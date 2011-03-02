@@ -1,0 +1,133 @@
+<container name="SoraWindow" width="1024" height="768" x="0" y="0" opaque="false" foregroundColor="0xAAAAAA">
+	<window name="SpeedPanel" width="180"  height="220" x="0" y="0" caption="SpeedPanel" opaque="true" foregroundColor="0xAAFFFF">
+		<label name="MinSpeedLabel" width="160"  height="20" x="10" y="10" caption="MinSpeed" opaque="false"/>
+		<slider name="MinSpeed" width="160"  height="10" x="10" y="30" start="-300" end="300" value="0" makerLength="1" stepLength="1" id="MinSpeed" responser="SpeedPanel" responsetype="action"/>
+		<label name="MaxSpeedLabel" width="160"  height="20" x="10" y="40" caption="MaxSpeed" opaque="false"/>
+		<slider name="MaxSpeed" width="160"  height="10" x="10" y="60" start="-300" end="300" value="0" makerLength="1" stepLength="1" id="MaxSpeed" responser="SpeedPanel" responsetype="action"/>
+	
+		<label name="MinLinearAccelLabel" width="160"  height="20" x="10" y="70" caption="MinLinearAcc"/>
+		<slider name="MinLinearAccel" width="160"  height="10" x="10" y="90" start="-100" end="100" value="0" makerLength="1" stepLength="0.1" id="MinLinearAccel" responser="SpeedPanel" responsetype="action"/>
+		<label name="MaxLinearAccelLabel" width="160"  height="20" x="10" y="100" caption="MaxLinearAcc"/>
+		<slider name="MaxLinearAccel" width="160"  height="10" x="10" y="120" start="-100" end="100" value="0" makerLength="1" stepLength="0.1" id="MaxLinearAccel" responser="SpeedPanel" responsetype="action"/>
+	
+		<label name="MinTrigAccelLabel" width="160"  height="20" x="10" y="130" caption="MinTrigAcc"/>
+		<slider name="MinTrigAccel" width="160"  height="10" x="10" y="150" start="-360" end="360" value="0" makerLength="1" stepLength="0.1" id="MinTrigAccel" responser="SpeedPanel" responsetype="action"/>
+		<label name="MaxTrigAccelLabel" width="160"  height="20" x="10" y="160" caption="MaxTrigAcc"/>
+		<slider name="MaxTrigAccel" width="160"  height="10" x="10" y="180" start="-360" end="360" value="0" makerLength="1" stepLength="0.1" id="MaxTrigAccel" responser="SpeedPanel" responsetype="action"/>
+	</window>
+	
+	<window name="LifetimePanel" width="180"  height="160" x="0" y="220" caption="LifetimePanel" opaque="true" foregroundColor="0xAAFFFF">	
+		<label name="MinLifetimeLabel" width="160"  height="20" x="10" y="10" caption="MinLifetime"/>
+		<slider name="MinLifetime" width="160"  height="10" x="10" y="30" start="0" end="60" value="0" makerLength="1" stepLength="0.1" id="MinLifetime" responser="LifetimePanel" responsetype="action"/>
+		<label name="MaxLifetimeLabel" width="160"  height="20" x="10" y="40" caption="MaxLifetime"/>
+		<slider name="MaxLifetime" width="160"  height="10" x="10" y="60" start="0" end="60" value="0" makerLength="1" stepLength="0.1" id="MaxLifetime" responser="LifetimePanel" responsetype="action"/>
+		<label name="EmissionTimeLabel" width="160"  height="20" x="10" y="70" caption="EmissionTime"/>
+		<slider name="EmissionTime" width="160"  height="10" x="10" y="90" start="0" end="60" value="0" makerLength="1" stepLength="0.1" id="EmissionTime" responser="LifetimePanel" responsetype="action"/>
+		<label name="EmissionSpeedLabel" width="160"  height="20" x="10" y="100" caption="EmissionSpeed"/>
+		<slider name="EmissionSpeed" width="160"  height="10" x="10" y="120" start="0" end="500" value="0" makerLength="1" stepLength="1" id="EmissionSpeed" responser="LifetimePanel" responsetype="action"/>
+	</window>
+	
+	<window name="PropPanel" width="180"  height="710" x="844" y="0" caption="PropPanel" opaque="true" foregroundColor="0xAAFFFF">	
+		<label name="MinSpinLabel" width="160"  height="20" x="10" y="10" caption="MinSpin"/>
+		<slider name="MinSpin" width="160"  height="10" x="10" y="30" start="-36" end="36" value="0" makerLength="1" stepLength="1" id="MinSpin" responser="PropPanel" responsetype="action"/>
+		<label name="MaxSpinLabel" width="160"  height="20" x="10" y="40" caption="MaxSpin"/>
+		<slider name="MaxSpin" width="160"  height="10" x="10" y="60" start="-36" end="36" value="0" makerLength="1" stepLength="1" id="MaxSpin" responser="PropPanel" responsetype="action"/>
+	
+		<label name="MinGravityLabel" width="160"  height="20" x="10" y="80" caption="MinGravity"/>
+		<slider name="MinGravity" width="160"  height="10" x="10" y="100" start="0" end="10" value="0" makerLength="1" stepLength="0.1" id="MinGravity" responser="PropPanel" responsetype="action"/>
+		<label name="MaxGravityLabel" width="160"  height="20" x="10" y="110" caption="MaxGravity"/>
+		<slider name="MaxGravity" width="160"  height="10" x="10" y="130" start="0" end="10" value="0" makerLength="1" stepLength="0.1" id="MaxGravity" responser="PropPanel" responsetype="action"/>
+	
+		<label name="MinStartScaleLabel" width="160"  height="20" x="10" y="150" caption="MinStartScale"/>
+		<slider name="MinStartScale" width="160"  height="10" x="10" y="170" start="0" end="10" value="0" makerLength="1" stepLength="0.1" id="MinStartScale" responser="PropPanel" responsetype="action"/>
+		<label name="MaxStartScaleLabel" width="160"  height="20" x="10" y="180" caption="MaxStartScale"/>
+		<slider name="MaxStartScale" width="160"  height="10" x="10" y="200" start="0" end="10" value="0" makerLength="1" stepLength="0.1" id="MaxStartScale" responser="PropPanel" responsetype="action"/>
+		
+		<label name="MinEndScaleLabel" width="160"  height="20" x="10" y="220" caption="MinEndScale"/>
+		<slider name="MinEndScale" width="160"  height="10" x="10" y="240" start="0" end="10" value="0" makerLength="1" stepLength="0.1" id="MinEndScale" responser="PropPanel" responsetype="action"/>
+		<label name="MaxEndScaleLabel" width="160"  height="20" x="10" y="250" caption="MaxEndScale"/>
+		<slider name="MaxEndScale" width="160"  height="10" x="10" y="270" start="0" end="10" value="0" makerLength="1" stepLength="0.1" id="MaxEndScale" responser="PropPanel" responsetype="action"/>
+		
+		<label name="EmitRangeXLabel" width="160"  height="20" x="10" y="290" caption="EmitRangeX"/>
+		<slider name="EmitRangeX" width="160"  height="10" x="10" y="310" start="0" end="1000" value="0" makerLength="1" stepLength="1" id="EmitRangeX" responser="PropPanel" responsetype="action"/>
+		<label name="EmitRangeYLabel" width="160"  height="20" x="10" y="320" caption="EmitRangeY"/>
+		<slider name="EmitRangeY" width="160"  height="10" x="10" y="340" start="0" end="1000" value="0" makerLength="1" stepLength="1" id="EmitRangeY" responser="PropPanel" responsetype="action"/>
+		<label name="EmitRangeZLabel" width="160"  height="20" x="10" y="350" caption="EmitRangeZ"/>
+		<slider name="EmitRangeZ" width="160"  height="10" x="10" y="370" start="0" end="1000" value="0" makerLength="1" stepLength="1" id="EmitRangeZ" responser="PropPanel" responsetype="action"/>
+		
+		<label name="EmitPointXLabel" width="160"  height="20" x="10" y="390" caption="EmitPointX"/>
+		<slider name="EmitPointX" width="160"  height="10" x="10" y="410" start="0" end="1000" value="0" makerLength="1" stepLength="1" id="EmitPointX" responser="PropPanel" responsetype="action"/>
+		<label name="EmitPointYLabel" width="160"  height="20" x="10" y="420" caption="EmitPointY"/>
+		<slider name="EmitPointY" width="160"  height="10" x="10" y="440" start="0" end="1000" value="0" makerLength="1" stepLength="1" id="EmitPointY" responser="PropPanel" responsetype="action"/>
+		<label name="EmitPointZLabel" width="160"  height="20" x="10" y="450" caption="EmitPointZ"/>
+		<slider name="EmitPointZ" width="160"  height="10" x="10" y="470" start="0" end="1000" value="0" makerLength="1" stepLength="1" id="EmitPointZ" responser="PropPanel" responsetype="action"/>
+	
+		<label name="MinDirectionXLabel" width="160"  height="20" x="10" y="490" caption="MinDirectionX"/>
+		<slider name="MinDirectionX" width="160"  height="10" x="10" y="510" start="-1" end="1" value="0" makerLength="1" stepLength="1" id="MinDirectionX" responser="PropPanel" responsetype="action"/>
+		<label name="MinDirectionYLabel" width="160"  height="20" x="10" y="520" caption="MinDirectionY"/>
+		<slider name="MinDirectionY" width="160"  height="10" x="10" y="540" start="-1" end="1" value="0" makerLength="1" stepLength="1" id="MinDirectionY" responser="PropPanel" responsetype="action"/>
+		<label name="MinDirectionZLabel" width="160"  height="20" x="10" y="550" caption="MinDirectionZ"/>
+		<slider name="MinDirectionZ" width="160"  height="10" x="10" y="570" start="-1" end="1" value="0" makerLength="1" stepLength="1" id="MinDirectionZ" responser="PropPanel" responsetype="action"/>
+		
+		<label name="MaxDirectionXLabel" width="160"  height="20" x="10" y="590" caption="MaxDirectionX"/>
+		<slider name="MaxDirectionX" width="160"  height="10" x="10" y="610" start="-1" end="1" value="0" makerLength="1" stepLength="1" id="MaxDirectionX" responser="PropPanel" responsetype="action"/>
+		<label name="MaxDirectionYLabel" width="160"  height="20" x="10" y="620" caption="MaxDirectionY"/>
+		<slider name="MaxDirectionY" width="160"  height="10" x="10" y="640" start="-1" end="1" value="0" makerLength="1" stepLength="1" id="MaxDirectionY" responser="PropPanel" responsetype="action"/>
+		<label name="MaxDirectionZLabel" width="160"  height="20" x="10" y="650" caption="MaxDirectionZ"/>
+		<slider name="MaxDirectionZ" width="160"  height="10" x="10" y="670" start="-1" end="1" value="0" makerLength="1" stepLength="1" id="MaxDirectionZ" responser="PropPanel" responsetype="action"/>
+	</window>
+	
+	<window name="StartColorPanel" width="180"  height="110" x="0" y="380" caption="StartColorPanel" opaque="true">
+		<label name="SMinRLabel" width="60" height="20" x="10" y="5" caption="R"/>
+		<slider name="SMinR" width="60" height="10" x="30" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinR" responser="ColorPanel" responsetype="action"/>
+		<label name="SMinGLabel" width="60" height="20" x="10" y="25" caption="G"/>
+		<slider name="SMinG" width="60" height="10" x="30" y="30" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinG" responser="ColorPanel" responsetype="action"/>
+		<label name="SMinBLabel" width="60" height="20" x="10" y="45" caption="B"/>
+		<slider name="SMinB" width="60" height="10" x="30" y="50" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinB" responser="ColorPanel" responsetype="action"/>
+		<label name="SMinALabel" width="60" height="20" x="10" y="65" caption="A"/>
+		<slider name="SMinA" width="60" height="10" x="30" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinA" responser="ColorPanel" responsetype="action"/>
+		
+		<label name="SMaxRLabel" width="60" height="20" x="90" y="5" caption=""/>
+		<slider name="SMaxR" width="60" height="10" x="100" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxR" responser="ColorPanel" responsetype="action"/>
+		<label name="SMaxGLabel" width="60" height="20" x="90" y="25" caption=""/>
+		<slider name="SMaxG" width="60" height="10" x="100" y="30" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxG" responser="ColorPanel" responsetype="action"/>
+		<label name="SMaxBLabel" width="60" height="20" x="90" y="45" caption=""/>
+		<slider name="SMaxB" width="60" height="10" x="100" y="50" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxB" responser="ColorPanel" responsetype="action"/>
+		<label name="SMaxALabel" width="60" height="20" x="90" y="65" caption=""/>
+		<slider name="SMaxA" width="60" height="10" x="100" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxA" responser="ColorPanel" responsetype="action"/>
+	</window>
+	<window name="EndColorPanel" width="180"  height="110" x="0" y="490" caption="EndColorPanel" opaque="true">
+		<label name="EMinRLabel" width="60" height="20" x="10" y="5" caption="R"/>
+		<slider name="EMinR" width="60" height="10" x="30" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinR" responser="ColorPanel" responsetype="action"/>
+		<label name="EMinGLabel" width="60" height="20" x="10" y="25" caption="G"/>
+		<slider name="EMinG" width="60" height="10" x="30" y="30" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinG" responser="ColorPanel" responsetype="action"/>
+		<label name="EMinBLabel" width="60" height="20" x="10" y="45" caption="B"/>
+		<slider name="EMinB" width="60" height="10" x="30" y="50" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinB" responser="ColorPanel" responsetype="action"/>
+		<label name="EMinALabel" width="60" height="20" x="10" y="65" caption="A"/>
+		<slider name="EMinA" width="60" height="10" x="30" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinA" responser="ColorPanel" responsetype="action"/>
+		
+		<label name="EMaxRLabel" width="60" height="20" x="90" y="5" caption=""/>
+		<slider name="EMaxR" width="60" height="10" x="100" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMaxR" responser="ColorPanel" responsetype="action"/>
+		<label name="EMaxGLabel" width="60" height="20" x="90" y="25" caption=""/>
+		<slider name="EMaxG" width="60" height="10" x="100" y="30" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMaxG" responser="ColorPanel" responsetype="action"/>
+		<label name="EMaxBLabel" width="60" height="20" x="90" y="45" caption=""/>
+		<slider name="EMaxB" width="60" height="10" x="100" y="50" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMaxB" responser="ColorPanel" responsetype="action"/>
+		<label name="EMaxALabel" width="60" height="20" x="90" y="65" caption=""/>
+		<slider name="EMaxA" width="60" height="10" x="100" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMaxA" responser="ColorPanel" responsetype="action"/>
+	</window>
+	<window name="OptionPanel" width="150" height="275" x="180" y="0" caption="OptionPanel" opaque="true">
+		<button name="RestoreDefault" width="135" height="20" x="5" y="5" caption="Restore Default" id="RestoreDefault" responser="OptionPanelButton" responsetype="action"/>
+		<checkbox name="CSpeedPanel" width="130" height="20" x="5" y="30" caption="SpeedPanel" id="SpeedPanelCheck" responser="OptionPanel" responsetype="action"/>
+		<checkbox name="CLifetimePanel" width="130" height="20" x="5" y="50" caption="LifetimePanel" id="LifetimePanelCheck" responser="OptionPanel" responsetype="action"/>
+		<checkbox name="CPropPanel" width="130" height="20" x="5" y="70" caption="PropPanel" id="PropPanelCheck" responser="OptionPanel" responsetype="action"/>
+		<checkbox name="CStartColorPanel" width="130" height="20" x="5" y="90" caption="StaColorPanel" id="StartColorPanelCheck" responser="OptionPanel" responsetype="action"/>
+		<checkbox name="CEndColorPanel" width="130" height="20" x="5" y="110" caption="EndColorPanel" id="EndColorPanelCheck" responser="OptionPanel" responsetype="action"/>
+		<button name="Open" width="60" height="20" x="5" y="135" caption="Open" id="Open" responser="OptionPanelButton" responsetype="action"/>
+		<button name="Save" width="60" height="20" x="80" y="135" caption="Save" id="Save" responser="OptionPanelButton" responsetype="action"/>
+		<button name="SaveAs" width="135" height="20" x="5" y="160" caption="Save As..." id="SaveAs" responser="OptionPanelButton" responsetype="action"/>
+		<button name="ParticleSprite" width="135" height="20" x="5" y="180" caption="Sprite..." id="ParticleSprite" responser="OptionPanelButton" responsetype="action"/>
+		<slider name="TextureRect" width="135" height="20" x="5" y="210" start="0" end="15" value="0" makerLength="1" stepLength="1" id="TextureRect" responser="OptionPanelButton" responsetype="action"/>
+		<checkbox name="CBlendMode" width="135" height="20" x="5" y="235" caption="AlphaBlend" id="BlendModeCheck" responser="OptionPanel" responsetype="action"/>
+		
+	</window>
+</container>

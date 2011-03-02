@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* Sora-iPhone */ = {
+		activeExec = 0;
+		executables = (
+			884CC34312F652E500FD18FC /* Sora-iPhone */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 884CC34312F652E500FD18FC /* Sora-iPhone */;
+		activeSDKPreference = iphonesimulator4.0;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* Sora-iPhone */;
+		addToTargets = (
+		);
+		codeSenseManager = 884CC48A12F6530100FD18FC /* Code sense */;
+		executables = (
+			884CC34312F652E500FD18FC /* Sora-iPhone */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					937,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 320556849;
+			PBXWorkspaceStateSaveDate = 320556849;
+		};
+		perUserProjectItems = {
+			885D9880131B4F93009A7E14 /* PBXTextBookmark */ = 885D9880131B4F93009A7E14 /* PBXTextBookmark */;
+			8897829F13071E2D00A69ADE /* PBXTextBookmark */ = 8897829F13071E2D00A69ADE /* PBXTextBookmark */;
+			889782A213071E2D00A69ADE /* PBXTextBookmark */ = 889782A213071E2D00A69ADE /* PBXTextBookmark */;
+			889782FD1307234500A69ADE /* PBXTextBookmark */ = 889782FD1307234500A69ADE /* PBXTextBookmark */;
+			889783031307237000A69ADE /* PBXTextBookmark */ = 889783031307237000A69ADE /* PBXTextBookmark */;
+			889783441307251C00A69ADE /* PBXTextBookmark */ = 889783441307251C00A69ADE /* PBXTextBookmark */;
+			88978365130726CE00A69ADE /* PlistBookmark */ = 88978365130726CE00A69ADE /* PlistBookmark */;
+			8897836D1307275800A69ADE /* PBXTextBookmark */ = 8897836D1307275800A69ADE /* PBXTextBookmark */;
+			889783721307283A00A69ADE /* PBXTextBookmark */ = 889783721307283A00A69ADE /* PBXTextBookmark */;
+			889783CB1307295100A69ADE /* PBXTextBookmark */ = 889783CB1307295100A69ADE /* PBXTextBookmark */;
+			889784681307DBA800A69ADE /* PBXTextBookmark */ = 889784681307DBA800A69ADE /* PBXTextBookmark */;
+			889784691307DBA800A69ADE /* PBXTextBookmark */ = 889784691307DBA800A69ADE /* PBXTextBookmark */;
+			8897846A1307DBA800A69ADE /* PBXTextBookmark */ = 8897846A1307DBA800A69ADE /* PBXTextBookmark */;
+			8897846B1307DBA800A69ADE /* PBXTextBookmark */ = 8897846B1307DBA800A69ADE /* PBXTextBookmark */;
+			8897846C1307DBA800A69ADE /* PBXTextBookmark */ = 8897846C1307DBA800A69ADE /* PBXTextBookmark */;
+			8897846D1307DBA800A69ADE /* PBXTextBookmark */ = 8897846D1307DBA800A69ADE /* PBXTextBookmark */;
+			8897846E1307DBA800A69ADE /* PBXTextBookmark */ = 8897846E1307DBA800A69ADE /* PBXTextBookmark */;
+			889784701307DBA800A69ADE /* PBXTextBookmark */ = 889784701307DBA800A69ADE /* PBXTextBookmark */;
+			889784711307DBA800A69ADE /* PBXTextBookmark */ = 889784711307DBA800A69ADE /* PBXTextBookmark */;
+			889784731307DBA800A69ADE /* PBXTextBookmark */ = 889784731307DBA800A69ADE /* PBXTextBookmark */;
+			889784741307DBA800A69ADE /* PBXTextBookmark */ = 889784741307DBA800A69ADE /* PBXTextBookmark */;
+			889784761307DBA800A69ADE /* PBXTextBookmark */ = 889784761307DBA800A69ADE /* PBXTextBookmark */;
+		};
+		sourceControlManager = 884CC48912F6530100FD18FC /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	884CC34312F652E500FD18FC /* Sora-iPhone */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = "Sora-iPhone";
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	884CC48912F6530100FD18FC /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	884CC48A12F6530100FD18FC /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	885D9880131B4F93009A7E14 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889783FF1307D89900A69ADE /* SoraiOSInput.h */;
+		name = "SoraiOSInput.h: 39";
+		rLen = 0;
+		rLoc = 974;
+		rType = 0;
+		vrLen = 867;
+		vrLoc = 144;
+	};
+	8897813F13071C9500A69ADE /* SoraiOSInitializer.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 1526}}";
+			sepNavSelRange = "{326, 0}";
+			sepNavVisRange = "{0, 705}";
+		};
+	};
+	8897814013071C9500A69ADE /* SoraOGLESRenderer.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 10416}}";
+			sepNavSelRange = "{4093, 0}";
+			sepNavVisRange = "{3177, 1294}";
+		};
+	};
+	8897814113071C9500A69ADE /* SoraOGLESRenderer.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 1918}}";
+			sepNavSelRange = "{3187, 0}";
+			sepNavVisRange = "{397, 890}";
+		};
+	};
+	8897814413071C9500A69ADE /* Wrapper.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Wrapper.h;
+		path = /Users/darkfall/MyWorks/hoshinosora/SoraNew/Sora/Plugins/SoraOGLESRenderer/Wrapper.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 742}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 749}";
+		};
+	};
+	889781AE13071CAB00A69ADE /* SoraCore.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 10388}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{2208, 821}";
+		};
+	};
+	889781C013071CAB00A69ADE /* SoraInput.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 602}}";
+			sepNavSelRange = "{1061, 18}";
+			sepNavVisRange = "{128, 996}";
+		};
+	};
+	889781C813071CAB00A69ADE /* SoraMiscTool.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 494}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 762}";
+		};
+	};
+	889781CD13071CAB00A69ADE /* SoraPlatform.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 3122}}";
+			sepNavSelRange = "{3189, 0}";
+			sepNavVisRange = "{2767, 877}";
+		};
+	};
+	889781DB13071CAB00A69ADE /* SoraSprite.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 6006}}";
+			sepNavSelRange = "{5352, 10}";
+			sepNavVisRange = "{4851, 933}";
+		};
+	};
+	8897825613071CCD00A69ADE /* EAGLView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 532}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{34, 957}";
+		};
+	};
+	8897825713071CCD00A69ADE /* EAGLView.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 2128}}";
+			sepNavSelRange = "{2281, 0}";
+			sepNavVisRange = "{1484, 1317}";
+		};
+	};
+	8897825B13071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 784}}";
+			sepNavSelRange = "{484, 0}";
+			sepNavVisRange = "{186, 788}";
+		};
+	};
+	8897825C13071CCD00A69ADE /* Sora_iPhoneViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 532}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{35, 732}";
+		};
+	};
+	8897825D13071CCD00A69ADE /* Sora_iPhoneViewController.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {2280, 2296}}";
+			sepNavSelRange = "{1188, 0}";
+			sepNavVisRange = "{0, 842}";
+		};
+	};
+	8897829413071DA000A69ADE /* SoraiOSInitializer.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = SoraiOSInitializer.h;
+		path = ../Plugins/SoraOGLESRenderer/SoraiOSInitializer.h;
+		sourceTree = "<group>";
+	};
+	8897829F13071E2D00A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889781AE13071CAB00A69ADE /* SoraCore.cpp */;
+		name = "SoraCore.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 821;
+		vrLoc = 2208;
+	};
+	889782A213071E2D00A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889781C813071CAB00A69ADE /* SoraMiscTool.h */;
+		name = "SoraMiscTool.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 762;
+		vrLoc = 0;
+	};
+	889782FD1307234500A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889781DB13071CAB00A69ADE /* SoraSprite.cpp */;
+		name = "SoraSprite.cpp: 226";
+		rLen = 10;
+		rLoc = 5352;
+		rType = 0;
+		vrLen = 933;
+		vrLoc = 4851;
+	};
+	889783031307237000A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889783041307237000A69ADE /* SoraOGLRenderer.h */;
+		name = "SoraOGLRenderer.h: 109";
+		rLen = 0;
+		rLoc = 3353;
+		rType = 0;
+		vrLen = 749;
+		vrLoc = 2968;
+	};
+	889783041307237000A69ADE /* SoraOGLRenderer.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = SoraOGLRenderer.h;
+		path = /Users/darkfall/MyWorks/hoshinosora/SoraNew/Sora/Plugins/SoraOGLRenderer/SoraOGLRenderer.h;
+		sourceTree = "<absolute>";
+	};
+	889783441307251C00A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889783451307251C00A69ADE /* gl.h */;
+		name = "gl.h: 685";
+		rLen = 84;
+		rLoc = 27132;
+		rType = 0;
+		vrLen = 2725;
+		vrLoc = 26327;
+	};
+	889783451307251C00A69ADE /* gl.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = gl.h;
+		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/ES1/gl.h;
+		sourceTree = "<absolute>";
+	};
+	88978365130726CE00A69ADE /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Sora_iPhone-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/darkfall/MyWorks/hoshinosora/SoraNew/Sora/Sora-iPhone/Sora_iPhone-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	8897836D1307275800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897836E1307275800A69ADE /* UIDevice.h */;
+		name = "UIDevice.h: 35";
+		rLen = 188;
+		rLoc = 1322;
+		rType = 0;
+		vrLen = 1514;
+		vrLoc = 683;
+	};
+	8897836E1307275800A69ADE /* UIDevice.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = UIDevice.h;
+		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIDevice.h;
+		sourceTree = "<absolute>";
+	};
+	889783721307283A00A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889781CD13071CAB00A69ADE /* SoraPlatform.h */;
+		name = "SoraPlatform.h: 158";
+		rLen = 0;
+		rLoc = 3189;
+		rType = 0;
+		vrLen = 877;
+		vrLoc = 2767;
+	};
+	889783CB1307295100A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897825B13071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm */;
+		name = "Sora_iPhoneAppDelegate.mm: 20";
+		rLen = 0;
+		rLoc = 484;
+		rType = 0;
+		vrLen = 788;
+		vrLoc = 186;
+	};
+	889783FF1307D89900A69ADE /* SoraiOSInput.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 616}}";
+			sepNavSelRange = "{974, 0}";
+			sepNavVisRange = "{144, 867}";
+		};
+	};
+	889784581307D9D300A69ADE /* SoraiOSInputEvent.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1115, 440}}";
+			sepNavSelRange = "{490, 0}";
+			sepNavVisRange = "{0, 616}";
+		};
+	};
+	889784681307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897814013071C9500A69ADE /* SoraOGLESRenderer.cpp */;
+		name = "SoraOGLESRenderer.cpp: 149";
+		rLen = 0;
+		rLoc = 4093;
+		rType = 0;
+		vrLen = 1294;
+		vrLoc = 3177;
+	};
+	889784691307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897814413071C9500A69ADE /* Wrapper.h */;
+		name = "Wrapper.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 749;
+		vrLoc = 0;
+	};
+	8897846A1307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897814113071C9500A69ADE /* SoraOGLESRenderer.h */;
+		name = "SoraOGLESRenderer.h: 102";
+		rLen = 0;
+		rLoc = 3187;
+		rType = 0;
+		vrLen = 890;
+		vrLoc = 397;
+	};
+	8897846B1307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897825613071CCD00A69ADE /* EAGLView.h */;
+		name = "EAGLView.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 957;
+		vrLoc = 34;
+	};
+	8897846C1307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897825713071CCD00A69ADE /* EAGLView.mm */;
+		name = "EAGLView.mm: 89";
+		rLen = 0;
+		rLoc = 2281;
+		rType = 0;
+		vrLen = 1317;
+		vrLoc = 1484;
+	};
+	8897846D1307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897825C13071CCD00A69ADE /* Sora_iPhoneViewController.h */;
+		name = "Sora_iPhoneViewController.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 732;
+		vrLoc = 35;
+	};
+	8897846E1307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897825D13071CCD00A69ADE /* Sora_iPhoneViewController.mm */;
+		name = "Sora_iPhoneViewController.mm: 48";
+		rLen = 0;
+		rLoc = 1188;
+		rType = 0;
+		vrLen = 842;
+		vrLoc = 0;
+	};
+	889784701307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897829413071DA000A69ADE /* SoraiOSInitializer.h */;
+		name = "SoraiOSInitializer.h: 101";
+		rLen = 0;
+		rLoc = 2198;
+		rType = 0;
+		vrLen = 545;
+		vrLoc = 1688;
+	};
+	889784711307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889784721307DBA800A69ADE /* UIEvent.h */;
+		name = "UIEvent.h: 40";
+		rLen = 49;
+		rLoc = 1252;
+		rType = 0;
+		vrLen = 1331;
+		vrLoc = 517;
+	};
+	889784721307DBA800A69ADE /* UIEvent.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = UIEvent.h;
+		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIEvent.h;
+		sourceTree = "<absolute>";
+	};
+	889784731307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889784581307D9D300A69ADE /* SoraiOSInputEvent.h */;
+		name = "SoraiOSInputEvent.h: 22";
+		rLen = 0;
+		rLoc = 490;
+		rType = 0;
+		vrLen = 616;
+		vrLoc = 0;
+	};
+	889784741307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889781C013071CAB00A69ADE /* SoraInput.h */;
+		name = "SoraInput.h: 36";
+		rLen = 18;
+		rLoc = 1061;
+		rType = 0;
+		vrLen = 996;
+		vrLoc = 128;
+	};
+	889784761307DBA800A69ADE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889783FF1307D89900A69ADE /* SoraiOSInput.h */;
+		name = "SoraiOSInput.h: 39";
+		rLen = 0;
+		rLoc = 974;
+		rType = 0;
+		vrLen = 836;
+		vrLoc = 145;
+	};
+}

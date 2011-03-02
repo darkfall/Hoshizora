@@ -1,0 +1,40 @@
+#ifndef SORA_FILE_H
+#define SORA_FILE_H
+
+#include <fstream>
+
+#include "SoraPlatform.h"
+#include "SoraException.h"
+//#include "SoraStringConv.h"
+
+namespace sora {
+
+	class SoraFileBase {
+		friend class SoraZipFile;
+		friend class SoraHttpFile;
+		friend class SoraINIFile;
+		friend class SoraMusicFile;
+		friend class SoraMIDIFile;
+		friend class SoraSoundEffectFile;
+		friend class SoraFile;
+
+	public:
+		SoraFileBase(): isopen(false) {}
+		virtual ~SoraFileBase() {}
+
+		virtual int32 readFile(const SoraWString& sFile) = 0;
+		virtual int32 readFileMem(void* pstr, ulong32 filesize) = 0;
+		virtual void  closeFile() = 0;
+		
+		bool  is_open() const { return isopen; }
+		void  set_open(bool flag) { isopen = flag; }
+
+	private:
+		SoraWString sFilePath;
+
+		bool isopen;
+	};
+
+} // namespace sora
+
+#endif // SORA_FILE_H

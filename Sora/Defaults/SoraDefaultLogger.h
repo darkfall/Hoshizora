@@ -1,0 +1,49 @@
+#ifndef SORA_DEFAULT_LOGGER_H_
+#define SORA_DEFAULT_LOGGER_H_
+
+#include <fstream>
+
+#include "SoraPlatform.h"
+
+namespace sora {
+
+	class SoraDefaultLogger {
+	public:
+		SoraDefaultLogger(): logfile("SoraLog.txt") {
+			std::ofstream file(logfile.c_str());
+			if(file.is_open())
+				file<<"============================Hoshi no Sora==================================\n";
+			file.close();
+		}
+		inline ~SoraDefaultLogger() { };
+
+		inline void setFile(const SoraString& file) { logfile = file; }
+
+		inline void log(const SoraString& str) {
+			std::fstream file(logfile.c_str(), std::ios::app);
+			if(!file.is_open()) return;
+
+			file<<str<<std::endl;
+			file.close();
+		}
+		inline void log(const SoraWString& str) {
+			std::fstream file;
+#if defined(__APPLE_CC__) || defined(__GNUC__)
+			file.open(logfile.c_str(), (std::_Ios_Openmode)(std::ios::app || std::ios::out));
+#else
+			file.open(logfile.c_str(), (std::ios::app || std::ios::out));
+#endif
+			if(!file.is_open()) return;
+
+			file<<str.c_str()<<std::endl;
+			file.close();
+		}
+
+	private:
+		SoraString logfile;
+	};
+
+} // namespace sora
+
+
+#endif // SORA_DEFAULT_LOGGER_H_

@@ -1,0 +1,12 @@
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.cpp: In member function 'std::list<sora::SoraAutoPtr<sora::SoraObject>, std::allocator<sora::SoraAutoPtr<sora::SoraObject> > >& sora::SoraObject::getObjList() const':
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.cpp:65: error: invalid initialization of reference of type 'std::list<sora::SoraAutoPtr<sora::SoraObject>, std::allocator<sora::SoraAutoPtr<sora::SoraObject> > >&' from expression of type 'const std::list<sora::SoraAutoPtr<sora::SoraObject>, std::allocator<sora::SoraAutoPtr<sora::SoraObject> > >'
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.cpp: At global scope:
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.cpp:77: error: prototype for 'sora::SoraAutoPtr<sora::SoraObject> sora::SoraObject::getObjByName(const SoraString&)' does not match any in class 'sora::SoraObject'
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.h:44: error: candidate is: sora::SoraObject* sora::SoraObject::getObjByName(const SoraString&)
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.cpp:77: error: 'sora::SoraAutoPtr<sora::SoraObject> sora::SoraObject::getObjByName(const SoraString&)' cannot be overloaded
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.h:44: error: with 'sora::SoraObject* sora::SoraObject::getObjByName(const SoraString&)'
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.cpp: In member function 'sora::SoraAutoPtr<sora::SoraObject> sora::SoraObject::getObjByName(const SoraString&)':
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.cpp:88: error: expected primary-expression before ';' token
+/Developer/SDKs/MacOSX10.6.sdk/usr/include/c++/4.2.1/bits/list.tcc: In member function 'void std::list<_Tp, _Alloc>::remove(const _Tp&) [with _Tp = sora::SoraAutoPtr<sora::SoraObject>, _Alloc = std::allocator<sora::SoraAutoPtr<sora::SoraObject> >]':
+/Users/darkfall/SoraNew/Sora/Sora-OSX/../Sora/SoraObject.cpp:61:   instantiated from here
+/Developer/SDKs/MacOSX10.6.sdk/usr/include/c++/4.2.1/bits/list.tcc:183: error: no match for 'operator==' in '__first. std::_List_iterator<_Tp>::operator* [with _Tp = sora::SoraAutoPtr<sora::SoraObject>]() == __value'

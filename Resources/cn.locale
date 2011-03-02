@@ -1,0 +1,9 @@
+@locale=zh-cn
+Start="开始"
+Option="选项"
+End="退出"
+
+Easy="简单"
+Normal="普通"
+Hard="困难"
+Lunatic="疯狂"

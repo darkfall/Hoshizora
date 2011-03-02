@@ -1,0 +1,33 @@
+/*
+ *  SoraOGLRenderTarget.h
+ *  SoraPureCore
+ *
+ *  Created by griffin clare on 11/19/10.
+ *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *
+ */
+
+#ifndef SORA_OGLES_RENDER_TARGET_H_
+#define SORA_OGLES_RENDER_TARGET_H_
+
+#include "SoraRenderTarget.h"
+
+#include "glfw/GL/glfw.h"
+
+namespace sora {
+
+class SoraRenderTargetOG: public SoraRenderTarget {
+	ulong32 frameBuffer;
+	ulong32 depthBuffer;
+	
+public:
+	SoraRenderTargetOG(ulong32 w, ulong32 h, bool zbuffer);
+	~SoraRenderTargetOG();
+	
+	virtual void attachToRender();
+	virtual void detachFromRender();
+};
+
+} // namespace sora
+
+#endif
