@@ -30,7 +30,7 @@ class MainWindow: public sora::SoraWindowInfoBase {
 	void init() {
 		sora::SORA->setFPS(60);
 
-		if(!sora::GCN_GLOBAL->initGUIChan("cour.ttf", 14)) {
+		if(!sora::GCN_GLOBAL->initGUIChan(L"cour.ttf", 14)) {
 			sora::SORA->messageBox("Error initializing GUIChan, exiting...", "Fatal Error", MB_OK | MB_ICONERROR);
 		}
 		sora::GCN_GLOBAL->createTop();
