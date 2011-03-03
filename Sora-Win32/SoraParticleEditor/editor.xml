@@ -1,22 +1,28 @@
 <container name="SoraWindow" width="1024" height="768" x="0" y="0" opaque="false" foregroundColor="0xAAAAAA">
-	<window name="SpeedPanel" width="180"  height="220" x="0" y="0" caption="SpeedPanel" opaque="true" foregroundColor="0xAAFFFF">
+	<window name="SpeedPanel" width="180"  height="290" x="0" y="0" caption="SpeedPanel" opaque="true" foregroundColor="0xAAFFFF">
 		<label name="MinSpeedLabel" width="160"  height="20" x="10" y="10" caption="MinSpeed" opaque="false"/>
-		<slider name="MinSpeed" width="160"  height="10" x="10" y="30" start="-300" end="300" value="0" makerLength="1" stepLength="1" id="MinSpeed" responser="SpeedPanel" responsetype="action"/>
+		<slider name="MinSpeed" width="160"  height="10" x="10" y="30" start="-500" end="500" value="0" makerLength="1" stepLength="1" id="MinSpeed" responser="SpeedPanel" responsetype="action"/>
 		<label name="MaxSpeedLabel" width="160"  height="20" x="10" y="40" caption="MaxSpeed" opaque="false"/>
-		<slider name="MaxSpeed" width="160"  height="10" x="10" y="60" start="-300" end="300" value="0" makerLength="1" stepLength="1" id="MaxSpeed" responser="SpeedPanel" responsetype="action"/>
+		<slider name="MaxSpeed" width="160"  height="10" x="10" y="60" start="-500" end="500" value="0" makerLength="1" stepLength="1" id="MaxSpeed" responser="SpeedPanel" responsetype="action"/>
 	
 		<label name="MinLinearAccelLabel" width="160"  height="20" x="10" y="70" caption="MinLinearAcc"/>
-		<slider name="MinLinearAccel" width="160"  height="10" x="10" y="90" start="-100" end="100" value="0" makerLength="1" stepLength="0.1" id="MinLinearAccel" responser="SpeedPanel" responsetype="action"/>
+		<slider name="MinLinearAccel" width="160"  height="10" x="10" y="90" start="-200" end="200" value="0" makerLength="1" stepLength="0.1" id="MinLinearAccel" responser="SpeedPanel" responsetype="action"/>
 		<label name="MaxLinearAccelLabel" width="160"  height="20" x="10" y="100" caption="MaxLinearAcc"/>
-		<slider name="MaxLinearAccel" width="160"  height="10" x="10" y="120" start="-100" end="100" value="0" makerLength="1" stepLength="0.1" id="MaxLinearAccel" responser="SpeedPanel" responsetype="action"/>
+		<slider name="MaxLinearAccel" width="160"  height="10" x="10" y="120" start="-200" end="200" value="0" makerLength="1" stepLength="0.1" id="MaxLinearAccel" responser="SpeedPanel" responsetype="action"/>
 	
 		<label name="MinTrigAccelLabel" width="160"  height="20" x="10" y="130" caption="MinTrigAcc"/>
 		<slider name="MinTrigAccel" width="160"  height="10" x="10" y="150" start="-360" end="360" value="0" makerLength="1" stepLength="0.1" id="MinTrigAccel" responser="SpeedPanel" responsetype="action"/>
 		<label name="MaxTrigAccelLabel" width="160"  height="20" x="10" y="160" caption="MaxTrigAcc"/>
 		<slider name="MaxTrigAccel" width="160"  height="10" x="10" y="180" start="-360" end="360" value="0" makerLength="1" stepLength="0.1" id="MaxTrigAccel" responser="SpeedPanel" responsetype="action"/>
+	
+		<label name="MinAngleLabel" width="160"  height="20" x="10" y="200" caption="MinAngle"/>
+		<slider name="MinAngle" width="160"  height="10" x="10" y="220" start="-360" end="360" value="0" makerLength="1" stepLength="1" id="MinAngle" responser="PropPanel" responsetype="action"/>
+		<label name="MaxAngleLabel" width="160"  height="20" x="10" y="230" caption="MaxAngle"/>
+		<slider name="MaxAngle" width="160"  height="10" x="10" y="250" start="-360" end="360" value="0" makerLength="1" stepLength="1" id="MaxAngle" responser="PropPanel" responsetype="action"/>
+		
 	</window>
 	
-	<window name="LifetimePanel" width="180"  height="160" x="0" y="220" caption="LifetimePanel" opaque="true" foregroundColor="0xAAFFFF">	
+	<window name="LifetimePanel" width="180"  height="160" x="0" y="290" caption="LifetimePanel" opaque="true" foregroundColor="0xAAFFFF">	
 		<label name="MinLifetimeLabel" width="160"  height="20" x="10" y="10" caption="MinLifetime"/>
 		<slider name="MinLifetime" width="160"  height="10" x="10" y="30" start="0" end="60" value="0" makerLength="1" stepLength="0.1" id="MinLifetime" responser="LifetimePanel" responsetype="action"/>
 		<label name="MaxLifetimeLabel" width="160"  height="20" x="10" y="40" caption="MaxLifetime"/>
@@ -75,9 +81,11 @@
 		<slider name="MaxDirectionY" width="160"  height="10" x="10" y="640" start="-1" end="1" value="0" makerLength="1" stepLength="1" id="MaxDirectionY" responser="PropPanel" responsetype="action"/>
 		<label name="MaxDirectionZLabel" width="160"  height="20" x="10" y="650" caption="MaxDirectionZ"/>
 		<slider name="MaxDirectionZ" width="160"  height="10" x="10" y="670" start="-1" end="1" value="0" makerLength="1" stepLength="1" id="MaxDirectionZ" responser="PropPanel" responsetype="action"/>
+		
+	
 	</window>
 	
-	<window name="StartColorPanel" width="180"  height="110" x="0" y="380" caption="StartColorPanel" opaque="true">
+	<window name="StartColorPanel" width="180"  height="110" x="0" y="450" caption="StartColorPanel" opaque="true">
 		<label name="SMinRLabel" width="60" height="20" x="10" y="5" caption="R"/>
 		<slider name="SMinR" width="60" height="10" x="30" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinR" responser="ColorPanel" responsetype="action"/>
 		<label name="SMinGLabel" width="60" height="20" x="10" y="25" caption="G"/>
@@ -96,7 +104,7 @@
 		<label name="SMaxALabel" width="60" height="20" x="90" y="65" caption=""/>
 		<slider name="SMaxA" width="60" height="10" x="100" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxA" responser="ColorPanel" responsetype="action"/>
 	</window>
-	<window name="EndColorPanel" width="180"  height="110" x="0" y="490" caption="EndColorPanel" opaque="true">
+	<window name="EndColorPanel" width="180"  height="110" x="0" y="560" caption="EndColorPanel" opaque="true">
 		<label name="EMinRLabel" width="60" height="20" x="10" y="5" caption="R"/>
 		<slider name="EMinR" width="60" height="10" x="30" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinR" responser="ColorPanel" responsetype="action"/>
 		<label name="EMinGLabel" width="60" height="20" x="10" y="25" caption="G"/>
