@@ -558,7 +558,7 @@ void editorWindow::render() {
 	if(pFont) {
 		pFont->render(100, 690, s2ws(fp_to_str(SoraCore::Instance()->getFPS())).c_str(), true);
 		pFont->render(100, 720, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true, true);
-		pFont->render(100, 740, L"Rev 0x10", true, true);
+		pFont->render(100, 740, L"Rev 0x10 \0", true, true);
 	}
 }
 

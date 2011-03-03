@@ -61,7 +61,7 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 		subobjs.remove(o);
 	}
 	
-	SoraObject::SUB_OBJECT_LIST& SoraObject::getObjList() const {
+	SoraObject::SUB_OBJECT_LIST SoraObject::getObjList() {
 		return subobjs;
 	}
 	

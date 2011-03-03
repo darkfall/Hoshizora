@@ -230,8 +230,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -302,13 +300,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>252</integer>
-									<integer>10</integer>
+									<integer>305</integer>
+									<integer>304</integer>
+									<integer>303</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 3836}, {253, 702}}</string>
+							<string>{{0, 5099}, {253, 702}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -338,12 +337,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraObject.cpp</string>
+								<string>editorWindow.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -351,11 +352,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraObject.cpp</string>
+										<string>editorWindow.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>88C6C144131EA85C0018429A</string>
+										<string>88C678D7131F2A5B0096853A</string>
 										<key>history</key>
 										<array>
 											<string>88A792821287330A00F9C74C</string>
@@ -624,7 +625,6 @@
 											<string>885D994C131B625E009A7E14</string>
 											<string>885D994E131B625E009A7E14</string>
 											<string>885D994F131B625E009A7E14</string>
-											<string>885D9950131B625E009A7E14</string>
 											<string>885D9951131B625E009A7E14</string>
 											<string>885D9952131B625E009A7E14</string>
 											<string>885D9958131B628E009A7E14</string>
@@ -652,7 +652,6 @@
 											<string>885D9A62131B6D2F009A7E14</string>
 											<string>885D9A68131B6D62009A7E14</string>
 											<string>885D9A69131B6D62009A7E14</string>
-											<string>885D9A9F131D67E1009A7E14</string>
 											<string>885D9AA8131D6924009A7E14</string>
 											<string>885D9AA9131D6924009A7E14</string>
 											<string>885D9AAA131D6924009A7E14</string>
@@ -669,8 +668,10 @@
 											<string>885D9BD6131E03C5009A7E14</string>
 											<string>88C6C140131EA85C0018429A</string>
 											<string>88C6C141131EA85C0018429A</string>
-											<string>88C6C142131EA85C0018429A</string>
-											<string>88C6C143131EA85C0018429A</string>
+											<string>88C678C1131F2A1A0096853A</string>
+											<string>88C678C2131F2A1A0096853A</string>
+											<string>88C678D1131F2A350096853A</string>
+											<string>885D9A9F131D67E1009A7E14</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -728,9 +729,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>88C6C145131EA85C0018429A</string>
+				<string>88C678AA131F294A0096853A</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>88C6C146131EA85C0018429A</string>
+				<string>88C678AB131F294A0096853A</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -868,8 +869,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>88C678CD131F2A1A0096853A</string>
+		<string>88C678CE131F2A1A0096853A</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>88D7F517128518B600BA1949</string>
-		<string>/Users/darkfall/SoraNew/Sora/Sora-OSX/Sora.xcodeproj</string>
+		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 117 1440 761 0 0 1440 878 </string>
@@ -893,7 +898,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraObject.cpp</string>
+								<string>lScene.cpp</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -951,7 +956,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>88D7F517128518B600BA1949</string>
-				<string>88C6C126131EA74D0018429A</string>
+				<string>88C678AC131F294A0096853A</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -964,7 +969,7 @@
 			<key>WindowToolGUID</key>
 			<string>88D7F517128518B600BA1949</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -1073,13 +1078,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>885D9D9E131E0A24009A7E14</string>
+				<string>88C678C5131F2A1A0096853A</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>885D9D9F131E0A24009A7E14</string>
-				<string>885D9DA0131E0A24009A7E14</string>
-				<string>885D9DA1131E0A24009A7E14</string>
-				<string>885D9DA2131E0A24009A7E14</string>
-				<string>885D9DA3131E0A24009A7E14</string>
+				<string>88C678C6131F2A1A0096853A</string>
+				<string>88C678C7131F2A1A0096853A</string>
+				<string>88C678C8131F2A1A0096853A</string>
+				<string>88C678C9131F2A1A0096853A</string>
+				<string>88C678CA131F2A1A0096853A</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -1233,7 +1238,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>885D9DA4131E0A24009A7E14</string>
+				<string>88C678CB131F2A1A0096853A</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
