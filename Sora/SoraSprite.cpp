@@ -140,6 +140,9 @@ namespace sora {
 	}
 
 	void SoraSprite::setTextureRect(float32 x, float32 y, float32 width, float32 height) {
+		if(!texture)
+			return;
+		
 		float tx1, ty1, tx2, ty2;
 		
 		textureRect.x1=x;

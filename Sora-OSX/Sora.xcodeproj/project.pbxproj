@@ -40,6 +40,7 @@
 		88240CD312C5803D009498F7 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 88240CBF12C5803D009498F7 /* zip.c */; };
 		88240CD412C5803D009498F7 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 88240CC212C5803D009498F7 /* zutil.c */; };
 		88240CFB12C5811B009498F7 /* SoraShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88240CF912C5811B009498F7 /* SoraShader.cpp */; };
+		88374B121321EE0C00369B12 /* FileDlgOsx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88374B111321EE0C00369B12 /* FileDlgOsx.mm */; };
 		883900F0131A096700CC101A /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 883900EE131A096700CC101A /* editorWindow.cpp */; };
 		884575D81300DB38003EC408 /* state_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884575D71300DB38003EC408 /* state_test.cpp */; };
 		884E91C612DEAE0100598D7E /* FolderTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884E91C512DEAE0100598D7E /* FolderTree.cpp */; };
@@ -263,6 +264,8 @@
 		8828BF7B1314405A002C6FA7 /* SoraNamedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraNamedObject.h; path = Experimental/SoraNamedObject.h; sourceTree = "<group>"; };
 		8828C1D21314CB07002C6FA7 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		882AD88A130DCA7500800891 /* SoraASSM_Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraASSM_Action.h; path = Experimental/SoraASSM_Action.h; sourceTree = "<group>"; };
+		88374B101321EE0C00369B12 /* FileDlgOsx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileDlgOsx.h; path = ../Plugins/DarkLib/FileDlgOsx.h; sourceTree = SOURCE_ROOT; };
+		88374B111321EE0C00369B12 /* FileDlgOsx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FileDlgOsx.mm; path = ../Plugins/DarkLib/FileDlgOsx.mm; sourceTree = SOURCE_ROOT; };
 		883900EE131A096700CC101A /* editorWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = editorWindow.cpp; path = ../SoraParticleEditor/editorWindow.cpp; sourceTree = SOURCE_ROOT; };
 		883900EF131A096700CC101A /* editorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editorWindow.h; path = ../SoraParticleEditor/editorWindow.h; sourceTree = SOURCE_ROOT; };
 		8839FFA51319FCD500CC101A /* peMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = peMainWindow.h; path = SoraParticleEditor/peMainWindow.h; sourceTree = "<group>"; };
@@ -828,6 +831,15 @@
 			path = ZLIB;
 			sourceTree = "<group>";
 		};
+		88374B0E1321EDD200369B12 /* DarkLibOsx */ = {
+			isa = PBXGroup;
+			children = (
+				88374B101321EE0C00369B12 /* FileDlgOsx.h */,
+				88374B111321EE0C00369B12 /* FileDlgOsx.mm */,
+			);
+			name = DarkLibOsx;
+			sourceTree = "<group>";
+		};
 		8839FF9F1319FC9C00CC101A /* ParticleEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1374,6 +1386,7 @@
 		88D7F51B1285190700BA1949 /* Sora */ = {
 			isa = PBXGroup;
 			children = (
+				88374B0E1321EDD200369B12 /* DarkLibOsx */,
 				88DD0C1F12EB5B48005555F6 /* tcmalloc */,
 				884E91C312DEADC000598D7E /* Experimental */,
 				8811382412CC3BA100C648C7 /* SoraINIFile */,
@@ -1754,6 +1767,7 @@
 				8820969512EF5BF500FB7FFF /* gcnImageButton2.cpp in Sources */,
 				884575D81300DB38003EC408 /* state_test.cpp in Sources */,
 				883900F0131A096700CC101A /* editorWindow.cpp in Sources */,
+				88374B121321EE0C00369B12 /* FileDlgOsx.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

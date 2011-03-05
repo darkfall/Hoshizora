@@ -448,8 +448,12 @@ namespace sora {
 	*/
 	void SoraCore::releaseTexture(HSORATEXTURE pTexture) {
 		assert(bInitialized==true);
-		SoraTextureMap::Instance()->decRf(pTexture);
-		return pRenderSystem->releaseTexture((SoraTexture*)pTexture);
+		SoraTextureMap::Instance()->remove(pTexture);
+		
+		SoraTexture* tex = (SoraTexture*)pTexture;
+		pRenderSystem->releaseTexture(tex);
+		delete tex;
+		tex = 0;
 	}
 
 	void SoraCore::clearTextureMap() {

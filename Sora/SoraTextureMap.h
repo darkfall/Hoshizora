@@ -61,6 +61,15 @@ namespace sora {
 			}
 		}
 		
+		void remove(HSORATEXTURE tex) {
+			TEXMAP_RV::iterator p = texMapRv.find(tex);
+			if(p != texMapRv.end()) {					
+				texRefs.erase(texRefs.find(p->second));
+				texMap.erase(texMap.find(p->second));
+				texMapRv.erase(p);
+			}
+		}
+		
 		void del(HSORATEXTURE tex) {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
@@ -78,6 +87,10 @@ namespace sora {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
 				texRefs[p->second]--;
+				if(texRefs[p->second] == 0) {
+					SORA->releaseTexture(p->first);
+				}
+				printf("tex: %lu, ref: %d\n", tex, texRefs[p->second]);
 			}
 		}
 		
@@ -94,10 +107,10 @@ namespace sora {
 	private:
 		typedef hash_map<stringId, HSORATEXTURE> TEX_MAP;
 		TEX_MAP texMap;
-		typedef std::map<HSORATEXTURE, stringId> TEXMAP_RV;
+		typedef hash_map<HSORATEXTURE, stringId> TEXMAP_RV;
 		TEXMAP_RV texMapRv;
 		
-		typedef std::map<stringId, int32> TEX_USE_COUNT;
+		typedef hash_map<stringId, int32> TEX_USE_COUNT;
 		TEX_USE_COUNT texRefs;
 	};
 };

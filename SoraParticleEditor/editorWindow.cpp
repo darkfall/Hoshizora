@@ -1,4 +1,5 @@
 #include "editorWindow.h"
+#include "Darklib/FileDlgOsx.h"
 
 gcn::Window* pSpeedPanel;
 gcn::Window* pPropPanel;
@@ -8,7 +9,7 @@ gcn::Window* pEndColorPanel;
 
 std::wstring sCurrParticleFile = L"Default.sps";
 
-#ifdef OS_WIN32
+#if defined(OS_OSX) || defined(OS_WIN32)
 FileDlg* fileDlg;
 #endif
 
@@ -421,24 +422,31 @@ void setTextureRectSlider(SoraSprite* pspr) {
 }
 
 void loadParticleSprite(const SoraWString path) {
-	ulong32 tex = SoraCore::Instance()->createTexture(path);
-	if(tex) {
-		delete pspr;
-		pspr = SORA->createSpriteTex(tex);
-		if(pspr == 0) {
-			SoraTexture* ppar = (SoraTexture*)sora::SoraCore::Instance()->createTexture(L"pics/particles.png");
-			pspr = new SoraSprite(ppar);
-			if(pspr == 0) {
-				SoraCore::Instance()->messageBox("Failed loading particle sprite", "Error", MB_OK | MB_ICONERROR);
-			}
-		}
-		setTextureRectSlider(pspr);
-	} else {
-		SoraCore::Instance()->messageBox("Failed loading particle sprite", "Error", MB_OK | MB_ICONERROR);
-	}
+	delete pspr;
+	pspr = SORA->createSprite(path);
+	if(pspr == NULL)
+		pspr = SORA->createSprite(L"pics/particles.png");
 
-	
 	peffect->restart();
+}
+
+void applyFilterSps() {
+#ifdef WIN32	
+	fileDlg->SetFilter(TEXT("SoraParticleFile (*.sps)\0*.sps\0\0"));
+	fileDlg->SetDefaultExt(L".sps\0");	
+#else	
+	fileDlg->SetFilter("sps;");
+	fileDlg->SetDefaultExt("sps");	
+#endif
+}
+void applyFilterImage() {
+#ifdef WIN32	
+	fileDlg->SetFilter(TEXT("ImageFiles (*.png,*.bmp,*.jpg)\0*.png;*.bmp;*.jpg\0\0"));
+	fileDlg->SetDefaultExt(L".png\0");	
+#else	
+	fileDlg->SetFilter("png;bmp;jpg");
+	fileDlg->SetDefaultExt("png");	
+#endif
 }
 
 class OptionPanelButtonResponser: public SoraGUIResponser {
@@ -449,22 +457,25 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 	
 		restoreValue();
 	} else if(getID().compare("Open") == 0) {
-#ifdef WIN32
+#if defined(OS_OSX) || defined(OS_WIN32)
+
 		if(bOpenFinished) {
 			peffect->restart();
 			bOpenFinished = false;
 			return;
 		}
+
+#ifdef WIN32
 		wchar_t fileTitleBuffer[512];
 		wchar_t filePathBuffer[512];
+
 		fileTitleBuffer[0] = '\0';
 		filePathBuffer[0] = '\0';
-
-		fileDlg->SetFilter(TEXT("SoraParticleFile (*.sps)\0*.sps\0\0"));
-		fileDlg->SetDefaultExt(L".sps\0");	
-		fileDlg->SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
+		
+		applyFilterSps();
 		if(fileDlg->FileOpenDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
 			sCurrParticleFile = filePathBuffer;
+			
 			delete peffect;
 			peffect = new SoraParticleSystem;
 			peffect->emit(sCurrParticleFile, pspr);
@@ -473,25 +484,60 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 			restoreValue();
 			peffect->fire();
 			return;
+			
+#elif defined(OS_OSX)
+		char fileTitleBuffer[512];
+		char filePathBuffer[512];
+			
+		fileTitleBuffer[0] = '\0';
+		filePathBuffer[0] = '\0';
+			
+		applyFilterSps();
+		if(fileDlg->FileOpenDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {	
+			sCurrParticleFile = s2ws(filePathBuffer);
+			
+			delete peffect;
+			peffect = new SoraParticleSystem;
+			peffect->emit(sCurrParticleFile, pspr);
+			bOpenFinished = true;
+			
+			restoreValue();
+			peffect->fire();
+			return;
+#endif
+			
+			
 		}
 #endif
 	} else if(getID().compare("Save") == 0) {
 		peffect->saveScript(sCurrParticleFile);
 	} else if(getID().compare("SaveAs") == 0) {
+		
 #ifdef WIN32
 		wchar_t fileTitleBuffer[512];
 		wchar_t filePathBuffer[512];
 		fileTitleBuffer[0] = '\0';
 		filePathBuffer[0] = '\0';
 
-		fileDlg->SetFilter(TEXT("SoraParticleFile (*.sps)\0*.sps\0\0"));
-		fileDlg->SetDefaultExt(L".sps\0");	
-		fileDlg->SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
+		applyFilterSps();
 		if(fileDlg->FileSaveDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
 			sCurrParticleFile = filePathBuffer;
-			peffect->saveScript(sCurrParticleFile);
+		}
+		
+#elif defined(OS_OSX)
+		char fileTitleBuffer[512];
+		char filePathBuffer[512];
+		fileTitleBuffer[0] = '\0';
+		filePathBuffer[0] = '\0';
+		
+		applyFilterSps();
+		if(fileDlg->FileSaveDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
+			sCurrParticleFile = s2ws(filePathBuffer);
 		}
 #endif
+		
+		peffect->saveScript(sCurrParticleFile);
+
 	} else if(getID().compare("TextureRect") == 0) {
 		gcn::Slider* ps = (gcn::Slider*)getSource();
 		int v = (int)ps->getValue() % 4;
@@ -506,14 +552,23 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 		wchar_t filePathBuffer[512];
 		fileTitleBuffer[0] = '\0';
 		filePathBuffer[0] = '\0';
-
-		fileDlg->SetFilter(TEXT("ImageFiles (*.png,*.bmp,*.jpg)\0*.png;*.bmp;*.jpg\0\0"));
-		fileDlg->SetDefaultExt(L".png\0");	
-		fileDlg->SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
+		
+		applyFilterImage();
 		if(fileDlg->FileOpenDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
 			loadParticleSprite(filePathBuffer);
 		}
+#elif defined(OS_OSX)
+		char fileTitleBuffer[512];
+		char filePathBuffer[512];
+		fileTitleBuffer[0] = '\0';
+		filePathBuffer[0] = '\0';
+		
+		applyFilterImage();
+		if(fileDlg->FileOpenDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
+			loadParticleSprite(s2ws(filePathBuffer));
+		}
 #endif
+		
 	}
 	}
 };
@@ -662,9 +717,14 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 
 		labelLoadValue();
 		restoreValue();
-
-#ifdef WIN32
-		fileDlg = new FileDlg((HWND)SoraCore::Instance()->getMainWindowHandle());
+		
+#if defined(OS_OSX) || defined(OS_WIN32)
+		fileDlg = new FileDlg();
+#ifdef OS_OSX
+		fileDlg->SetDefaultPath(ws2s(SoraFileUtility::getApplicationPath()).c_str());
+#else
+		fileDlg->SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
+#endif
 #endif
 
 		return pWindow;

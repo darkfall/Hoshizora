@@ -93,26 +93,20 @@ namespace sora {
 	void SoraParticleSystem::killAll() {
 		bActive = false;
 		particles.clear();
-		fCurrEmitTime = 0.f;
-		fToEmitTime = 0.f;
 	}
 
 	void SoraParticleSystem::stop() {
 		bActive = false;
-		fCurrEmitTime = 0.f;
-		fToEmitTime = 0.f;
 	}
 
 	void SoraParticleSystem::fire() {
 		bActive = true;
-		fCurrEmitTime = 0.f;
-		fToEmitTime = 0.f;
+		init();
 	}
 
 	void SoraParticleSystem::fireAt(float32 x, float32 y, float32 z) {
 		bActive = true;
-		fCurrEmitTime = 0.f;
-		fToEmitTime = 0.f;
+		init();
 		pheader.emitPos.set(x, y, z);
 	}
 
@@ -125,6 +119,8 @@ namespace sora {
 		killAll();
 		if(pSprite) {	
 			bActive = true;
+			
+			init();
 		}
 	}
 	
