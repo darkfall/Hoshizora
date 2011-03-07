@@ -1,0 +1,1406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{b346c15c-9ddb-4163-a967-561b3c48e6fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\FreetypeFont">
+      <UniqueIdentifier>{087ef6e9-6fb0-46b6-9e4e-ae951e9c5ee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\hgeRenderer">
+      <UniqueIdentifier>{58085291-7515-49cd-aa99-c92d1ababfc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\zipResourceManager">
+      <UniqueIdentifier>{3c8e0f9a-1b8a-47d0-b721-949fc3118fab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\Win32MiscTool">
+      <UniqueIdentifier>{ca0930f5-37de-44ad-8b3c-52c0f4bfc37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\Win32Timer">
+      <UniqueIdentifier>{cc9b9671-1206-45bf-bfa2-c4780a2effac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SoraGUIChan">
+      <UniqueIdentifier>{ec121d5a-d71c-4312-8092-5335f6982e95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\lAnm">
+      <UniqueIdentifier>{87de757a-6bfb-44f6-9ff1-fe7508c79f93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Reflection">
+      <UniqueIdentifier>{71d0abf7-7e33-44e3-95b2-56904c762047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ls">
+      <UniqueIdentifier>{73246dc3-8041-4eb4-99ff-15b309138524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\gcn">
+      <UniqueIdentifier>{8578cdd2-36ba-456f-b963-2d908fdef218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\hgeRenderer\hge">
+      <UniqueIdentifier>{dd18c601-8445-4ac4-8431-422cf9e4b32d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\zlib">
+      <UniqueIdentifier>{2d456fcb-de45-45d0-b289-03240ed0976e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\ParticleSystem">
+      <UniqueIdentifier>{44a99006-6005-4dff-8541-dfd6f14faced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\llexer">
+      <UniqueIdentifier>{2b321a02-f143-4c8d-880f-12bcef076c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\tinyxml">
+      <UniqueIdentifier>{9e2fcf89-533e-4058-9c74-6b7db9abe390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\experimental">
+      <UniqueIdentifier>{bf15e2d1-c675-4257-8adf-6699edce332d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\AudiereSS">
+      <UniqueIdentifier>{a4b38122-6251-489b-ad11-326b9ae84e36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\defaults">
+      <UniqueIdentifier>{2cef4640-6e28-4ab5-a729-25f85e45fde2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\debug">
+      <UniqueIdentifier>{a0075821-69fc-43b2-b904-e4dcbb8923bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\random">
+      <UniqueIdentifier>{78cbc1ea-1726-478d-a6ef-4464315d1ed0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Sora\hgerect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\hgevector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\HoshiNoSora.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\md5lib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\QuickList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Rect4V.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraAutoPtr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraColor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraComponentType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraCore.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraEventManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraException.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraFileBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraFileUtility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraFont.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraFontManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraInfiniteRendererCallback.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraInput.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraInternalLogger.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraKeyInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraMath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraMiscTool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraPlatform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraPlugin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraPluginManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraRenderSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraRenderTarget.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraResourceManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraSingleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraSoundSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraSprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraString.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraStringConv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraTextureMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraTimer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraTypeInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraWindowInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\MyFileReader.h">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\PackMemory.h">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\PackReader.h">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\SoraZipFile.h">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.h">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraWin32Timer\orz.h">
+      <Filter>Plugins\Win32Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraWin32Timer\SoraTimer_Win32.h">
+      <Filter>Plugins\Win32Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraWin32MiscTool\SoraMiscTool_Win32.h">
+      <Filter>Plugins\Win32MiscTool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichansora.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUI.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguifont.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguigraphics.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguiimage.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguiimageloader.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguiinput.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUIListener.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUIResponser.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUIResponserMap.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\xmlgui.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\actionevent.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\actionlistener.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\basiccontainer.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\cliprectangle.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\color.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\contrib\widgets\adjustingcontainer.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\deathlistener.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\defaultfont.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\event.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\exception.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\focushandler.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\focuslistener.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\font.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\genericinput.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\graphics.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\gui.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\image.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\imagefont.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\imageloader.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\input.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\inputevent.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\key.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\keyevent.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\keyinput.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\keylistener.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\listmodel.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\mouseevent.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\mouseinput.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\mouselistener.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\platform.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\rectangle.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\selectionevent.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\selectionlistener.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\StringConv.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widget.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgetlistener.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\button.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\checkbox.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\container.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\dropdown.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\icon.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\imagebutton.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\label.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\listbox.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\radiobutton.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\scrollarea.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\slider.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\tab.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\tabbedarea.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textbox.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textfield.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\window.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan.hpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\lAnm\lAnm.h">
+      <Filter>Plugins\lAnm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\lAnm\lMemFile.h">
+      <Filter>Plugins\lAnm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Reflection\rfMap.h">
+      <Filter>源文件\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Reflection\lMemFile.h">
+      <Filter>源文件\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Reflection\rfCommon.h">
+      <Filter>源文件\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="rfMapRenderer.h">
+      <Filter>源文件\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="rfMainWindow.h">
+      <Filter>源文件\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="lsAnimatedSprite.h">
+      <Filter>源文件\ls</Filter>
+    </ClInclude>
+    <ClInclude Include="guichansetup.h">
+      <Filter>源文件\gcn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftconfig.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftheader.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftmodule.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftoption.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftstdlib.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\freetype.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftadvanc.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftbbox.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftbdf.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftbitmap.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftcache.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftchapters.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftcid.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\fterrdef.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\fterrors.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftgasp.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftglyph.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftgxval.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftgzip.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftimage.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftincrem.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftlcdfil.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftlist.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftlzw.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftmac.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftmm.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftmodapi.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftmoderr.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftotval.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftoutln.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftpfr.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftrender.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftsizes.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftsnames.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftstroke.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftsynth.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftsystem.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\fttrigon.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\fttypes.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftwinfnt.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ftxf86.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\autohint.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftcalc.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftdebug.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftdriver.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftgloadr.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftmemory.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftobjs.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftpic.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftrfork.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftserv.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftstream.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\fttrace.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\ftvalid.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\internal.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\pcftypes.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\psaux.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\pshints.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svbdf.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svcid.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svgldict.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svgxval.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svkern.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svmm.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svotval.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svpfr.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svpostnm.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svpscmap.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svpsinfo.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svsfnt.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svttcmap.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svtteng.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svttglyf.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svwinfnt.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\services\svxf86nm.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\sfnt.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\t1types.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\internal\tttypes.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\t1tables.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ttnameid.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\tttables.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\tttags.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\ttunpat.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\ft2build.h">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="SoraDXRenderer.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\CoreTransform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\CoreTransformer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\graphicEffects.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\quaternion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\vector3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\CoreLinearTransformer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraImageEffect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge.h">
+      <Filter>Plugins\hgeRenderer\hge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge_impl.h">
+      <Filter>Plugins\hgeRenderer\hge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\crc32.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\crypt.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\deflate.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\inffast.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\inffixed.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\inflate.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\inftrees.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\ioapi.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\iowin32.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\mztools.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\trees.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\unzip.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\zconf.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\zconf.in.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\zip.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\zlib.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\ZLIB\zutil.h">
+      <Filter>头文件\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h">
+      <Filter>Plugins\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="testMainWindow.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\win32filewrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\menuScene.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\menuSceneManager.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\stgscene.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\titleScene.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\backgroundScene.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\guichansetup.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\lBasicRenderItem.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\lGUIScene.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\lScene.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora-OSX\mainWindow.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\glfw\GL\glfw.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_helper.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\SOIL.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stb_image_aug.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stbi_DDS_aug.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stbi_DDS_aug_c.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLInput.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLKeyPoll.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraFolderResourceManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\llexer\llexer.h">
+      <Filter>头文件\llexer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\tinyXML\tinyxml.h">
+      <Filter>头文件\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\tinyXML\tinystr.h">
+      <Filter>头文件\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Experimental\FolderTree.h">
+      <Filter>头文件\experimental</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Experimental\Sora2DMatrix.h">
+      <Filter>头文件\experimental</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Experimental\AutoList.h">
+      <Filter>头文件\experimental</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Experimental\common.h">
+      <Filter>头文件\experimental</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraResourceFileFinder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraLocalizer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraLocalizedString.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\audiere\audiere.h">
+      <Filter>Plugins\AudiereSS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereDevice.h">
+      <Filter>Plugins\AudiereSS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundFile.h">
+      <Filter>Plugins\AudiereSS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraSoundFileBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\orz.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\SoraDefaultLogger.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\SoraDefaultMiscTool.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\SoraDefaultTimer.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\SoraMiscTool_OSX.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\SoraMiscTool_Win32.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\SoraOSXTimer.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\SoraTimer_Win32.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\uncopyable.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Debug\SoraGlobalProfiler.h">
+      <Filter>头文件\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Debug\SoraInternalLogger.h">
+      <Filter>头文件\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Debug\SoraAutoProfile.h">
+      <Filter>头文件\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params607.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params1279.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params2281.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params4253.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params11213.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params19937.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params44497.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params86243.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params132049.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params216091.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-sse2.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\hgeRandom.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-alti.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Random\SFMT-params.h">
+      <Filter>头文件\random</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.h">
+      <Filter>源文件\gcn</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Sora\hgerect.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\hgevector.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\md5lib.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraCore.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraEvent.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraEventManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraObject.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraPluginManger.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraSprite.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraStringConv.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraTexture.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.cpp">
+      <Filter>Plugins\FreetypeFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\PackMemory.cpp">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\PackReader.cpp">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\SoraZipFile.cpp">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.cpp">
+      <Filter>Plugins\zipResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraWin32Timer\orz.c">
+      <Filter>Plugins\Win32Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguifont.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguigraphics.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguiimage.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguiimageloader.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguiinput.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\xmlgui.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\actionevent.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\basiccontainer.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\cliprectangle.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\color.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\contrib\widgets\adjustingcontainer.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\defaultfont.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\event.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\exception.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\focushandler.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\font.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\genericinput.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\graphics.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\gui.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\guichan.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\image.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\imagefont.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\inputevent.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\key.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\keyevent.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\keyinput.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\mouseevent.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\mouseinput.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\rectangle.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\selectionevent.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\StringConv.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widget.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\button.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\checkbox.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\container.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\dropdown.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\icon.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\imagebutton.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\label.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\listbox.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\radiobutton.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\scrollarea.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\slider.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\tab.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\tabbedarea.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textbox.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textfield.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\window.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\lAnm\lAnm.cpp">
+      <Filter>Plugins\lAnm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Reflection\rfMap.cpp">
+      <Filter>源文件\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="rfMainWindow.cpp">
+      <Filter>源文件\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="rfMapRenderer.cpp">
+      <Filter>源文件\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="lsAnimatedSprite.cpp">
+      <Filter>源文件\ls</Filter>
+    </ClCompile>
+    <ClCompile Include="SoraDXRenderer.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\CoreTransform.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\graphicEffects.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\deflate.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\gzio.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\infback.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\inffast.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\inflate.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\inftrees.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\ioapi.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\iowin32.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\mztools.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\trees.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\uncompr.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\unzip.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\zip.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\zutil.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\adler32.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\compress.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\ZLIB\crc32.c">
+      <Filter>头文件\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp">
+      <Filter>Plugins\hgeRenderer\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeresource.cpp">
+      <Filter>Plugins\hgeRenderer\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp">
+      <Filter>Plugins\hgeRenderer\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp">
+      <Filter>Plugins\hgeRenderer\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraShader.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp">
+      <Filter>Plugins\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="testMainWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraTimerEvent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\win32filewrapper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\menuSceneManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\stgscene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\titleScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\backgroundScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\lBasicRenderItem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\lGUIScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\lScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\mainWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora-OSX\menuScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_helper.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\SOIL.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\stb_image_aug.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLInput.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLKeyPoll.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\llexer\llexer.cpp">
+      <Filter>头文件\llexer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\tinyXML\tinyxml.cpp">
+      <Filter>头文件\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\tinyXML\tinyxmlerror.cpp">
+      <Filter>头文件\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\tinyXML\tinyxmlparser.cpp">
+      <Filter>头文件\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\tinyXML\tinystr.cpp">
+      <Filter>头文件\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\Experimental\FolderTree.cpp">
+      <Filter>头文件\experimental</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraResourceFileFinder.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraLocalizer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundFile.cpp">
+      <Filter>Plugins\AudiereSS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\Defaults\orz.c">
+      <Filter>头文件\defaults</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\Random\SFMT.c">
+      <Filter>头文件\random</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.cpp">
+      <Filter>源文件\gcn</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Plugins\SoraOGLRenderer\soil\soil.html">
+      <Filter>Plugins</Filter>
+    </None>
+  </ItemGroup>
+</Project>
