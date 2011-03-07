@@ -301,13 +301,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>278</integer>
+									<integer>234</integer>
 									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 4579}, {253, 702}}</string>
+							<string>{{0, 3848}, {253, 702}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -344,7 +344,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hashtable.h</string>
+								<string>SoraCore.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -352,11 +352,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>hashtable.h</string>
+										<string>SoraCore.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>88374CBD13220CBD00369B12</string>
+										<string>88374CF213221BC700369B12</string>
 										<key>history</key>
 										<array>
 											<string>88A792821287330A00F9C74C</string>
@@ -416,7 +416,6 @@
 											<string>88DD59C112E0282D0081AE6C</string>
 											<string>88DD5AE812E053AF0081AE6C</string>
 											<string>88DD5CDC12E229920081AE6C</string>
-											<string>8896F14F12E7EAD900F42D48</string>
 											<string>8896F2A312E8B77100F42D48</string>
 											<string>8896F2AC12E8B77100F42D48</string>
 											<string>8896F32C12E9069300F42D48</string>
@@ -592,7 +591,6 @@
 											<string>885D97AD131B4CBF009A7E14</string>
 											<string>885D98C4131B530B009A7E14</string>
 											<string>885D98C5131B530B009A7E14</string>
-											<string>885D9913131B5B75009A7E14</string>
 											<string>885D9914131B5B75009A7E14</string>
 											<string>885D9915131B5B75009A7E14</string>
 											<string>885D9916131B5B75009A7E14</string>
@@ -674,9 +672,9 @@
 											<string>88374C8413220B4D00369B12</string>
 											<string>88374C9A13220C1F00369B12</string>
 											<string>88374C9B13220C1F00369B12</string>
-											<string>88374CB313220C8F00369B12</string>
 											<string>88374CBA13220CBD00369B12</string>
-											<string>88374CBB13220CBD00369B12</string>
+											<string>88374CF113221BC700369B12</string>
+											<string>88374CB313220C8F00369B12</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -734,9 +732,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>88374AFE1321ECFB00369B12</string>
+				<string>88374CF313221BC700369B12</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>88374AFF1321ECFB00369B12</string>
+				<string>88374CF413221BC700369B12</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -874,14 +872,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>88374CBF13220CBD00369B12</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>88374B091321ECFB00369B12</string>
-		<string>88374B0A1321ECFB00369B12</string>
 		<string>88D7F517128518B600BA1949</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 117 1440 761 0 0 1440 878 </string>
@@ -922,8 +915,6 @@
 							<string>186pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -963,7 +954,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>88D7F517128518B600BA1949</string>
-				<string>88374B001321ECFB00369B12</string>
+				<string>88374CF513221BC700369B12</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -976,7 +967,7 @@
 			<key>WindowToolGUID</key>
 			<string>88D7F517128518B600BA1949</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -1085,13 +1076,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>88374B011321ECFB00369B12</string>
+				<string>88374CF613221BC700369B12</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>88374B021321ECFB00369B12</string>
-				<string>88374B031321ECFB00369B12</string>
-				<string>88374B041321ECFB00369B12</string>
-				<string>88374B051321ECFB00369B12</string>
-				<string>88374B061321ECFB00369B12</string>
+				<string>88374CF713221BC700369B12</string>
+				<string>88374CF813221BC700369B12</string>
+				<string>88374CF913221BC700369B12</string>
+				<string>88374CFA13221BC700369B12</string>
+				<string>88374CFB13221BC700369B12</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
