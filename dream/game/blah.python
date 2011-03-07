@@ -1,0 +1,61 @@
+import wx
+
+class FormFiche(wx.Frame):
+     def __init__(self):
+         wx.Frame.__init__(self,None,-1,"Title")
+
+         scroll=wx.ScrolledWindow(self,-1)
+
+         self.scroll=scroll
+         panel=wx.Panel(scroll,-1)
+
+         gs = wx.FlexGridSizer(50, 2, 2, 2)  # rows, cols, hgap, vgap
+
+         for i in range(50):
+             gs.Add(wx.StaticText(panel,-1," champ %d : "%(i)))
+             wxc=wx.TextCtrl(panel,-1,style=0)
+             wx.EVT_SET_FOCUS(wxc,self.focusGain)
+             gs.Add(wxc)
+
+         panel.SetSizer(gs)
+
+         panel.SetAutoLayout(True)
+
+         panel.Layout()
+         panel.Fit()
+
+         self.unit=20
+         width,height=panel.GetSizeTuple()
+
+         scroll.SetScrollbars(self.unit, self.unit, width/self.unit, height/self.unit)
+         if (width>400): width=400
+         if (height>400): height=400
+         self.SetSize((width,height))
+
+         self.Center()
+         self.MakeModal(True)
+         self.Show(1)
+
+     def focusGain(self,event):
+         w=self.FindWindowById(event.GetId())
+         x,y=w.GetPositionTuple()
+         hx,hy=w.GetSizeTuple()
+         cx,cy=self.scroll.GetClientSizeTuple()
+         sx,sy=self.scroll.GetViewStart()
+         sx=sx*20
+         sy=sy*20
+
+         if (y<sy):
+             self.scroll.Scroll(0,y/self.unit)
+         if (x<sx):
+             self.scroll.Scroll(0,-1)
+         if ((x+sx)>cx):
+             self.scroll.Scroll(0,-1)
+         if ((y+hy-sy)>cy):
+             self.scroll.Scroll(0,y/self.unit)
+
+         event.Skip()
+
+myapp=wx.PySimpleApp()
+FormFiche()
+myapp.MainLoop()
