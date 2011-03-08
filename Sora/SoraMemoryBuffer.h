@@ -141,6 +141,7 @@ namespace sora {
 			currPos = rhs.currPos;
 			length = rhs.length;
 			apCData = rhs.apCData;
+			return *this;
 		}
 
 	private:

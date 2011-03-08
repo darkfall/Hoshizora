@@ -67,6 +67,7 @@ namespace sora {
 		};
 
 		static SoraInternalLogger* LOG = SoraInternalLogger::Instance();
+#define INT_LOG SoraInternalLogger
 	//} // namespace internal
 } // namespace sora
 
