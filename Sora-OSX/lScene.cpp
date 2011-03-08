@@ -251,11 +251,11 @@ namespace projl {
 	}
 	
 	lScene* lSceneManager::getSceneByName(const SoraString& name) {
-		uint32 hash = sora::BKDRHash(name.c_str());
+		sora::stringId hash = sora::str2id(name);
 		
 		SCENE_LIST::iterator p = scenes.begin();
 		while( p != scenes.end() ) {
-			if((*p)->getNameHash() == hash)
+			if((*p)->getName() == hash)
 				return (*p);
 			++p;
 		}

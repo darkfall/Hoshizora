@@ -53,13 +53,39 @@ int main(int argc, char* argv[]) {
 		sora::SoraMemoryFile file4(L"box2.png");
 		sora::SoraMemoryFile file5(L"boxhl.png");
 		sora::SoraMemoryFile file6(L"boxhl.png");
+		
+		sora::SoraMemoryBuffer serializeBuffer;
+		// alloc 4kb data
+		serializeBuffer.alloc(4096);
+		file1.serialize(serializeBuffer);
+		file2.serialize(serializeBuffer);
+		file3.serialize(serializeBuffer);
+		file4.serialize(serializeBuffer);
+		file5.serialize(serializeBuffer);
+		file6.serialize(serializeBuffer);
+		
+		serializeBuffer.writeToFile("test.serialized");
+	}
+	{
+		ulong32 size;
+		void* pdata = sora::SORA->getResourceFile(L"test.serialized", size);
+		if(size && pdata) {
+			sora::SoraMemoryBuffer serialzeData(pdata, size);
+			sora::SoraMemoryFile file1; file1.unserialize(serialzeData);
+			sora::SoraMemoryFile file2; file2.unserialize(serialzeData);
+			sora::SoraMemoryFile file3; file3.unserialize(serialzeData);
+			sora::SoraMemoryFile file4; file4.unserialize(serialzeData);
+			sora::SoraMemoryFile file5; file5.unserialize(serialzeData);
+			sora::SoraMemoryFile file6; file6.unserialize(serialzeData);
+
+		}
 	}
 	
-	
+	/*
 	sora::SoraLocalizer* localizer = sora::SoraLocalizer::Instance();
 	localizer->addLocaleConf(L"en.locale");
 	localizer->addLocaleConf(L"cn.locale");
-	
+	*/
 	sora->setFPS(60.0);
 	
 	sora->createWindow(new peMainWindow);

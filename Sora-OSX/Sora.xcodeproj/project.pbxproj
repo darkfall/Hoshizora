@@ -269,6 +269,7 @@
 		88374E391325A9B600369B12 /* SoraNamedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraNamedObject.h; sourceTree = "<group>"; };
 		88374F0F1325CE8600369B12 /* SoraCGGLShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraCGGLShader.cpp; path = ../Plugins/SoraShader/SoraCGGLShader.cpp; sourceTree = SOURCE_ROOT; };
 		88374F101325CE8600369B12 /* SoraCGGLShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraCGGLShader.h; path = ../Plugins/SoraShader/SoraCGGLShader.h; sourceTree = SOURCE_ROOT; };
+		8837504E1325F42900369B12 /* Serializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serializable.h; sourceTree = "<group>"; };
 		883900EE131A096700CC101A /* editorWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = editorWindow.cpp; path = ../SoraParticleEditor/editorWindow.cpp; sourceTree = SOURCE_ROOT; };
 		883900EF131A096700CC101A /* editorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editorWindow.h; path = ../SoraParticleEditor/editorWindow.h; sourceTree = SOURCE_ROOT; };
 		8839FFA51319FCD500CC101A /* peMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = peMainWindow.h; path = SoraParticleEditor/peMainWindow.h; sourceTree = "<group>"; };
@@ -1425,6 +1426,7 @@
 				889BFD4812BF4D23002D8A2F /* SoraImageEffect.h */,
 				88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */,
 				88D87D2B12A09A66007D6865 /* SoraColor.h */,
+				8837504E1325F42900369B12 /* Serializable.h */,
 				88D87D2C12A09A66007D6865 /* SoraComponentType.h */,
 				88D87D2D12A09A66007D6865 /* SoraCore.cpp */,
 				88D87D2E12A09A66007D6865 /* SoraCore.h */,

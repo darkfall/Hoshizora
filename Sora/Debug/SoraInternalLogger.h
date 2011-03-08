@@ -30,7 +30,7 @@ namespace sora {
 				vsprintf(Message, format, ArgPtr);
 				va_end(ArgPtr);
 				
-				printf("_DEBUG: %s\n", Message);
+				printf("_DEBUG: %s", Message);
 #endif
 			}
 			

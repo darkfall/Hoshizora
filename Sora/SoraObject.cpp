@@ -69,19 +69,15 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 		return parent;
 	}
 
-	void SoraObject::setName(const SoraString& n) {
-		name = n;
-		nameHash = BKDRHash(n.c_str());
-	}
-	
 	SoraObject::AP_OBJECT SoraObject::getObjByName(const SoraString& n) {
 		if(name.compare(n) == 0) {
 			return this;
 		}
 		
 		SUB_OBJECT_LIST::iterator itObj = subobjs.begin();
+		stringId id = str2id(n);
 		while(itObj != subobjs.end()) {
-			if(itObj->pointer()->getNameHash() == str2id(n))
+			if(itObj->pointer()->getName() == id)
 				return *itObj;
 			++itObj;
 		}

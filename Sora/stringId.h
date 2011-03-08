@@ -13,6 +13,7 @@
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
 #include "hash.h"
+#include "Debug/SoraInternalLogger.h"
 
 namespace sora {
 	
@@ -25,9 +26,7 @@ namespace sora {
 		inline stringId getStringId(const SoraString& str) {
 			stringId sid = crc32(str);
 			if(strings.find(sid) == strings.end()) {
-#ifdef _DEBUG
-				printf("mapping str, id=%lu, str=%s\n", sid, str.c_str());
-#endif
+				INT_LOG::debugPrintf("mapping str, id=%lu, str=%s\n", sid, str.c_str());
 				strings[sid] = s2ws(str);
 			}
 			return sid;
@@ -42,9 +41,7 @@ namespace sora {
 
 			if(strings.find(sid) == strings.end()) {
 				strings[sid] = str;
-#ifdef _DEBUG
-				printf("mapping str, id=%lu, str=%s\n", sid, ws2s(str).c_str());
-#endif
+				INT_LOG::debugPrintf("STR_MAP: mapping str, id=%lu, str=%s\n", sid, ws2s(str).c_str());
 			}
 			return sid;
 		}
@@ -67,6 +64,12 @@ namespace sora {
 			if(itStr != strings.end())
 				return ws2s(itStr->second).c_str();
 			return 0;
+		}
+		
+		inline void print() {
+			for(STR_MAP::iterator itstr = strings.begin(); itstr != strings.end(); ++itstr) {
+				INT_LOG::debugPrintf("STR_MAP: %lu = %s\n", itstr->first, ws2s(itstr->second).c_str());
+			}
 		}
 		
 	private:

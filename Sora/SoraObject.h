@@ -11,10 +11,12 @@
 #include <algorithm>
 #include <list>
 #include "SoraAutoPtr.h"
+#include "SoraNamedObject.h"
 
 namespace sora {
 
-	class SoraObject: public SoraEventHandler {
+	class SoraObject: public SoraEventHandler,
+						public SoraNamedObject {
 	public:
 		typedef SoraObject* PSORAOBJECT;
 		typedef SoraAutoPtr<SoraObject> AP_OBJECT;
@@ -37,10 +39,6 @@ namespace sora {
 		SUB_OBJECT_LIST getObjList();
 		AP_OBJECT getParent() const;
 				
-		void setName(const SoraString& n);
-		SoraString getName() const { return name; }
-		uint32 getNameHash() const { return nameHash; }
-		
 		AP_OBJECT getObjByName(const SoraString& n);
 		
 		uint32 getType() const { return type; }
