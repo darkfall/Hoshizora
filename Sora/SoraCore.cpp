@@ -49,8 +49,7 @@ namespace sora {
 		pResourceFileFinder = new SoraResourceFileFinder;
 		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
 		
-		
-		init_gen_rand(rand());
+		setRandomSeed(rand());
 	}
 
 	void SoraCore::_initializeTimer() {
@@ -675,6 +674,7 @@ namespace sora {
 
 	void SoraCore::setRandomSeed(int32 seed) {
 		Random_Seed(seed);
+		init_gen_rand(seed);
 	}
 
 	int32 SoraCore::getRandomSeed() {
