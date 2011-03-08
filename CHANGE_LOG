@@ -1,0 +1,4 @@
+2011/3/07
+添加序列化公共接口
+调整集成体系, SoraNamedObject -> SoraObject, SoraMemoryBuffer -> SoraMemoryFile, SoraMemoryBuffer -> SoraNamedObject
+ 
