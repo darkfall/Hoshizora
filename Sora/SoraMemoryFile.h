@@ -23,7 +23,13 @@ namespace sora {
 				public SoraNamedObject,
 				public AutoListElement<SoraMemoryFile> {
 	public:
-		SoraMemoryFile(const SoraWString& filename) {			
+		SoraMemoryFile(const SoraWString& filename) { read(filename); }
+		SoraMemoryFile(stringId filename) { read(filename); }
+		SoraMemoryFile() {}
+					
+		virtual ~SoraMemoryFile() {}	
+					
+		void read(const SoraWString& filename) {
 			ObjList memoryFiles = getAllMembers();
 			ObjList::iterator itObj = std::find_if(memoryFiles.begin(), memoryFiles.end(), std::bind2nd(compareObjectName(), str2id(filename)));
 			if(itObj != memoryFiles.end()) {
@@ -39,11 +45,20 @@ namespace sora {
 			}
 		}
 					
-		virtual ~SoraMemoryFile() {}	
+		void read(stringId filename) {
+			read(id2strw(filename));
+		}
 		
 		SoraMemoryFile& operator=(const SoraMemoryFile& rhs) {
 			memoryFile = rhs.memoryFile;
+			setName(rhs.getName());
 			return *this;
+		}
+					
+		virtual void unserialize(SoraMemoryBuffer& bufferStream) {
+			SoraNamedObject::unserialize(bufferStream);
+			INT_LOG::debugPrintf("*** unserialze, name:=%lu, %s, listsize=%d\n", getName(), id2str(getName()), getAllMembers().size());
+			read(getName());
 		}
 					
 	private:

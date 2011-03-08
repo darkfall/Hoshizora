@@ -49,9 +49,11 @@ namespace sora {
 			size = (size + 15) & uint32(-16);
 			uint8* data = new uint8[size];
 			if(!data) return false;
+			memset(data, 0, length);
 			apCData = data;
 			length = size;
 			seek(0);
+			return true;
 		}
 		
 		bool push(void* pdata, ulong32 size) {
@@ -59,26 +61,58 @@ namespace sora {
 				memcpy((void*)(get()+currPos), pdata, size);
 				currPos += size;
 				return true;
+			} else {
+				// buffer not enough, reallocate
+				
+				// save current data
+				uint8* tempData = new uint8[length];
+				memcpy(tempData, (void*)(get()), length);
+				
+				// rellocate data
+				ulong32 prevLength = length;
+				length = length*2 + 1024;
+				alloc(length);
+				memcpy((void*)(get()), tempData, prevLength);
+				currPos += prevLength;
+				return push(pdata, size);
 			}
 			return false;
+		}
+		
+		template<typename T>
+		bool push(T t) {
+			return push(&t, sizeof(t));
+		}
+		
+		bool writeToFile(const SoraString& path) {
+			FILE* pFile = fopen(path.c_str(), "wb");
+			if(pFile) {
+				ulong32 wrote = fwrite((void*)(get()), length, 1, pFile);
+				if(wrote != length) {
+					fclose(pFile);
+					return false;
+				}
+			}
+			fclose(pFile);
+			return true;
 		}
 
 		/* 
 		 read a block of memory, size = sizeof(T) 
 		 */
 		template<typename T>
-		bool read(T* t) {
-			if(!valid()) return false;
-			if(currPos == length) return false;
+		T read() {
+			if(!valid()) return 0;
+			if(currPos == length) return 0;
 
 			ulong32 size = sizeof(T);
-			if(currPos+size <= length && t) {
-				memcpy(t, (void*)get()+currPos, size);
+			if(currPos+size <= length) {
+				T t;
+				memcpy(&t, (void*)(get()+currPos), size);
 				currPos += size;
-				return true;
+				return t;
 			}
-			memset(t, 0, size);
-			return false;
+			return 0;
 		}
 
 		/* 
@@ -115,8 +149,8 @@ namespace sora {
 			return result;
 		}
 		
-		uint8* get() { return apCData.pointer(); }
-		uint8* get(ulong32 offset) { 
+		inline uint8* get() { return apCData.pointer(); }
+		inline uint8* get(ulong32 offset) { 
 			if(offset > length) offset = 0;
 			return (apCData.pointer()+offset);
 		}

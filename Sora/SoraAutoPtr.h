@@ -17,6 +17,8 @@ using std::map;
 #include "SoraPlatform.h"
 #include "SoraException.h"
 
+#include "Debug/SoraInternalLogger.h"
+
 /*
  a simple reference counted auto pointer implemention
  */
@@ -109,18 +111,14 @@ namespace sora {
 			refCount = new int;
 			*refCount = 1;
 			
-#ifdef _DEBUG
-			printf("holding obj: %lu, refCount:%d\n", (ulong32)ptr, *refCount);
-#endif
+			INT_LOG::debugPrintf("AUTOPTR: holding obj: %lu, refCount:%d\n", (ulong32)ptr, *refCount);
 		}
 		
 		inline void reference_count_dec() {
 			if(refCount == NULL) return;
 			--(*refCount);
 			if(*refCount == 0) {
-#ifdef _DEBUG
-				printf("deallocing obj: %lu, refCount:%d\n", (ulong32)ptr, *refCount);
-#endif
+				INT_LOG::debugPrintf("AUTOPTR: deallocing obj: %lu, refCount:%d\n", (ulong32)ptr, *refCount);
 				sora_safe_delete(ptr);
 				sora_safe_delete(refCount);
 			}

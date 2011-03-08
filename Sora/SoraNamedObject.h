@@ -16,12 +16,16 @@
 #include <list>
 #include <algorithm>
 
+#include "SoraMemoryBuffer.h"
+#include "Serializable.h"
+#include <cassert>
+
 namespace sora {
 	
 	/*
 	 Base class for all objects that have a name
 	 */
-	class SoraNamedObject {
+	class SoraNamedObject: public Serializable {
 	public:
 		SoraNamedObject(): name(0) {}
 		SoraNamedObject(const SoraString& _name): name(str2id(_name)) {}
@@ -30,6 +34,28 @@ namespace sora {
 		
 		void setName(stringId n) { name = n; }
 		stringId getName() const { return name; }
+		
+		virtual void serialize(SoraMemoryBuffer& bufferStream) {
+			const char* strData = id2str(name);
+			if(!strData) {
+				printf("%lu == ??\n", name);
+				SoraStringManager::Instance()->print();
+				return;
+			}
+			
+			SoraString strName = strData;
+			ulong32 size = (strName.size());
+			bufferStream.push(size);
+			bufferStream.push((void*)(strName.c_str()), strName.size());
+		}
+		virtual void unserialize(SoraMemoryBuffer& bufferStream) {
+			ulong32 length = bufferStream.read<ulong32>();
+			assert(length > 0);
+			
+			uint8 strName[length];
+			bufferStream.read(strName, length);
+			name = str2id((const char*)strName);
+		}
 		
 		stringId name;
 	};
