@@ -268,21 +268,8 @@
 								<string>88B0906A12B80C5100777409</string>
 								<string>88F3D53C1286376C001F52E9</string>
 								<string>88D7F51B1285190700BA1949</string>
-								<string>88374B0E1321EDD200369B12</string>
-								<string>88DD0C1F12EB5B48005555F6</string>
 								<string>884E91C312DEADC000598D7E</string>
-								<string>8811382412CC3BA100C648C7</string>
-								<string>8811828412C8951000B3A316</string>
-								<string>88CE58D212C1B41C00C551F0</string>
-								<string>88B09BEB12B8AE6600777409</string>
-								<string>88B09BEC12B8AE6600777409</string>
-								<string>88B09C3312B8AE6600777409</string>
-								<string>886DE26912B5C420009A9CF5</string>
-								<string>8859BF4A12B4809D00F3304A</string>
-								<string>8859BEFA12B47EC300F3304A</string>
-								<string>8859BEFB12B47EC300F3304A</string>
-								<string>8859BEFC12B47EC300F3304A</string>
-								<string>8859BF0012B47EC300F3304A</string>
+								<string>88504BE612ECE420009B9F45</string>
 								<string>88B0905E12B80C4300777409</string>
 								<string>886DE10212B5B1D5009A9CF5</string>
 								<string>886DE10C12B5B1D5009A9CF5</string>
@@ -301,13 +288,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>234</integer>
+									<integer>14</integer>
+									<integer>13</integer>
 									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 3848}, {253, 702}}</string>
+							<string>{{0, 11}, {253, 702}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -344,7 +332,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraCore.cpp</string>
+								<string>SoraMemoryBuffer.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -352,11 +340,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraCore.cpp</string>
+										<string>SoraMemoryBuffer.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>88374CF213221BC700369B12</string>
+										<string>88374E351325A98800369B12</string>
 										<key>history</key>
 										<array>
 											<string>88A792821287330A00F9C74C</string>
@@ -519,7 +507,6 @@
 											<string>889785B61307EC3700A69ADE</string>
 											<string>889785B91307EC3700A69ADE</string>
 											<string>88E4A423130B75670052CC1D</string>
-											<string>882AD886130DBB0B00800891</string>
 											<string>882AD890130E370000800891</string>
 											<string>8828BF5E13143921002C6FA7</string>
 											<string>8828BF5F13143921002C6FA7</string>
@@ -529,9 +516,6 @@
 											<string>8828C06313149C61002C6FA7</string>
 											<string>8828C0FB1314C5B6002C6FA7</string>
 											<string>8828C0FD1314C5B6002C6FA7</string>
-											<string>8828C0FE1314C5B6002C6FA7</string>
-											<string>8828C0FF1314C5B6002C6FA7</string>
-											<string>8828C1001314C5B6002C6FA7</string>
 											<string>8828C1011314C5B6002C6FA7</string>
 											<string>8828C1021314C5B6002C6FA7</string>
 											<string>8828C1031314C5B6002C6FA7</string>
@@ -543,7 +527,6 @@
 											<string>8828C10A1314C5B6002C6FA7</string>
 											<string>8828C10B1314C5B6002C6FA7</string>
 											<string>8828C10C1314C5B6002C6FA7</string>
-											<string>8828C10D1314C5B6002C6FA7</string>
 											<string>8828C10E1314C5B6002C6FA7</string>
 											<string>8828C10F1314C5B6002C6FA7</string>
 											<string>8828C1101314C5B6002C6FA7</string>
@@ -643,27 +626,18 @@
 											<string>885D9AA9131D6924009A7E14</string>
 											<string>885D9AAA131D6924009A7E14</string>
 											<string>885D9BCC131E03C5009A7E14</string>
-											<string>885D9BCD131E03C5009A7E14</string>
-											<string>885D9BCE131E03C5009A7E14</string>
-											<string>885D9BCF131E03C5009A7E14</string>
-											<string>885D9BD0131E03C5009A7E14</string>
-											<string>885D9BD1131E03C5009A7E14</string>
 											<string>885D9BD2131E03C5009A7E14</string>
 											<string>885D9BD3131E03C5009A7E14</string>
 											<string>885D9BD4131E03C5009A7E14</string>
 											<string>885D9BD5131E03C5009A7E14</string>
 											<string>885D9BD6131E03C5009A7E14</string>
 											<string>88C6C140131EA85C0018429A</string>
-											<string>88C6C141131EA85C0018429A</string>
 											<string>88C678C1131F2A1A0096853A</string>
-											<string>88C678C2131F2A1A0096853A</string>
 											<string>88C678D1131F2A350096853A</string>
-											<string>88374B671321FD5400369B12</string>
 											<string>88374B681321FD5400369B12</string>
 											<string>88374B691321FD5400369B12</string>
 											<string>88374B6A1321FD5400369B12</string>
 											<string>88374B6D1321FD5400369B12</string>
-											<string>88374B6E1321FD5400369B12</string>
 											<string>88374BAA1321FEF300369B12</string>
 											<string>88374BC71322000600369B12</string>
 											<string>88374BDE1322020B00369B12</string>
@@ -674,7 +648,25 @@
 											<string>88374C9B13220C1F00369B12</string>
 											<string>88374CBA13220CBD00369B12</string>
 											<string>88374CF113221BC700369B12</string>
-											<string>88374CB313220C8F00369B12</string>
+											<string>88374D5013259C6A00369B12</string>
+											<string>88374D881325A11F00369B12</string>
+											<string>88374D891325A11F00369B12</string>
+											<string>88374D8A1325A11F00369B12</string>
+											<string>88374DBB1325A65200369B12</string>
+											<string>88374DBC1325A65200369B12</string>
+											<string>88374DBD1325A65200369B12</string>
+											<string>88374DBE1325A65200369B12</string>
+											<string>88374DBF1325A65200369B12</string>
+											<string>88374DC01325A65200369B12</string>
+											<string>88374DEB1325A7B900369B12</string>
+											<string>88374DEC1325A7B900369B12</string>
+											<string>88374DED1325A7B900369B12</string>
+											<string>88374DEE1325A7B900369B12</string>
+											<string>88374DFA1325A81B00369B12</string>
+											<string>88374E321325A98800369B12</string>
+											<string>88374E331325A98800369B12</string>
+											<string>88374E341325A98800369B12</string>
+											<string>88374DFB1325A81B00369B12</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -732,9 +724,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>88374CF313221BC700369B12</string>
+				<string>88374D5813259C6A00369B12</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>88374CF413221BC700369B12</string>
+				<string>88374D5913259C6A00369B12</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -872,9 +864,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>88374E361325A98800369B12</string>
+		<string>88374D861325A09D00369B12</string>
+		<string>88374D871325A09D00369B12</string>
 		<string>88D7F517128518B600BA1949</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 117 1440 761 0 0 1440 878 </string>
@@ -893,12 +889,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>SoraMemoryFile.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -954,7 +952,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>88D7F517128518B600BA1949</string>
-				<string>88374CF513221BC700369B12</string>
+				<string>88374D3913259B9700369B12</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -1050,10 +1048,10 @@
 									<key>Frame</key>
 									<string>{{398, 0}, {474, 270}}</string>
 									<key>RubberWindowFrame</key>
-									<string>353 176 872 548 0 0 1440 878 </string>
+									<string>312 235 872 548 0 0 1440 878 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>353 176 872 548 0 0 1440 878 </string>
+								<string>312 235 872 548 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
@@ -1076,18 +1074,18 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>88374CF613221BC700369B12</string>
+				<string>88374D3A13259B9700369B12</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>88374CF713221BC700369B12</string>
-				<string>88374CF813221BC700369B12</string>
-				<string>88374CF913221BC700369B12</string>
-				<string>88374CFA13221BC700369B12</string>
-				<string>88374CFB13221BC700369B12</string>
+				<string>88374D3B13259B9700369B12</string>
+				<string>88374D3C13259B9700369B12</string>
+				<string>88374D3D13259B9700369B12</string>
+				<string>88374D3E13259B9700369B12</string>
+				<string>88374D3F13259B9700369B12</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>353 176 872 548 0 0 1440 878 </string>
+			<string>312 235 872 548 0 0 1440 878 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
@@ -1238,7 +1236,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>88374B071321ECFB00369B12</string>
+				<string>88374D7E1325A08D00369B12</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

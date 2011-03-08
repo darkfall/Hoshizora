@@ -261,11 +261,14 @@
 		88240CFA12C5811B009498F7 /* SoraShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraShader.h; sourceTree = "<group>"; };
 		8828BF7813143EFF002C6FA7 /* SoraASSM_Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraASSM_Event.h; path = Experimental/SoraASSM_Event.h; sourceTree = "<group>"; };
 		8828BF7913143FE9002C6FA7 /* SoraASSM_Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraASSM_Variable.h; path = Experimental/SoraASSM_Variable.h; sourceTree = "<group>"; };
-		8828BF7B1314405A002C6FA7 /* SoraNamedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraNamedObject.h; path = Experimental/SoraNamedObject.h; sourceTree = "<group>"; };
 		8828C1D21314CB07002C6FA7 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		882AD88A130DCA7500800891 /* SoraASSM_Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraASSM_Action.h; path = Experimental/SoraASSM_Action.h; sourceTree = "<group>"; };
 		88374B101321EE0C00369B12 /* FileDlgOsx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileDlgOsx.h; path = ../Plugins/DarkLib/FileDlgOsx.h; sourceTree = SOURCE_ROOT; };
 		88374B111321EE0C00369B12 /* FileDlgOsx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FileDlgOsx.mm; path = ../Plugins/DarkLib/FileDlgOsx.mm; sourceTree = SOURCE_ROOT; };
+		88374D8C1325A12900369B12 /* AutoContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoContainer.h; sourceTree = "<group>"; };
+		88374E371325A9B600369B12 /* SoraMemoryBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMemoryBuffer.h; sourceTree = "<group>"; };
+		88374E381325A9B600369B12 /* SoraMemoryFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMemoryFile.h; sourceTree = "<group>"; };
+		88374E391325A9B600369B12 /* SoraNamedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraNamedObject.h; sourceTree = "<group>"; };
 		883900EE131A096700CC101A /* editorWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = editorWindow.cpp; path = ../SoraParticleEditor/editorWindow.cpp; sourceTree = SOURCE_ROOT; };
 		883900EF131A096700CC101A /* editorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editorWindow.h; path = ../SoraParticleEditor/editorWindow.h; sourceTree = SOURCE_ROOT; };
 		8839FFA51319FCD500CC101A /* peMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = peMainWindow.h; path = SoraParticleEditor/peMainWindow.h; sourceTree = "<group>"; };
@@ -858,7 +861,6 @@
 				882AD88A130DCA7500800891 /* SoraASSM_Action.h */,
 				8828BF7813143EFF002C6FA7 /* SoraASSM_Event.h */,
 				8828BF7913143FE9002C6FA7 /* SoraASSM_Variable.h */,
-				8828BF7B1314405A002C6FA7 /* SoraNamedObject.h */,
 				884575D61300DB38003EC408 /* state_test.h */,
 				884575D71300DB38003EC408 /* state_test.cpp */,
 				884E91C412DEAE0100598D7E /* FolderTree.h */,
@@ -1411,12 +1413,16 @@
 				8828C1D21314CB07002C6FA7 /* common.h */,
 				88CE59A012C1CE6A00C551F0 /* quaternion.h */,
 				88CE59A112C1CE6A00C551F0 /* vector3.h */,
+				88374E371325A9B600369B12 /* SoraMemoryBuffer.h */,
+				88374E381325A9B600369B12 /* SoraMemoryFile.h */,
+				88374E391325A9B600369B12 /* SoraNamedObject.h */,
 				88D87D2512A09A66007D6865 /* HoshiNoSora.h */,
 				88D87D2612A09A66007D6865 /* md5lib.cpp */,
 				88D87D2712A09A66007D6865 /* md5lib.h */,
 				88D87D2812A09A66007D6865 /* QuickList.h */,
 				88D87D2912A09A66007D6865 /* Rect4V.h */,
 				88CFF7E812C6D562002A9F75 /* hash.h */,
+				88374D8C1325A12900369B12 /* AutoContainer.h */,
 				889BFD4312BF4D23002D8A2F /* CoreTransformer.h */,
 				889BFD4112BF4D23002D8A2F /* CoreTransform.cpp */,
 				889BFD4212BF4D23002D8A2F /* CoreTransform.h */,
@@ -1575,7 +1581,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "Griffin Bu(Project L)";
+				ORGANIZATIONNAME = "Griffin Bu(Project Hoshizor)";
 			};
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "Sora" */;
 			compatibilityVersion = "Xcode 3.1";

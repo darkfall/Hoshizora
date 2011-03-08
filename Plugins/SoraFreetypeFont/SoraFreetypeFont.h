@@ -9,6 +9,8 @@
 
 #include <vector>
 
+#include "SoraMemoryFile.h"
+
 namespace sora {
 
 	/**

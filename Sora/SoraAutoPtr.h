@@ -87,7 +87,11 @@ namespace sora {
 		}
 
 		T* pointer() const { return ptr; }
-		int32 ref_count() const { return *refCount; }
+		int32 ref_count() const { 
+			if(refCount)
+				return *refCount;
+			return 0;
+		}
 		
 		bool operator == (const SoraAutoPtr<T>& rhs) {
 			return ptr == rhs.ptr;
