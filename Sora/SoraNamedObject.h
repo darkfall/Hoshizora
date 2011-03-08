@@ -22,6 +22,8 @@
 
 namespace sora {
 	
+#define MAX_NAME_LENGTH 1024
+	
 	/*
 	 Base class for all objects that have a name
 	 */
@@ -38,7 +40,7 @@ namespace sora {
 		virtual void serialize(SoraMemoryBuffer& bufferStream) {
 			const char* strData = id2str(name);
 			if(!strData) {
-				printf("%lu == ??\n", name);
+				INT_LOG::debugPrintf("%lu == ??\n", name);
 				SoraStringManager::Instance()->print();
 				return;
 			}
@@ -50,17 +52,24 @@ namespace sora {
 		}
 		virtual void unserialize(SoraMemoryBuffer& bufferStream) {
 			ulong32 length = bufferStream.read<ulong32>();
-			assert(length > 0);
+			// see if the length is too long or negative
+			// avoid bad unserialize
+			assert(length > 0 && length < MAX_NAME_LENGTH);
 			
 			uint8 strName[length];
 			bufferStream.read(strName, length);
 			name = str2id((const char*)strName);
 		}
 		
+		// be default
+		// a named object is serializable
+		// serialized file is length(4 bytes) + name(length)
+		virtual bool serializable() { return true; }
+		
 		stringId name;
 	};
 	
-	class SoraNamedObjectList {
+	class SoraNamedObjectList: public Serializable {
 	public:
 		typedef std::list<SoraNamedObject*> OBJ_LIST;
 
@@ -103,6 +112,10 @@ namespace sora {
 		
 		size_t size() { return objList.size(); }
 		size_t count() { return objList.size(); }
+		
+		void serialize(SoraMemoryBuffer& memoryStream) {}
+		void unserialize(SoraMemoryBuffer& memoryStream) {}
+		bool serializable() { return false; }
 		
 	private:
 		struct compareObjectName: public std::binary_function<SoraNamedObject*, stringId, bool> {

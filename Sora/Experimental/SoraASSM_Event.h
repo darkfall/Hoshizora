@@ -19,7 +19,7 @@ namespace sora {
 	class SoraASSM_State;
 	
 	template<typename entity_type>
-	class SoraASSM_Event: public SoraEvent, public SoraNamedObject {
+	class SoraASSM_Event: public SoraEvent {
 	public:
 		SoraASSM_Event(stringId name) { setName(name); }
 		virtual ~SoraASSM_Event() {}

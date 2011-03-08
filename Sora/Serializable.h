@@ -18,6 +18,7 @@ namespace sora {
 	public:
 		virtual void serialize(SoraMemoryBuffer& bufferStream) = 0;
 		virtual void unserialize(SoraMemoryBuffer& bufferStream) = 0;
+		virtual bool serializable() = 0;
 	};
 	
 } // namespace sora
