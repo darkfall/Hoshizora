@@ -43,6 +43,7 @@ namespace sora {
 		
 		SoraMemoryFile& operator=(const SoraMemoryFile& rhs) {
 			memoryFile = rhs.memoryFile;
+			return *this;
 		}
 					
 	private:
