@@ -13,6 +13,7 @@
 #include "SoraCore.h"
 
 namespace sora {
+	
 
 /*
 	void EntityState_Combat_Pursuit::onExecute(BaseEntity* pOwner) {

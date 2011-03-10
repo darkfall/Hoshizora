@@ -112,9 +112,9 @@ namespace sora {
 		HSORARESOURCE SORACALL loadResourcePack	(const SoraWString& file);
 		void	SORACALL attachResourcePack		(HSORARESOURCE pfile);
 		void	SORACALL detachResourcePack		(HSORARESOURCE handle);
-		void*	SORACALL getResourceFile			(const SoraWString& file, ulong32& size);
+		void*	SORACALL getResourceFile		(const SoraWString& file, ulong32& size);
 		void*	SORACALL readResourceFile		(const SoraWString& file, ulong32 size);
-		ulong32 SORACALL getResourceFileSize		(const SoraWString& file);
+		ulong32 SORACALL getResourceFileSize	(const SoraWString& file);
 		void	SORACALL freeResourceFile		(void* p);
 		void	SORACALL enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
 

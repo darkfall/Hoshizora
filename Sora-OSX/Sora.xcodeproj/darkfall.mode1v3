@@ -230,6 +230,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -270,6 +272,7 @@
 								<string>88D7F51B1285190700BA1949</string>
 								<string>884E91C312DEADC000598D7E</string>
 								<string>8859BEFA12B47EC300F3304A</string>
+								<string>88D87D1D12A09A66007D6865</string>
 								<string>88504BE612ECE420009B9F45</string>
 								<string>88B0905E12B80C4300777409</string>
 								<string>886DE10212B5B1D5009A9CF5</string>
@@ -289,14 +292,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>17</integer>
-									<integer>13</integer>
+									<integer>54</integer>
+									<integer>50</integer>
 									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {253, 702}}</string>
+							<string>{{0, 469}, {253, 702}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -326,14 +329,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraASSM_Event.h</string>
+								<string>SoraOSXTimer.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -341,11 +342,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraASSM_Event.h</string>
+										<string>SoraOSXTimer.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>88F6CF471326B48D00BF127D</string>
+										<string>88F6CF8D1327E57600BF127D</string>
 										<key>history</key>
 										<array>
 											<string>88A792821287330A00F9C74C</string>
@@ -434,7 +435,6 @@
 											<string>88504AB312EC06F3009B9F45</string>
 											<string>88504B6912ECD797009B9F45</string>
 											<string>88504BC812ECDE1B009B9F45</string>
-											<string>88504BE012ECE409009B9F45</string>
 											<string>88504C5812ECEE6E009B9F45</string>
 											<string>882096A612EFAB5500FB7FFF</string>
 											<string>882096A812EFAB5500FB7FFF</string>
@@ -502,7 +502,6 @@
 											<string>882AD890130E370000800891</string>
 											<string>8828BF5E13143921002C6FA7</string>
 											<string>8828BF5F13143921002C6FA7</string>
-											<string>8828BF6213143921002C6FA7</string>
 											<string>8828BF6313143921002C6FA7</string>
 											<string>8828BF6413143921002C6FA7</string>
 											<string>8828C0FB1314C5B6002C6FA7</string>
@@ -552,7 +551,6 @@
 											<string>8828C2AA131627EA002C6FA7</string>
 											<string>8828C2B5131629CF002C6FA7</string>
 											<string>8828C2B8131629CF002C6FA7</string>
-											<string>886752851318BFFD00279288</string>
 											<string>8839FFB61319FE3400CC101A</string>
 											<string>8839000D131A006900CC101A</string>
 											<string>8839009F131A058800CC101A</string>
@@ -605,7 +603,6 @@
 											<string>885D9A49131B6C5D009A7E14</string>
 											<string>885D9A62131B6D2F009A7E14</string>
 											<string>885D9A68131B6D62009A7E14</string>
-											<string>885D9BD2131E03C5009A7E14</string>
 											<string>885D9BD3131E03C5009A7E14</string>
 											<string>885D9BD4131E03C5009A7E14</string>
 											<string>885D9BD5131E03C5009A7E14</string>
@@ -635,7 +632,6 @@
 											<string>88374E511325AE0700369B12</string>
 											<string>88374E521325AE0700369B12</string>
 											<string>88374E531325AE0700369B12</string>
-											<string>88374E551325AE0700369B12</string>
 											<string>88374E571325AE0700369B12</string>
 											<string>88374E591325AE0700369B12</string>
 											<string>88374E5A1325AE0700369B12</string>
@@ -666,7 +662,13 @@
 											<string>88F6CF431326B48D00BF127D</string>
 											<string>88F6CF441326B48D00BF127D</string>
 											<string>88F6CF451326B48D00BF127D</string>
-											<string>88F6CF461326B48D00BF127D</string>
+											<string>88F6CF4A13273BDB00BF127D</string>
+											<string>88F6CF7A13274C7200BF127D</string>
+											<string>88F6CF7B13274C7200BF127D</string>
+											<string>88F6CF881327E57600BF127D</string>
+											<string>88F6CF891327E57600BF127D</string>
+											<string>88F6CF8B1327E57600BF127D</string>
+											<string>88F6CF8C1327E57600BF127D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -724,9 +726,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>88F6CF481326B48D00BF127D</string>
+				<string>88F6CF7D13274C7200BF127D</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>88F6CF491326B48D00BF127D</string>
+				<string>88F6CF7E13274C7200BF127D</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -890,7 +892,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraNamedObject.h</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -907,8 +909,6 @@
 							<string>186pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -948,7 +948,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>88D7F517128518B600BA1949</string>
-				<string>88F6CF361326B47000BF127D</string>
+				<string>88F6CF7F13274C7200BF127D</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -1070,13 +1070,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>88F6CF371326B47000BF127D</string>
+				<string>88F6CF8013274C7200BF127D</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>88F6CF381326B47000BF127D</string>
-				<string>88F6CF391326B47000BF127D</string>
-				<string>88F6CF3A1326B47000BF127D</string>
-				<string>88F6CF3B1326B47000BF127D</string>
-				<string>88F6CF3C1326B47000BF127D</string>
+				<string>88F6CF8113274C7200BF127D</string>
+				<string>88F6CF8213274C7200BF127D</string>
+				<string>88F6CF8313274C7200BF127D</string>
+				<string>88F6CF8413274C7200BF127D</string>
+				<string>88F6CF8513274C7200BF127D</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
