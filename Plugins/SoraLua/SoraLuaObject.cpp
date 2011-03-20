@@ -19,12 +19,12 @@ namespace sora {
 		SoraLuaExport::export_constants(luaState);
 		SoraLuaExport::export_soracore(luaState);
 		SoraLuaExport::export_sorafiles(luaState);
-		SoraLuaExport::export_soraobjects(luaState);
+		//SoraLuaExport::export_soraobjects(luaState);
 
 		luaopen_pluto(luaState->GetCState());
 
-		type = OBJ_LUA;
-		LuaStateRefMap[(ulong32)luaState].inc();
+		//setType(OBJ_LUA);
+		LuaStateRefMap[(ulong32)luaState] = 1;
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
 	}
 
@@ -36,26 +36,26 @@ namespace sora {
 		SoraLuaExport::export_constants(luaState);
 		SoraLuaExport::export_soracore(luaState);
 		SoraLuaExport::export_sorafiles(luaState);
-		SoraLuaExport::export_soraobjects(luaState);
+		//SoraLuaExport::export_soraobjects(luaState);
 
 		luaopen_pluto(luaState->GetCState());
 
-		type = OBJ_LUA;
-		LuaStateRefMap[(ulong32)luaState].inc();
+		//setType(OBJ_LUA);
+		LuaStateRefMap[(ulong32)luaState] = 1;
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
 	}
 
 	SoraLuaObject::SoraLuaObject(LuaState* state) {
 		luaState = state;
-		LuaStateRefMap[(ulong32)luaState].inc();
+		LuaStateRefMap[(ulong32)luaState] = 1;
 		if(!luaState)
 			throw SORA_EXCEPTION("error creating LuaState");
-		type = OBJ_LUA;
+		//setType(OBJ_LUA);
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
 	}
 
 	SoraLuaObject::~SoraLuaObject() {
-		LuaStateRefMap[(ulong32)luaState].dec();
+		LuaStateRefMap[(ulong32)luaState]--;
 		if(LuaStateRefMap[(ulong32)luaState] == 0)
 			LuaState::Destroy(luaState);
 		SoraLuaObjectManager::Instance()->unregisterLuaObject(this);

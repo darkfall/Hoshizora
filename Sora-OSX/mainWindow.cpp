@@ -53,8 +53,11 @@ bool mainWindow::updateFunc() {
 bool mainWindow::renderFunc() {
 	sora->beginScene();
 	
-	mainScenes->render();
-	
+	//mainScenes->render();
+	//pSpr->render4V(100.f, 100.f, 700.f, 0.f, 700.f, 600.f, 100.f, 500.f);
+    sora->setViewPoint(0.f, 0.f, 1.f);
+    pSpr->render(0.f, 0.f);
+    
 	sora->endScene();
 
 	return false;
@@ -70,6 +73,8 @@ void mainWindow::init() {
 	
 	stg = new stgScene;
 	mainScenes->addScene(stg);
+    
+    pSpr = sora::SORA->createSprite(L"titlebg2.png");
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

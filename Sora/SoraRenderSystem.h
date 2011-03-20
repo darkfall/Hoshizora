@@ -59,10 +59,12 @@ namespace sora {
 		virtual void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0) { }
 		virtual void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f) = 0;
 		virtual void setTransformWindowSize(float32 w, float32 h) = 0;
-
+        virtual void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f) = 0;
+        
 		virtual void shutdown() = 0;
 		virtual ulong32 getMainWindowHandle() = 0;
 		virtual SoraWindowInfoBase* getMainWindow() = 0;
+        
 
 		virtual void flush() = 0;
 

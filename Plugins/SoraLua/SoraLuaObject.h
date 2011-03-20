@@ -16,7 +16,7 @@ namespace sora {
 	using namespace LuaPlus;
 	using std::map;
 
-	static map<ulong32, SoraInt> LuaStateRefMap;
+	static map<ulong32, int32> LuaStateRefMap;
 
 	class SoraLuaObject: public SoraObject {	 
 	public:												 

@@ -1,9 +1,7 @@
 #include "Wrapper.h"
 
 #include "SoraStringConv.h"
-#include "SoraGraphicEffect.h"
 #include "SoraImageEffect.h"
-#include "SoraRenderObject.h"
 
 namespace sora {
 
@@ -161,99 +159,7 @@ namespace sora {
 			return 0.f;
 		}
 
-		ulong32 getPixel(HSORASPRITE h, int32 x, int32 y) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) return p->getPixel(x, y);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-			return 0;
-		}
-
-		void setPixel(HSORASPRITE h, ulong32 c, int32 x, int32 y) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) p->setPixel(c, x, y);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-		}
-
-		HSORASPRITE gaussBlurNew(HSORASPRITE h, double32 sigma, int32 radius) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) return (HSORASPRITE)SoraGraphicEffect::gaussBlurNew(p, sigma, radius);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-			return 0;
-		}
-
-		void gaussBlur(HSORASPRITE h, double32 sigma, int32 radius) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) SoraGraphicEffect::gaussBlur(p, sigma, radius);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-		}
-
-		void setBlendMode(HSORASPRITE h, int32 mode) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) p->setBlendMode(mode);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-		}
-
-		int32 getBlendMode(HSORASPRITE h) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) return p->getBlendMode();
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-			return 0;
-		}
-
-		HSORASPRITE grayNew(HSORASPRITE h) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) return (HSORASPRITE)SoraGraphicEffect::grayNew(p);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-			return 0;
-		}
-
-		void gray(HSORASPRITE h) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) SoraGraphicEffect::gray(p);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-		}
-
-		HSORASPRITE reverseNew(HSORASPRITE h) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) return (HSORASPRITE)SoraGraphicEffect::reverseNew(p);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-			return 0;
-		}
-
-		void reverse(HSORASPRITE h) {
-			SoraSprite* p = (SoraSprite*)(h);
-			if(p) SoraGraphicEffect::reverse(p);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-		}
-
-		HSORASPRITE alphaMixNew(HSORASPRITE h1, HSORASPRITE h2, double32 a, int32 posx, int32 posy) {
-			SoraSprite* p = (SoraSprite*)h1;
-			SoraSprite* p2 = (SoraSprite*)h2;
-			if(p && p2) return (HSORASPRITE)SoraGraphicEffect::alphaMixNew(p, p2, a, posx, posy);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-			return 0;
-		}
-
-		void alphaMix(HSORASPRITE h1, HSORASPRITE h2, double32 a, int32 posx, int32 posy) {
-			SoraSprite* p = (SoraSprite*)h1;
-			SoraSprite* p2 = (SoraSprite*)h2;
-			if(p && p2) SoraGraphicEffect::alphaMix(p, p2, a, posx, posy);
-			else
-				throw SORA_EXCEPTION("Invalid sprite arg");
-		}
-
-		void release(HSORASPRITE h, bool bDeleteTexture) {
+        void release(HSORASPRITE h, bool bDeleteTexture) {
 			SoraSprite* p = (SoraSprite*)h;
 			if(p) {
 				delete p;
@@ -562,16 +468,16 @@ namespace sora {
 	namespace imageeffectwrapper {
 
 		ulong32 makeEffect_fade(float32 src, float32 dst, float32 time, int32 mode) {
-			return (ulong32)(new SoraImageEffectFade(src, dst, time, mode));
+			return (ulong32)(new SoraImageEffectFade(src, dst, time, (sora::IMAGE_EFFECT_MODE)mode));
 		}
 		ulong32 makeEffect_transitions(float32 sx, float32 sy, float32 dx, float32 dy, float32 time, int32 mode) {
-			return (ulong32)(new SoraImageEffectTransitions(sx, sy, dx, dy, time, mode));
+			return (ulong32)(new SoraImageEffectTransitions(sx, sy, dx, dy, time, (sora::IMAGE_EFFECT_MODE)mode));
 		}
 		ulong32 makeEffect_scale_tensile(float32 sv, float32 dv, float32 sh, float32 dh, float32 time, int32 mode) {
-			return (ulong32)(new SoraImageEffectScale(sv, dv, sh, dh, time, mode));
+			return (ulong32)(new SoraImageEffectScale(sv, dv, sh, dh, time, (sora::IMAGE_EFFECT_MODE)mode));
 		}
 		ulong32 makeEffect_scale(float32 s, float32 d, float32 time, int32 mode) {
-			return (ulong32)(new SoraImageEffectScale(s, d, time, mode));
+			return (ulong32)(new SoraImageEffectScale(s, d, time, (sora::IMAGE_EFFECT_MODE)mode));
 		}
 	}
 } // namespace sora

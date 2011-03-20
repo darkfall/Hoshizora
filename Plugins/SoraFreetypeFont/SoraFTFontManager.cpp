@@ -51,7 +51,7 @@ namespace sora {
 				Faces.push_back(f);
 				/* hold the memory, letting it dealloc when font destroys */
 			//	if(bsize != 0)
-			//		f.memoryHold.set((void*)filename, bsize);
+			//		f.memoryHold.set((void*)filename, bsize);
 				index = (int)Faces.size()-1;
 			} else {
 				delete f.face;

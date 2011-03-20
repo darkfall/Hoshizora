@@ -61,6 +61,7 @@ namespace sora {
 		void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=1.f, float32 vscale=1.f);
 		void setTransformWindowSize(float32 w, float32 h);
+        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
 
 		ulong32 getMainWindowHandle() { return (ulong32)mainWindow; }
 		SoraWindowInfoBase* getMainWindow() { return mainWindow; }
@@ -98,13 +99,13 @@ namespace sora {
 		SoraWindowInfoBase* mainWindow;
 
 		struct _SoraOGLWindowInfo {
-			float32 x, y;
+			float32 x, y, z;
 			float32 dx, dy;
 			float32 rot;
 			float32 hscale, vscale;
 			int32 width, height;
 			
-			_SoraOGLWindowInfo(): hscale(1.f), vscale(1.f), x(0.f), y(0.f), dx(0.f), dy(0.f), rot(0.f), width(0.f), height(0.f) {}
+			_SoraOGLWindowInfo(): hscale(1.f), vscale(1.f), x(0.f), y(0.f), z(0.f), dx(0.f), dy(0.f), rot(0.f), width(0.f), height(0.f) {}
 		};
 		_SoraOGLWindowInfo _oglWindowInfo;
 

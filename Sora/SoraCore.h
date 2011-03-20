@@ -84,7 +84,7 @@ namespace sora {
 		void SORACALL renderQuad(SoraQuad& quad);
 		void SORACALL renderTriple(SoraTriple& trip);
 
-		void SORACALL renderRect		(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, DWORD color=0xFFFFFFFF, float32 z=0.5f);
+		void SORACALL renderRect		(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, DWORD color=0xFFFFFFFF, float32 z=0.0f);
 		void SORACALL setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void SORACALL setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
 		void SORACALL setTransformWindowSize (float32 w, float32 h);
@@ -155,6 +155,9 @@ namespace sora {
 		
 		SoraMusicFile* SORACALL createMusicFile(const SoraWString& musicName, bool bStream=false);
 		SoraSoundEffectFile* SORACALL createSoundEffectFile(const SoraWString& se);
+        
+        
+        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
 
 		/*
 		 for directX, return (ulong32)(pD3DDevice)

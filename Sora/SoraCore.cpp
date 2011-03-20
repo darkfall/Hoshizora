@@ -509,6 +509,10 @@ namespace sora {
 		assert(bInitialized==true);
 		pRenderSystem->setTransformWindowSize(w, h);
 	}
+    
+    void SoraCore::setViewPoint(float32 x, float32 y, float32 z) {
+        pRenderSystem->setViewPoint(x, y, z);
+    }
 
 	void SoraCore::beginScene(ulong32 c, ulong32 t) {
 		assert(bInitialized==true);

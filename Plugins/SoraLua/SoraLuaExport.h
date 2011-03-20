@@ -71,14 +71,13 @@ namespace sora {
 				.def("createTexture", &SoraCore::createTexture)
 				.def("createSprite", &SoraCore::createSprite)
 				.def("createSpriteWithTex", &SoraCore::createSpriteTex)
-				.def("renderSprite", &SoraCore::renderSprite)
 			//	.def("renderSprite4V", &SoraCore::renderSprite4V)
 
 				.def("renderRect", &SoraCore::renderRect)
 			
 				.def("loadResourcePack", &SoraCore::loadResourcePack)
 				.def("attachResourcePack", &SoraCore::attachResourcePack)
-				.def("deattachResourcePack", &SoraCore::deattachResourcePack)
+				.def("detachResourcePack", &SoraCore::detachResourcePack)
 				.def("readResourceFile", &SoraCore::readResourceFile)
 				.def("getResourceFileSize", &SoraCore::getResourceFileSize)
 

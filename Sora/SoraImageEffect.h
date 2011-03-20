@@ -43,9 +43,9 @@ namespace sora {
 	};
 
 	enum IMAGE_EFFECT_MODE {
-		IMAGE_EFFECT_ONCE,
-		IMAGE_EFFECT_PINGPONG,
-		IMAGE_EFFECT_REPEAT,
+		IMAGE_EFFECT_ONCE = 1,
+		IMAGE_EFFECT_PINGPONG = 2,
+		IMAGE_EFFECT_REPEAT = 3,
 	};
 	
 	class SoraImageEffect {

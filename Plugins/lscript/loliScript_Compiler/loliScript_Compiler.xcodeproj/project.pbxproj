@@ -37,6 +37,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		88901BE613366318002ACD1E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		8DD76F690486A84900D96B5E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
@@ -100,6 +109,8 @@
 		888D5D5210F8A06500BE83CA /* compiler_funcTabe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = compiler_funcTabe.cpp; sourceTree = "<group>"; };
 		888D5D5310F8A06500BE83CA /* compiler_symbolTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compiler_symbolTable.h; sourceTree = "<group>"; };
 		888D5D5410F8A06500BE83CA /* compiler_symbolTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = compiler_symbolTable.cpp; sourceTree = "<group>"; };
+		88901BE813366318002ACD1E /* lscript */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lscript; sourceTree = BUILT_PRODUCTS_DIR; };
+		88901BED13366318002ACD1E /* lscript.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = lscript.1; sourceTree = "<group>"; };
 		88BB63331100CF3300743504 /* compiler_defineTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compiler_defineTable.h; sourceTree = "<group>"; };
 		88BB63341100CF3300743504 /* compiler_defineTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = compiler_defineTable.cpp; sourceTree = "<group>"; };
 		88C2B1611180779E00BE31A3 /* compiler_classTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compiler_classTable.h; sourceTree = "<group>"; };
@@ -113,6 +124,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		88901BE513366318002ACD1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F660486A84900D96B5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -127,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				08FB7795FE84155DC02AAC07 /* Source */,
+				88901BEA13366318002ACD1E /* lscript */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				C6859E8C029090F304C91782 /* Documentation */,
 			);
@@ -150,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD76F6C0486A84900D96B5E /* loliScript_Compiler */,
+				88901BE813366318002ACD1E /* lscript */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,6 +258,14 @@
 			name = Compiler;
 			sourceTree = "<group>";
 		};
+		88901BEA13366318002ACD1E /* lscript */ = {
+			isa = PBXGroup;
+			children = (
+				88901BED13366318002ACD1E /* lscript.1 */,
+			);
+			path = lscript;
+			sourceTree = "<group>";
+		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +277,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		88901BE713366318002ACD1E /* lscript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88901BF013366318002ACD1E /* Build configuration list for PBXNativeTarget "lscript" */;
+			buildPhases = (
+				88901BE413366318002ACD1E /* Sources */,
+				88901BE513366318002ACD1E /* Frameworks */,
+				88901BE613366318002ACD1E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lscript;
+			productName = lscript;
+			productReference = 88901BE813366318002ACD1E /* lscript */;
+			productType = "com.apple.product-type.tool";
+		};
 		8DD76F620486A84900D96B5E /* loliScript_Compiler */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "loliScript_Compiler" */;
@@ -277,17 +322,29 @@
 			};
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "loliScript_Compiler" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* loliScript_Compiler */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8DD76F620486A84900D96B5E /* loliScript_Compiler */,
+				88901BE713366318002ACD1E /* lscript */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		88901BE413366318002ACD1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F640486A84900D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -338,6 +395,7 @@
 					"_GLIBCXX_DEBUG_PEDANTIC=1",
 				);
 				INSTALL_PATH = /usr/local/bin;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = loliScript_Compiler;
 			};
 			name = Debug;
@@ -349,6 +407,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = loliScript_Compiler;
 			};
 			name = Release;
@@ -379,6 +438,40 @@
 			};
 			name = Release;
 		};
+		88901BEE13366318002ACD1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		88901BEF13366318002ACD1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -399,6 +492,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		88901BF013366318002ACD1E /* Build configuration list for PBXNativeTarget "lscript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88901BEE13366318002ACD1E /* Debug */,
+				88901BEF13366318002ACD1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

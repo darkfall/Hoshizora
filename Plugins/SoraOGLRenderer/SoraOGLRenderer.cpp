@@ -140,10 +140,11 @@ namespace sora{
 		glLoadIdentity();
 		glTranslatef(_oglWindowInfo.x-_oglWindowInfo.dx, _oglWindowInfo.y-_oglWindowInfo.dy, 0.f); //Set Center Coodinates
 		glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
-		//glRotatef(DGR_RAD(20), -1.f, 1.f, 1.f);
+
+        //glRotatef(DGR_RAD(20), -1.f, 1.f, 1.f);
 		glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
 
-		glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.0f);
+		glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
 	}
 
 	void SoraOGLRenderer::_glBeginScene(ulong32 color, ulong32 t) {
@@ -699,6 +700,12 @@ namespace sora{
 		applyTransform();
 
 	}
+    
+    void SoraOGLRenderer::setViewPoint(float32 x, float32 y, float32 z) {
+        _oglWindowInfo.x = x;
+        _oglWindowInfo.y = y;
+        _oglWindowInfo.z = z;
+    }
 
 	void SoraOGLRenderer::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
 		_oglWindowInfo.x		=	x;

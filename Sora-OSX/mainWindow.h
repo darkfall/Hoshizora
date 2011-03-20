@@ -47,6 +47,8 @@ private:
 	projl::lSceneManager* mainScenes;
 	titleScene* title;
 	stgScene* stg;
+                    
+    sora::SoraSprite* pSpr;
 					
 	sora::BaseEntity* testEntity;
 };
