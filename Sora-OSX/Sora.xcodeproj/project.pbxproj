@@ -435,6 +435,8 @@
 		886DE26B12B5C420009A9CF5 /* audioWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = audioWrapper.mm; sourceTree = "<group>"; };
 		886DE26C12B5C420009A9CF5 /* SoraQTSoundSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraQTSoundSystem.cpp; sourceTree = "<group>"; };
 		886DE26D12B5C420009A9CF5 /* SoraQTSoundSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraQTSoundSystem.h; sourceTree = "<group>"; };
+		888935BE13384EBF006F3358 /* SoraConfigurationTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraConfigurationTree.h; sourceTree = "<group>"; };
+		888DACFA13384D1B004CAB83 /* SoraMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMoviePlayer.h; sourceTree = "<group>"; };
 		888FC31F12D4D01C00818B3C /* basicSTGPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basicSTGPlayer.h; sourceTree = "<group>"; };
 		888FC32012D4D01C00818B3C /* basicSTGPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = basicSTGPlayer.cpp; sourceTree = "<group>"; };
 		888FC32612D4D28300818B3C /* keyMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyMapper.h; sourceTree = "<group>"; };
@@ -886,6 +888,7 @@
 				88DD0B9012EAA708005555F6 /* SoraAS.h */,
 				88DD0B8F12EAA708005555F6 /* SoraAS.cpp */,
 				88DD0C2312EB5B66005555F6 /* tcmalloc_test.h */,
+				888935BE13384EBF006F3358 /* SoraConfigurationTree.h */,
 			);
 			name = Experimental;
 			sourceTree = "<group>";
@@ -1530,6 +1533,7 @@
 				88D87D5012A09A66007D6865 /* SoraTexture.h */,
 				88D87D5112A09A66007D6865 /* SoraTextureMap.h */,
 				88D87D5212A09A66007D6865 /* SoraTimer.h */,
+				888DACFA13384D1B004CAB83 /* SoraMoviePlayer.h */,
 				88D87D5312A09A66007D6865 /* SoraTypeInfo.h */,
 				88D87D5412A09A66007D6865 /* SoraWindowInfo.h */,
 				88D87D5512A09A66007D6865 /* SoraTimerEvent.cpp */,

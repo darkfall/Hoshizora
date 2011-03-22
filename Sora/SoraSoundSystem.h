@@ -13,6 +13,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraSoundFile.h"
+#include "SoraMoviePlayer.h"
 
 namespace sora {
 	
@@ -29,7 +30,6 @@ namespace sora {
 		
 		virtual SoraMusicFile* createMusicFile(void* data, ulong32 size, bool bStream=false) = 0;
 		virtual SoraSoundEffectFile* createSoundEffectFile(void* data, ulong32 size) = 0;
-
 		/*
 			update sound device
 		*/
