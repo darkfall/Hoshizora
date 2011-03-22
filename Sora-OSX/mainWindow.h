@@ -16,6 +16,7 @@
 
 #include "Experimental/state_test.h"
 
+
 class mainWindow: public sora::SoraWindowInfoBase,
 				public sora::SoraEventHandler {
 public:

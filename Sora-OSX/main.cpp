@@ -28,6 +28,8 @@
 #include "Experimental/state_test.h"
 #include "SoraMemoryFile.h"
 
+#include "vlcTestWindow.h"
+
 #include "SoraParticleEditor/peMainWindow.h"
 
 int main(int argc, char* argv[]) {
@@ -45,7 +47,7 @@ int main(int argc, char* argv[]) {
 		sora->shutDown();
 	}
 	sora->attachResourcePack(res);
-	
+	/*
 	{
 		sora::SoraMemoryFile file1(L"box.png");
 		sora::SoraMemoryFile file2(L"box.png");
@@ -79,7 +81,7 @@ int main(int argc, char* argv[]) {
 			sora::SoraMemoryFile file6; file6.unserialize(serialzeData);
 
 		}
-	}
+	}*/
 	
 	/*
 	sora::SoraLocalizer* localizer = sora::SoraLocalizer::Instance();
@@ -88,7 +90,7 @@ int main(int argc, char* argv[]) {
 	*/
 	sora->setFPS(60.0);
 	
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new vlcWindow);
 	sora->start();
 		
 	return 0;

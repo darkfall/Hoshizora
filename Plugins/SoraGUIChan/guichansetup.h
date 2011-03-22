@@ -52,6 +52,14 @@ namespace sora {
 		gcn::Container* getTop() {
 			return (gcn::Container*)pGUIChan->getTop();
 		}
+        
+        gcn::Widget* findWidget(const SoraString& sid) {
+            gcn::Container* pTop = getTop();
+            if(pTop) {
+                return pTop->findWidgetById(sid.c_str());
+            }
+            return NULL;
+        }
 	
 		void gcnLogic() {
 			pGUIChan->logic();

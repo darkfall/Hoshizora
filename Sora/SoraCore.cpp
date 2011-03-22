@@ -772,5 +772,9 @@ namespace sora {
 		_postError("SoraCore::createSoundEffectFile: error load music data");
 		return NULL;
 	}
+    
+    void SoraCore::execute(const SoraString& appPath, const SoraString& args) {
+        system((appPath+args).c_str());
+    }
 
 } // namespace sora

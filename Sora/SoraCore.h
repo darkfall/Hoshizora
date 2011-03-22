@@ -158,6 +158,7 @@ namespace sora {
         
         
         void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
+        void execute(const SoraString& appPath, const SoraString& args);
 
 		/*
 		 for directX, return (ulong32)(pD3DDevice)
