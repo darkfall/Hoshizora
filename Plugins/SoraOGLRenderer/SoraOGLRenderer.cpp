@@ -398,19 +398,27 @@ namespace sora{
 	}
 
 	SoraTexture* SoraOGLRenderer::createTextureFromRawData(unsigned int* data, int32 w, int32 h) {
+        GLuint texId;
+        
+        glGenTextures(1, &texId);
+		glBindTexture(GL_TEXTURE_2D, texId);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        /*
 		ulong32 texid = SOIL_create_OGL_texture((unsigned char*)data,
 												w,
 												h,
 												4,
 												0,
-												SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_TEXTURE_REPEATS);
-		if(!texid) {
+												SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_TEXTURE_REPEATS);*/
+		if(!texId) {
 			throw SORA_EXCEPTION("Error creating texture");
 			return 0;
 		}
-		SoraTexture* tex = new SoraTexture(texid,
-										   _glTextureGetWidth(texid),
-										   _glTextureGetHeight(texid),
+		SoraTexture* tex = new SoraTexture(texId,
+										   _glTextureGetWidth(texId),
+										   _glTextureGetHeight(texId),
 										   w,
 										   h);
 		return tex;

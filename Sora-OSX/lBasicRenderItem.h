@@ -12,7 +12,6 @@
 
 #include "SoraPlatform.h"
 #include "SoraSprite.h"
-#include "SoraLocalizedString.h"
 #include "SoraCore.h"
 
 namespace projl {
@@ -28,14 +27,14 @@ namespace projl {
 		lBasicRenderItem();
 		virtual ~lBasicRenderItem();
 		
-		void initWithString(const sora::SoraLocalizedString& str, sora::SoraFont* font);
+		void initWithString(const SoraWString& str, sora::SoraFont* font);
 		void initWithSprite(const SoraWString& spr, float32 x=0.f, float32 y=0.f, float32 w=0.f, float32 h=0.f);
 			
 		void render(float32 x, float32 y);
 		uint32 update(float32 dt);
 		
 		sora::SoraSprite* getSprite() { return spr; }
-		sora::SoraLocalizedString getString() { return str; }
+		SoraWString getString() { return str; }
 		
 		int32 getType() const { return type; }
 		
@@ -52,7 +51,7 @@ namespace projl {
 		sora::SoraSprite* spr;
 		
 		sora::SoraFont* font;
-		sora::SoraLocalizedString str;
+		SoraWString str;
 		
 		int32 type;
 	};

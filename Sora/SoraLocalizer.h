@@ -19,9 +19,7 @@
 #include <map>
 
 namespace sora {
-	
-	class SoraLocalizedString;
-		
+			
 	class SoraLocalizer: public SoraSingleton<SoraLocalizer> {
 		friend class SoraSingleton<SoraLocalizer>;
 		friend class SoraLocalizedString;
@@ -50,19 +48,13 @@ namespace sora {
 		void localizeResourceName(SoraWString& resourceName);
 		
 	private:
-		typedef std::map<SoraString, SoraWString> LOCALE_STRING_MAP;		
-		typedef std::map<SoraString, LOCALE_STRING_MAP > LOCALE_CONF_MAP;
+		typedef map<SoraString, SoraWString> LOCALE_STRING_MAP;		
+		typedef map<SoraString, LOCALE_STRING_MAP > LOCALE_CONF_MAP;
 		LOCALE_CONF_MAP localeConfs;
 		LOCALE_CONF_MAP::iterator currentLocaleMap;
 		
 		SoraString currentLocale;
 		SoraWString currentLocaleW;
-		
-		void registerLocalizedString(SoraLocalizedString* pLocalizedStr);
-		void unregisterLocalizedString(SoraLocalizedString* pLocalizedStr);
-		
-		typedef std::map<ulong32, SoraLocalizedString*> LOCALIZED_STRING_MAP;
-		LOCALIZED_STRING_MAP localizedStrs;
 		
 	protected:
 		inline bool readToken(llexer* lexer, Token tokenExpected);

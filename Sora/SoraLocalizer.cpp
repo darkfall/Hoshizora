@@ -8,7 +8,6 @@
  */
 
 #include "SoraLocalizer.h"
-#include "SoraLocalizedString.h"
 
 namespace sora {
 	
@@ -107,22 +106,6 @@ namespace sora {
 			currentLocale = localeIdent;
 			currentLocaleW = s2ws(localeIdent);
 			currentLocaleMap = itConf;
-#ifdef _DEBUG
-			printf("switching locale: ident=%s, registeredSize=%u\n", localeIdent.c_str(), localizedStrs.size());
-#endif
-			for(LOCALIZED_STRING_MAP::iterator itLocalStrs=localizedStrs.begin(); itLocalStrs!=localizedStrs.end(); ++itLocalStrs) {
-				LOCALE_STRING_MAP::iterator itStr = itConf->second.find(itLocalStrs->second->localeIdent);
-#ifdef _DEBUG
-				printf("localeident=%s\n", itLocalStrs->second->localeIdent.c_str());
-#endif
-				if(itStr != itConf->second.end()) {
-#ifdef _DEBUG
-					printf("replace localized str, ident=%s, orig=%s, next=%s\n", itLocalStrs->second->localeIdent.c_str(), 
-							ws2s(itLocalStrs->second->localizedString).c_str(), ws2s(itStr->second).c_str());
-#endif
-					itLocalStrs->second->localizedString = itStr->second;
-				}
-			}
 		}
 	}
 		
@@ -133,14 +116,5 @@ namespace sora {
 		}
 	}
 
-	void SoraLocalizer::registerLocalizedString(SoraLocalizedString* pLocalizedString) {
-		localizedStrs[(ulong32)pLocalizedString] = pLocalizedString;
-	}
-	
-	void SoraLocalizer::unregisterLocalizedString(SoraLocalizedString* pLocalizedStr) {
-		LOCALIZED_STRING_MAP::iterator itLocalStr = localizedStrs.find((ulong32)pLocalizedStr);
-		if(itLocalStr != localizedStrs.end())
-			localizedStrs.erase(itLocalStr);
-	}
 
 } // namespace sora

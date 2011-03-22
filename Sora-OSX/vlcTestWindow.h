@@ -10,11 +10,8 @@
 
 #include "SoraCore.h"
 #include "vlc/vlc.h"
+#include "libvlc/SoraVlcMoviePlayer.h"
 
-typedef struct {
-    void* pixels;
-    int32 frameCount;
-} MP_CTX;
 
 class vlcWindow: public sora::SoraWindowInfoBase {
 public:
@@ -25,8 +22,8 @@ public:
 	bool renderFunc();
 	void init();
 	
-	int32 getWindowWidth() { return 1280; }
-	int32 getWindowHeight() { return 720; }
+	int32 getWindowWidth() { return 960; }
+	int32 getWindowHeight() { return 640; }
 	
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }
@@ -39,13 +36,8 @@ public:
 	bool hideMouse() { return false; }
 		
 private:
-        
-    libvlc_instance_t* vlcInstance;
-    libvlc_media_player_t* mp;
-    libvlc_media_t* media;
-    libvlc_media_track_info_t* pTrackInfo;
     
-    
+    sora::SoraVlcMoviePlayer* moviePlayer;
 };
 
 

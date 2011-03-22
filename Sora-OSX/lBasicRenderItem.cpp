@@ -24,7 +24,7 @@ namespace projl {
 		}
 	}
 	
-	void lBasicRenderItem::initWithString(const sora::SoraLocalizedString& str, sora::SoraFont* font) {
+	void lBasicRenderItem::initWithString(const SoraWString& str, sora::SoraFont* font) {
 		this->str = str;
 		this->font = font;
 		type = RENDERITEM_STR;
@@ -37,12 +37,12 @@ namespace projl {
 		}
 		this->spr->setCenter(this->spr->getSpriteWidth()/2, this->spr->getSpriteHeight()/2);
 		type = RENDERITEM_SPR;
-		str.setString(spr);
+		str = spr;
 	}
 	
 	void lBasicRenderItem::render(float32 x, float32 y) {
 		if(type == RENDERITEM_STR) {
-			font->render(x, y, str.getStr().c_str(), true, true);
+			font->render(x, y, str.c_str(), true, true);
 		} else if(type == RENDERITEM_SPR) 
 			if(spr) spr->render(x, y);
 	}

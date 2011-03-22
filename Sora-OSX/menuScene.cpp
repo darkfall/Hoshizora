@@ -81,7 +81,7 @@ void lShineMenuScene::addItem(const SoraString& item) {
 	if(!pfont) return;
 	
 	projl::lBasicRenderItem* britem = new projl::lBasicRenderItem;
-	britem->initWithString(sora::SoraLocalizedString(item), pfont);
+	britem->initWithString(sora::s2ws(item), pfont);
 	items.push_back(britem);
 
 	currItem = 0;

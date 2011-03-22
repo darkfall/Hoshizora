@@ -160,6 +160,7 @@
 		88FABDCA129F2A9C00B6A1D8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */; };
 		88FABDD5129F2AA200B6A1D8 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */; };
 		88FD360B128E8367004DED08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FD360A128E8367004DED08 /* Cocoa.framework */; };
+		88FF1DDC13386214009E7786 /* SoraVlcMoviePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* SoraPureCore.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* SoraPureCore.1 */; };
 /* End PBXBuildFile section */
@@ -684,7 +685,6 @@
 		88DD0CBB12EB9311005555F6 /* orz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orz.h; sourceTree = "<group>"; };
 		88DD0CBC12EB9311005555F6 /* SoraMiscTool_Win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMiscTool_Win32.h; sourceTree = "<group>"; };
 		88DD0CBD12EB9311005555F6 /* SoraTimer_Win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTimer_Win32.h; sourceTree = "<group>"; };
-		88DD59F512E0396F0081AE6C /* SoraLocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLocalizedString.h; sourceTree = "<group>"; };
 		88DD59F812E03D760081AE6C /* SoraLocalizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLocalizer.h; sourceTree = "<group>"; };
 		88DD59F912E03D760081AE6C /* SoraLocalizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraLocalizer.cpp; sourceTree = "<group>"; };
 		88DD59FF12E040510081AE6C /* llexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = llexer.cpp; sourceTree = "<group>"; };
@@ -696,6 +696,9 @@
 		88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
 		88FD360A128E8367004DED08 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		88FF1DDA133861E2009E7786 /* SoraVlcMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraVlcMoviePlayer.h; path = ../Plugins/libvlc/SoraVlcMoviePlayer.h; sourceTree = "<group>"; };
+		88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraVlcMoviePlayer.cpp; path = ../Plugins/libvlc/SoraVlcMoviePlayer.cpp; sourceTree = "<group>"; };
+		88FF1DDD1338628D009E7786 /* SoraMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMoviePlayer.h; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* SoraPureCore */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SoraPureCore; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* SoraPureCore.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SoraPureCore.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1411,6 +1414,8 @@
 				88D1A0A91337FF2D00F26121 /* libvlc.dylib */,
 				88D1A0AA1337FF2D00F26121 /* libvlccore.dylib */,
 				88D1A09B1337FF1700F26121 /* vlc */,
+				88FF1DDA133861E2009E7786 /* SoraVlcMoviePlayer.h */,
+				88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */,
 			);
 			name = vlc;
 			sourceTree = "<group>";
@@ -1491,6 +1496,7 @@
 				88D87D2F12A09A66007D6865 /* SoraEvent.cpp */,
 				88CFF86A12C6E4EE002A9F75 /* SoraEventManager.h */,
 				88D87D3112A09A66007D6865 /* SoraEventManager.cpp */,
+				88FF1DDD1338628D009E7786 /* SoraMoviePlayer.h */,
 				88240CFA12C5811B009498F7 /* SoraShader.h */,
 				88240CF912C5811B009498F7 /* SoraShader.cpp */,
 				88D87D3312A09A66007D6865 /* SoraException.h */,
@@ -1542,7 +1548,6 @@
 				881182D212C8A60500B3A316 /* osxfilewrapper.mm */,
 				8811845912C8ABAF00B3A316 /* win32filewrapper.h */,
 				8811845A12C8ABAF00B3A316 /* win32filewrapper.cpp */,
-				88DD59F512E0396F0081AE6C /* SoraLocalizedString.h */,
 				88DD59F812E03D760081AE6C /* SoraLocalizer.h */,
 				88DD59F912E03D760081AE6C /* SoraLocalizer.cpp */,
 				88DD5A0212E0416A0081AE6C /* lMemFile.h */,
@@ -1828,6 +1833,7 @@
 				88374B121321EE0C00369B12 /* FileDlgOsx.mm in Sources */,
 				88374F111325CE8600369B12 /* SoraCGGLShader.cpp in Sources */,
 				88D1A0AF1337FF7D00F26121 /* vlcTestWindow.cpp in Sources */,
+				88FF1DDC13386214009E7786 /* SoraVlcMoviePlayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
