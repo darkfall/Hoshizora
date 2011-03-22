@@ -56,9 +56,10 @@ namespace sora {
 			// avoid bad unserialize
 			assert(length > 0 && length < MAX_NAME_LENGTH);
 			
-			uint8 strName[length];
+			uint8* strName = new uint8[length];
 			bufferStream.read(strName, length);
 			name = str2id((const char*)strName);
+            delete strName;
 		}
 		
 		// be default
