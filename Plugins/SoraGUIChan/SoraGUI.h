@@ -35,6 +35,7 @@ namespace sora {
 			pMouseListener = new SoraGUIMouseListener;
 			pLuaActionListener = new SoraLuaGUIActionListener;
 		}
+        
 		void registerGUIResponser(gcn::Widget* pWidget, SoraGUIResponser* pResponser, const SoraString& responserID, int iResponceType) {
 			if(iResponceType & RESPONCE_ACTION) pWidget->addActionListener(pActionListener);
 			if(iResponceType & RESPONCE_DEATH) pWidget->addDeathListener(pDeathListener);
@@ -43,6 +44,7 @@ namespace sora {
 			if(iResponceType & RESPONCE_FOCUS) pWidget->addFocusListener(pFocusListener);
 			SoraGUIResponserMap::Instance()->registerResponser(responserID, pResponser);
 		}
+        
 		void registerLuaGUIResponser(gcn::Widget* pWidget, const SoraString& sScript) {
 			SoraGUIResponserMap::Instance()->registerLuaResponser((ulong32)pWidget, sScript);
 			pWidget->addActionListener(pLuaActionListener);

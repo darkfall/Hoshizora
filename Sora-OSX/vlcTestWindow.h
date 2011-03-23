@@ -12,8 +12,15 @@
 #include "vlc/vlc.h"
 #include "libvlc/SoraVlcMoviePlayer.h"
 
+#include "mplayerx/wrapper.h"
 
-class vlcWindow: public sora::SoraWindowInfoBase {
+#include "SoraGUIChan/SoraGUIResponser.h"
+#include "SoraGUIChan/guichansetup.h"
+
+#include "Darklib/FileDlgOsx.h"
+
+
+class vlcWindow: public sora::SoraWindowInfoBase, public sora::SoraGUIResponser {
 public:
 	vlcWindow() {}
 	~vlcWindow() {}
@@ -22,8 +29,8 @@ public:
 	bool renderFunc();
 	void init();
 	
-	int32 getWindowWidth() { return 960; }
-	int32 getWindowHeight() { return 640; }
+	int32 getWindowWidth() { return 1024; }
+	int32 getWindowHeight() { return 768; }
 	
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }
@@ -34,10 +41,22 @@ public:
 	bool isWindowSubWindow() { return false; }	
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
+    
+    void action();
 		
 private:
+    void _loadGUI();
     
+    sora::mpMoviePlayer* mpPlayer;
     sora::SoraVlcMoviePlayer* moviePlayer;
+    
+    FileDlg* pFileOpener;
+
+    sora::SoraSprite* pSpr;
+    sora::SoraTexture* pTex;
+    sora::SoraFont* pFont;
+    
+    gcn::Slider* pslider;
 };
 
 

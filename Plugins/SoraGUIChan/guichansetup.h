@@ -25,8 +25,11 @@ namespace sora {
 		
 	public:
 		gcn::Gui* pGUIChan;
+        gcnInitializer(): pGUIChan(0) {}
 		
 		bool initGUIChan(const SoraWString& font, int size) {
+            if(pGUIChan) return false;
+            
 			pGUIChan = new gcn::Gui;
 		
 			pGUIChan->setInput(new gcn::SoraGUIInput);
@@ -41,6 +44,8 @@ namespace sora {
 		}
 		
 		void createTop() {
+            if(!pGUIChan) return;
+            
 			gcn::Container* contTop = new gcn::Container;
 			contTop->setDimension(gcn::Rectangle(0, 0, 
 												 sora::SORA->getScreenWidth(), 
@@ -62,11 +67,13 @@ namespace sora {
         }
 	
 		void gcnLogic() {
-			pGUIChan->logic();
+            if(pGUIChan)
+                pGUIChan->logic();
 		}
 	
 		void gcnDraw() {
-			pGUIChan->draw();
+			if(pGUIChan)
+                pGUIChan->draw();
 		}
 	};
 	

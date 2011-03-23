@@ -5,6 +5,7 @@
 #include "SoraGUI.h"
 #include "soraguifont.hpp"
 #include "SoraStringConv.h"
+#include "SoraPlatform.h"
 
 XmlGui::XmlGui()
 {
@@ -15,33 +16,18 @@ bool XmlGui::parse(const std::string &filename)
 {
 	TiXmlElement *element = NULL;
 	TiXmlNode *node = NULL;
-
-	doc = new TiXmlDocument(filename.c_str());
-
-	bool loadOkay = doc->LoadFile();
-
-	if ( !loadOkay )
-	{
-		throw GCN_EXCEPTION(("Error parsing xml file."+doc->ErrorDesc()).c_str());
-	}
-	node = doc->FirstChild();
-
-	if(node == NULL)
-	{
-		throw GCN_EXCEPTION("Xml document is null or has errors.");
-	}
-
-	while(node!=NULL)
-	{
-		element = node->ToElement();
-		parseWidgets(element,NULL);
-		node = doc->IterateChildren(node);
-	}
-
-	return true;
+    
+    ulong32 size;
+    void* pdata = sora::SORA->getResourceFile(sora::s2ws(filename), size);
+    if(pdata) {
+        bool result = parse((char*)pdata, size);
+        sora::SORA->freeResourceFile(pdata);
+        return result;
+    }
+	return false;
 }
 
-bool XmlGui::parse(const char* str) {
+bool XmlGui::parse(const char* str, ulong32 size) {
 	TiXmlElement *element = NULL;
 	TiXmlNode *node = NULL;
 

@@ -50,7 +50,7 @@ namespace sora {
 	}
 	
 	void SoraZipResourceManager::freeResourceFile(void* p) {
-		if(p) free(p);
+		if(p) delete p;
 	}
 
 	ulong32 SoraZipResourceManager::getResourceFileSize(const SoraWString& file) {

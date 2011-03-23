@@ -77,13 +77,13 @@ void* SoraZipFile::getFile(const SoraWString& filename, uLong readSize) {
 }
 
 void* SoraZipFile::_getfile(const SoraWString& filename, uLong readSize) {
-	void* buffer = malloc(readSize);
+	uint8* buffer = new uint8[readSize];
 	memset(buffer, 0, readSize);
 	if(buffer) {
 		if(pReader->ReadFile(ws2s(filename).c_str(), buffer, readSize) == readSize) {
 			return buffer;
 		} else {
-			free(buffer);
+			delete buffer;
 			return 0;
 		}
 	} else

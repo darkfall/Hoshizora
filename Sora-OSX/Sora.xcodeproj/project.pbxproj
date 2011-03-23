@@ -161,6 +161,19 @@
 		88FABDD5129F2AA200B6A1D8 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */; };
 		88FD360B128E8367004DED08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FD360A128E8367004DED08 /* Cocoa.framework */; };
 		88FF1DDC13386214009E7786 /* SoraVlcMoviePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */; };
+		88FF1F6313392A4A009E7786 /* AudioInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F4A13392A4A009E7786 /* AudioInfo.m */; };
+		88FF1F6413392A4A009E7786 /* CoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F4C13392A4A009E7786 /* CoreController.m */; };
+		88FF1F6513392A4A009E7786 /* coredef_private.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F4E13392A4A009E7786 /* coredef_private.m */; };
+		88FF1F6613392A4A009E7786 /* coredef.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F5013392A4A009E7786 /* coredef.m */; };
+		88FF1F6713392A4A009E7786 /* LogAnalyzeOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F5213392A4A009E7786 /* LogAnalyzeOperation.m */; };
+		88FF1F6813392A4A009E7786 /* LogAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F5413392A4A009E7786 /* LogAnalyzer.m */; };
+		88FF1F6913392A4A009E7786 /* MovieInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F5613392A4A009E7786 /* MovieInfo.m */; };
+		88FF1F6A13392A4A009E7786 /* ParameterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F5813392A4A009E7786 /* ParameterManager.m */; };
+		88FF1F6B13392A4A009E7786 /* PlayerCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F5A13392A4A009E7786 /* PlayerCore.mm */; };
+		88FF1F6C13392A4A009E7786 /* PlayingInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F5C13392A4A009E7786 /* PlayingInfo.m */; };
+		88FF1F6F13392A4A009E7786 /* VideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F6213392A4A009E7786 /* VideoInfo.m */; };
+		88FF1F7513392CEC009E7786 /* wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1F7413392CEB009E7786 /* wrapper.mm */; };
+		88FF1FDE133939D1009E7786 /* PlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1FDD133939CF009E7786 /* PlayerController.m */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* SoraPureCore.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* SoraPureCore.1 */; };
 /* End PBXBuildFile section */
@@ -699,6 +712,32 @@
 		88FF1DDA133861E2009E7786 /* SoraVlcMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraVlcMoviePlayer.h; path = ../Plugins/libvlc/SoraVlcMoviePlayer.h; sourceTree = "<group>"; };
 		88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraVlcMoviePlayer.cpp; path = ../Plugins/libvlc/SoraVlcMoviePlayer.cpp; sourceTree = "<group>"; };
 		88FF1DDD1338628D009E7786 /* SoraMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMoviePlayer.h; sourceTree = "<group>"; };
+		88FF1F4913392A4A009E7786 /* AudioInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioInfo.h; path = ../Plugins/mplayerx/AudioInfo.h; sourceTree = "<group>"; };
+		88FF1F4A13392A4A009E7786 /* AudioInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioInfo.m; path = ../Plugins/mplayerx/AudioInfo.m; sourceTree = "<group>"; };
+		88FF1F4B13392A4A009E7786 /* CoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreController.h; path = ../Plugins/mplayerx/CoreController.h; sourceTree = "<group>"; };
+		88FF1F4C13392A4A009E7786 /* CoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreController.m; path = ../Plugins/mplayerx/CoreController.m; sourceTree = "<group>"; };
+		88FF1F4D13392A4A009E7786 /* coredef_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coredef_private.h; path = ../Plugins/mplayerx/coredef_private.h; sourceTree = "<group>"; };
+		88FF1F4E13392A4A009E7786 /* coredef_private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = coredef_private.m; path = ../Plugins/mplayerx/coredef_private.m; sourceTree = "<group>"; };
+		88FF1F4F13392A4A009E7786 /* coredef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coredef.h; path = ../Plugins/mplayerx/coredef.h; sourceTree = "<group>"; };
+		88FF1F5013392A4A009E7786 /* coredef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = coredef.m; path = ../Plugins/mplayerx/coredef.m; sourceTree = "<group>"; };
+		88FF1F5113392A4A009E7786 /* LogAnalyzeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogAnalyzeOperation.h; path = ../Plugins/mplayerx/LogAnalyzeOperation.h; sourceTree = "<group>"; };
+		88FF1F5213392A4A009E7786 /* LogAnalyzeOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogAnalyzeOperation.m; path = ../Plugins/mplayerx/LogAnalyzeOperation.m; sourceTree = "<group>"; };
+		88FF1F5313392A4A009E7786 /* LogAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogAnalyzer.h; path = ../Plugins/mplayerx/LogAnalyzer.h; sourceTree = "<group>"; };
+		88FF1F5413392A4A009E7786 /* LogAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogAnalyzer.m; path = ../Plugins/mplayerx/LogAnalyzer.m; sourceTree = "<group>"; };
+		88FF1F5513392A4A009E7786 /* MovieInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovieInfo.h; path = ../Plugins/mplayerx/MovieInfo.h; sourceTree = "<group>"; };
+		88FF1F5613392A4A009E7786 /* MovieInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovieInfo.m; path = ../Plugins/mplayerx/MovieInfo.m; sourceTree = "<group>"; };
+		88FF1F5713392A4A009E7786 /* ParameterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParameterManager.h; path = ../Plugins/mplayerx/ParameterManager.h; sourceTree = "<group>"; };
+		88FF1F5813392A4A009E7786 /* ParameterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParameterManager.m; path = ../Plugins/mplayerx/ParameterManager.m; sourceTree = "<group>"; };
+		88FF1F5913392A4A009E7786 /* PlayerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerCore.h; path = ../Plugins/mplayerx/PlayerCore.h; sourceTree = "<group>"; };
+		88FF1F5A13392A4A009E7786 /* PlayerCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlayerCore.mm; path = ../Plugins/mplayerx/PlayerCore.mm; sourceTree = "<group>"; };
+		88FF1F5B13392A4A009E7786 /* PlayingInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingInfo.h; path = ../Plugins/mplayerx/PlayingInfo.h; sourceTree = "<group>"; };
+		88FF1F5C13392A4A009E7786 /* PlayingInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingInfo.m; path = ../Plugins/mplayerx/PlayingInfo.m; sourceTree = "<group>"; };
+		88FF1F6113392A4A009E7786 /* VideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoInfo.h; path = ../Plugins/mplayerx/VideoInfo.h; sourceTree = "<group>"; };
+		88FF1F6213392A4A009E7786 /* VideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoInfo.m; path = ../Plugins/mplayerx/VideoInfo.m; sourceTree = "<group>"; };
+		88FF1F7013392CB1009E7786 /* wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrapper.h; path = ../Plugins/mplayerx/wrapper.h; sourceTree = "<group>"; };
+		88FF1F7413392CEB009E7786 /* wrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = wrapper.mm; path = ../Plugins/mplayerx/wrapper.mm; sourceTree = "<group>"; };
+		88FF1FDC133939CE009E7786 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerController.h; path = ../Plugins/mplayerx/PlayerController.h; sourceTree = "<group>"; };
+		88FF1FDD133939CF009E7786 /* PlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerController.m; path = ../Plugins/mplayerx/PlayerController.m; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* SoraPureCore */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SoraPureCore; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* SoraPureCore.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SoraPureCore.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -760,8 +799,8 @@
 				888FC32012D4D01C00818B3C /* basicSTGPlayer.cpp */,
 				888FC32612D4D28300818B3C /* keyMapper.h */,
 				888FC32C12D4D38A00818B3C /* stgkey.h */,
-				88D1A0AD1337FF7D00F26121 /* vlcTestWindow.cpp */,
 				88D1A0AE1337FF7D00F26121 /* vlcTestWindow.h */,
+				88D1A0AD1337FF7D00F26121 /* vlcTestWindow.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -1444,6 +1483,7 @@
 		88D7F51B1285190700BA1949 /* Sora */ = {
 			isa = PBXGroup;
 			children = (
+				88FF1F4813392A34009E7786 /* mplayerx */,
 				88D1A09A1337FEF700F26121 /* vlc */,
 				88374B0E1321EDD200369B12 /* DarkLibOsx */,
 				88DD0C1F12EB5B48005555F6 /* tcmalloc */,
@@ -1602,6 +1642,39 @@
 				88DD5A0012E040510081AE6C /* llexer.h */,
 			);
 			path = llexer;
+			sourceTree = "<group>";
+		};
+		88FF1F4813392A34009E7786 /* mplayerx */ = {
+			isa = PBXGroup;
+			children = (
+				88FF1F4913392A4A009E7786 /* AudioInfo.h */,
+				88FF1FDC133939CE009E7786 /* PlayerController.h */,
+				88FF1FDD133939CF009E7786 /* PlayerController.m */,
+				88FF1F4A13392A4A009E7786 /* AudioInfo.m */,
+				88FF1F4B13392A4A009E7786 /* CoreController.h */,
+				88FF1F4C13392A4A009E7786 /* CoreController.m */,
+				88FF1F4D13392A4A009E7786 /* coredef_private.h */,
+				88FF1F4E13392A4A009E7786 /* coredef_private.m */,
+				88FF1F4F13392A4A009E7786 /* coredef.h */,
+				88FF1F5013392A4A009E7786 /* coredef.m */,
+				88FF1F5113392A4A009E7786 /* LogAnalyzeOperation.h */,
+				88FF1F5213392A4A009E7786 /* LogAnalyzeOperation.m */,
+				88FF1F5313392A4A009E7786 /* LogAnalyzer.h */,
+				88FF1F5413392A4A009E7786 /* LogAnalyzer.m */,
+				88FF1F5513392A4A009E7786 /* MovieInfo.h */,
+				88FF1F5613392A4A009E7786 /* MovieInfo.m */,
+				88FF1F5713392A4A009E7786 /* ParameterManager.h */,
+				88FF1F5813392A4A009E7786 /* ParameterManager.m */,
+				88FF1F5913392A4A009E7786 /* PlayerCore.h */,
+				88FF1F5A13392A4A009E7786 /* PlayerCore.mm */,
+				88FF1F5B13392A4A009E7786 /* PlayingInfo.h */,
+				88FF1F5C13392A4A009E7786 /* PlayingInfo.m */,
+				88FF1F6113392A4A009E7786 /* VideoInfo.h */,
+				88FF1F6213392A4A009E7786 /* VideoInfo.m */,
+				88FF1F7013392CB1009E7786 /* wrapper.h */,
+				88FF1F7413392CEB009E7786 /* wrapper.mm */,
+			);
+			name = mplayerx;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -1834,6 +1907,19 @@
 				88374F111325CE8600369B12 /* SoraCGGLShader.cpp in Sources */,
 				88D1A0AF1337FF7D00F26121 /* vlcTestWindow.cpp in Sources */,
 				88FF1DDC13386214009E7786 /* SoraVlcMoviePlayer.cpp in Sources */,
+				88FF1F6313392A4A009E7786 /* AudioInfo.m in Sources */,
+				88FF1F6413392A4A009E7786 /* CoreController.m in Sources */,
+				88FF1F6513392A4A009E7786 /* coredef_private.m in Sources */,
+				88FF1F6613392A4A009E7786 /* coredef.m in Sources */,
+				88FF1F6713392A4A009E7786 /* LogAnalyzeOperation.m in Sources */,
+				88FF1F6813392A4A009E7786 /* LogAnalyzer.m in Sources */,
+				88FF1F6913392A4A009E7786 /* MovieInfo.m in Sources */,
+				88FF1F6A13392A4A009E7786 /* ParameterManager.m in Sources */,
+				88FF1F6B13392A4A009E7786 /* PlayerCore.mm in Sources */,
+				88FF1F6C13392A4A009E7786 /* PlayingInfo.m in Sources */,
+				88FF1F6F13392A4A009E7786 /* VideoInfo.m in Sources */,
+				88FF1F7513392CEC009E7786 /* wrapper.mm in Sources */,
+				88FF1FDE133939D1009E7786 /* PlayerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

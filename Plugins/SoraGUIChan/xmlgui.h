@@ -39,7 +39,7 @@ public:
 	//@param filename the file name to parse
 	//@return true if loaded ok
 	bool parse(const std::string &filename);
-	bool parse(const char* ptr);
+	bool parse(const char* ptr, unsigned long size);
 
 	//@param name th widget name
 	//@return widget by name

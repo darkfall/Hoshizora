@@ -339,6 +339,8 @@ namespace sora{
 			glColorPointer (4, GL_UNSIGNED_BYTE, 0, mColors);
 			glDrawArrays(GL_QUADS, 0, mVertexCount);
 			mVertexCount = 0;
+            
+        //    glFlush();
 		}
 	}
 
@@ -405,6 +407,7 @@ namespace sora{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glBindTexture(GL_TEXTURE_2D, 0);
         /*
 		ulong32 texid = SOIL_create_OGL_texture((unsigned char*)data,
 												w,
@@ -475,10 +478,15 @@ namespace sora{
 			flush();
 		}
 
-		glEnable(GL_TEXTURE_2D);
-		if(trip.tex)
-			bindTexture(trip.tex);
-
+		glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
+		if(trip.tex) {
+            
+			//glBindTexture(GL_TEXTURE_2D, quad.tex->mTextureID);
+			bindTexture(trip.tex);			
+		} else {
+            flush();
+            glBindTexture(GL_TEXTURE_2D, 0);
+        }
 		_glSetBlendMode(trip.blend);
 
 		//TODO: insert code here
@@ -541,8 +549,10 @@ namespace sora{
 
 			//glBindTexture(GL_TEXTURE_2D, quad.tex->mTextureID);
 			bindTexture(quad.tex);			
-		} else
-			glBindTexture(GL_TEXTURE_2D, 0);
+		} else {
+            flush();
+            glBindTexture(GL_TEXTURE_2D, 0);
+        }
 		_glSetBlendMode(quad.blend);
 
 		//TODO: insert code here

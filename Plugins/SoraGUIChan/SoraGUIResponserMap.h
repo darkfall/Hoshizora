@@ -1,5 +1,5 @@
-#ifndef SORA_GUI_RESPONSER_MAP
-#define SORA_GUI_RESPONSER_MAP
+#ifndef SORA_GUI_RESPONSER_MAP_H
+#define SORA_GUI_RESPONSER_MAP_H
 
 #include "SoraException.h"
 #include "SoraPlatform.h"
@@ -16,17 +16,14 @@ namespace sora {
 
 	public:
 		~SoraGUIResponserMap() {
-			for(ResponserMap::iterator p = _resMap.begin(); p != _resMap.end(); ++p) {
-				if(p->second) delete p->second;
-			}
 			_resMap.clear();
 		}
 
 		void registerResponser(const SoraString& id, SoraGUIResponser* responser) {
-			_resMap[id] = responser;
+			_resMap.insert(std::make_pair<stringId, SoraGUIResponser*>(str2id(id), responser));
 		}
 		SoraGUIResponser* getResponser(const SoraString& id) {
-			return _resMap[id];
+			return _resMap[str2id(id)];
 		}
 
 		void registerLuaResponser(ulong32 h, const SoraString& path) {
@@ -37,7 +34,7 @@ namespace sora {
 		}
 
 	private:
-		typedef std::map<SoraString, SoraGUIResponser*> ResponserMap;
+		typedef std::map<stringId, SoraGUIResponser*> ResponserMap;
 		typedef std::map<ulong32, SoraString> LuaScriptMap;
 		ResponserMap _resMap;
 		LuaScriptMap _scrMap;
