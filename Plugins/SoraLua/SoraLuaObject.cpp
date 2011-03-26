@@ -18,13 +18,12 @@ namespace sora {
 
 		SoraLuaExport::export_constants(luaState);
 		SoraLuaExport::export_soracore(luaState);
-		SoraLuaExport::export_sorafiles(luaState);
-		//SoraLuaExport::export_soraobjects(luaState);
+        SoraLuaExport::export_sprites(luaState);
 
 		luaopen_pluto(luaState->GetCState());
 
 		//setType(OBJ_LUA);
-		LuaStateRefMap[(ulong32)luaState] = 1;
+		//LuaStateRefMap[(ulong32)luaState] = 1;
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
 	}
 
@@ -35,14 +34,16 @@ namespace sora {
 		
 		SoraLuaExport::export_constants(luaState);
 		SoraLuaExport::export_soracore(luaState);
-		SoraLuaExport::export_sorafiles(luaState);
-		//SoraLuaExport::export_soraobjects(luaState);
+        SoraLuaExport::export_sprites(luaState);
+
 
 		luaopen_pluto(luaState->GetCState());
 
 		//setType(OBJ_LUA);
-		LuaStateRefMap[(ulong32)luaState] = 1;
+		//LuaStateRefMap[(ulong32)luaState] = 1;
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
+        
+        doScript(scriptPath);
 	}
 
 	SoraLuaObject::SoraLuaObject(LuaState* state) {
@@ -55,8 +56,8 @@ namespace sora {
 	}
 
 	SoraLuaObject::~SoraLuaObject() {
-		LuaStateRefMap[(ulong32)luaState]--;
-		if(LuaStateRefMap[(ulong32)luaState] == 0)
+	//	LuaStateRefMap[(ulong32)luaState]--;
+	//	if(LuaStateRefMap[(ulong32)luaState] == 0)
 			LuaState::Destroy(luaState);
 		SoraLuaObjectManager::Instance()->unregisterLuaObject(this);
 	}
@@ -140,4 +141,45 @@ namespace sora {
 	LuaState* SoraLuaObject::getState() {
 		return luaState;
 	}
+    
+    template<typename RT>
+    RT SoraLuaObject::callFunc(const SoraString& funcName) {
+        LuaObject obj = get(funcName);
+        if(obj.IsFunction()) {
+            LuaFunction<RT> func = obj;
+            return func();
+        }
+        return 0;
+    }
+    
+    void SoraLuaObject::callFuncVoid(const SoraString& funcName) {
+        LuaObject obj = get(funcName);
+        if(obj.IsFunction()) {
+            LuaFunctionVoid func = obj;
+            func();
+        }
+    }
+    
+    template<typename RT>
+    LuaFunction<RT> SoraLuaObject::getFunc(const SoraString& funcName) {
+        LuaFunction<RT> func;
+        LuaObject obj = get(funcName);
+        if(obj.IsFunction()) {
+            func = obj;
+        }
+        return func;
+    }
+    
+    uint32 SoraLuaObject::update(float32 dt) {
+        LuaObject obj = get("update");
+        if(obj.IsFunction()) {
+            LuaFunction<void> func = obj;
+            func("dt");
+        }
+        return 0;
+    }
+   
+    void SoraLuaObject::render() {
+        callFuncVoid("render");
+    }
 } // namespace sora

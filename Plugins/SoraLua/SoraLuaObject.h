@@ -24,6 +24,9 @@ namespace sora {
 		SoraLuaObject(const SoraWString& scriptPath);
 		SoraLuaObject(LuaState* state);
 		virtual ~SoraLuaObject();
+        
+        uint32 update(float32 dt);
+        void render();
 
 		int32 doScript(const SoraWString& scriptPath);
 		int32 doString(const SoraString& str);
@@ -51,6 +54,13 @@ namespace sora {
 		lua_CFunction getCFunction(const SoraString& name);
 		void* getUserData(const SoraString& name);
 		bool getBoolean(const SoraString& name);
+        
+        template<typename RT>
+        RT callFunc(const SoraString& funcName);
+        void callFuncVoid(const SoraString& funcName);
+        
+        template<typename RT>
+        LuaFunction<RT> getFunc(const SoraString& funcName);
 
 		LuaState* getState();
 	private:
