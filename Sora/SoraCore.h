@@ -205,6 +205,7 @@ namespace sora {
 
 		int32 iScreenWidth, iScreenHeight;
 
+        bool bMainScene;
 		bool bFrameSync;
 		float32 time;
 

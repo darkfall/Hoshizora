@@ -43,6 +43,8 @@ namespace guiwrapper {
     void addWidgetToParent(ulong32 h, const SoraString& parent);
     void removeWidget(ulong32 h, const SoraString& parent);
     
+    void setWidgetResponser(ulong32 h, const SoraString& responser, const SoraString& responsetype);
+    
     void setWidgetFrameSize(ulong32 h, uint32 framesize);
     uint32 getWidgetFrameSize(ulong32 h);
     

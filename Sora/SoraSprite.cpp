@@ -5,6 +5,14 @@
 
 namespace sora {
 
+    SoraSprite::SoraSprite(HSORATEXTURE tex) {
+        SoraSprite((SoraTexture*)tex);
+    }
+    
+    SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h) {
+        SoraSprite((SoraTexture*)tex, x, y, w, h);
+    }
+    
 	SoraSprite::SoraSprite(SoraTexture* tex) {
 		float texx1, texy1, texx2, texy2;
 		
@@ -303,11 +311,11 @@ namespace sora {
 	}
 
 	int32 SoraSprite::getSpriteWidth()  const{
-		return (int32)textureRect.x2;
+		return (int32)textureRect.x2*hscale;
 	}
 
 	int32 SoraSprite::getSpriteHeight()  const{
-		return (int32)textureRect.y2;
+		return (int32)textureRect.y2*vscale;
 	}
 
 	int32 SoraSprite::getSpritePosX()  const{

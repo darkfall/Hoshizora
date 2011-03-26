@@ -60,6 +60,7 @@ namespace guiwrapper {
         .def("getWidgetById", &guiwrapper::getWidgetById)
         .def("addWidget", &guiwrapper::addWidgetToParent)
         .def("removeWidget", &guiwrapper::removeWidget)
+        .def("setWidgetResponser", &guiwrapper::setWidgetResponser)
         .def("setWidgetFrameSize", &guiwrapper::setWidgetFrameSize)
         .def("getWidgetFrameSize", &guiwrapper::getWidgetFrameSize)
         .def("getWidgetParent", &guiwrapper::getWidgetParent)
@@ -136,6 +137,14 @@ namespace guiwrapper {
         bool result = pXmlGui->parse(xmlPath);
         delete pXmlGui;
         return result;
+    }
+    
+    void setWidgetResponser(ulong32 h, const SoraString& responser, const SoraString& responseType) {
+        gcn::Widget* w = getWidgetByHandle(h);
+        if(w) {
+            std::string type = responseType;
+            XmlGui::parseResponser(w, responser, &type);
+        }
     }
     
     void addWidgetToParent(ulong32 h, const SoraString& parent) {

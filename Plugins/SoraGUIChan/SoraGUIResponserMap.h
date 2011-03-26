@@ -10,7 +10,7 @@
 #include <map>
 
 namespace sora {
-	
+    
 	class SoraGUIResponserMap: public SoraSingleton<SoraGUIResponserMap> {
 		friend class SoraSingleton<SoraGUIResponserMap>;
 
@@ -23,21 +23,43 @@ namespace sora {
 			_resMap.insert(std::make_pair<stringId, SoraGUIResponser*>(str2id(id), responser));
 		}
 		SoraGUIResponser* getResponser(const SoraString& id) {
-			return _resMap[str2id(id)];
+            ResponserMap::iterator itResponser = _resMap.find(str2id(id));
+            if(itResponser != _resMap.end())
+                return itResponser->second;
+			return 0;
 		}
 
-		void registerLuaResponser(ulong32 h, const SoraString& path) {
-			_scrMap[h] = path;
+        // in xml, use responser = "@handleType=src" to indicate this gui uses a external responser
+		void registerExternalResponser(const SoraString& handleType, SoraGUIResponserExtern* responser) {
+			_extMap.insert(std::make_pair<stringId, SoraGUIResponserExtern*>(str2id(handleType), responser));
 		}
-		SoraString getLuaResponser(ulong32 h) {
-			return _scrMap[h];
-		}
-
+        SoraGUIResponserExtern* getExternalResponser(const SoraString& handleType) {
+            ExternalResponserMap::iterator itResponser = _extMap.find(str2id(handleType));
+            if(itResponser != _extMap.end())
+                return itResponser->second;
+			return 0;
+        }
+        
+        stringId getHandleSrcFromWidgetHandle(ulong32 handle) {
+            HandleSrcMap::iterator itHandleSrc = widgetSrc.find(handle);
+            if(itHandleSrc != widgetSrc.end())
+                return itHandleSrc->second;
+            return 0;
+        }
+        
+        void registerHandleSrc(ulong32 widget, const SoraString& src) {
+            widgetSrc[widget] = str2id(src);
+        }
+        
 	private:
+        typedef hash_map<ulong32, stringId> HandleSrcMap;
+        HandleSrcMap widgetSrc;
+        
 		typedef std::map<stringId, SoraGUIResponser*> ResponserMap;
-		typedef std::map<ulong32, SoraString> LuaScriptMap;
 		ResponserMap _resMap;
-		LuaScriptMap _scrMap;
+    
+        typedef std::map<stringId, SoraGUIResponserExtern*> ExternalResponserMap;
+		ExternalResponserMap _extMap;
 	};
 } // namespace sora
 

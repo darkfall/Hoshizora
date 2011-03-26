@@ -24,6 +24,18 @@ namespace sora {
 		friend class sora::SoraSingleton<gcnInitializer>;
 		
 	public:
+        class gcnListener: public SoraFrameListener {
+        public:
+            gcnListener(gcnInitializer* initializer): pinitializer(initializer) {}
+            
+            void onFrameStart()  {}
+            void onFrameEnd() {
+                pinitializer->gcnLogic();
+            }
+        private:
+            gcnInitializer* pinitializer;
+        };
+        
 		gcn::Gui* pGUIChan;
         gcnInitializer(): pGUIChan(0) {}
 		
@@ -40,6 +52,9 @@ namespace sora {
 				gcn::Widget::setGlobalFont(pfont);
 			else
 				return false;
+            
+            gcnListener* plistener = new gcnListener(this);
+            SORA->addFrameListener(plistener);
 			return true;
 		}
 		
@@ -61,9 +76,57 @@ namespace sora {
         gcn::Widget* findWidget(const SoraString& sid) {
             gcn::Container* pTop = getTop();
             if(pTop) {
-                return pTop->findWidgetById(sid.c_str());
+                if(sid.compare("top") == 0)
+                    return pTop;
+                
+                gcn::Widget* pWidget = 0;
+                try {
+                    pWidget = pTop->findWidgetById(sid.c_str());
+                } catch(gcn::Exception& exp) {
+                    SORA->log("guilib exception: "+exp.getMessage());
+                }
+                return pWidget;
             }
             return NULL;
+        }
+        
+        void addWidget(gcn::Widget* widget, const SoraString& parentId) {
+            gcn::Widget* pParent = findWidget(parentId);
+            
+            try {
+                gcn::Container* cont = dynamic_cast<gcn::Container*>(pParent);
+                if(cont != NULL) {
+                    cont->add(widget);
+                    return;
+                }
+                gcn::Window* wind = dynamic_cast<gcn::Window*>(pParent);
+                if(wind != NULL) {
+                    wind->add(widget);
+                    return;
+                }
+            } catch(gcn::Exception& exp) {
+                SORA->log("guilib exception: "+exp.getMessage());
+            }
+        }
+        
+        void removeWidget(gcn::Widget* widget, const SoraString& parent) {
+            gcn::Widget* pParent = findWidget(parent);
+            printf("foudn parent, %s=%llu", parent.c_str(), (ulong32)pParent);
+            
+            try {
+                gcn::Container* cont = dynamic_cast<gcn::Container*>(pParent);
+                if(cont != NULL) {
+                    cont->remove(widget);
+                    return;
+                }
+                gcn::Window* wind = dynamic_cast<gcn::Window*>(pParent);
+                if(wind != NULL) {
+                    wind->remove(widget);
+                    return;
+                }
+            } catch(gcn::Exception& exp) {
+                SORA->log("guilib exception: "+exp.getMessage());
+            }
         }
 	
 		void gcnLogic() {

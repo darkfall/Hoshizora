@@ -44,6 +44,8 @@ public:
 	//@param name th widget name
 	//@return widget by name
 	gcn::Widget *getWidget(const std::string &name);
+    
+    static void parseResponser(gcn::Widget* widget, const std::string& responser, const std::string* type);
 
 	//!parse default parameters for all widgets
 	//@param element the xml element

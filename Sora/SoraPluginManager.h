@@ -28,6 +28,8 @@ public:
 	virtual void unistallPlugin(SoraPlugin* pPlugin);
 	
 	virtual SoraPlugin* getPlugin(const SoraString& sPluginName);
+    
+    virtual void update();
 	
 private:
 	std::list<SoraPlugin*> pPluginList;

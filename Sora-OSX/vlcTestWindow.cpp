@@ -15,6 +15,8 @@
 
 #include "SoraFileUtility.h"
 
+#include "SoraLua/guichanwrapper.h"
+
 static int keyUpDataGuard = 0;
 
 bool vlcWindow::updateFunc() {
@@ -126,8 +128,12 @@ bool vlcWindow::renderFunc() {
         pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
         pSpr->render(getWindowWidth()/2, 0.f);
     }
+
+    luaTest.render();
     
     sora::GCN_GLOBAL->gcnDraw();
+    
+    
     sora::SORA->endScene();
    
     return false;
@@ -158,6 +164,10 @@ void vlcWindow::init() {
     
     pslider = 0;
     _loadGUI();
+    
+    guiwrapper::export_guilib(luaTest.getState());
+
+    luaTest.doScript((L"test.lua"));
     
     pFileOpener = new FileDlg;
     pFileOpener->SetDefaultPath(sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());

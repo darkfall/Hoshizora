@@ -32,6 +32,7 @@
 
 #include "SoraParticleEditor/peMainWindow.h"
 
+
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();
 	sora::SoraCore* sora = sora::SoraCore::Instance();

@@ -46,6 +46,8 @@ namespace sora {
 
 	class SoraSprite: public SoraObject {
 	public:
+        SoraSprite(HSORATEXTURE tex);
+        SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 width, float32 height);
 		SoraSprite(SoraTexture* tex);
 		SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height);
 		virtual ~SoraSprite();

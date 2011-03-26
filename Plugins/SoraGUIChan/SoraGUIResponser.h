@@ -36,8 +36,8 @@ namespace sora {
 		virtual void mouseWheelMovedUp(const gcn::MouseEvent& mouseEvent) { }
 		virtual void mouseDragged(const gcn::MouseEvent& mouseEvent) { }
 
-		SoraString getID() { return widgetID; }
-		gcn::Widget* getSource() { return source; }
+		SoraString getID() const { return widgetID; }
+		gcn::Widget* getSource() const { return source; }
 
 		void setID(const SoraString& id) { widgetID = id; }
 		void setSource(gcn::Widget* s) { source = s; }
@@ -45,8 +45,14 @@ namespace sora {
 		SoraString widgetID;
 		gcn::Widget* source;
 	};
+    
+    class SoraGUIResponserExtern: public SoraGUIResponser {
+    public:
+      //  SoraString getHandleSrc() const { return id2str(SoraGUIResponserMap::Instance()->getHandleSrcFromWidgetHandle((ulong32)getSource())); }
 
-	class SoraLuaGUIResponser: public SoraGUIResponser {
+    };
+
+	/*class SoraLuaGUIResponser: public SoraGUIResponser {
 	public:
 		SoraLuaGUIResponser(const SoraString& luaScript);
 
@@ -75,7 +81,7 @@ namespace sora {
 
 	private:
 		// LuaObject* pObj;
-	};
+	};*/
 } // namespace sora
 
 #endif

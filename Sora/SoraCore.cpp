@@ -43,6 +43,8 @@ namespace sora {
 		pFontManager = 0;
 		pRenderSystem = 0;
 		pSoundSystem = 0;
+        
+        bMainScene = false;
 
 		pPluginManager = new SoraPluginManager;
 
@@ -121,20 +123,26 @@ namespace sora {
 
 		pRenderSystem->beginFrame();
 		_frameListenerStart();
-
+        
 		mainWindow->updateFunc();
-		mainWindow->renderFunc();
-
+        
+        pPluginManager->update();
+        
 		time += pTimer->getDelta();
 		SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
-
-		_frameListenerEnd();
-		
+        
 		pRenderSystem->update();
 		
+        mainWindow->renderFunc();
+        
+        _frameListenerEnd();
 #ifdef _DEBUG
 		DEBUG_RENDERER->render();
 #endif
+        if(bMainScene) {
+            bMainScene = false;
+            pRenderSystem->endScene();
+        }
 		pRenderSystem->endFrame();
 	}
 
@@ -517,10 +525,13 @@ namespace sora {
 	void SoraCore::beginScene(ulong32 c, ulong32 t) {
 		assert(bInitialized==true);
 		pRenderSystem->beginScene(c, t);
+        if(c == 0)
+            bMainScene = true;
 	}
 	void SoraCore::endScene() {
 		assert(bInitialized==true);
-		pRenderSystem->endScene();
+		if(!bMainScene) 
+            pRenderSystem->endScene();
 	}
 
 	ulong32 SoraCore::createTarget(int width, int height, bool zbuffer) {

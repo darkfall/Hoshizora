@@ -20,20 +20,7 @@ namespace sora {
 			}
 		}
 	};
-	class SoraLuaGUIActionListener: public gcn::ActionListener {
-	public:
-		void action(const gcn::ActionEvent& ev) {
-			/*int result = SoraCore::Instance()->doLuaFile(SoraStringConverter::string2WideString(
-				SoraGUIResponserMap::Instance()->getLuaResponser((ulong32)ev.getSource()))
-				);
-			if(result == -1) throw SORA_EXCEPTION("Error loading lua file: "+SoraGUIResponserMap::Instance()->getLuaResponser((ulong32)ev.getSource()));
-			LuaObject o = SoraCore::Instance()->getMainLuaState()->GetGlobals()["onClick"];
-			if(o.IsFunction()) {
-				LuaFunction<void> func = o;
-				func(ev.getSource()->getId());
-			}*/
-		}
-	};
+	
 	class SoraGUIKeyListener: public gcn::KeyListener {
 		void keyPressed(const gcn::KeyEvent& ev) {
 			SoraGUIResponser* pResponser = SoraGUIResponserMap::Instance()->getResponser(ev.getSource()->getId());
@@ -53,6 +40,7 @@ namespace sora {
 			}
 		}
 	};
+    
 	class SoraGUIDeathListener: public gcn::DeathListener {
 		void death(const gcn::Event& ev) {
 			SoraGUIResponser* pResponser = SoraGUIResponserMap::Instance()->getResponser(ev.getSource()->getId());
@@ -63,6 +51,7 @@ namespace sora {
 			}
 		}
 	};
+    
 	class SoraGUIMouseListener: public gcn::MouseListener {
 		void mousePressed(const gcn::MouseEvent& ev) {
 			SoraGUIResponser* pResponser = SoraGUIResponserMap::Instance()->getResponser(ev.getSource()->getId());
@@ -137,6 +126,7 @@ namespace sora {
 			}
 		}
 	};
+    
 	class SoraGUIFocusListener: public gcn::FocusListener {
 		void focusGained(const gcn::Event& ev) {
 			SoraGUIResponser* pResponser = SoraGUIResponserMap::Instance()->getResponser(ev.getSource()->getId());

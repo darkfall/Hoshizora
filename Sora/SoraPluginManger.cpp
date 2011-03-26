@@ -68,5 +68,13 @@ SoraPlugin* SoraPluginManager::getPlugin(const SoraString& sPluginName) {
 	}
 	return 0;
 }
+    
+    void SoraPluginManager::update() {
+        itPlugin plugin = pPluginList.begin();
+        while(plugin != pPluginList.end()) {
+            (*plugin)->update();
+            ++plugin;
+        }
+    }
 
 } // namespace sora

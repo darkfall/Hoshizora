@@ -118,6 +118,65 @@ void XmlGui::parseWidgets(TiXmlElement *element, gcn::Widget *parent)
 		parseListbox(element,parent);
 }
 
+int parseRespondType(const char* respondStr) {
+    std::vector<std::string> rtypes;
+    sora::deliStr(rtypes, respondStr, ',');
+    int irtype = 0;
+    for(size_t i=0; i<rtypes.size(); ++i) {
+        if(rtypes[i].compare("action") == 0) irtype |= sora::RESPONCE_ACTION;
+        else if(rtypes[i].compare("death") == 0) irtype |= sora::RESPONCE_DEATH;
+        else if(rtypes[i].compare("focus") == 0) irtype |= sora::RESPONCE_FOCUS;
+        else if(rtypes[i].compare("mouse") == 0) irtype |= sora::RESPONCE_MOUSE;
+        else if(rtypes[i].compare("key") == 0) irtype |= sora::RESPONCE_KEY;
+    }
+    return irtype;
+}
+
+void XmlGui::parseResponser(gcn::Widget* widget, const std::string& arg, const std::string* type) {
+    if(arg[0] == '@') {
+        size_t ap = arg.find("=");
+        if(ap != std::string::npos) {
+            SoraString srcType = arg.substr(1, ap);
+            
+            sora::SoraGUIResponserExtern* pResponser = sora::SoraGUIResponserMap::Instance()->getExternalResponser( srcType );
+            if(pResponser) {
+                const std::string* respondtypestr = type;
+                if(respondtypestr) {
+                    int irtype = parseRespondType(respondtypestr->c_str());
+                    sora::SoraGUI::Instance()->registerExternalGUIResponser(widget, 
+                                                                            pResponser, 
+                                                                            widget->getId(),
+                                                                            arg.substr(ap+1, arg.size()),
+                                                                            irtype);
+                } else {
+                    sora::SoraGUI::Instance()->registerExternalGUIResponser(widget, 
+                                                                            pResponser, 
+                                                                            widget->getId(),
+                                                                            arg.substr(ap+1, arg.size()),
+                                                                            sora::RESPONCE_ACTION);
+                }
+            }
+        }
+    } else {
+        sora::SoraGUIResponser* pResponser = sora::SoraGUIResponserMap::Instance()->getResponser( arg );
+        if(pResponser) {
+            const std::string* respondtypestr = type;
+            if(respondtypestr) {
+                int irtype = parseRespondType(respondtypestr->c_str());
+                sora::SoraGUI::Instance()->registerGUIResponser(widget, 
+                                                                pResponser, 
+                                                                widget->getId(),
+                                                                irtype);
+            } else {
+                sora::SoraGUI::Instance()->registerGUIResponser(widget, 
+                                                                pResponser, 
+                                                                widget->getId(),
+                                                                sora::RESPONCE_ACTION);
+            }
+        } 
+    }
+}
+
 void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 {
 	if(!element) return;
@@ -215,38 +274,7 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 		widget->setId(element->Attribute("id")->c_str());
 		if(element->Attribute("responser")) {
 			SoraString arg = element->Attribute("responser")->c_str();
-			if(arg.find(".lua") != std::string::npos) {
-				size_t ap = arg.find("=");
-				if(ap != std::string::npos) {
-					SoraString spath = arg.substr(ap+1, arg.size());
-					sora::SoraGUI::Instance()->registerLuaGUIResponser(widget, spath);
-				}
-			} else {
-				sora::SoraGUIResponser* pResponser = sora::SoraGUIResponserMap::Instance()->getResponser( element->Attribute("responser")->c_str() );
-				if(pResponser) {
-					if(element->Attribute("responsetype")) {
-						std::vector<std::string> rtypes;
-						sora::deliStr(rtypes, element->Attribute("responsetype")->c_str(), ',');
-						int irtype = 0;
-						for(size_t i=0; i<rtypes.size(); ++i) {
-							if(rtypes[i].compare("action") == 0) irtype |= sora::RESPONCE_ACTION;
-							else if(rtypes[i].compare("death") == 0) irtype |= sora::RESPONCE_DEATH;
-							else if(rtypes[i].compare("focus") == 0) irtype |= sora::RESPONCE_FOCUS;
-							else if(rtypes[i].compare("mouse") == 0) irtype |= sora::RESPONCE_MOUSE;
-							else if(rtypes[i].compare("key") == 0) irtype |= sora::RESPONCE_KEY;
-						}
-						sora::SoraGUI::Instance()->registerGUIResponser(widget, 
-																		pResponser, 
-																		element->Attribute("id")->c_str(),
-																		irtype);
-					} else {
-						sora::SoraGUI::Instance()->registerGUIResponser(widget, 
-																		pResponser, 
-																		element->Attribute("id")->c_str(),
-																		sora::RESPONCE_ACTION);
-					}
-				} 
-			}
+			parseResponser(widget, arg, element->Attribute("responsetype"));
 		}
 	}
 }

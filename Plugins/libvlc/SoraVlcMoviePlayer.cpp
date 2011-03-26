@@ -73,14 +73,11 @@ namespace sora {
     }
     
     void SoraVlcMoviePlayer::openMedia(const SoraWString& filePath, uint32 width, uint32 height, const SoraString& dis) {
-        if(media) {
-            libvlc_media_release(media);
-        }
-        
-        
+        if(media) { libvlc_media_release(media); }
         media = libvlc_media_new_path(vlcInstance, ws2s(filePath).c_str());
+
         libvlc_media_player_set_media(mp, media);
-                
+        
         libvlc_event_attach(evtManager, libvlc_MediaPlayerPaused, eventHandle, &frameData);
         libvlc_event_attach(evtManager, libvlc_MediaPlayerPlaying, eventHandle, &frameData);
         libvlc_event_attach(evtManager, libvlc_MediaPlayerStopped, eventHandle, &frameData);

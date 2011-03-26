@@ -6,6 +6,7 @@
 #include "SoraSingleton.h"
 
 #include "SoraGUIListener.h"
+#include "SoraGUIResponser.h"
 
 #include <map>
 
@@ -24,16 +25,16 @@ namespace sora {
 //	const int RESPONCE_ALL = RESPONCE_ACTION | RESPONCE_KEY | RESPONCE_DEATH | RESPONCE_FOCUS | RESPONCE_MOUSE;
 
 	class SoraGUI: public SoraSingleton<SoraGUI> {
+        friend class XmlGui;
 		friend class SoraSingleton<SoraGUI>;
-
-	public:
+        
+    public:
 		SoraGUI() {
 			pActionListener = new SoraGUIActionListener;
 			pKeyListener = new SoraGUIKeyListener;
 			pDeathListener = new SoraGUIDeathListener;
 			pFocusListener = new SoraGUIFocusListener;
 			pMouseListener = new SoraGUIMouseListener;
-			pLuaActionListener = new SoraLuaGUIActionListener;
 		}
         
 		void registerGUIResponser(gcn::Widget* pWidget, SoraGUIResponser* pResponser, const SoraString& responserID, int iResponceType) {
@@ -42,19 +43,24 @@ namespace sora {
 			if(iResponceType & RESPONCE_KEY) pWidget->addKeyListener(pKeyListener);
 			if(iResponceType & RESPONCE_MOUSE) pWidget->addMouseListener(pMouseListener);
 			if(iResponceType & RESPONCE_FOCUS) pWidget->addFocusListener(pFocusListener);
+            
 			SoraGUIResponserMap::Instance()->registerResponser(responserID, pResponser);
 		}
         
-		void registerLuaGUIResponser(gcn::Widget* pWidget, const SoraString& sScript) {
-			SoraGUIResponserMap::Instance()->registerLuaResponser((ulong32)pWidget, sScript);
-			pWidget->addActionListener(pLuaActionListener);
-		}
-
-	private:
-		std::map<SoraString, SoraGUIResponser*> responserMap;
-
+        void registerExternalGUIResponser(gcn::Widget* pWidget, SoraGUIResponserExtern* pResponser, const SoraString& responserID, const SoraString& handleSrc, int iResponceType) {
+            if(iResponceType & RESPONCE_ACTION) pWidget->addActionListener(pActionListener);
+			if(iResponceType & RESPONCE_DEATH) pWidget->addDeathListener(pDeathListener);
+			if(iResponceType & RESPONCE_KEY) pWidget->addKeyListener(pKeyListener);
+			if(iResponceType & RESPONCE_MOUSE) pWidget->addMouseListener(pMouseListener);
+			if(iResponceType & RESPONCE_FOCUS) pWidget->addFocusListener(pFocusListener);
+            
+            SoraGUIResponserMap::Instance()->registerHandleSrc((ulong32)pWidget, handleSrc);
+			SoraGUIResponserMap::Instance()->registerExternalResponser(responserID, pResponser);
+        }
+       
+    private:
+        
 		SoraGUIActionListener* pActionListener;
-		SoraLuaGUIActionListener* pLuaActionListener;
 		SoraGUIKeyListener* pKeyListener;
 		SoraGUIDeathListener* pDeathListener;
 		SoraGUIFocusListener* pFocusListener;

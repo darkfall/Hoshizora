@@ -19,6 +19,7 @@
 
 #include "Darklib/FileDlgOsx.h"
 
+#include "SoraLua/SoraLuaObject.h"
 
 class vlcWindow: public sora::SoraWindowInfoBase, public sora::SoraGUIResponser {
 public:
@@ -49,6 +50,9 @@ private:
     
     sora::mpMoviePlayer* mpPlayer;
     sora::SoraVlcMoviePlayer* moviePlayer;
+    
+    sora::SoraLuaObject luaTest;
+
     
     FileDlg* pFileOpener;
 
