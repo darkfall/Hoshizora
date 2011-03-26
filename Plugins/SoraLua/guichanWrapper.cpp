@@ -154,10 +154,10 @@ namespace guiwrapper {
         }
     }
     
-    void removeWidget(ulong32 h, const SoraString& parent) {
+    void removeWidget(ulong32 h) {
         gcn::Widget* w = getWidgetByHandle(h);
         if(w) {
-            GCN_GLOBAL->removeWidget(w, parent);
+            GCN_GLOBAL->removeWidget(w);
         }
     }
     

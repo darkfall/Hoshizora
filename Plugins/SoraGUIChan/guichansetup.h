@@ -109,10 +109,8 @@ namespace sora {
             }
         }
         
-        void removeWidget(gcn::Widget* widget, const SoraString& parent) {
-            gcn::Widget* pParent = findWidget(parent);
-            printf("foudn parent, %s=%llu", parent.c_str(), (ulong32)pParent);
-            
+        void removeWidget(gcn::Widget* widget) {
+            gcn::Widget* pParent = widget->getParent();            
             try {
                 gcn::Container* cont = dynamic_cast<gcn::Container*>(pParent);
                 if(cont != NULL) {
