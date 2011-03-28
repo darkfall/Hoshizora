@@ -60,7 +60,7 @@ namespace sora {
 		void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
 		void setTransformWindowSize(float32 w, float32 h);
-
+        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		
 		ulong32 getMainWindowHandle();
 		SoraWindowInfoBase* getMainWindow();
@@ -71,6 +71,7 @@ namespace sora {
 
 		SoraWString videoInfo();
 		ulong32 getVideoDeviceHandle();
+        void snapshot(const SoraString& path);
 
 		void flush();
 		

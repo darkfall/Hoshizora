@@ -73,6 +73,8 @@ namespace sora {
 		ulong32 getVideoDeviceHandle();
 
 		void flush();
+        
+        void snapshot(const SoraString& path) {}
 
 	private:
 		void applyTransform();

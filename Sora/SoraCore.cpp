@@ -790,5 +790,10 @@ namespace sora {
     void SoraCore::execute(const SoraString& appPath, const SoraString& args) {
         system((appPath+args).c_str());
     }
+    
+    void SoraCore::snapshot(const SoraString& path) {
+        assert(bInitialized == true);
+        return pRenderSystem->snapshot(path);
+    }
 
 } // namespace sora

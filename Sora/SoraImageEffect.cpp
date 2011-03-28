@@ -13,6 +13,10 @@ namespace sora {
 		}
 		
 	}
+    
+    bool SoraImageEffect::finished() {
+        return (states == IMAGE_EFFECT_END || states == IMAGE_EFFECT_NOTSTART);
+    }
 	
 	void SoraImageEffect::start(IMAGE_EFFECT_MODE _mode, float32 time) {
 		effectTime = time;

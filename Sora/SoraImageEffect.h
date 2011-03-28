@@ -76,6 +76,8 @@ namespace sora {
 		void pause();
 		void pauseForTime(float32 t);
 		void resume();
+        
+        bool finished();
 
 		float32 getTime();
 

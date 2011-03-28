@@ -334,5 +334,13 @@ namespace sora{
 	ulong32 SoraHGERenderer::getVideoDeviceHandle() {
 		return pHGE->getVideoDeviceHandle();
 	}
+    
+    void SoraHGERenderer::snapshot(const SoraString& path) {
+        pHGE->System_Snapshot(path.c_str());
+    }
+    
+    void SoraHGERenderer::setViewPoint(float32 x, float32 y, float32 z) {
+        
+    }
 
 } // namespace sora

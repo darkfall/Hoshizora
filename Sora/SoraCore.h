@@ -157,9 +157,9 @@ namespace sora {
 		SoraSoundEffectFile* SORACALL createSoundEffectFile(const SoraWString& se);
         
         
-        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
-        void execute(const SoraString& appPath, const SoraString& args);
-
+        void SORACALL setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
+        void SORACALL execute(const SoraString& appPath, const SoraString& args);
+        void SORACALL snapshot(const SoraString& path);
 		/*
 		 for directX, return (ulong32)(pD3DDevice)
 		 for ogl, just return (ulong32)(this)
