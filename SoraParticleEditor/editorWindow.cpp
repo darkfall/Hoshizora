@@ -627,7 +627,7 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 		SORA->shutDown();
 	}
 
-	if(pXmlParser->parse((const char*)pdata)) {
+	if(pXmlParser->parse((const char*)pdata, size)) {
 		gcn::Widget* pWindow = pXmlParser->getWidget("SoraWindow");
 		GCN_GLOBAL->getTop()->add( pWindow );
 

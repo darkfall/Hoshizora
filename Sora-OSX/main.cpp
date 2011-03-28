@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
 	*/
 	sora->setFPS(60.0);
 	
-	sora->createWindow(new vlcWindow);
+	sora->createWindow(new peMainWindow);
 	sora->start();
 		
 	return 0;

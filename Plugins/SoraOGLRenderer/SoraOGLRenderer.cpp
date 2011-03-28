@@ -173,8 +173,8 @@ namespace sora{
 			pCurTarget->detachFromRender();
             pCurTarget = 0;
         }
-		else
-			glfwSwapBuffers();
+		//else
+		//	glfwSwapBuffers();
 		
 		iFrameStart = 0;
 	}

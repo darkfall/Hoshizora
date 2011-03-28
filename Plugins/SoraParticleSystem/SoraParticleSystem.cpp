@@ -144,7 +144,8 @@ namespace sora {
 					}
 				
 					if( p->fGravity != 0.f ) {
-						rotate(0.f, p->fGravity*dt, 0.f);
+						p->direction.y += p->fGravity*dt;
+                        p->direction.normalize();
 					}
 						
 					if(p->fLinearAcc != 0.f) {
