@@ -215,6 +215,9 @@ namespace sora {
 
 	void SoraCore::shutDown() {
 		//SoraTextureMap::Instance()->Destroy();
+        if(mainWindow)
+            delete mainWindow;
+        
 		if(bHasInput) delete pInput;
 		if(pPluginManager) delete pPluginManager;
 		if(pTimer) delete pTimer;

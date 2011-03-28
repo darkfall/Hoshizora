@@ -180,8 +180,8 @@ namespace sora {
 
 	
 	void SoraSprite::render() {
-		render(getPositionX(), getPositionY());
-	}
+        render(getPositionX(), getPositionY());
+    }
 
 	void SoraSprite::render(float32 x, float32 y) {
 		float32 tx1, ty1, tx2, ty2;

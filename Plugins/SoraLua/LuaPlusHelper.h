@@ -10,14 +10,20 @@ using namespace LuaPlus;
 class LuaConvert
 {
 public:
-	LuaConvert(LuaObject& obj)
-		: refobj(obj)
+	LuaConvert(const LuaObject& obj)
 	{
+        refobj = obj;
 	}
 	operator int()
 	{
 		return refobj.GetInteger();
 	}
+    operator unsigned int() {
+        return refobj.GetInteger();
+    }
+    operator unsigned long() {
+        return refobj.GetInteger();
+    }
 	operator float()
 	{
 		return refobj.GetFloat();
@@ -63,6 +69,103 @@ private:
 };
 
 template<typename Object>
+static	int ConstructorHelperc(LuaState* state, Object* pObj)
+{
+    std::string metaname("MetaClass_");
+    metaname += typeid(Object).name();
+    
+    LuaObject obj = state->BoxPointer(pObj);
+    obj.SetMetaTable(state->GetGlobal(metaname.c_str()));
+    obj.Push();
+    return 1;
+}
+
+template<typename Object, typename A1>
+static	int Constructor1c(LuaState* state)
+{
+    LuaConvert a1 = LuaObject(state, 1);
+    return ConstructorHelperc(state, new Object((A1)a1) );
+}
+
+template<typename Object, typename A1, typename A2>
+static	int Constructor2c(LuaState* state)
+{
+    LuaConvert a1 = LuaObject(state, 1);
+    LuaConvert a2 = LuaObject(state, 2);
+    return ConstructorHelperc(state, new Object((A1)a1, (A2)a2) );
+}
+
+template<typename Object, typename A1, typename A2, typename A3>
+static	int Constructor3c(LuaState* state)
+{
+    LuaConvert a1 = LuaObject(state, 1);
+    LuaConvert a2 = LuaObject(state, 2);
+    LuaConvert a3 = LuaObject(state, 3);
+    return ConstructorHelperc(state, new Object((A1)a1, (A2)a2, (A3)a3) );
+}
+
+template<typename Object, typename A1, typename A2, typename A3, typename A4>
+static	int Constructor4c(LuaState* state)
+{
+    LuaConvert a1 = LuaObject(state, 1);
+    LuaConvert a2 = LuaObject(state, 2);
+    LuaConvert a3 = LuaObject(state, 3);
+    LuaConvert a4 = LuaObject(state, 4);
+    return ConstructorHelperc(state, new Object((A1)a1, (A2)a2, (A3)a3, (A4)a4) );
+}
+
+template<typename Object, typename A1, typename A2, typename A3, typename A4, typename A5>
+static	int Constructor5c(LuaState* state)
+{
+    LuaConvert a1 = LuaObject(state, 1);
+    LuaConvert a2 = LuaObject(state, 2);
+    LuaConvert a3 = LuaObject(state, 3);
+    LuaConvert a4 = LuaObject(state, 4);
+    LuaConvert a5 = LuaObject(state, 5);
+    return ConstructorHelperc(state, new Object((A1)a1, (A2)a2, (A3)a3, (A4)a4, (A5)a5) );
+}
+
+template<typename Object, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
+static	int Constructor6c(LuaState* state)
+{
+    LuaConvert a1 = LuaObject(state, 1);
+    LuaConvert a2 = LuaObject(state, 2);
+    LuaConvert a3 = LuaObject(state, 3);
+    LuaConvert a4 = LuaObject(state, 4);
+    LuaConvert a5 = LuaObject(state, 5);
+    LuaConvert a6 = LuaObject(state, 6);
+    return ConstructorHelperc(state, new Object((A1)a1, (A2)a2, (A3)a3, (A4)a4, (A5)a5), (A6)a6 );
+}
+
+template<typename Object, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7>
+static	int Constructor7c(LuaState* state)
+{
+    LuaConvert a1 = LuaObject(state, 1);
+    LuaConvert a2 = LuaObject(state, 2);
+    LuaConvert a3 = LuaObject(state, 3);
+    LuaConvert a4 = LuaObject(state, 4);
+    LuaConvert a5 = LuaObject(state, 5);
+    LuaConvert a6 = LuaObject(state, 6);
+    LuaConvert a7 = LuaObject(state, 7);
+    return ConstructorHelperc(state, new Object((A1)a1, (A2)a2, (A3)a3, (A4)a4, (A5)a5), (A6)a6, (A7)a7 );
+}
+
+template<typename Object, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8>
+static	int Constructor8c(LuaState* state)
+{
+    LuaConvert a1 = LuaObject(state, 1);
+    LuaConvert a2 = LuaObject(state, 2);
+    LuaConvert a3 = LuaObject(state, 3);
+    LuaConvert a4 = LuaObject(state, 4);
+    LuaConvert a5 = LuaObject(state, 5);
+    LuaConvert a6 = LuaObject(state, 6);
+    LuaConvert a7 = LuaObject(state, 7);
+    LuaConvert a8 = LuaObject(state, 8);
+    return ConstructorHelperc(state, new Object((A1)a1, (A2)a2, (A3)a3, (A4)a4, (A5)a5), (A6)a6, (A7)a7, (A8)a8 );
+}
+
+
+template<typename Object>
 class LuaConstructor
 {
 private:
@@ -83,52 +186,7 @@ public:
 	static	int Constructor(LuaState* state)
 	{
 		return ConstructorHelper(state, new Object());
-	}
-
-	template<typename A1>
-		static	int Constructor(LuaState* state)
-	{
-		LuaConvert a1 = LuaObject(state, 1);
-		return ConstructorHelper(state, new Object((A1)a1) );
-	}
-
-	template<typename A1, typename A2>
-		static	int Constructor(LuaState* state)
-	{
-		LuaConvert a1 = LuaObject(state, 1);
-		LuaConvert a2 = LuaObject(state, 2);
-		return ConstructorHelper(state, new Object((A1)a1, (A2)a2) );
-	}
-
-	template<typename A1, typename A2, typename A3>
-		static	int Constructor(LuaState* state)
-	{
-		LuaConvert a1 = LuaObject(state, 1);
-		LuaConvert a2 = LuaObject(state, 2);
-		LuaConvert a3 = LuaObject(state, 3);
-		return ConstructorHelper(state, new Object((A1)a1, (A2)a2, (A3)a3) );
-	}
-
-	template<typename A1, typename A2, typename A3, typename A4>
-		static	int Constructor(LuaState* state)
-	{
-		LuaConvert a1 = LuaObject(state, 1);
-		LuaConvert a2 = LuaObject(state, 2);
-		LuaConvert a3 = LuaObject(state, 3);
-		LuaConvert a4 = LuaObject(state, 4);
-		return ConstructorHelper(state, new Object((A1)a1, (A2)a2, (A3)a3, (A4)a4) );
-	}
-
-	template<typename A1, typename A2, typename A3, typename A4, typename A5>
-		static	int Constructor(LuaState* state)
-	{
-		LuaConvert a1 = LuaObject(state, 1);
-		LuaConvert a2 = LuaObject(state, 2);
-		LuaConvert a3 = LuaObject(state, 3);
-		LuaConvert a4 = LuaObject(state, 4);
-		LuaConvert a5 = LuaObject(state, 5);
-		return ConstructorHelper(state, new Object((A1)a1, (A2)a2, (A3)a3, (A4)a4, (A5)a5) );
-	}
+    }
 
 	static int Destructor(LuaState* state)
 	{
@@ -176,37 +234,55 @@ public:
 		luaGlobals.Register(name, LuaConstructor<Object>::Constructor);
 		return *this;
 	}
-/*
+
 	template<typename A1>
-		inline LuaClass& create(const char* name)
+        LuaClass& create(const char* name)
 	{
-		luaGlobals.Register(name, LuaConstructor<Object>::Constructor<A1>);
+		luaGlobals.Register(name, Constructor1c<Object, A1>);
 		return *this;
 	}
 	template<typename A1, typename A2>
-		inline LuaClass& create(const char* name)
+        LuaClass& create(const char* name)
 	{
-		luaGlobals.Register(name, LuaConstructor<Object>::Constructor<A1, A2>);
+		luaGlobals.Register(name, Constructor2c<Object, A1, A2>);
 		return *this;
 	}
 	template<typename A1, typename A2, typename A3>
-		inline LuaClass& create(const char* name)
+        LuaClass& create(const char* name)
 	{
-		luaGlobals.Register(name, LuaConstructor<Object>::Constructor<A1, A2, A3>);
+		luaGlobals.Register(name, Constructor3c<Object, A1, A2, A3>);
 		return *this;
 	}
 	template<typename A1, typename A2, typename A3, typename A4>
-		inline LuaClass& create(const char* name)
+        LuaClass& create(const char* name)
 	{
-		luaGlobals.Register(name, LuaConstructor<Object>::Constructor<A1, A2, A3, A4>);
+		luaGlobals.Register(name, Constructor4c<Object, A1, A2, A3, A4>);
 		return *this;
 	}
 	template<typename A1, typename A2, typename A3, typename A4, typename A5>
-		inline LuaClass& create(const char* name)
+        LuaClass& create(const char* name)
 	{
-		luaGlobals.Register(name, LuaConstructor<Object>::Constructor<A1, A2, A3, A4, A5>);
+		luaGlobals.Register(name, Constructor5c<Object, A1, A2, A3, A4, A5>);
 		return *this;
-	}*/
+	}
+    template<typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
+    LuaClass& create(const char* name)
+	{
+		luaGlobals.Register(name, Constructor6c<Object, A1, A2, A3, A4, A5, A6>);
+		return *this;
+	}
+    template<typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7>
+    LuaClass& create(const char* name)
+	{
+		luaGlobals.Register(name, Constructor7c<Object, A1, A2, A3, A4, A5, A6, A7>);
+		return *this;
+	}
+    template<typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8>
+    LuaClass& create(const char* name)
+	{
+		luaGlobals.Register(name, Constructor8c<Object, A1, A2, A3, A4, A5, A6, A7, A8>);
+		return *this;
+	}
 	inline LuaClass& destroy(const char* name)
 	{
 		metaTableObj.Register(name, LuaConstructor<Object>::Destructor);

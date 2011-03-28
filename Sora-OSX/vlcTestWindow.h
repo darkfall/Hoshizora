@@ -55,7 +55,7 @@ private:
 
     
     FileDlg* pFileOpener;
-
+    
     sora::SoraSprite* pSpr;
     sora::SoraTexture* pTex;
     sora::SoraFont* pFont;

@@ -11,25 +11,29 @@
 #define SORA_PLUGIN_H
 
 #include "SoraPlatform.h"
+#include "uncopyable.h"
 
 namespace sora {
 
-	class SoraPlugin {
+	class SoraPlugin: public uncopyable {
 	public:	
+        SoraPlugin() {}
+        virtual ~SoraPlugin() {}
+        
 		// calls when install a plugin
-		virtual void install() = 0;
+		virtual void install() {}
 	
 		// calls when initialise a plugin
-		virtual void initialise() = 0;
+		virtual void initialise() {}
 	
 		// calls when shutdown a plugin
-		virtual void shutdown() = 0;
+		virtual void shutdown() {}
 
 		// calls when unistsall a plugin
-		virtual void unistall() = 0;
+		virtual void unistall() {}
 		
 		// calls every frame
-		virtual void update() = 0;
+		virtual void update() {}
 	
 		virtual const SoraString getName() const = 0;
 	};

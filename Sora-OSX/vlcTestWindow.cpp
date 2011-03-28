@@ -82,7 +82,8 @@ void vlcWindow::action() {
 }
 
 bool vlcWindow::renderFunc() {
-    sora::SORA->beginScene();
+    ulong32 targ = sora::SORA->createTarget(getWindowWidth(), getWindowHeight(), false);
+    sora::SORA->beginScene(0x00000000, targ);
     
     pFont->print(0.f, getWindowHeight()-50.f, sora::FONT_ALIGNMENT_LEFT, L"SoraCoreRenderFPS: %f, VideoFPS: %f", sora::SORA->getFPS(), moviePlayer->getFPS());
     pFont->print(0.f, getWindowHeight()-30.f, sora::FONT_ALIGNMENT_LEFT, L"FrameCount: %d", moviePlayer->getFrameCount());
@@ -125,16 +126,26 @@ bool vlcWindow::renderFunc() {
             pSpr->render(getWindowWidth()/2, 0.f);
         }
     } else if(pSpr) {
-        pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
+         pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
         pSpr->render(getWindowWidth()/2, 0.f);
     }
 
-    luaTest.render();
+   // luaTest.render();
     
     sora::GCN_GLOBAL->gcnDraw();
-    
-    
     sora::SORA->endScene();
+    
+    sora::SoraSprite* ptest = new sora::SoraSprite((sora::SoraTexture*)(sora::SORA->getTargetTexture(targ)));
+    sora::SORA->beginScene();
+    ptest->render();
+    if(pSpr) {
+        pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
+        pSpr->render(getWindowWidth()/2, 0.f);
+    }
+    sora::SORA->endScene();
+    
+    delete ptest;
+    sora::SORA->freeTarget(targ);
    
     return false;
 }

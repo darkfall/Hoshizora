@@ -13,7 +13,8 @@
 
 class uncopyable {
 public:
-	virtual uncopyable() {}
+    uncopyable() {}
+	virtual ~uncopyable() {}
 	
 private:
 	uncopyable& operator=(const uncopyable&);

@@ -13,7 +13,7 @@ namespace sora {
 
 	class SoraCore;
 	
-#define SPRITE_TYPE 0x00000001
+#define SPRITE_TYPE 0x00000010
 
 	#define	BLEND_COLORADD		1
 	#define	BLEND_COLORMUL		0

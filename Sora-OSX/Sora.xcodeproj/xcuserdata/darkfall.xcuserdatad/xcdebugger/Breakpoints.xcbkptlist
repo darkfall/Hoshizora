@@ -371,11 +371,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "322802143.996507"
+         timestampString = "322911381.602927"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "172"
-         endingLineNumber = "172"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
          landmarkName = "vlcWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -420,6 +420,20 @@
          endingLineNumber = "37"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "vlcTestWindow.cpp"
+         timestampString = "322911381.602927"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "161"
+         endingLineNumber = "161"
+         landmarkName = "vlcWindow::_loadGUI()"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

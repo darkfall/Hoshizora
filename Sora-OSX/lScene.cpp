@@ -34,11 +34,11 @@ namespace projl {
 		sora::SoraObject::SUB_OBJECT_LIST objs = getObjList();
 		sora::SoraObject::SUB_OBJECT_LIST::iterator itObj = objs.begin();
 		while(itObj != objs.end()) {
-			if(itObj->pointer()->getType() == SPRITE_TYPE) {
-				sora::SoraSprite* pspr = (sora::SoraSprite*)itObj->pointer();
+			if((*itObj)->getType() == SPRITE_TYPE) {
+				sora::SoraSprite* pspr = (sora::SoraSprite*)(*itObj);
 				pspr->setScale((float32)sceneRect.x2/pspr->getSpriteWidth(), (float32)sceneRect.y2/pspr->getSpriteHeight());
 			}
-			itObj->pointer()->render();
+			(*itObj)->render();
 			++itObj;
 		}
 	}
@@ -47,7 +47,7 @@ namespace projl {
 		sora::SoraObject::SUB_OBJECT_LIST objs = getObjList();
 		sora::SoraObject::SUB_OBJECT_LIST::iterator itObj = objs.begin();
 		while(itObj != objs.end()) {
-			itObj->pointer()->update(dt);
+			(*itObj)->update(dt);
 			++itObj;
 		}
 		return 0;

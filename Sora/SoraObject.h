@@ -17,8 +17,8 @@ namespace sora {
 	class SoraObject: public SoraEventHandler {
 	public:
 		typedef SoraObject* PSORAOBJECT;
-		typedef SoraAutoPtr<SoraObject> AP_OBJECT;
-		typedef std::list<SoraAutoPtr<SoraObject> > SUB_OBJECT_LIST;
+		typedef SoraObject* AP_OBJECT;
+		typedef std::list<AP_OBJECT> SUB_OBJECT_LIST;
 		
 		SoraObject();
 		virtual ~SoraObject();
@@ -29,13 +29,14 @@ namespace sora {
 		virtual void	add(AP_OBJECT pobj);
 		virtual void	del(AP_OBJECT pobj);
 		
-		void setPosition(float32 _x, float32 _y);
-		void getPosition(float32& _x, float32& _y);
-		float32 getPositionX();
-		float32 getPositionY();
+		virtual void setPosition(float32 _x, float32 _y);
+		virtual void getPosition(float32& _x, float32& _y);
+		virtual float32 getPositionX() const;
+		virtual float32 getPositionY() const;
 		
 		SUB_OBJECT_LIST getObjList();
 		AP_OBJECT getParent() const;
+        void setParent(AP_OBJECT obj);
 				
 		AP_OBJECT getObjByName(const SoraString& n);
 		

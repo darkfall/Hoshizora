@@ -4,61 +4,73 @@
 #include "SoraPlatform.h"
 #include "SoraException.h"
 #include "SoraSingleton.h"
+#include "SoraPlugin.h"
+#include "SoraCore.h"
 
 #include "Box2D/Box2D.h"
 
 namespace sora {
 
 #define SORA_PHYSICAL_DEFAULT_GRAVITY_X 0.f
-#define SORA_PHYSICAL_DEFAULT_GRAVITY_Y 1.f
-
-#define SORA_BOX2D_SCALAR 100
-
-	inline float32 pixel2b2cor(float32 px) {
-		return px / SORA_BOX2D_SCALAR;
-	}
-
-	inline float32 b2cor2pixel(float32 cor) {
-		return cor * SORA_BOX2D_SCALAR;
-	}
-
-	inline b2Vec2 pixel2b2cor(b2Vec2& px) {
-		return b2Vec2(px.x / SORA_BOX2D_SCALAR, px.y / SORA_BOX2D_SCALAR);
-	}
-
-	inline b2Vec2 b2cor2pixel(b2Vec2& cor) {
-		return b2Vec2(cor.x * SORA_BOX2D_SCALAR, cor.y * SORA_BOX2D_SCALAR);
-	}
+#define SORA_PHYSICAL_DEFAULT_GRAVITY_Y 1.f	
 
 	class SoraPhysicalWorld: public SoraSingleton<SoraPhysicalWorld> {
 		friend class SoraSingleton<SoraPhysicalWorld>;
+        
+        class SoraPhysicalWorldPlugin: public SoraPlugin {
+        public:
+            SoraPhysicalWorldPlugin() {}
+            ~SoraPhysicalWorldPlugin() {}
+            
+            void update() {
+                SoraPhysicalWorld::Instance()->setFrameTime(SORA->getDelta());
+                SoraPhysicalWorld::Instance()->stepWorld();
+            }
+            
+            const SoraString getName() const { return "PhysicalWorld"; }
+        };
 		
-		SoraPhysicalWorld(): velocityIteration(10), positionIteration(8), bInitialized(false) {}
-		~SoraPhysicalWorld() {}
+		SoraPhysicalWorld(): velocityIteration(10), positionIteration(8), bInitialized(false), bPluginInstalled(false), coordScalar(100), physicalWorld(NULL) {}
+		~SoraPhysicalWorld() { SORA->unistallPluginS("PhysicalWorld"); }
 
 	public:
-		void InitBox2DWorld(b2Vec2 gravity, bool doSleep=true);
+		void initBox2DWorld(b2Vec2 gravity, bool doSleep=true);
 
-		b2Vec2 GetGravity() { return worldGravity; }
+		b2Vec2 getGravity() { return worldGravity; }
 
-		b2World* GetCurrentWorld() { return physicalWorld; }
+		b2World* getCurrentWorld() { return physicalWorld; }
+        b2Body* getBodyList();
 
 		// frametime would get automatically form coretimer
 		// iterations default is 10, 8
-		void StepWorld();
+		void stepWorld();
 
-		void StepWorldEx(float32 dt, int32 vIteration, int32 pIteration);
-		void SetFrameTime(float32 ft) { dt = ft; }
+		void stepWorldEx(float32 dt, int32 vIteration, int32 pIteration);
+		void setFrameTime(float32 ft) { dt = ft; }
 
 		// create a dynamic body
-		b2Body* CreateBody(float32 px, float32 py, const b2Shape& box, bool isDynamic, float density=1.f);
-		b2Body* CreateBody(float32 px, float32 py, bool bDynamicBody);
-		b2Body* CreateBody(const b2BodyDef& bodyDef, const b2FixtureDef& fixtureDef);
+		b2Body* createBody(float32 px, float32 py, const b2Shape& box, bool isDynamic, float32 density=1.f, float32 friction=0.2f);
+		b2Body* createBody(float32 px, float32 py, bool bDynamicBody);
+		b2Body* createBody(const b2BodyDef& bodyDef, const b2FixtureDef& fixtureDef);
 
-		void CreateJoint(const b2JointDef& jdef);
+		void createJoint(const b2JointDef& jdef);
 
 		void destroyBody(b2Body* body);
 		void destroyJoint(b2Joint* joint);
+        
+        void setScalar(int32 scalar) { coordScalar = scalar; }
+        int32 getScalar() { return coordScalar; }
+        
+        inline float32 pixel2b2cor(float32 px) { return px / coordScalar; }
+        inline float32 b2cor2pixel(float32 cor) { return cor * coordScalar; }
+        inline b2Vec2 pixel2b2cor(b2Vec2& px) { return b2Vec2(px.x / coordScalar, px.y / coordScalar); }
+        inline b2Vec2 b2cor2pixel(b2Vec2& cor) { return b2Vec2(cor.x * coordScalar, cor.y * coordScalar); }
+        
+        // wrappers to help build shapes fast
+        b2PolygonShape generateBox(float32 w, float32 h, float32 cx=0.f, float32 cy=0.f, float32 rot=0.f);
+        b2CircleShape generateCircle(float32 r);
+        b2PolygonShape generatePolygen(b2Vec2* vertices, size_t count);
+        b2PolygonShape generateEdge(float32 v1, float32 v2, float32 v3, float32 v4);
 
 	private:
 		b2World* physicalWorld;
@@ -69,9 +81,16 @@ namespace sora {
 		float32 dt;
 
 		b2Vec2 worldGravity;
+        
+        int32 coordScalar;
 
 		bool bInitialized;
+        bool bPluginInstalled;
+        
+        SoraPhysicalWorldPlugin plugin;
 	};
+    
+#define PHYSICAL_WORLD SoraPhysicalWorld::Instance()
 
 } // namespace sora
 

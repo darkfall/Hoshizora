@@ -14,7 +14,7 @@ namespace sora {
 	uint32 SoraObject::update(float32 dt){
 		SUB_OBJECT_LIST::iterator itObj = subobjs.begin();
 		while(itObj != subobjs.end()) {
-			itObj->pointer()->update(dt);
+			(*itObj)->update(dt);
 			++itObj;
 		}
 	
@@ -24,7 +24,7 @@ namespace sora {
 	void SoraObject::render() {
 		SUB_OBJECT_LIST::iterator itObj = subobjs.begin();
 		while(itObj != subobjs.end()) {
-			itObj->pointer()->render();
+			(*itObj)->render();
 			++itObj;
 		}
 	}
@@ -35,21 +35,30 @@ namespace sora {
 	}
 	
 	void SoraObject::getPosition(float32& _x, float32& _y) {
-		_x = posx;
-		_y = posy;
+		_x = getPositionX();
+		_y = getPositionY();
 	}
 	
-	float32 SoraObject::getPositionX() {
-		return posx;
+	float32 SoraObject::getPositionX() const {
+        if(!parent)
+            return posx;
+        return posx+parent->getPositionX();
 	}
 	
-	float32 SoraObject::getPositionY() {
-		return posy;
+	float32 SoraObject::getPositionY() const {
+        if(!parent)
+            return posy;
+        return posx+parent->getPositionY();
 	}
 
 	void SoraObject::add(AP_OBJECT o){
 		subobjs.push_back(o);
+        o->parent = this;
 	}
+    
+    void SoraObject::setParent(AP_OBJECT o) {
+        this->parent = o;
+    }
 /*
 void SoraObject::addlua(LuaPlus::LuaObject p) {
 	if(p.IsUserData()) {
@@ -59,6 +68,7 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 
 	void SoraObject::del(AP_OBJECT o){
 		subobjs.remove(o);
+        o->parent = 0;
 	}
 	
 	SoraObject::SUB_OBJECT_LIST SoraObject::getObjList() {
@@ -77,11 +87,11 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 		SUB_OBJECT_LIST::iterator itObj = subobjs.begin();
 		stringId id = str2id(n);
 		while(itObj != subobjs.end()) {
-			if(itObj->pointer()->getName() == id)
+			if((*itObj)->getName() == id)
 				return *itObj;
 			++itObj;
 		}
-		return AP_OBJECT();
+		return NULL;
 	}
 	
 

@@ -18,7 +18,10 @@ namespace sora {
     public:
         virtual ~SoraMoviePlayer() {}
         
-        virtual void openMedia(const SoraWString& filePath, uint32 width, uint32 height, const SoraString& dis="RGBA") {}
+        /* @param width and height are hack for vlc
+         to be solved
+         */
+        virtual void openMedia(const SoraWString& filePath, uint32 width=0, uint32 height=0, const SoraString& dis="RGBA") {}
         virtual void play() {}
         virtual void stop() {}
         virtual void pause() {}
@@ -32,6 +35,12 @@ namespace sora {
         virtual void setTime(s_int64 newtime) {}
         virtual s_int64 getTime() const { return 0; }
 
+        virtual bool isStopped() const { return false; }
+        virtual bool isPlaying() const { return false; }
+        virtual bool isPaused() const { return false; }
+        
+        virtual float32 getPlayRate() const { return 0.f; }
+        virtual void setPlayRate(float32 rate) {}
         
         virtual s_int64 getLength() const { return 0; }
         virtual float getFPS() const { return 0.f; }

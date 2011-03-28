@@ -26,7 +26,7 @@ namespace sora {
     static void unlock(void* data, void* id, void* const* pixels) {
         SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
         ctx->bChanged = true;
-        memcpy(ctx->dummy, ctx->pixels, ctx->videoWidth*ctx->videoHeight*4);
+        memcpy(ctx->dummy, ctx->pixels, ctx->pPlayer->getWidth()*ctx->pPlayer->getHeight()*4);
     }
     
     static void display(void* data, void* id) {
@@ -75,15 +75,15 @@ namespace sora {
     void SoraVlcMoviePlayer::openMedia(const SoraWString& filePath, uint32 width, uint32 height, const SoraString& dis) {
         if(media) { libvlc_media_release(media); }
         media = libvlc_media_new_path(vlcInstance, ws2s(filePath).c_str());
-
         libvlc_media_player_set_media(mp, media);
+        libvlc_media_release(media);
         
         libvlc_event_attach(evtManager, libvlc_MediaPlayerPaused, eventHandle, &frameData);
         libvlc_event_attach(evtManager, libvlc_MediaPlayerPlaying, eventHandle, &frameData);
         libvlc_event_attach(evtManager, libvlc_MediaPlayerStopped, eventHandle, &frameData);
         libvlc_event_attach(evtManager, libvlc_MediaPlayerEndReached, eventHandle, &frameData);
+        libvlc_event_attach(evtManager, libvlc_MediaPlayerPositionChanged, eventHandle, &frameData);
 
-                
         setMediaInfo(width, height);
 
         libvlc_video_set_format(mp, dis.c_str(), frameData.videoWidth, frameData.videoHeight, frameData.videoWidth*4);

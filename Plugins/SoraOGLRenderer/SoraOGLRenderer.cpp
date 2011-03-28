@@ -154,6 +154,8 @@ namespace sora{
 			pCurTarget = (SoraRenderTargetOG*)t;
 			width = pCurTarget->w;
 			height = pCurTarget->h;
+            
+            applyTransform();
 		} else pCurTarget = 0;
 
 		if(pCurTarget) pCurTarget->attachToRender();
@@ -166,11 +168,13 @@ namespace sora{
 
 	void SoraOGLRenderer::_glEndScene() {
 		flush();
-		//glFlush();
-		if(pCurTarget)
+		if(pCurTarget) {
+            glFlush();
 			pCurTarget->detachFromRender();
-		//else
-		//	glfwSwapBuffers();
+            pCurTarget = 0;
+        }
+		else
+			glfwSwapBuffers();
 		
 		iFrameStart = 0;
 	}
@@ -646,10 +650,6 @@ namespace sora{
 			rect.x3 = x2; rect.y3 = y2;
 			rect.x4 = x1; rect.y4 = y2;
 		}
-//		pLineSprite->setColor(color);
-//		pLineSprite->setZ(z);
-//		pLineSprite->render4V(rect.x1, rect.y1, rect.x2, rect.y2, rect.x3, rect.y3, rect.x4, rect.y4);
-
 		sora::SoraQuad quad;
 
         quad.tex = NULL;
@@ -758,7 +758,6 @@ namespace sora{
 	ulong32 SoraOGLRenderer::getTargetTexture(ulong32 t) {
 		SoraRenderTarget* pt = (SoraRenderTarget*)t;
 		if(!pt) return 0;
-		pt->stex;
 		return (ulong32)pt->stex;
 	}
 

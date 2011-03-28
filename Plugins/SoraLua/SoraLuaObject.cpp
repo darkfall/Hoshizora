@@ -22,9 +22,9 @@ namespace sora {
 
 		luaopen_pluto(luaState->GetCState());
 
-		//setType(OBJ_LUA);
 		//LuaStateRefMap[(ulong32)luaState] = 1;
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
+        setType(OBJ_LUA);
 	}
 
 	SoraLuaObject::SoraLuaObject(const SoraWString& scriptPath) {
@@ -39,19 +39,19 @@ namespace sora {
 
 		luaopen_pluto(luaState->GetCState());
 
-		//setType(OBJ_LUA);
 		//LuaStateRefMap[(ulong32)luaState] = 1;
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
-        
+        setType(OBJ_LUA);
+
         doScript(scriptPath);
 	}
 
 	SoraLuaObject::SoraLuaObject(LuaState* state) {
 		luaState = state;
-		LuaStateRefMap[(ulong32)luaState] = 1;
+		//LuaStateRefMap[(ulong32)luaState] = 1;
 		if(!luaState)
 			throw SORA_EXCEPTION("error creating LuaState");
-		//setType(OBJ_LUA);
+		setType(OBJ_LUA);
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
 	}
 

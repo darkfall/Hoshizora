@@ -68,7 +68,6 @@ namespace sora {
             .def("log", &SoraCore::log)
             .def("execute", &SoraCore::execute)
             .def("setFrameSync", &SoraCore::setFrameSync);
-            //.def("getCurrentSystemTime", &SoraCore::getCurrentSystemTime);
 		}
         
 
