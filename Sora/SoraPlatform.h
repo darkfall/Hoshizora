@@ -29,6 +29,23 @@ using __gnu_cxx::hash_map;
 using std::hash_map;
 #endif
 
+#ifndef __GNUC__
+
+static inline int lrint (double const x) { // Round to nearest integer
+    int n; 
+#if defined(__unix__) || defined(__GNUC__)
+    // 32-bit Linux, Gnu/AT&T syntax:
+    __asm ("fldl %1 \n fistpl %0 " : "=m"(n) : "m"(x) : "memory" ); 
+#else
+    // 32-bit Windows, Intel/MASM syntax: 
+    __asm fld qword ptr x; 
+    __asm fistp dword ptr n;
+#endif 
+    return n;
+}
+
+#endif
+
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
@@ -132,7 +149,6 @@ typedef std::wstring SoraWString;
 	#define OS_ANDROID
 
 #elif defined(WIN32)
-	#define USE_AUDIERE
 	#define FONT_PATH L"C:/Windows/Fonts"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 

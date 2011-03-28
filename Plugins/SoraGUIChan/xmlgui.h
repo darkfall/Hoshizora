@@ -29,6 +29,9 @@ parse for gcn::ImageButton
 
 #include <map>
 
+class XmlGui;
+typedef void (*parseFunc)(TiXmlElement* element, gcn::Widget* widget, XmlGui* pcaller);
+
 //!XmlGui class for loading gui widget from xml file
 class XmlGui
 {
@@ -127,19 +130,23 @@ public:
 	//@param name the font name
 	//@param al the pointer to font class
 	void addFont(const std::string &name,gcn::Font *font);
+    
+    //!adding widget to parent
+	//!parent widget can be Container,ScrollArea,Window. this function get class and set widget or add widget (for Container)
+	//@param widget our widget
+	//@param parent the parent widget
+	void addToParent(gcn::Widget *widget, gcn::Widget *parent);
 
 	
+    void registerParseFunc(const std::string& name, parseFunc func);
+    
 private:
 	//!parse xml node
 	//@param element - xml element
 	//@param parent - the parent widget
 	void parseWidgets(TiXmlElement *element, gcn::Widget *parent);
 
-	//!adding widget to parent
-	//!parent widget can be Container,ScrollArea,Window. this function get class and set widget or add widget (for Container)
-	//@param widget our widget
-	//@param parent the parent widget
-	void addToParent(gcn::Widget *widget, gcn::Widget *parent);
+	
 
 	//!check string value for boolean value
 	//@param value the string value
@@ -150,6 +157,8 @@ private:
 	std::map<std::string,gcn::Widget*> widgets;
 	std::map<std::string,gcn::ActionListener*> actions;
 	std::map<std::string,gcn::Font*> fonts;
+    
+    std::map<std::string,parseFunc> externParseFuncs;
 
 	//temporary xml document (need by some functions)
 	TiXmlDocument *doc;

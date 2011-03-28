@@ -140,7 +140,7 @@ uint32 lZipPackLoader::getData(void* pDataIn, void* pDataOut, LPACKER_NODE node)
 	
     (void)inflateEnd(&strm);
 	
-	printf("insize: %d, totalsize: %d, totalIn: %d, totalOut: %d\n", node.size, strm.total_out, totalIn, totalOut);
+	printf("insize: %d, totalsize: %lu, totalIn: %d, totalOut: %d\n", node.size, strm.total_out, totalIn, totalOut);
     return strm.total_out;
 }
 

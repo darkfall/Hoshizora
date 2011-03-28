@@ -14,10 +14,7 @@ XmlGui::XmlGui()
 
 bool XmlGui::parse(const std::string &filename)
 {
-	TiXmlElement *element = NULL;
-	TiXmlNode *node = NULL;
-    
-    ulong32 size;
+   ulong32 size;
     void* pdata = sora::SORA->getResourceFile(sora::s2ws(filename), size);
     if(pdata) {
         bool result = parse((char*)pdata, size);
@@ -116,6 +113,12 @@ void XmlGui::parseWidgets(TiXmlElement *element, gcn::Widget *parent)
 		parseDropdown(element,parent);
 	else if(value == "listbox")
 		parseListbox(element,parent);
+    else {
+        std::map<std::string,parseFunc>::iterator itExternFunc = externParseFuncs.find(value);
+        if(itExternFunc != externParseFuncs.end()) {
+            itExternFunc->second(element, parent, this);
+        }
+    }
 }
 
 int parseRespondType(const char* respondStr) {
@@ -948,6 +951,10 @@ gcn::Widget *XmlGui::getWidget(const std::string &name)
 	}
 
 	return widgets[name];
+}
+
+void XmlGui::registerParseFunc(const std::string& name, parseFunc func) {
+    externParseFuncs[name] = func;
 }
 
 bool XmlGui::checkBool(const std::string &value)
