@@ -7,7 +7,6 @@
 
 #include "../../SoraParticleEditor/editorWindow.h"
 
-
 class peMainWindow: public sora::SoraWindowInfoBase {
 	
 	bool updateFunc() { 

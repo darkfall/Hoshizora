@@ -104,6 +104,11 @@ namespace sora {
                     wind->add(widget);
                     return;
                 }
+                gcn::ScrollArea* scroll = dynamic_cast<gcn::ScrollArea*>(pParent);
+                if(scroll) {
+                    scroll->setContent(widget);
+                    return;
+                }
             } catch(gcn::Exception& exp) {
                 SORA->log("guilib exception: "+exp.getMessage());
             }
@@ -120,6 +125,11 @@ namespace sora {
                 gcn::Window* wind = dynamic_cast<gcn::Window*>(pParent);
                 if(wind != NULL) {
                     wind->remove(widget);
+                    return;
+                }
+                gcn::ScrollArea* scroll = dynamic_cast<gcn::ScrollArea*>(pParent);
+                if(scroll) {
+                    scroll->setContent(NULL);
                     return;
                 }
             } catch(gcn::Exception& exp) {

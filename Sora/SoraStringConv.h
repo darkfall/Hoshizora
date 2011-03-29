@@ -37,7 +37,6 @@ namespace sora {
 	template<typename T>
 	std::wstring anyToWString(const T& t, int precision=3);
 	
-	
 	// 純英文字符串限定
 	std::string ws2s2(const std::wstring& ws);
 	std::wstring s2ws2(const std::string& s);	

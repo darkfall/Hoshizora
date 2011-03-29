@@ -125,6 +125,12 @@ typedef std::wstring SoraWString;
 #define SORACALL
 #endif
 
+#if defined(WIN32)
+#define strcmpnocase stricmp
+#else
+#define strcmpnocase strcasecmp
+#endif
+
 #if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 	#define FONT_PATH L"/System/Library/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"

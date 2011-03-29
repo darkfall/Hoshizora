@@ -385,11 +385,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "322798118.389239"
+         timestampString = "323057376.870689"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
@@ -399,25 +399,25 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "322798118.389239"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "38"
-         endingLineNumber = "38"
-         landmarkName = "main(int argc, char* argv[])"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "main.cpp"
-         timestampString = "322798118.389239"
+         timestampString = "323057376.870689"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "37"
          endingLineNumber = "37"
+         landmarkName = "main(int argc, char* argv[])"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "main.cpp"
+         timestampString = "323057376.870689"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "36"
+         endingLineNumber = "36"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
@@ -434,6 +434,20 @@
          endingLineNumber = "161"
          landmarkName = "vlcWindow::_loadGUI()"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "main.cpp"
+         timestampString = "323057376.870689"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "main(int argc, char* argv[])"
+         landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

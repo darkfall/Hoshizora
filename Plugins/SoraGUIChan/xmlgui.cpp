@@ -7,6 +7,8 @@
 #include "SoraStringConv.h"
 #include "SoraPlatform.h"
 
+namespace sora {
+
 XmlGui::XmlGui()
 {
 	
@@ -14,7 +16,7 @@ XmlGui::XmlGui()
 
 bool XmlGui::parse(const std::string &filename)
 {
-   ulong32 size;
+    ulong32 size;
     void* pdata = sora::SORA->getResourceFile(sora::s2ws(filename), size);
     if(pdata) {
         bool result = parse((char*)pdata, size);
@@ -232,13 +234,12 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 		widget->setBackgroundColor(gcn::Color(color));
 	}
 
-
-/*	if(element->Attribute("border"))
+	if(element->Attribute("framesize"))
 	{
-		int b = atoi(element->Attribute("bordersize")->c_str());
-		widget->setBorderSize(b);
+		int b = atoi(element->Attribute("framesize")->c_str());
+		widget->setFrameSize(b);
 	}
-	*/
+	
 	if(element->Attribute("font"))
 	{
 		if(fonts.find(*element->Attribute("font")) != fonts.end())
@@ -985,3 +986,4 @@ std::string XmlListModel::getElementAt(int i)
 	return items[i];
 }
 
+} //namespace sora

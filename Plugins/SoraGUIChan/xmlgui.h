@@ -29,6 +29,8 @@ parse for gcn::ImageButton
 
 #include <map>
 
+namespace sora {
+
 class XmlGui;
 typedef void (*parseFunc)(TiXmlElement* element, gcn::Widget* widget, XmlGui* pcaller);
 
@@ -171,6 +173,8 @@ public:
     virtual std::string getElementAt(int i);
 	std::vector<std::string> items;
 };
+    
+} // namespace sora
 
 #endif
 

@@ -20,7 +20,7 @@ sora::SoraParticleSystem* peffect;
 
 
 #include "SoraGUIChan/xmlgui.h"
-XmlGui* pXmlParser;
+sora::XmlGui* pXmlParser;
 
 gcn::Slider* slMinSpeed;
 gcn::Slider* slMaxSpeed;
@@ -601,8 +601,6 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
                                        atoi(pushRectCt[1].c_str()),
                                        atoi(pushRectCt[2].c_str()),
                                        atoi(pushRectCt[3].c_str())));
-            printf("%s, rr%d, %d\n", element->Attribute("image")->c_str(), atoi(normRectCt[0].c_str()), 
-                   atoi(normRectCt[1].c_str()));
         }
         caller->parseDefaults(element, button);
         

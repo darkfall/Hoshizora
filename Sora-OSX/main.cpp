@@ -32,7 +32,6 @@
 
 #include "SoraParticleEditor/peMainWindow.h"
 
-
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();
 	sora::SoraCore* sora = sora::SoraCore::Instance();
@@ -48,6 +47,7 @@ int main(int argc, char* argv[]) {
 		sora->shutDown();
 	}
 	sora->attachResourcePack(res);
+
 	/*
 	{
 		sora::SoraMemoryFile file1(L"box.png");

@@ -132,6 +132,10 @@
 		889BFD4A12BF4D23002D8A2F /* graphicEffects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 889BFD4412BF4D23002D8A2F /* graphicEffects.cpp */; };
 		889BFD4B12BF4D23002D8A2F /* SoraImageEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */; };
 		88A6042212B97E0800E23EA3 /* rfMainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A6042112B97E0800E23EA3 /* rfMainWindow.cpp */; };
+		88AD7F6E13415856000F4F68 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AD7F6713415856000F4F68 /* json_reader.cpp */; };
+		88AD7F6F13415856000F4F68 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AD7F6813415856000F4F68 /* json_value.cpp */; };
+		88AD7F7013415856000F4F68 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AD7F6A13415856000F4F68 /* json_writer.cpp */; };
+		88AD7F7413415997000F4F68 /* jsongui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AD7F7213415997000F4F68 /* jsongui.cpp */; };
 		88B090F212B815C100777409 /* rfMapRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B090F112B815C100777409 /* rfMapRenderer.cpp */; };
 		88B0911812B817A700777409 /* rfMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B0911612B817A700777409 /* rfMap.cpp */; };
 		88B09C6D12B8AE6600777409 /* actionevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B09BED12B8AE6600777409 /* actionevent.cpp */; };
@@ -664,6 +668,23 @@
 		889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraImageEffect.cpp; sourceTree = "<group>"; };
 		889BFD4812BF4D23002D8A2F /* SoraImageEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraImageEffect.h; sourceTree = "<group>"; };
 		88A6042112B97E0800E23EA3 /* rfMainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rfMainWindow.cpp; sourceTree = "<group>"; };
+		88AD7F5F13415856000F4F68 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		88AD7F6013415856000F4F68 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		88AD7F6113415856000F4F68 /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
+		88AD7F6213415856000F4F68 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forwards.h; sourceTree = "<group>"; };
+		88AD7F6313415856000F4F68 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		88AD7F6413415856000F4F68 /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json_batchallocator.h; sourceTree = "<group>"; };
+		88AD7F6513415856000F4F68 /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalarray.inl; sourceTree = "<group>"; };
+		88AD7F6613415856000F4F68 /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_internalmap.inl; sourceTree = "<group>"; };
+		88AD7F6713415856000F4F68 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_reader.cpp; sourceTree = "<group>"; };
+		88AD7F6813415856000F4F68 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_value.cpp; sourceTree = "<group>"; };
+		88AD7F6913415856000F4F68 /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_valueiterator.inl; sourceTree = "<group>"; };
+		88AD7F6A13415856000F4F68 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = json_writer.cpp; sourceTree = "<group>"; };
+		88AD7F6B13415856000F4F68 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
+		88AD7F6C13415856000F4F68 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
+		88AD7F6D13415856000F4F68 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		88AD7F7213415997000F4F68 /* jsongui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsongui.cpp; sourceTree = "<group>"; };
+		88AD7F7313415997000F4F68 /* jsongui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsongui.h; sourceTree = "<group>"; };
 		88B090A612B80EE000777409 /* rfMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMainWindow.h; sourceTree = "<group>"; };
 		88B090A712B80F1700777409 /* testMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testMainWindow.h; sourceTree = "<group>"; };
 		88B090F012B8151300777409 /* rfMapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMapRenderer.h; sourceTree = "<group>"; };
@@ -1653,6 +1674,28 @@
 			path = ../Plugins/SoraQTSoundSystem;
 			sourceTree = SOURCE_ROOT;
 		};
+		88AD7F5E13415855000F4F68 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				88AD7F5F13415856000F4F68 /* autolink.h */,
+				88AD7F6013415856000F4F68 /* config.h */,
+				88AD7F6113415856000F4F68 /* features.h */,
+				88AD7F6213415856000F4F68 /* forwards.h */,
+				88AD7F6313415856000F4F68 /* json.h */,
+				88AD7F6413415856000F4F68 /* json_batchallocator.h */,
+				88AD7F6513415856000F4F68 /* json_internalarray.inl */,
+				88AD7F6613415856000F4F68 /* json_internalmap.inl */,
+				88AD7F6713415856000F4F68 /* json_reader.cpp */,
+				88AD7F6813415856000F4F68 /* json_value.cpp */,
+				88AD7F6913415856000F4F68 /* json_valueiterator.inl */,
+				88AD7F6A13415856000F4F68 /* json_writer.cpp */,
+				88AD7F6B13415856000F4F68 /* reader.h */,
+				88AD7F6C13415856000F4F68 /* value.h */,
+				88AD7F6D13415856000F4F68 /* writer.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		88B0905E12B80C4300777409 /* ProjectL */ = {
 			isa = PBXGroup;
 			children = (
@@ -1743,6 +1786,8 @@
 				88B09C6512B8AE6600777409 /* SoraGUIResponserMap.h */,
 				88B09C6B12B8AE6600777409 /* xmlgui.cpp */,
 				88B09C6C12B8AE6600777409 /* xmlgui.h */,
+				88AD7F7213415997000F4F68 /* jsongui.cpp */,
+				88AD7F7313415997000F4F68 /* jsongui.h */,
 			);
 			name = SoraGUIChan;
 			path = ../Plugins/SoraGUIChan;
@@ -1948,6 +1993,7 @@
 				88504BE612ECE420009B9F45 /* Debug */,
 				88DD59FE12E040510081AE6C /* llexer */,
 				88504B8812ECDB4E009B9F45 /* Random */,
+				88AD7F5E13415855000F4F68 /* json */,
 				88D87D2112A09A66007D6865 /* hgerect.cpp */,
 				88C79F7212BD4C6E008DA079 /* uncopyable.h */,
 				88D87D2212A09A66007D6865 /* hgerect.h */,
@@ -2555,6 +2601,10 @@
 				88FECD80133E665900619A07 /* b2WeldJoint.cpp in Sources */,
 				88FECD81133E665900619A07 /* SoraPhysicalObject.cpp in Sources */,
 				88FECD82133E665900619A07 /* SoraPhysicalWorld.cpp in Sources */,
+				88AD7F6E13415856000F4F68 /* json_reader.cpp in Sources */,
+				88AD7F6F13415856000F4F68 /* json_value.cpp in Sources */,
+				88AD7F7013415856000F4F68 /* json_writer.cpp in Sources */,
+				88AD7F7413415997000F4F68 /* jsongui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

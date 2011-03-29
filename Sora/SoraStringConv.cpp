@@ -29,7 +29,7 @@ namespace sora {
 		return str;
 	}
 	
-	std::string int_to_str(int32 n)
+std::string int_to_str(int32 n)
 {
 	char *str = NULL;                  
 	int length = 1;                     

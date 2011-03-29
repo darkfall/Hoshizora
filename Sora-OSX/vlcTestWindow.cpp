@@ -155,8 +155,8 @@ void vlcWindow::_loadGUI() {
     sora::GCN_GLOBAL->createTop();
     
     sora::SoraGUIResponserMap::Instance()->registerResponser("PlayerController", this);
-    
-    XmlGui* pguiloader = new XmlGui;
+
+    sora::XmlGui* pguiloader = new sora::XmlGui;
     
     if(!pguiloader->parse("./player.xml")) {
         sora::SORA->messageBox("Error loading gui xml conf file!", "Fatal Error", MB_OK | MB_ICONERROR);
