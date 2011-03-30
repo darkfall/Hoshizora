@@ -30,7 +30,7 @@ namespace sora {
     }
     
     static void display(void* data, void* id) {
-        SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
+       // SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
         
         (void) data;
     }

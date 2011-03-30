@@ -99,7 +99,7 @@ namespace sora {
 	}
 
 	void SoraFolderResourceManager::freeResourceFile(void* p) {
-		delete p;
+		if(p) delete (uint8*)p;
 	}
 
 } // namespace sora

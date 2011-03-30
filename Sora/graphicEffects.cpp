@@ -6,7 +6,7 @@ int gaussBlur(unsigned long *data, int width, int height, double sigma, int radi
     double *gaussMatrix, gaussSum = 0.0, _2sigma2 = 2 * sigma * sigma;    
     int x, y, xx, yy, xxx, yyy;    
     double *pdbl, a, r, g, b, d;    
-    unsigned char *bbb, *pout, *poutb;    
+    unsigned char *bbb, *pout, *poutb, *pczdata = (unsigned char*)data;    
     pout = poutb = (unsigned char *)malloc(width * height * 4);    
     if (!pout) return 0;    
     gaussMatrix = pdbl = (double *)malloc((radius * 2 + 1) * (radius * 2 + 1) * sizeof(double));    
@@ -36,8 +36,8 @@ int gaussBlur(unsigned long *data, int width, int height, double sigma, int radi
                 if (yyy >= 0 && yyy < height) {    
                     for (xx = -radius; xx <= radius; xx++) {    
                         xxx = x + xx;    
-                        if (xxx >= 0 && xxx < width) {    
-                            bbb = (unsigned char *)&data[xxx + yyy * width];    
+                        if (xxx >= 0 && xxx < width) {
+                            bbb = &pczdata[(xxx + yyy * width)*4];    
                             d = *pdbl;    
                             b += d * bbb[0];    
                             g += d * bbb[1];    
@@ -63,8 +63,9 @@ int gaussBlur(unsigned long *data, int width, int height, double sigma, int radi
 }  
 
 int gray(unsigned long *data, int width, int height) {
-	double a, r, g, b;    
-	unsigned char* pout, *poutb;    
+	unsigned char a, r, g, b;    
+	unsigned char* pout, *poutb;   
+    unsigned char* pczdata = (unsigned char*)data;
     pout = poutb =(unsigned char *)malloc(width * height * 4);    
     if (!pout) return 0;   
 
@@ -72,13 +73,11 @@ int gray(unsigned long *data, int width, int height) {
 	double gray;
 	for (y = 0; y < height; y++) {    
         for (x = 0; x < width; x++) {    
-            a = r = g = b = 0.0;    
-            unsigned char *c = (unsigned char *)&data[x + y * width];  
-			
-			b = c[0];
-			g = c[1];
-			r = c[2];
-			a = c[3];
+            a = r = g = b = 0;    			
+			b = *pczdata++;
+			g = *pczdata++;
+			r = *pczdata++;
+			a = *pczdata++;
 			
 			gray = r*0.3+g*0.59+b*0.11;
 
@@ -94,25 +93,24 @@ int gray(unsigned long *data, int width, int height) {
 }
 
 int reverse(unsigned long* data, int width, int height) {
-	double a, r, g, b;    
-	unsigned char* pout, *poutb;    
+	unsigned char a, r, g, b;    
+	unsigned char* pout, *poutb, *pczdata = (unsigned char*)data;    
     pout = poutb =(unsigned char *)malloc(width * height * 4);    
     if (!pout) return 0;   
 
     int y, x;
 	for (y = 0; y < height; y++) {    
         for (x = 0; x < width; x++) {    
-            a = r = g = b = 0.0;    
-            unsigned char *c = (unsigned char *)&data[x + y * width];  
+            a = r = g = b = 0;    
 			
-			b = c[0];
-			g = c[1];
-			r = c[2];
-			a = c[3];
+			b = *pczdata++;
+			g = *pczdata++;
+			r = *pczdata++;
+			a = *pczdata++;
 		
-            *pout++ = (unsigned char)(255.0-b);    
-            *pout++ = (unsigned char)(255.0-g);    
-            *pout++ = (unsigned char)(255.0-r);    
+            *pout++ = (unsigned char)(255-b);    
+            *pout++ = (unsigned char)(255-g);    
+            *pout++ = (unsigned char)(255-r);    
             *pout++ = (unsigned char)a;    
         }    
     }    
@@ -123,7 +121,7 @@ int reverse(unsigned long* data, int width, int height) {
 
 int alphaMix(unsigned long* data1, unsigned long* data2, int width, int height, int width2, int height2, double a, int posx, int posy) {
 	double sa, sr, sg, sb, da, dr, dg, db;    
-	unsigned char* pout, *poutb;    
+	unsigned char* pout, *poutb, *pczdata1 = (unsigned char*)data1, *pczdata2 = (unsigned char*)data2;    
     pout = poutb =(unsigned char *)malloc(width * height * 4);    
     if (!pout) return 0;   
 
@@ -136,18 +134,15 @@ int alphaMix(unsigned long* data1, unsigned long* data2, int width, int height, 
 	for (y = 0; y < height; y++) {    
         for (x = 0; x < width; x++) {    
 			if(x >= posx && y >= posy && x < rw && y < rh) {
-				unsigned char *c1 = (unsigned char *)&data1[x + y * width];  
-				unsigned char *c2 = (unsigned char *)&data2[x-posx + (y-posy) * width2];
+				sb = *pczdata1++;
+				sg = *pczdata1++;
+				sr = *pczdata1++;
+				sa = *pczdata1++;
 
-				sb = c1[0];
-				sg = c1[1];
-				sr = c1[2];
-				sa = c1[3];
-
-				db = c2[0];
-				dg = c2[1];
-				dr = c2[2];
-				da = c2[3];
+				db = *pczdata2++;
+				dg = *pczdata2++;
+				dr = *pczdata2++;
+				da = *pczdata2++;
 				
 				if(da != 0.f) {
 					*pout++ = (unsigned char)(sb*a+(1-a)*db);    
@@ -155,17 +150,17 @@ int alphaMix(unsigned long* data1, unsigned long* data2, int width, int height, 
 					*pout++ = (unsigned char)(sr*a+(1-a)*dr);    
 					*pout++ = (unsigned char)sa;
 				} else {
-					*pout++ = (unsigned char)c1[0];    
-					*pout++ = (unsigned char)c1[1];    
-					*pout++ = (unsigned char)c1[2];    
-					*pout++ = (unsigned char)c1[3];
+					*pout++ = (unsigned char)sb;    
+					*pout++ = (unsigned char)sg;    
+					*pout++ = (unsigned char)sr;    
+					*pout++ = (unsigned char)sa;
 				}
 			} else {
 				unsigned char *c1 = (unsigned char *)&data1[x + y * width]; 
-				*pout++ = (unsigned char)c1[0];    
-				*pout++ = (unsigned char)c1[1];    
-				*pout++ = (unsigned char)c1[2];    
-				*pout++ = (unsigned char)c1[3];
+				*pout++ = (unsigned char)*pczdata1++;    
+				*pout++ = (unsigned char)*pczdata1++;    
+				*pout++ = (unsigned char)*pczdata1++;    
+				*pout++ = (unsigned char)*pczdata1++;
 			}
         }    
     }    

@@ -1,5 +1,4 @@
 <container name="SoraWindow" width="1024" height="768" x="0" y="0" opaque="false" foregroundColor="0xAAAAAA">
-	<imagebutton2 name="buttontest" width="180" height="200" x="400" y="100" id="buttontest" image="title.png" normalrect="0,0,128,128" pushedrect="128,0,128,128"/>
 	<window name="SpeedPanel" width="180"  height="290" x="0" y="0" caption="SpeedPanel" opaque="true" foregroundColor="0xAAFFFF">
 		<label name="MinSpeedLabel" width="160"  height="20" x="10" y="10" caption="MinSpeed" opaque="false"/>
 		<slider name="MinSpeed" width="160"  height="10" x="10" y="30" start="-500" end="500" value="0" makerLength="1" stepLength="1" id="MinSpeed" responser="SpeedPanel" responsetype="action"/>

@@ -50,7 +50,8 @@ namespace sora {
 		virtual SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h) = 0;
 
 		virtual ulong32*  	 textureLock(SoraTexture* ht, bool bReadOnly=true, uint32 x=0, uint32 y=0, uint32 w=0, uint32 h=0) = 0;
-		virtual void		 releaseTexture(SoraTexture* pTexture) = 0;
+		virtual void         textureUnlock(SoraTexture* ht) = 0;
+        virtual void		 releaseTexture(SoraTexture* pTexture) = 0;
 
 		virtual void renderQuad(SoraQuad& quad) = 0;
 		virtual void renderTriple(SoraTriple& trip) = 0;

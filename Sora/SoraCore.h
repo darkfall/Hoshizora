@@ -72,6 +72,7 @@ namespace sora {
 		HSORATEXTURE SORACALL createTextureFromRawData(uint32* data, int32 w, int32 h);
 		HSORATEXTURE SORACALL createTextureFromMem(void* data, ulong32 size);
 		ulong32*	 SORACALL textureLock(HSORATEXTURE, bool bReadOnly=true, uint32 x=0, uint32 y=0, uint32 w=0, uint32 h=0);
+        void		 SORACALL textureUnlock(HSORATEXTURE);
 		void		 SORACALL releaseTexture(HSORATEXTURE pTexture);
 
 		void SORACALL attachShaderContext(SoraShaderContext* context);

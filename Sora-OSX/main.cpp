@@ -23,14 +23,17 @@
 
 #include "TemplateTransformer.h"
 
-//#include "Experimental/tcmalloc_test.h"
-
 #include "Experimental/state_test.h"
 #include "SoraMemoryFile.h"
 
 #include "vlcTestWindow.h"
 
 #include "SoraParticleEditor/peMainWindow.h"
+
+#include "SoraGUIChan/XmlGui.h"
+#include "SoraGUIChan/Jsongui.h"
+
+#include "Debug/SoraAutoProfile.h"
 
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();
@@ -39,7 +42,7 @@ int main(int argc, char* argv[]) {
 	sora->registerResourceManager(new sora::SoraZipResourceManager);
 	sora->registerFontManager(new sora::SoraFTFontManager);
 	sora->registerInput(new sora::SoraOGLInput);
-	
+        
 	
 	sora::HSORARESOURCE res = sora->loadResourcePack(L"./data.rfResource");
 	if(!res) {
@@ -91,7 +94,7 @@ int main(int argc, char* argv[]) {
 	*/
 	sora->setFPS(60.0);
 	
-	sora->createWindow(new peMainWindow);
+	sora->createWindow(new mainWindow);
 	sora->start();
 		
 	return 0;

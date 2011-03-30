@@ -314,6 +314,11 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::bindTexture(SoraTexture* tex) {
+        if(!tex) {
+            mCurrTexture != 0;
+            glBindTexture(GL_TEXTURE_2D, 0);
+            return;
+        }
 		if (mCurrTexture != tex->mTextureID) {
 			flush();
 
@@ -392,6 +397,8 @@ namespace sora{
 		if(!texId) {
 			throw SORA_EXCEPTION("Error creating texture");
 		}
+        
+
 		/*GLuint texId;
 
 		glGenTextures(1, &texId);
@@ -412,13 +419,7 @@ namespace sora{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glBindTexture(GL_TEXTURE_2D, 0);
-        /*
-		ulong32 texid = SOIL_create_OGL_texture((unsigned char*)data,
-												w,
-												h,
-												4,
-												0,
-												SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_TEXTURE_REPEATS);*/
+    
 		if(!texId) {
 			throw SORA_EXCEPTION("Error creating texture");
 			return 0;
@@ -432,44 +433,56 @@ namespace sora{
 	}
 
 	ulong32* SoraOGLRenderer::textureLock(SoraTexture* ht, bool bReadOnly, uint32 x, uint32 y, uint32 w, uint32 h) {
-		glEnable(GL_TEXTURE_2D);
+		ht->dataRef.texData = new ulong32[ht->mOriginalWidth * ht->mOriginalHeight];
+		memset(ht->dataRef.texData, 0, ht->mOriginalWidth * ht->mOriginalHeight);
+        //printf("%d, %d, %d, %d\n",_glTextureGetWidth(ht->mTextureID),_glTextureGetHeight(ht->mTextureID), );
+		if(ht->dataRef.texData) {
+            glEnable(GL_TEXTURE_2D);
 
-		//glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
-		bindTexture(ht);
-		ulong32* imageData = (ulong32*)malloc(ht->mTextureWidth*ht->mTextureHeight*4);
-		memset(imageData, 0, w*h*4);
-		if(imageData) {
-	//		printf("%d, %d, %d, %d\n", imageData[0], imageData[1], imageData[2], imageData[3]);
-			glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_INT, imageData);
-			printf("%d, %d, %d, %d, %d\n", glGetError(), GL_INVALID_ENUM, GL_INVALID_OPERATION, GL_INVALID_VALUE, GL_NO_ERROR);
+            GLint PreviousTexture;
+            glGetIntegerv(GL_TEXTURE_BINDING_2D, &PreviousTexture);
 
-	//		printf("%d, %d, %d, %d\n", imageData[0], imageData[1], imageData[2], imageData[3]);
+            glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
+			glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, ht->dataRef.texData);
+            printf("%d, %d, %d, %d, %d\n", glGetError(), GL_INVALID_ENUM, GL_INVALID_OPERATION, GL_INVALID_VALUE, GL_NO_ERROR);
 
-			//glReadPixels(x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+            glBindTexture(GL_TEXTURE_2D, 0);
+            
+            glBindTexture(GL_TEXTURE_2D, PreviousTexture);
 
-		//	ht->dataRef.texData = imageData;
+            if(glGetError() != 0) {
+                free(ht->dataRef.texData);
+                ht->dataRef.texData = 0;
+                return NULL;
+            }
+
 		//	ht->dataRef.x = x; ht->dataRef.y = y;
 		//	ht->dataRef.w = w; ht->dataRef.h = h;
 
-			return imageData;
+			return (ulong32*)ht->dataRef.texData;
 		}
-		free(imageData);
 		return 0;
 	}
 
-	void SoraOGLRenderer::textureUnlock(SoraTexture* h) {
-	/*	if(h->dataRef.texData) {
+	void SoraOGLRenderer::textureUnlock(SoraTexture* ht) {
+		if(ht->dataRef.texData != NULL) {
 			glEnable(GL_TEXTURE_2D);
-			bindTexture(h);
+            
+            GLint PreviousTexture;
+            glGetIntegerv(GL_TEXTURE_BINDING_2D, &PreviousTexture);
+			
+            glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight, GL_RGBA, GL_UNSIGNED_BYTE, ht->dataRef.texData);
+            glBindTexture(GL_TEXTURE_2D, 0);
+            
+            glBindTexture(GL_TEXTURE_2D, PreviousTexture);
 
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, h->mTextureWidth, h->mTextureHeight, 0, GL_RGBA, GL_UNSIGNED_INT, h->dataRef.texData);
-		//	glTexSubImage2D(GL_TEXTURE_2D, 0, h->dataRef.x, h->dataRef.y, h->dataRef.w, h->dataRef.h, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8, h->dataRef.texData);
 			printf("%d, %d, %d, %d, %d\n", glGetError(), GL_INVALID_ENUM, GL_INVALID_OPERATION, GL_INVALID_VALUE, GL_NO_ERROR);
 
-		//	printf("%d, %d, %d, %d\n", h->dataRef.texData[0], h->dataRef.texData[1], h->dataRef.texData[2], h->dataRef.texData[3]);
-			//free(h->dataRef.texData);
-			//h->dataRef.texData = 0;
-		}*/
+			delete ht->dataRef.texData;
+			ht->dataRef.texData = 0;
+            
+		}
 
 	}
 
@@ -801,5 +814,9 @@ namespace sora{
 		flush();
 		currShader = 0;
 	}
+    
+    void SoraOGLRenderer::snapshot(const SoraString& path) {
+        SOIL_save_screenshot(path.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, SORA->getScreenWidth(), SORA->getScreenHeight());
+    }
 
 } // namespace sora

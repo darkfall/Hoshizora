@@ -11,6 +11,7 @@
 #include "SoraGUIResponser.h"
 #include "SoraGUIResponserMap.h"
 #include "guichansora.hpp"
+#include "guichansetup.h"
 
 #include "SoraCore.h"
 
@@ -20,9 +21,9 @@ namespace sora {
         opened = false;
     }
     
-    bool JsonGui::parse(const SoraWString& filePath) {
+    bool JsonGui::parse(const SoraString& filePath) {
         ulong32 size;
-        void* pdata = SORA->getResourceFile(filePath, size);
+        void* pdata = SORA->getResourceFile(s2ws(filePath), size);
         if(pdata) {
             bool result = parse(pdata, size);
             SORA->freeResourceFile(pdata);
@@ -76,8 +77,6 @@ namespace sora {
             const char* type = itMember->c_str();
             bool isObjectValue = val[type].isObject();
             if(isObjectValue) {
-                printf("JsonGui**** parse widget: %s\n", type);
-
                 if(strcmpnocase(type, "container") == 0) {
                     parseContainer(val[type], parent);
                 } else if(strcmpnocase(type, "window") == 0) {
@@ -182,6 +181,11 @@ namespace sora {
                 SoraString type = val["responsetype"].asString();
                 parseResponser(widget, arg, type.size()==0?NULL:&type);
             }
+        }
+        
+        if(val.isMember("parent")) {
+            if(widget->getParent() == NULL)
+                GCN_GLOBAL->addWidget(widget, val["parent"].asString());
         }
     }
     

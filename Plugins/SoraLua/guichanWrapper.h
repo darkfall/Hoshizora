@@ -22,11 +22,18 @@ namespace sora {
         virtual gcn::Widget* createGuiWidget(const SoraString& ident, const SoraString& id);
     };
     
-    const stringId SID_BUTTON = str2id("button");
-    const stringId SID_SLIDER = str2id("button");
-    const stringId SID_CONTAINER = str2id("button");
-    const stringId SID_WINDOW = str2id("button");
-    const stringId SID_LABEL = str2id("button");
+    const stringId SID_BUTTON       = str2id("button");
+    const stringId SID_SLIDER       = str2id("slider");
+    const stringId SID_CONTAINER    = str2id("container");
+    const stringId SID_WINDOW       = str2id("window");
+    const stringId SID_LABEL        = str2id("label");
+    const stringId SID_ICON         = str2id("icon");
+    const stringId SID_CHECKBOX     = str2id("checkbox");
+    const stringId SID_TEXTBOX      = str2id("textbox");
+    const stringId SID_TEXTFIELD    = str2id("textfield");
+    const stringId SID_IMAGEBUTTON  = str2id("imagebutton");
+    
+    
 } // namespace sora
 
 namespace guiwrapper {
@@ -35,6 +42,7 @@ namespace guiwrapper {
     void export_guilib(LuaPlus::LuaState* state);
     
     bool loadXmlGui(const SoraString& xmlPath);
+    bool loadJsonGui(const SoraString& jsonPath);
     
     void setGuiCreator(sora::SoraGuiCreator* pCreator);
     ulong32 createWidget(const SoraString& ident, const SoraString& id);

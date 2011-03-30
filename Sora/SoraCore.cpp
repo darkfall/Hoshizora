@@ -117,32 +117,75 @@ namespace sora {
 	void SoraCore::update() {
 		assert(bInitialized == true);
 		
-		//PROFILE("COREUPDATE");
-		
-		if(pSoundSystem) pSoundSystem->update();
+		{
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("UPDATE_SOUNDSYSTEM");
+#endif
+            if(pSoundSystem) pSoundSystem->update();
+        }
 
 		pRenderSystem->beginFrame();
 		_frameListenerStart();
         
-		mainWindow->updateFunc();
-        
-        pPluginManager->update();
-        
-		time += pTimer->getDelta();
-		SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
-        
-		pRenderSystem->update();
-		
-        mainWindow->renderFunc();
-        
-        _frameListenerEnd();
-#ifdef _DEBUG
-		DEBUG_RENDERER->render();
+        {
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("UPDATE_MAINWINDOW");
 #endif
+            mainWindow->updateFunc();
+        }
+        
+        {
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("UPDATE_PLUGINS");
+#endif
+            pPluginManager->update();
+        }
+        
+        {
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("UPDATE_EVENT_MANAGER");
+#endif
+            SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
+        }
+        
+        {
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("UPDATE_RENDERSYSTEM");
+#endif
+            pRenderSystem->update();
+        }
+		
+        {
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("RENDER_MAINWINDOW");
+#endif
+            mainWindow->renderFunc();
+        }
+        
+        {
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("FRAMELISTENER_END");
+#endif
+            _frameListenerEnd();
+        }
+        
+        {
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("DEBUG_RENDER");
+#endif
+            
+#ifdef _DEBUG
+            DEBUG_RENDERER->render();
+#endif
+        }
+        
         if(bMainScene) {
             bMainScene = false;
             pRenderSystem->endScene();
         }
+        
+		time += pTimer->getDelta();
+        
 		pRenderSystem->endFrame();
 	}
 
@@ -450,12 +493,12 @@ namespace sora {
 		assert(bInitialized==true);
 		return pRenderSystem->textureLock((SoraTexture*)ht, bReadOnly, x, y, w, h);
 	}
-/*
+
 	void SoraCore::textureUnlock(HSORATEXTURE h) {
 		if(!bInitialized) throw SoraException("Sora not initialized");;
 		pRenderSystem->textureUnlock((SoraTexture*)h);
 	}
-	*/
+	
 	void SoraCore::releaseTexture(HSORATEXTURE pTexture) {
 		assert(bInitialized==true);
 		SoraTextureMap::Instance()->remove(pTexture);

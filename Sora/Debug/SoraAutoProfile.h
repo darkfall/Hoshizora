@@ -12,6 +12,11 @@
 
 #include "SoraGlobalProfiler.h"
 
+#ifdef OS_OSX
+#include <mach/mach.h>
+#include <mach/mach_time.h>
+#endif
+
 namespace sora {
 	
 	inline s_int64 getCurrentSystemTime() {

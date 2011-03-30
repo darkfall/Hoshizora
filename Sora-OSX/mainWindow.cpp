@@ -11,6 +11,8 @@
 #include "SoraEventManager.h"
 #include "SoraLocalizer.h"
 
+#include "graphicEffects.h"
+
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
 	
@@ -56,6 +58,8 @@ bool mainWindow::renderFunc() {
 	//mainScenes->render();
 	//pSpr->render4V(100.f, 100.f, 700.f, 0.f, 700.f, 600.f, 100.f, 500.f);
     sora->setViewPoint(0.f, 0.f, 1.f);
+    
+    
     pSpr->render(0.f, 0.f);
     
 	sora->endScene();

@@ -14,8 +14,11 @@
 #include "SoraGuiChan/SoraGUIResponserMap.h"
 
 #include "SoraFileUtility.h"
+#include "graphicEffects.h"
 
 #include "SoraLua/guichanwrapper.h"
+
+#include "Debug/SoraAutoProfile.h"
 
 static int keyUpDataGuard = 0;
 
@@ -82,8 +85,8 @@ void vlcWindow::action() {
 }
 
 bool vlcWindow::renderFunc() {
-    ulong32 targ = sora::SORA->createTarget(getWindowWidth(), getWindowHeight(), false);
-    sora::SORA->beginScene(0x00000000, targ);
+  //  ulong32 targ = sora::SORA->createTarget(getWindowWidth(), getWindowHeight(), false);
+    sora::SORA->beginScene(/*0x00000000, targ*/);
     
     pFont->print(0.f, getWindowHeight()-50.f, sora::FONT_ALIGNMENT_LEFT, L"SoraCoreRenderFPS: %f, VideoFPS: %f", sora::SORA->getFPS(), moviePlayer->getFPS());
     pFont->print(0.f, getWindowHeight()-30.f, sora::FONT_ALIGNMENT_LEFT, L"FrameCount: %d", moviePlayer->getFrameCount());
@@ -117,6 +120,8 @@ bool vlcWindow::renderFunc() {
             if(pTex) {
                 pSpr = new sora::SoraSprite(pTex);
             }
+            
+            
             pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
             pSpr->render(getWindowWidth()/2, 0.f);
        
@@ -126,7 +131,7 @@ bool vlcWindow::renderFunc() {
             pSpr->render(getWindowWidth()/2, 0.f);
         }
     } else if(pSpr) {
-         pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
+        pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
         pSpr->render(getWindowWidth()/2, 0.f);
     }
 
@@ -135,7 +140,7 @@ bool vlcWindow::renderFunc() {
     sora::GCN_GLOBAL->gcnDraw();
     sora::SORA->endScene();
     
-    sora::SoraSprite* ptest = new sora::SoraSprite((sora::SoraTexture*)(sora::SORA->getTargetTexture(targ)));
+   /* sora::SoraSprite* ptest = new sora::SoraSprite((sora::SoraTexture*)(sora::SORA->getTargetTexture(targ)));
     sora::SORA->beginScene();
     ptest->render();
     if(pSpr) {
@@ -145,7 +150,7 @@ bool vlcWindow::renderFunc() {
     sora::SORA->endScene();
     
     delete ptest;
-    sora::SORA->freeTarget(targ);
+    sora::SORA->freeTarget(targ);*/
    
     return false;
 }
@@ -177,8 +182,6 @@ void vlcWindow::init() {
     _loadGUI();
     
     guiwrapper::export_guilib(luaTest.getState());
-
-    luaTest.doScript((L"test.lua"));
     
     pFileOpener = new FileDlg;
     pFileOpener->SetDefaultPath(sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
@@ -189,7 +192,7 @@ void vlcWindow::init() {
     moviePlayer->play();
     
     sora::SORA->setWindowTitle(L"AMV_Scenerio.mp4");
-    sora::SORA->setFPS(999);
+    sora::SORA->setFPS(24);
     
     pFont = sora::SORA->createFont(L"cour.ttf", 24);
     pFont->setColor(0xFFFFFFFF);

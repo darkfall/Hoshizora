@@ -26,7 +26,7 @@ namespace sora {
 		int32 mTextureWidth, mTextureHeight;
 		int32 mOriginalWidth, mOriginalHeight;
 		wchar_t name[MAX_TEXTURE_NAME_SIZE];
-		//SoraTextureDataRef dataRef;
+		SoraTextureDataRef dataRef;
 	};
 
 } // namespace sora

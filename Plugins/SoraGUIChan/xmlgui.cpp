@@ -6,6 +6,7 @@
 #include "soraguifont.hpp"
 #include "SoraStringConv.h"
 #include "SoraPlatform.h"
+#include "guichansetup.h"
 
 namespace sora {
 
@@ -273,6 +274,11 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 
 	if(element->Attribute("eventId"))
 		widget->setActionEventId(*element->Attribute("eventId"));
+    
+    if(element->Attribute("parent")) {
+        if(widget->getParent() == NULL)
+            GCN_GLOBAL->addWidget(widget, *element->Attribute("parent"));
+    }
 	
 	if(element->Attribute("id")) {
 		widget->setId(element->Attribute("id")->c_str());

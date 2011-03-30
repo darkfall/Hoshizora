@@ -74,7 +74,7 @@ namespace sora {
 
 		void flush();
         
-        void snapshot(const SoraString& path) {}
+        void snapshot(const SoraString& path);
 
 	private:
 		void applyTransform();

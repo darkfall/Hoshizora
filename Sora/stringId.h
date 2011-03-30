@@ -27,7 +27,6 @@ namespace sora {
 		inline stringId getStringId(const SoraString& str) {
 			stringId sid = crc32(str);
 			if(strings.find(sid) == strings.end()) {
-		//		INT_LOG::debugPrintf("mapping str, id=%lu, str=%s\n", sid, str.c_str());
 				strings[sid] = s2ws(str);
 			}
 			return sid;
@@ -42,7 +41,6 @@ namespace sora {
 
 			if(strings.find(sid) == strings.end()) {
 				strings[sid] = str;
-		//		INT_LOG::debugPrintf("STR_MAP: mapping str, id=%lu, str=%s\n", sid, ws2s(str).c_str());
 			}
 			return sid;
 		}

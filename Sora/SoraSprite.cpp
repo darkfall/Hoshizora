@@ -276,10 +276,14 @@ namespace sora {
 		return quad.blend;
 	}
 
-	ulong32* SoraSprite::getPixelData(bool bReadOnly, int x, int y, int w, int h) {
+	ulong32* SoraSprite::getPixelData(bool bReadOnly, int x, int y, int w, int h) const {
 		return sora->textureLock((HSORATEXTURE)texture, false, x, y, w, h);
 		return 0;
 	}
+    
+    void SoraSprite::unlockPixelData() {
+        sora->textureUnlock((HSORASPRITE)texture);
+    }
 
 	const hgeRect& SoraSprite::getTextureRect() const {
 		return textureRect;
@@ -384,7 +388,7 @@ namespace sora {
 		rotZ = rz;
 	}
 	
-	float32 SoraSprite::getRotationZ()  const{
+	float32 SoraSprite::getRotationZ() const {
 		return rotZ;
 	}
 	
@@ -448,7 +452,7 @@ namespace sora {
 		return 0;
 	}
 	
-	bool SoraSprite::hasEffect() {
+	bool SoraSprite::hasEffect() const {
 		return !vEffects.empty();
 	}
 	

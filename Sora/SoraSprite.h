@@ -95,14 +95,15 @@ namespace sora {
 		void setRotationZ(float32 rz);
 		float32 getRotationZ() const;
 
-		ulong32* getPixelData(bool bReadOnly=true, int x=0, int y=0, int w=0, int h=0);
-		SoraTexture* getTexture() { return texture; }
+		ulong32* getPixelData(bool bReadOnly=true, int x=0, int y=0, int w=0, int h=0) const;
+        void unlockPixelData();
+		SoraTexture* getTexture() const { return texture; }
 		
 		uint32 update(float32 dt);
 		void addEffect(SoraImageEffect* effect);
 		void stopEffect(SoraImageEffect* eff);
 		void clearEffects();
-		bool hasEffect();
+		bool hasEffect() const;
 		
 	private:
 		SoraSprite() { texture=0; _initDefaults(); }

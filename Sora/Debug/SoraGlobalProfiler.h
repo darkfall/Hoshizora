@@ -30,18 +30,18 @@ namespace sora {
 			
 			s_profile(const char* name, s_int64 t): sName(name), elapsedTime(t) {}
 		};
-		typedef std::vector<s_profile> PROFILE_CONT;
+		typedef std::map<SoraString, s_profile> PROFILE_CONT;
 
 	public:
 		void storeProfile(const char* name, s_int64 elapsedTime) {
-			profiles.push_back(s_profile(name, elapsedTime));
+			profiles.insert(std::make_pair<SoraString, s_profile>(name, s_profile(name, elapsedTime)));
 			LOG->debugPrintf("ProfileName=%s, time=%llu\n", name, elapsedTime);
 		}
 		
 		void printProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				LOG->debugPrintf("ProfileName=%s, time=%llu\n", itprofile->sName.c_str(), itprofile->elapsedTime);
+				LOG->debugPrintf("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
 				++itprofile;
 			}
 		}
@@ -49,7 +49,7 @@ namespace sora {
 		void logProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				LOG->debugLogf("ProfileName=%s, time=%llu", itprofile->sName.c_str(), itprofile->elapsedTime);
+				LOG->debugLogf("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
 				++itprofile;
 			}
 		}
@@ -57,7 +57,7 @@ namespace sora {
 		std::ostream& operator<<(std::ostream& stream) {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				stream << itprofile->sName.c_str() << itprofile->elapsedTime << std::endl;
+				stream << itprofile->second.sName.c_str() << itprofile->second.elapsedTime << std::endl;
 				++itprofile;
 			}
 			return stream;

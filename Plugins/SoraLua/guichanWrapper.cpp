@@ -11,6 +11,7 @@
 
 #include "SoraGUIChan/guichansetup.h"
 #include "SoraGUIChan/xmlgui.h"
+#include "SoraGUIChan/jsongui.h"
 #include "LuaPlusHelper.h"
 
 namespace sora {
@@ -21,23 +22,53 @@ namespace sora {
             gcn::Button* pbutton = new gcn::Button;
             pbutton->setId(id);
             return pbutton;
-        } else if(sid == SID_SLIDER) {
+        }
+        if(sid == SID_SLIDER) {
             gcn::Slider* pslider = new gcn::Slider;
             pslider->setId(id);
             return pslider;
-        } else if(sid == SID_CONTAINER) {
+        }
+        if(sid == SID_CONTAINER) {
             gcn::Container* pcont = new gcn::Container;
             pcont->setId(id);
             return pcont;
-        } else if(sid == SID_WINDOW) {
+        }
+        if(sid == SID_WINDOW) {
             gcn::Window* pwind = new gcn::Window;
             pwind->setId(id);
             return pwind;
-        } else if(sid == SID_LABEL) {
+        }
+        if(sid == SID_LABEL) {
             gcn::Label* plabel = new gcn::Label;
             plabel->setId(id);
             return plabel;
         }
+        if(sid == SID_CHECKBOX) {
+            gcn::CheckBox* pcheckbox = new gcn::CheckBox;
+            pcheckbox->setId(id);
+            return pcheckbox;
+        }
+        if(sid == SID_TEXTBOX) {
+            gcn::TextBox* ptextbox = new gcn::TextBox;
+            ptextbox->setId(id);
+            return ptextbox;
+        }
+        if(sid == SID_TEXTFIELD) {
+            gcn::TextField* pfield = new gcn::TextField;
+            pfield->setId(id);
+            return pfield;
+        }
+        if(sid == SID_ICON) {
+            gcn::Icon* picon = new gcn::Icon;
+            picon->setId(id);
+            return picon;
+        }
+        if(sid == SID_IMAGEBUTTON) {
+            gcn::ImageButton* pbutton = new gcn::ImageButton;
+            pbutton->setId(id);
+            return pbutton;
+        }
+        
         return NULL;
     }
     
@@ -56,6 +87,7 @@ namespace guiwrapper {
         
         LuaModule(state, "guilib")
         .def("loadXmlGui", &guiwrapper::loadXmlGui)
+        .def("loadJsonGui", &guiwrapper::loadJsonGui)
         .def("createWidget", &guiwrapper::createWidget)
         .def("getWidgetById", &guiwrapper::getWidgetById)
         .def("addWidget", &guiwrapper::addWidgetToParent)
@@ -126,6 +158,7 @@ namespace guiwrapper {
         if(pCreator) {
             return (ulong32)pCreator->createGuiWidget(ident, id);
         }
+        return 0;
     }
     
     ulong32 getWidgetById(const SoraString& id) {
@@ -136,6 +169,13 @@ namespace guiwrapper {
         XmlGui* pXmlGui = new XmlGui;
         bool result = pXmlGui->parse(xmlPath);
         delete pXmlGui;
+        return result;
+    }
+    
+    bool loadJsonGui(const SoraString& jsonPath) {
+        JsonGui* pJsonGui = new JsonGui;
+        bool result = pJsonGui->parse(jsonPath);
+        delete pJsonGui;
         return result;
     }
     
