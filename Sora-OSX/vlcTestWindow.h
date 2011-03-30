@@ -44,6 +44,8 @@ public:
 	bool hideMouse() { return false; }
     
     void action();
+    
+    inline void renderMovieImage();
 		
 private:
     void _loadGUI();
@@ -61,6 +63,8 @@ private:
     sora::SoraFont* pFont;
     
     gcn::Slider* pslider;
+    
+    sora::SoraShaderContext* shader;
 };
 
 

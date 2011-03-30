@@ -17,11 +17,12 @@ namespace sora {
 	 */
 	class SoraCGGLShader: public SoraShader {
 		friend class SoraShaderContext;
-
-	public:
-		
-		SoraCGGLShader(const SoraString& file, const SoraString& entry, int32 type, CGcontext context);
+        friend class SoraCGGLShaderContext;
+        
+        SoraCGGLShader(const SoraString& file, const SoraString& entry, int32 type, CGcontext context);
 		~SoraCGGLShader();
+        
+	public:
 		
 		bool setParameterfv(const char* name, float32* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);

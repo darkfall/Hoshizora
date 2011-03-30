@@ -441,6 +441,11 @@ namespace sora {
 		return pResourceFileFinder->getResourceFileSize(file);
 	}
 
+    SoraShaderContext* SoraCore::createShaderContext() {
+        assert(bInitialized == true);
+        return pRenderSystem->createShaderContext();
+    }
+    
 	void SoraCore::attachShaderContext(SoraShaderContext* context) {
 		if(pRenderSystem)
 			pRenderSystem->attachShaderContext(context);

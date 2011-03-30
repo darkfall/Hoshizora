@@ -15,6 +15,7 @@
 #include "SoraMath.h"
 #include "Rect4V.h"
 #include "SoraInfiniteRendererCallback.h"
+#include "SoraShader/SoraCGD3D9Shader.h"
 
 #include "Debug/SoraInternalLogger.h"
 
@@ -125,6 +126,10 @@ namespace sora{
 	SoraWindowInfoBase* SoraHGERenderer::getMainWindow() {
 		return pMainWindow;
 	}
+    
+    SoraShaderContext* SoraHGERenderer::createShaderContext() {
+        return new SoraCGD3D9ShaderContext;
+    }
 
 	void SoraHGERenderer::attachShaderContext(SoraShaderContext* context) {
 		currShader = context;

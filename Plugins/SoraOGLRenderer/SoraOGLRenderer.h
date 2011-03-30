@@ -66,6 +66,7 @@ namespace sora {
 		ulong32 getMainWindowHandle() { return (ulong32)mainWindow; }
 		SoraWindowInfoBase* getMainWindow() { return mainWindow; }
 
+        SoraShaderContext* createShaderContext();
 		void attachShaderContext(SoraShaderContext* context);
 		void detachShaderContext();
 

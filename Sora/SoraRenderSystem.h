@@ -72,6 +72,7 @@ namespace sora {
 		virtual bool isActive() = 0;
 		virtual SoraWString videoInfo() = 0;
 
+        virtual SoraShaderContext* createShaderContext() = 0;
 		virtual	void attachShaderContext(SoraShaderContext* context) = 0;
 		virtual void detachShaderContext() = 0;
 
@@ -84,7 +85,6 @@ namespace sora {
 		virtual bool isFullscreen() = 0;
         
         virtual void snapshot(const SoraString& path) = 0;
-
 	};
 
 } // namespace sora

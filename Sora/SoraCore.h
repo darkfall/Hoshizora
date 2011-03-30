@@ -75,6 +75,7 @@ namespace sora {
         void		 SORACALL textureUnlock(HSORATEXTURE);
 		void		 SORACALL releaseTexture(HSORATEXTURE pTexture);
 
+        SoraShaderContext* SORACALL createShaderContext();
 		void SORACALL attachShaderContext(SoraShaderContext* context);
 		void SORACALL detachShaderContext();
 		void SORACALL clearTextureMap();

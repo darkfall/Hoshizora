@@ -34,22 +34,12 @@ bool mainWindow::updateFunc() {
 		sora->shutDown();
 	if(sora->keyDown(SORA_KEY_F))
 		sora->setFullscreen(false);
-	if(sora->keyDown(SORA_KEY_Q))
-		testEntity->setLife(90);
-	if(sora->keyDown(SORA_KEY_W))
-		testEntity->setLife(20);
-	
-	if(sora->keyDown(SORA_KEY_1))
-		sora->messageBox("Error loading resource data", "Fatal Error", MB_OK | MB_ICONWARNING);
-	if(sora->keyDown(SORA_KEY_2))
-		sora->messageBox("Error loading resource data", "Fatal Error", MB_OKCANCEL | MB_ICONERROR);
-	if(sora->keyDown(SORA_KEY_3))
-		sora->messageBox("Error loading resource data", "Fatal Error", MB_OK | MB_ICONSTOP);
-	if(sora->keyDown(SORA_KEY_4))
-		sora->messageBox("Error loading resource data", "Fatal Error", MB_OK | MB_ICONINFORMATION);
+    
+    if(sora->keyDown(SORA_KEY_1))
+       sora->snapshot("test.bmp");
 
 	
-	return false;
+    return false;
 }
 
 bool mainWindow::renderFunc() {
@@ -59,10 +49,10 @@ bool mainWindow::renderFunc() {
 	//pSpr->render4V(100.f, 100.f, 700.f, 0.f, 700.f, 600.f, 100.f, 500.f);
     sora->setViewPoint(0.f, 0.f, 1.f);
     
-    
     pSpr->render(0.f, 0.f);
-    
+
 	sora->endScene();
+    
 
 	return false;
 }
