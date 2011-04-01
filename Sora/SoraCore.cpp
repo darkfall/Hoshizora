@@ -45,6 +45,8 @@ namespace sora {
 		pSoundSystem = 0;
         
         bMainScene = false;
+        
+        shaderContext = 0;
 
 		pPluginManager = new SoraPluginManager;
 
@@ -260,6 +262,8 @@ namespace sora {
 		//SoraTextureMap::Instance()->Destroy();
         if(mainWindow)
             delete mainWindow;
+        if(shaderContext)
+            delete shaderContext;
         
 		if(bHasInput) delete pInput;
 		if(pPluginManager) delete pPluginManager;
@@ -440,6 +444,15 @@ namespace sora {
 	ulong32 SoraCore::getResourceFileSize(const SoraWString& file) {
 		return pResourceFileFinder->getResourceFileSize(file);
 	}
+    
+    SoraShader* SoraCore::createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type) {
+        if(shaderContext == NULL) {
+            shaderContext = createShaderContext();
+            if(shaderContext == NULL)
+                return NULL;
+        }
+        return shaderContext->createShader(file, entry, type);
+    }
 
     SoraShaderContext* SoraCore::createShaderContext() {
         assert(bInitialized == true);
@@ -447,17 +460,13 @@ namespace sora {
     }
     
 	void SoraCore::attachShaderContext(SoraShaderContext* context) {
-		if(pRenderSystem)
-			pRenderSystem->attachShaderContext(context);
-		else
-			_postError("SoraCore: RenderSystem not initialized\n");
+        assert(bInitialized == true);
+        pRenderSystem->attachShaderContext(context);
 	}
 
 	void SoraCore::detachShaderContext() {
-		if(pRenderSystem)
-			pRenderSystem->detachShaderContext();
-		else
-			_postError("SoraCore: RenderSystem not initialized\n");
+        assert(bInitialized == true);
+        pRenderSystem->detachShaderContext();
 	}
 
 	HSORATEXTURE SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
@@ -494,9 +503,9 @@ namespace sora {
 		return (HSORATEXTURE)pRenderSystem->createTextureFromMem(data, size);
 	}
 
-	ulong32* SoraCore::textureLock(HSORATEXTURE ht, bool bReadOnly, uint32 x, uint32 y, uint32 w, uint32 h) {
+	ulong32* SoraCore::textureLock(HSORATEXTURE ht) {
 		assert(bInitialized==true);
-		return pRenderSystem->textureLock((SoraTexture*)ht, bReadOnly, x, y, w, h);
+		return pRenderSystem->textureLock((SoraTexture*)ht);
 	}
 
 	void SoraCore::textureUnlock(HSORATEXTURE h) {
@@ -843,5 +852,6 @@ namespace sora {
         assert(bInitialized == true);
         return pRenderSystem->snapshot(path);
     }
+
 
 } // namespace sora

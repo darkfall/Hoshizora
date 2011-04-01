@@ -85,9 +85,7 @@ void vlcWindow::action() {
 
 void vlcWindow::renderMovieImage() {
     pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
-    sora::SORA->attachShaderContext(shader);
     pSpr->render(getWindowWidth()/2, 0.f);
-    sora::SORA->detachShaderContext();
 }
 
 bool vlcWindow::renderFunc() {
@@ -127,6 +125,7 @@ bool vlcWindow::renderFunc() {
             if(pTex) {
                 pSpr = new sora::SoraSprite(pTex);
             }
+            pSpr->attachShader(shader);
             
             renderMovieImage();
        
@@ -200,10 +199,9 @@ void vlcWindow::init() {
     pFont = sora::SORA->createFont(L"cour.ttf", 24);
     pFont->setColor(0xFFFFFFFF);
     
-    shader = sora::SORA->createShaderContext();
-    sora::SoraShader* s = shader->attachShader("gray.ps", "gray", sora::FRAGMENT_SHADER);
+    shader = sora::SORA->createShader(L"gray.ps", "gray", sora::FRAGMENT_SHADER);
     float32 ratio = 3.f;
-    s->setParameterfv("ratio", &ratio, 1);
+    shader->setParameterfv("ratio", &ratio, 1);
     
     pSpr = 0;
 }

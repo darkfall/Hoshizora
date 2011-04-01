@@ -31,6 +31,9 @@ namespace sora {
 		friend class SoraShaderContext;
 		
 	public:
+        SoraShader();
+		virtual ~SoraShader();
+        
 		/*
 			Set a parameterf
 			@param name, the name of the parameter to set
@@ -52,12 +55,8 @@ namespace sora {
 			Get the type of the shader
 			See SORA_SHADER_TYPE
 		 */
-		int32 shaderType();
-
-		SoraShader();
-		virtual ~SoraShader();
-
-		uint32 type;
+		int32 getType() const { return type; }
+        void setType(int32 t) { type = t; };
 
 	private:
 		/* 
@@ -70,16 +69,26 @@ namespace sora {
 		 Detach the shader from render
 		 */
 		virtual bool detach() = 0;
+        
+        uint32 type;
 	};
 	
 	class SoraShaderContext {
-		friend class SoraCGGLShaderContext;
-		friend class SoraCGD3D9ShaderContext;
-
 	public:
+        typedef std::list<SoraShader*> ShaderList;
+
 		SoraShaderContext();
 		virtual ~SoraShaderContext();
 		
+        /*
+         create a shader from context, not attach
+         @param file, the path of the shader file to attach
+         @param entry, entry function of the shader
+         @param type, the type of the shader, see SORA_SHADER_TYPE
+         @retval, the handle to the attached shader, is 0 if attach failed
+		 */
+        virtual SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type) = 0;
+        
 		/*
 			attach a shader to context
 			@param file, the path of the shader file to attach
@@ -87,12 +96,15 @@ namespace sora {
 			@param type, the type of the shader, see SORA_SHADER_TYPE
 			@retval, the handle to the attached shader, is 0 if attach failed
 		 */
-		virtual SoraShader* attachShader(const SoraString& file, const SoraString& entry, int32 type) = 0;
+        SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
+        
+        
+        void attachShader(SoraShader* shader) { assert(shader != NULL); shaders.push_back(shader); }
 		/*
 			detach a shader from context
 			@param shader, the handle to the shader, the retval of attachShader
 		 */
-		void	detachShader(ulong32 shader);
+		void	detachShader(SoraShader* shader);
 
 		/*
 			attach all shaders in context to render
@@ -112,15 +124,16 @@ namespace sora {
 		*/
 		bool	attachShaderList();
 		bool	detachShaderList();
+        
+        void    setError(int32 error) { err = error; }
+        int32   getError() const      { return err; }
+        
+        uint32   getShaderSize() const { return shaders.size(); }
+        
+        const ShaderList& getShaderList()  { return shaders; }
 		
 	private:
-		
-		/*
-			Check for Cg Error
-			Log to core
-		 */
-		typedef std::list<SoraShader*> ShaderList;
-		inline ShaderList::iterator getShader(ulong32 shader);
+		inline ShaderList::iterator getShaderIterator(SoraShader* shader);
 		
 		ShaderList shaders;
 		

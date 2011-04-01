@@ -7,6 +7,7 @@
 #include "hgerect.h"
 #include "SoraImageEffect.h"
 #include "SoraObject.h"
+#include "SoraShader.h"
 #include <list>
 
 namespace sora {
@@ -52,9 +53,9 @@ namespace sora {
 		SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height);
 		virtual ~SoraSprite();
 
-		virtual void render();
-		virtual void render(float32 x, float32 y);
-		virtual void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
+        void render();
+        void render(float32 x, float32 y);
+        void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
 
 		void setTexture(SoraTexture* tex);
 		
@@ -95,16 +96,22 @@ namespace sora {
 		void setRotationZ(float32 rz);
 		float32 getRotationZ() const;
 
-		ulong32* getPixelData(bool bReadOnly=true, int x=0, int y=0, int w=0, int h=0) const;
+		ulong32* getPixelData() const;
         void unlockPixelData();
 		SoraTexture* getTexture() const { return texture; }
 		
 		uint32 update(float32 dt);
 		void addEffect(SoraImageEffect* effect);
-		void stopEffect(SoraImageEffect* eff);
+		void stopEffect(SoraImageEffect* effect);
 		void clearEffects();
 		bool hasEffect() const;
-		
+        
+        void attachShader(SoraShader*);
+        void detachShader(SoraShader*);
+        SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);
+        bool hasShader() const;
+        void clearShader();
+        
 	private:
 		SoraSprite() { texture=0; _initDefaults(); }
 		SoraSprite(SoraSprite&) { }
@@ -125,6 +132,8 @@ namespace sora {
 
 		SoraCore* sora;
 		SoraQuad quad;
+        
+        SoraShaderContext* shaderContext;
 	};
 
 } // namespace sora

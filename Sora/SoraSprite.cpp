@@ -60,12 +60,12 @@ namespace sora {
 		float texx1, texy1, texx2, texy2;
 		
 		textureRect.x1 = 0.f; textureRect.y1 = 0.f;
-	//	if(tex) {
+		if(tex) {
 			textureRect.x2 = width; textureRect.y2 = height;
-	//	} else {
-	//		textureRect.x2 = 1.f;
-	//		textureRect.y2 = 1.f;
-	//	}
+		} else {
+			textureRect.x2 = 1.f;
+			textureRect.y2 = 1.f;
+		}
 		
 		quad.tex = tex;
 		
@@ -100,6 +100,7 @@ namespace sora {
 
 	SoraSprite::~SoraSprite() {
 		clearEffects();
+        clearShader();
 	//	if(texture) delete texture;
 		SoraTextureMap::Instance()->decRf((HSORATEXTURE)texture);
 	}
@@ -145,6 +146,7 @@ namespace sora {
 		bVFlip = bHFlip = false;
 		rot = rotZ = 0.f;
 		centerX = centerY = 0.f;
+        shaderContext = NULL;
 	}
 
 	void SoraSprite::setTextureRect(float32 x, float32 y, float32 width, float32 height) {
@@ -234,7 +236,11 @@ namespace sora {
 			}
 		}
 		
+        if(hasShader()) 
+            sora->attachShaderContext(shaderContext);
 		sora->renderQuad(quad);
+        if(hasShader())
+            sora->detachShaderContext();
 	}
 
 	void SoraSprite::render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4) {
@@ -243,7 +249,11 @@ namespace sora {
 		quad.v[2].x = x3; quad.v[2].y = y3;
 		quad.v[3].x = x4; quad.v[3].y = y4;
 		
+        if(hasShader()) 
+            sora->attachShaderContext(shaderContext);
 		sora->renderQuad(quad);
+        if(hasShader()) 
+            sora->detachShaderContext();
 	}
 
 	void SoraSprite::setColor(ulong32 c, int32 i) {
@@ -276,8 +286,8 @@ namespace sora {
 		return quad.blend;
 	}
 
-	ulong32* SoraSprite::getPixelData(bool bReadOnly, int x, int y, int w, int h) const {
-		return sora->textureLock((HSORATEXTURE)texture, false, x, y, w, h);
+	ulong32* SoraSprite::getPixelData() const {
+		return sora->textureLock((HSORATEXTURE)texture);
 		return 0;
 	}
     
@@ -451,9 +461,46 @@ namespace sora {
 		}
 		return 0;
 	}
+    
+    SoraShader* SoraSprite::attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type) {
+        if(!shaderContext) {
+            shaderContext = sora->createShaderContext();
+            if(!shaderContext)
+                return NULL;
+        }
+        SoraShader* shader = shaderContext->attachShader(shaderPath, entry, type);
+        return shader;
+    }
+    
+    void SoraSprite::attachShader(SoraShader* shader) {
+        if(!shaderContext) {
+            shaderContext = sora->createShaderContext();
+            if(!shaderContext)
+                return;
+        }
+        shaderContext->attachShader(shader);
+    }
+    
+    void SoraSprite::detachShader(SoraShader* shader) {
+        if(shaderContext) {
+            shaderContext->detachShader(shader);
+        }
+    }
+    
+    bool SoraSprite::hasShader() const {
+        return (shaderContext != NULL && shaderContext->getShaderSize() != 0);
+    }
 	
 	bool SoraSprite::hasEffect() const {
 		return !vEffects.empty();
 	}
+    
+    void SoraSprite::clearShader() {
+        if(shaderContext) {
+            delete shaderContext;
+            shaderContext = 0;
+        }
+    }
+    
 	
 } // namespace sora

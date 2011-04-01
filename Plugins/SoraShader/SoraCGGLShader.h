@@ -19,7 +19,7 @@ namespace sora {
 		friend class SoraShaderContext;
         friend class SoraCGGLShaderContext;
         
-        SoraCGGLShader(const SoraString& file, const SoraString& entry, int32 type, CGcontext context);
+        SoraCGGLShader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context);
 		~SoraCGGLShader();
         
 	public:
@@ -55,7 +55,7 @@ namespace sora {
 		SoraCGGLShaderContext();
 		~SoraCGGLShaderContext();
 
-		SoraShader* attachShader(const SoraString& file, const SoraString& entry, int32 type);
+        SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
 		
 		CGcontext context;
 	};

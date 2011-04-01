@@ -26,42 +26,53 @@ namespace sora {
 	}
 	
 	SoraShaderContext::~SoraShaderContext() {
-		ShaderList::iterator liShader = shaders.begin();
-		while(liShader != shaders.end()) {
-			if((*liShader)) {
-				delete (*liShader);
-				(*liShader) = 0;
-				++liShader;
+		ShaderList::iterator itShader = shaders.begin();
+		while(itShader != shaders.end()) {
+			if((*itShader)) {
+				delete (*itShader);
+				(*itShader) = 0;
+				++itShader;
 			}
 		}
 	}
 	
-	std::list<SoraShader*>::iterator SoraShaderContext::getShader(ulong32 shader) {
-		ShaderList::iterator liShader = shaders.begin();
-		while(liShader != shaders.end()) {
-			if(shader == (ulong32)(*liShader)) {
-				return liShader;
+	std::list<SoraShader*>::iterator SoraShaderContext::getShaderIterator(SoraShader* shader) {
+		ShaderList::iterator itShader = shaders.begin();
+		while(itShader != shaders.end()) {
+			if(shader == (*itShader)) {
+				return itShader;
 			}
-			++liShader;
+			++itShader;
 		}
 		return shaders.end();
 	}
+    
+    SoraShader* SoraShaderContext::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
+        if(getError() != 0) return false;
+		
+		SoraShader* shader = createShader(file, entry, type);
+        if(shader) {
+            attachShader(shader);
+            return shader;
+        }
+        return NULL;
+    }
 	
 	void SoraShaderContext::attachToRender() {
 		SoraCore::Instance()->attachShaderContext(this);
 	}
 
 	bool SoraShaderContext::attachShaderList() {
-		if(err != 0) return false;
+		if(getError() != 0) return false;
 
-		ShaderList::iterator liShader = shaders.begin();
+		ShaderList::const_iterator itShader = getShaderList().begin();
 		int32 er = 1;
 		
-		while(liShader != shaders.end()) {
-			(*liShader)->attach();
-			if((*liShader)->type == 0) er = 0;
+		while(itShader != getShaderList().end()) {
+			(*itShader)->attach();
+			if((*itShader)->type == 0) er = 0;
 			
-			++liShader;
+			++itShader;
 		}
 		return er==1?true:false;
 	}
@@ -73,22 +84,22 @@ namespace sora {
 	bool SoraShaderContext::detachShaderList() {
 		if(err != 0) return false;
 
-		ShaderList::iterator liShader = shaders.begin();
+		ShaderList::iterator itShader = shaders.begin();
 		int32 er = 1;
 		
-		while(liShader != shaders.end()) {
-			(*liShader)->detach();
-			if((*liShader)->type == 0) er = 1;
+		while(itShader != shaders.end()) {
+			(*itShader)->detach();
+			if((*itShader)->type == 0) er = 1;
 			
-			++liShader;
+			++itShader;
 		}	
 		return er==1?true:false;
 	}
 	
-	void SoraShaderContext::detachShader(ulong32 shader) {
+	void SoraShaderContext::detachShader(SoraShader* shader) {
 		if(err != 0) return;
 		
-		ShaderList::iterator itShader = getShader(shader);
+		ShaderList::iterator itShader = getShaderIterator(shader);
 		if(itShader != shaders.end()) {
 			delete (*itShader);
 			(*itShader) = 0;

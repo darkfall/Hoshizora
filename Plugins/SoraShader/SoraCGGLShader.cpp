@@ -13,22 +13,17 @@ namespace sora {
 		if(context) {
 			cgDestroyContext(context);
 		}
-	}
-	
-	SoraShader* SoraCGGLShaderContext::attachShader(const SoraString& file, const SoraString& entry, int32 type) {
-		if(err != 0) return false;
+    }
+
+    SoraShader* SoraCGGLShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
+        SoraShader* shader = (SoraShader*)(new SoraCGGLShader(file, entry, type, context));
 		
-		SoraShader* shader;
-		shader = (SoraShader*)(new SoraCGGLShader(file, entry, type, context));
-		
-		if(shader->type != 0) {
-			shaders.push_back(shader);
-			return shader;
-		} else {
+		if(shader->getType() == 0) {
 			delete shader;
-			return 0;
+			return NULL;
 		}
-	}
+        return shader;
+    }
 
 	SoraCGGLShader::~SoraCGGLShader() {
 		cgDestroyProgram(program);
@@ -42,50 +37,39 @@ namespace sora {
 			if(error == CG_COMPILER_ERROR) {
 				INT_LOG::debugPrintf("SoraShaderContext: %s", cgGetLastListing(context));
 			}			
-			type = 0;
+			setType(0);
 		}
 	}
 
-	SoraCGGLShader::SoraCGGLShader(const SoraString& file, const SoraString& entry, int32 type, CGcontext context) {
-		this->type = type;
+	SoraCGGLShader::SoraCGGLShader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context) {
+		setType(type);
 		this->context = context;
 		
 		switch (type) {
 			case VERTEX_SHADER: profile = cgGLGetLatestProfile(CG_GL_VERTEX); break;
 			case FRAGMENT_SHADER: profile = cgGLGetLatestProfile(CG_GL_FRAGMENT); break;
 			default:
-				this->type = 0;
+				this->setType(0);
 		}
 		cgGLGetOptimalOptions(profile);
 		checkError(context);
 		
-		/*
-		program = cgCreateProgramFromFile(context,
-										  CG_SOURCE,
-										  file.c_str(),
-										  profile,
-										  entry.c_str(),
-										  NULL);
-		 */
 		ulong32 size;
-		const char* data = (const char*)SoraCore::Instance()->getResourceFile(s2ws(file), size);
+		const char* data = (const char*)SoraCore::Instance()->getResourceFile(file, size);
 		if(data) {
-			char* sdata = (char*)malloc(size+1);
-			memcpy(sdata, data, size);
-			sdata[size] = '\0';
 			program = cgCreateProgram(context,
 									  CG_SOURCE,
-									  sdata,
+									  data,
 									  profile,
 									  entry.c_str(),
 									  NULL);
-			free(sdata);
-			free((void*)data);
+			SORA->freeResourceFile((void*)data);
+            
 			
 			checkError(context);
 			cgGLLoadProgram(program);
 		} else {
-			type = 0;
+			setType(0);
 		}
 	}
 	
@@ -95,21 +79,21 @@ namespace sora {
 		cgGLEnableProfile(profile);
 		checkError(context);
 
-		return (type != 0);
+		return (getType() != 0);
 	}
 	
 	bool SoraCGGLShader::detach() {
 		cgGLDisableProfile(profile);
 		checkError(context);
 		
-		return (type != 0);
+		return (getType() != 0);
 	}
 
 	bool SoraCGGLShader::setParameterfv(const char* name, float32* fv, uint32 size) {
-		if(type == 0) return false;
+		if(getType() == 0) return false;
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);
-		if(type == 0) return false;
+		if(getType() == 0) return false;
 		
 		switch (size) {
 			case 1: cgSetParameter1fv(param, fv); break;
@@ -118,14 +102,14 @@ namespace sora {
 			case 4: cgSetParameter4fv(param, fv); break;
 		}
 		checkError(context);
-		return (type != 0);
+		return (getType() != 0);
 	}
 	
 	bool SoraCGGLShader::setParameteriv(const char* name, int32* fv, uint32 size) {
-		if(type == 0) return false;
+		if(getType() == 0) return false;
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);
-		if(type == 0) return false;
+		if(getType() == 0) return false;
 		
 		switch (size) {
 			case 1: cgSetParameter1iv(param, fv); break;
@@ -134,7 +118,7 @@ namespace sora {
 			case 4: cgSetParameter4iv(param, fv); break;
 		}
 		checkError(context);
-		return (type != 0);
+		return (getType() != 0);
 	}
 
 } // namespace sora

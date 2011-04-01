@@ -433,10 +433,9 @@ namespace sora{
 		return tex;
 	}
 
-	ulong32* SoraOGLRenderer::textureLock(SoraTexture* ht, bool bReadOnly, uint32 x, uint32 y, uint32 w, uint32 h) {
+	ulong32* SoraOGLRenderer::textureLock(SoraTexture* ht) {
 		ht->dataRef.texData = new ulong32[ht->mOriginalWidth * ht->mOriginalHeight];
 		memset(ht->dataRef.texData, 0, ht->mOriginalWidth * ht->mOriginalHeight);
-        //printf("%d, %d, %d, %d\n",_glTextureGetWidth(ht->mTextureID),_glTextureGetHeight(ht->mTextureID), );
 		if(ht->dataRef.texData) {
             glEnable(GL_TEXTURE_2D);
 
@@ -445,7 +444,6 @@ namespace sora{
 
             glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
 			glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, ht->dataRef.texData);
-            printf("%d, %d, %d, %d, %d\n", glGetError(), GL_INVALID_ENUM, GL_INVALID_OPERATION, GL_INVALID_VALUE, GL_NO_ERROR);
 
             glBindTexture(GL_TEXTURE_2D, 0);
             
@@ -456,10 +454,6 @@ namespace sora{
                 ht->dataRef.texData = 0;
                 return NULL;
             }
-
-		//	ht->dataRef.x = x; ht->dataRef.y = y;
-		//	ht->dataRef.w = w; ht->dataRef.h = h;
-
 			return (ulong32*)ht->dataRef.texData;
 		}
 		return 0;
@@ -478,11 +472,8 @@ namespace sora{
             
             glBindTexture(GL_TEXTURE_2D, PreviousTexture);
 
-			printf("%d, %d, %d, %d, %d\n", glGetError(), GL_INVALID_ENUM, GL_INVALID_OPERATION, GL_INVALID_VALUE, GL_NO_ERROR);
-
 			delete ht->dataRef.texData;
 			ht->dataRef.texData = 0;
-            
 		}
 
 	}

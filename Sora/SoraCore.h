@@ -71,14 +71,15 @@ namespace sora {
 		HSORATEXTURE SORACALL createTextureWH(int32 w, int32 h);
 		HSORATEXTURE SORACALL createTextureFromRawData(uint32* data, int32 w, int32 h);
 		HSORATEXTURE SORACALL createTextureFromMem(void* data, ulong32 size);
-		ulong32*	 SORACALL textureLock(HSORATEXTURE, bool bReadOnly=true, uint32 x=0, uint32 y=0, uint32 w=0, uint32 h=0);
+		ulong32*	 SORACALL textureLock(HSORATEXTURE);
         void		 SORACALL textureUnlock(HSORATEXTURE);
 		void		 SORACALL releaseTexture(HSORATEXTURE pTexture);
+        void         SORACALL clearTextureMap();
 
         SoraShaderContext* SORACALL createShaderContext();
 		void SORACALL attachShaderContext(SoraShaderContext* context);
 		void SORACALL detachShaderContext();
-		void SORACALL clearTextureMap();
+        SoraShader* SORACALL createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
 
 		SoraSprite* SORACALL createSprite (const SoraWString& sPath);
 		SoraSprite* SORACALL createSpriteTex(HSORATEXTURE tex);
@@ -218,10 +219,12 @@ namespace sora {
 
 		inline void _frameListenerStart();
 		inline void _frameListenerEnd();
+        
+        SoraShaderContext* shaderContext;
 	};
 
 
-	static SoraCore* SORA = SoraCore::Instance();
+#define SORA SoraCore::Instance()
 
 } // namespace sora
 
