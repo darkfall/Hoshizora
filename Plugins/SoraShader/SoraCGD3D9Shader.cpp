@@ -16,19 +16,14 @@ namespace sora {
 		}
 	}
 
-	SoraShader* SoraCGD3D9ShaderContext::attachShader(const SoraString& file, const SoraString& entry, int32 type) {
-		if(err != 0) return false;
+	SoraShader* SoraCGD3D9ShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
+		SoraShader* shader = (SoraShader*)(new SoraCGD3D9Shader(file, entry, type, context));
 		
-		SoraShader* shader;
-		shader = (SoraShader*)(new SoraCGD3D9Shader(file, entry, type, context));
-		
-		if(shader->type != 0) {
-			shaders.push_back(shader);
-			return shader;
-		} else {
+		if(shader->getType() == 0) {
 			delete shader;
 			return 0;
 		}
+		return shader;
 	}
 	
 	SoraCGD3D9Shader::~SoraCGD3D9Shader() {
@@ -40,25 +35,26 @@ namespace sora {
 		const char* str = cgGetLastErrorString(&error);
 		if(error != CG_NO_ERROR) {
 			SoraCore::Instance()->log(std::string("SoraShader: ")+str);
-			printf("SoraShader: %s\n", str);
 			if(error == CG_COMPILER_ERROR) {
 				SoraCore::Instance()->log(std::string("SoraShaderContext: ")+cgGetLastListing(context));
-				printf("SoraShaderContext: %s", cgGetLastListing(context));
 			}			
-			type = 0;
+			setType(0);
 		}
 	}
 	
-	SoraCGD3D9Shader::SoraCGD3D9Shader(const SoraString& file, const SoraString& entry, int32 type, CGcontext context) {
-		this->type = type;
+	SoraCGD3D9Shader::SoraCGD3D9Shader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context) {
+		setType(type);
 		switch (type) {
 			case VERTEX_SHADER:		profile = cgD3D9GetLatestVertexProfile(); break;
 			case FRAGMENT_SHADER:	profile = cgD3D9GetLatestPixelProfile(); break;
+			default:
+				setType(0);
 		}
 		cgD3D9GetOptimalOptions(profile);
 		checkError(context);	
+
 		ulong32 size;
-		const char* data = (const char*)SoraCore::Instance()->getResourceFile(s2ws(file), size);
+		const char* data = (const char*)SoraCore::Instance()->getResourceFile(file, size);
 		if(data) {
 			char* sdata = (char*)malloc(size+1);
 			memcpy(sdata, data, size);
@@ -69,42 +65,47 @@ namespace sora {
 									  profile,
 									  entry.c_str(),
 									  NULL);
+			sora::SORA->freeResourceFile((void*)data);
 			free(sdata);
-			free((void*)data);
-
+			
 			checkError(context);
 			cgD3D9LoadProgram(program, false, 0);
 			checkError(context);
 		} else {
-			type = 0;
+			setType(0);
 		}	
+
+		textureParam = 0;
+		textureHandle = 0;
 	}
 	
+	void SoraCGD3D9Shader::setTexture(const SoraString& decalName, ulong32 tex) {
+		textureParam = cgGetNamedParameter(program, decalName.c_str());
+		textureHandle = tex;
+		checkError(context);
+	}
+
 	bool SoraCGD3D9Shader::attach() {
-		if(type == 0) return false;
-		
 		cgD3D9BindProgram(program);
 		checkError(context);
+		
 		//cgDXEnableProfile(profile);
 		
-		return type != 0;
+		return getType() != 0;
 	}
 	
 	bool SoraCGD3D9Shader::detach() {
-		if(type == 0) return false;
-		
 		//cgD3D9DisableProfile(profile);
 		cgD3D9UnbindProgram(program);
 		checkError(context);
 		
-		return type != 0;
+		return getType() != 0;
 	}
 
 	bool SoraCGD3D9Shader::setParameterfv(const char* name, float32* fv, uint32 size) {
-		if(type == 0) return false;
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);
-		if(type == 0) return false;
+		if(getType() == 0) return false;
 		
 		switch (size) {
 			case 1: cgSetParameter1fv(param, fv); break;
@@ -113,14 +114,13 @@ namespace sora {
 			case 4: cgSetParameter4fv(param, fv); break;
 		}
 		checkError(context);
-		return (type != 0);
+		return (getType() != 0);
 	}
 	
 	bool SoraCGD3D9Shader::setParameteriv(const char* name, int32* fv, uint32 size) {
-		if(type == 0) return false;
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);
-		if(type == 0) return false;
+		if(getType() == 0) return false;
 		
 		switch (size) {
 			case 1: cgSetParameter1iv(param, fv); break;
@@ -129,7 +129,7 @@ namespace sora {
 			case 4: cgSetParameter4iv(param, fv); break;
 		}
 		checkError(context);
-		return (type != 0);
+		return (getType() != 0);
 	}
 
 } // namespace sora

@@ -49,7 +49,7 @@ namespace sora {
 			case VERTEX_SHADER: profile = cgGLGetLatestProfile(CG_GL_VERTEX); break;
 			case FRAGMENT_SHADER: profile = cgGLGetLatestProfile(CG_GL_FRAGMENT); break;
 			default:
-				this->setType(0);
+				setType(0);
 		}
 		cgGLGetOptimalOptions(profile);
 		checkError(context);
@@ -65,12 +65,17 @@ namespace sora {
 									  NULL);
 			SORA->freeResourceFile((void*)data);
             
-			
 			checkError(context);
 			cgGLLoadProgram(program);
 		} else {
 			setType(0);
 		}
+
+		textureParam = 0;
+	}
+
+	void SoraCGGLShader::setTexture(const SoraString& decalName, ulong32 tex) {
+		textureParam = cgGetNamedParameter(program, decalName.c_str());
 	}
 	
 	bool SoraCGGLShader::attach() {
@@ -78,7 +83,10 @@ namespace sora {
 		checkError(context);
 		cgGLEnableProfile(profile);
 		checkError(context);
-
+		if(textureParam) {
+			cgGLEnableTextureParameter(textureParam);
+			checkError(context);
+		}
 		return (getType() != 0);
 	}
 	

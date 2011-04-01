@@ -51,6 +51,8 @@ namespace sora {
 		 */
 		virtual bool setParameteriv(const char* name, int32* val, uint32 size) = 0;
 		
+		virtual void setTexture(const SoraString& decalName, ulong32 tex) = 0;
+
 		/*
 			Get the type of the shader
 			See SORA_SHADER_TYPE

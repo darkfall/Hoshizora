@@ -67,7 +67,7 @@ namespace sora {
 
 	void SoraCore::_initializeMiscTool() {
 #ifdef OS_WIN32
-		pMiscTool = new SoraMiscToolWin32; return;
+		pMiscTool = new SoraMiscToolWin32;  return;
 #elif defined(OS_OSX)
 		pMiscTool = new SoraMiscToolOSX; return;
 #endif
@@ -701,10 +701,12 @@ namespace sora {
 	}
 
 	int32 SoraCore::messageBox(const SoraString& sMssg, const SoraString& sTitle, int32 iCode) {
+		pMiscTool->setMainWindowHandle(getMainWindowHandle());
 		return pMiscTool->messageBox(sMssg, sTitle, iCode);
 	}
 
 	int32 SoraCore::messageBoxW(const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode) {
+		pMiscTool->setMainWindowHandle(getMainWindowHandle());
 		return pMiscTool->messageBox(sMssg, sTitle, iCode);
 	}
 

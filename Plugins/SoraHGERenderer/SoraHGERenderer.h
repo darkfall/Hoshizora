@@ -49,7 +49,7 @@ namespace sora {
 		SoraTexture* createTextureWH(int w, int h);
 		SoraTexture* createTextureFromMem(void* ptr, ulong32 size, bool bMipmap=false);
 		SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h);
-		ulong32*	 textureLock(SoraTexture*, bool bReadOnly=true, uint32 x=0, uint32 y=0, uint32 w=0, uint32 h=0);
+		ulong32*	 textureLock(SoraTexture*);
 		void		 textureUnlock(SoraTexture*);
 		void		 releaseTexture(SoraTexture* tex);
 

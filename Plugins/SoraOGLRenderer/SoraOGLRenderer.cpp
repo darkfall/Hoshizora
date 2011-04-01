@@ -316,7 +316,7 @@ namespace sora{
 
 	void SoraOGLRenderer::bindTexture(SoraTexture* tex) {
         if(!tex) {
-            mCurrTexture != 0;
+            mCurrTexture = 0;
             glBindTexture(GL_TEXTURE_2D, 0);
             return;
         }
@@ -605,8 +605,7 @@ namespace sora{
 			mColors[(mVertexCount<<2)+3] = colors[cdx++];
 			mVertexCount++;
 		}
-
-		if(currShader) {
+		if(currShader) {	
 			if(!currShader->attachShaderList())
 				SoraCore::Instance()->log("SoraOGLRenderer: error attaching shader list");
 			flush();
@@ -643,7 +642,7 @@ namespace sora{
 		Rect4V rect;
 
 		if(fWidth != y2-y1 && fWidth != x2-x1) {
-			float rotAng = (float)atan2f(y2-y1, x2-x1)-D_PI_4;
+			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
 
 			rect.x1 = x1; rect.y1 = y1;
 			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
@@ -718,8 +717,8 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::setTransformWindowSize(float32 w, float32 h) {
-		_oglWindowInfo.width = w!=0.f?w:mainWindow->getWindowWidth();
-		_oglWindowInfo.height = h!=0.f?h:mainWindow->getWindowHeight();
+		_oglWindowInfo.width = w!=0?w:mainWindow->getWindowWidth();
+		_oglWindowInfo.height = h!=0?h:mainWindow->getWindowHeight();
 		applyTransform();
 
 	}

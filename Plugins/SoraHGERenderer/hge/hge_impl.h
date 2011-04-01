@@ -146,6 +146,7 @@ public:
 	virtual void		CALL	Texture_Unlock(HTEXTURE tex);
 
 	virtual unsigned long CALL getVideoDeviceHandle();
+	virtual void	CALL SetShaderChanged(bool flag) { shaderChanged = flag; }
 	//////// Implementation ////////
 
 	static HGE_Impl*	_Interface_Get();
@@ -242,7 +243,7 @@ public:
 	void				_AdjustWindow();
 	void				_Resize(int width, int height);
 	bool				_init_lost();
-	void				_render_batch(bool bEndScene=false);
+	void				CALL _render_batch(bool bEndScene=false);
 	int					_format_id(D3DFORMAT fmt);
 	void				_SetBlendMode(int blend);
 	void				_SetProjectionMatrix(int width, int height);

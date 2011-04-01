@@ -69,9 +69,10 @@ namespace sora {
 		int32 er = 1;
 		
 		while(itShader != getShaderList().end()) {
-			(*itShader)->attach();
-			if((*itShader)->type == 0) er = 0;
-			
+			if((*itShader) != NULL) {
+				(*itShader)->attach();
+				if((*itShader)->type == 0) er = 0;
+			}
 			++itShader;
 		}
 		return er==1?true:false;
@@ -88,9 +89,10 @@ namespace sora {
 		int32 er = 1;
 		
 		while(itShader != shaders.end()) {
-			(*itShader)->detach();
-			if((*itShader)->type == 0) er = 1;
-			
+			if((*itShader) != NULL) {
+				(*itShader)->detach();
+				if((*itShader)->type == 0) er = 1;
+			}
 			++itShader;
 		}	
 		return er==1?true:false;

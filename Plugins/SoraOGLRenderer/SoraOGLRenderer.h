@@ -108,7 +108,7 @@ namespace sora {
 			float32 hscale, vscale;
 			int32 width, height;
 			
-			_SoraOGLWindowInfo(): hscale(1.f), vscale(1.f), x(0.f), y(0.f), z(0.f), dx(0.f), dy(0.f), rot(0.f), width(0.f), height(0.f) {}
+			_SoraOGLWindowInfo(): hscale(1.f), vscale(1.f), x(0.f), y(0.f), z(0.f), dx(0.f), dy(0.f), rot(0.f), width(0), height(0) {}
 		};
 		_SoraOGLWindowInfo _oglWindowInfo;
 

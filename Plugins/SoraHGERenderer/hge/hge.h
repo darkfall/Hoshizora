@@ -387,7 +387,8 @@ public:
 	virtual char*		CALL	Resource_EnumFiles(const char *wildcard=0) = 0;
 	virtual char*		CALL	Resource_EnumFolders(const char *wildcard=0) = 0;
 
-	virtual void			_render_batch(bool bEndScene=false) = 0;
+	virtual void			CALL _render_batch(bool bEndScene=false) = 0;
+	virtual	void			CALL SetShaderChanged(bool flag) = 0;
 	virtual unsigned long		CALL	getVideoDeviceHandle() = 0;
 
 	IDirect3DDevice9*		pD3DDevice;

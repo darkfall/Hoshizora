@@ -5,14 +5,13 @@ struct C2E2f_Output {
   float4 color : COLOR;
 };
 
-C2E2f_Output C2E2f_passthru(float2 texCoord : TEXCOORD0,
-                            uniform sampler2D tex: TEX0)
+C2E2f_Output C2E2f_passthru(float2 texCoord: TEXCOORD0,
+				uniform sampler2D decal: TEX0,
+				uniform float ratio)
 {
   C2E2f_Output OUT;
-  OUT.color = tex2D(tex, texCoord);
-  float col = (OUT.color.r + OUT.color.g + OUT.color.b) / 3.0;
-  OUT.color.r = col;
-  OUT.color.g = col;
-  OUT.color.b = col;
+  OUT.color = tex2D(decal, texCoord);
+  float c = (OUT.color.r + OUT.color.g + OUT.color.b) / ratio;
+  OUT.color.r = c; OUT.color.g = c; OUT.color.b = c;
   return OUT;
 }

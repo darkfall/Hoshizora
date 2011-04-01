@@ -14,6 +14,9 @@
 #include <string>
 #include <vector>
 
+#include <sstream>
+#include <iomanip>
+
 #include "SoraPlatform.h"
 
 namespace sora {
@@ -33,13 +36,21 @@ namespace sora {
 	
 	
 	template<typename T>
-	std::string anyToString(const T& t, int precision=3);
+	std::string anyToString(const T& t, int precision) {
+		std::ostringstream str;
+		str << std::fixed << std::setprecision(precision) << t;
+		return str.str();		
+	}
 	template<typename T>
-	std::wstring anyToWString(const T& t, int precision=3);
+	std::wstring anyToWString(const T& t, int precision) {
+		std::wostringstream str;
+		str << std::fixed << std::setprecision(precision) << t;
+		return str.str();
+	}
 	
 	// 純英文字符串限定
-	std::string ws2s2(const std::wstring& ws);
-	std::wstring s2ws2(const std::string& s);	
+	std::string ws2sfast(const std::wstring& ws);
+	std::wstring s2wsfast(const std::string& s);	
 
 	void deliStr(std::vector<std::string>& c, const std::string& str, char deli);
 	//}

@@ -205,8 +205,8 @@ namespace sora{
 		return 0;
 	}
 
-	ulong32* SoraHGERenderer::textureLock(SoraTexture* ht, bool bReadOnly, uint32 x, uint32 y, uint32 w, uint32 h) {
-		return pHGE->Texture_Lock(ht->mTextureID, bReadOnly, x, y, w, h);
+	ulong32* SoraHGERenderer::textureLock(SoraTexture* ht) {
+		return pHGE->Texture_Lock(ht->mTextureID, false, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight);
 	}
 
 	void SoraHGERenderer::textureUnlock(SoraTexture* h) {
@@ -234,8 +234,12 @@ namespace sora{
 			memcpy(&hquad.v[0], &quad.v[0], sizeof(hgeVertex)*4);
 			hquad.blend = quad.blend;
 		}
-		pHGE->Gfx_RenderQuad(&hquad);
+		if(currShader) {
+			pHGE->SetShaderChanged(true);
+		}
 
+		pHGE->Gfx_RenderQuad(&hquad);
+			
 		if(currShader) {
 			currShader->attachShaderList();
 			pHGE->_render_batch();

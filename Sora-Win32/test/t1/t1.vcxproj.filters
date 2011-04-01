@@ -76,6 +76,9 @@
     <Filter Include="头文件\random">
       <UniqueIdentifier>{78cbc1ea-1726-478d-a6ef-4464315d1ed0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\json">
+      <UniqueIdentifier>{fae32abf-f0da-4349-8837-db96947a14c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -702,9 +705,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\ft2build.h">
       <Filter>Plugins\FreetypeFont</Filter>
     </ClInclude>
-    <ClInclude Include="SoraDXRenderer.h">
-      <Filter>Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\CoreTransform.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -990,6 +990,45 @@
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.h">
       <Filter>源文件\gcn</Filter>
     </ClInclude>
+    <ClInclude Include="SoraDXRenderer.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\jsongui.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\autolink.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\config.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\features.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\forwards.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\json.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\json_batchallocator.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\reader.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\value.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\json\writer.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -1214,9 +1253,6 @@
     <ClCompile Include="lsAnimatedSprite.cpp">
       <Filter>源文件\ls</Filter>
     </ClCompile>
-    <ClCompile Include="SoraDXRenderer.cpp">
-      <Filter>Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\CoreTransform.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -1397,10 +1433,40 @@
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.cpp">
       <Filter>源文件\gcn</Filter>
     </ClCompile>
+    <ClCompile Include="SoraDXRenderer.cpp">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\jsongui.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\json\json_reader.cpp">
+      <Filter>头文件\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\json\json_value.cpp">
+      <Filter>头文件\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\json\json_writer.cpp">
+      <Filter>头文件\json</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Plugins\SoraOGLRenderer\soil\soil.html">
       <Filter>Plugins</Filter>
+    </None>
+    <None Include="..\..\..\Sora\json\json_internalarray.inl">
+      <Filter>头文件\json</Filter>
+    </None>
+    <None Include="..\..\..\Sora\json\json_internalmap.inl">
+      <Filter>头文件\json</Filter>
+    </None>
+    <None Include="..\..\..\Sora\json\json_valueiterator.inl">
+      <Filter>头文件\json</Filter>
     </None>
   </ItemGroup>
 </Project>

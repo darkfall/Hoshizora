@@ -252,8 +252,8 @@ namespace sora {
         if(hasShader()) 
             sora->attachShaderContext(shaderContext);
 		sora->renderQuad(quad);
-        if(hasShader()) 
-            sora->detachShaderContext();
+ //       if(hasShader()) 
+   //         sora->detachShaderContext();
 	}
 
 	void SoraSprite::setColor(ulong32 c, int32 i) {
@@ -469,7 +469,7 @@ namespace sora {
                 return NULL;
         }
         SoraShader* shader = shaderContext->attachShader(shaderPath, entry, type);
-        return shader;
+	    return shader;
     }
     
     void SoraSprite::attachShader(SoraShader* shader) {

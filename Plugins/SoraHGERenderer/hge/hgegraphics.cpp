@@ -234,58 +234,6 @@ void CALL HGE_Impl::Gfx_RenderTriple(const hgeTriple *triple)
 
 void CALL HGE_Impl::Gfx_RenderQuad(const hgeQuad *quad)
 {
-	
-	//static int i=0;
-	//
-	////pD3DDevice->SetFVF( D3DFVF_XYZ | D3DFVF_TEX1 );
-	////pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
-	////pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-	////pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
-	////pD3DDevice->SetRenderState( D3DRS_ALPHATESTENABLE, FALSE );
-	////pD3DDevice->SetRenderState( D3DRS_SEPARATEALPHABLENDENABLE, FALSE );
-	////pD3DDevice->SetRenderState( D3DRS_BLENDOP, D3DBLENDOP_ADD );
-	////pD3DDevice->SetRenderState( D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA|D3DCOLORWRITEENABLE_BLUE|D3DCOLORWRITEENABLE_GREEN|D3DCOLORWRITEENABLE_RED );
-	////pD3DDevice->SetRenderState( D3DRS_SHADEMODE, D3DSHADE_GOURAUD );
-	////pD3DDevice->SetRenderState( D3DRS_FOGENABLE, FALSE );
-	////pD3DDevice->SetRenderState( D3DRS_ZWRITEENABLE, FALSE );
-	////pD3DDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID );
-	////pD3DDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_CCW );
-	//if(i==0 && false )
-	//{
-	//	i=1;
-	//	
-	//	//pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-	//	//pD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-
-
-	//	//pD3DDevice->SetRenderState (D3DRS_CULLMODE, D3DCULL_NONE);
-	//	//pD3DDevice->SetRenderState (D3DRS_LIGHTING, FALSE);
-	//	//pD3DDevice->SetRenderState (D3DRS_ALPHABLENDENABLE,   TRUE);
-	//	//pD3DDevice->SetRenderState (D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	//	//pD3DDevice->SetRenderState (D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
-	//	//pD3DDevice->SetTextureStageState (0, D3DTSS_COLOROP, D3DTOP_MODULATE);
-	//	//pD3DDevice->SetTextureStageState (0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-	//pSprite->Begin(D3DXSPRITE_ALPHABLEND);  // 为什么初始化的时候必须做一次这样的操作呢 ,就是会设置pD3DDevice->SetFVF(D3DFVF_HGEVERTEX);
-	////// Texture being used is 64 by 64:
-	////D3DXVECTOR2 spriteCentre=D3DXVECTOR2(32.0f,32.0f);
-	////// Screen position of the sprite
-	////D3DXVECTOR2 trans=D3DXVECTOR2(50.0f,80.0f);
-	////// Rotate based on the time passed
-	////float rotation=timeGetTime()/500.0f;
-	////// Build our matrix to rotate, scale and position our sprite
-	////D3DXMATRIX mat;
-	////D3DXVECTOR2 scaling(2.0f,2.0f);
-	////// out, scaling centre, scaling rotation, scaling, rotation centre, 
-	////// rotation, translation
-	////D3DXMatrixTransformation2D(&mat,NULL,0.0f,&scaling,&spriteCentre,rotation,&trans);
-	////// Tell the sprite about the matrix
-	////pSprite->SetTransform(&mat);
-	////// Draw the sprite
-	////pSprite->Draw((LPDIRECT3DTEXTURE9)quad->tex,NULL,NULL,NULL,0xFFFFFFFF);
-	////// Thats it
-	//pSprite->End();
-	//}
 
 	if(VertArray)
 	{

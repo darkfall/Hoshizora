@@ -50,7 +50,7 @@ namespace sora {
 			
 			//printf("%f, %f\n", pos, (t1+(t2-t1)*sinf(D_PI_2*pos)));
 
-			return (t1+(t2-t1)*sinf(D_PI_2*pos));
+			return (t1+(t2-t1)*sinf(F_PI_2*pos));
 		}
 		
 		CoreTrigTransformer<T>* copy() {

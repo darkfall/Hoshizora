@@ -224,6 +224,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textbox.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textfield.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\window.hpp" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\jsongui.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUI.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguifont.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguigraphics.hpp" />
@@ -250,6 +251,8 @@
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.h" />
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.h" />
     <ClInclude Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraWin32MiscTool\SoraMiscTool_Win32.h" />
     <ClInclude Include="..\..\..\Plugins\SoraWin32Timer\orz.h" />
     <ClInclude Include="..\..\..\Plugins\SoraWin32Timer\SoraTimer_Win32.h" />
@@ -294,6 +297,15 @@
     <ClInclude Include="..\..\..\Sora\hgerect.h" />
     <ClInclude Include="..\..\..\Sora\hgevector.h" />
     <ClInclude Include="..\..\..\Sora\HoshiNoSora.h" />
+    <ClInclude Include="..\..\..\Sora\json\autolink.h" />
+    <ClInclude Include="..\..\..\Sora\json\config.h" />
+    <ClInclude Include="..\..\..\Sora\json\features.h" />
+    <ClInclude Include="..\..\..\Sora\json\forwards.h" />
+    <ClInclude Include="..\..\..\Sora\json\json.h" />
+    <ClInclude Include="..\..\..\Sora\json\json_batchallocator.h" />
+    <ClInclude Include="..\..\..\Sora\json\reader.h" />
+    <ClInclude Include="..\..\..\Sora\json\value.h" />
+    <ClInclude Include="..\..\..\Sora\json\writer.h" />
     <ClInclude Include="..\..\..\Sora\llexer\llexer.h" />
     <ClInclude Include="..\..\..\Sora\md5lib.h" />
     <ClInclude Include="..\..\..\Sora\quaternion.h" />
@@ -431,6 +443,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textbox.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textfield.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\window.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\jsongui.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguifont.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguigraphics.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguiimage.cpp" />
@@ -452,6 +465,8 @@
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraWin32Timer\orz.c" />
     <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\PackMemory.cpp" />
@@ -474,6 +489,9 @@
     <ClCompile Include="..\..\..\Sora\graphicEffects.cpp" />
     <ClCompile Include="..\..\..\Sora\hgerect.cpp" />
     <ClCompile Include="..\..\..\Sora\hgevector.cpp" />
+    <ClCompile Include="..\..\..\Sora\json\json_reader.cpp" />
+    <ClCompile Include="..\..\..\Sora\json\json_value.cpp" />
+    <ClCompile Include="..\..\..\Sora\json\json_writer.cpp" />
     <ClCompile Include="..\..\..\Sora\llexer\llexer.cpp" />
     <ClCompile Include="..\..\..\Sora\md5lib.cpp" />
     <ClCompile Include="..\..\..\Sora\Random\SFMT.c" />
@@ -522,6 +540,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Plugins\SoraOGLRenderer\soil\soil.html" />
+    <None Include="..\..\..\Sora\json\json_internalarray.inl" />
+    <None Include="..\..\..\Sora\json\json_internalmap.inl" />
+    <None Include="..\..\..\Sora\json\json_valueiterator.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

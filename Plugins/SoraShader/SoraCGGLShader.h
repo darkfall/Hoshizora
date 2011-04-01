@@ -24,6 +24,7 @@ namespace sora {
         
 	public:
 		
+		void setTexture(const SoraString& decalName, ulong32 tex);
 		bool setParameterfv(const char* name, float32* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
 		
@@ -48,6 +49,7 @@ namespace sora {
 		CGprofile profile;
 		CGprogram program;
 		CGcontext context;
+		CGparameter textureParam;
 	};
 	
 	class SoraCGGLShaderContext: public SoraShaderContext {
