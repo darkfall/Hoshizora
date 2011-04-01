@@ -52,7 +52,9 @@ bool mainWindow::renderFunc() {
    // sora->setViewPoint(0.f, 0.f, 1.f);
   	
     pSpr->render(0.f, 0.f);
-	pSpr2->render(0.f, 0.f);
+	pSpr2->render(100.f, 100.f);
+	float t = 0.56;
+	//shader->setParameterfv("twisting", &t, 1);
 
 	sora->endScene();
     
@@ -75,7 +77,8 @@ void mainWindow::init() {
 	pSpr2 = sora::SORA->createSprite(L"sea.png");
 	
 	pSpr2->setScale(0.5f, 0.5f);
-	pSpr2->attachShader(L"gray.ps", "gray", sora::FRAGMENT_SHADER);
+	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
+	pSpr2->attachShader(L"gray.ps", "C3E3f_pass", sora::FRAGMENT_SHADER);
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

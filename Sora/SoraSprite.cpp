@@ -147,6 +147,7 @@ namespace sora {
 		rot = rotZ = 0.f;
 		centerX = centerY = 0.f;
         shaderContext = NULL;
+		setPosition(0.f, 0.f);
 	}
 
 	void SoraSprite::setTextureRect(float32 x, float32 y, float32 width, float32 height) {
