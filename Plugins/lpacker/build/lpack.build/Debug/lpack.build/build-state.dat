@@ -313,8 +313,8 @@ t2
 s0
 
 N/Users/darkfall/SoraGit/Plugins/lpacker/ZLIB/zconf.h
-c000000004D74848B0000000000002548
-t1299481739
+c000000004D9151800000000000002548
+t1301369216
 s9544
 i<windows.h>
 i<sys/types.h>
@@ -322,8 +322,8 @@ i<unistd.h>
 i<unixio.h>
 
 N/Users/darkfall/SoraGit/Plugins/lpacker/ZLIB/zlib.h
-c000000004D74848B00000000000107D9
-t1299481739
+c000000004D91518000000000000107D9
+t1301369216
 s67545
 i"zconf.h"
 
@@ -413,36 +413,36 @@ t2
 s0
 
 N/Users/darkfall/SoraGit/Plugins/lpacker/lPacker.cpp
-c000000004D74848B000000000000158A
-t1299481739
+c000000004D915180000000000000158A
+t1301369216
 s5514
 i"lPacker.h"
 i<cassert>
 
 N/Users/darkfall/SoraGit/Plugins/lpacker/lPacker.h
-c000000004D74848B00000000000010CA
-t1299481739
+c000000004D91518000000000000010CA
+t1301369216
 s4298
 i<vector>
 i<string>
 
 N/Users/darkfall/SoraGit/Plugins/lpacker/lZipPacker.cpp
-c000000004D74848B0000000000000D08
-t1299481739
-s3336
+c000000004D9153060000000000000D09
+t1301369606
+s3337
 i"lZipPacker.h"
 i"ZLIB/zlib.h"
 i<cassert>
 
 N/Users/darkfall/SoraGit/Plugins/lpacker/lZipPacker.h
-c000000004D74848B00000000000003A6
-t1299481739
+c000000004D91518000000000000003A6
+t1301369216
 s934
 i"lPacker.h"
 
 N/Users/darkfall/SoraGit/Plugins/lpacker/main.cpp
-c000000004D74848B00000000000004D1
-t1299481739
+c000000004D91518000000000000004D1
+t1301369216
 s1233
 i<iostream>
 i"lZipPacker.h"
@@ -661,6 +661,21 @@ t1296903135
 s1233
 i<iostream>
 i"lZipPacker.h"
+
+N/xcode3/SDKs/MacOSX10.6.sdk
+c000000004D5A274300000000000000EE
+t1297753923
+s238
+
+N/xcode3/SDKs/MacOSX10.6.sdk/usr/include/sys/types.h
+c000000004CC3DE680000000000002905
+t1287904872
+s10501
+
+N/xcode3/SDKs/MacOSX10.6.sdk/usr/include/unistd.h
+c000000004BBD2CE9000000000000563E
+t1270689001
+s22078
 
 CCompileC build/lpack.build/Debug/lpack.build/Objects-normal/x86_64/adler32.o /Users/darkfall/MyWorks/hoshinosora/SoraNew/Sora/Plugins/lpacker/../lPack/ZLIB/adler32.c normal x86_64 c com.apple.compilers.gcc.4_2
 r0

@@ -125,6 +125,8 @@ bool vlcWindow::renderFunc() {
             if(pTex) {
                 pSpr = new sora::SoraSprite(pTex);
             }
+            
+            pSpr->attachShader(vshader);
             pSpr->attachShader(shader);
             
             renderMovieImage();
@@ -199,9 +201,14 @@ void vlcWindow::init() {
     pFont = sora::SORA->createFont(L"cour.ttf", 24);
     pFont->setColor(0xFFFFFFFF);
     
+    
     shader = sora::SORA->createShader(L"gray.ps", "gray", sora::FRAGMENT_SHADER);
     float32 ratio = 3.f;
     shader->setParameterfv("ratio", &ratio, 1);
+    
+    vshader = sora::SORA->createShader(L"C3E4v_twist.cg", "C3E4v_twist", sora::VERTEX_SHADER);
+    float t = 0.64;
+    //vshader->setParameterfv("twisting", &t, 1);
     
     pSpr = 0;
 }

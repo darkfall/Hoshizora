@@ -371,11 +371,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "323313451.304439"
+         timestampString = "323400349.979265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "195"
-         endingLineNumber = "195"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
          landmarkName = "vlcWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -427,11 +427,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "323313451.304439"
+         timestampString = "323400349.979265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "166"
-         endingLineNumber = "166"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
          landmarkName = "vlcWindow::_loadGUI()"
          landmarkType = "5">
       </FileBreakpoint>

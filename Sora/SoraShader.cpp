@@ -15,6 +15,7 @@ namespace sora {
 
 	SoraShader::SoraShader() {
 		this->type = 0;
+        bInternal = false;
 	}
 	
 	SoraShader::~SoraShader() {
@@ -28,11 +29,11 @@ namespace sora {
 	SoraShaderContext::~SoraShaderContext() {
 		ShaderList::iterator itShader = shaders.begin();
 		while(itShader != shaders.end()) {
-			if((*itShader)) {
+			if((*itShader) && (*itShader)->bInternal) {
 				delete (*itShader);
 				(*itShader) = 0;
-				++itShader;
 			}
+            ++itShader;
 		}
 	}
 	
@@ -52,6 +53,7 @@ namespace sora {
 		
 		SoraShader* shader = createShader(file, entry, type);
         if(shader) {
+            shader->bInternal = true;
             attachShader(shader);
             return shader;
         }

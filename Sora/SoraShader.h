@@ -61,6 +61,7 @@ namespace sora {
         void setType(int32 t) { type = t; };
 
 	private:
+        bool bInternal;
 		/* 
 		 Attach the shader to render
 		 Applies to the rendering after attach

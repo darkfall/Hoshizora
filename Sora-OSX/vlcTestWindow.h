@@ -65,6 +65,7 @@ private:
     gcn::Slider* pslider;
     
     sora::SoraShader* shader;
+    sora::SoraShader* vshader;
 };
 
 
