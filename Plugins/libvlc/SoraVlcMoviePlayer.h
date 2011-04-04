@@ -31,8 +31,9 @@ namespace sora {
             bool bPaused;
     
             SoraVlcMoviePlayer* pPlayer;
+            SoraSprite* pSpr;
             
-            tagMP_CTX(): bChanged(false), frameCount(0), pixels(0), dummy(0), bPlaying(false), bPaused(false), bStopped(true) {}
+            tagMP_CTX(): bChanged(false), frameCount(0), pixels(0), dummy(0), bPlaying(false), bPaused(false), bStopped(true), pSpr(NULL) {}
         } MP_CTX;
         
         SoraVlcMoviePlayer();
@@ -75,6 +76,8 @@ namespace sora {
      
         float32 getPlayRate() const;
         void setPlayRate(float32 rate);
+        
+        void bindSprite(SoraSprite* pSprite);
         
     private:
         void setMediaInfo(uint32 w, uint32 h);

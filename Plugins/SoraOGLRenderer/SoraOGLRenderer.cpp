@@ -385,7 +385,7 @@ namespace sora{
 	}
 
 	SoraTexture* SoraOGLRenderer::createTextureWH(int w, int h) {
-		size_t size = w*h*4;
+		/*size_t size = w*h*4;
 		GLubyte* bitData = new GLubyte[size];
 		memset(bitData, size, 0xFF);
 
@@ -397,17 +397,17 @@ namespace sora{
 												SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_TEXTURE_REPEATS);
 		if(!texId) {
 			throw SORA_EXCEPTION("Error creating texture");
-		}
+		}*/
         
 
-		/*GLuint texId;
+		GLuint texId;
 
 		glGenTextures(1, &texId);
 		glBindTexture(GL_TEXTURE_2D, texId);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-*/
+
 		return new SoraTexture(texId, w, h, w, h);
 	}
 

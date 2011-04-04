@@ -109,7 +109,8 @@ bool vlcWindow::renderFunc() {
                  moviePlayer->getAudioChannelNum());
 
 
-    if(moviePlayer->isPlaying()) {
+    renderMovieImage();
+    /*if(moviePlayer->isPlaying()) {
         if(moviePlayer->frameChanged()) {
             if(pTex) {
                 sora::SORA->releaseTexture((sora::HSORATEXTURE)pTex);
@@ -138,7 +139,7 @@ bool vlcWindow::renderFunc() {
     } else if(pSpr) {
         renderMovieImage();
     }
-
+*/
    // luaTest.render();
     
     sora::GCN_GLOBAL->gcnDraw();
@@ -192,23 +193,16 @@ void vlcWindow::init() {
     pFileOpener->SetFilter("mp4;rm;rmvb;mkv;avi;flv;f4v;");
     
     moviePlayer = new sora::SoraVlcMoviePlayer();
+    
+    pSpr = new sora::SoraSprite((sora::SoraTexture*)sora::SORA->createTextureWH(848, 499));
+    moviePlayer->bindSprite(pSpr);
+
     moviePlayer->openMedia(L"./AMV_Scenario.mp4", 848, 499);
     moviePlayer->play();
-    
+        
     sora::SORA->setWindowTitle(L"AMV_Scenerio.mp4");
     sora::SORA->setFPS(999);
     
     pFont = sora::SORA->createFont(L"cour.ttf", 24);
     pFont->setColor(0xFFFFFFFF);
-    
-    
-    shader = sora::SORA->createShader(L"gray.ps", "gray", sora::FRAGMENT_SHADER);
-    float32 ratio = 3.f;
-    shader->setParameterfv("ratio", &ratio, 1);
-    
-    vshader = sora::SORA->createShader(L"C3E4v_twist.cg", "C3E4v_twist", sora::VERTEX_SHADER);
-    float t = 0.64;
-    //vshader->setParameterfv("twisting", &t, 1);
-    
-    pSpr = 0;
 }

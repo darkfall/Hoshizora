@@ -17,7 +17,10 @@ namespace sora {
     
     static void* lock(void* data, void** pixels) {
         SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
-        *pixels = ctx->pixels;
+        if(!ctx->pSpr)
+            *pixels = ctx->pixels;
+        else
+            *pixels = ctx->pSpr->getPixelData();
         ++ctx->frameCount;
     
         return 0;
@@ -27,6 +30,8 @@ namespace sora {
         SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
         ctx->bChanged = true;
         memcpy(ctx->dummy, ctx->pixels, ctx->pPlayer->getWidth()*ctx->pPlayer->getHeight()*4);
+        if(ctx->pSpr)
+            ctx->pSpr->unlockPixelData();
     }
     
     static void display(void* data, void* id) {
@@ -185,5 +190,9 @@ namespace sora {
     
     void SoraVlcMoviePlayer::setPlayRate(float32 rate) {
         libvlc_media_player_set_rate(mp, rate);
+    }
+    
+    void SoraVlcMoviePlayer::bindSprite(SoraSprite* pSprite) {
+        frameData.pSpr = pSprite;
     }
 } // namespace sora

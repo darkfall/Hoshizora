@@ -16,6 +16,61 @@
 #include <cassert>
 
 namespace sora {
+    
+    template<typename ElementType, int minPartitionSize>
+    class PartitionTree;
+    
+    template<typename ElementType, int minPartitionSize>
+    class PartitionTreeIterator {
+        friend class PartitionTree<ElementType, minPartitionSize>;
+        
+    public:
+        typedef typename PartitionTree<ElementType, minPartitionSize>::PARTITION_NODE ValueType;
+        typedef typename PartitionTree<ElementType, minPartitionSize>::PARTITION_ELEMENT_ITERATOR ElementTypeIterator;
+        
+        typedef PartitionTreeIterator<ElementType, minPartitionSize> ITERATOR;
+        
+        PartitionTreeIterator(): _ValuePtr(NULL) {}
+        
+        ITERATOR& operator++() {
+            if(_itIndex != _ValuePtr->elements.end()-1) {
+                ++_itIndex;
+            } else {
+                if(_ValuePtr->nextNode != NULL)
+                    _ValuePtr = _ValuePtr->nextNode;
+            }
+            return *this;
+        }
+        
+        ITERATOR& operator--() {
+            if(_itIndex != _ValuePtr->elements.begin()) {
+                --_itIndex;
+            } else {
+                if(_ValuePtr->prevNode != NULL) 
+                    _ValuePtr = _ValuePtr->prevNode;
+            }
+            return *this;
+        }
+        
+        ElementType& operator*() {
+            return _itIndex->element;
+        }
+        ElementType* operator&() {
+            return &_itIndex->element;
+        }
+        ElementType& operator->() {
+            return _itIndex->element;
+        }
+        
+    private:
+        ValueType _ValuePtr;
+        ElementTypeIterator _itIndex;
+        
+        PartitionTreeIterator(ValueType* pVal): _ValuePtr(pVal) {
+            assert(_ValuePtr != NULL && _ValuePtr->isLeaf());
+            _itIndex = _ValuePtr->elements.begin();
+        }
+    };
 	
 	/*
 	 A special Quadtree for fast iteration but slower insertion
@@ -39,8 +94,9 @@ namespace sora {
 			PARTITION_ELEMENT elements;
 			
 			PARTITION* next;
+            PARTITION* parent;
 			
-			PARTITION_NODE(): next(NULL), x(0), y(0) {}
+			PARTITION_NODE(): next(NULL), x(0), y(0), nextNode(NULL), prevNode(NULL), parent(NULL) {}
 			~PARTITION_NODE() { 
 				if(!isLeaf()) {
 					delete next;
@@ -56,6 +112,9 @@ namespace sora {
 				}
 				return 0;
 			}
+            
+            PARTITION_NODE* nextNode;
+            PARTITION_NODE* prevNode;
 		};
 		
 		struct PARTITION {
@@ -171,8 +230,10 @@ namespace sora {
 			if(w <= PART_SIZE && h <= PART_SIZE) {
 				node->elements.push_back(ELEMENT_CONT(x, y, element));
 			} else {
-				if(node->next == NULL)
+				if(node->next == NULL) {
 					node->next = _initPartition(node->x, node->y, part->midx, part->midy);
+                    node->parent = part;
+                }
 				_insertElement(node->next, x, y, element);
 			}
 		}

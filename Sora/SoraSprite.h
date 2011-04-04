@@ -113,6 +113,8 @@ namespace sora {
         void clearShader();
         
 	private:
+        void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
+        
 		SoraSprite() { texture=0; _initDefaults(); }
 		SoraSprite(SoraSprite&) { }
 

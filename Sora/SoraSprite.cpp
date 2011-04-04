@@ -6,58 +6,24 @@
 namespace sora {
 
     SoraSprite::SoraSprite(HSORATEXTURE tex) {
-        SoraSprite((SoraTexture*)tex);
+        SoraTexture* ptex = (SoraTexture*)tex;
+        _init(ptex, 0.f, 0.f, ptex?ptex->mTextureWidth:1.f, ptex?ptex->mTextureHeight:1.f);
     }
     
     SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h) {
-        SoraSprite((SoraTexture*)tex, x, y, w, h);
+        _init((SoraTexture*)tex, x, y, w, h);
     }
     
 	SoraSprite::SoraSprite(SoraTexture* tex) {
-		float texx1, texy1, texx2, texy2;
-		
-		sora = SoraCore::Instance();
-		
-		textureRect.x1 = 0.f; textureRect.y1 = 0.f;
-		if(tex) {
-			textureRect.x2 = tex->mTextureWidth; textureRect.y2 = tex->mTextureHeight;
-		} else {
-			textureRect.x2 = 1.f;
-			textureRect.y2 = 1.f;
-		}
-		quad.tex = tex;
-		
-		texx1 = 0.f;
-		texy1 = 0.f;
-		texx2 = 1.f;
-		texy2 = 1.f;
-		
-		quad.v[0].tx = texx1; quad.v[0].ty = texy1;
-		quad.v[1].tx = texx2; quad.v[1].ty = texy1;
-		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
-		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
-		
-		quad.v[0].z = 
-		quad.v[1].z = 
-		quad.v[2].z = 
-		quad.v[3].z = 0.0f;
-		
-		quad.v[0].col = 
-		quad.v[1].col = 
-		quad.v[2].col = 
-		quad.v[3].col = 0xffffffff;
-
-		quad.blend=BLEND_DEFAULT;
-		
-		texture = tex;
-
-		_initDefaults();
-		
-		setType(SPRITE_TYPE);
+		_init(tex, 0.f, 0.f, tex?tex->mTextureWidth:1.f, tex?tex->mTextureHeight:1.f);
 	}
 
 	SoraSprite::SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
-		float texx1, texy1, texx2, texy2;
+		_init(tex, x, y, width, height);
+	}
+    
+    void SoraSprite::_init(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
+        float texx1, texy1, texx2, texy2;
 		
 		textureRect.x1 = 0.f; textureRect.y1 = 0.f;
 		if(tex) {
@@ -88,15 +54,15 @@ namespace sora {
 		quad.v[1].col = 
 		quad.v[2].col = 
 		quad.v[3].col = 0xffffffff;
-
+        
 		quad.blend=BLEND_DEFAULT;
 		
 		texture = tex;
-
+        
 		_initDefaults();
 		
 		setType(SPRITE_TYPE);
-	}
+    }
 
 	SoraSprite::~SoraSprite() {
 		clearEffects();
@@ -148,6 +114,7 @@ namespace sora {
 		centerX = centerY = 0.f;
         shaderContext = NULL;
 		setPosition(0.f, 0.f);
+        sora = SoraCore::Instance();
 	}
 
 	void SoraSprite::setTextureRect(float32 x, float32 y, float32 width, float32 height) {
@@ -238,10 +205,10 @@ namespace sora {
 		}
 		
         if(hasShader()) 
-            sora->attachShaderContext(shaderContext);
-		sora->renderQuad(quad);
+            SORA->attachShaderContext(shaderContext);
+		SORA->renderQuad(quad);
         if(hasShader())
-            sora->detachShaderContext();
+            SORA->detachShaderContext();
 	}
 
 	void SoraSprite::render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4) {
@@ -288,12 +255,12 @@ namespace sora {
 	}
 
 	ulong32* SoraSprite::getPixelData() const {
-		return sora->textureLock((HSORATEXTURE)texture);
+		return SORA->textureLock((HSORATEXTURE)quad.tex);
 		return 0;
 	}
     
     void SoraSprite::unlockPixelData() {
-        sora->textureUnlock((HSORASPRITE)texture);
+        SORA->textureUnlock((HSORASPRITE)quad.tex);
     }
 
 	const hgeRect& SoraSprite::getTextureRect() const {
