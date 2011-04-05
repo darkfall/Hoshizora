@@ -49,7 +49,7 @@ namespace sora {
 	}
     
     SoraShader* SoraShaderContext::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
-        if(getError() != 0) return false;
+        if(getError() != 0) return NULL;
 		
 		SoraShader* shader = createShader(file, entry, type);
         if(shader) {

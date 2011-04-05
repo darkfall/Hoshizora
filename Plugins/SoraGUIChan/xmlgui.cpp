@@ -20,8 +20,12 @@ bool XmlGui::parse(const std::string &filename)
     ulong32 size;
     void* pdata = sora::SORA->getResourceFile(sora::s2ws(filename), size);
     if(pdata) {
-        bool result = parse((char*)pdata, size);
+		char* sdata = (char*)malloc(size+1);
+		memcpy(sdata, pdata, size);
+		sdata[size] = '\0';
+        bool result = parse(sdata, size);
         sora::SORA->freeResourceFile(pdata);
+		free(sdata);
         return result;
     }
 	return false;

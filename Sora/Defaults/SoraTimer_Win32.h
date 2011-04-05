@@ -17,6 +17,8 @@ extern "C" {
 namespace sora {
 
 	class SoraWin32Timer: public SoraTimer {
+		friend class SoraCore;
+
 	public:
 		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; nFrameCounter = 0; fTimeScale = 1.f; }
 		void setFPS(int32 fps) { desiredFPS = fps; }
@@ -91,7 +93,7 @@ namespace sora {
 				fDeltaTime = (float)((double)(NowTime - lastTime) / (double)(TimePrecision)) * fTimeScale;
 		        lastTime = NowTime;
 			}
-			if(fDeltaTime >= 0.1f) 
+			if(fDeltaTime >= 0.01f) 
 				fDeltaTime = 1.f / desiredFPS;
 			fDeltaTime *= fTimeScale;
 

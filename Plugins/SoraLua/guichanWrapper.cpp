@@ -338,8 +338,9 @@ namespace guiwrapper {
     bool isWidgetEnabled(ulong32 h) {
         gcn::Widget* w = getWidgetByHandle(h);
         if(w) {
-            w->isEnabled();
+            return w->isEnabled();
         }
+		return false;
     }
     
     void requestWidgetModalFocus(ulong32 h) {

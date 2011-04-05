@@ -76,6 +76,7 @@ typedef DWORD HEFFECT;
 typedef DWORD HMUSIC;
 typedef DWORD HSTREAM;
 typedef DWORD HCHANNEL;
+typedef DWORD HSHADER;
 
 typedef DWORD HPIXSHADER;
 typedef DWORD HCONSTTABLE;
@@ -376,6 +377,10 @@ public:
 	virtual int			CALL	Texture_GetHeight(HTEXTURE tex, bool bOriginal=false) = 0;
 	virtual DWORD*		CALL	Texture_Lock(HTEXTURE tex, bool bReadOnly=true, int left=0, int top=0, int width=0, int height=0) = 0;
 	virtual void		CALL	Texture_Unlock(HTEXTURE tex) = 0;
+
+	virtual HSHADER		CALL	Shader_Create(const char *filename) = 0;
+	virtual void		CALL	Shader_Free(HSHADER shader) = 0;
+	virtual void		CALL	Gfx_SetShader(HSHADER shader) = 0;
 
 	
 	virtual void*		CALL	Resource_Load(const char *filename, DWORD *size=0) = 0;

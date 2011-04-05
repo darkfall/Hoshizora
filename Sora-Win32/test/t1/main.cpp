@@ -28,6 +28,7 @@
 #define HGE_RENDERER
 
 #include "../Sora-OSX/mainWindow.h"
+#include "vlcTestWindow.h"
 
 int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,
@@ -58,7 +59,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	sora->setFPS(60);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new vlcWindow);
 	sora->start();
 		
 	return 0;

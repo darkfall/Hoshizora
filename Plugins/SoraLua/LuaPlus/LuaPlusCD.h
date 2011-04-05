@@ -808,28 +808,28 @@ namespace LPCD
 
 
 	template <typename Callee, typename RT>
-	int Call(Callee& callee, RT (Callee::*func)(), lua_State* L, int index)
+	int Call2(Callee& callee, RT (Callee::*func)(), lua_State* L, int index)
 	{
 		return ReturnSpecialization<RT>::Call(callee, func, L, index);
 	}
 
 
 	template <typename Callee, typename RT, typename P1>
-	int Call(Callee& callee, RT (Callee::*func)(P1), lua_State* L, int index)
+	int Call2(Callee& callee, RT (Callee::*func)(P1), lua_State* L, int index)
 	{
 		return ReturnSpecialization<RT>::Call(callee, func, L, index);
 	}
 
 
 	template <typename Callee, typename RT, typename P1, typename P2>
-	int Call(Callee& callee, RT (Callee::*func)(P1, P2), lua_State* L, int index)
+	int Call2(Callee& callee, RT (Callee::*func)(P1, P2), lua_State* L, int index)
 	{
 		return ReturnSpecialization<RT>::Call(callee, func, L, index);
 	}
 
 
 	template <typename Callee, typename RT, typename P1, typename P2, typename P3>
-	int Call(Callee& callee, RT (Callee::*func)(P1, P2, P3), lua_State* L, int index)
+	int Call2(Callee& callee, RT (Callee::*func)(P1, P2, P3), lua_State* L, int index)
 	{
 		return ReturnSpecialization<RT>::Call(callee, func, L, index);
 	}
@@ -837,7 +837,7 @@ namespace LPCD
 
 	template <typename Callee, typename RT, typename P1, typename P2, typename P3,
 				typename P4>
-	int Call(Callee& callee, RT (Callee::*func)(P1, P2, P3, P4), lua_State* L, int index)
+	int Call2(Callee& callee, RT (Callee::*func)(P1, P2, P3, P4), lua_State* L, int index)
 	{
 		return ReturnSpecialization<RT>::Call(callee, func, L, index);
 	}
@@ -845,7 +845,7 @@ namespace LPCD
 
 	template <typename Callee, typename RT, typename P1, typename P2, typename P3,
 				typename P4, typename P5>
-	int Call(Callee& callee, RT (Callee::*func)(P1, P2, P3, P4, P5), lua_State* L, int index)
+	int Call2(Callee& callee, RT (Callee::*func)(P1, P2, P3, P4, P5), lua_State* L, int index)
 	{
 		return ReturnSpecialization<RT>::Call(callee, func, L, index);
 	}
@@ -853,7 +853,7 @@ namespace LPCD
 
 	template <typename Callee, typename RT, typename P1, typename P2, typename P3,
 				typename P4, typename P5, typename P6>
-	int Call(Callee& callee, RT (Callee::*func)(P1, P2, P3, P4, P5, P6), lua_State* L, int index)
+	int Call2(Callee& callee, RT (Callee::*func)(P1, P2, P3, P4, P5, P6), lua_State* L, int index)
 	{
 		return ReturnSpecialization<RT>::Call(callee, func, L, index);
 	}
@@ -861,7 +861,7 @@ namespace LPCD
 
 	template <typename Callee, typename RT, typename P1, typename P2, typename P3,
 				typename P4, typename P5, typename P6, typename P7>
-	int Call(Callee& callee, RT (Callee::*func)(P1, P2, P3, P4, P5, P6, P7), lua_State* L, int index)
+	int Call2(Callee& callee, RT (Callee::*func)(P1, P2, P3, P4, P5, P6, P7), lua_State* L, int index)
 	{
 		return ReturnSpecialization<RT>::Call(callee, func, L, index);
 	}
@@ -1018,7 +1018,7 @@ namespace LPCD
 		{
  			unsigned char* buffer = GetFirstUpValueAsUserData(L);
 			Callee& callee = *(Callee*)GetObjectUserData(L);
-			return Call(callee, *(Func*)buffer, L, startIndex);
+			return Call2(callee, *(Func*)buffer, L, startIndex);
 		}
 	};
 

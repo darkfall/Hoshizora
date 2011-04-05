@@ -270,9 +270,10 @@ namespace sora {
 		if(pTimer) delete pTimer;
 		if(pFontManager) delete pFontManager;
 
-		pRenderSystem->shutdown();
-
-		delete pRenderSystem;
+		if(bInitialized) {
+			pRenderSystem->shutdown();
+			delete pRenderSystem;
+		}
 		delete pResourceFileFinder;
 		
 		if(pSoundSystem) {
@@ -519,8 +520,6 @@ namespace sora {
 		
 		SoraTexture* tex = (SoraTexture*)pTexture;
 		pRenderSystem->releaseTexture(tex);
-		delete tex;
-		tex = 0;
 	}
 
 	void SoraCore::clearTextureMap() {

@@ -133,6 +133,10 @@ public:
 	virtual char*		CALL	Resource_EnumFiles(const char *wildcard=0);
 	virtual char*		CALL	Resource_EnumFolders(const char *wildcard=0);
 
+	virtual HSHADER		CALL	Shader_Create(const char *filename);
+	virtual void		CALL	Shader_Free(HSHADER shader);
+	virtual void		CALL	Gfx_SetShader(HSHADER shader);
+
 	virtual HTARGET		CALL	Target_Create(int width, int height, bool zbuffer);
 	virtual void		CALL	Target_Free(HTARGET target);
 	virtual HTEXTURE	CALL	Target_GetTexture(HTARGET target);
@@ -232,6 +236,7 @@ public:
 	int					CurPrimType;
 	int					CurBlendMode;
 	HTEXTURE			CurTexture;
+	HSHADER				CurShader;
 
 
 

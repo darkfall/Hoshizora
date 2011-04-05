@@ -55,7 +55,7 @@ public:
 		va_end(arglist);
 
 #if defined(WIN32) || defined(_XBOX) || defined(_XBOX_VER)
-		OutputDebugString(message);
+		OutputDebugStringA(message);
 #else // !WIN32
 		puts(message);
 #endif // WIN32

@@ -480,6 +480,8 @@ namespace sora{
 
 	void SoraOGLRenderer::releaseTexture(SoraTexture* tex) {
 		glDeleteTextures(1, (const GLuint*)&tex->mTextureID);
+		delete tex;
+		tex = 0;
 	}
 
 	void SoraOGLRenderer::renderTriple(SoraTriple& trip) {

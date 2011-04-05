@@ -3,17 +3,6 @@
 
 #include "luaclass.h"
 #include "LuaPlusHelper.h"
-
-//#include "SoraPhysicalObject.h"
-//#include "SoraRenderObject.h"
-//#include "SoraLuaObject.h"
-
-//#include "SoraZipFile.h"
-//#include "Files/SoraSoundFile.h"
-//#include "Files/SoraHttpFile.h"
-//#include "SoraINIFile.h"
-//#include "SoraParticleSystem.h"
-
 #include "SoraCore.h"
 
 #include <vector>

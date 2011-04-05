@@ -39,13 +39,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/cg;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,9 +78,89 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Plugins\DarkLib\FileDlg.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.h" />
     <ClInclude Include="..\..\..\Plugins\lAnm\lAnm.h" />
     <ClInclude Include="..\..\..\Plugins\lAnm\lMemFile.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\SoraVlcMoviePlayer.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\deprecated.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_events.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_discoverer.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_library.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_list.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_list_player.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_player.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_structures.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_version.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_vlm.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_access.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_acl.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_aout.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_aout_mixer.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_arrays.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_art_finder.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_avcodec.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_bits.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_block.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_block_helper.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_charset.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_codec.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_common.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_config.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_configuration.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_config_cat.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_cpu.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_demux.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_dialog.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_epg.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_es.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_es_out.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_events.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_filter.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_fourcc.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_fs.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_gcrypt.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_http.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_httpd.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_image.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_inhibit.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_input.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_input_item.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_main.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_md5.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_messages.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_meta.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_modules.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_mouse.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_mtime.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_objects.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_picture.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_picture_fifo.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_picture_pool.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_playlist.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_plugin.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_probe.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_rand.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_services_discovery.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_sout.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_sql.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_stream.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_strings.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_subpicture.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_threads.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_url.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_variables.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_video_splitter.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vlm.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vout.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vout_display.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vout_opengl.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vout_window.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_xlib.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_xml.h" />
+    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\vlc.h" />
     <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\audiere\audiere.h" />
     <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereDevice.h" />
     <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundFile.h" />
@@ -394,10 +474,13 @@
     <ClInclude Include="rfMapRenderer.h" />
     <ClInclude Include="SoraDXRenderer.h" />
     <ClInclude Include="testMainWindow.h" />
+    <ClInclude Include="vlcTestWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Plugins\DarkLib\FileDlg.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.cpp" />
     <ClCompile Include="..\..\..\Plugins\lAnm\lAnm.cpp" />
+    <ClCompile Include="..\..\..\Plugins\libvlc\SoraVlcMoviePlayer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundFile.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.cpp" />
@@ -537,6 +620,7 @@
     <ClCompile Include="rfMapRenderer.cpp" />
     <ClCompile Include="SoraDXRenderer.cpp" />
     <ClCompile Include="testMainWindow.cpp" />
+    <ClCompile Include="vlcTestWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Plugins\SoraOGLRenderer\soil\soil.html" />

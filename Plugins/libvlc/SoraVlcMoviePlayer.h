@@ -13,6 +13,11 @@
 #include "SoraMoviePlayer.h"
 #include "vlc/vlc.h"
 
+#ifdef OS_WIN32
+#pragma comment(lib, "libvlc.lib")
+#pragma comment(lib, "libvlccore.lib")
+#endif
+
 namespace sora {
     
     class SoraVlcMoviePlayer: public SoraMoviePlayer {

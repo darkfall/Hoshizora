@@ -17,10 +17,7 @@ namespace sora {
     
     static void* lock(void* data, void** pixels) {
         SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
-        if(!ctx->pSpr)
-            *pixels = ctx->pixels;
-        else
-            *pixels = ctx->pSpr->getPixelData();
+        *pixels = ctx->pixels;
         ++ctx->frameCount;
     
         return 0;
@@ -30,8 +27,6 @@ namespace sora {
         SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
         ctx->bChanged = true;
         memcpy(ctx->dummy, ctx->pixels, ctx->pPlayer->getWidth()*ctx->pPlayer->getHeight()*4);
-        if(ctx->pSpr)
-            ctx->pSpr->unlockPixelData();
     }
     
     static void display(void* data, void* id) {
@@ -55,7 +50,7 @@ namespace sora {
         const char* vlc_argv[] = {
             "--plugin-path=./Plugins"
             "--ignore-config",
-            "--vout", "vmem",
+			"-I", "dummy"
         };
         int vlc_argc = sizeof(vlc_argv) / sizeof(*vlc_argv);
         
@@ -89,9 +84,10 @@ namespace sora {
         libvlc_event_attach(evtManager, libvlc_MediaPlayerEndReached, eventHandle, &frameData);
         libvlc_event_attach(evtManager, libvlc_MediaPlayerPositionChanged, eventHandle, &frameData);
 
-        setMediaInfo(width, height);
+		setMediaInfo(width, height);
 
         libvlc_video_set_format(mp, dis.c_str(), frameData.videoWidth, frameData.videoHeight, frameData.videoWidth*4);
+		SORA->logf("w: %d, h: %d", getWidth(), getHeight());
     }
     
     void SoraVlcMoviePlayer::setMediaInfo(uint32 w, uint32 h) {
@@ -185,7 +181,7 @@ namespace sora {
     }
 
     float32 SoraVlcMoviePlayer::getPlayRate() const {
-        libvlc_media_player_get_rate(mp);
+        return libvlc_media_player_get_rate(mp);
     }
     
     void SoraVlcMoviePlayer::setPlayRate(float32 rate) {

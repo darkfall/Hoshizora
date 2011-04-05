@@ -72,8 +72,7 @@ namespace sora{
 
 	SoraWindowHandle SoraHGERenderer::createWindow(SoraWindowInfoBase* windowInfo) {
 //		if(!windowInfo->isWindowSubWindow()) {
-			// callbacks			
-			
+			// just for hge compablity, otherwise hge would fail to start
 			pHGE->System_SetState(HGE_FRAMEFUNC, bool_updateFrame);
 		
 			pHGE->System_SetState(HGE_SCREENWIDTH, windowInfo->getWindowWidth());
@@ -81,6 +80,7 @@ namespace sora{
 			pHGE->System_SetState(HGE_WINDOWED, windowInfo->isWindowed());
 			pHGE->System_SetState(HGE_HIDEMOUSE, windowInfo->hideMouse());
 			pHGE->System_SetState(HGE_TITLE, windowInfo->getWindowName().c_str());
+			pHGE->System_SetState(HGE_DONTSUSPEND, true);
 
 			pHGE->System_SetState(HGE_ZBUFFER, true);
 			pHGE->System_SetState(HGE_FPS, HGEFPS_UNLIMITED);
@@ -188,9 +188,9 @@ namespace sora{
 
 	SoraTexture* SoraHGERenderer::createTextureFromRawData(unsigned int* data, int32 w, int32 h) {
 		HTEXTURE htex = pHGE->Texture_Create(w, h);
-		unsigned long* td = pHGE->Texture_Lock(htex, false);
+		unsigned long* td = pHGE->Texture_Lock(htex, false, 0, 0, w, h);
 		if(!td) return 0;
-		memcpy(td, data, sizeof(unsigned int) * w*h);
+		memcpy(td, data, 4*w*h);
 		pHGE->Texture_Unlock(htex);
 		if(htex) {
 			SoraTexture* tex = new SoraTexture;
