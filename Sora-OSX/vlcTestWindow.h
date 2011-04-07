@@ -66,6 +66,8 @@ private:
     
     sora::SoraShader* shader;
     sora::SoraShader* vshader;
+    
+    ulong32 target;
 };
 
 

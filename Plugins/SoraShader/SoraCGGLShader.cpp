@@ -76,6 +76,7 @@ namespace sora {
 
 	void SoraCGGLShader::setTexture(const SoraString& decalName, ulong32 tex) {
 		textureParam = cgGetNamedParameter(program, decalName.c_str());
+        cgGLSetTextureParameter(textureParam, (GLuint)((SoraTexture*)tex)->mTextureID);
 	}
 	
 	bool SoraCGGLShader::attach() {

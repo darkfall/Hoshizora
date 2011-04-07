@@ -10,6 +10,7 @@
 
 #include "SoraOGLRenderTarget.h"
 #include "SoraTexture.h"
+#include "SoraCore.h"
 
 #ifdef WIN32
 #include <GL/GL.h>
@@ -19,66 +20,66 @@
 
 namespace sora {
 
-SoraRenderTargetOG::SoraRenderTargetOG(ulong32 _w, ulong32 _h, bool _zbuffer):
-SoraRenderTarget(_w, _h, _zbuffer) {
-	long32 gl_error;
-
-	frameBuffer = depthBuffer = 0;
+SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
+    w(_w), h(_h), zbuffer(_zbuffer), err(0), frameBuffer(0), depthBuffer(0) {
+	GLuint gl_error;
 
 	glEnable(GL_TEXTURE_2D);
 
 #ifndef WIN32
-	glGenTextures(1, (unsigned int*)(&tex));					// Create 1 Texture
-	glBindTexture(GL_TEXTURE_2D, tex);							// Bind The Texture
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE); // automatic mipmap generation included in OpenGL v1.4
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-	glBindTexture(GL_TEXTURE_2D, 0);							// Bind The Texture
+    GLuint glTex;
+	glGenTextures(1, &glTex);					
+	glBindTexture(GL_TEXTURE_2D, glTex);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _w, _h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 
 	if((gl_error = glGetError()) != GL_NO_ERROR) {
 		err = 1;
 	}
-
-	glDisable(GL_TEXTURE_2D);
-
 	// create framebuffer
-	glGenFramebuffersEXT(1, (unsigned int*)(&frameBuffer));
+	glGenFramebuffersEXT(1, &frameBuffer);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frameBuffer);
 
-	//create render buffer
+	//create depth buffer
 	if (zbuffer) {
-		glGenRenderbuffersEXT(1, (unsigned int*)(&depthBuffer));
+		glGenRenderbuffersEXT(1, &depthBuffer);
 		glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depthBuffer);
 		glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT, w, h);
+        glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, depthBuffer);
 		glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
 	}
 
 	// attach texture
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0);
-	// Attach to the FBO for depth
-	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, depthBuffer);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, glTex, 0);
+    GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
+    if(status != GL_FRAMEBUFFER_COMPLETE_EXT) {
+        err = 1;
+    }
 
+    glBindTexture(GL_TEXTURE_2D, 0);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
-	if(!tex || !frameBuffer)
+	if(!glTex || !frameBuffer)
 		err = 2;
 	err = 0;
 
 	SoraTexture* ptex = new SoraTexture;
-	ptex->mTextureID = tex;
+	ptex->mTextureID = glTex;
 	ptex->mTextureWidth = ptex->mOriginalWidth = w;
 	ptex->mTextureHeight = ptex->mOriginalHeight = h;
-	stex = (ulong32)ptex;
+	tex = (ulong32)ptex;
+        
+    glDisable(GL_TEXTURE_2D);
 #endif
 }
 
 SoraRenderTargetOG::~SoraRenderTargetOG() {
 #ifndef WIN32
-	if (tex)
-		glDeleteTextures(1, (uint32*)(&tex));
+	if (tex) {
+		glDeleteTextures(1, (GLuint*)(&((SoraTexture*)tex)->mTextureID));
+        delete (SoraTexture*)tex;
+    }
 
 	if (frameBuffer)
 		glDeleteFramebuffersEXT(1, (uint32*)(&frameBuffer));
@@ -91,12 +92,18 @@ SoraRenderTargetOG::~SoraRenderTargetOG() {
 void SoraRenderTargetOG::attachToRender() {
 #ifndef WIN32
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frameBuffer);
+
+  //  glPushAttrib(GL_VIEWPORT_BIT);
+
+ //   glViewport(0, 0, w, h);
+
 #endif
 }
 
 void SoraRenderTargetOG::detachFromRender() {
 #ifndef WIN32
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+//	glPopAttrib();
+    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 #endif
 }
 

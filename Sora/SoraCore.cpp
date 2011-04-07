@@ -584,7 +584,7 @@ namespace sora {
 	void SoraCore::beginScene(ulong32 c, ulong32 t) {
 		assert(bInitialized==true);
 		pRenderSystem->beginScene(c, t);
-        if(c == 0)
+        if(t == 0)
             bMainScene = true;
 	}
 	void SoraCore::endScene() {

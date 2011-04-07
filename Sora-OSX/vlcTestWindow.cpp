@@ -44,6 +44,15 @@ bool vlcWindow::updateFunc() {
         pslider->setValue(pslider->getScaleEnd() * ((float32)moviePlayer->getTime()/moviePlayer->getLength()));
 
     sora::GCN_GLOBAL->gcnLogic();
+    
+    float mousex, mousey;
+    sora::SORA->getMousePos(&mousex, &mousey);
+    float lightPos[2];
+    lightPos[0] = (mousex - 100) / 848;
+    lightPos[1] = (mousey)/499;
+    if(lightPos[0] < 1.0 && lightPos[1] < 1.0 && lightPos[0] > 0.0 && lightPos[1] > 0.0)
+        shader->setParameterfv("lightPos", lightPos, 2);
+    
 
     return false;
 }
@@ -84,14 +93,16 @@ void vlcWindow::action() {
 }
 
 void vlcWindow::renderMovieImage() {
-    pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
-    pSpr->render(getWindowWidth()/2, 0.f);
+    if(pSpr) {
+        pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
+        pSpr->render(getWindowWidth()/2, 0.f);
+    }
 }
 
 bool vlcWindow::renderFunc() {
   //  sora::PROFILE("movierender");
   //  ulong32 targ = sora::SORA->createTarget(getWindowWidth(), getWindowHeight(), false);
-    sora::SORA->beginScene(/*0x00000000, targ*/);
+    sora::SORA->beginScene(0x00000000, target/*0x00000000, targ*/);
     
     pFont->print(0.f, getWindowHeight()-50.f, sora::FONT_ALIGNMENT_LEFT, L"SoraCoreRenderFPS: %f, VideoFPS: %f", sora::SORA->getFPS(), moviePlayer->getFPS());
     pFont->print(0.f, getWindowHeight()-30.f, sora::FONT_ALIGNMENT_LEFT, L"FrameCount: %d", moviePlayer->getFrameCount());
@@ -109,8 +120,7 @@ bool vlcWindow::renderFunc() {
                  moviePlayer->getAudioChannelNum());
 
 
-    renderMovieImage();
-    /*if(moviePlayer->isPlaying()) {
+    if(moviePlayer->isPlaying()) {
         if(moviePlayer->frameChanged()) {
             if(pTex) {
                 sora::SORA->releaseTexture((sora::HSORATEXTURE)pTex);
@@ -127,7 +137,6 @@ bool vlcWindow::renderFunc() {
                 pSpr = new sora::SoraSprite(pTex);
             }
             
-            pSpr->attachShader(vshader);
             pSpr->attachShader(shader);
             
             renderMovieImage();
@@ -139,23 +148,23 @@ bool vlcWindow::renderFunc() {
     } else if(pSpr) {
         renderMovieImage();
     }
-*/
+
    // luaTest.render();
     
-    sora::GCN_GLOBAL->gcnDraw();
+  //  sora::GCN_GLOBAL->gcnDraw();
     sora::SORA->endScene();
     
-   /* sora::SoraSprite* ptest = new sora::SoraSprite((sora::SoraTexture*)(sora::SORA->getTargetTexture(targ)));
+    sora::SoraSprite* ptest = new sora::SoraSprite(sora::SORA->getTargetTexture(target));
     sora::SORA->beginScene();
+   // ptest->setFlip(false, true);
+  //  ptest->setCenter(ptest->getSpriteWidth()/2, ptest->getSpriteHeight()/2);
+  //  ptest->setRotation(sora::DGR_RAD(180));
     ptest->render();
-    if(pSpr) {
-        pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
-        pSpr->render(getWindowWidth()/2, 0.f);
-    }
+  //  renderMovieImage();
     sora::SORA->endScene();
     
     delete ptest;
-    sora::SORA->freeTarget(targ);*/
+   // sora::SORA->freeTarget(target);
    
     return false;
 }
@@ -193,9 +202,6 @@ void vlcWindow::init() {
     pFileOpener->SetFilter("mp4;rm;rmvb;mkv;avi;flv;f4v;");
     
     moviePlayer = new sora::SoraVlcMoviePlayer();
-    
-    pSpr = new sora::SoraSprite((sora::SoraTexture*)sora::SORA->createTextureWH(848, 499));
-    moviePlayer->bindSprite(pSpr);
 
     moviePlayer->openMedia(L"./AMV_Scenario.mp4", 848, 499);
     moviePlayer->play();
@@ -203,6 +209,18 @@ void vlcWindow::init() {
     sora::SORA->setWindowTitle(L"AMV_Scenerio.mp4");
     sora::SORA->setFPS(999);
     
+    shader = sora::SORA->createShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
+    float lightColor[4] = {1.f, 0.7f, 0.3f, 1.f};
+    shader->setParameterfv("lightColor", lightColor, 4);
+    float lightPos[2] = {0.f, 0.f};
+    shader->setParameterfv("lightPos", lightPos, 2);
+    float lightRadius = 0.5f;
+    shader->setParameterfv("lightRadius", &lightRadius, 1);
+    float intensity = 2.f;
+    shader->setParameterfv("lightIntensity", &intensity, 1);
+    
     pFont = sora::SORA->createFont(L"cour.ttf", 24);
     pFont->setColor(0xFFFFFFFF);
+    
+    target = sora::SORA->createTarget(1024, 768, false);
 }

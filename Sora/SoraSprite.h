@@ -73,7 +73,7 @@ namespace sora {
 		float32 getCenterX() const;
 		float32 getCenterY() const;
 
-		void setFlip(bool hflag, bool vflag);
+		void setFlip(bool hflag, bool vflag, bool bFlipCenter=true);
 		bool getHFlip() const;
 		bool getVFlip() const;
 
@@ -127,7 +127,7 @@ namespace sora {
 		float32 centerX, centerY;
 		float32 vscale, hscale;
 
-		bool bVFlip, bHFlip;
+		bool bVFlip, bHFlip, bCFlip;
 		
 		typedef std::list<SoraImageEffect*> IMAGE_EFFECT_LIST;
 		IMAGE_EFFECT_LIST vEffects;

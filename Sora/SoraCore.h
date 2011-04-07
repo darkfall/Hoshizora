@@ -65,7 +65,7 @@ namespace sora {
 
 		ulong32 SORACALL createTarget(int width, int height, bool zbuffer=true);
 		void	SORACALL freeTarget(ulong32 t);
-		ulong32 SORACALL getTargetTexture(ulong32 t);
+		HSORATEXTURE SORACALL getTargetTexture(ulong32 t);
 
 		HSORATEXTURE SORACALL createTexture	(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
 		HSORATEXTURE SORACALL createTextureWH(int32 w, int32 h);
