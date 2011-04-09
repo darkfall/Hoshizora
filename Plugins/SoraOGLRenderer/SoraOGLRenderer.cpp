@@ -156,11 +156,12 @@ namespace sora{
                     pCurTarget->getWidth(), 
                     0
                     , pCurTarget->getHeight(), -1, 1);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glTranslatef(0.f, 0.f, 0.f); //Set Center Coodinates
+            glRotatef(0.f, -0.f, 0.f, 1.f);
+            glScalef(1.f, 1.f, 1.0f);//
        
-            glTranslatef(-_oglWindowInfo.dx, -_oglWindowInfo.dy, 0.f); //Set Center Coodinates
-            glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
-            glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
-            
             glTranslatef(0.f, 0.f, 0.f);
         }
 	}
@@ -175,15 +176,13 @@ namespace sora{
             
             pCurTarget->attachToRender();
             applyTransform();
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-       
-            return;
+            glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
         } else {
             if(iFrameStart) {
                 glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             }
         }
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void SoraOGLRenderer::_glEndScene() {
@@ -347,14 +346,9 @@ namespace sora{
 			glBindTexture(GL_TEXTURE_2D, tex->mTextureID);
 			mCurrTexture = tex->mTextureID;
 
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		
-			/*if (mLinearFiltering) {
-			
-			else {
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);*/
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		}
 	}
 
@@ -450,16 +444,13 @@ namespace sora{
 
             glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
 			glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, ht->dataRef.texData);
-
-            glBindTexture(GL_TEXTURE_2D, 0);
-            
-            glBindTexture(GL_TEXTURE_2D, PreviousTexture);
-
-            if(glGetError() != 0) {
-                free(ht->dataRef.texData);
+            if(glGetError() != GL_NO_ERROR) {
+                delete ht->dataRef.texData;
                 ht->dataRef.texData = 0;
                 return NULL;
             }
+            
+            glBindTexture(GL_TEXTURE_2D, PreviousTexture);
 			return (ulong32*)ht->dataRef.texData;
 		}
 		return 0;

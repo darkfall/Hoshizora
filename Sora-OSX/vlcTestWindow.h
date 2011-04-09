@@ -20,6 +20,7 @@
 #include "Darklib/FileDlgOsx.h"
 
 #include "SoraLua/SoraLuaObject.h"
+#include "SoraCanvas.h"
 
 class vlcWindow: public sora::SoraWindowInfoBase, public sora::SoraGUIResponser {
 public:
@@ -67,7 +68,11 @@ private:
     sora::SoraShader* shader;
     sora::SoraShader* vshader;
     
+    sora::SoraBaseCanvas* canvas1;
+    sora::SoraBaseCanvas* canvas2;
+    
     ulong32 target;
+    ulong32 target2;
 };
 
 

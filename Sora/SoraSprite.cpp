@@ -71,15 +71,17 @@ namespace sora {
 		SoraTextureMap::Instance()->decRf((HSORATEXTURE)texture);
 	}
 
-	void SoraSprite::setTexture(SoraTexture* tex) {
+	void SoraSprite::setTexture(HSORATEXTURE tex) {
 		float tx1,ty1,tx2,ty2;
 		float tw,th;
 		
-		quad.tex=tex;
+        SoraTexture* ptex = (SoraTexture*)tex;
+        assert(ptex != NULL);
+		quad.tex=ptex;
 		
 		if(tex) {
-			tw = (float)tex->mTextureWidth;
-			th = (float)tex->mTextureHeight;
+			tw = (float)ptex->mTextureWidth;
+			th = (float)ptex->mTextureHeight;
 		}
 		else {
 			tw = 1.0f;
@@ -104,7 +106,7 @@ namespace sora {
 			quad.v[3].tx=tx1; quad.v[3].ty=ty2; 
 		}
 		
-		texture = tex;
+		texture = ptex;
 	}
 
 	void SoraSprite::_initDefaults() {

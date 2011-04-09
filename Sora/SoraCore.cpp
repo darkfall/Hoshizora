@@ -87,6 +87,11 @@ namespace sora {
 
 		_checkCoreComponents();
 		_logInternalLog();
+      
+        // create render target for debug renderer
+#ifdef DEBUG
+        DEBUG_RENDERER->createTarget();
+#endif
 
 		if(pRenderSystem)
 			pRenderSystem->start(pTimer);
@@ -127,6 +132,7 @@ namespace sora {
         }
 
 		pRenderSystem->beginFrame();
+        
 		_frameListenerStart();
         
         {
@@ -156,6 +162,7 @@ namespace sora {
 #endif
             pRenderSystem->update();
         }
+        
 		
         {
 #ifdef PROFILE_CORE_UPDATE
@@ -535,16 +542,16 @@ namespace sora {
 		assert(bInitialized==true);
 		HSORATEXTURE tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
-			return new SoraSprite((SoraTexture*)tex);
+			return new SoraSprite(tex);
 		} else {
 			tex = createTexture(sPath);
-			return new SoraSprite((SoraTexture*)tex);
+			return new SoraSprite(tex);
 		}
 	}
 
 	SoraSprite* SoraCore::createSpriteTex(HSORATEXTURE tex) {
 		assert(bInitialized==true);
-		return new SoraSprite((SoraTexture*)tex);
+		return new SoraSprite(tex);
 	}
 
 	void SoraCore::renderQuad(SoraQuad& quad) {
@@ -578,6 +585,7 @@ namespace sora {
 	}
     
     void SoraCore::setViewPoint(float32 x, float32 y, float32 z) {
+        assert(bInitialized==true);
         pRenderSystem->setViewPoint(x, y, z);
     }
 

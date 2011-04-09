@@ -32,7 +32,7 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 	glBindTexture(GL_TEXTURE_2D, glTex);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _w, _h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _w, _h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 
 	if((gl_error = glGetError()) != GL_NO_ERROR) {
 		err = 1;
@@ -92,17 +92,11 @@ SoraRenderTargetOG::~SoraRenderTargetOG() {
 void SoraRenderTargetOG::attachToRender() {
 #ifndef WIN32
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frameBuffer);
-
-  //  glPushAttrib(GL_VIEWPORT_BIT);
-
- //   glViewport(0, 0, w, h);
-
 #endif
 }
 
 void SoraRenderTargetOG::detachFromRender() {
 #ifndef WIN32
-//	glPopAttrib();
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 #endif
 }

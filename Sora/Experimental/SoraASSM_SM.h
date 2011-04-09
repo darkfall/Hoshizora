@@ -29,8 +29,8 @@ namespace sora {
 	/*
 	 ASSM (A Simple State Machine) implemention
 	 */
-	static stringId EVENT_FINISH = str2id("FINISH");
-	static stringId EVENT_START = str2id("START");
+	static const stringId EVENT_FINISH = str2id("FINISH");
+	static const stringId EVENT_START = str2id("START");
 	
 	template<typename entity_type>
 	class SoraASSM_SM {
@@ -128,13 +128,14 @@ namespace sora {
 		}
 			
 		void addEvent(SoraASSM_Event<entity_type>* event) { events.addObject(event); }
-		void addVariable(SoraASSM_Variable* var) { variables.addObject(var); }
+        template<typename varType>
+		void addVariable(stringId name, SoraASSM_Variable<varType>* var) { var->setName(name); variables.addObject(var); }
 		void removeEvent(stringId name) { events.removeObjectByName(name); }
 		void removeVariable(stringId name) { variables.removeObjectByName(name); }
 		
 		SoraASSM_Event<entity_type>* getEvent(stringId name) { return (SoraASSM_Event<entity_type>*)events.getObjectByName(name); }
-		SoraASSM_Variable* getVariable(stringId name) { return variables.getObjectByName(name); }
-	
+        template<typename varType>
+		SoraASSM_Variable<varType>* getVariable(stringId name) { return variables.getObjectByName(name); }
 		
 		entity_type* getOwner() const { return pOwner; }
 		

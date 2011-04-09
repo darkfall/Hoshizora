@@ -41,15 +41,15 @@ namespace sora {
 
 	void FTGlyph::cache(unsigned int idx) {
 		FT_Set_Pixel_Sizes(*face, 0, size);
-		if (!FT_Load_Glyph(*face, idx, FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP)) {
+		if (!FT_Load_Glyph(*face, idx, FT_LOAD_TARGET_LCD_V | FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP)) {
 			FT_GlyphSlot glyph = (*face)->glyph;
 			FT_Bitmap bits;
 			if(glyph->format == ft_glyph_format_outline) {
 				if(!FT_Render_Glyph(glyph, FT_RENDER_MODE_NORMAL)) {
 					bits = glyph->bitmap;
 					unsigned char *pt = bits.buffer;
-					image = new unsigned char[bits.width * bits.rows];
-					memcpy(image, pt, bits.width * bits.rows);
+				//	image = new unsigned char[bits.width * bits.rows];
+				//	memcpy(image, pt, bits.width * bits.rows);
 
 					top = glyph->bitmap_top;
 					left = glyph->bitmap_left;
@@ -82,7 +82,7 @@ namespace sora {
 					memset(texd, 0, imgw*imgh*sizeof(unsigned int));
 					unsigned int *texp = texd;
 					offset = size - bits.rows;
-					bool cflag = true;
+					bool cflag = false;
 					for(int i = 0; i < bits.rows; ++i) {
 						unsigned int *rowp = texp;
 						for(int j = 0; j < bits.width; ++j){
@@ -102,9 +102,7 @@ namespace sora {
 						}
 						texp += imgw;
 					}
-					char name[128];
-					sprintf(name,"FTFontGlyph%d",idx);
-				
+                    
 					if(tex){
 						sora->releaseTexture(tex);
 					}
@@ -252,7 +250,7 @@ namespace sora {
 				int offx = ft_glyphs[n-1].left;
 				int offy = ft_glyphs[n-1].size - ft_glyphs[n-1].top;
 
-				sprite->setTexture((SoraTexture*)ft_glyphs[n-1].tex);
+				sprite->setTexture(ft_glyphs[n-1].tex);
 				sprite->setTextureRect(0, 0, imgw-1.0f, imgh-1.0f);
 				sprite->render(x+offx, y+offy);
  
@@ -310,7 +308,7 @@ namespace sora {
 				int offx = ft_glyphs[n-1].left;
 				int offy = ft_glyphs[n-1].size - ft_glyphs[n-1].top;
 
-				sprite->setTexture((SoraTexture*)ft_glyphs[n-1].tex);
+				sprite->setTexture(ft_glyphs[n-1].tex);
 				sprite->setTextureRect(0, 0, imgw-1.0f, imgh-1.0f);
 				sprite->setRotation(charRotation);
 				sprite->setScale(scale, scale);

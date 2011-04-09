@@ -371,11 +371,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "323854959.768868"
+         timestampString = "324014178.980299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
+         startingLineNumber = "187"
+         endingLineNumber = "187"
          landmarkName = "vlcWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -427,11 +427,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "323854959.768868"
+         timestampString = "324014178.980299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
+         startingLineNumber = "157"
+         endingLineNumber = "157"
          landmarkName = "vlcWindow::_loadGUI()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -455,11 +455,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "323854959.768868"
+         timestampString = "324014178.980299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "179"
-         endingLineNumber = "179"
+         startingLineNumber = "158"
+         endingLineNumber = "158"
          landmarkName = "vlcWindow::_loadGUI()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -469,11 +469,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "323854959.768868"
+         timestampString = "324014178.980299"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "205"
-         endingLineNumber = "205"
+         startingLineNumber = "183"
+         endingLineNumber = "183"
          landmarkName = "vlcWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>

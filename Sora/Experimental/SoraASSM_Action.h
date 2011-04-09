@@ -12,6 +12,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraNamedObject.h"
+#include "SoraASSM_Variable.h"
 
 namespace sora {
 	
@@ -45,9 +46,17 @@ namespace sora {
 				}
 			}
 		}
+        
+        template<typename varType>
+        void pushVariable(stringId name);
+        template<typename varType>
+        SoraASSM_Variable<varType>* getVariableByName(stringId name);
+        
 	private:
 		bool bFinished;
 		bool bEntered;
+        
+        SoraNamedObjectList variables;
 	};
 	
 } // namespace sora

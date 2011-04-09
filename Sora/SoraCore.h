@@ -63,7 +63,7 @@ namespace sora {
 		void SORACALL beginScene(ulong32 c=0, ulong32 h=0);
 		void SORACALL endScene();
 
-		ulong32 SORACALL createTarget(int width, int height, bool zbuffer=true);
+		HSORATARGET SORACALL createTarget(int width, int height, bool zbuffer=true);
 		void	SORACALL freeTarget(ulong32 t);
 		HSORATEXTURE SORACALL getTargetTexture(ulong32 t);
 

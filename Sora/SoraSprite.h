@@ -49,15 +49,13 @@ namespace sora {
 	public:
         SoraSprite(HSORATEXTURE tex);
         SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 width, float32 height);
-		SoraSprite(SoraTexture* tex);
-		SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height);
 		virtual ~SoraSprite();
 
         void render();
         void render(float32 x, float32 y);
         void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
 
-		void setTexture(SoraTexture* tex);
+		void setTexture(HSORATEXTURE tex);
 		
 		void setTextureRect(float32 x, float32 y, float32 width, float32 height);
 		const hgeRect& getTextureRect() const;
@@ -113,6 +111,9 @@ namespace sora {
         void clearShader();
         
 	private:
+        SoraSprite(SoraTexture* tex);
+		SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height);
+        
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
         
 		SoraSprite() { texture=0; _initDefaults(); }
