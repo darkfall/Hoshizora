@@ -64,6 +64,9 @@ namespace sora {
 
 		virtual void play() = 0;
 		virtual void stop() = 0;
+        
+        virtual void setPosition(float32 x, float32 y, float32 z) = 0;
+        virtual void getPosition(float32& x, float32& y, float32& z) = 0;
 
 		// 0 - 1
 		virtual void setVolume(float32 vol) = 0;

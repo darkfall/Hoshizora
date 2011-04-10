@@ -70,6 +70,9 @@ namespace sora {
 		// if type==MULTIPLE, then stop all instances of the sound
 		// if type==SINGLE, stop the sound only
 		void stop();
+        
+        void setPosition(float32 x, float32 y, float32 z) {}
+        void getPosition(float32& x, float32& y, float32& z) {}
 
 		// 0 - 1
 		void setVolume(float32 vol);
