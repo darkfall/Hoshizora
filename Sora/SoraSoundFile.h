@@ -43,6 +43,9 @@ namespace sora {
 
 		virtual void setPosition(float32 x, float32 y, float32 z) = 0;
 		virtual void getPosition(float32& x, float32& y, float32& z) = 0;
+        
+        virtual void setMusicPosition(int32 pos) = 0;
+        virtual int32 getMusicPosition() = 0;
 		
 		virtual int32 getLength() = 0;
 		

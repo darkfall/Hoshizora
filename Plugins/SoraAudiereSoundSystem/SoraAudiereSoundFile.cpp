@@ -87,13 +87,22 @@ namespace sora {
 			return 0.f;
 		}
 
-		void SoraAudiereMusicFile::setPosition(int32 pos) { 
+		void SoraAudiereMusicFile::setPosition(float32 x, float32 y, float32 z) { 
 			if(is_open()) sound->setPosition(pos);
 		}
-		int32 SoraAudiereMusicFile::getPosition() { 
+		void SoraAudiereMusicFile::getPosition(float32& x, float32& y, float32& z) { 
 			if(is_open()) return sound->getPosition();
 			return 0;
 		}
+    
+    void SoraAudiereMusic::setMusicPosition(int32 pos) {
+        if(is_open()) sound->setPosition(pos);
+    }
+    
+    int32 SoraAudiereMusic::getMusicPosition() {
+        if(is_open()) return sound->getPosition();
+        return 0;
+    }
 
 		int32 SoraAudiereMusicFile::getLength() { 
 			if(is_open()) return sound->getLength();
