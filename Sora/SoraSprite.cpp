@@ -72,6 +72,12 @@ namespace sora {
 	}
 
 	void SoraSprite::setTexture(HSORATEXTURE tex) {
+        if(quad.tex) {
+            if(!SoraTextureMap::Instance()->exist((HSORATEXTURE)quad.tex)) {
+                sora::SORA->releaseTexture((HSORATEXTURE)quad.tex);
+            }
+        }
+        
 		float tx1,ty1,tx2,ty2;
 		float tw,th;
 		
@@ -222,8 +228,8 @@ namespace sora {
         if(hasShader()) 
             sora->attachShaderContext(shaderContext);
 		sora->renderQuad(quad);
- //       if(hasShader()) 
-   //         sora->detachShaderContext();
+        if(hasShader()) 
+            sora->detachShaderContext();
 	}
 
 	void SoraSprite::setColor(ulong32 c, int32 i) {

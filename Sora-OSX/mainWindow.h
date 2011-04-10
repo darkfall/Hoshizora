@@ -50,6 +50,8 @@ private:
 	stgScene* stg;
                     
     sora::SoraSprite* pSpr;
+                    sora::SoraSprite* p2;
+                    sora::SoraSprite* p3;
 	sora::SoraShader* shader;
 					
 	sora::BaseEntity* testEntity;

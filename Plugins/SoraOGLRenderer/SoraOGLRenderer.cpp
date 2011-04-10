@@ -75,25 +75,23 @@ namespace sora{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		glClearStencil(0);                          // clear stencil buffer
+        
+        glEnable(GL_DEPTH_TEST);
 		glClearDepth(1.0f);                         // Depth Buffer Setup
 
-		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		//      glCullFace(GL_BACK);
 		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 		glEnable(GL_COLOR_MATERIAL);
-		//      glDisable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);                     // The Type Of Depth Test To Do
+        //glDisable(GL_DEPTH_TEST);
+		glDepthFunc(GL_NOTEQUAL);                     // The Type Of Depth Test To Do
 
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
 		
-		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_DITHER);
 		glDisable(GL_FOG);
 		glDisable(GL_LIGHTING);
 		glDisable(GL_CULL_FACE);
-		glDisable(GL_LOGIC_OP);
-		glDisable(GL_STENCIL_TEST);
 		glDisable(GL_TEXTURE_2D);
 		
 		glEnable(GL_DEPTH_BUFFER_BIT);
