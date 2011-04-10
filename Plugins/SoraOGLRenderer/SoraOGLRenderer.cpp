@@ -67,25 +67,37 @@ namespace sora{
 
 		//delete mainWindow;
 	}
+    
+    static void InitPerspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar)
+    {
+        GLfloat xmin, xmax, ymin, ymax;
+        
+        ymax = zNear * (GLfloat)tan(fovy * 3.1415962f / 360.0);
+        ymin = -ymax;
+        xmin = ymin * aspect;
+        xmax = ymax * aspect;
+        
+        glFrustum(xmin, xmax, ymin, ymax, zNear, zFar);
+    }
 
 	void SoraOGLRenderer::_glInitialize() {
 		glShadeModel(GL_SMOOTH);                    // Enables Smooth Shading
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);      // 4-byte pixel alignment
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
 		glClearStencil(0);                          // clear stencil buffer
         
         glEnable(GL_DEPTH_TEST);
-		glClearDepth(1.0f);                         // Depth Buffer Setup
-
+        glDepthFunc(GL_LEQUAL);                       // The Type Of Depth Test To Do
+		glClearDepth(1.f);                          // Depth Buffer Setup
+        
+        glDepthMask(GL_FALSE);
+        
 		glEnable(GL_CULL_FACE);
-		//      glCullFace(GL_BACK);
 		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 		glEnable(GL_COLOR_MATERIAL);
-        //glDisable(GL_DEPTH_TEST);
-		glDepthFunc(GL_NOTEQUAL);                     // The Type Of Depth Test To Do
 
+     //   InitPerspective(60, (float)_oglWindowInfo.width / _oglWindowInfo.height, 0.f, 1.f);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
 		
 		glDisable(GL_DITHER);
@@ -93,10 +105,7 @@ namespace sora{
 		glDisable(GL_LIGHTING);
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_TEXTURE_2D);
-		
-		glEnable(GL_DEPTH_BUFFER_BIT);
-		glDepthMask(0);
-	}
+    }
 
 	void SoraOGLRenderer::_glBeginFrame() {
 	}
@@ -123,7 +132,7 @@ namespace sora{
 		glLoadIdentity();
 		//Creating an orthoscopic view matrix going from -1 -> 1 in each
 		//dimension on the screen (x, y, z).
-		glOrtho(0, _oglWindowInfo.width, _oglWindowInfo.height, 0, -1, 1);
+		glOrtho(0.f, w, h, 0.f, -1.f, 1.f);
 	}
 
 	void SoraOGLRenderer::applyTransform() {
@@ -133,10 +142,10 @@ namespace sora{
                        _oglWindowInfo.height);
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            glOrtho(0, 
+            glOrtho(0.f, 
                     _oglWindowInfo.width, 
                     _oglWindowInfo.height
-                    , 0, -1, 1);
+                    , 0.f, -1.f, 1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             glTranslatef(_oglWindowInfo.x-_oglWindowInfo.dx, _oglWindowInfo.y-_oglWindowInfo.dy, 0.f); //Set Center Coodinates
@@ -199,7 +208,7 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::_glSetBlendMode(int32 blend) {
-		glDisable(GL_ALPHA_TEST);
+//		glDisable(GL_ALPHA_TEST);
 		glEnable(GL_BLEND); // Enable Blending
 
 		if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND)) {
@@ -210,8 +219,11 @@ namespace sora{
 		}
 
 		if((blend & BLEND_ZWRITE) != (CurBlendMode & BLEND_ZWRITE)) {
-			if(blend & BLEND_ZWRITE) glDepthMask(GL_TRUE);
-			else glDepthMask(GL_FALSE);
+			if(blend & BLEND_ZWRITE) {
+                glDepthMask(GL_TRUE);
+            } else {
+                glDepthMask(GL_FALSE);
+            }
 		}
 
 		if((blend & BLEND_COLORADD) != (CurBlendMode & BLEND_COLORADD)) {
@@ -256,12 +268,12 @@ namespace sora{
 		glfwSetWindowCloseCallback(int_exitFunc);
 		glfwSetKeyCallback(glfwKeyCallback);
 
-		_glInitialize();
-		_glSetProjectionMatrix(windowInfo->getWindowWidth(), windowInfo->getWindowHeight());
-
-		mainWindow = windowInfo;
+        mainWindow = windowInfo;
 		_oglWindowInfo.width = windowInfo->getWindowWidth();
 		_oglWindowInfo.height = windowInfo->getWindowHeight();
+        
+		_glInitialize();
+		_glSetProjectionMatrix(windowInfo->getWindowWidth(), windowInfo->getWindowHeight());
 
 		if(mainWindow->hideMouse())
 			glfwDisable(GLFW_MOUSE_CURSOR);
@@ -295,9 +307,7 @@ namespace sora{
 		bFullscreen = flag;
 		glfwCloseWindow();
 		glfwOpenWindow(mainWindow->getWindowWidth(), mainWindow->getWindowHeight(),
-					   0, 0, 0, 0,
-					   16,
-					   0,
+					   8, 8, 8, 8, 16, 0,
 					   bFullscreen==true?GLFW_FULLSCREEN:GLFW_WINDOW);
 		glfwSetWindowTitle(mainWindow->getWindowName().c_str());
 		glfwSetWindowCloseCallback(int_exitFunc);
@@ -355,7 +365,7 @@ namespace sora{
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 			glEnableClientState(GL_COLOR_ARRAY);
-			
+           
 			glVertexPointer(3, GL_FLOAT, 0, mVertices);
 			glTexCoordPointer(2, GL_FLOAT, 0, mUVs);
 
