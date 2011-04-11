@@ -36,7 +36,6 @@ namespace sora {
 		SoraLuaExport::export_soracore(luaState);
         SoraLuaExport::export_sprites(luaState);
 
-
 		luaopen_pluto(luaState->GetCState());
 
 		//LuaStateRefMap[(ulong32)luaState] = 1;

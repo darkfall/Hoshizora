@@ -11,6 +11,10 @@
 
 #include <map>
 
+#ifdef OS_WIN32
+#pragma comment(lib, "LuaPlus.lib")
+#endif
+
 namespace sora {
 
 	using namespace LuaPlus;
