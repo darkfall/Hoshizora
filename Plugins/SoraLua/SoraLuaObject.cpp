@@ -137,7 +137,7 @@ namespace sora {
 		return luaState->GetGlobal(name.c_str()).GetBoolean();
 	}
 
-	LuaState* SoraLuaObject::getState() {
+	LuaState* SoraLuaObject::getState() const {
 		return luaState;
 	}
     
