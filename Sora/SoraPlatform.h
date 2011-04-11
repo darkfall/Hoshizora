@@ -156,7 +156,7 @@ typedef std::wstring SoraWString;
 	#define OS_ANDROID
 
 #elif defined(WIN32)
-	#define FONT_PATH L"C:/Windows/Fonts"
+	#define FONT_PATH L"C:/Windows/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
 	#define USE_HGE_KEYMAP

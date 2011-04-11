@@ -41,7 +41,7 @@ namespace sora {
 			return sora_fopenw(itFile->second, "rb");
 		}
 
-		pfile = fopen(ws2s(fileName).c_str(), "rb");
+		pfile = sora_fopenw(fileName, "rb");
 		if(pfile != NULL)
             return pfile;
 
