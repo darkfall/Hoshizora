@@ -503,5 +503,9 @@ namespace sora {
         }
     }
     
+    HSORATEXTURE SoraSprite::getTexture() const {
+        return (HSORATEXTURE)texture;
+    }
+    
 	
 } // namespace sora

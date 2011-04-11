@@ -96,7 +96,7 @@ namespace sora {
 
 		ulong32* getPixelData() const;
         void unlockPixelData();
-		SoraTexture* getTexture() const { return texture; }
+		HSORATEXTURE getTexture() const;
 		
 		uint32 update(float32 dt);
 		void addEffect(SoraImageEffect* effect);

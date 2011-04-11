@@ -158,7 +158,8 @@ namespace sora {
 		
 		SoraMusicFile* SORACALL createMusicFile(const SoraWString& musicName, bool bStream=false);
 		SoraSoundEffectFile* SORACALL createSoundEffectFile(const SoraWString& se);
-        
+        SoraMusicFile* SORACALL createMusicFile(bool bStream=false);
+        SoraSoundEffectFile* SORACALL createSoundEffectFile();
         
         void SORACALL setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
         void SORACALL execute(const SoraString& appPath, const SoraString& args);

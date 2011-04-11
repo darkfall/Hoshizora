@@ -127,27 +127,27 @@ namespace sora {
 		return *this;
 	}
 
-	float32 CoreTransform::Get1st() {
+	float32 CoreTransform::Get1st() const {
 		if(bClean) return 0.f;
 		
 		return f1;
 	}
 
-	float32 CoreTransform::Get2nd() {
+	float32 CoreTransform::Get2nd() const {
 		if(bClean) return 0.f;
 	
 		if(iKind >= TRANSFORM_2F) return f2;
 		return 0.f;
 	}
 
-	float32 CoreTransform::Get3rd() {
+	float32 CoreTransform::Get3rd() const {
 		if(bClean) return 0.f;
 	
 		if(iKind >= TRANSFORM_3F) return f3;
 		return 0.f;
 	}
 
-	float32 CoreTransform::Get4th() {
+	float32 CoreTransform::Get4th() const {
 		if(bClean) return 0.f;
 	
 		if(iKind >= TRANSFORM_4F) return f4;

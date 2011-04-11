@@ -111,6 +111,14 @@ namespace sora {
             }
             return false;
         }
+        
+        stringId getTextureName(HSORATEXTURE tex) {
+            TEXMAP_RV::iterator p = texMapRv.find(tex);
+			if(p != texMapRv.end()) {
+                return p->second;
+            }
+            return 0;
+        }
 		
 	private:
 		typedef hash_map<stringId, HSORATEXTURE> TEX_MAP;

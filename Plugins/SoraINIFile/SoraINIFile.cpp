@@ -26,7 +26,7 @@ void SoraINIFile::closeFile() {
 	if(bFileWrite) Commit();
 
 	sec.clear();	
-	isopen = false;
+    set_open(false);
 }
 
 int32 SoraINIFile::readFile(const SoraWString& path) {
@@ -49,7 +49,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 			return result;
 		}
 	}
-	isopen = false;
+    set_open(false);
 	return false;
 }
 	
@@ -64,7 +64,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 	}
 	
 	int32 SoraINIFile::readFileMem(void* pData, ulong32 size) {
-		if(isopen) closeFile();
+		if(is_open()) closeFile();
 		
 		sec.clear();
 		
@@ -114,7 +114,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 			}			
 		}
 		
-		isopen = true;
+        set_open(true);
 		bMemoryFile = true;
 		return true;
 	}

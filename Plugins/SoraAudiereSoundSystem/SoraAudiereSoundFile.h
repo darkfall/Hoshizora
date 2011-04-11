@@ -49,14 +49,12 @@ namespace sora {
 		SoraWString getName() { return musicName; }
 
 	private:
-		void _parseName(const SoraWString& path);
+		inline void _parseName(const SoraWString& path);
 
 		bool bIsStream;
 		int pausePos;
 
 		OutputStreamPtr sound;	
-
-		SoraWString musicName;
 	};
 
 	class SoraAudiereSoundEffectFile: public SoraSoundEffectFile {
@@ -86,6 +84,8 @@ namespace sora {
 		float32 getVolume();
 
 	private:
+        inline void _parseName(const SoraWString& path);
+
 		SoundEffectPtr se;	
 
 		int iSoundEffectType;

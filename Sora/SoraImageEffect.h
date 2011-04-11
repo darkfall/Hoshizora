@@ -77,25 +77,27 @@ namespace sora {
 		void pauseForTime(float32 t);
 		void resume();
         
-        bool finished();
+        bool finished() const ;
 
 		float32 getTime();
 
-		uint8 getState() { return states; }
-		uint8 getMode() { return mode; }
-		uint16 getType() { return etype; }
+		uint8 getState() const { return states; }
+		uint8 getMode() const { return mode; }
+		uint16 getType() const  { return etype; }
 
 		virtual void start(IMAGE_EFFECT_MODE mode, float32 time);
-		virtual uint32 update(float32 delta);
+		virtual uint32 update(float32 delta) ;
 		
 		void setTransformer(CoreTransformer<CoreTransform>* transformer);
 
-		float32 get1st() { return t_curr.Get1st(); }
-		float32 get2nd() { return t_curr.Get2nd(); }
-		float32 get3rd() { return t_curr.Get3rd(); }
-		float32 get4th() { return t_curr.Get4th(); }
+		float32 get1st() const { return t_curr.Get1st(); }
+		float32 get2nd() const { return t_curr.Get2nd(); }
+		float32 get3rd() const { return t_curr.Get3rd(); }
+		float32 get4th() const { return t_curr.Get4th(); }
 		
 		SoraImageEffect& add(SoraImageEffect* next);
+        
+        float32 getEffectTime() const { return effectTime; }
 				
 	private:
 

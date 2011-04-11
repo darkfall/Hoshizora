@@ -39,10 +39,10 @@ namespace sora {
 	
 		int GetKind() const { return iKind; }
 	
-		float32 Get1st();
-		float32 Get2nd();
-		float32 Get3rd();
-		float32 Get4th();
+		float32 Get1st() const;
+		float32 Get2nd() const;
+		float32 Get3rd() const;
+		float32 Get4th() const;
 	
 		CoreTransform GetDist(const CoreTransform& t2, int divider);
 	

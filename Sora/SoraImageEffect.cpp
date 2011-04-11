@@ -14,7 +14,7 @@ namespace sora {
 		
 	}
     
-    bool SoraImageEffect::finished() {
+    bool SoraImageEffect::finished() const {
         return (states == IMAGE_EFFECT_END || states == IMAGE_EFFECT_NOTSTART);
     }
 	

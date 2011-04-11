@@ -827,14 +827,7 @@ namespace sora {
 			return NULL;
 		}
 		
-		ulong32 size;
-		void* data = getResourceFile(musicName, size);
-		if(data) {
-			return pSoundSystem->createMusicFile(data, size, bStream);
-		}
-		
-		_postError("SoraCore::createMusicFile: error load music data");
-		return NULL;
+		return pSoundSystem->createMusicFile(musicName, bStream);
 	}
 	
 	SoraSoundEffectFile* SoraCore::createSoundEffectFile(const SoraWString& se) {
@@ -843,15 +836,26 @@ namespace sora {
 			return NULL;
 		}
 		
-		ulong32 size;
-		void* data = getResourceFile(se, size);
-		if(data) {
-			return pSoundSystem->createSoundEffectFile(data, size);
+		return pSoundSystem->createSoundEffectFile(se);
+	}
+    
+    SoraMusicFile* SORACALL SoraCore::createMusicFile(bool bStream) {
+        if(!pSoundSystem) {
+			_postError("SoraCore::createMusicFile: no soundsystem available");
+			return NULL;
+		}
+        
+        return pSoundSystem->createMusicFile(bStream);
+    }
+    
+    SoraSoundEffectFile* SORACALL SoraCore::createSoundEffectFile() {
+        if(!pSoundSystem) {
+			_postError("SoraCore::createSoundEffectFile: no soundsystem available");
+			return NULL;
 		}
 		
-		_postError("SoraCore::createSoundEffectFile: error load music data");
-		return NULL;
-	}
+		return pSoundSystem->createSoundEffectFile();
+    }
     
     void SoraCore::execute(const SoraString& appPath, const SoraString& args) {
         system((appPath+args).c_str());
