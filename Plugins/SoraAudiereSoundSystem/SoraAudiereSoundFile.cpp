@@ -54,13 +54,13 @@ namespace sora {
 		}
 		void SoraAudiereMusicFile::pause() {
 			if(is_open()) {
-				pausePos = getPosition();
+				pausePos = getMusicPosition();
 				stop();
 			}
 		}
 		void SoraAudiereMusicFile::resume() {
 			if(is_open()) {
-				setPosition(pausePos);
+				setMusicPosition(pausePos);
 				play();
 			}
 		}
@@ -92,18 +92,19 @@ namespace sora {
 		}
 
 		void SoraAudiereMusicFile::setPosition(float32 x, float32 y, float32 z) { 
-			if(is_open()) sound->setPosition(pos);
+//			if(is_open()) sound->setPosition(pos);
 		}
 		void SoraAudiereMusicFile::getPosition(float32& x, float32& y, float32& z) { 
-			if(is_open()) return sound->getPosition();
-			return 0;
+			x = y = z = 0.f;
+	//		if(is_open()) return sound->getPosition();
+		//	return 0;
 		}
     
-    void SoraAudiereMusic::setMusicPosition(int32 pos) {
+    void SoraAudiereMusicFile::setMusicPosition(int32 pos) {
         if(is_open()) sound->setPosition(pos);
     }
     
-    int32 SoraAudiereMusic::getMusicPosition() {
+    int32 SoraAudiereMusicFile::getMusicPosition() {
         if(is_open()) return sound->getPosition();
         return 0;
     }
@@ -136,7 +137,7 @@ namespace sora {
 				musicName = s.substr(s.rfind('/'), s.size());
 			if(musicName.find('.') != std::string::npos)
 				musicName.erase(musicName.rfind('.'), musicName.size());
-            setName(musicName);
+            setName(str2id(musicName));
 		}
 
 		int32 SoraAudiereSoundEffectFile::readFile(const SoraWString& sFilePath) {
@@ -223,8 +224,8 @@ namespace sora {
         }
         if(s.find('/') != std::string::npos)
             seName = s.substr(s.rfind('/'), s.size());
-        if(musicName.find('.') != std::string::npos)
+        if(s.find('.') != std::string::npos)
             seName.erase(seName.rfind('.'), seName.size());
-        setName(seName);
+        setName(str2id(seName));
     }
 } // namespace sora

@@ -83,9 +83,11 @@ void mainWindow::init() {
     pSpr->setZ(-0.3f); pSpr->setBlendMode(BLEND_DEFAULT_Z);
     pSpr2->setColor(0x88FFFFFF);
 	
+	luaobj = new sora::SoraLuaObject();
+	luaobj->doScript(L"test.txt");
 //	pSpr2->setScale(0.5f, 0.5f);
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
-//	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
+	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

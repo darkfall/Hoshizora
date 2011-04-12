@@ -45,8 +45,6 @@ namespace sora {
 		void setRepeat(bool flag);
 		bool isRepeat();
 		bool isPlaying();
-		
-		SoraWString getName() { return musicName; }
 
 	private:
 		inline void _parseName(const SoraWString& path);

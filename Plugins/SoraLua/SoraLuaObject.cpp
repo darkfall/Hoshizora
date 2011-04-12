@@ -62,7 +62,12 @@ namespace sora {
 	}
 
 	int32 SoraLuaObject::doScript(const SoraWString& scriptPath) {
-		return luaState->DoFile(ws2s(scriptPath).c_str());
+		ulong32 size;
+		void* pdata = SORA->getResourceFile(scriptPath, size);
+		if(pdata) {
+			return doBuffer((char*)pdata, size, 0);
+		}
+		return 0;
 	}
 
 	int32 SoraLuaObject::doString(const SoraString& str) {

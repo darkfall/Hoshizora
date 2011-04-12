@@ -13,6 +13,10 @@
 
 namespace sora { 
 
+	static void core_messageBox(const SoraString& message, const SoraString& title, int32 flag) {
+		SORA->messageBox(message, title, flag);
+		SORA->log(message);
+	}
 	class SoraLuaExport {
 	public:
 		static void export_soracore(SoraLuaObject* state) {
@@ -21,7 +25,9 @@ namespace sora {
 		static void export_soracore(LuaState* state) {
             assert(state != NULL);
             
-			SoraCore* pCore = SoraCore::Instance();
+			LuaModule(state, "core")
+				.def("messageBox", &core_messageBox);
+		/*	SoraCore* pCore = SoraCore::Instance();
 			gge::LuaClass<SoraCore>(state, "SoraCore", pCore)
             .def("setFPS", &SoraCore::setFPS)
             .def("setTimeScale", &SoraCore::setTimeScale)
@@ -56,7 +62,7 @@ namespace sora {
             .def("messageBox", &SoraCore::messageBox)
             .def("log", &SoraCore::log)
             .def("execute", &SoraCore::execute)
-            .def("setFrameSync", &SoraCore::setFrameSync);
+            .def("setFrameSync", &SoraCore::setFrameSync);*/
 		}
         
 

@@ -15,6 +15,7 @@
 #include "stgscene.h"
 
 #include "Experimental/state_test.h"
+#include "SoraLua/SoraLuaObject.h"
 
 
 class mainWindow: public sora::SoraWindowInfoBase,
@@ -55,6 +56,7 @@ private:
 	sora::SoraShader* shader;
 					
 	sora::BaseEntity* testEntity;
+	sora::SoraLuaObject* luaobj;
 };
 
 #endif
