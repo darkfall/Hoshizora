@@ -12,20 +12,25 @@
 
 #include "SoraPlatform.h"
 #include "SoraNamedObject.h"
+#include "vector3.h"
 
 namespace sora {
 	
-	class SoraASSM_Variable: public SoraNamedObject {
-	};
 	/*
 	 Base class for state machine variables
+     bool
+     int
+     float
+     ulong32
+     vector3
 	 */
-	/*class SoraASSM_Variable: public SoraNamedObject {
+    template<typename VAR_TYPE>
+	class SoraASSM_Variable: public SoraNamedObject {
 	public:
 		SoraASSM_Variable(): bValueAssigned(false), defaultValue(0), value(0) {}
 		virtual ~SoraASSM_Variable() {}
 		
-		void reset() { defaultValue = 0; }
+		void reset() { defaultValue = 0; value = 0; }
 		
 		VAR_TYPE& Value() { 
 			if(!bValueAssigned)
@@ -33,7 +38,7 @@ namespace sora {
 			return value;
 		}
 		
-		SoraASSM_Variable operator=(VAR_TYPE val) { defaultValue = val; }
+		SoraASSM_Variable operator =(VAR_TYPE val) { defaultValue = val; }
 	
 		SoraASSM_Variable& operator +(VAR_TYPE val) { defaultValue += val; }
 		SoraASSM_Variable& operator -(VAR_TYPE val) { defaultValue -= val; }
@@ -51,7 +56,22 @@ namespace sora {
 		VAR_TYPE defaultValue;
 		bool bValueAssigned;
 	};
-	*/
+    
+    typedef SoraASSM_Variable<float> SMFloatVariable;
+    typedef SoraASSM_Variable<int>   SMIntegerVariable;
+    typedef SoraASSM_Variable<bool>  SMBoolVariable;
+    typedef SoraASSM_Variable<ulong32> SMUlongVariable;
+    
+    class SoraVector3: public vector3 {
+    public:
+        SoraVector3& operator = (int i) {
+            x = i; y = i;
+            return *this;
+        }
+    };
+
+    typedef SoraASSM_Variable<SoraVector3> SMVector2Variable;
+    
 } // namespace sora 
 
 

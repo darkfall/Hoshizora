@@ -23,9 +23,14 @@ public:
 	virtual void attachToRender() = 0;
 	virtual void detachFromRender() = 0;
 	
+    int32 getWidth() const  { return w; }
+    int32 getHeight() const { return h; }
+    int32 getError() const  { return err; }
+    bool  isZBuffer() const { return zbuffer; }
+    
+private:
 	int32 w, h;
 	ulong32 tex;
-	ulong32 stex;
 	bool zbuffer;
 	int32 err;
 };

@@ -67,38 +67,45 @@ namespace sora{
 
 		//delete mainWindow;
 	}
+    
+    static void InitPerspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar)
+    {
+        GLfloat xmin, xmax, ymin, ymax;
+        
+        ymax = zNear * (GLfloat)tan(fovy * 3.1415962f / 360.0);
+        ymin = -ymax;
+        xmin = ymin * aspect;
+        xmax = ymax * aspect;
+        
+        glFrustum(xmin, xmax, ymin, ymax, zNear, zFar);
+    }
 
 	void SoraOGLRenderer::_glInitialize() {
 		glShadeModel(GL_SMOOTH);                    // Enables Smooth Shading
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);      // 4-byte pixel alignment
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
 		glClearStencil(0);                          // clear stencil buffer
-		glClearDepth(1.0f);                         // Depth Buffer Setup
-
-		glEnable(GL_DEPTH_TEST);
+        
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LEQUAL);                       // The Type Of Depth Test To Do
+		glClearDepth(1.f);                          // Depth Buffer Setup
+        
+        glDepthMask(GL_FALSE);
+        
 		glEnable(GL_CULL_FACE);
-		//      glCullFace(GL_BACK);
 		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 		glEnable(GL_COLOR_MATERIAL);
-		//      glDisable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);                     // The Type Of Depth Test To Do
 
+     //   InitPerspective(60, (float)_oglWindowInfo.width / _oglWindowInfo.height, 0.f, 1.f);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
 		
-		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_DITHER);
 		glDisable(GL_FOG);
 		glDisable(GL_LIGHTING);
 		glDisable(GL_CULL_FACE);
-		glDisable(GL_LOGIC_OP);
-		glDisable(GL_STENCIL_TEST);
 		glDisable(GL_TEXTURE_2D);
-		
-		glEnable(GL_DEPTH_BUFFER_BIT);
-		glDepthMask(0);
-	}
+    }
 
 	void SoraOGLRenderer::_glBeginFrame() {
 	}
@@ -125,27 +132,45 @@ namespace sora{
 		glLoadIdentity();
 		//Creating an orthoscopic view matrix going from -1 -> 1 in each
 		//dimension on the screen (x, y, z).
-		glOrtho(0, _oglWindowInfo.width, _oglWindowInfo.height, 0, -1, 1);
+		glOrtho(0.f, w, h, 0.f, -1.f, 1.f);
 	}
 
 	void SoraOGLRenderer::applyTransform() {
-		glViewport(0, 0, _oglWindowInfo.width, _oglWindowInfo.height);
-		glMatrixMode(GL_PROJECTION);
-		//Clearing the projection matrix...
-		glLoadIdentity();
-		//Creating an orthoscopic view matrix going from -1 -> 1 in each
-		//dimension on the screen (x, y, z).
-		glOrtho(0, _oglWindowInfo.width, _oglWindowInfo.height, 0, -1, 1);
-		glMatrixMode(GL_MODELVIEW);
-		//Clearing model view matrix
-		glLoadIdentity();
-		glTranslatef(_oglWindowInfo.x-_oglWindowInfo.dx, _oglWindowInfo.y-_oglWindowInfo.dy, 0.f); //Set Center Coodinates
-		glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
-
-        //glRotatef(DGR_RAD(20), -1.f, 1.f, 1.f);
-		glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
-
-		glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
+        if(!pCurTarget) {
+            glViewport(0, 0, 
+                       _oglWindowInfo.width, 
+                       _oglWindowInfo.height);
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glOrtho(0.f, 
+                    _oglWindowInfo.width, 
+                    _oglWindowInfo.height
+                    , 0.f, -1.f, 1.f);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glTranslatef(_oglWindowInfo.x-_oglWindowInfo.dx, _oglWindowInfo.y-_oglWindowInfo.dy, 0.f); //Set Center Coodinates
+            glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
+            glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
+                
+            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
+        } else {
+            glViewport(0, 0, 
+                       pCurTarget->getWidth(), 
+                       pCurTarget->getHeight());
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glOrtho(0, 
+                    pCurTarget->getWidth(), 
+                    0
+                    , pCurTarget->getHeight(), -1, 1);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glTranslatef(0.f, 0.f, 0.f); //Set Center Coodinates
+            glRotatef(0.f, -0.f, 0.f, 1.f);
+            glScalef(1.f, 1.f, 1.0f);//
+       
+            glTranslatef(0.f, 0.f, 0.f);
+        }
 	}
 
 	void SoraOGLRenderer::_glBeginScene(ulong32 color, ulong32 t) {
@@ -153,35 +178,37 @@ namespace sora{
 		int32 height = _oglWindowInfo.height;
 		if(t) {
 			pCurTarget = (SoraRenderTargetOG*)t;
-			width = pCurTarget->w;
-			height = pCurTarget->h;
+			width = pCurTarget->getWidth();
+			height = pCurTarget->getHeight();
             
+            pCurTarget->attachToRender();
             applyTransform();
-		} else pCurTarget = 0;
-
-		if(pCurTarget) pCurTarget->attachToRender();
-
-		if(iFrameStart || pCurTarget) {
-			glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		}
+            glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
+        } else {
+            if(iFrameStart) {
+                glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
+            }
+        }
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void SoraOGLRenderer::_glEndScene() {
 		flush();
-		if(pCurTarget) {
+		if(pCurTarget != NULL) {
             glFlush();
 			pCurTarget->detachFromRender();
             pCurTarget = 0;
-        }
+
+            applyTransform();
+        } else 
+            iFrameStart = 0;
 		//else
 		//	glfwSwapBuffers();
 		
-		iFrameStart = 0;
 	}
 
 	void SoraOGLRenderer::_glSetBlendMode(int32 blend) {
-		glDisable(GL_ALPHA_TEST);
+//		glDisable(GL_ALPHA_TEST);
 		glEnable(GL_BLEND); // Enable Blending
 
 		if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND)) {
@@ -192,8 +219,11 @@ namespace sora{
 		}
 
 		if((blend & BLEND_ZWRITE) != (CurBlendMode & BLEND_ZWRITE)) {
-			if(blend & BLEND_ZWRITE) glDepthMask(GL_TRUE);
-			else glDepthMask(GL_FALSE);
+			if(blend & BLEND_ZWRITE) {
+                glDepthMask(GL_TRUE);
+            } else {
+                glDepthMask(GL_FALSE);
+            }
 		}
 
 		if((blend & BLEND_COLORADD) != (CurBlendMode & BLEND_COLORADD)) {
@@ -238,12 +268,12 @@ namespace sora{
 		glfwSetWindowCloseCallback(int_exitFunc);
 		glfwSetKeyCallback(glfwKeyCallback);
 
-		_glInitialize();
-		_glSetProjectionMatrix(windowInfo->getWindowWidth(), windowInfo->getWindowHeight());
-
-		mainWindow = windowInfo;
+        mainWindow = windowInfo;
 		_oglWindowInfo.width = windowInfo->getWindowWidth();
 		_oglWindowInfo.height = windowInfo->getWindowHeight();
+        
+		_glInitialize();
+		_glSetProjectionMatrix(windowInfo->getWindowWidth(), windowInfo->getWindowHeight());
 
 		if(mainWindow->hideMouse())
 			glfwDisable(GLFW_MOUSE_CURSOR);
@@ -277,9 +307,7 @@ namespace sora{
 		bFullscreen = flag;
 		glfwCloseWindow();
 		glfwOpenWindow(mainWindow->getWindowWidth(), mainWindow->getWindowHeight(),
-					   0, 0, 0, 0,
-					   16,
-					   0,
+					   8, 8, 8, 8, 16, 0,
 					   bFullscreen==true?GLFW_FULLSCREEN:GLFW_WINDOW);
 		glfwSetWindowTitle(mainWindow->getWindowName().c_str());
 		glfwSetWindowCloseCallback(int_exitFunc);
@@ -326,14 +354,9 @@ namespace sora{
 			glBindTexture(GL_TEXTURE_2D, tex->mTextureID);
 			mCurrTexture = tex->mTextureID;
 
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		
-			/*if (mLinearFiltering) {
-			
-			else {
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);*/
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 		}
 	}
 
@@ -342,7 +365,7 @@ namespace sora{
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 			glEnableClientState(GL_COLOR_ARRAY);
-			
+           
 			glVertexPointer(3, GL_FLOAT, 0, mVertices);
 			glTexCoordPointer(2, GL_FLOAT, 0, mUVs);
 
@@ -385,21 +408,6 @@ namespace sora{
 	}
 
 	SoraTexture* SoraOGLRenderer::createTextureWH(int w, int h) {
-		/*size_t size = w*h*4;
-		GLubyte* bitData = new GLubyte[size];
-		memset(bitData, size, 0xFF);
-
-		ulong32 texId = SOIL_create_OGL_texture(bitData,
-												w,
-												h,
-												4,
-												0,
-												SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_TEXTURE_REPEATS);
-		if(!texId) {
-			throw SORA_EXCEPTION("Error creating texture");
-		}*/
-        
-
 		GLuint texId;
 
 		glGenTextures(1, &texId);
@@ -444,16 +452,13 @@ namespace sora{
 
             glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
 			glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, ht->dataRef.texData);
-
-            glBindTexture(GL_TEXTURE_2D, 0);
-            
-            glBindTexture(GL_TEXTURE_2D, PreviousTexture);
-
-            if(glGetError() != 0) {
-                free(ht->dataRef.texData);
+            if(glGetError() != GL_NO_ERROR) {
+                delete ht->dataRef.texData;
                 ht->dataRef.texData = 0;
                 return NULL;
             }
+            
+            glBindTexture(GL_TEXTURE_2D, PreviousTexture);
 			return (ulong32*)ht->dataRef.texData;
 		}
 		return 0;
@@ -690,8 +695,8 @@ namespace sora{
 		int32 width = w;
 		int32 height = h;
 		if(pCurTarget) {
-			width = pCurTarget->w;
-			height = pCurTarget->h;
+			width = pCurTarget->getWidth();
+			height = pCurTarget->getHeight();
 		} else {
 			width = _oglWindowInfo.width;
 			height = _oglWindowInfo.height;
@@ -739,6 +744,8 @@ namespace sora{
 		_oglWindowInfo.rot		=	rot;
 		_oglWindowInfo.hscale	=	hscale!=0.f?hscale:1.f;
 		_oglWindowInfo.vscale	=	vscale!=0.f?hscale:1.f;
+        
+        applyTransform();
 	}
 
 	ulong32 SoraOGLRenderer::createTarget(int width, int height, bool zbuffer) {
@@ -762,9 +769,9 @@ namespace sora{
 	}
 
 	ulong32 SoraOGLRenderer::getTargetTexture(ulong32 t) {
-		SoraRenderTarget* pt = (SoraRenderTarget*)t;
-		if(!pt) return 0;
-		return (ulong32)pt->stex;
+        assert(t != NULL);
+		SoraRenderTargetOG* pt = (SoraRenderTargetOG*)t;
+		return pt->getTexture();
 	}
 
 	bool SoraOGLRenderer::_glVersionCheck() {

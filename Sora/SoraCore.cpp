@@ -87,6 +87,11 @@ namespace sora {
 
 		_checkCoreComponents();
 		_logInternalLog();
+      
+        // create render target for debug renderer
+#ifdef DEBUG
+        DEBUG_RENDERER->createTarget();
+#endif
 
 		if(pRenderSystem)
 			pRenderSystem->start(pTimer);
@@ -127,6 +132,7 @@ namespace sora {
         }
 
 		pRenderSystem->beginFrame();
+        
 		_frameListenerStart();
         
         {
@@ -156,6 +162,7 @@ namespace sora {
 #endif
             pRenderSystem->update();
         }
+        
 		
         {
 #ifdef PROFILE_CORE_UPDATE
@@ -535,16 +542,16 @@ namespace sora {
 		assert(bInitialized==true);
 		HSORATEXTURE tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
-			return new SoraSprite((SoraTexture*)tex);
+			return new SoraSprite(tex);
 		} else {
 			tex = createTexture(sPath);
-			return new SoraSprite((SoraTexture*)tex);
+			return new SoraSprite(tex);
 		}
 	}
 
 	SoraSprite* SoraCore::createSpriteTex(HSORATEXTURE tex) {
 		assert(bInitialized==true);
-		return new SoraSprite((SoraTexture*)tex);
+		return new SoraSprite(tex);
 	}
 
 	void SoraCore::renderQuad(SoraQuad& quad) {
@@ -578,13 +585,14 @@ namespace sora {
 	}
     
     void SoraCore::setViewPoint(float32 x, float32 y, float32 z) {
+        assert(bInitialized==true);
         pRenderSystem->setViewPoint(x, y, z);
     }
 
 	void SoraCore::beginScene(ulong32 c, ulong32 t) {
 		assert(bInitialized==true);
 		pRenderSystem->beginScene(c, t);
-        if(c == 0)
+        if(t == 0)
             bMainScene = true;
 	}
 	void SoraCore::endScene() {
@@ -819,14 +827,7 @@ namespace sora {
 			return NULL;
 		}
 		
-		ulong32 size;
-		void* data = getResourceFile(musicName, size);
-		if(data) {
-			return pSoundSystem->createMusicFile(data, size, bStream);
-		}
-		
-		_postError("SoraCore::createMusicFile: error load music data");
-		return NULL;
+		return pSoundSystem->createMusicFile(musicName, bStream);
 	}
 	
 	SoraSoundEffectFile* SoraCore::createSoundEffectFile(const SoraWString& se) {
@@ -835,15 +836,26 @@ namespace sora {
 			return NULL;
 		}
 		
-		ulong32 size;
-		void* data = getResourceFile(se, size);
-		if(data) {
-			return pSoundSystem->createSoundEffectFile(data, size);
+		return pSoundSystem->createSoundEffectFile(se);
+	}
+    
+    SoraMusicFile* SORACALL SoraCore::createMusicFile(bool bStream) {
+        if(!pSoundSystem) {
+			_postError("SoraCore::createMusicFile: no soundsystem available");
+			return NULL;
+		}
+        
+        return pSoundSystem->createMusicFile(bStream);
+    }
+    
+    SoraSoundEffectFile* SORACALL SoraCore::createSoundEffectFile() {
+        if(!pSoundSystem) {
+			_postError("SoraCore::createSoundEffectFile: no soundsystem available");
+			return NULL;
 		}
 		
-		_postError("SoraCore::createSoundEffectFile: error load music data");
-		return NULL;
-	}
+		return pSoundSystem->createSoundEffectFile();
+    }
     
     void SoraCore::execute(const SoraString& appPath, const SoraString& args) {
         system((appPath+args).c_str());

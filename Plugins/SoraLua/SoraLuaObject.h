@@ -11,6 +11,12 @@
 
 #include <map>
 
+#ifdef OS_WIN32     
+    #ifdef LUA_PLUS_LIB
+        #pragma comment(lib, "LuaPlus.lib")
+    #endif
+#endif
+
 namespace sora {
 
 	using namespace LuaPlus;
@@ -61,7 +67,7 @@ namespace sora {
         template<typename RT>
         LuaFunction<RT> getFunc(const SoraString& funcName);
 
-		LuaState* getState();
+		LuaState* getState() const;
 	private:
 		LuaState* luaState;
 		

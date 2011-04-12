@@ -63,9 +63,9 @@ namespace sora {
 		void SORACALL beginScene(ulong32 c=0, ulong32 h=0);
 		void SORACALL endScene();
 
-		ulong32 SORACALL createTarget(int width, int height, bool zbuffer=true);
+		HSORATARGET SORACALL createTarget(int width, int height, bool zbuffer=true);
 		void	SORACALL freeTarget(ulong32 t);
-		ulong32 SORACALL getTargetTexture(ulong32 t);
+		HSORATEXTURE SORACALL getTargetTexture(ulong32 t);
 
 		HSORATEXTURE SORACALL createTexture	(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
 		HSORATEXTURE SORACALL createTextureWH(int32 w, int32 h);
@@ -158,7 +158,8 @@ namespace sora {
 		
 		SoraMusicFile* SORACALL createMusicFile(const SoraWString& musicName, bool bStream=false);
 		SoraSoundEffectFile* SORACALL createSoundEffectFile(const SoraWString& se);
-        
+        SoraMusicFile* SORACALL createMusicFile(bool bStream=false);
+        SoraSoundEffectFile* SORACALL createSoundEffectFile();
         
         void SORACALL setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
         void SORACALL execute(const SoraString& appPath, const SoraString& args);

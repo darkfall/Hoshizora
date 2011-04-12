@@ -18,8 +18,10 @@ namespace sora {
 
 		void update();
 		
-		SoraMusicFile* createMusicFile(void* data, ulong32 size, bool bStream=false);
-		SoraSoundEffectFile* createSoundEffectFile(void* data, ulong32 size);
+		SoraMusicFile* createMusicFile(const SoraWString& path, bool bStream=false);
+        SoraSoundEffectFile* createSoundEffectFile(const SoraWString& path);
+        SoraMusicFile* createMusicFile(bool bStream);
+        SoraSoundEffectFile* createSoundEffectFile();
 	};
 
 } // namespace sora 

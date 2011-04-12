@@ -1,6 +1,0 @@
-<container name="PlayerWindow" id="PlayerWindow" width="224" height="168" x="800" y="600" opaque="true">
-	<slider name="PlayerSlider" width="200"  height="20" x="12" y="10" start="0" end="10000" value="0" makerLength="1" stepLength="1" id="PlayerPos" responser="PlayerController" responsetype="action"/>
-	<button name="Open" width="150" height="30" x="36" y="50" caption="Open" id="Open" responser="PlayerController" responsetype="action"/>
-	<button name="Stop" width="150" height="30" x="36" y="90" caption="Stop" id="Stop" responser="PlayerController" responsetype="action"/>
-	<button name="Pause" width="150" height="30" x="36" y="130" caption="Pause" id="Pause" responser="PlayerController" responsetype="action"/>
-</container>

@@ -83,7 +83,7 @@ namespace projl {
 	
 	lSceneManager::lSceneManager(float32 x, float32 y, float32 w, float32 h) {
 		sora = sora::SoraCore::Instance();
-		pSprBlackCover = new sora::SoraSprite((sora::SoraTexture*)sora->createTextureWH(w, h));
+		pSprBlackCover = new sora::SoraSprite(sora->createTextureWH(w, h));
 		pSprBlackCover->setPosition(x, y);
 		pSprBlackCover->setColor(0x00FFFFFF);
 		

@@ -4,6 +4,9 @@
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 887022B11346AB3500AE8DD7 /* SoraPureCore */;
 		activeTarget = 8DD76F620486A84900D96B5E /* SoraPureCore */;
+		addToTargets = (
+			8DD76F620486A84900D96B5E /* SoraPureCore */,
+		);
 		codeSenseManager = 887022D31346AB4300AE8DD7 /* Code sense */;
 		executables = (
 			887022B11346AB3500AE8DD7 /* SoraPureCore */,
@@ -14,7 +17,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					993,
+					969,
 					20,
 					48,
 					43,
@@ -31,15 +34,17 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 323398536;
-			PBXWorkspaceStateSaveDate = 323398536;
+			PBXPerProjectTemplateStateSaveDate = 323884366;
+			PBXWorkspaceStateSaveDate = 323884366;
 		};
 		perUserProjectItems = {
+			88691168134E16590012BDE0 /* PBXTextBookmark */ = 88691168134E16590012BDE0 /* PBXTextBookmark */;
+			88691169134E16590012BDE0 /* PBXTextBookmark */ = 88691169134E16590012BDE0 /* PBXTextBookmark */;
+			8869116A134E16590012BDE0 /* PBXTextBookmark */ = 8869116A134E16590012BDE0 /* PBXTextBookmark */;
+			8869116B134E16590012BDE0 /* PBXTextBookmark */ = 8869116B134E16590012BDE0 /* PBXTextBookmark */;
 			887022D61346AB7F00AE8DD7 /* PBXTextBookmark */ = 887022D61346AB7F00AE8DD7 /* PBXTextBookmark */;
 			887022EF1346ABA300AE8DD7 /* PBXTextBookmark */ = 887022EF1346ABA300AE8DD7 /* PBXTextBookmark */;
 			887022F01346ABA300AE8DD7 /* PBXTextBookmark */ = 887022F01346ABA300AE8DD7 /* PBXTextBookmark */;
-			887022F11346ABA300AE8DD7 /* PBXBookmark */ = 887022F11346ABA300AE8DD7 /* PBXBookmark */;
-			887022F21346ABA300AE8DD7 /* PBXTextBookmark */ = 887022F21346ABA300AE8DD7 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 887022D21346AB4300AE8DD7 /* Source Control */;
 		userBuildSettings = {
@@ -54,9 +59,9 @@
 	};
 	8811389F12CC424000C648C7 /* mainWindow.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 1106}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1147, 1246}}";
 			sepNavSelRange = "{440, 0}";
-			sepNavVisRange = "{784, 920}";
+			sepNavVisRange = "{710, 1384}";
 		};
 	};
 	88240CFA12C5811B009498F7 /* SoraShader.h */ = {
@@ -65,6 +70,53 @@
 			sepNavSelRange = "{161, 0}";
 			sepNavVisRange = "{622, 1056}";
 		};
+	};
+	88691165134E15850012BDE0 /* SoraCanvas.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1147, 741}}";
+			sepNavSelRange = "{474, 0}";
+			sepNavVisRange = "{0, 545}";
+		};
+	};
+	88691168134E16590012BDE0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8811389F12CC424000C648C7 /* mainWindow.cpp */;
+		name = "mainWindow.cpp: 23";
+		rLen = 0;
+		rLoc = 440;
+		rType = 0;
+		vrLen = 1384;
+		vrLoc = 710;
+	};
+	88691169134E16590012BDE0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D3F12A09A66007D6865 /* SoraObject.h */;
+		name = "SoraObject.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1208;
+		vrLoc = 55;
+	};
+	8869116A134E16590012BDE0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88691165134E15850012BDE0 /* SoraCanvas.h */;
+		name = "SoraCanvas.h: 25";
+		rLen = 0;
+		rLoc = 471;
+		rType = 0;
+		vrLen = 534;
+		vrLoc = 0;
+	};
+	8869116B134E16590012BDE0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88691165134E15850012BDE0 /* SoraCanvas.h */;
+		name = "SoraCanvas.h: 26";
+		rLen = 0;
+		rLoc = 474;
+		rType = 0;
+		vrLen = 545;
+		vrLoc = 0;
 	};
 	887022B11346AB3500AE8DD7 /* SoraPureCore */ = {
 		isa = PBXExecutable;
@@ -137,25 +189,18 @@
 		vrLen = 826;
 		vrLoc = 0;
 	};
-	887022F11346ABA300AE8DD7 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 8811389F12CC424000C648C7 /* mainWindow.cpp */;
-	};
-	887022F21346ABA300AE8DD7 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 8811389F12CC424000C648C7 /* mainWindow.cpp */;
-		name = "mainWindow.cpp: 23";
-		rLen = 0;
-		rLoc = 440;
-		rType = 0;
-		vrLen = 920;
-		vrLoc = 784;
-	};
 	88D87D2D12A09A66007D6865 /* SoraCore.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {502, 12166}}";
 			sepNavSelRange = "{6932, 0}";
 			sepNavVisRange = "{6725, 395}";
+		};
+	};
+	88D87D3F12A09A66007D6865 /* SoraObject.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1147, 896}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{55, 1208}";
 		};
 	};
 	8DD76F620486A84900D96B5E /* SoraPureCore */ = {

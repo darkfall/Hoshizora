@@ -5,20 +5,13 @@
 
 #include "SoraPlatform.h"
 #include "SoraException.h"
+#include "SoraNamedObject.h"
 //#include "SoraStringConv.h"
 
 namespace sora {
 
-	class SoraFileBase {
-		friend class SoraZipFile;
-		friend class SoraHttpFile;
-		friend class SoraINIFile;
-		friend class SoraMusicFile;
-		friend class SoraMIDIFile;
-		friend class SoraSoundEffectFile;
-		friend class SoraFile;
-
-	public:
+	class SoraFileBase: public SoraNamedObject {
+    public:
 		SoraFileBase(): isopen(false) {}
 		virtual ~SoraFileBase() {}
 

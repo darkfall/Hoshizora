@@ -7,6 +7,8 @@ namespace sora {
 
 		int32 SoraAudiereMusicFile::readFile(const SoraWString& sFilePath) {
 			if(is_open()) closeFile();
+            
+            _parseName(sFilePath);
 
 			AudioDevicePtr device = SoraAudiereDevice::Instance()->getDevice();
 			if(!device) { return SORASOUND_FAILED_OPEN_DEVICE; }
@@ -23,6 +25,7 @@ namespace sora {
 
 			return SORASOUND_FAILED_OPEN_SOUND;
 		}
+    
 		int32 SoraAudiereMusicFile::readFileMem(void* ptr, ulong32 size) {
 			if(is_open()) closeFile();
 
@@ -35,6 +38,7 @@ namespace sora {
 			set_open(true);
 			return SORASOUND_SUCCESS;
 		}
+    
 		void SoraAudiereMusicFile::closeFile() {
 			if(is_open()) {
 				sound->unref();
@@ -87,13 +91,22 @@ namespace sora {
 			return 0.f;
 		}
 
-		void SoraAudiereMusicFile::setPosition(int32 pos) { 
+		void SoraAudiereMusicFile::setPosition(float32 x, float32 y, float32 z) { 
 			if(is_open()) sound->setPosition(pos);
 		}
-		int32 SoraAudiereMusicFile::getPosition() { 
+		void SoraAudiereMusicFile::getPosition(float32& x, float32& y, float32& z) { 
 			if(is_open()) return sound->getPosition();
 			return 0;
 		}
+    
+    void SoraAudiereMusic::setMusicPosition(int32 pos) {
+        if(is_open()) sound->setPosition(pos);
+    }
+    
+    int32 SoraAudiereMusic::getMusicPosition() {
+        if(is_open()) return sound->getPosition();
+        return 0;
+    }
 
 		int32 SoraAudiereMusicFile::getLength() { 
 			if(is_open()) return sound->getLength();
@@ -114,6 +127,7 @@ namespace sora {
 		}
 
 		void SoraAudiereMusicFile::_parseName(const SoraWString& path) {
+            SoraWString musicName;
 			SoraWString s = path;
 			for(size_t i=0; i<s.size(); ++i) {
 				if(s[i] == L'\\') s[i] = L'/';
@@ -122,10 +136,13 @@ namespace sora {
 				musicName = s.substr(s.rfind('/'), s.size());
 			if(musicName.find('.') != std::string::npos)
 				musicName.erase(musicName.rfind('.'), musicName.size());
+            setName(musicName);
 		}
 
 		int32 SoraAudiereSoundEffectFile::readFile(const SoraWString& sFilePath) {
 			if(is_open()) closeFile();
+            
+            _parseName(sFilePath);
 
 			AudioDevicePtr device = SoraAudiereDevice::Instance()->getDevice();
 			if(!device) { return SORASOUND_FAILED_OPEN_DEVICE; }
@@ -198,4 +215,16 @@ namespace sora {
 			return 0.f;
 		}
 
+    void SoraAudiereSoundEffectFile::_parseName(const SoraWString& path) {
+        SoraWString seName;
+        SoraWString s = path;
+        for(size_t i=0; i<s.size(); ++i) {
+            if(s[i] == L'\\') s[i] = L'/';
+        }
+        if(s.find('/') != std::string::npos)
+            seName = s.substr(s.rfind('/'), s.size());
+        if(musicName.find('.') != std::string::npos)
+            seName.erase(seName.rfind('.'), seName.size());
+        setName(seName);
+    }
 } // namespace sora

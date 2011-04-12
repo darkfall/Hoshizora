@@ -14,6 +14,7 @@
 #include "SoraSingleton.h"
 
 #include "SoraCore.h"
+#include "SoraFont.h"
 
 
 namespace sora {
@@ -22,8 +23,24 @@ namespace sora {
 		friend class SoraSingleton<SoraDebugRenderer>;
 		
 	public:
-		SoraDebugRenderer() {}
-		~SoraDebugRenderer() {}
+		SoraDebugRenderer(): pRenderSprite(0), renderTarget(0) {}
+		~SoraDebugRenderer() {
+            if(pRenderSprite)
+                delete pRenderSprite;
+            if(renderTarget)
+                SORA->freeTarget(renderTarget);
+        }
+        
+        void createTarget() {
+            renderTarget = SORA->createTarget(SORA->getScreenWidth(), SORA->getScreenHeight(), false);
+
+            if(!renderTarget)
+                throw SORA_EXCEPTION("Error creating target for debug renderer");
+        }
+        
+        void setFont(SoraFont* font) {
+            pFont = font;
+        }
 		
 		void addLine(const hgeVector& point1, const hgeVector& point2, float32 width, const SoraColorRGBA& color=COLOR_BLACK, float32 depth=0.f) {
             debugRenderItem item(ITEM_LINE);
@@ -60,12 +77,28 @@ namespace sora {
             item.color = color;
             item.depth = depth;
             item.str = str;
+            item.pFont = pFont;
             debugRenderItems.push_back(item);
         }
 		
 		void render() {
+        //    SORA->beginScene(0x00000000, renderTarget);
+            DEBUG_RENDER_ITEMS::iterator itItem = debugRenderItems.begin();
+            while(itItem != debugRenderItems.end()) {
+                itItem->render();
+                ++itItem;
+            }
+         //   SORA->endScene();
         }
 		
+        void renderToScreen() {
+            if(!pRenderSprite)
+                pRenderSprite = new SoraSprite(SORA->getTargetTexture(renderTarget));
+            else
+                pRenderSprite->setTexture(SORA->getTargetTexture(renderTarget));
+            pRenderSprite->render(0.f, 0.f);
+        }
+        
 		void clear() {
             debugRenderItems.clear();
         }
@@ -92,8 +125,10 @@ namespace sora {
 			uint32 type;
             float32 width;
             bool bFill;
+            
+            SoraFont* pFont;
 			
-			debugRenderItem(uint8 _type): type(_type), color(COLOR_WHITE), bFill(false) {}
+			debugRenderItem(uint8 _type): type(_type), color(COLOR_WHITE), bFill(false), pFont(NULL) {}
             
             void render() {
                 switch(type) {
@@ -105,6 +140,8 @@ namespace sora {
                     case ITEM_CIRCLE:
                         break;
                     case ITEM_STRING:
+                        if(pFont) 
+                            pFont->render(pos.x, pos.y, str.c_str());
                         break;
                 }
             }
@@ -112,9 +149,13 @@ namespace sora {
 		typedef std::list<debugRenderItem> DEBUG_RENDER_ITEMS;
 		
 		DEBUG_RENDER_ITEMS debugRenderItems;
+        
+        HSORATARGET renderTarget;
+        SoraSprite* pRenderSprite;
+        SoraFont* pFont;
 	};
 	
-	static SoraDebugRenderer* DEBUG_RENDERER = SoraDebugRenderer::Instance();
+#define DEBUG_RENDERER SoraDebugRenderer::Instance()
 } // namespace sora
 
 #endif // DEBUG_RENDERER_H_

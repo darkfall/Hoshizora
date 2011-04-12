@@ -1,0 +1,24 @@
+{
+	"container": {
+		"name": "cont1",
+		"x": 100,
+		"y": 100,
+		"width": 200,
+		"height": 300,
+		"opaque": false,
+		"foregroundColor": "0xFFFFFFFF",
+		
+		"window": {
+			"name": "b1",
+			"x": 0,
+			"y": 0,
+			"width": 30,
+			"height": 30,
+			"caption": "lalalla",
+			"id": "button1",
+			"opaque": true,
+			"foregroundColor": "0xAAFFFFFF"
+		}
+	}
+}
+		

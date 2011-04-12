@@ -34,8 +34,11 @@ namespace sora {
 		float32 getPitch();
 		float32 getVolume();
 
-		void setPosition(int32 pos);
-		int32 getPosition();
+		void setPosition(float32 x, float32 y, float32 z);
+        void getPosition(float32& x, float32& y, float32& z);
+        
+        void setMusicPosition(int32 pos);
+        int32 getMusicPosition();
 
 		int32 getLength();
 		
@@ -46,14 +49,12 @@ namespace sora {
 		SoraWString getName() { return musicName; }
 
 	private:
-		void _parseName(const SoraWString& path);
+		inline void _parseName(const SoraWString& path);
 
 		bool bIsStream;
 		int pausePos;
 
 		OutputStreamPtr sound;	
-
-		SoraWString musicName;
 	};
 
 	class SoraAudiereSoundEffectFile: public SoraSoundEffectFile {
@@ -67,6 +68,9 @@ namespace sora {
 		// if type==MULTIPLE, then stop all instances of the sound
 		// if type==SINGLE, stop the sound only
 		void stop();
+        
+        void setPosition(float32 x, float32 y, float32 z) {}
+        void getPosition(float32& x, float32& y, float32& z) {}
 
 		// 0 - 1
 		void setVolume(float32 vol);
@@ -80,6 +84,8 @@ namespace sora {
 		float32 getVolume();
 
 	private:
+        inline void _parseName(const SoraWString& path);
+
 		SoundEffectPtr se;	
 
 		int iSoundEffectType;

@@ -50,9 +50,11 @@ bool mainWindow::renderFunc() {
 	//mainScenes->render();
 	//pSpr->render4V(100.f, 100.f, 700.f, 0.f, 700.f, 600.f, 100.f, 500.f);
    // sora->setViewPoint(0.f, 0.f, 1.f);
-  	
+    p3->render(0.f, 0.f);
     pSpr->render(0.f, 0.f);
-	pSpr2->render(100.f, 100.f);
+
+    pSpr2->render(0.f, 0.f);
+    
 	float t = 0.56;
 	//shader->setParameterfv("twisting", &t, 1);
 
@@ -75,10 +77,15 @@ void mainWindow::init() {
     
     pSpr = sora::SORA->createSprite(L"titlebg2.png");
 	pSpr2 = sora::SORA->createSprite(L"sea.png");
+    p3 = sora::SORA->createSprite(L"stgui.png");
+    p3->setZ(-0.4f);  p3->setBlendMode(BLEND_DEFAULT_Z);
+    pSpr2->setZ(0.5f);
+    pSpr->setZ(-0.3f); pSpr->setBlendMode(BLEND_DEFAULT_Z);
+    pSpr2->setColor(0x88FFFFFF);
 	
-	pSpr2->setScale(0.5f, 0.5f);
+//	pSpr2->setScale(0.5f, 0.5f);
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
-	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
+//	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

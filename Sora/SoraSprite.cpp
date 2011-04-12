@@ -71,15 +71,23 @@ namespace sora {
 		SoraTextureMap::Instance()->decRf((HSORATEXTURE)texture);
 	}
 
-	void SoraSprite::setTexture(SoraTexture* tex) {
+	void SoraSprite::setTexture(HSORATEXTURE tex) {
+        if(quad.tex) {
+            if(!SoraTextureMap::Instance()->exist((HSORATEXTURE)quad.tex)) {
+                sora::SORA->releaseTexture((HSORATEXTURE)quad.tex);
+            }
+        }
+        
 		float tx1,ty1,tx2,ty2;
 		float tw,th;
 		
-		quad.tex=tex;
+        SoraTexture* ptex = (SoraTexture*)tex;
+        assert(ptex != NULL);
+		quad.tex=ptex;
 		
 		if(tex) {
-			tw = (float)tex->mTextureWidth;
-			th = (float)tex->mTextureHeight;
+			tw = (float)ptex->mTextureWidth;
+			th = (float)ptex->mTextureHeight;
 		}
 		else {
 			tw = 1.0f;
@@ -104,7 +112,7 @@ namespace sora {
 			quad.v[3].tx=tx1; quad.v[3].ty=ty2; 
 		}
 		
-		texture = tex;
+		texture = ptex;
 	}
 
 	void SoraSprite::_initDefaults() {
@@ -220,8 +228,8 @@ namespace sora {
         if(hasShader()) 
             sora->attachShaderContext(shaderContext);
 		sora->renderQuad(quad);
- //       if(hasShader()) 
-   //         sora->detachShaderContext();
+        if(hasShader()) 
+            sora->detachShaderContext();
 	}
 
 	void SoraSprite::setColor(ulong32 c, int32 i) {
@@ -277,9 +285,34 @@ namespace sora {
 		x = centerX;
 	}
 
-	void SoraSprite::setFlip(bool hflag, bool vflag) {
-		bHFlip = hflag;
-		bVFlip = vflag;
+	void SoraSprite::setFlip(bool hflag, bool vflag, bool bFlipCenter) {
+		float tx, ty;
+        
+        if(bCFlip & bHFlip) centerX = getSpriteWidth() - centerX;
+        if(bCFlip & bVFlip) centerY = getSpriteHeight() - centerY;
+        
+        bCFlip = bFlipCenter;
+        
+        if(bCFlip & bHFlip) centerX = getSpriteWidth() - centerX;
+        if(bCFlip & bVFlip) centerY = getSpriteHeight() - centerY;
+        
+        if(hflag != bHFlip) {
+            tx=quad.v[0].tx; quad.v[0].tx=quad.v[1].tx; quad.v[1].tx=tx;
+            ty=quad.v[0].ty; quad.v[0].ty=quad.v[1].ty; quad.v[1].ty=ty;
+            tx=quad.v[3].tx; quad.v[3].tx=quad.v[2].tx; quad.v[2].tx=tx;
+            ty=quad.v[3].ty; quad.v[3].ty=quad.v[2].ty; quad.v[2].ty=ty;
+            
+            bHFlip = !bHFlip;
+        }
+        
+        if(vflag != bVFlip) {
+            tx=quad.v[0].tx; quad.v[0].tx=quad.v[3].tx; quad.v[3].tx=tx;
+            ty=quad.v[0].ty; quad.v[0].ty=quad.v[3].ty; quad.v[3].ty=ty;
+            tx=quad.v[1].tx; quad.v[1].tx=quad.v[2].tx; quad.v[2].tx=tx;
+            ty=quad.v[1].ty; quad.v[1].ty=quad.v[2].ty; quad.v[2].ty=ty;
+            
+            bVFlip = !bVFlip;
+        }
 	}
 
 	int32 SoraSprite::getTextureWidth()  const{
@@ -468,6 +501,10 @@ namespace sora {
             delete shaderContext;
             shaderContext = 0;
         }
+    }
+    
+    HSORATEXTURE SoraSprite::getTexture() const {
+        return (HSORATEXTURE)texture;
     }
     
 	

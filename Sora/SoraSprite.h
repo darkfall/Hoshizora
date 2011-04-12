@@ -49,15 +49,13 @@ namespace sora {
 	public:
         SoraSprite(HSORATEXTURE tex);
         SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 width, float32 height);
-		SoraSprite(SoraTexture* tex);
-		SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height);
 		virtual ~SoraSprite();
 
         void render();
         void render(float32 x, float32 y);
         void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
 
-		void setTexture(SoraTexture* tex);
+		void setTexture(HSORATEXTURE tex);
 		
 		void setTextureRect(float32 x, float32 y, float32 width, float32 height);
 		const hgeRect& getTextureRect() const;
@@ -73,7 +71,7 @@ namespace sora {
 		float32 getCenterX() const;
 		float32 getCenterY() const;
 
-		void setFlip(bool hflag, bool vflag);
+		void setFlip(bool hflag, bool vflag, bool bFlipCenter=true);
 		bool getHFlip() const;
 		bool getVFlip() const;
 
@@ -98,7 +96,7 @@ namespace sora {
 
 		ulong32* getPixelData() const;
         void unlockPixelData();
-		SoraTexture* getTexture() const { return texture; }
+		HSORATEXTURE getTexture() const;
 		
 		uint32 update(float32 dt);
 		void addEffect(SoraImageEffect* effect);
@@ -113,6 +111,9 @@ namespace sora {
         void clearShader();
         
 	private:
+        SoraSprite(SoraTexture* tex);
+		SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height);
+        
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
         
 		SoraSprite() { texture=0; _initDefaults(); }
@@ -127,7 +128,7 @@ namespace sora {
 		float32 centerX, centerY;
 		float32 vscale, hscale;
 
-		bool bVFlip, bHFlip;
+		bool bVFlip, bHFlip, bCFlip;
 		
 		typedef std::list<SoraImageEffect*> IMAGE_EFFECT_LIST;
 		IMAGE_EFFECT_LIST vEffects;
