@@ -101,7 +101,7 @@ void rfMainWindow::renderState() {
 }
 
 void rfMainWindow::success() {
-	pState = new sora::SoraSprite((sora::SoraTexture*)CORE->createTexture(L"youwin.png"));
+	pState = new sora::SoraSprite(CORE->createTexture(L"youwin.png"));
 	pState->setCenter(pState->getTextureWidth()/2, pState->getTextureHeight()/2);
 	pState->setPosition(getWindowWidth()/2, getWindowHeight()/2);
 	
@@ -113,7 +113,7 @@ void rfMainWindow::success() {
 }
 
 void rfMainWindow::fail() {
-	pState = new sora::SoraSprite((sora::SoraTexture*)CORE->createTexture(L"youlose.png"));
+	pState = new sora::SoraSprite(CORE->createTexture(L"youlose.png"));
 	pState->setCenter(pState->getTextureWidth()/2, pState->getTextureHeight()/2);
 	pState->setPosition(getWindowWidth()/2, getWindowHeight()/2);
 	

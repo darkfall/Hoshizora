@@ -88,6 +88,12 @@
     <Filter Include="Plugins\Darklb">
       <UniqueIdentifier>{3ce0d67f-86cd-4ff8-a6a3-4577a3314c3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\SoraLua">
+      <UniqueIdentifier>{36d26737-0773-44ae-9375-a46bb6723ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SoraLua\Luaplus">
+      <UniqueIdentifier>{fb07bb90-3288-4b25-9add-4f15a736d658}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -1281,6 +1287,153 @@
     <ClInclude Include="..\..\..\Plugins\DarkLib\FileDlg.h">
       <Filter>Plugins\Darklb</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaAutoBlock.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaCall.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaFunction.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaHelper.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaHelper_Object.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaHelper_StackObject.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaLink.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlus.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusCD.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusInternal.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackObject.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackTableIterator.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStateCD.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStateOutFile.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaTableIterator.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\luathread.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\pt.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lapi.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lauxlib.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lcode.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldebug.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldo.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lfunc.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lgc.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\llex.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\llimits.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lmem.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lobject.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lopcodes.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lparser.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstate.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstring.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltable.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltm.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lua.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\luaconf.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lualib.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lundump.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lvm.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lzio.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\pluto.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\srm.h">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\guichanWrapper.h">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaExport.h">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaObject.h">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaStateManager.h">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\spriteWrapper.h">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -1715,6 +1868,156 @@
     <ClCompile Include="..\..\..\Plugins\DarkLib\FileDlg.cpp">
       <Filter>Plugins\Darklb</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlus.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusAddons.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusFunctions.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlus_Libs.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackObject.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStateOutFile.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState_DumpObject.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaTableIterator.cpp">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\luathread.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\lwstrlib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\popen.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\pt.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lapi.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lauxlib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lbaselib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lcode.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldblib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldebug.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldo.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldump.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lfunc.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lgc.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\linit.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\liolib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\llex.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lmathlib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lmem.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\loadlib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lobject.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lopcodes.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\loslib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lparser.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstate.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstring.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstrlib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltable.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltablib.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltm.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lundump.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lvm.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lzio.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\pluto.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\print.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\srm.c">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\guichanWrapper.cpp">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaObject.cpp">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaStateManager.cpp">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\spriteWrapper.cpp">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Plugins\SoraOGLRenderer\soil\soil.html">
@@ -1728,6 +2031,21 @@
     </None>
     <None Include="..\..\..\Sora\json\json_valueiterator.inl">
       <Filter>头文件\json</Filter>
+    </None>
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaCall.inl">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </None>
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.inl">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </None>
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackObject.inl">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </None>
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackTableIterator.inl">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
+    </None>
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState.inl">
+      <Filter>Plugins\SoraLua\Luaplus</Filter>
     </None>
   </ItemGroup>
 </Project>

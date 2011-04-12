@@ -39,12 +39,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -319,6 +319,55 @@
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge_impl.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\guichanWrapper.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaAutoBlock.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaCall.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaFunction.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaHelper.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaHelper_Object.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaHelper_StackObject.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaLink.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlus.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusCD.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusInternal.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackObject.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackTableIterator.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStateCD.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStateOutFile.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaTableIterator.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\luathread.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\pt.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lapi.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lauxlib.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lcode.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldebug.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldo.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lfunc.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lgc.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\llex.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\llimits.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lmem.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lobject.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lopcodes.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lparser.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstate.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstring.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltable.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltm.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lua.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\luaconf.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lualib.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lundump.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lvm.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lzio.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\pluto.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\srm.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaExport.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaObject.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaStateManager.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\spriteWrapper.h" />
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\glfw\GL\glfw.h" />
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.h" />
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_helper.h" />
@@ -539,6 +588,56 @@
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\guichanWrapper.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlus.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusAddons.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusFunctions.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlus_Libs.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackObject.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStateOutFile.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState_DumpObject.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaTableIterator.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\luathread.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\lwstrlib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\popen.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\pt.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lapi.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lauxlib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lbaselib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lcode.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldblib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldebug.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldo.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ldump.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lfunc.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lgc.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\linit.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\liolib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\llex.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lmathlib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lmem.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\loadlib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lobject.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lopcodes.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\loslib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lparser.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstate.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstring.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lstrlib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltable.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltablib.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\ltm.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lundump.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lvm.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lzio.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\pluto.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\print.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\srm.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaObject.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaStateManager.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\spriteWrapper.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_helper.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\SOIL.cpp" />
@@ -623,6 +722,11 @@
     <ClCompile Include="vlcTestWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaCall.inl" />
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.inl" />
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackObject.inl" />
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaStackTableIterator.inl" />
+    <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState.inl" />
     <None Include="..\..\..\Plugins\SoraOGLRenderer\soil\soil.html" />
     <None Include="..\..\..\Sora\json\json_internalarray.inl" />
     <None Include="..\..\..\Sora\json\json_internalmap.inl" />
