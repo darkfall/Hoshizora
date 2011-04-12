@@ -121,7 +121,6 @@ bool vlcWindow::renderFunc() {
     
     canvas1->finishRender();
 
-    canvas2->beginRender();
     if(moviePlayer->isPlaying()) {
         if(moviePlayer->frameChanged()) {
             ulong32* data = pSpr->getPixelData();
@@ -132,6 +131,8 @@ bool vlcWindow::renderFunc() {
             moviePlayer->setFinish();
         }
     } 
+    canvas2->beginRender();
+
     renderMovieImage();
 
     sora::GCN_GLOBAL->gcnDraw();
@@ -141,8 +142,9 @@ bool vlcWindow::renderFunc() {
     sora::SORA->beginScene();
    
     canvas1->render();
+
     canvas2->render();
-    
+
     sora::SORA->endScene();
        
     return false;
@@ -198,9 +200,13 @@ void vlcWindow::init() {
     shader->setParameterfv("lightRadius", &lightRadius, 1);
     float intensity = 2.f;
     shader->setParameterfv("lightIntensity", &intensity, 1);
+   // pSpr->attachShader(shader);
     
     pFont = sora::SORA->createFont(L"ThonburiBold.ttf", 24);
     pFont->setColor(0xFFFFFFFF);
+    
+    pFogSpr = sora::SORA->createSprite(L"titlebg2.png");
+    shader->setTexture("texsample2", pFogSpr->getTexture());
     
     canvas1 = new sora::SoraBaseCanvas(1024, 768);
     canvas2 = new sora::SoraBaseCanvas(1024, 768);

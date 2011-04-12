@@ -43,6 +43,7 @@ public:
 	void onMenuClick(const menuEvent* mev);
 	
 private:
+    void loadShader();
 	sora::SoraCore* sora;
 	
 	projl::lSceneManager* mainScenes;

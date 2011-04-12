@@ -38,7 +38,7 @@ namespace sora {
 			Set a parameterf
 			@param name, the name of the parameter to set
 			@param val, the value to set
-			@param size, the size of the value array, from 1..4
+			@param size, the size of the value array
 			@retval, succeed or not
 		 */
 		virtual bool setParameterfv(const char* name, float32* val, uint32 size) = 0;
@@ -46,11 +46,19 @@ namespace sora {
 			Set a parameteri
 			@param name, the name of the parameter to set
 			@param val, the value to set
-			@param size, the size of the value array, from 1..4
+			@param size, the size of the value array
 			@retval, succeed or not
 		 */
 		virtual bool setParameteriv(const char* name, int32* val, uint32 size) = 0;
+        
+        virtual bool getParameterfv(const char* name, float32* val, uint32 size) = 0;
+        virtual bool getParameteriv(const char* name, int32* val, uint32 size) = 0;
+
 		
+        /*
+         add a sample texture
+         may use as TEX1 in shader
+         */
 		virtual void setTexture(const SoraString& decalName, ulong32 tex) = 0;
 
 		/*

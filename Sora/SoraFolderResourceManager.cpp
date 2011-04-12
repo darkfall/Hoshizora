@@ -59,9 +59,10 @@ namespace sora {
 	void* SoraFolderResourceManager::readResourceFile(const SoraWString& file, ulong32 size) {
 		FILE* pfile = openFile(file);
 		if(pfile != NULL) {
-            uint8* pdata = new uint8[size];
+            uint8* pdata = new uint8[size+1];
 			if(pdata != NULL) {
 				fread(pdata, size, 1, pfile);
+                pdata[size] = '\0';
 				return (void*)pdata;
 			}
 		}
@@ -75,9 +76,10 @@ namespace sora {
 			size = ftell(pfile);
 			fseek(pfile, 0, SEEK_SET);
 
-            uint8* pdata = new uint8[size];
+            uint8* pdata = new uint8[size+1];
 			if(pdata != NULL) {
 				fread(pdata, size, 1, pfile);
+                pdata[size] = '\0';
 				return (void*)pdata;
 			}
 		}

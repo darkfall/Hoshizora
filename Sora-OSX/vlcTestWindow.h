@@ -60,13 +60,13 @@ private:
     FileDlg* pFileOpener;
     
     sora::SoraSprite* pSpr;
+    sora::SoraSprite* pFogSpr;
     sora::SoraTexture* pTex;
     sora::SoraFont* pFont;
     
     gcn::Slider* pslider;
     
     sora::SoraShader* shader;
-    sora::SoraShader* vshader;
     
     sora::SoraBaseCanvas* canvas1;
     sora::SoraBaseCanvas* canvas2;

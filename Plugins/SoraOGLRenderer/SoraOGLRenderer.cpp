@@ -221,8 +221,10 @@ namespace sora{
 		if((blend & BLEND_ZWRITE) != (CurBlendMode & BLEND_ZWRITE)) {
 			if(blend & BLEND_ZWRITE) {
                 glDepthMask(GL_TRUE);
+           //     glEnable(GL_DEPTH_TEST);
             } else {
-                glDepthMask(GL_FALSE);
+                glDisable(GL_DEPTH_TEST);
+            //    glDepthMask(GL_FALSE);
             }
 		}
 
@@ -261,7 +263,7 @@ namespace sora{
 	SoraWindowHandle SoraOGLRenderer::createWindow(SoraWindowInfoBase* windowInfo) {
 		glfwInit();
 		glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
-					   , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN);
+					   , 8, 8, 8, 8, 32, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN);
 		glfwSetWindowTitle(windowInfo->getWindowName().c_str());
 		if(windowInfo->getWindowPosX() != 0.f && windowInfo->getWindowPosY() != 0.f)
 			glfwSetWindowPos(windowInfo->getWindowPosX(), windowInfo->getWindowPosY());
@@ -307,7 +309,7 @@ namespace sora{
 		bFullscreen = flag;
 		glfwCloseWindow();
 		glfwOpenWindow(mainWindow->getWindowWidth(), mainWindow->getWindowHeight(),
-					   8, 8, 8, 8, 16, 0,
+					   8, 8, 8, 8, 32, 0,
 					   bFullscreen==true?GLFW_FULLSCREEN:GLFW_WINDOW);
 		glfwSetWindowTitle(mainWindow->getWindowName().c_str());
 		glfwSetWindowCloseCallback(int_exitFunc);

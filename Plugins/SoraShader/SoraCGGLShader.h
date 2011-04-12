@@ -19,7 +19,7 @@ namespace sora {
 		friend class SoraShaderContext;
         friend class SoraCGGLShaderContext;
         
-        SoraCGGLShader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context);
+        SoraCGGLShader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile);
 		~SoraCGGLShader();
         
 	public:
@@ -27,7 +27,9 @@ namespace sora {
 		void setTexture(const SoraString& decalName, ulong32 tex);
 		bool setParameterfv(const char* name, float32* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
-		
+        bool getParameterfv(const char* name, float32* val, uint32 size);
+        bool getParameteriv(const char* name, int32* val, uint32 size);
+        
 	private:
 		bool attach();
 		bool detach();
@@ -46,9 +48,9 @@ namespace sora {
 		*/
 		void checkError(CGcontext context);
 	
-		CGprofile profile;
 		CGprogram program;
 		CGcontext context;
+        CGprofile profile;
 		CGparameter textureParam;
 	};
 	
@@ -60,6 +62,8 @@ namespace sora {
         SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
 		
 		CGcontext context;
+        CGprofile fragmentProfile;
+        CGprofile vertexProfile;
 	};
 
 } // namespace sora

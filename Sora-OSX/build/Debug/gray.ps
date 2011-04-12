@@ -1,7 +1,7 @@
 // This is C2E2f_passthru from "The Cg Tutorial" (Addison-Wesley, ISBN
 // 0321194969) by Randima Fernando and Mark J. Kilgard.  See page 53.
 
-struct C2E2f_Output {
+struct s_output {
   float4 color : COLOR;
 };
 
@@ -10,28 +10,88 @@ float3 expand(float3 v)
   return (v-0.5)*2;  // Expand a range-compressed vector
 }
 
+float to2Pi(float r) {
+	return lerp(0.0, 1.0, r) * 3.1415926 / 2;
+}
+
 uniform float4 lightColor;
 uniform float2 lightPos;
 uniform float  lightRadius;
 uniform float  lightIntensity;
 uniform float  lightTreshold;
 
-C2E2f_Output simplePointLight(float2 texCoord: TEXCOORD0,
-				uniform sampler2D decal: TEX0)
-{
-  C2E2f_Output OUT;
-  float4 texColor = tex2D(decal, texCoord);
-  
-//  float3 lightTex = lightColor.xyz;
-//  float3 light = expand(lightTex);
-//  float3 normalTex = texColor.xyz;
- // float3 normal = expand(normalTex);
-  
-//  OUT.color = texColor * (clamp(texCoord.x, texCoord.y, 0.0) * lightIntensity);
-  float posDist = distance(texCoord, lightPos);
-  
-  OUT.color = texColor * lerp(1.0, 0.0, posDist/lightRadius);
-  return OUT;
+s_output simplePointLight(float2 texCoord: TEXCOORD0, uniform sampler2D decal: TEX0, 
+							uniform sampler2D texsample2: TEX1) {
+	s_output OUT;
+	OUT.color = tex2D(decal, texCoord);
+	return OUT;
 }
 
+
+/*
+s_output simplePointLight(float2 texCoord: TEXCOORD0,
+				uniform sampler2D decal: TEX0)
+{
+  s_output OUT;
+  float4 texColor = tex2D(decal, texCoord);
+
+  float posDist = distance(texCoord, lightPos);
+  
+  lightRadius = 0.5;
+  lightIntensity = 2.0;
+  
+  OUT.color = texColor + lightColor * lerp(1.0, 0.0, posDist/lightRadius);
+  OUT.color = OUT.color * lightIntensity;
+//  OUT.color = OUT.color * lightTreshold * (1.0 - sin(to2Pi(posDist/lightRadius)));
+  return OUT;
+}
+*/
+uniform float c_width = 0.005;
+uniform float process = 0.0;
+/*
+s_output simplePointLight(float2 texCoord: TEXCOORD0, uniform sampler2D decal: TEX0, uniform sampler2D texsample2: TEX1) {
+	s_output OUT;
+	float4 texColor = tex2D(decal, texCoord);
+	lightPos.x = lightPos.y = 0.5;
+	float posDist = distance(texCoord, lightPos);
+	OUT.color = float4(0.0, 0.0, 0.0, 1.0);
+	
+	lightRadius = 0.3;
+	if(posDist > lightRadius && posDist < lightRadius+c_width) {
+		float dgr = atan2(texCoord.y-lightPos.y, texCoord.x-lightPos.x);
+		dgr = lerp(0.0, 3.14159/4, dgr);
+		process = lerp(0.0, 3.14159, process);
+		if(dgr >= -process && dgr < process)
+			OUT.color = float4(1.0, 0.7, 0.3, 1.0);
+	}
+	if(posDist > lightRadius/2 && posDist < lightRadius/2+c_width) {
+		float dgr = atan2(texCoord.y-lightPos.y, texCoord.x-lightPos.x);
+		dgr = lerp(0, 3.14159/2, dgr);
+		process = lerp(0, 3.14159, process);
+		if(dgr >= 0 && dgr < process*2)
+			OUT.color = float4(1.0, 0.7, 0.3, 1.0);
+	}
+	lightPos = float2(0.35, 0.35);
+	lightRadius = 0.05;
+	posDist = distance(texCoord, lightPos);
+	if(posDist > lightRadius && posDist < lightRadius+c_width) {
+		float dgr = atan2(texCoord.y-lightPos.y, texCoord.x-lightPos.x);
+		dgr = lerp(0.0, 3.14159/4, dgr);
+		process = lerp(0.0, 3.14159, process);
+		if(dgr >= -process && dgr < process)
+			OUT.color = float4(1.0, 0.7, 0.3, 1.0);
+	}
+	lightPos = float2(0.65, 0.35);
+	lightRadius = 0.05;
+	posDist = distance(texCoord, lightPos);
+	if(posDist > lightRadius && posDist < lightRadius+c_width) {
+		float dgr = atan2(texCoord.y-lightPos.y, texCoord.x-lightPos.x);
+		dgr = lerp(0.0, 3.14159/4, dgr);
+		process = lerp(0.0, 3.14159, process);
+		if(dgr >= -process && dgr < process)
+			OUT.color = float4(1.0, 0.7, 0.3, 1.0);
+	}
+	return OUT;
+}
+*/
 //

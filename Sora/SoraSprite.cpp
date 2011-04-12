@@ -73,7 +73,7 @@ namespace sora {
 
 	void SoraSprite::setTexture(HSORATEXTURE tex) {
         if(quad.tex) {
-            if(!SoraTextureMap::Instance()->exist((HSORATEXTURE)quad.tex)) {
+            if(SoraTextureMap::Instance()->exist((HSORATEXTURE)quad.tex)) {
                 sora::SORA->releaseTexture((HSORATEXTURE)quad.tex);
             }
         }
