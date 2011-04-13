@@ -34,14 +34,14 @@ namespace gcn
     int SoraGUIImage::getWidth() const
     {
 		if(mSoraSprite)
-			return mSoraSprite->getTextureWidth();
+			return mSoraSprite->getSpriteWidth();
 		return 0;
     }
 
     int SoraGUIImage::getHeight() const
     {
 		if(mSoraSprite)
-			return mSoraSprite->getTextureHeight();
+			return mSoraSprite->getSpriteHeight();
 		return 0;
     }
 
@@ -111,7 +111,7 @@ namespace gcn
         sora->textureUnlock(mTexture);
 		 */
         mSoraSprite = (sora::SoraSprite*)sora->createSpriteTex(mTexture);
-		mSoraSprite->setZ(GUI_Z);
-		mSoraSprite->setBlendMode(BLEND_DEFAULT_Z);
+	//	mSoraSprite->setZ(GUI_Z);
+	//	mSoraSprite->setBlendMode(BLEND_DEFAULT_Z);
     }
 }
