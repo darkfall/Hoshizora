@@ -159,8 +159,8 @@ namespace sora {
 		
 		SetFlip(bX, bY, bHS);*/
 		textureRect.Set(x, y, width, height);
-        sprWidth = texture->width;
-        sprHeight = texture->height;
+        sprWidth = width;
+        sprHeight = height;
 	}
 
 	
