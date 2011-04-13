@@ -333,19 +333,11 @@ namespace sora {
 	}
 
 	int32 SoraSprite::getSpriteWidth()  const{
-		return (int32)(sprWidth.x2*hscale);
+		return (int32)(sprWidth*hscale);
 	}
 
 	int32 SoraSprite::getSpriteHeight()  const{
-		return (int32)(sprHeight.y2*vscale);
-	}
-
-	int32 SoraSprite::getSpritePosX()  const{
-		return (int32)textureRect.x1;
-	}
-
-	int32 SoraSprite::getSpritePosY()  const{
-		return (int32)textureRect.y1;
+		return (int32)(sprHeight*vscale);
 	}
 
 	void SoraSprite::setScale(float32 h, float32 v) {
