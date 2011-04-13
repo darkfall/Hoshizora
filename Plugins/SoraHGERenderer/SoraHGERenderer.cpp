@@ -332,7 +332,12 @@ namespace sora{
 	}
 
 	ulong32 SoraHGERenderer::getTargetTexture(ulong32 t) {
-		return pHGE->Target_GetTexture(t);
+		HTEXTURE tex = pHGE->Target_GetTexture(t);
+		SoraTexture* tex = new SoraTexture(tex, pHGE->Texture_GetWidth(tex),
+												pHGE->Texture_GetHeight(tex),
+												pHGE->Texture_GetWidth(tex, true),
+												pHGE->Texture_GetHeight(tex, true));
+		return (ulong32)tex;
 	}
 
 	SoraWString SoraHGERenderer::videoInfo() {
