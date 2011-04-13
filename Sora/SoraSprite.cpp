@@ -7,7 +7,7 @@ namespace sora {
 
     SoraSprite::SoraSprite(HSORATEXTURE tex) {
         SoraTexture* ptex = (SoraTexture*)tex;
-        _init(ptex, 0.f, 0.f, ptex?ptex->mOriginalWidth:1.f, ptex?ptex->mOriginalHeight:1.f);
+        _init(ptex, 0.f, 0.f, ptex?ptex->mTextureWidth:1.f, ptex?ptex->mTextureHeight:1.f);
     }
     
     SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h) {
@@ -15,7 +15,7 @@ namespace sora {
     }
     
 	SoraSprite::SoraSprite(SoraTexture* tex) {
-		_init(tex, 0.f, 0.f, tex?tex->mOriginalWidth:1.f, tex?tex->mOriginalHeight:1.f);
+		_init(tex, 0.f, 0.f, tex?tex->mTextureWidth:1.f, tex?tex->mTextureHeight:1.f);
 	}
 
 	SoraSprite::SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
@@ -62,6 +62,9 @@ namespace sora {
 		_initDefaults();
 		
 		setType(SPRITE_TYPE);
+        
+        sprWidth = texture->mOriginalWidth;
+        sprHeight = texture->mOriginalHeight;
     }
 
 	SoraSprite::~SoraSprite() {
@@ -113,6 +116,8 @@ namespace sora {
 		}
 		
 		texture = ptex;
+        sprWidth = texture->mOriginalWidth;
+        sprHeight = texture->mOriginalHeight;
 	}
 
 	void SoraSprite::_initDefaults() {
@@ -154,6 +159,8 @@ namespace sora {
 		
 		SetFlip(bX, bY, bHS);*/
 		textureRect.Set(x, y, width, height);
+        sprWidth = texture->width;
+        sprHeight = texture->height;
 	}
 
 	
@@ -326,11 +333,11 @@ namespace sora {
 	}
 
 	int32 SoraSprite::getSpriteWidth()  const{
-		return (int32)(textureRect.x2*hscale);
+		return (int32)(sprWidth.x2*hscale);
 	}
 
 	int32 SoraSprite::getSpriteHeight()  const{
-		return (int32)(textureRect.y2*vscale);
+		return (int32)(sprHeight.y2*vscale);
 	}
 
 	int32 SoraSprite::getSpritePosX()  const{

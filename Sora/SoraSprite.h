@@ -123,6 +123,7 @@ namespace sora {
 		SoraTexture* texture;
 		
 		hgeRect textureRect;
+        int32 sprWidth, sprHeight;
 
 		float32 rot, rotZ;
 		float32 centerX, centerY;
