@@ -113,11 +113,11 @@ void mainWindow::init() {
     
     sora::SORA->setFPS(120);
     
-  //  pSpr = sora::SORA->createSprite(L"titlebg2.png");
-    pSpr = new sora::SoraSprite(sora::SORA->createTextureWH(512, 512));
-    ulong32* pdata = pSpr->getPixelData();
-    memset(pdata, 0, 4*512*512);
-    pSpr->unlockPixelData();
+    pSpr = sora::SORA->createSprite(L"titlebg2.png");
+ //   pSpr = new sora::SoraSprite(sora::SORA->createTextureWH(512, 512));
+//    ulong32* pdata = pSpr->getPixelData();
+ //   memset(pdata, 0, 4*512*512);
+ //   pSpr->unlockPixelData();
     pSpr2 = sora::SORA->createSprite(L"sea.png");
 
     loadShader();
@@ -132,11 +132,7 @@ void mainWindow::init() {
 	luaobj->doScript(L"test.txt");
 //	pSpr2->setScale(0.5f, 0.5f);
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
-<<<<<<< HEAD
-
-=======
-	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
->>>>>>> a143cfd0f1320489eded7382d107a59ce2451951
+//	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

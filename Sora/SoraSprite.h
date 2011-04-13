@@ -78,8 +78,8 @@ namespace sora {
 		void setBlendMode(int32 mode);
 		int32  getBlendMode() const;
 
-		int32 getTextureWidth() const;
-		int32 getTextureHeight() const;
+		int32 getTextureWidth(bool bOriginal=false) const;
+		int32 getTextureHeight(bool bOriginal=false) const;
 		int32 getSpriteWidth() const;
 		int32 getSpriteHeight() const;
 		int32 getSpritePosX() const;
