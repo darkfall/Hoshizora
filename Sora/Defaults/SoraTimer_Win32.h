@@ -95,7 +95,7 @@ namespace sora {
 		        lastTime = NowTime;
 			}
 			long t = (NowTime-lastTime);
-			log<<t<<" "<<fDeltaTime<<std::endl;
+			//log<<t<<" "<<fDeltaTime<<std::endl;
 			if(fDeltaTime >= 1.f) 
 				fDeltaTime = 1.f / desiredFPS;
 	//		fDeltaTime *= fTimeScale;
