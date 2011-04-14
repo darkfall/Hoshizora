@@ -45,7 +45,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -251,6 +251,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan.hpp" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichansetup.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichansora.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\actionevent.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\actionlistener.hpp" />
@@ -394,7 +395,6 @@
     <ClInclude Include="..\..\..\Reflection\rfCommon.h" />
     <ClInclude Include="..\..\..\Reflection\rfMap.h" />
     <ClInclude Include="..\..\..\Sora-OSX\backgroundScene.h" />
-    <ClInclude Include="..\..\..\Sora-OSX\guichansetup.h" />
     <ClInclude Include="..\..\..\Sora-OSX\lBasicRenderItem.h" />
     <ClInclude Include="..\..\..\Sora-OSX\lGUIScene.h" />
     <ClInclude Include="..\..\..\Sora-OSX\lScene.h" />

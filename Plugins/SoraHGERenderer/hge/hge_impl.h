@@ -300,14 +300,6 @@ public:
 	WIN32_FIND_DATAW	SearchData;
 
 
-	// Timer
-	float				fTime;
-	float				fDeltaTime;
-	DWORD				nFixedDelta;
-	int					nFPS;
-	DWORD				t0, t0fps, dt;
-	int					cfps;
-
 	bool				shaderChanged;
 
 

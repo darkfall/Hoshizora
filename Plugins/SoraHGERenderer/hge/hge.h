@@ -396,6 +396,10 @@ public:
 	virtual	void			CALL SetShaderChanged(bool flag) = 0;
 	virtual unsigned long		CALL	getVideoDeviceHandle() = 0;
 
+	virtual void				_UpdateMouse() = 0;
+	virtual void				_InputInit() = 0;
+	virtual void				_ClearQueue() = 0;
+
 	IDirect3DDevice9*		pD3DDevice;
 
 };

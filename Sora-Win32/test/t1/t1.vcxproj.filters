@@ -828,9 +828,6 @@
     <ClInclude Include="..\..\..\Sora-OSX\backgroundScene.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\guichansetup.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora-OSX\lBasicRenderItem.h">
       <Filter>源文件</Filter>
     </ClInclude>
@@ -1433,6 +1430,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraLua\spriteWrapper.h">
       <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichansetup.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

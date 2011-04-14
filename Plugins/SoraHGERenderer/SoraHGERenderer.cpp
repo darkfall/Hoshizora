@@ -68,6 +68,9 @@ namespace sora{
 		if(!pHGE->System_Start()) {
 			throw SORA_EXCEPTION("Cannot initialize hge render system");
 		}
+//		while(true) {
+//			void_updateFrame();
+//		}
 	}
 
 	SoraWindowHandle SoraHGERenderer::createWindow(SoraWindowInfoBase* windowInfo) {
@@ -83,7 +86,7 @@ namespace sora{
 			pHGE->System_SetState(HGE_DONTSUSPEND, true);
 
 			pHGE->System_SetState(HGE_ZBUFFER, true);
-			pHGE->System_SetState(HGE_FPS, HGEFPS_UNLIMITED);
+	//		pHGE->System_SetState(HGE_FPS, HGEFPS_UNLIMITED);
 
 			//pHGE->System_SetState(HGE_LOGFILE, "hgelog.txt");
 		
@@ -226,18 +229,16 @@ namespace sora{
 	void SoraHGERenderer::renderQuad(SoraQuad& quad) {
 		hgeQuad hquad;
 		if(quad.tex) {
-			memcpy(&hquad, &quad, sizeof(hgeQuad));	
+			memcpy(hquad.v, quad.v, sizeof(hgeVertex)*4);
 			hquad.tex = ((SoraTexture*)quad.tex)->mTextureID;
+			hquad.blend = quad.blend;
 		}
 		else {
 			hquad.tex = 0;
-			memcpy(&hquad.v[0], &quad.v[0], sizeof(hgeVertex)*4);
+			memcpy(hquad.v, quad.v, sizeof(hgeVertex)*4);
 			hquad.blend = quad.blend;
 		}
-		if(currShader) {
-			pHGE->SetShaderChanged(true);
-		}
-
+		
 		pHGE->Gfx_RenderQuad(&hquad);
 			
 		if(currShader) {
@@ -248,8 +249,9 @@ namespace sora{
 
 	void SoraHGERenderer::renderTriple(SoraTriple& trip) {
 		hgeTriple htrip;
-		memcpy(&htrip, &trip, sizeof(hgeTriple));
+		memcpy(&htrip.v[0], &trip.v[0], sizeof(hgeVertex)*3);
 		htrip.tex = ((SoraTexture*)trip.tex)->mTextureID;
+		htrip.blend = trip.blend;
 		pHGE->Gfx_RenderTriple(&htrip);
 
 		if(currShader) {
@@ -333,11 +335,11 @@ namespace sora{
 
 	ulong32 SoraHGERenderer::getTargetTexture(ulong32 t) {
 		HTEXTURE tex = pHGE->Target_GetTexture(t);
-		SoraTexture* tex = new SoraTexture(tex, pHGE->Texture_GetWidth(tex),
+		SoraTexture* ptex = new SoraTexture(tex, pHGE->Texture_GetWidth(tex),
 												pHGE->Texture_GetHeight(tex),
 												pHGE->Texture_GetWidth(tex, true),
 												pHGE->Texture_GetHeight(tex, true));
-		return (ulong32)tex;
+		return (ulong32)ptex;
 	}
 
 	SoraWString SoraHGERenderer::videoInfo() {

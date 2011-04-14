@@ -59,7 +59,7 @@ namespace sora {
 			}
 			fdt = dt/1000.f * fTimeScale;
 			/* too long */
-			if(fdt >= 0.1f)
+			if(fdt >= 1.f)
 				fdt = fpsInterval / 1000.f;
 			oldtime = time;
 			

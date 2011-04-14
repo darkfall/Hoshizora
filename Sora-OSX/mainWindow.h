@@ -58,6 +58,7 @@ private:
 					
 	sora::BaseEntity* testEntity;
 	sora::SoraLuaObject* luaobj;
+	sora::SoraFont* pFont;
 };
 
 #endif

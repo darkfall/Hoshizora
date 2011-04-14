@@ -65,7 +65,7 @@ bool mainWindow::updateFunc() {
     }
     
     float32 ppp;
-    shader->getParameterfv("process", &ppp, 1);
+//    shader->getParameterfv("process", &ppp, 1);
   //  printf("%f\n", ppp);
 
 	
@@ -91,8 +91,11 @@ bool mainWindow::renderFunc() {
     lpos[1] = 0.5f + 0.3f*cosf(sora::DGR_RAD(sora::SORA->getFrameCount()));
 
     process += 0.01;
-    shader->setParameterfv("process", &process, 1);
-    shader->setParameterfv("lightPos", lpos, 2);
+//    shader->setParameterfv("process", &process, 1);
+ //   shader->setParameterfv("lightPos", lpos, 2);
+	
+	pFont->print(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f time: %f", sora::SORA->getFPS(), sora::SORA->getDelta());
+
 	sora->endScene();
     
 
@@ -111,9 +114,10 @@ void mainWindow::init() {
 	stg = new stgScene;
 	mainScenes->addScene(stg);
     
-    sora::SORA->setFPS(120);
+    sora::SORA->setFPS(999);
     
     pSpr = sora::SORA->createSprite(L"titlebg2.png");
+	pSpr->setTextureRect(0, 0, 500, 500);
  //   pSpr = new sora::SoraSprite(sora::SORA->createTextureWH(512, 512));
 //    ulong32* pdata = pSpr->getPixelData();
  //   memset(pdata, 0, 4*512*512);
@@ -130,6 +134,9 @@ void mainWindow::init() {
 	
 	luaobj = new sora::SoraLuaObject();
 	luaobj->doScript(L"test.txt");
+
+	pFont = sora::SORA->createFont(L"XHei.TTC", 20);
+	pFont->setColor(0xFFFFFFFF);
 //	pSpr2->setScale(0.5f, 0.5f);
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
 //	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);

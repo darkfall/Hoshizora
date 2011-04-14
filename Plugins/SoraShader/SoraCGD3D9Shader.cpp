@@ -11,6 +11,8 @@ namespace sora {
         
         vertexProfile = cgD3D9GetLatestVertexProfile();
         fragmentProfile = cgD3D9GetLatestPixelProfile();
+		cgD3D9GetOptimalOptions(vertexProfile);
+		cgD3D9GetOptimalOptions(fragmentProfile);
 	}
 
 	SoraCGD3D9ShaderContext::~SoraCGD3D9ShaderContext() {	
@@ -27,7 +29,7 @@ namespace sora {
                 break;
             }
             case VERTEX_SHADER: {
-                shdaer = new SoraCGD3D9Shader(file, entry, type, context, vertexProfile);
+                shader = new SoraCGD3D9Shader(file, entry, type, context, vertexProfile);
                 break;
             }
         }
@@ -41,6 +43,8 @@ namespace sora {
 	
 	SoraCGD3D9Shader::~SoraCGD3D9Shader() {
 		cgDestroyProgram(program);
+		if(textureParam)
+			cgDestroyParameter(textureParam);
 	}
 
 	void SoraCGD3D9Shader::checkError(CGcontext context) {
@@ -58,28 +62,22 @@ namespace sora {
 	SoraCGD3D9Shader::SoraCGD3D9Shader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile) {
 		setType(type);
 		
-		cgD3D9GetOptimalOptions(profile);
-		checkError(context);	
-        
+		this->context = context;
         this->profile = profile;
 
 		ulong32 size;
 		const char* data = (const char*)SoraCore::Instance()->getResourceFile(file, size);
 		if(data) {
-			char* sdata = (char*)malloc(size+1);
-			memcpy(sdata, data, size);
-			sdata[size] = '\0';
 			program = cgCreateProgram(context,
 									  CG_SOURCE,
-									  sdata,
+									  data,
 									  profile,
 									  entry.c_str(),
 									  NULL);
 			sora::SORA->freeResourceFile((void*)data);
-			free(sdata);
 			
 			checkError(context);
-			cgD3D9LoadProgram(program, false, 0);
+			cgD3D9LoadProgram(program, true, 0);
 			checkError(context);
 		} else {
 			setType(0);
@@ -99,7 +97,7 @@ namespace sora {
 		cgD3D9BindProgram(program);
 		checkError(context);
         if(textureParam) {
-            cgD3D9SetTextureParameter(textureParam, (IDirect3DBaseTexture9*)textureHandle->textureId);
+            cgD3D9SetTextureParameter(textureParam, (IDirect3DBaseTexture9*)(((SoraTexture*)textureHandle)->mTextureID));
         }
 		
 		//cgDXEnableProfile(profile);

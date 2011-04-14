@@ -734,8 +734,9 @@ bool HGE_Impl::_GfxInit()
 	d3dppFS.SwapEffect       = D3DSWAPEFFECT_FLIP;
 	d3dppFS.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 
-	if(nHGEFPS==HGEFPS_VSYNC) d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
-	else					  d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+	//if(nHGEFPS==HGEFPS_VSYNC) d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
+	//else
+	d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 	if(bZBuffer)
 	{

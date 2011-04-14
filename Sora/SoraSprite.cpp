@@ -6,8 +6,8 @@
 namespace sora {
 
     SoraSprite::SoraSprite(HSORATEXTURE tex) {
-        SoraTexture* ptex = (SoraTexture*)tex;
-        _init(ptex, 0.f, 0.f, ptex?ptex->mTextureWidth:1.f, ptex?ptex->mTextureHeight:1.f);
+        SoraTexture* ptex = tex==0?NULL:(SoraTexture*)tex;
+        _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mTextureWidth:1.f, ptex!=NULL?ptex->mTextureHeight:1.f);
     }
     
     SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h) {
@@ -15,7 +15,7 @@ namespace sora {
     }
     
 	SoraSprite::SoraSprite(SoraTexture* tex) {
-		_init(tex, 0.f, 0.f, tex?tex->mTextureWidth:1.f, tex?tex->mTextureHeight:1.f);
+		_init(tex, 0.f, 0.f, tex!=NULL?tex->mTextureWidth:1.f, tex!=NULL?tex->mTextureHeight:1.f);
 	}
 
 	SoraSprite::SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
@@ -63,8 +63,8 @@ namespace sora {
 		
 		setType(SPRITE_TYPE);
         
-        sprWidth = texture->mOriginalWidth;
-        sprHeight = texture->mOriginalHeight;
+        sprWidth = texture!=NULL?texture->mOriginalWidth:1.f;
+        sprHeight = texture!=NULL?texture->mOriginalHeight:1.f;
     }
 
 	SoraSprite::~SoraSprite() {
