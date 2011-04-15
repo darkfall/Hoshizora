@@ -524,11 +524,7 @@ namespace sora {
 	void SoraCore::releaseTexture(HSORATEXTURE pTexture) {
 		assert(bInitialized==true);
         if(!pTexture) return;
-        if(SoraTextureMap::Instance()->exist(pTexture))
-            SoraTextureMap::Instance()->decRf(pTexture);
-        else {
-            pRenderSystem->releaseTexture((SoraTexture*)pTexture);
-        }
+        pRenderSystem->releaseTexture((SoraTexture*)pTexture);
 	}
 
 	void SoraCore::clearTextureMap() {
