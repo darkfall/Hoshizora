@@ -34,16 +34,9 @@ namespace sora {
 		}
 		
 		quad.tex = tex;
+		texture = tex;
 		
-		texx1= x/textureRect.x2;
-		texy1= y/textureRect.y2;
-		texx2=(x+width)/textureRect.x2;
-		texy2=(x+height)/textureRect.y2;
-		
-		quad.v[0].tx = texx1; quad.v[0].ty = texy1;
-		quad.v[1].tx = texx2; quad.v[1].ty = texy1;
-		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
-		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
+		setTextureRect(x, y, width, height);
 		
 		quad.v[0].z = 
 		quad.v[1].z = 
@@ -56,8 +49,6 @@ namespace sora {
 		quad.v[3].col = 0xffffffff;
         
 		quad.blend=BLEND_DEFAULT;
-		
-		texture = tex;
         
 		_initDefaults();
 		
