@@ -17,7 +17,8 @@ uniform float  lightIntensity;
 uniform float  lightTreshold;
 
 C2E2f_Output simplePointLight(float2 texCoord: TEXCOORD0,
-								uniform sampler2D decal: TEX0)
+								uniform sampler2D decal: TEX0, 
+								uniform sampler2D sample22)
 {
   C2E2f_Output OUT;
   float4 texColor = tex2D(decal, texCoord);
@@ -28,9 +29,9 @@ C2E2f_Output simplePointLight(float2 texCoord: TEXCOORD0,
  // float3 normal = expand(normalTex);
   
 //  OUT.color = texColor * (clamp(texCoord.x, texCoord.y, 0.0) * lightIntensity);
-  float posDist = distance(texCoord, lightPos);
+//  float posDist = distance(texCoord, lightPos);
   
-  OUT.color = texColor * lerp(1.0, 0.0, posDist/lightRadius);
+  OUT.color =  tex2D(sample22, texCoord) * 0.5 + texColor*0.5;
   return OUT;
 }
 

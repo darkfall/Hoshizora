@@ -574,38 +574,7 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 };
 
 #include "SoraGUIChan/guichansetup.h"
-#include "gcnImageButton2.h"
-    
-    void parseGcnExtendButton(TiXmlElement* element, gcn::Widget* parent, XmlGui* caller) {
-        if(!element) return;
-        
-        std::string name;
-        if(element->Attribute("name")) name = element->Attribute("name")->c_str();
-        else throw GCN_EXCEPTION("Button Widget must have a unique name");
-        
-        gcn::ImageButton2* button = new gcn::ImageButton2;
-        if(element->Attribute("image")) {
-            std::string normalRect = element->Attribute("normalrect")->c_str();
-            std::string pushedRect = element->Attribute("pushedrect")->c_str();
-            
-            std::vector<std::string> normRectCt, pushRectCt;
-            sora::deliStr(normRectCt, normalRect, ',');
-            sora::deliStr(pushRectCt, pushedRect, ',');
-            
-            button->setImage(element->Attribute("image")->c_str(),
-                             gcn::Rectangle(atoi(normRectCt[0].c_str()), 
-                                       atoi(normRectCt[1].c_str()), 
-                                       atoi(normRectCt[2].c_str()), 
-                                       atoi(normRectCt[3].c_str())),
-                             gcn::Rectangle(atoi(pushRectCt[0].c_str()),
-                                       atoi(pushRectCt[1].c_str()),
-                                       atoi(pushRectCt[2].c_str()),
-                                       atoi(pushRectCt[3].c_str())));
-        }
-        caller->parseDefaults(element, button);
-        
-        caller->addToParent(button,parent);
-    }
+   
 
 editorWindow::editorWindow() {
 	SoraGUIResponserMap::Instance()->registerResponser("SpeedPanel", new SpeedPanelResponser);
@@ -659,7 +628,6 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 		SORA->shutDown();
 	}
 
-    pXmlParser->registerParseFunc("imagebutton2", parseGcnExtendButton);
 	if(pXmlParser->parse((const char*)pdata, size)) {
 		gcn::Widget* pWindow = pXmlParser->getWidget("SoraWindow");
 		GCN_GLOBAL->getTop()->add( pWindow );

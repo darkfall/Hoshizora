@@ -41,6 +41,8 @@ void mainWindow::loadShader() {
     shader->setParameterfv("lightIntensity", &intensity, 1);
     float treshold = 1.0f;
     shader->setParameterfv("lightTreshold", &treshold, 1);
+
+	shader->setTexture("sample22", p3->getTexture());
     
   //  shader->setTexture("texsample2", pSpr2->getTexture());
 }
@@ -117,16 +119,16 @@ void mainWindow::init() {
     sora::SORA->setFPS(999);
     
     pSpr = sora::SORA->createSprite(L"titlebg2.png");
-	pSpr->setTextureRect(0, 0, 500, 500);
+//	pSpr->setTextureRect(0, 0, 500, 500);
  //   pSpr = new sora::SoraSprite(sora::SORA->createTextureWH(512, 512));
 //    ulong32* pdata = pSpr->getPixelData();
  //   memset(pdata, 0, 4*512*512);
  //   pSpr->unlockPixelData();
     pSpr2 = sora::SORA->createSprite(L"sea.png");
-
+	
+    p3 = sora::SORA->createSprite(L"stgui.png");
     loadShader();
  //   pSpr->setColor(0xFF000000);
- //   p3 = sora::SORA->createSprite(L"stgui.png");
  //   p3->setZ(-0.4f);  p3->setBlendMode(BLEND_DEFAULT_Z);
  //   pSpr2->setZ(0.5f);
     //pSpr->setZ(-0.3f); pSpr->setBlendMode(BLEND_DEFAULT_Z);

@@ -55,6 +55,7 @@ private:
                     sora::SoraSprite* p2;
                     sora::SoraSprite* p3;
 	sora::SoraShader* shader;
+	sora::SoraShaderContext* context;
 					
 	sora::BaseEntity* testEntity;
 	sora::SoraLuaObject* luaobj;

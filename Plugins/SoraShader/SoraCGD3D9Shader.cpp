@@ -9,8 +9,8 @@ namespace sora {
 
 		cgD3D9SetDevice((IDirect3DDevice9*)(SoraCore::Instance()->getVideoDeviceHandle()));
         
-        vertexProfile = cgD3D9GetLatestVertexProfile();
-        fragmentProfile = cgD3D9GetLatestPixelProfile();
+        vertexProfile = CG_PROFILE_VS_2_X;
+        fragmentProfile = CG_PROFILE_PS_2_X;
 		cgD3D9GetOptimalOptions(vertexProfile);
 		cgD3D9GetOptimalOptions(fragmentProfile);
 	}
@@ -84,21 +84,20 @@ namespace sora {
 		}	
 
 		textureParam = 0;
-		textureHandle = 0;
 	}
 	
 	void SoraCGD3D9Shader::setTexture(const SoraString& decalName, ulong32 tex) {
 		textureParam = cgGetNamedParameter(program, decalName.c_str());
-		textureHandle = tex;
-		checkError(context);
+		cgD3D9SetTexture(textureParam, (LPDIRECT3DTEXTURE9)(((SoraTexture*)tex)->mTextureID));
 	}
 
 	bool SoraCGD3D9Shader::attach() {
+		
 		cgD3D9BindProgram(program);
 		checkError(context);
-        if(textureParam) {
-            cgD3D9SetTextureParameter(textureParam, (IDirect3DBaseTexture9*)(((SoraTexture*)textureHandle)->mTextureID));
-        }
+      //  if(textureParam) {
+       //     cgD3D9SetTextureParameter(textureParam, (IDirect3DBaseTexture9*)(((SoraTexture*)textureHandle)->mTextureID));
+       // }
 		
 		//cgDXEnableProfile(profile);
 		

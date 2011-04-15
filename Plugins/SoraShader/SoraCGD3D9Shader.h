@@ -31,8 +31,8 @@ namespace sora {
 		bool setParameterfv(const char* name, float32* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
         
-        bool getParameterfv(const char* name, float32* val, uint32 size);
-        bool getParameteriv(const char* name, int32* val, uint32 size);
+		bool getParameterfv(const char* name, float32* val, uint32 size);
+		bool getParameteriv(const char* name, int32* val, uint32 size);
         
 	private:
 		bool attach();
@@ -51,7 +51,6 @@ namespace sora {
 		CGprogram program;
 		CGcontext context;
 		CGparameter textureParam;
-		ulong32 textureHandle;
 	};
 
 	class SoraCGD3D9ShaderContext: public SoraShaderContext {

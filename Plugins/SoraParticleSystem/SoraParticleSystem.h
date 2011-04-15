@@ -170,7 +170,7 @@ namespace sora {
 
 		void _parseScript(const SoraWString& script);
 		
-		typedef std::vector<SoraParticleNode> PARTICLES;
+		typedef QuickList<SoraParticleNode> PARTICLES;
 		PARTICLES particles;
 		
 		typedef std::list<SoraParticleEffector*> EFFECTORS;
