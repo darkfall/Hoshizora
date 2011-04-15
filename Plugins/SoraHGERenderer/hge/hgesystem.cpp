@@ -192,7 +192,7 @@ bool CALL HGE_Impl::System_Initiate()
 
 	// Init subsystems
 
-	timeBeginPeriod(1);
+	//timeBeginPeriod(1);
 	_InputInit();
 	if(!_GfxInit()) { System_Shutdown(); return false; }
 

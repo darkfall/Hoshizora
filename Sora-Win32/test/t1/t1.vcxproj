@@ -417,7 +417,6 @@
     <ClInclude Include="..\..\..\Sora\Defaults\SoraMiscTool_Win32.h" />
     <ClInclude Include="..\..\..\Sora\Defaults\SoraOSXTimer.h" />
     <ClInclude Include="..\..\..\Sora\Defaults\SoraTimer_Win32.h" />
-    <ClInclude Include="..\..\..\Sora\Defaults\uncopyable.h" />
     <ClInclude Include="..\..\..\Sora\Experimental\AutoList.h" />
     <ClInclude Include="..\..\..\Sora\Experimental\common.h" />
     <ClInclude Include="..\..\..\Sora\Experimental\FolderTree.h" />

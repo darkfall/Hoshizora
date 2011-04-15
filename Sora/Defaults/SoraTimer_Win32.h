@@ -20,7 +20,7 @@ namespace sora {
 		friend class SoraCore;
 
 	public:
-		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; nFrameCounter = 0; fTimeScale = 1.f; log.open("log.txt"); }
+		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; nFrameCounter = 0; fTimeScale = 1.f; }
 		void setFPS(int32 fps) { desiredFPS = fps; }
 		float32 getDelta() { return fDeltaTime; }
 		float32 getFPS() { return fFPS; }
@@ -35,7 +35,7 @@ namespace sora {
 			int bPriorityRaised = 0;
 		    LONGLONG TimeInterval, TimePrecision, NowTime;
 			static LONGLONG lastTime = GetCurrentSystemTime();
-
+			
 			LARGE_INTEGER Frequency;
 		    QueryPerformanceFrequency(&Frequency);
 			TimePrecision =  Frequency.QuadPart;
@@ -107,7 +107,6 @@ namespace sora {
 		}
 
 	private:
-		std::ofstream log;
 		int32 desiredFPS, oldTimeStamp;
 		float32 fDeltaTime, fTime, fFPS;
 		int32 nFrameCounter;

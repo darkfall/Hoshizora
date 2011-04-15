@@ -942,9 +942,6 @@
     <ClInclude Include="..\..\..\Sora\Defaults\SoraTimer_Win32.h">
       <Filter>头文件\defaults</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\Defaults\uncopyable.h">
-      <Filter>头文件\defaults</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\Debug\SoraGlobalProfiler.h">
       <Filter>头文件\debug</Filter>
     </ClInclude>
