@@ -88,6 +88,7 @@ bool mainWindow::renderFunc() {
    // pSpr->render(0.f, 0.f);
 
     pSpr->render(0.f, 0.f);
+//	pSpr->setRotation(0.5);
     
 	lpos[0] = 0.5f + 0.3f*sinf(sora::DGR_RAD(sora::SORA->getFrameCount()));
     lpos[1] = 0.5f + 0.3f*cosf(sora::DGR_RAD(sora::SORA->getFrameCount()));
@@ -118,7 +119,8 @@ void mainWindow::init() {
     
     sora::SORA->setFPS(999);
     
-    pSpr = sora::SORA->createSprite(L"titlebg2.png");
+    pSpr = new sora::SoraSprite(NULL);
+	pSpr->setTexture(sora::SORA->createTexture(L"titlebg2.png"));
 //	pSpr->setTextureRect(0, 0, 500, 500);
  //   pSpr = new sora::SoraSprite(sora::SORA->createTextureWH(512, 512));
 //    ulong32* pdata = pSpr->getPixelData();

@@ -5,22 +5,14 @@
 
 namespace sora {
 
-    SoraSprite::SoraSprite(HSORATEXTURE tex) {
+    SoraSprite::SoraSprite(HSORATEXTURE tex): shaderContext(NULL) {
         SoraTexture* ptex = tex==0?NULL:(SoraTexture*)tex;
         _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mTextureWidth:1.f, ptex!=NULL?ptex->mTextureHeight:1.f);
     }
     
-    SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h) {
+    SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h): shaderContext(NULL) {
         _init((SoraTexture*)tex, x, y, w, h);
     }
-    
-	SoraSprite::SoraSprite(SoraTexture* tex) {
-		_init(tex, 0.f, 0.f, tex!=NULL?tex->mTextureWidth:1.f, tex!=NULL?tex->mTextureHeight:1.f);
-	}
-
-	SoraSprite::SoraSprite(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
-		_init(tex, x, y, width, height);
-	}
     
     void SoraSprite::_init(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
         float texx1, texy1, texx2, texy2;
@@ -36,7 +28,15 @@ namespace sora {
 		quad.tex = tex;
 		texture = tex;
 		
-		setTextureRect(x, y, width, height);
+		texx1=x/textureRect.x2;
+		texy1=y/textureRect.y2;
+		texx2=(x+width)/textureRect.x2;
+		texy2=(y+height)/textureRect.y2;
+
+		quad.v[0].tx = texx1; quad.v[0].ty = texy1;
+		quad.v[1].tx = texx2; quad.v[1].ty = texy1;
+		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
+		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
 		
 		quad.v[0].z = 
 		quad.v[1].z = 
@@ -72,43 +72,8 @@ namespace sora {
             }
         }
         
-		float tx1,ty1,tx2,ty2;
-		float tw,th;
-		
-        SoraTexture* ptex = (SoraTexture*)tex;
-        assert(ptex != NULL);
-		quad.tex=ptex;
-		
-		if(tex) {
-			tw = (float)ptex->mTextureWidth;
-			th = (float)ptex->mTextureHeight;
-		}
-		else {
-			tw = 1.0f;
-			th = 1.0f;
-		}
-		
-		if(tw!=textureRect.x2 || th!=textureRect.y2) {
-			tx1=quad.v[0].tx*textureRect.x2;
-			ty1=quad.v[0].ty*textureRect.y2;
-			tx2=quad.v[2].tx*textureRect.x2;
-			ty2=quad.v[2].ty*textureRect.y2;
-			
-			textureRect.x2=tw;
-			textureRect.y2=th;
-			
-			tx1/=tw; ty1/=th;
-			tx2/=tw; ty2/=th;
-			
-			quad.v[0].tx=tx1; quad.v[0].ty=ty1; 
-			quad.v[1].tx=tx2; quad.v[1].ty=ty1; 
-			quad.v[2].tx=tx2; quad.v[2].ty=ty2; 
-			quad.v[3].tx=tx1; quad.v[3].ty=ty2; 
-		}
-		
-		texture = ptex;
-        sprWidth = texture->mOriginalWidth;
-        sprHeight = texture->mOriginalHeight;
+		SoraTexture* ptex = (SoraTexture*)tex;
+        _init(ptex, 0.f, 0.f, ptex->mTextureWidth, ptex->mTextureHeight);
 	}
 
 	void SoraSprite::_initDefaults() {
@@ -116,7 +81,10 @@ namespace sora {
 		bVFlip = bHFlip = false;
 		rot = rotZ = 0.f;
 		centerX = centerY = 0.f;
-        shaderContext = NULL;
+		if(shaderContext)
+			clearShader();
+		if(hasEffect())
+			clearEffects();
 		setPosition(0.f, 0.f);
         sora = SoraCore::Instance();
 	}
@@ -131,12 +99,7 @@ namespace sora {
 		textureRect.y1=y;
 		textureRect.x2=width;
 		textureRect.y2=height;
-	/*	if(adjSize)
-		{
-			width=w;
-			height=h;
-		}*/
-		
+
 		tx1=textureRect.x1/texture->mTextureWidth; ty1=textureRect.y1/texture->mTextureHeight;
 		tx2=(textureRect.x1+width)/texture->mTextureWidth; ty2=(textureRect.y1+height)/texture->mTextureHeight;
 		
@@ -145,11 +108,6 @@ namespace sora {
 		quad.v[2].tx=tx2; quad.v[2].ty=ty2; 
 		quad.v[3].tx=tx1; quad.v[3].ty=ty2; 
 		
-	/*	bX=bXFlip; bY=bYFlip; bHS=bHSFlip;
-		bXFlip=false; bYFlip=false;
-		
-		SetFlip(bX, bY, bHS);*/
-		textureRect.Set(x, y, width, height);
         sprWidth = width;
         sprHeight = height;
 	}
