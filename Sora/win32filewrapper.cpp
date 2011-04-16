@@ -13,15 +13,19 @@
 
 namespace sorawin32 {
 
-	void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
+void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
 		WIN32_FIND_DATAW FindData;
-		HANDLE hFile = FindFirstFileW(folder.c_str(), &FindData);
+		SoraWString newFolder = folder+L"\\*";
+	
+		HANDLE hFile = FindFirstFileW(newFolder.c_str(), &FindData);
 		if(hFile == INVALID_HANDLE_VALUE)
 			return;
 
 		SoraWString tmpPath;
 		SoraWString fName = FindData.cFileName;
-		if((FindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+		if(fName==L"."||fName==L".." )
+			tmpPath = L"nop";
+		else if((FindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
 			       tmpPath = folder;
 				   tmpPath += L'/';
 				   tmpPath += FindData.cFileName;
@@ -36,7 +40,10 @@ namespace sorawin32 {
 	    while(FindOK) {  
 			FindOK = FindNextFileW(hFile, &FindData);  
 		    if(FindOK) {
-			    if((FindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+				fName = FindData.cFileName;
+				if(fName==L"."||fName==L"..")
+					continue;
+			    else if((FindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
 					    tmpPath = folder;
 						tmpPath += L'/';
 						tmpPath += FindData.cFileName;

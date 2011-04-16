@@ -41,7 +41,8 @@ namespace sora {
     
 		void SoraAudiereMusicFile::closeFile() {
 			if(is_open()) {
-				sound->unref();
+				//sound->unref();
+				sound = NULL;
 				set_open(true);
 			}
 		}
