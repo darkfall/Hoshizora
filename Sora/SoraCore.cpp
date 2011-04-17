@@ -45,6 +45,7 @@ namespace sora {
 		pSoundSystem = 0;
         
         bMainScene = false;
+		mainWindow = 0;
         
         shaderContext = 0;
 

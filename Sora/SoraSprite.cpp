@@ -8,10 +8,12 @@ namespace sora {
     SoraSprite::SoraSprite(HSORATEXTURE tex): shaderContext(NULL) {
         SoraTexture* ptex = tex==0?NULL:(SoraTexture*)tex;
         _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mTextureWidth:1.f, ptex!=NULL?ptex->mTextureHeight:1.f);
+		_initDefaults();
     }
     
     SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h): shaderContext(NULL) {
         _init((SoraTexture*)tex, x, y, w, h);
+		_initDefaults();
     }
     
     void SoraSprite::_init(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
@@ -38,22 +40,6 @@ namespace sora {
 		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
 		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
 		
-		quad.v[0].z = 
-		quad.v[1].z = 
-		quad.v[2].z = 
-		quad.v[3].z = 0.f;
-		
-		quad.v[0].col = 
-		quad.v[1].col = 
-		quad.v[2].col = 
-		quad.v[3].col = 0xffffffff;
-        
-		quad.blend=BLEND_DEFAULT;
-        
-		_initDefaults();
-		
-		setType(SPRITE_TYPE);
-        
         sprWidth = texture!=NULL?texture->mOriginalWidth:1.f;
         sprHeight = texture!=NULL?texture->mOriginalHeight:1.f;
     }
@@ -72,10 +58,8 @@ namespace sora {
             }
         }
         
-		ulong32 colbefore = quad.v[0].col;
 		SoraTexture* ptex = (SoraTexture*)tex;
         _init(ptex, 0.f, 0.f, ptex->mTextureWidth, ptex->mTextureHeight);
-		setColor(colbefore);
 	}
 
 	void SoraSprite::_initDefaults() {
@@ -88,6 +72,20 @@ namespace sora {
 		if(hasEffect())
 			clearEffects();
 		setPosition(0.f, 0.f);
+
+		quad.v[0].z = 
+		quad.v[1].z = 
+		quad.v[2].z = 
+		quad.v[3].z = 0.f;
+		
+		quad.v[0].col = 
+		quad.v[1].col = 
+		quad.v[2].col = 
+		quad.v[3].col = 0xffffffff;
+        
+		quad.blend=BLEND_DEFAULT;
+		
+		setType(SPRITE_TYPE);
         sora = SoraCore::Instance();
 	}
 

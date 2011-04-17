@@ -78,6 +78,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\AnimationEditor\aeMainWindow.h" />
+    <ClInclude Include="..\..\..\AnimationEditor\editorWindow.h" />
     <ClInclude Include="..\..\..\Plugins\DarkLib\FileDlg.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.h" />
     <ClInclude Include="..\..\..\Plugins\lAnm\lAnm.h" />
@@ -383,6 +385,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h" />
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.h" />
     <ClInclude Include="..\..\..\Plugins\SoraWin32MiscTool\SoraMiscTool_Win32.h" />
     <ClInclude Include="..\..\..\Plugins\SoraWin32Timer\orz.h" />
     <ClInclude Include="..\..\..\Plugins\SoraWin32Timer\SoraTimer_Win32.h" />
@@ -525,6 +528,7 @@
     <ClInclude Include="vlcTestWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\AnimationEditor\editorWindow.cpp" />
     <ClCompile Include="..\..\..\Plugins\DarkLib\FileDlg.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.cpp" />
     <ClCompile Include="..\..\..\Plugins\lAnm\lAnm.cpp" />
@@ -648,6 +652,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraWin32Timer\orz.c" />
     <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\PackMemory.cpp" />

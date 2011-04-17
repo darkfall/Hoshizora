@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef GUICHAN_SETUP_H_
-#define GUICHAN_SETUP_H_
+#ifndef SORA_GUICHAN_SETUP_H_
+#define SORA_GUICHAN_SETUP_H_
 
 #include "SoraGUIChan/guichansora.hpp"
 
