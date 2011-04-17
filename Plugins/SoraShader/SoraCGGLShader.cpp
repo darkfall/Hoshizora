@@ -12,7 +12,6 @@ namespace sora {
         fragmentProfile = cgGLGetLatestProfile(CG_GL_FRAGMENT);
         cgGLGetOptimalOptions(fragmentProfile);
         cgGLGetOptimalOptions(vertexProfile);
-
 	}
 
 	SoraCGGLShaderContext::~SoraCGGLShaderContext() {	

@@ -36,8 +36,24 @@ namespace sora {
 		}
 	};
 						
+    // interface for read & write anything into a file
 	
-		
+    template<typename T>
+    inline T cFileReadT(FILE* file, bool& err) {
+        T i;
+        fread(&i, sizeof(T), 1, file);
+        if(ferror(file))
+            err = true;
+        return i;
+    }
+    
+    template<typename T>
+    inline bool cFileWriteT(FILE* file, T i) {
+        fwrite(&i, sizeof(T), 1, file);
+        if(ferror(file))
+            return true;
+        return false;
+    }
 } // namespace sora
 
 #endif

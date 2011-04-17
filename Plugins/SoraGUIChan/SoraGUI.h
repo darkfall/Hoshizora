@@ -13,16 +13,17 @@
 namespace sora {
 
 	enum SoraGUIResponseType {
-		RESPONCE_ACTION = 1,
-		RESPONCE_KEY = 2,
-		RESPONCE_DEATH = 4,
-		RESPONCE_FOCUS = 8,
-		RESPONCE_MOUSE = 16,
-		RESPONCE_LUA = 32,
-		RESPONCE_ALL = 31,
+		RESPONSEACTION = 1,
+		RESPONSEKEY = 2,
+		RESPONSEDEATH = 4,
+		RESPONSEFOCUS = 8,
+		RESPONSEMOUSE = 16,
+		RESPONSELUA = 32,
+		RESPONSESELECTION = 64,
+		RESPONSEALL = 63,
 	};
 
-//	const int RESPONCE_ALL = RESPONCE_ACTION | RESPONCE_KEY | RESPONCE_DEATH | RESPONCE_FOCUS | RESPONCE_MOUSE;
+//	const int RESPONSEALL = RESPONSEACTION | RESPONSEKEY | RESPONSEDEATH | RESPONSEFOCUS | RESPONSEMOUSE;
 
 	class SoraGUI: public SoraSingleton<SoraGUI> {
         friend class XmlGui;
@@ -35,24 +36,53 @@ namespace sora {
 			pDeathListener = new SoraGUIDeathListener;
 			pFocusListener = new SoraGUIFocusListener;
 			pMouseListener = new SoraGUIMouseListener;
+			pSelectionListener = new SoraGUISelectionListener;
+		}
+		
+		~SoraGUI() {
+			delete pActionListener;
+			delete pKeyListener;
+			delete pDeathListener;
+			delete pFocusListener;
+			delete pMouseListener;
+			delete pSelectionListener;
 		}
         
 		void registerGUIResponser(gcn::Widget* pWidget, SoraGUIResponser* pResponser, const SoraString& responserID, int iResponceType) {
-			if(iResponceType & RESPONCE_ACTION) pWidget->addActionListener(pActionListener);
-			if(iResponceType & RESPONCE_DEATH) pWidget->addDeathListener(pDeathListener);
-			if(iResponceType & RESPONCE_KEY) pWidget->addKeyListener(pKeyListener);
-			if(iResponceType & RESPONCE_MOUSE) pWidget->addMouseListener(pMouseListener);
-			if(iResponceType & RESPONCE_FOCUS) pWidget->addFocusListener(pFocusListener);
+			if(iResponceType & RESPONSEACTION) pWidget->addActionListener(pActionListener);
+			if(iResponceType & RESPONSEDEATH) pWidget->addDeathListener(pDeathListener);
+			if(iResponceType & RESPONSEKEY) pWidget->addKeyListener(pKeyListener);
+			if(iResponceType & RESPONSEMOUSE) pWidget->addMouseListener(pMouseListener);
+			if(iResponceType & RESPONSEFOCUS) pWidget->addFocusListener(pFocusListener);
+			if(iResponceType & RESPONSESELECTION) {
+				gcn::ListBox* plb = dynamic_cast<gcn::ListBox*> (pWidget);
+				if(plb) {
+					plb->addSelectionListener(pSelectionListener);
+				}
+				else {
+					gcn::DropDown* pdd = dynamic_cast<gcn::DropDown*> (pWidget);
+					if(pdd) pdd->addSelectionListener(pSelectionListener);
+				}
+			}
             
 			SoraGUIResponserMap::Instance()->registerResponser(responserID, pResponser);
 		}
         
         void registerExternalGUIResponser(gcn::Widget* pWidget, SoraGUIResponserExtern* pResponser, const SoraString& responserID, const SoraString& handleSrc, int iResponceType) {
-            if(iResponceType & RESPONCE_ACTION) pWidget->addActionListener(pActionListener);
-			if(iResponceType & RESPONCE_DEATH) pWidget->addDeathListener(pDeathListener);
-			if(iResponceType & RESPONCE_KEY) pWidget->addKeyListener(pKeyListener);
-			if(iResponceType & RESPONCE_MOUSE) pWidget->addMouseListener(pMouseListener);
-			if(iResponceType & RESPONCE_FOCUS) pWidget->addFocusListener(pFocusListener);
+            if(iResponceType & RESPONSEACTION) pWidget->addActionListener(pActionListener);
+			if(iResponceType & RESPONSEDEATH) pWidget->addDeathListener(pDeathListener);
+			if(iResponceType & RESPONSEKEY) pWidget->addKeyListener(pKeyListener);
+			if(iResponceType & RESPONSEMOUSE) pWidget->addMouseListener(pMouseListener);
+			if(iResponceType & RESPONSEFOCUS) pWidget->addFocusListener(pFocusListener);
+			if(iResponceType & RESPONSESELECTION) {
+				gcn::ListBox* plb = dynamic_cast<gcn::ListBox*> (pWidget);
+				if(plb)
+					plb->addSelectionListener(pSelectionListener);
+				else {
+					gcn::DropDown* pdd = dynamic_cast<gcn::DropDown*> (pWidget);
+					if(pdd) pdd->addSelectionListener(pSelectionListener);
+				}
+			}
             
             SoraGUIResponserMap::Instance()->registerHandleSrc((ulong32)pWidget, handleSrc);
 			SoraGUIResponserMap::Instance()->registerExternalResponser(responserID, pResponser);
@@ -65,6 +95,7 @@ namespace sora {
 		SoraGUIDeathListener* pDeathListener;
 		SoraGUIFocusListener* pFocusListener;
 		SoraGUIMouseListener* pMouseListener;
+		SoraGUISelectionListener* pSelectionListener;
 	};
 } // namespace sora
 

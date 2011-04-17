@@ -76,8 +76,7 @@ namespace gcn
         Color color = graphics->getColor();
 		
 		if(mSoraFont) {
-			mSoraFont->setColor(CARGB(color.a, (float)color.r, (float)color.g, (float)color.b));
-			//mSoraFont->Render(x, y, HGETEXT_LEFT, text.c_str());
+			mSoraFont->setColor(CARGB(color.a, color.r, color.g, color.b));
 			mSoraFont->render((float)x, (float)y, sora::s2ws(text+" \0").c_str());
 		}
     }

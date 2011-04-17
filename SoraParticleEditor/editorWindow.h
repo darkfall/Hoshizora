@@ -1,5 +1,5 @@
-#ifndef EDITOR_WINDOW_H
-#define EDITOR_WINDOW_H
+#ifndef PARTICLE_EDITOR_WINDOW_H
+#define PARTICLE_EDITOR_WINDOW_H
 
 #include "HoshiNoSora.h"
 #include "SoraFont.h"

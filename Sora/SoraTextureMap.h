@@ -91,6 +91,7 @@ namespace sora {
 					SORA->releaseTexture(p->first);
 				}
 				printf("tex: %lu, ref: %d\n", tex, texRefs[p->second]);
+				remove(tex);
 			}
 		}
 		

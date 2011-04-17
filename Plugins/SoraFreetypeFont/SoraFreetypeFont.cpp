@@ -336,7 +336,7 @@ namespace sora {
 
 	float32 SoraFTFont::getHeight() {
 		if(!ft_glyphs.empty())
-			return (float32)ft_glyphs[0].size+kerningHeight;
+			return (float32)ft_glyphs[0].size*1.5+kerningHeight;
 		return 0.f;
 	}
 

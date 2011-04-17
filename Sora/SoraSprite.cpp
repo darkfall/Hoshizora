@@ -72,8 +72,10 @@ namespace sora {
             }
         }
         
+		ulong32 colbefore = quad.v[0].col;
 		SoraTexture* ptex = (SoraTexture*)tex;
         _init(ptex, 0.f, 0.f, ptex->mTextureWidth, ptex->mTextureHeight);
+		setColor(colbefore);
 	}
 
 	void SoraSprite::_initDefaults() {

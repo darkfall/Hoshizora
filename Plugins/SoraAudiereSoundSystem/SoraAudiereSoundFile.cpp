@@ -177,7 +177,7 @@ namespace sora {
 
 		void SoraAudiereSoundEffectFile::closeFile() {
 			if(is_open()) {
-				se->unref();
+				//se->unref();
 				set_open(true);
 			}
 		}

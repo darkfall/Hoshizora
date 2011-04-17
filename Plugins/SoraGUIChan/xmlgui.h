@@ -43,7 +43,7 @@ public:
 	//!parse xml file
 	//@param filename the file name to parse
 	//@return true if loaded ok
-	bool parse(const std::string &filename);
+	bool parse(const std::wstring &filename);
 	bool parse(const char* ptr, unsigned long size);
 
 	//@param name th widget name
@@ -171,6 +171,7 @@ class XmlListModel : public gcn::ListModel
 public:
     virtual int getNumberOfElements();
     virtual std::string getElementAt(int i);
+	virtual void pushElement(const std::string& str) { items.push_back(str); }
 	std::vector<std::string> items;
 };
     

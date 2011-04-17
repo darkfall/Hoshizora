@@ -30,6 +30,7 @@ namespace sora {
     
     uint32 SoraBaseCanvas::update(float32 dt) {
         pCanvasSprite->update(dt);
+		return 0;
     }
     
     void SoraBaseCanvas::beginRender() {
@@ -43,31 +44,39 @@ namespace sora {
         SORA->endScene();
     }
     
-    void SoraBaseCanvas::setFont(SoraFont* font) {
-        pFont = font;
-    }
-        
-    void SoraBaseCanvas::renderString(const SoraString& str, float32 x, float32 y) {
-        if(!pFont) 
-            SORA->log("SoraBaseCanvas: no font available");
-        else 
-            pFont->render(x, y, s2ws(str).c_str());
-    }
-    
-    void SoraBaseCanvas::renderString(const SoraWString& str, float32 x, float32 y) {
-        if(!pFont) 
-            SORA->log("SoraBaseCanvas: no font available");
-        else 
-            pFont->render(x, y, str.c_str());
-    }
-    
-    void SoraBaseCanvas::renderSprite(SoraSprite* pSpr, float32 x, float32 y) {
-        if(x != 0.f || y != 0.f)
-            pSpr->render(x, y);
-        else 
-            pSpr->render();
-    }
-    
-    
+	void SoraBaseCanvas::attachShader(SoraShader* shader) {
+		pCanvasSprite->attachShader(shader);
+	}
+	void SoraBaseCanvas::detachShader(SoraShader* shader) {
+		pCanvasSprite->detachShader(shader);
+	}
+	
+	SoraShader* SoraBaseCanvas::attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type) {
+		return pCanvasSprite->attachShader(shaderPath, entry, type);
+	}
+	
+	bool SoraBaseCanvas::hasShader() const {
+		return pCanvasSprite->hasShader();
+	}
+	
+	void SoraBaseCanvas::clearShader() {
+		return pCanvasSprite->clearShader();
+	}
+	
+	void SoraBaseCanvas::addEffect(SoraImageEffect* effect) {
+		return pCanvasSprite->addEffect(effect);
+	}
+	
+	void SoraBaseCanvas::stopEffect(SoraImageEffect* effect) {
+		return pCanvasSprite->stopEffect(effect);
+	}
+	
+	void SoraBaseCanvas::clearEffects() {
+		return pCanvasSprite->clearEffects();
+	}
+	
+	bool SoraBaseCanvas::hasEffect() const {
+		return pCanvasSprite->hasEffect();
+	}
     
 } // namespace sora

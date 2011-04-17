@@ -15,10 +15,10 @@ XmlGui::XmlGui()
 	
 }
 
-bool XmlGui::parse(const std::string &filename)
+bool XmlGui::parse(const std::wstring &filename)
 {
     ulong32 size;
-    char* pdata = (char*)sora::SORA->getResourceFile(sora::s2ws(filename), size);
+    char* pdata = (char*)sora::SORA->getResourceFile(filename, size);
     if(pdata) {
 		bool result = parse(pdata, size);
         sora::SORA->freeResourceFile(pdata);
@@ -129,11 +129,12 @@ int parseRespondType(const char* respondStr) {
     sora::deliStr(rtypes, respondStr, ',');
     int irtype = 0;
     for(size_t i=0; i<rtypes.size(); ++i) {
-        if(rtypes[i].compare("action") == 0) irtype |= sora::RESPONCE_ACTION;
-        else if(rtypes[i].compare("death") == 0) irtype |= sora::RESPONCE_DEATH;
-        else if(rtypes[i].compare("focus") == 0) irtype |= sora::RESPONCE_FOCUS;
-        else if(rtypes[i].compare("mouse") == 0) irtype |= sora::RESPONCE_MOUSE;
-        else if(rtypes[i].compare("key") == 0) irtype |= sora::RESPONCE_KEY;
+        if(rtypes[i].compare("action") == 0) irtype |= sora::RESPONSEACTION;
+        else if(rtypes[i].compare("death") == 0) irtype |= sora::RESPONSEDEATH;
+        else if(rtypes[i].compare("focus") == 0) irtype |= sora::RESPONSEFOCUS;
+        else if(rtypes[i].compare("mouse") == 0) irtype |= sora::RESPONSEMOUSE;
+        else if(rtypes[i].compare("key") == 0) irtype |= sora::RESPONSEKEY;
+		else if(rtypes[i].compare("selection") == 0) irtype |= sora::RESPONSESELECTION;
     }
     return irtype;
 }
@@ -159,7 +160,7 @@ void XmlGui::parseResponser(gcn::Widget* widget, const std::string& arg, const s
                                                                             pResponser, 
                                                                             widget->getId(),
                                                                             arg.substr(ap+1, arg.size()),
-                                                                            sora::RESPONCE_ACTION);
+                                                                            sora::RESPONSEACTION);
                 }
             }
         }
@@ -177,7 +178,7 @@ void XmlGui::parseResponser(gcn::Widget* widget, const std::string& arg, const s
                 sora::SoraGUI::Instance()->registerGUIResponser(widget, 
                                                                 pResponser, 
                                                                 widget->getId(),
-                                                                sora::RESPONCE_ACTION);
+                                                                sora::RESPONSEACTION);
             }
         } 
     }

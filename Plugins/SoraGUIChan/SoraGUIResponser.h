@@ -35,6 +35,8 @@ namespace sora {
 		virtual void mouseWheelMovedDown(const gcn::MouseEvent& mouseEvent) { }
 		virtual void mouseWheelMovedUp(const gcn::MouseEvent& mouseEvent) { }
 		virtual void mouseDragged(const gcn::MouseEvent& mouseEvent) { }
+		
+		virtual void valueChanged() {}
 
 		SoraString getID() const { return widgetID; }
 		gcn::Widget* getSource() const { return source; }

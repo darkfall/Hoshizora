@@ -165,14 +165,14 @@ namespace guiwrapper {
         return (ulong32)GCN_GLOBAL->findWidget(id);
     }
     
-    bool loadXmlGui(const SoraString& xmlPath) {
+    bool loadXmlGui(const SoraWString& xmlPath) {
         XmlGui* pXmlGui = new XmlGui;
         bool result = pXmlGui->parse(xmlPath);
         delete pXmlGui;
         return result;
     }
     
-    bool loadJsonGui(const SoraString& jsonPath) {
+    bool loadJsonGui(const SoraWString& jsonPath) {
         JsonGui* pJsonGui = new JsonGui;
         bool result = pJsonGui->parse(jsonPath);
         delete pJsonGui;

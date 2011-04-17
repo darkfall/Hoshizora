@@ -146,6 +146,17 @@ namespace sora {
 			}
 		}
 	};
+	
+	class SoraGUISelectionListener: public gcn::SelectionListener {
+		void valueChanged(const gcn::SelectionEvent& ev) {
+			SoraGUIResponser* pResponser = SoraGUIResponserMap::Instance()->getResponser(ev.getSource()->getId());
+			if(pResponser) {
+				pResponser->setID(ev.getSource()->getId());
+				pResponser->setSource(ev.getSource());
+				pResponser->valueChanged();
+			}
+		}
+	};
 
 } // namespace sora
 

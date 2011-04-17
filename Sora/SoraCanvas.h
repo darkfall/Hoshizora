@@ -31,10 +31,16 @@ namespace sora {
         void beginRender();
         void finishRender();
 		
-        void setFont(SoraFont* font);
-        void renderString(const SoraString& str, float32 x, float32 y);
-        void renderString(const SoraWString& str, float32 x, float32 y);
-        void renderSprite(SoraSprite* spr, float32 x=0.f, float32 y=0.f);
+        void attachShader(SoraShader*);
+        void detachShader(SoraShader*);
+        SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);
+        bool hasShader() const;
+        void clearShader();
+		
+		void addEffect(SoraImageEffect* effect);
+		void stopEffect(SoraImageEffect* effect);
+		void clearEffects();
+		bool hasEffect() const;
         
         SoraSprite* getCanvasSprite() const { return pCanvasSprite; }
         
@@ -44,7 +50,6 @@ namespace sora {
         
 		ulong32 canvasTarget;
 		
-        SoraFont* pFont;
         SoraSprite* pCanvasSprite;
         
         bool bSceneBegan;

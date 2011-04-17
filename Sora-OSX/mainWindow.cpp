@@ -42,7 +42,7 @@ void mainWindow::loadShader() {
     float treshold = 1.0f;
     shader->setParameterfv("lightTreshold", &treshold, 1);
 
-	shader->setTexture("sample22", p3->getTexture());
+//	shader->setTexture("sample22", p3->getTexture());
     
   //  shader->setTexture("texsample2", pSpr2->getTexture());
 }
@@ -79,7 +79,7 @@ static float32 lpos[2] = {0.f, 0.f};
 static float32 attx = 0.01f, atty = 0.01f;
 
 bool mainWindow::renderFunc() {
-	sora->beginScene();
+	sora->beginScene(0xFFFFFFFF);
 	
 	//mainScenes->render();
 	//pSpr->render4V(100.f, 100.f, 700.f, 0.f, 700.f, 600.f, 100.f, 500.f);
@@ -88,6 +88,8 @@ bool mainWindow::renderFunc() {
    // pSpr->render(0.f, 0.f);
 
     pSpr->render(0.f, 0.f);
+	pAnimatedSprite->update(sora::SORA->getDelta());
+	pAnimatedSprite->render();
 //	pSpr->setRotation(0.5);
     
 	lpos[0] = 0.5f + 0.3f*sinf(sora::DGR_RAD(sora::SORA->getFrameCount()));
@@ -117,7 +119,7 @@ void mainWindow::init() {
 	stg = new stgScene;
 	mainScenes->addScene(stg);
     
-    sora::SORA->setFPS(999);
+    sora::SORA->setFPS(60);
     
     pSpr = new sora::SoraSprite(NULL);
 	pSpr->setTexture(sora::SORA->createTexture(L"titlebg2.png"));
@@ -139,11 +141,19 @@ void mainWindow::init() {
 	luaobj = new sora::SoraLuaObject();
 	luaobj->doScript(L"test.txt");
 
-	pFont = sora::SORA->createFont(L"XHei.TTC", 20);
-	pFont->setColor(0xFFFFFFFF);
+	pFont = sora::SORA->createFont(L"ThonburiBold.ttf", 20);
+	pFont->setColor(0x00000000);
 //	pSpr2->setScale(0.5f, 0.5f);
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
 //	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
+    
+    sora::SoraSpriteAnimationPacker packer;
+    packer.pack("patchouli.txt", "patchouli.anm");
+    pAnimatedSprite = packer.unpack("patchouli.anm");
+    assert(pAnimatedSprite != 0);
+	pAnimatedSprite->play();
+	pAnimatedSprite->setPosition(100.f, 100.f);
+	packer.unpackToFile("patchouli.anm");
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

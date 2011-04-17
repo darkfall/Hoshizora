@@ -21,9 +21,9 @@ namespace sora {
         opened = false;
     }
     
-    bool JsonGui::parse(const SoraString& filePath) {
+    bool JsonGui::parse(const SoraWString& filePath) {
         ulong32 size;
-        void* pdata = SORA->getResourceFile(s2ws(filePath), size);
+        void* pdata = SORA->getResourceFile(filePath, size);
         if(pdata) {
             bool result = parse(pdata, size);
             SORA->freeResourceFile(pdata);
@@ -38,10 +38,13 @@ namespace sora {
             parseWidget(rootValue, NULL);
             return true;
         }
+		INT_LOG::debugPrintf("%s", reader.getFormatedErrorMessages().c_str());
         return false;
     }
     
     void JsonGui::addToParent(gcn::Widget* widget, gcn::Widget* parent) {
+		if(parent == NULL) return;
+		
         gcn::Container* pcont = dynamic_cast<gcn::Container*>(parent);
         if(pcont) {
             pcont->add(widget);
@@ -69,44 +72,62 @@ namespace sora {
     void JsonGui::registerParseFunc(const SoraString& name, JsonGuiParseFunc func) {
         extensionFuncs[str2id(name)] = func;
     }
+	
+	void JsonGui::_parseWidget(const char* name, const Json::Value& val, gcn::Widget* parent) {
+		if(strcmpnocase(name, "container") == 0) {
+			parseContainer(val, parent);
+		} else if(strcmpnocase(name, "window") == 0) {
+			parseWindow(val, parent);
+		} else if(strcmpnocase(name, "button") == 0) {
+			parseButton(val, parent);
+		} else if(strcmpnocase(name, "slider") == 0) {
+			parseSlider(val, parent);
+		} else if(strcmpnocase(name, "textbox") == 0) {
+			parseTextBox(val, parent);
+		} else if(strcmpnocase(name, "textfield") == 0) {
+			parseTextField(val, parent);
+		} else if(strcmpnocase(name, "label") == 0) {
+			parseLabel(val, parent);
+		} else if(strcmpnocase(name, "checkbox") == 0) {
+			parseCheckbox(val, parent);
+		} else if(strcmpnocase(name, "radiobutton") == 0) {
+			parseRadioButton(val, parent);
+		} else if(strcmpnocase(name, "imagebutton") == 0) {
+			parseImageButton(val, parent);
+		} else if(strcmpnocase(name, "icon") == 0) {
+			parseIcon(val, parent);
+		} else if(strcmpnocase(name, "listbox") == 0) {
+			parseListBox(val, parent);
+		} else if(strcmpnocase(name, "dropdown") == 0) {
+			parseDropDown(val, parent);
+		}
+		else {
+			EXTENSION_FUNC_MAP::iterator itFunc = extensionFuncs.find(str2id(name));
+			if(itFunc != extensionFuncs.end()) {
+				itFunc->second(val, parent, this);
+			}
+		}
+	}
     
     void JsonGui::parseWidget(const Json::Value& val, gcn::Widget* parent) {
         VALUE_NAMES members = val.getMemberNames();
         VALUE_NAMES::iterator itMember = members.begin();
         while(itMember != members.end()) {
             const char* type = itMember->c_str();
+			INT_LOG::debugPrintf("parsing %s\n", type);
+
             bool isObjectValue = val[type].isObject();
             if(isObjectValue) {
-                if(strcmpnocase(type, "container") == 0) {
-                    parseContainer(val[type], parent);
-                } else if(strcmpnocase(type, "window") == 0) {
-                    parseWindow(val[type], parent);
-                } else if(strcmpnocase(type, "button") == 0) {
-                    parseButton(val[type], parent);
-                } else if(strcmpnocase(type, "slider") == 0) {
-                    parseSlider(val[type], parent);
-                } else if(strcmpnocase(type, "textbox") == 0) {
-                    parseTextBox(val[type], parent);
-                } else if(strcmpnocase(type, "textfield") == 0) {
-                    parseTextBox(val[type], parent);
-                } else if(strcmpnocase(type, "label") == 0) {
-                    parseTextBox(val[type], parent);
-                } else if(strcmpnocase(type, "checkbox") == 0) {
-                    parseCheckbox(val[type], parent);
-                } else if(strcmpnocase(type, "radiobutton") == 0) {
-                    parseRadioButton(val[type], parent);
-                } else if(strcmpnocase(type, "imagebutton") == 0) {
-                    parseImageButton(val[type], parent);
-                } else if(strcmpnocase(type, "icon") == 0) {
-                    parseIcon(val[type], parent);
-                }
-                else {
-                    EXTENSION_FUNC_MAP::iterator itFunc = extensionFuncs.find(str2id(type));
-                    if(itFunc != extensionFuncs.end()) {
-                        itFunc->second(val, parent, this);
-                    }
-                }    
-            }
+				_parseWidget(type, val[type], parent);
+			} else if(val[type].isArray()) {
+				if(strcmpnocase(type, "widgets") == 0) {
+					for(int i=0; i<val[type].size(); ++i) {
+						if(val[type][i].isObject()) {
+							parseWidget(val[type][i], parent);
+						}
+					}
+				}
+			}
             ++itMember;
         }
 
@@ -117,7 +138,7 @@ namespace sora {
             widget->setX(val["x"].asInt());
         }
         if(val.isMember("y")) {
-            widget->setX(val["y"].asInt());
+            widget->setY(val["y"].asInt());
         }
         if(val.isMember("width")) {
             widget->setWidth(val["width"].asInt());
@@ -133,12 +154,12 @@ namespace sora {
         if(val.isMember("foregroundcolor")) {
             int color;
             sscanf(val["foregroundcolor"].asCString(), "%x", &color);
-            widget->setBaseColor(gcn::Color(color));
+            widget->setForegroundColor(gcn::Color(color));
         }
         if(val.isMember("backgroundcolor")) {
             int color;
             sscanf(val["backgroundcolor"].asCString(), "%x", &color);
-            widget->setBaseColor(gcn::Color(color));
+            widget->setBackgroundColor(gcn::Color(color));
         }
         
         if(val.isMember("framesize")) {
@@ -190,7 +211,6 @@ namespace sora {
     }
     
     void JsonGui::parseContainer(const Json::Value& val, gcn::Widget* parent) {
-        printf("parsing container\n");
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
@@ -206,8 +226,17 @@ namespace sora {
         parseDefaults(val, c);
         
         //parsing child elements
-        parseWidget(val, c);
-        
+		if(val.isMember("widgets")) {
+			Json::Value widgets = val["widgets"];
+			if(widgets.isArray()) {
+				for(int i=0; i<widgets.size(); ++i) {
+					if(widgets[i].isObject()) {
+						parseWidget(widgets[i], c);
+					}
+				}
+			}
+        }
+		
         addToParent(c, parent);
         widgets[str2id(name)] = c;
     }
@@ -241,7 +270,16 @@ namespace sora {
         parseDefaults(val, window);
         
         //parsing child elements
-        parseWidget(val, window);
+		if(val.isMember("widgets")) {
+			Json::Value widgets = val["widgets"];
+			if(widgets.isArray()) {
+				for(int i=0; i<widgets.size(); ++i) {
+					if(widgets[i].isObject()) {
+						parseWidget(widgets[i], window);
+					}
+				}
+			}
+        }
                 
         addToParent(window, parent);
         widgets[str2id(name)] = window;
@@ -272,10 +310,7 @@ namespace sora {
         
         button->adjustSize();
         parseDefaults(val, button);
-        
-        //	button->lostFocus(); //fix: this call must't exists
-        //?????
-        
+		
         addToParent(button, parent);
         widgets[str2id(name)] = button;
     }
@@ -486,18 +521,82 @@ namespace sora {
         addToParent(radio, parent);
         widgets[str2id(name)] = radio;
     }
-    
+	
+	void JsonGui::parseListBox(const Json::Value& val, gcn::Widget* parent) {
+		std::string name;
+        if(val.isMember("name")) {
+            name = val["name"].asString();
+        } else {
+            throw GCN_EXCEPTION("Slider Widget must have a unique name");
+        }
+		
+		gcn::ListBox* listbox = new gcn::ListBox;
+		if(val.isMember("selectioncolor")) {
+			int color;
+            sscanf(val["selectioncolor"].asCString(), "%x", &color);
+            listbox->setSelectionColor(gcn::Color(color));
+		}
+		
+		if(val.isMember("items")) {
+			Json::Value items = val["items"];
+			if(items.isArray()) {
+				JsonListModel* listModel = new JsonListModel;
+
+				for(int i=0; i<items.size(); ++i) {
+					listModel->items.push_back(items[i].asString());
+				}
+				listbox->setListModel(listModel);
+			}
+		}
+		
+		parseDefaults(val, listbox);
+		addToParent(listbox, parent);
+		widgets[str2id(name)] = listbox;
+	}
+	
+	void JsonGui::parseDropDown(const Json::Value& val, gcn::Widget* parent) {
+		std::string name;
+        if(val.isMember("name")) {
+            name = val["name"].asString();
+        } else {
+            throw GCN_EXCEPTION("Slider Widget must have a unique name");
+        }
+		
+		gcn::ListBox* dropdown = new gcn::ListBox;
+		if(val.isMember("selectioncolor")) {
+			int color;
+            sscanf(val["selectioncolor"].asCString(), "%x", &color);
+            dropdown->setSelectionColor(gcn::Color(color));
+		}
+		
+		if(val.isMember("items")) {
+			Json::Value items = val["items"];
+			if(items.isArray()) {
+				JsonListModel* listModel = new JsonListModel;
+				
+				for(int i=0; i<items.size(); ++i) {
+					listModel->items.push_back(items[i].asString());
+				}
+				dropdown->setListModel(listModel);
+			} 
+		}
+		
+		parseDefaults(val, dropdown);
+		addToParent(dropdown, parent);
+		widgets[str2id(name)] = dropdown;
+	}
     
     int JsonGui::parseRespondType(const char* respondStr) {
         std::vector<std::string> rtypes;
         sora::deliStr(rtypes, respondStr, ',');
         int irtype = 0;
         for(size_t i=0; i<rtypes.size(); ++i) {
-            if(rtypes[i].compare("action") == 0) irtype |= sora::RESPONCE_ACTION;
-            else if(rtypes[i].compare("death") == 0) irtype |= sora::RESPONCE_DEATH;
-            else if(rtypes[i].compare("focus") == 0) irtype |= sora::RESPONCE_FOCUS;
-            else if(rtypes[i].compare("mouse") == 0) irtype |= sora::RESPONCE_MOUSE;
-            else if(rtypes[i].compare("key") == 0) irtype |= sora::RESPONCE_KEY;
+            if(rtypes[i].compare("action") == 0) irtype |= sora::RESPONSEACTION;
+            else if(rtypes[i].compare("death") == 0) irtype |= sora::RESPONSEDEATH;
+            else if(rtypes[i].compare("focus") == 0) irtype |= sora::RESPONSEFOCUS;
+            else if(rtypes[i].compare("mouse") == 0) irtype |= sora::RESPONSEMOUSE;
+            else if(rtypes[i].compare("key") == 0) irtype |= sora::RESPONSEKEY;
+			else if(rtypes[i].compare("selection") == 0) irtype |= sora::RESPONSESELECTION;
         }
         return irtype;
     }
@@ -523,7 +622,7 @@ namespace sora {
                                                                                 pResponser, 
                                                                                 widget->getId(),
                                                                                 arg.substr(ap+1, arg.size()),
-                                                                                sora::RESPONCE_ACTION);
+                                                                                sora::RESPONSEACTION);
                     }
                 }
             }
@@ -541,7 +640,7 @@ namespace sora {
                     sora::SoraGUI::Instance()->registerGUIResponser(widget, 
                                                                     pResponser, 
                                                                     widget->getId(),
-                                                                    sora::RESPONCE_ACTION);
+                                                                    sora::RESPONSEACTION);
                 }
             } 
         }

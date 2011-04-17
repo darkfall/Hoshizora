@@ -41,8 +41,8 @@ namespace guiwrapper {
     void export_guilibobj(sora::SoraLuaObject* obj);
     void export_guilib(LuaPlus::LuaState* state);
     
-    bool loadXmlGui(const SoraString& xmlPath);
-    bool loadJsonGui(const SoraString& jsonPath);
+    bool loadXmlGui(const SoraWString& xmlPath);
+    bool loadJsonGui(const SoraWString& jsonPath);
     
     void setGuiCreator(sora::SoraGuiCreator* pCreator);
     ulong32 createWidget(const SoraString& ident, const SoraString& id);

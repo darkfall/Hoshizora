@@ -32,7 +32,7 @@ namespace sora {
         static void parseResponser(gcn::Widget* widget, const std::string& responser, const std::string* type);
         static int parseRespondType(const char* respondStr);
 
-        bool parse(const SoraString& filePath);
+        bool parse(const SoraWString& filePath);
         bool parse(void* strData, ulong32 size);
         
         void parseDefaults(const Json::Value& val, gcn::Widget* widget);
@@ -52,12 +52,16 @@ namespace sora {
         void parseTextField(const Json::Value& val, gcn::Widget* parent);
         void parseRadioButton(const Json::Value& val, gcn::Widget* parent);
         void parseImageButton(const Json::Value& val, gcn::Widget* parent);
-        
+        void parseListBox(const Json::Value& val, gcn::Widget* parent);
+		void parseDropDown(const Json::Value& val, gcn::Widget* parent);
+		
         void registerParseFunc(const SoraString& name, JsonGuiParseFunc func);
         
         gcn::Widget* getWidget(const SoraString& name);
         
     private:
+		inline void _parseWidget(const char* name, const Json::Value& val, gcn::Widget* parent);
+		
         Json::Reader reader;
         Json::Value rootValue;
         
@@ -69,6 +73,19 @@ namespace sora {
         typedef std::map<stringId, gcn::Widget*> WIDGET_MAP;
         WIDGET_MAP widgets;
     };
+	
+	class JsonListModel : public gcn::ListModel {
+	public:
+		virtual int getNumberOfElements() { return items.size(); }
+		virtual std::string getElementAt(int i) { 
+			if(i < items.size())
+				return items[i];
+			return "null";
+		}
+		virtual void pushElement(const std::string& str) { items.push_back(str); }
+		
+		std::vector<std::string> items;
+	};
     
 } // namespace sora
 

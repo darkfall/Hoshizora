@@ -72,6 +72,8 @@ namespace gcn
          * @return The number of elements in the list
          */
         virtual int getNumberOfElements() = 0;
+		
+		virtual void pushElement(const std::string& str) = 0;
 
         /**
          * Gets an element at a certain index in the list.

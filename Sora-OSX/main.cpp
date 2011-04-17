@@ -35,6 +35,8 @@
 
 #include "Debug/SoraAutoProfile.h"
 
+#include "../AnimationEditor/aeMainWindow.h"
+
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();
 	sora::SoraCore* sora = sora::SoraCore::Instance();
@@ -94,7 +96,7 @@ int main(int argc, char* argv[]) {
 	*/
 	sora->setFPS(60.0);
 	
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new aeMainWindow);
 	sora->start();
 		
 	return 0;
