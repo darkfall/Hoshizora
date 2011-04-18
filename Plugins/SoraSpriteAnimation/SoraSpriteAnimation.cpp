@@ -208,10 +208,11 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
         if(!err) {
             uint32 texSize;
 			err = !pmfile->read(&texSize);
-            char texturePath[texSize+1];
+            char* texturePath = new char[texSize+1];
 			err = !pmfile->read(texturePath, texSize);
 			texturePath[texSize] = '\0';
 			panm->texturePath = texturePath;
+			delete texturePath;
 		}
 		
 		if(!err) {
@@ -220,10 +221,11 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
 		if(!err) {
 			uint32 size;
 			err = !pmfile->read(&size);
-			char name[size+1];
+			char* name = new char[size+1];
 			err = !pmfile->read(name, size);
 			name[size] = '\0';
 			panm->defaultName = name;
+			delete name;
 			
 			err = !pmfile->read(&panm->defaultNameHash);
 			panm->defaultId = panm->defaultNameHash;
@@ -238,11 +240,12 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
 				LANM_NODE node;
 				uint32 size;
 				err = !pmfile->read(&size);
-				char name[size+1];
+				char* name = new char[size+1];
 				err = !pmfile->read(name, size);
 				name[size] = '\0';
 				node.name = name;
-				
+				delete name;
+
 				err = !pmfile->read(&node.nameHash);
 				err = !pmfile->read(&node.anmFrame);
 				
@@ -323,10 +326,11 @@ int SoraSpriteAnimationPacker::unpackToFile(const char* pstrlanm) {
 	
 	uint32 texSize = cFileReadT<uint32> (pf, err);
 	if(!err) {
-		char tex[texSize+1];
+		char* tex = new char[texSize+1];
 		fread(tex, texSize, 1, pf);
 		tex[texSize] = '\0';
 		fprintf(pd, "%s\n", tex);
+		delete tex;
 	}
 	
 	
@@ -442,6 +446,7 @@ void SoraSpriteAnimation::toNextAnm() {
 
 void SoraSpriteAnimation::toCurrAnmNode() {
 	currNodeId = getNodeIdByAnmId(currId);
+	currAnmIndex = 0;
 	totalTime = anmNodes[currNodeId].anmFrame;
 	distTime = totalTime / anmNodes[currNodeId].texList.size();
 }
@@ -518,7 +523,10 @@ void SoraSpriteAnimation::init() {
     assert(texturePath.size() != 0);
     pAnmSprite = SORA->createSprite(s2ws(texturePath));
 	if(anmCount != 0 && anmNodes[0].texList.size() != 0)
-		pAnmSprite->setTextureRect(anmNodes[0].texList[0].tx, anmNodes[0].texList[0].ty, anmNodes[0].texList[0].tw, anmNodes[0].texList[0].th);
+		pAnmSprite->setTextureRect((float32)anmNodes[0].texList[0].tx, 
+									(float32)anmNodes[0].texList[0].ty, 
+									(float32)anmNodes[0].texList[0].tw, 
+									(float32)anmNodes[0].texList[0].th);
     if(pAnmSprite == NULL)
         throw SORA_EXCEPTION("error loading animation sprite");
 }
@@ -526,7 +534,7 @@ void SoraSpriteAnimation::init() {
 void SoraSpriteAnimation::render() {
     if(pAnmSprite) {
         LANM_TEX texRect = getCurrTex();
-        pAnmSprite->setTextureRect(texRect.tx, texRect.ty, texRect.tw, texRect.th);
+        pAnmSprite->setTextureRect((float32)texRect.tx, (float32)texRect.ty, (float32)texRect.tw, (float32)texRect.th);
         pAnmSprite->render(getPositionX(), getPositionY());
     }
 }
@@ -548,10 +556,10 @@ void SoraSpriteAnimation::render() {
 	void SoraSpriteAnimation::setAnchor(ANIMATION_SPRITE_ANCHOR anchor) {
 		switch (anchor) {
 			case ANCHOR_UPPER_LEFT: if(pAnmSprite) pAnmSprite->setCenter(0.f, 0.f); break;
-			case ANCHOR_UPPER_RIGHT: if(pAnmSprite) pAnmSprite->setCenter(pAnmSprite->getSpriteWidth(), 0.f); break;
-			case ANCHOR_LOWER_RIGHT: if(pAnmSprite) pAnmSprite->setCenter(pAnmSprite->getSpriteWidth(), pAnmSprite->getSpriteHeight()); break;
-			case ANCHOR_LOWER_LEFT: if(pAnmSprite) pAnmSprite->setCenter(0.f, pAnmSprite->getSpriteHeight()); break;
-			case ANCHOR_MIDDLE: if(pAnmSprite) pAnmSprite->setCenter(pAnmSprite->getSpriteWidth()/2, pAnmSprite->getSpriteHeight()/2); break;
+			case ANCHOR_UPPER_RIGHT: if(pAnmSprite) pAnmSprite->setCenter((float32)pAnmSprite->getSpriteWidth(), 0.f); break;
+			case ANCHOR_LOWER_RIGHT: if(pAnmSprite) pAnmSprite->setCenter((float32)pAnmSprite->getSpriteWidth(), (float32)pAnmSprite->getSpriteHeight()); break;
+			case ANCHOR_LOWER_LEFT: if(pAnmSprite) pAnmSprite->setCenter(0.f, (float32)pAnmSprite->getSpriteHeight()); break;
+			case ANCHOR_MIDDLE: if(pAnmSprite) pAnmSprite->setCenter((float32)pAnmSprite->getSpriteWidth()/2, (float32)pAnmSprite->getSpriteHeight()/2); break;
 		}
 	}
 	

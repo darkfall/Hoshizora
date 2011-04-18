@@ -94,6 +94,12 @@
     <Filter Include="Plugins\SoraLua\Luaplus">
       <UniqueIdentifier>{fb07bb90-3288-4b25-9add-4f15a736d658}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\SoraSpriteAnimation">
+      <UniqueIdentifier>{9b97a4b2-260b-4f7a-802a-9e6847e4b754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\AnimationEditor">
+      <UniqueIdentifier>{492b3ee2-973e-44c8-8ed0-677c5c584330}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -1431,6 +1437,15 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichansetup.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.h">
+      <Filter>Plugins\SoraSpriteAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AnimationEditor\aeMainWindow.h">
+      <Filter>源文件\AnimationEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AnimationEditor\editorWindow.h">
+      <Filter>源文件\AnimationEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -2014,6 +2029,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraLua\spriteWrapper.cpp">
       <Filter>Plugins\SoraLua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.cpp">
+      <Filter>Plugins\SoraSpriteAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\AnimationEditor\editorWindow.cpp">
+      <Filter>源文件\AnimationEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

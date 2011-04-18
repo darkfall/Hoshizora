@@ -30,6 +30,8 @@
 #include "../Sora-OSX/mainWindow.h"
 #include "vlcTestWindow.h"
 
+#include "../AnimationEditor/aeMainWindow.h"
+
 int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,
 					   LPSTR    lpCmdLine,
@@ -59,7 +61,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	sora->setFPS(60);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new aeMainWindow);
 	sora->start();
 		
 	return 0;
