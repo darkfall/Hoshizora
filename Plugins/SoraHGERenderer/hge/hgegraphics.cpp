@@ -348,7 +348,7 @@ HTARGET CALL HGE_Impl::Target_Create(int width, int height, bool zbuffer)
 	if(zbuffer)
 	{
 		if(FAILED(pD3DDevice->CreateDepthStencilSurface(width, height,
-			D3DFMT_D16, D3DMULTISAMPLE_NONE, 0, false, &pTarget->pDepth, NULL)))
+			D3DFMT_D16, D3DMULTISAMPLE_NONE, 0, TRUE, &pTarget->pDepth, NULL)))
 		{   
 			pTarget->pTex->Release();
 			_PostError("Can't create render target depth buffer");
