@@ -2303,7 +2303,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8DD76F620486A84900D96B5E /* lpack */ = {
+		8DD76F620486A84900D96B5E /* SoraPureCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "SoraPureCore" */;
 			buildPhases = (
@@ -2365,7 +2365,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				8DD76F620486A84900D96B5E /* lpack */,
+				8DD76F620486A84900D96B5E /* SoraPureCore */,
 			);
 		};
 /* End PBXProject section */

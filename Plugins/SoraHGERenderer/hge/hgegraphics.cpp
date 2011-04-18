@@ -143,6 +143,13 @@ bool CALL HGE_Impl::Gfx_BeginScene(HTARGET targ)
 			pSurf=pScreenSurf;
 			pDepth=pScreenDepth;
 		}
+        if(FAILED(pD3DDevice->SetDepthStencilSurface( pDepth )))
+        {
+            if(target) pSurf->Release();
+            _PostError(L"Gfx_BeginScene: Can't set DepthStencilSurface");
+            return false;
+        }
+        
 		if(FAILED(pD3DDevice->SetRenderTarget(0, pSurf)))
 		{
 			if(target) pSurf->Release();
