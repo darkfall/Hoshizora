@@ -1,0 +1,77 @@
+//
+//  SoraFMODSystem.h
+//  Sora
+//
+//  Created by Griffin Bu on 4/18/11.
+//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//
+
+#ifndef SORA_FMOD_SYSTEM_H_
+#define SORA_FMOD_SYSTEM_H_ 
+
+#include "fmod/fmod.hpp"
+#include "fmod/fmod_errors.h"
+
+#include "SoraSingleton.h"
+#include "debug/SoraInternalLogger.h"
+
+namespace sora {
+    
+    bool FMOD_ERROR_CHECK(FMOD_RESULT result) {
+        if(result != FMOD_OK) {
+            INT_LOG_HANDLE->logf("FMOD ERROR: error (%d) %s\n", result, FMOD_ErrorString(result));
+            return false;
+        }
+        return true;
+    }
+
+        
+    class SoraFMODSystem: public SoraSingleton<SoraFMODSystem> {
+        friend class SoraSingleton<SoraFMODSystem>;
+        
+    protected:
+        SoraFMODSystem(): pSystem(NULL) {
+        }
+        
+        ~SoraFMODSystem() {
+            if(pSystem) {
+                pSystem->close();
+                delete pSystem;
+                pSystem = 0;
+            }
+        }
+        
+    public:
+        FMOD::System* getSystem() const {
+            if(!pSystem)
+                throw SORA_EXCEPTION("No FMODSystem available");
+            return pSystem;
+        }
+        
+        bool init(int maxchannel, unsigned int initFlags, char*externalArgs) {
+            if(pSystem)
+                throw SORA_EXCEPTION("FMOD System already exists");
+            else {
+                FMOD_RESULT result = FMOD::System_Create(&pSystem);
+                if(FMOD_ERROR_CHECK(result)) {
+                    result = pSystem->init(maxchannel, initFlags, externalArgs);
+                    return FMOD_ERROR_CHECK(result);
+                }
+            }
+            return false;
+        }
+        
+        void update() {
+            if(pSystem)
+                pSystem->update();
+        }
+        
+    private:
+        FMOD::System* pSystem;
+    };
+    
+    
+} // namespace sora
+
+
+#endif

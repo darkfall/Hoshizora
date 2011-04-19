@@ -10,12 +10,15 @@
 #define SORA_FMOD_SOUND_FILE_H_
 
 #include "SoraSoundFile.h"
+#include "SoraFMODSystem.h"
 
 namespace sora {
     
     class SoraFMODMusicFile: public SoraMusicFile {
     public:
-        ~SoraMusicFile() {}
+        SoraFMODMusicFile(bool bStream);
+        SoraFMODMusicFile(const SoraWString& sFilePath, bool bStream);
+        ~SoraFMODMusicFile();
 		
 		int32 readFile(const SoraWString& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
@@ -33,27 +36,36 @@ namespace sora {
 		// 0.5 - 2.0
 		void setPitch(float32 pitch);
         
-		float32 getPan();
-		float32 getPitch();
-		float32 getVolume();
+		float32 getPan() const;
+		float32 getPitch() const;
+		float32 getVolume() const;
         
 		void setPosition(float32 x, float32 y, float32 z);
 		void getPosition(float32& x, float32& y, float32& z);
         
         void setMusicPosition(int32 pos);
-        int32 getMusicPosition();
+        int32 getMusicPosition() const;
 		
-		int32 getLength();
+		int32 getLength() const;
 		
-		void setRepeat(bool flag);
-		bool isRepeat();
-		bool isPlaying();
+		void setRepeat(int32 loopCount);
+		int32 isRepeat() const;
+		bool isPlaying() const;
         
+    private:
+        FMOD::System* pSystem;
+        FMOD::Sound* pSound;
+        FMOD::Channel* pChannel;
+        
+        bool bIsStream;
+        void *pSoundData;
     };
     
     class SoraFMODSoundEffectFile : public SoraSoundEffectFile {
     public:
-        ~SoraSoundEffectFile() {}
+        SoraFMODSoundEffectFile();
+        SoraFMODSoundEffectFile(const SoraWString& path);
+        ~SoraFMODSoundEffectFile();
 		
 		int32 readFile(const SoraWString& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
@@ -72,9 +84,21 @@ namespace sora {
 		// 0.5 - 2.0
 		void setPitch(float32 pitch);
         
-		float32 getPan();
-		float32 getPitch();
-		float32 getVolume();
+		float32 getPan() const;
+		float32 getPitch() const;
+		float32 getVolume() const;
+        
+        void setRepeat(int32 loopCount);
+		int32 isRepeat() const;
+		bool isPlaying() const;
+        
+    private:
+        FMOD::System* pSystem;
+        
+        FMOD::Sound* pSound;
+        FMOD::Channel* pChannel;
+        
+        void *pSoundData;
     };
     
 } // namespace sora

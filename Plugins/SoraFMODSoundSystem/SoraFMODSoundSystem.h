@@ -12,10 +12,14 @@
 #include "SoraPlatform.h"
 #include "SoraSoundSystem.h"
 
+#include "SoraFMODSystem.h"
+
 namespace sora {
     
     class SoraFMODSoundSystem: public SoraSoundSystem {
     public:
+        SoraFMODSoundSystem();
+        
         int32 init();
 		void shutdown();
 		
@@ -27,7 +31,10 @@ namespace sora {
          update sound device
          */
 		void update();
-    }
+        
+    private:
+        SoraFMODSystem* pfs;
+    };
 } // namespace sora
 
 

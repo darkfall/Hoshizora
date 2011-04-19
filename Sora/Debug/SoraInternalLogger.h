@@ -21,7 +21,28 @@ namespace sora {
 				vMssg.push_back("_DEBUG: "+mssg);
 				return *this;
 			}
+            
+            static void printf(const char* format, ...) {
+				va_list	ArgPtr;
+				char Message[1024] = {0};
+				va_start(ArgPtr, format);
+				vsprintf(Message, format, ArgPtr);
+				va_end(ArgPtr);
+				
+				printf("LOG: %s", Message);
+			}
 			
+            void logf(const char* format, ...) {
+				va_list	ArgPtr;
+				char Message[1024] = {0};
+				va_start(ArgPtr, format);
+				vsprintf(Message, format, ArgPtr);
+				va_end(ArgPtr);
+				
+				printf(Message);
+                vMssg.push_back(SoraString("LOG: ")+Message);
+			}
+            
 			static void debugPrintf(const char* format, ...) {
 #ifdef _DEBUG
 				va_list	ArgPtr;
@@ -42,7 +63,8 @@ namespace sora {
 				vsprintf(Message, format, ArgPtr);
 				va_end(ArgPtr);
 				
-				vMssg.push_back(SoraString("_DEBUG: ")+Message);
+				debugPrintf(Message);
+                vMssg.push_back(SoraString("_DEBUG: ")+Message);
 #endif
 			}
 			
@@ -68,6 +90,7 @@ namespace sora {
 
 		static SoraInternalLogger* LOG = SoraInternalLogger::Instance();
 #define INT_LOG SoraInternalLogger
+#define INT_LOG_HANDLE SoraInternalLogger::Instance()
 	//} // namespace internal
 } // namespace sora
 

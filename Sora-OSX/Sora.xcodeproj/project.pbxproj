@@ -1037,6 +1037,7 @@
 		88DD59FF12E040510081AE6C /* llexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = llexer.cpp; sourceTree = "<group>"; };
 		88DD5A0012E040510081AE6C /* llexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = llexer.h; sourceTree = "<group>"; };
 		88DD5A0212E0416A0081AE6C /* lMemFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lMemFile.h; sourceTree = "<group>"; };
+		88E6D98D135CBABD0038370C /* SoraFMODSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFMODSystem.h; sourceTree = "<group>"; };
 		88F3D53C1286376C001F52E9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		88F3D5D2128637A2001F52E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		88FABD84129F271900B6A1D8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1688,6 +1689,7 @@
 				8899C90D135C1732003C4932 /* SoraFMODSoundFile.h */,
 				8899C909135C172A003C4932 /* SoraFMODSoundSystem.cpp */,
 				8899C90A135C172A003C4932 /* SoraFMODSoundSystem.h */,
+				88E6D98D135CBABD0038370C /* SoraFMODSystem.h */,
 			);
 			name = SoraFMODSoundSystem;
 			path = ../Plugins/SoraFMODSoundSystem;

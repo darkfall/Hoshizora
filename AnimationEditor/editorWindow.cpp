@@ -16,8 +16,13 @@ using namespace sora;
 animationEditorWindow::animationEditorWindow() {
 	SoraGUIResponserMap::Instance()->registerResponser("AnimationPanel", this);
 	
+#ifdef OS_WIN32
 	fileopener.SetFilter(L"AnimationConfig(*.txt)\0*.txt\0\0");
 	fileopener.SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
+#elif defined(OS_OSX)
+    fileopener.SetFilter("txt;");
+    fileopener.SetDefaultPath(ws2s(SoraFileUtility::getApplicationPath()).c_str());
+#endif
 	pAnimatedSprite = 0;
 	pAvailableAnimations = 0;
 }

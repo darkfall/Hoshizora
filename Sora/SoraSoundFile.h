@@ -37,21 +37,21 @@ namespace sora {
 		// 0.5 - 2.0
 		virtual void setPitch(float32 pitch) = 0;
 
-		virtual float32 getPan() = 0;
-		virtual float32 getPitch() = 0;
-		virtual float32 getVolume() = 0;
+		virtual float32 getPan() const = 0;
+		virtual float32 getPitch() const = 0;
+		virtual float32 getVolume() const = 0;
 
 		virtual void setPosition(float32 x, float32 y, float32 z) = 0;
 		virtual void getPosition(float32& x, float32& y, float32& z) = 0;
         
         virtual void setMusicPosition(int32 pos) = 0;
-        virtual int32 getMusicPosition() = 0;
+        virtual int32 getMusicPosition() const = 0;
 		
-		virtual int32 getLength() = 0;
+		virtual int32 getLength() const = 0;
 		
-		virtual void setRepeat(bool flag) = 0;
-		virtual bool isRepeat() = 0;
-		virtual bool isPlaying() = 0;
+		virtual void setRepeat(int32 flag) = 0;
+		virtual int32 isRepeat() const = 0;
+		virtual bool isPlaying() const = 0;
 	};
 
 	class SoraSoundEffectFile: public SoraFileBase {
@@ -75,9 +75,13 @@ namespace sora {
 		// 0.5 - 2.0
 		virtual void setPitch(float32 pitch) = 0;
 
-		virtual float32 getPan() = 0;
-		virtual float32 getPitch() = 0;
-		virtual float32 getVolume() = 0;
+		virtual float32 getPan() const = 0;
+		virtual float32 getPitch() const = 0;
+		virtual float32 getVolume() const = 0;
+        
+        virtual void setRepeat(int32 flag) = 0;
+		virtual int32 isRepeat() const = 0;
+		virtual bool isPlaying() const = 0;
 	};
 
 
