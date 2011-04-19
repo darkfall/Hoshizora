@@ -70,7 +70,7 @@ namespace gcn
 
     void  SoraGUIInput::_pollInput()
     {
-        SoraKeyEvent ie;
+        sora::SoraKeyEvent ie;
     
         while(sora->getKeyEvent(ie)) 
 		  pollKeyInput(ie);
@@ -188,7 +188,7 @@ namespace gcn
         mMiddleMouseButtonDown  = centerBtn;
     }
 
-    void  SoraGUIInput::pollKeyInput(SoraKeyEvent &ki)
+    void  SoraGUIInput::pollKeyInput(sora::SoraKeyEvent &ki)
     {
         if (ki.type != SORA_INPUT_KEYDOWN 
             && ki.type != SORA_INPUT_KEYUP )

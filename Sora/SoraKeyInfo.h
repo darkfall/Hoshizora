@@ -427,6 +427,7 @@
 
 #endif
 
+namespace sora {
 
 typedef struct tagSoraKeyEvent {
 	int		type;			// event type
@@ -437,5 +438,7 @@ typedef struct tagSoraKeyEvent {
 	float	x;				// mouse cursor x-coordinate
 	float	y;				// mouse cursor y-coordinate
 } SoraKeyEvent;
+    
+}
 
 #endif

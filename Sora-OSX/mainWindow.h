@@ -18,6 +18,8 @@
 #include "SoraLua/SoraLuaObject.h"
 
 #include "SoraSpriteAnimation/SoraSpriteAnimation.h"
+#include "SoraSoundFile.h"
+
 
 class mainWindow: public sora::SoraWindowInfoBase, public sora::SoraEventHandler {
 public:
@@ -42,6 +44,7 @@ public:
 	bool hideMouse() { return false; }
 	
 	void onMenuClick(const menuEvent* mev);
+    void onSoundEvent(const sora::SoraPlaybackEvent* sev);
 	
 private:
     void loadShader();

@@ -340,7 +340,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>889D9CA4135AE9A500B24C14</string>
+										<string>881A084A135E2EC60040F6FC</string>
 										<key>history</key>
 										<array>
 											<string>887022D61346AB7F00AE8DD7</string>
@@ -401,7 +401,7 @@
 											<string>889D9CA0135AE9A500B24C14</string>
 											<string>889D9CA1135AE9A500B24C14</string>
 											<string>889D9CA2135AE9A500B24C14</string>
-											<string>889D9CA3135AE9A500B24C14</string>
+											<string>889D9CA4135AE9A500B24C14</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -459,9 +459,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>889D9CA5135AE9A500B24C14</string>
+				<string>881A084B135E2EC60040F6FC</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>889D9CA6135AE9A500B24C14</string>
+				<string>881A084C135E2EC60040F6FC</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -599,9 +599,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>889D9CB0135AE9A500B24C14</string>
-		<string>889D9CB1135AE9A500B24C14</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>887022D01346AB4300AE8DD7</string>
 		<string>88BFA125135AB23D00BB8E70</string>
 		<string>1CD10A99069EF8BA00B06720</string>
@@ -685,7 +682,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>887022D01346AB4300AE8DD7</string>
-				<string>889D9CA7135AE9A500B24C14</string>
+				<string>881A084D135E2EC60040F6FC</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -729,8 +726,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {396, 269}}</string>
-											<string>{{396, 0}, {473, 269}}</string>
+											<string>{{0, 0}, {396, 274}}</string>
+											<string>{{396, 0}, {473, 274}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -745,8 +742,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {869, 269}}</string>
-											<string>{{0, 269}, {869, 259}}</string>
+											<string>{{0, 0}, {869, 274}}</string>
+											<string>{{0, 274}, {869, 254}}</string>
 										</array>
 									</dict>
 								</dict>
@@ -779,7 +776,7 @@
 										<real>169</real>
 									</array>
 									<key>Frame</key>
-									<string>{{396, 0}, {473, 269}}</string>
+									<string>{{396, 0}, {473, 274}}</string>
 									<key>RubberWindowFrame</key>
 									<string>21 286 869 569 0 0 1440 878 </string>
 								</dict>
@@ -807,13 +804,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>889D9CA8135AE9A500B24C14</string>
+				<string>881A084E135E2EC60040F6FC</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>889D9CA9135AE9A500B24C14</string>
-				<string>889D9CAA135AE9A500B24C14</string>
-				<string>889D9CAB135AE9A500B24C14</string>
-				<string>889D9CAC135AE9A500B24C14</string>
-				<string>889D9CAD135AE9A500B24C14</string>
+				<string>881A084F135E2EC60040F6FC</string>
+				<string>881A0850135E2EC60040F6FC</string>
+				<string>881A0851135E2EC60040F6FC</string>
+				<string>881A0852135E2EC60040F6FC</string>
+				<string>881A0853135E2EC60040F6FC</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -1056,8 +1053,6 @@
 							<string>0pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXCVSModuleFilterTypeKey</key>
@@ -1095,7 +1090,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>88BFA125135AB23D00BB8E70</string>
-				<string>889D9CAF135AE9A500B24C14</string>
+				<string>881A0854135E2EC60040F6FC</string>
 				<string>1C78EAB2065D492600B07095</string>
 				<string>1CD052920623707200166675</string>
 			</array>

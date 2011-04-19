@@ -12,6 +12,27 @@
 
 namespace sora {
     
+    static FMOD_RESULT myChannelCallback(FMOD_CHANNEL *channel, FMOD_CHANNEL_CALLBACKTYPE type, void *commanddata1, void *commanddata2) {
+        SoraFMODMusicFile* pMusicFile = NULL;
+        FMOD::Channel* pChannel = (FMOD::Channel*)channel;
+        if(pChannel) {
+            void* pmyData;
+            pChannel->getUserData(&pmyData);
+            if(pmyData)
+                pMusicFile = (SoraFMODMusicFile*)pmyData;
+        }
+        
+        if(!pMusicFile) {
+            INT_LOG_HANDLE->logf("error converting event data object to SoraFMODMusicFile");
+            return FMOD_ERR_EVENT_FAILED;
+        }
+        
+        if(type == FMOD_CHANNEL_CALLBACKTYPE_END) {
+            pMusicFile->publishEvent(SORAPB_EV_PLAY_ENDED);
+        }
+        return FMOD_OK;
+    }
+    
     SoraFMODMusicFile::SoraFMODMusicFile(bool bStream) {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
@@ -90,23 +111,44 @@ namespace sora {
     
     void SoraFMODMusicFile::play() {
         if(pSound) {
-            pSystem->playSound(FMOD_CHANNEL_FREE, pSound, pChannel==NULL?false:true, &pChannel);
+            if(pChannel)
+                pChannel->stop();
+            FMOD_RESULT result = pSystem->playSound(FMOD_CHANNEL_FREE, pSound, pChannel==NULL?false:true, &pChannel);
+            if(FMOD_ERROR_CHECK(result)) {
+                publishEvent(SORAPB_EV_PLAY_STARTED);
+                
+                // register FMOD Channel Callback to get SOUND_ENDED event
+                pChannel->setUserData((void*)this);
+                pChannel->setCallback(myChannelCallback);
+                pChannel->setPaused(false);
+            }
         }
     }
     
     void SoraFMODMusicFile::stop() {
-        if(pChannel)
-            pChannel->stop();
+        if(pChannel) {
+            publishEvent(SORAPB_EV_PLAY_STOPPED);
+            FMOD_RESULT result = pChannel->stop();
+            FMOD_ERROR_CHECK(result);
+        }
     }
     
     void SoraFMODMusicFile::pause() {
-        if(pChannel)
-            pChannel->setPaused(true);
+        if(pChannel) {
+            FMOD_RESULT result = pChannel->setPaused(true);
+            if(FMOD_ERROR_CHECK(result)) {
+                publishEvent(SORAPB_EV_PLAY_PAUSED);
+            }
+        }
     }
     
     void SoraFMODMusicFile::resume() {
-        if(pChannel)
-            pChannel->setPaused(false);
+        if(pChannel) {
+            FMOD_RESULT result = pChannel->setPaused(false);
+            if(FMOD_ERROR_CHECK(result)) {
+                publishEvent(SORAPB_EV_PLAY_RESUMED);
+            }
+        }
     }
     
     void SoraFMODMusicFile::setVolume(float32 vol) {
@@ -274,13 +316,22 @@ namespace sora {
     
     void SoraFMODSoundEffectFile::play() {
         if(pSound) {
-            pSystem->playSound(FMOD_CHANNEL_FREE, pSound, pChannel==NULL?false:true, &pChannel);
+            FMOD_RESULT result = pSystem->playSound(FMOD_CHANNEL_FREE, pSound, pChannel==NULL?false:true, &pChannel);
+            if(FMOD_ERROR_CHECK(result)) {
+                publishEvent(SORAPB_EV_PLAY_STARTED);
+                pChannel->setUserData((void*)this);
+                pChannel->setCallback(myChannelCallback);
+            }
         }
     }
     
     void SoraFMODSoundEffectFile::stop() {
-        if(pChannel)
-            pChannel->stop();
+        if(pChannel) {
+            FMOD_RESULT result = pChannel->stop();
+            if(FMOD_ERROR_CHECK(result)) {
+                publishEvent(SORAPB_EV_PLAY_STOPPED);
+            }
+        }
     }
     
     void SoraFMODSoundEffectFile::setVolume(float32 vol) {
