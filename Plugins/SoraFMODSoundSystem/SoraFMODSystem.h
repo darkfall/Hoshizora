@@ -41,8 +41,6 @@ namespace sora {
         ~SoraFMODSystem() {
             if(pSystem) {
                 pSystem->close();
-                delete pSystem;
-                pSystem = 0;
             }
         }
         

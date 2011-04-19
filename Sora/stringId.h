@@ -24,6 +24,15 @@ namespace sora {
 		friend class SoraSingleton<SoraStringManager>;
 		
 	public:
+        // explicit add strings, no hash implied, be care
+        inline void addString(const SoraString& str, stringId sid) {
+            strings[sid] = s2ws(str);
+        }
+        
+        inline void addString(const SoraWString& str, stringId sid) {
+            strings[sid] = str;
+        }
+        
 		inline stringId getStringId(const SoraString& str) {
 			stringId sid = crc32(str);
 			if(strings.find(sid) == strings.end()) {
@@ -32,7 +41,7 @@ namespace sora {
 			return sid;
 		}
 		
-		inline stringId getStringIdNoCache(const SoraString& str) {
+		static stringId getStringIdNoCache(const SoraString& str) {
 			return crc32(str);
 		}
 		
@@ -45,7 +54,7 @@ namespace sora {
 			return sid;
 		}
 		
-		inline stringId getStringIdNoCache(const SoraWString& str) {
+		static stringId getStringIdNoCache(const SoraWString& str) {
 			return crc32(str);
 		}
 		
@@ -76,7 +85,7 @@ namespace sora {
 		STR_MAP strings;
 	};
 	
-	static SoraStringManager* SORA_STR_MANAGER = SoraStringManager::Instance();
+    #define SORA_STR_MANAGER SoraStringManager::Instance()
 	#define str2id(str) SORA_STR_MANAGER->getStringId(str)
 	#define id2strw(id) SORA_STR_MANAGER->getStringByIdW(id)
 	#define id2str(id) SORA_STR_MANAGER->getStringById(id)

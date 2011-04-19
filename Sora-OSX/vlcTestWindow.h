@@ -51,7 +51,6 @@ public:
 private:
     void _loadGUI();
     
-    sora::mpMoviePlayer* mpPlayer;
     sora::SoraVlcMoviePlayer* moviePlayer;
     
     sora::SoraLuaObject luaTest;

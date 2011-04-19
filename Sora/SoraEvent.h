@@ -10,12 +10,22 @@
 
 namespace sora {
 
+    class SoraEventHandler;
+    
 	class SoraEvent: public SoraNamedObject {
 	protected:
 		virtual ~SoraEvent() {};
-		
+        
+    public:
+        SoraEvent(): pEventSource(NULL) {}
+
+        void setSource(SoraEventHandler* source) { pEventSource = source; }
+        SoraEventHandler* getSource() const { return pEventSource; }
 		// base event not serializable
 		virtual bool serializable() { return false; }
+        
+    private:
+        SoraEventHandler* pEventSource;
 	};
 
 	class SoraHandlerFunctionBase {

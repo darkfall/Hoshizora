@@ -771,8 +771,9 @@ namespace sora{
 	}
 
 	ulong32 SoraOGLRenderer::getTargetTexture(ulong32 t) {
-        assert(t != NULL);
 		SoraRenderTargetOG* pt = (SoraRenderTargetOG*)t;
+        assert(pt != NULL);
+
 		return pt->getTexture();
 	}
 

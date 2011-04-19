@@ -3,6 +3,10 @@
 
 #include "SoraPlatform.h"
 #include "SoraFileBase.h"
+#include "SoraEvent.h"
+
+#include "SoraConstantStrings.h"
+#include "SoraPlaybackEvent.h"
 
 namespace sora {
 	
@@ -16,8 +20,8 @@ namespace sora {
 		SORASOUND_FAILED_OPEN_SOUND = -2,
 		SORASOUND_FAILED_OPEN_MEMORY_FILE = -3,
 	};
-
-	class SoraMusicFile: public SoraFileBase {
+    
+	class SoraMusicFile: public SoraFileBase, public SoraPlaybackEventHandler {
 	public:
 		virtual ~SoraMusicFile() {}
 		
@@ -54,7 +58,7 @@ namespace sora {
 		virtual bool isPlaying() const = 0;
 	};
 
-	class SoraSoundEffectFile: public SoraFileBase {
+	class SoraSoundEffectFile: public SoraFileBase, public SoraPlaybackEventHandler {
 	public:
 		virtual ~SoraSoundEffectFile() {}
 		

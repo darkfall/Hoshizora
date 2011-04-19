@@ -9,12 +9,12 @@
 #ifndef SORA_MOVIE_PLAYER_H_
 #define SORA_MOVIE_PLAYER_H_
 
-
 #include "SoraPlatform.h"
+#include "SoraPlaybackEvent.h"
 
 namespace sora {
 
-    class SoraMoviePlayer {
+    class SoraMoviePlayer: public SoraPlaybackEventHandler {
     public:
         virtual ~SoraMoviePlayer() {}
         
@@ -51,6 +51,7 @@ namespace sora {
         virtual void* getPixelData() const { return NULL; }
         virtual uint32 getFrameCount() const { return 0; }
         virtual bool frameChanged() const { return false; }
+    
     };
 } // namespace sora
 

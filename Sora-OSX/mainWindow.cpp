@@ -52,24 +52,32 @@ static float32 process = 0.0;
 bool mainWindow::updateFunc() {
 	mainScenes->update(sora->getDelta());
 	
-	if(sora->keyDown(SORA_KEY_ESCAPE))
-		sora->shutDown();
-	if(sora->keyDown(SORA_KEY_F))
-		sora->setFullscreen(false);
     
-    if(sora->keyDown(SORA_KEY_1))
-       sora->snapshot("test.bmp");
+    sora::SoraKeyEvent kev;
+    if(sora->getKeyEvent(kev)) {
+        if(kev.key == SORA_KEY_ESCAPE && kev.type == SORA_INPUT_KEYDOWN)
+            sora->shutDown();
     
-    if(sora->keyDown(SORA_KEY_Q)) {
-        pSpr->detachShader(shader);
-        loadShader();
-        process = 0.0;
+        if(kev.key == SORA_KEY_1 && kev.type == SORA_INPUT_KEYDOWN) {
+            bgm->stop();
+        }
+    
+        if(kev.key == SORA_KEY_2 && kev.type == SORA_INPUT_KEYDOWN) {
+            bgm->pause();
+        }
+        if(kev.key == SORA_KEY_3 && kev.type == SORA_INPUT_KEYDOWN) {
+            bgm->resume();
+        }
+        if(kev.key == SORA_KEY_4 && kev.type == SORA_INPUT_KEYDOWN) {
+            bgm->play();
+        }
+    
+        if(kev.key == SORA_KEY_Q && kev.type == SORA_INPUT_KEYDOWN) {
+            pSpr->detachShader(shader);
+            loadShader();
+            process = 0.0;
+        }
     }
-    
-    float32 ppp;
-//    shader->getParameterfv("process", &ppp, 1);
-  //  printf("%f\n", ppp);
-
 	
     return false;
 }
@@ -98,7 +106,7 @@ bool mainWindow::renderFunc() {
 //    shader->setParameterfv("process", &process, 1);
  //   shader->setParameterfv("lightPos", lpos, 2);
 	
-	pFont->print(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f time: %f", sora::SORA->getFPS(), sora::SORA->getDelta());
+	pFont->print(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f time: %f\0\0", sora::SORA->getFPS(), sora::SORA->getDelta());
 
 	sora->endScene();
     
@@ -146,9 +154,17 @@ void mainWindow::init() {
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
 //	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
     
- 
-	bgm = sora::SORA->createMusicFile(L"01 ÓûÉî¤­ë‘»ê.ogg", false);
+    registerEventFunc(this, &mainWindow::onSoundEvent);
+
+	bgm = sora::SORA->createMusicFile(L"01.ogg", false);
+    bgm->registerEventHandler(this);
+
 	bgm->play();
+}
+
+void mainWindow::onSoundEvent(const sora::SoraPlaybackEvent* event) {
+    if(event->getSource() == bgm)
+        sora::INT_LOG::debugPrintf("RECEIVED SOUND EVENT: evid: %d, evid: %lu, evname: %s1\n", event->getEventType(), event->getName(), sora::id2str(event->getName()));
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

@@ -55,7 +55,7 @@ namespace gcn
          *
          * @param ki the hge input event to handle.
          */
-        void pollKeyInput(SoraKeyEvent &ki);
+        void pollKeyInput(sora::SoraKeyEvent &ki);
     
         /**
          * Handles mouse input. The function is called by _pollInput.

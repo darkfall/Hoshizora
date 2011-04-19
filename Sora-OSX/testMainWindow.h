@@ -15,8 +15,6 @@
 
 #include "SoraParticleSystem/SoraParticleSystem.h"
 
-#include "SoraFMODSound/fmod/fmod.hpp"
-
 #define _DEBUG
 
 #include "lScene.h"

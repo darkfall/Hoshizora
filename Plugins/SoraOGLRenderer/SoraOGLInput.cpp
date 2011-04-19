@@ -65,8 +65,8 @@ namespace sora {
 
 	int32 SoraOGLInput::getKeyState(int32 key) {
 		if(key >= GLFW_MOUSE_BUTTON_1 && key <= GLFW_MOUSE_BUTTON_8)
-			return (glfwGetMouseButton(key)==GLFW_PRESS);
-		return glfwGetKey((key))==GLFW_PRESS;
+			return (glfwGetMouseButton(key)==GLFW_PRESS)?SORA_INPUT_KEYDOWN:SORA_INPUT_KEYUP;
+		return glfwGetKey((key))==GLFW_PRESS?SORA_INPUT_KEYDOWN:SORA_INPUT_KEYUP;
 	}
 	
 	char* SoraOGLInput::getKeyName(int32 key) {

@@ -39,10 +39,25 @@ namespace sora {
         SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
 
         switch (ev->type) {
-            case libvlc_MediaPlayerStopped: ctx->bStopped = true; ctx->bPlaying = false; ctx->pPlayer->stop(); break;
-            case libvlc_MediaPlayerPaused: ctx->bPaused = true; ctx->bPlaying = false; break;
-            case libvlc_MediaPlayerPlaying: ctx->bPlaying = true; break;
-            case libvlc_MediaPlayerEndReached: ctx->bPlaying = false; ctx->bStopped = true; break;
+            case libvlc_MediaPlayerStopped: 
+                ctx->bStopped = true; 
+                ctx->bPlaying = false; 
+                ctx->pPlayer->publishEvent(SORAPB_EV_PLAY_STOPPED);
+                break;
+            case libvlc_MediaPlayerPaused: 
+                ctx->bPaused = true; 
+                ctx->bPlaying = false;
+                ctx->pPlayer->publishEvent(SORAPB_EV_PLAY_PAUSED);
+                break;
+            case libvlc_MediaPlayerPlaying: 
+                ctx->pPlayer->publishEvent(ctx->bPaused?SORAPB_EV_PLAY_RESUMED:SORAPB_EV_PLAY_STARTED);
+                ctx->bPlaying = true; 
+                break;
+            case libvlc_MediaPlayerEndReached: 
+                ctx->bPlaying = false; 
+                ctx->bStopped = true; 
+                ctx->pPlayer->publishEvent(SORAPB_EV_PLAY_ENDED);
+                break;
         }
     }
     
@@ -109,7 +124,6 @@ namespace sora {
     void SoraVlcMoviePlayer::play() {
         libvlc_media_player_play(mp);
     }
-    
     
     void SoraVlcMoviePlayer::resume() {
         libvlc_media_player_set_pause(mp, 0);

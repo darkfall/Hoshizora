@@ -3,6 +3,7 @@
 #include "SoraTextureMap.h"
 #include "SoraFileUtility.h"
 #include "SoraEventManager.h"
+#include "SoraConstantStrings.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
@@ -55,6 +56,7 @@ namespace sora {
 		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
 		
 		setRandomSeed(rand());
+        initConstantStrings();
 	}
 
 	void SoraCore::_initializeTimer() {

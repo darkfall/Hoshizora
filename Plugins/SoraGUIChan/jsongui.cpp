@@ -38,7 +38,7 @@ namespace sora {
             parseWidget(rootValue, NULL);
             return true;
         }
-		INT_LOG::debugPrintf("%s", reader.getFormatedErrorMessages().c_str());
+		INT_LOG_HANDLE->logf("%s", reader.getFormatedErrorMessages().c_str());
         return false;
     }
     
@@ -114,7 +114,6 @@ namespace sora {
         VALUE_NAMES::iterator itMember = members.begin();
         while(itMember != members.end()) {
             const char* type = itMember->c_str();
-			INT_LOG::debugPrintf("parsing %s\n", type);
 
             bool isObjectValue = val[type].isObject();
             if(isObjectValue) {
