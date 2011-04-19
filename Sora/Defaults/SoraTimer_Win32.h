@@ -107,7 +107,8 @@ namespace sora {
 		}
 
 	private:
-		int32 desiredFPS, oldTimeStamp;
+		float32 desiredFPS;
+		int32 oldTimeStamp;
 		float32 fDeltaTime, fTime, fFPS;
 		int32 nFrameCounter;
 		float32 fTimeScale;

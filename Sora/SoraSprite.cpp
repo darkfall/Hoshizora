@@ -40,8 +40,8 @@ namespace sora {
 		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
 		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
 		
-        sprWidth = texture!=NULL?texture->mOriginalWidth:1.f;
-        sprHeight = texture!=NULL?texture->mOriginalHeight:1.f;
+        sprWidth = texture!=NULL?texture->mOriginalWidth:1;
+        sprHeight = texture!=NULL?texture->mOriginalHeight:1;
     }
 
 	SoraSprite::~SoraSprite() {
@@ -59,7 +59,7 @@ namespace sora {
         }
         
 		SoraTexture* ptex = (SoraTexture*)tex;
-        _init(ptex, 0.f, 0.f, ptex->mTextureWidth, ptex->mTextureHeight);
+        _init(ptex, 0.f, 0.f, (float32)ptex->mTextureWidth, (float32)ptex->mTextureHeight);
 	}
 
 	void SoraSprite::_initDefaults() {
@@ -108,8 +108,8 @@ namespace sora {
 		quad.v[2].tx=tx2; quad.v[2].ty=ty2; 
 		quad.v[3].tx=tx1; quad.v[3].ty=ty2; 
 		
-        sprWidth = width;
-        sprHeight = height;
+        sprWidth = (int32)width;
+        sprHeight = (int32)height;
 	}
 
 	

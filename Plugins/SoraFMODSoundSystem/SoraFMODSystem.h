@@ -15,9 +15,14 @@
 #include "SoraSingleton.h"
 #include "debug/SoraInternalLogger.h"
 
+#include "SoraPlatform.h"
+#ifdef OS_WIN32
+#pragma comment(lib, "fmodex_vc.lib")
+#endif
+
 namespace sora {
     
-    bool FMOD_ERROR_CHECK(FMOD_RESULT result) {
+    static bool FMOD_ERROR_CHECK(FMOD_RESULT result) {
         if(result != FMOD_OK) {
             INT_LOG_HANDLE->logf("FMOD ERROR: error (%d) %s\n", result, FMOD_ErrorString(result));
             return false;

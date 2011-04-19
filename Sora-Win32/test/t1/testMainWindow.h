@@ -15,9 +15,6 @@
 
 #include "SoraParticleSystem/SoraParticleSystem.h"
 
-#include "SoraFMODSound/fmod/fmod.hpp"
-
-
 class testMainWindow: public sora::SoraWindowInfoBase {
 	
 	bool updateFunc();

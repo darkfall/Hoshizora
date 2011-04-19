@@ -88,8 +88,7 @@ bool mainWindow::renderFunc() {
    // pSpr->render(0.f, 0.f);
 
     pSpr->render(0.f, 0.f);
-	pAnimatedSprite->update(sora::SORA->getDelta());
-	pAnimatedSprite->render();
+
 //	pSpr->setRotation(0.5);
     
 	lpos[0] = 0.5f + 0.3f*sinf(sora::DGR_RAD(sora::SORA->getFrameCount()));
@@ -147,13 +146,9 @@ void mainWindow::init() {
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
 //	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
     
-    sora::SoraSpriteAnimationPacker packer;
-    packer.pack("patchouli.txt", "patchouli.anm");
-    pAnimatedSprite = packer.unpack("patchouli.anm");
-    assert(pAnimatedSprite != 0);
-	pAnimatedSprite->play();
-	pAnimatedSprite->setPosition(100.f, 100.f);
-	packer.unpackToFile("patchouli.anm");
+ 
+	bgm = sora::SORA->createMusicFile(L"01 ÓûÉî¤­ë‘»ê.ogg", false);
+	bgm->play();
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

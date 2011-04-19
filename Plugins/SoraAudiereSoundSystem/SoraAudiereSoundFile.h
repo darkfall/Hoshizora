@@ -30,21 +30,21 @@ namespace sora {
 		// 0.5 - 2.0
 		void setPitch(float32 pitch);
 
-		float32 getPan();
-		float32 getPitch();
-		float32 getVolume();
+		float32 getPan() const;
+		float32 getPitch() const;
+		float32 getVolume() const;
 
 		void setPosition(float32 x, float32 y, float32 z);
         void getPosition(float32& x, float32& y, float32& z);
         
         void setMusicPosition(int32 pos);
-        int32 getMusicPosition();
+        int32 getMusicPosition() const;
 
-		int32 getLength();
+		int32 getLength() const;
 		
-		void setRepeat(bool flag);
-		bool isRepeat();
-		bool isPlaying();
+		void setRepeat(int32 flag);
+		int32 isRepeat() const;
+		bool isPlaying() const;
 
 	private:
 		inline void _parseName(const SoraWString& path);
@@ -77,9 +77,14 @@ namespace sora {
 		// 0.5 - 2.0
 		void setPitch(float32 pitch);
 
-		float32 getPan();
-		float32 getPitch();
-		float32 getVolume();
+		float32 getPan() const;
+		float32 getPitch() const;
+		float32 getVolume() const;
+
+		// todo 
+		void setRepeat(int32 flag) {}
+		int32 isRepeat() const { return 0; }
+		bool isPlaying() const { return false; }
 
 	private:
         inline void _parseName(const SoraWString& path);

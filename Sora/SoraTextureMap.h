@@ -73,6 +73,7 @@ namespace sora {
 		void del(HSORATEXTURE tex) {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
+				texRefs.erase(texRefs.find(p->second));
 				texMap.erase(texMap.find(p->second));
 				texMapRv.erase(p);
 			}
@@ -87,11 +88,13 @@ namespace sora {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
 				texRefs[p->second]--;
+				
+				INT_LOG::debugPrintf("tex: %lu, ref: %d\n", tex, texRefs[p->second]);
 				if(texRefs[p->second] == 0) {
 					SORA->releaseTexture(p->first);
+					remove(tex);
 				}
-				printf("tex: %lu, ref: %d\n", tex, texRefs[p->second]);
-				remove(tex);
+			
 			}
 		}
 		

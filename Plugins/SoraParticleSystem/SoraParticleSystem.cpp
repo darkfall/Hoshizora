@@ -13,13 +13,15 @@ namespace sora {
 	}
 
 	SoraParticleSystem::SoraParticleSystem() {
-		bActive = false;
 		fCurrEmitTime = 0.f;
 		fToEmitTime = 0.f;
-		z = 0.5f;
+		bActive = false;
 		bRotate3v = false;
 		fMaxDistance = MAX_DISTANCE;
 		core = SoraCore::Instance();
+
+		z = 0.f;
+		bZDepth = false;
 	}
 
 	SoraParticleSystem::SoraParticleSystem(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
@@ -46,6 +48,22 @@ namespace sora {
 		}
 		
 		init();
+	}
+
+	void SoraParticleSystem::setZDepthEnabled(bool flag) {
+		bZDepth = flag;
+	}
+
+	void SoraParticleSystem::setZDepth(float32 depth) {
+		z = depth;
+	}
+
+	bool SoraParticleSystem::isZDepthEnabled() const {
+		return bZDepth;
+	}
+
+	float32 SoraParticleSystem::getZDepth() const {
+		return z;
 	}
 
 	void SoraParticleSystem::emit(const SoraWString& str, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
@@ -87,6 +105,7 @@ namespace sora {
 		bRotate3v = false;
 		fMaxDistance = MAX_DISTANCE;
 		
+		bZDepth = false;
 		z = 0.f;
 	}
 
@@ -214,7 +233,12 @@ namespace sora {
 		pSprite->setTextureRect(pheader.texX, pheader.texY, pheader.texW, pheader.texH);
 		pSprite->setCenter(pheader.texW/2, pheader.texH/2);
 
-	//	pSprite->setZ( p->position.z / fMaxDistance );
+		if(bZDepth) {
+			pSprite->setBlendMode(pSprite->getBlendMode() & BLEND_ZWRITE);
+			pSprite->setZ( z );
+		} else {
+			pSprite->setBlendMode(pSprite->getBlendMode() & BLEND_NOZWRITE);
+		}
 		if(particles.size() == 0)
 			return;
 		for(PARTICLES::iterator p=particles.begin(); p!=particles.end(); ++p) {

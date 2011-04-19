@@ -62,6 +62,8 @@ private:
 	sora::SoraFont* pFont;
                     
     sora::SoraSpriteAnimation* pAnimatedSprite;
+
+	sora::SoraMusicFile* bgm;
 };
 
 #endif

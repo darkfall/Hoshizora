@@ -127,6 +127,12 @@ namespace sora {
 		SoraParticleSystem(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		SoraParticleSystem(const SoraWString& script, SoraSprite* pSpr, float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		 
+		// enable z depth buffer when rendering particle
+		void setZDepthEnabled(bool flag);
+		void setZDepth(float32 z);
+		bool isZDepthEnabled() const;
+		float32 getZDepth() const;
+
 		void emit(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		void emit(const SoraWString& script, SoraSprite* pSpr, float32 x=0.f, float32 y=0.f, float32 z=0.f);
 
@@ -183,6 +189,7 @@ namespace sora {
 		float32 fMaxDistance;
 
 		bool bActive;
+		bool bZDepth;
 		float32 z;
 		
 		bool bRotate3v;

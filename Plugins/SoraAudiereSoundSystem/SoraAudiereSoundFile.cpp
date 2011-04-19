@@ -20,6 +20,7 @@ namespace sora {
 				sound = OpenSound(device, pSoundFile, bIsStream);
 				if(!sound) { return SORASOUND_FAILED_OPEN_SOUND; }
 				set_open(true);
+				SORA->freeResourceFile(ptr);
 				return SORASOUND_SUCCESS;
 			}
 
@@ -43,7 +44,7 @@ namespace sora {
 			if(is_open()) {
 				//sound->unref();
 				sound = NULL;
-				set_open(true);
+				set_open(false);
 			}
 		}
 
@@ -78,16 +79,16 @@ namespace sora {
 			if(is_open()) sound->setPitchShift(pitch);
 		}
 
-		float32 SoraAudiereMusicFile::getPan() { 
+		float32 SoraAudiereMusicFile::getPan() const { 
 			if(is_open()) return sound->getPan();
 			return 0.f;
 		}
-		float32 SoraAudiereMusicFile::getPitch() { 
+		float32 SoraAudiereMusicFile::getPitch() const { 
 			if(is_open()) return sound->getPitchShift();
 			return 0.f;
 		}
 
-		float32 SoraAudiereMusicFile::getVolume() {
+		float32 SoraAudiereMusicFile::getVolume() const {
 			if(is_open()) return sound->getVolume();
 			return 0.f;
 		}
@@ -105,25 +106,25 @@ namespace sora {
         if(is_open()) sound->setPosition(pos);
     }
     
-    int32 SoraAudiereMusicFile::getMusicPosition() {
+    int32 SoraAudiereMusicFile::getMusicPosition() const {
         if(is_open()) return sound->getPosition();
         return 0;
     }
 
-		int32 SoraAudiereMusicFile::getLength() { 
+		int32 SoraAudiereMusicFile::getLength() const { 
 			if(is_open()) return sound->getLength();
 			return 0;
 		}
 		
-		void SoraAudiereMusicFile::setRepeat(bool flag) { 
-			if(is_open()) sound->setRepeat(flag);
+		void SoraAudiereMusicFile::setRepeat(int32 loopCount) { 
+			if(is_open()) sound->setRepeat(loopCount);
 		}
 
-		bool SoraAudiereMusicFile::isRepeat() { 
+		int32 SoraAudiereMusicFile::isRepeat() const { 
 			if(is_open()) return sound->getRepeat();
 			return false;
 		}
-		bool SoraAudiereMusicFile::isPlaying() { 
+		bool SoraAudiereMusicFile::isPlaying() const { 
 			if(is_open()) return sound->isPlaying();
 			return false;
 		}
@@ -178,7 +179,7 @@ namespace sora {
 		void SoraAudiereSoundEffectFile::closeFile() {
 			if(is_open()) {
 				//se->unref();
-				set_open(true);
+				set_open(false);
 			}
 		}
 
@@ -202,17 +203,17 @@ namespace sora {
 			if(se) se->setPitchShift(pitch);
 		}
 
-		float32 SoraAudiereSoundEffectFile::getPan() {
+		float32 SoraAudiereSoundEffectFile::getPan() const {
 			if(se) return se->getPan();
 			return 0.f;
 		}
 
-		float32 SoraAudiereSoundEffectFile::getPitch() {
+		float32 SoraAudiereSoundEffectFile::getPitch() const {
 			if(se) return se->getPitchShift();
 			return 0.f;
 		}
 
-		float32 SoraAudiereSoundEffectFile::getVolume() {
+		float32 SoraAudiereSoundEffectFile::getVolume() const {
 			if(se) return se->getVolume();
 			return 0.f;
 		}

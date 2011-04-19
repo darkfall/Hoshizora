@@ -32,6 +32,9 @@
 
 #include "../AnimationEditor/aeMainWindow.h"
 
+#include "SoraFMODSoundSystem/SoraFMODSoundSystem.h"
+#include "SoraAudiereSoundSystem/SoraAudiereSoundSystem.h"
+
 int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,
 					   LPSTR    lpCmdLine,
@@ -39,6 +42,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	sora::SoraCore* sora = sora::SoraCore::Instance();
 	sora->registerResourceManager(new sora::SoraZipResourceManager);
 	sora->registerFontManager(new sora::SoraFTFontManager);
+	sora->registerSoundSystem(new sora::SoraAudiereSoundSystem);
 	
 	// remember to change USE_HGE_KEYMAP between USE_GLFW_KEYMAP in SoraPlatform.h when using different renderers 
 #ifdef HGE_RENDERER
@@ -61,7 +65,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	sora->setFPS(60);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");
-	sora->createWindow(new aeMainWindow);
+	sora->createWindow(new mainWindow);
 	sora->start();
 		
 	return 0;

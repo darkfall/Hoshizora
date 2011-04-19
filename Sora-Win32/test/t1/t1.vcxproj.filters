@@ -100,6 +100,9 @@
     <Filter Include="源文件\AnimationEditor">
       <UniqueIdentifier>{492b3ee2-973e-44c8-8ed0-677c5c584330}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\fmodss">
+      <UniqueIdentifier>{f1814d00-3672-4eb2-b534-1c544e64c90f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -1446,6 +1449,18 @@
     <ClInclude Include="..\..\..\AnimationEditor\editorWindow.h">
       <Filter>源文件\AnimationEditor</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundFile.h">
+      <Filter>Plugins\fmodss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundSystem.h">
+      <Filter>Plugins\fmodss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSystem.h">
+      <Filter>Plugins\fmodss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundSystem.h">
+      <Filter>Plugins\AudiereSS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -2035,6 +2050,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\AnimationEditor\editorWindow.cpp">
       <Filter>源文件\AnimationEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundSystem.cpp">
+      <Filter>Plugins\fmodss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundFile.cpp">
+      <Filter>Plugins\fmodss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundSystem.cpp">
+      <Filter>Plugins\AudiereSS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

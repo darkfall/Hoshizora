@@ -39,13 +39,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)../../../Plugins/SoraFMODSoundSystem/;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)../../../Plugins/SoraFMODSoundSystem/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -166,6 +166,10 @@
     <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\audiere\audiere.h" />
     <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereDevice.h" />
     <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundFile.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundSystem.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundFile.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundSystem.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSystem.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftconfig.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftheader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftmodule.h" />
@@ -534,6 +538,9 @@
     <ClCompile Include="..\..\..\Plugins\lAnm\lAnm.cpp" />
     <ClCompile Include="..\..\..\Plugins\libvlc\SoraVlcMoviePlayer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundFile.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundSystem.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundFile.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundSystem.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\actionevent.cpp" />

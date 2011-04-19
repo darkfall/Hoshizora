@@ -48,6 +48,7 @@ namespace sora {
     }
     
     SoraFMODMusicFile::~SoraFMODMusicFile() {
+		closeFile();
         if(bIsStream)
             if(pSoundData)
                 SORA->freeResourceFile(pSoundData);
@@ -206,10 +207,10 @@ namespace sora {
         return false;
     }
     
-    SoraFMODSoundEffectFile::SoraFMODSoundEffectFile {
+    SoraFMODSoundEffectFile::SoraFMODSoundEffectFile() {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
-            INT_LOG_HANDLE->logf("Creating %s: No FMOD System available", ws2s(path).c_str());
+            INT_LOG_HANDLE->logf("Creating FMODSoundEffectFile: No FMOD System available");
             
         pSound = NULL;
         pChannel = NULL;
@@ -234,6 +235,19 @@ namespace sora {
                 INT_LOG_HANDLE->logf("Creating %s: File not exists", ws2s(path).c_str());
         } else {
             readFile(path);
+        }
+    }
+
+	
+	SoraFMODSoundEffectFile::~SoraFMODSoundEffectFile() {
+		closeFile();
+    }
+
+	 void SoraFMODSoundEffectFile::closeFile() {
+        if(pSound) {
+            if(pChannel)
+                pChannel->stop();
+            pSound->release();
         }
     }
     
