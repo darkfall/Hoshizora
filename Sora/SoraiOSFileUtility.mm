@@ -34,7 +34,6 @@ namespace sora {
 	SoraWString appResourcePath() {
 		SoraWString path(appApplicationPath());
 		path += L"/";
-		LOG->debugPrintf(ws2s(path).c_str());
 		return path;
 	}
 	

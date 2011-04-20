@@ -45,9 +45,10 @@ namespace sora {
 			GetCurrentDirectory(MAX_PATH, buffer);
 			
 			return buffer;
-#endif
-#ifdef OS_OSX
+#elif defined(OS_OSX)
 			return osxApplicationPath();
+#elif defined(OS_IOS)
+			return appResourcePath();
 #endif
 			return L"./";
 		}

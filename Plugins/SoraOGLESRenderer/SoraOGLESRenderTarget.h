@@ -7,25 +7,40 @@
  *
  */
 
-#ifndef SORA_OGLES_RENDER_TARGET_H_
-#define SORA_OGLES_RENDER_TARGET_H_
+#ifndef SORA_OGL_RENDER_TARGET_H_
+#define SORA_OGL_RENDER_TARGET_H_
 
 #include "SoraRenderTarget.h"
 
-#include "glfw/GL/glfw.h"
+#ifdef OS_IOS
+#include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h>
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+#endif
 
 namespace sora {
 
-class SoraRenderTargetOG: public SoraRenderTarget {
-	ulong32 frameBuffer;
-	ulong32 depthBuffer;
-	
+class SoraRenderTargetOGES {
+	GLuint frameBuffer;
+	GLuint depthBuffer;
+
+    int32 w, h;
+	ulong32 tex;
+	bool zbuffer;
+	int32 err;
+    
 public:
-	SoraRenderTargetOG(ulong32 w, ulong32 h, bool zbuffer);
-	~SoraRenderTargetOG();
-	
+	SoraRenderTargetOGES(int32 _w, int32 _h, bool _zbuffer);
+	~SoraRenderTargetOGES();
+
 	virtual void attachToRender();
 	virtual void detachFromRender();
+    
+    int32 getWidth() const { return w; }
+    int32 getHeight() const { return h; }
+    
+    ulong32 getTexture() const { return tex; }
 };
 
 } // namespace sora

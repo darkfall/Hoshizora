@@ -11,13 +11,7 @@
 #define _SORA_OGLES_RENDERER_H_
 
 #include "SoraRenderSystem.h"
-
-#include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
-
-//#include "SoraOGLESRenderTarget.h"
+#include "SoraOGLESRenderTarget.h"
 
 namespace sora {
 	
@@ -34,8 +28,8 @@ namespace sora {
 		void shutdown();
 		bool isActive();
 		
-		void beginFrame() {}
-		void endFrame() {}
+		void beginFrame();
+		void endFrame();
 		
 		void start(SoraTimer* timer);
 
@@ -55,7 +49,7 @@ namespace sora {
 		SoraTexture* createTextureFromMem(void* ptr, ulong32 size, bool bMipmap=false);
 		SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h);
 
-		ulong32*	 textureLock(SoraTexture*, bool bReadOnly=true, uint32 x=0, uint32 y=0, uint32 w=0, uint32 h=0);
+		ulong32*	 textureLock(SoraTexture*);
 		void		 textureUnlock(SoraTexture*);
 		void		 releaseTexture(SoraTexture* tex);
 
@@ -77,6 +71,10 @@ namespace sora {
 		ulong32 getVideoDeviceHandle();
 		
 		void flush();
+        
+        SoraShaderContext* createShaderContext() {}
+		void setViewPoint(float32 x, float32 y, float32 z) {}        
+        void snapshot(const SoraString& path) {}
 		
 	private:
 		inline void _to2D();
@@ -120,8 +118,8 @@ namespace sora {
 		
 		SoraTimer* pTimer;
 		
-	//	std::list<SoraRenderTarget*> liTargets;
-	//	SoraRenderTargetOG* pCurTarget;
+		std::list<SoraRenderTarget*> liTargets;
+		SoraRenderTargetOGES* pCurTarget;
 		
 		bool bShaderAvailable;
 		GLuint uGLShaderProgram;
@@ -131,6 +129,7 @@ namespace sora {
 		SoraShaderContext* currShader;
 		
 		bool bFullscreen;
+		int iFrameStart;
 	};
 } // namespace sora
 

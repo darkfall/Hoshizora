@@ -65,9 +65,6 @@ typedef		unsigned char	uint8;
 typedef		float			float32;
 typedef		double			double32;
 
-
-typedef		long long		long64;
-typedef		unsigned long long ulong64;
 typedef		long			long32;
 typedef		unsigned long	ulong32;
 
@@ -176,52 +173,6 @@ typedef std::wstring SoraWString;
 
 #endif
 
-// iphone resolution
-// retina display for iPod Touch 4gen or iPhone 4 gen and up
-// OS_IPAD for 1024*768
-#ifdef OS_IOS
-
-#if (UI_USER_INTERFACE_IDIOM == UIUserInterfaceIdiomPad)
-#define OS_IOS_IPAD
-#endif
-
-#define _IS_RETINA_DISPLAY() {\
-	if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && \
-		([UIScreen mainScreen].scale == 2.0)) { \
-		return true; \
-	} \
-	return false; \
-}
-
-#ifndef OS_IOS_IPAD
-
-#if _IS_RETINA_DISPLAY
-#define SORA_IPHONE_RETINA_DISPLAY_SUPPORTED
-#endif
-
-#endif
-
-#ifndef OS_IOS_IPAD
-	#ifdef SORA_IPHONE_RETINA_DISPLAY_SUPPORTED
-		#define SORA_IOS_WINDOW_WIDTH		640
-		#define SORA_IOS_WINDOW_HEIGHT		960
-		#define SORA_IOS_WINDOW_WIDTH_ROT	960
-		#define SORA_IOS_WINDOW_HEIGHT_ROT	640
-	#else
-		#define SORA_IOS_WINDOW_WIDTH		320
-		#define SORA_IOS_WINDOW_HEIGHT		480
-		#define SORA_IOS_WINDOW_WIDTH_ROT	480
-		#define SORA_IOS_WINDOW_HEIGHT_ROT	320
-	#endif // SORA_IPHONE_RETINA_DISPLAY_SUPPORTED
-#else
-	#define SORA_IOS_WINDOW_WIDTH		768
-	#define SORA_IOS_WINDOW_HEIGHT		1024
-	#define SORA_IOS_WINDOW_WIDTH_ROT	1024
-	#define SORA_IOS_WINDOW_HEIGHT_ROT	768
-#endif // OS_IOS_IPAD
-
-#endif
-
 
 // android resolution defines
 #ifdef OS_ANDROID
@@ -238,10 +189,25 @@ typedef std::wstring SoraWString;
 
 #include <stdint.h>
 
+#define BIT_32_64_EXTEND
+
+#if defined(OS_OSX) || defined(OS_IOS)
+#undef BIT_32_64_EXTEND
+#endif
+
 #ifdef OS_WIN32
 #define s_int64 __int64
 #else
 #define s_int64 uint64_t
+#endif
+
+#ifdef BIT_32_64_EXTEND
+// 64bit extend
+typedef		long long		long64;
+typedef		unsigned long long ulong64;
+#else 
+typedef     long long64;
+typedef     unsigned long ulong64;
 #endif
 
 typedef enum {

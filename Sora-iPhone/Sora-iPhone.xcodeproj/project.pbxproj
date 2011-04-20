@@ -14,6 +14,12 @@
 		28EC4C5A11D54ECE0027AA9F /* Sora_iPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EC4C5811D54ECE0027AA9F /* Sora_iPhoneViewController.xib */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		88057E4C135EABF500B1535B /* SoraOGLESRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88057E4A135EABF500B1535B /* SoraOGLESRenderTarget.cpp */; };
+		88057F8D135EBA4000B1535B /* rfMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88057F8B135EBA4000B1535B /* rfMap.cpp */; };
+		88057F94135EBA4D00B1535B /* rfMainWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88057F90135EBA4D00B1535B /* rfMainWindow.mm */; };
+		88057F95135EBA4D00B1535B /* rfMapRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */; };
+		88057FAD135EBBBF00B1535B /* resource.SoraResource in Resources */ = {isa = PBXBuildFile; fileRef = 88057FAC135EBBBF00B1535B /* resource.SoraResource */; };
+		88058042135EC07E00B1535B /* data.rfResource in Resources */ = {isa = PBXBuildFile; fileRef = 88058041135EC07E00B1535B /* data.rfResource */; };
 		884CC59912F6537B00FD18FC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58A12F6537B00FD18FC /* UIKit.framework */; };
 		884CC59A12F6537B00FD18FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58B12F6537B00FD18FC /* QuartzCore.framework */; };
 		884CC59B12F6537B00FD18FC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58C12F6537B00FD18FC /* MediaPlayer.framework */; };
@@ -107,6 +113,20 @@
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Sora_iPhone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sora_iPhone_Prefix.pch; sourceTree = "<group>"; };
+		88057E4A135EABF500B1535B /* SoraOGLESRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLESRenderTarget.cpp; sourceTree = "<group>"; };
+		88057E4B135EABF500B1535B /* SoraOGLESRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLESRenderTarget.h; sourceTree = "<group>"; };
+		88057EB0135EB28100B1535B /* SoraiOSMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSMainWindow.h; sourceTree = "<group>"; };
+		88057F3D135EB60800B1535B /* SoraiOSDeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSDeviceHelper.h; sourceTree = "<group>"; };
+		88057F89135EBA4000B1535B /* lMemFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lMemFile.h; sourceTree = "<group>"; };
+		88057F8A135EBA4000B1535B /* rfCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfCommon.h; sourceTree = "<group>"; };
+		88057F8B135EBA4000B1535B /* rfMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rfMap.cpp; sourceTree = "<group>"; };
+		88057F8C135EBA4000B1535B /* rfMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMap.h; sourceTree = "<group>"; };
+		88057F90135EBA4D00B1535B /* rfMainWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = rfMainWindow.mm; sourceTree = "<group>"; };
+		88057F91135EBA4D00B1535B /* rfMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMainWindow.h; sourceTree = "<group>"; };
+		88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rfMapRenderer.cpp; sourceTree = "<group>"; };
+		88057F93135EBA4D00B1535B /* rfMapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMapRenderer.h; sourceTree = "<group>"; };
+		88057FAC135EBBBF00B1535B /* resource.SoraResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = resource.SoraResource; path = "../Sora-OSX/build/Debug/resource.SoraResource"; sourceTree = SOURCE_ROOT; };
+		88058041135EC07E00B1535B /* data.rfResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.rfResource; path = ../Resources/data.rfResource; sourceTree = SOURCE_ROOT; };
 		884CC58A12F6537B00FD18FC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		884CC58B12F6537B00FD18FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/QuartzCore.framework; sourceTree = SOURCE_ROOT; };
 		884CC58C12F6537B00FD18FC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/MediaPlayer.framework; sourceTree = SOURCE_ROOT; };
@@ -152,7 +172,6 @@
 		8897815B13071CA100A69ADE /* SoraZipFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraZipFile.h; sourceTree = "<group>"; };
 		8897815C13071CA100A69ADE /* SoraZipResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraZipResourceManager.cpp; sourceTree = "<group>"; };
 		8897815D13071CA100A69ADE /* SoraZipResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraZipResourceManager.h; sourceTree = "<group>"; };
-		8897816413071CAB00A69ADE /* AutoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoList.h; sourceTree = "<group>"; };
 		8897816513071CAB00A69ADE /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		8897816613071CAB00A69ADE /* CoreTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreTransform.cpp; sourceTree = "<group>"; };
 		8897816713071CAB00A69ADE /* CoreTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTransform.h; sourceTree = "<group>"; };
@@ -240,7 +259,6 @@
 		889781C113071CAB00A69ADE /* soraiOSFileUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = soraiOSFileUtility.h; sourceTree = "<group>"; };
 		889781C213071CAB00A69ADE /* SoraiOSFileUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSFileUtility.mm; sourceTree = "<group>"; };
 		889781C313071CAB00A69ADE /* SoraKeyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraKeyInfo.h; sourceTree = "<group>"; };
-		889781C413071CAB00A69ADE /* SoraLocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLocalizedString.h; sourceTree = "<group>"; };
 		889781C513071CAB00A69ADE /* SoraLocalizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraLocalizer.cpp; sourceTree = "<group>"; };
 		889781C613071CAB00A69ADE /* SoraLocalizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLocalizer.h; sourceTree = "<group>"; };
 		889781C713071CAB00A69ADE /* SoraMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMath.h; sourceTree = "<group>"; };
@@ -261,7 +279,6 @@
 		889781D613071CAB00A69ADE /* SoraShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraShader.cpp; sourceTree = "<group>"; };
 		889781D713071CAB00A69ADE /* SoraShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraShader.h; sourceTree = "<group>"; };
 		889781D813071CAB00A69ADE /* SoraSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSingleton.h; sourceTree = "<group>"; };
-		889781D913071CAB00A69ADE /* SoraSoundFileBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSoundFileBase.h; sourceTree = "<group>"; };
 		889781DA13071CAB00A69ADE /* SoraSoundSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSoundSystem.h; sourceTree = "<group>"; };
 		889781DB13071CAB00A69ADE /* SoraSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSprite.cpp; sourceTree = "<group>"; };
 		889781DC13071CAB00A69ADE /* SoraSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSprite.h; sourceTree = "<group>"; };
@@ -373,12 +390,18 @@
 			isa = PBXGroup;
 			children = (
 				884CC35F12F6530100FD18FC /* Sora */,
+				88057F88135EBA4000B1535B /* Reflection */,
 				8897825613071CCD00A69ADE /* EAGLView.h */,
 				8897825713071CCD00A69ADE /* EAGLView.mm */,
 				8897825A13071CCD00A69ADE /* Sora_iPhoneAppDelegate.h */,
 				8897825B13071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm */,
 				8897825C13071CCD00A69ADE /* Sora_iPhoneViewController.h */,
 				8897825D13071CCD00A69ADE /* Sora_iPhoneViewController.mm */,
+				88057EB0135EB28100B1535B /* SoraiOSMainWindow.h */,
+				88057F90135EBA4D00B1535B /* rfMainWindow.mm */,
+				88057F91135EBA4D00B1535B /* rfMainWindow.h */,
+				88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */,
+				88057F93135EBA4D00B1535B /* rfMapRenderer.h */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -399,6 +422,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				88057FAC135EBBBF00B1535B /* resource.SoraResource */,
+				88058041135EC07E00B1535B /* data.rfResource */,
 				889782A813071E6500A69ADE /* magicCircle.png */,
 				28EC4C5811D54ECE0027AA9F /* Sora_iPhoneViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -432,6 +457,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		88057F88135EBA4000B1535B /* Reflection */ = {
+			isa = PBXGroup;
+			children = (
+				88057F89135EBA4000B1535B /* lMemFile.h */,
+				88057F8A135EBA4000B1535B /* rfCommon.h */,
+				88057F8B135EBA4000B1535B /* rfMap.cpp */,
+				88057F8C135EBA4000B1535B /* rfMap.h */,
+			);
+			name = Reflection;
+			path = ../Reflection;
+			sourceTree = SOURCE_ROOT;
+		};
 		884CC35F12F6530100FD18FC /* Sora */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,9 +484,12 @@
 			children = (
 				8897812713071C9500A69ADE /* Apple */,
 				8897813313071C9500A69ADE /* soil */,
+				88057F3D135EB60800B1535B /* SoraiOSDeviceHelper.h */,
 				8897813F13071C9500A69ADE /* SoraiOSInitializer.h */,
 				889783FF1307D89900A69ADE /* SoraiOSInput.h */,
 				889784581307D9D300A69ADE /* SoraiOSInputEvent.h */,
+				88057E4A135EABF500B1535B /* SoraOGLESRenderTarget.cpp */,
+				88057E4B135EABF500B1535B /* SoraOGLESRenderTarget.h */,
 				8897814013071C9500A69ADE /* SoraOGLESRenderer.cpp */,
 				8897814113071C9500A69ADE /* SoraOGLESRenderer.h */,
 			);
@@ -510,7 +550,6 @@
 		8897816313071CAB00A69ADE /* Sora */ = {
 			isa = PBXGroup;
 			children = (
-				8897816413071CAB00A69ADE /* AutoList.h */,
 				8897816513071CAB00A69ADE /* common.h */,
 				8897816613071CAB00A69ADE /* CoreTransform.cpp */,
 				8897816713071CAB00A69ADE /* CoreTransform.h */,
@@ -562,7 +601,6 @@
 				889781C113071CAB00A69ADE /* soraiOSFileUtility.h */,
 				889781C213071CAB00A69ADE /* SoraiOSFileUtility.mm */,
 				889781C313071CAB00A69ADE /* SoraKeyInfo.h */,
-				889781C413071CAB00A69ADE /* SoraLocalizedString.h */,
 				889781C513071CAB00A69ADE /* SoraLocalizer.cpp */,
 				889781C613071CAB00A69ADE /* SoraLocalizer.h */,
 				889781C713071CAB00A69ADE /* SoraMath.h */,
@@ -583,7 +621,6 @@
 				889781D613071CAB00A69ADE /* SoraShader.cpp */,
 				889781D713071CAB00A69ADE /* SoraShader.h */,
 				889781D813071CAB00A69ADE /* SoraSingleton.h */,
-				889781D913071CAB00A69ADE /* SoraSoundFileBase.h */,
 				889781DA13071CAB00A69ADE /* SoraSoundSystem.h */,
 				889781DB13071CAB00A69ADE /* SoraSprite.cpp */,
 				889781DC13071CAB00A69ADE /* SoraSprite.h */,
@@ -792,6 +829,8 @@
 				28EC4C5A11D54ECE0027AA9F /* Sora_iPhoneViewController.xib in Resources */,
 				8897814E13071C9500A69ADE /* soil.html in Resources */,
 				889782A913071E6500A69ADE /* magicCircle.png in Resources */,
+				88057FAD135EBBBF00B1535B /* resource.SoraResource in Resources */,
+				88058042135EC07E00B1535B /* data.rfResource in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,6 +907,10 @@
 				8897825E13071CCD00A69ADE /* EAGLView.mm in Sources */,
 				8897826013071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm in Sources */,
 				8897826113071CCD00A69ADE /* Sora_iPhoneViewController.mm in Sources */,
+				88057E4C135EABF500B1535B /* SoraOGLESRenderTarget.cpp in Sources */,
+				88057F8D135EBA4000B1535B /* rfMap.cpp in Sources */,
+				88057F94135EBA4D00B1535B /* rfMainWindow.mm in Sources */,
+				88057F95135EBA4D00B1535B /* rfMapRenderer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
