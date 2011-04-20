@@ -38,7 +38,7 @@ namespace sora {
 		stringId getName() const { return name; }
 		
 		virtual void serialize(SoraMemoryBuffer& bufferStream) {
-			const char* strData = id2str(name);
+			const char* strData = id2str(name).c_str();
 			if(!strData) {
 				INT_LOG::debugPrintf("%lu == ??\n", name);
 				SoraStringManager::Instance()->print();
@@ -67,6 +67,7 @@ namespace sora {
 		// serialized file is length(4 bytes) + name(length)
 		virtual bool serializable() { return true; }
 		
+	private:
 		stringId name;
 	};
 	

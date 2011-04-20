@@ -164,7 +164,7 @@ void mainWindow::init() {
 
 void mainWindow::onSoundEvent(const sora::SoraPlaybackEvent* event) {
     if(event->getSource() == bgm)
-        sora::INT_LOG::debugPrintf("RECEIVED SOUND EVENT: evid: %d, evid: %lu, evname: %s1\n", event->getEventType(), event->getName(), sora::id2str(event->getName()));
+        sora::INT_LOG_HANDLE->debugLogf("RECEIVED SOUND EVENT: evid: %d, evid: %llu, evname: %s1\n", event->getEventType(), event->getName(), sora::id2str(event->getName()).c_str());
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

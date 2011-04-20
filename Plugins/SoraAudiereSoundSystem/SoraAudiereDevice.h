@@ -10,8 +10,21 @@
 #endif
 
 namespace sora {
+
+	static std::map<audiere::OutputStreamPtr, SoraMusicFile*> G_MUSIC_FILE_MAP;
 	
-	using namespace audiere;
+	class myAudiereMusicCallback: public audiere::StopCallback {
+	public:
+		void __stdcall ref() {}
+		void __stdcall unref() {}
+		void __stdcall streamStopped(audiere::StopEvent* ev) {
+			std::map<audiere::OutputStreamPtr, SoraMusicFile*>::iterator itMusicFile = G_MUSIC_FILE_MAP.find(ev->getOutputStream());
+			if(itMusicFile != G_MUSIC_FILE_MAP.end()) {
+				assert(itMusicFile->second != NULL);
+				itMusicFile->second->publishEvent(ev->getReason()==audiere::StopEvent::STOP_CALLED?SORAPB_EV_PLAY_STOPPED:SORAPB_EV_PLAY_ENDED);
+			}
+		}
+	};
 
 	class SoraAudiereDevice: public SoraSingleton<SoraAudiereDevice> {
 		friend class SoraSingleton<SoraAudiereDevice>;
@@ -21,18 +34,22 @@ namespace sora {
 				device->unref();
 		}
 		bool setupDevice(const char* name, const char* param) {
-			device = OpenDevice(name, param);
-			if(device) return true;
+			device = audiere::OpenDevice(name, param);
+			if(device) {
+				device->registerCallback(&myCallback);
+				return true;
+			}
 			return false;
 		}
 		void update() {
 			if(device) device->update();
 		}
 
-		AudioDevicePtr getDevice() { return device; }
+		audiere::AudioDevicePtr getDevice() { return device; }
 
 	private:
-		AudioDevicePtr device;
+		audiere::AudioDevicePtr device;
+		myAudiereMusicCallback myCallback;
 	};
 } // namespace sora
 

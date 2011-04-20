@@ -18,7 +18,7 @@
 
 namespace sora {
 	
-	typedef ulong32 stringId;
+	typedef ulong64 stringId;
 
 	class SoraStringManager: public SoraSingleton<SoraStringManager> {
 		friend class SoraSingleton<SoraStringManager>;
@@ -58,30 +58,30 @@ namespace sora {
 			return crc32(str);
 		}
 		
-		inline const wchar_t* getStringByIdW(stringId sid) {
+		inline SoraWString getStringByIdW(stringId sid) {
 			if(sid == 0) return NULL;
-			STR_MAP::iterator itStr = strings.find(sid);
-			if(itStr != strings.end())
-				return itStr->second.c_str();
-			return NULL;
+			std::wstring str = strings[sid];
+			if(str.size() != 0)
+				return str;
+			return L"\0";
 		}
 		
-		inline const char* getStringById(stringId sid) {
+		inline SoraString getStringById(stringId sid) {
 			if(sid == 0) return NULL;
-			STR_MAP::iterator itStr = strings.find(sid);
-			if(itStr != strings.end())
-				return ws2s(itStr->second).c_str();
-			return 0;
+			std::string str = ws2s(strings[sid]);
+			if(str.size() != 0)
+				return str;
+			return "\0";
 		}
 		
 		inline void print() {
 			for(STR_MAP::iterator itstr = strings.begin(); itstr != strings.end(); ++itstr) {
-				INT_LOG::debugPrintf("STR_MAP: %lu = %s\n", itstr->first, ws2s(itstr->second).c_str());
+				INT_LOG::debugPrintf("STR_MAP: %llu = %s\n", itstr->first, ws2s(itstr->second).c_str());
 			}
 		}
 		
 	private:
-		typedef hash_map<ulong32, SoraWString> STR_MAP;
+		typedef hash_map<stringId, SoraWString> STR_MAP;
 		STR_MAP strings;
 	};
 	

@@ -155,6 +155,7 @@ namespace sora {
 		if(getType() == 0) return false;
         
         cgGetParameterValuefc(param, size, val);
+		return true;
     }
     
     bool SoraCGD3D9Shader::getParameteriv(const char* name, int32* val, uint32 size) {
@@ -164,6 +165,7 @@ namespace sora {
 		if(getType() == 0) return false;
         
         cgGetParameterValueic(param, size, val);
+		return true;
     }
 
 } // namespace sora

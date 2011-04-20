@@ -51,14 +51,14 @@ namespace sora {
 	private:
 		struct folderDescription {
 			SoraWString folderName;
-			ulong32 folderHash;
+			stringId folderHash;
 			folderDescription(const SoraWString& folder): folderName(folder), folderHash(crc32(folder)) {}
 		};
 		typedef std::vector<folderDescription> FOLDER_CONT;
 		FOLDER_CONT folders;
 		SoraWString applicationPath;
 		
-		typedef hash_map</*fileNameHash*/ulong32, /*fileFullPath*/SoraWString> FILE_CACHE;
+		typedef hash_map</*fileNameHash*/stringId, /*fileFullPath*/SoraWString> FILE_CACHE;
 		FILE_CACHE fileCache;
 		
 		inline FILE* openFile(const SoraWString& fileName);

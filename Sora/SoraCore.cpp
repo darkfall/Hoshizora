@@ -196,6 +196,7 @@ namespace sora {
             pRenderSystem->endScene();
         }
         
+		_logInternalLog();
 		time += pTimer->getDelta();
         
 		pRenderSystem->endFrame();
@@ -243,6 +244,7 @@ namespace sora {
 		std::vector<SoraString> vLog = SoraInternalLogger::Instance()->get();
 		for(size_t i=0; i<vLog.size(); ++i)
 			pMiscTool->log(vLog[i]);
+		SoraInternalLogger::Instance()->clear();
 	}
 
 	void SoraCore::postError(const SoraString& string) {
@@ -291,7 +293,6 @@ namespace sora {
 			delete pSoundSystem;
 		}
 		
-		_logInternalLog();
 		if(pMiscTool) delete pMiscTool;
 
 		SoraEventManager::Destroy();

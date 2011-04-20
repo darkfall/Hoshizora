@@ -429,6 +429,7 @@
     <ClInclude Include="..\..\..\Sora\Experimental\FolderTree.h" />
     <ClInclude Include="..\..\..\Sora\Experimental\Sora2DMatrix.h" />
     <ClInclude Include="..\..\..\Sora\graphicEffects.h" />
+    <ClInclude Include="..\..\..\Sora\hash.h" />
     <ClInclude Include="..\..\..\Sora\hgerect.h" />
     <ClInclude Include="..\..\..\Sora\hgevector.h" />
     <ClInclude Include="..\..\..\Sora\HoshiNoSora.h" />
@@ -464,6 +465,7 @@
     <ClInclude Include="..\..\..\Sora\SoraAutoPtr.h" />
     <ClInclude Include="..\..\..\Sora\SoraColor.h" />
     <ClInclude Include="..\..\..\Sora\SoraComponentType.h" />
+    <ClInclude Include="..\..\..\Sora\SoraConstantStrings.h" />
     <ClInclude Include="..\..\..\Sora\SoraCore.h" />
     <ClInclude Include="..\..\..\Sora\SoraEvent.h" />
     <ClInclude Include="..\..\..\Sora\SoraEventManager.h" />
@@ -482,6 +484,7 @@
     <ClInclude Include="..\..\..\Sora\SoraLocalizer.h" />
     <ClInclude Include="..\..\..\Sora\SoraMath.h" />
     <ClInclude Include="..\..\..\Sora\SoraMiscTool.h" />
+    <ClInclude Include="..\..\..\Sora\SoraNamedObject.h" />
     <ClInclude Include="..\..\..\Sora\SoraObject.h" />
     <ClInclude Include="..\..\..\Sora\SoraPlatform.h" />
     <ClInclude Include="..\..\..\Sora\SoraPlugin.h" />
@@ -492,6 +495,7 @@
     <ClInclude Include="..\..\..\Sora\SoraResourceManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraShader.h" />
     <ClInclude Include="..\..\..\Sora\SoraSingleton.h" />
+    <ClInclude Include="..\..\..\Sora\SoraSoundFile.h" />
     <ClInclude Include="..\..\..\Sora\SoraSoundFileBase.h" />
     <ClInclude Include="..\..\..\Sora\SoraSoundSystem.h" />
     <ClInclude Include="..\..\..\Sora\SoraSprite.h" />
@@ -502,6 +506,7 @@
     <ClInclude Include="..\..\..\Sora\SoraTimer.h" />
     <ClInclude Include="..\..\..\Sora\SoraTypeInfo.h" />
     <ClInclude Include="..\..\..\Sora\SoraWindowInfo.h" />
+    <ClInclude Include="..\..\..\Sora\stringId.h" />
     <ClInclude Include="..\..\..\Sora\tinyXML\tinystr.h" />
     <ClInclude Include="..\..\..\Sora\tinyXML\tinyxml.h" />
     <ClInclude Include="..\..\..\Sora\vector3.h" />

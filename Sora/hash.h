@@ -121,24 +121,24 @@ namespace sora {
 		0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d,
 	};
 	
-	inline ulong32 crc32(const char *buf, size_t size) {
-		ulong32 crc = (ulong32)~0;		
+	inline s_int64 crc32(const char *buf, size_t size) {
+		s_int64 crc = (ulong32)~0;		
 		for(size_t i=0; i<size; ++i) {
 			_CRC32_(crc, buf[i]);
 		}
 		return ~crc;
 	}
 	
-	inline ulong32 crc32(const SoraString& str) {
-		ulong32 crc = (ulong32)~0;
+	inline s_int64 crc32(const SoraString& str) {
+		s_int64 crc = (ulong32)~0;
 		for(size_t i=0; i<str.size(); ++i) {
 			_CRC32_(crc, str[i]);
 		}
 		return ~crc;
 	}
 	
-	inline ulong32 crc32(const SoraWString& str) {
-		ulong32 crc = (ulong32)~0;
+	inline s_int64 crc32(const SoraWString& str) {
+		s_int64 crc = (ulong32)~0;
 		for(size_t i=0; i<str.size(); ++i) {
 			_CRC32_(crc, str[i]);
 		}

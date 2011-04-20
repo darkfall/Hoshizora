@@ -41,7 +41,7 @@ namespace sora {
 			TimePrecision =  Frequency.QuadPart;
 			if (desiredFPS > 0)
 			{
-				TimeInterval = TimePrecision / desiredFPS;
+				TimeInterval = TimePrecision / (LONGLONG)desiredFPS;
 			}
 			else
 			{
@@ -94,7 +94,7 @@ namespace sora {
 				fDeltaTime = (float)((double)(NowTime - lastTime) / (double)(TimePrecision)) * fTimeScale;
 		        lastTime = NowTime;
 			}
-			long t = (NowTime-lastTime);
+			long long t = (NowTime-lastTime);
 			//log<<t<<" "<<fDeltaTime<<std::endl;
 			if(fDeltaTime >= 1.f) 
 				fDeltaTime = 1.f / desiredFPS;

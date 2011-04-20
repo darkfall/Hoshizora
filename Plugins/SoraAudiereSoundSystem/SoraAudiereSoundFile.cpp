@@ -2,8 +2,22 @@
 
 #include "SoraCore.h"
 #include "SoraAudiereDevice.h"
+#include "SoraFileUtility.h"
 
 namespace sora {
+
+	using namespace audiere;
+	SoraAudiereMusicFile::SoraAudiereMusicFile(bool stream) {
+		bIsStream = stream;
+		sound = NULL;
+	}
+
+	SoraAudiereMusicFile::~SoraAudiereMusicFile() {
+		if(is_open()) {
+			G_MUSIC_FILE_MAP.erase(G_MUSIC_FILE_MAP.find(sound));
+			closeFile();
+		}
+	}
 
 		int32 SoraAudiereMusicFile::readFile(const SoraWString& sFilePath) {
 			if(is_open()) closeFile();
@@ -12,18 +26,23 @@ namespace sora {
 
 			AudioDevicePtr device = SoraAudiereDevice::Instance()->getDevice();
 			if(!device) { return SORASOUND_FAILED_OPEN_DEVICE; }
-			ulong32 size;
-			void* ptr = SoraCore::Instance()->getResourceFile(sFilePath, size);
-			if(ptr) {
-				File* pSoundFile = CreateMemoryFile(ptr, (int)size);
-				if(!pSoundFile) { return SORASOUND_FAILED_OPEN_MEMORY_FILE; }
+			if(SoraFileUtility::fileExists(sFilePath)) {
+				File* pSoundFile = OpenFile(ws2s(sFilePath.c_str()).c_str(), false);
+				if(!pSoundFile) return SORASOUND_FAILED_OPEN_DISK_FILE;
 				sound = OpenSound(device, pSoundFile, bIsStream);
 				if(!sound) { return SORASOUND_FAILED_OPEN_SOUND; }
+				G_MUSIC_FILE_MAP.insert(std::make_pair<OutputStreamPtr, SoraMusicFile*>(sound, this));	
 				set_open(true);
-				SORA->freeResourceFile(ptr);
 				return SORASOUND_SUCCESS;
+			} else {
+				ulong32 size;
+				void* ptr = SoraCore::Instance()->getResourceFile(sFilePath, size);
+				if(ptr) {
+					int32 result = readFileMem(ptr, size);
+					SORA->freeResourceFile(ptr);
+					return result;
+				}
 			}
-
 			return SORASOUND_FAILED_OPEN_SOUND;
 		}
     
@@ -36,12 +55,14 @@ namespace sora {
 			if(!pSoundFile) { return SORASOUND_FAILED_OPEN_MEMORY_FILE; }
 			sound = OpenSound(device, pSoundFile, bIsStream);
 			if(!sound) { return SORASOUND_FAILED_OPEN_SOUND; }
+			G_MUSIC_FILE_MAP.insert(std::make_pair<OutputStreamPtr, SoraMusicFile*>(sound, this));	
 			set_open(true);
 			return SORASOUND_SUCCESS;
 		}
     
 		void SoraAudiereMusicFile::closeFile() {
 			if(is_open()) {
+				stop();
 				//sound->unref();
 				sound = NULL;
 				set_open(false);
@@ -49,21 +70,31 @@ namespace sora {
 		}
 
 		void SoraAudiereMusicFile::play() { 
-			if(is_open()) sound->play();
+			if(is_open()) {
+				if(sound->isPlaying())
+					return;
+				publishEvent(SORAPB_EV_PLAY_STARTED);
+				sound->setPosition(0);
+				sound->play();
+			}
 		}
 		void SoraAudiereMusicFile::stop() { 
-			if(is_open()) sound->stop();
+			if(is_open()) {
+				sound->stop();
+			}
 		}
 		void SoraAudiereMusicFile::pause() {
 			if(is_open()) {
+				publishEvent(SORAPB_EV_PLAY_PAUSED);
 				pausePos = getMusicPosition();
 				stop();
 			}
 		}
 		void SoraAudiereMusicFile::resume() {
 			if(is_open()) {
+				publishEvent(SORAPB_EV_PLAY_RESUMED);
 				setMusicPosition(pausePos);
-				play();
+				sound->play();
 			}
 		}
 
@@ -142,6 +173,11 @@ namespace sora {
             setName(str2id(musicName));
 		}
 
+		SoraAudiereSoundEffectFile::~SoraAudiereSoundEffectFile() {
+			if(is_open())
+				closeFile();
+		}
+
 		int32 SoraAudiereSoundEffectFile::readFile(const SoraWString& sFilePath) {
 			if(is_open()) closeFile();
             
@@ -149,17 +185,25 @@ namespace sora {
 
 			AudioDevicePtr device = SoraAudiereDevice::Instance()->getDevice();
 			if(!device) { return SORASOUND_FAILED_OPEN_DEVICE; }
-			ulong32 size;
-			void* ptr = SoraCore::Instance()->getResourceFile(sFilePath, size);
-			if(ptr) {
-				File* file = CreateMemoryFile(ptr, (int)size);
-				if(!file) return SORASOUND_FAILED_OPEN_MEMORY_FILE;
-				se = OpenSoundEffect(device, file, (SoundEffectType)iSoundEffectType);
-				if(!se) return SORASOUND_FAILED_OPEN_SOUND;
+			if(SoraFileUtility::fileExists(sFilePath)) {
+				File* pSoundFile = OpenFile(ws2s(sFilePath.c_str()).c_str(), false);
+				if(!pSoundFile) return SORASOUND_FAILED_OPEN_DISK_FILE;
+				se = OpenSoundEffect(device, pSoundFile, (SoundEffectType)iSoundEffectType);
+				if(!se) { return SORASOUND_FAILED_OPEN_SOUND; }
+			
+				set_open(true);
+				return SORASOUND_SUCCESS;
+			} else {
+				ulong32 size;
+				void* ptr = SoraCore::Instance()->getResourceFile(sFilePath, size);
+				if(ptr) {
+					int32 result = readFileMem(ptr, size);
+					SORA->freeResourceFile(ptr);
+					return result;
+				}
 			}
 
-			set_open(true);
-			return SORASOUND_SUCCESS;
+			return SORASOUND_FAILED_OPEN_SOUND;
 		}
 
 		int32 SoraAudiereSoundEffectFile::readFileMem(void* ptr, ulong32 size) {

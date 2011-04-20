@@ -10,7 +10,7 @@
 
 namespace sora {
 
-	class SoraFileBase: public SoraNamedObject {
+	class SoraFileBase {
     public:
 		SoraFileBase(): isopen(false) {}
 		virtual ~SoraFileBase() {}

@@ -13,7 +13,9 @@ namespace sora {
 
 	class SoraAudiereMusicFile: public SoraMusicFile {
 	public:
-		SoraAudiereMusicFile(bool stream=true) { bIsStream = stream; pausePos = 0; }
+		SoraAudiereMusicFile(bool stream=true);
+		~SoraAudiereMusicFile();
+
 		int32 readFile(const SoraWString& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
 		void closeFile();
@@ -58,6 +60,8 @@ namespace sora {
 	class SoraAudiereSoundEffectFile: public SoraSoundEffectFile {
 	public:
 		SoraAudiereSoundEffectFile(int type = MULTIPLE) { iSoundEffectType = type; }
+		~SoraAudiereSoundEffectFile();
+
 		int32 readFile(const SoraWString& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
 		void closeFile();

@@ -55,7 +55,7 @@ static inline int lrint (double const x) { // Round to nearest integer
 
 #ifdef PLATFORM_32
 
-typedef	    int		int32;
+typedef	    int				int32;
 typedef		unsigned int	uint32;
 typedef		signed short	int16;
 typedef		unsigned short	uint16;
@@ -65,6 +65,9 @@ typedef		unsigned char	uint8;
 typedef		float			float32;
 typedef		double			double32;
 
+
+typedef		long long		long64;
+typedef		unsigned long long ulong64;
 typedef		long			long32;
 typedef		unsigned long	ulong32;
 

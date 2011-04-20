@@ -8,6 +8,8 @@
 
 namespace sora {
 	//namespace sorainternal {
+	class SoraCore;
+
 		class SoraInternalLogger: public SoraSingleton<SoraInternalLogger> {
 			friend class SoraSingleton<SoraInternalLogger>;
 			friend class SoraCore;
@@ -86,6 +88,7 @@ namespace sora {
 			std::vector<SoraString> vMssg;
 
 			void clear() { vMssg.clear(); }
+
 		};
 
 		static SoraInternalLogger* LOG = SoraInternalLogger::Instance();

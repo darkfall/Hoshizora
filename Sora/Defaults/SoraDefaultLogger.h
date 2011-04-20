@@ -23,7 +23,7 @@ namespace sora {
 		//	std::fstream file(logfile.c_str(), std::ios::app);
 			if(!file.is_open()) return;
 
-			file<<str<<std::endl;
+			file<<str;
 		//	file.close();
 		}
 		inline void log(const SoraWString& str) {
@@ -35,7 +35,7 @@ namespace sora {
 #endif*/
 			if(!file.is_open()) return;
 
-			file<<str.c_str()<<std::endl;
+			file<<str.c_str();
 		//	file.close();
 		}
 
