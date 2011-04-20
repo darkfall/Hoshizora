@@ -62,9 +62,9 @@ namespace sora {
         
         void publishEvent(SORA_PLAYBACK_EVENT eventType) {
             event.setEventType(eventType);
+			event.setSource(this);
             if(pEventHandler)
                 pEventHandler->handleEvent(&event);
-            event.setSource(this);
             this->handleEvent(&event);
         }
         

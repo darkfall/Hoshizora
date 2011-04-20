@@ -924,9 +924,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundFile.h">
       <Filter>Plugins\AudiereSS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraSoundFileBase.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\Defaults\orz.h">
       <Filter>头文件\defaults</Filter>
     </ClInclude>

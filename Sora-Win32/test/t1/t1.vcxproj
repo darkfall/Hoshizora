@@ -496,7 +496,6 @@
     <ClInclude Include="..\..\..\Sora\SoraShader.h" />
     <ClInclude Include="..\..\..\Sora\SoraSingleton.h" />
     <ClInclude Include="..\..\..\Sora\SoraSoundFile.h" />
-    <ClInclude Include="..\..\..\Sora\SoraSoundFileBase.h" />
     <ClInclude Include="..\..\..\Sora\SoraSoundSystem.h" />
     <ClInclude Include="..\..\..\Sora\SoraSprite.h" />
     <ClInclude Include="..\..\..\Sora\SoraString.h" />
