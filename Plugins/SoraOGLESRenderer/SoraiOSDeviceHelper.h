@@ -3,7 +3,7 @@
  *  Sora-iPhone
  *
  *  Created by Griffin Bu on 4/20/11.
- *  Copyright 2011 Studio Symphonie. All rights reserved.
+ *  Copyright 2011 Studio GameMaster. All rights reserved.
  *
  */
 #ifndef SORA_IOS_RESOLUTION_HELPER_H_
@@ -19,6 +19,10 @@
 #ifdef OS_IOS
 
 #import <UIKit/UIDevice.h>
+#include "SoraFileUtility.h"
+#include "soraiOSFileUtility.h"
+
+namespace sora {
 
 static bool _IS_IPAD() {
 	return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
@@ -56,14 +60,43 @@ static int32 iOSGetScreenHeight(int rot=0) {
 }
 
 
-static SoraWString iOSGetResourceName(const SoraWString& origName) {
-	if(_IS_RETINA_DISPLAY()) {
+static SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRetina=true) {
+	if(appendRetina && _IS_RETINA_DISPLAY()) {
 		SoraWString fn = origName.substr(0, origName.rfind(L"."));
 		SoraWString ext = origName.substr(origName.rfind(L"."), origName.size());
-		return fn + L"@2x" + ext;
+		return sora::SoraFileUtility::getApplicationPath() + fn + L"@2x" + ext;
 	}
-	return origName;
+	return sora::SoraFileUtility::getApplicationPath() + origName;
 }
+	
+	static SoraWString iOSGetDocumentResourceName(const SoraWString& origName, bool appendRetina=true) {
+		if(appendRetina && _IS_RETINA_DISPLAY()) {
+			SoraWString fn = origName.substr(0, origName.rfind(L"."));
+			SoraWString ext = origName.substr(origName.rfind(L"."), origName.size());
+			return appDocumentPath() + fn + L"@2x" + ext;
+		}
+		return appDocumentPath() + origName;
+	}
+	
+	//Objc NSString 和 String 的相互转换
+	std::string NSString2String(NSString* nss) {
+		std::string buffer([nss UTF8String]);
+		return buffer;
+	}
+	
+	NSString* string2NSString(const std::string& str) {
+		NSString* buffer = [[NSString alloc] initWithUTF8String:str.c_str()];
+		return buffer;
+	}
+	
+	NSString* string2NSString(const char* str) {
+		NSString* buffer = [[NSString alloc] initWithUTF8String:str];
+		return buffer;
+	}
+	
+	
+
+} // namespace sora
 
 #endif // OS_IOS
 

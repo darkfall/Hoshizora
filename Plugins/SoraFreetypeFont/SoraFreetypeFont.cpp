@@ -103,9 +103,6 @@ namespace sora {
 						texp += imgw;
 					}
                     
-					if(tex){
-						sora->releaseTexture(tex);
-					}
 					tex = createTexture(texd, imgw, imgh);
 					delete texd;
 					cached = true;
@@ -127,8 +124,8 @@ namespace sora {
 
 	SoraFTFont::SoraFTFont() {
 		attached = false;
-		kerningWidth = 0;
-		kerningHeight = 0;
+		kerningWidth = 0.f;
+		kerningHeight = 0.f;
 
 		sora = SoraCore::Instance();
 		if(!sora)
@@ -298,7 +295,11 @@ namespace sora {
 						y = y - ((int)getHeight() >> 1 );
 				}
 				continue;
+			} else if(*pwstr == L'\t') {
+				x += getWidthFromCharacter(L' ')*8;
+				continue;
 			}
+            
 			n = getGlyphByChar(*pwstr);
 			if(n > 0 && n < ft_glyphs.size()) {
 				int imgw = ft_glyphs[n-1].imgw;

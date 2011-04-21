@@ -3,7 +3,7 @@
  *  Sora-iPhone
  *
  *  Created by Griffin Bu on 2/13/11.
- *  Copyright 2011 Studio Symphonie. All rights reserved.
+ *  Copyright 2011 Studio GameMaster. All rights reserved.
  *
  */
 

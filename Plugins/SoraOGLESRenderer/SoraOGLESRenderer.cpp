@@ -613,14 +613,14 @@ namespace sora{
 			printf("\n");
 		}
 		*/
-		GLubyte colors[24] = {
+	/*	GLubyte colors[24] = {
 			(GLubyte)CGETR(quad.v[3].col), (GLubyte)CGETG(quad.v[3].col), (GLubyte)CGETB(quad.v[3].col), (GLubyte)CGETA(quad.v[3].col),
 			(GLubyte)CGETR(quad.v[2].col), (GLubyte)CGETG(quad.v[2].col), (GLubyte)CGETB(quad.v[2].col), (GLubyte)CGETA(quad.v[2].col),
 			(GLubyte)CGETR(quad.v[1].col), (GLubyte)CGETG(quad.v[1].col), (GLubyte)CGETB(quad.v[1].col), (GLubyte)CGETA(quad.v[1].col),
 			(GLubyte)CGETR(quad.v[0].col), (GLubyte)CGETG(quad.v[0].col), (GLubyte)CGETB(quad.v[0].col), (GLubyte)CGETA(quad.v[0].col),
 			(GLubyte)CGETR(quad.v[1].col), (GLubyte)CGETG(quad.v[1].col), (GLubyte)CGETB(quad.v[1].col), (GLubyte)CGETA(quad.v[1].col),
 			(GLubyte)CGETR(quad.v[0].col), (GLubyte)CGETG(quad.v[0].col), (GLubyte)CGETB(quad.v[0].col), (GLubyte)CGETA(quad.v[0].col)
-		};
+		};*/
 				
 		if (mVertexCount >= MAX_VERTEX_BUFFER-6)
 			flush();
@@ -628,9 +628,9 @@ namespace sora{
 		int u = 0;
 		int idx = 0;
 		int cdx = 0;
-	//	GLubyte colors[4] = {
-	//		(GLubyte)CGETR(quad.v[0].col), (GLubyte)CGETG(quad.v[0].col), (GLubyte)CGETB(quad.v[0].col), (GLubyte)CGETA(quad.v[0].col)
-	//	};
+		GLubyte colors[4] = {
+			(GLubyte)CGETR(quad.v[0].col), (GLubyte)CGETG(quad.v[0].col), (GLubyte)CGETB(quad.v[0].col), (GLubyte)CGETA(quad.v[0].col)
+		};
 		for (int i=0;i<6;i++) {
 			mVertices[(mVertexCount*3)] = verteces[idx++];
 			mVertices[(mVertexCount*3)+1] = verteces[idx++];
@@ -639,10 +639,10 @@ namespace sora{
 			mUVs[(mVertexCount<<1)] = texCoords[u++];
 			mUVs[(mVertexCount<<1)+1] = texCoords[u++];
 				
-			mColors[(mVertexCount<<2)] = colors[cdx++];
-			mColors[(mVertexCount<<2)+1] = colors[cdx++];
-			mColors[(mVertexCount<<2)+2] = colors[cdx++];
-			mColors[(mVertexCount<<2)+3] = colors[cdx++];
+			mColors[(mVertexCount<<2)] = colors[0];
+			mColors[(mVertexCount<<2)+1] = colors[1];
+			mColors[(mVertexCount<<2)+2] = colors[2];
+			mColors[(mVertexCount<<2)+3] = colors[3];
 			mVertexCount++;
 		}
 

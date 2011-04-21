@@ -202,24 +202,64 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>88057F76135EB93300B1535B</string>
+				<string>8834C36F135F825F006A20F6</string>
 				<key>PBXProjectModuleLabel</key>
-				<string>EAGLView.mm</string>
+				<string>SoraiOSFont.mm</string>
 				<key>PBXSplitModuleInNavigatorKey</key>
 				<dict>
 					<key>Split0</key>
 					<dict>
 						<key>PBXProjectModuleGUID</key>
-						<string>88057F77135EB93300B1535B</string>
+						<string>8834C370135F825F006A20F6</string>
 						<key>PBXProjectModuleLabel</key>
-						<string>EAGLView.mm</string>
+						<string>SoraiOSFont.mm</string>
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>88058088135EC2E600B1535B</string>
+						<string>8834C3A4135F8698006A20F6</string>
 						<key>history</key>
 						<array>
-							<string>88057F64135EB8D500B1535B</string>
+							<string>8834C34B135F7EF1006A20F6</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {762, 777}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>656 60 762 818 0 0 1440 878 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>8834C3A5135F8698006A20F6</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>hash.h</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>8834C3A6135F8698006A20F6</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>hash.h</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>8834C3A8135F8698006A20F6</string>
+						<key>history</key>
+						<array>
+							<string>8834C3A7135F8698006A20F6</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -235,7 +275,7 @@
 				<key>PBXModuleWindowStatusBarHidden2</key>
 				<false/>
 				<key>RubberWindowFrame</key>
-				<string>1455 -82 762 977 1440 -180 1920 1080 </string>
+				<string>1501 -124 762 977 1440 -180 1920 1080 </string>
 			</dict>
 		</dict>
 	</array>
@@ -307,10 +347,14 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>884CC35F12F6530100FD18FC</string>
+								<string>8834C33E135F7B20006A20F6</string>
+								<string>8834C334135F7AE7006A20F6</string>
 								<string>8897812613071C9500A69ADE</string>
-								<string>8897815313071CA100A69ADE</string>
+								<string>8897812713071C9500A69ADE</string>
 								<string>8897816313071CAB00A69ADE</string>
+								<string>889781EB13071CAB00A69ADE</string>
 								<string>88057F88135EBA4000B1535B</string>
+								<string>8834C317135F7A47006A20F6</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>29B97323FDCFA39411CA2CEA</string>
@@ -322,7 +366,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>11</integer>
+									<integer>3</integer>
 									<integer>2</integer>
 									<integer>1</integer>
 									<integer>0</integer>
@@ -366,7 +410,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraOGLESRenderer.cpp</string>
+								<string>SoraiOSFont.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -374,11 +418,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraOGLESRenderer.cpp</string>
+										<string>SoraiOSFont.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>88058087135EC2E600B1535B</string>
+										<string>8834C3A3135F8698006A20F6</string>
 										<key>history</key>
 										<array>
 											<string>889782A213071E2D00A69ADE</string>
@@ -393,16 +437,12 @@
 											<string>88057E68135EAD3A00B1535B</string>
 											<string>88057E93135EB0BA00B1535B</string>
 											<string>88057E94135EB0BA00B1535B</string>
-											<string>88057EA7135EB1F000B1535B</string>
-											<string>88057EAB135EB1F000B1535B</string>
 											<string>88057F22135EB4CC00B1535B</string>
 											<string>88057F23135EB4CC00B1535B</string>
 											<string>88057F25135EB4CC00B1535B</string>
 											<string>88057F26135EB4CC00B1535B</string>
-											<string>88057F50135EB7A600B1535B</string>
 											<string>88057F53135EB7A600B1535B</string>
 											<string>88057F6F135EB93300B1535B</string>
-											<string>88057F82135EB9E400B1535B</string>
 											<string>88057FCB135EBCCA00B1535B</string>
 											<string>88057FF7135EBF1B00B1535B</string>
 											<string>88057FF9135EBF1B00B1535B</string>
@@ -428,25 +468,44 @@
 											<string>88058018135EBF1B00B1535B</string>
 											<string>88058019135EBF1B00B1535B</string>
 											<string>8805801A135EBF1B00B1535B</string>
-											<string>8805801B135EBF1B00B1535B</string>
 											<string>8805801C135EBF1B00B1535B</string>
-											<string>8805801D135EBF1B00B1535B</string>
 											<string>8805801E135EBF1B00B1535B</string>
 											<string>8805801F135EBF1B00B1535B</string>
 											<string>88058036135EC00800B1535B</string>
 											<string>88058037135EC00800B1535B</string>
-											<string>88058038135EC00800B1535B</string>
-											<string>88058039135EC00800B1535B</string>
 											<string>8805804A135EC0F500B1535B</string>
 											<string>8805804B135EC0F500B1535B</string>
 											<string>8805804C135EC0F500B1535B</string>
-											<string>8805804E135EC0F500B1535B</string>
 											<string>8805804F135EC0F500B1535B</string>
 											<string>88058063135EC17700B1535B</string>
 											<string>88058064135EC17700B1535B</string>
 											<string>88058070135EC1E700B1535B</string>
-											<string>88058079135EC26500B1535B</string>
-											<string>8805807A135EC26500B1535B</string>
+											<string>880580A5135EC59500B1535B</string>
+											<string>8834C2DD135F6BB7006A20F6</string>
+											<string>8834C2DF135F6BB7006A20F6</string>
+											<string>8834C2E0135F6BB7006A20F6</string>
+											<string>8834C2E1135F6BB7006A20F6</string>
+											<string>8834C2E2135F6BB7006A20F6</string>
+											<string>8834C2EE135F6C06006A20F6</string>
+											<string>8834C327135F7AD9006A20F6</string>
+											<string>8834C328135F7AD9006A20F6</string>
+											<string>8834C329135F7AD9006A20F6</string>
+											<string>8834C32A135F7AD9006A20F6</string>
+											<string>8834C32C135F7AD9006A20F6</string>
+											<string>8834C32D135F7AD9006A20F6</string>
+											<string>8834C32E135F7AD9006A20F6</string>
+											<string>8834C32F135F7AD9006A20F6</string>
+											<string>8834C330135F7AD9006A20F6</string>
+											<string>8834C365135F825F006A20F6</string>
+											<string>8834C366135F825F006A20F6</string>
+											<string>8834C367135F825F006A20F6</string>
+											<string>8834C368135F825F006A20F6</string>
+											<string>8834C369135F825F006A20F6</string>
+											<string>8834C36A135F825F006A20F6</string>
+											<string>8834C36C135F825F006A20F6</string>
+											<string>8834C3A0135F8698006A20F6</string>
+											<string>8834C3A1135F8698006A20F6</string>
+											<string>8834C3A2135F8698006A20F6</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -504,9 +563,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>88057E2F135EAAC600B1535B</string>
+				<string>8834C1E3135F6A56006A20F6</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>88057E30135EAAC600B1535B</string>
+				<string>8834C1E4135F6A56006A20F6</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -644,13 +703,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>88057FD1135EBCCA00B1535B</string>
-		<string>88057FD2135EBCCA00B1535B</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>8818214412F13DAD00BE19CC</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>88057F76135EB93300B1535B</string>
+		<string>8834C3A5135F8698006A20F6</string>
+		<string>8834C36F135F825F006A20F6</string>
 		<string>/Users/darkfall/SoraGit/Sora-iPhone/Sora-iPhone.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -670,14 +727,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraiOSInitializer.h</string>
+								<string>SoraConstantStrings.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -694,6 +749,8 @@
 							<string>174pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -733,7 +790,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>8818214412F13DAD00BE19CC</string>
-				<string>88057E31135EAAC600B1535B</string>
+				<string>8834C1E6135F6A56006A20F6</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -746,7 +803,7 @@
 			<key>WindowToolGUID</key>
 			<string>8818214412F13DAD00BE19CC</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -855,13 +912,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>88057E32135EAAC600B1535B</string>
+				<string>8834C1E7135F6A56006A20F6</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>88057E33135EAAC600B1535B</string>
-				<string>88057E34135EAAC600B1535B</string>
-				<string>88057E35135EAAC600B1535B</string>
-				<string>88057E36135EAAC600B1535B</string>
-				<string>88057E37135EAAC600B1535B</string>
+				<string>8834C1E8135F6A56006A20F6</string>
+				<string>8834C1E9135F6A56006A20F6</string>
+				<string>8834C1EA135F6A56006A20F6</string>
+				<string>8834C1EB135F6A56006A20F6</string>
+				<string>8834C1EC135F6A56006A20F6</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -888,14 +945,12 @@
 							<key>Dock</key>
 							<array>
 								<dict>
-									<key>BecomeActive</key>
-									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraOGLESRenderer.cpp</string>
+										<string></string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -916,6 +971,8 @@
 							<string>212pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -951,8 +1008,8 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>88057EA0135EB1DA00B1535B</string>
-				<string>88057EA1135EB1DA00B1535B</string>
+				<string>8834C1F1135F6AA0006A20F6</string>
+				<string>8834C1F2135F6AA0006A20F6</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
@@ -980,8 +1037,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1017,7 +1072,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>88057E7F135EAF1600B1535B</string>
+				<string>880580A9135EC59500B1535B</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -1027,7 +1082,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

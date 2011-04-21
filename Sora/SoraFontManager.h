@@ -2,6 +2,7 @@
 #define SORA_FONT_MANAGER_H_
 
 //#include "SoraFont.h"
+#include "SoraPlatform.h"
 
 namespace sora {
 	/**

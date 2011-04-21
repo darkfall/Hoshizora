@@ -196,7 +196,7 @@ namespace sora {
             pRenderSystem->endScene();
         }
         
-		_logInternalLog();
+	//	_logInternalLog();
 		time += pTimer->getDelta();
         
 		pRenderSystem->endFrame();

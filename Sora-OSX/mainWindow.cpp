@@ -50,7 +50,7 @@ static float32 process = 0.0;
 
 
 bool mainWindow::updateFunc() {
-	mainScenes->update(sora->getDelta());
+//	mainScenes->update(sora->getDelta());
 	
     
     sora::SoraKeyEvent kev;
@@ -87,15 +87,15 @@ static float32 lpos[2] = {0.f, 0.f};
 static float32 attx = 0.01f, atty = 0.01f;
 
 bool mainWindow::renderFunc() {
-	sora->beginScene(0xFFFFFFFF);
+	sora->beginScene();
 	
 	//mainScenes->render();
 	//pSpr->render4V(100.f, 100.f, 700.f, 0.f, 700.f, 600.f, 100.f, 500.f);
    // sora->setViewPoint(0.f, 0.f, 1.f);
-  //  p3->render(0.f, 0.f);
+    p3->render(0.f, 0.f);
    // pSpr->render(0.f, 0.f);
 
-    pSpr->render(0.f, 0.f);
+//    pSpr->render(0.f, 0.f);
 
 //	pSpr->setRotation(0.5);
     
@@ -106,8 +106,8 @@ bool mainWindow::renderFunc() {
 //    shader->setParameterfv("process", &process, 1);
  //   shader->setParameterfv("lightPos", lpos, 2);
 	
-	pFont->print(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f time: %f\0\0", sora::SORA->getFPS(), sora::SORA->getDelta());
-
+	//pFont->print(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f time: %f\0\0", sora::SORA->getFPS(), sora::SORA->getDelta());
+//	pFont->render(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"sdlsdsd");
 	sora->endScene();
     
 
@@ -145,11 +145,11 @@ void mainWindow::init() {
     //pSpr->setZ(-0.3f); pSpr->setBlendMode(BLEND_DEFAULT_Z);
  //   pSpr2->setColor(0x88FFFFFF);
 	
-	luaobj = new sora::SoraLuaObject();
-	luaobj->doScript(L"test.txt");
+//	luaobj = new sora::SoraLuaObject();
+//	luaobj->doScript(L"test.txt");
 
-	pFont = sora::SORA->createFont(L"ThonburiBold.ttf", 20);
-	pFont->setColor(0x00000000);
+//	pFont = sora::SORA->createFont(L"ThonburiBold.ttf", 60);
+//	pFont->setColor(0xFFFFFFFF);
 //	pSpr2->setScale(0.5f, 0.5f);
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
 //	sora::SoraShader* s = pSpr2->attachShader(L"gray.ps", "simplePointLight", sora::FRAGMENT_SHADER);
@@ -157,9 +157,9 @@ void mainWindow::init() {
     registerEventFunc(this, &mainWindow::onSoundEvent);
 
 	bgm = sora::SORA->createMusicFile(L"01.ogg", false);
-    bgm->registerEventHandler(this);
+   // bgm->registerEventHandler(this);
 
-	bgm->play();
+	//bgm->play();
 }
 
 void mainWindow::onSoundEvent(const sora::SoraPlaybackEvent* event) {

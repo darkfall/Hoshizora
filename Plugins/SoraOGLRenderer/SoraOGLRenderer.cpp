@@ -564,7 +564,9 @@ namespace sora{
 
 		glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
 		if(quad.tex) {
-            bindTexture(quad.tex);			
+
+			//glBindTexture(GL_TEXTURE_2D, quad.tex->mTextureID);
+			bindTexture(quad.tex);			
 		} else {
             flush();
             glBindTexture(GL_TEXTURE_2D, 0);

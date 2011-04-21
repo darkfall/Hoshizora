@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 //Zlib Example Port to MacOS by Griffin Bu
-//Copyright Studio Symphonie & GameMaster & Ring0Dev
+//Copyright Studio GameMaster & Ring0Dev
 
 #ifndef PACKMEMORY_H_
 #define PACKMEMORY_H_

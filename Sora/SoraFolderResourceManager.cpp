@@ -62,7 +62,7 @@ namespace sora {
             uint8* pdata = new uint8[size+1];
 			if(pdata != NULL) {
 				fread(pdata, size, 1, pfile);
-                pdata[size] = '\0';
+                pdata[size] = 0;
 				return (void*)pdata;
 			}
 		}
@@ -79,7 +79,7 @@ namespace sora {
             uint8* pdata = new uint8[size+1];
 			if(pdata != NULL) {
 				fread(pdata, size, 1, pfile);
-                pdata[size] = '\0';
+                pdata[size] = 0;
 				return (void*)pdata;
 			}
 		}

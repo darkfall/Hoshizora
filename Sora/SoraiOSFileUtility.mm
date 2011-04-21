@@ -44,7 +44,7 @@ namespace sora {
 	SoraWString appDocumentPath() {
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-		return s2ws(NSString2String(basePath));
+		return s2ws(NSString2String(basePath)+"/");
 	}
 	
 	bool appFileExists(const SoraWString& path) {

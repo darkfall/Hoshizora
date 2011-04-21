@@ -37,7 +37,7 @@
 
 #include "../AnimationEditor/aeMainWindow.h"
 
-#include "SoraFMODSoundSystem.h"
+//#include "SoraFMODSoundSystem.h"
 
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 	sora->registerResourceManager(new sora::SoraZipResourceManager);
 	sora->registerFontManager(new sora::SoraFTFontManager);
 	sora->registerInput(new sora::SoraOGLInput);
-    sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
+  //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
         
 	sora::HSORARESOURCE res = sora->loadResourcePack(L"./data.rfResource");
 	if(!res) {
