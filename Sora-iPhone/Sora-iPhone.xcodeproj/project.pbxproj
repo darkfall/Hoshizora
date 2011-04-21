@@ -20,6 +20,12 @@
 		88057F95135EBA4D00B1535B /* rfMapRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */; };
 		88057FAD135EBBBF00B1535B /* resource.SoraResource in Resources */ = {isa = PBXBuildFile; fileRef = 88057FAC135EBBBF00B1535B /* resource.SoraResource */; };
 		88058042135EC07E00B1535B /* data.rfResource in Resources */ = {isa = PBXBuildFile; fileRef = 88058041135EC07E00B1535B /* data.rfResource */; };
+		8829061D135FE209006EF84A /* SoraiOSStringConv.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8829061C135FE209006EF84A /* SoraiOSStringConv.mm */; };
+		8829063E135FE427006EF84A /* boss_patchouli.png in Resources */ = {isa = PBXBuildFile; fileRef = 8829063B135FE427006EF84A /* boss_patchouli.png */; };
+		8829063F135FE427006EF84A /* editorWindow.json in Resources */ = {isa = PBXBuildFile; fileRef = 8829063C135FE427006EF84A /* editorWindow.json */; };
+		88290640135FE427006EF84A /* patchouli.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8829063D135FE427006EF84A /* patchouli.txt */; };
+		882906FC135FE67B006EF84A /* patchouli.anm in Resources */ = {isa = PBXBuildFile; fileRef = 882906FB135FE67B006EF84A /* patchouli.anm */; };
+		88290746135FE9A3006EF84A /* SoraMiscTool_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88290745135FE9A3006EF84A /* SoraMiscTool_iOS.mm */; };
 		8834C278135F6B37006A20F6 /* actionevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C1F5135F6B37006A20F6 /* actionevent.cpp */; };
 		8834C279135F6B37006A20F6 /* basiccontainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C1F8135F6B37006A20F6 /* basiccontainer.cpp */; };
 		8834C27A135F6B37006A20F6 /* cliprectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C1FA135F6B37006A20F6 /* cliprectangle.cpp */; };
@@ -89,7 +95,7 @@
 		8834C321135F7A47006A20F6 /* patchouli.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8834C31D135F7A47006A20F6 /* patchouli.txt */; };
 		8834C337135F7AE7006A20F6 /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C335135F7AE7006A20F6 /* SoraSpriteAnimation.cpp */; };
 		8834C349135F7B85006A20F6 /* SoraiOSFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8834C346135F7B85006A20F6 /* SoraiOSFont.mm */; };
-		8834C34A135F7B85006A20F6 /* SoraiOSFontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C347135F7B85006A20F6 /* SoraiOSFontManager.cpp */; };
+		8834C34A135F7B85006A20F6 /* SoraiOSFontManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8834C347135F7B85006A20F6 /* SoraiOSFontManager.mm */; };
 		884CC59912F6537B00FD18FC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58A12F6537B00FD18FC /* UIKit.framework */; };
 		884CC59A12F6537B00FD18FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58B12F6537B00FD18FC /* QuartzCore.framework */; };
 		884CC59B12F6537B00FD18FC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58C12F6537B00FD18FC /* MediaPlayer.framework */; };
@@ -197,6 +203,14 @@
 		88057F93135EBA4D00B1535B /* rfMapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMapRenderer.h; sourceTree = "<group>"; };
 		88057FAC135EBBBF00B1535B /* resource.SoraResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = resource.SoraResource; path = "../Sora-OSX/build/Debug/resource.SoraResource"; sourceTree = SOURCE_ROOT; };
 		88058041135EC07E00B1535B /* data.rfResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.rfResource; path = ../Resources/data.rfResource; sourceTree = SOURCE_ROOT; };
+		8829061B135FE209006EF84A /* SoraiOSStringConv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSStringConv.h; sourceTree = "<group>"; };
+		8829061C135FE209006EF84A /* SoraiOSStringConv.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSStringConv.mm; sourceTree = "<group>"; };
+		8829063B135FE427006EF84A /* boss_patchouli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boss_patchouli.png; path = anime/boss_patchouli.png; sourceTree = "<group>"; };
+		8829063C135FE427006EF84A /* editorWindow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = editorWindow.json; path = anime/editorWindow.json; sourceTree = "<group>"; };
+		8829063D135FE427006EF84A /* patchouli.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = patchouli.txt; path = anime/patchouli.txt; sourceTree = "<group>"; };
+		882906FB135FE67B006EF84A /* patchouli.anm */ = {isa = PBXFileReference; lastKnownFileType = file; path = patchouli.anm; sourceTree = "<group>"; };
+		88290744135FE95D006EF84A /* SoraMiscTool_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMiscTool_iOS.h; sourceTree = "<group>"; };
+		88290745135FE9A3006EF84A /* SoraMiscTool_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraMiscTool_iOS.mm; sourceTree = "<group>"; };
 		8834C1F5135F6B37006A20F6 /* actionevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actionevent.cpp; sourceTree = "<group>"; };
 		8834C1F6135F6B37006A20F6 /* actionevent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actionevent.hpp; sourceTree = "<group>"; };
 		8834C1F7135F6B37006A20F6 /* actionlistener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actionlistener.hpp; sourceTree = "<group>"; };
@@ -345,7 +359,7 @@
 		8834C336135F7AE7006A20F6 /* SoraSpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSpriteAnimation.h; sourceTree = "<group>"; };
 		8834C345135F7B85006A20F6 /* SoraiOSFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraiOSFont.h; path = ../Plugins/SoraiOSFontManager/SoraiOSFont.h; sourceTree = SOURCE_ROOT; };
 		8834C346135F7B85006A20F6 /* SoraiOSFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoraiOSFont.mm; path = ../Plugins/SoraiOSFontManager/SoraiOSFont.mm; sourceTree = SOURCE_ROOT; };
-		8834C347135F7B85006A20F6 /* SoraiOSFontManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraiOSFontManager.cpp; path = ../Plugins/SoraiOSFontManager/SoraiOSFontManager.cpp; sourceTree = SOURCE_ROOT; };
+		8834C347135F7B85006A20F6 /* SoraiOSFontManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoraiOSFontManager.mm; path = ../Plugins/SoraiOSFontManager/SoraiOSFontManager.mm; sourceTree = SOURCE_ROOT; };
 		8834C348135F7B85006A20F6 /* SoraiOSFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraiOSFontManager.h; path = ../Plugins/SoraiOSFontManager/SoraiOSFontManager.h; sourceTree = SOURCE_ROOT; };
 		884CC58A12F6537B00FD18FC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		884CC58B12F6537B00FD18FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/QuartzCore.framework; sourceTree = SOURCE_ROOT; };
@@ -409,7 +423,6 @@
 		8897817513071CAB00A69ADE /* SoraMiscTool_Win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMiscTool_Win32.h; sourceTree = "<group>"; };
 		8897817613071CAB00A69ADE /* SoraOSXTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOSXTimer.h; sourceTree = "<group>"; };
 		8897817713071CAB00A69ADE /* SoraTimer_Win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTimer_Win32.h; sourceTree = "<group>"; };
-		8897817813071CAB00A69ADE /* uncopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uncopyable.h; sourceTree = "<group>"; };
 		8897817A13071CAB00A69ADE /* FolderTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FolderTree.cpp; sourceTree = "<group>"; };
 		8897817B13071CAB00A69ADE /* FolderTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTree.h; sourceTree = "<group>"; };
 		8897817C13071CAB00A69ADE /* memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory.cpp; sourceTree = "<group>"; };
@@ -623,6 +636,7 @@
 				88057F91135EBA4D00B1535B /* rfMainWindow.h */,
 				88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */,
 				88057F93135EBA4D00B1535B /* rfMapRenderer.h */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -635,7 +649,6 @@
 			isa = PBXGroup;
 			children = (
 				32CA4F630368D1EE00C91783 /* Sora_iPhone_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -643,6 +656,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				882906FB135FE67B006EF84A /* patchouli.anm */,
+				8829063B135FE427006EF84A /* boss_patchouli.png */,
+				8829063C135FE427006EF84A /* editorWindow.json */,
+				8829063D135FE427006EF84A /* patchouli.txt */,
 				88057FAC135EBBBF00B1535B /* resource.SoraResource */,
 				88058041135EC07E00B1535B /* data.rfResource */,
 				889782A813071E6500A69ADE /* magicCircle.png */,
@@ -903,8 +920,8 @@
 			children = (
 				8834C345135F7B85006A20F6 /* SoraiOSFont.h */,
 				8834C346135F7B85006A20F6 /* SoraiOSFont.mm */,
-				8834C347135F7B85006A20F6 /* SoraiOSFontManager.cpp */,
 				8834C348135F7B85006A20F6 /* SoraiOSFontManager.h */,
+				8834C347135F7B85006A20F6 /* SoraiOSFontManager.mm */,
 			);
 			name = SoraiOSFontManager;
 			sourceTree = "<group>";
@@ -1075,6 +1092,8 @@
 				889781E113071CAB00A69ADE /* SoraTexture.h */,
 				889781E213071CAB00A69ADE /* SoraTextureMap.h */,
 				889781E313071CAB00A69ADE /* SoraTimer.h */,
+				8829061B135FE209006EF84A /* SoraiOSStringConv.h */,
+				8829061C135FE209006EF84A /* SoraiOSStringConv.mm */,
 				889781E413071CAB00A69ADE /* SoraTimerEvent.cpp */,
 				889781E513071CAB00A69ADE /* SoraTimerEvent.h */,
 				889781E613071CAB00A69ADE /* SoraTypeInfo.h */,
@@ -1115,7 +1134,8 @@
 				8897817513071CAB00A69ADE /* SoraMiscTool_Win32.h */,
 				8897817613071CAB00A69ADE /* SoraOSXTimer.h */,
 				8897817713071CAB00A69ADE /* SoraTimer_Win32.h */,
-				8897817813071CAB00A69ADE /* uncopyable.h */,
+				88290744135FE95D006EF84A /* SoraMiscTool_iOS.h */,
+				88290745135FE9A3006EF84A /* SoraMiscTool_iOS.mm */,
 			);
 			path = Defaults;
 			sourceTree = "<group>";
@@ -1292,6 +1312,10 @@
 				8834C31E135F7A47006A20F6 /* boss_patchouli.png in Resources */,
 				8834C320135F7A47006A20F6 /* editorWindow.json in Resources */,
 				8834C321135F7A47006A20F6 /* patchouli.txt in Resources */,
+				8829063E135FE427006EF84A /* boss_patchouli.png in Resources */,
+				8829063F135FE427006EF84A /* editorWindow.json in Resources */,
+				88290640135FE427006EF84A /* patchouli.txt in Resources */,
+				882906FC135FE67B006EF84A /* patchouli.anm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1427,7 +1451,9 @@
 				8834C31F135F7A47006A20F6 /* editorWindow.cpp in Sources */,
 				8834C337135F7AE7006A20F6 /* SoraSpriteAnimation.cpp in Sources */,
 				8834C349135F7B85006A20F6 /* SoraiOSFont.mm in Sources */,
-				8834C34A135F7B85006A20F6 /* SoraiOSFontManager.cpp in Sources */,
+				8834C34A135F7B85006A20F6 /* SoraiOSFontManager.mm in Sources */,
+				8829061D135FE209006EF84A /* SoraiOSStringConv.mm in Sources */,
+				88290746135FE9A3006EF84A /* SoraMiscTool_iOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

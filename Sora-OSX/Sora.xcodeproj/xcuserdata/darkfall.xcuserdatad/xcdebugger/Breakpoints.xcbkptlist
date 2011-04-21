@@ -371,11 +371,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "324251802.983395"
+         timestampString = "325059759.095285"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "189"
-         endingLineNumber = "189"
+         startingLineNumber = "193"
+         endingLineNumber = "193"
          landmarkName = "vlcWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -427,11 +427,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "324251802.983395"
+         timestampString = "325059759.095285"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
          landmarkName = "vlcWindow::_loadGUI()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -455,11 +455,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "324251802.983395"
+         timestampString = "325059759.095285"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
+         startingLineNumber = "164"
+         endingLineNumber = "164"
          landmarkName = "vlcWindow::_loadGUI()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -469,11 +469,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "vlcTestWindow.cpp"
-         timestampString = "324251802.983395"
+         timestampString = "325059759.095285"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "185"
-         endingLineNumber = "185"
+         startingLineNumber = "189"
+         endingLineNumber = "189"
          landmarkName = "vlcWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -502,6 +502,48 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "6"
          endingLineNumber = "6">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraOGLRenderer/SoraOGLRenderer.cpp"
+         timestampString = "325053828.918369"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "393"
+         endingLineNumber = "393"
+         landmarkName = "SoraOGLRenderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraOGLRenderer/SoraOGLRenderer.cpp"
+         timestampString = "325053850.315928"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "432"
+         endingLineNumber = "432"
+         landmarkName = "SoraOGLRenderer::createTextureFromRawData(unsigned int* data, int32 w, int32 h)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraFreetypeFont/SoraFreetypeFont.cpp"
+         timestampString = "325059512.789161"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
+         landmarkName = "SoraFTFont::getGlyphByChar(wchar_t c)"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

@@ -79,22 +79,110 @@ static SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRe
 	}
 	
 	//Objc NSString 和 String 的相互转换
-	std::string NSString2String(NSString* nss) {
+	static std::string NSString2String(NSString* nss) {
 		std::string buffer([nss UTF8String]);
 		return buffer;
 	}
 	
-	NSString* string2NSString(const std::string& str) {
+	static NSString* string2NSString(const std::string& str) {
 		NSString* buffer = [[NSString alloc] initWithUTF8String:str.c_str()];
 		return buffer;
 	}
 	
-	NSString* string2NSString(const char* str) {
+	static NSString* string2NSString(const char* str) {
 		NSString* buffer = [[NSString alloc] initWithUTF8String:str];
 		return buffer;
 	}
 	
-	
+	static NSString* wstring2NSString(const std::wstring& ws) {
+		char* data = (char*)ws.data();
+		unsigned size = ws.size() * sizeof(wchar_t);
+		
+#if TARGET_RT_BIG_ENDIAN
+		const NSStringEncoding kEncoding_wchar_t = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF32BE);
+#else
+		const NSStringEncoding kEncoding_wchar_t = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF32LE);
+#endif
+		
+		NSString* result = [[[NSString alloc] initWithBytes:data length:size encoding:kEncoding_wchar_t] autorelease];
+		return result;
+	}
+	/*
+	 Family: Hiragino Kaku Gothic ProN W3 
+	 Font: HiraKakuProN-W3 
+	 Family: Courier 
+	 Font: Courier 
+	 Font: Courier-BoldOblique 
+	 Font: Courier-Oblique 
+	 Font: Courier-Bold 
+	 Family: Arial 
+	 Font: ArialMT 
+	 Font: Arial-BoldMT 
+	 Font: Arial-BoldItalicMT 
+	 Font: Arial-ItalicMT 
+	 Family: STHeiti TC 
+	 Font: STHeitiTC-Light 
+	 Font: STHeitiTC-Medium 
+	 Family: AppleGothic 
+	 Font: AppleGothic 
+	 Family: Courier New 
+	 Font: CourierNewPS-BoldMT 
+	 Font: CourierNewPS-ItalicMT 
+	 Font: CourierNewPS-BoldItalicMT 
+	 Font: CourierNewPSMT 
+	 Family: Zapfino 
+	 Font: Zapfino 
+	 Family: Hiragino Kaku Gothic ProN W6 
+	 Font: HiraKakuProN-W6 
+	 Family: Arial Unicode MS 
+	 Font: ArialUnicodeMS 
+	 Family: STHeiti SC 
+	 Font: STHeitiSC-Medium 
+	 Font: STHeitiSC-Light 
+	 Family: American Typewriter 
+	 Font: AmericanTypewriter 
+	 Font: AmericanTypewriter-Bold 
+	 Family: Helvetica 
+	 Font: Helvetica-Oblique 
+	 Font: Helvetica-BoldOblique 
+	 Font: Helvetica 
+	 Font: Helvetica-Bold 
+	 Family: Marker Felt 
+	 Font: MarkerFelt-Thin 
+	 Family: Helvetica Neue 
+	 Font: HelveticaNeue 
+	 Font: HelveticaNeue-Bold 
+	 Family: DB LCD Temp 
+	 Font: DBLCDTempBlack 
+	 Family: Verdana 
+	 Font: Verdana-Bold 
+	 Font: Verdana-BoldItalic 
+	 Font: Verdana 
+	 Font: Verdana-Italic 
+	 Family: Times New Roman 
+	 Font: TimesNewRomanPSMT 
+	 Font: TimesNewRomanPS-BoldMT 
+	 Font: TimesNewRomanPS-BoldItalicMT 
+	 Font: TimesNewRomanPS-ItalicMT 
+	 Family: Georgia 
+	 Font: Georgia-Bold 
+	 Font: Georgia 
+	 Font: Georgia-BoldItalic 
+	 Font: Georgia-Italic 
+	 Family: STHeiti J 
+	 Font: STHeitiJ-Medium 
+	 Font: STHeitiJ-Light 
+	 Family: Arial Rounded MT Bold 
+	 Font: ArialRoundedMTBold 
+	 Family: Trebuchet MS 
+	 Font: TrebuchetMS-Italic 
+	 Font: TrebuchetMS 
+	 Font: Trebuchet-BoldItalic 
+	 Font: TrebuchetMS-Bold 
+	 Family: STHeiti K 
+	 Font: STHeitiK-Medium 
+	 Font: STHeitiK-Light
+	*/
 
 } // namespace sora
 

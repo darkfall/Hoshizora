@@ -11,9 +11,11 @@
 
 #include <algorithm>
 
+#ifdef OS_IOS
+#include "SoraiOSStringConv.h"
+#endif
 
 namespace sora {
-
 	
 std::string int_to_str(int32 n)
 {
@@ -119,10 +121,24 @@ std::string fp_to_str(float32 x)
 	}
 #endif
 
+	std::string ws2s2(const std::wstring& ws) {
+		std::string buffer(ws.length(), ' ');
+		std::copy(ws.begin(), ws.end(), buffer.begin());
+		return buffer;
+	}
+	
+	std::wstring s2ws2(const std::string& s) {
+		std::wstring buffer(s.length(), L' ');
+		std::copy(s.begin(), s.end(), buffer.begin());
+		return buffer;
+	}
+	
 std::string ws2s(const std::wstring& ws)
 {
 #ifdef WIN32
 	return WChar2Ansi(ws);
+#elif defined(OS_IOS)
+	return iOSWString2String(ws);
 #endif
     std::string curLocale = setlocale(LC_ALL, NULL);        // curLocale = "C";
     setlocale(LC_CTYPE, "chs");
@@ -141,6 +157,8 @@ std::wstring s2ws(const std::string& s)
 {
 #ifdef WIN32
 	return Ansi2WChar(s, s.size());
+#elif defined(OS_IOS)
+	return iOSString2WString(s);
 #endif
     setlocale(LC_CTYPE, "chs"); 
     const char* _Source = s.c_str();
@@ -154,17 +172,6 @@ std::wstring s2ws(const std::string& s)
     return result;
 }
 	
-	std::string ws2s2(const std::wstring& ws) {
-		std::string buffer(ws.length(), ' ');
-		std::copy(ws.begin(), ws.end(), buffer.begin());
-		return buffer;
-	}
-	
-	std::wstring s2ws2(const std::string& s) {
-		std::wstring buffer(s.length(), L' ');
-		std::copy(s.begin(), s.end(), buffer.begin());
-		return buffer;
-	}
 
 	
 inline size_t skipSpaces(const std::string& str, size_t currPos) {

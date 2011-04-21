@@ -75,6 +75,7 @@
 		883814B213425F080021FD96 /* SOIL.c in Sources */ = {isa = PBXBuildFile; fileRef = 883814AE13425F080021FD96 /* SOIL.c */; };
 		883814B313425F080021FD96 /* stb_image_aug.c in Sources */ = {isa = PBXBuildFile; fileRef = 883814AF13425F080021FD96 /* stb_image_aug.c */; };
 		883900F0131A096700CC101A /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 883900EE131A096700CC101A /* editorWindow.cpp */; };
+		88411DD0135FFE7A009BAA61 /* osx_libglfw_i386.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88411DCF135FFE7A009BAA61 /* osx_libglfw_i386.lib */; };
 		884575D81300DB38003EC408 /* state_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884575D71300DB38003EC408 /* state_test.cpp */; };
 		884E5E3C133AFCB3006E9CC6 /* libvlc.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E38133AFCB3006E9CC6 /* libvlc.5.dylib */; };
 		884E5E3D133AFCB3006E9CC6 /* libvlc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E39133AFCB3006E9CC6 /* libvlc.dylib */; };
@@ -92,10 +93,7 @@
 		8859BF1912B47EC300F3304A /* SoraOGLRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8859BF0E12B47EC300F3304A /* SoraOGLRenderTarget.cpp */; };
 		8859BFA412B4809D00F3304A /* SoraFreetypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8859BF9E12B4809D00F3304A /* SoraFreetypeFont.cpp */; };
 		8859BFA512B4809D00F3304A /* SoraFTFontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8859BFA012B4809D00F3304A /* SoraFTFontManager.cpp */; };
-		885D9781131B4BDE009A7E14 /* osx_libglfw_i386.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 885D977F131B4BDE009A7E14 /* osx_libglfw_i386.lib */; };
 		885D9782131B4BDE009A7E14 /* osx_libglfw_x86_64.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 885D9780131B4BDE009A7E14 /* osx_libglfw_x86_64.lib */; };
-		885D97BE131B4D25009A7E14 /* osx_libfreetype_i386.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 885D97BC131B4D25009A7E14 /* osx_libfreetype_i386.lib */; };
-		885D97BF131B4D25009A7E14 /* osx_libfreetype_x86_64.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 885D97BD131B4D25009A7E14 /* osx_libfreetype_x86_64.lib */; };
 		88691167134E15850012BDE0 /* SoraCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88691166134E15850012BDE0 /* SoraCanvas.cpp */; };
 		886DE1D812B5B81F009A9CF5 /* SoraOGLInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886DE1D712B5B81F009A9CF5 /* SoraOGLInput.cpp */; };
 		886DE25012B5C283009A9CF5 /* SoraOGLKeyPoll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886DE24F12B5C283009A9CF5 /* SoraOGLKeyPoll.cpp */; };
@@ -226,6 +224,7 @@
 		88D87D6112A09A66007D6865 /* SoraStringConv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D4D12A09A66007D6865 /* SoraStringConv.cpp */; };
 		88D87D6212A09A66007D6865 /* SoraTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D4F12A09A66007D6865 /* SoraTexture.cpp */; };
 		88D87D6312A09A66007D6865 /* SoraTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D5512A09A66007D6865 /* SoraTimerEvent.cpp */; };
+		88DAEBA713600618002221FB /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DAEBA613600618002221FB /* libfreetype.dylib */; };
 		88DCB28912DE475300C0B009 /* SoraResourceFileFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB28812DE475300C0B009 /* SoraResourceFileFinder.cpp */; };
 		88DCB37612DE7ABA00C0B009 /* SoraFolderResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB37512DE7ABA00C0B009 /* SoraFolderResourceManager.cpp */; };
 		88DCB3CE12DE837C00C0B009 /* SoraOSXFileUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB3CD12DE837C00C0B009 /* SoraOSXFileUtility.mm */; };
@@ -431,6 +430,7 @@
 		883900EF131A096700CC101A /* editorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editorWindow.h; path = ../SoraParticleEditor/editorWindow.h; sourceTree = SOURCE_ROOT; };
 		8839FFA51319FCD500CC101A /* peMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = peMainWindow.h; path = SoraParticleEditor/peMainWindow.h; sourceTree = "<group>"; };
 		8839FFBE1319FE4700CC101A /* guichansetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guichansetup.h; sourceTree = "<group>"; };
+		88411DCF135FFE7A009BAA61 /* osx_libglfw_i386.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = osx_libglfw_i386.lib; path = "../../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraOGLRenderer/osx_libglfw_i386.lib"; sourceTree = "<group>"; };
 		884575D61300DB38003EC408 /* state_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = state_test.h; path = Experimental/state_test.h; sourceTree = "<group>"; };
 		884575D71300DB38003EC408 /* state_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = state_test.cpp; path = Experimental/state_test.cpp; sourceTree = "<group>"; };
 		884CC87312F88E1300FD18FC /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
@@ -566,10 +566,7 @@
 		8859BF9F12B4809D00F3304A /* SoraFreetypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFreetypeFont.h; sourceTree = "<group>"; };
 		8859BFA012B4809D00F3304A /* SoraFTFontManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraFTFontManager.cpp; sourceTree = "<group>"; };
 		8859BFA112B4809D00F3304A /* SoraFTFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFTFontManager.h; sourceTree = "<group>"; };
-		885D977F131B4BDE009A7E14 /* osx_libglfw_i386.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libglfw_i386.lib; sourceTree = "<group>"; };
 		885D9780131B4BDE009A7E14 /* osx_libglfw_x86_64.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libglfw_x86_64.lib; sourceTree = "<group>"; };
-		885D97BC131B4D25009A7E14 /* osx_libfreetype_i386.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libfreetype_i386.lib; sourceTree = "<group>"; };
-		885D97BD131B4D25009A7E14 /* osx_libfreetype_x86_64.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libfreetype_x86_64.lib; sourceTree = "<group>"; };
 		88691165134E15850012BDE0 /* SoraCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCanvas.h; sourceTree = "<group>"; };
 		88691166134E15850012BDE0 /* SoraCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraCanvas.cpp; sourceTree = "<group>"; };
 		886DE1D612B5B81F009A9CF5 /* SoraOGLInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLInput.h; sourceTree = "<group>"; };
@@ -927,6 +924,7 @@
 		88D87D5412A09A66007D6865 /* SoraWindowInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraWindowInfo.h; sourceTree = "<group>"; };
 		88D87D5512A09A66007D6865 /* SoraTimerEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraTimerEvent.cpp; sourceTree = "<group>"; };
 		88D87D5612A09A66007D6865 /* SoraTimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTimerEvent.h; sourceTree = "<group>"; };
+		88DAEBA613600618002221FB /* libfreetype.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfreetype.dylib; sourceTree = "<group>"; };
 		88DCB24012DE165000C0B009 /* SoraResourceFileFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraResourceFileFinder.h; sourceTree = "<group>"; };
 		88DCB28812DE475300C0B009 /* SoraResourceFileFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraResourceFileFinder.cpp; sourceTree = "<group>"; };
 		88DCB37412DE7ABA00C0B009 /* SoraFolderResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFolderResourceManager.h; sourceTree = "<group>"; };
@@ -980,10 +978,7 @@
 				88FABD85129F271900B6A1D8 /* AudioToolbox.framework in Frameworks */,
 				88FABDCA129F2A9C00B6A1D8 /* QTKit.framework in Frameworks */,
 				88FABDD5129F2AA200B6A1D8 /* CoreAudio.framework in Frameworks */,
-				885D9781131B4BDE009A7E14 /* osx_libglfw_i386.lib in Frameworks */,
 				885D9782131B4BDE009A7E14 /* osx_libglfw_x86_64.lib in Frameworks */,
-				885D97BE131B4D25009A7E14 /* osx_libfreetype_i386.lib in Frameworks */,
-				885D97BF131B4D25009A7E14 /* osx_libfreetype_x86_64.lib in Frameworks */,
 				884E5E3C133AFCB3006E9CC6 /* libvlc.5.dylib in Frameworks */,
 				884E5E3D133AFCB3006E9CC6 /* libvlc.dylib in Frameworks */,
 				884E5E3E133AFCB3006E9CC6 /* libvlccore.4.dylib in Frameworks */,
@@ -993,6 +988,8 @@
 				88BD153F1346ADCA0068AABA /* LuaPlusDebug.lib in Frameworks */,
 				88BF9F6E135AA63200BB8E70 /* Cg.framework in Frameworks */,
 				8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */,
+				88411DD0135FFE7A009BAA61 /* osx_libglfw_i386.lib in Frameworks */,
+				88DAEBA713600618002221FB /* libfreetype.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1347,9 +1344,9 @@
 		8859BEFA12B47EC300F3304A /* SoraOGLRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				88411DCF135FFE7A009BAA61 /* osx_libglfw_i386.lib */,
 				8859BEFB12B47EC300F3304A /* glfw */,
 				8859BF0012B47EC300F3304A /* soil */,
-				885D977F131B4BDE009A7E14 /* osx_libglfw_i386.lib */,
 				885D9780131B4BDE009A7E14 /* osx_libglfw_x86_64.lib */,
 				8859BF0C12B47EC300F3304A /* SoraOGLRenderer.cpp */,
 				8859BF0D12B47EC300F3304A /* SoraOGLRenderer.h */,
@@ -1403,8 +1400,7 @@
 		8859BF4A12B4809D00F3304A /* SoraFreetypeFont */ = {
 			isa = PBXGroup;
 			children = (
-				885D97BC131B4D25009A7E14 /* osx_libfreetype_i386.lib */,
-				885D97BD131B4D25009A7E14 /* osx_libfreetype_x86_64.lib */,
+				88DAEBA613600618002221FB /* libfreetype.dylib */,
 				8859BF4B12B4809D00F3304A /* freetype */,
 				8859BF9C12B4809D00F3304A /* ft2build.h */,
 				8859BF9E12B4809D00F3304A /* SoraFreetypeFont.cpp */,
@@ -2451,6 +2447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2479,6 +2476,9 @@
 					"$(SRCROOT)/../Plugins/SoraLuaBind/",
 					"\"$(SRCROOT)/../Plugins/libvlc/osx/lib\"",
 					"\"$(SRCROOT)/../Plugins/fmod\"",
+					"\"$(SRCROOT)/../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraFreetypeFont\"",
+					"\"$(SRCROOT)/../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraOGLRenderer\"",
+					"\"$(SRCROOT)/../Plugins/SoraFreetypeFont\"",
 				);
 				PRODUCT_NAME = Sora;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
@@ -2514,6 +2514,9 @@
 					"$(SRCROOT)/../Plugins/SoraLuaBind/",
 					"\"$(SRCROOT)/../Plugins/libvlc/osx/lib\"",
 					"\"$(SRCROOT)/../Plugins/fmod\"",
+					"\"$(SRCROOT)/../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraFreetypeFont\"",
+					"\"$(SRCROOT)/../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraOGLRenderer\"",
+					"\"$(SRCROOT)/../Plugins/SoraFreetypeFont\"",
 				);
 				PRODUCT_NAME = Sora;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";

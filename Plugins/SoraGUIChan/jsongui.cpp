@@ -170,7 +170,7 @@ namespace sora {
             if(val.isMember("fontsize")) 
                 fontsize = val["fontsize"].asInt();
             else fontsize = 16;	
-            gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(val["font"].asCString(), fontsize);
+            gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(s2ws(val["font"].asCString()), fontsize);
             if(pfont) {
                 widget->setFont(pfont);
             }

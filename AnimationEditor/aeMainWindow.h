@@ -36,7 +36,7 @@ class aeMainWindow: public sora::SoraWindowInfoBase {
 	void init() {		
 		sora::SORA->setFPS(60);
 		
-		if(!sora::GCN_GLOBAL->initGUIChan(L"ThonburiBold.ttf", 16)) {
+		if(!sora::GCN_GLOBAL->initGUIChan(L"STHeiti Light.ttc", 16)) {
 			sora::SORA->messageBox("Error initializing GUIChan, make sure ARIALN.ttf exists, exiting...", "Fatal Error", MB_OK | MB_ICONERROR);
 			sora::SORA->shutDown();
 		}

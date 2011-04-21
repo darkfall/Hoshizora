@@ -250,7 +250,7 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 			int fontsize;
 			if(element->Attribute("fontsize")) fontsize = atoi(element->Attribute("fontsize")->c_str());
 			else fontsize = 16;	
-			gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(element->Attribute("font")->c_str(), fontsize);
+			gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(s2ws(element->Attribute("font")->c_str()), fontsize);
 			if(pfont) {
 				fonts[*element->Attribute("font")] = pfont;
 				widget->setFont(pfont);

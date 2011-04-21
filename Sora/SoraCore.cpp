@@ -17,6 +17,7 @@
 #include "Defaults/SoraTimer_Win32.h"
 #include "Defaults/SoraMiscTool_Win32.h"
 #include "Defaults/SoraMiscTool_OSX.h"
+#include "Defaults/SoraMiscTool_iOS.h"
 
 #include "Random/hgeRandom.h"
 
@@ -73,6 +74,8 @@ namespace sora {
 		pMiscTool = new SoraMiscToolWin32;  return;
 #elif defined(OS_OSX)
 		pMiscTool = new SoraMiscToolOSX; return;
+#elif defined(OS_IOS)
+		pMiscTool = new SoraMiscTooliOS; return;
 #endif
 		pMiscTool = new SoraDefaultMiscTool;
 	}
@@ -797,13 +800,21 @@ namespace sora {
 			return 0;
 		}
 
+#ifndef OS_IOS
+        if(SoraFileUtility::fileExists(font)) {
+            SoraFont* f = pFontManager->getFont(ws2s(font).c_str(), size);
+            return f;
+        }
 		ulong32 s;
 		void* p = getResourceFile(font, s);
 		if(p) {
-			SoraFont* f = pFontManager->getFont((const char*)p, size, s, ws2s(font).c_str());
+			SoraFont* f = pFontManager->getFont((const char*)p, size, s-1, ws2s(font).c_str());
 			//freeResourceFile(p);
 			return f;
 		}
+#else
+		return pFontManager->getFont(ws2s(font).c_str(), size);
+#endif
 		_postError("Error loading font");
 		return 0;
 	}

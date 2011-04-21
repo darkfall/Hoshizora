@@ -14,6 +14,11 @@
 
 #include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraFileUtility.h"
+#include "SoraiOSFontManager/SoraiOSFontManager.h"
+
+#include "SoraFont.h"
+
+#include "SoraGUIChan/guichansetup.h"
 
 class SoraiOSMainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -24,16 +29,16 @@ public:
 	}
 	
 	virtual bool renderFunc() {
-		sora::SORA->beginScene(0, fbo);
-		pBG->render();
-	    if(sprTest) sprTest->render(0.f, 0.f);
-		//sprm->render(0.f, 0.f, 0.f);
-		sora::SORA->endScene();
-		
 		sora::SORA->beginScene();
-		sora::SoraSprite* pp = new sora::SoraSprite(sora::SORA->getTargetTexture(fbo));
-		if(pp)
-			pp->render();
+		pBG->render();
+	   // if(sprTest) sprTest->render(0.f, 0.f);
+		
+	//	pFont->render(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"test\0");
+	//	pFont2->render(0.f, 20.f, sora::FONT_ALIGNMENT_LEFT, L"多撒旦as\0");
+		
+		sora::GCN_GLOBAL->gcnLogic();
+		sora::GCN_GLOBAL->gcnDraw();
+		//sprm->render(0.f, 0.f, 0.f);
 		sora::SORA->endScene();
 		
 		return false;
@@ -41,6 +46,7 @@ public:
 	
 	void init() {
 		sora::SORA->registerResourceManager(new sora::SoraZipResourceManager);
+		sora::SORA->registerFontManager(new sora::SoraiOSFontManager);
 		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource"));
 		
 		printf("%s\n", sora::ws2s(sora::iOSGetResourceName(L"magicCircle.png")).c_str());
@@ -49,7 +55,19 @@ public:
 		pBG = sora::SORA->createSprite(L"background1.png");
 		pBG->setScale(pBG->getSpriteWidth()/getWindowWidth(), pBG->getSpriteHeight()/getWindowHeight());
 		
+		pFont = sora::SORA->createFont(L"STHeitiJ-Medium", 20);
+		pFont2 = sora::SORA->createFont(L"STHeitiJ-Medium", 24);
+		
 		fbo = sora::SORA->createTarget(getWindowWidth(), getWindowHeight());
+		
+		sora::GCN_GLOBAL->initGUIChan(L"STHeitiJ-Medium", 20);
+		sora::GCN_GLOBAL->createTop();
+		
+		gcn::Button* myButton = new gcn::Button;
+		myButton->setPosition(0, 100);
+		myButton->setCaption("s速度");
+		myButton->adjustSize();
+		sora::GCN_GLOBAL->addWidget(myButton, "top");
 	}
 	
 	int32 getWindowWidth() { return sora::iOSGetScreenWidth(bScreenRotated); }
@@ -71,6 +89,8 @@ private:
 	bool bScreenRotated;
 	sora::SoraSprite* sprTest;
 	sora::SoraSprite* pBG;
+	sora::SoraFont* pFont;
+	sora::SoraFont* pFont2;
 	ulong32 fbo;
 };
 

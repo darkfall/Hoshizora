@@ -41,13 +41,13 @@ namespace sora {
 
 	void FTGlyph::cache(unsigned int idx) {
 		FT_Set_Pixel_Sizes(*face, 0, size);
-		if (!FT_Load_Glyph(*face, idx, FT_LOAD_TARGET_LCD_V | FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP)) {
+		if (!FT_Load_Glyph(*face, idx, FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP)) {
 			FT_GlyphSlot glyph = (*face)->glyph;
 			FT_Bitmap bits;
 			if(glyph->format == ft_glyph_format_outline) {
 				if(!FT_Render_Glyph(glyph, FT_RENDER_MODE_NORMAL)) {
 					bits = glyph->bitmap;
-					unsigned char *pt = bits.buffer;
+					uint8_t *pt = bits.buffer;
 				//	image = new unsigned char[bits.width * bits.rows];
 				//	memcpy(image, pt, bits.width * bits.rows);
 
@@ -78,13 +78,13 @@ namespace sora {
 						imgw = imgh;
 					}
 
-					unsigned int *texd = new unsigned int[imgw*imgh];
-					memset(texd, 0, imgw*imgh*sizeof(unsigned int));
-					unsigned int *texp = texd;
+					uint32 *texd = (uint32*)malloc(imgw*imgh*4);
+ 					memset(texd, 0, imgw*imgh*4);
+					uint32 *texp = texd;
 					offset = size - bits.rows;
 					bool cflag = false;
 					for(int i = 0; i < bits.rows; ++i) {
-						unsigned int *rowp = texp;
+						uint32 *rowp = texp;
 						for(int j = 0; j < bits.width; ++j){
 							if(*pt) {
 								if(cflag) {
@@ -104,7 +104,7 @@ namespace sora {
 					}
                     
 					tex = createTexture(texd, imgw, imgh);
-					delete texd;
+                    free(texd);
 					cached = true;
 				}
 			}
@@ -113,12 +113,6 @@ namespace sora {
 
 	HSORATEXTURE FTGlyph::createTexture(unsigned int *data, int w, int h) {
 		HSORATEXTURE tex = sora->createTextureFromRawData(data, w, h);
-		/*ulong32* color = sora->textureLock(tex);
-		if(color)
-			memcpy(color, data, sizeof( unsigned int ) * w * h);
-		else
-			throw SORA_EXCEPTION("error locking texture");
-		sora->textureUnlock(tex);*/
 		return tex;
 	}
 
@@ -237,7 +231,12 @@ namespace sora {
 						x = x - ((int32)getStringWidth(pwstr) >>1 );
 				}
 				continue;
+			} else if(*pwstr == L'\t') {
+				x += getWidthFromCharacter(L' ')*8;
+                ++pwstr;
+				continue;
 			}
+            
 			n = getGlyphByChar(*pwstr);
 			if(n > 0 && n < ft_glyphs.size()) {
 				int imgw = ft_glyphs[n-1].imgw;
@@ -297,6 +296,7 @@ namespace sora {
 				continue;
 			} else if(*pwstr == L'\t') {
 				x += getWidthFromCharacter(L' ')*8;
+                ++pwstr;
 				continue;
 			}
             
@@ -337,7 +337,7 @@ namespace sora {
 
 	float32 SoraFTFont::getHeight() {
 		if(!ft_glyphs.empty())
-			return (float32)ft_glyphs[0].size*1.5+kerningHeight;
+			return (float32)size*1.5f+kerningHeight;
 		return 0.f;
 	}
 

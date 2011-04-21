@@ -92,8 +92,9 @@ namespace sora{
 		glClearDepth(1.f);                          // Depth Buffer Setup
         
         glDepthMask(GL_FALSE);
+        glDisable(GL_DEPTH_TEST); //????
         
-		glEnable(GL_CULL_FACE);
+        glEnable(GL_CULL_FACE);
 		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 		glEnable(GL_COLOR_MATERIAL);
 
@@ -263,7 +264,7 @@ namespace sora{
 	SoraWindowHandle SoraOGLRenderer::createWindow(SoraWindowInfoBase* windowInfo) {
 		glfwInit();
 		glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
-					   , 8, 8, 8, 8, 32, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN);
+					   , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN);
 		glfwSetWindowTitle(windowInfo->getWindowName().c_str());
 		if(windowInfo->getWindowPosX() != 0.f && windowInfo->getWindowPosY() != 0.f)
 			glfwSetWindowPos(windowInfo->getWindowPosX(), windowInfo->getWindowPosY());
@@ -309,7 +310,7 @@ namespace sora{
 		bFullscreen = flag;
 		glfwCloseWindow();
 		glfwOpenWindow(mainWindow->getWindowWidth(), mainWindow->getWindowHeight(),
-					   8, 8, 8, 8, 32, 0,
+					   8, 8, 8, 8, 16, 0,
 					   bFullscreen==true?GLFW_FULLSCREEN:GLFW_WINDOW);
 		glfwSetWindowTitle(mainWindow->getWindowName().c_str());
 		glfwSetWindowCloseCallback(int_exitFunc);
@@ -350,7 +351,7 @@ namespace sora{
             glBindTexture(GL_TEXTURE_2D, 0);
             return;
         }
-		if (mCurrTexture != tex->mTextureID) {
+		else if (mCurrTexture != tex->mTextureID) {
 			flush();
 
 			glBindTexture(GL_TEXTURE_2D, tex->mTextureID);
@@ -503,7 +504,7 @@ namespace sora{
 			bindTexture(trip.tex);			
 		} else {
             flush();
-            glBindTexture(GL_TEXTURE_2D, 0);
+            bindTexture(0);
         }
 		_glSetBlendMode(trip.blend);
 
@@ -569,7 +570,7 @@ namespace sora{
 			bindTexture(quad.tex);			
 		} else {
             flush();
-            glBindTexture(GL_TEXTURE_2D, 0);
+            bindTexture(0);
         }
 		_glSetBlendMode(quad.blend);
 
@@ -722,6 +723,7 @@ namespace sora{
 			_oglWindowInfo.y = y;
 		}
 		
+        flush();
 		applyTransform();
 	}
 
@@ -729,7 +731,6 @@ namespace sora{
 		_oglWindowInfo.width = w!=0?w:mainWindow->getWindowWidth();
 		_oglWindowInfo.height = h!=0?h:mainWindow->getWindowHeight();
 		applyTransform();
-
 	}
     
     void SoraOGLRenderer::setViewPoint(float32 x, float32 y, float32 z) {
@@ -747,6 +748,7 @@ namespace sora{
 		_oglWindowInfo.hscale	=	hscale!=0.f?hscale:1.f;
 		_oglWindowInfo.vscale	=	vscale!=0.f?hscale:1.f;
         
+        flush();
         applyTransform();
 	}
 

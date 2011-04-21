@@ -15,7 +15,7 @@ namespace gcn
     class GCN_EXTENSION_DECLSPEC SoraGUIFont : public Font
     {
     public:
-		SoraGUIFont(const char* lpsFontName, int nFaceSize);
+		SoraGUIFont(const std::wstring& lpsFontName, int nFaceSize);
         
 		/**
          * Destructor.

@@ -9,10 +9,10 @@
 
 namespace gcn
 {
-    SoraGUIFont::SoraGUIFont(const char* lpsFontName, int nFaceSize)
+    SoraGUIFont::SoraGUIFont(const std::wstring& lpsFontName, int nFaceSize)
     {
 		sora = sora::SoraCore::Instance();
-        mSoraFont = (sora::SoraFont*)sora->createFont(sora::s2ws(lpsFontName), nFaceSize);
+        mSoraFont = (sora::SoraFont*)sora->createFont(lpsFontName, nFaceSize);
     }
 
     SoraGUIFont::~SoraGUIFont()
@@ -28,7 +28,7 @@ namespace gcn
     int SoraGUIFont::getWidth(const std::string &text) const
     {
 		if(text.size() > 0)
-		  return static_cast<int>(mSoraFont->getStringWidth(sora::s2ws(text).c_str())) + 1;
+            return mSoraFont?(static_cast<int>(mSoraFont->getStringWidth(sora::s2ws(text).c_str())) + 1):0.f;
 		return 1;
     }
   
@@ -45,7 +45,7 @@ namespace gcn
 
     int SoraGUIFont::getHeight() const
     {
-        return  static_cast<int>(mSoraFont->getHeight());
+        return  mSoraFont?static_cast<int>(mSoraFont->getHeight()):0.f;
     }
 
     int SoraGUIFont::getStringIndexAt(const std::string& text, int x) const
@@ -77,7 +77,7 @@ namespace gcn
 		
 		if(mSoraFont) {
 			mSoraFont->setColor(CARGB(color.a, color.r, color.g, color.b));
-			mSoraFont->render((float)x, (float)y, sora::s2ws(text+" \0").c_str());
+			mSoraFont->render((float)x, (float)y, sora::s2ws(text).c_str());
 		}
     }
 }

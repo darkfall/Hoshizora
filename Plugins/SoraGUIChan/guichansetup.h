@@ -47,7 +47,7 @@ namespace sora {
 			pGUIChan->setInput(new gcn::SoraGUIInput);
 			gcn::Image::setImageLoader(new gcn::SoraGUIImageLoader);
 			pGUIChan->setGraphics(new gcn::SoraGUIGraphics);
-			gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(ws2s(font).c_str(), size);
+			gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(font, size);
 			if(pfont)
 				gcn::Widget::setGlobalFont(pfont);
 			else

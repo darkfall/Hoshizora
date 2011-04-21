@@ -323,7 +323,7 @@ namespace guiwrapper {
     void setWidgetFont(ulong32 h, const SoraString& fontName, int32 fontSize) {
         gcn::Widget* w = getWidgetByHandle(h);
         if(w) {
-            SoraGUIFont* font = new SoraGUIFont(fontName.c_str(), fontSize);
+            SoraGUIFont* font = new SoraGUIFont(s2ws(fontName), fontSize);
             w->setFont(font);
         }
     }

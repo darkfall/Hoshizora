@@ -74,6 +74,6 @@ namespace sora {
 	
 } // namespace sora
 
-#endif // OS_WIN32
+#endif // OS_OSX
 
 #endif // SORA_MISCTOOL_WIN32

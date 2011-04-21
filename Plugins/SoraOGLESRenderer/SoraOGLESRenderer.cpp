@@ -312,11 +312,12 @@ namespace sora{
 	
 	void SoraOGLESRenderer::bindTexture(SoraTexture* tex) {
         if(!tex) {
+			flush();
+			
             mCurrTexture = 0;
             glBindTexture(GL_TEXTURE_2D, 0);
-            return;
         }
-		if (mCurrTexture != tex->mTextureID) {
+		else if (mCurrTexture != tex->mTextureID) {
 			flush();
 			
 			glBindTexture(GL_TEXTURE_2D, tex->mTextureID);
@@ -584,11 +585,9 @@ namespace sora{
 			bindTexture(quad.tex);			
 		} else {
             flush();
-            glBindTexture(GL_TEXTURE_2D, 0);
+            bindTexture(0);	
         }
 		_glSetBlendMode(quad.blend);
-	
-		_glSetBlendMode(quad.blend);		
 		GLfloat verteces[18] = {
 			quad.v[0].x, quad.v[0].y, quad.v[0].z,
 			quad.v[1].x, quad.v[1].y, quad.v[0].z,
@@ -723,7 +722,8 @@ namespace sora{
 		_oglWindowInfo.height = height;
 		_oglWindowInfo.x = x;
 		_oglWindowInfo.y = y;
-		applyTransform();
+		flush();
+	//	applyTransform();
 		//glViewport(x, y, width, height); 
 		//setTransform(x, y);
 	}
@@ -743,6 +743,8 @@ namespace sora{
 		_oglWindowInfo.rot		=	rot;
 		_oglWindowInfo.hscale	=	hscale!=0.f?hscale:1.f;
 		_oglWindowInfo.vscale	=	vscale!=0.f?hscale:1.f;
+		flush();
+		applyTransform();
 	}
 
 	ulong32 SoraOGLESRenderer::createTarget(int width, int height, bool zbuffer) {
