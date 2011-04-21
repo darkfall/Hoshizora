@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "EAGLView.h"
+#import "SoraOGLESRenderer/SoraiOSTouchPool.h"
 
 @interface EAGLView (PrivateMethods)
 - (void)createFramebuffer;
@@ -128,6 +129,7 @@
     }
 }
 
+
 - (BOOL)presentFramebuffer
 {
     BOOL success = FALSE;
@@ -142,6 +144,34 @@
     }
     
     return success;
+}
+
+
+- (void)touchesChangedWithEvent:(UIEvent*)event
+{
+	NSSet *touches = [event allTouches];
+	sora::SoraiOSInputDelegate::updateTouchInfo(touches, (UIView*)self);
+}
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self touchesChangedWithEvent:event];
+}
+
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self touchesChangedWithEvent:event];
+
+}
+
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self touchesChangedWithEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self touchesChangedWithEvent:event];
+
 }
 
 - (void)layoutSubviews

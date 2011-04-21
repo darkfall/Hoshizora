@@ -110,6 +110,8 @@
 		884CC5A412F6537B00FD18FC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59512F6537B00FD18FC /* UIKit.framework */; };
 		884CC5A512F6537B00FD18FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59612F6537B00FD18FC /* Foundation.framework */; };
 		884CC5A612F6537B00FD18FC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59712F6537B00FD18FC /* CoreGraphics.framework */; };
+		8881A21213600F7000F376F1 /* SoraiOSInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8881A21113600F7000F376F1 /* SoraiOSInput.cpp */; };
+		8881A21513600F7E00F376F1 /* SoraiOSTouchPool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8881A21413600F7E00F376F1 /* SoraiOSTouchPool.mm */; };
 		8897814613071C9500A69ADE /* PVRTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8897812A13071C9500A69ADE /* PVRTexture.mm */; };
 		8897814713071C9500A69ADE /* SoundEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897812B13071C9500A69ADE /* SoundEngine.cpp */; };
 		8897814813071C9500A69ADE /* Texture2D.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8897812E13071C9500A69ADE /* Texture2D.mm */; };
@@ -375,6 +377,10 @@
 		884CC59512F6537B00FD18FC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		884CC59612F6537B00FD18FC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		884CC59712F6537B00FD18FC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8881A21113600F7000F376F1 /* SoraiOSInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraiOSInput.cpp; sourceTree = "<group>"; };
+		8881A21313600F7E00F376F1 /* SoraiOSTouchPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSTouchPool.h; sourceTree = "<group>"; };
+		8881A21413600F7E00F376F1 /* SoraiOSTouchPool.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSTouchPool.mm; sourceTree = "<group>"; };
+		8881A22F1360132300F376F1 /* SoraiOSTouchInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSTouchInfo.h; sourceTree = "<group>"; };
 		8897812813071C9500A69ADE /* OpenGL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL_Internal.h; sourceTree = "<group>"; };
 		8897812913071C9500A69ADE /* PVRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRTexture.h; sourceTree = "<group>"; };
 		8897812A13071C9500A69ADE /* PVRTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PVRTexture.mm; sourceTree = "<group>"; };
@@ -578,7 +584,6 @@
 		8897825D13071CCD00A69ADE /* Sora_iPhoneViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Sora_iPhoneViewController.mm; sourceTree = "<group>"; };
 		889782A813071E6500A69ADE /* magicCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magicCircle.png; sourceTree = "<group>"; };
 		889783FF1307D89900A69ADE /* SoraiOSInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSInput.h; sourceTree = "<group>"; };
-		889784581307D9D300A69ADE /* SoraiOSInputEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSInputEvent.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Sora_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sora_iPhone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -946,12 +951,15 @@
 				8897813313071C9500A69ADE /* soil */,
 				88057F3D135EB60800B1535B /* SoraiOSDeviceHelper.h */,
 				8897813F13071C9500A69ADE /* SoraiOSInitializer.h */,
-				889783FF1307D89900A69ADE /* SoraiOSInput.h */,
-				889784581307D9D300A69ADE /* SoraiOSInputEvent.h */,
 				88057E4A135EABF500B1535B /* SoraOGLESRenderTarget.cpp */,
 				88057E4B135EABF500B1535B /* SoraOGLESRenderTarget.h */,
 				8897814013071C9500A69ADE /* SoraOGLESRenderer.cpp */,
 				8897814113071C9500A69ADE /* SoraOGLESRenderer.h */,
+				889783FF1307D89900A69ADE /* SoraiOSInput.h */,
+				8881A21113600F7000F376F1 /* SoraiOSInput.cpp */,
+				8881A21313600F7E00F376F1 /* SoraiOSTouchPool.h */,
+				8881A21413600F7E00F376F1 /* SoraiOSTouchPool.mm */,
+				8881A22F1360132300F376F1 /* SoraiOSTouchInfo.h */,
 			);
 			name = SoraOGLESRenderer;
 			path = ../Plugins/SoraOGLESRenderer;
@@ -1454,6 +1462,8 @@
 				8834C34A135F7B85006A20F6 /* SoraiOSFontManager.mm in Sources */,
 				8829061D135FE209006EF84A /* SoraiOSStringConv.mm in Sources */,
 				88290746135FE9A3006EF84A /* SoraMiscTool_iOS.mm in Sources */,
+				8881A21213600F7000F376F1 /* SoraiOSInput.cpp in Sources */,
+				8881A21513600F7E00F376F1 /* SoraiOSTouchPool.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
