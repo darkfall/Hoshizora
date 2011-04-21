@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8851F7A3135FAEC700091C9C</string>
+						<string>8851F7AA135FB11600091C9C</string>
 						<key>history</key>
 						<array>
 							<string>8851F751135FAB9F00091C9C</string>
@@ -325,13 +325,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>233</integer>
-									<integer>216</integer>
+									<integer>149</integer>
+									<integer>9</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 3524}, {210, 760}}</string>
+							<string>{{0, 2319}, {210, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -368,7 +368,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>mainWindow.cpp</string>
+								<string>SoraCore.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -376,14 +376,13 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>mainWindow.cpp</string>
+										<string>SoraCore.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8851F7A2135FAEC700091C9C</string>
+										<string>8851F7A9135FB11600091C9C</string>
 										<key>history</key>
 										<array>
-											<string>887022D61346AB7F00AE8DD7</string>
 											<string>88691169134E16590012BDE0</string>
 											<string>88BF9F86135AA73800BB8E70</string>
 											<string>88BF9FC1135AAA0100BB8E70</string>
@@ -443,7 +442,8 @@
 											<string>8851F795135FAE4700091C9C</string>
 											<string>8851F79A135FAEA800091C9C</string>
 											<string>8851F79B135FAEA800091C9C</string>
-											<string>8851F79C135FAEA800091C9C</string>
+											<string>8851F7A7135FB11600091C9C</string>
+											<string>8851F7A8135FB11600091C9C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -641,7 +641,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>8851F7A4135FAEC700091C9C</string>
 		<string>8851F705135FAA0F00091C9C</string>
 		<string>8851F706135FAA0F00091C9C</string>
 		<string>887022D01346AB4300AE8DD7</string>

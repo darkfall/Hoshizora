@@ -46,8 +46,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 325020243;
-			PBXWorkspaceStateSaveDate = 325020243;
+			PBXPerProjectTemplateStateSaveDate = 325038364;
+			PBXWorkspaceStateSaveDate = 325038364;
 		};
 		perUserProjectItems = {
 			88057E61135EAD3A00B1535B /* PBXTextBookmark */ = 88057E61135EAD3A00B1535B /* PBXTextBookmark */;
@@ -113,7 +113,6 @@
 			8834C32E135F7AD9006A20F6 /* PBXTextBookmark */ = 8834C32E135F7AD9006A20F6 /* PBXTextBookmark */;
 			8834C32F135F7AD9006A20F6 /* PBXTextBookmark */ = 8834C32F135F7AD9006A20F6 /* PBXTextBookmark */;
 			8834C330135F7AD9006A20F6 /* PBXTextBookmark */ = 8834C330135F7AD9006A20F6 /* PBXTextBookmark */;
-			8834C34B135F7EF1006A20F6 /* PBXBookmark */ = 8834C34B135F7EF1006A20F6 /* PBXBookmark */;
 			8834C365135F825F006A20F6 /* PBXTextBookmark */ = 8834C365135F825F006A20F6 /* PBXTextBookmark */;
 			8834C366135F825F006A20F6 /* PBXTextBookmark */ = 8834C366135F825F006A20F6 /* PBXTextBookmark */;
 			8834C367135F825F006A20F6 /* PBXTextBookmark */ = 8834C367135F825F006A20F6 /* PBXTextBookmark */;
@@ -123,11 +122,12 @@
 			8834C36C135F825F006A20F6 /* PBXTextBookmark */ = 8834C36C135F825F006A20F6 /* PBXTextBookmark */;
 			8834C3A0135F8698006A20F6 /* PBXTextBookmark */ = 8834C3A0135F8698006A20F6 /* PBXTextBookmark */;
 			8834C3A1135F8698006A20F6 /* PBXTextBookmark */ = 8834C3A1135F8698006A20F6 /* PBXTextBookmark */;
-			8834C3A2135F8698006A20F6 /* PBXTextBookmark */ = 8834C3A2135F8698006A20F6 /* PBXTextBookmark */;
 			8834C3A3135F8698006A20F6 /* PBXTextBookmark */ = 8834C3A3135F8698006A20F6 /* PBXTextBookmark */;
 			8834C3A4135F8698006A20F6 /* PBXTextBookmark */ = 8834C3A4135F8698006A20F6 /* PBXTextBookmark */;
-			8834C3A7135F8698006A20F6 /* PBXTextBookmark */ = 8834C3A7135F8698006A20F6 /* PBXTextBookmark */;
 			8834C3A8135F8698006A20F6 /* PBXTextBookmark */ = 8834C3A8135F8698006A20F6 /* PBXTextBookmark */;
+			8851F7C4135FB1DE00091C9C /* PBXTextBookmark */ = 8851F7C4135FB1DE00091C9C /* PBXTextBookmark */;
+			8851F7C5135FB1DE00091C9C /* PBXTextBookmark */ = 8851F7C5135FB1DE00091C9C /* PBXTextBookmark */;
+			8851F7C6135FB1DE00091C9C /* PBXTextBookmark */ = 8851F7C6135FB1DE00091C9C /* PBXTextBookmark */;
 			889782A213071E2D00A69ADE /* PBXTextBookmark */ = 889782A213071E2D00A69ADE /* PBXTextBookmark */;
 			889782FD1307234500A69ADE /* PBXTextBookmark */ = 889782FD1307234500A69ADE /* PBXTextBookmark */;
 			889783031307237000A69ADE /* PBXTextBookmark */ = 889783031307237000A69ADE /* PBXTextBookmark */;
@@ -178,11 +178,6 @@
 		name = SoraConstantStrings.h;
 		path = "/Users/darkfall/SoraGit/Sora-iPhone/../Sora/SoraConstantStrings.h";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {847, 532}}";
-			sepNavSelRange = "{557, 0}";
-			sepNavVisRange = "{363, 297}";
-		};
 	};
 	88057E68135EAD3A00B1535B /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -392,7 +387,7 @@
 		lineNumber = 37;
 		modificationTime = 324976939.7453361;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 0;
 	};
 	88057FF7135EBF1B00B1535B /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1031,7 +1026,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1115, 1288}}";
 			sepNavSelRange = "{628, 0}";
-			sepNavVisRange = "{460, 1193}";
+			sepNavVisRange = "{430, 1292}";
 		};
 	};
 	8834C346135F7B85006A20F6 /* SoraiOSFont.mm */ = {
@@ -1055,10 +1050,6 @@
 			sepNavSelRange = "{501, 0}";
 			sepNavVisRange = "{0, 682}";
 		};
-	};
-	8834C34B135F7EF1006A20F6 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 8834C346135F7B85006A20F6 /* SoraiOSFont.mm */;
 	};
 	8834C365135F825F006A20F6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1150,16 +1141,6 @@
 		vrLen = 1165;
 		vrLoc = 368;
 	};
-	8834C3A2135F8698006A20F6 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 8834C345135F7B85006A20F6 /* SoraiOSFont.h */;
-		name = "SoraiOSFont.h: 43";
-		rLen = 44;
-		rLoc = 771;
-		rType = 0;
-		vrLen = 896;
-		vrLoc = 1129;
-	};
 	8834C3A3135F8698006A20F6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 8834C345135F7B85006A20F6 /* SoraiOSFont.h */;
@@ -1179,13 +1160,6 @@
 		rType = 0;
 		vrLen = 1263;
 		vrLoc = 1099;
-	};
-	8834C3A7135F8698006A20F6 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 8897818813071CAB00A69ADE /* hash.h */;
-		rLen = 1;
-		rLoc = 123;
-		rType = 1;
 	};
 	8834C3A8135F8698006A20F6 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1242,6 +1216,36 @@
 	884CC48A12F6530100FD18FC /* Code sense */ = {
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
+	};
+	8851F7C4135FB1DE00091C9C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8834C345135F7B85006A20F6 /* SoraiOSFont.h */;
+		name = "SoraiOSFont.h: 34";
+		rLen = 0;
+		rLoc = 628;
+		rType = 0;
+		vrLen = 1292;
+		vrLoc = 430;
+	};
+	8851F7C5135FB1DE00091C9C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8834C346135F7B85006A20F6 /* SoraiOSFont.mm */;
+		name = "SoraiOSFont.mm: 99";
+		rLen = 0;
+		rLoc = 2311;
+		rType = 0;
+		vrLen = 1263;
+		vrLoc = 1099;
+	};
+	8851F7C6135FB1DE00091C9C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8897818813071CAB00A69ADE /* hash.h */;
+		name = "hash.h: 137";
+		rLen = 0;
+		rLoc = 4639;
+		rType = 0;
+		vrLen = 2099;
+		vrLoc = 2902;
 	};
 	8897812A13071C9500A69ADE /* PVRTexture.mm */ = {
 		uiCtxt = {
@@ -1547,11 +1551,6 @@
 		name = SoraiOSInitializer.h;
 		path = ../Plugins/SoraOGLESRenderer/SoraiOSInitializer.h;
 		sourceTree = "<group>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {847, 1022}}";
-			sepNavSelRange = "{233, 0}";
-			sepNavVisRange = "{146, 202}";
-		};
 	};
 	889782A213071E2D00A69ADE /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
