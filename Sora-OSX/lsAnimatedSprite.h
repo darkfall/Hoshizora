@@ -11,7 +11,7 @@
 #define _LS_ANIMATED_SPRITE_H_
 
 #include "SoraSprite.h"
-#include "lAnm.h"
+#include "lAnm/lAnm.h"
 #include "SoraEvent.h"
 #include "SoraTimerEvent.h"
 

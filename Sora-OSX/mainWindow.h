@@ -15,13 +15,10 @@
 #include "stgscene.h"
 
 #include "Experimental/state_test.h"
-#include "SoraLua/SoraLuaObject.h"
-
-#include "SoraSpriteAnimation/SoraSpriteAnimation.h"
-#include "SoraSoundFile.h"
 
 
-class mainWindow: public sora::SoraWindowInfoBase, public sora::SoraEventHandler {
+class mainWindow: public sora::SoraWindowInfoBase,
+				public sora::SoraEventHandler {
 public:
 	mainWindow();
 	~mainWindow();
@@ -44,29 +41,15 @@ public:
 	bool hideMouse() { return false; }
 	
 	void onMenuClick(const menuEvent* mev);
-    void onSoundEvent(const sora::SoraPlaybackEvent* sev);
 	
 private:
-    void loadShader();
 	sora::SoraCore* sora;
-	
-	projl::lSceneManager* mainScenes;
-	titleScene* title;
-	stgScene* stg;
+
                     
     sora::SoraSprite* pSpr;
-                    sora::SoraSprite* p2;
-                    sora::SoraSprite* p3;
 	sora::SoraShader* shader;
-	sora::SoraShaderContext* context;
 					
 	sora::BaseEntity* testEntity;
-	sora::SoraLuaObject* luaobj;
-	sora::SoraFont* pFont;
-                    
-    sora::SoraSpriteAnimation* pAnimatedSprite;
-
-	sora::SoraMusicFile* bgm;
 };
 
 #endif
