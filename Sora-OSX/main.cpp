@@ -39,6 +39,9 @@
 
 //#include "SoraFMODSoundSystem.h"
 
+#include "../ReflectionRev/rfMirror.h"
+
+
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();
 	sora::SoraCore* sora = sora::SoraCore::Instance();
@@ -47,7 +50,7 @@ int main(int argc, char* argv[]) {
 	sora->registerFontManager(new sora::SoraFTFontManager);
 	sora->registerInput(new sora::SoraOGLInput);
   //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
-        
+	
 	sora::HSORARESOURCE res = sora->loadResourcePack(L"./data.rfResource");
 	if(!res) {
 		sora->messageBox("Error loading resource data", "Fatal Error", MB_OK | MB_ICONERROR);
@@ -98,7 +101,7 @@ int main(int argc, char* argv[]) {
 	*/
 	sora->setFPS(60.0);
 	
-	sora->createWindow(new vlcWindow);
+	sora->createWindow(new mainWindow);
 	sora->start();
 		
 	return 0;

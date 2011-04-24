@@ -44,40 +44,60 @@ namespace gcn
 			return mSoraSprite->getSpriteHeight();
 		return 0;
     }
+	
+	void SoraGUIImage::setColor(const Color& col) {
+		if(mSoraSprite)
+			mSoraSprite->setColor(CARGB(col.a, col.r, col.g, col.b));
+	}
+	
+	gcn::Color SoraGUIImage::getColor() {
+		if(mSoraSprite) {
+			ulong32 hardwareColor = mSoraSprite->getColor();
+			return gcn::Color(CGETR(hardwareColor),
+							  CGETG(hardwareColor),
+							  CGETB(hardwareColor),
+							  CGETA(hardwareColor));
+		}
+		return gcn::Color();
+	}
+	
+	void SoraGUIImage::setRotation(float rot) {
+		if(mSoraSprite)
+			mSoraSprite->setRotation(rot);
+	}
 
     Color SoraGUIImage::getPixel(int x, int y)
     {
-        /*DWORD *pLockPtr = mSoraSprite->getPixelData();
+        ulong32 *pLockPtr = mSoraSprite->getPixelData();
 
         if (pLockPtr == NULL)
         {
             throw GCN_EXCEPTION("Locking of the texture failed. HGE only support locking of 32bit textures.");
         }
 
-        DWORD color = pLockPtr[x + y * getWidth()];
+        ulong32 color = pLockPtr[x + y * getWidth()];
 
         mSoraSprite->unlockPixelData();
         return Color(CGETR(color),
                      CGETG(color), 
                      CGETB(color), 
-                     CGETA(color ));*/
+                     CGETA(color));
 		return Color();
     }
 
     void  SoraGUIImage::putPixel(int x, int y, const Color& color)
     {
-        //DWORD hardwareColor = CARGB(color.a, color.r, color.g, color.b);
+        ulong32 hardwareColor = CARGB(color.a, color.r, color.g, color.b);
 
-        /*DWORD *pLockPtr = mSoraSprite->getPixelData();
+        DWORD *pLockPtr = mSoraSprite->getPixelData();
 
-        if (pLockPtr == NULL)
-        {
+        if (pLockPtr == NULL) {
             throw GCN_EXCEPTION("Locking of the texture failed. HGE only support locking of 32bit textures.");
         }
 
         pLockPtr[x + y * getWidth()] = hardwareColor;
 
-        mSoraSprite->unlockPixelData();*/
+        mSoraSprite->unlockPixelData();
     }
 	
 	void SoraGUIImage::setTextureRect(const Rectangle& rect) {
@@ -114,4 +134,12 @@ namespace gcn
 	//	mSoraSprite->setZ(GUI_Z);
 	//	mSoraSprite->setBlendMode(BLEND_DEFAULT_Z);
     }
+	
+	void SoraGUIImage::setName(const std::string& n) {
+		name = n;
+	}
+	
+	std::string SoraGUIImage::getName() {
+		return name;
+	}
 }

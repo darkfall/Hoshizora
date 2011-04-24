@@ -68,7 +68,7 @@ namespace sora {
 		int32 getType() const { return type; }
         void setType(int32 t) { type = t; };
 
-	private:
+	protected:
         bool bInternal;
 		/* 
 		 Attach the shader to render
@@ -143,7 +143,7 @@ namespace sora {
         
         const ShaderList& getShaderList()  { return shaders; }
 		
-	private:
+	protected:
 		inline ShaderList::iterator getShaderIterator(SoraShader* shader);
 		
 		ShaderList shaders;

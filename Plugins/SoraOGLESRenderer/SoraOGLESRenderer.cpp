@@ -662,9 +662,9 @@ namespace sora{
 
 	void SoraOGLESRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, DWORD color, float32 z) {
 		Rect4V rect;
-			
+		
 		if(fWidth != y2-y1 && fWidth != x2-x1) {
-			float rotAng = (float)atan2f(y2-y1, x2-x1)-D_PI_4;
+			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
 			
 			rect.x1 = x1; rect.y1 = y1;
 			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
@@ -698,7 +698,7 @@ namespace sora{
 		
         int i;
         for (i = 0; i < 4; ++i) {
-            quad.v[i].z = 0.5f;
+            quad.v[i].z = z;
         }
 		
         quad.blend = BLEND_DEFAULT;
@@ -707,25 +707,36 @@ namespace sora{
 	}
 
 	void SoraOGLESRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
-		// to do
-		/*printf("%d, %d, %d, %d", x, y, w, h);
-		glEnable(GL_SCISSOR_TEST);
-		glScissor(x+w!=0?w:mainWindow->getWindowWidth(), y+h!=0?h:mainWindow->getWindowHeight(), w!=0?w:mainWindow->getWindowWidth(), h!=0?h:mainWindow->getWindowHeight());
-	setTransform(x+w, y+h);*/
 		int32 width = w;
 		int32 height = h;
-		if(w==0) {
-			width = mainWindow->getWindowWidth();
-			height = mainWindow->getWindowHeight();
+		if(pCurTarget) {
+			width = pCurTarget->getWidth();
+			height = pCurTarget->getHeight();
+		} else {
+			width = _oglWindowInfo.width;
+			height = _oglWindowInfo.height;
 		}
-		_oglWindowInfo.width = width;
-		_oglWindowInfo.height = height;
-		_oglWindowInfo.x = x;
-		_oglWindowInfo.y = y;
-		flush();
-	//	applyTransform();
-		//glViewport(x, y, width, height); 
-		//setTransform(x, y);
+		
+		if(w==0 && h==0) {
+			_oglWindowInfo.width = width;
+			_oglWindowInfo.height = height;
+			_oglWindowInfo.x = x;
+			_oglWindowInfo.y = y;
+		} else {
+			if(x<0) { w+=x; x=0; }
+			if(y<0) { h+=y; y=0; }
+			
+			if(x+w > width) w=width-x;
+			if(y+h > height) h=height-y;
+			
+			_oglWindowInfo.width = width;
+			_oglWindowInfo.height = height;
+			_oglWindowInfo.x = x;
+			_oglWindowInfo.y = y;
+		}
+		
+        flush();
+		applyTransform();
 	}
 	
 	void SoraOGLESRenderer::setTransformWindowSize(float32 w, float32 h) {

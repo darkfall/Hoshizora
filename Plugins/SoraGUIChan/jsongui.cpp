@@ -213,8 +213,6 @@ namespace sora {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Container Widget must have a unique name");
         }
         
         gcn::Container *c = new gcn::Container();
@@ -237,15 +235,14 @@ namespace sora {
         }
 		
         addToParent(c, parent);
-        widgets[str2id(name)] = c;
+        if(name.size() != 0)
+			widgets[str2id(name)] = c;
     }
     
     void JsonGui::parseWindow(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Window Widget must have a unique name");
         }
         
         gcn::Window *window = new gcn::Window;
@@ -281,15 +278,14 @@ namespace sora {
         }
                 
         addToParent(window, parent);
-        widgets[str2id(name)] = window;
+        if(name.size() != 0)
+			widgets[str2id(name)] = window;
     }
     
     void JsonGui::parseButton(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Button Widget must have a unique name");
         }
         
         gcn::Button *button = new gcn::Button;
@@ -311,15 +307,14 @@ namespace sora {
         parseDefaults(val, button);
 		
         addToParent(button, parent);
-        widgets[str2id(name)] = button;
+        if(name.size() != 0)
+			widgets[str2id(name)] = button;
     }
     
     void JsonGui::parseSlider(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Slider Widget must have a unique name");
         }
         
         gcn::Slider *slider = new gcn::Slider;
@@ -347,15 +342,14 @@ namespace sora {
         parseDefaults(val, slider);
         
         addToParent(slider, parent);
-        widgets[str2id(name)] = slider;
+        if(name.size() != 0)
+			widgets[str2id(name)] = slider;
     }
     
     void JsonGui::parseLabel(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Icon Widget must have a unique name");
         }
         
         gcn::Label *label = new gcn::Label;
@@ -378,15 +372,14 @@ namespace sora {
         parseDefaults(val, label);
         
         addToParent(label, parent);
-        widgets[str2id(name)] = label;
+		if(name.size() != 0)
+			widgets[str2id(name)] = label;
     }
     
     void JsonGui::parseImageButton(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Icon Widget must have a unique name");
         }
         
         gcn::ImageButton* pButton = 0;
@@ -400,7 +393,8 @@ namespace sora {
             parseDefaults(val, pButton);
             
             addToParent(pButton, parent);
-            widgets[str2id(name)] = pButton;
+            if(name.size() != 0)
+				widgets[str2id(name)] = pButton;
         }
     }
     
@@ -408,8 +402,6 @@ namespace sora {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Icon Widget must have a unique name");
         }
         
         gcn::Icon *icon;
@@ -425,7 +417,8 @@ namespace sora {
             parseDefaults(val, icon);
             
             addToParent(icon, parent);
-            widgets[str2id(name)] = icon;
+            if(name.size() != 0)
+				widgets[str2id(name)] = icon;
         }
     }
     
@@ -433,8 +426,6 @@ namespace sora {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Slider Widget must have a unique name");
         }
         
         gcn::CheckBox *checkbox = new gcn::CheckBox;
@@ -448,15 +439,14 @@ namespace sora {
         parseDefaults(val, checkbox);
 
         addToParent(checkbox, parent);
-        widgets[str2id(name)] = checkbox;
+        if(name.size() != 0)
+			widgets[str2id(name)] = checkbox;
     }
     
     void JsonGui::parseTextBox(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Slider Widget must have a unique name");
         }
         
         gcn::TextBox *textbox = new gcn::TextBox;
@@ -474,15 +464,14 @@ namespace sora {
         parseDefaults(val, textbox);
         
         addToParent(textbox, parent);
-        widgets[str2id(name)] = textbox;
+        if(name.size() != 0)
+			widgets[str2id(name)] = textbox;
     }
     
     void JsonGui::parseTextField(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Slider Widget must have a unique name");
         }
         
         gcn::TextField *textField = new gcn::TextField;
@@ -494,15 +483,14 @@ namespace sora {
         parseDefaults(val, textField);
         
         addToParent(textField, parent);
-        widgets[str2id(name)] = textField;
+        if(name.size() != 0)
+			widgets[str2id(name)] = textField;
     }
     
     void JsonGui::parseRadioButton(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Slider Widget must have a unique name");
         }
         
         gcn::RadioButton *radio = new gcn::RadioButton;
@@ -518,15 +506,14 @@ namespace sora {
         parseDefaults(val, radio);
         
         addToParent(radio, parent);
-        widgets[str2id(name)] = radio;
+        if(name.size() != 0)
+			widgets[str2id(name)] = radio;
     }
 	
 	void JsonGui::parseListBox(const Json::Value& val, gcn::Widget* parent) {
 		std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Slider Widget must have a unique name");
         }
 		
 		gcn::ListBox* listbox = new gcn::ListBox;
@@ -550,15 +537,14 @@ namespace sora {
 		
 		parseDefaults(val, listbox);
 		addToParent(listbox, parent);
-		widgets[str2id(name)] = listbox;
+		if(name.size() != 0)
+			widgets[str2id(name)] = listbox;
 	}
 	
 	void JsonGui::parseDropDown(const Json::Value& val, gcn::Widget* parent) {
 		std::string name;
         if(val.isMember("name")) {
             name = val["name"].asString();
-        } else {
-            throw GCN_EXCEPTION("Slider Widget must have a unique name");
         }
 		
 		gcn::ListBox* dropdown = new gcn::ListBox;
@@ -582,7 +568,8 @@ namespace sora {
 		
 		parseDefaults(val, dropdown);
 		addToParent(dropdown, parent);
-		widgets[str2id(name)] = dropdown;
+		if(name.size() != 0)
+			widgets[str2id(name)] = dropdown;
 	}
     
     int JsonGui::parseRespondType(const char* respondStr) {
@@ -645,4 +632,240 @@ namespace sora {
         }
     }
     
+	
+	Json::Value& JsonGuiWritter::writeWidget(Json::Value& inValue, gcn::Widget* widget) {
+		gcn::Button* pb = dynamic_cast<Button*> (widget);
+		if(pb) {
+			JValue jv;
+			writeButton(jv, pb);
+			writeDefault(jv, widget);
+			inValue["button"] = jv;
+		}
+		gcn::Container* pc = dynamic_cast<Container*> (widget);
+		if(pc) {
+			JValue jv;
+			writeContainer(jv, pc);
+			writeDefault(jv, widget);
+			inValue["container"] = jv;
+		}
+		gcn::Window* pw = dynamic_cast<Window*> (widget);
+		if(pw) {
+			JValue jv;
+			writeWindow(jv, pw);
+			writeDefault(jv, widget);
+			inValue["window"] = jv;
+		}
+		gcn::Slider* ps = dynamic_cast<Slider*> (widget);
+		if(ps) {
+			JValue jv;
+			writeSlider(jv, ps);
+			writeDefault(jv, widget);
+			inValue["slider"] = jv;
+		}
+		gcn::Label* pl = dynamic_cast<Label*> (widget);
+		if(pl) {
+			JValue jv;
+			writeLabel(jv, pl);
+			writeDefault(jv, widget);
+			inValue["label"] = jv;
+		}
+		gcn::Icon* pi = dynamic_cast<Icon*> (widget);
+		if(pi) {
+			JValue jv;
+			writeIcon(jv, pi);
+			writeDefault(jv, widget);
+			inValue["icon"] = jv;
+		}
+		gcn::CheckBox* pcb = dynamic_cast<CheckBox*> (widget);
+		if(pcb) {
+			JValue jv;
+			writeCheckBox(jv, pcb);
+			writeDefault(jv, widget);
+			inValue["checkbox"] = jv;
+		}
+		gcn::TextBox* ptb = dynamic_cast<TextBox*> (widget);
+		if(ptb) {
+			JValue jv;
+			writeTextBox(jv, ptb);
+			writeDefault(jv, widget);
+			inValue["textbox"] = jv;
+		}
+		gcn::TextField* ptf = dynamic_cast<TextField*> (widget);
+		if(ptf) {
+			JValue jv;
+			writeContainer(jv, pc);
+			writeDefault(jv, widget);
+			inValue["textfield"] = jv;
+		}
+		gcn::RadioButton* prb = dynamic_cast<RadioButton*> (widget);
+		if(prb) {
+			JValue jv;
+			writeRadioButton(jv, prb);
+			writeDefault(jv, widget);
+			inValue["radiobutton"] = jv;
+		}
+		gcn::ImageButton* pib = dynamic_cast<ImageButton*> (widget);
+		if(pib) {
+			JValue jv;
+			writeImageButton(jv, pib);
+			writeDefault(jv, widget);
+			inValue["imagebutton"] = jv;
+		}
+		gcn::DropDown* pdd = dynamic_cast<DropDown*> (widget);
+		if(pdd) {
+			JValue jv;
+			writeDropDown(jv, pdd);
+			writeDefault(jv, widget);
+			inValue["dropdown"] = jv;
+		}
+		gcn::ListBox* plb = dynamic_cast<ListBox*> (widget);
+		if(plb) {
+			JValue jv;
+			writeListBox(jv, plb);
+			writeDefault(jv, widget);
+			inValue["listbox"] = jv;
+		}
+		return inValue;
+	}
+	
+	std::string JsonGuiWritter::getHexColor(const gcn::Color& col) {
+		char colout[16];
+		unsigned int uiCol = CARGB(col.a, col.r, col.b, col.b);
+		sprintf(colout, "%X", uiCol);
+		
+		return std::string("0x")+colout;
+	}
+	
+	Json::Value& JsonGuiWritter::writeDefault(Json::Value& inValue, gcn::Widget* widget) {
+		inValue["x"] = JValue(widget->getX());
+		inValue["y"] = JValue(widget->getY());
+		inValue["width"] = JValue(widget->getWidth());
+		inValue["height"] = JValue(widget->getHeight());
+	
+		inValue["basecolor"] = JValue(getHexColor(widget->getBaseColor()));
+		inValue["foregroundcolor"] = JValue(getHexColor(widget->getForegroundColor()));
+		inValue["backgroundcolor"] = JValue(getHexColor(widget->getBackgroundColor()));
+		
+		inValue["framesize"] = JValue(widget->getFrameSize());
+		inValue["visible"] = JValue(widget->isVisible());
+		inValue["focusable"] = JValue(widget->isFocusable());
+		inValue["enabled"] = JValue(widget->isEnabled());
+		inValue["tabout"] = JValue(widget->isTabOutEnabled());
+		inValue["id"] = JValue(widget->getId());
+		
+		return inValue;
+	}
+	
+	Json::Value& JsonGuiWritter::writeButton(Json::Value& inValue, gcn::Button* widget) {
+		inValue["caption"] = JValue(widget->getCaption());
+		switch (widget->getAlignment()) {
+			case gcn::Graphics::CENTER: inValue["align"] = JValue("center"); break;
+			case gcn::Graphics::LEFT: inValue["align"] = JValue("left"); break;
+			case gcn::Graphics::RIGHT: inValue["align"] = JValue("right"); break;
+		}
+		
+		return inValue;
+	}
+	
+	Json::Value& JsonGuiWritter::writeContainer(Json::Value& inValue, gcn::Container* widget) {
+		inValue["opaque"] = JValue(widget->isOpaque());
+		
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeWindow(Json::Value& inValue, gcn::Window* widget) {
+		inValue["opaque"] = JValue(widget->isOpaque());
+		inValue["caption"] = JValue(widget->getCaption());
+		inValue["movable"] = JValue(widget->isMovable());
+		inValue["titleBarHeight"] = JValue(widget->getTitleBarHeight());
+		inValue["tabbing"] = JValue(widget->getPadding());
+		
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeSlider(Json::Value& inValue, gcn::Slider* widget) {
+		inValue["start"] = JValue(widget->getScaleStart());
+		inValue["end"] = JValue(widget->getScaleEnd());
+		inValue["value"] = JValue(widget->getValue());
+		inValue["markerLength"] = JValue(widget->getMarkerLength());
+		inValue["stepLength"] = JValue(widget->getStepLength());
+		if(widget->getOrientation() == gcn::Slider::HORIZONTAL)
+			inValue["orientation"] = JValue("horizontal");
+		else
+			inValue["orientation"] = JValue("vertical");
+		
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeLabel(Json::Value& inValue, gcn::Label* widget) {
+		inValue["caption"] = JValue(widget->getCaption());
+		switch (widget->getAlignment()) {
+			case gcn::Graphics::CENTER: inValue["align"] = JValue("center"); break;
+			case gcn::Graphics::LEFT: inValue["align"] = JValue("left"); break;
+			case gcn::Graphics::RIGHT: inValue["align"] = JValue("right"); break;
+		}
+		
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeIcon(Json::Value& inValue, gcn::Icon* widget) {
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeCheckBox(Json::Value& inValue, gcn::CheckBox* widget) {
+		inValue["caption"] = JValue(widget->getCaption());
+
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeTextBox(Json::Value& inValue, gcn::TextBox* widget) {
+		inValue["editable"] = JValue(widget->isEditable());
+		inValue["text"] = JValue(ws2s(widget->getText()));
+		
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeTextField(Json::Value& inValue, gcn::TextField* widget) {
+		inValue["text"] = JValue(ws2s(widget->getText()));
+
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeRadioButton(Json::Value& inValue, gcn::RadioButton* widget) {
+		inValue["caption"] = JValue(widget->getCaption());
+		inValue["group"] = JValue(widget->getGroup());
+		
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeImageButton(Json::Value& inValue, gcn::ImageButton* widget) {
+		
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeDropDown(Json::Value& inValue, gcn::DropDown* widget) {
+		inValue["selectioncolor"] = getHexColor(widget->getSelectionColor());
+		JValue items;
+		gcn::ListModel* lm = widget->getListModel();
+		if(lm) {
+			for(int i=0; i<lm->getNumberOfElements(); ++i)
+				items.append(JValue(lm->getElementAt(i)));
+		}
+		inValue["items"] = items;
+		return inValue;
+	}
+
+	Json::Value& JsonGuiWritter::writeListBox(Json::Value& inValue, gcn::ListBox* widget) {
+		inValue["selectioncolor"] = getHexColor(widget->getSelectionColor());
+		JValue items;
+		gcn::ListModel* lm = widget->getListModel();
+		if(lm) {
+			for(int i=0; i<lm->getNumberOfElements(); ++i)
+				items.append(JValue(lm->getElementAt(i)));
+		}
+		inValue["items"] = items;
+		
+		return inValue;
+	}
+
 } // namespace sora

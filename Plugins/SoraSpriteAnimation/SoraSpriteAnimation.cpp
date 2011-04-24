@@ -520,15 +520,20 @@ uint32 SoraSpriteAnimation::getCurrAnimationIndex() const {
 }
 
 void SoraSpriteAnimation::init() {
-    assert(texturePath.size() != 0);
-    pAnmSprite = SORA->createSprite(s2ws(texturePath));
-	if(anmCount != 0 && anmNodes[0].texList.size() != 0)
-		pAnmSprite->setTextureRect((float32)anmNodes[0].texList[0].tx, 
-									(float32)anmNodes[0].texList[0].ty, 
-									(float32)anmNodes[0].texList[0].tw, 
-									(float32)anmNodes[0].texList[0].th);
-    if(pAnmSprite == NULL)
-        throw SORA_EXCEPTION("error loading animation sprite");
+    if(texturePath.size() != 0) {
+		if(pAnmSprite) {
+			delete pAnmSprite;
+			pAnmSprite = NULL;
+		}
+		pAnmSprite = SORA->createSprite(s2ws(texturePath));
+		if(pAnmSprite != NULL) {
+			if(anmCount != 0 && anmNodes[0].texList.size() != 0)
+				pAnmSprite->setTextureRect((float32)anmNodes[0].texList[0].tx, 
+										   (float32)anmNodes[0].texList[0].ty, 
+										   (float32)anmNodes[0].texList[0].tw, 
+										   (float32)anmNodes[0].texList[0].th);
+		}
+	}
 }
 
 void SoraSpriteAnimation::render() {

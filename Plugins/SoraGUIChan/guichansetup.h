@@ -136,6 +136,20 @@ namespace sora {
                 SORA->log("guilib exception: "+exp.getMessage());
             }
         }
+		
+		gcn::Widget* getWidgetAt(int32 x, int32 y, const char* wid=NULL) {
+			if(wid == NULL) {
+				gcn::Container* pTop = getTop();
+				if(pTop) {
+					return pTop->getWidgetAt(x, y);
+				}
+			} else {
+				gcn::Widget* pWidget = findWidget(wid);
+				if(pWidget)
+					return pWidget->getWidgetAt(x, y);
+			}
+			return NULL;
+		}
 	
 		void gcnLogic() {
             if(pGUIChan)

@@ -50,7 +50,7 @@
     self.displayLink = nil;
 
 	// initialize SORA base systems
-	sora::SORA_IOS->SoraiOSStart(new aeMainWindow);
+	sora::SORA_IOS->SoraiOSStart(new SoraiOSMainWindow);
 }
 
 - (void)dealloc

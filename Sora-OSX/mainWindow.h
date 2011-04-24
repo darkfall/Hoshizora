@@ -16,9 +16,7 @@
 
 #include "Experimental/state_test.h"
 
-
-class mainWindow: public sora::SoraWindowInfoBase,
-				public sora::SoraEventHandler {
+class mainWindow: public sora::SoraWindowInfoBase {
 public:
 	mainWindow();
 	~mainWindow();
@@ -44,12 +42,12 @@ public:
 	
 private:
 	sora::SoraCore* sora;
-
                     
     sora::SoraSprite* pSpr;
 	sora::SoraShader* shader;
 					
 	sora::BaseEntity* testEntity;
+    sora::SoraFont* pFont;
 };
 
 #endif

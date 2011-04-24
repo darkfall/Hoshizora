@@ -86,10 +86,12 @@ class SoraSpriteAnimation: public SoraObject {
 	
 public:
 	~SoraSpriteAnimation();
+	
+	typedef LANM_TEX SoraAnimationRect;
 
 	uint32 update(float dt);
     void render();
-	LANM_TEX getCurrTex();
+	SoraAnimationRect getCurrTex();
 	
 	/*
 	 plays the default anm

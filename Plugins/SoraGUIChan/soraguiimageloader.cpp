@@ -26,7 +26,8 @@ namespace gcn
         }
 
         SoraGUIImage *image = new SoraGUIImage((sora::HSORATEXTURE)tex);
-
+		image->setName(filename);
+		
         if (convertToDisplayFormat)
         {
             image->convertToDisplayFormat();

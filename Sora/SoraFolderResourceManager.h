@@ -28,6 +28,7 @@ namespace sora {
 		SoraFolderResourceManager(): applicationPath(SoraFileUtility::getApplicationPath()+L"/") {
 #ifdef OS_IOS
 			loadResourcePack(appResourcePath());
+			loadResourcePack(appDocumentPath());
 #else
 			loadResourcePack(DEFAULT_RESOURCE_SEARCH_PATH);
 #endif

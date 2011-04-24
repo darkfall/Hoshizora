@@ -67,7 +67,7 @@ namespace sora {
 		// serialized file is length(4 bytes) + name(length)
 		virtual bool serializable() { return true; }
 		
-	private:
+	protected:
 		stringId name;
 	};
 	

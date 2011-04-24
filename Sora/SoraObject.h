@@ -43,7 +43,7 @@ namespace sora {
 		uint32 getType() const { return type; }
 		void setType(uint32 t) { type = t; }
 	
-	private:
+	protected:
 		SoraObject(const SoraObject&);
 		SoraObject operator=(const SoraObject&);
 		

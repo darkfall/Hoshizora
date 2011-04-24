@@ -162,4 +162,22 @@ namespace sora {
 		}
 	}
 	
+	void SoraEventManager::publishInputEvent(SoraKeyEvent* kev) {
+		INPUT_EVENT_HANDLER_LIST::iterator itHandler = iehList.begin();
+		while(itHandler != iehList.end()) {
+			if((*itHandler)) {
+				(*itHandler)->handleEvent(kev);
+				++itHandler;
+			}
+		}
+	}
+	
+	void SoraEventManager::registerInputEventHandler(SoraEventHandler* handler) {
+		iehList.push_back(handler);
+	}
+	
+	void SoraEventManager::unregisterInputEventHandler(SoraEventHandler* handler) {
+		iehList.remove(handler);
+	}
+	
 } // namespace sora

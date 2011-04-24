@@ -427,18 +427,20 @@
 
 #endif
 
+#include "SoraEvent.h"
+
 namespace sora {
 
-typedef struct tagSoraKeyEvent {
-	int		type;			// event type
-	int		key;			// key code
-	int		flags;			// event flags
-	int		chr;			// character code
-	int		wheel;			// wheel shift
-	float	x;				// mouse cursor x-coordinate
-	float	y;				// mouse cursor y-coordinate
-} SoraKeyEvent;
-    
+	class SoraKeyEvent: public SoraEvent {
+	public:
+		int		type;			// event type
+		int		key;			// key code
+		int		flags;			// event flags
+		int		chr;			// character code
+		int		wheel;			// wheel shift
+		float	x;				// mouse cursor x-coordinate
+		float	y;				// mouse cursor y-coordinate
+	};  
 }
 
 #endif

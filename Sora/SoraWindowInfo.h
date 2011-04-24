@@ -2,13 +2,14 @@
 #define SORA_WINDOW_INFO_H
 
 #include "SoraPlatform.h"
+#include "SoraEvent.h"
 #include "SoraException.h"
 
 namespace sora {
 
 	typedef ulong32 SoraWindowHandle;
 
-	class SoraWindowInfoBase {
+	class SoraWindowInfoBase: public SoraEventHandler {
 	public:
 		virtual int32 getWindowWidth() = 0;
 		virtual int32 getWindowHeight() = 0;

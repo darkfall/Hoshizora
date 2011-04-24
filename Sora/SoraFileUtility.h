@@ -39,16 +39,45 @@ namespace sora {
 			return true;
 		}
 		
+		static SoraWString getAbsolutePath(const SoraWString& filePath) {
+#ifdef WIN32
+			wchar_t buffer[MAX_PATH];
+			GetCurrentDirectory(MAX_PATH, buffer);
+			
+			return buffer+L"/"+filePath;
+#elif defined(OS_OSX)
+			return osxApplicationPath()+L"/"+filePath;
+#elif defined(OS_IOS)
+			return appResourcePath()+L"/"+filePath;
+#endif
+			return L"./"+filePath;
+		}
+		
+		/* 
+		 get path in which can use to write file
+		 specified for ios,
+		 because ios limit writting files in app
+		 also some part of osx
+		 */
+		static SoraWString getWrittablePath(const SoraWString& filePath) {
+#ifndef OS_IOS
+			return getAbsolutePath(filePath);
+#else
+			return appDocumentPath()+L"/"+filePath;
+#endif
+			return L"\0";
+		}
+		
 		static SoraWString getApplicationPath() {
 #ifdef WIN32
 			wchar_t buffer[MAX_PATH];
 			GetCurrentDirectory(MAX_PATH, buffer);
 			
-			return buffer;
+			return buffer+L"/";
 #elif defined(OS_OSX)
-			return osxApplicationPath();
+			return osxApplicationPath()+L"/";
 #elif defined(OS_IOS)
-			return appResourcePath();
+			return appResourcePath()+L"/";
 #endif
 			return L"./";
 		}

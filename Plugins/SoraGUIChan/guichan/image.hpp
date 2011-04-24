@@ -96,6 +96,7 @@ namespace gcn
          * @since 0.5.0
          */
         static Image* load(const std::string& filename, bool convertToDisplayFormat = true);
+		
 
         /**
          * Gets the image loader used for loading images.
@@ -171,8 +172,18 @@ namespace gcn
          */
         virtual void putPixel(int x, int y, const Color& color) = 0;
 		
+		virtual void setColor(const Color& color) = 0;
+		virtual gcn::Color getColor() = 0;
+		virtual void setRotation(float rot) = 0;
+		
 		
 		virtual void setTextureRect(const Rectangle& rect) = 0;
+		
+		/*
+		 extension
+		 */
+		virtual void setName(const std::string&) = 0;
+		virtual std::string getName() = 0;
 
         /**
          * Converts the image, if possible, to display format.

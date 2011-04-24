@@ -20,23 +20,23 @@
 
 #include "SoraGUIChan/guichansetup.h"
 
+#include "gcnExtend/gcnDraggableImageButtonIncubator.h"
+#include "gcnExtend/gcnSelectableContainer.h"
+
 class SoraiOSMainWindow: public sora::SoraWindowInfoBase {
 public:
 	SoraiOSMainWindow(): bScreenRotated(false) {}
 	
 	virtual bool updateFunc() {
+
 		return false;
 	}
 	
 	virtual bool renderFunc() {
 		sora::SORA->beginScene();
-		pBG->render();
-	   // if(sprTest) sprTest->render(0.f, 0.f);
-		
-	//	pFont->render(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"test\0");
-	//	pFont2->render(0.f, 20.f, sora::FONT_ALIGNMENT_LEFT, L"多撒旦as\0");
-		
+	
 		sora::GCN_GLOBAL->gcnLogic();
+
 		sora::GCN_GLOBAL->gcnDraw();
 		//sprm->render(0.f, 0.f, 0.f);
 		sora::SORA->endScene();
@@ -47,27 +47,29 @@ public:
 	void init() {
 		sora::SORA->registerResourceManager(new sora::SoraZipResourceManager);
 		sora::SORA->registerFontManager(new sora::SoraiOSFontManager);
+		sora::SORA->registerInput(new sora::SoraiOSInput);
+		
 		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource"));
-		
-		printf("%s\n", sora::ws2s(sora::iOSGetResourceName(L"magicCircle.png")).c_str());
-		sprTest = sora::SORA->createSprite(L"magicCircle.png");
-		sprTest->setScale(0.5f, 0.5f);
-		pBG = sora::SORA->createSprite(L"background1.png");
-		pBG->setScale(pBG->getSpriteWidth()/getWindowWidth(), pBG->getSpriteHeight()/getWindowHeight());
-		
-		pFont = sora::SORA->createFont(L"STHeitiJ-Medium", 20);
-		pFont2 = sora::SORA->createFont(L"STHeitiJ-Medium", 24);
-		
-		fbo = sora::SORA->createTarget(getWindowWidth(), getWindowHeight());
 		
 		sora::GCN_GLOBAL->initGUIChan(L"STHeitiJ-Medium", 20);
 		sora::GCN_GLOBAL->createTop();
 		
-		gcn::Button* myButton = new gcn::Button;
-		myButton->setPosition(0, 100);
-		myButton->setCaption("s速度");
-		myButton->adjustSize();
-		sora::GCN_GLOBAL->addWidget(myButton, "top");
+		
+		gcn::SelectableContainer* sc = new gcn::SelectableContainer;
+		
+		sc->setDimension(gcn::Rectangle(0, 0, 512, 512));
+		sc->setImage("background1.png");
+		sc->adjustSize();
+		sc->setId("canvas");
+		sora::GCN_GLOBAL->addWidget(sc, "top");
+		
+		gcn::DraggableImageButtonIncubator* di = new gcn::DraggableImageButtonIncubator();
+		di->setImage("boxbutton.png", gcn::Rectangle(0, 64, 64, 64), gcn::Rectangle(0, 64, 64, 64)); 
+		di->setNewItemImage("boxbutton.png", gcn::Rectangle(0, 0, 64, 64), gcn::Rectangle(64, 0, 64, 64));
+		di->setBaseColor(gcn::Color(255, 255, 255, 155));
+		
+		sora::GCN_GLOBAL->addWidget(di, "canvas");
+		
 	}
 	
 	int32 getWindowWidth() { return sora::iOSGetScreenWidth(bScreenRotated); }

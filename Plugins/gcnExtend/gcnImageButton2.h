@@ -8,7 +8,7 @@
  */
 
 #ifndef GCN_IMAGE_BUTTON_2_
-#define GCN_ImAGE_BUTTON_2_
+#define GCN_IMAGE_BUTTON_2_
 
 #include "SoraGUIChan/guichan.hpp"
 
@@ -21,17 +21,43 @@ namespace gcn {
 		
 		ImageButton2(const std::string& sprNormal, const Rectangle& normal, const Rectangle& pushed);
 		
-		void setImage(const std::string& sprNormal, const Rectangle& normal, const Rectangle& pushed);
-        void draw(Graphics* graphics);
+		virtual void setImage(const std::string& sprNormal, const Rectangle& normal, const Rectangle& pushed);
+		virtual void setImage(Image* image, const Rectangle& normal, const Rectangle& pushed);
 		
-	private:
+		/*
+		 this would used by isFocused
+		 */
+		void setFocusRect(const Rectangle& normal);
+		Rectangle getFocusRect() const;
+		/*
+		 this would used by isEnabled
+		 */
+		void setUnavailableRect(const Rectangle& normal);
+		Rectangle getUnavailableRect() const;
+		
+		void setDrawRect(const Rectangle& normal, const Rectangle& pushed);
+		Rectangle getNormalRect() const;
+		Rectangle getPushedRect() const;
+		Image* getImage() const;
+		
+		virtual void draw(Graphics* graphics);
+		virtual void drawFrame(Graphics* graphics);
+		
+		void enableFrameWhenMouseEntered(bool flag);
+		bool isFrameEnabledWhenMouseEntered() const;
+		
+		virtual void adjustSize();
+		
+	protected:
 		Image* mImage;
 		
 		Rectangle normalTex;
 		Rectangle pushedTex;
 		Rectangle unavailTex;
+		Rectangle focusTex;
 		
 		bool mInternalImage;
+		bool mFrameMouseEntered;
 	};
 } // namespace gcn
 

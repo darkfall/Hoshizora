@@ -10,7 +10,7 @@
 #include "guichan/image.hpp"
 
 
-#define GUI_Z 0.f
+#define GUI_Z 1.f
 
 namespace gcn
 {
@@ -55,9 +55,17 @@ namespace gcn
         virtual void convertToDisplayFormat();
 		
 		virtual void setTextureRect(const Rectangle& rect);
-
-
+		
+		virtual void setColor(const Color& color);
+		virtual gcn::Color getColor();
+		virtual void setRotation(float rot);
+		
+		virtual std::string getName();
+		virtual void setName(const std::string& name);
+		
     protected:
+		std::string name;
+		
 		sora::SoraCore* sora;
         sora::SoraSprite *mSoraSprite;
 		sora::HSORATEXTURE mTexture;

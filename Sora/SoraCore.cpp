@@ -499,8 +499,7 @@ namespace sora {
 			freeResourceFile(data);
 			return tex;
 		}
-		else
-			throw SORA_EXCEPTION("Error loading texture");
+		return 0;
 	}
 
 	HSORATEXTURE SoraCore::createTextureWH(int w, int h) {

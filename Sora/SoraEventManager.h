@@ -13,6 +13,7 @@
 #include "SoraTimerEvent.h"
 #include "QuickList.h"
 #include "hash.h"
+#include "SoraKeyInfo.h"
 
 namespace sora {
 	
@@ -104,6 +105,16 @@ namespace sora {
 		void SORACALL registerTimerEvent(const SoraEventHandlerPack& handler, SoraTimerEvent* ev, float32 time, bool repeat=false);
 		void SORACALL unregisterTimerEvent(SoraEventHandlerPack* handler);
 		
+		/*
+		 you should call this in your key event pool in order to let components know there is a key input event 
+		 */
+		void SORACALL publishInputEvent(SoraKeyEvent* kev);
+		/*
+		 register key input event handlers
+		 */
+		void SORACALL registerInputEventHandler(SoraEventHandler* handler);
+		void SORACALL unregisterInputEventHandler(SoraEventHandler* handler);
+		
 		void SORACALL update(float32 dt);
 
 	private:
@@ -162,9 +173,12 @@ namespace sora {
 				}
 		};
 		
-		typedef QuickList<SoraTimerEventInfo*, 2048> TIMER_EVENT_LIST;
+		typedef QuickList<SoraTimerEventInfo*, 256> TIMER_EVENT_LIST;
 		TIMER_EVENT_LIST tevList;
 		float32 currTime;
+		
+		typedef std::list<SoraEventHandler*> INPUT_EVENT_HANDLER_LIST;
+		INPUT_EVENT_HANDLER_LIST iehList;
 		
 		inline void freeTimerEvent(TIMER_EVENT_LIST::iterator ittev);
 	};

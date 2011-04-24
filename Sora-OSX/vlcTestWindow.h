@@ -47,6 +47,8 @@ public:
     void action();
     
     inline void renderMovieImage();
+	
+	void onKeyEvent(const sora::SoraKeyEvent* kev);
 		
 private:
     void _loadGUI();

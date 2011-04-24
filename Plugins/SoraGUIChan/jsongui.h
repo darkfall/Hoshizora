@@ -86,6 +86,30 @@ namespace sora {
 		
 		std::vector<std::string> items;
 	};
+	
+	class JsonGuiWritter {
+	public:
+		typedef Json::Value JValue;
+		static Json::Value& writeWidget(Json::Value& inValue, gcn::Widget* widget);
+		
+		static std::string getHexColor(const gcn::Color& col);
+		
+		static Json::Value& writeDefault(Json::Value& inValue, gcn::Widget* widget);
+		static Json::Value& writeButton(Json::Value& inValue, gcn::Button* widget);
+		static Json::Value& writeContainer(Json::Value& inValue, gcn::Container* widget);
+		static Json::Value& writeWindow(Json::Value& inValue, gcn::Window* widget);
+		static Json::Value& writeSlider(Json::Value& inValue, gcn::Slider* wiget);
+		static Json::Value& writeLabel(Json::Value& inValue, gcn::Label* wiget);
+		static Json::Value& writeIcon(Json::Value& inValue, gcn::Icon* wiget);
+		static Json::Value& writeCheckBox(Json::Value& inValue, gcn::CheckBox* wiget);
+		static Json::Value& writeTextBox(Json::Value& inValue, gcn::TextBox* wiget);
+		static Json::Value& writeTextField(Json::Value& inValue, gcn::TextField* wiget);
+		static Json::Value& writeRadioButton(Json::Value& inValue, gcn::RadioButton* wiget);
+		static Json::Value& writeImageButton(Json::Value& inValue, gcn::ImageButton* wiget);
+		static Json::Value& writeDropDown(Json::Value& inValue, gcn::DropDown* wiget);
+		static Json::Value& writeListBox(Json::Value& inValue, gcn::ListBox* wiget);
+	
+	};
     
 } // namespace sora
 

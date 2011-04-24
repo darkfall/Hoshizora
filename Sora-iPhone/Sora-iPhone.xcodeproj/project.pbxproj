@@ -97,19 +97,20 @@
 		8834C349135F7B85006A20F6 /* SoraiOSFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8834C346135F7B85006A20F6 /* SoraiOSFont.mm */; };
 		8834C34A135F7B85006A20F6 /* SoraiOSFontManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8834C347135F7B85006A20F6 /* SoraiOSFontManager.mm */; };
 		884CC59912F6537B00FD18FC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58A12F6537B00FD18FC /* UIKit.framework */; };
-		884CC59A12F6537B00FD18FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58B12F6537B00FD18FC /* QuartzCore.framework */; };
-		884CC59B12F6537B00FD18FC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58C12F6537B00FD18FC /* MediaPlayer.framework */; };
-		884CC59C12F6537B00FD18FC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58D12F6537B00FD18FC /* AVFoundation.framework */; };
-		884CC59D12F6537B00FD18FC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58E12F6537B00FD18FC /* AudioToolbox.framework */; };
-		884CC59E12F6537B00FD18FC /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58F12F6537B00FD18FC /* CoreAudio.framework */; };
-		884CC59F12F6537B00FD18FC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59012F6537B00FD18FC /* OpenAL.framework */; };
-		884CC5A012F6537B00FD18FC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59112F6537B00FD18FC /* CoreGraphics.framework */; };
 		884CC5A112F6537B00FD18FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59212F6537B00FD18FC /* QuartzCore.framework */; };
 		884CC5A212F6537B00FD18FC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59312F6537B00FD18FC /* OpenGLES.framework */; };
 		884CC5A312F6537B00FD18FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59412F6537B00FD18FC /* Foundation.framework */; };
 		884CC5A412F6537B00FD18FC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59512F6537B00FD18FC /* UIKit.framework */; };
 		884CC5A512F6537B00FD18FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59612F6537B00FD18FC /* Foundation.framework */; };
 		884CC5A612F6537B00FD18FC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59712F6537B00FD18FC /* CoreGraphics.framework */; };
+		887E2823136115CD00803DA6 /* gcnImageButton2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E281A136115CD00803DA6 /* gcnImageButton2.cpp */; };
+		887E2824136115CD00803DA6 /* gcnDraggableImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E281C136115CD00803DA6 /* gcnDraggableImageButton.cpp */; };
+		887E2825136115CD00803DA6 /* gcnDraggableImageButtonIncubator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E281E136115CD00803DA6 /* gcnDraggableImageButtonIncubator.cpp */; };
+		887E2826136115CD00803DA6 /* gcnBackgroundContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E2820136115CD00803DA6 /* gcnBackgroundContainer.cpp */; };
+		887E2827136115CD00803DA6 /* gcnSelectableContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E2822136115CD00803DA6 /* gcnSelectableContainer.cpp */; };
+		887E28361361161800803DA6 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887E28351361161800803DA6 /* OpenAL.framework */; };
+		887E283C1361162400803DA6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887E283B1361162400803DA6 /* AudioToolbox.framework */; };
+		887E2844136116BE00803DA6 /* boxbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 887E2843136116BE00803DA6 /* boxbutton.png */; };
 		8881A21213600F7000F376F1 /* SoraiOSInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8881A21113600F7000F376F1 /* SoraiOSInput.cpp */; };
 		8881A21513600F7E00F376F1 /* SoraiOSTouchPool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8881A21413600F7E00F376F1 /* SoraiOSTouchPool.mm */; };
 		8897814613071C9500A69ADE /* PVRTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8897812A13071C9500A69ADE /* PVRTexture.mm */; };
@@ -364,19 +365,26 @@
 		8834C347135F7B85006A20F6 /* SoraiOSFontManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoraiOSFontManager.mm; path = ../Plugins/SoraiOSFontManager/SoraiOSFontManager.mm; sourceTree = SOURCE_ROOT; };
 		8834C348135F7B85006A20F6 /* SoraiOSFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraiOSFontManager.h; path = ../Plugins/SoraiOSFontManager/SoraiOSFontManager.h; sourceTree = SOURCE_ROOT; };
 		884CC58A12F6537B00FD18FC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		884CC58B12F6537B00FD18FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/QuartzCore.framework; sourceTree = SOURCE_ROOT; };
-		884CC58C12F6537B00FD18FC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/MediaPlayer.framework; sourceTree = SOURCE_ROOT; };
-		884CC58D12F6537B00FD18FC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/AVFoundation.framework; sourceTree = SOURCE_ROOT; };
-		884CC58E12F6537B00FD18FC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/AudioToolbox.framework; sourceTree = SOURCE_ROOT; };
-		884CC58F12F6537B00FD18FC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/CoreAudio.framework; sourceTree = SOURCE_ROOT; };
-		884CC59012F6537B00FD18FC /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/OpenAL.framework; sourceTree = SOURCE_ROOT; };
-		884CC59112F6537B00FD18FC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = ../../trunk/loliEngine/iphoneos2.2.1/System/Library/Frameworks/CoreGraphics.framework; sourceTree = SOURCE_ROOT; };
 		884CC59212F6537B00FD18FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		884CC59312F6537B00FD18FC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		884CC59412F6537B00FD18FC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		884CC59512F6537B00FD18FC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		884CC59612F6537B00FD18FC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		884CC59712F6537B00FD18FC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		887E240E1360A34E00803DA6 /* SoraKeyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraKeyInfo.h; sourceTree = "<group>"; };
+		887E2819136115CD00803DA6 /* gcnImageButton2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnImageButton2.h; sourceTree = "<group>"; };
+		887E281A136115CD00803DA6 /* gcnImageButton2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnImageButton2.cpp; sourceTree = "<group>"; };
+		887E281B136115CD00803DA6 /* gcnDraggableImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnDraggableImageButton.h; sourceTree = "<group>"; };
+		887E281C136115CD00803DA6 /* gcnDraggableImageButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnDraggableImageButton.cpp; sourceTree = "<group>"; };
+		887E281D136115CD00803DA6 /* gcnDraggableImageButtonIncubator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnDraggableImageButtonIncubator.h; sourceTree = "<group>"; };
+		887E281E136115CD00803DA6 /* gcnDraggableImageButtonIncubator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnDraggableImageButtonIncubator.cpp; sourceTree = "<group>"; };
+		887E281F136115CD00803DA6 /* gcnBackgroundContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnBackgroundContainer.h; sourceTree = "<group>"; };
+		887E2820136115CD00803DA6 /* gcnBackgroundContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnBackgroundContainer.cpp; sourceTree = "<group>"; };
+		887E2821136115CD00803DA6 /* gcnSelectableContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnSelectableContainer.h; sourceTree = "<group>"; };
+		887E2822136115CD00803DA6 /* gcnSelectableContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnSelectableContainer.cpp; sourceTree = "<group>"; };
+		887E28351361161800803DA6 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		887E283B1361162400803DA6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		887E2843136116BE00803DA6 /* boxbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boxbutton.png; path = "../Sora-OSX/build/Debug/boxbutton.png"; sourceTree = SOURCE_ROOT; };
 		8881A21113600F7000F376F1 /* SoraiOSInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraiOSInput.cpp; sourceTree = "<group>"; };
 		8881A21313600F7E00F376F1 /* SoraiOSTouchPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSTouchPool.h; sourceTree = "<group>"; };
 		8881A21413600F7E00F376F1 /* SoraiOSTouchPool.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSTouchPool.mm; sourceTree = "<group>"; };
@@ -597,19 +605,14 @@
 				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
 				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
 				884CC59912F6537B00FD18FC /* UIKit.framework in Frameworks */,
-				884CC59A12F6537B00FD18FC /* QuartzCore.framework in Frameworks */,
-				884CC59B12F6537B00FD18FC /* MediaPlayer.framework in Frameworks */,
-				884CC59C12F6537B00FD18FC /* AVFoundation.framework in Frameworks */,
-				884CC59D12F6537B00FD18FC /* AudioToolbox.framework in Frameworks */,
-				884CC59E12F6537B00FD18FC /* CoreAudio.framework in Frameworks */,
-				884CC59F12F6537B00FD18FC /* OpenAL.framework in Frameworks */,
-				884CC5A012F6537B00FD18FC /* CoreGraphics.framework in Frameworks */,
 				884CC5A112F6537B00FD18FC /* QuartzCore.framework in Frameworks */,
 				884CC5A212F6537B00FD18FC /* OpenGLES.framework in Frameworks */,
 				884CC5A312F6537B00FD18FC /* Foundation.framework in Frameworks */,
 				884CC5A412F6537B00FD18FC /* UIKit.framework in Frameworks */,
 				884CC5A512F6537B00FD18FC /* Foundation.framework in Frameworks */,
 				884CC5A612F6537B00FD18FC /* CoreGraphics.framework in Frameworks */,
+				887E28361361161800803DA6 /* OpenAL.framework in Frameworks */,
+				887E283C1361162400803DA6 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +649,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				887E283B1361162400803DA6 /* AudioToolbox.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -661,6 +665,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				887E2843136116BE00803DA6 /* boxbutton.png */,
 				882906FB135FE67B006EF84A /* patchouli.anm */,
 				8829063B135FE427006EF84A /* boss_patchouli.png */,
 				8829063C135FE427006EF84A /* editorWindow.json */,
@@ -679,13 +684,6 @@
 			isa = PBXGroup;
 			children = (
 				884CC58A12F6537B00FD18FC /* UIKit.framework */,
-				884CC58B12F6537B00FD18FC /* QuartzCore.framework */,
-				884CC58C12F6537B00FD18FC /* MediaPlayer.framework */,
-				884CC58D12F6537B00FD18FC /* AVFoundation.framework */,
-				884CC58E12F6537B00FD18FC /* AudioToolbox.framework */,
-				884CC58F12F6537B00FD18FC /* CoreAudio.framework */,
-				884CC59012F6537B00FD18FC /* OpenAL.framework */,
-				884CC59112F6537B00FD18FC /* CoreGraphics.framework */,
 				884CC59212F6537B00FD18FC /* QuartzCore.framework */,
 				884CC59312F6537B00FD18FC /* OpenGLES.framework */,
 				884CC59412F6537B00FD18FC /* Foundation.framework */,
@@ -696,6 +694,7 @@
 				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				887E28351361161800803DA6 /* OpenAL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -934,6 +933,7 @@
 		884CC35F12F6530100FD18FC /* Sora */ = {
 			isa = PBXGroup;
 			children = (
+				887E2818136115CD00803DA6 /* gcnExtend */,
 				8834C33E135F7B20006A20F6 /* SoraiOSFontManager */,
 				8834C334135F7AE7006A20F6 /* SoraSpriteAnimation */,
 				8834C1F3135F6B37006A20F6 /* SoraGUIChan */,
@@ -943,6 +943,24 @@
 			);
 			name = Sora;
 			sourceTree = "<group>";
+		};
+		887E2818136115CD00803DA6 /* gcnExtend */ = {
+			isa = PBXGroup;
+			children = (
+				887E2819136115CD00803DA6 /* gcnImageButton2.h */,
+				887E281A136115CD00803DA6 /* gcnImageButton2.cpp */,
+				887E281B136115CD00803DA6 /* gcnDraggableImageButton.h */,
+				887E281C136115CD00803DA6 /* gcnDraggableImageButton.cpp */,
+				887E281D136115CD00803DA6 /* gcnDraggableImageButtonIncubator.h */,
+				887E281E136115CD00803DA6 /* gcnDraggableImageButtonIncubator.cpp */,
+				887E281F136115CD00803DA6 /* gcnBackgroundContainer.h */,
+				887E2820136115CD00803DA6 /* gcnBackgroundContainer.cpp */,
+				887E2821136115CD00803DA6 /* gcnSelectableContainer.h */,
+				887E2822136115CD00803DA6 /* gcnSelectableContainer.cpp */,
+			);
+			name = gcnExtend;
+			path = ../Plugins/gcnExtend;
+			sourceTree = SOURCE_ROOT;
 		};
 		8897812613071C9500A69ADE /* SoraOGLESRenderer */ = {
 			isa = PBXGroup;
@@ -1099,6 +1117,7 @@
 				889781E013071CAB00A69ADE /* SoraTexture.cpp */,
 				889781E113071CAB00A69ADE /* SoraTexture.h */,
 				889781E213071CAB00A69ADE /* SoraTextureMap.h */,
+				887E240E1360A34E00803DA6 /* SoraKeyInfo.h */,
 				889781E313071CAB00A69ADE /* SoraTimer.h */,
 				8829061B135FE209006EF84A /* SoraiOSStringConv.h */,
 				8829061C135FE209006EF84A /* SoraiOSStringConv.mm */,
@@ -1324,6 +1343,7 @@
 				8829063F135FE427006EF84A /* editorWindow.json in Resources */,
 				88290640135FE427006EF84A /* patchouli.txt in Resources */,
 				882906FC135FE67B006EF84A /* patchouli.anm in Resources */,
+				887E2844136116BE00803DA6 /* boxbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1464,6 +1484,11 @@
 				88290746135FE9A3006EF84A /* SoraMiscTool_iOS.mm in Sources */,
 				8881A21213600F7000F376F1 /* SoraiOSInput.cpp in Sources */,
 				8881A21513600F7E00F376F1 /* SoraiOSTouchPool.mm in Sources */,
+				887E2823136115CD00803DA6 /* gcnImageButton2.cpp in Sources */,
+				887E2824136115CD00803DA6 /* gcnDraggableImageButton.cpp in Sources */,
+				887E2825136115CD00803DA6 /* gcnDraggableImageButtonIncubator.cpp in Sources */,
+				887E2826136115CD00803DA6 /* gcnBackgroundContainer.cpp in Sources */,
+				887E2827136115CD00803DA6 /* gcnSelectableContainer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

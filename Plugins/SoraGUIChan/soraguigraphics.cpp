@@ -132,9 +132,7 @@ namespace gcn
             return;
         }
 
-        // As HGE omits the last pixel we need to adjust the coordinates
-        // before drawing the line. If it's a vertical or horizontal line
-        // all we have to do is add the omitted pixel.
+       
         if (y1 == y2 || x1 == x2) {
             x2++;
             y2++;
@@ -190,10 +188,10 @@ namespace gcn
         x2 += top.xOffset;
         y2 += top.yOffset;
 
-        sora->renderRect(x1, y1 + 1.f, x2, y1, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x2, y1 + 1.f, x2, y2 - 1.f, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x2, y2, x1 + 1.f, y2, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x1 + 1.f, y2, x1 + 1.f, y1 + 1.f, 1.f, mHardwareColor, GUI_Z);
+        sora->renderRect(x1, y1, x2, y1, 1.f, mHardwareColor, GUI_Z);
+        sora->renderRect(x2, y1, x2, y2, 1.f, mHardwareColor, GUI_Z);
+        sora->renderRect(x2, y2, x1, y2, 1.f, mHardwareColor, GUI_Z);
+        sora->renderRect(x1, y2, x1, y1, 1.f, mHardwareColor, GUI_Z);
 
 	/*	fillRectangle(Rectangle(x1, y1+1, x2, y1));
 		fillRectangle(Rectangle(x2, y1 + 1.f, x2, y2 - 1.f));

@@ -8,8 +8,8 @@
  */
 #include "SoraOGLKeyPoll.h"
 #include "glfw/GL/glfw.h"
-
-
+#include "Debug/SoraInternalLogger.h"
+#include "SoraEventManager.h"
 #include <vector>
 
 namespace sora {
@@ -39,10 +39,9 @@ namespace sora {
 		ev.x = x;
 		ev.y = y;
 		
-#ifdef _DEBUG
-		printf("ev, char: %c, wheel: %d, x, y: %d, %d, flag: %d, key: %d\n", ev.chr, ev.wheel, x, y, ev.flags, ev.key);
-#endif
-
+		INT_LOG::debugPrintf("ev, char: %c, wheel: %d, x, y: %d, %d, flag: %d, key: %d\n", ev.chr, ev.wheel, x, y, ev.flags, ev.key);		
+		
+		SORA_EVENT_MANAGER->publishInputEvent(&ev);
 		keyPoll.push_back(ev);
 	}
 

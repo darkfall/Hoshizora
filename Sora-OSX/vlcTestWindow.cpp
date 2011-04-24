@@ -20,6 +20,8 @@
 #include "Debug/SoraDebugRenderer.h"
 #include "Debug/SoraAutoProfile.h"
 
+#include "SoraEventManager.h"
+
 static int keyUpDataGuard = 0;
 
 bool vlcWindow::updateFunc() {
@@ -104,7 +106,7 @@ bool vlcWindow::renderFunc() {
 
     canvas1->beginRender();
     
-  /*  pFont->print(0.f, getWindowHeight()-50.f, sora::FONT_ALIGNMENT_LEFT, L"SoraCoreRenderFPS: %f, VideoFPS: %f", sora::SORA->getFPS(), moviePlayer->getFPS());
+    pFont->print(0.f, getWindowHeight()-50.f, sora::FONT_ALIGNMENT_LEFT, L"SoraCoreRenderFPS: %f, VideoFPS: %f", sora::SORA->getFPS(), moviePlayer->getFPS());
     pFont->print(0.f, getWindowHeight()-30.f, sora::FONT_ALIGNMENT_LEFT, L"FrameCount: %d", moviePlayer->getFrameCount());
     pFont->print(0.f, getWindowHeight()-70.f, sora::FONT_ALIGNMENT_LEFT, L"Time: %llu, Lenght: %llu", 
                    moviePlayer->getTime(),
@@ -117,7 +119,7 @@ bool vlcWindow::renderFunc() {
                  moviePlayer->getPlayRate());
     pFont->print(0.f, getWindowHeight()-130.f, sora::FONT_ALIGNMENT_LEFT, L"Audio Track Num: %d, Audio Channel: %d", 
                  moviePlayer->getAudioTrackNum(),
-                 moviePlayer->getAudioChannelNum());*/
+                 moviePlayer->getAudioChannelNum());
     
     canvas1->finishRender();
 
@@ -144,7 +146,7 @@ bool vlcWindow::renderFunc() {
     sora::GCN_GLOBAL->gcnDraw();
 
 
-  //  canvas1->render();
+    canvas1->render();
 
 //    canvas2->render();
 
@@ -213,4 +215,11 @@ void vlcWindow::init() {
     
     canvas1 = new sora::SoraBaseCanvas(1024, 768);
     canvas2 = new sora::SoraBaseCanvas(1024, 768);
+	
+	registerEventFunc(this, &vlcWindow::onKeyEvent);
+	sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
+}
+
+void vlcWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {
+	printf("received key input event, key=%d, type=%d, flag=%d\n", kev->key, kev->type, kev->flags);
 }
