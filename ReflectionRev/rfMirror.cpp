@@ -11,7 +11,7 @@
 
 namespace reflection {
 
-	rfMirror::rfMirror(): pInLight(NULL) {
+	rfMirror::rfMirror(): pInLight(NULL), bVisited(false) {
 		enableDrag(false);
 	}
 	
@@ -35,8 +35,11 @@ namespace reflection {
 		
 		printf("d: %f, in: %f, f: %f, out: %f\n", rfRadToDgr(deltaDir), rfRadToDgr(inFace), rfRadToDgr(facing.Angle()), rfRadToDgr(inDir.Angle()));
 		
+		if(!pLight) {
+			pLight = new rfLight;
+		}
 		pLight->setDirection(inDir);
-		pLight->setStartPoint(rfPoint(getX(), getY()));
+		pLight->setStartPoint(rfPoint(getX()+getWidth()/2, getY()+getHeight()/2));
 		
 		pInLight = inLight;
 		
@@ -52,6 +55,14 @@ namespace reflection {
 		setFacing(dir);
 		
 		return reflect(pInLight);
+	}
+	
+	void rfMirror::setVisited(bool flag) {
+		bVisited = flag;
+	}
+	
+	bool rfMirror::isVisited() const {
+		return bVisited;
 	}
 /*	
 	Json::Value& rfMirror::writeJsonValue(Json::Value& inValue) {

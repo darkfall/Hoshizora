@@ -8,6 +8,7 @@
  */
 
 #include "rfShape.h"
+#include "rfMap.h"
 
 namespace reflection {
 
@@ -74,9 +75,15 @@ namespace reflection {
 		lightSource->setFacing(facing);
 		lightSource->setPosition(getX(), getY());
 		lightSource->setSourceImage(pComponentImage);
-		
-		if(pLightSource)
+		if(pLightSource) {
+			if(getParentMap())
+				getParentMap()->removeLightSource(pLightSource);
 			delete pLightSource;
+		}
+		if(getParentMap())
+			getParentMap()->updateLightSource(lightSource);
+		
+		
 		pLightSource = lightSource;
 		
 		setState(STATE_BLOCK);
@@ -87,8 +94,10 @@ namespace reflection {
 			return;
 		
 		if(mDragged) {
-			if(pLightSource)
+			if(pLightSource) {
 				pLightSource->setPosition(getX(), getY());
+				pParentMap->recalculateLightMap();
+			}
 			if(pMirror) {
 				sora::SoraSprite* psp;
 				if((psp = pMirror->getSourceImage()) != NULL) {
@@ -96,9 +105,17 @@ namespace reflection {
 				} else {
 					pMirror->setPosition(getX(), getY());
 				}
-				
+				pParentMap->recalculateLightMap();
 			}
 		}
+	}
+	
+	void rfShapeBase::setParentMap(rfMap* map) {
+		pParentMap = map;
+	}
+	
+	rfMap* rfShapeBase::getParentMap() const {
+		return pParentMap;
 	}
 	
 	void rfShapeBase::setShapeSpriteContainer(rfShapeSpriteContainer* cont) {
@@ -233,8 +250,11 @@ namespace reflection {
 	}*/
 	
 	void rfShapeBox::addMirror() {
-		if(pMirror)
+		if(pMirror) {
+			if(getParentMap())
+				getParentMap()->removeMirror(pMirror);
 			delete pMirror;
+		}
 		
 		pMirror = new rfMirror;
 		pMirror->setFacing(rfPoint(1.f, 0.f));
@@ -244,6 +264,8 @@ namespace reflection {
 											 pComponentImage->getSpriteWidth(), 
 											 pComponentImage->getSpriteHeight()));
 		
+		if(getParentMap())
+			getParentMap()->updateMirror(pMirror);
 		setState(STATE_PLACED);
 	}
 	
@@ -331,6 +353,22 @@ namespace reflection {
 			Json::Value lightsourceValue = inValue["lightsource"];
 			addLightSource(rfPoint(0.f, 0.f));
 			pLightSource->readJsonValue(lightsourceValue);
+		}
+	}
+	
+	void rfShapeBox::rfShapeBoxActionListener::action(const gcn::ActionEvent& actionEvent) {
+		{
+			if(actionEvent.getSource() == pParent) {
+				if(pParent->getState() == rfShapeBase::STATE_PLACED) {
+					rfMirror* pMirror = pParent->getMirror();
+					if(pMirror != NULL) {
+						pMirror->turn(rfDgrToRad(360.f/pParent->getEdgeNum()));
+						pParent->pParentMap->recalculateLightMap();
+					}
+				} else if(pParent->getState() == rfShapeBase::STATE_PLACEABLE) {
+					pParent->addMirror();
+				}
+			}
 		}
 	}
 	

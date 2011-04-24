@@ -8,6 +8,7 @@
  */
 
 #include "rfLightSource.h"
+#include "rfMap.h"
 
 namespace reflection {
 
@@ -39,6 +40,14 @@ namespace reflection {
 		ptEnd = e;
 	}
 	
+	void rfLight::logic() {
+	}
+	
+	void rfLight::draw(gcn::Graphics* graphics) {
+		graphics->setColor(gcn::Color(255, 255, 255, 255));
+		graphics->drawLine(ptStart.x, ptStart.y, ptEnd.x, ptEnd.y);
+	}
+	
 	rfLightSource::rfLightSource(): pLight(NULL), pSourceImage(NULL) {
 	}
 	
@@ -64,7 +73,7 @@ namespace reflection {
 	rfLight* rfLightSource::shootLight() {
 		rfLight* newLight = new rfLight;
 		newLight->setDirection(facing);
-		newLight->setStartPoint(rfPoint(getX(), getY()));
+		newLight->setStartPoint(rfPoint(getX()+getWidth()/2, getY()+getWidth()/2));
 		if(pLight) {
 			delete pLight;
 		}
@@ -74,7 +83,10 @@ namespace reflection {
 	
 	void rfLightSource::setSourceImage(sora::SoraSprite* image) {
 		pSourceImage = image;
-		pSourceImage->setCenter(pSourceImage->getSpriteWidth()/2, pSourceImage->getSpriteHeight()/2);
+		if(pSourceImage) {
+			pSourceImage->setCenter(pSourceImage->getSpriteWidth()/2, pSourceImage->getSpriteHeight()/2);
+			setDimension(gcn::Rectangle(getX(), getY(), pSourceImage->getSpriteWidth(), pSourceImage->getSpriteHeight()));
+		}
 	}
 	
 	sora::SoraSprite* rfLightSource::getSourceImage() const {
@@ -122,6 +134,14 @@ namespace reflection {
 			setX(inValue["x"].asInt());
 		if(inValue.isMember("y"))
 			setY(inValue["y"].asInt());
+	}
+	
+	rfMap* rfLightSource::getParentMap() const {
+		return pParentMap;
+	}
+	
+	void rfLightSource::setParentMap(rfMap* map) {
+		pParentMap = map;
 	}
 	
 } // namespace reflection

@@ -79,7 +79,7 @@ namespace sora {
 			oldtime = time;
 			fdt = dtToMil(dt)/1000.f * fTimeScale;
 			/* too long */
-			if(fdt >= 0.1f)
+			if(fdt >= 1.f)
 				fdt = 1.f / fps;
 			
 			fps = 1.f / fdt;

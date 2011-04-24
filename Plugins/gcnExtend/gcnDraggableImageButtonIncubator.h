@@ -57,6 +57,7 @@ namespace gcn {
 		Widget* addParent;
 		
 		bool bInternalImage;
+		bool mWidgetDragged;
 		IncubateFunc exFunc;
 		
 		void *userData;

@@ -14,7 +14,11 @@
 namespace reflection {
 
 	rfMap::rfMap(): pMirrorImage(NULL), pLightSourceImage(NULL) {
-		setState(STATE_WAITING);
+		setState(STATE_PLAYING);
+#ifdef DEBUG
+		setState(STATE_EDITING);
+#endif
+		lightRenderer.setMap(this);
 	}
 	
 	rfMap::~rfMap() {
@@ -110,14 +114,56 @@ namespace reflection {
 		if(prsb) {
 			prsb->setComponentImage(pMirrorImage);
 			prsb->setShapeSpriteContainer(&rootSprCont);
+			prsb->setParentMap(this);
+			if(mapState != STATE_EDITING) 
+				prsb->enableDrag(false);
+			
+			if(prsb->getState() == rfShapeBase::STATE_WAITFORLIGHT) 
+				lightRenderer.addToLightBox(prsb);
 			return;
 		}
 		
 		rfLightSource* pls = dynamic_cast<rfLightSource*> (widget);
 		if(pls) {
 			pls->setSourceImage(pLightSourceImage);
+			pls->setParentMap(this);
+			if(mapState != STATE_EDITING) 
+				pls->enableDrag(false);
+			
+			lightRenderer.addLightSource(pls);
 			return;
 		}
+	}
+	
+	void rfMap::updateShape(rfShapeBase* shape) {
+		if(shape->getState() == rfShapeBase::STATE_WAITFORLIGHT)
+			lightRenderer.addToLightBox(shape);
+	}
+	
+	void rfMap::updateMirror(rfMirror* mirror) {
+		lightRenderer.addMirror(mirror);
+	}
+	
+	void rfMap::updateLightSource(rfLightSource* ls) {
+		lightRenderer.addLightSource(ls);
+	}
+	
+	void rfMap::removeShape(rfShapeBase* shape) {
+		lightRenderer.removeToLightBox(shape);
+		
+		if(shape->getMirror() != NULL)
+			lightRenderer.removeMirror(shape->getMirror());
+		if(shape->getLightSource() != NULL)
+			lightRenderer.removeLightSource(shape->getLightSource());
+		remove(shape);
+	}
+
+	void rfMap::removeMirror(rfMirror* mirror) {
+		lightRenderer.removeMirror(mirror);
+	}
+	
+	void rfMap::removeLightSource(rfLightSource* ls) {
+		lightRenderer.removeLightSource(ls);
 	}
 	
 	Json::Value rfMap::writeProperties() {
@@ -242,6 +288,7 @@ namespace reflection {
 	bool rfMap::load(const std::wstring& filename) {
 		clear();
 		resetState();
+		lightRenderer.reset();
 		
 		ulong32 size;
 		void* data = sora::SORA->getResourceFile(filename, size);
@@ -270,6 +317,9 @@ namespace reflection {
 					}
 				}
 				setState(STATE_WAITING);
+#ifdef DEBUG
+				setState(STATE_EDITING);
+#endif
 				return true;
 			}
 		}
@@ -291,10 +341,10 @@ namespace reflection {
 	}
 	
 	void rfMap::draw(gcn::Graphics* graphics) {
+		SelectableContainer::draw(graphics);
+
 		if(mapState != STATE_WAITING)
 			lightRenderer.draw(graphics);
-		
-		SelectableContainer::draw(graphics);
 	}
 	
 	void rfMap::resetState() {
@@ -330,5 +380,31 @@ namespace reflection {
 			++itWidget;
 		}
 	}
+			   
+	rfUInt rfMap::getLightedBoxNumber() const {
+		return lightRenderer.getLightedBoxNumber();
+	}
+	
+	rfUInt rfMap::getLightNumber() const {
+		return lightRenderer.getLightNumber();
+	}
+	
+	rfUInt rfMap::getLightSourceNumber() const {
+		return lightRenderer.getLightSourceNumber();
+	}
+	
+	rfUInt rfMap::getShapeBoxNumber() const {
+		return lightRenderer.getShapeBoxNumber();
+	}
+	
+	rfUInt rfMap::getMirrorNumber() const {
+		return lightRenderer.getMirrorNumber();
+	}
+	
+	void rfMap::recalculateLightMap() {
+		lightRenderer.recalculate();
+	}
+
+	
 
 } // namespace reflection

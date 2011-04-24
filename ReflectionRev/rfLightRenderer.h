@@ -25,6 +25,9 @@ namespace reflection {
 		friend class rfMap;
 		
 	public:
+		rfMapLightRenderer();
+		~rfMapLightRenderer() {}
+		
 		void addLightSource(rfLightSource* llight);
 		void addMirror(rfMirror* mirror);
 		void addToLightBox(rfShapeBase* shape);
@@ -47,11 +50,18 @@ namespace reflection {
 		rfUInt getLightSourceNumber() const;
 		rfUInt getShapeBoxNumber() const;
 		rfUInt getMirrorNumber() const;
+		
+		void setMap(rfMap* map);
+		
+		void setMinMarchDistance(rfUInt distance);
+		rfUInt getMinMarchDistance() const;
 				
 	private:
-		void calculateLightPath(rfLight* inLight);
+		void calculateLightPath(rfLight* inLight, rfLightSource* start);
 		
 		rfUInt lightedBox;
+		rfUInt minMarchDistance;
+		rfMap* pParentMap;
 		
 		typedef std::list<rfLightSource*> LIGHT_SOURCE_LIST;
 		LIGHT_SOURCE_LIST mLightSourceList;
@@ -64,6 +74,7 @@ namespace reflection {
 		
 		typedef std::list<rfLight*> LIGHT_LIST;
 		LIGHT_LIST mLightList;
+
 	};
 } // namespace reflection
 

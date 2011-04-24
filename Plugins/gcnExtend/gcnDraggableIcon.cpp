@@ -100,6 +100,11 @@ namespace gcn {
 		}
 	}
 	
+	void DraggableIcon::setImage(const std::string& image) {
+		const Image* ii = Image::load(image);
+		Icon::setImage(ii);
+	}
+	
 	bool DraggableIcon::isDragEnabled() const {
 		return mDraggable;
 	}

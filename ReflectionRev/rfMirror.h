@@ -27,11 +27,13 @@ namespace reflection {
 		
 		virtual rfLight* reflect(rfLight* inLight);
 		virtual rfLight* turn(float32 delta);
+	
+		void setVisited(bool flag);
+		bool isVisited() const;
 		
-	//	virtual Json::Value& writeJsonValue(Json::Value& inValue);
-	//	virtual void readJsonValue(Json::Value& inValue);
+	protected:		
+		bool bVisited;
 		
-	protected:
 		rfLight* pInLight;
 		rfLight* pOutLight;
 	};

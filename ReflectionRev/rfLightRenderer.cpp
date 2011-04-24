@@ -8,8 +8,11 @@
  */
 
 #include "rfLightRenderer.h"
+#include "rfMap.h"
 
 namespace reflection {
+	
+	rfMapLightRenderer::rfMapLightRenderer(): pParentMap(NULL), minMarchDistance(10), lightedBox(0) {}
 
 	void rfMapLightRenderer::addLightSource(rfLightSource* llight) {
 		mLightSourceList.push_back(llight);
@@ -53,17 +56,89 @@ namespace reflection {
 	}
 	
 	void rfMapLightRenderer::recalculate() {
+		if(!pParentMap) return;
+		
 		lightedBox = 0;
 		mLightList.clear();
+		
+		/*
+		 set all mirror unvisited
+		 */
+		MIRROR_LIST::iterator itMirror = mMirrorList.begin();
+		while(itMirror != mMirrorList.end()) {
+			if((*itMirror))
+			   (*itMirror)->setVisited(false);
+			else {
+				itMirror = mMirrorList.erase(itMirror);
+				continue;
+			}
+			++itMirror;
+		}
 		
 		LIGHT_SOURCE_LIST::iterator itLight = mLightSourceList.begin();
 		while(itLight != mLightSourceList.end()) {
 			rfLight* startLight = (*itLight)->shootLight();
-			calculateLightPath(startLight);
+			calculateLightPath(startLight, (*itLight));
+			
+			++itLight;
 		}
 	}
 	
-	void rfMapLightRenderer::calculateLightPath(rfLight* inLight) {
+	void rfMapLightRenderer::calculateLightPath(rfLight* inLight, rfLightSource* start) {
+		rfPoint startPos = inLight->getStartPoint();
+		gcn::Rectangle mapRange = pParentMap->getDimension();
+		
+		rfFloat marchDir = inLight->getDirection().Angle();
+		rfPoint currPos = startPos;
+		while(mapRange.isPointInRect(currPos.x, currPos.y)) {
+			rfPoint nextPos(currPos.x + sinf(marchDir) * minMarchDistance, currPos.y + cosf(marchDir) * minMarchDistance);
+			//printf("nextPos: %f,%f\n", nextPos.x, nextPos.y);
+			gcn::Widget* pw = pParentMap->getWidgetAt(nextPos.x, nextPos.y);
+			if(pw == NULL || pw == start) {
+				currPos = nextPos;
+				continue;
+			}/* else if(pw == start) {
+				// backing into the samepos, circle, break
+				break;
+			}*/
+			
+			// is shape
+			rfShapeBase* shape = dynamic_cast<rfShapeBase*> (pw);
+			if(shape != NULL) {
+				if(shape->getState() == rfShapeBase::STATE_WAITFORLIGHT)
+					shape->setState(rfShapeBase::STATE_LIGHTED);
+				else {
+					// is mirror
+					// reflect a new light
+					rfMirror* mirror = shape->getMirror();
+					if(pw != NULL) {
+						// backing to the same mirror,
+						// a circle
+						// break
+						if(mirror->isVisited()) {
+							break;
+						}
+						
+						rfLight* newLight = mirror->reflect(inLight);
+						
+						if(newLight != NULL) {
+							inLight->setEndPoint(rfPoint(mirror->getX()+mirror->getWidth()/2, mirror->getY()+mirror->getHeight()/2));
+							mLightList.push_back(inLight);
+							
+							inLight = newLight;
+							marchDir = inLight->getDirection().Angle();
+							mirror->setVisited(true);
+							
+							printf("inserting light, spos=%f,%f, epos=%f,%f\n", inLight->getStartPoint().x, inLight->getStartPoint().y,
+								   inLight->getEndPoint().x, inLight->getEndPoint().y);
+						}
+					}
+				}
+			}			
+			currPos = nextPos;
+		}
+		inLight->setEndPoint(currPos);
+		mLightList.push_back(inLight);
 	}
 	
 	void rfMapLightRenderer::draw(gcn::Graphics* graphics) {
@@ -100,6 +175,18 @@ namespace reflection {
 	
 	rfUInt rfMapLightRenderer::getMirrorNumber() const {
 		return mMirrorList.size();
+	}
+	
+	void rfMapLightRenderer::setMap(rfMap* map) {
+		pParentMap = map;
+	}
+	
+	void rfMapLightRenderer::setMinMarchDistance(rfUInt distance) {
+		minMarchDistance = distance;
+	}
+	
+	rfUInt rfMapLightRenderer::getMinMarchDistance() const {
+		return minMarchDistance;
 	}
 
 } // namespace reflection

@@ -66,6 +66,23 @@ namespace reflection {
 		virtual void logic();
 		virtual void draw(gcn::Graphics* graphics);
 		
+		void updateShape(rfShapeBase* shape);
+		void updateMirror(rfMirror* mirror);
+		void updateLightSource(rfLightSource* ls);
+		
+		void removeShape(rfShapeBase* shape);
+		void removeMirror(rfMirror* mirror);
+		void removeLightSource(rfLightSource* ls);
+		
+		void recalculateLightMap();
+		
+		rfUInt getLightedBoxNumber() const;
+		
+		rfUInt getLightNumber() const;
+		rfUInt getLightSourceNumber() const;
+		rfUInt getShapeBoxNumber() const;
+		rfUInt getMirrorNumber() const;
+		
 	private:
 		void enableEditing();
 		void disableEditing();

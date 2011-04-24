@@ -47,8 +47,7 @@ namespace reflection {
 		typedef std::map<rfUInt, rfShapeSprite> SPRITE_CONT;
 		SPRITE_CONT sprites;
 	};
-	
-	
+		
 	/*
 	 base class for all shape
 	 */
@@ -94,6 +93,9 @@ namespace reflection {
 		 inheritant from widget listener
 		 */
 		virtual void widgetMoved(const gcn::Event& event);
+		
+		void setParentMap(rfMap* map) ;
+		rfMap* getParentMap() const;
 
 	protected:
 		gcn::Color lightedColor;
@@ -115,6 +117,8 @@ namespace reflection {
 		 state must equal to placeable to contain mirror
 		 */
 		rfMirror* pMirror;
+		
+		rfMap* pParentMap;
 	};
 		
 	/*
@@ -122,6 +126,7 @@ namespace reflection {
 	 handle any right even n_edge shape
 	 */
 	class rfShapeBox: public rfShapeBase {
+		friend class rfShapeBoxActionListener;
 	public:
 		rfShapeBox();
 		virtual ~rfShapeBox();
@@ -156,18 +161,7 @@ namespace reflection {
 				pParent = parent;
 			}
 			
-			void action(const gcn::ActionEvent& actionEvent) {
-				if(actionEvent.getSource() == pParent) {
-					if(pParent->getState() == rfShapeBase::STATE_PLACED) {
-						rfMirror* pMirror = pParent->getMirror();
-						if(pMirror != NULL) {
-							pMirror->turn(rfDgrToRad(360.f/pParent->getEdgeNum()));
-						}
-					} else if(pParent->getState() == rfShapeBase::STATE_PLACEABLE) {
-						pParent->addMirror();
-					}
-				}
-			}
+			void action(const gcn::ActionEvent& actionEvent);
 				   
 			rfShapeBox* pParent;
 		};

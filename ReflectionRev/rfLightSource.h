@@ -41,6 +41,8 @@ namespace reflection {
 		rfPoint ptEnd;
 	};
 	
+	class rfMap;
+		
 	/*
 	 base class for a light source, which can shoot a light
 	 */
@@ -66,12 +68,17 @@ namespace reflection {
 		virtual Json::Value& writeJsonValue(Json::Value& inValue);
 		virtual void readJsonValue(Json::Value& inValue);
 		
+		void setParentMap(rfMap* map);
+		rfMap* getParentMap() const;
+		
 	protected:
 		rfLight* pLight;
 		rfPoint facing;
-		
+				
 		bool bEditing;
 		sora::SoraSprite* pSourceImage;
+		
+		rfMap* pParentMap;
 	};
 	
 	

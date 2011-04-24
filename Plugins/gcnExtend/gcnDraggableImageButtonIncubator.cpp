@@ -98,6 +98,7 @@ namespace gcn {
 				ml->mousePressed(mouseEvent);
 			
 			mMousePressed = true;
+			mWidgetDragged = false;
             mouseEvent.consume();
 			
 			mDragOffsetX = mouseEvent.getX();
@@ -119,6 +120,26 @@ namespace gcn {
 				if(ml)
 					ml->mouseReleased(mouseEvent);
 				currentWidget->setFrameSize(0);
+				
+				// we cannot let another widget exist on the same place
+				if(!mWidgetDragged) {
+					Widget* pParent;
+					if(addParent == NULL)
+						pParent = getParent();
+					else
+						pParent = addParent;
+					Container* pCont = dynamic_cast<Container*> (pParent);
+					if(pCont) {
+						pCont->remove(currentWidget);
+					}
+					else {
+						Window* pWnd = dynamic_cast<Window*>(pParent);
+						if(pWnd) {
+							pWnd->remove(currentWidget);
+						}
+					}
+					delete currentWidget;
+				}
 				currentWidget = NULL;
 			}
         }
@@ -146,6 +167,7 @@ namespace gcn {
 			if (currentWidget) {
 				currentWidget->setPosition(mouseEvent.getX() - mDragOffsetX + getX(),
 										  mouseEvent.getY() - mDragOffsetY + getY());
+				mWidgetDragged = true;
 			}
 			
 			mouseEvent.consume();
