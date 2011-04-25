@@ -70,7 +70,7 @@ namespace reflection {
 		return pComponentImage;
 	}
 	
-	void rfShapeBase::addLightSource(const rfPoint& facing) {
+	void rfShapeBase::addLightSource(rfFloat facing) {
 		rfLightSource* lightSource = new rfLightSource;
 		lightSource->setFacing(facing);
 		lightSource->setPosition(getX(), getY());
@@ -90,23 +90,18 @@ namespace reflection {
 	}
 	
 	void rfShapeBase::widgetMoved(const gcn::Event& event) {
-		if(!mEnabled)
-			return;
-		
-		if(mDragged) {
-			if(pLightSource) {
-				pLightSource->setPosition(getX(), getY());
-				pParentMap->recalculateLightMap();
+		if(pLightSource) {
+			pLightSource->setPosition(getX(), getY());
+			pParentMap->recalculateLightMap();
+		}
+		if(pMirror) {
+			sora::SoraSprite* psp;
+			if((psp = pMirror->getSourceImage()) != NULL) {
+				pMirror->setPosition(getX()+(getWidth()-psp->getSpriteWidth())/2, getY()+(getHeight()-psp->getSpriteHeight())/2);
+			} else {
+				pMirror->setPosition(getX(), getY());
 			}
-			if(pMirror) {
-				sora::SoraSprite* psp;
-				if((psp = pMirror->getSourceImage()) != NULL) {
-					pMirror->setPosition(getX()+(getWidth()-psp->getSpriteWidth())/2, getY()+(getHeight()-psp->getSpriteHeight())/2);
-				} else {
-					pMirror->setPosition(getX(), getY());
-				}
-				pParentMap->recalculateLightMap();
-			}
+			pParentMap->recalculateLightMap();
 		}
 	}
 	
@@ -257,7 +252,7 @@ namespace reflection {
 		}
 		
 		pMirror = new rfMirror;
-		pMirror->setFacing(rfPoint(1.f, 0.f));
+		pMirror->setFacing(0.f);
 		pMirror->setSourceImage(pComponentImage);
 		pMirror->setDimension(gcn::Rectangle(getX()+(getWidth()-pComponentImage->getSpriteWidth())/2, 
 											 getY()+(getHeight()-pComponentImage->getSpriteHeight())/2, 
@@ -351,7 +346,7 @@ namespace reflection {
 		}
 		if(inValue.isMember("lightsource")) {
 			Json::Value lightsourceValue = inValue["lightsource"];
-			addLightSource(rfPoint(0.f, 0.f));
+			addLightSource(0.f);
 			pLightSource->readJsonValue(lightsourceValue);
 		}
 	}

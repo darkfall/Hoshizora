@@ -35,7 +35,7 @@ namespace sora {
     
     void SoraBaseCanvas::beginRender() {
         bSceneBegan = true;
-        SORA->beginScene(0xFFFFFF00, canvasTarget);
+        SORA->beginScene(0, canvasTarget);
     }
     
     void SoraBaseCanvas::finishRender() {

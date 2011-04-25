@@ -18,7 +18,7 @@ namespace sora {
 	class SoraDefaultMiscTool: public SoraMiscTool {
 	public:
 		SoraDefaultMiscTool() { pLogger = new SoraDefaultLogger; }
-		~SoraDefaultMiscTool() { delete pLogger; }
+		virtual ~SoraDefaultMiscTool() { delete pLogger; }
 
 		virtual void setLogFile(const SoraString& sfile) { pLogger->setFile(sfile); }
 

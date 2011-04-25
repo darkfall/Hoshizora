@@ -13,6 +13,7 @@
 #include "SoraCore.h"
 #include "titleScene.h"
 #include "stgscene.h"
+#include "SoraCanvas.h"
 
 #include "Experimental/state_test.h"
 
@@ -48,6 +49,9 @@ private:
 					
 	sora::BaseEntity* testEntity;
     sora::SoraFont* pFont;
+	
+	sora::SoraBaseCanvas* canvas1;
+	ulong32 rt1;
 };
 
 #endif

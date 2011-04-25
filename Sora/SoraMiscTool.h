@@ -16,6 +16,8 @@ namespace sora {
 	
 	class SoraMiscTool {
 	public:
+		virtual ~SoraMiscTool() {}
+		
 		virtual int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) = 0;
 		virtual int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) = 0;
 

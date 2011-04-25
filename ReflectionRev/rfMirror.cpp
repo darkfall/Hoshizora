@@ -21,38 +21,48 @@ namespace reflection {
 	rfLight* rfMirror::reflect(rfLight* inLight) {
 		if(inLight == NULL)
 			return NULL;
+				
+		rfFloat inFace = inLight->getDirection() + rfDgrToRad(180.f);
+		if(inFace < 0)
+			inFace = rfDgrToRad(360.f) + inFace;
+		rfFloat mirrorFace = facing;
 		
-		rfPoint inDir = inLight->getDirection();
+		float32 deltaDir = mirrorFace - inFace;
+
+		printf("inFace: %f, mirrorFace: %f, deltaFace: %f, out:%f\n", rfRadToDgr(inFace), rfRadToDgr(mirrorFace), rfRadToDgr(deltaDir), rfRadToDgr(inFace+deltaDir*2));
 		
-		float32 inFace = inDir.Angle();
-		float32 deltaDir = inDir.Angle(&facing);
-		if(abs(deltaDir) == rfDgrToRad(90) || abs(deltaDir) == rfDgrToRad(180)) {
-			pInLight = NULL;
-			return NULL;
-		}
-			
-		inDir.Rotate(deltaDir*2);
+//		if(abs(deltaDir) == rfDgrToRad(90) || abs(deltaDir) == rfDgrToRad(180)) {
+//			pInLight = NULL;
+//			return NULL;
+//		}
 		
-		printf("d: %f, in: %f, f: %f, out: %f\n", rfRadToDgr(deltaDir), rfRadToDgr(inFace), rfRadToDgr(facing.Angle()), rfRadToDgr(inDir.Angle()));
-		
+	/*	if(deltaDir > rfDgrToRad(90))
+			deltaDir = rfDgrToRad(180)-deltaDir;
+		else if(deltaDir < rfDgrToRad(-90))
+			deltaDir = rfDgrToRad(180)+deltaDir;*/
+
+		inFace += deltaDir*2;
+//		inFace += rfDgrToRad(180.f);
+				
 		if(!pLight) {
 			pLight = new rfLight;
 		}
-		pLight->setDirection(inDir);
+		pLight->setDirection(inFace);
 		pLight->setStartPoint(rfPoint(getX()+getWidth()/2, getY()+getHeight()/2));
 		
 		pInLight = inLight;
 		
 		if(pSourceImage)
-			pSourceImage->setRotation(-facing.Angle());
+			pSourceImage->setRotation(-facing);
 		return pLight;
 	}
 	
 	rfLight* rfMirror::turn(float32 delta) {
-		rfPoint dir = getFacing();
-		dir.Rotate(delta);
-		dir.Normalize();
-		setFacing(dir);
+		setFacing(getFacing()+delta);
+		if(facing > rfDgrToRad(360.f))
+			facing = facing - rfDgrToRad(360.f);
+		
+	//	facing = rfDgrToRad((rfInt)rfRadToDgr(facing));
 		
 		return reflect(pInLight);
 	}

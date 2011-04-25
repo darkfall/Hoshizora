@@ -51,6 +51,7 @@ namespace sora{
 
 		currShader = 0;
 		iFrameStart = 1;
+		CurBlendMode = 0;
 	}
 
 	SoraOGLRenderer::~SoraOGLRenderer() {
@@ -163,7 +164,7 @@ namespace sora{
             glOrtho(0, 
                     pCurTarget->getWidth(), 
                     0
-                    , pCurTarget->getHeight(), -1, 1);
+                    , pCurTarget->getHeight(), -1.f, 1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             glTranslatef(0.f, 0.f, 0.f); //Set Center Coodinates
@@ -184,6 +185,7 @@ namespace sora{
             
             pCurTarget->attachToRender();
             applyTransform();
+			CurBlendMode = 0;
             glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
         } else {
             if(iFrameStart) {

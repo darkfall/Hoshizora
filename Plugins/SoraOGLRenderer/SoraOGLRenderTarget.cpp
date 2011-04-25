@@ -62,7 +62,7 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 
 	if(!glTex || !frameBuffer)
 		err = 2;
-	err = 0;
+	else err = 0;
 
 	SoraTexture* ptex = new SoraTexture;
 	ptex->mTextureID = glTex;

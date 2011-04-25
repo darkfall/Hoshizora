@@ -16,7 +16,7 @@ namespace reflection {
 	rfLight::~rfLight() {
 	}
 	
-	rfPoint rfLight::getDirection() const { 
+	rfFloat rfLight::getDirection() const { 
 		return direction;
 	}
 	
@@ -28,7 +28,7 @@ namespace reflection {
 		return ptEnd;
 	}
 	
-	void rfLight::setDirection(const rfPoint& d) {
+	void rfLight::setDirection(rfFloat d) {
 		direction = d;
 	}
 	
@@ -38,6 +38,8 @@ namespace reflection {
 	
 	void rfLight::setEndPoint(const rfPoint& e) {
 		ptEnd = e;
+	//	rfPoint d  = rfPoint(ptEnd.x-ptStart.x, ptEnd.y-ptStart.y);
+	//	setDirection(d.Angle());
 	}
 	
 	void rfLight::logic() {
@@ -62,11 +64,11 @@ namespace reflection {
 		return pLight;
 	}
 	
-	rfPoint rfLightSource::getFacing() const {
+	rfFloat rfLightSource::getFacing() const {
 		return facing;
 	}
 	
-	void rfLightSource::setFacing(const rfPoint& face) {
+	void rfLightSource::setFacing(rfFloat face) {
 		facing = face;
 	}
 	
@@ -108,16 +110,13 @@ namespace reflection {
 	void rfLightSource::draw(gcn::Graphics* graphics) {
 		DraggableIcon::draw(graphics);
 		if(pSourceImage) {
-			pSourceImage->setRotation(-getFacing().Angle());
+			pSourceImage->setRotation(-getFacing());
 			pSourceImage->render(getX()+getWidth()/2, getY()+getWidth()/2);
 		}
 	}
 	
 	Json::Value& rfLightSource::writeJsonValue(Json::Value& inValue) {
-		Json::Value facingValue; 
-		facingValue["x"] = facing.x;
-		facingValue["y"] = facing.y;
-		inValue["facing"] = facingValue;
+		inValue["facing"] = facing;
 		inValue["x"] = getX();
 		inValue["y"] = getY();
 		return inValue;
@@ -125,10 +124,7 @@ namespace reflection {
 	
 	void rfLightSource::readJsonValue(Json::Value& inValue) {
 		if(inValue.isMember("facing")) {
-			rfDouble ffacingx = inValue["facing"]["x"].asDouble();
-			rfDouble ffacingy = inValue["facing"]["y"].asDouble();
-
-			setFacing(rfPoint(ffacingx, ffacingy));
+			setFacing(inValue["facing"].asDouble());
 		}
 		if(inValue.isMember("x"))
 			setX(inValue["x"].asInt());

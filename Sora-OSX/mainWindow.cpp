@@ -68,7 +68,6 @@ bool mainWindow::updateFunc() {
 sora::SoraSprite* pSpr2;
 
 bool mainWindow::renderFunc() {
-	sora->beginScene();
 	
 	//mainScenes->render();
 	//pSpr->render4V(100.f, 100.f, 700.f, 0.f, 700.f, 600.f, 100.f, 500.f);
@@ -78,10 +77,15 @@ bool mainWindow::renderFunc() {
 	//pSpr2->render(100.f, 100.f);
 	float t = 0.56;
 	//shader->setParameterfv("twisting", &t, 1);
-    
+
+	canvas1->beginRender();
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
 	
+	canvas1->finishRender();
+		
+	sora->beginScene();
+	canvas1->render();
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	
 	reflection::rfMap* map = (reflection::rfMap*)sora::GCN_GLOBAL->findWidget("map");
@@ -106,6 +110,8 @@ gcn::Widget* myIncubateFunc_hexogon(void* userData) {
 		box->setShapeSpriteContainer(map->getShapeSpriteContainer());
 	}
 	
+	box->enableFrameWhenMouseEntered(true);
+	
 	box->setEdgeNum(6);
 	
 	return box;
@@ -113,7 +119,8 @@ gcn::Widget* myIncubateFunc_hexogon(void* userData) {
 
 void mainWindow::init() {
     sora::SORA->setFPS(999);
- //   pSpr = sora::SORA->createSprite(L"titlebg2.png");
+    pSpr = sora::SORA->createSprite(L"titlebg2.png");
+	pSpr->setScale(0.3f, 0.3f);
 //	pSpr2 = sora::SORA->createSprite(L"sea.png");
 	
 //	pSpr2->setScale(0.5f, 0.5f);
@@ -144,7 +151,7 @@ void mainWindow::init() {
 		reflection::rfLightSource* ls = new reflection::rfLightSource;
 		ls->setDimension(gcn::Rectangle(100, 100, 10, 10));
 	//	ls->setImage("boxhl.png");
-		ls->setFacing(reflection::rfPoint(1.f, 0.f));
+		ls->setFacing(sora::DGR_RAD(-90));
 		map->add(ls);
 					
 		gcn::DraggableImageButtonIncubator* di = new gcn::DraggableImageButtonIncubator();
@@ -154,6 +161,9 @@ void mainWindow::init() {
 		di->setUserData(map);
 		di->setAddParent(map);
 		sora::GCN_GLOBAL->addWidget(di, "top");
+		
+		canvas1 = new sora::SoraBaseCanvas(getWindowWidth(), getWindowHeight(), false);
+		rt1 = sora::SORA->createTarget(getWindowWidth(), getWindowHeight());
 	}
 }
 

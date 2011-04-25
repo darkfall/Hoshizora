@@ -96,8 +96,11 @@ void vlcWindow::action() {
 
 void vlcWindow::renderMovieImage() {
     if(pSpr) {
-        pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
-       pSpr->render(getWindowWidth()/2, 0.f);
+		pSpr->setScale(1.5f, 1.5f);
+
+    //    pSpr->setCenter(pSpr->getSpriteWidth()/2, 0);
+
+       pSpr->render(0.f, 0.f);
     }
 }
 
@@ -105,10 +108,11 @@ bool vlcWindow::renderFunc() {
   //  sora::PROFILE("movierender");
 
     canvas1->beginRender();
-    
+	pFont->setScale(4.f);
+
     pFont->print(0.f, getWindowHeight()-50.f, sora::FONT_ALIGNMENT_LEFT, L"SoraCoreRenderFPS: %f, VideoFPS: %f", sora::SORA->getFPS(), moviePlayer->getFPS());
     pFont->print(0.f, getWindowHeight()-30.f, sora::FONT_ALIGNMENT_LEFT, L"FrameCount: %d", moviePlayer->getFrameCount());
-    pFont->print(0.f, getWindowHeight()-70.f, sora::FONT_ALIGNMENT_LEFT, L"Time: %llu, Lenght: %llu", 
+    pFont->print(0.f, getWindowHeight()-70.f, sora::FONT_ALIGNMENT_LEFT, L"Time: %llu, Length: %llu", 
                    moviePlayer->getTime(),
                    moviePlayer->getLength());
         
@@ -120,6 +124,7 @@ bool vlcWindow::renderFunc() {
     pFont->print(0.f, getWindowHeight()-130.f, sora::FONT_ALIGNMENT_LEFT, L"Audio Track Num: %d, Audio Channel: %d", 
                  moviePlayer->getAudioTrackNum(),
                  moviePlayer->getAudioChannelNum());
+	
     
     canvas1->finishRender();
 
@@ -137,18 +142,18 @@ bool vlcWindow::renderFunc() {
 
     renderMovieImage();
 
-   // sora::GCN_GLOBAL->gcnDraw();
+    sora::GCN_GLOBAL->gcnDraw();
 
     canvas2->finishRender();
     
     sora::SORA->beginScene(0);
-    renderMovieImage();
-    sora::GCN_GLOBAL->gcnDraw();
+  //  renderMovieImage();
+   // sora::GCN_GLOBAL->gcnDraw();
 
 
     canvas1->render();
 
-//    canvas2->render();
+   canvas2->render();
 
     sora::SORA->endScene();
        

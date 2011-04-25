@@ -24,11 +24,11 @@ namespace reflection {
 		rfLight();
 		~rfLight();
 		
-		rfPoint getDirection() const;
+		rfFloat getDirection() const;
 		rfPoint getStartPoint() const;
 		rfPoint getEndPoint() const;
 		
-		void setDirection(const rfPoint& d);
+		void setDirection(rfFloat d);
 		void setStartPoint(const rfPoint& s);
 		void setEndPoint(const rfPoint& e);
 		
@@ -36,7 +36,7 @@ namespace reflection {
 		virtual void logic();
 		
 	protected:
-		rfPoint direction;		
+		rfFloat direction;		
 		rfPoint ptStart;
 		rfPoint ptEnd;
 	};
@@ -51,8 +51,8 @@ namespace reflection {
 		rfLightSource();
 		virtual ~rfLightSource();
 		
-		void setFacing(const rfPoint& face);
-		rfPoint getFacing() const;
+		void setFacing(rfFloat face);
+		rfFloat getFacing() const;
 		
 		rfLight* getLight() const;
 		rfLight* shootLight();
@@ -73,7 +73,7 @@ namespace reflection {
 		
 	protected:
 		rfLight* pLight;
-		rfPoint facing;
+		rfFloat facing;
 				
 		bool bEditing;
 		sora::SoraSprite* pSourceImage;

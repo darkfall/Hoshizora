@@ -15,6 +15,7 @@ namespace gcn {
 	DraggableImageButton::DraggableImageButton() {
 		mDraggable = true;
 		mDragFrame = false;
+		mFrameMouseEntered = false;
 		mDragOffsetX = mDragOffsetY	= 0;
 		setFrameSize(0);
 
@@ -109,6 +110,14 @@ namespace gcn {
 	
 	void DraggableImageButton::enableDragFrame(bool flag) {
 		mDragFrame = flag;
+	}
+	
+	void DraggableImageButton::enableFrameWhenMouseEntered(bool flag) {
+		mFrameMouseEntered = flag;
+	}
+	
+	bool DraggableImageButton::isFrameEnabledWhenMouseEntered() const {
+		return mFrameMouseEntered;
 	}
 
 } // namespace gcn

@@ -75,7 +75,6 @@
 		883814B213425F080021FD96 /* SOIL.c in Sources */ = {isa = PBXBuildFile; fileRef = 883814AE13425F080021FD96 /* SOIL.c */; };
 		883814B313425F080021FD96 /* stb_image_aug.c in Sources */ = {isa = PBXBuildFile; fileRef = 883814AF13425F080021FD96 /* stb_image_aug.c */; };
 		883900F0131A096700CC101A /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 883900EE131A096700CC101A /* editorWindow.cpp */; };
-		88411DD0135FFE7A009BAA61 /* osx_libglfw_i386.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88411DCF135FFE7A009BAA61 /* osx_libglfw_i386.lib */; };
 		884575D81300DB38003EC408 /* state_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884575D71300DB38003EC408 /* state_test.cpp */; };
 		884E5E3C133AFCB3006E9CC6 /* libvlc.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E38133AFCB3006E9CC6 /* libvlc.5.dylib */; };
 		884E5E3D133AFCB3006E9CC6 /* libvlc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E39133AFCB3006E9CC6 /* libvlc.dylib */; };
@@ -450,7 +449,6 @@
 		883900EF131A096700CC101A /* editorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editorWindow.h; path = ../SoraParticleEditor/editorWindow.h; sourceTree = SOURCE_ROOT; };
 		8839FFA51319FCD500CC101A /* peMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = peMainWindow.h; path = SoraParticleEditor/peMainWindow.h; sourceTree = "<group>"; };
 		8839FFBE1319FE4700CC101A /* guichansetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guichansetup.h; sourceTree = "<group>"; };
-		88411DCF135FFE7A009BAA61 /* osx_libglfw_i386.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = osx_libglfw_i386.lib; path = "../../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraOGLRenderer/osx_libglfw_i386.lib"; sourceTree = "<group>"; };
 		884575D61300DB38003EC408 /* state_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = state_test.h; path = Experimental/state_test.h; sourceTree = "<group>"; };
 		884575D71300DB38003EC408 /* state_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = state_test.cpp; path = Experimental/state_test.cpp; sourceTree = "<group>"; };
 		884CC87312F88E1300FD18FC /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
@@ -1049,7 +1047,6 @@
 				88BD153F1346ADCA0068AABA /* LuaPlusDebug.lib in Frameworks */,
 				88BF9F6E135AA63200BB8E70 /* Cg.framework in Frameworks */,
 				8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */,
-				88411DD0135FFE7A009BAA61 /* osx_libglfw_i386.lib in Frameworks */,
 				887E35891362C6F400803DA6 /* libfreetype.6.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1422,7 +1419,6 @@
 		8859BEFA12B47EC300F3304A /* SoraOGLRenderer */ = {
 			isa = PBXGroup;
 			children = (
-				88411DCF135FFE7A009BAA61 /* osx_libglfw_i386.lib */,
 				8859BEFB12B47EC300F3304A /* glfw */,
 				8859BF0012B47EC300F3304A /* soil */,
 				885D9780131B4BDE009A7E14 /* osx_libglfw_x86_64.lib */,

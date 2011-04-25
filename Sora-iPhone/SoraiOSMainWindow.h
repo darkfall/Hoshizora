@@ -28,7 +28,6 @@ public:
 	SoraiOSMainWindow(): bScreenRotated(false) {}
 	
 	virtual bool updateFunc() {
-
 		return false;
 	}
 	
@@ -38,6 +37,8 @@ public:
 		sora::GCN_GLOBAL->gcnLogic();
 
 		sora::GCN_GLOBAL->gcnDraw();
+		
+		pFont->print(0.f, getWindowHeight()-20, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.2f", sora::SORA->getFPS());
 		//sprm->render(0.f, 0.f, 0.f);
 		sora::SORA->endScene();
 		
@@ -54,6 +55,7 @@ public:
 		sora::GCN_GLOBAL->initGUIChan(L"STHeitiJ-Medium", 20);
 		sora::GCN_GLOBAL->createTop();
 		
+		pFont = sora::SORA->createFont(L"STHeitiJ-Medium", 20);
 		
 		gcn::SelectableContainer* sc = new gcn::SelectableContainer;
 		

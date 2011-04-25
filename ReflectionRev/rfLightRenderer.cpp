@@ -88,10 +88,11 @@ namespace reflection {
 		rfPoint startPos = inLight->getStartPoint();
 		gcn::Rectangle mapRange = pParentMap->getDimension();
 		
-		rfFloat marchDir = inLight->getDirection().Angle();
+		rfFloat marchDir = inLight->getDirection();
 		rfPoint currPos = startPos;
+		rfFloat sh = sora::SORA->getScreenHeight();
 		while(mapRange.isPointInRect(currPos.x, currPos.y)) {
-			rfPoint nextPos(currPos.x + sinf(marchDir) * minMarchDistance, currPos.y + cosf(marchDir) * minMarchDistance);
+			rfPoint nextPos(currPos.x + cosf(marchDir) * minMarchDistance, currPos.y - sinf(marchDir) * minMarchDistance);
 			//printf("nextPos: %f,%f\n", nextPos.x, nextPos.y);
 			gcn::Widget* pw = pParentMap->getWidgetAt(nextPos.x, nextPos.y);
 			if(pw == NULL || pw == start) {
@@ -111,7 +112,7 @@ namespace reflection {
 					// is mirror
 					// reflect a new light
 					rfMirror* mirror = shape->getMirror();
-					if(pw != NULL) {
+					if(mirror != NULL) {
 						// backing to the same mirror,
 						// a circle
 						// break
@@ -119,18 +120,28 @@ namespace reflection {
 							break;
 						}
 						
+						inLight->setEndPoint(rfPoint(mirror->getX()+mirror->getWidth()/2, (mirror->getY()+mirror->getHeight()/2)));
 						rfLight* newLight = mirror->reflect(inLight);
 						
 						if(newLight != NULL) {
-							inLight->setEndPoint(rfPoint(mirror->getX()+mirror->getWidth()/2, mirror->getY()+mirror->getHeight()/2));
 							mLightList.push_back(inLight);
 							
 							inLight = newLight;
-							marchDir = inLight->getDirection().Angle();
+							marchDir = inLight->getDirection();
 							mirror->setVisited(true);
 							
-							printf("inserting light, spos=%f,%f, epos=%f,%f\n", inLight->getStartPoint().x, inLight->getStartPoint().y,
-								   inLight->getEndPoint().x, inLight->getEndPoint().y);
+							currPos.x = currPos.x + cosf(marchDir) * shape->getWidth() * 2.f;
+							currPos.y = currPos.y - sinf(marchDir) * shape->getHeight() * 2.f;
+							gcn::Widget* pw2 = pParentMap->getWidgetAt(currPos.x, currPos.y);
+							while(pw2 == pw) {
+								currPos.x = currPos.x + cosf(marchDir) * shape->getWidth() * 2.f;
+								currPos.y = currPos.y - sinf(marchDir) * shape->getHeight() * 2.f;
+							}
+							
+							printf("inserting light, spos=%f,%f, epos=%f,%f, dir=%f\n", inLight->getStartPoint().x, inLight->getStartPoint().y,
+								   inLight->getEndPoint().x, inLight->getEndPoint().y, rfRadToDgr(marchDir));
+							
+							continue;
 						}
 					}
 				}

@@ -75,7 +75,7 @@ namespace reflection {
 		void removeMirror();
 		rfMirror* getMirror() const;
 		
-		void addLightSource(const rfPoint& facing);
+		void addLightSource(rfFloat facing);
 		rfLightSource* getLightSource() const;
 		
 		void setComponentImage(sora::SoraSprite* image);
