@@ -24,22 +24,22 @@ namespace sora {
 class SoraRenderTargetOG {
 	GLuint frameBuffer;
 	GLuint depthBuffer;
-
+GLuint glTex;
     int32 w, h;
 	ulong32 tex;
 	bool zbuffer;
 	int32 err;
-    
+
 public:
 	SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer);
 	~SoraRenderTargetOG();
 
 	virtual void attachToRender();
 	virtual void detachFromRender();
-    
+
     int32 getWidth() const { return w; }
     int32 getHeight() const { return h; }
-    
+
     ulong32 getTexture() const { return tex; }
 };
 

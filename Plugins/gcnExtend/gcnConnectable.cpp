@@ -10,25 +10,24 @@
 #include "gcnConnectable.h"
 
 namespace gcn {
-	
+
 	ConnectableWidget::ConnectableWidget(): mPair(NULL) {
-	}	
-	
+	}
+
 	ConnectableWidget::~ConnectableWidget() {
 	}
-	
+
 	void ConnectableWidget::connect(Widget* pair) {
 		mPair = pair;
 	}
-	
+
 	Widget* ConnectableWidget::getPair() const {
 		return mPair;
 	}
-		
-	void ConnectableWidget::draw(Graphics* graphics) {		
+
+	void ConnectableWidget::draw(Graphics* graphics) {
 		graphics->setColor(mBaseColor);
 		if(mPair != NULL) {
-			printf("%d, %d, %d, %d\n", getX(), getY(), mPair->getX(), mPair->getY());
 			graphics->drawLine(getX(), getY(), mPair->getX(), mPair->getY());
 		}
 	}

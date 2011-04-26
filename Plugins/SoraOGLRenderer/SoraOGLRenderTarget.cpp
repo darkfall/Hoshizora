@@ -27,14 +27,16 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 	glEnable(GL_TEXTURE_2D);
 
 #ifndef WIN32
-    GLuint glTex;
-	glGenTextures(1, &glTex);					
+	glGenTextures(1, &glTex);
 	glBindTexture(GL_TEXTURE_2D, glTex);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, _w, _h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 
+    glBindTexture(GL_TEXTURE_2D, 0);
+
 	if((gl_error = glGetError()) != GL_NO_ERROR) {
+	    std::cerr<<gl_error<<std::endl;
 		err = 1;
 	}
 	// create framebuffer
@@ -57,7 +59,6 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
         err = 1;
     }
 
-    glBindTexture(GL_TEXTURE_2D, 0);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
 	if(!glTex || !frameBuffer)
@@ -69,8 +70,12 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 	ptex->mTextureWidth = ptex->mOriginalWidth = w;
 	ptex->mTextureHeight = ptex->mOriginalHeight = h;
 	tex = (ulong32)ptex;
-        
+
     glDisable(GL_TEXTURE_2D);
+
+
+    if(err != 0)
+        SORA->log("Error creating Render Target");
 #endif
 }
 
@@ -91,13 +96,23 @@ SoraRenderTargetOG::~SoraRenderTargetOG() {
 
 void SoraRenderTargetOG::attachToRender() {
 #ifndef WIN32
+
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frameBuffer);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, glTex, 0);
+	GLuint gl_error;
+	if((gl_error = glGetError()) != GL_NO_ERROR) {
+	    SORA->log("error detach rendtarget");
+	}
 #endif
 }
 
 void SoraRenderTargetOG::detachFromRender() {
 #ifndef WIN32
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+    GLuint gl_error;
+    if((gl_error = glGetError()) != GL_NO_ERROR) {
+	    SORA->log("error detach rendtarget");
+	}
 #endif
 }
 

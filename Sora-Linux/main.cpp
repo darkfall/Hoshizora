@@ -4,9 +4,7 @@
 #include "SoraFreetypeFont/SoraFTFontManager.h"
 #include "SoraZipResourceManager/SoraZipResourceManager.h"
 
-#include "test/mainWindow.h"
-#include "test/testMainWindow.h"
-#include "test/rfMainWindow.h"
+#include "mainWindow.h"
 
 class lmainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -64,7 +62,7 @@ int main() {
     sora::SORA->attachResourcePack(resource);
 
     sora::SORA->setFPS(60.f);
-    sora::SORA->createWindow(new rfMainWindow);
+    sora::SORA->createWindow(new mainWindow);
 
     sora::SORA->start();
 }

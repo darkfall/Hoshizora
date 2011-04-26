@@ -32,15 +32,15 @@ using std::hash_map;
 #ifndef __GNUC__
 
 static inline int lrint (double const x) { // Round to nearest integer
-    int n; 
+    int n;
 #if defined(__unix__) || defined(__GNUC__)
     // 32-bit Linux, Gnu/AT&T syntax:
-    __asm ("fldl %1 \n fistpl %0 " : "=m"(n) : "m"(x) : "memory" ); 
+    __asm ("fldl %1 \n fistpl %0 " : "=m"(n) : "m"(x) : "memory" );
 #else
-    // 32-bit Windows, Intel/MASM syntax: 
-    __asm fld qword ptr x; 
+    // 32-bit Windows, Intel/MASM syntax:
+    __asm fld qword ptr x;
     __asm fistp dword ptr n;
-#endif 
+#endif
     return n;
 }
 
@@ -191,9 +191,9 @@ typedef std::wstring SoraWString;
 
 #define BIT_32_64_EXTEND
 
-#if defined(OS_OSX) || defined(OS_IOS)
+#if defined(OS_OSX) || defined(OS_IOS) || defined(OS_LINUX)
 #undef BIT_32_64_EXTEND
-#endif
+#endifř
 
 #ifdef OS_WIN32
 #define s_int64 __int64
@@ -205,7 +205,7 @@ typedef std::wstring SoraWString;
 // 64bit extend
 typedef		long long		long64;
 typedef		unsigned long long ulong64;
-#else 
+#else
 typedef     long long64;
 typedef     unsigned long ulong64;
 #endif
