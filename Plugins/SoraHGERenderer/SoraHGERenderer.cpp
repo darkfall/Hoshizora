@@ -115,7 +115,7 @@ namespace sora{
 	}
 
 	void SoraHGERenderer::setFullscreen(bool flag) {
-		pHGE->System_SetState(HGE_WINDOWED, flag);
+		pHGE->System_SetState(HGE_WINDOWED, !flag);
 	}
 
 	bool SoraHGERenderer::isFullscreen() {

@@ -226,6 +226,7 @@ namespace sora{
 		if((blend & BLEND_ZWRITE) != (CurBlendMode & BLEND_ZWRITE)) {
 			if(blend & BLEND_ZWRITE) {
                 glDepthMask(GL_TRUE);
+                glClear(GL_DEPTH_BUFFER_BIT);
            //     glEnable(GL_DEPTH_TEST);
             } else {
                 glDisable(GL_DEPTH_TEST);

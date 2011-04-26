@@ -73,9 +73,7 @@ bool mainWindow::renderFunc() {
 	//pSpr->render4V(100.f, 100.f, 700.f, 0.f, 700.f, 600.f, 100.f, 500.f);
    // sora->setViewPoint(0.f, 0.f, 1.f);
   	
- //   pSpr->render(0.f, 0.f);
-	//pSpr2->render(100.f, 100.f);
-	float t = 0.56;
+ 	float t = 0.56;
 	//shader->setParameterfv("twisting", &t, 1);
 
 	canvas1->beginRender();
@@ -85,7 +83,13 @@ bool mainWindow::renderFunc() {
 	canvas1->finishRender();
 		
 	sora->beginScene();
+	
 	canvas1->render();
+	
+	pSpr->render(0.f, 0.f);
+	pSpr2->render(100.f, 100.f);
+	
+	
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	
 	reflection::rfMap* map = (reflection::rfMap*)sora::GCN_GLOBAL->findWidget("map");
@@ -121,8 +125,11 @@ void mainWindow::init() {
     sora::SORA->setFPS(999);
     pSpr = sora::SORA->createSprite(L"titlebg2.png");
 	pSpr->setScale(0.3f, 0.3f);
-//	pSpr2 = sora::SORA->createSprite(L"sea.png");
-	
+		pSpr->setBlendMode(pSpr->getBlendMode() | BLEND_ZWRITE);
+	pSpr->setZ(0.5);
+	pSpr2 = sora::SORA->createSprite(L"sea.png");
+	pSpr2->setBlendMode(pSpr2->getBlendMode() | BLEND_ZWRITE);
+	pSpr2->setZ(0.3);
 //	pSpr2->setScale(0.5f, 0.5f);
 	//shader = pSpr2->attachShader(L"C3E2v_varying.cg", "C3E2v_varying", sora::VERTEX_SHADER);
 //	pSpr2->attachShader(L"gray.ps", "gray", sora::FRAGMENT_SHADER);
@@ -162,7 +169,7 @@ void mainWindow::init() {
 		di->setAddParent(map);
 		sora::GCN_GLOBAL->addWidget(di, "top");
 		
-		canvas1 = new sora::SoraBaseCanvas(getWindowWidth(), getWindowHeight(), false);
+		canvas1 = new sora::SoraBaseCanvas(getWindowWidth(), getWindowHeight(), true);
 		rt1 = sora::SORA->createTarget(getWindowWidth(), getWindowHeight());
 	}
 }
