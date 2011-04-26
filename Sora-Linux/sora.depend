@@ -4491,3 +4491,3725 @@
 1296359327 source:/home/darkfall/桌面/hoshinosora/SoraNew/Sora/Sora/win32filewrapper.cpp
 	"win32filewrapper.h"
 
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraFreetypeFont/SoraFTFontManager.cpp
+	"SoraFTFontManager.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraFreetypeFont/SoraFTFontManager.h
+	<vector>
+	<string>
+	"SoraPlatform.h"
+	"SoraFreetypeFont.h"
+	"SoraFontManager.h"
+
+1303766192 /home/darkfall/Desktop/Hoshizor/Sora/SoraPlatform.h
+	<ext/hash_map>
+	<hash_map>
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<memory.h>
+	<string>
+	<cassert>
+	<Windows.h>
+	<Availability.h>
+	<stdint.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraFreetypeFont/SoraFreetypeFont.h
+	"SoraCore.h"
+	"SoraFont.h"
+	<ft2build.h>
+	<freetype/freetype.h>
+	<vector>
+	"SoraMemoryFile.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraCore.h
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"SoraAutoPtr.h"
+	"SoraException.h"
+	"SoraRenderSystem.h"
+	"SoraResourceManager.h"
+	"SoraInput.h"
+	"SoraMiscTool.h"
+	"SoraPluginManager.h"
+	"SoraTimer.h"
+	"SoraFontManager.h"
+	"SoraSoundSystem.h"
+	"SoraResourceFileFinder.h"
+	"SoraShader.h"
+	"SoraFrameListener.h"
+	<map>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraSingleton.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraAutoPtr.h
+	<typeinfo>
+	<map>
+	"SoraPlatform.h"
+	"SoraException.h"
+	"Debug/SoraInternalLogger.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraException.h
+	"SoraPlatform.h"
+	"SoraStringConv.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraStringConv.h
+	<iostream>
+	<string>
+	<vector>
+	<sstream>
+	<iomanip>
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Debug/SoraInternalLogger.h
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	<vector>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraRenderSystem.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraWindowInfo.h"
+	"SoraSprite.h"
+	"SoraTexture.h"
+	"SoraTimer.h"
+	"SoraShader.h"
+	<map>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraWindowInfo.h
+	"SoraPlatform.h"
+	"SoraException.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraSprite.h
+	"SoraTexture.h"
+	"SoraColor.h"
+	"hgerect.h"
+	"SoraImageEffect.h"
+	"SoraObject.h"
+	"SoraShader.h"
+	<list>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraTexture.h
+	"SoraPlatform.h"
+
+1303766191 /home/darkfall/Desktop/Hoshizor/Sora/SoraColor.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/hgerect.h
+
+1303766227 /home/darkfall/Desktop/Hoshizor/Sora/SoraImageEffect.h
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraColor.h"
+	"hgevector.h"
+	"SoraObject.h"
+	"CoreTransform.h"
+	"CoreTransformer.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/hgevector.h
+	<math.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraObject.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraEvent.h"
+	"SoraAutoPtr.h"
+	<algorithm>
+	<list>
+	"SoraAutoPtr.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraEvent.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	<map>
+	"SoraTypeInfo.h"
+	"SoraNamedObject.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraTypeInfo.h
+	"SoraPlatform.h"
+	<typeinfo>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraNamedObject.h
+	"stringId.h"
+	"common.h"
+	<list>
+	<algorithm>
+	"SoraMemoryBuffer.h"
+	"Serializable.h"
+	<cassert>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/stringId.h
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"hash.h"
+	"Debug/SoraInternalLogger.h"
+	"SoraStringConv.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/hash.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/common.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraMemoryBuffer.h
+	<memory.h>
+	<malloc.h>
+	"SoraPlatform.h"
+	"SoraAutoPtr.h"
+	"Debug/SoraInternalLogger.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Serializable.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/CoreTransform.h
+	"SoraPlatform.h"
+	"SoraException.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/CoreTransformer.h
+	"SoraPlatform.h"
+	"SoraMath.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraMath.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraShader.h
+	"SoraPlatform.h"
+	<list>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraTimer.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraResourceManager.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	<vector>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraInput.h
+	"SoraPlatform.h"
+	"SoraKeyInfo.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraKeyInfo.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraMiscTool.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraPluginManager.h
+	"SoraPlugin.h"
+	<list>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraPlugin.h
+	"SoraPlatform.h"
+	"uncopyable.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/uncopyable.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraFontManager.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraSoundSystem.h
+	"SoraPlatform.h"
+	"SoraSoundFile.h"
+	"SoraMoviePlayer.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraSoundFile.h
+	"SoraPlatform.h"
+	"SoraFileBase.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraFileBase.h
+	<fstream>
+	"SoraPlatform.h"
+	"SoraException.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraMoviePlayer.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraResourceFileFinder.h
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraAutoPtr.h"
+	<vector>
+	<map>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraFrameListener.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraFont.h
+	"SoraPlatform.h"
+	"SoraImageEffect.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraFreetypeFont/ft2build.h
+	<freetype/config/ftheader.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraFreetypeFont/freetype/config/ftheader.h
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraFreetypeFont/freetype/freetype.h
+	<ft2build.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraMemoryFile.h
+	"SoraMemoryBuffer.h"
+	"SoraNamedObject.h"
+	"AutoContainer.h"
+	"SoraCore.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/AutoContainer.h
+	<list>
+	<map>
+	<vector>
+	"stringId.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraFreetypeFont/SoraFreetypeFont.cpp
+	"SoraFreetypeFont.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/StringConv.cpp
+	"guichan/StringConv.h"
+	<string.h>
+	<stdlib.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/StringConv.h
+	<iostream>
+	<string>
+	<vector>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/actionevent.cpp
+	"guichan/actionevent.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/actionevent.hpp
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+	<string>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/event.hpp
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/platform.hpp
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/basiccontainer.cpp
+	"guichan/basiccontainer.hpp"
+	<algorithm>
+	"guichan/exception.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/graphics.hpp"
+	"guichan/mouseinput.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/basiccontainer.hpp
+	<list>
+	"guichan/deathlistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/deathlistener.hpp
+	<string>
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widget.hpp
+	<list>
+	<string>
+	"guichan/color.hpp"
+	"guichan/rectangle.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/color.hpp
+	"guichan/platform.hpp"
+	<iostream>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/rectangle.hpp
+	"guichan/platform.hpp"
+	<iostream>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/exception.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/focushandler.hpp
+	<vector>
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/graphics.hpp
+	<iosfwd>
+	<stack>
+	"guichan/cliprectangle.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/cliprectangle.hpp
+	"guichan/rectangle.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/mouseinput.hpp
+	"guichan/platform.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/cliprectangle.cpp
+	"guichan/cliprectangle.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/color.cpp
+	"guichan/color.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/contrib/widgets/adjustingcontainer.cpp
+	"guichan/contrib/widgets/adjustingcontainer.hpp"
+	<guichan.hpp>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/contrib/widgets/adjustingcontainer.hpp
+	"guichan/widgets/container.hpp"
+	<vector>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/container.hpp
+	<list>
+	"guichan/basiccontainer.hpp"
+	"guichan/graphics.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan.hpp
+	<guichan/actionevent.hpp>
+	<guichan/actionlistener.hpp>
+	<guichan/cliprectangle.hpp>
+	<guichan/color.hpp>
+	<guichan/deathlistener.hpp>
+	<guichan/event.hpp>
+	<guichan/exception.hpp>
+	<guichan/focushandler.hpp>
+	<guichan/focuslistener.hpp>
+	<guichan/font.hpp>
+	<guichan/genericinput.hpp>
+	<guichan/graphics.hpp>
+	<guichan/gui.hpp>
+	<guichan/image.hpp>
+	<guichan/imagefont.hpp>
+	<guichan/imageloader.hpp>
+	<guichan/input.hpp>
+	<guichan/inputevent.hpp>
+	<guichan/key.hpp>
+	<guichan/keyevent.hpp>
+	<guichan/keyinput.hpp>
+	<guichan/keylistener.hpp>
+	<guichan/listmodel.hpp>
+	<guichan/mouseevent.hpp>
+	<guichan/mouseinput.hpp>
+	<guichan/mouselistener.hpp>
+	<guichan/rectangle.hpp>
+	<guichan/selectionevent.hpp>
+	<guichan/selectionlistener.hpp>
+	<guichan/widget.hpp>
+	<guichan/widgetlistener.hpp>
+	<guichan/widgets/button.hpp>
+	<guichan/widgets/checkbox.hpp>
+	<guichan/widgets/container.hpp>
+	<guichan/widgets/dropdown.hpp>
+	<guichan/widgets/icon.hpp>
+	<guichan/widgets/imagebutton.hpp>
+	<guichan/widgets/label.hpp>
+	<guichan/widgets/listbox.hpp>
+	<guichan/widgets/scrollarea.hpp>
+	<guichan/widgets/slider.hpp>
+	<guichan/widgets/radiobutton.hpp>
+	<guichan/widgets/tab.hpp>
+	<guichan/widgets/tabbedarea.hpp>
+	<guichan/widgets/textbox.hpp>
+	<guichan/widgets/textfield.hpp>
+	<guichan/widgets/window.hpp>
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/actionlistener.hpp
+	<string>
+	"guichan/actionevent.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/focuslistener.hpp
+	<string>
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/font.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/genericinput.hpp
+	<queue>
+	"guichan/input.hpp"
+	"guichan/keyinput.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/input.hpp
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/keyinput.hpp
+	"guichan/key.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/key.hpp
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/gui.hpp
+	<list>
+	<deque>
+	"guichan/keyevent.hpp"
+	"guichan/mouseevent.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/keyevent.hpp
+	"guichan/inputevent.hpp"
+	"guichan/key.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/inputevent.hpp
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/mouseevent.hpp
+	"guichan/inputevent.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/image.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/imagefont.hpp
+	<string>
+	"guichan/font.hpp"
+	"guichan/platform.hpp"
+	"guichan/rectangle.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/imageloader.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/keylistener.hpp
+	"guichan/keyevent.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/listmodel.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/mouselistener.hpp
+	"guichan/mouseevent.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/selectionevent.hpp
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/selectionlistener.hpp
+	<string>
+	"guichan/selectionevent.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgetlistener.hpp
+	<string>
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/button.hpp
+	<string>
+	"guichan/focuslistener.hpp"
+	"guichan/graphics.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/mouseevent.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/checkbox.hpp
+	<string>
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/dropdown.hpp
+	"guichan/actionlistener.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/deathlistener.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/focuslistener.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/listmodel.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/selectionlistener.hpp"
+	"guichan/widgets/listbox.hpp"
+	"guichan/widgets/scrollarea.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/listbox.hpp
+	<list>
+	"guichan/keylistener.hpp"
+	"guichan/listmodel.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/scrollarea.hpp
+	<string>
+	"guichan/basiccontainer.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/icon.hpp
+	"guichan/image.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/imagebutton.hpp
+	"guichan/platform.hpp"
+	"guichan/widgets/button.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/label.hpp
+	<string>
+	"guichan/graphics.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/slider.hpp
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/radiobutton.hpp
+	<map>
+	<string>
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/tab.hpp
+	<map>
+	<string>
+	"guichan/basiccontainer.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/tabbedarea.hpp
+	<map>
+	<string>
+	<vector>
+	"guichan/actionlistener.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/textbox.hpp
+	<ctime>
+	<string>
+	<vector>
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/textfield.hpp
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+	<string>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/window.hpp
+	<string>
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widgets/container.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/defaultfont.cpp
+	"guichan/defaultfont.hpp"
+	<string>
+	"guichan/graphics.hpp"
+	"guichan/rectangle.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/defaultfont.hpp
+	"guichan/font.hpp"
+	"guichan/platform.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/event.cpp
+	"guichan/event.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/exception.cpp
+	"guichan/exception.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/focushandler.cpp
+	"guichan/focushandler.hpp"
+	"guichan/focuslistener.hpp"
+	"guichan/exception.hpp"
+	"guichan/widget.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/font.cpp
+	"guichan/font.hpp"
+	<string>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/genericinput.cpp
+	"guichan/genericinput.hpp"
+	"guichan/exception.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/graphics.cpp
+	"guichan/graphics.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/image.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/gui.cpp
+	"guichan/gui.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/exception.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/graphics.hpp"
+	"guichan/input.hpp"
+	"guichan/keyinput.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/widget.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/guichan.cpp
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/image.cpp
+	"guichan/image.hpp"
+	"guichan/exception.hpp"
+	"guichan/imageloader.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/imagefont.cpp
+	"guichan/imagefont.hpp"
+	<sstream>
+	"guichan/color.hpp"
+	"guichan/exception.hpp"
+	"guichan/graphics.hpp"
+	"guichan/image.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/inputevent.cpp
+	"guichan/inputevent.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/key.cpp
+	"guichan/key.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/keyevent.cpp
+	"guichan/keyevent.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/keyinput.cpp
+	"guichan/keyinput.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/mouseevent.cpp
+	"guichan/mouseevent.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/mouseinput.cpp
+	"guichan/mouseinput.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/rectangle.cpp
+	"guichan/rectangle.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/selectionevent.cpp
+	"guichan/selectionevent.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widget.cpp
+	"guichan/widget.hpp"
+	"guichan/actionevent.hpp"
+	"guichan/actionlistener.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/deathlistener.hpp"
+	"guichan/defaultfont.hpp"
+	"guichan/event.hpp"
+	"guichan/exception.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/graphics.hpp"
+	"guichan/keyinput.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/widgetlistener.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/button.cpp
+	"guichan/widgets/button.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseevent.hpp"
+	"guichan/mouseinput.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/checkbox.cpp
+	"guichan/widgets/checkbox.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/container.cpp
+	"guichan/widgets/container.hpp"
+	"guichan/exception.hpp"
+	"guichan/graphics.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/dropdown.cpp
+	"guichan/widgets/dropdown.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/listmodel.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/widgets/listbox.hpp"
+	"guichan/widgets/scrollarea.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/icon.cpp
+	"guichan/widgets/icon.hpp"
+	"guichan/graphics.hpp"
+	"guichan/image.hpp"
+	"guichan/rectangle.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/imagebutton.cpp
+	"guichan/widgets/imagebutton.hpp"
+	"guichan/graphics.hpp"
+	"guichan/image.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/label.cpp
+	"guichan/widgets/label.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/StringConv.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/listbox.cpp
+	"guichan/widgets/listbox.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/listmodel.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/selectionlistener.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/radiobutton.cpp
+	"guichan/widgets/radiobutton.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/scrollarea.cpp
+	"guichan/widgets/scrollarea.hpp"
+	"guichan/exception.hpp"
+	"guichan/graphics.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/slider.cpp
+	"guichan/widgets/slider.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/tab.cpp
+	"guichan/widgets/tab.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/widgets/button.hpp"
+	"guichan/widgets/label.hpp"
+	"guichan/widgets/tabbedarea.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/tabbedarea.cpp
+	"guichan/widgets/tabbedarea.hpp"
+	"guichan/exception.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/widgets/container.hpp"
+	"guichan/widgets/tab.hpp"
+	<algorithm>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/textbox.cpp
+	"guichan/widgets/textbox.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/StringConv.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/textfield.cpp
+	"guichan/widgets/textfield.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/StringConv.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/window.cpp
+	"guichan/widgets/window.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/mouseinput.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguifont.cpp
+	"soraguifont.hpp"
+	"guichan/color.hpp"
+	"guichan/graphics.hpp"
+	"SoraStringConv.h"
+	"SoraFont.h"
+	"SoraColor.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguifont.hpp
+	<string>
+	"guichan/font.hpp"
+	"guichan/platform.hpp"
+	"SoraCore.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguigraphics.cpp
+	"soraguigraphics.hpp"
+	"soraguiimage.hpp"
+	"guichan/cliprectangle.hpp"
+	"guichan/exception.hpp"
+	"guichan/rectangle.hpp"
+	"guichan/font.hpp"
+	"SoraSprite.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguigraphics.hpp
+	"guichan/graphics.hpp"
+	"guichan/platform.hpp"
+	"guichan/color.hpp"
+	"SoraCore.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguiimage.hpp
+	<string>
+	"SoraCore.h"
+	"SoraColor.h"
+	"guichan/color.hpp"
+	"guichan/platform.hpp"
+	"guichan/image.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguiimage.cpp
+	"soraguiimage.hpp"
+	"guichan/exception.hpp"
+	"guichan/rectangle.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguiimageloader.cpp
+	"soraguiimage.hpp"
+	"soraguiimageloader.hpp"
+	"guichan/exception.hpp"
+	"SoraStringConv.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguiimageloader.hpp
+	"guichan/platform.hpp"
+	"guichan/imageloader.hpp"
+	"SoraCore.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguiinput.cpp
+	"soraguiinput.hpp"
+	"guichan/exception.hpp"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/soraguiinput.hpp
+	<queue>
+	"guichan/input.hpp"
+	"guichan/keyinput.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/platform.hpp"
+	"SoraCore.h"
+	"SoraKeyInfo.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/xmlgui.cpp
+	"xmlgui.h"
+	<string>
+	"SoraGUI.h"
+	"soraguifont.hpp"
+	"SoraStringConv.h"
+	"SoraPlatform.h"
+	"guichansetup.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/xmlgui.h
+	"guichan.hpp"
+	"tinyxml/tinyxml.h"
+	<map>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/tinyxml/tinyxml.h
+	<string>
+	<stdio.h>
+	<assert.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/SoraGUI.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraSingleton.h"
+	"SoraGUIListener.h"
+	"SoraGUIResponser.h"
+	<map>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/SoraGUIListener.h
+	<guichan.hpp>
+	"SoraCore.h"
+	"SoraGUIResponserMap.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/SoraGUIResponserMap.h
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"SoraGUIResponser.h"
+	<map>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/SoraGUIResponser.h
+	<guichan.hpp>
+	"SoraPlatform.h"
+	"SoraException.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichansetup.h
+	"SoraGUIChan/guichansora.hpp"
+	"SoraGUIChan/guichan.hpp"
+	"SoraCore.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraGUIChan/guichansora.hpp
+	"soraguigraphics.hpp"
+	"soraguiimage.hpp"
+	"soraguifont.hpp"
+	"soraguiimageloader.hpp"
+	"soraguiinput.hpp"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLInput.cpp
+	"SoraOGLInput.h"
+	"glfw/GL/glfw.h"
+	<vector>
+	"SoraOGLKeyPoll.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLInput.h
+	"SoraInput.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/glfw/GL/glfw.h
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLKeyPoll.h
+	"SoraPlatform.h"
+	<map>
+	"SoraKeyInfo.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLKeyPoll.cpp
+	"SoraOGLKeyPoll.h"
+	"glfw/GL/glfw.h"
+	<vector>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderTarget.cpp
+	"SoraOGLRenderTarget.h"
+	"SoraTexture.h"
+	<GL/GL.h>
+	<GL/GLU.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderTarget.h
+	"SoraRenderTarget.h"
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glext.h>
+	"glfw/GL/glfw.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraRenderTarget.h
+	"SoraPlatform.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderer.cpp
+	"SoraOGLRenderer.h"
+	"Debug/SoraInternalLogger.h"
+	"SoraStringConv.h"
+	"SoraFileUtility.h"
+	"SoraMath.h"
+	"Rect4V.h"
+	"SoraColor.h"
+	"SoraCore.h"
+	"SoraInfiniteRendererCallback.h"
+	"SoraOGLKeyPoll.h"
+	"SoraShader/SoraCGGLShader.h"
+	"glfw/GL/glfw.h"
+	"soil/SOIL.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderer.h
+	"SoraRenderSystem.h"
+	"SoraOGLRenderTarget.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraFileUtility.h
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"Shlwapi.h"
+	"SoraOSXFileUtility.h"
+	"soraiOSFileUtility.h"
+	<fstream>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraOSXFileUtility.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/soraiOSFileUtility.h
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Rect4V.h
+	"hgevector.h"
+	"hgerect.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraInfiniteRendererCallback.h
+	"SoraTimer.h"
+	"SoraCore.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraShader/SoraCGGLShader.h
+	"SoraShader.h"
+	"Cg/cg.h"
+	"Cg/cgGL.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraShader/Cg/cg.h
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraShader/Cg/cgGL.h
+	<Cg/cg.h>
+	<OpenGL/gl.h>
+	<GL/gl.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/SOIL.h
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/SOIL.cpp
+	<windows.h>
+	<wingdi.h>
+	<GL/gl.h>
+	<OpenGL/gl.h>
+	<Carbon/Carbon.h>
+	<GL/gl.h>
+	<GL/glx.h>
+	"SOIL.h"
+	"stb_image_aug.h"
+	"image_helper.h"
+	"image_DXT.h"
+	<stdlib.h>
+	<string.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/stb_image_aug.h
+	<stdio.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/image_helper.h
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/image_DXT.h
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/image_DXT.cpp
+	"image_DXT.h"
+	<math.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/image_helper.cpp
+	"image_helper.h"
+	<stdlib.h>
+	<math.h>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/stb_image_aug.cpp
+	"stb_image_aug.h"
+	<math.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<assert.h>
+	<stdarg.h>
+	"stbi_DDS_aug.h"
+	"stbi_DDS_aug_c.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/stbi_DDS_aug.h
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraOGLRenderer/soil/stbi_DDS_aug_c.h
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraParticleSystem/SoraParticleSystem.cpp
+	"SoraParticleSystem.h"
+	"SoraStringConv.h"
+	"SoraMath.h"
+	<algorithm>
+	<cmath>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraParticleSystem/SoraParticleSystem.h
+	"SoraCore.h"
+	"SoraSprite.h"
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraColor.h"
+	"hgerect.h"
+	"hgevector.h"
+	"vector3.h"
+	"QuickList.h"
+	"quaternion.h"
+	<vector>
+	<map>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/vector3.h
+	<cmath>
+	<cassert>
+	"SoraMath.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/QuickList.h
+	<list>
+	<assert.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/quaternion.h
+	"vector3.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/MyFileReader.cpp
+	"MyFileReader.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/MyFileReader.h
+	<cstdio>
+	<cstring>
+	<stdexcept>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/PackMemory.cpp
+	"PackMemory.h"
+	<memory.h>
+	<malloc.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/PackMemory.h
+	"ZLIB/unzip.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/unzip.h
+	"zlib.h"
+	"ioapi.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/zlib.h
+	"zconf.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/zconf.h
+	<windows.h>
+	<sys/types.h>
+	<unistd.h>
+	<unixio.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/ioapi.h
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/PackReader.cpp
+	"PackReader.h"
+	<string>
+	<iostream>
+	<memory.h>
+	<string.h>
+	<malloc.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/PackReader.h
+	"PackMemory.h"
+	<string>
+	<map>
+	<vector>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/SoraZipFile.cpp
+	"SoraZipFile.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/SoraZipFile.h
+	"SoraFileBase.h"
+	"SoraStringConv.h"
+	"PackReader.h"
+	"MyFileReader.h"
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/SoraZipResourceManager.cpp
+	"SoraZipResourceManager.h"
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/SoraZipResourceManager/SoraZipResourceManager.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraAutoPtr.h"
+	"SoraZipFile.h"
+	"SoraResourceManager.h"
+	<map>
+
+1303763517 source:/home/darkfall/Desktop/Hoshizor/Plugins/lAnm/lAnm.cpp
+	"lAnm.h"
+	"llexer/llexer.h"
+	"lMemFile.h"
+	"hash.h"
+	<cassert>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/lAnm/lAnm.h
+	<vector>
+	<string>
+	<stack>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/llexer/llexer.h
+	<cstdio>
+	<cstring>
+	<string>
+	<vector>
+	<map>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/lMemFile.h
+	<memory.h>
+	<malloc.h>
+
+1303763534 source:/home/darkfall/Desktop/Hoshizor/Reflection/rfMap.cpp
+	"rfMap.h"
+	"lMemFile.h"
+
+1303763534 /home/darkfall/Desktop/Hoshizor/Reflection/rfMap.h
+	<vector>
+	"rfCommon.h"
+
+1303763534 /home/darkfall/Desktop/Hoshizor/Reflection/rfCommon.h
+	<stdio.h>
+
+1303763534 /home/darkfall/Desktop/Hoshizor/Reflection/lMemFile.h
+	<memory.h>
+	<malloc.h>
+
+1303768221 source:/home/darkfall/Desktop/Hoshizor/Sora-Linux/main.cpp
+	"SoraCore.h"
+	"SoraOGLRenderer/SoraOGLRenderer.h"
+	"SoraOGLRenderer/SoraOGLInput.h"
+	"SoraFreetypeFont/SoraFTFontManager.h"
+	"SoraZipResourceManager/SoraZipResourceManager.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/CoreTransform.cpp
+	"CoreTransform.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/Defaults/orz.c
+	"orz.h"
+	"stdio.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Defaults/orz.h
+	"windows.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/Experimental/FolderTree.cpp
+	"FolderTree.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Experimental/FolderTree.h
+	"SoraPlatform.h"
+	"SoraException.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/Experimental/memory.cpp
+	"memory.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Experimental/memory.h
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT.c
+	<string.h>
+	<assert.h>
+	"SFMT.h"
+	"SFMT-params.h"
+	<altivec.h>
+	<emmintrin.h>
+	"SFMT-alti.h"
+	"SFMT-sse2.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT.h
+	<stdio.h>
+	<inttypes.h>
+	<inttypes.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params.h
+	"SFMT-params607.h"
+	"SFMT-params1279.h"
+	"SFMT-params2281.h"
+	"SFMT-params4253.h"
+	"SFMT-params11213.h"
+	"SFMT-params19937.h"
+	"SFMT-params44497.h"
+	"SFMT-params86243.h"
+	"SFMT-params132049.h"
+	"SFMT-params216091.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params607.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params1279.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params2281.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params4253.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params11213.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params19937.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params44497.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params86243.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params132049.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-params216091.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-alti.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/SFMT-sse2.h
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraCore.cpp
+	"SoraCore.h"
+	"SoraTextureMap.h"
+	"SoraFileUtility.h"
+	"SoraEventManager.h"
+	"Defaults/SoraDefaultMiscTool.h"
+	"Defaults/SoraDefaultTimer.h"
+	"osxfilewrapper.h"
+	"win32filewrapper.h"
+	"SoraFolderResourceManager.h"
+	"Defaults/SoraOSXTimer.h"
+	"Defaults/SoraTimer_Win32.h"
+	"Defaults/SoraMiscTool_Win32.h"
+	"Defaults/SoraMiscTool_OSX.h"
+	"Random/hgeRandom.h"
+	"Debug/SoraInternalLogger.h"
+	"Debug/SoraAutoProfile.h"
+	"Debug/SoraDebugRenderer.h"
+	"Random/SFMT.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraTextureMap.h
+	"SoraTexture.h"
+	"SoraSingleton.h"
+	"SoraException.h"
+	"SoraCore.h"
+	"SoraPlatform.h"
+	"stringId.h"
+	<map>
+	"hash.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraEventManager.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraSingleton.h"
+	"SoraEvent.h"
+	<map>
+	<vector>
+	"SoraTimerEvent.h"
+	"QuickList.h"
+	"hash.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraTimerEvent.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraEvent.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Defaults/SoraDefaultMiscTool.h
+	"SoraMiscTool.h"
+	"SoraDefaultLogger.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Defaults/SoraDefaultLogger.h
+	<fstream>
+	"SoraPlatform.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Defaults/SoraDefaultTimer.h
+	"SoraTimer.h"
+	<sys/timeb.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/osxfilewrapper.h
+	"SoraPlatform.h"
+	<vector>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/win32filewrapper.h
+	"SoraPlatform.h"
+	<vector>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraFolderResourceManager.h
+	"SoraResourceManager.h"
+	"SoraFileUtility.h"
+	"stringId.h"
+	<vector>
+	"hash.h"
+	"soraiOSFileUtility.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Defaults/SoraOSXTimer.h
+	"SoraTimer.h"
+	"SoraPlatform.h"
+	<mach/mach.h>
+	<mach/mach_time.h>
+	<CoreServices/CoreServices.h>
+	<time.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Defaults/SoraTimer_Win32.h
+	"SoraTimer.h"
+	"SoraPlatform.h"
+	"orz.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Defaults/SoraMiscTool_Win32.h
+	"SoraDefaultMiscTool.h"
+	"SoraStringConv.h"
+	"SoraPlatform.h"
+	<windows.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Defaults/SoraMiscTool_OSX.h
+	"SoraDefaultMiscTool.h"
+	"SoraStringConv.h"
+	"SoraPlatform.h"
+	<CoreFoundation/CoreFoundation.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Random/hgeRandom.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Debug/SoraAutoProfile.h
+	"SoraGlobalProfiler.h"
+	<mach/mach.h>
+	<mach/mach_time.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Debug/SoraGlobalProfiler.h
+	"SoraCore.h"
+	"SoraSingleton.h"
+	<iostream>
+	<fstream>
+	<stdio.h>
+	"SoraInternalLogger.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/Debug/SoraDebugRenderer.h
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"SoraCore.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraEvent.cpp
+	"SoraEvent.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraEventManager.cpp
+	"SoraEventManager.h"
+	"hash.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraFolderResourceManager.cpp
+	"SoraFolderResourceManager.h"
+	"SoraFileUtility.h"
+	"Debug/SoraInternalLogger.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraImageEffect.cpp
+	"SoraImageEffect.h"
+	"CoreTransformer.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraLocalizer.cpp
+	"SoraLocalizer.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/SoraLocalizer.h
+	"SoraPlatform.h"
+	"SoraStringConv.h"
+	"SoraSingleton.h"
+	"SoraCore.h"
+	"llexer/llexer.h"
+	<map>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraObject.cpp
+	"SoraObject.h"
+	"hash.h"
+	"stringId.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraPluginManger.cpp
+	"SoraPluginManager.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraResourceFileFinder.cpp
+	"SoraResourceFileFinder.h"
+	"SoraResourceManager.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraShader.cpp
+	"SoraShader.h"
+	"SoraCore.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraSprite.cpp
+	"SoraSprite.h"
+	"SoraTextureMap.h"
+	"SoraCore.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraStringConv.cpp
+	"SoraStringConv.h"
+	<algorithm>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraTexture.cpp
+	"SoraTexture.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/SoraTimerEvent.cpp
+	"SoraTimerEvent.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/adler32.c
+	"zlib.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/compress.c
+	"zlib.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/crc32.c
+	<stdio.h>
+	"zutil.h"
+	<limits.h>
+	"crc32.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/zutil.h
+	"zlib.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<errno.h>
+	<alloc.h>
+	<malloc.h>
+	<malloc.h>
+	<unix.h>
+	<stdio.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/crc32.h
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/deflate.c
+	"deflate.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/deflate.h
+	"zutil.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/gzio.c
+	<stdio.h>
+	"zutil.h"
+	<stdarg.h>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/infback.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/inftrees.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/inflate.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/inffast.h
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/inffixed.h
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/inffast.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/inflate.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+	<stdio.h>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/inftrees.c
+	"zutil.h"
+	"inftrees.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/ioapi.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zlib.h"
+	"ioapi.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/mztools.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zlib.h"
+	"unzip.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/trees.c
+	"deflate.h"
+	<ctype.h>
+	"trees.h"
+	<stdio.h>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/trees.h
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/uncompr.c
+	"zlib.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/unzip.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zlib.h"
+	"unzip.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<errno.h>
+	"crypt.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/crypt.h
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/zip.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"zlib.h"
+	"zip.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<errno.h>
+	"crypt.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/ZLIB/zip.h
+	"zlib.h"
+	"ioapi.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/ZLIB/zutil.c
+	"zutil.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/graphicEffects.cpp
+	"graphicEffects.h"
+	<fstream>
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/graphicEffects.h
+	<cmath>
+	<memory.h>
+	<malloc.h>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/hgerect.cpp
+	"hgerect.h"
+	<math.h>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/hgevector.cpp
+	"hgevector.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/llexer/llexer.cpp
+	"llexer.h"
+	<malloc.h>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/md5lib.cpp
+	<assert.h>
+	<string.h>
+	<iostream.h>
+	<string>
+	<iostream>
+	<stdio.h>
+	"md5lib.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/md5lib.h
+	<fstream.h>
+	<string.h>
+	<fstream>
+	<string>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/tinyXML/tinystr.cpp
+	"tinystr.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/tinyXML/tinystr.h
+	<assert.h>
+	<string.h>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/tinyXML/tinyxml.cpp
+	"tinyxml.h"
+
+1303763543 /home/darkfall/Desktop/Hoshizor/Sora/tinyXML/tinyxml.h
+	<string>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/tinyXML/tinyxmlerror.cpp
+	"tinyxml.h"
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/tinyXML/tinyxmlparser.cpp
+	"tinyxml.h"
+	<ctype.h>
+
+1303763543 source:/home/darkfall/Desktop/Hoshizor/Sora/win32filewrapper.cpp
+	"win32filewrapper.h"
+
+1303767620 source:/home/darkfall/Desktop/Hoshizor/Plugins/SoraShader/SoraCGGLShader.cpp
+	"SoraCGGLShader.h"
+	"SoraCore.h"
+	"Debug/SoraInternalLogger.h"
+	<cg/cg.h>
+	<cg/cgGL.h>
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/cg/cg.h
+
+1303763517 /home/darkfall/Desktop/Hoshizor/Plugins/cg/cgGL.h
+	<Cg/cg.h>
+	<OpenGL/gl.h>
+	<GL/gl.h>
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraFreetypeFont/SoraFTFontManager.cpp
+	"SoraFTFontManager.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraFreetypeFont/SoraFTFontManager.h
+	<vector>
+	<string>
+	"SoraPlatform.h"
+	"SoraFreetypeFont.h"
+	"SoraFontManager.h"
+
+1303771831 /home/darkfall/桌面/Hoshizor/Sora/SoraPlatform.h
+	<ext/hash_map>
+	<hash_map>
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<memory.h>
+	<string>
+	<cassert>
+	<Windows.h>
+	<Availability.h>
+	<stdint.h>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraFreetypeFont/SoraFreetypeFont.h
+	"SoraCore.h"
+	"SoraFont.h"
+	<ft2build.h>
+	<freetype/freetype.h>
+	<vector>
+	"SoraMemoryFile.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraCore.h
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"SoraAutoPtr.h"
+	"SoraException.h"
+	"SoraRenderSystem.h"
+	"SoraResourceManager.h"
+	"SoraInput.h"
+	"SoraMiscTool.h"
+	"SoraPluginManager.h"
+	"SoraTimer.h"
+	"SoraFontManager.h"
+	"SoraSoundSystem.h"
+	"SoraResourceFileFinder.h"
+	"SoraShader.h"
+	"SoraFrameListener.h"
+	<map>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraSingleton.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraAutoPtr.h
+	<typeinfo>
+	<map>
+	"SoraPlatform.h"
+	"SoraException.h"
+	"Debug/SoraInternalLogger.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraException.h
+	"SoraPlatform.h"
+	"SoraStringConv.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraStringConv.h
+	<iostream>
+	<string>
+	<vector>
+	<sstream>
+	<iomanip>
+	"SoraPlatform.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Debug/SoraInternalLogger.h
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	<vector>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraRenderSystem.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraWindowInfo.h"
+	"SoraSprite.h"
+	"SoraTexture.h"
+	"SoraTimer.h"
+	"SoraShader.h"
+	<map>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraWindowInfo.h
+	"SoraPlatform.h"
+	"SoraEvent.h"
+	"SoraException.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraSprite.h
+	"SoraTexture.h"
+	"SoraColor.h"
+	"hgerect.h"
+	"SoraImageEffect.h"
+	"SoraObject.h"
+	"SoraShader.h"
+	<list>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraTexture.h
+	"SoraPlatform.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraColor.h
+	"SoraPlatform.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/hgerect.h
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraImageEffect.h
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraColor.h"
+	"hgevector.h"
+	"SoraObject.h"
+	"CoreTransform.h"
+	"CoreTransformer.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/hgevector.h
+	<math.h>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraObject.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraEvent.h"
+	"SoraAutoPtr.h"
+	<algorithm>
+	<list>
+	"SoraAutoPtr.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraEvent.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	<map>
+	"SoraTypeInfo.h"
+	"SoraNamedObject.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraTypeInfo.h
+	"SoraPlatform.h"
+	<typeinfo>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraNamedObject.h
+	"stringId.h"
+	"common.h"
+	<list>
+	<algorithm>
+	"SoraMemoryBuffer.h"
+	"Serializable.h"
+	<cassert>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/stringId.h
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"hash.h"
+	"Debug/SoraInternalLogger.h"
+	"SoraStringConv.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/hash.h
+	"SoraPlatform.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/common.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraMemoryBuffer.h
+	<memory.h>
+	<malloc.h>
+	"SoraPlatform.h"
+	"SoraAutoPtr.h"
+	"Debug/SoraInternalLogger.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Serializable.h
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/CoreTransform.h
+	"SoraPlatform.h"
+	"SoraException.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/CoreTransformer.h
+	"SoraPlatform.h"
+	"SoraMath.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraMath.h
+	"SoraPlatform.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraShader.h
+	"SoraPlatform.h"
+	<list>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraTimer.h
+	"SoraPlatform.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraResourceManager.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	<vector>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraInput.h
+	"SoraPlatform.h"
+	"SoraKeyInfo.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraKeyInfo.h
+	"SoraPlatform.h"
+	"SoraEvent.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraMiscTool.h
+	"SoraPlatform.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraPluginManager.h
+	"SoraPlugin.h"
+	<list>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraPlugin.h
+	"SoraPlatform.h"
+	"uncopyable.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/uncopyable.h
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraFontManager.h
+	"SoraPlatform.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraSoundSystem.h
+	"SoraPlatform.h"
+	"SoraSoundFile.h"
+	"SoraMoviePlayer.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraSoundFile.h
+	"SoraPlatform.h"
+	"SoraFileBase.h"
+	"SoraEvent.h"
+	"SoraConstantStrings.h"
+	"SoraPlaybackEvent.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraFileBase.h
+	<fstream>
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraNamedObject.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraMoviePlayer.h
+	"SoraPlatform.h"
+	"SoraPlaybackEvent.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraResourceFileFinder.h
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraAutoPtr.h"
+	<vector>
+	<map>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraFrameListener.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraFont.h
+	"SoraPlatform.h"
+	"SoraImageEffect.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraFreetypeFont/ft2build.h
+	<freetype/config/ftheader.h>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraFreetypeFont/freetype/config/ftheader.h
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraFreetypeFont/freetype/freetype.h
+	<ft2build.h>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraMemoryFile.h
+	"SoraMemoryBuffer.h"
+	"SoraNamedObject.h"
+	"AutoContainer.h"
+	"SoraCore.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/AutoContainer.h
+	<list>
+	<map>
+	<vector>
+	"stringId.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraFreetypeFont/SoraFreetypeFont.cpp
+	"SoraFreetypeFont.h"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/StringConv.cpp
+	"guichan/StringConv.h"
+	<string.h>
+	<stdlib.h>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/StringConv.h
+	<iostream>
+	<string>
+	<vector>
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/actionevent.cpp
+	"guichan/actionevent.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/actionevent.hpp
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+	<string>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/event.hpp
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/platform.hpp
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/basiccontainer.cpp
+	"guichan/basiccontainer.hpp"
+	<algorithm>
+	"guichan/exception.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/graphics.hpp"
+	"guichan/mouseinput.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/basiccontainer.hpp
+	<list>
+	"guichan/deathlistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/deathlistener.hpp
+	<string>
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widget.hpp
+	<list>
+	<string>
+	"guichan/color.hpp"
+	"guichan/rectangle.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/color.hpp
+	"guichan/platform.hpp"
+	<iostream>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/rectangle.hpp
+	"guichan/platform.hpp"
+	<iostream>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/exception.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/focushandler.hpp
+	<vector>
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/graphics.hpp
+	<iosfwd>
+	<stack>
+	"guichan/cliprectangle.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/cliprectangle.hpp
+	"guichan/rectangle.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/mouseinput.hpp
+	"guichan/platform.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/cliprectangle.cpp
+	"guichan/cliprectangle.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/color.cpp
+	"guichan/color.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/contrib/widgets/adjustingcontainer.cpp
+	"guichan/contrib/widgets/adjustingcontainer.hpp"
+	<guichan.hpp>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/contrib/widgets/adjustingcontainer.hpp
+	"guichan/widgets/container.hpp"
+	<vector>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/container.hpp
+	<list>
+	"guichan/basiccontainer.hpp"
+	"guichan/graphics.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan.hpp
+	<guichan/actionevent.hpp>
+	<guichan/actionlistener.hpp>
+	<guichan/cliprectangle.hpp>
+	<guichan/color.hpp>
+	<guichan/deathlistener.hpp>
+	<guichan/event.hpp>
+	<guichan/exception.hpp>
+	<guichan/focushandler.hpp>
+	<guichan/focuslistener.hpp>
+	<guichan/font.hpp>
+	<guichan/genericinput.hpp>
+	<guichan/graphics.hpp>
+	<guichan/gui.hpp>
+	<guichan/image.hpp>
+	<guichan/imagefont.hpp>
+	<guichan/imageloader.hpp>
+	<guichan/input.hpp>
+	<guichan/inputevent.hpp>
+	<guichan/key.hpp>
+	<guichan/keyevent.hpp>
+	<guichan/keyinput.hpp>
+	<guichan/keylistener.hpp>
+	<guichan/listmodel.hpp>
+	<guichan/mouseevent.hpp>
+	<guichan/mouseinput.hpp>
+	<guichan/mouselistener.hpp>
+	<guichan/rectangle.hpp>
+	<guichan/selectionevent.hpp>
+	<guichan/selectionlistener.hpp>
+	<guichan/widget.hpp>
+	<guichan/widgetlistener.hpp>
+	<guichan/widgets/button.hpp>
+	<guichan/widgets/checkbox.hpp>
+	<guichan/widgets/container.hpp>
+	<guichan/widgets/dropdown.hpp>
+	<guichan/widgets/icon.hpp>
+	<guichan/widgets/imagebutton.hpp>
+	<guichan/widgets/label.hpp>
+	<guichan/widgets/listbox.hpp>
+	<guichan/widgets/scrollarea.hpp>
+	<guichan/widgets/slider.hpp>
+	<guichan/widgets/radiobutton.hpp>
+	<guichan/widgets/tab.hpp>
+	<guichan/widgets/tabbedarea.hpp>
+	<guichan/widgets/textbox.hpp>
+	<guichan/widgets/textfield.hpp>
+	<guichan/widgets/window.hpp>
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/actionlistener.hpp
+	<string>
+	"guichan/actionevent.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/focuslistener.hpp
+	<string>
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/font.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/genericinput.hpp
+	<queue>
+	"guichan/input.hpp"
+	"guichan/keyinput.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/input.hpp
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/keyinput.hpp
+	"guichan/key.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/key.hpp
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/gui.hpp
+	<list>
+	<deque>
+	"guichan/keyevent.hpp"
+	"guichan/mouseevent.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/keyevent.hpp
+	"guichan/inputevent.hpp"
+	"guichan/key.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/inputevent.hpp
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/mouseevent.hpp
+	"guichan/inputevent.hpp"
+	"guichan/platform.hpp"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/image.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/imagefont.hpp
+	<string>
+	"guichan/font.hpp"
+	"guichan/platform.hpp"
+	"guichan/rectangle.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/imageloader.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/keylistener.hpp
+	"guichan/keyevent.hpp"
+	"guichan/platform.hpp"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/listmodel.hpp
+	<string>
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/mouselistener.hpp
+	"guichan/mouseevent.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/selectionevent.hpp
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/selectionlistener.hpp
+	<string>
+	"guichan/selectionevent.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgetlistener.hpp
+	<string>
+	"guichan/event.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/button.hpp
+	<string>
+	"guichan/focuslistener.hpp"
+	"guichan/graphics.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/mouseevent.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/checkbox.hpp
+	<string>
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/dropdown.hpp
+	"guichan/actionlistener.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/deathlistener.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/focuslistener.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/listmodel.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/selectionlistener.hpp"
+	"guichan/widgets/listbox.hpp"
+	"guichan/widgets/scrollarea.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/listbox.hpp
+	<list>
+	"guichan/keylistener.hpp"
+	"guichan/listmodel.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/scrollarea.hpp
+	<string>
+	"guichan/basiccontainer.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/icon.hpp
+	"guichan/image.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/imagebutton.hpp
+	"guichan/platform.hpp"
+	"guichan/widgets/button.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/label.hpp
+	<string>
+	"guichan/graphics.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/slider.hpp
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/radiobutton.hpp
+	<map>
+	<string>
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/tab.hpp
+	<map>
+	<string>
+	"guichan/basiccontainer.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/tabbedarea.hpp
+	<map>
+	<string>
+	<vector>
+	"guichan/actionlistener.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/textbox.hpp
+	<ctime>
+	<string>
+	<vector>
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/textfield.hpp
+	"guichan/keylistener.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widget.hpp"
+	<string>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/window.hpp
+	<string>
+	"guichan/mouselistener.hpp"
+	"guichan/platform.hpp"
+	"guichan/widgets/container.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/defaultfont.cpp
+	"guichan/defaultfont.hpp"
+	<string>
+	"guichan/graphics.hpp"
+	"guichan/rectangle.hpp"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/defaultfont.hpp
+	"guichan/font.hpp"
+	"guichan/platform.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/event.cpp
+	"guichan/event.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/exception.cpp
+	"guichan/exception.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/focushandler.cpp
+	"guichan/focushandler.hpp"
+	"guichan/focuslistener.hpp"
+	"guichan/exception.hpp"
+	"guichan/widget.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/font.cpp
+	"guichan/font.hpp"
+	<string>
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/genericinput.cpp
+	"guichan/genericinput.hpp"
+	"guichan/exception.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/graphics.cpp
+	"guichan/graphics.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/image.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/gui.cpp
+	"guichan/gui.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/exception.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/graphics.hpp"
+	"guichan/input.hpp"
+	"guichan/keyinput.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/widget.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/guichan.cpp
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/image.cpp
+	"guichan/image.hpp"
+	"guichan/exception.hpp"
+	"guichan/imageloader.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/imagefont.cpp
+	"guichan/imagefont.hpp"
+	<sstream>
+	"guichan/color.hpp"
+	"guichan/exception.hpp"
+	"guichan/graphics.hpp"
+	"guichan/image.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/inputevent.cpp
+	"guichan/inputevent.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/key.cpp
+	"guichan/key.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/keyevent.cpp
+	"guichan/keyevent.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/keyinput.cpp
+	"guichan/keyinput.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/mouseevent.cpp
+	"guichan/mouseevent.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/mouseinput.cpp
+	"guichan/mouseinput.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/rectangle.cpp
+	"guichan/rectangle.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/selectionevent.cpp
+	"guichan/selectionevent.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widget.cpp
+	"guichan/widget.hpp"
+	"guichan/actionevent.hpp"
+	"guichan/actionlistener.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/deathlistener.hpp"
+	"guichan/defaultfont.hpp"
+	"guichan/event.hpp"
+	"guichan/exception.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/graphics.hpp"
+	"guichan/keyinput.hpp"
+	"guichan/keylistener.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/mouselistener.hpp"
+	"guichan/widgetlistener.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/button.cpp
+	"guichan/widgets/button.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseevent.hpp"
+	"guichan/mouseinput.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/checkbox.cpp
+	"guichan/widgets/checkbox.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/container.cpp
+	"guichan/widgets/container.hpp"
+	"guichan/exception.hpp"
+	"guichan/graphics.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/dropdown.cpp
+	"guichan/widgets/dropdown.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/listmodel.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/widgets/listbox.hpp"
+	"guichan/widgets/scrollarea.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/icon.cpp
+	"guichan/widgets/icon.hpp"
+	"guichan/graphics.hpp"
+	"guichan/image.hpp"
+	"guichan/rectangle.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/imagebutton.cpp
+	"guichan/widgets/imagebutton.hpp"
+	"guichan/graphics.hpp"
+	"guichan/image.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/label.cpp
+	"guichan/widgets/label.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/StringConv.h"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/listbox.cpp
+	"guichan/widgets/listbox.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/listmodel.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/selectionlistener.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/radiobutton.cpp
+	"guichan/widgets/radiobutton.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/scrollarea.cpp
+	"guichan/widgets/scrollarea.hpp"
+	"guichan/exception.hpp"
+	"guichan/graphics.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/slider.cpp
+	"guichan/widgets/slider.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/tab.cpp
+	"guichan/widgets/tab.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/widgets/button.hpp"
+	"guichan/widgets/label.hpp"
+	"guichan/widgets/tabbedarea.hpp"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/tabbedarea.cpp
+	"guichan/widgets/tabbedarea.hpp"
+	"guichan/exception.hpp"
+	"guichan/focushandler.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/widgets/container.hpp"
+	"guichan/widgets/tab.hpp"
+	<algorithm>
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/textbox.cpp
+	"guichan/widgets/textbox.hpp"
+	"guichan/basiccontainer.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/StringConv.h"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/textfield.cpp
+	"guichan/widgets/textfield.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/key.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/StringConv.h"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichan/widgets/window.cpp
+	"guichan/widgets/window.hpp"
+	"guichan/exception.hpp"
+	"guichan/font.hpp"
+	"guichan/graphics.hpp"
+	"guichan/mouseinput.hpp"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguifont.cpp
+	"soraguifont.hpp"
+	"guichan/color.hpp"
+	"guichan/graphics.hpp"
+	"SoraStringConv.h"
+	"SoraFont.h"
+	"SoraColor.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguifont.hpp
+	<string>
+	"guichan/font.hpp"
+	"guichan/platform.hpp"
+	"SoraCore.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguigraphics.cpp
+	"soraguigraphics.hpp"
+	"soraguiimage.hpp"
+	"guichan/cliprectangle.hpp"
+	"guichan/exception.hpp"
+	"guichan/rectangle.hpp"
+	"guichan/font.hpp"
+	"SoraSprite.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguigraphics.hpp
+	"guichan/graphics.hpp"
+	"guichan/platform.hpp"
+	"guichan/color.hpp"
+	"SoraCore.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguiimage.hpp
+	<string>
+	"SoraCore.h"
+	"SoraColor.h"
+	"guichan/color.hpp"
+	"guichan/platform.hpp"
+	"guichan/image.hpp"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguiimage.cpp
+	"soraguiimage.hpp"
+	"guichan/exception.hpp"
+	"guichan/rectangle.hpp"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguiimageloader.cpp
+	"soraguiimage.hpp"
+	"soraguiimageloader.hpp"
+	"guichan/exception.hpp"
+	"SoraStringConv.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguiimageloader.hpp
+	"guichan/platform.hpp"
+	"guichan/imageloader.hpp"
+	"SoraCore.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguiinput.cpp
+	"soraguiinput.hpp"
+	"guichan/exception.hpp"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/soraguiinput.hpp
+	<queue>
+	"guichan/input.hpp"
+	"guichan/keyinput.hpp"
+	"guichan/mouseinput.hpp"
+	"guichan/platform.hpp"
+	"SoraCore.h"
+	"SoraKeyInfo.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/xmlgui.cpp
+	"xmlgui.h"
+	<string>
+	"SoraGUI.h"
+	"soraguifont.hpp"
+	"SoraStringConv.h"
+	"SoraPlatform.h"
+	"guichansetup.h"
+
+1303771929 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/xmlgui.h
+	"guichan.hpp"
+	"tinyXML/tinyxml.h"
+	<map>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/tinyxml/tinyxml.h
+	<string>
+	<stdio.h>
+	<assert.h>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/SoraGUI.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraSingleton.h"
+	"SoraGUIListener.h"
+	"SoraGUIResponser.h"
+	<map>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/SoraGUIListener.h
+	<guichan.hpp>
+	"SoraCore.h"
+	"SoraGUIResponserMap.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/SoraGUIResponserMap.h
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"SoraGUIResponser.h"
+	<map>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/SoraGUIResponser.h
+	<guichan.hpp>
+	"SoraPlatform.h"
+	"SoraException.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichansetup.h
+	"SoraGUIChan/guichansora.hpp"
+	"SoraGUIChan/guichan.hpp"
+	"SoraCore.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/guichansora.hpp
+	"soraguigraphics.hpp"
+	"soraguiimage.hpp"
+	"soraguifont.hpp"
+	"soraguiimageloader.hpp"
+	"soraguiinput.hpp"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLInput.cpp
+	"SoraOGLInput.h"
+	"glfw/GL/glfw.h"
+	<vector>
+	"SoraOGLKeyPoll.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLInput.h
+	"SoraInput.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/glfw/GL/glfw.h
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLKeyPoll.h
+	"SoraPlatform.h"
+	<map>
+	"SoraKeyInfo.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLKeyPoll.cpp
+	"SoraOGLKeyPoll.h"
+	"glfw/GL/glfw.h"
+	"Debug/SoraInternalLogger.h"
+	"SoraEventManager.h"
+	<vector>
+
+1303777278 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderTarget.cpp
+	"SoraOGLRenderTarget.h"
+	"SoraTexture.h"
+	"SoraCore.h"
+	<GL/GL.h>
+	<GL/GLU.h>
+
+1303776344 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderTarget.h
+	"SoraRenderTarget.h"
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glext.h>
+	"glfw/GL/glfw.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraRenderTarget.h
+	"SoraPlatform.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderer.cpp
+	"SoraOGLRenderer.h"
+	"Debug/SoraInternalLogger.h"
+	"SoraStringConv.h"
+	"SoraFileUtility.h"
+	"SoraMath.h"
+	"Rect4V.h"
+	"SoraColor.h"
+	"SoraCore.h"
+	"SoraInfiniteRendererCallback.h"
+	"SoraOGLKeyPoll.h"
+	"SoraShader/SoraCGGLShader.h"
+	"glfw/GL/glfw.h"
+	"soil/SOIL.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderer.h
+	"SoraRenderSystem.h"
+	"SoraOGLRenderTarget.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraFileUtility.h
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"Shlwapi.h"
+	"SoraOSXFileUtility.h"
+	"soraiOSFileUtility.h"
+	<fstream>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraOSXFileUtility.h
+	"SoraPlatform.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/soraiOSFileUtility.h
+	"SoraPlatform.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Rect4V.h
+	"hgevector.h"
+	"hgerect.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraInfiniteRendererCallback.h
+	"SoraTimer.h"
+	"SoraCore.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraShader/SoraCGGLShader.h
+	"SoraShader.h"
+	"Cg/cg.h"
+	"Cg/cgGL.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraShader/Cg/cg.h
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraShader/Cg/cgGL.h
+	<Cg/cg.h>
+	<OpenGL/gl.h>
+	<GL/gl.h>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/SOIL.h
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/SOIL.cpp
+	<windows.h>
+	<wingdi.h>
+	<GL/gl.h>
+	<OpenGL/gl.h>
+	<Carbon/Carbon.h>
+	<GL/gl.h>
+	<GL/glx.h>
+	"SOIL.h"
+	"stb_image_aug.h"
+	"image_helper.h"
+	"image_DXT.h"
+	<stdlib.h>
+	<string.h>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/stb_image_aug.h
+	<stdio.h>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/image_helper.h
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/image_DXT.h
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/image_DXT.cpp
+	"image_DXT.h"
+	<math.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/image_helper.cpp
+	"image_helper.h"
+	<stdlib.h>
+	<math.h>
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/stb_image_aug.cpp
+	"stb_image_aug.h"
+	<math.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<assert.h>
+	<stdarg.h>
+	"stbi_DDS_aug.h"
+	"stbi_DDS_aug_c.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/stbi_DDS_aug.h
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/soil/stbi_DDS_aug_c.h
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraParticleSystem/SoraParticleSystem.cpp
+	"SoraParticleSystem.h"
+	"SoraStringConv.h"
+	"SoraMath.h"
+	<algorithm>
+	<cmath>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraParticleSystem/SoraParticleSystem.h
+	"SoraCore.h"
+	"SoraSprite.h"
+	"SoraException.h"
+	"SoraPlatform.h"
+	"SoraColor.h"
+	"hgerect.h"
+	"hgevector.h"
+	"vector3.h"
+	"QuickList.h"
+	"quaternion.h"
+	<vector>
+	<map>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/vector3.h
+	<cmath>
+	<cassert>
+	"SoraMath.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/QuickList.h
+	<list>
+	<assert.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/quaternion.h
+	"vector3.h"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/MyFileReader.cpp
+	"MyFileReader.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/MyFileReader.h
+	<cstdio>
+	<cstring>
+	<stdexcept>
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/PackMemory.cpp
+	"PackMemory.h"
+	<memory.h>
+	<malloc.h>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/PackMemory.h
+	"ZLIB/unzip.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/unzip.h
+	"zlib.h"
+	"ioapi.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/zlib.h
+	"zconf.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/zconf.h
+	<windows.h>
+	<sys/types.h>
+	<unistd.h>
+	<unixio.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/ioapi.h
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/PackReader.cpp
+	"PackReader.h"
+	<string>
+	<iostream>
+	<memory.h>
+	<string.h>
+	<malloc.h>
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/PackReader.h
+	"PackMemory.h"
+	<string>
+	<map>
+	<vector>
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/SoraZipFile.cpp
+	"SoraZipFile.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/SoraZipFile.h
+	"SoraFileBase.h"
+	"SoraStringConv.h"
+	"PackReader.h"
+	"MyFileReader.h"
+
+1303770470 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/SoraZipResourceManager.cpp
+	"SoraZipResourceManager.h"
+
+1303770470 /home/darkfall/桌面/Hoshizor/Plugins/SoraZipResourceManager/SoraZipResourceManager.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraAutoPtr.h"
+	"SoraZipFile.h"
+	"SoraResourceManager.h"
+	<map>
+
+1303770471 source:/home/darkfall/桌面/Hoshizor/Plugins/lAnm/lAnm.cpp
+	"lAnm.h"
+	"llexer/llexer.h"
+	"lMemFile.h"
+	"hash.h"
+	<cassert>
+
+1303770471 /home/darkfall/桌面/Hoshizor/Plugins/lAnm/lAnm.h
+	<vector>
+	<string>
+	<stack>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/llexer/llexer.h
+	<cstdio>
+	<cstring>
+	<string>
+	<vector>
+	<map>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/lMemFile.h
+	<memory.h>
+	<malloc.h>
+
+1303770475 source:/home/darkfall/桌面/Hoshizor/Reflection/rfMap.cpp
+	"rfMap.h"
+	"lMemFile.h"
+
+1303770475 /home/darkfall/桌面/Hoshizor/Reflection/rfMap.h
+	<vector>
+	"rfCommon.h"
+
+1303770475 /home/darkfall/桌面/Hoshizor/Reflection/rfCommon.h
+	<stdio.h>
+
+1303770475 /home/darkfall/桌面/Hoshizor/Reflection/lMemFile.h
+	<memory.h>
+	<malloc.h>
+
+1303772963 source:/home/darkfall/桌面/Hoshizor/Sora-Linux/main.cpp
+	"SoraCore.h"
+	"SoraOGLRenderer/SoraOGLRenderer.h"
+	"SoraOGLRenderer/SoraOGLInput.h"
+	"SoraFreetypeFont/SoraFTFontManager.h"
+	"SoraZipResourceManager/SoraZipResourceManager.h"
+	"mainWindow.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/CoreTransform.cpp
+	"CoreTransform.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/Defaults/orz.c
+	"orz.h"
+	"stdio.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Defaults/orz.h
+	"windows.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/Random/SFMT.c
+	<string.h>
+	<assert.h>
+	"SFMT.h"
+	"SFMT-params.h"
+	<altivec.h>
+	<emmintrin.h>
+	"SFMT-alti.h"
+	"SFMT-sse2.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT.h
+	<stdio.h>
+	<inttypes.h>
+	<inttypes.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params.h
+	"SFMT-params607.h"
+	"SFMT-params1279.h"
+	"SFMT-params2281.h"
+	"SFMT-params4253.h"
+	"SFMT-params11213.h"
+	"SFMT-params19937.h"
+	"SFMT-params44497.h"
+	"SFMT-params86243.h"
+	"SFMT-params132049.h"
+	"SFMT-params216091.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params607.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params1279.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params2281.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params4253.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params11213.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params19937.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params44497.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params86243.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params132049.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-params216091.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-alti.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/SFMT-sse2.h
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/SoraCore.cpp
+	"SoraCore.h"
+	"SoraTextureMap.h"
+	"SoraFileUtility.h"
+	"SoraEventManager.h"
+	"SoraConstantStrings.h"
+	"Defaults/SoraDefaultMiscTool.h"
+	"Defaults/SoraDefaultTimer.h"
+	"osxfilewrapper.h"
+	"win32filewrapper.h"
+	"SoraFolderResourceManager.h"
+	"Defaults/SoraOSXTimer.h"
+	"Defaults/SoraTimer_Win32.h"
+	"Defaults/SoraMiscTool_Win32.h"
+	"Defaults/SoraMiscTool_OSX.h"
+	"Defaults/SoraMiscTool_iOS.h"
+	"Random/hgeRandom.h"
+	"Debug/SoraInternalLogger.h"
+	"Debug/SoraAutoProfile.h"
+	"Debug/SoraDebugRenderer.h"
+	"Random/SFMT.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraTextureMap.h
+	"SoraTexture.h"
+	"SoraSingleton.h"
+	"SoraException.h"
+	"SoraCore.h"
+	"SoraPlatform.h"
+	"stringId.h"
+	<map>
+	"hash.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraEventManager.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraSingleton.h"
+	"SoraEvent.h"
+	<map>
+	<vector>
+	"SoraTimerEvent.h"
+	"QuickList.h"
+	"hash.h"
+	"SoraKeyInfo.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraTimerEvent.h
+	"SoraPlatform.h"
+	"SoraException.h"
+	"SoraEvent.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Defaults/SoraDefaultMiscTool.h
+	"SoraMiscTool.h"
+	"SoraDefaultLogger.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Defaults/SoraDefaultLogger.h
+	<fstream>
+	"SoraPlatform.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Defaults/SoraDefaultTimer.h
+	"SoraTimer.h"
+	<sys/timeb.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/osxfilewrapper.h
+	"SoraPlatform.h"
+	<vector>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/win32filewrapper.h
+	"SoraPlatform.h"
+	<vector>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraFolderResourceManager.h
+	"SoraResourceManager.h"
+	"SoraFileUtility.h"
+	"stringId.h"
+	<vector>
+	"hash.h"
+	"soraiOSFileUtility.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Defaults/SoraOSXTimer.h
+	"SoraTimer.h"
+	"SoraPlatform.h"
+	<mach/mach.h>
+	<mach/mach_time.h>
+	<CoreServices/CoreServices.h>
+	<time.h>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Defaults/SoraTimer_Win32.h
+	"SoraTimer.h"
+	"SoraPlatform.h"
+	"orz.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Defaults/SoraMiscTool_Win32.h
+	"SoraDefaultMiscTool.h"
+	"SoraStringConv.h"
+	"SoraPlatform.h"
+	<windows.h>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Defaults/SoraMiscTool_OSX.h
+	"SoraDefaultMiscTool.h"
+	"SoraStringConv.h"
+	"SoraPlatform.h"
+	<CoreFoundation/CoreFoundation.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Random/hgeRandom.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Debug/SoraAutoProfile.h
+	"SoraGlobalProfiler.h"
+	<mach/mach.h>
+	<mach/mach_time.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/Debug/SoraGlobalProfiler.h
+	"SoraCore.h"
+	"SoraSingleton.h"
+	<iostream>
+	<fstream>
+	<stdio.h>
+	"SoraInternalLogger.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Debug/SoraDebugRenderer.h
+	"SoraPlatform.h"
+	"SoraSingleton.h"
+	"SoraCore.h"
+	"SoraFont.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/SoraEvent.cpp
+	"SoraEvent.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/SoraEventManager.cpp
+	"SoraEventManager.h"
+	"hash.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/SoraFolderResourceManager.cpp
+	"SoraFolderResourceManager.h"
+	"SoraFileUtility.h"
+	"Debug/SoraInternalLogger.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/SoraImageEffect.cpp
+	"SoraImageEffect.h"
+	"CoreTransformer.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/SoraLocalizer.cpp
+	"SoraLocalizer.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/SoraLocalizer.h
+	"SoraPlatform.h"
+	"SoraStringConv.h"
+	"SoraSingleton.h"
+	"SoraCore.h"
+	"llexer/llexer.h"
+	<map>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/SoraObject.cpp
+	"SoraObject.h"
+	"hash.h"
+	"stringId.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/SoraPluginManger.cpp
+	"SoraPluginManager.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/SoraResourceFileFinder.cpp
+	"SoraResourceFileFinder.h"
+	"SoraResourceManager.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/SoraShader.cpp
+	"SoraShader.h"
+	"SoraCore.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/SoraSprite.cpp
+	"SoraSprite.h"
+	"SoraTextureMap.h"
+	"SoraCore.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/SoraStringConv.cpp
+	"SoraStringConv.h"
+	<algorithm>
+	"SoraiOSStringConv.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/SoraTexture.cpp
+	"SoraTexture.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/SoraTimerEvent.cpp
+	"SoraTimerEvent.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/adler32.c
+	"zlib.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/compress.c
+	"zlib.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/crc32.c
+	<stdio.h>
+	"zutil.h"
+	<limits.h>
+	"crc32.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/zutil.h
+	"zlib.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<errno.h>
+	<alloc.h>
+	<malloc.h>
+	<malloc.h>
+	<unix.h>
+	<stdio.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/crc32.h
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/deflate.c
+	"deflate.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/deflate.h
+	"zutil.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/gzio.c
+	<stdio.h>
+	"zutil.h"
+	<stdarg.h>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/infback.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/inftrees.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/inflate.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/inffast.h
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/inffixed.h
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/inffast.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/inflate.c
+	"zutil.h"
+	"inftrees.h"
+	"inflate.h"
+	"inffast.h"
+	"inffixed.h"
+	<stdio.h>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/inftrees.c
+	"zutil.h"
+	"inftrees.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/ioapi.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zlib.h"
+	"ioapi.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/mztools.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zlib.h"
+	"unzip.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/trees.c
+	"deflate.h"
+	<ctype.h>
+	"trees.h"
+	<stdio.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/trees.h
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/uncompr.c
+	"zlib.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/unzip.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"zlib.h"
+	"unzip.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<errno.h>
+	"crypt.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/crypt.h
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/zip.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"zlib.h"
+	"zip.h"
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<errno.h>
+	"crypt.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/ZLIB/zip.h
+	"zlib.h"
+	"ioapi.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/ZLIB/zutil.c
+	"zutil.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/graphicEffects.cpp
+	"graphicEffects.h"
+	<fstream>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/graphicEffects.h
+	<cmath>
+	<memory.h>
+	<malloc.h>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/hgerect.cpp
+	"hgerect.h"
+	<math.h>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/hgevector.cpp
+	"hgevector.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/llexer/llexer.cpp
+	"llexer.h"
+	<malloc.h>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/md5lib.cpp
+	<assert.h>
+	<string.h>
+	<iostream.h>
+	<string>
+	<iostream>
+	<stdio.h>
+	"md5lib.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/md5lib.h
+	<fstream.h>
+	<string.h>
+	<fstream>
+	<string>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/tinyXML/tinystr.cpp
+	"tinystr.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/tinyXML/tinystr.h
+	<assert.h>
+	<string.h>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/tinyXML/tinyxml.cpp
+	"tinyxml.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/tinyXML/tinyxml.h
+	<string>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/tinyXML/tinyxmlerror.cpp
+	"tinyxml.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/tinyXML/tinyxmlparser.cpp
+	"tinyxml.h"
+	<ctype.h>
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/win32filewrapper.cpp
+	"win32filewrapper.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraShader/SoraCGGLShader.cpp
+	"SoraCGGLShader.h"
+	"SoraCore.h"
+	"Debug/SoraInternalLogger.h"
+
+1303770471 /home/darkfall/桌面/Hoshizor/Plugins/cg/cg.h
+
+1303770471 /home/darkfall/桌面/Hoshizor/Plugins/cg/cgGL.h
+	<Cg/cg.h>
+	<OpenGL/gl.h>
+	<GL/gl.h>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraConstantStrings.h
+	"stringId.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraPlaybackEvent.h
+	"SoraEvent.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/Defaults/SoraMiscTool_iOS.h
+	"SoraDefaultMiscTool.h"
+	"SoraStringConv.h"
+	"SoraPlatform.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraiOSStringConv.h
+	"SoraPlatform.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnBackgroundContainer.cpp
+	"gcnBackgroundContainer.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnBackgroundContainer.h
+	"SoraGUIChan/guichan.hpp"
+
+1303772596 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnConnectable.cpp
+	"gcnConnectable.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnConnectable.h
+	"SoraGUIChan/guichan.hpp"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnDraggableIcon.cpp
+	"gcnDraggableIcon.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnDraggableIcon.h
+	"SoraGUIChan/guichan.hpp"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnDraggableImageButton.cpp
+	"gcnDraggableImageButton.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnDraggableImageButton.h
+	"gcnImageButton2.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnImageButton2.h
+	"SoraGUIChan/guichan.hpp"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnDraggableImageButtonIncubator.cpp
+	"gcnDraggableImageButtonIncubator.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnDraggableImageButtonIncubator.h
+	"gcnDraggableImageButton.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnImageButton2.cpp
+	"gcnImageButton2.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnImageEffectImage.cpp
+	"gcnImageEffectImage.h"
+	"SoraCore.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnImageEffectImage.h
+	"SoraGUIChan/guichan.hpp"
+	"SoraImageEffect.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnMenuContainer.cpp
+	"gcnMenuContainer.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnMenuContainer.h
+	"SoraGUIChan/guichan.hpp"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfController.cpp
+	"rfController.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfController.h
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfEditorView.cpp
+	"rfEditorView.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfEditorView.h
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfGameOverView.cpp
+	"rfGameOverView.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfGameOverView.h
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfLightRenderer.cpp
+	"rfLightRenderer.h"
+	"rfMap.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfLightRenderer.h
+	"rfCommon.h"
+	"rfMirror.h"
+	"rfShape.h"
+	"rfLightSource.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfCommon.h
+	"SoraPlatform.h"
+	"SoraObject.h"
+	"SoraMath.h"
+	"json/json.h"
+	"SoraGUIChan/jsongui.h"
+	"hgevector.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/json.h
+	"autolink.h"
+	"value.h"
+	"reader.h"
+	"writer.h"
+	"features.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/autolink.h
+	"config.h"
+	<cpptl/cpptl_autolink.h>
+	"autolink.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/config.h
+	<cpptl/config.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/value.h
+	"forwards.h"
+	<string>
+	<vector>
+	<map>
+	<cpptl/smallmap.h>
+	<cpptl/forwards.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/forwards.h
+	"config.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/reader.h
+	"features.h"
+	"value.h"
+	<deque>
+	<stack>
+	<string>
+	<iostream>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/features.h
+	"forwards.h"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/writer.h
+	"value.h"
+	<vector>
+	<string>
+	<iostream>
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/jsongui.h
+	"SoraPlatform.h"
+	"stringId.h"
+	"json/json.h"
+	"SoraGUI.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfMirror.h
+	"rfCommon.h"
+	"rfLightSource.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfLightSource.h
+	"rfCommon.h"
+	"SoraSprite.h"
+	"gcnExtend/gcnDraggableIcon.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfShape.h
+	"rfCommon.h"
+	"rfLightSource.h"
+	"rfMirror.h"
+	"SoraSprite.h"
+	"gcnExtend/gcnDraggableImageButton.h"
+	<map>
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfMap.h
+	"rfLightRenderer.h"
+	"gcnExtend/gcnSelectableContainer.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnSelectableContainer.h
+	"SoraGUIChan/guichan.hpp"
+	"gcnBackgroundContainer.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfLightSource.cpp
+	"rfLightSource.h"
+	"rfMap.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfMap.cpp
+	"rfMap.h"
+	"SoraFileUtility.h"
+	"json/json.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfMapSelectionView.cpp
+	"rfMapSelectionView.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfMapSelectionView.h
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfMirror.cpp
+	"rfMirror.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfOptionView.cpp
+	"rfOptionView.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfOptionView.h
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfShape.cpp
+	"rfShape.h"
+	"rfMap.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfTitleView.cpp
+	"rfTitleView.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfTitleView.h
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/ReflectionRev/rfView.cpp
+	"rfView.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/ReflectionRev/rfView.h
+
+1303772799 source:/home/darkfall/桌面/Hoshizor/Plugins/gcnExtend/gcnSelectableContainer.cpp
+	"gcnSelectableContainer.h"
+	<cmath>
+
+1303773057 /home/darkfall/桌面/Hoshizor/Sora-Linux/mainWindow.h
+	"SoraCore.h"
+	"SoraCanvas.h"
+
+1303771495 /home/darkfall/桌面/Hoshizor/Sora/SoraCanvas.h
+	"SoraPlatform.h"
+	"SoraObject.h"
+	"SoraCore.h"
+	"SoraFont.h"
+
+1303777358 source:/home/darkfall/桌面/Hoshizor/Sora-Linux/mainWindow.cpp
+	"mainWindow.h"
+	"SoraEventManager.h"
+	"SoraLocalizer.h"
+	"graphicEffects.h"
+	"SoraGUIChan/guichansetup.h"
+	"gcnExtend/gcnDraggableImageButtonIncubator.h"
+	"gcnExtend/gcnSelectableContainer.h"
+	"gcnExtend/gcnDraggableIcon.h"
+	"gcnExtend/gcnConnectable.h"
+	"../ReflectionRev/rfMap.h"
+	"../ReflectionRev/rfShape.h"
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/json/json_reader.cpp
+	"reader.h"
+	"value.h"
+	<utility>
+	<cstdio>
+	<cassert>
+	<cstring>
+	<iostream>
+	<stdexcept>
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/json/json_value.cpp
+	<iostream>
+	"value.h"
+	"writer.h"
+	<utility>
+	<stdexcept>
+	<cstring>
+	<cassert>
+	<cpptl/conststring.h>
+	<cstddef>
+	"json_batchallocator.h"
+	"json_internalarray.inl"
+	"json_internalmap.inl"
+	"json_valueiterator.inl"
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/json_batchallocator.h
+	<stdlib.h>
+	<assert.h>
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/json_internalarray.inl
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/json_internalmap.inl
+
+1303770477 /home/darkfall/桌面/Hoshizor/Sora/json/json_valueiterator.inl
+
+1303770477 source:/home/darkfall/桌面/Hoshizor/Sora/json/json_writer.cpp
+	"writer.h"
+	<utility>
+	<assert.h>
+	<stdio.h>
+	<string.h>
+	<iostream>
+	<sstream>
+	<iomanip>
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraGUIChan/jsongui.cpp
+	"jsongui.h"
+	"SoraGUIResponser.h"
+	"SoraGUIResponserMap.h"
+	"guichansora.hpp"
+	"guichansetup.h"
+	"SoraCore.h"
+
+1303771495 source:/home/darkfall/桌面/Hoshizor/Sora/SoraCanvas.cpp
+	"SoraCanvas.h"
+
+1303776365 source:/home/darkfall/桌面/Hoshizor/Plugins/SoraOGLRenderer/SoraOGLRenderTarget_noext.cpp
+	"SoraOGLRenderTarget.h"
+	"SoraTexture.h"
+	"SoraCore.h"
+	<GL/GL.h>
+	<GL/GLU.h>
+

@@ -5,7 +5,7 @@
               fixed widget allocation, when attribute "name" is't exists
 			  deleted all "return false" after GCN_EXCEPTION, because they not used ever
  * v. 0.3.5 - fixed stupid bug, when widgets not parsed if parent widget is NULL
- * v. 0.3   - added parsing method for widget, 
+ * v. 0.3   - added parsing method for widget,
  *		      now checking widget node is in one function
  * v. 0.2   - small bug fix
  *          - added parsing widgets under 'container'
@@ -13,7 +13,7 @@
  * v. 0.1   - first public release
 */
 
-/* 
+/*
 Updates for HoshiNoSora by DarkfallGriffin@GameMaster
 www.gamemastercn.com
 
@@ -25,7 +25,7 @@ parse for gcn::ImageButton
 #define XML_GUI_H
 
 #include "guichan.hpp"
-#include "tinyxml/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 
 #include <map>
 
@@ -49,7 +49,7 @@ public:
 	//@param name th widget name
 	//@return widget by name
 	gcn::Widget *getWidget(const std::string &name);
-    
+
     static void parseResponser(gcn::Widget* widget, const std::string& responser, const std::string* type);
 
 	//!parse default parameters for all widgets
@@ -122,33 +122,33 @@ public:
 	//@param element the xml element
 	//@param widget the current widget
 	void parseListbox(TiXmlElement *element,gcn::Widget *parent);
-	
+
 	//!add actionlistener to array
 	//@param name the actionlistener name
 	//@param al the pointer to actionlistener class
 	void addActionListener(const std::string &name,gcn::ActionListener *al);
 
-	//!add font 
+	//!add font
 	//@param name the font name
 	//@param al the pointer to font class
 	void addFont(const std::string &name,gcn::Font *font);
-    
+
     //!adding widget to parent
 	//!parent widget can be Container,ScrollArea,Window. this function get class and set widget or add widget (for Container)
 	//@param widget our widget
 	//@param parent the parent widget
 	void addToParent(gcn::Widget *widget, gcn::Widget *parent);
 
-	
+
     void registerParseFunc(const std::string& name, parseFunc func);
-    
+
 private:
 	//!parse xml node
 	//@param element - xml element
 	//@param parent - the parent widget
 	void parseWidgets(TiXmlElement *element, gcn::Widget *parent);
 
-	
+
 
 	//!check string value for boolean value
 	//@param value the string value
@@ -159,7 +159,7 @@ private:
 	std::map<std::string,gcn::Widget*> widgets;
 	std::map<std::string,gcn::ActionListener*> actions;
 	std::map<std::string,gcn::Font*> fonts;
-    
+
     std::map<std::string,parseFunc> externParseFuncs;
 
 	//temporary xml document (need by some functions)
@@ -174,7 +174,7 @@ public:
 	virtual void pushElement(const std::string& str) { items.push_back(str); }
 	std::vector<std::string> items;
 };
-    
+
 } // namespace sora
 
 #endif
