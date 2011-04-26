@@ -93,7 +93,7 @@ namespace sora{
 		glClearDepth(1.f);                          // Depth Buffer Setup
 
         glDepthMask(GL_FALSE);
-     //   glDisable(GL_DEPTH_TEST); //????
+        glDisable(GL_DEPTH_TEST); //????
 
  //       glEnable(GL_CULL_FACE);
 //		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);

@@ -251,6 +251,7 @@
 		88DCB4AE12DE914000C0B009 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB4A912DE914000C0B009 /* tinyxml.cpp */; };
 		88DCB4AF12DE914000C0B009 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB4AB12DE914000C0B009 /* tinyxmlerror.cpp */; };
 		88DCB4B012DE914000C0B009 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB4AC12DE914000C0B009 /* tinyxmlparser.cpp */; };
+		88DCE5D61366654A005FBBE0 /* kalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE5D41366654A005FBBE0 /* kalloc.c */; };
 		88DD0B9312EAA708005555F6 /* SoraAS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0B8F12EAA708005555F6 /* SoraAS.cpp */; };
 		88DD0B9712EAA7B9005555F6 /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0B9612EAA7B9005555F6 /* memory.cpp */; };
 		88DD0CBE12EB9311005555F6 /* orz.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0CBA12EB9311005555F6 /* orz.c */; };
@@ -996,6 +997,8 @@
 		88DCB4AA12DE914000C0B009 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		88DCB4AB12DE914000C0B009 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
 		88DCB4AC12DE914000C0B009 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		88DCE5D41366654A005FBBE0 /* kalloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kalloc.c; sourceTree = "<group>"; };
+		88DCE5D51366654A005FBBE0 /* kalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kalloc.h; sourceTree = "<group>"; };
 		88DD0B8E12EAA631005555F6 /* stringId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringId.h; sourceTree = "<group>"; };
 		88DD0B8F12EAA708005555F6 /* SoraAS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraAS.cpp; path = Experimental/SoraAS.cpp; sourceTree = "<group>"; };
 		88DD0B9012EAA708005555F6 /* SoraAS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraAS.h; path = Experimental/SoraAS.h; sourceTree = "<group>"; };
@@ -2098,6 +2101,8 @@
 				88D87D2812A09A66007D6865 /* QuickList.h */,
 				88D87D2912A09A66007D6865 /* Rect4V.h */,
 				88CFF7E812C6D562002A9F75 /* hash.h */,
+				88DCE5D41366654A005FBBE0 /* kalloc.c */,
+				88DCE5D51366654A005FBBE0 /* kalloc.h */,
 				88374D8C1325A12900369B12 /* AutoContainer.h */,
 				889BFD4312BF4D23002D8A2F /* CoreTransformer.h */,
 				88691165134E15850012BDE0 /* SoraCanvas.h */,
@@ -2563,6 +2568,7 @@
 				887E3B9E1363AFE600803DA6 /* gcnMenuContainer.cpp in Sources */,
 				887E3BA11363B0A800803DA6 /* gcnImageEffectImage.cpp in Sources */,
 				887E3E601363D55800803DA6 /* rfLightRenderer.cpp in Sources */,
+				88DCE5D61366654A005FBBE0 /* kalloc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

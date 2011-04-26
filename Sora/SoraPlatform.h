@@ -17,16 +17,44 @@
 
 /*
  gcc std extension
+ if gcc version > 4
+ then there is tr1 support
+ visual studio 2008 sp1 or above also has tr1 support
+ to do with vs version check
+ khash also available as an external khash option
  */
+
 #ifdef __GNUC__
-#include <ext/hash_map>
-using __gnu_cxx::hash_map;
+	#if __GNUC__ > 4
+		#include <tr1/unordered_map>
+		#define hash_map std::tr1::unordered_map
+	#else
+		#include <ext/hash_map>
+		using __gnu_cxx::hash_map;
+	#endif
 #else
-#include <hash_map>
+	#include <hash_map>
 #endif
 
 #ifdef WIN32
 using std::hash_map;
+#endif
+
+#ifdef USE_KALLOC
+#include "kalloc.h"
+
+#define malloc kmalloc
+#define free kfree
+#define realloc krealloc
+#endif
+
+#ifdef USE_TR1_SHARED_PTR
+
+#include <tr1/memory>
+#define SoraSharedPtr std::tr1::shared_ptr
+
+#else
+#define SoraSharedPtr SoraAutoPtr
 #endif
 
 #ifndef __GNUC__

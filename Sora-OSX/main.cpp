@@ -100,7 +100,6 @@ int main(int argc, char* argv[]) {
 	localizer->addLocaleConf(L"cn.locale");
 	*/
 	sora->setFPS(60.0);
-	
 	sora->createWindow(new mainWindow);
 	sora->start();
 		

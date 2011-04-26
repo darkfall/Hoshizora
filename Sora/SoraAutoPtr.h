@@ -26,7 +26,7 @@ using std::map;
 namespace sora {
 	
 #define sora_safe_delete(ptr) { if(ptr) delete ptr; ptr=0; }
-
+	
 	template<typename T>
 	class SoraAutoPtr {
 	public:
@@ -127,6 +127,6 @@ namespace sora {
 		void* operator new(size_t);
 		//void operator delete(void*);
 	};
-	
+		
 } // namespace sora
 #endif
