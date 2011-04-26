@@ -330,6 +330,8 @@
 			88DCE617136667DF005FBBE0 /* PBXTextBookmark */ = 88DCE617136667DF005FBBE0 /* PBXTextBookmark */;
 			88DCE618136667DF005FBBE0 /* PBXTextBookmark */ = 88DCE618136667DF005FBBE0 /* PBXTextBookmark */;
 			88DCE619136667DF005FBBE0 /* PBXTextBookmark */ = 88DCE619136667DF005FBBE0 /* PBXTextBookmark */;
+			88DCE625136668B4005FBBE0 /* PBXTextBookmark */ = 88DCE625136668B4005FBBE0 /* PBXTextBookmark */;
+			88DCE626136668B4005FBBE0 /* PBXTextBookmark */ = 88DCE626136668B4005FBBE0 /* PBXTextBookmark */;
 			88E2C861136525D50029A8CB = 88E2C861136525D50029A8CB /* PBXTextBookmark */;
 			88E2C862136525D50029A8CB = 88E2C862136525D50029A8CB /* PBXTextBookmark */;
 			88E2C887136526810029A8CB = 88E2C887136526810029A8CB /* PBXTextBookmark */;
@@ -3089,7 +3091,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 69";
 		rLen = 33;
-		rLoc = 1879;
+		rLoc = 1888;
 		rType = 0;
 		vrLen = 939;
 		vrLoc = 894;
@@ -3318,6 +3320,12 @@
 		};
 	};
 	88D87D2612A09A66007D6865 /* md5lib.cpp */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = md5lib.cpp;
+		path = /Users/darkfall/SoraGit/Sora/md5lib.cpp;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1091, 7812}}";
 			sepNavSelRange = "{0, 0}";
@@ -3325,6 +3333,12 @@
 		};
 	};
 	88D87D2712A09A66007D6865 /* md5lib.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = md5lib.h;
+		path = /Users/darkfall/SoraGit/Sora/md5lib.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1091, 2128}}";
 			sepNavSelRange = "{0, 0}";
@@ -3340,9 +3354,9 @@
 	};
 	88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1091, 1848}}";
-			sepNavSelRange = "{513, 0}";
-			sepNavVisRange = "{146, 1102}";
+			sepNavIntBoundsRect = "{{0, 0}, {775, 1876}}";
+			sepNavSelRange = "{2694, 0}";
+			sepNavVisRange = "{2240, 440}";
 		};
 	};
 	88D87D2B12A09A66007D6865 /* SoraColor.h */ = {
@@ -3431,9 +3445,9 @@
 	};
 	88D87D4012A09A66007D6865 /* SoraPlatform.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1091, 3892}}";
-			sepNavSelRange = "{926, 0}";
-			sepNavVisRange = "{231, 1103}";
+			sepNavIntBoundsRect = "{{0, 0}, {1091, 3878}}";
+			sepNavSelRange = "{964, 0}";
+			sepNavVisRange = "{364, 1115}";
 		};
 	};
 	88D87D4A12A09A66007D6865 /* SoraSprite.cpp */ = {
@@ -4056,7 +4070,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 69";
 		rLen = 33;
-		rLoc = 1879;
+		rLoc = 1888;
 		rType = 0;
 		vrLen = 1011;
 		vrLoc = 889;
@@ -4175,12 +4189,18 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 43";
 		rLen = 0;
-		rLoc = 1076;
+		rLoc = 1085;
 		rType = 0;
 		vrLen = 1066;
 		vrLoc = 229;
 	};
 	88DCE5D41366654A005FBBE0 /* kalloc.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = kalloc.c;
+		path = /Users/darkfall/SoraGit/Sora/kalloc.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {908, 3122}}";
 			sepNavSelRange = "{3668, 0}";
@@ -4188,6 +4208,12 @@
 		};
 	};
 	88DCE5D51366654A005FBBE0 /* kalloc.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = kalloc.h;
+		path = /Users/darkfall/SoraGit/Sora/kalloc.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1091, 741}}";
 			sepNavSelRange = "{0, 0}";
@@ -4199,7 +4225,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 43";
 		rLen = 0;
-		rLoc = 1076;
+		rLoc = 1085;
 		rType = 0;
 		vrLen = 1066;
 		vrLoc = 229;
@@ -4302,7 +4328,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 48";
 		rLen = 0;
-		rLoc = 865;
+		rLoc = 874;
 		rType = 0;
 		vrLen = 1087;
 		vrLoc = 229;
@@ -4312,7 +4338,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 53";
 		rLen = 0;
-		rLoc = 1076;
+		rLoc = 1085;
 		rType = 0;
 		vrLen = 1087;
 		vrLoc = 229;
@@ -4477,7 +4503,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 56";
 		rLen = 22;
-		rLoc = 980;
+		rLoc = 989;
 		rType = 0;
 		vrLen = 999;
 		vrLoc = 552;
@@ -4487,10 +4513,30 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 50";
 		rLen = 0;
-		rLoc = 926;
+		rLoc = 935;
 		rType = 0;
 		vrLen = 1103;
 		vrLoc = 231;
+	};
+	88DCE625136668B4005FBBE0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
+		name = "SoraPlatform.h: 50";
+		rLen = 0;
+		rLoc = 935;
+		rType = 0;
+		vrLen = 1103;
+		vrLoc = 231;
+	};
+	88DCE626136668B4005FBBE0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
+		name = "SoraPlatform.h: 52";
+		rLen = 0;
+		rLoc = 964;
+		rType = 0;
+		vrLen = 1115;
+		vrLoc = 364;
 	};
 	88DD0B8E12EAA631005555F6 /* stringId.h */ = {
 		uiCtxt = {

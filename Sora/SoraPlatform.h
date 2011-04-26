@@ -40,8 +40,8 @@
 using std::hash_map;
 #endif
 
-#ifdef USE_KALLOC
-#include "kalloc.h"
+#ifdef USE_KMALLOC
+#include "support/kalloc.h"
 
 #define malloc kmalloc
 #define free kfree

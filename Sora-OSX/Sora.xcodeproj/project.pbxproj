@@ -234,7 +234,6 @@
 		88D1A0AF1337FF7D00F26121 /* vlcTestWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D1A0AD1337FF7D00F26121 /* vlcTestWindow.cpp */; };
 		88D87D5712A09A66007D6865 /* hgerect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2112A09A66007D6865 /* hgerect.cpp */; };
 		88D87D5812A09A66007D6865 /* hgevector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2312A09A66007D6865 /* hgevector.cpp */; };
-		88D87D5912A09A66007D6865 /* md5lib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2612A09A66007D6865 /* md5lib.cpp */; };
 		88D87D5A12A09A66007D6865 /* SoraCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2D12A09A66007D6865 /* SoraCore.cpp */; };
 		88D87D5B12A09A66007D6865 /* SoraEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2F12A09A66007D6865 /* SoraEvent.cpp */; };
 		88D87D5C12A09A66007D6865 /* SoraEventManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D3112A09A66007D6865 /* SoraEventManager.cpp */; };
@@ -251,7 +250,8 @@
 		88DCB4AE12DE914000C0B009 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB4A912DE914000C0B009 /* tinyxml.cpp */; };
 		88DCB4AF12DE914000C0B009 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB4AB12DE914000C0B009 /* tinyxmlerror.cpp */; };
 		88DCB4B012DE914000C0B009 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB4AC12DE914000C0B009 /* tinyxmlparser.cpp */; };
-		88DCE5D61366654A005FBBE0 /* kalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE5D41366654A005FBBE0 /* kalloc.c */; };
+		88DCE62113666885005FBBE0 /* kalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE61B13666885005FBBE0 /* kalloc.c */; };
+		88DCE62213666885005FBBE0 /* md5lib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE61E13666885005FBBE0 /* md5lib.cpp */; };
 		88DD0B9312EAA708005555F6 /* SoraAS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0B8F12EAA708005555F6 /* SoraAS.cpp */; };
 		88DD0B9712EAA7B9005555F6 /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0B9612EAA7B9005555F6 /* memory.cpp */; };
 		88DD0CBE12EB9311005555F6 /* orz.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0CBA12EB9311005555F6 /* orz.c */; };
@@ -939,8 +939,6 @@
 		88D87D2312A09A66007D6865 /* hgevector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hgevector.cpp; sourceTree = "<group>"; };
 		88D87D2412A09A66007D6865 /* hgevector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgevector.h; sourceTree = "<group>"; };
 		88D87D2512A09A66007D6865 /* HoshiNoSora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoshiNoSora.h; sourceTree = "<group>"; };
-		88D87D2612A09A66007D6865 /* md5lib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5lib.cpp; sourceTree = "<group>"; };
-		88D87D2712A09A66007D6865 /* md5lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5lib.h; sourceTree = "<group>"; };
 		88D87D2812A09A66007D6865 /* QuickList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickList.h; sourceTree = "<group>"; };
 		88D87D2912A09A66007D6865 /* Rect4V.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect4V.h; sourceTree = "<group>"; };
 		88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraAutoPtr.h; sourceTree = "<group>"; };
@@ -997,8 +995,12 @@
 		88DCB4AA12DE914000C0B009 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		88DCB4AB12DE914000C0B009 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
 		88DCB4AC12DE914000C0B009 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
-		88DCE5D41366654A005FBBE0 /* kalloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kalloc.c; sourceTree = "<group>"; };
-		88DCE5D51366654A005FBBE0 /* kalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kalloc.h; sourceTree = "<group>"; };
+		88DCE61B13666885005FBBE0 /* kalloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kalloc.c; sourceTree = "<group>"; };
+		88DCE61C13666885005FBBE0 /* kalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kalloc.h; sourceTree = "<group>"; };
+		88DCE61D13666885005FBBE0 /* khash.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = khash.hh; sourceTree = "<group>"; };
+		88DCE61E13666885005FBBE0 /* md5lib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5lib.cpp; sourceTree = "<group>"; };
+		88DCE61F13666885005FBBE0 /* md5lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5lib.h; sourceTree = "<group>"; };
+		88DCE62013666885005FBBE0 /* sort.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sort.hh; sourceTree = "<group>"; };
 		88DD0B8E12EAA631005555F6 /* stringId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringId.h; sourceTree = "<group>"; };
 		88DD0B8F12EAA708005555F6 /* SoraAS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraAS.cpp; path = Experimental/SoraAS.cpp; sourceTree = "<group>"; };
 		88DD0B9012EAA708005555F6 /* SoraAS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraAS.h; path = Experimental/SoraAS.h; sourceTree = "<group>"; };
@@ -2088,6 +2090,7 @@
 				88DD59FE12E040510081AE6C /* llexer */,
 				88504B8812ECDB4E009B9F45 /* Random */,
 				88AD7F5E13415855000F4F68 /* json */,
+				88DCE61A13666885005FBBE0 /* support */,
 				88D87D2112A09A66007D6865 /* hgerect.cpp */,
 				88D87D2212A09A66007D6865 /* hgerect.h */,
 				88D87D2312A09A66007D6865 /* hgevector.cpp */,
@@ -2096,13 +2099,9 @@
 				88CE59A012C1CE6A00C551F0 /* quaternion.h */,
 				88CE59A112C1CE6A00C551F0 /* vector3.h */,
 				88D87D2512A09A66007D6865 /* HoshiNoSora.h */,
-				88D87D2612A09A66007D6865 /* md5lib.cpp */,
-				88D87D2712A09A66007D6865 /* md5lib.h */,
 				88D87D2812A09A66007D6865 /* QuickList.h */,
 				88D87D2912A09A66007D6865 /* Rect4V.h */,
 				88CFF7E812C6D562002A9F75 /* hash.h */,
-				88DCE5D41366654A005FBBE0 /* kalloc.c */,
-				88DCE5D51366654A005FBBE0 /* kalloc.h */,
 				88374D8C1325A12900369B12 /* AutoContainer.h */,
 				889BFD4312BF4D23002D8A2F /* CoreTransformer.h */,
 				88691165134E15850012BDE0 /* SoraCanvas.h */,
@@ -2218,6 +2217,19 @@
 			path = tinyXML;
 			sourceTree = "<group>";
 		};
+		88DCE61A13666885005FBBE0 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				88DCE61B13666885005FBBE0 /* kalloc.c */,
+				88DCE61C13666885005FBBE0 /* kalloc.h */,
+				88DCE61D13666885005FBBE0 /* khash.hh */,
+				88DCE61E13666885005FBBE0 /* md5lib.cpp */,
+				88DCE61F13666885005FBBE0 /* md5lib.h */,
+				88DCE62013666885005FBBE0 /* sort.hh */,
+			);
+			path = support;
+			sourceTree = "<group>";
+		};
 		88DD0C1F12EB5B48005555F6 /* tcmalloc */ = {
 			isa = PBXGroup;
 			children = (
@@ -2331,7 +2343,6 @@
 				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
 				88D87D5712A09A66007D6865 /* hgerect.cpp in Sources */,
 				88D87D5812A09A66007D6865 /* hgevector.cpp in Sources */,
-				88D87D5912A09A66007D6865 /* md5lib.cpp in Sources */,
 				88D87D5A12A09A66007D6865 /* SoraCore.cpp in Sources */,
 				88D87D5B12A09A66007D6865 /* SoraEvent.cpp in Sources */,
 				88D87D5C12A09A66007D6865 /* SoraEventManager.cpp in Sources */,
@@ -2568,7 +2579,8 @@
 				887E3B9E1363AFE600803DA6 /* gcnMenuContainer.cpp in Sources */,
 				887E3BA11363B0A800803DA6 /* gcnImageEffectImage.cpp in Sources */,
 				887E3E601363D55800803DA6 /* rfLightRenderer.cpp in Sources */,
-				88DCE5D61366654A005FBBE0 /* kalloc.c in Sources */,
+				88DCE62113666885005FBBE0 /* kalloc.c in Sources */,
+				88DCE62213666885005FBBE0 /* md5lib.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
