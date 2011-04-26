@@ -309,6 +309,8 @@ namespace sora {
 
 		ulong32 result = pRenderSystem->createWindow(info);
 		if(result) {
+			if(pInput != NULL)
+				pInput->setWindowHandle(result);
 			pMiscTool->setMainWindowHandle(result);
 			bMainWindowSet = true;
 			mainWindow = info;

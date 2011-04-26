@@ -285,7 +285,7 @@ namespace sora{
 		if(mainWindow->hideMouse())
 			glfwDisable(GLFW_MOUSE_CURSOR);
 
-		bFullscreen = windowInfo->isWindowed();
+		bFullscreen = !windowInfo->isWindowed();
 		windowInfo->init();
 
 		return (ulong32)windowInfo;

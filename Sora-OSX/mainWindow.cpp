@@ -40,7 +40,7 @@ bool mainWindow::updateFunc() {
 	if(sora->keyDown(SORA_KEY_ESCAPE))
 		sora->shutDown();
 	if(sora->keyDown(SORA_KEY_F))
-		sora->setFullscreen(false);
+		sora->setFullscreen(true);
     
     if(sora->keyDown(SORA_KEY_1)) {
 		reflection::rfMap* map = (reflection::rfMap*)(sora::GCN_GLOBAL->findWidget("map"));

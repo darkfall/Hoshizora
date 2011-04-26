@@ -60,7 +60,7 @@ namespace sora {
 	
 	void SoraResourceFileFinder::freeResourceFile(void* p) {
 		if(p) 
-			delete p;
+			delete (uint8*)p;
 	}
 	
 	ulong32	SoraResourceFileFinder::loadResourcePack(const SoraWString& file) {

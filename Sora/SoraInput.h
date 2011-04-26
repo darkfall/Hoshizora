@@ -31,6 +31,12 @@ namespace sora {
 		virtual bool	setJoyKey(int32 key) = 0;
 		virtual bool	hasJoy() = 0;
 		
+		/*
+		 set the window handle corresponds to which window to handle input
+		 @param window: the result of renderer->createWindow
+		 */
+		virtual void	setWindowHandle(ulong32 window) = 0;
+		
 #ifdef OS_IOS
 		/* ***** corresponding to mobile touch screens only */
 		virtual int32	getGesture() = 0;

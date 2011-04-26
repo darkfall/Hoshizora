@@ -8,10 +8,8 @@
 
 #include "SoraFont.h"
 
-#include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraFreetypeFont/SoraFTFontManager.h"
-#include "SoraOGLRenderer/SoraOGLInput.h"
 #include "SoraQTSoundSystem/SoraQTSoundSystem.h"
 
 #include "testMainWindow.h"
@@ -37,9 +35,11 @@
 
 #include "../AnimationEditor/aeMainWindow.h"
 
-//#include "SoraFMODSoundSystem.h"
 
 #include "../ReflectionRev/rfMirror.h"
+
+#include "GLFW3/SoraOGLInputGLFW3.h"
+#include "GLFW3/SoraOGLRenderer.h"
 
 
 int main(int argc, char* argv[]) {
