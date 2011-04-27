@@ -16,7 +16,12 @@ namespace gcn {
 		
 		mInternalImage = false;
 		mFrameMouseEntered = false;
+		
+		mClickSound = NULL;
+		mEnterSound = NULL;
+		
 		setFrameSize(0);
+		addActionListener(this);
 	}
 	
 	ImageButton2::~ImageButton2() {
@@ -25,6 +30,14 @@ namespace gcn {
 				delete mImage;
 				mImage = 0;
 			}
+		}
+		if(mClickSound) {
+			delete mClickSound;
+			mClickSound = NULL;
+		}
+		if(mEnterSound) {
+			delete mEnterSound;
+			mEnterSound = NULL;
 		}
 	}
 	
@@ -142,6 +155,20 @@ namespace gcn {
         }
 	}
 	
+	void ImageButton2::mouseEntered(MouseEvent& mouseEvent) {
+		if(mouseEvent.getSource() == this) {
+			if(mEnterSound)
+				mEnterSound->play();
+		}
+	}
+	
+	void ImageButton2::action(const ActionEvent& actionEvent) {
+		if(actionEvent.getSource() == this) {
+			if(mClickSound)
+				mClickSound->play();
+		}
+	}
+	
 	void ImageButton2::enableFrameWhenMouseEntered(bool flag) {
 		mFrameMouseEntered = flag;
 	}
@@ -164,6 +191,14 @@ namespace gcn {
 	
 	Rectangle ImageButton2::getUnavailableRect() const {
 		return unavailTex;
+	}
+	
+	void ImageButton2::setClickSound(const std::string& soundName) {
+		mClickSound = Sound::load(soundName);
+	}
+	
+	void ImageButton2::setEnterSound(const std::string& soundName) {
+		mEnterSound = Sound::load(soundName);
 	}
 	
 } // namespace gcn

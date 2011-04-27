@@ -20,7 +20,6 @@ namespace gcn {
 		DraggableIcon(const std::string& icon);
 		DraggableIcon(Image* image);
 		virtual ~DraggableIcon() {}
-				
 		
 		void setImage(const std::string& image);
 		/*

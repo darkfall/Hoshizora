@@ -24,28 +24,39 @@
  khash also available as an external khash option
  */
 
+
 #ifdef __GNUC__
 	#if __GNUC__ > 4
 		#include <tr1/unordered_map>
 		#define hash_map std::tr1::unordered_map
 	#else
 		#include <ext/hash_map>
+namespace sora {
+
 		using __gnu_cxx::hash_map;
+}
 	#endif
 #else
 	#include <hash_map>
 #endif
 
 #ifdef WIN32
+namespace sora {
+
 using std::hash_map;
+
+}
 #endif
 
 #ifdef USE_KMALLOC
-#include "support/kalloc.h"
-
-#define malloc kmalloc
-#define free kfree
-#define realloc krealloc
+	#include "support/kalloc.h"
+	#define mymalloc kmalloc
+	#define myfree kfree
+	#define myrealloc krealloc
+#else
+	#define mymalloc malloc
+	#define myfree free
+	#define myrealloc realloc
 #endif
 
 #ifdef USE_TR1_SHARED_PTR
@@ -56,6 +67,7 @@ using std::hash_map;
 #else
 #define SoraSharedPtr SoraAutoPtr
 #endif
+
 
 #ifndef __GNUC__
 
@@ -202,7 +214,7 @@ typedef std::wstring SoraWString;
 #endif
 
 
-// android resolution defines
+// android resolution definitions
 #ifdef OS_ANDROID
 
 

@@ -88,12 +88,14 @@ namespace gcn {
         mHasMouse = false;
 		if(mFrameMouseEntered)
 			setFrameSize(0);
+		ImageButton2::mouseExited(mouseEvent);
     }
 	
     void DraggableImageButton::mouseEntered(MouseEvent& mouseEvent) {
         mHasMouse = true;
 		if(mFrameMouseEntered)
 			setFrameSize(1);
+		ImageButton2::mouseEntered(mouseEvent);
     }
 	
 	bool DraggableImageButton::isDragEnabled() const {

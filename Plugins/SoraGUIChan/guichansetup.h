@@ -11,8 +11,8 @@
 #define SORA_GUICHAN_SETUP_H_
 
 #include "SoraGUIChan/guichansora.hpp"
-
 #include "SoraGUIChan/guichan.hpp"
+#include "SoraGUIChan/SoraSoundLoader.h"
 
 #include "SoraCore.h"
 
@@ -52,6 +52,9 @@ namespace sora {
 				gcn::Widget::setGlobalFont(pfont);
 			else
 				return false;
+			
+			// register global sound loader
+			SoraSoundLoader::Instance();
             
             gcnListener* plistener = new gcnListener(this);
             SORA->addFrameListener(plistener);

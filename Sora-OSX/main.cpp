@@ -40,6 +40,7 @@
 
 #include "GLFW3/SoraOGLInputGLFW3.h"
 #include "GLFW3/SoraOGLRenderer.h"
+#include "SoraFMODSoundSystem/SoraFMODSoundSystem.h"
 
 
 int main(int argc, char* argv[]) {
@@ -49,7 +50,7 @@ int main(int argc, char* argv[]) {
 	sora->registerResourceManager(new sora::SoraZipResourceManager);
 	sora->registerFontManager(new sora::SoraFTFontManager);
 	sora->registerInput(new sora::SoraOGLInput);
-  //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
+    sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
 	
 	sora::HSORARESOURCE res = sora->loadResourcePack(L"./data.rfResource");
 	if(!res) {

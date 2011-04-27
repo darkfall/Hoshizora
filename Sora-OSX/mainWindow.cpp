@@ -77,18 +77,18 @@ bool mainWindow::renderFunc() {
 	//shader->setParameterfv("twisting", &t, 1);
 
 	canvas1->beginRender();
-	sora::GCN_GLOBAL->gcnLogic();
-	sora::GCN_GLOBAL->gcnDraw();
-	
-	canvas1->finishRender();
-		
-	sora->beginScene();
-	
-	canvas1->render();
 	
 	pSpr->render(0.f, 0.f);
 	pSpr2->render(100.f, 100.f);
 	
+	canvas1->finishRender();
+		
+	sora->beginScene();
+	sora::GCN_GLOBAL->gcnLogic();
+	sora::GCN_GLOBAL->gcnDraw();
+	
+	
+	canvas1->render();
 	
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	
@@ -115,6 +115,8 @@ gcn::Widget* myIncubateFunc_hexogon(void* userData) {
 	}
 	
 	box->enableFrameWhenMouseEntered(true);
+	box->setClickSound("start.wav");
+	box->setEnterSound("click_08.wav");
 	
 	box->setEdgeNum(6);
 	

@@ -112,7 +112,6 @@ namespace gcn {
             && mHasMouse)
         {
             mMousePressed = false;
-            distributeActionEvent();
             mouseEvent.consume();
 			
 			if(currentWidget) {

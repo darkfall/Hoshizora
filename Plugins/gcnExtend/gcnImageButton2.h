@@ -11,10 +11,15 @@
 #define GCN_IMAGE_BUTTON_2_
 
 #include "SoraGUIChan/guichan.hpp"
+#include "SoraGUIChan/Sound.h"
 
 namespace gcn {
 	
-	class ImageButton2: public Button {
+	/*
+	 image based button
+	 with sound support by Sound extension
+	 */
+	class ImageButton2: public Button, public ActionListener {
 	public:
 		ImageButton2();
 		virtual ~ImageButton2();
@@ -23,6 +28,12 @@ namespace gcn {
 		
 		virtual void setImage(const std::string& sprNormal, const Rectangle& normal, const Rectangle& pushed);
 		virtual void setImage(Image* image, const Rectangle& normal, const Rectangle& pushed);
+		
+		void setClickSound(const std::string& soundName);
+		void setEnterSound(const std::string& soundName);
+		
+		void mouseEntered(MouseEvent& mouseEvent);
+		void action(const ActionEvent& actionEvent);
 		
 		/*
 		 this would used by isFocused
@@ -55,6 +66,9 @@ namespace gcn {
 		Rectangle pushedTex;
 		Rectangle unavailTex;
 		Rectangle focusTex;
+		
+		Sound* mClickSound;
+		Sound* mEnterSound;
 		
 		bool mInternalImage;
 		bool mFrameMouseEntered;

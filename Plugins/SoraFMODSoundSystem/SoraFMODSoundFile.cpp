@@ -113,7 +113,7 @@ namespace sora {
         if(pSound) {
             if(pChannel)
                 pChannel->stop();
-            FMOD_RESULT result = pSystem->playSound(FMOD_CHANNEL_FREE, pSound, pChannel==NULL?false:true, &pChannel);
+            FMOD_RESULT result = pSystem->playSound(FMOD_CHANNEL_FREE, pSound, false, &pChannel);
             if(FMOD_ERROR_CHECK(result)) {
                 publishEvent(SORAPB_EV_PLAY_STARTED);
                 
@@ -316,21 +316,21 @@ namespace sora {
     
     void SoraFMODSoundEffectFile::play() {
         if(pSound) {
-            FMOD_RESULT result = pSystem->playSound(FMOD_CHANNEL_FREE, pSound, pChannel==NULL?false:true, &pChannel);
-            if(FMOD_ERROR_CHECK(result)) {
+            FMOD_RESULT result = pSystem->playSound(FMOD_CHANNEL_FREE, pSound, false, &pChannel);
+       /*     if(FMOD_ERROR_CHECK(result)) {
                 publishEvent(SORAPB_EV_PLAY_STARTED);
                 pChannel->setUserData((void*)this);
                 pChannel->setCallback(myChannelCallback);
-            }
+            }*/
         }
     }
     
     void SoraFMODSoundEffectFile::stop() {
         if(pChannel) {
             FMOD_RESULT result = pChannel->stop();
-            if(FMOD_ERROR_CHECK(result)) {
+       /*     if(FMOD_ERROR_CHECK(result)) {
                 publishEvent(SORAPB_EV_PLAY_STOPPED);
-            }
+            }*/
         }
     }
     

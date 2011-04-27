@@ -77,7 +77,6 @@ namespace reflection {
 	void rfMap::setMirrorImage(const std::wstring mirrorImage) {
 		pMirrorImage = sora::SORA->createSprite(mirrorImage);
 		mirrorImagePath = mirrorImage;
-		pMirrorImage->setScale(2.f, 2.f);
 	}
 	
 	sora::SoraSprite* rfMap::getMirrorImage() const {

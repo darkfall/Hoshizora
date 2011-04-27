@@ -86,6 +86,9 @@
 		8859BFA412B4809D00F3304A /* SoraFreetypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8859BF9E12B4809D00F3304A /* SoraFreetypeFont.cpp */; };
 		8859BFA512B4809D00F3304A /* SoraFTFontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8859BFA012B4809D00F3304A /* SoraFTFontManager.cpp */; };
 		88691167134E15850012BDE0 /* SoraCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88691166134E15850012BDE0 /* SoraCanvas.cpp */; };
+		886E0E2F1367A70100A77847 /* SoraSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E281367A70100A77847 /* SoraSound.cpp */; };
+		886E0E301367A70100A77847 /* SoraSoundLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E2A1367A70100A77847 /* SoraSoundLoader.cpp */; };
+		886E0E311367A70100A77847 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E2C1367A70100A77847 /* Sound.cpp */; };
 		887E24D61360BC3A00803DA6 /* gcnDraggableImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E24D51360BC3A00803DA6 /* gcnDraggableImageButton.cpp */; };
 		887E25581360C5F000803DA6 /* gcnDraggableImageButtonIncubator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E25571360C5F000803DA6 /* gcnDraggableImageButtonIncubator.cpp */; };
 		887E26531360F7E700803DA6 /* gcnSelectableContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E26521360F7E700803DA6 /* gcnSelectableContainer.cpp */; };
@@ -570,6 +573,13 @@
 		8859BFA112B4809D00F3304A /* SoraFTFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFTFontManager.h; sourceTree = "<group>"; };
 		88691165134E15850012BDE0 /* SoraCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCanvas.h; sourceTree = "<group>"; };
 		88691166134E15850012BDE0 /* SoraCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraCanvas.cpp; sourceTree = "<group>"; };
+		886E0E281367A70100A77847 /* SoraSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSound.cpp; sourceTree = "<group>"; };
+		886E0E291367A70100A77847 /* SoraSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSound.h; sourceTree = "<group>"; };
+		886E0E2A1367A70100A77847 /* SoraSoundLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSoundLoader.cpp; sourceTree = "<group>"; };
+		886E0E2B1367A70100A77847 /* SoraSoundLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSoundLoader.h; sourceTree = "<group>"; };
+		886E0E2C1367A70100A77847 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
+		886E0E2D1367A70100A77847 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		886E0E2E1367A70100A77847 /* SoundLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundLoader.h; sourceTree = "<group>"; };
 		887E24D41360BC3200803DA6 /* gcnDraggableImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnDraggableImageButton.h; sourceTree = "<group>"; };
 		887E24D51360BC3A00803DA6 /* gcnDraggableImageButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnDraggableImageButton.cpp; sourceTree = "<group>"; };
 		887E25561360C5F000803DA6 /* gcnDraggableImageButtonIncubator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnDraggableImageButtonIncubator.h; sourceTree = "<group>"; };
@@ -1642,6 +1652,13 @@
 				88B09C6C12B8AE6600777409 /* xmlgui.h */,
 				88AD7F7213415997000F4F68 /* jsongui.cpp */,
 				88AD7F7313415997000F4F68 /* jsongui.h */,
+				886E0E281367A70100A77847 /* SoraSound.cpp */,
+				886E0E291367A70100A77847 /* SoraSound.h */,
+				886E0E2A1367A70100A77847 /* SoraSoundLoader.cpp */,
+				886E0E2B1367A70100A77847 /* SoraSoundLoader.h */,
+				886E0E2C1367A70100A77847 /* Sound.cpp */,
+				886E0E2D1367A70100A77847 /* Sound.h */,
+				886E0E2E1367A70100A77847 /* SoundLoader.h */,
 			);
 			name = SoraGUIChan;
 			path = ../Plugins/SoraGUIChan;
@@ -2591,6 +2608,9 @@
 				88DCE78713667AF3005FBBE0 /* stb_image_aug.c in Sources */,
 				88DCE78B13667B0B005FBBE0 /* SoraCGGLShader.cpp in Sources */,
 				88DCE79313667B2D005FBBE0 /* SOIL.c in Sources */,
+				886E0E2F1367A70100A77847 /* SoraSound.cpp in Sources */,
+				886E0E301367A70100A77847 /* SoraSoundLoader.cpp in Sources */,
+				886E0E311367A70100A77847 /* Sound.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

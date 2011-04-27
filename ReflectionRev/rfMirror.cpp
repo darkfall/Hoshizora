@@ -30,16 +30,6 @@ namespace reflection {
 		float32 deltaDir = mirrorFace - inFace;
 
 		printf("inFace: %f, mirrorFace: %f, deltaFace: %f, out:%f\n", rfRadToDgr(inFace), rfRadToDgr(mirrorFace), rfRadToDgr(deltaDir), rfRadToDgr(inFace+deltaDir*2));
-		
-//		if(abs(deltaDir) == rfDgrToRad(90) || abs(deltaDir) == rfDgrToRad(180)) {
-//			pInLight = NULL;
-//			return NULL;
-//		}
-		
-	/*	if(deltaDir > rfDgrToRad(90))
-			deltaDir = rfDgrToRad(180)-deltaDir;
-		else if(deltaDir < rfDgrToRad(-90))
-			deltaDir = rfDgrToRad(180)+deltaDir;*/
 
 		inFace += deltaDir*2;
 //		inFace += rfDgrToRad(180.f);

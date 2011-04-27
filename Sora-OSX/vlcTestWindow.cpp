@@ -107,8 +107,7 @@ void vlcWindow::renderMovieImage() {
 bool vlcWindow::renderFunc() {
   //  sora::PROFILE("movierender");
 
-  //  canvas1->beginRender();
-	sora::SORA->beginScene(0);
+    canvas1->beginRender();
 	
 	pFont->setScale(4.f);
 
@@ -128,7 +127,7 @@ bool vlcWindow::renderFunc() {
                  moviePlayer->getAudioChannelNum());
 	
     
-  //  canvas1->finishRender();
+    canvas1->finishRender();
 
     if(moviePlayer->isPlaying()) {
         if(moviePlayer->frameChanged()) {
@@ -140,21 +139,23 @@ bool vlcWindow::renderFunc() {
             moviePlayer->setFinish();
         }
     } 
-   // canvas2->beginRender();
+    canvas2->beginRender();
 
     renderMovieImage();
 
     sora::GCN_GLOBAL->gcnDraw();
 
-   // canvas2->finishRender();
+   
+canvas2->finishRender();
     
   //  renderMovieImage();
    // sora::GCN_GLOBAL->gcnDraw();
 
+	sora::SORA->beginScene(0);
 
-  //  canvas1->render();
+    canvas1->render();
 
-//   canvas2->render();
+   canvas2->render();
 
     sora::SORA->endScene();
        
