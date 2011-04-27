@@ -25,6 +25,8 @@ namespace gcn {
 	MenuContainer::~MenuContainer() {
 		if(titleImage)
 			delete titleImage;
+		if(mMoveSound)
+			delete mMoveSound;
 	}
 	
 	void MenuContainer::setTitleImage(const std::string& title, bool bIsImage) {
@@ -36,17 +38,26 @@ namespace gcn {
 		if(bIsImage) {
 			titleImage = Image::load(title);
 			titleString.clear();
+			if(titleImage)
+				bottomPosY += titleImage->getHeight();
 		}
 		else {
 			titleString = title;
+			bottomPosY += getFont()->getHeight();
 		}
 	}
 	
 	void MenuContainer::keyPressed(KeyEvent& keyEvent) {
 		if(keyEvent.getKey() == Key::DOWN) {
 			focusNext();
+			
+			if(mMoveSound)
+				mMoveSound->play();
 		} else if(keyEvent.getKey() == Key::UP) {
 			focusPrevious();
+			
+			if(mMoveSound)
+				mMoveSound->play();
 		}
 	}
 	
@@ -54,6 +65,15 @@ namespace gcn {
 	}
 	
 	void MenuContainer::add(Widget* widget) {
+		Container::add(widget);
+		
+		switch (alignment) {
+			case ALIGN_LEFT: bottomPosX = 0; break;
+			case ALIGN_MIDDLE: bottomPosX = (getWidth()-widget->getWidth())<<1; break;
+			case ALIGN_RIGHT: bottomPosX = getWidth()-widget->getWidth(); break;
+		}
+		widget->setPosition(bottomPosX, bottomPosY);
+		bottomPosY += widget->getHeight();
 	}
 	
 	void MenuContainer::setAlignment(MenuItemAlignment align) {
@@ -62,6 +82,10 @@ namespace gcn {
 	
 	MenuContainer::MenuItemAlignment MenuContainer::getAlignment() const {
 		return alignment;
+	}
+	
+	void MenuContainer::setMoveSound(const std::string& soundName) {
+		mMoveSound = Sound::load(soundName);
 	}
 
 } // namespace gcn

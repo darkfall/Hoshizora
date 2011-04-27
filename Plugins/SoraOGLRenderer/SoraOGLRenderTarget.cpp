@@ -45,10 +45,6 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 		
 		// attach texture
 		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, glTex, NULL);
-		GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
-		if(status != GL_FRAMEBUFFER_COMPLETE_EXT) {
-			err = 1;
-		}
 		
 
 	//create depth buffer
@@ -66,6 +62,10 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 	}
 	
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+		GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
+		if(status != GL_FRAMEBUFFER_COMPLETE_EXT) {
+			err = 1;
+		}
 
 	if(!glTex || !frameBuffer)
 		err = 2;

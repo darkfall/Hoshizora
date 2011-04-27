@@ -162,8 +162,8 @@ namespace gcn {
 			graphics->setColor(getSelectionColor());
 			graphics->drawLine(selectRect.x, selectRect.y, selectRect.x+selectRect.width, selectRect.y);
 			graphics->drawLine(selectRect.x+selectRect.width, selectRect.y, selectRect.x+selectRect.width, selectRect.y+selectRect.height);
-			graphics->drawLine(selectRect.x+selectRect.width, selectRect.y+selectRect.height, selectRect.x, selectRect.y+selectRect.height);
-			graphics->drawLine(selectRect.x, selectRect.y+selectRect.height, selectRect.x, selectRect.y);
+			graphics->drawLine(selectRect.x, selectRect.y+selectRect.height, selectRect.x+selectRect.width, selectRect.y+selectRect.height);
+			graphics->drawLine(selectRect.x, selectRect.y, selectRect.x, selectRect.y+selectRect.height);
 		}
 	}
 

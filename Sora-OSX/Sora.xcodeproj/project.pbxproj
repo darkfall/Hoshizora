@@ -89,6 +89,21 @@
 		886E0E2F1367A70100A77847 /* SoraSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E281367A70100A77847 /* SoraSound.cpp */; };
 		886E0E301367A70100A77847 /* SoraSoundLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E2A1367A70100A77847 /* SoraSoundLoader.cpp */; };
 		886E0E311367A70100A77847 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E2C1367A70100A77847 /* Sound.cpp */; };
+		886E0FF713681F5800A77847 /* GLFW.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 886E0FDB13681F5800A77847 /* GLFW.lib */; };
+		886E0FF813681F5800A77847 /* linux_libglfw.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 886E0FDC13681F5800A77847 /* linux_libglfw.lib */; };
+		886E0FF913681F5800A77847 /* osx_libglfw_i386.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 886E0FDD13681F5800A77847 /* osx_libglfw_i386.lib */; };
+		886E0FFA13681F5800A77847 /* osx_libglfw_x86_64.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 886E0FDE13681F5800A77847 /* osx_libglfw_x86_64.lib */; };
+		886E0FFC13681F5800A77847 /* image_DXT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FE113681F5800A77847 /* image_DXT.cpp */; };
+		886E0FFE13681F5800A77847 /* image_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FE413681F5800A77847 /* image_helper.cpp */; };
+		886E100013681F5800A77847 /* SOIL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FE713681F5800A77847 /* SOIL.cpp */; };
+		886E100213681F5800A77847 /* stb_image_aug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FEB13681F5800A77847 /* stb_image_aug.cpp */; };
+		886E100313681F5800A77847 /* SoraOGLInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */; };
+		886E100413681F5800A77847 /* SoraOGLKeyPoll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */; };
+		886E100513681F5800A77847 /* SoraOGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FF313681F5800A77847 /* SoraOGLRenderer.cpp */; };
+		886E100613681F5800A77847 /* SoraOGLRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FF513681F5800A77847 /* SoraOGLRenderTarget.cpp */; };
+		886E100D13681F6100A77847 /* SoraCGGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E100B13681F6100A77847 /* SoraCGGLShader.cpp */; };
+		886E10311368252E00A77847 /* gcnProgressBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E10301368252E00A77847 /* gcnProgressBar.cpp */; };
+		886E1037136826A800A77847 /* SoraSoundEffectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E1036136826A800A77847 /* SoraSoundEffectManager.cpp */; };
 		887E24D61360BC3A00803DA6 /* gcnDraggableImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E24D51360BC3A00803DA6 /* gcnDraggableImageButton.cpp */; };
 		887E25581360C5F000803DA6 /* gcnDraggableImageButtonIncubator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E25571360C5F000803DA6 /* gcnDraggableImageButtonIncubator.cpp */; };
 		887E26531360F7E700803DA6 /* gcnSelectableContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E26521360F7E700803DA6 /* gcnSelectableContainer.cpp */; };
@@ -245,17 +260,6 @@
 		88DCB4B012DE914000C0B009 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB4AC12DE914000C0B009 /* tinyxmlparser.cpp */; };
 		88DCE62113666885005FBBE0 /* kalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE61B13666885005FBBE0 /* kalloc.c */; };
 		88DCE62213666885005FBBE0 /* md5lib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE61E13666885005FBBE0 /* md5lib.cpp */; };
-		88DCE68A13666F82005FBBE0 /* SoraOGLKeyPoll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE67913666F82005FBBE0 /* SoraOGLKeyPoll.cpp */; };
-		88DCE68B13666F82005FBBE0 /* SoraOGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE67B13666F82005FBBE0 /* SoraOGLRenderer.cpp */; };
-		88DCE68C13666F82005FBBE0 /* SoraOGLRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE67D13666F82005FBBE0 /* SoraOGLRenderTarget.cpp */; };
-		88DCE713136678AF005FBBE0 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DCE711136678AF005FBBE0 /* libglfw.a */; };
-		88DCE714136678AF005FBBE0 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DCE712136678AF005FBBE0 /* libglfw.dylib */; };
-		88DCE744136679CD005FBBE0 /* SoraOGLInputGLFW3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE742136679CD005FBBE0 /* SoraOGLInputGLFW3.cpp */; };
-		88DCE78113667AF3005FBBE0 /* image_DXT.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE77213667AF3005FBBE0 /* image_DXT.c */; };
-		88DCE78313667AF3005FBBE0 /* image_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE77513667AF3005FBBE0 /* image_helper.c */; };
-		88DCE78713667AF3005FBBE0 /* stb_image_aug.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE77C13667AF3005FBBE0 /* stb_image_aug.c */; };
-		88DCE78B13667B0B005FBBE0 /* SoraCGGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE78913667B0B005FBBE0 /* SoraCGGLShader.cpp */; };
-		88DCE79313667B2D005FBBE0 /* SOIL.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DCE79213667B2D005FBBE0 /* SOIL.c */; };
 		88DD0B9312EAA708005555F6 /* SoraAS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0B8F12EAA708005555F6 /* SoraAS.cpp */; };
 		88DD0B9712EAA7B9005555F6 /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0B9612EAA7B9005555F6 /* memory.cpp */; };
 		88DD0CBE12EB9311005555F6 /* orz.c in Sources */ = {isa = PBXBuildFile; fileRef = 88DD0CBA12EB9311005555F6 /* orz.c */; };
@@ -580,6 +584,35 @@
 		886E0E2C1367A70100A77847 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
 		886E0E2D1367A70100A77847 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		886E0E2E1367A70100A77847 /* SoundLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundLoader.h; sourceTree = "<group>"; };
+		886E0FDA13681F5800A77847 /* glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw.h; sourceTree = "<group>"; };
+		886E0FDB13681F5800A77847 /* GLFW.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = GLFW.lib; sourceTree = "<group>"; };
+		886E0FDC13681F5800A77847 /* linux_libglfw.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = linux_libglfw.lib; sourceTree = "<group>"; };
+		886E0FDD13681F5800A77847 /* osx_libglfw_i386.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libglfw_i386.lib; sourceTree = "<group>"; };
+		886E0FDE13681F5800A77847 /* osx_libglfw_x86_64.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libglfw_x86_64.lib; sourceTree = "<group>"; };
+		886E0FE113681F5800A77847 /* image_DXT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image_DXT.cpp; sourceTree = "<group>"; };
+		886E0FE213681F5800A77847 /* image_DXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_DXT.h; sourceTree = "<group>"; };
+		886E0FE413681F5800A77847 /* image_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image_helper.cpp; sourceTree = "<group>"; };
+		886E0FE513681F5800A77847 /* image_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_helper.h; sourceTree = "<group>"; };
+		886E0FE713681F5800A77847 /* SOIL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SOIL.cpp; sourceTree = "<group>"; };
+		886E0FE813681F5800A77847 /* SOIL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOIL.h; sourceTree = "<group>"; };
+		886E0FE913681F5800A77847 /* soil.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = soil.html; sourceTree = "<group>"; };
+		886E0FEB13681F5800A77847 /* stb_image_aug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image_aug.cpp; sourceTree = "<group>"; };
+		886E0FEC13681F5800A77847 /* stb_image_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_aug.h; sourceTree = "<group>"; };
+		886E0FEE13681F5800A77847 /* stbi_DDS_aug_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug_c.h; sourceTree = "<group>"; };
+		886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLInput.cpp; sourceTree = "<group>"; };
+		886E0FF013681F5800A77847 /* SoraOGLInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLInput.h; sourceTree = "<group>"; };
+		886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLKeyPoll.cpp; sourceTree = "<group>"; };
+		886E0FF213681F5800A77847 /* SoraOGLKeyPoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLKeyPoll.h; sourceTree = "<group>"; };
+		886E0FF313681F5800A77847 /* SoraOGLRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLRenderer.cpp; sourceTree = "<group>"; };
+		886E0FF413681F5800A77847 /* SoraOGLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderer.h; sourceTree = "<group>"; };
+		886E0FF513681F5800A77847 /* SoraOGLRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLRenderTarget.cpp; sourceTree = "<group>"; };
+		886E0FF613681F5800A77847 /* SoraOGLRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderTarget.h; sourceTree = "<group>"; };
+		886E100B13681F6100A77847 /* SoraCGGLShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraCGGLShader.cpp; path = ../Plugins/SoraShader/SoraCGGLShader.cpp; sourceTree = SOURCE_ROOT; };
+		886E100C13681F6100A77847 /* SoraCGGLShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraCGGLShader.h; path = ../Plugins/SoraShader/SoraCGGLShader.h; sourceTree = SOURCE_ROOT; };
+		886E102F1368252E00A77847 /* gcnProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnProgressBar.h; sourceTree = "<group>"; };
+		886E10301368252E00A77847 /* gcnProgressBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnProgressBar.cpp; sourceTree = "<group>"; };
+		886E1035136826A800A77847 /* SoraSoundEffectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSoundEffectManager.h; sourceTree = "<group>"; };
+		886E1036136826A800A77847 /* SoraSoundEffectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSoundEffectManager.cpp; sourceTree = "<group>"; };
 		887E24D41360BC3200803DA6 /* gcnDraggableImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnDraggableImageButton.h; sourceTree = "<group>"; };
 		887E24D51360BC3A00803DA6 /* gcnDraggableImageButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnDraggableImageButton.cpp; sourceTree = "<group>"; };
 		887E25561360C5F000803DA6 /* gcnDraggableImageButtonIncubator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnDraggableImageButtonIncubator.h; sourceTree = "<group>"; };
@@ -989,33 +1022,6 @@
 		88DCE61E13666885005FBBE0 /* md5lib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5lib.cpp; sourceTree = "<group>"; };
 		88DCE61F13666885005FBBE0 /* md5lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5lib.h; sourceTree = "<group>"; };
 		88DCE62013666885005FBBE0 /* sort.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sort.hh; sourceTree = "<group>"; };
-		88DCE66113666F82005FBBE0 /* glext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glext.h; sourceTree = "<group>"; };
-		88DCE66213666F82005FBBE0 /* glfw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw3.h; sourceTree = "<group>"; };
-		88DCE66313666F82005FBBE0 /* glxext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glxext.h; sourceTree = "<group>"; };
-		88DCE66413666F82005FBBE0 /* wglext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wglext.h; sourceTree = "<group>"; };
-		88DCE67913666F82005FBBE0 /* SoraOGLKeyPoll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLKeyPoll.cpp; sourceTree = "<group>"; };
-		88DCE67A13666F82005FBBE0 /* SoraOGLKeyPoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLKeyPoll.h; sourceTree = "<group>"; };
-		88DCE67B13666F82005FBBE0 /* SoraOGLRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLRenderer.cpp; sourceTree = "<group>"; };
-		88DCE67C13666F82005FBBE0 /* SoraOGLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderer.h; sourceTree = "<group>"; };
-		88DCE67D13666F82005FBBE0 /* SoraOGLRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLRenderTarget.cpp; sourceTree = "<group>"; };
-		88DCE67E13666F82005FBBE0 /* SoraOGLRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderTarget.h; sourceTree = "<group>"; };
-		88DCE711136678AF005FBBE0 /* libglfw.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libglfw.a; sourceTree = "<group>"; };
-		88DCE712136678AF005FBBE0 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libglfw.dylib; sourceTree = "<group>"; };
-		88DCE742136679CD005FBBE0 /* SoraOGLInputGLFW3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLInputGLFW3.cpp; sourceTree = "<group>"; };
-		88DCE743136679CD005FBBE0 /* SoraOGLInputGLFW3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLInputGLFW3.h; sourceTree = "<group>"; };
-		88DCE77213667AF3005FBBE0 /* image_DXT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = image_DXT.c; sourceTree = "<group>"; };
-		88DCE77413667AF3005FBBE0 /* image_DXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_DXT.h; sourceTree = "<group>"; };
-		88DCE77513667AF3005FBBE0 /* image_helper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = image_helper.c; sourceTree = "<group>"; };
-		88DCE77713667AF3005FBBE0 /* image_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_helper.h; sourceTree = "<group>"; };
-		88DCE77A13667AF3005FBBE0 /* SOIL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOIL.h; sourceTree = "<group>"; };
-		88DCE77B13667AF3005FBBE0 /* soil.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = soil.html; sourceTree = "<group>"; };
-		88DCE77C13667AF3005FBBE0 /* stb_image_aug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image_aug.c; sourceTree = "<group>"; };
-		88DCE77E13667AF3005FBBE0 /* stb_image_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_aug.h; sourceTree = "<group>"; };
-		88DCE77F13667AF3005FBBE0 /* stbi_DDS_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug.h; sourceTree = "<group>"; };
-		88DCE78013667AF3005FBBE0 /* stbi_DDS_aug_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug_c.h; sourceTree = "<group>"; };
-		88DCE78913667B0B005FBBE0 /* SoraCGGLShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraCGGLShader.cpp; path = ../Plugins/SoraShader/SoraCGGLShader.cpp; sourceTree = SOURCE_ROOT; };
-		88DCE78A13667B0B005FBBE0 /* SoraCGGLShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraCGGLShader.h; path = ../Plugins/SoraShader/SoraCGGLShader.h; sourceTree = SOURCE_ROOT; };
-		88DCE79213667B2D005FBBE0 /* SOIL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SOIL.c; sourceTree = "<group>"; };
 		88DD0B8E12EAA631005555F6 /* stringId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringId.h; sourceTree = "<group>"; };
 		88DD0B8F12EAA708005555F6 /* SoraAS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraAS.cpp; path = Experimental/SoraAS.cpp; sourceTree = "<group>"; };
 		88DD0B9012EAA708005555F6 /* SoraAS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraAS.h; path = Experimental/SoraAS.h; sourceTree = "<group>"; };
@@ -1067,8 +1073,10 @@
 				88BF9F6E135AA63200BB8E70 /* Cg.framework in Frameworks */,
 				8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */,
 				887E35891362C6F400803DA6 /* libfreetype.6.dylib in Frameworks */,
-				88DCE713136678AF005FBBE0 /* libglfw.a in Frameworks */,
-				88DCE714136678AF005FBBE0 /* libglfw.dylib in Frameworks */,
+				886E0FF713681F5800A77847 /* GLFW.lib in Frameworks */,
+				886E0FF813681F5800A77847 /* linux_libglfw.lib in Frameworks */,
+				886E0FF913681F5800A77847 /* osx_libglfw_i386.lib in Frameworks */,
+				886E0FFA13681F5800A77847 /* osx_libglfw_x86_64.lib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,6 +1164,8 @@
 				887E3B9D1363AFE600803DA6 /* gcnMenuContainer.cpp */,
 				887E3B9F1363B0A800803DA6 /* gcnImageEffectImage.h */,
 				887E3BA01363B0A800803DA6 /* gcnImageEffectImage.cpp */,
+				886E102F1368252E00A77847 /* gcnProgressBar.h */,
+				886E10301368252E00A77847 /* gcnProgressBar.cpp */,
 			);
 			name = gcnExtend;
 			path = ../Plugins/gcnExtend;
@@ -1558,6 +1568,73 @@
 			);
 			path = services;
 			sourceTree = "<group>";
+		};
+		886E0FD713681F5800A77847 /* SoraOGLRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				886E100B13681F6100A77847 /* SoraCGGLShader.cpp */,
+				886E100C13681F6100A77847 /* SoraCGGLShader.h */,
+				886E0FD813681F5800A77847 /* glfw */,
+				886E0FDB13681F5800A77847 /* GLFW.lib */,
+				886E0FDC13681F5800A77847 /* linux_libglfw.lib */,
+				886E0FDD13681F5800A77847 /* osx_libglfw_i386.lib */,
+				886E0FDE13681F5800A77847 /* osx_libglfw_x86_64.lib */,
+				886E0FDF13681F5800A77847 /* soil */,
+				886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */,
+				886E0FF013681F5800A77847 /* SoraOGLInput.h */,
+				886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */,
+				886E0FF213681F5800A77847 /* SoraOGLKeyPoll.h */,
+				886E0FF313681F5800A77847 /* SoraOGLRenderer.cpp */,
+				886E0FF413681F5800A77847 /* SoraOGLRenderer.h */,
+				886E0FF513681F5800A77847 /* SoraOGLRenderTarget.cpp */,
+				886E0FF613681F5800A77847 /* SoraOGLRenderTarget.h */,
+			);
+			name = SoraOGLRenderer;
+			path = ../Plugins/SoraOGLRenderer;
+			sourceTree = SOURCE_ROOT;
+		};
+		886E0FD813681F5800A77847 /* glfw */ = {
+			isa = PBXGroup;
+			children = (
+				886E0FD913681F5800A77847 /* GL */,
+			);
+			path = glfw;
+			sourceTree = "<group>";
+		};
+		886E0FD913681F5800A77847 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				886E0FDA13681F5800A77847 /* glfw.h */,
+			);
+			path = GL;
+			sourceTree = "<group>";
+		};
+		886E0FDF13681F5800A77847 /* soil */ = {
+			isa = PBXGroup;
+			children = (
+				886E0FE113681F5800A77847 /* image_DXT.cpp */,
+				886E0FE213681F5800A77847 /* image_DXT.h */,
+				886E0FE413681F5800A77847 /* image_helper.cpp */,
+				886E0FE513681F5800A77847 /* image_helper.h */,
+				886E0FE713681F5800A77847 /* SOIL.cpp */,
+				886E0FE813681F5800A77847 /* SOIL.h */,
+				886E0FE913681F5800A77847 /* soil.html */,
+				886E0FEB13681F5800A77847 /* stb_image_aug.cpp */,
+				886E0FEC13681F5800A77847 /* stb_image_aug.h */,
+				886E0FEE13681F5800A77847 /* stbi_DDS_aug_c.h */,
+			);
+			path = soil;
+			sourceTree = "<group>";
+		};
+		886E1034136826A000A77847 /* SoraSoundEffectManager */ = {
+			isa = PBXGroup;
+			children = (
+				886E1035136826A800A77847 /* SoraSoundEffectManager.h */,
+				886E1036136826A800A77847 /* SoraSoundEffectManager.cpp */,
+			);
+			name = SoraSoundEffectManager;
+			path = ../Plugins/SoraSoundEffectManager;
+			sourceTree = SOURCE_ROOT;
 		};
 		887E2934136152DD00803DA6 /* Reflection */ = {
 			isa = PBXGroup;
@@ -2037,7 +2114,8 @@
 		88D7F51B1285190700BA1949 /* Sora */ = {
 			isa = PBXGroup;
 			children = (
-				88DCE65F13666F82005FBBE0 /* GLFW3 */,
+				886E1034136826A000A77847 /* SoraSoundEffectManager */,
+				886E0FD713681F5800A77847 /* SoraOGLRenderer */,
 				8802D4B9135FA8C2001FD2D8 /* SoraFMODSoundSystem */,
 				88BA9E00135A96E500C282EB /* SoraSpriteAnimation */,
 				88BD14821346ADCA0068AABA /* SoraLua */,
@@ -2196,65 +2274,6 @@
 				88DCE62013666885005FBBE0 /* sort.hh */,
 			);
 			path = support;
-			sourceTree = "<group>";
-		};
-		88DCE65F13666F82005FBBE0 /* GLFW3 */ = {
-			isa = PBXGroup;
-			children = (
-				88DCE711136678AF005FBBE0 /* libglfw.a */,
-				88DCE712136678AF005FBBE0 /* libglfw.dylib */,
-				88DCE66013666F82005FBBE0 /* GL */,
-				88DCE66713666F82005FBBE0 /* soil */,
-				88DCE742136679CD005FBBE0 /* SoraOGLInputGLFW3.cpp */,
-				88DCE743136679CD005FBBE0 /* SoraOGLInputGLFW3.h */,
-				88DCE67913666F82005FBBE0 /* SoraOGLKeyPoll.cpp */,
-				88DCE67A13666F82005FBBE0 /* SoraOGLKeyPoll.h */,
-				88DCE67B13666F82005FBBE0 /* SoraOGLRenderer.cpp */,
-				88DCE67C13666F82005FBBE0 /* SoraOGLRenderer.h */,
-				88DCE67D13666F82005FBBE0 /* SoraOGLRenderTarget.cpp */,
-				88DCE67E13666F82005FBBE0 /* SoraOGLRenderTarget.h */,
-				88DCE78913667B0B005FBBE0 /* SoraCGGLShader.cpp */,
-				88DCE78A13667B0B005FBBE0 /* SoraCGGLShader.h */,
-			);
-			name = GLFW3;
-			path = ../Plugins/GLFW3;
-			sourceTree = SOURCE_ROOT;
-		};
-		88DCE66013666F82005FBBE0 /* GL */ = {
-			isa = PBXGroup;
-			children = (
-				88DCE66113666F82005FBBE0 /* glext.h */,
-				88DCE66213666F82005FBBE0 /* glfw3.h */,
-				88DCE66313666F82005FBBE0 /* glxext.h */,
-				88DCE66413666F82005FBBE0 /* wglext.h */,
-			);
-			path = GL;
-			sourceTree = "<group>";
-		};
-		88DCE66713666F82005FBBE0 /* soil */ = {
-			isa = PBXGroup;
-			children = (
-				88DCE77113667AF3005FBBE0 /* soil */,
-			);
-			path = soil;
-			sourceTree = "<group>";
-		};
-		88DCE77113667AF3005FBBE0 /* soil */ = {
-			isa = PBXGroup;
-			children = (
-				88DCE77213667AF3005FBBE0 /* image_DXT.c */,
-				88DCE77413667AF3005FBBE0 /* image_DXT.h */,
-				88DCE77513667AF3005FBBE0 /* image_helper.c */,
-				88DCE77713667AF3005FBBE0 /* image_helper.h */,
-				88DCE77A13667AF3005FBBE0 /* SOIL.h */,
-				88DCE77B13667AF3005FBBE0 /* soil.html */,
-				88DCE77C13667AF3005FBBE0 /* stb_image_aug.c */,
-				88DCE79213667B2D005FBBE0 /* SOIL.c */,
-				88DCE77E13667AF3005FBBE0 /* stb_image_aug.h */,
-				88DCE77F13667AF3005FBBE0 /* stbi_DDS_aug.h */,
-				88DCE78013667AF3005FBBE0 /* stbi_DDS_aug_c.h */,
-			);
-			name = soil;
 			sourceTree = "<group>";
 		};
 		88DD0C1F12EB5B48005555F6 /* tcmalloc */ = {
@@ -2599,18 +2618,20 @@
 				887E3E601363D55800803DA6 /* rfLightRenderer.cpp in Sources */,
 				88DCE62113666885005FBBE0 /* kalloc.c in Sources */,
 				88DCE62213666885005FBBE0 /* md5lib.cpp in Sources */,
-				88DCE68A13666F82005FBBE0 /* SoraOGLKeyPoll.cpp in Sources */,
-				88DCE68B13666F82005FBBE0 /* SoraOGLRenderer.cpp in Sources */,
-				88DCE68C13666F82005FBBE0 /* SoraOGLRenderTarget.cpp in Sources */,
-				88DCE744136679CD005FBBE0 /* SoraOGLInputGLFW3.cpp in Sources */,
-				88DCE78113667AF3005FBBE0 /* image_DXT.c in Sources */,
-				88DCE78313667AF3005FBBE0 /* image_helper.c in Sources */,
-				88DCE78713667AF3005FBBE0 /* stb_image_aug.c in Sources */,
-				88DCE78B13667B0B005FBBE0 /* SoraCGGLShader.cpp in Sources */,
-				88DCE79313667B2D005FBBE0 /* SOIL.c in Sources */,
 				886E0E2F1367A70100A77847 /* SoraSound.cpp in Sources */,
 				886E0E301367A70100A77847 /* SoraSoundLoader.cpp in Sources */,
 				886E0E311367A70100A77847 /* Sound.cpp in Sources */,
+				886E0FFC13681F5800A77847 /* image_DXT.cpp in Sources */,
+				886E0FFE13681F5800A77847 /* image_helper.cpp in Sources */,
+				886E100013681F5800A77847 /* SOIL.cpp in Sources */,
+				886E100213681F5800A77847 /* stb_image_aug.cpp in Sources */,
+				886E100313681F5800A77847 /* SoraOGLInput.cpp in Sources */,
+				886E100413681F5800A77847 /* SoraOGLKeyPoll.cpp in Sources */,
+				886E100513681F5800A77847 /* SoraOGLRenderer.cpp in Sources */,
+				886E100613681F5800A77847 /* SoraOGLRenderTarget.cpp in Sources */,
+				886E100D13681F6100A77847 /* SoraCGGLShader.cpp in Sources */,
+				886E10311368252E00A77847 /* gcnProgressBar.cpp in Sources */,
+				886E1037136826A800A77847 /* SoraSoundEffectManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 #define GCN_MENU_CONTAINER_H_
 
 #include "SoraGUIChan/guichan.hpp"
+#include "SoraGUIChan/Sound.h"
 
 namespace gcn {
 	
@@ -55,6 +56,7 @@ namespace gcn {
 		void setAlignment(MenuItemAlignment align);
 		MenuItemAlignment getAlignment() const;
 		
+		void setMoveSound(const std::string& soundName);		
 		
 	private:
 		Image* titleImage;
@@ -63,6 +65,8 @@ namespace gcn {
 		int bottomPosX, bottomPosY;
 		
 		MenuItemAlignment alignment;
+		
+		Sound* mMoveSound;
 	};
 	
 } // namespace gcn

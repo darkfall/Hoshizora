@@ -35,6 +35,8 @@ namespace sora {
 		bool	joyKeyState(int32 key, unsigned char state);
 		bool	setJoyKey(int32 key);
 		bool	hasJoy();
+		
+		void setWindowHandle(ulong32 handle) {}
 	};
 	
 } // namespace sora

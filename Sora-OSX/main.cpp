@@ -4,13 +4,11 @@
 #include "SoraCore.h"
 
 #include "SoraWindowInfo.h"
-#include "SoraRenderTarget.h"
 
 #include "SoraFont.h"
 
 #include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraFreetypeFont/SoraFTFontManager.h"
-#include "SoraQTSoundSystem/SoraQTSoundSystem.h"
 
 #include "testMainWindow.h"
 #include "rfMainWindow.h"
@@ -18,10 +16,6 @@
 
 #include "SoraLocalizer.h"
 
-
-#include "TemplateTransformer.h"
-
-#include "Experimental/state_test.h"
 #include "SoraMemoryFile.h"
 
 #include "vlcTestWindow.h"
@@ -38,10 +32,11 @@
 
 #include "../ReflectionRev/rfMirror.h"
 
-#include "GLFW3/SoraOGLInputGLFW3.h"
-#include "GLFW3/SoraOGLRenderer.h"
+//#include "GLFW3/SoraOGLInputGLFW3.h"
+//#include "GLFW3/SoraOGLRenderer.h"
 #include "SoraFMODSoundSystem/SoraFMODSoundSystem.h"
-
+#include "SoraOGLRenderer/SoraOGLRenderer.h"
+#include "SoraOGLRenderer/SoraOGLInput.h"
 
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();

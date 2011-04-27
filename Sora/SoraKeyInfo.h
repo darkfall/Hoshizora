@@ -151,7 +151,7 @@
 #endif
 
 #ifdef USE_GLFW_KEYMAP
-#include "GLFW3/GL/glfw3.h"
+//#include "GLFW3/GL/glfw3.h"
 
 #if GLFW_VERSION_MAJOR == 3
 

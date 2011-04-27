@@ -78,15 +78,14 @@ bool mainWindow::renderFunc() {
 
 	canvas1->beginRender();
 	
-	pSpr->render(0.f, 0.f);
-	pSpr2->render(100.f, 100.f);
+//	pSpr->render(0.f, 0.f);
+//	pSpr2->render(100.f, 100.f);
 	
 	canvas1->finishRender();
 		
 	sora->beginScene();
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
-	
 	
 	canvas1->render();
 	

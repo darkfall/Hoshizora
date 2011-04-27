@@ -71,9 +71,9 @@ namespace sora {
 
 		void SoraAudiereMusicFile::play() { 
 			if(is_open()) {
-				if(sound->isPlaying())
-					return;
-				publishEvent(SORAPB_EV_PLAY_STARTED);
+				if(mEventPublish) {
+					publishEvent(SORAPB_EV_PLAY_STARTED);
+				}
 				sound->setPosition(0);
 				sound->play();
 			}
@@ -85,14 +85,16 @@ namespace sora {
 		}
 		void SoraAudiereMusicFile::pause() {
 			if(is_open()) {
-				publishEvent(SORAPB_EV_PLAY_PAUSED);
+				if(mEventPublish)
+					publishEvent(SORAPB_EV_PLAY_PAUSED);
 				pausePos = getMusicPosition();
 				stop();
 			}
 		}
 		void SoraAudiereMusicFile::resume() {
 			if(is_open()) {
-				publishEvent(SORAPB_EV_PLAY_RESUMED);
+				if(mEventPublish)
+					publishEvent(SORAPB_EV_PLAY_RESUMED);
 				setMusicPosition(pausePos);
 				sound->play();
 			}

@@ -26,9 +26,13 @@
 
 
 #ifdef __GNUC__
-	#if __GNUC__ > 4
+	#if __GNUC__ >= 4
 		#include <tr1/unordered_map>
-		#define hash_map std::tr1::unordered_map
+namespace sora {
+	
+		using std::tr1::unordered_map;
+		#define hash_map unordered_map
+}
 	#else
 		#include <ext/hash_map>
 namespace sora {

@@ -54,11 +54,17 @@ namespace sora {
     
     class SoraPlaybackEventHandler: public SoraEventHandler {
     public:
-        SoraPlaybackEventHandler(): pEventHandler(NULL) {}
+        SoraPlaybackEventHandler(): pEventHandler(NULL), mEventPublish(false) {}
         
         void registerEventHandler(SoraEventHandler* pHandler) {
             pEventHandler = pHandler;
         }
+		
+		/*
+		 enable or disable event publishing
+		 */
+		void enableEventPublish(bool flag) { mEventPublish = flag; }
+		bool isEventPublishEnabled() const { return mEventPublish; }
         
         void publishEvent(SORA_PLAYBACK_EVENT eventType) {
             event.setEventType(eventType);
@@ -71,10 +77,11 @@ namespace sora {
         // default does nothing
         virtual void onSoundEvent(const SoraPlaybackEvent* pEvent) {}
         
-    private:
+    protected:
         SoraEventHandler* pEventHandler;
         
         SoraPlaybackEvent event;
+		bool mEventPublish;
     };
 } // namespace sora
 
