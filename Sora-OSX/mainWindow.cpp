@@ -23,6 +23,7 @@
 #include "../ReflectionRev/rfMap.h"
 #include "../ReflectionRev/rfShape.h"
 
+#include "SoraSoundManager/SoraBGMManager.h"
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
@@ -58,10 +59,17 @@ bool mainWindow::updateFunc() {
 				map->loadConfig(L"mapconf.txt");
 				map->load(L"lalala.txt");
 			}
+		} else if(ev.key == SORA_KEY_N) {
+			sora::SoraBGMManager::Instance()->toPrevBGM();
+		} else if(ev.key == SORA_KEY_M) {
+			sora::SoraBGMManager::Instance()->toNextBGM();
+		} else if(ev.key == SORA_KEY_B) {
+			sora::SoraBGMManager::Instance()->pause();
+		} else if(ev.key == SORA_KEY_V) {
+			sora::SoraBGMManager::Instance()->resume();
 		}
 	}
 
-	
     return false;
 }
 
@@ -173,6 +181,10 @@ void mainWindow::init() {
 		canvas1 = new sora::SoraBaseCanvas(getWindowWidth(), getWindowHeight(), true);
 		rt1 = sora::SORA->createTarget(getWindowWidth(), getWindowHeight());
 	}
+	
+	sora::SoraBGMManager::Instance()->play(L"01.ogg", true);
+	sora::SoraBGMManager::Instance()->play(L"02.mp3", true);
+	sora::SoraBGMManager::Instance()->setFadeTime(1.f, 1.f);
 }
 
 void mainWindow::onMenuClick(const menuEvent* mev) {

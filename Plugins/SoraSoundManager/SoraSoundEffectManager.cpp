@@ -96,6 +96,7 @@ namespace sora {
 			pefile->play();
 			return true;
 		}
+		return false;
 	}
 
 } // namespace sora

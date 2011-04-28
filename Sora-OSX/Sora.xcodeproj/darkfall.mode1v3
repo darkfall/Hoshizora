@@ -197,48 +197,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>886E105413682C8500A77847</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>SoraSoundEffectManager.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>886E105513682C8500A77847</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>SoraSoundEffectManager.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>886E109F136831BB00A77847</string>
-						<key>history</key>
-						<array>
-							<string>886E105613682C8500A77847</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {762, 777}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>374 60 762 818 0 0 1440 878 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -308,8 +267,9 @@
 								<string>08FB7794FE84155DC02AAC07</string>
 								<string>88B0906A12B80C5100777409</string>
 								<string>88D7F51B1285190700BA1949</string>
-								<string>886E1034136826A000A77847</string>
+								<string>886E10BF1368E67800A77847</string>
 								<string>8802D4B9135FA8C2001FD2D8</string>
+								<string>883806021342587B00A47BD9</string>
 								<string>88B09BEB12B8AE6600777409</string>
 								<string>08FB7795FE84155DC02AAC07</string>
 								<string>887E2934136152DD00803DA6</string>
@@ -323,14 +283,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>55</integer>
-									<integer>30</integer>
+									<integer>11</integer>
+									<integer>10</integer>
 									<integer>9</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 2918}, {266, 966}}</string>
+							<string>{{0, 117}, {266, 966}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -367,7 +327,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraSoundLoader.cpp</string>
+								<string>SoraBGMManager.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -375,11 +335,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraSoundLoader.cpp</string>
+										<string>SoraBGMManager.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>886E109E136831BB00A77847</string>
+										<string>886E11111369054000A77847</string>
 										<key>history</key>
 										<array>
 											<string>88BFA0BD135AAEE700BB8E70</string>
@@ -587,24 +547,33 @@
 											<string>886E10271368209000A77847</string>
 											<string>886E10291368209000A77847</string>
 											<string>886E102A1368209000A77847</string>
-											<string>886E102B1368209000A77847</string>
 											<string>886E102C1368209000A77847</string>
-											<string>886E103A13682B3B00A77847</string>
 											<string>886E103B13682B3B00A77847</string>
 											<string>886E103E13682B3B00A77847</string>
 											<string>886E103F13682B3B00A77847</string>
 											<string>886E104013682B3B00A77847</string>
-											<string>886E104113682B3B00A77847</string>
-											<string>886E104213682B3B00A77847</string>
 											<string>886E104313682B3B00A77847</string>
 											<string>886E105C13682DB200A77847</string>
-											<string>886E107D13682F5200A77847</string>
 											<string>886E107F13682F5200A77847</string>
 											<string>886E10911368310E00A77847</string>
-											<string>886E10921368310E00A77847</string>
-											<string>886E10931368310E00A77847</string>
-											<string>886E10971368312D00A77847</string>
-											<string>886E0F511367B76D00A77847</string>
+											<string>886E10A01368BABF00A77847</string>
+											<string>886E10B31368E65600A77847</string>
+											<string>886E10B41368E65600A77847</string>
+											<string>886E10B51368E65600A77847</string>
+											<string>886E10B61368E65600A77847</string>
+											<string>886E10C61368E68400A77847</string>
+											<string>886E10D91368E7A700A77847</string>
+											<string>886E10F61368E90F00A77847</string>
+											<string>886E10F71368E90F00A77847</string>
+											<string>886E10F81368E90F00A77847</string>
+											<string>886E10F91368E90F00A77847</string>
+											<string>886E10FB1368E90F00A77847</string>
+											<string>886E10FC1368E90F00A77847</string>
+											<string>886E10FD1368E90F00A77847</string>
+											<string>886E10FE1368E90F00A77847</string>
+											<string>886E11071368E92600A77847</string>
+											<string>886E110F1369054000A77847</string>
+											<string>886E11101369054000A77847</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -805,10 +774,9 @@
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>886E0FB113681DBC00A77847</string>
 		<string>886E0FB213681DBC00A77847</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>887022D01346AB4300AE8DD7</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>886E105413682C8500A77847</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -828,14 +796,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraSoundEffectManager.h</string>
+								<string>SoraPlugin.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -852,6 +818,8 @@
 							<string>328pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1138,6 +1106,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1183,7 +1153,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
