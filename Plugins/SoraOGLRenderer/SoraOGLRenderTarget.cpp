@@ -21,7 +21,7 @@
 namespace sora {
 
 SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
-    w(_w), h(_h), zbuffer(_zbuffer), err(0), frameBuffer(0), depthBuffer(0) {
+    w(_w), h(_h), zbuffer(_zbuffer), err(0), frameBuffer(0), depthBuffer(0), tex(0) {
 	GLuint gl_error;
 
 	glEnable(GL_TEXTURE_2D);

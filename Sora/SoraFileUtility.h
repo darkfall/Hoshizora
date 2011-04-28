@@ -44,7 +44,7 @@ namespace sora {
 			wchar_t buffer[MAX_PATH];
 			GetCurrentDirectory(MAX_PATH, buffer);
 			
-			return buffer+L"/"+filePath;
+			return SoraWString(buffer)+L"/"+filePath;
 #elif defined(OS_OSX)
 			return osxApplicationPath()+L"/"+filePath;
 #elif defined(OS_IOS)
@@ -73,7 +73,7 @@ namespace sora {
 			wchar_t buffer[MAX_PATH];
 			GetCurrentDirectory(MAX_PATH, buffer);
 			
-			return buffer+L"/";
+			return SoraWString(buffer)+L"/";
 #elif defined(OS_OSX)
 			return osxApplicationPath()+L"/";
 #elif defined(OS_IOS)

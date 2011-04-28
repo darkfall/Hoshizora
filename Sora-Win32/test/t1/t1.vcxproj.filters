@@ -33,15 +33,6 @@
     <Filter Include="Plugins\lAnm">
       <UniqueIdentifier>{87de757a-6bfb-44f6-9ff1-fe7508c79f93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Reflection">
-      <UniqueIdentifier>{71d0abf7-7e33-44e3-95b2-56904c762047}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\ls">
-      <UniqueIdentifier>{73246dc3-8041-4eb4-99ff-15b309138524}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\gcn">
-      <UniqueIdentifier>{8578cdd2-36ba-456f-b963-2d908fdef218}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Plugins\hgeRenderer\hge">
       <UniqueIdentifier>{dd18c601-8445-4ac4-8431-422cf9e4b32d}</UniqueIdentifier>
     </Filter>
@@ -103,6 +94,15 @@
     <Filter Include="Plugins\fmodss">
       <UniqueIdentifier>{f1814d00-3672-4eb2-b534-1c544e64c90f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\gcnExtend">
+      <UniqueIdentifier>{717fca83-b659-46e5-80f2-5f6265767467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SoundManager">
+      <UniqueIdentifier>{ee863d42-56a4-491d-886f-ff935d6966a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\reflectionRev">
+      <UniqueIdentifier>{de0404de-8ffc-4248-9dba-7080938ba951}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -112,9 +112,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\HoshiNoSora.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\md5lib.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\QuickList.h">
@@ -456,27 +453,6 @@
     <ClInclude Include="..\..\..\Plugins\lAnm\lMemFile.h">
       <Filter>Plugins\lAnm</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Reflection\rfMap.h">
-      <Filter>源文件\Reflection</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Reflection\lMemFile.h">
-      <Filter>源文件\Reflection</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Reflection\rfCommon.h">
-      <Filter>源文件\Reflection</Filter>
-    </ClInclude>
-    <ClInclude Include="rfMapRenderer.h">
-      <Filter>源文件\Reflection</Filter>
-    </ClInclude>
-    <ClInclude Include="rfMainWindow.h">
-      <Filter>源文件\Reflection</Filter>
-    </ClInclude>
-    <ClInclude Include="lsAnimatedSprite.h">
-      <Filter>源文件\ls</Filter>
-    </ClInclude>
-    <ClInclude Include="guichansetup.h">
-      <Filter>源文件\gcn</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftconfig.h">
       <Filter>Plugins\FreetypeFont</Filter>
     </ClInclude>
@@ -816,38 +792,8 @@
     <ClInclude Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h">
       <Filter>Plugins\ParticleSystem</Filter>
     </ClInclude>
-    <ClInclude Include="testMainWindow.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\win32filewrapper.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\menuScene.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\menuSceneManager.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\stgscene.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\titleScene.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\backgroundScene.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\lBasicRenderItem.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\lGUIScene.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\lScene.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora-OSX\mainWindow.h">
-      <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\glfw\GL\glfw.h">
       <Filter>Plugins</Filter>
@@ -1001,12 +947,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\Random\SFMT-params.h">
       <Filter>头文件\random</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.h">
-      <Filter>源文件\gcn</Filter>
-    </ClInclude>
-    <ClInclude Include="SoraDXRenderer.h">
-      <Filter>Plugins\hgeRenderer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h">
       <Filter>Plugins</Filter>
@@ -1281,9 +1221,6 @@
     <ClInclude Include="..\..\..\Plugins\libvlc\SoraVlcMoviePlayer.h">
       <Filter>Plugins\SoraVlcMoviePlayer</Filter>
     </ClInclude>
-    <ClInclude Include="vlcTestWindow.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\DarkLib\FileDlg.h">
       <Filter>Plugins\Darklb</Filter>
     </ClInclude>
@@ -1473,15 +1410,108 @@
     <ClInclude Include="..\..\..\Sora\hash.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnDraggableImageButton.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnDraggableImageButtonIncubator.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageEffectImage.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnProgressBar.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnSelectableContainer.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnBackgroundContainer.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnConnectable.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnDraggableIcon.h">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraSoundLoader.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Sound.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoundLoader.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraSound.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.h">
+      <Filter>Plugins\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.h">
+      <Filter>Plugins\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="vlcTestWindow.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfGameOverView.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfLightRenderer.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfLightSource.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfMap.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfMapSelectionView.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfMirror.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfOptionView.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfShape.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfTitleView.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfView.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfCommon.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfController.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ReflectionRev\rfEditorView.h">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClInclude>
+    <ClInclude Include="mainWindow.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraCanvas.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\hgevector.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\md5lib.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraCore.cpp">
@@ -1534,9 +1564,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraWin32Timer\orz.c">
       <Filter>Plugins\Win32Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguifont.cpp">
       <Filter>Plugins\SoraGUIChan</Filter>
@@ -1685,18 +1712,6 @@
     <ClCompile Include="..\..\..\Plugins\lAnm\lAnm.cpp">
       <Filter>Plugins\lAnm</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Reflection\rfMap.cpp">
-      <Filter>源文件\Reflection</Filter>
-    </ClCompile>
-    <ClCompile Include="rfMainWindow.cpp">
-      <Filter>源文件\Reflection</Filter>
-    </ClCompile>
-    <ClCompile Include="rfMapRenderer.cpp">
-      <Filter>源文件\Reflection</Filter>
-    </ClCompile>
-    <ClCompile Include="lsAnimatedSprite.cpp">
-      <Filter>源文件\ls</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\CoreTransform.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -1775,42 +1790,6 @@
     <ClCompile Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp">
       <Filter>Plugins\ParticleSystem</Filter>
     </ClCompile>
-    <ClCompile Include="testMainWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraTimerEvent.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\win32filewrapper.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\menuSceneManager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\stgscene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\titleScene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\backgroundScene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\lBasicRenderItem.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\lGUIScene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\lScene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\mainWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora-OSX\menuScene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.cpp">
       <Filter>Plugins</Filter>
     </ClCompile>
@@ -1874,12 +1853,6 @@
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp">
       <Filter>Plugins\hgeRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.cpp">
-      <Filter>源文件\gcn</Filter>
-    </ClCompile>
-    <ClCompile Include="SoraDXRenderer.cpp">
-      <Filter>Plugins\hgeRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.cpp">
       <Filter>Plugins</Filter>
     </ClCompile>
@@ -1900,9 +1873,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\libvlc\SoraVlcMoviePlayer.cpp">
       <Filter>Plugins\SoraVlcMoviePlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="vlcTestWindow.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\DarkLib\FileDlg.cpp">
       <Filter>Plugins\Darklb</Filter>
@@ -2071,6 +2041,102 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundSystem.cpp">
       <Filter>Plugins\AudiereSS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnDraggableImageButton.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnDraggableImageButtonIncubator.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageEffectImage.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnProgressBar.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnSelectableContainer.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnBackgroundContainer.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnConnectable.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnDraggableIcon.cpp">
+      <Filter>Plugins\gcnExtend</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraSoundLoader.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Sound.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraSound.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.cpp">
+      <Filter>Plugins\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.cpp">
+      <Filter>Plugins\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mainWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="vlcTestWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfGameOverView.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfLightRenderer.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfLightSource.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfMap.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfMapSelectionView.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfMirror.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfOptionView.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfShape.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfTitleView.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfView.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfController.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ReflectionRev\rfEditorView.cpp">
+      <Filter>源文件\reflectionRev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\win32filewrapper.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraCanvas.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

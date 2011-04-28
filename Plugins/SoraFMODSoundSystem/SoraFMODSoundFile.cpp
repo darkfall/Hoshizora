@@ -12,8 +12,12 @@
 
 namespace sora {
     
+#ifndef OS_WIN32
     static FMOD_RESULT SORACALL myChannelCallback(FMOD_CHANNEL *channel, FMOD_CHANNEL_CALLBACKTYPE type, void *commanddata1, void *commanddata2) {
-        SoraPlaybackEventHandler* pMusicFile = NULL;
+#else
+	static FMOD_RESULT _stdcall myChannelCallback(FMOD_CHANNEL *channel, FMOD_CHANNEL_CALLBACKTYPE type, void *commanddata1, void *commanddata2) {
+#endif
+		SoraPlaybackEventHandler* pMusicFile = NULL;
         FMOD::Channel* pChannel = (FMOD::Channel*)channel;
         if(pChannel) {
             void* pmyData;

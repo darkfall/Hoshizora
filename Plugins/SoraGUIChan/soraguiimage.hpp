@@ -10,7 +10,7 @@
 #include "guichan/image.hpp"
 
 
-#define GUI_Z 1.f
+#define GUI_Z 0.f
 
 namespace gcn
 {

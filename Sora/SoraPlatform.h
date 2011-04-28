@@ -237,7 +237,7 @@ typedef std::wstring SoraWString;
 
 #if defined(OS_OSX) || defined(OS_IOS) || defined(OS_LINUX)
 #undef BIT_32_64_EXTEND
-#endifř
+#endif
 
 #ifdef OS_WIN32
 #define s_int64 __int64

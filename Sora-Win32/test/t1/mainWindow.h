@@ -11,13 +11,11 @@
 #define MAIN_WINDOW_H_
 
 #include "SoraCore.h"
-#include "titleScene.h"
-#include "stgscene.h"
+#include "SoraCanvas.h"
 
 #include "Experimental/state_test.h"
 
-class mainWindow: public sora::SoraWindowInfoBase,
-				public sora::SoraEventHandler {
+class mainWindow: public sora::SoraWindowInfoBase {
 public:
 	mainWindow();
 	~mainWindow();
@@ -38,17 +36,20 @@ public:
 	bool isWindowSubWindow() { return false; }	
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
-	
-	void onMenuClick(const menuEvent* mev);
+
+	void onKeyEvent(const sora::SoraKeyEvent* kev);
 	
 private:
 	sora::SoraCore* sora;
-	
-	projl::lSceneManager* mainScenes;
-	titleScene* title;
-	stgScene* stg;
+                    
+    sora::SoraSprite* pSpr;
+	sora::SoraShader* shader;
 					
 	sora::BaseEntity* testEntity;
+    sora::SoraFont* pFont;
+	
+	sora::SoraBaseCanvas* canvas1;
+	ulong32 rt1;
 };
 
 #endif

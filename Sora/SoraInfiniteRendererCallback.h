@@ -13,6 +13,7 @@ namespace sora{
 		assert(g_timer != 0);
 		if(g_timer->update()) {
 			SoraCore::Instance()->update();
+			return true;
 		}
 		return false;
 	}

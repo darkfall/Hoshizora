@@ -18,6 +18,8 @@
 #include <dinput.h>
 #include <objbase.h>
 
+#include "SoraEventManager.h"
+
 char *KeyNames[] =
 {
  "?",
@@ -406,6 +408,18 @@ void HGE_Impl::_BuildEvent(int type, int key, int scan, int flags, int x, int y)
 	else if(eptr->event.type==INPUT_MOUSEWHEEL)
 	{
 		Zpos+=eptr->event.wheel;
+	}
+
+	if(eptr->event.key != 0) {
+		sora::SoraKeyEvent ev;
+		ev.chr = eptr->event.chr;
+		ev.flags = eptr->event.flags;
+		ev.key = eptr->event.key;
+		ev.type = eptr->event.type;
+		ev.wheel = eptr->event.wheel;
+		ev.x = eptr->event.x;
+		ev.y = eptr->event.y;
+		sora::SORA_EVENT_MANAGER->publishInputEvent(&ev);
 	}
 }
 

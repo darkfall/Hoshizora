@@ -40,6 +40,8 @@ namespace sora {
 		bool	setJoyKey(int32 key);
 		bool	hasJoy();
 
+		void	setWindowHandle(ulong32 handle) {}
+
 	private:
 		SoraHGEInput(const SoraHGEInput&) {}
 

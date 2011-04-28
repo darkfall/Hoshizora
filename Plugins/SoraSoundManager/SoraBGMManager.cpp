@@ -64,7 +64,7 @@ namespace sora {
 			mCurrFadeOutTime = 0.f;
 		}
 		else {
-			if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size()) {
+			if(mCurrBGMId >= 0 && mCurrBGMId < (int32)mBGMQueue.size()) {
 				mBGMQueue[mCurrBGMId]->stop();
 			}
 		}
@@ -90,7 +90,7 @@ namespace sora {
 			return;
 		
 		mPaused = true;
-		if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size())
+		if(mCurrBGMId >= 0 && mCurrBGMId < (int32)mBGMQueue.size())
 			mBGMQueue[mCurrBGMId]->pause();
 		else
 			mPaused = false;
@@ -98,7 +98,7 @@ namespace sora {
 	
 	void SoraBGMManager::resume() {
 		if(mPaused) {
-			if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size())
+			if(mCurrBGMId >= 0 && mCurrBGMId < (int32)mBGMQueue.size())
 				mBGMQueue[mCurrBGMId]->resume();
 			mPaused = false;
 		}
@@ -116,7 +116,7 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::toNextBGM() {
-		if(mCurrBGMId < mBGMQueue.size()-1) {
+		if(mCurrBGMId < (int32)mBGMQueue.size()-1) {
 			_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
 		}
 	}
@@ -210,7 +210,7 @@ namespace sora {
 	
 	void SoraBGMManager::onPlaybackEvent(const SoraPlaybackEvent* event) {
 		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
-			if(mCurrBGMId < mBGMQueue.size()) {
+			if(mCurrBGMId < (int32)mBGMQueue.size()) {
 				if(!mRandomBGMQueuePlay)
 					_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
 				else {

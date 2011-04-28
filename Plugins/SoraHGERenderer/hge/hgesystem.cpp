@@ -249,40 +249,6 @@ bool CALL HGE_Impl::System_Start()
 
 	bActive=true;
 
-	// MAIN LOOP
-
-	for(;;)
-	{
-		
-		// Process window messages if not in "child mode"
-		// (if in "child mode" the parent application will do this for us)
-
-		if(!hwndParent)
-		{
-			if (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
-			{ 
-				if (msg.message == WM_QUIT)	break;
-				// TranslateMessage(&msg);
-				DispatchMessage(&msg);
-				continue;
-			}
-		}
-
-		// Check if mouse is over HGE window for Input_IsMouseOver
-
-		_UpdateMouse();
-
-		// If HGE window is focused or we have the "don't suspend" state - process the main loop
-
-		procFrameFunc();
-
-		_ClearQueue();
-	}
-
-	_ClearQueue();
-
-	bActive=false;
-
 	return true;
 }
 
