@@ -342,6 +342,9 @@
 			886E110F1369054000A77847 /* PBXTextBookmark */ = 886E110F1369054000A77847 /* PBXTextBookmark */;
 			886E11101369054000A77847 /* PBXTextBookmark */ = 886E11101369054000A77847 /* PBXTextBookmark */;
 			886E11111369054000A77847 /* PBXTextBookmark */ = 886E11111369054000A77847 /* PBXTextBookmark */;
+			886E11121369064600A77847 /* PBXTextBookmark */ = 886E11121369064600A77847 /* PBXTextBookmark */;
+			886E11131369064600A77847 /* PBXTextBookmark */ = 886E11131369064600A77847 /* PBXTextBookmark */;
+			886E11141369064600A77847 /* PBXTextBookmark */ = 886E11141369064600A77847 /* PBXTextBookmark */;
 			887E244D1360A8EB00803DA6 = 887E244D1360A8EB00803DA6 /* PBXTextBookmark */;
 			887E24771360AB2F00803DA6 = 887E24771360AB2F00803DA6 /* PBXTextBookmark */;
 			887E24781360AB2F00803DA6 = 887E24781360AB2F00803DA6 /* PBXTextBookmark */;
@@ -2947,9 +2950,9 @@
 	};
 	886E10C01368E67800A77847 /* SoraBGMManager.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1571, 3234}}";
-			sepNavSelRange = "{1734, 0}";
-			sepNavVisRange = "{1219, 1415}";
+			sepNavIntBoundsRect = "{{0, 0}, {1571, 3248}}";
+			sepNavSelRange = "{4636, 0}";
+			sepNavVisRange = "{3448, 1671}";
 		};
 	};
 	886E10C11368E67800A77847 /* SoraBGMManager.h */ = {
@@ -3189,9 +3192,9 @@
 		path = ../Plugins/SoraSoundManager/SoraBGMManager.h;
 		sourceTree = "<group>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1571, 1890}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1571, 1792}}";
 			sepNavSelRange = "{785, 0}";
-			sepNavVisRange = "{0, 1436}";
+			sepNavVisRange = "{504, 1565}";
 		};
 	};
 	886E10F01368E8DA00A77847 /* PBXTextBookmark */ = {
@@ -3278,7 +3281,7 @@
 		fRef = 886E10C01368E67800A77847 /* SoraBGMManager.cpp */;
 		name = "SoraBGMManager.cpp: 208";
 		rLen = 0;
-		rLoc = 4640;
+		rLoc = 4636;
 		rType = 0;
 		vrLen = 1632;
 		vrLoc = 0;
@@ -3447,7 +3450,7 @@
 		fRef = 886E10C01368E67800A77847 /* SoraBGMManager.cpp */;
 		name = "SoraBGMManager.cpp: 208";
 		rLen = 0;
-		rLoc = 4640;
+		rLoc = 4636;
 		rType = 0;
 		vrLen = 1632;
 		vrLoc = 0;
@@ -3461,6 +3464,36 @@
 		rType = 0;
 		vrLen = 1415;
 		vrLoc = 1219;
+	};
+	886E11121369064600A77847 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E10EF1368E8DA00A77847 /* SoraBGMManager.h */;
+		name = "SoraBGMManager.h: 38";
+		rLen = 0;
+		rLoc = 785;
+		rType = 0;
+		vrLen = 1565;
+		vrLoc = 504;
+	};
+	886E11131369064600A77847 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E10C01368E67800A77847 /* SoraBGMManager.cpp */;
+		name = "SoraBGMManager.cpp: 74";
+		rLen = 0;
+		rLoc = 1734;
+		rType = 0;
+		vrLen = 1415;
+		vrLoc = 1219;
+	};
+	886E11141369064600A77847 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E10C01368E67800A77847 /* SoraBGMManager.cpp */;
+		name = "SoraBGMManager.cpp: 209";
+		rLen = 0;
+		rLoc = 4636;
+		rType = 0;
+		vrLen = 1671;
+		vrLoc = 3448;
 	};
 	887022B11346AB3500AE8DD7 /* SoraPureCore */ = {
 		isa = PBXExecutable;

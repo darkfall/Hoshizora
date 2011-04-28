@@ -206,8 +206,6 @@ namespace sora {
 				}
 			}
 		}
-		
-		printf("%f, %f, %f, %f\n", mCurrFadeOutTime, mFadeOutTime, mCurrFadeInTime, mFadeInTime);
 	}
 	
 	void SoraBGMManager::onPlaybackEvent(const SoraPlaybackEvent* event) {
