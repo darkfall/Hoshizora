@@ -78,7 +78,7 @@ namespace sora {
 	public:
 		virtual int getNumberOfElements() { return items.size(); }
 		virtual std::string getElementAt(int i) { 
-			if(i < items.size())
+			if(i < (int)items.size())
 				return items[i];
 			return "null";
 		}

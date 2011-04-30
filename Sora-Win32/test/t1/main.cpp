@@ -15,15 +15,9 @@
 
 #include "SoraAudiereSoundSystem/SoraAudiereSoundSystem.h"
 
-#include "rfMainWindow.h"
-
-#pragma comment(linker, "/NODEFAULTLIB:libcmt.lib")
-#pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
-
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
 
-#include "testMainWindow.h"
 
 #define HGE_RENDERER
 
@@ -34,6 +28,14 @@
 
 #include "SoraFMODSoundSystem/SoraFMODSoundSystem.h"
 #include "SoraAudiereSoundSystem/SoraAudiereSoundSystem.h"
+
+#ifdef OS_WIN32
+#pragma comment(linker, "/NODEFAULTLIB:libcmt.lib")
+#pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
+#endif
+
+
+#include "mainWindow.h"
 
 int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,

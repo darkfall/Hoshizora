@@ -702,7 +702,10 @@ bool HGE_Impl::_GfxInit()
 	d3dppW.Windowed         = TRUE;
 
 	if(nHGEFPS==HGEFPS_VSYNC) { d3dppW.SwapEffect = D3DSWAPEFFECT_COPY; d3dppW.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT; }
-	else					  d3dppW.SwapEffect = D3DSWAPEFFECT_COPY;
+	else					  {
+		d3dppW.SwapEffect = D3DSWAPEFFECT_COPY;
+		d3dppW.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+	}
 
 	if(bZBuffer)
 	{

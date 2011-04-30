@@ -272,8 +272,10 @@ namespace sora {
         }
         if(s.find('/') != std::string::npos)
             seName = s.substr(s.rfind('/'), s.size());
+		else
+			seName = s;
         if(s.find('.') != std::string::npos)
-            seName.erase(seName.rfind('.'), seName.size());
+            seName = (seName.rfind('.'), seName.size());
         setName(str2id(seName));
     }
 } // namespace sora

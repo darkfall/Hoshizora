@@ -24,7 +24,7 @@ namespace sora {
 class SoraRenderTargetOG {
 	GLuint frameBuffer;
 	GLuint depthBuffer;
-GLuint glTex;
+	GLuint glTex;
     int32 w, h;
 	ulong32 tex;
 	bool zbuffer;
