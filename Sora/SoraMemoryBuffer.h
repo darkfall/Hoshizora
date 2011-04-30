@@ -17,7 +17,6 @@
 
 #include "SoraPlatform.h"
 #include "SoraAutoPtr.h"
-#include "Debug/SoraInternalLogger.h"
 
 namespace sora {
 

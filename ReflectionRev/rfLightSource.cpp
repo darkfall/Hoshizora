@@ -73,6 +73,9 @@ namespace reflection {
 	}
 	
 	rfLight* rfLightSource::shootLight() {
+		if(pLight)
+			return pLight;
+		
 		rfLight* newLight = new rfLight;
 		newLight->setDirection(facing);
 		newLight->setStartPoint(rfPoint(getX()+getWidth()/2, getY()+getWidth()/2));

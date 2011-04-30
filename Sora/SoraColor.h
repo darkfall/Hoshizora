@@ -18,9 +18,9 @@ namespace sora {
 #define CGETR(col)		(((col)>>16) & 0xFF)
 #define CGETG(col)		(((col)>>8) & 0xFF)
 #define CGETB(col)		((col) & 0xFF)
-#define CSETA(col,a)		(((col) & 0x00FFFFFF) + (ulong32(a)<<24))
-#define CSETR(col,r)		(((col) & 0xFF00FFFF) + (ulong32(r)<<16))
-#define CSETG(col,g)		(((col) & 0xFFFF00FF) + (ulong32(g)<<8))
+#define CSETA(col,a)		(((col) & 0x00FFFFFF) + (ulong32)(a)<<24)
+#define CSETR(col,r)		(((col) & 0xFF00FFFF) + (ulong32)(r)<<16)
+#define CSETG(col,g)		(((col) & 0xFFFF00FF) + (ulong32)(g)<<8)
 #define CSETB(col,b)		(((col) & 0xFFFFFF00) + ulong32(b))
 
 class SoraColorRGBA {

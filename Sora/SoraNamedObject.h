@@ -40,8 +40,6 @@ namespace sora {
 		virtual void serialize(SoraMemoryBuffer& bufferStream) {
 			const char* strData = id2str(name).c_str();
 			if(!strData) {
-				INT_LOG::debugPrintf("%lu == ??\n", name);
-				SoraStringManager::Instance()->print();
 				return;
 			}
 			

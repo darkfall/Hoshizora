@@ -24,47 +24,17 @@ namespace sora {
 	 ****/
 	
 	class SoraEventHandlerPack: public SoraEventHandler {
+		friend class SoraEventManager;
+		
 	public:
-		SoraEventHandlerPack() {
-			registerEventFunc(this, &SoraEventHandlerPack::onTimerEvent);
-		}
+		SoraEventHandlerPack();
+		SoraEventHandlerPack& add(SoraEventHandler* handler) ;
+		void onTimerEvent(const SoraTimerEvent* ev);
+		void publishEvent(SoraEvent* ev);
 		
-		SoraEventHandlerPack& add(SoraEventHandler* handler) {
-			evHandlers.push_back(handler);
-			return *this;
-		}
+		void unRegister(SoraEventHandler* handler);
 		
-		void onTimerEvent(const SoraTimerEvent* ev) {
-			EVENT_HANDLER_CONT::iterator itHandler = evHandlers.begin();
-			while(itHandler != evHandlers.end()) {
-				if((*itHandler)) {
-					(*itHandler)->handleEvent(ev);
-					++itHandler;
-				} else {
-					itHandler = evHandlers.erase(itHandler);
-				}
-			}
-		}
-		
-		void publishEvent(SoraEvent* ev) {
-			EVENT_HANDLER_CONT::iterator itHandler = evHandlers.begin();
-			while(itHandler != evHandlers.end()) {
-				if((*itHandler)) {
-					(*itHandler)->handleEvent(ev);
-					++itHandler;
-				} else {
-					itHandler = evHandlers.erase(itHandler);
-				}
-			}
-		}
-		
-		void unRegister(SoraEventHandler* handler) {
-			for(size_t i=0; i<evHandlers.size(); ++i) {
-				if(evHandlers[i] == handler)
-					evHandlers.erase(evHandlers.begin()+i);
-			}
-		}
-		
+	protected:
 		typedef std::vector<SoraEventHandler*> EVENT_HANDLER_CONT;
 		EVENT_HANDLER_CONT evHandlers;
 	};
@@ -152,8 +122,21 @@ namespace sora {
 			
 			float32 time;
 			float32 currTime;
+			float32 totalTime;
 			bool repeat;
 			bool internalte;
+			
+			void update(float32 dt) {
+				currTime += dt;
+				totalTime += dt;
+				if(currTime >= time) {
+					ev->setTime(currTime);
+					ev->setTotalTime(totalTime);
+					handlerPack.onTimerEvent(ev);
+					
+					currTime = 0.f;
+				}
+			}
 			
 			SoraTimerEventInfo(SoraEventHandler* h, float32 _time, float32 _currTime, bool _repeat) :
 				time(_time), repeat(_repeat), internalte(true), currTime(_currTime) {
@@ -194,8 +177,7 @@ namespace sora {
 		std::string param;
 	};
 	
-	static SoraEventManager* SORA_EVENT_MANAGER = SoraEventManager::Instance();
-
+#define SORA_EVENT_MANAGER SoraEventManager::Instance()
 } // namespace sora
 
 

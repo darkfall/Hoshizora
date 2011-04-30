@@ -6,13 +6,13 @@
 
 #include <map>
 #include "SoraTypeInfo.h"
-#include "SoraNamedObject.h"
+#include "stringId.h"
 
 namespace sora {
 
     class SoraEventHandler;
     
-	class SoraEvent: public SoraNamedObject {
+	class SoraEvent {
 	protected:
 		virtual ~SoraEvent() {};
         
@@ -23,8 +23,12 @@ namespace sora {
         SoraEventHandler* getSource() const { return pEventSource; }
 		// base event not serializable
 		virtual bool serializable() { return false; }
+		
+		void setName(stringId _name) { name = _name; }
+		stringId getName() const { return name; }
         
     private:
+		stringId name;
         SoraEventHandler* pEventSource;
 	};
 
@@ -52,7 +56,7 @@ namespace sora {
 		MemberFunc _function;
 	};
 
-	class SoraEventHandler: public SoraNamedObject {
+	class SoraEventHandler {
 	public:
 		~SoraEventHandler();
 		void handleEvent(const SoraEvent*);

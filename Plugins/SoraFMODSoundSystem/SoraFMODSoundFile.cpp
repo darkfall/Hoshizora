@@ -13,13 +13,13 @@
 namespace sora {
     
     static FMOD_RESULT SORACALL myChannelCallback(FMOD_CHANNEL *channel, FMOD_CHANNEL_CALLBACKTYPE type, void *commanddata1, void *commanddata2) {
-        SoraPlaybackEventHandler* pMusicFile = NULL;
+        SoraFMODMusicFile* pMusicFile = NULL;
         FMOD::Channel* pChannel = (FMOD::Channel*)channel;
         if(pChannel) {
             void* pmyData;
             pChannel->getUserData(&pmyData);
             if(pmyData)
-                pMusicFile = (SoraPlaybackEventHandler*)pmyData;
+                pMusicFile = (SoraFMODMusicFile*)pmyData;
         }
         
         if(!pMusicFile) {
@@ -28,7 +28,8 @@ namespace sora {
         }
         
         if(type == FMOD_CHANNEL_CALLBACKTYPE_END) {
-            pMusicFile->publishEvent(SORAPB_EV_PLAY_ENDED);
+			if(pMusicFile->isEventPublishEnabled())
+				pMusicFile->publishEvent(SORAPB_EV_PLAY_ENDED);
         }
         return FMOD_OK;
     }

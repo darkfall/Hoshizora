@@ -11,10 +11,11 @@
 #include <algorithm>
 #include <list>
 #include "SoraAutoPtr.h"
+#include "SoraNamedObject.h"
 
 namespace sora {
 
-	class SoraObject: public SoraEventHandler {
+	class SoraObject: public SoraEventHandler, public SoraNamedObject {
 	public:
 		typedef SoraObject* PSORAOBJECT;
 		typedef SoraObject* AP_OBJECT;

@@ -11,11 +11,9 @@
 #define MAIN_WINDOW_H_
 
 #include "SoraCore.h"
-#include "titleScene.h"
-#include "stgscene.h"
 #include "SoraCanvas.h"
-
-#include "Experimental/state_test.h"
+#include "SoraPlatform.h"
+#include "SoraLua/SoraLuaObject.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -39,7 +37,7 @@ public:
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
 	
-	void onMenuClick(const menuEvent* mev);
+	void onKeyEvent(const sora::SoraKeyEvent* kev);
 	
 private:
 	sora::SoraCore* sora;
@@ -47,11 +45,11 @@ private:
     sora::SoraSprite* pSpr;
 	sora::SoraShader* shader;
 					
-	sora::BaseEntity* testEntity;
     sora::SoraFont* pFont;
 	
 	sora::SoraBaseCanvas* canvas1;
-	ulong32 rt1;
+	
+	sora::SoraLuaObject luaObject;
 };
 
 #endif

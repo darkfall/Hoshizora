@@ -249,9 +249,14 @@ Token llexer::getNextToken() {
 	int iAddCurrChar;
 
 	while(TRUE) {
+		if(currState.iCurrLine >= contSource.size())
+			return TOKEN_TYPE_END_OF_STREAM;
+		
 		cCurrChar = getNextChar();
 		if(cCurrChar == '\0')
 			break;
+		if(cCurrChar == '\n')
+			continue;
 
 		iAddCurrChar = TRUE;
 

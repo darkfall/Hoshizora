@@ -97,7 +97,7 @@ namespace reflection {
 		if(pMirror) {
 			sora::SoraSprite* psp;
 			if((psp = pMirror->getSourceImage()) != NULL) {
-				pMirror->setPosition(getX()+(getWidth()-psp->getSpriteWidth())/2, getY()+(getHeight()-psp->getSpriteHeight())/2);
+				pMirror->setPosition(getX()+(getWidth()-psp->getSpriteWidth())/4*3, getY()+(getHeight()-psp->getSpriteHeight())/4*3);
 			} else {
 				pMirror->setPosition(getX(), getY());
 			}
@@ -254,13 +254,16 @@ namespace reflection {
 		pMirror = new rfMirror;
 		pMirror->setFacing(0.f);
 		pMirror->setSourceImage(pComponentImage);
-		pMirror->setDimension(gcn::Rectangle(getX()+(getWidth()-pComponentImage->getSpriteWidth())/2, 
-											 getY()+(getHeight()-pComponentImage->getSpriteHeight())/2, 
-											 pComponentImage->getSpriteWidth(), 
-											 pComponentImage->getSpriteHeight()));
+		pMirror->setDimension(gcn::Rectangle(getX()+(getWidth()-pComponentImage->getSpriteWidth())/4*3, 
+											 getY()+(getHeight()-pComponentImage->getSpriteHeight())/4*3, 
+											 pComponentImage->getSpriteWidth()/2, 
+											 pComponentImage->getSpriteHeight()/2));
+	
+	
 		
 		if(getParentMap())
 			getParentMap()->updateMirror(pMirror);
+	
 		setState(STATE_PLACED);
 	}
 	

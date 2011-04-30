@@ -11,8 +11,13 @@ namespace sora {
 	public:
 		float32 getTime() const { return time; }
 		void setTime(float32 _time) { time = _time; }
-	private:
+		
+		float32 getTotalTime() const { return totalTime; }
+		void setTotalTime(float32 _totalTime) { totalTime = _totalTime; }
+	
+	protected:
 		float32 time;
+		float32 totalTime;
 	};
 
 	class timer {

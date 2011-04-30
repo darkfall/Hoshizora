@@ -17,6 +17,7 @@ namespace sora {
 										mStopAtEnd(false), mRandomBGMQueuePlay(false), mPaused(false),
 										mPrevBGMId(-1), mCurrBGMId(-1) {
 		SORA->registerPlugin(this);
+		registerEventFunc(this, &SoraBGMManager::onPlaybackEvent);
 	}
 	
 	void SoraBGMManager::_clearBGMQueue() {
@@ -116,8 +117,18 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::toNextBGM() {
-		if(mCurrBGMId < mBGMQueue.size()-1) {
-			_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
+		if(mCurrBGMId < mBGMQueue.size()) {
+			if(!mRandomBGMQueuePlay)
+				_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
+			else {
+				uint32 newId = SORA->randomInt(0, mBGMQueue.size());
+				_playBGM(mBGMQueue[newId], newId);
+			}
+		} else {
+			if(mStopAtEnd)
+				_clearBGMQueue();
+			else
+				mCurrBGMId = 0;
 		}
 	}
 	
@@ -209,20 +220,9 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::onPlaybackEvent(const SoraPlaybackEvent* event) {
+		printf("lalalala");
 		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
-			if(mCurrBGMId < mBGMQueue.size()) {
-				if(!mRandomBGMQueuePlay)
-					_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
-				else {
-					uint32 newId = SORA->randomInt(0, mBGMQueue.size());
-					_playBGM(mBGMQueue[newId], newId);
-				}
-			} else {
-				if(mStopAtEnd)
-					_clearBGMQueue();
-				else
-					mCurrBGMId = 0;
-			}
+			toNextBGM();
 		}
 	}
 

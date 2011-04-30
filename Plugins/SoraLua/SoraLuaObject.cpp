@@ -19,6 +19,7 @@ namespace sora {
 		SoraLuaExport::export_constants(luaState);
 		SoraLuaExport::export_soracore(luaState);
         SoraLuaExport::export_sprites(luaState);
+		SoraLuaExport::export_font(luaState);
 
 		luaopen_pluto(luaState->GetCState());
 
@@ -35,7 +36,8 @@ namespace sora {
 		SoraLuaExport::export_constants(luaState);
 		SoraLuaExport::export_soracore(luaState);
         SoraLuaExport::export_sprites(luaState);
-
+		SoraLuaExport::export_font(luaState);
+		
 		luaopen_pluto(luaState->GetCState());
 
 		//LuaStateRefMap[(ulong32)luaState] = 1;
@@ -65,7 +67,8 @@ namespace sora {
 		ulong32 size;
 		void* pdata = SORA->getResourceFile(scriptPath, size);
 		if(pdata) {
-			return doBuffer((char*)pdata, size, 0);
+			return doString((const char*)pdata);
+			SORA->freeResourceFile(pdata);
 		}
 		return 0;
 	}
@@ -79,7 +82,13 @@ namespace sora {
 	}
 
 	int32 SoraLuaObject::loadScript(const SoraWString& scriptPath) {
-		return luaState->LoadFile(ws2s(scriptPath).c_str());
+		ulong32 size;
+		void* pdata = SORA->getResourceFile(scriptPath, size);
+		if(pdata) {
+			return loadString((const char*)pdata);
+			SORA->freeResourceFile(pdata);
+		}
+		return 0;
 	}
 
 	int32 SoraLuaObject::loadString(const SoraString& str) {
@@ -178,7 +187,7 @@ namespace sora {
         LuaObject obj = get("update");
         if(obj.IsFunction()) {
             LuaFunction<void> func = obj;
-            func("dt");
+            func(dt);
         }
         return 0;
     }

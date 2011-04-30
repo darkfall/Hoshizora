@@ -13,6 +13,8 @@
 #include "guichansora.hpp"
 #include "guichansetup.h"
 
+#include "Debug/SoraInternalLogger.h"
+
 #include "SoraCore.h"
 
 namespace sora {

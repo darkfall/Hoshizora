@@ -57,7 +57,6 @@ namespace sora {
 					
 		virtual void unserialize(SoraMemoryBuffer& bufferStream) {
 			SoraNamedObject::unserialize(bufferStream);
-			INT_LOG::debugPrintf("*** unserialze, name:=%lu, %s, listsize=%d\n", getName(), id2str(getName()).c_str(), getAllMembers().size());
 			read(getName());
 		}
 					

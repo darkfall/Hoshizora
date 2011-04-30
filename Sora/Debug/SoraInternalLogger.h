@@ -3,95 +3,62 @@
 
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
+#include "SoraStringConv.h"
+#include "SoraEvent.h"
+#include "SoraTimerEvent.h"
 
 #include <vector>
+#include <fstream>
 
 namespace sora {
 	//namespace sorainternal {
 	class SoraCore;
 
-		class SoraInternalLogger: public SoraSingleton<SoraInternalLogger> {
+		class SoraInternalLogger: public SoraSingleton<SoraInternalLogger>, public SoraEventHandler {
 			friend class SoraSingleton<SoraInternalLogger>;
 			friend class SoraCore;
+			
+		protected:
+			SoraInternalLogger();
+			~SoraInternalLogger();
 
 		public:
-			void log(const SoraString& mssg) {
-				vMssg.push_back("_DEBUG: "+mssg);
-			}
+			void log(const SoraString& mssg);
 
-			SoraInternalLogger& operator<<(SoraString& mssg) {
-				vMssg.push_back("_DEBUG: "+mssg);
-				return *this;
-			}
+			SoraInternalLogger& operator<<(SoraString& mssg);
+			SoraInternalLogger& operator<<(SoraWString& mssg);
             
-            static void printf(const char* format, ...) {
-				va_list	ArgPtr;
-				char Message[1024] = {0};
-				va_start(ArgPtr, format);
-				vsprintf(Message, format, ArgPtr);
-				va_end(ArgPtr);
-				
-				::printf("LOG: %s", Message);
-			}
-			
-            void logf(const char* format, ...) {
-				va_list	ArgPtr;
-				char Message[1024] = {0};
-				va_start(ArgPtr, format);
-				vsprintf(Message, format, ArgPtr);
-				va_end(ArgPtr);
-				
-				printf(Message);
-                vMssg.push_back(SoraString("LOG: ")+Message);
-			}
-            
-			static void debugPrintf(const char* format, ...) {
-#ifdef _DEBUG
-				va_list	ArgPtr;
-				char Message[1024] = {0};
-				va_start(ArgPtr, format);
-				vsprintf(Message, format, ArgPtr);
-				va_end(ArgPtr);
-				
-				::printf("_DEBUG: %s", Message);
-#endif
-			}
-			
-			void debugLogf(const char* format, ...) {
-#ifdef _DEBUG
-				va_list	ArgPtr;
-				char Message[1024] = {0};
-				va_start(ArgPtr, format);
-				vsprintf(Message, format, ArgPtr);
-				va_end(ArgPtr);
-				
-				debugPrintf(Message);
-                vMssg.push_back(SoraString("_DEBUG: ")+Message);
-#endif
-			}
-			
-			void writeToFile(const char* fileName) {
-				FILE* file = fopen(fileName, "w");
-				if(file) {
-					std::vector<SoraString>::iterator itLog = vMssg.begin();
-					while(itLog != vMssg.end()) {
-						fwrite(itLog->c_str(), itLog->size(), 1, file);
-						++itLog;
-					}
-				}
-				fclose(file);
-			}
+            static void printf(const char* format, ...);
+			static void printf(const wchar_t* format, ...);			
+			static void debugPrintf(const char* format, ...);
 
-			const std::vector<SoraString>& get() const { return vMssg; }
+            void logf(const char* format, ...);			
+            void logf(const wchar_t* format, ...);
+			void debugLogf(const char* format, ...);
+			
+			void writeToFile(const char* fileName);
+			
+			/*
+			 set the interval that the log writes to SoraLog.txt
+			 default 1.f
+			 */
+			void setLogInternval(float32 interval);
+			
+			void onLogTimerEvent(const SoraTimerEvent* tev);
+
+			const std::vector<SoraString>& get() const;
+			
+			void clearLogs();
 		
 		private:
 			std::vector<SoraString> vMssg;
-
-			void clear() { vMssg.clear(); }
-
+			
+			std::ofstream logFile;
+			
+			int32 currLogIndex;
+			float32 logInterval;
 		};
 
-		static SoraInternalLogger* LOG = SoraInternalLogger::Instance();
 #define INT_LOG SoraInternalLogger
 #define INT_LOG_HANDLE SoraInternalLogger::Instance()
 	//} // namespace internal

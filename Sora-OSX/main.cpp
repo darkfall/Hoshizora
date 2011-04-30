@@ -29,14 +29,13 @@
 
 #include "../AnimationEditor/aeMainWindow.h"
 
-
-#include "../ReflectionRev/rfMirror.h"
-
 //#include "GLFW3/SoraOGLInputGLFW3.h"
 //#include "GLFW3/SoraOGLRenderer.h"
 #include "SoraFMODSoundSystem/SoraFMODSoundSystem.h"
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
+
+#include "../MEAD/meadBulletManager.h"
 
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();
@@ -54,42 +53,6 @@ int main(int argc, char* argv[]) {
 	}
 	sora->attachResourcePack(res);
     
-	/*
-	{
-		sora::SoraMemoryFile file1(L"box.png");
-		sora::SoraMemoryFile file2(L"box.png");
-		sora::SoraMemoryFile file3(L"boxhl.png");
-		sora::SoraMemoryFile file4(L"box2.png");
-		sora::SoraMemoryFile file5(L"boxhl.png");
-		sora::SoraMemoryFile file6(L"boxhl.png");
-		
-		sora::SoraMemoryBuffer serializeBuffer;
-		// alloc 4kb data
-		serializeBuffer.alloc(4096);
-		file1.serialize(serializeBuffer);
-		file2.serialize(serializeBuffer);
-		file3.serialize(serializeBuffer);
-		file4.serialize(serializeBuffer);
-		file5.serialize(serializeBuffer);
-		file6.serialize(serializeBuffer);
-		
-		serializeBuffer.writeToFile("test.serialized");
-	}
-	{
-		ulong32 size;
-		void* pdata = sora::SORA->getResourceFile(L"test.serialized", size);
-		if(size && pdata) {
-			sora::SoraMemoryBuffer serialzeData(pdata, size);
-			sora::SoraMemoryFile file1; file1.unserialize(serialzeData);
-			sora::SoraMemoryFile file2; file2.unserialize(serialzeData);
-			sora::SoraMemoryFile file3; file3.unserialize(serialzeData);
-			sora::SoraMemoryFile file4; file4.unserialize(serialzeData);
-			sora::SoraMemoryFile file5; file5.unserialize(serialzeData);
-			sora::SoraMemoryFile file6; file6.unserialize(serialzeData);
-
-		}
-	}*/
-	
 	/*
 	sora::SoraLocalizer* localizer = sora::SoraLocalizer::Instance();
 	localizer->addLocaleConf(L"en.locale");

@@ -109,6 +109,7 @@ namespace reflection {
 				if(shape->getState() == rfShapeBase::STATE_WAITFORLIGHT)
 					shape->setState(rfShapeBase::STATE_LIGHTED);
 				else {
+					
 					// is mirror
 					// reflect a new light
 					rfMirror* mirror = shape->getMirror();
@@ -119,16 +120,24 @@ namespace reflection {
 						if(mirror->isVisited()) {
 							break;
 						}
+						if(!mirror->getDimension().isPointInRect(currPos.x, currPos.y)) {
+							currPos.x = currPos.x + cosf(marchDir) * minMarchDistance / 2;
+							currPos.y = currPos.y - sinf(marchDir) * minMarchDistance / 2;
+							continue;
+						}
 						
-						inLight->setEndPoint(rfPoint(mirror->getX()+mirror->getWidth()/2, (mirror->getY()+mirror->getHeight()/2)));
+						
+					//	inLight->setDirection(atan2f(-mirror->getY()+startPos.y, mirror->getX()-startPos.x));
 						rfLight* newLight = mirror->reflect(inLight);
 						
 						if(newLight != NULL) {
 							mLightList.push_back(inLight);
-							
+							inLight->setEndPoint(rfPoint(mirror->getX()+mirror->getWidth()/2, (mirror->getY()+mirror->getHeight()/2)));
+
 							inLight = newLight;
 							marchDir = inLight->getDirection();
 							mirror->setVisited(true);
+							inLight->setStartPoint(rfPoint(mirror->getX()+mirror->getWidth()/2, (mirror->getY()+mirror->getHeight()/2)));
 							
 							currPos.x = currPos.x + cosf(marchDir) * shape->getWidth() * 2.f;
 							currPos.y = currPos.y - sinf(marchDir) * shape->getHeight() * 2.f;
@@ -140,6 +149,7 @@ namespace reflection {
 							
 							printf("inserting light, spos=%f,%f, epos=%f,%f, dir=%f\n", inLight->getStartPoint().x, inLight->getStartPoint().y,
 								   inLight->getEndPoint().x, inLight->getEndPoint().y, rfRadToDgr(marchDir));
+							startPos = currPos;
 							
 							continue;
 						}

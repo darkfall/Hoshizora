@@ -13,7 +13,6 @@
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
 #include "hash.h"
-#include "Debug/SoraInternalLogger.h"
 #include "SoraStringConv.h"
 
 namespace sora {
@@ -72,12 +71,6 @@ namespace sora {
 			if(str.size() != 0)
 				return str;
 			return "\0";
-		}
-		
-		inline void print() {
-			for(STR_MAP::iterator itstr = strings.begin(); itstr != strings.end(); ++itstr) {
-				INT_LOG::debugPrintf("STR_MAP: %llu = %s\n", itstr->first, ws2s(itstr->second).c_str());
-			}
 		}
 		
 	private:

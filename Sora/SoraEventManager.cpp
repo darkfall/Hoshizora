@@ -4,6 +4,48 @@
 //#include "SoraLuaStateManager.h"
 
 namespace sora {
+	
+	SoraEventHandlerPack::SoraEventHandlerPack() {
+		registerEventFunc(this, &SoraEventHandlerPack::onTimerEvent);
+	}
+	
+	SoraEventHandlerPack& SoraEventHandlerPack::add(SoraEventHandler* handler) {
+		evHandlers.push_back(handler);
+		return *this;
+	}
+	
+	void SoraEventHandlerPack::onTimerEvent(const SoraTimerEvent* ev) {
+		EVENT_HANDLER_CONT::iterator itHandler = evHandlers.begin();
+		while(itHandler != evHandlers.end()) {
+			if((*itHandler)) {
+				SoraTimerEvent* ccev = const_cast<SoraTimerEvent*>(ev);
+				(*itHandler)->handleEvent((ccev));
+				++itHandler;
+			} else {
+				itHandler = evHandlers.erase(itHandler);
+			}
+		}
+	}
+	
+	void SoraEventHandlerPack::publishEvent(SoraEvent* ev) {
+		EVENT_HANDLER_CONT::iterator itHandler = evHandlers.begin();
+		while(itHandler != evHandlers.end()) {
+			if((*itHandler)) {
+				ev->setSource((*itHandler));
+				(*itHandler)->handleEvent(ev);
+				++itHandler;
+			} else {
+				itHandler = evHandlers.erase(itHandler);
+			}
+		}
+	}
+	
+	void SoraEventHandlerPack::unRegister(SoraEventHandler* handler) {
+		for(size_t i=0; i<evHandlers.size(); ++i) {
+			if(evHandlers[i] == handler)
+				evHandlers.erase(evHandlers.begin()+i);
+		}
+	}
 
 	void SoraEventManager::registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev) {
 		EVENT_ID eid = BKDRHash(eventName.c_str());
@@ -26,11 +68,15 @@ namespace sora {
 			while(itEvent != elist.end()) {
 				if(itEvent->handler != NULL && itEvent->ev != NULL) {
 					if(receiver == NULL) {
+						itEvent->ev->setSource(itEvent->handler);
 						itEvent->handler->handleEvent(itEvent->ev);
 					}
-					else
-						if(itEvent->handler == receiver)
+					else {
+						if(itEvent->handler == receiver) {
+							itEvent->ev->setSource(itEvent->handler);
 							itEvent->handler->handleEvent(itEvent->ev);
+						}
+					}
 				} else {
 					if(itEvent->handler == NULL) {
 						itEvent = elist.erase(itEvent);
@@ -58,11 +104,14 @@ namespace sora {
 			while(itEvent != elist.end()) {
 				if(itEvent->handler != NULL) {
 					if(receiver == NULL) {
+						ev->setSource(itEvent->handler);
 						itEvent->handler->handleEvent(ev);
 					}
 					else
-						if(itEvent->handler == receiver)
+						if(itEvent->handler == receiver) {
+							ev->setSource(itEvent->handler);
 							itEvent->handler->handleEvent(ev);
+						}
 				} else {
 					if(itEvent->handler == NULL) {
 						itEvent = elist.erase(itEvent);
@@ -119,21 +168,12 @@ namespace sora {
 		if(tevList.size() != 0) {
 			TIMER_EVENT_LIST::iterator ittev = tevList.begin();
 			while(ittev != tevList.end()) {
-				if((*ittev)->time < currTime) {
-					(*ittev)->handlerPack.onTimerEvent((*ittev)->ev);
-					if(!(*ittev)->repeat) {
-						freeTimerEvent(ittev);
-						ittev = tevList.erase(ittev);
-						continue;
-					} else {
-						(*ittev)->time = (*ittev)->time*2-(*ittev)->currTime;
-					}
-					if((*ittev)->handlerPack.evHandlers.empty()) {
-						freeTimerEvent(ittev);
-						ittev = tevList.erase(ittev);
-					}
-				}
 				
+				(*ittev)->update(dt);
+				if((*ittev)->handlerPack.evHandlers.empty()) {
+					freeTimerEvent(ittev);
+					ittev = tevList.erase(ittev);
+				}
 				++ittev;
 			}
 		}

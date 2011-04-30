@@ -26,9 +26,9 @@ namespace sora {
 	 a bgm would play in loop mode
 	 */
 	
-	class SoraBGMManager: public SoraSingleton<SoraBGMManager>, public SoraPlaybackEventHandler, public SoraPlugin {
+	class SoraBGMManager: public SoraSingleton<SoraBGMManager>, public SoraEventHandler, public SoraPlugin {
 		friend class SoraSingleton<SoraBGMManager>;
-	
+	 
 	protected:
 		SoraBGMManager();
 		~SoraBGMManager();

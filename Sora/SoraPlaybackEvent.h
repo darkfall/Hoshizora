@@ -38,7 +38,7 @@ namespace sora {
             eventType = event;
             _setEventName(event);
         }
-        
+		        
     private:
         void _setEventName(SORA_PLAYBACK_EVENT event) {
             switch(event) {
@@ -54,7 +54,13 @@ namespace sora {
     
     class SoraPlaybackEventHandler: public SoraEventHandler {
     public:
-        SoraPlaybackEventHandler(): pEventHandler(NULL), mEventPublish(false) {}
+        SoraPlaybackEventHandler(): pEventHandler(NULL), mEventPublish(false) {
+			event = new SoraPlaybackEvent;
+		}
+		virtual ~SoraPlaybackEventHandler() {
+			delete event;
+			event = 0;
+		}
         
         void registerEventHandler(SoraEventHandler* pHandler) {
             pEventHandler = pHandler;
@@ -67,11 +73,11 @@ namespace sora {
 		bool isEventPublishEnabled() const { return mEventPublish; }
         
         void publishEvent(SORA_PLAYBACK_EVENT eventType) {
-            event.setEventType(eventType);
-			event.setSource(this);
+            event->setEventType(eventType);
+			event->setSource(this);
             if(pEventHandler)
-                pEventHandler->handleEvent(&event);
-            this->handleEvent(&event);
+                pEventHandler->handleEvent(event);
+            this->handleEvent(event);
         }
         
         // default does nothing
@@ -80,7 +86,7 @@ namespace sora {
     protected:
         SoraEventHandler* pEventHandler;
         
-        SoraPlaybackEvent event;
+        SoraPlaybackEvent* event;
 		bool mEventPublish;
     };
 } // namespace sora

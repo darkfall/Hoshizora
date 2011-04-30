@@ -35,13 +35,13 @@ namespace sora {
 	public:
 		void storeProfile(const char* name, s_int64 elapsedTime) {
 			profiles.insert(std::make_pair<SoraString, s_profile>(name, s_profile(name, elapsedTime)));
-			LOG->debugPrintf("ProfileName=%s, time=%llu\n", name, elapsedTime);
+			INT_LOG_HANDLE->debugPrintf("ProfileName=%s, time=%llu\n", name, elapsedTime);
 		}
 		
 		void printProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				LOG->debugPrintf("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
+				INT_LOG_HANDLE->debugPrintf("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
 				++itprofile;
 			}
 		}
@@ -49,7 +49,7 @@ namespace sora {
 		void logProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				LOG->debugLogf("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
+				INT_LOG_HANDLE->debugLogf("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
 				++itprofile;
 			}
 		}

@@ -9,6 +9,7 @@
 #include <cassert>
 
 #include "spriteWrapper.h"
+#include "fontWrapper.h"
 #include "SoraEventManager.h"
 
 namespace sora { 
@@ -27,7 +28,7 @@ namespace sora {
             
 			LuaModule(state, "core")
 				.def("messageBox", &core_messageBox);
-		/*	SoraCore* pCore = SoraCore::Instance();
+			SoraCore* pCore = SoraCore::Instance();
 			gge::LuaClass<SoraCore>(state, "SoraCore", pCore)
             .def("setFPS", &SoraCore::setFPS)
             .def("setTimeScale", &SoraCore::setTimeScale)
@@ -62,7 +63,8 @@ namespace sora {
             .def("messageBox", &SoraCore::messageBox)
             .def("log", &SoraCore::log)
             .def("execute", &SoraCore::execute)
-            .def("setFrameSync", &SoraCore::setFrameSync);*/
+            .def("setFrameSync", &SoraCore::setFrameSync)
+			.def("renderRect", &SoraCore::renderRect);
 		}
         
 
@@ -119,7 +121,22 @@ namespace sora {
                 .def("makeEffectRotation", &imageeffectwrapper::makeEffect_rotation);
 		}
         
-       
+        static void export_font(SoraLuaObject* state) {
+			export_font(state->getState());
+		}
+		
+		static void export_font(LuaState* state) {
+			LuaModule(state, "fontlib")
+				.def("createFont", &fontWrapper::createFont)
+				.def("renderString", &fontWrapper::renderString)
+				.def("setKerningWidth", &fontWrapper::setKerningWidth)
+				.def("setKerningHeight", &fontWrapper::setKerningHeight)
+				.def("getKerningWidth", &fontWrapper::getKerningWidth)
+				.def("getKerningHeight", &fontWrapper::getKerningHeight)
+				.def("getFontSize", &fontWrapper::getFontSize)
+				.def("setColor", &fontWrapper::setColor)
+				.def("getColor", &fontWrapper::getColor);
+		}
 
 		static void export_constants(SoraLuaObject* state) {
 			export_constants(state->getState());
@@ -277,6 +294,10 @@ namespace sora {
 			global.SetInteger("IMAGE_EFFECT_ONCE", IMAGE_EFFECT_ONCE);
 			global.SetInteger("IMAGE_EFFECT_PINGPONG", IMAGE_EFFECT_PINGPONG);
 			global.SetInteger("IMAGE_EFFECT_REPEAT", IMAGE_EFFECT_REPEAT);
+			
+			global.SetInteger("FONT_ALIGNMENT_LEFT", FONT_ALIGNMENT_LEFT);
+			global.SetInteger("FONT_ALIGNMENT_RIGHT", FONT_ALIGNMENT_RIGHT);
+			global.SetInteger("FONT_ALIGNMENT_CENTER", FONT_ALIGNMENT_CENTER);
 
 			global.SetInteger("BLEND_COLORADD", BLEND_COLORADD);
 			global.SetInteger("BLEND_COLORMUL", BLEND_COLORMUL);

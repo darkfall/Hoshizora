@@ -89,7 +89,6 @@ namespace sora {
 			if(p != texMapRv.end()) {
 				texRefs[p->second]--;
 				
-				INT_LOG::debugPrintf("tex: %lu, ref: %d\n", tex, texRefs[p->second]);
 				if(texRefs[p->second] == 0) {
 					SORA->releaseTexture(p->first);
 					remove(tex);

@@ -40,6 +40,9 @@ namespace sora {
 
 		_initializeTimer();
 		_initializeMiscTool();
+		
+		SoraEventManager::Instance();
+		SoraInternalLogger::Instance();
 
 		pInput = 0;
 		pFontManager = 0;
@@ -92,7 +95,6 @@ namespace sora {
 		}
 
 		_checkCoreComponents();
-		_logInternalLog();
       
         // create render target for debug renderer
 #ifdef DEBUG
@@ -199,7 +201,6 @@ namespace sora {
             pRenderSystem->endScene();
         }
         
-		_logInternalLog();
 		time += pTimer->getDelta();
         
 		pRenderSystem->endFrame();
@@ -244,10 +245,7 @@ namespace sora {
 	}
 
 	void SoraCore::_logInternalLog() {
-		std::vector<SoraString> vLog = SoraInternalLogger::Instance()->get();
-		for(size_t i=0; i<vLog.size(); ++i)
-			pMiscTool->log(vLog[i]);
-		SoraInternalLogger::Instance()->clear();
+		//INT_LOG_HANDLE->writeToFile("SoraLog.txt");
 	}
 
 	void SoraCore::postError(const SoraString& string) {
@@ -256,7 +254,7 @@ namespace sora {
 
 	void SoraCore::_postError(const SoraString& string) {
 		if(!bMessageBoxErrorPost)
-			pMiscTool->log(string);
+			INT_LOG_HANDLE->log(string);
 		else
 			pMiscTool->messageBox(string, "SoraCoreError", MB_ICONERROR | MB_OK);
 	}
@@ -274,6 +272,8 @@ namespace sora {
 	}
 
 	void SoraCore::shutDown() {
+		_logInternalLog();
+
 		//SoraTextureMap::Instance()->Destroy();
         if(mainWindow)
             delete mainWindow;
@@ -724,11 +724,21 @@ namespace sora {
 	}
 
 	void SoraCore::log(const SoraString& sMssg) {
-		pMiscTool->log(sMssg);
+		INT_LOG_HANDLE->log(sMssg);
 	}
 
 	void SoraCore::logw(const SoraWString& sMssg) {
-		pMiscTool->log(sMssg);
+		INT_LOG_HANDLE->log(ws2s(sMssg));
+	}
+	
+	void SoraCore::logf(const char* format, ...) {
+		va_list	ArgPtr;
+		char Message[1024] = {0};
+		va_start(ArgPtr, format);
+		vsprintf(Message, format, ArgPtr);
+		va_end(ArgPtr);
+		
+		INT_LOG_HANDLE->log(Message);
 	}
 
 	void SoraCore::registerPlugin(SoraPlugin* pPlugin) {
@@ -750,16 +760,6 @@ namespace sora {
 	SoraWString SoraCore::videoInfo() {
 		assert(bInitialized==true);
 		return pRenderSystem->videoInfo();
-	}
-
-	void SoraCore::logf(const char* format, ...) {
-		va_list	ArgPtr;
-		char Message[1024] = {0};
-		va_start(ArgPtr, format);
-		vsprintf(Message, format, ArgPtr);
-		va_end(ArgPtr);
-
-		pMiscTool->log(Message);
 	}
 
 	void SoraCore::setRandomSeed(int32 seed) {
