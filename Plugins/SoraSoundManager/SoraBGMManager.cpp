@@ -117,23 +117,20 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::toNextBGM() {
-<<<<<<< HEAD
-		if(mCurrBGMId < mBGMQueue.size()) {
-			if(!mRandomBGMQueuePlay)
-				_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
-			else {
-				uint32 newId = SORA->randomInt(0, mBGMQueue.size());
-				_playBGM(mBGMQueue[newId], newId);
-			}
+		if(mRandomBGMQueuePlay) {
+			uint32 newId = SORA->randomInt(0, mBGMQueue.size());
+			_playBGM(mBGMQueue[newId], newId);
+		}
+		else if(mCurrBGMId < mBGMQueue.size()-1) {
+			_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
 		} else {
 			if(mStopAtEnd)
 				_clearBGMQueue();
-			else
-				mCurrBGMId = 0;
-=======
-		if(mCurrBGMId < (int32)mBGMQueue.size()-1) {
-			_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
->>>>>>> bcfe57e2a77ee8b93e4f759be6872c12d4bda732
+			else {
+				if(mBGMQueue.size() != 0) {
+					_playBGM(mBGMQueue[0], 0);
+				}
+			}
 		}
 	}
 	
@@ -148,6 +145,8 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::setVolume(float32 volume) { 
+		if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size())
+			mBGMQueue[mCurrBGMId]->setVolume(volume);
 		bgmVolume = volume;
 	}
 	
@@ -225,25 +224,8 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::onPlaybackEvent(const SoraPlaybackEvent* event) {
-		printf("lalalala");
 		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
-<<<<<<< HEAD
 			toNextBGM();
-=======
-			if(mCurrBGMId < (int32)mBGMQueue.size()) {
-				if(!mRandomBGMQueuePlay)
-					_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
-				else {
-					uint32 newId = SORA->randomInt(0, mBGMQueue.size());
-					_playBGM(mBGMQueue[newId], newId);
-				}
-			} else {
-				if(mStopAtEnd)
-					_clearBGMQueue();
-				else
-					mCurrBGMId = 0;
-			}
->>>>>>> bcfe57e2a77ee8b93e4f759be6872c12d4bda732
 		}
 	}
 

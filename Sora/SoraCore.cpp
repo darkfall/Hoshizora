@@ -400,21 +400,21 @@ namespace sora {
 		pFontManager = fontManager;
 	}
 
-	float32 SoraCore::getFPS() const {
+	float32 SoraCore::getFPS() {
 		return pTimer->getFPS();
 	}
 
-	float32 SoraCore::getDelta() const {
+	float32 SoraCore::getDelta() {
 		if(!bFrameSync)
 			return pTimer->getDelta();
 		return 1.f;
 	}
 
-	float32 SoraCore::getTime() const {
+	float32 SoraCore::getTime() {
 		return pTimer->getTime();
 	}
 
-	s_int64 SoraCore::getCurrentSystemTime() const {
+	s_int64 SoraCore::getCurrentSystemTime() {
 		return pTimer->getCurrentSystemTime();
 	}
 
@@ -422,7 +422,7 @@ namespace sora {
 		pTimer->setFPS(fps);
 	}
 
-	int32 SoraCore::getFrameCount() const {
+	int32 SoraCore::getFrameCount() {
 		return pTimer->getFrameCount();
 	}
 
@@ -430,7 +430,7 @@ namespace sora {
 		pTimer->setTimeScale(scale);
 	}
 
-	float32 SoraCore::getTimeScale() const {
+	float32 SoraCore::getTimeScale() {
 		return pTimer->getTimeScale();
 	}
 

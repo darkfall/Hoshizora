@@ -17,6 +17,12 @@
 #include "stringId.h"
 
 namespace sora {
+	/*
+	 gui creator delegate
+	 inheritate from this to create your own widgets
+	 @ident, widget ident from script, "button" etc
+	 @id, the id of the widget
+	 */
     class SoraGuiCreator {
     public:
         virtual gcn::Widget* createGuiWidget(const SoraString& ident, const SoraString& id);

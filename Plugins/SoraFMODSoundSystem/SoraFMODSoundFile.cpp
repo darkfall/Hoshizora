@@ -14,14 +14,10 @@ namespace sora {
     
 #ifndef OS_WIN32
     static FMOD_RESULT SORACALL myChannelCallback(FMOD_CHANNEL *channel, FMOD_CHANNEL_CALLBACKTYPE type, void *commanddata1, void *commanddata2) {
-<<<<<<< HEAD
-        SoraFMODMusicFile* pMusicFile = NULL;
-=======
 #else
 	static FMOD_RESULT _stdcall myChannelCallback(FMOD_CHANNEL *channel, FMOD_CHANNEL_CALLBACKTYPE type, void *commanddata1, void *commanddata2) {
 #endif
 		SoraPlaybackEventHandler* pMusicFile = NULL;
->>>>>>> bcfe57e2a77ee8b93e4f759be6872c12d4bda732
         FMOD::Channel* pChannel = (FMOD::Channel*)channel;
         if(pChannel) {
             void* pmyData;
@@ -50,6 +46,10 @@ namespace sora {
         pSound = NULL;
         pChannel = NULL;
         pSoundData = NULL;
+		
+		volume = 100.f;
+		pan = 0.f;
+		pitch = 0.f;
                 
         bIsStream = bStream;
     }
@@ -63,6 +63,10 @@ namespace sora {
         pSound = NULL;
         pChannel = NULL;
         pSoundData = NULL;
+		
+		volume = 100.f;
+		pan = 0.f;
+		pitch = 0.f;
 
         if(!SoraFileUtility::fileExists(path)) {            
             ulong32 size;
@@ -123,6 +127,11 @@ namespace sora {
             if(pChannel)
                 pChannel->stop();
             FMOD_RESULT result = pSystem->playSound(FMOD_CHANNEL_FREE, pSound, false, &pChannel);
+			if(pChannel) {
+				pChannel->setVolume(volume/100.f);
+				if(pan != 0.f) pChannel->setPan(pan);
+			}
+			
             if(FMOD_ERROR_CHECK(result) && mEventPublish) {
                 publishEvent(SORAPB_EV_PLAY_STARTED);
                 
@@ -164,16 +173,19 @@ namespace sora {
         if(pChannel)
             // scale to 0-1
             pChannel->setVolume(vol/100.f);
+		volume = vol;
     }
     
     void SoraFMODMusicFile::setPan(float32 pan) {
         if(pChannel)
             pChannel->setPan(pan);
+		this->pan = pan;
     }
     
     void SoraFMODMusicFile::setPitch(float32 pitch) {
       //  if(pChannel)
       //      pChannel->setPitch(
+		this->pitch = pitch;
     }
     
     float32 SoraFMODMusicFile::getVolume() const {
@@ -265,6 +277,10 @@ namespace sora {
             
         pSound = NULL;
         pChannel = NULL;
+		
+		volume = 100.f;
+		pan = 0.f;
+		pitch = 0.f;
     }
     
     SoraFMODSoundEffectFile::SoraFMODSoundEffectFile(const SoraWString& path) {
@@ -275,6 +291,10 @@ namespace sora {
         pSound = NULL;
         pChannel = NULL;
         pSoundData = NULL;
+		
+		volume = 100.f;
+		pan = 0.f;
+		pitch = 0.f;
         
         if(!SoraFileUtility::fileExists(path)) {            
             ulong32 size;
@@ -325,8 +345,16 @@ namespace sora {
     
     void SoraFMODSoundEffectFile::play() {
         if(pSound) {
+			if(pChannel)
+				pChannel->stop();
             FMOD_RESULT result = pSystem->playSound(FMOD_CHANNEL_FREE, pSound, false, &pChannel);
-            if(FMOD_ERROR_CHECK(result) && mEventPublish) {
+			if(pChannel) {
+				pChannel->setVolume(volume/100.f);
+				if(pan != 0.f) pChannel->setPan(pan);
+			}
+			if(FMOD_ERROR_CHECK(result) && mEventPublish) {
+				
+				
                 publishEvent(SORAPB_EV_PLAY_STARTED);
                 pChannel->setUserData((void*)this);
                 pChannel->setCallback(myChannelCallback);
@@ -347,16 +375,19 @@ namespace sora {
         if(pChannel)
             // scale to 0-1
             pChannel->setVolume(vol/100.f);
+		volume = vol;
     }
     
     void SoraFMODSoundEffectFile::setPan(float32 pan) {
         if(pChannel)
             pChannel->setPan(pan);
+		this->pan = pan;
     }
     
     void SoraFMODSoundEffectFile::setPitch(float32 pitch) {
         //  if(pChannel)
         //      pChannel->setPitch(
+		this->pitch = pitch;
     }
     
     float32 SoraFMODSoundEffectFile::getVolume() const {

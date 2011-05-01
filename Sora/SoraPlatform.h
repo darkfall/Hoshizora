@@ -17,11 +17,11 @@
 
 /*
  gcc std extension
- if gcc version > 4
+ if gcc version >= 4
  then there is tr1 support
  visual studio 2008 sp1 or above also has tr1 support
  to do with vs version check
- khash also available as an external khash option
+ khash also available as an external kash option
  */
 
 
@@ -199,7 +199,7 @@ typedef std::wstring SoraWString;
 
 	#define OS_ANDROID
 
-#elif defined(WIN32)
+#elif defined(WIN32) || defined(_MSC_VER)
 	#define FONT_PATH L"C:/Windows/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
@@ -262,24 +262,6 @@ typedef enum {
 	OS_TYPE_ANDROID = 5,
 	OS_TYPE_OTHER = 6,
 } OS_TYPE_ENUM;
-
-static int OS_TYPE() {
-#if defined(OS_OSX)
-	return OS_TYPE_OSX;
-#endif
-
-#if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32) || defined(__CYGWIN__))
-	return OS_TYPE_WIN32;
-#endif
-
-#if defined(OS_IOS)
-	return OS_TYPE_IOS;
-#endif
-
-	return OS_TYPE_LINUX;
-
-	//return OS_TYPE_OTHER;
-}
 
 #ifndef _DEBUG
 #define _DEBUG

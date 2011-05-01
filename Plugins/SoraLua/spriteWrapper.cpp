@@ -24,6 +24,22 @@ namespace spritewrapper {
         return (HSORASPRITE)(new SoraSprite(tex, x, y, w, h));
     }
     
+	HSORASPRITE createSpriteWH(float32 w, float32 h){
+		return (HSORASPRITE)(new SoraSprite(SORA->createTextureWH(w, h)));
+	}
+	
+	HSORATEXTURE createTexture(const SoraWString& path) {
+		return SORA->createTexture(path);
+	}
+	
+	HSORATEXTURE createTextureWH(float32 w, float32 h) {
+		return SORA->createTextureWH(w, h);
+	}
+	
+	void releaseTexture(HSORATEXTURE tex) {
+		SORA->releaseTexture(tex);
+	}
+	
     void setTextureRect(HSORASPRITE h, float32 x, float32 y, float32 w, float32 fh) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setTextureRect(x, y, w, fh);
@@ -31,12 +47,21 @@ namespace spritewrapper {
             throw SORA_EXCEPTION("Invalid sprite arg");
     }
     
-    void setColor(HSORASPRITE h, ulong32 c, int32 i) {
+    void setColor(HSORASPRITE h, float32 r, float32 g, float32 b, float32 a) {
         SoraSprite* p = (SoraSprite*)(h);
-        if(p) p->setColor(c, i);
+		SoraColorRGBA color(r, g, b, a);
+        if(p) p->setColor(color.GetHWColor(), -1);
         else
             throw SORA_EXCEPTION("Invalid sprite arg");
     }
+	
+	void setVertexColor(HSORASPRITE h, float32 r, float32 g, float32 b, float32 a, int32 i) {
+		SoraSprite* p = (SoraSprite*)(h);
+		SoraColorRGBA color(r, g, b, a);
+        if(p) p->setColor(color.GetHWColor(), i);
+        else
+            throw SORA_EXCEPTION("Invalid sprite arg");
+	}
     
     void setZ(HSORASPRITE h, float32 z, int32 i) {
         SoraSprite* p = (SoraSprite*)(h);
@@ -263,13 +288,22 @@ namespace spritewrapper {
             throw SORA_EXCEPTION("Invalid sprite arg");
     }
     
-    void release(HSORASPRITE h, bool bDeleteTexture) {
+    void release(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)h;
         if(p) {
             delete p;
             p = 0;
         }
     }
+	
+	void setAlpha(HSORASPRITE h, float32 a) {
+		SoraSprite* p = (SoraSprite*)h;
+		if(p) {
+			SoraColorRGBA col = p->getColor();
+			col.a = a;
+			p->setColor(col.GetHWColor());
+		}
+	}
 } // namespace spritewrapper
 
 namespace imageeffectwrapper {
@@ -292,5 +326,7 @@ namespace imageeffectwrapper {
     ulong32 makeEffect_rotation(float32 start, float32 end, float32 time, int32 mode) {
         return (ulong32)(new SoraImageEffectRotation(start, end, time, (sora::IMAGE_EFFECT_MODE)mode));
     }
-    
+    ulong32 makeEffect_rotationZ(float32 start, float32 zstart, float32 end, float32 zend, float32 time, int32 mode) {
+		return (ulong32)(new SoraImageEffectRotation(start, zstart, end, zend, time, (sora::IMAGE_EFFECT_MODE)mode));
+	}
 }

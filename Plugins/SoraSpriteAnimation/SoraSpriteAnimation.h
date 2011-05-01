@@ -74,17 +74,18 @@ private:
 #define UNPACK_ANIMATION_IN_MEM(data, size) SoraSpriteAnimationPacker::unpack(data, size)
 	
 	typedef enum {
-		ANCHOR_UPPER_LEFT,
-		ANCHOR_UPPER_RIGHT,
-		ANCHOR_LOWER_RIGHT,
-		ANCHOR_LOWER_LEFT,
-		ANCHOR_MIDDLE,
+		ANCHOR_UPPER_LEFT=1,
+		ANCHOR_UPPER_RIGHT=2,
+		ANCHOR_LOWER_RIGHT=3,
+		ANCHOR_LOWER_LEFT=4,
+		ANCHOR_MIDDLE=5,
 	} ANIMATION_SPRITE_ANCHOR;
 	
 class SoraSpriteAnimation: public SoraObject {
 	friend class SoraSpriteAnimationPacker;
 	
 public:
+	SoraSpriteAnimation(const std::wstring& anmPath);
 	~SoraSpriteAnimation();
 	
 	typedef LANM_TEX SoraAnimationRect;
@@ -103,7 +104,7 @@ public:
 	 @param bLoop, is loop
 	 @param bQueue, is put the anime in playing queue, if false, then the anime would start playing immediately
 	 */
-	void play(const char* name, bool bLoop=true, bool bQueue=false);
+	void playEx(const char* name, bool bLoop=true, bool bQueue=false);
 	
 	void pause();
 	void resume();
@@ -120,7 +121,7 @@ public:
 	
 	SoraSprite* getSprite() const;
 	
-	void setAnchor(ANIMATION_SPRITE_ANCHOR anchor);
+	void setAnchor(int32 anchor);
 	ANIMATION_SPRITE_ANCHOR getAnchor() const;
 		
 private:

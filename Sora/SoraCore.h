@@ -51,13 +51,13 @@ namespace sora {
 		SoraPlugin* SORACALL getPlugin	(const SoraString& sPluginName);
 
 		void	SORACALL setFPS(int32 fps);
-		float32 SORACALL getFPS() const;
-		float32 SORACALL getDelta() const;
-		float32 SORACALL getTime() const;
-		int32	SORACALL getFrameCount() const;
+		float32 SORACALL getFPS();
+		float32 SORACALL getDelta();
+		float32 SORACALL getTime();
+		int32	SORACALL getFrameCount();
 		void	SORACALL setTimeScale(float32 scale);
-		float32 SORACALL getTimeScale() const;
-		s_int64 SORACALL getCurrentSystemTime() const;
+		float32 SORACALL getTimeScale();
+		s_int64 SORACALL getCurrentSystemTime();
 
 		// render system APIs
 		void SORACALL beginScene(ulong32 c=0, ulong32 h=0);

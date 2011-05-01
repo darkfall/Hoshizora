@@ -46,3 +46,127 @@ BulletData {
 BulletData {
 	TexId: 1 TexRect: (240 0 16 16) ShootColor: (255 255 255) BulletId: 16
 }
+
+BulletData {
+	TexId: 1 TexRect: (0 16 16 16) ShootColor: (255 255 255) BulletId: 17
+}
+BulletData {
+	TexId: 1 TexRect: (16 16 16 16) ShootColor: (255 255 255) BulletId: 18
+}
+BulletData {
+	TexId: 1 TexRect: (32 16 16 16) ShootColor: (255 255 255) BulletId: 19
+}
+BulletData {
+	TexId: 1 TexRect: (48 16 16 16) ShootColor: (255 255 255) BulletId: 20
+}
+BulletData {
+	TexId: 1 TexRect: (64 16 16 16) ShootColor: (255 255 255) BulletId: 21
+}
+BulletData {
+	TexId: 1 TexRect: (80 16 16 16) ShootColor: (255 255 255) BulletId: 22
+}
+BulletData {
+	TexId: 1 TexRect: (96 16 16 16) ShootColor: (255 255 255) BulletId: 23
+}
+BulletData {
+	TexId: 1 TexRect: (112 16 16 16) ShootColor: (255 255 255) BulletId: 24
+}
+BulletData {
+	TexId: 1 TexRect: (128 16 16 16) ShootColor: (255 255 255) BulletId: 25
+}
+BulletData {
+	TexId: 1 TexRect: (144 16 16 16) ShootColor: (255 255 255) BulletId: 26
+}
+BulletData {
+	TexId: 1 TexRect: (160 16 16 16) ShootColor: (255 255 255) BulletId: 27
+}
+BulletData {
+	TexId: 1 TexRect: (176 16 16 16) ShootColor: (255 255 255) BulletId: 28
+}
+BulletData {
+	TexId: 1 TexRect: (192 16 16 16) ShootColor: (255 255 255) BulletId: 29
+}
+
+BulletData {
+	TexId: 1 TexRect: (0 32 24 24) ShootColor: (255 255 255) BulletId: 30
+}
+BulletData {
+	TexId: 1 TexRect: (24 32 24 24) ShootColor: (255 255 255) BulletId: 31
+}
+BulletData {
+	TexId: 1 TexRect: (48 32 24 24) ShootColor: (255 255 255) BulletId: 32
+}
+BulletData {
+	TexId: 1 TexRect: (72 32 24 24) ShootColor: (255 255 255) BulletId: 33
+}
+BulletData {
+	TexId: 1 TexRect: (96 32 24 24) ShootColor: (255 255 255) BulletId: 34
+}
+BulletData {
+	TexId: 1 TexRect: (120 32 24 24) ShootColor: (255 255 255) BulletId: 35
+}
+BulletData {
+	TexId: 1 TexRect: (144 32 24 24) ShootColor: (255 255 255) BulletId: 36
+}
+BulletData {
+	TexId: 1 TexRect: (168 32 24 24) ShootColor: (255 255 255) BulletId: 37
+}
+BulletData {
+	TexId: 1 TexRect: (192 32 24 24) ShootColor: (255 255 255) BulletId: 38
+}
+BulletData {
+	TexId: 1 TexRect: (216 32 24 24) ShootColor: (255 255 255) BulletId: 39
+}
+BulletData {
+	TexId: 1 TexRect: (240 32 24 24) ShootColor: (255 255 255) BulletId: 40
+}
+BulletData {
+	TexId: 1 TexRect: (264 32 24 24) ShootColor: (255 255 255) BulletId: 41
+}
+BulletData {
+	TexId: 1 TexRect: (288 32 24 24) ShootColor: (255 255 255) BulletId: 42
+}
+
+BulletData {
+	TexId: 1 TexRect: (0 56 32 32) ShootColor: (255 255 255) BulletId: 43
+}
+BulletData {
+	TexId: 1 TexRect: (32 56 32 32) ShootColor: (255 255 255) BulletId: 44
+}
+BulletData {
+	TexId: 1 TexRect: (64 56 32 32) ShootColor: (255 255 255) BulletId: 45
+}
+BulletData {
+	TexId: 1 TexRect: (96 56 32 32) ShootColor: (255 255 255) BulletId: 46
+}
+BulletData {
+	TexId: 1 TexRect: (128 56 32 32) ShootColor: (255 255 255) BulletId: 47
+}
+BulletData {
+	TexId: 1 TexRect: (160 56 32 32) ShootColor: (255 255 255) BulletId: 48
+}
+BulletData {
+	TexId: 1 TexRect: (192 56 32 32) ShootColor: (255 255 255) BulletId: 49
+}
+BulletData {
+	TexId: 1 TexRect: (224 56 32 32) ShootColor: (255 255 255) BulletId: 50
+}
+BulletData {
+	TexId: 1 TexRect: (256 56 32 32) ShootColor: (255 255 255) BulletId: 51
+}
+BulletData {
+	TexId: 1 TexRect: (288 56 32 32) ShootColor: (255 255 255) BulletId: 52
+}
+BulletData {
+	TexId: 1 TexRect: (320 56 32 32) ShootColor: (255 255 255) BulletId: 53
+}
+BulletData {
+	TexId: 1 TexRect: (352 56 32 32) ShootColor: (255 255 255) BulletId: 54
+}
+BulletData {
+	TexId: 1 TexRect: (384 56 32 32) ShootColor: (255 255 255) BulletId: 55
+}
+
+BulletData {
+	TexId: 1 TexRect: (0 88 16 24) ShootColor: (255 255 255) BulletId: 56
+}

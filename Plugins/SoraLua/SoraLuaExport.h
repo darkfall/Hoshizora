@@ -11,6 +11,7 @@
 #include "spriteWrapper.h"
 #include "fontWrapper.h"
 #include "SoraEventManager.h"
+#include "SoraMath.h"
 
 namespace sora { 
 
@@ -31,6 +32,12 @@ namespace sora {
 			SoraCore* pCore = SoraCore::Instance();
 			gge::LuaClass<SoraCore>(state, "SoraCore", pCore)
             .def("setFPS", &SoraCore::setFPS)
+			.def("getFPS", &SoraCore::getFPS)
+			.def("getFrameCount", &SoraCore::getFrameCount)
+			.def("getTime", &SoraCore::getTime)
+			.def("getTimeScale", &SoraCore::getTimeScale)
+			.def("setTimeScale", &SoraCore::setTimeScale)
+			.def("getDelta", &SoraCore::getDelta)
             .def("setTimeScale", &SoraCore::setTimeScale)
             .def("beginScene", &SoraCore::beginScene)
             .def("endScene", &SoraCore::endScene)
@@ -79,8 +86,13 @@ namespace sora {
                 .def("createSprite", &spritewrapper::createSprite)
                 .def("createSpriteWithTex", &spritewrapper::createSpriteWithTex)
                 .def("createSpriteWithTexEx", &spritewrapper::createSpriteWithTexEx)
+				.def("createSpriteWH", &spritewrapper::createSpriteWH)
+				.def("createTexture", &spritewrapper::createTexture)
+				.def("createTextureWH", &spritewrapper::createTextureWH)
+				.def("releaseTexture", &spritewrapper::releaseTexture)
 				.def("setTextureRect", &spritewrapper::setTextureRect)
 				.def("setColor", &spritewrapper::setColor)
+				.def("setVertexColor", &spritewrapper::setVertexColor)
 				.def("setZ", &spritewrapper::setZ)
 				.def("getColor", &spritewrapper::getColor)
 				.def("getZ", &spritewrapper::getZ)
@@ -112,13 +124,15 @@ namespace sora {
                 .def("getPosX", &spritewrapper::getPosX)
                 .def("getPosY", &spritewrapper::getPosY)
 				.def("release", &spritewrapper::release)
+				.def("setAlpha", &spritewrapper::setAlpha)
             
 				.def("makeEffectFade", &imageeffectwrapper::makeEffect_fade)
 				.def("makeEffectTransition", &imageeffectwrapper::makeEffect_transitions)
 				.def("makeEffectScale", &imageeffectwrapper::makeEffect_scale)
 				.def("makeEffectTensile", &imageeffectwrapper::makeEffect_scale_tensile)
                 .def("makeEffectColorTransitions", &imageeffectwrapper::makeEffect_colorTransitions)
-                .def("makeEffectRotation", &imageeffectwrapper::makeEffect_rotation);
+                .def("makeEffectRotation", &imageeffectwrapper::makeEffect_rotation)	
+				.def("makeEffectRotationZ", &imageeffectwrapper::makeEffect_rotationZ);
 		}
         
         static void export_font(SoraLuaObject* state) {
@@ -283,6 +297,10 @@ namespace sora {
 			global.SetInteger("SORA_JOY_RIGHT",		SORA_JOY_RIGHT);
 			global.SetInteger("SORA_JOY_UP",		SORA_JOY_UP);
 			global.SetInteger("SORA_JOY_DOWN",		SORA_JOY_DOWN);
+			
+			global.SetNumber("PI", (lua_Number)F_PI);
+			global.SetNumber("PI_2", (lua_Number)F_PI_2);
+			global.SetNumber("PI_4", (lua_Number)F_PI_4);
 
 			global.SetInteger("MB_OK", MB_OK);
             global.SetInteger("MB_ICONERROR", MB_ICONERROR);

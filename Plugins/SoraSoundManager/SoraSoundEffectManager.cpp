@@ -26,19 +26,19 @@ namespace sora {
 		mSoundEffects.clear();
 	}
 
-	SoundEffectId SoraSoundEffectManager::load(const std::wstring& effectName) {
-		SoundEffectId eid = str2id(effectName);
-		SOUND_EFFECT_MAP::iterator itEffect = mSoundEffects.find(eid);
-		if(itEffect != mSoundEffects.end() && (itEffect->second != NULL)) {
-			return eid;
+	SoundEffectId SoraSoundEffectManager::load(const std::wstring& effectName, SoundEffectId sid) {
+		SOUND_EFFECT_MAP::iterator itEffect = mSoundEffects.find(sid);
+		while(itEffect != mSoundEffects.end() && (itEffect->second != NULL)) {
+			sid++;
+			itEffect = mSoundEffects.find(sid);
 		} 
 		
 		SoraSoundEffectFile* pefile = SORA->createSoundEffectFile(effectName);
 		if(pefile == NULL)
 			return 0;
 		
-		mSoundEffects[eid] = pefile;
-		return eid;
+		mSoundEffects[sid] = pefile;
+		return sid;
 	}
 	
 	void SoraSoundEffectManager::unload(SoundEffectId eid) {
@@ -62,7 +62,6 @@ namespace sora {
 	bool SoraSoundEffectManager::play(SoundEffectId eid) {
 		SOUND_EFFECT_MAP::iterator itEffect = mSoundEffects.find(eid);
 		if(itEffect != mSoundEffects.end() && (itEffect->second != NULL)) {
-			itEffect->second->setVolume(effectVolume);
 			itEffect->second->play();
 			return true;
 		}
@@ -77,6 +76,12 @@ namespace sora {
 	}
 	
 	void SoraSoundEffectManager::setVolume(float32 vol) {
+		SOUND_EFFECT_MAP::iterator itEffect = mSoundEffects.begin();
+		while(itEffect != mSoundEffects.end()) {
+			if(itEffect->second != NULL)
+				itEffect->second->setVolume(vol);
+			++itEffect;
+		}
 		effectVolume = vol;
 	}
 	

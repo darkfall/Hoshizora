@@ -21,6 +21,9 @@
 
 
 #include "SoraSoundManager/SoraBGMManager.h"
+#include "SoraSoundManager/SoundManagerLuaExport.h"
+
+#include "SoraSpriteAnimation/AnimationLuaExport.h"
 
 #include "../MEAD/bulletLuaExport.h"
 #include "../MEAD/meadBossManager.h"
@@ -45,9 +48,6 @@ bool mainWindow::updateFunc() {
 	
 	}
 	
-	mead::globalBulletManagerUpdate();
-	mead::meadBossManager::Instance()->update();
-
     return false;
 }
 
@@ -61,10 +61,9 @@ bool mainWindow::renderFunc() {
 		
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	
+
 	luaObject.update(0.f);
 	luaObject.render();
-	
-	mead::meadBossManager::Instance()->render();
 	
 	sora->endScene();
 	return false;
@@ -82,6 +81,8 @@ void mainWindow::init() {
 	
 	mead::globalBulletManagerInit();
 	mead::exportBulletManager(luaObject.getState());
+	sora::exportSoundManager(luaObject.getState());
+	sora::exportSpriteAnimation(luaObject.getState());
 	
 	luaObject.doScript(L"mybullettest.lua");
 }

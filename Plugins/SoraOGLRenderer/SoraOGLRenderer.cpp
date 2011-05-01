@@ -213,6 +213,9 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::_glSetBlendMode(int32 blend) {
+		if(blend != CurBlendMode)
+			flush();
+		
 //		glDisable(GL_ALPHA_TEST);
 		glEnable(GL_BLEND); // Enable Blending
 
@@ -229,8 +232,8 @@ namespace sora{
                 glClear(GL_DEPTH_BUFFER_BIT);
            //     glEnable(GL_DEPTH_TEST);
             } else {
-                glDisable(GL_DEPTH_TEST);
-            //    glDepthMask(GL_FALSE);
+            //    glDisable(GL_DEPTH_TEST);
+                glDepthMask(GL_FALSE);
             }
 		}
 
@@ -364,7 +367,6 @@ namespace sora{
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
 		}
 	}
 
@@ -422,7 +424,11 @@ namespace sora{
 		glBindTexture(GL_TEXTURE_2D, texId);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+		
+		uint8* texData = new uint8[w*h*4];
+		memset(texData, 255, w*h*4);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+		delete texData;
 
 		return new SoraTexture(texId, w, h, w, h);
 	}

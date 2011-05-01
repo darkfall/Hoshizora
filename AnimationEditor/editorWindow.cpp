@@ -138,7 +138,7 @@ void animationEditorWindow::valueChanged() {
 		if(pAvailableAnimations) {
 			std::string anmId = pAvailableAnimations->getListModel()->getElementAt(pAvailableAnimations->getSelected());
 			if(pAnimatedSprite) {
-				pAnimatedSprite->play(anmId.c_str(), true);
+				pAnimatedSprite->playEx(anmId.c_str(), true);
 			}
 		}
 	}

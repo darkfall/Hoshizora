@@ -1059,6 +1059,8 @@
 		88E340BF136C0A24000B67C8 /* meadBossManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = meadBossManager.cpp; path = ../MEAD/meadBossManager.cpp; sourceTree = SOURCE_ROOT; };
 		88E340C0136C0A24000B67C8 /* meadBossManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meadBossManager.h; path = ../MEAD/meadBossManager.h; sourceTree = SOURCE_ROOT; };
 		88E340F8136C0D09000B67C8 /* bulletLuaHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bulletLuaHelper.cpp; path = ../MEAD/bulletLuaHelper.cpp; sourceTree = SOURCE_ROOT; };
+		88E34272136CEE67000B67C8 /* SoundManagerLuaExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManagerLuaExport.h; sourceTree = "<group>"; };
+		88E34294136CF343000B67C8 /* AnimationLuaExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationLuaExport.h; path = ../Plugins/SoraSpriteAnimation/AnimationLuaExport.h; sourceTree = SOURCE_ROOT; };
 		88F3D53C1286376C001F52E9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		88F3D5D2128637A2001F52E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		88FABD84129F271900B6A1D8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1642,6 +1644,7 @@
 				886E10C11368E67800A77847 /* SoraBGMManager.h */,
 				886E10C21368E67800A77847 /* SoraSoundEffectManager.cpp */,
 				886E10C31368E67800A77847 /* SoraSoundEffectManager.h */,
+				88E34272136CEE67000B67C8 /* SoundManagerLuaExport.h */,
 			);
 			name = SoraSoundManager;
 			path = ../Plugins/SoraSoundManager;
@@ -1899,6 +1902,7 @@
 			children = (
 				88BA9E02135A972100C282EB /* SoraSpriteAnimation.h */,
 				88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */,
+				88E34294136CF343000B67C8 /* AnimationLuaExport.h */,
 			);
 			name = SoraSpriteAnimation;
 			path = ../Sora;
@@ -1913,6 +1917,7 @@
 				88BD14861346ADCA0068AABA /* luaclass.h */,
 				88BD14871346ADCA0068AABA /* LuaPlus */,
 				88BD14F61346ADCA0068AABA /* LuaPlus.dll */,
+				88BD15001346ADCA0068AABA /* SoraLuaStateManager.h */,
 				88BD14F71346ADCA0068AABA /* LuaPlus.lib */,
 				88BD14F81346ADCA0068AABA /* LuaPlusDebug.lib */,
 				88BD14F91346ADCA0068AABA /* LuaPlusHelper.h */,
@@ -1920,7 +1925,6 @@
 				88BD14FD1346ADCA0068AABA /* SoraLuaObject.cpp */,
 				88BD14FE1346ADCA0068AABA /* SoraLuaObject.h */,
 				88BD14FF1346ADCA0068AABA /* SoraLuaStateManager.cpp */,
-				88BD15001346ADCA0068AABA /* SoraLuaStateManager.h */,
 				88BD15011346ADCA0068AABA /* spriteWrapper.cpp */,
 				88BD15021346ADCA0068AABA /* spriteWrapper.h */,
 				88E33EBD136BD554000B67C8 /* fontWrapper.h */,

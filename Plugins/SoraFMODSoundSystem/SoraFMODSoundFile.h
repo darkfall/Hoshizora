@@ -59,6 +59,10 @@ namespace sora {
         
         bool bIsStream;
         void *pSoundData;
+		
+		float32 volume;
+		float32 pitch;
+		float32 pan;
     };
     
     class SoraFMODSoundEffectFile : public SoraSoundEffectFile {
@@ -97,6 +101,10 @@ namespace sora {
         
         FMOD::Sound* pSound;
         FMOD::Channel* pChannel;
+		
+		float32 volume;
+		float32 pitch;
+		float32 pan;
         
         void *pSoundData;
     };

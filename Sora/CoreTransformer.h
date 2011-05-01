@@ -39,7 +39,7 @@ namespace sora {
 	};
 	
 	/*
-	 0 - 2_PI sinf
+	 0 - PI_2 sinf
 	 */
 	template<typename T>
 	class CoreTrigTransformer: public CoreTransformer<T> {
@@ -47,10 +47,26 @@ namespace sora {
 		T slerp(T& t1, T& t2, float32 pos) {
 			if(pos > 1.f) pos = 1.f;
 			else if(pos < 0.f) pos = 0.f;
-			
-			//printf("%f, %f\n", pos, (t1+(t2-t1)*sinf(D_PI_2*pos)));
-
+		
 			return (t1+(t2-t1)*sinf(F_PI_2*pos));
+		}
+		
+		CoreTrigTransformer<T>* copy() {
+			return new CoreTrigTransformer<T>;
+		}
+	};
+	
+	/*
+	 0 - PI*2 sinf, fullround
+	 */
+	template<typename T>
+	class CoreTrigTransformerFull: public CoreTransformer<T> {
+	public:
+		T slerp(T& t1, T& t2, float32 pos) {
+			if(pos > 1.f) pos = 1.f;
+			else if(pos < 0.f) pos = 0.f;
+					
+			return (t1+(t2-t1)*sinf(F_PI*2*pos));
 		}
 		
 		CoreTrigTransformer<T>* copy() {
@@ -65,7 +81,7 @@ namespace sora {
 	
 	template<typename T>
 	T TrigSlerp(T& t1, T& t2, float32 pos) {
-		return (t1+(t2-t1)*sinf(D_PI_2*pos));
+		return (t1+(t2-t1)*sinf(F_PI_2*pos));
 	}
 	
 		

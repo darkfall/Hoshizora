@@ -19,9 +19,16 @@ namespace spritewrapper {
     HSORASPRITE createSprite(const SoraWString& path);
     HSORASPRITE createSpriteWithTex(HSORATEXTURE tex);
     HSORASPRITE createSpriteWithTexEx(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h);
+	HSORASPRITE createSpriteWH(float32 w, float32 h);
+	
+	HSORATEXTURE createTexture(const SoraWString& path);
+	HSORATEXTURE createTextureWH(float32 w, float32 h);
+	void releaseTexture(HSORATEXTURE tex);
     
     void setTextureRect	(HSORASPRITE h, float32 x, float32 y, float32 w, float32 fh);
-    void setColor		(HSORASPRITE h, ulong32 c, int32 i=-1);
+    void setColor		(HSORASPRITE h, float32 r, float32 g, float32 b, float32 a);
+	void setVertexColor (HSORASPRITE h, float32 r, float32 g, float32 b, float32 a, int32 i);
+	void setAlpha		(HSORASPRITE h, float32 a);
     void setZ			(HSORASPRITE h, float32 z, int32 i=-1);
     ulong32 getColor	(HSORASPRITE h, int32 i=-1);
     float32 getZ		(HSORASPRITE h, int32 i=-1);
@@ -58,7 +65,7 @@ namespace spritewrapper {
     void setBlendMode		(HSORASPRITE h, int32 mode);
     int32 getBlendMode		(HSORASPRITE h);
     
-    void release (HSORASPRITE h, bool bDeleteTexture);
+    void release (HSORASPRITE h);
 } // namespace spritewrapper
 
 
@@ -72,6 +79,7 @@ namespace imageeffectwrapper {
     ulong32 makeEffect_scale(float32 s, float32 d, float32 time, int32 mode);
     ulong32 makeEffect_colorTransitions(ulong32 start, ulong32 end, float32 time, int32 mode);
     ulong32 makeEffect_rotation(float32 start, float32 end, float32 time, int32 mode);
+	ulong32 makeEffect_rotationZ(float32 start, float32 zstart, float32 end, float32 zend, float32 time, int32 mode);
     
 } // namespace iamgeeffectwrapper
 

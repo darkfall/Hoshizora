@@ -299,7 +299,6 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const char* pstrlanm) {
 	return anm;
 }
 
-
 int SoraSpriteAnimationPacker::unpackToFile(const char* pstrlanm) {
 	FILE* pf = fopen(pstrlanm, "rb");
 	if(!pf) 
@@ -375,6 +374,95 @@ int SoraSpriteAnimationPacker::unpackToFile(const char* pstrlanm) {
 void SoraSpriteAnimationPacker::clear() {
 	anmNodes.clear();
 }
+	
+SoraSpriteAnimation::SoraSpriteAnimation(const std::wstring& anmPath):
+	anmCount(0), currId(0), currAnmIndex(0), 
+	bPaused(false), bIsPlaying(false), bLoop(true), 
+	defaultId(0), currTime(0), totalTime(0), currNodeId(0), pAnmSprite(NULL) {
+		ulong32 size;
+		void* pData = sora::SORA->getResourceFile(anmPath, size);
+		
+		bool err = false;
+		if(pData) {
+			lMemFile* pmfile = new lMemFile(pData, size);
+			
+			char strHeader[5];
+			pmfile->read(strHeader, 4);
+			strHeader[4] = '\0';
+			
+			if(strcmp(strHeader, LANM_HEADER) != 0)
+				err = true;
+			
+			if(!err) {
+				uint32 texSize;
+				err = !pmfile->read(&texSize);
+				char* texturePath = new char[texSize+1];
+				err = !pmfile->read(texturePath, texSize);
+				texturePath[texSize] = '\0';
+				
+				texturePath = texturePath;
+				delete texturePath;
+			}
+			
+			if(!err) {
+				err = !pmfile->read(&anmCount); 
+			}
+			if(!err) {
+				uint32 size;
+				err = !pmfile->read(&size);
+				char* name = new char[size+1];
+				err = !pmfile->read(name, size);
+				name[size] = '\0';
+				
+				defaultName = name;
+				delete name;
+				
+				err = !pmfile->read(&defaultNameHash);
+				defaultId = defaultNameHash;
+			}
+			
+			if(!err) {
+				for(uint8 i=0; i<anmCount; ++i) {
+					LANM_NODE node;
+					uint32 size;
+					err = !pmfile->read(&size);
+					char* name = new char[size+1];
+					err = !pmfile->read(name, size);
+					name[size] = '\0';
+					node.name = name;
+					delete name;
+					
+					err = !pmfile->read(&node.nameHash);
+					err = !pmfile->read(&node.anmFrame);
+					
+					uint32 anmSize;
+					err = !pmfile->read(&anmSize);
+#ifdef _DEBUG
+					printf("nameHash: %d, anmFrame: %d, anmCount: %d, name: %s\n", node.nameHash, node.anmFrame, anmSize, node.name.c_str());
+#endif
+					for(uint8 j=0; j<anmSize; ++j) {
+						LANM_TEX tex;
+						err = !pmfile->read(&tex.tx);
+						err = !pmfile->read(&tex.ty);
+						err = !pmfile->read(&tex.tw);
+						err = !pmfile->read(&tex.th);
+						
+						node.texList.push_back(tex);
+					}
+					
+					anmNodes.push_back(node);
+					if(err)
+						break;
+				}
+			}
+			
+			pmfile->seek(0);
+			delete pmfile;
+		}
+		
+		SORA->freeResourceFile(pData);
+	}
+	
 
 uint32 SoraSpriteAnimationPacker::addNode(const char* anmName, uint32 frame) {
 	LANM_NODE node;
@@ -479,7 +567,7 @@ void SoraSpriteAnimation::play() {
 	toCurrAnmNode();
 }
 
-void SoraSpriteAnimation::play(const char* name, bool loop, bool isQueue) {
+void SoraSpriteAnimation::playEx(const char* name, bool loop, bool isQueue) {
 	if(!isQueue) {
 		int id = getNodeIdByAnmId(sora::BKDRHash(name));
 		if(id == -1)
@@ -558,7 +646,7 @@ void SoraSpriteAnimation::render() {
 		return pAnmSprite;
 	}
 	
-	void SoraSpriteAnimation::setAnchor(ANIMATION_SPRITE_ANCHOR anchor) {
+	void SoraSpriteAnimation::setAnchor(int32 anchor) {
 		switch (anchor) {
 			case ANCHOR_UPPER_LEFT: if(pAnmSprite) pAnmSprite->setCenter(0.f, 0.f); break;
 			case ANCHOR_UPPER_RIGHT: if(pAnmSprite) pAnmSprite->setCenter((float32)pAnmSprite->getSpriteWidth(), 0.f); break;
