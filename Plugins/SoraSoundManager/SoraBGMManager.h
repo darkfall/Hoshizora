@@ -44,11 +44,44 @@ namespace sora {
 		
 	public:
 		/*
+		 plays a bgm
 		 @param bgmPath, the path of the bgm to play
 		 @param addToQueue, is add the bgm to the bgm queue
 		*/
 		bool   play(const std::wstring& bgmPath, bool addToQueue);
-		void   stop(bool bStopAtEnd);
+		/*
+		 stops the bgm
+		 @param stopAtEnd, is stop the bgm queue at the end of it
+				notice if random bgm playback is enabled, 
+				the queue may never reach the end
+		 */
+		void   stop(bool stopAtEnd);
+		
+		/*
+		 plays a looping background sound that mixes with the bgm
+		 @param bgmsPath, the path of the sound
+		 @param bgsid, the user defined id of the bgs
+		 @param looptime, the loop time of the bgs, pass -1 for infinite loop
+		 @param volume, the volume of the bg sound, this is a scale relative to the bgmVolume, 0.0 - 1.0
+		 @param bgmVolume adjustment, this is a scale relative to the bgmVolume, use 0.0 - 1.0 to adjust bgmvolume to a certain percentage
+		 @return the id represents the bg sound, it is the same with the user defined id if no error happened
+				if the user defined id had already be token in the bgs queue, then the returned id would be the
+				first available id after it
+				return -1 means failed open the bg sound file
+		*/
+		int32	playBGS(const std::wstring& bgmsPath, uint32 bgsid, int32 looptimes, float32 volumeScale, float32 bgmVolumeScale);
+		/*
+		 adjust the volume of a certain bgs
+		 @param volume, the new volume for the bgs
+		 */
+		void	adjustBGSVolume(uint32 bgsid, float32 volume);
+		/*
+		 stops a certain bgs
+		 @param bgsid, the id of the bgs, see @playBGS
+		*/
+		void	stopBGS(uint32 bgsid);
+		
+		
 		
 		void	pause();
 		void	resume();
@@ -123,6 +156,23 @@ namespace sora {
 		bool mStopAtEnd;
 		bool mRandomBGMQueuePlay;
 		bool mPaused;
+		
+		typedef struct tagBGSInfo {
+			uint32 bgsid;
+			SoraMusicFile* bgsFile;
+			
+			uint32 currLoopTimes;
+			uint32 loopTimes;
+			
+			float32 volumeScale;
+			float32 bgmVolumeScale;
+			
+			tagBGSInfo(uint32 id, uint32 lt, uint32 vol, uint32 bgmvol): 
+				bgsid(id), loopTimes(lt), volumeScale(vol), bgmVolumeScale(bgmvol), currLoopTimes(0), bgsFile(NULL) {
+			}
+		} BGSInfo;
+		typedef std::map<uint32, BGSInfo> BGS_MAP;
+		BGS_MAP mBGSounds;
 	};
 	
 } // namespace sora

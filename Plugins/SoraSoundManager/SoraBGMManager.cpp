@@ -228,5 +228,20 @@ namespace sora {
 			toNextBGM();
 		}
 	}
+	
+	
+	int32 SoraBGMManager::playBGS(const std::wstring& bgmsPath, uint32 bgsid, int32 looptimes, float32 volumeScale, float32 bgmVolumeScale) {
+		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
+		while(itBgs != mBGSounds.end() && itBgs->second.bgsFile != NULL) {
+			++bgsid;
+			itBgs = mBGSounds.find(bgsid);
+		}
+	}
+	
+	void SoraBGMManager::adjustBGSVolume(uint32 bgsid, float32 volume) {
+	}
+	
+	void SoraBGMManager::stopBGS(uint32 bgsid) {
+	}
 
 } // namespace sora

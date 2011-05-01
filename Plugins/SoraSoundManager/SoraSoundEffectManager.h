@@ -17,7 +17,7 @@
 
 namespace sora {
 		
-	typedef uint32 SoundEffectId;
+	typedef int32 SoundEffectId;
 	/*
 	 a global sound effect manager for fast and convinient sound effect playback
 	 especially in scripts
@@ -33,9 +33,9 @@ namespace sora {
 		
 		/*
 		 load a sound effect into the manager
-		 if cannot load the effect, the @retval would be 0
+		 if cannot load the effect, the @retval would be -1
 		 @param sid = the id of the sound effect, if it already has been taken, then would return next available id
-		 otherwise @retval = sid, so never take se id 0
+		 otherwise @retval = sid, so never take se id -1
 		 */
 		SoundEffectId load(const std::wstring& effectName, SoundEffectId sid);
 		void unload(SoundEffectId);
