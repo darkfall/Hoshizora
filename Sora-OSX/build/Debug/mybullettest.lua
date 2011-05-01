@@ -14,10 +14,7 @@ SE_START = seManager:load("start.wav", 2);
 SE_SHOOT = seManager:load("shoot.wav", 3);
 seManager:setVolume(100);
 
-
 function update(dt)
-	fontlib.renderString(font, 175, 0, FONT_ALIGNMENT_LEFT, "BULLET: "..tostring(getBulletSize()));
-	fontlib.renderString(font, 175, 580, FONT_ALIGNMENT_LEFT, "FPS: "..tostring(SoraCore:getFPS()));
 	
 	if count == 0 then
 		boss = bossManager:createBoss("mybosstest.lua", "patchouli.txt.anm");
@@ -32,5 +29,9 @@ function update(dt)
 	
 	globalBulletManagerUpdate();
 	setBulletScreenRect(150, -20, 650, 620);
+	
+	fontlib.renderString(font, 175, 20, FONT_ALIGNMENT_LEFT, "BULLET: "..tostring(getBulletSize()));
+	fontlib.renderString(font, 175, 580, FONT_ALIGNMENT_LEFT, "FPS: "..tostring(SoraCore:getFPS()));
+	
 	spritelib.render(sprcover);
 end

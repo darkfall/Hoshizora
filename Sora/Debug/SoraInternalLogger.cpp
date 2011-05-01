@@ -16,7 +16,7 @@
 namespace sora {
 	
 	SoraInternalLogger::SoraInternalLogger(): currLogIndex(0), logInterval(1.f) {
-		logFile.open("SoraLog.txt");
+		logFile.open("./SoraLog.txt");
 		if(!logFile.is_open()) 
 			log("LOGGER: cannot open log file. all logs would only remain while excuting time");
 		

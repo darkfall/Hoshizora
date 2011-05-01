@@ -60,6 +60,9 @@ namespace sora {
 		typedef sora::hash_map<SoundEffectId, SoraSoundEffectFile*> SOUND_EFFECT_MAP;
 		SOUND_EFFECT_MAP mSoundEffects;
 		
+		typedef sora::hash_map<stringId, SoraSoundEffectFile*> LOADED_EFFECT_MAP;
+		LOADED_EFFECT_MAP mLoadedEffects;
+		
 		float32 effectVolume;
 	};
 	

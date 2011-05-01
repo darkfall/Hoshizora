@@ -27,6 +27,12 @@ namespace sora {
 	}
 
 	SoundEffectId SoraSoundEffectManager::load(const std::wstring& effectName, SoundEffectId sid) {
+		LOADED_EFFECT_MAP::iterator itPrev = mLoadedEffects.find(str2idnc(effectName));
+		if(itPrev != mLoadedEffects.end()) {
+			mSoundEffects[sid] = itPrev->second;
+			return sid;
+		}
+		
 		SOUND_EFFECT_MAP::iterator itEffect = mSoundEffects.find(sid);
 		while(itEffect != mSoundEffects.end() && (itEffect->second != NULL)) {
 			sid++;
@@ -38,6 +44,7 @@ namespace sora {
 			return 0;
 		
 		mSoundEffects[sid] = pefile;
+		mLoadedEffects[(str2idnc(effectName))] = pefile;
 		return sid;
 	}
 	

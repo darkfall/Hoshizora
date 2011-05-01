@@ -36,17 +36,8 @@ function update(dt)
 	currentSc.scUpdate();
 	
 	drawbg();
-	
-	spritelib.update(sprbg);
-	spritelib.update(sprbgu);
-	spritelib.render(sprbgu);
-	spritelib.renderWithPos(sprbg, 400, 300);
-	
 	spritelib.renderWithPos(healthBarSpr, 200, 10);
-	
-	if bosscount == 120 then
-		boss:setDied(true);
-	end
+
 	bosscount = bosscount + 1;
 end
 
@@ -57,8 +48,6 @@ function init()
 	boss:playAnimation("stand", true, false);
 	
 	boss:loadScript("patchouli_sc1.lua");
-
-	
 	currentSc = newspellcard(500, royalFire.init, royalFire.update);
 end
 
