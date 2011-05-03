@@ -17,7 +17,18 @@ namespace sora {
     
     static void* lock(void* data, void** pixels) {
         SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
-        *pixels = ctx->pixels;
+		if(ctx->pixels) {
+			if(ctx->internal == 2) {
+				free(ctx->dummy);
+				ctx->dummy = malloc(ctx->videoWidth*ctx->videoHeight*4);
+			}
+			ctx->internal = 0;
+			*pixels = ctx->pixels;
+		}
+		else {
+			ctx->internal = 1;
+			*pixels = ctx->dummy;
+		}
         ++ctx->frameCount;
     
         return 0;
@@ -25,8 +36,10 @@ namespace sora {
     
     static void unlock(void* data, void* id, void* const* pixels) {
         SoraVlcMoviePlayer::MP_CTX* ctx = (SoraVlcMoviePlayer::MP_CTX*)data;
-        ctx->bChanged = true;
-        memcpy(ctx->dummy, ctx->pixels, ctx->pPlayer->getWidth()*ctx->pPlayer->getHeight()*4);
+		if(ctx->pixels && ctx->internal != 1) {
+			ctx->bChanged = true;
+			memcpy(ctx->dummy, ctx->pixels, ctx->pPlayer->getWidth()*ctx->pPlayer->getHeight()*4);
+		}
     }
     
     static void display(void* data, void* id) {
@@ -49,23 +62,39 @@ namespace sora {
                 ctx->bPlaying = false;
                 ctx->pPlayer->publishEvent(SORAPB_EV_PLAY_PAUSED);
                 break;
-            case libvlc_MediaPlayerPlaying: 
+            case libvlc_MediaPlayerPlaying:  {
                 ctx->pPlayer->publishEvent(ctx->bPaused?SORAPB_EV_PLAY_RESUMED:SORAPB_EV_PLAY_STARTED);
-                ctx->bPlaying = true; 
+                ctx->bPlaying = true;
                 break;
+			}
             case libvlc_MediaPlayerEndReached: 
                 ctx->bPlaying = false; 
                 ctx->bStopped = true; 
                 ctx->pPlayer->publishEvent(SORAPB_EV_PLAY_ENDED);
                 break;
+			case libvlc_MediaPlayerPositionChanged: {
+				uint32 w = 0, h;
+				if(libvlc_video_get_size(ctx->mp, 0, &w, &h) == -1) {
+					libvlc_media_player_stop(ctx->mp);
+					ctx->internal = 3;
+					SORA->log("error getting video dimensions, exit");
+				}
+				ctx->pPlayer->setMediaInfo(w, h);
+				ctx->bChanged = true;
+				//libvlc_media_player_stop(ctx->mp);
+				libvlc_event_detach(ctx->evtManager, libvlc_MediaPlayerPositionChanged, eventHandle, ctx);
+				break;
+			}
+				
         }
     }
     
-    SoraVlcMoviePlayer::SoraVlcMoviePlayer(): vlcInstance(0), mp(0), media(0), evtManager(0) {
+    SoraVlcMoviePlayer::SoraVlcMoviePlayer(): vlcInstance(0), mp(0), media(0), evtManager(0), videoWidth(0), videoHeight(0) {
         const char* vlc_argv[] = {
             "--plugin-path=./Plugins"
             "--ignore-config",
-			"-I", "dummy"
+			"-I", "dummy",
+			"--verbose", "2"
         };
         int vlc_argc = sizeof(vlc_argv) / sizeof(*vlc_argv);
         
@@ -73,55 +102,84 @@ namespace sora {
         if(!vlcInstance)
             throw SoraException("Error initializing VLCCore");
         
-        mp = libvlc_media_player_new(vlcInstance);
-        if(!mp)
-            throw SoraException("Error creating vlc media player");
-        
-        evtManager = libvlc_media_player_event_manager(mp);
-        if(!evtManager)
-            throw SoraException("Error creating event manager for player");
+		mp = NULL;
+        evtManager = NULL;
     }
     
     SoraVlcMoviePlayer::~SoraVlcMoviePlayer() {
-        libvlc_media_player_release(mp);
+		if(mp)
+			libvlc_media_player_release(mp);
         libvlc_release(vlcInstance);
     }
     
-    void SoraVlcMoviePlayer::openMedia(const SoraWString& filePath, uint32 width, uint32 height, const SoraString& dis) {
+    bool SoraVlcMoviePlayer::openMedia(const SoraWString& filePath, const SoraString& dis) {
         if(media) { libvlc_media_release(media); }
         media = libvlc_media_new_path(vlcInstance, ws2s(filePath).c_str());
-        libvlc_media_player_set_media(mp, media);
+		if(mp) {
+			libvlc_media_player_release(mp);
+		}
+		mp = libvlc_media_player_new_from_media(media);
+		if(!mp) {
+			SORA->log("Error creating vlc media player");
+			return false;
+		}
+		evtManager = libvlc_media_player_event_manager(mp);
+        if(!evtManager) {
+			SORA->log("Error creating event manager for the media player, event cannot not work");
+			return false;
+		}
+		else {
+			libvlc_event_attach(evtManager, libvlc_MediaPlayerPaused, eventHandle, &frameData);
+			libvlc_event_attach(evtManager, libvlc_MediaPlayerPlaying, eventHandle, &frameData);
+			libvlc_event_attach(evtManager, libvlc_MediaPlayerStopped, eventHandle, &frameData);
+			libvlc_event_attach(evtManager, libvlc_MediaPlayerEndReached, eventHandle, &frameData);
+			libvlc_event_attach(evtManager, libvlc_MediaPlayerPositionChanged, eventHandle, &frameData);
+		}
         libvlc_media_release(media);
-        
-        libvlc_event_attach(evtManager, libvlc_MediaPlayerPaused, eventHandle, &frameData);
-        libvlc_event_attach(evtManager, libvlc_MediaPlayerPlaying, eventHandle, &frameData);
-        libvlc_event_attach(evtManager, libvlc_MediaPlayerStopped, eventHandle, &frameData);
-        libvlc_event_attach(evtManager, libvlc_MediaPlayerEndReached, eventHandle, &frameData);
-        libvlc_event_attach(evtManager, libvlc_MediaPlayerPositionChanged, eventHandle, &frameData);
+		
+		displayFormat = dis;
 
-		setMediaInfo(width, height);
+        frameData.videoWidth = 0;
+        frameData.videoHeight = 0;
+        frameData.pixels = NULL;
+        frameData.dummy = malloc(1024*1024*4);
+		
+		frameData.bPaused = frameData.bPlaying = frameData.bChanged = frameData.bStopped = false;
+		
+		frameData.mp = mp;
+        frameData.pPlayer = this;
+		frameData.evtManager = evtManager;
+		
+		libvlc_video_set_callbacks(mp, lock, unlock, display, &frameData);
 
-        libvlc_video_set_format(mp, dis.c_str(), frameData.videoWidth, frameData.videoHeight, frameData.videoWidth*4);
-		SORA->logf("w: %d, h: %d", getWidth(), getHeight());
-    }
+		// play for first frame to get video infomartion
+		libvlc_media_player_play(mp);
+		while(!frameData.bChanged);
+		frameData.bChanged = false;
+		libvlc_media_player_stop(mp);
+		
+		if(frameData.internal == 3) {
+			if(mp) {
+				libvlc_media_player_release(mp);
+			}
+			return false;
+		}
+		
+		return true;
+	}
     
     void SoraVlcMoviePlayer::setMediaInfo(uint32 w, uint32 h) {
-        if(frameData.pixels) 
-            free(frameData.pixels);
-        if(frameData.dummy)
-            free(frameData.dummy);
-        
-        frameData.videoWidth = w;
-        frameData.videoHeight = h;
-        frameData.pixels = malloc(frameData.videoWidth * frameData.videoHeight * 4);
-        frameData.dummy = malloc(frameData.videoWidth * frameData.videoHeight * 4);
-        
-        frameData.pPlayer = this;
-        
-        libvlc_video_set_callbacks(mp, lock, unlock, display, &frameData);
-    }
+	    videoWidth = frameData.videoWidth = w;
+		videoHeight = frameData.videoHeight = h;
+		
+		frameData.pixels = malloc(w*h*4);
+		frameData.internal = 2;
+	}
     
     void SoraVlcMoviePlayer::play() {
+		libvlc_video_set_callbacks(mp, lock, unlock, display, &frameData);
+		libvlc_video_set_format(mp, displayFormat.c_str(), videoWidth, videoHeight, videoWidth*4);
+
         libvlc_media_player_play(mp);
     }
     
@@ -200,9 +258,5 @@ namespace sora {
     
     void SoraVlcMoviePlayer::setPlayRate(float32 rate) {
         libvlc_media_player_set_rate(mp, rate);
-    }
-    
-    void SoraVlcMoviePlayer::bindSprite(SoraSprite* pSprite) {
-        frameData.pSpr = pSprite;
     }
 } // namespace sora

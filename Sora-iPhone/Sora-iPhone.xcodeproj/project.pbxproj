@@ -136,7 +136,6 @@
 		8897821F13071CAB00A69ADE /* hgerect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897818913071CAB00A69ADE /* hgerect.cpp */; };
 		8897822013071CAB00A69ADE /* hgevector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897818B13071CAB00A69ADE /* hgevector.cpp */; };
 		8897822113071CAB00A69ADE /* llexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897818F13071CAB00A69ADE /* llexer.cpp */; };
-		8897822213071CAB00A69ADE /* md5lib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897819213071CAB00A69ADE /* md5lib.cpp */; };
 		8897822313071CAB00A69ADE /* osxfilewrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8897819513071CAB00A69ADE /* osxfilewrapper.mm */; };
 		8897822413071CAB00A69ADE /* SFMT.c in Sources */ = {isa = PBXBuildFile; fileRef = 889781A713071CAB00A69ADE /* SFMT.c */; };
 		8897822513071CAB00A69ADE /* SoraCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 889781AE13071CAB00A69ADE /* SoraCore.cpp */; };
@@ -457,8 +456,6 @@
 		8897818F13071CAB00A69ADE /* llexer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = llexer.cpp; sourceTree = "<group>"; };
 		8897819013071CAB00A69ADE /* llexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = llexer.h; sourceTree = "<group>"; };
 		8897819113071CAB00A69ADE /* lMemFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lMemFile.h; sourceTree = "<group>"; };
-		8897819213071CAB00A69ADE /* md5lib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5lib.cpp; sourceTree = "<group>"; };
-		8897819313071CAB00A69ADE /* md5lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5lib.h; sourceTree = "<group>"; };
 		8897819413071CAB00A69ADE /* osxfilewrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osxfilewrapper.h; sourceTree = "<group>"; };
 		8897819513071CAB00A69ADE /* osxfilewrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = osxfilewrapper.mm; sourceTree = "<group>"; };
 		8897819613071CAB00A69ADE /* quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quaternion.h; sourceTree = "<group>"; };
@@ -540,7 +537,6 @@
 		889781E513071CAB00A69ADE /* SoraTimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTimerEvent.h; sourceTree = "<group>"; };
 		889781E613071CAB00A69ADE /* SoraTypeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTypeInfo.h; sourceTree = "<group>"; };
 		889781E713071CAB00A69ADE /* SoraWindowInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraWindowInfo.h; sourceTree = "<group>"; };
-		889781E813071CAB00A69ADE /* StreamUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamUtility.h; sourceTree = "<group>"; };
 		889781E913071CAB00A69ADE /* stringId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringId.h; sourceTree = "<group>"; };
 		889781EA13071CAB00A69ADE /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
 		889781EC13071CAB00A69ADE /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
@@ -1054,8 +1050,6 @@
 				8897818D13071CAB00A69ADE /* HoshiNoSora.h */,
 				8897818E13071CAB00A69ADE /* llexer */,
 				8897819113071CAB00A69ADE /* lMemFile.h */,
-				8897819213071CAB00A69ADE /* md5lib.cpp */,
-				8897819313071CAB00A69ADE /* md5lib.h */,
 				8897819413071CAB00A69ADE /* osxfilewrapper.h */,
 				8897819513071CAB00A69ADE /* osxfilewrapper.mm */,
 				8897819613071CAB00A69ADE /* quaternion.h */,
@@ -1125,7 +1119,6 @@
 				889781E513071CAB00A69ADE /* SoraTimerEvent.h */,
 				889781E613071CAB00A69ADE /* SoraTypeInfo.h */,
 				889781E713071CAB00A69ADE /* SoraWindowInfo.h */,
-				889781E813071CAB00A69ADE /* StreamUtility.h */,
 				889781E913071CAB00A69ADE /* stringId.h */,
 				889781EA13071CAB00A69ADE /* TemplateTransformer.h */,
 				889781EB13071CAB00A69ADE /* tinyXML */,
@@ -1377,7 +1370,6 @@
 				8897821F13071CAB00A69ADE /* hgerect.cpp in Sources */,
 				8897822013071CAB00A69ADE /* hgevector.cpp in Sources */,
 				8897822113071CAB00A69ADE /* llexer.cpp in Sources */,
-				8897822213071CAB00A69ADE /* md5lib.cpp in Sources */,
 				8897822313071CAB00A69ADE /* osxfilewrapper.mm in Sources */,
 				8897822413071CAB00A69ADE /* SFMT.c in Sources */,
 				8897822513071CAB00A69ADE /* SoraCore.cpp in Sources */,

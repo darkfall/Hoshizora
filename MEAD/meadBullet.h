@@ -150,6 +150,9 @@ namespace mead {
 			isAlphaBlend = flag;
 		}
 		
+		bool isCustomCollid;
+		float32 collisionRadius;
+		
 		meadBullet(): 
 			positionX(0.f), positionY(0.f), speed(0.f), direction(0.f), texId(0), shootTime(0),
 			originPointX(0.f), originPointY(0.f), speedX(0.f), speedY(0.f), 
@@ -158,7 +161,9 @@ namespace mead {
 			customValue1(0.f), customValue2(0.f),
 			currReflectionTimes(0), reflectionTimes(0),
 			currShootTime(0), currPauseTime(0), pauseTime(0),
-			diedEffectTime(30), currDiedEffectTime(0),
+			diedEffectTime(10), currDiedEffectTime(0),
+			isLaser(false), laserLength(0.f),
+			isCustomCollid(false), collisionRadius(0.f), 
 			isCollision(false), isGraze(true), isShow(true), isDied(false), isImmortal(false), isDownReflection(false), isAlphaBlend(true) {
 		}
 		
@@ -170,11 +175,14 @@ namespace mead {
 			customValue1(0.f), customValue2(0.f),
 			currReflectionTimes(0), reflectionTimes(0),
 			currShootTime(0), currPauseTime(0), pauseTime(0),
-			diedEffectTime(90), currDiedEffectTime(0),
+			diedEffectTime(10), currDiedEffectTime(0),
+			isLaser(false), laserLength(0.f),
+			isCustomCollid(false), collisionRadius(0.f), 
 			isCollision(false), isGraze(true), isShow(true), isDied(false), isImmortal(false), isDownReflection(false), isAlphaBlend(true)  {
 				setSpeed(speed);
 				if(st == 0)
 					isCollision = true;
+				collisionRadius = (texRect.x2 + texRect.y2) / 4;
 		}
 				
 		inline void update() {
@@ -207,6 +215,21 @@ namespace mead {
 			}
 			
 			if(!isDied) {
+				if(isLaser) {
+					if(laserLastTime != 0) {
+						++currLaserLastTime;
+						if(currLaserLastTime >= laserLastTime) {
+							isDied = true;
+						}
+					} else {
+						float32 laserPosX = positionX - laserLength * cosf(direction);
+						float32 laserPosY = positionY + laserLength * sinf(direction);
+						if(!screenRect.TestPoint(laserPosX, laserPosY)) {
+							isDied = true;
+							currDiedEffectTime = diedEffectTime;
+						}
+					}
+				} else
 				if(!screenRect.TestPoint(positionX, positionY)) {
 					if(reflectionTimes == 0 || (!isDownReflection && positionY >= screenRect.y2)) {
 						isDied = true;
@@ -238,27 +261,90 @@ namespace mead {
 			return (isDied && currDiedEffectTime > diedEffectTime);
 		}
 		
+		bool isLaser;
+		float32 laserLength, laserScale;
+		float32 laserWidthScale;
+		uint32 currLaserLastTime, laserLastTime;
+		
+		inline void setLaser(float32 length) {
+			isLaser = true;
+			laserLength = length;
+			
+			currLaserLastTime = laserLastTime = 0;
+			
+			laserScale = length/texRect.y2;
+		}
+		
+		inline void setLaser(float32 width, uint32 lt) {
+			isLaser = true;
+			laserLength = 0.f;
+			
+			laserWidthScale = width / texRect.x2;
+			
+			currLaserLastTime = 0;
+			laserLastTime = lt;
+
+			laserScale = 600 / texRect.y2;
+		}
+		
+		inline bool collisionDetect(float32 x, float32 y) {
+		}
+		
 		inline void render(sora::SoraSprite* spr) {
 			spr->setTextureRect(texRect.x1, texRect.y1, texRect.x2, texRect.y2);
-			spr->setCenter(texRect.x2/2, texRect.y2/2);
-			spr->setRotation(-direction+sora::DGR_RAD(90));
-			spr->setColor(0xFFFFFFFF);
-			if(shootTime == 0) {
-				if(!isDied) {
-					spr->setBlendMode(BLEND_COLORMUL | isAlphaBlend?BLEND_ALPHABLEND:BLEND_ALPHAADD | BLEND_NOZWRITE);
-					spr->setScale(1.f, 1.f);
+			if(!isLaser) {
+				spr->setCenter(texRect.x2/2, texRect.y2/2);
+				spr->setRotation(-direction+sora::DGR_RAD(90));
+				spr->setColor(0xFFFFFFFF);
+				if(shootTime == 0) {
+					if(!isDied) {
+						spr->setBlendMode(BLEND_COLORMUL | isAlphaBlend?BLEND_ALPHABLEND:BLEND_ALPHAADD | BLEND_NOZWRITE);
+						spr->setScale(1.f, 1.f);
+					} else {
+						spr->setBlendMode(BLEND_COLORMUL | BLEND_ALPHAADD | BLEND_NOZWRITE);
+						sora::SoraColorRGBA color = spr->getColor();
+						color.a = 1.f - (float32)currDiedEffectTime/diedEffectTime;
+						spr->setColor(color.GetHWColor());
+					}
 				} else {
 					spr->setBlendMode(BLEND_COLORMUL | BLEND_ALPHAADD | BLEND_NOZWRITE);
-					sora::SoraColorRGBA color = spr->getColor();
-					color.a = 1.f - (float32)currDiedEffectTime/diedEffectTime;
-					spr->setColor(color.GetHWColor());
+					float32 scale = 1.f + (2.f - (float32)currShootTime/shootTime * 2);
+					spr->setScale(scale, scale);
 				}
+				spr->render(positionX, positionY);
 			} else {
-				spr->setBlendMode(BLEND_COLORMUL | BLEND_ALPHAADD | BLEND_NOZWRITE);
-				float32 scale = 1.f + (2.f - (float32)currShootTime/shootTime * 2);
-				spr->setScale(scale, scale);
+				if(laserLength != 0.f) {
+					spr->setBlendMode(BLEND_COLORMUL | BLEND_ALPHAADD | BLEND_NOZWRITE);
+					spr->setCenter(texRect.x2/2, texRect.y2/2);
+					spr->setRotation(-direction+sora::DGR_RAD(90));
+					spr->setColor(0xFFFFFFFF);
+					if(shootTime == 0) {
+						if(!isDied)
+							spr->setScale(1.f, laserScale);
+						else {
+							spr->setScale(1.f, laserScale*(float32)currDiedEffectTime/diedEffectTime);
+						}
+					} else {
+						spr->setScale(1.f, laserScale*(float32)currShootTime/shootTime);
+					}
+					spr->render(positionX, positionY);
+				} else {
+					spr->setBlendMode(BLEND_COLORMUL | BLEND_ALPHAADD | BLEND_NOZWRITE);
+					spr->setCenter(texRect.x2/2, 0.f);
+					spr->setRotation(-direction+sora::DGR_RAD(90));
+					spr->setColor(0xFFFFFFFF);
+					if(shootTime != 0) {
+						spr->setScale(0.1f, laserScale);
+					} else {
+						if(!isDied)
+							spr->setScale(laserWidthScale, laserScale);
+						else {
+							spr->setScale(laserWidthScale - (float32)currDiedEffectTime/diedEffectTime * laserWidthScale, laserScale);
+						}
+					}
+					spr->render(positionX, positionY);
+				}
 			}
-			spr->render(positionX, positionY);
 		}
 		
 		uint32 pauseTime;

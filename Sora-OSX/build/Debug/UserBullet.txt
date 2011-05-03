@@ -168,5 +168,9 @@ BulletData {
 }
 
 BulletData {
-	TexId: 1 TexRect: (0 88 16 24) ShootColor: (255 255 255) BulletId: 56
+	TexId: 1 TexRect: (2 90 14 20) ShootColor: (255 255 255) BulletId: 56
+}
+
+BulletData {
+	TexId: 1 TexRect: (16 88 8 24) BulletId: 60 
 }

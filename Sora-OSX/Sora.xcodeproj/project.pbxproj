@@ -71,9 +71,7 @@
 		883900F0131A096700CC101A /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 883900EE131A096700CC101A /* editorWindow.cpp */; };
 		884575D81300DB38003EC408 /* state_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884575D71300DB38003EC408 /* state_test.cpp */; };
 		884E5E3C133AFCB3006E9CC6 /* libvlc.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E38133AFCB3006E9CC6 /* libvlc.5.dylib */; };
-		884E5E3D133AFCB3006E9CC6 /* libvlc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E39133AFCB3006E9CC6 /* libvlc.dylib */; };
 		884E5E3E133AFCB3006E9CC6 /* libvlccore.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E3A133AFCB3006E9CC6 /* libvlccore.4.dylib */; };
-		884E5E3F133AFCB3006E9CC6 /* libvlccore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E3B133AFCB3006E9CC6 /* libvlccore.dylib */; };
 		884E91C612DEAE0100598D7E /* FolderTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884E91C512DEAE0100598D7E /* FolderTree.cpp */; };
 		88504B9912ECDB4E009B9F45 /* SFMT.c in Sources */ = {isa = PBXBuildFile; fileRef = 88504B9712ECDB4E009B9F45 /* SFMT.c */; };
 		8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851F6F0135FA97900091C9C /* libfmodexL.dylib */; };
@@ -88,9 +86,6 @@
 		886E0E2F1367A70100A77847 /* SoraSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E281367A70100A77847 /* SoraSound.cpp */; };
 		886E0E301367A70100A77847 /* SoraSoundLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E2A1367A70100A77847 /* SoraSoundLoader.cpp */; };
 		886E0E311367A70100A77847 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E2C1367A70100A77847 /* Sound.cpp */; };
-		886E0FF713681F5800A77847 /* GLFW.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 886E0FDB13681F5800A77847 /* GLFW.lib */; };
-		886E0FF813681F5800A77847 /* linux_libglfw.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 886E0FDC13681F5800A77847 /* linux_libglfw.lib */; };
-		886E0FF913681F5800A77847 /* osx_libglfw_i386.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 886E0FDD13681F5800A77847 /* osx_libglfw_i386.lib */; };
 		886E0FFA13681F5800A77847 /* osx_libglfw_x86_64.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 886E0FDE13681F5800A77847 /* osx_libglfw_x86_64.lib */; };
 		886E0FFC13681F5800A77847 /* image_DXT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FE113681F5800A77847 /* image_DXT.cpp */; };
 		886E0FFE13681F5800A77847 /* image_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0FE413681F5800A77847 /* image_helper.cpp */; };
@@ -180,6 +175,9 @@
 		88B09C9A12B8AE6600777409 /* soraguiimageloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B09C5F12B8AE6600777409 /* soraguiimageloader.cpp */; };
 		88B09C9B12B8AE6600777409 /* soraguiinput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B09C6112B8AE6600777409 /* soraguiinput.cpp */; };
 		88B09C9F12B8AE6600777409 /* xmlgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B09C6B12B8AE6600777409 /* xmlgui.cpp */; };
+		88B6A322136F86E0000564F9 /* meadPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6A321136F86E0000564F9 /* meadPlayer.cpp */; };
+		88B6A32F136F88B3000564F9 /* SoraGlobalValues.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6A32E136F88B3000564F9 /* SoraGlobalValues.cpp */; };
+		88B6A3A8136F990C000564F9 /* GlobalValuesLuaExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6A3A7136F990C000564F9 /* GlobalValuesLuaExporter.cpp */; };
 		88BA9E03135A972100C282EB /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */; };
 		88BD150C1346ADCA0068AABA /* guichanWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BD14831346ADCA0068AABA /* guichanWrapper.cpp */; };
 		88BD150D1346ADCA0068AABA /* libluaplus.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BD14851346ADCA0068AABA /* libluaplus.dylib */; };
@@ -231,8 +229,6 @@
 		88BD153B1346ADCA0068AABA /* pluto.c in Sources */ = {isa = PBXBuildFile; fileRef = 88BD14EE1346ADCA0068AABA /* pluto.c */; };
 		88BD153C1346ADCA0068AABA /* print.c in Sources */ = {isa = PBXBuildFile; fileRef = 88BD14F01346ADCA0068AABA /* print.c */; };
 		88BD153D1346ADCA0068AABA /* srm.c in Sources */ = {isa = PBXBuildFile; fileRef = 88BD14F41346ADCA0068AABA /* srm.c */; };
-		88BD153E1346ADCA0068AABA /* LuaPlus.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BD14F71346ADCA0068AABA /* LuaPlus.lib */; };
-		88BD153F1346ADCA0068AABA /* LuaPlusDebug.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BD14F81346ADCA0068AABA /* LuaPlusDebug.lib */; };
 		88BD15411346ADCA0068AABA /* SoraLuaObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BD14FD1346ADCA0068AABA /* SoraLuaObject.cpp */; };
 		88BD15421346ADCA0068AABA /* SoraLuaStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BD14FF1346ADCA0068AABA /* SoraLuaStateManager.cpp */; };
 		88BD15431346ADCA0068AABA /* spriteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BD15011346ADCA0068AABA /* spriteWrapper.cpp */; };
@@ -271,6 +267,7 @@
 		88E340C1136C0A24000B67C8 /* meadBoss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88E340BD136C0A24000B67C8 /* meadBoss.cpp */; };
 		88E340C2136C0A24000B67C8 /* meadBossManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88E340BF136C0A24000B67C8 /* meadBossManager.cpp */; };
 		88E340F9136C0D09000B67C8 /* bulletLuaHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88E340F8136C0D09000B67C8 /* bulletLuaHelper.cpp */; };
+		88E345B6136EF747000B67C8 /* SoraiOSStringConv.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88E345B5136EF747000B67C8 /* SoraiOSStringConv.mm */; };
 		88F3D53F1286376C001F52E9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F3D53C1286376C001F52E9 /* OpenGL.framework */; };
 		88F3D5D3128637A2001F52E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F3D5D2128637A2001F52E9 /* Foundation.framework */; };
 		88FABD85129F271900B6A1D8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABD84129F271900B6A1D8 /* AudioToolbox.framework */; };
@@ -460,9 +457,7 @@
 		884575D71300DB38003EC408 /* state_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = state_test.cpp; path = Experimental/state_test.cpp; sourceTree = "<group>"; };
 		884CC87312F88E1300FD18FC /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
 		884E5E38133AFCB3006E9CC6 /* libvlc.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvlc.5.dylib; path = ../Plugins/libvlc/osx/lib/libvlc.5.dylib; sourceTree = "<group>"; };
-		884E5E39133AFCB3006E9CC6 /* libvlc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvlc.dylib; path = ../Plugins/libvlc/osx/lib/libvlc.dylib; sourceTree = "<group>"; };
 		884E5E3A133AFCB3006E9CC6 /* libvlccore.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvlccore.4.dylib; path = ../Plugins/libvlc/osx/lib/libvlccore.4.dylib; sourceTree = "<group>"; };
-		884E5E3B133AFCB3006E9CC6 /* libvlccore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvlccore.dylib; path = ../Plugins/libvlc/osx/lib/libvlccore.dylib; sourceTree = "<group>"; };
 		884E91C412DEAE0100598D7E /* FolderTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FolderTree.h; path = Experimental/FolderTree.h; sourceTree = "<group>"; };
 		884E91C512DEAE0100598D7E /* FolderTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FolderTree.cpp; path = Experimental/FolderTree.cpp; sourceTree = "<group>"; };
 		88504B7B12ECDB11009B9F45 /* hgeRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgeRandom.h; sourceTree = "<group>"; };
@@ -589,9 +584,6 @@
 		886E0E2D1367A70100A77847 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		886E0E2E1367A70100A77847 /* SoundLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundLoader.h; sourceTree = "<group>"; };
 		886E0FDA13681F5800A77847 /* glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw.h; sourceTree = "<group>"; };
-		886E0FDB13681F5800A77847 /* GLFW.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = GLFW.lib; sourceTree = "<group>"; };
-		886E0FDC13681F5800A77847 /* linux_libglfw.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = linux_libglfw.lib; sourceTree = "<group>"; };
-		886E0FDD13681F5800A77847 /* osx_libglfw_i386.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libglfw_i386.lib; sourceTree = "<group>"; };
 		886E0FDE13681F5800A77847 /* osx_libglfw_x86_64.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libglfw_x86_64.lib; sourceTree = "<group>"; };
 		886E0FE113681F5800A77847 /* image_DXT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image_DXT.cpp; sourceTree = "<group>"; };
 		886E0FE213681F5800A77847 /* image_DXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_DXT.h; sourceTree = "<group>"; };
@@ -810,6 +802,12 @@
 		88B09C6512B8AE6600777409 /* SoraGUIResponserMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGUIResponserMap.h; sourceTree = "<group>"; };
 		88B09C6B12B8AE6600777409 /* xmlgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xmlgui.cpp; sourceTree = "<group>"; };
 		88B09C6C12B8AE6600777409 /* xmlgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xmlgui.h; sourceTree = "<group>"; };
+		88B6A320136F86E0000564F9 /* meadPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meadPlayer.h; sourceTree = "<group>"; };
+		88B6A321136F86E0000564F9 /* meadPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = meadPlayer.cpp; sourceTree = "<group>"; };
+		88B6A32D136F88B3000564F9 /* SoraGlobalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGlobalValues.h; sourceTree = "<group>"; };
+		88B6A32E136F88B3000564F9 /* SoraGlobalValues.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraGlobalValues.cpp; sourceTree = "<group>"; };
+		88B6A399136F9503000564F9 /* GlobalValuesLuaExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalValuesLuaExport.h; sourceTree = "<group>"; };
+		88B6A3A7136F990C000564F9 /* GlobalValuesLuaExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlobalValuesLuaExporter.cpp; sourceTree = "<group>"; };
 		88BA3203134FCEAC00FB727B /* SMAct_SetIntValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMAct_SetIntValue.h; path = Experimental/ASSMActions/SMAct_SetIntValue.h; sourceTree = "<group>"; };
 		88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraSpriteAnimation.cpp; path = ../Plugins/SoraSpriteAnimation/SoraSpriteAnimation.cpp; sourceTree = "<group>"; };
 		88BA9E02135A972100C282EB /* SoraSpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraSpriteAnimation.h; path = ../Plugins/SoraSpriteAnimation/SoraSpriteAnimation.h; sourceTree = "<group>"; };
@@ -921,8 +919,6 @@
 		88BD14F41346ADCA0068AABA /* srm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = srm.c; sourceTree = "<group>"; };
 		88BD14F51346ADCA0068AABA /* srm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srm.h; sourceTree = "<group>"; };
 		88BD14F61346ADCA0068AABA /* LuaPlus.dll */ = {isa = PBXFileReference; lastKnownFileType = file; path = LuaPlus.dll; sourceTree = "<group>"; };
-		88BD14F71346ADCA0068AABA /* LuaPlus.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = LuaPlus.lib; sourceTree = "<group>"; };
-		88BD14F81346ADCA0068AABA /* LuaPlusDebug.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = LuaPlusDebug.lib; sourceTree = "<group>"; };
 		88BD14F91346ADCA0068AABA /* LuaPlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaPlusHelper.h; sourceTree = "<group>"; };
 		88BD14FC1346ADCA0068AABA /* SoraLuaExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLuaExport.h; sourceTree = "<group>"; };
 		88BD14FD1346ADCA0068AABA /* SoraLuaObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraLuaObject.cpp; sourceTree = "<group>"; };
@@ -1061,6 +1057,7 @@
 		88E340F8136C0D09000B67C8 /* bulletLuaHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bulletLuaHelper.cpp; path = ../MEAD/bulletLuaHelper.cpp; sourceTree = SOURCE_ROOT; };
 		88E34272136CEE67000B67C8 /* SoundManagerLuaExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManagerLuaExport.h; sourceTree = "<group>"; };
 		88E34294136CF343000B67C8 /* AnimationLuaExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationLuaExport.h; path = ../Plugins/SoraSpriteAnimation/AnimationLuaExport.h; sourceTree = SOURCE_ROOT; };
+		88E345B5136EF747000B67C8 /* SoraiOSStringConv.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSStringConv.mm; sourceTree = "<group>"; };
 		88F3D53C1286376C001F52E9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		88F3D5D2128637A2001F52E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		88FABD84129F271900B6A1D8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1086,18 +1083,11 @@
 				88FABDCA129F2A9C00B6A1D8 /* QTKit.framework in Frameworks */,
 				88FABDD5129F2AA200B6A1D8 /* CoreAudio.framework in Frameworks */,
 				884E5E3C133AFCB3006E9CC6 /* libvlc.5.dylib in Frameworks */,
-				884E5E3D133AFCB3006E9CC6 /* libvlc.dylib in Frameworks */,
 				884E5E3E133AFCB3006E9CC6 /* libvlccore.4.dylib in Frameworks */,
-				884E5E3F133AFCB3006E9CC6 /* libvlccore.dylib in Frameworks */,
 				88BD150D1346ADCA0068AABA /* libluaplus.dylib in Frameworks */,
-				88BD153E1346ADCA0068AABA /* LuaPlus.lib in Frameworks */,
-				88BD153F1346ADCA0068AABA /* LuaPlusDebug.lib in Frameworks */,
 				88BF9F6E135AA63200BB8E70 /* Cg.framework in Frameworks */,
 				8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */,
 				887E35891362C6F400803DA6 /* libfreetype.6.dylib in Frameworks */,
-				886E0FF713681F5800A77847 /* GLFW.lib in Frameworks */,
-				886E0FF813681F5800A77847 /* linux_libglfw.lib in Frameworks */,
-				886E0FF913681F5800A77847 /* osx_libglfw_i386.lib in Frameworks */,
 				886E0FFA13681F5800A77847 /* osx_libglfw_x86_64.lib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1586,9 +1576,6 @@
 				886E100B13681F6100A77847 /* SoraCGGLShader.cpp */,
 				886E100C13681F6100A77847 /* SoraCGGLShader.h */,
 				886E0FD813681F5800A77847 /* glfw */,
-				886E0FDB13681F5800A77847 /* GLFW.lib */,
-				886E0FDC13681F5800A77847 /* linux_libglfw.lib */,
-				886E0FDD13681F5800A77847 /* osx_libglfw_i386.lib */,
 				886E0FDE13681F5800A77847 /* osx_libglfw_x86_64.lib */,
 				886E0FDF13681F5800A77847 /* soil */,
 				886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */,
@@ -1889,6 +1876,18 @@
 			path = widgets;
 			sourceTree = "<group>";
 		};
+		88B6A32C136F88AC000564F9 /* SoraGlobalValues */ = {
+			isa = PBXGroup;
+			children = (
+				88B6A32D136F88B3000564F9 /* SoraGlobalValues.h */,
+				88B6A32E136F88B3000564F9 /* SoraGlobalValues.cpp */,
+				88B6A399136F9503000564F9 /* GlobalValuesLuaExport.h */,
+				88B6A3A7136F990C000564F9 /* GlobalValuesLuaExporter.cpp */,
+			);
+			name = SoraGlobalValues;
+			path = ../Plugins/SoraGlobalValues;
+			sourceTree = SOURCE_ROOT;
+		};
 		88BA3201134FCE7E00FB727B /* SoraASSM_Actions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1918,8 +1917,6 @@
 				88BD14871346ADCA0068AABA /* LuaPlus */,
 				88BD14F61346ADCA0068AABA /* LuaPlus.dll */,
 				88BD15001346ADCA0068AABA /* SoraLuaStateManager.h */,
-				88BD14F71346ADCA0068AABA /* LuaPlus.lib */,
-				88BD14F81346ADCA0068AABA /* LuaPlusDebug.lib */,
 				88BD14F91346ADCA0068AABA /* LuaPlusHelper.h */,
 				88BD14FC1346ADCA0068AABA /* SoraLuaExport.h */,
 				88BD14FD1346ADCA0068AABA /* SoraLuaObject.cpp */,
@@ -2098,9 +2095,7 @@
 			isa = PBXGroup;
 			children = (
 				884E5E38133AFCB3006E9CC6 /* libvlc.5.dylib */,
-				884E5E39133AFCB3006E9CC6 /* libvlc.dylib */,
 				884E5E3A133AFCB3006E9CC6 /* libvlccore.4.dylib */,
-				884E5E3B133AFCB3006E9CC6 /* libvlccore.dylib */,
 				88D1A09B1337FF1700F26121 /* vlc */,
 				88FF1DDA133861E2009E7786 /* SoraVlcMoviePlayer.h */,
 				88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */,
@@ -2217,6 +2212,7 @@
 				88D87D4B12A09A66007D6865 /* SoraSprite.h */,
 				88D87D4C12A09A66007D6865 /* SoraString.h */,
 				88D87D4E12A09A66007D6865 /* SoraStringConv.h */,
+				88E345B5136EF747000B67C8 /* SoraiOSStringConv.mm */,
 				88D87D4D12A09A66007D6865 /* SoraStringConv.cpp */,
 				88D87D4F12A09A66007D6865 /* SoraTexture.cpp */,
 				88D87D5012A09A66007D6865 /* SoraTexture.h */,
@@ -2294,8 +2290,8 @@
 		88DD59FE12E040510081AE6C /* llexer */ = {
 			isa = PBXGroup;
 			children = (
-				88DD59FF12E040510081AE6C /* llexer.cpp */,
 				88DD5A0012E040510081AE6C /* llexer.h */,
+				88DD59FF12E040510081AE6C /* llexer.cpp */,
 			);
 			path = llexer;
 			sourceTree = "<group>";
@@ -2303,6 +2299,7 @@
 		88E33824136A79F2000B67C8 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				88B6A32C136F88AC000564F9 /* SoraGlobalValues */,
 				88E33856136A7D4E000B67C8 /* PartitionTree&GridMap */,
 				8820969212EF5BF500FB7FFF /* gcnExtend */,
 				886E10BF1368E67800A77847 /* SoraSoundManager */,
@@ -2358,12 +2355,14 @@
 				88E33A37136B423C000B67C8 /* meadBulletManager.h */,
 				88E33A38136B423C000B67C8 /* meadBulletManager.cpp */,
 				88E33BA0136B6434000B67C8 /* bulletLuaExport.h */,
-				88E340BC136C0A24000B67C8 /* bulletLuaHelper.h */,
 				88E340F8136C0D09000B67C8 /* bulletLuaHelper.cpp */,
-				88E340BD136C0A24000B67C8 /* meadBoss.cpp */,
+				88E340BC136C0A24000B67C8 /* bulletLuaHelper.h */,
 				88E340BE136C0A24000B67C8 /* meadBoss.h */,
+				88E340BD136C0A24000B67C8 /* meadBoss.cpp */,
 				88E340BF136C0A24000B67C8 /* meadBossManager.cpp */,
 				88E340C0136C0A24000B67C8 /* meadBossManager.h */,
+				88B6A320136F86E0000564F9 /* meadPlayer.h */,
+				88B6A321136F86E0000564F9 /* meadPlayer.cpp */,
 			);
 			name = myDream;
 			sourceTree = "<group>";
@@ -2712,6 +2711,10 @@
 				88E340C1136C0A24000B67C8 /* meadBoss.cpp in Sources */,
 				88E340C2136C0A24000B67C8 /* meadBossManager.cpp in Sources */,
 				88E340F9136C0D09000B67C8 /* bulletLuaHelper.cpp in Sources */,
+				88E345B6136EF747000B67C8 /* SoraiOSStringConv.mm in Sources */,
+				88B6A322136F86E0000564F9 /* meadPlayer.cpp in Sources */,
+				88B6A32F136F88B3000564F9 /* SoraGlobalValues.cpp in Sources */,
+				88B6A3A8136F990C000564F9 /* GlobalValuesLuaExporter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

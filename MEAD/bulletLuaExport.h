@@ -14,15 +14,18 @@
 #include "luaclass.h"
 #include "bulletLuaHelper.h"
 #include "meadBossManager.h"
+#include "SoraGlobalValues/GlobalValuesLuaExport.h"
 
 namespace mead {
 	
 	static void exportBulletManager(LuaPlus::LuaState* state) {
 		LuaClass<meadBulletManager>(state)
-			.create("meadBulletManager")
+			.create("BulletManager")
 			.destroy("free")
 			.def("shootBullet", &meadBulletManager::shootBullet)
 			.def("shootBulletEx", &meadBulletManager::shootBulletEx)
+			.def("shootLaser", &meadBulletManager::shootLaser)
+			.def("shootLaserEx", &meadBulletManager::shootLaserEx)
 			.def("shootBulletDirect", &meadBulletManager::shootBulletDirect)
 			.def("loadBulletConfig", &meadBulletManager::loadBulletConfig)
 			.def("loadBulletSprite", &meadBulletManager::loadBulletSprite)
@@ -36,7 +39,7 @@ namespace mead {
 		
 		
 		LuaClass<meadBullet>(state)
-			.create("meadBullet")
+			.create("MeadBullet")
 			.destroy("free")
 			.def("getPositionX", &meadBullet::getPositionX)
 			.def("getPositionY", &meadBullet::getPositionY)
@@ -93,6 +96,8 @@ namespace mead {
 			.def("globalBulletManagerUpdate", &globalBulletManagerUpdate)
 			.def("shootBullet", &shootBullet)
 			.def("shootBulletEx", &shootBulletEx)
+			.def("shootLaser", &shootLaser)
+			.def("shootLaserEx", &shootLaserEx)
 			.def("shootBulletDirect", &shootBulletDirect)
 			.def("loadBulletConfig", &loadBulletConfig)
 			.def("loadBulletSprite", &loadBulletSprite)
@@ -105,12 +110,14 @@ namespace mead {
 			.def("setBulletDownReflection", &setBulletDownReflection)
 			.def("setBulletAlphaBlend", &setBulletAlphaBlend);
 		
-		gge::LuaClass<meadBossManager>(state, "bossManager", meadBossManager::Instance())
+		gge::LuaClass<meadBossManager>(state, "BossManager", meadBossManager::Instance())
 			.def("createBoss", &meadBossManager::createBoss)
 			.def("isBossDied", &meadBossManager::isBossDied)
 			.def("clearAllBosses", &meadBossManager::clearAllBosses)
 			.def("update", &meadBossManager::update)
 			.def("render", &meadBossManager::render);
+		
+		sora::exportGlobalValuesManager(state);
 	}
 	
 } // namespace mead

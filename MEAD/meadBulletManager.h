@@ -30,6 +30,9 @@ namespace mead {
 		ulong32 shootBullet(float32 posx, float32 posy, float32 speed, float32 direction, uint32 bulletId, uint32 shootTime); 
 		ulong32 shootBulletEx(float32 posx, float32 posy, float32 speed, float32 direction, float32 directionIncremental, uint32 bulletId, uint32 shootTime);
 		
+		ulong32 shootLaser(float32 posx, float32 posy, float32 speed, float32 direction, float32 length, uint32 bulletId, uint32 shootTime);
+		ulong32 shootLaserEx(float32 x, float32 y, float32 width, float32 direction, uint32 bulletId, uint32 shootTime, uint32 lastTime);
+		
 		// lua user data export
 		ulong32 shootBulletDirect(void* bullet, uint32 bulletId, uint32 shootTime); 
 		

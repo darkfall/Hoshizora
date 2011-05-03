@@ -172,10 +172,50 @@ namespace mead {
 		if(itConfig != mBulletConfigs.end()) {
 			BULLET_SPRITE_MAP::iterator itSprite = mBulletSprites.find(itConfig->second.mTextureId);
 			if(itSprite != mBulletSprites.end()) {
-				meadBullet* bullet = (meadBullet*)bullet;
-				bullet->texId = itConfig->second.mTextureId;
-				bullet->texRect = itConfig->second.mTextureRect;
-				bullet->shootTime = shootTime;
+				meadBullet* nbullet = new meadBullet;
+				memcpy(nbullet, bullet, sizeof(meadBullet));
+				
+				nbullet->texId = itConfig->second.mTextureId;
+				nbullet->texRect = itConfig->second.mTextureRect;
+				nbullet->shootTime = shootTime;
+				
+				mBullets.push_back(nbullet);
+				mBulletBuffer[(ulong32)nbullet] = nbullet;
+				return (ulong32)nbullet;
+			}
+		}
+		return 0;
+	}
+	
+	ulong32 meadBulletManager::shootLaser(float32 posx, float32 posy, float32 speed, float32 direction, float32 length, uint32 bulletId, uint32 shootTime) {
+		BULLET_CONFIG_MAP::iterator itConfig = mBulletConfigs.find(bulletId);
+		if(itConfig != mBulletConfigs.end()) {
+			BULLET_SPRITE_MAP::iterator itSprite = mBulletSprites.find(itConfig->second.mTextureId);
+			if(itSprite != mBulletSprites.end()) {
+				meadBullet* bullet = new meadBullet(posx, posy, speed, direction, itConfig->second.mTextureId, shootTime, itConfig->second.mTextureRect);
+				bullet->screenRect = mScreenRect;
+				bullet->bulletId = bulletId;
+				
+				bullet->setLaser(length);
+				
+				mBullets.push_back(bullet);
+				mBulletBuffer[(ulong32)bullet] = bullet;
+				return (ulong32)bullet;
+			}
+		}
+		return 0;
+	}
+	
+	ulong32 meadBulletManager::shootLaserEx(float32 x, float32 y, float32 width, float32 direction, uint32 bulletId, uint32 shootTime, uint32 lastTime) {
+		BULLET_CONFIG_MAP::iterator itConfig = mBulletConfigs.find(bulletId);
+		if(itConfig != mBulletConfigs.end()) {
+			BULLET_SPRITE_MAP::iterator itSprite = mBulletSprites.find(itConfig->second.mTextureId);
+			if(itSprite != mBulletSprites.end()) {
+				meadBullet* bullet = new meadBullet(x, y, 0.f, direction, itConfig->second.mTextureId, shootTime, itConfig->second.mTextureRect);
+				bullet->screenRect = mScreenRect;
+				bullet->bulletId = bulletId;
+				
+				bullet->setLaser(width, lastTime);
 				
 				mBullets.push_back(bullet);
 				mBulletBuffer[(ulong32)bullet] = bullet;

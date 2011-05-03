@@ -39,13 +39,13 @@ namespace sora {
 		_y = getPositionY();
 	}
 	
-	float32 SoraObject::getPositionX() const {
+	float32 SoraObject::getPositionX() {
         if(!parent)
             return posx;
         return posx+parent->getPositionX();
 	}
 	
-	float32 SoraObject::getPositionY() const {
+	float32 SoraObject::getPositionY() {
         if(!parent)
             return posy;
         return posx+parent->getPositionY();

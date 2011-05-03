@@ -17,7 +17,7 @@
 namespace sora {
 
 	static void exportSoundManager(LuaPlus::LuaState* state) {
-		gge::LuaClass<sora::SoraBGMManager>(state, "bgmManager", sora::SoraBGMManager::Instance())
+		gge::LuaClass<sora::SoraBGMManager>(state, "BGMManager", sora::SoraBGMManager::Instance())
 			.def("play", &sora::SoraBGMManager::play)
 			.def("stop", &sora::SoraBGMManager::stop)
 			.def("pause", &sora::SoraBGMManager::pause)
@@ -31,7 +31,7 @@ namespace sora {
 			.def("setFadeTime", &sora::SoraBGMManager::setFadeTime)
 			.def("enableRandomPlay", &sora::SoraBGMManager::enableRandomBGMQueuePlay);
 			
-		gge::LuaClass<sora::SoraSoundEffectManager>(state, "seManager", sora::SoraSoundEffectManager::Instance())
+		gge::LuaClass<sora::SoraSoundEffectManager>(state, "SEManager", sora::SoraSoundEffectManager::Instance())
 			.def("load", &sora::SoraSoundEffectManager::load)
 			.def("unload", &sora::SoraSoundEffectManager::unload)
 			.def("play", &sora::SoraSoundEffectManager::play)

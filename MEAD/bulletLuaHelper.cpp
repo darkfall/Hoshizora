@@ -36,6 +36,14 @@ namespace mead {
 		return g_bulletManager->shootBulletDirect(bullet, bulletId, shootTime);
 	}
 	
+	ulong32 shootLaser(float32 posx, float32 posy, float32 speed, float32 direction, float32 length, uint32 bulletId, uint32 shootTime) {
+		return g_bulletManager->shootLaser(posx, posy, speed, direction, length, bulletId, shootTime);
+	}
+	
+	ulong32 shootLaserEx(float32 x, float32 y, float32 dx, float32 dy, uint32 bulletId, uint32 shootTime, uint32 lastTime) {
+		return g_bulletManager->shootLaserEx(x, y, dx, dy, bulletId, shootTime, lastTime);
+	}
+	
 	void loadBulletConfig(const std::wstring& config) {
 		g_bulletManager->loadBulletConfig(config);
 	}

@@ -8,24 +8,24 @@ font = fontlib.createFont("ARIALN.ttf", 20);
 
 functionCallList = {}
 
-bgmManager:play("01.ogg", false);
-SE_CLICK08 = seManager:load("click_08.wav", 1);
-SE_START = seManager:load("start.wav", 2);
-SE_SHOOT = seManager:load("shoot.wav", 3);
-seManager:setVolume(100);
+BGMManager:play("01.ogg", false);
+SE_CLICK08 = SEManager:load("click_08.wav", 1);
+SE_START = SEManager:load("start.wav", 2);
+SE_SHOOT = SEManager:load("shoot.wav", 3);
+BGMManager:setVolume(100);
 
 function update(dt)
 	
 	if count == 0 then
-		boss = bossManager:createBoss("mybosstest.lua", "patchouli.txt.anm");
+		boss = BossManager:createBoss("mybosstest.lua", "patchouli.txt.anm");
 		if boss == 0 then
 			SoraCore:messageBox("error loading boss", "error", MB_OK);
 		end
 		count = count + 1;
 	end
 	
-	bossManager:update();	
-	bossManager:render();
+	BossManager:update();	
+	BossManager:render();
 	
 	globalBulletManagerUpdate();
 	setBulletScreenRect(150, -20, 650, 620);

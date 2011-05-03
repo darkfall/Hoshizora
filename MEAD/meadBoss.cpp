@@ -13,6 +13,7 @@
 
 #include "SoraSoundManager/SoundManagerLuaExport.h"
 #include "SoraSpriteAnimation/AnimationLuaExport.h"
+#include "SoraGlobalValues/GlobalValuesLuaExport.h"
 
 namespace mead {
 
@@ -77,6 +78,8 @@ namespace mead {
 		exportBulletManager(state);
 		sora::exportSoundManager(state);
 		sora::exportSpriteAnimation(state);
+		sora::exportGlobalValuesManager(state);
+		sora::GlobalValuesExporter::exportValues(state);
 	}
 	
 	void meadBoss::setPosition(float32 x, float32 y) {
@@ -94,6 +97,11 @@ namespace mead {
 	void meadBoss::moveToPosition(float32 x, float32 y, uint32 frame) {
 		speedX = (x-posx)/frame;
 		speedY = (y-posy)/frame;
+		
+		if(speedX > 0)
+			playAnimation("moveright", true, false);
+		else if(speedX < 0)
+			playAnimation("moveleft", true, false);
 		
 		currMoveFrame = 0;
 		moveFrame = frame;

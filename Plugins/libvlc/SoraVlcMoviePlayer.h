@@ -21,8 +21,11 @@
 namespace sora {
     
     class SoraVlcMoviePlayer: public SoraMoviePlayer {
+		friend class MP_CTX;
+		
     public:
-        typedef struct tagMP_CTX {
+        class MP_CTX {
+		public:
             void* pixels;
             void* dummy;
             uint32 frameCount;
@@ -34,17 +37,20 @@ namespace sora {
             bool bStopped;
             bool bPlaying;
             bool bPaused;
-    
+			
+            libvlc_media_player_t* mp;
+			libvlc_event_manager_t* evtManager;
+
             SoraVlcMoviePlayer* pPlayer;
-            SoraSprite* pSpr;
-            
-            tagMP_CTX(): bChanged(false), frameCount(0), pixels(0), dummy(0), bPlaying(false), bPaused(false), bStopped(true), pSpr(NULL) {}
-        } MP_CTX;
+            int32 internal;
+			
+            MP_CTX(): bChanged(false), frameCount(0), pixels(0), dummy(0), bPlaying(false), bPaused(false), bStopped(true) {}
+        };
         
         SoraVlcMoviePlayer();
         ~SoraVlcMoviePlayer();
         
-        void openMedia(const SoraWString& filePath, uint32 width, uint32 height, const SoraString& dis="RGBA");
+        bool openMedia(const SoraWString& filePath, const SoraString& dis="RGBA");
         void play();
         void stop();
         void pause();
@@ -62,8 +68,8 @@ namespace sora {
         s_int64 getLength() const;
         float getFPS() const;
         
-        uint32 getWidth() const { return libvlc_video_get_width(mp); }
-        uint32 getHeight() const { return libvlc_video_get_height(mp); }
+        uint32 getWidth() const { return videoWidth; }
+        uint32 getHeight() const { return videoHeight; }
         uint32 getFrameCount() const { return frameData.frameCount; }        
         bool frameChanged() const { return frameData.bChanged; }
         void setFinish() { frameData.bChanged = false; }
@@ -82,17 +88,17 @@ namespace sora {
         float32 getPlayRate() const;
         void setPlayRate(float32 rate);
         
-        void bindSprite(SoraSprite* pSprite);
-        
+		void setMediaInfo(uint32 w, uint32 h);
     private:
-        void setMediaInfo(uint32 w, uint32 h);
-
         libvlc_instance_t* vlcInstance;
         libvlc_media_player_t* mp;
         libvlc_media_t* media;
         libvlc_event_manager_t* evtManager;
+		
+		uint32 videoWidth, videoHeight;
        
         MP_CTX frameData;
+		std::string displayFormat;
     };
     
 } // namesapce sora

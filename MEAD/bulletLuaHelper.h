@@ -24,6 +24,9 @@ namespace mead {
 	ulong32 shootBullet(float32 posx, float32 posy, float32 speed, float32 direction, uint32 bulletId, uint32 shootTime);	
 	ulong32 shootBulletEx(float32 posx, float32 posy, float32 speed, float32 direction, float32 directionIncremental, uint32 bulletId, uint32 shootTime);	
 	ulong32 shootBulletDirect(void* bullet, uint32 bulletId, uint32 shootTime);	
+	ulong32 shootLaser(float32 posx, float32 posy, float32 speed, float32 direction, float32 length, uint32 bulletId, uint32 shootTime);
+	ulong32 shootLaserEx(float32 x, float32 y, float32 dx, float32 dy, uint32 bulletId, uint32 shootTime, uint32 lastTime);
+	
 	void loadBulletConfig(const std::wstring& config);	
 	void loadBulletSprite(uint32 texId, const std::wstring& sprFile);	
 	void clearBulletList(bool force);	

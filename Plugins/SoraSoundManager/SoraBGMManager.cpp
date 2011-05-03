@@ -232,16 +232,63 @@ namespace sora {
 	
 	int32 SoraBGMManager::playBGS(const std::wstring& bgmsPath, uint32 bgsid, int32 looptimes, float32 volumeScale, float32 bgmVolumeScale) {
 		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
-		while(itBgs != mBGSounds.end() && itBgs->second.bgsFile != NULL) {
+		while(itBgs != mBGSounds.end()) {
+			if(itBgs->second.bgsFile == NULL) {
+				mBGSounds.erase(itBgs);
+				break;
+			}
+			
 			++bgsid;
 			itBgs = mBGSounds.find(bgsid);
 		}
+		
+		SoraMusicFile* mfile = SORA->createMusicFile(bgmsPath);
+		if(mfile) {
+			BGSInfo bgsinfo(bgsid, looptimes, volumeScale, bgmVolumeScale);
+			bgsinfo.bgsFile = mfile;
+			mfile->setVolume(volumeScale * bgmVolume);
+			
+			if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size()) {
+				mBGMQueue[mCurrBGMId]->setVolume(bgmVolume * bgmVolumeScale);
+			}
+			mBGSounds[bgsid] = bgsinfo;
+			mfile->play();
+			
+			return bgsid;
+		}
+		return 0;
 	}
 	
-	void SoraBGMManager::adjustBGSVolume(uint32 bgsid, float32 volume) {
+	void SoraBGMManager::BGSInfo::onPlaybackEvent(const SoraPlaybackEvent* event) {
+		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
+			++currLoopTimes;
+			if(currLoopTimes >= loopTimes) {
+				delete bgsFile;
+				bgsFile = NULL;
+			} else {
+				bgsFile->play();
+			}
+		}
+	}
+	
+	void SoraBGMManager::adjustBGSVolume(uint32 bgsid, float32 volumeScale) {
+		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
+		if(itBgs != mBGSounds.end()) {
+			if(itBgs->second.bgsFile != NULL) {
+				itBgs->second.bgsFile->setVolume(volumeScale * bgmVolume);
+			}
+		}
 	}
 	
 	void SoraBGMManager::stopBGS(uint32 bgsid) {
+		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
+		if(itBgs != mBGSounds.end()) {
+			if(itBgs->second.bgsFile != NULL) {
+				delete itBgs->second.bgsFile;
+				itBgs->second.bgsFile = NULL;
+			}
+			mBGSounds.erase(itBgs);
+		}
 	}
 
 } // namespace sora
