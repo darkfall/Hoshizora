@@ -10,7 +10,7 @@
 #ifndef SORA_LUA_FUNCTION_HELPER_H_
 #define SORA_LUA_FUNCTION_HELPER_H_
 
-#include "LuaPlus.h"
+#include "SoraLua/LuaPlus/LuaPlus.h"
 
 namespace sora {
 		

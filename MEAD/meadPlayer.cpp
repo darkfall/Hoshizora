@@ -47,7 +47,7 @@ namespace mead {
 		mPlayerStates[PLAYER_HIGH_SCORE]		= 0;
 		mPlayerStates[PLAYER_IS_IMMUNE]			= false;
 		
-		mScreenRect.Set(0.f, 0.f, sora::SORA->getScreenWidth(), sora::SORA->getScreenHeight());
+		mScreenRect.Set(0.f, 0.f, (float32)sora::SORA->getScreenWidth(), (float32)sora::SORA->getScreenHeight());
 		mCollisionPointRadius = 1.f;
 		
 		sora = sora::SoraCore::Instance();
@@ -84,8 +84,8 @@ namespace mead {
 			return false;
 		}
 		mSprite->setAnchor(sora::ANCHOR_MIDDLE);
-		mSpriteWidth_2 = mSprite->getSprite()->getSpriteWidth() >> 2;
-		mSpriteHeight_2 = mSprite->getSprite()->getSpriteHeight() >> 2;
+		mSpriteWidth_2 = (float32)(mSprite->getSprite()->getSpriteWidth() >> 2);
+		mSpriteHeight_2 = (float32)(mSprite->getSprite()->getSpriteHeight() >> 2);
 		
 		return true;
 	}
@@ -95,10 +95,10 @@ namespace mead {
 			mSprite->update(dt);
 		}
 		
-		msgMovement(sora->keyDown(mBasicKeys[PLAYER_INPUT_UP]),
-				    sora->keyDown(mBasicKeys[PLAYER_INPUT_DOWN]),
-				    sora->keyDown(mBasicKeys[PLAYER_INPUT_LEFT]),
-				    sora->keyDown(mBasicKeys[PLAYER_INPUT_RIGHT]));
+		msgMovement(sora->keyDown(mBasicKeys[PLAYER_INPUT_LEFT]),
+				    sora->keyDown(mBasicKeys[PLAYER_INPUT_RIGHT]),
+				    sora->keyDown(mBasicKeys[PLAYER_INPUT_UP]),
+				    sora->keyDown(mBasicKeys[PLAYER_INPUT_DOWN]));
 				
 		msgShoot(sora->keyDown(mBasicKeys[PLAYER_INPUT_SHOOT]));
 		msgBomb(sora->keyDown(mBasicKeys[PLAYER_INPUT_BOMB]));
@@ -133,7 +133,7 @@ namespace mead {
 			if(!mPlayerStates[PLAYER_CAN_SLOW])
 				isSlow = false;
 			
-			float32 moveSpeed = isSlow?mPlayerStates[PLAYER_SLOW_MOVE_SPEED]:mPlayerStates[PLAYER_MOVE_SPEED];
+			float32 moveSpeed = (float32)(isSlow?mPlayerStates[PLAYER_SLOW_MOVE_SPEED]:mPlayerStates[PLAYER_MOVE_SPEED]);
 		
 			// check if the player is within the screen
 			if(posx-mSpriteWidth_2 <= mScreenRect.x1) left = false;
@@ -302,8 +302,8 @@ namespace mead {
 	}
 	
 	void meadPlayer::setCollisionBox(int32 w, int32 h) {
-		mSpriteWidth_2 = (int32)w >> 1;
-		mSpriteHeight_2 = (int32)h >> 1;
+		mSpriteWidth_2 = (float32)(w >> 1);
+		mSpriteHeight_2 = (float32)(h >> 1);
 	}
 	
 	void meadPlayer::setScreenRect(float32 x, float32 y, float32 x1, float32 y1) {

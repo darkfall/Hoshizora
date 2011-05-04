@@ -1,5 +1,6 @@
 "boss_patchouli.png"
 5 stand
+
 stand 30 3
 0 0 128 128
 0 128 128 128

@@ -138,7 +138,7 @@ namespace sora {
 		bool	SORACALL isMouseOver();
 		bool	SORACALL keyDown(int32 key);
 		bool	SORACALL keyUp(int32 key);
-		bool	SORACALL getKeyState(int32 key);
+		int32	SORACALL getKeyState(int32 key);
 		char*	SORACALL getKeyName(int32 key);
 		bool	SORACALL getKeyEvent(SoraKeyEvent& ev);
 		bool	SORACALL joyKeyPressed(int32 key);

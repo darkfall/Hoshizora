@@ -21,8 +21,8 @@
 
 #define HGE_RENDERER
 
-#include "../Sora-OSX/mainWindow.h"
-#include "vlcTestWindow.h"
+//#include "../Sora-OSX/mainWindow.h"
+//#include "vlcTestWindow.h"
 
 #include "../AnimationEditor/aeMainWindow.h"
 
@@ -56,13 +56,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 #endif
 
 //	sora->registerSoundSystem(new sora::SoraAudiereSoundSystem);
-	
-	sora::HSORARESOURCE res = sora->loadResourcePack(L"./data.rfResource");
-	if(!res) {
-		sora->messageBox("Error loading resource data", "Fatal Error", MB_OK | MB_ICONERROR);
-		sora->shutDown();
-	}
-	sora->attachResourcePack(res);
 	
 	sora->setFPS(60);
 	

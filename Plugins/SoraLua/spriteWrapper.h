@@ -19,10 +19,10 @@ namespace spritewrapper {
     HSORASPRITE createSprite(const SoraWString& path);
     HSORASPRITE createSpriteWithTex(HSORATEXTURE tex);
     HSORASPRITE createSpriteWithTexEx(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h);
-	HSORASPRITE createSpriteWH(float32 w, float32 h);
+	HSORASPRITE createSpriteWH(int32 w, int32 h);
 	
 	HSORATEXTURE createTexture(const SoraWString& path);
-	HSORATEXTURE createTextureWH(float32 w, float32 h);
+	HSORATEXTURE createTextureWH(int32 w, int32 h);
 	void releaseTexture(HSORATEXTURE tex);
     
     void setTextureRect	(HSORASPRITE h, float32 x, float32 y, float32 w, float32 fh);

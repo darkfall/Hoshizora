@@ -24,7 +24,7 @@ namespace spritewrapper {
         return (HSORASPRITE)(new SoraSprite(tex, x, y, w, h));
     }
     
-	HSORASPRITE createSpriteWH(float32 w, float32 h){
+	HSORASPRITE createSpriteWH(int32 w, int32 h){
 		return (HSORASPRITE)(new SoraSprite(SORA->createTextureWH(w, h)));
 	}
 	
@@ -32,7 +32,7 @@ namespace spritewrapper {
 		return SORA->createTexture(path);
 	}
 	
-	HSORATEXTURE createTextureWH(float32 w, float32 h) {
+	HSORATEXTURE createTextureWH(int32 w, int32 h) {
 		return SORA->createTextureWH(w, h);
 	}
 	

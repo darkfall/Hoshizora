@@ -170,7 +170,7 @@ namespace sora {
 			float32 volumeScale;
 			float32 bgmVolumeScale;
 			
-			BGSInfo(uint32 id, uint32 lt, uint32 vol, uint32 bgmvol): 
+			BGSInfo(uint32 id, uint32 lt, float32 vol, float32 bgmvol): 
 				bgsid(id), loopTimes(lt), volumeScale(vol), bgmVolumeScale(bgmvol), currLoopTimes(0), bgsFile(NULL) {
 					if(loopTimes != -1) {
 						registerEventFunc(this, &BGSInfo::onPlaybackEvent);

@@ -46,8 +46,8 @@ namespace sora {
 		.def("getStringValue",  &SoraGlobalValues::getStringValue_Str)
 		.def("setBoolValue",  &SoraGlobalValues::setBoolValue_Str)
 		.def("setIntValue",  &SoraGlobalValues::setIntValue_Str)
-		.def("setFloatValue",  &SoraGlobalValues::setFloatValue)
-		.def("setStringValue",  &SoraGlobalValues::setStringValue);
+		.def("setFloatValue",  &SoraGlobalValues::setFloatValue_Str)
+		.def("setStringValue",  &SoraGlobalValues::setStringValue_Str);
 	}
 	
 }

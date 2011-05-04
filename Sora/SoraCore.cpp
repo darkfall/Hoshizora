@@ -668,7 +668,7 @@ namespace sora {
 		return false;
 	}
 
-	bool SoraCore::getKeyState(int32 key) {
+	int32 SoraCore::getKeyState(int32 key) {
 		if(bHasInput) return pInput->getKeyState(key);
 		return false;
 	}

@@ -172,7 +172,7 @@ namespace sora {
 				musicName = s.substr(s.rfind('/'), s.size());
 			if(musicName.find('.') != std::string::npos)
 				musicName.erase(musicName.rfind('.'), musicName.size());
-            setName(str2id(musicName));
+        //    setName(str2id(musicName));
 		}
 
 		SoraAudiereSoundEffectFile::~SoraAudiereSoundEffectFile() {
@@ -276,6 +276,6 @@ namespace sora {
 			seName = s;
         if(s.find('.') != std::string::npos)
             seName = (seName.rfind('.'), seName.size());
-        setName(str2id(seName));
+//        setName(str2id(seName));
     }
 } // namespace sora
