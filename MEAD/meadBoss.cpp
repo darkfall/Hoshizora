@@ -51,8 +51,8 @@ namespace mead {
 		}
 	}
 	
-	void meadBoss::setSprite(const std::string& sprite) {
-		mBossSprite = sora::SoraSpriteAnimationPacker::unpack(sprite.c_str());
+	void meadBoss::setSprite(const std::wstring& sprite) {
+		mBossSprite = sora::UNPACK_ANIMATION(sprite);
 		if(mBossSprite)
 			mBossSprite->setAnchor(sora::ANCHOR_MIDDLE);
 	}
@@ -76,6 +76,7 @@ namespace mead {
 			.def("loadScript", &meadBoss::loadScript);
 		
 		exportBulletManager(state);
+		exportGlobal(state);
 		sora::exportSoundManager(state);
 		sora::exportSpriteAnimation(state);
 		sora::exportGlobalValuesManager(state);
@@ -143,8 +144,7 @@ namespace mead {
 		lives = n;
 	}
 	
-	void meadBoss::update() {
-		float32 dt = sora::SORA->getDelta();
+	uint32 meadBoss::update(float32 dt) {
 		if(mBossScript)
 			mBossScript->update(dt);
 		if(mBossSprite)
@@ -158,6 +158,7 @@ namespace mead {
 			posx += speedX;
 			posy += speedY;
 		}
+		return 0;
 	}
 	
 	void meadBoss::render() {
@@ -177,4 +178,9 @@ namespace mead {
 		return bDied;
 	}
 	
+	void meadBoss::onDie() {
+	}
+	
+	void meadBoss::onReceiveDamage(uint32 healthLeft) {
+	}
 } // namespace mead

@@ -1,3 +1,5 @@
+BulletSprite: 1 "bullet2.png"
+
 BulletData {
 	TexId: 1 TexRect: (0 0 16 16) ShootColor: (255 255 255) BulletId: 1
 }

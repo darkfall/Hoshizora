@@ -29,9 +29,6 @@ namespace sora {
 	public:
 		typedef std::list<T*> ObjList;
 	
-	private:
-		static ObjList members;
-		
 	protected:
 		AutoListElement() {
 			members.push_back(static_cast<T*> (this));
@@ -42,9 +39,8 @@ namespace sora {
 			members.remove(static_cast<T*> (this));
 		}
 									
-	public:
-		
-		static ObjList& getAllMembers() { return members; }
+	public:		
+		static ObjList members;
 	};
 	
 	template<typename T>

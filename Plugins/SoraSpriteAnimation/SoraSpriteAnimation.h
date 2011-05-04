@@ -51,7 +51,8 @@ public:
 	static int pack(const char* pstrScript, const char* pstrDest);
 	int pack2(const char* pstrTex, const char* dest);
 	
-	static SoraSpriteAnimation* unpack(const char* pstrlanm);
+	static SoraSpriteAnimation* unpack(const SoraString& pstrlanm);
+	static SoraSpriteAnimation* unpack(const SoraWString& pstrlanm);
 	static SoraSpriteAnimation* unpack(void* pData, unsigned long size);
 	
 	static int unpackToFile(const char* pstrlanm);

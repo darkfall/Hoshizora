@@ -30,9 +30,8 @@ namespace sora {
 		virtual ~SoraMemoryFile() {}	
 					
 		void read(const SoraWString& filename) {
-			ObjList memoryFiles = getAllMembers();
-			ObjList::iterator itObj = std::find_if(memoryFiles.begin(), memoryFiles.end(), std::bind2nd(compareObjectName(), str2id(filename)));
-			if(itObj != memoryFiles.end()) {
+			ObjList::iterator itObj = std::find_if(members.begin(), members.end(), std::bind2nd(compareObjectName(), str2id(filename)));
+			if(itObj != members.end()) {
 				*this = **itObj;
 				return;
 			}

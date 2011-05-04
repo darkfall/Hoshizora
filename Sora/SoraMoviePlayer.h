@@ -21,7 +21,7 @@ namespace sora {
         /* @param width and height are hack for vlc
          to be solved
          */
-        virtual bool openMedia(const SoraWString& filePath, uint32 width=0, uint32 height=0, const SoraString& dis="RGBA") {}
+        virtual bool openMedia(const SoraWString& filePath, const SoraString& dis="RGBA") { return false; }
         virtual void play() {}
         virtual void stop() {}
         virtual void pause() {}

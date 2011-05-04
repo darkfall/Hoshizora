@@ -17,14 +17,14 @@
 
 namespace mead {
 	
-	class meadBoss {
+	class meadBoss: public sora::SoraObject {
 	public:
 		meadBoss();
 		~meadBoss();
 		
 		bool setScript(const std::wstring& script);
 		void reloadScript();
-		void setSprite(const std::string& animation);
+		void setSprite(const std::wstring& animation);
 		
 		void loadScript(const std::wstring& script);
 		
@@ -47,8 +47,15 @@ namespace mead {
 		
 		void playAnimation(const char* name, bool loop, bool queue);
 		
-		void update();
+		uint32 update(float32 dt);
 		void render();
+		
+		
+		// script callbacks
+		
+		void onDie();
+		void onReceiveDamage(uint32 healthLeft);
+		
 		
 	private:
 		void exportSelf(LuaPlus::LuaState* state);

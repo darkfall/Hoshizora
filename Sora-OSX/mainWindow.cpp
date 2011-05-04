@@ -69,6 +69,7 @@ bool mainWindow::renderFunc() {
 	return false;
 }
 
+
 void mainWindow::init() {
     sora::SORA->setFPS(60);
 
@@ -79,12 +80,16 @@ void mainWindow::init() {
 		sora::GCN_GLOBAL->createTop();
 	}
 	
-	mead::globalBulletManagerInit();
+	editor = new reflection::rfEditor;
+	editor->init();
+	
+/*	mead::globalBulletManagerInit();
 	mead::exportBulletManager(luaObject.getState());
+	mead::exportGlobal(luaObject.getState());
 	sora::exportSoundManager(luaObject.getState());
 	sora::exportSpriteAnimation(luaObject.getState());
 	
-	luaObject.doScript(L"mybullettest.lua");
+	luaObject.doScript(L"mybullettest.lua");*/
 }
 
 void mainWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {

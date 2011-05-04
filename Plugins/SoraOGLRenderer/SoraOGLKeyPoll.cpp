@@ -38,9 +38,7 @@ namespace sora {
 		glfwGetMousePos(&x, &y);
 		ev.x = x;
 		ev.y = y;
-		
-		INT_LOG::debugPrintf("ev, char: %c, wheel: %d, x, y: %d, %d, flag: %d, key: %d\n", ev.chr, ev.wheel, x, y, ev.flags, ev.key);		
-		
+				
 		SORA_EVENT_MANAGER->publishInputEvent(&ev);
 		keyPoll.push_back(ev);
 	}

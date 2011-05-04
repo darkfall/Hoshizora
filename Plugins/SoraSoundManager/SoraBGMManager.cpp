@@ -24,7 +24,6 @@ namespace sora {
 		if(!mBGMQueue.empty()) {
 			for(uint32 i=0; i<mBGMQueue.size(); ++i) {
 				if(mBGMQueue[i] != NULL) {
-					mBGMQueue[i]->stop();
 					delete mBGMQueue[i];
 					mBGMQueue[i] = NULL;
 				}
@@ -60,7 +59,7 @@ namespace sora {
 	}
 
 	void SoraBGMManager::_playBGM(SoraMusicFile* musicFile, uint32 newBGMId) {
-		if(mFadeOutTime != 0.f) {
+		if(mFadeOutTime != 0.f && mCurrBGMId != -1) {
 			mPrevBGMId = mCurrBGMId;
 			mCurrFadeOutTime = 0.f;
 		}
@@ -75,12 +74,12 @@ namespace sora {
 		musicFile->enableEventPublish(true);
 		musicFile->registerEventHandler(this);
 		
+		musicFile->play();
 		musicFile->setVolume(bgmVolume);
 		if(bgmPitch != -2.f)
 			musicFile->setPitch(bgmPitch);
 		if(bgmPan != -2.f)
 			musicFile->setPan(bgmPan);
-		musicFile->play();
 		
 		mCurrBGMId = newBGMId;
 		mPaused = false;

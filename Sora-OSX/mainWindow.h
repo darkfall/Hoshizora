@@ -14,6 +14,7 @@
 #include "SoraCanvas.h"
 #include "SoraPlatform.h"
 #include "SoraLua/SoraLuaObject.h"
+#include "../ReflectionRev/editor/rfEditor.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -50,6 +51,8 @@ private:
 	sora::SoraBaseCanvas* canvas1;
 	
 	sora::SoraLuaObject luaObject;
+	
+	reflection::rfEditor* editor;
 };
 
 #endif

@@ -26,7 +26,7 @@ namespace mead {
 		~meadBossManager();
 		
 	public:
-		ulong32 createBoss(const std::wstring& script, const std::string& animation);
+		ulong32 createBoss(const std::wstring& script, const std::wstring& animation);
 		
 		bool isBossDied(ulong32 handle);
 		

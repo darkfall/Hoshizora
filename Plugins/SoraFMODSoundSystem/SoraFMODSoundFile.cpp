@@ -83,9 +83,6 @@ namespace sora {
     
     SoraFMODMusicFile::~SoraFMODMusicFile() {
 		closeFile();
-        if(bIsStream)
-            if(pSoundData)
-                SORA->freeResourceFile(pSoundData);
     }
     
     int32 SoraFMODMusicFile::readFile(const SoraWString& path) {
@@ -96,7 +93,7 @@ namespace sora {
         if(!bIsStream)
             result = pSystem->createSound(ws2s(path).c_str(), FMOD_CREATESAMPLE | FMOD_SOFTWARE | FMOD_2D, 0, &pSound);
         else 
-            result = pSystem->createStream(ws2s(path).c_str(), FMOD_CREATESAMPLE | FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM, 0, &pSound);
+            result = pSystem->createStream(ws2s(path).c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM, 0, &pSound);
         return FMOD_ERROR_CHECK(result)==FMOD_OK?1:0;
     }
     
@@ -110,14 +107,16 @@ namespace sora {
         if(!bIsStream)
             result = pSystem->createSound((const char*)data, FMOD_CREATESAMPLE | FMOD_SOFTWARE | FMOD_2D | FMOD_OPENMEMORY, &exinfo, &pSound);
         else
-            result = pSystem->createStream((const char*)data, FMOD_CREATESAMPLE | FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_OPENMEMORY, &exinfo, &pSound);
+            result = pSystem->createStream((const char*)data, FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_OPENMEMORY, &exinfo, &pSound);
         return FMOD_ERROR_CHECK(result)==FMOD_OK?1:0;
     }
     
     void SoraFMODMusicFile::closeFile() {
         if(pSound) {
-            if(pChannel)
+            if(pChannel) {
+				pChannel->setUserData(0);
                 pChannel->stop();
+			}
             pSound->release();
         }
     }

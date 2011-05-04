@@ -28,10 +28,10 @@ function royalFire.update()
 	local ldir = math.rad(math.random(0, 360));
 	
 	shootLaser(boss:getPositionX(), boss:getPositionY(), 3, ldir, 90, 3, 30);
-	bullet = shootLaserEx(boss:getPositionX(), boss:getPositionY(), 
-				10,
-				ldir, 56, 10, 90);
-	
+--	bullet = shootLaserEx(boss:getPositionX(), boss:getPositionY(), 
+--				10,
+--				ldir, 56, 10, 90);
+
 
 
 	royalFireCount = royalFireCount + 1;
@@ -40,5 +40,5 @@ end
 function royalFire.init(health)
 	boss:setHealth(health);
 	boss:setDied(false);
-	boss:playAnimation("spellcard", false, false);
+	boss:playAnimation("stand", true, false);
 end

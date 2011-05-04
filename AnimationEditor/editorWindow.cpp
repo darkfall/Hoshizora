@@ -85,7 +85,7 @@ void animationEditorWindow::loadAnimation(const SoraString& path) {
 			pAnimatedSprite = 0;
 		}
 		
-		pAnimatedSprite = UNPACK_ANIMATION(anmDest.c_str());
+		pAnimatedSprite = UNPACK_ANIMATION(anmDest);
 		if(!pAnimatedSprite) {
 			SORA->messageBox("Error loading animation file, please check your pack", "Error", MB_OK | MB_ICONERROR);
 		} else {

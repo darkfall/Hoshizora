@@ -14,6 +14,8 @@
 #include "luaclass.h"
 #include "bulletLuaHelper.h"
 #include "meadBossManager.h"
+#include "meadPlayerManager.h"
+
 #include "SoraGlobalValues/GlobalValuesLuaExport.h"
 
 namespace mead {
@@ -109,15 +111,26 @@ namespace mead {
 			.def("getBulletDirect", &getBulletDirect)
 			.def("setBulletDownReflection", &setBulletDownReflection)
 			.def("setBulletAlphaBlend", &setBulletAlphaBlend);
+	}
+	
+
+	static void exportGlobal(LuaState* state) {
+		sora::exportGlobalValuesManager(state);
 		
 		gge::LuaClass<meadBossManager>(state, "BossManager", meadBossManager::Instance())
-			.def("createBoss", &meadBossManager::createBoss)
-			.def("isBossDied", &meadBossManager::isBossDied)
-			.def("clearAllBosses", &meadBossManager::clearAllBosses)
-			.def("update", &meadBossManager::update)
-			.def("render", &meadBossManager::render);
+		.def("createBoss", &meadBossManager::createBoss)
+		.def("isBossDied", &meadBossManager::isBossDied)
+		.def("clearBosses", &meadBossManager::clearAllBosses)
+		.def("update", &meadBossManager::update)
+		.def("render", &meadBossManager::render);
 		
-		sora::exportGlobalValuesManager(state);
+		gge::LuaClass<meadPlayerManager>(state, "PlayerManager", meadPlayerManager::Instance())
+		.def("createPlayer", &meadPlayerManager::createPlayer)
+		.def("isPlayerDied", &meadPlayerManager::isPlayerDied)
+		.def("clearPlayers", &meadPlayerManager::clearAllPlayers)
+		.def("update", &meadPlayerManager::update)
+		.def("render", &meadPlayerManager::render);
+		
 	}
 	
 } // namespace mead

@@ -283,21 +283,29 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
 	return panm;
 }
 
-SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const char* pstrlanm) {
-	FILE* pf = fopen(pstrlanm, "rb");
-	if(!pf) 
-		return 0;
-	
-	unsigned long size = 0;
-	fseek(pf, 0, SEEK_END);
-	size = ftell(pf);
-	fseek(pf, 0, SEEK_SET);
-	void* pData = malloc(size);
-	fread(pData, 1, size, pf);
-	SoraSpriteAnimation* anm = unpack(pData, size);
-	free(pData);
-	return anm;
+SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const SoraString& name) {
+	ulong32 size;
+	void* data = SORA->getResourceFile(s2ws(name), size);
+	if(data) {
+		SoraSpriteAnimation* anm = unpack(data, size);
+		SORA->freeResourceFile(data);
+		
+		return anm;
+	}
+	return NULL;
 }
+	
+	SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const SoraWString& name) {
+		ulong32 size;
+		void* data = SORA->getResourceFile(name, size);
+		if(data) {
+			SoraSpriteAnimation* anm = unpack(data, size);
+			SORA->freeResourceFile(data);
+			
+			return anm;
+		}
+		return NULL;
+	}
 
 int SoraSpriteAnimationPacker::unpackToFile(const char* pstrlanm) {
 	FILE* pf = fopen(pstrlanm, "rb");
@@ -458,9 +466,12 @@ SoraSpriteAnimation::SoraSpriteAnimation(const std::wstring& anmPath):
 			
 			pmfile->seek(0);
 			delete pmfile;
+			
+			SORA->freeResourceFile(pData);
+			if(!err)
+				init();
 		}
 		
-		SORA->freeResourceFile(pData);
 	}
 	
 
@@ -530,6 +541,7 @@ void SoraSpriteAnimation::toNextAnm() {
 			bLoop = true;
 		}
 	}
+	play();
 }
 
 void SoraSpriteAnimation::toCurrAnmNode() {
@@ -551,9 +563,11 @@ void SoraSpriteAnimation::setDefaultAnimation(const char* name) {
 }
 
 LANM_TEX SoraSpriteAnimation::getCurrTex() {
-	if(currNodeId != -1)
-		return anmNodes[currNodeId].texList[currAnmIndex];
-	return LANM_TEX();
+	if(currNodeId != -1) {
+		if(currAnmIndex < anmNodes[currNodeId].texList.size())
+			return anmNodes[currNodeId].texList[currAnmIndex];
+	}
+	return anmNodes[0].texList[0];
 }
 
 void SoraSpriteAnimation::play() {
@@ -573,6 +587,9 @@ void SoraSpriteAnimation::playEx(const char* name, bool loop, bool isQueue) {
 		if(id == -1)
 			return;
 	
+		if(currNodeId == id)
+			return;
+		
 		currNodeId = id;
 		currId = anmNodes[currNodeId].nameHash; 
 		currTime = 0;
@@ -620,8 +637,10 @@ void SoraSpriteAnimation::init() {
 										   (float32)anmNodes[0].texList[0].ty, 
 										   (float32)anmNodes[0].texList[0].tw, 
 										   (float32)anmNodes[0].texList[0].th);
-		}
+		} else 
+			SORA->logf("error loading sprite from %s", texturePath.c_str());
 	}
+	play();
 }
 
 void SoraSpriteAnimation::render() {

@@ -15,8 +15,9 @@ namespace mead {
 	meadBulletManager* g_bulletManager = NULL;
 	
 	void globalBulletManagerInit() {
-		if(g_bulletManager == NULL)
+		if(g_bulletManager == NULL) {
 			g_bulletManager = new meadBulletManager;
+		}
 	}
 	
 	void globalBulletManagerUpdate() {

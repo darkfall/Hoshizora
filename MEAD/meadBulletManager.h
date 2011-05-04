@@ -16,9 +16,13 @@
 #include "SoraColor.h"
 #include "SoraSprite.h"
 
+#include "AutoContainer.h"
+
 namespace mead {
 	
-	class meadBulletManager {
+	typedef void (*CustomBulletCollisionFunc)(meadBullet*, void* userData1, void* userData2);
+	
+	class meadBulletManager: public sora::AutoListElement<meadBulletManager>  {
 	public:
 		meadBulletManager();
 		~meadBulletManager();

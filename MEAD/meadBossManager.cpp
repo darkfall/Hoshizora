@@ -19,7 +19,7 @@ namespace mead {
 		clearAllBosses();
 	}
 	
-	ulong32 meadBossManager::createBoss(const std::wstring& script, const std::string& animation) {
+	ulong32 meadBossManager::createBoss(const std::wstring& script, const std::wstring& animation) {
 		meadBoss* boss = new meadBoss;
 		boss->setSprite(animation);
 		if(!boss->setScript(script)) {
@@ -50,7 +50,7 @@ namespace mead {
 	void meadBossManager::update() {
 		BOSS_LIST::iterator itBoss = mBosses.begin();
 		while(itBoss != mBosses.end()) {
-			itBoss->second->update();
+			itBoss->second->update(0.f);
 			if(itBoss->second->isDied()) {
 				delete itBoss->second;
 				itBoss->second = NULL;

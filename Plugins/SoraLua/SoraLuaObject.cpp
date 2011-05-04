@@ -154,17 +154,7 @@ namespace sora {
 	LuaState* SoraLuaObject::getState() const {
 		return luaState;
 	}
-    
-    template<typename RT>
-    RT SoraLuaObject::callFunc(const SoraString& funcName) {
-        LuaObject obj = get(funcName);
-        if(obj.IsFunction()) {
-            LuaFunction<RT> func = obj;
-            return func();
-        }
-        return 0;
-    }
-    
+	
     void SoraLuaObject::callFuncVoid(const SoraString& funcName) {
         LuaObject obj = get(funcName);
         if(obj.IsFunction()) {
@@ -172,17 +162,7 @@ namespace sora {
             func();
         }
     }
-    
-    template<typename RT>
-    LuaFunction<RT> SoraLuaObject::getFunc(const SoraString& funcName) {
-        LuaFunction<RT> func;
-        LuaObject obj = get(funcName);
-        if(obj.IsFunction()) {
-            func = obj;
-        }
-        return func;
-    }
-    
+	
     uint32 SoraLuaObject::update(float32 dt) {
         LuaObject obj = get("update");
         if(obj.IsFunction()) {

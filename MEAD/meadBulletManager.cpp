@@ -104,10 +104,19 @@ namespace mead {
 									tkNextToken = lexer->getNextToken();
 									if(tkNextToken == TOKEN_TYPE_END_OF_STREAM)
 										break;
-								}
+								} 
 								
 								mBulletConfigs[bulletId] = node;
+							} else {
+								sora::SORA->messageBoxW(L"invalid bullet definition file: "+file, L"Error", MB_OK | MB_ICONERROR);
 							}
+						} else if(strcmpnocase(lexer->getCurrLexeme(), "BulletSprite") == 0) {
+							lexer->getNextToken();
+							lexer->getNextToken();
+							
+							int32 id = atoi(lexer->getCurrLexeme());
+							lexer->getNextToken();
+							loadBulletSprite((uint32)id, sora::s2ws(lexer->getCurrLexeme()));
 						}
 					}
 					tkNextToken = lexer->getNextToken();

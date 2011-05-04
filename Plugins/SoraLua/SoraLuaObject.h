@@ -17,6 +17,8 @@
     #endif
 #endif
 
+#include "SoraLuaFunctionHelper.h"
+
 namespace sora {
 
 	using namespace LuaPlus;
@@ -59,14 +61,9 @@ namespace sora {
 		lua_CFunction getCFunction(const SoraString& name);
 		void* getUserData(const SoraString& name);
 		bool getBoolean(const SoraString& name);
-        
-        template<typename RT>
-        RT callFunc(const SoraString& funcName);
+		
         void callFuncVoid(const SoraString& funcName);
-        
-        template<typename RT>
-        LuaFunction<RT> getFunc(const SoraString& funcName);
-
+	
 		LuaState* getState() const;
 	private:
 		LuaState* luaState;

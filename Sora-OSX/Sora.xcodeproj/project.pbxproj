@@ -175,7 +175,6 @@
 		88B09C9A12B8AE6600777409 /* soraguiimageloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B09C5F12B8AE6600777409 /* soraguiimageloader.cpp */; };
 		88B09C9B12B8AE6600777409 /* soraguiinput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B09C6112B8AE6600777409 /* soraguiinput.cpp */; };
 		88B09C9F12B8AE6600777409 /* xmlgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B09C6B12B8AE6600777409 /* xmlgui.cpp */; };
-		88B6A322136F86E0000564F9 /* meadPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6A321136F86E0000564F9 /* meadPlayer.cpp */; };
 		88B6A32F136F88B3000564F9 /* SoraGlobalValues.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6A32E136F88B3000564F9 /* SoraGlobalValues.cpp */; };
 		88B6A3A8136F990C000564F9 /* GlobalValuesLuaExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6A3A7136F990C000564F9 /* GlobalValuesLuaExporter.cpp */; };
 		88BA9E03135A972100C282EB /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */; };
@@ -274,6 +273,8 @@
 		88FABDCA129F2A9C00B6A1D8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */; };
 		88FABDD5129F2AA200B6A1D8 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */; };
 		88FD360B128E8367004DED08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FD360A128E8367004DED08 /* Cocoa.framework */; };
+		88FE04B91370AE4200A62EBB /* meadPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FE04B71370AE4200A62EBB /* meadPlayer.cpp */; };
+		88FE04BC1370AE4C00A62EBB /* meadPlayerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FE04BB1370AE4C00A62EBB /* meadPlayerManager.cpp */; };
 		88FF1DDC13386214009E7786 /* SoraVlcMoviePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* SoraPureCore.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* SoraPureCore.1 */; };
@@ -802,8 +803,6 @@
 		88B09C6512B8AE6600777409 /* SoraGUIResponserMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGUIResponserMap.h; sourceTree = "<group>"; };
 		88B09C6B12B8AE6600777409 /* xmlgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xmlgui.cpp; sourceTree = "<group>"; };
 		88B09C6C12B8AE6600777409 /* xmlgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xmlgui.h; sourceTree = "<group>"; };
-		88B6A320136F86E0000564F9 /* meadPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meadPlayer.h; sourceTree = "<group>"; };
-		88B6A321136F86E0000564F9 /* meadPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = meadPlayer.cpp; sourceTree = "<group>"; };
 		88B6A32D136F88B3000564F9 /* SoraGlobalValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGlobalValues.h; sourceTree = "<group>"; };
 		88B6A32E136F88B3000564F9 /* SoraGlobalValues.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraGlobalValues.cpp; sourceTree = "<group>"; };
 		88B6A399136F9503000564F9 /* GlobalValuesLuaExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalValuesLuaExport.h; sourceTree = "<group>"; };
@@ -1064,6 +1063,12 @@
 		88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
 		88FD360A128E8367004DED08 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		88FE045C13709F1900A62EBB /* SoraLuaFunctionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLuaFunctionHelper.h; sourceTree = "<group>"; };
+		88FE04B71370AE4200A62EBB /* meadPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = meadPlayer.cpp; path = ../MEAD/meadPlayer.cpp; sourceTree = SOURCE_ROOT; };
+		88FE04B81370AE4200A62EBB /* meadPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meadPlayer.h; path = ../MEAD/meadPlayer.h; sourceTree = SOURCE_ROOT; };
+		88FE04BA1370AE4C00A62EBB /* meadPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meadPlayerManager.h; path = ../MEAD/meadPlayerManager.h; sourceTree = SOURCE_ROOT; };
+		88FE04BB1370AE4C00A62EBB /* meadPlayerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = meadPlayerManager.cpp; path = ../MEAD/meadPlayerManager.cpp; sourceTree = SOURCE_ROOT; };
+		88FE06181371094900A62EBB /* meadCollision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meadCollision.h; path = ../MEAD/meadCollision.h; sourceTree = SOURCE_ROOT; };
 		88FF1DDA133861E2009E7786 /* SoraVlcMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraVlcMoviePlayer.h; path = ../Plugins/libvlc/SoraVlcMoviePlayer.h; sourceTree = "<group>"; };
 		88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraVlcMoviePlayer.cpp; path = ../Plugins/libvlc/SoraVlcMoviePlayer.cpp; sourceTree = "<group>"; };
 		88FF1DDD1338628D009E7786 /* SoraMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMoviePlayer.h; sourceTree = "<group>"; };
@@ -1925,6 +1930,7 @@
 				88BD15011346ADCA0068AABA /* spriteWrapper.cpp */,
 				88BD15021346ADCA0068AABA /* spriteWrapper.h */,
 				88E33EBD136BD554000B67C8 /* fontWrapper.h */,
+				88FE045C13709F1900A62EBB /* SoraLuaFunctionHelper.h */,
 			);
 			name = SoraLua;
 			path = ../Plugins/SoraLua;
@@ -2352,6 +2358,7 @@
 			isa = PBXGroup;
 			children = (
 				88E33A35136B34B5000B67C8 /* meadBullet.h */,
+				88FE06181371094900A62EBB /* meadCollision.h */,
 				88E33A37136B423C000B67C8 /* meadBulletManager.h */,
 				88E33A38136B423C000B67C8 /* meadBulletManager.cpp */,
 				88E33BA0136B6434000B67C8 /* bulletLuaExport.h */,
@@ -2359,10 +2366,12 @@
 				88E340BC136C0A24000B67C8 /* bulletLuaHelper.h */,
 				88E340BE136C0A24000B67C8 /* meadBoss.h */,
 				88E340BD136C0A24000B67C8 /* meadBoss.cpp */,
-				88E340BF136C0A24000B67C8 /* meadBossManager.cpp */,
 				88E340C0136C0A24000B67C8 /* meadBossManager.h */,
-				88B6A320136F86E0000564F9 /* meadPlayer.h */,
-				88B6A321136F86E0000564F9 /* meadPlayer.cpp */,
+				88E340BF136C0A24000B67C8 /* meadBossManager.cpp */,
+				88FE04B81370AE4200A62EBB /* meadPlayer.h */,
+				88FE04B71370AE4200A62EBB /* meadPlayer.cpp */,
+				88FE04BA1370AE4C00A62EBB /* meadPlayerManager.h */,
+				88FE04BB1370AE4C00A62EBB /* meadPlayerManager.cpp */,
 			);
 			name = myDream;
 			sourceTree = "<group>";
@@ -2712,9 +2721,10 @@
 				88E340C2136C0A24000B67C8 /* meadBossManager.cpp in Sources */,
 				88E340F9136C0D09000B67C8 /* bulletLuaHelper.cpp in Sources */,
 				88E345B6136EF747000B67C8 /* SoraiOSStringConv.mm in Sources */,
-				88B6A322136F86E0000564F9 /* meadPlayer.cpp in Sources */,
 				88B6A32F136F88B3000564F9 /* SoraGlobalValues.cpp in Sources */,
 				88B6A3A8136F990C000564F9 /* GlobalValuesLuaExporter.cpp in Sources */,
+				88FE04B91370AE4200A62EBB /* meadPlayer.cpp in Sources */,
+				88FE04BC1370AE4C00A62EBB /* meadPlayerManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

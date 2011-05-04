@@ -164,6 +164,7 @@ namespace mead {
 			diedEffectTime(10), currDiedEffectTime(0),
 			isLaser(false), laserLength(0.f),
 			isCustomCollid(false), collisionRadius(0.f), 
+			isPlayerBullet(false),
 			isCollision(false), isGraze(true), isShow(true), isDied(false), isImmortal(false), isDownReflection(false), isAlphaBlend(true) {
 		}
 		
@@ -177,7 +178,8 @@ namespace mead {
 			currShootTime(0), currPauseTime(0), pauseTime(0),
 			diedEffectTime(10), currDiedEffectTime(0),
 			isLaser(false), laserLength(0.f),
-			isCustomCollid(false), collisionRadius(0.f), 
+			isCustomCollid(false), collisionRadius(0.f),
+			isPlayerBullet(false),
 			isCollision(false), isGraze(true), isShow(true), isDied(false), isImmortal(false), isDownReflection(false), isAlphaBlend(true)  {
 				setSpeed(speed);
 				if(st == 0)
@@ -286,6 +288,8 @@ namespace mead {
 
 			laserScale = 600 / texRect.y2;
 		}
+		
+		bool isPlayerBullet;
 		
 		inline bool collisionDetect(float32 x, float32 y) {
 		}

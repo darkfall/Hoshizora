@@ -30,10 +30,12 @@ namespace sora {
 		virtual void	add(AP_OBJECT pobj);
 		virtual void	del(AP_OBJECT pobj);
 		
-		void setPosition(float32 _x, float32 _y);
+		virtual void setPosition(float32 _x, float32 _y);
+		virtual float32 getPositionX();
+		virtual float32 getPositionY();
+		// this uses getPositionX and getPositionY, so no need to be virtual 
 		void getPosition(float32& _x, float32& _y);
-		float32 getPositionX();
-		float32 getPositionY();
+		
 		
 		SUB_OBJECT_LIST getObjList();
 		AP_OBJECT getParent() const;

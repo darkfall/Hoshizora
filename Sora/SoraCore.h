@@ -156,7 +156,7 @@ namespace sora {
 
 		SoraFont* SORACALL createFont(const SoraWString& fontName, int size);
 		
-		SoraMusicFile* SORACALL createMusicFile(const SoraWString& musicName, bool bStream=false);
+		SoraMusicFile* SORACALL createMusicFile(const SoraWString& musicName, bool bStream=true);
 		SoraSoundEffectFile* SORACALL createSoundEffectFile(const SoraWString& se);
         SoraMusicFile* SORACALL createMusicFile(bool bStream=false);
         SoraSoundEffectFile* SORACALL createSoundEffectFile();
