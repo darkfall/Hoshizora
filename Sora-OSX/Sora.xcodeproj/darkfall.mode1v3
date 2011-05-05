@@ -342,7 +342,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>88FE062E13711C3A00A62EBB</string>
+										<string>88A864B71371F0BA003A3CDE</string>
 										<key>history</key>
 										<array>
 											<string>88BFA0BD135AAEE700BB8E70</string>
@@ -666,7 +666,7 @@
 											<string>88FE0620137112F100A62EBB</string>
 											<string>88FE0621137112F100A62EBB</string>
 											<string>88FE062C13711C3A00A62EBB</string>
-											<string>88FE062D13711C3A00A62EBB</string>
+											<string>88FE062F13711D6900A62EBB</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -724,9 +724,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>88FE03831370595C00A62EBB</string>
+				<string>88A864B81371F0BA003A3CDE</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>88FE03841370595C00A62EBB</string>
+				<string>88A864B91371F0BA003A3CDE</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -864,11 +864,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>88FE04E71370B18800A62EBB</string>
-		<string>88FE04E81370B18800A62EBB</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>887022D01346AB4300AE8DD7</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -888,14 +884,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>meadPlayer.cpp</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -951,7 +945,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>887022D01346AB4300AE8DD7</string>
-				<string>88FE037A1370595900A62EBB</string>
+				<string>88A864BA1371F0BA003A3CDE</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

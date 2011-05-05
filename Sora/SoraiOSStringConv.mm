@@ -17,7 +17,7 @@ namespace sora {
 	
 	std::wstring NSStringToStringW ( NSString* Str )   
 	{   
-		NSStringEncoding pEncode    =   CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingHZ_GB_2312 );   
+		NSStringEncoding pEncode    =   CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingUTF32LE );   
 		NSData* pSData              =   [ Str dataUsingEncoding : pEncode ];    
 		
 		return std::wstring ( (wchar_t*) [ pSData bytes ], [ pSData length] / sizeof ( wchar_t ) );   
