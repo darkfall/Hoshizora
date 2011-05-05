@@ -21,7 +21,7 @@ namespace sora {
 
 	public:
 		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; nFrameCounter = 0; fTimeScale = 1.f; }
-		void setFPS(int32 fps) { desiredFPS = fps; }
+		void setFPS(int32 fps) { desiredFPS = (float32)fps; }
 		float32 getDelta() { return fDeltaTime; }
 		float32 getFPS() { return fFPS; }
 		float32 getTime() { return fTime; }

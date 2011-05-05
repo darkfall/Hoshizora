@@ -70,12 +70,6 @@
     <Filter Include="头文件\json">
       <UniqueIdentifier>{fae32abf-f0da-4349-8837-db96947a14c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugins\SoraVlcMoviePlayer">
-      <UniqueIdentifier>{fcd7f282-817a-4192-8c3f-a2967e7ce7fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Plugins\SoraVlcMoviePlayer\Libvlc">
-      <UniqueIdentifier>{cf6b5e25-0ea0-48de-98e3-30e04d9e1bbb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Plugins\Darklb">
       <UniqueIdentifier>{3ce0d67f-86cd-4ff8-a6a3-4577a3314c3b}</UniqueIdentifier>
     </Filter>
@@ -91,9 +85,6 @@
     <Filter Include="源文件\AnimationEditor">
       <UniqueIdentifier>{492b3ee2-973e-44c8-8ed0-677c5c584330}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugins\fmodss">
-      <UniqueIdentifier>{f1814d00-3672-4eb2-b534-1c544e64c90f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Plugins\gcnExtend">
       <UniqueIdentifier>{717fca83-b659-46e5-80f2-5f6265767467}</UniqueIdentifier>
     </Filter>
@@ -102,6 +93,12 @@
     </Filter>
     <Filter Include="源文件\reflectionRev">
       <UniqueIdentifier>{de0404de-8ffc-4248-9dba-7080938ba951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\mead">
+      <UniqueIdentifier>{2f138d3f-9ccc-4b37-8f25-ce2ebbd8f281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\GlobalValues">
+      <UniqueIdentifier>{5bd043bf-e027-4f8b-81b6-adeaabe56fb2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -984,243 +981,6 @@
     <ClInclude Include="..\..\..\Sora\json\writer.h">
       <Filter>头文件\json</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\deprecated.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_events.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_discoverer.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_library.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_list.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_list_player.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_media_player.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_structures.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_version.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\libvlc_vlm.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_access.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_acl.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_aout.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_aout_mixer.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_arrays.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_art_finder.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_avcodec.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_bits.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_block.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_block_helper.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_charset.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_codec.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_common.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_config.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_configuration.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_config_cat.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_cpu.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_demux.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_dialog.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_epg.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_es.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_es_out.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_events.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_filter.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_fourcc.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_fs.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_gcrypt.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_http.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_httpd.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_image.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_inhibit.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_input.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_input_item.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_main.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_md5.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_messages.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_meta.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_modules.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_mouse.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_mtime.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_objects.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_picture.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_picture_fifo.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_picture_pool.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_playlist.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_plugin.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_probe.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_rand.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_services_discovery.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_sout.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_sql.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_stream.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_strings.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_subpicture.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_threads.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_url.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_variables.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_video_splitter.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vlm.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vout.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vout_display.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vout_opengl.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_vout_window.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_xlib.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\plugins\vlc_xml.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\win32\include\vlc\vlc.h">
-      <Filter>Plugins\SoraVlcMoviePlayer\Libvlc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\libvlc\SoraVlcMoviePlayer.h">
-      <Filter>Plugins\SoraVlcMoviePlayer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\DarkLib\FileDlg.h">
       <Filter>Plugins\Darklb</Filter>
     </ClInclude>
@@ -1383,15 +1143,6 @@
     <ClInclude Include="..\..\..\AnimationEditor\editorWindow.h">
       <Filter>源文件\AnimationEditor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundFile.h">
-      <Filter>Plugins\fmodss</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundSystem.h">
-      <Filter>Plugins\fmodss</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSystem.h">
-      <Filter>Plugins\fmodss</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundSystem.h">
       <Filter>Plugins\AudiereSS</Filter>
     </ClInclude>
@@ -1458,9 +1209,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.h">
       <Filter>Plugins\SoundManager</Filter>
     </ClInclude>
-    <ClInclude Include="vlcTestWindow.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\ReflectionRev\rfGameOverView.h">
       <Filter>源文件\reflectionRev</Filter>
     </ClInclude>
@@ -1505,6 +1253,39 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraCanvas.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\meadBoss.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\meadBossManager.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\meadBullet.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\meadBulletManager.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\meadCollision.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\meadPlayer.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\meadPlayerManager.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\bulletLuaExport.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\bulletLuaHelper.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGlobalValues\GlobalValuesLuaExport.h">
+      <Filter>Plugins\GlobalValues</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGlobalValues\SoraGlobalValues.h">
+      <Filter>Plugins\GlobalValues</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1871,9 +1652,6 @@
     <ClCompile Include="..\..\..\Sora\json\json_writer.cpp">
       <Filter>头文件\json</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\libvlc\SoraVlcMoviePlayer.cpp">
-      <Filter>Plugins\SoraVlcMoviePlayer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Plugins\DarkLib\FileDlg.cpp">
       <Filter>Plugins\Darklb</Filter>
     </ClCompile>
@@ -2033,12 +1811,6 @@
     <ClCompile Include="..\..\..\AnimationEditor\editorWindow.cpp">
       <Filter>源文件\AnimationEditor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundSystem.cpp">
-      <Filter>Plugins\fmodss</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraFMODSoundSystem\SoraFMODSoundFile.cpp">
-      <Filter>Plugins\fmodss</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundSystem.cpp">
       <Filter>Plugins\AudiereSS</Filter>
     </ClCompile>
@@ -2093,9 +1865,6 @@
     <ClCompile Include="mainWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="vlcTestWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\ReflectionRev\rfGameOverView.cpp">
       <Filter>源文件\reflectionRev</Filter>
     </ClCompile>
@@ -2137,6 +1906,33 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraCanvas.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\Debug\SoraInternalLogger.cpp">
+      <Filter>头文件\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\MEAD\meadBoss.cpp">
+      <Filter>源文件\mead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\MEAD\meadBossManager.cpp">
+      <Filter>源文件\mead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\MEAD\meadBulletManager.cpp">
+      <Filter>源文件\mead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\MEAD\meadPlayer.cpp">
+      <Filter>源文件\mead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\MEAD\meadPlayerManager.cpp">
+      <Filter>源文件\mead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\MEAD\bulletLuaHelper.cpp">
+      <Filter>源文件\mead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGlobalValues\GlobalValuesLuaExporter.cpp">
+      <Filter>Plugins\GlobalValues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGlobalValues\SoraGlobalValues.cpp">
+      <Filter>Plugins\GlobalValues</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

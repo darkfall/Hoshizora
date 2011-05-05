@@ -13,7 +13,7 @@
 #include "SoraCore.h"
 #include "SoraCanvas.h"
 
-#include "Experimental/state_test.h"
+#include "SoraLua/SoraLuaObject.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -45,11 +45,11 @@ private:
     sora::SoraSprite* pSpr;
 	sora::SoraShader* shader;
 					
-	sora::BaseEntity* testEntity;
     sora::SoraFont* pFont;
 	
 	sora::SoraBaseCanvas* canvas1;
-	ulong32 rt1;
+
+	sora::SoraLuaObject luaObject;
 };
 
 #endif

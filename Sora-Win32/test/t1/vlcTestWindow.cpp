@@ -65,7 +65,7 @@ void vlcWindow::action() {
         moviePlayer->pause();
 
 		if(fileOpener->FileOpenDlg((HWND)sora::SORA->getMainWindowHandle(), path, title)) {
-			moviePlayer->openMedia(path, 848, 480);
+			moviePlayer->openMedia(path, "RV32");
 		}
        
         moviePlayer->play();
@@ -134,10 +134,12 @@ bool vlcWindow::renderFunc() {
             renderMovieImage();
        
             moviePlayer->setFinish();*/
-			ulong32* data = pSpr->getPixelData();
-			if(data)
-				memcpy(data, moviePlayer->getPixelData(), 4*moviePlayer->getWidth()*moviePlayer->getHeight());
-			pSpr->unlockPixelData();
+			if(moviePlayer->getPixelData() != NULL) {
+				ulong32* data = pSpr->getPixelData();
+				if(data)
+					memcpy(data, moviePlayer->getPixelData(), 4*moviePlayer->getWidth()*moviePlayer->getHeight());
+				pSpr->unlockPixelData();
+			}
         }
 	}
 	if(pSpr) {
@@ -195,12 +197,12 @@ void vlcWindow::init() {
 
     moviePlayer = new sora::SoraVlcMoviePlayer();
 
-    moviePlayer->openMedia(L"./AMV_Scenario.mp4", 848, 480, "RV32");
-	moviePlayer->setTime(10000);
-    moviePlayer->play();
+    if(moviePlayer->openMedia(L"./AMV_Scenario.mp4", "RV32"))
+		pSpr = sora::SORA->createSpriteTex(sora::SORA->createTextureWH(moviePlayer->getWidth(), moviePlayer->getHeight()));
+    
+	moviePlayer->play();
 
-	pSpr = sora::SORA->createSpriteTex(sora::SORA->createTextureWH(848, 480));
-        
+	    
     sora::SORA->setWindowTitle(L"AMV_Scenerio.mp4");
     sora::SORA->setFPS(999);
     

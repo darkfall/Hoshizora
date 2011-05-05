@@ -255,8 +255,8 @@ Token llexer::getNextToken() {
 		cCurrChar = getNextChar();
 		if(cCurrChar == '\0')
 			break;
-		if(cCurrChar == '\n')
-			continue;
+	//	if(cCurrChar == '\n')
+	//		continue;
 
 		iAddCurrChar = TRUE;
 

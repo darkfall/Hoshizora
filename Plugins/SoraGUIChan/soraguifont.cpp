@@ -28,7 +28,7 @@ namespace gcn
     int SoraGUIFont::getWidth(const std::string &text) const
     {
 		if(text.size() > 0)
-            return mSoraFont?(static_cast<int>(mSoraFont->getStringWidth(sora::s2ws(text).c_str())) + 1):0.f;
+            return mSoraFont?(static_cast<int>(mSoraFont->getStringWidth(sora::s2ws(text).c_str())) + 1):0;
 		return 1;
     }
   
@@ -45,7 +45,7 @@ namespace gcn
 
     int SoraGUIFont::getHeight() const
     {
-        return  mSoraFont?static_cast<int>(mSoraFont->getHeight()):0.f;
+        return  mSoraFont?static_cast<int>(mSoraFont->getHeight()):0;
     }
 
     int SoraGUIFont::getStringIndexAt(const std::string& text, int x) const

@@ -73,10 +73,10 @@ namespace mead {
 										lexer->getNextToken();
 										if(lexer->getNextToken() == TOKEN_TYPE_DELIM_OPEN_PAREN) {
 											hgeRect rect;
-											lexer->getNextToken(); rect.x1 = atoi(lexer->getCurrLexeme());
-											lexer->getNextToken(); rect.y1 = atoi(lexer->getCurrLexeme());
-											lexer->getNextToken(); rect.x2 = atoi(lexer->getCurrLexeme());
-											lexer->getNextToken(); rect.y2 = atoi(lexer->getCurrLexeme());
+											lexer->getNextToken(); rect.x1 = (float)atof(lexer->getCurrLexeme());
+											lexer->getNextToken(); rect.y1 = (float)atof(lexer->getCurrLexeme());
+											lexer->getNextToken(); rect.x2 = (float)atof(lexer->getCurrLexeme());
+											lexer->getNextToken(); rect.y2 = (float)atof(lexer->getCurrLexeme());
 											
 											node.mTextureRect = rect;
 											

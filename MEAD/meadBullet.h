@@ -134,7 +134,7 @@ namespace mead {
 		bool isDownReflection; 
 		
 		void setReflectionTimes(uint32 times) { reflectionTimes = times; }
-		float32 getReflectionTimes() { return reflectionTimes; }
+		uint32 getReflectionTimes() { return reflectionTimes; }
 		
 		void setDownReflection(bool flag) { isDownReflection = flag; }
 				

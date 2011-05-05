@@ -541,7 +541,6 @@ void SoraSpriteAnimation::toNextAnm() {
 			bLoop = true;
 		}
 	}
-	play();
 }
 
 void SoraSpriteAnimation::toCurrAnmNode() {
