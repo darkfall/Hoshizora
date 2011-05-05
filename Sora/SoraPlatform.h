@@ -229,6 +229,31 @@ typedef std::wstring SoraWString;
 #define sora_fopenw(path, mode) _wfopen(path.c_str(), TEXT(mode))
 #else
 #define sora_fopenw(path, mode) fopen(ws2s(path).c_str(), mode)
+#include <time.h>
+#include <errno.h>
+// sleep for milliseconds
+// because sleep under windows is guaranteed in millisecond precision
+// but under *nix is second precision
+// so we need high precision sleep udner *nix
+// this is guaranteed in milliseconds
+// see my http://cc.byexamples.com/2007/05/25/nanosleep-is-better-than-sleep-and-usleep/ for more information
+static void msleep(uint32_t msec) {
+	struct timespec timeout0;
+	struct timespec timeout1;
+	struct timespec* tmp;
+	struct timespec* t0 = &timeout0;
+	struct timespec* t1 = &timeout1;
+	
+	t0->tv_sec = msec / 1000;
+	t0->tv_nsec = (msec % 1000) * (1000 * 1000);
+	
+	while ((nanosleep(t0, t1) == (-1)) && (errno == EINTR)) {
+		tmp = t0;
+		t0 = t1;
+		t1 = tmp;
+	}
+}
+
 #endif
 
 #include <stdint.h>

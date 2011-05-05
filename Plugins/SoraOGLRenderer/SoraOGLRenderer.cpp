@@ -65,8 +65,6 @@ namespace sora{
 			++itt;
 		}
 		liTargets.clear();
-
-		//delete mainWindow;
 	}
 
     static void InitPerspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar)
@@ -107,6 +105,11 @@ namespace sora{
 		glDisable(GL_LIGHTING);
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_TEXTURE_2D);
+		
+		
+		SoraString info("OpenGL Version=");
+		info += (char*)glGetString(GL_VERSION);
+		SET_ENV_STRING("RENDERER_DRIVER", info);
     }
 
 	void SoraOGLRenderer::_glBeginFrame() {
@@ -810,13 +813,8 @@ namespace sora{
 
 	SoraWString SoraOGLRenderer::videoInfo() {
 		SoraWString info(L"Driver=OpenGL Version=");
-		//int mav, miv, rev;
 		info += s2ws((char*)glGetString(GL_VERSION));
 
-		//glfwGetVersion(&mav, &miv, &rev);
-		//info += int_to_str(mav); info+=".";
-		//info += int_to_str(miv); info+=".";
-		//info += int_to_str(rev); info+="\n";
 		return info;
 	}
 

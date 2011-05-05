@@ -11,9 +11,10 @@
 #include "SoraCore.h"
 #include "bulletLuaExport.h"
 
+#include "SoraLua/EnvVarExport.h"
+
 #include "SoraSoundManager/SoundManagerLuaExport.h"
 #include "SoraSpriteAnimation/AnimationLuaExport.h"
-#include "SoraGlobalValues/GlobalValuesLuaExport.h"
 
 namespace mead {
 
@@ -79,8 +80,6 @@ namespace mead {
 		exportGlobal(state);
 		sora::exportSoundManager(state);
 		sora::exportSpriteAnimation(state);
-		sora::exportGlobalValuesManager(state);
-		sora::GlobalValuesExporter::exportValues(state);
 	}
 	
 	void meadBoss::setPosition(float32 x, float32 y) {

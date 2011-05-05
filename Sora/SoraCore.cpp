@@ -13,7 +13,7 @@
 
 #include "SoraFolderResourceManager.h"
 
-#include "Defaults/SoraOSXTimer.h"
+#include "Defaults/SoraTimer_OSX.h"
 #include "Defaults/SoraTimer_Win32.h"
 #include "Defaults/SoraMiscTool_Win32.h"
 #include "Defaults/SoraMiscTool_OSX.h"
@@ -24,6 +24,8 @@
 #include "Debug/SoraInternalLogger.h"
 #include "Debug/SoraAutoProfile.h"
 #include "Debug/SoraDebugRenderer.h"
+
+#include "MemoryUsage.h"
 
 extern "C" {
 #include "Random/SFMT.h"
@@ -131,6 +133,7 @@ namespace sora {
 
 	void SoraCore::update() {
 		assert(bInitialized == true);
+		PROFILE("CORE_UPDATE");
 		
 		{
 #ifdef PROFILE_CORE_UPDATE
@@ -307,6 +310,9 @@ namespace sora {
 		iScreenWidth = info->getWindowWidth();
 		iScreenHeight = info->getWindowHeight();
 
+		SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
+		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
+		
 		ulong32 result = pRenderSystem->createWindow(info);
 		if(result) {
 			if(pInput != NULL)
@@ -419,6 +425,8 @@ namespace sora {
 	}
 
 	void SoraCore::setFPS(int32 fps) {
+		SET_ENV_INT("CORE_TIMER_SET_FPS", fps);
+		
 		pTimer->setFPS(fps);
 	}
 
@@ -427,6 +435,8 @@ namespace sora {
 	}
 
 	void SoraCore::setTimeScale(float32 scale) {
+		SET_ENV_INT("CORE_TIMER_TIME_SCALE", scale);
+
 		pTimer->setTimeScale(scale);
 	}
 
@@ -880,5 +890,7 @@ namespace sora {
         return pRenderSystem->snapshot(path);
     }
 
-
+	s_int64 SoraCore::getEngineMemoryUsage() {
+		return getMemoryUsage();
+	}
 } // namespace sora

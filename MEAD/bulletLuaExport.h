@@ -10,13 +10,13 @@
 #ifndef MEAD_BULLET_LUA_EXPORT_H_
 #define MEAD_BULLET_LUA_EXPORT_H_
 
-#include "LuaPlusHelper.h"
-#include "luaclass.h"
 #include "bulletLuaHelper.h"
 #include "meadBossManager.h"
 #include "meadPlayerManager.h"
 
-#include "SoraGlobalValues/GlobalValuesLuaExport.h"
+#include "SoraLua/EnvVarExport.h"
+#include "SoraLua/LuaPlusHelper.h"
+#include "SoraLua/luaclass.h"
 
 namespace mead {
 	
@@ -114,9 +114,7 @@ namespace mead {
 	}
 	
 
-	static void exportGlobal(LuaState* state) {
-		sora::exportGlobalValuesManager(state);
-		
+	static void exportGlobal(LuaState* state) {		
 		gge::LuaClass<meadBossManager>(state, "BossManager", meadBossManager::Instance())
 		.def("createBoss", &meadBossManager::createBoss)
 		.def("isBossDied", &meadBossManager::isBossDied)

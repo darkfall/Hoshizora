@@ -61,14 +61,12 @@ bool mainWindow::renderFunc() {
 		
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	
-
 	luaObject.update(0.f);
 	luaObject.render();
 	
 	sora->endScene();
 	return false;
 }
-
 
 void mainWindow::init() {
     sora::SORA->setFPS(60);
@@ -82,6 +80,7 @@ void mainWindow::init() {
 	
 	editor = new reflection::rfEditor;
 	editor->init();
+	
 	
 /*	mead::globalBulletManagerInit();
 	mead::exportBulletManager(luaObject.getState());

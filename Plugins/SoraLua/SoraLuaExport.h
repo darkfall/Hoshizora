@@ -13,12 +13,10 @@
 #include "SoraEventManager.h"
 #include "SoraMath.h"
 
-namespace sora { 
+#include "EnvVarExport.h"
 
-	static void core_messageBox(const SoraString& message, const SoraString& title, int32 flag) {
-		SORA->messageBox(message, title, flag);
-		SORA->log(message);
-	}
+namespace sora { 
+	
 	class SoraLuaExport {
 	public:
 		static void export_soracore(SoraLuaObject* state) {
@@ -27,8 +25,6 @@ namespace sora {
 		static void export_soracore(LuaState* state) {
             assert(state != NULL);
             
-			LuaModule(state, "core")
-				.def("messageBox", &core_messageBox);
 			SoraCore* pCore = SoraCore::Instance();
 			gge::LuaClass<SoraCore>(state, "SoraCore", pCore)
             .def("setFPS", &SoraCore::setFPS)
@@ -72,6 +68,8 @@ namespace sora {
             .def("execute", &SoraCore::execute)
             .def("setFrameSync", &SoraCore::setFrameSync)
 			.def("renderRect", &SoraCore::renderRect);
+			
+			exportEnvValuesManager(state);
 		}
         
 

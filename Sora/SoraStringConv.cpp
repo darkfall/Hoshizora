@@ -133,14 +133,13 @@ std::string fp_to_str(float32 x)
 		return buffer;
 	}
 	
-std::string ws2s(const std::wstring& ws)
-{
+std::string ws2s(const std::wstring& ws) {
 #ifdef WIN32
 	return WChar2Ansi(ws);
 #elif defined(OS_IOS)
 	return iOSWString2String(ws);
 #endif
-    std::string curLocale = setlocale(LC_ALL, NULL);        // curLocale = "C";
+    std::string curLocale = setlocale(LC_CTYPE, NULL);        // curLocale = "C";
     setlocale(LC_CTYPE, "chs");
     const wchar_t* _Source = ws.c_str();
     size_t _Dsize = 2 * ws.size() + 1;

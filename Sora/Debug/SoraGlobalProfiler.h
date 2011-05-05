@@ -28,20 +28,21 @@ namespace sora {
 			SoraString sName;
 			s_int64 elapsedTime;
 			
+			s_profile(): elapsedTime(0) {}
 			s_profile(const char* name, s_int64 t): sName(name), elapsedTime(t) {}
 		};
-		typedef std::map<SoraString, s_profile> PROFILE_CONT;
+		typedef hash_map<SoraString, s_profile> PROFILE_CONT;
 
 	public:
 		void storeProfile(const char* name, s_int64 elapsedTime) {
-			profiles.insert(std::make_pair<SoraString, s_profile>(name, s_profile(name, elapsedTime)));
-			INT_LOG_HANDLE->debugPrintf("ProfileName=%s, time=%llu\n", name, elapsedTime);
+			profiles[name] = s_profile(name, elapsedTime);
+	//		INT_LOG_HANDLE->debugPrintf("ProfileName=%s, time=%llu\n", name, elapsedTime);
 		}
 		
 		void printProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				INT_LOG_HANDLE->debugPrintf("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
+				INT_LOG_HANDLE->logf("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
 				++itprofile;
 			}
 		}
@@ -49,7 +50,7 @@ namespace sora {
 		void logProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				INT_LOG_HANDLE->debugLogf("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
+				INT_LOG_HANDLE->logf("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
 				++itprofile;
 			}
 		}

@@ -18,6 +18,8 @@ namespace sora {
 										mPrevBGMId(-1), mCurrBGMId(-1) {
 		SORA->registerPlugin(this);
 		registerEventFunc(this, &SoraBGMManager::onPlaybackEvent);
+	
+		SET_ENV_FLOAT("BGM_VOLUME", bgmVolume);
 	}
 	
 	void SoraBGMManager::_clearBGMQueue() {
@@ -144,6 +146,8 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::setVolume(float32 volume) { 
+		SET_ENV_FLOAT("BGM_VOLUME", bgmVolume);
+		
 		if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size())
 			mBGMQueue[mCurrBGMId]->setVolume(volume);
 		bgmVolume = volume;

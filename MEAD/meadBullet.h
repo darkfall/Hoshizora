@@ -292,6 +292,7 @@ namespace mead {
 		bool isPlayerBullet;
 		
 		inline bool collisionDetect(float32 x, float32 y) {
+			return false;
 		}
 		
 		inline void render(sora::SoraSprite* spr) {

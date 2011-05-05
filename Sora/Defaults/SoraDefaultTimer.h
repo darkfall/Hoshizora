@@ -55,6 +55,17 @@ namespace sora {
 			dt = getDelta(time, oldtime);
 
 			if(dt < fpsInterval) {
+				for(;;) {
+					// 1 millisecond precision
+					if(getDelta(time, oldtime) < fpsInterval - 1000) {
+						for(;;)
+							if(getDelta(time, oldtime) >= fpsInterval)
+								break;
+						break;
+					} else {
+						msleep(1);
+					}
+				}
 				return false;
 			}
 			fdt = dt/1000.f * fTimeScale;

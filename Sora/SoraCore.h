@@ -17,6 +17,7 @@
 #include "SoraResourceFileFinder.h"
 #include "SoraShader.h"
 #include "SoraFrameListener.h"
+#include "SoraEnvValues.h"
 
 #include <map>
 
@@ -184,6 +185,8 @@ namespace sora {
 		/* frame listener functions */
 		void SORACALL addFrameListener(SoraFrameListener* listener);
 		void SORACALL delFrameListener(SoraFrameListener* listener);
+		
+		s_int64 getEngineMemoryUsage();
 
 	private:
 

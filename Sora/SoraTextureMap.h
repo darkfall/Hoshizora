@@ -6,6 +6,7 @@
 #include "SoraException.h"
 #include "SoraCore.h"
 #include "SoraPlatform.h"
+#include "SoraEnvValues.h"
 
 #include "stringId.h"
 #include <map>
@@ -32,7 +33,6 @@ namespace sora {
 		
 		void clear() {
 			for(TEX_MAP::iterator p = texMap.begin(); p != texMap.end(); ++p) {
-				//printf("tex rf: %d, %d\n", p->second, texRefs[p->first]);
 				if(texRefs[p->first] == 0) {
 					SoraCore::Instance()->releaseTexture(p->second);
 #ifdef _DEBUG
@@ -44,10 +44,9 @@ namespace sora {
 			}
 		}
 
-		void add(const SoraWString& key, HSORATEXTURE tex) {
+		void add(const SoraWString& key, HSORATEXTURE tex) {			
 			stringId uiKey = str2id(key);
 			TEX_MAP::iterator pos = texMap.find(uiKey);
-			//wcscpy(((SoraTexture*)tex)->name, key.c_str());
 			if(pos == texMap.end()) {
 				texMap[uiKey] = tex;
 				texMapRv[tex] = uiKey;
@@ -59,6 +58,8 @@ namespace sora {
 				texMapRv[tex] = uiKey;
 				texRefs[uiKey]++;
 			}
+			
+			SET_ENV_INT("CORE_TEXMAP_SIZE", texMap.size());
 		}
 		
 		void remove(HSORATEXTURE tex) {
@@ -68,6 +69,8 @@ namespace sora {
 				texMap.erase(texMap.find(p->second));
 				texMapRv.erase(p);
 			}
+			
+			SET_ENV_INT("CORE_TEXMAP_SIZE", texMap.size());
 		}
 		
 		void del(HSORATEXTURE tex) {
@@ -77,6 +80,8 @@ namespace sora {
 				texMap.erase(texMap.find(p->second));
 				texMapRv.erase(p);
 			}
+			
+			SET_ENV_INT("CORE_TEXMAP_SIZE", texMap.size());
 		}
 		
 		void addRf(const SoraWString& key) {
