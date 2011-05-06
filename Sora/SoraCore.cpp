@@ -435,7 +435,7 @@ namespace sora {
 	}
 
 	void SoraCore::setTimeScale(float32 scale) {
-		SET_ENV_INT("CORE_TIMER_TIME_SCALE", scale);
+		SET_ENV_FLOAT("CORE_TIMER_TIME_SCALE", scale);
 
 		pTimer->setTimeScale(scale);
 	}

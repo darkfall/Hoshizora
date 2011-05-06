@@ -97,9 +97,6 @@
     <Filter Include="源文件\mead">
       <UniqueIdentifier>{2f138d3f-9ccc-4b37-8f25-ce2ebbd8f281}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugins\GlobalValues">
-      <UniqueIdentifier>{5bd043bf-e027-4f8b-81b6-adeaabe56fb2}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -885,9 +882,6 @@
     <ClInclude Include="..\..\..\Sora\Defaults\SoraMiscTool_Win32.h">
       <Filter>头文件\defaults</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\Defaults\SoraOSXTimer.h">
-      <Filter>头文件\defaults</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\Defaults\SoraTimer_Win32.h">
       <Filter>头文件\defaults</Filter>
     </ClInclude>
@@ -1281,11 +1275,17 @@
     <ClInclude Include="..\..\..\MEAD\bulletLuaHelper.h">
       <Filter>源文件\mead</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGlobalValues\GlobalValuesLuaExport.h">
-      <Filter>Plugins\GlobalValues</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\EnvVarExport.h">
+      <Filter>Plugins\SoraLua</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGlobalValues\SoraGlobalValues.h">
-      <Filter>Plugins\GlobalValues</Filter>
+    <ClInclude Include="..\..\..\Sora\SoraEnvValues.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\Defaults\SoraTimer_OSX.h">
+      <Filter>头文件\defaults</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\MemoryUsage.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1928,11 +1928,11 @@
     <ClCompile Include="..\..\..\MEAD\bulletLuaHelper.cpp">
       <Filter>源文件\mead</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraGlobalValues\GlobalValuesLuaExporter.cpp">
-      <Filter>Plugins\GlobalValues</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\EnvVarExport.cpp">
+      <Filter>Plugins\SoraLua</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraGlobalValues\SoraGlobalValues.cpp">
-      <Filter>Plugins\GlobalValues</Filter>
+    <ClCompile Include="..\..\..\Sora\SoraEnvValues.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
