@@ -23,18 +23,22 @@ namespace soraosx {
 		NSError *error = nil;
 		NSArray *array = [[NSFileManager defaultManager]
 						  subpathsOfDirectoryAtPath:path error:&error];
+		
 		if (array != nil) {
 			std::setlocale(LC_CTYPE, "chs"); 
 
 			for(NSString* file in array) {
-				const char* _Source = [file UTF8String];
-				size_t _Dsize = [file length] + 1;
-				wchar_t *_Dest = new wchar_t[_Dsize];
-				wmemset(_Dest, 0, _Dsize);
-				mbstowcs(_Dest,_Source,_Dsize);
-				
-				cont.push_back(_Dest);
-				delete []_Dest;
+				NSRange range = [file rangeOfString:@".DS_Store"];
+				if(range.location == NSNotFound) {
+					const char* _Source = [file UTF8String];
+					size_t _Dsize = [file length] + 1;
+					wchar_t *_Dest = new wchar_t[_Dsize];
+					wmemset(_Dest, 0, _Dsize);
+					mbstowcs(_Dest,_Source,_Dsize);
+					
+					cont.push_back(folder + L"/" + _Dest);
+					delete []_Dest;
+				}
 			}
 			
 			std::setlocale(LC_CTYPE, "C");

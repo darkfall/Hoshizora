@@ -70,8 +70,6 @@
 		8838067B1342587B00A47BD9 /* SoraPhysicalWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 883806551342587B00A47BD9 /* SoraPhysicalWorld.cpp */; };
 		883900F0131A096700CC101A /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 883900EE131A096700CC101A /* editorWindow.cpp */; };
 		884575D81300DB38003EC408 /* state_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884575D71300DB38003EC408 /* state_test.cpp */; };
-		884E5E3C133AFCB3006E9CC6 /* libvlc.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E38133AFCB3006E9CC6 /* libvlc.5.dylib */; };
-		884E5E3E133AFCB3006E9CC6 /* libvlccore.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 884E5E3A133AFCB3006E9CC6 /* libvlccore.4.dylib */; };
 		884E91C612DEAE0100598D7E /* FolderTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884E91C512DEAE0100598D7E /* FolderTree.cpp */; };
 		88504B9912ECDB4E009B9F45 /* SFMT.c in Sources */ = {isa = PBXBuildFile; fileRef = 88504B9712ECDB4E009B9F45 /* SFMT.c */; };
 		8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851F6F0135FA97900091C9C /* libfmodexL.dylib */; };
@@ -120,6 +118,10 @@
 		887E3B9E1363AFE600803DA6 /* gcnMenuContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E3B9D1363AFE600803DA6 /* gcnMenuContainer.cpp */; };
 		887E3BA11363B0A800803DA6 /* gcnImageEffectImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E3BA01363B0A800803DA6 /* gcnImageEffectImage.cpp */; };
 		887E3E601363D55800803DA6 /* rfLightRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E3E5F1363D55800803DA6 /* rfLightRenderer.cpp */; };
+		88898319137520D4000B937A /* rftdSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88898318137520D4000B937A /* rftdSystem.cpp */; };
+		888985441375D6DB000B937A /* rftdEnemyObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 888985431375D6DB000B937A /* rftdEnemyObject.cpp */; };
+		8889871813760766000B937A /* rftdMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8889871713760766000B937A /* rftdMap.cpp */; };
+		8889871C13760AC9000B937A /* rftdSpawnPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8889871B13760AC9000B937A /* rftdSpawnPoint.cpp */; };
 		889BFD4912BF4D23002D8A2F /* CoreTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 889BFD4112BF4D23002D8A2F /* CoreTransform.cpp */; };
 		889BFD4A12BF4D23002D8A2F /* graphicEffects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 889BFD4412BF4D23002D8A2F /* graphicEffects.cpp */; };
 		889BFD4B12BF4D23002D8A2F /* SoraImageEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */; };
@@ -234,7 +236,6 @@
 		88BF9F6E135AA63200BB8E70 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BF9F6D135AA63200BB8E70 /* Cg.framework */; };
 		88BF9FDA135AAB6100BB8E70 /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BF9FD9135AAB6100BB8E70 /* editorWindow.cpp */; };
 		88CE58D512C1B41C00C551F0 /* SoraParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CE58D312C1B41C00C551F0 /* SoraParticleSystem.cpp */; };
-		88D1A0AF1337FF7D00F26121 /* vlcTestWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D1A0AD1337FF7D00F26121 /* vlcTestWindow.cpp */; };
 		88D87D5712A09A66007D6865 /* hgerect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2112A09A66007D6865 /* hgerect.cpp */; };
 		88D87D5812A09A66007D6865 /* hgevector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2312A09A66007D6865 /* hgevector.cpp */; };
 		88D87D5A12A09A66007D6865 /* SoraCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2D12A09A66007D6865 /* SoraCore.cpp */; };
@@ -275,7 +276,6 @@
 		88FD360B128E8367004DED08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FD360A128E8367004DED08 /* Cocoa.framework */; };
 		88FE04B91370AE4200A62EBB /* meadPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FE04B71370AE4200A62EBB /* meadPlayer.cpp */; };
 		88FE04BC1370AE4C00A62EBB /* meadPlayerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FE04BB1370AE4C00A62EBB /* meadPlayerManager.cpp */; };
-		88FF1DDC13386214009E7786 /* SoraVlcMoviePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* SoraPureCore.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* SoraPureCore.1 */; };
 /* End PBXBuildFile section */
@@ -457,8 +457,6 @@
 		884575D61300DB38003EC408 /* state_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = state_test.h; path = Experimental/state_test.h; sourceTree = "<group>"; };
 		884575D71300DB38003EC408 /* state_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = state_test.cpp; path = Experimental/state_test.cpp; sourceTree = "<group>"; };
 		884CC87312F88E1300FD18FC /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
-		884E5E38133AFCB3006E9CC6 /* libvlc.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvlc.5.dylib; path = ../Plugins/libvlc/osx/lib/libvlc.5.dylib; sourceTree = "<group>"; };
-		884E5E3A133AFCB3006E9CC6 /* libvlccore.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvlccore.4.dylib; path = ../Plugins/libvlc/osx/lib/libvlccore.4.dylib; sourceTree = "<group>"; };
 		884E91C412DEAE0100598D7E /* FolderTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FolderTree.h; path = Experimental/FolderTree.h; sourceTree = "<group>"; };
 		884E91C512DEAE0100598D7E /* FolderTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FolderTree.cpp; path = Experimental/FolderTree.cpp; sourceTree = "<group>"; };
 		88504B7B12ECDB11009B9F45 /* hgeRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgeRandom.h; sourceTree = "<group>"; };
@@ -654,6 +652,23 @@
 		887E3BA01363B0A800803DA6 /* gcnImageEffectImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnImageEffectImage.cpp; sourceTree = "<group>"; };
 		887E3E5E1363D55800803DA6 /* rfLightRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rfLightRenderer.h; path = ../ReflectionRev/rfLightRenderer.h; sourceTree = SOURCE_ROOT; };
 		887E3E5F1363D55800803DA6 /* rfLightRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rfLightRenderer.cpp; path = ../ReflectionRev/rfLightRenderer.cpp; sourceTree = SOURCE_ROOT; };
+		888982D013751453000B937A /* rftdBulletEffector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdBulletEffector.h; sourceTree = "<group>"; };
+		888982D313751478000B937A /* rftdCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdCommon.h; sourceTree = "<group>"; };
+		888982D413751661000B937A /* rftdObjColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdObjColor.h; sourceTree = "<group>"; };
+		888982D5137516FA000B937A /* rftdTowerConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdTowerConf.h; sourceTree = "<group>"; };
+		88898317137520CB000B937A /* rftdSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdSystem.h; sourceTree = "<group>"; };
+		88898318137520D4000B937A /* rftdSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdSystem.cpp; sourceTree = "<group>"; };
+		888985121375CE67000B937A /* rftdEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdEvents.h; sourceTree = "<group>"; };
+		888985141375CF8E000B937A /* rftdRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdRegion.h; sourceTree = "<group>"; };
+		888985421375D6DB000B937A /* rftdEnemyObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdEnemyObject.h; sourceTree = "<group>"; };
+		888985431375D6DB000B937A /* rftdEnemyObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdEnemyObject.cpp; sourceTree = "<group>"; };
+		888985451375D759000B937A /* rftdEnemyConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdEnemyConf.h; sourceTree = "<group>"; };
+		888985731375DB50000B937A /* rftdTextureConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdTextureConf.h; sourceTree = "<group>"; };
+		8889871613760766000B937A /* rftdMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdMap.h; sourceTree = "<group>"; };
+		8889871713760766000B937A /* rftdMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdMap.cpp; sourceTree = "<group>"; };
+		8889871A13760907000B937A /* rftdSpawnPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdSpawnPoint.h; sourceTree = "<group>"; };
+		8889871B13760AC9000B937A /* rftdSpawnPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdSpawnPoint.cpp; sourceTree = "<group>"; };
+		88898971137637A5000B937A /* rftdSteer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdSteer.h; sourceTree = "<group>"; };
 		888DACFA13384D1B004CAB83 /* SoraMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMoviePlayer.h; sourceTree = "<group>"; };
 		8896F2C112E8B79900F42D48 /* SoraASSM_State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraASSM_State.h; path = Experimental/SoraASSM_State.h; sourceTree = "<group>"; };
 		8896F2C312E8B79900F42D48 /* SoraASSM_SM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraASSM_SM.h; path = Experimental/SoraASSM_SM.h; sourceTree = "<group>"; };
@@ -931,27 +946,13 @@
 		88BF9FD8135AAB6100BB8E70 /* editorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editorWindow.h; path = ../AnimationEditor/editorWindow.h; sourceTree = SOURCE_ROOT; };
 		88BF9FD9135AAB6100BB8E70 /* editorWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = editorWindow.cpp; path = ../AnimationEditor/editorWindow.cpp; sourceTree = SOURCE_ROOT; };
 		88BF9FDE135AABC200BB8E70 /* aeMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aeMainWindow.h; path = ../AnimationEditor/aeMainWindow.h; sourceTree = SOURCE_ROOT; };
+		88CD9D021377B64300492B3F /* rftdMapConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdMapConf.h; sourceTree = "<group>"; };
 		88CE58D312C1B41C00C551F0 /* SoraParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraParticleSystem.cpp; sourceTree = "<group>"; };
 		88CE58D412C1B41C00C551F0 /* SoraParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraParticleSystem.h; sourceTree = "<group>"; };
 		88CE59A012C1CE6A00C551F0 /* quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quaternion.h; sourceTree = "<group>"; };
 		88CE59A112C1CE6A00C551F0 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector3.h; sourceTree = "<group>"; };
 		88CFF7E812C6D562002A9F75 /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		88CFF86A12C6E4EE002A9F75 /* SoraEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraEventManager.h; sourceTree = "<group>"; };
-		88D1A09C1337FF1700F26121 /* deprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deprecated.h; sourceTree = "<group>"; };
-		88D1A09D1337FF1700F26121 /* libvlc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc.h; sourceTree = "<group>"; };
-		88D1A09E1337FF1700F26121 /* libvlc_events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_events.h; sourceTree = "<group>"; };
-		88D1A09F1337FF1700F26121 /* libvlc_media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media.h; sourceTree = "<group>"; };
-		88D1A0A01337FF1700F26121 /* libvlc_media_discoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_discoverer.h; sourceTree = "<group>"; };
-		88D1A0A11337FF1700F26121 /* libvlc_media_library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_library.h; sourceTree = "<group>"; };
-		88D1A0A21337FF1700F26121 /* libvlc_media_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_list.h; sourceTree = "<group>"; };
-		88D1A0A31337FF1700F26121 /* libvlc_media_list_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_list_player.h; sourceTree = "<group>"; };
-		88D1A0A41337FF1700F26121 /* libvlc_media_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_player.h; sourceTree = "<group>"; };
-		88D1A0A51337FF1700F26121 /* libvlc_structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_structures.h; sourceTree = "<group>"; };
-		88D1A0A61337FF1700F26121 /* libvlc_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_version.h; sourceTree = "<group>"; };
-		88D1A0A71337FF1700F26121 /* libvlc_vlm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_vlm.h; sourceTree = "<group>"; };
-		88D1A0A81337FF1700F26121 /* vlc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vlc.h; sourceTree = "<group>"; };
-		88D1A0AD1337FF7D00F26121 /* vlcTestWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vlcTestWindow.cpp; sourceTree = "<group>"; };
-		88D1A0AE1337FF7D00F26121 /* vlcTestWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vlcTestWindow.h; sourceTree = "<group>"; };
 		88D87D1E12A09A66007D6865 /* SoraDefaultLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDefaultLogger.h; sourceTree = "<group>"; };
 		88D87D1F12A09A66007D6865 /* SoraDefaultMiscTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDefaultMiscTool.h; sourceTree = "<group>"; };
 		88D87D2012A09A66007D6865 /* SoraDefaultTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDefaultTimer.h; sourceTree = "<group>"; };
@@ -1070,8 +1071,6 @@
 		88FE04BA1370AE4C00A62EBB /* meadPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meadPlayerManager.h; path = ../MEAD/meadPlayerManager.h; sourceTree = SOURCE_ROOT; };
 		88FE04BB1370AE4C00A62EBB /* meadPlayerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = meadPlayerManager.cpp; path = ../MEAD/meadPlayerManager.cpp; sourceTree = SOURCE_ROOT; };
 		88FE06181371094900A62EBB /* meadCollision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meadCollision.h; path = ../MEAD/meadCollision.h; sourceTree = SOURCE_ROOT; };
-		88FF1DDA133861E2009E7786 /* SoraVlcMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraVlcMoviePlayer.h; path = ../Plugins/libvlc/SoraVlcMoviePlayer.h; sourceTree = "<group>"; };
-		88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraVlcMoviePlayer.cpp; path = ../Plugins/libvlc/SoraVlcMoviePlayer.cpp; sourceTree = "<group>"; };
 		88FF1DDD1338628D009E7786 /* SoraMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMoviePlayer.h; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* Sora */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sora; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* SoraPureCore.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SoraPureCore.1; sourceTree = "<group>"; };
@@ -1088,8 +1087,6 @@
 				88FABD85129F271900B6A1D8 /* AudioToolbox.framework in Frameworks */,
 				88FABDCA129F2A9C00B6A1D8 /* QTKit.framework in Frameworks */,
 				88FABDD5129F2AA200B6A1D8 /* CoreAudio.framework in Frameworks */,
-				884E5E3C133AFCB3006E9CC6 /* libvlc.5.dylib in Frameworks */,
-				884E5E3E133AFCB3006E9CC6 /* libvlccore.4.dylib in Frameworks */,
 				88BD150D1346ADCA0068AABA /* libluaplus.dylib in Frameworks */,
 				88BF9F6E135AA63200BB8E70 /* Cg.framework in Frameworks */,
 				8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */,
@@ -1117,6 +1114,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				888982CF13751440000B937A /* ReflectionTD */,
 				88E33A34136B3483000B67C8 /* myDream */,
 				887E2934136152DD00803DA6 /* Reflection */,
 				88BF9FD7135AAB2400BB8E70 /* AnimationEditor */,
@@ -1124,8 +1122,6 @@
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 				8811389E12CC424000C648C7 /* mainWindow.h */,
 				8811389F12CC424000C648C7 /* mainWindow.cpp */,
-				88D1A0AE1337FF7D00F26121 /* vlcTestWindow.h */,
-				88D1A0AD1337FF7D00F26121 /* vlcTestWindow.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -1676,6 +1672,32 @@
 			name = Reflection;
 			sourceTree = "<group>";
 		};
+		888982CF13751440000B937A /* ReflectionTD */ = {
+			isa = PBXGroup;
+			children = (
+				888982D013751453000B937A /* rftdBulletEffector.h */,
+				888982D413751661000B937A /* rftdObjColor.h */,
+				888982D5137516FA000B937A /* rftdTowerConf.h */,
+				888985451375D759000B937A /* rftdEnemyConf.h */,
+				888985731375DB50000B937A /* rftdTextureConf.h */,
+				88CD9D021377B64300492B3F /* rftdMapConf.h */,
+				888982D313751478000B937A /* rftdCommon.h */,
+				888985121375CE67000B937A /* rftdEvents.h */,
+				888985141375CF8E000B937A /* rftdRegion.h */,
+				88898971137637A5000B937A /* rftdSteer.h */,
+				888985421375D6DB000B937A /* rftdEnemyObject.h */,
+				888985431375D6DB000B937A /* rftdEnemyObject.cpp */,
+				8889871A13760907000B937A /* rftdSpawnPoint.h */,
+				8889871B13760AC9000B937A /* rftdSpawnPoint.cpp */,
+				8889871613760766000B937A /* rftdMap.h */,
+				8889871713760766000B937A /* rftdMap.cpp */,
+				88898317137520CB000B937A /* rftdSystem.h */,
+				88898318137520D4000B937A /* rftdSystem.cpp */,
+			);
+			name = ReflectionTD;
+			path = ../ReflectionTD;
+			sourceTree = SOURCE_ROOT;
+		};
 		88AD7F5E13415855000F4F68 /* json */ = {
 			isa = PBXGroup;
 			children = (
@@ -2088,40 +2110,6 @@
 			path = ../Plugins/SoraParticleSystem;
 			sourceTree = SOURCE_ROOT;
 		};
-		88D1A09A1337FEF700F26121 /* vlc */ = {
-			isa = PBXGroup;
-			children = (
-				884E5E38133AFCB3006E9CC6 /* libvlc.5.dylib */,
-				884E5E3A133AFCB3006E9CC6 /* libvlccore.4.dylib */,
-				88D1A09B1337FF1700F26121 /* vlc */,
-				88FF1DDA133861E2009E7786 /* SoraVlcMoviePlayer.h */,
-				88FF1DDB13386214009E7786 /* SoraVlcMoviePlayer.cpp */,
-			);
-			name = vlc;
-			path = ../Sora;
-			sourceTree = "<group>";
-		};
-		88D1A09B1337FF1700F26121 /* vlc */ = {
-			isa = PBXGroup;
-			children = (
-				88D1A09C1337FF1700F26121 /* deprecated.h */,
-				88D1A09D1337FF1700F26121 /* libvlc.h */,
-				88D1A09E1337FF1700F26121 /* libvlc_events.h */,
-				88D1A09F1337FF1700F26121 /* libvlc_media.h */,
-				88D1A0A01337FF1700F26121 /* libvlc_media_discoverer.h */,
-				88D1A0A11337FF1700F26121 /* libvlc_media_library.h */,
-				88D1A0A21337FF1700F26121 /* libvlc_media_list.h */,
-				88D1A0A31337FF1700F26121 /* libvlc_media_list_player.h */,
-				88D1A0A41337FF1700F26121 /* libvlc_media_player.h */,
-				88D1A0A51337FF1700F26121 /* libvlc_structures.h */,
-				88D1A0A61337FF1700F26121 /* libvlc_version.h */,
-				88D1A0A71337FF1700F26121 /* libvlc_vlm.h */,
-				88D1A0A81337FF1700F26121 /* vlc.h */,
-			);
-			name = vlc;
-			path = ../Plugins/libvlc/osx/include/vlc;
-			sourceTree = "<group>";
-		};
 		88D7F51B1285190700BA1949 /* Sora */ = {
 			isa = PBXGroup;
 			children = (
@@ -2307,7 +2295,6 @@
 				88BA9E00135A96E500C282EB /* SoraSpriteAnimation */,
 				88BD14821346ADCA0068AABA /* SoraLua */,
 				883806021342587B00A47BD9 /* SoraBox2D */,
-				88D1A09A1337FEF700F26121 /* vlc */,
 				88374B0E1321EDD200369B12 /* DarkLibOsx */,
 				88DD0C1F12EB5B48005555F6 /* tcmalloc */,
 				88CE58D212C1B41C00C551F0 /* SoraParticleSystem */,
@@ -2569,8 +2556,6 @@
 				884575D81300DB38003EC408 /* state_test.cpp in Sources */,
 				883900F0131A096700CC101A /* editorWindow.cpp in Sources */,
 				88374B121321EE0C00369B12 /* FileDlgOsx.mm in Sources */,
-				88D1A0AF1337FF7D00F26121 /* vlcTestWindow.cpp in Sources */,
-				88FF1DDC13386214009E7786 /* SoraVlcMoviePlayer.cpp in Sources */,
 				88AD7F6E13415856000F4F68 /* json_reader.cpp in Sources */,
 				88AD7F6F13415856000F4F68 /* json_value.cpp in Sources */,
 				88AD7F7013415856000F4F68 /* json_writer.cpp in Sources */,
@@ -2718,6 +2703,10 @@
 				88FE04BC1370AE4C00A62EBB /* meadPlayerManager.cpp in Sources */,
 				88A8652313732C9B003A3CDE /* SoraEnvValues.cpp in Sources */,
 				88A8653B13732FAA003A3CDE /* EnvVarExport.cpp in Sources */,
+				88898319137520D4000B937A /* rftdSystem.cpp in Sources */,
+				888985441375D6DB000B937A /* rftdEnemyObject.cpp in Sources */,
+				8889871813760766000B937A /* rftdMap.cpp in Sources */,
+				8889871C13760AC9000B937A /* rftdSpawnPoint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

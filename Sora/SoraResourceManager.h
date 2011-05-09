@@ -36,6 +36,8 @@ namespace sora {
 		 @param format, resource format string, zip etc
 		 */
 		virtual bool isFormatSupported(const SoraWString& format) const = 0;
+		
+		virtual bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) { return false; }
 	};
 
 } // namespace sora;

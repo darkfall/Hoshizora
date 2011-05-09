@@ -25,6 +25,7 @@ namespace gcn {
 	
 	void BackgroundContainer::setImage(const std::string& bgImage) {
 		pBackgroundImage = Image::load(bgImage);
+		adjustSize();
 	}
 	
 	void BackgroundContainer::draw(Graphics* graphics) {

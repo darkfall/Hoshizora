@@ -91,4 +91,14 @@ namespace sora {
 			return true;
 		return false;
 	}
+	
+	bool SoraZipResourceManager::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) { 
+		RESOURCE_PACK::iterator p = resourcePacks.begin();
+		while( p != resourcePacks.end() ) {
+			if(p->second->enumFiles(cont, folder))
+				return true;
+			++p;
+		}
+		return false;
+	}
 } // namespace sora;

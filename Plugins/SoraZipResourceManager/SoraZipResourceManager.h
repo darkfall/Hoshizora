@@ -36,6 +36,8 @@ namespace sora {
 		SoraWString getFormat() const { return L"zip;rfResource"; }
 		bool isFormatSupported(const SoraWString& format) const;
 		
+		bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
+		
 	private:
 		RESOURCE_PACK resourcePacks;
 	};

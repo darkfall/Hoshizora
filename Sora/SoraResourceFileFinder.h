@@ -38,6 +38,8 @@ namespace sora {
 		ulong32 getResourceFileSize			(const SoraWString& file);
 		void freeResourceFile(void* p);
 		
+		bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
+		
 	private:		
 		typedef std::vector<SoraAutoPtr<SoraResourceManager> > RESOURCE_MANAGER_CONT;
 		RESOURCE_MANAGER_CONT resourceManagers;

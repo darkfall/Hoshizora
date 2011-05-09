@@ -33,12 +33,7 @@ namespace sora {
 		t_curr = t_src;
 		
 		if(!t_transformer) {
-			if(mode == IMAGE_EFFECT_PINGPONG) {
-				t_transformer = new CoreTrigTransformerFull<CoreTransform>;
-				effectTime *= 2;
-			}
-			else
-				t_transformer = new CoreLinearTransformer<CoreTransform>;
+			t_transformer = new CoreLinearTransformer<CoreTransform>;
 			bInternalTransformer = true;
 		} else bInternalTransformer = false;
 	}
@@ -102,8 +97,14 @@ namespace sora {
 						states = IMAGE_EFFECT_END;
 						break;
 					case IMAGE_EFFECT_REPEAT:
+						
+						startTime = 0.f;
+						t_curr = t_src;
+						break;
+						
 					case IMAGE_EFFECT_PINGPONG:
 						startTime = 0.f;
+						std::swap(t_src, t_dst);
 						t_curr = t_src;
 						break;
 				}

@@ -103,5 +103,20 @@ uLong SoraZipFile::getFileCRC(const SoraWString& filename) {
 	}
 	return 0;
 }
+	
+	bool SoraZipFile::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
+		if(is_open() && pReader) {
+			std::vector<std::string> tmpCont;
+			pReader->GetFileList(tmpCont);
+			for(size_t i=0; i<tmpCont.size(); ++i) {
+				std::wstring tmpFile = s2ws(tmpCont[i]);
+				if(tmpFile.find(folder) != std::wstring::npos)
+					cont.push_back(tmpFile);
+			}
+			if(cont.size() != 0)
+				return true;
+		}
+		return false;
+	}
 
 } // namespace sora

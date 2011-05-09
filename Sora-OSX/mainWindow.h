@@ -13,6 +13,7 @@
 #include "SoraCore.h"
 #include "SoraCanvas.h"
 #include "SoraPlatform.h"
+#include "SoraParticleSystem/SoraParticleSystem.h"
 #include "SoraLua/SoraLuaObject.h"
 #include "../ReflectionRev/editor/rfEditor.h"
 
@@ -25,13 +26,13 @@ public:
 	bool renderFunc();
 	void init();
 	
-	int32 getWindowWidth() { return 800; }
-	int32 getWindowHeight() { return 600; }
+	int32 getWindowWidth() { return 1024; }
+	int32 getWindowHeight() { return 768; }
 	
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }
 	
-	SoraString getWindowName() { return "Genso De L"; }
+	SoraString getWindowName() { return "Reflection"; }
 	SoraString getWindowId() { return "MainWindow"; }
 	
 	bool isWindowSubWindow() { return false; }	
@@ -44,10 +45,14 @@ private:
 	sora::SoraCore* sora;
                     
     sora::SoraSprite* pSpr;
+	sora::SoraSprite* pSpr2;
+	sora::SoraSprite* pressAnyKey;
+	
 	sora::SoraShader* shader;
 					
     sora::SoraFont* pFont;
-	
+	sora::SoraParticleSystem* ps;
+	sora::SoraSprite* psSpr;
 	sora::SoraBaseCanvas* canvas1;
 	
 	sora::SoraLuaObject luaObject;

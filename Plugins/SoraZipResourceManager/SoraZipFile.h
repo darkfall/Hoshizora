@@ -25,6 +25,8 @@ namespace sora {
 
 		virtual uLong getFileSize(const SoraWString& filename);
 		virtual uLong getFileCRC(const SoraWString& filename);
+		
+		virtual bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
 
 	private:
 		void _releaseFile();

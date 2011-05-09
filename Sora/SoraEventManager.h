@@ -35,7 +35,7 @@ namespace sora {
 		void unRegister(SoraEventHandler* handler);
 		
 	protected:
-		typedef std::vector<SoraEventHandler*> EVENT_HANDLER_CONT;
+		typedef std::list<SoraEventHandler*> EVENT_HANDLER_CONT;
 		EVENT_HANDLER_CONT evHandlers;
 	};
 
@@ -139,24 +139,24 @@ namespace sora {
 			}
 			
 			SoraTimerEventInfo(SoraEventHandler* h, float32 _time, float32 _currTime, bool _repeat) :
-				time(_time), repeat(_repeat), internalte(true), currTime(_currTime) {
+				time(_time), repeat(_repeat), internalte(true), currTime(_currTime), totalTime(0.f) {
 					ev = new SoraTimerEvent;
 					handlerPack.add(h);
 				}
 			SoraTimerEventInfo(SoraEventHandler* h, SoraTimerEvent* _ev, float32 _time, float32 _currTime, bool _repeat) :
-				ev(_ev), time(_time), repeat(_repeat), internalte(false), currTime(_currTime) {
+				ev(_ev), time(_time), repeat(_repeat), internalte(false), currTime(_currTime), totalTime(0.f) {
 					handlerPack.add(h);
 				}
 			SoraTimerEventInfo(const SoraEventHandlerPack& pack, float32 _time, float32 _currTime, bool _repeat):
-				handlerPack(pack), time(_time), repeat(_repeat), currTime(_currTime) {
+				handlerPack(pack), time(_time), repeat(_repeat), currTime(_currTime), totalTime(0.f) {
 					ev = new SoraTimerEvent;
 				}
 			SoraTimerEventInfo(const SoraEventHandlerPack& pack, SoraTimerEvent* _ev, float32 _time, float32 _currTime, bool _repeat) :
-				ev(_ev), time(_time), repeat(_repeat), internalte(false), handlerPack(pack), currTime(_currTime) {
+				ev(_ev), time(_time), repeat(_repeat), internalte(false), handlerPack(pack), currTime(_currTime), totalTime(0.f) {
 				}
 		};
 		
-		typedef QuickList<SoraTimerEventInfo*, 256> TIMER_EVENT_LIST;
+		typedef std::list<SoraTimerEventInfo*> TIMER_EVENT_LIST;
 		TIMER_EVENT_LIST tevList;
 		float32 currTime;
 		

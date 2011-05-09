@@ -41,10 +41,7 @@ namespace sora {
 	}
 	
 	void SoraEventHandlerPack::unRegister(SoraEventHandler* handler) {
-		for(size_t i=0; i<evHandlers.size(); ++i) {
-			if(evHandlers[i] == handler)
-				evHandlers.erase(evHandlers.begin()+i);
-		}
+		evHandlers.remove(handler);
 	}
 
 	void SoraEventManager::registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev) {
@@ -147,15 +144,15 @@ namespace sora {
 	}
 	
 	void SoraEventManager::createTimerEvent(SoraEventHandler* handler, float32 time, bool repeat) {
-		tevList.push_back(new SoraTimerEventInfo(handler, time+currTime, currTime, repeat)); 
+		tevList.push_back(new SoraTimerEventInfo(handler, time, 0.f, repeat)); 
 	}
 	
 	void SoraEventManager::registerTimerEvent(SoraEventHandler* handler, SoraTimerEvent* ev, float32 time, bool repeat) {
-		tevList.push_back(new SoraTimerEventInfo(handler, ev, time+currTime, currTime, repeat)); 
+		tevList.push_back(new SoraTimerEventInfo(handler, ev, time, 0.f, repeat)); 
 	}
 	
 	void SoraEventManager::registerTimerEvent(const SoraEventHandlerPack& pack, SoraTimerEvent* ev, float32 time, bool repeat) {
-		tevList.push_back(new SoraTimerEventInfo(pack, ev, time+currTime, currTime, repeat));
+		tevList.push_back(new SoraTimerEventInfo(pack, ev, time, 0.f, repeat));
 	}
 	
 	void SoraEventManager::freeTimerEvent(TIMER_EVENT_LIST::iterator ittev) {
@@ -173,6 +170,7 @@ namespace sora {
 				if((*ittev)->handlerPack.evHandlers.empty()) {
 					freeTimerEvent(ittev);
 					ittev = tevList.erase(ittev);
+					continue;
 				}
 				++ittev;
 			}
@@ -182,10 +180,15 @@ namespace sora {
 	void SoraEventManager::unregisterTimerEvent(SoraEventHandler* handler) {
 		TIMER_EVENT_LIST::iterator ittev = tevList.begin();
 		while(ittev != tevList.end()) {
-			(*ittev)->handlerPack.unRegister(handler);
-			if((*ittev)->handlerPack.evHandlers.empty()) {
-				freeTimerEvent(ittev);
-				tevList.erase(ittev);
+			if((*ittev)) {
+				(*ittev)->handlerPack.unRegister(handler);
+				if((*ittev)->handlerPack.evHandlers.empty()) {
+					freeTimerEvent(ittev);
+					tevList.erase(ittev);
+				}
+			} else {
+				ittev = tevList.erase(ittev);
+				continue;
 			}
 			++ittev;
 		}

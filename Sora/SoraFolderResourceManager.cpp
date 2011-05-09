@@ -103,5 +103,15 @@ namespace sora {
 	void SoraFolderResourceManager::freeResourceFile(void* p) {
 		if(p) delete (uint8*)p;
 	}
-
+	
+	bool SoraFolderResourceManager::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
+#ifdef WIN32
+		sorawin32::enumFilesInFolder(cont, folder);
+#endif
+#ifdef OS_OSX
+		soraosx::enumFilesInFolder(cont, folder);
+#endif
+		return true;
+	}
+	
 } // namespace sora

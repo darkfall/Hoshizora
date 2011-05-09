@@ -37,7 +37,7 @@ namespace sora {
 		void getPosition(float32& _x, float32& _y);
 		
 		
-		SUB_OBJECT_LIST getObjList();
+		SUB_OBJECT_LIST getObjList() const;
 		AP_OBJECT getParent() const;
         void setParent(AP_OBJECT obj);
 				

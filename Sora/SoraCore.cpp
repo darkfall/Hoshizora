@@ -8,8 +8,6 @@
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
 
-#include "osxfilewrapper.h"
-#include "win32filewrapper.h"
 
 #include "SoraFolderResourceManager.h"
 
@@ -831,14 +829,7 @@ namespace sora {
 	}
 
 	void SoraCore::enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
-#ifdef WIN32
-		sorawin32::enumFilesInFolder(cont, folder);
-#endif
-#ifdef OS_OSX
-		soraosx::enumFilesInFolder(cont, folder);
-#endif
-#ifndef USE_BOOST
-#endif
+		pResourceFileFinder->enumFiles(cont, folder);
 	}
 
 	void SoraCore::setFrameSync(bool flag) {

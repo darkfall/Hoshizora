@@ -11,7 +11,7 @@
 
 #include <algorithm>
 
-#ifdef OS_IOS
+#if defined(OS_IOS) || defined(OS_OSX)
 #include "SoraiOSStringConv.h"
 #endif
 
@@ -139,8 +139,8 @@ std::string ws2s(const std::wstring& ws) {
 #elif defined(OS_IOS)
 	return iOSWString2String(ws);
 #endif
-    std::string curLocale = setlocale(LC_CTYPE, NULL);        // curLocale = "C";
-    setlocale(LC_CTYPE, "chs");
+    std::string curLocale = setlocale(LC_ALL, NULL);        // curLocale = "C";
+    setlocale(LC_ALL, "chs");
     const wchar_t* _Source = ws.c_str();
     size_t _Dsize = 2 * ws.size() + 1;
     char *_Dest = new char[_Dsize];
@@ -148,7 +148,7 @@ std::string ws2s(const std::wstring& ws) {
     wcstombs(_Dest,_Source,_Dsize);
     std::string result = _Dest;
     delete []_Dest;
-    setlocale(LC_CTYPE, curLocale.c_str());
+    setlocale(LC_ALL, curLocale.c_str());
     return result;
 }
 
@@ -159,7 +159,7 @@ std::wstring s2ws(const std::string& s)
 #elif defined(OS_IOS)
 	return iOSString2WString(s);
 #endif
-    setlocale(LC_CTYPE, "chs"); 
+    setlocale(LC_ALL, "chs"); 
     const char* _Source = s.c_str();
     size_t _Dsize = s.size() + 1;
     wchar_t *_Dest = new wchar_t[_Dsize];
@@ -167,7 +167,7 @@ std::wstring s2ws(const std::string& s)
     mbstowcs(_Dest,_Source,_Dsize);
     std::wstring result = _Dest;
     delete []_Dest;
-    setlocale(LC_CTYPE, "C");
+    setlocale(LC_ALL, "C");
     return result;
 }
 	
@@ -175,7 +175,10 @@ std::wstring s2ws(const std::string& s)
 	
 inline size_t skipSpaces(const std::string& str, size_t currPos) {
 	char c = str[currPos];
-	while(c == ' ' || c == '\n' || c == '\r' || c == '\t') ++currPos;
+	while((c == ' ' || c == '\n' || c == '\r' || c == '\t') && currPos<str.size()-1) {
+		++currPos;
+		c = str[currPos];
+	}
 	return currPos;
 }
 

@@ -99,4 +99,15 @@ namespace sora {
 			resourceManagers[i]->detachResourcePack(handle);
 		}
 	}
+	
+	bool SoraResourceFileFinder::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
+		for(size_t i=1; i<resourceManagers.size(); ++i) {
+			SoraResourceManager* prm = *resourceManagers[i];
+			
+			if(prm->enumFiles(cont, folder))
+				return true;
+		}
+		
+		return resourceManagers[0]->enumFiles(cont, folder);
+	}
 } // namespace sora

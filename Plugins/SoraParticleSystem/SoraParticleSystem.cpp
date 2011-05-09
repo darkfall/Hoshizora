@@ -174,8 +174,13 @@ namespace sora {
 						rotate(p->fTrigAcc*dt, 0.f, 0.f);
 					}
 				
-					p->position += p->direction*p->fSpeed*dt*((1.f - p->position.z / fMaxDistance) + 0.01f);
-				
+					if(p->direction.length() != 0)
+						p->position += p->direction*p->fSpeed*dt*((1.f - p->position.z / fMaxDistance) + 0.01f);
+					else {
+						p->position.x += cosf(p->fAngle) * p->fSpeed;
+						p->position.y += sinf(p->fAngle) * p->fSpeed;
+					}
+					
 					p->fAngle += p->fSpin * dt;
 					p->fCurrScale += p->fScaleVar * dt;
 					p->dwCurrColor += p->dwColorVar * dt;

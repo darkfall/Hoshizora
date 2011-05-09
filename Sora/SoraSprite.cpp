@@ -42,6 +42,8 @@ namespace sora {
 		
         sprWidth = texture!=NULL?texture->mOriginalWidth:1;
         sprHeight = texture!=NULL?texture->mOriginalHeight:1;
+		
+		shaderContext = NULL;
     }
 
 	SoraSprite::~SoraSprite() {

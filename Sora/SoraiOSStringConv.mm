@@ -9,7 +9,7 @@
 
 #include "SoraiOSStringConv.h"
 
-#ifdef OS_IOS
+#if defined(OS_IOS) || defined(OS_OSX)
 
 #import <Foundation/Foundation.h>
 

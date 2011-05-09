@@ -37,6 +37,7 @@
 
 #include "../MEAD/meadBulletManager.h"
 
+
 int main(int argc, char* argv[]) {
 //	sora::tcmalloc_test::test();
 	sora::SoraCore* sora = sora::SoraCore::Instance();
@@ -52,7 +53,10 @@ int main(int argc, char* argv[]) {
 		sora->shutDown();
 	}
 	sora->attachResourcePack(res);
-    
+	
+	
+	sora::SoraLocalizer::Instance()->addLocaleConf(L"rftdLocale_chn.locale");
+	sora::SoraLocalizer::Instance()->setCurrentLocale("CHN");
 	/*
 	sora::SoraLocalizer* localizer = sora::SoraLocalizer::Instance();
 	localizer->addLocaleConf(L"en.locale");

@@ -21,6 +21,10 @@
 #include "soraiOSFileUtility.h"
 #endif
 
+
+#include "osxfilewrapper.h"
+#include "win32filewrapper.h"
+
 namespace sora {
 	
 	class SoraFolderResourceManager: public SoraResourceManager {
@@ -49,6 +53,7 @@ namespace sora {
 		SoraWString getFormat() const	{ return L""; }
 		bool isFormatSupported(const SoraWString& format) const { return format.size()==0; }
 		
+		bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
 	private:
 		struct folderDescription {
 			SoraWString folderName;

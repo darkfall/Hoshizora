@@ -48,8 +48,8 @@ namespace sora {
 		void localizeResourceName(SoraWString& resourceName);
 		
 	private:
-		typedef map<SoraString, SoraWString> LOCALE_STRING_MAP;		
-		typedef map<SoraString, LOCALE_STRING_MAP > LOCALE_CONF_MAP;
+		typedef hash_map<SoraString, SoraWString> LOCALE_STRING_MAP;		
+		typedef hash_map<SoraString, LOCALE_STRING_MAP > LOCALE_CONF_MAP;
 		LOCALE_CONF_MAP localeConfs;
 		LOCALE_CONF_MAP::iterator currentLocaleMap;
 		
