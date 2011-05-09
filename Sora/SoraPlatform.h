@@ -134,24 +134,6 @@ typedef std::wstring SoraWString;
 
 #include <cassert>
 
-#ifdef WIN32
-#include <Windows.h>
-#else
-#define MB_OK				1
-#define MB_OKCANCEL			2
-#define MB_ICONERROR		4
-#define MB_ICONSTOP			8
-#define MB_ICONWARNING		16
-#define MB_ICONINFORMATION	32
-
-#define IDOK				1
-#define IDCANCEL			2
-#define IDABORT				3
-#define IDRETRY				4
-#define IDYES				6
-#define IDNO				7
-
-#endif
 
 #ifdef __APPLE_CC__
 #include <Availability.h>
@@ -227,6 +209,12 @@ typedef std::wstring SoraWString;
 
 #ifdef OS_WIN32
 #define sora_fopenw(path, mode) _wfopen(path.c_str(), TEXT(mode))
+
+#include <windows.h>
+static void msleep(uint32 msec) {
+	Sleep(msec);
+}
+
 #else
 #define sora_fopenw(path, mode) fopen(ws2s(path).c_str(), mode)
 #include <time.h>
@@ -253,6 +241,20 @@ static void msleep(uint32_t msec) {
 		t1 = tmp;
 	}
 }
+
+#define MB_OK				1
+#define MB_OKCANCEL			2
+#define MB_ICONERROR		4
+#define MB_ICONSTOP			8
+#define MB_ICONWARNING		16
+#define MB_ICONINFORMATION	32
+
+#define IDOK				1
+#define IDCANCEL			2
+#define IDABORT				3
+#define IDRETRY				4
+#define IDYES				6
+#define IDNO				7
 
 #endif
 
