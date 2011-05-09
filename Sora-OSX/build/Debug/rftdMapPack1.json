@@ -1,0 +1,11 @@
+{
+	"name": "MyMapPack1",
+	
+	"maps": [
+		{
+			"mapname": "testmap",
+			"mappath": "rftdMapTest.json"
+		}
+	]
+
+}

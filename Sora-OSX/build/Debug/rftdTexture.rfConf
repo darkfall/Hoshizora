@@ -1,0 +1,24 @@
+Texture {
+	TexId: 1
+	Path: "rftdEnemy.png"
+}
+
+Texture {
+	TexId: 2
+	Path: "rftdMap1.png"
+}
+
+Textire {
+	TexId: 4
+	Path: "rftdMap.png"
+}
+
+Texture {
+	TexId: 3
+	Path: "rftdLightPath.png"
+}
+
+Texture {
+	TexId: 5
+	Path: "rftdMapElements1.png"
+}

@@ -1,0 +1,127 @@
+{
+	"map_rect": {
+		"x": 0,
+		"y": 0,
+		"w": 1024,
+		"h": 768
+	},
+	
+	"background_tex": {
+		"texid": 2
+	},
+	
+	"enemy_confs": [
+		"rftdEnemy.json"
+	],
+	
+	"sources": [
+		{
+			"source_id": 1,
+			"max_source_enemy_tolerance": 20,
+			
+			"source_tex": {
+				"texid": 2,
+				"texrect": "0,0,128,128",
+				"center": {
+					"x": "64",
+					"y": "64"
+				}
+			},
+			
+			"lightpath_tex": {
+				"texid": 3,
+				"texrect": "0,0,64,64",
+				"shader": [
+					{
+						"file": "lightpath.cg",
+						"entry": "lightpath_update",
+						"type": "fragment_shader"
+					},
+					{
+						"file": "lightpath.vr",
+						"entry": "lightpath_vertex",
+						"type": "vertex_shader"
+					}
+				]
+			},
+			
+			"lightpath_vertices": [
+				{
+					"route": [
+						"100, 100",
+						"200, 100",
+						"200, 200",
+						"400, 200",
+						"400, 600",
+						"800, 600"
+					]
+				}
+			]
+		}
+	],
+	
+	"spawn_points": [
+		{
+			"spawn_point_tex": {
+				"texid": 5,
+				"texrect": "0,0,100,100",
+				"center": {
+					"x": 50,
+					"y": 0
+				}
+			},
+			
+			"spawn_route_tex": {
+				"texid": 4,
+				"texrect": "0,0,64,64"
+			},
+	
+			"posx": 100,
+			"posy": 0,
+					
+			"route": [
+				"100, 650",
+				"924, 650",
+				"924, 0"
+			],
+			
+			"end_source_id": 1,
+			"level_list_id": 1
+		}
+	],
+	
+	"level_interval": [
+		5.0,
+		5.0,
+		5.0,
+		5.0,
+		5.0,
+		5.0
+	],
+	
+	"level_name": [
+		"MAP1_LEVEL1_NAME",
+		"MAP1_LEVEL2_NAME"
+	],
+	
+	"level_list_conf": [
+		{
+			"id": 1,
+			"total": 2,
+		
+			"levels": [
+				{ 
+					"enemyid": 1,
+					"amount": 20,
+					"interval": 1.0
+				},
+				{ 
+					"enemyid": 2,
+					"amount": 20,
+					"interval": 1.0
+				}
+			]
+		}
+	]
+
+}

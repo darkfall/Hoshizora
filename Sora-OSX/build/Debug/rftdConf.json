@@ -1,0 +1,21 @@
+{
+	"locale_file_path": "locales/",
+	"locale": "ENG",
+	
+	"texture_conf_path": [
+		"rftdTexture.rfConf"
+	],
+	
+	"color_conf_path": [
+		"rftdColor.rfConf"
+	],
+	
+	"map_pack_path": [
+		"rftdMapPack1.json"
+	],
+	
+	"tower_conf_path": [
+		"towers/"
+	]
+	
+}

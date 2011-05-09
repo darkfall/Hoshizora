@@ -1,0 +1,90 @@
+{
+	"enemies": [
+		{
+			"enemy_tex": {
+				// texture id, see rftdTexture.rfConf
+				"texid": 1,
+				"texrect": "0,0,64,64",
+				// the color id, use to determine tex color
+				// see rftdColor.rfConf
+				"colorid": 1,
+				"center": {
+					"x": 32,
+					"y": 32
+				},
+				"shader": [
+					{
+						// the shader file
+						"file": "rftdHighlight.fs",
+						// the shader entry function
+						"entry": "highlight",
+						// the type of the shader, fragment_shader / vertex_shader
+						"type": "fragment_shader",
+						"params": [
+							{
+								// the name of the param
+								"name": "hlColor",
+								// available types are float, int and texture
+								"type": "float",
+								// the value list of the param
+								// the size of the param would be the size of this list
+								"param_list": [
+									1.0,
+									0.0,
+									0.0,
+									1.0
+								]
+							}
+						]
+					}
+				]
+			},
+		
+			"name": "hahaha",
+			"id": 1,
+			"health": 100,
+			"defense": 1,
+			"type": 1,
+			"effector": 0,
+			"speed": 80
+		},
+		
+		{
+			"enemy_tex": {
+				"texid": 1,
+				"texrect": "0,0,64,64",
+				"colorid": 2,
+				"center": {
+					"x": 32,
+					"y": 32
+				},
+				"shader": [
+					{
+						"file": "rftdHighlight.fs",
+						"entry": "highlight",
+						"type": "fragment_shader",
+						"params": [
+							{
+								"name": "hlColor",
+								"type": "float",
+								"param_list": [
+									0.0,
+									0.7,
+									1.0,
+									1.0
+								]
+							}
+						]
+					}
+				]
+			},
+		
+			"id": 2,
+			"health": 100,
+			"defense": 1,
+			"type": 1,
+			"effector": 0,
+			"speed": 60	
+		}
+	]
+}
