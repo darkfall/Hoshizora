@@ -11,17 +11,18 @@
 #define RFTD_SPAWN_POINT_H_
 
 #include "gcnExtend/gcnDraggableIcon.h"
+#include "hgevector.h"
 
 #include "SoraEvent.h"
 #include "SoraTimerEvent.h"
-#include "hgevector.h"
+#include "SoraSprite.h"
 
 #include "json/json.h"
-#include "SoraSprite.h"
 
 namespace rftd {
 	
 	class rftdMapEnemyCont;
+	class rftdSource;
 	
 	class EnemySpawnEvent: public sora::SoraTimerEvent {
 	public:
@@ -76,8 +77,12 @@ namespace rftd {
 		void update(float32 dt);
 		void render();
 		
+		void setEndSource(rftdSource* source);
+		rftdSource* getEndSource() const;
+		
 	private:
 		rftdMapEnemyCont* parentMap;
+		rftdSource* endSource;
 		
 		int32 enemyType;
 		int32 enemySize;

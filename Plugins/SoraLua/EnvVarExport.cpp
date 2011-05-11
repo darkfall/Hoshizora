@@ -28,9 +28,13 @@ namespace sora {
 					case SoraEnvValues::VALUE_FLOAT:
 						global.SetNumber(id2str(itVal->first).c_str(), itVal->second.data.floatVal);
 						break;
-					case SoraEnvValues::VALUE_STRING:
+					case SoraEnvValues::VALUE_STRING: {
 						std::string str = id2str(itVal->second.data.stringVal);
 						global.SetString(id2str(itVal->first).c_str(), str.c_str(), str.size());
+						break;
+					}
+					case SoraEnvValues::VALUE_USERDATA:
+						global.SetUserData(id2str(itVal->first).c_str(), itVal->second.userData);
 						break;
 				}
 				++itVal;
@@ -47,7 +51,9 @@ namespace sora {
 			.def("setBool",		&SoraEnvValues::setBool)
 			.def("setInt",		&SoraEnvValues::setInt)
 			.def("setFloat",	&SoraEnvValues::setFloat)
-			.def("setString",	&SoraEnvValues::setString);
+			.def("setString",	&SoraEnvValues::setString)
+			.def("setUserData",	&SoraEnvValues::setData)
+			.def("getUserData",	&SoraEnvValues::getData);
 	}
 	
 }

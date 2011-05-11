@@ -235,6 +235,9 @@
 		88BD15431346ADCA0068AABA /* spriteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BD15011346ADCA0068AABA /* spriteWrapper.cpp */; };
 		88BF9F6E135AA63200BB8E70 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BF9F6D135AA63200BB8E70 /* Cg.framework */; };
 		88BF9FDA135AAB6100BB8E70 /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BF9FD9135AAB6100BB8E70 /* editorWindow.cpp */; };
+		88C712AC1378A65200E0C2BB /* rftdSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C712AB1378A65200E0C2BB /* rftdSource.cpp */; };
+		88C7138D1379EAB800E0C2BB /* rftdMapGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C7138C1379EAB800E0C2BB /* rftdMapGrid.cpp */; };
+		88C713CA137A5ADB00E0C2BB /* rftdMapEnemyCont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C713C9137A5ADB00E0C2BB /* rftdMapEnemyCont.cpp */; };
 		88CE58D512C1B41C00C551F0 /* SoraParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CE58D312C1B41C00C551F0 /* SoraParticleSystem.cpp */; };
 		88D87D5712A09A66007D6865 /* hgerect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2112A09A66007D6865 /* hgerect.cpp */; };
 		88D87D5812A09A66007D6865 /* hgevector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2312A09A66007D6865 /* hgevector.cpp */; };
@@ -946,6 +949,12 @@
 		88BF9FD8135AAB6100BB8E70 /* editorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editorWindow.h; path = ../AnimationEditor/editorWindow.h; sourceTree = SOURCE_ROOT; };
 		88BF9FD9135AAB6100BB8E70 /* editorWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = editorWindow.cpp; path = ../AnimationEditor/editorWindow.cpp; sourceTree = SOURCE_ROOT; };
 		88BF9FDE135AABC200BB8E70 /* aeMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aeMainWindow.h; path = ../AnimationEditor/aeMainWindow.h; sourceTree = SOURCE_ROOT; };
+		88C712AA1378A65200E0C2BB /* rftdSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdSource.h; sourceTree = "<group>"; };
+		88C712AB1378A65200E0C2BB /* rftdSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdSource.cpp; sourceTree = "<group>"; };
+		88C7138B1379EAB800E0C2BB /* rftdMapGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdMapGrid.h; sourceTree = "<group>"; };
+		88C7138C1379EAB800E0C2BB /* rftdMapGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdMapGrid.cpp; sourceTree = "<group>"; };
+		88C713C8137A5ADB00E0C2BB /* rftdMapEnemyCont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdMapEnemyCont.h; sourceTree = "<group>"; };
+		88C713C9137A5ADB00E0C2BB /* rftdMapEnemyCont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdMapEnemyCont.cpp; sourceTree = "<group>"; };
 		88CD9D021377B64300492B3F /* rftdMapConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdMapConf.h; sourceTree = "<group>"; };
 		88CE58D312C1B41C00C551F0 /* SoraParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraParticleSystem.cpp; sourceTree = "<group>"; };
 		88CE58D412C1B41C00C551F0 /* SoraParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraParticleSystem.h; sourceTree = "<group>"; };
@@ -1681,14 +1690,20 @@
 				888985451375D759000B937A /* rftdEnemyConf.h */,
 				888985731375DB50000B937A /* rftdTextureConf.h */,
 				88CD9D021377B64300492B3F /* rftdMapConf.h */,
-				888982D313751478000B937A /* rftdCommon.h */,
 				888985121375CE67000B937A /* rftdEvents.h */,
 				888985141375CF8E000B937A /* rftdRegion.h */,
 				88898971137637A5000B937A /* rftdSteer.h */,
+				888982D313751478000B937A /* rftdCommon.h */,
+				88C7138B1379EAB800E0C2BB /* rftdMapGrid.h */,
+				88C7138C1379EAB800E0C2BB /* rftdMapGrid.cpp */,
 				888985421375D6DB000B937A /* rftdEnemyObject.h */,
 				888985431375D6DB000B937A /* rftdEnemyObject.cpp */,
 				8889871A13760907000B937A /* rftdSpawnPoint.h */,
 				8889871B13760AC9000B937A /* rftdSpawnPoint.cpp */,
+				88C712AA1378A65200E0C2BB /* rftdSource.h */,
+				88C712AB1378A65200E0C2BB /* rftdSource.cpp */,
+				88C713C8137A5ADB00E0C2BB /* rftdMapEnemyCont.h */,
+				88C713C9137A5ADB00E0C2BB /* rftdMapEnemyCont.cpp */,
 				8889871613760766000B937A /* rftdMap.h */,
 				8889871713760766000B937A /* rftdMap.cpp */,
 				88898317137520CB000B937A /* rftdSystem.h */,
@@ -2707,6 +2722,9 @@
 				888985441375D6DB000B937A /* rftdEnemyObject.cpp in Sources */,
 				8889871813760766000B937A /* rftdMap.cpp in Sources */,
 				8889871C13760AC9000B937A /* rftdSpawnPoint.cpp in Sources */,
+				88C712AC1378A65200E0C2BB /* rftdSource.cpp in Sources */,
+				88C7138D1379EAB800E0C2BB /* rftdMapGrid.cpp in Sources */,
+				88C713CA137A5ADB00E0C2BB /* rftdMapEnemyCont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

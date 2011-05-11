@@ -77,7 +77,7 @@ namespace sora {
 			SORA->freeResourceFile(confData);
 			
 			if(localeIdent.size() != 0) {
-				localeConfs[localeIdent] = localeStrMap;
+				localeConfs[localeIdent].insert(localeStrMap.begin(), localeStrMap.end());
 				if(currentLocale.size() == 0) {
 					currentLocale = localeIdent;
 					currentLocaleW = s2ws(currentLocale);

@@ -8,7 +8,7 @@ Texture {
 	Path: "rftdMap1.png"
 }
 
-Textire {
+Texture {
 	TexId: 4
 	Path: "rftdMap.png"
 }

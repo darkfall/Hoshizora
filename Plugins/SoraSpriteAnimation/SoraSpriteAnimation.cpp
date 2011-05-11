@@ -386,7 +386,7 @@ void SoraSpriteAnimationPacker::clear() {
 SoraSpriteAnimation::SoraSpriteAnimation(const std::wstring& anmPath):
 	anmCount(0), currId(0), currAnmIndex(0), 
 	bPaused(false), bIsPlaying(false), bLoop(true), 
-	defaultId(0), currTime(0), totalTime(0), currNodeId(0), pAnmSprite(NULL) {
+	defaultId(0), currTime(0), totalTime(0), currNodeId(0)  {
 		ulong32 size;
 		void* pData = sora::SORA->getResourceFile(anmPath, size);
 		
@@ -496,12 +496,11 @@ void SoraSpriteAnimationPacker::addNodeTex(uint32 nodeId, uint32 tx, uint32 ty, 
 SoraSpriteAnimation::SoraSpriteAnimation():
 	anmCount(0), currId(0), currAnmIndex(0), 
 	bPaused(false), bIsPlaying(false), bLoop(true), 
-	defaultId(0), currTime(0), totalTime(0), currNodeId(0), pAnmSprite(NULL)  {
+	defaultId(0), currTime(0), totalTime(0), currNodeId(0)  {
 }
 
 SoraSpriteAnimation::~SoraSpriteAnimation() {
-	if(pAnmSprite)
-		delete pAnmSprite;
+
 }
 
 int SoraSpriteAnimation::getNodeIdByAnmId(uint32 anmId) {
@@ -514,6 +513,8 @@ int SoraSpriteAnimation::getNodeIdByAnmId(uint32 anmId) {
 }
 
 uint32 SoraSpriteAnimation::update(float dt) {
+	SoraSprite::update(dt);
+	
 	if(!bIsPlaying) return 0;
 	
 	if(!bPaused && totalTime != 0) {
@@ -525,7 +526,7 @@ uint32 SoraSpriteAnimation::update(float dt) {
 		}
 		currTime++;
 	}
-    return 1;
+    return 0;
 }
 
 void SoraSpriteAnimation::toNextAnm() {
@@ -625,14 +626,10 @@ uint32 SoraSpriteAnimation::getCurrAnimationIndex() const {
 
 void SoraSpriteAnimation::init() {
     if(texturePath.size() != 0) {
-		if(pAnmSprite) {
-			delete pAnmSprite;
-			pAnmSprite = NULL;
-		}
-		pAnmSprite = SORA->createSprite(s2ws(texturePath));
-		if(pAnmSprite != NULL) {
+		setTexture(sora::SORA->createTexture(s2ws(texturePath)));
+		if(texture != NULL) {
 			if(anmCount != 0 && anmNodes[0].texList.size() != 0)
-				pAnmSprite->setTextureRect((float32)anmNodes[0].texList[0].tx, 
+				setTextureRect((float32)anmNodes[0].texList[0].tx, 
 										   (float32)anmNodes[0].texList[0].ty, 
 										   (float32)anmNodes[0].texList[0].tw, 
 										   (float32)anmNodes[0].texList[0].th);
@@ -643,11 +640,9 @@ void SoraSpriteAnimation::init() {
 }
 
 void SoraSpriteAnimation::render() {
-    if(pAnmSprite) {
-        LANM_TEX texRect = getCurrTex();
-        pAnmSprite->setTextureRect((float32)texRect.tx, (float32)texRect.ty, (float32)texRect.tw, (float32)texRect.th);
-        pAnmSprite->render(getPositionX(), getPositionY());
-    }
+    LANM_TEX texRect = getCurrTex();
+	setTextureRect((float32)texRect.tx, (float32)texRect.ty, (float32)texRect.tw, (float32)texRect.th);
+	SoraSprite::render(getPositionX(), getPositionY());
 }
 	
 	std::string SoraSpriteAnimation::getAnimationName(size_t id) const {
@@ -659,18 +654,14 @@ void SoraSpriteAnimation::render() {
 			return anmNodes[currNodeId].name;
 		return "\0";
 	}
-
-    SoraSprite* SoraSpriteAnimation::getSprite() const {
-		return pAnmSprite;
-	}
 	
 	void SoraSpriteAnimation::setAnchor(int32 anchor) {
 		switch (anchor) {
-			case ANCHOR_UPPER_LEFT: if(pAnmSprite) pAnmSprite->setCenter(0.f, 0.f); break;
-			case ANCHOR_UPPER_RIGHT: if(pAnmSprite) pAnmSprite->setCenter((float32)pAnmSprite->getSpriteWidth(), 0.f); break;
-			case ANCHOR_LOWER_RIGHT: if(pAnmSprite) pAnmSprite->setCenter((float32)pAnmSprite->getSpriteWidth(), (float32)pAnmSprite->getSpriteHeight()); break;
-			case ANCHOR_LOWER_LEFT: if(pAnmSprite) pAnmSprite->setCenter(0.f, (float32)pAnmSprite->getSpriteHeight()); break;
-			case ANCHOR_MIDDLE: if(pAnmSprite) pAnmSprite->setCenter((float32)pAnmSprite->getSpriteWidth()/2, (float32)pAnmSprite->getSpriteHeight()/2); break;
+			case ANCHOR_UPPER_LEFT: setCenter(0.f, 0.f); break;
+			case ANCHOR_UPPER_RIGHT: setCenter((float32)getSpriteWidth(), 0.f); break;
+			case ANCHOR_LOWER_RIGHT: setCenter((float32)getSpriteWidth(), (float32)getSpriteHeight()); break;
+			case ANCHOR_LOWER_LEFT: setCenter(0.f, (float32)getSpriteHeight()); break;
+			case ANCHOR_MIDDLE: setCenter((float32)getSpriteWidth()/2, (float32)getSpriteHeight()/2); break;
 		}
 	}
 	

@@ -82,17 +82,17 @@ private:
 		ANCHOR_MIDDLE=5,
 	} ANIMATION_SPRITE_ANCHOR;
 	
-class SoraSpriteAnimation: public SoraObject {
+class SoraSpriteAnimation: public SoraSprite {
 	friend class SoraSpriteAnimationPacker;
 	
 public:
 	SoraSpriteAnimation(const std::wstring& anmPath);
-	~SoraSpriteAnimation();
+	virtual ~SoraSpriteAnimation();
 	
 	typedef LANM_TEX SoraAnimationRect;
 
-	uint32 update(float dt);
-    void render();
+	virtual uint32 update(float dt);
+    virtual void render();
 	SoraAnimationRect getCurrTex();
 	
 	/*
@@ -119,9 +119,7 @@ public:
 	
 	std::string getAnimationName(size_t id) const;
 	std::string getCurrentAnimationName() const;
-	
-	SoraSprite* getSprite() const;
-	
+		
 	void setAnchor(int32 anchor);
 	ANIMATION_SPRITE_ANCHOR getAnchor() const;
 		
@@ -158,7 +156,6 @@ private:
 	bool bLoop;
     
     std::string texturePath;
-	SoraSprite* pAnmSprite;
     
 	typedef std::stack<uint8> ANM_QUEUE;
 	ANM_QUEUE anmQueue;

@@ -49,13 +49,6 @@ namespace sora {
 	};
 	
 	class SoraImageEffect {
-		friend class SoraImageEffectFade;
-		friend class SoraImageEffectTransitions;
-		friend class SoraImageEffectScale;
-		friend class SoraImageEffectShake;
-		friend class SoraImageEffectColorTransitions;
-		friend class SoraImageEffectRotation;
-
 	public:
 		SoraImageEffect(): etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL) {
 		//	type = IMAGE_EFFECT_TYPE;
@@ -99,7 +92,7 @@ namespace sora {
         
         float32 getEffectTime() const { return effectTime; }
 				
-	private:
+	protected:
 
 		uint16 etype;
 		IMAGE_EFFECT_MODE mode;

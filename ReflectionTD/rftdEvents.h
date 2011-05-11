@@ -14,7 +14,16 @@
 
 namespace rftd {
 	
-
+	class EnemyReachEndEvent: public sora::SoraEvent {
+	public:
+		EnemyReachEndEvent(int32 atk): attack(atk) {}
+		
+		int32 getAttack() const {
+			return attack;
+		}
+	private:
+		int32 attack;
+	};	
 	
 } // namespace rftd
 

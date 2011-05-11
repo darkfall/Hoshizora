@@ -32,12 +32,14 @@ namespace sora {
 		float32			getValue		(stringId name, float32 defaultVal);
 		std::string		getValue		(stringId name, const std::string& defaultVal);
 		std::wstring	getValue		(stringId name, const std::wstring& defaultVal);
+		void*			getValue		(stringId name);
 		
 		void setValue	(stringId name, bool val);
 		void setValue	(stringId name, int32 val);
 		void setValue	(stringId name, float32 val);
 		void setValue	(stringId name, const std::string& val);
 		void setValue	(stringId name, const std::wstring& val);
+		void setValue	(stringId name, void* data);
 		
 		// for script export
 		// because there's no polyphormism in scripts
@@ -47,12 +49,17 @@ namespace sora {
 		float32			getFloat	(const std::string& name, float32 defaultVal);
 		std::string		getString	(const std::string& name, const std::string& defaultVal);
 		std::wstring	getWString	(const std::string& name, const std::wstring& defaultVal);
+		void*			getData		(const std::string& name);
 		
 		void setBool		(const std::string& name, bool val);
 		void setInt			(const std::string& name, int32 val);
 		void setFloat		(const std::string& name, float32 val);
 		void setString		(const std::string& name, const std::string& val);
 		void setWString		(const std::string& name, const std::wstring& val);
+		void setData		(const std::string& name, void* data);
+		
+		void removeData		(const std::string& name);
+		void removeData		(stringId name);
 
 	private:
 		enum {
@@ -60,6 +67,7 @@ namespace sora {
 			VALUE_BOOL = 2,
 			VALUE_FLOAT = 3,
 			VALUE_STRING = 4,
+			VALUE_USERDATA = 5,
 		};
 		
 		struct VALUE_STORE {
@@ -70,6 +78,7 @@ namespace sora {
 				stringId stringVal;
 			} data;
 			
+			void* userData;
 			uint8 VALUE_TYPE;
 		};
 		
@@ -78,20 +87,24 @@ namespace sora {
 		GLOBAL_VALUE_MAP values;
 	};
 	
-	#define SET_ENV(name, val)		sora::SoraEnvValues::Instance()->setValue(name, val) 
-	#define GET_ENV(name, default)	sora::SoraEnvValues::Instance()->getValue(name, default);
+	#define SET_ENV(name, val)		SoraEnvValues::Instance()->setValue(name, val) 
+	#define GET_ENV(name, default)	SoraEnvValues::Instance()->getValue(name, default)
 	
-	#define SET_ENV_INT(name, val)		sora::SoraEnvValues::Instance()->setInt(name, val);
-	#define SET_ENV_FLOAT(name, val)	sora::SoraEnvValues::Instance()->setFloat(name, val);
-	#define SET_ENV_BOOL(name, val)		sora::SoraEnvValues::Instance()->setBool(name, val);
-	#define SET_ENV_STRING(name, val)	sora::SoraEnvValues::Instance()->setString(name, val);
-	#define SET_ENV_WSTRING(name, val)	sora::SoraEnvValues::Instance()->setWString(name, val);
+	#define SET_ENV_INT(name, val)		SoraEnvValues::Instance()->setInt(name, val)
+	#define SET_ENV_FLOAT(name, val)	SoraEnvValues::Instance()->setFloat(name, val)
+	#define SET_ENV_BOOL(name, val)		SoraEnvValues::Instance()->setBool(name, val)
+	#define SET_ENV_STRING(name, val)	SoraEnvValues::Instance()->setString(name, val)
+	#define SET_ENV_WSTRING(name, val)	SoraEnvValues::Instance()->setWString(name, val)
+	#define SET_ENV_DATA(name, data)	SoraEnvValues::Instance()->setData(name, data)
 	
-	#define GET_ENV_INT(name, val)		sora::SoraEnvValues::Instance()->getInt(name, val);
-	#define GET_ENV_FLOAT(name, val)	sora::SoraEnvValues::Instance()->getFloat(name, val);
-	#define GET_ENV_BOOL(name, val)		sora::SoraEnvValues::Instance()->getBool(name, val);
-	#define GET_ENV_STRING(name, val)	sora::SoraEnvValues::Instance()->getString(name, val);
-	#define GET_ENV_WSTRING(name, val)	sora::SoraEnvValues::Instance()->getWString(name, val);
+	#define GET_ENV_INT(name, val)		SoraEnvValues::Instance()->getInt(name, val)
+	#define GET_ENV_FLOAT(name, val)	SoraEnvValues::Instance()->getFloat(name, val)
+	#define GET_ENV_BOOL(name, val)		SoraEnvValues::Instance()->getBool(name, val)
+	#define GET_ENV_STRING(name, val)	SoraEnvValues::Instance()->getString(name, val)
+	#define GET_ENV_WSTRING(name, val)	SoraEnvValues::Instance()->getWString(name, val)
+	#define GET_ENV_DATA(name)			SoraEnvValues::Instance()->getData(name)
+	
+	#define REMOVE_ENV_DATA(name)	SoraEnvValues::Instance()->removeData(name)
 } // namespace sora
 
 

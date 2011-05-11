@@ -17,6 +17,7 @@
 
 namespace rftd {
 
+	
 	rftdSpawnPoint::rftdSpawnPoint() {
 		bPaused = true;
 		bFinished = false;
@@ -29,6 +30,8 @@ namespace rftd {
 		
 		mPointSprite = NULL;
 		mRouteSprite = NULL;
+		
+		endSource = NULL;
 		
 		spawnEvent = new EnemySpawnEvent(-1);
 		
@@ -135,6 +138,7 @@ namespace rftd {
 					for(size_t i=0; i<moveQueue.size(); ++i)
 						pNewObject->addRoutePoint(moveQueue[i].x, moveQueue[i].y);
 					pNewObject->steerStart();
+					pNewObject->setEndSource(endSource);
 					parentMap->add(pNewObject);
 					
 					++currEnemySize;
@@ -177,8 +181,10 @@ namespace rftd {
 		else
 			return false;
 		
-		if(val.isMember("end_source_id"))
+		if(val.isMember("end_source_id")) {
 			endSourceId = val["end_source_id"].asInt();
+			setEndSource(parentMap->getSourceById(endSourceId));
+		}
 		else
 			return false;
 		
@@ -194,11 +200,21 @@ namespace rftd {
 	}
 	
 	void rftdSpawnPoint::update(float32 dt) {
+		if(mPointSprite)
+			mPointSprite->update(dt);
 	}
 	
 	void rftdSpawnPoint::render() {
 		if(mPointSprite) {
 			mPointSprite->render(getX(), getY());
 		}
+	}
+	
+	void rftdSpawnPoint::setEndSource(rftdSource* source) {
+		endSource = source;
+	}
+	
+	rftdSource* rftdSpawnPoint::getEndSource() const {
+		return endSource;
 	}
 } // namespace rftd

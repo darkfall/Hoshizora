@@ -16,6 +16,10 @@
 	
 	"tower_conf_path": [
 		"towers/"
-	]
+	],
 	
+	"global_font": {
+		"name": "Bank Gothic Medium BT.ttf",
+		"size": 20
+	}
 }

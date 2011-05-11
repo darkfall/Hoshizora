@@ -18,7 +18,9 @@
 #include "AutoContainer.h"
 
 namespace rftd {
-
+	
+	class rftdSource;
+	
 	class rftdEnemyObject: public sora::SoraObject, public sora::AutoListElement<rftdEnemyObject> {
 	public:
 		rftdEnemyObject();
@@ -38,6 +40,21 @@ namespace rftd {
 		
 		bool loadConf(Json::Value& val);
 		
+		int32 getHealth() const;
+		void setHealth(int32 health);
+		
+		int32 getDefense() const;
+		void setDefense(int32 defense);
+		
+		int32 getType() const;
+		void setType(int32 type);
+		
+		int32 getAttack() const;
+		void setAttack(int32 attack);
+		
+		void setEndSource(rftdSource* endSource);
+		rftdSource* getEndSource() const;
+		
 	private:
 		sora::SoraSprite* mSprite;
 		sora::SoraColorRGBA mColor;
@@ -47,8 +64,9 @@ namespace rftd {
 		int32 mHealth;
 		int32 mDefense;
 		int32 mType;
+		int32 mAttack;
 		
-		//EnemyConf mProperties;
+		rftdSource* mEndSource;
 	};
 	
 } // namespace rftd

@@ -22,6 +22,10 @@
 #include "rftdTextureConf.h"
 #include "rftdMapConf.h"
 
+#include "SoraEnvValues.h"
+#include "SoraCore.h"
+#include "SoraFont.h"
+
 namespace rftd {
 	
 	static void rftdInitialize() {
@@ -88,17 +92,27 @@ namespace rftd {
 					}
 				}
 				
+				if(root.isMember("global_font")) {
+					Json::Value fontVal = root["global_font"];
+					if(fontVal.isMember("name") && fontVal.isMember("size")) {
+						std::wstring fontName = sora::s2ws(fontVal["name"].asString());
+						sora::SoraFont* globalFont;
+						try {
+							globalFont = sora::SORA->createFont(fontName, fontVal["size"].asInt());
+						} catch(sora::SoraException& exp) {
+							sora::SORA->messageBoxW(L"Error creating global font: "+fontName, L"Error", MB_OK | MB_ICONERROR);
+						}
+						if(globalFont)
+							sora::SET_ENV_DATA("rftd_global_font", (void*)globalFont);
+					} 
+				}
+				
 			} else {
 				sora::SORA->messageBox(reader.getFormatedErrorMessages(), "Json Parser Error", MB_OK | MB_ICONERROR);
 			}
 		}
 		
-		// load configuration files
-		ObjColorLoader::Instance()->readObjColorConf(L"rftdColor.rfConf");
-		TextureConfLoader::Instance()->readTextureConf(L"rftdTexture.rfConf");
-		EnemyConfLoader::Instance()->readEnemyConf(L"rftdEnemy.rfConf");
-		
-		TowerConfLoader::Instance()->readTowerConfInFolder(L"./towers/");
+		sora::SET_ENV_INT("rftd_map_gridsize", 8);
 	}
 	
 	

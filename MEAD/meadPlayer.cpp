@@ -84,8 +84,8 @@ namespace mead {
 			return false;
 		}
 		mSprite->setAnchor(sora::ANCHOR_MIDDLE);
-		mSpriteWidth_2 = (float32)(mSprite->getSprite()->getSpriteWidth() >> 2);
-		mSpriteHeight_2 = (float32)(mSprite->getSprite()->getSpriteHeight() >> 2);
+		mSpriteWidth_2 = (float32)(mSprite->getSpriteWidth() >> 2);
+		mSpriteHeight_2 = (float32)(mSprite->getSpriteHeight() >> 2);
 		
 		return true;
 	}
