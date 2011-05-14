@@ -35,11 +35,11 @@
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
 
-#include "../MEAD/meadBulletManager.h"
 
+#include "../mead/meadMainWindow.h"
+#include "../ReflectionTD/rftdMainWindow.h"
 
 int main(int argc, char* argv[]) {
-//	sora::tcmalloc_test::test();
 	sora::SoraCore* sora = sora::SoraCore::Instance();
 	sora->registerRenderSystem(new sora::SoraOGLRenderer);
 	sora->registerResourceManager(new sora::SoraZipResourceManager);
@@ -57,13 +57,9 @@ int main(int argc, char* argv[]) {
 	
 	sora::SoraLocalizer::Instance()->addLocaleConf(L"rftdLocale_chn.locale");
 	sora::SoraLocalizer::Instance()->setCurrentLocale("CHN");
-	/*
-	sora::SoraLocalizer* localizer = sora::SoraLocalizer::Instance();
-	localizer->addLocaleConf(L"en.locale");
-	localizer->addLocaleConf(L"cn.locale");
-	*/
+
 	sora->setFPS(60.0);
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new rftd::rftdMainWindow);
 	sora->start();
 		
 	return 0;

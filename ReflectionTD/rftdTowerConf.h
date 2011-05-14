@@ -39,7 +39,6 @@ namespace rftd {
 		
 		int32 bullet_damage;
 		
-		std::vector<BulletEffectorConf> bullet_effector_list;
 	} TowerLevelConf;
 	
 	typedef struct {
@@ -65,21 +64,6 @@ namespace rftd {
 				sora::SORA->messageBox("Error getting tower conf", "Error", MB_OK | MB_ICONERROR);
 			}
 			return TowerConf();
-		}
-		
-		BulletEffectorConf readEffectorConf(const std::string& effString) {		
-			std::vector<std::string> effParams;
-			sora::deliStr(effParams, effString, ',');
-			BulletEffectorConf effector;
-			
-			if(effParams.size() != 0) {
-				effector.name = effParams[0];
-				
-				for(size_t i=1; i<effParams.size(); ++i)
-					effector.param_list.push_back((float32)atof(effParams[i].c_str()));
-			}
-			
-			return effector;
 		}
 		
 		TowerLevelConf readTowerLevelConf(Json::Value& val) {
@@ -117,10 +101,10 @@ namespace rftd {
 			if(val.isMember("bullet_effector")) {
 				Json::Value effectorArray = val["bullet_effector"];
 				if(effectorArray.isString()) {
-					conf.bullet_effector_list.push_back(readEffectorConf(effectorArray.asString()));
+			//		conf.bullet_effector_list.push_back(readEffectorConf(effectorArray.asString()));
 				} else {
-					for(size_t i=0; i<effectorArray.size(); ++i)
-						conf.bullet_effector_list.push_back(readEffectorConf(effectorArray[i].asString()));
+			//		for(size_t i=0; i<effectorArray.size(); ++i)
+			//			conf.bullet_effector_list.push_back(readEffectorConf(effectorArray[i].asString()));
 				}
 			}
 			

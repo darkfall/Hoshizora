@@ -24,6 +24,14 @@ namespace rftd {
 		friend class sora::SoraSingleton<TextureConfLoader>;
 		
 		std::map<uint32, sora::HSORATEXTURE> GLOBAL_TEXTURE_MAP;
+		
+		~TextureConfLoader() {
+			std::map<uint32, sora::HSORATEXTURE>::iterator itTex = GLOBAL_TEXTURE_MAP.begin();
+			while(itTex != GLOBAL_TEXTURE_MAP.end()) {
+				sora::SORA->releaseTexture(itTex->second);
+				++itTex;
+			}
+		}
 
 	public:
 		sora::HSORATEXTURE get(uint32 id) {
@@ -339,8 +347,8 @@ namespace rftd {
 			parseShader(pSprite, val["shader"]);
 		}
 		
-		if(val.isMember("effect")) {
-			parseEffects(pSprite, val["effect"]);
+		if(val.isMember("effects")) {
+			parseEffects(pSprite, val["effects"]);
 		}
 		
 		if(val.isMember("center")) {

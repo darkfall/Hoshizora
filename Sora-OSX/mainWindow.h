@@ -15,7 +15,6 @@
 #include "SoraPlatform.h"
 #include "SoraParticleSystem/SoraParticleSystem.h"
 #include "SoraLua/SoraLuaObject.h"
-#include "../ReflectionRev/editor/rfEditor.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -54,10 +53,6 @@ private:
 	sora::SoraParticleSystem* ps;
 	sora::SoraSprite* psSpr;
 	sora::SoraBaseCanvas* canvas1;
-	
-	sora::SoraLuaObject luaObject;
-	
-	reflection::rfEditor* editor;
 };
 
 #endif

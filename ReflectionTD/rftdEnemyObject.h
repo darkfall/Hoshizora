@@ -66,6 +66,8 @@ namespace rftd {
 		int32 mType;
 		int32 mAttack;
 		
+		bool mAttacked;
+		
 		rftdSource* mEndSource;
 	};
 	

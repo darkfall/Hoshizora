@@ -17,6 +17,10 @@ namespace rftd {
 		
 		mFont = (sora::SoraFont*)sora::GET_ENV_DATA("rftd_global_font");
 		
+		mHealthTextX = mHealthTextY = 0.f;
+		mShowHealthText = false;
+		mHealthTextAlign = sora::FONT_ALIGNMENT_LEFT;
+		
 		registerEventFunc(this, &rftdSource::onEnemyReachEndEvent);
 	}
 	
@@ -46,6 +50,26 @@ namespace rftd {
 		else {
 			mSourceSprite = NULL;
 			return false;
+		}
+		
+		if(val.isMember("show_health_text")) {
+			mShowHealthText = val["show_health_text"].asBool();
+			Json::Value healthPropVal = val["health_text_prop"];
+			if(healthPropVal.isObject()) {
+				if(healthPropVal.isMember("x") && healthPropVal.isMember("y")) {
+					mHealthTextX = (float32)healthPropVal["x"].asDouble();
+					mHealthTextY = (float32)healthPropVal["y"].asDouble();
+				} 
+				if(healthPropVal.isMember("align")) {
+					std::string alignStr = healthPropVal["align"].asString();
+					if(strcmpnocase(alignStr.c_str(), "center") == 0)
+						mHealthTextAlign = sora::FONT_ALIGNMENT_CENTER;
+					else if(strcmpnocase(alignStr.c_str(), "left") == 0)
+						mHealthTextAlign = sora::FONT_ALIGNMENT_LEFT;
+					else
+						mHealthTextAlign = sora::FONT_ALIGNMENT_RIGHT;
+				}
+			}
 		}
 		
 		if(val.isMember("posx") && val.isMember("posy"))
@@ -95,10 +119,10 @@ namespace rftd {
 	void rftdSource::render() {
 		if(mSourceSprite)
 			mSourceSprite->render(getPositionX(), getPositionY());
-		if(mFont) {
-			mFont->print(getPositionX(), 
-						 getPositionY()+mSourceSprite->getSpriteHeight()-mSourceSprite->getCenterY(), 
-						 sora::FONT_ALIGNMENT_LEFT, 
+		if(mFont && mShowHealthText) {
+			mFont->print(getPositionX()+mHealthTextX, 
+						 getPositionY()+mHealthTextY, 
+						 mHealthTextAlign, 
 						 L"Health: %d",
 						 mHealth);
 		}

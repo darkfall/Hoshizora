@@ -21,7 +21,6 @@ function update(dt)
 	if count == 0 then
 		boss = BossManager:createBoss("mybosstest.lua", "patchouli.txt.anm");
 		player1 = PlayerManager:createPlayer("myPlayertest.lua", "UserBullet.txt", "patchouli.txt.anm");
-		player2 = PlayerManager:createPlayer("myPlayertest2.lua", "UserBullet.txt", "patchouli.txt.anm");
 
 		if boss == 0 then
 			SoraCore:messageBox("error loading boss", "error", MB_OK);

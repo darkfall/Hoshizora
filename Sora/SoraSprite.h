@@ -114,7 +114,7 @@ namespace sora {
        
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
         
-		SoraSprite() { texture=0; _initDefaults(); }
+		SoraSprite() { shaderContext = NULL; texture=0; _initDefaults(); }
 		SoraSprite(SoraSprite&) { }
 
 		void _initDefaults();
