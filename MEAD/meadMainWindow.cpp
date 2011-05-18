@@ -56,7 +56,7 @@ namespace mead {
 	}
 	
 	void meadMainWindow::init() {
-		sora::SORA->setFPS(60);
+		sora::SORA->setFPS(999);
 		
 		if(sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 20) ) {
 			sora::GCN_GLOBAL->createTop();

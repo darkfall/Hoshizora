@@ -121,7 +121,7 @@ namespace sora {
 		ulong32 SORACALL getResourceFileSize	(const SoraWString& file);
 		void	SORACALL freeResourceFile		(void* p);
 		void	SORACALL enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
-
+	
 		bool SORACALL isMainWindowSet() { return bMainWindowSet; }
 		ulong32 SORACALL createWindow(SoraWindowInfoBase* info);
 		void SORACALL setWindowSize(int32 w, int32 h);
@@ -157,10 +157,10 @@ namespace sora {
 
 		SoraFont* SORACALL createFont(const SoraWString& fontName, int size);
 		
-		SoraMusicFile* SORACALL createMusicFile(const SoraWString& musicName, bool bStream=true);
-		SoraSoundEffectFile* SORACALL createSoundEffectFile(const SoraWString& se);
-        SoraMusicFile* SORACALL createMusicFile(bool bStream=false);
-        SoraSoundEffectFile* SORACALL createSoundEffectFile();
+		SoraMusicFile* SORACALL			createMusicFile(const SoraWString& musicName, bool bStream=true);
+		SoraSoundEffectFile* SORACALL	createSoundEffectFile(const SoraWString& se);
+        SoraMusicFile* SORACALL			createMusicFile(bool bStream=false);
+        SoraSoundEffectFile* SORACALL	createSoundEffectFile();
         
         void SORACALL setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
         void SORACALL execute(const SoraString& appPath, const SoraString& args);

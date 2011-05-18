@@ -582,6 +582,7 @@
 		886030A7137EAC1F00C3B63B /* meadMainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = meadMainWindow.cpp; path = ../MEAD/meadMainWindow.cpp; sourceTree = SOURCE_ROOT; };
 		886030D5137EADDD00C3B63B /* rftdMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdMainWindow.h; sourceTree = "<group>"; };
 		886030D6137EADDD00C3B63B /* rftdMainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdMainWindow.cpp; sourceTree = "<group>"; };
+		8860324C138119BB00C3B63B /* RefCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefCounted.h; sourceTree = "<group>"; };
 		88691165134E15850012BDE0 /* SoraCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCanvas.h; sourceTree = "<group>"; };
 		88691166134E15850012BDE0 /* SoraCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraCanvas.cpp; sourceTree = "<group>"; };
 		886E0E281367A70100A77847 /* SoraSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSound.cpp; sourceTree = "<group>"; };
@@ -2159,6 +2160,7 @@
 				88D87D2812A09A66007D6865 /* QuickList.h */,
 				88D87D2912A09A66007D6865 /* Rect4V.h */,
 				88CFF7E812C6D562002A9F75 /* hash.h */,
+				8860324C138119BB00C3B63B /* RefCounted.h */,
 				88374D8C1325A12900369B12 /* AutoContainer.h */,
 				889BFD4312BF4D23002D8A2F /* CoreTransformer.h */,
 				88A8652213732C9B003A3CDE /* SoraEnvValues.h */,
@@ -2235,12 +2237,12 @@
 				88D87D5412A09A66007D6865 /* SoraWindowInfo.h */,
 				88D87D5512A09A66007D6865 /* SoraTimerEvent.cpp */,
 				88D87D5612A09A66007D6865 /* SoraTimerEvent.h */,
+				88DD59F812E03D760081AE6C /* SoraLocalizer.h */,
+				88DD59F912E03D760081AE6C /* SoraLocalizer.cpp */,
 				881182D112C8A60500B3A316 /* osxfilewrapper.h */,
 				881182D212C8A60500B3A316 /* osxfilewrapper.mm */,
 				8811845912C8ABAF00B3A316 /* win32filewrapper.h */,
 				8811845A12C8ABAF00B3A316 /* win32filewrapper.cpp */,
-				88DD59F812E03D760081AE6C /* SoraLocalizer.h */,
-				88DD59F912E03D760081AE6C /* SoraLocalizer.cpp */,
 				88DD5A0212E0416A0081AE6C /* lMemFile.h */,
 				88DD0B8E12EAA631005555F6 /* stringId.h */,
 				88A865BD137339B9003A3CDE /* MemoryUsage.h */,

@@ -50,18 +50,9 @@ namespace sora {
 	
 	class SoraImageEffect {
 	public:
-		SoraImageEffect(): etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL) {
-		//	type = IMAGE_EFFECT_TYPE;
-		//	setFreeSubobjects(true);
-		}
-		SoraImageEffect(CoreTransformer<CoreTransform>* transformer): t_transformer(transformer) {
-		//	type = IMAGE_EFFECT_TYPE;
-		//	setFreeSubobjects(true);
-		}
-		SoraImageEffect(IMAGE_EFFECT_MODE _mode): mode(_mode), etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL) {
-		//	type = IMAGE_EFFECT_TYPE;
-		//	setFreeSubobjects(true);
-		}
+		SoraImageEffect(): etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL), pnext(NULL) { }
+		SoraImageEffect(CoreTransformer<CoreTransform>* transformer): t_transformer(transformer), pnext(NULL) { }
+		SoraImageEffect(IMAGE_EFFECT_MODE _mode): mode(_mode), etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL), pnext(NULL) { }
 		virtual ~SoraImageEffect();
 
 		void stop();
@@ -91,8 +82,15 @@ namespace sora {
 		SoraImageEffect& add(SoraImageEffect* next);
         
         float32 getEffectTime() const { return effectTime; }
+		
+		// define a image effect queue
+		// @retval = nextEffect
+		// to create a sequence, use SoraImageEffect xx(xx, yy, zz).next(new SoraImgeEffect yy).next etc
+		SoraImageEffect* setNext(SoraImageEffect* nextEffect);
+		SoraImageEffect* getNext() const;
 				
 	protected:
+		SoraImageEffect* pnext;
 
 		uint16 etype;
 		IMAGE_EFFECT_MODE mode;

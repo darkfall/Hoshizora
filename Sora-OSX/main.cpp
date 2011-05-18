@@ -54,12 +54,8 @@ int main(int argc, char* argv[]) {
 	}
 	sora->attachResourcePack(res);
 	
-	
-	sora::SoraLocalizer::Instance()->addLocaleConf(L"rftdLocale_chn.locale");
-	sora::SoraLocalizer::Instance()->setCurrentLocale("CHN");
-
-	sora->setFPS(60.0);
-	sora->createWindow(new rftd::rftdMainWindow);
+	sora->setFPS(999);
+	sora->createWindow(new mainWindow);
 	sora->start();
 		
 	return 0;

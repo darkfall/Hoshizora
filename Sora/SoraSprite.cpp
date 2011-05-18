@@ -403,10 +403,19 @@ namespace sora {
 						break;
 				}
 				
-				if(result == IMAGE_EFFECT_END) {
-					delete (*eff);
-					(*eff) = 0;
-					eff = vEffects.erase(eff);
+				if(result == IMAGE_EFFECT_END) {     
+					SoraImageEffect* nextEffect = (*eff)->getNext();
+					if(!nextEffect) {
+						delete (*eff);
+						(*eff) = 0;
+						
+						eff = vEffects.erase(eff);
+					} else {
+						delete (*eff);
+						(*eff) = 0;
+						
+						(*eff) = nextEffect;
+					}
 				} else
 					++eff;
 			}

@@ -4,6 +4,7 @@
 #include "SoraFileUtility.h"
 #include "SoraEventManager.h"
 #include "SoraConstantStrings.h"
+#include "SoraMemoryFile.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
@@ -298,7 +299,17 @@ namespace sora {
 		}
 		
 		if(pMiscTool) delete pMiscTool;
-
+		
+		// free all memory files
+		SoraMemoryFile::Members memoryFiles = SoraMemoryFile::members;
+		SoraMemoryFile::Members::iterator itMember = memoryFiles.begin();
+		while(itMember != memoryFiles.end()) {
+			delete *itMember;
+			*itMember = NULL;
+			
+			++itMember;
+		}
+		
 		SoraEventManager::Destroy();
 		// force exiting
 		exit(0);

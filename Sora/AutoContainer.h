@@ -27,7 +27,7 @@ namespace sora {
 	template<typename T>
 	class AutoListElement {
 	public:
-		typedef std::list<T*> ObjList;
+		typedef std::list<T*> Members;
 	
 	protected:
 		AutoListElement() {
@@ -40,7 +40,7 @@ namespace sora {
 		}
 									
 	public:		
-		static ObjList members;
+		static Members members;
 	};
 	
 	template<typename T>

@@ -115,6 +115,23 @@ namespace sora {
 		return states;
 	}
 	
+	SoraImageEffect* SoraImageEffect::setNext(SoraImageEffect* nextEffect) {
+		SoraImageEffect* tmpNext = pnext;
+		if(tmpNext != NULL) {
+			while(tmpNext->pnext != NULL) {
+				tmpNext = tmpNext->pnext;
+			}
+			tmpNext->pnext = nextEffect;
+		} else {
+			pnext = nextEffect;
+		}
+		return pnext;
+	}
+	
+	SoraImageEffect* SoraImageEffect::getNext() const {
+		return pnext;
+	}
+
 	
 	SoraImageEffectFade::SoraImageEffectFade(float32 src, float32 dst, float32 _time, IMAGE_EFFECT_MODE _mode,
 											 CoreTransformer<CoreTransform>* transformer):
