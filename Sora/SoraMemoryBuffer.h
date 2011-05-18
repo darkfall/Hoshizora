@@ -55,6 +55,18 @@ namespace sora {
 			return true;
 		}
 		
+		// reduce size to real size, becare that length have different meaning if you have used seek
+		void resize() {
+			if(currPos != 0) {
+				uint8* tmpData = new uint8[currPos];
+				memcpy(tmpData, (void*)(get()), currPos);
+				length = currPos;
+				
+				apCData.release();
+				apCData = tmpData;
+			}
+		}
+		
 		bool push(void* pdata, ulong32 size) {
 			if(currPos + size <= length) {
 				memcpy((void*)(get()+currPos), pdata, size);
@@ -73,6 +85,8 @@ namespace sora {
 				alloc(length);
 				memcpy((void*)(get()), tempData, prevLength);
 				currPos += prevLength;
+				
+				delete tempData;
 				return push(pdata, size);
 			}
 			return false;
