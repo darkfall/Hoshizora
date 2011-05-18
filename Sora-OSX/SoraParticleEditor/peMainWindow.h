@@ -42,7 +42,7 @@ class peMainWindow: public sora::SoraWindowInfoBase {
 		pEditor->loadXML(L"editor.xml");
 	}
 
-	int32 getWindowWidth() { return 1024; }
+	int32 getWindowWidth() { return 1280; }
 	int32 getWindowHeight() { return 768; }
 		
 	int32 getWindowPosX() { return 0; }

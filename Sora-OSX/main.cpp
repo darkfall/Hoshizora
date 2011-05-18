@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 	sora->attachResourcePack(res);
 	
 	sora->setFPS(999);
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new peMainWindow);
 	sora->start();
 		
 	return 0;

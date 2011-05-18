@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>886033AD1383AA8C00C3B63B</string>
+						<string>886034061383B84B00C3B63B</string>
 						<key>history</key>
 						<array>
 							<string>886032FA1382C16E00C3B63B</string>
@@ -310,6 +310,7 @@
 								<string>08FB7795FE84155DC02AAC07</string>
 								<string>888982CF13751440000B937A</string>
 								<string>88E33A34136B3483000B67C8</string>
+								<string>887E2934136152DD00803DA6</string>
 								<string>8839FF9F1319FC9C00CC101A</string>
 								<string>C6859E8C029090F304C91782</string>
 								<string>1AB674ADFE9D54B511CA2CBB</string>
@@ -318,13 +319,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>87</integer>
-									<integer>3</integer>
+									<integer>187</integer>
+									<integer>186</integer>
+									<integer>111</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 1406}, {205, 760}}</string>
+							<string>{{0, 2725}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -361,7 +363,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraSprite.cpp</string>
+								<string>editorWindow.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -369,11 +371,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraSprite.cpp</string>
+										<string>editorWindow.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>886033AC1383AA8C00C3B63B</string>
+										<string>886034051383B84B00C3B63B</string>
 										<key>history</key>
 										<array>
 											<string>88BFA0BD135AAEE700BB8E70</string>
@@ -701,8 +703,6 @@
 											<string>88CD9DD91377D5E000492B3F</string>
 											<string>88C712AE1378B5B100E0C2BB</string>
 											<string>88C713341378CAB700E0C2BB</string>
-											<string>88C713351378CAB700E0C2BB</string>
-											<string>88C713361378CAB700E0C2BB</string>
 											<string>88C713371378CAB700E0C2BB</string>
 											<string>88C713AA137A580400E0C2BB</string>
 											<string>88C713B9137A5A8300E0C2BB</string>
@@ -715,7 +715,6 @@
 											<string>88C71478137A63FC00E0C2BB</string>
 											<string>88C71487137A699600E0C2BB</string>
 											<string>88C71488137A699600E0C2BB</string>
-											<string>88C71489137A699600E0C2BB</string>
 											<string>88C71493137A699600E0C2BB</string>
 											<string>88C714AE137A6A4F00E0C2BB</string>
 											<string>88C7150D137A6EE700E0C2BB</string>
@@ -756,21 +755,24 @@
 											<string>88603235138116B700C3B63B</string>
 											<string>88603236138116B700C3B63B</string>
 											<string>88603245138119A700C3B63B</string>
-											<string>88603246138119A700C3B63B</string>
 											<string>8860324D13811AF300C3B63B</string>
 											<string>8860324E13811AF300C3B63B</string>
 											<string>8860324F13811AF300C3B63B</string>
 											<string>8860325F13816D1200C3B63B</string>
-											<string>886032D91382BB3600C3B63B</string>
 											<string>8860337B1383A8CC00C3B63B</string>
 											<string>8860337C1383A8CC00C3B63B</string>
 											<string>8860337D1383A8CC00C3B63B</string>
 											<string>886033801383A8CC00C3B63B</string>
 											<string>8860338B1383A9BA00C3B63B</string>
-											<string>886033A81383AA8C00C3B63B</string>
 											<string>886033A91383AA8C00C3B63B</string>
-											<string>886033AA1383AA8C00C3B63B</string>
-											<string>886033AB1383AA8C00C3B63B</string>
+											<string>886033B61383B36A00C3B63B</string>
+											<string>886033B71383B36A00C3B63B</string>
+											<string>886033B81383B36A00C3B63B</string>
+											<string>886033B91383B36A00C3B63B</string>
+											<string>886033BA1383B36A00C3B63B</string>
+											<string>886033E01383B48C00C3B63B</string>
+											<string>886033E11383B48C00C3B63B</string>
+											<string>886033BB1383B36A00C3B63B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

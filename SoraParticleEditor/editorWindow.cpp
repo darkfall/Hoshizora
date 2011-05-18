@@ -18,6 +18,8 @@ bool bOpenFinished = false;
 sora::SoraSprite* pspr;
 sora::SoraParticleSystem* peffect;
 
+sora::SoraSprite* pbgSpr = NULL;
+
 
 #include "SoraGUIChan/xmlgui.h"
 sora::XmlGui* pXmlParser;
@@ -421,13 +423,32 @@ void setTextureRectSlider(SoraSprite* pspr) {
 	SORA->log("Set Max TextureRect Slider Value:"+int_to_str(slTextureRect->getScaleEnd()));
 }
 
-void loadParticleSprite(const SoraWString path) {
+void loadParticleSprite(const SoraWString& path) {
 	delete pspr;
 	pspr = SORA->createSprite(path);
-	if(pspr == NULL)
+	if(pspr == NULL) {
+		SORA->messageBoxW(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
 		pspr = SORA->createSprite(L"pics/particles.png");
+	}
 
 	peffect->restart();
+}
+
+void loadBGSprite(const SoraWString& path) {
+	if(pbgSpr) 
+		delete pbgSpr;
+	pbgSpr = SORA->createSprite(path);
+	if(pbgSpr == NULL) {
+		SORA->messageBoxW(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
+	}
+	
+	/*float32 scale1 = 1.0, scale2 = 1.0;
+	if(pbgSpr->getSpriteWidth() > 1024)
+		scale1 = pbgSpr->getSpriteWidth() / 1024.f;
+	if(pbgSpr->getSpriteHeight() > 768)
+		scale2 = pbgSpr->getSpriteHeight() / 768.f;
+	pbgSpr->setScale(scale1<scale2?scale1:scale2, scale1<scale2?scale1:scale2);*/
+	pbgSpr->setCenter(pbgSpr->getSpriteWidth()/2, pbgSpr->getSpriteHeight()/2);
 }
 
 void applyFilterSps() {
@@ -568,7 +589,28 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 			loadParticleSprite(s2ws(filePathBuffer));
 		}
 #endif
+	} else if(getID().compare("BGSprite") == 0) {
+#ifdef WIN32
+		wchar_t fileTitleBuffer[512];
+		wchar_t filePathBuffer[512];
+		fileTitleBuffer[0] = '\0';
+		filePathBuffer[0] = '\0';
 		
+		applyFilterImage();
+		if(fileDlg->FileOpenDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
+			loadBGSprite(filePathBuffer);
+		}
+#elif defined(OS_OSX)
+		char fileTitleBuffer[512];
+		char filePathBuffer[512];
+		fileTitleBuffer[0] = '\0';
+		filePathBuffer[0] = '\0';
+		
+		applyFilterImage();
+		if(fileDlg->FileOpenDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
+			loadBGSprite(s2ws(filePathBuffer));
+		}
+#endif
 	}
 	}
 };
@@ -609,12 +651,16 @@ void editorWindow::update() {
 }
 
 void editorWindow::render() {
+	if(pbgSpr) {
+		pbgSpr->render(SORA->getScreenWidth()/2, SORA->getScreenHeight()/2);
+	}
+	
 	peffect->render();
 	
 	if(pFont) {
-		pFont->render(100, 690, s2ws(fp_to_str(SoraCore::Instance()->getFPS())).c_str(), true);
-		pFont->render(100, 720, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true, true);
-		pFont->render(100, 740, L"Rev 0x10 \0", true, true);
+		pFont->print(100, 690, sora::FONT_ALIGNMENT_CENTER, L"FPS: %.2f", sora::SORA->getFPS());
+		pFont->render(100, 720, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true);
+		pFont->render(100, 740, L"Rev 0x20 \0", true);
 	}
 }
 
