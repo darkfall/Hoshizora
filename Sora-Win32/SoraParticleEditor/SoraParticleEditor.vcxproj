@@ -46,7 +46,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\Program Files\Microsoft DirectX SDK %28August 2009%29\Include;$(SolutionDir)\..\..\Plugins\SoraFreetypeFont;$(SolutionDir)\..\..\Plugins\SoraGUIChan;$(SolutionDir)\..\..\Plugins;$(SolutionDir)\..\..\Sora\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(DXSDK_DIR)\lib\x86;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <LibraryPath>$(VCInstallDir)lib;../../Plugins/SoraFreetypeFont;../../Plugins/cg;$(VCInstallDir)atlmfc\lib;$(DXSDK_DIR)\lib\x86;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -77,6 +77,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\..\Sora\json\json_internalarray.inl" />
+    <None Include="..\..\Sora\json\json_internalmap.inl" />
+    <None Include="..\..\Sora\json\json_valueiterator.inl" />
+    <None Include="..\..\Sora\osxfilewrapper.mm" />
+    <None Include="..\..\Sora\SoraiOSFileUtility.mm" />
+    <None Include="..\..\Sora\SoraiOSStringConv.mm" />
+    <None Include="..\..\Sora\SoraOSXFileUtility.mm" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +155,10 @@
     <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUIListener.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUIResponser.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUIResponserMap.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraSound.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraSoundLoader.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\Sound.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoundLoader.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\xmlgui.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgecolor.h" />
@@ -158,13 +169,15 @@
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
     <ClInclude Include="..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h" />
+    <ClInclude Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.h" />
     <ClInclude Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.h" />
     <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackMemory.h" />
     <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackReader.h" />
     <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.h" />
     <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.h" />
     <ClInclude Include="..\..\SoraParticleEditor\editorWindow.h" />
-    <ClInclude Include="..\..\Sora\AutoList.h" />
+    <ClInclude Include="..\..\SoraParticleEditor\peMainWindow.h" />
+    <ClInclude Include="..\..\Sora\AutoContainer.h" />
     <ClInclude Include="..\..\Sora\common.h" />
     <ClInclude Include="..\..\Sora\CoreTransform.h" />
     <ClInclude Include="..\..\Sora\CoreTransformer.h" />
@@ -176,25 +189,40 @@
     <ClInclude Include="..\..\Sora\Defaults\SoraDefaultLogger.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraDefaultMiscTool.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraDefaultTimer.h" />
+    <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_iOS.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_OSX.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_Win32.h" />
-    <ClInclude Include="..\..\Sora\Defaults\SoraOSXTimer.h" />
+    <ClInclude Include="..\..\Sora\Defaults\SoraTimer_OSX.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraTimer_Win32.h" />
-    <ClInclude Include="..\..\Sora\Defaults\uncopyable.h" />
+    <ClInclude Include="..\..\Sora\Experimental\ASSMActions\SMAct_SetIntValue.h" />
     <ClInclude Include="..\..\Sora\Experimental\FolderTree.h" />
-    <ClInclude Include="..\..\Sora\Experimental\memory.h" />
-    <ClInclude Include="..\..\Sora\Experimental\SoraNamedObject.h" />
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Action.h" />
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Event.h" />
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_SM.h" />
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_State.h" />
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Variable.h" />
     <ClInclude Include="..\..\Sora\Experimental\state_test.h" />
     <ClInclude Include="..\..\Sora\Experimental\tcmalloc_test.h" />
     <ClInclude Include="..\..\Sora\graphicEffects.h" />
+    <ClInclude Include="..\..\Sora\GridMap.h" />
     <ClInclude Include="..\..\Sora\hash.h" />
     <ClInclude Include="..\..\Sora\hgerect.h" />
     <ClInclude Include="..\..\Sora\hgevector.h" />
     <ClInclude Include="..\..\Sora\HoshiNoSora.h" />
+    <ClInclude Include="..\..\Sora\json\autolink.h" />
+    <ClInclude Include="..\..\Sora\json\config.h" />
+    <ClInclude Include="..\..\Sora\json\features.h" />
+    <ClInclude Include="..\..\Sora\json\forwards.h" />
+    <ClInclude Include="..\..\Sora\json\json.h" />
+    <ClInclude Include="..\..\Sora\json\json_batchallocator.h" />
+    <ClInclude Include="..\..\Sora\json\reader.h" />
+    <ClInclude Include="..\..\Sora\json\value.h" />
+    <ClInclude Include="..\..\Sora\json\writer.h" />
     <ClInclude Include="..\..\Sora\llexer\llexer.h" />
     <ClInclude Include="..\..\Sora\lMemFile.h" />
-    <ClInclude Include="..\..\Sora\md5lib.h" />
+    <ClInclude Include="..\..\Sora\MemoryUsage.h" />
     <ClInclude Include="..\..\Sora\osxfilewrapper.h" />
+    <ClInclude Include="..\..\Sora\PartitionTree.h" />
     <ClInclude Include="..\..\Sora\quaternion.h" />
     <ClInclude Include="..\..\Sora\QuickList.h" />
     <ClInclude Include="..\..\Sora\Random\hgeRandom.h" />
@@ -213,11 +241,16 @@
     <ClInclude Include="..\..\Sora\Random\SFMT-sse2.h" />
     <ClInclude Include="..\..\Sora\Random\SFMT.h" />
     <ClInclude Include="..\..\Sora\Rect4V.h" />
+    <ClInclude Include="..\..\Sora\RefCounted.h" />
+    <ClInclude Include="..\..\Sora\Serializable.h" />
     <ClInclude Include="..\..\Sora\Sora2DMatrix.h" />
     <ClInclude Include="..\..\Sora\SoraAutoPtr.h" />
+    <ClInclude Include="..\..\Sora\SoraCanvas.h" />
     <ClInclude Include="..\..\Sora\SoraColor.h" />
     <ClInclude Include="..\..\Sora\SoraComponentType.h" />
+    <ClInclude Include="..\..\Sora\SoraConstantStrings.h" />
     <ClInclude Include="..\..\Sora\SoraCore.h" />
+    <ClInclude Include="..\..\Sora\SoraEnvValues.h" />
     <ClInclude Include="..\..\Sora\SoraEvent.h" />
     <ClInclude Include="..\..\Sora\SoraEventManager.h" />
     <ClInclude Include="..\..\Sora\SoraException.h" />
@@ -230,16 +263,22 @@
     <ClInclude Include="..\..\Sora\SoraGraphicEffect.h" />
     <ClInclude Include="..\..\Sora\SoraImageEffect.h" />
     <ClInclude Include="..\..\Sora\SoraInfiniteRendererCallback.h" />
+    <ClInclude Include="..\..\Sora\SoraINIFile\SoraINIFile.h" />
     <ClInclude Include="..\..\Sora\SoraInput.h" />
     <ClInclude Include="..\..\Sora\soraiOSFileUtility.h" />
+    <ClInclude Include="..\..\Sora\SoraiOSStringConv.h" />
     <ClInclude Include="..\..\Sora\SoraKeyInfo.h" />
-    <ClInclude Include="..\..\Sora\SoraLocalizedString.h" />
     <ClInclude Include="..\..\Sora\SoraLocalizer.h" />
     <ClInclude Include="..\..\Sora\SoraMath.h" />
+    <ClInclude Include="..\..\Sora\SoraMemoryBuffer.h" />
+    <ClInclude Include="..\..\Sora\SoraMemoryFile.h" />
     <ClInclude Include="..\..\Sora\SoraMiscTool.h" />
+    <ClInclude Include="..\..\Sora\SoraMoviePlayer.h" />
+    <ClInclude Include="..\..\Sora\SoraNamedObject.h" />
     <ClInclude Include="..\..\Sora\SoraObject.h" />
     <ClInclude Include="..\..\Sora\SoraOSXFileUtility.h" />
     <ClInclude Include="..\..\Sora\SoraPlatform.h" />
+    <ClInclude Include="..\..\Sora\SoraPlaybackEvent.h" />
     <ClInclude Include="..\..\Sora\SoraPlugin.h" />
     <ClInclude Include="..\..\Sora\SoraPluginManager.h" />
     <ClInclude Include="..\..\Sora\SoraRenderSystem.h" />
@@ -249,7 +288,6 @@
     <ClInclude Include="..\..\Sora\SoraShader.h" />
     <ClInclude Include="..\..\Sora\SoraSingleton.h" />
     <ClInclude Include="..\..\Sora\SoraSoundFile.h" />
-    <ClInclude Include="..\..\Sora\SoraSoundFileBase.h" />
     <ClInclude Include="..\..\Sora\SoraSoundSystem.h" />
     <ClInclude Include="..\..\Sora\SoraSprite.h" />
     <ClInclude Include="..\..\Sora\SoraString.h" />
@@ -260,11 +298,13 @@
     <ClInclude Include="..\..\Sora\SoraTimerEvent.h" />
     <ClInclude Include="..\..\Sora\SoraTypeInfo.h" />
     <ClInclude Include="..\..\Sora\SoraWindowInfo.h" />
-    <ClInclude Include="..\..\Sora\StreamUtility.h" />
     <ClInclude Include="..\..\Sora\stringId.h" />
+    <ClInclude Include="..\..\Sora\support\kalloc.h" />
+    <ClInclude Include="..\..\Sora\support\md5lib.h" />
     <ClInclude Include="..\..\Sora\TemplateTransformer.h" />
     <ClInclude Include="..\..\Sora\tinyXML\tinystr.h" />
     <ClInclude Include="..\..\Sora\tinyXML\tinyxml.h" />
+    <ClInclude Include="..\..\Sora\uncopyable.h" />
     <ClInclude Include="..\..\Sora\vector3.h" />
     <ClInclude Include="..\..\Sora\win32filewrapper.h" />
     <ClInclude Include="..\..\Sora\ZLIB\crc32.h" />
@@ -284,7 +324,6 @@
     <ClInclude Include="..\..\Sora\ZLIB\zip.h" />
     <ClInclude Include="..\..\Sora\ZLIB\zlib.h" />
     <ClInclude Include="..\..\Sora\ZLIB\zutil.h" />
-    <ClInclude Include="MainWindow.h" />
     <ClInclude Include="sorainit.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -339,6 +378,9 @@
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguiimage.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguiimageloader.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguiinput.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraSound.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraSoundLoader.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\Sound.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\xmlgui.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp" />
@@ -348,6 +390,7 @@
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
     <ClCompile Include="..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp" />
     <ClCompile Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp" />
     <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackMemory.cpp" />
     <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackReader.cpp" />
@@ -355,21 +398,26 @@
     <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.cpp" />
     <ClCompile Include="..\..\SoraParticleEditor\editorWindow.cpp" />
     <ClCompile Include="..\..\Sora\CoreTransform.cpp" />
+    <ClCompile Include="..\..\Sora\Debug\SoraInternalLogger.cpp" />
     <ClCompile Include="..\..\Sora\Defaults\orz.c" />
     <ClCompile Include="..\..\Sora\Experimental\FolderTree.cpp" />
-    <ClCompile Include="..\..\Sora\Experimental\memory.cpp" />
     <ClCompile Include="..\..\Sora\Experimental\state_test.cpp" />
     <ClCompile Include="..\..\Sora\graphicEffects.cpp" />
     <ClCompile Include="..\..\Sora\hgerect.cpp" />
     <ClCompile Include="..\..\Sora\hgevector.cpp" />
+    <ClCompile Include="..\..\Sora\json\json_reader.cpp" />
+    <ClCompile Include="..\..\Sora\json\json_value.cpp" />
+    <ClCompile Include="..\..\Sora\json\json_writer.cpp" />
     <ClCompile Include="..\..\Sora\llexer\llexer.cpp" />
-    <ClCompile Include="..\..\Sora\md5lib.cpp" />
     <ClCompile Include="..\..\Sora\Random\SFMT.c" />
+    <ClCompile Include="..\..\Sora\SoraCanvas.cpp" />
     <ClCompile Include="..\..\Sora\SoraCore.cpp" />
+    <ClCompile Include="..\..\Sora\SoraEnvValues.cpp" />
     <ClCompile Include="..\..\Sora\SoraEvent.cpp" />
     <ClCompile Include="..\..\Sora\SoraEventManager.cpp" />
     <ClCompile Include="..\..\Sora\SoraFolderResourceManager.cpp" />
     <ClCompile Include="..\..\Sora\SoraImageEffect.cpp" />
+    <ClCompile Include="..\..\Sora\SoraINIFile\SoraINIFile.cpp" />
     <ClCompile Include="..\..\Sora\SoraLocalizer.cpp" />
     <ClCompile Include="..\..\Sora\SoraObject.cpp" />
     <ClCompile Include="..\..\Sora\SoraPluginManger.cpp" />
@@ -379,6 +427,8 @@
     <ClCompile Include="..\..\Sora\SoraStringConv.cpp" />
     <ClCompile Include="..\..\Sora\SoraTexture.cpp" />
     <ClCompile Include="..\..\Sora\SoraTimerEvent.cpp" />
+    <ClCompile Include="..\..\Sora\support\kalloc.c" />
+    <ClCompile Include="..\..\Sora\support\md5lib.cpp" />
     <ClCompile Include="..\..\Sora\tinyXML\tinystr.cpp" />
     <ClCompile Include="..\..\Sora\tinyXML\tinyxml.cpp" />
     <ClCompile Include="..\..\Sora\tinyXML\tinyxmlerror.cpp" />

@@ -212,6 +212,7 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
 			err = !pmfile->read(texturePath, texSize);
 			texturePath[texSize] = '\0';
 			panm->texturePath = texturePath;
+
 			delete texturePath;
 		}
 		

@@ -1287,6 +1287,9 @@
     <ClInclude Include="..\..\..\Sora\MemoryUsage.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\MEAD\meadMainWindow.h">
+      <Filter>源文件\mead</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -1933,6 +1936,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraEnvValues.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\MEAD\meadMainWindow.cpp">
+      <Filter>源文件\mead</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

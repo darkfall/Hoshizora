@@ -34,6 +34,7 @@
 #pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
 #endif
 
+#include "../../mead/meadMainWindow.h"
 
 #include "mainWindow.h"
 
@@ -60,7 +61,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	sora->setFPS(60);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new mead::meadMainWindow);
 	sora->start();
 		
 	return 0;

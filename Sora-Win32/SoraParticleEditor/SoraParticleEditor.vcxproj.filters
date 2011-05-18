@@ -39,371 +39,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="..\..\Sora\osxfilewrapper.mm">
+      <Filter>Sora</Filter>
+    </None>
+    <None Include="..\..\Sora\SoraiOSFileUtility.mm">
+      <Filter>Sora</Filter>
+    </None>
+    <None Include="..\..\Sora\SoraiOSStringConv.mm">
+      <Filter>Sora</Filter>
+    </None>
+    <None Include="..\..\Sora\SoraOSXFileUtility.mm">
+      <Filter>Sora</Filter>
+    </None>
+    <None Include="..\..\Sora\json\json_internalarray.inl">
+      <Filter>Sora</Filter>
+    </None>
+    <None Include="..\..\Sora\json\json_internalmap.inl">
+      <Filter>Sora</Filter>
+    </None>
+    <None Include="..\..\Sora\json\json_valueiterator.inl">
+      <Filter>Sora</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Sora\AutoList.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\common.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\CoreTransform.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\CoreTransformer.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Debug\SoraAutoProfile.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Debug\SoraDebugRenderer.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Debug\SoraGlobalProfiler.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Debug\SoraInternalLogger.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\orz.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\SoraDefaultLogger.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\SoraDefaultMiscTool.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\SoraDefaultTimer.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_OSX.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_Win32.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\SoraOSXTimer.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\SoraTimer_Win32.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\uncopyable.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Experimental\FolderTree.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Experimental\memory.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Experimental\SoraNamedObject.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Experimental\state_test.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Experimental\tcmalloc_test.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\graphicEffects.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\hash.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\hgerect.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\hgevector.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\HoshiNoSora.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\llexer\llexer.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\lMemFile.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\md5lib.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\osxfilewrapper.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\quaternion.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\QuickList.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\hgeRandom.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-alti.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params11213.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params1279.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params132049.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params19937.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params216091.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params2281.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params4253.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params44497.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params607.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-params86243.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT-sse2.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Random\SFMT.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Rect4V.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\Sora2DMatrix.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraAutoPtr.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraColor.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraComponentType.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraCore.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraEvent.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraEventManager.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraException.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraFileBase.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraFileUtility.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraFolderResourceManager.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraFont.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraFontManager.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraFrameListener.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraGraphicEffect.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraImageEffect.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraInfiniteRendererCallback.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraInput.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\soraiOSFileUtility.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraKeyInfo.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraLocalizedString.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraLocalizer.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraMath.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraMiscTool.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraObject.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraOSXFileUtility.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraPlatform.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraPlugin.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraPluginManager.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraRenderSystem.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraRenderTarget.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraResourceFileFinder.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraResourceManager.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraShader.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraSingleton.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraSoundFile.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraSoundFileBase.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraSoundSystem.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraSprite.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraString.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraStringConv.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraTexture.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraTextureMap.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraTimer.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraTimerEvent.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraTypeInfo.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\SoraWindowInfo.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\StreamUtility.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\stringId.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\TemplateTransformer.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\tinyXML\tinystr.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\tinyXML\tinyxml.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\vector3.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\win32filewrapper.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\crc32.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\crypt.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\deflate.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\inffast.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\inffixed.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\inflate.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\inftrees.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\ioapi.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\iowin32.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\mztools.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\trees.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\unzip.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\zconf.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\zconf.in.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\zip.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\zlib.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sora\ZLIB\zutil.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="MainWindow.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="sorainit.hpp">
       <Filter>源文件</Filter>
     </ClInclude>
@@ -659,149 +317,467 @@
     <ClInclude Include="..\..\Plugins\DarkLib\FolderDlg.h">
       <Filter>Plugins\Darklib</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SoraParticleEditor\peMainWindow.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraINIFile\SoraINIFile.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\support\kalloc.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\support\md5lib.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\tinyXML\tinystr.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\tinyXML\tinyxml.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\crc32.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\crypt.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\deflate.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inffast.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inffixed.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inflate.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inftrees.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\ioapi.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\iowin32.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\mztools.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\trees.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\unzip.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zconf.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zconf.in.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zip.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zlib.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zutil.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\AutoContainer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\common.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\CoreTransform.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\CoreTransformer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\graphicEffects.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\GridMap.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\hash.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\hgerect.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\hgevector.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\HoshiNoSora.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\lMemFile.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\MemoryUsage.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\osxfilewrapper.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\PartitionTree.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\quaternion.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\QuickList.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Rect4V.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\RefCounted.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Serializable.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Sora2DMatrix.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraAutoPtr.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraCanvas.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraColor.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraComponentType.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraConstantStrings.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraCore.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraEnvValues.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraEvent.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraEventManager.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraException.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraFileBase.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraFileUtility.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraFolderResourceManager.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraFont.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraFontManager.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraFrameListener.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraGraphicEffect.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraImageEffect.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraInfiniteRendererCallback.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraInput.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\soraiOSFileUtility.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraiOSStringConv.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraKeyInfo.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraLocalizer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraMath.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraMemoryBuffer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraMemoryFile.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraMiscTool.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraMoviePlayer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraNamedObject.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraObject.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraOSXFileUtility.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraPlatform.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraPlaybackEvent.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraPlugin.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraPluginManager.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraRenderSystem.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraRenderTarget.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraResourceFileFinder.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraResourceManager.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraShader.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraSingleton.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraSoundFile.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraSoundSystem.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraSprite.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraString.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraStringConv.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraTexture.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraTextureMap.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraTimer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraTimerEvent.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraTypeInfo.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\SoraWindowInfo.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\stringId.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\TemplateTransformer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\uncopyable.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\vector3.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\win32filewrapper.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Debug\SoraAutoProfile.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Debug\SoraDebugRenderer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Debug\SoraGlobalProfiler.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Debug\SoraInternalLogger.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\orz.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\SoraDefaultLogger.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\SoraDefaultMiscTool.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\SoraDefaultTimer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_iOS.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_OSX.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_Win32.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\SoraTimer_OSX.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Defaults\SoraTimer_Win32.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\ASSMActions\SMAct_SetIntValue.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\FolderTree.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Action.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Event.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_SM.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_State.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Variable.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\state_test.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Experimental\tcmalloc_test.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\autolink.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\config.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\features.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\forwards.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\json.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\json_batchallocator.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\reader.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\value.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\json\writer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\llexer\llexer.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\hgeRandom.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-alti.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params11213.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params1279.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params132049.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params19937.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params216091.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params2281.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params4253.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params44497.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params607.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-params86243.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT-sse2.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\Random\SFMT.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraSoundLoader.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraSound.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\Sound.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoundLoader.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Sora\CoreTransform.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\Defaults\orz.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\Experimental\FolderTree.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\Experimental\memory.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\Experimental\state_test.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\graphicEffects.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\hgerect.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\hgevector.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\llexer\llexer.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\md5lib.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\Random\SFMT.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraCore.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraEvent.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraEventManager.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraFolderResourceManager.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraImageEffect.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraLocalizer.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraObject.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraPluginManger.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraResourceFileFinder.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraShader.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraSprite.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraStringConv.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraTexture.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\SoraTimerEvent.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\tinyXML\tinystr.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\tinyXML\tinyxml.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\tinyXML\tinyxmlerror.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\tinyXML\tinyxmlparser.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\win32filewrapper.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\adler32.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\compress.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\crc32.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\deflate.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\gzio.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\infback.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\inffast.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\inflate.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\inftrees.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\ioapi.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\iowin32.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\mztools.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\trees.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\uncompr.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\unzip.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\zip.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sora\ZLIB\zutil.c">
-      <Filter>Sora</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -1002,6 +978,180 @@
     </ClCompile>
     <ClCompile Include="..\..\Plugins\DarkLib\FileDlg.cpp">
       <Filter>Plugins\Darklib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraINIFile\SoraINIFile.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\support\kalloc.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\support\md5lib.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\tinyXML\tinystr.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\tinyXML\tinyxml.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\tinyXML\tinyxmlerror.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\tinyXML\tinyxmlparser.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\adler32.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\compress.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\crc32.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\deflate.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\gzio.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\infback.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inffast.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inflate.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inftrees.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\ioapi.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\iowin32.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\mztools.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\trees.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\uncompr.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\unzip.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\zip.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\zutil.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\CoreTransform.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\graphicEffects.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\hgerect.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\hgevector.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraCanvas.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraCore.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraEnvValues.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraEvent.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraEventManager.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraFolderResourceManager.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraImageEffect.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraLocalizer.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraObject.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraPluginManger.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraResourceFileFinder.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraShader.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraSprite.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraStringConv.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraTexture.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraTimerEvent.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\win32filewrapper.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\Debug\SoraInternalLogger.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\Defaults\orz.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\Experimental\FolderTree.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\Experimental\state_test.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\json\json_reader.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\json\json_value.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\json\json_writer.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\llexer\llexer.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\Random\SFMT.c">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraSoundLoader.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraSound.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\Sound.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

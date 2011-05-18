@@ -87,6 +87,7 @@
     <ClInclude Include="..\..\..\MEAD\meadBullet.h" />
     <ClInclude Include="..\..\..\MEAD\meadBulletManager.h" />
     <ClInclude Include="..\..\..\MEAD\meadCollision.h" />
+    <ClInclude Include="..\..\..\MEAD\meadMainWindow.h" />
     <ClInclude Include="..\..\..\MEAD\meadPlayer.h" />
     <ClInclude Include="..\..\..\MEAD\meadPlayerManager.h" />
     <ClInclude Include="..\..\..\Plugins\DarkLib\FileDlg.h" />
@@ -481,6 +482,7 @@
     <ClCompile Include="..\..\..\MEAD\meadBoss.cpp" />
     <ClCompile Include="..\..\..\MEAD\meadBossManager.cpp" />
     <ClCompile Include="..\..\..\MEAD\meadBulletManager.cpp" />
+    <ClCompile Include="..\..\..\MEAD\meadMainWindow.cpp" />
     <ClCompile Include="..\..\..\MEAD\meadPlayer.cpp" />
     <ClCompile Include="..\..\..\MEAD\meadPlayerManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\DarkLib\FileDlg.cpp" />
