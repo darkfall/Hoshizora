@@ -1,4 +1,4 @@
-<container name="SoraWindow" width="1024" height="768" x="0" y="0" opaque="false" foregroundColor="0xAAAAAA">
+<container name="SoraWindow" width="1280" height="768" x="0" y="0" opaque="false" foregroundColor="0xAAAAAA">
 	<window name="SpeedPanel" width="180"  height="290" x="0" y="0" caption="SpeedPanel" opaque="true" foregroundColor="0xAAFFFF">
 		<label name="MinSpeedLabel" width="160"  height="20" x="10" y="10" caption="MinSpeed" opaque="false"/>
 		<slider name="MinSpeed" width="160"  height="10" x="10" y="30" start="-500" end="500" value="0" makerLength="1" stepLength="1" id="MinSpeed" responser="SpeedPanel" responsetype="action"/>
@@ -33,7 +33,7 @@
 		<slider name="EmissionSpeed" width="160"  height="10" x="10" y="120" start="0" end="500" value="0" makerLength="1" stepLength="1" id="EmissionSpeed" responser="LifetimePanel" responsetype="action"/>
 	</window>
 	
-	<window name="PropPanel" width="180"  height="710" x="844" y="0" caption="PropPanel" opaque="true" foregroundColor="0xAAFFFF">	
+	<window name="PropPanel" width="180"  height="710" x="1100" y="0" caption="PropPanel" opaque="true" foregroundColor="0xAAFFFF">	
 		<label name="MinSpinLabel" width="160"  height="20" x="10" y="10" caption="MinSpin"/>
 		<slider name="MinSpin" width="160"  height="10" x="10" y="30" start="-36" end="36" value="0" makerLength="1" stepLength="1" id="MinSpin" responser="PropPanel" responsetype="action"/>
 		<label name="MaxSpinLabel" width="160"  height="20" x="10" y="40" caption="MaxSpin"/>
@@ -132,10 +132,11 @@
 		<checkbox name="CEndColorPanel" width="130" height="20" x="5" y="110" caption="EndColorPanel" id="EndColorPanelCheck" responser="OptionPanel" responsetype="action"/>
 		<button name="Open" width="60" height="20" x="5" y="135" caption="Open" id="Open" responser="OptionPanelButton" responsetype="action"/>
 		<button name="Save" width="60" height="20" x="80" y="135" caption="Save" id="Save" responser="OptionPanelButton" responsetype="action"/>
-		<button name="SaveAs" width="135" height="20" x="5" y="160" caption="Save As..." id="SaveAs" responser="OptionPanelButton" responsetype="action"/>
-		<button name="ParticleSprite" width="135" height="20" x="5" y="180" caption="Sprite..." id="ParticleSprite" responser="OptionPanelButton" responsetype="action"/>
+		<button name="SaveAs" width="135" height="20" x="5" y="158" caption="Save As..." id="SaveAs" responser="OptionPanelButton" responsetype="action"/>
+		<button name="ParticleSprite" width="60" height="20" x="5" y="180" caption="Sprite..." id="ParticleSprite" responser="OptionPanelButton" responsetype="action"/>
+		<button name="BGSprite" width=60 height="20" x="80" y="180" caption="BGSprite..." id="BGSprite" responser="OptionPanelButton" responsetype="action"/>
+
 		<slider name="TextureRect" width="135" height="20" x="5" y="210" start="0" end="15" value="0" makerLength="1" stepLength="1" id="TextureRect" responser="OptionPanelButton" responsetype="action"/>
 		<checkbox name="CBlendMode" width="135" height="20" x="5" y="235" caption="AlphaBlend" id="BlendModeCheck" responser="OptionPanel" responsetype="action"/>
-		
 	</window>
 </container>
