@@ -337,6 +337,9 @@ namespace sora {
 		IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
 		while(eff != vEffects.end()) {
 			if((*eff) == _eff) {
+				if((*eff)->isInList()) {
+					(*eff)->clearList();
+				}
 				delete _eff;
 				_eff = 0;
 				eff = vEffects.erase(eff);
@@ -357,8 +360,13 @@ namespace sora {
 	void SoraSprite::clearEffects() {
 		IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
 		while(eff != vEffects.end()) {
-			delete (*eff);
-			(*eff) = 0;
+			if((*eff)->isInList()) {
+				(*eff)->clearList();
+			}
+			if((*eff) != NULL) {
+				delete (*eff);
+				(*eff) = 0;
+			}
 			++eff;
 		}
 		vEffects.clear();
@@ -404,20 +412,41 @@ namespace sora {
 				}
 				
 				if(result == IMAGE_EFFECT_END) {     
-					SoraImageEffect* nextEffect = (*eff)->getNext();
-					if(!nextEffect) {
+					if(!(*eff)->isInList()) {
 						delete (*eff);
 						(*eff) = 0;
 						
 						eff = vEffects.erase(eff);
+						continue;
 					} else {
+						SoraImageEffect* nexteff = (*eff)->getNext();
 						delete (*eff);
 						(*eff) = 0;
 						
-						(*eff) = nextEffect;
+						(*eff) = nexteff;
+						if(nexteff == NULL) {
+							eff = vEffects.erase(eff);
+							continue;
+						} else (*eff)->restart();
 					}
-				} else
-					++eff;
+				} else if(result != IMAGE_EFFECT_PLAYING) {
+					if((*eff)->isInList()) {
+						if(result == IMAGE_EFFECT_END_OF_LIST && (*eff)->getListMode() == IMAGE_EFFECT_REPEAT) {
+							(*eff) = (*eff)->getListHead();
+							(*eff)->restart();
+						}
+						else if(result == IMAGE_EFFECT_TONEXT) {
+							SoraImageEffect* nexteff = (*eff)->getNext();
+							(*eff) = nexteff;
+							(*eff)->restart();
+						} else if(result == IMAGE_EFFECT_TOPREV) {
+							SoraImageEffect* preveff = (*eff)->getPrev();
+							(*eff) = preveff;
+							(*eff)->restart();
+						}
+					}
+				}
+				++eff;
 			}
 		}
 		return 0;

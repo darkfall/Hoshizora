@@ -39,20 +39,28 @@ namespace sora {
 		IMAGE_EFFECT_END,
 		IMAGE_EFFECT_NOTSTART,
 		IMAGE_EFFECT_PLAYING,
+		IMAGE_EFFECT_TONEXT,
+		IMAGE_EFFECT_END_OF_LIST,
+		IMAGE_EFFECT_TOPREV,
 		IMAGE_EFFECT_PAUSED,
 	};
 
 	enum IMAGE_EFFECT_MODE {
+		IMAGE_EFFECT_NULL = 0,
 		IMAGE_EFFECT_ONCE = 1,
 		IMAGE_EFFECT_PINGPONG = 2,
 		IMAGE_EFFECT_REPEAT = 3,
+		
+		// submodes
+		IMAGE_EFFECT_PINGPONG_INVERSE = 10,
+		IMAGE_EFFECT_PINGPONG_REVERSE = 11,
 	};
 	
 	class SoraImageEffect {
 	public:
-		SoraImageEffect(): etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL), pnext(NULL) { }
-		SoraImageEffect(CoreTransformer<CoreTransform>* transformer): t_transformer(transformer), pnext(NULL) { }
-		SoraImageEffect(IMAGE_EFFECT_MODE _mode): mode(_mode), etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL), pnext(NULL) { }
+		SoraImageEffect();
+		SoraImageEffect(CoreTransformer<CoreTransform>* transformer);
+		SoraImageEffect(IMAGE_EFFECT_MODE _mode);
 		virtual ~SoraImageEffect();
 
 		void stop();
@@ -72,6 +80,8 @@ namespace sora {
 		virtual void start(IMAGE_EFFECT_MODE mode, float32 time);
 		virtual uint32 update(float32 delta) ;
 		
+		void restart();
+		
 		void setTransformer(CoreTransformer<CoreTransform>* transformer);
 
 		float32 get1st() const { return t_curr.Get1st(); }
@@ -83,23 +93,43 @@ namespace sora {
         
         float32 getEffectTime() const { return effectTime; }
 		
+		void setRepeatTimes(uint32 times);
+		uint32 getRepeatTimes() const;
+		
 		// define a image effect queue
 		// @retval = nextEffect
 		// to create a sequence, use SoraImageEffect xx(xx, yy, zz).next(new SoraImgeEffect yy).next etc
 		SoraImageEffect* setNext(SoraImageEffect* nextEffect);
 		SoraImageEffect* getNext() const;
+		SoraImageEffect* getPrev() const;
+		
+		SoraImageEffect* getListHead() const;
+		SoraImageEffect* getListTail() const;
+		
+		IMAGE_EFFECT_MODE getListMode() const;
+		
+		void clearList();
+		bool isInList() const;
 				
 	protected:
+		void checkList();
+		void checkRepeatTimes();
+		
 		SoraImageEffect* pnext;
+		SoraImageEffect* pprev;
+		IMAGE_EFFECT_MODE listMode;
 
 		uint16 etype;
-		IMAGE_EFFECT_MODE mode;
 		uint8 states;
+		IMAGE_EFFECT_MODE mode;
 
 		float32 startTime;
 		float32 pauseTime;
 		float32 topauseTime;
 		float32 effectTime;
+		
+		uint32 currRepeatTimes;
+		uint32 repeatTimes;
 		
 		uint8 started;
 		uint8 paused;

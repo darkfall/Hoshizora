@@ -35,11 +35,27 @@
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
 
+#include "Experimental/SoraRTTI.h"
 
 #include "../mead/meadMainWindow.h"
 #include "../ReflectionTD/rftdMainWindow.h"
 
+
+class myClass {
+public:
+	myClass() {
+		std::cout<<"Foo:::"<<std::endl;
+	}
+};
+
+REGISTER_CLASS(myClass, "myClass");
+
+
 int main(int argc, char* argv[]) {
+	
+	myClass* newClass = (myClass*)CONSTRUCT_CLASS("myClass");
+	
+	
 	sora::SoraCore* sora = sora::SoraCore::Instance();
 	sora->registerRenderSystem(new sora::SoraOGLRenderer);
 	sora->registerResourceManager(new sora::SoraZipResourceManager);
@@ -55,7 +71,7 @@ int main(int argc, char* argv[]) {
 	sora->attachResourcePack(res);
 	
 	sora->setFPS(999);
-	sora->createWindow(new peMainWindow);
+	sora->createWindow(new mainWindow);
 	sora->start();
 		
 	return 0;

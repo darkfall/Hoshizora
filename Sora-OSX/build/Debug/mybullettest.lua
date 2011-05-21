@@ -38,7 +38,8 @@ function update(dt)
 	setBulletScreenRect(150, -20, 650, 620);
 	
 	fontlib.renderString(font, 175, 20, FONT_ALIGNMENT_LEFT, "BULLET: "..tostring(getBulletSize()));
-	fontlib.renderString(font, 175, 580, FONT_ALIGNMENT_LEFT, "FPS: "..tostring(SoraCore:getFPS()));
+
 	
 	spritelib.render(sprcover);
+		fontlib.renderString(font, 0, 580, FONT_ALIGNMENT_LEFT, "FPS: "..tostring(SoraCore:getFPS()));
 end

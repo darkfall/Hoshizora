@@ -171,8 +171,6 @@ std::wstring s2ws(const std::string& s)
     return result;
 }
 	
-
-	
 inline size_t skipSpaces(const std::string& str, size_t currPos) {
 	char c = str[currPos];
 	while((c == ' ' || c == '\n' || c == '\r' || c == '\t') && currPos<str.size()-1) {

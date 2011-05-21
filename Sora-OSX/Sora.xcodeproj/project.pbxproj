@@ -70,7 +70,6 @@
 		8838067B1342587B00A47BD9 /* SoraPhysicalWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 883806551342587B00A47BD9 /* SoraPhysicalWorld.cpp */; };
 		883900F0131A096700CC101A /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 883900EE131A096700CC101A /* editorWindow.cpp */; };
 		884575D81300DB38003EC408 /* state_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884575D71300DB38003EC408 /* state_test.cpp */; };
-		884E91C612DEAE0100598D7E /* FolderTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884E91C512DEAE0100598D7E /* FolderTree.cpp */; };
 		88504B9912ECDB4E009B9F45 /* SFMT.c in Sources */ = {isa = PBXBuildFile; fileRef = 88504B9712ECDB4E009B9F45 /* SFMT.c */; };
 		8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851F6F0135FA97900091C9C /* libfmodexL.dylib */; };
 		8859BED112B47E1C00F3304A /* MyFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8859BEA412B47E1C00F3304A /* MyFileReader.cpp */; };
@@ -82,6 +81,8 @@
 		8859BFA512B4809D00F3304A /* SoraFTFontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8859BFA012B4809D00F3304A /* SoraFTFontManager.cpp */; };
 		886030A8137EAC1F00C3B63B /* meadMainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886030A7137EAC1F00C3B63B /* meadMainWindow.cpp */; };
 		886030D7137EADDD00C3B63B /* rftdMainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886030D6137EADDD00C3B63B /* rftdMainWindow.cpp */; };
+		8860340A1384E6C100C3B63B /* gcnWidgetSwitcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886034091384E6C100C3B63B /* gcnWidgetSwitcher.cpp */; };
+		8860340D1384E6D500C3B63B /* gcnPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8860340C1384E6D500C3B63B /* gcnPanel.cpp */; };
 		88691167134E15850012BDE0 /* SoraCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88691166134E15850012BDE0 /* SoraCanvas.cpp */; };
 		886E0E2F1367A70100A77847 /* SoraSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E281367A70100A77847 /* SoraSound.cpp */; };
 		886E0E301367A70100A77847 /* SoraSoundLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E0E2A1367A70100A77847 /* SoraSoundLoader.cpp */; };
@@ -462,8 +463,6 @@
 		884575D61300DB38003EC408 /* state_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = state_test.h; path = Experimental/state_test.h; sourceTree = "<group>"; };
 		884575D71300DB38003EC408 /* state_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = state_test.cpp; path = Experimental/state_test.cpp; sourceTree = "<group>"; };
 		884CC87312F88E1300FD18FC /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
-		884E91C412DEAE0100598D7E /* FolderTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FolderTree.h; path = Experimental/FolderTree.h; sourceTree = "<group>"; };
-		884E91C512DEAE0100598D7E /* FolderTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FolderTree.cpp; path = Experimental/FolderTree.cpp; sourceTree = "<group>"; };
 		88504B7B12ECDB11009B9F45 /* hgeRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgeRandom.h; sourceTree = "<group>"; };
 		88504B8912ECDB4E009B9F45 /* hgeRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgeRandom.h; sourceTree = "<group>"; };
 		88504B8A12ECDB4E009B9F45 /* SFMT-alti.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFMT-alti.h"; sourceTree = "<group>"; };
@@ -583,6 +582,11 @@
 		886030D5137EADDD00C3B63B /* rftdMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdMainWindow.h; sourceTree = "<group>"; };
 		886030D6137EADDD00C3B63B /* rftdMainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rftdMainWindow.cpp; sourceTree = "<group>"; };
 		8860324C138119BB00C3B63B /* RefCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefCounted.h; sourceTree = "<group>"; };
+		886034081384E32700C3B63B /* gcnWidgetSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnWidgetSwitcher.h; sourceTree = "<group>"; };
+		886034091384E6C100C3B63B /* gcnWidgetSwitcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnWidgetSwitcher.cpp; sourceTree = "<group>"; };
+		8860340B1384E6D500C3B63B /* gcnPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnPanel.h; sourceTree = "<group>"; };
+		8860340C1384E6D500C3B63B /* gcnPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnPanel.cpp; sourceTree = "<group>"; };
+		886035291386A6C100C3B63B /* SoraRTTI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraRTTI.h; path = Experimental/SoraRTTI.h; sourceTree = "<group>"; };
 		88691165134E15850012BDE0 /* SoraCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCanvas.h; sourceTree = "<group>"; };
 		88691166134E15850012BDE0 /* SoraCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraCanvas.cpp; sourceTree = "<group>"; };
 		886E0E281367A70100A77847 /* SoraSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSound.cpp; sourceTree = "<group>"; };
@@ -1188,6 +1192,10 @@
 				887E3BA01363B0A800803DA6 /* gcnImageEffectImage.cpp */,
 				886E102F1368252E00A77847 /* gcnProgressBar.h */,
 				886E10301368252E00A77847 /* gcnProgressBar.cpp */,
+				886034081384E32700C3B63B /* gcnWidgetSwitcher.h */,
+				886034091384E6C100C3B63B /* gcnWidgetSwitcher.cpp */,
+				8860340B1384E6D500C3B63B /* gcnPanel.h */,
+				8860340C1384E6D500C3B63B /* gcnPanel.cpp */,
 			);
 			name = gcnExtend;
 			path = ../Plugins/gcnExtend;
@@ -1404,11 +1412,10 @@
 				8828BF7913143FE9002C6FA7 /* SoraASSM_Variable.h */,
 				884575D61300DB38003EC408 /* state_test.h */,
 				884575D71300DB38003EC408 /* state_test.cpp */,
-				884E91C412DEAE0100598D7E /* FolderTree.h */,
-				884E91C512DEAE0100598D7E /* FolderTree.cpp */,
 				88DD0B9012EAA708005555F6 /* SoraAS.h */,
 				88DD0B8F12EAA708005555F6 /* SoraAS.cpp */,
 				88DD0C2312EB5B66005555F6 /* tcmalloc_test.h */,
+				886035291386A6C100C3B63B /* SoraRTTI.h */,
 			);
 			name = Experimental;
 			sourceTree = "<group>";
@@ -2575,7 +2582,6 @@
 				88DCB4AE12DE914000C0B009 /* tinyxml.cpp in Sources */,
 				88DCB4AF12DE914000C0B009 /* tinyxmlerror.cpp in Sources */,
 				88DCB4B012DE914000C0B009 /* tinyxmlparser.cpp in Sources */,
-				884E91C612DEAE0100598D7E /* FolderTree.cpp in Sources */,
 				88DD59FA12E03D760081AE6C /* SoraLocalizer.cpp in Sources */,
 				88DD5A0112E040510081AE6C /* llexer.cpp in Sources */,
 				88DD0B9312EAA708005555F6 /* SoraAS.cpp in Sources */,
@@ -2741,6 +2747,8 @@
 				88C713CA137A5ADB00E0C2BB /* rftdMapEnemyCont.cpp in Sources */,
 				886030A8137EAC1F00C3B63B /* meadMainWindow.cpp in Sources */,
 				886030D7137EADDD00C3B63B /* rftdMainWindow.cpp in Sources */,
+				8860340A1384E6C100C3B63B /* gcnWidgetSwitcher.cpp in Sources */,
+				8860340D1384E6D500C3B63B /* gcnPanel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

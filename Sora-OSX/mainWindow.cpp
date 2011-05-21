@@ -81,7 +81,7 @@ void mainWindow::init() {
 	
 	pSpr = sora::SORA->createSprite(L"magicCircle.png");
 	
-	sora::SoraImageEffect* peff = new sora::IERotation(0.f, 360.f, 3.f);
+	sora::SoraImageEffect* peff = new sora::IERotation(0.f, 360.f, 3.f, sora::IMAGE_EFFECT_PINGPONG);
 	peff->setNext(new sora::IETransitions(100.f, 100.f, 200.f, 200.f, 3.f))
 		->setNext(new sora::IEColorTransitions(0x00000000, 0xFFFFFFFF, 3.f));
 	pSpr->addEffect(peff);

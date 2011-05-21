@@ -4,6 +4,19 @@
 
 namespace sora {
 		
+	SoraImageEffect::SoraImageEffect(): 
+		etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL), pnext(NULL), pprev(NULL),
+		currRepeatTimes(0), repeatTimes(0), listMode(IMAGE_EFFECT_NULL) {
+	}
+	SoraImageEffect::SoraImageEffect(CoreTransformer<CoreTransform>* transformer): 
+		t_transformer(transformer), pnext(NULL), pprev(NULL),
+		currRepeatTimes(0), repeatTimes(0), listMode(IMAGE_EFFECT_NULL) { 
+	}
+	SoraImageEffect::SoraImageEffect(IMAGE_EFFECT_MODE _mode): 
+		mode(_mode), etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL), pnext(NULL), pprev(NULL),
+		currRepeatTimes(0), repeatTimes(0), listMode(IMAGE_EFFECT_NULL) { 
+	}
+	
 	SoraImageEffect::~SoraImageEffect() {
 		if(bInternalTransformer) {
 			if(t_transformer) {
@@ -11,7 +24,15 @@ namespace sora {
 				t_transformer = 0;
 			}
 		}
-		
+	}
+	
+	void SoraImageEffect::setRepeatTimes(uint32 times) {
+		repeatTimes = times;
+		currRepeatTimes = 0;
+	}
+	
+	uint32 SoraImageEffect::getRepeatTimes() const {
+		return repeatTimes;
 	}
     
     bool SoraImageEffect::finished() const {
@@ -28,6 +49,9 @@ namespace sora {
 		started = 1;
 		paused = 0;
 		mode = _mode;
+		listMode = mode;
+		if(listMode == IMAGE_EFFECT_PINGPONG)
+			listMode = IMAGE_EFFECT_PINGPONG_INVERSE;
 		states = IMAGE_EFFECT_PLAYING;
 		startTime = pauseTime = topauseTime = 0.f;
 		t_curr = t_src;
@@ -37,12 +61,20 @@ namespace sora {
 			bInternalTransformer = true;
 		} else bInternalTransformer = false;
 	}
-
+	
+	void SoraImageEffect::restart() {
+		started = 1;
+		paused = 0;
+		states = IMAGE_EFFECT_PLAYING;
+		startTime = pauseTime = topauseTime = 0.f;
+		t_curr = t_src;
+	}
+	
 	void SoraImageEffect::stop() {
 		started = 0;
 		states = IMAGE_EFFECT_END;
 	}
-
+	
 	void SoraImageEffect::pause() {
 		paused = 1;
 		pauseTime = 0.f;
@@ -54,13 +86,13 @@ namespace sora {
 		pause();
 		topauseTime = t;
 	}
-
+	
 	void SoraImageEffect::resume() {
 		paused = 0;
 		topauseTime = 0.f;
 		states = IMAGE_EFFECT_PLAYING;
 	}
-
+	
 	float32 SoraImageEffect::getTime() {
 		if(started == 1) {
 			if(paused == 1) {
@@ -77,7 +109,7 @@ namespace sora {
 		t_transformer = transformer;
 		bInternalTransformer = false;
 	}
-
+	
 	uint32 SoraImageEffect::update(float32 delta) {
 		if(started == 1) {
 			if(paused == 1) {
@@ -88,24 +120,30 @@ namespace sora {
 				
 				return states;
 			}
-
+			
 			startTime += delta;
 			if(startTime >= effectTime) {
 				t_curr = t_dst;
 				switch(mode) {
 					case IMAGE_EFFECT_ONCE:
 						states = IMAGE_EFFECT_END;
+						t_curr = t_dst;
+						checkRepeatTimes();
 						break;
-					case IMAGE_EFFECT_REPEAT:
 						
+					case IMAGE_EFFECT_REPEAT:
 						startTime = 0.f;
 						t_curr = t_src;
+						
+						checkRepeatTimes();
 						break;
 						
 					case IMAGE_EFFECT_PINGPONG:
 						startTime = 0.f;
 						std::swap(t_src, t_dst);
 						t_curr = t_src;
+						
+						checkRepeatTimes();
 						break;
 				}
 			} else
@@ -115,23 +153,133 @@ namespace sora {
 		return states;
 	}
 	
+	void SoraImageEffect::checkRepeatTimes() {
+		// inverse and reverse
+		if(repeatTimes != 0) {
+			++currRepeatTimes;
+			if(currRepeatTimes >= mode == IMAGE_EFFECT_PINGPONG ? repeatTimes*2 : repeatTimes) {
+				repeatTimes = 0;
+				states = IMAGE_EFFECT_END;
+				
+				if(isInList())
+					checkList();
+			}
+		} else {
+			if(isInList())
+				checkList();
+		}
+	}
+	
+	SoraImageEffect* SoraImageEffect::getListHead() const {
+		const SoraImageEffect* phead = this;
+		while(phead->pprev != NULL)
+			phead = phead->pprev;
+		return (SoraImageEffect*)phead;
+	}
+	
+	SoraImageEffect* SoraImageEffect::getListTail() const {
+		const SoraImageEffect* ptail = this;
+		while(ptail->pnext != NULL)
+			ptail = ptail->pnext;
+		return (SoraImageEffect*)ptail;
+	}
+	
+	void SoraImageEffect::checkList() {
+		if(pnext != NULL) {
+			switch (listMode) {
+				case IMAGE_EFFECT_ONCE:
+					states = IMAGE_EFFECT_END;
+					break;
+					
+				case IMAGE_EFFECT_REPEAT:
+					states = IMAGE_EFFECT_TONEXT;
+					break;
+					
+				case IMAGE_EFFECT_PINGPONG_INVERSE:
+					states = IMAGE_EFFECT_TONEXT;
+					break;
+					
+				case IMAGE_EFFECT_PINGPONG_REVERSE:
+					states = IMAGE_EFFECT_TOPREV;
+					
+					if(pprev == NULL) {
+						SoraImageEffect* peff = getListHead();
+						while(peff != NULL) {
+							peff->listMode = IMAGE_EFFECT_PINGPONG_INVERSE;
+							peff = peff->pnext;
+						}
+						listMode = IMAGE_EFFECT_PINGPONG_INVERSE;
+						states = IMAGE_EFFECT_TONEXT;
+					}
+					break;
+			}
+		} else {
+			if(pprev != NULL) {
+				if(listMode == IMAGE_EFFECT_PINGPONG_INVERSE) {
+					SoraImageEffect* peff = getListHead();
+					while(peff != NULL) {
+						peff->listMode = IMAGE_EFFECT_PINGPONG_REVERSE;
+						peff = peff->pnext;
+					}
+					listMode = IMAGE_EFFECT_PINGPONG_REVERSE;
+					states = IMAGE_EFFECT_TOPREV;
+				} else if(listMode == IMAGE_EFFECT_REPEAT)
+					states = IMAGE_EFFECT_END_OF_LIST;
+			}
+		}
+		
+	}
+	
+	bool SoraImageEffect::isInList() const {
+		return pprev != NULL || pnext != NULL;
+	}
+	
+	IMAGE_EFFECT_MODE SoraImageEffect::getListMode() const {
+		return listMode;
+	}
+	
+	void SoraImageEffect::clearList() {
+		SoraImageEffect* peff = getListHead();
+		while(peff != NULL) {
+			SoraImageEffect* eff = peff;
+			peff = eff->getNext();
+			
+			delete eff;
+			eff = NULL;
+		}
+	}
+	
 	SoraImageEffect* SoraImageEffect::setNext(SoraImageEffect* nextEffect) {
+		if(nextEffect == NULL) {
+			pnext = NULL;
+			pprev = NULL;
+		}
+			
 		SoraImageEffect* tmpNext = pnext;
 		if(tmpNext != NULL) {
 			while(tmpNext->pnext != NULL) {
 				tmpNext = tmpNext->pnext;
 			}
 			tmpNext->pnext = nextEffect;
+			nextEffect->pprev = tmpNext;
 		} else {
 			pnext = nextEffect;
+			pnext->pprev = this;
 		}
+		nextEffect->listMode = this->listMode;
+		if(nextEffect->listMode == IMAGE_EFFECT_PINGPONG)
+			nextEffect->listMode = IMAGE_EFFECT_PINGPONG_INVERSE;
+		
 		return pnext;
 	}
 	
 	SoraImageEffect* SoraImageEffect::getNext() const {
 		return pnext;
 	}
-
+	
+	SoraImageEffect* SoraImageEffect::getPrev() const {
+		return pprev;
+	}
 	
 	SoraImageEffectFade::SoraImageEffectFade(float32 src, float32 dst, float32 _time, IMAGE_EFFECT_MODE _mode,
 											 CoreTransformer<CoreTransform>* transformer):

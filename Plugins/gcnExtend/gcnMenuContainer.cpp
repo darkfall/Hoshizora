@@ -69,7 +69,7 @@ namespace gcn {
 		
 		switch (alignment) {
 			case ALIGN_LEFT: bottomPosX = 0; break;
-			case ALIGN_MIDDLE: bottomPosX = (getWidth()-widget->getWidth())<<1; break;
+			case ALIGN_MIDDLE: bottomPosX = (getWidth()-widget->getWidth())>>1; break;
 			case ALIGN_RIGHT: bottomPosX = getWidth()-widget->getWidth(); break;
 		}
 		widget->setPosition(bottomPosX, bottomPosY);
