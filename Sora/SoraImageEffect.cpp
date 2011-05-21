@@ -53,6 +53,7 @@ namespace sora {
 		if(listMode == IMAGE_EFFECT_PINGPONG)
 			listMode = IMAGE_EFFECT_PINGPONG_INVERSE;
 		states = IMAGE_EFFECT_PLAYING;
+		pingpongState = 0;
 		startTime = pauseTime = topauseTime = 0.f;
 		t_curr = t_src;
 		
@@ -128,6 +129,7 @@ namespace sora {
 					case IMAGE_EFFECT_ONCE:
 						states = IMAGE_EFFECT_END;
 						t_curr = t_dst;
+						
 						checkRepeatTimes();
 						break;
 						
@@ -142,8 +144,12 @@ namespace sora {
 						startTime = 0.f;
 						std::swap(t_src, t_dst);
 						t_curr = t_src;
+						++pingpongState;
 						
-						checkRepeatTimes();
+						if(pingpongState == 2) {
+							checkRepeatTimes();
+							pingpongState = 0;
+						}
 						break;
 				}
 			} else
@@ -158,8 +164,9 @@ namespace sora {
 		if(repeatTimes != 0) {
 			++currRepeatTimes;
 			if(currRepeatTimes >= mode == IMAGE_EFFECT_PINGPONG ? repeatTimes*2 : repeatTimes) {
-				repeatTimes = 0;
+				currRepeatTimes = 0;
 				states = IMAGE_EFFECT_END;
+				started = 0;
 				
 				if(isInList())
 					checkList();

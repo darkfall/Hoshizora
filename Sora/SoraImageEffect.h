@@ -131,6 +131,8 @@ namespace sora {
 		uint32 currRepeatTimes;
 		uint32 repeatTimes;
 		
+		uint8 pingpongState;
+		
 		uint8 started;
 		uint8 paused;
 

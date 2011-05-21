@@ -275,13 +275,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>101</integer>
-									<integer>17</integer>
+									<integer>133</integer>
+									<integer>125</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 1533}, {205, 760}}</string>
+							<string>{{0, 1719}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraImageEffect.cpp</string>
+								<string>mainWindow.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraImageEffect.cpp</string>
+										<string>mainWindow.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>886038CB1387C12F00C3B63B</string>
+										<string>886038D21387C3E800C3B63B</string>
 										<key>history</key>
 										<array>
 											<string>88BFA0BD135AAEE700BB8E70</string>
@@ -736,11 +736,11 @@
 											<string>886038201387B78900C3B63B</string>
 											<string>886038341387B7DE00C3B63B</string>
 											<string>886038A51387BD0F00C3B63B</string>
-											<string>886038B11387BE0000C3B63B</string>
 											<string>886038B21387BE0000C3B63B</string>
-											<string>886038B81387BE4C00C3B63B</string>
 											<string>886038C51387C0F000C3B63B</string>
-											<string>886038C61387C0F000C3B63B</string>
+											<string>886038CF1387C3E800C3B63B</string>
+											<string>886038D01387C3E800C3B63B</string>
+											<string>886038D11387C3E800C3B63B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -938,7 +938,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>886038CC1387C12F00C3B63B</string>
 		<string>8860383F1387B7DE00C3B63B</string>
 		<string>886038401387B7DE00C3B63B</string>
 		<string>887022D01346AB4300AE8DD7</string>
