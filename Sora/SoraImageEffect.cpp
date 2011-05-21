@@ -134,10 +134,10 @@ namespace sora {
 						break;
 						
 					case IMAGE_EFFECT_REPEAT:
+						checkRepeatTimes();
+						
 						startTime = 0.f;
 						t_curr = t_src;
-						
-						checkRepeatTimes();
 						break;
 						
 					case IMAGE_EFFECT_PINGPONG:
@@ -177,6 +177,17 @@ namespace sora {
 		}
 	}
 	
+	void SoraImageEffect::setListLoopMode(IMAGE_EFFECT_MODE mode) {
+		SoraImageEffect* peff = getListHead();
+		while(peff != NULL) {
+			peff->listMode = mode;
+			if(peff->listMode == IMAGE_EFFECT_PINGPONG)
+				peff->listMode = IMAGE_EFFECT_PINGPONG_INVERSE;
+			
+			peff = peff->pnext;
+		}
+	}
+	
 	SoraImageEffect* SoraImageEffect::getListHead() const {
 		const SoraImageEffect* phead = this;
 		while(phead->pprev != NULL)
@@ -200,6 +211,7 @@ namespace sora {
 					
 				case IMAGE_EFFECT_REPEAT:
 					states = IMAGE_EFFECT_TONEXT;
+					t_curr = t_dst;
 					break;
 					
 				case IMAGE_EFFECT_PINGPONG_INVERSE:
