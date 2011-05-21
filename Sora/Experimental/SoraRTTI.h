@@ -52,6 +52,7 @@ namespace sora {
 		SoraString name;
 	};
 	
+	
 	#define REGISTER_CLASS(T, name) \
 		static T* SoraRTTIConstructor_##T() { \
 			return new T(); \
@@ -64,6 +65,8 @@ namespace sora {
 	
 	#define CONSTRUCT_CLASS(name) \
 		sora::SoraRTTIRepository::Instance()->constructClass(name); 
+	
+	
 	
 } // namespace sora
 

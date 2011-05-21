@@ -420,11 +420,14 @@ namespace sora {
 						continue;
 					} else {
 						SoraImageEffect* nexteff = (*eff)->getNext();
-						delete (*eff);
-						(*eff) = 0;
 						
 						(*eff) = nexteff;
 						if(nexteff == NULL) {
+							(*eff)->clearList();
+							
+							delete (*eff);
+							(*eff) = 0;
+							
 							eff = vEffects.erase(eff);
 							continue;
 						} else (*eff)->restart();

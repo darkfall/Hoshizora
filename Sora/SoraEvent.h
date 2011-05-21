@@ -21,13 +21,20 @@ namespace sora {
 
         void setSource(SoraEventHandler* source) { pEventSource = source; }
         SoraEventHandler* getSource() const { return pEventSource; }
-		// base event not serializable
-		virtual bool serializable() { return false; }
 		
 		void setName(stringId _name) { name = _name; }
 		stringId getName() const { return name; }
+		
+		// consume a event
+		void consume() { bConsumed = true; }
+		bool isConsumed() const { return bConsumed; }
+		
+		// base event not serializable
+		virtual bool serializable() { return false; }
         
     private:
+		bool bConsumed;
+		
 		stringId name;
         SoraEventHandler* pEventSource;
 	};
