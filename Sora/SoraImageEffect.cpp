@@ -24,6 +24,8 @@ namespace sora {
 				t_transformer = 0;
 			}
 		}
+		
+		pprev = pnext = NULL;
 	}
 	
 	void SoraImageEffect::setRepeatTimes(uint32 times) {
@@ -69,6 +71,13 @@ namespace sora {
 		states = IMAGE_EFFECT_PLAYING;
 		startTime = pauseTime = topauseTime = 0.f;
 		t_curr = t_src;
+	}
+	
+	void SoraImageEffect::swap() {
+		if(mode != IMAGE_EFFECT_PINGPONG) {
+			std::swap(t_src, t_dst);
+			t_curr = t_src;
+		}
 	}
 	
 	void SoraImageEffect::stop() {
@@ -163,7 +172,7 @@ namespace sora {
 		// inverse and reverse
 		if(repeatTimes != 0) {
 			++currRepeatTimes;
-			if(currRepeatTimes >= mode == IMAGE_EFFECT_PINGPONG ? repeatTimes*2 : repeatTimes) {
+			if(currRepeatTimes >= repeatTimes) {
 				currRepeatTimes = 0;
 				states = IMAGE_EFFECT_END;
 				started = 0;
@@ -225,6 +234,7 @@ namespace sora {
 						SoraImageEffect* peff = getListHead();
 						while(peff != NULL) {
 							peff->listMode = IMAGE_EFFECT_PINGPONG_INVERSE;
+							peff->swap();
 							peff = peff->pnext;
 						}
 						listMode = IMAGE_EFFECT_PINGPONG_INVERSE;
@@ -238,6 +248,7 @@ namespace sora {
 					SoraImageEffect* peff = getListHead();
 					while(peff != NULL) {
 						peff->listMode = IMAGE_EFFECT_PINGPONG_REVERSE;
+						peff->swap();
 						peff = peff->pnext;
 					}
 					listMode = IMAGE_EFFECT_PINGPONG_REVERSE;
@@ -260,9 +271,14 @@ namespace sora {
 	void SoraImageEffect::clearList() {
 		SoraImageEffect* peff = getListHead();
 		while(peff != NULL) {
+			if(peff == this) {
+				peff = peff->getNext();
+				continue;
+			}
+			
 			SoraImageEffect* eff = peff;
 			peff = eff->getNext();
-			
+
 			delete eff;
 			eff = NULL;
 		}

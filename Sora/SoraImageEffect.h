@@ -106,11 +106,12 @@ namespace sora {
 		SoraImageEffect* getListHead() const;
 		SoraImageEffect* getListTail() const;
 		
-		void setListLoopMode(IMAGE_EFFECT_MODE mode)
+		void setListLoopMode(IMAGE_EFFECT_MODE mode);
 		IMAGE_EFFECT_MODE getListMode() const;
 		
 		void clearList();
 		bool isInList() const;
+		void swap();
 				
 	protected:
 		void checkList();
