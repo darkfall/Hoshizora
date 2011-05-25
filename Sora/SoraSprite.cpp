@@ -230,7 +230,7 @@ namespace sora {
         SORA->textureUnlock((HSORASPRITE)quad.tex);
     }
 
-	const hgeRect& SoraSprite::getTextureRect() const {
+	hgeRect SoraSprite::getTextureRect() const {
 		return textureRect;
 	}
 

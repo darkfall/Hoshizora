@@ -41,20 +41,8 @@
 #include "../ReflectionTD/rftdMainWindow.h"
 
 
-class myClass {
-public:
-	myClass() {
-		std::cout<<"Foo:::"<<std::endl;
-	}
-};
-
-REGISTER_CLASS(myClass, "myClass");
-
-
 int main(int argc, char* argv[]) {
-	
-	myClass* newClass = (myClass*)CONSTRUCT_CLASS("myClass");
-	
+
 	
 	sora::SoraCore* sora = sora::SoraCore::Instance();
 	sora->registerRenderSystem(new sora::SoraOGLRenderer);
@@ -70,7 +58,6 @@ int main(int argc, char* argv[]) {
 	}
 	sora->attachResourcePack(res);
 	
-	sora->setFPS(999);
 	sora->createWindow(new mainWindow);
 	sora->start();
 		

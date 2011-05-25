@@ -46,6 +46,9 @@ bool mainWindow::updateFunc() {
 	
 	}
 	
+	ps->update(sora::SORA->getDelta());
+
+	
     return false;
 }
 
@@ -55,9 +58,16 @@ bool mainWindow::renderFunc() {
 //	sora::GCN_GLOBAL->gcnLogic();
 //	sora::GCN_GLOBAL->gcnDraw();
 		
-	//pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
-	pSpr->update(sora::SORA->getDelta());
-	pSpr->render();
+	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
+	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"NUM: %d", ps->getLiveParticle());
+
+//	pSpr->update(sora::SORA->getDelta());
+//	pSpr->render();
+	
+	float mx, my;
+	sora::SORA->getMousePos(&mx, &my);
+	ps->moveTo(mx, my, 0.f);
+	ps->render();
 //	pSpr->render4V(256.f, 128.f, 256.f, 256.f, 376.f, 256.f, 376.f, 128.f);
 /*	pSpr2->update(sora::SORA->getDelta());
 	pSpr2->render(0.f, -128.f);*/
@@ -74,22 +84,21 @@ bool mainWindow::renderFunc() {
 }
 
 void mainWindow::init() {
-    sora::SORA->setFPS(60);
-
+    sora::SORA->setFPS(120);
+	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
+	
 	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 20);
 	pFont->setColor(0xFFFFCC00);
 	
-	pSpr = sora::SORA->createSprite(L"magicCircle.png");
-	
-	sora::SoraImageEffect* peff = new sora::IERotation(0.f, sora::DGR_RAD(360), 3.f);
-	peff->setNext(new sora::IETransitions(100.f, 100.f, 200.f, 200.f, 3.f))
-		->setNext(new sora::IEColorTransitions(0xFFFFFFFF, 0x0, 3.f, sora::IMAGE_EFFECT_PINGPONG));
-	peff->setListLoopMode(sora::IMAGE_EFFECT_PINGPONG);
-	pSpr->addEffect(peff);
+	pSpr = sora::SORA->createSprite(L"pics/particles.png");
 	
 	if(sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 20) ) {
 		sora::GCN_GLOBAL->createTop();
 	}
+	
+	ps = new sora::SoraParticleSystem;
+	ps->emit(L"Default.sps", pSpr);
+	ps->fire();
 }
 
 void mainWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {

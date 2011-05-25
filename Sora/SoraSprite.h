@@ -8,6 +8,8 @@
 #include "SoraImageEffect.h"
 #include "SoraObject.h"
 #include "SoraShader.h"
+#include "RTTI/SoraRTTI.h"
+
 #include <list>
 
 namespace sora {
@@ -58,7 +60,7 @@ namespace sora {
 		void setTexture(HSORATEXTURE tex);
 		
 		void setTextureRect(float32 x, float32 y, float32 width, float32 height);
-		const hgeRect& getTextureRect() const;
+		hgeRect getTextureRect() const;
 		
 		void setColor(ulong32 c, int32 i=-1);
 		ulong32 getColor(int32 i=0) const;
@@ -109,7 +111,7 @@ namespace sora {
         SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);
         bool hasShader() const;
         void clearShader();
-        
+		
 	protected:
        
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);

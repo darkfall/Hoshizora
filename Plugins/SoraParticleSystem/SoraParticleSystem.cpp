@@ -218,7 +218,7 @@ namespace sora {
 		fToEmitTime += dt;
 		if(pheader.fEmitDuration == 0.f) {
 			if(fToEmitTime > 1.f / pheader.nEmitNum) {
-				for(int i=0; i<(int)(fToEmitTime * pheader.nEmitNum); ++i) {
+				for(int i=0; i<(int)(fToEmitTime * pheader.nEmitNum + 0.5f); ++i) {
 					emitParticle();
 				}
 				fToEmitTime = 0.f;
