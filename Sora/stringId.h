@@ -62,7 +62,7 @@ namespace sora {
 			std::wstring str = strings[sid];
 			if(str.size() != 0)
 				return str;
-			return L"\0";
+			return L"???\0";
 		}
 		
 		inline SoraString getStringById(stringId sid) {
@@ -70,7 +70,7 @@ namespace sora {
 			std::string str = ws2s(strings[sid]);
 			if(str.size() != 0)
 				return str;
-			return "\0";
+			return "???\0";
 		}
 		
 	private:

@@ -14,12 +14,13 @@ namespace sora {
     SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h): shaderContext(NULL) {
         _init((SoraTexture*)tex, x, y, w, h);
 		_initDefaults();
+		setTextureRect(x, y, w, h);
     }
     
     void SoraSprite::_init(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
         float texx1, texy1, texx2, texy2;
 		
-		textureRect.x1 = 0.f; textureRect.y1 = 0.f;
+		textureRect.x1 = x; textureRect.y1 = y;
 		if(tex) {
 			textureRect.x2 = width; textureRect.y2 = height;
 		} else {
@@ -40,17 +41,20 @@ namespace sora {
 		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
 		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
 		
-        sprWidth = texture!=NULL?texture->mOriginalWidth:1;
-        sprHeight = texture!=NULL?texture->mOriginalHeight:1;
+        sprWidth = texture!=NULL?texture->mTextureWidth:1;
+        sprHeight = texture!=NULL?texture->mTextureHeight:1;
 		
 		shaderContext = NULL;
+		
+		if(texture)
+			setName(SoraTextureMap::Instance()->getTextureName((HSORATEXTURE)tex));
     }
 
 	SoraSprite::~SoraSprite() {
 		clearEffects();
         clearShader();
 	//	if(texture) delete texture;
-		SoraTextureMap::Instance()->decRf((HSORATEXTURE)texture);
+	//	SoraTextureMap::Instance()->decRf((HSORATEXTURE)texture);
 	}
 
 	void SoraSprite::setTexture(HSORATEXTURE tex) {
@@ -191,14 +195,14 @@ namespace sora {
             sora->detachShaderContext();
 	}
 
-	void SoraSprite::setColor(ulong32 c, int32 i) {
+	void SoraSprite::setColor(uint32 c, int32 i) {
 		if(i != -1)
 			quad.v[i].col = c;
 		else
 			quad.v[0].col = quad.v[1].col = quad.v[2].col = quad.v[3].col = c;
 	}
 
-	ulong32 SoraSprite::getColor(int32 i)  const{
+	uint32 SoraSprite::getColor(int32 i)  const{
 		return quad.v[i].col;
 	}
 	
@@ -221,7 +225,7 @@ namespace sora {
 		return quad.blend;
 	}
 
-	ulong32* SoraSprite::getPixelData() const {
+	uint32* SoraSprite::getPixelData() const {
 		return SORA->textureLock((HSORATEXTURE)quad.tex);
 		return 0;
 	}

@@ -50,11 +50,11 @@ namespace sora {
 		SoraTexture* createTextureFromMem(void* ptr, ulong32 size, bool bMipmap=false);
 		SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h);
 
-		ulong32*	 textureLock(SoraTexture*);
+		uint32*		 textureLock(SoraTexture*);
 		void		 textureUnlock(SoraTexture*);
 		void		 releaseTexture(SoraTexture* tex);
 
-		void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, DWORD color=0xFFFFFFFF, float32 z=0.5f);
+		void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, uint32 color=0xFFFFFFFF, float32 z=0.5f);
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
 
@@ -74,6 +74,7 @@ namespace sora {
 		ulong32 getVideoDeviceHandle();
 
 		void flush();
+		void flushTrip();
         
         void snapshot(const SoraString& path);
 

@@ -216,7 +216,7 @@ namespace sora{
 		return 0;
 	}
 
-	ulong32* SoraHGERenderer::textureLock(SoraTexture* ht) {
+	uint32* SoraHGERenderer::textureLock(SoraTexture* ht) {
 		return pHGE->Texture_Lock(ht->mTextureID, false, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight);
 	}
 
@@ -272,7 +272,7 @@ namespace sora{
 		return pHGE->System_GetState(HGE_ACTIVE);
 	}
 
-	void SoraHGERenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, DWORD color, float32 z) {
+	void SoraHGERenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
 		//pHGE->Gfx_RenderLine(x1, y1, x2, y2);
 		Rect4V rect;
 

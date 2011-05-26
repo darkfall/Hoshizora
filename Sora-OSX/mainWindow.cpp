@@ -27,6 +27,7 @@
 
 #include "SoraLua/SoraLuaExport.h"
 
+#include "SoraPNGOps/SoraCompressedTexture.h"
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
@@ -64,10 +65,17 @@ bool mainWindow::renderFunc() {
 //	pSpr->update(sora::SORA->getDelta());
 //	pSpr->render();
 	
-	float mx, my;
-	sora::SORA->getMousePos(&mx, &my);
-	ps->moveTo(mx, my, 0.f);
+//	float mx, my;
+//	sora::SORA->getMousePos(&mx, &my);
+//	ps->moveTo(mx, my, 0.f);
 	ps->render();
+	
+	p1->render(0.f, 0.f);
+	//p2->render(0.f, 100.f);
+	//p3->render(0.f, 200.f);
+	
+	hgeRect bb = ps->getBoundingBox();
+	sora::SORA->renderBox(bb.x1, bb.y1, bb.x2, bb.y2, 0xFFFFFFFF);
 //	pSpr->render4V(256.f, 128.f, 256.f, 256.f, 376.f, 256.f, 376.f, 128.f);
 /*	pSpr2->update(sora::SORA->getDelta());
 	pSpr2->render(0.f, -128.f);*/
@@ -84,7 +92,7 @@ bool mainWindow::renderFunc() {
 }
 
 void mainWindow::init() {
-    sora::SORA->setFPS(120);
+    sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	
 	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 20);
@@ -96,8 +104,10 @@ void mainWindow::init() {
 		sora::GCN_GLOBAL->createTop();
 	}
 	
+	//sora::SoraPNGOptimizer::optimizePNGFromAndWriteToFile(L"titlebg.png", L"titlebg_optd.png");
+	
 	ps = new sora::SoraParticleSystem;
-	ps->emit(L"Default.sps", pSpr);
+	ps->emit(L"astar.sps", pSpr, getWindowWidth()/2, getWindowHeight()/2);
 	ps->fire();
 }
 

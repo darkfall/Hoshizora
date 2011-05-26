@@ -26,13 +26,13 @@ namespace sora {
 class SoraColorRGBA {
 public:
 	SoraColorRGBA(float32 _r, float32 _g, float32 _b, float32 _a):r(_r), g(_g), b(_b), a(_a) {}
-	SoraColorRGBA(DWORD col) { *this = col; }
+	SoraColorRGBA(uint32 col) { *this = col; }
 	SoraColorRGBA():r(1.f), g(1.f), b(1.f), a(1.f) {}
 
 	void Set(float32 _r, float32 _g, float32 _b, float32 _a) { r = _r; g = _g; b = _b; a = _a; }
 	
 	SoraColorRGBA operator = (const SoraColorRGBA& rhs)		{r = rhs.r; g = rhs.g; b = rhs.b; a = rhs.a; return *this; }
-	SoraColorRGBA operator = (DWORD col)					{a = (col>>24)/255.0f; r = ((col>>16) & 0xFF)/255.0f; g = ((col>>8) & 0xFF)/255.0f; b = (col & 0xFF)/255.0f; return *this; }
+	SoraColorRGBA operator = (uint32 col)					{a = (col>>24)/255.0f; r = ((col>>16) & 0xFF)/255.0f; g = ((col>>8) & 0xFF)/255.0f; b = (col & 0xFF)/255.0f; return *this; }
 	
 	SoraColorRGBA& operator += (const SoraColorRGBA& rhs) {r += rhs.r; g += rhs.g; b += rhs.b; a += rhs.a; return *this; }
 	SoraColorRGBA& operator -= (const SoraColorRGBA& rhs) {r -= rhs.r; g -= rhs.g; b -= rhs.b; a -= rhs.a; return *this; }
@@ -60,7 +60,7 @@ public:
 	bool operator != (const SoraColorRGBA& rhs)	{return (r!=rhs.r || g!=rhs.g && b!=rhs.b && a!=rhs.a); }
 
 	unsigned long GetHWColor() const { return ((unsigned long)(a*255.0f)<<24) + ((unsigned long)(r*255.0f)<<16) + ((unsigned long)(g*255.0f)<<8) + (unsigned long)(b*255.0f); }
-	static DWORD GetHWColor(float32 oR, float32 og, float32 ob, float32 oa)  { return ((unsigned long)(oa*255.0f)<<24) + ((unsigned long)(oR*255.0f)<<16) + ((unsigned long)(og*255.0f)<<8) + (unsigned long)(ob*255.0f); }
+	static uint32 GetHWColor(float32 oR, float32 og, float32 ob, float32 oa)  { return ((unsigned long)(oa*255.0f)<<24) + ((unsigned long)(oR*255.0f)<<16) + ((unsigned long)(og*255.0f)<<8) + (unsigned long)(ob*255.0f); }
 
 	
 	SoraColorRGBA Normalize() {if(r<0.f) r=-r; if(g<0.f) g=-g; if(b<0.f) b=-b; if(a<0.f) a=-a; if(r>1.f) r=1.f; if(g>1.f) g=1.f; if(b>1.f) b=1.f; if(a>1.f) a=1.f; return *this; }

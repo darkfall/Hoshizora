@@ -28,7 +28,7 @@ namespace sora {
 		pheader = header;
 		pSprite = pSpr;
 		core = SoraCore::Instance();
-		if(x != 0.f && y != 0.f) {
+		if(x != 0.f || y != 0.f) {
 			pheader.emitPos.x = x;
 			pheader.emitPos.y = y;
 			pheader.emitPos.z = z;
@@ -41,7 +41,7 @@ namespace sora {
 		_parseScript(str);
 		pSprite = pSpr;
 		core = SoraCore::Instance();
-		if(x != 0.f && y != 0.f && z != 0.f) {
+		if(x != 0.f || y != 0.f || z != 0.f) {
 			pheader.emitPos.x = x;
 			pheader.emitPos.y = y;
 			pheader.emitPos.z = z;
@@ -70,7 +70,7 @@ namespace sora {
 		_parseScript(str);
 		pSprite = pSpr;
 	
-		if(x != 0.f && y != 0.f && z != 0.f) {
+		if(x != 0.f || y != 0.f || z != 0.f) {
 			pheader.emitPos.x = x;
 			pheader.emitPos.y = y;
 			pheader.emitPos.z = z;
@@ -83,7 +83,7 @@ namespace sora {
 		pheader = header;
 		pSprite = pSpr;
 		
-		if(x != 0.f && y != 0.f && z != 0.f) {
+		if(x != 0.f || y != 0.f || z != 0.f) {
 			pheader.emitPos.x = x;
 			pheader.emitPos.y = y;
 			pheader.emitPos.z = z;
@@ -96,16 +96,26 @@ namespace sora {
 		pSprite->setCenter((float32)pSprite->getSpriteWidth()/2, (float32)pSprite->getSpriteHeight()/2);
 		pSprite->setBlendMode(pheader.blendMode);
 		pSprite->setTextureRect(pheader.texX, pheader.texY, pheader.texW, pheader.texH);
-		fCurrEmitTime = 0.f;
-		fToEmitTime = 0.f;
+		
 		if(pheader.emitPos.z > MAX_DISTANCE) pheader.emitPos.z = MAX_DISTANCE;
 		else if(pheader.emitPos.z < 0.f) pheader.emitPos.z = 0.f;
+		
 		particles.clear();
+		
+		hrBoundingBox.Set(pheader.emitPos.x-pSprite->getTextureWidth()/2*pheader.fMaxStartScale, 
+						  pheader.emitPos.y-pSprite->getTextureHeight()/2*pheader.fMaxStartScale, 
+						  pheader.emitPos.x+pSprite->getTextureWidth()/2*pheader.fMaxStartScale, 
+						  pheader.emitPos.y+pSprite->getTextureHeight()/2*pheader.fMaxStartScale);
+		
 		bActive = true;
 		bRotate3v = false;
+		bZDepth = false;
+		
+		fCurrEmitTime = 0.f;
+		fToEmitTime = 0.f;
+		
 		fMaxDistance = MAX_DISTANCE;
 		
-		bZDepth = false;
 		z = 0.f;
 	}
 
@@ -165,6 +175,8 @@ namespace sora {
 					if( p->fGravity != 0.f ) {
 						p->direction.y += p->fGravity*dt;
                         p->direction.normalize();
+						if(p->fSpeed == 0.f)
+							p->fSpeed += p->fGravity*dt;
 					}
 						
 					if(p->fLinearAcc != 0.f) {
@@ -180,6 +192,15 @@ namespace sora {
 						p->position.x += cosf(p->fAngle) * p->fSpeed;
 						p->position.y += sinf(p->fAngle) * p->fSpeed;
 					}
+					
+					if(p->position.x < hrBoundingBox.x1)
+						hrBoundingBox.x1 = p->position.x-pSprite->getTextureWidth()/2*p->fCurrScale;
+					else if(p->position.x > hrBoundingBox.x2)
+						hrBoundingBox.x2 = p->position.x+pSprite->getTextureWidth()/2*p->fCurrScale;
+					if(p->position.y < hrBoundingBox.y1)
+						hrBoundingBox.y1 = p->position.y-pSprite->getTextureHeight()/2*p->fCurrScale;
+					else if(p->position.y > hrBoundingBox.y2)
+						hrBoundingBox.y2 = p->position.y+pSprite->getTextureHeight()/2*p->fCurrScale;
 					
 					p->fAngle += p->fSpin * dt;
 					p->fCurrScale += p->fScaleVar * dt;
@@ -310,7 +331,7 @@ namespace sora {
 		if(pSprite) pSprite->setBlendMode(mode);
 	}
 
-	int32 SoraParticleSystem::getBlendMode() {
+	int32 SoraParticleSystem::getBlendMode() const {
 		return pheader.blendMode;
 	}
 	

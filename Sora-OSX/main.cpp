@@ -35,8 +35,6 @@
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
 
-#include "Experimental/SoraRTTI.h"
-
 #include "../mead/meadMainWindow.h"
 #include "../ReflectionTD/rftdMainWindow.h"
 

@@ -105,6 +105,29 @@ namespace sora {
 			return (getApplicationPath() + L"/" + file);
 		}
 		
+		// get file name from path
+		static SoraWString getFileName(const SoraWString& file) {
+			SoraWString op = file;
+			for(size_t i=0; i<op.size(); ++i)
+				if(op[i] == L'\\')
+					op[i] = L'/';
+			size_t rspos = op.rfind(L"/");
+			if(rspos != SoraWString::npos)
+				op.erase(0, rspos+1);
+			return op;
+		}
+		
+		static SoraString getFileName(const SoraString& file) {
+			SoraString op = file;
+			for(size_t i=0; i<op.size(); ++i)
+				if(op[i] == '\\')
+					op[i] = '/';
+			size_t rspos = op.rfind("/");
+			if(rspos != SoraString::npos)
+				op.erase(0, rspos+1);
+			return op;
+		}
+		
 		static void* readFile(const char* pstrFilePath, ulong32& size) {
 			FILE* file = fopen(pstrFilePath, "rb");
 			if(file) {
@@ -130,7 +153,7 @@ namespace sora {
 		}
 
 		
-		static void* readFiles(const char* pstrFile, ulong32 size) {
+		static void* readFileWithSize(const char* pstrFile, ulong32 size) {
 			FILE* file = fopen(pstrFile, "rb");
 			if(file) {
 				void* buffer = malloc(size);

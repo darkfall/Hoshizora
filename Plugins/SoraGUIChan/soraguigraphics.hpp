@@ -67,7 +67,7 @@ namespace gcn
         sora::SoraCore* sora;
 
 		Color mColor;
-        DWORD mHardwareColor;
+        uint32 mHardwareColor;
         bool mClipNull;
     };
 }

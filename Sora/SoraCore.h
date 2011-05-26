@@ -72,8 +72,12 @@ namespace sora {
 		HSORATEXTURE SORACALL createTextureWH(int32 w, int32 h);
 		HSORATEXTURE SORACALL createTextureFromRawData(uint32* data, int32 w, int32 h);
 		HSORATEXTURE SORACALL createTextureFromMem(void* data, ulong32 size);
-		ulong32*	 SORACALL textureLock(HSORATEXTURE);
+		uint32*		 SORACALL textureLock(HSORATEXTURE);
         void		 SORACALL textureUnlock(HSORATEXTURE);
+		int32		 SORACALL getTextureWidth(HSORATEXTURE, bool origin=false);
+		int32		 SORACALL getTextureHeight(HSORATEXTURE, bool origin=false);
+		// depends on render system, may have different meaning
+		ulong32		 SORACALL getTextureId(HSORATEXTURE);
 		void		 SORACALL releaseTexture(HSORATEXTURE pTexture);
         void         SORACALL clearTextureMap();
 
@@ -88,7 +92,8 @@ namespace sora {
 		void SORACALL renderQuad(SoraQuad& quad);
 		void SORACALL renderTriple(SoraTriple& trip);
 
-		void SORACALL renderRect		(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, DWORD color=0xFFFFFFFF, float32 z=0.0f);
+		void SORACALL renderRect	(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, ulong32 color=0xFFFFFFFF, float32 z=0.0f);
+		void SORACALL renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, ulong32 color, float32 z=0.f);
 		void SORACALL setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void SORACALL setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
 		void SORACALL setTransformWindowSize (float32 w, float32 h);

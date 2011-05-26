@@ -147,17 +147,17 @@ namespace sora {
 
 		void killAll();
 
-		bool isActive() { return bActive; }
+		bool isActive() const { return bActive; }
 
 		void saveScript(const SoraWString& script);
-		int32 getLiveParticle() { return particles.size(); }
+		int32 getLiveParticle() const { return particles.size(); }
 		
 		void setBlendMode(int32 mode);
-		int32 getBlendMode();
+		int32 getBlendMode() const;
 
 		void rotate(float32 roll, float32 pitch, float32 yaw);
-		
-		inline void emitParticle();
+				
+		hgeRect getBoundingBox() const { return hrBoundingBox; }
 		
 		/* effector */
 		/*
@@ -165,10 +165,11 @@ namespace sora {
 		 */
 		void addEffector(SoraParticleEffector* effector);
 		void removeEffector(SoraParticleEffector* effector);
-
+		
 		SoraParticleHeader pheader;
 
 	private:
+		inline void emitParticle();
 		inline void init();
 		
 		SoraParticleSystem(const SoraParticleSystem&);
@@ -194,6 +195,8 @@ namespace sora {
 		
 		bool bRotate3v;
 		quaternion quatRotation;
+		
+		hgeRect hrBoundingBox;
 		
 		SoraCore* core;
 	};

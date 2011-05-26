@@ -389,6 +389,21 @@ namespace sora{
         //    glFlush();
 		}
 	}
+	
+	void SoraOGLRenderer::flushTrip() {
+		if(mVertexCount > 0) {
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glEnableClientState(GL_COLOR_ARRAY);
+			
+			glVertexPointer(3, GL_FLOAT, 0, mVertices);
+			glTexCoordPointer(2, GL_FLOAT, 0, mUVs);
+			
+			glColorPointer (4, GL_UNSIGNED_BYTE, 0, mColors);
+			glDrawArrays(GL_TRIANGLES, 0, mVertexCount);
+			mVertexCount = 0;
+		}
+	}
 
 	SoraTexture* SoraOGLRenderer::createTexture(const SoraWString& sTexturePath, bool bMipmap) {
 		// to do
@@ -458,8 +473,8 @@ namespace sora{
 		return tex;
 	}
 
-	ulong32* SoraOGLRenderer::textureLock(SoraTexture* ht) {
-		ht->dataRef.texData = new ulong32[ht->mOriginalWidth * ht->mOriginalHeight];
+	uint32* SoraOGLRenderer::textureLock(SoraTexture* ht) {
+		ht->dataRef.texData = new uint32[ht->mOriginalWidth * ht->mOriginalHeight];
 		memset(ht->dataRef.texData, 0, ht->mOriginalWidth * ht->mOriginalHeight);
 		if(ht->dataRef.texData) {
             glEnable(GL_TEXTURE_2D);
@@ -476,7 +491,7 @@ namespace sora{
             }
 
             glBindTexture(GL_TEXTURE_2D, PreviousTexture);
-			return (ulong32*)ht->dataRef.texData;
+			return (uint32*)ht->dataRef.texData;
 		}
 		return 0;
 	}
@@ -494,7 +509,7 @@ namespace sora{
 
             glBindTexture(GL_TEXTURE_2D, PreviousTexture);
 
-			delete ht->dataRef.texData;
+			delete[] ht->dataRef.texData;
 			ht->dataRef.texData = 0;
 		}
 
@@ -517,7 +532,7 @@ namespace sora{
 			//glBindTexture(GL_TEXTURE_2D, quad.tex->mTextureID);
 			bindTexture(trip.tex);
 		} else {
-            flush();
+            flushTrip();
             bindTexture(0);
         }
 		_glSetBlendMode(trip.blend);
@@ -541,7 +556,7 @@ namespace sora{
 		};
 
 		if (mVertexCount >= MAX_VERTEX_BUFFER-3)
-			flush();
+			flushTrip();
 
 		int u = 0;
 		int idx = 0;
@@ -564,11 +579,11 @@ namespace sora{
 		if(currShader) {
 			if(!currShader->attachShaderList())
 				SoraCore::Instance()->log("SoraOGLRenderer: error attaching shader list");
-			flush();
+			flushTrip();
 		}
 
 		if(!trip.tex)
-			flush();
+			flushTrip();
 
 	}
 
@@ -662,7 +677,7 @@ namespace sora{
 		return true;
 	}
 
-	void SoraOGLRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, DWORD color, float32 z) {
+	void SoraOGLRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
 		Rect4V rect;
 
 		if(fWidth != y2-y1 && fWidth != x2-x1) {

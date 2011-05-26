@@ -31,7 +31,7 @@ namespace sora {
 	struct SoraVertex {
 		float			x, y;		// screen position    
 		float			z;			// Z-buffer depth 0..1
-		ulong32			col;		// color
+		uint32			col;		// color
 		float			tx, ty;		// texture coordinates
 	};
 	
@@ -62,8 +62,8 @@ namespace sora {
 		void setTextureRect(float32 x, float32 y, float32 width, float32 height);
 		hgeRect getTextureRect() const;
 		
-		void setColor(ulong32 c, int32 i=-1);
-		ulong32 getColor(int32 i=0) const;
+		void setColor(uint32 c, int32 i=-1);
+		uint32 getColor(int32 i=0) const;
 
 		void setZ(float32 z, int32 i=-1);
 		float32 getZ(int32 i=0) const;
@@ -96,7 +96,7 @@ namespace sora {
 		void setRotationZ(float32 rz);
 		float32 getRotationZ() const;
 
-		ulong32* getPixelData() const;
+		uint32* getPixelData() const;
         void unlockPixelData();
 		HSORATEXTURE getTexture() const;
 		

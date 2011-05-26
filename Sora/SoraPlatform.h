@@ -112,7 +112,7 @@ typedef		double			double32;
 typedef		long			long32;
 typedef		unsigned long	ulong32;
 
-typedef unsigned long       DWORD, ULONG;
+typedef unsigned long       ULONG, ulong;
 typedef unsigned short      WORD;
 typedef unsigned char       BYTE;
 typedef unsigned int		UINT;
