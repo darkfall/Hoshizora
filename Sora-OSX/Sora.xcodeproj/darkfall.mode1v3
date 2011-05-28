@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>884530911390F22D0045D130</string>
+						<string>884530961390F3890045D130</string>
 						<key>history</key>
 						<array>
 							<string>88452D2C138F9F870045D130</string>
@@ -271,6 +271,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -321,14 +323,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>76</integer>
-									<integer>75</integer>
-									<integer>72</integer>
+									<integer>190</integer>
+									<integer>188</integer>
+									<integer>183</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 772}, {205, 760}}</string>
+							<string>{{0, 2776}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -358,14 +360,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraINIFile.cpp</string>
+								<string>editorWindow.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -373,11 +373,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraINIFile.cpp</string>
+										<string>editorWindow.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>884530901390F22D0045D130</string>
+										<string>884530951390F3890045D130</string>
 										<key>history</key>
 										<array>
 											<string>88BFA0BD135AAEE700BB8E70</string>
@@ -835,14 +835,14 @@
 											<string>88452F581390E5140045D130</string>
 											<string>88452F601390E58B0045D130</string>
 											<string>88452F761390E71A0045D130</string>
-											<string>88452FB41390ECD80045D130</string>
 											<string>88452FE31390EE9D0045D130</string>
 											<string>88452FFA1390EEDC0045D130</string>
 											<string>884530041390EEE80045D130</string>
 											<string>884530731390F1D40045D130</string>
-											<string>884530821390F20B0045D130</string>
 											<string>884530831390F20B0045D130</string>
-											<string>884530721390F1D40045D130</string>
+											<string>884530921390F3890045D130</string>
+											<string>884530931390F3890045D130</string>
+											<string>884530941390F3890045D130</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

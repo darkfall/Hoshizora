@@ -776,6 +776,11 @@
 			8845308F1390F2280045D130 /* PBXTextBookmark */ = 8845308F1390F2280045D130 /* PBXTextBookmark */;
 			884530901390F22D0045D130 /* PBXTextBookmark */ = 884530901390F22D0045D130 /* PBXTextBookmark */;
 			884530911390F22D0045D130 /* PBXTextBookmark */ = 884530911390F22D0045D130 /* PBXTextBookmark */;
+			884530921390F3890045D130 /* PBXTextBookmark */ = 884530921390F3890045D130 /* PBXTextBookmark */;
+			884530931390F3890045D130 /* PBXTextBookmark */ = 884530931390F3890045D130 /* PBXTextBookmark */;
+			884530941390F3890045D130 /* PBXTextBookmark */ = 884530941390F3890045D130 /* PBXTextBookmark */;
+			884530951390F3890045D130 /* PBXTextBookmark */ = 884530951390F3890045D130 /* PBXTextBookmark */;
+			884530961390F3890045D130 /* PBXTextBookmark */ = 884530961390F3890045D130 /* PBXTextBookmark */;
 			8851F792135FAE4700091C9C = 8851F792135FAE4700091C9C /* PBXTextBookmark */;
 			8860303E137E330100C3B63B = 8860303E137E330100C3B63B /* PBXTextBookmark */;
 			88603044137E334800C3B63B = 88603044137E334800C3B63B /* PBXTextBookmark */;
@@ -1479,9 +1484,9 @@
 	};
 	8839FFA51319FCD500CC101A /* peMainWindow.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1428}}";
-			sepNavSelRange = "{763, 0}";
-			sepNavVisRange = "{451, 1226}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1484}}";
+			sepNavSelRange = "{806, 0}";
+			sepNavVisRange = "{62, 1250}";
 		};
 	};
 	8839FFBE1319FE4700CC101A /* guichansetup.h */ = {
@@ -7546,6 +7551,56 @@
 		vrLoc = 1339;
 	};
 	884530911390F22D0045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88452D0C138F9B850045D130 /* CloseModifier.h */;
+		name = "CloseModifier.h: 48";
+		rLen = 32;
+		rLoc = 827;
+		rType = 0;
+		vrLen = 820;
+		vrLoc = 0;
+	};
+	884530921390F3890045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88E3384C136A7AB7000B67C8 /* SoraINIFile.cpp */;
+		name = "SoraINIFile.cpp: 86";
+		rLen = 0;
+		rLoc = 1680;
+		rType = 0;
+		vrLen = 1527;
+		vrLoc = 1339;
+	};
+	884530931390F3890045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8839FFA51319FCD500CC101A /* peMainWindow.h */;
+		name = "peMainWindow.h: 28";
+		rLen = 0;
+		rLoc = 806;
+		rType = 0;
+		vrLen = 1250;
+		vrLoc = 62;
+	};
+	884530941390F3890045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EF131A096700CC101A /* editorWindow.h */;
+		name = "editorWindow.h: 31";
+		rLen = 0;
+		rLoc = 660;
+		rType = 0;
+		vrLen = 674;
+		vrLoc = 0;
+	};
+	884530951390F3890045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EF131A096700CC101A /* editorWindow.h */;
+		name = "editorWindow.h: 31";
+		rLen = 0;
+		rLoc = 660;
+		rType = 0;
+		vrLen = 674;
+		vrLoc = 0;
+	};
+	884530961390F3890045D130 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 88452D0C138F9B850045D130 /* CloseModifier.h */;
 		name = "CloseModifier.h: 48";
