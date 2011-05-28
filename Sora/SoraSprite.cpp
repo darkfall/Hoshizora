@@ -341,9 +341,6 @@ namespace sora {
 		IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
 		while(eff != vEffects.end()) {
 			if((*eff) == _eff) {
-				if((*eff)->isInList()) {
-					(*eff)->clearList();
-				}
 				delete _eff;
 				_eff = 0;
 				eff = vEffects.erase(eff);
@@ -364,9 +361,6 @@ namespace sora {
 	void SoraSprite::clearEffects() {
 		IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
 		while(eff != vEffects.end()) {
-			if((*eff)->isInList()) {
-				(*eff)->clearList();
-			}
 			if((*eff) != NULL) {
 				delete (*eff);
 				(*eff) = 0;
@@ -381,78 +375,15 @@ namespace sora {
 			IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
 			while(eff != vEffects.end()) {
 				uint32 result = (*eff)->update(dt);
-				switch((*eff)->getType()) {
-					case IMAGE_EFFECT_FADEIN:
-					case IMAGE_EFFECT_FADEOUT:
-						setColor(CSETA(getColor(), (*eff)->get1st()*255));
-						break;
-						
-					case IMAGE_EFFECT_TRANSITIONS:
-						setPosition((*eff)->get1st(), (*eff)->get2nd());
-						break;
-						
-					case IMAGE_EFFECT_TRANSITIONS_Z:
-						setPosition((*eff)->get1st(), (*eff)->get2nd());
-						setZ((*eff)->get3rd());
-						break;
-						
-					case IMAGE_EFFECT_TENSILE:
-					case IMAGE_EFFECT_SCALEIN:
-					case IMAGE_EFFECT_SCALEOUT:
-						setScale((*eff)->get1st(), (*eff)->get2nd());
-						break;
-						
-					case IMAGE_EFFECT_COLOR_TRANSITION:
-						setColor(SoraColorRGBA::GetHWColor((*eff)->get1st(), (*eff)->get2nd(), (*eff)->get3rd(), (*eff)->get4th()));
-						break;
-						
-					case IMAGE_EFFECT_ROTATE:
-						setRotation((*eff)->get1st());
-						break;
-					case IMAGE_EFFECT_ROTATE_Z:
-						setRotation((*eff)->get1st());
-						setRotationZ((*eff)->get2nd());
-						break;
-				}
 				
 				if(result == IMAGE_EFFECT_END) {     
-					if(!(*eff)->isInList()) {
-						delete (*eff);
-						(*eff) = 0;
-						
-						eff = vEffects.erase(eff);
-						continue;
-					} else {
-						SoraImageEffect* nexteff = (*eff)->getNext();
-						
-						(*eff) = nexteff;
-						if(nexteff == NULL) {
-							(*eff)->clearList();
-							
-							delete (*eff);
-							(*eff) = 0;
-							
-							eff = vEffects.erase(eff);
-							continue;
-						} else (*eff)->restart();
-					}
-				} else if(result != IMAGE_EFFECT_PLAYING) {
-					if((*eff)->isInList()) {
-						if(result == IMAGE_EFFECT_END_OF_LIST && (*eff)->getListMode() == IMAGE_EFFECT_REPEAT) {
-							(*eff) = (*eff)->getListHead();
-							(*eff)->restart();
-						}
-						else if(result == IMAGE_EFFECT_TONEXT) {
-							SoraImageEffect* nexteff = (*eff)->getNext();
-							(*eff) = nexteff;
-							(*eff)->restart();
-						} else if(result == IMAGE_EFFECT_TOPREV) {
-							SoraImageEffect* preveff = (*eff)->getPrev();
-							(*eff) = preveff;
-							(*eff)->restart();
-						}
-					}
-				}
+					delete (*eff);
+					(*eff) = 0;
+					
+					eff = vEffects.erase(eff);
+					continue;
+				} else 
+					(*eff)->effect(this);
 				++eff;
 			}
 		}

@@ -61,6 +61,8 @@ bool mainWindow::renderFunc() {
 		
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 
+	pSpr->update(sora::SORA->getDelta());
+	pSpr->render();
 
 	sora->endScene();
 	return false;
@@ -75,6 +77,11 @@ void mainWindow::init() {
 
 		
 	sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 20);
+	
+	pSpr = sora::SORA->createSprite(L"magicCircle.png");
+	pSpr->addEffect((new sora::SoraImageEffectList(sora::IMAGE_EFFECT_REPEAT))
+					->add(new sora::IEFade(1.f, 0.5f, 1.f))
+					->add(new sora::IETransitions(0.f, 0.f, 500.f, 500.f, 2.f)));
 	
 	gcn::Container* cont = new gcn::Container;
 	cont->setDimension(gcn::Rectangle(100, 0, 800, 800));

@@ -13,6 +13,8 @@
 namespace sora {
 	
 #define IMAGE_EFFECT_TYPE 0x00001000
+	
+	class SoraSprite;
 
 	enum {
 		IMAGE_EFFECT_NONE = 0,
@@ -39,9 +41,6 @@ namespace sora {
 		IMAGE_EFFECT_END,
 		IMAGE_EFFECT_NOTSTART,
 		IMAGE_EFFECT_PLAYING,
-		IMAGE_EFFECT_TONEXT,
-		IMAGE_EFFECT_END_OF_LIST,
-		IMAGE_EFFECT_TOPREV,
 		IMAGE_EFFECT_PAUSED,
 	};
 
@@ -74,11 +73,13 @@ namespace sora {
 		float32 getTime();
 
 		uint8 getState() const { return states; }
-		uint8 getMode() const { return mode; }
 		uint16 getType() const  { return etype; }
+		IMAGE_EFFECT_MODE getMode() const { return mode; }
 
 		virtual void start(IMAGE_EFFECT_MODE mode, float32 time);
-		virtual uint32 update(float32 delta) ;
+		virtual uint32 update(float32 delta);
+		
+		virtual void effect(SoraSprite* sprite) = 0;
 		
 		void restart();
 		
@@ -96,30 +97,10 @@ namespace sora {
 		void setRepeatTimes(uint32 times);
 		uint32 getRepeatTimes() const;
 		
-		// define a image effect queue
-		// @retval = nextEffect
-		// to create a sequence, use SoraImageEffect xx(xx, yy, zz).next(new SoraImgeEffect yy).next etc
-		SoraImageEffect* setNext(SoraImageEffect* nextEffect);
-		SoraImageEffect* getNext() const;
-		SoraImageEffect* getPrev() const;
-				
-		SoraImageEffect* getListHead() const;
-		SoraImageEffect* getListTail() const;
-		
-		void setListLoopMode(IMAGE_EFFECT_MODE mode);
-		IMAGE_EFFECT_MODE getListMode() const;
-		
-		void clearList();
-		bool isInList() const;
 		void swap();
 				
 	protected:
-		void checkList();
 		void checkRepeatTimes();
-		
-		SoraImageEffect* pnext;
-		SoraImageEffect* pprev;
-		IMAGE_EFFECT_MODE listMode;
 
 		uint16 etype;
 		uint8 states;
@@ -145,12 +126,44 @@ namespace sora {
 		CoreTransformer<CoreTransform>* t_transformer;
 		bool bInternalTransformer;
 	};
+	
+	class SoraImageEffectList: public SoraImageEffect {
+	public:
+		SoraImageEffectList();
+		SoraImageEffectList(IMAGE_EFFECT_MODE mode);
+		virtual ~SoraImageEffectList();
+		
+		SoraImageEffectList* add(SoraImageEffect* effect);
+
+		SoraImageEffect* getListHead() const;
+		SoraImageEffect* getListTail() const;
+		
+		void setListMode(IMAGE_EFFECT_MODE mode);
+		IMAGE_EFFECT_MODE getListMode() const;
+		
+		virtual uint32 update(float32 delta);
+		virtual void start(IMAGE_EFFECT_MODE mode, float32 time);
+		
+		virtual void effect(SoraSprite* spr);
+		
+	private:
+		typedef std::list<SoraImageEffect*> IMAGE_EFFECT_LIST;
+		IMAGE_EFFECT_LIST mImageEffects;
+		
+		SoraImageEffect* mCurrEffect;
+		
+		bool mReverse;
+		
+		IMAGE_EFFECT_MODE mListMode;
+	};
 
 	class SoraImageEffectFade: public SoraImageEffect {
 	public:
 		SoraImageEffectFade(float32 src, float32 dst, float32 time, 
 							IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							CoreTransformer<CoreTransform>* transformer=0);
+		
+		virtual void effect(SoraSprite* sprite);
 	};
 
 	class SoraImageEffectShake: public SoraImageEffect {
@@ -158,6 +171,8 @@ namespace sora {
 		SoraImageEffectShake(float32 mV, float32 mH, float32 time, 
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							 CoreTransformer<CoreTransform>* transformer=0);
+		
+		virtual void effect(SoraSprite* sprite);
 	};
 
 	class SoraImageEffectScale: public SoraImageEffect {
@@ -168,6 +183,8 @@ namespace sora {
 		SoraImageEffectScale(float32 srcV, float32 dstV, float32 srcH, float32 dstH, float32 time, 
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							 CoreTransformer<CoreTransform>* transformer=0);
+		
+		virtual void effect(SoraSprite* sprite);
 	};
 
 	class SoraImageEffectTransitions: public SoraImageEffect {
@@ -178,6 +195,8 @@ namespace sora {
 		SoraImageEffectTransitions(float32 sx, float32 sy, float32 dx, float32 dy, float32 time, 
 								   IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 								   CoreTransformer<CoreTransform>* transformer=0);
+		
+		virtual void effect(SoraSprite* sprite);
 	};
 	
 	class SoraImageEffectColorTransitions: public SoraImageEffect {
@@ -188,6 +207,8 @@ namespace sora {
 		SoraImageEffectColorTransitions(ulong32 start, ulong32 end, float32 time, 
 										IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 										CoreTransformer<CoreTransform>* transformer=0);
+		
+		virtual void effect(SoraSprite* sprite);
 	};
 	
 	class SoraImageEffectRotation: public SoraImageEffect {
@@ -198,6 +219,8 @@ namespace sora {
 		SoraImageEffectRotation(float32 start, float32 startz, float32 end, float32 endz, float32 time,
 								IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 								CoreTransformer<CoreTransform>* transformer=0);
+		
+		virtual void effect(SoraSprite* sprite);
 	};
 	
 	typedef SoraImageEffectFade IEFade;

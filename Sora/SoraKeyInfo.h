@@ -722,6 +722,40 @@ namespace sora {
 		int		wheel;			// wheel shift
 		float	x;				// mouse cursor x-coordinate
 		float	y;				// mouse cursor y-coordinate
+		
+		bool isKeyDown() const {
+			return type == SORA_INPUT_KEYDOWN;
+		}
+		
+		bool isKeyUp() const {
+			return type == SORA_INPUT_KEYUP;
+		}
+		
+		int getKey() const {
+			return key;
+		}
+		
+		bool isKeyPressed(int k) {
+			return isKeyDown() && k == key;
+		}
+		
+		bool isKeyUp(int k) {
+			return isKeyUp() && k == key;
+		}
+		
+		bool isShiftFlag() const {
+			return flags & SORA_INPUT_FLAG_SHIFT;
+		}
+		
+		bool isCtrlFlag() const {
+			return flags & SORA_INPUT_FLAG_CTRL;
+		}
+		
+		bool isAltFlag() const {
+			return flags & SORA_INPUT_FLAG_ALT;
+		}
+		
+		
 	};  
 }
 

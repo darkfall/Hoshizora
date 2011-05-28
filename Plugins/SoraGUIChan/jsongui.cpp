@@ -15,6 +15,8 @@
 
 #include "Debug/SoraInternalLogger.h"
 
+#include "Modifiers/LabelSliderLinker.h"
+
 #include "SoraCore.h"
 
 namespace sora {
@@ -348,6 +350,21 @@ namespace sora {
         if(name.size() != 0)
 			widgets[str2id(name)] = slider;
     }
+	
+	void JsonGui::parseLabelModifier(const Json::Value& modifier, gcn::Label* label) {
+		if(modifier.isMember("name")) {
+			std::string name = modifier["name"].asString();
+			if(strcmpnocase("SliderLinker", name.c_str()) == 0) {
+				if(modifier.isMember("object")) { 
+					std::string obj = modifier["object"].asString();
+					gcn::Slider* slider = dynamic_cast<gcn::Slider*> (getWidget(obj));
+					if(slider) {
+						label->addModifier(new gcn::LabelSliderLinker(slider, label->getCaption()));
+					}
+				}
+			}
+		}
+	}
     
     void JsonGui::parseLabel(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
@@ -359,6 +376,16 @@ namespace sora {
         if(val.isMember("caption")) {
             label->setCaption(val["caption"].asString());
         }
+		
+		Json::Value modifiers = val["modifiers"];
+		if(modifiers.isArray()) {
+			for(int i=0; i<modifiers.size(); ++i) {
+				Json::Value modifier = modifiers[i];
+				if(modifier.isObject()) {
+					parseLabelModifier(modifier, label);
+				}
+			}
+		}
         
         label->adjustSize();
         if(val.isMember("align")) {

@@ -62,6 +62,8 @@ namespace sora {
     private:
 		inline void _parseWidget(const char* name, const Json::Value& val, gcn::Widget* parent);
 		
+		void parseLabelModifier(const Json::Value& modifier, gcn::Label* label);
+		
         Json::Reader reader;
         Json::Value rootValue;
         

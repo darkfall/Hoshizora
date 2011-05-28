@@ -90,8 +90,8 @@ namespace sora{
         glDepthFunc(GL_LEQUAL);                       // The Type Of Depth Test To Do
 		glClearDepth(1.f);                          // Depth Buffer Setup
 
-        glDepthMask(GL_FALSE);
-        glDisable(GL_DEPTH_TEST); //????
+        //glDepthMask(GL_FALSE);
+
 
  //       glEnable(GL_CULL_FACE);
 //		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
@@ -181,6 +181,8 @@ namespace sora{
 	void SoraOGLRenderer::_glBeginScene(ulong32 color, ulong32 t) {
 		int32 width = _oglWindowInfo.width;
 		int32 height = _oglWindowInfo.height;
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
 		if(t) {
 			pCurTarget = (SoraRenderTargetOG*)t;
 			width = pCurTarget->getWidth();
@@ -195,7 +197,6 @@ namespace sora{
                 glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
             }
         }
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void SoraOGLRenderer::_glEndScene() {
@@ -231,12 +232,9 @@ namespace sora{
 
 		if((blend & BLEND_ZWRITE) != (CurBlendMode & BLEND_ZWRITE)) {
 			if(blend & BLEND_ZWRITE) {
-                glDepthMask(GL_TRUE);
-                glClear(GL_DEPTH_BUFFER_BIT);
-           //     glEnable(GL_DEPTH_TEST);
+                glEnable(GL_DEPTH_TEST);
             } else {
-            //    glDisable(GL_DEPTH_TEST);
-                glDepthMask(GL_FALSE);
+                glDisable(GL_DEPTH_TEST);
             }
 		}
 
@@ -730,8 +728,8 @@ namespace sora{
 			width = pCurTarget->getWidth();
 			height = pCurTarget->getHeight();
 		} else {
-			width = _oglWindowInfo.width;
-			height = _oglWindowInfo.height;
+			width = mainWindow->getWindowWidth();
+			height = mainWindow->getWindowHeight();
 		}
 
 		if(w==0 && h==0) {
@@ -753,6 +751,15 @@ namespace sora{
 		}
 
         flush();
+	/*	glViewport(_oglWindowInfo.x, _oglWindowInfo.y,
+				   _oglWindowInfo.width,
+				   _oglWindowInfo.height);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(_oglWindowInfo.x, 
+				_oglWindowInfo.x+_oglWindowInfo.width, 
+				_oglWindowInfo.y+_oglWindowInfo.height, 
+				_oglWindowInfo.y, -1.f, 1.f);*/
 		applyTransform();
 	}
 
