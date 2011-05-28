@@ -11,6 +11,8 @@
 #include "SoraStringConv.h"
 #include <fstream>
 
+#include "SoraCore.h"
+
 namespace sora {
 
 SoraINIFile::SoraINIFile() {
@@ -70,7 +72,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 		
 		const char* pstrData = (const char*)pData;
 		uint32 currPos = 0;
-		
+
 		SoraString buffer;
 		INISector section;
 		while(currPos <= size) {

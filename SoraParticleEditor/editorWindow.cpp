@@ -710,6 +710,7 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 
 	if(pXmlParser->parse((const char*)pdata, size)) {
 		gcn::Widget* pWindow = pXmlParser->getWidget("SoraWindow");
+		pWindow->setDimension(gcn::Rectangle(0, 0, SORA->getScreenWidth(), SORA->getScreenHeight()));
 		GCN_GLOBAL->getTop()->add( pWindow );
 
 	//	pspr = SORA->createSprite(L"pics/particles.png");

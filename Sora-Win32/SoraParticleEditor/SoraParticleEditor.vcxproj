@@ -148,6 +148,9 @@
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\widgets\textbox.hpp" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\widgets\textfield.hpp" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\widgets\window.hpp" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\Modifiers\CloseModifier.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\Modifiers\LabelSliderLinker.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUI.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\soraguifont.hpp" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\soraguigraphics.hpp" />
@@ -373,6 +376,9 @@
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\widgets\textbox.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\widgets\textfield.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\widgets\window.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\Modifiers\CloseModifier.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\Modifiers\LabelSliderLinker.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguifont.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguigraphics.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguiimage.cpp" />

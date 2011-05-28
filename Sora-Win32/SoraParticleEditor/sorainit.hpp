@@ -28,6 +28,7 @@ namespace soratest
 		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 		
 
+		peMainWindowLoader::Instance()->loadConfig();
 		sora::SORA->createWindow(new peMainWindow);
 	}
 

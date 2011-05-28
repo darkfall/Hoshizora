@@ -773,6 +773,15 @@
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\SoundLoader.h">
       <Filter>Plugins\SoraGUIChan\GUIChan</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\Modifiers\CloseModifier.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\Modifiers\LabelSliderLinker.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -1146,6 +1155,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\Sound.cpp">
       <Filter>Plugins\SoraGUIChan\GUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\Modifiers\CloseModifier.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\Modifiers\LabelSliderLinker.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

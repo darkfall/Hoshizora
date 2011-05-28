@@ -1,1 +1,1 @@
-============================Hoshi no Sora==================================
+LOG: SoraCore::CheckCoreComponents: no soundsystem available
