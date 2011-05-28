@@ -217,7 +217,7 @@ namespace sora{
 	}
 
 	uint32* SoraHGERenderer::textureLock(SoraTexture* ht) {
-		return pHGE->Texture_Lock(ht->mTextureID, false, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight);
+		return (uint32*)pHGE->Texture_Lock(ht->mTextureID, false, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight);
 	}
 
 	void SoraHGERenderer::textureUnlock(SoraTexture* h) {

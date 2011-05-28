@@ -127,6 +127,8 @@
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\rectangle.hpp" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\selectionevent.hpp" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\selectionlistener.hpp" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\Sound.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\SoundLoader.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\StringConv.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\widget.hpp" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\widgetlistener.hpp" />
@@ -155,10 +157,8 @@
     <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUIListener.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUIResponser.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUIResponserMap.h" />
-    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraSound.h" />
-    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraSoundLoader.h" />
-    <ClInclude Include="..\..\Plugins\SoraGUIChan\Sound.h" />
-    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoundLoader.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUISound.h" />
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.h" />
     <ClInclude Include="..\..\Plugins\SoraGUIChan\xmlgui.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgecolor.h" />
@@ -195,7 +195,6 @@
     <ClInclude Include="..\..\Sora\Defaults\SoraTimer_OSX.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraTimer_Win32.h" />
     <ClInclude Include="..\..\Sora\Experimental\ASSMActions\SMAct_SetIntValue.h" />
-    <ClInclude Include="..\..\Sora\Experimental\FolderTree.h" />
     <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Action.h" />
     <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Event.h" />
     <ClInclude Include="..\..\Sora\Experimental\SoraASSM_SM.h" />
@@ -355,6 +354,7 @@
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\mouseinput.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\rectangle.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\selectionevent.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\Sound.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\StringConv.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\widget.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\widgets\button.cpp" />
@@ -378,9 +378,8 @@
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguiimage.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguiimageloader.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\soraguiinput.cpp" />
-    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraSound.cpp" />
-    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraSoundLoader.cpp" />
-    <ClCompile Include="..\..\Plugins\SoraGUIChan\Sound.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraGUISound.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.cpp" />
     <ClCompile Include="..\..\Plugins\SoraGUIChan\xmlgui.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp" />
@@ -400,7 +399,6 @@
     <ClCompile Include="..\..\Sora\CoreTransform.cpp" />
     <ClCompile Include="..\..\Sora\Debug\SoraInternalLogger.cpp" />
     <ClCompile Include="..\..\Sora\Defaults\orz.c" />
-    <ClCompile Include="..\..\Sora\Experimental\FolderTree.cpp" />
     <ClCompile Include="..\..\Sora\Experimental\state_test.cpp" />
     <ClCompile Include="..\..\Sora\graphicEffects.cpp" />
     <ClCompile Include="..\..\Sora\hgerect.cpp" />

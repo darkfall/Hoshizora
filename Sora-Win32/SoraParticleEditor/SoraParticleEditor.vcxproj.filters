@@ -662,9 +662,6 @@
     <ClInclude Include="..\..\Sora\Experimental\ASSMActions\SMAct_SetIntValue.h">
       <Filter>Sora</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Sora\Experimental\FolderTree.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Sora\Experimental\SoraASSM_Action.h">
       <Filter>Sora</Filter>
     </ClInclude>
@@ -764,17 +761,17 @@
     <ClInclude Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.h">
       <Filter>Plugins\SoraHGERenderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraSoundLoader.h">
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUISound.h">
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraSound.h">
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.h">
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraGUIChan\Sound.h">
-      <Filter>Plugins\SoraGUIChan</Filter>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\Sound.h">
+      <Filter>Plugins\SoraGUIChan\GUIChan</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraGUIChan\SoundLoader.h">
-      <Filter>Plugins\SoraGUIChan</Filter>
+    <ClInclude Include="..\..\Plugins\SoraGUIChan\guichan\SoundLoader.h">
+      <Filter>Plugins\SoraGUIChan\GUIChan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1120,9 +1117,6 @@
     <ClCompile Include="..\..\Sora\Defaults\orz.c">
       <Filter>Sora</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Sora\Experimental\FolderTree.cpp">
-      <Filter>Sora</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Sora\Experimental\state_test.cpp">
       <Filter>Sora</Filter>
     </ClCompile>
@@ -1144,14 +1138,14 @@
     <ClCompile Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp">
       <Filter>Plugins\SoraHGERenderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraSoundLoader.cpp">
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.cpp">
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraSound.cpp">
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\SoraGUISound.cpp">
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Plugins\SoraGUIChan\Sound.cpp">
-      <Filter>Plugins\SoraGUIChan</Filter>
+    <ClCompile Include="..\..\Plugins\SoraGUIChan\guichan\Sound.cpp">
+      <Filter>Plugins\SoraGUIChan\GUIChan</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
