@@ -123,7 +123,7 @@ class SpeedPanelResponser: public SoraGUIResponser {
 		else if(getID().compare("MaxTrigAccel") == 0) {
 			peffect->pheader.fMaxTrigAcc = p->getValue();
 		}
-		labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
+	//	labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
 	}
 };
 
@@ -138,7 +138,7 @@ class LifetimePanelResponser: public SoraGUIResponser {
 			peffect->pheader.fEmitLifetime = p->getValue();
 		else if(getID().compare("EmissionSpeed") == 0)
 			peffect->pheader.nEmitNum = p->getValue();
-		labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
+//		labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
 	}
 };
 
@@ -189,7 +189,7 @@ class PropPanelResponser: public SoraGUIResponser {
 			peffect->pheader.fMinAngle = p->getValue();
 		else if(getID().compare("MaxAngle") == 0)
 			peffect->pheader.fMaxAngle = p->getValue();
-		labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
+	//	labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
 	}
 };
 
@@ -448,7 +448,7 @@ void loadBGSprite(const SoraWString& path) {
 	if(pbgSpr->getSpriteHeight() > 768)
 		scale2 = pbgSpr->getSpriteHeight() / 768.f;
 	pbgSpr->setScale(scale1<scale2?scale1:scale2, scale1<scale2?scale1:scale2);*/
-	pbgSpr->setCenter(pbgSpr->getSpriteWidth()/2, pbgSpr->getSpriteHeight()/2);
+//	pbgSpr->setCenter(pbgSpr->getSpriteWidth()/2, pbgSpr->getSpriteHeight()/2);
 }
 
 void applyFilterSps() {
@@ -638,6 +638,10 @@ editorWindow::editorWindow() {
 	peffect->pheader.fEmitLifetime = 10.f;
 	
 	peffect->fire();
+	
+	mBGPosX = 0.f;
+	mBGPosY = 0.f;
+	
 }
 
 void editorWindow::update() {
@@ -648,23 +652,53 @@ void editorWindow::update() {
 		peffect->restart();
 		bOpenFinished = false;
 	}
+	
+	if(SORA->keyDown(SORA_KEY_LEFT)) {
+		if(mBGPosX > 0.f)
+			mBGPosX -= 1.f;
+		else mBGPosX = 0.f;
+	} else if(SORA->keyDown(SORA_KEY_RIGHT)) {
+		if(mBGPosX < SORA->getScreenWidth())
+			mBGPosX += 1.f;
+		else mBGPosX = SORA->getScreenWidth();
+	}
+	if(SORA->keyDown(SORA_KEY_UP)) {
+		if(mBGPosY > 0.f)
+			mBGPosY -= 1.f;
+		else mBGPosY = 0.f;
+	} else if(SORA->keyDown(SORA_KEY_DOWN)) {
+		if(mBGPosY < SORA->getScreenHeight())
+			mBGPosY += 1.f;
+		else mBGPosY = SORA->getScreenHeight();
+	}
+	
+	
 }
 
 void editorWindow::render() {
 	if(pbgSpr) {
-		pbgSpr->render(SORA->getScreenWidth()/2, SORA->getScreenHeight()/2);
+		pbgSpr->render(mBGPosX, mBGPosY);
 	}
 	
 	peffect->render();
 	
 	if(pFont) {
-		pFont->print(100, 690, sora::FONT_ALIGNMENT_CENTER, L"FPS: %.2f", sora::SORA->getFPS());
-		pFont->render(100, 720, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true);
-		pFont->render(100, 740, L"Rev 0x20 \0", true);
+		int32 mWidth = sora::SORA->getScreenWidth();
+		int32 mHeight = sora::SORA->getScreenHeight();
+		pFont->print(mWidth-100, mHeight-70, sora::FONT_ALIGNMENT_CENTER, L"FPS: %.2f", sora::SORA->getFPS());
+		pFont->render(mWidth-100, mHeight-50, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true);
+		pFont->render(mWidth-100, mHeight-30, L"Rev 0x30 \0", true);
 	}
 }
 
 gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
+	gcn::Widget* pprev = GCN_GLOBAL->findWidget("SoraWindow");
+	if(pprev != NULL) {
+		GCN_GLOBAL->removeWidget(pprev);
+		delete pprev;
+		pprev = NULL;
+	}
+	
 	pXmlParser = new XmlGui;
 
 	ulong32 size;
@@ -742,12 +776,12 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 		slMaxDirectionY = (gcn::Slider*)pXmlParser->getWidget("MaxDirectionY");
 		slMaxDirectionZ = (gcn::Slider*)pXmlParser->getWidget("MaxDirectionZ");
 
-		cbSpeedPanel = (gcn::CheckBox*)pXmlParser->getWidget("CSpeedPanel");
-		cbLifetimePanel = (gcn::CheckBox*)pXmlParser->getWidget("CLifetimePanel");
-		cbStartColorPanel = (gcn::CheckBox*)pXmlParser->getWidget("CStartColorPanel");
-		cbEndColorPanel = (gcn::CheckBox*)pXmlParser->getWidget("CEndColorPanel");
-		cbPropPanel = (gcn::CheckBox*)pXmlParser->getWidget("CPropPanel");
-		cbBlendMode = (gcn::CheckBox*)pXmlParser->getWidget("CBlendMode");
+		cbSpeedPanel = (gcn::CheckBox*)pXmlParser->getWidget("SpeedPanelCheck");
+		cbLifetimePanel = (gcn::CheckBox*)pXmlParser->getWidget("LifetimePanelCheck");
+		cbStartColorPanel = (gcn::CheckBox*)pXmlParser->getWidget("StartColorPanelCheck");
+		cbEndColorPanel = (gcn::CheckBox*)pXmlParser->getWidget("EndColorPanelCheck");
+		cbPropPanel = (gcn::CheckBox*)pXmlParser->getWidget("PropPanelCheck");
+		cbBlendMode = (gcn::CheckBox*)pXmlParser->getWidget("BlendModeCheck");
 
 		slMinAngle = (gcn::Slider*)pXmlParser->getWidget("MinAngle");
 		slMaxAngle = (gcn::Slider*)pXmlParser->getWidget("MaxAngle");

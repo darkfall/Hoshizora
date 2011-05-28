@@ -72,6 +72,7 @@
 		88452CC8138F98450045D130 /* TimedWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88452CC7138F98450045D130 /* TimedWidget.cpp */; };
 		88452D0E138F9CBF0045D130 /* CloseModifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88452D0D138F9CBF0045D130 /* CloseModifier.cpp */; };
 		88452D58138FAB970045D130 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88452D55138FAB970045D130 /* Sound.cpp */; };
+		88452EC91390D81B0045D130 /* LabelSliderLinker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88452EC81390D81B0045D130 /* LabelSliderLinker.cpp */; };
 		884575D81300DB38003EC408 /* state_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 884575D71300DB38003EC408 /* state_test.cpp */; };
 		88504B9912ECDB4E009B9F45 /* SFMT.c in Sources */ = {isa = PBXBuildFile; fileRef = 88504B9712ECDB4E009B9F45 /* SFMT.c */; };
 		8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851F6F0135FA97900091C9C /* libfmodexL.dylib */; };
@@ -493,6 +494,8 @@
 		88452D56138FAB970045D130 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		88452D57138FAB970045D130 /* SoundLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundLoader.h; sourceTree = "<group>"; };
 		88452DBA138FB68E0045D130 /* Modifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Modifier.h; sourceTree = "<group>"; };
+		88452EC71390D81B0045D130 /* LabelSliderLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelSliderLinker.h; sourceTree = "<group>"; };
+		88452EC81390D81B0045D130 /* LabelSliderLinker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LabelSliderLinker.cpp; sourceTree = "<group>"; };
 		884575D61300DB38003EC408 /* state_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = state_test.h; path = Experimental/state_test.h; sourceTree = "<group>"; };
 		884575D71300DB38003EC408 /* state_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = state_test.cpp; path = Experimental/state_test.cpp; sourceTree = "<group>"; };
 		884CC87312F88E1300FD18FC /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
@@ -1475,6 +1478,8 @@
 				88452D0D138F9CBF0045D130 /* CloseModifier.cpp */,
 				88452CA8138F96160045D130 /* TimedWidget.h */,
 				88452CC7138F98450045D130 /* TimedWidget.cpp */,
+				88452EC71390D81B0045D130 /* LabelSliderLinker.h */,
+				88452EC81390D81B0045D130 /* LabelSliderLinker.cpp */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -2913,6 +2918,7 @@
 				88452CC8138F98450045D130 /* TimedWidget.cpp in Sources */,
 				88452D0E138F9CBF0045D130 /* CloseModifier.cpp in Sources */,
 				88452D58138FAB970045D130 /* Sound.cpp in Sources */,
+				88452EC91390D81B0045D130 /* LabelSliderLinker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

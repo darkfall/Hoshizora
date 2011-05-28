@@ -27,6 +27,8 @@ public:
 
 private:
 	sora::SoraFont* pFont;
+	
+	float32 mBGPosX, mBGPosY;
 };
 
 #endif

@@ -56,7 +56,8 @@ int main(int argc, char* argv[]) {
 	}
 	sora->attachResourcePack(res);
 	
-	sora->createWindow(new mainWindow);
+	peMainWindowLoader::Instance()->loadConfig();
+	sora->createWindow(new peMainWindow);
 	sora->start();
 		
 	return 0;

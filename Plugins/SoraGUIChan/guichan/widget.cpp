@@ -96,6 +96,14 @@ namespace gcn
             Event event(this);
             (*iter)->death(event);
         }
+		
+		ModifierIterator itModifier = mModifiers.begin();
+		while(itModifier != mModifiers.end()) {
+			delete (*itModifier);
+			(*itModifier) = NULL;
+			
+			++itModifier;
+		}
 
         _setFocusHandler(NULL);
 

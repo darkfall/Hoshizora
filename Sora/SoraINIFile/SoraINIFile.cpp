@@ -55,7 +55,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 	
 	inline SoraString readLn(const char* pstr, uint32& currPos, ulong32 size) {
 		SoraString buffer;
-		while(pstr[currPos] != '\n' && currPos < size) {
+		while(pstr[currPos] != '\n' && pstr[currPos] != '\r' && currPos < size) {
 			buffer += pstr[currPos];
 			++currPos;
 		}
@@ -73,45 +73,48 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 		
 		SoraString buffer;
 		INISector section;
-		while(currPos < size) {
+		while(currPos <= size) {
 			buffer = readLn(pstrData, currPos, size);
-			while(buffer[0] == '[') {
-				if(buffer[0] == '[') {
-					size_t right = buffer.find(']');
-					if(right != SoraString::npos) {
-						section.name = buffer.substr(1, right-1);
-						
-						buffer = readLn(pstrData, currPos, size);
-						while(buffer[0] != '[' && currPos < size) {
-							if(buffer.find('=') == SoraString::npos || buffer[0] == ';') {
+			if(buffer.size() == 0)
+				continue;
+			
+			if(buffer[0] != '[') {
+				if(buffer.find('=') == SoraString::npos || buffer[0] == ';') {
+					continue;
+				}
+				
+				size_t equalPos = buffer.find('=');
+				publicSec.value.push_back(INISectorValue(buffer.substr(0, equalPos), buffer.substr(equalPos+1, buffer.size()-equalPos-1)));
+			} else {
+				while(buffer[0] == '[') {
+					if(buffer[0] == '[') {
+						size_t right = buffer.find(']');
+						if(right != SoraString::npos) {
+							section.name = buffer.substr(1, right-1);
+							
+							buffer = readLn(pstrData, currPos, size);
+							while(buffer[0] != '[' && currPos <= size) {
+								if(buffer.find('=') == SoraString::npos || buffer[0] == ';') {
+									buffer = readLn(pstrData, currPos, size);
+									continue;
+								}
+								
+								size_t equalPos = buffer.find('=');
+								section.value.push_back(INISectorValue(buffer.substr(0, equalPos), buffer.substr(equalPos+1, buffer.size()-equalPos-1)));
 								buffer = readLn(pstrData, currPos, size);
-								continue;
 							}
 							
-							size_t equalPos = buffer.find('=');
-							section.value.push_back(INISectorValue(buffer.substr(0, equalPos), buffer.substr(equalPos+1, buffer.size()-equalPos-1)));
+							sec.push_back(section);
+							section.value.clear();
+							section.name.clear();
+						} else {
 							buffer = readLn(pstrData, currPos, size);
+							while(buffer[0] != '[' && currPos < size)
+								buffer = readLn(pstrData, currPos, size);
 						}
-						
-						sec.push_back(section);
-						section.value.clear();
-						section.name.clear();
-					} else {
-						buffer = readLn(pstrData, currPos, size);
-						while(buffer[0] != '[' && currPos < size)
-							buffer = readLn(pstrData, currPos, size);
-					}
-				} else {
-					if(buffer.find('=') == SoraString::npos || buffer[0] == ';') {
-						buffer = readLn(pstrData, currPos, size);
-						continue;
-					}
-					
-					size_t equalPos = buffer.find('=');
-					publicSec.value.push_back(INISectorValue(buffer.substr(0, equalPos), buffer.substr(equalPos+1, buffer.size()-equalPos-1)));
-					buffer = readLn(pstrData, currPos, size);
+					} 
 				}
-			}			
+			}
 		}
 		
         set_open(true);

@@ -196,14 +196,15 @@ namespace sora {
         if(val.isMember("eventId"))
             widget->setActionEventId(val["eventId"].asString());
         
-        if(val.isMember("id")) {
-            widget->setId(val["id"].asString());
-            if(val.isMember("responser")) {
-                SoraString arg = val["responser"].asString();
-                SoraString type = val["responsetype"].asString();
-                parseResponser(widget, arg, type.size()==0?NULL:&type);
-            }
-        }
+		if(val.isMember("name")) {
+            widget->setId(val["name"].asString());
+		}
+        
+		if(val.isMember("responser")) {
+			SoraString arg = val["responser"].asString();
+			SoraString type = val["responsetype"].asString();
+			parseResponser(widget, arg, type.size()==0?NULL:&type);
+		}
         
         if(val.isMember("parent")) {
             if(widget->getParent() == NULL)

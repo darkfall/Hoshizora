@@ -8,6 +8,8 @@
 #include "SoraPlatform.h"
 #include "guichansetup.h"
 
+#include "Modifiers/LabelSliderLinker.h"
+
 namespace sora {
 
 XmlGui::XmlGui()
@@ -281,12 +283,12 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
             GCN_GLOBAL->addWidget(widget, (*element->Attribute("parent")).c_str());
     }
 	
-	if(element->Attribute("id")) {
-		widget->setId(element->Attribute("id")->c_str());
-		if(element->Attribute("responser")) {
-			SoraString arg = element->Attribute("responser")->c_str();
-			parseResponser(widget, arg, element->Attribute("responsetype"));
-		}
+	if(element->Attribute("name")) {
+		widget->setId(element->Attribute("name")->c_str());
+	}
+	if(element->Attribute("responser")) {
+		SoraString arg = element->Attribute("responser")->c_str();
+		parseResponser(widget, arg, element->Attribute("responsetype"));
 	}
 }
 
@@ -329,6 +331,24 @@ void XmlGui::parseContainer(TiXmlElement *element, gcn::Widget *parent)
 	addToParent(c,parent);
 	widgets[name] = c;
 }
+	
+	void XmlGui::parseLabelModifiers(TiXmlElement* element, gcn::Label* label) {
+		if(element->Attribute("name")) {
+			std::string name = *element->Attribute("name");
+			if(strcmpnocase(name.c_str(), "SliderLinker") == 0) {
+				if(element->Attribute("object")) {
+					std::string obj = *element->Attribute("object");
+					gcn::Widget* widget = getWidget(obj);
+					if(widget) {
+						gcn::Slider* slider = dynamic_cast<gcn::Slider*> (widget); 
+						if(slider) {
+							label->addModifier(new gcn::LabelSliderLinker(slider,label->getCaption()));
+						}
+					}
+				}
+			}
+		}
+	}
 
 void XmlGui::parseLabel(TiXmlElement *element,gcn::Widget *parent)
 {
@@ -346,7 +366,6 @@ void XmlGui::parseLabel(TiXmlElement *element,gcn::Widget *parent)
 		throw GCN_EXCEPTION("Label Widget must have a unique name");
 	}
 
-
 	gcn::Label *label = new gcn::Label;
 
 
@@ -354,6 +373,20 @@ void XmlGui::parseLabel(TiXmlElement *element,gcn::Widget *parent)
 	{
 		label->setCaption(*element->Attribute("caption"));
 	}
+	
+	TiXmlNode* props = element->FirstChild();
+	if(props) {
+		TiXmlElement* selmnts = props->ToElement();
+		if(selmnts) {
+			std::string val = selmnts->Value();
+			if(strcmpnocase(val.c_str(), "modifier") == 0) {
+				parseLabelModifiers(selmnts, label);
+			}
+			
+			props = props->IterateChildren(props);
+		}
+	}
+	
 
 	label->adjustSize();
 
@@ -471,8 +504,8 @@ void XmlGui::parseCheckBox(TiXmlElement *element,gcn::Widget *parent)
 	checkbox->adjustSize();
 
 
-//	if(element->Attribute("marked"))
-//		checkbox->setMarked(checkBool(*element->Attribute("marked")));			
+	if(element->Attribute("marked"))
+		checkbox->setSelected(checkBool(*element->Attribute("marked")));			
 
 	parseDefaults(element,checkbox);
 	

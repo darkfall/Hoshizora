@@ -143,6 +143,8 @@ public:
     void registerParseFunc(const std::string& name, parseFunc func);
 
 private:
+	inline void parseLabelModifiers(TiXmlElement* element, gcn::Label* label);
+	
 	//!parse xml node
 	//@param element - xml element
 	//@param parent - the parent widget
