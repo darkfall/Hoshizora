@@ -12,16 +12,35 @@
 
 #include "SoraGUIChan/guichansora.hpp"
 #include "SoraGUIChan/guichan.hpp"
-#include "SoraGUIChan/SoraSoundLoader.h"
 
 #include "SoraCore.h"
 
 namespace sora {
-	
-	using namespace gcn;
-	
+		
 	class gcnInitializer: public sora::SoraSingleton<gcnInitializer> {
 		friend class sora::SoraSingleton<gcnInitializer>;
+		
+		gcnInitializer(): 
+			mGUIChan(NULL),
+			mGlobalFont(NULL),
+			mInput(NULL),
+			mImageLoader(NULL),
+			mGraphics(NULL),
+			mSoundLoader(NULL) {
+		}
+		
+		~gcnInitializer() {
+			if(mGlobalFont)
+				delete mGlobalFont;
+			if(mImageLoader)
+				delete mImageLoader;
+			if(mInput)
+				delete mInput;
+			if(mGraphics)
+				delete mGraphics;
+			if(mSoundLoader)
+				delete mSoundLoader;
+		}
 		
 	public:
         class gcnListener: public SoraFrameListener {
@@ -36,44 +55,50 @@ namespace sora {
             gcnInitializer* pinitializer;
         };
         
-		gcn::Gui* pGUIChan;
-        gcnInitializer(): pGUIChan(0) {}
+		gcn::Gui* getGui() const { return mGUIChan; }
 		
-		bool initGUIChan(const SoraWString& font, int size) {
-            if(pGUIChan) return false;
+		bool initGUIChan(const wchar_t* font, int size) {
+            if(mGUIChan) return false;
             
-			pGUIChan = new gcn::Gui;
+			mGUIChan = new gcn::Gui;
 		
-			pGUIChan->setInput(new gcn::SoraGUIInput);
-			gcn::Image::setImageLoader(new gcn::SoraGUIImageLoader);
-			pGUIChan->setGraphics(new gcn::SoraGUIGraphics);
-			gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(font, size);
-			if(pfont)
-				gcn::Widget::setGlobalFont(pfont);
-			else
-				return false;
+			mInput = new gcn::SoraGUIInput;
+			mGUIChan->setInput(mInput);
+			mImageLoader = new gcn::SoraGUIImageLoader;
+			gcn::Image::setImageLoader(mImageLoader);
+			mGraphics = new gcn::SoraGUIGraphics;
+			mGUIChan->setGraphics(mGraphics);
+			mSoundLoader = new gcn::SoraGUISoundLoader;
+			mGUIChan->setSoundLoader(mSoundLoader);
 			
-			// register global sound loader
-			SoraSoundLoader::Instance();
-            
+			if(font) { 
+				mGlobalFont = new gcn::SoraGUIFont(font, size);
+				if(mGlobalFont)
+					gcn::Widget::setGlobalFont(mGlobalFont);
+				else
+					return false;
+			}
+			
             gcnListener* plistener = new gcnListener(this);
             SORA->addFrameListener(plistener);
+			
+			createTop();
 			return true;
 		}
 		
 		void createTop() {
-            if(!pGUIChan) return;
+            if(!mGUIChan || mGUIChan->getTop() != NULL) return;
             
 			gcn::Container* contTop = new gcn::Container;
 			contTop->setDimension(gcn::Rectangle(0, 0, 
 												 sora::SORA->getScreenWidth(), 
 												 sora::SORA->getScreenHeight()));
-			pGUIChan->setTop(contTop);
+			mGUIChan->setTop(contTop);
 			contTop->setOpaque(false);
 		}
 	
 		gcn::Container* getTop() {
-			return (gcn::Container*)pGUIChan->getTop();
+			return (gcn::Container*)mGUIChan->getTop();
 		}
         
         gcn::Widget* findWidget(const SoraString& sid) {
@@ -93,7 +118,12 @@ namespace sora {
             return NULL;
         }
         
-        void addWidget(gcn::Widget* widget, const SoraString& parentId) {
+        void addWidget(gcn::Widget* widget, const char* parentId) {
+			if(!parentId) {
+				getTop()->add(widget);
+				return;
+			}
+			
             gcn::Widget* pParent = findWidget(parentId);
             
             try {
@@ -155,14 +185,24 @@ namespace sora {
 		}
 	
 		void gcnLogic() {
-            if(pGUIChan)
-                pGUIChan->logic();
+            if(mGUIChan)
+                mGUIChan->logic();
 		}
 	
 		void gcnDraw() {
-			if(pGUIChan)
-                pGUIChan->draw();
+			if(mGUIChan)
+                mGUIChan->draw();
 		}
+		
+	private:
+		gcn::SoraGUISoundLoader* mSoundLoader;
+		gcn::SoraGUIGraphics* mGraphics;
+		gcn::SoraGUIImageLoader* mImageLoader;
+		gcn::SoraGUIInput* mInput;
+		gcn::SoraGUIFont* mGlobalFont;
+		
+		gcn::Gui* mGUIChan;
+
 	};
 	
 	#define GCN_GLOBAL gcnInitializer::Instance()

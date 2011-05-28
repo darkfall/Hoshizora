@@ -40,7 +40,7 @@ namespace gcn {
 		virtual void add(Widget* widget);
 		
 	private:
-		WidgetList::iterator mTopWidget;
+		Widget* mTopWidget;
 		
 		WidgetSwitcher mSwitcher;
 	};

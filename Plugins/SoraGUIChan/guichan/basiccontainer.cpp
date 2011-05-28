@@ -206,6 +206,7 @@ namespace gcn
 
     void BasicContainer::logic()
     {
+		Widget::logic();
         logicChildren();
     }
 

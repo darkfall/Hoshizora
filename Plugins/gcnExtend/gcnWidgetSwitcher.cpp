@@ -47,6 +47,8 @@ namespace gcn {
 	}
 	
 	void WidgetSwitcher::logic() {
+		Widget::logic();
+		
 		if(mCurrFrame != -1) {
 			if(mPrevWidget)
 				mPrevWidget->logic();

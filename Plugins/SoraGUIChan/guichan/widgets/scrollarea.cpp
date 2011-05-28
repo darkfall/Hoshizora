@@ -797,6 +797,8 @@ namespace gcn
 
     void ScrollArea::logic()
     {
+		Widget::logic();
+		
         checkPolicies();
 
         setVerticalScrollAmount(getVerticalScrollAmount());

@@ -49,6 +49,7 @@
 
 #include "guichan/color.hpp"
 #include "guichan/rectangle.hpp"
+#include "guichan/Modifier.h"
 
 namespace gcn
 {
@@ -165,7 +166,7 @@ namespace gcn
          * @see Gui::logic
          * @since 0.1.0
          */
-        virtual void logic() { }
+        virtual void logic();
 
         /**
          * Gets the widget's parent container.
@@ -835,7 +836,7 @@ namespace gcn
          * @since 0.7.0
          */
         virtual const std::list<FocusListener*>& _getFocusListeners();
-
+		 
         /**
          * Gets the area of the widget occupied by the widget's children.
          * By default this method returns an empty rectangle as not all
@@ -960,6 +961,32 @@ namespace gcn
          * @since 0.8.0
          */
         virtual void showPart(Rectangle rectangle);
+		
+		
+		/**
+	  	 * Gets the modifiers of the widget
+		 */
+		virtual const std::list<Modifier*> _getModifiers();
+		
+		/**
+		 * Add a modifier to the modifier list
+		 * Modifier would be automatically deleted if Modifier::isFinished() == true
+		 * @see removeModifier
+		 */
+		virtual void addModifier(Modifier* modifier);
+		
+		/**
+		 * Remove a modifier from the modifier list
+		 * @see addModifier
+		 */
+		virtual void removeModifier(Modifier* modifier);
+		
+		/**
+		 * Sets the alpha color of the widget
+		 * Applys to background, foreground, selection and baseColor
+		 * @param color, the alpha color value, range from 0 to 255
+		 */
+		virtual void setAlpha(int alpha);
 
     protected:
         /**
@@ -1077,6 +1104,7 @@ namespace gcn
 
         typedef std::list<WidgetListener*> WidgetListenerList;
 
+
         /**
          * Holds the widget listeners of the widget.
          */
@@ -1188,6 +1216,15 @@ namespace gcn
          * Holds a list of all instances of widgets.
          */
         static std::list<Widget*> mWidgets;
+		
+		
+		/**
+		 * Holds the list of all modifiers
+		 */
+		typedef std::list<Modifier*> ModifierList;
+		typedef std::list<Modifier*>::iterator ModifierIterator;
+		
+		ModifierList mModifiers;
     };
 }
 

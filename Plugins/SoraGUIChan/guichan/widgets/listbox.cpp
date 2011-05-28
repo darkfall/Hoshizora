@@ -155,6 +155,7 @@ namespace gcn
 
     void ListBox::logic()
     {
+		Widget::logic();
         adjustSize();
     }
 

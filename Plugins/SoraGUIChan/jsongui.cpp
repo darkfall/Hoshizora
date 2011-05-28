@@ -207,7 +207,7 @@ namespace sora {
         
         if(val.isMember("parent")) {
             if(widget->getParent() == NULL)
-                GCN_GLOBAL->addWidget(widget, val["parent"].asString());
+                GCN_GLOBAL->addWidget(widget, val["parent"].asString().c_str());
         }
     }
     
@@ -636,91 +636,91 @@ namespace sora {
     
 	
 	Json::Value& JsonGuiWritter::writeWidget(Json::Value& inValue, gcn::Widget* widget) {
-		gcn::Button* pb = dynamic_cast<Button*> (widget);
+		gcn::Button* pb = dynamic_cast<gcn::Button*> (widget);
 		if(pb) {
 			JValue jv;
 			writeButton(jv, pb);
 			writeDefault(jv, widget);
 			inValue["button"] = jv;
 		}
-		gcn::Container* pc = dynamic_cast<Container*> (widget);
+		gcn::Container* pc = dynamic_cast<gcn::Container*> (widget);
 		if(pc) {
 			JValue jv;
 			writeContainer(jv, pc);
 			writeDefault(jv, widget);
 			inValue["container"] = jv;
 		}
-		gcn::Window* pw = dynamic_cast<Window*> (widget);
+		gcn::Window* pw = dynamic_cast<gcn::Window*> (widget);
 		if(pw) {
 			JValue jv;
 			writeWindow(jv, pw);
 			writeDefault(jv, widget);
 			inValue["window"] = jv;
 		}
-		gcn::Slider* ps = dynamic_cast<Slider*> (widget);
+		gcn::Slider* ps = dynamic_cast<gcn::Slider*> (widget);
 		if(ps) {
 			JValue jv;
 			writeSlider(jv, ps);
 			writeDefault(jv, widget);
 			inValue["slider"] = jv;
 		}
-		gcn::Label* pl = dynamic_cast<Label*> (widget);
+		gcn::Label* pl = dynamic_cast<gcn::Label*> (widget);
 		if(pl) {
 			JValue jv;
 			writeLabel(jv, pl);
 			writeDefault(jv, widget);
 			inValue["label"] = jv;
 		}
-		gcn::Icon* pi = dynamic_cast<Icon*> (widget);
+		gcn::Icon* pi = dynamic_cast<gcn::Icon*> (widget);
 		if(pi) {
 			JValue jv;
 			writeIcon(jv, pi);
 			writeDefault(jv, widget);
 			inValue["icon"] = jv;
 		}
-		gcn::CheckBox* pcb = dynamic_cast<CheckBox*> (widget);
+		gcn::CheckBox* pcb = dynamic_cast<gcn::CheckBox*> (widget);
 		if(pcb) {
 			JValue jv;
 			writeCheckBox(jv, pcb);
 			writeDefault(jv, widget);
 			inValue["checkbox"] = jv;
 		}
-		gcn::TextBox* ptb = dynamic_cast<TextBox*> (widget);
+		gcn::TextBox* ptb = dynamic_cast<gcn::TextBox*> (widget);
 		if(ptb) {
 			JValue jv;
 			writeTextBox(jv, ptb);
 			writeDefault(jv, widget);
 			inValue["textbox"] = jv;
 		}
-		gcn::TextField* ptf = dynamic_cast<TextField*> (widget);
+		gcn::TextField* ptf = dynamic_cast<gcn::TextField*> (widget);
 		if(ptf) {
 			JValue jv;
 			writeContainer(jv, pc);
 			writeDefault(jv, widget);
 			inValue["textfield"] = jv;
 		}
-		gcn::RadioButton* prb = dynamic_cast<RadioButton*> (widget);
+		gcn::RadioButton* prb = dynamic_cast<gcn::RadioButton*> (widget);
 		if(prb) {
 			JValue jv;
 			writeRadioButton(jv, prb);
 			writeDefault(jv, widget);
 			inValue["radiobutton"] = jv;
 		}
-		gcn::ImageButton* pib = dynamic_cast<ImageButton*> (widget);
+		gcn::ImageButton* pib = dynamic_cast<gcn::ImageButton*> (widget);
 		if(pib) {
 			JValue jv;
 			writeImageButton(jv, pib);
 			writeDefault(jv, widget);
 			inValue["imagebutton"] = jv;
 		}
-		gcn::DropDown* pdd = dynamic_cast<DropDown*> (widget);
+		gcn::DropDown* pdd = dynamic_cast<gcn::DropDown*> (widget);
 		if(pdd) {
 			JValue jv;
 			writeDropDown(jv, pdd);
 			writeDefault(jv, widget);
 			inValue["dropdown"] = jv;
 		}
-		gcn::ListBox* plb = dynamic_cast<ListBox*> (widget);
+		gcn::ListBox* plb = dynamic_cast<gcn::ListBox*> (widget);
 		if(plb) {
 			JValue jv;
 			writeListBox(jv, plb);

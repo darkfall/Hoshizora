@@ -13,8 +13,8 @@ namespace gcn {
 
 	void Panel::draw(Graphics* graphics) {
 		if(!mSwitcher.isSwitching()) {
-			if(*mTopWidget)
-				(*mTopWidget)->draw(graphics);
+			if(mTopWidget)
+				(mTopWidget)->draw(graphics);
 		} else {
 			mSwitcher.draw(graphics);
 		}
@@ -22,8 +22,8 @@ namespace gcn {
 	
 	void Panel::logic() {
 		if(!mSwitcher.isSwitching()) {
-			if(*mTopWidget)
-				(*mTopWidget)->logic();
+			if(mTopWidget)
+				(mTopWidget)->logic();
 		} else {
 			mSwitcher.logic();
 		}
@@ -31,31 +31,37 @@ namespace gcn {
 	
 	void Panel::add(Widget* widget) {
 		mWidgets.push_back(widget);
-		mTopWidget = mWidgets.begin();
+		mTopWidget = mWidgets.front();
 	}
 	
 	void Panel::setTop(Widget* widget) {
 		WidgetList::iterator itWidget = std::find(mWidgets.begin(), mWidgets.end(), widget);
 		if(itWidget != mWidgets.end())
-			mTopWidget = itWidget;
+			mTopWidget = widget;
 	}
 	
 	void Panel::toNext(unsigned int switchFrame) {
-		if(mTopWidget != mWidgets.end()) {
-			mSwitcher.start(*mTopWidget, *(mTopWidget++), switchFrame);
+		if(mTopWidget) {
+			WidgetList::iterator itWidget = std::find(mWidgets.begin(), mWidgets.end(), mTopWidget);
+			++itWidget;
+			if(itWidget != mWidgets.end()) 
+				mSwitcher.start(mTopWidget, *itWidget, switchFrame);
 		}
 	}
 	
 	void Panel::toPrev(unsigned int switchFrame) {
-		if(mTopWidget != mWidgets.begin()) {
-			mSwitcher.start(*mTopWidget, *(mTopWidget--), switchFrame);
+		if(mTopWidget) {
+			WidgetList::iterator itWidget = std::find(mWidgets.begin(), mWidgets.end(), mTopWidget);
+			--itWidget;
+			if(itWidget != mWidgets.end()) 
+				mSwitcher.start(mTopWidget, *itWidget, switchFrame);
 		}
 	}
 
 	void Panel::toWidget(Widget* widget, unsigned int switchFrame) {
 		WidgetList::iterator nextWidget = std::find(mWidgets.begin(), mWidgets.end(), widget);
 		if(nextWidget != mWidgets.end()) {
-			mSwitcher.start(*mTopWidget, *nextWidget, switchFrame);
+			mSwitcher.start(mTopWidget, *nextWidget, switchFrame);
 		}
 	}
 	

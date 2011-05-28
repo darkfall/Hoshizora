@@ -732,4 +732,34 @@ namespace gcn
             mParent->showWidgetPart(this, rectangle);
         }                
     }
+	
+	void Widget::logic() {
+		ModifierIterator iter;
+		
+		for (iter = mModifiers.begin(); iter != mModifiers.end(); ++iter) {
+			(*iter)->update(this);
+		}
+	}
+	
+	const std::list<Modifier*> Widget::_getModifiers() {
+		return mModifiers;
+	}
+	
+	void Widget::addModifier(Modifier* modifier) {
+		mModifiers.push_back(modifier);
+	}
+	
+	void Widget::removeModifier(Modifier* modifier) {
+		mModifiers.remove(modifier);
+	}
+	
+	void Widget::setAlpha(int alpha) {
+		if(alpha < 0) alpha = 0; 
+		else if(alpha > 255) alpha = 255;
+		
+		mForegroundColor.a = alpha;
+		mBaseColor.a = alpha;
+		mSelectionColor.a = alpha;
+		mBackgroundColor.a = alpha;
+	}
 }

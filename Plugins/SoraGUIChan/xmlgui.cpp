@@ -278,7 +278,7 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
     
     if(element->Attribute("parent")) {
         if(widget->getParent() == NULL)
-            GCN_GLOBAL->addWidget(widget, *element->Attribute("parent"));
+            GCN_GLOBAL->addWidget(widget, (*element->Attribute("parent")).c_str());
     }
 	
 	if(element->Attribute("id")) {
