@@ -781,6 +781,14 @@
 			884530941390F3890045D130 /* PBXTextBookmark */ = 884530941390F3890045D130 /* PBXTextBookmark */;
 			884530951390F3890045D130 /* PBXTextBookmark */ = 884530951390F3890045D130 /* PBXTextBookmark */;
 			884530961390F3890045D130 /* PBXTextBookmark */ = 884530961390F3890045D130 /* PBXTextBookmark */;
+			8845309C1390F7720045D130 /* PBXTextBookmark */ = 8845309C1390F7720045D130 /* PBXTextBookmark */;
+			8845309D1390F7720045D130 /* XCBuildMessageTextBookmark */ = 8845309D1390F7720045D130 /* XCBuildMessageTextBookmark */;
+			8845309E1390F7720045D130 /* PBXTextBookmark */ = 8845309E1390F7720045D130 /* PBXTextBookmark */;
+			8845309F1390F7720045D130 /* PBXTextBookmark */ = 8845309F1390F7720045D130 /* PBXTextBookmark */;
+			884530A21390F7770045D130 /* PBXTextBookmark */ = 884530A21390F7770045D130 /* PBXTextBookmark */;
+			884530A31390F7770045D130 /* PBXBookmark */ = 884530A31390F7770045D130 /* PBXBookmark */;
+			884530A41390F7770045D130 /* PBXTextBookmark */ = 884530A41390F7770045D130 /* PBXTextBookmark */;
+			884530A51390F7770045D130 /* PBXTextBookmark */ = 884530A51390F7770045D130 /* PBXTextBookmark */;
 			8851F792135FAE4700091C9C = 8851F792135FAE4700091C9C /* PBXTextBookmark */;
 			8860303E137E330100C3B63B = 8860303E137E330100C3B63B /* PBXTextBookmark */;
 			88603044137E334800C3B63B = 88603044137E334800C3B63B /* PBXTextBookmark */;
@@ -1222,9 +1230,9 @@
 	};
 	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 910}}";
-			sepNavSelRange = "{1000, 0}";
-			sepNavVisRange = "{233, 1356}";
+			sepNavIntBoundsRect = "{{0, 0}, {717, 980}}";
+			sepNavSelRange = "{563, 0}";
+			sepNavVisRange = "{204, 535}";
 			sepNavWindowFrame = "{{15, 4}, {840, 871}}";
 		};
 	};
@@ -1483,6 +1491,12 @@
 		};
 	};
 	8839FFA51319FCD500CC101A /* peMainWindow.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = peMainWindow.h;
+		path = "/Users/darkfall/SoraGit/Sora-OSX/SoraParticleEditor/peMainWindow.h";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 1484}}";
 			sepNavSelRange = "{806, 0}";
@@ -4234,7 +4248,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 41";
 		rLen = 0;
-		rLoc = 861;
+		rLoc = 863;
 		rType = 0;
 		vrLen = 1382;
 		vrLoc = 156;
@@ -4843,7 +4857,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1554;
+		rLoc = 1556;
 		rType = 0;
 		vrLen = 1384;
 		vrLoc = 156;
@@ -4883,7 +4897,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1554;
+		rLoc = 1556;
 		rType = 0;
 		vrLen = 1338;
 		vrLoc = 204;
@@ -6410,7 +6424,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1554;
+		rLoc = 1556;
 		rType = 0;
 		vrLen = 1338;
 		vrLoc = 204;
@@ -6480,7 +6494,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1517;
+		rLoc = 1519;
 		rType = 0;
 		vrLen = 1384;
 		vrLoc = 205;
@@ -6779,7 +6793,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1502;
+		rLoc = 1504;
 		rType = 0;
 		vrLen = 1384;
 		vrLoc = 205;
@@ -6789,7 +6803,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1502;
+		rLoc = 1504;
 		rType = 0;
 		vrLen = 1330;
 		vrLoc = 259;
@@ -6829,7 +6843,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 46";
 		rLen = 0;
-		rLoc = 1000;
+		rLoc = 1002;
 		rType = 0;
 		vrLen = 1356;
 		vrLoc = 233;
@@ -7601,6 +7615,86 @@
 		vrLoc = 0;
 	};
 	884530961390F3890045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88452D0C138F9B850045D130 /* CloseModifier.h */;
+		name = "CloseModifier.h: 48";
+		rLen = 32;
+		rLoc = 827;
+		rType = 0;
+		vrLen = 820;
+		vrLoc = 0;
+	};
+	884530971390F75B0045D130 /* peMainWindow.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1484}}";
+			sepNavSelRange = "{861, 0}";
+			sepNavVisRange = "{0, 1153}";
+		};
+	};
+	8845309C1390F7720045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C6B12B8AE6600777409 /* xmlgui.cpp */;
+		name = "xmlgui.cpp: 345";
+		rLen = 0;
+		rLoc = 10358;
+		rType = 0;
+		vrLen = 551;
+		vrLoc = 9976;
+	};
+	8845309D1390F7720045D130 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "SoraParticleEditor/peMainWindow.h: No such file or directory";
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 0;
+		rLoc = 21;
+		rType = 1;
+	};
+	8845309E1390F7720045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 29";
+		rLen = 0;
+		rLoc = 563;
+		rType = 0;
+		vrLen = 535;
+		vrLoc = 204;
+	};
+	8845309F1390F7720045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C3D12B8AE6600777409 /* icon.hpp */;
+		name = "icon.hpp: 56";
+		rLen = 15;
+		rLoc = 2447;
+		rType = 0;
+		vrLen = 229;
+		vrLoc = 2324;
+	};
+	884530A21390F7770045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EF131A096700CC101A /* editorWindow.h */;
+		name = "editorWindow.h: 31";
+		rLen = 0;
+		rLoc = 660;
+		rType = 0;
+		vrLen = 674;
+		vrLoc = 0;
+	};
+	884530A31390F7770045D130 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+	};
+	884530A41390F7770045D130 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 34";
+		rLen = 0;
+		rLoc = 861;
+		rType = 0;
+		vrLen = 1153;
+		vrLoc = 0;
+	};
+	884530A51390F7770045D130 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 88452D0C138F9B850045D130 /* CloseModifier.h */;
 		name = "CloseModifier.h: 48";
@@ -11708,7 +11802,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 41";
 		rLen = 0;
-		rLoc = 861;
+		rLoc = 863;
 		rType = 0;
 		vrLen = 1384;
 		vrLoc = 156;
@@ -15813,9 +15907,9 @@
 	};
 	88E3384C136A7AB7000B67C8 /* SoraINIFile.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 5642}}";
-			sepNavSelRange = "{1680, 0}";
-			sepNavVisRange = "{1339, 1527}";
+			sepNavIntBoundsRect = "{{0, 0}, {977, 5376}}";
+			sepNavSelRange = "{9933, 0}";
+			sepNavVisRange = "{3773, 736}";
 		};
 	};
 	88E3384D136A7AB7000B67C8 /* SoraINIFile.h */ = {

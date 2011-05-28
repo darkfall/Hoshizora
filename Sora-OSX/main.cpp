@@ -20,14 +20,13 @@
 
 #include "vlcTestWindow.h"
 
-#include "SoraParticleEditor/peMainWindow.h"
-
 #include "SoraGUIChan/XmlGui.h"
 #include "SoraGUIChan/Jsongui.h"
 
 #include "Debug/SoraAutoProfile.h"
 
 #include "../AnimationEditor/aeMainWindow.h"
+#include "../SoraParticleEditor/peMainWindow.h"
 
 //#include "GLFW3/SoraOGLInputGLFW3.h"
 //#include "GLFW3/SoraOGLRenderer.h"
