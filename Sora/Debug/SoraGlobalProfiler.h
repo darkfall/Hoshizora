@@ -64,6 +64,21 @@ namespace sora {
 			return stream;
 		}
 		
+		void printProfile(const char* name) {
+			PROFILE_CONT::iterator itprofile = profiles.find(name);
+			if(itprofile != profiles.end()) {
+				INT_LOG_HANDLE->debugPrintf("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
+			}
+		}
+		
+		s_profile getProfile(const char* name) const {
+			PROFILE_CONT::const_iterator itprofile = profiles.find(name);
+			if(itprofile != profiles.end()) {
+				return itprofile->second;
+			}
+			return s_profile();
+		}
+		
 		void flush() {
 			profiles.clear();
 		}

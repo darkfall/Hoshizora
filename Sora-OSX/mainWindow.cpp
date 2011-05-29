@@ -31,6 +31,9 @@
 
 #include "SoraGUIChan/Modifiers/CloseModifier.h"
 
+#include "SoraPNGOps/SoraPNGOptimizer.h"
+#include "Debug/SoraAutoProfile.h"
+
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
 	
@@ -40,18 +43,20 @@ mainWindow::mainWindow() {
 
 mainWindow::~mainWindow() {
 }
+int32 posy = 0;
 
 bool mainWindow::updateFunc() {
 	
 	if(sora->keyDown(SORA_KEY_ESCAPE))
 		sora->shutDown();
-	if(sora->keyDown(SORA_KEY_F)) {
-	
+	if(sora->keyDown(SORA_KEY_DOWN)) {
+		++posy;
 	}
 
 	
     return false;
 }
+
 
 bool mainWindow::renderFunc() {
 	
@@ -61,27 +66,38 @@ bool mainWindow::renderFunc() {
 		
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 
+	
 	pSpr->update(sora::SORA->getDelta());
 	pSpr->render();
+	pressAnyKey->render(0, posy);
+	pSpr2->render(0, posy);
 
 	sora->endScene();
 	return false;
 }
 
 void mainWindow::init() {
+	{
+		sora::PROFILE("lallaa");
+		sora::SoraPNGOptimizer::optimizePNGFromAndWriteToFile(L"background.png", L"bg_optd.png");
+	}
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	
 	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 20);
 	pFont->setColor(0xFFFFCC00);
+	
 
 		
 	sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 20);
 	
-	pSpr = sora::SORA->createSprite(L"magicCircle.png");
-	pSpr->addEffect((new sora::SoraImageEffectList(sora::IMAGE_EFFECT_REPEAT))
-					->add(new sora::IEFade(1.f, 0.5f, 1.f))
-					->add(new sora::IETransitions(0.f, 0.f, 500.f, 500.f, 2.f)));
+	pSpr = sora::SORA->createSprite(L"background.png");
+	pressAnyKey = sora::SORA->createSprite(L"road.png");
+	pSpr2 = sora::SORA->createSprite(L"grass.png");
+	
+	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(0.f);
+	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
+	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(1.f);
 	
 	gcn::Container* cont = new gcn::Container;
 	cont->setDimension(gcn::Rectangle(100, 0, 800, 800));
