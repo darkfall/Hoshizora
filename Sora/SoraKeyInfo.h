@@ -744,15 +744,15 @@ namespace sora {
 		}
 		
 		bool isShiftFlag() const {
-			return flags & SORA_INPUT_FLAG_SHIFT;
+			return (flags & SORA_INPUT_FLAG_SHIFT) ? true : false;
 		}
 		
 		bool isCtrlFlag() const {
-			return flags & SORA_INPUT_FLAG_CTRL;
+			return (flags & SORA_INPUT_FLAG_CTRL) ? true : false;
 		}
 		
 		bool isAltFlag() const {
-			return flags & SORA_INPUT_FLAG_ALT;
+			return (flags & SORA_INPUT_FLAG_ALT) ? true : false;
 		}
 		
 		

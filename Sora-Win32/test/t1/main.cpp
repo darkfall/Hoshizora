@@ -61,7 +61,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	sora->setFPS(60);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");
-	sora->createWindow(new mead::meadMainWindow);
+	sora->createWindow(new mainWindow);
 	sora->start();
 		
 	return 0;

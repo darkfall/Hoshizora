@@ -48,17 +48,17 @@ bool mainWindow::updateFunc() {
 }
 
 sora::SoraSprite* pSpr2;
+sora::SoraSprite* pSpr3;
 
 bool mainWindow::renderFunc() {
 	sora->beginScene();
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
-		
-	//pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
-	
 
-	luaObject.update(0.f);
-	luaObject.render();
+	pSpr->render();
+	pSpr3->render();
+	pSpr2->render();
+
 	sora->endScene();
 	return false;
 }
@@ -66,13 +66,25 @@ bool mainWindow::renderFunc() {
 void mainWindow::init() {
     sora::SORA->setFPS(60);
 
-	mead::globalBulletManagerInit();
+	pSpr = sora::SORA->createSprite(L"bg_optd.png");
+	pSpr2 = sora::SORA->createSprite(L"grass.png");
+	pSpr3 = sora::SORA->createSprite(L"road.png");
+
+	pSpr->setBlendMode(BLEND_DEFAULT_Z);
+	pSpr2->setBlendMode(BLEND_DEFAULT_Z);
+	pSpr3->setBlendMode(BLEND_DEFAULT_Z);
+
+	pSpr->setZ(1.f);
+	pSpr3->setZ(0.5f);
+	pSpr2->setZ(0.0f);
+	/*mead::globalBulletManagerInit();
 	mead::exportBulletManager(luaObject.getState());
 	mead::exportGlobal(luaObject.getState());
 	sora::exportSoundManager(luaObject.getState());
 	sora::exportSpriteAnimation(luaObject.getState());
 	
 	luaObject.doScript(L"mybullettest.lua");
+	*/
 
 	registerEventFunc(this, &mainWindow::onKeyEvent);
 	sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);

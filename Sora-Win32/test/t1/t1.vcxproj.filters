@@ -834,9 +834,6 @@
     <ClInclude Include="..\..\..\Sora\tinyXML\tinystr.h">
       <Filter>头文件\tinyxml</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\Experimental\FolderTree.h">
-      <Filter>头文件\experimental</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\Experimental\Sora2DMatrix.h">
       <Filter>头文件\experimental</Filter>
     </ClInclude>
@@ -1164,9 +1161,6 @@
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.h">
       <Filter>Plugins\gcnExtend</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageEffectImage.h">
-      <Filter>Plugins\gcnExtend</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.h">
       <Filter>Plugins\gcnExtend</Filter>
     </ClInclude>
@@ -1185,16 +1179,7 @@
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnDraggableIcon.h">
       <Filter>Plugins\gcnExtend</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraSoundLoader.h">
-      <Filter>Plugins\SoraGUIChan</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Sound.h">
-      <Filter>Plugins\SoraGUIChan</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoundLoader.h">
-      <Filter>Plugins\SoraGUIChan</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraSound.h">
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.h">
@@ -1289,6 +1274,27 @@
     </ClInclude>
     <ClInclude Include="..\..\..\MEAD\meadMainWindow.h">
       <Filter>源文件\mead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\Sound.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\SoundLoader.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Modifiers\CloseModifier.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Modifiers\LabelSliderLinker.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUISound.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.h">
+      <Filter>Plugins\SoraGUIChan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1616,9 +1622,6 @@
     <ClCompile Include="..\..\..\Sora\tinyXML\tinystr.cpp">
       <Filter>头文件\tinyxml</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\Experimental\FolderTree.cpp">
-      <Filter>头文件\experimental</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraResourceFileFinder.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -1826,9 +1829,6 @@
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.cpp">
       <Filter>Plugins\gcnExtend</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageEffectImage.cpp">
-      <Filter>Plugins\gcnExtend</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.cpp">
       <Filter>Plugins\gcnExtend</Filter>
     </ClCompile>
@@ -1846,15 +1846,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnDraggableIcon.cpp">
       <Filter>Plugins\gcnExtend</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraSoundLoader.cpp">
-      <Filter>Plugins\SoraGUIChan</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Sound.cpp">
-      <Filter>Plugins\SoraGUIChan</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraSound.cpp">
-      <Filter>Plugins\SoraGUIChan</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.cpp">
       <Filter>Plugins\SoundManager</Filter>
@@ -1939,6 +1930,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\MEAD\meadMainWindow.cpp">
       <Filter>源文件\mead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\Sound.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Modifiers\CloseModifier.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Modifiers\LabelSliderLinker.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraGUISound.cpp">
+      <Filter>Plugins\SoraGUIChan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
