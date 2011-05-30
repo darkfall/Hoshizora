@@ -286,38 +286,38 @@ namespace sora {
 		node.bDead = false;
 		node.fLifetime = core->randomFloat(pheader.fMinLifetime, pheader.fMaxLifetime);
 		
-		node.dwCurrColor.a = core->_SFMTRandomFloat(pheader.dwMinStartColor.a, pheader.dwMaxStartColor.a);
-		node.dwCurrColor.r = core->_SFMTRandomFloat(pheader.dwMinStartColor.r, pheader.dwMaxStartColor.r);
-		node.dwCurrColor.g = core->_SFMTRandomFloat(pheader.dwMinStartColor.g, pheader.dwMaxStartColor.g);
-		node.dwCurrColor.b = core->_SFMTRandomFloat(pheader.dwMinStartColor.b, pheader.dwMaxStartColor.b);
+		node.dwCurrColor.a = core->randomFloat(pheader.dwMinStartColor.a, pheader.dwMaxStartColor.a);
+		node.dwCurrColor.r = core->randomFloat(pheader.dwMinStartColor.r, pheader.dwMaxStartColor.r);
+		node.dwCurrColor.g = core->randomFloat(pheader.dwMinStartColor.g, pheader.dwMaxStartColor.g);
+		node.dwCurrColor.b = core->randomFloat(pheader.dwMinStartColor.b, pheader.dwMaxStartColor.b);
 		SoraColorRGBA dwStart = node.dwCurrColor;
 		SoraColorRGBA dwEnd;
-		dwEnd.a = core->_SFMTRandomFloat(pheader.dwMinEndColor.a, pheader.dwMaxEndColor.a);
-		dwEnd.r = core->_SFMTRandomFloat(pheader.dwMinEndColor.r, pheader.dwMaxEndColor.r);
-		dwEnd.g = core->_SFMTRandomFloat(pheader.dwMinEndColor.g, pheader.dwMaxEndColor.g);
-		dwEnd.b = core->_SFMTRandomFloat(pheader.dwMinEndColor.b, pheader.dwMaxEndColor.b);
+		dwEnd.a = core->randomFloat(pheader.dwMinEndColor.a, pheader.dwMaxEndColor.a);
+		dwEnd.r = core->randomFloat(pheader.dwMinEndColor.r, pheader.dwMaxEndColor.r);
+		dwEnd.g = core->randomFloat(pheader.dwMinEndColor.g, pheader.dwMaxEndColor.g);
+		dwEnd.b = core->randomFloat(pheader.dwMinEndColor.b, pheader.dwMaxEndColor.b);
 		node.dwColorVar = (dwEnd - dwStart) / node.fLifetime;
 		
-		node.fCurrScale = core->_SFMTRandomFloat(pheader.fMinStartScale, pheader.fMaxStartScale);
+		node.fCurrScale = core->randomFloat(pheader.fMinStartScale, pheader.fMaxStartScale);
 		float32 fStart = node.fCurrScale;
-		float32 fEnd = core->_SFMTRandomFloat(pheader.fMinEndScale, pheader.fMaxEndScale);
+		float32 fEnd = core->randomFloat(pheader.fMinEndScale, pheader.fMaxEndScale);
 		node.fScaleVar = (fEnd - fStart) / node.fLifetime;
 		
 		node.fCurrSpin = 0.f;
-		node.fSpin = core->_SFMTRandomFloat(pheader.fMinSpin, pheader.fMaxSpin);
+		node.fSpin = core->randomFloat(pheader.fMinSpin, pheader.fMaxSpin);
 		
-		node.fSpeed = core->_SFMTRandomFloat(pheader.fMinSpeed, pheader.fMaxSpeed);
-		node.fAngle = DGR_RAD(core->_SFMTRandomFloat(pheader.fMinAngle, pheader.fMaxAngle));
-		node.fGravity = core->_SFMTRandomFloat(pheader.fMinGravity, pheader.fMaxGravity);
-		node.fTrigAcc = DGR_RAD(core->_SFMTRandomFloat(pheader.fMinTrigAcc, pheader.fMaxTrigAcc));
-		node.fLinearAcc = core->_SFMTRandomFloat(pheader.fMinLinearAcc, pheader.fMaxLinearAcc);
+		node.fSpeed = core->randomFloat(pheader.fMinSpeed, pheader.fMaxSpeed);
+		node.fAngle = DGR_RAD(core->randomFloat(pheader.fMinAngle, pheader.fMaxAngle));
+		node.fGravity = core->randomFloat(pheader.fMinGravity, pheader.fMaxGravity);
+		node.fTrigAcc = DGR_RAD(core->randomFloat(pheader.fMinTrigAcc, pheader.fMaxTrigAcc));
+		node.fLinearAcc = core->randomFloat(pheader.fMinLinearAcc, pheader.fMaxLinearAcc);
 		
-		node.position.set(pheader.emitPos.x+core->_SFMTRandomFloat(-pheader.emitRange.x, pheader.emitRange.x),
-						  pheader.emitPos.y+core->_SFMTRandomFloat(-pheader.emitRange.y, pheader.emitRange.y),
-						  pheader.emitPos.z+core->_SFMTRandomFloat(-pheader.emitRange.z, pheader.emitRange.z));
-		node.direction = vector3(core->_SFMTRandomFloat(pheader.minDirection.x, pheader.maxDirection.x),
-								 core->_SFMTRandomFloat(pheader.minDirection.y, pheader.maxDirection.y),
-								 core->_SFMTRandomFloat(pheader.minDirection.z, pheader.maxDirection.z)).normalize();
+		node.position.set(pheader.emitPos.x+core->randomFloat(-pheader.emitRange.x, pheader.emitRange.x),
+						  pheader.emitPos.y+core->randomFloat(-pheader.emitRange.y, pheader.emitRange.y),
+						  pheader.emitPos.z+core->randomFloat(-pheader.emitRange.z, pheader.emitRange.z));
+		node.direction = vector3(core->randomFloat(pheader.minDirection.x, pheader.maxDirection.x),
+								 core->randomFloat(pheader.minDirection.y, pheader.maxDirection.y),
+								 core->randomFloat(pheader.minDirection.z, pheader.maxDirection.z)).normalize();
 		
 		if(bRotate3v)
 			node.direction = quatRotation.rotate(node.direction);

@@ -66,21 +66,20 @@ bool mainWindow::renderFunc() {
 		
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 
+	sora::SORA->beginZBufferSort();
 	
 	pSpr->update(sora::SORA->getDelta());
-	pSpr->render();
 	pressAnyKey->render(0, posy);
 	pSpr2->render(0, posy);
+	pSpr->render();
+	
+	sora::SORA->endZBufferSort();
 
 	sora->endScene();
 	return false;
 }
 
 void mainWindow::init() {
-	{
-		sora::PROFILE("lallaa");
-		sora::SoraPNGOptimizer::optimizePNGFromAndWriteToFile(L"background.png", L"bg_optd.png");
-	}
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	
@@ -97,7 +96,12 @@ void mainWindow::init() {
 	
 	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(0.f);
 	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
-	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(1.f);
+	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(1.f); 
+	
+	sora::SoraShader* s = pSpr->attachShader(L"rftdHighlight.fs", "highlight", sora::FRAGMENT_SHADER);
+	float hlColor[4];
+	 hlColor[0] = 0.5f; hlColor[1] = 0.5f; hlColor[2] = 0.5f; hlColor[3] = 0.5f;
+	s->setParameterfv("hlColor", hlColor, 4);
 	
 	gcn::Container* cont = new gcn::Container;
 	cont->setDimension(gcn::Rectangle(100, 0, 800, 800));

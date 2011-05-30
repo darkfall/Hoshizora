@@ -87,7 +87,6 @@ namespace sora {
         SoraShader* SORACALL createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
 
 		SoraSprite* SORACALL createSprite (const SoraWString& sPath);
-		SoraSprite* SORACALL createSpriteTex(HSORATEXTURE tex);
 
 		void SORACALL renderQuad(SoraQuad& quad);
 		void SORACALL renderTriple(SoraTriple& trip);
@@ -97,23 +96,32 @@ namespace sora {
 		void SORACALL setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void SORACALL setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
 		void SORACALL setTransformWindowSize (float32 w, float32 h);
+		
+		/*
+		 z sort without zbuffer, because there are some problems with transparency when zbuffer is on
+		 we don't want our transparency pixels in textures to be omitted when rendering with z
+		 implemention for fast sort, accuracy 0.001
+		 */
+		void SORACALL beginZBufferSort();
+		void SORACALL endZBufferSort();
 
+		/*
+		 under windows, this would return HWND, 
+		 under other plaforms, just return (ulong32)mainWindow
+		 */
 		ulong32 SORACALL getMainWindowHandle();
 		SoraWindowInfoBase* SORACALL getMainWindow();
 
-		void SORACALL enableMessageBoxErrorPost(bool bFlag) { bMessageBoxErrorPost = bFlag; }
+		void SORACALL enableMessageBoxErrorPost(bool bFlag);
 
+		/*generates a int32 random number using SFMT*/
 		void	SORACALL setRandomSeed(int32 seed);
 		int32	SORACALL getRandomSeed();
-		int32	SORACALL randomInt	(int32 min, int32 max);
-		float32 SORACALL randomFloat	(float32 min, float32 max);
-		/* random number generators using SFMT */
-		int32	SORACALL _SFMTRandomInt(int32 min, int32 max);
-		float32 SORACALL _SFMTRandomFloat(float32 min, float32 max);
-		/*generates a int32 random number using SFMT*/
-		int32	SORACALL _SFMTRandomInt32();
+		int32	SORACALL randomInt(int32 min, int32 max);
+		float32 SORACALL randomFloat(float32 min, float32 max);
+		int32	SORACALL randomIntNoRange();
 		/*generates a float32 random number range [0, 1] using SFMT*/
-		float32 SORACALL _SFMTRandomFloat32();
+		float32 SORACALL randomFloatNoRange();
 
 		int32 SORACALL getScreenWidth();
 		int32 SORACALL getScreenHeight();
@@ -215,6 +223,7 @@ namespace sora {
 		bool bInitialized;
 		bool bHasInput;
 
+		int32 iRandomSeed;
 		int32 iScreenWidth, iScreenHeight;
 
         bool bMainScene;
@@ -222,15 +231,50 @@ namespace sora {
 		float32 time;
 
 		SoraWindowInfoBase* mainWindow;
-
+		SoraShaderContext* shaderContext;
+		
 		typedef std::list<SoraFrameListener*> FRAME_LISTENER_CONT;
 		FRAME_LISTENER_CONT frameListeners;
 
 		inline void _frameListenerStart();
 		inline void _frameListenerEnd();
-        
-        SoraShaderContext* shaderContext;
-	};
+		
+		
+		typedef struct __Z_BUFFER_NODE {
+			SoraVertex*			vertex;
+			SoraTexture*		tex;
+			SoraShaderContext*	shader;
+			int					blend;
+			int					size;
+			
+			void release() {
+				if(vertex) {
+					delete []vertex;
+					vertex = NULL;
+					size = 0;
+				}
+				__Z_BUFFER_NODE* tnext = next;
+				while(tnext != NULL) {
+					__Z_BUFFER_NODE* ttnext = tnext;
+					tnext = ttnext->next;
+					
+					delete ttnext;
+					ttnext = NULL;
+				}
+				next = NULL;
+			}
+			
+			__Z_BUFFER_NODE* next;
+			
+			__Z_BUFFER_NODE(): vertex(NULL), shader(NULL), tex(NULL), blend(BLEND_DEFAULT), size(0), next(NULL) {}
+		};
+		
+		bool bZBufferArea;
+		SoraShaderContext* __prevShader;
+		__Z_BUFFER_NODE __z_buffer_array[1000];
+		
+		inline void __z_buffer_insert_node(const __Z_BUFFER_NODE& node, int32 z);
+    };
 
 
 #define SORA SoraCore::Instance()

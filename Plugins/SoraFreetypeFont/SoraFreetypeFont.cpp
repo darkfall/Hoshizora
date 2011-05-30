@@ -124,7 +124,7 @@ namespace sora {
 		sora = SoraCore::Instance();
 		if(!sora)
 			throw SORA_EXCEPTION("error getting core instance");
-		sprite = sora->createSpriteTex(0);
+		sprite = new SoraSprite(NULL);
 		if(!sprite)
 			throw SORA_EXCEPTION("error creating font sprite");
 		

@@ -499,8 +499,6 @@
 		884575D61300DB38003EC408 /* state_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = state_test.h; path = Experimental/state_test.h; sourceTree = "<group>"; };
 		884575D71300DB38003EC408 /* state_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = state_test.cpp; path = Experimental/state_test.cpp; sourceTree = "<group>"; };
 		884CC87312F88E1300FD18FC /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
-		88504B7B12ECDB11009B9F45 /* hgeRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgeRandom.h; sourceTree = "<group>"; };
-		88504B8912ECDB4E009B9F45 /* hgeRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgeRandom.h; sourceTree = "<group>"; };
 		88504B8A12ECDB4E009B9F45 /* SFMT-alti.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFMT-alti.h"; sourceTree = "<group>"; };
 		88504B8B12ECDB4E009B9F45 /* SFMT-params.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFMT-params.h"; sourceTree = "<group>"; };
 		88504B8C12ECDB4E009B9F45 /* SFMT-params11213.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFMT-params11213.h"; sourceTree = "<group>"; };
@@ -1504,7 +1502,6 @@
 		88504B8812ECDB4E009B9F45 /* Random */ = {
 			isa = PBXGroup;
 			children = (
-				88504B8912ECDB4E009B9F45 /* hgeRandom.h */,
 				88504B8A12ECDB4E009B9F45 /* SFMT-alti.h */,
 				88504B8B12ECDB4E009B9F45 /* SFMT-params.h */,
 				88504B8C12ECDB4E009B9F45 /* SFMT-params11213.h */,
@@ -1520,7 +1517,6 @@
 				88504B9612ECDB4E009B9F45 /* SFMT-sse2.h */,
 				88504B9712ECDB4E009B9F45 /* SFMT.c */,
 				88504B9812ECDB4E009B9F45 /* SFMT.h */,
-				88504B7B12ECDB11009B9F45 /* hgeRandom.h */,
 			);
 			path = Random;
 			sourceTree = "<group>";

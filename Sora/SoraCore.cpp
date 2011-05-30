@@ -16,8 +16,6 @@
 #include "Defaults/SoraMiscTool_OSX.h"
 #include "Defaults/SoraMiscTool_iOS.h"
 
-#include "Random/hgeRandom.h"
-
 #include "Debug/SoraInternalLogger.h"
 #include "Debug/SoraAutoProfile.h"
 #include "Debug/SoraDebugRenderer.h"
@@ -35,27 +33,27 @@ namespace sora {
 		bMessageBoxErrorPost = false;
 		bInitialized = false;
 		bFrameSync = false;
-
 		bHasInput = false;
-
+		bZBufferArea = false;
+        bMainScene = false;
+		
 		_initializeTimer();
 		_initializeMiscTool();
 		
 		SoraEventManager::Instance();
 		SoraInternalLogger::Instance();
 
-		pInput = 0;
-		pFontManager = 0;
-		pRenderSystem = 0;
-		pSoundSystem = 0;
+		pInput = NULL;
+		pFontManager = NULL;
+		pRenderSystem = NULL;
+		pSoundSystem = NULL;
         
-        bMainScene = false;
-		mainWindow = 0;
-        
-        shaderContext = 0;
+		mainWindow = NULL;
+		
+		__prevShader = NULL;
+        shaderContext = NULL;
 
 		pPluginManager = new SoraPluginManager;
-
 		pResourceFileFinder = new SoraResourceFileFinder;
 		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
 		
@@ -497,11 +495,15 @@ namespace sora {
 	void SoraCore::attachShaderContext(SoraShaderContext* context) {
         assert(bInitialized == true);
         pRenderSystem->attachShaderContext(context);
+		
+		__prevShader = context;
 	}
 
 	void SoraCore::detachShaderContext() {
         assert(bInitialized == true);
         pRenderSystem->detachShaderContext();
+		
+		__prevShader = NULL;
 	}
 
 	HSORATEXTURE SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
@@ -601,20 +603,40 @@ namespace sora {
 			}
 		}
 	}
-
-	SoraSprite* SoraCore::createSpriteTex(HSORATEXTURE tex) {
-		assert(bInitialized==true);
-		return new SoraSprite(tex);
-	}
-
+	
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		assert(bInitialized==true);
-		pRenderSystem->renderQuad(quad);
+		if(bZBufferArea) {
+			int32 z = static_cast<int32>(quad.v[0].z * 1000);
+			__Z_BUFFER_NODE node;
+			node.vertex = new SoraVertex[4];
+			memcpy(node.vertex, &quad.v[0], sizeof(SoraVertex)*4);
+			node.size = 4;
+			node.blend = quad.blend;
+			node.tex = quad.tex;
+			node.shader = __prevShader;
+			
+			__z_buffer_insert_node(node, z);
+		} else 
+			pRenderSystem->renderQuad(quad);
 	}
 
 	void SoraCore::renderTriple(SoraTriple& trip) {
 		assert(bInitialized==true);
-		pRenderSystem->renderTriple(trip);
+		
+		if(bZBufferArea) {
+			int32 z = static_cast<int32>(trip.v[0].z * 1000);
+			__Z_BUFFER_NODE node;
+			node.vertex = new SoraVertex[3];
+			memcpy(node.vertex, &trip.v[0], sizeof(SoraVertex)*3);
+			node.size = 3;
+			node.blend = trip.blend;
+			node.tex = trip.tex;
+			node.shader = __prevShader;
+			
+			__z_buffer_insert_node(node, z);
+		} else 
+			pRenderSystem->renderTriple(trip);
 	}
 
 	void SoraCore::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, ulong32 color, float32 z) {
@@ -861,35 +883,27 @@ namespace sora {
 	}
 
 	void SoraCore::setRandomSeed(int32 seed) {
-		Random_Seed(seed);
 		init_gen_rand(seed);
+		iRandomSeed = seed;
 	}
 
 	int32 SoraCore::getRandomSeed() {
-		return g_seed2;
+		return iRandomSeed;
 	}
 
 	int32 SoraCore::randomInt(int32 min, int32 max) {
-		return Random_int32(min, max);
-	}
-
-	float32 SoraCore::randomFloat(float32 min, float32 max) {
-		return Random_float32(min, max);
-	}
-
-	int32 SoraCore::_SFMTRandomInt(int32 min, int32 max) {
 		return (int32)(min+genrand_real1()*(max-min));
 	}
 
-	float32 SoraCore::_SFMTRandomFloat(float32 min, float32 max) {
+	float32 SoraCore::randomFloat(float32 min, float32 max) {
 		return (float32)(min+genrand_real1()*(max-min));
 	}
 
-	int32 SoraCore::_SFMTRandomInt32() {
+	int32 SoraCore::randomIntNoRange() {
 		return gen_rand32();
 	}
 
-	float32 SoraCore::_SFMTRandomFloat32() {
+	float32 SoraCore::randomFloatNoRange() {
 		return (float32)genrand_real1();
 	}
 
@@ -973,5 +987,69 @@ namespace sora {
 
 	s_int64 SoraCore::getEngineMemoryUsage() {
 		return getMemoryUsage();
+	}
+	
+	void SORACALL SoraCore::enableMessageBoxErrorPost(bool bFlag) { 
+		bMessageBoxErrorPost = bFlag;
+	}
+	
+	void SORACALL SoraCore::beginZBufferSort() {
+		bZBufferArea = true;
+	}
+
+	void SORACALL SoraCore::endZBufferSort() {
+		bZBufferArea = false;
+		for(int i=0; i<1000; ++i) {
+			__Z_BUFFER_NODE* node = &__z_buffer_array[i];
+			if(__z_buffer_array[i].size == 4) {
+				SoraQuad quad;
+				memcpy(&quad.v[0], node->vertex, sizeof(SoraVertex)*4);
+				quad.blend = node->blend;
+				quad.tex = node->tex;
+				
+				if(node->shader)
+					attachShaderContext(node->shader);
+				renderQuad(quad);
+				detachShaderContext();
+			} else if(node->size == 3) {
+				SoraTriple trip;
+				memcpy(&trip.v[0], node->vertex, sizeof(SoraVertex)*3);
+				trip.blend = node->blend;
+				trip.tex = node->tex;
+				
+				if(node->shader)
+					attachShaderContext(node->shader);
+				renderTriple(trip);
+				detachShaderContext();
+			} else {
+				// todo
+				
+			}
+			__z_buffer_array[i].release();
+		}
+	}
+	
+	void SoraCore::__z_buffer_insert_node(const __Z_BUFFER_NODE& node, int32 z) {
+		if(z >= 1000)
+			z = 999;
+		else if(z <= 0)
+			z = 0;
+		
+		__Z_BUFFER_NODE* cnode = &__z_buffer_array[z];
+		if(cnode->size != 0) {
+			__Z_BUFFER_NODE* next = cnode;
+			while(next->next != NULL)
+				next = next->next;
+			
+			__Z_BUFFER_NODE* newNode = new __Z_BUFFER_NODE();
+			newNode->vertex	= node.vertex;
+			newNode->blend = node.blend;
+			newNode->size = node.size;
+			newNode->shader = node.shader;
+			
+			next->next = newNode;
+		} else {
+			__z_buffer_array[z] = node;
+		}
 	}
 } // namespace sora

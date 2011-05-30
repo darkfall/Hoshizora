@@ -147,8 +147,10 @@ namespace sora{
 	}
 
 	void SoraHGERenderer::detachShaderContext() {
-		currShader->detachShaderList();
-		currShader = 0;
+		if(currShader != NULL) {
+			currShader->detachShaderList();
+			currShader = 0;
+		}
 	}
 
 	SoraTexture* SoraHGERenderer::createTexture(const SoraWString& sTexturePath, bool bMipmap) {

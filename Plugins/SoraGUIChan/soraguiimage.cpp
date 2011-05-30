@@ -130,7 +130,7 @@ namespace gcn
 
         sora->textureUnlock(mTexture);
 		 */
-        mSoraSprite = (sora::SoraSprite*)sora->createSpriteTex(mTexture);
+        mSoraSprite = new sora::SoraSprite(mTexture);
 	//	mSoraSprite->setZ(GUI_Z);
 	//	mSoraSprite->setBlendMode(BLEND_DEFAULT_Z);
     }

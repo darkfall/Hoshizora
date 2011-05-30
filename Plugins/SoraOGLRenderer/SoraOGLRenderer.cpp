@@ -849,6 +849,9 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::detachShaderContext() {
+		if(!currShader)
+			return;
+		
 		if(!currShader->detachShaderList())
 			SoraCore::Instance()->log("SoraOGLRenderer: error detaching shader list");
 		flush();
