@@ -268,8 +268,12 @@ static void msleep(uint32_t msec) {
 
 #ifdef OS_WIN32
 #define s_int64 __int64
+typedef __int64 int64;
+typedef unsigned __int64 uint64;
 #else
-#define s_int64 uint64_t
+#define s_int64 int64_t
+typedef int64_t int64;
+typedef uint64_t uint64;
 #endif
 
 #ifdef BIT_32_64_EXTEND

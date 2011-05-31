@@ -237,7 +237,7 @@ namespace sora {
 	};
 	
 	template<class __IN>
-	class RTTIVarConvertTo<__IN, int64_t> {
+	class RTTIVarConvertTo<__IN, int64> {
 	public:
 		int operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
@@ -256,20 +256,20 @@ namespace sora {
 				case RTTI_ULONG32:
 				case RTTI_FLOAT:
 				case RTTI_DOUBLE:
-					return static_cast<int64_t>(value);
+					return static_cast<int64>(value);
 					break;
 					
 				case RTTI_STRING:
-					return static_cast<int64_t>(atoi(value.c_str()));
+					return static_cast<int64>(atoi(value.c_str()));
 					break;
 			}
 			
-			return RTTIDefaultValue<int64_t>::Default();
+			return RTTIDefaultValue<int64>::Default();
 		}
 	};
 	
 	template<class __IN>
-	class RTTIVarConvertTo<__IN, uint64_t> {
+	class RTTIVarConvertTo<__IN, uint64> {
 	public:
 		int operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
@@ -288,15 +288,15 @@ namespace sora {
 				case RTTI_ULONG32:
 				case RTTI_FLOAT:
 				case RTTI_DOUBLE:
-					return static_cast<uint64_t>(value);
+					return static_cast<uint64>(value);
 					break;
 					
 				case RTTI_STRING:
-					return static_cast<uint64_t>(atoi(value.c_str()));
+					return static_cast<uint64>(atoi(value.c_str()));
 					break;
 			}
 			
-			return RTTIDefaultValue<uint64_t>::Default();
+			return RTTIDefaultValue<uint64>::Default();
 		}
 	};
 	

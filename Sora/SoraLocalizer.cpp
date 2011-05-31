@@ -18,15 +18,6 @@ namespace sora {
 		return (lexer->getNextToken() == tokenExpected);
 	}
 	
-	const wchar_t* SoraLocalizer::strToWideStr(const char* str) {
-		size_t _Dsize = strlen(str);
-		wchar_t *_Dest = new wchar_t[_Dsize];
-		wmemset(_Dest, 0, _Dsize);
-		mbstowcs(_Dest, str, _Dsize);
-		//_Dest[_Dsize] = L'\0';
-		return _Dest;
-	}
-	
 	SoraString SoraLocalizer::readLocaleIdent(llexer* confLexer) {
 		readToken(confLexer, TOKEN_TYPE_IDENT);
 		if(strcmp(confLexer->getCurrLexeme(), "locale") == 0) {

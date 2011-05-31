@@ -39,9 +39,11 @@ namespace sora {
 		}
 		
 		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+			return L"\0";
 		}
 		
 		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+			return L"\0";
 		}
 		
 		virtual void setMainWindowHandle(ulong32 handle) { }

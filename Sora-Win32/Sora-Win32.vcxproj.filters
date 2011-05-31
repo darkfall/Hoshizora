@@ -159,6 +159,51 @@
     <ClInclude Include="..\Sora\SoraFileUtility.h">
       <Filter>头文件\Sora</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTI.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIClass.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIClassManager.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIConstructor.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIException.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIField.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIFunctor.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIMethod.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIType.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTITypeDecl.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIVar.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIVarAccess.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIVarConverter.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraRTTIVarDefaultValue.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RTTI\SoraSingleton.h">
+      <Filter>头文件\Sora</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sora\SoraSprite.cpp">
@@ -195,6 +240,21 @@
       <Filter>头文件\Sora</Filter>
     </ClCompile>
     <ClCompile Include="..\Sora\hgerect.cpp">
+      <Filter>头文件\Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\RTTI\SoraRTTIClass.cpp">
+      <Filter>头文件\Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\RTTI\SoraRTTIClassManager.cpp">
+      <Filter>头文件\Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\RTTI\SoraRTTIField.cpp">
+      <Filter>头文件\Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\RTTI\SoraRTTIMethod.cpp">
+      <Filter>头文件\Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\RTTI\SoraRTTIType.cpp">
       <Filter>头文件\Sora</Filter>
     </ClCompile>
   </ItemGroup>

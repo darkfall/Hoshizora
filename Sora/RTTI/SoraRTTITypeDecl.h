@@ -76,12 +76,12 @@ namespace sora {
 	}
 	
 	template<>
-	inline SoraRTTIType* RTTITypeOf(int64_t&) {
+	inline SoraRTTIType* RTTITypeOf(int64&) {
 		return &SoraRTTIType::int64Type;
 	}
 	
 	template<>
-	inline SoraRTTIType* RTTITypeOf(uint64_t&) {
+	inline SoraRTTIType* RTTITypeOf(uint64&) {
 		return &SoraRTTIType::uint64Type;
 	}
 	
@@ -139,11 +139,11 @@ namespace sora {
 		return &SoraRTTIType::ulong32Type;
 	}
 	
-	inline SoraRTTIType* RTTITypeOfPtr(int64_t*) {
+	inline SoraRTTIType* RTTITypeOfPtr(int64*) {
 		return &SoraRTTIType::int64Type;
 	}
 	
-	inline SoraRTTIType* RTTITypeOfPtr(uint64_t*) {
+	inline SoraRTTIType* RTTITypeOfPtr(uint64*) {
 		return &SoraRTTIType::uint64Type;
 	}
 	
@@ -201,12 +201,12 @@ namespace sora {
 	}
 	
 	template<>
-	inline SoraRTTIType* RTTITypeOfPtr(int64_t const*const*) {
+	inline SoraRTTIType* RTTITypeOfPtr(int64 const*const*) {
 		return new SoraRTTIPtrType(&SoraRTTIType::int64Type);
 	}
 	
 	template<>
-	inline SoraRTTIType* RTTITypeOfPtr(uint64_t const*const*) {
+	inline SoraRTTIType* RTTITypeOfPtr(uint64 const*const*) {
 		return new SoraRTTIPtrType(&SoraRTTIType::uint64Type);
 	}
 	

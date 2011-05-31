@@ -16,6 +16,14 @@
 #include "SoraRTTIException.h"
 
 namespace sora {
+
+#ifdef WIN32
+typedef __int64 int64;
+typedef unsigned __int64 uint64;
+#else
+typedef int64_t int64;
+typedef uint64_t uint64;
+#endif
 	
 	typedef enum {
 		RTTI_FLAG_VIRTUAL	= 1,

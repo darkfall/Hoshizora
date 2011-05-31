@@ -92,11 +92,11 @@ namespace sora {
 		unsigned long getULong() {
 			return RTTIVarConvertTo<__T, unsigned long>(mValue.get());
 		}
-		int64_t getInt64() {
-			return RTTIVarConvertTo<__T, int64_t>(mValue.get());
+		int64 getInt64() {
+			return RTTIVarConvertTo<__T, int64>(mValue.get());
 		}
-		uint64_t getUInt64() {
-			return RTTIVarConvertTo<__T, uint64_t>(mValue.get());
+		uint64 getUInt64() {
+			return RTTIVarConvertTo<__T, uint64>(mValue.get());
 		}
 		float getFloat() {
 			return RTTIVarConvertTo<__T, float>(mValue.get());
@@ -139,10 +139,10 @@ namespace sora {
 		operator unsigned long() {
 			return getULong();
 		}
-		operator int64_t() {
+		operator int64() {
 			return getInt64();
 		}
-		operator uint64_t() {
+		operator uint64() {
 			return getUInt64();
 		}
 		operator float() {
@@ -217,13 +217,13 @@ namespace sora {
 	}
 	
 	template<>
-	inline SoraRTTIType* RTTIVarOf(int64_t&) {
-		return new SoraRTTIVar<int64_t>();
+	inline SoraRTTIType* RTTIVarOf(int64&) {
+		return new SoraRTTIVar<int64>();
 	}
 	
 	template<>
-	inline SoraRTTIType* RTTIVarOf(uint64_t&) {
-		return new SoraRTTIVar<uint64_t>();
+	inline SoraRTTIType* RTTIVarOf(uint64&) {
+		return new SoraRTTIVar<uint64>();
 	}
 	
 	template<>
