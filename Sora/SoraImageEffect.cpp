@@ -173,8 +173,10 @@ namespace sora {
 				started = 0;
 
 			}
-		} else 
+		} else if(repeatTimes == -1)
 			start(getMode(), getEffectTime());
+		else
+			states = IMAGE_EFFECT_END;
 	}
 	
 	SoraImageEffectList::SoraImageEffectList(IMAGE_EFFECT_MODE mode) {

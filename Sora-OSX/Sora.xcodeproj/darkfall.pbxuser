@@ -109,14 +109,14 @@
 			88C714DF137A6C5400E0C2BB /* rftdSource.cpp:24 */,
 			886038591387B9C400C3B63B /* SoraSprite.cpp:385 */,
 			8860385B1387B9C800C3B63B /* SoraSprite.cpp:385 */,
-			8860387C1387BAED00C3B63B /* SoraImageEffect.cpp:178 */,
-			8860387E1387BAF100C3B63B /* SoraImageEffect.cpp:178 */,
-			8860388C1387BB4A00C3B63B /* SoraImageEffect.cpp:177 */,
+			8860387C1387BAED00C3B63B /* SoraImageEffect.cpp:180 */,
+			8860387E1387BAF100C3B63B /* SoraImageEffect.cpp:180 */,
+			8860388C1387BB4A00C3B63B /* SoraImageEffect.cpp:179 */,
 			886038EE1387CF9900C3B63B /* SoraRTTI.h:31 */,
 			88A212B0138E5E2E0019C5AA /* mainWindow.cpp:112 */,
 			8845301C1390EFF70045D130 /* SoraINIFile.cpp:83 */,
 			884530331390F0600045D130 /* SoraINIFile.cpp:166 */,
-			8845321513912D8C0045D130 /* SoraImageEffect.cpp:238 */,
+			8845321513912D8C0045D130 /* SoraImageEffect.cpp:240 */,
 		);
 		codeSenseManager = 887022D31346AB4300AE8DD7 /* Code sense */;
 		executables = (
@@ -525,6 +525,13 @@
 			887F1BCF139523A700F534D5 /* PBXTextBookmark */ = 887F1BCF139523A700F534D5 /* PBXTextBookmark */;
 			887F1BD0139523A700F534D5 /* PBXTextBookmark */ = 887F1BD0139523A700F534D5 /* PBXTextBookmark */;
 			887F1BD1139523AF00F534D5 /* PBXTextBookmark */ = 887F1BD1139523AF00F534D5 /* PBXTextBookmark */;
+			887F1BD21395243400F534D5 /* PBXTextBookmark */ = 887F1BD21395243400F534D5 /* PBXTextBookmark */;
+			887F1BD31395248D00F534D5 /* PBXTextBookmark */ = 887F1BD31395248D00F534D5 /* PBXTextBookmark */;
+			887F1BD41395248D00F534D5 /* PBXTextBookmark */ = 887F1BD41395248D00F534D5 /* PBXTextBookmark */;
+			887F1BD51395248D00F534D5 /* PBXTextBookmark */ = 887F1BD51395248D00F534D5 /* PBXTextBookmark */;
+			887F1BD6139524E300F534D5 /* PBXTextBookmark */ = 887F1BD6139524E300F534D5 /* PBXTextBookmark */;
+			887F1BD7139524E300F534D5 /* PBXTextBookmark */ = 887F1BD7139524E300F534D5 /* PBXTextBookmark */;
+			887F1BD8139524E300F534D5 /* PBXTextBookmark */ = 887F1BD8139524E300F534D5 /* PBXTextBookmark */;
 			8889817C137500A2000B937A = 8889817C137500A2000B937A /* PBXTextBookmark */;
 			888982E713751981000B937A = 888982E713751981000B937A /* PBXTextBookmark */;
 			888982EA13751981000B937A = 888982EA13751981000B937A /* PBXTextBookmark */;
@@ -789,9 +796,9 @@
 	};
 	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 882}}";
-			sepNavSelRange = "{862, 0}";
-			sepNavVisRange = "{204, 1386}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1204}}";
+			sepNavSelRange = "{1181, 23}";
+			sepNavVisRange = "{401, 1501}";
 			sepNavWindowFrame = "{{15, 4}, {840, 871}}";
 		};
 	};
@@ -2210,7 +2217,7 @@
 		vrLen = 3479;
 		vrLoc = 119430;
 	};
-	8845321513912D8C0045D130 /* SoraImageEffect.cpp:238 */ = {
+	8845321513912D8C0045D130 /* SoraImageEffect.cpp:240 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2222,7 +2229,7 @@
 		functionName = "SoraImageEffectList::update(float32 delta)";
 		hitCount = 3;
 		ignoreCount = 0;
-		lineNumber = 238;
+		lineNumber = 240;
 		location = Sora;
 		modificationTime = 328281565.129132;
 		originalNumberOfMultipleMatches = 1;
@@ -2243,7 +2250,7 @@
 		fRef = 889BFD4812BF4D23002D8A2F /* SoraImageEffect.h */;
 		name = "SoraImageEffect.h: 147";
 		rLen = 41;
-		rLoc = 3291;
+		rLoc = 3288;
 		rType = 0;
 		vrLen = 1290;
 		vrLoc = 2491;
@@ -2253,7 +2260,7 @@
 		fRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */;
 		name = "SoraImageEffect.cpp: 245";
 		rLen = 0;
-		rLoc = 5778;
+		rLoc = 5838;
 		rType = 0;
 		vrLen = 1647;
 		vrLoc = 5322;
@@ -2293,7 +2300,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 56";
 		rLen = 0;
-		rLoc = 1469;
+		rLoc = 1956;
 		rType = 0;
 		vrLen = 1385;
 		vrLoc = 204;
@@ -3342,7 +3349,7 @@
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	8860387C1387BAED00C3B63B /* SoraImageEffect.cpp:178 */ = {
+	8860387C1387BAED00C3B63B /* SoraImageEffect.cpp:180 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3354,12 +3361,12 @@
 		functionName = "SoraImageEffect::checkList()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 178;
+		lineNumber = 180;
 		modificationTime = 328281487.157939;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
-	8860387E1387BAF100C3B63B /* SoraImageEffect.cpp:178 */ = {
+	8860387E1387BAF100C3B63B /* SoraImageEffect.cpp:180 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3371,13 +3378,13 @@
 		functionName = "SoraImageEffect::checkList()";
 		hitCount = 1;
 		ignoreCount = 0;
-		lineNumber = 178;
+		lineNumber = 180;
 		location = Sora;
 		modificationTime = 328281522.1407889;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	8860388C1387BB4A00C3B63B /* SoraImageEffect.cpp:177 */ = {
+	8860388C1387BB4A00C3B63B /* SoraImageEffect.cpp:179 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3389,7 +3396,7 @@
 		functionName = "SoraImageEffect::checkRepeatTimes()";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 177;
+		lineNumber = 179;
 		location = Sora;
 		modificationTime = 328281487.158742;
 		originalNumberOfMultipleMatches = 1;
@@ -4487,7 +4494,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 56";
 		rLen = 0;
-		rLoc = 1469;
+		rLoc = 1956;
 		rType = 0;
 		vrLen = 1416;
 		vrLoc = 0;
@@ -4567,7 +4574,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 44";
 		rLen = 8;
-		rLoc = 908;
+		rLoc = 1395;
 		rType = 0;
 		vrLen = 1476;
 		vrLoc = 44;
@@ -5265,7 +5272,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 44";
 		rLen = 8;
-		rLoc = 908;
+		rLoc = 1395;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 44;
@@ -5275,7 +5282,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1555;
+		rLoc = 2042;
 		rType = 0;
 		vrLen = 1387;
 		vrLoc = 204;
@@ -5305,7 +5312,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1555;
+		rLoc = 2042;
 		rType = 0;
 		vrLen = 1387;
 		vrLoc = 204;
@@ -5405,7 +5412,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1555;
+		rLoc = 2042;
 		rType = 0;
 		vrLen = 1387;
 		vrLoc = 204;
@@ -5465,7 +5472,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 39";
 		rLen = 0;
-		rLoc = 862;
+		rLoc = 1349;
 		rType = 0;
 		vrLen = 1435;
 		vrLoc = 156;
@@ -5525,7 +5532,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 46";
 		rLen = 0;
-		rLoc = 862;
+		rLoc = 1349;
 		rType = 0;
 		vrLen = 1368;
 		vrLoc = 156;
@@ -5535,7 +5542,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 40";
 		rLen = 0;
-		rLoc = 862;
+		rLoc = 1349;
 		rType = 0;
 		vrLen = 1270;
 		vrLoc = 156;
@@ -5545,7 +5552,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 39";
 		rLen = 0;
-		rLoc = 862;
+		rLoc = 1349;
 		rType = 0;
 		vrLen = 1253;
 		vrLoc = 284;
@@ -5565,7 +5572,7 @@
 		fRef = 889BFD4812BF4D23002D8A2F /* SoraImageEffect.h */;
 		name = "SoraImageEffect.h: 146";
 		rLen = 0;
-		rLoc = 3289;
+		rLoc = 3286;
 		rType = 0;
 		vrLen = 1287;
 		vrLoc = 1450;
@@ -5575,7 +5582,7 @@
 		fRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */;
 		name = "SoraImageEffect.cpp: 245";
 		rLen = 0;
-		rLoc = 5778;
+		rLoc = 5838;
 		rType = 0;
 		vrLen = 1647;
 		vrLoc = 5322;
@@ -5585,7 +5592,7 @@
 		fRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */;
 		name = "SoraImageEffect.cpp: 177";
 		rLen = 0;
-		rLoc = 4019;
+		rLoc = 4040;
 		rType = 0;
 		vrLen = 1068;
 		vrLoc = 3460;
@@ -5606,7 +5613,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 0;
-		rLoc = 38;
+		rLoc = 62;
 		rType = 1;
 	};
 	887F1BCD139523A300F534D5 /* PBXTextBookmark */ = {
@@ -5614,7 +5621,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 41";
 		rLen = 0;
-		rLoc = 862;
+		rLoc = 1349;
 		rType = 0;
 		vrLen = 460;
 		vrLoc = 862;
@@ -5623,7 +5630,7 @@
 		isa = PBXTextBookmark;
 		fRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */;
 		name = "SoraImageEffect.cpp: 176";
-		rLen = 45;
+		rLen = 66;
 		rLoc = 3993;
 		rType = 0;
 		vrLen = 1068;
@@ -5634,7 +5641,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 39";
 		rLen = 0;
-		rLoc = 862;
+		rLoc = 1349;
 		rType = 0;
 		vrLen = 1253;
 		vrLoc = 284;
@@ -5644,7 +5651,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 39";
 		rLen = 0;
-		rLoc = 862;
+		rLoc = 1349;
 		rType = 0;
 		vrLen = 1253;
 		vrLoc = 284;
@@ -5654,10 +5661,80 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 39";
 		rLen = 0;
-		rLoc = 862;
+		rLoc = 1349;
 		rType = 0;
 		vrLen = 1386;
 		vrLoc = 204;
+	};
+	887F1BD21395243400F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 54";
+		rLen = 23;
+		rLoc = 1181;
+		rType = 0;
+		vrLen = 1501;
+		vrLoc = 401;
+	};
+	887F1BD31395248D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 54";
+		rLen = 23;
+		rLoc = 1181;
+		rType = 0;
+		vrLen = 1501;
+		vrLoc = 401;
+	};
+	887F1BD41395248D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */;
+		name = "SoraImageEffect.cpp: 176";
+		rLen = 66;
+		rLoc = 3993;
+		rType = 0;
+		vrLen = 1065;
+		vrLoc = 3460;
+	};
+	887F1BD51395248D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */;
+		name = "SoraImageEffect.cpp: 168";
+		rLen = 280;
+		rLoc = 3818;
+		rType = 0;
+		vrLen = 1064;
+		vrLoc = 3524;
+	};
+	887F1BD6139524E300F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889BFD4812BF4D23002D8A2F /* SoraImageEffect.h */;
+		name = "SoraImageEffect.h: 114";
+		rLen = 0;
+		rLoc = 2497;
+		rType = 0;
+		vrLen = 1195;
+		vrLoc = 1754;
+	};
+	887F1BD7139524E300F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */;
+		name = "SoraImageEffect.cpp: 179";
+		rLen = 0;
+		rLoc = 4098;
+		rType = 0;
+		vrLen = 1097;
+		vrLoc = 3484;
+	};
+	887F1BD8139524E300F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */;
+		name = "SoraImageEffect.cpp: 179";
+		rLen = 0;
+		rLoc = 4098;
+		rType = 0;
+		vrLen = 1369;
+		vrLoc = 0;
 	};
 	8889817C137500A2000B937A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -6654,16 +6731,16 @@
 	};
 	889BFD4712BF4D23002D8A2F /* SoraImageEffect.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 6062}}";
-			sepNavSelRange = "{3993, 45}";
-			sepNavVisRange = "{3460, 1068}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 6132}}";
+			sepNavSelRange = "{4098, 0}";
+			sepNavVisRange = "{0, 1369}";
 		};
 	};
 	889BFD4812BF4D23002D8A2F /* SoraImageEffect.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 3724}}";
-			sepNavSelRange = "{3289, 0}";
-			sepNavVisRange = "{1450, 1287}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 3696}}";
+			sepNavSelRange = "{2497, 0}";
+			sepNavVisRange = "{1754, 1195}";
 		};
 	};
 	88A20E1C138DF5060019C5AA /* PBXTextBookmark */ = {

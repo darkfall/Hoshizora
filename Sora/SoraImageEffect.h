@@ -94,7 +94,7 @@ namespace sora {
         
         float32 getEffectTime() const { return effectTime; }
 		
-		void setRepeatTimes(uint32 times);
+		void setRepeatTimes(int32 times);
 		uint32 getRepeatTimes() const;
 		
 		void swap();
@@ -111,8 +111,8 @@ namespace sora {
 		float32 topauseTime;
 		float32 effectTime;
 		
-		uint32 currRepeatTimes;
-		uint32 repeatTimes;
+		int32 currRepeatTimes;
+		int32 repeatTimes;
 		
 		uint8 pingpongState;
 		

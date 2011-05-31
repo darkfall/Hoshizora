@@ -230,6 +230,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -279,13 +281,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>157</integer>
-									<integer>145</integer>
+									<integer>72</integer>
+									<integer>19</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 2147}, {205, 760}}</string>
+							<string>{{0, 810}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -315,14 +317,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>main.cpp</string>
+								<string>SoraImageEffect.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -330,11 +330,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>main.cpp</string>
+										<string>SoraImageEffect.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>887F1BD1139523AF00F534D5</string>
+										<string>887F1BD8139524E300F534D5</string>
 										<key>history</key>
 										<array>
 											<string>88BFA132135AB29100BB8E70</string>
@@ -808,9 +808,9 @@
 											<string>887F1BC0139521EC00F534D5</string>
 											<string>887F1BC1139521EC00F534D5</string>
 											<string>887F1BC71395239900F534D5</string>
-											<string>887F1BC81395239900F534D5</string>
-											<string>887F1BCE139523A700F534D5</string>
-											<string>887F1BCF139523A700F534D5</string>
+											<string>887F1BD31395248D00F534D5</string>
+											<string>887F1BD6139524E300F534D5</string>
+											<string>887F1BD7139524E300F534D5</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
