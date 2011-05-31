@@ -514,8 +514,10 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 		filePathBuffer[0] = '\0';
 			
 		applyFilterSps();
-		if(fileDlg->FileOpenDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {	
-			sCurrParticleFile = s2ws(filePathBuffer);
+		SoraWString particleFile = sora::SORA->fileOpenDialog("sps;");
+
+		if(particleFile.size() != 0) {	
+			sCurrParticleFile = particleFile;
 			
 			delete peffect;
 			peffect = new SoraParticleSystem;

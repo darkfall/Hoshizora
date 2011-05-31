@@ -40,11 +40,12 @@ namespace sora {
 		void SORACALL registerRenderSystem	(SoraRenderSystem* pRenderSystem);
 		void SORACALL registerResourceManager(SoraResourceManager* pResourceManager);
 		void SORACALL registerInput			(SoraInput* pInput);
+		void SORACALL registerFontManager	(SoraFontManager* pFontManager);
+		void SORACALL registerSoundSystem	(SoraSoundSystem* pSoundSystem);
+		
 		void SORACALL registerMiscTool		(SoraMiscTool* pMiscTool);
 		void SORACALL registerPluginManager  (SoraPluginManager* pPluginManager);
 		void SORACALL registerTimer			(SoraTimer* pTimer);
-		void SORACALL registerFontManager	(SoraFontManager* pFontManager);
-		void SORACALL registerSoundSystem	(SoraSoundSystem* pSoundSystem);
 
 		void SORACALL registerPlugin		(SoraPlugin* pPlugin);
 		void SORACALL unistallPlugin		(SoraPlugin* pPlugin);
@@ -167,6 +168,9 @@ namespace sora {
 		void	SORACALL log		(const SoraString& sMssg);
 		void	SORACALL logw		(const SoraWString& sMssg);
 		void	SORACALL logf		(const char* str, ...);
+		
+		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
+		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
 
 		SoraFont* SORACALL createFont(const SoraWString& fontName, int size);
 		

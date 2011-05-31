@@ -832,13 +832,33 @@ namespace sora {
 		if(bHasInput) return pInput->hasJoy();
 		return false;
 	}
+	
+	SoraWString SoraCore::fileOpenDialog(const char* filter, const char* defaultPath) {
+		if(!pMiscTool)
+			return L"\0";
+		
+		return pMiscTool->fileOpenDialog(filter, defaultPath);
+	}
+	
+	SoraWString SoraCore::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
+		if(!pMiscTool)
+			return L"\0";
+		
+		return pMiscTool->fileSaveDialog(filter, defaultPath, defaultExt);
+	}
 
 	int32 SoraCore::messageBox(const SoraString& sMssg, const SoraString& sTitle, int32 iCode) {
+		if(!pMiscTool)
+			return 0;
+		
 		pMiscTool->setMainWindowHandle(getMainWindowHandle());
 		return pMiscTool->messageBox(sMssg, sTitle, iCode);
 	}
 
 	int32 SoraCore::messageBoxW(const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode) {
+		if(!pMiscTool)
+			return 0;
+		
 		pMiscTool->setMainWindowHandle(getMainWindowHandle());
 		return pMiscTool->messageBox(sMssg, sTitle, iCode);
 	}

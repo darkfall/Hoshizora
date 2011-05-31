@@ -123,6 +123,8 @@
 		887E35891362C6F400803DA6 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 887E35881362C6F400803DA6 /* libfreetype.6.dylib */; };
 		887E3B9E1363AFE600803DA6 /* gcnMenuContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E3B9D1363AFE600803DA6 /* gcnMenuContainer.cpp */; };
 		887E3E601363D55800803DA6 /* rfLightRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E3E5F1363D55800803DA6 /* rfLightRenderer.cpp */; };
+		887F1B471394F58400F534D5 /* SoraMiscTool_OSX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 887F1B461394F58400F534D5 /* SoraMiscTool_OSX.mm */; };
+		887F1B4A1394F60300F534D5 /* SoraMiscTool_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 887F1B491394F60300F534D5 /* SoraMiscTool_iOS.mm */; };
 		88898319137520D4000B937A /* rftdSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88898318137520D4000B937A /* rftdSystem.cpp */; };
 		888985441375D6DB000B937A /* rftdEnemyObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 888985431375D6DB000B937A /* rftdEnemyObject.cpp */; };
 		8889871813760766000B937A /* rftdMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8889871713760766000B937A /* rftdMap.cpp */; };
@@ -694,6 +696,9 @@
 		887E3B9D1363AFE600803DA6 /* gcnMenuContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnMenuContainer.cpp; sourceTree = "<group>"; };
 		887E3E5E1363D55800803DA6 /* rfLightRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rfLightRenderer.h; path = ../ReflectionRev/rfLightRenderer.h; sourceTree = SOURCE_ROOT; };
 		887E3E5F1363D55800803DA6 /* rfLightRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rfLightRenderer.cpp; path = ../ReflectionRev/rfLightRenderer.cpp; sourceTree = SOURCE_ROOT; };
+		887F1B461394F58400F534D5 /* SoraMiscTool_OSX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraMiscTool_OSX.mm; sourceTree = "<group>"; };
+		887F1B481394F60300F534D5 /* SoraMiscTool_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMiscTool_iOS.h; sourceTree = "<group>"; };
+		887F1B491394F60300F534D5 /* SoraMiscTool_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraMiscTool_iOS.mm; sourceTree = "<group>"; };
 		888982D013751453000B937A /* rftdBulletEffector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdBulletEffector.h; sourceTree = "<group>"; };
 		888982D313751478000B937A /* rftdCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdCommon.h; sourceTree = "<group>"; };
 		888982D413751661000B937A /* rftdObjColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdObjColor.h; sourceTree = "<group>"; };
@@ -1053,7 +1058,7 @@
 		88D87D2212A09A66007D6865 /* hgerect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgerect.h; sourceTree = "<group>"; };
 		88D87D2312A09A66007D6865 /* hgevector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hgevector.cpp; sourceTree = "<group>"; };
 		88D87D2412A09A66007D6865 /* hgevector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hgevector.h; sourceTree = "<group>"; };
-		88D87D2512A09A66007D6865 /* HoshiNoSora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoshiNoSora.h; sourceTree = "<group>"; };
+		88D87D2512A09A66007D6865 /* Hoshizora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoshizora.h; sourceTree = "<group>"; };
 		88D87D2812A09A66007D6865 /* QuickList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickList.h; sourceTree = "<group>"; };
 		88D87D2912A09A66007D6865 /* Rect4V.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect4V.h; sourceTree = "<group>"; };
 		88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraAutoPtr.h; sourceTree = "<group>"; };
@@ -2311,10 +2316,10 @@
 				8828C1D21314CB07002C6FA7 /* common.h */,
 				88CE59A012C1CE6A00C551F0 /* quaternion.h */,
 				88CE59A112C1CE6A00C551F0 /* vector3.h */,
-				88D87D2512A09A66007D6865 /* HoshiNoSora.h */,
 				88D87D2812A09A66007D6865 /* QuickList.h */,
 				88D87D2912A09A66007D6865 /* Rect4V.h */,
 				88CFF7E812C6D562002A9F75 /* hash.h */,
+				88D87D2512A09A66007D6865 /* Hoshizora.h */,
 				8860324C138119BB00C3B63B /* RefCounted.h */,
 				88374D8C1325A12900369B12 /* AutoContainer.h */,
 				889BFD4312BF4D23002D8A2F /* CoreTransformer.h */,
@@ -2418,6 +2423,9 @@
 				88DD0CBB12EB9311005555F6 /* orz.h */,
 				88DD0CBC12EB9311005555F6 /* SoraMiscTool_Win32.h */,
 				88504CA412ECF5BA009B9F45 /* SoraMiscTool_OSX.h */,
+				887F1B461394F58400F534D5 /* SoraMiscTool_OSX.mm */,
+				887F1B481394F60300F534D5 /* SoraMiscTool_iOS.h */,
+				887F1B491394F60300F534D5 /* SoraMiscTool_iOS.mm */,
 			);
 			path = Defaults;
 			sourceTree = "<group>";
@@ -2915,6 +2923,8 @@
 				88452D0E138F9CBF0045D130 /* CloseModifier.cpp in Sources */,
 				88452D58138FAB970045D130 /* Sound.cpp in Sources */,
 				88452EC91390D81B0045D130 /* LabelSliderLinker.cpp in Sources */,
+				887F1B471394F58400F534D5 /* SoraMiscTool_OSX.mm in Sources */,
+				887F1B4A1394F60300F534D5 /* SoraMiscTool_iOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

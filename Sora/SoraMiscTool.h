@@ -20,13 +20,10 @@ namespace sora {
 		
 		virtual int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) = 0;
 		virtual int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) = 0;
-
-		virtual void setLogFile(const SoraString& sLogFile) = 0;
-
-		virtual void log(const SoraString& sMessage) = 0;
-		virtual void log(const SoraWString& sMessage) = 0;
-		
 		virtual void setMainWindowHandle(ulong32 handle) = 0;
+		
+		virtual SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) = 0;
+		virtual SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) = 0;		
 	};
 } // namespace sora
 

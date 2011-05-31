@@ -2,7 +2,7 @@
 #define SORA_PS_MAIN_WINDOW_H
 
 
-#include "HoshiNoSora.h"
+#include "Hoshizora.h"
 #include "SoraGUIChan/guichansetup.h"
 #include "SoraEventManager.h"
 #include "SoraINIFile/SoraINIFile.h"

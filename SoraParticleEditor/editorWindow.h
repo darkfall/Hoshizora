@@ -1,7 +1,7 @@
 #ifndef PARTICLE_EDITOR_WINDOW_H
 #define PARTICLE_EDITOR_WINDOW_H
 
-#include "HoshiNoSora.h"
+#include "Hoshizora.h"
 #include "SoraFont.h"
 #include "SoraParticleSystem/SoraParticleSystem.h"
 #include "SoraGUIChan/guichansora.hpp"

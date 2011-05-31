@@ -37,7 +37,13 @@ namespace sora {
 		virtual void log(const SoraWString& sMessage) {
 			pLogger->log(sMessage);
 		}
-
+		
+		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+		}
+		
+		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+		}
+		
 		virtual void setMainWindowHandle(ulong32 handle) { }
 		
 	private:

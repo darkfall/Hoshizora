@@ -23,6 +23,13 @@ public:
 	}
 
 	void setMainWindowHandle(ulong32 mainWindowHandle) { _hWnd = (HWND)mainWindowHandle; }
+	
+	SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+	}
+	
+	SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+	}
+	
 
 private:
 	HWND _hWnd;
