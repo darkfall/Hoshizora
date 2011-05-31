@@ -107,8 +107,8 @@
 			88CD9D861377C2DC00492B3F /* mainWindow.cpp:112 */,
 			88CD9D961377C35100492B3F /* rftdMapConf.h:37 */,
 			88C714DF137A6C5400E0C2BB /* rftdSource.cpp:24 */,
-			886038591387B9C400C3B63B /* SoraSprite.cpp:384 */,
-			8860385B1387B9C800C3B63B /* SoraSprite.cpp:384 */,
+			886038591387B9C400C3B63B /* SoraSprite.cpp:385 */,
+			8860385B1387B9C800C3B63B /* SoraSprite.cpp:385 */,
 			8860387C1387BAED00C3B63B /* SoraImageEffect.cpp:178 */,
 			8860387E1387BAF100C3B63B /* SoraImageEffect.cpp:178 */,
 			8860388C1387BB4A00C3B63B /* SoraImageEffect.cpp:177 */,
@@ -498,6 +498,12 @@
 			887F1BB213950B3C00F534D5 /* PBXTextBookmark */ = 887F1BB213950B3C00F534D5 /* PBXTextBookmark */;
 			887F1BB31395185400F534D5 /* PBXTextBookmark */ = 887F1BB31395185400F534D5 /* PBXTextBookmark */;
 			887F1BB41395185400F534D5 /* PBXTextBookmark */ = 887F1BB41395185400F534D5 /* PBXTextBookmark */;
+			887F1BB513951D1D00F534D5 /* PBXTextBookmark */ = 887F1BB513951D1D00F534D5 /* PBXTextBookmark */;
+			887F1BB613951D1D00F534D5 /* PBXTextBookmark */ = 887F1BB613951D1D00F534D5 /* PBXTextBookmark */;
+			887F1BB713951D1D00F534D5 /* PBXTextBookmark */ = 887F1BB713951D1D00F534D5 /* PBXTextBookmark */;
+			887F1BB813951D1D00F534D5 /* PBXTextBookmark */ = 887F1BB813951D1D00F534D5 /* PBXTextBookmark */;
+			887F1BB913951D1D00F534D5 /* PBXTextBookmark */ = 887F1BB913951D1D00F534D5 /* PBXTextBookmark */;
+			887F1BBA13951D1D00F534D5 /* PBXTextBookmark */ = 887F1BBA13951D1D00F534D5 /* PBXTextBookmark */;
 			8889817C137500A2000B937A = 8889817C137500A2000B937A /* PBXTextBookmark */;
 			888982E713751981000B937A = 888982E713751981000B937A /* PBXTextBookmark */;
 			888982EA13751981000B937A = 888982EA13751981000B937A /* PBXTextBookmark */;
@@ -816,16 +822,16 @@
 	};
 	8811389E12CC424000C648C7 /* mainWindow.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 798}}";
-			sepNavSelRange = "{522, 6}";
-			sepNavVisRange = "{0, 1190}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 812}}";
+			sepNavSelRange = "{347, 878}";
+			sepNavVisRange = "{70, 1162}";
 		};
 	};
 	8811389F12CC424000C648C7 /* mainWindow.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1680}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1652}}";
 			sepNavSelRange = "{595, 0}";
-			sepNavVisRange = "{1459, 1502}";
+			sepNavVisRange = "{3, 1198}";
 			sepNavWindowFrame = "{{1547, -63}, {762, 874}}";
 		};
 	};
@@ -3280,7 +3286,7 @@
 		vrLen = 1279;
 		vrLoc = 0;
 	};
-	886038591387B9C400C3B63B /* SoraSprite.cpp:384 */ = {
+	886038591387B9C400C3B63B /* SoraSprite.cpp:385 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3292,12 +3298,12 @@
 		functionName = "SoraSprite::update(float32 dt)";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 384;
+		lineNumber = 385;
 		modificationTime = 328281487.15776;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
-	8860385B1387B9C800C3B63B /* SoraSprite.cpp:384 */ = {
+	8860385B1387B9C800C3B63B /* SoraSprite.cpp:385 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3309,7 +3315,7 @@
 		functionName = "SoraSprite::update(float32 dt)";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 384;
+		lineNumber = 385;
 		location = Sora;
 		modificationTime = 328281487.157825;
 		originalNumberOfMultipleMatches = 1;
@@ -5362,6 +5368,66 @@
 		rType = 0;
 		vrLen = 1636;
 		vrLoc = 230;
+	};
+	887F1BB513951D1D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D5412A09A66007D6865 /* SoraWindowInfo.h */;
+		name = "SoraWindowInfo.h: 21";
+		rLen = 0;
+		rLoc = 506;
+		rType = 0;
+		vrLen = 721;
+		vrLoc = 0;
+	};
+	887F1BB613951D1D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 59";
+		rLen = 0;
+		rLoc = 1556;
+		rType = 0;
+		vrLen = 1387;
+		vrLoc = 204;
+	};
+	887F1BB713951D1D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8811389E12CC424000C648C7 /* mainWindow.h */;
+		name = "mainWindow.h: 19";
+		rLen = 878;
+		rLoc = 347;
+		rType = 0;
+		vrLen = 1162;
+		vrLoc = 70;
+	};
+	887F1BB813951D1D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8811389F12CC424000C648C7 /* mainWindow.cpp */;
+		name = "mainWindow.cpp: 26";
+		rLen = 0;
+		rLoc = 595;
+		rType = 0;
+		vrLen = 1198;
+		vrLoc = 3;
+	};
+	887F1BB913951D1D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4A12A09A66007D6865 /* SoraSprite.cpp */;
+		name = "SoraSprite.cpp: 45";
+		rLen = 0;
+		rLoc = 1335;
+		rType = 0;
+		vrLen = 1432;
+		vrLoc = 9402;
+	};
+	887F1BBA13951D1D00F534D5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4A12A09A66007D6865 /* SoraSprite.cpp */;
+		name = "SoraSprite.cpp: 386";
+		rLen = 0;
+		rLoc = 10019;
+		rType = 0;
+		vrLen = 1355;
+		vrLoc = 9316;
 	};
 	8889817C137500A2000B937A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -9877,9 +9943,9 @@
 	};
 	88D87D4A12A09A66007D6865 /* SoraSprite.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 6034}}";
-			sepNavSelRange = "{1335, 0}";
-			sepNavVisRange = "{230, 1636}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 6314}}";
+			sepNavSelRange = "{10019, 0}";
+			sepNavVisRange = "{9316, 1355}";
 		};
 	};
 	88D87D4B12A09A66007D6865 /* SoraSprite.h */ = {
@@ -9948,8 +10014,8 @@
 	};
 	88D87D5412A09A66007D6865 /* SoraWindowInfo.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1147, 741}}";
-			sepNavSelRange = "{107, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 741}}";
+			sepNavSelRange = "{506, 0}";
 			sepNavVisRange = "{0, 721}";
 		};
 	};
@@ -11297,7 +11363,7 @@
 		fRef = 88D87D4A12A09A66007D6865 /* SoraSprite.cpp */;
 		name = "SoraSprite.cpp: 386";
 		rLen = 0;
-		rLoc = 10026;
+		rLoc = 10021;
 		rType = 0;
 		vrLen = 1333;
 		vrLoc = 9641;
