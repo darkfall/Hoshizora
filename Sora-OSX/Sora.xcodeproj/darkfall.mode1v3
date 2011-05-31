@@ -279,13 +279,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>121</integer>
-									<integer>19</integer>
+									<integer>157</integer>
+									<integer>145</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 1983}, {205, 760}}</string>
+							<string>{{0, 2147}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -322,7 +322,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraSprite.cpp</string>
+								<string>main.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -330,11 +330,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraSprite.cpp</string>
+										<string>main.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>887F1BBA13951D1D00F534D5</string>
+										<string>887F1BD1139523AF00F534D5</string>
 										<key>history</key>
 										<array>
 											<string>88BFA132135AB29100BB8E70</string>
@@ -633,7 +633,6 @@
 											<string>88A21059138E24F60019C5AA</string>
 											<string>88A2105E138E24F60019C5AA</string>
 											<string>88A2105F138E24F60019C5AA</string>
-											<string>88A21064138E25EE0019C5AA</string>
 											<string>88A21086138E2F080019C5AA</string>
 											<string>88A211E7138E46DA0019C5AA</string>
 											<string>88A21201138E48BC0019C5AA</string>
@@ -762,8 +761,6 @@
 											<string>884530C01390FDF70045D130</string>
 											<string>884531AD139122E10045D130</string>
 											<string>88453231139130500045D130</string>
-											<string>88453243139130CA0045D130</string>
-											<string>88453259139132C40045D130</string>
 											<string>8845325A139132C40045D130</string>
 											<string>8845325B139132C40045D130</string>
 											<string>884532F2139240EC0045D130</string>
@@ -798,19 +795,22 @@
 											<string>887F1B881394F7A600F534D5</string>
 											<string>887F1B891394F7A600F534D5</string>
 											<string>887F1B8A1394F7A600F534D5</string>
-											<string>887F1B8B1394F7A600F534D5</string>
 											<string>887F1B8C1394F7A600F534D5</string>
 											<string>887F1B9E1394F89B00F534D5</string>
 											<string>887F1B9F1394F89B00F534D5</string>
-											<string>887F1BA01394F89B00F534D5</string>
 											<string>887F1BA11394F89B00F534D5</string>
 											<string>887F1BAD13950B3C00F534D5</string>
 											<string>887F1BAE13950B3C00F534D5</string>
 											<string>887F1BB513951D1D00F534D5</string>
-											<string>887F1BB613951D1D00F534D5</string>
 											<string>887F1BB713951D1D00F534D5</string>
 											<string>887F1BB813951D1D00F534D5</string>
-											<string>887F1BB913951D1D00F534D5</string>
+											<string>887F1BBB1395204300F534D5</string>
+											<string>887F1BC0139521EC00F534D5</string>
+											<string>887F1BC1139521EC00F534D5</string>
+											<string>887F1BC71395239900F534D5</string>
+											<string>887F1BC81395239900F534D5</string>
+											<string>887F1BCE139523A700F534D5</string>
+											<string>887F1BCF139523A700F534D5</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -1032,14 +1032,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraMiscTool_OSX.mm</string>
+								<string>main.cpp</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -1056,6 +1054,8 @@
 							<string>328pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

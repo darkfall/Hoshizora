@@ -174,7 +174,7 @@ namespace sora {
 
 			}
 		} else 
-			states = IMAGE_EFFECT_END;
+			start(getMode(), getEffectTime());
 	}
 	
 	SoraImageEffectList::SoraImageEffectList(IMAGE_EFFECT_MODE mode) {

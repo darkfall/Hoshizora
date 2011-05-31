@@ -37,7 +37,6 @@
 #include "../mead/meadMainWindow.h"
 #include "../ReflectionTD/rftdMainWindow.h"
 
-
 int main(int argc, char* argv[]) {
 
 	

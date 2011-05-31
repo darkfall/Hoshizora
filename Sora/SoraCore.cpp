@@ -729,7 +729,7 @@ namespace sora {
 
 	ulong32 SoraCore::createTarget(int width, int height, bool zbuffer) {
 		assert(bInitialized==true);
-		return pRenderSystem->createTarget(width, height, zbuffer);
+		return pRenderSystem->createTarget(width==0?iScreenWidth, height==0?iScreenHeight, zbuffer);
 	}
 
 	void SoraCore::freeTarget(ulong32 t) {
