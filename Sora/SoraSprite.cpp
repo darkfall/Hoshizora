@@ -41,8 +41,8 @@ namespace sora {
 		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
 		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
 		
-        sprWidth = texture!=NULL?texture->mTextureWidth:1;
-        sprHeight = texture!=NULL?texture->mTextureHeight:1;
+        sprWidth = width;
+        sprHeight = height;
 		
 		shaderContext = NULL;
 		

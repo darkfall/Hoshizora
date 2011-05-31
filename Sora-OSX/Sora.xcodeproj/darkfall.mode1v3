@@ -197,88 +197,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>884531D5139129F10045D130</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>SoraOGLRenderer.cpp</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>884531D6139129F10045D130</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>SoraOGLRenderer.cpp</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>887F1BA41394F89B00F534D5</string>
-						<key>history</key>
-						<array>
-							<string>88E547ED1393970300ECC5CF</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {840, 649}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>38 162 840 690 0 0 1440 878 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>88452D43138FA60B0045D130</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>CloseModifier.h</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>88452D44138FA60B0045D130</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>CloseModifier.h</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>887F1BA51394F89B00F534D5</string>
-						<key>history</key>
-						<array>
-							<string>88E547EE1393970300ECC5CF</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {840, 649}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>388 188 840 690 0 0 1440 878 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -360,13 +279,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>157</integer>
-									<integer>145</integer>
+									<integer>121</integer>
+									<integer>19</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 2147}, {205, 760}}</string>
+							<string>{{0, 1869}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -403,7 +322,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>main.cpp</string>
+								<string>SoraSprite.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -411,11 +330,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>main.cpp</string>
+										<string>SoraSprite.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>887F1BA31394F89B00F534D5</string>
+										<string>887F1BB41395185400F534D5</string>
 										<key>history</key>
 										<array>
 											<string>88BFA132135AB29100BB8E70</string>
@@ -860,24 +779,19 @@
 											<string>88E546DF1393813400ECC5CF</string>
 											<string>88E546EA1393821900ECC5CF</string>
 											<string>88E5470A139384A700ECC5CF</string>
-											<string>88E5473C13938A5000ECC5CF</string>
 											<string>88E5475113938C5C00ECC5CF</string>
 											<string>88E5476113938CE500ECC5CF</string>
 											<string>88E547DC139392E600ECC5CF</string>
 											<string>88E547E91393970300ECC5CF</string>
 											<string>887F1B351394E6E500F534D5</string>
-											<string>887F1B371394E6E500F534D5</string>
-											<string>887F1B381394E6E500F534D5</string>
 											<string>887F1B3D1394E74A00F534D5</string>
 											<string>887F1B501394F62A00F534D5</string>
 											<string>887F1B511394F62A00F534D5</string>
 											<string>887F1B521394F62A00F534D5</string>
-											<string>887F1B541394F62A00F534D5</string>
 											<string>887F1B551394F62A00F534D5</string>
 											<string>887F1B561394F62A00F534D5</string>
 											<string>887F1B581394F62A00F534D5</string>
 											<string>887F1B5B1394F62A00F534D5</string>
-											<string>887F1B5D1394F62A00F534D5</string>
 											<string>887F1B5F1394F62A00F534D5</string>
 											<string>887F1B851394F7A600F534D5</string>
 											<string>887F1B861394F7A600F534D5</string>
@@ -891,7 +805,12 @@
 											<string>887F1B9F1394F89B00F534D5</string>
 											<string>887F1BA01394F89B00F534D5</string>
 											<string>887F1BA11394F89B00F534D5</string>
-											<string>887F1BA21394F89B00F534D5</string>
+											<string>887F1BAC13950B3C00F534D5</string>
+											<string>887F1BAD13950B3C00F534D5</string>
+											<string>887F1BAE13950B3C00F534D5</string>
+											<string>887F1BAF13950B3C00F534D5</string>
+											<string>887F1BB31395185400F534D5</string>
+											<string>88E5473C13938A5000ECC5CF</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -1089,13 +1008,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>887F1BA71394F89B00F534D5</string>
 		<string>887F1BA81394F89B00F534D5</string>
 		<string>887F1BA91394F89B00F534D5</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>887022D01346AB4300AE8DD7</string>
-		<string>88452D43138FA60B0045D130</string>
-		<string>884531D5139129F10045D130</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 	</array>
