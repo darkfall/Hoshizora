@@ -815,7 +815,8 @@ bool HGE_Impl::_GfxInit()
 
 	_SetProjectionMatrix(nScreenWidth, nScreenHeight);
 	D3DXMatrixIdentity(&matView);
-//	pD3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_FALSE ); 
+	pD3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_FALSE ); 
+	CurBlendMode = BLEND_DEFAULT;
 	
 	if(!_init_lost()) return false;
 
