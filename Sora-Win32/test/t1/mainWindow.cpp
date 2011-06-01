@@ -58,7 +58,10 @@ bool mainWindow::renderFunc() {
 	sora::GCN_GLOBAL->gcnDraw();
 
 	//pSpr->render();
-	pSpr->renderWithVertices(vert, 6, SORA_TRIANGLES_FAN);
+	//pSpr->renderWithVertices(vert, 6, SORA_TRIANGLES_FAN);
+	pSpr->render();
+	pSpr3->render();
+	pSpr2->render();
 
 	sora->endScene();
 	return false;
@@ -71,13 +74,8 @@ void mainWindow::init() {
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
 	pSpr3 = sora::SORA->createSprite(L"road.png");
 
-	pSpr->setBlendMode(BLEND_DEFAULT_Z);
-	pSpr2->setBlendMode(BLEND_DEFAULT_Z);
-	pSpr3->setBlendMode(BLEND_DEFAULT_Z);
-
-	pSpr->setZ(1.f);
+	
 	pSpr3->setZ(0.5f);
-	pSpr2->setZ(0.0f);
 	/*mead::globalBulletManagerInit();
 	mead::exportBulletManager(luaObject.getState());
 	mead::exportGlobal(luaObject.getState());

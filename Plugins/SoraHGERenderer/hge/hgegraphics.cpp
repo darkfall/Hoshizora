@@ -724,22 +724,31 @@ bool HGE_Impl::_GfxInit()
 		d3dppW.AutoDepthStencilFormat = D3DFMT_D16;
 	}
 
-// Set up Full Screen presentation parameters
-
-	nModes=pD3D->GetAdapterModeCount(D3DADAPTER_DEFAULT, Mode.Format);
-
-	for(i=0; i<nModes; i++)
+	if(nScreenBPP == 32)
 	{
-		pD3D->EnumAdapterModes(D3DADAPTER_DEFAULT, Mode.Format, i, &Mode);
-		if(Mode.Width != (UINT)nScreenWidth || Mode.Height != (UINT)nScreenHeight) continue;
-		if(nScreenBPP==16 && (_format_id(Mode.Format) > _format_id(D3DFMT_A1R5G5B5))) continue;
-		if(_format_id(Mode.Format) > _format_id(Format)) Format=Mode.Format;
+		nModes=pD3D->GetAdapterModeCount(D3DADAPTER_DEFAULT, D3DFMT_X8R8G8B8);
+		for(i=0;i<nModes;i++)
+		{
+			pD3D->EnumAdapterModes(D3DADAPTER_DEFAULT, D3DFMT_X8R8G8B8, i, &Mode);
+			if(Mode.Width != (UINT)nScreenWidth || Mode.Height != (UINT)nScreenHeight) continue;
+			if(_format_id(Mode.Format) > _format_id(Format)) Format=Mode.Format;
+		}
 	}
-
-	if(Format == D3DFMT_UNKNOWN)
+	else
 	{
-		_PostError("Can't find appropriate full screen video mode");
-		if(!bWindowed) return false;
+		D3DFORMAT tempFormat = D3DFMT_X1R5G5B5;
+		nModes = pD3D->GetAdapterModeCount(D3DADAPTER_DEFAULT, D3DFMT_X1R5G5B5);
+		if(!nModes)
+		{
+			nModes = pD3D->GetAdapterModeCount(D3DADAPTER_DEFAULT, D3DFMT_R5G6B5);
+			tempFormat = D3DFMT_R5G6B5;
+		}
+		for(i=0; i<nModes; i++)
+		{
+			pD3D->EnumAdapterModes(D3DADAPTER_DEFAULT, tempFormat, i, &Mode);
+			if(Mode.Width != (UINT)nScreenWidth || Mode.Height != (UINT)nScreenHeight) continue;
+			if(_format_id(Mode.Format) > _format_id(Format)) Format=Mode.Format;
+		}
 	}
 
 	ZeroMemory(&d3dppFS, sizeof(d3dppFS));
@@ -806,6 +815,7 @@ bool HGE_Impl::_GfxInit()
 
 	_SetProjectionMatrix(nScreenWidth, nScreenHeight);
 	D3DXMatrixIdentity(&matView);
+//	pD3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_FALSE ); 
 	
 	if(!_init_lost()) return false;
 
