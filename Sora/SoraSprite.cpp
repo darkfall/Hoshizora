@@ -79,16 +79,6 @@ namespace sora {
 		if(hasEffect())
 			clearEffects();
 		setPosition(0.f, 0.f);
-
-		quad.v[0].z = 
-		quad.v[1].z = 
-		quad.v[2].z = 
-		quad.v[3].z = 0.f;
-		
-		quad.v[0].col = 
-		quad.v[1].col = 
-		quad.v[2].col = 
-		quad.v[3].col = 0xffffffff;
         
 		quad.blend=BLEND_DEFAULT;
 		
@@ -195,6 +185,14 @@ namespace sora {
             sora->detachShaderContext();
 	}
 
+	void SoraSprite::renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode) {
+		if(hasShader()) 
+            sora->attachShaderContext(shaderContext);
+		sora->renderWithVertices((HSORATEXTURE)quad.tex, quad.blend, vertices, size, mode);
+		if(hasShader()) 
+            sora->detachShaderContext();
+	}
+	
 	void SoraSprite::setColor(uint32 c, int32 i) {
 		if(i != -1)
 			quad.v[i].col = c;

@@ -381,25 +381,10 @@ namespace sora{
 			glTexCoordPointer(2, GL_FLOAT, 0, mUVs);
 
 			glColorPointer (4, GL_UNSIGNED_BYTE, 0, mColors);
-			glDrawArrays(GL_QUADS, 0, mVertexCount);
+			glDrawArrays(CurDrawMode, 0, mVertexCount);
 			mVertexCount = 0;
 
         //    glFlush();
-		}
-	}
-	
-	void SoraOGLRenderer::flushTrip() {
-		if(mVertexCount > 0) {
-			glEnableClientState(GL_VERTEX_ARRAY);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			glEnableClientState(GL_COLOR_ARRAY);
-			
-			glVertexPointer(3, GL_FLOAT, 0, mVertices);
-			glTexCoordPointer(2, GL_FLOAT, 0, mUVs);
-			
-			glColorPointer (4, GL_UNSIGNED_BYTE, 0, mColors);
-			glDrawArrays(GL_TRIANGLES, 0, mVertexCount);
-			mVertexCount = 0;
 		}
 	}
 
@@ -518,6 +503,17 @@ namespace sora{
 		delete tex;
 		tex = 0;
 	}
+	
+	int32 SoraOGLRenderer::_modeToGLMode(int32 mode) {
+		switch (mode) {
+			case SORA_LINE:				return GL_LINE;
+			case SORA_TRIANGLES:		return GL_TRIANGLES;
+			case SORA_TRIANGLES_FAN:	return GL_TRIANGLE_FAN;
+			case SORA_TRIANGLES_STRIP:	return GL_TRIANGLE_STRIP;
+			case SORA_QUAD:				return GL_QUADS;
+		}
+		return GL_TRIANGLES;
+	}
 
 	void SoraOGLRenderer::renderTriple(SoraTriple& trip) {
 		if(currShader != NULL) {
@@ -530,10 +526,11 @@ namespace sora{
 			//glBindTexture(GL_TEXTURE_2D, quad.tex->mTextureID);
 			bindTexture(trip.tex);
 		} else {
-            flushTrip();
+            flush();
             bindTexture(0);
         }
 		_glSetBlendMode(trip.blend);
+		CurDrawMode = GL_TRIANGLES;
 
 		//TODO: insert code here
 		GLfloat verteces[9] = {
@@ -554,7 +551,7 @@ namespace sora{
 		};
 
 		if (mVertexCount >= MAX_VERTEX_BUFFER-3)
-			flushTrip();
+			flush();
 
 		int u = 0;
 		int idx = 0;
@@ -577,12 +574,51 @@ namespace sora{
 		if(currShader) {
 			if(!currShader->attachShaderList())
 				SoraCore::Instance()->log("SoraOGLRenderer: error attaching shader list");
-			flushTrip();
+			flush();
 		}
 
 		if(!trip.tex)
-			flushTrip();
+			flush();
 
+	}
+	
+	void SoraOGLRenderer::renderWithVertices(SoraTexture* tex, int32 blendMode,  SoraVertex* vertices, uint32 vsize, int32 mode) {		
+		flush();
+		
+		glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
+		if(tex) {
+			
+			//glBindTexture(GL_TEXTURE_2D, quad.tex->mTextureID);
+			bindTexture(tex);
+		} else {
+            bindTexture(0);
+        }
+		_glSetBlendMode(blendMode);
+		CurDrawMode = _modeToGLMode(mode);
+		
+		for(int i=0; i<vsize; ++i) {
+			int ti = i;
+			
+			mVertices[(mVertexCount*3)] = vertices[ti].x;
+			mVertices[(mVertexCount*3)+1] = vertices[ti].y;
+			mVertices[(mVertexCount*3)+2] = vertices[ti].z;
+			
+			mUVs[(mVertexCount<<1)] = vertices[ti].tx;
+			mUVs[(mVertexCount<<1)+1] = vertices[ti].ty;
+			
+			mColors[(mVertexCount<<2)] = (GLubyte)CGETR(vertices[ti].col);
+			mColors[(mVertexCount<<2)+1] = (GLubyte)CGETG(vertices[ti].col);
+			mColors[(mVertexCount<<2)+2] = (GLubyte)CGETB(vertices[ti].col);
+			mColors[(mVertexCount<<2)+3] = (GLubyte)CGETA(vertices[ti].col);
+			mVertexCount++;
+		}
+		
+		if(currShader) {
+			if(!currShader->attachShaderList())
+				SoraCore::Instance()->log("SoraOGLRenderer: error attaching shader list");
+		}
+		
+		flush();
 	}
 
 	void SoraOGLRenderer::renderQuad(SoraQuad& quad) {
@@ -600,35 +636,45 @@ namespace sora{
             bindTexture(0);
         }
 		_glSetBlendMode(quad.blend);
+		CurDrawMode = GL_TRIANGLES;
 
 		//TODO: insert code here
-		GLfloat verteces[12] = {
-			quad.v[3].x, quad.v[3].y, quad.v[3].z,
-			quad.v[2].x, quad.v[2].y, quad.v[2].z,
-			quad.v[1].x, quad.v[1].y, quad.v[1].z,
+		GLfloat verteces[18] = {
 			quad.v[0].x, quad.v[0].y, quad.v[0].z,
+			quad.v[1].x, quad.v[1].y, quad.v[1].z,
+			quad.v[2].x, quad.v[2].y, quad.v[2].z,
+			
+			quad.v[3].x, quad.v[3].y, quad.v[3].z,
+			quad.v[0].x, quad.v[0].y, quad.v[0].z,
+			quad.v[2].x, quad.v[2].y, quad.v[2].z,
 		};
 
-		GLfloat texCoords[8] = {
-			quad.v[3].tx, quad.v[3].ty,
-			quad.v[2].tx, quad.v[2].ty,
-			quad.v[1].tx, quad.v[1].ty,
+		GLfloat texCoords[12] = {
 			quad.v[0].tx, quad.v[0].ty,
+			quad.v[1].tx, quad.v[1].ty,
+			quad.v[2].tx, quad.v[2].ty,
+
+			quad.v[3].tx, quad.v[3].ty,
+			quad.v[0].tx, quad.v[0].ty,
+			quad.v[2].tx, quad.v[2].ty,
 		};
-		GLubyte colors[16] = {
-			(GLubyte)CGETR(quad.v[3].col), (GLubyte)CGETG(quad.v[3].col), (GLubyte)CGETB(quad.v[3].col), (GLubyte)CGETA(quad.v[3].col),
-			(GLubyte)CGETR(quad.v[2].col), (GLubyte)CGETG(quad.v[2].col), (GLubyte)CGETB(quad.v[2].col), (GLubyte)CGETA(quad.v[2].col),
-			(GLubyte)CGETR(quad.v[1].col), (GLubyte)CGETG(quad.v[1].col), (GLubyte)CGETB(quad.v[1].col), (GLubyte)CGETA(quad.v[1].col),
+		GLubyte colors[24] = {
 			(GLubyte)CGETR(quad.v[0].col), (GLubyte)CGETG(quad.v[0].col), (GLubyte)CGETB(quad.v[0].col), (GLubyte)CGETA(quad.v[0].col),
+			(GLubyte)CGETR(quad.v[1].col), (GLubyte)CGETG(quad.v[1].col), (GLubyte)CGETB(quad.v[1].col), (GLubyte)CGETA(quad.v[1].col),
+			(GLubyte)CGETR(quad.v[2].col), (GLubyte)CGETG(quad.v[2].col), (GLubyte)CGETB(quad.v[2].col), (GLubyte)CGETA(quad.v[2].col),
+
+			(GLubyte)CGETR(quad.v[3].col), (GLubyte)CGETG(quad.v[3].col), (GLubyte)CGETB(quad.v[3].col), (GLubyte)CGETA(quad.v[3].col),
+			(GLubyte)CGETR(quad.v[0].col), (GLubyte)CGETG(quad.v[0].col), (GLubyte)CGETB(quad.v[0].col), (GLubyte)CGETA(quad.v[0].col),
+			(GLubyte)CGETR(quad.v[2].col), (GLubyte)CGETG(quad.v[2].col), (GLubyte)CGETB(quad.v[2].col), (GLubyte)CGETA(quad.v[2].col),
 		};
 
-		if (mVertexCount >= MAX_VERTEX_BUFFER-4)
+		if (mVertexCount >= MAX_VERTEX_BUFFER-6)
 			flush();
 
 		int u = 0;
 		int idx = 0;
 		int cdx = 0;
-		for (int i=0;i<4;i++) {
+		for (int i=0;i<6;i++) {
 			mVertices[(mVertexCount*3)] = verteces[idx++];
 			mVertices[(mVertexCount*3)+1] = verteces[idx++];
 			mVertices[(mVertexCount*3)+2] = verteces[idx++];
@@ -673,52 +719,6 @@ namespace sora{
 	bool SoraOGLRenderer::isActive() {
 		//return pHGE->System_GetState(HGE_ACTIVE);
 		return true;
-	}
-
-	void SoraOGLRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
-		Rect4V rect;
-
-		if(fWidth != y2-y1 && fWidth != x2-x1) {
-			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
-
-			rect.x1 = x1; rect.y1 = y1;
-			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
-			rect.x4 = x2; rect.y4 = y2;
-			rect.x3 = x2+fWidth*cosf(rotAng); rect.y3 = y2+fWidth*sinf(rotAng);
-		} else {
-			rect.x1 = x1; rect.y1 = y1;
-			rect.x2 = x2; rect.y2 = y1;
-			rect.x3 = x2; rect.y3 = y2;
-			rect.x4 = x1; rect.y4 = y2;
-		}
-		sora::SoraQuad quad;
-
-        quad.tex = NULL;
-
-        quad.v[0].x   = rect.x1;
-        quad.v[0].y   = rect.y1;
-        quad.v[0].col = color;
-
-        quad.v[1].x   = rect.x2;
-        quad.v[1].y   = rect.y2;
-        quad.v[1].col = color;
-
-        quad.v[2].x   = rect.x3;
-        quad.v[2].y   = rect.y3;
-        quad.v[2].col = color;
-
-        quad.v[3].x   = rect.x4;
-        quad.v[3].y   = rect.y4;
-        quad.v[3].col = color;
-
-        int i;
-        for (i = 0; i < 4; ++i) {
-            quad.v[i].z = z;
-        }
-
-        quad.blend = BLEND_DEFAULT;
-
-		renderQuad(quad);
 	}
 
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {

@@ -33,6 +33,8 @@ namespace sora {
 		float			z;			// Z-buffer depth 0..1
 		uint32			col;		// color
 		float			tx, ty;		// texture coordinates
+		
+		SoraVertex(): z(0.0f), col(0xFFFFFFFF) {}
 	};
 	
 	struct SoraQuad {
@@ -56,6 +58,7 @@ namespace sora {
         void render();
         void render(float32 x, float32 y);
         void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
+		void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
 
 		void setTexture(HSORATEXTURE tex);
 		

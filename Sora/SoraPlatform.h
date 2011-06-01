@@ -107,7 +107,6 @@ typedef		signed char		int8;
 typedef		unsigned char	uint8;
 
 typedef		float			float32;
-typedef		double			double32;
 
 typedef		long			long32;
 typedef		unsigned long	ulong32;
@@ -257,6 +256,12 @@ static void msleep(uint32_t msec) {
 #define IDNO				7
 
 #endif
+
+#define SORA_LINE				0x0001
+#define SORA_TRIANGLES			0x0002
+#define SORA_TRIANGLES_FAN		0x0003
+#define SORA_TRIANGLES_STRIP	0x0004
+#define SORA_QUAD				0x0005
 
 #include <stdint.h>
 

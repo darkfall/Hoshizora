@@ -27,7 +27,7 @@ namespace sora {
 		}
 	}
 	
-	void SoraImageEffect::setRepeatTimes(uint32 times) {
+	void SoraImageEffect::setRepeatTimes(int32 times) {
 		repeatTimes = times;
 		currRepeatTimes = 0;
 	}
@@ -200,7 +200,12 @@ namespace sora {
 	}
 	
 	SoraImageEffectList::~SoraImageEffectList() {
-		
+		IMAGE_EFFECT_LIST::iterator itEffect = mImageEffects.begin();
+		while(itEffect != mImageEffects.end()) {
+			delete *itEffect;
+			*itEffect = NULL;
+			++itEffect;
+		}
 	}
 	
 	SoraImageEffectList* SoraImageEffectList::add(SoraImageEffect* effect) {

@@ -91,6 +91,7 @@ namespace sora {
 
 		void SORACALL renderQuad(SoraQuad& quad);
 		void SORACALL renderTriple(SoraTriple& trip);
+		void SORACALL renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
 
 		void SORACALL renderRect	(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, ulong32 color=0xFFFFFFFF, float32 z=0.0f);
 		void SORACALL renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, ulong32 color, float32 z=0.f);
@@ -250,6 +251,7 @@ namespace sora {
 			SoraShaderContext*	shader;
 			int					blend;
 			int					size;
+			int					drawMode;
 			
 			void release() {
 				if(vertex) {

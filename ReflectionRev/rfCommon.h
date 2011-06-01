@@ -25,7 +25,7 @@ namespace reflection {
 	typedef hgeVector rfPoint;
 	typedef sora::SoraObject rfObject;
 	typedef float32 rfFloat;
-	typedef double32 rfDouble;
+	typedef double rfDouble;
 	typedef int32 rfInt;
 	typedef ulong32 rfULong;
 	typedef long32 rfLong;

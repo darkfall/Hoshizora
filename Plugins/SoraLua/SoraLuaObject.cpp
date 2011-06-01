@@ -131,7 +131,7 @@ namespace sora {
 		return luaState->GetGlobal(name.c_str()).GetFloat();
 	}
 
-	double32 SoraLuaObject::getDouble(const SoraString& name) {
+	double SoraLuaObject::getDouble(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetDouble();
 	}
 

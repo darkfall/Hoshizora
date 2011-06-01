@@ -23,10 +23,10 @@ namespace sora {
 	const float32 F_PI_6  = 0.5233333f;
 	const float32 F_PI_12 = 0.2616667f;
 
-	const double32 D_PI	  =	3.1415926535897932384626433832795;
-	const double32 D_PI_2 = 1.5707963267948966192313216916398;
-	const double32 D_PI_4 = 0.7853981633974483096156608458198;
-	const double32 D_PI_8 = 0.3926990816987241548078304229099;
+	const double D_PI	  =	3.1415926535897932384626433832795;
+	const double D_PI_2 = 1.5707963267948966192313216916398;
+	const double D_PI_4 = 0.7853981633974483096156608458198;
+	const double D_PI_8 = 0.3926990816987241548078304229099;
 
 	inline float32 DGR_RAD(float32 dgr)  {return (float32)((D_PI * dgr) / 180.0); }
 	inline float32 RAD_DGR(float32 rad)  {return (float32)((180.0 * rad) / D_PI); }

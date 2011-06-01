@@ -638,61 +638,34 @@ namespace sora {
 		} else 
 			pRenderSystem->renderTriple(trip);
 	}
+	
+	void SoraCore::renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
+		assert(bInitialized == true);
+		if(bZBufferArea) {
+			// use z 0
+			int32 z = static_cast<int32>(vertices[0].z * 1000);
+			__Z_BUFFER_NODE node;
+			node.vertex = new SoraVertex[vsize];
+			memcpy(node.vertex, vertices, sizeof(SoraVertex)*vsize);
+			node.size = vsize;
+			node.blend = blendMode;
+			node.tex = (SoraTexture*)tex;
+			node.shader = __prevShader;
+			node.drawMode = mode;
+			
+			__z_buffer_insert_node(node, z);
+		} else 	
+			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
+	}
 
 	void SoraCore::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, ulong32 color, float32 z) {
 		assert(bInitialized==true);
-	//	pRenderSystem->renderRect(x1, y1, x2, y2, fWidth, color, z);
-		
-		Rect4V rect;
-		
-		if(fWidth != y2-y1 && fWidth != x2-x1) {
-			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
-			
-			rect.x1 = x1; rect.y1 = y1;
-			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
-			rect.x4 = x2; rect.y4 = y2;
-			rect.x3 = x2+fWidth*cosf(rotAng); rect.y3 = y2+fWidth*sinf(rotAng);
-		} else {
-			rect.x1 = x1; rect.y1 = y1;
-			rect.x2 = x2; rect.y2 = y1;
-			rect.x3 = x2; rect.y3 = y2;
-			rect.x4 = x1; rect.y4 = y2;
-		}
-		sora::SoraQuad quad;
-		
-        quad.tex = NULL;
-		
-        quad.v[0].x   = rect.x1;
-        quad.v[0].y   = rect.y1;
-        quad.v[0].col = color;
-		
-        quad.v[1].x   = rect.x2;
-        quad.v[1].y   = rect.y2;
-        quad.v[1].col = color;
-		
-        quad.v[2].x   = rect.x3;
-        quad.v[2].y   = rect.y3;
-        quad.v[2].col = color;
-		
-        quad.v[3].x   = rect.x4;
-        quad.v[3].y   = rect.y4;
-        quad.v[3].col = color;
-		
-        int i;
-        for (i = 0; i < 4; ++i) {
-            quad.v[i].z = z;
-        }
-		
-        quad.blend = BLEND_DEFAULT;
-		
-		renderQuad(quad);
+		pRenderSystem->renderRect(x1, y1, x2, y2, fWidth, color, z);
 	}
 	
 	void SoraCore::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, ulong32 color, float32 z) {
-        renderRect(x1, y1, x2, y1, 1.f, color, z);
-        renderRect(x2, y1, x2, y2, 1.f, color, z);
-        renderRect(x2, y2, x1, y2, 1.f, color, z);
-        renderRect(x1, y2, x1, y1, 1.f, color, z);
+		assert(bInitialized==true);
+		pRenderSystem->renderBox(x1, y1, x2, y2, color, z);
 	}
 
 	void SoraCore::setClipping(int32 x, int32 y, int32 w, int32 h) {
@@ -729,7 +702,7 @@ namespace sora {
 
 	ulong32 SoraCore::createTarget(int width, int height, bool zbuffer) {
 		assert(bInitialized==true);
-		return pRenderSystem->createTarget(width==0?iScreenWidth, height==0?iScreenHeight, zbuffer);
+		return pRenderSystem->createTarget(width==0?iScreenWidth:width, height==0?iScreenHeight:height, zbuffer);
 	}
 
 	void SoraCore::freeTarget(ulong32 t) {
@@ -1021,29 +994,34 @@ namespace sora {
 		bZBufferArea = false;
 		for(int i=0; i<1000; ++i) {
 			__Z_BUFFER_NODE* node = &__z_buffer_array[i];
-			if(__z_buffer_array[i].size == 4) {
-				SoraQuad quad;
-				memcpy(&quad.v[0], node->vertex, sizeof(SoraVertex)*4);
-				quad.blend = node->blend;
-				quad.tex = node->tex;
-				
-				if(node->shader)
-					attachShaderContext(node->shader);
-				renderQuad(quad);
-				detachShaderContext();
-			} else if(node->size == 3) {
-				SoraTriple trip;
-				memcpy(&trip.v[0], node->vertex, sizeof(SoraVertex)*3);
-				trip.blend = node->blend;
-				trip.tex = node->tex;
-				
-				if(node->shader)
-					attachShaderContext(node->shader);
-				renderTriple(trip);
-				detachShaderContext();
-			} else {
-				// todo
-				
+			while(node != NULL) {
+				if(node->size == 4) {
+					SoraQuad quad;
+					memcpy(&quad.v[0], node->vertex, sizeof(SoraVertex)*4);
+					quad.blend = node->blend;
+					quad.tex = node->tex;
+					
+					if(node->shader)
+						attachShaderContext(node->shader);
+					pRenderSystem->renderQuad(quad);
+					detachShaderContext();
+				} else if(node->size == 3) {
+					SoraTriple trip;
+					memcpy(&trip.v[0], node->vertex, sizeof(SoraVertex)*3);
+					trip.blend = node->blend;
+					trip.tex = node->tex;
+					
+					if(node->shader)
+						attachShaderContext(node->shader);
+					pRenderSystem->renderTriple(trip);
+					detachShaderContext();
+				} else {
+					if(node->shader)
+						attachShaderContext(node->shader);
+					pRenderSystem->renderWithVertices(node->tex, node->blend, node->vertex, node->size, node->drawMode);
+					detachShaderContext();
+				}
+				node = node->next;
 			}
 			__z_buffer_array[i].release();
 		}
@@ -1066,6 +1044,7 @@ namespace sora {
 			newNode->blend = node.blend;
 			newNode->size = node.size;
 			newNode->shader = node.shader;
+			newNode->tex = node.tex;
 			
 			next->next = newNode;
 		} else {

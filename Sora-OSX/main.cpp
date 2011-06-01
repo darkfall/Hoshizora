@@ -37,29 +37,6 @@
 #include "../mead/meadMainWindow.h"
 #include "../ReflectionTD/rftdMainWindow.h"
 
-void mainWindow::init() {
-	myTarget = sora::SORA->createTarget(0, 0, true);
-	
-	mySprite = new sora::SoraSprite(0);
-}
-
-bool mainWindow::render() {
-	sora::SORA->beginScene(0, myTarget);
-	sora::SORA->renderBox(0.f, 
-						  0.f, 
-						  getWindowWidth(), 
-						  getWindowHeight(), 
-						  0xFFFFFFFF, 
-						  0.f);
-	sora::SORA->endScene();
-	
-	sora::SORA->beginScene();
-	
-	mySprite->setTexture(sora::SORA->getTargetTexture(myTarget));
-	mySprite->render();
-	
-	sora::SORA->endScene();
-}
 
 int main(int argc, char* argv[]) {
 
@@ -79,7 +56,7 @@ int main(int argc, char* argv[]) {
 	sora->attachResourcePack(res);
 	
 	peMainWindowLoader::Instance()->loadConfig();
-	sora->createWindow(new peMainWindow);
+	sora->createWindow(new mainWindow);
 	sora->start();
 		
 	return 0;
