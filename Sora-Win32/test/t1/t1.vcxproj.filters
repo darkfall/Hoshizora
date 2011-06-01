@@ -1949,6 +1949,9 @@
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraGUISound.cpp">
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Plugins\SoraOGLRenderer\soil\soil.html">

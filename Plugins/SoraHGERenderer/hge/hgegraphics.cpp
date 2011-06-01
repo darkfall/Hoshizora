@@ -313,7 +313,10 @@ hgeVertex* CALL HGE_Impl::Gfx_StartBatch(int prim_type, HTEXTURE tex, int blend,
 			CurTexture = tex;
 		}
 
-		*max_prim=VERTEX_BUFFER_SIZE / prim_type;
+		if(prim_type != HGEPRIM_TRIPLES_FAN && prim_type != HGEPRIM_TRIPLES_STRIP)
+			*max_prim=VERTEX_BUFFER_SIZE / prim_type;
+		else
+			*max_prim=VERTEX_BUFFER_SIZE / 3;
 		return VertArray;
 	}
 	else return 0;
@@ -612,6 +615,14 @@ void HGE_Impl::_render_batch(bool bEndScene)
 				case HGEPRIM_LINES:
 					pD3DDevice->DrawPrimitive(D3DPT_LINELIST, 0, nPrim);
 					break;
+
+				case HGEPRIM_TRIPLES_FAN:
+					pD3DDevice->DrawPrimitive(D3DPT_TRIANGLEFAN, 0, nPrim-2);
+					break;
+
+				case HGEPRIM_TRIPLES_STRIP:
+					pD3DDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, nPrim);
+					break;
 			}
 
 			nPrim=0;
@@ -759,10 +770,23 @@ bool HGE_Impl::_GfxInit()
 	if(_format_id(d3dpp->BackBufferFormat) < 4) nScreenBPP=16;
 	else nScreenBPP=32;
 	
+	  D3DCAPS9 d3dcaps;
+        if(FAILED(pD3D->GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &d3dcaps)))
+        {
+                _PostError("Can't get D3DCAPS");
+                return false;
+        }
+
+        DWORD d3dvp = D3DCREATE_HARDWARE_VERTEXPROCESSING;
+        if ((d3dcaps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT) == 0 || d3dcaps.VertexShaderVersion < D3DVS_VERSION(1,1))
+        {
+                d3dvp = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+        }
+
 // Create D3D Device
 
 	if( FAILED( pD3D->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hwnd,
-                                  D3DCREATE_SOFTWARE_VERTEXPROCESSING,
+                                  d3dvp,
                                   d3dpp, &pD3DDevice ) ) )
 	{
 		_PostError("Can't create D3D device");

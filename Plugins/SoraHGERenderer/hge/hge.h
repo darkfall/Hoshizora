@@ -210,6 +210,11 @@ typedef bool (*hgeCallback)();
 #define HGEPRIM_LINES		2
 #define HGEPRIM_TRIPLES		3
 #define HGEPRIM_QUADS		4
+/*
+** Extended by Griffin Bu
+*/
+#define HGEPRIM_TRIPLES_FAN 5
+#define HGEPRIM_TRIPLES_STRIP 6
 
 
 /*

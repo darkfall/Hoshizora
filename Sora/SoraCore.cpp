@@ -606,7 +606,7 @@ namespace sora {
 	
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		assert(bInitialized==true);
-		if(bZBufferArea) {
+		if(bZBufferArea && (quad.blend & BLEND_ZWRITE)) {
 			int32 z = static_cast<int32>(quad.v[0].z * 1000);
 			__Z_BUFFER_NODE node;
 			node.vertex = new SoraVertex[4];
@@ -624,7 +624,7 @@ namespace sora {
 	void SoraCore::renderTriple(SoraTriple& trip) {
 		assert(bInitialized==true);
 		
-		if(bZBufferArea) {
+		if(bZBufferArea && (trip.blend & BLEND_ZWRITE)) {
 			int32 z = static_cast<int32>(trip.v[0].z * 1000);
 			__Z_BUFFER_NODE node;
 			node.vertex = new SoraVertex[3];
@@ -641,7 +641,7 @@ namespace sora {
 	
 	void SoraCore::renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
 		assert(bInitialized == true);
-		if(bZBufferArea) {
+		if(bZBufferArea && (blendMode & BLEND_ZWRITE)) {
 			// use z 0
 			int32 z = static_cast<int32>(vertices[0].z * 1000);
 			__Z_BUFFER_NODE node;

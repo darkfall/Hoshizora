@@ -50,14 +50,15 @@ bool mainWindow::updateFunc() {
 sora::SoraSprite* pSpr2;
 sora::SoraSprite* pSpr3;
 
+sora::SoraVertex vert[6];
+
 bool mainWindow::renderFunc() {
 	sora->beginScene();
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
 
-	pSpr->render();
-	pSpr3->render();
-	pSpr2->render();
+	//pSpr->render();
+	pSpr->renderWithVertices(vert, 6, SORA_TRIANGLES_FAN);
 
 	sora->endScene();
 	return false;
@@ -86,6 +87,21 @@ void mainWindow::init() {
 	luaObject.doScript(L"mybullettest.lua");
 	*/
 
+		
+	float32 px = 400.f, py = 300.f;
+	for(int i=0; i<6; ++i) {
+		vert[i].col = CSETA(0xFFFFFFFF, 255/6*(i+1));
+		vert[i].z = 0.0f;
+		
+		vert[i].x = px + 300*cosf(sora::DGR_RAD(i*60));
+		vert[i].y = py + 300*sinf(sora::DGR_RAD(i*60));
+		
+		vert[i].tx = (pSpr->getSpriteWidth() / 2 + 300 * cosf(sora::DGR_RAD(i*60))) / pSpr->getTextureWidth(false);
+		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getTextureHeight(false);
+
+		sora::SORA->logf("%f, %f", vert[i].tx, vert[i].ty);
+	}
+	
 	registerEventFunc(this, &mainWindow::onKeyEvent);
 	sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
 }

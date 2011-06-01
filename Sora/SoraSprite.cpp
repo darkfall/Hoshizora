@@ -41,9 +41,13 @@ namespace sora {
 		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
 		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
 		
-        sprWidth = width;
-        sprHeight = height;
-		
+		if(tex) {
+	       sprWidth = static_cast<int32>(tex->mOriginalWidth);
+	       sprHeight = static_cast<int32>(tex->mOriginalHeight);
+		} else {
+			sprWidth = 1;
+			sprHeight = 1;
+		}
 		shaderContext = NULL;
 		
 		if(texture)
@@ -277,12 +281,12 @@ namespace sora {
 	}
 
 	int32 SoraSprite::getTextureWidth(bool bOriginal)  const{
-		if(texture) return bOriginal?texture->mTextureWidth:texture->mOriginalWidth;
+		if(texture) return bOriginal?texture->mOriginalWidth:texture->mTextureWidth;
 		return 0;
 	}
 
 	int32 SoraSprite::getTextureHeight(bool bOriginal) const {
-		if(texture) return bOriginal?texture->mTextureWidth:texture->mOriginalWidth;
+		if(texture) return bOriginal?texture->mOriginalWidth:texture->mTextureHeight;
 		return 0;
 	}
 
