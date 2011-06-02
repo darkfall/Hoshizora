@@ -136,8 +136,8 @@ void mainWindow::init() {
 		vert[i].x = px + 300*cosf(sora::DGR_RAD(i*60));
 		vert[i].y = py + 300*sinf(sora::DGR_RAD(i*60));
 		
-		vert[i].tx = (pSpr->getSpriteWidth() / 2 + 300 * cosf(sora::DGR_RAD(i*60))) / pSpr->getSpriteWidth();
-		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getSpriteHeight();
+		vert[i].tx = (pSpr->getSpriteWidth() / 2 + 300*cosf(sora::DGR_RAD(i*60))) / pSpr->getTextureWidth(false);
+		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getTextureHeight(false);
 	}
 	
 	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(0.f);

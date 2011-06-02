@@ -1015,7 +1015,7 @@ namespace sora {
 						attachShaderContext(node->shader);
 					pRenderSystem->renderTriple(trip);
 					detachShaderContext();
-				} else {
+				} else if(node->size != 0) {
 					if(node->shader)
 						attachShaderContext(node->shader);
 					pRenderSystem->renderWithVertices(node->tex, node->blend, node->vertex, node->size, node->drawMode);

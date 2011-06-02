@@ -230,8 +230,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -270,6 +268,7 @@
 								<string>88E33824136A79F2000B67C8</string>
 								<string>886E0FD713681F5800A77847</string>
 								<string>88BD14821346ADCA0068AABA</string>
+								<string>88CE58D212C1B41C00C551F0</string>
 								<string>88D7F51B1285190700BA1949</string>
 								<string>88DCE61A13666885005FBBE0</string>
 								<string>08FB7795FE84155DC02AAC07</string>
@@ -281,13 +280,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>177</integer>
-									<integer>163</integer>
+									<integer>97</integer>
+									<integer>49</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 2453}, {205, 760}}</string>
+							<string>{{0, 6}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -317,12 +316,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>mainWindow.cpp</string>
+								<string>SoraCore.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -330,11 +331,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>mainWindow.cpp</string>
+										<string>SoraCore.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>887F1E1A1396328800F534D5</string>
+										<string>887F207113974B6800F534D5</string>
 										<key>history</key>
 										<array>
 											<string>88BFA132135AB29100BB8E70</string>
@@ -404,7 +405,6 @@
 											<string>88E33986136AA2CD000B67C8</string>
 											<string>88E339CE136AA631000B67C8</string>
 											<string>88E339DC136AA716000B67C8</string>
-											<string>88E33A1E136B319A000B67C8</string>
 											<string>88E33A1F136B319A000B67C8</string>
 											<string>88E33CB3136B74A8000B67C8</string>
 											<string>88E33CBD136B74A8000B67C8</string>
@@ -601,7 +601,6 @@
 											<string>88603ADC1388ED5700C3B63B</string>
 											<string>88AE8F37138D44E700825F00</string>
 											<string>88A20E1C138DF5060019C5AA</string>
-											<string>88A20E1D138DF5060019C5AA</string>
 											<string>88A20EBD138E01860019C5AA</string>
 											<string>88A20EBE138E01860019C5AA</string>
 											<string>88A20EBF138E01860019C5AA</string>
@@ -749,7 +748,6 @@
 											<string>88453231139130500045D130</string>
 											<string>8845325A139132C40045D130</string>
 											<string>8845325B139132C40045D130</string>
-											<string>884532F2139240EC0045D130</string>
 											<string>8845333D139243790045D130</string>
 											<string>8845335413927C750045D130</string>
 											<string>8845335613927C750045D130</string>
@@ -764,7 +762,6 @@
 											<string>88E547DC139392E600ECC5CF</string>
 											<string>887F1B351394E6E500F534D5</string>
 											<string>887F1B3D1394E74A00F534D5</string>
-											<string>887F1B501394F62A00F534D5</string>
 											<string>887F1B521394F62A00F534D5</string>
 											<string>887F1B551394F62A00F534D5</string>
 											<string>887F1B561394F62A00F534D5</string>
@@ -798,21 +795,25 @@
 											<string>887F1C01139610D400F534D5</string>
 											<string>887F1C02139610D400F534D5</string>
 											<string>887F1C03139610D400F534D5</string>
-											<string>887F1C161396113600F534D5</string>
-											<string>887F1C5F1396145300F534D5</string>
 											<string>887F1D071396216D00F534D5</string>
 											<string>887F1D11139623AD00F534D5</string>
 											<string>887F1D5813962AEA00F534D5</string>
 											<string>887F1DBE13962EB800F534D5</string>
 											<string>887F1DED1396306600F534D5</string>
-											<string>887F1E00139630A400F534D5</string>
 											<string>887F1E131396328800F534D5</string>
-											<string>887F1E141396328800F534D5</string>
-											<string>887F1E151396328800F534D5</string>
-											<string>887F1E161396328800F534D5</string>
 											<string>887F1E171396328800F534D5</string>
-											<string>887F1E181396328800F534D5</string>
-											<string>887F1E191396328800F534D5</string>
+											<string>887F1EA713965DE400F534D5</string>
+											<string>887F1F3313965F9A00F534D5</string>
+											<string>887F1F3413965F9A00F534D5</string>
+											<string>887F1FDB139744E400F534D5</string>
+											<string>887F1FDC139744E400F534D5</string>
+											<string>887F1FDD139744E400F534D5</string>
+											<string>887F1FDE139744E400F534D5</string>
+											<string>887F1FDF139744E400F534D5</string>
+											<string>887F1FE0139744E400F534D5</string>
+											<string>887F1FE1139744E400F534D5</string>
+											<string>887F206113974B2C00F534D5</string>
+											<string>887F206213974B2C00F534D5</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -870,9 +871,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>887F1B231394E48600F534D5</string>
+				<string>887F206413974B2C00F534D5</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>887F1B241394E48600F534D5</string>
+				<string>887F206513974B2C00F534D5</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -1010,12 +1011,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>887F1E1B1396328800F534D5</string>
-		<string>887F1BA81394F89B00F534D5</string>
-		<string>887F1BA91394F89B00F534D5</string>
 		<string>887022D01346AB4300AE8DD7</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -1035,14 +1032,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraOGLRenderer.cpp</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -1098,7 +1093,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>887022D01346AB4300AE8DD7</string>
-				<string>887F1B271394E48600F534D5</string>
+				<string>887F206613974B2C00F534D5</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -1220,13 +1215,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>887F1B281394E48600F534D5</string>
+				<string>887F206713974B2C00F534D5</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>887F1B291394E48600F534D5</string>
-				<string>887F1B2A1394E48600F534D5</string>
-				<string>887F1B2B1394E48600F534D5</string>
-				<string>887F1B2C1394E48600F534D5</string>
-				<string>887F1B2D1394E48600F534D5</string>
+				<string>887F206813974B2C00F534D5</string>
+				<string>887F206913974B2C00F534D5</string>
+				<string>887F206A13974B2C00F534D5</string>
+				<string>887F206B13974B2C00F534D5</string>
+				<string>887F206C13974B2C00F534D5</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -1345,8 +1340,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1382,7 +1375,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>887F1BA61394F89B00F534D5</string>
+				<string>887F1F4C1396602500F534D5</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -1392,7 +1385,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
