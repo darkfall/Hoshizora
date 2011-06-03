@@ -20,6 +20,8 @@ namespace sora {
         
         /* @param width and height are hack for vlc
          to be solved
+		// opengl = RGBA
+		// hge+dx = RV32
          */
         virtual bool openMedia(const SoraWString& filePath, const SoraString& dis="RGBA") { return false; }
         virtual void play() {}

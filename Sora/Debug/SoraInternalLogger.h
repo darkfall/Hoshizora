@@ -58,8 +58,9 @@ namespace sora {
 			int32 currLogIndex;
 			float32 logInterval;
 		};
-
-#define INT_LOG SoraInternalLogger
+	
+	typedef SoraInternalLogger Debug;
+	
 #define INT_LOG_HANDLE SoraInternalLogger::Instance()
 	//} // namespace internal
 } // namespace sora

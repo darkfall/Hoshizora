@@ -50,9 +50,9 @@ namespace sora {
 		CGerror error;
 		const char* str = cgGetLastErrorString(&error);
 		if(error != CG_NO_ERROR) {
-			INT_LOG::debugPrintf("SoraShader: %s\n", str);
+			Debug::debugPrintf("SoraShader: %s\n", str);
 			if(error == CG_COMPILER_ERROR) {
-				INT_LOG::debugPrintf("SoraShaderContext: %s", cgGetLastListing(context));
+				Debug::debugPrintf("SoraShaderContext: %s", cgGetLastListing(context));
 			}			
 			setType(0);
 		}

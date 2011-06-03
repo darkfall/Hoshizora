@@ -2114,6 +2114,7 @@
 		88BD14821346ADCA0068AABA /* SoraLua */ = {
 			isa = PBXGroup;
 			children = (
+				88BD15001346ADCA0068AABA /* SoraLuaStateManager.h */,
 				88A8653913732FAA003A3CDE /* EnvVarExport.cpp */,
 				88A8653A13732FAA003A3CDE /* EnvVarExport.h */,
 				88BD14831346ADCA0068AABA /* guichanWrapper.cpp */,
@@ -2121,7 +2122,6 @@
 				88BD14861346ADCA0068AABA /* luaclass.h */,
 				88BD14871346ADCA0068AABA /* LuaPlus */,
 				88BD14F61346ADCA0068AABA /* LuaPlus.dll */,
-				88BD15001346ADCA0068AABA /* SoraLuaStateManager.h */,
 				88BD14FF1346ADCA0068AABA /* SoraLuaStateManager.cpp */,
 				88BD14F91346ADCA0068AABA /* LuaPlusHelper.h */,
 				88BD14FC1346ADCA0068AABA /* SoraLuaExport.h */,

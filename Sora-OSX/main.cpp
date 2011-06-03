@@ -39,7 +39,6 @@
 
 
 int main(int argc, char* argv[]) {
-
 	
 	sora::SoraCore* sora = sora::SoraCore::Instance();
 	sora->registerRenderSystem(new sora::SoraOGLRenderer);

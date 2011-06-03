@@ -14,6 +14,8 @@
 #endif
 
 #include "SoraPlatform.h"
+#include "hgevector.h"
+#include "hgerect.h"
 
 namespace sora {
 
@@ -31,14 +33,9 @@ namespace sora {
 	inline float32 DGR_RAD(float32 dgr)  {return (float32)((D_PI * dgr) / 180.0); }
 	inline float32 RAD_DGR(float32 rad)  {return (float32)((180.0 * rad) / D_PI); }
 	
-	// to do
-	typedef struct {
-		float32 x, y;
-	} Vertex2;
-
-	typedef struct {
-		float32 x, y, z;
-	} Vertex3;
+	
+	typedef hgeVector SoraVector;
+	typedef hgeRect SoraRect;
 	
 	template<typename T>
 	inline void soraswap(T& t1, T& t2) {

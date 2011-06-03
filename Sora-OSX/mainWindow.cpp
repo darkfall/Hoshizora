@@ -34,11 +34,14 @@
 #include "SoraPNGOps/SoraPNGOptimizer.h"
 #include "Debug/SoraAutoProfile.h"
 
+
+
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
 	
 	registerEventFunc(this, &mainWindow::onKeyEvent);
 	sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
+	
 }
 
 mainWindow::~mainWindow() {
@@ -54,7 +57,6 @@ void transform3d(float32& x, float32& y, float32 z) {
 	y = (y - cy) * scale + cy;
 	z = 0.f;
 }
-
 
 bool mainWindow::updateFunc() {
 	
@@ -139,6 +141,7 @@ void mainWindow::init() {
 		vert[i].tx = (pSpr->getSpriteWidth() / 2 + 300*cosf(sora::DGR_RAD(i*60))) / pSpr->getTextureWidth(false);
 		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getTextureHeight(false);
 	}
+	
 	
 	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(0.f);
 	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);

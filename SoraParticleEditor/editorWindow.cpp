@@ -123,7 +123,6 @@ class SpeedPanelResponser: public SoraGUIResponser {
 		else if(getID().compare("MaxTrigAccel") == 0) {
 			peffect->pheader.fMaxTrigAcc = p->getValue();
 		}
-	//	labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
 	}
 };
 
