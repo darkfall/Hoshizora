@@ -124,6 +124,14 @@ namespace sora {
 	typedef ulong32 HSORATEXTURE;
 	typedef ulong32 HGUIWIDGET;
     typedef ulong32 HSORATARGET;
+	
+	enum {
+		SORA_LINE				= 0x0001,
+		SORA_TRIANGLES			= 0x0002,
+		SORA_TRIANGLES_FAN		= 0x0003,
+		SORA_TRIANGLES_STRIP	= 0x0004,
+		SORA_QUAD				= 0x0005,
+	};
 } // namespace sora
 
 
@@ -256,12 +264,6 @@ static void msleep(uint32_t msec) {
 #define IDNO				7
 
 #endif
-
-#define SORA_LINE				0x0001
-#define SORA_TRIANGLES			0x0002
-#define SORA_TRIANGLES_FAN		0x0003
-#define SORA_TRIANGLES_STRIP	0x0004
-#define SORA_QUAD				0x0005
 
 #include <stdint.h>
 

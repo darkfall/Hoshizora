@@ -34,6 +34,7 @@
 #include "SoraPNGOps/SoraPNGOptimizer.h"
 #include "Debug/SoraAutoProfile.h"
 
+#include "cmd/SoraConsole.h"
 
 
 mainWindow::mainWindow() {
@@ -99,18 +100,18 @@ bool mainWindow::renderFunc() {
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 
-	sora::SORA->beginZBufferSort();
-	
-//	pSpr->update(sora::SORA->getDelta());
-//	pSpr->render();
-//	pressAnyKey->render(0, posy);
-//	pSpr2->render(0, posy);
-	pSpr->renderWithVertices(vert, 6, SORA_TRIANGLES_FAN);
-	
-	sora::SORA->endZBufferSort();
+	pSpr->render();
+	pressAnyKey->render();
+	pSpr2->render();
+	sora::SoraConsole::Instance()->render();
 
 	sora->endScene();
 	return false;
+}
+
+void onDownloadFinish(sora::SoraHttpFile* file){
+	sora::Debug::debugPrintf("downloaded Size = %lu, buffersize=%lu,%lu, time = %f", file->getDownloadedSize(), file->getMemoryBuffer()->size(), file->getMemoryBuffer()->realsize(), file->getDownloadTime());
+	file->writeToFile(L"./lalalalal.png");
 }
 
 
@@ -121,9 +122,15 @@ void mainWindow::init() {
 	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 20);
 	pFont->setColor(0xFFFFCC00);
 	
+	file.setFinishCallback(onDownloadFinish);
+	file.readFile(L"http://www.studio-gamemaster.com/sora_800_600.png");
+	
 
 		
 	sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 20);
+	
+	sora::SoraConsole::Instance();
+	sora::SoraConsole::Instance()->setFont(L"Bank Gothic Medium BT.ttf", 20);
 	
 	pSpr = sora::SORA->createSprite(L"background.png");
 	pressAnyKey = sora::SORA->createSprite(L"road.png");

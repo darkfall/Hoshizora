@@ -69,7 +69,7 @@ namespace sora {
 		}
 	}
 	
-	bool SoraPNGOptimizer::optimizePNGFromAndWriteToFile(const SoraWString& file, const SoraWString& output) {
+	bool SoraPNGOptimizer::optimizePNGFromAndWriteToFile(const SoraWString& file, const wchar_t* output) {
 		if(SoraFileUtility::fileExists(file)) {
 			HSORATEXTURE tex = sora::SORA->createTexture(file, false);
 			if(tex) {
@@ -81,7 +81,11 @@ namespace sora {
 				if(col) {
 					optimizePNGData(col, width, height, pitch);
 					
-					FILE* pf = sora_fopenw(output, "wb");
+					FILE* pf;
+					if(output)
+						pf = sora_fopenw(output, "wb");
+					else
+						pf = sora_fopenw(file.c_str(), "wb");
 					if(!pf) {
 						sora::SORA->textureUnlock(tex);
 						sora::SORA->releaseTexture(tex);
@@ -107,13 +111,17 @@ namespace sora {
 			sora::SORA->enumFilesInFolder(filecont, file);
 			if(filecont.size() != 0) {
 				for(size_t i=0; i<filecont.size(); ++i) {
-					std::wstring op = sora::SoraFileUtility::getFileName(filecont[i]);
-					size_t rppos = op.rfind(L".");
-					if(rppos != std::wstring::npos)
-						op.insert(rppos, L"_optd");
-					else
-						op += L"_optd.png";
-					optimizePNGFromAndWriteToFile(filecont[i], op);
+					if(output) {
+						std::wstring op = sora::SoraFileUtility::getFileName(filecont[i]);
+						size_t rppos = op.rfind(L".");
+						if(rppos != std::wstring::npos)
+							op.insert(rppos, L"_optd");
+						else
+							op += L"_optd.png";
+						optimizePNGFromAndWriteToFile(filecont[i], op.c_str());
+					} else {
+						optimizePNGFromAndWriteToFile(filecont[i], filecont[i].c_str());
+					}
 				}
 				return true;
 			}

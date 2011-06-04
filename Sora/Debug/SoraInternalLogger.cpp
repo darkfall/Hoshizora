@@ -93,7 +93,7 @@ namespace sora {
 		vsprintf(Message, format, ArgPtr);
 		va_end(ArgPtr);
 		
-		::printf("DEBUG: %s", Message);
+		::printf("DEBUG: %s\n", Message);
 #endif
 	}
 	

@@ -17,6 +17,47 @@ namespace sora {
 	typedef std::vector<SoraKeyEvent> VKEYEVENT_POLL;
 	static VKEYEVENT_POLL keyPoll;
 
+	char toasciiWithFlag(int key, int flag) {
+		char chr;
+		if(key >= 0 && key <= 255) {
+			chr = toascii(key);
+			if(flag & SORA_INPUT_FLAG_SHIFT) {
+				switch(key) {
+					case SORA_KEY_1: chr = '!'; break;
+					case SORA_KEY_2: chr = '@'; break;
+					case SORA_KEY_3: chr = '#'; break;
+					case SORA_KEY_4: chr = '$'; break;
+					case SORA_KEY_5: chr = '%'; break;
+					case SORA_KEY_6: chr = '^'; break;
+					case SORA_KEY_7: chr = '&'; break;
+					case SORA_KEY_8: chr = '*'; break;
+					case SORA_KEY_9: chr = '('; break;
+					case SORA_KEY_0: chr = ')'; break;
+					case SORA_KEY_GRAVE: chr = '~';  break;
+					case SORA_KEY_EQUALS: chr = '+';  break;
+					case SORA_KEY_BACKSLASH: chr = '|';  break;
+					case SORA_KEY_LBRACKET: chr = '{';  break;
+					case SORA_KEY_RBRACKET: chr = '}';  break;
+					case SORA_KEY_SEMICOLON: chr = ':';  break;
+					case SORA_KEY_APOSTROPHE: chr = '"';  break;
+					case SORA_KEY_COMMA: chr = '<';  break;
+					case SORA_KEY_PERIOD: chr = '>';  break;
+					case SORA_KEY_SLASH: chr = '?';  break;
+				}
+			} else {
+				if(key >= SORA_KEY_A && key <= SORA_KEY_Z)
+					chr = tolower(chr);
+			}
+		}
+		else 
+			chr = 0;
+		
+		std::cout<<key<<" "<<(char)key<<" "<<chr<<std::endl;
+		std::cout<<SORA_KEY_GRAVE<<" "<<SORA_KEY_EQUALS<<" "<<SORA_KEY_BACKSLASH<<std::endl;
+		
+		return chr;
+	}
+	
 	void glfwKeyCallback(int key, int action) {
 		SoraKeyEvent ev;
 		if(action == GLFW_PRESS) ev.type = SORA_INPUT_KEYDOWN;
@@ -30,9 +71,7 @@ namespace sora {
 		if(glfwGetKey(GLFW_KEY_CAPS_LOCK) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_CAPSLOCK;
 		if(glfwGetKey(GLFW_KEY_SCROLL_LOCK)) ev.flags |= SORA_INPUT_FLAG_SCROLLLOCK;
 
-		if(key > 0 && key < 255)
-			ev.chr = (char)key;
-		else ev.chr = 0;
+		ev.chr = toasciiWithFlag(ev.key, ev.flags);
 		ev.wheel = glfwGetMouseWheel();
 		int32 x, y;
 		glfwGetMousePos(&x, &y);

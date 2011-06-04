@@ -121,13 +121,13 @@ std::string fp_to_str(float32 x)
 	}
 #endif
 
-	std::string ws2s2(const std::wstring& ws) {
+	std::string ws2sfast(const std::wstring& ws) {
 		std::string buffer(ws.length(), ' ');
 		std::copy(ws.begin(), ws.end(), buffer.begin());
 		return buffer;
 	}
 	
-	std::wstring s2ws2(const std::string& s) {
+	std::wstring s2wsfast(const std::string& s) {
 		std::wstring buffer(s.length(), L' ');
 		std::copy(s.begin(), s.end(), buffer.begin());
 		return buffer;

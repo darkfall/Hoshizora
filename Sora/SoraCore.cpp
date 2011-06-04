@@ -140,20 +140,25 @@ namespace sora {
 
 		pRenderSystem->beginFrame();
         
-		_frameListenerStart();
+		{
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("FRAMELISTENER_START");
+#endif
+			_frameListenerStart();
+		}
+		
+		{
+#ifdef PROFILE_CORE_UPDATE
+            PROFILE("UPDATE_PLUGINS");
+#endif
+            pPluginManager->update();
+        }
         
         {
 #ifdef PROFILE_CORE_UPDATE
             PROFILE("UPDATE_MAINWINDOW");
 #endif
             mainWindow->updateFunc();
-        }
-        
-        {
-#ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_PLUGINS");
-#endif
-            pPluginManager->update();
         }
         
         {

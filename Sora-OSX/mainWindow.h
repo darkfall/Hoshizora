@@ -16,6 +16,8 @@
 #include "SoraParticleSystem/SoraParticleSystem.h"
 #include "SoraLua/SoraLuaObject.h"
 
+#include "SoraHttpFile/SoraHttpFile.h"
+
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
 	mainWindow();
@@ -53,6 +55,8 @@ private:
 	sora::SoraParticleSystem* ps;
 	sora::SoraSprite* psSpr;
 	sora::SoraBaseCanvas* canvas1;
+	
+	sora::SoraHttpFile file;
 };
 
 #endif
