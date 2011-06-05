@@ -334,10 +334,19 @@ namespace sora {
 		}
 		return width;
 	}
+	
+	float32 SoraFTFont::getStringHeight(const wchar_t* pwstr) {
+		float height = getHeight();
+		for(const wchar_t* p = pwstr; *p; ++p) {
+			if(*p == L'\n')
+				height += getHeight();
+		}
+		return height;
+	}
 
 	float32 SoraFTFont::getHeight() {
 		if(!ft_glyphs.empty())
-			return (float32)size*1.5f+kerningHeight;
+			return (float32)size+kerningHeight;
 		return 0.f;
 	}
 

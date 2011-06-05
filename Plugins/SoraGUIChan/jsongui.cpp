@@ -42,7 +42,8 @@ namespace sora {
             parseWidget(rootValue, NULL);
             return true;
         }
-		INT_LOG_HANDLE->logf("%s", reader.getFormatedErrorMessages().c_str());
+		DebugPtr->log(reader.getFormatedErrorMessages(),
+					  LOG_LEVEL_ERROR);
         return false;
     }
     

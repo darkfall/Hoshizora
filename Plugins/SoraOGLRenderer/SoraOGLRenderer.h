@@ -102,6 +102,8 @@ namespace sora {
 		inline bool _glCheckError();
 
 		SoraWindowInfoBase* mainWindow;
+		int32 windowWidth;
+		int32 windowHeight;
 
 		struct _SoraOGLWindowInfo {
 			float32 x, y, z;

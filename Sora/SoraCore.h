@@ -18,12 +18,16 @@
 #include "SoraShader.h"
 #include "SoraFrameListener.h"
 #include "SoraEnvValues.h"
+#include "SoraInternalLogger.h"
 
 #include <map>
 
 namespace sora {
 
-	class SoraCore: public SoraSingleton<SoraCore> {
+	class SoraConsole;
+	class SoraConsoleEvent;
+	
+	class SoraCore: public SoraSingleton<SoraCore>, public SoraEventHandler {
 	protected:
 		friend class SoraSingleton<SoraCore>;
 
@@ -166,8 +170,8 @@ namespace sora {
 
 		int32	SORACALL messageBox	(const SoraString& sMssg, const SoraString& sTitle, int32 iCode);
 		int32	SORACALL messageBoxW (const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode);
-		void	SORACALL log		(const SoraString& sMssg);
-		void	SORACALL logw		(const SoraWString& sMssg);
+		void	SORACALL log		(const SoraString& sMssg, int32 level=LOG_LEVEL_NORMAL);
+		void	SORACALL logw		(const SoraWString& sMssg, int32 level=LOG_LEVEL_NORMAL);
 		void	SORACALL logf		(const char* str, ...);
 		
 		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
@@ -205,12 +209,17 @@ namespace sora {
 		void SORACALL delFrameListener(SoraFrameListener* listener);
 		
 		s_int64 getEngineMemoryUsage();
+		
+		SoraConsole* getConsole();
+		void setSystemFont(const wchar_t* font, int32 fontSize);
+		
+		void onConsoleEvent(SoraConsoleEvent* cev);
 
 	private:
-
+		inline void _registerCoreCmds();
+		
 		inline void _checkCoreComponents();
 		inline void _postError(const SoraString& str);
-		inline void _logInternalLog();
 		inline void _initializeTimer();
 		inline void _initializeMiscTool();
 

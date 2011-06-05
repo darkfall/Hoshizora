@@ -71,7 +71,7 @@ namespace mead {
 		luaObject.doScript(L"mybullettest.lua");
 	}
 	
-	void meadMainWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {
+	void meadMainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
 		if(kev->type == SORA_INPUT_KEYDOWN) {
 			if(kev->key == SORA_KEY_1 ) {
 				mead::meadBossManager::Instance()->clearAllBosses();

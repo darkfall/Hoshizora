@@ -10,6 +10,8 @@ extern "C" {
 #include "SoraLuaStateManager.h"
 #include "SoraLuaExport.h"
 
+#include "Debug/SoraInternalLogger.h"
+
 namespace sora {
 	SoraLuaObject::SoraLuaObject() {
 		luaState = LuaState::Create(true);
@@ -74,11 +76,29 @@ namespace sora {
 	}
 
 	int32 SoraLuaObject::doString(const SoraString& str) {
-		return luaState->DoString(str.c_str());
+		int32 result = luaState->DoString(str.c_str());
+		if(result != 0) {
+	
+			lua_Debug debug;
+			lua_getstack(luaState->GetCState(), 0, &debug);
+	
+			DebugPtr->log(vamssg("Lua Error: %d, what:\n %s", result, debug.what),
+						  LOG_LEVEL_ERROR);
+		}
+		return result;
 	}
 
 	int32 SoraLuaObject::doBuffer(const char* buff, size_t size, const char* name) {
-		return luaState->DoBuffer(buff, size, name);
+		int32 result = luaState->DoBuffer(buff, size, name);
+		if(result != 0) {
+			
+			lua_Debug debug;
+			lua_getstack(luaState->GetCState(), 0, &debug);
+			
+			DebugPtr->log(vamssg("Lua Error: %d, what: %s", result, debug.what),
+						  LOG_LEVEL_ERROR);
+		}
+		return result;
 	}
 
 	int32 SoraLuaObject::loadScript(const SoraWString& scriptPath) {
@@ -92,11 +112,29 @@ namespace sora {
 	}
 
 	int32 SoraLuaObject::loadString(const SoraString& str) {
-		return luaState->LoadString(str.c_str());
+		int32 result = luaState->LoadString(str.c_str());
+		if(result != 0) {
+			
+			lua_Debug debug;
+			lua_getstack(luaState->GetCState(), 0, &debug);
+			
+			DebugPtr->log(vamssg("Lua Error: %d, what: %s", result, debug.what),
+						  LOG_LEVEL_ERROR);
+		}
+		return result;
 	}
 
 	int32 SoraLuaObject::loadBuffer(const char* buffer, size_t size, const char* name) {
-		return luaState->LoadBuffer(buffer, size, name);
+		int32 result = luaState->LoadBuffer(buffer, size, name);
+		if(result != 0) {
+			
+			lua_Debug debug;
+			lua_getstack(luaState->GetCState(), 0, &debug);
+			
+			DebugPtr->log(vamssg("Lua Error: %d, what: %s", result, debug.what),
+						  LOG_LEVEL_ERROR);
+		}
+		return result;
 	}
 
 	LuaObject SoraLuaObject::createThread() {

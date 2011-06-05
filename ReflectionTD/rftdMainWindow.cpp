@@ -76,7 +76,7 @@ namespace rftd {
 		sora::GCN_GLOBAL->addWidget(mtmap, "top");
 	}
 	
-	void rftdMainWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {
+	void rftdMainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
 		if(kev->type == SORA_INPUT_KEYDOWN) {
 			if(kev->key == SORA_KEY_1 ) {
 				

@@ -115,6 +115,11 @@ namespace sora {
 			}
 		}
 		RTTIName += " {\n";
+		CONSTRUCTOR_LIST::iterator itConstructor = mConstructors.begin();
+		while(itConstructor != mConstructors.end()) {
+			RTTIName += "	"+getName()+(*itConstructor)->getSignature()+"\n";
+			++itConstructor;
+		}
 		METHOD_LIST::iterator itMethod = mMethods.begin();
 		while(itMethod != mMethods.end()) {
 			RTTIName += "	"+(*itMethod)->getDecl()+"\n";

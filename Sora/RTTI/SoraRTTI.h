@@ -125,7 +125,7 @@ namespace sora {
 											 constructor)\
 	
 #define RTTI_DEFAULT_CONSTRUCTOR() \
-	RTTI_CONSTRUCTOR("default", (new sora::SoraRTTIConstructor0<self>())) 
+	RTTI_CONSTRUCTOR((void), (new sora::SoraRTTIConstructor0<self>())) 
 	
 #define RTTI_CONSTRUCTOR_1(__P1) \
 	RTTI_CONSTRUCTOR((__P1), (new sora::SoraRTTIConstructor1<self, __P1>()))

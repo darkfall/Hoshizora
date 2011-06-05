@@ -149,7 +149,7 @@ namespace mead {
 		
 	private:
 		void exportSelf(LuaPlus::LuaState* state);
-		void onKeyEvent(const sora::SoraKeyEvent* kev);
+		void onKeyEvent(sora::SoraKeyEvent* kev);
 		
 		sora::SoraLuaObject mScriptObject;
 		meadBulletManager* mBulletManager;

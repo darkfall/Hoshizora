@@ -360,16 +360,16 @@
 #define SORA_KEY_Z			0x5A
 
 #define SORA_KEY_GRAVE		0xC0
-#define SORA_KEY_MINUS		0xBD
-#define SORA_KEY_EQUALS		0xBB
-#define SORA_KEY_BACKSLASH	0xDC
-#define SORA_KEY_LBRACKET	0xDB
-#define SORA_KEY_RBRACKET	0xDD
-#define SORA_KEY_SEMICOLON	0xBA
-#define SORA_KEY_APOSTROPHE	0xDE
-#define SORA_KEY_COMMA		0xBC
-#define SORA_KEY_PERIOD		0xBE
-#define SORA_KEY_SLASH		0xBF
+#define SORA_KEY_MINUS		0x2D
+#define SORA_KEY_EQUALS		0X3D
+#define SORA_KEY_BACKSLASH	0x5C
+#define SORA_KEY_LBRACKET	0x5B
+#define SORA_KEY_RBRACKET	0x5D
+#define SORA_KEY_SEMICOLON	0x3A
+#define SORA_KEY_APOSTROPHE	0x22
+#define SORA_KEY_COMMA		0x27
+#define SORA_KEY_PERIOD		0x2E
+#define SORA_KEY_SLASH		0x2F
 
 #define SORA_KEY_NUMPAD0	GLFW_KEY_KP_0
 #define SORA_KEY_NUMPAD1	GLFW_KEY_KP_1
@@ -635,17 +635,17 @@
 #define SORA_KEY_Y			0x59
 #define SORA_KEY_Z			0x5A
 
-#define SORA_KEY_GRAVE		0xC0
-#define SORA_KEY_MINUS		0xBD
-#define SORA_KEY_EQUALS		0xBB
-#define SORA_KEY_BACKSLASH	0xDC
-#define SORA_KEY_LBRACKET	0xDB
-#define SORA_KEY_RBRACKET	0xDD
-#define SORA_KEY_SEMICOLON	0xBA
-#define SORA_KEY_APOSTROPHE	0xDE
-#define SORA_KEY_COMMA		0xBC
-#define SORA_KEY_PERIOD		0xBE
-#define SORA_KEY_SLASH		0xBF
+#define SORA_KEY_GRAVE		0x60
+#define SORA_KEY_MINUS		0x2D
+#define SORA_KEY_EQUALS		0X3D
+#define SORA_KEY_BACKSLASH	0x5C
+#define SORA_KEY_LBRACKET	0x5B
+#define SORA_KEY_RBRACKET	0x5D
+#define SORA_KEY_SEMICOLON	0x3B
+#define SORA_KEY_APOSTROPHE	0x27
+#define SORA_KEY_COMMA		0x2C
+#define SORA_KEY_PERIOD		0x2E
+#define SORA_KEY_SLASH		0x2F
 
 #define SORA_KEY_NUMPAD0	GLFW_KEY_KP_0
 #define SORA_KEY_NUMPAD1	GLFW_KEY_KP_1
@@ -735,11 +735,11 @@ namespace sora {
 			return key;
 		}
 		
-		bool isKeyPressed(int k) {
+		bool isKeyPressed(int k) const {
 			return isKeyDown() && k == key;
 		}
 		
-		bool isKeyUp(int k) {
+		bool isKeyReleased(int k) const {
 			return isKeyUp() && k == key;
 		}
 		

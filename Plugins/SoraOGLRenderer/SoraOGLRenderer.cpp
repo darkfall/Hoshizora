@@ -283,6 +283,8 @@ namespace sora{
         mainWindow = windowInfo;
 		_oglWindowInfo.width = windowInfo->getWindowWidth();
 		_oglWindowInfo.height = windowInfo->getWindowHeight();
+		windowWidth = _oglWindowInfo.width;
+		windowHeight = _oglWindowInfo.height;
 
 		_glInitialize();
 		_glSetProjectionMatrix(windowInfo->getWindowWidth(), windowInfo->getWindowHeight());
@@ -300,6 +302,13 @@ namespace sora{
 
 	void SoraOGLRenderer::setWindowSize(int32 w, int32 h) {
 		glfwSetWindowSize(w, h);
+		
+		_oglWindowInfo.width = w;
+		_oglWindowInfo.height = h;
+		windowWidth = _oglWindowInfo.width;
+		windowHeight = _oglWindowInfo.height;
+		
+		_glSetProjectionMatrix(w, h);
 	}
 
 	void SoraOGLRenderer::setWindowTitle(const SoraWString& title) {
@@ -728,8 +737,8 @@ namespace sora{
 			width = pCurTarget->getWidth();
 			height = pCurTarget->getHeight();
 		} else {
-			width = mainWindow->getWindowWidth();
-			height = mainWindow->getWindowHeight();
+			width = windowWidth;
+			height = windowHeight;
 		}
 
 		if(w==0 && h==0) {
@@ -764,8 +773,8 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::setTransformWindowSize(float32 w, float32 h) {
-		_oglWindowInfo.width = w!=0?w:mainWindow->getWindowWidth();
-		_oglWindowInfo.height = h!=0?h:mainWindow->getWindowHeight();
+		_oglWindowInfo.width = w!=0?w:windowWidth;
+		_oglWindowInfo.height = h!=0?h:windowHeight;
 		applyTransform();
 	}
 

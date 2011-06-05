@@ -190,7 +190,7 @@ void vlcWindow::init() {
     if(moviePlayer->openMedia(L"./AMV_Scenario.mp4")) {
 		pSpr = new sora::SoraSprite(sora::SORA->createTextureWH(moviePlayer->getWidth(), moviePlayer->getHeight()));
 		moviePlayer->play();
-	} else pSpr = NULL;
+	};
         
     sora::SORA->setWindowTitle(L"AMV_Scenerio.mp4");
     sora::SORA->setFPS(999);

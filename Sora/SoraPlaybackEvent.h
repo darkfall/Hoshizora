@@ -81,7 +81,7 @@ namespace sora {
         }
         
         // default does nothing
-        virtual void onSoundEvent(const SoraPlaybackEvent* pEvent) {}
+        virtual void onSoundEvent(SoraPlaybackEvent* pEvent) {}
         
     protected:
         SoraEventHandler* pEventHandler;

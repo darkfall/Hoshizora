@@ -36,7 +36,7 @@ namespace sora {
 		s_int64 getCurrentSystemTime() {
 			timeb t;
 			ftime(&t);
-			return (s_int64)(t.time + t.millitm);
+			return (s_int64)(t.time*1000 + t.millitm);
 		}
 		
 		bool update() {
