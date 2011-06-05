@@ -861,12 +861,20 @@ void HGE_Impl::_AdjustWindow()
 
 void HGE_Impl::_Resize(int width, int height)
 {
-	if(hwndParent)
-	{
+	rectW.right = width+rectW.left;
+	rectW.bottom = height+rectW.top;
+
+	rectFS.right = width;
+	rectFS.left = height;
+
+//	if(hwndParent)
+	//{
 		//if(procFocusLostFunc) procFocusLostFunc();
 
 		d3dppW.BackBufferWidth=width;
 		d3dppW.BackBufferHeight=height;
+		d3dppFS.BackBufferWidth=width;
+		d3dppFS.BackBufferHeight=height;
 		nScreenWidth=width;
 		nScreenHeight=height;
 
@@ -874,7 +882,7 @@ void HGE_Impl::_Resize(int width, int height)
 		_GfxRestore();
 
 		//if(procFocusGainFunc) procFocusGainFunc();
-	}
+//	}
 }
 
 void HGE_Impl::_GfxDone()
@@ -1065,6 +1073,9 @@ bool HGE_Impl::_init_lost()
 	CurBlendMode = BLEND_DEFAULT;
 	CurTexture = NULL;
 	CurShader = NULL;
+
+	pD3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_FALSE ); 
+	CurBlendMode = BLEND_DEFAULT;
 
 	pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
 	pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);

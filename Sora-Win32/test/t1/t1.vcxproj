@@ -358,6 +358,7 @@
     <ClInclude Include="..\..\..\ReflectionRev\rfShape.h" />
     <ClInclude Include="..\..\..\ReflectionRev\rfTitleView.h" />
     <ClInclude Include="..\..\..\ReflectionRev\rfView.h" />
+    <ClInclude Include="..\..\..\Sora\cmd\SoraConsole.h" />
     <ClInclude Include="..\..\..\Sora\CoreLinearTransformer.h" />
     <ClInclude Include="..\..\..\Sora\CoreTransform.h" />
     <ClInclude Include="..\..\..\Sora\CoreTransformer.h" />
@@ -646,6 +647,7 @@
     <ClCompile Include="..\..\..\ReflectionRev\rfShape.cpp" />
     <ClCompile Include="..\..\..\ReflectionRev\rfTitleView.cpp" />
     <ClCompile Include="..\..\..\ReflectionRev\rfView.cpp" />
+    <ClCompile Include="..\..\..\Sora\cmd\SoraConsole.cpp" />
     <ClCompile Include="..\..\..\Sora\CoreTransform.cpp" />
     <ClCompile Include="..\..\..\Sora\Debug\SoraInternalLogger.cpp" />
     <ClCompile Include="..\..\..\Sora\Defaults\orz.c" />
@@ -665,6 +667,7 @@
     <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraLocalizer.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraMemoryBuffer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraObject.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPluginManger.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp" />

@@ -404,7 +404,9 @@ public:
 	virtual void				_UpdateMouse() = 0;
 	virtual void				_InputInit() = 0;
 	virtual void				_ClearQueue() = 0;
-
+	
+	virtual void				_Resize(int width, int height) = 0;
+	virtual void				_AdjustWindow() = 0;
 	IDirect3DDevice9*		pD3DDevice;
 
 };

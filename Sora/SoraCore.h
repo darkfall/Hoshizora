@@ -18,7 +18,7 @@
 #include "SoraShader.h"
 #include "SoraFrameListener.h"
 #include "SoraEnvValues.h"
-#include "SoraInternalLogger.h"
+#include "Debug/SoraInternalLogger.h"
 
 #include <map>
 

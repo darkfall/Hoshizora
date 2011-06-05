@@ -73,15 +73,14 @@ bool mainWindow::renderFunc() {
 
 void mainWindow::init() {
     sora::SORA->setFPS(60);
+	sora::SORA->setSystemFont(L"cour.ttf", 16);
 
 	pSpr = sora::SORA->createSprite(L"bg_optd.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
 	pSpr3 = sora::SORA->createSprite(L"road.png");
 
-	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(0.1f); 
-	pSpr3->setBlendMode(BLEND_DEFAULT_Z);
+	pSpr->setZ(0.1f); 
 	pSpr3->setZ(0.5f);
-	pSpr2->setBlendMode(BLEND_DEFAULT_Z);
 	pSpr2->setZ(1.0f);
 	/*mead::globalBulletManagerInit();
 	mead::exportBulletManager(luaObject.getState());
@@ -103,8 +102,6 @@ void mainWindow::init() {
 		
 		vert[i].tx = (pSpr->getSpriteWidth() / 2 + 300 * cosf(sora::DGR_RAD(i*60))) / pSpr->getTextureWidth(false);
 		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getTextureHeight(false);
-
-		sora::SORA->logf("%f, %f", vert[i].tx, vert[i].ty);
 	}
 	
 	registerEventFunc(this, &mainWindow::onKeyEvent);
@@ -115,7 +112,7 @@ void mainWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {
 	if(kev->type == SORA_INPUT_KEYDOWN) {
 		if(kev->key == SORA_KEY_1 ) {
 			mead::meadBossManager::Instance()->clearAllBosses();
-			luaObject.doScript(L"mybullettest.lua");
+//			luaObject.doScript(L"mybullettest.lua");
 		} else if(kev->key == SORA_KEY_2) {
 			mead::meadBossManager::Instance()->reloadScripts();
 		}

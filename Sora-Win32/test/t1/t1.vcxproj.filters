@@ -1296,6 +1296,9 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.h">
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\cmd\SoraConsole.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -1950,6 +1953,12 @@
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraMemoryBuffer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\cmd\SoraConsole.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>

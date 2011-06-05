@@ -1077,6 +1077,8 @@ namespace sora {
 	void SoraCore::_registerCoreCmds() {
 		sora::SoraConsole::Instance()->registerCmdHandler(this, "set");
 		sora::SoraConsole::Instance()->registerCmdHandler(this, "log");
+		
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "exit");
 	}
 	
 	void SoraCore::onConsoleEvent(SoraConsoleEvent* cev) {
@@ -1116,6 +1118,8 @@ namespace sora {
 					log(params[i]);
 				}
 			}
+		} else if(cev->getCmd().compare("exit") == 0) {
+			shutDown();
 		}
 	}
 } // namespace sora

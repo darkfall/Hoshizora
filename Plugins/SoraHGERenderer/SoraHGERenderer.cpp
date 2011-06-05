@@ -110,8 +110,8 @@ namespace sora{
 	}
 
 	void SoraHGERenderer::setWindowSize(int32 w, int32 h) {
-		pHGE->System_SetState(HGE_SCREENWIDTH, w);
-		pHGE->System_SetState(HGE_SCREENHEIGHT, h);
+		pHGE->_Resize(w, h);
+		pHGE->_AdjustWindow();
 	}
 
 	void SoraHGERenderer::setWindowTitle(const SoraWString& title) {

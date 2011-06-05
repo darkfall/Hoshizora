@@ -51,9 +51,9 @@ namespace sora {
 		CGerror error;
 		const char* str = cgGetLastErrorString(&error);
 		if(error != CG_NO_ERROR) {
-			SoraCore::Instance()->log(std::string("SoraShader: ")+str);
+			SoraCore::Instance()->log(std::string("SoraShader: ")+str, LOG_LEVEL_ERROR);
 			if(error == CG_COMPILER_ERROR) {
-				SoraCore::Instance()->log(std::string("SoraShaderContext: ")+cgGetLastListing(context));
+				SoraCore::Instance()->log(std::string("SoraShaderContext: ")+cgGetLastListing(context), LOG_LEVEL_ERROR);
 			}			
 			setType(0);
 		}

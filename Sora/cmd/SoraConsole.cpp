@@ -13,7 +13,7 @@
 #include "SoraCore.h"
 
 #include "SoraStringConv.h"
-#include "SoraInternalLogger.h"
+#include "Debug/SoraInternalLogger.h"
 
 namespace sora {
 
@@ -81,7 +81,7 @@ namespace sora {
 			if(mBackspaceDown) {
 				if(mBackspaceTime >= 0.2f) {
 					if(mCurrentLine.size() > 0)
-						mCurrentLine.erase(mCurrentLine.size()-1);
+						mCurrentLine.erase(mCurrentLine.size()-2);
 					mBackspaceTime = 0.f;
 				} else 
 					mBackspaceTime += delta;
@@ -156,8 +156,8 @@ namespace sora {
 		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
 		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
 		if(mFont) {			
-			int32 x = mPositionX + 1;
-			int32 y = mPositionY + 1;
+			float32 x = mPositionX + 1.f;
+			float32 y = mPositionY + 1.f;
 			
 			if(mHistory.size() != 0) {
 				for(size_t i=mStartLine; i<mCurrLine; ++i) {
@@ -188,8 +188,8 @@ namespace sora {
 		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
 		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
 		if(mFont) {
-			int32 x = mPositionX + 1;
-			int32 y = mPositionY + mHeight - mFontHeight - 1;
+			float32 x = mPositionX + 1.f;
+			float32 y = mPositionY + mHeight - mFontHeight - 1.f;
 			
 			std::vector<SoraInternalLogger::LogMssg> debugMssg = DebugPtr->get();
 			
@@ -319,7 +319,7 @@ namespace sora {
 				mBackspaceDown = false;
 				mBackspaceTime = 0.f;
 				if(mCurrentLine.size() > 0)
-					mCurrentLine.erase(mCurrentLine.size()-1);
+					mCurrentLine.erase(mCurrentLine.size()-1, 1);
 			}
 		}
 		
