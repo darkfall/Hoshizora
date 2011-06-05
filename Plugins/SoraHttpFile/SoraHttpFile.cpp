@@ -10,8 +10,10 @@ namespace sora {
 	SoraHttpFileDownloadThread::~SoraHttpFileDownloadThread() {
 		if(pFile) {
 			delete pFile->buffer;
+			delete pFile;
 		}
-		delete pFile;
+		if(pHead)
+			delete pHead;
 	}
 	
 	int32 SoraHttpFileDownloadThread::getState() const { 
@@ -52,6 +54,9 @@ namespace sora {
 		return size*nmemb;
 	}
 	
+	std::string SoraHttpFileDownloadThread::getURL() const {
+		return pHead->sURL;
+	}
 
 	void SoraHttpFileDownloadThread::execute(void* parg) {
 		easy_handle = curl_easy_init();
@@ -72,16 +77,17 @@ namespace sora {
 		curl_easy_setopt(easy_handle, CURLOPT_WRITEDATA, pFile);
 		CURLcode result = curl_easy_perform(easy_handle);
 		if(result != CURLE_OK) {
-			throw SORA_EXCEPTION("unable to perform CURL");
+			DebugPtr->log("Unable to perform CURL", 
+						  LOG_LEVEL_ERROR);
 		}
 
 		ftime(&pFile->endtime);
 
 		getTime();
 		pFile->state = DOWNLOAD_FINISHED;
+		curl_easy_cleanup(easy_handle);
 		if(pHead->finish)
 			pHead->finish(pHead->httpFile);
-		curl_easy_cleanup(easy_handle);
 	}
 
 	void SoraHttpFileDownloadThread::getTime() {
@@ -95,9 +101,7 @@ namespace sora {
 	}
 
 	SoraHttpFile::~SoraHttpFile() {
-		if(pdownloadthread) {
-			delete pdownloadthread;
-		}
+		
 	}
 
 	bool SoraHttpFile::writeToFile(const SoraWString& file) {
@@ -116,50 +120,63 @@ namespace sora {
 		// to do
 		if(isopen) return 0;
 
-		pdownloadthread = new SoraHttpFileDownloadThread;
-		SoraHttpFileHead* phead = new SoraHttpFileHead;
-		phead->sURL = ws2s(url);
-		phead->finish = finish;
-		phead->httpFile = this;
-		pdownloadthread->start(phead);
+		phead.sURL = ws2s(url);
+		phead.finish = finishCallback;
+		phead.httpFile = this;
+		pdownloadthread.start(&phead);
+		
+		DebugPtr->log(vamssg("Start download file from %s", phead.sURL.c_str()), 
+					  LOG_LEVEL_NORMAL);
 
 		isopen = true;
 			
 		return 1;
 	}
+	
+	void SoraHttpFile::closeFile() {
+		isopen = false;
+	}
+	
+	void SoraHttpFile::setFinishCallback(SoraHttpCallback callback) { 
+		finishCallback = callback;
+	}
 
 	ulong32 SoraHttpFile::getDownloadedSize() const { 
-		if(isopen) return pdownloadthread->getDownloadedSize();
+		if(isopen) return pdownloadthread.getDownloadedSize();
 		return 0;
 	} 
 	
-	float32 SoraHttpFile::getDownloadTime() const { 
-		if(isopen) return pdownloadthread->getDownloadTime();
+	float32 SoraHttpFile::getDownloadTime() { 
+		if(isopen) return pdownloadthread.getDownloadTime();
 		return 0.f;
 	}
 	
 	int32 SoraHttpFile::getState() const { 
-		if(isopen) return pdownloadthread->getState();
+		if(isopen) return pdownloadthread.getState();
 		return 0;
 	}
 
 	bool SoraHttpFile::isFinished() const {
 		if(isopen)
-			return pdownloadthread->getState() == DOWNLOAD_FINISHED;
+			return pdownloadthread.getState() == DOWNLOAD_FINISHED;
 		return false;
 	}
 
 	void SoraHttpFile::suspend() { 
-		if(isopen) pdownloadthread->suspend();
+		if(isopen) pdownloadthread.suspend();
 	}
 	void SoraHttpFile::resume() { 
-		if(isopen) pdownloadthread->resume();
+		if(isopen) pdownloadthread.resume();
 	}
 	
 	SoraMemoryBuffer* SoraHttpFile::getMemoryBuffer() const {
-		if(isopen) return pdownloadthread->getMemoryBuffer();
+		if(isopen) return pdownloadthread.getMemoryBuffer();
 		return NULL;
 	}
 	
+	std::string SoraHttpFile::getURL() const {
+		if(isopen) return pdownloadthread.getURL();
+		return "";
+	}
 
 } // namespace sora

@@ -42,10 +42,10 @@ namespace sora {
 	class SoraHandlerFunctionBase {
 	public:
 		virtual ~SoraHandlerFunctionBase() {};
-		void exec(const SoraEvent* event) { call(event);}
+		void exec(SoraEvent* event) { call(event);}
 
 	private:
-		virtual void call(const SoraEvent*) = 0;
+		virtual void call(SoraEvent*) = 0;
 	};
 
 	template <class T, class EventT>
@@ -54,7 +54,7 @@ namespace sora {
 		typedef void (T::*MemberFunc)(EventT*);
 		SoraMemberFunctionHandler(T* instance, MemberFunc memFn) : _instance(instance), _function(memFn) {};
 
-		void call(const SoraEvent* event) {
+		void call(SoraEvent* event) {
 			(_instance->*_function)(static_cast<EventT*>(event));
 		}
 
@@ -66,7 +66,7 @@ namespace sora {
 	class SoraEventHandler {
 	public:
 		~SoraEventHandler();
-		void handleEvent(const SoraEvent*);
+		void handleEvent(SoraEvent*);
 
 		template <class T, class EventT>
 		void registerEventFunc(T*, void (T::*memFn)(EventT*));

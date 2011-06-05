@@ -13,67 +13,168 @@
 #include "SoraCore.h"
 
 #include "SoraStringConv.h"
+#include "SoraInternalLogger.h"
 
 namespace sora {
 
-	SoraConsole::SoraConsole() {
+	SoraConsole::SoraConsole(): mStartLine(0) {
 		registerEventFunc(this, &SoraConsole::onKeyEvent);
 		sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
 		
+		reset();
+	}
+	
+	SoraConsole::~SoraConsole() {
+	}
+	
+	void SoraConsole::reset() {
 		mCaretRow = 0;
 		mCaretPosition = 0;
 		
 		mCaretColor = 0xFFFFFFFF;
 		mBackgroundColor = 0x99000000;
 		mCmdColor = 0xFFFFFFFF;
+		mResultColor = 0xFF22DD00;
 		
 		mActive = false;
-		mActiveKey = SORA_KEY_F1;
+		mActiveKey = SORA_KEY_GRAVE;
+		
+		mBackspaceDown = false;
+		mBackspaceTime = 0.f;
+		
+		mUpDown = mDownDown = false;
+		mUpDownTime = mDownDownTime = 0.f;
+		
+		mMssgReachTop = true;
 		
 		mPositionX = 1;
 		mPositionY = 1;
 		
 		mWidth = SoraCore::Instance()->getScreenWidth()-2;
 		mHeight = 300;
+		if(mHeight > SoraCore::Instance()->getScreenHeight())
+			mHeight = SoraCore::Instance()->getScreenHeight();
 		
 		mFont = NULL;
 		
 		mCaretShow = 0.f;
-	}
-	
-	SoraConsole::~SoraConsole() {
+		
+		mTab = TAB_CMDLINE;
+		
+		mCurrLine = 0;
+		mStartLine = 0;
+		mCurrHeight = 0;
 	}
 	
 	void SoraConsole::render() {
 		if(mActive) {
-			drawCmds();
-			drawCaret();
+			float32 delta = SORA->getDelta();
+			if(mTab == TAB_CMDLINE) {
+				drawCmds();
+				
+				mCaretShow += delta;
+			} else if(mTab == TAB_MSSG) {
+				drawMssg();
+			}
+			drawTab();
 			
-			mCaretShow += SORA->getDelta();
+			if(mBackspaceDown) {
+				if(mBackspaceTime >= 0.2f) {
+					if(mCurrentLine.size() > 0)
+						mCurrentLine.erase(mCurrentLine.size()-1);
+					mBackspaceTime = 0.f;
+				} else 
+					mBackspaceTime += delta;
+			}
+			
+			if(mUpDown) {
+				if(mUpDownTime >= 0.2f) {
+					if(mTab == TAB_CMDLINE) {
+						if(mStartLine > 0) {
+							mCurrLine -= 1;
+							mStartLine -= 1;
+						} 
+					} else if(mTab == TAB_MSSG) {
+						if(mCurrLine > 0 && !mMssgReachTop) {
+							mCurrLine -= 1;
+						} 
+					}
+				} else 
+					mUpDownTime += delta;
+			} 
+			if(mDownDown) {
+				if(mDownDownTime >= 0.2f) {
+					if(mTab == TAB_CMDLINE) {
+						if(mCurrLine < mHistory.size()) {
+							++mCurrLine;
+							++mStartLine;
+						}
+					} else if(mTab == TAB_MSSG) {
+						if(mCurrLine < DebugPtr->logSize()-1) {
+							++mCurrLine;
+						}
+					}
+				} else 
+					mDownDownTime += delta;
+			}
 		}
 	}
+	
+	void SoraConsole::drawTab() {
+		ulong32 hCol = 0xFF909090;
+		SORA->renderRect(mPositionX+mWidth-120.f, 
+						 mPositionY+mHeight-mFontHeight, 
+						 mPositionX+mWidth-60.f,
+						 mPositionY+mHeight,
+						 60.f,
+						 mTab==TAB_CMDLINE?hCol:mBackgroundColor);
+		SORA->renderRect(mPositionX+mWidth-60.f, 
+						 mPositionY+mHeight-mFontHeight, 
+						 mPositionX+mWidth,
+						 mPositionY+mHeight,
+						 60.f,
+						 mTab==TAB_MSSG?hCol:mBackgroundColor);
+		SORA->renderBox(mPositionX+mWidth-120.f, 
+						mPositionY+mHeight-mFontHeight, 
+						mPositionX+mWidth-60.f,
+						mPositionY+mHeight,
+						mCaretColor);
+		SORA->renderBox(mPositionX+mWidth-60.f, 
+						mPositionY+mHeight-mFontHeight, 
+						mPositionX+mWidth,
+						mPositionY+mHeight,
+						mCaretColor);
+		if(mFont) {
+			mFont->setColor(mCaretColor);
+			mFont->render(mPositionX+mWidth-90.f, mPositionY+mHeight-mFontHeight*1.2f, FONT_ALIGNMENT_CENTER, L"Cmd");
+			mFont->render(mPositionX+mWidth-30.f, mPositionY+mHeight-mFontHeight*1.2f, FONT_ALIGNMENT_CENTER, L"Log");
+		}
+	}
+					  
 	
 	void SoraConsole::drawCmds() {
 		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
 		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
-		if(mFont) {
-			int32 maxRow = mHeight / mFontHeight - 2;
-			int32 startRow;
-			if(mHistory.size() > maxRow) {
-				startRow = mHistory.size() - maxRow;
-				mCaretRow = maxRow + 1;
-			}
-			else {
-				startRow = 0;
-				mCaretRow = mHistory.size();
-			}
+		if(mFont) {			
 			int32 x = mPositionX + 1;
 			int32 y = mPositionY + 1;
-			for(size_t i=startRow; i<mHistory.size(); ++i) {
-				mFont->render(x, y, FONT_ALIGNMENT_LEFT, s2wsfast(">>"+mHistory[i]).c_str());
-				y += mFontHeight;
+			
+			if(mHistory.size() != 0) {
+				for(size_t i=mStartLine; i<mCurrLine; ++i) {
+					mFont->setColor(mCaretColor);
+					mFont->render(x, y, FONT_ALIGNMENT_LEFT, (L"> "+mHistory[i].mCmd).c_str());
+					y += mFontHeight;
+					
+					if(mHistory[i].mResult.size() != 0) {
+						mFont->setColor(mResultColor);
+						mFont->render(x+mFont->getFontSize()*4, y, FONT_ALIGNMENT_LEFT, mHistory[i].mResult.c_str());
+						y += mFont->getStringHeight(mHistory[i].mResult.c_str());
+					}
+				}
 			}
-			std::wstring currLine = s2wsfast(">>"+mCurrentLine);
+			
+			mFont->setColor(mCaretColor);
+			std::wstring currLine = s2wsfast("> "+mCurrentLine);
 			mFont->render(x, y, FONT_ALIGNMENT_LEFT, currLine.c_str());
 			
 			if(mCaretShow <= 0.5f) {
@@ -83,9 +184,54 @@ namespace sora {
 		}
 	}
 	
-	void SoraConsole::drawCaret() {
+	void SoraConsole::drawMssg() {
+		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
+		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
 		if(mFont) {
-		
+			int32 x = mPositionX + 1;
+			int32 y = mPositionY + mHeight - mFontHeight - 1;
+			
+			std::vector<SoraInternalLogger::LogMssg> debugMssg = DebugPtr->get();
+			
+			int32 starty = y;
+			for(int32 i=mCurrLine; i>=0; --i) {
+				starty -= mFont->getStringHeight(s2wsfast(debugMssg[i].mLog).c_str());
+				if(starty <= mPositionY + mFontHeight)
+					break;
+			}
+			if(starty > mPositionY + mFontHeight) {
+				y -= (starty - mPositionY - mFontHeight);
+				y -= mFontHeight;
+				mMssgReachTop = true;
+			} else {
+				mMssgReachTop = false;
+			}
+
+
+			for(int32 i=mCurrLine; i>=0; --i) {
+				switch(debugMssg[i].mLogLevel) {
+					case LOG_LEVEL_NORMAL:	mFont->setColor(0xFFFFFFFF); break;
+					case LOG_LEVEL_NOTICE:	mFont->setColor(0xFF30AAFF); break;
+					case LOG_LEVEL_ERROR:	mFont->setColor(0xFFFF0000); break;
+					case LOG_LEVEL_WARNING: mFont->setColor(0xFFFFCC00); break;
+				}
+				mFont->render(x, y, FONT_ALIGNMENT_LEFT, s2wsfast("> "+debugMssg[i].mLog).c_str());
+				if(i > 0)
+					y -= mFont->getStringHeight(s2wsfast(debugMssg[i-1].mLog).c_str());
+			
+				if(y <= mPositionY + 1)
+					break;
+			}
+		}
+	}
+	
+	void SoraConsole::setTab(int32 tab) {
+		mTab = tab;
+		mCaretShow = 0.f;
+		if(mTab == TAB_CMDLINE) {
+			mCurrLine = mHistory.size();
+		} else if(mTab == TAB_MSSG) {
+			mCurrLine = DebugPtr->logSize()-1;
 		}
 	}
 	
@@ -96,11 +242,25 @@ namespace sora {
 	void SoraConsole::setFont(const std::wstring& font, int32 fontSize) {
 		mFont = SORA->createFont(font, fontSize);
 		mFont->setColor(mCaretColor);
-		mFontHeight = fontSize;
+		mFontHeight = mFont->getHeight();
 	}
 	
 	void SoraConsole::publishCmd(const std::string& cmd, const char* params) {
+		if(cmd.compare("clear") == 0) {
+			mHistory.clear();
+			mCurrLine = 0;
+			mStartLine = 0;
+			mCurrHeight = 0;
+			return;
+		}
+		
 		CMD_HANDLER_MAP::iterator itHandler = mHandlers.find(cmd);
+		
+		CmdHistory history;
+		if(params != NULL)
+			history.mCmd = s2wsfast(cmd+" "+params);
+		else
+			history.mCmd = s2wsfast(cmd);
 		if(itHandler != mHandlers.end()) {
 			SoraConsoleEvent cev;
 			
@@ -109,48 +269,127 @@ namespace sora {
 				cev.setParams(params);
 			
 			itHandler->second->handleEvent(&cev);
+
+			history.mResult = s2wsfast(cev.getResults());
+		}
+		
+		mHistory.push_back(history);
+		mCurrLine += 1;
+		mCurrHeight += mFontHeight;
+		if(mFont) {
+			if(history.mResult.size() != 0)
+				mCurrHeight += mFont->getStringHeight(history.mResult.c_str());
+		}
+		if(mCurrHeight >= mHeight-1-mFontHeight) {
+			mStartLine += 1;
+			mCurrHeight = mHeight-1-mFontHeight;
 		}
 	}
 	
-	void SoraConsole::onKeyEvent(const SoraKeyEvent* kev) {
+	void SoraConsole::onKeyEvent(SoraKeyEvent* kev) {
 		if(!mActive) {
 			if(kev->isKeyPressed(mActiveKey))
 				mActive = true;
 			return;
+		} else {
+			if(kev->isKeyDown()) {
+				int32 key = kev->getKey();
+				if(key == mActiveKey) {
+					mActive = false;
+					return;
+				}
+			}
+		}
+
+		if(kev->isKeyDown()) {
+			if(kev->isKeyPressed(SORA_KEY_TAB)) {
+				if(mTab == TAB_CMDLINE) 
+					setTab(TAB_MSSG);
+				else if(mTab == TAB_MSSG)
+					setTab(TAB_CMDLINE);
+			}
 		}
 		
-		if(kev->isKeyDown()) {
-			int32 key = kev->getKey();
-			if(key == mActiveKey) {
-				mActive = false;
-				return;
+		int32 key = kev->getKey();
+		if(key == SORA_KEY_BACKSPACE) {
+			if(kev->isKeyDown()) {
+				mBackspaceDown = true;
 			}
-			if(key >= 0 && key <= 255) {
-				mCurrentLine += kev->chr;
-			} 
-			
-			if(key == SORA_KEY_BACKSPACE){
+			else {
+				mBackspaceDown = false;
+				mBackspaceTime = 0.f;
 				if(mCurrentLine.size() > 0)
 					mCurrentLine.erase(mCurrentLine.size()-1);
-			} else if(key == SORA_KEY_ENTER) {
-				std::string cmd;
-				
-				size_t spacePos = mCurrentLine.find(' ');
-				if(spacePos != std::string::npos) {
-					cmd = mCurrentLine.substr(0, spacePos);
-					size_t nextPos = spacePos;
-					while(mCurrentLine[nextPos] == ' ' && nextPos < mCurrentLine.size())
-						++nextPos;
-					publishCmd(cmd, mCurrentLine.substr(nextPos, mCurrentLine.size()).c_str());
-				}
-				else {
-					cmd = mCurrentLine;
-					publishCmd(cmd, NULL);
-				}
-				
-				mHistory.push_back(mCurrentLine);
-				mCurrentLine.clear();
 			}
+		}
+		
+		if(key == SORA_KEY_UP) {
+			if(kev->isKeyDown()) {
+				mUpDown = true;
+				mUpDownTime = 0.f;
+			} else {
+				if(mTab == TAB_CMDLINE) {
+					if(mStartLine > 0) {
+						mCurrLine -= 1;
+						mStartLine -= 1;
+					} 
+				} else if(mTab == TAB_MSSG) {
+					if(mCurrLine > 0 && !mMssgReachTop) {
+						mCurrLine -= 1;
+					} 
+				}
+				mUpDown = false;
+			}
+		} else if(key == SORA_KEY_DOWN) {
+			if(kev->isKeyDown()) {
+				mDownDown = true;
+				mDownDownTime = 0.f;
+			} else {
+				if(mTab == TAB_CMDLINE) {
+					if(mCurrLine < mHistory.size()) {
+						++mCurrLine;
+						++mStartLine;
+					}
+				} else if(mTab == TAB_MSSG) {
+					if(mCurrLine < DebugPtr->logSize()-1) {
+						++mCurrLine;
+					}
+				}
+				mDownDown = false;
+			}
+		}
+		
+		if(mTab == TAB_CMDLINE) {
+			if(kev->isKeyDown()) {
+				if(key == mActiveKey) {
+					mActive = false;
+					return;
+				}
+				if(key >= 0 && key <= 255) {
+					mCurrentLine += kev->chr;
+				} 
+				
+				if(key == SORA_KEY_ENTER) {
+					std::string cmd;
+					
+					size_t spacePos = mCurrentLine.find(' ');
+					if(spacePos != std::string::npos) {
+						cmd = mCurrentLine.substr(0, spacePos);
+						size_t nextPos = spacePos;
+						while(mCurrentLine[nextPos] == ' ' && nextPos < mCurrentLine.size())
+							++nextPos;
+						publishCmd(cmd, mCurrentLine.substr(nextPos, mCurrentLine.size()).c_str());
+					}
+					else {
+						cmd = mCurrentLine;
+						publishCmd(cmd, NULL);
+					}
+					mCurrentLine.clear();
+				} 
+			}
+		} else if(mTab == TAB_MSSG) {
+			if(kev->isKeyPressed(SORA_KEY_S) && kev->isCtrlFlag())
+				DebugPtr->writeToFile("./SoraLog.log");
 		}
 	}
 	

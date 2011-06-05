@@ -103,38 +103,38 @@ bool mainWindow::renderFunc() {
 	pSpr->render();
 	pressAnyKey->render();
 	pSpr2->render();
-	sora::SoraConsole::Instance()->render();
 
 	sora->endScene();
 	return false;
 }
 
 void onDownloadFinish(sora::SoraHttpFile* file){
-	sora::Debug::debugPrintf("downloaded Size = %lu, buffersize=%lu,%lu, time = %f", file->getDownloadedSize(), file->getMemoryBuffer()->size(), file->getMemoryBuffer()->realsize(), file->getDownloadTime());
+	sora::SORA->log(sora::vamssg("Download finished from %s, size = %lu, buffersize=%lu,%lu, time = %f", file->getURL().c_str(), file->getDownloadedSize(), file->getMemoryBuffer()->size(), file->getMemoryBuffer()->realsize(), file->getDownloadTime()),
+					sora::LOG_LEVEL_NORMAL);
 	file->writeToFile(L"./lalalalal.png");
+	file->closeFile();
 }
-
 
 void mainWindow::init() {
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
+	sora::SORA->setSystemFont(L"ARIALN.ttf", 16);
 	
 	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 20);
 	pFont->setColor(0xFFFFCC00);
 	
+	
 	file.setFinishCallback(onDownloadFinish);
 	file.readFile(L"http://www.studio-gamemaster.com/sora_800_600.png");
-	
-
 		
 	sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 20);
 	
-	sora::SoraConsole::Instance();
-	sora::SoraConsole::Instance()->setFont(L"Bank Gothic Medium BT.ttf", 20);
 	
 	pSpr = sora::SORA->createSprite(L"background.png");
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
+	
+	obj.doScript(L"test.lua");
 	
 	
 	float32 px = 400.f, py = 300.f;
@@ -156,7 +156,7 @@ void mainWindow::init() {
 	
 }
 
-void mainWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {
+void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
 	if(kev->type == SORA_INPUT_KEYDOWN) {
 		if(kev->key == SORA_KEY_1 ) {
 		

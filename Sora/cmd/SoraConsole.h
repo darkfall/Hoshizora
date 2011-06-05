@@ -30,12 +30,20 @@ namespace sora {
 		void setCmd(const std::string& cmd) { mCmd = cmd; }
 		void setParams(const std::string& params) { mParams = params; }
 		
+		/**
+		 * Set the return result of the executed cmd, would be displayed in the console
+		 * @parem results, the result of the cmd
+		 */
+		void setResults(const std::string& results) { mResults = results; }
+		
 		std::string getCmd() const { return mCmd; }
 		std::string getParams() const { return mParams; }
+		std::string getResults() const { return mResults; }
 	
 	private:
 		std::string mCmd;
 		std::string mParams;
+		std::string mResults;
 	};
 	
 	class SoraConsole: public SoraSingleton<SoraConsole>, public SoraEventHandler {
@@ -46,12 +54,21 @@ namespace sora {
 		~SoraConsole();
 	
 	public:	
+		typedef enum {
+			TAB_CMDLINE = 1,
+			TAB_MSSG = 2,
+		};
+		
 		void render();
 		
 		void publishCmd(const std::string& cmd, const char* params);
+		void outputMessage(const std::string& msg);
+		
+		void setTab(int32 tabid);
+		int32 getTab() const { return mTab; }
 		
 		void registerCmdHandler(SoraEventHandler* handler, const std::string& cmd);
-		void onKeyEvent(const SoraKeyEvent* kev);
+		void onKeyEvent(SoraKeyEvent* kev);
 		
 		std::string getCurrentLine() const { return mCurrentLine; }
 		
@@ -61,25 +78,41 @@ namespace sora {
 		void setCmdColor(uint32 color) { mCmdColor = color; }
 		void setBackgroundColor(uint32 color) { mBackgroundColor = color; }
 		void setCaretColor(uint32 color) { mCaretColor = color; }
+		void setResultColor(uint32 color) { mResultColor = color; }
 		
 		uint32 getCmdColor() const { return mCmdColor; }
 		uint32 getBackgroundColor() const { return mBackgroundColor; }
 		uint32 getCaretColor() const { return mCaretColor; }
+		uint32 getResultColor() const { return mResultColor; }
 		
 		bool isActive() const { return mActive; }
 		void setActiveKey(int32 key) { mActiveKey = key; }
 		
 		void setPosition(int32 posx, int32 posy) { mPositionX = posx; mPositionY = posy; }
 		void setSize(int32 width, int32 height) { mWidth = width; mHeight = height; }
+		int32 getWidth() const { return mWidth; }
+		int32 getHeight() const { return mHeight; }
 		
 		void setFont(const std::wstring& font, int32 fontSize);
+		void reset();
 		
 	private:
-		void drawCaret();
 		void drawCmds();
+		void drawMssg();
+		void drawTab();
 		
 		bool mActive;
 		int32 mActiveKey;
+		
+		bool mBackspaceDown;
+		float32 mBackspaceTime;
+		
+		bool mUpDown, mDownDown;
+		float32 mUpDownTime, mDownDownTime;
+		
+		bool mMssgReachTop;
+		
+		int32 mTab;
 		
 		int32 mPositionX, mPositionY;
 		int32 mWidth, mHeight;
@@ -88,7 +121,11 @@ namespace sora {
 		CMD_HANDLER_MAP mHandlers;
 	
 		std::string mCurrentLine;
-		typedef std::vector<std::string> CMD_HISTORY;
+		typedef struct {
+			std::wstring mCmd;
+			std::wstring mResult;
+		} CmdHistory;
+		typedef std::vector<CmdHistory> CMD_HISTORY;
 		CMD_HISTORY mHistory;
 		
 		uint32 mCaretRow;
@@ -97,10 +134,14 @@ namespace sora {
 		uint32 mCmdColor;
 		uint32 mBackgroundColor;
 		uint32 mCaretColor;
+		uint32 mResultColor;
 		
 		SoraFont* mFont;
 		int32 mFontHeight;
 		
+		int32 mCurrLine;
+		int32 mStartLine;
+		int32 mCurrHeight;
 		float32 mCaretShow;
 	};
 	

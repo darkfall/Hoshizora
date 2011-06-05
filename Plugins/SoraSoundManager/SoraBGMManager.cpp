@@ -226,7 +226,7 @@ namespace sora {
 		}
 	}
 	
-	void SoraBGMManager::onPlaybackEvent(const SoraPlaybackEvent* event) {
+	void SoraBGMManager::onPlaybackEvent(SoraPlaybackEvent* event) {
 		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
 			toNextBGM();
 		}
@@ -262,7 +262,7 @@ namespace sora {
 		return 0;
 	}
 	
-	void SoraBGMManager::BGSInfo::onPlaybackEvent(const SoraPlaybackEvent* event) {
+	void SoraBGMManager::BGSInfo::onPlaybackEvent(SoraPlaybackEvent* event) {
 		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
 			++currLoopTimes;
 			if(currLoopTimes >= loopTimes) {

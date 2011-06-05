@@ -62,6 +62,8 @@ namespace sora {
 		// to do
 		void stop();
 		
+		std::string getURL() const;
+		
 		SoraMemoryBuffer* getMemoryBuffer() const;
 
 		static size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp);
@@ -74,26 +76,23 @@ namespace sora {
 	};
 
 	class SoraHttpFile: public SoraFileBase {
-		enum {
-			DOWNLOAD_FILE_SET = 1,
-			DOWNLOAD_FILE_NO = 0
-		};
 	public:
-		SoraHttpFile(): state(DOWNLOAD_FILE_NO), finish(0) {}
+		SoraHttpFile(): finishCallback(0) {}
 		~SoraHttpFile();
 
 		bool writeToFile(const SoraWString& file);
-		void setFinishCallback(SoraHttpCallback callback) { finish = callback; }
+		void setFinishCallback(SoraHttpCallback callback);
 
 		int32 readFile(const SoraWString& url);
 		int32 readFileMem(void* pstr, ulong32 filesize) { return 0; }
-		void closeFile() { }
+		void closeFile();
 		
 		SoraMemoryBuffer* getMemoryBuffer() const;
 		
 		ulong32 getDownloadedSize() const;
-		float32 getDownloadTime() const;
+		float32 getDownloadTime();
 		int32 getState() const;
+		std::string getURL() const;
 
 		void suspend();
 		void resume();
@@ -101,10 +100,11 @@ namespace sora {
 		bool isFinished() const;
 
 	private:
-		SoraHttpFileDownloadThread* pdownloadthread;
-		SoraHttpCallback finish;
-
-		int32 state;
+		void finishDownload();
+		
+		SoraHttpFileDownloadThread pdownloadthread;
+		SoraHttpCallback finishCallback;
+		SoraHttpFileHead phead;
 	};
 
 } // namespace sora

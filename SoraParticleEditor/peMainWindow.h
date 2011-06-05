@@ -86,7 +86,7 @@ class peMainWindow: public sora::SoraWindowInfoBase {
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
 	
-	void onKeyEvent(const sora::SoraKeyEvent* kev) {
+	void onKeyEvent(sora::SoraKeyEvent* kev) {
 		if(kev->key == SORA_KEY_1 && kev->type == SORA_INPUT_KEYDOWN) {			
 			pEditor->loadXML(L"editor.xml");
 		}

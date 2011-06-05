@@ -51,10 +51,7 @@ namespace sora {
 		}
 		else 
 			chr = 0;
-		
-		std::cout<<key<<" "<<(char)key<<" "<<chr<<std::endl;
-		std::cout<<SORA_KEY_GRAVE<<" "<<SORA_KEY_EQUALS<<" "<<SORA_KEY_BACKSLASH<<std::endl;
-		
+
 		return chr;
 	}
 	

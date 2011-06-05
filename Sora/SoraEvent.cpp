@@ -11,7 +11,7 @@ SoraEventHandler::~SoraEventHandler() {
 	_handlers.clear();
 }
 
-void SoraEventHandler::handleEvent(const SoraEvent* event) {
+void SoraEventHandler::handleEvent(SoraEvent* event) {
 	Handlers::iterator it = _handlers.find(SoraTypeInfo(typeid(*event)));
 	if(it != _handlers.end()) {
 		it->second->exec(event);

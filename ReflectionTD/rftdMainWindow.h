@@ -40,7 +40,7 @@ namespace rftd {
 		bool isWindowed() { return true; }
 		bool hideMouse() { return false; }
 		
-		void onKeyEvent(const sora::SoraKeyEvent* kev);
+		void onKeyEvent(sora::SoraKeyEvent* kev);
 		
 	private:
 		sora::SoraCore* sora;
