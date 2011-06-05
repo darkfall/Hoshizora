@@ -342,7 +342,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>887F2B83139C008E00F534D5</string>
+										<string>887F2B87139C036E00F534D5</string>
 										<key>history</key>
 										<array>
 											<string>88BFA132135AB29100BB8E70</string>
@@ -853,7 +853,7 @@
 											<string>887F2B80139C008E00F534D5</string>
 											<string>887F2B81139C008E00F534D5</string>
 											<string>887F2B82139C008E00F534D5</string>
-											<string>887F2B78139C004000F534D5</string>
+											<string>887F2B86139C036E00F534D5</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -1051,12 +1051,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>887F2B84139C008E00F534D5</string>
 		<string>887F2A64139BB4E100F534D5</string>
 		<string>887F2A65139BB4E100F534D5</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>887022D01346AB4300AE8DD7</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -1433,7 +1432,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

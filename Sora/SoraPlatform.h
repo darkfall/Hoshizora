@@ -169,30 +169,23 @@ typedef std::wstring SoraWString;
 	#define FONT_PATH L"/System/Library/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
-	#define USE_GLFW_KEYMAP
-
 	#define OS_OSX
 
 #elif defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
 	#define FONT_PATH L"/System/Library/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
-	#define USE_GLFW_KEYMAP
-
 	#define OS_IOS
 
 #elif defined(__ANDROID__)
 	#define FONT_PATH L"./"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
-	#define USE_GLFW_KEYMAP
 
 	#define OS_ANDROID
 
 #elif defined(WIN32) || defined(_MSC_VER)
 	#define FONT_PATH L"C:/Windows/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
-
-	#define USE_HGE_KEYMAP
 
 	#define OS_WIN32
 
