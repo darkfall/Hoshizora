@@ -93,16 +93,18 @@ sora::SoraVertex vert[6];
 
 bool mainWindow::renderFunc() {
 	
-	sora->beginScene(0x00000000);
+	sora->beginScene(0xFFFFFFFF);
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
 		
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 
+//	sora::SORA->beginZBufferSort();
 	pSpr->render();
 	pressAnyKey->render();
 	pSpr2->render();
+//	sora::SORA->endZBufferSort();
 
 	sora->endScene();
 	return false;
@@ -133,6 +135,9 @@ void mainWindow::init() {
 	pSpr = sora::SORA->createSprite(L"background.png");
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
+	
+	pSpr2->setZ(1.f);
+	pressAnyKey->setZ(0.5f);
 	
 	obj.doScript(L"test.lua");
 	

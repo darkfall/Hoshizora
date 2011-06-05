@@ -253,12 +253,6 @@ namespace sora {
 			global.SetInteger("SORA_KEY_NUMPAD8",	SORA_KEY_NUMPAD8);
 			global.SetInteger("SORA_KEY_NUMPAD9",	SORA_KEY_NUMPAD9);
 
-			global.SetInteger("SORA_KEY_MULTIPLY",	SORA_KEY_MULTIPLY);
-			global.SetInteger("SORA_KEY_DIVIDE",	SORA_KEY_DIVIDE);
-			global.SetInteger("SORA_KEY_ADD",		SORA_KEY_ADD);
-			global.SetInteger("SORA_KEY_SUBTRACT",	SORA_KEY_SUBTRACT);
-			global.SetInteger("SORA_KEY_DECIMAL",	SORA_KEY_DECIMAL);
-
 			global.SetInteger("SORA_KEY_F1",		SORA_KEY_F1);
 			global.SetInteger("SORA_KEY_F2",		SORA_KEY_F2);
 			global.SetInteger("SORA_KEY_F3",		SORA_KEY_F3);
@@ -287,14 +281,23 @@ namespace sora {
 			global.SetInteger("SORA_INPUT_FLAG_NUMLOCK",	SORA_INPUT_FLAG_NUMLOCK);
 			global.SetInteger("SORA_INPUT_FLAG_REPEAT",		SORA_INPUT_FLAG_REPEAT);
 
-			global.SetInteger("SORA_DIKEY_PRESSED",	SORA_DIKEY_PRESSED);
-			global.SetInteger("SORA_DIKEY_UP",		SORA_DIKEY_UP);
-			global.SetInteger("SORA_DIKEY_DOWN",	SORA_DIKEY_DOWN);
+			global.SetInteger("SORA_JOYSTICK_PRESSED",	SORA_JOYSTICK_PRESSED);
+			global.SetInteger("SORA_JOYSTICK_UP",		SORA_JOYSTICK_UP);
+			global.SetInteger("SORA_JOYSTICK_DOWN",	SORA_JOYSTICK_DOWN);
 
-			global.SetInteger("SORA_JOY_LEFT",		SORA_JOY_LEFT);
-			global.SetInteger("SORA_JOY_RIGHT",		SORA_JOY_RIGHT);
-			global.SetInteger("SORA_JOY_UP",		SORA_JOY_UP);
-			global.SetInteger("SORA_JOY_DOWN",		SORA_JOY_DOWN);
+			global.SetInteger("SORA_JOYSTICK_1",		SORA_JOYSTICK_1);
+			global.SetInteger("SORA_JOYSTICK_2",		SORA_JOYSTICK_2);
+			global.SetInteger("SORA_JOYSTICK_3",		SORA_JOYSTICK_3);
+			global.SetInteger("SORA_JOYSTICK_4",		SORA_JOYSTICK_4);
+			global.SetInteger("SORA_JOYSTICK_5",		SORA_JOYSTICK_5);
+			global.SetInteger("SORA_JOYSTICK_6",		SORA_JOYSTICK_6);
+			global.SetInteger("SORA_JOYSTICK_7",		SORA_JOYSTICK_7);
+			global.SetInteger("SORA_JOYSTICK_8",		SORA_JOYSTICK_8);
+			global.SetInteger("SORA_JOYSTICK_9",		SORA_JOYSTICK_9);
+			global.SetInteger("SORA_JOYSTICK_10",		SORA_JOYSTICK_10);
+			global.SetInteger("SORA_JOYSTICK_11",		SORA_JOYSTICK_11);
+			global.SetInteger("SORA_JOYSTICK_12",		SORA_JOYSTICK_12);
+
 			
 			global.SetNumber("PI", (lua_Number)F_PI);
 			global.SetNumber("PI_2", (lua_Number)F_PI_2);

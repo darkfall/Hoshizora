@@ -25,6 +25,8 @@
 #include "MemoryUsage.h"
 #include "Rect4V.h"
 
+#include "SoraInputSimulator.h"
+
 extern "C" {
 #include "Random/SFMT.h"
 }
@@ -141,6 +143,8 @@ namespace sora {
 #endif
             if(pSoundSystem) pSoundSystem->update();
         }
+		
+		SoraInputSimulator::clear();
 
 		pRenderSystem->beginFrame();
         
@@ -766,16 +770,32 @@ namespace sora {
 	}
 
 	bool SoraCore::keyDown(int32 key) {
+		int32 simulateState = SoraInputSimulator::getKeyState(key);
+		if(simulateState != -1)
+			return simulateState == SORA_INPUT_KEYDOWN;
+		
 		if(bHasInput) return pInput->keyDown(key);
 		return false;
 	}
 
 	bool SoraCore::keyUp(int32 key) {
+		int32 simulateState = SoraInputSimulator::getKeyState(key);
+		if(simulateState != -1)
+			return simulateState == SORA_INPUT_KEYUP;
+		
 		if(bHasInput) return pInput->keyUp(key);
 		return false;
 	}
+	
+	void SoraCore::simulateKey(int32 key, int32 state) {
+		SoraInputSimulator::simulateKey(key, state);
+	}
 
 	int32 SoraCore::getKeyState(int32 key) {
+		int32 simulateState = SoraInputSimulator::getKeyState(key);
+		if(simulateState != -1)
+			return simulateState;
+		
 		if(bHasInput) return pInput->getKeyState(key);
 		return false;
 	}

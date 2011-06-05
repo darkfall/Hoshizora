@@ -56,6 +56,7 @@ namespace sora {
 			mHeight = SoraCore::Instance()->getScreenHeight();
 		
 		mFont = NULL;
+		mFontHeight = 20;
 		
 		mCaretShow = 0.f;
 		
@@ -79,9 +80,9 @@ namespace sora {
 			drawTab();
 			
 			if(mBackspaceDown) {
-				if(mBackspaceTime >= 0.2f) {
+				if(mBackspaceTime >= 0.1f) {
 					if(mCurrentLine.size() > 0)
-						mCurrentLine.erase(mCurrentLine.size()-2);
+						mCurrentLine.erase(mCurrentLine.size()-1);
 					mBackspaceTime = 0.f;
 				} else 
 					mBackspaceTime += delta;
@@ -189,7 +190,7 @@ namespace sora {
 		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
 		if(mFont) {
 			float32 x = mPositionX + 1.f;
-			float32 y = mPositionY + mHeight - mFontHeight - 1.f;
+			float32 y = mPositionY + mHeight - mFontHeight*2 - 1.f;
 			
 			std::vector<SoraInternalLogger::LogMssg> debugMssg = DebugPtr->get();
 			
@@ -365,7 +366,7 @@ namespace sora {
 					mActive = false;
 					return;
 				}
-				if(key >= 0 && key <= 255) {
+				if(isKeyPrintable(key)) {
 					mCurrentLine += kev->chr;
 				} 
 				

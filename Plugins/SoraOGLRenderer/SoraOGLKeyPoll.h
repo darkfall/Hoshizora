@@ -17,6 +17,9 @@
 namespace sora {
 	void glfwKeyCallback(int key, int action);
 
+	int sorakey_to_glfwkey(int key);
+	int glfwkey_to_sorakey(int key);
+
     void clearPoll();
     bool getEv(SoraKeyEvent& ev);
 

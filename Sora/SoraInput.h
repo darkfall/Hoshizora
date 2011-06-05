@@ -10,6 +10,7 @@ namespace sora {
 		Abstract input class that defines input APIs
 	*/
 
+	/* << interface >> */
 	class SoraInput {
 	public:
 		// inputs

@@ -167,6 +167,8 @@ namespace sora {
 		bool	SORACALL joyKeyState(int32 key, unsigned char state);
 		bool	SORACALL setJoyKey(int32 key);
 		bool	SORACALL hasJoy();
+		
+		void	SORACALL simulateKey(int32 key, int32 state);
 
 		int32	SORACALL messageBox	(const SoraString& sMssg, const SoraString& sTitle, int32 iCode);
 		int32	SORACALL messageBoxW (const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode);
@@ -258,9 +260,9 @@ namespace sora {
 			SoraVertex*			vertex;
 			SoraTexture*		tex;
 			SoraShaderContext*	shader;
-			int					blend;
-			int					size;
-			int					drawMode;
+			int32				blend;
+			int32				size;
+			int32				drawMode;
 			
 			void release() {
 				if(vertex) {
