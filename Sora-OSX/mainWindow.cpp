@@ -100,11 +100,12 @@ bool mainWindow::renderFunc() {
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 
-//	sora::SORA->beginZBufferSort();
-	pSpr->render();
+	sora::SORA->beginZBufferSort();
 	pressAnyKey->render();
 	pSpr2->render();
-//	sora::SORA->endZBufferSort();
+	pSpr->render();
+
+	sora::SORA->endZBufferSort();
 
 	sora->endScene();
 	return false;
@@ -136,8 +137,9 @@ void mainWindow::init() {
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
 	
-	pSpr2->setZ(1.f);
-	pressAnyKey->setZ(0.5f);
+	pSpr2->setZ(0.f); 
+	pressAnyKey->setZ(0.5f); 	
+	pSpr->setZ(1.0); 
 	
 	obj.doScript(L"test.lua");
 	

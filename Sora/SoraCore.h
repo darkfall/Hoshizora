@@ -215,8 +215,6 @@ namespace sora {
 		SoraConsole* getConsole();
 		void setSystemFont(const wchar_t* font, int32 fontSize);
 		
-		void onConsoleEvent(SoraConsoleEvent* cev);
-
 	private:
 		inline void _registerCoreCmds();
 		
@@ -255,42 +253,8 @@ namespace sora {
 		inline void _frameListenerStart();
 		inline void _frameListenerEnd();
 		
-		
-		typedef struct __Z_BUFFER_NODE {
-			SoraVertex*			vertex;
-			SoraTexture*		tex;
-			SoraShaderContext*	shader;
-			int32				blend;
-			int32				size;
-			int32				drawMode;
-			
-			void release() {
-				if(vertex) {
-					delete []vertex;
-					vertex = NULL;
-					size = 0;
-				}
-				__Z_BUFFER_NODE* tnext = next;
-				while(tnext != NULL) {
-					__Z_BUFFER_NODE* ttnext = tnext;
-					tnext = ttnext->next;
-					
-					delete ttnext;
-					ttnext = NULL;
-				}
-				next = NULL;
-			}
-			
-			__Z_BUFFER_NODE* next;
-			
-			__Z_BUFFER_NODE(): vertex(NULL), shader(NULL), tex(NULL), blend(BLEND_DEFAULT), size(0), next(NULL) {}
-		};
-		
 		bool bZBufferArea;
 		SoraShaderContext* __prevShader;
-		__Z_BUFFER_NODE __z_buffer_array[1000];
-		
-		inline void __z_buffer_insert_node(const __Z_BUFFER_NODE& node, int32 z);
     };
 
 

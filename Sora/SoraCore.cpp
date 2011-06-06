@@ -21,11 +21,15 @@
 #include "Debug/SoraDebugRenderer.h"
 
 #include "cmd/SoraConsole.h"
+#include "cmd/CoreCmds.h"
+
+#include "helpers/SoraZSorter.h"
+#include "helpers/SoraInputSimulator.h"
+
 
 #include "MemoryUsage.h"
 #include "Rect4V.h"
 
-#include "SoraInputSimulator.h"
 
 extern "C" {
 #include "Random/SFMT.h"
@@ -63,8 +67,6 @@ namespace sora {
 		
 		setRandomSeed(rand());
         initConstantStrings();
-		
-		registerEventFunc(this, &SoraCore::onConsoleEvent);
 	}
 
 	void SoraCore::_initializeTimer() {
@@ -326,8 +328,8 @@ namespace sora {
 		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
 		
 		sora::SoraConsole::Instance();
-		_registerCoreCmds();
-
+		sora::SoraCoreCmdHandler::Instance();
+		
 		ulong32 result = pRenderSystem->createWindow(info);
 		if(result) {
 			if(pInput != NULL)
@@ -625,16 +627,7 @@ namespace sora {
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		assert(bInitialized==true);
 		if(bZBufferArea) {
-			int32 z = static_cast<int32>(quad.v[0].z * 1000);
-			__Z_BUFFER_NODE node;
-			node.vertex = new SoraVertex[4];
-			memcpy(node.vertex, &quad.v[0], sizeof(SoraVertex)*4);
-			node.size = 4;
-			node.blend = quad.blend;
-			node.tex = quad.tex;
-			node.shader = __prevShader;
-			
-			__z_buffer_insert_node(node, z);
+			SoraZSorter::renderQuad(quad, __prevShader);
 		} else 
 			pRenderSystem->renderQuad(quad);
 	}
@@ -643,16 +636,7 @@ namespace sora {
 		assert(bInitialized==true);
 		
 		if(bZBufferArea) {
-			int32 z = static_cast<int32>(trip.v[0].z * 1000);
-			__Z_BUFFER_NODE node;
-			node.vertex = new SoraVertex[3];
-			memcpy(node.vertex, &trip.v[0], sizeof(SoraVertex)*3);
-			node.size = 3;
-			node.blend = trip.blend;
-			node.tex = trip.tex;
-			node.shader = __prevShader;
-			
-			__z_buffer_insert_node(node, z);
+			SoraZSorter::renderTriple(trip, __prevShader);
 		} else 
 			pRenderSystem->renderTriple(trip);
 	}
@@ -660,18 +644,7 @@ namespace sora {
 	void SoraCore::renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
 		assert(bInitialized == true);
 		if(bZBufferArea) {
-			// use z 0
-			int32 z = static_cast<int32>(vertices[0].z * 1000);
-			__Z_BUFFER_NODE node;
-			node.vertex = new SoraVertex[vsize];
-			memcpy(node.vertex, vertices, sizeof(SoraVertex)*vsize);
-			node.size = vsize;
-			node.blend = blendMode;
-			node.tex = (SoraTexture*)tex;
-			node.shader = __prevShader;
-			node.drawMode = mode;
-			
-			__z_buffer_insert_node(node, z);
+			SoraZSorter::renderWithVertices(tex, blendMode, vertices, vsize, mode, __prevShader);
 		} else 	
 			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
 	}
@@ -1034,112 +1007,7 @@ namespace sora {
 
 	void SORACALL SoraCore::endZBufferSort() {
 		bZBufferArea = false;
-		for(int i=0; i<1000; ++i) {
-			__Z_BUFFER_NODE* node = &__z_buffer_array[i];
-			while(node != NULL) {
-				if(node->size == 4) {
-					SoraQuad quad;
-					memcpy(&quad.v[0], node->vertex, sizeof(SoraVertex)*4);
-					quad.blend = node->blend;
-					quad.tex = node->tex;
-					
-					if(node->shader)
-						attachShaderContext(node->shader);
-					pRenderSystem->renderQuad(quad);
-					detachShaderContext();
-				} else if(node->size == 3) {
-					SoraTriple trip;
-					memcpy(&trip.v[0], node->vertex, sizeof(SoraVertex)*3);
-					trip.blend = node->blend;
-					trip.tex = node->tex;
-					
-					if(node->shader)
-						attachShaderContext(node->shader);
-					pRenderSystem->renderTriple(trip);
-					detachShaderContext();
-				} else if(node->size != 0) {
-					if(node->shader)
-						attachShaderContext(node->shader);
-					pRenderSystem->renderWithVertices(node->tex, node->blend, node->vertex, node->size, node->drawMode);
-					detachShaderContext();
-				}
-				node = node->next;
-			}
-			__z_buffer_array[i].release();
-		}
+		SoraZSorter::endSortAndRender();
 	}
-	
-	void SoraCore::__z_buffer_insert_node(const __Z_BUFFER_NODE& node, int32 z) {
-		if(z >= 1000)
-			z = 999;
-		else if(z <= 0)
-			z = 0;
-		
-		__Z_BUFFER_NODE* cnode = &__z_buffer_array[z];
-		if(cnode->size != 0) {
-			__Z_BUFFER_NODE* next = cnode;
-			while(next->next != NULL)
-				next = next->next;
-			
-			__Z_BUFFER_NODE* newNode = new __Z_BUFFER_NODE();
-			newNode->vertex	= node.vertex;
-			newNode->blend = node.blend;
-			newNode->size = node.size;
-			newNode->shader = node.shader;
-			newNode->tex = node.tex;
-			
-			next->next = newNode;
-		} else {
-			__z_buffer_array[z] = node;
-		}
-	}
-	
-	void SoraCore::_registerCoreCmds() {
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "set");
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "log");
-		
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "exit");
-	}
-	
-	void SoraCore::onConsoleEvent(SoraConsoleEvent* cev) {
-		std::vector<std::string> params;
-		deliStr(params, cev->getParams().c_str(), ' ');
-		
-		if(cev->getCmd().compare("set") == 0) {
-			if(params.size() > 0) {
-				std::string p1 = params[0];
-				size_t dotPos = p1.find('.');
-				if(dotPos != std::string::npos) {
-					std::string p1Prev = p1.substr(0, dotPos);
-					if(p1Prev.compare("window") == 0 && params.size() >= 2) {
-						std::string p1Param = p1.substr(dotPos+1, p1.size());
-						
-						if(p1Param.compare("width") == 0) {
-							int32 width = atoi(params[1].c_str());
-							setWindowSize(width, getScreenHeight());
-							
-							cev->setResults("Window.Width seted to "+params[1]);
-						} else if(p1Param.compare("height") == 0) {
-							int32 height = atoi(params[1].c_str());
-							setWindowSize(getScreenWidth(), height);
-							
-							cev->setResults("Window.Height seted to "+params[1]);
-						} else if(p1Param.compare("title") == 0) {
-							setWindowTitle(s2ws(params[1]).c_str());
-							
-							cev->setResults("Window.Title seted to "+params[1]);
-						}
-					}
-				}
-			}
-		} else if(cev->getCmd().compare("log") == 0) {
-			if(params.size() > 0) {
-				for(size_t i=0; i<params.size(); ++i) {
-					log(params[i]);
-				}
-			}
-		} else if(cev->getCmd().compare("exit") == 0) {
-			shutDown();
-		}
-	}
+
 } // namespace sora

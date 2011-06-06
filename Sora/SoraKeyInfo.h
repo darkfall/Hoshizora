@@ -180,7 +180,8 @@ namespace sora {
 		   (key == SORA_KEY_APOSTROPHE) ||
 		   (key == SORA_KEY_COMMA) ||
 		   (key == SORA_KEY_PERIOD) ||
-		   (key == SORA_KEY_SLASH)
+		   (key == SORA_KEY_SLASH) ||
+		   (key == SORA_KEY_SPACE)
 		   )
 			return true;
 		return false;
@@ -204,6 +205,7 @@ namespace sora {
 				case SORA_KEY_COMMA: chr = ',';  break;
 				case SORA_KEY_PERIOD: chr = '.';  break;
 				case SORA_KEY_SLASH: chr = '/';  break;
+				case SORA_KEY_SPACE: chr = ' '; break;
 			}
 		}
 		
