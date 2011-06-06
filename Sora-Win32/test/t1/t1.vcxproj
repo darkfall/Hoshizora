@@ -358,6 +358,7 @@
     <ClInclude Include="..\..\..\ReflectionRev\rfShape.h" />
     <ClInclude Include="..\..\..\ReflectionRev\rfTitleView.h" />
     <ClInclude Include="..\..\..\ReflectionRev\rfView.h" />
+    <ClInclude Include="..\..\..\Sora\cmd\CoreCmds.h" />
     <ClInclude Include="..\..\..\Sora\cmd\SoraConsole.h" />
     <ClInclude Include="..\..\..\Sora\CoreLinearTransformer.h" />
     <ClInclude Include="..\..\..\Sora\CoreTransform.h" />
@@ -378,6 +379,8 @@
     <ClInclude Include="..\..\..\Sora\Experimental\Sora2DMatrix.h" />
     <ClInclude Include="..\..\..\Sora\graphicEffects.h" />
     <ClInclude Include="..\..\..\Sora\hash.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraInputSimulator.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraZSorter.h" />
     <ClInclude Include="..\..\..\Sora\hgerect.h" />
     <ClInclude Include="..\..\..\Sora\hgevector.h" />
     <ClInclude Include="..\..\..\Sora\HoshiNoSora.h" />
@@ -647,11 +650,14 @@
     <ClCompile Include="..\..\..\ReflectionRev\rfShape.cpp" />
     <ClCompile Include="..\..\..\ReflectionRev\rfTitleView.cpp" />
     <ClCompile Include="..\..\..\ReflectionRev\rfView.cpp" />
+    <ClCompile Include="..\..\..\Sora\cmd\CoreCmds.cpp" />
     <ClCompile Include="..\..\..\Sora\cmd\SoraConsole.cpp" />
     <ClCompile Include="..\..\..\Sora\CoreTransform.cpp" />
     <ClCompile Include="..\..\..\Sora\Debug\SoraInternalLogger.cpp" />
     <ClCompile Include="..\..\..\Sora\Defaults\orz.c" />
     <ClCompile Include="..\..\..\Sora\graphicEffects.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraInputSimulator.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraZSorter.cpp" />
     <ClCompile Include="..\..\..\Sora\hgerect.cpp" />
     <ClCompile Include="..\..\..\Sora\hgevector.cpp" />
     <ClCompile Include="..\..\..\Sora\json\json_reader.cpp" />
