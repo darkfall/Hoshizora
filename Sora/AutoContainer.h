@@ -14,8 +14,6 @@
 #include <map>
 #include <vector>
 
-#include "stringId.h"
-
 namespace sora {
 	
 	/*

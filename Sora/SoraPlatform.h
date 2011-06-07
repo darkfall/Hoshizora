@@ -153,7 +153,7 @@ typedef std::wstring SoraWString;
 #define SORAEXPORT
 #endif
 
-#if defined(WIN32) && defined(SORA_STD_CALL)
+#if defined(SORA_STD_CALL)
 #define SORACALL __stdcall
 #else
 #define SORACALL

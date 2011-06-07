@@ -786,11 +786,11 @@ bool HGE_Impl::_GfxInit()
                 return false;
         }
 
-        DWORD d3dvp = D3DCREATE_HARDWARE_VERTEXPROCESSING;
-        if ((d3dcaps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT) == 0 || d3dcaps.VertexShaderVersion < D3DVS_VERSION(1,1))
-        {
-                d3dvp = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
-        }
+      //  DWORD d3dvp = D3DCREATE_HARDWARE_VERTEXPROCESSING;
+       // if ((d3dcaps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT) == 0 || d3dcaps.VertexShaderVersion < D3DVS_VERSION(1,1))
+       // {
+             DWORD d3dvp = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+       // }
 
 // Create D3D Device
 

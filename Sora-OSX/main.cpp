@@ -47,13 +47,7 @@ int main(int argc, char* argv[]) {
 	sora->registerInput(new sora::SoraOGLInput);
 //    sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
 	
-	sora::HSORARESOURCE res = sora->loadResourcePack(L"./data.rfResource");
-	if(!res) {
-		sora->messageBox("Error loading resource data", "Fatal Error", MB_OK | MB_ICONERROR);
-		sora->shutDown();
-	}
-	sora->attachResourcePack(res);
-	
+
 	peMainWindowLoader::Instance()->loadConfig();
 	sora->createWindow(new mainWindow);
 	sora->start();

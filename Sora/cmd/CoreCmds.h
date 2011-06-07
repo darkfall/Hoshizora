@@ -23,9 +23,13 @@ namespace sora {
 		friend class SoraSingleton<SoraCoreCmdHandler>;
 		SoraCoreCmdHandler();
 		
-	public:
 		sora::SoraCore* sora;
-		
+
+	public:
+		inline void _doCmdSet(SoraConsoleEvent* cev, const std::vector<std::string>& params);
+		inline void _doCmdGet(SoraConsoleEvent* cev, const std::vector<std::string>& params);
+		inline void _doCmdMisc(SoraConsoleEvent* cev, const std::vector<std::string>& params);
+			
 		void onCmdEvent(SoraConsoleEvent* cev);
 	};
 	

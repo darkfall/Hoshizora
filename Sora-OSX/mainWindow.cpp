@@ -121,16 +121,16 @@ void onDownloadFinish(sora::SoraHttpFile* file){
 void mainWindow::init() {
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
-	sora::SORA->setSystemFont(L"ARIALN.ttf", 16);
+	sora::SORA->setSystemFont(L"cour.ttf", 16);
 	
-	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 20);
+	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 16);
 	pFont->setColor(0xFFFFCC00);
 	
 	
 	file.setFinishCallback(onDownloadFinish);
 	file.readFile(L"http://www.studio-gamemaster.com/sora_800_600.png");
 		
-	sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 20);
+	sora::GCN_GLOBAL->initGUIChan(0, 0);
 	
 	
 	pSpr = sora::SORA->createSprite(L"background.png");

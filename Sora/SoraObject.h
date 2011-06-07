@@ -12,10 +12,11 @@
 #include <list>
 #include "SoraAutoPtr.h"
 #include "SoraNamedObject.h"
+#include "AutoContainer.h"
 
 namespace sora {
 
-	class SoraObject: public SoraEventHandler, public SoraNamedObject {
+	class SoraObject: public SoraEventHandler, public SoraNamedObject, public AutoListElement<SoraObject> {
 	public:
 		typedef SoraObject* PSORAOBJECT;
 		typedef SoraObject* AP_OBJECT;
@@ -35,7 +36,6 @@ namespace sora {
 		virtual float32 getPositionY();
 		// this uses getPositionX and getPositionY, so no need to be virtual 
 		void getPosition(float32& _x, float32& _y);
-		
 		
 		SUB_OBJECT_LIST getObjList() const;
 		AP_OBJECT getParent() const;
