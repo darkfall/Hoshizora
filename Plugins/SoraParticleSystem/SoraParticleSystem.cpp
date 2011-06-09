@@ -120,8 +120,6 @@ namespace sora {
 		fToEmitTime = 0.f;
 		
 		fMaxDistance = MAX_DISTANCE;
-		
-		z = 0.f;
 	}
 
 	void SoraParticleSystem::killAll() {
