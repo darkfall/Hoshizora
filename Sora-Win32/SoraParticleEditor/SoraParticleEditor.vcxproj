@@ -181,6 +181,8 @@
     <ClInclude Include="..\..\SoraParticleEditor\editorWindow.h" />
     <ClInclude Include="..\..\SoraParticleEditor\peMainWindow.h" />
     <ClInclude Include="..\..\Sora\AutoContainer.h" />
+    <ClInclude Include="..\..\Sora\cmd\CoreCmds.h" />
+    <ClInclude Include="..\..\Sora\cmd\SoraConsole.h" />
     <ClInclude Include="..\..\Sora\common.h" />
     <ClInclude Include="..\..\Sora\CoreTransform.h" />
     <ClInclude Include="..\..\Sora\CoreTransformer.h" />
@@ -208,6 +210,8 @@
     <ClInclude Include="..\..\Sora\graphicEffects.h" />
     <ClInclude Include="..\..\Sora\GridMap.h" />
     <ClInclude Include="..\..\Sora\hash.h" />
+    <ClInclude Include="..\..\Sora\helpers\SoraInputSimulator.h" />
+    <ClInclude Include="..\..\Sora\helpers\SoraZSorter.h" />
     <ClInclude Include="..\..\Sora\hgerect.h" />
     <ClInclude Include="..\..\Sora\hgevector.h" />
     <ClInclude Include="..\..\Sora\HoshiNoSora.h" />
@@ -402,11 +406,15 @@
     <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.cpp" />
     <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.cpp" />
     <ClCompile Include="..\..\SoraParticleEditor\editorWindow.cpp" />
+    <ClCompile Include="..\..\Sora\cmd\CoreCmds.cpp" />
+    <ClCompile Include="..\..\Sora\cmd\SoraConsole.cpp" />
     <ClCompile Include="..\..\Sora\CoreTransform.cpp" />
     <ClCompile Include="..\..\Sora\Debug\SoraInternalLogger.cpp" />
     <ClCompile Include="..\..\Sora\Defaults\orz.c" />
     <ClCompile Include="..\..\Sora\Experimental\state_test.cpp" />
     <ClCompile Include="..\..\Sora\graphicEffects.cpp" />
+    <ClCompile Include="..\..\Sora\helpers\SoraInputSimulator.cpp" />
+    <ClCompile Include="..\..\Sora\helpers\SoraZSorter.cpp" />
     <ClCompile Include="..\..\Sora\hgerect.cpp" />
     <ClCompile Include="..\..\Sora\hgevector.cpp" />
     <ClCompile Include="..\..\Sora\json\json_reader.cpp" />
@@ -423,8 +431,10 @@
     <ClCompile Include="..\..\Sora\SoraImageEffect.cpp" />
     <ClCompile Include="..\..\Sora\SoraINIFile\SoraINIFile.cpp" />
     <ClCompile Include="..\..\Sora\SoraLocalizer.cpp" />
+    <ClCompile Include="..\..\Sora\SoraMemoryBuffer.cpp" />
     <ClCompile Include="..\..\Sora\SoraObject.cpp" />
     <ClCompile Include="..\..\Sora\SoraPluginManger.cpp" />
+    <ClCompile Include="..\..\Sora\SoraRenderSystem.cpp" />
     <ClCompile Include="..\..\Sora\SoraResourceFileFinder.cpp" />
     <ClCompile Include="..\..\Sora\SoraShader.cpp" />
     <ClCompile Include="..\..\Sora\SoraSprite.cpp" />

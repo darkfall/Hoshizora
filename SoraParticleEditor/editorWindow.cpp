@@ -15,6 +15,8 @@ FileDlg* fileDlg;
 
 bool bOpenFinished = false;
 
+bool bShowBoundingBox = false;
+
 sora::SoraSprite* pspr;
 sora::SoraParticleSystem* peffect;
 
@@ -100,6 +102,62 @@ typedef gcn::Slider* PSLIDER;
 typedef gcn::Label* PLABEL;
 
 using namespace sora;
+
+
+#include "cmd/SoraConsole.h"
+#include "SoraGUIChan/guichansetup.h"
+
+class PEConsoleCmdHandler: public SoraEventHandler {
+public:
+	PEConsoleCmdHandler() {
+		registerEventFunc(this, &PEConsoleCmdHandler::onConsoleEvent);
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "showbox");
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "showgui");
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "respawn");
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "moveto");
+	}
+	
+	void onConsoleEvent(SoraConsoleEvent* ev) {
+		if(ev->getCmd().compare("showbox") == 0) {
+			std::cout<<ev->getParams()<<std::endl;
+			if(ev->getParams().compare("on") == 0) {
+				bShowBoundingBox = true;
+				ev->setResults("bouding box show enabled");
+			}
+			else if(ev->getParams().compare("off") == 0) {
+				bShowBoundingBox = false;
+				ev->setResults("bouding box show disabled");
+			}
+			
+		} else if(ev->getCmd().compare("showgui") == 0) {
+			if(ev->getParams().compare("on") == 0) {
+				sora::GCN_GLOBAL->getTop()->setEnabled(true);
+				sora::GCN_GLOBAL->getTop()->setVisible(true);
+				ev->setResults("gui show enabled");
+
+			} else if(ev->getParams().compare("off") == 0) {
+				sora::GCN_GLOBAL->getTop()->setEnabled(false);
+				sora::GCN_GLOBAL->getTop()->setVisible(false);
+				
+				ev->setResults("gui show disabled");
+			}
+		} else if(ev->getCmd().compare("moveto") == 0) {
+			std::vector<std::string> params;
+			sora::deliStr(params, ev->getParams(), ' ');
+			if(params.size() == 2) {
+				peffect->moveTo(atoi(params[0].c_str()), atoi(params[1].c_str()), 0.f);
+			} else if(params.size() == 3) {
+				peffect->moveTo(atoi(params[0].c_str()), atoi(params[1].c_str()), atoi(params[2].c_str()));
+			}
+		} else if(ev->getCmd().compare("respawn") == 0) {
+			peffect->fire();
+		} else if(ev->getCmd().compare("save") == 0) {
+			if(ev->getParams().size() != 0) {
+				peffect->saveScript(sora::s2ws(ev->getParams()));
+			}
+		}
+	}
+};
 
 
 class SpeedPanelResponser: public SoraGUIResponser {
@@ -672,8 +730,6 @@ void editorWindow::update() {
 			mBGPosY += 1.f;
 		else mBGPosY = SORA->getScreenHeight();
 	}
-	
-	
 }
 
 void editorWindow::render() {
@@ -682,13 +738,17 @@ void editorWindow::render() {
 	}
 	
 	peffect->render();
+	if(bShowBoundingBox) {
+		hgeRect box = peffect->getBoundingBox();
+		sora::SORA->renderBox(box.x1, box.y1, box.x2, box.y2, 0xFFFFFFFF);
+	}
 	
 	if(pFont) {
 		int32 mWidth = sora::SORA->getScreenWidth();
 		int32 mHeight = sora::SORA->getScreenHeight();
 		pFont->print(mWidth-100, mHeight-70, sora::FONT_ALIGNMENT_CENTER, L"FPS: %.2f", sora::SORA->getFPS());
 		pFont->render(mWidth-100, mHeight-50, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true);
-		pFont->render(mWidth-100, mHeight-30, L"Rev 0x30 \0", true);
+		pFont->render(mWidth-100, mHeight-30, L"Rev 0x31 \0", true);
 	}
 }
 
@@ -809,6 +869,7 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 		fileDlg->SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
 #endif
 #endif
+		new PEConsoleCmdHandler;
 
 		return pWindow;
 
@@ -818,3 +879,12 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 	}
 	return 0;
 }
+
+
+
+
+
+
+
+
+

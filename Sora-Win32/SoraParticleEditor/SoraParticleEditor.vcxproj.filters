@@ -782,6 +782,18 @@
     <ClInclude Include="..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.h">
       <Filter>Plugins\SoraGUIChan</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sora\cmd\CoreCmds.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\cmd\SoraConsole.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\helpers\SoraZSorter.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\helpers\SoraInputSimulator.h">
+      <Filter>Sora</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -1164,6 +1176,24 @@
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.cpp">
       <Filter>Plugins\SoraGUIChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\cmd\CoreCmds.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\cmd\SoraConsole.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraMemoryBuffer.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\helpers\SoraZSorter.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\helpers\SoraInputSimulator.cpp">
+      <Filter>Sora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\SoraRenderSystem.cpp">
+      <Filter>Sora</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

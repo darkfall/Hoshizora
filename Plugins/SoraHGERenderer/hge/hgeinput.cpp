@@ -387,14 +387,29 @@ void HGE_Impl::_BuildEvent(int type, int key, int scan, int flags, int x, int y)
 		eptr->event.y=(float)pt.y;
 	}
 
-	eptr->next=0; 
+	
+	sora::SoraKeyEvent ev;
+	if(eptr->event.key != 0) {
+		ev.chr = eptr->event.chr;
+		ev.flags = eptr->event.flags;
+		ev.key = eptr->event.key;
+		ev.type = eptr->event.type;
+		ev.wheel = eptr->event.wheel;
+		ev.x = eptr->event.x;
+		ev.y = eptr->event.y;
+		sora::SORA_EVENT_MANAGER->publishInputEvent(&ev);
+	}
 
-	if(!queue) queue=eptr;
-	else
-	{
-		last=queue;
-		while(last->next) last=last->next;
-		last->next=eptr;
+	if(!ev.isConsumed()) {
+		eptr->next=0; 
+
+		if(!queue) queue=eptr;
+		else
+		{
+			last=queue;
+			while(last->next) last=last->next;
+			last->next=eptr;
+		}
 	}
 
 	if(eptr->event.type==INPUT_KEYDOWN || eptr->event.type==INPUT_MBUTTONDOWN)
@@ -410,17 +425,7 @@ void HGE_Impl::_BuildEvent(int type, int key, int scan, int flags, int x, int y)
 		Zpos+=eptr->event.wheel;
 	}
 
-	if(eptr->event.key != 0) {
-		sora::SoraKeyEvent ev;
-		ev.chr = eptr->event.chr;
-		ev.flags = eptr->event.flags;
-		ev.key = eptr->event.key;
-		ev.type = eptr->event.type;
-		ev.wheel = eptr->event.wheel;
-		ev.x = eptr->event.x;
-		ev.y = eptr->event.y;
-		sora::SORA_EVENT_MANAGER->publishInputEvent(&ev);
-	}
+	
 }
 
 void HGE_Impl::_ClearQueue()
