@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 	
 
 	peMainWindowLoader::Instance()->loadConfig();
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new peMainWindow);
 	sora->start();
 		
 	return 0;

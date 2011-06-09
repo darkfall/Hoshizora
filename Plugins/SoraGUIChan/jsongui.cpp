@@ -202,6 +202,9 @@ namespace sora {
 		if(val.isMember("name")) {
             widget->setId(val["name"].asString());
 		}
+		if(val.isMember("id")) {
+            widget->setId(val["id"].asString());
+		}
         
 		if(val.isMember("responser")) {
 			SoraString arg = val["responser"].asString();

@@ -173,60 +173,55 @@
 	</window>
 	
 	<window name="StartColorPanel" width="180"  height="110" x="924" y="450" caption="StartColorPanel" opaque="true">
+		<label name="SMinRLabel" width="10" height="20" x="10" y="5" caption="R"/>
+		
 		<slider name="SMinR" width="60" height="10" x="30" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinR" responser="ColorPanel" responsetype="action"/>
-		<label name="SMinRLabel" width="60" height="20" x="10" y="5" caption="R"/>
+		<label name="SMinGLabel" width="10" height="20" x="10" y="25" caption="G"/>
 		
 		<slider name="SMinG" width="60" height="10" x="30" y="30" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinG" responser="ColorPanel" responsetype="action"/>
-		<label name="SMinGLabel" width="60" height="20" x="10" y="25" caption="G"/>
 		
+		<label name="SMinBLabel" width="10" height="20" x="10" y="45" caption="B"/>
 		
 		<slider name="SMinB" width="60" height="10" x="30" y="50" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinB" responser="ColorPanel" responsetype="action"/>
-		<label name="SMinBLabel" width="60" height="20" x="10" y="45" caption="B"/>
+		<label name="SMinALabel" width="10" height="20" x="10" y="65" caption="A"/>
 		
 		<slider name="SMinA" width="60" height="10" x="30" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMinA" responser="ColorPanel" responsetype="action"/>
-		<label name="SMinALabel" width="60" height="20" x="10" y="65" caption="A"/>
 		
 		
 		<slider name="SMaxR" width="60" height="10" x="100" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxR" responser="ColorPanel" responsetype="action"/>
-		<label name="SMaxRLabel" width="60" height="20" x="90" y="5" caption=""/>
 		
 		<slider name="SMaxG" width="60" height="10" x="100" y="30" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxG" responser="ColorPanel" responsetype="action"/>
-		<label name="SMaxGLabel" width="60" height="20" x="90" y="25" caption=""/>
 		
 		<slider name="SMaxB" width="60" height="10" x="100" y="50" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxB" responser="ColorPanel" responsetype="action"/>
-		<label name="SMaxBLabel" width="60" height="20" x="90" y="45" caption=""/>
 		
 		<slider name="SMaxA" width="60" height="10" x="100" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="SMaxA" responser="ColorPanel" responsetype="action"/>
-		<label name="SMaxALabel" width="60" height="20" x="90" y="65" caption=""/>
 		
 	</window>
 	<window name="EndColorPanel" width="180"  height="110" x="924" y="560" caption="EndColorPanel" opaque="true">
-		<slider name="EMinR" width="60" height="10" x="30" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinR" responser="ColorPanel" responsetype="action"/>
-		<label name="EMinRLabel" width="60" height="20" x="10" y="5" caption="R"/>
+		<label name="EMinRLabel" width="10" height="20" x="10" y="5" caption="R"/>
 		
+		<slider name="EMinR" width="60" height="10" x="30" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinR" responser="ColorPanel" responsetype="action"/>
+		
+		<label name="EMinGLabel" width="10" height="20" x="10" y="25" caption="G"/>
 		
 		<slider name="EMinG" width="60" height="10" x="30" y="30" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinG" responser="ColorPanel" responsetype="action"/>
-		<label name="EMinGLabel" width="60" height="20" x="10" y="25" caption="G"/>
 		
+		<label name="EMinBLabel" width="10" height="20" x="10" y="45" caption="B"/>
 		
 		<slider name="EMinB" width="60" height="10" x="30" y="50" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinB" responser="ColorPanel" responsetype="action"/>
-		<label name="EMinBLabel" width="60" height="20" x="10" y="45" caption="B"/>
+		
+		<label name="EMinALabel" width="10" height="20" x="10" y="65" caption="A"/>
 		
 		<slider name="EMinA" width="60" height="10" x="30" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMinA" responser="ColorPanel" responsetype="action"/>
-		<label name="EMinALabel" width="60" height="20" x="10" y="65" caption="A"/>
 		
 		
 		<slider name="EMaxR" width="60" height="10" x="100" y="10" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMaxR" responser="ColorPanel" responsetype="action"/>
-		<label name="EMaxRLabel" width="60" height="20" x="90" y="5" caption=""/>
 		
 		<slider name="EMaxG" width="60" height="10" x="100" y="30" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMaxG" responser="ColorPanel" responsetype="action"/>
-		<label name="EMaxGLabel" width="60" height="20" x="90" y="25" caption=""/>
 		
 		<slider name="EMaxB" width="60" height="10" x="100" y="50" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMaxB" responser="ColorPanel" responsetype="action"/>
-		<label name="EMaxBLabel" width="60" height="20" x="90" y="45" caption=""/>
 		
 		<slider name="EMaxA" width="60" height="10" x="100" y="70" start="0" end="1" value="0" makerLength="1" stepLength="0.01" id="EMaxA" responser="ColorPanel" responsetype="action"/>
-		<label name="EMaxALabel" width="60" height="20" x="90" y="65" caption=""/>
 		
 		
 	</window>

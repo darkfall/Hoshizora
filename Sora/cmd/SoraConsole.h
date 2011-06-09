@@ -93,7 +93,7 @@ namespace sora {
 		int32 getWidth() const { return mWidth; }
 		int32 getHeight() const { return mHeight; }
 		
-		void setFont(const std::wstring& font, int32 fontSize);
+		void setFont(SoraFont* font);
 		void reset();
 		
 	private:

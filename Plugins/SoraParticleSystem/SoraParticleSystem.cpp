@@ -22,6 +22,7 @@ namespace sora {
 
 		z = 0.f;
 		bZDepth = false;
+		
 	}
 
 	SoraParticleSystem::SoraParticleSystem(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
@@ -77,6 +78,9 @@ namespace sora {
 		}
 		
 		init();
+		bRotate3v = false;
+		bZDepth = false;
+
 	}
 
 	void SoraParticleSystem::emit(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
@@ -90,6 +94,9 @@ namespace sora {
 		}
 		
 		init();
+		bRotate3v = false;
+		bZDepth = false;
+
 	}
 	
 	void SoraParticleSystem::init() {
@@ -108,8 +115,6 @@ namespace sora {
 						  pheader.emitPos.y+pSprite->getTextureHeight()/2*pheader.fMaxStartScale);
 		
 		bActive = true;
-		bRotate3v = false;
-		bZDepth = false;
 		
 		fCurrEmitTime = 0.f;
 		fToEmitTime = 0.f;
@@ -137,11 +142,15 @@ namespace sora {
 		bActive = true;
 		init();
 		pheader.emitPos.set(x, y, z);
+		hrBoundingBox.x1 = x;
+		hrBoundingBox.y1 = y;
 	}
 
 	void SoraParticleSystem::moveTo(float32 x, float32 y, float32 z, bool bKill) {
 		if(bKill) killAll();
 		pheader.emitPos.set(x, y, z);
+		hrBoundingBox.x1 = x;
+		hrBoundingBox.y1 = y;
 	}
 
 	void SoraParticleSystem::restart() {

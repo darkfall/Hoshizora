@@ -240,10 +240,12 @@ namespace sora {
 		mHandlers[cmd] = handler;
 	}
 	
-	void SoraConsole::setFont(const std::wstring& font, int32 fontSize) {
-		mFont = SORA->createFont(font, fontSize);
-		mFont->setColor(mCaretColor);
-		mFontHeight = mFont->getHeight();
+	void SoraConsole::setFont(SoraFont* font) {
+		mFont = font;
+		if(mFont) {
+			mFont->setColor(mCaretColor);
+			mFontHeight = mFont->getHeight();
+		}
 	}
 	
 	void SoraConsole::publishCmd(const std::string& cmd, const char* params) {
@@ -301,6 +303,8 @@ namespace sora {
 				}
 			}
 		}
+		
+		kev->consume();
 
 		if(kev->isKeyDown()) {
 			if(kev->isKeyPressed(SORA_KEY_TAB)) {

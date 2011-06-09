@@ -66,7 +66,7 @@ namespace sora {
 		 @param resourceName, the resource name to localize
 		 for example, myResource.png would be localized as myResource_CHN.png if current locale is CHN
 		 */
-		void localizeResourceName(SoraWString& resourceName);
+		SoraWString localizeResourceName(SoraWString& resourceName);
 		
 	private:
 		typedef hash_map<SoraString, SoraWString> LOCALE_STRING_MAP;		

@@ -926,9 +926,12 @@ namespace sora {
 			return f;
 		}
 #else
-		return pFontManager->getFont(ws2s(font).c_str(), size);
+		SoraFont* ff = pFontManager->getFont(ws2s(font).c_str(), size);
+		if(ff)
+			SoraConsole::Instance()->setFont(ff);
+		else
+			_postError("Error loading Font: "+ws2s(font));
 #endif
-		_postError("Error loading font");
 		return 0;
 	}
 
@@ -998,7 +1001,8 @@ namespace sora {
 	}
 	
 	void SoraCore::setSystemFont(const wchar_t* font, int32 fontSize) {
-		SoraConsole::Instance()->setFont(font, fontSize);
+		SoraFont* ff = createFont(font, fontSize);
+		SoraConsole::Instance()->setFont(ff);
 	}
 	
 	void SORACALL SoraCore::beginZBufferSort() {

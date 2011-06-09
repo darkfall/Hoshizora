@@ -1,17 +1,1 @@
 ============================Hoshi no Sora==================================
-ua Error: 1, what:
- spr = spritelib.createSprite("magicCircle.png");
-spritelib.setScale(spr, 0.5, 0.5);
-spritelib.setPositionss(spr, SoraCore:getScreenWidth()-spritelib.getSpriteWidth(spr), SoraCore:getScreenHeight()-spritelib.getSpriteHeight(spr));
-
-function update(dt)
-
-end
-
-function render()
-	spritelib.render(spr);
-end
-Created MainWindow, Width=1024, Height=768, Title=Reflection
-SoraCore::CheckCoreComponents: no SoundSystem available
-No SoundSystem available, sound related API disabled
-Download finished from http://www.studio-gamemaster.com/sora_800_600.png, size = 21150, buffersize=35152,21150, time = 0.363000
