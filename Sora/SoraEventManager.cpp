@@ -211,6 +211,9 @@ namespace sora {
 			if((*itHandler)) {
 				(*itHandler)->handleEvent(kev);
 				++itHandler;
+				
+				if(kev->isConsumed())
+					break;
 			}
 		}
 	}
