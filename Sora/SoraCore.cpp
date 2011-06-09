@@ -914,8 +914,12 @@ namespace sora {
 		}
 
 #ifndef OS_IOS
+		SoraFont* f;
         if(SoraFileUtility::fileExists(font)) {
-            SoraFont* f = pFontManager->getFont(ws2s(font).c_str(), size);
+            f = pFontManager->getFont(ws2s(font).c_str(), size);
+
+			if(SoraConsole::Instance()->getFont() == NULL)
+				SoraConsole::Instance()->setFont(f);
             return f;
         }
 		ulong32 s;
@@ -923,6 +927,8 @@ namespace sora {
 		if(p) {
 			SoraFont* f = pFontManager->getFont((const char*)p, size, s-1, ws2s(font).c_str());
 			//freeResourceFile(p);
+			if(SoraConsole::Instance()->getFont() == NULL)
+				SoraConsole::Instance()->setFont(f);
 			return f;
 		}
 #else

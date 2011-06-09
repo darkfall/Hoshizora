@@ -238,7 +238,7 @@
 		<button name="ParticleSprite" width="150" height="20" x="400" y="5" caption="Particle Sprite..." id="ParticleSprite" responser="OptionPanelButton" responsetype="action"/>
 		<button name="BGSprite" width=100 height="20" x="555" y="5" caption="BGSprite..." id="BGSprite" responser="OptionPanelButton" responsetype="action"/>
 
-		<slider name="TextureRect" width="135" height="20" x="5" y="210" start="0" end="15" value="0" makerLength="1" stepLength="1" id="TextureRect" responser="OptionPanelButton" responsetype="action"/>
-		<checkbox name="BlendModeCheck" width="135" height="20" x="5" y="235" caption="AlphaBlend" id="BlendModeCheck" responser="OptionPanel" responsetype="action"/>
+		<slider name="TextureRect" width="135" height="20" x="750" y="5" start="0" end="15" value="0" makerLength="1" stepLength="1" id="TextureRect" responser="OptionPanelButton" responsetype="action"/>
+		<checkbox name="BlendModeCheck" width="135" height="20" x="755" y="30" caption="AlphaBlend" id="BlendModeCheck" responser="OptionPanel" responsetype="action"/>
 	</window>
 </container>

@@ -191,7 +191,6 @@
     <ClInclude Include="..\..\Sora\Debug\SoraGlobalProfiler.h" />
     <ClInclude Include="..\..\Sora\Debug\SoraInternalLogger.h" />
     <ClInclude Include="..\..\Sora\Defaults\orz.h" />
-    <ClInclude Include="..\..\Sora\Defaults\SoraDefaultLogger.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraDefaultMiscTool.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraDefaultTimer.h" />
     <ClInclude Include="..\..\Sora\Defaults\SoraMiscTool_iOS.h" />

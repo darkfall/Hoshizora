@@ -151,13 +151,10 @@ public:
 			}
 		} else if(ev->getCmd().compare("respawn") == 0) {
 			peffect->fire();
-<<<<<<< HEAD
 		} else if(ev->getCmd().compare("save") == 0) {
 			if(ev->getParams().size() != 0) {
 				peffect->saveScript(sora::s2ws(ev->getParams()));
 			}
-=======
->>>>>>> baf326624a3cf96a0abaddfb3e35fbf53bec2b60
 		}
 	}
 };

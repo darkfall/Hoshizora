@@ -94,6 +94,7 @@ namespace sora {
 		int32 getHeight() const { return mHeight; }
 		
 		void setFont(SoraFont* font);
+		SoraFont* getFont() { return mFont;}
 		void reset();
 		
 	private:

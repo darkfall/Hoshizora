@@ -635,9 +635,6 @@
     <ClInclude Include="..\..\Sora\Defaults\orz.h">
       <Filter>Sora</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Sora\Defaults\SoraDefaultLogger.h">
-      <Filter>Sora</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Sora\Defaults\SoraDefaultMiscTool.h">
       <Filter>Sora</Filter>
     </ClInclude>
