@@ -126,12 +126,7 @@ void mainWindow::init() {
 	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 16);
 	pFont->setColor(0xFFFFCC00);
 	
-	
-	file.setFinishCallback(onDownloadFinish);
-	file.readFile(L"http://www.studio-gamemaster.com/sora_800_600.png");
-		
-	sora::GCN_GLOBAL->initGUIChan(0, 0);
-	
+	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
 	
 	pSpr = sora::SORA->createSprite(L"background.png");
 	pressAnyKey = sora::SORA->createSprite(L"road.png");

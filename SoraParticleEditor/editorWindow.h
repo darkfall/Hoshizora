@@ -14,7 +14,7 @@
 #include "DarkLib/FileDlg.h"
 #endif
 
-
+void loadBGSprite(const SoraWString& path);
 class editorWindow {
 public:
 	editorWindow();

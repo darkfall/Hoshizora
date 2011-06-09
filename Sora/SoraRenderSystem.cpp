@@ -60,10 +60,10 @@ namespace sora {
 	}
 	
 	void SoraRenderSystem::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
-		renderRect(x1, y1, x2, y1, 1.f, color, z);
-		renderRect(x2, y1, x2, y2, 1.f, color, z);
-		renderRect(x2, y2, x1, y2, 1.f, color, z);
-		renderRect(x1, y2, x1, y1, 1.f, color, z);
+		renderRect(x1, y1, x2, y1+1.f, 1.f, color, z);
+		renderRect(x2, y1, x2+1.f, y2, 1.f, color, z);
+		renderRect(x2, y2, x1, y2+1.f, 1.f, color, z);
+		renderRect(x1, y2, x1+1.f, y1, 1.f, color, z);
 	}
 
 } // namespace sora

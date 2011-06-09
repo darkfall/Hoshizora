@@ -415,10 +415,6 @@ namespace sora{
 														  | /*SOIL_FLAG_POWER_OF_TWO | */SOIL_FLAG_TEXTURE_REPEATS/*| SOIL_FLAG_INVERT_Y*/,
 														  &w, &h, &channels);
 
-		if(!texid) {
-			throw SORA_EXCEPTION("Error loading texture");
-		}
-
 		SoraTexture* tex = new SoraTexture(texid,
 										   _glTextureGetWidth(texid),
 										   _glTextureGetHeight(texid),

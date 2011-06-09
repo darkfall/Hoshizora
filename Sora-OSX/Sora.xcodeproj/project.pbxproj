@@ -1507,8 +1507,8 @@
 			isa = PBXGroup;
 			children = (
 				883900EE131A096700CC101A /* editorWindow.cpp */,
-				884530971390F75B0045D130 /* peMainWindow.h */,
 				883900EF131A096700CC101A /* editorWindow.h */,
+				884530971390F75B0045D130 /* peMainWindow.h */,
 			);
 			name = ParticleEditor;
 			sourceTree = "<group>";

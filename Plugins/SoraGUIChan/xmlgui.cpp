@@ -286,6 +286,9 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 	if(element->Attribute("name")) {
 		widget->setId(element->Attribute("name")->c_str());
 	}
+	if(element->Attribute("id")) {
+		widget->setId(element->Attribute("id")->c_str());
+	}
 	if(element->Attribute("responser")) {
 		SoraString arg = element->Attribute("responser")->c_str();
 		parseResponser(widget, arg, element->Attribute("responsetype"));

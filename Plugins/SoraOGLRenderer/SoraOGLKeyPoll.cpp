@@ -199,7 +199,8 @@ namespace sora {
 		ev.y = y;
 				
 		SORA_EVENT_MANAGER->publishInputEvent(&ev);
-		keyPoll.push_back(ev);
+		if(!ev.isConsumed())
+			keyPoll.push_back(ev);
 	}
 
 	void clearPoll() {

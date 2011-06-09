@@ -23,6 +23,7 @@ public:
 			if(config->readFileMem(data, size)) {
 				mWidth = config->getInt("public", "width", 1280);
 				mHeight = config->getInt("public", "height", 800);
+				defaultBg = config->getString("public", "defaultbg", "\0");
 			}
 		}
 		return true;
@@ -31,9 +32,13 @@ public:
 	int32 getWidth() const { return mWidth; }
 	int32 getHeight() const { return mHeight; }
 	
+	std::string getDefaultBg() const { return defaultBg; }
+	
 private:
 	int32 mWidth;
 	int32 mHeight;
+	
+	std::string defaultBg;
 };
 
 class peMainWindow: public sora::SoraWindowInfoBase {
@@ -59,16 +64,22 @@ class peMainWindow: public sora::SoraWindowInfoBase {
 
 	void init() {
 		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
-		
+		sora::SORA->setSystemFont(L"cour.ttf", 16);
+
 		sora::SORA->setFPS(60);
 
-		if(!sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 14)) {
+		if(!sora::GCN_GLOBAL->initGUIChan(L"cour.ttf", 14)) {
 			sora::SORA->messageBox("Error initializing GUIChan, exiting...", "Fatal Error", MB_OK | MB_ICONERROR);
+			sora::SORA->shutDown();
 		}
-		sora::GCN_GLOBAL->createTop();
 
 		pEditor = new editorWindow;
-		pEditor->loadXML(L"editor.xml");
+		if(!pEditor->loadXML(L"editor.xml")) {
+			sora::SORA->messageBox("Error loading gui config, exiting...", "Fatal Error", MB_OK | MB_ICONERROR);
+			sora::SORA->shutDown();
+		}
+		
+		loadBGSprite(sora::s2ws(peMainWindowLoader::Instance()->getDefaultBg()));
 		
 		sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
 		registerEventFunc(this, &peMainWindow::onKeyEvent);

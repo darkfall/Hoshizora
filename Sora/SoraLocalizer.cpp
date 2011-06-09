@@ -125,11 +125,12 @@ namespace sora {
 		}
 	}
 		
-	void SoraLocalizer::localizeResourceName(SoraWString& resourceName) {
+	SoraWString SoraLocalizer::localizeResourceName(SoraWString& resourceName) {
 		size_t dotPos = resourceName.rfind(L'.');
 		if(dotPos != std::string::npos) {
 			resourceName.insert(dotPos, L"_"+currentLocaleW);
 		}
+		return resourceName;
 	}
 
 
