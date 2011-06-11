@@ -237,4 +237,6 @@ private:
     unsigned short usErrorCode;
 };
 
+typedef llexer SoraLexer;
+
 #endif

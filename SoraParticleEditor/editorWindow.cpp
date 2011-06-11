@@ -1,6 +1,8 @@
 #include "editorWindow.h"
 #include "Darklib/FileDlgOsx.h"
 
+#include "peMainWindow.h"
+
 gcn::Window* pSpeedPanel;
 gcn::Window* pPropPanel;
 gcn::Window* pLifetimePanel;
@@ -488,6 +490,7 @@ void loadParticleSprite(const SoraWString& path) {
 		pspr = SORA->createSprite(L"pics/particles.png");
 	}
 
+	peffect->setSprite(pspr);
 	peffect->restart();
 }
 
@@ -571,7 +574,7 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 		filePathBuffer[0] = '\0';
 			
 		applyFilterSps();
-		SoraWString particleFile = sora::SORA->fileOpenDialog("sps;");
+			SoraWString particleFile = sora::SORA->fileOpenDialog("sps;", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
 
 		if(particleFile.size() != 0) {	
 			sCurrParticleFile = particleFile;
@@ -620,12 +623,14 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 
 	} else if(getID().compare("TextureRect") == 0) {
 		gcn::Slider* ps = (gcn::Slider*)getSource();
-		int v = (int)ps->getValue() % 4;
-		int h = (int)ps->getValue() / 4;
-		peffect->pheader.texX = v*32;
-		peffect->pheader.texY = h*32;
-		peffect->pheader.texW = 32;
-		peffect->pheader.texH = 32;
+		int v = (int)ps->getValue() % peMainWindowLoader::Instance()->getRow();
+		int h = (int)ps->getValue() / peMainWindowLoader::Instance()->getRow();
+		peffect->pheader.texX = v*peMainWindowLoader::Instance()->getTexWidth();
+		peffect->pheader.texY = h*peMainWindowLoader::Instance()->getTexHeight();
+		peffect->pheader.texW = peMainWindowLoader::Instance()->getTexWidth();
+		peffect->pheader.texH = peMainWindowLoader::Instance()->getTexHeight();
+		
+		sora::DebugPtr->log(vamssg("%.2f, %.2f, %.2f, %.2f", peffect->pheader.texX, peffect->pheader.texY,peffect->pheader.texW, peffect->pheader.texH));
 	} else if(getID().compare("ParticleSprite") == 0) {
 #ifdef WIN32
 		wchar_t fileTitleBuffer[512];
@@ -691,7 +696,7 @@ editorWindow::editorWindow() {
 	pFont->setColor(0xFFFFFFFF);
 
 	peffect = new SoraParticleSystem();
-	pspr = SORA->createSprite(L"pics/particles.png");
+	pspr = SORA->createSprite(sora::s2ws(peMainWindowLoader::Instance()->getDefaultParticleSprite()));
 	peffect->emit(L"Default.sps", pspr);
 	peffect->pheader.fEmitDuration = 10.f;
 	peffect->pheader.fEmitLifetime = 10.f;
@@ -849,6 +854,12 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 		slMaxAngle = (gcn::Slider*)pXmlParser->getWidget("MaxAngle");
 
 		slTextureRect = (gcn::Slider*)pXmlParser->getWidget("TextureRect");
+		if(slTextureRect) {
+			slTextureRect->setScale(0.0, peMainWindowLoader::Instance()->getRow()*peMainWindowLoader::Instance()->getCol());
+			slTextureRect->setStepLength(1.0);
+			
+			std::cout<<peMainWindowLoader::Instance()->getRow()*peMainWindowLoader::Instance()->getCol()<<std::endl;
+		}
 
 		cbSpeedPanel->setSelected(true);
 		cbLifetimePanel->setSelected(true);

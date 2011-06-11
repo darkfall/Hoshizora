@@ -321,30 +321,45 @@ namespace sora {
 	}
 
 	ulong32 SoraCore::createWindow(SoraWindowInfoBase* info) {
-		iScreenWidth = info->getWindowWidth();
-		iScreenHeight = info->getWindowHeight();
-
 		SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
 		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
 		
-		sora::SoraConsole::Instance();
-		sora::SoraCoreCmdHandler::Instance();
-		
-		ulong32 result = pRenderSystem->createWindow(info);
-		if(result) {
-			if(pInput != NULL)
-				pInput->setWindowHandle(result);
-			pMiscTool->setMainWindowHandle(result);
-			bMainWindowSet = true;
-			mainWindow = info;
+		if(mainWindow == NULL) {
+			iScreenWidth = info->getWindowWidth();
+			iScreenHeight = info->getWindowHeight();
 			
-			DebugPtr->log(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
-						  LOG_LEVEL_NOTICE);
-			return result;
+			sora::SoraConsole::Instance();
+			sora::SoraCoreCmdHandler::Instance();
+		
+			ulong32 result = pRenderSystem->createWindow(info);
+			if(result) {
+				if(pInput != NULL)
+					pInput->setWindowHandle(result);
+				pMiscTool->setMainWindowHandle(result);
+				bMainWindowSet = true;
+				mainWindow = info;
+			
+				DebugPtr->log(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
+							  LOG_LEVEL_NOTICE);
+				return result;
+			} else {
+				_postError("SoraCore::createWindow, createWindow failed");
+				shutDown();
+				return 0;
+			}
 		} else {
-			_postError("SoraCore::createWindow, createWindow failed");
-			shutDown();
-			return 0;
+			mainWindow = info;
+			DebugPtr->log(vamssg("Recreated MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
+						  LOG_LEVEL_NOTICE);
+			
+			if(info->getWindowWidth() != iScreenWidth || info->getWindowHeight() != iScreenHeight) {
+				iScreenWidth = info->getWindowWidth();
+				iScreenHeight = info->getWindowHeight();
+				
+				pRenderSystem->setWindowSize(iScreenWidth, iScreenHeight);
+				pRenderSystem->setWindowTitle(s2ws(info->getWindowName()));
+				pRenderSystem->setWindowPos(info->getWindowPosX(), info->getWindowPosY());
+			}
 		}
 		return 0;
 	}

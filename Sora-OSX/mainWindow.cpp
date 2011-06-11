@@ -104,6 +104,9 @@ bool mainWindow::renderFunc() {
 	pressAnyKey->render();
 	pSpr2->render();
 	pSpr->render();
+	
+	ps->update(sora::SORA->getDelta());
+	ps->render();
 
 	sora::SORA->endZBufferSort();
 
@@ -136,8 +139,10 @@ void mainWindow::init() {
 	pressAnyKey->setZ(0.5f); 	
 	pSpr->setZ(1.0); 
 	
-	obj.doScript(L"test.lua");
-	
+	ps = new sora::SoraParticleManager;
+	ps->setGlobalSprite(sora::SORA->createSprite(L"pics/particles.png"));
+	ps->emitS(L"bg13_fire_left.sps", 100.f, 100.f);
+	ps->emitS(L"astar.sps", 200.f, 100.f);
 	
 	float32 px = 400.f, py = 300.f;
 	for(int i=0; i<6; ++i) {
@@ -150,6 +155,17 @@ void mainWindow::init() {
 		vert[i].tx = (pSpr->getSpriteWidth() / 2 + 300*cosf(sora::DGR_RAD(i*60))) / pSpr->getTextureWidth(false);
 		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getTextureHeight(false);
 	}
+	
+	uint8 localIp[4] = {192, 168, 1, 103};
+	if(!psocket.Initialize())
+		sora::DebugPtr->log("Error initializing passive socket");
+	if(!psocket.Listen(localIp, 3000))
+		sora::DebugPtr->log(sora::vamssg("Passive Socket Error, error code = %d", psocket.GetSocketError()));
+	
+	if(!asocket.Initialize())
+		sora::DebugPtr->log("Error initializing active socket");
+	if(!asocket.Open(localIp, 3000))
+		sora::DebugPtr->log(sora::vamssg("Active Socket Error, error code = %d", asocket.GetSocketError()));
 	
 	
 	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(0.f);

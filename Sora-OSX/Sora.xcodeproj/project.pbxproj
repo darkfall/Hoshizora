@@ -134,6 +134,12 @@
 		887F2C13139C6DDA00F534D5 /* SoraInputSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887F2C11139C6DDA00F534D5 /* SoraInputSimulator.cpp */; };
 		887F2C16139C6DE800F534D5 /* SoraZSorter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887F2C15139C6DE800F534D5 /* SoraZSorter.cpp */; };
 		887F2C1B139C739800F534D5 /* CoreCmds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887F2C1A139C739800F534D5 /* CoreCmds.cpp */; };
+		8884F4F113A1E41100BEC5AB /* lua_tinker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8884F4EF13A1E41100BEC5AB /* lua_tinker.cpp */; };
+		8884F66013A1F8C200BEC5AB /* SoraMutableSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8884F65F13A1F8C200BEC5AB /* SoraMutableSprite.cpp */; };
+		8884F69813A2597E00BEC5AB /* ActiveSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8884F69013A2597E00BEC5AB /* ActiveSocket.cpp */; };
+		8884F69913A2597E00BEC5AB /* PassiveSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8884F69313A2597E00BEC5AB /* PassiveSocket.cpp */; };
+		8884F69A13A2597E00BEC5AB /* SimpleSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8884F69513A2597E00BEC5AB /* SimpleSocket.cpp */; };
+		8884F79D13A2926D00BEC5AB /* SoraSpriteFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */; };
 		88898319137520D4000B937A /* rftdSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88898318137520D4000B937A /* rftdSystem.cpp */; };
 		888985441375D6DB000B937A /* rftdEnemyObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 888985431375D6DB000B937A /* rftdEnemyObject.cpp */; };
 		8889871813760766000B937A /* rftdMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8889871713760766000B937A /* rftdMap.cpp */; };
@@ -737,6 +743,21 @@
 		887F2C15139C6DE800F534D5 /* SoraZSorter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraZSorter.cpp; sourceTree = "<group>"; };
 		887F2C19139C739800F534D5 /* CoreCmds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreCmds.h; sourceTree = "<group>"; };
 		887F2C1A139C739800F534D5 /* CoreCmds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreCmds.cpp; sourceTree = "<group>"; };
+		8884F4EF13A1E41100BEC5AB /* lua_tinker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_tinker.cpp; sourceTree = "<group>"; };
+		8884F4F013A1E41100BEC5AB /* lua_tinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_tinker.h; sourceTree = "<group>"; };
+		8884F4FA13A1E52C00BEC5AB /* TinkerExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinkerExport.h; sourceTree = "<group>"; };
+		8884F64713A1F60500BEC5AB /* SoraMutableSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMutableSprite.h; sourceTree = "<group>"; };
+		8884F65F13A1F8C200BEC5AB /* SoraMutableSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraMutableSprite.cpp; sourceTree = "<group>"; };
+		8884F69013A2597E00BEC5AB /* ActiveSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActiveSocket.cpp; sourceTree = "<group>"; };
+		8884F69113A2597E00BEC5AB /* ActiveSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveSocket.h; sourceTree = "<group>"; };
+		8884F69213A2597E00BEC5AB /* Host.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Host.h; sourceTree = "<group>"; };
+		8884F69313A2597E00BEC5AB /* PassiveSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PassiveSocket.cpp; sourceTree = "<group>"; };
+		8884F69413A2597E00BEC5AB /* PassiveSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassiveSocket.h; sourceTree = "<group>"; };
+		8884F69513A2597E00BEC5AB /* SimpleSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleSocket.cpp; sourceTree = "<group>"; };
+		8884F69613A2597E00BEC5AB /* SimpleSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleSocket.h; sourceTree = "<group>"; };
+		8884F69713A2597E00BEC5AB /* StatTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTimer.h; sourceTree = "<group>"; };
+		8884F79B13A2926D00BEC5AB /* SoraSpriteFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSpriteFont.h; sourceTree = "<group>"; };
+		8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSpriteFont.cpp; sourceTree = "<group>"; };
 		888982D013751453000B937A /* rftdBulletEffector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdBulletEffector.h; sourceTree = "<group>"; };
 		888982D313751478000B937A /* rftdCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdCommon.h; sourceTree = "<group>"; };
 		888982D413751661000B937A /* rftdObjColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdObjColor.h; sourceTree = "<group>"; };
@@ -1890,12 +1911,40 @@
 		887F2C10139C6DDA00F534D5 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				887F2C11139C6DDA00F534D5 /* SoraInputSimulator.cpp */,
 				887F2C12139C6DDA00F534D5 /* SoraInputSimulator.h */,
+				887F2C11139C6DDA00F534D5 /* SoraInputSimulator.cpp */,
 				887F2C14139C6DE800F534D5 /* SoraZSorter.h */,
 				887F2C15139C6DE800F534D5 /* SoraZSorter.cpp */,
+				8884F64713A1F60500BEC5AB /* SoraMutableSprite.h */,
+				8884F65F13A1F8C200BEC5AB /* SoraMutableSprite.cpp */,
+				8884F79B13A2926D00BEC5AB /* SoraSpriteFont.h */,
+				8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */,
 			);
 			path = helpers;
+			sourceTree = "<group>";
+		};
+		8884F68E13A2597E00BEC5AB /* SoraNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				8884F68F13A2597E00BEC5AB /* clsockets */,
+			);
+			name = SoraNetwork;
+			path = ../Plugins/SoraNetwork;
+			sourceTree = SOURCE_ROOT;
+		};
+		8884F68F13A2597E00BEC5AB /* clsockets */ = {
+			isa = PBXGroup;
+			children = (
+				8884F69013A2597E00BEC5AB /* ActiveSocket.cpp */,
+				8884F69113A2597E00BEC5AB /* ActiveSocket.h */,
+				8884F69213A2597E00BEC5AB /* Host.h */,
+				8884F69313A2597E00BEC5AB /* PassiveSocket.cpp */,
+				8884F69413A2597E00BEC5AB /* PassiveSocket.h */,
+				8884F69513A2597E00BEC5AB /* SimpleSocket.cpp */,
+				8884F69613A2597E00BEC5AB /* SimpleSocket.h */,
+				8884F69713A2597E00BEC5AB /* StatTimer.h */,
+			);
+			path = clsockets;
 			sourceTree = "<group>";
 		};
 		888982CF13751440000B937A /* ReflectionTD */ = {
@@ -2249,6 +2298,7 @@
 				88BD15021346ADCA0068AABA /* spriteWrapper.h */,
 				88E33EBD136BD554000B67C8 /* fontWrapper.h */,
 				88FE045C13709F1900A62EBB /* SoraLuaFunctionHelper.h */,
+				8884F4FA13A1E52C00BEC5AB /* TinkerExport.h */,
 			);
 			name = SoraLua;
 			path = ../Plugins/SoraLua;
@@ -2327,6 +2377,8 @@
 		88BD14B81346ADCA0068AABA /* src */ = {
 			isa = PBXGroup;
 			children = (
+				8884F4EF13A1E41100BEC5AB /* lua_tinker.cpp */,
+				8884F4F013A1E41100BEC5AB /* lua_tinker.h */,
 				88BD14B91346ADCA0068AABA /* lapi.c */,
 				88BD14BA1346ADCA0068AABA /* lapi.h */,
 				88BD14BB1346ADCA0068AABA /* lauxlib.c */,
@@ -2592,6 +2644,7 @@
 		88E33824136A79F2000B67C8 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				8884F68E13A2597E00BEC5AB /* SoraNetwork */,
 				887F22A81399D75A00F534D5 /* SoraPThread */,
 				887F22901399D72700F534D5 /* SoraHttpFile */,
 				88A20E8C138E00FC0019C5AA /* SoraPNGOps */,
@@ -3059,6 +3112,12 @@
 				887F2C13139C6DDA00F534D5 /* SoraInputSimulator.cpp in Sources */,
 				887F2C16139C6DE800F534D5 /* SoraZSorter.cpp in Sources */,
 				887F2C1B139C739800F534D5 /* CoreCmds.cpp in Sources */,
+				8884F4F113A1E41100BEC5AB /* lua_tinker.cpp in Sources */,
+				8884F66013A1F8C200BEC5AB /* SoraMutableSprite.cpp in Sources */,
+				8884F69813A2597E00BEC5AB /* ActiveSocket.cpp in Sources */,
+				8884F69913A2597E00BEC5AB /* PassiveSocket.cpp in Sources */,
+				8884F69A13A2597E00BEC5AB /* SimpleSocket.cpp in Sources */,
+				8884F79D13A2926D00BEC5AB /* SoraSpriteFont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

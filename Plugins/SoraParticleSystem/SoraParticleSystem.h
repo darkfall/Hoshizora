@@ -132,6 +132,11 @@ namespace sora {
 		void setZDepth(float32 z);
 		bool isZDepthEnabled() const;
 		float32 getZDepth() const;
+		
+		void setSprite(SoraSprite* spr);
+		SoraSprite* getSprite() const;
+		
+		void setTextureRect(float32 x, float32 y, float32 w, float32 h);
 
 		void emit(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		void emit(const SoraWString& script, SoraSprite* pSpr, float32 x=0.f, float32 y=0.f, float32 z=0.f);
@@ -207,10 +212,10 @@ namespace sora {
 
 	public:
 		SoraParticleManager();
-		SoraParticleManager(HSORASPRITE globalSprite);
+		SoraParticleManager(SoraSprite* globalSprite);
 		virtual ~SoraParticleManager();
 
-		void setGlobalSprite(HSORASPRITE globalSprite);
+		void setGlobalSprite(SoraSprite* globalSprite);
 
 		HSORAPARTICLE emit(const SoraParticleHeader& header, float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		HSORAPARTICLE emitS(const SoraWString& par, float32 x=0.f, float32 y=0.f, float32 z=0.f);

@@ -101,7 +101,7 @@ static inline int lrint (double const x) { // Round to nearest integer
 
 typedef	    int				int32;
 typedef		unsigned int	uint32;
-typedef		signed short	int16;
+typedef		short			int16;
 typedef		unsigned short	uint16;
 typedef		signed char		int8;
 typedef		unsigned char	uint8;
@@ -115,6 +115,19 @@ typedef unsigned long       ULONG, ulong;
 typedef unsigned short      WORD;
 typedef unsigned char       BYTE;
 typedef unsigned int		UINT;
+
+#if defined(WIN32)
+typedef unsigned long long int uint64;
+typedef long long int          int64;
+#elif (__WORDSIZE == 32)
+__extension__
+typedef long long int          int64;
+__extension__
+typedef unsigned long long int uint64;
+#elif (__WORDSIZE == 64)
+typedef uint64_t uint64;
+typedef int64_t  int64;
+#endif
 
 
 #endif // PLATFORM_32
@@ -268,12 +281,8 @@ static void msleep(uint32_t msec) {
 
 #ifdef OS_WIN32
 #define s_int64 __int64
-typedef __int64 int64;
-typedef unsigned __int64 uint64;
 #else
 #define s_int64 int64_t
-typedef int64_t int64;
-typedef uint64_t uint64;
 #endif
 
 #ifdef BIT_32_64_EXTEND

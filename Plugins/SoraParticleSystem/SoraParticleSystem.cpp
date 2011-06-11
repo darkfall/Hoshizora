@@ -99,6 +99,16 @@ namespace sora {
 
 	}
 	
+	void SoraParticleSystem::setTextureRect(float32 x, float32 y, float32 w, float32 h) {
+		pheader.texX = x;
+		pheader.texY = y;
+		pheader.texW = w;
+		pheader.texH = h;
+		
+		if(pSprite)
+			pSprite->setTextureRect(x, y, w, h);
+	}
+	
 	void SoraParticleSystem::init() {
 		pSprite->setCenter((float32)pSprite->getSpriteWidth()/2, (float32)pSprite->getSpriteHeight()/2);
 		pSprite->setBlendMode(pheader.blendMode);
@@ -120,6 +130,14 @@ namespace sora {
 		fToEmitTime = 0.f;
 		
 		fMaxDistance = MAX_DISTANCE;
+	}
+	
+	void SoraParticleSystem::setSprite(SoraSprite* spr) {
+		pSprite = spr;
+	}
+	
+	SoraSprite* SoraParticleSystem::getSprite() const {
+		return pSprite;
 	}
 
 	void SoraParticleSystem::killAll() {
@@ -384,7 +402,7 @@ namespace sora {
 		pGlobalSprite = 0;
 	}
 
-	SoraParticleManager::SoraParticleManager(HSORASPRITE globalSprite) {
+	SoraParticleManager::SoraParticleManager(SoraSprite* globalSprite) {
 		pGlobalSprite = (SoraSprite*)globalSprite;
 	}
 
@@ -392,8 +410,8 @@ namespace sora {
 		killAll();
 	}
 
-	void SoraParticleManager::setGlobalSprite(HSORASPRITE globalSprite) {
-		pGlobalSprite = (SoraSprite*)globalSprite;
+	void SoraParticleManager::setGlobalSprite(SoraSprite* globalSprite) {
+		pGlobalSprite = globalSprite;
 	}
 
 	void SoraParticleManager::killAll() {

@@ -18,6 +18,9 @@
 
 #include "SoraHttpFile/SoraHttpFile.h"
 
+#include "SoraNetwork/clsockets/ActiveSocket.h"
+#include "SoraNetwork/clsockets/PassiveSocket.h"
+
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
 	mainWindow();
@@ -52,13 +55,16 @@ private:
 	sora::SoraShader* shader;
 					
     sora::SoraFont* pFont;
-	sora::SoraParticleSystem* ps;
+	sora::SoraParticleManager* ps;
 	sora::SoraSprite* psSpr;
 	sora::SoraBaseCanvas* canvas1;
 	
 	sora::SoraLuaObject obj;
 	
 	sora::SoraHttpFile file;
+	
+	CActiveSocket asocket;
+	CPassiveSocket psocket;
 };
 
 #endif

@@ -17,7 +17,7 @@ namespace sora {
 		virtual ~SoraEvent() {};
         
     public:
-        SoraEvent(): pEventSource(NULL) {}
+        SoraEvent(): pEventSource(NULL), bConsumed(false) {}
 
         void setSource(SoraEventHandler* source) { pEventSource = source; }
         SoraEventHandler* getSource() const { return pEventSource; }

@@ -48,7 +48,6 @@ int main(int argc, char* argv[]) {
 //    sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
 	
 
-	peMainWindowLoader::Instance()->loadConfig();
 	sora->createWindow(new peMainWindow);
 	sora->start();
 		

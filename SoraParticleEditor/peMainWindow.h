@@ -24,7 +24,16 @@ public:
 				mWidth = config->getInt("public", "width", 1280);
 				mHeight = config->getInt("public", "height", 800);
 				defaultBg = config->getString("public", "defaultbg", "\0");
+				
+				texW = config->getInt("public", "texwidth", 32);
+				texH = config->getInt("public", "texheight", 32);
+				col = config->getInt("public", "col", 4);
+				row = config->getInt("public", "row", 4);
+				defaultps = config->getString("public", "particlesprite", "\0");
 			}
+			
+			delete config;
+			sora::SORA->freeResourceFile(data);
 		}
 		return true;
 	};
@@ -32,13 +41,26 @@ public:
 	int32 getWidth() const { return mWidth; }
 	int32 getHeight() const { return mHeight; }
 	
+	int32 getTexWidth() const { return texW; }
+	int32 getTexHeight() const { return texH; }
+	
+	int32 getCol() const { return col; }
+	int32 getRow() const { return row; }
+	
 	std::string getDefaultBg() const { return defaultBg; }
+	std::string getDefaultParticleSprite() const { return defaultps; }
 	
 private:
 	int32 mWidth;
 	int32 mHeight;
 	
+	int32 texW;
+	int32 texH;
+	int32 col;
+	int32 row;
+	
 	std::string defaultBg;
+	std::string defaultps;
 };
 
 class peMainWindow: public sora::SoraWindowInfoBase {
@@ -63,6 +85,8 @@ class peMainWindow: public sora::SoraWindowInfoBase {
 	}
 
 	void init() {
+		peMainWindowLoader::Instance()->loadConfig();
+
 		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 		sora::SORA->setSystemFont(L"cour.ttf", 16);
 

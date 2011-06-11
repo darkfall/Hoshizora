@@ -55,10 +55,10 @@ namespace sora {
         SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 width, float32 height);
 		virtual ~SoraSprite();
 
-        void render();
-        void render(float32 x, float32 y);
-        void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
-		void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
+        virtual void render();
+        virtual void render(float32 x, float32 y);
+        virtual void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
+		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
 
 		void setTexture(HSORATEXTURE tex);
 		
