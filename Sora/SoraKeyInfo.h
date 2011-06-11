@@ -281,7 +281,21 @@ namespace sora {
 			return (flags & SORA_INPUT_FLAG_ALT) ? true : false;
 		}
 		
+		bool isMouseLButtonDown() const {
+			return isKeyDown() && key == SORA_KEY_LBUTTON;
+		}
 		
+		bool isMouseRButtonDown() const {
+			return isKeyDown() && key == SORA_KEY_RBUTTON;
+		}
+		
+		bool isMouseLButtonUp() const {
+			return isKeyUp() && key == SORA_KEY_LBUTTON;
+		}
+		
+		bool isMouseRButtonUp() const {
+			return isKeyUp() && key == SORA_KEY_RBUTTON;
+		}
 	};  
 }
 

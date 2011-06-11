@@ -202,6 +202,29 @@ namespace sora {
 		if(!ev.isConsumed())
 			keyPoll.push_back(ev);
 	}
+	
+	void glfwMouseCallback(int key, int action) {
+		SoraKeyEvent ev;
+		if(action == GLFW_PRESS) ev.type = SORA_INPUT_KEYDOWN;
+		else ev.type = SORA_INPUT_KEYUP;
+		
+		switch(key) {
+			case GLFW_MOUSE_BUTTON_LEFT: ev.key = SORA_KEY_LBUTTON;
+			case GLFW_MOUSE_BUTTON_RIGHT: ev.key = SORA_KEY_RBUTTON;
+			case GLFW_MOUSE_BUTTON_MIDDLE: ev.key = SORA_KEY_MBUTTON;
+		}
+		
+		ev.chr = 0;
+		ev.wheel = glfwGetMouseWheel();
+		int32 x, y;
+		glfwGetMousePos(&x, &y);
+		ev.x = x;
+		ev.y = y;
+		
+		SORA_EVENT_MANAGER->publishInputEvent(&ev);
+		if(!ev.isConsumed())
+			keyPoll.push_back(ev);
+	}
 
 	void clearPoll() {
 		keyPoll.clear();

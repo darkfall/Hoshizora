@@ -118,8 +118,10 @@
 			887F26FE139B4F9C00F534D5 /* SoraConsole.cpp:300 */,
 			887F284B139B691E00F534D5 /* SoraConsole.cpp:280 */,
 			887F288F139B6D2200F534D5 /* SoraConsole.cpp:268 */,
-			887F2B66139BFFA000F534D5 /* SoraOGLInput.cpp:55 */,
+			887F2B66139BFFA000F534D5 /* SoraOGLInput.cpp:56 */,
 			887F2B6E139C002200F534D5 /* soraguiinput.cpp:100 */,
+			8884F88713A3D0BC00BEC5AB /* SoraOGLKeyPoll.cpp:182 */,
+			8884F89D13A3D16600BEC5AB /* SoraOGLKeyPoll.cpp:207 */,
 		);
 		codeSenseManager = 887022D31346AB4300AE8DD7 /* Code sense */;
 		executables = (
@@ -843,6 +845,91 @@
 			8884F85313A3B3B700BEC5AB /* PBXTextBookmark */ = 8884F85313A3B3B700BEC5AB /* PBXTextBookmark */;
 			8884F85413A3B3BA00BEC5AB /* PBXTextBookmark */ = 8884F85413A3B3BA00BEC5AB /* PBXTextBookmark */;
 			8884F85513A3B4ED00BEC5AB /* PBXTextBookmark */ = 8884F85513A3B4ED00BEC5AB /* PBXTextBookmark */;
+			8884F85D13A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F85D13A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F85E13A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F85E13A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F85F13A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F85F13A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86013A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86013A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86113A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86113A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86213A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86213A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86313A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86313A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86413A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86413A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86513A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86513A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86613A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86613A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86713A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86713A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86813A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86813A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86913A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86913A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86A13A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86A13A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86B13A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86B13A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F86C13A3BB2600BEC5AB /* PBXTextBookmark */ = 8884F86C13A3BB2600BEC5AB /* PBXTextBookmark */;
+			8884F87713A3BBFD00BEC5AB /* PBXTextBookmark */ = 8884F87713A3BBFD00BEC5AB /* PBXTextBookmark */;
+			8884F87813A3BBFD00BEC5AB /* PBXTextBookmark */ = 8884F87813A3BBFD00BEC5AB /* PBXTextBookmark */;
+			8884F87913A3BBFD00BEC5AB /* PBXTextBookmark */ = 8884F87913A3BBFD00BEC5AB /* PBXTextBookmark */;
+			8884F87A13A3BBFD00BEC5AB /* PBXTextBookmark */ = 8884F87A13A3BBFD00BEC5AB /* PBXTextBookmark */;
+			8884F87D13A3BC1C00BEC5AB /* PBXTextBookmark */ = 8884F87D13A3BC1C00BEC5AB /* PBXTextBookmark */;
+			8884F88413A3BC5C00BEC5AB /* PBXTextBookmark */ = 8884F88413A3BC5C00BEC5AB /* PBXTextBookmark */;
+			8884F88B13A3D0C100BEC5AB /* PBXTextBookmark */ = 8884F88B13A3D0C100BEC5AB /* PBXTextBookmark */;
+			8884F88C13A3D0C100BEC5AB /* PBXTextBookmark */ = 8884F88C13A3D0C100BEC5AB /* PBXTextBookmark */;
+			8884F88D13A3D0C100BEC5AB /* PBXTextBookmark */ = 8884F88D13A3D0C100BEC5AB /* PBXTextBookmark */;
+			8884F88E13A3D0C100BEC5AB /* PBXTextBookmark */ = 8884F88E13A3D0C100BEC5AB /* PBXTextBookmark */;
+			8884F88F13A3D0C100BEC5AB /* PBXTextBookmark */ = 8884F88F13A3D0C100BEC5AB /* PBXTextBookmark */;
+			8884F89313A3D0D600BEC5AB /* PBXTextBookmark */ = 8884F89313A3D0D600BEC5AB /* PBXTextBookmark */;
+			8884F89413A3D0D600BEC5AB /* PBXTextBookmark */ = 8884F89413A3D0D600BEC5AB /* PBXTextBookmark */;
+			8884F89513A3D0D600BEC5AB /* PBXTextBookmark */ = 8884F89513A3D0D600BEC5AB /* PBXTextBookmark */;
+			8884F89813A3D15F00BEC5AB /* PBXTextBookmark */ = 8884F89813A3D15F00BEC5AB /* PBXTextBookmark */;
+			8884F89913A3D15F00BEC5AB /* XCBuildMessageTextBookmark */ = 8884F89913A3D15F00BEC5AB /* XCBuildMessageTextBookmark */;
+			8884F89A13A3D15F00BEC5AB /* PBXTextBookmark */ = 8884F89A13A3D15F00BEC5AB /* PBXTextBookmark */;
+			8884F8A113A3D16800BEC5AB /* PBXTextBookmark */ = 8884F8A113A3D16800BEC5AB /* PBXTextBookmark */;
+			8884F8A213A3D16800BEC5AB /* PBXTextBookmark */ = 8884F8A213A3D16800BEC5AB /* PBXTextBookmark */;
+			8884F8A313A3D16800BEC5AB /* PBXTextBookmark */ = 8884F8A313A3D16800BEC5AB /* PBXTextBookmark */;
+			8884F8A413A3D16800BEC5AB /* PBXTextBookmark */ = 8884F8A413A3D16800BEC5AB /* PBXTextBookmark */;
+			8884F8A513A3D16800BEC5AB /* PBXTextBookmark */ = 8884F8A513A3D16800BEC5AB /* PBXTextBookmark */;
+			8884F8AB13A3D1F300BEC5AB /* PBXTextBookmark */ = 8884F8AB13A3D1F300BEC5AB /* PBXTextBookmark */;
+			8884F8AC13A3D1F300BEC5AB /* PBXTextBookmark */ = 8884F8AC13A3D1F300BEC5AB /* PBXTextBookmark */;
+			8884F8AD13A3D1F300BEC5AB /* PBXTextBookmark */ = 8884F8AD13A3D1F300BEC5AB /* PBXTextBookmark */;
+			8884F8AE13A3D1F300BEC5AB /* PBXTextBookmark */ = 8884F8AE13A3D1F300BEC5AB /* PBXTextBookmark */;
+			8884F8AF13A3D1F300BEC5AB /* PBXTextBookmark */ = 8884F8AF13A3D1F300BEC5AB /* PBXTextBookmark */;
+			8884F8B213A3D23300BEC5AB /* PBXTextBookmark */ = 8884F8B213A3D23300BEC5AB /* PBXTextBookmark */;
+			8884F8BB13A3D4A300BEC5AB /* PBXTextBookmark */ = 8884F8BB13A3D4A300BEC5AB /* PBXTextBookmark */;
+			8884F8BC13A3D4A300BEC5AB /* PBXTextBookmark */ = 8884F8BC13A3D4A300BEC5AB /* PBXTextBookmark */;
+			8884F8BD13A3D4A300BEC5AB /* PBXTextBookmark */ = 8884F8BD13A3D4A300BEC5AB /* PBXTextBookmark */;
+			8884F8BE13A3D4A300BEC5AB /* PBXTextBookmark */ = 8884F8BE13A3D4A300BEC5AB /* PBXTextBookmark */;
+			8884F8BF13A3D4A300BEC5AB /* PBXTextBookmark */ = 8884F8BF13A3D4A300BEC5AB /* PBXTextBookmark */;
+			8884F8C013A3D4A300BEC5AB /* PBXTextBookmark */ = 8884F8C013A3D4A300BEC5AB /* PBXTextBookmark */;
+			8884F8C113A3D4A300BEC5AB /* PBXTextBookmark */ = 8884F8C113A3D4A300BEC5AB /* PBXTextBookmark */;
+			8884F8C913A3D61E00BEC5AB /* PBXTextBookmark */ = 8884F8C913A3D61E00BEC5AB /* PBXTextBookmark */;
+			8884F8CA13A3D61E00BEC5AB /* PBXTextBookmark */ = 8884F8CA13A3D61E00BEC5AB /* PBXTextBookmark */;
+			8884F8CB13A3D61E00BEC5AB /* PBXTextBookmark */ = 8884F8CB13A3D61E00BEC5AB /* PBXTextBookmark */;
+			8884F8CC13A3D61E00BEC5AB /* PBXTextBookmark */ = 8884F8CC13A3D61E00BEC5AB /* PBXTextBookmark */;
+			8884F8D013A3D62C00BEC5AB /* PBXTextBookmark */ = 8884F8D013A3D62C00BEC5AB /* PBXTextBookmark */;
+			8884F8D413A3D65D00BEC5AB /* PBXTextBookmark */ = 8884F8D413A3D65D00BEC5AB /* PBXTextBookmark */;
+			8884F8D513A3D65D00BEC5AB /* PBXTextBookmark */ = 8884F8D513A3D65D00BEC5AB /* PBXTextBookmark */;
+			8884F8D613A3D65D00BEC5AB /* PBXTextBookmark */ = 8884F8D613A3D65D00BEC5AB /* PBXTextBookmark */;
+			8884F8D713A3D65D00BEC5AB /* PBXTextBookmark */ = 8884F8D713A3D65D00BEC5AB /* PBXTextBookmark */;
+			8884F8DD13A3D6A100BEC5AB /* PBXTextBookmark */ = 8884F8DD13A3D6A100BEC5AB /* PBXTextBookmark */;
+			8884F8E113A3D6D900BEC5AB /* PBXTextBookmark */ = 8884F8E113A3D6D900BEC5AB /* PBXTextBookmark */;
+			8884F8E713A3D74300BEC5AB /* PBXTextBookmark */ = 8884F8E713A3D74300BEC5AB /* PBXTextBookmark */;
+			8884F8F713A3D8A300BEC5AB /* PBXTextBookmark */ = 8884F8F713A3D8A300BEC5AB /* PBXTextBookmark */;
+			8884F8F813A3D8A300BEC5AB /* PBXTextBookmark */ = 8884F8F813A3D8A300BEC5AB /* PBXTextBookmark */;
+			8884F8F913A3D8A300BEC5AB /* PBXTextBookmark */ = 8884F8F913A3D8A300BEC5AB /* PBXTextBookmark */;
+			8884F8FA13A3D8A300BEC5AB /* PBXTextBookmark */ = 8884F8FA13A3D8A300BEC5AB /* PBXTextBookmark */;
+			8884F8FE13A3D8B900BEC5AB /* PBXTextBookmark */ = 8884F8FE13A3D8B900BEC5AB /* PBXTextBookmark */;
+			8884F90813A3DAE000BEC5AB /* PBXTextBookmark */ = 8884F90813A3DAE000BEC5AB /* PBXTextBookmark */;
+			8884F90913A3DAE000BEC5AB /* PBXTextBookmark */ = 8884F90913A3DAE000BEC5AB /* PBXTextBookmark */;
+			8884F90A13A3DAE000BEC5AB /* PBXTextBookmark */ = 8884F90A13A3DAE000BEC5AB /* PBXTextBookmark */;
+			8884F90B13A3DAE000BEC5AB /* PBXTextBookmark */ = 8884F90B13A3DAE000BEC5AB /* PBXTextBookmark */;
+			8884F90C13A3DAE000BEC5AB /* PBXTextBookmark */ = 8884F90C13A3DAE000BEC5AB /* PBXTextBookmark */;
+			8884F90D13A3DAE000BEC5AB /* PBXTextBookmark */ = 8884F90D13A3DAE000BEC5AB /* PBXTextBookmark */;
+			8884F90E13A3DAE000BEC5AB /* PBXTextBookmark */ = 8884F90E13A3DAE000BEC5AB /* PBXTextBookmark */;
+			8884F90F13A3DAE000BEC5AB /* PBXTextBookmark */ = 8884F90F13A3DAE000BEC5AB /* PBXTextBookmark */;
+			8884F91313A3DAF000BEC5AB /* PBXTextBookmark */ = 8884F91313A3DAF000BEC5AB /* PBXTextBookmark */;
+			8884F91713A3DB0700BEC5AB /* PBXTextBookmark */ = 8884F91713A3DB0700BEC5AB /* PBXTextBookmark */;
+			8884F91A13A3DB1400BEC5AB /* PBXTextBookmark */ = 8884F91A13A3DB1400BEC5AB /* PBXTextBookmark */;
+			8884F91F13A3DD4E00BEC5AB /* PBXTextBookmark */ = 8884F91F13A3DD4E00BEC5AB /* PBXTextBookmark */;
+			8884F92013A3DD4E00BEC5AB /* PBXTextBookmark */ = 8884F92013A3DD4E00BEC5AB /* PBXTextBookmark */;
+			8884F92113A3DD4E00BEC5AB /* PBXTextBookmark */ = 8884F92113A3DD4E00BEC5AB /* PBXTextBookmark */;
+			8884F92613A3DDB100BEC5AB /* PBXTextBookmark */ = 8884F92613A3DDB100BEC5AB /* PBXTextBookmark */;
+			8884F92713A3DDB100BEC5AB /* PBXTextBookmark */ = 8884F92713A3DDB100BEC5AB /* PBXTextBookmark */;
+			8884F92813A3DDB100BEC5AB /* PBXTextBookmark */ = 8884F92813A3DDB100BEC5AB /* PBXTextBookmark */;
 			8889817C137500A2000B937A = 8889817C137500A2000B937A /* PBXTextBookmark */;
 			888983B013752312000B937A = 888983B013752312000B937A /* PBXTextBookmark */;
 			888983B113752312000B937A = 888983B113752312000B937A /* PBXTextBookmark */;
@@ -1130,7 +1217,7 @@
 		fRef = 886E0FF213681F5800A77847 /* SoraOGLKeyPoll.h */;
 		name = "SoraOGLKeyPoll.h: 20";
 		rLen = 0;
-		rLoc = 320;
+		rLoc = 366;
 		rType = 0;
 		vrLen = 474;
 		vrLoc = 0;
@@ -1688,16 +1775,16 @@
 	};
 	883900EE131A096700CC101A /* editorWindow.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 13132}}";
-			sepNavSelRange = "{27337, 0}";
-			sepNavVisRange = "{26057, 1691}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 13272}}";
+			sepNavSelRange = "{28735, 0}";
+			sepNavVisRange = "{28338, 1305}";
 		};
 	};
 	883900EF131A096700CC101A /* editorWindow.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 693}}";
-			sepNavSelRange = "{475, 0}";
-			sepNavVisRange = "{0, 715}";
+			sepNavSelRange = "{749, 0}";
+			sepNavVisRange = "{0, 850}";
 		};
 	};
 	8839FFBE1319FE4700CC101A /* guichansetup.h */ = {
@@ -1804,6 +1891,11 @@
 		name = guichansetup.h;
 		path = ../Plugins/SoraGUIChan/guichansetup.h;
 		sourceTree = "<group>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 3066}}";
+			sepNavSelRange = "{5684, 0}";
+			sepNavVisRange = "{5079, 1209}";
+		};
 	};
 	88452D77138FB0430045D130 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -2418,7 +2510,7 @@
 		fRef = 88B09C3012B8AE6600777409 /* widget.cpp */;
 		name = "widget.cpp: 771";
 		rLen = 0;
-		rLoc = 18464;
+		rLoc = 18513;
 		rType = 0;
 		vrLen = 1180;
 		vrLoc = 15852;
@@ -2491,7 +2583,7 @@
 		ignoreCount = 0;
 		lineNumber = 83;
 		location = Sora;
-		modificationTime = 328990756.634669;
+		modificationTime = 329503080.761818;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2509,7 +2601,7 @@
 		ignoreCount = 0;
 		lineNumber = 166;
 		location = Sora;
-		modificationTime = 328990756.6348079;
+		modificationTime = 329503080.761942;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2525,9 +2617,10 @@
 	};
 	884530971390F75B0045D130 /* peMainWindow.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1918}}";
-			sepNavSelRange = "{1044, 14}";
-			sepNavVisRange = "{432, 1314}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1904}}";
+			sepNavSelRange = "{2184, 0}";
+			sepNavVisRange = "{2055, 1503}";
+			sepNavWindowFrame = "{{61, 85}, {840, 746}}";
 		};
 	};
 	884530BC1390FDF70045D130 /* PBXTextBookmark */ = {
@@ -2574,7 +2667,7 @@
 		ignoreCount = 0;
 		lineNumber = 245;
 		location = Sora;
-		modificationTime = 328990760.914838;
+		modificationTime = 329503082.226661;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -2706,7 +2799,7 @@
 		ignoreCount = 0;
 		lineNumber = 285;
 		location = Sora;
-		modificationTime = 328990756.63032;
+		modificationTime = 329503080.752607;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2724,7 +2817,7 @@
 		ignoreCount = 0;
 		lineNumber = 265;
 		location = Sora;
-		modificationTime = 328990756.630338;
+		modificationTime = 329503080.75265;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2742,7 +2835,7 @@
 		ignoreCount = 0;
 		lineNumber = 226;
 		location = Sora;
-		modificationTime = 328990756.630361;
+		modificationTime = 329503080.752673;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2760,7 +2853,7 @@
 		ignoreCount = 0;
 		lineNumber = 219;
 		location = Sora;
-		modificationTime = 328990756.630371;
+		modificationTime = 329503080.752747;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2778,7 +2871,7 @@
 		ignoreCount = 0;
 		lineNumber = 81;
 		location = Sora;
-		modificationTime = 328990756.6304362;
+		modificationTime = 329503080.752845;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2872,9 +2965,9 @@
 	};
 	8859BF9E12B4809D00F3304A /* SoraFreetypeFont.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 5026}}";
-			sepNavSelRange = "{5480, 0}";
-			sepNavVisRange = "{4609, 1432}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 5124}}";
+			sepNavSelRange = "{6630, 0}";
+			sepNavVisRange = "{325, 1157}";
 			sepNavWindowFrame = "{{9, 4}, {762, 874}}";
 		};
 	};
@@ -2882,7 +2975,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 1918}}";
 			sepNavSelRange = "{2114, 0}";
-			sepNavVisRange = "{1450, 1304}";
+			sepNavVisRange = "{1081, 1321}";
 		};
 	};
 	8859BFA012B4809D00F3304A /* SoraFTFontManager.cpp */ = {
@@ -3318,7 +3411,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 383;
-		modificationTime = 328990756.634366;
+		modificationTime = 329503080.760884;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3336,7 +3429,7 @@
 		ignoreCount = 0;
 		lineNumber = 383;
 		location = Sora;
-		modificationTime = 328990756.634391;
+		modificationTime = 329503080.761121;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3353,7 +3446,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 180;
-		modificationTime = 328990756.6344889;
+		modificationTime = 329503080.761232;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3371,7 +3464,7 @@
 		ignoreCount = 0;
 		lineNumber = 180;
 		location = Sora;
-		modificationTime = 328990756.634571;
+		modificationTime = 329503080.761386;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3389,7 +3482,7 @@
 		ignoreCount = 0;
 		lineNumber = 179;
 		location = Sora;
-		modificationTime = 328990756.634615;
+		modificationTime = 329503080.761628;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3406,7 +3499,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 31;
-		modificationTime = 328990756.634649;
+		modificationTime = 329503080.761705;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3626,7 +3719,7 @@
 		ignoreCount = 0;
 		lineNumber = 166;
 		location = Sora;
-		modificationTime = 328990756.630675;
+		modificationTime = 329503080.753597;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3644,7 +3737,7 @@
 		ignoreCount = 0;
 		lineNumber = 36;
 		location = Sora;
-		modificationTime = 328990756.6307451;
+		modificationTime = 329503080.753862;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3688,37 +3781,37 @@
 	};
 	886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1526}}";
-			sepNavSelRange = "{1576, 18}";
-			sepNavVisRange = "{847, 1350}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1568}}";
+			sepNavSelRange = "{337, 0}";
+			sepNavVisRange = "{1315, 1124}";
 		};
 	};
 	886E0FF013681F5800A77847 /* SoraOGLInput.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {807, 716}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 693}}";
 			sepNavSelRange = "{830, 0}";
 			sepNavVisRange = "{0, 905}";
 		};
 	};
 	886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 3178}}";
-			sepNavSelRange = "{8101, 0}";
-			sepNavVisRange = "{6685, 1662}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 3528}}";
+			sepNavSelRange = "{8297, 0}";
+			sepNavVisRange = "{7175, 1580}";
 		};
 	};
 	886E0FF213681F5800A77847 /* SoraOGLKeyPoll.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 741}}";
-			sepNavSelRange = "{320, 0}";
-			sepNavVisRange = "{0, 474}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 693}}";
+			sepNavSelRange = "{319, 46}";
+			sepNavVisRange = "{0, 520}";
 		};
 	};
 	886E0FF313681F5800A77847 /* SoraOGLRenderer.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 12376}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 12390}}";
 			sepNavSelRange = "{2344, 0}";
-			sepNavVisRange = "{3170, 1955}";
+			sepNavVisRange = "{3170, 1887}";
 			sepNavWindowFrame = "{{38, 106}, {840, 746}}";
 		};
 	};
@@ -3763,7 +3856,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 81;
-		modificationTime = 328990756.6308299;
+		modificationTime = 329503080.753966;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3887,7 +3980,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 152;
-		modificationTime = 328990756.630457;
+		modificationTime = 329503080.752956;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -4156,7 +4249,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 227;
-		modificationTime = 328990756.630477;
+		modificationTime = 329503080.752999;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -4314,7 +4407,7 @@
 		ignoreCount = 0;
 		lineNumber = 51;
 		location = Sora;
-		modificationTime = 328990756.630507;
+		modificationTime = 329503080.753066;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -5020,7 +5113,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 300;
-		modificationTime = 328990756.6349031;
+		modificationTime = 329503080.762159;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -5098,7 +5191,7 @@
 		ignoreCount = 0;
 		lineNumber = 280;
 		location = Sora;
-		modificationTime = 328990756.634953;
+		modificationTime = 329503080.762186;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -5116,7 +5209,7 @@
 		ignoreCount = 0;
 		lineNumber = 268;
 		location = Sora;
-		modificationTime = 328990760.9737059;
+		modificationTime = 329503082.280851;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -5297,7 +5390,7 @@
 		vrLen = 905;
 		vrLoc = 0;
 	};
-	887F2B66139BFFA000F534D5 /* SoraOGLInput.cpp:55 */ = {
+	887F2B66139BFFA000F534D5 /* SoraOGLInput.cpp:56 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -5307,11 +5400,11 @@
 		delayBeforeContinue = 0;
 		fileReference = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
 		functionName = "SoraOGLInput::keyDown(int32 key)";
-		hitCount = 1;
+		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 55;
+		lineNumber = 56;
 		location = Sora;
-		modificationTime = 328990772.526055;
+		modificationTime = 329503080.762348;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -5339,9 +5432,9 @@
 		ignoreCount = 0;
 		lineNumber = 100;
 		location = Sora;
-		modificationTime = 328990761.105449;
+		modificationTime = 329503080.762655;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 2;
 	};
 	887F2C11139C6DDA00F534D5 /* SoraInputSimulator.cpp */ = {
 		uiCtxt = {
@@ -7504,7 +7597,7 @@
 		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
 		name = "peMainWindow.h: 79";
 		rLen = 0;
-		rLoc = 2692;
+		rLoc = 2749;
 		rType = 0;
 		vrLen = 1564;
 		vrLoc = 1265;
@@ -7514,7 +7607,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 891";
 		rLen = 0;
-		rLoc = 35389;
+		rLoc = 36174;
 		rType = 0;
 		vrLen = 1866;
 		vrLoc = 19714;
@@ -7684,7 +7777,7 @@
 		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
 		name = "SoraOGLInput.cpp: 68";
 		rLen = 18;
-		rLoc = 1576;
+		rLoc = 1625;
 		rType = 0;
 		vrLen = 1350;
 		vrLoc = 847;
@@ -8332,9 +8425,9 @@
 	};
 	8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 2240}}";
-			sepNavSelRange = "{694, 0}";
-			sepNavVisRange = "{0, 1178}";
+			sepNavIntBoundsRect = "{{0, 0}, {717, 2170}}";
+			sepNavSelRange = "{3356, 0}";
+			sepNavVisRange = "{3285, 263}";
 		};
 	};
 	8884F7A213A3696100BEC5AB /* PBXTextBookmark */ = {
@@ -8550,7 +8643,7 @@
 		fRef = 883900EF131A096700CC101A /* editorWindow.h */;
 		name = "editorWindow.h: 17";
 		rLen = 0;
-		rLoc = 475;
+		rLoc = 527;
 		rType = 0;
 		vrLen = 715;
 		vrLoc = 0;
@@ -8570,7 +8663,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 491";
 		rLen = 0;
-		rLoc = 20778;
+		rLoc = 20802;
 		rType = 0;
 		vrLen = 1912;
 		vrLoc = 19616;
@@ -8780,7 +8873,7 @@
 		fRef = 883900EF131A096700CC101A /* editorWindow.h */;
 		name = "editorWindow.h: 17";
 		rLen = 0;
-		rLoc = 475;
+		rLoc = 527;
 		rType = 0;
 		vrLen = 715;
 		vrLoc = 0;
@@ -8840,7 +8933,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 575";
 		rLen = 14;
-		rLoc = 23021;
+		rLoc = 23045;
 		rType = 0;
 		vrLen = 1218;
 		vrLoc = 22126;
@@ -8850,7 +8943,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 575";
 		rLen = 0;
-		rLoc = 23099;
+		rLoc = 23123;
 		rType = 0;
 		vrLen = 1196;
 		vrLoc = 22170;
@@ -8910,7 +9003,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 856";
 		rLen = 13;
-		rLoc = 34153;
+		rLoc = 34873;
 		rType = 0;
 		vrLen = 2353;
 		vrLoc = 32348;
@@ -8920,7 +9013,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 856";
 		rLen = 0;
-		rLoc = 34423;
+		rLoc = 35143;
 		rType = 0;
 		vrLen = 2518;
 		vrLoc = 32277;
@@ -8960,7 +9053,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 856";
 		rLen = 0;
-		rLoc = 34264;
+		rLoc = 34984;
 		rType = 0;
 		vrLen = 2404;
 		vrLoc = 32421;
@@ -9019,7 +9112,7 @@
 		isa = PBXTextBookmark;
 		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
 		name = "peMainWindow.h: 85";
-		rLen = 48;
+		rLen = 105;
 		rLoc = 2090;
 		rType = 0;
 		vrLen = 1321;
@@ -9030,7 +9123,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 857";
 		rLen = 0;
-		rLoc = 34302;
+		rLoc = 35022;
 		rType = 0;
 		vrLen = 2420;
 		vrLoc = 32421;
@@ -9040,7 +9133,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 633";
 		rLen = 0;
-		rLoc = 24814;
+		rLoc = 24973;
 		rType = 0;
 		vrLen = 1942;
 		vrLoc = 23654;
@@ -9070,7 +9163,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 633";
 		rLen = 0;
-		rLoc = 24951;
+		rLoc = 25110;
 		rType = 0;
 		vrLen = 1912;
 		vrLoc = 23685;
@@ -9100,7 +9193,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 861";
 		rLen = 0;
-		rLoc = 34418;
+		rLoc = 35138;
 		rType = 0;
 		vrLen = 1773;
 		vrLoc = 33545;
@@ -9130,7 +9223,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 631";
 		rLen = 0;
-		rLoc = 24791;
+		rLoc = 24950;
 		rType = 0;
 		vrLen = 1861;
 		vrLoc = 23869;
@@ -9160,7 +9253,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 631";
 		rLen = 0;
-		rLoc = 24791;
+		rLoc = 24950;
 		rType = 0;
 		vrLen = 1926;
 		vrLoc = 23869;
@@ -9169,7 +9262,7 @@
 		isa = PBXTextBookmark;
 		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
 		name = "peMainWindow.h: 85";
-		rLen = 48;
+		rLen = 105;
 		rLoc = 2090;
 		rType = 0;
 		vrLen = 1321;
@@ -9220,7 +9313,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 631";
 		rLen = 0;
-		rLoc = 24791;
+		rLoc = 24950;
 		rType = 0;
 		vrLen = 1926;
 		vrLoc = 23869;
@@ -9230,7 +9323,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 699";
 		rLen = 0;
-		rLoc = 27337;
+		rLoc = 27496;
 		rType = 0;
 		vrLen = 1661;
 		vrLoc = 26057;
@@ -9280,7 +9373,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 699";
 		rLen = 0;
-		rLoc = 27337;
+		rLoc = 27496;
 		rType = 0;
 		vrLen = 1691;
 		vrLoc = 26057;
@@ -9525,6 +9618,888 @@
 		vrLen = 1178;
 		vrLoc = 0;
 	};
+	8884F85D13A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */;
+		name = "SoraSpriteFont.cpp: 28";
+		rLen = 0;
+		rLoc = 694;
+		rType = 0;
+		vrLen = 1178;
+		vrLoc = 0;
+	};
+	8884F85E13A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8859BF9E12B4809D00F3304A /* SoraFreetypeFont.cpp */;
+		name = "SoraFreetypeFont.cpp: 280";
+		rLen = 0;
+		rLoc = 6630;
+		rType = 0;
+		vrLen = 1235;
+		vrLoc = 5868;
+	};
+	8884F85F13A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88CE58D412C1B41C00C551F0 /* SoraParticleSystem.h */;
+		name = "SoraParticleSystem.h: 139";
+		rLen = 64;
+		rLoc = 2746;
+		rType = 0;
+		vrLen = 1507;
+		vrLoc = 1956;
+	};
+	8884F86013A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 45";
+		rLen = 0;
+		rLoc = 1337;
+		rType = 0;
+		vrLen = 1333;
+		vrLoc = 411;
+	};
+	8884F86113A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EF131A096700CC101A /* editorWindow.h */;
+		name = "editorWindow.h: 29";
+		rLen = 43;
+		rLoc = 725;
+		rType = 0;
+		vrLen = 786;
+		vrLoc = 0;
+	};
+	8884F86213A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF313681F5800A77847 /* SoraOGLRenderer.cpp */;
+		name = "SoraOGLRenderer.cpp: 97";
+		rLen = 0;
+		rLoc = 2344;
+		rType = 0;
+		vrLen = 1887;
+		vrLoc = 3170;
+	};
+	8884F86313A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88DCE7F813667EC1005FBBE0 /* glfw.h */;
+		name = "glfw.h: 456";
+		rLen = 26;
+		rLoc = 17203;
+		rType = 0;
+		vrLen = 2673;
+		vrLoc = 15978;
+	};
+	8884F86413A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
+		name = "SoraOGLInput.cpp: 22";
+		rLen = 0;
+		rLoc = 383;
+		rType = 0;
+		vrLen = 1013;
+		vrLoc = 140;
+	};
+	8884F86513A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4A12A09A66007D6865 /* SoraSprite.cpp */;
+		name = "SoraSprite.cpp: 104";
+		rLen = 0;
+		rLoc = 2787;
+		rType = 0;
+		vrLen = 1276;
+		vrLoc = 2244;
+	};
+	8884F86613A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D3C12A09A66007D6865 /* SoraMath.h */;
+		name = "SoraMath.h: 92";
+		rLen = 81;
+		rLoc = 2881;
+		rType = 0;
+		vrLen = 1889;
+		vrLoc = 1241;
+	};
+	8884F86713A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		name = "SoraOGLKeyPoll.cpp: 187";
+		rLen = 0;
+		rLoc = 7337;
+		rType = 0;
+		vrLen = 1712;
+		vrLoc = 6586;
+	};
+	8884F86813A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF213681F5800A77847 /* SoraOGLKeyPoll.h */;
+		name = "SoraOGLKeyPoll.h: 19";
+		rLen = 0;
+		rLoc = 365;
+		rType = 0;
+		vrLen = 474;
+		vrLoc = 0;
+	};
+	8884F86913A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF013681F5800A77847 /* SoraOGLInput.h */;
+		name = "SoraOGLInput.h: 39";
+		rLen = 0;
+		rLoc = 830;
+		rType = 0;
+		vrLen = 905;
+		vrLoc = 0;
+	};
+	8884F86A13A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D3B12A09A66007D6865 /* SoraKeyInfo.h */;
+		name = "SoraKeyInfo.h: 297";
+		rLen = 0;
+		rLoc = 6876;
+		rType = 0;
+		vrLen = 1012;
+		vrLoc = 5910;
+	};
+	8884F86B13A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 895";
+		rLen = 0;
+		rLoc = 36154;
+		rType = 0;
+		vrLen = 1480;
+		vrLoc = 33989;
+	};
+	8884F86C13A3BB2600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 745";
+		rLen = 0;
+		rLoc = 28968;
+		rType = 0;
+		vrLen = 1410;
+		vrLoc = 27772;
+	};
+	8884F87713A3BBFD00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88CE58D412C1B41C00C551F0 /* SoraParticleSystem.h */;
+		name = "SoraParticleSystem.h: 174";
+		rLen = 31;
+		rLoc = 3833;
+		rType = 0;
+		vrLen = 986;
+		vrLoc = 461;
+	};
+	8884F87813A3BBFD00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EF131A096700CC101A /* editorWindow.h */;
+		name = "editorWindow.h: 32";
+		rLen = 0;
+		rLoc = 749;
+		rType = 0;
+		vrLen = 850;
+		vrLoc = 0;
+	};
+	8884F87913A3BBFD00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 742";
+		rLen = 0;
+		rLoc = 28902;
+		rType = 0;
+		vrLen = 1525;
+		vrLoc = 34348;
+	};
+	8884F87A13A3BBFD00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 903";
+		rLen = 0;
+		rLoc = 36132;
+		rType = 0;
+		vrLen = 1510;
+		vrLoc = 34371;
+	};
+	8884F87D13A3BC1C00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 905";
+		rLen = 0;
+		rLoc = 36154;
+		rType = 0;
+		vrLen = 1511;
+		vrLoc = 34371;
+	};
+	8884F88413A3BC5C00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 709";
+		rLen = 0;
+		rLoc = 27734;
+		rType = 0;
+		vrLen = 1778;
+		vrLoc = 26445;
+	};
+	8884F88713A3D0BC00BEC5AB /* SoraOGLKeyPoll.cpp:182 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		functionName = "glfwKeyCallback(int key, int action)";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 182;
+		location = Sora;
+		modificationTime = 329503080.763099;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	8884F88B13A3D0C100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 906";
+		rLen = 0;
+		rLoc = 36152;
+		rType = 0;
+		vrLen = 1289;
+		vrLoc = 34768;
+	};
+	8884F88C13A3D0C100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF213681F5800A77847 /* SoraOGLKeyPoll.h */;
+		name = "SoraOGLKeyPoll.h: 19";
+		rLen = 0;
+		rLoc = 365;
+		rType = 0;
+		vrLen = 474;
+		vrLoc = 0;
+	};
+	8884F88D13A3D0C100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
+		name = "SoraOGLInput.cpp: 22";
+		rLen = 0;
+		rLoc = 383;
+		rType = 0;
+		vrLen = 1366;
+		vrLoc = 590;
+	};
+	8884F88E13A3D0C100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		name = "SoraOGLKeyPoll.cpp: 199";
+		rLen = 0;
+		rLoc = 8027;
+		rType = 0;
+		vrLen = 1457;
+		vrLoc = 6890;
+	};
+	8884F88F13A3D0C100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		name = "SoraOGLKeyPoll.cpp: 199";
+		rLen = 0;
+		rLoc = 8027;
+		rType = 0;
+		vrLen = 1457;
+		vrLoc = 6890;
+	};
+	8884F89313A3D0D600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		name = "SoraOGLKeyPoll.cpp: 199";
+		rLen = 0;
+		rLoc = 8027;
+		rType = 0;
+		vrLen = 1457;
+		vrLoc = 6890;
+	};
+	8884F89413A3D0D600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C6112B8AE6600777409 /* soraguiinput.cpp */;
+		rLen = 0;
+		rLoc = 99;
+		rType = 1;
+	};
+	8884F89513A3D0D600BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C6112B8AE6600777409 /* soraguiinput.cpp */;
+		name = "soraguiinput.cpp: 100";
+		rLen = 0;
+		rLoc = 1994;
+		rType = 0;
+		vrLen = 1587;
+		vrLoc = 1485;
+	};
+	8884F89813A3D15F00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */;
+		name = "SoraSpriteFont.cpp: 148";
+		rLen = 0;
+		rLoc = 3356;
+		rType = 0;
+		vrLen = 263;
+		vrLoc = 3285;
+	};
+	8884F89913A3D15F00BEC5AB /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'glfwMouseCallback' was not declared in this scope";
+		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 21;
+		rType = 1;
+	};
+	8884F89A13A3D15F00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
+		name = "SoraOGLInput.cpp: 22";
+		rLen = 0;
+		rLoc = 383;
+		rType = 0;
+		vrLen = 247;
+		vrLoc = 246;
+	};
+	8884F89D13A3D16600BEC5AB /* SoraOGLKeyPoll.cpp:207 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		functionName = "glfwMouseCallback(int key, int action)";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 207;
+		location = Sora;
+		modificationTime = 329503139.427214;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	8884F8A113A3D16800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C6112B8AE6600777409 /* soraguiinput.cpp */;
+		name = "soraguiinput.cpp: 100";
+		rLen = 0;
+		rLoc = 1994;
+		rType = 0;
+		vrLen = 1649;
+		vrLoc = 1485;
+	};
+	8884F8A213A3D16800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF213681F5800A77847 /* SoraOGLKeyPoll.h */;
+		name = "SoraOGLKeyPoll.h: 19";
+		rLen = 46;
+		rLoc = 319;
+		rType = 0;
+		vrLen = 520;
+		vrLoc = 0;
+	};
+	8884F8A313A3D16800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
+		name = "SoraOGLInput.cpp: 22";
+		rLen = 0;
+		rLoc = 337;
+		rType = 0;
+		vrLen = 1124;
+		vrLoc = 1315;
+	};
+	8884F8A413A3D16800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		name = "SoraOGLKeyPoll.cpp: 206";
+		rLen = 17;
+		rLoc = 8139;
+		rType = 0;
+		vrLen = 998;
+		vrLoc = 7929;
+	};
+	8884F8A513A3D16800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		name = "SoraOGLKeyPoll.cpp: 206";
+		rLen = 17;
+		rLoc = 8139;
+		rType = 0;
+		vrLen = 1589;
+		vrLoc = 7021;
+	};
+	8884F8AB13A3D1F300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88DCE7F813667EC1005FBBE0 /* glfw.h */;
+		name = "glfw.h: 456";
+		rLen = 82;
+		rLoc = 17177;
+		rType = 0;
+		vrLen = 2673;
+		vrLoc = 15978;
+	};
+	8884F8AC13A3D1F300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
+		name = "SoraOGLInput.cpp: 22";
+		rLen = 0;
+		rLoc = 337;
+		rType = 0;
+		vrLen = 1124;
+		vrLoc = 1315;
+	};
+	8884F8AD13A3D1F300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FF113681F5800A77847 /* SoraOGLKeyPoll.cpp */;
+		name = "SoraOGLKeyPoll.cpp: 211";
+		rLen = 0;
+		rLoc = 8297;
+		rType = 0;
+		vrLen = 1580;
+		vrLoc = 7175;
+	};
+	8884F8AE13A3D1F300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 906";
+		rLen = 0;
+		rLoc = 36152;
+		rType = 0;
+		vrLen = 1291;
+		vrLoc = 34766;
+	};
+	8884F8AF13A3D1F300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 742";
+		rLen = 0;
+		rLoc = 28576;
+		rType = 0;
+		vrLen = 1144;
+		vrLoc = 27817;
+	};
+	8884F8B213A3D23300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 775";
+		rLen = 0;
+		rLoc = 29620;
+		rType = 0;
+		vrLen = 1818;
+		vrLoc = 2859;
+	};
+	8884F8BB13A3D4A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 775";
+		rLen = 0;
+		rLoc = 29620;
+		rType = 0;
+		vrLen = 1818;
+		vrLoc = 2859;
+	};
+	8884F8BC13A3D4A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C2A12B8AE6600777409 /* rectangle.hpp */;
+		name = "rectangle.hpp: 58";
+		rLen = 38;
+		rLoc = 2387;
+		rType = 0;
+		vrLen = 1538;
+		vrLoc = 1537;
+	};
+	8884F8BD13A3D4A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C3412B8AE6600777409 /* button.cpp */;
+		name = "button.cpp: 218";
+		rLen = 0;
+		rLoc = 6588;
+		rType = 0;
+		vrLen = 1493;
+		vrLoc = 3731;
+	};
+	8884F8BE13A3D4A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C3112B8AE6600777409 /* widget.hpp */;
+		name = "widget.hpp: 991";
+		rLen = 391;
+		rLoc = 33281;
+		rType = 0;
+		vrLen = 1381;
+		vrLoc = 32981;
+	};
+	8884F8BF13A3D4A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C3012B8AE6600777409 /* widget.cpp */;
+		name = "widget.cpp: 75";
+		rLen = 0;
+		rLoc = 3145;
+		rType = 0;
+		vrLen = 1676;
+		vrLoc = 1831;
+	};
+	8884F8C013A3D4A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 45";
+		rLen = 0;
+		rLoc = 1337;
+		rType = 0;
+		vrLen = 1333;
+		vrLoc = 411;
+	};
+	8884F8C113A3D4A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2194;
+		rType = 0;
+		vrLen = 1468;
+		vrLoc = 1841;
+	};
+	8884F8C913A3D61E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C5412B8AE6600777409 /* window.cpp */;
+		name = "window.cpp: 233";
+		rLen = 75;
+		rLoc = 7341;
+		rType = 0;
+		vrLen = 1543;
+		vrLoc = 5528;
+	};
+	8884F8CA13A3D61E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C6B12B8AE6600777409 /* xmlgui.cpp */;
+		name = "xmlgui.cpp: 227";
+		rLen = 15;
+		rLoc = 6982;
+		rType = 0;
+		vrLen = 1357;
+		vrLoc = 6631;
+	};
+	8884F8CB13A3D61E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2143;
+		rType = 0;
+		vrLen = 1504;
+		vrLoc = 1841;
+	};
+	8884F8CC13A3D61E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2143;
+		rType = 0;
+		vrLen = 1503;
+		vrLoc = 1842;
+	};
+	8884F8D013A3D62C00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2143;
+		rType = 0;
+		vrLen = 1492;
+		vrLoc = 1891;
+	};
+	8884F8D413A3D65D00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09BF512B8AE6600777409 /* color.hpp */;
+		name = "color.hpp: 56";
+		rLen = 34;
+		rLoc = 2391;
+		rType = 0;
+		vrLen = 1875;
+		vrLoc = 1201;
+	};
+	8884F8D513A3D65D00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C3012B8AE6600777409 /* widget.cpp */;
+		name = "widget.cpp: 787";
+		rLen = 5;
+		rLoc = 18939;
+		rType = 0;
+		vrLen = 1179;
+		vrLoc = 18211;
+	};
+	8884F8D613A3D65D00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2143;
+		rType = 0;
+		vrLen = 1539;
+		vrLoc = 1842;
+	};
+	8884F8D713A3D65D00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2143;
+		rType = 0;
+		vrLen = 1520;
+		vrLoc = 1863;
+	};
+	8884F8DD13A3D6A100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2143;
+		rType = 0;
+		vrLen = 1532;
+		vrLoc = 1912;
+	};
+	8884F8E113A3D6D900BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 91";
+		rLen = 0;
+		rLoc = 2194;
+		rType = 0;
+		vrLen = 1531;
+		vrLoc = 1915;
+	};
+	8884F8E713A3D74300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2143;
+		rType = 0;
+		vrLen = 1529;
+		vrLoc = 2029;
+	};
+	8884F8F713A3D8A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2143;
+		rType = 0;
+		vrLen = 1521;
+		vrLoc = 2074;
+	};
+	8884F8F813A3D8A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C5512B8AE6600777409 /* window.hpp */;
+		name = "window.hpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1430;
+		vrLoc = 4427;
+	};
+	8884F8F913A3D8A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C5412B8AE6600777409 /* window.cpp */;
+		name = "window.cpp: 197";
+		rLen = 9;
+		rLoc = 6398;
+		rType = 0;
+		vrLen = 1444;
+		vrLoc = 5257;
+	};
+	8884F8FA13A3D8A300BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C5412B8AE6600777409 /* window.cpp */;
+		name = "window.cpp: 82";
+		rLen = 0;
+		rLoc = 3050;
+		rType = 0;
+		vrLen = 1018;
+		vrLoc = 2190;
+	};
+	8884F8FE13A3D8B900BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C5412B8AE6600777409 /* window.cpp */;
+		name = "window.cpp: 82";
+		rLen = 0;
+		rLoc = 3048;
+		rType = 0;
+		vrLen = 1015;
+		vrLoc = 2257;
+	};
+	8884F90813A3DAE000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C5412B8AE6600777409 /* window.cpp */;
+		name = "window.cpp: 224";
+		rLen = 8;
+		rLoc = 6998;
+		rType = 0;
+		vrLen = 1446;
+		vrLoc = 5876;
+	};
+	8884F90913A3DAE000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C0C12B8AE6600777409 /* graphics.cpp */;
+		name = "graphics.cpp: 164";
+		rLen = 67;
+		rLoc = 4954;
+		rType = 0;
+		vrLen = 1264;
+		vrLoc = 4373;
+	};
+	8884F90A13A3DAE000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C5912B8AE6600777409 /* soraguifont.cpp */;
+		name = "soraguifont.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1125;
+		vrLoc = 763;
+	};
+	8884F90B13A3DAE000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8859BF9E12B4809D00F3304A /* SoraFreetypeFont.cpp */;
+		name = "SoraFreetypeFont.cpp: 280";
+		rLen = 0;
+		rLoc = 6630;
+		rType = 0;
+		vrLen = 1157;
+		vrLoc = 325;
+	};
+	8884F90C13A3DAE000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8859BF9F12B4809D00F3304A /* SoraFreetypeFont.h */;
+		name = "SoraFreetypeFont.h: 99";
+		rLen = 0;
+		rLoc = 2114;
+		rType = 0;
+		vrLen = 1321;
+		vrLoc = 1081;
+	};
+	8884F90D13A3DAE000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88452D6F138FB00D0045D130 /* guichansetup.h */;
+		name = "guichansetup.h: 203";
+		rLen = 0;
+		rLoc = 5684;
+		rType = 0;
+		vrLen = 1209;
+		vrLoc = 5079;
+	};
+	8884F90E13A3DAE000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
+		name = "main.cpp: 51";
+		rLen = 0;
+		rLoc = 1245;
+		rType = 0;
+		vrLen = 1243;
+		vrLoc = 73;
+	};
+	8884F90F13A3DAE000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2192;
+		rType = 0;
+		vrLen = 1522;
+		vrLoc = 2029;
+	};
+	8884F91313A3DAF000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2174;
+		rType = 0;
+		vrLen = 1495;
+		vrLoc = 2055;
+	};
+	8884F91713A3DB0700BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2190;
+		rType = 0;
+		vrLen = 1527;
+		vrLoc = 2055;
+	};
+	8884F91A13A3DB1400BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2184;
+		rType = 0;
+		vrLen = 1511;
+		vrLoc = 2074;
+	};
+	8884F91F13A3DD4E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
+		name = "peMainWindow.h: 90";
+		rLen = 0;
+		rLoc = 2184;
+		rType = 0;
+		vrLen = 1503;
+		vrLoc = 2055;
+	};
+	8884F92013A3DD4E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 775";
+		rLen = 0;
+		rLoc = 29620;
+		rType = 0;
+		vrLen = 1747;
+		vrLoc = 2930;
+	};
+	8884F92113A3DD4E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 627";
+		rLen = 0;
+		rLoc = 24408;
+		rType = 0;
+		vrLen = 1928;
+		vrLoc = 23709;
+	};
+	8884F92613A3DDB100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88CE58D412C1B41C00C551F0 /* SoraParticleSystem.h */;
+		name = "SoraParticleSystem.h: 174";
+		rLen = 31;
+		rLoc = 3833;
+		rType = 0;
+		vrLen = 1444;
+		vrLoc = 2603;
+	};
+	8884F92713A3DDB100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 749";
+		rLen = 0;
+		rLoc = 28637;
+		rType = 0;
+		vrLen = 1316;
+		vrLoc = 28317;
+	};
+	8884F92813A3DDB100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 751";
+		rLen = 0;
+		rLoc = 28735;
+		rType = 0;
+		vrLen = 1305;
+		vrLoc = 28338;
+	};
 	8889817C137500A2000B937A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 8889817D137500A2000B937A /* stl_list.h */;
@@ -9639,7 +10614,7 @@
 		ignoreCount = 0;
 		lineNumber = 184;
 		location = Sora;
-		modificationTime = 328990756.632275;
+		modificationTime = 329503080.756653;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9657,7 +10632,7 @@
 		ignoreCount = 0;
 		lineNumber = 105;
 		location = Sora;
-		modificationTime = 328990756.632375;
+		modificationTime = 329503080.756836;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9715,7 +10690,7 @@
 		ignoreCount = 0;
 		lineNumber = 184;
 		location = Sora;
-		modificationTime = 328990756.632401;
+		modificationTime = 329503080.756953;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9733,7 +10708,7 @@
 		ignoreCount = 0;
 		lineNumber = 184;
 		location = Sora;
-		modificationTime = 328990756.632463;
+		modificationTime = 329503080.757104;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9858,7 +10833,7 @@
 		ignoreCount = 0;
 		lineNumber = 18;
 		location = Sora;
-		modificationTime = 328990756.632479;
+		modificationTime = 329503080.757271;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9876,7 +10851,7 @@
 		ignoreCount = 0;
 		lineNumber = 104;
 		location = Sora;
-		modificationTime = 328990756.632518;
+		modificationTime = 329503080.757313;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9894,7 +10869,7 @@
 		ignoreCount = 0;
 		lineNumber = 104;
 		location = Sora;
-		modificationTime = 328990756.63254;
+		modificationTime = 329503080.757332;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9980,7 +10955,7 @@
 		ignoreCount = 0;
 		lineNumber = 65;
 		location = Sora;
-		modificationTime = 328990756.6325589;
+		modificationTime = 329503080.757409;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9998,7 +10973,7 @@
 		ignoreCount = 0;
 		lineNumber = 120;
 		location = Sora;
-		modificationTime = 328990756.632582;
+		modificationTime = 329503080.757454;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10016,7 +10991,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.632631;
+		modificationTime = 329503080.757516;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10034,7 +11009,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.632784;
+		modificationTime = 329503080.757598;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10052,7 +11027,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.632827;
+		modificationTime = 329503080.757654;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10070,7 +11045,7 @@
 		ignoreCount = 0;
 		lineNumber = 56;
 		location = Sora;
-		modificationTime = 328990756.632855;
+		modificationTime = 329503080.757779;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10088,7 +11063,7 @@
 		ignoreCount = 0;
 		lineNumber = 38;
 		location = Sora;
-		modificationTime = 328990756.632908;
+		modificationTime = 329503080.757861;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10106,7 +11081,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.63292;
+		modificationTime = 329503080.758019;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10124,7 +11099,7 @@
 		ignoreCount = 0;
 		lineNumber = 142;
 		location = Sora;
-		modificationTime = 328990756.6330531;
+		modificationTime = 329503080.758049;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10142,7 +11117,7 @@
 		ignoreCount = 0;
 		lineNumber = 37;
 		location = Sora;
-		modificationTime = 328990756.633078;
+		modificationTime = 329503080.758106;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10160,7 +11135,7 @@
 		ignoreCount = 0;
 		lineNumber = 49;
 		location = Sora;
-		modificationTime = 328990756.633099;
+		modificationTime = 329503080.758194;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10178,7 +11153,7 @@
 		ignoreCount = 0;
 		lineNumber = 141;
 		location = Sora;
-		modificationTime = 328990756.633196;
+		modificationTime = 329503080.758321;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10196,7 +11171,7 @@
 		ignoreCount = 0;
 		lineNumber = 46;
 		location = Sora;
-		modificationTime = 328990756.633274;
+		modificationTime = 329503080.758373;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10214,7 +11189,7 @@
 		ignoreCount = 0;
 		lineNumber = 141;
 		location = Sora;
-		modificationTime = 328990756.633305;
+		modificationTime = 329503080.758504;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10231,7 +11206,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 136;
-		modificationTime = 328990756.63335;
+		modificationTime = 329503080.758555;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -10249,7 +11224,7 @@
 		ignoreCount = 0;
 		lineNumber = 130;
 		location = Sora;
-		modificationTime = 328990756.633364;
+		modificationTime = 329503080.758593;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10284,7 +11259,7 @@
 		ignoreCount = 0;
 		lineNumber = 56;
 		location = Sora;
-		modificationTime = 328990756.633427;
+		modificationTime = 329503080.758666;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10301,7 +11276,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 14;
-		modificationTime = 328990756.633456;
+		modificationTime = 329503080.758802;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -10319,7 +11294,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.633471;
+		modificationTime = 329503080.75888;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10337,7 +11312,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.633554;
+		modificationTime = 329503080.758912;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10355,7 +11330,7 @@
 		ignoreCount = 0;
 		lineNumber = 45;
 		location = Sora;
-		modificationTime = 328990756.633628;
+		modificationTime = 329503080.759011;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10373,7 +11348,7 @@
 		ignoreCount = 0;
 		lineNumber = 38;
 		location = Sora;
-		modificationTime = 328990756.633713;
+		modificationTime = 329503080.759107;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11302,7 +12277,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 2436}}";
 			sepNavSelRange = "{2391, 34}";
-			sepNavVisRange = "{4856, 1289}";
+			sepNavVisRange = "{1201, 1875}";
 		};
 	};
 	88B09C0112B8AE6600777409 /* event.cpp */ = {
@@ -11345,6 +12320,13 @@
 			sepNavIntBoundsRect = "{{0, 0}, {1091, 1568}}";
 			sepNavSelRange = "{2395, 33}";
 			sepNavVisRange = "{2251, 1342}";
+		};
+	};
+	88B09C0C12B8AE6600777409 /* graphics.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 2618}}";
+			sepNavSelRange = "{4954, 67}";
+			sepNavVisRange = "{4373, 1264}";
 		};
 	};
 	88B09C0D12B8AE6600777409 /* graphics.hpp */ = {
@@ -11519,9 +12501,9 @@
 	};
 	88B09C2A12B8AE6600777409 /* rectangle.hpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1162, 1932}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1834}}";
 			sepNavSelRange = "{2387, 38}";
-			sepNavVisRange = "{1537, 1645}";
+			sepNavVisRange = "{1537, 1538}";
 		};
 	};
 	88B09C2C12B8AE6600777409 /* selectionevent.hpp */ = {
@@ -11540,17 +12522,17 @@
 	};
 	88B09C3012B8AE6600777409 /* widget.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 9982}}";
-			sepNavSelRange = "{18464, 0}";
-			sepNavVisRange = "{15852, 1180}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 10654}}";
+			sepNavSelRange = "{18939, 5}";
+			sepNavVisRange = "{18211, 1179}";
 			sepNavWindowFrame = "{{678, 4}, {762, 874}}";
 		};
 	};
 	88B09C3112B8AE6600777409 /* widget.hpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 17374}}";
-			sepNavSelRange = "{3022, 35}";
-			sepNavVisRange = "{3789, 2443}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 17780}}";
+			sepNavSelRange = "{33281, 391}";
+			sepNavVisRange = "{32981, 1381}";
 		};
 	};
 	88B09C3212B8AE6600777409 /* widgetlistener.hpp */ = {
@@ -11562,9 +12544,9 @@
 	};
 	88B09C3412B8AE6600777409 /* button.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 3920}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 3878}}";
 			sepNavSelRange = "{6588, 0}";
-			sepNavVisRange = "{3444, 1310}";
+			sepNavVisRange = "{3731, 1493}";
 		};
 	};
 	88B09C3512B8AE6600777409 /* button.hpp */ = {
@@ -11745,16 +12727,16 @@
 	};
 	88B09C5412B8AE6600777409 /* window.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1091, 4172}}";
-			sepNavSelRange = "{7186, 75}";
-			sepNavVisRange = "{6897, 1195}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 4214}}";
+			sepNavSelRange = "{6998, 8}";
+			sepNavVisRange = "{5876, 1446}";
 		};
 	};
 	88B09C5512B8AE6600777409 /* window.hpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 3388}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 3360}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{4427, 1482}";
+			sepNavVisRange = "{4427, 1430}";
 		};
 	};
 	88B09C5612B8AE6600777409 /* guichan.hpp */ = {
@@ -11780,9 +12762,9 @@
 	};
 	88B09C5912B8AE6600777409 /* soraguifont.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1190}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1176}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 1107}";
+			sepNavVisRange = "{763, 1125}";
 		};
 	};
 	88B09C5A12B8AE6600777409 /* soraguifont.hpp */ = {
@@ -11836,9 +12818,9 @@
 	};
 	88B09C6112B8AE6600777409 /* soraguiinput.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {807, 6174}}";
-			sepNavSelRange = "{4405, 0}";
-			sepNavVisRange = "{2692, 2372}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 6356}}";
+			sepNavSelRange = "{1994, 0}";
+			sepNavVisRange = "{1485, 1649}";
 		};
 	};
 	88B09C6212B8AE6600777409 /* soraguiinput.hpp */ = {
@@ -11871,9 +12853,9 @@
 	};
 	88B09C6B12B8AE6600777409 /* xmlgui.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 13510}}";
-			sepNavSelRange = "{8972, 0}";
-			sepNavVisRange = "{7505, 1763}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 13328}}";
+			sepNavSelRange = "{6982, 15}";
+			sepNavVisRange = "{6631, 1357}";
 		};
 	};
 	88B09C6C12B8AE6600777409 /* xmlgui.h */ = {
@@ -12315,7 +13297,7 @@
 		ignoreCount = 0;
 		lineNumber = 40;
 		location = Sora;
-		modificationTime = 328990756.629272;
+		modificationTime = 329503080.751648;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12333,7 +13315,7 @@
 		ignoreCount = 0;
 		lineNumber = 30;
 		location = Sora;
-		modificationTime = 328990756.62941;
+		modificationTime = 329503080.751787;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12351,7 +13333,7 @@
 		ignoreCount = 0;
 		lineNumber = 47;
 		location = Sora;
-		modificationTime = 328990756.629509;
+		modificationTime = 329503080.751847;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12389,7 +13371,7 @@
 		ignoreCount = 0;
 		lineNumber = 237;
 		location = Sora;
-		modificationTime = 328990756.629639;
+		modificationTime = 329503080.751918;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12407,7 +13389,7 @@
 		ignoreCount = 0;
 		lineNumber = 115;
 		location = Sora;
-		modificationTime = 328990756.629753;
+		modificationTime = 329503080.752086;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12425,7 +13407,7 @@
 		ignoreCount = 0;
 		lineNumber = 227;
 		location = Sora;
-		modificationTime = 328990756.629932;
+		modificationTime = 329503080.752261;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12443,7 +13425,7 @@
 		ignoreCount = 0;
 		lineNumber = 223;
 		location = Sora;
-		modificationTime = 328990756.6299549;
+		modificationTime = 329503080.752315;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12498,7 +13480,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 39;
-		modificationTime = 328990756.6301219;
+		modificationTime = 329503080.752386;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -12516,7 +13498,7 @@
 		ignoreCount = 0;
 		lineNumber = 39;
 		location = Sora;
-		modificationTime = 328990756.6302;
+		modificationTime = 329503080.752442;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12534,7 +13516,7 @@
 		ignoreCount = 0;
 		lineNumber = 657;
 		location = Sora;
-		modificationTime = 328990756.630305;
+		modificationTime = 329503080.752493;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12563,7 +13545,7 @@
 		fRef = 884530971390F75B0045D130 /* peMainWindow.h */;
 		name = "peMainWindow.h: 79";
 		rLen = 0;
-		rLoc = 2692;
+		rLoc = 2749;
 		rType = 0;
 		vrLen = 1282;
 		vrLoc = 804;
@@ -12573,7 +13555,7 @@
 		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
 		name = "editorWindow.cpp: 891";
 		rLen = 0;
-		rLoc = 35389;
+		rLoc = 36174;
 		rType = 0;
 		vrLen = 1748;
 		vrLoc = 3833;
@@ -12657,7 +13639,7 @@
 		ignoreCount = 0;
 		lineNumber = 24;
 		location = Sora;
-		modificationTime = 328990761.182454;
+		modificationTime = 329503082.203525;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -12695,7 +13677,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.633745;
+		modificationTime = 329503080.759178;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12713,7 +13695,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.633771;
+		modificationTime = 329503080.75929;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12731,7 +13713,7 @@
 		ignoreCount = 0;
 		lineNumber = 209;
 		location = Sora;
-		modificationTime = 328990756.6338;
+		modificationTime = 329503080.759324;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12749,7 +13731,7 @@
 		ignoreCount = 0;
 		lineNumber = 208;
 		location = Sora;
-		modificationTime = 328990756.633819;
+		modificationTime = 329503080.759452;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12767,7 +13749,7 @@
 		ignoreCount = 0;
 		lineNumber = 157;
 		location = Sora;
-		modificationTime = 328990756.6338819;
+		modificationTime = 329503080.759539;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12785,7 +13767,7 @@
 		ignoreCount = 0;
 		lineNumber = 396;
 		location = Sora;
-		modificationTime = 328990756.633901;
+		modificationTime = 329503080.759574;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12803,7 +13785,7 @@
 		ignoreCount = 0;
 		lineNumber = 396;
 		location = Sora;
-		modificationTime = 328990756.633919;
+		modificationTime = 329503080.759614;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12821,7 +13803,7 @@
 		ignoreCount = 0;
 		lineNumber = 396;
 		location = Sora;
-		modificationTime = 328990756.6339949;
+		modificationTime = 329503080.759725;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12839,7 +13821,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.634021;
+		modificationTime = 329503080.759892;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12884,7 +13866,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 328990756.634067;
+		modificationTime = 329503080.759921;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12902,7 +13884,7 @@
 		ignoreCount = 0;
 		lineNumber = 122;
 		location = Sora;
-		modificationTime = 328990756.634094;
+		modificationTime = 329503080.759977;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12920,7 +13902,7 @@
 		ignoreCount = 0;
 		lineNumber = 112;
 		location = Sora;
-		modificationTime = 328990756.634114;
+		modificationTime = 329503080.760182;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12938,7 +13920,7 @@
 		ignoreCount = 0;
 		lineNumber = 112;
 		location = Sora;
-		modificationTime = 328990756.634149;
+		modificationTime = 329503080.760294;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12963,7 +13945,7 @@
 		ignoreCount = 0;
 		lineNumber = 46;
 		location = Sora;
-		modificationTime = 328990756.63422;
+		modificationTime = 329503080.760464;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13049,7 +14031,7 @@
 		ignoreCount = 0;
 		lineNumber = 42;
 		location = Sora;
-		modificationTime = 328990756.6342961;
+		modificationTime = 329503080.760538;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13101,7 +14083,7 @@
 		ignoreCount = 0;
 		lineNumber = 37;
 		location = Sora;
-		modificationTime = 328990756.63432;
+		modificationTime = 329503080.760661;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13164,16 +14146,16 @@
 	};
 	88CE58D312C1B41C00C551F0 /* SoraParticleSystem.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 7252}}";
-			sepNavSelRange = "{10501, 54}";
-			sepNavVisRange = "{9320, 1962}";
+			sepNavIntBoundsRect = "{{0, 0}, {977, 7420}}";
+			sepNavSelRange = "{7908, 0}";
+			sepNavVisRange = "{7426, 755}";
 		};
 	};
 	88CE58D412C1B41C00C551F0 /* SoraParticleSystem.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 3514}}";
-			sepNavSelRange = "{2746, 64}";
-			sepNavVisRange = "{3833, 1231}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 3542}}";
+			sepNavSelRange = "{3833, 31}";
+			sepNavVisRange = "{2603, 1444}";
 			sepNavWindowFrame = "{{15, 127}, {840, 746}}";
 		};
 	};
@@ -13417,9 +14399,9 @@
 	};
 	88D87D3B12A09A66007D6865 /* SoraKeyInfo.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 3668}}";
-			sepNavSelRange = "{5876, 0}";
-			sepNavVisRange = "{5480, 1070}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 3808}}";
+			sepNavSelRange = "{6876, 0}";
+			sepNavVisRange = "{5910, 1012}";
 			sepNavWindowFrame = "{{15, 4}, {840, 871}}";
 		};
 	};
@@ -13427,7 +14409,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 1386}}";
 			sepNavSelRange = "{2881, 81}";
-			sepNavVisRange = "{1123, 2007}";
+			sepNavVisRange = "{1241, 1889}";
 		};
 	};
 	88D87D3D12A09A66007D6865 /* SoraMiscTool.h */ = {
@@ -13511,7 +14493,7 @@
 	};
 	88D87D4A12A09A66007D6865 /* SoraSprite.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 5950}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 6020}}";
 			sepNavSelRange = "{2787, 0}";
 			sepNavVisRange = "{2244, 1276}";
 			sepNavWindowFrame = "{{61, 85}, {840, 746}}";
@@ -14354,7 +15336,7 @@
 		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
 		name = "SoraOGLInput.cpp: 68";
 		rLen = 18;
-		rLoc = 1576;
+		rLoc = 1625;
 		rType = 0;
 		vrLen = 1390;
 		vrLoc = 807;
@@ -14424,7 +15406,7 @@
 		fRef = 883900EF131A096700CC101A /* editorWindow.h */;
 		name = "editorWindow.h: 17";
 		rLen = 0;
-		rLoc = 475;
+		rLoc = 527;
 		rType = 0;
 		vrLen = 715;
 		vrLoc = 0;
@@ -14568,7 +15550,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 69;
-		modificationTime = 328990756.6305531;
+		modificationTime = 329503080.753277;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -14756,7 +15738,7 @@
 		ignoreCount = 0;
 		lineNumber = 13;
 		location = Sora;
-		modificationTime = 328990756.630568;
+		modificationTime = 329503080.753372;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -14784,7 +15766,7 @@
 		ignoreCount = 0;
 		lineNumber = 267;
 		location = Sora;
-		modificationTime = 328990756.630641;
+		modificationTime = 329503080.753518;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -14801,6 +15783,11 @@
 		name = glfw.h;
 		path = ../Plugins/SoraOGLRenderer/glfw/GL/glfw.h;
 		sourceTree = "<group>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1167, 6944}}";
+			sepNavSelRange = "{17177, 82}";
+			sepNavVisRange = "{15978, 2673}";
+		};
 	};
 	88DD0B8E12EAA631005555F6 /* stringId.h */ = {
 		uiCtxt = {
@@ -14917,7 +15904,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 172;
-		modificationTime = 328990756.630519;
+		modificationTime = 329503080.753154;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -15074,7 +16061,7 @@
 		ignoreCount = 0;
 		lineNumber = 79;
 		location = Sora;
-		modificationTime = 328990756.630841;
+		modificationTime = 329503080.754202;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15092,7 +16079,7 @@
 		ignoreCount = 0;
 		lineNumber = 16;
 		location = Sora;
-		modificationTime = 328990760.637209;
+		modificationTime = 329503081.979281;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -15157,7 +16144,7 @@
 		ignoreCount = 0;
 		lineNumber = 60;
 		location = Sora;
-		modificationTime = 328990756.63089;
+		modificationTime = 329503080.75438;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15181,7 +16168,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 207;
-		modificationTime = 328990756.630909;
+		modificationTime = 329503080.75461;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -15206,7 +16193,7 @@
 		ignoreCount = 0;
 		lineNumber = 520;
 		location = Sora;
-		modificationTime = 328990756.630936;
+		modificationTime = 329503080.754683;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15224,7 +16211,7 @@
 		ignoreCount = 0;
 		lineNumber = 587;
 		location = Sora;
-		modificationTime = 328990756.6309569;
+		modificationTime = 329503080.75477;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15284,7 +16271,7 @@
 		ignoreCount = 0;
 		lineNumber = 201;
 		location = Sora;
-		modificationTime = 328990756.631043;
+		modificationTime = 329503080.754994;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15300,7 +16287,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 201;
-		modificationTime = 328990756.6311401;
+		modificationTime = 329503080.755116;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -15317,9 +16304,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 201;
-		modificationTime = 328990773.789681;
+		modificationTime = 329503080.755259;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 0;
 	};
 	88E340E5136C0BE9000B67C8 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -15352,7 +16339,7 @@
 		ignoreCount = 0;
 		lineNumber = 180;
 		location = Sora;
-		modificationTime = 328990756.631228;
+		modificationTime = 329503080.755371;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15370,7 +16357,7 @@
 		ignoreCount = 0;
 		lineNumber = 178;
 		location = Sora;
-		modificationTime = 328990756.631272;
+		modificationTime = 329503080.755593;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15429,7 +16416,7 @@
 		ignoreCount = 0;
 		lineNumber = 71;
 		location = Sora;
-		modificationTime = 328990756.631425;
+		modificationTime = 329503080.755733;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15501,7 +16488,7 @@
 		ignoreCount = 0;
 		lineNumber = 176;
 		location = Sora;
-		modificationTime = 328990756.631456;
+		modificationTime = 329503080.755785;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15519,7 +16506,7 @@
 		ignoreCount = 0;
 		lineNumber = 82;
 		location = Sora;
-		modificationTime = 328990756.631513;
+		modificationTime = 329503080.755864;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15537,7 +16524,7 @@
 		ignoreCount = 0;
 		lineNumber = 66;
 		location = Sora;
-		modificationTime = 328990756.631556;
+		modificationTime = 329503080.755888;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15565,7 +16552,7 @@
 		ignoreCount = 0;
 		lineNumber = 169;
 		location = Sora;
-		modificationTime = 328990756.6315761;
+		modificationTime = 329503080.755914;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15583,7 +16570,7 @@
 		ignoreCount = 0;
 		lineNumber = 169;
 		location = Sora;
-		modificationTime = 328990756.631752;
+		modificationTime = 329503080.756027;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15601,7 +16588,7 @@
 		ignoreCount = 0;
 		lineNumber = 129;
 		location = Sora;
-		modificationTime = 328990756.6317919;
+		modificationTime = 329503080.756126;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15619,7 +16606,7 @@
 		ignoreCount = 0;
 		lineNumber = 122;
 		location = Sora;
-		modificationTime = 328990756.631816;
+		modificationTime = 329503080.756203;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15637,7 +16624,7 @@
 		ignoreCount = 0;
 		lineNumber = 127;
 		location = Sora;
-		modificationTime = 328990756.631973;
+		modificationTime = 329503080.756241;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15655,7 +16642,7 @@
 		ignoreCount = 0;
 		lineNumber = 41;
 		location = Sora;
-		modificationTime = 328990756.632055;
+		modificationTime = 329503080.75634;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15673,7 +16660,7 @@
 		ignoreCount = 0;
 		lineNumber = 30;
 		location = Sora;
-		modificationTime = 328990756.632073;
+		modificationTime = 329503080.756366;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15691,7 +16678,7 @@
 		ignoreCount = 0;
 		lineNumber = 42;
 		location = Sora;
-		modificationTime = 328990756.632101;
+		modificationTime = 329503080.756387;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15748,7 +16735,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 65;
-		modificationTime = 328990756.632126;
+		modificationTime = 329503080.756425;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -15838,7 +16825,7 @@
 		ignoreCount = 0;
 		lineNumber = 232;
 		location = Sora;
-		modificationTime = 328990756.632153;
+		modificationTime = 329503080.756449;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15856,7 +16843,7 @@
 		ignoreCount = 0;
 		lineNumber = 143;
 		location = Sora;
-		modificationTime = 328990760.767595;
+		modificationTime = 329503082.095485;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};

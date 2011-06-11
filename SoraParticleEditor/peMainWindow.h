@@ -86,6 +86,9 @@ class peMainWindow: public sora::SoraWindowInfoBase {
 
 	void init() {
 		peMainWindowLoader::Instance()->loadConfig();
+		
+		sora::GCN_GLOBAL->setGlobalBaseColor(0xFF999999);
+	
 
 		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 		sora::SORA->setSystemFont(L"cour.ttf", 16);

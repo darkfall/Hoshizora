@@ -16,7 +16,7 @@ FileDlg* fileDlg;
 #endif
 
 bool bOpenFinished = false;
-
+bool bMouseDown = false;
 bool bShowBoundingBox = false;
 
 sora::SoraSprite* pspr;
@@ -621,6 +621,10 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 		
 		peffect->saveScript(sCurrParticleFile);
 
+	}  else if(getID().compare("FPS") == 0) {
+		gcn::Slider* ps = (gcn::Slider*)getSource();
+		sora::SORA->setFPS(ps->getValue());
+		
 	} else if(getID().compare("TextureRect") == 0) {
 		gcn::Slider* ps = (gcn::Slider*)getSource();
 		int v = (int)ps->getValue() % peMainWindowLoader::Instance()->getRow();
@@ -706,6 +710,9 @@ editorWindow::editorWindow() {
 	mBGPosX = 0.f;
 	mBGPosY = 0.f;
 	
+	registerEventFunc(this, &editorWindow::onInputEvent);
+	sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
+	
 }
 
 void editorWindow::update() {
@@ -735,6 +742,26 @@ void editorWindow::update() {
 			mBGPosY += 1.f;
 		else mBGPosY = SORA->getScreenHeight();
 	}
+	
+	if(sora::SORA->keyDown(SORA_KEY_LBUTTON)) {
+		float32 x, y;
+		sora::SORA->getMousePos(&x, &y);
+		if(peffect->isActive() && peffect->getBoundingBox().TestPoint(x, y)) {
+			bMouseDown = true;
+		}
+	} else {
+		bMouseDown = false;
+	}
+
+	
+	if(bMouseDown) {
+		float32 x, y;
+		sora::SORA->getMousePos(&x, &y);
+		peffect->moveTo(x, y, peffect->pheader.emitPos.z);
+		
+		slEmitPointX->setValue(x);
+		slEmitPointY->setValue(y);
+	}
 }
 
 void editorWindow::render() {
@@ -753,7 +780,7 @@ void editorWindow::render() {
 		int32 mHeight = sora::SORA->getScreenHeight();
 		pFont->print(mWidth-100, mHeight-70, sora::FONT_ALIGNMENT_CENTER, L"FPS: %.2f", sora::SORA->getFPS());
 		pFont->render(mWidth-100, mHeight-50, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true);
-		pFont->render(mWidth-100, mHeight-30, L"Rev 0x31 \0", true);
+		pFont->render(mWidth-100, mHeight-30, L"Rev 0x35 \0", true);
 	}
 }
 
@@ -891,7 +918,9 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 	return 0;
 }
 
+	void editorWindow::onInputEvent(sora::SoraKeyEvent* kev) {
 
+	}
 
 
 

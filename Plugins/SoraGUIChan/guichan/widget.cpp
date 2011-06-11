@@ -69,10 +69,10 @@ namespace gcn
     std::list<Widget*> Widget::mWidgets;
 
     Widget::Widget()
-            : mForegroundColor(0x000000),
-              mBackgroundColor(0xffffff),
-              mBaseColor(0x808090),
-              mSelectionColor(0xc3d9ff),
+            : mForegroundColor(mGlobalForegroundColor),
+              mBackgroundColor(mGlobalBackgroundColor),
+              mBaseColor(mGlobalBaseColor),
+              mSelectionColor(mGlobalSelectionColor),
               mFocusHandler(NULL),
               mInternalFocusHandler(NULL),
               mParent(NULL),
@@ -769,5 +769,42 @@ namespace gcn
 		mBaseColor.a = alpha;
 		mSelectionColor.a = alpha;
 		mBackgroundColor.a = alpha;
+	}
+
+	Color Widget::mGlobalBackgroundColor(0xffffff);
+	Color Widget::mGlobalForegroundColor(0x000000);
+	Color Widget::mGlobalBaseColor(0x808090);
+	Color Widget::mGlobalSelectionColor(0xc3d9ff);
+
+	void Widget::setGlobalBackgroundColor(const Color& col) {
+		mGlobalBackgroundColor = col;
+	}
+	
+	void Widget::setGlobalForegroundColor(const Color& col) {
+		mGlobalForegroundColor = col;
+	}
+	
+	void Widget::setGlobalBaseColor(const Color& col) {
+		mGlobalBaseColor = col;
+	}
+	
+	void Widget::setGlobalSelectionColor(const Color& col) {
+		mGlobalSelectionColor = col;
+	}
+	
+	Color Widget::getGlobalBackgroundColor() {
+		return mGlobalBackgroundColor;
+	}
+	
+	Color Widget::getGlobalForegroundColor() {
+		return mGlobalForegroundColor;
+	}
+	
+	Color Widget::getGlobalBaseColor() {
+		return mGlobalBaseColor;
+	}
+	
+	Color Widget::getGlobalSelectionColor() {
+		return mGlobalSelectionColor;
 	}
 }

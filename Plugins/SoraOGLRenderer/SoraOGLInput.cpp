@@ -19,6 +19,7 @@ namespace sora {
 	
 	SoraOGLInput::SoraOGLInput() {
 		glfwSetKeyCallback(glfwKeyCallback);
+		glfwSetMouseButtonCallback(glfwMouseCallback);
 	}
 
 	void SoraOGLInput::getMousePos(float32 *x, float32 *y) {

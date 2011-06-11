@@ -10,12 +10,15 @@
 #include "SoraGUIChan/SoraGUIResponser.h"
 #include "SoraGUIChan/SoraGUIResponserMap.h"
 
+#include "SoraEvent.h"
+#include "SoraKeyInfo.h"
+
 #ifdef WIN32
 #include "DarkLib/FileDlg.h"
 #endif
 
 void loadBGSprite(const SoraWString& path);
-class editorWindow {
+class editorWindow: public sora::SoraEventHandler {
 public:
 	editorWindow();
 	~editorWindow();
@@ -24,6 +27,9 @@ public:
 	void render();
 
 	gcn::Widget* loadXML(const SoraWString& xmlPath);
+	
+	
+	void onInputEvent(sora::SoraKeyEvent* kev);
 
 private:
 	sora::SoraFont* pFont;

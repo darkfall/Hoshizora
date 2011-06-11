@@ -194,6 +194,23 @@ namespace sora {
                 mGUIChan->draw();
 		}
 		
+		
+		void setGlobalBackgroundColor(ulong32 col) {
+			gcn::Widget::setGlobalBackgroundColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
+		}
+		
+		void setGlobalForegroundColor(ulong32 col) {
+			gcn::Widget::setGlobalForegroundColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
+		}
+		
+		void setGlobalBaseColor(ulong32 col) {
+			gcn::Widget::setGlobalBaseColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
+		}
+		
+		void setGlobalSelectionColor(ulong32 col) {
+			gcn::Widget::setGlobalSelectionColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
+		}
+		
 	private:
 		gcn::SoraGUISoundLoader* mSoundLoader;
 		gcn::SoraGUIGraphics* mGraphics;

@@ -987,8 +987,19 @@ namespace gcn
 		 * @param color, the alpha color value, range from 0 to 255
 		 */
 		virtual void setAlpha(int alpha);
+		
+		
+		static void setGlobalBackgroundColor(const Color& col);
+		static void setGlobalForegroundColor(const Color& col);
+		static void setGlobalBaseColor(const Color& col);
+		static void setGlobalSelectionColor(const Color& col);
 
-    protected:
+		static Color getGlobalBackgroundColor();
+		static Color getGlobalForegroundColor();
+		static Color getGlobalBaseColor();
+		static Color getGlobalSelectionColor();
+	
+	protected:
         /**
          * Distributes an action event to all action listeners
          * of the widget.
@@ -1134,6 +1145,11 @@ namespace gcn
          * Holds the selection color of the widget.
          */
         Color mSelectionColor;
+		
+		static Color mGlobalForegroundColor;
+		static Color mGlobalBackgroundColor;
+		static Color mGlobalBaseColor;
+		static Color mGlobalSelectionColor;
 
         /**
          * Holds the focus handler used by the widget.

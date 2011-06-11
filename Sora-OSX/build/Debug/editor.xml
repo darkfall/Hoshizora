@@ -1,5 +1,5 @@
 <container name="SoraWindow" width="1280" height="768" x="0" y="0" opaque="false" foregroundColor="0xAAAAAA">
-	<window name="SpeedPanel" width="180"  height="290" x="924" y="0" caption="SpeedPanel" opaque="true" foregroundColor="0xAAFFFF">
+	<window name="SpeedPanel" width="180"  height="290" x="924" y="0" caption="SpeedPanel" opaque="true">
 		<slider name="MinSpeed" width="160"  height="10" x="10" y="30" start="-500" end="500" value="0" makerLength="1" stepLength="1" id="MinSpeed" responser="SpeedPanel" responsetype="action"/>
 		<label name="MinSpeedLabel" width="160"  height="20" x="10" y="10" caption="MinSpeed" opaque="false">
 			<modifier name="SliderLinker" object="MinSpeed"/>
@@ -43,7 +43,7 @@
 		
 	</window>
 	
-	<window name="LifetimePanel" width="180"  height="160" x="924" y="290" caption="LifetimePanel" opaque="true" foregroundColor="0xAAFFFF">	
+	<window name="LifetimePanel" width="180"  height="160" x="924" y="290" caption="LifetimePanel" opaque="true">	
 		<slider name="MinLifetime" width="160"  height="10" x="10" y="30" start="0" end="60" value="0" makerLength="1" stepLength="0.1" id="MinLifetime" responser="LifetimePanel" responsetype="action"/>
 		<label name="MinLifetimeLabel" width="160"  height="20" x="10" y="10" caption="MinLifetime">
 			<modifier name="SliderLinker" object="MinLifetime"/>
@@ -66,7 +66,7 @@
 		
 	</window>
 	
-	<window name="PropPanel" width="180"  height="710" x="1100" y="0" caption="PropPanel" opaque="true" foregroundColor="0xAAFFFF">	
+	<window name="PropPanel" width="180"  height="710" x="1100" y="0" caption="PropPanel" opaque="true">	
 		<slider name="MinSpin" width="160"  height="10" x="10" y="30" start="-36" end="36" value="0" makerLength="1" stepLength="1" id="MinSpin" responser="PropPanel" responsetype="action"/>
 		<label name="MinSpinLabel" width="160"  height="20" x="10" y="10" caption="MinSpin">
 			<modifier name="SliderLinker" object="MinSpin"/>
@@ -225,7 +225,7 @@
 		
 		
 	</window>
-	<window name="OptionPanel" width="924" height="75" x="5" y="720" caption="OptionPanel" opaque="true">
+	<window name="OptionPanel" width="1024" height="75" x="5" y="720" caption="OptionPanel" opaque="true">
 		<button name="RestoreDefault" width="135" height="20" x="5" y="30" caption="Restore Default" id="RestoreDefault" responser="OptionPanelButton" responsetype="action"/>
 		<checkbox name="SpeedPanelCheck" width="110" height="20" x="145" y="30" caption="SpeedPanel" id="SpeedPanelCheck" responser="OptionPanel" responsetype="action"/>
 		<checkbox name="LifetimePanelCheck" width="110" height="20" x="255" y="30" caption="LifetimePanel" id="LifetimePanelCheck" responser="OptionPanel" responsetype="action"/>
@@ -238,7 +238,16 @@
 		<button name="ParticleSprite" width="150" height="20" x="400" y="5" caption="Particle Sprite..." id="ParticleSprite" responser="OptionPanelButton" responsetype="action"/>
 		<button name="BGSprite" width=100 height="20" x="555" y="5" caption="BGSprite..." id="BGSprite" responser="OptionPanelButton" responsetype="action"/>
 
-		<slider name="TextureRect" width="135" height="20" x="750" y="5" start="0" end="15" value="0" makerLength="1" stepLength="1" id="TextureRect" responser="OptionPanelButton" responsetype="action"/>
+		<slider name="TextureRect" width="135" height="10" x="720" y="15" start="0" end="15" value="0" makerLength="1" stepLength="1" id="TextureRect" responser="OptionPanelButton" responsetype="action"/>
+		<label name="TextureRectLabel" width="135"  height="20" x="720" y="-5" caption="TextureRect">
+			<modifier name="SliderLinker" object="TextureRect"/>
+		</label>
+		
+		<slider name="FPS" width="135" height="10" x="870" y="15" start="30" end="120" value="60" makerLength="1" stepLength="1" responser="OptionPanelButton" responsetype="action"/>
+		<label name="FPSLabel" width="135"  height="20" x="870" y="-5" caption="FPS">
+			<modifier name="SliderLinker" object="FPS"/>
+		</label>
+		
 		<checkbox name="BlendModeCheck" width="135" height="20" x="755" y="30" caption="AlphaBlend" id="BlendModeCheck" responser="OptionPanel" responsetype="action"/>
 	</window>
 </container>
