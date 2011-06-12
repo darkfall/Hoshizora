@@ -758,6 +758,7 @@
 		8884F69713A2597E00BEC5AB /* StatTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTimer.h; sourceTree = "<group>"; };
 		8884F79B13A2926D00BEC5AB /* SoraSpriteFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSpriteFont.h; sourceTree = "<group>"; };
 		8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSpriteFont.cpp; sourceTree = "<group>"; };
+		8884F93313A5107B00BEC5AB /* SoraConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraConfig.h; sourceTree = "<group>"; };
 		888982D013751453000B937A /* rftdBulletEffector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdBulletEffector.h; sourceTree = "<group>"; };
 		888982D313751478000B937A /* rftdCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdCommon.h; sourceTree = "<group>"; };
 		888982D413751661000B937A /* rftdObjColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rftdObjColor.h; sourceTree = "<group>"; };
@@ -2541,6 +2542,7 @@
 				88374E371325A9B600369B12 /* SoraMemoryBuffer.h */,
 				887F23731399E9FE00F534D5 /* SoraMemoryBuffer.cpp */,
 				88374E381325A9B600369B12 /* SoraMemoryFile.h */,
+				8884F93313A5107B00BEC5AB /* SoraConfig.h */,
 				88D87D4012A09A66007D6865 /* SoraPlatform.h */,
 				88D87D4112A09A66007D6865 /* SoraPlugin.h */,
 				88D87D4212A09A66007D6865 /* SoraPluginManager.h */,

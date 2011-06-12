@@ -90,16 +90,18 @@ extern "C"
 #endif
 
 #if defined(WIN32)
-    typedef unsigned long long int uint64;
-    typedef long long int          int64;
-#elif (__WORDSIZE == 32)
-    __extension__
-    typedef long long int          int64;
-    __extension__
-    typedef unsigned long long int uint64;
-#elif (__WORDSIZE == 64)
-    typedef uint64_t uint64;
-    typedef int64_t  int64;
+	typedef signed __int64         int64;
+	typedef unsigned __int64       uint64;
+#elif defined(__GNUC__)
+	#if defined(__LP64__)
+	#define _PTR_IS_64_BIT 1
+	#define _LONG_IS_64_BIT 1
+		typedef int64_t        int64;
+		typedef uint64_t      uint64;
+	#else
+		typedef signed long long   int64;
+		typedef unsigned long long uint64;
+	#endif
 #endif
 
 #ifdef WIN32

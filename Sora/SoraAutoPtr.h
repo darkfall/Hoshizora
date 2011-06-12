@@ -126,6 +126,12 @@ namespace sora {
 		void* operator new(size_t);
 		//void operator delete(void*);
 	};
+	
+	template<typename T>
+	class SoraSharedClass: public SoraAutoPtr<T> {
+	public:
+		typedef SoraAutoPtr<T> Pointer;
+	};
 		
 } // namespace sora
 #endif

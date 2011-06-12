@@ -10,11 +10,6 @@
 #ifndef _SORA_PLATFORM_H_
 #define _SORA_PLATFORM_H_
 
-#ifdef WIN32
-#pragma warning(disable: 4530)
-#pragma warning(disable: 4786)
-#endif
-
 /*
  gcc std extension
  if gcc version >= 4
@@ -95,27 +90,19 @@ static inline int lrint (double const x) { // Round to nearest integer
 #include <stdarg.h>
 #include <memory.h>
 
-#define PLATFORM_32
 
-#ifdef PLATFORM_32
-
-typedef	    int				int32;
-typedef		unsigned int	uint32;
-typedef		short			int16;
-typedef		unsigned short	uint16;
-typedef		signed char		int8;
-typedef		unsigned char	uint8;
-
-typedef		float			float32;
+#include "SoraConfig.h"
 
 typedef		long			long32;
 typedef		unsigned long	ulong32;
+
+typedef		float			float32;
 
 typedef unsigned long       ULONG, ulong;
 typedef unsigned short      WORD;
 typedef unsigned char       BYTE;
 typedef unsigned int		UINT;
-
+/*
 #if defined(WIN32)
 typedef unsigned long long int uint64;
 typedef long long int          int64;
@@ -128,9 +115,16 @@ typedef unsigned long long int uint64;
 typedef uint64_t uint64;
 typedef int64_t  int64;
 #endif
+*/
 
+#include <stdint.h>
 
-#endif // PLATFORM_32
+#ifdef OS_WIN32
+typedef __int64 s_int64;
+#else
+typedef int64_t s_int64 ;
+#endif
+
 
 namespace sora {
 	typedef ulong32 HSORASPRITE;
@@ -269,29 +263,6 @@ static void msleep(uint32_t msec) {
 #define IDYES				6
 #define IDNO				7
 
-#endif
-
-#include <stdint.h>
-
-#define BIT_32_64_EXTEND
-
-#if defined(OS_OSX) || defined(OS_IOS) || defined(OS_LINUX)
-#undef BIT_32_64_EXTEND
-#endif
-
-#ifdef OS_WIN32
-#define s_int64 __int64
-#else
-#define s_int64 int64_t
-#endif
-
-#ifdef BIT_32_64_EXTEND
-// 64bit extend
-typedef		long long		long64;
-typedef		unsigned long long ulong64;
-#else
-typedef     long long64;
-typedef     unsigned long ulong64;
 #endif
 
 typedef enum {

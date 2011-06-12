@@ -6,7 +6,6 @@
 		activeExecutable = 887022B11346AB3500AE8DD7 /* SoraPureCore */;
 		activeTarget = 8DD76F620486A84900D96B5E /* SoraPureCore */;
 		addToTargets = (
-			8DD76F620486A84900D96B5E /* SoraPureCore */,
 		);
 		breakpoints = (
 			88BFA102135AB21800BB8E70 /* jsongui.cpp:40 */,
@@ -28,7 +27,7 @@
 			887E312D13626C2C00803DA6 /* rfShape.cpp:227 */,
 			887E41A91363FF5600803DA6 /* rfLightSource.cpp:51 */,
 			88E2CBB613653A6B0029A8CB /* SoraOGLRenderer.cpp:172 */,
-			88DCE60A136667AE005FBBE0 /* SoraPlatform.h:69 */,
+			88DCE60A136667AE005FBBE0 /* SoraPlatform.h:64 */,
 			88DCE7B313667CD2005FBBE0 /* SoraZipResourceManager.cpp:13 */,
 			88DCE7DC13667DB2005FBBE0 /* SoraOGLRenderer.cpp:267 */,
 			886E0F191367B60B00A77847 /* gcnImageButton2.cpp:166 */,
@@ -122,6 +121,7 @@
 			887F2B6E139C002200F534D5 /* soraguiinput.cpp:100 */,
 			8884F88713A3D0BC00BEC5AB /* SoraOGLKeyPoll.cpp:182 */,
 			8884F89D13A3D16600BEC5AB /* SoraOGLKeyPoll.cpp:207 */,
+			8884F97B13A515FE00BEC5AB /* SoraConfig.h:260 */,
 		);
 		codeSenseManager = 887022D31346AB4300AE8DD7 /* Code sense */;
 		executables = (
@@ -930,6 +930,57 @@
 			8884F92613A3DDB100BEC5AB /* PBXTextBookmark */ = 8884F92613A3DDB100BEC5AB /* PBXTextBookmark */;
 			8884F92713A3DDB100BEC5AB /* PBXTextBookmark */ = 8884F92713A3DDB100BEC5AB /* PBXTextBookmark */;
 			8884F92813A3DDB100BEC5AB /* PBXTextBookmark */ = 8884F92813A3DDB100BEC5AB /* PBXTextBookmark */;
+			8884F93213A5043B00BEC5AB /* PBXTextBookmark */ = 8884F93213A5043B00BEC5AB /* PBXTextBookmark */;
+			8884F93813A511FF00BEC5AB /* PBXTextBookmark */ = 8884F93813A511FF00BEC5AB /* PBXTextBookmark */;
+			8884F93913A511FF00BEC5AB /* PBXTextBookmark */ = 8884F93913A511FF00BEC5AB /* PBXTextBookmark */;
+			8884F93A13A511FF00BEC5AB /* XCBuildMessageTextBookmark */ = 8884F93A13A511FF00BEC5AB /* XCBuildMessageTextBookmark */;
+			8884F93B13A511FF00BEC5AB /* PBXTextBookmark */ = 8884F93B13A511FF00BEC5AB /* PBXTextBookmark */;
+			8884F93E13A5121500BEC5AB /* PBXTextBookmark */ = 8884F93E13A5121500BEC5AB /* PBXTextBookmark */;
+			8884F93F13A5121500BEC5AB /* PBXTextBookmark */ = 8884F93F13A5121500BEC5AB /* PBXTextBookmark */;
+			8884F94013A5121500BEC5AB /* XCBuildMessageTextBookmark */ = 8884F94013A5121500BEC5AB /* XCBuildMessageTextBookmark */;
+			8884F94113A5121500BEC5AB /* PBXTextBookmark */ = 8884F94113A5121500BEC5AB /* PBXTextBookmark */;
+			8884F94A13A5125E00BEC5AB /* PBXTextBookmark */ = 8884F94A13A5125E00BEC5AB /* PBXTextBookmark */;
+			8884F94B13A5125E00BEC5AB /* PBXTextBookmark */ = 8884F94B13A5125E00BEC5AB /* PBXTextBookmark */;
+			8884F94C13A5125E00BEC5AB /* PBXTextBookmark */ = 8884F94C13A5125E00BEC5AB /* PBXTextBookmark */;
+			8884F94D13A5125E00BEC5AB /* XCBuildMessageTextBookmark */ = 8884F94D13A5125E00BEC5AB /* XCBuildMessageTextBookmark */;
+			8884F94F13A5125E00BEC5AB /* PBXTextBookmark */ = 8884F94F13A5125E00BEC5AB /* PBXTextBookmark */;
+			8884F95213A5130000BEC5AB /* PBXTextBookmark */ = 8884F95213A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95313A5130000BEC5AB /* PBXTextBookmark */ = 8884F95313A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95413A5130000BEC5AB /* PBXTextBookmark */ = 8884F95413A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95513A5130000BEC5AB /* PBXTextBookmark */ = 8884F95513A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95613A5130000BEC5AB /* PBXTextBookmark */ = 8884F95613A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95713A5130000BEC5AB /* PBXTextBookmark */ = 8884F95713A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95813A5130000BEC5AB /* PBXTextBookmark */ = 8884F95813A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95913A5130000BEC5AB /* PBXTextBookmark */ = 8884F95913A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95A13A5130000BEC5AB /* PBXTextBookmark */ = 8884F95A13A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95B13A5130000BEC5AB /* PBXTextBookmark */ = 8884F95B13A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95C13A5130000BEC5AB /* PBXTextBookmark */ = 8884F95C13A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95D13A5130000BEC5AB /* PBXTextBookmark */ = 8884F95D13A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95E13A5130000BEC5AB /* PBXTextBookmark */ = 8884F95E13A5130000BEC5AB /* PBXTextBookmark */;
+			8884F95F13A5130000BEC5AB /* PBXTextBookmark */ = 8884F95F13A5130000BEC5AB /* PBXTextBookmark */;
+			8884F96013A5130000BEC5AB /* PBXTextBookmark */ = 8884F96013A5130000BEC5AB /* PBXTextBookmark */;
+			8884F96113A5133500BEC5AB /* PBXTextBookmark */ = 8884F96113A5133500BEC5AB /* PBXTextBookmark */;
+			8884F96213A5133500BEC5AB /* XCBuildMessageTextBookmark */ = 8884F96213A5133500BEC5AB /* XCBuildMessageTextBookmark */;
+			8884F96313A5133500BEC5AB /* PBXTextBookmark */ = 8884F96313A5133500BEC5AB /* PBXTextBookmark */;
+			8884F96A13A5137800BEC5AB /* PBXTextBookmark */ = 8884F96A13A5137800BEC5AB /* PBXTextBookmark */;
+			8884F96B13A5137800BEC5AB /* PBXTextBookmark */ = 8884F96B13A5137800BEC5AB /* PBXTextBookmark */;
+			8884F96C13A5137800BEC5AB /* PBXTextBookmark */ = 8884F96C13A5137800BEC5AB /* PBXTextBookmark */;
+			8884F96D13A5137800BEC5AB /* PBXTextBookmark */ = 8884F96D13A5137800BEC5AB /* PBXTextBookmark */;
+			8884F97213A513DE00BEC5AB /* PBXTextBookmark */ = 8884F97213A513DE00BEC5AB /* PBXTextBookmark */;
+			8884F97313A513DE00BEC5AB /* PBXTextBookmark */ = 8884F97313A513DE00BEC5AB /* PBXTextBookmark */;
+			8884F97413A513DE00BEC5AB /* PBXTextBookmark */ = 8884F97413A513DE00BEC5AB /* PBXTextBookmark */;
+			8884F97513A513DE00BEC5AB /* XCBuildMessageTextBookmark */ = 8884F97513A513DE00BEC5AB /* XCBuildMessageTextBookmark */;
+			8884F97713A513DE00BEC5AB /* PBXTextBookmark */ = 8884F97713A513DE00BEC5AB /* PBXTextBookmark */;
+			8884F97813A513DF00BEC5AB /* PBXTextBookmark */ = 8884F97813A513DF00BEC5AB /* PBXTextBookmark */;
+			8884F97913A5149200BEC5AB /* PBXTextBookmark */ = 8884F97913A5149200BEC5AB /* PBXTextBookmark */;
+			8884F97A13A5149200BEC5AB /* PBXTextBookmark */ = 8884F97A13A5149200BEC5AB /* PBXTextBookmark */;
+			8884F98313A517B100BEC5AB /* PBXTextBookmark */ = 8884F98313A517B100BEC5AB /* PBXTextBookmark */;
+			8884F98413A517B100BEC5AB /* XCBuildMessageTextBookmark */ = 8884F98413A517B100BEC5AB /* XCBuildMessageTextBookmark */;
+			8884F98513A517B100BEC5AB /* PBXTextBookmark */ = 8884F98513A517B100BEC5AB /* PBXTextBookmark */;
+			8884F98613A517B200BEC5AB /* PBXTextBookmark */ = 8884F98613A517B200BEC5AB /* PBXTextBookmark */;
+			8884F98713A517B200BEC5AB /* PBXTextBookmark */ = 8884F98713A517B200BEC5AB /* PBXTextBookmark */;
+			8884F98813A517B200BEC5AB /* PBXTextBookmark */ = 8884F98813A517B200BEC5AB /* PBXTextBookmark */;
+			8884F98913A517B200BEC5AB /* PBXTextBookmark */ = 8884F98913A517B200BEC5AB /* PBXTextBookmark */;
 			8889817C137500A2000B937A = 8889817C137500A2000B937A /* PBXTextBookmark */;
 			888983B013752312000B937A = 888983B013752312000B937A /* PBXTextBookmark */;
 			888983B113752312000B937A = 888983B113752312000B937A /* PBXTextBookmark */;
@@ -1314,7 +1365,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 156";
 		rLen = 0;
-		rLoc = 3234;
+		rLoc = 3043;
 		rType = 0;
 		vrLen = 930;
 		vrLoc = 5159;
@@ -1602,8 +1653,8 @@
 	8811845A12C8ABAF00B3A316 /* win32filewrapper.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 886}}";
-			sepNavSelRange = "{1247, 0}";
-			sepNavVisRange = "{179, 1313}";
+			sepNavSelRange = "{863, 0}";
+			sepNavVisRange = "{149, 1342}";
 		};
 	};
 	8820969312EF5BF500FB7FFF /* gcnImageButton2.cpp */ = {
@@ -1681,9 +1732,9 @@
 	};
 	882DBD9F135E32AE00761846 /* SoraConstantStrings.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 741}}";
-			sepNavSelRange = "{711, 0}";
-			sepNavVisRange = "{0, 1238}";
+			sepNavIntBoundsRect = "{{0, 0}, {717, 574}}";
+			sepNavSelRange = "{730, 0}";
+			sepNavVisRange = "{305, 483}";
 		};
 	};
 	882DBDA0135E3C1000761846 /* SoraPlaybackEvent.h */ = {
@@ -1776,8 +1827,8 @@
 	883900EE131A096700CC101A /* editorWindow.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 13272}}";
-			sepNavSelRange = "{28735, 0}";
-			sepNavVisRange = "{28338, 1305}";
+			sepNavSelRange = "{28937, 0}";
+			sepNavVisRange = "{28775, 1386}";
 		};
 	};
 	883900EF131A096700CC101A /* editorWindow.h */ = {
@@ -2583,7 +2634,7 @@
 		ignoreCount = 0;
 		lineNumber = 83;
 		location = Sora;
-		modificationTime = 329503080.761818;
+		modificationTime = 329586293.147375;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2601,7 +2652,7 @@
 		ignoreCount = 0;
 		lineNumber = 166;
 		location = Sora;
-		modificationTime = 329503080.761942;
+		modificationTime = 329586293.147387;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2667,7 +2718,7 @@
 		ignoreCount = 0;
 		lineNumber = 245;
 		location = Sora;
-		modificationTime = 329503082.226661;
+		modificationTime = 329586296.322482;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -2766,9 +2817,9 @@
 	};
 	88504BED12ECE990009B9F45 /* SoraInternalLogger.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1246}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1232}}";
 			sepNavSelRange = "{1438, 0}";
-			sepNavVisRange = "{326, 1395}";
+			sepNavVisRange = "{402, 1319}";
 		};
 	};
 	88504C7E12ECF02F009B9F45 /* SoraFrameListener.h */ = {
@@ -2799,7 +2850,7 @@
 		ignoreCount = 0;
 		lineNumber = 285;
 		location = Sora;
-		modificationTime = 329503080.752607;
+		modificationTime = 329586293.145445;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2817,7 +2868,7 @@
 		ignoreCount = 0;
 		lineNumber = 265;
 		location = Sora;
-		modificationTime = 329503080.75265;
+		modificationTime = 329586293.145461;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2835,7 +2886,7 @@
 		ignoreCount = 0;
 		lineNumber = 226;
 		location = Sora;
-		modificationTime = 329503080.752673;
+		modificationTime = 329586293.145479;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2853,7 +2904,7 @@
 		ignoreCount = 0;
 		lineNumber = 219;
 		location = Sora;
-		modificationTime = 329503080.752747;
+		modificationTime = 329586293.145502;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2871,7 +2922,7 @@
 		ignoreCount = 0;
 		lineNumber = 81;
 		location = Sora;
-		modificationTime = 329503080.752845;
+		modificationTime = 329586293.145522;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3411,7 +3462,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 383;
-		modificationTime = 329503080.760884;
+		modificationTime = 329586293.14728;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3429,7 +3480,7 @@
 		ignoreCount = 0;
 		lineNumber = 383;
 		location = Sora;
-		modificationTime = 329503080.761121;
+		modificationTime = 329586293.147297;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3446,7 +3497,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 180;
-		modificationTime = 329503080.761232;
+		modificationTime = 329586293.147319;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3464,7 +3515,7 @@
 		ignoreCount = 0;
 		lineNumber = 180;
 		location = Sora;
-		modificationTime = 329503080.761386;
+		modificationTime = 329586293.147336;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3482,7 +3533,7 @@
 		ignoreCount = 0;
 		lineNumber = 179;
 		location = Sora;
-		modificationTime = 329503080.761628;
+		modificationTime = 329586293.147352;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3499,7 +3550,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 31;
-		modificationTime = 329503080.761705;
+		modificationTime = 329586293.147365;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3649,7 +3700,7 @@
 	};
 	886E0E281367A70100A77847 /* SoraGUISound.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 741}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 693}}";
 			sepNavSelRange = "{166, 0}";
 			sepNavVisRange = "{0, 725}";
 		};
@@ -3719,7 +3770,7 @@
 		ignoreCount = 0;
 		lineNumber = 166;
 		location = Sora;
-		modificationTime = 329503080.753597;
+		modificationTime = 329586293.145678;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3737,7 +3788,7 @@
 		ignoreCount = 0;
 		lineNumber = 36;
 		location = Sora;
-		modificationTime = 329503080.753862;
+		modificationTime = 329586293.145697;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3781,9 +3832,9 @@
 	};
 	886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1568}}";
-			sepNavSelRange = "{337, 0}";
-			sepNavVisRange = "{1315, 1124}";
+			sepNavIntBoundsRect = "{{0, 0}, {717, 1624}}";
+			sepNavSelRange = "{383, 0}";
+			sepNavVisRange = "{246, 247}";
 		};
 	};
 	886E0FF013681F5800A77847 /* SoraOGLInput.h */ = {
@@ -3856,7 +3907,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 81;
-		modificationTime = 329503080.753966;
+		modificationTime = 329586293.145719;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -3898,7 +3949,7 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 0;
+		breakpointsEnabled = 1;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
@@ -3980,7 +4031,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 152;
-		modificationTime = 329503080.752956;
+		modificationTime = 329586293.14554;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -4249,7 +4300,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 227;
-		modificationTime = 329503080.752999;
+		modificationTime = 329586293.14556;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -4407,7 +4458,7 @@
 		ignoreCount = 0;
 		lineNumber = 51;
 		location = Sora;
-		modificationTime = 329503080.753066;
+		modificationTime = 329586293.145573;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -5113,7 +5164,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 300;
-		modificationTime = 329503080.762159;
+		modificationTime = 329586293.147428;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -5191,7 +5242,7 @@
 		ignoreCount = 0;
 		lineNumber = 280;
 		location = Sora;
-		modificationTime = 329503080.762186;
+		modificationTime = 329586293.147449;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -5209,7 +5260,7 @@
 		ignoreCount = 0;
 		lineNumber = 268;
 		location = Sora;
-		modificationTime = 329503082.280851;
+		modificationTime = 329586296.36777;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -5404,7 +5455,7 @@
 		ignoreCount = 0;
 		lineNumber = 56;
 		location = Sora;
-		modificationTime = 329503080.762348;
+		modificationTime = 329586293.147472;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -5432,7 +5483,7 @@
 		ignoreCount = 0;
 		lineNumber = 100;
 		location = Sora;
-		modificationTime = 329503080.762655;
+		modificationTime = 329586293.147482;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -6185,7 +6236,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 156";
 		rLen = 0;
-		rLoc = 3234;
+		rLoc = 3043;
 		rType = 0;
 		vrLen = 930;
 		vrLoc = 5159;
@@ -6936,7 +6987,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 7364}}";
 			sepNavSelRange = "{6914, 10}";
-			sepNavVisRange = "{6935, 2888}";
+			sepNavVisRange = "{6935, 2754}";
 		};
 	};
 	8884F69F13A25A9300BEC5AB /* PBXTextBookmark */ = {
@@ -7114,7 +7165,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 0;
-		rLoc = 284;
+		rLoc = 265;
 		rType = 1;
 	};
 	8884F6B813A25B0000BEC5AB /* PBXTextBookmark */ = {
@@ -7122,7 +7173,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 275";
 		rLen = 0;
-		rLoc = 5863;
+		rLoc = 5449;
 		rType = 0;
 		vrLen = 200;
 		vrLoc = 5481;
@@ -7152,7 +7203,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 106";
 		rLen = 0;
-		rLoc = 1927;
+		rLoc = 1705;
 		rType = 0;
 		vrLen = 1151;
 		vrLoc = 1383;
@@ -7162,7 +7213,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 283";
 		rLen = 0;
-		rLoc = 5831;
+		rLoc = 5449;
 		rType = 0;
 		vrLen = 1109;
 		vrLoc = 3270;
@@ -7182,7 +7233,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 283";
 		rLen = 0;
-		rLoc = 5831;
+		rLoc = 5449;
 		rType = 0;
 		vrLen = 1109;
 		vrLoc = 3270;
@@ -7507,9 +7558,15 @@
 	};
 	8884F70613A25CE100BEC5AB /* cssmconfig.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = cssmconfig.h;
 		path = /xcode3/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Security.framework/Headers/cssmconfig.h;
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {726, 1330}}";
+			sepNavSelRange = "{1646, 8}";
+			sepNavVisRange = "{1575, 167}";
+		};
 	};
 	8884F70713A25CE100BEC5AB /* XCBuildMessageTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -7517,7 +7574,7 @@
 		fRef = 8884F70813A25CE100BEC5AB /* Host.h */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 100;
+		rLoc = 101;
 		rType = 1;
 	};
 	8884F70813A25CE100BEC5AB /* Host.h */ = {
@@ -7527,9 +7584,9 @@
 		path = ../Plugins/SoraNetwork/clsockets/Host.h;
 		sourceTree = "<group>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {781, 3472}}";
-			sepNavSelRange = "{3128, 0}";
-			sepNavVisRange = "{2793, 1176}";
+			sepNavIntBoundsRect = "{{0, 0}, {717, 3682}}";
+			sepNavSelRange = "{3663, 340}";
+			sepNavVisRange = "{3540, 229}";
 			sepNavWindowFrame = "{{84, 64}, {840, 746}}";
 		};
 	};
@@ -7538,7 +7595,7 @@
 		fRef = 8884F6B313A25ADC00BEC5AB /* Host.h */;
 		name = "Host.h: 102";
 		rLen = 0;
-		rLoc = 3988;
+		rLoc = 3789;
 		rType = 0;
 		vrLen = 257;
 		vrLoc = 3794;
@@ -7548,8 +7605,8 @@
 		comments = "'int8' has a previous declaration as 'typedef signed char int8'";
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		fallbackIsa = XCBuildMessageTextBookmark;
-		rLen = 1;
-		rLoc = 105;
+		rLen = 0;
+		rLoc = 94;
 		rType = 1;
 	};
 	8884F70B13A25CE100BEC5AB /* PBXTextBookmark */ = {
@@ -7557,7 +7614,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 106";
 		rLen = 0;
-		rLoc = 1943;
+		rLoc = 1705;
 		rType = 0;
 		vrLen = 265;
 		vrLoc = 1811;
@@ -7837,7 +7894,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 106";
 		rLen = 0;
-		rLoc = 1943;
+		rLoc = 1705;
 		rType = 0;
 		vrLen = 207;
 		vrLoc = 1811;
@@ -8331,7 +8388,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 106";
 		rLen = 0;
-		rLoc = 1943;
+		rLoc = 1705;
 		rType = 0;
 		vrLen = 265;
 		vrLoc = 1811;
@@ -8435,7 +8492,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 106";
 		rLen = 0;
-		rLoc = 1943;
+		rLoc = 1705;
 		rType = 0;
 		vrLen = 265;
 		vrLoc = 1811;
@@ -8445,7 +8502,7 @@
 		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		name = "SoraPlatform.h: 106";
 		rLen = 0;
-		rLoc = 1943;
+		rLoc = 1705;
 		rType = 0;
 		vrLen = 265;
 		vrLoc = 1811;
@@ -9852,7 +9909,7 @@
 		ignoreCount = 0;
 		lineNumber = 182;
 		location = Sora;
-		modificationTime = 329503080.763099;
+		modificationTime = 329586293.147688;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9976,7 +10033,7 @@
 		ignoreCount = 0;
 		lineNumber = 207;
 		location = Sora;
-		modificationTime = 329503139.427214;
+		modificationTime = 329586293.147702;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10500,6 +10557,557 @@
 		vrLen = 1305;
 		vrLoc = 28338;
 	};
+	8884F93213A5043B00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
+		name = "SoraOGLInput.cpp: 22";
+		rLen = 0;
+		rLoc = 383;
+		rType = 0;
+		vrLen = 247;
+		vrLoc = 246;
+	};
+	8884F93313A5107B00BEC5AB /* SoraConfig.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 3934}}";
+			sepNavSelRange = "{146, 0}";
+			sepNavVisRange = "{5915, 1287}";
+		};
+	};
+	8884F93813A511FF00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0FEF13681F5800A77847 /* SoraOGLInput.cpp */;
+		name = "SoraOGLInput.cpp: 22";
+		rLen = 0;
+		rLoc = 383;
+		rType = 0;
+		vrLen = 247;
+		vrLoc = 246;
+	};
+	8884F93913A511FF00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 145";
+		rLen = 0;
+		rLoc = 3814;
+		rType = 0;
+		vrLen = 289;
+		vrLoc = 3593;
+	};
+	8884F93A13A511FF00BEC5AB /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Conflicting declaration 'typedef int64_t int64'";
+		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 115;
+		rType = 1;
+	};
+	8884F93B13A511FF00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
+		name = "SoraPlatform.h: 114";
+		rLen = 0;
+		rLoc = 2228;
+		rType = 0;
+		vrLen = 206;
+		vrLoc = 2053;
+	};
+	8884F93E13A5121500BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
+		name = "SoraPlatform.h: 114";
+		rLen = 0;
+		rLoc = 2228;
+		rType = 0;
+		vrLen = 206;
+		vrLoc = 2053;
+	};
+	8884F93F13A5121500BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4E12A09A66007D6865 /* SoraStringConv.h */;
+		name = "SoraStringConv.h: 30";
+		rLen = 0;
+		rLoc = 453;
+		rType = 0;
+		vrLen = 245;
+		vrLoc = 361;
+	};
+	8884F94013A5121500BEC5AB /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'sora::floatHash' declared as an 'inline' variable";
+		fRef = 88CFF7E812C6D562002A9F75 /* hash.h */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 38;
+		rType = 1;
+	};
+	8884F94113A5121500BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88CFF7E812C6D562002A9F75 /* hash.h */;
+		name = "hash.h: 39";
+		rLen = 0;
+		rLoc = 682;
+		rType = 0;
+		vrLen = 142;
+		vrLoc = 642;
+	};
+	8884F94A13A5125E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88CFF7E812C6D562002A9F75 /* hash.h */;
+		name = "hash.h: 124";
+		rLen = 0;
+		rLoc = 4308;
+		rType = 0;
+		vrLen = 315;
+		vrLoc = 4152;
+	};
+	8884F94B13A5125E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 882DBD9F135E32AE00761846 /* SoraConstantStrings.h */;
+		name = "SoraConstantStrings.h: 27";
+		rLen = 0;
+		rLoc = 730;
+		rType = 0;
+		vrLen = 483;
+		vrLoc = 305;
+	};
+	8884F94C13A5125E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F70813A25CE100BEC5AB /* Host.h */;
+		name = "Host.h: 101";
+		rLen = 0;
+		rLoc = 3789;
+		rType = 0;
+		vrLen = 257;
+		vrLoc = 3794;
+	};
+	8884F94D13A5125E00BEC5AB /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Conflicting declaration 'typedef uint64_t uint64'";
+		fRef = 8884F94E13A5125E00BEC5AB /* Host.h */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 101;
+		rType = 1;
+	};
+	8884F94E13A5125E00BEC5AB /* Host.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Host.h;
+		path = ../Plugins/SoraNetwork/clsockets/Host.h;
+		sourceTree = "<group>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {717, 3794}}";
+			sepNavSelRange = "{3906, 0}";
+			sepNavVisRange = "{3763, 259}";
+		};
+	};
+	8884F94F13A5125E00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F70813A25CE100BEC5AB /* Host.h */;
+		name = "Host.h: 90";
+		rLen = 351;
+		rLoc = 3663;
+		rType = 0;
+		vrLen = 229;
+		vrLoc = 3540;
+	};
+	8884F95213A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 883900EE131A096700CC101A /* editorWindow.cpp */;
+		name = "editorWindow.cpp: 762";
+		rLen = 0;
+		rLoc = 28937;
+		rType = 0;
+		vrLen = 1386;
+		vrLoc = 28775;
+	};
+	8884F95313A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C4A12B8AE6600777409 /* slider.cpp */;
+		name = "slider.cpp: 339";
+		rLen = 46;
+		rLoc = 9963;
+		rType = 0;
+		vrLen = 998;
+		vrLoc = 9612;
+	};
+	8884F95413A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88B09C6B12B8AE6600777409 /* xmlgui.cpp */;
+		name = "xmlgui.cpp: 227";
+		rLen = 15;
+		rLoc = 6982;
+		rType = 0;
+		vrLen = 912;
+		vrLoc = 23531;
+	};
+	8884F95513A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886E0E281367A70100A77847 /* SoraGUISound.cpp */;
+		name = "SoraGUISound.cpp: 10";
+		rLen = 0;
+		rLoc = 166;
+		rType = 0;
+		vrLen = 725;
+		vrLoc = 0;
+	};
+	8884F95613A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4F12A09A66007D6865 /* SoraTexture.cpp */;
+		name = "SoraTexture.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 446;
+		vrLoc = 0;
+	};
+	8884F95713A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8811845A12C8ABAF00B3A316 /* win32filewrapper.cpp */;
+		name = "win32filewrapper.cpp: 34";
+		rLen = 0;
+		rLoc = 863;
+		rType = 0;
+		vrLen = 1342;
+		vrLoc = 149;
+	};
+	8884F95813A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88CE58D312C1B41C00C551F0 /* SoraParticleSystem.cpp */;
+		name = "SoraParticleSystem.cpp: 19";
+		rLen = 0;
+		rLoc = 364;
+		rType = 0;
+		vrLen = 1087;
+		vrLoc = 62;
+	};
+	8884F95913A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88DD0B8E12EAA631005555F6 /* stringId.h */;
+		name = "stringId.h: 20";
+		rLen = 0;
+		rLoc = 325;
+		rType = 0;
+		vrLen = 1179;
+		vrLoc = 0;
+	};
+	8884F95A13A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4E12A09A66007D6865 /* SoraStringConv.h */;
+		name = "SoraStringConv.h: 30";
+		rLen = 0;
+		rLoc = 453;
+		rType = 0;
+		vrLen = 1050;
+		vrLoc = 177;
+	};
+	8884F95B13A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F69613A2597E00BEC5AB /* SimpleSocket.h */;
+		name = "SimpleSocket.h: 161";
+		rLen = 10;
+		rLoc = 6914;
+		rType = 0;
+		vrLen = 2754;
+		vrLoc = 6935;
+	};
+	8884F95C13A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 144";
+		rLen = 5;
+		rLoc = 3807;
+		rType = 0;
+		vrLen = 1338;
+		vrLoc = 3040;
+	};
+	8884F95D13A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88CFF7E812C6D562002A9F75 /* hash.h */;
+		name = "hash.h: 124";
+		rLen = 0;
+		rLoc = 4321;
+		rType = 0;
+		vrLen = 1555;
+		vrLoc = 3402;
+	};
+	8884F95E13A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
+		name = "SoraPlatform.h: 99";
+		rLen = 0;
+		rLoc = 1767;
+		rType = 0;
+		vrLen = 971;
+		vrLoc = 1591;
+	};
+	8884F95F13A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F94E13A5125E00BEC5AB /* Host.h */;
+		name = "Host.h: 81";
+		rLen = 0;
+		rLoc = 3470;
+		rType = 0;
+		vrLen = 2512;
+		vrLoc = 4812;
+	};
+	8884F96013A5130000BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F94E13A5125E00BEC5AB /* Host.h */;
+		name = "Host.h: 104";
+		rLen = 0;
+		rLoc = 4008;
+		rType = 0;
+		vrLen = 943;
+		vrLoc = 3506;
+	};
+	8884F96113A5133500BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F94E13A5125E00BEC5AB /* Host.h */;
+		name = "Host.h: 95";
+		rLen = 0;
+		rLoc = 3786;
+		rType = 0;
+		vrLen = 242;
+		vrLoc = 3836;
+	};
+	8884F96213A5133500BEC5AB /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Conflicting declaration 'typedef uint64_t uint64'";
+		fRef = 8884F70613A25CE100BEC5AB /* cssmconfig.h */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 52;
+		rType = 1;
+	};
+	8884F96313A5133500BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F70613A25CE100BEC5AB /* cssmconfig.h */;
+		name = "cssmconfig.h: 53";
+		rLen = 0;
+		rLoc = 1638;
+		rType = 0;
+		vrLen = 174;
+		vrLoc = 1575;
+	};
+	8884F96A13A5137800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F94E13A5125E00BEC5AB /* Host.h */;
+		name = "Host.h: 101";
+		rLen = 0;
+		rLoc = 3928;
+		rType = 0;
+		vrLen = 928;
+		vrLoc = 3506;
+	};
+	8884F96B13A5137800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F70613A25CE100BEC5AB /* cssmconfig.h */;
+		name = "cssmconfig.h: 53";
+		rLen = 0;
+		rLoc = 1638;
+		rType = 0;
+		vrLen = 941;
+		vrLoc = 1111;
+	};
+	8884F96C13A5137800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 144";
+		rLen = 0;
+		rLoc = 3707;
+		rType = 0;
+		vrLen = 1306;
+		vrLoc = 3144;
+	};
+	8884F96D13A5137800BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 151";
+		rLen = 0;
+		rLoc = 3782;
+		rType = 0;
+		vrLen = 1204;
+		vrLoc = 3144;
+	};
+	8884F97213A513DE00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 153";
+		rLen = 0;
+		rLoc = 3814;
+		rType = 0;
+		vrLen = 172;
+		vrLoc = 3723;
+	};
+	8884F97313A513DE00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F70613A25CE100BEC5AB /* cssmconfig.h */;
+		name = "cssmconfig.h: 53";
+		rLen = 8;
+		rLoc = 1646;
+		rType = 0;
+		vrLen = 167;
+		vrLoc = 1575;
+	};
+	8884F97413A513DE00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F94E13A5125E00BEC5AB /* Host.h */;
+		name = "Host.h: 99";
+		rLen = 32;
+		rLoc = 3863;
+		rType = 0;
+		vrLen = 268;
+		vrLoc = 3763;
+	};
+	8884F97513A513DE00BEC5AB /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Conflicting declaration 'typedef long int int64'";
+		fRef = 8884F97613A513DE00BEC5AB /* Host.h */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 98;
+		rType = 1;
+	};
+	8884F97613A513DE00BEC5AB /* Host.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Host.h;
+		path = ../Plugins/SoraNetwork/clsockets/Host.h;
+		sourceTree = "<group>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {717, 3794}}";
+			sepNavSelRange = "{3906, 0}";
+			sepNavVisRange = "{3763, 259}";
+		};
+	};
+	8884F97713A513DE00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F94E13A5125E00BEC5AB /* Host.h */;
+		name = "Host.h: 100";
+		rLen = 0;
+		rLoc = 3906;
+		rType = 0;
+		vrLen = 259;
+		vrLoc = 3763;
+	};
+	8884F97813A513DF00BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 152";
+		rLen = 7;
+		rLoc = 3792;
+		rType = 0;
+		vrLen = 1196;
+		vrLoc = 3180;
+	};
+	8884F97913A5149200BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 8";
+		rLen = 0;
+		rLoc = 146;
+		rType = 0;
+		vrLen = 1596;
+		vrLoc = 0;
+	};
+	8884F97A13A5149200BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 8";
+		rLen = 0;
+		rLoc = 146;
+		rType = 0;
+		vrLen = 1287;
+		vrLoc = 5915;
+	};
+	8884F97B13A515FE00BEC5AB /* SoraConfig.h:260 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 260;
+		modificationTime = 329586293.14771;
+		originalNumberOfMultipleMatches = 1;
+		state = 0;
+	};
+	8884F98313A517B100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F97613A513DE00BEC5AB /* Host.h */;
+		name = "Host.h: 100";
+		rLen = 0;
+		rLoc = 3906;
+		rType = 0;
+		vrLen = 259;
+		vrLoc = 3763;
+	};
+	8884F98413A517B100BEC5AB /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Expected unqualified-id before '}' token";
+		fRef = 88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 135;
+		rType = 1;
+	};
+	8884F98513A517B100BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */;
+		name = "SoraAutoPtr.h: 134";
+		rLen = 0;
+		rLoc = 2632;
+		rType = 0;
+		vrLen = 185;
+		vrLoc = 2477;
+	};
+	8884F98613A517B200BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8884F93313A5107B00BEC5AB /* SoraConfig.h */;
+		name = "SoraConfig.h: 8";
+		rLen = 0;
+		rLoc = 146;
+		rType = 0;
+		vrLen = 1287;
+		vrLoc = 5915;
+	};
+	8884F98713A517B200BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88504BED12ECE990009B9F45 /* SoraInternalLogger.h */;
+		name = "SoraInternalLogger.h: 58";
+		rLen = 0;
+		rLoc = 1438;
+		rType = 0;
+		vrLen = 1319;
+		vrLoc = 402;
+	};
+	8884F98813A517B200BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88E337661369DF5E000B67C8 /* SoraInternalLogger.cpp */;
+		name = "SoraInternalLogger.cpp: 71";
+		rLen = 0;
+		rLoc = 1706;
+		rType = 0;
+		vrLen = 1260;
+		vrLoc = 602;
+	};
+	8884F98913A517B200BEC5AB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */;
+		name = "SoraAutoPtr.h: 115";
+		rLen = 0;
+		rLoc = 2258;
+		rType = 0;
+		vrLen = 846;
+		vrLoc = 1790;
+	};
 	8889817C137500A2000B937A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 8889817D137500A2000B937A /* stl_list.h */;
@@ -10614,7 +11222,7 @@
 		ignoreCount = 0;
 		lineNumber = 184;
 		location = Sora;
-		modificationTime = 329503080.756653;
+		modificationTime = 329586293.146363;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10632,7 +11240,7 @@
 		ignoreCount = 0;
 		lineNumber = 105;
 		location = Sora;
-		modificationTime = 329503080.756836;
+		modificationTime = 329586293.146387;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10690,7 +11298,7 @@
 		ignoreCount = 0;
 		lineNumber = 184;
 		location = Sora;
-		modificationTime = 329503080.756953;
+		modificationTime = 329586293.146406;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10708,7 +11316,7 @@
 		ignoreCount = 0;
 		lineNumber = 184;
 		location = Sora;
-		modificationTime = 329503080.757104;
+		modificationTime = 329586293.146427;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10833,7 +11441,7 @@
 		ignoreCount = 0;
 		lineNumber = 18;
 		location = Sora;
-		modificationTime = 329503080.757271;
+		modificationTime = 329586293.146447;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10851,7 +11459,7 @@
 		ignoreCount = 0;
 		lineNumber = 104;
 		location = Sora;
-		modificationTime = 329503080.757313;
+		modificationTime = 329586293.146472;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10869,7 +11477,7 @@
 		ignoreCount = 0;
 		lineNumber = 104;
 		location = Sora;
-		modificationTime = 329503080.757332;
+		modificationTime = 329586293.146489;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10955,7 +11563,7 @@
 		ignoreCount = 0;
 		lineNumber = 65;
 		location = Sora;
-		modificationTime = 329503080.757409;
+		modificationTime = 329586293.146509;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10973,7 +11581,7 @@
 		ignoreCount = 0;
 		lineNumber = 120;
 		location = Sora;
-		modificationTime = 329503080.757454;
+		modificationTime = 329586293.146536;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -10991,7 +11599,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.757516;
+		modificationTime = 329586293.146556;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11009,7 +11617,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.757598;
+		modificationTime = 329586293.146575;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11027,7 +11635,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.757654;
+		modificationTime = 329586293.146588;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11045,7 +11653,7 @@
 		ignoreCount = 0;
 		lineNumber = 56;
 		location = Sora;
-		modificationTime = 329503080.757779;
+		modificationTime = 329586293.146604;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11063,7 +11671,7 @@
 		ignoreCount = 0;
 		lineNumber = 38;
 		location = Sora;
-		modificationTime = 329503080.757861;
+		modificationTime = 329586293.146625;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11081,7 +11689,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.758019;
+		modificationTime = 329586293.146644;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11099,7 +11707,7 @@
 		ignoreCount = 0;
 		lineNumber = 142;
 		location = Sora;
-		modificationTime = 329503080.758049;
+		modificationTime = 329586293.146667;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11117,7 +11725,7 @@
 		ignoreCount = 0;
 		lineNumber = 37;
 		location = Sora;
-		modificationTime = 329503080.758106;
+		modificationTime = 329586293.146685;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11135,7 +11743,7 @@
 		ignoreCount = 0;
 		lineNumber = 49;
 		location = Sora;
-		modificationTime = 329503080.758194;
+		modificationTime = 329586293.146733;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11153,7 +11761,7 @@
 		ignoreCount = 0;
 		lineNumber = 141;
 		location = Sora;
-		modificationTime = 329503080.758321;
+		modificationTime = 329586293.146758;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11171,7 +11779,7 @@
 		ignoreCount = 0;
 		lineNumber = 46;
 		location = Sora;
-		modificationTime = 329503080.758373;
+		modificationTime = 329586293.146771;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11189,7 +11797,7 @@
 		ignoreCount = 0;
 		lineNumber = 141;
 		location = Sora;
-		modificationTime = 329503080.758504;
+		modificationTime = 329586293.146792;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11206,7 +11814,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 136;
-		modificationTime = 329503080.758555;
+		modificationTime = 329586293.146811;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -11224,7 +11832,7 @@
 		ignoreCount = 0;
 		lineNumber = 130;
 		location = Sora;
-		modificationTime = 329503080.758593;
+		modificationTime = 329586293.146825;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11259,7 +11867,7 @@
 		ignoreCount = 0;
 		lineNumber = 56;
 		location = Sora;
-		modificationTime = 329503080.758666;
+		modificationTime = 329586293.146844;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11276,7 +11884,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 14;
-		modificationTime = 329503080.758802;
+		modificationTime = 329586293.146858;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -11294,7 +11902,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.75888;
+		modificationTime = 329586293.146879;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11312,7 +11920,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.758912;
+		modificationTime = 329586293.146894;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11330,7 +11938,7 @@
 		ignoreCount = 0;
 		lineNumber = 45;
 		location = Sora;
-		modificationTime = 329503080.759011;
+		modificationTime = 329586293.146911;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -11348,7 +11956,7 @@
 		ignoreCount = 0;
 		lineNumber = 38;
 		location = Sora;
-		modificationTime = 329503080.759107;
+		modificationTime = 329586293.146932;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -12657,9 +13265,9 @@
 	};
 	88B09C4A12B8AE6600777409 /* slider.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 4788}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{489, 2016}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 5320}}";
+			sepNavSelRange = "{9963, 46}";
+			sepNavVisRange = "{9612, 998}";
 		};
 	};
 	88B09C4B12B8AE6600777409 /* slider.hpp */ = {
@@ -12853,9 +13461,9 @@
 	};
 	88B09C6B12B8AE6600777409 /* xmlgui.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 13328}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 14658}}";
 			sepNavSelRange = "{6982, 15}";
-			sepNavVisRange = "{6631, 1357}";
+			sepNavVisRange = "{23531, 912}";
 		};
 	};
 	88B09C6C12B8AE6600777409 /* xmlgui.h */ = {
@@ -13297,7 +13905,7 @@
 		ignoreCount = 0;
 		lineNumber = 40;
 		location = Sora;
-		modificationTime = 329503080.751648;
+		modificationTime = 329586293.145144;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13315,7 +13923,7 @@
 		ignoreCount = 0;
 		lineNumber = 30;
 		location = Sora;
-		modificationTime = 329503080.751787;
+		modificationTime = 329586293.1452;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13333,7 +13941,7 @@
 		ignoreCount = 0;
 		lineNumber = 47;
 		location = Sora;
-		modificationTime = 329503080.751847;
+		modificationTime = 329586293.145223;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13371,7 +13979,7 @@
 		ignoreCount = 0;
 		lineNumber = 237;
 		location = Sora;
-		modificationTime = 329503080.751918;
+		modificationTime = 329586293.14527;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13389,7 +13997,7 @@
 		ignoreCount = 0;
 		lineNumber = 115;
 		location = Sora;
-		modificationTime = 329503080.752086;
+		modificationTime = 329586293.145302;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13407,7 +14015,7 @@
 		ignoreCount = 0;
 		lineNumber = 227;
 		location = Sora;
-		modificationTime = 329503080.752261;
+		modificationTime = 329586293.145319;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13425,7 +14033,7 @@
 		ignoreCount = 0;
 		lineNumber = 223;
 		location = Sora;
-		modificationTime = 329503080.752315;
+		modificationTime = 329586293.145343;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13480,7 +14088,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 39;
-		modificationTime = 329503080.752386;
+		modificationTime = 329586293.145361;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -13498,7 +14106,7 @@
 		ignoreCount = 0;
 		lineNumber = 39;
 		location = Sora;
-		modificationTime = 329503080.752442;
+		modificationTime = 329586293.145407;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13516,7 +14124,7 @@
 		ignoreCount = 0;
 		lineNumber = 657;
 		location = Sora;
-		modificationTime = 329503080.752493;
+		modificationTime = 329586293.145432;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13639,7 +14247,7 @@
 		ignoreCount = 0;
 		lineNumber = 24;
 		location = Sora;
-		modificationTime = 329503082.203525;
+		modificationTime = 329586296.264435;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -13677,7 +14285,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.759178;
+		modificationTime = 329586293.146945;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13695,7 +14303,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.75929;
+		modificationTime = 329586293.146989;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13713,7 +14321,7 @@
 		ignoreCount = 0;
 		lineNumber = 209;
 		location = Sora;
-		modificationTime = 329503080.759324;
+		modificationTime = 329586293.147009;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13731,7 +14339,7 @@
 		ignoreCount = 0;
 		lineNumber = 208;
 		location = Sora;
-		modificationTime = 329503080.759452;
+		modificationTime = 329586293.147028;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13749,7 +14357,7 @@
 		ignoreCount = 0;
 		lineNumber = 157;
 		location = Sora;
-		modificationTime = 329503080.759539;
+		modificationTime = 329586293.147049;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13767,7 +14375,7 @@
 		ignoreCount = 0;
 		lineNumber = 396;
 		location = Sora;
-		modificationTime = 329503080.759574;
+		modificationTime = 329586293.147064;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13785,7 +14393,7 @@
 		ignoreCount = 0;
 		lineNumber = 396;
 		location = Sora;
-		modificationTime = 329503080.759614;
+		modificationTime = 329586293.147085;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13803,7 +14411,7 @@
 		ignoreCount = 0;
 		lineNumber = 396;
 		location = Sora;
-		modificationTime = 329503080.759725;
+		modificationTime = 329586293.147104;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13821,7 +14429,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.759892;
+		modificationTime = 329586293.147119;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13866,7 +14474,7 @@
 		ignoreCount = 0;
 		lineNumber = 14;
 		location = Sora;
-		modificationTime = 329503080.759921;
+		modificationTime = 329586293.147139;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13884,7 +14492,7 @@
 		ignoreCount = 0;
 		lineNumber = 122;
 		location = Sora;
-		modificationTime = 329503080.759977;
+		modificationTime = 329586293.147158;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13902,7 +14510,7 @@
 		ignoreCount = 0;
 		lineNumber = 112;
 		location = Sora;
-		modificationTime = 329503080.760182;
+		modificationTime = 329586293.147179;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13920,7 +14528,7 @@
 		ignoreCount = 0;
 		lineNumber = 112;
 		location = Sora;
-		modificationTime = 329503080.760294;
+		modificationTime = 329586293.147196;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -13945,7 +14553,7 @@
 		ignoreCount = 0;
 		lineNumber = 46;
 		location = Sora;
-		modificationTime = 329503080.760464;
+		modificationTime = 329586293.147208;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -14031,7 +14639,7 @@
 		ignoreCount = 0;
 		lineNumber = 42;
 		location = Sora;
-		modificationTime = 329503080.760538;
+		modificationTime = 329586293.147222;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -14083,7 +14691,7 @@
 		ignoreCount = 0;
 		lineNumber = 37;
 		location = Sora;
-		modificationTime = 329503080.760661;
+		modificationTime = 329586293.147241;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -14146,9 +14754,9 @@
 	};
 	88CE58D312C1B41C00C551F0 /* SoraParticleSystem.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {977, 7420}}";
-			sepNavSelRange = "{7908, 0}";
-			sepNavVisRange = "{7426, 755}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 7406}}";
+			sepNavSelRange = "{364, 0}";
+			sepNavVisRange = "{62, 1087}";
 		};
 	};
 	88CE58D412C1B41C00C551F0 /* SoraParticleSystem.h */ = {
@@ -14176,8 +14784,8 @@
 	88CFF7E812C6D562002A9F75 /* hash.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 2212}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{3502, 1499}";
+			sepNavSelRange = "{4321, 0}";
+			sepNavVisRange = "{3402, 1555}";
 		};
 	};
 	88CFF86A12C6E4EE002A9F75 /* SoraEventManager.h */ = {
@@ -14291,9 +14899,9 @@
 	};
 	88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1834}}";
-			sepNavSelRange = "{1832, 0}";
-			sepNavVisRange = "{452, 1221}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1932}}";
+			sepNavSelRange = "{2258, 0}";
+			sepNavVisRange = "{1790, 846}";
 		};
 	};
 	88D87D2B12A09A66007D6865 /* SoraColor.h */ = {
@@ -14435,9 +15043,9 @@
 	};
 	88D87D4012A09A66007D6865 /* SoraPlatform.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {717, 4480}}";
-			sepNavSelRange = "{1943, 0}";
-			sepNavVisRange = "{1811, 265}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 4102}}";
+			sepNavSelRange = "{1767, 0}";
+			sepNavVisRange = "{1591, 971}";
 			sepNavWindowFrame = "{{84, 64}, {840, 746}}";
 		};
 	};
@@ -14524,13 +15132,13 @@
 	88D87D4E12A09A66007D6865 /* SoraStringConv.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1152, 840}}";
-			sepNavSelRange = "{1110, 80}";
-			sepNavVisRange = "{142, 1085}";
+			sepNavSelRange = "{453, 0}";
+			sepNavVisRange = "{177, 1050}";
 		};
 	};
 	88D87D4F12A09A66007D6865 /* SoraTexture.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 741}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 693}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 446}";
 		};
@@ -15056,7 +15664,7 @@
 		fRef = 882DBD9F135E32AE00761846 /* SoraConstantStrings.h */;
 		name = "SoraConstantStrings.h: 27";
 		rLen = 0;
-		rLoc = 711;
+		rLoc = 707;
 		rType = 0;
 		vrLen = 1238;
 		vrLoc = 0;
@@ -15146,7 +15754,7 @@
 		fRef = 88DD0B8E12EAA631005555F6 /* stringId.h */;
 		name = "stringId.h: 73";
 		rLen = 0;
-		rLoc = 1673;
+		rLoc = 1672;
 		rType = 0;
 		vrLen = 1254;
 		vrLoc = 632;
@@ -15538,7 +16146,7 @@
 		vrLen = 2102;
 		vrLoc = 0;
 	};
-	88DCE60A136667AE005FBBE0 /* SoraPlatform.h:69 */ = {
+	88DCE60A136667AE005FBBE0 /* SoraPlatform.h:64 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -15549,8 +16157,8 @@
 		fileReference = 88D87D4012A09A66007D6865 /* SoraPlatform.h */;
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 69;
-		modificationTime = 329503080.753277;
+		lineNumber = 64;
+		modificationTime = 329586293.145616;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -15738,7 +16346,7 @@
 		ignoreCount = 0;
 		lineNumber = 13;
 		location = Sora;
-		modificationTime = 329503080.753372;
+		modificationTime = 329586293.145644;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15766,7 +16374,7 @@
 		ignoreCount = 0;
 		lineNumber = 267;
 		location = Sora;
-		modificationTime = 329503080.753518;
+		modificationTime = 329586293.145665;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15791,9 +16399,9 @@
 	};
 	88DD0B8E12EAA631005555F6 /* stringId.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1232}}";
-			sepNavSelRange = "{1673, 0}";
-			sepNavVisRange = "{632, 1254}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1246}}";
+			sepNavSelRange = "{325, 0}";
+			sepNavVisRange = "{0, 1179}";
 		};
 	};
 	88DD0B8F12EAA708005555F6 /* SoraAS.cpp */ = {
@@ -15904,15 +16512,15 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 172;
-		modificationTime = 329503080.753154;
+		modificationTime = 329586293.145586;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
 	88E337661369DF5E000B67C8 /* SoraInternalLogger.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1152, 1204}}";
-			sepNavSelRange = "{1317, 62}";
-			sepNavVisRange = "{555, 1232}";
+			sepNavIntBoundsRect = "{{0, 0}, {1152, 1288}}";
+			sepNavSelRange = "{1706, 0}";
+			sepNavVisRange = "{602, 1260}";
 		};
 	};
 	88E33834136A7A0D000B67C8 /* PBXTextBookmark */ = {
@@ -16061,7 +16669,7 @@
 		ignoreCount = 0;
 		lineNumber = 79;
 		location = Sora;
-		modificationTime = 329503080.754202;
+		modificationTime = 329586293.145742;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16079,7 +16687,7 @@
 		ignoreCount = 0;
 		lineNumber = 16;
 		location = Sora;
-		modificationTime = 329503081.979281;
+		modificationTime = 329586295.977191;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
@@ -16144,7 +16752,7 @@
 		ignoreCount = 0;
 		lineNumber = 60;
 		location = Sora;
-		modificationTime = 329503080.75438;
+		modificationTime = 329586293.145785;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16168,7 +16776,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 207;
-		modificationTime = 329503080.75461;
+		modificationTime = 329586293.1458;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -16193,7 +16801,7 @@
 		ignoreCount = 0;
 		lineNumber = 520;
 		location = Sora;
-		modificationTime = 329503080.754683;
+		modificationTime = 329586293.145822;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16211,7 +16819,7 @@
 		ignoreCount = 0;
 		lineNumber = 587;
 		location = Sora;
-		modificationTime = 329503080.75477;
+		modificationTime = 329586293.145842;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16271,7 +16879,7 @@
 		ignoreCount = 0;
 		lineNumber = 201;
 		location = Sora;
-		modificationTime = 329503080.754994;
+		modificationTime = 329586293.145871;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16287,7 +16895,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 201;
-		modificationTime = 329503080.755116;
+		modificationTime = 329586293.145894;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -16304,7 +16912,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 201;
-		modificationTime = 329503080.755259;
+		modificationTime = 329586293.14591;
 		originalNumberOfMultipleMatches = 1;
 		state = 0;
 	};
@@ -16339,7 +16947,7 @@
 		ignoreCount = 0;
 		lineNumber = 180;
 		location = Sora;
-		modificationTime = 329503080.755371;
+		modificationTime = 329586293.145926;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16357,7 +16965,7 @@
 		ignoreCount = 0;
 		lineNumber = 178;
 		location = Sora;
-		modificationTime = 329503080.755593;
+		modificationTime = 329586293.145939;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16416,7 +17024,7 @@
 		ignoreCount = 0;
 		lineNumber = 71;
 		location = Sora;
-		modificationTime = 329503080.755733;
+		modificationTime = 329586293.145957;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16488,7 +17096,7 @@
 		ignoreCount = 0;
 		lineNumber = 176;
 		location = Sora;
-		modificationTime = 329503080.755785;
+		modificationTime = 329586293.145972;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16506,7 +17114,7 @@
 		ignoreCount = 0;
 		lineNumber = 82;
 		location = Sora;
-		modificationTime = 329503080.755864;
+		modificationTime = 329586293.145987;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16524,7 +17132,7 @@
 		ignoreCount = 0;
 		lineNumber = 66;
 		location = Sora;
-		modificationTime = 329503080.755888;
+		modificationTime = 329586293.146004;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16552,7 +17160,7 @@
 		ignoreCount = 0;
 		lineNumber = 169;
 		location = Sora;
-		modificationTime = 329503080.755914;
+		modificationTime = 329586293.146022;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16570,7 +17178,7 @@
 		ignoreCount = 0;
 		lineNumber = 169;
 		location = Sora;
-		modificationTime = 329503080.756027;
+		modificationTime = 329586293.146046;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16588,7 +17196,7 @@
 		ignoreCount = 0;
 		lineNumber = 129;
 		location = Sora;
-		modificationTime = 329503080.756126;
+		modificationTime = 329586293.146067;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16606,7 +17214,7 @@
 		ignoreCount = 0;
 		lineNumber = 122;
 		location = Sora;
-		modificationTime = 329503080.756203;
+		modificationTime = 329586293.14609;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16624,7 +17232,7 @@
 		ignoreCount = 0;
 		lineNumber = 127;
 		location = Sora;
-		modificationTime = 329503080.756241;
+		modificationTime = 329586293.146115;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16642,7 +17250,7 @@
 		ignoreCount = 0;
 		lineNumber = 41;
 		location = Sora;
-		modificationTime = 329503080.75634;
+		modificationTime = 329586293.146181;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16660,7 +17268,7 @@
 		ignoreCount = 0;
 		lineNumber = 30;
 		location = Sora;
-		modificationTime = 329503080.756366;
+		modificationTime = 329586293.146208;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16678,7 +17286,7 @@
 		ignoreCount = 0;
 		lineNumber = 42;
 		location = Sora;
-		modificationTime = 329503080.756387;
+		modificationTime = 329586293.146222;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16735,7 +17343,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 65;
-		modificationTime = 329503080.756425;
+		modificationTime = 329586293.146264;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -16825,7 +17433,7 @@
 		ignoreCount = 0;
 		lineNumber = 232;
 		location = Sora;
-		modificationTime = 329503080.756449;
+		modificationTime = 329586293.146313;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16843,7 +17451,7 @@
 		ignoreCount = 0;
 		lineNumber = 143;
 		location = Sora;
-		modificationTime = 329503082.095485;
+		modificationTime = 329586296.135773;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};

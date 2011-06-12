@@ -65,6 +65,12 @@ namespace sora {
 		if(file.is_open()) {
 			std::vector<LogMssg>::iterator itLog = vMssg.begin();
 			while(itLog != vMssg.end()) {
+				switch(itLog->mLogLevel) {
+					case LOG_LEVEL_NORMAL: file<<"[normal]";  break;
+					case LOG_LEVEL_ERROR: file<<"[error]";  break;
+					case LOG_LEVEL_NOTICE: file<<"[notice]";  break;
+					case LOG_LEVEL_WARNING: file<<"[warning]";  break;
+				}
 				file<<itLog->mLog<<std::endl;
 				++itLog;
 			}
