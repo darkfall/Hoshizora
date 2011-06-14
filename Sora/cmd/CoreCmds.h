@@ -10,8 +10,8 @@
 #ifndef SORA_CORE_CMDS_H_
 #define SORA_CORE_CMDS_H_
 
-#include "SoraPlatform.h"
-#include "SoraEvent.h"
+#include "../SoraPlatform.h"
+#include "../SoraEvent.h"
 
 namespace sora {
 	

@@ -1,0 +1,32 @@
+TARGET_LIB = soracore.a
+OBJS = ../sora/SoraStringConv.o ../sora/CoreTransform.o ../sora/hgerect.o \
+	../sora/hgevector.o ../sora/SoraCanvas.o \
+	../sora/SoraEnvValues.o ../sora/SoraEvent.o ../sora/SoraEventManager.o \
+	../sora/SoraFileUtility.o ../sora/SoraFolderResourceManager.o \
+	../sora/SoraImageEffect.o ../sora/SoraLocalizer.o ../sora/SoraMemoryBuffer.o \
+	../sora/SoraObject.o ../sora/SoraPluginManager.o ../sora/SoraRenderSystem.o \
+	../sora/SoraResourceFileFinder.o ../sora/SoraShader.o ../sora/SoraSprite.o \
+	../sora/SoraTexture.o ../sora/SoraTimerEvent.o  \
+	../sora/cmd/CoreCmds.o ../sora/cmd/SoraConsole.o ../sora/Debug/SoraInternalLogger.o \
+	../sora/helpers/SoraInputSimulator.o ../sora/helpers/SoraMutableSprite.o ../sora/helpers/SoraSpriteFont.o ../sora/helpers/SoraZSorter.o \
+	../sora/json/json_reader.o ../sora/json/json_value.o ../sora/json/json_writer.o \
+	../sora/llexer/llexer.o ../sora/random/SFMT.o ../sora/SoraINIFile/SoraINIFile.o \
+	../sora/support/md5lib.o \
+	../sora/tinyXML/tinystr.o ../sora/tinyXML/tinyxml.o ../sora/tinyXML/tinyxmlerror.o ../sora/tinyXML/tinyxmlparser.o \
+	../sora/SoraCore.o \
+	
+INCDIR = 
+CFLAGS = -O2 -G0 -Wall
+CXXFLAGS = $(CFLAGS)
+ASFLAGS = $(CFLAGS)
+
+LIBS = -lfreetype -lpng -lz 
+LIBDIR = 
+LDFLAGS =
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak
+
+install : $(TARGET_LIB)
+	@cp soracore.a lib/
+	@echo "Done"

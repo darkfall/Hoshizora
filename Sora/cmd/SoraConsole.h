@@ -10,13 +10,13 @@
 #ifndef SORA_COMMAND_LINE_H_
 #define SORA_COMMAND_LINE_H_
 
-#include "SoraPlatform.h"
-#include "SoraSingleton.h"
+#include "../SoraPlatform.h"
+#include "../SoraSingleton.h"
 
-#include "SoraEvent.h"
-#include "SoraKeyInfo.h"
+#include "../SoraEvent.h"
+#include "../SoraKeyInfo.h"
 
-#include "SoraFont.h"
+#include "../SoraFont.h"
 
 namespace sora {
 	

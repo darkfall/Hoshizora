@@ -1,8 +1,8 @@
 #ifndef SORA_TIMER_WIN32
 #define SORA_TIMER_WIN32
 
-#include "SoraTimer.h"
-#include "SoraPlatform.h"
+#include "../SoraTimer.h"
+#include "../SoraPlatform.h"
 
 namespace sora {
 	class SoraWin32Timer;

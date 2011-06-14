@@ -8,10 +8,12 @@
  */
 
 #include "SoraINIFile.h"
-#include "SoraStringConv.h"
-#include <fstream>
 
-#include "SoraCore.h"
+#include "../SoraStringConv.h"
+#include "../SoraCore.h"
+
+
+#include <fstream>
 
 namespace sora {
 

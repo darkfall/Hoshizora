@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  mColor.h
  *  OpenGLES Study 1
  *

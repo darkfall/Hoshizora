@@ -88,10 +88,16 @@ static inline int lrint (double const x) { // Round to nearest integer
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
-#include <memory.h>
 
+#ifndef _PSP
+#include <memory.h>
+#else
+#include <malloc.h>
+#include <memory>
+#endif
 
 #include "SoraConfig.h"
 
@@ -136,10 +142,6 @@ namespace sora {
 	};
 } // namespace sora
 
-
-#include <string>
-typedef std::string SoraString;
-typedef std::wstring SoraWString;
 
 #include <cassert>
 
@@ -186,8 +188,6 @@ typedef std::wstring SoraWString;
 	#define OS_ANDROID
 
 #elif defined(_WIN32) || defined(_MSC_VER)
-
-
 	#define FONT_PATH L"C:/Windows/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
@@ -195,11 +195,17 @@ typedef std::wstring SoraWString;
 
 #elif defined(linux) || defined(__linux)
     // linux defines are just experimental, i'm not sure it's right or not
-    #define USE_GLFW_KEYMAP
     #define FONT_PATH L"/usr/share/fonts/truetype"
     #define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
     #define OS_LINUX
+
+#elif defined(_PSP)
+
+#define FONT_PATH L"./fonts"
+#define DEFAULT_RESOURCE_SEARCH_PATH L"."
+
+#define OS_PSP
 
 #endif
 
@@ -209,6 +215,22 @@ typedef __int64 s_int64;
 typedef int64_t s_int64 ;
 #endif
 
+#ifndef OS_PSP
+#include <string>
+typedef std::string SoraString;
+typedef std::wstring SoraWString;
+
+#define HAS_WSTRING
+
+#else
+#include <string>
+typedef std::string SoraString;
+namespace std {
+	typedef std::basic_string<wchar_t> wstring;
+	typedef basic_ostringstream<wchar_t> wostringstream;
+}
+typedef std::wstring SoraWString;
+#endif
 
 
 // android resolution definitions

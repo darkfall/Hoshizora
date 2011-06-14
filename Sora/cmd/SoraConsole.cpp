@@ -9,11 +9,11 @@
 
 #include "SoraConsole.h"
 
-#include "SoraEventManager.h"
-#include "SoraCore.h"
+#include "../SoraEventManager.h"
+#include "../SoraCore.h"
 
-#include "SoraStringConv.h"
-#include "Debug/SoraInternalLogger.h"
+#include "../SoraStringConv.h"
+#include "../Debug/SoraInternalLogger.h"
 
 namespace sora {
 

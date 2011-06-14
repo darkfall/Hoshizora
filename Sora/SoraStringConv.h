@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  StringConv.h
  *  KuiIP
  *
@@ -20,8 +20,6 @@
 #include "SoraPlatform.h"
 
 namespace sora {
-
-
 	//extern "C" {
 	//INT -> STRING
 	std::string int_to_str(int32 n);
@@ -33,7 +31,6 @@ namespace sora {
 	std::string ws2s(const std::wstring& ws);
 	//字符串->宽字符串
 	std::wstring s2ws(const std::string& s);
-	
 	
 	template<typename T>
 	std::string anyToString(const T& t, int precision) {

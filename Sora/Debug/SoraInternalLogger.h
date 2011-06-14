@@ -1,11 +1,11 @@
 #ifndef SORA_CORE_LOGGER_H
 #define SORA_CORE_LOGGER_H
 
-#include "SoraPlatform.h"
-#include "SoraSingleton.h"
-#include "SoraStringConv.h"
-#include "SoraEvent.h"
-#include "SoraTimerEvent.h"
+#include "../SoraPlatform.h"
+#include "../SoraSingleton.h"
+#include "../SoraStringConv.h"
+#include "../SoraEvent.h"
+#include "../SoraTimerEvent.h"
 
 #include <vector>
 #include <fstream>
@@ -63,11 +63,21 @@ namespace sora {
 	
 	static std::wstring vamssgw(const wchar_t* format, ...) {
 		va_list	ArgPtr;
+#ifdef HAS_WSTRING
 		wchar_t Message[1024] = {0};
 		va_start(ArgPtr, format);
 		vswprintf(Message, 1024, format, ArgPtr);
 		va_end(ArgPtr);
 		return Message;
+
+#else
+		char Message[1024] = {0};
+		va_start(ArgPtr, format);
+		vsprintf(Message, ws2sfast(format).c_str(), ArgPtr);
+		va_end(ArgPtr);
+		return s2wsfast(Message);
+
+#endif
 	}
 	
 	static std::string vamssg(const char* format, ...) {

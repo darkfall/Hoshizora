@@ -16,7 +16,7 @@
 #ifdef OS_IOS
 
 // for [Texture2D initWithString]
-#include "SoraOGLESRenderer/Apple/Texture2D.h"
+#include "SoraiOSGLRenderer/Apple/Texture2D.h"
 #include "stringId.h"
 
 namespace sora {

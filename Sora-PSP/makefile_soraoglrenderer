@@ -1,0 +1,18 @@
+TARGET_LIB = sorapspglrenderer.a
+OBJS = SoraPSPGLRenderTarget.o SoraPSPGLRenderer.o 
+	
+INCDIR = ./ ../sora
+CFLAGS = -O2 -G0 -Wall
+CXXFLAGS = $(CFLAGS)
+ASFLAGS = $(CFLAGS)
+
+LIBS = -lz ./lib/libGL.a ./lib/libGLU.a ./lib/libglut.a ./lib/soil.a ./lib/soracore.a
+LIBDIR = 
+LDFLAGS =
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak
+
+install : $(TARGET_LIB)
+	@cp sorapspglrenderer.a lib/
+	@echo "Done"

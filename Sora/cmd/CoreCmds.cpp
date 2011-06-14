@@ -10,10 +10,9 @@
 #include "CoreCmds.h"
 #include "SoraConsole.h"
 
-#include "SoraConsole.h"
-#include "Debug/SoraInternalLogger.h"
+#include "../Debug/SoraInternalLogger.h"
 
-#include "SoraCore.h"
+#include "../SoraCore.h"
 
 namespace sora {
 

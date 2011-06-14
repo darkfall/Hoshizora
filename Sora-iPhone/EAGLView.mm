@@ -9,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "EAGLView.h"
-#import "SoraOGLESRenderer/SoraiOSTouchPool.h"
+#import "SoraiOSGLRenderer/SoraiOSTouchPool.h"
 
 @interface EAGLView (PrivateMethods)
 - (void)createFramebuffer;

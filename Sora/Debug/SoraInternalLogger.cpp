@@ -10,8 +10,8 @@
 
 #include "SoraInternalLogger.h"
 
-#include "SoraEventManager.h"
-#include "SoraEvent.h"
+#include "../SoraEventManager.h"
+#include "../SoraEvent.h"
 
 namespace sora {
 	
@@ -43,12 +43,21 @@ namespace sora {
 	
 	void SoraInternalLogger::printf(const wchar_t* format, ...) {
 		va_list	ArgPtr;
+#ifdef HAS_WSTRING
 		wchar_t Message[1024] = {0};
 		va_start(ArgPtr, format);
 		vswprintf(Message, 1024, format, ArgPtr);
-		va_end(ArgPtr);
 		
+		va_end(ArgPtr);
 		::wprintf(L"%s", Message);
+#else
+		char Message[1024] = {0};
+		va_start(ArgPtr, format);
+		vsprintf(Message, ws2sfast(format).c_str(), ArgPtr);
+		
+		va_end(ArgPtr);
+		::printf("%s", Message);
+#endif
 	}
 	
 	void SoraInternalLogger::log(const std::string& log, int32 logLevel) {

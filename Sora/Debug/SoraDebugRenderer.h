@@ -10,11 +10,11 @@
 #ifndef SORA_DEBUG_RENDERER_H_
 #define SORA_DEBUG_RENDERER_H_
 
-#include "SoraPlatform.h"
-#include "SoraSingleton.h"
+#include "../SoraPlatform.h"
+#include "../SoraSingleton.h"
 
-#include "SoraCore.h"
-#include "SoraFont.h"
+#include "../SoraCore.h"
+#include "../SoraFont.h"
 
 
 namespace sora {

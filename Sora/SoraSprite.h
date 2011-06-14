@@ -8,7 +8,6 @@
 #include "SoraImageEffect.h"
 #include "SoraObject.h"
 #include "SoraShader.h"
-#include "RTTI/SoraRTTI.h"
 
 #include <list>
 

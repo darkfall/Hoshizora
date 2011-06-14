@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/psp/!svn/ver/1652/trunk/pspgl/GL
+END
+glut.h
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/psp/!svn/ver/923/trunk/pspgl/GL/glut.h
+END
+gl.h
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/psp/!svn/ver/911/trunk/pspgl/GL/gl.h
+END
+glext.h
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/psp/!svn/ver/1652/trunk/pspgl/GL/glext.h
+END
+glu.h
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/psp/!svn/ver/911/trunk/pspgl/GL/glu.h
+END

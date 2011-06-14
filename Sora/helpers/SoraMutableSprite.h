@@ -10,7 +10,7 @@
 #ifndef SORA_MUTABLE_SPRITE_H_
 #define SORA_MUTABLE_SPRITE_H_
 
-#include "SoraSprite.h"
+#include "../SoraSprite.h"
 
 namespace sora {
 	

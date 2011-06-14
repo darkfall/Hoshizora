@@ -8,7 +8,7 @@
  */
 
 #include "SoraInputSimulator.h"
-#include "SoraEventManager.h"
+#include "../SoraEventManager.h"
 
 namespace sora {
 	

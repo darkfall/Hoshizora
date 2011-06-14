@@ -10,9 +10,9 @@
 #ifndef SORA_INPUT_SIMULATOR_H_
 #define SORA_INPUT_SIMULATOR_H_
 
-#include "SoraPlatform.h"
-#include "SoraKeyInfo.h"
-#include "SoraPlugin.h"
+#include "../SoraPlatform.h"
+#include "../SoraKeyInfo.h"
+#include "../SoraPlugin.h"
 
 #include <map>
 

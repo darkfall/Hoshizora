@@ -260,14 +260,23 @@ namespace sora {
 		}
 	}
 
-	void SoraFTFont::print(float32 x, float32 y, int32 align, const wchar_t* pwstr, ...) {
-		va_list l;
-		va_start(l, pwstr);
+	void SoraFTFont::print(float32 x, float32 y, int32 align, const wchar_t* format, ...) {
+		va_list	ArgPtr;
 
-		wchar_t text[1024];
-		vswprintf(text, 1024, pwstr, l);
-
-		render(x, y, align, text);
+#ifdef HAS_WSTRING
+		wchar_t Message[1024] = {0};
+		va_start(ArgPtr, format);
+		vswprintf(Message, 1024, format, ArgPtr);
+		va_end(ArgPtr);
+		render(x, y, align, Message);
+		
+#else
+		char Message[1024] = {0};
+		va_start(ArgPtr, format);
+		vsprintf(Message, ws2sfast(format).c_str(), ArgPtr);
+		va_end(ArgPtr);
+		render(x, y, align,  s2wsfast(Message).c_str());
+#endif
 	}
 
 	void SoraFTFont::render(float32 x, float32 y, const wchar_t* pwstr, bool bhcenter, bool bvcenter) {

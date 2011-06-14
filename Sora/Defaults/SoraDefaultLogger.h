@@ -3,7 +3,7 @@
 
 #include <fstream>
 
-#include "SoraPlatform.h"
+#include "../SoraPlatform.h"
 
 namespace sora {
 

@@ -10,9 +10,10 @@
 #ifndef SORA_MISCTOOL_IOS_H_
 #define SORA_MISCTOOL_IOS_H_
 
+#include "../SoraStringConv.h"
+#include "../SoraPlatform.h"
+
 #include "SoraDefaultMiscTool.h"
-#include "SoraStringConv.h"
-#include "SoraPlatform.h"
 
 #ifdef OS_IOS
 

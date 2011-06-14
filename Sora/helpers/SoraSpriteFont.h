@@ -10,7 +10,7 @@
 #ifndef SORA_SPRITE_FONT_H_
 #define SORA_SPRITE_FONT_H_
 
-#include "SoraFont.h"
+#include "../SoraFont.h"
 
 namespace sora {
 	

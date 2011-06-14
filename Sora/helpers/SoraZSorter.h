@@ -10,8 +10,8 @@
 #ifndef SORA_ZSORTER_H_
 #define SORA_ZSORTER_H_
 
-#include "SoraPlatform.h"
-#include "SoraSprite.h"
+#include "../SoraPlatform.h"
+#include "../SoraSprite.h"
 
 namespace sora {
 	

@@ -10,7 +10,6 @@
 #ifndef _SORA_MEMORY_BUFFER_H_
 #define _SORA_MEMORY_BUFFER_H_
 
-#include <memory.h>
 #if !defined(__APPLE__)
 #include <malloc.h>
 #endif

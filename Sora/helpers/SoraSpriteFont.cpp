@@ -9,7 +9,7 @@
 
 #include "SoraSpriteFont.h"
 
-#include "SoraCore.h"
+#include "../SoraCore.h"
 
 namespace sora {
 
@@ -72,13 +72,22 @@ namespace sora {
 	}
 	
 	void SoraSpriteFont::print(float32 x, float32 y, int32 align, const wchar_t *format, ...) {
-		va_list l;
-		va_start(l, format);
+		va_list	ArgPtr;
+#ifdef HAS_WSTRING
+		wchar_t Message[1024] = {0};
+		va_start(ArgPtr, format);
+		vswprintf(Message, 1024, format, ArgPtr);
+		va_end(ArgPtr);
+		render(x, y, align, Message);
+
+#else
+		char Message[1024] = {0};
+		va_start(ArgPtr, format);
+		vsprintf(Message, ws2sfast(format).c_str(), ArgPtr);
+		va_end(ArgPtr);
+		render(x, y, align,  s2wsfast(Message).c_str());
+#endif
 		
-		wchar_t text[1024];
-		vswprintf(text, 1024, format, l);
-		
-		render(x, y, align, text);
 	}
 	
 	void SoraSpriteFont::render(float32 x, float32 y, int32 align, const wchar_t* text) {

@@ -1,9 +1,9 @@
 #ifndef SORA_MISCTOOL_WIN32
 #define SORA_MISCTOOL_WIN32
 
+#include "../SoraStringConv.h"
+#include "../SoraPlatform.h"
 #include "SoraDefaultMiscTool.h"
-#include "SoraStringConv.h"
-#include "SoraPlatform.h"
 
 #ifdef OS_WIN32
 
