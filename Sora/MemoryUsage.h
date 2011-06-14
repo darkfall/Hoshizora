@@ -16,7 +16,7 @@
 
 #include <mach/mach.h>
 
-#elif defined(OS_WINDOWS)
+#elif defined(OS_WIN32)
 
 #include <windows.h>
 #include <psapi.h>

@@ -15,8 +15,7 @@
 
 #include "EnvVarExport.h"
 
-
-#include "TinkerExport.h"
+//#include "TinkerExport.h"
 
 namespace sora { 
 	

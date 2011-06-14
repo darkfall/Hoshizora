@@ -40,7 +40,7 @@ namespace sora {
 		__Z_BUFFER_NODE* next;
 		
 		__Z_BUFFER_NODE(): vertex(NULL), shader(NULL), tex(NULL), blend(BLEND_DEFAULT), size(0), next(NULL) {}
-	};
+	} __Z_BUFFER_NODE;
 	
 	__Z_BUFFER_NODE __z_buffer_array[1000];
 	

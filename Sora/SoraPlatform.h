@@ -7,6 +7,7 @@
  *
  */
 
+
 #ifndef _SORA_PLATFORM_H_
 #define _SORA_PLATFORM_H_
 
@@ -40,6 +41,7 @@ namespace sora {
 #endif
 
 #ifdef WIN32
+
 namespace sora {
 
 using std::hash_map;
@@ -119,13 +121,6 @@ typedef int64_t  int64;
 
 #include <stdint.h>
 
-#ifdef OS_WIN32
-typedef __int64 s_int64;
-#else
-typedef int64_t s_int64 ;
-#endif
-
-
 namespace sora {
 	typedef ulong32 HSORASPRITE;
 	typedef ulong32 HSORATEXTURE;
@@ -154,7 +149,7 @@ typedef std::wstring SoraWString;
 #endif
 
 // we are building a dll
-#if defined(WIN32) && defined(SORA_DLL_EXPORT)
+#if defined(_WIN32) && defined(SORA_DLL_EXPORT)
 #define SORAEXPORT __declspec(dllexport)
 #else
 #define SORAEXPORT
@@ -166,7 +161,7 @@ typedef std::wstring SoraWString;
 #define SORACALL
 #endif
 
-#if defined(WIN32)
+#if defined(_WIN32)
 #define strcmpnocase stricmp
 #else
 #define strcmpnocase strcasecmp
@@ -190,7 +185,9 @@ typedef std::wstring SoraWString;
 
 	#define OS_ANDROID
 
-#elif defined(WIN32) || defined(_MSC_VER)
+#elif defined(_WIN32) || defined(_MSC_VER)
+
+
 	#define FONT_PATH L"C:/Windows/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
@@ -205,6 +202,13 @@ typedef std::wstring SoraWString;
     #define OS_LINUX
 
 #endif
+
+#ifdef OS_WIN32
+typedef __int64 s_int64;
+#else
+typedef int64_t s_int64 ;
+#endif
+
 
 
 // android resolution definitions

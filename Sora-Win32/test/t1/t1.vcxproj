@@ -417,6 +417,7 @@
     <ClInclude Include="..\..\..\Sora\SoraCanvas.h" />
     <ClInclude Include="..\..\..\Sora\SoraColor.h" />
     <ClInclude Include="..\..\..\Sora\SoraComponentType.h" />
+    <ClInclude Include="..\..\..\Sora\SoraConfig.h" />
     <ClInclude Include="..\..\..\Sora\SoraConstantStrings.h" />
     <ClInclude Include="..\..\..\Sora\SoraCore.h" />
     <ClInclude Include="..\..\..\Sora\SoraEnvValues.h" />
@@ -670,6 +671,7 @@
     <ClCompile Include="..\..\..\Sora\SoraEnvValues.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEventManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraFileUtility.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraLocalizer.cpp" />

@@ -13,7 +13,7 @@
 // preconfig for different platforms
 
 #ifdef _WIN32
-
+#include <Windows.h>
 // Verify that we're built with the multithreaded
 // versions of the runtime libraries
 #if defined(_MSC_VER) && !defined(_MT)

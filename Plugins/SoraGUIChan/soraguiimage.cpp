@@ -102,7 +102,10 @@ namespace gcn
 	
 	void SoraGUIImage::setTextureRect(const Rectangle& rect) {
 		if(mSoraSprite)
-			mSoraSprite->setTextureRect(rect.x, rect.y, rect.width, rect.height);
+			mSoraSprite->setTextureRect(static_cast<float32>(rect.x), 
+										static_cast<float32>(rect.y), 
+										static_cast<float32>(rect.width), 
+										static_cast<float32>(rect.height));
 	}
 
     void SoraGUIImage::convertToDisplayFormat()
