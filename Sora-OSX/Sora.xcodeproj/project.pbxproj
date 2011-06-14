@@ -3165,6 +3165,7 @@
 					"\"$(SRCROOT)/../Plugins/GLFW3\"",
 					"\"$(SRCROOT)/../Plugins/SoraHttpFile\"",
 					"\"$(SRCROOT)/../Plugins/SoraPThread\"",
+					"\"$(SRCROOT)/../Plugins/libvlc/win32/lib\"",
 				);
 				PRODUCT_NAME = Sora;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
@@ -3206,6 +3207,7 @@
 					"\"$(SRCROOT)/../Plugins/GLFW3\"",
 					"\"$(SRCROOT)/../Plugins/SoraHttpFile\"",
 					"\"$(SRCROOT)/../Plugins/SoraPThread\"",
+					"\"$(SRCROOT)/../Plugins/libvlc/win32/lib\"",
 				);
 				PRODUCT_NAME = Sora;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";

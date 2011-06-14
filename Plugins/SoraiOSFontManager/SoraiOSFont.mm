@@ -210,6 +210,15 @@ namespace sora {
         }
 		return width;
     }
+	
+	float32 SoraiOSFont::getStringHeight(const wchar_t* pwstr) {
+		float32 height = getHeight();
+		for(const wchar_t* p = pwstr; *p; ++p) {
+            if(*p == L'\n')
+				height += getHeight();
+		}
+		return height;
+	}
     
     float32 SoraiOSFont::getWidthFromCharacter(wchar_t character, bool original) {
         stringId sid = crc32(&character, 1);
@@ -229,7 +238,7 @@ namespace sora {
     }
     
     float32 SoraiOSFont::getHeight() {
-        return size*1.5f+kerningHeight;
+        return size+kerningHeight;
     }
     
     uint32 SoraiOSFont::getFontSize() {

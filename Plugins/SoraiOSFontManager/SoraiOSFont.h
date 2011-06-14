@@ -68,6 +68,8 @@ namespace sora {
 		float32	getStringWidth(const wchar_t* text);
 		float32	getHeight();
 		
+		float32 getStringHeight(const wchar_t* text);
+		
 		// get font size
 		uint32	getFontSize();
 		

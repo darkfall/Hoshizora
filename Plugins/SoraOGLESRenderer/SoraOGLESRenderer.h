@@ -19,24 +19,24 @@ namespace sora {
 	public:
 		SoraOGLESRenderer();
 		~SoraOGLESRenderer();
-
+		
 		bool update();
 		
 		void beginScene(ulong32 color=0, ulong32 target=0);
 		void endScene();
-
-		void shutdown();
-		bool isActive();
 		
 		void beginFrame();
 		void endFrame();
 		
+		void shutdown();
+		bool isActive();
+		
 		void start(SoraTimer* timer);
-
+		
 		ulong32 createTarget(int width, int height, bool zbuffer=true);
 		void	freeTarget(ulong32 t);
 		ulong32 getTargetTexture(ulong32 t);
-
+		
 		SoraWindowHandle createWindow(SoraWindowInfoBase* windowInfo);
 		void setWindowSize(int32 w, int32 h);
 		void setWindowTitle(const SoraWString& title);
@@ -48,41 +48,40 @@ namespace sora {
 		SoraTexture* createTextureWH(int w, int h);
 		SoraTexture* createTextureFromMem(void* ptr, ulong32 size, bool bMipmap=false);
 		SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h);
-
-		ulong32*	 textureLock(SoraTexture*);
+		
+		uint32*		 textureLock(SoraTexture*);
 		void		 textureUnlock(SoraTexture*);
 		void		 releaseTexture(SoraTexture* tex);
-
-		void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, DWORD color=0xFFFFFFFF, float32 z=0.5f);
+		
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
+		void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode);
 		
 		void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=1.f, float32 vscale=1.f);
 		void setTransformWindowSize(float32 w, float32 h);
+        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		
 		ulong32 getMainWindowHandle() { return (ulong32)mainWindow; }
 		SoraWindowInfoBase* getMainWindow() { return mainWindow; }
 		
+        SoraShaderContext* createShaderContext();
 		void attachShaderContext(SoraShaderContext* context);
 		void detachShaderContext();
-
+		
 		SoraWString videoInfo();
 		ulong32 getVideoDeviceHandle();
 		
 		void flush();
         
-        SoraShaderContext* createShaderContext() {}
-		void setViewPoint(float32 x, float32 y, float32 z) {}        
-        void snapshot(const SoraString& path) {}
+        void snapshot(const SoraString& path);
 		
 	private:
-		inline void _to2D();
-		inline void _to3D();
-		
 		void applyTransform();
 		void bindTexture(SoraTexture* tex);
 		
+		
+		inline int32 _modeToGLMode(int32 mode);
 		inline void _glInitialize();
 		inline void _glEndFrame();
 		inline void _glBeginFrame();
@@ -102,19 +101,22 @@ namespace sora {
 		inline bool _glCheckError();
 		
 		SoraWindowInfoBase* mainWindow;
+		int32 windowWidth;
+		int32 windowHeight;
 		
 		struct _SoraOGLWindowInfo {
-			float32 x, y;
+			float32 x, y, z;
 			float32 dx, dy;
 			float32 rot;
 			float32 hscale, vscale;
 			int32 width, height;
 			
-			_SoraOGLWindowInfo(): hscale(1.f), vscale(1.f), x(0.f), y(0.f), dx(0.f), dy(0.f), rot(0.f), width(0.f), height(0.f) {}
+			_SoraOGLWindowInfo(): hscale(1.f), vscale(1.f), x(0.f), y(0.f), z(0.f), dx(0.f), dy(0.f), rot(0.f), width(0), height(0) {}
 		};
 		_SoraOGLWindowInfo _oglWindowInfo;
 		
 		int32 CurBlendMode;
+		int32 CurDrawMode;
 		
 		SoraTimer* pTimer;
 		
@@ -123,11 +125,11 @@ namespace sora {
 		
 		bool bShaderAvailable;
 		GLuint uGLShaderProgram;
-		
+
 		GLuint mCurrTexture;
 
 		SoraShaderContext* currShader;
-		
+
 		bool bFullscreen;
 		int iFrameStart;
 	};

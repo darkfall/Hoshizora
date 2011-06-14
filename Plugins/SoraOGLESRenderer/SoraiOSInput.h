@@ -53,6 +53,8 @@ namespace sora {
 		
 		int32	getGesture() { return 0; }
 		
+		void setWindowHandle(ulong32 handle) {}
+		
 	private:
 		SoraiOSTouch* pTouch;
 	};
