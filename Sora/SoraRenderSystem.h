@@ -87,6 +87,9 @@ namespace sora {
 		virtual bool isFullscreen() = 0;
         
         virtual void snapshot(const SoraString& path) = 0;
+
+		virtual void setIcon(const SoraString& icon) {}
+		virtual void setCursor(const SoraString& cursor) {}
 	};
 
 } // namespace sora

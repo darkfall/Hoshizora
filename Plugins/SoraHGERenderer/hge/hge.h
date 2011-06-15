@@ -172,6 +172,7 @@ enum hgeIntState
 enum hgeStringState
 {
 	HGE_ICON			= 26,   // char*	icon resource		(default: NULL)
+	HGE_CURSOR			= 33,
 	HGE_TITLE			= 27,   // char*	window title		(default: "HGE")
 	
 	HGE_INIFILE			= 28,   // char*	ini file			(default: NULL) (meaning no file)

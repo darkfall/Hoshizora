@@ -74,6 +74,9 @@ namespace sora {
         void snapshot(const SoraString& path);
 
 		void flush();
+
+		void setIcon(const SoraString& icon);
+		void setCursor(const SoraString& cursor);
 		
 	private:
 		inline int32 _modeToDXMode(int32 mode);

@@ -45,7 +45,10 @@ namespace sora {
 		bHasInput = false;
 		bZBufferArea = false;
         bMainScene = false;
-		
+		bPaused = false;
+		bPauseRender = false;
+		bPauseSound = false;
+
 		_initializeTimer();
 		_initializeMiscTool();
 		
@@ -1064,5 +1067,15 @@ namespace sora {
 	
 	bool SoraCore::isPaused() {
 		return bPaused;
+	}
+
+	void SoraCore::setIcon(const SoraString& icon) {
+		assert(bInitialized);
+		pRenderSystem->setIcon(icon);
+	}
+
+	void SoraCore::setCursor(const SoraString& cursor) {
+		assert(bInitialized);
+		pRenderSystem->setCursor(cursor);
 	}
 } // namespace sora

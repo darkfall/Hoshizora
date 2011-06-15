@@ -176,6 +176,7 @@ public:
 	bool				(*procExitFunc)();
 	
 	const char*			szIcon;
+	const char*			szCursor;
 	char				szWinTitle[256];
 	int					nScreenWidth;
 	int					nScreenHeight;
@@ -193,6 +194,8 @@ public:
 	bool				bHideMouse;
 	bool				bDontSuspend;
 	HWND				hwndParent;
+
+	HCURSOR				hCursor;
 
 	#ifdef DEMO
 	bool				bDMO;

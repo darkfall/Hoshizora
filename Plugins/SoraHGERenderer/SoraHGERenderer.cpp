@@ -93,12 +93,16 @@ namespace sora{
 			pHGE->System_SetState(HGE_HIDEMOUSE, windowInfo->hideMouse());
 			pHGE->System_SetState(HGE_TITLE, windowInfo->getWindowName().c_str());
 			pHGE->System_SetState(HGE_DONTSUSPEND, true);
+			
+			if(windowInfo->getIcon() != 0) {
+				pHGE->System_SetState(HGE_ICON, windowInfo->getIcon());
+			}
+		
+			if(windowInfo->getCursor() != 0) {
+				pHGE->System_SetState(HGE_CURSOR, windowInfo->getCursor());
+			}
 
 			pHGE->System_SetState(HGE_ZBUFFER, true);
-	//		pHGE->System_SetState(HGE_FPS, HGEFPS_UNLIMITED);
-
-			//pHGE->System_SetState(HGE_LOGFILE, "hgelog.txt");
-		
 			pHGE->System_Initiate();
 
 			windowInfo->init();
@@ -339,4 +343,11 @@ namespace sora{
         
     }
 
+	void SoraHGERenderer::setIcon(const SoraString& icon) {
+		pHGE->System_SetState(HGE_ICON, icon.c_str());
+	}
+
+	void SoraHGERenderer::setCursor(const SoraString& cursor) {
+		pHGE->System_SetState(HGE_CURSOR, cursor.c_str());
+	}
 } // namespace sora

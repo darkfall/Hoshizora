@@ -30,12 +30,15 @@ public:
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }
 	
-	SoraString getWindowName() { return "Genso De L"; }
+	SoraString getWindowName() { return "Portal ´«ËÍÃÅ2"; }
 	SoraString getWindowId() { return "MainWindow"; }
 	
 	bool isWindowSubWindow() { return false; }	
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
+
+	const char* getIcon() { return "./t1.ico"; }
+	const char* getCursor() { return "./RaiXPS_04_busy.ani"; }
 
 	void onKeyEvent(const sora::SoraKeyEvent* kev);
 	
