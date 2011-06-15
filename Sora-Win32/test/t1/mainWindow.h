@@ -38,7 +38,7 @@ public:
 	bool hideMouse() { return false; }
 
 	const char* getIcon() { return "./t1.ico"; }
-	const char* getCursor() { return "./RaiXPS_04_busy.ani"; }
+	const char* getCursor() { return "./t1.ani"; }
 
 	void onKeyEvent(const sora::SoraKeyEvent* kev);
 	
