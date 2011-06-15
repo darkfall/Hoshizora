@@ -2,6 +2,10 @@
 #define SORA_CGD3D9_SHADER_H_
 
 #include "SoraShader.h"
+
+#ifdef USE_SHADER
+
+
 #include "Cg/cg.h"
 #include "Cg/cgD3D9.h"
 
@@ -68,5 +72,6 @@ namespace sora {
 
 } // namespace sora
 
+#endif // USE_SHADER
 
 #endif // SORA_DX_SHADER_H_

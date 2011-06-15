@@ -2,6 +2,8 @@
 #include "SoraCore.h"
 #include "Debug/SoraInternalLogger.h"
 
+#ifdef USE_SHADER
+
 namespace sora {
 
 	SoraCGGLShaderContext::SoraCGGLShaderContext() {
@@ -169,3 +171,5 @@ namespace sora {
     }
 
 } // namespace sora
+
+#endif // USE_SHADER

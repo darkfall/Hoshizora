@@ -21,7 +21,10 @@
 #include "SoraInfiniteRendererCallback.h"
 
 #include "SoraOGLKeyPoll.h"
+
+#ifdef USE_SHADER
 #include "SoraShader/SoraCGGLShader.h"
+#endif
 
 #include "glfw/GL/glfw.h"
 #include "soil/SOIL.h"
@@ -846,7 +849,10 @@ namespace sora{
 	}
 
     SoraShaderContext* SoraOGLRenderer::createShaderContext() {
+#ifdef USE_SHADER
         return new SoraCGGLShaderContext;
+#endif
+		return NULL;
     }
 
 	void SoraOGLRenderer::attachShaderContext(SoraShaderContext* context) {

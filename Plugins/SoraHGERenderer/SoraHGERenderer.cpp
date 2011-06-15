@@ -15,7 +15,10 @@
 #include "SoraMath.h"
 #include "Rect4V.h"
 #include "SoraInfiniteRendererCallback.h"
+
+#ifdef USE_SHADER
 #include "SoraShader/SoraCGD3D9Shader.h"
+#endif
 
 #include "Debug/SoraInternalLogger.h"
 
@@ -143,7 +146,10 @@ namespace sora{
 	}
     
     SoraShaderContext* SoraHGERenderer::createShaderContext() {
+#ifdef USE_SHADER
         return new SoraCGD3D9ShaderContext;
+#endif
+		return NULL;
     }
 
 	void SoraHGERenderer::attachShaderContext(SoraShaderContext* context) {
