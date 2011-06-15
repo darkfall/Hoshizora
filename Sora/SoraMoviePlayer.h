@@ -34,8 +34,8 @@ namespace sora {
         virtual void setMute(bool flag) {}
         virtual bool getMute() { return false; }
 
-        virtual void setTime(s_int64 newtime) {}
-        virtual s_int64 getTime() const { return 0; }
+        virtual void setTime(uint64 newtime) {}
+        virtual uint64 getTime() const { return 0; }
 
         virtual bool isStopped() const { return false; }
         virtual bool isPlaying() const { return false; }
@@ -44,7 +44,7 @@ namespace sora {
         virtual float32 getPlayRate() const { return 0.f; }
         virtual void setPlayRate(float32 rate) {}
         
-        virtual s_int64 getLength() const { return 0; }
+        virtual uint64 getLength() const { return 0; }
         virtual float getFPS() const { return 0.f; }
         
         virtual uint32 getWidth() const { return 0; }

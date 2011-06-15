@@ -62,10 +62,10 @@ namespace sora {
         void setMute(bool flag);
         bool getMute();
 
-        void setTime(s_int64 newtime);
-        s_int64 getTime() const;
+        void setTime(uint64 newtime);
+        uint64 getTime() const;
         
-        s_int64 getLength() const;
+        uint64 getLength() const;
         float getFPS() const;
         
         uint32 getWidth() const { return videoWidth; }

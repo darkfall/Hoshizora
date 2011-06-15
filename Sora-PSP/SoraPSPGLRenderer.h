@@ -14,16 +14,15 @@
 #include "SoraRenderSystem.h"
 #include "SoraRenderTarget.h"
 
-#ifdef OS_PSP
-#include <GL/gl.h>
-#include <GL/glext.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-#endif
+class JGE;
+class JRenderer;
+class JTexture;
 
 namespace sora {
 
 	class SoraRenderTargetPSPGL;
+	class SoraJGEApp;
+	
 	
 	class SoraPSPGLRenderer: public SoraRenderSystem {
 	public:
@@ -86,62 +85,24 @@ namespace sora {
         
         void snapshot(const SoraString& path);
 		
-	private:
-		void applyTransform();
-		void bindTexture(SoraTexture* tex);
-		
-		
-		inline int32 _modeToGLMode(int32 mode);
-		inline void _glInitialize();
-		inline void _glEndFrame();
-		inline void _glBeginFrame();
-		inline void _glBeginScene(ulong32 color, ulong32 target);
-		inline void _glEndScene();
-		inline int32 _glTextureGetWidth(ulong32 tex, bool bOriginal=false);
-		inline int32 _glTextureGetHeight(ulong32 tex, bool bOriginal=false);
-		inline void _glSetProjectionMatrix(int32 w, int32 h);
-		inline void _glSetBlendMode(int32 mode);
-		
-		// checks if opengl 2.0 is available
-		inline bool _glVersionCheck();
-		// checks if glsl is avaiable
-		inline bool _glShaderCheck();
-		const char* _glGetShaderLog(GLuint shader);
-		
-		inline bool _glCheckError();
-		
+	private:	
 		SoraWindowInfoBase* mainWindow;
 		int32 windowWidth;
 		int32 windowHeight;
-		
-		struct _SoraOGLWindowInfo {
-			float32 x, y, z;
-			float32 dx, dy;
-			float32 rot;
-			float32 hscale, vscale;
-			int32 width, height;
-			
-			_SoraOGLWindowInfo(): hscale(1.f), vscale(1.f), x(0.f), y(0.f), z(0.f), dx(0.f), dy(0.f), rot(0.f), width(0), height(0) {}
-		};
-		_SoraOGLWindowInfo _oglWindowInfo;
-		
-		int32 CurBlendMode;
-		int32 CurDrawMode;
-		
-		SoraTimer* pTimer;
 		
 		std::list<SoraRenderTarget*> liTargets;
 		SoraRenderTargetPSPGL* pCurTarget;
 		
 		bool bShaderAvailable;
-		GLuint uGLShaderProgram;
-
-		GLuint mCurrTexture;
 
 		SoraShaderContext* currShader;
-
-		bool bFullscreen;
 		int iFrameStart;
+		
+		SoraJGEApp* JGEApp;
+		JRenderer* JGERenderer;
+		
+		typedef hash_map<SoraTexture*, JTexture*> TEXTURE_MAP;
+		TEXTURE_MAP mTextureMap;
 	};
 } // namespace sora
 

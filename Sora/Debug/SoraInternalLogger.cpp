@@ -13,9 +13,17 @@
 #include "../SoraEventManager.h"
 #include "../SoraEvent.h"
 
+#ifdef OS_PSP
+#include <pspkernel.h>
+#include <pspdebug.h>
+#endif
+
 namespace sora {
 	
 	SoraInternalLogger::SoraInternalLogger() {
+#ifdef OS_PSP
+	//pspDebugScreenInit();
+#endif
 	}
 	
 	SoraInternalLogger::~SoraInternalLogger() {
@@ -38,7 +46,11 @@ namespace sora {
 		vsprintf(Message, format, ArgPtr);
 		va_end(ArgPtr);
 		
+	#ifndef OS_PSP
 		::printf("%s", Message);
+	#else
+//		pspDebugScreenPrintf(Message);
+	#endif
 	}
 	
 	void SoraInternalLogger::printf(const wchar_t* format, ...) {
@@ -56,7 +68,11 @@ namespace sora {
 		vsprintf(Message, ws2sfast(format).c_str(), ArgPtr);
 		
 		va_end(ArgPtr);
+	#ifndef OS_PSP
 		::printf("%s", Message);
+	#else
+//		pspDebugScreenPrintf(Message);
+	#endif
 #endif
 	}
 	

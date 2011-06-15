@@ -40,6 +40,10 @@ namespace sora {
 
 		void SORACALL update();
 		bool SORACALL isActive();
+		
+		void SORACALL pause(bool bPauseRender=true, bool bPauseSound=true);
+		void SORACALL resume();
+		bool SORACALL isPaused();
 
 		void SORACALL registerRenderSystem	(SoraRenderSystem* pRenderSystem);
 		void SORACALL registerResourceManager(SoraResourceManager* pResourceManager);
@@ -63,7 +67,7 @@ namespace sora {
 		int32	SORACALL getFrameCount();
 		void	SORACALL setTimeScale(float32 scale);
 		float32 SORACALL getTimeScale();
-		s_int64 SORACALL getCurrentSystemTime();
+		uint64 SORACALL getCurrentSystemTime();
 
 		// render system APIs
 		void SORACALL beginScene(ulong32 c=0, ulong32 h=0);
@@ -210,7 +214,7 @@ namespace sora {
 		void SORACALL addFrameListener(SoraFrameListener* listener);
 		void SORACALL delFrameListener(SoraFrameListener* listener);
 		
-		s_int64 getEngineMemoryUsage();
+		uint64 getEngineMemoryUsage();
 		
 		SoraConsole* getConsole();
 		void setSystemFont(const wchar_t* font, int32 fontSize);
@@ -236,6 +240,10 @@ namespace sora {
 		bool bMessageBoxErrorPost;
 		bool bInitialized;
 		bool bHasInput;
+		
+		bool bPaused;
+		bool bPauseRender;
+		bool bPauseSound;
 
 		int32 iRandomSeed;
 		int32 iScreenWidth, iScreenHeight;

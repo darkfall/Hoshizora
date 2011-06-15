@@ -26,15 +26,15 @@ namespace sora {
 	public:
 		struct s_profile {
 			SoraString sName;
-			s_int64 elapsedTime;
+			uint64 elapsedTime;
 			
 			s_profile(): elapsedTime(0) {}
-			s_profile(const char* name, s_int64 t): sName(name), elapsedTime(t) {}
+			s_profile(const char* name, uint64 t): sName(name), elapsedTime(t) {}
 		};
 		typedef hash_map<SoraString, s_profile> PROFILE_CONT;
 
 	public:
-		void storeProfile(const char* name, s_int64 elapsedTime) {
+		void storeProfile(const char* name, uint64 elapsedTime) {
 			profiles[name] = s_profile(name, elapsedTime);
 	//		DebugPtr->debugPrintf("ProfileName=%s, time=%llu\n", name, elapsedTime);
 		}

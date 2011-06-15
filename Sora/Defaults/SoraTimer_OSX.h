@@ -23,7 +23,7 @@
 #include <time.h>
 
 // 500 nanoseconds
-static s_int64 TIME_PRECISION = 1000000;
+static uint64 TIME_PRECISION = 1000000;
 
 void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp) {  
 	uint64_t difference = end - start;  
@@ -58,13 +58,14 @@ namespace sora {
 		int32 getFrameCount() { return frameCounter; }
 		void setTimeScale(float32 ts) { fTimeScale = ts; }
 		float32 getTimeScale() { return fTimeScale; }
-		s_int64 getCurrentSystemTime() { return dtToMil(mach_absolute_time()); }
+		uint64 getCurrentSystemTime() { return dtToMil(mach_absolute_time()); }
 		
 		bool update() {
 			if(fpsInterval == SORA_FPS_INFINITE) {
 				if(oldtime != time) {
 					oldtime = time;
 					time = mach_absolute_time();
+					fdt = dtToMil(time-oldtime) / 1000.0 * fTimeScale;
 					fps = 1.f / (dtToMil(time-oldtime)/1000.f);;
 				} else {
 					time = mach_absolute_time();
@@ -74,7 +75,7 @@ namespace sora {
 			
 			if(machTimeToNano(mach_absolute_time() - oldtime) < fpsInterval) {
 				for(;;) {
-					s_int64 nanodt = machTimeToNano(mach_absolute_time() - oldtime);
+					uint64 nanodt = machTimeToNano(mach_absolute_time() - oldtime);
 					if(nanodt >= fpsInterval - TIME_PRECISION) {
 						for(;;)
 							if(machTimeToNano(mach_absolute_time() - oldtime) >= fpsInterval)

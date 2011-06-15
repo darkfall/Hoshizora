@@ -1,4 +1,6 @@
-TARGET_LIB = soracore.a
+PSP_FW_VERSION=371
+
+TARGET = SoraCore
 OBJS = ../sora/SoraStringConv.o ../sora/CoreTransform.o ../sora/hgerect.o \
 	../sora/hgevector.o ../sora/SoraCanvas.o \
 	../sora/SoraEnvValues.o ../sora/SoraEvent.o ../sora/SoraEventManager.o \
@@ -14,19 +16,23 @@ OBJS = ../sora/SoraStringConv.o ../sora/CoreTransform.o ../sora/hgerect.o \
 	../sora/support/md5lib.o \
 	../sora/tinyXML/tinystr.o ../sora/tinyXML/tinyxml.o ../sora/tinyXML/tinyxmlerror.o ../sora/tinyXML/tinyxmlparser.o \
 	../sora/SoraCore.o \
+	SoraJGEApp.o SoraPSPGLRenderTarget.o SoraPSPGLRenderer.o \
+	main1.o
 	
-INCDIR = 
-CFLAGS = -O2 -G0 -Wall
+INCDIR = ./ ../sora ./JGE/include ./JGE/dependencies/include
+CFLAGS = -O2 -G0 -Wall -DPSPFW3XX 
 CXXFLAGS = $(CFLAGS)
 ASFLAGS = $(CFLAGS)
 
-LIBS = -lfreetype -lpng -lz 
+LIBS = -lc ./lib/libGL.a ./lib/libGLU.a ./lib/libglut.a ./lib/soil.a -lm -lpsprtc
+LIBS += ./JGE/lib/libhgetools.a ./JGE/lib/libjinput.a  ./JGE/lib/libjge300.a ./JGE/lib/libjpeg.a ./JGE/lib/libmikmod.a -lstdc++ 
+LIBS += -lpsppower -lpspmpeg -lpspaudiocodec -lpspaudiolib -lpspaudio -lpspgum -lpspgu -lpsprtc ./lib/libfreetype.a ./lib/libpng.a ./lib/libz.a ./JGE/lib/libgif.a
+LIBS += -L/usr/local/pspdev/psp/lib -lm -L/usr/local/pspdev/psp/sdk/lib -lpspdebug -lpspgu -lpspctrl -lpspge -lpspdisplay -lpsphprm -lpspvfpu -lpspsdk -lpsprtc -lpspaudio -lc -lpspuser -lpsputility -lpspkernel
 LIBDIR = 
 LDFLAGS =
 
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = Sora
+
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
-
-install : $(TARGET_LIB)
-	@cp soracore.a lib/
-	@echo "Done"

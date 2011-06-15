@@ -17,12 +17,12 @@
  then there is tr1 support
  visual studio 2008 sp1 or above also has tr1 support
  to do with vs version check
- khash also available as an external kash option
+ khash also available as an external hash option
  */
 
 
 #ifdef __GNUC__
-	#if __GNUC__ >= 4
+	#if __GNUC__ >= 4 
 		#include <tr1/unordered_map>
 namespace sora {
 	
@@ -202,17 +202,14 @@ namespace sora {
 
 #elif defined(_PSP)
 
-#define FONT_PATH L"./fonts"
-#define DEFAULT_RESOURCE_SEARCH_PATH L"."
+	#define FONT_PATH L"./fonts"
+	#define DEFAULT_RESOURCE_SEARCH_PATH L"."
+		
+	#define OS_PSP
 
-#define OS_PSP
+  //  #define uint64 uint32
+  //  #define int64 int32
 
-#endif
-
-#ifdef OS_WIN32
-typedef __int64 s_int64;
-#else
-typedef int64_t s_int64 ;
 #endif
 
 #ifndef OS_PSP

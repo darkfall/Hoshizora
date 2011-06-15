@@ -1,11 +1,21 @@
 #include <pspkernel.h>
 #include <pspdebug.h>
+#include <pspdisplay.h>
+#include <psppower.h>
+#include <pspsdk.h> 
 
-PSP_MODULE_INFO("Hello World", 0, 1, 1);
+#include "Hoshizora.h"
+#include "SoraSprite.h"
+#include "SoraPSPGLRenderer.h"
 
+
+
+PSP_MODULE_INFO("Sora", 0, 1, 1);
 
 /* Exit callback */
 int exit_callback(int arg1, int arg2, void *common) {
+	sora::SORA->shutDown();
+	
     sceKernelExitGame();
 	return 0;
 }
@@ -36,41 +46,74 @@ int SetupCallbacks(void) {
     return thid;
 }
 
-#include "Hoshizora.h"
-#include "SoraSprite.h"
-#include "SoraPSPGLRenderer.h"
-
 sora::SoraPSPGLRenderer* renderer = new sora::SoraPSPGLRenderer;
-sora::SoraSprite* pspr;
 
+#include "JGE.h"
+#include "JRenderer.h"
+
+class mainWindow: public sora::SoraWindowInfoBase {
+public:
+	mainWindow() { }
+	~mainWindow() {}
+	
+	bool updateFunc() {
+		
+	}
+	bool renderFunc() {
+	//	sora::SORA->beginScene();
+		JRenderer::GetInstance()->RenderQuad(quad, 0, 0);
+		//JRenderer::GetInstance()->RenderQuad(quad2, 0, 0);
+
+	//	sora::SORA->endScene();
+	}
+	void init() {
+		jtex = JRenderer::GetInstance()->LoadTexture("sora.png");
+		quad = new JQuad(jtex, 0, 0, 376, 272);
+		
+	}
+	
+	int32 getWindowWidth() { return 480; }
+	int32 getWindowHeight() { return 272; }
+	
+	int32 getWindowPosX() { return 0; }
+	int32 getWindowPosY() { return 0; }
+	
+	SoraString getWindowName() { return "Reflection"; }
+	SoraString getWindowId() { return "MainWindow"; }
+	
+	bool isWindowSubWindow() { return false; }	
+	bool isWindowed() { return true; }
+	bool hideMouse() { return false; }
+		
+private:
+	JTexture* jtex ;
+	JTexture* jtex2 ;
+	JTexture* jtex3 ;
+	JQuad* quad;
+	JQuad* quad1;
+	JQuad* quad2;
+	sora::SoraCore* sora;
+};
+
+#include "Debug/SoraInternalLogger.h"
+
+#include <pspdisplay.h>
+
+#include "SoraJGEApp.h"
+#include "jge.h"
 int main() {
 	//pspDebugScreenInit();
 	SetupCallbacks();
 	
-	/*FILE* texfile = fopen("./test.png", "rb");
-	fseek(texfile, 0, SEEK_END);
-	ulong32 size = ftell(texfile);
-	fseek(texfile, 0, SEEK_SET);
+	sora::SORA->registerRenderSystem(renderer);
+	sora::SORA->createWindow(new mainWindow);
+	sora::SORA->start();
 	
-	uint8* texdata = new uint8[size];
-	if(texdata)
-		fread(texdata, size, 1, texfile);
-	fclose(texfile);
-	
-	ulong32 mytex = renderer->createTextureFromMem(texdata, size);
-	*/
-	pspr = new sora::SoraSprite((sora::HSORATEXTURE)renderer->createTextureWH(100, 100));
-	while(1) {
-		if(pspr) {
-			renderer->beginFrame();
-			renderer->beginScene();
-			pspr->render(0.f, 0.f);
-			renderer->endScene();
-			renderer->endFrame();
-		}
-	}
+	sora::SORA->shutDown();
+//	sora::SORA->createWindow(new mainWindow);
+	//sora::SORA->start();
 	
 	//printf("Hello World from Sora-PSP(fake)");
-	sceKernelSleepThread();
+	sceKernelExitGame();
 	return 0;
 }

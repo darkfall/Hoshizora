@@ -12,6 +12,7 @@
 
 #include "Defaults/SoraTimer_OSX.h"
 #include "Defaults/SoraTimer_Win32.h"
+#include "Defaults/SoraTimer_PSP.h"
 #include "Defaults/SoraMiscTool_Win32.h"
 #include "Defaults/SoraMiscTool_OSX.h"
 #include "Defaults/SoraMiscTool_iOS.h"
@@ -74,6 +75,8 @@ namespace sora {
 		pTimer = new SoraOSXTimer; return;
 #elif defined(OS_WIN32)
 		pTimer = new SoraWin32Timer; return;
+#elif defined(OS_PSP)
+		pTimer = new SoraPSPTimer; return;
 #endif
 		pTimer = new SoraDefaultTimer;
 	}
@@ -137,80 +140,93 @@ namespace sora {
 
 	void SoraCore::update() {
 		assert(bInitialized == true);
+#ifdef PROFILE_CORE_UPDATE
 		PROFILE("CORE_UPDATE");
-		
-		{
-#ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_SOUNDSYSTEM");
 #endif
-            if(pSoundSystem) pSoundSystem->update();
-        }
-		
-		SoraInputSimulator::clear();
 
-		pRenderSystem->beginFrame();
-        
-		{
+		if(!bPaused && !bPauseSound) {
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("FRAMELISTENER_START");
+				PROFILE("UPDATE_SOUNDSYSTEM");
 #endif
-			_frameListenerStart();
+				if(pSoundSystem) pSoundSystem->update();
+			}
 		}
 		
-		{
+	
+		if(!bPaused) {
+			SoraInputSimulator::clear();
+
+			pRenderSystem->beginFrame();
+        
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_PLUGINS");
+				PROFILE("FRAMELISTENER_START");
 #endif
-            pPluginManager->update();
-        }
-        
-        {
+				_frameListenerStart();
+			}
+			
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_MAINWINDOW");
+				PROFILE("UPDATE_PLUGINS");
 #endif
-            mainWindow->updateFunc();
-        }
-        
-        {
+				pPluginManager->update();
+			}
+			
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_EVENT_MANAGER");
+				PROFILE("UPDATE_MAINWINDOW");
 #endif
-            SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
-        }
-        
-        {
+				mainWindow->updateFunc();
+			}
+			
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_RENDERSYSTEM");
+				PROFILE("UPDATE_EVENT_MANAGER");
 #endif
-            pRenderSystem->update();
-        }
-        
-		
-        {
+				SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
+			}
+			
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("RENDER_MAINWINDOW");
+				PROFILE("UPDATE_RENDERSYSTEM");
 #endif
-            mainWindow->renderFunc();
-        }
+				pRenderSystem->update();
+			}
+		}
         
-        {
+		if(!bPaused && !bPauseRender) {
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("FRAMELISTENER_END");
+				PROFILE("RENDER_MAINWINDOW");
 #endif
-            _frameListenerEnd();
-        }
+				mainWindow->renderFunc();
+			}
+		}
         
-		DEBUG_RENDERER->render();
-		SoraConsole::Instance()->render();
-		
-        if(bMainScene) {
-            bMainScene = false;
-            pRenderSystem->endScene();
-        }
+		if(!bPaused) {
+			{
+#ifdef PROFILE_CORE_UPDATE
+				PROFILE("FRAMELISTENER_END");
+#endif
+				_frameListenerEnd();
+			}
+			
+			if(!bPauseRender) {
+				DEBUG_RENDERER->render();
+				SoraConsole::Instance()->render();
+				
+				if(bMainScene) {
+					bMainScene = false;
+					pRenderSystem->endScene();
+				}
+			}
+			
+			time += pTimer->getDelta();
+			
+			pRenderSystem->endFrame();
+		}
         
-		time += pTimer->getDelta();
-        
-		pRenderSystem->endFrame();
 	}
 
 	void SoraCore::flush() {
@@ -461,7 +477,7 @@ namespace sora {
 		return pTimer->getTime();
 	}
 
-	s_int64 SoraCore::getCurrentSystemTime() {
+	uint64 SoraCore::getCurrentSystemTime() {
 		return pTimer->getCurrentSystemTime();
 	}
 
@@ -1009,7 +1025,7 @@ namespace sora {
         return pRenderSystem->snapshot(path);
     }
 
-	s_int64 SoraCore::getEngineMemoryUsage() {
+	uint64 SoraCore::getEngineMemoryUsage() {
 		return getMemoryUsage();
 	}
 	
@@ -1026,13 +1042,27 @@ namespace sora {
 		SoraConsole::Instance()->setFont(ff);
 	}
 	
-	void SORACALL SoraCore::beginZBufferSort() {
+	void SoraCore::beginZBufferSort() {
 		bZBufferArea = true;
 	}
 
-	void SORACALL SoraCore::endZBufferSort() {
+	void SoraCore::endZBufferSort() {
 		bZBufferArea = false;
 		SoraZSorter::endSortAndRender();
 	}
 
+	void SoraCore::pause(bool render, bool sound) {
+		bPauseRender = render;
+		bPauseSound = sound;
+		
+		bPaused = true;
+	}
+	
+	void SoraCore::resume() {
+		bPaused = false;
+	}
+	
+	bool SoraCore::isPaused() {
+		return bPaused;
+	}
 } // namespace sora
