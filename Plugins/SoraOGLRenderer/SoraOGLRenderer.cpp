@@ -90,6 +90,7 @@ namespace sora{
         glDepthFunc(GL_LEQUAL);                       // The Type Of Depth Test To Do
 		glClearDepth(1.f);                          // Depth Buffer Setup
 
+		//glEnable(GL_SCISSOR_BIT);
         //glDepthMask(GL_FALSE);
 
 
@@ -727,7 +728,7 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
-		int32 width = w;
+		/*int32 width = w;
 		int32 height = h;
 		if(pCurTarget) {
 			width = pCurTarget->getWidth();
@@ -755,7 +756,7 @@ namespace sora{
 			_oglWindowInfo.y = y;
 		}
 
-        flush();
+        flush();*/
 	/*	glViewport(_oglWindowInfo.x, _oglWindowInfo.y,
 				   _oglWindowInfo.width,
 				   _oglWindowInfo.height);
@@ -765,7 +766,8 @@ namespace sora{
 				_oglWindowInfo.x+_oglWindowInfo.width, 
 				_oglWindowInfo.y+_oglWindowInfo.height, 
 				_oglWindowInfo.y, -1.f, 1.f);*/
-		applyTransform();
+	//	applyTransform();
+		glScissor(x, y, w, h);
 	}
 
 	void SoraOGLRenderer::setTransformWindowSize(float32 w, float32 h) {

@@ -37,6 +37,8 @@
 #include "../mead/meadMainWindow.h"
 #include "../ReflectionTD/rftdMainWindow.h"
 
+#include "SoraLua/SoraLuaMainWindow.h"
+
 
 int main(int argc, char* argv[]) {
 	
@@ -48,7 +50,7 @@ int main(int argc, char* argv[]) {
 //    sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
 	
 
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new peMainWindow);
 	sora->start();
 		
 	return 0;

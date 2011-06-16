@@ -21,15 +21,13 @@
 
 namespace sora {
 
-	using namespace LuaPlus;
-	
 #define OBJ_LUA 0x00000200
 
 	class SoraLuaObject: public SoraObject {	 
 	public:												 
 		SoraLuaObject();
 		SoraLuaObject(const SoraWString& scriptPath);
-		SoraLuaObject(LuaState* state);
+		SoraLuaObject(LuaPlus::LuaState* state);
 		virtual ~SoraLuaObject();
         
         uint32 update(float32 dt);
@@ -43,14 +41,14 @@ namespace sora {
 		int32 loadBuffer(const char* buff, size_t size, const char* name);
 		int32 loadScript(const SoraWString& scriptPath);
 
-		LuaObject createThread();
+		LuaPlus::LuaObject createThread();
 		
-		LuaStackObject createTable(int narr=0, int nrec=0);
-		LuaStackObject createUserData(size_t size);
+		LuaPlus::LuaStackObject createTable(int narr=0, int nrec=0);
+		LuaPlus::LuaStackObject createUserData(size_t size);
 
-		LuaObject getGlobals();
-		LuaObject get(const SoraString& name);
-		LuaObject operator[](const SoraString& name);
+		LuaPlus::LuaObject getGlobals();
+		LuaPlus::LuaObject get(const SoraString& name);
+		LuaPlus::LuaObject operator[](const SoraString& name);
 
 		// simple wrappers to help get data easily
 		int32 getInteger(const SoraString& name);
@@ -64,11 +62,12 @@ namespace sora {
 		
         void callFuncVoid(const SoraString& funcName);
 	
-		LuaState* getState() const;
-	private:
-		LuaState* luaState;
+		LuaPlus::LuaState* getState() const;
 		
-		LuaObject envObject;
+	private:
+		LuaPlus::LuaState* luaState;
+		
+		LuaPlus::LuaObject envObject;
 	};
 
 } // namespace sora

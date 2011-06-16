@@ -54,6 +54,10 @@ namespace sora {
             .def("getScreenHeight", &SoraCore::getScreenHeight)
             .def("loadResourcePack", &SoraCore::loadResourcePack)
             .def("attachResourcePack", &SoraCore::attachResourcePack)
+			.def("detachResourcePack", &SoraCore::detachResourcePack)
+			.def("readResourceFile", &SoraCore::readResourceFile)
+			.def("getResourceFileSize", &SoraCore::getResourceFileSize)
+			.def("freeResourceFile", &SoraCore::freeResourceFile)
             .def("setWindowTitle", &SoraCore::setWindowTitle)
             .def("setWindowPos", &SoraCore::setWindowPos)
             .def("setFullScreen", &SoraCore::setFullscreen)
@@ -64,12 +68,16 @@ namespace sora {
             .def("getMouseWheel", &SoraCore::getMouseWheel)
             .def("keyDown", &SoraCore::keyDown)
             .def("keyUp", &SoraCore::keyUp)
+			.def("simulateKey", &SoraCore::simulateKey)
             .def("getKeyState", &SoraCore::getKeyState)
             .def("messageBox", &SoraCore::messageBox)
             .def("log", &SoraCore::log)
             .def("execute", &SoraCore::execute)
             .def("setFrameSync", &SoraCore::setFrameSync)
-			.def("renderRect", &SoraCore::renderRect);
+			.def("renderRect", &SoraCore::renderRect)
+			.def("setWindowSize", &SoraCore::setWindowSize)
+			.def("pause", &SoraCore::pause)
+			.def("resume", &SoraCore::resume);
 			
 			exportEnvValuesManager(state);
 		}

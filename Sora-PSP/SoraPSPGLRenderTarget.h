@@ -13,18 +13,11 @@
 #include "SoraPlatform.h"
 #include "SoraRenderTarget.h"
 
-#ifdef OS_PSP
-#include <GL/gl.h>
-#include <GL/glext.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-#endif
-
 namespace sora {
 
 class SoraRenderTargetPSPGL {
-	GLuint frameBuffer;
-	GLuint depthBuffer;
+//	GLuint frameBuffer;
+//	GLuint depthBuffer;
 
     int32 w, h;
 	ulong32 tex;

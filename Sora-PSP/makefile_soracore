@@ -24,8 +24,7 @@ CFLAGS = -O2 -G0 -Wall -DPSPFW3XX
 CXXFLAGS = $(CFLAGS)
 ASFLAGS = $(CFLAGS)
 
-LIBS = -lc ./lib/libGL.a ./lib/libGLU.a ./lib/libglut.a ./lib/soil.a -lm -lpsprtc
-LIBS += ./JGE/lib/libhgetools.a ./JGE/lib/libjinput.a  ./JGE/lib/libjge300.a ./JGE/lib/libjpeg.a ./JGE/lib/libmikmod.a -lstdc++ 
+LIBS = ./JGE/lib/libhgetools.a ./JGE/lib/libjinput.a  ./JGE/lib/libjge300.a ./JGE/lib/libjpeg.a ./JGE/lib/libmikmod.a -lstdc++  -lc -lm -lpsprtc
 LIBS += -lpsppower -lpspmpeg -lpspaudiocodec -lpspaudiolib -lpspaudio -lpspgum -lpspgu -lpsprtc ./lib/libfreetype.a ./lib/libpng.a ./lib/libz.a ./JGE/lib/libgif.a
 LIBS += -L/usr/local/pspdev/psp/lib -lm -L/usr/local/pspdev/psp/sdk/lib -lpspdebug -lpspgu -lpspctrl -lpspge -lpspdisplay -lpsphprm -lpspvfpu -lpspsdk -lpsprtc -lpspaudio -lc -lpspuser -lpsputility -lpspkernel
 LIBDIR = 

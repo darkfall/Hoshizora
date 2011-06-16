@@ -13,6 +13,9 @@ extern "C" {
 #include "Debug/SoraInternalLogger.h"
 
 namespace sora {
+	
+	using namespace LuaPlus;
+	
 	SoraLuaObject::SoraLuaObject() {
 		luaState = LuaState::Create(true);
 		if(!luaState)

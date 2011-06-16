@@ -60,8 +60,9 @@ public:
 		
 	}
 	bool renderFunc() {
-	//	sora::SORA->beginScene();
-		JRenderer::GetInstance()->RenderQuad(quad, 0, 0);
+		//JRenderer::GetInstance()->ClearScreen(ARGB(0,0,0,0));
+
+	//	JRenderer::GetInstance()->RenderQuad(quad, 0, 0);
 		//JRenderer::GetInstance()->RenderQuad(quad2, 0, 0);
 
 	//	sora::SORA->endScene();

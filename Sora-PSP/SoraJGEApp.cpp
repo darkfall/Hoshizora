@@ -12,11 +12,11 @@ namespace sora {
 		
 	void SoraJGEApp::Update() {
 	//	if(mTimer->update()) {
-			SORA->update();
 	//	}
 	}
 		
 	void SoraJGEApp::Render() {
+		SORA->update();
 	}
 		
 	void SoraJGEApp::Pause() {
