@@ -93,11 +93,7 @@ sora::SoraVertex vert[6];
 
 bool mainWindow::renderFunc() {
 	pCanvas->beginRender();
-	{
-		sora::PROFILE("p1");
-		ps->update(sora::SORA->getDelta());
-		ps->render();
-	}
+	
 	pCanvas->finishRender();
 	
 	sora->beginScene(0);
@@ -108,14 +104,24 @@ bool mainWindow::renderFunc() {
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 
 	sora::SORA->beginZBufferSort();
-	pressAnyKey->render();
+	{
+		sora::PROFILE("p1");
+		
+		pressAnyKey->render();
 	pSpr2->render();
 	pSpr->render();
+	
+	{
+		ps->update(sora::SORA->getDelta());
+		ps->render();
+	}
 	
 	pCanvas->render();
 
 	sora::SORA->endZBufferSort();
-
+	}
+	sora::SORA_PROFILER->printProfile("p1");
+	
 	sora->endScene();
 	return false;
 }

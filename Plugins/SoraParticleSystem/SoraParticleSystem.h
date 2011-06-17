@@ -22,9 +22,6 @@
 #include <vector>
 #include <map>
 
-#define MAX_PARTICLE_NUM 20000
-#define MAX_DISTANCE 1000.f
-
 namespace sora {
 
 	struct SoraParticleHeader {
@@ -149,6 +146,9 @@ namespace sora {
 		void fire();
 		void fireAt(float32 x, float32 y, float32 z);
 		void moveTo(float32 x, float32 y, float32 z, bool bKill=false);
+		
+		static void setMaxParticleNum(int32 max) { mMaxParticleNum = max; }
+		static void setMaxParticleDistance(float32 max) { mMaxParticleDistance = max; }
 
 		void killAll();
 
@@ -176,6 +176,9 @@ namespace sora {
 	private:
 		inline void emitParticle();
 		inline void init();
+		
+		static int32 mMaxParticleNum;
+		static float32 mMaxParticleDistance;
 		
 		SoraParticleSystem(const SoraParticleSystem&);
 		SoraParticleSystem operator=(const SoraParticleSystem&);

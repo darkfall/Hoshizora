@@ -80,7 +80,7 @@ public:
 	void eraseAll();
 	void clear();
 
-	size_t size();
+	size_t size() const;
 
 private:
 	//ARRAY_SIZE>=2
@@ -417,7 +417,7 @@ void QuickList<T, allocSize>::clear()
 
 
 template<typename T, int allocSize>
-inline size_t QuickList<T, allocSize>::size()
+inline size_t QuickList<T, allocSize>::size() const
 {
 	return size_;
 }

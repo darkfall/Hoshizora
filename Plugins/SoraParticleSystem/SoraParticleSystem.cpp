@@ -2,11 +2,13 @@
 #include "SoraStringConv.h"
 #include "SoraMath.h"
 
-
 #include <algorithm>
 #include <cmath>
 
 namespace sora {
+
+	int32 SoraParticleSystem::mMaxParticleNum = 2000;
+	float32 SoraParticleSystem::mMaxParticleDistance = 500.f;
 
 	bool isParticleDead(const SoraParticleNode& node) {
 		return node.bDead;
@@ -17,7 +19,7 @@ namespace sora {
 		fToEmitTime = 0.f;
 		bActive = false;
 		bRotate3v = false;
-		fMaxDistance = MAX_DISTANCE;
+		fMaxDistance = mMaxParticleDistance;
 		core = SoraCore::Instance();
 
 		z = 0.f;
@@ -114,7 +116,7 @@ namespace sora {
 		pSprite->setBlendMode(pheader.blendMode);
 		pSprite->setTextureRect(pheader.texX, pheader.texY, pheader.texW, pheader.texH);
 		
-		if(pheader.emitPos.z > MAX_DISTANCE) pheader.emitPos.z = MAX_DISTANCE;
+		if(pheader.emitPos.z > mMaxParticleDistance) pheader.emitPos.z = mMaxParticleDistance;
 		else if(pheader.emitPos.z < 0.f) pheader.emitPos.z = 0.f;
 		
 		particles.clear();
@@ -129,7 +131,7 @@ namespace sora {
 		fCurrEmitTime = 0.f;
 		fToEmitTime = 0.f;
 		
-		fMaxDistance = MAX_DISTANCE;
+		fMaxDistance = mMaxParticleDistance;
 	}
 	
 	void SoraParticleSystem::setSprite(SoraSprite* spr) {
@@ -185,7 +187,7 @@ namespace sora {
 	void SoraParticleSystem::update(float32 dt) {
 		if(dt > 0.1f) return;
 		
-		std::remove_if(particles.begin(), particles.end(), isParticleDied);
+	//	particles.erase(std::remove_if(particles.begin(), particles.end(), isParticleDied), particles.end());
 
 		if(particles.size() != 0) {
 			PARTICLES::iterator p = particles.begin();
@@ -194,12 +196,12 @@ namespace sora {
 					p->fCurrLifetime += dt;;
 					if(p->fCurrLifetime >= p->fLifetime) {
 						p->bDead = true;
-				//		p = particles.erase(p);
+						p = particles.erase(p);
 						continue;
 					}
 					if(p->position.z < 0.f || p->position.z > fMaxDistance) {
 						p->bDead = true;
-					//	p = particles.erase(p);
+						p = particles.erase(p);
 						continue;
 					}
 				
@@ -263,7 +265,7 @@ namespace sora {
 		}
 		
 		if(!bActive) return;
-		if(particles.size() > MAX_PARTICLE_NUM) {
+		if(particles.size() > mMaxParticleNum) {
 			fToEmitTime = 0.f;
 			return;
 		}
@@ -286,6 +288,8 @@ namespace sora {
 	void SoraParticleSystem::render() {
 		if(!pSprite)
 			return;
+		if(particles.size() == 0)
+			return;
 		
 		pSprite->setTextureRect(pheader.texX, pheader.texY, pheader.texW, pheader.texH);
 		pSprite->setCenter(pheader.texW/2, pheader.texH/2);
@@ -296,8 +300,7 @@ namespace sora {
 		} else {
 			pSprite->setBlendMode(pSprite->getBlendMode() & BLEND_NOZWRITE);
 		}
-		if(particles.size() == 0)
-			return;
+		
 		for(PARTICLES::iterator p=particles.begin(); p!=particles.end(); ++p) {
 			if(!p->bDead) {
 				float32 scale = (1.f - p->position.z / fMaxDistance) + 0.01;

@@ -57,11 +57,7 @@ namespace sora {
 				next = next->next;
 			
 			__Z_BUFFER_NODE* newNode = new __Z_BUFFER_NODE();
-			newNode->vertex	= node.vertex;
-			newNode->blend = node.blend;
-			newNode->size = node.size;
-			newNode->shader = node.shader;
-			newNode->tex = node.tex;
+			memcpy(newNode, &node, sizeof(__Z_BUFFER_NODE));
 			
 			next->next = newNode;
 		} else {
