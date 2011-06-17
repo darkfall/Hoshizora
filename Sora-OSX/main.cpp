@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
 //    sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
 	
 
-	sora->createWindow(new peMainWindow);
+	sora->createWindow(new mainWindow);
 	sora->start();
 		
 	return 0;

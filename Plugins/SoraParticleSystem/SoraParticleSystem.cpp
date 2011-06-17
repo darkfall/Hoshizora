@@ -178,8 +178,14 @@ namespace sora {
 		}
 	}
 	
+	bool isParticleDied(const SoraParticleNode& node) {
+		return node.bDead;
+	}
+	
 	void SoraParticleSystem::update(float32 dt) {
 		if(dt > 0.1f) return;
+		
+		std::remove_if(particles.begin(), particles.end(), isParticleDied);
 
 		if(particles.size() != 0) {
 			PARTICLES::iterator p = particles.begin();
@@ -188,12 +194,12 @@ namespace sora {
 					p->fCurrLifetime += dt;;
 					if(p->fCurrLifetime >= p->fLifetime) {
 						p->bDead = true;
-						p = particles.erase(p);
+				//		p = particles.erase(p);
 						continue;
 					}
 					if(p->position.z < 0.f || p->position.z > fMaxDistance) {
 						p->bDead = true;
-						p = particles.erase(p);
+					//	p = particles.erase(p);
 						continue;
 					}
 				
@@ -237,7 +243,7 @@ namespace sora {
 						while(iteff != effectors.end() && !bdel) {
 							if((*iteff)->effect((*p), dt)) {
 								p->bDead = true;
-								p = particles.erase(p);
+						//		p = particles.erase(p);
 								bdel = true;
 								continue;
 							}

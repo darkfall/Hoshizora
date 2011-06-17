@@ -107,6 +107,7 @@ namespace sora{
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_TEXTURE_2D);
 		
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_SCISSOR_BIT);
 		
 		SoraString info("OpenGL Version=");
 		info += (char*)glGetString(GL_VERSION);
@@ -182,7 +183,6 @@ namespace sora{
 	void SoraOGLRenderer::_glBeginScene(ulong32 color, ulong32 t) {
 		int32 width = _oglWindowInfo.width;
 		int32 height = _oglWindowInfo.height;
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		if(t) {
 			pCurTarget = (SoraRenderTargetOG*)t;
@@ -192,12 +192,17 @@ namespace sora{
             pCurTarget->attachToRender();
             applyTransform();
 			CurBlendMode = 0;
-            glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
+            glClearColor(0, 0, 0, 0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
         } else {
             if(iFrameStart) {
                 glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
             }
         }
+
 	}
 
 	void SoraOGLRenderer::_glEndScene() {
@@ -206,7 +211,7 @@ namespace sora{
             pCurTarget->detachFromRender();
             pCurTarget = 0;
 
-            applyTransform();\
+            applyTransform();
 
             glFlush();
 

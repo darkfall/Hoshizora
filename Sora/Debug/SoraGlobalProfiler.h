@@ -35,8 +35,11 @@ namespace sora {
 
 	public:
 		void storeProfile(const char* name, uint64 elapsedTime) {
+			PROFILE_CONT::iterator itprofile = profiles.find(name);
+			if(itprofile == profiles.end()) {
+				DebugPtr->log(vamssg("ProfileName=%s, time=%llu\n", name, elapsedTime), LOG_LEVEL_NOTICE);
+			}
 			profiles[name] = s_profile(name, elapsedTime);
-	//		DebugPtr->debugPrintf("ProfileName=%s, time=%llu\n", name, elapsedTime);
 		}
 		
 		void printProfiles() {

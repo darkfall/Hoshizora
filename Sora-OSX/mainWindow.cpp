@@ -92,8 +92,15 @@ sora::SoraVertex vert[6];
 
 
 bool mainWindow::renderFunc() {
+	pCanvas->beginRender();
+	{
+		sora::PROFILE("p1");
+		ps->update(sora::SORA->getDelta());
+		ps->render();
+	}
+	pCanvas->finishRender();
 	
-	sora->beginScene(0xFFFFFFFF);
+	sora->beginScene(0);
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
 		
@@ -105,8 +112,7 @@ bool mainWindow::renderFunc() {
 	pSpr2->render();
 	pSpr->render();
 	
-	ps->update(sora::SORA->getDelta());
-	ps->render();
+	pCanvas->render();
 
 	sora::SORA->endZBufferSort();
 
@@ -128,6 +134,8 @@ void mainWindow::init() {
 	
 	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 16);
 	pFont->setColor(0xFFFFCC00);
+	
+	pCanvas = new sora::SoraBaseCanvas(800, 600);
 	
 	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
 	

@@ -47,6 +47,8 @@ public:
 	
 private:
 	sora::SoraCore* sora;
+	
+	sora::SoraBaseCanvas* pCanvas;
                     
     sora::SoraSprite* pSpr;
 	sora::SoraSprite* pSpr2;
