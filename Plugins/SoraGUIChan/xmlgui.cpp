@@ -650,6 +650,9 @@ void XmlGui::parseTextField(TiXmlElement *element,gcn::Widget *parent)
 	{
 		textfield->setText(sora::s2ws(*element->Attribute("text")).c_str());
 	}
+	
+	if(element->Attribute("numeric"))
+		textfield->enableNumericMode(checkBool(*element->Attribute("numeric")));
 
 	parseDefaults(element,textfield);
 

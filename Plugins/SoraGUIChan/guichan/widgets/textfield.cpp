@@ -60,6 +60,7 @@ namespace gcn
     {
         mCaretPosition = 0;
         mXScroll = 0;
+		mNumericMode = false;
 
         setFocusable(true);
 
@@ -90,6 +91,20 @@ namespace gcn
 
         mText = text;
     }
+	
+	void TextField::enableNumericMode(bool flag) {
+		mNumericMode = flag;
+	}
+	
+	bool TextField::isNumericModeEnabled() const { 
+		return mNumericMode;
+	}
+	
+	int TextField::getNumber() const {
+		if(mNumericMode) 
+			return atoi(ws2s(getText()).c_str());
+		return 0;
+	}
 
     void TextField::draw(Graphics* graphics)
     {
@@ -134,6 +149,8 @@ namespace gcn
 
         graphics->popClipArea();
     }
+	
+	
 
     void TextField::drawCaret(Graphics* graphics, int x)
     {
@@ -208,8 +225,15 @@ namespace gcn
         else if (key.isCharacter()
                  && key.getValue() != Key::TAB)
         {
-			mText.insert(mCaretPosition, std::wstring(1,(char)key.getValue()));
-            ++mCaretPosition;
+			if(!mNumericMode) {
+				mText.insert(mCaretPosition, std::wstring(1,(char)key.getValue()));
+				++mCaretPosition;
+			} else {
+				if(key.isNumber()) {
+					mText.insert(mCaretPosition, std::wstring(1,(char)key.getValue()));
+					++mCaretPosition;
+				}
+			}
         }
 
 		// ak add ime

@@ -513,6 +513,9 @@ namespace sora {
         if(val.isMember("text")) {
             textField->setText(sora::s2ws(val["text"].asString()).c_str());
         }
+		
+		if(val.isMember("numeric")) 
+			textField->enableNumericMode(val["numeric"].asBool());
     
         parseDefaults(val, textField);
         

@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>882F9D6913AC9DCD00ABA241</string>
+						<string>887A4B9413ACFA9100ADB830</string>
 						<key>history</key>
 						<array>
-							<string>8883E9EA13ABBF4000C57685</string>
+							<string>882F9D6913AC9DCD00ABA241</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -309,6 +309,9 @@
 								<string>88E33824136A79F2000B67C8</string>
 								<string>886E0FD713681F5800A77847</string>
 								<string>88CE58D212C1B41C00C551F0</string>
+								<string>88B09BEB12B8AE6600777409</string>
+								<string>88B09BEC12B8AE6600777409</string>
+								<string>88B09C3312B8AE6600777409</string>
 								<string>8859BF4A12B4809D00F3304A</string>
 								<string>8859BEA312B47E1C00F3304A</string>
 								<string>88D7F51B1285190700BA1949</string>
@@ -325,13 +328,16 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>117</integer>
-									<integer>52</integer>
+									<integer>134</integer>
+									<integer>102</integer>
+									<integer>34</integer>
+									<integer>32</integer>
+									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 1495}, {205, 760}}</string>
+							<string>{{0, 1778}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -368,7 +374,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraCanvas.cpp</string>
+								<string>StringConv.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -376,11 +382,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraCanvas.cpp</string>
+										<string>StringConv.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>882F9D6813AC9DCD00ABA241</string>
+										<string>887A4B9313ACFA9100ADB830</string>
 										<key>history</key>
 										<array>
 											<string>88BFA132135AB29100BB8E70</string>
@@ -564,7 +570,6 @@
 											<string>88A2103C138E1EA80019C5AA</string>
 											<string>88A2103D138E1EA80019C5AA</string>
 											<string>88A2103E138E1EA80019C5AA</string>
-											<string>88A21086138E2F080019C5AA</string>
 											<string>88A211E7138E46DA0019C5AA</string>
 											<string>88A21278138E5AE10019C5AA</string>
 											<string>88A2127A138E5AE10019C5AA</string>
@@ -602,7 +607,6 @@
 											<string>88452DE3138FBA730045D130</string>
 											<string>88452DE5138FBA730045D130</string>
 											<string>88452DE6138FBA730045D130</string>
-											<string>88452DE9138FBA730045D130</string>
 											<string>88452DEB138FBA730045D130</string>
 											<string>88452DEC138FBA730045D130</string>
 											<string>88452DED138FBA730045D130</string>
@@ -671,9 +675,7 @@
 											<string>887F22DE1399DF5D00F534D5</string>
 											<string>887F22E21399DF5D00F534D5</string>
 											<string>887F23191399E1DD00F534D5</string>
-											<string>887F23CC1399FF8500F534D5</string>
 											<string>887F2454139A13FC00F534D5</string>
-											<string>887F2456139A13FC00F534D5</string>
 											<string>887F2590139B315E00F534D5</string>
 											<string>887F25C1139B368500F534D5</string>
 											<string>887F2793139B58AA00F534D5</string>
@@ -752,9 +754,7 @@
 											<string>88DA4BA6139F814900CA9817</string>
 											<string>88DA4BA9139F814900CA9817</string>
 											<string>88DA4C3E13A086C300CA9817</string>
-											<string>88DA4C9213A08F9100CA9817</string>
 											<string>88DA4C9413A08F9100CA9817</string>
-											<string>88DA4C9513A08F9100CA9817</string>
 											<string>88DA4CAF13A08FEC00CA9817</string>
 											<string>88DA4CE513A0938300CA9817</string>
 											<string>88DA4CF013A0947D00CA9817</string>
@@ -828,7 +828,6 @@
 											<string>8884F91F13A3DD4E00BEC5AB</string>
 											<string>8884F95213A5130000BEC5AB</string>
 											<string>8884F95313A5130000BEC5AB</string>
-											<string>8884F95413A5130000BEC5AB</string>
 											<string>8884F95513A5130000BEC5AB</string>
 											<string>8884F95613A5130000BEC5AB</string>
 											<string>8884F95713A5130000BEC5AB</string>
@@ -930,7 +929,17 @@
 											<string>8883E9E013ABBF2E00C57685</string>
 											<string>882F9D6613AC9DCD00ABA241</string>
 											<string>882F9D6713AC9DCD00ABA241</string>
-											<string>8883E92013ABB7FD00C57685</string>
+											<string>887A4B7013ACF82300ADB830</string>
+											<string>887A4B7113ACF82300ADB830</string>
+											<string>887A4B7413ACF82300ADB830</string>
+											<string>887A4B7613ACF82300ADB830</string>
+											<string>887A4B7713ACF82300ADB830</string>
+											<string>887A4B7D13ACFA1D00ADB830</string>
+											<string>887A4B7E13ACFA1D00ADB830</string>
+											<string>887A4B7F13ACFA1D00ADB830</string>
+											<string>887A4B8013ACFA1D00ADB830</string>
+											<string>887A4B9013ACFA9100ADB830</string>
+											<string>887A4B9113ACFA9100ADB830</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -988,9 +997,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>882F9D6013AC993900ABA241</string>
+				<string>887A4B6013ACF5A300ADB830</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>882F9D6113AC993900ABA241</string>
+				<string>887A4B6113ACF5A300ADB830</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -1149,12 +1158,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>StringConv.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -1210,7 +1221,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>887022D01346AB4300AE8DD7</string>
-				<string>882F9D6313AC993900ABA241</string>
+				<string>887A4B6313ACF5A300ADB830</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

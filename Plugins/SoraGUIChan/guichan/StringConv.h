@@ -7,27 +7,19 @@
  *
  */
 
-#ifndef SORA_STRING_CONV_H
-#define SORA_STRING_CONV_H
-
-#ifdef WIN32
-#pragma warning(disable: 4530)
-#pragma warning(disable: 4786)
-
-#define _CRT_SECURE_NO_WARNINGS 1
-#endif
+#ifndef GCN_STRING_CONV_H
+#define GCN_STRING_CONV_H
 
 #include <iostream>
 #include <string>
 
 #include <vector>
 
-using std::string;
-using std::wstring;
+namespace gcn {
+	//宽字符串->字符串
+	std::string ws2s(const std::wstring& ws);
+	//字符串->宽字符串
+	std::wstring s2ws(const std::string& s);
+}
 
-//宽字符串->字符串
-string ws2s(const wstring& ws);
-//字符串->宽字符串
-wstring s2ws(const string& s);
-
-#endif
+#endif // GCN_STRING_CONV_H_

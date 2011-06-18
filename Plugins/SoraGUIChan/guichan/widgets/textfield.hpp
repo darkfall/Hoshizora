@@ -118,6 +118,21 @@ namespace gcn
          * @see setCaretPosition
          */
         unsigned int getCaretPosition() const;
+		
+		/**
+		 *	Enable numeric input mode
+		 *  When enabled, only numeric input would available in the field
+		 *
+		 **/
+		virtual void enableNumericMode(bool flag);
+		
+		virtual bool isNumericModeEnabled() const;
+		
+		/**
+		 * Only available in numeric mode
+		 **/
+		virtual int getNumber() const;
+		
 
 
         // Inherited from Widget
@@ -159,6 +174,8 @@ namespace gcn
          * Holds the text of the text box.
          */
         std::wstring mText;
+		
+		bool mNumericMode;
 
         /**
          * Holds the caret position.
