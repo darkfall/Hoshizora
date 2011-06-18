@@ -1,6 +1,8 @@
 #include "SoraCGD3D9Shader.h"
 #include "SoraCore.h"
 
+#ifdef USE_SHADER
+
 namespace sora {
 
 	SoraCGD3D9ShaderContext::SoraCGD3D9ShaderContext() {
@@ -169,3 +171,5 @@ namespace sora {
     }
 
 } // namespace sora
+
+#endif // USE_SHADER

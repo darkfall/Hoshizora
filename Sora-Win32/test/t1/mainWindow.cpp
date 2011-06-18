@@ -43,7 +43,7 @@ mainWindow::~mainWindow() {
 
 bool mainWindow::updateFunc() {
 	
-
+	//sora::SORA->setIcon("./portal2.ico");
     return false;
 }
 
@@ -57,16 +57,9 @@ bool mainWindow::renderFunc() {
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
 
-	//pSpr->render();
+	pSpr->render();
 	//pSpr->renderWithVertices(vert, 6, SORA_TRIANGLES_FAN);
 	
-	sora->beginZBufferSort();
-	pSpr2->render();
-	pSpr3->render();
-	pSpr->render();
-	
-	sora->endZBufferSort();
-
 	sora->endScene();
 	return false;
 }
@@ -75,7 +68,7 @@ void mainWindow::init() {
     sora::SORA->setFPS(60);
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
 
-	pSpr = sora::SORA->createSprite(L"bg_optd.png");
+	pSpr = sora::SORA->createSprite(L"portal-2.jpg");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
 	pSpr3 = sora::SORA->createSprite(L"road.png");
 
@@ -106,6 +99,7 @@ void mainWindow::init() {
 	
 	registerEventFunc(this, &mainWindow::onKeyEvent);
 	sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
+
 }
 
 void mainWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {

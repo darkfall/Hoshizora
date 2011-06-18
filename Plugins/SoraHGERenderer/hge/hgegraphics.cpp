@@ -817,6 +817,15 @@ bool HGE_Impl::_GfxInit()
 	D3DXMatrixIdentity(&matView);
 	pD3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_FALSE ); 
 	CurBlendMode = BLEND_DEFAULT;
+
+	/*if(szCursor != NULL) {
+		IDirect3DSurface9* PtrD3DSurface;
+		pD3DDevice->CreateOffscreenPlainSurface(32, 32,  D3DFMT_X8R8G8B8, D3DPOOL_DEFAULT, &PtrD3DSurface, NULL);  
+		D3DXLoadSurfaceFromFileA(PtrD3DSurface, 0, 0, szCursor, 0, 0, D3DX_DEFAULT, 0);
+		pD3DDevice->SetCursorProperties(0,0,PtrD3DSurface);
+
+		pD3DDevice->ShowCursor(TRUE);
+	}*/
 	
 	if(!_init_lost()) return false;
 

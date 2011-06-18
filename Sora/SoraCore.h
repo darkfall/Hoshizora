@@ -218,6 +218,9 @@ namespace sora {
 		
 		SoraConsole* getConsole();
 		void setSystemFont(const wchar_t* font, int32 fontSize);
+
+		void setIcon(const SoraString& icon);
+		void setCursor(const SoraString& cursor);
 		
 	private:
 		inline void _registerCoreCmds();

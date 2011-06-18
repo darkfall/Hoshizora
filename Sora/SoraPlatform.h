@@ -301,5 +301,11 @@ typedef enum {
 #define _DEBUG
 #endif
 
+/*
+flag for shaders in render system
+disable this to get rid of shader
+*/
+#define USE_SHADER
+
 #endif // _SORA_PLATFORM_H_
 
