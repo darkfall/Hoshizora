@@ -15,9 +15,9 @@ namespace sora {
         canvasTarget = SORA->createTarget(w, h, bDepthBuffer);
         pCanvasSprite = new SoraSprite(SORA->getTargetTexture(canvasTarget));
 		
-		uint32* data = pCanvasSprite->getPixelData();
+		/*uint32* data = pCanvasSprite->getPixelData();
 		memset(data, 0, w*h*4);
-		pCanvasSprite->unlockPixelData();
+		pCanvasSprite->unlockPixelData();*/
         
 		if(!canvasTarget || !pCanvasSprite) 
             throw SORA_EXCEPTION("Error creating render target");

@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8883E9EA13ABBF4000C57685</string>
+						<string>882F9D6913AC9DCD00ABA241</string>
 						<key>history</key>
 						<array>
-							<string>8883E89A13ABB7A200C57685</string>
+							<string>8883E9EA13ABBF4000C57685</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -325,14 +325,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>20</integer>
-									<integer>10</integer>
-									<integer>2</integer>
+									<integer>117</integer>
+									<integer>52</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 118}, {205, 760}}</string>
+							<string>{{0, 1495}, {205, 760}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -369,7 +368,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraOGLRenderer.cpp</string>
+								<string>SoraCanvas.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -377,11 +376,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoraOGLRenderer.cpp</string>
+										<string>SoraCanvas.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8883E9E913ABBF4000C57685</string>
+										<string>882F9D6813AC9DCD00ABA241</string>
 										<key>history</key>
 										<array>
 											<string>88BFA132135AB29100BB8E70</string>
@@ -911,7 +910,6 @@
 											<string>8883E78413ABB0C200C57685</string>
 											<string>8883E78D13ABB0FA00C57685</string>
 											<string>8883E79613ABB12400C57685</string>
-											<string>8883E7CD13ABB2B800C57685</string>
 											<string>8883E7D413ABB2CD00C57685</string>
 											<string>8883E7EB13ABB37A00C57685</string>
 											<string>8883E7F213ABB39600C57685</string>
@@ -919,7 +917,6 @@
 											<string>8883E80013ABB3E300C57685</string>
 											<string>8883E89413ABB79C00C57685</string>
 											<string>8883E89513ABB79C00C57685</string>
-											<string>8883E92013ABB7FD00C57685</string>
 											<string>8883E92113ABB7FD00C57685</string>
 											<string>8883E95713ABB99900C57685</string>
 											<string>8883E99C13ABBBE500C57685</string>
@@ -931,7 +928,9 @@
 											<string>8883E9CA13ABBE8C00C57685</string>
 											<string>8883E9DF13ABBF2E00C57685</string>
 											<string>8883E9E013ABBF2E00C57685</string>
-											<string>8883E9E113ABBF2E00C57685</string>
+											<string>882F9D6613AC9DCD00ABA241</string>
+											<string>882F9D6713AC9DCD00ABA241</string>
+											<string>8883E92013ABB7FD00C57685</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -989,9 +988,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>8883E92413ABB7FD00C57685</string>
+				<string>882F9D6013AC993900ABA241</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>8883E92513ABB7FD00C57685</string>
+				<string>882F9D6113AC993900ABA241</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -1129,11 +1128,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>8883E93013ABB7FD00C57685</string>
-		<string>8883E93113ABB7FD00C57685</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>887022D01346AB4300AE8DD7</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>88B1C28313A9EBC500EC541D</string>
 		<string>/Users/darkfall/SoraGit/Sora-OSX/Sora.xcodeproj</string>
 	</array>
@@ -1159,7 +1154,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoraParticleSystem.cpp</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -1176,8 +1171,6 @@
 							<string>169pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1217,7 +1210,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>887022D01346AB4300AE8DD7</string>
-				<string>8883E92713ABB7FD00C57685</string>
+				<string>882F9D6313AC993900ABA241</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
