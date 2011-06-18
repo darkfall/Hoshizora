@@ -57,6 +57,7 @@
 #include "guichan/mouseinput.hpp"
 #include "guichan/mouselistener.hpp"
 #include "guichan/widget.hpp"
+#include "guichan/SoundLoader.h"
 
 namespace gcn
 {
@@ -64,6 +65,7 @@ namespace gcn
             :mTop(NULL),
              mGraphics(NULL),
              mInput(NULL),
+			 mSoundLoader(NULL),
              mTabbing(true),
              mShiftPressed(false),
              mMetaPressed(false),
@@ -127,6 +129,14 @@ namespace gcn
     {
         return mInput;
     }
+	
+	void Gui::setSoundLoader(SoundLoader* soundLoader) {
+		mSoundLoader = soundLoader;
+	}
+	
+	SoundLoader* Gui::getSoundLoader() const {
+		return mSoundLoader;
+	}
 
     void Gui::logic()
     {

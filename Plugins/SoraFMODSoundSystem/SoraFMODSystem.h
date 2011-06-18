@@ -24,7 +24,8 @@ namespace sora {
     
     static bool FMOD_ERROR_CHECK(FMOD_RESULT result) {
         if(result != FMOD_OK) {
-            INT_LOG_HANDLE->logf("FMOD ERROR: error (%d) %s\n", result, FMOD_ErrorString(result));
+            DebugPtr->log(vamssg("FMOD ERROR: error (%d) %s\n", result, FMOD_ErrorString(result)),
+						  LOG_LEVEL_ERROR);
             return false;
         }
         return true;

@@ -97,9 +97,9 @@ namespace gcn
         sora->getMousePos(&curMouseX, &curMouseY);
         mouseWheel = sora->getMouseWheel();
 
-        leftBtn = sora->getKeyState(SORA_KEY_LBUTTON);
-        rightBtn = sora->getKeyState(SORA_KEY_RBUTTON);
-        centerBtn = sora->getKeyState(SORA_KEY_MBUTTON);
+        leftBtn = sora->getKeyState(SORA_KEY_LBUTTON)==SORA_INPUT_KEYDOWN;
+        rightBtn = sora->getKeyState(SORA_KEY_RBUTTON)==SORA_INPUT_KEYDOWN;
+        centerBtn = sora->getKeyState(SORA_KEY_MBUTTON)==SORA_INPUT_KEYDOWN;
 	
         // Check mouse movement
         if (mMouseX != curMouseX 

@@ -15,7 +15,11 @@
 #include "SoraPlatform.h"
 #include "SoraParticleSystem/SoraParticleSystem.h"
 #include "SoraLua/SoraLuaObject.h"
-#include "../ReflectionRev/editor/rfEditor.h"
+
+#include "SoraHttpFile/SoraHttpFile.h"
+
+#include "SoraNetwork/clsockets/ActiveSocket.h"
+#include "SoraNetwork/clsockets/PassiveSocket.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -39,10 +43,12 @@ public:
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
 	
-	void onKeyEvent(const sora::SoraKeyEvent* kev);
+	void onKeyEvent(sora::SoraKeyEvent* kev);
 	
 private:
 	sora::SoraCore* sora;
+	
+	sora::SoraBaseCanvas* pCanvas;
                     
     sora::SoraSprite* pSpr;
 	sora::SoraSprite* pSpr2;
@@ -51,13 +57,16 @@ private:
 	sora::SoraShader* shader;
 					
     sora::SoraFont* pFont;
-	sora::SoraParticleSystem* ps;
+	sora::SoraParticleManager* ps;
 	sora::SoraSprite* psSpr;
 	sora::SoraBaseCanvas* canvas1;
 	
-	sora::SoraLuaObject luaObject;
+	sora::SoraLuaObject obj;
 	
-	reflection::rfEditor* editor;
+	sora::SoraHttpFile file;
+	
+	CActiveSocket asocket;
+	CPassiveSocket psocket;
 };
 
 #endif

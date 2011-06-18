@@ -217,11 +217,11 @@ namespace sora {
         return libvlc_audio_get_mute(mp);
     }
     
-    s_int64 SoraVlcMoviePlayer::getLength() const {
+    uint64 SoraVlcMoviePlayer::getLength() const {
         return libvlc_media_player_get_length(mp);
     }
     
-    void SoraVlcMoviePlayer::setTime(s_int64 newtime) {
+    void SoraVlcMoviePlayer::setTime(uint64 newtime) {
         if(!isPlaying()) return;
         
         if(newtime < 0) newtime = 0;
@@ -230,7 +230,7 @@ namespace sora {
         libvlc_media_player_set_time(mp, (libvlc_time_t)newtime);
     }
     
-    s_int64 SoraVlcMoviePlayer::getTime() const {
+    uint64 SoraVlcMoviePlayer::getTime() const {
         return libvlc_media_player_get_time(mp);
     }
     

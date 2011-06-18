@@ -11,7 +11,6 @@
 #define GCN_MENU_CONTAINER_H_
 
 #include "SoraGUIChan/guichan.hpp"
-#include "SoraGUIChan/Sound.h"
 
 namespace gcn {
 	

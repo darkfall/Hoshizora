@@ -34,6 +34,7 @@
 #pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
 #endif
 
+#include "../../mead/meadMainWindow.h"
 
 #include "mainWindow.h"
 

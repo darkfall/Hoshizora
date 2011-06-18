@@ -70,15 +70,15 @@ namespace sora {
 	}
 
 	bool SoraHGEInput::joyKeyPressed(int key) {
-		return hge->Input_GetDIKey(key, SORA_DIKEY_PRESSED);
+		return hge->Input_GetDIKey(key, SORA_JOYSTICK_PRESSED);
 	}
 
 	bool SoraHGEInput::joyKeyDown(int key) {
-		return hge->Input_GetDIKey(key, SORA_DIKEY_DOWN);
+		return hge->Input_GetDIKey(key, SORA_JOYSTICK_DOWN);
 	}
 
 	bool SoraHGEInput::joyKeyUp(int key) {
-		return hge->Input_GetDIKey(key, SORA_DIKEY_UP);
+		return hge->Input_GetDIKey(key, SORA_JOYSTICK_UP);
 	}
 
 	bool SoraHGEInput::joyKeyState(int key, unsigned char state) {

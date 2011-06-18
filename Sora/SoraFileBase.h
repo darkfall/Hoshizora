@@ -22,7 +22,7 @@ namespace sora {
 		bool  is_open() const { return isopen; }
 		void  set_open(bool flag) { isopen = flag; }
 
-	private:
+	protected:
 		SoraWString sFilePath;
 
 		bool isopen;

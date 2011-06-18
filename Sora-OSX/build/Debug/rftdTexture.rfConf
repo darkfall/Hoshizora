@@ -22,3 +22,8 @@ Texture {
 	TexId: 5
 	Path: "rftdMapElements1.png"
 }
+
+Texture {
+	TexId: 6
+	Path: "rftdMapTest2.png"
+}

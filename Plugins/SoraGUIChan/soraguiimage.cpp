@@ -68,7 +68,7 @@ namespace gcn
 
     Color SoraGUIImage::getPixel(int x, int y)
     {
-        ulong32 *pLockPtr = mSoraSprite->getPixelData();
+        uint32 *pLockPtr = mSoraSprite->getPixelData();
 
         if (pLockPtr == NULL)
         {
@@ -89,7 +89,7 @@ namespace gcn
     {
         ulong32 hardwareColor = CARGB(color.a, color.r, color.g, color.b);
 
-        DWORD *pLockPtr = mSoraSprite->getPixelData();
+        uint32 *pLockPtr = mSoraSprite->getPixelData();
 
         if (pLockPtr == NULL) {
             throw GCN_EXCEPTION("Locking of the texture failed. HGE only support locking of 32bit textures.");
@@ -102,7 +102,10 @@ namespace gcn
 	
 	void SoraGUIImage::setTextureRect(const Rectangle& rect) {
 		if(mSoraSprite)
-			mSoraSprite->setTextureRect(rect.x, rect.y, rect.width, rect.height);
+			mSoraSprite->setTextureRect(static_cast<float32>(rect.x), 
+										static_cast<float32>(rect.y), 
+										static_cast<float32>(rect.width), 
+										static_cast<float32>(rect.height));
 	}
 
     void SoraGUIImage::convertToDisplayFormat()
@@ -130,7 +133,7 @@ namespace gcn
 
         sora->textureUnlock(mTexture);
 		 */
-        mSoraSprite = (sora::SoraSprite*)sora->createSpriteTex(mTexture);
+        mSoraSprite = new sora::SoraSprite(mTexture);
 	//	mSoraSprite->setZ(GUI_Z);
 	//	mSoraSprite->setBlendMode(BLEND_DEFAULT_Z);
     }

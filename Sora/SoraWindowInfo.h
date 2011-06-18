@@ -27,6 +27,11 @@ namespace sora {
 
 		virtual bool renderFunc() = 0;
 		virtual bool updateFunc() = 0;
+
+		virtual const char* getIcon() { return NULL; }
+		virtual const char* getCursor() { return NULL; }
+
+		virtual void pauseFunc() {}
 	};
 	
 } // namespace sora

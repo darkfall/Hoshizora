@@ -13,6 +13,7 @@
 #include "SoraLua/LuaPlus/LuaPlus.h"
 
 namespace sora {
+	
 		
 	template<typename P>
 	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P param) {
@@ -86,12 +87,21 @@ namespace sora {
 		}
 	}
 	
+	template<typename RT>
+	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name) {
+		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
+		if(func.IsFunction()) {
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc();
+		}
+	}
+	
 	template<typename RT, typename P>
 	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P param) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
-			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
-			realFunc(param);
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc(param);
 		}
 	}
 	
@@ -99,8 +109,8 @@ namespace sora {
 	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
-			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
-			realFunc(p1, p2);
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc(p1, p2);
 		}
 	}
 	
@@ -108,8 +118,8 @@ namespace sora {
 	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
-			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
-			realFunc(p1, p2, p3);
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc(p1, p2, p3);
 		}
 	}
 	
@@ -117,8 +127,8 @@ namespace sora {
 	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
-			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
-			realFunc(p1, p2, p3, p4);
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc(p1, p2, p3, p4);
 		}
 	}
 	
@@ -126,8 +136,8 @@ namespace sora {
 	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
-			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
-			realFunc(p1, p2, p3, p4, p5);
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc(p1, p2, p3, p4, p5);
 		}
 	}
 	
@@ -135,8 +145,8 @@ namespace sora {
 	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
-			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
-			realFunc(p1, p2, p3, p4, p5, p6);
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc(p1, p2, p3, p4, p5, p6);
 		}
 	}
 	
@@ -144,8 +154,8 @@ namespace sora {
 	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
-			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
-			realFunc(p1, p2, p3, p4, p5, p6, p7);
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc(p1, p2, p3, p4, p5, p6, p7);
 		}
 	}
 	
@@ -153,8 +163,8 @@ namespace sora {
 	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
-			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
-			realFunc(p1, p2, p3, p4, p5, p6, p7, p8);
+			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
+			return realFunc(p1, p2, p3, p4, p5, p6, p7, p8);
 		}
 	}
 	

@@ -14,7 +14,7 @@ namespace sora {
 		return *this;
 	}
 	
-	void SoraEventHandlerPack::onTimerEvent(const SoraTimerEvent* ev) {
+	void SoraEventHandlerPack::onTimerEvent(SoraTimerEvent* ev) {
 		EVENT_HANDLER_CONT::iterator itHandler = evHandlers.begin();
 		while(itHandler != evHandlers.end()) {
 			if((*itHandler)) {
@@ -211,6 +211,9 @@ namespace sora {
 			if((*itHandler)) {
 				(*itHandler)->handleEvent(kev);
 				++itHandler;
+				
+				if(kev->isConsumed())
+					break;
 			}
 		}
 	}

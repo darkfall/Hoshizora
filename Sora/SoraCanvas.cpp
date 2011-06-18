@@ -13,8 +13,15 @@ namespace sora {
         
     SoraBaseCanvas::SoraBaseCanvas(int32 w, int32 h, bool bDepthBuffer) {
         canvasTarget = SORA->createTarget(w, h, bDepthBuffer);
-        pCanvasSprite = new SoraSprite(SORA->getTargetTexture(canvasTarget));
-        if(!canvasTarget || !pCanvasSprite) 
+		if(!canvasTarget)
+			throw SORA_EXCEPTION("Error creating render target");
+        pCanvasSprite = new SoraSprite(0);
+		
+		/*uint32* data = pCanvasSprite->getPixelData();
+		memset(data, 0, w*h*4);
+		pCanvasSprite->unlockPixelData();*/
+        
+		if(!canvasTarget || !pCanvasSprite) 
             throw SORA_EXCEPTION("Error creating render target");
     }
     
@@ -22,6 +29,14 @@ namespace sora {
         SORA->freeTarget(canvasTarget);
         delete pCanvasSprite;
     }
+
+	void SoraBaseCanvas::setZ(float32 z) {
+		pCanvasSprite->setZ(z);
+	}
+
+	void SoraBaseCanvas::setBlendMode(int32 mode) {
+		pCanvasSprite->setBlendMode(mode);
+	}
     
     void SoraBaseCanvas::render() {
         pCanvasSprite->setTexture(SORA->getTargetTexture(canvasTarget));

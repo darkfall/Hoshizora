@@ -30,7 +30,10 @@ namespace sora {
         
         void beginRender();
         void finishRender();
-		
+
+		void setZ(float32 z);
+		void setBlendMode(int32 mode);
+
         void attachShader(SoraShader*);
         void detachShader(SoraShader*);
         SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);

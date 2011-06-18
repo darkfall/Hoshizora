@@ -16,7 +16,7 @@
 
 #include <mach/mach.h>
 
-#elif defined(OS_WINDOWS)
+#elif defined(OS_WIN32)
 
 #include <windows.h>
 #include <psapi.h>
@@ -32,7 +32,7 @@
 
 namespace sora {
 	
-	static s_int64 getMemoryUsage() {
+	static uint64 getMemoryUsage() {
 		// osx kernal memory usage
 #if defined(OS_IOS) || defined(OS_OSX)
 		

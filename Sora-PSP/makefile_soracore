@@ -1,0 +1,37 @@
+PSP_FW_VERSION=371
+
+TARGET = SoraCore
+OBJS = ../sora/SoraStringConv.o ../sora/CoreTransform.o ../sora/hgerect.o \
+	../sora/hgevector.o ../sora/SoraCanvas.o \
+	../sora/SoraEnvValues.o ../sora/SoraEvent.o ../sora/SoraEventManager.o \
+	../sora/SoraFileUtility.o ../sora/SoraFolderResourceManager.o \
+	../sora/SoraImageEffect.o ../sora/SoraLocalizer.o ../sora/SoraMemoryBuffer.o \
+	../sora/SoraObject.o ../sora/SoraPluginManager.o ../sora/SoraRenderSystem.o \
+	../sora/SoraResourceFileFinder.o ../sora/SoraShader.o ../sora/SoraSprite.o \
+	../sora/SoraTexture.o ../sora/SoraTimerEvent.o  \
+	../sora/cmd/CoreCmds.o ../sora/cmd/SoraConsole.o ../sora/Debug/SoraInternalLogger.o \
+	../sora/helpers/SoraInputSimulator.o ../sora/helpers/SoraMutableSprite.o ../sora/helpers/SoraSpriteFont.o ../sora/helpers/SoraZSorter.o \
+	../sora/json/json_reader.o ../sora/json/json_value.o ../sora/json/json_writer.o \
+	../sora/llexer/llexer.o ../sora/random/SFMT.o ../sora/SoraINIFile/SoraINIFile.o \
+	../sora/support/md5lib.o \
+	../sora/tinyXML/tinystr.o ../sora/tinyXML/tinyxml.o ../sora/tinyXML/tinyxmlerror.o ../sora/tinyXML/tinyxmlparser.o \
+	../sora/SoraCore.o \
+	SoraJGEApp.o SoraPSPGLRenderTarget.o SoraPSPGLRenderer.o \
+	main1.o
+	
+INCDIR = ./ ../sora ./JGE/include ./JGE/dependencies/include
+CFLAGS = -O2 -G0 -Wall -DPSPFW3XX 
+CXXFLAGS = $(CFLAGS)
+ASFLAGS = $(CFLAGS)
+
+LIBS = ./JGE/lib/libhgetools.a ./JGE/lib/libjinput.a  ./JGE/lib/libjge300.a ./JGE/lib/libjpeg.a ./JGE/lib/libmikmod.a -lstdc++  -lc -lm -lpsprtc
+LIBS += -lpsppower -lpspmpeg -lpspaudiocodec -lpspaudiolib -lpspaudio -lpspgum -lpspgu -lpsprtc ./lib/libfreetype.a ./lib/libpng.a ./lib/libz.a ./JGE/lib/libgif.a
+LIBS += -L/usr/local/pspdev/psp/lib -lm -L/usr/local/pspdev/psp/sdk/lib -lpspdebug -lpspgu -lpspctrl -lpspge -lpspdisplay -lpsphprm -lpspvfpu -lpspsdk -lpsprtc -lpspaudio -lc -lpspuser -lpsputility -lpspkernel
+LIBDIR = 
+LDFLAGS =
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = Sora
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak

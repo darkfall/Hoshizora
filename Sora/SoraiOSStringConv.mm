@@ -15,16 +15,14 @@
 
 namespace sora {
 	
-	std::wstring NSStringToStringW ( NSString* Str )   
-	{   
+	std::wstring NSStringToStringW ( NSString* Str ) {   
 		NSStringEncoding pEncode    =   CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingUTF32LE );   
 		NSData* pSData              =   [ Str dataUsingEncoding : pEncode ];    
 		
 		return std::wstring ( (wchar_t*) [ pSData bytes ], [ pSData length] / sizeof ( wchar_t ) );   
 	}   
 	
-	NSString* StringWToNSString ( const std::wstring& Str )   
-	{   
+	NSString* StringWToNSString ( const std::wstring& Str ) {   
 		NSString* pString = [ [ NSString alloc ]    
 							 initWithBytes : (char*)Str.data()   
 							 length : Str.size() * sizeof(wchar_t)   

@@ -19,6 +19,7 @@ namespace sora {
 	
 	SoraOGLInput::SoraOGLInput() {
 		glfwSetKeyCallback(glfwKeyCallback);
+		glfwSetMouseButtonCallback(glfwMouseCallback);
 	}
 
 	void SoraOGLInput::getMousePos(float32 *x, float32 *y) {
@@ -52,28 +53,28 @@ namespace sora {
 	}
 
 	bool SoraOGLInput::keyDown(int32 key) {
-		if(key >= GLFW_MOUSE_BUTTON_1 && key <= GLFW_MOUSE_BUTTON_8)
-			return (glfwGetMouseButton(key) == GLFW_PRESS);
-		return (glfwGetKey((key))==GLFW_PRESS);
+		if(key >= SORA_KEY_LBUTTON && key <= SORA_KEY_MBUTTON)
+			return (glfwGetMouseButton(sorakey_to_glfwkey(key)) == GLFW_PRESS);
+		return (glfwGetKey(sorakey_to_glfwkey(key))==GLFW_PRESS);
 	}
 
 	bool SoraOGLInput::keyUp(int32 key) {
-		if(key >= GLFW_MOUSE_BUTTON_1 && key <= GLFW_MOUSE_BUTTON_8)
-			return (glfwGetMouseButton(key) == GLFW_RELEASE);
-		return (glfwGetKey((key))==GLFW_RELEASE);
+		if(key >= SORA_KEY_LBUTTON && key <= SORA_KEY_MBUTTON)
+			return (glfwGetMouseButton(sorakey_to_glfwkey(key)) == GLFW_RELEASE);
+		return (glfwGetKey(sorakey_to_glfwkey(key))==GLFW_RELEASE);
 	}
 
 	int32 SoraOGLInput::getKeyState(int32 key) {
-		if(key >= GLFW_MOUSE_BUTTON_1 && key <= GLFW_MOUSE_BUTTON_8)
-			return (glfwGetMouseButton(key)==GLFW_PRESS)?SORA_INPUT_KEYDOWN:SORA_INPUT_KEYUP;
-		return glfwGetKey((key))==GLFW_PRESS?SORA_INPUT_KEYDOWN:SORA_INPUT_KEYUP;
+		if(key >= SORA_KEY_LBUTTON && key <= SORA_KEY_MBUTTON)
+			return (glfwGetMouseButton(sorakey_to_glfwkey(key))==GLFW_PRESS)?SORA_INPUT_KEYDOWN:SORA_INPUT_KEYUP;
+		return glfwGetKey(sorakey_to_glfwkey(key))==GLFW_PRESS?SORA_INPUT_KEYDOWN:SORA_INPUT_KEYUP;
 	}
 	
 	char* SoraOGLInput::getKeyName(int32 key) {
-		static char ckey[2];
-		ckey[0] = (char)key;
-		ckey[1] = '\0';
-		return ckey;
+		char name[2];
+		name[0] = toascii(key);
+		name[1] = '\0';
+		return name;
 	}
 	
 	bool SoraOGLInput::getKeyEvent(SoraKeyEvent& ev) {

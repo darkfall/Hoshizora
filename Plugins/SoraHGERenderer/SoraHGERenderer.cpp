@@ -15,7 +15,10 @@
 #include "SoraMath.h"
 #include "Rect4V.h"
 #include "SoraInfiniteRendererCallback.h"
+
+#ifdef USE_SHADER
 #include "SoraShader/SoraCGD3D9Shader.h"
+#endif
 
 #include "Debug/SoraInternalLogger.h"
 
@@ -93,12 +96,16 @@ namespace sora{
 			pHGE->System_SetState(HGE_HIDEMOUSE, windowInfo->hideMouse());
 			pHGE->System_SetState(HGE_TITLE, windowInfo->getWindowName().c_str());
 			pHGE->System_SetState(HGE_DONTSUSPEND, true);
+			
+			if(windowInfo->getIcon() != 0) {
+				pHGE->System_SetState(HGE_ICON, windowInfo->getIcon());
+			}
+		
+			if(windowInfo->getCursor() != 0) {
+				pHGE->System_SetState(HGE_CURSOR, windowInfo->getCursor());
+			}
 
 			pHGE->System_SetState(HGE_ZBUFFER, true);
-	//		pHGE->System_SetState(HGE_FPS, HGEFPS_UNLIMITED);
-
-			//pHGE->System_SetState(HGE_LOGFILE, "hgelog.txt");
-		
 			pHGE->System_Initiate();
 
 			windowInfo->init();
@@ -110,8 +117,8 @@ namespace sora{
 	}
 
 	void SoraHGERenderer::setWindowSize(int32 w, int32 h) {
-		pHGE->System_SetState(HGE_SCREENWIDTH, w);
-		pHGE->System_SetState(HGE_SCREENHEIGHT, h);
+		pHGE->_Resize(w, h);
+		pHGE->_AdjustWindow();
 	}
 
 	void SoraHGERenderer::setWindowTitle(const SoraWString& title) {
@@ -139,7 +146,10 @@ namespace sora{
 	}
     
     SoraShaderContext* SoraHGERenderer::createShaderContext() {
+#ifdef USE_SHADER
         return new SoraCGD3D9ShaderContext;
+#endif
+		return NULL;
     }
 
 	void SoraHGERenderer::attachShaderContext(SoraShaderContext* context) {
@@ -147,8 +157,10 @@ namespace sora{
 	}
 
 	void SoraHGERenderer::detachShaderContext() {
-		currShader->detachShaderList();
-		currShader = 0;
+		if(currShader != NULL) {
+			currShader->detachShaderList();
+			currShader = 0;
+		}
 	}
 
 	SoraTexture* SoraHGERenderer::createTexture(const SoraWString& sTexturePath, bool bMipmap) {
@@ -189,7 +201,7 @@ namespace sora{
 			tex->mTextureID = static_cast<ulong32>(htex);
 			tex->mTextureWidth		= w;
 			tex->mTextureHeight		= h;
-			tex->mOriginalHeight		= h;
+			tex->mOriginalHeight	= h;
 			tex->mOriginalWidth		= w;
 			return tex;
 		} else
@@ -208,7 +220,7 @@ namespace sora{
 			tex->mTextureID = static_cast<ulong32>(htex);
 			tex->mTextureWidth		= w;
 			tex->mTextureHeight		= h;
-			tex->mOriginalHeight		= h;
+			tex->mOriginalHeight	= h;
 			tex->mOriginalWidth		= w;
 			return tex;
 		} else
@@ -216,8 +228,8 @@ namespace sora{
 		return 0;
 	}
 
-	ulong32* SoraHGERenderer::textureLock(SoraTexture* ht) {
-		return pHGE->Texture_Lock(ht->mTextureID, false, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight);
+	uint32* SoraHGERenderer::textureLock(SoraTexture* ht) {
+		return (uint32*)pHGE->Texture_Lock(ht->mTextureID, false, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight);
 	}
 
 	void SoraHGERenderer::textureUnlock(SoraTexture* h) {
@@ -268,55 +280,27 @@ namespace sora{
 		}
 	}
 
-	bool SoraHGERenderer::isActive() {
-		return pHGE->System_GetState(HGE_ACTIVE);
+	int32 SoraHGERenderer::_modeToDXMode(int32 mode) {
+		switch(mode) {
+			case SORA_LINE: return HGEPRIM_LINES;
+			case SORA_TRIANGLES: return HGEPRIM_TRIPLES;
+			case SORA_TRIANGLES_FAN: return HGEPRIM_TRIPLES_FAN;
+			case SORA_TRIANGLES_STRIP: return HGEPRIM_TRIPLES_STRIP;
+			case SORA_QUAD: return HGEPRIM_QUADS;
+		}
+		return HGEPRIM_TRIPLES;
 	}
 
-	void SoraHGERenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, DWORD color, float32 z) {
-		//pHGE->Gfx_RenderLine(x1, y1, x2, y2);
-		Rect4V rect;
+	void SoraHGERenderer::renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 size, int32 mode) {
+		int32 maxSize;
+		hgeVertex* vtxBuffer = pHGE->Gfx_StartBatch(_modeToDXMode(mode), tex->mTextureID, blendMode, &maxSize);
+		memcpy(&vtxBuffer[0], vertices, sizeof(hgeVertex)*size);
+		pHGE->Gfx_FinishBatch(size);
+		pHGE->_render_batch();
+	}
 
-		if(fWidth != y2-y1 && fWidth != x2-x1) {
-			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
-
-			rect.x1 = x1; rect.y1 = y1;
-			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
-			rect.x4 = x2; rect.y4 = y2;
-			rect.x3 = x2+fWidth*cosf(rotAng); rect.y3 = y2+fWidth*sinf(rotAng);
-		} else {
-			rect.x1 = x1; rect.y1 = y1;
-			rect.x2 = x2; rect.y2 = y1;
-			rect.x3 = x2; rect.y3 = y2;
-			rect.x4 = x1; rect.y4 = y2;
-		}
-		sora::SoraQuad quad;
-
-        quad.tex = NULL;
-
-        quad.v[0].x   = rect.x1;
-        quad.v[0].y   = rect.y1;
-        quad.v[0].col = color;
-
-        quad.v[1].x   = rect.x2;
-        quad.v[1].y   = rect.y2;
-        quad.v[1].col = color;
-
-        quad.v[2].x   = rect.x3;
-        quad.v[2].y   = rect.y3;
-        quad.v[2].col = color;
-
-        quad.v[3].x   = rect.x4;
-        quad.v[3].y   = rect.y4;
-        quad.v[3].col = color;
-
-        int i;
-        for (i = 0; i < 4; ++i) {
-            quad.v[i].z = z;
-        }
-
-        quad.blend = BLEND_DEFAULT;
-
-		renderQuad(quad);
+	bool SoraHGERenderer::isActive() {
+		return pHGE->System_GetState(HGE_ACTIVE);
 	}
 
 	void SoraHGERenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
@@ -365,4 +349,11 @@ namespace sora{
         
     }
 
+	void SoraHGERenderer::setIcon(const SoraString& icon) {
+		pHGE->System_SetState(HGE_ICON, icon.c_str());
+	}
+
+	void SoraHGERenderer::setCursor(const SoraString& cursor) {
+		pHGE->System_SetState(HGE_CURSOR, cursor.c_str());
+	}
 } // namespace sora

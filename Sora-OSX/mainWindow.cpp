@@ -25,119 +25,173 @@
 
 #include "SoraSpriteAnimation/AnimationLuaExport.h"
 
-#include "../MEAD/bulletLuaExport.h"
-#include "../MEAD/meadBossManager.h"
-#include "../MEAD/bulletLuaHelper.h"
 #include "SoraLua/SoraLuaExport.h"
 
-#include "../ReflectionTD/rftdEnemyObject.h"
-#include "../ReflectionTD/rftdCommon.h"
+#include "SoraPNGOps/SoraCompressedTexture.h"
+
+#include "SoraGUIChan/Modifiers/CloseModifier.h"
+
+#include "SoraPNGOps/SoraPNGOptimizer.h"
+#include "Debug/SoraAutoProfile.h"
+
+#include "cmd/SoraConsole.h"
+
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
 	
 	registerEventFunc(this, &mainWindow::onKeyEvent);
 	sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
+	
 }
 
 mainWindow::~mainWindow() {
+}
+int32 posy = 0;
+
+
+
+float32 cx = 300.f, cy = 400.f, cz = 1.f;
+void transform3d(float32& x, float32& y, float32 z) {
+	float scale = (cz - z) / cz;
+	x = (x - cx) * scale + cx;
+	y = (y - cy) * scale + cy;
+	z = 0.f;
 }
 
 bool mainWindow::updateFunc() {
 	
 	if(sora->keyDown(SORA_KEY_ESCAPE))
 		sora->shutDown();
-	if(sora->keyDown(SORA_KEY_F)) {
-	
+	if(sora->keyDown(SORA_KEY_DOWN)) {
+		++posy;
 	}
+	
+	if(sora->keyDown(SORA_KEY_LEFT))
+		cx -= 2.f;
+	if(sora->keyDown(SORA_KEY_RIGHT))
+		cx += 2.f;
+	if(sora->keyDown(SORA_KEY_UP))
+		cy -= 2.f;
+	if(sora->keyDown(SORA_KEY_DOWN))
+		cy += 2.f;
+	
+	if(sora->keyDown(SORA_KEY_O))
+		cz += 0.1f;
+	if(sora->keyDown(SORA_KEY_P))
+		cz -= 0.1f;
+
 	
     return false;
 }
+void renderBottom() {
+	
+}
 
-rftd::rftdEnemyObject* test;
-float32 posx = 0;
-#include "../ReflectionTD/rftdMap.h"
+sora::SoraVertex vert[6];
 
-rftd::rftdMap* mtmap;
-rftd::MapConf conf;
 
 bool mainWindow::renderFunc() {
+	pCanvas->beginRender();
 	
-	sora->beginScene(0x00000000);
+	pCanvas->finishRender();
+	
+	sora->beginScene(0);
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
 		
-	//pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
-	
-//	pSpr->render4V(256.f, 128.f, 256.f, 256.f, 376.f, 256.f, 376.f, 128.f);
-/*	pSpr2->update(sora::SORA->getDelta());
-	pSpr2->render(0.f, -128.f);*/
+	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
+	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 
-/*	pressAnyKey->render(128+posx, 512.f);
-	pressAnyKey->setTextureRect(posx, 0.f, pressAnyKey->getTextureWidth()-posx, pressAnyKey->getSpriteHeight());
-	posx += 1;*/
+	sora::SORA->beginZBufferSort();
+	{
+		sora::PROFILE("p1");
+		
+		pressAnyKey->render();
+	pSpr2->render();
+	pSpr->render();
 	
-//	test->update(sora::SORA->getDelta());
-//	test->render();
+	{
+		ps->update(sora::SORA->getDelta());
+		ps->render();
+	}
 	
-	pFont->print(getWindowWidth(), 0.f, sora::FONT_ALIGNMENT_RIGHT, L"%.2f/%.2f", mtmap->getCurrLevelInterval(), mtmap->getLevelInterval());
-	pFont->print(getWindowWidth(), 20.f, sora::FONT_ALIGNMENT_RIGHT, L"level: %u", mtmap->getCurrLevel());
-	pFont->print(getWindowWidth(), 40.f, sora::FONT_ALIGNMENT_RIGHT, L"enemy: %d", mtmap->getEnemySize());
-	pFont->render(getWindowWidth(), 60.f, sora::FONT_ALIGNMENT_RIGHT, mtmap->getCurrLevelName().c_str());
-	pFont->render(getWindowWidth(), 80.f, sora::FONT_ALIGNMENT_RIGHT, conf.mapName.c_str());
-	
-//	luaObject.update(0.f);
-//	luaObject.render();
+	pCanvas->render();
+
+	sora::SORA->endZBufferSort();
+	}
+	sora::SORA_PROFILER->printProfile("p1");
 	
 	sora->endScene();
 	return false;
 }
 
-void mainWindow::init() {
-    sora::SORA->setFPS(60);
-
-	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 20);
-	pFont->setColor(0xFFFFCC00);
-	
-	if(sora::GCN_GLOBAL->initGUIChan(L"ARIALN.ttf", 20) ) {
-		sora::GCN_GLOBAL->createTop();
-	}
-	
-	pSpr = sora::SORA->createSprite(L"rtfdRoad.png");
-	pSpr->setTextureRect(0.f, 0.f, 64.f, 128.f);
-	
-	pSpr2 = sora::SORA->createSprite(L"rfTDbghl.png");
-	pSpr2->addEffect(new sora::IEFade(0.f, 1.f, 1.f, sora::IMAGE_EFFECT_PINGPONG));
-
-	pressAnyKey = sora::SORA->createSprite(L"PressAnyKey.png");
-	
-	psSpr = sora::SORA->createSprite(L"particle2.png");
-	ps = new sora::SoraParticleSystem(L"cparticle.psi.sps", psSpr);
-	
-	rftd::rftdInitialize();
-	
-	conf = rftd::GET_MAP(L"MyMapPack1", 0);
-	mtmap = new rftd::rftdMap;
-	mtmap->readMapConf(conf.mapPath);
-	mtmap->start();
-	sora::GCN_GLOBAL->addWidget(mtmap, "top");
-	
-/*	mead::globalBulletManagerInit();
-	mead::exportBulletManager(luaObject.getState());
-	mead::exportGlobal(luaObject.getState());
-	sora::exportSoundManager(luaObject.getState());
-	sora::exportSpriteAnimation(luaObject.getState());
-	
-	luaObject.doScript(L"mybullettest.lua");*/
+void onDownloadFinish(sora::SoraHttpFile* file){
+	sora::SORA->log(sora::vamssg("Download finished from %s, size = %lu, buffersize=%lu,%lu, time = %f", file->getURL().c_str(), file->getDownloadedSize(), file->getMemoryBuffer()->size(), file->getMemoryBuffer()->realsize(), file->getDownloadTime()),
+					sora::LOG_LEVEL_NORMAL);
+	file->writeToFile(L"./lalalalal.png");
+	file->closeFile();
 }
 
-void mainWindow::onKeyEvent(const sora::SoraKeyEvent* kev) {
+void mainWindow::init() {
+    sora::SORA->setFPS(60);
+	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
+	sora::SORA->setSystemFont(L"cour.ttf", 16);
+	
+	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 16);
+	pFont->setColor(0xFFFFCC00);
+	
+	pCanvas = new sora::SoraBaseCanvas(800, 600);
+	
+	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
+	
+	pSpr = sora::SORA->createSprite(L"background.png");
+	pressAnyKey = sora::SORA->createSprite(L"road.png");
+	pSpr2 = sora::SORA->createSprite(L"grass.png");
+	
+	pSpr2->setZ(0.f); 
+	pressAnyKey->setZ(0.5f); 	
+	pSpr->setZ(1.0); 
+	
+	ps = new sora::SoraParticleManager;
+	ps->setGlobalSprite(sora::SORA->createSprite(L"pics/particles.png"));
+	ps->emitS(L"bg13_fire_left.sps", 100.f, 100.f);
+	ps->emitS(L"astar.sps", 200.f, 100.f);
+	
+	float32 px = 400.f, py = 300.f;
+	for(int i=0; i<6; ++i) {
+		vert[i].col = 0xFFFFFFFF;
+		vert[i].z = 0.f;
+		
+		vert[i].x = px + 300*cosf(sora::DGR_RAD(i*60));
+		vert[i].y = py + 300*sinf(sora::DGR_RAD(i*60));
+		
+		vert[i].tx = (pSpr->getSpriteWidth() / 2 + 300*cosf(sora::DGR_RAD(i*60))) / pSpr->getTextureWidth(false);
+		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getTextureHeight(false);
+	}
+	
+	uint8 localIp[4] = {192, 168, 1, 103};
+	if(!psocket.Initialize())
+		sora::DebugPtr->log("Error initializing passive socket");
+	if(!psocket.Listen(localIp, 3000))
+		sora::DebugPtr->log(sora::vamssg("Passive Socket Error, error code = %d", psocket.GetSocketError()));
+	
+	if(!asocket.Initialize())
+		sora::DebugPtr->log("Error initializing active socket");
+	if(!asocket.Open(localIp, 3000))
+		sora::DebugPtr->log(sora::vamssg("Active Socket Error, error code = %d", asocket.GetSocketError()));
+	
+	
+	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(0.f);
+	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
+	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.6f); 
+	
+}
+
+void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
 	if(kev->type == SORA_INPUT_KEYDOWN) {
 		if(kev->key == SORA_KEY_1 ) {
-			mead::meadBossManager::Instance()->clearAllBosses();
-			luaObject.doScript(L"mybullettest.lua");
-		} else if(kev->key == SORA_KEY_2) {
-			mead::meadBossManager::Instance()->reloadScripts();
+		
 		}
 	}
 }

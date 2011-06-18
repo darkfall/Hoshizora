@@ -17,15 +17,23 @@
 #include <mach/mach_time.h>
 #endif
 
+#ifdef OS_PSP
+#include <psprtc.h>
+#endif
+
 namespace sora {
 	
-	inline s_int64 getCurrentSystemTime() {
+	inline uint64 getCurrentSystemTime() {
 #ifdef OS_WIN32
 		LARGE_INTEGER t;
 		QueryPerformanceCounter(&t);
-		return (s_int64)t.QuadPart;
+		return (uint64)t.QuadPart;
 #elif defined(OS_OSX)
 		return mach_absolute_time();
+#elif defined(OS_PSP)
+		uint64 t;
+		sceRtcGetCurrentTick(&t);
+		return t;
 #else
 		timeb t;
 		ftime(&t);
@@ -36,14 +44,14 @@ namespace sora {
 	struct SoraAutoProfile {
 		SoraAutoProfile(const char* name): sName(name), startTime(getCurrentSystemTime()) { }
 		~SoraAutoProfile() {
-			s_int64 endTime = getCurrentSystemTime();
-			s_int64 elapsedtime = endTime - startTime;
+			uint64 endTime = getCurrentSystemTime();
+			uint64 elapsedtime = endTime - startTime;
 			
 			SORA_PROFILER->storeProfile(sName, elapsedtime);
 		}
 		
 		const char* sName;
-		s_int64 startTime;
+		uint64 startTime;
 	};
 	
 	#define PROFILE(name) SoraAutoProfile(name)

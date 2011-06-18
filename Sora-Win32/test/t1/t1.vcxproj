@@ -87,6 +87,7 @@
     <ClInclude Include="..\..\..\MEAD\meadBullet.h" />
     <ClInclude Include="..\..\..\MEAD\meadBulletManager.h" />
     <ClInclude Include="..\..\..\MEAD\meadCollision.h" />
+    <ClInclude Include="..\..\..\MEAD\meadMainWindow.h" />
     <ClInclude Include="..\..\..\MEAD\meadPlayer.h" />
     <ClInclude Include="..\..\..\MEAD\meadPlayerManager.h" />
     <ClInclude Include="..\..\..\Plugins\DarkLib\FileDlg.h" />
@@ -96,7 +97,6 @@
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnDraggableImageButton.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnDraggableImageButtonIncubator.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.h" />
-    <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnImageEffectImage.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnProgressBar.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnSelectableContainer.h" />
@@ -228,6 +228,8 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\rectangle.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\selectionevent.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\selectionlistener.hpp" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\Sound.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\SoundLoader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\StringConv.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widget.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgetlistener.hpp" />
@@ -248,6 +250,9 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textfield.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\window.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\jsongui.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Modifiers\CloseModifier.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Modifiers\LabelSliderLinker.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUI.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguifont.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\soraguigraphics.hpp" />
@@ -257,9 +262,8 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUIListener.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUIResponser.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUIResponserMap.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraSound.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraSoundLoader.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\Sound.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUISound.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoundLoader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\xmlgui.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge.h" />
@@ -332,6 +336,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.h" />
     <ClInclude Include="..\..\..\Plugins\SoraWin32MiscTool\SoraMiscTool_Win32.h" />
     <ClInclude Include="..\..\..\Plugins\SoraWin32Timer\orz.h" />
@@ -354,6 +359,8 @@
     <ClInclude Include="..\..\..\ReflectionRev\rfShape.h" />
     <ClInclude Include="..\..\..\ReflectionRev\rfTitleView.h" />
     <ClInclude Include="..\..\..\ReflectionRev\rfView.h" />
+    <ClInclude Include="..\..\..\Sora\cmd\CoreCmds.h" />
+    <ClInclude Include="..\..\..\Sora\cmd\SoraConsole.h" />
     <ClInclude Include="..\..\..\Sora\CoreLinearTransformer.h" />
     <ClInclude Include="..\..\..\Sora\CoreTransform.h" />
     <ClInclude Include="..\..\..\Sora\CoreTransformer.h" />
@@ -370,10 +377,11 @@
     <ClInclude Include="..\..\..\Sora\Defaults\SoraTimer_Win32.h" />
     <ClInclude Include="..\..\..\Sora\Experimental\AutoList.h" />
     <ClInclude Include="..\..\..\Sora\Experimental\common.h" />
-    <ClInclude Include="..\..\..\Sora\Experimental\FolderTree.h" />
     <ClInclude Include="..\..\..\Sora\Experimental\Sora2DMatrix.h" />
     <ClInclude Include="..\..\..\Sora\graphicEffects.h" />
     <ClInclude Include="..\..\..\Sora\hash.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraInputSimulator.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraZSorter.h" />
     <ClInclude Include="..\..\..\Sora\hgerect.h" />
     <ClInclude Include="..\..\..\Sora\hgevector.h" />
     <ClInclude Include="..\..\..\Sora\HoshiNoSora.h" />
@@ -410,6 +418,7 @@
     <ClInclude Include="..\..\..\Sora\SoraCanvas.h" />
     <ClInclude Include="..\..\..\Sora\SoraColor.h" />
     <ClInclude Include="..\..\..\Sora\SoraComponentType.h" />
+    <ClInclude Include="..\..\..\Sora\SoraConfig.h" />
     <ClInclude Include="..\..\..\Sora\SoraConstantStrings.h" />
     <ClInclude Include="..\..\..\Sora\SoraCore.h" />
     <ClInclude Include="..\..\..\Sora\SoraEnvValues.h" />
@@ -429,6 +438,7 @@
     <ClInclude Include="..\..\..\Sora\SoraLocalizedString.h" />
     <ClInclude Include="..\..\..\Sora\SoraLocalizer.h" />
     <ClInclude Include="..\..\..\Sora\SoraMath.h" />
+    <ClInclude Include="..\..\..\Sora\SoraMemoryBuffer.h" />
     <ClInclude Include="..\..\..\Sora\SoraMiscTool.h" />
     <ClInclude Include="..\..\..\Sora\SoraNamedObject.h" />
     <ClInclude Include="..\..\..\Sora\SoraObject.h" />
@@ -474,6 +484,7 @@
     <ClInclude Include="..\..\..\Sora\ZLIB\zlib.h" />
     <ClInclude Include="..\..\..\Sora\ZLIB\zutil.h" />
     <ClInclude Include="mainWindow.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\AnimationEditor\editorWindow.cpp" />
@@ -481,6 +492,7 @@
     <ClCompile Include="..\..\..\MEAD\meadBoss.cpp" />
     <ClCompile Include="..\..\..\MEAD\meadBossManager.cpp" />
     <ClCompile Include="..\..\..\MEAD\meadBulletManager.cpp" />
+    <ClCompile Include="..\..\..\MEAD\meadMainWindow.cpp" />
     <ClCompile Include="..\..\..\MEAD\meadPlayer.cpp" />
     <ClCompile Include="..\..\..\MEAD\meadPlayerManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\DarkLib\FileDlg.cpp" />
@@ -490,7 +502,6 @@
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnDraggableImageButton.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnDraggableImageButtonIncubator.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageButton2.cpp" />
-    <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnImageEffectImage.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnProgressBar.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnSelectableContainer.cpp" />
@@ -523,6 +534,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\mouseinput.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\rectangle.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\selectionevent.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\Sound.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\StringConv.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widget.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\button.cpp" />
@@ -542,14 +554,16 @@
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\textfield.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\window.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\jsongui.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Modifiers\CloseModifier.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Modifiers\LabelSliderLinker.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguifont.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguigraphics.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguiimage.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguiimageloader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguiinput.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraSound.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraSoundLoader.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Sound.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraGUISound.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\xmlgui.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp" />
@@ -640,11 +654,14 @@
     <ClCompile Include="..\..\..\ReflectionRev\rfShape.cpp" />
     <ClCompile Include="..\..\..\ReflectionRev\rfTitleView.cpp" />
     <ClCompile Include="..\..\..\ReflectionRev\rfView.cpp" />
+    <ClCompile Include="..\..\..\Sora\cmd\CoreCmds.cpp" />
+    <ClCompile Include="..\..\..\Sora\cmd\SoraConsole.cpp" />
     <ClCompile Include="..\..\..\Sora\CoreTransform.cpp" />
     <ClCompile Include="..\..\..\Sora\Debug\SoraInternalLogger.cpp" />
     <ClCompile Include="..\..\..\Sora\Defaults\orz.c" />
-    <ClCompile Include="..\..\..\Sora\Experimental\FolderTree.cpp" />
     <ClCompile Include="..\..\..\Sora\graphicEffects.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraInputSimulator.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraZSorter.cpp" />
     <ClCompile Include="..\..\..\Sora\hgerect.cpp" />
     <ClCompile Include="..\..\..\Sora\hgevector.cpp" />
     <ClCompile Include="..\..\..\Sora\json\json_reader.cpp" />
@@ -657,11 +674,14 @@
     <ClCompile Include="..\..\..\Sora\SoraEnvValues.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEventManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraFileUtility.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraLocalizer.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraMemoryBuffer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraObject.cpp" />
-    <ClCompile Include="..\..\..\Sora\SoraPluginManger.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraPluginManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraResourceFileFinder.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraShader.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraSprite.cpp" />

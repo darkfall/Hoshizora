@@ -10,8 +10,8 @@
 #ifndef SORA_GLOBAL_PROFILER_H_
 #define SORA_GLOBAL_PROFILER_H_
 
-#include "SoraCore.h"
-#include "SoraSingleton.h"
+#include "../SoraCore.h"
+#include "../SoraSingleton.h"
 
 #include <iostream>
 #include <fstream>
@@ -26,23 +26,27 @@ namespace sora {
 	public:
 		struct s_profile {
 			SoraString sName;
-			s_int64 elapsedTime;
+			uint64 elapsedTime;
 			
 			s_profile(): elapsedTime(0) {}
-			s_profile(const char* name, s_int64 t): sName(name), elapsedTime(t) {}
+			s_profile(const char* name, uint64 t): sName(name), elapsedTime(t) {}
 		};
 		typedef hash_map<SoraString, s_profile> PROFILE_CONT;
 
 	public:
-		void storeProfile(const char* name, s_int64 elapsedTime) {
+		void storeProfile(const char* name, uint64 elapsedTime) {
+			PROFILE_CONT::iterator itprofile = profiles.find(name);
+			if(itprofile == profiles.end()) {
+				DebugPtr->log(vamssg("ProfileName=%s, time=%llu\n", name, elapsedTime), LOG_LEVEL_NOTICE);
+			}
 			profiles[name] = s_profile(name, elapsedTime);
-	//		INT_LOG_HANDLE->debugPrintf("ProfileName=%s, time=%llu\n", name, elapsedTime);
 		}
 		
 		void printProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				INT_LOG_HANDLE->logf("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
+				DebugPtr->log(vamssg("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
+							  LOG_LEVEL_NOTICE);
 				++itprofile;
 			}
 		}
@@ -50,7 +54,8 @@ namespace sora {
 		void logProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				INT_LOG_HANDLE->logf("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime);
+				DebugPtr->log(vamssg("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
+							   LOG_LEVEL_NOTICE);
 				++itprofile;
 			}
 		}
@@ -62,6 +67,22 @@ namespace sora {
 				++itprofile;
 			}
 			return stream;
+		}
+		
+		void printProfile(const char* name) {
+			PROFILE_CONT::iterator itprofile = profiles.find(name);
+			if(itprofile != profiles.end()) {
+				DebugPtr->log(vamssg("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
+							  LOG_LEVEL_NOTICE);
+			}
+		}
+		
+		s_profile getProfile(const char* name) const {
+			PROFILE_CONT::const_iterator itprofile = profiles.find(name);
+			if(itprofile != profiles.end()) {
+				return itprofile->second;
+			}
+			return s_profile();
 		}
 		
 		void flush() {

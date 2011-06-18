@@ -10,9 +10,10 @@
 #ifndef SORA_MISCTOOL_IOS_H_
 #define SORA_MISCTOOL_IOS_H_
 
+#include "../SoraStringConv.h"
+#include "../SoraPlatform.h"
+
 #include "SoraDefaultMiscTool.h"
-#include "SoraStringConv.h"
-#include "SoraPlatform.h"
 
 #ifdef OS_IOS
 
@@ -23,6 +24,12 @@ namespace sora {
 		int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode);
 		int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
 			return messageBox(ws2s(sMessage), ws2s(sTitle), msgCode);
+		}
+		
+		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+		}
+		
+		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
 		}
 	};
 	

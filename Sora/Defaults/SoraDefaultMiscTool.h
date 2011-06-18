@@ -10,38 +10,45 @@
 #ifndef SORA_DEFAULT_MISC_TOOL_H
 #define SORA_DEFAULT_MISC_TOOL_H
 
-#include "SoraMiscTool.h"
-#include "SoraDefaultLogger.h"
+#include "../SoraMiscTool.h"
+#include "../Debug/SoraInternalLogger.h"
 
 namespace sora {
 	
 	class SoraDefaultMiscTool: public SoraMiscTool {
 	public:
-		SoraDefaultMiscTool() { pLogger = new SoraDefaultLogger; }
-		virtual ~SoraDefaultMiscTool() { delete pLogger; }
+		SoraDefaultMiscTool(){}
+		virtual ~SoraDefaultMiscTool() { }
 
-		virtual void setLogFile(const SoraString& sfile) { pLogger->setFile(sfile); }
+		virtual void setLogFile(const SoraString& sfile) { }
 
 		virtual int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
-			pLogger->log("MessageBox: "+sTitle + ": " + sMessage);
+			DebugPtr->log("MessageBox: "+sTitle + ": " + sMessage);
 			return 0;
 		}
 		virtual int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
-			pLogger->log(L"MessageBox: "+ sTitle + L": " + sMessage);
+			DebugPtr->log(L"MessageBox: "+ sTitle + L": " + sMessage);
 			return 0;
 		}
 	
 		virtual void log(const SoraString& sMessage) {
-			pLogger->log(sMessage);
+			DebugPtr->log(sMessage);
 		}
 		virtual void log(const SoraWString& sMessage) {
-			pLogger->log(sMessage);
+			DebugPtr->log(sMessage);
 		}
-
+		
+		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+			return L"\0";
+		}
+		
+		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+			return L"\0";
+		}
+		
 		virtual void setMainWindowHandle(ulong32 handle) { }
 		
 	private:
-		SoraDefaultLogger* pLogger;
 	};
 } // namespace sora
 

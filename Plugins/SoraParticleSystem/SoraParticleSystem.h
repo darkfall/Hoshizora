@@ -22,9 +22,6 @@
 #include <vector>
 #include <map>
 
-#define MAX_PARTICLE_NUM 20000
-#define MAX_DISTANCE 1000.f
-
 namespace sora {
 
 	struct SoraParticleHeader {
@@ -132,6 +129,11 @@ namespace sora {
 		void setZDepth(float32 z);
 		bool isZDepthEnabled() const;
 		float32 getZDepth() const;
+		
+		void setSprite(SoraSprite* spr);
+		SoraSprite* getSprite() const;
+		
+		void setTextureRect(float32 x, float32 y, float32 w, float32 h);
 
 		void emit(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		void emit(const SoraWString& script, SoraSprite* pSpr, float32 x=0.f, float32 y=0.f, float32 z=0.f);
@@ -144,20 +146,23 @@ namespace sora {
 		void fire();
 		void fireAt(float32 x, float32 y, float32 z);
 		void moveTo(float32 x, float32 y, float32 z, bool bKill=false);
+		
+		static void setMaxParticleNum(int32 max) { mMaxParticleNum = max; }
+		static void setMaxParticleDistance(float32 max) { mMaxParticleDistance = max; }
 
 		void killAll();
 
-		bool isActive() { return bActive; }
+		bool isActive() const { return bActive; }
 
 		void saveScript(const SoraWString& script);
-		int32 getLiveParticle() { return particles.size(); }
+		int32 getLiveParticle() const { return particles.size(); }
 		
 		void setBlendMode(int32 mode);
-		int32 getBlendMode();
+		int32 getBlendMode() const;
 
 		void rotate(float32 roll, float32 pitch, float32 yaw);
-		
-		inline void emitParticle();
+				
+		hgeRect getBoundingBox() const { return hrBoundingBox; }
 		
 		/* effector */
 		/*
@@ -165,11 +170,15 @@ namespace sora {
 		 */
 		void addEffector(SoraParticleEffector* effector);
 		void removeEffector(SoraParticleEffector* effector);
-
+		
 		SoraParticleHeader pheader;
 
 	private:
+		inline void emitParticle();
 		inline void init();
+		
+		static int32 mMaxParticleNum;
+		static float32 mMaxParticleDistance;
 		
 		SoraParticleSystem(const SoraParticleSystem&);
 		SoraParticleSystem operator=(const SoraParticleSystem&);
@@ -195,6 +204,8 @@ namespace sora {
 		bool bRotate3v;
 		quaternion quatRotation;
 		
+		hgeRect hrBoundingBox;
+		
 		SoraCore* core;
 	};
 
@@ -204,10 +215,10 @@ namespace sora {
 
 	public:
 		SoraParticleManager();
-		SoraParticleManager(HSORASPRITE globalSprite);
+		SoraParticleManager(SoraSprite* globalSprite);
 		virtual ~SoraParticleManager();
 
-		void setGlobalSprite(HSORASPRITE globalSprite);
+		void setGlobalSprite(SoraSprite* globalSprite);
 
 		HSORAPARTICLE emit(const SoraParticleHeader& header, float32 x=0.f, float32 y=0.f, float32 z=0.f);
 		HSORAPARTICLE emitS(const SoraWString& par, float32 x=0.f, float32 y=0.f, float32 z=0.f);

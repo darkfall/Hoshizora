@@ -36,7 +36,7 @@ namespace sora {
 				if(texRefs[p->first] == 0) {
 					SoraCore::Instance()->releaseTexture(p->second);
 #ifdef _DEBUG
-					printf("Free Texture: %lu, tex=%s\n", p->second, (id2str(p->second)).c_str());
+					DebugPtr->log(vamssg("Free Texture: %lu, tex=%s\n", p->second, (id2str(p->second)).c_str()));
 #endif
 					texMapRv.erase(texMapRv.find(p->second));
 					texMap.erase(p);
@@ -106,6 +106,7 @@ namespace sora {
 			stringId uiKey = str2id(key);
 			TEX_MAP::iterator p = texMap.find(uiKey);
 			if(p != texMap.end()) {
+				SoraTexture* tex = (SoraTexture*)p->second;
 				texRefs[uiKey]++;
 				return p->second;
 			}

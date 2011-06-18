@@ -40,7 +40,7 @@ namespace sora {
 		void update();
 		const SoraString getName() const { return "SoraBGMManager"; }
 		
-		void onPlaybackEvent(const SoraPlaybackEvent* event);
+		void onPlaybackEvent(SoraPlaybackEvent* event);
 		
 	public:
 		/*
@@ -180,7 +180,7 @@ namespace sora {
 					}
 			}
 			
-			void onPlaybackEvent(const SoraPlaybackEvent* event);
+			void onPlaybackEvent(SoraPlaybackEvent* event);
 		};
 		typedef std::map<uint32, BGSInfo> BGS_MAP;
 		BGS_MAP mBGSounds;

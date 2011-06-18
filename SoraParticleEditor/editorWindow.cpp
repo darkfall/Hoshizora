@@ -1,6 +1,8 @@
 #include "editorWindow.h"
 #include "Darklib/FileDlgOsx.h"
 
+#include "peMainWindow.h"
+
 gcn::Window* pSpeedPanel;
 gcn::Window* pPropPanel;
 gcn::Window* pLifetimePanel;
@@ -14,9 +16,13 @@ FileDlg* fileDlg;
 #endif
 
 bool bOpenFinished = false;
+bool bMouseDown = false;
+bool bShowBoundingBox = false;
 
 sora::SoraSprite* pspr;
 sora::SoraParticleSystem* peffect;
+
+sora::SoraSprite* pbgSpr = NULL;
 
 
 #include "SoraGUIChan/xmlgui.h"
@@ -100,6 +106,62 @@ typedef gcn::Label* PLABEL;
 using namespace sora;
 
 
+#include "cmd/SoraConsole.h"
+#include "SoraGUIChan/guichansetup.h"
+
+class PEConsoleCmdHandler: public SoraEventHandler {
+public:
+	PEConsoleCmdHandler() {
+		registerEventFunc(this, &PEConsoleCmdHandler::onConsoleEvent);
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "showbox");
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "showgui");
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "respawn");
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "moveto");
+	}
+	
+	void onConsoleEvent(SoraConsoleEvent* ev) {
+		if(ev->getCmd().compare("showbox") == 0) {
+			std::cout<<ev->getParams()<<std::endl;
+			if(ev->getParams().compare("on") == 0) {
+				bShowBoundingBox = true;
+				ev->setResults("bouding box show enabled");
+			}
+			else if(ev->getParams().compare("off") == 0) {
+				bShowBoundingBox = false;
+				ev->setResults("bouding box show disabled");
+			}
+			
+		} else if(ev->getCmd().compare("showgui") == 0) {
+			if(ev->getParams().compare("on") == 0) {
+				sora::GCN_GLOBAL->getTop()->setEnabled(true);
+				sora::GCN_GLOBAL->getTop()->setVisible(true);
+				ev->setResults("gui show enabled");
+
+			} else if(ev->getParams().compare("off") == 0) {
+				sora::GCN_GLOBAL->getTop()->setEnabled(false);
+				sora::GCN_GLOBAL->getTop()->setVisible(false);
+				
+				ev->setResults("gui show disabled");
+			}
+		} else if(ev->getCmd().compare("moveto") == 0) {
+			std::vector<std::string> params;
+			sora::deliStr(params, ev->getParams(), ' ');
+			if(params.size() == 2) {
+				peffect->moveTo(atoi(params[0].c_str()), atoi(params[1].c_str()), 0.f);
+			} else if(params.size() == 3) {
+				peffect->moveTo(atoi(params[0].c_str()), atoi(params[1].c_str()), atoi(params[2].c_str()));
+			}
+		} else if(ev->getCmd().compare("respawn") == 0) {
+			peffect->fire();
+		} else if(ev->getCmd().compare("save") == 0) {
+			if(ev->getParams().size() != 0) {
+				peffect->saveScript(sora::s2ws(ev->getParams()));
+			}
+		}
+	}
+};
+
+
 class SpeedPanelResponser: public SoraGUIResponser {
 	void action() {
 		PSLIDER p = (gcn::Slider*)getSource();
@@ -121,7 +183,6 @@ class SpeedPanelResponser: public SoraGUIResponser {
 		else if(getID().compare("MaxTrigAccel") == 0) {
 			peffect->pheader.fMaxTrigAcc = p->getValue();
 		}
-		labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
 	}
 };
 
@@ -136,7 +197,7 @@ class LifetimePanelResponser: public SoraGUIResponser {
 			peffect->pheader.fEmitLifetime = p->getValue();
 		else if(getID().compare("EmissionSpeed") == 0)
 			peffect->pheader.nEmitNum = p->getValue();
-		labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
+//		labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
 	}
 };
 
@@ -187,7 +248,7 @@ class PropPanelResponser: public SoraGUIResponser {
 			peffect->pheader.fMinAngle = p->getValue();
 		else if(getID().compare("MaxAngle") == 0)
 			peffect->pheader.fMaxAngle = p->getValue();
-		labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
+	//	labelApplyValue((PLABEL)pXmlParser->getWidget(getID()+"Label"), s2ws(getID()), p->getValue());
 	}
 };
 
@@ -421,13 +482,33 @@ void setTextureRectSlider(SoraSprite* pspr) {
 	SORA->log("Set Max TextureRect Slider Value:"+int_to_str(slTextureRect->getScaleEnd()));
 }
 
-void loadParticleSprite(const SoraWString path) {
+void loadParticleSprite(const SoraWString& path) {
 	delete pspr;
 	pspr = SORA->createSprite(path);
-	if(pspr == NULL)
+	if(pspr == NULL) {
+		SORA->messageBoxW(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
 		pspr = SORA->createSprite(L"pics/particles.png");
+	}
 
+	peffect->setSprite(pspr);
 	peffect->restart();
+}
+
+void loadBGSprite(const SoraWString& path) {
+	if(pbgSpr) 
+		delete pbgSpr;
+	pbgSpr = SORA->createSprite(path);
+	if(pbgSpr == NULL) {
+		SORA->messageBoxW(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
+	}
+	
+	/*float32 scale1 = 1.0, scale2 = 1.0;
+	if(pbgSpr->getSpriteWidth() > 1024)
+		scale1 = pbgSpr->getSpriteWidth() / 1024.f;
+	if(pbgSpr->getSpriteHeight() > 768)
+		scale2 = pbgSpr->getSpriteHeight() / 768.f;
+	pbgSpr->setScale(scale1<scale2?scale1:scale2, scale1<scale2?scale1:scale2);*/
+//	pbgSpr->setCenter(pbgSpr->getSpriteWidth()/2, pbgSpr->getSpriteHeight()/2);
 }
 
 void applyFilterSps() {
@@ -493,8 +574,10 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 		filePathBuffer[0] = '\0';
 			
 		applyFilterSps();
-		if(fileDlg->FileOpenDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {	
-			sCurrParticleFile = s2ws(filePathBuffer);
+			SoraWString particleFile = sora::SORA->fileOpenDialog("sps;", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
+
+		if(particleFile.size() != 0) {	
+			sCurrParticleFile = particleFile;
 			
 			delete peffect;
 			peffect = new SoraParticleSystem;
@@ -538,14 +621,20 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 		
 		peffect->saveScript(sCurrParticleFile);
 
+	}  else if(getID().compare("FPS") == 0) {
+		gcn::Slider* ps = (gcn::Slider*)getSource();
+		sora::SORA->setFPS(ps->getValue());
+		
 	} else if(getID().compare("TextureRect") == 0) {
 		gcn::Slider* ps = (gcn::Slider*)getSource();
-		int v = (int)ps->getValue() % 4;
-		int h = (int)ps->getValue() / 4;
-		peffect->pheader.texX = v*32;
-		peffect->pheader.texY = h*32;
-		peffect->pheader.texW = 32;
-		peffect->pheader.texH = 32;
+		int v = (int)ps->getValue() % peMainWindowLoader::Instance()->getRow();
+		int h = (int)ps->getValue() / peMainWindowLoader::Instance()->getRow();
+		peffect->pheader.texX = v*peMainWindowLoader::Instance()->getTexWidth();
+		peffect->pheader.texY = h*peMainWindowLoader::Instance()->getTexHeight();
+		peffect->pheader.texW = peMainWindowLoader::Instance()->getTexWidth();
+		peffect->pheader.texH = peMainWindowLoader::Instance()->getTexHeight();
+		
+		sora::DebugPtr->log(vamssg("%.2f, %.2f, %.2f, %.2f", peffect->pheader.texX, peffect->pheader.texY,peffect->pheader.texW, peffect->pheader.texH));
 	} else if(getID().compare("ParticleSprite") == 0) {
 #ifdef WIN32
 		wchar_t fileTitleBuffer[512];
@@ -568,7 +657,28 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 			loadParticleSprite(s2ws(filePathBuffer));
 		}
 #endif
+	} else if(getID().compare("BGSprite") == 0) {
+#ifdef WIN32
+		wchar_t fileTitleBuffer[512];
+		wchar_t filePathBuffer[512];
+		fileTitleBuffer[0] = '\0';
+		filePathBuffer[0] = '\0';
 		
+		applyFilterImage();
+		if(fileDlg->FileOpenDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
+			loadBGSprite(filePathBuffer);
+		}
+#elif defined(OS_OSX)
+		char fileTitleBuffer[512];
+		char filePathBuffer[512];
+		fileTitleBuffer[0] = '\0';
+		filePathBuffer[0] = '\0';
+		
+		applyFilterImage();
+		if(fileDlg->FileOpenDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
+			loadBGSprite(s2ws(filePathBuffer));
+		}
+#endif
 	}
 	}
 };
@@ -590,12 +700,19 @@ editorWindow::editorWindow() {
 	pFont->setColor(0xFFFFFFFF);
 
 	peffect = new SoraParticleSystem();
-	pspr = SORA->createSprite(L"pics/particles.png");
+	pspr = SORA->createSprite(sora::s2ws(peMainWindowLoader::Instance()->getDefaultParticleSprite()));
 	peffect->emit(L"Default.sps", pspr);
 	peffect->pheader.fEmitDuration = 10.f;
 	peffect->pheader.fEmitLifetime = 10.f;
 	
 	peffect->fire();
+	
+	mBGPosX = 0.f;
+	mBGPosY = 0.f;
+	
+	registerEventFunc(this, &editorWindow::onInputEvent);
+	sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
+	
 }
 
 void editorWindow::update() {
@@ -606,19 +723,75 @@ void editorWindow::update() {
 		peffect->restart();
 		bOpenFinished = false;
 	}
+	
+	if(SORA->keyDown(SORA_KEY_LEFT)) {
+		if(mBGPosX > 0.f)
+			mBGPosX -= 1.f;
+		else mBGPosX = 0.f;
+	} else if(SORA->keyDown(SORA_KEY_RIGHT)) {
+		if(mBGPosX < SORA->getScreenWidth())
+			mBGPosX += 1.f;
+		else mBGPosX = SORA->getScreenWidth();
+	}
+	if(SORA->keyDown(SORA_KEY_UP)) {
+		if(mBGPosY > 0.f)
+			mBGPosY -= 1.f;
+		else mBGPosY = 0.f;
+	} else if(SORA->keyDown(SORA_KEY_DOWN)) {
+		if(mBGPosY < SORA->getScreenHeight())
+			mBGPosY += 1.f;
+		else mBGPosY = SORA->getScreenHeight();
+	}
+	
+	if(sora::SORA->keyDown(SORA_KEY_LBUTTON)) {
+		float32 x, y;
+		sora::SORA->getMousePos(&x, &y);
+		if(peffect->isActive() && peffect->getBoundingBox().TestPoint(x, y)) {
+			bMouseDown = true;
+		}
+	} else {
+		bMouseDown = false;
+	}
+
+	
+	if(bMouseDown) {
+		float32 x, y;
+		sora::SORA->getMousePos(&x, &y);
+		peffect->moveTo(x, y, peffect->pheader.emitPos.z);
+		
+		slEmitPointX->setValue(x);
+		slEmitPointY->setValue(y);
+	}
 }
 
 void editorWindow::render() {
+	if(pbgSpr) {
+		pbgSpr->render(mBGPosX, mBGPosY);
+	}
+	
 	peffect->render();
+	if(bShowBoundingBox) {
+		hgeRect box = peffect->getBoundingBox();
+		sora::SORA->renderBox(box.x1, box.y1, box.x2, box.y2, 0xFFFFFFFF);
+	}
 	
 	if(pFont) {
-		pFont->render(100, 690, s2ws(fp_to_str(SoraCore::Instance()->getFPS())).c_str(), true);
-		pFont->render(100, 720, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true, true);
-		pFont->render(100, 740, L"Rev 0x10 \0", true, true);
+		int32 mWidth = sora::SORA->getScreenWidth();
+		int32 mHeight = sora::SORA->getScreenHeight();
+		pFont->print(mWidth-100, mHeight-70, sora::FONT_ALIGNMENT_CENTER, L"FPS: %.2f", sora::SORA->getFPS());
+		pFont->render(mWidth-100, mHeight-50, s2ws("Particles: "+int_to_str(peffect->getLiveParticle())).c_str(), true);
+		pFont->render(mWidth-100, mHeight-30, L"Rev 0x35 \0", true);
 	}
 }
 
 gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
+	gcn::Widget* pprev = GCN_GLOBAL->findWidget("SoraWindow");
+	if(pprev != NULL) {
+		GCN_GLOBAL->removeWidget(pprev);
+		delete pprev;
+		pprev = NULL;
+	}
+	
 	pXmlParser = new XmlGui;
 
 	ulong32 size;
@@ -630,6 +803,7 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 
 	if(pXmlParser->parse((const char*)pdata, size)) {
 		gcn::Widget* pWindow = pXmlParser->getWidget("SoraWindow");
+		pWindow->setDimension(gcn::Rectangle(0, 0, SORA->getScreenWidth(), SORA->getScreenHeight()));
 		GCN_GLOBAL->getTop()->add( pWindow );
 
 	//	pspr = SORA->createSprite(L"pics/particles.png");
@@ -696,17 +870,23 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 		slMaxDirectionY = (gcn::Slider*)pXmlParser->getWidget("MaxDirectionY");
 		slMaxDirectionZ = (gcn::Slider*)pXmlParser->getWidget("MaxDirectionZ");
 
-		cbSpeedPanel = (gcn::CheckBox*)pXmlParser->getWidget("CSpeedPanel");
-		cbLifetimePanel = (gcn::CheckBox*)pXmlParser->getWidget("CLifetimePanel");
-		cbStartColorPanel = (gcn::CheckBox*)pXmlParser->getWidget("CStartColorPanel");
-		cbEndColorPanel = (gcn::CheckBox*)pXmlParser->getWidget("CEndColorPanel");
-		cbPropPanel = (gcn::CheckBox*)pXmlParser->getWidget("CPropPanel");
-		cbBlendMode = (gcn::CheckBox*)pXmlParser->getWidget("CBlendMode");
+		cbSpeedPanel = (gcn::CheckBox*)pXmlParser->getWidget("SpeedPanelCheck");
+		cbLifetimePanel = (gcn::CheckBox*)pXmlParser->getWidget("LifetimePanelCheck");
+		cbStartColorPanel = (gcn::CheckBox*)pXmlParser->getWidget("StartColorPanelCheck");
+		cbEndColorPanel = (gcn::CheckBox*)pXmlParser->getWidget("EndColorPanelCheck");
+		cbPropPanel = (gcn::CheckBox*)pXmlParser->getWidget("PropPanelCheck");
+		cbBlendMode = (gcn::CheckBox*)pXmlParser->getWidget("BlendModeCheck");
 
 		slMinAngle = (gcn::Slider*)pXmlParser->getWidget("MinAngle");
 		slMaxAngle = (gcn::Slider*)pXmlParser->getWidget("MaxAngle");
 
 		slTextureRect = (gcn::Slider*)pXmlParser->getWidget("TextureRect");
+		if(slTextureRect) {
+			slTextureRect->setScale(0.0, peMainWindowLoader::Instance()->getRow()*peMainWindowLoader::Instance()->getCol());
+			slTextureRect->setStepLength(1.0);
+			
+			std::cout<<peMainWindowLoader::Instance()->getRow()*peMainWindowLoader::Instance()->getCol()<<std::endl;
+		}
 
 		cbSpeedPanel->setSelected(true);
 		cbLifetimePanel->setSelected(true);
@@ -727,6 +907,7 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 		fileDlg->SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
 #endif
 #endif
+		new PEConsoleCmdHandler;
 
 		return pWindow;
 
@@ -736,3 +917,14 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 	}
 	return 0;
 }
+
+	void editorWindow::onInputEvent(sora::SoraKeyEvent* kev) {
+
+	}
+
+
+
+
+
+
+

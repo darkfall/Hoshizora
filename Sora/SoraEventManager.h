@@ -29,7 +29,7 @@ namespace sora {
 	public:
 		SoraEventHandlerPack();
 		SoraEventHandlerPack& add(SoraEventHandler* handler) ;
-		void onTimerEvent(const SoraTimerEvent* ev);
+		void onTimerEvent(SoraTimerEvent* ev);
 		void publishEvent(SoraEvent* ev);
 		
 		void unRegister(SoraEventHandler* handler);

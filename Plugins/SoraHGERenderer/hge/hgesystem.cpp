@@ -122,11 +122,21 @@ bool CALL HGE_Impl::System_Initiate()
 	winclass.cbClsExtra		= 0;
 	winclass.cbWndExtra		= 0;
 	winclass.hInstance		= hInstance;
-	winclass.hCursor		= LoadCursor(NULL, IDC_ARROW);
+	if(!szCursor) {
+		winclass.hCursor		= LoadCursor(NULL, IDC_ARROW);
+		hCursor = winclass.hCursor;
+	}
+	else {
+		winclass.hCursor		= LoadCursorFromFileA(szCursor);
+		hCursor = winclass.hCursor;
+	}
 	winclass.hbrBackground	= (HBRUSH)GetStockObject(BLACK_BRUSH);
 	winclass.lpszMenuName	= NULL; 
 	winclass.lpszClassName	= WINDOW_CLASS_NAME;
-	if(szIcon) winclass.hIcon = LoadIconA(hInstance, szIcon);
+	
+	if(szIcon) {
+		winclass.hIcon = (HICON)LoadImageA(NULL, szIcon, IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_DEFAULTSIZE);
+	}
 	else winclass.hIcon = LoadIconW(NULL, IDI_APPLICATION);
 	
 	if (!RegisterClassW(&winclass)) {
@@ -396,8 +406,16 @@ void CALL HGE_Impl::System_SetStateString(hgeStringState state, const char *valu
 	switch(state)
 	{
 		case HGE_ICON:			szIcon=value;
-								if(pHGE->hwnd) SetClassLong(pHGE->hwnd, GCL_HICON, (LONG)LoadIconA(pHGE->hInstance, szIcon));
+								if(pHGE->hwnd) SetClassLong(pHGE->hwnd, GCL_HICON, (LONG)(HICON)LoadImageA(NULL, szIcon, IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_DEFAULTSIZE));
 								break;
+		case HGE_CURSOR:
+								szCursor=value;
+								if(pHGE->hwnd) {
+									hCursor = LoadCursorFromFileA(szCursor);
+									SetClassLong(pHGE->hwnd, GCL_HCURSOR, (LONG)hCursor);
+								}
+								break;
+
 		case HGE_TITLE:			strcpy(szWinTitle,value);
 								if(pHGE->hwnd) SetWindowTextA(pHGE->hwnd, szWinTitle);
 								break;
@@ -609,6 +627,8 @@ HGE_Impl::HGE_Impl()
 	bHideMouse=true;
 	bDontSuspend=false;
 	hwndParent=0;
+	szCursor = NULL;
+	hCursor = NULL;
 
 	nPowerStatus=HGEPWR_UNSUPPORTED;
 	hKrnl32 = NULL;
@@ -680,7 +700,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 
 		case WM_SETCURSOR:
 			if(pHGE->bActive && LOWORD(lparam)==HTCLIENT && pHGE->bHideMouse) SetCursor(NULL);
-			else SetCursor(LoadCursor(NULL, IDC_ARROW));
+			else {
+				SetCursor(pHGE->hCursor);
+			}
 			return FALSE;
 
 		case WM_SYSKEYDOWN:

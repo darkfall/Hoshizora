@@ -4,26 +4,33 @@
 #include "SoraFileUtility.h"
 #include "SoraEventManager.h"
 #include "SoraConstantStrings.h"
+#include "SoraMemoryFile.h"
+#include "SoraFolderResourceManager.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
 
-
-#include "SoraFolderResourceManager.h"
-
 #include "Defaults/SoraTimer_OSX.h"
 #include "Defaults/SoraTimer_Win32.h"
+#include "Defaults/SoraTimer_PSP.h"
 #include "Defaults/SoraMiscTool_Win32.h"
 #include "Defaults/SoraMiscTool_OSX.h"
 #include "Defaults/SoraMiscTool_iOS.h"
-
-#include "Random/hgeRandom.h"
 
 #include "Debug/SoraInternalLogger.h"
 #include "Debug/SoraAutoProfile.h"
 #include "Debug/SoraDebugRenderer.h"
 
+#include "cmd/SoraConsole.h"
+#include "cmd/CoreCmds.h"
+
+#include "helpers/SoraZSorter.h"
+#include "helpers/SoraInputSimulator.h"
+
+
 #include "MemoryUsage.h"
+#include "Rect4V.h"
+
 
 extern "C" {
 #include "Random/SFMT.h"
@@ -35,8 +42,12 @@ namespace sora {
 		bMessageBoxErrorPost = false;
 		bInitialized = false;
 		bFrameSync = false;
-
 		bHasInput = false;
+		bZBufferArea = false;
+        bMainScene = false;
+		bPaused = false;
+		bPauseRender = false;
+		bPauseSound = false;
 
 		_initializeTimer();
 		_initializeMiscTool();
@@ -44,18 +55,17 @@ namespace sora {
 		SoraEventManager::Instance();
 		SoraInternalLogger::Instance();
 
-		pInput = 0;
-		pFontManager = 0;
-		pRenderSystem = 0;
-		pSoundSystem = 0;
+		pInput = NULL;
+		pFontManager = NULL;
+		pRenderSystem = NULL;
+		pSoundSystem = NULL;
         
-        bMainScene = false;
-		mainWindow = 0;
-        
-        shaderContext = 0;
+		mainWindow = NULL;
+		
+		__prevShader = NULL;
+        shaderContext = NULL;
 
 		pPluginManager = new SoraPluginManager;
-
 		pResourceFileFinder = new SoraResourceFileFinder;
 		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
 		
@@ -68,6 +78,8 @@ namespace sora {
 		pTimer = new SoraOSXTimer; return;
 #elif defined(OS_WIN32)
 		pTimer = new SoraWin32Timer; return;
+#elif defined(OS_PSP)
+		pTimer = new SoraPSPTimer; return;
 #endif
 		pTimer = new SoraDefaultTimer;
 	}
@@ -131,80 +143,94 @@ namespace sora {
 
 	void SoraCore::update() {
 		assert(bInitialized == true);
+#ifdef PROFILE_CORE_UPDATE
 		PROFILE("CORE_UPDATE");
-		
-		{
-#ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_SOUNDSYSTEM");
 #endif
-            if(pSoundSystem) pSoundSystem->update();
-        }
 
-		pRenderSystem->beginFrame();
-        
-		_frameListenerStart();
-        
-        {
+		if(!bPaused && !bPauseSound) {
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_MAINWINDOW");
+				PROFILE("UPDATE_SOUNDSYSTEM");
 #endif
-            mainWindow->updateFunc();
-        }
-        
-        {
-#ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_PLUGINS");
-#endif
-            pPluginManager->update();
-        }
-        
-        {
-#ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_EVENT_MANAGER");
-#endif
-            SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
-        }
-        
-        {
-#ifdef PROFILE_CORE_UPDATE
-            PROFILE("UPDATE_RENDERSYSTEM");
-#endif
-            pRenderSystem->update();
-        }
-        
+				if(pSoundSystem) pSoundSystem->update();
+			}
+		}
 		
-        {
+	
+		if(!bPaused) {
+			SoraInputSimulator::clear();
+
+			pRenderSystem->beginFrame();
+        
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("RENDER_MAINWINDOW");
+				PROFILE("FRAMELISTENER_START");
 #endif
-            mainWindow->renderFunc();
-        }
-        
-        {
+				_frameListenerStart();
+			}
+			
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("FRAMELISTENER_END");
+				PROFILE("UPDATE_PLUGINS");
 #endif
-            _frameListenerEnd();
-        }
-        
-        {
+				pPluginManager->update();
+			}
+			
+			{
 #ifdef PROFILE_CORE_UPDATE
-            PROFILE("DEBUG_RENDER");
+				PROFILE("UPDATE_MAINWINDOW");
 #endif
-            
-#ifdef _DEBUG
-            DEBUG_RENDERER->render();
+				mainWindow->updateFunc();
+			}
+			
+			{
+#ifdef PROFILE_CORE_UPDATE
+				PROFILE("UPDATE_EVENT_MANAGER");
 #endif
-        }
+				SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
+			}
+			
+			{
+#ifdef PROFILE_CORE_UPDATE
+				PROFILE("UPDATE_RENDERSYSTEM");
+#endif
+				pRenderSystem->update();
+			}
+		} else 
+			mainWindow->pauseFunc();
         
-        if(bMainScene) {
-            bMainScene = false;
-            pRenderSystem->endScene();
-        }
+		if(!bPaused && !bPauseRender) {
+			{
+#ifdef PROFILE_CORE_UPDATE
+				PROFILE("RENDER_MAINWINDOW");
+#endif
+				mainWindow->renderFunc();
+			}
+		}
         
-		time += pTimer->getDelta();
+		if(!bPaused) {
+			{
+#ifdef PROFILE_CORE_UPDATE
+				PROFILE("FRAMELISTENER_END");
+#endif
+				_frameListenerEnd();
+			}
+			
+			if(!bPauseRender) {
+				DEBUG_RENDERER->render();
+				SoraConsole::Instance()->render();
+				
+				if(bMainScene) {
+					bMainScene = false;
+					pRenderSystem->endScene();
+				}
+			}
+			
+			time += pTimer->getDelta();
+			
+			pRenderSystem->endFrame();
+		}
         
-		pRenderSystem->endFrame();
 	}
 
 	void SoraCore::flush() {
@@ -215,25 +241,31 @@ namespace sora {
 	void SoraCore::_checkCoreComponents() {
 		if(!pInput) {
 			bHasInput = false;
-			_postError("No input provided");
+			_postError("SoraCore::CheckCoreComponents: No Input provided");
+			DebugPtr->log("No Input available, input related API disabled", 
+						  LOG_LEVEL_WARNING);
 		}
 
 		if(!pPluginManager) {
 			pPluginManager = new SoraPluginManager;
-			_postError("SoraCore::CheckCoreComponents: No plugin manager registered, using default plugin manager");
+			_postError("SoraCore::CheckCoreComponents: No PluginManager registered, using default plugin manager");
 		}
 
 		if(!pMiscTool) {
 			pMiscTool = new SoraDefaultMiscTool;
-			_postError("SoraCore::CheckCoreComponents: No misc tool registered, using default tool");
+			_postError("SoraCore::CheckCoreComponents: No MiscTool registered, using default tool");
 		}
 
 		if(!pFontManager) {
-			_postError("SoraCore::CheckCoreComponents: no fontmanager available");
+			_postError("SoraCore::CheckCoreComponents: no FontManager available");
+			DebugPtr->log("No FontManager available, font related API disabled", 
+						  LOG_LEVEL_WARNING);
 		}
 		
 		if(!pSoundSystem) {
-			_postError("SoraCore::CheckCoreComponents: no soundsystem available");
+			_postError("SoraCore::CheckCoreComponents: no SoundSystem available");
+			DebugPtr->log("No SoundSystem available, sound related API disabled", 
+						  LOG_LEVEL_WARNING);
 		}
 
 		// no render system available, fatal error
@@ -245,17 +277,13 @@ namespace sora {
 		bInitialized = true;
 	}
 
-	void SoraCore::_logInternalLog() {
-		//INT_LOG_HANDLE->writeToFile("SoraLog.txt");
-	}
-
 	void SoraCore::postError(const SoraString& string) {
 		_postError(string);
 	}
 
 	void SoraCore::_postError(const SoraString& string) {
 		if(!bMessageBoxErrorPost)
-			INT_LOG_HANDLE->log(string);
+			DebugPtr->log(string, LOG_LEVEL_ERROR);
 		else
 			pMiscTool->messageBox(string, "SoraCoreError", MB_ICONERROR | MB_OK);
 	}
@@ -273,8 +301,6 @@ namespace sora {
 	}
 
 	void SoraCore::shutDown() {
-		_logInternalLog();
-
 		//SoraTextureMap::Instance()->Destroy();
         if(mainWindow)
             delete mainWindow;
@@ -298,37 +324,74 @@ namespace sora {
 		}
 		
 		if(pMiscTool) delete pMiscTool;
-
+		
+		// free all memory files
+		SoraMemoryFile::Members memoryFiles = SoraMemoryFile::members;
+		SoraMemoryFile::Members::iterator itMember = memoryFiles.begin();
+		while(itMember != memoryFiles.end()) {
+			delete *itMember;
+			*itMember = NULL;
+			
+			++itMember;
+		}
+		
 		SoraEventManager::Destroy();
 		// force exiting
 		exit(0);
 	}
 
 	ulong32 SoraCore::createWindow(SoraWindowInfoBase* info) {
-		iScreenWidth = info->getWindowWidth();
-		iScreenHeight = info->getWindowHeight();
-
 		SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
 		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
 		
-		ulong32 result = pRenderSystem->createWindow(info);
-		if(result) {
-			if(pInput != NULL)
-				pInput->setWindowHandle(result);
-			pMiscTool->setMainWindowHandle(result);
-			bMainWindowSet = true;
-			mainWindow = info;
-			return result;
+		if(mainWindow == NULL) {
+			iScreenWidth = info->getWindowWidth();
+			iScreenHeight = info->getWindowHeight();
+			
+			sora::SoraConsole::Instance();
+			sora::SoraCoreCmdHandler::Instance();
+		
+			ulong32 result = pRenderSystem->createWindow(info);
+			if(result) {
+				if(pInput != NULL)
+					pInput->setWindowHandle(result);
+				pMiscTool->setMainWindowHandle(result);
+				bMainWindowSet = true;
+				mainWindow = info;
+			
+				DebugPtr->log(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
+							  LOG_LEVEL_NOTICE);
+				return result;
+			} else {
+				_postError("SoraCore::createWindow, createWindow failed");
+				shutDown();
+				return 0;
+			}
 		} else {
-			_postError("SoraCore::createWindow, createWindow failed");
-			shutDown();
-			return 0;
+			mainWindow = info;
+			DebugPtr->log(vamssg("Recreated MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
+						  LOG_LEVEL_NOTICE);
+			
+			if(info->getWindowWidth() != iScreenWidth || info->getWindowHeight() != iScreenHeight) {
+				iScreenWidth = info->getWindowWidth();
+				iScreenHeight = info->getWindowHeight();
+				
+				pRenderSystem->setWindowSize(iScreenWidth, iScreenHeight);
+				pRenderSystem->setWindowTitle(s2ws(info->getWindowName()));
+				pRenderSystem->setWindowPos(info->getWindowPosX(), info->getWindowPosY());
+			}
 		}
 		return 0;
 	}
 
 	void SoraCore::setWindowSize(int32 w, int32 h) {
 		assert(bInitialized == true);
+		if(SoraConsole::Instance()->getWidth() == iScreenWidth-2) {
+			SoraConsole::Instance()->setSize(w-2, SoraConsole::Instance()->getHeight()>h?h:SoraConsole::Instance()->getHeight());
+		}
+		
+		iScreenWidth = w;
+		iScreenHeight = h;
 		pRenderSystem->setWindowSize(w, h);
 	}
 
@@ -418,7 +481,7 @@ namespace sora {
 		return pTimer->getTime();
 	}
 
-	s_int64 SoraCore::getCurrentSystemTime() {
+	uint64 SoraCore::getCurrentSystemTime() {
 		return pTimer->getCurrentSystemTime();
 	}
 
@@ -487,11 +550,15 @@ namespace sora {
 	void SoraCore::attachShaderContext(SoraShaderContext* context) {
         assert(bInitialized == true);
         pRenderSystem->attachShaderContext(context);
+		
+		__prevShader = context;
 	}
 
 	void SoraCore::detachShaderContext() {
         assert(bInitialized == true);
         pRenderSystem->detachShaderContext();
+		
+		__prevShader = NULL;
 	}
 
 	HSORATEXTURE SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
@@ -527,7 +594,7 @@ namespace sora {
 		return (HSORATEXTURE)pRenderSystem->createTextureFromMem(data, size);
 	}
 
-	ulong32* SoraCore::textureLock(HSORATEXTURE ht) {
+	uint32* SoraCore::textureLock(HSORATEXTURE ht) {
 		assert(bInitialized==true);
 		return pRenderSystem->textureLock((SoraTexture*)ht);
 	}
@@ -540,7 +607,29 @@ namespace sora {
 	void SoraCore::releaseTexture(HSORATEXTURE pTexture) {
 		assert(bInitialized==true);
         if(!pTexture) return;
+		SoraTextureMap::Instance()->del(pTexture);
         pRenderSystem->releaseTexture((SoraTexture*)pTexture);
+	}
+	
+	int32 SoraCore::getTextureWidth(HSORATEXTURE tex, bool origin) {
+		SoraTexture* ptex = (SoraTexture*)tex;
+		if(ptex)
+			return (origin?ptex->mOriginalWidth:ptex->mTextureWidth);
+		return 0;
+	}
+	
+	int32 SoraCore::getTextureHeight(HSORATEXTURE tex, bool origin) {
+		SoraTexture* ptex = (SoraTexture*)tex;
+		if(ptex)
+			return (origin?ptex->mOriginalHeight:ptex->mTextureHeight);
+		return 0;
+	}
+	
+	ulong32	SoraCore::getTextureId(HSORATEXTURE tex) {
+		SoraTexture* ptex = (SoraTexture*)tex;
+		if(ptex)
+			return ptex->mTextureID;
+		return 0;
 	}
 
 	void SoraCore::clearTextureMap() {
@@ -556,31 +645,54 @@ namespace sora {
 		assert(bInitialized==true);
 		HSORATEXTURE tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
-			return new SoraSprite(tex);
+			SoraSprite* pspr = new SoraSprite(tex);
+			pspr->setName(str2id(sPath));
+			return pspr;
 		} else {
 			tex = createTexture(sPath);
-			return new SoraSprite(tex);
+			if(!tex)
+				return new SoraSprite(tex);
+			else {
+				SoraSprite* pspr = new SoraSprite(tex);
+				pspr->setName(str2id(sPath));
+				return pspr;
+			}
 		}
 	}
-
-	SoraSprite* SoraCore::createSpriteTex(HSORATEXTURE tex) {
-		assert(bInitialized==true);
-		return new SoraSprite(tex);
-	}
-
+	
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		assert(bInitialized==true);
-		pRenderSystem->renderQuad(quad);
+		if(bZBufferArea) {
+			SoraZSorter::renderQuad(quad, __prevShader);
+		} else 
+			pRenderSystem->renderQuad(quad);
 	}
 
 	void SoraCore::renderTriple(SoraTriple& trip) {
 		assert(bInitialized==true);
-		pRenderSystem->renderTriple(trip);
+		
+		if(bZBufferArea) {
+			SoraZSorter::renderTriple(trip, __prevShader);
+		} else 
+			pRenderSystem->renderTriple(trip);
+	}
+	
+	void SoraCore::renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
+		assert(bInitialized == true);
+		if(bZBufferArea) {
+			SoraZSorter::renderWithVertices(tex, blendMode, vertices, vsize, mode, __prevShader);
+		} else 	
+			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
 	}
 
-	void SoraCore::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, DWORD color, float32 z) {
+	void SoraCore::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, ulong32 color, float32 z) {
 		assert(bInitialized==true);
 		pRenderSystem->renderRect(x1, y1, x2, y2, fWidth, color, z);
+	}
+	
+	void SoraCore::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, ulong32 color, float32 z) {
+		assert(bInitialized==true);
+		pRenderSystem->renderBox(x1, y1, x2, y2, color, z);
 	}
 
 	void SoraCore::setClipping(int32 x, int32 y, int32 w, int32 h) {
@@ -617,7 +729,7 @@ namespace sora {
 
 	ulong32 SoraCore::createTarget(int width, int height, bool zbuffer) {
 		assert(bInitialized==true);
-		return pRenderSystem->createTarget(width, height, zbuffer);
+		return pRenderSystem->createTarget(width==0?iScreenWidth:width, height==0?iScreenHeight:height, zbuffer);
 	}
 
 	void SoraCore::freeTarget(ulong32 t) {
@@ -667,16 +779,32 @@ namespace sora {
 	}
 
 	bool SoraCore::keyDown(int32 key) {
+		int32 simulateState = SoraInputSimulator::getKeyState(key);
+		if(simulateState != -1)
+			return simulateState == SORA_INPUT_KEYDOWN;
+		
 		if(bHasInput) return pInput->keyDown(key);
 		return false;
 	}
 
 	bool SoraCore::keyUp(int32 key) {
+		int32 simulateState = SoraInputSimulator::getKeyState(key);
+		if(simulateState != -1)
+			return simulateState == SORA_INPUT_KEYUP;
+		
 		if(bHasInput) return pInput->keyUp(key);
 		return false;
 	}
+	
+	void SoraCore::simulateKey(int32 key, int32 state) {
+		SoraInputSimulator::simulateKey(key, state);
+	}
 
 	int32 SoraCore::getKeyState(int32 key) {
+		int32 simulateState = SoraInputSimulator::getKeyState(key);
+		if(simulateState != -1)
+			return simulateState;
+		
 		if(bHasInput) return pInput->getKeyState(key);
 		return false;
 	}
@@ -720,23 +848,43 @@ namespace sora {
 		if(bHasInput) return pInput->hasJoy();
 		return false;
 	}
+	
+	SoraWString SoraCore::fileOpenDialog(const char* filter, const char* defaultPath) {
+		if(!pMiscTool)
+			return L"\0";
+		
+		return pMiscTool->fileOpenDialog(filter, defaultPath);
+	}
+	
+	SoraWString SoraCore::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
+		if(!pMiscTool)
+			return L"\0";
+		
+		return pMiscTool->fileSaveDialog(filter, defaultPath, defaultExt);
+	}
 
 	int32 SoraCore::messageBox(const SoraString& sMssg, const SoraString& sTitle, int32 iCode) {
+		if(!pMiscTool)
+			return 0;
+		
 		pMiscTool->setMainWindowHandle(getMainWindowHandle());
 		return pMiscTool->messageBox(sMssg, sTitle, iCode);
 	}
 
 	int32 SoraCore::messageBoxW(const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode) {
+		if(!pMiscTool)
+			return 0;
+		
 		pMiscTool->setMainWindowHandle(getMainWindowHandle());
 		return pMiscTool->messageBox(sMssg, sTitle, iCode);
 	}
 
-	void SoraCore::log(const SoraString& sMssg) {
-		INT_LOG_HANDLE->log(sMssg);
+	void SoraCore::log(const SoraString& sMssg, int32 level) {
+		DebugPtr->log(sMssg, level);
 	}
 
-	void SoraCore::logw(const SoraWString& sMssg) {
-		INT_LOG_HANDLE->log(ws2s(sMssg));
+	void SoraCore::logw(const SoraWString& sMssg, int32 level) {
+		DebugPtr->log(ws2s(sMssg), level);
 	}
 	
 	void SoraCore::logf(const char* format, ...) {
@@ -746,7 +894,7 @@ namespace sora {
 		vsprintf(Message, format, ArgPtr);
 		va_end(ArgPtr);
 		
-		INT_LOG_HANDLE->log(Message);
+		DebugPtr->log(Message);
 	}
 
 	void SoraCore::registerPlugin(SoraPlugin* pPlugin) {
@@ -771,35 +919,27 @@ namespace sora {
 	}
 
 	void SoraCore::setRandomSeed(int32 seed) {
-		Random_Seed(seed);
 		init_gen_rand(seed);
+		iRandomSeed = seed;
 	}
 
 	int32 SoraCore::getRandomSeed() {
-		return g_seed2;
+		return iRandomSeed;
 	}
 
 	int32 SoraCore::randomInt(int32 min, int32 max) {
-		return Random_int32(min, max);
-	}
-
-	float32 SoraCore::randomFloat(float32 min, float32 max) {
-		return Random_float32(min, max);
-	}
-
-	int32 SoraCore::_SFMTRandomInt(int32 min, int32 max) {
 		return (int32)(min+genrand_real1()*(max-min));
 	}
 
-	float32 SoraCore::_SFMTRandomFloat(float32 min, float32 max) {
+	float32 SoraCore::randomFloat(float32 min, float32 max) {
 		return (float32)(min+genrand_real1()*(max-min));
 	}
 
-	int32 SoraCore::_SFMTRandomInt32() {
+	int32 SoraCore::randomIntNoRange() {
 		return gen_rand32();
 	}
 
-	float32 SoraCore::_SFMTRandomFloat32() {
+	float32 SoraCore::randomFloatNoRange() {
 		return (float32)genrand_real1();
 	}
 
@@ -810,8 +950,12 @@ namespace sora {
 		}
 
 #ifndef OS_IOS
+		SoraFont* f;
         if(SoraFileUtility::fileExists(font)) {
-            SoraFont* f = pFontManager->getFont(ws2s(font).c_str(), size);
+            f = pFontManager->getFont(ws2s(font).c_str(), size);
+
+			if(SoraConsole::Instance()->getFont() == NULL)
+				SoraConsole::Instance()->setFont(f);
             return f;
         }
 		ulong32 s;
@@ -819,12 +963,17 @@ namespace sora {
 		if(p) {
 			SoraFont* f = pFontManager->getFont((const char*)p, size, s-1, ws2s(font).c_str());
 			//freeResourceFile(p);
+			if(SoraConsole::Instance()->getFont() == NULL)
+				SoraConsole::Instance()->setFont(f);
 			return f;
 		}
 #else
-		return pFontManager->getFont(ws2s(font).c_str(), size);
+		SoraFont* ff = pFontManager->getFont(ws2s(font).c_str(), size);
+		if(ff)
+			SoraConsole::Instance()->setFont(ff);
+		else
+			_postError("Error loading Font: "+ws2s(font));
 #endif
-		_postError("Error loading font");
 		return 0;
 	}
 
@@ -881,7 +1030,54 @@ namespace sora {
         return pRenderSystem->snapshot(path);
     }
 
-	s_int64 SoraCore::getEngineMemoryUsage() {
+	uint64 SoraCore::getEngineMemoryUsage() {
 		return getMemoryUsage();
+	}
+	
+	void SORACALL SoraCore::enableMessageBoxErrorPost(bool bFlag) { 
+		bMessageBoxErrorPost = bFlag;
+	}
+	
+	SoraConsole* SoraCore::getConsole() {
+		return SoraConsole::Instance();
+	}
+	
+	void SoraCore::setSystemFont(const wchar_t* font, int32 fontSize) {
+		SoraFont* ff = createFont(font, fontSize);
+		SoraConsole::Instance()->setFont(ff);
+	}
+	
+	void SoraCore::beginZBufferSort() {
+		bZBufferArea = true;
+	}
+
+	void SoraCore::endZBufferSort() {
+		bZBufferArea = false;
+		SoraZSorter::endSortAndRender();
+	}
+
+	void SoraCore::pause(bool render, bool sound) {
+		bPauseRender = render;
+		bPauseSound = sound;
+		
+		bPaused = true;
+	}
+	
+	void SoraCore::resume() {
+		bPaused = false;
+	}
+	
+	bool SoraCore::isPaused() {
+		return bPaused;
+	}
+
+	void SoraCore::setIcon(const SoraString& icon) {
+		assert(bInitialized);
+		pRenderSystem->setIcon(icon);
+	}
+
+	void SoraCore::setCursor(const SoraString& cursor) {
+		assert(bInitialized);
+		pRenderSystem->setCursor(cursor);
 	}
 } // namespace sora

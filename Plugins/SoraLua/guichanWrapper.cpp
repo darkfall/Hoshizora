@@ -190,7 +190,7 @@ namespace guiwrapper {
     void addWidgetToParent(ulong32 h, const SoraString& parent) {
         gcn::Widget* w = getWidgetByHandle(h);
         if(w) {
-            GCN_GLOBAL->addWidget(w, parent);
+            GCN_GLOBAL->addWidget(w, parent.c_str());
         }
     }
     
@@ -323,7 +323,7 @@ namespace guiwrapper {
     void setWidgetFont(ulong32 h, const SoraString& fontName, int32 fontSize) {
         gcn::Widget* w = getWidgetByHandle(h);
         if(w) {
-            SoraGUIFont* font = new SoraGUIFont(s2ws(fontName), fontSize);
+            gcn::SoraGUIFont* font = new gcn::SoraGUIFont(s2ws(fontName), fontSize);
             w->setFont(font);
         }
     }

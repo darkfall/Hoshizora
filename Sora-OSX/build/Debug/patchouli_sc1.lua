@@ -10,6 +10,7 @@ local rfChange = 5;
 function royalFire.update() 
 	local bullet;
 	
+--	for i=0, 32, 1 do 
 	rfX = boss:getPositionX() + rfDist * math.cos(PI_2+rfDir);
 	rfY = boss:getPositionY() - rfDist * math.sin(PI_2+rfDir);
 	
@@ -32,7 +33,7 @@ function royalFire.update()
 --				10,
 --				ldir, 56, 10, 90);
 
-
+---	end
 
 	royalFireCount = royalFireCount + 1;
 end 

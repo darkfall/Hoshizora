@@ -11,7 +11,7 @@
 #import "Sora_iPhoneViewController.h"
 #import "EAGLView.h"
 
-#import "SoraOGLESRenderer/SoraiOSInitializer.h"
+#import "SoraiOSGLRenderer/SoraiOSInitializer.h"
 #import "SoraiOSMainWindow.h"
 #import "rfMainWindow.h"
 #import "anime/aeMainWindow.h"

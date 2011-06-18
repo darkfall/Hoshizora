@@ -42,6 +42,10 @@ namespace sora {
 			if(ptr) reference_count_dec();
 		}
 		
+		void inc_ref_count() {
+			++(*refCount);
+		}
+		
 		void operator=(const SoraAutoPtr<T>& rhs) { 
 			if(ptr == rhs.ptr) {
 				assert(refCount == rhs.refCount);
@@ -82,7 +86,7 @@ namespace sora {
 			return ptr;
 		}
 		
-		bool valid() {
+		bool valid() const {
 			return ptr!=0;
 		}
 
@@ -121,6 +125,12 @@ namespace sora {
 				
 		void* operator new(size_t);
 		//void operator delete(void*);
+	};
+	
+	template<typename T>
+	class SoraSharedClass: public SoraAutoPtr<T> {
+	public:
+		typedef SoraAutoPtr<T> Pointer;
 	};
 		
 } // namespace sora

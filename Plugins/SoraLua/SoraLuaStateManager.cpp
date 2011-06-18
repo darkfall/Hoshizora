@@ -37,9 +37,9 @@ namespace sora {
 	}
 
 	void SoraLuaObjectManager::doSendMessage(const SoraString& mssg, const SoraString& params, SoraLuaObject* obj) {
-		LuaObject luaObj = obj->get(mssg);
+		LuaPlus::LuaObject luaObj = obj->get(mssg);
 		if(luaObj.IsFunction()) {
-			LuaFunction<void> mssgFunc = luaObj;
+			LuaPlus::LuaFunction<void> mssgFunc = luaObj;
 			mssgFunc(params);
 		}
 	}

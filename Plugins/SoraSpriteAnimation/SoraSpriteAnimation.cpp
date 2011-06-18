@@ -10,16 +10,14 @@
 #include "SoraSpriteAnimation.h"
 
 #include "llexer/llexer.h"
-#include "lMemFile.h"
+
 #include "hash.h"
 #include "common.h"
-
 #include "SoraCore.h"
-
+#include "lMemFile.h"
 #include <cassert>
 
 namespace sora {
-
 
 inline uint32 cFileReadToken(llexer* lexer, bool& err) {
 	Token token = lexer->getNextToken();
@@ -212,6 +210,7 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
 			err = !pmfile->read(texturePath, texSize);
 			texturePath[texSize] = '\0';
 			panm->texturePath = texturePath;
+
 			delete texturePath;
 		}
 		

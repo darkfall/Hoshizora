@@ -31,8 +31,10 @@ namespace rftd {
 		
 		steer.update(dt);
 		if(steer.isFinished()) {
-			if(mEndSource)
+			if(mEndSource && !mAttacked) {
+				mAttacked = true;
 				mEndSource->handleEvent(new EnemyReachEndEvent(getAttack()));
+			}
 		}
 		return 0;
 	}
@@ -63,6 +65,11 @@ namespace rftd {
 				mSprite = NULL;
 			}
 			mSprite = PRODUCE_SPRITE(val["enemy_tex"]);
+			
+			sora::SoraSpriteAnimation* spriteAnim = dynamic_cast<sora::SoraSpriteAnimation*> (mSprite);
+			if(spriteAnim != NULL)
+				steer.setAnimationSprite(spriteAnim);
+			
 		} else {
 			mSprite = NULL;
 			return false;
@@ -98,6 +105,7 @@ namespace rftd {
 	
 	void rftdEnemyObject::steerStart() {
 		steer.start();
+		mAttacked = false;
 	}
 	
 	void rftdEnemyObject::addRoutePoint(float32 x, float32 y) {

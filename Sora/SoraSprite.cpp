@@ -14,12 +14,13 @@ namespace sora {
     SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h): shaderContext(NULL) {
         _init((SoraTexture*)tex, x, y, w, h);
 		_initDefaults();
+		setTextureRect(x, y, w, h);
     }
     
     void SoraSprite::_init(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
         float texx1, texy1, texx2, texy2;
 		
-		textureRect.x1 = 0.f; textureRect.y1 = 0.f;
+		textureRect.x1 = x; textureRect.y1 = y;
 		if(tex) {
 			textureRect.x2 = width; textureRect.y2 = height;
 		} else {
@@ -40,23 +41,30 @@ namespace sora {
 		quad.v[2].tx = texx2; quad.v[2].ty = texy2;
 		quad.v[3].tx = texx1; quad.v[3].ty = texy2;
 		
-        sprWidth = texture!=NULL?texture->mOriginalWidth:1;
-        sprHeight = texture!=NULL?texture->mOriginalHeight:1;
-		
+		if(tex) {
+	       sprWidth = static_cast<int32>(tex->mOriginalWidth);
+	       sprHeight = static_cast<int32>(tex->mOriginalHeight);
+		} else {
+			sprWidth = 1;
+			sprHeight = 1;
+		}
 		shaderContext = NULL;
+		
+		if(texture)
+			setName(SoraTextureMap::Instance()->getTextureName((HSORATEXTURE)tex));
     }
 
 	SoraSprite::~SoraSprite() {
 		clearEffects();
         clearShader();
 	//	if(texture) delete texture;
-		SoraTextureMap::Instance()->decRf((HSORATEXTURE)texture);
+	//	SoraTextureMap::Instance()->decRf((HSORATEXTURE)texture);
 	}
 
 	void SoraSprite::setTexture(HSORATEXTURE tex) {
         if(quad.tex) {
             if(SoraTextureMap::Instance()->exist((HSORATEXTURE)quad.tex)) {
-                sora::SORA->releaseTexture((HSORATEXTURE)quad.tex);
+                SoraTextureMap::Instance()->decRf((HSORATEXTURE)quad.tex);
             }
         }
         
@@ -75,16 +83,6 @@ namespace sora {
 		if(hasEffect())
 			clearEffects();
 		setPosition(0.f, 0.f);
-
-		quad.v[0].z = 
-		quad.v[1].z = 
-		quad.v[2].z = 
-		quad.v[3].z = 0.f;
-		
-		quad.v[0].col = 
-		quad.v[1].col = 
-		quad.v[2].col = 
-		quad.v[3].col = 0xffffffff;
         
 		quad.blend=BLEND_DEFAULT;
 		
@@ -191,14 +189,22 @@ namespace sora {
             sora->detachShaderContext();
 	}
 
-	void SoraSprite::setColor(ulong32 c, int32 i) {
+	void SoraSprite::renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode) {
+		if(hasShader()) 
+            sora->attachShaderContext(shaderContext);
+		sora->renderWithVertices((HSORATEXTURE)quad.tex, quad.blend, vertices, size, mode);
+		if(hasShader()) 
+            sora->detachShaderContext();
+	}
+	
+	void SoraSprite::setColor(uint32 c, int32 i) {
 		if(i != -1)
 			quad.v[i].col = c;
 		else
 			quad.v[0].col = quad.v[1].col = quad.v[2].col = quad.v[3].col = c;
 	}
 
-	ulong32 SoraSprite::getColor(int32 i)  const{
+	uint32 SoraSprite::getColor(int32 i)  const{
 		return quad.v[i].col;
 	}
 	
@@ -221,7 +227,7 @@ namespace sora {
 		return quad.blend;
 	}
 
-	ulong32* SoraSprite::getPixelData() const {
+	uint32* SoraSprite::getPixelData() const {
 		return SORA->textureLock((HSORATEXTURE)quad.tex);
 		return 0;
 	}
@@ -230,7 +236,7 @@ namespace sora {
         SORA->textureUnlock((HSORASPRITE)quad.tex);
     }
 
-	const hgeRect& SoraSprite::getTextureRect() const {
+	hgeRect SoraSprite::getTextureRect() const {
 		return textureRect;
 	}
 
@@ -275,12 +281,12 @@ namespace sora {
 	}
 
 	int32 SoraSprite::getTextureWidth(bool bOriginal)  const{
-		if(texture) return bOriginal?texture->mTextureWidth:texture->mOriginalWidth;
+		if(texture) return bOriginal?texture->mOriginalWidth:texture->mTextureWidth;
 		return 0;
 	}
 
 	int32 SoraSprite::getTextureHeight(bool bOriginal) const {
-		if(texture) return bOriginal?texture->mTextureWidth:texture->mOriginalWidth;
+		if(texture) return bOriginal?texture->mOriginalWidth:texture->mTextureHeight;
 		return 0;
 	}
 
@@ -357,8 +363,10 @@ namespace sora {
 	void SoraSprite::clearEffects() {
 		IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
 		while(eff != vEffects.end()) {
-			delete (*eff);
-			(*eff) = 0;
+			if((*eff) != NULL) {
+				delete (*eff);
+				(*eff) = 0;
+			}
 			++eff;
 		}
 		vEffects.clear();
@@ -369,46 +377,16 @@ namespace sora {
 			IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
 			while(eff != vEffects.end()) {
 				uint32 result = (*eff)->update(dt);
-				switch((*eff)->getType()) {
-					case IMAGE_EFFECT_FADEIN:
-					case IMAGE_EFFECT_FADEOUT:
-						setColor(CSETA(getColor(), (*eff)->get1st()*255));
-						break;
-						
-					case IMAGE_EFFECT_TRANSITIONS:
-						setPosition((*eff)->get1st(), (*eff)->get2nd());
-						break;
-						
-					case IMAGE_EFFECT_TRANSITIONS_Z:
-						setPosition((*eff)->get1st(), (*eff)->get2nd());
-						setZ((*eff)->get3rd());
-						break;
-						
-					case IMAGE_EFFECT_TENSILE:
-					case IMAGE_EFFECT_SCALEIN:
-					case IMAGE_EFFECT_SCALEOUT:
-						setScale((*eff)->get1st(), (*eff)->get2nd());
-						break;
-						
-					case IMAGE_EFFECT_COLOR_TRANSITION:
-						setColor(SoraColorRGBA::GetHWColor((*eff)->get1st(), (*eff)->get2nd(), (*eff)->get3rd(), (*eff)->get4th()));
-						break;
-						
-					case IMAGE_EFFECT_ROTATE:
-						setRotation((*eff)->get1st());
-						break;
-					case IMAGE_EFFECT_ROTATE_Z:
-						setRotation((*eff)->get1st());
-						setRotationZ((*eff)->get2nd());
-						break;
-				}
+				(*eff)->effect(this);
 				
-				if(result == IMAGE_EFFECT_END) {
+				if(result == IMAGE_EFFECT_END) {     
 					delete (*eff);
 					(*eff) = 0;
+					
 					eff = vEffects.erase(eff);
-				} else
-					++eff;
+					continue;
+				}
+				++eff;
 			}
 		}
 		return 0;

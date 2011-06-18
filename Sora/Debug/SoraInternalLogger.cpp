@@ -10,35 +10,32 @@
 
 #include "SoraInternalLogger.h"
 
-#include "SoraEventManager.h"
-#include "SoraEvent.h"
+#include "../SoraEventManager.h"
+#include "../SoraEvent.h"
+
+#ifdef OS_PSP
+#include <pspkernel.h>
+#include <pspdebug.h>
+#endif
 
 namespace sora {
 	
-	SoraInternalLogger::SoraInternalLogger(): currLogIndex(0), logInterval(1.f) {
-		logFile.open("./SoraLog.txt");
-		if(!logFile.is_open()) 
-			log("LOGGER: cannot open log file. all logs would only remain while excuting time");
-		
-		registerEventFunc(this, &SoraInternalLogger::onLogTimerEvent);
-		SORA_EVENT_MANAGER->createTimerEvent(this, logInterval, true);
-	}
-	SoraInternalLogger::~SoraInternalLogger() {
-		logFile.close();
+	SoraInternalLogger::SoraInternalLogger() {
+#ifdef OS_PSP
+	//pspDebugScreenInit();
+#endif
 	}
 	
-
-	void SoraInternalLogger::log(const SoraString& mssg) {
-		vMssg.push_back("LOG: "+mssg);
+	SoraInternalLogger::~SoraInternalLogger() {
 	}
 	
 	SoraInternalLogger& SoraInternalLogger::operator<<(SoraString& mssg) {
-		vMssg.push_back("LOG: "+mssg);
+		vMssg.push_back(mssg);
 		return *this;
 	}
 	
 	SoraInternalLogger& SoraInternalLogger::operator<<(SoraWString& mssg) {
-		vMssg.push_back("LOG: "+ws2s(mssg));
+		vMssg.push_back(ws2s(mssg));
 		return *this;
 	}
 	
@@ -49,74 +46,57 @@ namespace sora {
 		vsprintf(Message, format, ArgPtr);
 		va_end(ArgPtr);
 		
-		::printf("LOG: %s", Message);
+	#ifndef OS_PSP
+		::printf("%s", Message);
+	#else
+//		pspDebugScreenPrintf(Message);
+	#endif
 	}
 	
 	void SoraInternalLogger::printf(const wchar_t* format, ...) {
 		va_list	ArgPtr;
+#ifdef HAS_WSTRING
 		wchar_t Message[1024] = {0};
 		va_start(ArgPtr, format);
 		vswprintf(Message, 1024, format, ArgPtr);
-		va_end(ArgPtr);
 		
-		::wprintf(L"LOG: %s", Message);
-	}
-	
-	void SoraInternalLogger::logf(const char* format, ...) {
-		va_list	ArgPtr;
+		va_end(ArgPtr);
+		::wprintf(L"%s", Message);
+#else
 		char Message[1024] = {0};
 		va_start(ArgPtr, format);
-		vsprintf(Message, format, ArgPtr);
-		va_end(ArgPtr);
+		vsprintf(Message, ws2sfast(format).c_str(), ArgPtr);
 		
-		printf(Message);
-		vMssg.push_back(SoraString("LOG: ")+Message);
-	}
-	
-	void SoraInternalLogger::logf(const wchar_t* format, ...) {
-		va_list	ArgPtr;
-		wchar_t Message[1024] = {0};
-		va_start(ArgPtr, format);
-		vswprintf(Message, 1024, format, ArgPtr);
 		va_end(ArgPtr);
-		
-		printf(Message);
-		SoraWString wstrLog = L"LOG: ";
-		vMssg.push_back(ws2s(wstrLog+Message));
-	}
-	
-	void SoraInternalLogger::debugPrintf(const char* format, ...) {
-#ifdef _DEBUG
-		va_list	ArgPtr;
-		char Message[1024] = {0};
-		va_start(ArgPtr, format);
-		vsprintf(Message, format, ArgPtr);
-		va_end(ArgPtr);
-		
-		::printf("DEBUG: %s", Message);
+	#ifndef OS_PSP
+		::printf("%s", Message);
+	#else
+//		pspDebugScreenPrintf(Message);
+	#endif
 #endif
 	}
 	
-	void SoraInternalLogger::debugLogf(const char* format, ...) {
-#ifdef _DEBUG
-		va_list	ArgPtr;
-		char Message[1024] = {0};
-		va_start(ArgPtr, format);
-		vsprintf(Message, format, ArgPtr);
-		va_end(ArgPtr);
-		
-		debugPrintf(Message);
-		vMssg.push_back(SoraString("DEBUG: ")+Message);
-#endif
+	void SoraInternalLogger::log(const std::string& log, int32 logLevel) {
+		vMssg.push_back(LogMssg(log, logLevel));
+	}
+	
+	void SoraInternalLogger::log(const std::wstring& log, int32 logLevel) {
+		vMssg.push_back(LogMssg(ws2s(log), logLevel));
 	}
 	
 	void SoraInternalLogger::writeToFile(const char* fileName) {
 		std::ofstream file(fileName);
 		
 		if(file.is_open()) {
-			std::vector<SoraString>::iterator itLog = vMssg.begin();
+			std::vector<LogMssg>::iterator itLog = vMssg.begin();
 			while(itLog != vMssg.end()) {
-				file<<*itLog<<std::endl;
+				switch(itLog->mLogLevel) {
+					case LOG_LEVEL_NORMAL: file<<"[normal]";  break;
+					case LOG_LEVEL_ERROR: file<<"[error]";  break;
+					case LOG_LEVEL_NOTICE: file<<"[notice]";  break;
+					case LOG_LEVEL_WARNING: file<<"[warning]";  break;
+				}
+				file<<itLog->mLog<<std::endl;
 				++itLog;
 			}
 		}
@@ -124,25 +104,12 @@ namespace sora {
 		file.close();
 	}
 	
-	/*
-	 set the interval that the log writes to SoraLog.txt
-	 default 1.f
-	 */
-	void SoraInternalLogger::setLogInternval(float32 interval) { 
-		logInterval = interval;
+	
+	size_t SoraInternalLogger::logSize() const {
+		return vMssg.size();
 	}
 	
-	void SoraInternalLogger::onLogTimerEvent(const SoraTimerEvent* tev) {
-		if(!logFile.is_open())
-			return;
-				
-		for(uint32 i=currLogIndex; i<vMssg.size(); ++i) {
-			logFile<<vMssg[i]<<std::endl;
-		}
-		currLogIndex = vMssg.size();
-	}
-	
-	const std::vector<SoraString>& SoraInternalLogger::get() const { 
+	const std::vector<SoraInternalLogger::LogMssg>& SoraInternalLogger::get() const { 
 		return vMssg; 
 	}
 	

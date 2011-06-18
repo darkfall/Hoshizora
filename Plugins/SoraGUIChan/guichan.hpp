@@ -12,6 +12,8 @@
  * Per Larsson a.k.a finalman
  * Olof Naessén a.k.a jansem/yakslem
  *
+ * Modifier Robert Bu @ darkfall@gameastercn.com
+ *
  * Visit: http://guichan.sourceforge.net
  *
  * License: (BSD)
@@ -91,6 +93,13 @@
 #include <guichan/widgets/textbox.hpp>
 #include <guichan/widgets/textfield.hpp>
 #include <guichan/widgets/window.hpp>
+
+/*
+ * extended by Robert Bu
+ */
+#include <guichan/Modifier.h>
+#include <guichan/Sound.h>
+#include <guichan/SoundLoader.h>
 
 #include "guichan/platform.hpp"
 

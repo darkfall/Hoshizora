@@ -17,17 +17,24 @@ namespace sora {
 		virtual ~SoraEvent() {};
         
     public:
-        SoraEvent(): pEventSource(NULL) {}
+        SoraEvent(): pEventSource(NULL), bConsumed(false) {}
 
         void setSource(SoraEventHandler* source) { pEventSource = source; }
         SoraEventHandler* getSource() const { return pEventSource; }
-		// base event not serializable
-		virtual bool serializable() { return false; }
 		
 		void setName(stringId _name) { name = _name; }
 		stringId getName() const { return name; }
+		
+		// consume a event
+		void consume() { bConsumed = true; }
+		bool isConsumed() const { return bConsumed; }
+		
+		// base event not serializable
+		virtual bool serializable() { return false; }
         
     private:
+		bool bConsumed;
+		
 		stringId name;
         SoraEventHandler* pEventSource;
 	};
@@ -35,10 +42,10 @@ namespace sora {
 	class SoraHandlerFunctionBase {
 	public:
 		virtual ~SoraHandlerFunctionBase() {};
-		void exec(const SoraEvent* event) { call(event);}
+		void exec(SoraEvent* event) { call(event);}
 
 	private:
-		virtual void call(const SoraEvent*) = 0;
+		virtual void call(SoraEvent*) = 0;
 	};
 
 	template <class T, class EventT>
@@ -47,7 +54,7 @@ namespace sora {
 		typedef void (T::*MemberFunc)(EventT*);
 		SoraMemberFunctionHandler(T* instance, MemberFunc memFn) : _instance(instance), _function(memFn) {};
 
-		void call(const SoraEvent* event) {
+		void call(SoraEvent* event) {
 			(_instance->*_function)(static_cast<EventT*>(event));
 		}
 
@@ -59,7 +66,7 @@ namespace sora {
 	class SoraEventHandler {
 	public:
 		~SoraEventHandler();
-		void handleEvent(const SoraEvent*);
+		void handleEvent(SoraEvent*);
 
 		template <class T, class EventT>
 		void registerEventFunc(T*, void (T::*memFn)(EventT*));

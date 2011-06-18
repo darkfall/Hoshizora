@@ -96,6 +96,7 @@ namespace sora {
 		float32	getKerningHeight();
 
 		float32	getStringWidth(const wchar_t* text);
+		float32 getStringHeight(const wchar_t* pwstr);
 		float32	getHeight();
 
 		// ×ÖÌå´óĞ¡

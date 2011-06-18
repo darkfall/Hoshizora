@@ -69,10 +69,10 @@ namespace gcn
     std::list<Widget*> Widget::mWidgets;
 
     Widget::Widget()
-            : mForegroundColor(0x000000),
-              mBackgroundColor(0xffffff),
-              mBaseColor(0x808090),
-              mSelectionColor(0xc3d9ff),
+            : mForegroundColor(mGlobalForegroundColor),
+              mBackgroundColor(mGlobalBackgroundColor),
+              mBaseColor(mGlobalBaseColor),
+              mSelectionColor(mGlobalSelectionColor),
               mFocusHandler(NULL),
               mInternalFocusHandler(NULL),
               mParent(NULL),
@@ -96,6 +96,14 @@ namespace gcn
             Event event(this);
             (*iter)->death(event);
         }
+		
+		ModifierIterator itModifier = mModifiers.begin();
+		while(itModifier != mModifiers.end()) {
+			delete (*itModifier);
+			(*itModifier) = NULL;
+			
+			++itModifier;
+		}
 
         _setFocusHandler(NULL);
 
@@ -732,4 +740,71 @@ namespace gcn
             mParent->showWidgetPart(this, rectangle);
         }                
     }
+	
+	void Widget::logic() {
+		ModifierIterator iter;
+		
+		for (iter = mModifiers.begin(); iter != mModifiers.end(); ++iter) {
+			(*iter)->update(this);
+		}
+	}
+	
+	const std::list<Modifier*> Widget::_getModifiers() {
+		return mModifiers;
+	}
+	
+	void Widget::addModifier(Modifier* modifier) {
+		mModifiers.push_back(modifier);
+	}
+	
+	void Widget::removeModifier(Modifier* modifier) {
+		mModifiers.remove(modifier);
+	}
+	
+	void Widget::setAlpha(int alpha) {
+		if(alpha < 0) alpha = 0; 
+		else if(alpha > 255) alpha = 255;
+		
+		mForegroundColor.a = alpha;
+		mBaseColor.a = alpha;
+		mSelectionColor.a = alpha;
+		mBackgroundColor.a = alpha;
+	}
+
+	Color Widget::mGlobalBackgroundColor(0xffffff);
+	Color Widget::mGlobalForegroundColor(0x000000);
+	Color Widget::mGlobalBaseColor(0x808090);
+	Color Widget::mGlobalSelectionColor(0xc3d9ff);
+
+	void Widget::setGlobalBackgroundColor(const Color& col) {
+		mGlobalBackgroundColor = col;
+	}
+	
+	void Widget::setGlobalForegroundColor(const Color& col) {
+		mGlobalForegroundColor = col;
+	}
+	
+	void Widget::setGlobalBaseColor(const Color& col) {
+		mGlobalBaseColor = col;
+	}
+	
+	void Widget::setGlobalSelectionColor(const Color& col) {
+		mGlobalSelectionColor = col;
+	}
+	
+	Color Widget::getGlobalBackgroundColor() {
+		return mGlobalBackgroundColor;
+	}
+	
+	Color Widget::getGlobalForegroundColor() {
+		return mGlobalForegroundColor;
+	}
+	
+	Color Widget::getGlobalBaseColor() {
+		return mGlobalBaseColor;
+	}
+	
+	Color Widget::getGlobalSelectionColor() {
+		return mGlobalSelectionColor;
+	}
 }

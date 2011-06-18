@@ -14,12 +14,6 @@
 
 namespace rftd {
 	
-	typedef struct {
-		std::string name;
-		
-		std::vector<float32> param_list;
-	} BulletEffectorConf;
-	
 	
 } // namespace rftd
 

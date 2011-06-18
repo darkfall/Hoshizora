@@ -21,6 +21,7 @@
 #include "rftdEnemyConf.h"
 #include "rftdTextureConf.h"
 #include "rftdMapConf.h"
+#include "rftdBulletConf.h"
 
 #include "SoraEnvValues.h"
 #include "SoraCore.h"
@@ -61,6 +62,15 @@ namespace rftd {
 					if(colorConfArray.isArray()) {
 						for(size_t i=0; i<colorConfArray.size(); ++i) {
 							ObjColorLoader::Instance()->readObjColorConf(sora::s2ws(colorConfArray[i].asString()));
+						}
+					}
+				}
+				
+				if(root.isMember("bullet_conf_path")) {
+					Json::Value bulletConfArray = root["bullet_conf_path"];
+					if(bulletConfArray.isArray()) {
+						for(size_t i=0; i<bulletConfArray.size(); ++i) {
+							BulletConfLoader::Instance()->readBulletConf(sora::s2ws(bulletConfArray[i].asString()));
 						}
 					}
 				}
@@ -115,6 +125,16 @@ namespace rftd {
 		sora::SET_ENV_INT("rftd_map_gridsize", 8);
 	}
 	
+	
+	static void rftdShutdown() {
+		MapPackLoader::Destroy();
+		EnemyConfLoader::Destroy();
+		TowerConfLoader::Destroy();
+		BulletConfLoader::Destroy();
+		ObjColorLoader::Destroy();
+		
+		TextureConfLoader::Destroy();
+	}
 	
 } // namespace rftd
 

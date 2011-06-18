@@ -44,6 +44,10 @@ namespace rftd {
 		sora::SoraSprite* mSourceSprite;
 		sora::SoraSprite* mLightPathSprite;
 		
+		float32 mHealthTextX, mHealthTextY;
+		int32 mHealthTextAlign;
+		bool mShowHealthText;
+		
 		typedef std::vector<hgeVector> LIGHT_ROUTE;
 		typedef std::list<LIGHT_ROUTE > LIGHT_ROUTE_CONT;
 		

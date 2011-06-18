@@ -11,11 +11,14 @@
 #define RFTD_STEER_H_
 
 #include "SoraPlatform.h"
+#include "SoraSpriteAnimation/SoraSpriteAnimation.h"
 
 namespace rftd {
 	
 	class rftdSteerBehaviour {
 	public:
+		rftdSteerBehaviour(): pAnimSpr(NULL) {}
+		
 		void start() {
 			bFinished = false;
 			toNext();
@@ -57,7 +60,6 @@ namespace rftd {
 			
 			posx += speedX * dt;
 			posy += speedY * dt;
-			
 		}
 		
 		void toNext() {
@@ -79,6 +81,19 @@ namespace rftd {
 			speedX = speed * cosf(direction);
 			speedY = speed * sinf(direction);
 			
+			if(pAnimSpr != NULL) {
+				if(speedY < 0.f)
+					pAnimSpr->playEx("moveup", true, false);
+				else if(speedY < 0.f)
+					pAnimSpr->playEx("movedown", true, false);
+				else if(speedX > 0.f)
+					pAnimSpr->playEx("moveright", true, false);
+				else if(speedX < 0.f)
+					pAnimSpr->playEx("moveleft", true, false);
+				else
+					pAnimSpr->playEx("stand", true, false);
+			}
+			
 			route.erase(route.begin());
 		}
 		
@@ -91,6 +106,14 @@ namespace rftd {
 		
 		bool isFinished() {
 			return bFinished;
+		}
+		
+		void setAnimationSprite(sora::SoraSpriteAnimation* pAnim) {
+			pAnimSpr = pAnim;
+		}
+		
+		sora::SoraSpriteAnimation* getAnimationSprite() const {
+			return pAnimSpr;
 		}
 		
 	private:
@@ -110,6 +133,8 @@ namespace rftd {
 		
 		typedef std::vector<POINT> ROUTE_VEC;
 		ROUTE_VEC route;
+		
+		sora::SoraSpriteAnimation* pAnimSpr;
 	};
 	
 }

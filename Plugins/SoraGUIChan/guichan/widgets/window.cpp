@@ -59,7 +59,11 @@ namespace gcn
     {
         setFrameSize(1);
         setPadding(2);
-        setTitleBarHeight(16);
+		if(!mGlobalFont)
+			setTitleBarHeight(16);
+		else
+			setTitleBarHeight(mGlobalFont->getHeight()*1.5);
+		
         setAlignment(Graphics::CENTER);
         addMouseListener(this);
         setMovable(true);
@@ -72,7 +76,10 @@ namespace gcn
         setCaption(caption);
         setFrameSize(1);
         setPadding(2);
-        setTitleBarHeight(16);
+        if(!mGlobalFont)
+			setTitleBarHeight(16);
+		else
+			setTitleBarHeight(mGlobalFont->getHeight()*1.5);
         setAlignment(Graphics::CENTER);
         addMouseListener(this);
         setMovable(true);

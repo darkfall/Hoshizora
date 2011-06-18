@@ -122,6 +122,7 @@ namespace mead {
 					tkNextToken = lexer->getNextToken();
 				}
 				
+				sora::SORA->freeResourceFile(data);
 				delete lexer;
 			}
 		}

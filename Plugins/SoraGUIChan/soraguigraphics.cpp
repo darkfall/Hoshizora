@@ -188,10 +188,10 @@ namespace gcn
         x2 += top.xOffset;
         y2 += top.yOffset;
 
-        sora->renderRect(x1, y1, x2, y1, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x2, y1, x2, y2, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x2, y2, x1, y2, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x1, y2, x1, y1, 1.f, mHardwareColor, GUI_Z);
+        sora->renderRect(x1, y1, x2, y1+1.f, 1.f, mHardwareColor, GUI_Z);
+        sora->renderRect(x2, y1, x2+1.f, y2, 1.f, mHardwareColor, GUI_Z);
+        sora->renderRect(x2, y2, x1, y2+1.f, 1.f, mHardwareColor, GUI_Z);
+        sora->renderRect(x1, y2, x1+1.f, y1, 1.f, mHardwareColor, GUI_Z);
     }
 
     void SoraGUIGraphics::fillRectangle(const Rectangle &rectangle) {

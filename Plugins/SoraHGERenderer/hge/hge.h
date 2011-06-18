@@ -172,6 +172,7 @@ enum hgeIntState
 enum hgeStringState
 {
 	HGE_ICON			= 26,   // char*	icon resource		(default: NULL)
+	HGE_CURSOR			= 33,
 	HGE_TITLE			= 27,   // char*	window title		(default: "HGE")
 	
 	HGE_INIFILE			= 28,   // char*	ini file			(default: NULL) (meaning no file)
@@ -210,6 +211,11 @@ typedef bool (*hgeCallback)();
 #define HGEPRIM_LINES		2
 #define HGEPRIM_TRIPLES		3
 #define HGEPRIM_QUADS		4
+/*
+** Extended by Griffin Bu
+*/
+#define HGEPRIM_TRIPLES_FAN 5
+#define HGEPRIM_TRIPLES_STRIP 6
 
 
 /*
@@ -399,7 +405,9 @@ public:
 	virtual void				_UpdateMouse() = 0;
 	virtual void				_InputInit() = 0;
 	virtual void				_ClearQueue() = 0;
-
+	
+	virtual void				_Resize(int width, int height) = 0;
+	virtual void				_AdjustWindow() = 0;
 	IDirect3DDevice9*		pD3DDevice;
 
 };

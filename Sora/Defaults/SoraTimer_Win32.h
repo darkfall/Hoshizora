@@ -1,8 +1,8 @@
 #ifndef SORA_TIMER_WIN32
 #define SORA_TIMER_WIN32
 
-#include "SoraTimer.h"
-#include "SoraPlatform.h"
+#include "../SoraTimer.h"
+#include "../SoraPlatform.h"
 
 namespace sora {
 	class SoraWin32Timer;
@@ -28,7 +28,13 @@ namespace sora {
 		int32 getFrameCount() { return nFrameCounter; }
 		void setTimeScale(float32 ts) { fTimeScale = ts; }
 		float32 getTimeScale() { return fTimeScale; }
-		s_int64 getCurrentSystemTime() { return GetCurrentSystemTime(); }
+		uint64 getCurrentSystemTime() { 
+			LONGLONG  TimePrecision;
+			LARGE_INTEGER Frequency;
+		    QueryPerformanceFrequency(&Frequency);
+			TimePrecision =  Frequency.QuadPart;
+			return GetCurrentSystemTime() / TimePrecision * 1000; 
+		}
 
 		
 		bool update() { 

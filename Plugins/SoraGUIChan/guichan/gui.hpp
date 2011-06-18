@@ -58,6 +58,7 @@ namespace gcn
     class Graphics;
     class Input;
     class KeyListener;
+	class SoundLoader;
     class Widget;
 
     // The following comment will appear in the doxygen main page.
@@ -131,7 +132,16 @@ namespace gcn
          * @since 0.1.0
          */
         virtual void setGraphics(Graphics* graphics);
-
+		
+		/**
+         * sets the sond loader being used for loading sound.
+         *
+         * @param The sound loader used for loading sound.
+         * @see getSoundLoader
+         * @since 0.9.0
+         */
+		virtual void setSoundLoader(SoundLoader* soundLoader);
+		
         /**
          * Gets the graphics object used for drawing.
          *
@@ -163,6 +173,16 @@ namespace gcn
          * @since 0.1.0
          */
         virtual Input* getInput() const;
+		
+		/**
+         * Gets the sond loader being used for loading sound.
+         *
+         *  @return The sound loader used for loading sound. NULL if no
+         *          input object has been set.
+         * @see setSoundLoader
+         * @since 0.9.0
+         */
+		virtual SoundLoader* getSoundLoader() const;
 
         /**
          * Performs logic of the GUI. By calling this function all logic
@@ -412,6 +432,11 @@ namespace gcn
          * Holds the focus handler for the Gui.
          */
         FocusHandler* mFocusHandler;
+		
+		/**
+		 * Holds the sound loader implementation used
+		 */
+		SoundLoader* mSoundLoader;
 
         /**
          * True if tabbing is enabled, false otherwise.

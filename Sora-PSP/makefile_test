@@ -1,0 +1,17 @@
+TARGET = sora_first
+OBJS = main1.o SoraPSPGLRenderTarget.o SoraPSPGLRenderer.o
+
+INCDIR = ./ ../sora ../plugins/SoraFreetypeFont
+CFLAGS = -O2 -G0 -Wall -lstdc++ -DPSPFW3XX
+CXXFLAGS = $(CFLAGS)
+ASFLAGS = $(CFLAGS)
+
+LIBS = -lm -lc -lstdc++ ./lib/libGL.a ./lib/libGLU.a ./lib/libglut.a ./lib/soil.a ./lib/soracore.a 
+LIBDIR = 
+LDFLAGS =
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = Basic controller sample
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak

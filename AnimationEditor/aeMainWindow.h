@@ -10,7 +10,7 @@
 #ifndef ANIMATION_EDITOR_H_
 #define ANIMATION_EDITOR_H_
 
-#include "HoshiNoSora.h"
+#include "Hoshizora.h"
 #include "SoraGUIChan/guichansetup.h"
 
 #include "editorWindow.h"

@@ -12,8 +12,6 @@
 #include "vlc/vlc.h"
 #include "libvlc/SoraVlcMoviePlayer.h"
 
-#include "mplayerx/wrapper.h"
-
 #include "SoraGUIChan/SoraGUIResponser.h"
 #include "SoraGUIChan/guichansetup.h"
 

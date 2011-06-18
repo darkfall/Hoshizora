@@ -50,4 +50,5 @@ inline float	 operator^ (const hgeVector &v, const hgeVector &u) { return v.Angl
 inline float	 operator% (const hgeVector &v, const hgeVector &u) { return v.Dot(&u); }
 
 
+
 #endif

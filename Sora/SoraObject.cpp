@@ -4,7 +4,7 @@
 
 namespace sora {
 
-	SoraObject::SoraObject(): type(0), parent(0), nameHash(0) {
+	SoraObject::SoraObject(): type(0), parent(0), nameHash(0), posx(0.f), posy(0.f) {
 	}
 
 	SoraObject::~SoraObject(){

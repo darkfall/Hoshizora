@@ -9,8 +9,6 @@
 
 namespace sora {
 
-	using namespace audiere;
-
 	class SoraAudiereMusicFile: public SoraMusicFile {
 	public:
 		SoraAudiereMusicFile(bool stream=true);
@@ -50,16 +48,17 @@ namespace sora {
 
 	private:
 		inline void _parseName(const SoraWString& path);
+		void* data;
 
 		bool bIsStream;
 		int pausePos;
 
-		OutputStreamPtr sound;	
+		audiere::OutputStreamPtr sound;	
 	};
 
 	class SoraAudiereSoundEffectFile: public SoraSoundEffectFile {
 	public:
-		SoraAudiereSoundEffectFile(int type = MULTIPLE) { iSoundEffectType = type; }
+		SoraAudiereSoundEffectFile(int type = audiere::MULTIPLE) { iSoundEffectType = type; }
 		~SoraAudiereSoundEffectFile();
 
 		int32 readFile(const SoraWString& sFilePath);
@@ -92,8 +91,9 @@ namespace sora {
 
 	private:
         inline void _parseName(const SoraWString& path);
+		void* data;
 
-		SoundEffectPtr se;	
+		audiere::SoundEffectPtr se;	
 
 		int iSoundEffectType;
 	};

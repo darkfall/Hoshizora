@@ -6,5 +6,6 @@
 #include "soraguifont.hpp"
 #include "soraguiimageloader.hpp"
 #include "soraguiinput.hpp"
+#include "SoraGUISoundLoader.h"
 
 #endif // end GCN_HGE_HPP

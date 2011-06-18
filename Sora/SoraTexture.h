@@ -6,7 +6,7 @@
 namespace sora {
 
 	struct SoraTextureDataRef {
-		ulong32* texData;
+		uint32* texData;
 		
 		SoraTextureDataRef(): texData(0) {}
 	};

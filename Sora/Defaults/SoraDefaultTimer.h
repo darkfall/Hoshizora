@@ -10,7 +10,7 @@
 #ifndef SORA_OSX_TIMER_H
 #define SORA_OSX_TIMER_H
 
-#include "SoraTimer.h"
+#include "../SoraTimer.h"
 
 #include <sys/timeb.h>
 
@@ -33,10 +33,10 @@ namespace sora {
 		float32 getTime() {  return fTime; }
 		void setTimeScale(float32 ts) { fTimeScale = ts; }
 		float32 getTimeScale() { return fTimeScale; }
-		s_int64 getCurrentSystemTime() {
+		uint64 getCurrentSystemTime() {
 			timeb t;
 			ftime(&t);
-			return (s_int64)(t.time + t.millitm);
+			return (uint64)(t.time*1000 + t.millitm);
 		}
 		
 		bool update() {

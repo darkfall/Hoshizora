@@ -156,7 +156,6 @@ int alphaMix(unsigned long* data1, unsigned long* data2, int width, int height, 
 					*pout++ = (unsigned char)sa;
 				}
 			} else {
-				unsigned char *c1 = (unsigned char *)&data1[x + y * width]; 
 				*pout++ = (unsigned char)*pczdata1++;    
 				*pout++ = (unsigned char)*pczdata1++;    
 				*pout++ = (unsigned char)*pczdata1++;    

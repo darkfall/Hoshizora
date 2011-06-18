@@ -16,7 +16,7 @@
 #ifdef OS_IOS
 
 // for [Texture2D initWithString]
-#include "SoraOGLESRenderer/Apple/Texture2D.h"
+#include "SoraiOSGLRenderer/Apple/Texture2D.h"
 #include "stringId.h"
 
 namespace sora {
@@ -67,6 +67,8 @@ namespace sora {
 		// get font dimensions
 		float32	getStringWidth(const wchar_t* text);
 		float32	getHeight();
+		
+		float32 getStringHeight(const wchar_t* text);
 		
 		// get font size
 		uint32	getFontSize();

@@ -264,7 +264,7 @@ namespace mead {
 		mScriptObject.callFuncVoid("onImmuneEnter");
 	}
 
-	void meadPlayer::onKeyEvent(const sora::SoraKeyEvent* kev) {
+	void meadPlayer::onKeyEvent(sora::SoraKeyEvent* kev) {
 		CUSTOM_KEY_MAP::iterator itKey = mCustomKeys.begin();
 		while(itKey != mCustomKeys.end()) {
 			if(kev->key == itKey->first) {

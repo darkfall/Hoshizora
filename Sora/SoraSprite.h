@@ -8,6 +8,7 @@
 #include "SoraImageEffect.h"
 #include "SoraObject.h"
 #include "SoraShader.h"
+
 #include <list>
 
 namespace sora {
@@ -29,8 +30,10 @@ namespace sora {
 	struct SoraVertex {
 		float			x, y;		// screen position    
 		float			z;			// Z-buffer depth 0..1
-		ulong32			col;		// color
+		uint32			col;		// color
 		float			tx, ty;		// texture coordinates
+		
+		SoraVertex(): z(0.0f), col(0xFFFFFFFF) {}
 	};
 	
 	struct SoraQuad {
@@ -51,17 +54,18 @@ namespace sora {
         SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 width, float32 height);
 		virtual ~SoraSprite();
 
-        void render();
-        void render(float32 x, float32 y);
-        void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
+        virtual void render();
+        virtual void render(float32 x, float32 y);
+        virtual void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
+		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
 
 		void setTexture(HSORATEXTURE tex);
 		
 		void setTextureRect(float32 x, float32 y, float32 width, float32 height);
-		const hgeRect& getTextureRect() const;
+		hgeRect getTextureRect() const;
 		
-		void setColor(ulong32 c, int32 i=-1);
-		ulong32 getColor(int32 i=0) const;
+		void setColor(uint32 c, int32 i=-1);
+		uint32 getColor(int32 i=0) const;
 
 		void setZ(float32 z, int32 i=-1);
 		float32 getZ(int32 i=0) const;
@@ -78,8 +82,8 @@ namespace sora {
 		void setBlendMode(int32 mode);
 		int32  getBlendMode() const;
 
-		int32 getTextureWidth(bool bOriginal=false) const;
-		int32 getTextureHeight(bool bOriginal=false) const;
+		int32 getTextureWidth(bool bOriginal=true) const;
+		int32 getTextureHeight(bool bOriginal=true) const;
 		int32 getSpriteWidth() const;
 		int32 getSpriteHeight() const;
 		int32 getSpritePosX() const;
@@ -94,7 +98,7 @@ namespace sora {
 		void setRotationZ(float32 rz);
 		float32 getRotationZ() const;
 
-		ulong32* getPixelData() const;
+		uint32* getPixelData() const;
         void unlockPixelData();
 		HSORATEXTURE getTexture() const;
 		
@@ -109,12 +113,12 @@ namespace sora {
         SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);
         bool hasShader() const;
         void clearShader();
-        
+		
 	protected:
        
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
         
-		SoraSprite() { texture=0; _initDefaults(); }
+		SoraSprite() { shaderContext = NULL; texture=0; _initDefaults(); }
 		SoraSprite(SoraSprite&) { }
 
 		void _initDefaults();

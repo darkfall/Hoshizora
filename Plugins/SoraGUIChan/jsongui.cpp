@@ -15,6 +15,8 @@
 
 #include "Debug/SoraInternalLogger.h"
 
+#include "Modifiers/LabelSliderLinker.h"
+
 #include "SoraCore.h"
 
 namespace sora {
@@ -40,7 +42,8 @@ namespace sora {
             parseWidget(rootValue, NULL);
             return true;
         }
-		INT_LOG_HANDLE->logf("%s", reader.getFormatedErrorMessages().c_str());
+		DebugPtr->log(reader.getFormatedErrorMessages(),
+					  LOG_LEVEL_ERROR);
         return false;
     }
     
@@ -196,18 +199,22 @@ namespace sora {
         if(val.isMember("eventId"))
             widget->setActionEventId(val["eventId"].asString());
         
-        if(val.isMember("id")) {
+		if(val.isMember("name")) {
+            widget->setId(val["name"].asString());
+		}
+		if(val.isMember("id")) {
             widget->setId(val["id"].asString());
-            if(val.isMember("responser")) {
-                SoraString arg = val["responser"].asString();
-                SoraString type = val["responsetype"].asString();
-                parseResponser(widget, arg, type.size()==0?NULL:&type);
-            }
-        }
+		}
+        
+		if(val.isMember("responser")) {
+			SoraString arg = val["responser"].asString();
+			SoraString type = val["responsetype"].asString();
+			parseResponser(widget, arg, type.size()==0?NULL:&type);
+		}
         
         if(val.isMember("parent")) {
             if(widget->getParent() == NULL)
-                GCN_GLOBAL->addWidget(widget, val["parent"].asString());
+                GCN_GLOBAL->addWidget(widget, val["parent"].asString().c_str());
         }
     }
     
@@ -347,6 +354,21 @@ namespace sora {
         if(name.size() != 0)
 			widgets[str2id(name)] = slider;
     }
+	
+	void JsonGui::parseLabelModifier(const Json::Value& modifier, gcn::Label* label) {
+		if(modifier.isMember("name")) {
+			std::string name = modifier["name"].asString();
+			if(strcmpnocase("SliderLinker", name.c_str()) == 0) {
+				if(modifier.isMember("object")) { 
+					std::string obj = modifier["object"].asString();
+					gcn::Slider* slider = dynamic_cast<gcn::Slider*> (getWidget(obj));
+					if(slider) {
+						label->addModifier(new gcn::LabelSliderLinker(slider, label->getCaption()));
+					}
+				}
+			}
+		}
+	}
     
     void JsonGui::parseLabel(const Json::Value& val, gcn::Widget* parent) {
         std::string name;
@@ -358,6 +380,16 @@ namespace sora {
         if(val.isMember("caption")) {
             label->setCaption(val["caption"].asString());
         }
+		
+		Json::Value modifiers = val["modifiers"];
+		if(modifiers.isArray()) {
+			for(int i=0; i<modifiers.size(); ++i) {
+				Json::Value modifier = modifiers[i];
+				if(modifier.isObject()) {
+					parseLabelModifier(modifier, label);
+				}
+			}
+		}
         
         label->adjustSize();
         if(val.isMember("align")) {
@@ -636,91 +668,91 @@ namespace sora {
     
 	
 	Json::Value& JsonGuiWritter::writeWidget(Json::Value& inValue, gcn::Widget* widget) {
-		gcn::Button* pb = dynamic_cast<Button*> (widget);
+		gcn::Button* pb = dynamic_cast<gcn::Button*> (widget);
 		if(pb) {
 			JValue jv;
 			writeButton(jv, pb);
 			writeDefault(jv, widget);
 			inValue["button"] = jv;
 		}
-		gcn::Container* pc = dynamic_cast<Container*> (widget);
+		gcn::Container* pc = dynamic_cast<gcn::Container*> (widget);
 		if(pc) {
 			JValue jv;
 			writeContainer(jv, pc);
 			writeDefault(jv, widget);
 			inValue["container"] = jv;
 		}
-		gcn::Window* pw = dynamic_cast<Window*> (widget);
+		gcn::Window* pw = dynamic_cast<gcn::Window*> (widget);
 		if(pw) {
 			JValue jv;
 			writeWindow(jv, pw);
 			writeDefault(jv, widget);
 			inValue["window"] = jv;
 		}
-		gcn::Slider* ps = dynamic_cast<Slider*> (widget);
+		gcn::Slider* ps = dynamic_cast<gcn::Slider*> (widget);
 		if(ps) {
 			JValue jv;
 			writeSlider(jv, ps);
 			writeDefault(jv, widget);
 			inValue["slider"] = jv;
 		}
-		gcn::Label* pl = dynamic_cast<Label*> (widget);
+		gcn::Label* pl = dynamic_cast<gcn::Label*> (widget);
 		if(pl) {
 			JValue jv;
 			writeLabel(jv, pl);
 			writeDefault(jv, widget);
 			inValue["label"] = jv;
 		}
-		gcn::Icon* pi = dynamic_cast<Icon*> (widget);
+		gcn::Icon* pi = dynamic_cast<gcn::Icon*> (widget);
 		if(pi) {
 			JValue jv;
 			writeIcon(jv, pi);
 			writeDefault(jv, widget);
 			inValue["icon"] = jv;
 		}
-		gcn::CheckBox* pcb = dynamic_cast<CheckBox*> (widget);
+		gcn::CheckBox* pcb = dynamic_cast<gcn::CheckBox*> (widget);
 		if(pcb) {
 			JValue jv;
 			writeCheckBox(jv, pcb);
 			writeDefault(jv, widget);
 			inValue["checkbox"] = jv;
 		}
-		gcn::TextBox* ptb = dynamic_cast<TextBox*> (widget);
+		gcn::TextBox* ptb = dynamic_cast<gcn::TextBox*> (widget);
 		if(ptb) {
 			JValue jv;
 			writeTextBox(jv, ptb);
 			writeDefault(jv, widget);
 			inValue["textbox"] = jv;
 		}
-		gcn::TextField* ptf = dynamic_cast<TextField*> (widget);
+		gcn::TextField* ptf = dynamic_cast<gcn::TextField*> (widget);
 		if(ptf) {
 			JValue jv;
 			writeContainer(jv, pc);
 			writeDefault(jv, widget);
 			inValue["textfield"] = jv;
 		}
-		gcn::RadioButton* prb = dynamic_cast<RadioButton*> (widget);
+		gcn::RadioButton* prb = dynamic_cast<gcn::RadioButton*> (widget);
 		if(prb) {
 			JValue jv;
 			writeRadioButton(jv, prb);
 			writeDefault(jv, widget);
 			inValue["radiobutton"] = jv;
 		}
-		gcn::ImageButton* pib = dynamic_cast<ImageButton*> (widget);
+		gcn::ImageButton* pib = dynamic_cast<gcn::ImageButton*> (widget);
 		if(pib) {
 			JValue jv;
 			writeImageButton(jv, pib);
 			writeDefault(jv, widget);
 			inValue["imagebutton"] = jv;
 		}
-		gcn::DropDown* pdd = dynamic_cast<DropDown*> (widget);
+		gcn::DropDown* pdd = dynamic_cast<gcn::DropDown*> (widget);
 		if(pdd) {
 			JValue jv;
 			writeDropDown(jv, pdd);
 			writeDefault(jv, widget);
 			inValue["dropdown"] = jv;
 		}
-		gcn::ListBox* plb = dynamic_cast<ListBox*> (widget);
+		gcn::ListBox* plb = dynamic_cast<gcn::ListBox*> (widget);
 		if(plb) {
 			JValue jv;
 			writeListBox(jv, plb);

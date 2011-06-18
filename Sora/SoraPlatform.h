@@ -7,13 +7,9 @@
  *
  */
 
+
 #ifndef _SORA_PLATFORM_H_
 #define _SORA_PLATFORM_H_
-
-#ifdef WIN32
-#pragma warning(disable: 4530)
-#pragma warning(disable: 4786)
-#endif
 
 /*
  gcc std extension
@@ -21,12 +17,12 @@
  then there is tr1 support
  visual studio 2008 sp1 or above also has tr1 support
  to do with vs version check
- khash also available as an external kash option
+ khash also available as an external hash option
  */
 
 
 #ifdef __GNUC__
-	#if __GNUC__ >= 4
+	#if __GNUC__ >= 4 
 		#include <tr1/unordered_map>
 namespace sora {
 	
@@ -45,6 +41,7 @@ namespace sora {
 #endif
 
 #ifdef WIN32
+
 namespace sora {
 
 using std::hash_map;
@@ -91,46 +88,60 @@ static inline int lrint (double const x) { // Round to nearest integer
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+
+#ifndef _PSP
 #include <memory.h>
+#else
+#include <malloc.h>
+#include <memory>
+#endif
 
-#define PLATFORM_32
-
-#ifdef PLATFORM_32
-
-typedef	    int				int32;
-typedef		unsigned int	uint32;
-typedef		signed short	int16;
-typedef		unsigned short	uint16;
-typedef		signed char		int8;
-typedef		unsigned char	uint8;
-
-typedef		float			float32;
-typedef		double			double32;
+#include "SoraConfig.h"
 
 typedef		long			long32;
 typedef		unsigned long	ulong32;
 
-typedef unsigned long       DWORD, ULONG;
+typedef		float			float32;
+
+typedef unsigned long       ULONG, ulong;
 typedef unsigned short      WORD;
 typedef unsigned char       BYTE;
 typedef unsigned int		UINT;
+/*
+#if defined(WIN32)
+typedef unsigned long long int uint64;
+typedef long long int          int64;
+#elif (__WORDSIZE == 32)
+__extension__
+typedef long long int          int64;
+__extension__
+typedef unsigned long long int uint64;
+#elif (__WORDSIZE == 64)
+typedef uint64_t uint64;
+typedef int64_t  int64;
+#endif
+*/
 
-
-#endif // PLATFORM_32
+#include <stdint.h>
 
 namespace sora {
 	typedef ulong32 HSORASPRITE;
 	typedef ulong32 HSORATEXTURE;
 	typedef ulong32 HGUIWIDGET;
     typedef ulong32 HSORATARGET;
+	
+	enum {
+		SORA_LINE				= 0x0001,
+		SORA_TRIANGLES			= 0x0002,
+		SORA_TRIANGLES_FAN		= 0x0003,
+		SORA_TRIANGLES_STRIP	= 0x0004,
+		SORA_QUAD				= 0x0005,
+	};
 } // namespace sora
 
-
-#include <string>
-typedef std::string SoraString;
-typedef std::wstring SoraWString;
 
 #include <cassert>
 
@@ -140,19 +151,19 @@ typedef std::wstring SoraWString;
 #endif
 
 // we are building a dll
-#if defined(WIN32) && defined(SORA_DLL_EXPORT)
+#if defined(_WIN32) && defined(SORA_DLL_EXPORT)
 #define SORAEXPORT __declspec(dllexport)
 #else
 #define SORAEXPORT
 #endif
 
-#if defined(WIN32) && defined(SORA_STD_CALL)
+#if defined(SORA_STD_CALL)
 #define SORACALL __stdcall
 #else
 #define SORACALL
 #endif
 
-#if defined(WIN32)
+#if defined(_WIN32)
 #define strcmpnocase stricmp
 #else
 #define strcmpnocase strcasecmp
@@ -162,41 +173,60 @@ typedef std::wstring SoraWString;
 	#define FONT_PATH L"/System/Library/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
-	#define USE_GLFW_KEYMAP
-
 	#define OS_OSX
 
 #elif defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
 	#define FONT_PATH L"/System/Library/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
-	#define USE_GLFW_KEYMAP
-
 	#define OS_IOS
 
 #elif defined(__ANDROID__)
 	#define FONT_PATH L"./"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
-	#define USE_GLFW_KEYMAP
 
 	#define OS_ANDROID
 
-#elif defined(WIN32) || defined(_MSC_VER)
+#elif defined(_WIN32) || defined(_MSC_VER)
 	#define FONT_PATH L"C:/Windows/Fonts/"
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
-
-	#define USE_HGE_KEYMAP
 
 	#define OS_WIN32
 
 #elif defined(linux) || defined(__linux)
     // linux defines are just experimental, i'm not sure it's right or not
-    #define USE_GLFW_KEYMAP
     #define FONT_PATH L"/usr/share/fonts/truetype"
     #define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
     #define OS_LINUX
 
+#elif defined(_PSP)
+
+	#define FONT_PATH L"./fonts"
+	#define DEFAULT_RESOURCE_SEARCH_PATH L"."
+		
+	#define OS_PSP
+
+  //  #define uint64 uint32
+  //  #define int64 int32
+
+#endif
+
+#ifndef OS_PSP
+#include <string>
+typedef std::string SoraString;
+typedef std::wstring SoraWString;
+
+#define HAS_WSTRING
+
+#else
+#include <string>
+typedef std::string SoraString;
+namespace std {
+	typedef std::basic_string<wchar_t> wstring;
+	typedef basic_ostringstream<wchar_t> wostringstream;
+}
+typedef std::wstring SoraWString;
 #endif
 
 
@@ -258,29 +288,6 @@ static void msleep(uint32_t msec) {
 
 #endif
 
-#include <stdint.h>
-
-#define BIT_32_64_EXTEND
-
-#if defined(OS_OSX) || defined(OS_IOS) || defined(OS_LINUX)
-#undef BIT_32_64_EXTEND
-#endif
-
-#ifdef OS_WIN32
-#define s_int64 __int64
-#else
-#define s_int64 uint64_t
-#endif
-
-#ifdef BIT_32_64_EXTEND
-// 64bit extend
-typedef		long long		long64;
-typedef		unsigned long long ulong64;
-#else
-typedef     long long64;
-typedef     unsigned long ulong64;
-#endif
-
 typedef enum {
 	OS_TYPE_WIN32 = 1,
 	OS_TYPE_OSX	  = 2,
@@ -293,6 +300,12 @@ typedef enum {
 #ifndef _DEBUG
 #define _DEBUG
 #endif
+
+/*
+flag for shaders in render system
+disable this to get rid of shader
+*/
+#define USE_SHADER
 
 #endif // _SORA_PLATFORM_H_
 

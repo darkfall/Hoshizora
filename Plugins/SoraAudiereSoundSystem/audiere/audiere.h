@@ -108,6 +108,7 @@ namespace audiere {
     }
 
     ~RefPtr() {
+		
       if (m_ptr) {
         m_ptr->unref();
         m_ptr = 0;

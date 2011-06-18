@@ -17,7 +17,7 @@
 
 namespace sora {
 	
-	typedef ulong64 stringId;
+	typedef uint64 stringId;
 
 	class SoraStringManager: public SoraSingleton<SoraStringManager> {
 		friend class SoraSingleton<SoraStringManager>;

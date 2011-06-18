@@ -49,13 +49,13 @@ namespace sora {
 		SoraTexture* createTextureWH(int w, int h);
 		SoraTexture* createTextureFromMem(void* ptr, ulong32 size, bool bMipmap=false);
 		SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h);
-		ulong32*	 textureLock(SoraTexture*);
+		uint32*		 textureLock(SoraTexture*);
 		void		 textureUnlock(SoraTexture*);
 		void		 releaseTexture(SoraTexture* tex);
 
-		void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, DWORD color=0xFFFFFFFF, float32 z=0.5f);
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
+		void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 size, int32 mode);
 
 		void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
@@ -74,8 +74,13 @@ namespace sora {
         void snapshot(const SoraString& path);
 
 		void flush();
+
+		void setIcon(const SoraString& icon);
+		void setCursor(const SoraString& cursor);
 		
 	private:
+		inline int32 _modeToDXMode(int32 mode);
+
 		HGE* pHGE;
 
 		SoraTimer* pTimer;

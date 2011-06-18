@@ -27,10 +27,10 @@ static int keyUpDataGuard = 0;
 bool vlcWindow::updateFunc() {
     if(keyUpDataGuard % 30 == 0 || keyUpDataGuard == 0) {
         if(sora::SORA->keyDown(SORA_KEY_LEFT)) {
-            moviePlayer->setTime(moviePlayer->getTime()-100);
+            moviePlayer->setTime(moviePlayer->getTime()-1000);
         }
         if(sora::SORA->keyDown(SORA_KEY_RIGHT)) {
-            moviePlayer->setTime(moviePlayer->getTime()+100);
+            moviePlayer->setTime(moviePlayer->getTime()+1000);
         }
         if(sora::SORA->keyDown(SORA_KEY_Q)) {
             moviePlayer->setPlayRate(2.f);
@@ -119,7 +119,7 @@ bool vlcWindow::renderFunc() {
 
     if(moviePlayer->isPlaying()) {
         if(moviePlayer->frameChanged()) {
-			ulong32* data = pSpr->getPixelData();
+			uint32* data = pSpr->getPixelData();
 			if(data) {
 				void* movieData = moviePlayer->getPixelData();
 				if(movieData) {
@@ -187,10 +187,10 @@ void vlcWindow::init() {
     
     moviePlayer = new sora::SoraVlcMoviePlayer();
 
-    if(moviePlayer->openMedia(L"./AMV_Scenario.mp4")) {
+    if(moviePlayer->openMedia(L"./1.mpg")) {
 		pSpr = new sora::SoraSprite(sora::SORA->createTextureWH(moviePlayer->getWidth(), moviePlayer->getHeight()));
 		moviePlayer->play();
-	} else pSpr = NULL;
+	};
         
     sora::SORA->setWindowTitle(L"AMV_Scenerio.mp4");
     sora::SORA->setFPS(999);

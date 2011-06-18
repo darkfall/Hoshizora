@@ -19,15 +19,15 @@ namespace sora {
 			SoraTexture* tex = in->getTexture();
 			
 			SoraTexture* outtex = (SoraTexture*)SoraCore::Instance()->createTextureWH(tex->mTextureWidth, tex->mTextureHeight);
-			ulong32* outputData = (ulong32*)malloc(tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
-			ulong32* data = in->getPixelData();
-			memcpy(outputData, data, tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
+			uint32* outputData = (uint32*)malloc(tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
+			uint32* data = in->getPixelData();
+			memcpy(outputData, data, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			in->unlockPixelData();
 			if(!::gaussBlur(outputData, (int32)tex->mTextureWidth, (int32)tex->mTextureHeight, sigma, radius))
 				throw SORA_EXCEPTION("failed gauss blur sprite");
 			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((HSORATEXTURE)outtex);
-			ulong32* odata = out->getPixelData(false);
-			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
+			uint32* odata = out->getPixelData(false);
+			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			free(outputData);
 			out->unlockPixelData();
 			if(!out)
@@ -37,7 +37,7 @@ namespace sora {
 		}
 
 		static void gaussBlur(SoraSprite* in, double sigma, int radius) {
-			ulong32* data = in->getPixelData(false);
+			uint32* data = in->getPixelData(false);
 			if(!::gaussBlur(data, (int32)in->getTextureWidth(), (int32)in->getTextureHeight(), sigma, radius))
 				throw SORA_EXCEPTION("failed gauss blur sprite");
 			in->unlockPixelData();
@@ -47,15 +47,15 @@ namespace sora {
 			SoraTexture* tex = in->getTexture();
 			
 			SoraTexture* outtex = (SoraTexture*)SoraCore::Instance()->createTextureWH(tex->mTextureWidth, tex->mTextureHeight);
-			ulong32* outputData = (ulong32*)malloc(tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
-			ulong32* data = in->getPixelData();
-			memcpy(outputData, data, tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
+			uint32* outputData = (uint32*)malloc(tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
+			uint32* data = in->getPixelData();
+			memcpy(outputData, data, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			in->unlockPixelData();
 			if(!::gray(outputData, (int32)tex->mTextureWidth, (int32)tex->mTextureHeight))
 				throw SORA_EXCEPTION("failed gray sprite");
 			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((HSORATEXTURE)outtex);
-			ulong32* odata = out->getPixelData(false);
-			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
+			uint32* odata = out->getPixelData(false);
+			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			free(outputData);
 			out->unlockPixelData();
 			if(!out)
@@ -65,7 +65,7 @@ namespace sora {
 		}
 
 		static void gray(SoraSprite* in) {
-			ulong32* data = in->getPixelData(false);
+			uint32* data = in->getPixelData(false);
 			if(!::gray(data, (int32)in->getTextureWidth(), (int32)in->getTextureHeight()))
 				throw SORA_EXCEPTION("failed gray sprite");
 			in->unlockPixelData();
@@ -75,15 +75,15 @@ namespace sora {
 			SoraTexture* tex = in->getTexture();
 			
 			SoraTexture* outtex = (SoraTexture*)SoraCore::Instance()->createTextureWH(tex->mTextureWidth, tex->mTextureHeight);
-			ulong32* outputData = (ulong32*)malloc(tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
-			ulong32* data = in->getPixelData();
-			memcpy(outputData, data, tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
+			uint32* outputData = (uint32*)malloc(tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
+			uint32* data = in->getPixelData();
+			memcpy(outputData, data, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			in->unlockPixelData();
 			if(!::reverse(outputData, (int32)tex->mTextureWidth, (int32)tex->mTextureHeight))
 				throw SORA_EXCEPTION("failed reverse sprite");
 			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((HSORATEXTURE)outtex);
-			ulong32* odata = out->getPixelData(false);
-			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
+			uint32* odata = out->getPixelData(false);
+			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			free(outputData);
 			out->unlockPixelData();
 			if(!out)
@@ -93,7 +93,7 @@ namespace sora {
 		}
 
 		static void reverse(SoraSprite* in) {
-			ulong32* data = in->getPixelData(false);
+			uint32* data = in->getPixelData(false);
 			if(!::reverse(data, (int32)in->getTextureWidth(), (int32)in->getTextureHeight()))
 				throw SORA_EXCEPTION("failed reverse sprite");
 			in->unlockPixelData();
@@ -103,16 +103,16 @@ namespace sora {
 			SoraTexture* tex = in->getTexture();
 			
 			SoraTexture* outtex = (SoraTexture*)SoraCore::Instance()->createTextureWH(tex->mTextureWidth, tex->mTextureHeight);
-			ulong32* outputData = (ulong32*)malloc(tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
-			ulong32* data = in->getPixelData();
-			memcpy(outputData, data, tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
+			uint32* outputData = (uint32*)malloc(tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
+			uint32* data = in->getPixelData();
+			memcpy(outputData, data, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			in->unlockPixelData();
 			if(!::alphaMix(outputData, src->getPixelData(), (int32)tex->mTextureWidth, (int32)tex->mTextureHeight, 
 															(int32)src->getTextureWidth(), (int32)src->getTextureHeight(), a, posx, posy))
 				throw SORA_EXCEPTION("failed alphaMix sprite");
 			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((HSORATEXTURE)outtex);
-			ulong32* odata = out->getPixelData(false);
-			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(ulong32));
+			uint32* odata = out->getPixelData(false);
+			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			free(outputData);
 			out->unlockPixelData();
 			src->unlockPixelData();
@@ -123,8 +123,8 @@ namespace sora {
 		}
 
 		static void alphaMix(SoraSprite* in, SoraSprite* src, double a, int posx=0, int posy=0) {
-			ulong32* data1 = in->getPixelData(false);
-			ulong32* data2 = src->getPixelData();
+			uint32* data1 = in->getPixelData(false);
+			uint32* data2 = src->getPixelData();
 			if(!::alphaMix(data1, data2, (int32)in->getTextureWidth(), (int32)in->getTextureHeight(), 
 										 (int32)src->getTextureWidth(), (int32)src->getTextureHeight(),
 										  a, posx, posy))

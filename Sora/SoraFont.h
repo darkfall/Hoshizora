@@ -37,6 +37,7 @@ namespace sora {
 
 		// get font dimensions
 		virtual float32	getStringWidth(const wchar_t* text) = 0;
+		virtual float32 getStringHeight(const wchar_t* text) = 0;
 		virtual float32	getHeight() = 0;
 
 		// get font size

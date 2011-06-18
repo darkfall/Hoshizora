@@ -2,6 +2,8 @@
 #include "SoraCore.h"
 #include "Debug/SoraInternalLogger.h"
 
+#ifdef USE_SHADER
+
 namespace sora {
 
 	SoraCGGLShaderContext::SoraCGGLShaderContext() {
@@ -50,9 +52,11 @@ namespace sora {
 		CGerror error;
 		const char* str = cgGetLastErrorString(&error);
 		if(error != CG_NO_ERROR) {
-			INT_LOG::debugPrintf("SoraShader: %s\n", str);
+			DebugPtr->log(vamssg("SoraShader: %s\n", str),
+					   LOG_LEVEL_ERROR);
 			if(error == CG_COMPILER_ERROR) {
-				INT_LOG::debugPrintf("SoraShaderContext: %s", cgGetLastListing(context));
+				DebugPtr->log(vamssg("SoraShaderContext: %s", cgGetLastListing(context)),
+							  LOG_LEVEL_ERROR);
 			}			
 			setType(0);
 		}
@@ -167,3 +171,5 @@ namespace sora {
     }
 
 } // namespace sora
+
+#endif // USE_SHADER
