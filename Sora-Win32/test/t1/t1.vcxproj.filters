@@ -1320,6 +1320,9 @@
     <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.h">
       <Filter>Plugins\SpriteAnimation</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\helpers\SoraMenuBar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -1993,6 +1996,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.cpp">
       <Filter>Plugins\SpriteAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\helpers\SoraMenuBar.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

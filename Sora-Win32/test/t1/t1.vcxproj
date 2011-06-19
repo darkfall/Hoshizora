@@ -381,6 +381,7 @@
     <ClInclude Include="..\..\..\Sora\graphicEffects.h" />
     <ClInclude Include="..\..\..\Sora\hash.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraInputSimulator.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraMenuBar.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraZSorter.h" />
     <ClInclude Include="..\..\..\Sora\hgerect.h" />
     <ClInclude Include="..\..\..\Sora\hgevector.h" />
@@ -661,6 +662,7 @@
     <ClCompile Include="..\..\..\Sora\Defaults\orz.c" />
     <ClCompile Include="..\..\..\Sora\graphicEffects.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraInputSimulator.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraMenuBar.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraZSorter.cpp" />
     <ClCompile Include="..\..\..\Sora\hgerect.cpp" />
     <ClCompile Include="..\..\..\Sora\hgevector.cpp" />

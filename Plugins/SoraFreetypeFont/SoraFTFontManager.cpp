@@ -49,6 +49,7 @@ namespace sora {
 	
 	bool SoraFTFontManager::fontExists(const char* filename) {
 		SFTFace f;
+		f.fileName = filename;
 		int index = find(Faces, f);
 		if(index != -1) {
 			return true;

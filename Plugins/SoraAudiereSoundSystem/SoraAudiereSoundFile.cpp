@@ -43,7 +43,10 @@ namespace sora {
 				if(ptr) {
 					int32 result = readFileMem(ptr, size);
 			//		SORA->freeResourceFile(ptr);
-					data = ptr;
+					if(result != SORASOUND_SUCCESS)
+						SORA->freeResourceFile(data);
+					else
+						data = ptr;
 					return result;
 				}
 			//}

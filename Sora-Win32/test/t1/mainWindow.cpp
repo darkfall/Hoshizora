@@ -58,9 +58,9 @@ bool mainWindow::renderFunc() {
 		sora::SORA->renderBox(0, 0, 100, 100, 0xFFFFFFFF);
 	pbc->finishRender();
 
-	sora::SORA->beginScene(0, tg);
+//	sora::SORA->beginScene(0, tg);
 	
-	sora::SORA->endScene();
+//	sora::SORA->endScene();
 
 	sora->beginScene(0);
 	sora::GCN_GLOBAL->gcnLogic();
@@ -74,11 +74,8 @@ bool mainWindow::renderFunc() {
 	ps->update(sora::SORA->getDelta());
 	ps->render();
 	pbc->render();
-	if(!ms->isPlaying()){
-		delete ms;
-		ms = sora::SORA->createMusicFile(L"fight.mp3", true);
-		ms->play();
-	}
+	
+	sora::SORA->createFont(L"cour.ttf", 16);
 
 	sora::SORA->endZBufferSort();
 //	pSpr->render();
@@ -111,10 +108,10 @@ void mainWindow::init() {
 	luaObject.doScript(L"mybullettest.lua");
 	*/
 	
-	tg = sora::SORA->createTarget(800, 600);
+	//tg = sora::SORA->createTarget(800, 600);
 	
-		ms = sora::SORA->createMusicFile(L"fight.mp3", true);
-		ms->play();
+	//	ms = sora::SORA->createMusicFile(L"fight.mp3", true);
+	//	ms->play();
 		
 	float32 px = 400.f, py = 300.f;
 	for(int i=0; i<6; ++i) {

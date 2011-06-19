@@ -41,7 +41,7 @@ namespace sora {
 			if(x >= mPosX && x <= mPosX+mWidth) {
 				if(y >= mParent->getMenuBarHeight() && y <= mParent->getMenuBarHeight()*(mItems.size()+1)) {
 					y -= mParent->getMenuBarHeight();
-					mCurrentItem = y / mItemHeight;
+					mCurrentItem = static_cast<int32>(y / mItemHeight);
 					
 					mItems[mCurrentItem].onClick();
 					mActive = false;

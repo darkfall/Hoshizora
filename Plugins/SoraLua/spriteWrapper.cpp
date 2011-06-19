@@ -316,8 +316,9 @@ namespace spritewrapper {
 	ulong32 attachShader(HSORASPRITE h, const SoraWString& shader, const SoraString& entry, int32 type) {
 		SoraSprite* p = (SoraSprite*)h;
 		if(p) {
-			p->attachShader(shader, entry, (sora::SORA_SHADER_TYPE)type);
+			return (ulong32)p->attachShader(shader, entry, (sora::SORA_SHADER_TYPE)type);
 		}
+		return 0;
 	}
 	
 	void setShaderParam1f(ulong32 shader, const char* name, float32 param) {
