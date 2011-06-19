@@ -21,12 +21,10 @@
 #include "Debug/SoraAutoProfile.h"
 #include "Debug/SoraDebugRenderer.h"
 
-#include "cmd/SoraConsole.h"
-#include "cmd/CoreCmds.h"
-
-#include "helpers/SoraZSorter.h"
 #include "helpers/SoraInputSimulator.h"
+#include "helpers/SoraZSorter.h"
 
+#include "cmd/CoreCmds.h"
 
 #include "MemoryUsage.h"
 #include "Rect4V.h"
@@ -219,6 +217,9 @@ namespace sora {
 			if(!bPauseRender) {
 				DEBUG_RENDERER->render();
 				SoraConsole::Instance()->render();
+				
+				SoraMenuBar::Instance()->update();
+				SoraMenuBar::Instance()->render();
 				
 				if(bMainScene) {
 					bMainScene = false;
@@ -950,14 +951,21 @@ namespace sora {
 		}
 
 #ifndef OS_IOS
+		SoraString fontName = ws2s(font);
+		
 		SoraFont* f;
-        if(SoraFileUtility::fileExists(font)) {
-            f = pFontManager->getFont(ws2s(font).c_str(), size);
+		if(pFontManager->fontExists(fontName.c_str())) {
+			f = pFontManager->getFont(fontName.c_str(), size, 0, 0);
+			return f;
+		}
+		
+      /*  if(SoraFileUtility::fileExists(font)) {
+            f = pFontManager->getFont(fontName.c_str(), size);
 
 			if(SoraConsole::Instance()->getFont() == NULL)
 				SoraConsole::Instance()->setFont(f);
             return f;
-        }
+        }*/
 		ulong32 s;
 		void* p = getResourceFile(font, s);
 		if(p) {
@@ -965,6 +973,8 @@ namespace sora {
 			//freeResourceFile(p);
 			if(SoraConsole::Instance()->getFont() == NULL)
 				SoraConsole::Instance()->setFont(f);
+			if(SoraMenuBar::Instance()->getFont() == NULL)
+				SoraMenuBar::Instance()->setFont(f);
 			return f;
 		}
 #else
@@ -977,6 +987,15 @@ namespace sora {
 		return 0;
 	}
 
+	void SoraCore::releaseFont(SoraFont* font) {
+		if(!pFontManager) {
+			_postError("FontManager not available");
+			return;
+		}
+		
+		pFontManager->releaseFont(font);
+	}
+	
 	void SoraCore::enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
 		pResourceFileFinder->enumFiles(cont, folder);
 	}
@@ -1038,13 +1057,14 @@ namespace sora {
 		bMessageBoxErrorPost = bFlag;
 	}
 	
-	SoraConsole* SoraCore::getConsole() {
+	SoraConsole* SoraCore::getConsole() const {
 		return SoraConsole::Instance();
 	}
 	
 	void SoraCore::setSystemFont(const wchar_t* font, int32 fontSize) {
 		SoraFont* ff = createFont(font, fontSize);
 		SoraConsole::Instance()->setFont(ff);
+		SoraMenuBar::Instance()->setFont(ff);
 	}
 	
 	void SoraCore::beginZBufferSort() {
@@ -1069,6 +1089,14 @@ namespace sora {
 	
 	bool SoraCore::isPaused() {
 		return bPaused;
+	}
+	
+	SoraMenuBar* SoraCore::getMenuBar() const {
+		return SoraMenuBar::Instance();
+	}
+	
+	void SoraCore::enableMenuBar(bool flag) {
+		SoraMenuBar::Instance()->setEnabled(flag);
 	}
 
 	void SoraCore::setIcon(const SoraString& icon) {

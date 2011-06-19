@@ -32,7 +32,7 @@ namespace sora {
 		// base event not serializable
 		virtual bool serializable() { return false; }
         
-    private:
+    protected:
 		bool bConsumed;
 		
 		stringId name;

@@ -24,6 +24,8 @@ namespace sora {
 		bool loaded;
 		FT_Library	library;
 		FT_Face		face;
+		
+		void* fontDataBuffer;
 
 		bool load(const char* filename, uint32 size=0);
 	};
@@ -65,8 +67,6 @@ namespace sora {
 		friend class SoraFTFontManager;
 
 	public:
-		~SoraFTFont();
-
 		/**
 		 * Render
 		 *
@@ -101,6 +101,7 @@ namespace sora {
 
 		// 字体大小
 		uint32	getFontSize();
+		void	setFontSize(uint32 size);
 	
 		// 获取字符宽度
 		float32	getWidthFromCharacter(wchar_t c, bool original = false);
@@ -112,10 +113,11 @@ namespace sora {
 		
 	private:
 		SoraFTFont();
+		~SoraFTFont();
 
 		SoraCore* sora;
 		SoraSprite* sprite;
-		
+				
 		float32 kerningWidth;
 		float32 kerningHeight;
 

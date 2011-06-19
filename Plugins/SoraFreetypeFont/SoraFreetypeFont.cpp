@@ -5,6 +5,8 @@ namespace sora {
 	FTFace::~FTFace() {
 		if(loaded) {
 			FT_Done_Face(face);
+			if(fontDataBuffer)
+				sora::SORA->freeResourceFile(fontDataBuffer);
 		}
 	}
 
@@ -14,11 +16,13 @@ namespace sora {
 				throw SORA_EXCEPTION("Error creating new face");
 				return false;
 			}
+			fontDataBuffer = NULL;
 		} else {
 			if(FT_New_Memory_Face(library, (FT_Bytes)name, size, 0, &face)) {
 				throw SORA_EXCEPTION("Error creating new face");
 				return false;
 			}
+			fontDataBuffer = (void*)name;
 		}
 
 		loaded = true;
@@ -103,6 +107,8 @@ namespace sora {
 						texp += imgw;
 					}
                     
+					if(tex != 0)
+						SORA->releaseTexture(tex);
 					tex = createTexture(texd, imgw, imgh);
                     free(texd);
 					cached = true;
@@ -134,6 +140,7 @@ namespace sora {
 
 	SoraFTFont::~SoraFTFont() {
 		attached = false;
+		
 		delete sprite;
 		sprite = 0;
 	}
@@ -167,7 +174,10 @@ namespace sora {
 	uint32 SoraFTFont::getGlyphByChar(wchar_t c) {
 		unsigned int idx = FT_Get_Char_Index(ft_face->face, c);
 
-		if(idx && !ft_glyphs[idx-1].cached)	ft_glyphs[idx-1].cache(idx);
+		if((idx && !ft_glyphs[idx-1].cached) || ft_glyphs[idx-1].size != size) {
+			ft_glyphs[idx-1].size = size;
+			ft_glyphs[idx-1].cache(idx);
+		}
 		return idx;
 	}
 
@@ -361,6 +371,10 @@ namespace sora {
 
 	uint32 SoraFTFont::getFontSize() {
 		return size;
+	}
+	
+	void SoraFTFont::setFontSize(uint32 s) {
+		size = s;
 	}
 	
 	void SoraFTFont::setCharRotation(float32 rot) {

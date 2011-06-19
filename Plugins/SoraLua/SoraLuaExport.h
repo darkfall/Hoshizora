@@ -133,6 +133,18 @@ namespace sora {
                 .def("getPosY", &spritewrapper::getPosY)
 				.def("release", &spritewrapper::release)
 				.def("setAlpha", &spritewrapper::setAlpha)
+			
+			.def("getTexture", &spritewrapper::getTexture)
+			.def("attachShader", &spritewrapper::attachShader)
+			.def("setShaderParam1f", &spritewrapper::setShaderParam1f)
+			.def("setShaderParam2f", &spritewrapper::setShaderParam2f)
+			.def("setShaderParam3f", &spritewrapper::setShaderParam3f)
+			.def("setShaderParam4f", &spritewrapper::setShaderParam4f)
+			.def("setShaderParam1i", &spritewrapper::setShaderParam1i)
+			.def("setShaderParam2i", &spritewrapper::setShaderParam2i)
+			.def("setShaderParam3i", &spritewrapper::setShaderParam3i)
+			.def("setShaderParam4i", &spritewrapper::setShaderParam4i)
+			.def("setShaderTextureParam", &spritewrapper::setShaderTextureParam)
             
 				.def("makeEffectFade", &imageeffectwrapper::makeEffect_fade)
 				.def("makeEffectTransition", &imageeffectwrapper::makeEffect_transitions)
@@ -323,6 +335,9 @@ namespace sora {
 			global.SetInteger("IMAGE_EFFECT_ONCE", IMAGE_EFFECT_ONCE);
 			global.SetInteger("IMAGE_EFFECT_PINGPONG", IMAGE_EFFECT_PINGPONG);
 			global.SetInteger("IMAGE_EFFECT_REPEAT", IMAGE_EFFECT_REPEAT);
+			
+			global.SetInteger("FRAGMENT_SHADER", FRAGMENT_SHADER);
+			global.SetInteger("VERTEX_SHADER", VERTEX_SHADER);
 			
 			global.SetInteger("FONT_ALIGNMENT_LEFT", FONT_ALIGNMENT_LEFT);
 			global.SetInteger("FONT_ALIGNMENT_RIGHT", FONT_ALIGNMENT_RIGHT);

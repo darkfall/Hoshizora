@@ -65,6 +65,9 @@ bool mainWindow::updateFunc() {
 		sora->shutDown();
 	if(sora->keyDown(SORA_KEY_DOWN)) {
 		++posy;
+		
+	//	sora::SORA->releaseFont(pFont);
+		pFont->setFontSize(pFont->getFontSize()+1);
 	}
 	
 	if(sora->keyDown(SORA_KEY_LEFT))
@@ -138,7 +141,10 @@ void mainWindow::init() {
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
 	
-	pFont = sora::SORA->createFont(L"Bank Gothic Medium BT.ttf", 16);
+	sora::SORA->enableMenuBar(true);
+	sora::SORA->getMenuBar()->setShowAlways(true);
+	
+	pFont = sora::SORA->createFont(L"cour.ttf", 16);
 	pFont->setColor(0xFFFFCC00);
 	
 	pCanvas = new sora::SoraBaseCanvas(800, 600);

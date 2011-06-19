@@ -45,6 +45,7 @@ namespace gcn
         //hgeFont *mHGEFont;
 		sora::SoraCore* sora;
 		sora::SoraFont *mSoraFont;
+		
     };
 }
 

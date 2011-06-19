@@ -31,8 +31,8 @@ namespace sora {
 				__Z_BUFFER_NODE* ttnext = tnext;
 				tnext = ttnext->next;
 				
+				delete [](ttnext->vertex);
 				delete ttnext;
-				ttnext = NULL;
 			}
 			next = NULL;
 		}

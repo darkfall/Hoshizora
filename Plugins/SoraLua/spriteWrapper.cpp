@@ -287,7 +287,15 @@ namespace spritewrapper {
         else
             throw SORA_EXCEPTION("Invalid sprite arg");
     }
-    
+	
+	ulong32 getTexture(HSORASPRITE h) {
+		SoraSprite* p = (SoraSprite*)(h);
+        if(p) {
+			return p->getTexture();
+		}
+		return 0;
+	}
+	
     void release(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)h;
         if(p) {
@@ -304,6 +312,102 @@ namespace spritewrapper {
 			p->setColor(col.GetHWColor());
 		}
 	}
+	
+	ulong32 attachShader(HSORASPRITE h, const SoraWString& shader, const SoraString& entry, int32 type) {
+		SoraSprite* p = (SoraSprite*)h;
+		if(p) {
+			p->attachShader(shader, entry, (sora::SORA_SHADER_TYPE)type);
+		}
+	}
+	
+	void setShaderParam1f(ulong32 shader, const char* name, float32 param) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			ps->setParameterfv(name, &param, 1);
+		}
+	}
+	
+	void setShaderParam2f(ulong32 shader, const char* name, float32 p1, float32 p2) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			float32 val[2];
+			val[0] = p1;
+			val[1] = p2;
+			ps->setParameterfv(name, val, 2);
+		}
+	}
+	
+	void setShaderParam3f(ulong32 shader, const char* name, float32 p1, float32 p2, float32 p3) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			float32 val[3];
+			val[0] = p1;
+			val[1] = p2;
+			val[2] = p3;
+			ps->setParameterfv(name, val, 3);
+		}
+	}
+	
+	void setShaderParam4f(ulong32 shader, const char* name, float32 p1, float32 p2, float32 p3, float32 p4) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			float32 val[4];
+			val[0] = p1;
+			val[1] = p2;
+			val[2] = p3;
+			val[3] = p4;
+			ps->setParameterfv(name, val, 4);
+		}
+	}
+	
+	void setShaderParam1i(ulong32 shader, const char* name, int32 param) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			ps->setParameteriv(name, &param, 1);
+		}
+	}
+	
+	void setShaderParam2i(ulong32 shader, const char* name, int32 p1, int32 p2) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			int32 val[2];
+			val[0] = p1;
+			val[1] = p2;
+			ps->setParameteriv(name, val, 2);
+		}
+		
+	}
+	
+	void setShaderParam3i(ulong32 shader, const char* name, int32 p1, int32 p2, int32 p3) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			int32 val[3];
+			val[0] = p1;
+			val[1] = p2;
+			val[2] = p3;
+			ps->setParameteriv(name, val, 3);
+		}
+	}
+	
+	void setShaderParam4i(ulong32 shader, const char* name, int32 p1, int32 p2, int32 p3, int32 p4) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			int32 val[4];
+			val[0] = p1;
+			val[1] = p2;
+			val[2] = p3;
+			val[3] = p4;
+			ps->setParameteriv(name, val, 4);
+		}
+	}
+	
+	void setShaderTextureParam(ulong32 shader, const char* name, ulong32 tex) {
+		SoraShader* ps = (SoraShader*)shader;
+		if(ps) {
+			ps->setTexture(name, tex);
+		}
+	}
+	
 } // namespace spritewrapper
 
 namespace imageeffectwrapper {

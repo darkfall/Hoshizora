@@ -325,10 +325,15 @@ namespace sora{
 
 	ulong32 SoraHGERenderer::getTargetTexture(ulong32 t) {
 		HTEXTURE tex = pHGE->Target_GetTexture(t);
+		TARGET_TEX_MAP::iterator itTex = mTargetTextures.find(tex);
+		if(itTex != mTargetTextures.end())
+			return itTex->second;
+		
 		SoraTexture* ptex = new SoraTexture(tex, pHGE->Texture_GetWidth(tex),
 												pHGE->Texture_GetHeight(tex),
 												pHGE->Texture_GetWidth(tex, true),
 												pHGE->Texture_GetHeight(tex, true));
+		mTargetTextures[tex] = (ulong32)ptex;
 		return (ulong32)ptex;
 	}
 

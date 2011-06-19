@@ -13,6 +13,7 @@
 #include "../Debug/SoraInternalLogger.h"
 
 #include "../SoraCore.h"
+#include "../SoraLocalizer.h"
 
 namespace sora {
 
@@ -26,6 +27,8 @@ namespace sora {
 		sora::SoraConsole::Instance()->registerCmdHandler(this, "log");
 		sora::SoraConsole::Instance()->registerCmdHandler(this, "save");
 		sora::SoraConsole::Instance()->registerCmdHandler(this, "exit");
+		
+		sora::SoraConsole::Instance()->registerCmdHandler(this, "setlocale");
 		
 		sora = SoraCore::Instance();
 	}
@@ -142,8 +145,7 @@ namespace sora {
 				} else if(p1Prev.compare("memuse") == 0) {
 					cev->setResults(vamssg("Current memory use = %dkb", sora->getEngineMemoryUsage()));
 
-				}
-				else if(p1Prev.compare("int") == 0 && params.size() >= 2) {
+				} else if(p1Prev.compare("int") == 0 && params.size() >= 2) {
 					cev->setResults("EnvValue "+vamssg("%s = %d", params[1].c_str(), GET_ENV_INT(params[1].c_str(), 0)));
 					
 				} else if(p1Prev.compare("float") == 0 && params.size() >= 2) {
@@ -155,7 +157,6 @@ namespace sora {
 					
 				} else if(p1Prev.compare("string") == 0 && params.size() >= 2) {					
 					cev->setResults("EnvValue "+vamssg("%s = %s", params[1].c_str(), GET_ENV_STRING(params[1].c_str(), "???").c_str()));
-
 				}
 			}
 		}
@@ -178,6 +179,10 @@ namespace sora {
 					result += params[i] + ", ";
 				}
 				cev->setResults(result);
+			}
+		} else if(cev->getCmd().compare("setlocale") == 0) {
+			if(params.size() == 1) {
+				SoraLocalizer::Instance()->setCurrentLocale(params[0]);
 			}
 		}
 			

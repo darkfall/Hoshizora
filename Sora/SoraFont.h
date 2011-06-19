@@ -42,6 +42,7 @@ namespace sora {
 
 		// get font size
 		virtual uint32	getFontSize() = 0;
+		virtual void	setFontSize(uint32 size) = 0;
 
 		// get width of a char
 		virtual float32	getWidthFromCharacter(wchar_t c, bool original = false) = 0;

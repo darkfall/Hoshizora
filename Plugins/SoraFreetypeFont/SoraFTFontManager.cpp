@@ -27,6 +27,34 @@ namespace sora {
 		}
 		return -1;
 	}
+	
+	void SoraFTFontManager::releaseFont(SoraFont* font) {
+		for(int i=0; i<FTFonts.size(); ++i) {
+			if(FTFonts[i].Font == font) {
+				SFTFace f;
+				f.fileName = FTFonts[i].fileName;
+				int index = find(Faces, f);
+				
+				if(index != -1) {
+					delete Faces[i].face;
+					Faces.erase(Faces.begin()+index);
+				}
+				
+				delete FTFonts[i].Font;
+				FTFonts.erase(FTFonts.begin()+i);
+				break;
+			}
+		}
+	}
+	
+	bool SoraFTFontManager::fontExists(const char* filename) {
+		SFTFace f;
+		int index = find(Faces, f);
+		if(index != -1) {
+			return true;
+		}
+		return false;
+	}
 
 	SoraFont* SoraFTFontManager::getFont(const char* filename, uint32 size, uint32 bsize, const char* pr) {
 		if(!inited) return 0;
@@ -62,8 +90,13 @@ namespace sora {
 		tf.size = size;
 		index = find(FTFonts, tf);
 		if(index != -1) {
-			if(FTFonts[index].Font)
+			if(FTFonts[index].Font) {
+				/*if(FTFonts[index].size != size) {
+					FTFonts[index].size = size;
+					FTFonts[index].Font->setFontSize(size);
+				}*/
 				return FTFonts[index].Font;
+			}
 		}
 
 		// not existing yet. try to load font.

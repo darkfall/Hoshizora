@@ -80,7 +80,10 @@ namespace sora {
 		
 	private:
 		inline int32 _modeToDXMode(int32 mode);
-
+		
+		typedef std::map<HTEXTURE, HSORATEXTURE> TARGET_TEX_MAP;
+		TARGET_TEX_MAP mTargetTextures;
+		
 		HGE* pHGE;
 
 		SoraTimer* pTimer;

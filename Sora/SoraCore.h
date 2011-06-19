@@ -18,14 +18,15 @@
 #include "SoraShader.h"
 #include "SoraFrameListener.h"
 #include "SoraEnvValues.h"
+
 #include "Debug/SoraInternalLogger.h"
+#include "helpers/SoraMenuBar.h"
+
+#include "cmd/SoraConsole.h"
 
 #include <map>
 
 namespace sora {
-
-	class SoraConsole;
-	class SoraConsoleEvent;
 	
 	class SoraCore: public SoraSingleton<SoraCore>, public SoraEventHandler {
 	protected:
@@ -184,6 +185,7 @@ namespace sora {
 		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
 
 		SoraFont* SORACALL createFont(const SoraWString& fontName, int size);
+		void SORACALL releaseFont(SoraFont* font);
 		
 		SoraMusicFile* SORACALL			createMusicFile(const SoraWString& musicName, bool bStream=true);
 		SoraSoundEffectFile* SORACALL	createSoundEffectFile(const SoraWString& se);
@@ -216,9 +218,13 @@ namespace sora {
 		
 		uint64 getEngineMemoryUsage();
 		
-		SoraConsole* getConsole();
+		SoraConsole* getConsole() const;
+		
+		SoraMenuBar* getMenuBar() const;
+		void enableMenuBar(bool flag);
+		
 		void setSystemFont(const wchar_t* font, int32 fontSize);
-
+		
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
 		

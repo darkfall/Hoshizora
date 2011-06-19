@@ -103,6 +103,7 @@
 		886E10311368252E00A77847 /* gcnProgressBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E10301368252E00A77847 /* gcnProgressBar.cpp */; };
 		886E10C41368E67800A77847 /* SoraBGMManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E10C01368E67800A77847 /* SoraBGMManager.cpp */; };
 		886E10C51368E67800A77847 /* SoraSoundEffectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E10C21368E67800A77847 /* SoraSoundEffectManager.cpp */; };
+		887A4CCD13AE205F00ADB830 /* SoraMenuBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887A4CCC13AE205F00ADB830 /* SoraMenuBar.cpp */; };
 		887E24D61360BC3A00803DA6 /* gcnDraggableImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E24D51360BC3A00803DA6 /* gcnDraggableImageButton.cpp */; };
 		887E25581360C5F000803DA6 /* gcnDraggableImageButtonIncubator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E25571360C5F000803DA6 /* gcnDraggableImageButtonIncubator.cpp */; };
 		887E26531360F7E700803DA6 /* gcnSelectableContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E26521360F7E700803DA6 /* gcnSelectableContainer.cpp */; };
@@ -673,6 +674,8 @@
 		886E10C11368E67800A77847 /* SoraBGMManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraBGMManager.h; sourceTree = "<group>"; };
 		886E10C21368E67800A77847 /* SoraSoundEffectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSoundEffectManager.cpp; sourceTree = "<group>"; };
 		886E10C31368E67800A77847 /* SoraSoundEffectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSoundEffectManager.h; sourceTree = "<group>"; };
+		887A4CCB13AE205F00ADB830 /* SoraMenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMenuBar.h; sourceTree = "<group>"; };
+		887A4CCC13AE205F00ADB830 /* SoraMenuBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraMenuBar.cpp; sourceTree = "<group>"; };
 		887E24D41360BC3200803DA6 /* gcnDraggableImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnDraggableImageButton.h; sourceTree = "<group>"; };
 		887E24D51360BC3A00803DA6 /* gcnDraggableImageButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gcnDraggableImageButton.cpp; sourceTree = "<group>"; };
 		887E25561360C5F000803DA6 /* gcnDraggableImageButtonIncubator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gcnDraggableImageButtonIncubator.h; sourceTree = "<group>"; };
@@ -1925,6 +1928,8 @@
 				8884F65F13A1F8C200BEC5AB /* SoraMutableSprite.cpp */,
 				8884F79B13A2926D00BEC5AB /* SoraSpriteFont.h */,
 				8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */,
+				887A4CCB13AE205F00ADB830 /* SoraMenuBar.h */,
+				887A4CCC13AE205F00ADB830 /* SoraMenuBar.cpp */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -3130,6 +3135,7 @@
 				88B1BFE213A7A7BD00EC541D /* SoraPluginManager.cpp in Sources */,
 				88B1C01113A7AE8300EC541D /* SoraFileUtility.cpp in Sources */,
 				88B1C21713A9E49A00EC541D /* SoraLuaMainWindow.cpp in Sources */,
+				887A4CCD13AE205F00ADB830 /* SoraMenuBar.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

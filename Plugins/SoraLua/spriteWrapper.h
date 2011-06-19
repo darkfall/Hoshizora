@@ -48,7 +48,8 @@ namespace spritewrapper {
     float32 getHScale			(HSORASPRITE h);
     void setRotation			(HSORASPRITE h, float32 r);
     float32 getRotation			(HSORASPRITE h);
-    
+	HSORATEXTURE getTexture		(HSORASPRITE h);
+
     void addEffect  (HSORASPRITE h, ulong32 eff);
     void stopEffect (HSORASPRITE h, ulong32 eff);
     void clearEffects (HSORASPRITE h);
@@ -64,6 +65,21 @@ namespace spritewrapper {
     
     void setBlendMode		(HSORASPRITE h, int32 mode);
     int32 getBlendMode		(HSORASPRITE h);
+	
+	
+	ulong32 attachShader(HSORASPRITE h, const SoraWString& shader, const SoraString& entry, int32 type);
+	
+	void setShaderParam1f(ulong32 shader, const char* name, float32 param);
+	void setShaderParam2f(ulong32 shader, const char* name, float32 p1, float32 p2);
+	void setShaderParam3f(ulong32 shader, const char* name, float32 p1, float32 p2, float32 p3);
+	void setShaderParam4f(ulong32 shader, const char* name, float32 p1, float32 p2, float32 p3, float32 p4);
+	
+	void setShaderParam1i(ulong32 shader, const char* name, int32 param);
+	void setShaderParam2i(ulong32 shader, const char* name, int32 p1, int32 p2);
+	void setShaderParam3i(ulong32 shader, const char* name, int32 p1, int32 p2, int32 p3);
+	void setShaderParam4i(ulong32 shader, const char* name, int32 p1, int32 p2, int32 p3, int32 p4);
+	
+	void setShaderTextureParam(ulong32 shader, const char* name, ulong32 tex);
     
     void release (HSORASPRITE h);
 } // namespace spritewrapper

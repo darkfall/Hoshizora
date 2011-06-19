@@ -37,6 +37,9 @@ namespace sora {
 	class FTFace;
 	class SoraFTFont;
 	*/
+	
+	class SFTFont;
+	
 	struct SFTFace {
 		SoraString fileName;
 		FTFace* face;
@@ -76,6 +79,8 @@ namespace sora {
 		~SoraFTFontManager();
 
 		SoraFont* getFont(const char* filename, uint32 fontsize, uint32 bsize=0, const char* pr=0);
+		bool fontExists(const char* filename);
+		void releaseFont(SoraFont* font);
 
 	private:
 		template<typename T1, typename T2>
