@@ -38,46 +38,60 @@ namespace sora {
 		if(mActive) {
 			float32 x, y;
 			SORA->getMousePos(&x, &y);
+			mCurrentItem = -1;
+			
 			if(x >= mPosX && x <= mPosX+mWidth) {
-				if(y >= mParent->getMenuBarHeight() && y <= mParent->getMenuBarHeight()*(mItems.size()+1)) {
-					y -= mParent->getMenuBarHeight();
-					mCurrentItem = static_cast<int32>(y / mItemHeight);
-					
-					mItems[mCurrentItem].onClick();
-					mActive = false;
-					return true;
+				if(y >= mParent->getMenuBarHeight() && y <= mParent->getMenuBarHeight()*(mItems.size()+2)) {
+					//y -= mParent->getMenuBarHeight();
+					mCurrentItem = static_cast<int32>(y /  mParent->getMenuBarHeight()) - 1;
 				}
 				
 				if(SORA->keyDown(SORA_KEY_LBUTTON)) {
-					if(y >= 0.f && y <= mParent->getMenuBarHeight()) {
-						mActive = false;
+					if(mCurrentItem != -1) {
+						mItems[mCurrentItem].onClick();
+						mParent->diactiveMenus();
+					} else {
+						mParent->diactiveMenus();
 					}
 				}
 			}
 		}
-		return false;
+		return mActive;
+	}
+	
+	std::wstring SoraMenuBarMenu::getName() const {
+		return mBarName;
 	}
 	
 	void SoraMenuBarMenu::render() {
 		if(mFont) {
-			mFont->render(mPosX, 0.f, mBarName.c_str(), false, true);
+			float32 distHeight = (mParent->getMenuBarHeight()-mItemHeight)/2;
+			float32 posy = mParent->getMenuBarHeight();
+
+			SORA->renderBox(mPosX, 0.f, mPosX+mWidth, posy, mWidth, 0xFF000000);
+			
+			mFont->setColor(0xFF000000);
+			if(mActive) {
+				SORA->renderRect(mPosX, 0.f, mPosX+mWidth, posy, mWidth, 0x99FFFFFF);
+			}
+			mFont->render(mPosX+10.f, distHeight, mBarName.c_str(), false, true);
 			
 			if(mActive) {
-				float32 posy = mParent->getMenuBarHeight();
-				
-				SORA->renderRect(mPosX, 0.f, mPosX+mWidth, posy, 0x2020AAFF, mWidth);
-				SORA->renderRect(mPosX, posy, mPosX+mWidth, posy*mItems.size(), 0xAAAAAAFF, mWidth);
+				SORA->renderRect(mPosX, posy, mPosX+mWidth, posy*(mItems.size()+1), mWidth, 0x99FFFFFF);
 				
 				for(size_t i=0; i<mItems.size(); ++i) {
 					if(mItems[i].isAvailable())
-						mFont->setColor(0xFFFFFFFF);
+						mFont->setColor(0xFF000000);
 					else
-						mFont->setColor(0xDDDDDDDD);
-					mFont->render(mPosX, posy, mItems[i].getName().c_str(), false, true);
-					if(mCurrentItem == i) {
-						SORA->renderRect(mPosX, posy, mPosX+mWidth, mParent->getMenuBarHeight(), 0x2020AAFF, mWidth);
-					}
+						mFont->setColor(0xFFDDDDDD);
 					
+					if(mCurrentItem == i && mItems[i].isAvailable()) {
+						SORA->renderRect(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), mWidth, 0x99FFFFFF);
+					}
+					SORA->renderBox(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), 0xFF000000);
+					
+					mFont->render(mPosX+10.f, posy+distHeight, mItems[i].getName().c_str(), false, true);
+
 					posy += mParent->getMenuBarHeight();
 				}
 			}
@@ -129,13 +143,27 @@ namespace sora {
 	}
 	
 	bool SoraMenuBarMenu::testPoint(float32 x, float32 y) {
-		return (x >= mPosX && x <= mWidth && y >= 0.f && y <= mItemHeight);
+		return (x >= mPosX && x <= mPosX+mWidth && y >= 0.f && y <= mItemHeight);
+	}
+	
+	void SoraMenuBarMenu::adjustWidth() {
+		if(mFont) {
+			for(size_t i=0; i<mItems.size(); ++i) {
+				float32 width = mFont->getStringWidth(mItems[i].getName().c_str());
+				if(mWidth < width)
+					mWidth = width;
+			}
+		}
+	}
+	
+	float32 SoraMenuBarMenu::getWidth() const {
+		return mWidth;
 	}
 	
 	void SoraMenuBarMenu::setFont(SoraFont* font) {
 		mFont = font;
 		if(mFont) {
-			mWidth = font->getStringWidth(mBarName.c_str());
+			mWidth = font->getStringWidth(mBarName.c_str()) + 20.f;
 			mItemHeight = font->getHeight();
 		}
 	}
@@ -173,9 +201,10 @@ namespace sora {
 		return mAvailable;
 	}
 	
-	SoraMenuBar::SoraMenuBar(int32 height): 
+	SoraMenuBar::SoraMenuBar(float32 height): 
 	mFont(NULL),
 	mMenuBarHeight(height),
+	mMenuBarLength(0.f),
 	mActive(false),
 	mShowAlways(false),
 	mMenuClicked(false),
@@ -194,7 +223,10 @@ namespace sora {
 		bar->setFont(mFont);
 		bar->mParent = this;
 		bar->mActive = false;
+		bar->mPosX = mMenuBarLength;
+		bar->adjustWidth();
 		
+		mMenuBarLength += mFont->getStringWidth(bar->getName().c_str()) + 20.f;
 		mMenus.push_back(bar);
 	}
 	
@@ -203,13 +235,13 @@ namespace sora {
 	}
 	
 	void SoraMenuBar::render() {
-		if(!mEnabled)
+		if(!mEnabled || mMenus.size() == 0)
 			return;
 		
 		if(mActive || mShowAlways) {
 			float32 screenWidth = SORA->getScreenWidth();
-			SORA->renderRect(0.f, 0.f, screenWidth, mMenuBarHeight, screenWidth, 0x88AAAAAA);
-			SORA->renderBox(0.f, 0.f, screenWidth-1, mMenuBarHeight-1, 0xDDDDDDDD);
+			SORA->renderRect(0.f, 0.f, screenWidth, mMenuBarHeight, screenWidth, 0x77DDDDDD);
+			SORA->renderBox(0.f, 0.f, screenWidth-1, mMenuBarHeight-1, 0xFFAAAAAA);
 			
 			MENUBAR_LIST::iterator itMenu = mMenus.begin();
 			while(itMenu != mMenus.end()) {
@@ -222,7 +254,13 @@ namespace sora {
 	bool SoraMenuBar::activeMenu(float32 x, float32 y) {
 		MENUBAR_LIST::iterator itMenu = mMenus.begin();
 		while(itMenu != mMenus.end()) {
-			if((*itMenu)->testPoint(x, y)) {
+			if(!(*itMenu)->isActive() && (*itMenu)->testPoint(x, y)) {
+				MENUBAR_LIST::iterator itMenu2 = mMenus.begin();
+				while(itMenu2 != mMenus.end()) {
+					(*itMenu2)->setActive(false);
+					++itMenu2;
+				}
+				
 				(*itMenu)->setActive(true);
 				return true;
 			}
@@ -233,21 +271,21 @@ namespace sora {
 	}
 	
 	void SoraMenuBar::update() {
-		if(!mEnabled)
+		if(!mEnabled || mMenus.size() == 0)
 			return;
 		
 		float32 posx, posy;
 		SORA->getMousePos(&posx, &posy);
 		
 		if(mActive || mShowAlways) {
-			MENUBAR_LIST::iterator itMenu = mMenus.begin();
 			bool menuClicked = false;
+			
+			MENUBAR_LIST::iterator itMenu = mMenus.begin();
 			while(itMenu != mMenus.end()) {
 				if((*itMenu)->update())
 					menuClicked = true;
 				++itMenu;
 			}
-			
 			
 			if(mMenuClicked) {
 				if(activeMenu(posx, posy))
@@ -255,18 +293,20 @@ namespace sora {
 				
 			} else {
 				if(SORA->keyDown(SORA_KEY_LBUTTON)) {
-					if(activeMenu(posx, posy))
+					if(activeMenu(posx, posy)) {
 						menuClicked = true;
-					
-					mMenuClicked = true;
-					
-				} else if(SORA->keyDown(SORA_KEY_RBUTTON)) {
-					diactiveMenus();
+						mMenuClicked = true;
+					}
 				}
 			}
 			
-			if(!menuClicked) {
+			if(SORA->keyDown(SORA_KEY_RBUTTON)) {
 				diactiveMenus();
+			}
+			
+			if(!menuClicked && !mShowAlways) {
+				if(!(posx >= 0.f && posx <= SORA->getScreenWidth() && posy >= 0.f && posy <= mMenuBarHeight))
+					mActive = false;
 			}
 		} else {
 			if(posx >= 0.f && posx <= SORA->getScreenWidth() && posy >= 0.f && posy <= mMenuBarHeight)
@@ -299,11 +339,11 @@ namespace sora {
 		return mFont;
 	}
 	
-	int32 SoraMenuBar::getMenuBarHeight() const {
+	float32 SoraMenuBar::getMenuBarHeight() const {
 		return mMenuBarHeight;
 	}
 	
-	void SoraMenuBar::setMenuBarHeight(int32 height) {
+	void SoraMenuBar::setMenuBarHeight(float32 height) {
 		mMenuBarHeight = height;
 	}
 	
@@ -311,6 +351,10 @@ namespace sora {
 		mShowAlways = flag;
 		if(flag)
 			mActive = true;
+	}
+	
+	bool SoraMenuBar::isActive() const {
+		return mActive;
 	}
 	
 	bool SoraMenuBar::isShowAlways() const {

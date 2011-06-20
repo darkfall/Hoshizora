@@ -28,6 +28,8 @@
 
 namespace sora {
 	
+	class SoraCamera;
+	
 	class SoraCore: public SoraSingleton<SoraCore>, public SoraEventHandler {
 	protected:
 		friend class SoraSingleton<SoraCore>;
@@ -222,11 +224,16 @@ namespace sora {
 		
 		SoraMenuBar* getMenuBar() const;
 		void enableMenuBar(bool flag);
+		void setMenuBarShowAlways(bool flag);
+		void addMenu(SoraMenuBarMenu* menu);
 		
 		void setSystemFont(const wchar_t* font, int32 fontSize);
 		
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
+		
+		void setMainCamera(SoraCamera* camera);
+		SoraCamera* getMainCamera() const;
 		
 	private:
 		inline void _registerCoreCmds();
@@ -263,6 +270,8 @@ namespace sora {
 
 		SoraWindowInfoBase* mainWindow;
 		SoraShaderContext* shaderContext;
+		
+		SoraCamera* mainCamera;
 		
 		typedef std::list<SoraFrameListener*> FRAME_LISTENER_CONT;
 		FRAME_LISTENER_CONT frameListeners;

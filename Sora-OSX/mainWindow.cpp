@@ -96,7 +96,13 @@ sora::SoraVertex vert[6];
 
 bool mainWindow::renderFunc() {
 	pCanvas->beginRender();
-	
+	sora::SORA->beginZBufferSort();
+
+	pressAnyKey->render();
+	pSpr2->render();
+	pSpr->render();
+	sora::SORA->endZBufferSort();
+
 	pCanvas->finishRender();
 	
 	sora->beginScene(0);
@@ -106,13 +112,10 @@ bool mainWindow::renderFunc() {
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 
-	sora::SORA->beginZBufferSort();
 	{
 		sora::PROFILE("p1");
 		
-		pressAnyKey->render();
-	pSpr2->render();
-	pSpr->render();
+	
 	
 	{
 		ps->update(sora::SORA->getDelta());
@@ -121,9 +124,7 @@ bool mainWindow::renderFunc() {
 	
 	pCanvas->render();
 
-	sora::SORA->endZBufferSort();
 	}
-	sora::SORA_PROFILER->printProfile("p1");
 	
 	sora->endScene();
 	return false;
@@ -136,13 +137,30 @@ void onDownloadFinish(sora::SoraHttpFile* file){
 	file->closeFile();
 }
 
+void mainWindow::onMenuEvent(sora::SoraMenuBarClickEvent* ev) {
+	sora::DebugPtr->log(ev->getItem()->getName());
+}
+
 void mainWindow::init() {
+	registerEventFunc(this, &mainWindow::onMenuEvent);
+	
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
 	
 	sora::SORA->enableMenuBar(true);
-	sora::SORA->getMenuBar()->setShowAlways(true);
+	sora::SORA->setMenuBarShowAlways(true);
+	sora::SoraMenuBarMenu* menu1 = new sora::SoraMenuBarMenu(L"File");
+	menu1->addItem(L"Open", this);
+	menu1->addItem(L"Save", this);
+	
+	sora::SORA->addMenu(menu1);
+	
+	sora::SoraMenuBarMenu* menu2 = new sora::SoraMenuBarMenu(L"Edit");
+	menu2->addItem(L"Find", this);
+	menu2->addItem(L"Replace", this);
+	
+	sora::SORA->addMenu(menu2);
 	
 	pFont = sora::SORA->createFont(L"cour.ttf", 16);
 	pFont->setColor(0xFFFFCC00);

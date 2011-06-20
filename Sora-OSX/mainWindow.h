@@ -44,6 +44,7 @@ public:
 	bool hideMouse() { return false; }
 	
 	void onKeyEvent(sora::SoraKeyEvent* kev);
+	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);
 	
 private:
 	sora::SoraCore* sora;

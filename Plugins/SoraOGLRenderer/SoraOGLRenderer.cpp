@@ -231,6 +231,10 @@ namespace sora{
 		
 //		glDisable(GL_ALPHA_TEST);
 		glEnable(GL_BLEND); // Enable Blending
+		
+		if((blend & BLEND_SRCALPHA) != (CurBlendMode & BLEND_SRCALPHA))
+			if(blend & BLEND_SRCALPHA)
+				glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
 
 		if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND)) {
 			if(blend & BLEND_ALPHABLEND)

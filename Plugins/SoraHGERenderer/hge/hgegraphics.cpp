@@ -635,6 +635,11 @@ void HGE_Impl::_render_batch(bool bEndScene)
 
 void HGE_Impl::_SetBlendMode(int blend)
 {
+	if((blend & BLEND_ALPHASRCCOLOR) != (CurBlendMode & BLEND_ALPHASRCCOLOR)) 
+   	{ 
+      	if(blend & BLEND_ALPHASRCCOLOR) 
+        	 pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_SRCCOLOR); 
+	}
 	if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND))
 	{
 		if(blend & BLEND_ALPHABLEND) pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);

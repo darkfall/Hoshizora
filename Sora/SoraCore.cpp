@@ -28,6 +28,7 @@
 
 #include "MemoryUsage.h"
 #include "Rect4V.h"
+#include "SoraCamera.h"
 
 
 extern "C" {
@@ -62,6 +63,7 @@ namespace sora {
 		
 		__prevShader = NULL;
         shaderContext = NULL;
+		mainCamera = NULL;
 
 		pPluginManager = new SoraPluginManager;
 		pResourceFileFinder = new SoraResourceFileFinder;
@@ -216,10 +218,12 @@ namespace sora {
 			
 			if(!bPauseRender) {
 				DEBUG_RENDERER->render();
-				SoraConsole::Instance()->render();
 				
 				SoraMenuBar::Instance()->update();
 				SoraMenuBar::Instance()->render();
+				
+				SoraConsole::Instance()->render();
+
 				
 				if(bMainScene) {
 					bMainScene = false;
@@ -1107,5 +1111,22 @@ namespace sora {
 	void SoraCore::setCursor(const SoraString& cursor) {
 		assert(bInitialized);
 		pRenderSystem->setCursor(cursor);
+	}
+	
+	void SoraCore::setMenuBarShowAlways(bool flag) {
+		SoraMenuBar::Instance()->setShowAlways(flag);
+	}
+	
+	void SoraCore::addMenu(SoraMenuBarMenu* menu) {
+		SoraMenuBar::Instance()->addMenu(menu);
+	}
+	
+	void SoraCore::setMainCamera(SoraCamera* camera) {
+		assert(camera != NULL);
+		mainCamera = camera;
+	}
+	
+	SoraCamera* SoraCore::getMainCamera() const {
+		return mainCamera;
 	}
 } // namespace sora

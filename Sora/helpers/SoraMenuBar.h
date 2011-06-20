@@ -58,6 +58,11 @@ namespace sora {
 		bool testPoint(float32 x, float32 y);
 		void setFont(SoraFont* font);
 		
+		void adjustWidth();
+		float32 getWidth() const;
+		
+		std::wstring getName() const;
+		
 	private:
 		std::wstring mBarName;
 		SoraFont* mFont;
@@ -98,7 +103,7 @@ namespace sora {
 	
 	class SoraMenuBar: public SoraSingleton<SoraMenuBar> {
 	public:
-		SoraMenuBar(int32 height = 30);
+		SoraMenuBar(float32 height = 30);
 		~SoraMenuBar();
 		
 		void addMenu(SoraMenuBarMenu* bar);
@@ -110,8 +115,8 @@ namespace sora {
 		void setFont(SoraFont* font);
 		SoraFont* getFont() const;
 		
-		int32 getMenuBarHeight() const;
-		void setMenuBarHeight(int32 height);
+		float32 getMenuBarHeight() const;
+		void setMenuBarHeight(float32 height);
 		
 		void setShowAlways(bool flag);
 		bool isShowAlways() const;
@@ -119,13 +124,17 @@ namespace sora {
 		void setEnabled(bool flag);
 		bool isEnabled() const;
 		
+		bool isActive() const;
+		
 		void diactiveMenus();
 		
 	private:
 		inline bool activeMenu(float32 x, float32 y);
 		
-		int32 mMenuBarHeight;
+		float32 mMenuBarHeight;
 		SoraFont* mFont;
+		
+		float32 mMenuBarLength;
 		
 		typedef std::list<SoraMenuBarMenu*> MENUBAR_LIST;
 		MENUBAR_LIST mMenus;
