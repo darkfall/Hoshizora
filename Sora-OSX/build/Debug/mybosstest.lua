@@ -47,7 +47,7 @@ function init()
 	boss:setLifeNumber(3);
 	boss:playAnimation("stand", true, false);
 	
-	boss:loadScript("patchouli_sc1.lua");
+	boss:loadScript("patchouli_sc2.lua");
 	currentSc = newspellcard(500, royalFire.init, royalFire.update);
 end
 
