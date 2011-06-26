@@ -38,16 +38,16 @@ namespace sora {
 		FILE* pfile = NULL;
 		FILE_CACHE::iterator itFile = fileCache.find(str2idnc(fileName));
 		if(itFile != fileCache.end()) {
-			return sora_fopenw(itFile->second, "rb");
+			return sora_fopenw(itFile->second.c_str(), "rb");
 		}
 
-		pfile = sora_fopenw(fileName, "rb");
+		pfile = sora_fopenw(fileName.c_str(), "rb");
 		if(pfile != NULL)
             return pfile;
 
 		for(size_t i=0; i<folders.size(); ++i) {
 			SoraWString fullPath = folders[i].folderName + fileName;
-			pfile = sora_fopenw(fullPath, "rb");
+			pfile = sora_fopenw(fullPath.c_str(), "rb");
 			if(pfile) {
 				fileCache[str2id(fileName)] = fullPath;
 				break;

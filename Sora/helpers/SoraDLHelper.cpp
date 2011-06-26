@@ -45,7 +45,7 @@ namespace sora {
 		else
 			DebugPtr->log(dlerror(), LOG_LEVEL_ERROR);
 #else
-		result = (ulong32)LoadLibrary(path.c_str());
+		result = (ulong32)LoadLibraryA(path.c_str());
 #endif
 		if(result != 0) {
 			mOpenedDll[SoraFileUtility::getFileName(path)] = result;

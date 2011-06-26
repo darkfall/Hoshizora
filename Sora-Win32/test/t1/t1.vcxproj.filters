@@ -97,6 +97,9 @@
     <Filter Include="Plugins\SpriteAnimation">
       <UniqueIdentifier>{36a2fda1-c6e8-4cec-8ce1-59b829a4f533}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\helpers">
+      <UniqueIdentifier>{04ae89db-4d64-4de8-8bc9-a4269634d541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -1299,9 +1302,6 @@
     <ClInclude Include="..\..\..\Sora\cmd\CoreCmds.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\helpers\SoraInputSimulator.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\helpers\SoraZSorter.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -1320,7 +1320,25 @@
     <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.h">
       <Filter>Plugins\SpriteAnimation</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\helpers\SoraDLHelper.h">
+      <Filter>头文件\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\helpers\SoraEnvHelper.h">
+      <Filter>头文件\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\helpers\SoraAssetManager.h">
+      <Filter>头文件\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\helpers\SoraBooter.h">
+      <Filter>头文件\helpers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Sora\helpers\SoraMenuBar.h">
+      <Filter>头文件\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\helpers\SoraInputSimulator.h">
+      <Filter>头文件\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraFileChangeEvent.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1982,9 +2000,6 @@
     <ClCompile Include="..\..\..\Sora\cmd\CoreCmds.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\helpers\SoraInputSimulator.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\helpers\SoraZSorter.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -1997,7 +2012,28 @@
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.cpp">
       <Filter>Plugins\SpriteAnimation</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Sora\helpers\SoraDLHelper.cpp">
+      <Filter>头文件\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\helpers\SoraEnvHelper.cpp">
+      <Filter>头文件\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\helpers\SoraAssetManager.cpp">
+      <Filter>头文件\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\helpers\SoraBooter.cpp">
+      <Filter>头文件\helpers</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\Sora\helpers\SoraMenuBar.cpp">
+      <Filter>头文件\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\helpers\SoraInputSimulator.cpp">
+      <Filter>头文件\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraFileChangeEvent.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\support\md5lib.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -829,7 +829,7 @@ else
 } */
 
 	if( FAILED( pD3D->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hwnd,
-                                  d3dvp,
+                                  d3dvp | D3DCREATE_FPU_PRESERVE,
                                   d3dpp, &pD3DDevice ) ) )
 	{
 		_PostError("Can't create D3D device");

@@ -12,12 +12,15 @@
 namespace sora {
 
 	bool SoraEnvHelper::writeEnv(const char* key, const char* val, const char* subkey, ulong32 mKey) {
+		return false;
 	}
 	
 	char* SoraEnvHelper::getEnv(const char* key, const char* subkey, ulong32 mKey) {
+		return NULL;
 	}
 	
 	bool SoraEnvHelper::delEnv(const char* key, ulong32 mKey) {
+		return false;
 	}
 	
 }

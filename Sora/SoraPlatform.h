@@ -238,7 +238,7 @@ typedef std::wstring SoraWString;
 #endif
 
 #ifdef OS_WIN32
-#define sora_fopenw(path, mode) _wfopen(path.c_str(), TEXT(mode))
+#define sora_fopenw(path, mode) _wfopen(path, TEXT(mode))
 
 #include <windows.h>
 static void msleep(uint32 msec) {

@@ -380,6 +380,10 @@
     <ClInclude Include="..\..\..\Sora\Experimental\Sora2DMatrix.h" />
     <ClInclude Include="..\..\..\Sora\graphicEffects.h" />
     <ClInclude Include="..\..\..\Sora\hash.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraAssetManager.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraBooter.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraDLHelper.h" />
+    <ClInclude Include="..\..\..\Sora\helpers\SoraEnvHelper.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraInputSimulator.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraMenuBar.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraZSorter.h" />
@@ -427,6 +431,7 @@
     <ClInclude Include="..\..\..\Sora\SoraEventManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraException.h" />
     <ClInclude Include="..\..\..\Sora\SoraFileBase.h" />
+    <ClInclude Include="..\..\..\Sora\SoraFileChangeEvent.h" />
     <ClInclude Include="..\..\..\Sora\SoraFileUtility.h" />
     <ClInclude Include="..\..\..\Sora\SoraFolderResourceManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraFont.h" />
@@ -661,6 +666,10 @@
     <ClCompile Include="..\..\..\Sora\Debug\SoraInternalLogger.cpp" />
     <ClCompile Include="..\..\..\Sora\Defaults\orz.c" />
     <ClCompile Include="..\..\..\Sora\graphicEffects.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraAssetManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraBooter.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraDLHelper.cpp" />
+    <ClCompile Include="..\..\..\Sora\helpers\SoraEnvHelper.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraInputSimulator.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraMenuBar.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraZSorter.cpp" />
@@ -676,6 +685,7 @@
     <ClCompile Include="..\..\..\Sora\SoraEnvValues.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEventManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraFileChangeEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFileUtility.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
@@ -689,6 +699,7 @@
     <ClCompile Include="..\..\..\Sora\SoraSprite.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraStringConv.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraTexture.cpp" />
+    <ClCompile Include="..\..\..\Sora\support\md5lib.cpp" />
     <ClCompile Include="..\..\..\Sora\tinyXML\tinystr.cpp" />
     <ClCompile Include="..\..\..\Sora\tinyXML\tinyxml.cpp" />
     <ClCompile Include="..\..\..\Sora\tinyXML\tinyxmlerror.cpp" />

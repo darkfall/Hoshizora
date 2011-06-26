@@ -92,7 +92,7 @@ namespace sora {
 	
 	
 	bool SoraMemoryBuffer::writeToFile(const SoraWString& path) {
-		FILE* pFile = sora_fopenw(path, "wb");
+		FILE* pFile = sora_fopenw(path.c_str(), "wb");
 		if(pFile) {
 			ulong32 wrote = fwrite((void*)(get()), realSize, 1, pFile);
 			if(wrote != realSize) {

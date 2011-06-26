@@ -3,7 +3,7 @@
 
 #include "SoraShader.h"
 
-#ifdef USE_SHADER
+#ifdef SORA_USE_SHADER
 
 
 #include "Cg/cg.h"

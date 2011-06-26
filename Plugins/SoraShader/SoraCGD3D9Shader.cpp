@@ -1,7 +1,7 @@
 #include "SoraCGD3D9Shader.h"
 #include "SoraCore.h"
 
-#ifdef USE_SHADER
+#ifdef SORA_USE_SHADER
 
 namespace sora {
 
