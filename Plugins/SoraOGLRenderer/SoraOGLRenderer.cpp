@@ -22,7 +22,7 @@
 
 #include "SoraOGLKeyPoll.h"
 
-#ifdef USE_SHADER
+#ifdef SORA_USE_SHADER
 #include "SoraShader/SoraCGGLShader.h"
 #endif
 
@@ -155,7 +155,7 @@ namespace sora{
             glOrtho(0.f,
                     _oglWindowInfo.width,
                     _oglWindowInfo.height
-                    , 0.f, -1.f, 1.f);
+                    , 0.f, 1.f, -1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             glTranslatef(_oglWindowInfo.x-_oglWindowInfo.dx, _oglWindowInfo.y-_oglWindowInfo.dy, 0.f); //Set Center Coodinates
@@ -172,7 +172,7 @@ namespace sora{
             glOrtho(0,
                     pCurTarget->getWidth(),
                     0
-                    , pCurTarget->getHeight(), -1.f, 1.f);
+                    , pCurTarget->getHeight(), 1.f, -1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             glTranslatef(0.f, 0.f, 0.f); //Set Center Coodinates
@@ -463,7 +463,7 @@ namespace sora{
         glBindTexture(GL_TEXTURE_2D, 0);
 
 		if(!texId) {
-			throw SORA_EXCEPTION("Error creating texture");
+			THROW_SORA_EXCEPTION("Error creating texture");
 			return 0;
 		}
 		SoraTexture* tex = new SoraTexture(texId,
@@ -860,7 +860,7 @@ namespace sora{
 	}
 
     SoraShaderContext* SoraOGLRenderer::createShaderContext() {
-#ifdef USE_SHADER
+#ifdef SORA_USE_SHADER
         return new SoraCGGLShaderContext;
 #endif
 		return NULL;

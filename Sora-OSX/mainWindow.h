@@ -45,6 +45,7 @@ public:
 	
 	void onKeyEvent(sora::SoraKeyEvent* kev);
 	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);
+	void onDownloadEvent(sora::SoraHttpDownloadEvent* ev);
 	
 private:
 	sora::SoraCore* sora;

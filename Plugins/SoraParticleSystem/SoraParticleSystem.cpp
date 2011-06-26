@@ -526,11 +526,11 @@ namespace sora {
 
 	HSORAPARTICLE SoraParticleManager::emit(const SoraParticleHeader& header, float32 x, float32 y, float32 z) {
 		if(pGlobalSprite == 0)
-			throw SORA_EXCEPTION("Error emit Particle, no global particle sprites set");
+			THROW_SORA_EXCEPTION("Error emit Particle, no global particle sprites set");
 		
 		SoraParticleSystem* par = new SoraParticleSystem(header, pGlobalSprite, x, y, z);
 		if(!par)
-			throw SORA_EXCEPTION("Failed Alloc ParticleSystem");
+			THROW_SORA_EXCEPTION("Failed Alloc ParticleSystem");
 		par->fire();
 		particles[(HSORAPARTICLE)par] = par;
 		return (HSORAPARTICLE)par;
@@ -538,11 +538,11 @@ namespace sora {
 
 	HSORAPARTICLE SoraParticleManager::emitS(const SoraWString& s, float32 x, float32 y, float32 z) {
 		if(pGlobalSprite == 0)
-			throw SORA_EXCEPTION("Error emit Particle, no global particle sprites set");
+			THROW_SORA_EXCEPTION("Error emit Particle, no global particle sprites set");
 		
 		SoraParticleSystem* par = new SoraParticleSystem(s, pGlobalSprite, x, y, z);
 		if(!par)
-			throw SORA_EXCEPTION("Failed Alloc ParticleSystem");
+			THROW_SORA_EXCEPTION("Failed Alloc ParticleSystem");
 		par->fire();
 		particles[(HSORAPARTICLE)par] = par;
 		return (HSORAPARTICLE)par;

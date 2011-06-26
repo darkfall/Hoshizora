@@ -110,9 +110,12 @@ namespace sora {
 	}
 	
 	void SoraZSorter::endSortAndRender() {
-		for(int i=0; i<=999; ++i) {
+		for(int i=999; i>=0; --i) {
 			__Z_BUFFER_NODE* node = &__z_buffer_array[i];
 			while(node != NULL) {
+				if(node->size == 0)
+					break;
+				
 				if(node->size == 4) {
 					SoraQuad quad;
 					memcpy(&quad.v[0], node->vertex, sizeof(SoraVertex)*4);

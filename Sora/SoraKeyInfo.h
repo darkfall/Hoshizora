@@ -296,6 +296,10 @@ namespace sora {
 		bool isMouseRButtonUp() const {
 			return isKeyUp() && key == SORA_KEY_RBUTTON;
 		}
+		
+#ifndef SORA_USE_RTTI
+		SORA_EVENT_IDENTIFIER(18446744071251492855ULL);
+#endif
 	};  
 }
 

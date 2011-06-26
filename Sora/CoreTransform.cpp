@@ -9,7 +9,7 @@ namespace sora {
 		if(bClean) return *this;
 		
 		if(iKind != t2.GetKind()) {
-			//throw SORA_EXCEPTION("CoreTransform::GetDist: Different Transform Type");
+			//THROW_SORA_EXCEPTION("CoreTransform::GetDist: Different Transform Type");
 			return *this;
 		}
 	
@@ -38,7 +38,7 @@ namespace sora {
 		if(bClean) return rhs;
 		
 		if(iKind != rhs.GetKind()) {
-			//throw SORA_EXCEPTION("CoreTransform::Operator +: Different Transform Type");
+			//THROW_SORA_EXCEPTION("CoreTransform::Operator +: Different Transform Type");
 			return *this;
 		}
 	
@@ -56,7 +56,7 @@ namespace sora {
 		if(bClean) return rhs;
 		
 		if(iKind != rhs.GetKind()) {
-			//throw SORA_EXCEPTION("CoreTransform::Operator +: Different Transform Type");
+			//THROW_SORA_EXCEPTION("CoreTransform::Operator +: Different Transform Type");
 			return *this;
 		}
 	
@@ -97,7 +97,7 @@ namespace sora {
 		if(bClean) return *this;
 	
 		if(iKind != rhs.GetKind()) {
-			//throw SORA_EXCEPTION("CoreTransform::Operator +: Different Transform Type");
+			//THROW_SORA_EXCEPTION("CoreTransform::Operator +: Different Transform Type");
 			return *this;
 		}
 	
@@ -114,7 +114,7 @@ namespace sora {
 		if(bClean) return *this;
 		
 		if(iKind != rhs.GetKind()) {
-			//throw SORA_EXCEPTION("CoreTransform::Operator +: Different Transform Type");
+			//THROW_SORA_EXCEPTION("CoreTransform::Operator +: Different Transform Type");
 			return *this;
 		}
 		

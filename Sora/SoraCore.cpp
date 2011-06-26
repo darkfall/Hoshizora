@@ -23,6 +23,7 @@
 
 #include "helpers/SoraInputSimulator.h"
 #include "helpers/SoraZSorter.h"
+#include "helpers/SoraBooter.h"
 
 #include "cmd/CoreCmds.h"
 
@@ -36,6 +37,7 @@ extern "C" {
 }
 
 namespace sora {
+	
 	SoraCore::SoraCore() {
 		bMainWindowSet = false;
 		bMessageBoxErrorPost = false;
@@ -96,13 +98,15 @@ namespace sora {
 	}
 
 	void SoraCore::start() {
+		SoraBooter::loadExPlugins(L"./sora/plugins");
+		
 		// no main window created
 		if(!bMainWindowSet) {
-			throw SORA_EXCEPTION("No main window created");
+			THROW_SORA_EXCEPTION("No main window created");
 			shutDown();
 		}
 		if(!bInitialized) {
-			throw SORA_EXCEPTION("Sora not initialized");
+			THROW_SORA_EXCEPTION("Sora not initialized");
 			shutDown();
 		}
 
@@ -276,7 +280,7 @@ namespace sora {
 		// no render system available, fatal error
 		// cause currently there's no cross-platform render system HoshiNoSora implemented
 		if(!pRenderSystem) {
-			throw SORA_EXCEPTION("no render system available");
+			THROW_SORA_EXCEPTION("no render system available");
 		}
 
 		bInitialized = true;
@@ -1045,7 +1049,7 @@ namespace sora {
     }
     
     void SoraCore::execute(const SoraString& appPath, const SoraString& args) {
-        system((appPath+args).c_str());
+        system((appPath+" "+args).c_str());
     }
     
     void SoraCore::snapshot(const SoraString& path) {

@@ -122,7 +122,7 @@ namespace sora {
 			uint32 newId = SORA->randomInt(0, mBGMQueue.size());
 			_playBGM(mBGMQueue[newId], newId);
 		}
-		else if(mCurrBGMId < mBGMQueue.size()-1) {
+		else if(mCurrBGMId != -1 && mCurrBGMId < mBGMQueue.size()-1) {
 			_playBGM(mBGMQueue[mCurrBGMId+1], mCurrBGMId+1);
 		} else {
 			if(mStopAtEnd)
@@ -236,9 +236,22 @@ namespace sora {
 	int32 SoraBGMManager::playBGS(const std::wstring& bgmsPath, uint32 bgsid, int32 looptimes, float32 volumeScale, float32 bgmVolumeScale) {
 		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
 		while(itBgs != mBGSounds.end()) {
-			if(itBgs->second.bgsFile == NULL) {
-				mBGSounds.erase(itBgs);
-				break;
+			if(bgmsPath.compare(itBgs->second->path) != 0) {
+				if(itBgs->second->bgsFile == NULL || itBgs->second->bPlayFinished == true) {
+					delete itBgs->second;
+					mBGSounds.erase(itBgs);
+					break;
+				}
+			} else {
+				if(itBgs->second->bgsFile != NULL) {
+					itBgs->second->bgsFile->setVolume(volumeScale * bgmVolume);
+					itBgs->second->bgsFile->play();
+					itBgs->second->bPlayFinished = false;
+					if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size()) {
+						mBGMQueue[mCurrBGMId]->setVolume(bgmVolume * bgmVolumeScale);
+					}
+					return bgsid;
+				}
 			}
 			
 			++bgsid;
@@ -247,8 +260,9 @@ namespace sora {
 		
 		SoraMusicFile* mfile = SORA->createMusicFile(bgmsPath);
 		if(mfile) {
-			BGSInfo bgsinfo(bgsid, looptimes, volumeScale, bgmVolumeScale);
-			bgsinfo.bgsFile = mfile;
+			BGSInfo* bgsinfo = new BGSInfo(bgsid, looptimes, volumeScale, bgmVolumeScale, mfile);
+			bgsinfo->path = bgmsPath;
+			
 			mfile->setVolume(volumeScale * bgmVolume);
 			
 			if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size()) {
@@ -259,15 +273,17 @@ namespace sora {
 			
 			return bgsid;
 		}
-		return 0;
+		return -1;
 	}
 	
 	void SoraBGMManager::BGSInfo::onPlaybackEvent(SoraPlaybackEvent* event) {
 		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
 			++currLoopTimes;
 			if(currLoopTimes >= loopTimes) {
-				delete bgsFile;
-				bgsFile = NULL;
+				
+				SoraBGMManager::Instance()->setVolume(SoraBGMManager::Instance()->getVolume());
+				bPlayFinished = true;
+				
 			} else {
 				bgsFile->play();
 			}
@@ -277,8 +293,8 @@ namespace sora {
 	void SoraBGMManager::adjustBGSVolume(uint32 bgsid, float32 volumeScale) {
 		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
 		if(itBgs != mBGSounds.end()) {
-			if(itBgs->second.bgsFile != NULL) {
-				itBgs->second.bgsFile->setVolume(volumeScale * bgmVolume);
+			if(itBgs->second->bgsFile != NULL) {
+				itBgs->second->bgsFile->setVolume(volumeScale * bgmVolume);
 			}
 		}
 	}
@@ -286,10 +302,7 @@ namespace sora {
 	void SoraBGMManager::stopBGS(uint32 bgsid) {
 		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
 		if(itBgs != mBGSounds.end()) {
-			if(itBgs->second.bgsFile != NULL) {
-				delete itBgs->second.bgsFile;
-				itBgs->second.bgsFile = NULL;
-			}
+			delete itBgs->second;
 			mBGSounds.erase(itBgs);
 		}
 	}

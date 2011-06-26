@@ -47,7 +47,9 @@ int main(int argc, char* argv[]) {
 	sora->registerResourceManager(new sora::SoraZipResourceManager);
 	sora->registerFontManager(new sora::SoraFTFontManager);
 	sora->registerInput(new sora::SoraOGLInput);
-//    sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
+    sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
+	
+	std::cout<<sora::str2id("SoraConsoleEvent")<<std::endl;
 	
 
 	sora->createWindow(new mainWindow);

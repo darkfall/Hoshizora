@@ -42,6 +42,8 @@ namespace rftd {
 
 		rftdSpawnPoint* getSpawnPoint() const { return which; }
 		
+		SORA_EVENT_IDENTIFIER(sora::str2id("SpawnFinishEvent"));
+		
 	private:
 		rftdSpawnPoint* which;
 	};

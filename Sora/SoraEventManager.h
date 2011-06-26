@@ -11,9 +11,13 @@
 #include <vector>
 
 #include "SoraTimerEvent.h"
+#include "SoraFileChangeEvent.h"
+#include "SoraKeyInfo.h"
+
 #include "QuickList.h"
 #include "hash.h"
-#include "SoraKeyInfo.h"
+
+#include "support/md5lib.h"
 
 namespace sora {
 	
@@ -42,7 +46,7 @@ namespace sora {
 	class SoraEventManager: public SoraSingleton<SoraEventManager> {
 		friend class SoraSingleton<SoraEventManager>;
 		
-		SoraEventManager(): currTime(0.f) {}
+		SoraEventManager(): currTime(0.f), mFileChangeDetectionInterval(1.f) {}
 	public:
 		//~SoraEventManager();
 
@@ -84,6 +88,14 @@ namespace sora {
 		 */
 		void SORACALL registerInputEventHandler(SoraEventHandler* handler);
 		void SORACALL unregisterInputEventHandler(SoraEventHandler* handler);
+		
+		
+		/*
+		 register file change event handler
+		 */
+		void SORACALL registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler);
+		void SORACALL unregisterFileChangeEventHandler(SoraEventHandler* handler);
+		void SORACALL setFileChangeDectectionInterval(float32 interval);
 		
 		void SORACALL update(float32 dt);
 
@@ -164,6 +176,8 @@ namespace sora {
 		INPUT_EVENT_HANDLER_LIST iehList;
 		
 		inline void freeTimerEvent(TIMER_EVENT_LIST::iterator ittev);
+		
+		float32 mFileChangeDetectionInterval;
 	};
 	
 	class SoraLuaEvent: public SoraEvent {
@@ -172,6 +186,10 @@ namespace sora {
 			func = _func;
 			param = _param;
 		}
+		
+#ifndef SORA_USE_RTTI
+		SORA_EVENT_IDENTIFIER(18446744073439210198ULL);
+#endif
 		
 		std::string func;
 		std::string param;

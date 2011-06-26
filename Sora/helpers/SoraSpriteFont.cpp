@@ -25,7 +25,7 @@ namespace sora {
 			buildPosMap(sequance);
 			memset(mCharPos, 0, sizeof(int32)*128);
 		} else
-			throw SORA_EXCEPTION("Error creating font "+ws2s(font));
+			THROW_SORA_EXCEPTION("Error creating font "+ws2s(font));
 	}
 	
 	SoraSpriteFont::~SoraSpriteFont() {

@@ -5,7 +5,7 @@ namespace sora {
 	SoraPhysicalObject::SoraPhysicalObject(float32 posx, float32 posy, const b2Shape& shape, float density, bool dynamicBody) {
 		body = SoraPhysicalWorld::Instance()->createBody(PHYSICAL_WORLD->pixel2b2cor(posx), PHYSICAL_WORLD->pixel2b2cor(posy), shape, dynamicBody, density);
 		if(!body)
-			throw SORA_EXCEPTION("Cannot create physical object");
+			THROW_SORA_EXCEPTION("Cannot create physical object");
 		localAnchor.Set(0.f, 0.f);
         setType(OBJ_PHYSICAL);
 	}
@@ -13,7 +13,7 @@ namespace sora {
 	SoraPhysicalObject::SoraPhysicalObject(const b2BodyDef& bodyDef, const b2FixtureDef& fixtureDef) {
 		body = SoraPhysicalWorld::Instance()->createBody(bodyDef, fixtureDef);
 		if(!body) 
-			throw SORA_EXCEPTION("Cannot create physical object");
+			THROW_SORA_EXCEPTION("Cannot create physical object");
 		localAnchor.Set(0.f, 0.f);
         setType(OBJ_PHYSICAL);
 	}
@@ -165,7 +165,7 @@ namespace sora {
 	SoraPhysicalObject::SoraPhysicalObject(float32 px, float32 py, int bDynamic) {
 		body = SoraPhysicalWorld::Instance()->createBody(PHYSICAL_WORLD->pixel2b2cor(px), PHYSICAL_WORLD->pixel2b2cor(py), bDynamic>0?true:false);
 		if(!body)
-			throw SORA_EXCEPTION("Cannot create physical object");
+			THROW_SORA_EXCEPTION("Cannot create physical object");
 		setType(OBJ_PHYSICAL);
 		localAnchor.Set(0.f, 0.f);
 	}

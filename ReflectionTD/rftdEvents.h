@@ -21,6 +21,8 @@ namespace rftd {
 		int32 getAttack() const {
 			return attack;
 		}
+		
+		SORA_EVENT_IDENTIFIER(sora::str2id("EnemyReachEndEvent"));
 	private:
 		int32 attack;
 	};	

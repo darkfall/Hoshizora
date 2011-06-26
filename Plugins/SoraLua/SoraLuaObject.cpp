@@ -19,7 +19,7 @@ namespace sora {
 	SoraLuaObject::SoraLuaObject() {
 		luaState = LuaState::Create(true);
 		if(!luaState)
-			throw SORA_EXCEPTION("error creating LuaState");
+			THROW_SORA_EXCEPTION("error creating LuaState");
 
 		SoraLuaExport::export_constants(luaState);
 		SoraLuaExport::export_soracore(luaState);
@@ -36,7 +36,7 @@ namespace sora {
 	SoraLuaObject::SoraLuaObject(const SoraWString& scriptPath) {
 		luaState = LuaState::Create(true);
 		if(!luaState)
-			throw SORA_EXCEPTION("error creating LuaState");
+			THROW_SORA_EXCEPTION("error creating LuaState");
 		
 		SoraLuaExport::export_constants(luaState);
 		SoraLuaExport::export_soracore(luaState);
@@ -56,7 +56,7 @@ namespace sora {
 		luaState = state;
 		//LuaStateRefMap[(ulong32)luaState] = 1;
 		if(!luaState)
-			throw SORA_EXCEPTION("error creating LuaState");
+			THROW_SORA_EXCEPTION("error creating LuaState");
 		setType(OBJ_LUA);
 		SoraLuaObjectManager::Instance()->registerLuaObject(this);
 	}

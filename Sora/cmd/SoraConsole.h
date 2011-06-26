@@ -27,6 +27,10 @@ namespace sora {
 		mCmd(cmd),
 		mParams(params) {}
 		
+#ifndef SORA_USE_RTTI
+		SORA_EVENT_IDENTIFIER(18446744073250990306ULL);
+#endif
+		
 		void setCmd(const std::string& cmd) { mCmd = cmd; }
 		void setParams(const std::string& params) { mParams = params; }
 		

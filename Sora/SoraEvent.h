@@ -11,13 +11,22 @@
 namespace sora {
 
     class SoraEventHandler;
+	
+#define SORA_EVENT_IDENTIFIER(ident) \
+	static sora::stringId EventIdentifier() { \
+		return ident; \
+	} \
     
 	class SoraEvent {
 	protected:
 		virtual ~SoraEvent() {};
         
     public:
-        SoraEvent(): pEventSource(NULL), bConsumed(false) {}
+        SoraEvent(): pEventSource(NULL), bConsumed(false) {
+#ifndef SORA_USE_RTTI
+			eventIdentifier = 0;
+#endif
+		}
 
         void setSource(SoraEventHandler* source) { pEventSource = source; }
         SoraEventHandler* getSource() const { return pEventSource; }
@@ -29,14 +38,24 @@ namespace sora {
 		void consume() { bConsumed = true; }
 		bool isConsumed() const { return bConsumed; }
 		
+#ifndef SORA_USE_RTTI
+		stringId getEventIdentifier() const {
+			return eventIdentifier;
+		}
+#endif
+		
 		// base event not serializable
 		virtual bool serializable() { return false; }
-        
+		
     protected:
 		bool bConsumed;
 		
 		stringId name;
         SoraEventHandler* pEventSource;
+		
+#ifndef SORA_USE_RTTI
+		stringId eventIdentifier;
+#endif
 	};
 
 	class SoraHandlerFunctionBase {
@@ -62,6 +81,21 @@ namespace sora {
 		T* _instance;
 		MemberFunc _function;
 	};
+	
+	template<typename EventT>
+	class SoraFuncFunctionHandler: public SoraHandlerFunctionBase  {
+	public:
+		typedef void (*EventFunc)(EventT* event);
+		 
+		SoraFuncFunctionHandler(EventFunc func): _func(func) {}
+		
+		void call(SoraEvent* ev) {
+			_func(static_cast<EventT*>(ev));
+		}
+		
+	private:
+		EventFunc _func;
+	};
 
 	class SoraEventHandler {
 	public:
@@ -70,6 +104,9 @@ namespace sora {
 
 		template <class T, class EventT>
 		void registerEventFunc(T*, void (T::*memFn)(EventT*));
+		
+		template <class EventT>
+		void registerEventFunc(void (*evFn)(EventT*));
 		
 		// base eventHandler not serializable
 		virtual bool serializable() { return false; }
@@ -82,7 +119,20 @@ namespace sora {
 
 	template <class T, class EventT>
 	void SoraEventHandler::registerEventFunc(T* obj, void (T::*memFn)(EventT*)) {	
+#ifdef SORA_USE_RTTI
 		_handlers[SoraTypeInfo(typeid(EventT))]= new SoraMemberFunctionHandler<T, EventT>(obj, memFn);
+#else
+		_handlers[SoraTypeInfo(EventT::EventIdentifier())] = new SoraMemberFunctionHandler<T, EventT>(obj, memFn);
+#endif
+	}
+	
+	template <class EventT>
+	void SoraEventHandler::registerEventFunc(void (*evFn)(EventT*)) {
+#ifdef SORA_USE_RTTI
+		_handlers[SoraTypeInfo(typeid(EventT))] = new SoraFuncFunctionHandler<EventT>(evFn);
+#else
+		_handlers[SoraTypeInfo(EventT::EventIdentifier())] = new SoraFuncFunctionHandler<EventT>(evFn);
+#endif
 	}
 
 } // namespace sora

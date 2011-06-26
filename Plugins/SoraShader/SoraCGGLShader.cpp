@@ -2,7 +2,7 @@
 #include "SoraCore.h"
 #include "Debug/SoraInternalLogger.h"
 
-#ifdef USE_SHADER
+#ifdef SORA_USE_SHADER
 
 namespace sora {
 
@@ -172,4 +172,4 @@ namespace sora {
 
 } // namespace sora
 
-#endif // USE_SHADER
+#endif // SORA_USE_SHADER

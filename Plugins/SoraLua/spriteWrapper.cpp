@@ -44,7 +44,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setTextureRect(x, y, w, fh);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     void setColor(HSORASPRITE h, float32 r, float32 g, float32 b, float32 a) {
@@ -52,7 +52,7 @@ namespace spritewrapper {
 		SoraColorRGBA color(r, g, b, a);
         if(p) p->setColor(color.GetHWColor(), -1);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
 	
 	void setVertexColor(HSORASPRITE h, float32 r, float32 g, float32 b, float32 a, int32 i) {
@@ -60,21 +60,21 @@ namespace spritewrapper {
 		SoraColorRGBA color(r, g, b, a);
         if(p) p->setColor(color.GetHWColor(), i);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
 	}
     
     void setZ(HSORASPRITE h, float32 z, int32 i) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setZ(z, i);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     ulong32 getColor(HSORASPRITE h, int32 i) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getColor(i);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0;
     }
     
@@ -82,7 +82,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getZ(i);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0;
     }
     
@@ -90,14 +90,14 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setCenter(x, y);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     float32 getCenterX(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getCenterX();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0.f;
     }
     
@@ -105,7 +105,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getCenterY();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0.f;
     }
     
@@ -113,14 +113,14 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setFlip(hf, vf);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     bool getVFlip(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getVFlip();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return false;
     }
     
@@ -128,7 +128,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getHFlip();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return false;
     }
     
@@ -136,7 +136,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getTextureWidth();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0;
     }
     
@@ -144,7 +144,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getTextureHeight();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0;
     }
     
@@ -152,7 +152,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getSpriteWidth();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0;
     }
     
@@ -160,7 +160,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getSpriteHeight();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0;
     }
     
@@ -168,14 +168,14 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setScale(vs, hs);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     float32 getVScale(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getVScale();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0.f;
     }
     
@@ -183,7 +183,7 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getHScale();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0.f;
     }
     
@@ -191,14 +191,14 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setRotation(r);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     float32 getRotation(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getRotation();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0.f;
     }
     
@@ -206,14 +206,14 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setBlendMode(mode);
         else 
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     int32 getBlendMode(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getBlendMode();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return 0;
     }
     
@@ -221,28 +221,28 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->addEffect((SoraImageEffect*)eff);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     void stopEffect (HSORASPRITE h, ulong32 eff) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->stopEffect((SoraImageEffect*)eff);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     void clearEffects (HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->clearEffects();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     bool hasEffect  (HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->hasEffect();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
         return false;
     }
     
@@ -250,42 +250,42 @@ namespace spritewrapper {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->update(sora::SORA->getDelta());
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     void render(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->render();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     void renderWithPos(HSORASPRITE h, float32 x, float32 y) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->render(x, y);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     int32 getPosX(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getPositionX();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     int32 getPosY(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getPositionY();
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
     void setPosition(HSORASPRITE h, float32 x, float32 y) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setPosition(x, y);
         else
-            throw SORA_EXCEPTION("Invalid sprite arg");
+            THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
 	
 	ulong32 getTexture(HSORASPRITE h) {

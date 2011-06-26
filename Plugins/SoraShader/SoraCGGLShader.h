@@ -3,7 +3,7 @@
 
 #include "SoraShader.h"
 
-#ifdef USE_SHADER
+#ifdef SORA_USE_SHADER
 
 #include "Cg/cg.h"
 #include "Cg/cgGL.h"
@@ -71,6 +71,6 @@ namespace sora {
 
 } // namespace sora
 
-#endif // USE_SHADER
+#endif // SORA_USE_SHADER
 
 #endif // SORA_OGL_SHADER_H_

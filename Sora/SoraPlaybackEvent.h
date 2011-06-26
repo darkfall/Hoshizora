@@ -38,7 +38,11 @@ namespace sora {
             eventType = event;
             _setEventName(event);
         }
-		        
+		
+#ifndef SORA_USE_RTTI
+		SORA_EVENT_IDENTIFIER(18446744069908103960ULL);
+#endif
+		
     private:
         void _setEventName(SORA_PLAYBACK_EVENT event) {
             switch(event) {

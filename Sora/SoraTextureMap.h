@@ -50,13 +50,13 @@ namespace sora {
 			if(pos == texMap.end()) {
 				texMap[uiKey] = tex;
 				texMapRv[tex] = uiKey;
-				texRefs[uiKey]++;
+				texRefs[uiKey] = 0;
 			}
 			else {
 				del(pos->second);
 				texMap[uiKey] = tex;
 				texMapRv[tex] = uiKey;
-				texRefs[uiKey]++;
+				texRefs[uiKey] == 0;
 			}
 			
 			SET_ENV_INT("CORE_TEXMAP_SIZE", texMap.size());
@@ -89,6 +89,13 @@ namespace sora {
 			texRefs[uiKey]++;
 		}
 		
+		void addRf(HSORATEXTURE tex) {
+			TEXMAP_RV::iterator p = texMapRv.find(tex);
+			if(p != texMapRv.end()) {
+				texRefs[p->second]++;
+			}
+		}
+		
 		void decRf(HSORATEXTURE tex) {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
@@ -106,7 +113,7 @@ namespace sora {
 			stringId uiKey = str2id(key);
 			TEX_MAP::iterator p = texMap.find(uiKey);
 			if(p != texMap.end()) {
-				SoraTexture* tex = (SoraTexture*)p->second;
+				//SoraTexture* tex = (SoraTexture*)p->second;
 				texRefs[uiKey]++;
 				return p->second;
 			}

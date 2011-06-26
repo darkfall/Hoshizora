@@ -798,6 +798,35 @@ bool HGE_Impl::_GfxInit()
        // }
 
 // Create D3D Device
+/*
+if (pureSoftware) 
+{ 
+   hr = pID3D->CreateDevice(   D3DADAPTER_DEFAULT, D3DDEVTYPE_REF,   hwnd, 
+                        D3DCREATE_SOFTWARE_VERTEXPROCESSING | D3DCREATE_FPU_PRESERVE, &present, &pID3DDevice); 
+
+   if (FAILED(hr)) 
+      os::Printer::log("Was not able to create Direct3D8 software device.", ELL_ERROR); 
+} 
+else 
+{ 
+   hr = pID3D->CreateDevice(   D3DADAPTER_DEFAULT, devtype,   hwnd, 
+                        D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_FPU_PRESERVE, &present, &pID3DDevice); 
+
+   if(FAILED(hr)) 
+   { 
+      hr = pID3D->CreateDevice(   D3DADAPTER_DEFAULT, devtype,   hwnd, 
+                           D3DCREATE_MIXED_VERTEXPROCESSING | D3DCREATE_FPU_PRESERVE , &present, &pID3DDevice); 
+
+      if(FAILED(hr)) 
+      { 
+         hr = pID3D->CreateDevice(   D3DADAPTER_DEFAULT, devtype, hwnd, 
+                              D3DCREATE_SOFTWARE_VERTEXPROCESSING | D3DCREATE_FPU_PRESERVE, &present, &pID3DDevice); 
+
+         if (FAILED(hr)) 
+            os::Printer::log("Was not able to create Direct3D8 device.", ELL_ERROR); 
+      } 
+   } 
+} */
 
 	if( FAILED( pD3D->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hwnd,
                                   d3dvp,

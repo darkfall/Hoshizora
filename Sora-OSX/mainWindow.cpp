@@ -80,9 +80,9 @@ bool mainWindow::updateFunc() {
 		cy += 2.f;
 	
 	if(sora->keyDown(SORA_KEY_O))
-		cz += 0.1f;
+		sora::SoraBGMManager::Instance()->play(L"01.ogg", false);
 	if(sora->keyDown(SORA_KEY_P))
-		cz -= 0.1f;
+		sora::SoraBGMManager::Instance()->playBGS(L"click_08.wav", 1, 1, 1.f, 0.5f);;
 
 	
     return false;
@@ -108,7 +108,8 @@ bool mainWindow::renderFunc() {
 	sora->beginScene(0);
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
-		
+	
+	pFont->setColor(0xFFFFFFFF);	
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 
@@ -130,19 +131,40 @@ bool mainWindow::renderFunc() {
 	return false;
 }
 
-void onDownloadFinish(sora::SoraHttpFile* file){
-	sora::SORA->log(sora::vamssg("Download finished from %s, size = %lu, buffersize=%lu,%lu, time = %f", file->getURL().c_str(), file->getDownloadedSize(), file->getMemoryBuffer()->size(), file->getMemoryBuffer()->realsize(), file->getDownloadTime()),
-					sora::LOG_LEVEL_NORMAL);
-	file->writeToFile(L"./lalalalal.png");
-	file->closeFile();
-}
-
 void mainWindow::onMenuEvent(sora::SoraMenuBarClickEvent* ev) {
 	sora::DebugPtr->log(ev->getItem()->getName());
 }
 
+void mainWindow::onDownloadEvent(sora::SoraHttpDownloadEvent* ev) {
+	sora::SORA->messageBox(sora::vamssg("download from %s finished, recevied size = %.2fkb, received time = %.2f, download speed = %.2fkb/s", 
+										ev->getURL().c_str(), 
+										ev->getReceivedSize()/1024.f, 
+										ev->getReceiveTime(), 
+										ev->getDownloadSpeed()/1024.f),
+										"test", MB_OK);
+	file.writeToFile(L"./test.png");
+}
+
+void downloadEvent(sora::SoraHttpDownloadEvent* ev) {
+	sora::SORA->messageBox(sora::vamssg("download from %s finished, recevied size = %.2fkb, received time = %.2f, download speed = %.2fkb/s", 
+										ev->getURL().c_str(), 
+										ev->getReceivedSize()/1024.f, 
+										ev->getReceiveTime(), 
+										ev->getDownloadSpeed()/1024.f),
+						   "test", MB_OK);
+}
+
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
+	registerEventFunc(this, &mainWindow::onDownloadEvent);
+	registerEventFunc(downloadEvent);
+	
+	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
+	if(testSize != 0.0) {
+		sora::SORA->messageBox(sora::vamssg("%f", testSize), "test", MB_OK);
+		file.setEventHandler(this);
+		file.downloadFileTo("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", L"~/Desktop/download.png");
+	}*/
 	
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
@@ -173,10 +195,6 @@ void mainWindow::init() {
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
 	
-	pSpr2->setZ(0.f); 
-	pressAnyKey->setZ(0.5f); 	
-	pSpr->setZ(1.0); 
-	
 	ps = new sora::SoraParticleManager;
 	ps->setGlobalSprite(sora::SORA->createSprite(L"pics/particles.png"));
 	ps->emitS(L"bg13_fire_left.sps", 100.f, 100.f);
@@ -194,28 +212,16 @@ void mainWindow::init() {
 		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getTextureHeight(false);
 	}
 	
-	uint8 localIp[4] = {192, 168, 1, 103};
-	if(!psocket.Initialize())
-		sora::DebugPtr->log("Error initializing passive socket");
-	if(!psocket.Listen(localIp, 3000))
-		sora::DebugPtr->log(sora::vamssg("Passive Socket Error, error code = %d", psocket.GetSocketError()));
-	
-	if(!asocket.Initialize())
-		sora::DebugPtr->log("Error initializing active socket");
-	if(!asocket.Open(localIp, 3000))
-		sora::DebugPtr->log(sora::vamssg("Active Socket Error, error code = %d", asocket.GetSocketError()));
-	
-	
-	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(0.f);
+	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(1.f);
 	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
-	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.6f); 
+	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.0f); 
 	
 }
 
 void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
 	if(kev->type == SORA_INPUT_KEYDOWN) {
 		if(kev->key == SORA_KEY_1 ) {
-		
+			
 		}
 	}
 }

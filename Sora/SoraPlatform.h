@@ -302,10 +302,21 @@ typedef enum {
 #endif
 
 /*
-flag for shaders in render system
-disable this to get rid of shader
+ flag for shaders in render system
+ disable this to get rid of shader
 */
-#define USE_SHADER
+#define SORA_USE_SHADER
+
+/*
+ use RTTI for SoraEvents and so on,
+ if disabled, then SoraEvent must give it's unique name for type identification
+*/
+#define SORA_USE_RTTI
+
+/*
+ if disabled, all exception would be disabled
+*/
+#define SORA_USE_EXCEPTION
 
 #endif // _SORA_PLATFORM_H_
 

@@ -160,7 +160,13 @@ namespace sora {
 		class BGSInfo: public SoraEventHandler {
 		public:
 			BGSInfo() {}
-
+			~BGSInfo() {
+				if(bgsFile)
+					delete bgsFile;
+			}
+			
+			std::wstring path;
+			
 			uint32 bgsid;
 			SoraMusicFile* bgsFile;
 			
@@ -170,19 +176,22 @@ namespace sora {
 			float32 volumeScale;
 			float32 bgmVolumeScale;
 			
-			BGSInfo(uint32 id, uint32 lt, float32 vol, float32 bgmvol): 
-				bgsid(id), loopTimes(lt), volumeScale(vol), bgmVolumeScale(bgmvol), currLoopTimes(0), bgsFile(NULL) {
+			bool bPlayFinished;
+			
+			BGSInfo(uint32 id, uint32 lt, float32 vol, float32 bgmvol, SoraMusicFile* file): 
+				bgsid(id), loopTimes(lt), volumeScale(vol), bgmVolumeScale(bgmvol), currLoopTimes(0), bgsFile(file) {
 					if(loopTimes != -1) {
 						registerEventFunc(this, &BGSInfo::onPlaybackEvent);
-						
-						bgsFile->registerEventHandler(this);
-						bgsFile->enableEventPublish(true);
+						if(bgsFile) {
+							bgsFile->registerEventHandler(this);
+							bgsFile->enableEventPublish(true);
+						}
 					}
 			}
 			
 			void onPlaybackEvent(SoraPlaybackEvent* event);
 		};
-		typedef std::map<uint32, BGSInfo> BGS_MAP;
+		typedef std::map<uint32, BGSInfo*> BGS_MAP;
 		BGS_MAP mBGSounds;
 	};
 	

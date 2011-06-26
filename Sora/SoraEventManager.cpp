@@ -226,4 +226,16 @@ namespace sora {
 		iehList.remove(handler);
 	}
 	
+	/*
+	 register file change event handler
+	 */
+	void SORACALL SoraEventManager::registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler) {
+	}
+	
+	void SORACALL SoraEventManager::unregisterFileChangeEventHandler(SoraEventHandler* handler) {
+	}
+	
+	void SORACALL SoraEventManager::setFileChangeDectectionInterval(float32 interval) {
+	}
+	
 } // namespace sora

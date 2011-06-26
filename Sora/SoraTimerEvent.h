@@ -15,6 +15,10 @@ namespace sora {
 		float32 getTotalTime() const { return totalTime; }
 		void setTotalTime(float32 _totalTime) { totalTime = _totalTime; }
 	
+#ifndef SORA_USE_RTTI
+		SORA_EVENT_IDENTIFIER(18446744070739255393ULL);
+#endif
+		
 	protected:
 		float32 time;
 		float32 totalTime;

@@ -1,0 +1,92 @@
+{
+	"widgets": [
+			{ "button": {
+				"parent": "top",
+				"name": "Open",
+				"x": 10, "y": 20,
+				"width": 120, "height": 30,
+				"caption": "Open File",
+				"id": "Open",
+				"opaque": false,
+				"responser": "AnimationPanel",
+				"responsetype": "action",
+				"foregroundcolor": "0x00000000"
+				}
+			},
+
+			{ "button": {
+				"parent": "top",
+				"name": "Refresh",
+				"x": 10, "y": 60,
+				"width": 120, "height": 30,
+				"caption": "Refresh",
+				"id": "Refresh",
+				"opaque": false,
+				"responser": "AnimationPanel",
+				"responsetype": "action"
+				}
+			},
+			
+			{ "listbox": {
+				"parent": "top",
+				"name": "AvailableAnimations",
+				"x": 10, "y": 200,
+				"width": 120, "height": 300,
+				"id": "AvailableAnimations",
+				"responser": "AnimationPanel",
+				"responsetype": "selection",
+				"backgroundcolor": "0x00000000",
+				"foregroundcolor": "0xFFFFFFFF",
+				"selectioncolor": "0xFF0000BB"
+				}
+			},
+			
+			{ "slider": {
+				"parent": "top",
+				"name": "PlayFrameRate",
+				"x": 10,
+				"y": 120,
+				"width": 120,
+				"height": 10,
+				"id": "PlayFrameRate",
+				"responser": "AnimationPanel",
+				"responsetype": "action",
+				"start": 1,
+				"end": 120,
+				"value": 60,
+				"makerLength": 1,
+				"stepLength": 1
+				}
+			},
+			
+			{ "label": {
+				"parent": "top",
+				"name": "PlayFrameRateLabel",
+				"x": 10,
+				"y": 100,
+				"width": 120,
+				"height": 20,
+				"caption": "PlayerFPS: 60",
+				"id": "PlayFrameRateLabel",
+				"opaque": false,
+				"foregroundcolor": "0xFFFFFFFF"
+				}
+			},
+			
+			{ "label": {
+				"parent": "top",
+				"name": "CurrentAnimationFile",
+				"x": 10,
+				"y": 400,
+				"width": 120,
+				"height": 20,
+				"caption": "Viewing: null",
+				"id": "CurrentAnimationFile",
+				"opaque": false,
+				"foregroundcolor": "0xFFFFFFFF"
+				}
+			}
+		]
+	
+}
+		

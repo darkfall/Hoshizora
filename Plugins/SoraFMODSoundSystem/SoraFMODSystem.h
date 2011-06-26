@@ -48,13 +48,13 @@ namespace sora {
     public:
         FMOD::System* getSystem() const {
             if(!pSystem)
-                throw SORA_EXCEPTION("No FMODSystem available");
+                THROW_SORA_EXCEPTION("No FMODSystem available");
             return pSystem;
         }
         
         bool init(int maxchannel, unsigned int initFlags, char*externalArgs) {
             if(pSystem)
-                throw SORA_EXCEPTION("FMOD System already exists");
+                THROW_SORA_EXCEPTION("FMOD System already exists");
             else {
                 FMOD_RESULT result = FMOD::System_Create(&pSystem);
                 if(FMOD_ERROR_CHECK(result)) {

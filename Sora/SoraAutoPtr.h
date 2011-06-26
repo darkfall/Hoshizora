@@ -61,7 +61,7 @@ namespace sora {
 		void operator=(T* rptr) {
 			if(ptr != NULL) {
 				if(typeid(rptr) != typeid(ptr)) {
-					throw SORA_EXCEPTION("SoraAutoPrt::operator =: different pointer type assignment");
+					THROW_SORA_EXCEPTION("SoraAutoPrt::operator =: different pointer type assignment");
 				}
 			
 				reference_count_dec();
@@ -75,13 +75,13 @@ namespace sora {
 		
 		T* operator->() {
 			if(ptr == 0) {
-				throw SORA_EXCEPTION("SoraAutoPtr::operator ->: pointer not allocted");
+				THROW_SORA_EXCEPTION("SoraAutoPtr::operator ->: pointer not allocted");
 			}
 			return ptr;
 		}
 		T* operator*() {
 			if(ptr == 0) {
-				throw SORA_EXCEPTION("SoraAutoPtr::operator *: pointer not allocted");
+				THROW_SORA_EXCEPTION("SoraAutoPtr::operator *: pointer not allocted");
 			}
 			return ptr;
 		}

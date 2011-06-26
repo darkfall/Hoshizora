@@ -32,7 +32,7 @@ namespace sora {
 		mCaretPosition = 0;
 		
 		mCaretColor = 0xFFFFFFFF;
-		mBackgroundColor = 0x99000000;
+		mBackgroundColor = 0xAA000000;
 		mCmdColor = 0xFFFFFFFF;
 		mResultColor = 0xFF22DD00;
 		
@@ -274,6 +274,8 @@ namespace sora {
 			itHandler->second->handleEvent(&cev);
 
 			history.mResult = s2wsfast(cev.getResults());
+		} else {
+			SORA->execute(cmd, params!=NULL?params:"");
 		}
 		
 		mHistory.push_back(history);

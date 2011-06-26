@@ -50,8 +50,10 @@ namespace sora {
 		}
 		shaderContext = NULL;
 		
-		if(texture)
+		if(texture && SoraTextureMap::Instance()->exist((HSORATEXTURE)tex)) {
 			setName(SoraTextureMap::Instance()->getTextureName((HSORATEXTURE)tex));
+			SoraTextureMap::Instance()->addRf((HSORATEXTURE)tex);
+		}
     }
 
 	SoraSprite::~SoraSprite() {

@@ -10,10 +10,25 @@
 #ifndef SORA_EXCEPTION_H
 #define SORA_EXCEPTION_H
 
+#include "SoraPlatform.h"
+
 #define SORA_EXCEPTION(mess) sora::SoraException(mess,   \
 								__FUNCTION__,          \
 								__FILE__,              \
 								__LINE__)
+
+#ifdef SORA_USE_EXCEPTION
+
+#define THROW_SORA_EXCEPTION(mess) throw sora::SoraException(mess, \
+									__FUNCTION__, \
+									__FILE__, \
+									__LINE__)
+
+#else
+
+#define THROW_SORA_EXCEPTION(mssg) 
+
+#endif
 
 #include "SoraPlatform.h"
 #include "SoraStringConv.h"

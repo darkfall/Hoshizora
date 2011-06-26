@@ -27,6 +27,10 @@ namespace sora {
 	//	void setItemName(const std::wstring& name);
 		SoraMenuBarItem* getItem() const;
 		
+#ifndef SORA_USE_RTTI
+		SORA_EVENT_IDENTIFIER(18446744069500614877ULL);
+#endif
+		
 	private:
 	//	std::wstring mItemName;
 	};

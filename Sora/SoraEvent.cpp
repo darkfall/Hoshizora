@@ -12,7 +12,11 @@ SoraEventHandler::~SoraEventHandler() {
 }
 
 void SoraEventHandler::handleEvent(SoraEvent* event) {
+#ifdef SORA_USE_RTTI
 	Handlers::iterator it = _handlers.find(SoraTypeInfo(typeid(*event)));
+#else
+	Handlers::iterator it = _handlers.find(SoraTypeInfo(event->getEventIdentifier()));
+#endif
 	if(it != _handlers.end()) {
 		it->second->exec(event);
 	}
