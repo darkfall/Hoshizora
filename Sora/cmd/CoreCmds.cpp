@@ -14,6 +14,7 @@
 
 #include "../SoraCore.h"
 #include "../SoraLocalizer.h"
+#include "../SoraEventManager.h"
 
 namespace sora {
 
@@ -106,6 +107,10 @@ namespace sora {
 					SET_ENV_STRING(params[1].c_str(), params[2].c_str());
 					
 					cev->setResults("EnvValue "+params[1]+" has been set to "+params[2]);
+				} 
+				
+				else if(p1Prev.compare("file_check_interval") == 0 && params.size() >= 1) {
+					SoraEventManager::Instance()->setFileChangeDetectionInterval(atof(params[0].c_str()));
 				}
 			}
 		}

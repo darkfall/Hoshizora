@@ -1,6 +1,7 @@
 #include "SoraEventManager.h"
 
 #include "hash.h"
+
 //#include "SoraLuaStateManager.h"
 
 namespace sora {
@@ -44,6 +45,14 @@ namespace sora {
 		evHandlers.remove(handler);
 	}
 
+	SoraEventManager::SoraEventManager(): currTime(0.f), mFileChangeEventPublisher(NULL) {
+	}
+	
+	SoraEventManager::~SoraEventManager() {
+		if(mFileChangeEventPublisher)
+			delete mFileChangeEventPublisher;
+	}
+	
 	void SoraEventManager::registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev) {
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		evMap[eid].push_back(SoraEventInfo(eventName, handler, ev));
@@ -226,16 +235,37 @@ namespace sora {
 		iehList.remove(handler);
 	}
 	
-	/*
-	 register file change event handler
-	 */
+	void SoraEventManager::SoraTimerEventInfo::update(float32 dt) {
+		currTime += dt;
+		totalTime += dt;
+		if(currTime >= time) {
+			ev->setTime(currTime);
+			ev->setTotalTime(totalTime);
+			handlerPack.onTimerEvent(ev);
+			
+			currTime = 0.f;
+		}
+	}
+	
 	void SORACALL SoraEventManager::registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler) {
+		if(mFileChangeEventPublisher == NULL)
+			mFileChangeEventPublisher = new SoraFileChangeEventPublisher;
+		
+		mFileChangeEventPublisher->addEventHandler(file, handler);
 	}
 	
 	void SORACALL SoraEventManager::unregisterFileChangeEventHandler(SoraEventHandler* handler) {
+		if(!mFileChangeEventPublisher)
+			return;
+		
+		mFileChangeEventPublisher->delEventHandler(handler);
 	}
 	
-	void SORACALL SoraEventManager::setFileChangeDectectionInterval(float32 interval) {
+	void SORACALL SoraEventManager::setFileChangeDetectionInterval(float32 interval) {
+		if(!mFileChangeEventPublisher)
+			return;
+		
+		mFileChangeEventPublisher->setInterval(interval);
 	}
 	
 } // namespace sora

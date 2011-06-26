@@ -157,6 +157,7 @@ void downloadEvent(sora::SoraHttpDownloadEvent* ev) {
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
+	registerEventFunc(this, &mainWindow::onFileChangeEvent);
 	registerEventFunc(downloadEvent);
 	
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
@@ -216,6 +217,12 @@ void mainWindow::init() {
 	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
 	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.0f); 
 	
+	
+	sora::SORA_EVENT_MANAGER->registerFileChangeEventHandler(L"test.lua", this);
+}
+
+void mainWindow::onFileChangeEvent(sora::SoraFileChangeEvent* cev) {
+	sora::SORA->messageBoxW(cev->getChangedFile().c_str(), L"test", MB_OK);
 }
 
 void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {

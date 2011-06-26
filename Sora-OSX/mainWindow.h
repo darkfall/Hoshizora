@@ -21,6 +21,8 @@
 #include "SoraNetwork/clsockets/ActiveSocket.h"
 #include "SoraNetwork/clsockets/PassiveSocket.h"
 
+#include "SoraFileChangeEvent.h"
+
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
 	mainWindow();
@@ -46,6 +48,7 @@ public:
 	void onKeyEvent(sora::SoraKeyEvent* kev);
 	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);
 	void onDownloadEvent(sora::SoraHttpDownloadEvent* ev);
+	void onFileChangeEvent(sora::SoraFileChangeEvent* ev);
 	
 private:
 	sora::SoraCore* sora;

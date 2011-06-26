@@ -13,6 +13,7 @@
 #include "SoraTimerEvent.h"
 #include "SoraFileChangeEvent.h"
 #include "SoraKeyInfo.h"
+#include "SoraFileChangeEvent.h"
 
 #include "QuickList.h"
 #include "hash.h"
@@ -26,7 +27,7 @@ namespace sora {
 	 You should care about the memory by yourself
 	 ALL Timered events would be deleted automatically except those passed by yourself
 	 ****/
-	
+		
 	class SoraEventHandlerPack: public SoraEventHandler {
 		friend class SoraEventManager;
 		
@@ -46,7 +47,9 @@ namespace sora {
 	class SoraEventManager: public SoraSingleton<SoraEventManager> {
 		friend class SoraSingleton<SoraEventManager>;
 		
-		SoraEventManager(): currTime(0.f), mFileChangeDetectionInterval(1.f) {}
+		SoraEventManager();
+		~SoraEventManager();
+		
 	public:
 		//~SoraEventManager();
 
@@ -95,7 +98,7 @@ namespace sora {
 		 */
 		void SORACALL registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler);
 		void SORACALL unregisterFileChangeEventHandler(SoraEventHandler* handler);
-		void SORACALL setFileChangeDectectionInterval(float32 interval);
+		void SORACALL setFileChangeDetectionInterval(float32 interval);
 		
 		void SORACALL update(float32 dt);
 
@@ -138,17 +141,7 @@ namespace sora {
 			bool repeat;
 			bool internalte;
 			
-			void update(float32 dt) {
-				currTime += dt;
-				totalTime += dt;
-				if(currTime >= time) {
-					ev->setTime(currTime);
-					ev->setTotalTime(totalTime);
-					handlerPack.onTimerEvent(ev);
-					
-					currTime = 0.f;
-				}
-			}
+			void update(float32 dt);
 			
 			SoraTimerEventInfo(SoraEventHandler* h, float32 _time, float32 _currTime, bool _repeat) :
 				time(_time), repeat(_repeat), internalte(true), currTime(_currTime), totalTime(0.f) {
@@ -177,7 +170,7 @@ namespace sora {
 		
 		inline void freeTimerEvent(TIMER_EVENT_LIST::iterator ittev);
 		
-		float32 mFileChangeDetectionInterval;
+		SoraFileChangeEventPublisher* mFileChangeEventPublisher;
 	};
 	
 	class SoraLuaEvent: public SoraEvent {

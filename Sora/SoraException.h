@@ -26,7 +26,8 @@
 
 #else
 
-#define THROW_SORA_EXCEPTION(mssg) 
+#define THROW_SORA_EXCEPTION(mssg) \
+	DebugPtr->log(vamssg("^s, function: %s, file: %s, line: %s", mssg, __FUNCTION__, __FILE__, __LINE__)); 
 
 #endif
 

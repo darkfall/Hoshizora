@@ -11,9 +11,14 @@
 #define SORA_FILE_CHANGE_EVENT_H_
 
 #include "SoraEvent.h"
+#include "SoraTimerEvent.h"
+
+#include "support/md5lib.h"
+
+#include <list>
 
 namespace sora {
-	
+		
 	class SoraFileChangeEvent: public SoraEvent {
 	public:
 		SoraFileChangeEvent(const SoraWString& file): mChangedFile(file) {}
@@ -28,6 +33,29 @@ namespace sora {
 	
 	private:
 		SoraWString mChangedFile;
+	};
+	
+	class SoraFileChangeEventPublisher: public SoraEventHandler {
+	public:
+		SoraFileChangeEventPublisher();
+		
+		void setInterval(float32 interval);
+		void addEventHandler(const SoraWString& file, SoraEventHandler* handler);
+		void delEventHandler(SoraEventHandler* handler);
+		void onCheckTimerEvent(SoraTimerEvent* event);
+		
+	private:
+		struct FileChangeInfo {			
+			std::string mMD5;
+			
+			typedef std::list<SoraEventHandler*> CHANGE_HANDLERS;
+			CHANGE_HANDLERS mHandlers;
+		};
+		
+		typedef std::map<SoraWString, FileChangeInfo> FILE_CHANGE_MAP;
+		FILE_CHANGE_MAP mChangeListeners;
+		
+		float32 mCheckInternval;
 	};
 	
 	
