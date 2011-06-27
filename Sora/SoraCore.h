@@ -235,6 +235,8 @@ namespace sora {
 		void setMainCamera(SoraCamera* camera);
 		SoraCamera* getMainCamera() const;
 		
+		void enablePluginDetection(bool flag);
+		
 	private:
 		inline void _registerCoreCmds();
 		
@@ -256,6 +258,7 @@ namespace sora {
 		bool bMessageBoxErrorPost;
 		bool bInitialized;
 		bool bHasInput;
+		bool bDisablePluginDetection;
 		
 		bool bPaused;
 		bool bPauseRender;

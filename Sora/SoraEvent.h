@@ -13,7 +13,7 @@ namespace sora {
     class SoraEventHandler;
 	
 #define SORA_EVENT_IDENTIFIER(ident) \
-	static sora::stringId EventIdentifier() { \
+	virtual sora::stringId getEventIdentifier() const { \
 		return ident; \
 	} \
     
@@ -39,9 +39,7 @@ namespace sora {
 		bool isConsumed() const { return bConsumed; }
 		
 #ifndef SORA_USE_RTTI
-		stringId getEventIdentifier() const {
-			return eventIdentifier;
-		}
+		virtual stringId getEventIdentifier() const = 0;
 #endif
 		
 		// base event not serializable
@@ -122,7 +120,8 @@ namespace sora {
 #ifdef SORA_USE_RTTI
 		_handlers[SoraTypeInfo(typeid(EventT))]= new SoraMemberFunctionHandler<T, EventT>(obj, memFn);
 #else
-		_handlers[SoraTypeInfo(EventT::EventIdentifier())] = new SoraMemberFunctionHandler<T, EventT>(obj, memFn);
+		EventT tmp;
+		_handlers[SoraTypeInfo(tmp.getEventIdentifier())] = new SoraMemberFunctionHandler<T, EventT>(obj, memFn);
 #endif
 	}
 	
@@ -131,7 +130,8 @@ namespace sora {
 #ifdef SORA_USE_RTTI
 		_handlers[SoraTypeInfo(typeid(EventT))] = new SoraFuncFunctionHandler<EventT>(evFn);
 #else
-		_handlers[SoraTypeInfo(EventT::EventIdentifier())] = new SoraFuncFunctionHandler<EventT>(evFn);
+		EventT tmp;
+		_handlers[SoraTypeInfo(tmp.getEventIdentifier())] = new SoraFuncFunctionHandler<EventT>(evFn);
 #endif
 	}
 

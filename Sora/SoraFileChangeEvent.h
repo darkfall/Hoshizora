@@ -21,7 +21,12 @@ namespace sora {
 		
 	class SoraFileChangeEvent: public SoraEvent {
 	public:
+		SoraFileChangeEvent() {}
 		SoraFileChangeEvent(const SoraWString& file): mChangedFile(file) {}
+		
+		void setChangedFile(const SoraWString& file) {
+			mChangedFile = file;
+		}
 		
 		SoraWString getChangedFile() const {
 			return mChangedFile;

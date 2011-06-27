@@ -26,6 +26,7 @@ namespace rftd {
 	
 	class EnemySpawnEvent: public sora::SoraTimerEvent {
 	public:
+		EnemySpawnEvent() {}
 		EnemySpawnEvent(int32 eid): enemyId(eid) {}
 		void setType(int32 eid) { enemyId = eid; }
 		int32 getType() const { return enemyId; }
@@ -38,6 +39,7 @@ namespace rftd {
 	
 	class SpawnFinishEvent: public sora::SoraEvent {
 	public:
+		SpawnFinishEvent() {}
 		SpawnFinishEvent(rftdSpawnPoint* sp): which(sp) {}
 
 		rftdSpawnPoint* getSpawnPoint() const { return which; }

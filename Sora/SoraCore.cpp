@@ -49,6 +49,7 @@ namespace sora {
 		bPaused = false;
 		bPauseRender = false;
 		bPauseSound = false;
+		bDisablePluginDetection = false;
 
 		_initializeTimer();
 		_initializeMiscTool();
@@ -98,7 +99,8 @@ namespace sora {
 	}
 
 	void SoraCore::start() {
-		SoraBooter::loadExPlugins(L"./sora/plugins");
+		if(!bDisablePluginDetection) 
+			SoraBooter::loadExPlugins(L"./sora/plugins");
 		
 		// no main window created
 		if(!bMainWindowSet) {
@@ -1128,6 +1130,10 @@ namespace sora {
 	void SoraCore::setMainCamera(SoraCamera* camera) {
 		assert(camera != NULL);
 		mainCamera = camera;
+	}
+	
+	void SoraCore::enablePluginDetection(bool flag) {
+		bDisablePluginDetection = !flag;
 	}
 	
 	SoraCamera* SoraCore::getMainCamera() const {

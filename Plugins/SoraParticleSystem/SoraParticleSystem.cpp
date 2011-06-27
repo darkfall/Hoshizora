@@ -22,9 +22,9 @@ namespace sora {
 		fMaxDistance = mMaxParticleDistance;
 		core = SoraCore::Instance();
 
-		z = 0.f;
+		z = 0.f;		
 		bZDepth = false;
-		
+
 	}
 
 	SoraParticleSystem::SoraParticleSystem(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
@@ -38,6 +38,8 @@ namespace sora {
 		}
 		
 		init();
+		bZDepth = false;
+
 	}
 
 	SoraParticleSystem::SoraParticleSystem(const SoraWString& str, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
@@ -51,6 +53,8 @@ namespace sora {
 		}
 		
 		init();
+		bZDepth = false;
+
 	}
 
 	void SoraParticleSystem::setZDepthEnabled(bool flag) {
@@ -112,9 +116,11 @@ namespace sora {
 	}
 	
 	void SoraParticleSystem::init() {
-		pSprite->setCenter((float32)pSprite->getSpriteWidth()/2, (float32)pSprite->getSpriteHeight()/2);
-		pSprite->setBlendMode(pheader.blendMode);
-		pSprite->setTextureRect(pheader.texX, pheader.texY, pheader.texW, pheader.texH);
+		if(pSprite) {
+			pSprite->setCenter((float32)pSprite->getSpriteWidth()/2, (float32)pSprite->getSpriteHeight()/2);
+			pSprite->setBlendMode(pheader.blendMode);
+			pSprite->setTextureRect(pheader.texX, pheader.texY, pheader.texW, pheader.texH);
+		}
 		
 		if(pheader.emitPos.z > mMaxParticleDistance) pheader.emitPos.z = mMaxParticleDistance;
 		else if(pheader.emitPos.z < 0.f) pheader.emitPos.z = 0.f;
@@ -187,7 +193,7 @@ namespace sora {
 	void SoraParticleSystem::update(float32 dt) {
 		if(dt > 0.1f) return;
 		
-	//	particles.erase(std::remove_if(particles.begin(), particles.end(), isParticleDied), particles.end());
+		particles.erase(std::remove_if(particles.begin(), particles.end(), isParticleDied), particles.end());
 
 		if(particles.size() != 0) {
 			PARTICLES::iterator p = particles.begin();
@@ -258,11 +264,16 @@ namespace sora {
 				++p;
 			}
 		}
-
+		
 		fCurrEmitTime += dt;
 		if(fCurrEmitTime > pheader.fEmitLifetime && pheader.fEmitLifetime != 0.f) { 
-			bActive = false;
+			if(getLiveParticle() == 0) {
+				bActive = false;
+				fCurrEmitTime = 0.f;
+			}
+			return;
 		}
+		
 		
 		if(!bActive) return;
 		if(particles.size() > mMaxParticleNum) {
@@ -295,10 +306,10 @@ namespace sora {
 		pSprite->setCenter(pheader.texW/2, pheader.texH/2);
 
 		if(bZDepth) {
-			pSprite->setBlendMode(pSprite->getBlendMode() & BLEND_ZWRITE);
+			pSprite->setBlendMode(BLEND_DEFAULT);
 			pSprite->setZ( z );
 		} else {
-			pSprite->setBlendMode(pSprite->getBlendMode() & BLEND_NOZWRITE);
+			pSprite->setBlendMode(BLEND_DEFAULT_Z);
 		}
 		
 		for(PARTICLES::iterator p=particles.begin(); p!=particles.end(); ++p) {
@@ -520,6 +531,10 @@ namespace sora {
 		PARTICLE_MAP::iterator p = particles.begin();
 		while( p != particles.end() ) {
 			p->second->update(dt);
+			if(!p->second->isActive()) {
+				delete p->second;
+				particles.erase(p);
+			}
 			++p;
 		}
 	}

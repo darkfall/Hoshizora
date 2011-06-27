@@ -67,7 +67,7 @@ bool mainWindow::updateFunc() {
 		++posy;
 		
 	//	sora::SORA->releaseFont(pFont);
-		pFont->setFontSize(pFont->getFontSize()+1);
+	//	pFont->setFontSize(pFont->getFontSize()+1);
 	}
 	
 	if(sora->keyDown(SORA_KEY_LEFT))
@@ -77,7 +77,7 @@ bool mainWindow::updateFunc() {
 	if(sora->keyDown(SORA_KEY_UP))
 		cy -= 2.f;
 	if(sora->keyDown(SORA_KEY_DOWN))
-		cy += 2.f;
+		ps->emitS(L"astar.sps", sora::SORA->randomFloat(0.f, 800.f), sora::SORA->randomFloat(0.f, 600.f));
 	
 	if(sora->keyDown(SORA_KEY_O))
 		sora::SoraBGMManager::Instance()->play(L"01.ogg", false);
@@ -109,10 +109,7 @@ bool mainWindow::renderFunc() {
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
 	
-	pFont->setColor(0xFFFFFFFF);	
-	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
-	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
-
+	
 	{
 		sora::PROFILE("p1");
 		
@@ -123,9 +120,15 @@ bool mainWindow::renderFunc() {
 		ps->render();
 	}
 	
-	pCanvas->render();
+	//pCanvas->render();
 
 	}
+	
+	pFont->setColor(0xFFFFFFFF);	
+	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
+	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
+	pFont->print(0.f, getWindowHeight()-60.f, sora::FONT_ALIGNMENT_LEFT, L"Alive Particles: %d, total %d", ps->size(), ps->getTotalParticleAlive());
+	
 	
 	sora->endScene();
 	return false;
@@ -198,7 +201,6 @@ void mainWindow::init() {
 	
 	ps = new sora::SoraParticleManager;
 	ps->setGlobalSprite(sora::SORA->createSprite(L"pics/particles.png"));
-	ps->emitS(L"bg13_fire_left.sps", 100.f, 100.f);
 	ps->emitS(L"astar.sps", 200.f, 100.f);
 	
 	float32 px = 400.f, py = 300.f;
