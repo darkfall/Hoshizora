@@ -11,7 +11,6 @@ namespace sora {
 	typedef ulong32 HSORARESOURCE;
 	
 	class SoraResourceManager {
-		
 	public:
 		virtual ~SoraResourceManager() {}
 
@@ -39,6 +38,7 @@ namespace sora {
 		
 		virtual bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) { return false; }
 	};
+	
 
 } // namespace sora;
 

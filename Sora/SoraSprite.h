@@ -60,6 +60,8 @@ namespace sora {
         virtual void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
 		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
 
+		virtual uint32 update(float32 dt);
+
 		void setTexture(HSORATEXTURE tex);
 		
 		void setTextureRect(float32 x, float32 y, float32 width, float32 height);
@@ -103,7 +105,6 @@ namespace sora {
         void unlockPixelData();
 		HSORATEXTURE getTexture() const;
 		
-		uint32 update(float32 dt);
 		void addEffect(SoraImageEffect* effect);
 		void stopEffect(SoraImageEffect* effect);
 		void clearEffects();

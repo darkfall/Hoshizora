@@ -17,6 +17,13 @@
 namespace sora {
 	
 	class SoraGifSprite: public SoraSprite {
+	public:
+		SoraGifSprite();
+		SoraGifSprite(const SoraWString& gifPath);
+		
+		bool load(const SoraWString& gifPath);
+		
+		virtual uint32 update(float32 dt);
 	};
 	
 } // namespace sora

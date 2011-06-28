@@ -1127,6 +1127,14 @@ namespace sora {
 		SoraMenuBar::Instance()->addMenu(menu);
 	}
 	
+	void SoraCore::delMenu(SoraMenuBarMenu* menu) {
+		SoraMenuBar::Instance()->delMenu(menu);
+	}
+	
+	void SoraCore::clearMenus() {
+		SoraMenuBar::Instance()->clear();
+	}
+	
 	void SoraCore::setMainCamera(SoraCamera* camera) {
 		assert(camera != NULL);
 		mainCamera = camera;

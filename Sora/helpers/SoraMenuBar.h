@@ -113,6 +113,8 @@ namespace sora {
 		void addMenu(SoraMenuBarMenu* bar);
 		void delMenu(SoraMenuBarMenu* bar);
 		
+		void clear();
+		
 		void render();
 		void update();
 		

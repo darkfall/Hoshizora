@@ -18,6 +18,7 @@
 #include "SoraShader.h"
 #include "SoraFrameListener.h"
 #include "SoraEnvValues.h"
+#include "SoraResourceFile.h"
 
 #include "Debug/SoraInternalLogger.h"
 #include "helpers/SoraMenuBar.h"
@@ -226,6 +227,8 @@ namespace sora {
 		void enableMenuBar(bool flag);
 		void setMenuBarShowAlways(bool flag);
 		void addMenu(SoraMenuBarMenu* menu);
+		void delMenu(SoraMenuBarMenu* menu);
+		void clearMenus();
 		
 		void setSystemFont(const wchar_t* font, int32 fontSize);
 		
