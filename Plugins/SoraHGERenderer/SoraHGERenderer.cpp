@@ -153,7 +153,12 @@ namespace sora{
     }
 
 	void SoraHGERenderer::attachShaderContext(SoraShaderContext* context) {
+		pHGE->_render_batch();
+		
 		currShader = context;
+		if(currShader && !currShader->attachShaderList()) {
+			DebugPtr->log("SoraHGERenderer: Unable to attach shader list");
+		}
 	}
 
 	void SoraHGERenderer::detachShaderContext() {
@@ -260,11 +265,9 @@ namespace sora{
 		}
 		
 		pHGE->Gfx_RenderQuad(&hquad);
-			
-		if(currShader) {
-			currShader->attachShaderList();
+		
+		if(currShader)
 			pHGE->_render_batch();
-		}
 	}
 
 	void SoraHGERenderer::renderTriple(SoraTriple& trip) {
@@ -273,11 +276,9 @@ namespace sora{
 		htrip.tex = ((SoraTexture*)trip.tex)->mTextureID;
 		htrip.blend = trip.blend;
 		pHGE->Gfx_RenderTriple(&htrip);
-
-		if(currShader) {
-			currShader->attachShaderList();
+		
+		if(currShader)
 			pHGE->_render_batch();
-		}
 	}
 
 	int32 SoraHGERenderer::_modeToDXMode(int32 mode) {

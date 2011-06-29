@@ -15,7 +15,7 @@ namespace sora {
 
 	SoraShader::SoraShader() {
 		this->type = 0;
-        bInternal = false;
+        bInternal = true;
 	}
 	
 	SoraShader::~SoraShader() {
@@ -27,14 +27,7 @@ namespace sora {
 	}
 	
 	SoraShaderContext::~SoraShaderContext() {
-		ShaderList::iterator itShader = shaders.begin();
-		while(itShader != shaders.end()) {
-			if((*itShader) && (*itShader)->bInternal) {
-				delete (*itShader);
-				(*itShader) = 0;
-			}
-            ++itShader;
-		}
+		clear();
 	}
 	
 	std::list<SoraShader*>::iterator SoraShaderContext::getShaderIterator(SoraShader* shader) {
@@ -111,5 +104,16 @@ namespace sora {
 		}
 	}
 	
+	void SoraShaderContext::clear() {
+		ShaderList::iterator itShader = shaders.begin();
+		while(itShader != shaders.end()) {
+			if((*itShader) && (*itShader)->bInternal) {
+				delete (*itShader);
+				(*itShader) = 0;
+			}
+            ++itShader;
+		}
+		shaders.clear();
+	}
 	
 } // namespace sora

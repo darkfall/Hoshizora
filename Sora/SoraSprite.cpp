@@ -59,8 +59,6 @@ namespace sora {
 	SoraSprite::~SoraSprite() {
 		clearEffects();
         clearShader();
-	//	if(texture) delete texture;
-	//	SoraTextureMap::Instance()->decRf((HSORATEXTURE)texture);
 	}
 
 	void SoraSprite::setTexture(HSORATEXTURE tex) {
@@ -411,6 +409,7 @@ namespace sora {
                 return;
         }
         shaderContext->attachShader(shader);
+		shader->setInternal(false);
     }
     
     void SoraSprite::detachShader(SoraShader* shader) {

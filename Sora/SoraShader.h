@@ -33,7 +33,8 @@ namespace sora {
 	public:
         SoraShader();
 		virtual ~SoraShader();
-        
+		
+		
 		/*
 			Set a parameterf
 			@param name, the name of the parameter to set
@@ -67,6 +68,8 @@ namespace sora {
 		 */
 		int32 getType() const { return type; }
         void setType(int32 t) { type = t; };
+		
+		void setInternal(bool flag) { bInternal = flag; }
 
 	protected:
         bool bInternal;
@@ -91,6 +94,8 @@ namespace sora {
 		SoraShaderContext();
 		virtual ~SoraShaderContext();
 		
+		void clear();
+        
         /*
          create a shader from context, not attach
          @param file, the path of the shader file to attach
@@ -133,8 +138,8 @@ namespace sora {
 		called by render system
 		DO NOT CALL THIS
 		*/
-		bool	attachShaderList();
-		bool	detachShaderList();
+		virtual bool	attachShaderList();
+		virtual bool	detachShaderList();
         
         void    setError(int32 error) { err = error; }
         int32   getError() const      { return err; }

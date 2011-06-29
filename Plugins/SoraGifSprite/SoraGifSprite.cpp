@@ -9,3 +9,8 @@
 
 #include "SoraGifSprite.h"
 
+namespace sora {
+
+
+
+} // namespace sora

@@ -534,10 +534,6 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::renderTriple(SoraTriple& trip) {
-		if(currShader != NULL) {
-			flush();
-		}
-
 		glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
 		if(trip.tex) {
 
@@ -589,15 +585,10 @@ namespace sora{
 			mVertexCount++;
 		}
 
-		if(currShader) {
-			if(!currShader->attachShaderList())
-				SoraCore::Instance()->log("SoraOGLRenderer: error attaching shader list");
+		if(currShader)
 			flush();
-		}
-
 		if(!trip.tex)
 			flush();
-
 	}
 	
 	void SoraOGLRenderer::renderWithVertices(SoraTexture* tex, int32 blendMode,  SoraVertex* vertices, uint32 vsize, int32 mode) {		
@@ -631,19 +622,10 @@ namespace sora{
 			mVertexCount++;
 		}
 		
-		if(currShader) {
-			if(!currShader->attachShaderList())
-				SoraCore::Instance()->log("SoraOGLRenderer: error attaching shader list");
-		}
-		
 		flush();
 	}
 
 	void SoraOGLRenderer::renderQuad(SoraQuad& quad) {
-		if(currShader != NULL) {
-			flush();
-		}
-
 		glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
 		if(quad.tex) {
 
@@ -706,12 +688,9 @@ namespace sora{
 			mColors[(mVertexCount<<2)+3] = colors[cdx++];
 			mVertexCount++;
 		}
-		if(currShader) {
-			if(!currShader->attachShaderList())
-				SoraCore::Instance()->log("SoraOGLRenderer: error attaching shader list");
+		
+		if(currShader)
 			flush();
-		}
-
 		if(!quad.tex)
 			flush();
 
@@ -867,7 +846,12 @@ namespace sora{
     }
 
 	void SoraOGLRenderer::attachShaderContext(SoraShaderContext* context) {
+		flush();
+		
 		currShader = context;
+		if(!currShader->attachShaderList()) {
+			DebugPtr->log("SoraOGLRenderer: Error attaching shader list");
+		}
 	}
 
 	void SoraOGLRenderer::detachShaderContext() {
@@ -875,7 +859,7 @@ namespace sora{
 			return;
 		
 		if(!currShader->detachShaderList())
-			SoraCore::Instance()->log("SoraOGLRenderer: error detaching shader list");
+			SoraCore::Instance()->log("SoraOGLRenderer: Error detaching shader list");
 		flush();
 		currShader = 0;
 	}
