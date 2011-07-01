@@ -182,6 +182,7 @@ namespace sora {
 		
 		if(requestedShaderUse)
 			mContext->detachShaderList();
+        return glGetError() == GL_NO_ERROR;
 	}
 	
 	bool SoraGLSLShader::getParameteriv(const char* name, int32* val, uint32 size) {
@@ -204,6 +205,7 @@ namespace sora {
 		
 		if(requestedShaderUse)
 			mContext->detachShaderList();
+        return glGetError() == GL_NO_ERROR;
 	}
 	
 	bool SoraGLSLShader::attach() {
@@ -216,10 +218,12 @@ namespace sora {
 			}
 		}
 		glAttachShader(mProgram, mShader);
+        return glGetError() == GL_NO_ERROR;
 	}
 	
 	bool SoraGLSLShader::detach() {
 		glDetachShader(mProgram, mShader);	
+        return glGetError() == GL_NO_ERROR;
 	}
 	
 	SoraGLSLShaderContext::SoraGLSLShaderContext() {
@@ -241,7 +245,8 @@ namespace sora {
 		SoraGLSLShader* shader = new SoraGLSLShader();
 		shader->mProgram = mProgram;
 		shader->mContext = this;
-		shader->loadShader(file, entry, type);
+        shader->loadShader(file, entry, type);
+        return shader;
 	}
 	
 	bool SoraGLSLShaderContext::attachShaderList() {
@@ -251,6 +256,7 @@ namespace sora {
 		glUseProgram(mProgram);
 		
 		mAttached = true;
+        return glGetError() == GL_NO_ERROR;
 	}
 	
 	bool SoraGLSLShaderContext::detachShaderList() {
@@ -259,6 +265,7 @@ namespace sora {
 		glUseProgram(0);
 		
 		mAttached = false;
+         return glGetError() == GL_NO_ERROR;
 	}
 	
 	bool SoraGLSLShaderContext::isAttached() const {

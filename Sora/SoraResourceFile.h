@@ -24,6 +24,7 @@ namespace sora {
 	public:
 		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
 		SoraResourceFileAuto(const SoraWString& file, bool retain=false);
+        SoraResourceFileAuto(const SoraWString& file, ulong32 size, bool retain=false);
 		~SoraResourceFileAuto();
 		
 		void* getData() const;

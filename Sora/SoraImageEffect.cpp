@@ -235,9 +235,9 @@ namespace sora {
 		mCurrEffect	= getListHead();
 	}
 	
-	void SoraImageEffectList::effect(SoraSprite* spr) {
+	void SoraImageEffectList::modify(SoraSprite* spr) {
 		if(mCurrEffect)
-			mCurrEffect->effect(spr);
+			mCurrEffect->modify(spr);
 	}
 
 	uint32 SoraImageEffectList::update(float32 delta) {
@@ -302,7 +302,7 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectFade::effect(SoraSprite* sprite) {
+	void SoraImageEffectFade::modify(SoraSprite* sprite) {
 		sprite->setColor(CSETA(sprite->getColor(), get1st()*255));
 	}
 
@@ -326,7 +326,7 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectScale::effect(SoraSprite* sprite) {
+	void SoraImageEffectScale::modify(SoraSprite* sprite) {
 		sprite->setScale(get1st(), get2nd());
 	}
 
@@ -350,7 +350,7 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectTransitions::effect(SoraSprite* sprite) {
+	void SoraImageEffectTransitions::modify(SoraSprite* sprite) {
 		sprite->setPosition(get1st(), get2nd());
 		if(etype == IMAGE_EFFECT_TRANSITIONS_Z)
 			sprite->setZ(get3rd());
@@ -376,7 +376,7 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectColorTransitions::effect(SoraSprite* sprite) {
+	void SoraImageEffectColorTransitions::modify(SoraSprite* sprite) {
 		sprite->setColor(SoraColorRGBA::GetHWColor(get1st(), get2nd(), get3rd(), get4th()), -1);
 	}
 	
@@ -400,7 +400,7 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectRotation::effect(SoraSprite* sprite) {
+	void SoraImageEffectRotation::modify(SoraSprite* sprite) {
 		sprite->setRotation(get1st());
 	}
 

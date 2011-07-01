@@ -9,6 +9,7 @@
 
 #include "SoraMenuBar.h"
 #include "SoraCore.h"
+#include "SoraEventManager.h"
 
 namespace sora {
 
@@ -209,6 +210,10 @@ namespace sora {
 	mShowAlways(false),
 	mMenuClicked(false),
 	mEnabled(false) {
+        mActiveKey.set(SORA_KEY_F1);
+        
+        registerEventFunc(this, &SoraMenuBar::onKeyEvent);
+        SoraEventManager::Instance()->registerInputEventHandler(this);
 	}
 	
 	SoraMenuBar::~SoraMenuBar() {
@@ -310,27 +315,21 @@ namespace sora {
 			if(SORA->keyDown(SORA_KEY_RBUTTON)) {
 				diactiveMenus();
 			}
-			
-			if(!menuClicked && !mShowAlways) {
-				if(!(posx >= 0.f && posx <= SORA->getScreenWidth() && posy >= 0.f && posy <= mMenuBarHeight))
-					mActive = false;
-			}
-		} else {
-			if(posx >= 0.f && posx <= SORA->getScreenWidth() && posy >= 0.f && posy <= mMenuBarHeight)
-				mActive = true;
-			else {
-				bool menuClicked = false;
-				
-				MENUBAR_LIST::iterator itMenu = mMenus.begin();
-				while(itMenu != mMenus.end()) {
-					if((*itMenu)->isActive())
-					   menuClicked = true;
-				}
-				if(!menuClicked)
-					mActive = false;
-			}
 		}
 	}
+    
+    void SoraMenuBar::onKeyEvent(SoraKeyEvent* kev) {
+        if(mActiveKey.test(kev)) {
+            kev->consume();
+            
+            if(!mShowAlways) {
+                if(mActive)
+                    mActive = false;
+                else 
+                    mActive = true;
+            }
+        }
+    }
 	
 	void SoraMenuBar::diactiveMenus() {
 		MENUBAR_LIST::iterator itMenu = mMenus.begin();
@@ -340,9 +339,15 @@ namespace sora {
 		}
 		
 		mMenuClicked = false;
-		if(!mShowAlways)
-			mActive = false;
 	}
+    
+    void SoraMenuBar::setActiveKey(SoraHotkey activeKey) {
+        mActiveKey = activeKey;
+    }
+    
+    SoraHotkey SoraMenuBar::getActiveKey() const {
+        return mActiveKey;
+    }
 	
 	void SoraMenuBar::setFont(SoraFont* font) {
 		mFont = font;

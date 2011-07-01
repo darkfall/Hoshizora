@@ -36,6 +36,10 @@
 
 #include "cmd/SoraConsole.h"
 
+#include "SoraGifSprite/SoraGifSprite.h"
+
+sora::SoraGifSprite* gifSprite;
+
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
@@ -113,18 +117,25 @@ bool mainWindow::renderFunc() {
 	{
 		sora::PROFILE("p1");
 		
-	
+		pFont->setColor(0xFFFFFFFF);	
+
 	
 	{
-		ps->update(sora::SORA->getDelta());
-		ps->render();
+	//	ps->update(sora::SORA->getDelta());
+	//	ps->render();
 	}
-	
+        gifSprite->update(0.f);
+        gifSprite->render();
+        pFont->print(gifSprite->getPositionX()+gifSprite->getSpriteWidth()/2,
+                     gifSprite->getPositionY()+gifSprite->getSpriteHeight(),
+                     sora::FONT_ALIGNMENT_CENTER,
+                     L"FrameRate: %d, Total Frame: %d",
+                     gifSprite->getFrameRate(),
+                     gifSprite->getFrameSize());
 	//pCanvas->render();
 
 	}
 	
-	pFont->setColor(0xFFFFFFFF);	
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 	pFont->print(0.f, getWindowHeight()-60.f, sora::FONT_ALIGNMENT_LEFT, L"Alive Particles: %d, total %d", ps->size(), ps->getTotalParticleAlive());
@@ -175,7 +186,7 @@ void mainWindow::init() {
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
 	
 	sora::SORA->enableMenuBar(true);
-	sora::SORA->setMenuBarShowAlways(true);
+	sora::SORA->setMenuBarShowAlways(false);
 	sora::SoraMenuBarMenu* menu1 = new sora::SoraMenuBarMenu(L"File");
 	menu1->addItem(L"Open", this);
 	menu1->addItem(L"Save", this);
@@ -218,7 +229,10 @@ void mainWindow::init() {
 	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(1.f);
 	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
 	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.0f); 
-	
+    
+    gifSprite = new sora::SoraGifSprite;
+    gifSprite->load(L"giftest.gif");
+	gifSprite->setPosition(100.f, 100.f);
 	
 	sora::SORA_EVENT_MANAGER->registerFileChangeEventHandler(L"test.lua", this);
 }

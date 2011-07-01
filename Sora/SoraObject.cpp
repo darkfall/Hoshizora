@@ -4,16 +4,16 @@
 
 namespace sora {
 
-	SoraObject::SoraObject(): type(0), parent(0), nameHash(0), posx(0.f), posy(0.f) {
+	SoraObject::SoraObject(): mType(0), mParent(0), mNameHash(0), mPosx(0.f), mPosy(0.f) {
 	}
 
 	SoraObject::~SoraObject(){
-		if(parent) parent->del(this);
+		if(mParent) mParent->del(this);
 	}
 	
 	uint32 SoraObject::update(float32 dt){
-		SUB_OBJECT_LIST::iterator itObj = subobjs.begin();
-		while(itObj != subobjs.end()) {
+		SUB_OBJECT_LIST::iterator itObj = mSubObjs.begin();
+		while(itObj != mSubObjs.end()) {
 			(*itObj)->update(dt);
 			++itObj;
 		}
@@ -22,16 +22,16 @@ namespace sora {
 	}
 	
 	void SoraObject::render() {
-		SUB_OBJECT_LIST::iterator itObj = subobjs.begin();
-		while(itObj != subobjs.end()) {
+		SUB_OBJECT_LIST::iterator itObj = mSubObjs.begin();
+		while(itObj != mSubObjs.end()) {
 			(*itObj)->render();
 			++itObj;
 		}
 	}
 	
 	void SoraObject::setPosition(float32 _x, float32 _y) {
-		posx = _x;
-		posy = _y;
+		mPosx = _x;
+		mPosy = _y;
 	}
 	
 	void SoraObject::getPosition(float32& _x, float32& _y) {
@@ -40,24 +40,24 @@ namespace sora {
 	}
 	
 	float32 SoraObject::getPositionX() {
-        if(!parent)
-            return posx;
-        return posx+parent->getPositionX();
+        if(!mParent)
+            return mPosx;
+        return mPosx+mParent->getPositionX();
 	}
 	
 	float32 SoraObject::getPositionY() {
-        if(!parent)
-            return posy;
-        return posx+parent->getPositionY();
+        if(!mParent)
+            return mPosy;
+        return mPosy+mParent->getPositionY();
 	}
 
-	void SoraObject::add(AP_OBJECT o){
-		subobjs.push_back(o);
-        o->parent = this;
+	void SoraObject::add(SoraObject* o){
+		mSubObjs.push_back(o);
+        o->mParent = this;
 	}
     
-    void SoraObject::setParent(AP_OBJECT o) {
-        this->parent = o;
+    void SoraObject::setParent(SoraObject* o) {
+        this->mParent = o;
     }
 /*
 void SoraObject::addlua(LuaPlus::LuaObject p) {
@@ -66,33 +66,42 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 	}
 }*/
 
-	void SoraObject::del(AP_OBJECT o){
-		subobjs.remove(o);
-        o->parent = 0;
+	void SoraObject::del(SoraObject* o){
+		mSubObjs.remove(o);
+        o->mParent = 0;
 	}
 	
 	SoraObject::SUB_OBJECT_LIST SoraObject::getObjList() const {
-		return subobjs;
+		return mSubObjs;
 	}
 	
-	SoraObject::AP_OBJECT SoraObject::getParent() const {
-		return parent;
+	SoraObject* SoraObject::getParent() const {
+		return mParent;
 	}
 
-	SoraObject::AP_OBJECT SoraObject::getObjByName(const SoraString& n) {
-		if(name.compare(n) == 0) {
+	SoraObject* SoraObject::getObjByName(const SoraString& n) {
+		if(mName.compare(n) == 0) {
 			return this;
 		}
 		
-		SUB_OBJECT_LIST::iterator itObj = subobjs.begin();
+		SUB_OBJECT_LIST::iterator itObj = mSubObjs.begin();
 		stringId id = str2id(n);
-		while(itObj != subobjs.end()) {
+		while(itObj != mSubObjs.end()) {
 			if((*itObj)->getName() == id)
 				return *itObj;
 			++itObj;
 		}
 		return NULL;
 	}
+	
+	uint32 SoraObject::getType() const { 
+		return mType;
+	}
+	
+	void SoraObject::setType(uint32 t) { 
+		mType = t; 
+	}
+
 	
 
 } // namespace sora

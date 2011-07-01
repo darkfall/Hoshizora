@@ -15,6 +15,7 @@
 
 #include "../SoraEvent.h"
 #include "../SoraKeyInfo.h"
+#include "../SoraHotkey.h"
 
 #include "../SoraFont.h"
 
@@ -90,7 +91,8 @@ namespace sora {
 		uint32 getResultColor() const { return mResultColor; }
 		
 		bool isActive() const { return mActive; }
-		void setActiveKey(int32 key) { mActiveKey = key; }
+		void setActiveKey(SoraHotkey key) { mActiveKey = key; }
+        SoraHotkey getActiveKey() const { return mActiveKey; }
 		
 		void setPosition(int32 posx, int32 posy) { mPositionX = posx; mPositionY = posy; }
 		void setSize(int32 width, int32 height) { mWidth = width; mHeight = height; }
@@ -107,7 +109,7 @@ namespace sora {
 		void drawTab();
 		
 		bool mActive;
-		int32 mActiveKey;
+		SoraHotkey mActiveKey;
 		
 		bool mBackspaceDown;
 		float32 mBackspaceTime;

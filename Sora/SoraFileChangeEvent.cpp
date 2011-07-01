@@ -40,6 +40,8 @@ namespace sora {
 				info.mHandlers.push_back(handler);
 				
 				mChangeListeners.insert(std::make_pair<SoraWString, FileChangeInfo>(file, info));
+                
+                fclose(fl);
 			} else {
 				THROW_SORA_EXCEPTION(vamssg("unable to open file %s", ws2s(file).c_str()));
 			}
@@ -74,11 +76,16 @@ namespace sora {
 					while(itHandler != itFile->second.mHandlers.end()) {
 						(*itHandler)->handleEvent(&event);
 						++itHandler;
+                        
+                        if(event.isConsumed())
+                            break;
 					}
 					
 					itFile->second.mMD5 = nowmd5.hex_digest();
 				}
+                fclose(file);
 			}
+            
 			++itFile;
 		}
 	}

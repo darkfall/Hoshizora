@@ -15,6 +15,7 @@
 #include "../SoraEvent.h"
 #include "../SoraFont.h"
 #include "../SoraPlugin.h"
+#include "../SoraHotkey.h"
 
 namespace sora {
 	
@@ -105,10 +106,14 @@ namespace sora {
 		SoraEventHandler* mEventHandler;
 	};
 	
-	class SoraMenuBar: public SoraSingleton<SoraMenuBar> {
-	public:
-		SoraMenuBar(float32 height = 30);
+	class SoraMenuBar: public SoraSingleton<SoraMenuBar>, public SoraEventHandler {
+    protected:
+        friend class SoraSingleton<SoraMenuBar>;
+        
+        SoraMenuBar(float32 height = 30);
 		~SoraMenuBar();
+		
+    public:
 		
 		void addMenu(SoraMenuBarMenu* bar);
 		void delMenu(SoraMenuBarMenu* bar);
@@ -126,6 +131,9 @@ namespace sora {
 		
 		void setShowAlways(bool flag);
 		bool isShowAlways() const;
+        
+        void setActiveKey(SoraHotkey activeKey);
+        SoraHotkey getActiveKey() const;
 		
 		void setEnabled(bool flag);
 		bool isEnabled() const;
@@ -133,12 +141,16 @@ namespace sora {
 		bool isActive() const;
 		
 		void diactiveMenus();
+        
+        void onKeyEvent(SoraKeyEvent* kev);
 		
 	private:
 		inline bool activeMenu(float32 x, float32 y);
 		
 		float32 mMenuBarHeight;
 		SoraFont* mFont;
+        
+        SoraHotkey mActiveKey;
 		
 		float32 mMenuBarLength;
 		

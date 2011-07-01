@@ -30,7 +30,7 @@ namespace sora {
 	public:
 		virtual bool update() = 0;
 
-		virtual void beginScene(ulong32 c, ulong32 t) = 0;
+		virtual void beginScene(ulong32 c, ulong32 t, bool clear=true) = 0;
 		virtual void endScene() = 0;
 		
 		virtual void beginFrame() = 0;
@@ -90,6 +90,9 @@ namespace sora {
 
 		virtual void setIcon(const SoraString& icon) {}
 		virtual void setCursor(const SoraString& cursor) {}
+		
+		virtual void pushTransformMatrix() {}
+		virtual void popTransformMatrix() {}
 	};
 
 } // namespace sora

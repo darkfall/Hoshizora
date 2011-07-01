@@ -715,6 +715,16 @@ namespace sora {
 		assert(bInitialized==true);
 		pRenderSystem->setTransform(x, y, dx, dy, rot, hscale, vscale);
 	}
+	
+	void SoraCore::pushTransformMatrix() {
+		assert(bInitialized==true);
+		pRenderSystem->pushTransformMatrix();
+	}
+	
+	void SoraCore::popTransformMatrix() {
+		assert(bInitialized==true);
+		pRenderSystem->popTransformMatrix();
+	}
 
 	void SoraCore::setTransformWindowSize(float32 w, float32 h) {
 		assert(bInitialized==true);
@@ -726,9 +736,9 @@ namespace sora {
         pRenderSystem->setViewPoint(x, y, z);
     }
 
-	void SoraCore::beginScene(ulong32 c, ulong32 t) {
+	void SoraCore::beginScene(ulong32 c, ulong32 t, bool clear) {
 		assert(bInitialized==true);
-		pRenderSystem->beginScene(c, t);
+		pRenderSystem->beginScene(c, t, clear);
         if(t == 0)
             bMainScene = true;
 	}

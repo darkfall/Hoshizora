@@ -53,9 +53,10 @@ namespace sora{
 		return false;
 	}
 
-	void SoraHGERenderer::beginScene(ulong32 color, ulong32 target) {
+	void SoraHGERenderer::beginScene(ulong32 color, ulong32 target, bool clear) {
 		pHGE->Gfx_BeginScene(target);
-		pHGE->Gfx_Clear(color);
+		if(clear)
+			pHGE->Gfx_Clear(color);
 	}
 
 	void SoraHGERenderer::endScene() {

@@ -57,7 +57,7 @@ public:
 	bool operator == (float32 t)				{return (r==t && g==t && b==t && a==t); }
 	bool operator != (float32 t)				{return (r!=t || g!=t || b!=t || a!=t); }
 	bool operator == (const SoraColorRGBA& rhs)	{return (r==rhs.r && g==rhs.g && b==rhs.b && a==rhs.a); }
-	bool operator != (const SoraColorRGBA& rhs)	{return (r!=rhs.r || g!=rhs.g && b!=rhs.b && a!=rhs.a); }
+	bool operator != (const SoraColorRGBA& rhs)	{return (r!=rhs.r || g!=rhs.g || b!=rhs.b || a!=rhs.a); }
 
 	unsigned int GetHWColor() const { return ((unsigned int)(a*255.0f)<<24) + ((unsigned int)(r*255.0f)<<16) + ((unsigned int)(g*255.0f)<<8) + (unsigned int)(b*255.0f); }
 	static uint32 GetHWColor(float32 oR, float32 og, float32 ob, float32 oa)  { return ((unsigned int)(oa*255.0f)<<24) + ((unsigned int)(oR*255.0f)<<16) + ((unsigned int)(og*255.0f)<<8) + (unsigned int)(ob*255.0f); }

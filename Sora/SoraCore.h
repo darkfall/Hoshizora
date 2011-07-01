@@ -56,13 +56,13 @@ namespace sora {
 		void SORACALL registerSoundSystem	(SoraSoundSystem* pSoundSystem);
 		
 		void SORACALL registerMiscTool		(SoraMiscTool* pMiscTool);
-		void SORACALL registerPluginManager  (SoraPluginManager* pPluginManager);
+		void SORACALL registerPluginManager (SoraPluginManager* pPluginManager);
 		void SORACALL registerTimer			(SoraTimer* pTimer);
 
 		void SORACALL registerPlugin		(SoraPlugin* pPlugin);
 		void SORACALL unistallPlugin		(SoraPlugin* pPlugin);
-		void SORACALL unistallPluginS	(const SoraString& sPluginName);
-		SoraPlugin* SORACALL getPlugin	(const SoraString& sPluginName);
+		void SORACALL unistallPluginS		(const SoraString& sPluginName);
+		SoraPlugin* SORACALL getPlugin		(const SoraString& sPluginName);
 
 		void	SORACALL setFPS(int32 fps);
 		float32 SORACALL getFPS();
@@ -74,7 +74,7 @@ namespace sora {
 		uint64 SORACALL getCurrentSystemTime();
 
 		// render system APIs
-		void SORACALL beginScene(ulong32 c=0, ulong32 h=0);
+		void SORACALL beginScene(ulong32 c=0, ulong32 h=0, bool clear=true);
 		void SORACALL endScene();
 
 		HSORATARGET SORACALL createTarget(int width, int height, bool zbuffer=true);
@@ -110,6 +110,9 @@ namespace sora {
 		void SORACALL setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void SORACALL setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
 		void SORACALL setTransformWindowSize (float32 w, float32 h);
+		
+		void SORACALL pushTransformMatrix();
+		void SORACALL popTransformMatrix();
 		
 		/*
 		 z sort without zbuffer, because there are some problems with transparency when zbuffer is on

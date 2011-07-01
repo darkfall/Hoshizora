@@ -23,7 +23,7 @@ namespace sora {
 
 		bool update();
 
-		void beginScene(ulong32 color=0, ulong32 target=0);
+		void beginScene(ulong32 color=0, ulong32 target=0, bool clear=true);
 		void endScene();
 		
 		void beginFrame();
@@ -62,6 +62,9 @@ namespace sora {
 		void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=1.f, float32 vscale=1.f);
 		void setTransformWindowSize(float32 w, float32 h);
         void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
+		
+		void pushTransformMatrix();
+		void popTransformMatrix();
 
 		ulong32 getMainWindowHandle() { return (ulong32)mainWindow; }
 		SoraWindowInfoBase* getMainWindow() { return mainWindow; }
@@ -86,7 +89,7 @@ namespace sora {
 		inline void _glInitialize();
 		inline void _glEndFrame();
 		inline void _glBeginFrame();
-		inline void _glBeginScene(ulong32 color, ulong32 target);
+		inline void _glBeginScene(ulong32 color, ulong32 target, bool clear);
 		inline void _glEndScene();
 		inline int32 _glTextureGetWidth(ulong32 tex, bool bOriginal=false);
 		inline int32 _glTextureGetHeight(ulong32 tex, bool bOriginal=false);

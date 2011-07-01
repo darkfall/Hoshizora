@@ -100,6 +100,10 @@ namespace sora {
 		gcn::Container* getTop() {
 			return (gcn::Container*)mGUIChan->getTop();
 		}
+		
+		void setTop(gcn::Container* top) {
+			mGUIChan->setTop(top);
+		}
         
         gcn::Widget* findWidget(const SoraString& sid) {
             gcn::Container* pTop = getTop();

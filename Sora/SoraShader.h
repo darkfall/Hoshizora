@@ -54,7 +54,16 @@ namespace sora {
         
         virtual bool getParameterfv(const char* name, float32* val, uint32 size) = 0;
         virtual bool getParameteriv(const char* name, int32* val, uint32 size) = 0;
+		
+		bool setParameter1f(const char* name, float32 v1);
+		bool setParameter2f(const char* name, float32 v1, float32 v2);
+		bool setParameter3f(const char* name, float32 v1, float32 v2, float32 v3);
+		bool setParameter4f(const char* name, float32 v1, float32 v2, float32 v3, float32 v4);
 
+		bool setParameter1i(const char* name, int32 v1);
+		bool setParameter2i(const char* name, int32 v1, float32 v2);
+		bool setParameter3i(const char* name, int32 v1, float32 v2, float32 v3);
+		bool setParameter4i(const char* name, int32 v1, float32 v2, float32 v3, float32 v4);
 		
         /*
          add a sample texture
@@ -120,31 +129,30 @@ namespace sora {
 			detach a shader from context
 			@param shader, the handle to the shader, the retval of attachShader
 		 */
-		void	detachShader(SoraShader* shader);
+		void detachShader(SoraShader* shader);
 
 		/*
 			attach all shaders in context to render
 			@retval, succeed or not
 		 */
-		void	attachToRender();
+		void attachToRender();
 		/*
 			detach all shaders in context from render
 			@retval, succeed or not
 		 */
-		void	detachFromRender();
-
+		void detachFromRender();
 
 		/*
 		called by render system
 		DO NOT CALL THIS
 		*/
-		virtual bool	attachShaderList();
-		virtual bool	detachShaderList();
+		virtual bool attachShaderList();
+		virtual bool detachShaderList();
         
-        void    setError(int32 error) { err = error; }
-        int32   getError() const      { return err; }
+        void	setError(int32 error) { err = error; }
+        int32	getError() const      { return err; }
         
-        uint32   getShaderSize() const { return shaders.size(); }
+        uint32 getShaderSize() const { return shaders.size(); }
         
         const ShaderList& getShaderList()  { return shaders; }
 		

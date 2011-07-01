@@ -19,7 +19,7 @@ namespace sora {
 
 	SoraConsole::SoraConsole(): mStartLine(0) {
 		registerEventFunc(this, &SoraConsole::onKeyEvent);
-		sora::SORA_EVENT_MANAGER->registerInputEventHandler(this);
+		SORA_EVENT_MANAGER->registerInputEventHandler(this);
 		
 		reset();
 	}
@@ -37,7 +37,7 @@ namespace sora {
 		mResultColor = 0xFF22DD00;
 		
 		mActive = false;
-		mActiveKey = SORA_KEY_GRAVE;
+		mActiveKey.set(SORA_KEY_GRAVE);
 		
 		mBackspaceDown = false;
 		mBackspaceTime = 0.f;
@@ -292,19 +292,17 @@ namespace sora {
 	}
 	
 	void SoraConsole::onKeyEvent(SoraKeyEvent* kev) {
-		if(!mActive) {
-			if(kev->isKeyPressed(mActiveKey))
-				mActive = true;
-			return;
-		} else {
-			if(kev->isKeyDown()) {
-				int32 key = kev->getKey();
-				if(key == mActiveKey) {
-					mActive = false;
-					return;
-				}
-			}
-		}
+		if(mActiveKey.test(kev)) {
+            if(mActive)
+                mActive = false;
+            else
+                mActive = true;
+            kev->consume();
+          
+            return;
+        }
+        if(!mActive)
+            return;
 		
 		kev->consume();
 
@@ -368,10 +366,6 @@ namespace sora {
 		
 		if(mTab == TAB_CMDLINE) {
 			if(kev->isKeyDown()) {
-				if(key == mActiveKey) {
-					mActive = false;
-					return;
-				}
 				if(isKeyPrintable(key)) {
 					mCurrentLine += kev->chr;
 				} 

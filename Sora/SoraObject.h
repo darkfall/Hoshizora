@@ -18,9 +18,7 @@ namespace sora {
 
 	class SoraObject: public SoraEventHandler, public SoraNamedObject, public AutoListElement<SoraObject> {
 	public:
-		typedef SoraObject* PSORAOBJECT;
-		typedef SoraObject* AP_OBJECT;
-		typedef std::list<AP_OBJECT> SUB_OBJECT_LIST;
+		typedef std::list<SoraObject*> SUB_OBJECT_LIST;
 		
 		SoraObject();
 		virtual ~SoraObject();
@@ -28,8 +26,8 @@ namespace sora {
 		virtual	uint32	update(float32 dt);
 		virtual void	render();
 		
-		virtual void	add(AP_OBJECT pobj);
-		virtual void	del(AP_OBJECT pobj);
+		virtual void	add(SoraObject* pobj);
+		virtual void	del(SoraObject* pobj);
 		
 		virtual void setPosition(float32 _x, float32 _y);
 		virtual float32 getPositionX();
@@ -38,27 +36,27 @@ namespace sora {
 		void getPosition(float32& _x, float32& _y);
 		
 		SUB_OBJECT_LIST getObjList() const;
-		AP_OBJECT getParent() const;
-        void setParent(AP_OBJECT obj);
+		SoraObject* getParent() const;
+        void setParent(SoraObject* obj);
 				
-		AP_OBJECT getObjByName(const SoraString& n);
+		SoraObject* getObjByName(const SoraString& n);
 		
-		uint32 getType() const { return type; }
-		void setType(uint32 t) { type = t; }
+		uint32 getType() const ;
+		void setType(uint32 t);
 	
 	protected:
 		SoraObject(const SoraObject&);
 		SoraObject operator=(const SoraObject&);
 		
-		PSORAOBJECT parent;
-		SUB_OBJECT_LIST subobjs;
+		SoraObject* mParent;
+		SUB_OBJECT_LIST mSubObjs;
 		
 		bool bFreeSubobjects;
-		float32 posx, posy;
-		uint32 type;
+		float32 mPosx, mPosy;
+		uint32 mType;
 		
-		SoraString name;
-		uint32 nameHash;
+		SoraString mName;
+		uint32 mNameHash;
 	};
 
 } // namespace sora

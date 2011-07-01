@@ -97,7 +97,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "55"
-         endingLineNumber = "55">
+         endingLineNumber = "55"
+         landmarkName = "class SoraRenderSystem"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -385,11 +387,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "324939002.860799"
+         timestampString = "331221876.323762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
@@ -403,9 +405,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "37"
-         endingLineNumber = "37"
-         landmarkName = "main(int argc, char* argv[])"
-         landmarkType = "7">
+         endingLineNumber = "37">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -417,9 +417,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "36"
-         endingLineNumber = "36"
-         landmarkName = "main(int argc, char* argv[])"
-         landmarkType = "7">
+         endingLineNumber = "36">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -441,11 +439,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "324939002.860799"
+         timestampString = "331221876.323762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
@@ -514,7 +512,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "393"
          endingLineNumber = "393"
-         landmarkName = "SoraOGLRenderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap)"
+         landmarkName = "SoraOGLRenderer::bindTexture(SoraTexture* tex)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -528,7 +526,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "432"
          endingLineNumber = "432"
-         landmarkName = "SoraOGLRenderer::createTextureFromRawData(unsigned int* data, int32 w, int32 h)"
+         landmarkName = "SoraOGLRenderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -542,7 +540,91 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "169"
          endingLineNumber = "169"
-         landmarkName = "SoraFTFont::getGlyphByChar(wchar_t c)"
+         landmarkName = "SoraFTFont::attach(FTFace* face, uint32 size)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraGifSprite/SoraGifSprite.cpp"
+         timestampString = "331153930.728788"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "62"
+         endingLineNumber = "62"
+         landmarkName = "SoraGifSprite::load(const SoraWString&amp; path)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraGestureRecognizer/SoraGesture.cpp"
+         timestampString = "331222557.698217"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "99"
+         endingLineNumber = "99"
+         landmarkName = "SoraGesture::doRecognizeGestureType(const SoraGesture::GestureSigPointList&amp; sigPoints)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraGestureRecognizer/SoraGestureRecognizer.cpp"
+         timestampString = "331220722.396157"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "24"
+         endingLineNumber = "24"
+         landmarkName = "SoraGestureRecognizer::SoraGestureRecognizer()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/SoraHotkey.h"
+         timestampString = "331220358.350235"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
+         landmarkName = "class SoraHotkeyEvent"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/helpers/SoraMenuBar.cpp"
+         timestampString = "331221596.056255"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "322"
+         endingLineNumber = "322"
+         landmarkName = "SoraMenuBar::onKeyEvent(SoraKeyEvent* kev)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraGestureRecognizer/SoraBaseGestureRecognizer.cpp"
+         timestampString = "331222341.174637"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "14"
+         endingLineNumber = "14"
+         landmarkName = "SoraBaseGestureTypeRecognizer::recognizeGesture(const SoraGesture::GestureSigPointList&amp; sigPoints)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

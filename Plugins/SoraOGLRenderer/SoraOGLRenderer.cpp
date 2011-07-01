@@ -183,7 +183,7 @@ namespace sora{
         }
 	}
 
-	void SoraOGLRenderer::_glBeginScene(ulong32 color, ulong32 t) {
+	void SoraOGLRenderer::_glBeginScene(ulong32 color, ulong32 t, bool clear) {
 		int32 width = _oglWindowInfo.width;
 		int32 height = _oglWindowInfo.height;
 
@@ -196,13 +196,20 @@ namespace sora{
             applyTransform();
 			CurBlendMode = 0;
             glClearColor(0, 0, 0, 0);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
+			
+			if(clear)
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+			else
+				glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+			
         } else {
             if(iFrameStart) {
                 glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
+				
+				if(clear)
+					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+				else
+					glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
             }
         }
 
@@ -274,8 +281,8 @@ namespace sora{
 		}
 	}
 
-	void SoraOGLRenderer::beginScene(ulong32 color, ulong32 target) {
-		_glBeginScene(color, target);
+	void SoraOGLRenderer::beginScene(ulong32 color, ulong32 target, bool clear) {
+		_glBeginScene(color, target, clear);
 	}
 
 	void SoraOGLRenderer::endScene() {
@@ -719,46 +726,15 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
-		/*int32 width = w;
-		int32 height = h;
-		if(pCurTarget) {
-			width = pCurTarget->getWidth();
-			height = pCurTarget->getHeight();
-		} else {
-			width = windowWidth;
-			height = windowHeight;
-		}
-
-		if(w==0 && h==0) {
-			_oglWindowInfo.width = width;
-			_oglWindowInfo.height = height;
-			_oglWindowInfo.x = x;
-			_oglWindowInfo.y = y;
-		} else {
-			if(x<0) { w+=x; x=0; }
-			if(y<0) { h+=y; y=0; }
-
-			if(x+w > width) w=width-x;
-			if(y+h > height) h=height-y;
-
-			_oglWindowInfo.width = width;
-			_oglWindowInfo.height = height;
-			_oglWindowInfo.x = x;
-			_oglWindowInfo.y = y;
-		}
-
-        flush();*/
-	/*	glViewport(_oglWindowInfo.x, _oglWindowInfo.y,
-				   _oglWindowInfo.width,
-				   _oglWindowInfo.height);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(_oglWindowInfo.x, 
-				_oglWindowInfo.x+_oglWindowInfo.width, 
-				_oglWindowInfo.y+_oglWindowInfo.height, 
-				_oglWindowInfo.y, -1.f, 1.f);*/
-	//	applyTransform();
 		glScissor(x, y, w, h);
+	}
+	
+	void SoraOGLRenderer::pushTransformMatrix() {
+		glPushMatrix();
+	}
+	
+	void SoraOGLRenderer::popTransformMatrix() {
+		glPopMatrix();
 	}
 
 	void SoraOGLRenderer::setTransformWindowSize(float32 w, float32 h) {

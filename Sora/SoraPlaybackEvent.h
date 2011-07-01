@@ -10,6 +10,7 @@
 #define SORA_PLAYBACK_EVENT_H_
 
 #include "SoraEvent.h"
+#include "SoraConstantStrings.h"
 
 namespace sora {
     

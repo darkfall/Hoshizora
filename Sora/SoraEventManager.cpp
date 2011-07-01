@@ -22,6 +22,9 @@ namespace sora {
 				SoraTimerEvent* ccev = const_cast<SoraTimerEvent*>(ev);
 				(*itHandler)->handleEvent((ccev));
 				++itHandler;
+                
+                if(ccev->isConsumed())
+                    break;
 			} else {
 				itHandler = evHandlers.erase(itHandler);
 			}

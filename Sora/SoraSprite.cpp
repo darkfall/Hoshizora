@@ -377,7 +377,7 @@ namespace sora {
 			IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
 			while(eff != vEffects.end()) {
 				uint32 result = (*eff)->update(dt);
-				(*eff)->effect(this);
+				(*eff)->modify(this);
 				
 				if(result == IMAGE_EFFECT_END) {     
 					delete (*eff);
