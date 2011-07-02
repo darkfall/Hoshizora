@@ -94,6 +94,7 @@ namespace sora {
         mAltFlag = rhs.mAltFlag;
         mCtrlFlag = rhs.mCtrlFlag;
         mRequirePress = rhs.mRequirePress;
+		return *this;
     }
     
 } // namespace sora

@@ -65,7 +65,7 @@ bool mainWindow::renderFunc() {
 	sora->beginScene(0);
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
-	
+
 	sora::SORA->beginZBufferSort();
 	pSpr3->render();
 	pSpr->render(100.f, 100.f);

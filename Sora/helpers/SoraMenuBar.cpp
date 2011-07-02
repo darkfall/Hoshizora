@@ -211,9 +211,7 @@ namespace sora {
 	mMenuClicked(false),
 	mEnabled(false) {
         mActiveKeyId = SORA->registerGlobalHotkey(SoraHotkey(SORA_KEY_F1), this);
-        
         registerEventFunc(this, &SoraMenuBar::onHotkeyEvent);
-        SoraEventManager::Instance()->registerInputEventHandler(this);
 	}
 	
 	SoraMenuBar::~SoraMenuBar() {

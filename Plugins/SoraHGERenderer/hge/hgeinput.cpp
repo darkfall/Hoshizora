@@ -388,7 +388,7 @@ void HGE_Impl::_BuildEvent(int type, int key, int scan, int flags, int x, int y)
 	}
 
 	
-	keypoll::publishInputedKey(eptr->event.key, eptr->event.type, eptr->event.chr);
+	sora::keypoll::publishInputedKey(eptr->event.key, eptr->event.type, eptr->event.chr);
 	
 	/*sora::SoraKeyEvent ev;
 	if(eptr->event.key != 0) {
