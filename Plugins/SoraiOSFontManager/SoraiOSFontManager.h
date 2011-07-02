@@ -22,6 +22,10 @@ namespace sora {
 		
 		SoraFont* getFont(const char* filename, uint32 size, uint32 bsize=0, const char* pr=0);
 		
+        bool fontExists(const char* filename);
+		
+        void releaseFont(SoraFont* font);
+        
 	private:
 		typedef std::map<SoraString, SoraFont*> FONT_MAP;
 		FONT_MAP mFontMap;

@@ -277,5 +277,9 @@ namespace sora {
     float32 SoraiOSFont::getKerningHeight() {
         return kerningHeight;
     }
+    
+    void SoraiOSFont::setFontSize(uint32 newsize) {
+    
+    }
 	
 } // namespace sora

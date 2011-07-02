@@ -32,6 +32,17 @@ namespace sora {
 		virtual const char* getCursor() { return NULL; }
 
 		virtual void pauseFunc() {}
+        
+        void setActive(bool flag) {
+            mActive = flag;
+        }
+        
+        bool isActive() const {
+            return mActive;
+        }
+        
+    private:
+        bool mActive;
 	};
 	
 } // namespace sora

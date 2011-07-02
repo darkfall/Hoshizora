@@ -132,7 +132,7 @@ namespace sora {
 		void setShowAlways(bool flag);
 		bool isShowAlways() const;
         
-        void setActiveKey(SoraHotkey activeKey);
+        void setActiveKey(const SoraHotkey& activeKey);
         SoraHotkey getActiveKey() const;
 		
 		void setEnabled(bool flag);
@@ -142,7 +142,7 @@ namespace sora {
 		
 		void diactiveMenus();
         
-        void onKeyEvent(SoraKeyEvent* kev);
+        void onHotkeyEvent(SoraHotkeyEvent* kev);
 		
 	private:
 		inline bool activeMenu(float32 x, float32 y);
@@ -150,7 +150,7 @@ namespace sora {
 		float32 mMenuBarHeight;
 		SoraFont* mFont;
         
-        SoraHotkey mActiveKey;
+        int32 mActiveKeyId;
 		
 		float32 mMenuBarLength;
 		

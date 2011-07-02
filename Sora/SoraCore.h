@@ -109,11 +109,11 @@ namespace sora {
 		void SORACALL renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, ulong32 color, float32 z=0.f);
 		void SORACALL setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void SORACALL setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
-		void SORACALL setTransformWindowSize (float32 w, float32 h);
 		
 		void SORACALL pushTransformMatrix();
 		void SORACALL popTransformMatrix();
-		
+        void SORACALL pushClippingMatrix();
+        void SORACALL popClippingMatrix();
 		/*
 		 z sort without zbuffer, because there are some problems with transparency when zbuffer is on
 		 we don't want our transparency pixels in textures to be omitted when rendering with z
@@ -178,6 +178,15 @@ namespace sora {
 		bool	SORACALL joyKeyState(int32 key, unsigned char state);
 		bool	SORACALL setJoyKey(int32 key);
 		bool	SORACALL hasJoy();
+        
+        /**
+         *  register a global hotkey and it's conresponding event handler
+         *  @returnval the id of the registered hotkey
+         */
+        int32   SORACALL registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler);
+        void    SORACALL unregisterGlobalHotkey(int32 hid);
+        void    SORACALL setGlobalHotkey(int32 hid, const SoraHotkey& key);
+        void    SORACALL clearGlobalHotkeys();
 		
 		void	SORACALL simulateKey(int32 key, int32 state);
 
@@ -225,13 +234,8 @@ namespace sora {
 		uint64 getEngineMemoryUsage();
 		
 		SoraConsole* getConsole() const;
-		
+        void enableMenuBar(bool flag);
 		SoraMenuBar* getMenuBar() const;
-		void enableMenuBar(bool flag);
-		void setMenuBarShowAlways(bool flag);
-		void addMenu(SoraMenuBarMenu* menu);
-		void delMenu(SoraMenuBarMenu* menu);
-		void clearMenus();
 		
 		void setSystemFont(const wchar_t* font, int32 fontSize);
 		

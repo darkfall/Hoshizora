@@ -74,6 +74,7 @@ namespace sora {
 		
 		void registerCmdHandler(SoraEventHandler* handler, const std::string& cmd);
 		void onKeyEvent(SoraKeyEvent* kev);
+        void onHotkeyEvent(SoraHotkeyEvent* hev);
 		
 		std::string getCurrentLine() const { return mCurrentLine; }
 		
@@ -91,8 +92,7 @@ namespace sora {
 		uint32 getResultColor() const { return mResultColor; }
 		
 		bool isActive() const { return mActive; }
-		void setActiveKey(SoraHotkey key) { mActiveKey = key; }
-        SoraHotkey getActiveKey() const { return mActiveKey; }
+		void setActiveKey(const SoraHotkey& key);
 		
 		void setPosition(int32 posx, int32 posy) { mPositionX = posx; mPositionY = posy; }
 		void setSize(int32 width, int32 height) { mWidth = width; mHeight = height; }
@@ -109,7 +109,7 @@ namespace sora {
 		void drawTab();
 		
 		bool mActive;
-		SoraHotkey mActiveKey;
+		int32 mActiveKeyId;
 		
 		bool mBackspaceDown;
 		float32 mBackspaceTime;

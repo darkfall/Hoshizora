@@ -59,9 +59,8 @@ namespace sora {
 
 		virtual void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color=0xFFFFFFFF, float32 z=0.0f);
 		virtual void renderBox(float32 x, float32 y, float32 width, float32 height, uint32 color=0xFFFFFFFF, float32 z=0.0f);
-		virtual void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0) { }
+		virtual void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0) = 0;
 		virtual void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f) = 0;
-		virtual void setTransformWindowSize(float32 w, float32 h) = 0;
         virtual void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f) = 0;
         
 		virtual void shutdown() = 0;
@@ -90,9 +89,6 @@ namespace sora {
 
 		virtual void setIcon(const SoraString& icon) {}
 		virtual void setCursor(const SoraString& cursor) {}
-		
-		virtual void pushTransformMatrix() {}
-		virtual void popTransformMatrix() {}
 	};
 
 } // namespace sora

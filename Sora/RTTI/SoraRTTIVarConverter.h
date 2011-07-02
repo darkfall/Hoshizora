@@ -1,11 +1,31 @@
 /*
  *  SoraRTTIVarConverter.h
- *  PartitionTree
  *
  *  Created by Griffin Bu on 5/22/11.
- *  Copyright 2011 Studio GameMaster. All rights reserved.
- *
+ *  Copyright 2011 Studio GameMaster(www.gamemastercn.com). All rights reserved.
+ **/
+
+/*
+ This software is provided 'as-is', without any express or implied
+ warranty. In no event will the authors be held liable for any
+ damages arising from the use of this software.
+ 
+ Permission is granted to anyone to use this software for any
+ purpose, including commercial applications, and to alter it and
+ redistribute it freely, subject to the following restrictions:
+ 
+ 1. The origin of this software must not be misrepresented; you must
+ not claim that you wrote the original software. If you use this
+ software in a product, an acknowledgment in the product documentation
+ would be appreciated but is not required.
+ 
+ 2. Altered source versions must be plainly marked as such, and
+ must not be misrepresented as being the original software.
+ 
+ 3. This notice may not be removed or altered from any source
+ distribution.
  */
+
 
 #ifndef SORA_RTTI_VAR_CONVERTER_H_
 #define SORA_RTTI_VAR_CONVERTER_H_
@@ -237,7 +257,7 @@ namespace sora {
 	};
 	
 	template<class __IN>
-	class RTTIVarConvertTo<__IN, int64> {
+	class RTTIVarConvertTo<__IN, int64_t> {
 	public:
 		int operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
@@ -256,20 +276,20 @@ namespace sora {
 				case RTTI_ULONG32:
 				case RTTI_FLOAT:
 				case RTTI_DOUBLE:
-					return static_cast<int64>(value);
+					return static_cast<int64_t>(value);
 					break;
 					
 				case RTTI_STRING:
-					return static_cast<int64>(atoi(value.c_str()));
+					return static_cast<int64_t>(atoi(value.c_str()));
 					break;
 			}
 			
-			return RTTIDefaultValue<int64>::Default();
+			return RTTIDefaultValue<int64_t>::Default();
 		}
 	};
 	
 	template<class __IN>
-	class RTTIVarConvertTo<__IN, uint64> {
+	class RTTIVarConvertTo<__IN, uint64_t> {
 	public:
 		int operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
@@ -288,15 +308,15 @@ namespace sora {
 				case RTTI_ULONG32:
 				case RTTI_FLOAT:
 				case RTTI_DOUBLE:
-					return static_cast<uint64>(value);
+					return static_cast<uint64_t>(value);
 					break;
 					
 				case RTTI_STRING:
-					return static_cast<uint64>(atoi(value.c_str()));
+					return static_cast<uint64_t>(atoi(value.c_str()));
 					break;
 			}
 			
-			return RTTIDefaultValue<uint64>::Default();
+			return RTTIDefaultValue<uint64_t>::Default();
 		}
 	};
 	

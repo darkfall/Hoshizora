@@ -150,25 +150,36 @@ namespace sora{
         }
 	}
 	
-	void SoraiOSGLRenderer::_glBeginScene(ulong32 color, ulong32 t) {
+	void SoraiOSGLRenderer::_glBeginScene(ulong32 color, ulong32 t, bool clear) {
 		int32 width = _oglWindowInfo.width;
 		int32 height = _oglWindowInfo.height;
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-		
+        
 		if(t) {
 			pCurTarget = (SoraRenderTargetiOSGL*)t;
 			width = pCurTarget->getWidth();
 			height = pCurTarget->getHeight();
-			
+            
             pCurTarget->attachToRender();
             applyTransform();
 			CurBlendMode = 0;
-            glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
+            glClearColor(0, 0, 0, 0);
+			
+			if(clear)
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+			else
+				glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+			
         } else {
             if(iFrameStart) {
                 glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
+				
+				if(clear)
+					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+				else
+					glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
             }
         }
+        
 	}
 	
 	void SoraiOSGLRenderer::_glEndScene() {
@@ -226,8 +237,8 @@ namespace sora{
 		g_timer = timer;
 	}
 
-	void SoraiOSGLRenderer::beginScene(ulong32 color, ulong32 target) {
-		_glBeginScene(color, target);
+	void SoraiOSGLRenderer::beginScene(ulong32 color, ulong32 target, bool clear) {
+		_glBeginScene(color, target, clear);
 	}
 
 	void SoraiOSGLRenderer::endScene() {

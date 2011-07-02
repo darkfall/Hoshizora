@@ -32,5 +32,24 @@ namespace sora {
 		mFontMap[filename] = pfont;
 		return pfont;
 	}
+    
+    bool SoraiOSFontManager::fontExists(const char* filename) {
+        FONT_MAP::iterator itFont = mFontMap.find(filename);
+        if(itFont != mFontMap.end())
+            return true;
+        return false;
+    }
+    
+    void SoraiOSFontManager::releaseFont(SoraFont* font) {
+        FONT_MAP::iterator itFont = mFontMap.begin();
+        while(itFont != mFontMap.end()) {
+            if(itFont->second == font) {
+                delete font;
+                itFont->second = NULL;
+                mFontMap.erase(itFont);
+                break;
+            }
+        }
+    }
 
 } // namespace sora

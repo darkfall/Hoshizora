@@ -72,6 +72,7 @@ namespace sora {
 		
 		// get font size
 		uint32	getFontSize();
+        void    setFontSize(uint32 newsize);
 		
 		// get width of a char
 		float32	getWidthFromCharacter(wchar_t c, bool original = false);

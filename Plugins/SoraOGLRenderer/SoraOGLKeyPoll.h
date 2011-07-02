@@ -21,9 +21,6 @@ namespace sora {
 	int sorakey_to_glfwkey(int key);
 	int glfwkey_to_sorakey(int key);
 
-    void clearPoll();
-    bool getEv(SoraKeyEvent& ev);
-
 } // namespace sora
 #endif
 

@@ -210,9 +210,9 @@ namespace sora {
 	mShowAlways(false),
 	mMenuClicked(false),
 	mEnabled(false) {
-        mActiveKey.set(SORA_KEY_F1);
+        mActiveKeyId = SORA->registerGlobalHotkey(SoraHotkey(SORA_KEY_F1), this);
         
-        registerEventFunc(this, &SoraMenuBar::onKeyEvent);
+        registerEventFunc(this, &SoraMenuBar::onHotkeyEvent);
         SoraEventManager::Instance()->registerInputEventHandler(this);
 	}
 	
@@ -318,8 +318,8 @@ namespace sora {
 		}
 	}
     
-    void SoraMenuBar::onKeyEvent(SoraKeyEvent* kev) {
-        if(mActiveKey.test(kev)) {
+    void SoraMenuBar::onHotkeyEvent(SoraHotkeyEvent* kev) {
+        if(mActiveKeyId == kev->getHotkeyId()) {
             kev->consume();
             
             if(!mShowAlways) {
@@ -341,12 +341,8 @@ namespace sora {
 		mMenuClicked = false;
 	}
     
-    void SoraMenuBar::setActiveKey(SoraHotkey activeKey) {
-        mActiveKey = activeKey;
-    }
-    
-    SoraHotkey SoraMenuBar::getActiveKey() const {
-        return mActiveKey;
+    void SoraMenuBar::setActiveKey(const SoraHotkey& activeKey) {
+        SORA->setGlobalHotkey(mActiveKeyId, activeKey);
     }
 	
 	void SoraMenuBar::setFont(SoraFont* font) {

@@ -18,19 +18,24 @@ namespace sora {
     
     class SoraHotkey;
     
-    class SoraHotkeyEvent {
+    class SoraHotkeyEvent: public SoraEvent {
     public:  
         SoraHotkeyEvent(): mHotkey(NULL) {}
-        SoraHotkeyEvent(SoraHotkey* hkey): mHotkey(hkey) {}
+        SoraHotkeyEvent(SoraHotkey* hkey, int32 hid): mHotkey(hkey), mHotkeyId(hid) {}
         
         SoraHotkey* getHotkey() const {
             return mHotkey;
+        }
+        
+        int32 getHotkeyId() const {
+            return mHotkeyId;
         }
         
         SORA_EVENT_IDENTIFIER(str2id("SoraHotkeyEvent"));
         
     private:
         SoraHotkey* mHotkey;
+        int32 mHotkeyId;
     };
     
     class SoraHotkey {
@@ -56,6 +61,12 @@ namespace sora {
         bool isAltFlag() const;
         bool isShiftFlag() const;
         int32 getKey() const;
+        
+        SoraHotkey& operator=(const SoraHotkey& rhs);
+        
+        SoraHotkey(const SoraHotkey& rhs) {
+            *this = rhs;
+        }
         
     private:
         int32 mKey;

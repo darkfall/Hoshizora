@@ -10,6 +10,7 @@
 
 #include "SoraOGLKeyPoll.h"
 #include "SoraEventManager.h"
+#include "SoraInputQueue.h"
 
 #include "Debug/SoraInternalLogger.h"
 
@@ -174,68 +175,32 @@ namespace sora {
 		}
 		return rkey;
 	}
-		
-	typedef std::vector<SoraKeyEvent> VKEYEVENT_POLL;
-	static VKEYEVENT_POLL keyPoll;
-
+    
 	void glfwKeyCallback(int key, int action) {
-		SoraKeyEvent ev;
-		if(action == GLFW_PRESS) ev.type = SORA_INPUT_KEYDOWN;
-		else ev.type = SORA_INPUT_KEYUP;
+		int32 type;
+		if(action == GLFW_PRESS) type = SORA_INPUT_KEYDOWN;
+		else type = SORA_INPUT_KEYUP;
 
-		ev.key = glfwkey_to_sorakey(key);
-		ev.flags = 0;
-		if(glfwGetKey(GLFW_KEY_LSHIFT) == GLFW_PRESS || glfwGetKey(GLFW_KEY_RSHIFT) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_SHIFT;
-		if(glfwGetKey(GLFW_KEY_LALT) == GLFW_PRESS || glfwGetKey(GLFW_KEY_RALT) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_ALT;
-		if(glfwGetKey(GLFW_KEY_LCTRL) == GLFW_PRESS || glfwGetKey(GLFW_KEY_RCTRL) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_CTRL;
-		if(glfwGetKey(GLFW_KEY_CAPS_LOCK) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_CAPSLOCK;
-		if(glfwGetKey(GLFW_KEY_SCROLL_LOCK)) ev.flags |= SORA_INPUT_FLAG_SCROLLLOCK;
+		int32 skey = glfwkey_to_sorakey(key);
 
-		ev.chr = toasciiWithFlag(ev.key, ev.flags);
-		ev.wheel = glfwGetMouseWheel();
-		int32 x, y;
-		glfwGetMousePos(&x, &y);
-		ev.x = x;
-		ev.y = y;
-				
-		SORA_EVENT_MANAGER->publishInputEvent(&ev);
-		if(!ev.isConsumed())
-			keyPoll.push_back(ev);
+		char chr = toasciiWithFlag(key, (glfwGetKey(GLFW_KEY_LSHIFT) == GLFW_PRESS || glfwGetKey(GLFW_KEY_RSHIFT) == GLFW_PRESS) ? SORA_INPUT_FLAG_SHIFT : 0);
+        
+        keypoll::publishInputedKey(skey, type, chr);
 	}
 	
 	void glfwMouseCallback(int key, int action) {
-		SoraKeyEvent ev;
-		if(action == GLFW_PRESS) ev.type = SORA_INPUT_KEYDOWN;
-		else ev.type = SORA_INPUT_KEYUP;
+		int32 type;
+		if(action == GLFW_PRESS) type = SORA_INPUT_KEYDOWN;
+		else type = SORA_INPUT_KEYUP;
 		
+        int32 skey;
 		switch(key) {
-			case GLFW_MOUSE_BUTTON_LEFT: ev.key = SORA_KEY_LBUTTON;
-			case GLFW_MOUSE_BUTTON_RIGHT: ev.key = SORA_KEY_RBUTTON;
-			case GLFW_MOUSE_BUTTON_MIDDLE: ev.key = SORA_KEY_MBUTTON;
+			case GLFW_MOUSE_BUTTON_LEFT: skey = SORA_KEY_LBUTTON;
+			case GLFW_MOUSE_BUTTON_RIGHT: skey = SORA_KEY_RBUTTON;
+			case GLFW_MOUSE_BUTTON_MIDDLE: skey = SORA_KEY_MBUTTON;
 		}
 		
-		ev.chr = 0;
-		ev.wheel = glfwGetMouseWheel();
-		int32 x, y;
-		glfwGetMousePos(&x, &y);
-		ev.x = x;
-		ev.y = y;
-		
-		SORA_EVENT_MANAGER->publishInputEvent(&ev);
-		if(!ev.isConsumed())
-			keyPoll.push_back(ev);
-	}
-
-	void clearPoll() {
-		keyPoll.clear();
-	}
-
-	bool getEv(SoraKeyEvent& ev) {
-		if(keyPoll.size() != 0) {
-			ev = keyPoll.back();
-			keyPoll.pop_back();
-			return true;
-		} else return false;
+		keypoll::publishInputedKey(skey, type, 0);
 	}
 
 } // namespace sora

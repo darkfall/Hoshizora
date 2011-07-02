@@ -6,6 +6,7 @@
 #include "SoraConstantStrings.h"
 #include "SoraMemoryFile.h"
 #include "SoraFolderResourceManager.h"
+#include "SoraInputQueue.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
@@ -30,7 +31,6 @@
 #include "MemoryUsage.h"
 #include "Rect4V.h"
 #include "SoraCamera.h"
-
 
 extern "C" {
 #include "Random/SFMT.h"
@@ -240,6 +240,8 @@ namespace sora {
 			time += pTimer->getDelta();
 			
 			pRenderSystem->endFrame();
+            
+            keypoll::clearInputQueue();
 		}
         
 	}
@@ -369,6 +371,7 @@ namespace sora {
 				pMiscTool->setMainWindowHandle(result);
 				bMainWindowSet = true;
 				mainWindow = info;
+                mainWindow->setActive(true);
 			
 				DebugPtr->log(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
 							  LOG_LEVEL_NOTICE);
@@ -379,8 +382,11 @@ namespace sora {
 				return 0;
 			}
 		} else {
+            mainWindow->setActive(false);
 			mainWindow = info;
-			DebugPtr->log(vamssg("Recreated MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
+            mainWindow->setActive(true);
+            
+			DebugPtr->log(vamssg("Set MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
 						  LOG_LEVEL_NOTICE);
 			
 			if(info->getWindowWidth() != iScreenWidth || info->getWindowHeight() != iScreenHeight) {
@@ -443,6 +449,8 @@ namespace sora {
 		if(bHasInput) delete pInput;
 		pInput = input;
 		bHasInput = true;
+        
+        keypoll::setQueueInput(input);
 	}
 
 	void SoraCore::registerResourceManager(SoraResourceManager* pResourceManager) {
@@ -718,17 +726,10 @@ namespace sora {
 	
 	void SoraCore::pushTransformMatrix() {
 		assert(bInitialized==true);
-		pRenderSystem->pushTransformMatrix();
 	}
 	
 	void SoraCore::popTransformMatrix() {
 		assert(bInitialized==true);
-		pRenderSystem->popTransformMatrix();
-	}
-
-	void SoraCore::setTransformWindowSize(float32 w, float32 h) {
-		assert(bInitialized==true);
-		pRenderSystem->setTransformWindowSize(w, h);
 	}
     
     void SoraCore::setViewPoint(float32 x, float32 y, float32 z) {
@@ -836,7 +837,7 @@ namespace sora {
 	}
 
 	bool SoraCore::getKeyEvent(SoraKeyEvent& ev) {
-		if(bHasInput) return pInput->getKeyEvent(ev);
+		if(bHasInput) return keypoll::getQueueEvent(ev);
 		return false;
 	}
 
@@ -869,6 +870,22 @@ namespace sora {
 		if(bHasInput) return pInput->hasJoy();
 		return false;
 	}
+    
+    int32 SoraCore::registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler) {
+        return keypoll::addGlobalHotKey(key, handler);
+    }
+    
+    void SoraCore::setGlobalHotkey(int32 hid, const SoraHotkey& key) {
+        keypoll::setGlobalHotkey(hid, key);
+    }
+    
+    void SoraCore::unregisterGlobalHotkey(int32 hid) {
+        keypoll::delGlobalHotkey(hid);
+    }
+    
+    void SoraCore::clearGlobalHotkeys() {
+        keypoll::clearGlobalHotkeys();
+    }
 	
 	SoraWString SoraCore::fileOpenDialog(const char* filter, const char* defaultPath) {
 		if(!pMiscTool)
@@ -1129,21 +1146,6 @@ namespace sora {
 		pRenderSystem->setCursor(cursor);
 	}
 	
-	void SoraCore::setMenuBarShowAlways(bool flag) {
-		SoraMenuBar::Instance()->setShowAlways(flag);
-	}
-	
-	void SoraCore::addMenu(SoraMenuBarMenu* menu) {
-		SoraMenuBar::Instance()->addMenu(menu);
-	}
-	
-	void SoraCore::delMenu(SoraMenuBarMenu* menu) {
-		SoraMenuBar::Instance()->delMenu(menu);
-	}
-	
-	void SoraCore::clearMenus() {
-		SoraMenuBar::Instance()->clear();
-	}
 	
 	void SoraCore::setMainCamera(SoraCamera* camera) {
 		assert(camera != NULL);
@@ -1157,4 +1159,5 @@ namespace sora {
 	SoraCamera* SoraCore::getMainCamera() const {
 		return mainCamera;
 	}
+
 } // namespace sora

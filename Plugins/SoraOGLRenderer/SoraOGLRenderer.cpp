@@ -267,7 +267,6 @@ namespace sora{
 	}
 
 	bool SoraOGLRenderer::update() {
-		clearPoll();
 		return false;
 	}
 

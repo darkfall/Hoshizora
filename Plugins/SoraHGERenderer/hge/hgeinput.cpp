@@ -18,7 +18,7 @@
 #include <dinput.h>
 #include <objbase.h>
 
-#include "SoraEventManager.h"
+#include "SoraInputQueue.h"
 
 char *KeyNames[] =
 {
@@ -388,7 +388,9 @@ void HGE_Impl::_BuildEvent(int type, int key, int scan, int flags, int x, int y)
 	}
 
 	
-	sora::SoraKeyEvent ev;
+	keypoll::publishInputedKey(eptr->event.key, eptr->event.type, eptr->event.chr);
+	
+	/*sora::SoraKeyEvent ev;
 	if(eptr->event.key != 0) {
 		ev.chr = eptr->event.chr;
 		ev.flags = eptr->event.flags;
@@ -410,7 +412,7 @@ void HGE_Impl::_BuildEvent(int type, int key, int scan, int flags, int x, int y)
 			while(last->next) last=last->next;
 			last->next=eptr;
 		}
-	}
+	}*/
 
 	if(eptr->event.type==INPUT_KEYDOWN || eptr->event.type==INPUT_MBUTTONDOWN)
 	{

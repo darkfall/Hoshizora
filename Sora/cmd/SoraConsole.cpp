@@ -19,6 +19,7 @@ namespace sora {
 
 	SoraConsole::SoraConsole(): mStartLine(0) {
 		registerEventFunc(this, &SoraConsole::onKeyEvent);
+        registerEventFunc(this, &SoraConsole::onHotkeyEvent);
 		SORA_EVENT_MANAGER->registerInputEventHandler(this);
 		
 		reset();
@@ -37,7 +38,7 @@ namespace sora {
 		mResultColor = 0xFF22DD00;
 		
 		mActive = false;
-		mActiveKey.set(SORA_KEY_GRAVE);
+		mActiveKeyId = SORA->registerGlobalHotkey(SoraHotkey(SORA_KEY_GRAVE), this);
 		
 		mBackspaceDown = false;
 		mBackspaceTime = 0.f;
@@ -235,6 +236,10 @@ namespace sora {
 			mCurrLine = DebugPtr->logSize()-1;
 		}
 	}
+    
+    void SoraConsole::setActiveKey(const SoraHotkey& key) {
+        sora::SORA->setGlobalHotkey(mActiveKeyId, key);
+    }
 	
 	void SoraConsole::registerCmdHandler(SoraEventHandler* handler, const std::string& cmd) {
 		mHandlers[cmd] = handler;
@@ -290,17 +295,18 @@ namespace sora {
 			mCurrHeight = mHeight-1-mFontHeight;
 		}
 	}
-	
-	void SoraConsole::onKeyEvent(SoraKeyEvent* kev) {
-		if(mActiveKey.test(kev)) {
+    
+    void SoraConsole::onHotkeyEvent(SoraHotkeyEvent* hev) {
+        if(hev->getHotkeyId() == mActiveKeyId) {
             if(mActive)
                 mActive = false;
             else
                 mActive = true;
-            kev->consume();
-          
-            return;
+            hev->consume();
         }
+    }
+	
+	void SoraConsole::onKeyEvent(SoraKeyEvent* kev) {
         if(!mActive)
             return;
 		

@@ -88,4 +88,12 @@ namespace sora {
         return mKey;
     }
     
+    SoraHotkey& SoraHotkey::operator=(const SoraHotkey& rhs) {
+        mKey = rhs.mKey;
+        mShiftFlag = rhs.mShiftFlag;
+        mAltFlag = rhs.mAltFlag;
+        mCtrlFlag = rhs.mCtrlFlag;
+        mRequirePress = rhs.mRequirePress;
+    }
+    
 } // namespace sora

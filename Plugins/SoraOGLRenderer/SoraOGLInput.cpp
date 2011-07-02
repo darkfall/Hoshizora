@@ -77,10 +77,6 @@ namespace sora {
 		return name;
 	}
 	
-	bool SoraOGLInput::getKeyEvent(SoraKeyEvent& ev) {
-		return getEv(ev);
-	}
-	
 	bool SoraOGLInput::joyKeyPressed(int32 key) {
 		return false;
 	}

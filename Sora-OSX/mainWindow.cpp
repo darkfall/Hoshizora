@@ -186,18 +186,20 @@ void mainWindow::init() {
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
 	
 	sora::SORA->enableMenuBar(true);
-	sora::SORA->setMenuBarShowAlways(false);
-	sora::SoraMenuBarMenu* menu1 = new sora::SoraMenuBarMenu(L"File");
+    sora::SoraMenuBar* menuBar = sora::SORA->getMenuBar();
+	menuBar->setShowAlways(false);
+	
+    sora::SoraMenuBarMenu* menu1 = new sora::SoraMenuBarMenu(L"File");
 	menu1->addItem(L"Open", this);
 	menu1->addItem(L"Save", this);
 	
-	sora::SORA->addMenu(menu1);
+	menuBar->addMenu(menu1);
 	
 	sora::SoraMenuBarMenu* menu2 = new sora::SoraMenuBarMenu(L"Edit");
 	menu2->addItem(L"Find", this);
 	menu2->addItem(L"Replace", this);
 	
-	sora::SORA->addMenu(menu2);
+	menuBar->addMenu(menu2);
 	
 	pFont = sora::SORA->createFont(L"cour.ttf", 16);
 	pFont->setColor(0xFFFFCC00);

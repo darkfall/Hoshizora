@@ -24,7 +24,6 @@ namespace sora {
 		virtual bool	keyUp(int32 key) = 0;
 		virtual int32	getKeyState(int32 key) = 0;
 		virtual char*	getKeyName(int32 key) = 0;
-		virtual bool	getKeyEvent(SoraKeyEvent& ev) = 0;
 		virtual bool	joyKeyPressed(int32 key) = 0;
 		virtual bool	joyKeyDown(int32 key) = 0;
 		virtual bool	joyKeyUp(int32 key) = 0;
