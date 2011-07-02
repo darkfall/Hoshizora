@@ -652,17 +652,18 @@ namespace sora{
 			
 			quad.v[3].x, quad.v[3].y, quad.v[3].z,
 			quad.v[0].x, quad.v[0].y, quad.v[0].z,
-			quad.v[2].x, quad.v[2].y, quad.v[2].z,
+            quad.v[2].x, quad.v[2].y, quad.v[2].z,
+
 		};
 
 		GLfloat texCoords[12] = {
 			quad.v[0].tx, quad.v[0].ty,
 			quad.v[1].tx, quad.v[1].ty,
 			quad.v[2].tx, quad.v[2].ty,
-
+            
 			quad.v[3].tx, quad.v[3].ty,
 			quad.v[0].tx, quad.v[0].ty,
-			quad.v[2].tx, quad.v[2].ty,
+            quad.v[2].tx, quad.v[2].ty,
 		};
 		GLubyte colors[24] = {
 			(GLubyte)CGETR(quad.v[0].col), (GLubyte)CGETG(quad.v[0].col), (GLubyte)CGETB(quad.v[0].col), (GLubyte)CGETA(quad.v[0].col),

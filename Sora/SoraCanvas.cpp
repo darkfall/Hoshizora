@@ -48,6 +48,12 @@ namespace sora {
 		return 0;
     }
     
+    
+    SoraSprite* SoraBaseCanvas::getCanvasSprite() const { 
+        pCanvasSprite->setTexture(SORA->getTargetTexture(canvasTarget));
+        return pCanvasSprite;
+    }
+    
     void SoraBaseCanvas::beginRender() {
         bSceneBegan = true;
         SORA->beginScene(0, canvasTarget);

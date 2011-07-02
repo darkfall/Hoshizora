@@ -100,12 +100,14 @@ sora::SoraVertex vert[6];
 
 bool mainWindow::renderFunc() {
 	pCanvas->beginRender();
-	sora::SORA->beginZBufferSort();
+	//sora::SORA->beginZBufferSort();
 
-	pressAnyKey->render();
-	pSpr2->render();
-	pSpr->render();
-	sora::SORA->endZBufferSort();
+	//pSpr->setColor(0xFFFFFFFF);
+    //pSpr->render4V(100.f, 200.f, 700.f, 200.f, 700.f, 600.f, 100.f, 600.f);
+    pSpr->setColor(0xFFFF0000);
+    pSpr->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f);
+    
+	//sora::SORA->endZBufferSort();
 
 	pCanvas->finishRender();
 	
@@ -124,8 +126,18 @@ bool mainWindow::renderFunc() {
 	//	ps->update(sora::SORA->getDelta());
 	//	ps->render();
 	}
+        
+        sora::SoraVertex vertices[4];
+        vertices[0].x = 100.f; vertices[0].y = 100.f; vertices[0].tx = 0.f; vertices[0].ty = 0.f;
+        vertices[1].x = 200.f; vertices[1].y = 100.f; vertices[1].tx = 1.f; vertices[1].ty = 0.f;
+        vertices[2].x = 300.f; vertices[2].y = 200.f; vertices[2].tx = 1.f; vertices[2].ty = 1.f;
+        vertices[3].x = 000.f; vertices[3].y = 200.f; vertices[3].tx = 0.f; vertices[3].ty = 1.f;
         gifSprite->update(0.f);
-        gifSprite->render();
+        gifSprite->renderWithVertices(vertices, 4, sora::SORA_TRIANGLES_FAN);
+      //  pSpr->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f);
+      //  pressAnyKey->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f); 
+       // pSpr2->setTexture(0);
+        pCanvas->getCanvasSprite()->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f);
         pFont->print(gifSprite->getPositionX()+gifSprite->getSpriteWidth()/2,
                      gifSprite->getPositionY()+gifSprite->getSpriteHeight(),
                      sora::FONT_ALIGNMENT_CENTER,
@@ -209,6 +221,10 @@ void mainWindow::init() {
 	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
 	
 	pSpr = sora::SORA->createSprite(L"background.png");
+    pSpr->setTexture(0);
+    pSpr->setColor(0xFFFF0000);
+    
+    
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
 	

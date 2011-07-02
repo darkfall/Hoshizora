@@ -45,7 +45,7 @@ namespace sora {
 		void clearEffects();
 		bool hasEffect() const;
         
-        SoraSprite* getCanvasSprite() const { return pCanvasSprite; }
+        SoraSprite* getCanvasSprite() const;
         
 	private:
         inline void _attachTarget();
