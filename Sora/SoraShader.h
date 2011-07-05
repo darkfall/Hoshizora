@@ -105,56 +105,60 @@ namespace sora {
 		
 		void clear();
         
-        /*
-         create a shader from context, not attach
-         @param file, the path of the shader file to attach
-         @param entry, entry function of the shader
-         @param type, the type of the shader, see SORA_SHADER_TYPE
-         @retval, the handle to the attached shader, is 0 if attach failed
+        /**
+         * create a shader from context, not attach
+         * @param file, the path of the shader file to attach
+         * @param entry, entry function of the shader
+         * @param type, the type of the shader, see SORA_SHADER_TYPE
+         * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
         virtual SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type) = 0;
         
-		/*
-			attach a shader to context
-			@param file, the path of the shader file to attach
-			@param entry, entry function of the shader
-			@param type, the type of the shader, see SORA_SHADER_TYPE
-			@retval, the handle to the attached shader, is 0 if attach failed
+		/**
+         * attach a shader to context
+         * @param file, the path of the shader file to attach
+         * @param entry, entry function of the shader
+         * @param type, the type of the shader, see SORA_SHADER_TYPE
+         * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
         SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
         
+        /**
+         *   get shader list
+         **/
+        const ShaderList& getShaders() const;
         
-        void attachShader(SoraShader* shader) { assert(shader != NULL); shaders.push_back(shader); }
-		/*
-			detach a shader from context
-			@param shader, the handle to the shader, the retval of attachShader
-		 */
+        void attachShader(SoraShader* shader);
+		/**
+		 *	detach a shader from context
+		 *	@param shader, the handle to the shader, the retval of attachShader
+		 **/
 		void detachShader(SoraShader* shader);
 
-		/*
-			attach all shaders in context to render
-			@retval, succeed or not
+		/**
+         * attach all shaders in context to render
+         * @retval, succeed or not
 		 */
 		void attachToRender();
-		/*
-			detach all shaders in context from render
-			@retval, succeed or not
+		/**
+         * detach all shaders in context from render
+         * @retval, succeed or not
 		 */
 		void detachFromRender();
-
+        
+        void	setError(int32 error);
+        int32	getError() const;
+        
+        uint32 size() const;
+        
 		/*
 		called by render system
-		DO NOT CALL THIS
+		DO NOT CALL THESE unless you know what you are doing
 		*/
 		virtual bool attachShaderList();
 		virtual bool detachShaderList();
         
-        void	setError(int32 error) { err = error; }
-        int32	getError() const      { return err; }
         
-        uint32 getShaderSize() const { return shaders.size(); }
-        
-        const ShaderList& getShaderList()  { return shaders; }
 		
 	protected:
 		inline ShaderList::iterator getShaderIterator(SoraShader* shader);

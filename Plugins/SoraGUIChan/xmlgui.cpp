@@ -219,21 +219,21 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 
 	if(element->Attribute("basecolor"))
 	{
-		int color;
+		unsigned int color;
 		sscanf(element->Attribute("basecolor")->c_str(),"%x",&color);
 		widget->setBaseColor(gcn::Color(color));
 	}
 
 	if(element->Attribute("foregroundcolor"))
 	{
-		int color;
+		unsigned int color;
 		sscanf(element->Attribute("foregroundcolor")->c_str(),"%x",&color);
 		widget->setForegroundColor(gcn::Color(color));
 	}
 
 	if(element->Attribute("backgroundcolor"))
 	{
-		int color;
+		unsigned int color;
 		sscanf(element->Attribute("backgroundcolor")->c_str(),"%x",&color);
 		widget->setBackgroundColor(gcn::Color(color));
 	}

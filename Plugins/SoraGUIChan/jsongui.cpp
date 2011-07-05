@@ -151,17 +151,17 @@ namespace sora {
             widget->setHeight(val["height"].asInt());
         }
         if(val.isMember("basecolor")) {
-            int color;
+            unsigned int color;
             sscanf(val["basecolor"].asCString(), "%x", &color);
             widget->setBaseColor(gcn::Color(color));
         }
         if(val.isMember("foregroundcolor")) {
-            int color;
+            unsigned int color;
             sscanf(val["foregroundcolor"].asCString(), "%x", &color);
             widget->setForegroundColor(gcn::Color(color));
         }
         if(val.isMember("backgroundcolor")) {
-            int color;
+            unsigned int color;
             sscanf(val["backgroundcolor"].asCString(), "%x", &color);
             widget->setBackgroundColor(gcn::Color(color));
         }

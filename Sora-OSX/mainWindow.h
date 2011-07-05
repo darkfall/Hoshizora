@@ -49,6 +49,14 @@ public:
 	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);
 	void onDownloadEvent(sora::SoraHttpDownloadEvent* ev);
 	void onFileChangeEvent(sora::SoraFileChangeEvent* ev);
+    
+    const char* getIcon() {
+        return "./t1.png";
+    }
+    
+    const char* getCursor() {
+        return "./t1c.png";
+    }
 	
 private:
 	sora::SoraCore* sora;

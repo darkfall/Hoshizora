@@ -109,10 +109,10 @@ namespace sora {
 	bool SoraShaderContext::attachShaderList() {
 		if(getError() != 0) return false;
 
-		ShaderList::const_iterator itShader = getShaderList().begin();
+		ShaderList::const_iterator itShader = shaders.begin();
 		int32 er = 1;
 		
-		while(itShader != getShaderList().end()) {
+		while(itShader != shaders.end()) {
 			if((*itShader) != NULL) {
 				(*itShader)->attach();
 				if((*itShader)->type == 0) er = 0;
@@ -153,6 +153,15 @@ namespace sora {
 		}
 	}
 	
+    const SoraShaderContext::ShaderList& SoraShaderContext::getShaders() const { 
+        return shaders;
+    }
+    
+    void SoraShaderContext::attachShader(SoraShader* shader) { 
+        assert(shader != NULL); 
+        shaders.push_back(shader);
+    }
+    
 	void SoraShaderContext::clear() {
 		ShaderList::iterator itShader = shaders.begin();
 		while(itShader != shaders.end()) {
@@ -164,5 +173,17 @@ namespace sora {
 		}
 		shaders.clear();
 	}
+    
+    void SoraShaderContext::setError(int32 error) { 
+        err = error;
+    }
+    
+    int32 SoraShaderContext::getError() const { 
+        return err;
+    }
+    
+    uint32 SoraShaderContext::size() const { 
+        return shaders.size();
+    }
 	
 } // namespace sora

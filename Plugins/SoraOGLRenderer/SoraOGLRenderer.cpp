@@ -27,7 +27,14 @@
 #endif
 
 #include "glfw/GL/glfw.h"
+
+extern "C" {
 #include "soil/SOIL.h"
+}
+
+#ifdef OS_OSX
+#include "OSXIconWrapper.h"
+#endif
 
 #ifdef WIN32
 #pragma comment(lib,"opengl32.lib")
@@ -267,6 +274,9 @@ namespace sora{
 	}
 
 	bool SoraOGLRenderer::update() {
+#ifdef OS_OSX
+        osx_activeCurrentCursor();
+#endif
 		return false;
 	}
 
@@ -313,6 +323,11 @@ namespace sora{
 
 		bFullscreen = !windowInfo->isWindowed();
 		windowInfo->init();
+        
+        if(windowInfo->getIcon() != NULL)
+            setIcon(mainWindow->getIcon());
+        if(windowInfo->getCursor() != NULL)
+            setCursor(mainWindow->getCursor());
 
 		return (ulong32)windowInfo;
 
@@ -728,14 +743,13 @@ namespace sora{
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
 		glScissor(x, y, w, h);
 	}
-	
-	void SoraOGLRenderer::pushTransformMatrix() {
-		glPushMatrix();
-	}
-	
-	void SoraOGLRenderer::popTransformMatrix() {
-		glPopMatrix();
-	}
+    
+    void SoraOGLRenderer::setVerticalSync(bool flag) {
+        if(flag)
+            glfwSwapInterval(1); // to device refresh rate
+        else
+            glfwSwapInterval(0);
+    }
 
 	void SoraOGLRenderer::setTransformWindowSize(float32 w, float32 h) {
 		_oglWindowInfo.width = w!=0?w:windowWidth;
@@ -842,6 +856,18 @@ namespace sora{
 
     void SoraOGLRenderer::snapshot(const SoraString& path) {
         SOIL_save_screenshot(path.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, SORA->getScreenWidth(), SORA->getScreenHeight());
+    }
+
+    void SoraOGLRenderer::setIcon(const SoraString& icon) {
+#ifdef OS_OSX
+        osx_setDockIcon(icon);
+#endif // OS_OSX
+    }
+    
+    void SoraOGLRenderer::setCursor(const SoraString& cursor) {
+#ifdef OS_OSX
+        osx_setAppCursor(cursor);
+#endif
     }
 
 } // namespace sora

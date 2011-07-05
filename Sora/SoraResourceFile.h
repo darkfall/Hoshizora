@@ -29,6 +29,9 @@ namespace sora {
 		
 		void* getData() const;
 		ulong32 getSize() const;
+        
+        void* data() const;
+        ulong32 size() const;
 		
 		operator void*();
 		operator char*();

@@ -37,9 +37,10 @@
 #include "cmd/SoraConsole.h"
 
 #include "SoraGifSprite/SoraGifSprite.h"
+#include "SoraGenericObjects/SoraCustomShapeSprite.h"
 
 sora::SoraGifSprite* gifSprite;
-
+sora::SoraCustomShapeSprite* customSprite;
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
@@ -52,7 +53,7 @@ mainWindow::mainWindow() {
 mainWindow::~mainWindow() {
 }
 int32 posy = 0;
-
+bool mouseReleased = true;
 
 
 float32 cx = 300.f, cy = 400.f, cz = 1.f;
@@ -64,6 +65,16 @@ void transform3d(float32& x, float32& y, float32 z) {
 }
 
 bool mainWindow::updateFunc() {
+    
+    if(sora->keyDown(SORA_KEY_LBUTTON)) {
+        if(mouseReleased) {
+            float32 x, y;
+            sora::SORA->getMousePos(&x, &y);
+            customSprite->addScreenMappingVertex(x, y);
+      //      mouseReleased = false;
+        }
+    } else 
+        mouseReleased = true;
 	
 	if(sora->keyDown(SORA_KEY_ESCAPE))
 		sora->shutDown();
@@ -89,14 +100,9 @@ bool mainWindow::updateFunc() {
 		sora::SoraBGMManager::Instance()->playBGS(L"click_08.wav", 1, 1, 1.f, 0.5f);;
 
 	
+//    sora::SORA->setCursor("./icon.icns");
     return false;
 }
-void renderBottom() {
-	
-}
-
-sora::SoraVertex vert[6];
-
 
 bool mainWindow::renderFunc() {
 	pCanvas->beginRender();
@@ -127,24 +133,24 @@ bool mainWindow::renderFunc() {
 	//	ps->render();
 	}
         
-        sora::SoraVertex vertices[4];
-        vertices[0].x = 100.f; vertices[0].y = 100.f; vertices[0].tx = 0.f; vertices[0].ty = 0.f;
-        vertices[1].x = 200.f; vertices[1].y = 100.f; vertices[1].tx = 1.f; vertices[1].ty = 0.f;
-        vertices[2].x = 300.f; vertices[2].y = 200.f; vertices[2].tx = 1.f; vertices[2].ty = 1.f;
-        vertices[3].x = 000.f; vertices[3].y = 200.f; vertices[3].tx = 0.f; vertices[3].ty = 1.f;
-        gifSprite->update(0.f);
-        gifSprite->renderWithVertices(vertices, 4, sora::SORA_TRIANGLES_FAN);
-      //  pSpr->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f);
-      //  pressAnyKey->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f); 
-       // pSpr2->setTexture(0);
-        pCanvas->getCanvasSprite()->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f);
-        pFont->print(gifSprite->getPositionX()+gifSprite->getSpriteWidth()/2,
-                     gifSprite->getPositionY()+gifSprite->getSpriteHeight(),
-                     sora::FONT_ALIGNMENT_CENTER,
-                     L"FrameRate: %d, Total Frame: %d",
-                     gifSprite->getFrameRate(),
-                     gifSprite->getFrameSize());
+        customSprite->render();
+        
 	//pCanvas->render();
+        
+        std::string renderMode;
+        switch(customSprite->getRenderMode()) {
+            case sora::SORA_LINE:
+                renderMode = "Line"; break;
+            case sora::SORA_TRIANGLES:
+                renderMode = "Triangle"; break;
+            case sora::SORA_TRIANGLES_STRIP:
+                renderMode = "Triangle_strip"; break;
+            case sora::SORA_TRIANGLES_FAN:
+                renderMode = "Triangle_fan"; break;
+            case sora::SORA_QUAD:
+                renderMode = "Quad"; break;
+        }
+        pFont->print(0.f, getWindowHeight()-80.f, sora::FONT_ALIGNMENT_LEFT, L"VertexCount: %d, RenderMode: %s", customSprite->getVertexCount(), renderMode.c_str());
 
 	}
 	
@@ -171,20 +177,10 @@ void mainWindow::onDownloadEvent(sora::SoraHttpDownloadEvent* ev) {
 	file.writeToFile(L"./test.png");
 }
 
-void downloadEvent(sora::SoraHttpDownloadEvent* ev) {
-	sora::SORA->messageBox(sora::vamssg("download from %s finished, recevied size = %.2fkb, received time = %.2f, download speed = %.2fkb/s", 
-										ev->getURL().c_str(), 
-										ev->getReceivedSize()/1024.f, 
-										ev->getReceiveTime(), 
-										ev->getDownloadSpeed()/1024.f),
-						   "test", MB_OK);
-}
-
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
-	registerEventFunc(downloadEvent);
 	
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
 	if(testSize != 0.0) {
@@ -193,7 +189,8 @@ void mainWindow::init() {
 		file.downloadFileTo("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", L"~/Desktop/download.png");
 	}*/
 	
-    sora::SORA->setFPS(60);
+    sora::SORA->setFPS(999);
+    sora::SORA->setVerticalSync(true);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
 	
@@ -221,8 +218,7 @@ void mainWindow::init() {
 	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
 	
 	pSpr = sora::SORA->createSprite(L"background.png");
-    pSpr->setTexture(0);
-    pSpr->setColor(0xFFFF0000);
+    customSprite = new sora::SoraCustomShapeSprite(pSpr, sora::SORA_TRIANGLES);
     
     
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
@@ -232,17 +228,6 @@ void mainWindow::init() {
 	ps->setGlobalSprite(sora::SORA->createSprite(L"pics/particles.png"));
 	ps->emitS(L"astar.sps", 200.f, 100.f);
 	
-	float32 px = 400.f, py = 300.f;
-	for(int i=0; i<6; ++i) {
-		vert[i].col = 0xFFFFFFFF;
-		vert[i].z = 0.f;
-		
-		vert[i].x = px + 300*cosf(sora::DGR_RAD(i*60));
-		vert[i].y = py + 300*sinf(sora::DGR_RAD(i*60));
-		
-		vert[i].tx = (pSpr->getSpriteWidth() / 2 + 300*cosf(sora::DGR_RAD(i*60))) / pSpr->getTextureWidth(false);
-		vert[i].ty = (pSpr->getSpriteHeight() / 2 + 300*sinf(sora::DGR_RAD(i*60))) / pSpr->getTextureHeight(false);
-	}
 	
 	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(1.f);
 	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
@@ -260,9 +245,21 @@ void mainWindow::onFileChangeEvent(sora::SoraFileChangeEvent* cev) {
 }
 
 void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
-	if(kev->type == SORA_INPUT_KEYDOWN) {
-		if(kev->key == SORA_KEY_1 ) {
-			
-		}
-	}
+	if(kev->isKeyPressed(SORA_KEY_1))
+        customSprite->setRenderMode(sora::SORA_TRIANGLES);
+    else if(kev->isKeyPressed(SORA_KEY_2))
+        customSprite->setRenderMode(sora::SORA_TRIANGLES_FAN);
+    else if(kev->isKeyPressed(SORA_KEY_3))
+        customSprite->setRenderMode(sora::SORA_TRIANGLES_STRIP);
+    else if(kev->isKeyPressed(SORA_KEY_4))
+        customSprite->setRenderMode(sora::SORA_QUAD);
+    else if(kev->isKeyPressed(SORA_KEY_5))
+        customSprite->clearVertices();
+    else if(kev->isKeyPressed(SORA_KEY_6))
+        customSprite->saveVertciesToFile(L"vertices.raw");
+    else if(kev->isKeyPressed(SORA_KEY_7))
+       if(!customSprite->loadVerticesFromFile(L"vertices.raw"))
+           sora::SORA->messageBox("sc", "sc", MB_OK);
+    //else if(kev->isKeyPressed(SORA_KEY_6))
+        
 }

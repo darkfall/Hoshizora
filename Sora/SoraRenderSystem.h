@@ -84,6 +84,7 @@ namespace sora {
 		virtual void setWindowPos(int32 px, int32 py) = 0;
 		virtual void setFullscreen(bool flag) = 0;
 		virtual bool isFullscreen() = 0;
+        virtual void setVerticalSync(bool flag) = 0;
         
         virtual void snapshot(const SoraString& path) = 0;
 

@@ -37,6 +37,14 @@ namespace sora {
 			SORA->freeResourceFile(mData);
 		}
 	}
+    
+    void* SoraResourceFileAuto::data() const {
+        return mData;
+    }
+    
+    ulong32 SoraResourceFileAuto::size() const {
+        return mSize;
+    }
 	
 	void* SoraResourceFileAuto::getData() const {
 		return mData;

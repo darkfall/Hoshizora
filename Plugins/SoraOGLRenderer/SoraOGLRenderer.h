@@ -62,9 +62,7 @@ namespace sora {
 		void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=1.f, float32 vscale=1.f);
 		void setTransformWindowSize(float32 w, float32 h);
         void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
-		
-		void pushTransformMatrix();
-		void popTransformMatrix();
+        void setVerticalSync(bool flag);
 
 		ulong32 getMainWindowHandle() { return (ulong32)mainWindow; }
 		SoraWindowInfoBase* getMainWindow() { return mainWindow; }
@@ -79,6 +77,9 @@ namespace sora {
 		void flush();
         
         void snapshot(const SoraString& path);
+        
+        void setIcon(const SoraString& icon);
+        void setCursor(const SoraString& cursor);
 
 	private:
 		void applyTransform();

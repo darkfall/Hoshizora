@@ -523,6 +523,11 @@ namespace sora {
 	float32 SoraCore::getTimeScale() {
 		return pTimer->getTimeScale();
 	}
+    
+    void SoraCore::setVerticalSync(bool flag) {
+        if(!bInitialized) return;
+        pRenderSystem->setVerticalSync(flag);
+    }
 
 	HSORARESOURCE SoraCore::loadResourcePack(const SoraWString& file) {
 		return pResourceFileFinder->loadResourcePack(file);

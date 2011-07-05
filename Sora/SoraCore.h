@@ -71,7 +71,8 @@ namespace sora {
 		int32	SORACALL getFrameCount();
 		void	SORACALL setTimeScale(float32 scale);
 		float32 SORACALL getTimeScale();
-		uint64 SORACALL getCurrentSystemTime();
+		uint64  SORACALL getCurrentSystemTime();
+        void    SORACALL setVerticalSync(bool flag);
 
 		// render system APIs
 		void SORACALL beginScene(ulong32 c=0, ulong32 h=0, bool clear=true);

@@ -419,7 +419,7 @@ namespace sora {
     }
     
     bool SoraSprite::hasShader() const {
-        return (shaderContext != NULL && shaderContext->getShaderSize() != 0);
+        return (shaderContext != NULL && shaderContext->size() != 0);
     }
 	
 	bool SoraSprite::hasEffect() const {
