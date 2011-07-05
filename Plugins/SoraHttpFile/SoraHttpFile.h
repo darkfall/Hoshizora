@@ -9,7 +9,7 @@
 #include "SoraMemoryBuffer.h"
 
 #include "curl/curl.h"
-#include "SoraPThread/SoraPThread.h"
+#include "SoraPThread/SoraThread.h"
 
 #ifdef OS_WIN32
 #pragma comment(lib, "libcurl.lib")

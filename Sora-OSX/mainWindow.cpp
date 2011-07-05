@@ -39,6 +39,9 @@
 #include "SoraGifSprite/SoraGifSprite.h"
 #include "SoraGenericObjects/SoraCustomShapeSprite.h"
 
+
+#include "SoraPThread/SoraThread.h"
+
 sora::SoraGifSprite* gifSprite;
 sora::SoraCustomShapeSprite* customSprite;
 
@@ -181,6 +184,7 @@ void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
+    
 	
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
 	if(testSize != 0.0) {
@@ -257,9 +261,10 @@ void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
         customSprite->clearVertices();
     else if(kev->isKeyPressed(SORA_KEY_6))
         customSprite->saveVertciesToFile(L"vertices.raw");
-    else if(kev->isKeyPressed(SORA_KEY_7))
+    else if(kev->isKeyPressed(SORA_KEY_7)) {
        if(!customSprite->loadVerticesFromFile(L"vertices.raw"))
            sora::SORA->messageBox("sc", "sc", MB_OK);
+    }
     //else if(kev->isKeyPressed(SORA_KEY_6))
         
 }

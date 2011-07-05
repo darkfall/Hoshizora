@@ -11,15 +11,18 @@
 #ifndef SORA_UNCOPYABLE_H_
 #define SORA_UNCOPYABLE_H_
 
-class uncopyable {
-public:
-    uncopyable() {}
-	virtual ~uncopyable() {}
+namespace sora {
+    
+    class uncopyable {
+    protected:
+        uncopyable() {}
+        ~uncopyable() {}
 	
-private:
-	uncopyable& operator=(const uncopyable&);
-	uncopyable(const uncopyable&);
-};
+    private:
+        const uncopyable& operator=(const uncopyable&);
+        uncopyable(const uncopyable&);
+    };
+}
 
 
 #endif
