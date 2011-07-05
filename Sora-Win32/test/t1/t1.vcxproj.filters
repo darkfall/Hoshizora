@@ -100,6 +100,24 @@
     <Filter Include="头文件\helpers">
       <UniqueIdentifier>{04ae89db-4d64-4de8-8bc9-a4269634d541}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\gesturerecognizer">
+      <UniqueIdentifier>{cf92180d-8466-4d95-964e-23a87326e977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\genericObjects">
+      <UniqueIdentifier>{dcfb7da1-65e4-45e6-8a00-69d304e1c0a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\network">
+      <UniqueIdentifier>{d7e202e1-0308-49ed-8bb7-c6a646b323f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\httpfile">
+      <UniqueIdentifier>{e1b73670-08de-4547-9033-9a028867a2c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\pthread">
+      <UniqueIdentifier>{2bca3d9d-1958-4d88-8f9c-400fe4847407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\Gif">
+      <UniqueIdentifier>{7f3a98f0-cdaa-46b4-b958-a793e2def883}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -1347,6 +1365,42 @@
     <ClInclude Include="..\..\..\Sora\SoraHotkey.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraBaseGestureTypeRecognizer.h">
+      <Filter>Plugins\gesturerecognizer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGesture.h">
+      <Filter>Plugins\gesturerecognizer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGestureRecognizer.h">
+      <Filter>Plugins\gesturerecognizer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraPlatformerGeomtry.h">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraPrefab.h">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraCustomShapeSprite.h">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.h">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraGeometry.h">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraPThread.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.h">
+      <Filter>Plugins\httpfile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGifSprite\SoraGifSprite.h">
+      <Filter>Plugins\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraResourceFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -2046,6 +2100,39 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraHotKey.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGesture.cpp">
+      <Filter>Plugins\gesturerecognizer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGestureRecognizer.cpp">
+      <Filter>Plugins\gesturerecognizer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraBaseGestureRecognizer.cpp">
+      <Filter>Plugins\gesturerecognizer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraPlatformerGeomtry.cpp">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraPrefab.cpp">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraCustomShapeSprite.cpp">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.cpp">
+      <Filter>Plugins\genericObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraPThread.cpp">
+      <Filter>Plugins\pthread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.cpp">
+      <Filter>Plugins\httpfile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGifSprite\SoraGifSprite.cpp">
+      <Filter>Plugins\Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>

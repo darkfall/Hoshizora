@@ -13,7 +13,13 @@
 #include "SoraPlatform.h"
 
 // sora thread using pthread(posix thread)
+#ifndef OS_WIN32
 #include <pthread.h>
+#else
+#include "pthread.h"
+
+#pragma comment(lib, "pthreadVC2.lib")
+#endif
 
 namespace sora {
 		

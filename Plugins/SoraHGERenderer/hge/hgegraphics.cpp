@@ -717,11 +717,8 @@ bool HGE_Impl::_GfxInit()
 	d3dppW.hDeviceWindow    = hwnd;
 	d3dppW.Windowed         = TRUE;
 
-	if(nHGEFPS==HGEFPS_VSYNC) { d3dppW.SwapEffect = D3DSWAPEFFECT_COPY; d3dppW.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT; }
-	else					  {
-		d3dppW.SwapEffect = D3DSWAPEFFECT_COPY;
-		d3dppW.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
-	}
+	d3dppW.SwapEffect = D3DSWAPEFFECT_FLIP;
+	d3dppW.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 	if(bZBuffer)
 	{
@@ -766,13 +763,12 @@ bool HGE_Impl::_GfxInit()
 	d3dppFS.hDeviceWindow    = hwnd;
 	d3dppFS.Windowed         = FALSE;
 
+	d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+
 	d3dppFS.SwapEffect       = D3DSWAPEFFECT_FLIP;
 	d3dppFS.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 
-	//if(nHGEFPS==HGEFPS_VSYNC) d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
-	//else
-	d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
-
+	
 	if(bZBuffer)
 	{
 		d3dppFS.EnableAutoDepthStencil = TRUE;

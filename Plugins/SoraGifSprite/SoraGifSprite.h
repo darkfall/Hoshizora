@@ -35,6 +35,8 @@ namespace sora {
         int32 getCurrFrame() const;
 		
 		virtual uint32 update(float32 dt);
+
+		void setPixelFormat(int32 rev);
         
     private:
         void init();

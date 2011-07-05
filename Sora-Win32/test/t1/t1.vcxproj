@@ -40,7 +40,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraGifSprite;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraHttpFile;$(ProjectDir)../../../Plugins/SoraPThread;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -192,6 +192,15 @@
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\ft2build.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraCustomShapeSprite.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraGeometry.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraPlatformerGeomtry.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraPrefab.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraBaseGestureTypeRecognizer.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGesture.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGestureRecognizer.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGifSprite\SoraGifSprite.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichansetup.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichansora.hpp" />
@@ -270,6 +279,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge_impl.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\EnvVarExport.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\guichanWrapper.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaAutoBlock.h" />
@@ -332,6 +342,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.h" />
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.h" />
     <ClInclude Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraPThread.h" />
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.h" />
@@ -455,6 +466,7 @@
     <ClInclude Include="..\..\..\Sora\SoraPluginManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderSystem.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderTarget.h" />
+    <ClInclude Include="..\..\..\Sora\SoraResourceFile.h" />
     <ClInclude Include="..\..\..\Sora\SoraResourceFileFinder.h" />
     <ClInclude Include="..\..\..\Sora\SoraResourceManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraShader.h" />
@@ -518,6 +530,14 @@
     <ClCompile Include="..\..\..\Plugins\SoraAudiereSoundSystem\SoraAudiereSoundSystem.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraCustomShapeSprite.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraPlatformerGeomtry.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraPrefab.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraBaseGestureRecognizer.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGesture.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGestureRecognizer.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGifSprite\SoraGifSprite.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\actionevent.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\basiccontainer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\cliprectangle.cpp" />
@@ -579,6 +599,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\EnvVarExport.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\guichanWrapper.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.cpp" />
@@ -639,6 +660,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraPThread.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.cpp" />
@@ -698,6 +720,7 @@
     <ClCompile Include="..\..\..\Sora\SoraObject.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPluginManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraResourceFileFinder.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraShader.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraSprite.cpp" />

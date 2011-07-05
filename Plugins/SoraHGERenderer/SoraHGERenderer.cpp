@@ -97,6 +97,7 @@ namespace sora{
 			pHGE->System_SetState(HGE_HIDEMOUSE, windowInfo->hideMouse());
 			pHGE->System_SetState(HGE_TITLE, windowInfo->getWindowName().c_str());
 			pHGE->System_SetState(HGE_DONTSUSPEND, true);
+
 			
 			if(windowInfo->getIcon() != 0) {
 				pHGE->System_SetState(HGE_ICON, windowInfo->getIcon());
@@ -108,7 +109,8 @@ namespace sora{
 
 			pHGE->System_SetState(HGE_ZBUFFER, true);
 			pHGE->System_Initiate();
-
+			
+			setVerticalSync(false);
 			windowInfo->init();
 
 			pMainWindow = windowInfo;
@@ -128,6 +130,13 @@ namespace sora{
 
 	void SoraHGERenderer::setWindowPos(int32 px, int32 py) {
 		return;
+	}
+
+	void SoraHGERenderer::setVerticalSync(bool flag) {
+		if(flag)
+			pHGE->System_SetState(HGE_FPS, HGEFPS_VSYNC);
+		else
+			pHGE->System_SetState(HGE_FPS, 0);
 	}
 
 	void SoraHGERenderer::setFullscreen(bool flag) {

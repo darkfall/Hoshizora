@@ -11,6 +11,10 @@
 #include "curl/curl.h"
 #include "SoraPThread/SoraPThread.h"
 
+#ifdef OS_WIN32
+#pragma comment(lib, "libcurl.lib")
+#endif
+
 #include <sys/timeb.h>
 
 namespace sora {

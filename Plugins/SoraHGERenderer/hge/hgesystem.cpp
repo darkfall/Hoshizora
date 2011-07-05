@@ -369,7 +369,7 @@ void CALL HGE_Impl::System_SetStateInt(hgeIntState state, int value)
 
 		case HGE_MUSVOLUME:		break;
 
-	/*	case HGE_FPS:			if(VertArray) break;
+		case HGE_FPS:			if(VertArray) break;
 
 								if(pD3DDevice)
 								{
@@ -378,14 +378,14 @@ void CALL HGE_Impl::System_SetStateInt(hgeIntState state, int value)
 										if(value==HGEFPS_VSYNC)
 										{
 											d3dppW.SwapEffect = D3DSWAPEFFECT_COPY/*_VSYNC*/;//*** because  D3DSWAPEFFECT_COPY_VSYNC have been removed 
-									/*		d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_ONE;//***
-											System_Log("D3DPRESENT_INTERVAL_ONE...................");
+											d3dppW.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
+											d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_ONE;//***
 										}
 										else
 										{
 											d3dppW.SwapEffect = D3DSWAPEFFECT_COPY;
+											d3dppW.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 											d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;//***
-											System_Log("D3DPRESENT_INTERVAL_IMMEDIATE...................");
 										}
 										if(procFocusLostFunc) procFocusLostFunc( );
 										_GfxRestore();
@@ -393,9 +393,7 @@ void CALL HGE_Impl::System_SetStateInt(hgeIntState state, int value)
 									}
 								}
 								nHGEFPS=value;
-								if(nHGEFPS>0) nFixedDelta=int(1000.0f/value);
-								else nFixedDelta=0;
-								break;*/
+								break;
 	}
 }
 

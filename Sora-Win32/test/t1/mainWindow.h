@@ -12,11 +12,13 @@
 
 #include "SoraCore.h"
 #include "SoraCanvas.h"
-
-#include "SoraLua/SoraLuaObject.h"
-#include "SoraCanvas.h"
-
+#include "SoraPlatform.h"
 #include "SoraParticleSystem/SoraParticleSystem.h"
+#include "SoraLua/SoraLuaObject.h"
+
+#include "SoraHttpFile/SoraHttpFile.h"
+
+#include "SoraFileChangeEvent.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -27,41 +29,43 @@ public:
 	bool renderFunc();
 	void init();
 	
-	int32 getWindowWidth() { return 800; }
-	int32 getWindowHeight() { return 600; }
+	int32 getWindowWidth() { return 1024; }
+	int32 getWindowHeight() { return 768; }
 	
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }
 	
-	SoraString getWindowName() { return "Portal ´«ËÍÃÅ2"; }
+	SoraString getWindowName() { return "Reflection"; }
 	SoraString getWindowId() { return "MainWindow"; }
 	
 	bool isWindowSubWindow() { return false; }	
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
-
-	const char* getIcon() { return "./t1.ico"; }
-	const char* getCursor() { return "./t1.ani"; }
-
-	void onKeyEvent(const sora::SoraKeyEvent* kev);
 	
+	void onKeyEvent(sora::SoraKeyEvent* kev);
+	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);
+	void onDownloadEvent(sora::SoraHttpDownloadEvent* ev);
+	void onFileChangeEvent(sora::SoraFileChangeEvent* ev);
+    
 private:
 	sora::SoraCore* sora;
+	
+	sora::SoraBaseCanvas* pCanvas;
                     
     sora::SoraSprite* pSpr;
+	sora::SoraSprite* pSpr2;
+	sora::SoraSprite* pressAnyKey;
+	
 	sora::SoraShader* shader;
 					
     sora::SoraFont* pFont;
-
-	sora::SoraBaseCanvas* pbc;
 	sora::SoraParticleManager* ps;
-	ulong32 tg;
-	
+	sora::SoraSprite* psSpr;
 	sora::SoraBaseCanvas* canvas1;
-
-	sora::SoraMusicFile* ms;
-
-	sora::SoraLuaObject luaObject;
+	
+	sora::SoraLuaObject obj;
+	
+	sora::SoraHttpFile file;
 };
 
 #endif

@@ -8,10 +8,14 @@
  */
 
 #include "SoraGifSprite.h"
-#include "libgif/gif_lib.h"
+#include "gif_lib.h"
 
 #include "SoraResourceFile.h"
 #include "SoraCore.h"
+
+#ifdef OS_WIN32
+#pragma comment(lib, "giflib.lib")
+#endif
 
 namespace sora {
     
@@ -64,8 +68,11 @@ namespace sora {
         GifFileType *GifFileIn = NULL;
         ColorMapObject *palette;
         
+#ifndef OS_WIN32
 #define gif_color32(c) CARGB(255,palette->Colors[c].Blue, palette->Colors[c].Green, palette->Colors[c].Red)
-
+#else
+#define gif_color32(c) CARGB(255, palette->Colors[c].Red, palette->Colors[c].Green, palette->Colors[c].Blue)
+#endif
         int ExtCode;
        
         SoraResourceFileAuto resourceFile(path);

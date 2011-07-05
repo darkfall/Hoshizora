@@ -146,7 +146,7 @@ namespace sora {
 
 	bool SoraHttpFile::writeToFile(const SoraWString& file) {
 		if(getState() == DOWNLOAD_FINISHED) {
-			FILE* fp = sora_fopenw(file, "wb");
+			FILE* fp = sora_fopenw(file.c_str(), "wb");
 			if(fp) {
 				fwrite(getMemoryBuffer()->get(), getMemoryBuffer()->realsize(), 1, fp);
 				fclose(fp);

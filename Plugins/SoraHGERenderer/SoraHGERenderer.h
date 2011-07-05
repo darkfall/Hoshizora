@@ -61,6 +61,7 @@ namespace sora {
 		void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
 		void setTransformWindowSize(float32 w, float32 h);
         void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
+		void setVerticalSync(bool flag);
 		
 		ulong32 getMainWindowHandle();
 		SoraWindowInfoBase* getMainWindow();
