@@ -342,7 +342,10 @@
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.h" />
     <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.h" />
     <ClInclude Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraPThread.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraCondition.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraMutex.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThread.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThreadTask.h" />
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.h" />
@@ -486,6 +489,7 @@
     <ClInclude Include="..\..\..\Sora\tinyXML\tinyxml.h" />
     <ClInclude Include="..\..\..\Sora\vector3.h" />
     <ClInclude Include="..\..\..\Sora\win32filewrapper.h" />
+    <ClInclude Include="..\..\..\Sora\WindowsStackTrace.h" />
     <ClInclude Include="..\..\..\Sora\ZLIB\crc32.h" />
     <ClInclude Include="..\..\..\Sora\ZLIB\crypt.h" />
     <ClInclude Include="..\..\..\Sora\ZLIB\deflate.h" />
@@ -660,7 +664,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraPThread.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraThread.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.cpp" />
@@ -709,6 +713,7 @@
     <ClCompile Include="..\..\..\Sora\SoraEnvValues.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEventManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraException.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFileChangeEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFileUtility.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp" />

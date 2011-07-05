@@ -1389,9 +1389,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraGeometry.h">
       <Filter>Plugins\genericObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraPThread.h">
-      <Filter>Plugins\pthread</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.h">
       <Filter>Plugins\httpfile</Filter>
     </ClInclude>
@@ -1399,6 +1396,21 @@
       <Filter>Plugins\Gif</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraResourceFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraMutex.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThread.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThreadTask.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraCondition.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\WindowsStackTrace.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -2123,9 +2135,6 @@
     <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.cpp">
       <Filter>Plugins\genericObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraPThread.cpp">
-      <Filter>Plugins\pthread</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.cpp">
       <Filter>Plugins\httpfile</Filter>
     </ClCompile>
@@ -2133,6 +2142,12 @@
       <Filter>Plugins\Gif</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraThread.cpp">
+      <Filter>Plugins\pthread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraException.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>

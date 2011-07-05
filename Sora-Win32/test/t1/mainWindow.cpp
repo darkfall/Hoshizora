@@ -179,11 +179,21 @@ void mainWindow::onDownloadEvent(sora::SoraHttpDownloadEvent* ev) {
 	file.writeToFile(L"./test.png");
 }
 
+void test() {
+	THROW_SORA_EXCEPTION("test");
+}
+
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
 	
+	try {
+		test();
+	} catch(sora::SoraException& exp) {
+		sora::SORA->messageBox(exp.stackTrace(), "Call Stack", MB_OK);
+	}
+
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
 	if(testSize != 0.0) {
 		sora::SORA->messageBox(sora::vamssg("%f", testSize), "test", MB_OK);

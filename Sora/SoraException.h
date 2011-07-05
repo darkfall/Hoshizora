@@ -34,12 +34,6 @@
 #include "SoraPlatform.h"
 #include "SoraStringConv.h"
 
-#ifdef __GNUC__
-#include <execinfo.h>
-#elif defined(OS_WINDOWS)
-#include "WindowsStackTrace.h"
-#endif
-
 namespace sora {
 	class SoraException {
 	public:
@@ -74,28 +68,10 @@ namespace sora {
         /*
          may not work for every platform
          */
-        const char* stackTrace() {
-#ifdef __GNUC__
-            const int len = 200;
-            void* buffer[len];
-            int nptrs = backtrace(buffer, len);
-            char** strings = backtrace_symbols(buffer, nptrs);
-            if (strings) {
-                for (int i = 0; i < nptrs; ++i) {
-                    mStackTrace.append(strings[i]);
-                    mStackTrace.push_back('\n');
-                }
-                free(strings);
-            }
-#elif defined(OS_WINDOWS)
-            mStackTrace = excep_filter();
-#endif
-            return mStackTrace.c_str();
-        }
+        static SoraString stackTrace();
 		
 	private:
 		SoraString mMssg, mFunction, mFile, mLine;
-        SoraString mStackTrace;
 	};
 } // namespace sora
 
