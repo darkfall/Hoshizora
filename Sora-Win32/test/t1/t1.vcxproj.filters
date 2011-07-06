@@ -1413,6 +1413,18 @@
     <ClInclude Include="..\..\..\Sora\WindowsStackTrace.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraCountDownLatch.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThreadLocal.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThreadPool.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraBlockingQueue.h">
+      <Filter>Plugins\pthread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -2149,6 +2161,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraException.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraCountDownLatch.cpp">
+      <Filter>Plugins\pthread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraThreadPool.cpp">
+      <Filter>Plugins\pthread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraThreadTask.cpp">
+      <Filter>Plugins\pthread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

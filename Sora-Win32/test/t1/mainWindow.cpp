@@ -39,6 +39,10 @@
 #include "SoraGifSprite/SoraGifSprite.h"
 #include "SoraGenericObjects/SoraCustomShapeSprite.h"
 
+#include "SoraPThread/SoraThreadPool.h"
+#include "SoraPThread/SoraCountDownLatch.h"
+#include "SoraPThread/SoraBlockingQueue.h"
+
 sora::SoraGifSprite* gifSprite;
 sora::SoraCustomShapeSprite* customSprite;
 
@@ -55,6 +59,14 @@ mainWindow::~mainWindow() {
 int32 posy = 0;
 bool mouseReleased = true;
 
+void mainWindow::threadtest(void* arg) {
+	sora::SoraBlockingQueue<int>* queue = static_cast<sora::SoraBlockingQueue<int>*>(arg);
+
+	for(;;) {
+		queue->take();
+		sora::SORA->messageBox("test", "test", MB_OK);
+	}
+}
 
 float32 cx = 300.f, cy = 400.f, cz = 1.f;
 void transform3d(float32& x, float32& y, float32 z) {
@@ -183,6 +195,7 @@ void test() {
 	THROW_SORA_EXCEPTION("test");
 }
 
+	sora::SoraBlockingQueue<int> queue;
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
@@ -249,7 +262,15 @@ void mainWindow::init() {
 	gifSprite->setPosition(100.f, 100.f);
 	
 	sora::SORA_EVENT_MANAGER->registerFileChangeEventHandler(L"test.lua", this);
-	
+
+
+	sora::SoraThreadPool* threadpool = new sora::SoraThreadPool;
+	threadpool->start(2);
+
+	sora::SoraThreadTask task;
+	task.setAsMemberFunc(&mainWindow::threadtest, this);
+	task.setArg(&queue);
+	threadpool->run(task);
 }
 
 void mainWindow::onFileChangeEvent(sora::SoraFileChangeEvent* cev) {
@@ -274,9 +295,7 @@ void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
            sora::SORA->messageBox("sc", "sc", MB_OK);
 	}
 	else if(kev->isKeyPressed(SORA_KEY_8))
-		sora::SORA->setVerticalSync(true);
-	else if(kev->isKeyPressed(SORA_KEY_9))
-		sora::SORA->setVerticalSync(false);
+		queue.put(10);
     //else if(kev->isKeyPressed(SORA_KEY_6))
         
 }
