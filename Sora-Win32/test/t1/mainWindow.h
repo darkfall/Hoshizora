@@ -46,6 +46,8 @@ public:
 	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);
 	void onDownloadEvent(sora::SoraHttpDownloadEvent* ev);
 	void onFileChangeEvent(sora::SoraFileChangeEvent* ev);
+
+	void threadtest(void* arg);
     
 private:
 	sora::SoraCore* sora;

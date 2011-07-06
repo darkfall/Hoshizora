@@ -10,6 +10,7 @@
 #include "common.h"
 #include "Debug/SoraInternalLogger.h"
 
+#include <stdio.h>
 #include <algorithm>
 
 namespace sora {
