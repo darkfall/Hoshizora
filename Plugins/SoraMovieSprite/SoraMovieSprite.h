@@ -13,17 +13,31 @@
 #include "SoraSprite.h"
 #include "SoraMoviePlayer.h"
 
+#include "SoraMovieFilter.h"
+
 namespace sora {
 	
 	class SoraMovieSprite: public SoraSprite {
 	public:
-		SoraMovieSprite(SoraMoviePlayer* moviePlayer);
+		SoraMovieSprite(SoraMoviePlayer* moviePlayer, const SoraWString& videoPath);
 		~SoraMovieSprite();
 		
 		uint32 update(float32 dt);
 		
+        void addMovieFilter(SoraMovieFilter* movieFilter);
+        void addPostProcessor(SoraShader* postProcessor);
+        
+        void delMovieFilter(SoraMovieFilter* movieFilter);
+        void delPostProcessor(SoraShader* postProcessor);
+                
 	private:
 		SoraMoviePlayer* mMoviePlayer;
+        
+        typedef std::list<SoraMovieFilter*> MOVIE_FILTER_LIST;
+        MOVIE_FILTER_LIST mMovieFilters;
+        
+        typedef std::list<SoraShader*> MOVIE_POST_PROCESSOR_LIST;
+        MOVIE_POST_PROCESSOR_LIST mPostProcessors;
 	};
 	
 	

@@ -44,6 +44,8 @@ public:
 	bool isWindowSubWindow() { return false; }	
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
+    
+    void test(void* arg);
 	
 	void onKeyEvent(sora::SoraKeyEvent* kev);
 	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);

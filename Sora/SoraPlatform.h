@@ -272,6 +272,20 @@ static void msleep(uint32_t msec) {
 	}
 }
 
+/*
+ Thread Independent Variables
+ */
+
+#ifdef _MSC_VER
+#define ThreadLocal __declspec(thread)
+#elif defined(__GNUC__) && !defined(OS_OSX)
+#define ThreadLocal __thread
+#else
+// some platforms such as Mac OS X does not support TLS
+// so we might need some other solutions
+#define ThreadLocal
+#endif
+
 #define MB_OK				1
 #define MB_OKCANCEL			2
 #define MB_ICONERROR		4

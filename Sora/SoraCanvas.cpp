@@ -13,91 +13,119 @@ namespace sora {
         
     SoraBaseCanvas::SoraBaseCanvas(int32 w, int32 h, bool bDepthBuffer) {
         canvasTarget = SORA->createTarget(w, h, bDepthBuffer);
-		if(!canvasTarget)
-			THROW_SORA_EXCEPTION("Error creating render target");
+		if(!canvasTarget) {
+			DebugPtr->log("Error creating render target");
+            return;
+        }
         pCanvasSprite = new SoraSprite(0);
 		
 		/*uint32* data = pCanvasSprite->getPixelData();
 		memset(data, 0, w*h*4);
 		pCanvasSprite->unlockPixelData();*/
         
-		if(!canvasTarget || !pCanvasSprite) 
-            THROW_SORA_EXCEPTION("Error creating render target");
+		if(!canvasTarget || !pCanvasSprite) {
+            DebugPtr->log("Error creating render target");
+            return;
+        }
     }
     
     SoraBaseCanvas::~SoraBaseCanvas() {
-        SORA->freeTarget(canvasTarget);
-        delete pCanvasSprite;
+        if(canvasTarget)
+            SORA->freeTarget(canvasTarget);
+        if(pCanvasSprite)
+            delete pCanvasSprite;
     }
 
 	void SoraBaseCanvas::setZ(float32 z) {
-		pCanvasSprite->setZ(z);
+        if(pCanvasSprite)
+            pCanvasSprite->setZ(z);
 	}
 
 	void SoraBaseCanvas::setBlendMode(int32 mode) {
-		pCanvasSprite->setBlendMode(mode);
+        if(pCanvasSprite)
+            pCanvasSprite->setBlendMode(mode);
 	}
     
     void SoraBaseCanvas::render() {
-        pCanvasSprite->setTexture(SORA->getTargetTexture(canvasTarget));
-        pCanvasSprite->render(getPositionX(), getPositionY());
+        if(pCanvasSprite) {
+            pCanvasSprite->setTexture(SORA->getTargetTexture(canvasTarget));
+            pCanvasSprite->render(getPositionX(), getPositionY());
+        }
     }
     
     uint32 SoraBaseCanvas::update(float32 dt) {
-        pCanvasSprite->update(dt);
+        if(pCanvasSprite)
+            pCanvasSprite->update(dt);
 		return 0;
     }
     
     
     SoraSprite* SoraBaseCanvas::getCanvasSprite() const { 
-        pCanvasSprite->setTexture(SORA->getTargetTexture(canvasTarget));
+        if(pCanvasSprite)
+            pCanvasSprite->setTexture(SORA->getTargetTexture(canvasTarget));
         return pCanvasSprite;
     }
     
     void SoraBaseCanvas::beginRender() {
-        bSceneBegan = true;
-        SORA->beginScene(0, canvasTarget);
+        if(canvasTarget) {
+            bSceneBegan = true;
+            SORA->beginScene(0, canvasTarget);
+        }
     }
     
     void SoraBaseCanvas::finishRender() {
-        if(!bSceneBegan)
-            THROW_SORA_EXCEPTION("Render not began");
-        SORA->endScene();
+        if(canvasTarget) {
+            if(!bSceneBegan)
+                THROW_SORA_EXCEPTION("Render not began");
+            SORA->endScene();
+        }
     }
     
 	void SoraBaseCanvas::attachShader(SoraShader* shader) {
-		pCanvasSprite->attachShader(shader);
+        if(pCanvasSprite)
+            pCanvasSprite->attachShader(shader);
 	}
 	void SoraBaseCanvas::detachShader(SoraShader* shader) {
-		pCanvasSprite->detachShader(shader);
+        if(pCanvasSprite)
+            pCanvasSprite->detachShader(shader);
 	}
 	
 	SoraShader* SoraBaseCanvas::attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type) {
-		return pCanvasSprite->attachShader(shaderPath, entry, type);
+        if(pCanvasSprite)
+            return pCanvasSprite->attachShader(shaderPath, entry, type);
+        return NULL;
 	}
 	
 	bool SoraBaseCanvas::hasShader() const {
-		return pCanvasSprite->hasShader();
+        if(pCanvasSprite)
+            return pCanvasSprite->hasShader();
+        return false;
 	}
 	
 	void SoraBaseCanvas::clearShader() {
-		return pCanvasSprite->clearShader();
+        if(pCanvasSprite)
+            return pCanvasSprite->clearShader();
 	}
 	
 	void SoraBaseCanvas::addEffect(SoraImageEffect* effect) {
-		return pCanvasSprite->addEffect(effect);
+        if(pCanvasSprite)
+            return pCanvasSprite->addEffect(effect);
 	}
 	
 	void SoraBaseCanvas::stopEffect(SoraImageEffect* effect) {
-		return pCanvasSprite->stopEffect(effect);
+        if(pCanvasSprite)
+            return pCanvasSprite->stopEffect(effect);
 	}
 	
 	void SoraBaseCanvas::clearEffects() {
-		return pCanvasSprite->clearEffects();
+        if(pCanvasSprite)
+            return pCanvasSprite->clearEffects();
 	}
 	
 	bool SoraBaseCanvas::hasEffect() const {
-		return pCanvasSprite->hasEffect();
+        if(pCanvasSprite)
+            return pCanvasSprite->hasEffect();
+        return false;
 	}
     
 } // namespace sora

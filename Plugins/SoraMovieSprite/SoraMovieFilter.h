@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef SORA_MOVIE_PLAYER_H_
-#define SORA_MOVIE_PLAYER_H_
+#ifndef SORA_MOVIE_FILTER_H_
+#define SORA_MOVIE_FILTER_H_
 
 #include "SoraPlatform.h"
 
@@ -20,7 +20,7 @@ namespace sora {
 	
 	class SoraMovieFilter {
 	public:
-		virtual void filterImage(uint8* colorData, uint32 width, uint32 height);
+		virtual void filterFrame(uint32* colorData, uint32 width, uint32 height) = 0;
 	};
 	
 } // namespace sora

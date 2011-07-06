@@ -68,17 +68,17 @@ namespace sora {
         uint64 getLength() const;
         float getFPS() const;
         
-        uint32 getWidth() const { return videoWidth; }
-        uint32 getHeight() const { return videoHeight; }
-        uint32 getFrameCount() const { return frameData.frameCount; }        
-        bool frameChanged() const { return frameData.bChanged; }
-        void setFinish() { frameData.bChanged = false; }
+        uint32 getWidth() const;
+        uint32 getHeight() const;
+        uint32 getFrameCount() const;        
+        bool frameChanged() const;
+        void setFinish();
         
-        void* getPixelData() const { return frameData.dummy; }
+        void* getPixelData() const;
         
-        bool isStopped() const { return frameData.bStopped; }
-        bool isPlaying() const { return frameData.bPlaying; }
-        bool isPaused() const { return frameData.bStopped; }
+        bool isStopped() const;
+        bool isPlaying() const;
+        bool isPaused() const;
         
         int32 getAudioTrackNum() const;
         int32 getAudioChannelNum() const;

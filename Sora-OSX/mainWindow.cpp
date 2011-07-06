@@ -40,7 +40,10 @@
 #include "SoraGenericObjects/SoraCustomShapeSprite.h"
 
 
-#include "SoraPThread/SoraThread.h"
+#include "SoraPThread/SoraThreadPool.h"
+
+#include "SoraPThread/SoraCountDownLatch.h"
+#include "SoraPThread/SoraBlockingQueue.h"
 
 sora::SoraGifSprite* gifSprite;
 sora::SoraCustomShapeSprite* customSprite;
@@ -58,6 +61,9 @@ mainWindow::~mainWindow() {
 int32 posy = 0;
 bool mouseReleased = true;
 
+
+sora::SoraCountDownLatch* countDownLatch;
+sora::SoraBlockingQueue<int> blockingQueue;
 
 float32 cx = 300.f, cy = 400.f, cz = 1.f;
 void transform3d(float32& x, float32& y, float32 z) {
@@ -163,6 +169,7 @@ bool mainWindow::renderFunc() {
 	
 	
 	sora->endScene();
+
 	return false;
 }
 
@@ -179,6 +186,8 @@ void mainWindow::onDownloadEvent(sora::SoraHttpDownloadEvent* ev) {
 										"test", MB_OK);
 	file.writeToFile(L"./test.png");
 }
+
+sora::SoraThreadPool threadPool;
 
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
@@ -242,10 +251,23 @@ void mainWindow::init() {
 	gifSprite->setPosition(100.f, 100.f);
 	
 	sora::SORA_EVENT_MANAGER->registerFileChangeEventHandler(L"test.lua", this);
+    
+    sora::SoraThreadTask task;
+    task.setAsMemberFunc(&mainWindow::test, this);
+    task.setArg(&blockingQueue);
+    
+    threadPool.start(2);
+    threadPool.run(task);
 }
 
 void mainWindow::onFileChangeEvent(sora::SoraFileChangeEvent* cev) {
 	sora::SORA->messageBoxW(cev->getChangedFile().c_str(), L"test", MB_OK);
+}
+
+void mainWindow::test(void* arg) {
+    sora::SoraBlockingQueue<int>* blockingQueue = static_cast<sora::SoraBlockingQueue<int>*>(arg);
+    for(;;)
+        printf("taking from blocking queue: %d\n", blockingQueue->take());
 }
 
 void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
@@ -265,6 +287,8 @@ void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
        if(!customSprite->loadVerticesFromFile(L"vertices.raw"))
            sora::SORA->messageBox("sc", "sc", MB_OK);
     }
-    //else if(kev->isKeyPressed(SORA_KEY_6))
+    else if(kev->isKeyPressed(SORA_KEY_9)) {
+        blockingQueue.put(sora::SORA->randomInt(0, 9999));
+    }
         
 }

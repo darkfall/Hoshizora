@@ -1,5 +1,5 @@
 /*
- *  SoraThreadFactory.cpp
+ *  SoraThread.cpp
  *  Plugin Concept
  *
  *  Created by griffin clare on 8/27/10.
@@ -15,16 +15,29 @@ namespace sora {
 
     SoraThread::SoraThread(): _arg(NULL), thread_task(NULL), active(false) {}
     
-    SoraThread::SoraThread(SoraThreadTask* task): thread_task(task), _arg(NULL), active(false) {}
-    
-    SoraThread::~SoraThread() {
-        if(isActive()) {
-            pthread_join(thread, 0);
-            --active_thread_num;
-        }
+    SoraThread::SoraThread(const SoraThreadTask& task, const std::string _name):
+    thread_task(task), 
+    _arg(NULL), 
+    active(false),
+    name(_name) {
     }
     
-    void SoraThread::setThreadTask(SoraThreadTask* task) {
+    SoraThread::~SoraThread() {
+        /*if(isActive()) {
+            pthread_join(thread, 0);
+            --active_thread_num;
+        }*/
+    }
+    
+    void SoraThread::setName(const std::string& _name) {
+        name = _name;
+    }
+    
+    std::string SoraThread::getName() const {
+        return name;
+    }
+    
+    void SoraThread::setThreadTask(const SoraThreadTask& task) {
         thread_task = task;
     }
     
@@ -36,7 +49,7 @@ namespace sora {
         return active_thread_num;
     }
     
-    SoraThreadTask* SoraThread::getThreadTask() const {
+    SoraThreadTask SoraThread::getThreadTask() const {
         return thread_task;
     }
     
@@ -78,10 +91,11 @@ namespace sora {
         ++active_thread_num;
         pt->setActive(true);
         
-        if(pt->getThreadTask() == NULL)
+        SoraThreadTask task(pt->getThreadTask());
+        if(!task.isValid())
             pt->run( pt->getarg() );
         else 
-            pt->getThreadTask()->run( pt->getarg() );
+            task( pt->getarg() );
         
         pthread_exit(0);
         pt->setActive(false);

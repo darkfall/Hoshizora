@@ -29,7 +29,12 @@ namespace sora {
 			.def("setPitch", &sora::SoraBGMManager::setPitch)
 			.def("setPan", &sora::SoraBGMManager::setPan)
 			.def("setFadeTime", &sora::SoraBGMManager::setFadeTime)
-			.def("enableRandomPlay", &sora::SoraBGMManager::enableRandomBGMQueuePlay);
+			.def("enableRandomPlay", &sora::SoraBGMManager::enableRandomBGMQueuePlay)
+            .def("playBGS", &sora::SoraBGMManager::playBGS)
+            .def("stopBGS", &sora::SoraBGMManager::stopBGS)
+            .def("adjustBGSVolume", &sora::SoraBGMManager::adjustBGSVolume)
+            .def("toNextBGM", &sora::SoraBGMManager::toNextBGM)
+            .def("toPrevBGM", &sora::SoraBGMManager::toPrevBGM);
 			
 		gge::LuaClass<sora::SoraSoundEffectManager>(state, "SEManager", sora::SoraSoundEffectManager::Instance())
 			.def("load", &sora::SoraSoundEffectManager::load)

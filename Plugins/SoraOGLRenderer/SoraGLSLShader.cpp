@@ -228,9 +228,6 @@ namespace sora {
 	
 	SoraGLSLShaderContext::SoraGLSLShaderContext() {
 		mProgram = glCreateProgram();
-		if(!mProgram) {
-			THROW_SORA_EXCEPTION("Error creating glsl program");
-		}
 	}
 	
 	SoraGLSLShaderContext::~SoraGLSLShaderContext() {
@@ -250,6 +247,9 @@ namespace sora {
 	}
 	
 	bool SoraGLSLShaderContext::attachShaderList() {
+        if(!mProgram)
+            return false;
+        
 		SoraShaderContext::attachShaderList();
 		
 		glLinkProgram(mProgram);
@@ -260,6 +260,9 @@ namespace sora {
 	}
 	
 	bool SoraGLSLShaderContext::detachShaderList() {
+        if(!mProgram)
+            return false;
+        
 		SoraShaderContext::detachShaderList();
 		
 		glUseProgram(0);

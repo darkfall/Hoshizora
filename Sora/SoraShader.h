@@ -12,6 +12,8 @@
 #define SORA_SHADER_H__
 
 #include "SoraPlatform.h"
+#include "AutoContainer.h"
+
 #include <list>
 
 namespace sora {
@@ -27,7 +29,7 @@ namespace sora {
 		Class to hold a shader
 		Automatically created and managed by SoraShaderContext
 	*/
-	class SoraShader {
+	class SoraShader: public AutoListElement<SoraShader> {
 		friend class SoraShaderContext;
 		
 	public:

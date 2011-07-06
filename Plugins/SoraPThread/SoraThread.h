@@ -24,6 +24,8 @@
 #include "SoraThreadTask.h"
 #include "SoraMutex.h"
 #include "SoraCondition.h"
+#include "SoraThreadLocal.h"
+#include "SoraBlockingQueue.h"
 
 namespace sora {
 		
@@ -32,7 +34,7 @@ namespace sora {
 
 	public:
 		SoraThread();
-        SoraThread(SoraThreadTask* task);
+        SoraThread(const SoraThreadTask& task, const std::string name=std::string());
         ~SoraThread();
 		
 		int32 start(void* arg);
@@ -40,14 +42,17 @@ namespace sora {
         bool isActive() const;
         int32 getActiveThreadNum() const;
         
-        void setThreadTask(SoraThreadTask* task);
+        void setThreadTask(const SoraThreadTask& task);
         /**
          * only available when using external task routine
          **/
-        SoraThreadTask* getThreadTask() const;
+        SoraThreadTask getThreadTask() const;
         
         void join();
 		
+        void setName(const std::string& name);
+        std::string getName() const;
+        
 	protected:
 		int32 run(void* arg);
 		static void* entry(void*);
@@ -64,10 +69,11 @@ namespace sora {
 		pthread_t thread;
 		pthread_attr_t attr;
         
-        SoraThreadTask* thread_task;
+        SoraThreadTask thread_task;
         
         static int32 active_thread_num;
 		
+        std::string name;
 		void* _arg;
         bool active;
 	};

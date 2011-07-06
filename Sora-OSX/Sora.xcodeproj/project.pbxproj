@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -247,6 +247,52 @@
 		88B1BFE213A7A7BD00EC541D /* SoraPluginManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B1BFE113A7A7BD00EC541D /* SoraPluginManager.cpp */; };
 		88B1C01113A7AE8300EC541D /* SoraFileUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B1C01013A7AE8300EC541D /* SoraFileUtility.cpp */; };
 		88B1C21713A9E49A00EC541D /* SoraLuaMainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B1C21613A9E49A00EC541D /* SoraLuaMainWindow.cpp */; };
+		88B387D113C425D1008AF50E /* SoraVlcMoviePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B3863E13C425D0008AF50E /* SoraVlcMoviePlayer.cpp */; };
+		88B387FE13C431F2008AF50E /* libcaca.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387D513C431F1008AF50E /* libcaca.0.dylib */; };
+		88B387FF13C431F2008AF50E /* libdca.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387D613C431F1008AF50E /* libdca.0.dylib */; };
+		88B3880013C431F2008AF50E /* libdvbpsi.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387D713C431F1008AF50E /* libdvbpsi.6.dylib */; };
+		88B3880113C431F2008AF50E /* libdvdcss.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387D813C431F1008AF50E /* libdvdcss.2.dylib */; };
+		88B3880213C431F2008AF50E /* libdvdnav.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387D913C431F1008AF50E /* libdvdnav.4.dylib */; };
+		88B3880313C431F2008AF50E /* libdvdread.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387DA13C431F1008AF50E /* libdvdread.4.dylib */; };
+		88B3880413C431F2008AF50E /* libFLAC.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387DB13C431F1008AF50E /* libFLAC.8.dylib */; };
+		88B3880513C431F2008AF50E /* libfluidsynth.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387DC13C431F1008AF50E /* libfluidsynth.1.dylib */; };
+		88B3880613C431F2008AF50E /* libfontconfig.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387DD13C431F1008AF50E /* libfontconfig.1.dylib */; };
+		88B3880713C431F2008AF50E /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387DE13C431F1008AF50E /* libfreetype.6.dylib */; };
+		88B3880813C431F2008AF50E /* libfribidi.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387DF13C431F1008AF50E /* libfribidi.0.dylib */; };
+		88B3880913C431F2008AF50E /* libgcrypt.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E013C431F1008AF50E /* libgcrypt.11.dylib */; };
+		88B3880A13C431F2008AF50E /* libgnutls.26.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E113C431F1008AF50E /* libgnutls.26.dylib */; };
+		88B3880B13C431F2008AF50E /* libintl.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E213C431F1008AF50E /* libintl.8.dylib */; };
+		88B3880C13C431F2008AF50E /* libixml.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E313C431F1008AF50E /* libixml.2.dylib */; };
+		88B3880D13C431F2008AF50E /* libkate.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E413C431F1008AF50E /* libkate.1.dylib */; };
+		88B3880E13C431F2008AF50E /* libmad.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E513C431F1008AF50E /* libmad.0.dylib */; };
+		88B3880F13C431F2008AF50E /* libmpcdec.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E613C431F1008AF50E /* libmpcdec.dylib */; };
+		88B3881013C431F2008AF50E /* libmpeg2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E713C431F1008AF50E /* libmpeg2.0.dylib */; };
+		88B3881113C431F2008AF50E /* libogg.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E813C431F1008AF50E /* libogg.0.dylib */; };
+		88B3881213C431F2008AF50E /* liborc-0.4.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387E913C431F1008AF50E /* liborc-0.4.0.dylib */; };
+		88B3881313C431F2008AF50E /* libpng14.14.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387EA13C431F1008AF50E /* libpng14.14.dylib */; };
+		88B3881413C431F2008AF50E /* libschroedinger-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387EB13C431F1008AF50E /* libschroedinger-1.0.0.dylib */; };
+		88B3881513C431F2008AF50E /* libSDL-1.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387EC13C431F1008AF50E /* libSDL-1.3.0.dylib */; };
+		88B3881613C431F2008AF50E /* libSDL_image.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387ED13C431F1008AF50E /* libSDL_image.0.dylib */; };
+		88B3881713C431F2008AF50E /* libshout.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387EE13C431F1008AF50E /* libshout.3.dylib */; };
+		88B3881813C431F2008AF50E /* libspeex.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387EF13C431F1008AF50E /* libspeex.1.dylib */; };
+		88B3881913C431F2008AF50E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F013C431F1008AF50E /* libsqlite3.0.dylib */; };
+		88B3881A13C431F2008AF50E /* libtag.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F113C431F1008AF50E /* libtag.1.dylib */; };
+		88B3881B13C431F2008AF50E /* libtheora.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F213C431F1008AF50E /* libtheora.0.dylib */; };
+		88B3881C13C431F2008AF50E /* libthreadutil.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F313C431F1008AF50E /* libthreadutil.2.dylib */; };
+		88B3881D13C431F2008AF50E /* libtwolame.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F413C431F1008AF50E /* libtwolame.0.dylib */; };
+		88B3881E13C431F2008AF50E /* libupnp.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F513C431F1008AF50E /* libupnp.3.dylib */; };
+		88B3881F13C431F2008AF50E /* libvlc.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F613C431F1008AF50E /* libvlc.5.dylib */; };
+		88B3882013C431F2008AF50E /* libvlc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F713C431F1008AF50E /* libvlc.dylib */; };
+		88B3882113C431F2008AF50E /* libvlccore.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F813C431F1008AF50E /* libvlccore.4.dylib */; };
+		88B3882213C431F2008AF50E /* libvlccore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387F913C431F1008AF50E /* libvlccore.dylib */; };
+		88B3882313C431F2008AF50E /* libvorbis.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387FA13C431F1008AF50E /* libvorbis.0.dylib */; };
+		88B3882413C431F2008AF50E /* libvorbisenc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387FB13C431F1008AF50E /* libvorbisenc.2.dylib */; };
+		88B3882513C431F2008AF50E /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387FC13C431F1008AF50E /* libxml2.2.dylib */; };
+		88B3882613C431F2008AF50E /* libzvbi.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387FD13C431F1008AF50E /* libzvbi.0.dylib */; };
+		88B3882813C43843008AF50E /* SoraException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B3882713C43842008AF50E /* SoraException.cpp */; };
+		88B3882B13C4428E008AF50E /* SoraThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B3882A13C4428E008AF50E /* SoraThreadPool.cpp */; };
+		88B3882F13C44B7C008AF50E /* SoraCountDownLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B3882E13C44B7B008AF50E /* SoraCountDownLatch.cpp */; };
+		88B3883213C45128008AF50E /* SoraThreadTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B3883113C45128008AF50E /* SoraThreadTask.cpp */; };
 		88BA9E03135A972100C282EB /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */; };
 		88BD150C1346ADCA0068AABA /* guichanWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BD14831346ADCA0068AABA /* guichanWrapper.cpp */; };
 		88BD150E1346ADCA0068AABA /* luace.c in Sources */ = {isa = PBXBuildFile; fileRef = 88BD148C1346ADCA0068AABA /* luace.c */; };
@@ -1038,6 +1084,70 @@
 		88B1C01013A7AE8300EC541D /* SoraFileUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraFileUtility.cpp; sourceTree = "<group>"; };
 		88B1C21513A9E49A00EC541D /* SoraLuaMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLuaMainWindow.h; sourceTree = "<group>"; };
 		88B1C21613A9E49A00EC541D /* SoraLuaMainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraLuaMainWindow.cpp; sourceTree = "<group>"; };
+		88B384F813C425CF008AF50E /* deprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deprecated.h; sourceTree = "<group>"; };
+		88B384F913C425CF008AF50E /* libvlc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc.h; sourceTree = "<group>"; };
+		88B384FA13C425CF008AF50E /* libvlc_events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_events.h; sourceTree = "<group>"; };
+		88B384FB13C425CF008AF50E /* libvlc_media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media.h; sourceTree = "<group>"; };
+		88B384FC13C425CF008AF50E /* libvlc_media_discoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_discoverer.h; sourceTree = "<group>"; };
+		88B384FD13C425CF008AF50E /* libvlc_media_library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_library.h; sourceTree = "<group>"; };
+		88B384FE13C425CF008AF50E /* libvlc_media_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_list.h; sourceTree = "<group>"; };
+		88B384FF13C425CF008AF50E /* libvlc_media_list_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_list_player.h; sourceTree = "<group>"; };
+		88B3850013C425CF008AF50E /* libvlc_media_player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_media_player.h; sourceTree = "<group>"; };
+		88B3850113C425CF008AF50E /* libvlc_structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_structures.h; sourceTree = "<group>"; };
+		88B3850213C425CF008AF50E /* libvlc_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_version.h; sourceTree = "<group>"; };
+		88B3850313C425CF008AF50E /* libvlc_vlm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libvlc_vlm.h; sourceTree = "<group>"; };
+		88B3850413C425CF008AF50E /* vlc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vlc.h; sourceTree = "<group>"; };
+		88B3863E13C425D0008AF50E /* SoraVlcMoviePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraVlcMoviePlayer.cpp; sourceTree = "<group>"; };
+		88B3863F13C425D0008AF50E /* SoraVlcMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraVlcMoviePlayer.h; sourceTree = "<group>"; };
+		88B387D513C431F1008AF50E /* libcaca.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libcaca.0.dylib; sourceTree = "<group>"; };
+		88B387D613C431F1008AF50E /* libdca.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libdca.0.dylib; sourceTree = "<group>"; };
+		88B387D713C431F1008AF50E /* libdvbpsi.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libdvbpsi.6.dylib; sourceTree = "<group>"; };
+		88B387D813C431F1008AF50E /* libdvdcss.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libdvdcss.2.dylib; sourceTree = "<group>"; };
+		88B387D913C431F1008AF50E /* libdvdnav.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libdvdnav.4.dylib; sourceTree = "<group>"; };
+		88B387DA13C431F1008AF50E /* libdvdread.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libdvdread.4.dylib; sourceTree = "<group>"; };
+		88B387DB13C431F1008AF50E /* libFLAC.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libFLAC.8.dylib; sourceTree = "<group>"; };
+		88B387DC13C431F1008AF50E /* libfluidsynth.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfluidsynth.1.dylib; sourceTree = "<group>"; };
+		88B387DD13C431F1008AF50E /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfontconfig.1.dylib; sourceTree = "<group>"; };
+		88B387DE13C431F1008AF50E /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfreetype.6.dylib; sourceTree = "<group>"; };
+		88B387DF13C431F1008AF50E /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfribidi.0.dylib; sourceTree = "<group>"; };
+		88B387E013C431F1008AF50E /* libgcrypt.11.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgcrypt.11.dylib; sourceTree = "<group>"; };
+		88B387E113C431F1008AF50E /* libgnutls.26.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libgnutls.26.dylib; sourceTree = "<group>"; };
+		88B387E213C431F1008AF50E /* libintl.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libintl.8.dylib; sourceTree = "<group>"; };
+		88B387E313C431F1008AF50E /* libixml.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libixml.2.dylib; sourceTree = "<group>"; };
+		88B387E413C431F1008AF50E /* libkate.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libkate.1.dylib; sourceTree = "<group>"; };
+		88B387E513C431F1008AF50E /* libmad.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmad.0.dylib; sourceTree = "<group>"; };
+		88B387E613C431F1008AF50E /* libmpcdec.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpcdec.dylib; sourceTree = "<group>"; };
+		88B387E713C431F1008AF50E /* libmpeg2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpeg2.0.dylib; sourceTree = "<group>"; };
+		88B387E813C431F1008AF50E /* libogg.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libogg.0.dylib; sourceTree = "<group>"; };
+		88B387E913C431F1008AF50E /* liborc-0.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "liborc-0.4.0.dylib"; sourceTree = "<group>"; };
+		88B387EA13C431F1008AF50E /* libpng14.14.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libpng14.14.dylib; sourceTree = "<group>"; };
+		88B387EB13C431F1008AF50E /* libschroedinger-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libschroedinger-1.0.0.dylib"; sourceTree = "<group>"; };
+		88B387EC13C431F1008AF50E /* libSDL-1.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libSDL-1.3.0.dylib"; sourceTree = "<group>"; };
+		88B387ED13C431F1008AF50E /* libSDL_image.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libSDL_image.0.dylib; sourceTree = "<group>"; };
+		88B387EE13C431F1008AF50E /* libshout.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libshout.3.dylib; sourceTree = "<group>"; };
+		88B387EF13C431F1008AF50E /* libspeex.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libspeex.1.dylib; sourceTree = "<group>"; };
+		88B387F013C431F1008AF50E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libsqlite3.0.dylib; sourceTree = "<group>"; };
+		88B387F113C431F1008AF50E /* libtag.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtag.1.dylib; sourceTree = "<group>"; };
+		88B387F213C431F1008AF50E /* libtheora.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtheora.0.dylib; sourceTree = "<group>"; };
+		88B387F313C431F1008AF50E /* libthreadutil.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libthreadutil.2.dylib; sourceTree = "<group>"; };
+		88B387F413C431F1008AF50E /* libtwolame.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtwolame.0.dylib; sourceTree = "<group>"; };
+		88B387F513C431F1008AF50E /* libupnp.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libupnp.3.dylib; sourceTree = "<group>"; };
+		88B387F613C431F1008AF50E /* libvlc.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libvlc.5.dylib; sourceTree = "<group>"; };
+		88B387F713C431F1008AF50E /* libvlc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libvlc.dylib; sourceTree = "<group>"; };
+		88B387F813C431F1008AF50E /* libvlccore.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libvlccore.4.dylib; sourceTree = "<group>"; };
+		88B387F913C431F1008AF50E /* libvlccore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libvlccore.dylib; sourceTree = "<group>"; };
+		88B387FA13C431F1008AF50E /* libvorbis.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libvorbis.0.dylib; sourceTree = "<group>"; };
+		88B387FB13C431F1008AF50E /* libvorbisenc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libvorbisenc.2.dylib; sourceTree = "<group>"; };
+		88B387FC13C431F1008AF50E /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libxml2.2.dylib; sourceTree = "<group>"; };
+		88B387FD13C431F1008AF50E /* libzvbi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libzvbi.0.dylib; sourceTree = "<group>"; };
+		88B3882713C43842008AF50E /* SoraException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraException.cpp; sourceTree = "<group>"; };
+		88B3882913C44287008AF50E /* SoraThreadPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraThreadPool.h; sourceTree = "<group>"; };
+		88B3882A13C4428E008AF50E /* SoraThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraThreadPool.cpp; sourceTree = "<group>"; };
+		88B3882C13C44A34008AF50E /* SoraThreadLocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraThreadLocal.h; sourceTree = "<group>"; };
+		88B3882D13C44B2F008AF50E /* SoraCountDownLatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCountDownLatch.h; sourceTree = "<group>"; };
+		88B3882E13C44B7B008AF50E /* SoraCountDownLatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraCountDownLatch.cpp; sourceTree = "<group>"; };
+		88B3883013C44D07008AF50E /* SoraBlockingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraBlockingQueue.h; sourceTree = "<group>"; };
+		88B3883113C45128008AF50E /* SoraThreadTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraThreadTask.cpp; sourceTree = "<group>"; };
 		88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraSpriteAnimation.cpp; path = ../Plugins/SoraSpriteAnimation/SoraSpriteAnimation.cpp; sourceTree = "<group>"; };
 		88BA9E02135A972100C282EB /* SoraSpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraSpriteAnimation.h; path = ../Plugins/SoraSpriteAnimation/SoraSpriteAnimation.h; sourceTree = "<group>"; };
 		88BD14831346ADCA0068AABA /* guichanWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guichanWrapper.cpp; sourceTree = "<group>"; };
@@ -1318,6 +1428,47 @@
 				886E0FFA13681F5800A77847 /* osx_libglfw_x86_64.lib in Frameworks */,
 				887F22C11399DBFE00F534D5 /* libcurl.dylib in Frameworks */,
 				88628A9E13C2F58200BAC3F6 /* libgif_osx_x86_64.a in Frameworks */,
+				88B387FE13C431F2008AF50E /* libcaca.0.dylib in Frameworks */,
+				88B387FF13C431F2008AF50E /* libdca.0.dylib in Frameworks */,
+				88B3880013C431F2008AF50E /* libdvbpsi.6.dylib in Frameworks */,
+				88B3880113C431F2008AF50E /* libdvdcss.2.dylib in Frameworks */,
+				88B3880213C431F2008AF50E /* libdvdnav.4.dylib in Frameworks */,
+				88B3880313C431F2008AF50E /* libdvdread.4.dylib in Frameworks */,
+				88B3880413C431F2008AF50E /* libFLAC.8.dylib in Frameworks */,
+				88B3880513C431F2008AF50E /* libfluidsynth.1.dylib in Frameworks */,
+				88B3880613C431F2008AF50E /* libfontconfig.1.dylib in Frameworks */,
+				88B3880713C431F2008AF50E /* libfreetype.6.dylib in Frameworks */,
+				88B3880813C431F2008AF50E /* libfribidi.0.dylib in Frameworks */,
+				88B3880913C431F2008AF50E /* libgcrypt.11.dylib in Frameworks */,
+				88B3880A13C431F2008AF50E /* libgnutls.26.dylib in Frameworks */,
+				88B3880B13C431F2008AF50E /* libintl.8.dylib in Frameworks */,
+				88B3880C13C431F2008AF50E /* libixml.2.dylib in Frameworks */,
+				88B3880D13C431F2008AF50E /* libkate.1.dylib in Frameworks */,
+				88B3880E13C431F2008AF50E /* libmad.0.dylib in Frameworks */,
+				88B3880F13C431F2008AF50E /* libmpcdec.dylib in Frameworks */,
+				88B3881013C431F2008AF50E /* libmpeg2.0.dylib in Frameworks */,
+				88B3881113C431F2008AF50E /* libogg.0.dylib in Frameworks */,
+				88B3881213C431F2008AF50E /* liborc-0.4.0.dylib in Frameworks */,
+				88B3881313C431F2008AF50E /* libpng14.14.dylib in Frameworks */,
+				88B3881413C431F2008AF50E /* libschroedinger-1.0.0.dylib in Frameworks */,
+				88B3881513C431F2008AF50E /* libSDL-1.3.0.dylib in Frameworks */,
+				88B3881613C431F2008AF50E /* libSDL_image.0.dylib in Frameworks */,
+				88B3881713C431F2008AF50E /* libshout.3.dylib in Frameworks */,
+				88B3881813C431F2008AF50E /* libspeex.1.dylib in Frameworks */,
+				88B3881913C431F2008AF50E /* libsqlite3.0.dylib in Frameworks */,
+				88B3881A13C431F2008AF50E /* libtag.1.dylib in Frameworks */,
+				88B3881B13C431F2008AF50E /* libtheora.0.dylib in Frameworks */,
+				88B3881C13C431F2008AF50E /* libthreadutil.2.dylib in Frameworks */,
+				88B3881D13C431F2008AF50E /* libtwolame.0.dylib in Frameworks */,
+				88B3881E13C431F2008AF50E /* libupnp.3.dylib in Frameworks */,
+				88B3881F13C431F2008AF50E /* libvlc.5.dylib in Frameworks */,
+				88B3882013C431F2008AF50E /* libvlc.dylib in Frameworks */,
+				88B3882113C431F2008AF50E /* libvlccore.4.dylib in Frameworks */,
+				88B3882213C431F2008AF50E /* libvlccore.dylib in Frameworks */,
+				88B3882313C431F2008AF50E /* libvorbis.0.dylib in Frameworks */,
+				88B3882413C431F2008AF50E /* libvorbisenc.2.dylib in Frameworks */,
+				88B3882513C431F2008AF50E /* libxml2.2.dylib in Frameworks */,
+				88B3882613C431F2008AF50E /* libzvbi.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2016,11 +2167,18 @@
 		887F22A81399D75A00F534D5 /* SoraPThread */ = {
 			isa = PBXGroup;
 			children = (
-				887F22B01399D75B00F534D5 /* SoraThread.cpp */,
 				887F22B11399D75B00F534D5 /* SoraThread.h */,
+				887F22B01399D75B00F534D5 /* SoraThread.cpp */,
 				88628A9F13C2F88C00BAC3F6 /* SoraThreadTask.h */,
+				88B3883113C45128008AF50E /* SoraThreadTask.cpp */,
 				88628AA013C3036300BAC3F6 /* SoraMutex.h */,
 				88628AA113C3056500BAC3F6 /* SoraCondition.h */,
+				88B3882913C44287008AF50E /* SoraThreadPool.h */,
+				88B3882A13C4428E008AF50E /* SoraThreadPool.cpp */,
+				88B3882C13C44A34008AF50E /* SoraThreadLocal.h */,
+				88B3882D13C44B2F008AF50E /* SoraCountDownLatch.h */,
+				88B3882E13C44B7B008AF50E /* SoraCountDownLatch.cpp */,
+				88B3883013C44D07008AF50E /* SoraBlockingQueue.h */,
 			);
 			name = SoraPThread;
 			path = ../Plugins/SoraPThread;
@@ -2398,6 +2556,103 @@
 			path = widgets;
 			sourceTree = "<group>";
 		};
+		88B384F413C425CF008AF50E /* libvlc */ = {
+			isa = PBXGroup;
+			children = (
+				88B387D413C431F1008AF50E /* lib */,
+				88B384F513C425CF008AF50E /* osx */,
+				88B3863E13C425D0008AF50E /* SoraVlcMoviePlayer.cpp */,
+				88B3863F13C425D0008AF50E /* SoraVlcMoviePlayer.h */,
+			);
+			name = libvlc;
+			path = ../Plugins/libvlc;
+			sourceTree = "<group>";
+		};
+		88B384F513C425CF008AF50E /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				88B384F613C425CF008AF50E /* include */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
+		88B384F613C425CF008AF50E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				88B384F713C425CF008AF50E /* vlc */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		88B384F713C425CF008AF50E /* vlc */ = {
+			isa = PBXGroup;
+			children = (
+				88B384F813C425CF008AF50E /* deprecated.h */,
+				88B384F913C425CF008AF50E /* libvlc.h */,
+				88B384FA13C425CF008AF50E /* libvlc_events.h */,
+				88B384FB13C425CF008AF50E /* libvlc_media.h */,
+				88B384FC13C425CF008AF50E /* libvlc_media_discoverer.h */,
+				88B384FD13C425CF008AF50E /* libvlc_media_library.h */,
+				88B384FE13C425CF008AF50E /* libvlc_media_list.h */,
+				88B384FF13C425CF008AF50E /* libvlc_media_list_player.h */,
+				88B3850013C425CF008AF50E /* libvlc_media_player.h */,
+				88B3850113C425CF008AF50E /* libvlc_structures.h */,
+				88B3850213C425CF008AF50E /* libvlc_version.h */,
+				88B3850313C425CF008AF50E /* libvlc_vlm.h */,
+				88B3850413C425CF008AF50E /* vlc.h */,
+			);
+			path = vlc;
+			sourceTree = "<group>";
+		};
+		88B387D413C431F1008AF50E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				88B387D513C431F1008AF50E /* libcaca.0.dylib */,
+				88B387D613C431F1008AF50E /* libdca.0.dylib */,
+				88B387D713C431F1008AF50E /* libdvbpsi.6.dylib */,
+				88B387D813C431F1008AF50E /* libdvdcss.2.dylib */,
+				88B387D913C431F1008AF50E /* libdvdnav.4.dylib */,
+				88B387DA13C431F1008AF50E /* libdvdread.4.dylib */,
+				88B387DB13C431F1008AF50E /* libFLAC.8.dylib */,
+				88B387DC13C431F1008AF50E /* libfluidsynth.1.dylib */,
+				88B387DD13C431F1008AF50E /* libfontconfig.1.dylib */,
+				88B387DE13C431F1008AF50E /* libfreetype.6.dylib */,
+				88B387DF13C431F1008AF50E /* libfribidi.0.dylib */,
+				88B387E013C431F1008AF50E /* libgcrypt.11.dylib */,
+				88B387E113C431F1008AF50E /* libgnutls.26.dylib */,
+				88B387E213C431F1008AF50E /* libintl.8.dylib */,
+				88B387E313C431F1008AF50E /* libixml.2.dylib */,
+				88B387E413C431F1008AF50E /* libkate.1.dylib */,
+				88B387E513C431F1008AF50E /* libmad.0.dylib */,
+				88B387E613C431F1008AF50E /* libmpcdec.dylib */,
+				88B387E713C431F1008AF50E /* libmpeg2.0.dylib */,
+				88B387E813C431F1008AF50E /* libogg.0.dylib */,
+				88B387E913C431F1008AF50E /* liborc-0.4.0.dylib */,
+				88B387EA13C431F1008AF50E /* libpng14.14.dylib */,
+				88B387EB13C431F1008AF50E /* libschroedinger-1.0.0.dylib */,
+				88B387EC13C431F1008AF50E /* libSDL-1.3.0.dylib */,
+				88B387ED13C431F1008AF50E /* libSDL_image.0.dylib */,
+				88B387EE13C431F1008AF50E /* libshout.3.dylib */,
+				88B387EF13C431F1008AF50E /* libspeex.1.dylib */,
+				88B387F013C431F1008AF50E /* libsqlite3.0.dylib */,
+				88B387F113C431F1008AF50E /* libtag.1.dylib */,
+				88B387F213C431F1008AF50E /* libtheora.0.dylib */,
+				88B387F313C431F1008AF50E /* libthreadutil.2.dylib */,
+				88B387F413C431F1008AF50E /* libtwolame.0.dylib */,
+				88B387F513C431F1008AF50E /* libupnp.3.dylib */,
+				88B387F613C431F1008AF50E /* libvlc.5.dylib */,
+				88B387F713C431F1008AF50E /* libvlc.dylib */,
+				88B387F813C431F1008AF50E /* libvlccore.4.dylib */,
+				88B387F913C431F1008AF50E /* libvlccore.dylib */,
+				88B387FA13C431F1008AF50E /* libvorbis.0.dylib */,
+				88B387FB13C431F1008AF50E /* libvorbisenc.2.dylib */,
+				88B387FC13C431F1008AF50E /* libxml2.2.dylib */,
+				88B387FD13C431F1008AF50E /* libzvbi.0.dylib */,
+			);
+			name = lib;
+			path = osx/lib;
+			sourceTree = "<group>";
+		};
 		88BA9E00135A96E500C282EB /* SoraSpriteAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -2659,6 +2914,7 @@
 				88240CFA12C5811B009498F7 /* SoraShader.h */,
 				88240CF912C5811B009498F7 /* SoraShader.cpp */,
 				88D87D3312A09A66007D6865 /* SoraException.h */,
+				88B3882713C43842008AF50E /* SoraException.cpp */,
 				88D10AB213C30BD900E0002A /* WindowsStackTrace.h */,
 				88D87D3412A09A66007D6865 /* SoraFileBase.h */,
 				88D87D3512A09A66007D6865 /* SoraFileUtility.h */,
@@ -2792,6 +3048,7 @@
 		88E33824136A79F2000B67C8 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				88B384F413C425CF008AF50E /* libvlc */,
 				8859229013C1B76700EF986E /* SoraSpriteParser */,
 				8837676C13BCD4C300DC2543 /* SoraStateMachine */,
 				887D5BCE13BC20680088A4CC /* SoraMovieSprite */,
@@ -2907,10 +3164,11 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Griffin Bu(Project Hoshizor)";
 			};
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "Sora" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -3295,6 +3553,11 @@
 				881DDC5A13BEF44000A0A4CE /* SoraInputQueue.cpp in Sources */,
 				8859220213C187AA00EF986E /* OSXIconWrapper.mm in Sources */,
 				8859229313C1B76700EF986E /* SoraSpriteParser.cpp in Sources */,
+				88B387D113C425D1008AF50E /* SoraVlcMoviePlayer.cpp in Sources */,
+				88B3882813C43843008AF50E /* SoraException.cpp in Sources */,
+				88B3882B13C4428E008AF50E /* SoraThreadPool.cpp in Sources */,
+				88B3882F13C44B7C008AF50E /* SoraCountDownLatch.cpp in Sources */,
+				88B3883213C45128008AF50E /* SoraThreadTask.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3309,9 +3572,9 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					./../Plugins/AngelScript,
 					./../Plugins/SoraGUIChan,
@@ -3400,6 +3663,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -3409,8 +3673,8 @@
 					./../Plugins/,
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.6;
+				OTHER_LDFLAGS = "-Wall";
+				SDKROOT = macosx;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				USER_HEADER_SEARCH_PATHS = ./../Sora/;
 				VALID_ARCHS = "i386 x86_64";
@@ -3423,6 +3687,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -3431,7 +3696,7 @@
 					./../Plugins/SoraFreetypeFont,
 					./../Plugins/,
 				);
-				PREBINDING = NO;
+				OTHER_LDFLAGS = "-Wall";
 				SDKROOT = macosx;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				USER_HEADER_SEARCH_PATHS = ./../Sora/;

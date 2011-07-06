@@ -18,47 +18,49 @@ namespace sora {
 	
 	SoraLuaObject::SoraLuaObject() {
 		luaState = LuaState::Create(true);
-		if(!luaState)
-			THROW_SORA_EXCEPTION("error creating LuaState");
 
-		SoraLuaExport::export_constants(luaState);
-		SoraLuaExport::export_soracore(luaState);
-        SoraLuaExport::export_sprites(luaState);
-		SoraLuaExport::export_font(luaState);
+        if(luaState) {
+            SoraLuaExport::export_constants(luaState);
+            SoraLuaExport::export_soracore(luaState);
+            SoraLuaExport::export_sprites(luaState);
+            SoraLuaExport::export_font(luaState);
 
-		luaopen_pluto(luaState->GetCState());
+            luaopen_pluto(luaState->GetCState());
 
-		//LuaStateRefMap[(ulong32)luaState] = 1;
-		SoraLuaObjectManager::Instance()->registerLuaObject(this);
-        setType(OBJ_LUA);
+            //LuaStateRefMap[(ulong32)luaState] = 1;
+            SoraLuaObjectManager::Instance()->registerLuaObject(this);
+            setType(OBJ_LUA);
+        } else 
+            DebugPtr->log("Error creating LuaState");
 	}
 
 	SoraLuaObject::SoraLuaObject(const SoraWString& scriptPath) {
 		luaState = LuaState::Create(true);
-		if(!luaState)
-			THROW_SORA_EXCEPTION("error creating LuaState");
+		if(luaState) {
+            SoraLuaExport::export_constants(luaState);
+            SoraLuaExport::export_soracore(luaState);
+            SoraLuaExport::export_sprites(luaState);
+            SoraLuaExport::export_font(luaState);
 		
-		SoraLuaExport::export_constants(luaState);
-		SoraLuaExport::export_soracore(luaState);
-        SoraLuaExport::export_sprites(luaState);
-		SoraLuaExport::export_font(luaState);
-		
-		luaopen_pluto(luaState->GetCState());
+            luaopen_pluto(luaState->GetCState());
 
-		//LuaStateRefMap[(ulong32)luaState] = 1;
-		SoraLuaObjectManager::Instance()->registerLuaObject(this);
-        setType(OBJ_LUA);
+                //LuaStateRefMap[(ulong32)luaState] = 1;
+            SoraLuaObjectManager::Instance()->registerLuaObject(this);
+            setType(OBJ_LUA);
 
-        doScript(scriptPath);
+            doScript(scriptPath);
+        } else 
+            DebugPtr->log("Error creating LuaState");
 	}
 
 	SoraLuaObject::SoraLuaObject(LuaState* state) {
 		luaState = state;
 		//LuaStateRefMap[(ulong32)luaState] = 1;
-		if(!luaState)
-			THROW_SORA_EXCEPTION("error creating LuaState");
-		setType(OBJ_LUA);
-		SoraLuaObjectManager::Instance()->registerLuaObject(this);
+		if(luaState) {
+            setType(OBJ_LUA);
+            SoraLuaObjectManager::Instance()->registerLuaObject(this);
+        } else 
+            DebugPtr->log("Error creating LuaState");
 	}
 
 	SoraLuaObject::~SoraLuaObject() {

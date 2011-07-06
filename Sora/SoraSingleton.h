@@ -10,17 +10,28 @@
 #ifndef SORA_SINGLETON_H_
 #define SORA_SINGLETON_H_
 
+#include "SoraPlatform.h"
+
 namespace sora {
 	
 	template<class T>
 	class SoraSingleton {
 	public:
 		static T* Instance() {
-			if(!pInstance) pInstance = new T;
+			if(!pInstance) pInstance = new T();
 			return pInstance;
 		}
+        
+        static T& RefInstance() {
+            if(!pInstance) pInstance = new T();
+            return *pInstance;
+        }
 	
-		static void Destroy() { if(pInstance) delete pInstance; }
+		static void Destroy() { 
+            if(pInstance) 
+                delete pInstance;
+            pInstance = NULL;
+        }
 	
 	private:
 		static T* pInstance;
@@ -34,7 +45,39 @@ namespace sora {
 	};
 
 	template<class T>
-	T* SoraSingleton<T>::pInstance = 0;
+	T* SoraSingleton<T>::pInstance = NULL;
+    
+    template<class T>
+    class SoraThreadLocalSingleton {
+    public:
+        static T* Instance() {
+            if(!pInstance) pInstance = new T();
+            return pInstance;
+        }
+        
+        static T& RefInstance() {
+            if(!pInstance) pInstance = new T();
+            return *pInstance;
+        }
+        
+        static void Destroy() {
+            if(pInstance)
+                delete pInstance;
+            pInstance = NULL;
+        }
+        
+    private:
+        static ThreadLocal T* pInstance;
+        SoraThreadLocalSingleton(const SoraThreadLocalSingleton& singleton) {}
+        SoraThreadLocalSingleton& operator=(const SoraThreadLocalSingleton& singleton){}
+        
+	protected:
+		SoraThreadLocalSingleton() {}
+		virtual ~SoraThreadLocalSingleton() {}
+    };
+    
+    template<class T>
+    ThreadLocal T* SoraThreadLocalSingleton<T>::pInstance = NULL;
 	
 } // namespace sora
 

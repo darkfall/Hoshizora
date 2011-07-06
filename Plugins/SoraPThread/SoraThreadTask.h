@@ -12,21 +12,38 @@
 #include "SoraPlatform.h"
 #include "uncopyable.h"
 
+#include "SoraAutoPtr.h"
+
 namespace sora {
     
-    class SoraThreadTask: uncopyable {
+    class SoraThreadTaskImpl: uncopyable {
     public:
-        SoraThreadTask() {}
-        
-        virtual void run(void* arg) = 0;
+        virtual void operator()(void* arg) = 0;
     };
     
-    class SoraCThreadTask: public SoraThreadTask {
+    template<typename T>
+    class SoraMemberThreadTask: public SoraThreadTaskImpl {
+    public:
+        typedef void (T::*ThreadFunc)(void* args);
+        SoraMemberThreadTask(ThreadFunc func, T* obj):
+        _func(func),
+        _obj(obj) {}
+        
+        void operator()(void* arg) {
+            (_obj->*_func)(arg);
+        }
+        
+    private:
+        ThreadFunc _func;
+        T* _obj;
+    };
+    
+    class SoraCThreadTask: public SoraThreadTaskImpl {
     public:
         typedef void (*CThreadTask)(void* arg);
         SoraCThreadTask(CThreadTask task): mCTask(task) {}
         
-        void run(void* arg) {
+        void operator()(void* arg) {
             mCTask(arg);
         }
         
@@ -34,7 +51,37 @@ namespace sora {
         CThreadTask mCTask;
     };
     
+    class SoraThreadTask {
+    public:
+        SoraThreadTask();
+        SoraThreadTask(void (*ThreadFunc)(void* arg));
+        
+        template<typename T>
+        void setAsMemberFunc(void (T::*ThreadFunc)(void* args), T* obj);
+        void setAsCFunc(void (*ThreadFunc)(void* arg));
+        
+        void run(void* arg) const;
+        void operator()(void* arg) const;
+        
+        void setArg(void* arg);
+        void* getArg() const;
+        
+        bool isValid() const;
+        
+    private:
+        SoraAutoPtr<SoraThreadTaskImpl> func;
+        
+        void* iarg;
+    };
     
+    template<typename T>
+    void SoraThreadTask::setAsMemberFunc(void (T::*ThreadFunc)(void* args), T* obj) {
+        SoraMemberThreadTask<T>* memberTask = new SoraMemberThreadTask<T>(ThreadFunc, obj);
+        if(!memberTask)
+            THROW_SORA_EXCEPTION("Error creating member thread task");
+        else
+            func = memberTask;
+    }
 } // namespace sora
 
 #endif

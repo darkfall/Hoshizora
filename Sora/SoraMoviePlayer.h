@@ -53,6 +53,7 @@ namespace sora {
         virtual void* getPixelData() const { return NULL; }
         virtual uint32 getFrameCount() const { return 0; }
         virtual bool frameChanged() const { return false; }
+        virtual void setFinish() {}
     
     };
 } // namespace sora

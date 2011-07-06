@@ -22,14 +22,14 @@ namespace sora {
 	mRetain(retain) {
 		mData = SORA->getResourceFile(file, mSize);
 		if(!mData)
-			THROW_SORA_EXCEPTION(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+			DebugPtr->log(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
 	}
     
     SoraResourceFileAuto::SoraResourceFileAuto(const SoraWString& file, ulong32 size, bool retain):
     mRetain(retain) {
         mData = SORA->readResourceFile(file, size);
         if(!mData)
-			THROW_SORA_EXCEPTION(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+			DebugPtr->log(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
     }
 	
 	SoraResourceFileAuto::~SoraResourceFileAuto() {

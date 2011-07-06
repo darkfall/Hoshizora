@@ -327,7 +327,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "99"
-         endingLineNumber = "99">
+         endingLineNumber = "99"
+         landmarkName = "SoraLocalizer::addLocaleConf(const SoraWString&amp; confPath)"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -486,7 +488,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "33"
          endingLineNumber = "33"
-         landmarkName = "unlock(void* data, void* id, void* const* pixels)"
+         landmarkName = "lock(void* data, void** pixels)"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
@@ -673,11 +675,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "331552302.036448"
+         timestampString = "331636391.534379"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "297"
-         endingLineNumber = "297"
+         startingLineNumber = "291"
+         endingLineNumber = "291"
          landmarkName = "mainWindow::onKeyEvent(sora::SoraKeyEvent* kev)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -687,11 +689,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "331552302.036448"
+         timestampString = "331636391.534379"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "272"
-         endingLineNumber = "272">
+         startingLineNumber = "271"
+         endingLineNumber = "271"
+         landmarkName = "mainWindow::test(void* arg)"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

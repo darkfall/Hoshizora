@@ -93,14 +93,12 @@ namespace sora {
         const char* vlc_argv[] = {
             "--plugin-path=./Plugins"
             "--ignore-config",
-			"-I", "dummy",
-			"--verbose", "2"
+			"-I", "dummy"
+           // ,"--verbose", "2"
         };
         int vlc_argc = sizeof(vlc_argv) / sizeof(*vlc_argv);
         
         vlcInstance = libvlc_new(vlc_argc, vlc_argv);
-        if(!vlcInstance)
-            throw SoraException("Error initializing VLCCore");
         
 		mp = NULL;
         evtManager = NULL;
@@ -109,10 +107,14 @@ namespace sora {
     SoraVlcMoviePlayer::~SoraVlcMoviePlayer() {
 		if(mp)
 			libvlc_media_player_release(mp);
-        libvlc_release(vlcInstance);
+        if(vlcInstance)
+            libvlc_release(vlcInstance);
     }
     
     bool SoraVlcMoviePlayer::openMedia(const SoraWString& filePath, const SoraString& dis) {
+        if(!vlcInstance)
+            return false;
+        
         if(media) { libvlc_media_release(media); }
         media = libvlc_media_new_path(vlcInstance, ws2s(filePath).c_str());
 		if(mp) {
@@ -138,6 +140,9 @@ namespace sora {
         libvlc_media_release(media);
 		
 		displayFormat = dis;
+#ifdef OS_WIN32
+        displayFormat = "RV32"
+#endif
 
         frameData.videoWidth = 0;
         frameData.videoHeight = 0;
@@ -169,6 +174,9 @@ namespace sora {
 	}
     
     void SoraVlcMoviePlayer::setMediaInfo(uint32 w, uint32 h) {
+        if(!vlcInstance || !mp)
+            return;
+        
 	    videoWidth = frameData.videoWidth = w;
 		videoHeight = frameData.videoHeight = h;
 		
@@ -177,6 +185,9 @@ namespace sora {
 	}
     
     void SoraVlcMoviePlayer::play() {
+        if(!vlcInstance || !mp)
+            return;
+        
 		libvlc_video_set_callbacks(mp, lock, unlock, display, &frameData);
 		libvlc_video_set_format(mp, displayFormat.c_str(), videoWidth, videoHeight, videoWidth*4);
 
@@ -184,6 +195,9 @@ namespace sora {
     }
     
     void SoraVlcMoviePlayer::resume() {
+        if(!vlcInstance || !mp)
+            return;
+        
         libvlc_media_player_set_pause(mp, 0);
         frameData.bPlaying = true;
         frameData.bPaused = false;
@@ -202,47 +216,69 @@ namespace sora {
     }
     
     void SoraVlcMoviePlayer::setVolume(int32 vol) {
+        if(!mp)
+            return ;
+        
         libvlc_audio_set_volume(mp, vol);
     }
     
     int32 SoraVlcMoviePlayer::getVolume() const {
+        if(!mp)
+            return 0;
+        
         return libvlc_audio_get_volume(mp);
     }
     
     void SoraVlcMoviePlayer::setMute(bool flag) {
+        if(!mp)
+            return ;
+        
         libvlc_audio_set_mute(mp, flag);
     }
     
     bool SoraVlcMoviePlayer::getMute() {
+        if(!mp)
+            return false;
+        
         return libvlc_audio_get_mute(mp);
     }
     
     uint64 SoraVlcMoviePlayer::getLength() const {
+        if(!mp)
+            return 0;
+        
         return libvlc_media_player_get_length(mp);
     }
     
     void SoraVlcMoviePlayer::setTime(uint64 newtime) {
         if(!isPlaying()) return;
         
-        if(newtime < 0) newtime = 0;
         if(newtime > getLength()) newtime = getLength();
         
         libvlc_media_player_set_time(mp, (libvlc_time_t)newtime);
     }
     
     uint64 SoraVlcMoviePlayer::getTime() const {
+        if(!mp)
+            return 0;
         return libvlc_media_player_get_time(mp);
     }
     
     float SoraVlcMoviePlayer::getFPS() const {
+        if(!mp)
+            return 0.f;
         return libvlc_media_player_get_fps(mp);
     }
     
     int32 SoraVlcMoviePlayer::getAudioTrackNum() const {
+        if(!mp)
+            return 0;
         return libvlc_audio_get_track_count(mp);
     }
     
     int32 SoraVlcMoviePlayer::getAudioChannelNum() const {
+        if(!mp)
+            return 0;
         return libvlc_audio_get_channel(mp);
     }
     
@@ -253,10 +289,52 @@ namespace sora {
     }
 
     float32 SoraVlcMoviePlayer::getPlayRate() const {
+        if(!mp)
+            return 0.f;
+        
         return libvlc_media_player_get_rate(mp);
     }
     
     void SoraVlcMoviePlayer::setPlayRate(float32 rate) {
+        if(!mp)
+            return;
+        
         libvlc_media_player_set_rate(mp, rate);
+    }
+    
+    uint32 SoraVlcMoviePlayer::getWidth() const { 
+        return videoWidth;
+    }
+    
+    uint32 SoraVlcMoviePlayer::getHeight() const { 
+        return videoHeight;
+    }
+   
+    uint32 SoraVlcMoviePlayer::getFrameCount() const { 
+        return frameData.frameCount;
+    }        
+    
+    bool SoraVlcMoviePlayer::frameChanged() const { 
+        return frameData.bChanged;
+    }
+    
+    void SoraVlcMoviePlayer::setFinish() { 
+        frameData.bChanged = false;
+    }
+    
+    void* SoraVlcMoviePlayer::getPixelData() const { 
+        return frameData.dummy;
+    }
+    
+    bool SoraVlcMoviePlayer::isStopped() const { 
+        return frameData.bStopped;
+    }
+    
+    bool SoraVlcMoviePlayer::isPlaying() const { 
+        return frameData.bPlaying; 
+    }
+    
+    bool SoraVlcMoviePlayer::isPaused() const { 
+        return frameData.bStopped; 
     }
 } // namespace sora
