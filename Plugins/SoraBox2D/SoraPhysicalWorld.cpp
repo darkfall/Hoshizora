@@ -29,6 +29,7 @@ namespace sora {
         void onFrameStart() {
 #ifdef SORA_PHYSICAL_THREAD
             frameStarted = true;
+            frameFinish = false;
 #else
             mWorld->setFrameTime(SORA->getDelta());
             mWorld->stepWorld();
@@ -37,7 +38,10 @@ namespace sora {
         
         void onFrameEnd() {
 #ifdef SORA_PHYSICAL_THREAD
-            while(!frameFinish);
+            while(!frameFinish) {
+                msleep(1);
+            }
+            
             SoraGlobalProfiler::Instance()->printProfile("PhysicalWorldThread");
 #endif
         }
@@ -49,8 +53,6 @@ namespace sora {
             for(;;) {
                 if(frameStarted) {
                     PROFILE("PhysicalWorldThread");
-
-                    frameFinish = false;
                         
                     if(mWorld) {
                         mWorld->setFrameTime(SORA->getDelta());

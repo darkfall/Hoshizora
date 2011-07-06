@@ -303,7 +303,7 @@ static void msleep(uint32_t msec) {
 #define ThreadLocal
 #endif
 
-#ifndef snprintf
+#ifndef __GNUC__
 #define snprintf _snprintf
 #endif
 
