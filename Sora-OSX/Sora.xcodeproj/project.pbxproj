@@ -1619,8 +1619,8 @@
 				883806031342587B00A47BD9 /* Box2D */,
 				883806531342587B00A47BD9 /* SoraPhysicalObject.cpp */,
 				883806541342587B00A47BD9 /* SoraPhysicalObject.h */,
-				883806551342587B00A47BD9 /* SoraPhysicalWorld.cpp */,
 				883806561342587B00A47BD9 /* SoraPhysicalWorld.h */,
+				883806551342587B00A47BD9 /* SoraPhysicalWorld.cpp */,
 			);
 			name = SoraBox2D;
 			path = ../Plugins/SoraBox2D;

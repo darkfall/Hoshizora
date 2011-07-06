@@ -58,7 +58,7 @@ namespace sora {
 		int32 getFrameCount() { return frameCounter; }
 		void setTimeScale(float32 ts) { fTimeScale = ts; }
 		float32 getTimeScale() { return fTimeScale; }
-		uint64 getCurrentSystemTime() { return dtToMil(mach_absolute_time()); }
+		uint64 getCurrentSystemTime() { return mach_absolute_time(); }
 		
 		bool update() {
 			if(fpsInterval == SORA_FPS_INFINITE) {

@@ -9,32 +9,27 @@
 
 #include "Box2D/Box2D.h"
 
+/**
+ * This option lets you run the physical update in a single thread
+ *  So that if the physical world runs very slow
+ *  It still woundn't influence the main thread of the game
+ **/
+#define SORA_PHYSICAL_THREAD
+
 namespace sora {
 
 #define SORA_PHYSICAL_DEFAULT_GRAVITY_X 0.f
 #define SORA_PHYSICAL_DEFAULT_GRAVITY_Y 1.f	
 
 	class SoraPhysicalWorld: public SoraSingleton<SoraPhysicalWorld> {
+    protected:
 		friend class SoraSingleton<SoraPhysicalWorld>;
         
-        class SoraPhysicalWorldPlugin: public SoraPlugin {
-        public:
-            SoraPhysicalWorldPlugin() {}
-            ~SoraPhysicalWorldPlugin() {}
-            
-            void update() {
-                SoraPhysicalWorld::Instance()->setFrameTime(SORA->getDelta());
-                SoraPhysicalWorld::Instance()->stepWorld();
-            }
-            
-            const SoraString getName() const { return "PhysicalWorld"; }
-        };
-		
-		SoraPhysicalWorld(): velocityIteration(10), positionIteration(8), bInitialized(false), bPluginInstalled(false), coordScalar(100), physicalWorld(NULL) {}
-		~SoraPhysicalWorld() { SORA->unistallPluginS("PhysicalWorld"); }
+		SoraPhysicalWorld();
+		~SoraPhysicalWorld();
 
 	public:
-		void initBox2DWorld(b2Vec2 gravity, bool doSleep=true);
+		void initBox2DWorld(float32 gravityx, float32 gravityy, bool doSleep=true);
 
 		b2Vec2 getGravity() { return worldGravity; }
 
@@ -57,6 +52,9 @@ namespace sora {
 
 		void destroyBody(b2Body* body);
 		void destroyJoint(b2Joint* joint);
+        
+        int32 getBodyCount() const;
+        int32 getJointCount() const;
         
         void setScalar(int32 scalar) { coordScalar = scalar; }
         int32 getScalar() { return coordScalar; }
@@ -86,9 +84,7 @@ namespace sora {
 
 		bool bInitialized;
         bool bPluginInstalled;
-        
-        SoraPhysicalWorldPlugin plugin;
-	};
+    };
     
 #define PHYSICAL_WORLD SoraPhysicalWorld::Instance()
 

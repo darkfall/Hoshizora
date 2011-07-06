@@ -13,6 +13,7 @@
 #include "../SoraTimer.h"
 
 #include <sys/timeb.h>
+#include <sys/time.h>
 
 namespace sora {
 	class SoraDefaultTimer: public SoraTimer {
@@ -34,9 +35,9 @@ namespace sora {
 		void setTimeScale(float32 ts) { fTimeScale = ts; }
 		float32 getTimeScale() { return fTimeScale; }
 		uint64 getCurrentSystemTime() {
-			timeb t;
-			ftime(&t);
-			return (uint64)(t.time*1000 + t.millitm);
+			timeval tv;
+            gettimeofday(&tv, 0);
+            return tv.tv_usec;
 		}
 		
 		bool update() {

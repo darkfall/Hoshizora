@@ -72,7 +72,7 @@ namespace sora {
 		void printProfile(const char* name) {
 			PROFILE_CONT::iterator itprofile = profiles.find(name);
 			if(itprofile != profiles.end()) {
-				DebugPtr->log(vamssg("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
+				DebugPtr->log(vamssg("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
 							  LOG_LEVEL_NOTICE);
 			}
 		}

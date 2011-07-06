@@ -38,6 +38,7 @@ namespace sora {
         ~SoraThread();
 		
 		int32 start(void* arg);
+        int32 start(const SoraThreadTask& task);
         
         bool isActive() const;
         int32 getActiveThreadNum() const;

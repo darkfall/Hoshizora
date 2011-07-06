@@ -167,20 +167,6 @@ namespace sora {
 			SoraInputSimulator::clear();
 
 			pRenderSystem->beginFrame();
-        
-			{
-#ifdef PROFILE_CORE_UPDATE
-				PROFILE("FRAMELISTENER_START");
-#endif
-				_frameListenerStart();
-			}
-			
-			{
-#ifdef PROFILE_CORE_UPDATE
-				PROFILE("UPDATE_PLUGINS");
-#endif
-				pPluginManager->update();
-			}
 			
 			{
 #ifdef PROFILE_CORE_UPDATE
@@ -194,6 +180,20 @@ namespace sora {
 				PROFILE("UPDATE_EVENT_MANAGER");
 #endif
 				SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
+			}
+            
+            {
+#ifdef PROFILE_CORE_UPDATE
+				PROFILE("FRAMELISTENER_START");
+#endif
+				_frameListenerStart();
+			}
+			
+			{
+#ifdef PROFILE_CORE_UPDATE
+				PROFILE("UPDATE_PLUGINS");
+#endif
+				pPluginManager->update();
 			}
 			
 			{

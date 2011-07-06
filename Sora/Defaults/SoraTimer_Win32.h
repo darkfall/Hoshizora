@@ -33,7 +33,7 @@ namespace sora {
 			LARGE_INTEGER Frequency;
 		    QueryPerformanceFrequency(&Frequency);
 			TimePrecision =  Frequency.QuadPart;
-			return GetCurrentSystemTime() / TimePrecision * 1000; 
+			return GetCurrentSystemTime(); 
 		}
 
 		

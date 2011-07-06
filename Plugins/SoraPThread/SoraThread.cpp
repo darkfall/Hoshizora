@@ -62,6 +62,15 @@ namespace sora {
         return 0;
     }
     
+    int32 SoraThread::start(const SoraThreadTask& task) {
+        if(!active) {
+            setThreadTask(task);
+            int32 result = pthread_create(&thread, NULL, SoraThread::entry, this);
+            return result;
+        }
+        return 0;
+    }
+    
     int SoraThread::run(void* arg) {
         setup();
         execute(arg);
