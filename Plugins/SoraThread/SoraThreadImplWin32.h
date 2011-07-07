@@ -21,34 +21,70 @@ namespace sora {
     
     class SoraThreadImpl {
     protected:
-        SoraThreadImpl();
-        ~SoraThreadImpl();
+        SoraThreadImpl():
+			 thread_handle(NULL),
+			 thread_id(0),
+			 active(false) {
+		}
+        ~SoraThreadImpl()  {
+			if(thread_handle == NULL)
+				return;
+			exitImpl();
+			thread_id = 0;
+			CloseHandle(thread_handle);
+		}
         
-        int32 startImpl();
-        int32 startWithTaskImpl(const SoraThreadTask& task);
+        int32 startImpl()  {
+			if(active || !thread_task.isValid())
+			    return 0;
         
-        bool isActiveImpl() const;
-        int32 getActiveThreadNumImpl() const;
+			thread_handle = CreateThread(NULL, 0, _ThreadProc, (LPVOID)this, 0, (LPDWORD)&thread_id);
+			if(thread_handle == INVALID_HANDLE_VALUE || thread_handle == NULL) {
+			    thread_id = 0;
+			    return 0;
+			}
+			return 1;
+		}
+        int32 startWithTaskImpl(const SoraThreadTask& task) {
+			setThreadTaskImpl(task);
+			return startImpl();
+		}
         
-        void setThreadTaskImpl(const SoraThreadTask& task);
-        SoraThreadTask getThreadTaskImpl() const;
-        
-        void join();
-        void exit();
-        
+        void joinImpl() {
+			WaitForSingleObject(thread_handle, INFINITE);
+		}
+    
+		void exitImpl() {
+			TerminateThread(thread_handle, 0);
+		}
+    
+		bool isActiveImpl() const {
+			return active;
+		}
+    
+		void setActiveImpl(bool flag) {
+			active = flag;
+		}
+
+		void setThreadTaskImpl(const SoraThreadTask& task) {
+			thread_task = task;
+		}
+    
+		SoraThreadTask getThreadTaskImpl() const {
+			return thread_task;
+		}
+       
     private:
         uint32 thread_id;
         HANDLE thread_handle;
         
-        SoraThreadtask thread_task;
+        SoraThreadTask thread_task;
         static DWORD WINAPI _ThreadProc(LPVOID param);
-        
-        static int32 active_thread_num;
-        void* arg;
+       
         bool active;
     };
     
-    
+	 
 } // namespace sora
 
 #endif

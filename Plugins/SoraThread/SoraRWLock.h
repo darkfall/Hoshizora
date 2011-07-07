@@ -14,7 +14,11 @@
 /*
 
  */
+#if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
 #include "SoraRWLockImplPosix.h"
+#else
+#include "SoraRWLockImplWin32.h"
+#endif
 
 namespace sora {
     

@@ -339,5 +339,25 @@ typedef enum {
 */
 #define SORA_USE_EXCEPTION
 
+
+
+/****************
+	Below are compile options for plugins
+	Depends on the plugins you use
+	I put them here for convinience
+******************/
+
+/*
+	SoraThread Plugin Option
+	If SORA_WIN32_PTHREAD have been defined, then SoraThread would try to use external pthread library under Windows
+	Otherwise it would use Win32API to archive the goal
+	Default: NO
+*/
+#ifdef OS_WIN32
+//#define SORA_WIN32_PTHREAD
+#endif
+
+
+
 #endif // _SORA_PLATFORM_H_
 

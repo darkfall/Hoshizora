@@ -8,24 +8,23 @@
 
 #include "SoraThreadImplPosix.h"
 
+#if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
 namespace sora {
-    
-    int32 SoraThreadImpl::active_thread_num = 0;
-
+ 
     void* SoraThreadImpl::entry(void* pthis) {
         SoraThreadImpl* pt = static_cast<SoraThreadImpl*>(pthis);
         
-        ++active_thread_num;
         pt->setActiveImpl(true);
         
         SoraThreadTask task(pt->getThreadTaskImpl());
         if(task.isValid())
-            task( pt->getargImpl() );
+            task( );
         
         pthread_exit(0);
         pt->setActiveImpl(false);
-        --active_thread_num;
         return 0;
     }
-    
+
 } // namespace sora
+
+#endif

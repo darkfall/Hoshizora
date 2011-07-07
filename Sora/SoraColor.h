@@ -2,7 +2,7 @@
  *  mColor.h
  *  OpenGLES Study 1
  *
- *  Created by griffin clare on 09年10月16日.
+ *  Created by griffin clare on 09.10.16
  *  Copyright 2009 ring0Dev. All rights reserved.
  *
  */

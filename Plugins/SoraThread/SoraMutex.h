@@ -9,10 +9,16 @@
 #ifndef Sora_SoraMutex_h
 #define Sora_SoraMutex_h
 
-#include "SoraMutexImplPosix.h"
-
 #include "SoraPlatform.h"
 #include "uncopyable.h"
+
+
+#if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
+#include "SoraMutexImplPosix.h"
+#else
+#include "SoraMutexImplWin32.h"
+#endif
+
 
 namespace sora {
     

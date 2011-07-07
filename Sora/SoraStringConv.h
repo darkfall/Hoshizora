@@ -27,9 +27,7 @@ namespace sora {
 	//FLOAT -> STRING
 	std::string fp_to_str(float32 x);
 
-	//宽字符串->字符串
 	std::string ws2s(const std::wstring& ws);
-	//字符串->宽字符串
 	std::wstring s2ws(const std::string& s);
 	
 	template<typename T>
@@ -45,7 +43,6 @@ namespace sora {
 		return str.str();
 	}
 	
-	// 純英文字符串限定
 	std::string ws2sfast(const std::wstring& ws);
 	std::wstring s2wsfast(const std::string& s);	
 

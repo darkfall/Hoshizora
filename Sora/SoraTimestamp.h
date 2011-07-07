@@ -93,8 +93,8 @@ public:
 		/// the returned value is always 1000000.
 
 #if defined(_WIN32)
-	static SoraTimestamp fromFileTimeNP(UInt32 fileTimeLow, UInt32 fileTimeHigh);
-	void toFileTimeNP(UInt32& fileTimeLow, UInt32& fileTimeHigh) const;
+	static SoraTimestamp fromFileTimeNP(uint32 fileTimeLow, uint32 fileTimeHigh);
+	void toFileTimeNP(uint32& fileTimeLow, uint32& fileTimeHigh) const;
 #endif
 
 private:

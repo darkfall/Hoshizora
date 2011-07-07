@@ -46,12 +46,12 @@ namespace sora {
             }
         }
         
-        inline void* getSysMutex() {
+        inline void* getSysMutexImpl() {
             return &cs;
         }
         
     private:
-        CRTICAL_SECTION cs;
+        CRITICAL_SECTION cs;
     };
     
     

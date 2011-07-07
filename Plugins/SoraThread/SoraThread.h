@@ -12,7 +12,14 @@
 
 #include "SoraPlatform.h"
 
+#if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
 #include "SoraThreadImplPosix.h"
+	#if defined(SORA_WIN32_PTHREAD)
+		#pragma comment(lib, "pthreadVC2.lib");
+	#endif
+#else
+#include "SoraThreadImplWin32.h"
+#endif
 
 #include "SoraThreadTask.h"
 #include "SoraMutex.h"
@@ -47,6 +54,8 @@ namespace sora {
 		
 	private:
         std::string name;
+
+		static int32 active_thread_num;
     };
 		
 } // namespace sora

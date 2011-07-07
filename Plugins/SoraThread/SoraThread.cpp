@@ -11,6 +11,8 @@
 
 namespace sora {
     
+	int32 SoraThread::active_thread_num = 0;
+
     SoraThread::SoraThread() {
     
     }
@@ -21,7 +23,8 @@ namespace sora {
     }
     
     SoraThread::~SoraThread() {
-        
+        if(isActive())
+			--active_thread_num;
     }
     
     void SoraThread::setName(const std::string& _name) {
@@ -41,7 +44,7 @@ namespace sora {
     }
     
     int32 SoraThread::getActiveThreadNum() const {
-        return getActiveThreadNumImpl();
+        return active_thread_num;
     }
     
     SoraThreadTask SoraThread::getThreadTask() const {
@@ -49,7 +52,8 @@ namespace sora {
     }
     
     int32 SoraThread::start() {
-       return startImpl();
+	    ++active_thread_num;
+        return startImpl();
     }
     
     int32 SoraThread::startWithTask(const SoraThreadTask& task) {
@@ -57,10 +61,16 @@ namespace sora {
     }
     
     void SoraThread::join() {
-        joinImpl();
+		if(isActive()) {
+	        joinImpl();
+			--active_thread_num;
+		}
     }
 	
     void SoraThread::exit() {
-        exitImpl();
+		if(isActive()) {
+	        exitImpl();
+			--active_thread_num;
+		};
     }
 } // namespace sora

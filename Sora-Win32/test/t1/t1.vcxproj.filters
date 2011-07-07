@@ -112,11 +112,11 @@
     <Filter Include="Plugins\httpfile">
       <UniqueIdentifier>{e1b73670-08de-4547-9033-9a028867a2c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugins\pthread">
-      <UniqueIdentifier>{2bca3d9d-1958-4d88-8f9c-400fe4847407}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Plugins\Gif">
       <UniqueIdentifier>{7f3a98f0-cdaa-46b4-b958-a793e2def883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SoraThread">
+      <UniqueIdentifier>{f9c1f298-6803-4699-b960-972d1d911231}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1398,32 +1398,62 @@
     <ClInclude Include="..\..\..\Sora\SoraResourceFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraMutex.h">
-      <Filter>Plugins\pthread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThread.h">
-      <Filter>Plugins\pthread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThreadTask.h">
-      <Filter>Plugins\pthread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraCondition.h">
-      <Filter>Plugins\pthread</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\WindowsStackTrace.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraCountDownLatch.h">
-      <Filter>Plugins\pthread</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraCountDownLatch.h">
+      <Filter>Plugins\SoraThread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThreadLocal.h">
-      <Filter>Plugins\pthread</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraMutex.h">
+      <Filter>Plugins\SoraThread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraThreadPool.h">
-      <Filter>Plugins\pthread</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraMutexImplPosix.h">
+      <Filter>Plugins\SoraThread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraPThread\SoraBlockingQueue.h">
-      <Filter>Plugins\pthread</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraMutexImplWin32.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraRWLock.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraRWLockImplPosix.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraRWLockImplWin32.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraThread.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraThreadImplPosix.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraThreadImplWin32.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraThreadLocal.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraThreadPool.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraThreadTask.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraAtomicCounter.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraBlockingQueue.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraCondition.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraConditionImplWin32.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraTimestamp.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2156,20 +2186,32 @@
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraThread.cpp">
-      <Filter>Plugins\pthread</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraException.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraCountDownLatch.cpp">
-      <Filter>Plugins\pthread</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraThread\SoraCountDownLatch.cpp">
+      <Filter>Plugins\SoraThread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraThreadPool.cpp">
-      <Filter>Plugins\pthread</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraThread\SoraThread.cpp">
+      <Filter>Plugins\SoraThread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraPThread\SoraThreadTask.cpp">
-      <Filter>Plugins\pthread</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraThread\SoraThreadPool.cpp">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraThread\SoraThreadTask.cpp">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraThread\SoraAtomicCounter.cpp">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraThread\SoraThreadImplPosix.cpp">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraThread\SoraThreadImplWin32.cpp">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraTimestamp.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

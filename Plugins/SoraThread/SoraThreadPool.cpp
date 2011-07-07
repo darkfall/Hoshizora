@@ -58,7 +58,7 @@ namespace sora {
     
     void SoraThreadPool::run(const SoraThreadTask& task) {
         if(threads.empty())
-            task(0);
+            task();
         else {
             SoraMutexGuard lock(mutex);
             queue.push_back(task);
@@ -83,7 +83,7 @@ namespace sora {
         try {
             while(running) {
                 SoraThreadTask task(take());
-                task(arg);
+                task();
             }
         }
         catch(const SoraException& exp) {

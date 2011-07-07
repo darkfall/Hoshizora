@@ -13,7 +13,7 @@
 
 #ifdef OS_WIN32
 
-#include <Windows.h>
+#include <windows.h>
 
 /**
  * This implemention is far more complex than the POSIX one
@@ -45,25 +45,26 @@ namespace sora {
     
     typedef HANDLE pthread_mutex_t;
     
-    int 
-    pthread_cond_init (pthread_cond_t *cv,
-                       const pthread_condattr_t *)
+    static int 
+    _win32_pthread_cond_init (pthread_cond_t *cv,
+                       const void *)
     {
         cv->waiters_count_ = 0;
         cv->was_broadcast_ = 0;
-        cv->sema_ = CreatedSemaphore (NULL,       // no security
+        cv->sema_ = CreateSemaphoreA (NULL,       // no security
                                       0,          // initially 0
                                       0x7fffffff, // max count
                                       NULL);      // unnamed 
         InitializeCriticalSection (&cv->waiters_count_lock_);
-        cv->waiters_done_ = CreateEvent (NULL,  // no security
+        cv->waiters_done_ = CreateEventA (NULL,  // no security
                                          FALSE, // auto-reset
                                          FALSE, // non-signaled initially
                                          NULL); // unnamed
+		return 0;
     }
     
-    int
-    pthread_cond_wait (pthread_cond_t *cv, 
+    static int
+    _win32_pthread_cond_wait (pthread_cond_t *cv, 
                        pthread_mutex_t *external_mutex)
     {
         // Avoid race conditions.
@@ -96,11 +97,12 @@ namespace sora {
         else
             // Always regain the external mutex since that's the guarantee we
             // give to our callers. 
-            WaitForSingleObject (*external_mutex);
+            WaitForSingleObject (*external_mutex, INFINITE);
+		return 0;
     }
     
-    int
-    pthread_cond_signal (pthread_cond_t *cv)
+    static int
+    _win32_pthread_cond_signal (pthread_cond_t *cv)
     {
         EnterCriticalSection (&cv->waiters_count_lock_);
         int have_waiters = cv->waiters_count_ > 0;
@@ -109,10 +111,11 @@ namespace sora {
         // If there aren't any waiters, then this is a no-op.  
         if (have_waiters)
             ReleaseSemaphore (cv->sema_, 1, 0);
+		return 0;
     }
     
-    int
-    pthread_cond_broadcast (pthread_cond_t *cv)
+    static int
+    _win32_pthread_cond_broadcast (pthread_cond_t *cv)
     {
         // This is needed to ensure that <waiters_count_> and <was_broadcast_> are
         // consistent relative to each other.
@@ -142,8 +145,10 @@ namespace sora {
         }
         else
             LeaveCriticalSection (&cv->waiters_count_lock_);
+		return 0;
     }
 } // namespace sora
 
+#endif // OS_WIN32
 
 #endif

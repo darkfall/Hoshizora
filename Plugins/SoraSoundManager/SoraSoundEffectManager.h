@@ -17,7 +17,7 @@
 
 namespace sora {
 		
-	typedef int32 SoundEffectId;
+	typedef stringId SoundEffectId;
 	/*
 	 a global sound effect manager for fast and convinient sound effect playback
 	 especially in scripts

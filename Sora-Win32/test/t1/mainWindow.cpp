@@ -39,9 +39,9 @@
 #include "SoraGifSprite/SoraGifSprite.h"
 #include "SoraGenericObjects/SoraCustomShapeSprite.h"
 
-#include "SoraPThread/SoraThreadPool.h"
-#include "SoraPThread/SoraCountDownLatch.h"
-#include "SoraPThread/SoraBlockingQueue.h"
+#include "SoraThread/SoraThreadPool.h"
+#include "SoraThread/SoraCountDownLatch.h"
+#include "SoraThread/SoraBlockingQueue.h"
 
 sora::SoraGifSprite* gifSprite;
 sora::SoraCustomShapeSprite* customSprite;
@@ -58,6 +58,8 @@ mainWindow::~mainWindow() {
 }
 int32 posy = 0;
 bool mouseReleased = true;
+
+sora::SoraBlockingQueue<int> queue;
 
 void mainWindow::threadtest(void* arg) {
 	sora::SoraBlockingQueue<int>* queue = static_cast<sora::SoraBlockingQueue<int>*>(arg);
@@ -195,7 +197,6 @@ void test() {
 	THROW_SORA_EXCEPTION("test");
 }
 
-	sora::SoraBlockingQueue<int> queue;
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);

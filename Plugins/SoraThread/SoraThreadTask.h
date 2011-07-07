@@ -61,8 +61,8 @@ namespace sora {
         void setAsMemberFunc(void (T::*ThreadFunc)(void* args), T* obj);
         void setAsCFunc(void (*ThreadFunc)(void* arg));
         
-        void run(void* arg) const;
-        void operator()(void* arg) const;
+        void run() const;
+        void operator()() const;
         
         void setArg(void* arg);
         void* getArg() const;

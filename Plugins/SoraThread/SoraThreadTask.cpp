@@ -43,16 +43,16 @@ namespace sora {
         return func.valid();
     }
     
-    void SoraThreadTask::run(void* arg) const {
+    void SoraThreadTask::run() const {
         if(func.valid()) {
             SoraThreadTaskImpl* realFunc = func.pointer();
-            realFunc->operator ()(arg==NULL?iarg:arg);
+            realFunc->operator ()(iarg);
         } else
             DebugPtr->log("SoraThreadtask::run - invalid func ptr");
     }
     
-    void SoraThreadTask::operator()(void* arg) const {
-        run(arg==NULL?iarg:arg);
+    void SoraThreadTask::operator()() const {
+        run();
     }
     
 } // namespace sora

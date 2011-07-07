@@ -14,7 +14,7 @@
 
 #ifdef OS_WIN32
 
-#include <Widnows.h>
+#include <windows.h>
 
 namespace sora {
     

@@ -98,7 +98,7 @@ void SoraTimestamp::update()
 #if defined(_WIN32)
 
 
-SoraTimestamp SoraTimestamp::fromFileTimeNP(UInt32 fileTimeLow, UInt32 fileTimeHigh)
+SoraTimestamp SoraTimestamp::fromFileTimeNP(uint32 fileTimeLow, uint32 fileTimeHigh)
 {
 	ULARGE_INTEGER epoch; // UNIX epoch (1970-01-01 00:00:00) expressed in Windows NT FILETIME
 	epoch.LowPart  = 0xD53E8000;
@@ -113,7 +113,7 @@ SoraTimestamp SoraTimestamp::fromFileTimeNP(UInt32 fileTimeLow, UInt32 fileTimeH
 }
 
 
-void SoraTimestamp::toFileTimeNP(UInt32& fileTimeLow, UInt32& fileTimeHigh) const
+void SoraTimestamp::toFileTimeNP(uint32& fileTimeLow, uint32& fileTimeHigh) const
 {
 	ULARGE_INTEGER epoch; // UNIX epoch (1970-01-01 00:00:00) expressed in Windows NT FILETIME
 	epoch.LowPart  = 0xD53E8000;

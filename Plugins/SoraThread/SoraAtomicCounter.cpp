@@ -18,7 +18,7 @@ namespace sora {
     }
     
     SoraAtomicCounter::SoraAtomicCounter(const SoraAtomicCounter& _counter):
-    counter(_counter.value) {
+    counter(_counter.value()) {
     }
     
     SoraAtomicCounter::~SoraAtomicCounter() {
@@ -26,7 +26,7 @@ namespace sora {
     }
     
     SoraAtomicCounter& SoraAtomicCounter::operator=(const SoraAtomicCounter& rhs) {
-        InterlockedExchange(&counter, counter.value());
+        InterlockedExchange(&counter, rhs.value());
         return *this;
     }
     

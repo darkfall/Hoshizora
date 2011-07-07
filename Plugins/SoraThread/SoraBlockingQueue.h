@@ -35,10 +35,10 @@ namespace sora {
         }
         
         T take() {
-            SoraMutexGuard lock(mutex);
             while(queue.empty())  
                 cond.wait();
             
+            SoraMutexGuard lock(mutex);
             assert(!queue.empty());
             T front(queue.front());
             queue.pop_front();

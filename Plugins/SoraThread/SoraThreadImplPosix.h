@@ -12,15 +12,14 @@
 #include "SoraPlatform.h"
 #include "SoraThreadTask.h"
 
+#if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
+
 // sora thread using pthread(posix thread)
 #ifndef OS_WIN32
 #include <pthread.h>
 #else
 #include "pthread.h"
-
-#pragma comment(lib, "pthreadVC2.lib")
 #endif
-
 
 namespace sora {
     
@@ -28,7 +27,7 @@ namespace sora {
         friend class SoraThread;
         
     protected:
-        SoraThreadImpl(): active(false), arg(NULL) {}
+        SoraThreadImpl(): active(false) {}
     
         inline int32 startImpl() {
             if(!thread_task.isValid() || active) {
@@ -40,7 +39,7 @@ namespace sora {
         }
         inline int32 startWithTaskImpl(const SoraThreadTask& task) {
             setThreadTaskImpl(task);
-            startImpl();
+            return startImpl();
         }
         
         inline void joinImpl() {
@@ -50,17 +49,13 @@ namespace sora {
         
         inline void exitImpl() {
             if(active)
-                pthread_exit(thread);
+                pthread_exit(&thread);
         }
         
         inline bool isActiveImpl() const {
             return active;
         }
-        
-        inline int32 getActiveThreadNumImpl() const {
-            return active_thread_num;
-        }
-        
+       
         inline void setThreadTaskImpl(const SoraThreadTask& task) {
             thread_task = task;
         }
@@ -71,14 +66,6 @@ namespace sora {
         
         static void* entry(void* pthis);
         
-        inline void* getargImpl() const { 
-            return arg;
-        }
-        
-        inline void setargImpl(void* _arg) { 
-            arg = _arg;
-        }
-        
         inline void setActiveImpl(bool flag) {
             active = flag;
         }
@@ -88,15 +75,14 @@ namespace sora {
 		pthread_attr_t attr;
         
         SoraThreadTask thread_task;
-        static int32 active_thread_num;
         
-        void* arg;
         bool active;
     };
-    
 
+    
     
 } // namespace sora
 
+#endif
 
 #endif
