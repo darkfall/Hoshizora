@@ -205,7 +205,7 @@ void mainWindow::init() {
 		file.downloadFileTo("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", L"~/Desktop/download.png");
 	}*/
 	
-    sora::SORA->setFPS(999);
+    sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
 	

@@ -12,22 +12,18 @@
 
 #include "../SoraTimer.h"
 
-#include <sys/timeb.h>
-
-#ifndef OS_WIN32
-#include <sys/time.h>
-#endif
+#include "SoraTimestamp.h"
 
 namespace sora {
 	class SoraDefaultTimer: public SoraTimer {
 	public:
-		SoraDefaultTimer(): fpsInterval(SORA_FPS_INFINITE), frameCounter(0), fps(0.f), dt(0.f), fTime(0.f), fTimeScale(1.f) {
-			ftime(&time);
+		SoraDefaultTimer(): fpsInterval(SORA_FPS_INFINITE), frameCounter(0), fps(0.f), fTime(0.f), fTimeScale(1.f) {
+			time.update();
 			oldtime = time;
 		}
 		
 		void setFPS(int32 fps) {
-			fpsInterval = 1.f / fps * 1000;
+			fpsInterval = 1.f / fps * 1000 * 1000 ;
 			this->fps = (float32)fps;
 		}
 		
@@ -38,68 +34,59 @@ namespace sora {
 		void setTimeScale(float32 ts) { fTimeScale = ts; }
 		float32 getTimeScale() { return fTimeScale; }
 		uint64 getCurrentSystemTime() {
-#ifndef OS_WIN32
-			timeval tv;
-            gettimeofday(&tv, 0);
-            return tv.tv_usec;
-#else
-			timeb t;
-			ftime(&t);
-			return t.millitm + t.time * 1000;
-#endif
+            SoraTimestamp currtime;
+            return currtime.epochMicroseconds();
 		}
 		
 		bool update() {
 			if(fpsInterval == SORA_FPS_INFINITE) {
-				if(!timebEqual(time, oldtime)) {
-					fps = 1.f / (getDelta(time, oldtime)/1000.f);
+				if(!(time == oldtime)) {
+					fps = 1.f / ((time - oldtime)/(float32)(1000*1000));
 					oldtime = time;
-					ftime(&time);
+					time.update();
 				} else {
-					ftime(&time);
+					time.update();
 				}
 				return true;
 			}
-			
-			ftime(&time);
-			dt = getDelta(time, oldtime);
 
-			if(dt < fpsInterval) {
+			if(SoraTimestamp::currentTime()-oldtime.epochMicroseconds() < fpsInterval) {
 				for(;;) {
-					// 1 millisecond precision
-					if(getDelta(time, oldtime) < fpsInterval - 1000) {
+                    uint64 ldt = SoraTimestamp::currentTime() - oldtime.epochMicroseconds();
+					if(ldt >= fpsInterval - 1000) {
 						for(;;)
-							if(getDelta(time, oldtime) >= fpsInterval)
+							if(SoraTimestamp::currentTime() - oldtime.epochMicroseconds() >= fpsInterval)
 								break;
 						break;
 					} else {
 						msleep(1);
 					}
 				}
-				return false;
 			}
-			fdt = dt/1000.f * fTimeScale;
+            time.update();
+            
+            if(oldtime <= time - fpsInterval && oldtime >= time - (fpsInterval*2)) {
+				fdt = fpsInterval / (float32)(1000*1000) * fTimeScale;
+				oldtime += fpsInterval;
+			} else {
+				fdt = (time-oldtime) / (float32)(1000*1000) * fTimeScale;
+				oldtime = time;
+			}
 			/* too long */
 			if(fdt >= 1.f)
-				fdt = fpsInterval / 1000.f;
-			oldtime = time;
+				fdt = 1.f / fps;
 			
 			fps = 1.f / fdt;
+			
 			frameCounter++;
-			fTime += dt / 1000.f;
+			fTime += fdt;
 			return true;
 		}
 		
 	private:
-		inline float32 getDelta(timeb& t1, timeb& t2) {
-			return (float32)((t1.millitm - t2.millitm) + 1000*(t1.time-t2.time));
-		}
-		inline bool timebEqual(timeb& t1, timeb& t2) {
-			return (t1.millitm == t2.millitm && t1.time == t2.time);
-		}
-		
-		timeb time, oldtime;
-		float32 dt, fpsInterval, fps;
+		SoraTimestamp time, oldtime;
+		uint64 fpsInterval;
+        float32 fps;
 		float32 fdt;
 		
 		float32 fTime;

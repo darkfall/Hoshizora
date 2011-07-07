@@ -47,6 +47,7 @@ namespace sora {
 		mUpDownTime = mDownDownTime = 0.f;
 		
 		mMssgReachTop = true;
+        mUseSysTerm = false;
 		
 		mPositionX = 1;
 		mPositionY = 1;
@@ -280,7 +281,8 @@ namespace sora {
 
 			history.mResult = s2wsfast(cev.getResults());
 		} else {
-			SORA->execute(cmd, params!=NULL?params:"");
+            if(mUseSysTerm)
+                SORA->execute(cmd, params!=NULL?params:"");
 		}
 		
 		mHistory.push_back(history);
@@ -304,6 +306,10 @@ namespace sora {
                 mActive = true;
             hev->consume();
         }
+    }
+    
+    void SoraConsole::setUseSysTerm(bool flag) {
+        mUseSysTerm = flag;
     }
 	
 	void SoraConsole::onKeyEvent(SoraKeyEvent* kev) {

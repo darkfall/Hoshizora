@@ -17,7 +17,7 @@
 
 namespace sora {
 		
-	typedef stringId SoundEffectId;
+	typedef uint32 SoundEffectId;
 	/*
 	 a global sound effect manager for fast and convinient sound effect playback
 	 especially in scripts
@@ -44,11 +44,7 @@ namespace sora {
 		
 		bool play(SoundEffectId effId);
 		void stop(SoundEffectId effId);
-		
-		/* 
-			play a sound effect directly by its name
-			this sound effect would also be cached by the manager
-		 */
+
 		bool playDirect(const std::wstring& effectName);
 		
 		/* applies to global effects */

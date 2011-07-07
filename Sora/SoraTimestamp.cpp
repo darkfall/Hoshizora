@@ -66,6 +66,33 @@ SoraTimestamp SoraTimestamp::fromUtcTime(UtcTimeVal val)
 	val /= 10;
 	return SoraTimestamp(val);
 }
+    
+    SoraTimestamp::TimeVal SoraTimestamp::currentTime() {
+        TimeVal ts;
+#if defined(_WIN32)
+        
+        FILETIME ft;
+        GetSystemTimeAsFileTime(&ft);
+        ULARGE_INTEGER epoch; // UNIX epoch (1970-01-01 00:00:00) expressed in Windows NT FILETIME
+        epoch.LowPart  = 0xD53E8000;
+        epoch.HighPart = 0x019DB1DE;
+        
+        ULARGE_INTEGER ts;
+        ts.LowPart  = ft.dwLowDateTime;
+        ts.HighPart = ft.dwHighDateTime;
+        ts.QuadPart -= epoch.QuadPart;
+        ts = ts.QuadPart/10;
+        
+#else
+        
+        struct timeval tv;
+        if (gettimeofday(&tv, NULL))
+            throw ("cannot get time of day");
+        ts = TimeVal(tv.tv_sec)*resolution() + tv.tv_usec;
+        
+#endif
+        return ts;
+    }
 
 
 void SoraTimestamp::update()

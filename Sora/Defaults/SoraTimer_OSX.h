@@ -65,8 +65,8 @@ namespace sora {
 				if(oldtime != time) {
 					oldtime = time;
 					time = mach_absolute_time();
-					fdt = dtToMil(time-oldtime) / 1000.0 * fTimeScale;
-					fps = 1.f / (dtToMil(time-oldtime)/1000.f);;
+					fdt = dtToMil(time-oldtime) / (float32)1000 * fTimeScale;
+					fps = 1.f / (dtToMil(time-oldtime)/(float32)1000);;
 				} else {
 					time = mach_absolute_time();
 				}
@@ -89,10 +89,10 @@ namespace sora {
 			time = mach_absolute_time();
 			
 			if(oldtime <= time - fpsInterval && oldtime >= time - (fpsInterval*2)) {
-				fdt = dtToMil(fpsInterval) / 1000.0 * fTimeScale;
+				fdt = dtToMil(fpsInterval) / (float32)1000 * fTimeScale;
 				oldtime += fpsInterval;
 			} else {
-				fdt = dtToMil(time-oldtime) / 1000.0 * fTimeScale;
+				fdt = dtToMil(time-oldtime) / (float32)1000 * fTimeScale;
 				oldtime = time;
 			}
 			if(fdt >= 1.f)
@@ -116,7 +116,7 @@ namespace sora {
 		}
 		
 		inline double dtToMil(uint64_t dt) {
-			return ((double)machTimeToNano(dt) / (1000.0*1000.0));
+			return ((double)machTimeToNano(dt) / (1000*1000));
 		}
 		
 		uint64_t time, oldtime;

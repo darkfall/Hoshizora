@@ -102,6 +102,8 @@ namespace sora {
 		void setFont(SoraFont* font);
 		SoraFont* getFont() { return mFont;}
 		void reset();
+        
+        void setUseSysTerm(bool flag);
 		
 	private:
 		void drawCmds();
@@ -118,6 +120,8 @@ namespace sora {
 		float32 mUpDownTime, mDownDownTime;
 		
 		bool mMssgReachTop;
+        
+        bool mUseSysTerm;
 		
 		int32 mTab;
 		

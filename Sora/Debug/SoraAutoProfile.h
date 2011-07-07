@@ -21,23 +21,18 @@
 #include <psprtc.h>
 #endif
 
+#include "SoraTimestamp.h"
+
 namespace sora {
 	
 	inline uint64 getCurrentSystemTime() {
-#ifdef OS_WIN32
-		LARGE_INTEGER t;
-		QueryPerformanceCounter(&t);
-		return (uint64)t.QuadPart;
-#elif defined(OS_OSX)
-		return mach_absolute_time();
-#elif defined(OS_PSP)
+#ifdef OS_PSP
 		uint64 t;
 		sceRtcGetCurrentTick(&t);
 		return t;
 #else
-		timeb t;
-		ftime(&t);
-		return t.time*1000 + t.millitm;
+		SoraTimestamp currTime;
+        return currTime.epochMicroseconds();
 #endif
 	}
 	

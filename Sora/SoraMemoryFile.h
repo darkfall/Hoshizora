@@ -71,7 +71,7 @@ namespace sora {
 			return *this;
 		}
 					
-		virtual void unserialize(SoraMemoryBuffer& bufferStream) {
+		virtual void unserialize(SoraStream& bufferStream) {
 			SoraNamedObject::unserialize(bufferStream);
 			read(getName());
 		}

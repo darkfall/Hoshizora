@@ -78,7 +78,7 @@ namespace sora {
 
 	void SoraCore::_initializeTimer() {
 #if defined(OS_OSX) || defined(OS_IOS)
-		pTimer = new SoraOSXTimer; return;
+		pTimer = new SoraDefaultTimer; return;
 #elif defined(OS_WIN32)
 		pTimer = new SoraWin32Timer; return;
 #elif defined(OS_PSP)
@@ -501,7 +501,7 @@ namespace sora {
 	}
 
 	uint64 SoraCore::getCurrentSystemTime() {
-		return pTimer->getCurrentSystemTime();
+		return SoraTimestamp::currentTime();
 	}
 
 	void SoraCore::setFPS(int32 fps) {

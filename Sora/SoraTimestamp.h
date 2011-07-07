@@ -72,6 +72,8 @@ public:
 	TimeVal epochMicroseconds() const;
 		/// Returns the timestamp expressed in microseconds
 		/// since the Unix epoch, midnight, January 1, 1970.
+    
+    static TimeVal currentTime();
 	
 	TimeDiff elapsed() const;
 		/// Returns the time elapsed since the time denoted by

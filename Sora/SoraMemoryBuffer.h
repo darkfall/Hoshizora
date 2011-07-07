@@ -71,11 +71,11 @@ namespace sora {
 		 so remember to free
 		 if buffersize < size, then the size would be set to the bytes accuraly read
 		 */
-		bool read(void* pv, ulong32& size);		
+		ulong32 read(void* pv, ulong32 size);		
 		/*
 		 read a block of memory from offset 
 		 */
-		bool read(ulong32 offset, void* pv, ulong32& size);
+		ulong32 read(ulong32 offset, void* pv, ulong32 size);
 		
 		uint8* get();
 		uint8* get(ulong32 offset);
@@ -89,7 +89,42 @@ namespace sora {
 		bool valid() const;
 		
 		SoraMemoryBuffer& operator=(const SoraMemoryBuffer& rhs);
+        
+        template<typename T>
+        inline SoraMemoryBuffer& operator << (const T& val) {
+            push(&val, sizeof(T));
+            return *this;
+        }
+        
+        inline SoraMemoryBuffer& operator << (const std::string& val) {
+            char* cval = const_cast<char*>((val+"\0").c_str());
+            push(static_cast<void*>(cval), val.size()+1);
+            return *this;
+        }
 
+        template<typename T>
+        inline SoraMemoryBuffer& operator >> (T& val) {
+            read(&val, sizeof(T));
+            return *this;
+        }
+        
+        inline SoraMemoryBuffer& operator >> (std:: string& val) {
+            ulong32 n = currPos;
+            const char* data = (const char*)apCData.get();
+            while(n < realSize && data[n] != '\0') {
+                ++n;
+            }
+            if(n > currPos) {
+                val.resize(n-currPos);
+                memcpy(&val[0], &data[currPos], n-currPos);
+            }
+            if(n == realSize)
+                currPos = n;
+            else
+                currPos = n + 1;
+            return *this;
+        }
+        
 	private:
 		SoraAutoPtr<uint8> apCData;
 		ulong32 length;

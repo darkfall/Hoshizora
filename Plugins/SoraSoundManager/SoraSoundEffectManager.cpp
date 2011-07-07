@@ -100,18 +100,18 @@ namespace sora {
 	}
 	
 	bool SoraSoundEffectManager::playDirect(const std::wstring& effectName) {
-		SoundEffectId eid = str2id(effectName);
-		if(!play(eid)) {
+		//SoundEffectId eid = str2id(effectName);
+		//if(!play(eid)) {
 			SoraSoundEffectFile* pefile = SORA->createSoundEffectFile(effectName);
 			if(pefile == NULL)
 				return false;
 			
-			mSoundEffects[eid] = pefile;
+		//	mSoundEffects[eid] = pefile;
 			pefile->setVolume(effectVolume);
 			pefile->play();
 			return true;
-		}
-		return false;
+		//}
+		//return false;
 	}
 
 } // namespace sora

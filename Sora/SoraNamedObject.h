@@ -37,27 +37,14 @@ namespace sora {
 		void setName(stringId n) { name = n; }
 		stringId getName() const { return name; }
 		
-		virtual void serialize(SoraMemoryBuffer& bufferStream) {
-			const char* strData = id2str(name).c_str();
-			if(!strData) {
-				return;
-			}
-			
-			SoraString strName = strData;
-			ulong32 size = (strName.size());
-			bufferStream.push(size);
-			bufferStream.push((void*)(strName.c_str()), strName.size());
+		virtual void serialize(SoraStream& bufferStream) {
+            std::string strData = id2str(name).c_str();
+			bufferStream<<strData;
 		}
-		virtual void unserialize(SoraMemoryBuffer& bufferStream) {
-			ulong32 length = bufferStream.read<ulong32>();
-			// see if the length is too long or negative
-			// avoid bad unserialize
-			assert(length > 0 && length < MAX_NAME_LENGTH);
-			
-			uint8* strName = new uint8[length];
-			bufferStream.read(strName, length);
-			name = str2id((const char*)strName);
-            delete strName;
+		virtual void unserialize(SoraStream& bufferStream) {
+            std::string strData;
+            bufferStream>>strData;
+            setName(str2id(strData));
 		}
 		
 		// be default

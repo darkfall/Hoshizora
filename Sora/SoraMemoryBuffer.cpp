@@ -112,9 +112,9 @@ namespace sora {
 	 so remember to free
 	 if buffersize < size, then the size would be set to the bytes accuraly read
 	 */
-	bool SoraMemoryBuffer::read(void* pv, ulong32& size) {
-		if(!valid()) return false;
-		if(currPos == length) return false;
+	ulong32 SoraMemoryBuffer::read(void* pv, ulong32 size) {
+		if(!valid()) return 0;
+		if(currPos == length) return 0;
 		
 		assert(pv != NULL);
 		
@@ -123,19 +123,19 @@ namespace sora {
 		}
 		memcpy(pv, (void*)(get()+currPos), size);
 		currPos += size;
-		return true;
+		return size;
 	}
 	
 	/*
 	 read a block of memory from offset 
 	 */
-	bool SoraMemoryBuffer::read(ulong32 offset, void* pv, ulong32& size) {
+	ulong32 SoraMemoryBuffer::read(ulong32 offset, void* pv, ulong32 size) {
 		if(!valid()) return false;
 		
 		ulong32 tempPos = currPos;
 		if(!seek(offset))
 			seek(0);
-		bool result = read(pv, size);
+		ulong32 result = read(pv, size);
 		seek(tempPos);
 		return result;
 	}
