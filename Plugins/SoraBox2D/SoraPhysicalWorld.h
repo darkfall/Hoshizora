@@ -14,7 +14,7 @@
  *  So that if the physical world runs very slow
  *  It still woundn't influence the main thread of the game
  **/
-#define SORA_PHYSICAL_THREAD
+//#define SORA_PHYSICAL_THREAD
 
 namespace sora {
 

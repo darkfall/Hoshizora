@@ -36,6 +36,10 @@ namespace sora {
 	
 	typedef hgeVector SoraVector;
 	typedef hgeRect SoraRect;
+    
+    inline bool floatEqual(float32 f1, float32 f2) {
+        return fabs(f1 - f2) < 0.0000001;
+    }
 	
 	template<typename T>
 	inline void soraswap(T& t1, T& t2) {

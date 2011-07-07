@@ -9,7 +9,7 @@
 #include "SoraMemoryBuffer.h"
 
 #include "curl/curl.h"
-#include "SoraPThread/SoraThread.h"
+#include "SoraThread/SoraThread.h"
 
 #ifdef OS_WIN32
 #pragma comment(lib, "libcurl.lib")
@@ -104,11 +104,13 @@ namespace sora {
 		SoraHttpCallback finish;
 	} SoraHttpFileHead;
 
-	class SoraHttpFileDownloadThread: public SoraThread {
+	class SoraHttpFileDownloadThread {
 	public:
 		SoraHttpFileDownloadThread();
 		~SoraHttpFileDownloadThread();
 
+        void startDownload(void* parg);
+        
 		void setup();
 		void execute(void* parg);
 		
@@ -126,7 +128,6 @@ namespace sora {
 		void stop();
 		
 		SoraString getURL() const;
-		
 		SoraMemoryBuffer* getMemoryBuffer() const;
 
 		static size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp);
@@ -134,6 +135,9 @@ namespace sora {
 	private:
 		SoraHttpDownloadFile* pFile;
 		SoraHttpFileHead* pHead;
+        
+        SoraThreadTask downloadTask;
+        SoraThread downloadThread;
 
 		CURL *easy_handle;
 	};

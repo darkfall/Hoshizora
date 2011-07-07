@@ -40,10 +40,10 @@
 #include "SoraGenericObjects/SoraCustomShapeSprite.h"
 
 
-#include "SoraPThread/SoraThreadPool.h"
+#include "SoraThread/SoraThreadPool.h"
 
-#include "SoraPThread/SoraCountDownLatch.h"
-#include "SoraPThread/SoraBlockingQueue.h"
+#include "SoraThread/SoraCountDownLatch.h"
+#include "SoraThread/SoraBlockingQueue.h"
 
 #include "SoraBox2D/SoraPhysicalWorld.h"
 #include "SoraBox2D/SoraPhysicalObject.h"
@@ -110,10 +110,7 @@ bool mainWindow::updateFunc() {
 		sora::SoraBGMManager::Instance()->play(L"01.ogg", false);
 	if(sora->keyDown(SORA_KEY_P))
 		sora::SoraBGMManager::Instance()->playBGS(L"click_08.wav", 1, 1, 1.f, 0.5f);;
-    
-	sora::SoraPhysicalObject* phyobj = new sora::SoraPhysicalObject(0.f, 0.f, true);
-    phyobj->setAsBox(100.f, 100.f, 1.f);
-    
+     
 	
 //    sora::SORA->setCursor("./icon.icns");
     return false;
@@ -260,6 +257,13 @@ void mainWindow::init() {
     
     sora::SoraPhysicalWorld::Instance()->initBox2DWorld(0.f, 1.f);
 
+    
+    sora::SoraThreadTask task;
+    task.setAsMemberFunc(&mainWindow::test, this);
+    task.setArg(&blockingQueue);
+    
+    threadPool.start(2);
+    threadPool.run(task);
 }
 
 void mainWindow::onFileChangeEvent(sora::SoraFileChangeEvent* cev) {

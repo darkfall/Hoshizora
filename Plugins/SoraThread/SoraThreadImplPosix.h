@@ -1,0 +1,102 @@
+//
+//  SoraThreadImplPosix.h
+//  Sora
+//
+//  Created by Ruiwei Bu on 7/7/11.
+//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//
+
+#ifndef Sora_SoraThreadImplPosix_h
+#define Sora_SoraThreadImplPosix_h
+
+#include "SoraPlatform.h"
+#include "SoraThreadTask.h"
+
+// sora thread using pthread(posix thread)
+#ifndef OS_WIN32
+#include <pthread.h>
+#else
+#include "pthread.h"
+
+#pragma comment(lib, "pthreadVC2.lib")
+#endif
+
+
+namespace sora {
+    
+    class SoraThreadImpl: uncopyable {
+        friend class SoraThread;
+        
+    protected:
+        SoraThreadImpl(): active(false), arg(NULL) {}
+    
+        inline int32 startImpl() {
+            if(!thread_task.isValid() || active) {
+                return 0;
+            }
+            
+            int32 result = pthread_create(&thread, NULL, SoraThreadImpl::entry, this);
+            return result;
+        }
+        inline int32 startWithTaskImpl(const SoraThreadTask& task) {
+            setThreadTaskImpl(task);
+            startImpl();
+        }
+        
+        inline void joinImpl() {
+            if(active)
+                pthread_join(thread, 0);
+        }
+        
+        inline void exitImpl() {
+            if(active)
+                pthread_exit(thread);
+        }
+        
+        inline bool isActiveImpl() const {
+            return active;
+        }
+        
+        inline int32 getActiveThreadNumImpl() const {
+            return active_thread_num;
+        }
+        
+        inline void setThreadTaskImpl(const SoraThreadTask& task) {
+            thread_task = task;
+        }
+        
+        inline SoraThreadTask getThreadTaskImpl() const {
+            return thread_task;
+        }
+        
+        static void* entry(void* pthis);
+        
+        inline void* getargImpl() const { 
+            return arg;
+        }
+        
+        inline void setargImpl(void* _arg) { 
+            arg = _arg;
+        }
+        
+        inline void setActiveImpl(bool flag) {
+            active = flag;
+        }
+        
+    private:
+		pthread_t thread;
+		pthread_attr_t attr;
+        
+        SoraThreadTask thread_task;
+        static int32 active_thread_num;
+        
+        void* arg;
+        bool active;
+    };
+    
+
+    
+} // namespace sora
+
+
+#endif

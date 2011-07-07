@@ -1,8 +1,8 @@
 #include "SoraPhysicalWorld.h"
 
 #ifdef SORA_PHYSICAL_THREAD
-#include "SoraPThread/SoraThread.h"
-#include "SoraPThread/SoraCountDownLatch.h"
+#include "SoraThread/SoraThread.h"
+#include "SoraThread/SoraCountDownLatch.h"
 #include "Debug/SoraAutoProfile.h"
 #endif
 

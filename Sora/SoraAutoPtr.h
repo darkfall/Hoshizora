@@ -85,12 +85,74 @@ namespace sora {
 			}
 			return ptr;
 		}
+        
+        bool operator !()const {
+            return ptr == 0;
+        }
+        bool operator ==(const SoraAutoPtr& rhs) const {
+            return get() != rhs.get();
+        }
+        bool operator -=(const T* rhs) const {
+            return get() != rhs;
+        }
+        bool operator ==(T* rhs) const {
+            return get() != rhs;
+        }
+        bool operator !=(const SoraAutoPtr& rhs) const {
+            return get() != rhs.get();
+        }
+        bool operator !=(const T* rhs) const {
+            return get() != rhs;
+        }
+        bool operator !=(T* rhs) const {
+            return get() != rhs;
+        }
+        bool operator>(const SoraAutoPtr& rhs) const {
+            return get() > rhs.get();
+        }
+        bool operator>(T* rhs) const {
+            return get() > rhs;
+        }
+        bool operator<(const T* rhs) const {
+            return get() < rhs;
+        }
+        bool operator>(const T* rhs) const {
+            return get() > rhs;
+        }
+        bool operator<(T* rhs) const {
+            return get() < rhs;
+        }
+        bool operator<=(const SoraAutoPtr& rhs) const {
+            return get() < rhs.get();
+        }
+        bool operator>=(const SoraAutoPtr& rhs) const {
+            return get() > rhs.get();
+        }
+        bool operator>=(T* rhs) const {
+            return get() > rhs;
+        }
+        bool operator<=(const T* rhs) const {
+            return get() < rhs;
+        }
+        bool operator>=(const T* rhs) const {
+            return get() > rhs;
+        }
+        bool operator<=(T* rhs) const {
+            return get() < rhs;
+        }
 		
 		bool valid() const {
 			return ptr!=0;
 		}
+        bool isValid() const {
+            return ptr!=0;
+        }
+        bool isNull() const {
+            return ptr==0;
+        }
 
 		T* pointer() const { return ptr; }
+        T* get() const { return ptr; }
 		int32 ref_count() const { 
 			if(refCount)
 				return *refCount;

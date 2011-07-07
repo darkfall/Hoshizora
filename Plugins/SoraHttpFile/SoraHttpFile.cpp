@@ -6,6 +6,8 @@ namespace sora {
 	SoraHttpFileDownloadThread::SoraHttpFileDownloadThread() { 
 		pFile = NULL;
 		easy_handle = NULL;
+        
+        downloadTask.setAsMemberFunc(&SoraHttpFileDownloadThread::execute, this);
 	}
 
 	SoraHttpFileDownloadThread::~SoraHttpFileDownloadThread() {
@@ -41,7 +43,9 @@ namespace sora {
 	}
 	
 	// to do
-	void SoraHttpFileDownloadThread::stop() { }
+	void SoraHttpFileDownloadThread::stop() {
+        downloadThread.exit();
+    }
 	
 	size_t SoraHttpFileDownloadThread::write_data(void *buffer, size_t size, size_t nmemb, void *userp) {
 		SoraHttpDownloadFile* phead = static_cast<SoraHttpDownloadFile*>(userp);
@@ -55,6 +59,13 @@ namespace sora {
 		return pHead->sURL;
 	}
 	
+    void SoraHttpFileDownloadThread::startDownload(void* parg) {
+        downloadTask.setArg(parg);
+      
+        setup();
+        downloadThread.startWithTask(downloadTask);
+    }
+    
 	void SoraHttpFileDownloadThread::setup() {
 		if(!pFile)
 			pFile = new SoraHttpDownloadFile;
@@ -65,7 +76,7 @@ namespace sora {
 		}
 	}
 
-	void SoraHttpFileDownloadThread::execute(void* parg) {
+	void SoraHttpFileDownloadThread::execute(void* parg) {        
 		pHead = static_cast<SoraHttpFileHead*>(parg);
 		
 		pFile->buffer = new SoraMemoryBuffer;
@@ -163,7 +174,7 @@ namespace sora {
 		phead.sURL = url;
 		phead.finish = finishCallback;
 		phead.httpFile = this;
-		pdownloadthread.start(&phead);
+		pdownloadthread.startDownload(&phead);
 		
 		DebugPtr->log(vamssg("Start download file from %s", phead.sURL.c_str()), 
 					  LOG_LEVEL_NORMAL);
@@ -179,7 +190,7 @@ namespace sora {
 		phead.sURL = url;
 		phead.finish = NULL;
 		phead.httpFile = this;
-		pdownloadthread.start(&phead);
+		pdownloadthread.startDownload(&phead);
 		
 		DebugPtr->log(vamssg("Start download file from %s, to %s", phead.sURL.c_str(), ws2s(file).c_str()), 
 					  LOG_LEVEL_NORMAL);
