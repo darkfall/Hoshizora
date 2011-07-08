@@ -307,17 +307,6 @@ static void msleep(uint32_t msec) {
 #define snprintf _snprintf
 #endif
 
-
-typedef enum {
-	OS_TYPE_WIN32 = 1,
-	OS_TYPE_OSX	  = 2,
-	OS_TYPE_LINUX = 3,
-	OS_TYPE_IOS = 4,
-	OS_TYPE_ANDROID = 5,
-	OS_TYPE_OTHER = 6,
-} OS_TYPE_ENUM;
-
-
 #ifndef _DEBUG
 #define _DEBUG
 #endif

@@ -192,12 +192,17 @@ void mainWindow::onDownloadEvent(sora::SoraHttpDownloadEvent* ev) {
 
 sora::SoraThreadPool threadPool;
 
+void downloadDelegate(sora::SoraHttpFile& file) {
+    sora::SORA->messageBox(sora::vamssg("downloadtime: %d", file.getDownloadTime()), "test", MB_OK);
+}
+
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
     
-	
+	file.downloadFileWithDelegate("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", Delegate(downloadDelegate).clone());
+    
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
 	if(testSize != 0.0) {
 		sora::SORA->messageBox(sora::vamssg("%f", testSize), "test", MB_OK);

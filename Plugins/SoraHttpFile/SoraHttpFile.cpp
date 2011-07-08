@@ -109,10 +109,11 @@ namespace sora {
 	}
 	
 	void SoraHttpFileDownloadThread::end() {
-		if(pHead->finish)
-			pHead->finish(pHead->httpFile);
+        SoraHttpFile* hfile = pHead->httpFile;
+
+		if(hfile->getDelegate() != NULL)
+			hfile->getDelegate()->notify(pHead->httpFile, *pHead->httpFile);
 		
-		SoraHttpFile* hfile = pHead->httpFile;
 		if(hfile->getEventHandler() != NULL) {
 			SoraHttpDownloadEvent event;
 			event.setReceivedSize(pFile->receivedSize);
@@ -132,23 +133,27 @@ namespace sora {
 	}
 	
 	SoraHttpFile::SoraHttpFile(): 
-	finishCallback(0),
 	mDownloadTo(false),
-	isopen(false) {
+	isopen(false),
+    delegate(NULL),
+    mEventHandler(NULL) {
 	}
 	
 	SoraHttpFile::SoraHttpFile(const SoraString& url, SoraEventHandler* handler) {
 		mEventHandler = handler;
 		downloadFile(url);
+        delegate = NULL;
 	}
 	
-	SoraHttpFile::SoraHttpFile(const SoraString& url, SoraHttpCallback callback) {
-		finishCallback = callback;
+	SoraHttpFile::SoraHttpFile(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* del) {
+		delegate = del;
 		downloadFile(url);
+        mEventHandler = NULL;
 	}
 
 	SoraHttpFile::~SoraHttpFile() {
-		
+		if(delegate)
+            delete delegate;
 	}
 	
 	void SoraHttpFile::finishDownload() {
@@ -159,7 +164,7 @@ namespace sora {
 		if(getState() == DOWNLOAD_FINISHED) {
 			FILE* fp = sora_fopenw(file.c_str(), "wb");
 			if(fp) {
-				fwrite(getMemoryBuffer()->get(), getMemoryBuffer()->realsize(), 1, fp);
+				fwrite(getMemoryBuffer()->get(), 1, getMemoryBuffer()->realsize(), fp);
 				fclose(fp);
 				return true;
 			}
@@ -172,7 +177,6 @@ namespace sora {
 		if(isopen) return false;
 
 		phead.sURL = url;
-		phead.finish = finishCallback;
 		phead.httpFile = this;
 		pdownloadthread.startDownload(&phead);
 		
@@ -188,7 +192,6 @@ namespace sora {
 		if(isopen) return false;
 		
 		phead.sURL = url;
-		phead.finish = NULL;
 		phead.httpFile = this;
 		pdownloadthread.startDownload(&phead);
 		
@@ -199,6 +202,10 @@ namespace sora {
 		setDownloadToFile(file);
 		return true;
 	}
+    
+    SoraAbstractDelegate<SoraHttpFile>* SoraHttpFile::getDelegate() {
+        return delegate;
+    }
 							   
 	void SoraHttpFile::setDownloadToFile(const SoraWString& file) {
 		mDownloadToFile = file;
@@ -221,14 +228,19 @@ namespace sora {
 		return mDownloadToFile;
 	}
 	
-	void SoraHttpFile::setFinishCallback(SoraHttpCallback callback) { 
-		finishCallback = callback;
+	void SoraHttpFile::setDelegate(SoraAbstractDelegate<SoraHttpFile>* del) { 
+		delegate = del;
 	}
 
 	ulong32 SoraHttpFile::getDownloadedSize() const { 
 		if(isopen) return pdownloadthread.getDownloadedSize();
 		return 0;
 	} 
+    
+    bool SoraHttpFile::downloadFileWithDelegate(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* delegate) {
+        setDelegate(delegate);
+        downloadFile(url);
+    }
 	
 	double SoraHttpFile::getRemoteFileSize(const SoraString& url) {
 		CURL* handle;

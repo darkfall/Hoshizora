@@ -26,6 +26,7 @@
 #include "SoraCondition.h"
 #include "SoraThreadLocal.h"
 #include "SoraBlockingQueue.h"
+#include "SoraSemaphore.h"
 
 namespace sora {
 		

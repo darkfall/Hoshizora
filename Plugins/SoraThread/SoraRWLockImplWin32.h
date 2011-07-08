@@ -18,7 +18,7 @@
 
 namespace sora {
     
-    class SoraRWLockImpl {
+    class SoraRWLockImpl: public uncopyable {
     protected:
         SoraRWLockImpl():
         readers(0),

@@ -15,7 +15,8 @@
 #pragma comment(lib, "libcurl.lib")
 #endif
 
-#include <sys/timeb.h>
+#include "SoraTimestamp.h"
+#include "SoraDelegate.h"
 
 namespace sora {
 
@@ -95,14 +96,11 @@ namespace sora {
 	
 	class SoraHttpFile;
 	
-	typedef void (*SoraHttpCallback)(SoraHttpFile* pFile);
-
-	typedef struct tagSoraHttpFileHead {
-		SoraString sURL;
+	class SoraHttpFileHead {
+	public:
+        SoraString sURL;
 		SoraHttpFile* httpFile;
-
-		SoraHttpCallback finish;
-	} SoraHttpFileHead;
+	};
 
 	class SoraHttpFileDownloadThread {
 	public:
@@ -148,19 +146,21 @@ namespace sora {
 	public:
 		SoraHttpFile();
 		SoraHttpFile(const SoraString& url, SoraEventHandler* handler);
-		SoraHttpFile(const SoraString& url, SoraHttpCallback callback);
+		SoraHttpFile(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* delegate);
 		~SoraHttpFile();
 
 		bool downloadFile(const SoraString& url);
 		bool downloadFileTo(const SoraString& url, const SoraWString& to);
-		
+		bool downloadFileWithDelegate(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* delegate);
+        
 		void setDownloadToFile(const SoraWString& file);
 		
 		void setEventHandler(SoraEventHandler* handler);
 		SoraEventHandler* getEventHandler() const;
 		
 		bool writeToFile(const SoraWString& file);
-		void setFinishCallback(SoraHttpCallback callback);
+		void setDelegate(SoraAbstractDelegate<SoraHttpFile>* delegate);
+        SoraAbstractDelegate<SoraHttpFile>* getDelegate();
 		
 		static double getRemoteFileSize(const SoraString& url);
 		
@@ -188,7 +188,7 @@ namespace sora {
 		SoraWString mDownloadToFile;
 		
 		SoraHttpFileDownloadThread pdownloadthread;
-		SoraHttpCallback finishCallback;
+		SoraAbstractDelegate<SoraHttpFile>* delegate;
 		SoraHttpFileHead phead;
 		
 		SoraEventHandler* mEventHandler;

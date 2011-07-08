@@ -20,7 +20,7 @@
 
 namespace sora {
     
-    class SoraMutexLockImpl {
+    class SoraMutexLockImpl: public uncopyable {
     protected:
         SoraMutexLockImpl() {
             InitializeCriticalSectionAndSpinCount(&cs, 4000);

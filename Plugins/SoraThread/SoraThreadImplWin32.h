@@ -19,7 +19,7 @@
 
 namespace sora {
     
-    class SoraThreadImpl {
+    class SoraThreadImpl: public uncopyable {
     protected:
         SoraThreadImpl():
 			 thread_handle(NULL),

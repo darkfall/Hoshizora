@@ -69,6 +69,12 @@ namespace sora {
         
         bool isValid() const;
         
+        SoraThreadTask& operator=(const SoraThreadTask& rhs) {
+            func = rhs.func;
+            iarg = rhs.iarg;
+            return *this;
+        }
+        
     private:
         SoraAutoPtr<SoraThreadTaskImpl> func;
         
@@ -82,6 +88,17 @@ namespace sora {
             THROW_SORA_EXCEPTION("Error creating member thread task");
         else
             func = memberTask;
+    }
+    
+    template<typename T>
+    static SoraThreadTask ThreadTask(void (T::*ThreadFunc)(void*), T* obj) {
+        SoraThreadTask task;
+        task.setAsMemberFunc(ThreadFunc, obj);
+        return task;
+    }
+    
+    static SoraThreadTask ThreadTask(void (*ThreadFunc)(void*)) {
+        return SoraThreadTask(ThreadFunc);
     }
 } // namespace sora
 

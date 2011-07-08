@@ -675,11 +675,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "331721937.482363"
+         timestampString = "331791755.714598"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293"
+         startingLineNumber = "298"
+         endingLineNumber = "298"
          landmarkName = "mainWindow::onKeyEvent(sora::SoraKeyEvent* kev)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -689,11 +689,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "331721937.482363"
+         timestampString = "331791755.714598"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "273"
-         endingLineNumber = "273">
+         startingLineNumber = "278"
+         endingLineNumber = "278">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -867,11 +867,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "331721116.405289"
+         timestampString = "331791755.714598"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261"
+         startingLineNumber = "266"
+         endingLineNumber = "266"
          landmarkName = "mainWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -895,11 +895,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "331721937.482363"
+         timestampString = "331791755.714598"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "274"
-         endingLineNumber = "274"
+         startingLineNumber = "279"
+         endingLineNumber = "279"
          landmarkName = "mainWindow::test(void* arg)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1013,6 +1013,20 @@
          startingLineNumber = "62"
          endingLineNumber = "62"
          landmarkName = "update()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraHttpFile/SoraHttpFile.cpp"
+         timestampString = "331792799.140617"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "97"
+         endingLineNumber = "97"
+         landmarkName = "SoraHttpFileDownloadThread::execute(void* parg)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

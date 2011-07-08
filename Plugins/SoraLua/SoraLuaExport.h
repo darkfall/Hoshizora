@@ -17,6 +17,8 @@
 
 //#include "TinkerExport.h"
 
+// 重构
+
 namespace sora { 
 	
 	class SoraLuaExport {

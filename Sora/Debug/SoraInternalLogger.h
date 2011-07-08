@@ -48,6 +48,16 @@ namespace sora {
 		
 		void log(const std::string& log, int32 logLevel=LOG_LEVEL_NORMAL);
 		void log(const std::wstring& log, int32 logLevel=LOG_LEVEL_NORMAL);
+        
+        void normal(const std::string& log);
+        void error(const std::string& log);
+        void warning(const std::string& log);
+        void notice(const std::string& lob);
+        
+        void normal(const std::wstring& log);
+        void error(const std::wstring& log);
+        void warning(const std::wstring& log);
+        void notice(const std::wstring& lob);
 		
 		void writeToFile(const char* fileName);
 		

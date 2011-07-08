@@ -103,6 +103,38 @@ namespace sora {
 		
 		file.close();
 	}
+    
+    void SoraInternalLogger::normal(const std::string& mssg) {
+        log(mssg, LOG_LEVEL_NORMAL);
+    }
+    
+    void SoraInternalLogger::error(const std::string& mssg) {
+        log(mssg, LOG_LEVEL_ERROR);
+    }
+    
+    void SoraInternalLogger::warning(const std::string& mssg) {
+        log(mssg, LOG_LEVEL_WARNING);
+    }
+    
+    void SoraInternalLogger::notice(const std::string& mssg) {
+        log(mssg, LOG_LEVEL_NOTICE);
+    }
+    
+    void SoraInternalLogger::normal(const std::wstring& mssg) {
+        log(mssg, LOG_LEVEL_NORMAL);
+    }
+    
+    void SoraInternalLogger::error(const std::wstring& mssg) {
+        log(mssg, LOG_LEVEL_ERROR);
+    }
+    
+    void SoraInternalLogger::warning(const std::wstring& mssg) {
+        log(mssg, LOG_LEVEL_WARNING);
+    }
+    
+    void SoraInternalLogger::notice(const std::wstring& mssg) {
+        log(mssg, LOG_LEVEL_NOTICE);
+    }
 	
 	
 	size_t SoraInternalLogger::logSize() const {
