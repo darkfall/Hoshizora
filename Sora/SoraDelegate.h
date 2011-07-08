@@ -24,7 +24,7 @@ namespace sora {
     class SoraAbstractDelegate {
     public:
         SoraAbstractDelegate(void* target): mTarget(target) {
-            assert(target != NULL);
+        //    assert(target != NULL);
         }
         
         SoraAbstractDelegate(const SoraAbstractDelegate& del): mTarget(del.mTarget) {
@@ -276,6 +276,11 @@ namespace sora {
     template<class TARGS>
     class SoraExpireDelegate: public SoraAbstractDelegate<TARGS> {
     public:
+        SoraExpireDelegate():
+        SoraAbstractDelegate<TARGS>(NULL),
+        mDelegate(NULL),
+        mExpire(0) {}
+        
         SoraExpireDelegate(const SoraAbstractDelegate<TARGS>& p, SoraTimestamp::TimeDiff expireMilliseconds):
         SoraAbstractDelegate<TARGS>(p),
         mDelegate(p.clone()),
@@ -306,7 +311,7 @@ namespace sora {
         }
         
         bool notify(const void* sender, TARGS& args) {
-            if(!expired()) {
+            if(!expired() && mDelegate) {
                 return this->mDelegate->notify(sender, args);
             } else
                 return false;
@@ -329,6 +334,8 @@ namespace sora {
         
     protected:
         bool expired() const {
+            if(mExpire == 0)
+                return false;
             return mCreationTime.isElapsed(mExpire);
         }
         
@@ -337,7 +344,6 @@ namespace sora {
         SoraTimestamp mCreationTime;
         
     private:
-        SoraExpireDelegate();
     };
     
     template<class TOBJ, class TARGS>
