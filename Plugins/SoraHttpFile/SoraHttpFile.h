@@ -146,12 +146,12 @@ namespace sora {
 	public:
 		SoraHttpFile();
 		SoraHttpFile(const SoraString& url, SoraEventHandler* handler);
-		SoraHttpFile(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* delegate);
+		SoraHttpFile(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* del);
 		~SoraHttpFile();
 
 		bool downloadFile(const SoraString& url);
 		bool downloadFileTo(const SoraString& url, const SoraWString& to);
-		bool downloadFileWithDelegate(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* delegate);
+		bool downloadFileWithDelegate(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* del);
         
 		void setDownloadToFile(const SoraWString& file);
 		
@@ -188,7 +188,7 @@ namespace sora {
 		SoraWString mDownloadToFile;
 		
 		SoraHttpFileDownloadThread pdownloadthread;
-		SoraAbstractDelegate<SoraHttpFile>* delegate;
+		SoraAbstractDelegate<SoraHttpFile>* mDelegate;
 		SoraHttpFileHead phead;
 		
 		SoraEventHandler* mEventHandler;

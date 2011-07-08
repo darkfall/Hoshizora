@@ -22,10 +22,10 @@ namespace sora {
         SoraSemaphoreImpl(int n, int max) {
             assert( n>=0 && max>0 && n<=max);
             
-            sema = CreateSemaphore(NULL, n, max, NULL);
+            sema = CreateSemaphoreW(NULL, n, max, NULL);
         }
         
-        ~SoraSemaphreImpl() {
+        ~SoraSemaphoreImpl() {
             CloseHandle(sema);
         }
         
@@ -36,7 +36,7 @@ namespace sora {
         }
         
         void waitImpl() {
-            switch(WaitForSingleObject(sema,INIFINITE)) {
+            switch(WaitForSingleObject(sema,INFINITE)) {
                 case WAIT_OBJECT_0:
                     return;
                 default:

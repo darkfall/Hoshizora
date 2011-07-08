@@ -1338,9 +1338,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.h">
       <Filter>Plugins\SpriteAnimation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\helpers\SoraDLHelper.h">
-      <Filter>头文件\helpers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\helpers\SoraEnvHelper.h">
       <Filter>头文件\helpers</Filter>
     </ClInclude>
@@ -1454,6 +1451,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraTimestamp.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraAny.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraDelegate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraSemaphore.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraSemaphoreImplPosix.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraThread\SoraSemaphoreImplWin32.h">
+      <Filter>Plugins\SoraThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\helpers\SoraDllHelper.h">
+      <Filter>头文件\helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2126,9 +2141,6 @@
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.cpp">
       <Filter>Plugins\SpriteAnimation</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\helpers\SoraDLHelper.cpp">
-      <Filter>头文件\helpers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\helpers\SoraEnvHelper.cpp">
       <Filter>头文件\helpers</Filter>
     </ClCompile>
@@ -2212,6 +2224,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraTimestamp.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraAny.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraDelegate.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\helpers\SoraDllHelper.cpp">
+      <Filter>头文件\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraThread\SoraCondition.cpp">
+      <Filter>Plugins\SoraThread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

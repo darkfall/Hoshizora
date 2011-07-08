@@ -77,11 +77,11 @@ SoraTimestamp SoraTimestamp::fromUtcTime(UtcTimeVal val)
         epoch.LowPart  = 0xD53E8000;
         epoch.HighPart = 0x019DB1DE;
         
-        ULARGE_INTEGER ts;
-        ts.LowPart  = ft.dwLowDateTime;
-        ts.HighPart = ft.dwHighDateTime;
-        ts.QuadPart -= epoch.QuadPart;
-        ts = ts.QuadPart/10;
+        ULARGE_INTEGER tts;
+        tts.LowPart  = ft.dwLowDateTime;
+        tts.HighPart = ft.dwHighDateTime;
+        tts.QuadPart -= epoch.QuadPart;
+        ts = tts.QuadPart/10;
         
 #else
         

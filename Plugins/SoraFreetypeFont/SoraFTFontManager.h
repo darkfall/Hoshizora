@@ -38,8 +38,6 @@ namespace sora {
 	class SoraFTFont;
 	*/
 	
-	class SFTFont;
-	
 	struct SFTFace {
 		SoraString fileName;
 		FTFace* face;

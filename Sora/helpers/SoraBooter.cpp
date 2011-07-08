@@ -9,7 +9,7 @@
 
 #include "SoraBooter.h"
 
-#include "SoraDLHelper.h"
+#include "SoraDllHelper.h"
 
 #include "../SoraCore.h"
 
@@ -39,7 +39,7 @@ namespace sora {
 		if(plugins.size() != 0) {
 			for(size_t i=0; i<plugins.size(); ++i) {
 				
-				SoraDLHelper* dlhelper = SoraDLHelper::Instance();
+				SoraDllHelper* dlhelper = SoraDllHelper::Instance();
 				
 				ulong32 dlHandle = dlhelper->opendl(sora::ws2sfast(plugins[i].c_str()));
 				if(dlHandle != 0) {

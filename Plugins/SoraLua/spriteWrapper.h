@@ -59,8 +59,8 @@ namespace spritewrapper {
     void render(HSORASPRITE h);
     void renderWithPos(HSORASPRITE h, float32 x, float32 y);
     
-    int32 getPosX(HSORASPRITE h);
-    int32 getPosY(HSORASPRITE h);
+    float32 getPosX(HSORASPRITE h);
+    float32 getPosY(HSORASPRITE h);
     void setPosition(HSORASPRITE h, float32 x, float32 y);
     
     void setBlendMode		(HSORASPRITE h, int32 mode);

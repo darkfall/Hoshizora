@@ -267,14 +267,14 @@ namespace spritewrapper {
             THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
-    int32 getPosX(HSORASPRITE h) {
+    float32 getPosX(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getPositionX();
         else
             THROW_SORA_EXCEPTION("Invalid sprite arg");
     }
     
-    int32 getPosY(HSORASPRITE h) {
+    float32 getPosY(HSORASPRITE h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getPositionY();
         else

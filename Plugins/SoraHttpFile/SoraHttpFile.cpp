@@ -135,25 +135,25 @@ namespace sora {
 	SoraHttpFile::SoraHttpFile(): 
 	mDownloadTo(false),
 	isopen(false),
-    delegate(NULL),
+    mDelegate(NULL),
     mEventHandler(NULL) {
 	}
 	
 	SoraHttpFile::SoraHttpFile(const SoraString& url, SoraEventHandler* handler) {
 		mEventHandler = handler;
 		downloadFile(url);
-        delegate = NULL;
+        mDelegate = NULL;
 	}
 	
 	SoraHttpFile::SoraHttpFile(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* del) {
-		delegate = del;
+		mDelegate = del;
 		downloadFile(url);
         mEventHandler = NULL;
 	}
 
 	SoraHttpFile::~SoraHttpFile() {
-		if(delegate)
-            delete delegate;
+		if(mDelegate)
+            delete mDelegate;
 	}
 	
 	void SoraHttpFile::finishDownload() {
@@ -204,7 +204,7 @@ namespace sora {
 	}
     
     SoraAbstractDelegate<SoraHttpFile>* SoraHttpFile::getDelegate() {
-        return delegate;
+        return mDelegate;
     }
 							   
 	void SoraHttpFile::setDownloadToFile(const SoraWString& file) {
@@ -229,7 +229,7 @@ namespace sora {
 	}
 	
 	void SoraHttpFile::setDelegate(SoraAbstractDelegate<SoraHttpFile>* del) { 
-		delegate = del;
+		mDelegate = del;
 	}
 
 	ulong32 SoraHttpFile::getDownloadedSize() const { 
@@ -237,9 +237,9 @@ namespace sora {
 		return 0;
 	} 
     
-    bool SoraHttpFile::downloadFileWithDelegate(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* delegate) {
-        setDelegate(delegate);
-        downloadFile(url);
+    bool SoraHttpFile::downloadFileWithDelegate(const SoraString& url, SoraAbstractDelegate<SoraHttpFile>* del) {
+        setDelegate(del);
+        return downloadFile(url);
     }
 	
 	double SoraHttpFile::getRemoteFileSize(const SoraString& url) {

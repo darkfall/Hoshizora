@@ -78,7 +78,7 @@ namespace sora {
 
 	void SoraCore::_initializeTimer() {
 #if defined(OS_OSX) || defined(OS_IOS)
-		pTimer = new SoraDefaultTimer; return;
+		pTimer = new SoraOSXTimer; return;
 #elif defined(OS_WIN32)
 		pTimer = new SoraWin32Timer; return;
 #elif defined(OS_PSP)
