@@ -41,8 +41,23 @@
 
 #include "SoraGestureRecognizer/SoraGestureRecognizer.h"
 
+#include "SoraPath.h"
+
 
 int main(int argc, char* argv[]) {
+    
+    sora::SoraPath path = "./test.cpp";
+    printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
+           path.current().c_str(),
+           path.home().c_str(),
+           path.null().c_str(),
+           path.temp().c_str(),
+           path.toString().c_str(),
+           path.toString(sora::SoraPath::PATH_WINDOWS).c_str(),
+           path.absolute().toString().c_str(),
+           path.getExtension().c_str(),
+           path.getFileName().c_str(),
+           path.getBaseName().c_str());
 	
 	sora::SoraCore* sora = sora::SoraCore::Instance();
 	sora->registerRenderSystem(new sora::SoraOGLRenderer);

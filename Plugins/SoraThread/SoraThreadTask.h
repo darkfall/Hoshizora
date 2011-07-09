@@ -56,6 +56,10 @@ namespace sora {
     public:
         SoraThreadTask();
         SoraThreadTask(void (*ThreadFunc)(void* arg));
+        template<typename T>
+        SoraThreadTask(void (T::*ThreadFunc)(void* args), T* obj) {
+            setAsMemberFunc(ThreadFunc, obj);
+        }
         
         template<typename T>
         void setAsMemberFunc(void (T::*ThreadFunc)(void* args), T* obj);

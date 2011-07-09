@@ -31,7 +31,7 @@ namespace sora {
 	
 	class SoraCamera;
 	
-	class SoraCore: public SoraSingleton<SoraCore>, public SoraEventHandler {
+	class SORA_API SoraCore: public SoraSingleton<SoraCore>, public SoraEventHandler {
 	protected:
 		friend class SoraSingleton<SoraCore>;
 
@@ -39,198 +39,198 @@ namespace sora {
 		~SoraCore() { }
 
 	public:
-		void SORACALL start();
-		void SORACALL shutDown();
+		void start();
+		void shutDown();
 
-		void SORACALL update();
-		bool SORACALL isActive();
+		void update();
+		bool isActive();
 		
-		void SORACALL pause(bool bPauseRender=true, bool bPauseSound=true);
-		void SORACALL resume();
-		bool SORACALL isPaused();
+		void pause(bool bPauseRender=true, bool bPauseSound=true);
+		void resume();
+		bool isPaused();
 
-		void SORACALL registerRenderSystem	(SoraRenderSystem* pRenderSystem);
-		void SORACALL registerResourceManager(SoraResourceManager* pResourceManager);
-		void SORACALL registerInput			(SoraInput* pInput);
-		void SORACALL registerFontManager	(SoraFontManager* pFontManager);
-		void SORACALL registerSoundSystem	(SoraSoundSystem* pSoundSystem);
+		void registerRenderSystem	(SoraRenderSystem* pRenderSystem);
+		void registerResourceManager(SoraResourceManager* pResourceManager);
+		void registerInput			(SoraInput* pInput);
+		void registerFontManager	(SoraFontManager* pFontManager);
+		void registerSoundSystem	(SoraSoundSystem* pSoundSystem);
 		
-		void SORACALL registerMiscTool		(SoraMiscTool* pMiscTool);
-		void SORACALL registerPluginManager (SoraPluginManager* pPluginManager);
-		void SORACALL registerTimer			(SoraTimer* pTimer);
+		void registerMiscTool		(SoraMiscTool* pMiscTool);
+		void registerPluginManager (SoraPluginManager* pPluginManager);
+		void registerTimer			(SoraTimer* pTimer);
 
-		void SORACALL registerPlugin		(SoraPlugin* pPlugin);
-		void SORACALL unistallPlugin		(SoraPlugin* pPlugin);
-		void SORACALL unistallPluginS		(const SoraString& sPluginName);
-		SoraPlugin* SORACALL getPlugin		(const SoraString& sPluginName);
+		void registerPlugin		(SoraPlugin* pPlugin);
+		void unistallPlugin		(SoraPlugin* pPlugin);
+		void unistallPluginS		(const SoraString& sPluginName);
+		SoraPlugin* getPlugin		(const SoraString& sPluginName);
 
-		void	SORACALL setFPS(int32 fps);
-		float32 SORACALL getFPS();
-		float32 SORACALL getDelta();
-		float32 SORACALL getTime();
-		int32	SORACALL getFrameCount();
-		void	SORACALL setTimeScale(float32 scale);
-		float32 SORACALL getTimeScale();
-		uint64  SORACALL getCurrentSystemTime();
-        void    SORACALL setVerticalSync(bool flag);
+		void	setFPS(int32 fps);
+		float32 getFPS();
+		float32 getDelta();
+		float32 getTime();
+		int32	getFrameCount();
+		void	setTimeScale(float32 scale);
+		float32 getTimeScale();
+		uint64  getCurrentSystemTime();
+        void    setVerticalSync(bool flag);
 
 		// render system APIs
-		void SORACALL beginScene(ulong32 c=0, ulong32 h=0, bool clear=true);
-		void SORACALL endScene();
+		void beginScene(ulong32 c=0, ulong32 h=0, bool clear=true);
+		void endScene();
 
-		HSORATARGET SORACALL createTarget(int width, int height, bool zbuffer=true);
-		void	SORACALL freeTarget(ulong32 t);
-		HSORATEXTURE SORACALL getTargetTexture(ulong32 t);
+		HSORATARGET createTarget(int width, int height, bool zbuffer=true);
+		void	freeTarget(ulong32 t);
+		HSORATEXTURE getTargetTexture(ulong32 t);
 
-		HSORATEXTURE SORACALL createTexture	(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
-		HSORATEXTURE SORACALL createTextureWH(int32 w, int32 h);
-		HSORATEXTURE SORACALL createTextureFromRawData(uint32* data, int32 w, int32 h);
-		HSORATEXTURE SORACALL createTextureFromMem(void* data, ulong32 size);
-		uint32*		 SORACALL textureLock(HSORATEXTURE);
-        void		 SORACALL textureUnlock(HSORATEXTURE);
-		int32		 SORACALL getTextureWidth(HSORATEXTURE, bool origin=false);
-		int32		 SORACALL getTextureHeight(HSORATEXTURE, bool origin=false);
+		HSORATEXTURE createTexture	(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
+		HSORATEXTURE createTextureWH(int32 w, int32 h);
+		HSORATEXTURE createTextureFromRawData(uint32* data, int32 w, int32 h);
+		HSORATEXTURE createTextureFromMem(void* data, ulong32 size);
+		uint32*		 textureLock(HSORATEXTURE);
+        void		 textureUnlock(HSORATEXTURE);
+		int32		 getTextureWidth(HSORATEXTURE, bool origin=false);
+		int32		 getTextureHeight(HSORATEXTURE, bool origin=false);
 		// depends on render system, may have different meaning
-		ulong32		 SORACALL getTextureId(HSORATEXTURE);
-		void		 SORACALL releaseTexture(HSORATEXTURE pTexture);
-        void         SORACALL clearTextureMap();
+		ulong32		 getTextureId(HSORATEXTURE);
+		void		 releaseTexture(HSORATEXTURE pTexture);
+        void         clearTextureMap();
 
-        SoraShaderContext* SORACALL createShaderContext();
-		void SORACALL attachShaderContext(SoraShaderContext* context);
-		void SORACALL detachShaderContext();
-        SoraShader* SORACALL createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
+        SoraShaderContext* createShaderContext();
+		void attachShaderContext(SoraShaderContext* context);
+		void detachShaderContext();
+        SoraShader* createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
 
-		SoraSprite* SORACALL createSprite (const SoraWString& sPath);
+		SoraSprite* createSprite (const SoraWString& sPath);
 
-		void SORACALL renderQuad(SoraQuad& quad);
-		void SORACALL renderTriple(SoraTriple& trip);
-		void SORACALL renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
+		void renderQuad(SoraQuad& quad);
+		void renderTriple(SoraTriple& trip);
+		void renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
 
-		void SORACALL renderRect	(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, ulong32 color=0xFFFFFFFF, float32 z=0.0f);
-		void SORACALL renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, ulong32 color, float32 z=0.f);
-		void SORACALL setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
-		void SORACALL setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
+		void renderRect	(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, ulong32 color=0xFFFFFFFF, float32 z=0.0f);
+		void renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, ulong32 color, float32 z=0.f);
+		void setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
+		void setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
 		
-		void SORACALL pushTransformMatrix();
-		void SORACALL popTransformMatrix();
-        void SORACALL pushClippingMatrix();
-        void SORACALL popClippingMatrix();
+		void pushTransformMatrix();
+		void popTransformMatrix();
+        void pushClippingMatrix();
+        void popClippingMatrix();
 		/*
 		 z sort without zbuffer, because there are some problems with transparency when zbuffer is on
 		 we don't want our transparency pixels in textures to be omitted when rendering with z
 		 implemention for fast sort, accuracy 0.001
 		 */
-		void SORACALL beginZBufferSort();
-		void SORACALL endZBufferSort();
+		void beginZBufferSort();
+		void endZBufferSort();
 
 		/*
 		 under windows, this would return HWND, 
 		 under other plaforms, just return (ulong32)mainWindow
 		 */
-		ulong32 SORACALL getMainWindowHandle();
-		SoraWindowInfoBase* SORACALL getMainWindow();
+		ulong32 getMainWindowHandle();
+		SoraWindowInfoBase* getMainWindow();
 
-		void SORACALL enableMessageBoxErrorPost(bool bFlag);
+		void enableMessageBoxErrorPost(bool bFlag);
 
 		/*generates a int32 random number using SFMT*/
-		void	SORACALL setRandomSeed(int32 seed);
-		int32	SORACALL getRandomSeed();
-		int32	SORACALL randomInt(int32 min, int32 max);
-		float32 SORACALL randomFloat(float32 min, float32 max);
-		int32	SORACALL randomIntNoRange();
+		void	setRandomSeed(int32 seed);
+		int32	getRandomSeed();
+		int32	randomInt(int32 min, int32 max);
+		float32 randomFloat(float32 min, float32 max);
+		int32	randomIntNoRange();
 		/*generates a float32 random number range [0, 1] using SFMT*/
-		float32 SORACALL randomFloatNoRange();
+		float32 randomFloatNoRange();
 
-		int32 SORACALL getScreenWidth();
-		int32 SORACALL getScreenHeight();
+		int32 getScreenWidth();
+		int32 getScreenHeight();
 
-		HSORARESOURCE SORACALL loadResourcePack	(const SoraWString& file);
-		void	SORACALL attachResourcePack		(HSORARESOURCE pfile);
-		void	SORACALL detachResourcePack		(HSORARESOURCE handle);
-		void*	SORACALL getResourceFile		(const SoraWString& file, ulong32& size);
-		void*	SORACALL readResourceFile		(const SoraWString& file, ulong32 size);
-		ulong32 SORACALL getResourceFileSize	(const SoraWString& file);
-		void	SORACALL freeResourceFile		(void* p);
-		void	SORACALL enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
+		HSORARESOURCE loadResourcePack	(const SoraWString& file);
+		void	attachResourcePack		(HSORARESOURCE pfile);
+		void	detachResourcePack		(HSORARESOURCE handle);
+		void*	getResourceFile		(const SoraWString& file, ulong32& size);
+		void*	readResourceFile		(const SoraWString& file, ulong32 size);
+		ulong32 getResourceFileSize	(const SoraWString& file);
+		void	freeResourceFile		(void* p);
+		void	enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
 	
-		bool SORACALL isMainWindowSet() { return bMainWindowSet; }
-		ulong32 SORACALL createWindow(SoraWindowInfoBase* info);
-		void SORACALL setWindowSize(int32 w, int32 h);
-		void SORACALL setWindowTitle(const SoraWString& title);
-		void SORACALL setWindowPos(int32 px, int32 py);
-		void SORACALL setFullscreen(bool flag);
-		bool SORACALL isFullscreen();
+		bool isMainWindowSet() { return bMainWindowSet; }
+		ulong32 createWindow(SoraWindowInfoBase* info);
+		void setWindowSize(int32 w, int32 h);
+		void setWindowTitle(const SoraWString& title);
+		void setWindowPos(int32 px, int32 py);
+		void setFullscreen(bool flag);
+		bool isFullscreen();
 
 		// inputs
-		void	SORACALL getMousePos(float32 *x, float32 *y);
-		float32 SORACALL getMousePosX();
-		float32 SORACALL getMousePosY();
-		void	SORACALL setMousePos(float32 x, float32 y);
-		int		SORACALL getMouseWheel();
-		bool	SORACALL isMouseOver();
-		bool	SORACALL keyDown(int32 key);
-		bool	SORACALL keyUp(int32 key);
-		int32	SORACALL getKeyState(int32 key);
-		char*	SORACALL getKeyName(int32 key);
-		bool	SORACALL getKeyEvent(SoraKeyEvent& ev);
-		bool	SORACALL joyKeyPressed(int32 key);
-		bool	SORACALL joyKeyDown(int32 key);
-		bool	SORACALL joyKeyUp(int32 key);
-		bool	SORACALL joyKeyState(int32 key, unsigned char state);
-		bool	SORACALL setJoyKey(int32 key);
-		bool	SORACALL hasJoy();
+		void	getMousePos(float32 *x, float32 *y);
+		float32 getMousePosX();
+		float32 getMousePosY();
+		void	setMousePos(float32 x, float32 y);
+		int		getMouseWheel();
+		bool	isMouseOver();
+		bool	keyDown(int32 key);
+		bool	keyUp(int32 key);
+		int32	getKeyState(int32 key);
+		char*	getKeyName(int32 key);
+		bool	getKeyEvent(SoraKeyEvent& ev);
+		bool	joyKeyPressed(int32 key);
+		bool	joyKeyDown(int32 key);
+		bool	joyKeyUp(int32 key);
+		bool	joyKeyState(int32 key, unsigned char state);
+		bool	setJoyKey(int32 key);
+		bool	hasJoy();
         
         /**
          *  register a global hotkey and it's conresponding event handler
          *  @returnval the id of the registered hotkey
          */
-        int32   SORACALL registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler);
-        void    SORACALL unregisterGlobalHotkey(int32 hid);
-        void    SORACALL setGlobalHotkey(int32 hid, const SoraHotkey& key);
-        void    SORACALL clearGlobalHotkeys();
+        int32   registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler);
+        void    unregisterGlobalHotkey(int32 hid);
+        void    setGlobalHotkey(int32 hid, const SoraHotkey& key);
+        void    clearGlobalHotkeys();
 		
-		void	SORACALL simulateKey(int32 key, int32 state);
+		void	simulateKey(int32 key, int32 state);
 
-		int32	SORACALL messageBox	(const SoraString& sMssg, const SoraString& sTitle, int32 iCode);
-		int32	SORACALL messageBoxW (const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode);
-		void	SORACALL log		(const SoraString& sMssg, int32 level=LOG_LEVEL_NORMAL);
-		void	SORACALL logw		(const SoraWString& sMssg, int32 level=LOG_LEVEL_NORMAL);
-		void	SORACALL logf		(const char* str, ...);
+		int32	messageBox	(const SoraString& sMssg, const SoraString& sTitle, int32 iCode);
+		int32	messageBoxW (const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode);
+		void	log		(const SoraString& sMssg, int32 level=LOG_LEVEL_NORMAL);
+		void	logw		(const SoraWString& sMssg, int32 level=LOG_LEVEL_NORMAL);
+		void	logf		(const char* str, ...);
 		
 		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
 		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
 
-		SoraFont* SORACALL createFont(const SoraWString& fontName, int size);
-		void SORACALL releaseFont(SoraFont* font);
+		SoraFont* createFont(const SoraWString& fontName, int size);
+		void releaseFont(SoraFont* font);
 		
 		SoraMusicFile* SORACALL			createMusicFile(const SoraWString& musicName, bool bStream=true);
 		SoraSoundEffectFile* SORACALL	createSoundEffectFile(const SoraWString& se);
         SoraMusicFile* SORACALL			createMusicFile(bool bStream=false);
         SoraSoundEffectFile* SORACALL	createSoundEffectFile();
         
-        void SORACALL setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
-        void SORACALL execute(const SoraString& appPath, const SoraString& args);
-        void SORACALL snapshot(const SoraString& path);
+        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
+        void execute(const SoraString& appPath, const SoraString& args);
+        void snapshot(const SoraString& path);
 		/*
 		 for directX, return (ulong32)(pD3DDevice)
 		 for ogl, just return (ulong32)(this)
 		 */
-		ulong32		SORACALL getVideoDeviceHandle();
-		SoraWString SORACALL videoInfo();
-		void		SORACALL flush();
+		ulong32		getVideoDeviceHandle();
+		SoraWString videoInfo();
+		void		flush();
 
-		void SORACALL postError	(const SoraString& sMssg);
+		void postError	(const SoraString& sMssg);
 
 		/*
 		 if enabled
 		 getDelta would always return 1.f
 		 which suggest all caculation based on delta would sync by frame
 		 */
-		void SORACALL setFrameSync(bool flag);
+		void setFrameSync(bool flag);
 
 		/* frame listener functions */
-		void SORACALL addFrameListener(SoraFrameListener* listener);
-		void SORACALL delFrameListener(SoraFrameListener* listener);
+		void addFrameListener(SoraFrameListener* listener);
+		void delFrameListener(SoraFrameListener* listener);
 		
 		uint64 getEngineMemoryUsage();
 		

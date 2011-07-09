@@ -150,12 +150,6 @@ namespace sora {
 #include <Availability.h>
 #endif
 
-// we are building a dll
-#if defined(_WIN32) && defined(SORA_DLL_EXPORT)
-#define SORAEXPORT __declspec(dllexport)
-#else
-#define SORAEXPORT
-#endif
 
 #if defined(SORA_STD_CALL)
 #define SORACALL __stdcall
@@ -206,10 +200,18 @@ namespace sora {
 	#define DEFAULT_RESOURCE_SEARCH_PATH L"."
 		
 	#define OS_PSP
+#endif
 
-  //  #define uint64 uint32
-  //  #define int64 int32
 
+// we are building a dll
+#if defined(OS_WIN32) 
+    #if defined(SORA_DLL_EXPORT)
+        #define SORA_API __declspec(dllexport)
+    #elif defined(SORA_DLL_IMPORT)
+        #define SORA_API __declspec(dllimport)
+    #endif
+#else
+    #define SORA_API
 #endif
 
 #ifndef OS_PSP
