@@ -52,10 +52,10 @@ namespace sora {
 		mPositionX = 1;
 		mPositionY = 1;
 		
-		mWidth = SoraCore::Instance()->getScreenWidth()-2;
-		mHeight = 300;
+		mWidth = SoraCore::Instance()->getScreenWidth()-2.f;
+		mHeight = 300.f;
 		if(mHeight > SoraCore::Instance()->getScreenHeight())
-			mHeight = SoraCore::Instance()->getScreenHeight();
+			mHeight = (float32)SoraCore::Instance()->getScreenHeight();
 		
 		mFont = NULL;
 		mFontHeight = 20;
@@ -196,7 +196,7 @@ namespace sora {
 			
 			std::vector<SoraInternalLogger::LogMssg> debugMssg = DebugPtr->get();
 			
-			int32 starty = y;
+			float32 starty = y;
 			for(int32 i=mCurrLine; i>=0; --i) {
 				starty -= mFont->getStringHeight(s2wsfast(debugMssg[i].mLog).c_str());
 				if(starty <= mPositionY + mFontHeight)

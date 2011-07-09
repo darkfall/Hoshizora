@@ -1470,6 +1470,9 @@
     <ClInclude Include="..\..\..\Sora\helpers\SoraDllHelper.h">
       <Filter>头文件\helpers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraPath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -2236,6 +2239,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraThread\SoraCondition.cpp">
       <Filter>Plugins\SoraThread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraPath.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

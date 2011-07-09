@@ -63,9 +63,9 @@ namespace sora {
 		bool setParameter4f(const char* name, float32 v1, float32 v2, float32 v3, float32 v4);
 
 		bool setParameter1i(const char* name, int32 v1);
-		bool setParameter2i(const char* name, int32 v1, float32 v2);
-		bool setParameter3i(const char* name, int32 v1, float32 v2, float32 v3);
-		bool setParameter4i(const char* name, int32 v1, float32 v2, float32 v3, float32 v4);
+		bool setParameter2i(const char* name, int32 v1, int32 v2);
+		bool setParameter3i(const char* name, int32 v1, int32 v2, int32 v3);
+		bool setParameter4i(const char* name, int32 v1, int32 v2, int32 v3, int32 v4);
 		
         /*
          add a sample texture

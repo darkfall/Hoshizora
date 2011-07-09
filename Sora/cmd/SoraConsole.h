@@ -94,10 +94,10 @@ namespace sora {
 		bool isActive() const { return mActive; }
 		void setActiveKey(const SoraHotkey& key);
 		
-		void setPosition(int32 posx, int32 posy) { mPositionX = posx; mPositionY = posy; }
-		void setSize(int32 width, int32 height) { mWidth = width; mHeight = height; }
-		int32 getWidth() const { return mWidth; }
-		int32 getHeight() const { return mHeight; }
+		void setPosition(float32 posx, float32 posy) { mPositionX = posx; mPositionY = posy; }
+		void setSize(float32 width, float32 height) { mWidth = width; mHeight = height; }
+		float32 getWidth() const { return mWidth; }
+		float32 getHeight() const { return mHeight; }
 		
 		void setFont(SoraFont* font);
 		SoraFont* getFont() { return mFont;}
@@ -125,8 +125,8 @@ namespace sora {
 		
 		int32 mTab;
 		
-		int32 mPositionX, mPositionY;
-		int32 mWidth, mHeight;
+		float32 mPositionX, mPositionY;
+		float32 mWidth, mHeight;
 		
 		typedef std::map<std::string, SoraEventHandler*> CMD_HANDLER_MAP;
 		CMD_HANDLER_MAP mHandlers;

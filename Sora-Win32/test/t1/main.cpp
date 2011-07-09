@@ -38,10 +38,14 @@
 
 #include "mainWindow.h"
 
+#include "SoraPath.h"
+
 int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,
 					   LPSTR    lpCmdLine,
 					   int       nCmdShow) {
+
+
 	sora::SoraCore* sora = sora::SoraCore::Instance();
 	sora->registerResourceManager(new sora::SoraZipResourceManager);
 	sora->registerFontManager(new sora::SoraFTFontManager);
@@ -58,6 +62,17 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 //	sora->registerSoundSystem(new sora::SoraAudiereSoundSystem);
 	
+	sora::SoraPath path = "./test.cpp";
+	sora::SORA->messageBox(sora::vamssg("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
+		path.home().c_str(),
+		path.null().c_str(),
+		path.temp().c_str(),
+		path.current().c_str(),
+		path.toString().c_str(),
+		path.toString(sora::SoraPath::PATH_UNIX).c_str(),
+		path.getBaseName().c_str(),
+		path.getDevice().c_str(),
+		path.absolute().toString().c_str()), "test", MB_OK);
 	sora->setFPS(60);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");

@@ -56,7 +56,7 @@ namespace sora {
 				del(pos->second);
 				texMap[uiKey] = tex;
 				texMapRv[tex] = uiKey;
-				texRefs[uiKey] == 0;
+				texRefs[uiKey] = 0;
 			}
 			
 			SET_ENV_INT("CORE_TEXMAP_SIZE", texMap.size());

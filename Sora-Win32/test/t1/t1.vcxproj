@@ -482,6 +482,7 @@
     <ClInclude Include="..\..\..\Sora\SoraMiscTool.h" />
     <ClInclude Include="..\..\..\Sora\SoraNamedObject.h" />
     <ClInclude Include="..\..\..\Sora\SoraObject.h" />
+    <ClInclude Include="..\..\..\Sora\SoraPath.h" />
     <ClInclude Include="..\..\..\Sora\SoraPlatform.h" />
     <ClInclude Include="..\..\..\Sora\SoraPlugin.h" />
     <ClInclude Include="..\..\..\Sora\SoraPluginManager.h" />
@@ -751,6 +752,7 @@
     <ClCompile Include="..\..\..\Sora\SoraLocalizer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraMemoryBuffer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraObject.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraPath.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPluginManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp" />

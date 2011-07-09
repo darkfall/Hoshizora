@@ -52,19 +52,19 @@ namespace sora {
 		return setParameteriv(name, arr, 1);
 	}
 	
-	bool SoraShader::setParameter2i(const char* name, int32 v1, float32 v2) {
+	bool SoraShader::setParameter2i(const char* name, int32 v1, int32 v2) {
 		int32 arr[2];
 		arr[0] = v1; arr[1] = v2;
 		return setParameteriv(name, arr, 2);
 	}
 	
-	bool SoraShader::setParameter3i(const char* name, int32 v1, float32 v2, float32 v3) {
+	bool SoraShader::setParameter3i(const char* name, int32 v1, int32 v2, int32 v3) {
 		int32 arr[3];
 		arr[0] = v1; arr[1] = v2; arr[2] = v3;
 		return setParameteriv(name, arr, 3);
 	}
 	
-	bool SoraShader::setParameter4i(const char* name, int32 v1, float32 v2, float32 v3, float32 v4) {
+	bool SoraShader::setParameter4i(const char* name, int32 v1, int32 v2, int32 v3, int32 v4) {
 		int32 arr[4];
 		arr[0] = v1; arr[1] = v2; arr[2] = v3; arr[3] = v4;
 		return setParameteriv(name, arr, 4);

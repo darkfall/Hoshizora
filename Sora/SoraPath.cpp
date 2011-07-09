@@ -25,7 +25,7 @@ namespace sora {
     }
     
     SoraPath::SoraPath(const std::wstring& path) {
-        assign(path);
+        assign(sora::ws2s(path));
     }
     
     SoraPath::SoraPath(const std::string& path, Style style)  {
@@ -55,6 +55,8 @@ namespace sora {
     SoraPath::SoraPath(const SoraPath& path):
     mName(path.mName),
     mDirs(path.mDirs),
+	mDevice(path.mDevice),
+	mNode(path.mNode),
     mAbsolute(path.mAbsolute) {
         
     }
@@ -62,6 +64,8 @@ namespace sora {
     SoraPath::SoraPath(const SoraPath& parent, const std::string& filename):
     mName(parent.mName),
     mDirs(parent.mDirs),
+	mDevice(parent.mDevice),
+	mNode(parent.mNode),
     mAbsolute(parent.mAbsolute) {
         makeDirectory();
         mName = filename;
@@ -70,6 +74,8 @@ namespace sora {
     SoraPath::SoraPath(const SoraPath& parent, const std::wstring& filename):
     mName(parent.mName),
     mDirs(parent.mDirs),
+	mDevice(parent.mDevice),
+	mNode(parent.mNode),
     mAbsolute(parent.mAbsolute) {
         makeDirectory();
         mName = sora::ws2s(filename);
@@ -78,6 +84,8 @@ namespace sora {
     SoraPath::SoraPath(const SoraPath& parent, const SoraPath& relative):
     mName(parent.mName),
     mDirs(parent.mDirs),
+	mDevice(parent.mDevice),
+	mNode(parent.mNode),
     mAbsolute(parent.mAbsolute) {
         resolve(relative);
     }
@@ -86,7 +94,14 @@ namespace sora {
     }
     
     SoraPath& SoraPath::operator = (const SoraPath& path) {
-        return assign(path);
+        if(&path != this) {
+			mName = path.mName;
+			mDevice = path.mDevice;
+			mNode = path.mNode;
+			mDirs = path.mDirs;
+			mAbsolute = path.mAbsolute;
+		}
+		return *this;
     }
     
     SoraPath& SoraPath::operator = (const std::string& path) {
@@ -94,7 +109,7 @@ namespace sora {
     }
     
     SoraPath& SoraPath::operator = (const std::wstring& path) {
-        return assign(path);
+        return assign(sora::ws2s(path));
     }
     
     SoraPath& SoraPath::operator = (const char* path) {
@@ -108,16 +123,9 @@ namespace sora {
     void SoraPath::swap(SoraPath& path) {
         std::swap(mName, path.mName);
         std::swap(mDirs, path.mDirs);
+		std::swap(mDevice, path.mDevice);
+		std::swap(mNode, path.mNode);
         std::swap(mAbsolute, path.mAbsolute);
-    }
-    
-    SoraPath& SoraPath::assign(const SoraPath& path) {
-        if(&path != this) {
-            mName = path.mName;
-            mDirs = path.mDirs;
-            mAbsolute = path.mAbsolute;
-        }
-        return *this;
     }
     
     SoraPath& SoraPath::assign(const std::string& path) {
@@ -193,7 +201,7 @@ namespace sora {
     }
     
     SoraPath& SoraPath::parseDirectory(const std::wstring& path) {
-        assign(path);
+        assign(sora::ws2s(path));
         return makeDirectory();
     }
     
@@ -230,6 +238,8 @@ namespace sora {
                 tmp.pushDirectory(*it);
             }
             mDirs = tmp.mDirs;
+			mDevice = tmp.mDevice;
+			mNode = tmp.mNode;
             mAbsolute = base.mAbsolute;
         }
         return *this;
@@ -283,7 +293,7 @@ namespace sora {
     
     SoraPath& SoraPath::resolve(const SoraPath& path) {
         if(path.isAbsolute()) {
-            assign(path);
+            *this = path;
         } else {
             for(int i=0; i<path.depth(); ++i) {
                 pushDirectory(path.mDirs[i]);
@@ -430,7 +440,7 @@ namespace sora {
                 mAbsolute = true; ++it;
             } else if(*it == '~') {
                 ++it;
-                if(it == end | *it == '/') {
+                if(it == end || *it == '/') {
                     SoraPath cwd(home());
                     mDirs = cwd.mDirs;
                     mAbsolute = true;
@@ -469,6 +479,7 @@ namespace sora {
                 mAbsolute = true;
                 ++it;
             }
+
             if(mAbsolute && it != end && (*it == '\\' || *it == '/')) {
                 ++it;
                 while(it != end && *it != '\\' && *it != '/')
@@ -551,14 +562,14 @@ namespace sora {
     
     std::string SoraPath::buildWindows() const {
         std::string result;
-        if(!mNode.empty()) {
+        if(!mDevice.empty()) {
+            result.append(mDevice);
+            result.append(":\\");
+        } else if(!mNode.empty()) {
             result.append("\\\\");
             result.append(mNode);
             result.append("\\");
-        } else if(!mDevice.empty()) {
-            result.append(mDevice);
-            result.append(":\\");
-        } 
+        }  
         for(StringVec::const_iterator it = mDirs.begin();
             it != mDirs.end();
             ++it) {

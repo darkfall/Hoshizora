@@ -89,7 +89,7 @@ void animationEditorWindow::loadAnimation(const SoraString& path) {
 		if(!pAnimatedSprite) {
 			SORA->messageBox("Error loading animation file, please check your pack", "Error", MB_OK | MB_ICONERROR);
 		} else {
-			pAnimatedSprite->setPosition(SORA->getScreenWidth()/2, SORA->getScreenHeight()/2);
+			pAnimatedSprite->setPosition(SORA->getScreenWidth()/2.f, SORA->getScreenHeight()/2.f);
 			pAnimatedSprite->setAnchor(ANCHOR_MIDDLE);
 			pAnimatedSprite->play();
 			

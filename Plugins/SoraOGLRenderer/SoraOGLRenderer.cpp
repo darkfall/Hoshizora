@@ -752,8 +752,8 @@ namespace sora{
     }
 
 	void SoraOGLRenderer::setTransformWindowSize(float32 w, float32 h) {
-		_oglWindowInfo.width = w!=0?w:windowWidth;
-		_oglWindowInfo.height = h!=0?h:windowHeight;
+		_oglWindowInfo.width = w!=0.f?w:windowWidth;
+		_oglWindowInfo.height = h!=0.f?h:windowHeight;
 		applyTransform();
 	}
 

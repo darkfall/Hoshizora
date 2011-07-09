@@ -23,7 +23,7 @@ namespace sora {
 		}
 		
 		void setFPS(int32 fps) {
-			fpsInterval = 1.f / fps * 1000 * 1000 ;
+			fpsInterval = (uint64)((1.f / fps) * 1000 * 1000);
 			this->fps = (float32)fps;
 		}
 		

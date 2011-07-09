@@ -209,7 +209,9 @@ namespace sora {
         #define SORA_API __declspec(dllexport)
     #elif defined(SORA_DLL_IMPORT)
         #define SORA_API __declspec(dllimport)
-    #endif
+    #else
+		#define SORA_API
+	#endif
 #else
     #define SORA_API
 #endif

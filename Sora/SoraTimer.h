@@ -14,7 +14,7 @@
 
 namespace sora {
 	
-#define SORA_FPS_INFINITE 1000.0f
+#define SORA_FPS_INFINITE 1000
 	
 	class SoraTimer {
 	public:

@@ -69,7 +69,7 @@ namespace sora {
 			float32 distHeight = (mParent->getMenuBarHeight()-mItemHeight)/2;
 			float32 posy = mParent->getMenuBarHeight();
 
-			SORA->renderBox(mPosX, 0.f, mPosX+mWidth, posy, mWidth, 0xFF000000);
+			SORA->renderBox(mPosX, 0.f, mPosX+mWidth, posy, 0xFF000000);
 			
 			mFont->setColor(0xFF000000);
 			if(mActive) {
@@ -249,9 +249,9 @@ namespace sora {
 			return;
 		
 		if(mActive || mShowAlways) {
-			float32 screenWidth = SORA->getScreenWidth();
+			float32 screenWidth = (float32)SORA->getScreenWidth();
 			SORA->renderRect(0.f, 0.f, screenWidth, mMenuBarHeight, screenWidth, 0x99FFFFFF);
-			SORA->renderBox(0.f, 0.f, screenWidth-1, mMenuBarHeight-1, 0xFFAAAAAA);
+			SORA->renderBox(0.f, 0.f, screenWidth-1.f, mMenuBarHeight-1.f, 0xFFAAAAAA);
 			
 			MENUBAR_LIST::iterator itMenu = mMenus.begin();
 			while(itMenu != mMenus.end()) {

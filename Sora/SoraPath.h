@@ -70,7 +70,6 @@ namespace sora {
         SoraPath& assign(const wchar_t* path);
         SoraPath& assign(const std::string& path);
         SoraPath& assign(const std::string& path, Style style);
-        SoraPath& assign(const SoraPath& path);
         
         std::string toString() const;
         std::wstring toWString() const;
