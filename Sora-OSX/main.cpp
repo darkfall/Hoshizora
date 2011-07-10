@@ -43,22 +43,18 @@
 
 #include "SoraPath.h"
 
+#include "SoraStringTokenlizer.h"
 
 int main(int argc, char* argv[]) {
     
-    sora::SoraPath path = "./test.cpp";
-    printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
-           path.current().c_str(),
-           path.home().c_str(),
-           path.null().c_str(),
-           path.temp().c_str(),
-           path.toString().c_str(),
-           path.toString(sora::SoraPath::PATH_WINDOWS).c_str(),
-           path.absolute().toString().c_str(),
-           path.getExtension().c_str(),
-           path.getFileName().c_str(),
-           path.getBaseName().c_str());
-	
+    sora::SoraStringTokenlizer tokens;
+    tokens.parse(std::string("test, dsdsd, adsd;, ad-, asdsd2, adsd,   "), ",");;
+    sora::SoraStringTokenlizer::iterator start = tokens.begin();
+    while(start != tokens.end()) {
+        printf("%s\n", (*start).c_str());
+        ++start;
+    }
+    
 	sora::SoraCore* sora = sora::SoraCore::Instance();
 	sora->registerRenderSystem(new sora::SoraOGLRenderer);
 	sora->registerResourceManager(new sora::SoraZipResourceManager);

@@ -1,5 +1,5 @@
 /*
- *  SoraiOSGLRenderer.cpp
+ *  SoraiOSGLRenderer_ES2.cpp
  *  Plugin Concept
  *
  *  Created by griffin clare on 8/23/10.
@@ -7,7 +7,7 @@
  *
  */
 
-#include "SoraiOSGLRenderer.h"
+#include "SoraiOSGLRenderer_ES2.h"
 
 #include "SoraStringConv.h"
 #include "SoraInternalLogger.h"
@@ -31,14 +31,28 @@ static GLfloat mVertices[MAX_VERTEX_BUFFER*3];
 static GLfloat mUVs[MAX_VERTEX_BUFFER<<1];
 static GLubyte mColors[MAX_VERTEX_BUFFER<<2];
 
+#define ATTR_POS_VERTEX 0
+#define ATTR_POS_UV     1
+#define ATTR_POS_COLOR  2
+
 namespace sora{
 
-	SoraiOSGLRenderer::SoraiOSGLRenderer() {
+	SoraiOSGLRenderer_ES2::SoraiOSGLRenderer_ES2() {
 		pCurTarget = 0;
-		uGLShaderProgram = 0;
 		
-		bShaderAvailable = _glShaderCheck();
-		
+        mES2ShaderContext = createShaderContext();
+        mES2VertexShader = mES2ShaderContext->createShader(L"vertex.vs", "main", VERTEX_SHADER);
+        mES2FragmentShader = mES2ShaderContext->createShader(L"fragment.fs", "main", FRAGMENT_SHADER);
+        if(!mES2VertexShader || !mES2FragmentShader)
+            THROW_SORA_EXCEPTION("Error creating shader for ogles2 rendering");
+        mES2ShaderContext->attachShader(mES2VertexShader);
+        mES2ShaderContext->attachShader(mES2FragmentShader);
+        
+        GLuint program  = (static_cast<SoraGLSLShaderContext*>(mES2ShaderContext))->getProgram();
+        glBindAttribLocation(program, ATTR_POS_VERTEX, "g_position");
+        glBindAttribLocation(program, ATTR_POS_UV, "g_texCoords");
+        glBindAttribLocation(program, ATTR_POS_COLOR, "g_color");
+        
 		mCurrTexture = -1;
 		
 		currShader = 0;
@@ -46,11 +60,11 @@ namespace sora{
 		CurBlendMode = 0;
 	}
 
-	SoraiOSGLRenderer::~SoraiOSGLRenderer() {
+	SoraiOSGLRenderer_ES2::~SoraiOSGLRenderer_ES2() {
 	//	shutdown();
 	}
 
-	void SoraiOSGLRenderer::shutdown() {
+	void SoraiOSGLRenderer_ES2::shutdown() {
 		std::list<SoraRenderTarget*>::iterator itt = liTargets.begin();
 		while(itt != liTargets.end()) {
 			delete (*itt);
@@ -61,7 +75,7 @@ namespace sora{
 		//delete mainWindow;
 	}
 
-	void SoraiOSGLRenderer::_glInitialize() {
+	void SoraiOSGLRenderer_ES2::_glInitialize() {
 		glShadeModel(GL_SMOOTH);                    // Enables Smooth Shading
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);      // 4-byte pixel alignment
 		
@@ -87,23 +101,23 @@ namespace sora{
 		glDisable(GL_TEXTURE_2D);
     }
 	
-	void SoraiOSGLRenderer::_glBeginFrame() {
+	void SoraiOSGLRenderer_ES2::_glBeginFrame() {
 	}
 	
-	void SoraiOSGLRenderer::_glEndFrame() {
+	void SoraiOSGLRenderer_ES2::_glEndFrame() {
 		glFlush();
 	}
 	
-	void SoraiOSGLRenderer::beginFrame() {
+	void SoraiOSGLRenderer_ES2::beginFrame() {
 		applyTransform();
 		iFrameStart = 1;
 	}
 	
-	void SoraiOSGLRenderer::endFrame() {
+	void SoraiOSGLRenderer_ES2::endFrame() {
 		_glEndFrame();
 	}
 	
-	void SoraiOSGLRenderer::_glSetProjectionMatrix(int32 w, int32 h) {
+	void SoraiOSGLRenderer_ES2::_glSetProjectionMatrix(int32 w, int32 h) {
 		glViewport(0, 0, w, h);
 		glMatrixMode(GL_PROJECTION);
 		
@@ -114,7 +128,7 @@ namespace sora{
 		glOrthof(0.f, w, h, 0.f, -1.f, 1.f);
 	}
 	
-	void SoraiOSGLRenderer::applyTransform() {
+	void SoraiOSGLRenderer_ES2::applyTransform() {
         if(!pCurTarget) {
             /*glViewport(0, 0,
                        _oglWindowInfo.width,
@@ -152,7 +166,7 @@ namespace sora{
         }
 	}
 	
-	void SoraiOSGLRenderer::_glBeginScene(ulong32 color, ulong32 t, bool clear) {
+	void SoraiOSGLRenderer_ES2::_glBeginScene(ulong32 color, ulong32 t, bool clear) {
 		int32 width = _oglWindowInfo.width;
 		int32 height = _oglWindowInfo.height;
         
@@ -184,7 +198,7 @@ namespace sora{
         
 	}
 	
-	void SoraiOSGLRenderer::_glEndScene() {
+	void SoraiOSGLRenderer_ES2::_glEndScene() {
 		flush();
 		if(pCurTarget != NULL) {
             glFlush();
@@ -199,7 +213,7 @@ namespace sora{
 		
 	}
 	
-	void SoraiOSGLRenderer::_glSetBlendMode(int32 blend) {
+	void SoraiOSGLRenderer_ES2::_glSetBlendMode(int32 blend) {
 		if(blend != CurBlendMode)
 			flush();
 		
@@ -229,26 +243,26 @@ namespace sora{
 		CurBlendMode = blend;
 	}
 	
-	bool SoraiOSGLRenderer::update() {
+	bool SoraiOSGLRenderer_ES2::update() {
 		//clearPoll();
 		return false;
 	}
 	
-	void SoraiOSGLRenderer::start(SoraTimer* timer) {
+	void SoraiOSGLRenderer_ES2::start(SoraTimer* timer) {
 		SORA_IOS->setTimer(timer);
 		g_timer = timer;
 	}
 
-	void SoraiOSGLRenderer::beginScene(ulong32 color, ulong32 target, bool clear) {
+	void SoraiOSGLRenderer_ES2::beginScene(ulong32 color, ulong32 target, bool clear) {
 		_glBeginScene(color, target, clear);
 	}
 
-	void SoraiOSGLRenderer::endScene() {
+	void SoraiOSGLRenderer_ES2::endScene() {
 		currShader = 0;
 		_glEndScene();
 	}
 
-	SoraWindowHandle SoraiOSGLRenderer::createWindow(SoraWindowInfoBase* windowInfo) {
+	SoraWindowHandle SoraiOSGLRenderer_ES2::createWindow(SoraWindowInfoBase* windowInfo) {
 		mainWindow = windowInfo;
 		_oglWindowInfo.width = windowInfo->getWindowWidth();
 		_oglWindowInfo.height = windowInfo->getWindowHeight();
@@ -265,19 +279,19 @@ namespace sora{
 		return 0;
 	}
 	
-	void SoraiOSGLRenderer::setWindowSize(int32 w, int32 h) {
+	void SoraiOSGLRenderer_ES2::setWindowSize(int32 w, int32 h) {
 	//	glfwSetWindowSize(w, h);
 	}
 	
-	void SoraiOSGLRenderer::setWindowTitle(const SoraWString& title) {
+	void SoraiOSGLRenderer_ES2::setWindowTitle(const SoraWString& title) {
 	//	glfwSetWindowTitle(ws2s(title).c_str());
 	}
 	
-	void SoraiOSGLRenderer::setWindowPos(int32 px, int32 py) {
+	void SoraiOSGLRenderer_ES2::setWindowPos(int32 px, int32 py) {
 	//	glfwSetWindowPos(px, py);
 	}
 	
-	void SoraiOSGLRenderer::setFullscreen(bool flag) {
+	void SoraiOSGLRenderer_ES2::setFullscreen(bool flag) {
 		/*if(bFullscreen == flag)
 			return;
 		
@@ -299,15 +313,15 @@ namespace sora{
 		beginScene();*/
 	}
 	
-	bool SoraiOSGLRenderer::isFullscreen() {
+	bool SoraiOSGLRenderer_ES2::isFullscreen() {
 		return bFullscreen;
 	}
 	
-	ulong32 SoraiOSGLRenderer::getVideoDeviceHandle() {
+	ulong32 SoraiOSGLRenderer_ES2::getVideoDeviceHandle() {
 		return (ulong32)this;
 	}
 	
-	int32 SoraiOSGLRenderer::_glTextureGetWidth(ulong32 tex, bool bOriginal) {
+	int32 SoraiOSGLRenderer_ES2::_glTextureGetWidth(ulong32 tex, bool bOriginal) {
 		/*GLint w; 
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
@@ -316,7 +330,7 @@ namespace sora{
 		return 0;
 	}
 	
-	int32 SoraiOSGLRenderer::_glTextureGetHeight(ulong32 tex, bool bOriginal) {
+	int32 SoraiOSGLRenderer_ES2::_glTextureGetHeight(ulong32 tex, bool bOriginal) {
 		/*GLint h; 
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
@@ -325,7 +339,7 @@ namespace sora{
 		return 0;
 	}
 	
-	void SoraiOSGLRenderer::bindTexture(SoraTexture* tex) {
+	void SoraiOSGLRenderer_ES2::bindTexture(SoraTexture* tex) {
         if(!tex) {
 			flush();
 			
@@ -335,6 +349,8 @@ namespace sora{
 		else if (mCurrTexture != tex->mTextureID) {
 			flush();
 			
+            mES2FragmentShader->setParameter1i("Texture0", 0);
+            glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, tex->mTextureID);
 			mCurrTexture = tex->mTextureID;
 			
@@ -344,29 +360,35 @@ namespace sora{
 		}
 	}
 	
-	void SoraiOSGLRenderer::flush() {
+	void SoraiOSGLRenderer_ES2::flush() {
 		if (mVertexCount > 0) {
-			glEnableClientState(GL_VERTEX_ARRAY);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			glEnableClientState(GL_COLOR_ARRAY);
-			
-			glVertexPointer(3, GL_FLOAT, 0, mVertices);
-			glTexCoordPointer(2, GL_FLOAT, 0, mUVs);
-			
-			glColorPointer (4, GL_UNSIGNED_BYTE, 0, mColors);
+            
+            //mES2VertexShader->setParameterfv("u_mvpMatrix", mvpMatrix, 16);
+            
+            mES2ShaderContext->attachShaderList();
+            
+			glEnableVertexAttribArray(ATTR_POS_VERTEX);
+            glVertexAttribPointer(ATTR_POS_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, mVertices);
+            
+            glEnableVertexAttribArray(ATTR_POS_UV);
+            glVertexAttribPointer(ATTR_POS_UV, 2, GL_FLOAT, GL_FALSE, 0, mUVs);
+            
+            glEnableVertexAttribArray(ATTR_POS_COLOR);
+            glVertexAttribPointer(ATTR_POS_COLOR, 4, GL_FLOAT, GL_FALSE, 0, mColors);
+            
 			glDrawArrays(CurDrawMode, 0, mVertexCount);
 			mVertexCount = 0;
 		}
 	}
 
-	SoraTexture* SoraiOSGLRenderer::createTexture(const SoraWString& sTexturePath, bool bMipmap) {
+	SoraTexture* SoraiOSGLRenderer_ES2::createTexture(const SoraWString& sTexturePath, bool bMipmap) {
 		//return mTextureCreate(ws2s(sTexturePath).c_str(), false);
 		// to do
 		return 0;
 	}
 	
 	// to do
-	SoraTexture* SoraiOSGLRenderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap) {
+	SoraTexture* SoraiOSGLRenderer_ES2::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap) {
 		/*return mTextureCreateWithData(ptr, size);*/
 		ulong32  texid;
 		int w, h, channels;
@@ -414,7 +436,7 @@ namespace sora{
 		return tex;
 	}
 
-	SoraTexture* SoraiOSGLRenderer::createTextureWH(int w, int h) {
+	SoraTexture* SoraiOSGLRenderer_ES2::createTextureWH(int w, int h) {
 		// ios max texture size = 1024
 		if(w > 1024 || h > 1024)
 			return NULL;
@@ -441,7 +463,7 @@ namespace sora{
 		return new SoraTexture(texId, w, h, w, h);
 	}
 	
-	SoraTexture* SoraiOSGLRenderer::createTextureFromRawData(unsigned int* data, int32 w, int32 h) {
+	SoraTexture* SoraiOSGLRenderer_ES2::createTextureFromRawData(unsigned int* data, int32 w, int32 h) {
 		// ios max texture size = 1024
 		if(w > 1024 || h > 1024)
 			return NULL;
@@ -484,7 +506,7 @@ namespace sora{
 		return tex;
 	}
 
-	uint32* SoraiOSGLRenderer::textureLock(SoraTexture* ht) {
+	uint32* SoraiOSGLRenderer_ES2::textureLock(SoraTexture* ht) {
 		ht->dataRef.texData = new uint32[ht->mOriginalWidth * ht->mOriginalHeight];
 		memset(ht->dataRef.texData, 0, ht->mOriginalWidth * ht->mOriginalHeight);
 		if(ht->dataRef.texData) {
@@ -507,7 +529,7 @@ namespace sora{
 		return 0;
 	}
 	
-	void SoraiOSGLRenderer::textureUnlock(SoraTexture* ht) {
+	void SoraiOSGLRenderer_ES2::textureUnlock(SoraTexture* ht) {
 		if(ht->dataRef.texData != NULL) {
 			glEnable(GL_TEXTURE_2D);
             
@@ -526,13 +548,13 @@ namespace sora{
 		
 	}
 
-	void SoraiOSGLRenderer::releaseTexture(SoraTexture* tex) {
+	void SoraiOSGLRenderer_ES2::releaseTexture(SoraTexture* tex) {
 		glDeleteTextures(1, (const GLuint*)&tex->mTextureID);
 		delete tex;
 		tex = 0;
 	}
 	
-	int32 SoraiOSGLRenderer::_modeToGLMode(int32 mode) {
+	int32 SoraiOSGLRenderer_ES2::_modeToGLMode(int32 mode) {
 		switch (mode) {
 	//		case SORA_LINE:				return GL_LINE;
 			case SORA_TRIANGLES:		return GL_TRIANGLES;
@@ -543,7 +565,7 @@ namespace sora{
 		return GL_TRIANGLES;
 	}
 	
-	void SoraiOSGLRenderer::renderTriple(SoraTriple& trip) {
+	void SoraiOSGLRenderer_ES2::renderTriple(SoraTriple& trip) {
 		if(currShader != NULL) {
 			flush();
 		}
@@ -601,7 +623,7 @@ namespace sora{
 		
 		if(currShader) {
 			if(!currShader->attachShaderList())
-				SoraCore::Instance()->log("SoraiOSGLRenderer: error attaching shader list");
+				SoraCore::Instance()->log("SoraiOSGLRenderer_ES2: error attaching shader list");
 			flush();
 		}
 
@@ -609,7 +631,7 @@ namespace sora{
 			flush();	
 	}
 	
-	void SoraiOSGLRenderer::renderWithVertices(SoraTexture* tex, int32 blendMode,  SoraVertex* vertices, uint32 vsize, int32 mode) {		
+	void SoraiOSGLRenderer_ES2::renderWithVertices(SoraTexture* tex, int32 blendMode,  SoraVertex* vertices, uint32 vsize, int32 mode) {		
 		flush();
 		
 		glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
@@ -648,7 +670,7 @@ namespace sora{
 		flush();
 	}
 	
-	void SoraiOSGLRenderer::renderQuad(SoraQuad& quad) {
+	void SoraiOSGLRenderer_ES2::renderQuad(SoraQuad& quad) {
 		if(currShader != NULL) {
 			flush();
 		}
@@ -717,7 +739,7 @@ namespace sora{
 		}
 		if(currShader) {
 			if(!currShader->attachShaderList())
-				SoraCore::Instance()->log("SoraiOSGLRenderer: error attaching shader list");
+				SoraCore::Instance()->log("SoraiOSGLRenderer_ES2: error attaching shader list");
 			flush();
 		}
 
@@ -725,11 +747,11 @@ namespace sora{
 			flush();
 	}
 
-	bool SoraiOSGLRenderer::isActive() {
+	bool SoraiOSGLRenderer_ES2::isActive() {
 		return true;
 	}
 
-	void SoraiOSGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
+	void SoraiOSGLRenderer_ES2::setClipping(int32 x, int32 y, int32 w, int32 h) {
 		int32 width = w;
 		int32 height = h;
 		if(pCurTarget) {
@@ -762,14 +784,14 @@ namespace sora{
 		applyTransform();
 	}
 	
-	void SoraiOSGLRenderer::setTransformWindowSize(float32 w, float32 h) {
+	void SoraiOSGLRenderer_ES2::setTransformWindowSize(float32 w, float32 h) {
 		_oglWindowInfo.width = w!=0.f?w:mainWindow->getWindowWidth();
 		_oglWindowInfo.height = h!=0.f?h:mainWindow->getWindowHeight();
 		applyTransform();
 
 	}
 
-	void SoraiOSGLRenderer::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
+	void SoraiOSGLRenderer_ES2::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
 		_oglWindowInfo.x		=	x;
 		_oglWindowInfo.y		=	y;
 		_oglWindowInfo.dx		=	dx;
@@ -781,13 +803,13 @@ namespace sora{
 		applyTransform();
 	}
 
-	ulong32 SoraiOSGLRenderer::createTarget(int width, int height, bool zbuffer) {
+	ulong32 SoraiOSGLRenderer_ES2::createTarget(int width, int height, bool zbuffer) {
 		SoraRenderTargetiOSGL* t = new SoraRenderTargetiOSGL(width, height, zbuffer);
 		liTargets.push_back((SoraRenderTarget*)t);
 		return (ulong32)t;
 	}
 
-	void SoraiOSGLRenderer::freeTarget(ulong32 t) {
+	void SoraiOSGLRenderer_ES2::freeTarget(ulong32 t) {
 		SoraRenderTarget* pt = (SoraRenderTarget*)t;
 		if(!pt) return;
 		std::list<SoraRenderTarget*>::iterator itt = liTargets.begin();
@@ -801,21 +823,21 @@ namespace sora{
 		}
 	}
 
-	ulong32 SoraiOSGLRenderer::getTargetTexture(ulong32 t) {
+	ulong32 SoraiOSGLRenderer_ES2::getTargetTexture(ulong32 t) {
 		SoraRenderTargetiOSGL* pt = (SoraRenderTargetiOSGL*)t;
         assert(pt != NULL);
 		
 		return pt->getTexture();
 	}
 	
-	bool SoraiOSGLRenderer::_glVersionCheck() {
+	bool SoraiOSGLRenderer_ES2::_glVersionCheck() {
 	/*	int majorVersion, minorVersion, rev;
 		glfwGetVersion(&majorVersion, &minorVersion, &rev);
 		return majorVersion >= 2;*/
 		return true;
 	}
 	
-	bool SoraiOSGLRenderer::_glShaderCheck() {
+	bool SoraiOSGLRenderer_ES2::_glShaderCheck() {
 		// to do
 		// check extensions
 		// return glfwExtensionSupported("GL_ARB_fragment_shade");
@@ -823,11 +845,11 @@ namespace sora{
 	}
 	
 	
-	inline bool SoraiOSGLRenderer::_glCheckError() {
+	inline bool SoraiOSGLRenderer_ES2::_glCheckError() {
 		return glGetError() != GL_NO_ERROR;
 	}
 	
-	SoraWString SoraiOSGLRenderer::videoInfo() {
+	SoraWString SoraiOSGLRenderer_ES2::videoInfo() {
 		SoraWString info(L"Driver=OpenGL Version=");
 		//int mav, miv, rev;
 		info += s2ws((char*)glGetString(GL_VERSION));
@@ -839,27 +861,27 @@ namespace sora{
 		return info;
 	}
 	
-	SoraShaderContext* SoraiOSGLRenderer::createShaderContext() {
+	SoraShaderContext* SoraiOSGLRenderer_ES2::createShaderContext() {
 		return new SoraGLSLShaderContext();
 	}
 	
-	void SoraiOSGLRenderer::snapshot(const SoraString& file) {
+	void SoraiOSGLRenderer_ES2::snapshot(const SoraString& file) {
 	}
 	
-	void SoraiOSGLRenderer::setViewPoint(float, float, float) {
+	void SoraiOSGLRenderer_ES2::setViewPoint(float, float, float) {
 	}
 
-	void SoraiOSGLRenderer::attachShaderContext(SoraShaderContext* context) {
+	void SoraiOSGLRenderer_ES2::attachShaderContext(SoraShaderContext* context) {
 		currShader = context;
 	}
     
-    void SoraiOSGLRenderer::setVerticalSync(bool flag) {
+    void SoraiOSGLRenderer_ES2::setVerticalSync(bool flag) {
         SoraiOSInitializer::Instance()->setVerticalSync(flag);
     }
 
-	void SoraiOSGLRenderer::detachShaderContext() {
+	void SoraiOSGLRenderer_ES2::detachShaderContext() {
 		if(!currShader->detachShaderList())
-			SoraCore::Instance()->log("SoraiOSGLRenderer: error detaching shader list");
+			SoraCore::Instance()->log("SoraiOSGLRenderer_ES2: error detaching shader list");
 		flush();
 		currShader = 0;
 	}

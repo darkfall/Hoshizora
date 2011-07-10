@@ -354,12 +354,12 @@ namespace sora {
 	}
 
 	ulong32 SoraCore::createWindow(SoraWindowInfoBase* info) {
-		SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
-		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
-		
 		if(mainWindow == NULL) {
 			iScreenWidth = info->getWindowWidth();
 			iScreenHeight = info->getWindowHeight();
+            
+            SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
+            SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
 			
 			sora::SoraConsole::Instance();
 			sora::SoraCoreCmdHandler::Instance();
@@ -384,6 +384,10 @@ namespace sora {
 		} else {
             mainWindow->setActive(false);
 			mainWindow = info;
+            if(mainWindow->isActive())
+                mainWindow->init();
+            else 
+                mainWindow->reinit();
             mainWindow->setActive(true);
             
 			DebugPtr->log(vamssg("Set MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
@@ -398,6 +402,11 @@ namespace sora {
 				pRenderSystem->setWindowPos(info->getWindowPosX(), info->getWindowPosY());
 			}
 		}
+        
+        SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
+		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
+		
+		
 		return 0;
 	}
 

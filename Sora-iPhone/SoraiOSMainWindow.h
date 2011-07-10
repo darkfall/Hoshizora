@@ -37,9 +37,11 @@ public:
 		sora::GCN_GLOBAL->gcnLogic();
 
 		sora::GCN_GLOBAL->gcnDraw();
-		
+    //    pBG->setTexture(0);
+		pBG->render(0.f, 0.f);
+        
 		if(pFont)
-		pFont->print(0.f, getWindowHeight()-20, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.2f", sora::SORA->getFPS());
+            pFont->print(0.f, getWindowHeight()-20, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.2f", sora::SORA->getFPS());
 		//sprm->render(0.f, 0.f, 0.f);
 		sora::SORA->endScene();
 		
@@ -53,6 +55,8 @@ public:
 		
 		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource"));
 		
+        pBG = sora::SORA->createSprite(L"background1.png");
+
 		sora::GCN_GLOBAL->initGUIChan(L"STHeitiJ-Medium", 20);
 		sora::GCN_GLOBAL->createTop();
 		
@@ -89,6 +93,7 @@ public:
 	bool hideMouse() { return false; }
 	
 	void rotScreen(bool flag) { bScreenRotated = flag; }
+    bool isScreenRoteted() const { return bScreenRotated; }
 	
 private:
 	bool bScreenRotated;

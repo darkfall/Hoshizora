@@ -7,18 +7,20 @@
  *
  */
 
-#ifndef _SORA_IOSGL_RENDERER_H_
-#define _SORA_IOSGL_RENDERER_H_
+#ifndef _SORA_IOSGL_ES2_RENDERER_H_
+#define _SORA_IOSGL_ES2_RENDERER_H_
 
 #include "SoraRenderSystem.h"
 #include "SoraiOSGLRenderTarget.h"
 
+#include "SoraGLSLShader.h"
+
 namespace sora {
 	
-	class SoraiOSGLRenderer: public SoraRenderSystem {
+	class SoraiOSGLRenderer_ES2: public SoraRenderSystem {
 	public:
-		SoraiOSGLRenderer();
-		~SoraiOSGLRenderer();
+		SoraiOSGLRenderer_ES2();
+		~SoraiOSGLRenderer_ES2();
 		
 		bool update();
 		
@@ -123,13 +125,17 @@ namespace sora {
 		
 		std::list<SoraRenderTarget*> liTargets;
 		SoraRenderTargetiOSGL* pCurTarget;
-		
-		bool bShaderAvailable;
-		GLuint uGLShaderProgram;
-
+    
 		GLuint mCurrTexture;
 
 		SoraShaderContext* currShader;
+        
+        SoraShaderContext* mES2ShaderContext;
+        SoraShader* mES2VertexShader;
+        SoraShader* mES2FragmentShader;
+        GLuint mVertexUVSlot;
+        GLuint mVerticesSlot;
+        GLuint mMVPMatrixSlot;
 
 		bool bFullscreen;
 		int iFrameStart;

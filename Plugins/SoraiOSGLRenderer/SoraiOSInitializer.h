@@ -14,6 +14,7 @@
 #include "Debug/SoraInternalLogger.h"
 
 #include "SoraiOSGLRenderer.h"
+#include "SoraiOSGLRenderer_ES2.h"
 #include "SoraiOSInput.h"
 
 namespace sora {
@@ -21,17 +22,24 @@ namespace sora {
 	class SoraiOSInitializer: public SoraSingleton<SoraiOSInitializer> {
 		friend class SoraSingleton<SoraiOSInitializer>;
 		
-		inline void SoraiOSInit() {
-			SORA->registerRenderSystem(new SoraiOSGLRenderer);
-				
+		inline void SoraiOSInit(bool isOGLES2API) {
+            if(isOGLES2API)
+                SORA->registerRenderSystem(new SoraiOSGLRenderer_ES2);
+            else
+                SORA->registerRenderSystem(new SoraiOSGLRenderer);
+            
+            mVerticalSync = false;
 		//	input = new SoraiOSInput;
 		//	SORA->registerInput(input);
 		}
 		
+        SoraiOSInitializer() {}
+        ~SoraiOSInitializer() {}
+        
 	public:
 		
-		inline void SoraiOSStart(SoraWindowInfoBase* window) {
-			SoraiOSInit();
+		inline void SoraiOSStart(SoraWindowInfoBase* window, bool isOGLES2API=false) {
+			SoraiOSInit(isOGLES2API);
 			
 			try {
 				SORA->createWindow(window);
@@ -44,8 +52,14 @@ namespace sora {
 		
 		void setTimer(SoraTimer* timer) { pTimer = timer; }
 		
+        void setVerticalSync(bool flag) {
+            mVerticalSync = flag;
+        }
+        
 		inline bool update() {
-			if(pTimer)
+            if(mVerticalSync)
+                return true;
+            else if(pTimer)
 				return pTimer->update();
 			return false;
 		}
@@ -61,8 +75,9 @@ namespace sora {
 		
 	private:
 		SoraTimer* pTimer;
-		
 		SoraiOSInput* input;
+        
+        bool mVerticalSync;
 	};
 
 	

@@ -28,7 +28,7 @@
 
 - (void)awakeFromNib
 {
-    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
     if (!aContext) {
         aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
@@ -151,6 +151,8 @@
 	if(sora::SORA_IOS->update()) {
 		[(EAGLView *)self.view setFramebuffer];
 		sora::SORA_IOS->SoraiOSUpdateSystems();
+        
+    
 		[(EAGLView *)self.view presentFramebuffer];
 	}
 }

@@ -91,7 +91,7 @@ namespace sora {
                         if (it != end) ++it;
                     }
                     else {
-                        while (it != end && ((*it >= 'a' && *it <= 'z') || (*it >= 'A' && *it <= 'Z') || (*it >= '1' && *it <= '0') || *it == '_')) var += *it++;
+                        while (it != end && (((*it >= 'a' && *it <= 'z') || (*it >= 'A' && *it <= 'Z') || (*it >= '0' && *it <= '9')) || *it == '_')) var += *it++;
                     }
                     char* val = getenv(var.c_str());
                     if (val) result += val;
@@ -103,6 +103,21 @@ namespace sora {
         static void listRootsImpl(std::vector<std::string>& roots) {
             roots.clear();
             roots.push_back("/");
+        }
+        static std::string resourceImpl() {
+            return "./";
+        }
+        static std::string writtableImpl() {
+            return "./";
+        }
+        static std::string fontImpl() {
+#ifdef OS_OSX
+            // osx specific
+            return "/Library/Fonts/";
+#else
+            // *nix
+            return "/usr/share/fonts/";
+#endif // OS_OSX
         }
     };
 

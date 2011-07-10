@@ -164,41 +164,27 @@ namespace sora {
 #endif
 
 #if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-	#define FONT_PATH L"/System/Library/Fonts/"
-	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
 	#define OS_OSX
 
 #elif defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
-	#define FONT_PATH L"/System/Library/Fonts/"
-	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
 	#define OS_IOS
 
 #elif defined(__ANDROID__)
-	#define FONT_PATH L"./"
-	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
 	#define OS_ANDROID
 
 #elif defined(_WIN32) || defined(_MSC_VER)
-	#define FONT_PATH L"C:/Windows/Fonts/"
-	#define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
 	#define OS_WIN32
 
 #elif defined(linux) || defined(__linux)
-    // linux defines are just experimental, i'm not sure it's right or not
-    #define FONT_PATH L"/usr/share/fonts/truetype"
-    #define DEFAULT_RESOURCE_SEARCH_PATH L"./"
 
     #define OS_LINUX
 
-#elif defined(_PSP)
+#elif defined(_PSP)		
 
-	#define FONT_PATH L"./fonts"
-	#define DEFAULT_RESOURCE_SEARCH_PATH L"."
-		
 	#define OS_PSP
 #endif
 
@@ -299,7 +285,7 @@ static void msleep(uint32_t msec) {
 
 #ifdef _MSC_VER
 #define ThreadLocal __declspec(thread)
-#elif defined(__GNUC__) && !defined(OS_OSX)
+#elif defined(__GNUC__) && !defined(OS_OSX) && !defined(OS_IOS)
 #define ThreadLocal __thread
 #else
 // some platforms such as Mac OS X does not support TLS

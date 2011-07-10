@@ -18,13 +18,16 @@ namespace sora {
     
     class SoraPathImpl {
     public:
-        static std::string getEnvImpl();
+        static std::string getEnvImpl(const std::string& name);
         static std::string currentImpl();
         static std::string homeImpl();
         static std::string tempImpl();
         static std::string nullImpl();
         static std::string expandImpl(const std::string patH);
         static void listRootsImpl(std::vector<std::string>& roots);
+        static std::string resourceImpl();
+        static std::string writtableImpl();
+        static std::string fontImpl();
     };
     
 } // namespace sora

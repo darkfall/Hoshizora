@@ -11,6 +11,8 @@ namespace sora {
 
 	class SoraWindowInfoBase: public SoraEventHandler {
 	public:
+        SoraWindowInfoBase(): mActive(true) {}
+        
 		virtual int32 getWindowWidth() = 0;
 		virtual int32 getWindowHeight() = 0;
 		
@@ -32,6 +34,8 @@ namespace sora {
 		virtual const char* getCursor() { return NULL; }
 
 		virtual void pauseFunc() {}
+        
+        virtual void reinit() {}
         
         void setActive(bool flag) {
             mActive = flag;

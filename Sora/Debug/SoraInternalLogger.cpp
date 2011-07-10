@@ -61,7 +61,7 @@ namespace sora {
 		vswprintf(Message, 1024, format, ArgPtr);
 		
 		va_end(ArgPtr);
-		::wprintf(L"%s", Message);
+		::wprintf(L"%s\n", Message);
 #else
 		char Message[1024] = {0};
 		va_start(ArgPtr, format);
@@ -69,7 +69,7 @@ namespace sora {
 		
 		va_end(ArgPtr);
 	#ifndef OS_PSP
-		::printf("%s", Message);
+		::printf("%s\n", Message);
 	#else
 //		pspDebugScreenPrintf(Message);
 	#endif
@@ -78,10 +78,16 @@ namespace sora {
 	
 	void SoraInternalLogger::log(const std::string& log, int32 logLevel) {
 		vMssg.push_back(LogMssg(log, logLevel));
+#ifdef OS_IOS
+        ::printf("%s\n", log.c_str());
+#endif
 	}
 	
 	void SoraInternalLogger::log(const std::wstring& log, int32 logLevel) {
 		vMssg.push_back(LogMssg(ws2s(log), logLevel));
+#ifdef OS_IOS
+        ::printf("%s\n", ws2s(log).c_str());
+#endif
 	}
 	
 	void SoraInternalLogger::writeToFile(const char* fileName) {

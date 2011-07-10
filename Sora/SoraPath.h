@@ -132,10 +132,34 @@ namespace sora {
         static char separator();
         static char pathSeparator();
         
+        static std::string getEnv(const std::string& env);
         static std::string current();
         static std::string home();
         static std::string temp();
         static std::string null();
+        // default resource path
+        // under most platforms this just returns "./"
+        // but for mobile platforms such as iOS
+        // will return the accessable resource path
+        static std::string resource();
+        // default writtable path
+        // under most platforms this just returns "./"
+        // but for mobile platforms such as iOS
+        // will return the writtable resource path
+        // such as Documents for iOS
+        static std::string writtable();
+        // default system font path
+        // such as :/Windows/System32/Fonts for windows
+        static std::string font();
+        
+        static std::wstring getEnvW(const std::string& env);
+        static std::wstring currentW();
+        static std::wstring homeW();
+        static std::wstring tempW();
+        static std::wstring nullW();
+        static std::wstring resourceW();
+        static std::wstring writtableW();
+        static std::wstring fontW();
         
         static std::string expand(const std::string& path);
         static std::string expand(const std::wstring& path);

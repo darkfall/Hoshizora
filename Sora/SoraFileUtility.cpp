@@ -15,6 +15,8 @@
 #include "soraiOSFileUtility.h"
 #endif
 
+#include "SoraPath.h"
+
 
 namespace sora {
 
@@ -77,23 +79,9 @@ namespace sora {
 		}
 
 	 SoraWString SoraFileUtility::getFontPath(const SoraWString& file) {
-#ifdef OS_OSX
-			SoraWString buffer = L"/System/Library/Fonts/";
-			buffer += file;
-			if(fileExists(buffer)) return buffer;
-			buffer = L"/Library/Fonts/";
-			buffer += file;
-			
-			return buffer;
-#elif defined(WIN32)
-			SoraWString buffer = L"C:/Windows/Fonts/";
-			buffer += file;
-			
-			return buffer;
-#endif
-			return FONT_PATH;
-			return L"./";
-		}
+         std::wstring fontPath = SoraPath::fontW();
+         return fontPath + file;
+     }
 
 	 SoraWString SoraFileUtility::getFullPath(const SoraWString& file) {
 			return (getApplicationPath() + L"/" + file);

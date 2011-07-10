@@ -34,6 +34,9 @@ namespace sora {
 		
 		// calls every frame
 		virtual void update() {}
+        
+        // calls when reinitialise a plugin under some special situations
+        virtual void reinitialise() {}
 	
 		virtual const SoraString getName() const = 0;
 	};

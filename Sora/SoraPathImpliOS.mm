@@ -12,6 +12,8 @@
 
 #include <Foundation/Foundation.h>
 
+#include "soraiOSFileUtility.h"
+
 namespace sora {
     
     inline std::string NSString2String(NSString* nss) {
@@ -25,28 +27,28 @@ namespace sora {
 	}
 	
     
-    static std::string SoraPathImpl::getEnvImpl() {
+    std::string SoraPathImpl::getEnvImpl(const std::string& name) {
         const char* val = getenv(name.c_str());
         if (val)
             return std::string(val);
         else
             THROW_SORA_EXCEPTION("Cannot get env string");
     }
-    static std::string SoraPathImpl::currentImpl() {
+    std::string SoraPathImpl::currentImpl() {
         return [[[NSBundle mainBundle] bundlePath] UTF8String];
     }
-    static std::string SoraPathImpl::homeImpl() {
+    std::string SoraPathImpl::homeImpl() {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
 		return (NSString2String(basePath)+"/");
     }
-    static std::string SoraPathImpl::tempImpl() {
+    std::string SoraPathImpl::tempImpl() {
         return homeImpl();
     }
-    static std::string SoraPathImpl::nullImpl() {
+    std::string SoraPathImpl::nullImpl() {
         return currentImpl();
     }
-    static std::string SoraPathImpl::expandImpl(const std::string path) {
+    std::string SoraPathImpl::expandImpl(const std::string path) {
         std::string result;
         std::string::const_iterator it  = path.begin();
         std::string::const_iterator end = path.end();
@@ -67,7 +69,7 @@ namespace sora {
                     if (it != end) ++it;
                 }
                 else {
-                    while (it != end && (Ascii::isAlphaNumeric(*it) || *it == '_')) var += *it++;
+                    while (it != end && (((*it >= 'a' && *it <= 'z') || (*it >= 'A' && *it <= 'Z') || (*it >= '0' && *it <= '9')) || *it == '_')) var += *it++;
                 }
                 char* val = getenv(var.c_str());
                 if (val) result += val;
@@ -76,9 +78,26 @@ namespace sora {
         }
         return result;
     }
-    static void SoraPathImpl::listRootsImpl(std::vector<std::string>& roots) {
+    void SoraPathImpl::listRootsImpl(std::vector<std::string>& roots) {
         roots.clear();
         roots.push_back(currentImpl());
+    }
+    std::string SoraPathImpl::resourceImpl() {
+        std::string path = [[[NSBundle mainBundle] bundlePath] UTF8String];
+        return path + "/";
+    }
+    std::string SoraPathImpl::writtableImpl() {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        if(basePath) {
+            std::string path = [basePath UTF8String];
+            return path + "/";
+        }
+        return "./";
+    }
+    std::string SoraPathImpl::fontImpl() {
+        // ios default
+        return "/System/Library/Fonts/";
     }
 } // namespace sora
 

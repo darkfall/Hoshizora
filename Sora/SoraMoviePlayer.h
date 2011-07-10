@@ -16,44 +16,37 @@ namespace sora {
 
     class SoraMoviePlayer: public SoraPlaybackEventHandler {
     public:
-        virtual ~SoraMoviePlayer() {}
+        virtual bool openMedia(const SoraWString& filePath, const SoraString& dis="RGBA") = 0;
+        virtual void play() = 0;
+        virtual void stop() = 0;
+        virtual void pause() = 0;
         
-        /* @param width and height are hack for vlc
-         to be solved
-		// opengl = RGBA
-		// hge+dx = RV32
-         */
-        virtual bool openMedia(const SoraWString& filePath, const SoraString& dis="RGBA") { return false; }
-        virtual void play() {}
-        virtual void stop() {}
-        virtual void pause() {}
+        virtual void setVolume(int32 vol) = 0;
+        virtual int32 getVolume() const = 0;
         
-        virtual void setVolume(int32 vol) {}
-        virtual int32 getVolume() const { return 0; }
-        
-        virtual void setMute(bool flag) {}
-        virtual bool getMute() { return false; }
+        virtual void setMute(bool flag) = 0;
+        virtual bool getMute() = 0;
 
-        virtual void setTime(uint64 newtime) {}
-        virtual uint64 getTime() const { return 0; }
+        virtual void setTime(uint64 newtime) = 0;
+        virtual uint64 getTime() const = 0;
 
-        virtual bool isStopped() const { return false; }
-        virtual bool isPlaying() const { return false; }
-        virtual bool isPaused() const { return false; }
+        virtual bool isStopped() const = 0;
+        virtual bool isPlaying() const = 0;
+        virtual bool isPaused() const = 0;
         
-        virtual float32 getPlayRate() const { return 0.f; }
-        virtual void setPlayRate(float32 rate) {}
+        virtual float32 getPlayRate() const = 0;
+        virtual void setPlayRate(float32 rate) = 0;
         
-        virtual uint64 getLength() const { return 0; }
-        virtual float getFPS() const { return 0.f; }
+        virtual uint64 getLength() const = 0;
+        virtual float getFPS() const = 0;
         
-        virtual uint32 getWidth() const { return 0; }
-        virtual uint32 getHeight() const { return 0; }
+        virtual uint32 getWidth() const = 0;
+        virtual uint32 getHeight() const = 0;
         
-        virtual void* getPixelData() const { return NULL; }
-        virtual uint32 getFrameCount() const { return 0; }
-        virtual bool frameChanged() const { return false; }
-        virtual void setFinish() {}
+        virtual void* getPixelData() const = 0;
+        virtual uint32 getFrameCount() const = 0;
+        virtual bool frameChanged() const = 0;
+        virtual void setFinish() = 0;
     
     };
 } // namespace sora

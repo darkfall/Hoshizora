@@ -16,12 +16,6 @@
 #include <vector>
 
 #include "hash.h"
-
-#ifdef OS_IOS
-#include "soraiOSFileUtility.h"
-#endif
-
-
 #include "osxfilewrapper.h"
 #include "win32filewrapper.h"
 
@@ -29,15 +23,7 @@ namespace sora {
 	
 	class SoraFolderResourceManager: public SoraResourceManager {
 	public:
-		SoraFolderResourceManager(): applicationPath(SoraFileUtility::getApplicationPath()+L"/") {
-#ifdef OS_IOS
-			loadResourcePack(appResourcePath());
-			loadResourcePack(appDocumentPath());
-#else
-			loadResourcePack(DEFAULT_RESOURCE_SEARCH_PATH);
-#endif
-			loadResourcePack(FONT_PATH);
-		}
+		SoraFolderResourceManager();
 		~SoraFolderResourceManager() {}
 		
 		HSORARESOURCE	loadResourcePack	(const SoraWString& folder);

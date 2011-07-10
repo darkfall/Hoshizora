@@ -10,8 +10,19 @@
 #include "SoraFolderResourceManager.h"
 #include "SoraFileUtility.h"
 #include "Debug/SoraInternalLogger.h"
+#include "SoraPath.h"
 
 namespace sora {
+    
+    SoraFolderResourceManager::SoraFolderResourceManager(): applicationPath(SoraFileUtility::getApplicationPath()+L"/") {
+#ifdef OS_IOS
+        loadResourcePack(SoraPath::writtableW());
+        loadResourcePack(SoraPath::resourceW());
+#else
+        loadResourcePack(SoraPath::resourceW());
+#endif
+        loadResourcePack(SoraPath::fontW());
+    }
 
 	HSORARESOURCE SoraFolderResourceManager::loadResourcePack(const SoraWString& folder) {
 		//if(!SoraFileUtility::fileExists(folder)) {

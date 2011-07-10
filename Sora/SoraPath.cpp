@@ -402,6 +402,10 @@ namespace sora {
         mAbsolute = false;
     }
     
+    std::string SoraPath::getEnv(const std::string& env) {
+        getEnvImpl(env);
+    }
+    
     std::string SoraPath::current() {
         return SoraPathImpl::currentImpl();
     }
@@ -416,6 +420,50 @@ namespace sora {
     
     std::string SoraPath::null() {
         return SoraPathImpl::nullImpl();
+    }
+    
+    std::string SoraPath::resource() {
+        return SoraPathImpl::resourceImpl();
+    }
+    
+    std::string SoraPath::writtable() {
+        return SoraPathImpl::writtableImpl();
+    }
+    
+    std::wstring SoraPath::getEnvW(const std::string& env) {
+        return sora::s2ws(getEnv(env));
+    }
+    
+    std::wstring SoraPath::currentW() {
+        return sora::s2ws(current());
+    }
+    
+    std::wstring SoraPath::homeW() {
+        return sora::s2ws(home());
+    }
+    
+    std::wstring SoraPath::tempW() {
+        return sora::s2ws(temp());
+    }
+    
+    std::wstring SoraPath::nullW() {
+        return sora::s2ws(null());
+    }
+    
+    std::wstring SoraPath::resourceW() {
+        return sora::s2ws(resource());
+    }
+    
+    std::wstring SoraPath::writtableW() {
+        return sora::s2ws(writtable());
+    }
+    
+    std::string SoraPath::font() {
+        return fontImpl();
+    }
+    
+    std::wstring SoraPath::fontW() {
+        return sora::s2ws(font());
     }
     
     std::string SoraPath::expand(const std::string& path) {

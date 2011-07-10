@@ -84,6 +84,18 @@ namespace sora {
                 ++it;
             }
         }
+        static std::string resourceImpl() {
+            return "./";
+        }
+        static std::string writtableImpl() {
+            return "./";
+        }
+        static std::string fontImpl() {
+            char buffer[_MAX_PATH];
+            GetWindowsDirectoryA(buffer, _MAX_PATH-1);
+            std::string sfontpath(buffer);
+            return sfontpath + "\\Fonts\\";
+        }
     };
 
 } // namespace sora

@@ -14,8 +14,8 @@
 
 namespace sora {
 	
-	static std::wstring iOSString2WString(const std::string& str);
-	static std::string iOSWString2String(const std::wstring& str);
+    std::wstring iOSString2WString(const std::string& str);
+	std::string iOSWString2String(const std::wstring& str);
     
 } // namespace sora
 
