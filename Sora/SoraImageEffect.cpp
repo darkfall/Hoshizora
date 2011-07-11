@@ -10,21 +10,22 @@ namespace sora {
 		currRepeatTimes(0), repeatTimes(0) {
 	}
 	SoraImageEffect::SoraImageEffect(CoreTransformer<CoreTransform>* transformer): 
-		t_transformer(transformer), 
 		currRepeatTimes(0), repeatTimes(0) { 
+            if(transformer) {
+                t_transformer = transformer->clone();
+            } else 
+                t_transformer = NULL;
 	}
 	SoraImageEffect::SoraImageEffect(IMAGE_EFFECT_MODE _mode): 
 		mode(_mode), etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL), 
-		currRepeatTimes(0), repeatTimes(0) { 
+		currRepeatTimes(0), repeatTimes(-1) { 
 	}
 	
 	SoraImageEffect::~SoraImageEffect() {
-		if(bInternalTransformer) {
-			if(t_transformer) {
-				delete t_transformer;
-				t_transformer = 0;
-			}
-		}
+		if(t_transformer) {
+            delete t_transformer;
+            t_transformer = 0;
+        }
 	}
 	
 	void SoraImageEffect::setRepeatTimes(int32 times) {
@@ -58,8 +59,7 @@ namespace sora {
 		
 		if(!t_transformer) {
 			t_transformer = new CoreLinearTransformer<CoreTransform>;
-			bInternalTransformer = true;
-		} else bInternalTransformer = false;
+		}
 	}
 	
 	void SoraImageEffect::restart() {
@@ -112,10 +112,9 @@ namespace sora {
 		assert(transformer != 0);
 		if(t_transformer) delete t_transformer;
 		t_transformer = transformer;
-		bInternalTransformer = false;
 	}
 	
-	uint32 SoraImageEffect::update(float32 delta) {
+	int32 SoraImageEffect::update(float32 delta) {
 		if(started == 1) {
 			if(paused == 1) {
 				pauseTime += delta;
@@ -133,8 +132,6 @@ namespace sora {
 					case IMAGE_EFFECT_ONCE:
 						states = IMAGE_EFFECT_END;
 						t_curr = t_dst;
-						
-						checkRepeatTimes();
 						break;
 						
 					case IMAGE_EFFECT_REPEAT:
@@ -163,20 +160,18 @@ namespace sora {
 		return states;
 	}
 	
-	void SoraImageEffect::checkRepeatTimes() {
-		// inverse and reverse
-		if(repeatTimes != 0) {
+	bool SoraImageEffect::checkRepeatTimes() {
+		if(repeatTimes == 0)
+            return false;
+        else if(repeatTimes != 0 ) {
 			++currRepeatTimes;
 			if(currRepeatTimes >= repeatTimes) {
 				currRepeatTimes = 0;
 				states = IMAGE_EFFECT_END;
 				started = 0;
-
+                return true;
 			}
-		} else if(repeatTimes == -1)
-			start(getMode(), getEffectTime());
-		else
-			states = IMAGE_EFFECT_END;
+		}
 	}
 	
 	SoraImageEffectList::SoraImageEffectList(IMAGE_EFFECT_MODE mode) {
@@ -188,6 +183,27 @@ namespace sora {
 		paused = 0;
 		states = IMAGE_EFFECT_PLAYING;
 	}
+        
+    SoraImageEffect& SoraImageEffect::operator =(const SoraImageEffect& rhs) {
+        if(&rhs != this) {
+            etype = rhs.etype;
+            states = rhs.states;
+            mode = rhs.mode;
+            startTime = rhs.startTime;
+            pauseTime = rhs.pauseTime;
+            topauseTime = rhs.topauseTime;
+            effectTime = rhs.effectTime;
+            currRepeatTimes = rhs.currRepeatTimes;
+            repeatTimes = rhs.repeatTimes;
+            pingpongState = rhs.pingpongState;
+            started = rhs.started;
+            paused = rhs.paused;
+            t_src = rhs.t_src;
+            t_dst = rhs.t_dst;
+            t_curr = rhs.t_curr;
+            t_transformer = rhs.t_transformer->clone();
+        }
+    }
 											 
 	SoraImageEffectList::SoraImageEffectList() {
 		mListMode = IMAGE_EFFECT_ONCE;
@@ -239,8 +255,17 @@ namespace sora {
 		if(mCurrEffect)
 			mCurrEffect->modify(spr);
 	}
+    
+    SoraModifier<SoraSprite>* SoraImageEffectList::clone() {
+        SoraImageEffectList* newlist = new SoraImageEffectList(*this);
+        newlist->mImageEffects = this->mImageEffects;
+        newlist->mReverse = this->mReverse;
+        newlist->mListMode = this->mListMode;
+        newlist->mCurrEffect = this->mCurrEffect;
+        return newlist;
+    }
 
-	uint32 SoraImageEffectList::update(float32 delta) {
+	int32 SoraImageEffectList::update(float32 delta) {
 		if(mCurrEffect) {
 			int32 result = mCurrEffect->update(delta);
 			if(result == IMAGE_EFFECT_END) {
@@ -305,6 +330,10 @@ namespace sora {
 	void SoraImageEffectFade::modify(SoraSprite* sprite) {
 		sprite->setColor(CSETA(sprite->getColor(), get1st()*255));
 	}
+    
+    SoraModifier<SoraSprite>* SoraImageEffectFade::clone() {
+        return new SoraImageEffectFade(*this);
+    }
 
 	SoraImageEffectScale::SoraImageEffectScale(float32 src, float32 dst, float32 _time, IMAGE_EFFECT_MODE _mode,
 											   CoreTransformer<CoreTransform>* transformer):
@@ -329,6 +358,10 @@ namespace sora {
 	void SoraImageEffectScale::modify(SoraSprite* sprite) {
 		sprite->setScale(get1st(), get2nd());
 	}
+    
+    SoraModifier<SoraSprite>* SoraImageEffectScale::clone() {
+        return new SoraImageEffectScale(*this);
+    }
 
 	SoraImageEffectTransitions::SoraImageEffectTransitions(float32 sx, float32 sy, float32 sz, float32 dx, float32 dy, float32 dz, float32 _time, IMAGE_EFFECT_MODE _mode,
 														   CoreTransformer<CoreTransform>* transformer):
@@ -349,6 +382,10 @@ namespace sora {
 
 		start(_mode, _time);
 	}
+    
+    SoraModifier<SoraSprite>* SoraImageEffectTransitions::clone() {
+        return new SoraImageEffectTransitions(*this);
+    }
 	
 	void SoraImageEffectTransitions::modify(SoraSprite* sprite) {
 		sprite->setPosition(get1st(), get2nd());
@@ -379,6 +416,10 @@ namespace sora {
 	void SoraImageEffectColorTransitions::modify(SoraSprite* sprite) {
 		sprite->setColor(SoraColorRGBA::GetHWColor(get1st(), get2nd(), get3rd(), get4th()), -1);
 	}
+    
+    SoraModifier<SoraSprite>* SoraImageEffectColorTransitions::clone() {
+        return new SoraImageEffectColorTransitions(*this);
+    }
 	
 	SoraImageEffectRotation::SoraImageEffectRotation(float32 s, float32 e, float32 _time, IMAGE_EFFECT_MODE _mode,
 													 CoreTransformer<CoreTransform>* transformer):
@@ -403,5 +444,9 @@ namespace sora {
 	void SoraImageEffectRotation::modify(SoraSprite* sprite) {
 		sprite->setRotation(get1st());
 	}
+    
+    SoraModifier<SoraSprite>* SoraImageEffectRotation::clone() {
+        return new SoraImageEffectRotation(*this);
+    }
 
 } // namespace sora

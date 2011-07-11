@@ -312,6 +312,8 @@
 		88B3882513C431F2008AF50E /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387FC13C431F1008AF50E /* libxml2.2.dylib */; };
 		88B3882613C431F2008AF50E /* libzvbi.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387FD13C431F1008AF50E /* libzvbi.0.dylib */; };
 		88B3882813C43843008AF50E /* SoraException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B3882713C43842008AF50E /* SoraException.cpp */; };
+		88B6F80013CB1CB4005F2E0D /* SoraDirectoryIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6F7FF13CB1CB4005F2E0D /* SoraDirectoryIterator.cpp */; };
+		88B6F80313CB2941005F2E0D /* SoraModifierAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6F80213CB2941005F2E0D /* SoraModifierAdapter.cpp */; };
 		88BA9E03135A972100C282EB /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */; };
 		88BD150C1346ADCA0068AABA /* guichanWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BD14831346ADCA0068AABA /* guichanWrapper.cpp */; };
 		88BD150E1346ADCA0068AABA /* luace.c in Sources */ = {isa = PBXBuildFile; fileRef = 88BD148C1346ADCA0068AABA /* luace.c */; };
@@ -1222,6 +1224,12 @@
 		88B387FC13C431F1008AF50E /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libxml2.2.dylib; sourceTree = "<group>"; };
 		88B387FD13C431F1008AF50E /* libzvbi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libzvbi.0.dylib; sourceTree = "<group>"; };
 		88B3882713C43842008AF50E /* SoraException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraException.cpp; sourceTree = "<group>"; };
+		88B6F7FC13CB18AF005F2E0D /* SoraDirectoryIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDirectoryIterator.h; sourceTree = "<group>"; };
+		88B6F7FD13CB18BD005F2E0D /* SoraDirectoryIteratorImplWindows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDirectoryIteratorImplWindows.h; sourceTree = "<group>"; };
+		88B6F7FE13CB18C6005F2E0D /* SoraDirectoryIteratorImplUnix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDirectoryIteratorImplUnix.h; sourceTree = "<group>"; };
+		88B6F7FF13CB1CB4005F2E0D /* SoraDirectoryIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraDirectoryIterator.cpp; sourceTree = "<group>"; };
+		88B6F80113CB28EA005F2E0D /* SoraModifierAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraModifierAdapter.h; sourceTree = "<group>"; };
+		88B6F80213CB2941005F2E0D /* SoraModifierAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraModifierAdapter.cpp; sourceTree = "<group>"; };
 		88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoraSpriteAnimation.cpp; path = ../Plugins/SoraSpriteAnimation/SoraSpriteAnimation.cpp; sourceTree = "<group>"; };
 		88BA9E02135A972100C282EB /* SoraSpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraSpriteAnimation.h; path = ../Plugins/SoraSpriteAnimation/SoraSpriteAnimation.h; sourceTree = "<group>"; };
 		88BD14831346ADCA0068AABA /* guichanWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = guichanWrapper.cpp; sourceTree = "<group>"; };
@@ -3134,6 +3142,12 @@
 				8896383913CAA88E004CF8AD /* SoraNotificationCenter.h */,
 				8896383A13CAA89A004CF8AD /* SoraNotificationCenter.cpp */,
 				8896383C13CAAA11004CF8AD /* SoraSingletonHolder.h */,
+				88B6F7FC13CB18AF005F2E0D /* SoraDirectoryIterator.h */,
+				88B6F7FF13CB1CB4005F2E0D /* SoraDirectoryIterator.cpp */,
+				88B6F7FD13CB18BD005F2E0D /* SoraDirectoryIteratorImplWindows.h */,
+				88B6F7FE13CB18C6005F2E0D /* SoraDirectoryIteratorImplUnix.h */,
+				88B6F80113CB28EA005F2E0D /* SoraModifierAdapter.h */,
+				88B6F80213CB2941005F2E0D /* SoraModifierAdapter.cpp */,
 			);
 			name = Sora;
 			path = ../Sora;
@@ -3724,6 +3738,8 @@
 				8896383613CAA573004CF8AD /* SoraNotification.cpp in Sources */,
 				8896383813CAA5B5004CF8AD /* SoraObserver.cpp in Sources */,
 				8896383B13CAA89B004CF8AD /* SoraNotificationCenter.cpp in Sources */,
+				88B6F80013CB1CB4005F2E0D /* SoraDirectoryIterator.cpp in Sources */,
+				88B6F80313CB2941005F2E0D /* SoraModifierAdapter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

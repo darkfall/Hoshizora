@@ -154,7 +154,8 @@ bool mainWindow::renderFunc() {
 
 	}
 	obj.update(sora::SORA->getDelta());
-	
+	pSpr->render();
+    
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 	pFont->print(0.f, getWindowHeight()-60.f, sora::FONT_ALIGNMENT_LEFT, L"Alive Particles: %d, total %d", ps->size(), ps->getTotalParticleAlive());
@@ -185,11 +186,15 @@ void downloadDelegate(sora::SoraHttpFile& file) {
     sora::SORA->messageBox(sora::vamssg("downloadtime: %d", file.getDownloadTime()), "test", MB_OK);
 }
 
+
+#include "SoraModifierAdapter.h"
+
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
     
+   
 	/*file.downloadFileWithDelegate("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", Delegate(downloadDelegate).clone());*/
     
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
@@ -228,6 +233,10 @@ void mainWindow::init() {
 	
 	pSpr = sora::SORA->createSprite(L"background.png");
     customSprite = new sora::SoraCustomShapeSprite(pSpr, sora::SORA_TRIANGLES);
+    
+    sora::SoraModiferAdapter<sora::SoraSprite>* effects = new sora::SoraModiferAdapter<sora::SoraSprite>(pSpr);
+    effects->add(new sora::IETransitions(0.f, 0.f, 600.f, 600.f, 10.f, sora::IMAGE_EFFECT_ONCE));
+    
     
     
 	pressAnyKey = sora::SORA->createSprite(L"road.png");

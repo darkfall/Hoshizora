@@ -11,6 +11,12 @@
 #include "SoraCore.h"
 
 namespace sora {
+    SoraResourceFileAuto::SoraResourceFileAuto():
+    mData(NULL),
+    mSize(0),
+    mRetain(false) {
+        
+    }
 
 	SoraResourceFileAuto::SoraResourceFileAuto(void* data, ulong32 size, bool retain):
 	mData(data),
@@ -37,6 +43,13 @@ namespace sora {
 			SORA->freeResourceFile(mData);
 		}
 	}
+    
+    SoraResourceFileAuto& SoraResourceFileAuto::operator=(const SoraWString& file) {
+        mData = SORA->getResourceFile(file, mSize);
+		if(!mData)
+			DebugPtr->log(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+        mRetain = false;
+    }
     
     void* SoraResourceFileAuto::data() const {
         return mData;

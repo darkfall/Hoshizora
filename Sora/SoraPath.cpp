@@ -494,6 +494,13 @@ namespace sora {
                     mAbsolute = true;
                 } else 
                     --it;
+            } else if(*it == '.') {
+                ++it;
+                if(it == end || *it == '/') {
+                    SoraPath cwd(current());
+                    mDirs = cwd.mDirs;
+                    mAbsolute = true;
+                }
             }
             
             while(it != end) {
@@ -526,6 +533,13 @@ namespace sora {
             if(*it == '\\' || *it == '/') {
                 mAbsolute = true;
                 ++it;
+            } else if(*it == '.') {
+                ++it;
+                if(it == end || *it == '/') {
+                    SoraPath cwd(current());
+                    mDirs = cwd.mDirs;
+                    mAbsolute = true;
+                }
             }
 
             if(mAbsolute && it != end && (*it == '\\' || *it == '/')) {

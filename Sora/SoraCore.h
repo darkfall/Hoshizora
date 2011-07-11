@@ -292,6 +292,7 @@ namespace sora {
 
 		inline void _frameListenerStart();
 		inline void _frameListenerEnd();
+        inline void _modifierAdapterUpdate();
 		
 		bool bZBufferArea;
 		SoraShaderContext* __prevShader;

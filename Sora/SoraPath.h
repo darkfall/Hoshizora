@@ -166,6 +166,8 @@ namespace sora {
         
         static void listRoots(std::vector<std::string>& roots);
         
+        bool isEmpty() const;
+        
     protected:
         void parseUnix(const std::string& path);
         void parseWindows(const std::string& path);
@@ -195,6 +197,10 @@ namespace sora {
     
     inline bool SoraPath::isFile() const {
         return !mName.empty();
+    }
+    
+    inline bool SoraPath::isEmpty() const {
+        return mName.empty() && mDirs.empty();
     }
     
     inline std::string SoraPath::getFileName() const {

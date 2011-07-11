@@ -17,11 +17,11 @@ namespace sora {
 	
 	template<typename T>
 	class CoreTransformer {
-	public:
+	public:        
+        virtual CoreTransformer<T>* clone() = 0;
+        
 		virtual T slerp(T& t1, T& t2, float32 pos) = 0;
-		
-		virtual CoreTransformer<T>* copy() = 0;
-	};
+    };
 	
 	template<typename T>
 	class CoreLinearTransformer: public CoreTransformer<T> {
@@ -36,6 +36,10 @@ namespace sora {
 		CoreLinearTransformer<T>* copy() {
 			return new CoreLinearTransformer<T>;
 		}
+        
+        CoreTransformer<T>* clone() {
+            return new CoreLinearTransformer<T>(*this);
+        }
 	};
 	
 	/*
@@ -54,6 +58,10 @@ namespace sora {
 		CoreTrigTransformer<T>* copy() {
 			return new CoreTrigTransformer<T>;
 		}
+        
+        CoreTransformer<T>* clone() {
+            return new CoreTrigTransformer<T>(*this);
+        }
 	};
 	
 	/*
@@ -72,6 +80,10 @@ namespace sora {
 		CoreTrigTransformer<T>* copy() {
 			return new CoreTrigTransformer<T>;
 		}
+        
+        CoreTransformer<T>* clone() {
+            return new CoreTrigTransformerFull<T>(*this);
+        }
 	};
 	
 	template<typename T>

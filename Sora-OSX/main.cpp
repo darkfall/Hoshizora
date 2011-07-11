@@ -45,7 +45,16 @@
 
 #include "SoraStringTokenlizer.h"
 
+#include "SoraDirectoryIterator.h"
+
 int main(int argc, char* argv[]) {
+    
+    sora::SoraDirectoryIterator itDir("./");
+    while(!itDir.isEnd()) {
+        printf("        %s\n", itDir.name().c_str());
+        ++itDir;
+    }
+    
     
     sora::SoraStringTokenlizer tokens;
     tokens.parse(std::string("test, dsdsd, adsd;, ad-, asdsd2, adsd,   "), ",");;

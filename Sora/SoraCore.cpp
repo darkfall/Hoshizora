@@ -7,6 +7,7 @@
 #include "SoraMemoryFile.h"
 #include "SoraFolderResourceManager.h"
 #include "SoraInputQueue.h"
+#include "SoraModifierAdapter.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
@@ -173,6 +174,7 @@ namespace sora {
 				PROFILE("UPDATE_MAINWINDOW");
 #endif
 				mainWindow->updateFunc();
+                _modifierAdapterUpdate();
 			}
 			
 			{
@@ -1174,4 +1176,18 @@ namespace sora {
 		return mainCamera;
 	}
 
+    void SoraCore::_modifierAdapterUpdate() {
+        SoraAbstractModiferAdapter::Members modifierAdapaterList = SoraAbstractModiferAdapter::members;
+        
+        if(modifierAdapaterList.size() == 0) {
+            return;
+        }
+        
+        SoraAbstractModiferAdapter::Members::iterator itModifier = modifierAdapaterList.begin();
+        float32 dt = getDelta();
+        while(itModifier != modifierAdapaterList.end()) {
+            (*itModifier)->update(dt);
+            ++itModifier;
+        }
+    }
 } // namespace sora

@@ -46,7 +46,7 @@ struct LANM_NODE {
 
 class SoraSpriteAnimation;
 
-class SoraSpriteAnimationPacker {
+class SORA_API SoraSpriteAnimationPacker {
 public:
 	static int pack(const char* pstrScript, const char* pstrDest);
 	int pack2(const char* pstrTex, const char* dest);
@@ -82,7 +82,7 @@ private:
 		ANCHOR_MIDDLE=5,
 	} ANIMATION_SPRITE_ANCHOR;
 	
-class SoraSpriteAnimation: public SoraSprite {
+class SORA_API SoraSpriteAnimation: public SoraSprite {
 	friend class SoraSpriteAnimationPacker;
 	
 public:
