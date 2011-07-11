@@ -16,7 +16,7 @@
 namespace sora {
     
     /**
-     *  Adapter that helps apply image effect to any class
+     *  Adapter that helps apply modifiers to any class
      *  Such as SoraObject
      **/
     
@@ -39,7 +39,6 @@ namespace sora {
                     int32 result = (*itModifier)->update(dt);
                     (*itModifier)->modify(mObj);
                     
-                    printf("%d\n", result);
                     if(result == sora::ModifierUpdateEnd) {     
                         delete (*itModifier);
                         (*itModifier) = 0;
