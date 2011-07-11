@@ -7,7 +7,7 @@
 
 namespace sora {
 	
-	class SoraTimerEvent: public SoraEvent {
+	class SORA_API SoraTimerEvent: public SoraEvent {
 	public:
 		float32 getTime() const { return time; }
 		void setTime(float32 _time) { time = _time; }

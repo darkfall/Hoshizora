@@ -16,7 +16,7 @@
 
 namespace sora {
 
-	class SoraObject: public SoraEventHandler, public SoraNamedObject, public AutoListElement<SoraObject> {
+	class SORA_API SoraObject: public SoraEventHandler, public SoraNamedObject, public AutoListElement<SoraObject> {
 	public:
 		typedef std::list<SoraObject*> SUB_OBJECT_LIST;
 		

@@ -15,7 +15,7 @@
 namespace sora {
 	
 	template<class T>
-	class SoraSingleton {
+	class SORA_API SoraSingleton {
 	public:
 		static T* Instance() {
 			if(!pInstance) pInstance = new T();
@@ -48,7 +48,7 @@ namespace sora {
 	T* SoraSingleton<T>::pInstance = NULL;
     
     template<class T>
-    class SoraThreadLocalSingleton {
+    class SORA_API SoraThreadLocalSingleton {
     public:
         static T* Instance() {
             if(!pInstance) pInstance = new T();

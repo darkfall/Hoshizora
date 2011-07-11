@@ -22,7 +22,7 @@ namespace sora {
 		SORASOUND_FAILED_OPEN_MEMORY_FILE = -3,
 	};
     
-	class SoraMusicFile: public SoraFileBase, public SoraPlaybackEventHandler {
+	class SORA_API SoraMusicFile: public SoraFileBase, public SoraPlaybackEventHandler {
 	public:
 		virtual ~SoraMusicFile() {}
 		
@@ -59,7 +59,7 @@ namespace sora {
 		virtual bool isPlaying() const = 0;
 	};
 
-	class SoraSoundEffectFile: public SoraFileBase, public SoraPlaybackEventHandler {
+	class SORA_API SoraSoundEffectFile: public SoraFileBase, public SoraPlaybackEventHandler {
 	public:
 		virtual ~SoraSoundEffectFile() {}
 		

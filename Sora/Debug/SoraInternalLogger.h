@@ -22,7 +22,7 @@ namespace sora {
 		LOG_LEVEL_NOTICE = 4,
 	};
 
-	class SoraInternalLogger: public SoraSingleton<SoraInternalLogger>, public SoraEventHandler {
+	class SORA_API SoraInternalLogger: public SoraSingleton<SoraInternalLogger>, public SoraEventHandler {
 		friend class SoraSingleton<SoraInternalLogger>;
 		friend class SoraCore;
 		

@@ -29,7 +29,7 @@ namespace sora {
 		Class to hold a shader
 		Automatically created and managed by SoraShaderContext
 	*/
-	class SoraShader: public AutoListElement<SoraShader> {
+	class SORA_API SoraShader: public AutoListElement<SoraShader> {
 		friend class SoraShaderContext;
 		
 	public:
@@ -98,7 +98,7 @@ namespace sora {
         uint32 type;
 	};
 	
-	class SoraShaderContext {
+	class SORA_API SoraShaderContext {
 	public:
         typedef std::list<SoraShader*> ShaderList;
 

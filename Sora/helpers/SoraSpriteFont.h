@@ -14,7 +14,7 @@
 
 namespace sora {
 	
-	class SoraSpriteFont: public SoraFont {
+	class SORA_API SoraSpriteFont: public SoraFont {
 	public:
 		SoraSpriteFont(const SoraWString& font, const SoraString& sequance, int32 width, int32 height);
 		~SoraSpriteFont();

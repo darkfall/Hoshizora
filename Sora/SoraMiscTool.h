@@ -14,7 +14,7 @@
 
 namespace sora {
 	
-	class SoraMiscTool {
+	class SORA_API SoraMiscTool {
 	public:
 		virtual ~SoraMiscTool() {}
 		

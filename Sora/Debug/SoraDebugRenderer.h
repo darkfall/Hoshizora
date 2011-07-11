@@ -19,7 +19,7 @@
 
 namespace sora {
 	
-	class SoraDebugRenderer: public SoraSingleton<SoraDebugRenderer> {
+	class SORA_API SoraDebugRenderer: public SoraSingleton<SoraDebugRenderer> {
 		friend class SoraSingleton<SoraDebugRenderer>;
 		
 	public:

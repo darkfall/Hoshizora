@@ -10,7 +10,7 @@ namespace sora {
 
 	typedef ulong32 HSORARESOURCE;
 	
-	class SoraResourceManager {
+	class SORA_API SoraResourceManager {
 	public:
 		virtual ~SoraResourceManager() {}
 

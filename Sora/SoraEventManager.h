@@ -28,7 +28,7 @@ namespace sora {
 	 ALL Timered events would be deleted automatically except those passed by yourself
 	 ****/
 		
-	class SoraEventHandlerPack: public SoraEventHandler {
+	class SORA_API SoraEventHandlerPack: public SoraEventHandler {
 		friend class SoraEventManager;
 		
 	public:

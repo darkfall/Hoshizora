@@ -18,7 +18,7 @@
 
 namespace sora {
 	
-	class SoraEnvValues: public SoraSingleton<SoraEnvValues> {
+	class SORA_API SoraEnvValues: public SoraSingleton<SoraEnvValues> {
 		friend class SoraSingleton<SoraEnvValues>;
 		friend class EnvValuesExporter;
 		

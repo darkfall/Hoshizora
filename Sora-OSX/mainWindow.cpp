@@ -39,6 +39,9 @@
 #include "SoraGifSprite/SoraGifSprite.h"
 #include "SoraGenericObjects/SoraCustomShapeSprite.h"
 
+#include "../MEAD/bulletLuaExport.h"
+#include "SoraSoundManager/SoundManagerLuaExport.h"
+
 
 #include "SoraThread/SoraThreadPool.h"
 
@@ -111,7 +114,7 @@ bool mainWindow::updateFunc() {
 	if(sora->keyDown(SORA_KEY_P))
 		sora::SoraBGMManager::Instance()->playBGS(L"click_08.wav", 1, 1, 1.f, 0.5f);;
      
-	
+    mead::globalBulletManagerUpdate();
 //    sora::SORA->setCursor("./icon.icns");
     return false;
 }
@@ -148,23 +151,9 @@ bool mainWindow::renderFunc() {
         customSprite->render();
         
 	//pCanvas->render();
-        
-        std::string renderMode;
-        switch(customSprite->getRenderMode()) {
-            case sora::SORA_LINE:
-                renderMode = "Line"; break;
-            case sora::SORA_TRIANGLES:
-                renderMode = "Triangle"; break;
-            case sora::SORA_TRIANGLES_STRIP:
-                renderMode = "Triangle_strip"; break;
-            case sora::SORA_TRIANGLES_FAN:
-                renderMode = "Triangle_fan"; break;
-            case sora::SORA_QUAD:
-                renderMode = "Quad"; break;
-        }
-        pFont->print(0.f, getWindowHeight()-80.f, sora::FONT_ALIGNMENT_LEFT, L"VertexCount: %d, RenderMode: %s", customSprite->getVertexCount(), renderMode.c_str());
 
 	}
+	obj.update(sora::SORA->getDelta());
 	
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
@@ -262,6 +251,11 @@ void mainWindow::init() {
     
     sora::SoraPhysicalWorld::Instance()->initBox2DWorld(0.f, 1.f);
 
+    mead::exportBulletManager(obj.getState());
+    mead::exportGlobal(obj.getState());
+    sora::exportSoundManager(obj.getState());
+    mead::globalBulletManagerInit();
+    obj.doScript(L"mybullettest.lua");
     
     sora::SoraThreadTask task;
     task.setAsMemberFunc(&mainWindow::test, this);

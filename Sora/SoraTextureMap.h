@@ -19,7 +19,7 @@ namespace sora {
 	/*
 	 texture map poll for faster texture access
 	 */
-	class SoraTextureMap: public SoraSingleton<SoraTextureMap> {
+	class SORA_API SoraTextureMap: public SoraSingleton<SoraTextureMap> {
 		friend class SoraSingleton<SoraTextureMap>;
 
 	public:

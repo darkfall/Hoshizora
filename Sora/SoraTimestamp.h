@@ -11,7 +11,7 @@
 
 namespace sora {
 
-class SoraTimestamp
+class SORA_API SoraTimestamp
 	/// A Timestamp stores a monotonic time value
 	/// with (theoretical) microseconds resolution.
 	/// Timestamps can be compared with each other

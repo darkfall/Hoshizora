@@ -11,7 +11,7 @@ namespace sora {
 		SoraTextureDataRef(): texData(0) {}
 	};
 	
-	class SoraTexture {
+	class SORA_API SoraTexture {
 	public:
 		SoraTexture();
 		SoraTexture(ulong32 id, int32 width, int32 height, int32 oriwidth, int32 oriheight);

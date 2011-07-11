@@ -20,7 +20,7 @@ namespace sora {
 	/*
 		Base class for canvas which render things onto a texture, using RenderTarget
 	 */
-	class SoraBaseCanvas: public SoraObject {
+	class SORA_API SoraBaseCanvas: public SoraObject {
 	public:
         SoraBaseCanvas(int32 width, int32 height, bool bDepthBuffer=true);
         virtual ~SoraBaseCanvas();

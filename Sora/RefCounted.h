@@ -10,55 +10,38 @@
 #ifndef SORA_REF_COUNTED_H_
 #define SORA_REF_COUNTED_H_
 
+#include "uncopyable.h"
+
 namespace sora {
 	
-	class RefCounted {
-	public:
-		RefCounted(): refCount(NULL) {}
-		virtual ~RefCounted() {
-			ref_dec();
-			if(ref_count() == 0)
-				release();
-		}
-		
-		virtual void release() {
-		};
-		
-		void ref_reassign(const RefCounted& ref) {
-			ref_dec();
-			refCount = ref.refCount;
-		}
-		
-		void ref_init() {
-			if(refCount)
-				delete refCount;
-			refCount = new size_t;
-			*refCount = 1;
-		}
-		
-		void ref_dec() {
-			--*refCount;
-			if(*refCount == 0) {
-				delete refCount;
-				refCount = NULL;
-				
-				release();
-			}
-		}
-		
-		void ref_inc() {
-			++*refCount;
-		}
-		
-		size_t ref_count() {
-			if(refCount)
-				return *refCount;
-			return 0;
-		}
-		
-	private:
-		size_t* refCount;
-	};
+	class SoraRefCounted: uncopyable {
+    public:
+        SoraRefCounted(): counter(1) {}
+        
+        void duplicate() const;
+        void release() const;
+        int refCount() const;
+        
+    protected:
+        virtual ~SoraRefCounted() {}
+        
+    private:
+        mutable int counter;
+    };
+    
+    inline int SoraRefCounted::refCount() const {
+        return counter;
+    }
+    
+    inline void SoraRefCounted::duplicate() const {
+        ++counter;
+    }
+    
+    inline void SoraRefCounted::release() const {
+        if(--counter == 0)
+            delete this;
+    }
+    
 	
 } // namespace sora
 

@@ -57,7 +57,7 @@ namespace sora {
 		IMAGE_EFFECT_PINGPONG_REVERSE = 11,
 	};
 	
-	class SoraImageEffect: public SoraModifier<SoraSprite> {
+	class SORA_API SoraImageEffect: public SoraModifier<SoraSprite> {
 	public:
 		SoraImageEffect();
 		SoraImageEffect(CoreTransformer<CoreTransform>* transformer);
@@ -129,7 +129,7 @@ namespace sora {
 		bool bInternalTransformer;
 	};
 	
-	class SoraImageEffectList: public SoraImageEffect {
+	class SORA_API SoraImageEffectList: public SoraImageEffect {
 	public:
 		SoraImageEffectList();
 		SoraImageEffectList(IMAGE_EFFECT_MODE mode);
@@ -159,7 +159,7 @@ namespace sora {
 		IMAGE_EFFECT_MODE mListMode;
 	};
 
-	class SoraImageEffectFade: public SoraImageEffect {
+	class SORA_API SoraImageEffectFade: public SoraImageEffect {
 	public:
 		SoraImageEffectFade(float32 src, float32 dst, float32 time, 
 							IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
@@ -168,7 +168,7 @@ namespace sora {
 		virtual void modify(SoraSprite* sprite);
 	};
 
-	class SoraImageEffectShake: public SoraImageEffect {
+	class SORA_API SoraImageEffectShake: public SoraImageEffect {
 	public:
 		SoraImageEffectShake(float32 mV, float32 mH, float32 time, 
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
@@ -177,7 +177,7 @@ namespace sora {
 		virtual void modify(SoraSprite* sprite);
 	};
 
-	class SoraImageEffectScale: public SoraImageEffect {
+	class SORA_API SoraImageEffectScale: public SoraImageEffect {
 	public:
 		SoraImageEffectScale(float32 src, float32 dst, float32 time, 
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
@@ -189,7 +189,7 @@ namespace sora {
 		virtual void modify(SoraSprite* sprite);
 	};
 
-	class SoraImageEffectTransitions: public SoraImageEffect {
+	class SORA_API SoraImageEffectTransitions: public SoraImageEffect {
 	public:
 		SoraImageEffectTransitions(float32 sx, float32 sy, float32 sz, float32 dx, float32 dy, float32 dz, float32 time, 
 								   IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
@@ -201,7 +201,7 @@ namespace sora {
 		virtual void modify(SoraSprite* sprite);
 	};
 	
-	class SoraImageEffectColorTransitions: public SoraImageEffect {
+	class SORA_API SoraImageEffectColorTransitions: public SoraImageEffect {
 	public:
 		SoraImageEffectColorTransitions(const SoraColorRGBA& start, const SoraColorRGBA& end, float32 time, 
 										IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
@@ -213,7 +213,7 @@ namespace sora {
 		virtual void modify(SoraSprite* sprite);
 	};
 	
-	class SoraImageEffectRotation: public SoraImageEffect {
+	class SORA_API SoraImageEffectRotation: public SoraImageEffect {
 	public:
 		SoraImageEffectRotation(float32 start, float32 end, float32 time,
 								IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,

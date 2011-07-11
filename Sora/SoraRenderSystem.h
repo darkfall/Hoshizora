@@ -26,7 +26,7 @@ namespace sora {
 		Abstarct Render System Base
 	*/
 
-	class SoraRenderSystem {
+	class SORA_API SoraRenderSystem {
 	public:
 		virtual bool update() = 0;
 

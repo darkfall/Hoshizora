@@ -98,6 +98,23 @@ namespace sora {
 		float32 value = min + (unitFloat * (max - min));
 		return value;
 	}
+    
+    inline uint16 flipBytes(uint16 value) {
+        return ((value >> 8) && 0x00FF) | ((value << 8) & 0xFF00);
+    }
+    
+    inline uint32 flipBytes(uint32 value) {
+        return ((value >> 24) & 0x000000FF) | ((value >> 8) & 0x0000FF00) |
+            ((value << 8) & 0x00FF0000) | ((value << 24) & 0xFF000000);
+    }
+    
+    inline int16 flipBytes(int16 value) {
+        return int16(flipBytes(uint16(value)));
+    }
+    
+    inline int32 flipBytes(int32 value) {
+        return int32(flipBytes(uint32(value)));
+    }
 } // namespace sora
 
 #endif

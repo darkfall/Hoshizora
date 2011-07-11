@@ -21,7 +21,7 @@
 
 namespace sora {
 	
-	class SoraFolderResourceManager: public SoraResourceManager {
+	class SORA_API SoraFolderResourceManager: public SoraResourceManager {
 	public:
 		SoraFolderResourceManager();
 		~SoraFolderResourceManager() {}

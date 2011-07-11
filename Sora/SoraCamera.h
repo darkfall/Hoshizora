@@ -17,7 +17,7 @@
 
 namespace sora {
 	
-	class SoraCamera: public SoraObject {
+	class SORA_API SoraCamera: public SoraObject {
 	public:
 		SoraCamera(float32 x, float32 y);
 		~SoraCamera();

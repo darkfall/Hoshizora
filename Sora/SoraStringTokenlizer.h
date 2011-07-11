@@ -15,7 +15,7 @@
 
 namespace sora {
     
-    class SoraStringTokenlizer {
+    class SORA_API SoraStringTokenlizer {
     public:
         typedef std::vector<std::string> TokenContainer;
         typedef TokenContainer::iterator Iterator;

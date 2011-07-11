@@ -26,7 +26,7 @@ namespace sora {
 #define sora_safe_delete(ptr) { if(ptr) delete ptr; ptr=0; }
 	
 	template<typename T>
-	class SoraAutoPtr {
+	class SORA_API SoraAutoPtr {
 	public:
 		SoraAutoPtr(): ptr(NULL), refCount(NULL) {}
 		SoraAutoPtr(T* t): ptr(t), refCount(NULL) { reference_count_init(); }
@@ -159,6 +159,10 @@ namespace sora {
 			return 0;
 		}
 		
+        operator T* () {
+            return ptr;
+        }
+        
 		bool operator == (const SoraAutoPtr<T>& rhs) {
 			return ptr == rhs.ptr;
 		}

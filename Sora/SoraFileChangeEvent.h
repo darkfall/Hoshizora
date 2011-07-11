@@ -19,7 +19,7 @@
 
 namespace sora {
 		
-	class SoraFileChangeEvent: public SoraEvent {
+	class SORA_API SoraFileChangeEvent: public SoraEvent {
 	public:
 		SoraFileChangeEvent() {}
 		SoraFileChangeEvent(const SoraWString& file): mChangedFile(file) {}
@@ -40,7 +40,7 @@ namespace sora {
 		SoraWString mChangedFile;
 	};
 	
-	class SoraFileChangeEventPublisher: public SoraEventHandler {
+	class SORA_API SoraFileChangeEventPublisher: public SoraEventHandler {
 	public:
 		SoraFileChangeEventPublisher();
 		

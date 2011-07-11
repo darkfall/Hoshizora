@@ -17,7 +17,7 @@ namespace sora {
 		return ident; \
 	} \
     
-	class SoraEvent {
+	class SORA_API SoraEvent {
 	protected:
 		virtual ~SoraEvent() {};
         
@@ -56,7 +56,7 @@ namespace sora {
 #endif
 	};
 
-	class SoraHandlerFunctionBase {
+	class SORA_API SoraHandlerFunctionBase {
 	public:
 		virtual ~SoraHandlerFunctionBase() {};
 		void exec(SoraEvent* event) { call(event);}
@@ -95,7 +95,7 @@ namespace sora {
 		EventFunc _func;
 	};
 
-	class SoraEventHandler {
+	class SORA_API SoraEventHandler {
 	public:
 		~SoraEventHandler();
 		void handleEvent(SoraEvent*);

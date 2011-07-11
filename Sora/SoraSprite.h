@@ -49,7 +49,7 @@ namespace sora {
 		int				blend;
 	};
 
-	class SoraSprite: public SoraObject {
+	class SORA_API SoraSprite: public SoraObject {
 	public:
         SoraSprite(HSORATEXTURE tex);
         SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 width, float32 height);

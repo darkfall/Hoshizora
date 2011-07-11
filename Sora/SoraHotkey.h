@@ -18,7 +18,7 @@ namespace sora {
     
     class SoraHotkey;
     
-    class SoraHotkeyEvent: public SoraEvent {
+    class SORA_API SoraHotkeyEvent: public SoraEvent {
     public:  
         SoraHotkeyEvent(): mHotkey(NULL) {}
         SoraHotkeyEvent(SoraHotkey* hkey, int32 hid): mHotkey(hkey), mHotkeyId(hid) {}
@@ -38,7 +38,7 @@ namespace sora {
         int32 mHotkeyId;
     };
     
-    class SoraHotkey {
+    class SORA_API SoraHotkey {
     public:
         SoraHotkey();
         SoraHotkey(int32 key, bool ctrlFlag=false, bool altFlag=false, bool shiftFlag=false);

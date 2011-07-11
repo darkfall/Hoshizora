@@ -35,7 +35,7 @@
 #include "SoraStringConv.h"
 
 namespace sora {
-	class SoraException {
+	class SORA_API SoraException {
 	public:
 		SoraException(const SoraString& mssg, const SoraString& function, const SoraString& file, const SoraString& line):
 				mMssg(mssg), mFunction(function), mFile(file), mLine(line) {}

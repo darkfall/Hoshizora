@@ -36,7 +36,7 @@ namespace sora {
 	//	std::wstring mItemName;
 	};
 	
-	class SoraMenuBarMenu {
+	class SORA_API SoraMenuBarMenu {
 		friend class SoraMenuBar;
 
 	public:
@@ -86,7 +86,7 @@ namespace sora {
 		bool mActive;
 	};
 	
-	class SoraMenuBarItem: public SoraEventHandler {
+	class SORA_API SoraMenuBarItem: public SoraEventHandler {
 		friend class SoraMenuBarMenu;
 		
 	public:
@@ -106,7 +106,7 @@ namespace sora {
 		SoraEventHandler* mEventHandler;
 	};
 	
-	class SoraMenuBar: public SoraSingleton<SoraMenuBar>, public SoraEventHandler {
+	class SORA_API SoraMenuBar: public SoraSingleton<SoraMenuBar>, public SoraEventHandler {
     protected:
         friend class SoraSingleton<SoraMenuBar>;
         

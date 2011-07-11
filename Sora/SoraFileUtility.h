@@ -7,7 +7,7 @@
 
 namespace sora {
 
-	class SoraFileUtility {
+	class SORA_API SoraFileUtility {
 	public:
 		static bool fileExists(const SoraWString& filepath);
 		

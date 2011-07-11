@@ -15,7 +15,7 @@
 
 namespace sora {
 	
-	class SoraAssetManager: public SoraSingleton<SoraAssetManager> {
+	class SORA_API SoraAssetManager: public SoraSingleton<SoraAssetManager> {
 	protected:
 		friend class SoraSingleton<SoraAssetManager>;
 		

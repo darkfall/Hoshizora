@@ -17,7 +17,7 @@
 
 namespace sora {
 	
-	class SoraDllHelper: public SoraSingleton<SoraDllHelper> {
+	class SORA_API SoraDllHelper: public SoraSingleton<SoraDllHelper> {
 		friend class SoraSingleton<SoraDllHelper>;
 		
 		SoraDllHelper() {}

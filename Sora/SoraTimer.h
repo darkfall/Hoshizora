@@ -16,7 +16,7 @@ namespace sora {
 	
 #define SORA_FPS_INFINITE 1000
 	
-	class SoraTimer {
+	class SORA_API SoraTimer {
 	public:
 		virtual void setFPS(int32 fps) = 0;
 		virtual float32 getDelta() = 0;

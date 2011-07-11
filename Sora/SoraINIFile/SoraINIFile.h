@@ -38,7 +38,7 @@ struct INISector {
 	SoraString name;
 };
 
-class SoraINIFile: public SoraFileBase {
+class SORA_API SoraINIFile: public SoraFileBase {
 public:
 	typedef vector<INISector>::iterator itSector;
 

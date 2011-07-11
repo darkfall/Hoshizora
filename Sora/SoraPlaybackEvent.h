@@ -27,7 +27,7 @@ namespace sora {
         SORAPB_EV_PLAY_STOPPED,
     };
     
-    class SoraPlaybackEvent: public SoraEvent {
+    class SORA_API SoraPlaybackEvent: public SoraEvent {
     public:
         SoraPlaybackEvent(): eventType(SORAPB_EV_NULL) {}
         SoraPlaybackEvent(SORA_PLAYBACK_EVENT event): eventType(event) {
@@ -57,7 +57,7 @@ namespace sora {
         SORA_PLAYBACK_EVENT eventType;
     };
     
-    class SoraPlaybackEventHandler: public SoraEventHandler {
+    class SORA_API SoraPlaybackEventHandler: public SoraEventHandler {
     public:
         SoraPlaybackEventHandler(): pEventHandler(NULL), mEventPublish(false) {
 			event = new SoraPlaybackEvent;

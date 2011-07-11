@@ -21,7 +21,7 @@ namespace sora {
 		Abstract Sound Layer
 		*** Due to stream concerns, memory won't be freed by CORE, so you should handle passed memories by yourself
 	 */
-	class SoraSoundSystem {
+	class SORA_API SoraSoundSystem {
 	public:
 		virtual ~SoraSoundSystem() {}
 		

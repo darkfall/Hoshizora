@@ -22,7 +22,7 @@ namespace sora {
      * Modified for Hoshizora by Griffin Bu
      **/
     
-    class SoraAny {
+    class SORA_API SoraAny {
     public:
         SoraAny():
         mContent(NULL) {

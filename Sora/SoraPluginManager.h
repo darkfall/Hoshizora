@@ -15,7 +15,7 @@
 
 namespace sora {
 
-class SoraPluginManager {
+class SORA_API SoraPluginManager {
 	typedef std::list<SoraPlugin*>::iterator itPlugin;
 	
 public:

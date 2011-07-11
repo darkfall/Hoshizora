@@ -14,7 +14,7 @@ namespace sora {
 	
 #if defined(SORA_USE_RTTI)
 
-	class SoraTypeInfo {
+	class SORA_API SoraTypeInfo {
 	public:
 		explicit SoraTypeInfo(const std::type_info& info) : _typeInfo(info) {};
 
@@ -28,7 +28,7 @@ namespace sora {
 	
 #else 
 	
-	class SoraTypeInfo {
+	class SORA_API SoraTypeInfo {
 	public:
 		explicit SoraTypeInfo(stringId info): _typeInfo(info) {};
 		

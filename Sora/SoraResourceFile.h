@@ -20,7 +20,7 @@ namespace sora {
 	 *	this class can also request for a resource file directly
 	 **/
 	
-	class SoraResourceFileAuto {
+	class SORA_API SoraResourceFileAuto {
 	public:
 		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
 		SoraResourceFileAuto(const SoraWString& file, bool retain=false);

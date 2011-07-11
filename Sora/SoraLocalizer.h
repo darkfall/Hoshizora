@@ -36,7 +36,7 @@ namespace sora {
 		"GameTitle.png"="GameTitle_CHN.png" etc
 	 */
 			
-	class SoraLocalizer: public SoraSingleton<SoraLocalizer> {
+	class SORA_API SoraLocalizer: public SoraSingleton<SoraLocalizer> {
 		friend class SoraSingleton<SoraLocalizer>;
 		
 	public:

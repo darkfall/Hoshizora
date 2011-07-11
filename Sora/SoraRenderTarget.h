@@ -13,7 +13,7 @@
 
 namespace sora {
 
-class SoraRenderTarget {
+class SORA_API SoraRenderTarget {
 public:
 	SoraRenderTarget(ulong32 _w, ulong32 _h, bool _zbuffer):
 	w(_w), h(_h), zbuffer(_zbuffer) {}

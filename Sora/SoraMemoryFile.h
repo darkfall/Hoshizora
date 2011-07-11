@@ -19,8 +19,7 @@
 namespace sora {
 	
 	/* memory file with auto data count reference */
-	class SoraMemoryFile: 
-				public RefCounted,
+	class SORA_API SoraMemoryFile: 
 				public SoraMemoryBuffer,
 				public SoraNamedObject,
 				public AutoListElement<SoraMemoryFile> {
@@ -29,7 +28,9 @@ namespace sora {
 		SoraMemoryFile(stringId filename): dataPtr(NULL) { read(filename); }
 		SoraMemoryFile(): dataPtr(NULL) {}
 					
-		virtual ~SoraMemoryFile() {	}	
+		virtual ~SoraMemoryFile() {
+            release();
+        }	
 					
 		void release() {
 			if(dataPtr) {
@@ -50,9 +51,7 @@ namespace sora {
 			if(pData && size != 0) {
 				memoryFile.set(pData, size);
 				setName(str2id(filename));
-				
-				ref_init();
-			}
+            }
 		}
 					
 		void read(stringId filename) {
@@ -62,15 +61,7 @@ namespace sora {
 		ulong32 size() {
 			return memoryFile.size();
 		}
-		
-		SoraMemoryFile& operator=(const SoraMemoryFile& rhs) {
-			ref_reassign(rhs);
-			
-			memoryFile = rhs.memoryFile;
-			setName(rhs.getName());
-			return *this;
-		}
-					
+                        
 		virtual void unserialize(SoraStream& bufferStream) {
 			SoraNamedObject::unserialize(bufferStream);
 			read(getName());

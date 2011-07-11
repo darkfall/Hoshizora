@@ -13,7 +13,7 @@
 
 namespace sora {
     
-    class SoraFileStreamBasic {
+    class SORA_API SoraFileStreamBasic {
     public:
         enum SeekType {
             Begin = 0,
@@ -48,7 +48,7 @@ namespace sora {
     /*
      Win32 implemention
      */
-    class SoraFileStreamWin32: public SoraFileStreamBasic {
+    class SORA_API SoraFileStreamWin32: public SoraFileStreamBasic {
     public:
         SoraFileStreamWin32();
         virtual ~SoraFileStreamWin32();
@@ -73,7 +73,7 @@ namespace sora {
     /*
      POSIX implemention
      */
-    class SoraFileStreamPosix: public SoraFileStreamBasic {
+    class SORA_API SoraFileStreamPosix: public SoraFileStreamBasic {
         SoraFileStreamPosix();
         virtual ~SoraFileStreamPosix();
         virtual bool open(const std::string& filename, bool canwrite = false, bool append = false, bool nocache = false);

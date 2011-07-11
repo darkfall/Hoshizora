@@ -17,7 +17,7 @@ namespace sora {
 		Abstract Font Class provides Font related APIs
 	*/
 
-	class SoraFont {
+	class SORA_API SoraFont {
 	public:
 		virtual void	render(float32 x, float32 y, const wchar_t* text, bool hcenter = false, bool vcenter = false) = 0;
 		// render with alignments

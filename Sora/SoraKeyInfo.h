@@ -239,7 +239,7 @@ namespace sora {
 		return chr;
 	}
 	
-	class SoraKeyEvent: public SoraEvent {
+	class SORA_API SoraKeyEvent: public SoraEvent {
 	public:
 		int		type;			// event type
 		int		key;			// key code

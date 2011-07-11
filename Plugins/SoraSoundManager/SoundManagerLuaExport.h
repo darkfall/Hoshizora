@@ -8,7 +8,7 @@
  */
 
 #ifndef SOUND_MANAGER_LUA_EXPORT_H_
-#define SOUND_MANAGER_LuA_EXPORT_H_
+#define SOUND_MANAGER_LUA_EXPORT_H_
 
 #include "SoraLua/luaclass.h"
 #include "SoraBGMManager.h"

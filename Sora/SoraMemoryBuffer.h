@@ -23,7 +23,7 @@ namespace sora {
 	/*
 	 memory buffer using autoptr
 	 */
-	class SoraMemoryBuffer {
+	class SORA_API SoraMemoryBuffer {
 	public:
 		SoraMemoryBuffer();
 		SoraMemoryBuffer(void* pData, ulong32 _length);

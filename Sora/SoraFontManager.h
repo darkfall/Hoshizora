@@ -11,7 +11,7 @@ namespace sora {
 	*/
 	class SoraFont;
 
-	class SoraFontManager {
+	class SORA_API SoraFontManager {
 	public:
 
 		// this API both loads fonts in memory and hard drive

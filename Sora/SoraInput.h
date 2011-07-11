@@ -11,7 +11,7 @@ namespace sora {
 	*/
 
 	/* << interface >> */
-	class SoraInput {
+	class SORA_API SoraInput {
 	public:
 		// inputs
 		virtual void	getMousePos(float32 *x, float32 *y) = 0;

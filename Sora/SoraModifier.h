@@ -16,7 +16,7 @@ namespace sora {
      **/
     
     template<class MT>
-    class SoraModifier {
+    class SORA_API SoraModifier {
     public:
         virtual void modify(MT* object) = 0;
     };

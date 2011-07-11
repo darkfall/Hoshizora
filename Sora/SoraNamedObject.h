@@ -27,7 +27,7 @@ namespace sora {
 	/*
 	 Base class for all objects that have a name
 	 */
-	class SoraNamedObject: public Serializable {
+	class SORA_API SoraNamedObject: public Serializable {
 	public:
 		SoraNamedObject(): name(0) {}
 		SoraNamedObject(const SoraString& _name): name(str2id(_name)) {}
@@ -56,7 +56,7 @@ namespace sora {
 		stringId name;
 	};
 	
-	class SoraNamedObjectList: public Serializable {
+	class SORA_API SoraNamedObjectList: public Serializable {
 	public:
 		typedef std::list<SoraNamedObject*> OBJ_LIST;
 

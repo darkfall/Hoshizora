@@ -21,7 +21,7 @@
 
 namespace sora {
 	
-	class SoraConsoleEvent: public SoraEvent {
+	class SORA_API SoraConsoleEvent: public SoraEvent {
 	public:
 		SoraConsoleEvent() {}
 		SoraConsoleEvent(const std::string& cmd, const char* params):
@@ -51,7 +51,7 @@ namespace sora {
 		std::string mResults;
 	};
 	
-	class SoraConsole: public SoraSingleton<SoraConsole>, public SoraEventHandler {
+	class SORA_API SoraConsole: public SoraSingleton<SoraConsole>, public SoraEventHandler {
 	protected:
 		friend class SoraSingleton<SoraConsole>;
 		

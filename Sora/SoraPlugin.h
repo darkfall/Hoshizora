@@ -15,7 +15,7 @@
 
 namespace sora {
 
-	class SoraPlugin: public uncopyable {
+	class SORA_API SoraPlugin: public uncopyable {
 	public:	
         SoraPlugin() {}
         virtual ~SoraPlugin() {}
