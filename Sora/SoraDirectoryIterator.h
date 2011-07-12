@@ -27,7 +27,7 @@ namespace sora {
         SoraDirectoryIterator(const SoraPath& path);
         ~SoraDirectoryIterator();
         
-        const std::string& name() const;
+        std::string name() const;
         const SoraPath& path() const;
         
         bool isEnd() const;
@@ -45,7 +45,7 @@ namespace sora {
         bool mIsEnd;
     };
     
-    inline const std::string& SoraDirectoryIterator::name() const {
+    inline std::string SoraDirectoryIterator::name() const {
         return mPath.getFileName();
     }
     

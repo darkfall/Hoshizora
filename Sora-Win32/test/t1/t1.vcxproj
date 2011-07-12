@@ -413,7 +413,6 @@
     <ClInclude Include="..\..\..\Sora\helpers\SoraAssetManager.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraBooter.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraDllHelper.h" />
-    <ClInclude Include="..\..\..\Sora\helpers\SoraEnvHelper.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraInputSimulator.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraMenuBar.h" />
     <ClInclude Include="..\..\..\Sora\helpers\SoraZSorter.h" />
@@ -458,6 +457,9 @@
     <ClInclude Include="..\..\..\Sora\SoraConstantStrings.h" />
     <ClInclude Include="..\..\..\Sora\SoraCore.h" />
     <ClInclude Include="..\..\..\Sora\SoraDelegate.h" />
+    <ClInclude Include="..\..\..\Sora\SoraDirectoryIterator.h" />
+    <ClInclude Include="..\..\..\Sora\SoraDirectoryIteratorImplUnix.h" />
+    <ClInclude Include="..\..\..\Sora\SoraDirectoryIteratorImplWindows.h" />
     <ClInclude Include="..\..\..\Sora\SoraEnvValues.h" />
     <ClInclude Include="..\..\..\Sora\SoraEvent.h" />
     <ClInclude Include="..\..\..\Sora\SoraEventManager.h" />
@@ -480,7 +482,12 @@
     <ClInclude Include="..\..\..\Sora\SoraMath.h" />
     <ClInclude Include="..\..\..\Sora\SoraMemoryBuffer.h" />
     <ClInclude Include="..\..\..\Sora\SoraMiscTool.h" />
+    <ClInclude Include="..\..\..\Sora\SoraModifierAdapter.h" />
+    <ClInclude Include="..\..\..\Sora\SoraMoviePlayer.h" />
+    <ClInclude Include="..\..\..\Sora\SoraMoviePlayerNull.h" />
     <ClInclude Include="..\..\..\Sora\SoraNamedObject.h" />
+    <ClInclude Include="..\..\..\Sora\SoraNotification.h" />
+    <ClInclude Include="..\..\..\Sora\SoraNotificationCenter.h" />
     <ClInclude Include="..\..\..\Sora\SoraObject.h" />
     <ClInclude Include="..\..\..\Sora\SoraPath.h" />
     <ClInclude Include="..\..\..\Sora\SoraPlatform.h" />
@@ -724,7 +731,6 @@
     <ClCompile Include="..\..\..\Sora\helpers\SoraAssetManager.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraBooter.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraDllHelper.cpp" />
-    <ClCompile Include="..\..\..\Sora\helpers\SoraEnvHelper.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraInputSimulator.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraMenuBar.cpp" />
     <ClCompile Include="..\..\..\Sora\helpers\SoraZSorter.cpp" />
@@ -739,6 +745,7 @@
     <ClCompile Include="..\..\..\Sora\SoraCanvas.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraCore.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraDelegate.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraDirectoryIterator.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEnvValues.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEventManager.cpp" />
@@ -751,6 +758,9 @@
     <ClCompile Include="..\..\..\Sora\SoraInputQueue.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraLocalizer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraMemoryBuffer.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraModifierAdapter.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraNotification.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraNotificationCenter.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraObject.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPath.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPluginManager.cpp" />

@@ -172,6 +172,7 @@ namespace sora {
                 return true;
 			}
 		}
+		return false;
 	}
 	
 	SoraImageEffectList::SoraImageEffectList(IMAGE_EFFECT_MODE mode) {
@@ -203,6 +204,7 @@ namespace sora {
             t_curr = rhs.t_curr;
             t_transformer = rhs.t_transformer->clone();
         }
+		return *this;
     }
 											 
 	SoraImageEffectList::SoraImageEffectList() {

@@ -1338,9 +1338,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.h">
       <Filter>Plugins\SpriteAnimation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\helpers\SoraEnvHelper.h">
-      <Filter>头文件\helpers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\helpers\SoraAssetManager.h">
       <Filter>头文件\helpers</Filter>
     </ClInclude>
@@ -1471,6 +1468,30 @@
       <Filter>头文件\helpers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraPath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraNotification.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraModifierAdapter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraNotificationCenter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraMoviePlayerNull.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraMoviePlayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraDirectoryIteratorImplUnix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraDirectoryIterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraDirectoryIteratorImplWindows.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -2144,9 +2165,6 @@
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.cpp">
       <Filter>Plugins\SpriteAnimation</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\helpers\SoraEnvHelper.cpp">
-      <Filter>头文件\helpers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\helpers\SoraAssetManager.cpp">
       <Filter>头文件\helpers</Filter>
     </ClCompile>
@@ -2241,6 +2259,18 @@
       <Filter>Plugins\SoraThread</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraPath.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraNotification.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraModifierAdapter.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraNotificationCenter.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraDirectoryIterator.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>

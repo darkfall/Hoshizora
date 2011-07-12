@@ -39,6 +39,7 @@
 #include "mainWindow.h"
 
 #include "SoraPath.h"
+#include "SoraDirectoryIterator.h"
 
 int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,
@@ -62,17 +63,11 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 //	sora->registerSoundSystem(new sora::SoraAudiereSoundSystem);
 	
-	sora::SoraPath path = "./test.cpp";
-	sora::SORA->messageBox(sora::vamssg("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
-		path.home().c_str(),
-		path.null().c_str(),
-		path.temp().c_str(),
-		path.current().c_str(),
-		path.toString().c_str(),
-		path.toString(sora::SoraPath::PATH_UNIX).c_str(),
-		path.getBaseName().c_str(),
-		path.getDevice().c_str(),
-		path.absolute().toString().c_str()), "test", MB_OK);
+	sora::SoraDirectoryIterator it = "./";
+	while(!it.isEnd()) {
+		sora::DebugPtr->log(it.name());
+		++it;
+	}
 	sora->setFPS(60);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");

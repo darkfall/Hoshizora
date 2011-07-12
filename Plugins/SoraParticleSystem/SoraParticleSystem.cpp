@@ -314,7 +314,7 @@ namespace sora {
 		
 		for(PARTICLES::iterator p=particles.begin(); p!=particles.end(); ++p) {
 			if(!p->bDead) {
-				float32 scale = (1.f - p->position.z / fMaxDistance) + 0.01;
+				float32 scale = (1.f - p->position.z / fMaxDistance) + 0.01f;
 				if(scale > 1.f) scale = 1.f;
 				else if(scale < 0.f) scale = 0.f;
 				pSprite->setColor( CSETA(p->dwCurrColor.GetHWColor(), p->dwCurrColor.a * 255 * scale ) );

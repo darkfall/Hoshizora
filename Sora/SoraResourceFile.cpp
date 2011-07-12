@@ -49,6 +49,7 @@ namespace sora {
 		if(!mData)
 			DebugPtr->log(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
         mRetain = false;
+		return *this;
     }
     
     void* SoraResourceFileAuto::data() const {

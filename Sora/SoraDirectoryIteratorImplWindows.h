@@ -22,11 +22,12 @@ namespace sora {
         SoraDirectoryIteratorImpl(const std::string& path) {
             SoraPath p(path);
             p.makeDirectory();
-            std::string findPath = p.toString();
+            std::string findPath = p.toString()+"*";
             
             mFH = FindFirstFileA(findPath.c_str(), &mFD);
             if(mFH == INVALID_HANDLE_VALUE) {
-                if(GetLastError() != ERROR_NO_MORE_FILES) 
+				DWORD error = GetLastError();
+                if(error != ERROR_NO_MORE_FILES) 
                     THROW_SORA_EXCEPTION("Error when iterating files");
             } else {
                 mCurrent = mFD.cFileName;
@@ -46,7 +47,7 @@ namespace sora {
         const std::string& get() const;
         const std::string& next() {
             do {
-                if(FindNextFile(mFH, &mFD) != 0) {
+                if(FindNextFileA(mFH, &mFD) != 0) {
                     mCurrent = mFD.cFileName;
                 } else 
                     mCurrent.clear();
@@ -58,7 +59,7 @@ namespace sora {
         
     private:
         HANDLE mFH;
-        WIN32_FIND_DATA mFD;
+        WIN32_FIND_DATAA mFD;
         std::string mCurrent;
         int mRC;
     };

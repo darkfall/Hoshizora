@@ -403,7 +403,7 @@ namespace sora {
     }
     
     std::string SoraPath::getEnv(const std::string& env) {
-        getEnvImpl(env);
+        return getEnvImpl(env);
     }
     
     std::string SoraPath::current() {
@@ -491,6 +491,8 @@ namespace sora {
                 if(it == end || *it == '/') {
                     SoraPath cwd(home());
                     mDirs = cwd.mDirs;
+					mDevice = cwd.mDevice;
+					mNode = cwd.mNode;
                     mAbsolute = true;
                 } else 
                     --it;
@@ -499,6 +501,8 @@ namespace sora {
                 if(it == end || *it == '/') {
                     SoraPath cwd(current());
                     mDirs = cwd.mDirs;
+					mDevice = cwd.mDevice;
+					mNode = cwd.mNode;
                     mAbsolute = true;
                 }
             }
@@ -538,6 +542,8 @@ namespace sora {
                 if(it == end || *it == '/') {
                     SoraPath cwd(current());
                     mDirs = cwd.mDirs;
+					mDevice = cwd.mDevice;
+					mNode = cwd.mNode;
                     mAbsolute = true;
                 }
             }
