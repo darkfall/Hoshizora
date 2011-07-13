@@ -51,7 +51,9 @@ namespace sora {
         GIF_FRAME_CONT mFrames;
         
         int32 mCurrFrame;
-        int32 mFrameCount, mFrameRate;
+        int32 mFrameRate;
+        float32 mFrameInterval;
+        float32 mFrameCount;
 	};
 	
 } // namespace sora

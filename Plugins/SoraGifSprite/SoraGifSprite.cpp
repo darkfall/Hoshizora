@@ -200,6 +200,7 @@ namespace sora {
     
     void SoraGifSprite::setFrameRate(int32 frameRate) {
         mFrameRate = frameRate;
+        mFrameInterval = 1.f / frameRate;
         mFrameCount = 0;
     }
     
@@ -213,10 +214,10 @@ namespace sora {
         if(mFrames.size() == 0)
             return 0;
         
-        ++mFrameCount;
-        if(mFrameCount >= mFrameRate) {
+        mFrameCount += dt;
+        if(mFrameCount >= mFrameInterval) {
             toNextFrame();
-            mFrameCount = 0;
+            mFrameCount = 0.f;
         }
         
         return 0;

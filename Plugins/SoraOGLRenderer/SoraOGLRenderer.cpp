@@ -315,6 +315,7 @@ namespace sora{
                 glfwTerminate();
                 THROW_SORA_EXCEPTION("Error initializing GLFW");
             } else {
+                glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 0);
                 if(!glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
                                   , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN)) {
                     glfwTerminate();

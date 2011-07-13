@@ -42,7 +42,7 @@ public:
 	SoraString getWindowId() { return "MainWindow"; }
 	
 	bool isWindowSubWindow() { return false; }	
-	bool isWindowed() { return false; }
+	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
     
     void test(void* arg);

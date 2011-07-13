@@ -146,14 +146,14 @@ bool mainWindow::renderFunc() {
 	//	ps->render();
 	}
         
-        customSprite->render();
+      //  customSprite->render();
         
 	//pCanvas->render();
-
+        gifSprite->update(sora::SORA->getDelta());
+        gifSprite->render();
 	}
 	//obj.update(sora::SORA->getDelta());
-	pSpr->render(400.f, 300.f);
-    
+ 
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 	pFont->print(0.f, getWindowHeight()-60.f, sora::FONT_ALIGNMENT_LEFT, L"Alive Particles: %d, total %d", ps->size(), ps->getTotalParticleAlive());
@@ -249,7 +249,8 @@ void mainWindow::init() {
 	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.0f); 
     
     gifSprite = new sora::SoraGifSprite;
-    gifSprite->load(L"giftest.gif");
+    gifSprite->load(L"gm_logo.gif");
+    gifSprite->setFrameRate(24);
 	gifSprite->setPosition(100.f, 100.f);
 	
 	sora::SORA_EVENT_MANAGER->registerFileChangeEventHandler(L"test.lua", this);
