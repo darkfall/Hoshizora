@@ -234,10 +234,6 @@ void mainWindow::init() {
 	pSpr = sora::SORA->createSprite(L"background.png");
     customSprite = new sora::SoraCustomShapeSprite(pSpr, sora::SORA_TRIANGLES);
     
-    sora::SoraModiferAdapter<sora::SoraSprite>* effects = new sora::SoraModiferAdapter<sora::SoraSprite>(pSpr);
-    effects->add(new sora::IETransitions(0.f, 0.f, 600.f, 600.f, 10.f, sora::IMAGE_EFFECT_ONCE));
-    
-    
     
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");

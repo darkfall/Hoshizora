@@ -137,7 +137,7 @@ namespace sora {
 		return ~crc;
 	}
 	
-	inline uint64 crc32(const SoraString& str) {
+	inline uint64 crc32(const std::string& str) {
 		uint64 crc = (uint64)~0;
 		for(size_t i=0; i<str.size(); ++i) {
 			_CRC32_(crc, str[i]);
@@ -145,7 +145,7 @@ namespace sora {
 		return ~crc;
 	}
 	
-	inline uint64 crc32(const SoraWString& str) {
+	inline uint64 crc32(const std::wstring& str) {
 		uint64 crc = (uint64)~0;
 		for(size_t i=0; i<str.size(); ++i) {
 			_CRC32_(crc, str[i]);

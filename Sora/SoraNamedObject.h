@@ -29,16 +29,16 @@ namespace sora {
 	 */
 	class SORA_API SoraNamedObject: public Serializable {
 	public:
-		SoraNamedObject(): name(0) {}
-		SoraNamedObject(const SoraString& _name): name(str2id(_name)) {}
-		SoraNamedObject(stringId sid): name(sid) {}
+		SoraNamedObject(): mName(0) {}
+		SoraNamedObject(const SoraString& _name): mName(str2id(_name)) {}
+		SoraNamedObject(stringId sid): mName(sid) {}
 		virtual ~SoraNamedObject() {}
 		
-		void setName(stringId n) { name = n; }
-		stringId getName() const { return name; }
+		void setName(stringId n) { mName = n; }
+		stringId getName() const { return mName; }
 		
 		virtual void serialize(SoraStream& bufferStream) {
-            std::string strData = id2str(name).c_str();
+            std::string strData = id2str(mName).c_str();
 			bufferStream<<strData;
 		}
 		virtual void unserialize(SoraStream& bufferStream) {
@@ -53,7 +53,7 @@ namespace sora {
 		virtual bool serializable() { return true; }
 		
 	protected:
-		stringId name;
+		stringId mName;
 	};
 	
 	class SORA_API SoraNamedObjectList: public Serializable {

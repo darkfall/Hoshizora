@@ -1,18 +1,25 @@
 #include "SoraObject.h"
-#include "hash.h"
-#include "stringId.h"
+#include "SoraHandleManager.h"
+#include "SoraObjectHandle.h"
 
 namespace sora {
 
-	SoraObject::SoraObject(): mType(0), mParent(0), mNameHash(0), mPosx(0.f), mPosy(0.f) {
+	SoraObject::SoraObject(): mType(0), mParent(0), mPosx(0.f), mPosy(0.f) {
+        mUniqueId = GetNextUniqueId();
+        mHandleId = FindFreeHandleSlot();
+        
+        // register this object to ObjectHandles
+        SoraObjectHandle handle(this);
 	}
 
 	SoraObject::~SoraObject(){
 		if(mParent) mParent->del(this);
+        
+        FreeHandleSlot(mHandleId);
 	}
 	
 	uint32 SoraObject::update(float32 dt){
-		SUB_OBJECT_LIST::iterator itObj = mSubObjs.begin();
+		SubObjectList::iterator itObj = mSubObjs.begin();
 		while(itObj != mSubObjs.end()) {
 			(*itObj)->update(dt);
 			++itObj;
@@ -22,7 +29,7 @@ namespace sora {
 	}
 	
 	void SoraObject::render() {
-		SUB_OBJECT_LIST::iterator itObj = mSubObjs.begin();
+		SubObjectList::iterator itObj = mSubObjs.begin();
 		while(itObj != mSubObjs.end()) {
 			(*itObj)->render();
 			++itObj;
@@ -71,7 +78,7 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
         o->mParent = 0;
 	}
 	
-	SoraObject::SUB_OBJECT_LIST SoraObject::getObjList() const {
+	SoraObject::SubObjectList SoraObject::getObjList() const {
 		return mSubObjs;
 	}
 	
@@ -80,19 +87,22 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 	}
 
 	SoraObject* SoraObject::getObjByName(const SoraString& n) {
-		if(mName.compare(n) == 0) {
+        return getObjByName(str2id(n));
+	}
+    
+    SoraObject* SoraObject::getObjByName(stringId sid) {        
+		if(mName == sid) {
 			return this;
 		}
 		
-		SUB_OBJECT_LIST::iterator itObj = mSubObjs.begin();
-		stringId id = str2id(n);
+		SubObjectList::iterator itObj = mSubObjs.begin();
 		while(itObj != mSubObjs.end()) {
-			if((*itObj)->getName() == id)
+			if((*itObj)->getName() == sid)
 				return *itObj;
 			++itObj;
 		}
 		return NULL;
-	}
+    }
 	
 	uint32 SoraObject::getType() const { 
 		return mType;
@@ -102,6 +112,12 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 		mType = t; 
 	}
 
-	
+    SoraHandle SoraObject::getHandleId() const {
+        return mHandleId;
+    }
+    
+    SoraUniqueId SoraObject::getUniqueId() const {
+        return mUniqueId;
+    }
 
 } // namespace sora

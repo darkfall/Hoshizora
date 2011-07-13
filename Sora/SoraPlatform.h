@@ -140,6 +140,11 @@ namespace sora {
 		SORA_TRIANGLES_STRIP	= 0x0004,
 		SORA_QUAD				= 0x0005,
 	};
+    
+    
+    
+    typedef int32 SoraHandle;
+    typedef int32 SoraUniqueId;
 } // namespace sora
 
 
@@ -207,6 +212,10 @@ namespace sora {
 typedef std::string SoraString;
 typedef std::wstring SoraWString;
 
+/*#include "SoraString.h"
+namespace sora {
+    typedef SoraString SoraWString;
+}*/
 #define HAS_WSTRING
 
 #else

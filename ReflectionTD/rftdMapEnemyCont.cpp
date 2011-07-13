@@ -211,7 +211,7 @@ namespace rftd {
 		}
 		
 		if(state == MAP_STATE_SPAWNING) {
-			SUB_OBJECT_LIST::iterator itObj = mSubObjs.begin();
+			SubObjectList::iterator itObj = mSubObjs.begin();
 			while(itObj != mSubObjs.end()) {
 				rftdEnemyObject* enemyObject = static_cast<rftdEnemyObject*>(*itObj);
 				if(enemyObject != NULL && enemyObject->isFinished()) {

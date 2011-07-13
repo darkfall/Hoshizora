@@ -95,6 +95,7 @@ namespace sora {
 		
 		SoraShader* shader = createShader(file, entry, type);
         if(shader) {
+            shader->setName(GetUniqueStringId(file));
             shader->bInternal = true;
             attachShader(shader);
             return shader;

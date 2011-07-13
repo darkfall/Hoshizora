@@ -24,15 +24,15 @@ namespace sora {
 		
 	public:
         // explicit add strings, no hash implied, be care
-        inline void addString(const SoraString& str, stringId sid) {
+        inline void addString(const std::string& str, stringId sid) {
             strings[sid] = s2ws(str);
         }
         
-        inline void addString(const SoraWString& str, stringId sid) {
+        inline void addString(const std::wstring& str, stringId sid) {
             strings[sid] = str;
         }
         
-		inline stringId getStringId(const SoraString& str) {
+		inline stringId getStringId(const std::string& str) {
 			stringId sid = crc32(str);
 			if(strings.find(sid) == strings.end()) {
 				strings[sid] = s2ws(str);
@@ -40,11 +40,11 @@ namespace sora {
 			return sid;
 		}
 		
-		static stringId getStringIdNoCache(const SoraString& str) {
+		static stringId getStringIdNoCache(const std::string& str) {
 			return crc32(str);
 		}
 		
-		inline stringId getStringId(const SoraWString& str) {
+		inline stringId getStringId(const std::wstring& str) {
 			stringId sid = crc32(str);
 
 			if(strings.find(sid) == strings.end()) {
@@ -53,28 +53,28 @@ namespace sora {
 			return sid;
 		}
 		
-		static stringId getStringIdNoCache(const SoraWString& str) {
+		static stringId getStringIdNoCache(const std::wstring& str) {
 			return crc32(str);
 		}
 		
-		inline SoraWString getStringByIdW(stringId sid) {
+		inline std::wstring getStringByIdW(stringId sid) {
 			if(sid == 0) return NULL;
 			std::wstring str = strings[sid];
 			if(str.size() != 0)
 				return str;
-			return L"\0";
+			return std::wstring();;
 		}
 		
-		inline SoraString getStringById(stringId sid) {
+		inline std::string getStringById(stringId sid) {
 			if(sid == 0) return NULL;
 			std::string str = ws2s(strings[sid]);
 			if(str.size() != 0)
 				return str;
-			return "\0";
+			return std::string();
 		}
 		
 	private:
-		typedef hash_map<stringId, SoraWString> STR_MAP;
+		typedef hash_map<stringId, std::wstring> STR_MAP;
 		STR_MAP strings;
 	};
 	
@@ -83,6 +83,22 @@ namespace sora {
 	#define id2strw(id) SORA_STR_MANAGER->getStringByIdW(id)
 	#define id2str(id) SORA_STR_MANAGER->getStringById(id)
 	#define str2idnc(str) SORA_STR_MANAGER->getStringIdNoCache(str)
+    
+    static stringId GetUniqueStringId(const std::string& name) {
+        return SORA_STR_MANAGER->getStringId(name);
+    }
+    
+    static stringId GetUniqueStringId(const std::wstring& name) {
+        return SORA_STR_MANAGER->getStringId(name);
+    }
+    
+    static SoraString GetStringByUniqueId(stringId sid) {
+        return SORA_STR_MANAGER->getStringById(sid);
+    }
+    
+    static SoraWString GetStringByUniqueIdW(stringId sid) {
+        return SORA_STR_MANAGER->getStringByIdW(sid);
+    }
 } // namespace sora
 
 #endif

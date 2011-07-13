@@ -29,7 +29,7 @@ namespace sora {
 
 	std::string ws2s(const std::wstring& ws);
 	std::wstring s2ws(const std::string& s);
-	
+    
 	template<typename T>
 	std::string anyToString(const T& t, int precision) {
 		std::ostringstream str;
