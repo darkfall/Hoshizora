@@ -79,6 +79,10 @@ namespace sora {
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
 		
+		void onExtensionStateChanged(int32 extension, bool state, int32 param);
+        void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z);
+        void renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z);
+		
 	private:
 		inline int32 _modeToDXMode(int32 mode);
 		

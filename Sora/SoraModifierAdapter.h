@@ -60,6 +60,8 @@ namespace sora {
         }
         
     protected:
+        SoraModiferAdapter();
+        
         typedef std::list<SoraModifier<T>*> ModifierList;
 		ModifierList mModifiers;
         T* mObj;

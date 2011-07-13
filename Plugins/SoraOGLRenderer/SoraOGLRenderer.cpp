@@ -20,6 +20,8 @@
 #include "SoraCore.h"
 #include "SoraInfiniteRendererCallback.h"
 
+#include "SoraRenderSystemExtension.h"
+
 #include "SoraOGLKeyPoll.h"
 
 #ifdef SORA_USE_SHADER
@@ -62,10 +64,12 @@ namespace sora{
 		currShader = 0;
 		iFrameStart = 1;
 		CurBlendMode = 0;
+        
+        // FSAA params must be set by users before creating the main window
+        SoraRenderSystemExtension::Instance()->registerExtension(SORA_EXTENSION_FSAA);
 	}
 
 	SoraOGLRenderer::~SoraOGLRenderer() {
-	//	shutdown();
 	}
 
 	void SoraOGLRenderer::shutdown() {
@@ -102,7 +106,6 @@ namespace sora{
 
 		//glEnable(GL_SCISSOR_BIT);
         //glDepthMask(GL_FALSE);
-
 
  //       glEnable(GL_CULL_FACE);
 //		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
@@ -301,8 +304,20 @@ namespace sora{
 
 	SoraWindowHandle SoraOGLRenderer::createWindow(SoraWindowInfoBase* windowInfo) {
 		glfwInit();
-		glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
-					   , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN);
+        
+        int32 FSAASamples = SoraRenderSystemExtension::Instance()->getExtensionParam(SORA_EXTENSION_FSAA);
+        
+        glfwOpenWindowHint(GLFW_FSAA_SAMPLES, FSAASamples);
+        
+		if(!glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
+                           , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN)) {
+            glfwTerminate();
+            THROW_SORA_EXCEPTION("Error initializing GLFW");
+        }
+        if(glfwGetWindowParam(GLFW_FSAA_SAMPLES) != FSAASamples) {
+            THROW_SORA_EXCEPTION(vamssg("Error creating window with FSAA sample = %d", FSAASamples));
+        }
+        
 		glfwSetWindowTitle(windowInfo->getWindowName().c_str());
 		if(windowInfo->getWindowPosX() != 0.f && windowInfo->getWindowPosY() != 0.f)
 			glfwSetWindowPos(windowInfo->getWindowPosX(), windowInfo->getWindowPosY());
@@ -736,8 +751,7 @@ namespace sora{
 	}
 
 	bool SoraOGLRenderer::isActive() {
-		//return pHGE->System_GetState(HGE_ACTIVE);
-		return true;
+		return glfwGetWindowParam(GLFW_ACTIVE);
 	}
 
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
@@ -869,5 +883,69 @@ namespace sora{
         osx_setAppCursor(cursor);
 #endif
     }
+    
+    void SoraOGLRenderer::onExtensionStateChanged(int32 extension, bool state, int32 param) {
+        // multisampling
+        if(extension == SORA_EXTENSION_FSAA) {
+            if(state) {
+                glEnable(GL_MULTISAMPLE);
+            } else {
+                glDisable(GL_MULTISAMPLE);
+            }
+        }
+    }
+    
+    void SoraOGLRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
+		Rect4V rect;
+		
+		if(fWidth != y2-y1 && fWidth != x2-x1) {
+			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
+			
+			rect.x1 = x1; rect.y1 = y1;
+			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
+			rect.x4 = x2; rect.y4 = y2;
+			rect.x3 = x2+fWidth*cosf(rotAng); rect.y3 = y2+fWidth*sinf(rotAng);
+		} else {
+			rect.x1 = x1; rect.y1 = y1;
+			rect.x2 = x2; rect.y2 = y1;
+			rect.x3 = x2; rect.y3 = y2;
+			rect.x4 = x1; rect.y4 = y2;
+		}
+		sora::SoraQuad quad;
+		
+		quad.tex = NULL;
+		
+		quad.v[0].x   = rect.x1;
+		quad.v[0].y   = rect.y1;
+		quad.v[0].col = color;
+		
+		quad.v[1].x   = rect.x2;
+		quad.v[1].y   = rect.y2;
+		quad.v[1].col = color;
+		
+		quad.v[2].x   = rect.x3;
+		quad.v[2].y   = rect.y3;
+		quad.v[2].col = color;
+		
+		quad.v[3].x   = rect.x4;
+		quad.v[3].y   = rect.y4;
+		quad.v[3].col = color;
+		
+		int i;
+		for (i = 0; i < 4; ++i) {
+			quad.v[i].z = z;
+		}
+		
+		quad.blend = BLEND_DEFAULT;
+		
+		renderQuad(quad);
+	}
+	
+	void SoraOGLRenderer::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+		renderRect(x1, y1, x2, y1+1.f, 1.f, color, z);
+		renderRect(x2, y1, x2+1.f, y2, 1.f, color, z);
+		renderRect(x2, y2, x1, y2+1.f, 1.f, color, z);
+		renderRect(x1, y2, x1+1.f, y1, 1.f, color, z);
+	}
 
 } // namespace sora

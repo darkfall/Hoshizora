@@ -1,17 +1,16 @@
 /*
- *  SoraRenderSystem.cpp
+ *  SoraGenericObject.cpp
  *  Sora
  *
- *  Created by Griffin Bu on 6/1/11.
+ *  Created by Griffin Bu on 6/29/11.
  *  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
  *
  */
 
-
-#include "SoraRenderSystem.h"
-#include "Rect4V.h"
+#include "SoraActor.h"
 
 namespace sora {
+
 
 
 } // namespace sora

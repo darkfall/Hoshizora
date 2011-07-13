@@ -32,6 +32,7 @@
 #include "MemoryUsage.h"
 #include "Rect4V.h"
 #include "SoraCamera.h"
+#include "SoraRenderSystemExtension.h"
 
 extern "C" {
 #include "Random/SFMT.h"
@@ -496,6 +497,34 @@ namespace sora {
 		if(pFontManager) delete pFontManager;
 		pFontManager = fontManager;
 	}
+    
+    SoraRenderSystem* SoraCore::getRenderSystem() const {
+        return pRenderSystem;
+    }
+    
+    SoraInput* SoraCore::getInput() const {
+        return pInput;
+    }
+    
+    SoraMiscTool* SoraCore::getMiscTool() const {
+        return pMiscTool;
+    }
+    
+    SoraPluginManager* SoraCore::getPluginManager() const {
+        return pPluginManager;
+    }
+    
+    SoraTimer* SoraCore::getTimer() const {
+        return pTimer;
+    }
+    
+    SoraFontManager* SoraCore::getFontManager() const {
+        return pFontManager;
+    }
+    
+    SoraSoundSystem* SoraCore::getSoundSystem() const {
+        return pSoundSystem;
+    }
 
 	float32 SoraCore::getFPS() {
 		return pTimer->getFPS();
@@ -1189,5 +1218,24 @@ namespace sora {
             (*itModifier)->update(dt);
             ++itModifier;
         }
+    }
+    
+    void  SoraCore::enableRenderSystemExtension(int32 extesion) {
+        EnableRenderSystemExtension((ExtensionFeature)extesion);
+    }
+    
+    void  SoraCore::disableRenderSystemExtension(int32 extension) {
+        DisableRenderSystemExtension((ExtensionFeature)extension);
+    }
+    void  SoraCore::setRenderSystemExtensionParam(int32 extension, int32 param) {
+        SetRenderSystemExtensionParam((ExtensionFeature)extension, param);
+    }
+    
+    int32 SoraCore::getRenderSystemExtensionParam(int32 extension) {
+        return GetRenderSystemExtensionParam((ExtensionFeature)extension);
+    }
+    
+    bool SoraCore::isRenderSystemExtensionEnabled(int32 ext) {
+        return IsRenderSystemExtensionEnabled((ExtensionFeature)ext);
     }
 } // namespace sora

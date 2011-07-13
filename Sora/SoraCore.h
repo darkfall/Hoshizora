@@ -56,13 +56,27 @@ namespace sora {
 		void registerSoundSystem	(SoraSoundSystem* pSoundSystem);
 		
 		void registerMiscTool		(SoraMiscTool* pMiscTool);
-		void registerPluginManager (SoraPluginManager* pPluginManager);
+		void registerPluginManager  (SoraPluginManager* pPluginManager);
 		void registerTimer			(SoraTimer* pTimer);
+        
+        SoraRenderSystem*   getRenderSystem() const;
+        SoraInput*          getInput() const;
+        SoraMiscTool*       getMiscTool() const;
+        SoraPluginManager*  getPluginManager() const;
+        SoraTimer*          getTimer() const;
+        SoraFontManager*    getFontManager() const;
+        SoraSoundSystem*    getSoundSystem() const;
 
-		void registerPlugin		(SoraPlugin* pPlugin);
-		void unistallPlugin		(SoraPlugin* pPlugin);
+		void registerPlugin         (SoraPlugin* pPlugin);
+		void unistallPlugin         (SoraPlugin* pPlugin);
 		void unistallPluginS		(const SoraString& sPluginName);
 		SoraPlugin* getPlugin		(const SoraString& sPluginName);
+        
+        bool  isRenderSystemExtensionEnabled(int32 extension);
+        void  enableRenderSystemExtension(int32 extesion);
+        void  disableRenderSystemExtension(int32 extension);
+        void  setRenderSystemExtensionParam(int32 extension, int32 param);
+        int32 getRenderSystemExtensionParam(int32 extension);
 
 		void	setFPS(int32 fps);
 		float32 getFPS();
@@ -78,9 +92,9 @@ namespace sora {
 		void beginScene(ulong32 c=0, ulong32 h=0, bool clear=true);
 		void endScene();
 
-		HSORATARGET createTarget(int width, int height, bool zbuffer=true);
-		void	freeTarget(ulong32 t);
-		HSORATEXTURE getTargetTexture(ulong32 t);
+		HSORATARGET     createTarget(int width, int height, bool zbuffer=true);
+		void            freeTarget(ulong32 t);
+		HSORATEXTURE    getTargetTexture(ulong32 t);
 
 		HSORATEXTURE createTexture	(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
 		HSORATEXTURE createTextureWH(int32 w, int32 h);
@@ -95,10 +109,10 @@ namespace sora {
 		void		 releaseTexture(HSORATEXTURE pTexture);
         void         clearTextureMap();
 
-        SoraShaderContext* createShaderContext();
-		void attachShaderContext(SoraShaderContext* context);
-		void detachShaderContext();
-        SoraShader* createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
+        SoraShaderContext*  createShaderContext();
+		void                attachShaderContext(SoraShaderContext* context);
+		void                detachShaderContext();
+        SoraShader*         createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
 
 		SoraSprite* createSprite (const SoraWString& sPath);
 
@@ -153,13 +167,13 @@ namespace sora {
 		void	freeResourceFile		(void* p);
 		void	enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
 	
-		bool isMainWindowSet() { return bMainWindowSet; }
+		bool    isMainWindowSet() { return bMainWindowSet; }
 		ulong32 createWindow(SoraWindowInfoBase* info);
-		void setWindowSize(int32 w, int32 h);
-		void setWindowTitle(const SoraWString& title);
-		void setWindowPos(int32 px, int32 py);
-		void setFullscreen(bool flag);
-		bool isFullscreen();
+		void    setWindowSize(int32 w, int32 h);
+		void    setWindowTitle(const SoraWString& title);
+		void    setWindowPos(int32 px, int32 py);
+		void    setFullscreen(bool flag);
+		bool    isFullscreen();
 
 		// inputs
 		void	getMousePos(float32 *x, float32 *y);
@@ -193,7 +207,7 @@ namespace sora {
 
 		int32	messageBox	(const SoraString& sMssg, const SoraString& sTitle, int32 iCode);
 		int32	messageBoxW (const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode);
-		void	log		(const SoraString& sMssg, int32 level=LOG_LEVEL_NORMAL);
+		void	log         (const SoraString& sMssg, int32 level=LOG_LEVEL_NORMAL);
 		void	logw		(const SoraWString& sMssg, int32 level=LOG_LEVEL_NORMAL);
 		void	logf		(const char* str, ...);
 		
@@ -203,10 +217,10 @@ namespace sora {
 		SoraFont* createFont(const SoraWString& fontName, int size);
 		void releaseFont(SoraFont* font);
 		
-		SoraMusicFile* SORACALL			createMusicFile(const SoraWString& musicName, bool bStream=true);
-		SoraSoundEffectFile* SORACALL	createSoundEffectFile(const SoraWString& se);
-        SoraMusicFile* SORACALL			createMusicFile(bool bStream=false);
-        SoraSoundEffectFile* SORACALL	createSoundEffectFile();
+		SoraMusicFile* 			createMusicFile(const SoraWString& musicName, bool bStream=true);
+		SoraSoundEffectFile* 	createSoundEffectFile(const SoraWString& se);
+        SoraMusicFile* 			createMusicFile(bool bStream=false);
+        SoraSoundEffectFile* 	createSoundEffectFile();
         
         void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
         void execute(const SoraString& appPath, const SoraString& args);
@@ -234,9 +248,9 @@ namespace sora {
 		
 		uint64 getEngineMemoryUsage();
 		
-		SoraConsole* getConsole() const;
-        void enableMenuBar(bool flag);
-		SoraMenuBar* getMenuBar() const;
+		SoraConsole*    getConsole() const;
+        void            enableMenuBar(bool flag);
+		SoraMenuBar*    getMenuBar() const;
 		
 		void setSystemFont(const wchar_t* font, int32 fontSize);
 		

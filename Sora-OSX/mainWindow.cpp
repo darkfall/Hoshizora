@@ -94,7 +94,7 @@ bool mainWindow::updateFunc() {
 	if(sora->keyDown(SORA_KEY_ESCAPE))
 		sora->shutDown();
 	if(sora->keyDown(SORA_KEY_DOWN)) {
-		++posy;
+		pSpr->setScale(pSpr->getHScale()+0.01, pSpr->getVScale()+0.01);
 		
 	//	sora::SORA->releaseFont(pFont);
 	//	pFont->setFontSize(pFont->getFontSize()+1);
@@ -125,8 +125,6 @@ bool mainWindow::renderFunc() {
 
 	//pSpr->setColor(0xFFFFFFFF);
     //pSpr->render4V(100.f, 200.f, 700.f, 200.f, 700.f, 600.f, 100.f, 600.f);
-    pSpr->setColor(0xFFFF0000);
-    pSpr->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f);
     
 	//sora::SORA->endZBufferSort();
 
@@ -153,8 +151,8 @@ bool mainWindow::renderFunc() {
 	//pCanvas->render();
 
 	}
-	obj.update(sora::SORA->getDelta());
-	pSpr->render();
+	//obj.update(sora::SORA->getDelta());
+	pSpr->render(400.f, 300.f);
     
 	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
@@ -231,7 +229,10 @@ void mainWindow::init() {
 	
 	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
 	
-	pSpr = sora::SORA->createSprite(L"background.png");
+	pSpr = sora::SORA->createSprite(L"ArmA2-v1.02-MSAA-01x.png");
+    
+    pSpr->setCenter(pSpr->getSpriteWidth()/2, pSpr->getSpriteHeight()/2);
+    //pSpr->setScale(3.f, 3.f);
     customSprite = new sora::SoraCustomShapeSprite(pSpr, sora::SORA_TRIANGLES);
     
     

@@ -105,6 +105,7 @@ namespace sora {
 	#define GET_ENV_DATA(name)			SoraEnvValues::Instance()->getData(name)
 	
 	#define REMOVE_ENV_DATA(name)	SoraEnvValues::Instance()->removeData(name)
+    
 } // namespace sora
 
 
