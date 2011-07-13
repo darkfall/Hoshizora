@@ -224,6 +224,9 @@ namespace sora {
     }
     
     void SoraGifSprite::setFrame(int32 frameIndex) {
+        if(mCurrFrame == frameIndex)
+            return;
+        
         if(frameIndex < 0)
             frameIndex = mFrames.size() - 1;
         else if(frameIndex >= mFrames.size())
