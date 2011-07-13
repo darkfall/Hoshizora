@@ -470,6 +470,7 @@
     <ClInclude Include="..\..\..\Sora\SoraFolderResourceManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraFont.h" />
     <ClInclude Include="..\..\..\Sora\SoraFontManager.h" />
+    <ClInclude Include="..\..\..\Sora\SoraHandleManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraHotkey.h" />
     <ClInclude Include="..\..\..\Sora\SoraImageEffect.h" />
     <ClInclude Include="..\..\..\Sora\SoraInfiniteRendererCallback.h" />
@@ -489,6 +490,7 @@
     <ClInclude Include="..\..\..\Sora\SoraNotification.h" />
     <ClInclude Include="..\..\..\Sora\SoraNotificationCenter.h" />
     <ClInclude Include="..\..\..\Sora\SoraObject.h" />
+    <ClInclude Include="..\..\..\Sora\SoraObjectHandle.h" />
     <ClInclude Include="..\..\..\Sora\SoraPath.h" />
     <ClInclude Include="..\..\..\Sora\SoraPlatform.h" />
     <ClInclude Include="..\..\..\Sora\SoraPlugin.h" />
@@ -753,6 +755,7 @@
     <ClCompile Include="..\..\..\Sora\SoraFileChangeEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFileUtility.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraHandleManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraHotKey.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraInputQueue.cpp" />
@@ -762,6 +765,7 @@
     <ClCompile Include="..\..\..\Sora\SoraNotification.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraNotificationCenter.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraObject.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraObjectHandle.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPath.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPluginManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp" />

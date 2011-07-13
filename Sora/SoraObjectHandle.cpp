@@ -37,6 +37,7 @@ namespace sora {
             m_HandleId = rhs.m_HandleId;
             m_UniqueId = rhs.m_UniqueId;
         }
+		return *this;
     }
     
     bool SoraObjectHandle::operator==(const SoraObjectHandle& rhs) const {
