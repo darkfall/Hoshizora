@@ -516,7 +516,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "413"
          endingLineNumber = "413"
-         landmarkName = "SoraOGLRenderer::bindTexture(SoraTexture* tex)"
+         landmarkName = "SoraOGLRenderer::_glTextureGetHeight(ulong32 tex, bool bOriginal)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -530,7 +530,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "452"
          endingLineNumber = "452"
-         landmarkName = "SoraOGLRenderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap)"
+         landmarkName = "SoraOGLRenderer::createTexture(const SoraWString&amp; sTexturePath, bool bMipmap)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -761,9 +761,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "868"
-         endingLineNumber = "868"
-         landmarkName = "SoraOGLRenderer::setIcon(const SoraString&amp; icon)"
-         landmarkType = "5">
+         endingLineNumber = "868">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

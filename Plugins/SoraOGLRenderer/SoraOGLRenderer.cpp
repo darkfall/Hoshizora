@@ -311,8 +311,16 @@ namespace sora{
         
 		if(!glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
                            , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN)) {
-            glfwTerminate();
-            THROW_SORA_EXCEPTION("Error initializing GLFW");
+            if(FSAASamples == 0) {
+                glfwTerminate();
+                THROW_SORA_EXCEPTION("Error initializing GLFW");
+            } else {
+                if(!glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
+                                  , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN)) {
+                    glfwTerminate();
+                    THROW_SORA_EXCEPTION("Error initializing GLFW");
+                }
+            }
         }
         if(glfwGetWindowParam(GLFW_FSAA_SAMPLES) != FSAASamples) {
             THROW_SORA_EXCEPTION(vamssg("Error creating window with FSAA sample = %d", FSAASamples));
