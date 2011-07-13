@@ -496,6 +496,7 @@
     <ClInclude Include="..\..\..\Sora\SoraPlugin.h" />
     <ClInclude Include="..\..\..\Sora\SoraPluginManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderSystem.h" />
+    <ClInclude Include="..\..\..\Sora\SoraRenderSystemExtension.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderTarget.h" />
     <ClInclude Include="..\..\..\Sora\SoraResourceFile.h" />
     <ClInclude Include="..\..\..\Sora\SoraResourceFileFinder.h" />
@@ -769,6 +770,7 @@
     <ClCompile Include="..\..\..\Sora\SoraPath.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPluginManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraRenderSystemExtension.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraResourceFileFinder.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraShader.cpp" />

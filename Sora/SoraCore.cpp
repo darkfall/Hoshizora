@@ -416,7 +416,7 @@ namespace sora {
 	void SoraCore::setWindowSize(int32 w, int32 h) {
 		assert(bInitialized == true);
 		if(SoraConsole::Instance()->getWidth() == iScreenWidth-2) {
-			SoraConsole::Instance()->setSize(w-2, SoraConsole::Instance()->getHeight()>h?h:SoraConsole::Instance()->getHeight());
+			SoraConsole::Instance()->setSize(w-2.f, SoraConsole::Instance()->getHeight()>h?h:SoraConsole::Instance()->getHeight());
 		}
 		
 		iScreenWidth = w;

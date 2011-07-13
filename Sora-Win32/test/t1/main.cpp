@@ -69,6 +69,8 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		++it;
 	}
 	sora->setFPS(60);
+
+	sora->setRenderSystemExtensionParam(0x0001, 4);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");
 	sora->createWindow(new mainWindow);

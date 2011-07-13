@@ -20,6 +20,8 @@
 #include "SoraShader/SoraCGD3D9Shader.h"
 #endif
 
+#include "SoraRenderSystemExtension.h"
+
 #include "Debug/SoraInternalLogger.h"
 
 namespace sora{
@@ -27,6 +29,8 @@ namespace sora{
 	SoraHGERenderer::SoraHGERenderer() {
 		pHGE = hgeCreate(HGE_VERSION);
 		
+		SoraRenderSystemExtension::Instance()->registerExtension(SORA_EXTENSION_FSAA);
+
 		if(!pHGE) {
 			throw SORA_EXCEPTION("Error initiazing HGE");
 		}
@@ -89,6 +93,9 @@ namespace sora{
 	SoraWindowHandle SoraHGERenderer::createWindow(SoraWindowInfoBase* windowInfo) {
 //		if(!windowInfo->isWindowSubWindow()) {
 			// just for hge compablity, otherwise hge would fail to start
+			int32 nFSAA = GetRenderSystemExtensionParam(SORA_EXTENSION_FSAA);
+			pHGE->System_SetState(HGE_FSAA, nFSAA);
+
 			pHGE->System_SetState(HGE_FRAMEFUNC, bool_updateFrame);
 		
 			pHGE->System_SetState(HGE_SCREENWIDTH, windowInfo->getWindowWidth());
@@ -374,8 +381,12 @@ namespace sora{
 	}
 	
 	void SoraHGERenderer::onExtensionStateChanged(int32 extension, bool state, int32 param) {
-        if(extension == SoraRenderSystemExtension::SORA_EXTENSION_FSAA) {
-            
+        if(extension == SORA_EXTENSION_FSAA) {
+            if(state) {
+				pHGE->System_SetState(HGE_FSAA, param);
+				pHGE->enableFSAA();
+			} else
+				pHGE->disableFSAA();
         }
     }
     

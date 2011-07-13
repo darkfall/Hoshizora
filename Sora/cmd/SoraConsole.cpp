@@ -250,7 +250,7 @@ namespace sora {
 		mFont = font;
 		if(mFont) {
 			mFont->setColor(mCaretColor);
-			mFontHeight = mFont->getHeight();
+			mFontHeight = (int32)mFont->getHeight();
 		}
 	}
 	
@@ -290,11 +290,11 @@ namespace sora {
 		mCurrHeight += mFontHeight;
 		if(mFont) {
 			if(history.mResult.size() != 0)
-				mCurrHeight += mFont->getStringHeight(history.mResult.c_str());
+				mCurrHeight += (int32)mFont->getStringHeight(history.mResult.c_str());
 		}
 		if(mCurrHeight >= mHeight-1-mFontHeight) {
 			mStartLine += 1;
-			mCurrHeight = mHeight-1-mFontHeight;
+			mCurrHeight = (int32)(mHeight-1-mFontHeight);
 		}
 	}
     

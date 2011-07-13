@@ -751,7 +751,7 @@ namespace sora{
 	}
 
 	bool SoraOGLRenderer::isActive() {
-		return glfwGetWindowParam(GLFW_ACTIVE);
+		return static_cast<bool>(glfwGetWindowParam(GLFW_ACTIVE));
 	}
 
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
@@ -764,12 +764,6 @@ namespace sora{
         else
             glfwSwapInterval(0);
     }
-
-	void SoraOGLRenderer::setTransformWindowSize(float32 w, float32 h) {
-		_oglWindowInfo.width = w!=0.f?w:windowWidth;
-		_oglWindowInfo.height = h!=0.f?h:windowHeight;
-		applyTransform();
-	}
 
     void SoraOGLRenderer::setViewPoint(float32 x, float32 y, float32 z) {
         _oglWindowInfo.x = x;
@@ -886,6 +880,7 @@ namespace sora{
     
     void SoraOGLRenderer::onExtensionStateChanged(int32 extension, bool state, int32 param) {
         // multisampling
+#ifndef OS_WIN32
         if(extension == SORA_EXTENSION_FSAA) {
             if(state) {
                 glEnable(GL_MULTISAMPLE);
@@ -893,6 +888,7 @@ namespace sora{
                 glDisable(GL_MULTISAMPLE);
             }
         }
+#endif // OS_WIN32
     }
     
     void SoraOGLRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {

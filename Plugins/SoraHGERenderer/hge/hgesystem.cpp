@@ -364,6 +364,8 @@ void CALL HGE_Impl::System_SetStateInt(hgeIntState state, int value)
 		case HGE_SAMPLERATE:	if(!hBass) nSampleRate=value;
 								break;
 
+		case HGE_FSAA:	nFSAA = value; break;
+
 		case HGE_FXVOLUME:	
 								break;
 
@@ -586,6 +588,7 @@ HGE_Impl::HGE_Impl()
 	pIB=0;
 	VertArray=0;
 	textures=0;
+	nFSAA = 0;
 
 	hBass=0;
 	bSilent=false;

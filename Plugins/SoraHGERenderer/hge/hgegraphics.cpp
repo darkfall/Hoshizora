@@ -10,7 +10,7 @@
 #include "hge_impl.h"
 #include <d3d9.h>
 #include <d3dx9.h>
-
+#include "SoraException.h"
 
 void CALL HGE_Impl::Gfx_Clear(DWORD color)
 {
@@ -671,6 +671,16 @@ void HGE_Impl::_SetProjectionMatrix(int width, int height)
 	D3DXMatrixMultiply(&matProj, &matProj, &tmp);
 }
 
+void HGE_Impl::enableFSAA() {
+	if(pD3DDevice)
+		pD3DDevice->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, TRUE);
+}
+
+void HGE_Impl::disableFSAA() {
+	if(pD3DDevice)
+		pD3DDevice->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, FALSE);
+}
+
 bool HGE_Impl::_GfxInit()
 {
 	static const char *szFormats[]={"UNKNOWN", "R5G6B5", "X1R5G5B5", "A1R5G5B5", "X8R8G8B8", "A8R8G8B8"};
@@ -714,10 +724,42 @@ bool HGE_Impl::_GfxInit()
 	d3dppW.BackBufferFormat = Mode.Format;
 	d3dppW.BackBufferCount  = 1;
 	d3dppW.MultiSampleType  = D3DMULTISAMPLE_NONE;
+	
+	d3dppW.SwapEffect = D3DSWAPEFFECT_FLIP;
+	if(nFSAA != 0) {
+		 {
+			d3dppW.SwapEffect = D3DSWAPEFFECT_DISCARD;
+			switch(nFSAA) {
+				case 2: 
+					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
+					D3DDEVTYPE_HAL , D3DFMT_A8R8G8B8, TRUE, 
+					D3DMULTISAMPLE_2_SAMPLES, NULL)))
+						d3dppW.MultiSampleType = D3DMULTISAMPLE_2_SAMPLES; 
+					else 
+						THROW_SORA_EXCEPTION("Hardware does not support the value of multisample");
+					break;
+				case 4: 
+					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
+					D3DDEVTYPE_HAL , D3DFMT_A8R8G8B8, TRUE, 
+					D3DMULTISAMPLE_4_SAMPLES, NULL)))
+						d3dppW.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES; 
+					else 
+						THROW_SORA_EXCEPTION("Hardware does not support the value of multisample");
+					break;
+				case 8: 
+					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
+					D3DDEVTYPE_HAL , D3DFMT_A8R8G8B8, TRUE, 
+					D3DMULTISAMPLE_8_SAMPLES, NULL)))
+						d3dppW.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES; 
+					else 
+						THROW_SORA_EXCEPTION("Hardware does not support the value of multisample");
+					break;
+			}
+		}
+	}
 	d3dppW.hDeviceWindow    = hwnd;
 	d3dppW.Windowed         = TRUE;
 
-	d3dppW.SwapEffect = D3DSWAPEFFECT_FLIP;
 	d3dppW.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 	if(bZBuffer)
@@ -765,7 +807,38 @@ bool HGE_Impl::_GfxInit()
 
 	d3dppFS.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
-	d3dppFS.SwapEffect       = D3DSWAPEFFECT_FLIP;
+	d3dppFS.SwapEffect = D3DSWAPEFFECT_FLIP;
+	if(nFSAA != 0) {
+		 {
+			d3dppFS.SwapEffect = D3DSWAPEFFECT_DISCARD;
+			switch(nFSAA) {
+				case 2: 
+					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
+					D3DDEVTYPE_HAL , D3DFMT_A8R8G8B8, FALSE, 
+					D3DMULTISAMPLE_2_SAMPLES, NULL)))
+						d3dppFS.MultiSampleType = D3DMULTISAMPLE_2_SAMPLES; 
+					else 
+						THROW_SORA_EXCEPTION("Hardware does not support the value of multisample");
+					break;
+				case 4: 
+					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
+					D3DDEVTYPE_HAL , D3DFMT_A8R8G8B8, FALSE, 
+					D3DMULTISAMPLE_4_SAMPLES, NULL)))
+						d3dppFS.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES; 
+					else 
+						THROW_SORA_EXCEPTION("Hardware does not support the value of multisample");
+					break;
+				case 8: 
+					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
+					D3DDEVTYPE_HAL , D3DFMT_A8R8G8B8, FALSE, 
+					D3DMULTISAMPLE_8_SAMPLES, NULL)))
+						d3dppFS.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES; 
+					else 
+						THROW_SORA_EXCEPTION("Hardware does not support the value of multisample");
+					break;
+			}
+		}
+	}
 	d3dppFS.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 
 	
@@ -859,6 +932,8 @@ else
 	
 	if(!_init_lost()) return false;
 
+	if(nFSAA != 0)
+		enableFSAA();
 	Gfx_Clear(0);
 
 	return true;

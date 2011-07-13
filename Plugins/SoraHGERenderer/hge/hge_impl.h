@@ -157,6 +157,9 @@ public:
 	void				_FocusChange(bool bAct);
 	void				_PostError(char *error);
 
+	void enableFSAA();
+	void disableFSAA();
+
 
 	HINSTANCE			hInstance;
 	HWND				hwnd;
@@ -196,6 +199,7 @@ public:
 	HWND				hwndParent;
 
 	HCURSOR				hCursor;
+	int					nFSAA;
 
 	#ifdef DEMO
 	bool				bDMO;

@@ -165,6 +165,8 @@ enum hgeIntState
 	
 	HGE_FPS				= 24,	// int		fixed fps			(default: HGEFPS_UNLIMITED)
 
+	HGE_FSAA			= 34,
+
 	HGE_POWERSTATUS		= 25,   // int		battery life percent + status
 	
 	HGEINTSTATE_FORCE_DWORD = 0x7FFFFFF
@@ -406,6 +408,9 @@ public:
 	virtual void				_UpdateMouse() = 0;
 	virtual void				_InputInit() = 0;
 	virtual void				_ClearQueue() = 0;
+
+	virtual void			enableFSAA() = 0;
+	virtual void			disableFSAA() = 0;
 	
 	virtual void				_Resize(int width, int height) = 0;
 	virtual void				_AdjustWindow() = 0;
