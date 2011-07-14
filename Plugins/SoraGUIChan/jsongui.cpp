@@ -417,7 +417,7 @@ namespace sora {
         }
         
         gcn::ImageButton* pButton = 0;
-        gcn::Image* image;
+        gcn::Image* image = NULL;
         
         if(val.isMember("image")) {
             image = gcn::Image::load(val["image"].asString());

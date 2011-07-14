@@ -22,10 +22,12 @@ SoraZipFile::~SoraZipFile() {
 
 int32 SoraZipFile::readFile(const SoraWString& filePath) {
 	if(is_open()) closeFile();
+    mFilePath.clear();
 
 	pReader = new BOGY::PackReader;
 	if(pReader) {
 		if(pReader->Open(ws2s(filePath).c_str(), 0)) {
+            mFilePath = filePath;
             set_open(true);
 			return 1;
 		}
@@ -80,6 +82,11 @@ void* SoraZipFile::_getfile(const SoraWString& filename, uLong readSize) {
 	uint8* buffer = new uint8[readSize];
 	memset(buffer, 0, readSize);
 	if(buffer) {
+        SoraWString rfilename = filename;
+        size_t packpos = rfilename.find(mFilePath);
+        if(packpos != SoraWString::npos && packpos == 0) {
+            rfilename.erase(0, mFilePath.size()+1);
+        }
 		if(pReader->ReadFile(ws2s(filename).c_str(), buffer, readSize) == readSize) {
 			return buffer;
 		} else {

@@ -24,7 +24,7 @@ namespace sora {
 	}
 
 	SoraShader* SoraCGD3D9ShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
-		SoraShader* shader;
+		SoraCGD3D9Shader* shader;
         switch(type) {
             case FRAGMENT_SHADER: {
                 shader = new SoraCGD3D9Shader(file, entry, type, context, fragmentProfile);
@@ -40,6 +40,7 @@ namespace sora {
 			if(shader) delete shader;
 			return 0;
 		}
+		shader->mShaderContext = this;
 		return shader;
 	}
 	

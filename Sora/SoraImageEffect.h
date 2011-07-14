@@ -57,7 +57,7 @@ namespace sora {
 		IMAGE_EFFECT_PINGPONG_REVERSE = 11,
 	};
 	
-	class SORA_API SoraImageEffect: public SoraModifier<SoraSprite> {
+	class SORA_API SoraImageEffect: public SoraModifier<SoraObject> {
 	public:
 		SoraImageEffect();
 		SoraImageEffect(CoreTransformer<CoreTransform>* transformer);
@@ -81,7 +81,7 @@ namespace sora {
 		virtual void start(IMAGE_EFFECT_MODE mode, float32 time);
 		virtual int32 update(float32 delta);
 		
-		virtual void modify(SoraSprite* sprite) = 0;
+		virtual void modify(SoraObject* sprite) = 0;
 		
 		void restart();
 		
@@ -101,7 +101,7 @@ namespace sora {
 		
 		void swap();
         
-        virtual SoraModifier<SoraSprite>* clone() = 0;
+        virtual SoraModifier<SoraObject>* clone() = 0;
         
         SoraImageEffect& operator =(const SoraImageEffect& rhs);
         
@@ -149,9 +149,9 @@ namespace sora {
 		virtual int32 update(float32 delta);
 		virtual void start(IMAGE_EFFECT_MODE mode, float32 time);
 		
-		virtual void modify(SoraSprite* spr);
+		virtual void modify(SoraObject* obj);
         
-        SoraModifier<SoraSprite>* clone();
+        SoraModifier<SoraObject>* clone();
         		
 	private:
 		typedef std::list<SoraImageEffect*> IMAGE_EFFECT_LIST;
@@ -170,8 +170,8 @@ namespace sora {
 							IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraSprite* sprite);
-        SoraModifier<SoraSprite>* clone();
+        void modify(SoraObject* obj);
+        SoraModifier<SoraObject>* clone();
 	};
 
 	class SORA_API SoraImageEffectShake: public SoraImageEffect {
@@ -180,8 +180,8 @@ namespace sora {
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							 CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraSprite* sprite);
-        SoraModifier<SoraSprite>* clone();
+        void modify(SoraObject* obj);
+        SoraModifier<SoraObject>* clone();
 	};
 
 	class SORA_API SoraImageEffectScale: public SoraImageEffect {
@@ -193,8 +193,8 @@ namespace sora {
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							 CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraSprite* sprite);
-        SoraModifier<SoraSprite>* clone();
+        void modify(SoraObject* obj);
+        SoraModifier<SoraObject>* clone();
 	};
 
 	class SORA_API SoraImageEffectTransitions: public SoraImageEffect {
@@ -206,8 +206,8 @@ namespace sora {
 								   IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 								   CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraSprite* sprite);
-        SoraModifier<SoraSprite>* clone();
+        void modify(SoraObject* obj);
+        SoraModifier<SoraObject>* clone();
 	};
 	
 	class SORA_API SoraImageEffectColorTransitions: public SoraImageEffect {
@@ -219,8 +219,8 @@ namespace sora {
 										IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 										CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraSprite* sprite);
-        SoraModifier<SoraSprite>* clone();
+        void modify(SoraObject* obj);
+        SoraModifier<SoraObject>* clone();
 	};
 	
 	class SORA_API SoraImageEffectRotation: public SoraImageEffect {
@@ -232,8 +232,8 @@ namespace sora {
 								IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 								CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraSprite* sprite);
-        SoraModifier<SoraSprite>* clone();
+        void modify(SoraObject* obj);
+        SoraModifier<SoraObject>* clone();
 	};
 	
 	typedef SoraImageEffectFade IEFade;
@@ -244,6 +244,54 @@ namespace sora {
 	typedef SoraImageEffectRotation IERotation;
 	
 	typedef CoreTransformer<CoreTransform> IMAGE_EFFECT_TRANSFORMER;
+    
+    static IEFade* CreateEffectFade(float32 src, float32 dst, float32 time, 
+                                    IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                    CoreTransformer<CoreTransform>* transformer=0) {
+        return new IEFade(src, dst, time, mode, transformer);
+    }
+    
+    static IEScale* CreateEffectScale(float32 src, float32 dst, float32 time, 
+                                      IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                      CoreTransformer<CoreTransform>* transformer=0) {
+        return new IEScale(src, dst, time, mode, transformer);
+    }
+    
+    static IEScale* CreateEffectScale(float32 srcV, float32 dstV, float32 srcH, float32 dstH, float32 time, 
+                                      IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                      CoreTransformer<CoreTransform>* transformer=0) {
+        return new IEScale(srcV, dstV, srcH, dstH, time, mode, transformer);
+    }
+    
+    static IETransitions* CreateEffectTransitions(float32 sx, float32 sy, float32 sz, float32 dx, float32 dy, float32 dz, float32 time, 
+                                                  IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                  CoreTransformer<CoreTransform>* transformer=0) {
+        return new IETransitions(sx, sy, sz, dx, dy, dz, time, mode, transformer);
+    }
+    
+    static IETransitions* CreateEffectTransitions(float32 sx, float32 sy, float32 dx, float32 dy, float32 time, 
+                                                  IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                  CoreTransformer<CoreTransform>* transformer=0) {
+        return new IETransitions(sx, sy, dx, dy, time, mode, transformer);
+    }
+    
+    static IEColorTransitions* CreateColorTransitions(const SoraColorRGBA& start, const SoraColorRGBA& end, float32 time, 
+                                                      IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                      CoreTransformer<CoreTransform>* transformer=0) {
+        return new IEColorTransitions(start, end, time, mode, transformer);
+    }
+    
+    static IEColorTransitions* CreateColorTransitions(long32 start, ulong32 end, float32 time, 
+                                                      IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                      CoreTransformer<CoreTransform>* transformer=0) {
+        return new IEColorTransitions(start, end, time, mode, transformer);
+    }
+    
+    static IERotation* CreateEffectRotation(float32 start, float32 end, float32 time,
+                                            IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                            CoreTransformer<CoreTransform>* transformer=0) {
+        return new IERotation(start, end, time, mode, transformer);
+    }
 
 } // namespace sora
 

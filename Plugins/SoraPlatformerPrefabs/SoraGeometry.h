@@ -10,7 +10,9 @@
 #ifndef SORA_GEOMETRY_H_
 #define SORA_GEOMETRY_H_
 
+#include "SoraPlatform.h"
 #include "SoraObject.h"
+#include "SoraPrefab.h"
 
 namespace sora {
 	
@@ -18,7 +20,7 @@ namespace sora {
 	 *  Base class for geometry
 	 **/
 	
-	class SoraGeometry: public SoraObject {
+	class SoraGeometry: public SoraObject, public SoraPrefab {
 	public:
 		SoraGeometry();
 		~SoraGeometry();

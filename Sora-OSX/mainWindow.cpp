@@ -249,7 +249,7 @@ void mainWindow::init() {
 	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.0f); 
     
     gifSprite = new sora::SoraGifSprite;
-    gifSprite->load(L"2.gif");
+    gifSprite->load(L"giftest.gif");
     gifSprite->setFrameRate(24);
 	gifSprite->setPosition(100.f, 100.f);
 	

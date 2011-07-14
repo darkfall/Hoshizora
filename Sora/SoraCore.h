@@ -96,7 +96,7 @@ namespace sora {
 		void            freeTarget(ulong32 t);
 		HSORATEXTURE    getTargetTexture(ulong32 t);
 
-		HSORATEXTURE createTexture	(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
+		HSORATEXTURE createTexture(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
 		HSORATEXTURE createTextureWH(int32 w, int32 h);
 		HSORATEXTURE createTextureFromRawData(uint32* data, int32 w, int32 h);
 		HSORATEXTURE createTextureFromMem(void* data, ulong32 size);
@@ -113,6 +113,9 @@ namespace sora {
 		void                attachShaderContext(SoraShaderContext* context);
 		void                detachShaderContext();
         SoraShader*         createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
+        void                freeShader(SoraShader* shader);
+        // for convinience to attach a single shader but not a whole context, also use detachShaderContext to detach the shader
+        void                attachShader(SoraShader* shader);
 
 		SoraSprite* createSprite (const SoraWString& sPath);
 
@@ -298,6 +301,8 @@ namespace sora {
 
 		SoraWindowInfoBase* mainWindow;
 		SoraShaderContext* shaderContext;
+        SoraShaderContext* tempShaderContext;
+        SoraShaderContext* prevShaderContext;
 		
 		SoraCamera* mainCamera;
 		
@@ -309,7 +314,6 @@ namespace sora {
         inline void _modifierAdapterUpdate();
 		
 		bool bZBufferArea;
-		SoraShaderContext* __prevShader;
     };
 
 

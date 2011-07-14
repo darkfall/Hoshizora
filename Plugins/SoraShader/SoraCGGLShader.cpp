@@ -23,14 +23,14 @@ namespace sora {
     }
 
     SoraShader* SoraCGGLShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
-        SoraShader* shader;
+        SoraCGGLShader* shader = NULL;
         switch (type) {
 			case VERTEX_SHADER: {
-                shader = (SoraShader*)(new SoraCGGLShader(file, entry, type, context, vertexProfile));
+                shader = new SoraCGGLShader(file, entry, type, context, vertexProfile);
                 break;
             }
 			case FRAGMENT_SHADER: {
-                shader = (SoraShader*)(new SoraCGGLShader(file, entry, type, context, fragmentProfile));
+                shader = new SoraCGGLShader(file, entry, type, context, fragmentProfile);
                 break;
             }
 		}
@@ -39,6 +39,7 @@ namespace sora {
 			if(shader) delete shader;
 			return NULL;
 		}
+        shader->mShaderContext = this;
         return shader;
     }
 

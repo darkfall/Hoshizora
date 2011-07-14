@@ -33,6 +33,7 @@ namespace sora {
 		void* _getfile(const SoraWString& filename, uLong readsize);
 
 		std::string packCode;
+        SoraWString mFilePath;
 
 		BOGY::PackReader* pReader;
 	};

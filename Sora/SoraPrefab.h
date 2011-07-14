@@ -16,15 +16,14 @@ namespace sora {
 	
 	/**
 	 *	Base class for prefabs
-	 *
+	 *  A prefab is a predefined a template of game world objects
+     *  Must be able to load and save to file to save the state
 	 **/
 	
 	class SoraPrefab: public SoraObject {
 	public:
-		SoraPrefab();
-		~SoraPrefab();
-		
-		bool serializable() { return true; }
+        virtual bool saveToFile(const SoraWString& file) = 0;
+        virtual bool loadFromFile(const SoraWString& file) = 0;
 	};
 	
 	

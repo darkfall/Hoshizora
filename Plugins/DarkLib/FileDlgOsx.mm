@@ -53,6 +53,8 @@
 				
 			//	printf("%s, %s\n", pstrFileName, pstrTitleName);
 			}
+            
+            [filePath release];
 			return true;
 		}
 		return false;

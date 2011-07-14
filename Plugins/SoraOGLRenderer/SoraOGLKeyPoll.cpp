@@ -195,9 +195,9 @@ namespace sora {
 		
         int32 skey;
 		switch(key) {
-			case GLFW_MOUSE_BUTTON_LEFT: skey = SORA_KEY_LBUTTON;
-			case GLFW_MOUSE_BUTTON_RIGHT: skey = SORA_KEY_RBUTTON;
-			case GLFW_MOUSE_BUTTON_MIDDLE: skey = SORA_KEY_MBUTTON;
+			case GLFW_MOUSE_BUTTON_LEFT: skey = SORA_KEY_LBUTTON; break;
+			case GLFW_MOUSE_BUTTON_RIGHT: skey = SORA_KEY_RBUTTON; break;
+			case GLFW_MOUSE_BUTTON_MIDDLE: skey = SORA_KEY_MBUTTON; break;
 		}
 		
 		keypoll::publishInputedKey(skey, type, 0);

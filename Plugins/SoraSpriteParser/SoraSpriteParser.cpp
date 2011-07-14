@@ -11,8 +11,6 @@
 #include "SoraCore.h"
 #include "SoraSprite.h"
 
-#include "SoraSpriteAnimation/SoraSpriteAnimation.h"
-
 #include "json/json.h"
 
 namespace sora {
@@ -29,7 +27,18 @@ namespace sora {
     SoraSprite* SoraSpriteParser::getSprite(const SoraString& name) {
         SPRITE_MAP::iterator itSprite = mSprites.find(str2id(name));
         if(itSprite != mSprites.end()) {
-            return itSprite->second;
+            SpriteStore store = itSprite->second;
+            return store.mSprite;
+        }
+        return NULL;
+    }
+    
+    SoraSpriteAnimation* SoraSpriteParser::getAnimation(const SoraString& name) {
+        SPRITE_MAP::iterator itSprite = mSprites.find(str2id(name));
+        if(itSprite != mSprites.end()) {
+            SpriteStore store = itSprite->second;
+            if(store.mIsAnimation) 
+                return dynamic_cast<SoraSpriteAnimation*>(store.mSprite);
         }
         return NULL;
     }
@@ -49,14 +58,7 @@ namespace sora {
             Json::Value root;
             
             if(reader.parse(cdata, cdata+data.getSize(), root)) {
-                if(root.isMember("name")) {
-                    std::string name = root["name"].asString();
-                    SoraSprite* sprite = parseSprite(root);
-                    
-                    mSprites.insert(std::make_pair(str2id(name), sprite));
-                    
-                    return true;
-                }
+                return parse(root);
             }
         }
         return false;
@@ -79,10 +81,57 @@ namespace sora {
         return false;
     }
     
+    bool SoraSpriteParser::parse(const Json::Value& root) {
+        if(root.isMember("sprites")) {
+            Json::Value sprites = root["sprites"];
+            if(sprites.isArray()) {
+                for(size_t i=0; i<sprites.size(); ++i) {
+                    Json::Value sprVal = sprites[i];
+                    if(sprVal.isMember("name")) {
+                        std::string name = sprVal["name"].asString();
+                        if(!name.empty()) {
+                            SoraSprite* sprite = parseSprite(sprVal);
+                            bool isAnimation = false;
+                            if(sprVal.isMember("animation"))
+                                isAnimation = true;
+                            
+                            if(sprite != NULL) 
+                                mSprites.insert(std::make_pair(str2id(name), SpriteStore(sprite, isAnimation)));
+                            else
+                                THROW_SORA_EXCEPTION(vamssg("Failed to parse sprite with val name = %s", name.c_str()));
+                            return true;
+                        }
+                    }  
+                }
+            }
+            return true;
+        } else {
+            if(root.isMember("sprite")) {
+                Json::Value sprVal = root["sprite"];
+                if(sprVal.isMember("name")) {
+                    std::string name = sprVal["name"].asString();
+                    if(!name.empty()) {
+                        SoraSprite* sprite = parseSprite(sprVal);
+                        bool isAnimation = false;
+                        if(sprVal.isMember("animation"))
+                            isAnimation = true;
+                        
+                        if(sprite != NULL) 
+                            mSprites.insert(std::make_pair(str2id(name), SpriteStore(sprite, isAnimation)));
+                        else
+                            THROW_SORA_EXCEPTION(vamssg("Failed to parse sprite with val name = %s", name.c_str()));
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
     void SoraSpriteParser::clear() {
         SPRITE_MAP::iterator itSprite = mSprites.begin();
         while(itSprite != mSprites.end()) {
-            delete itSprite->second;
+            delete itSprite->second.mSprite;
             ++itSprite;
         }
         mSprites.clear();
@@ -368,7 +417,6 @@ namespace sora {
 		}
 	}
 	
-	// produce a SoraSprite depends on a rftd texture json configuration value
     sora::SoraSprite* parseSprite(Json::Value& val) {
 		if(val.isMember("texture")) {
             std::string strtex = val["texture"].asString();

@@ -71,10 +71,7 @@ namespace sora {
 	}
 	
 	char* SoraOGLInput::getKeyName(int32 key) {
-		char name[2];
-		name[0] = toascii(key);
-		name[1] = '\0';
-		return name;
+		return NULL;
 	}
 	
 	bool SoraOGLInput::joyKeyPressed(int32 key) {

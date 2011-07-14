@@ -41,12 +41,16 @@ namespace sora {
 		SoraVertex		v[4];
 		SoraTexture*	tex;
 		int				blend;
+        
+        SoraQuad(): tex(NULL) {}
 	};
 	
 	struct SoraTriple {
 		SoraVertex		v[3];
 		SoraTexture*	tex;
 		int				blend;
+        
+        SoraTriple(): tex(NULL) {}
 	};
 
 	class SORA_API SoraSprite: public SoraObject {

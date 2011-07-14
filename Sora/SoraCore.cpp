@@ -66,13 +66,15 @@ namespace sora {
         
 		mainWindow = NULL;
 		
-		__prevShader = NULL;
+		prevShaderContext = NULL;
         shaderContext = NULL;
+        tempShaderContext = NULL;
 		mainCamera = NULL;
 
 		pPluginManager = new SoraPluginManager;
 		pResourceFileFinder = new SoraResourceFileFinder;
 		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
+        
 		
 		setRandomSeed(rand());
         initConstantStrings();
@@ -364,9 +366,9 @@ namespace sora {
             SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
             SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
 			
-			sora::SoraConsole::Instance();
-			sora::SoraCoreCmdHandler::Instance();
-		
+            sora::SoraConsole::Instance();
+            sora::SoraCoreCmdHandler::Instance();
+            
 			ulong32 result = pRenderSystem->createWindow(info);
 			if(result) {
 				if(pInput != NULL)
@@ -605,6 +607,10 @@ namespace sora {
         }
         return shaderContext->createShader(file, entry, type);
     }
+    
+    void SoraCore::freeShader(SoraShader* shader) {
+        FreeShader(shader);
+    }
 
     SoraShaderContext* SoraCore::createShaderContext() {
         assert(bInitialized == true);
@@ -615,15 +621,30 @@ namespace sora {
         assert(bInitialized == true);
         pRenderSystem->attachShaderContext(context);
 		
-		__prevShader = context;
+		prevShaderContext = context;
 	}
 
 	void SoraCore::detachShaderContext() {
         assert(bInitialized == true);
         pRenderSystem->detachShaderContext();
+        
+        if(tempShaderContext) {
+            tempShaderContext->clear();
+        }
 		
-		__prevShader = NULL;
+		prevShaderContext = NULL;
 	}
+    
+    void SoraCore::attachShader(SoraShader* shader) {
+        if(!tempShaderContext) {
+            tempShaderContext = createShaderContext();
+            if(!tempShaderContext)
+                THROW_SORA_EXCEPTION("No shader context available :(");
+        }
+        if(tempShaderContext) {
+            tempShaderContext->attachShader(shader);
+        }
+    }
 
 	HSORATEXTURE SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
 		assert(bInitialized==true);
@@ -727,7 +748,7 @@ namespace sora {
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		assert(bInitialized==true);
 		if(bZBufferArea) {
-			SoraZSorter::renderQuad(quad, __prevShader);
+			SoraZSorter::renderQuad(quad, prevShaderContext);
 		} else 
 			pRenderSystem->renderQuad(quad);
 	}
@@ -736,7 +757,7 @@ namespace sora {
 		assert(bInitialized==true);
 		
 		if(bZBufferArea) {
-			SoraZSorter::renderTriple(trip, __prevShader);
+			SoraZSorter::renderTriple(trip, prevShaderContext);
 		} else 
 			pRenderSystem->renderTriple(trip);
 	}
@@ -744,7 +765,7 @@ namespace sora {
 	void SoraCore::renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
 		assert(bInitialized == true);
 		if(bZBufferArea) {
-			SoraZSorter::renderWithVertices(tex, blendMode, vertices, vsize, mode, __prevShader);
+			SoraZSorter::renderWithVertices(tex, blendMode, vertices, vsize, mode, prevShaderContext);
 		} else 	
 			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
 	}

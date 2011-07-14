@@ -49,7 +49,7 @@ namespace sora {
 	}
 
 	SoraGLSLShader::SoraGLSLShader() {
-		type = 0;
+		mType = 0;
 		mShader = 0;
 		mProgram = 0;
 		
@@ -58,9 +58,9 @@ namespace sora {
 	
 	bool SoraGLSLShader::loadShader(const SoraWString& file, const SoraString& entry, int32 _type) {
 		assert(mProgram != 0);
-        type = _type;
+        mType = _type;
 
-		if(type == FRAGMENT_SHADER) 
+		if(mType == FRAGMENT_SHADER) 
 			mShader = glCreateShader(GL_FRAGMENT_SHADER);
 		else
 			mShader = glCreateShader(GL_VERTEX_SHADER);
@@ -68,7 +68,7 @@ namespace sora {
 		
 		if(mShader == 0) {			
 			THROW_SORA_EXCEPTION("Error creating glsl shader");
-			type = 0;
+			mType = 0;
 			return false;
 		}
 		
@@ -82,7 +82,7 @@ namespace sora {
             glGetShaderiv(mShader, GL_COMPILE_STATUS, &success);
             if (success == 0) {
 				printShaderError();
-				type = 0;
+				mType = 0;
 				
 				return false;
 			}
@@ -101,7 +101,7 @@ namespace sora {
 	}
 	
 	bool SoraGLSLShader::setParameterfv(const char* name, float32* val, uint32 size) {
-		if(type == 0)
+		if(mType == 0)
 			return false;
 		
 		bool requestedShaderUse = false;
@@ -135,7 +135,7 @@ namespace sora {
 	}
 	
 	bool SoraGLSLShader::setParameteriv(const char* name, int32* val, uint32 size) {
-		if(type == 0)
+		if(mType == 0)
 			return false;
 	
 		bool requestedShaderUse = false;
@@ -167,7 +167,7 @@ namespace sora {
 	}
 	
 	bool SoraGLSLShader::getParameterfv(const char* name, float32* val, uint32 size) {
-		if(type == 0)
+		if(mType == 0)
 			return false;
 		
 		bool requestedShaderUse = false;
@@ -190,7 +190,7 @@ namespace sora {
 	}
 	
 	bool SoraGLSLShader::getParameteriv(const char* name, int32* val, uint32 size) {
-		if(type == 0)
+		if(mType == 0)
 			return false;
 		
 		bool requestedShaderUse = false;

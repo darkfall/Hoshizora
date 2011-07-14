@@ -12,6 +12,9 @@
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
 #include "stringId.h"
+#include "json/json.h"
+
+#include "SoraSpriteAnimation/SoraSpriteAnimation.h"
 
 #include <map>
 
@@ -28,9 +31,11 @@ namespace sora {
     
     public:
         SoraSprite* getSprite(const SoraString& name);
+        SoraSpriteAnimation* getAnimation(const SoraString& name);
         void delSprite(const SoraString& name);
         
         bool parse(const SoraWString& file, bool isFolder);
+        bool parse(const Json::Value& val);
         void clear();
         
         int32 size() const;
@@ -40,9 +45,30 @@ namespace sora {
     private:
         inline bool parseFile(const SoraWString& path);
         
-        typedef std::map<stringId, SoraSprite*> SPRITE_MAP;
+        struct SpriteStore {
+            SoraSprite* mSprite;
+            bool mIsAnimation;
+            
+            SpriteStore(): 
+            mSprite(NULL), 
+            mIsAnimation(false) {}
+            
+            SpriteStore(SoraSprite* sprite, bool animation):
+            mSprite(sprite),
+            mIsAnimation(animation) {}
+        };
+        
+        typedef std::map<stringId, SpriteStore> SPRITE_MAP;
         SPRITE_MAP mSprites;
     };
+    
+    static SoraSprite* GetSpriteFromParser(const SoraString& name) {
+        return SoraSpriteParser::Instance()->getSprite(name);
+    }
+    
+    static SoraSprite* GetAnimationFromParser(const SoraString& name) {
+        return SoraSpriteParser::Instance()->getAnimation(name);
+    }
 }
 
 #endif

@@ -95,6 +95,7 @@ namespace sora {
 											 types:fileTypes];
 		
 		if (result == NSOKButton) {
+            [filePath release];
 			NSArray *filesToOpen = [openDlg filenames];
 			int count = [filesToOpen count];
 			if(count > 0) {
@@ -123,6 +124,7 @@ namespace sora {
 											  file:nil];
 		
 		if (result == NSOKButton) {
+            [filePath release];
 			std::string fileName = [[saveDlg filename] UTF8String];
 			return sora::s2ws(fileName);
 		}

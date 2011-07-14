@@ -395,9 +395,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "67"
-         endingLineNumber = "67"
-         landmarkName = "main(int argc, char* argv[])"
-         landmarkType = "7">
+         endingLineNumber = "67">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -447,9 +445,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "78"
-         endingLineNumber = "78"
-         landmarkName = "main(int argc, char* argv[])"
-         landmarkType = "7">
+         endingLineNumber = "78">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1087,29 +1083,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "main.cpp"
-         timestampString = "332079304.530164"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
-         landmarkName = "main(int argc, char* argv[])"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraCore.cpp"
-         timestampString = "332086150.148783"
+         timestampString = "332344192.21896"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1180"
-         endingLineNumber = "1180"
-         landmarkName = "SoraCore::enableMenuBar(bool flag)"
-         landmarkType = "5">
+         startingLineNumber = "1201"
+         endingLineNumber = "1201">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

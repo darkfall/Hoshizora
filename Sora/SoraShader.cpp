@@ -14,8 +14,9 @@
 namespace sora {
 
 	SoraShader::SoraShader() {
-		this->type = 0;
+		mType = 0;
         bInternal = true;
+        mShaderContext = NULL;
 	}
 	
 	SoraShader::~SoraShader() {
@@ -70,6 +71,21 @@ namespace sora {
 		return setParameteriv(name, arr, 4);
 	}
 	
+    int32 SoraShader::getType() const {
+        return mType;
+    }
+    
+    void SoraShader::setType(int32 t) { 
+        mType = t;
+    };
+    
+    void SoraShader::setInternal(bool flag) { 
+        bInternal = flag;
+    }
+    
+    SoraShaderContext* SoraShader::getShaderContext() const {
+        return mShaderContext;
+    }
 	
 	SoraShaderContext::SoraShaderContext() {
 		err = 0;
@@ -80,14 +96,14 @@ namespace sora {
 	}
 	
 	std::list<SoraShader*>::iterator SoraShaderContext::getShaderIterator(SoraShader* shader) {
-		ShaderList::iterator itShader = shaders.begin();
-		while(itShader != shaders.end()) {
+		ShaderList::iterator itShader = mShaders.begin();
+		while(itShader != mShaders.end()) {
 			if(shader == (*itShader)) {
 				return itShader;
 			}
 			++itShader;
 		}
-		return shaders.end();
+		return mShaders.end();
 	}
 	    
     SoraShader* SoraShaderContext::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
@@ -110,13 +126,13 @@ namespace sora {
 	bool SoraShaderContext::attachShaderList() {
 		if(getError() != 0) return false;
 
-		ShaderList::const_iterator itShader = shaders.begin();
+		ShaderList::const_iterator itShader = mShaders.begin();
 		int32 er = 1;
 		
-		while(itShader != shaders.end()) {
+		while(itShader != mShaders.end()) {
 			if((*itShader) != NULL) {
 				(*itShader)->attach();
-				if((*itShader)->type == 0) er = 0;
+				if((*itShader)->mType == 0) er = 0;
 			}
 			++itShader;
 		}
@@ -126,17 +142,17 @@ namespace sora {
 	void SoraShaderContext::detachFromRender() {
 		SoraCore::Instance()->detachShaderContext();
 	}
-
+    
 	bool SoraShaderContext::detachShaderList() {
 		if(err != 0) return false;
 
-		ShaderList::iterator itShader = shaders.begin();
+		ShaderList::iterator itShader = mShaders.begin();
 		int32 er = 1;
 		
-		while(itShader != shaders.end()) {
+		while(itShader != mShaders.end()) {
 			if((*itShader) != NULL) {
 				(*itShader)->detach();
-				if((*itShader)->type == 0) er = 1;
+				if((*itShader)->mType == 0) er = 1;
 			}
 			++itShader;
 		}	
@@ -147,32 +163,34 @@ namespace sora {
 		if(err != 0) return;
 		
 		ShaderList::iterator itShader = getShaderIterator(shader);
-		if(itShader != shaders.end()) {
-			delete (*itShader);
-			(*itShader) = 0;
-			shaders.erase(itShader);
+		if(itShader != mShaders.end()) {
+            if((*itShader)->bInternal) {
+                delete (*itShader);
+                (*itShader) = 0;
+            }
+            mShaders.erase(itShader);
 		}
 	}
 	
     const SoraShaderContext::ShaderList& SoraShaderContext::getShaders() const { 
-        return shaders;
+        return mShaders;
     }
     
     void SoraShaderContext::attachShader(SoraShader* shader) { 
         assert(shader != NULL); 
-        shaders.push_back(shader);
+        mShaders.push_back(shader);
     }
     
 	void SoraShaderContext::clear() {
-		ShaderList::iterator itShader = shaders.begin();
-		while(itShader != shaders.end()) {
+		ShaderList::iterator itShader = mShaders.begin();
+		while(itShader != mShaders.end()) {
 			if((*itShader) && (*itShader)->bInternal) {
 				delete (*itShader);
 				(*itShader) = 0;
 			}
             ++itShader;
 		}
-		shaders.clear();
+		mShaders.clear();
 	}
     
     void SoraShaderContext::setError(int32 error) { 
@@ -184,7 +202,7 @@ namespace sora {
     }
     
     uint32 SoraShaderContext::size() const { 
-        return shaders.size();
+        return mShaders.size();
     }
 	
 } // namespace sora

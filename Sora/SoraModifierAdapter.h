@@ -32,6 +32,10 @@ namespace sora {
             assert(obj != NULL);
             mObj = obj;
         }
+        SoraModiferAdapter(T* obj, SoraModifier<T>* modi) {
+            mObj = obj;
+            add(modi);
+        }
         void update(float32 dt) {
             if(!mModifiers.empty()) {
                 typename ModifierList::iterator itModifier = mModifiers.begin();

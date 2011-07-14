@@ -25,6 +25,8 @@ namespace sora {
 		/* fragment shader */
 		FRAGMENT_SHADER = 2,
 	} SORA_SHADER_TYPE;
+    
+    class SoraShaderContext;
 	
 	/* 
 		Class to hold a shader
@@ -78,10 +80,12 @@ namespace sora {
 			Get the type of the shader
 			See SORA_SHADER_TYPE
 		 */
-		int32 getType() const { return type; }
-        void setType(int32 t) { type = t; };
+		int32 getType() const;
+        void setType(int32 t);
 		
-		void setInternal(bool flag) { bInternal = flag; }
+		void setInternal(bool flag);
+        
+        SoraShaderContext* getShaderContext() const;
 
 	protected:
         bool bInternal;
@@ -96,7 +100,8 @@ namespace sora {
 		 */
 		virtual bool detach() = 0;
         
-        uint32 type;
+        uint32 mType;
+        SoraShaderContext* mShaderContext;
 	};
 	
 	class SORA_API SoraShaderContext {
@@ -125,7 +130,7 @@ namespace sora {
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
         SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
-        
+                
         /**
          *   get shader list
          **/
@@ -160,16 +165,21 @@ namespace sora {
 		*/
 		virtual bool attachShaderList();
 		virtual bool detachShaderList();
-        
-        
 		
 	protected:
 		inline ShaderList::iterator getShaderIterator(SoraShader* shader);
 		
-		ShaderList shaders;
+		ShaderList mShaders;
 		
 		int32 err;
 	};
+    
+    static void FreeShader(SoraShader* shader) {
+        SoraShaderContext* context = shader->getShaderContext();
+        if(!context)
+            THROW_SORA_EXCEPTION("Caught wild shader without ShaderContext, possible bug");
+        else context->detachShader(shader);
+    }
 
 } // namespace sora
 
