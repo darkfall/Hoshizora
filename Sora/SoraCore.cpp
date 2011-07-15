@@ -53,7 +53,7 @@ namespace sora {
 		bPauseRender = false;
 		bPauseSound = false;
 		bDisablePluginDetection = false;
-        bEnableScreenBuffer = true;
+        bEnableScreenBuffer = false;
         bScreenBufferAttached = false;
 
 		_initializeTimer();
