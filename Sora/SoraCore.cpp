@@ -8,6 +8,7 @@
 #include "SoraFolderResourceManager.h"
 #include "SoraInputQueue.h"
 #include "SoraModifierAdapter.h"
+#include "SoraFullscreenBufferHandler.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
@@ -52,6 +53,8 @@ namespace sora {
 		bPauseRender = false;
 		bPauseSound = false;
 		bDisablePluginDetection = false;
+        bEnableScreenBuffer = true;
+        bScreenBufferAttached = false;
 
 		_initializeTimer();
 		_initializeMiscTool();
@@ -70,12 +73,12 @@ namespace sora {
         shaderContext = NULL;
         tempShaderContext = NULL;
 		mainCamera = NULL;
+        mScreenBuffer = NULL;
 
 		pPluginManager = new SoraPluginManager;
 		pResourceFileFinder = new SoraResourceFileFinder;
 		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
         
-		
 		setRandomSeed(rand());
         initConstantStrings();
 	}
@@ -103,28 +106,39 @@ namespace sora {
 	}
 
 	void SoraCore::start() {
-		if(!bDisablePluginDetection) 
-			SoraBooter::loadExPlugins(L"./sora/plugins");
-		
-		// no main window created
-		if(!bMainWindowSet) {
-			THROW_SORA_EXCEPTION("No main window created");
-			shutDown();
-		}
-		if(!bInitialized) {
-			THROW_SORA_EXCEPTION("Sora not initialized");
-			shutDown();
-		}
+        try {
+            if(!bDisablePluginDetection) 
+                SoraBooter::loadExPlugins(L"./sora/plugins");
+            
+            _checkCoreComponents();
 
-		_checkCoreComponents();
-      
-        // create render target for debug renderer
+            // no main window created
+            if(!bMainWindowSet) {
+                THROW_SORA_EXCEPTION("No main window created");
+                shutDown();
+            }
+            if(!bInitialized) {
+                THROW_SORA_EXCEPTION("Sora not initialized");
+                shutDown();
+            }
+            
+            
+            // create render target for debug renderer
 #ifdef DEBUG
-        DEBUG_RENDERER->createTarget();
+            DEBUG_RENDERER->createTarget();
 #endif
-
-		if(pRenderSystem)
-			pRenderSystem->start(pTimer);
+            mScreenBuffer = pRenderSystem->createTarget(iScreenWidth, iScreenHeight);
+            if(!mScreenBuffer) {
+                bEnableScreenBuffer = false;
+                THROW_SORA_EXCEPTION("Error creating fullscreen buffer, fullscreen posteffect maybe disabled");
+            }
+            SoraFullscreenBufferHandler::Instance();
+            
+            if(pRenderSystem)
+                pRenderSystem->start(pTimer);
+        } catch(const SoraException& exp) {
+            messageBox(exp.what(), "Fatal error!", MB_OK | MB_ICONERROR);
+        }
 	}
 
 	void SoraCore::_frameListenerStart() {
@@ -239,6 +253,13 @@ namespace sora {
 				if(bMainScene) {
 					bMainScene = false;
 					pRenderSystem->endScene();
+                    
+                    if(mScreenBuffer && bEnableScreenBuffer) {
+                        pRenderSystem->beginScene(0, 0, true);
+                        SoraFullscreenBufferHandler::Instance()->onBufferRender(getTargetTexture(mScreenBuffer));
+                        pRenderSystem->endScene();
+                        bScreenBufferAttached = false;
+                    }
 				}
 			}
 			
@@ -380,6 +401,7 @@ namespace sora {
 			
 				DebugPtr->log(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
 							  LOG_LEVEL_NOTICE);
+                
 				return result;
 			} else {
 				_postError("SoraCore::createWindow, createWindow failed");
@@ -805,14 +827,31 @@ namespace sora {
 
 	void SoraCore::beginScene(ulong32 c, ulong32 t, bool clear) {
 		assert(bInitialized==true);
-		pRenderSystem->beginScene(c, t, clear);
-        if(t == 0)
-            bMainScene = true;
+        if(mScreenBuffer && bEnableScreenBuffer) {
+            if(t == 0) {
+                bMainScene = true;
+                bScreenBufferAttached = true;
+                pRenderSystem->beginScene(0x000000FF, mScreenBuffer, true);
+            } else {
+                bMainScene = false;
+                bScreenBufferAttached = false;
+                pRenderSystem->endScene();
+                pRenderSystem->beginScene(c, t, clear);
+            }
+        } else {
+            if(t == 0) {
+                bMainScene = true;
+            } else bMainScene = false;
+            pRenderSystem->beginScene(c, t, clear);
+        }
 	}
 	void SoraCore::endScene() {
 		assert(bInitialized==true);
-		if(!bMainScene) 
+		if(!bMainScene) {
             pRenderSystem->endScene();
+            if(mScreenBuffer && bEnableScreenBuffer && bScreenBufferAttached) 
+                pRenderSystem->beginScene(0, mScreenBuffer, false);
+        }
 	}
 
 	ulong32 SoraCore::createTarget(int width, int height, bool zbuffer) {
@@ -955,7 +994,7 @@ namespace sora {
 	
 	SoraWString SoraCore::fileOpenDialog(const char* filter, const char* defaultPath) {
 		if(!pMiscTool)
-			return L"\0";
+			return SoraWString();
 		
 		return pMiscTool->fileOpenDialog(filter, defaultPath);
 	}
@@ -1258,5 +1297,13 @@ namespace sora {
     
     bool SoraCore::isRenderSystemExtensionEnabled(int32 ext) {
         return IsRenderSystemExtensionEnabled((ExtensionFeature)ext);
+    }
+    
+    void SoraCore::enableFullscreenBuffer(bool flag) {
+        bEnableScreenBuffer = flag;
+    }
+    
+    void SoraCore::registerFullscreenBufferDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate) {
+        SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate);
     }
 } // namespace sora

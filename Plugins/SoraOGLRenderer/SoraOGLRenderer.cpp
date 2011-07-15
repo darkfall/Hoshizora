@@ -205,22 +205,20 @@ namespace sora{
             pCurTarget->attachToRender();
             applyTransform();
 			CurBlendMode = 0;
-            glClearColor(0, 0, 0, 0);
+            glClearColor((float)(color>>24&0xFF)/255.0, (float)(color>>16&0xFF)/255.0, (float)(color>>8&0xFF)/255.0, (float)(color&0xFF)/255.0);
 			
 			if(clear)
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			else
-				glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+				glClear(GL_DEPTH_BUFFER_BIT);
 			
         } else {
-            if(iFrameStart) {
-                glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
-				
-				if(clear)
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-				else
-					glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-            }
+            glClearColor((float)(color>>24&0xFF)/255.0, (float)(color>>16&0xFF)/255.0, (float)(color>>8&0xFF)/255.0, (float)(color&0xFF)/255.0);
+            
+            if(clear)
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            else
+                glClear(GL_DEPTH_BUFFER_BIT);
         }
 
 	}
@@ -228,13 +226,12 @@ namespace sora{
 	void SoraOGLRenderer::_glEndScene() {
 		flush();
 		if(pCurTarget != NULL) {
+            glFlush();
+
             pCurTarget->detachFromRender();
             pCurTarget = 0;
 
             applyTransform();
-
-            glFlush();
-
         } else
             iFrameStart = 0;
 		//else
@@ -254,8 +251,14 @@ namespace sora{
 				glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
 
 		if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND)) {
-			if(blend & BLEND_ALPHABLEND)
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);      //Alpha blending
+			if(blend & BLEND_ALPHABLEND) {
+                if(pCurTarget)
+                    // alpha trick with FBO transparent background
+                    // see http://www.opengl.org/discussion_boards/ubbthreads.php?ubb=showflat&Number=257628
+                    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+                else 
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);      //Alpha blending
+            }
 			else
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE); //Addictive
 		}
@@ -489,8 +492,8 @@ namespace sora{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		
-		uint8* texData = new uint8[w*h*4];
-		memset(texData, 255, w*h*4);
+		uint8* texData = new uint8[w*h*sizeof(uint32)];
+		memset(texData, 255, w*h*sizeof(uint32));
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
 		delete texData;
 

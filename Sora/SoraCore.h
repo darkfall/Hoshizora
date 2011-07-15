@@ -19,10 +19,11 @@
 #include "SoraFrameListener.h"
 #include "SoraEnvValues.h"
 #include "SoraResourceFile.h"
+#include "SoraDelegate.h"
 
 #include "Debug/SoraInternalLogger.h"
-#include "helpers/SoraMenuBar.h"
 
+#include "helpers/SoraMenuBar.h"
 #include "cmd/SoraConsole.h"
 
 #include <map>
@@ -89,7 +90,7 @@ namespace sora {
         void    setVerticalSync(bool flag);
 
 		// render system APIs
-		void beginScene(ulong32 c=0, ulong32 h=0, bool clear=true);
+		void beginScene(ulong32 c=0x000000FF, ulong32 h=0, bool clear=true);
 		void endScene();
 
 		HSORATARGET     createTarget(int width, int height, bool zbuffer=true);
@@ -264,6 +265,13 @@ namespace sora {
 		SoraCamera* getMainCamera() const;
 		
 		void enablePluginDetection(bool flag);
+        
+        /**
+         * Enable Fullscreen buffer would cause everything be renderered to a screen texture buffer then render to screen
+         * This is required for fullscreen post shader effects
+         **/
+        void enableFullscreenBuffer(bool flag);
+        void registerFullscreenBufferDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate);
 		
 	private:
 		inline void _registerCoreCmds();
@@ -303,6 +311,11 @@ namespace sora {
 		SoraShaderContext* shaderContext;
         SoraShaderContext* tempShaderContext;
         SoraShaderContext* prevShaderContext;
+        
+        bool bEnableScreenBuffer;
+        bool bScreenBufferAttached;
+        ulong32 mScreenBuffer;
+        SoraSprite* mScreenBufferSprite;
 		
 		SoraCamera* mainCamera;
 		

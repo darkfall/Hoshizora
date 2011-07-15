@@ -27,17 +27,9 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 	GLuint gl_error;
 
 #ifndef WIN32
-		glGenTextures(1, &glTex);
-		glBindTexture(GL_TEXTURE_2D, glTex);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		
-		GLbyte* data = new GLbyte[_w*_h*4];
-		memset(data, 0, _w*_h*4);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _w, _h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		delete data;
-		
-		glBindTexture(GL_TEXTURE_2D, 0);
+		SoraTexture* objtex = (SoraTexture*)SoraCore::Instance()->createTextureWH(_w, _h);
+        glTex = objtex->mTextureID;
+        tex = (HSORATEXTURE)objtex;
 		
 		if((gl_error = glGetError()) != GL_NO_ERROR) {
 			err = 1;
@@ -72,14 +64,7 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 			err = 2;
 		else err = 0;
 		
-		SoraTexture* ptex = new SoraTexture;
-		ptex->mTextureID = glTex;
-		ptex->mTextureWidth = ptex->mOriginalWidth = w;
-		ptex->mTextureHeight = ptex->mOriginalHeight = h;
-		tex = (ulong32)ptex;
-		
 		glDisable(GL_TEXTURE_2D);
-		
 		
 		if(err != 0)
 			SORA->log("Error creating Render Target");
