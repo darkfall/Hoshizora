@@ -19,9 +19,7 @@
 
 #include "SoraCore.h"
 #include "SoraInfiniteRendererCallback.h"
-
 #include "SoraRenderSystemExtension.h"
-
 #include "SoraOGLKeyPoll.h"
 
 #ifdef SORA_USE_SHADER

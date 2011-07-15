@@ -126,16 +126,17 @@ namespace sora {
 		attached = false;
 		kerningWidth = 0.f;
 		kerningHeight = 0.f;
-
+        
+		charRotation = 0.f;
+		scale = 1.f;
+        lineWidth = 0.f;
+        lineRotation = 0.f;
+        
 		sora = SoraCore::Instance();
-		if(!sora)
-			THROW_SORA_EXCEPTION("error getting core instance");
 		sprite = new SoraSprite(NULL);
 		if(!sprite)
 			THROW_SORA_EXCEPTION("error creating font sprite");
 		
-		charRotation = 0.f;
-		scale = 1.f;
 	}
 
 	SoraFTFont::~SoraFTFont() {
@@ -207,7 +208,7 @@ namespace sora {
 		kerningHeight = kh;
 	}
 
-	float32 SoraFTFont::getKerningHeight() {
+	float32 SoraFTFont::getKerningHeight() const {
 		return kerningHeight;
 	}
 
@@ -215,7 +216,7 @@ namespace sora {
 		kerningWidth = kw;
 	}
 	
-	float32 SoraFTFont::getKerningWidth() {
+	float32 SoraFTFont::getKerningWidth() const {
 		return kerningWidth;
 	}
 
@@ -227,12 +228,12 @@ namespace sora {
 			else if(align == FONT_ALIGNMENT_CENTER )
 				x = x - ((int32)getStringWidth(pwstr) >>1 );
 		}
-
+        
 		uint32 n;
 		while(*pwstr) {
 			if(*pwstr == L'\n') {
-				y += getHeight() + kerningHeight;
 				++pwstr;
+                y += getHeight() + kerningHeight;
 				x = ox;
 				if(align != FONT_ALIGNMENT_LEFT) {
 					if(align == FONT_ALIGNMENT_RIGHT)
@@ -249,22 +250,56 @@ namespace sora {
             
 			n = getGlyphByChar(*pwstr);
 			if(n > 0 && n < ft_glyphs.size()) {
-				int imgw = ft_glyphs[n-1].imgw;
-				int imgh = ft_glyphs[n-1].imgh;
+				int imgw = ft_glyphs[n-1].imgw - 1;
+				int imgh = ft_glyphs[n-1].imgh - 1;
 				//int texw = ft_glyphs[n-1].texw;
 				//int texh = ft_glyphs[n-1].texh;
 				int offx = ft_glyphs[n-1].left;
 				int offy = ft_glyphs[n-1].size - ft_glyphs[n-1].top;
 
 				sprite->setTexture(ft_glyphs[n-1].tex);
-				sprite->setTextureRect(0, 0, imgw-1.0f, imgh-1.0f);
+				sprite->setTextureRect(0, 0, imgw, imgh);
+            //    sprite->setCenter(imgw/2.f, imgh/2.f);
+                sprite->setRotation(charRotation);
+				sprite->setScale(scale, scale);
 				sprite->render(x+offx, y+offy);
  
-				x += (getWidthFromCharacter(*pwstr) + kerningWidth);
+                if(lineRotation == 0.f) {
+                    x += (getWidthFromCharacter(*pwstr) + kerningWidth);
+                    if(lineWidth != 0.f && x >= lineWidth+ox) {
+                        y += getHeight() + kerningHeight;
+                        x = ox;
+                        if(align != FONT_ALIGNMENT_LEFT) {
+                            if(align == FONT_ALIGNMENT_RIGHT)
+                                x = x - getStringWidth(pwstr);
+                            else if(align == FONT_ALIGNMENT_CENTER )
+                                x = x - ((int32)getStringWidth(pwstr) >>1 );
+                        }
+                    }
+                } else {
+                    x += (getWidthFromCharacter(*pwstr) + kerningWidth) * cosf(lineRotation);
+                    y += (getHeight() + kerningHeight) * sinf(lineRotation);
+                }
 			} 
 			else {
 				// skip unknown characters
-				x += getWidthFromCharacter(*pwstr) + kerningWidth;
+				if(lineRotation == 0.f) {
+                    x += (getWidthFromCharacter(*pwstr) + kerningWidth);
+                    if(lineWidth != 0.f && x >= lineWidth+ox) {
+                        y += getHeight() + kerningHeight;
+                        x = ox;
+                        if(align != FONT_ALIGNMENT_LEFT) {
+                            if(align == FONT_ALIGNMENT_RIGHT)
+                                x = x - getStringWidth(pwstr);
+                            else if(align == FONT_ALIGNMENT_CENTER )
+                                x = x - ((int32)getStringWidth(pwstr) >>1 );
+                        }
+                    }
+                } else {
+                    float32 dist = (getWidthFromCharacter(*pwstr) + kerningWidth);
+                    x += dist * cosf(lineRotation);
+                    y += dist * sinf(lineRotation);
+                }       
 			}
 			++pwstr;
 		}
@@ -302,8 +337,8 @@ namespace sora {
 		uint32 n;
 		while(pwstr && *pwstr) {
 			if(*pwstr == L'\n') {
-				y += getHeight() + kerningHeight;
 				++pwstr;
+                y += getHeight() + kerningHeight;
 				x = ox;
 				if(bhcenter || bvcenter) {
 					if(bhcenter)
@@ -321,24 +356,58 @@ namespace sora {
             
 			n = getGlyphByChar(*pwstr);
 			if(n > 0 && n < ft_glyphs.size()) {
-				int imgw = ft_glyphs[n-1].imgw;
-				int imgh = ft_glyphs[n-1].imgh;
+				int imgw = ft_glyphs[n-1].imgw - 1;
+				int imgh = ft_glyphs[n-1].imgh - 1;
 				//int texw = ft_glyphs[n-1].texw;
 				//int texh = ft_glyphs[n-1].texh;
 				int offx = ft_glyphs[n-1].left;
 				int offy = ft_glyphs[n-1].size - ft_glyphs[n-1].top;
 
 				sprite->setTexture(ft_glyphs[n-1].tex);
-				sprite->setTextureRect(0, 0, imgw-1.0f, imgh-1.0f);
+				sprite->setTextureRect(0, 0, imgw, imgh);
+            //    sprite->setCenter(imgw/2.f, imgh/2.f);
 				sprite->setRotation(charRotation);
 				sprite->setScale(scale, scale);
 				sprite->render(x+offx, y+offy);
  
-				x += (getWidthFromCharacter(*pwstr) + kerningWidth);
+                if(lineRotation == 0.f) {
+                    x += (getWidthFromCharacter(*pwstr) + kerningWidth);
+                    if(lineWidth != 0.f && x >= lineWidth+ox) {
+                        y += getHeight() + kerningHeight;
+                        x = ox;
+                        if(bhcenter || bvcenter) {
+                            if(bhcenter)
+                                x = x - ((int)getStringWidth(pwstr) >> 1 );
+                            
+                            if(bvcenter)
+                                y = y - ((int)getHeight() >> 1 );
+                        }
+                    }
+                } else {
+                    x += (getWidthFromCharacter(*pwstr) + kerningWidth) * cosf(lineRotation);
+                    y += (getHeight() + kerningHeight) * sinf(lineRotation);
+                }
 			} 
 			else {
 				// skip unknown characters
-				x += getWidthFromCharacter(*pwstr) + kerningWidth;
+				if(lineRotation == 0.f) {
+                    x += (getWidthFromCharacter(*pwstr) + kerningWidth);
+                    if(lineWidth != 0.f && x >= lineWidth+ox) {
+                        y += getHeight() + kerningHeight;
+                        x = ox;
+                        if(bhcenter || bvcenter) {
+                            if(bhcenter)
+                                x = x - ((int)getStringWidth(pwstr) >> 1 );
+                            
+                            if(bvcenter)
+                                y = y - ((int)getHeight() >> 1 );
+                        }
+                    }
+                } else {
+                    float32 dist = (getWidthFromCharacter(*pwstr) + kerningWidth);
+                    x += dist * cosf(lineRotation);
+                    y += dist * sinf(lineRotation);
+                }
 			}
 			++pwstr;
 		}
@@ -363,13 +432,13 @@ namespace sora {
 		return height;
 	}
 
-	float32 SoraFTFont::getHeight() {
+	float32 SoraFTFont::getHeight() const {
 		if(!ft_glyphs.empty())
 			return (float32)size+kerningHeight;
 		return 0.f;
 	}
 
-	uint32 SoraFTFont::getFontSize() {
+	uint32 SoraFTFont::getFontSize() const {
 		return size;
 	}
 	
@@ -378,11 +447,38 @@ namespace sora {
 	}
 	
 	void SoraFTFont::setCharRotation(float32 rot) {
-		charRotation = rot;
+		charRotation = DGR_RAD(rot);
 	}
 	
 	void SoraFTFont::setScale(float32 s) {
 		scale = s;
 	}
+    
+    void SoraFTFont::setLineWidth(float32 width) {
+        lineWidth = width;
+    }
+    
+    float32 SoraFTFont::getLineWidth() const {
+        return lineWidth;
+    }
+    
+    float32 SoraFTFont::getCharRotation() const {
+        return charRotation;
+    }
+    
+    float32 SoraFTFont::getScale() const {
+        return scale;
+    }
 
+    void SoraFTFont::setLineRotation(float32 rot, bool rotateChar) {
+        lineRotation = DGR_RAD(rot);
+        if(rotateChar)
+            setCharRotation(rot);
+        else
+            setCharRotation(0.f);
+    }
+    
+    float32 SoraFTFont::getLineRotation() const {
+        return lineRotation;
+    }
 } // namespace sora

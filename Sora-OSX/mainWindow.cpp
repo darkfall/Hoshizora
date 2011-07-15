@@ -51,6 +51,8 @@
 #include "SoraBox2D/SoraPhysicalWorld.h"
 #include "SoraBox2D/SoraPhysicalObject.h"
 
+#include "SoraShaderManager.h"
+
 sora::SoraGifSprite* gifSprite;
 sora::SoraCustomShapeSprite* customSprite;
 
@@ -119,6 +121,7 @@ bool mainWindow::updateFunc() {
     return false;
 }
 
+
 bool mainWindow::renderFunc() {
 	pCanvas->beginRender(0x000000FF);
 	sora::SORA->beginZBufferSort();
@@ -126,7 +129,7 @@ bool mainWindow::renderFunc() {
     
     pressAnyKey->render();
     
-    //    pSpr->render();
+    pSpr->render();
 	sora::SORA->endZBufferSort();
     
 	pCanvas->finishRender();
@@ -134,6 +137,8 @@ bool mainWindow::renderFunc() {
 	sora->beginScene(0);
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
+    
+    sora::SoraPhysicalWorld::Instance()->initBox2DWorld(0.f, 1.f);
     
     
 	{
@@ -156,7 +161,12 @@ bool mainWindow::renderFunc() {
 	}
 	//obj.update(sora::SORA->getDelta());
     
-	pFont->print(0.f, getWindowHeight()-20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
+    //pFont->setLineRotation(90.f, true);
+    
+	pFont->print(900, 20.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %f", sora::SORA->getFPS());
+    
+   // pFont->setLineRotation(0.f);
+    
 	pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Camera:(X=%f, Y=%f, Z=%f)", cx,cy,cz);
 	pFont->print(0.f, getWindowHeight()-60.f, sora::FONT_ALIGNMENT_LEFT, L"Alive Particles: %d, total %d", ps->size(), ps->getTotalParticleAlive());
     
@@ -188,10 +198,11 @@ void downloadDelegate(sora::SoraHttpFile& file) {
 
 
 #include "SoraModifierAdapter.h"
+#include "modifiers/SoraFontModifiers.h"
 
 void mainWindow::onScreenBufferRender(ulong32& tex) {
     pScreenSpr->setTexture(tex);
-    pScreenSpr->render(100.f, 100.f);
+    pScreenSpr->render();
 }
 
 void mainWindow::init() {
@@ -199,8 +210,8 @@ void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
     
-    
     sora::SORA->registerFullscreenBufferDelegate(sora::DelegatePtr(this, &mainWindow::onScreenBufferRender));
+    //sora::SORA->enableFullscreenBuffer(true);
 	/*file.downloadFileWithDelegate("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", Delegate(downloadDelegate).clone());*/
     
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
@@ -234,11 +245,22 @@ void mainWindow::init() {
 	pFont = sora::SORA->createFont(L"cour.ttf", 16);
 	pFont->setColor(0xFFFFCC00);
     
+    new sora::SoraModifierAdapter<sora::SoraFont>(pFont,
+                                                  sora::CreateModifierList(new sora::SoraFontRotationModifier(0.f, 360.f, 10.f, true, false),
+                                                                           new sora::SoraFontScaleModifier(1.f, 2.f, 5.f),
+                                                                           true));
+
+    
 	pCanvas = new sora::SoraBaseCanvas(800, 600);
     
 	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
     
 	pSpr = sora::SORA->createSprite(L"background.png");
+    
+    new sora::SoraModifierAdapter<sora::SoraSprite>(pSpr,
+                                                    sora::CreateEffectList(sora::CreateEffectFade(0.f, 1.f, 5.f),
+                                                                           sora::CreateEffectTransitions(0.f, 0.f, 100.f, 100.f, 5.f),
+                                                                           sora::IMAGE_EFFECT_PINGPONG));
     
     //pSpr->setCenter(pSpr->getSpriteWidth()/2, pSpr->getSpriteHeight()/2);
     //pSpr->setScale(3.f, 3.f);
@@ -249,7 +271,10 @@ void mainWindow::init() {
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
     
     pScreenSpr = new sora::SoraSprite(NULL);
-    
+    sora::SoraShader* shader = pScreenSpr->attachShader(L"HDRBlur.cg", "HDRBlur", sora::FRAGMENT_SHADER);
+    if(!shader) {
+        sora::SORA->messageBox("sdsd", "Sd", MB_OK);
+    }
     pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(1.f);
     pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
     pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.f);

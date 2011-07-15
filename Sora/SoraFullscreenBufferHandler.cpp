@@ -40,6 +40,8 @@ namespace sora {
     }
 
     void SoraFullscreenBufferHandler::registerDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate) {
+        if(mDelegate != NULL)
+            delete mDelegate;
         mDelegate = delegate;
     }
     

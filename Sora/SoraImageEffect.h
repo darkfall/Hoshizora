@@ -5,19 +5,19 @@
 #include "SoraPlatform.h"
 #include "SoraColor.h"
 #include "hgevector.h"
-#include "SoraObject.h"
 
 #include "CoreTransform.h"
 #include "CoreTransformer.h"
 
 #include "SoraModifier.h"
+#include <list>
 
 namespace sora {
 	
 #define IMAGE_EFFECT_TYPE 0x00001000
+    
+    class SoraSprite;
 	
-	class SoraSprite;
-
 	enum {
 		IMAGE_EFFECT_NONE = 0,
 
@@ -57,7 +57,7 @@ namespace sora {
 		IMAGE_EFFECT_PINGPONG_REVERSE = 11,
 	};
 	
-	class SORA_API SoraImageEffect: public SoraModifier<SoraObject> {
+	class SORA_API SoraImageEffect: public SoraModifier<SoraSprite> {
 	public:
 		SoraImageEffect();
 		SoraImageEffect(CoreTransformer<CoreTransform>* transformer);
@@ -81,7 +81,7 @@ namespace sora {
 		virtual void start(IMAGE_EFFECT_MODE mode, float32 time);
 		virtual int32 update(float32 delta);
 		
-		virtual void modify(SoraObject* sprite) = 0;
+		virtual void modify(SoraSprite* sprite) = 0;
 		
 		void restart();
 		
@@ -101,7 +101,7 @@ namespace sora {
 		
 		void swap();
         
-        virtual SoraModifier<SoraObject>* clone() = 0;
+        virtual SoraModifier<SoraSprite>* clone() = 0;
         
         SoraImageEffect& operator =(const SoraImageEffect& rhs);
         
@@ -149,13 +149,13 @@ namespace sora {
 		virtual int32 update(float32 delta);
 		virtual void start(IMAGE_EFFECT_MODE mode, float32 time);
 		
-		virtual void modify(SoraObject* obj);
+		virtual void modify(SoraSprite* obj);
         
-        SoraModifier<SoraObject>* clone();
+        SoraModifier<SoraSprite>* clone();
         		
 	private:
-		typedef std::list<SoraImageEffect*> IMAGE_EFFECT_LIST;
-		IMAGE_EFFECT_LIST mImageEffects;
+		typedef std::list<SoraImageEffect*> ImageEffectList;
+		ImageEffectList mImageEffects;
 		
 		SoraImageEffect* mCurrEffect;
 		
@@ -170,8 +170,8 @@ namespace sora {
 							IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraObject* obj);
-        SoraModifier<SoraObject>* clone();
+        void modify(SoraSprite* obj);
+        SoraModifier<SoraSprite>* clone();
 	};
 
 	class SORA_API SoraImageEffectShake: public SoraImageEffect {
@@ -180,8 +180,8 @@ namespace sora {
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							 CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraObject* obj);
-        SoraModifier<SoraObject>* clone();
+        void modify(SoraSprite* obj);
+        SoraModifier<SoraSprite>* clone();
 	};
 
 	class SORA_API SoraImageEffectScale: public SoraImageEffect {
@@ -193,8 +193,8 @@ namespace sora {
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							 CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraObject* obj);
-        SoraModifier<SoraObject>* clone();
+        void modify(SoraSprite* obj);
+        SoraModifier<SoraSprite>* clone();
 	};
 
 	class SORA_API SoraImageEffectTransitions: public SoraImageEffect {
@@ -206,8 +206,8 @@ namespace sora {
 								   IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 								   CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraObject* obj);
-        SoraModifier<SoraObject>* clone();
+        void modify(SoraSprite* obj);
+        SoraModifier<SoraSprite>* clone();
 	};
 	
 	class SORA_API SoraImageEffectColorTransitions: public SoraImageEffect {
@@ -219,8 +219,8 @@ namespace sora {
 										IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 										CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraObject* obj);
-        SoraModifier<SoraObject>* clone();
+        void modify(SoraSprite* obj);
+        SoraModifier<SoraSprite>* clone();
 	};
 	
 	class SORA_API SoraImageEffectRotation: public SoraImageEffect {
@@ -232,8 +232,8 @@ namespace sora {
 								IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 								CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraObject* obj);
-        SoraModifier<SoraObject>* clone();
+        void modify(SoraSprite* obj);
+        SoraModifier<SoraSprite>* clone();
 	};
 	
 	typedef SoraImageEffectFade IEFade;
@@ -291,6 +291,109 @@ namespace sora {
                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
                                             CoreTransformer<CoreTransform>* transformer=0) {
         return new IERotation(start, end, time, mode, transformer);
+    }
+    
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, SoraImageEffect* eff2, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, 
+                                                 SoraImageEffect* eff2, 
+                                                 SoraImageEffect* eff3, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, 
+                                                 SoraImageEffect* eff2, 
+                                                 SoraImageEffect* eff3, 
+                                                 SoraImageEffect* eff4, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1,  
+                                                 SoraImageEffect* eff2, 
+                                                 SoraImageEffect* eff3, 
+                                                 SoraImageEffect* eff4, 
+                                                 SoraImageEffect* eff5, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1,  
+                                                 SoraImageEffect* eff2, 
+                                                 SoraImageEffect* eff3, 
+                                                 SoraImageEffect* eff4, 
+                                                 SoraImageEffect* eff5,
+                                                 SoraImageEffect* eff6, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1,  
+                                                 SoraImageEffect* eff2, 
+                                                 SoraImageEffect* eff3, 
+                                                 SoraImageEffect* eff4, 
+                                                 SoraImageEffect* eff5,
+                                                 SoraImageEffect* eff6, 
+                                                 SoraImageEffect* eff7, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        list->add(eff7);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1,  
+                                                 SoraImageEffect* eff2, 
+                                                 SoraImageEffect* eff3, 
+                                                 SoraImageEffect* eff4, 
+                                                 SoraImageEffect* eff5,
+                                                 SoraImageEffect* eff6, 
+                                                 SoraImageEffect* eff7,
+                                                 SoraImageEffect* eff8, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        list->add(eff7);
+        list->add(eff8);
+        return list;
     }
 
 } // namespace sora

@@ -418,6 +418,11 @@ namespace sora {
         return SoraFunctionDelegate<TARGS, true, false>(NotifyMethod).clone();
     }
     
+    template<class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(void (*NotifyMethod)(TARGS&)) {
+        return SoraFunctionDelegate<TARGS, false>(NotifyMethod).clone();
+    }
+    
     template<class TOBJ, class TARGS>
     static SoraAbstractDelegate<TARGS>* DelegatePtr(TOBJ* obj, void (TOBJ::*NotifyMethod)(const void*, TARGS&), SoraTimestamp::TimeDiff expireMs) {
         return SoraExpireDelegate<TARGS>(Delegate<TOBJ, TARGS, true>(obj, NotifyMethod), expireMs).clone();

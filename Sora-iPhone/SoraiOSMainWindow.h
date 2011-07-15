@@ -33,12 +33,12 @@ public:
 	
 	virtual bool renderFunc() {
 		sora::SORA->beginScene();
-	
+        pBG->render(0.f, 0.f);
+
 		sora::GCN_GLOBAL->gcnLogic();
 
 		sora::GCN_GLOBAL->gcnDraw();
     //    pBG->setTexture(0);
-		pBG->render(0.f, 0.f);
         
 		if(pFont)
             pFont->print(0.f, getWindowHeight()-20, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.2f", sora::SORA->getFPS());
@@ -75,7 +75,7 @@ public:
 		di->setNewItemImage("boxbutton.png", gcn::Rectangle(0, 0, 64, 64), gcn::Rectangle(64, 0, 64, 64));
 		di->setBaseColor(gcn::Color(255, 255, 255, 155));
 		
-		sora::GCN_GLOBAL->addWidget(di, "canvas");
+		sc->add(di);
 		
 	}
 	

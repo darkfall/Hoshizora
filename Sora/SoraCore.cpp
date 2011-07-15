@@ -127,17 +127,20 @@ namespace sora {
 #ifdef DEBUG
             DEBUG_RENDERER->createTarget();
 #endif
-            mScreenBuffer = pRenderSystem->createTarget(iScreenWidth, iScreenHeight);
-            if(!mScreenBuffer) {
-                bEnableScreenBuffer = false;
-                THROW_SORA_EXCEPTION("Error creating fullscreen buffer, fullscreen posteffect maybe disabled");
+            
+            if(bEnableScreenBuffer) {
+                mScreenBuffer = pRenderSystem->createTarget(iScreenWidth, iScreenHeight);
+                if(!mScreenBuffer) {
+                    bEnableScreenBuffer = false;
+                    THROW_SORA_EXCEPTION("Error creating fullscreen buffer, fullscreen posteffect maybe disabled");
+                }
+                SoraFullscreenBufferHandler::Instance();
             }
-            SoraFullscreenBufferHandler::Instance();
             
             if(pRenderSystem)
                 pRenderSystem->start(pTimer);
         } catch(const SoraException& exp) {
-            messageBox(exp.what(), "Fatal error!", MB_OK | MB_ICONERROR);
+            _postError(exp.what());
         }
 	}
 
@@ -171,104 +174,108 @@ namespace sora {
 		PROFILE("CORE_UPDATE");
 #endif
 
-		if(!bPaused && !bPauseSound) {
-			{
+        try {
+            if(!bPaused && !bPauseSound) {
+                {
 #ifdef PROFILE_CORE_UPDATE
-				PROFILE("UPDATE_SOUNDSYSTEM");
+                    PROFILE("UPDATE_SOUNDSYSTEM");
 #endif
-				if(pSoundSystem) pSoundSystem->update();
-			}
-		}
-		
-	
-		if(!bPaused) {
-			SoraInputSimulator::clear();
-
-			pRenderSystem->beginFrame();
-			
-			{
-#ifdef PROFILE_CORE_UPDATE
-				PROFILE("UPDATE_MAINWINDOW");
-#endif
-				mainWindow->updateFunc();
-                _modifierAdapterUpdate();
-			}
-			
-			{
-#ifdef PROFILE_CORE_UPDATE
-				PROFILE("UPDATE_EVENT_MANAGER");
-#endif
-				SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
-			}
+                    if(pSoundSystem) pSoundSystem->update();
+                }
+            }
             
-            {
+            
+            if(!bPaused) {
+                SoraInputSimulator::clear();
+                
+                pRenderSystem->beginFrame();
+                
+                {
 #ifdef PROFILE_CORE_UPDATE
-				PROFILE("FRAMELISTENER_START");
+                    PROFILE("UPDATE_MAINWINDOW");
 #endif
-				_frameListenerStart();
-			}
-			
-			{
+                    mainWindow->updateFunc();
+                    _modifierAdapterUpdate();
+                }
+                
+                {
 #ifdef PROFILE_CORE_UPDATE
-				PROFILE("UPDATE_PLUGINS");
+                    PROFILE("UPDATE_EVENT_MANAGER");
 #endif
-				pPluginManager->update();
-			}
-			
-			{
+                    SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
+                }
+                
+                {
 #ifdef PROFILE_CORE_UPDATE
-				PROFILE("UPDATE_RENDERSYSTEM");
+                    PROFILE("FRAMELISTENER_START");
 #endif
-				pRenderSystem->update();
-			}
-		} else 
-			mainWindow->pauseFunc();
-        
-		if(!bPaused && !bPauseRender) {
-			{
+                    _frameListenerStart();
+                }
+                
+                {
 #ifdef PROFILE_CORE_UPDATE
-				PROFILE("RENDER_MAINWINDOW");
+                    PROFILE("UPDATE_PLUGINS");
 #endif
-				mainWindow->renderFunc();
-			}
-		}
-        
-		if(!bPaused) {
-			{
+                    pPluginManager->update();
+                }
+                
+                {
 #ifdef PROFILE_CORE_UPDATE
-				PROFILE("FRAMELISTENER_END");
+                    PROFILE("UPDATE_RENDERSYSTEM");
 #endif
-				_frameListenerEnd();
-			}
-			
-			if(!bPauseRender) {
-				DEBUG_RENDERER->render();
-				
-				SoraMenuBar::Instance()->update();
-				SoraMenuBar::Instance()->render();
-				
-				SoraConsole::Instance()->render();
-
-				
-				if(bMainScene) {
-					bMainScene = false;
-					pRenderSystem->endScene();
+                    pRenderSystem->update();
+                }
+            } else 
+                mainWindow->pauseFunc();
+            
+            if(!bPaused && !bPauseRender) {
+                {
+#ifdef PROFILE_CORE_UPDATE
+                    PROFILE("RENDER_MAINWINDOW");
+#endif
+                    mainWindow->renderFunc();
+                }
+            }
+            
+            if(!bPaused) {
+                {
+#ifdef PROFILE_CORE_UPDATE
+                    PROFILE("FRAMELISTENER_END");
+#endif
+                    _frameListenerEnd();
+                }
+                
+                if(!bPauseRender) {
+                    DEBUG_RENDERER->render();
                     
-                    if(mScreenBuffer && bEnableScreenBuffer) {
-                        pRenderSystem->beginScene(0, 0, true);
-                        SoraFullscreenBufferHandler::Instance()->onBufferRender(getTargetTexture(mScreenBuffer));
+                    SoraMenuBar::Instance()->update();
+                    SoraMenuBar::Instance()->render();
+                    
+                    SoraConsole::Instance()->render();
+                    
+                    
+                    if(bMainScene) {
+                        bMainScene = false;
                         pRenderSystem->endScene();
-                        bScreenBufferAttached = false;
+                        
+                        if(mScreenBuffer && bEnableScreenBuffer) {
+                            pRenderSystem->beginScene(0, 0, true);
+                            SoraFullscreenBufferHandler::Instance()->onBufferRender(getTargetTexture(mScreenBuffer));
+                            pRenderSystem->endScene();
+                            bScreenBufferAttached = false;
+                        }
                     }
-				}
-			}
-			
-			time += pTimer->getDelta();
-			
-			pRenderSystem->endFrame();
-            
-            keypoll::clearInputQueue();
-		}
+                }
+                
+                time += pTimer->getDelta();
+                
+                pRenderSystem->endFrame();
+                
+                keypoll::clearInputQueue();
+            }
+        } catch (const SoraException& exp) {
+            messageBox(exp.what(), "A Error Happened :(", MB_OK | MB_ICONERROR);
+        }
         
 	}
 
@@ -324,7 +331,7 @@ namespace sora {
 		if(!bMessageBoxErrorPost)
 			DebugPtr->log(string, LOG_LEVEL_ERROR);
 		else
-			pMiscTool->messageBox(string, "SoraCoreError", MB_ICONERROR | MB_OK);
+			pMiscTool->messageBox(string, "Some Error Happened :(", MB_ICONERROR | MB_OK);
 	}
 
 	ulong32 SoraCore::getMainWindowHandle() {
@@ -1301,6 +1308,11 @@ namespace sora {
     
     void SoraCore::enableFullscreenBuffer(bool flag) {
         bEnableScreenBuffer = flag;
+        if(flag && !mScreenBuffer) {
+            mScreenBuffer = createTarget(getScreenWidth(), getScreenHeight());
+            if(!mScreenBuffer)
+                THROW_SORA_EXCEPTION("Error creating screen buffer, fullscreen buffer maybe disabled. :(");
+        }
     }
     
     void SoraCore::registerFullscreenBufferDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate) {

@@ -29,7 +29,8 @@ namespace sora {
 			return itFont->second;
 		
 		SoraiOSFont* pfont = new SoraiOSFont(filename, size);
-		mFontMap[filename] = pfont;
+        if(pfont)
+            mFontMap[filename] = pfont;
 		return pfont;
 	}
     

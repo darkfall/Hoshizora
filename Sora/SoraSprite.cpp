@@ -48,8 +48,6 @@ namespace sora {
 			sprWidth = 1;
 			sprHeight = 1;
 		}
-		shaderContext = NULL;
-		
 		if(texture && SoraTextureMap::Instance()->exist((HSORATEXTURE)tex)) {
 			setName(SoraTextureMap::Instance()->getTextureName((HSORATEXTURE)tex));
 			SoraTextureMap::Instance()->addRf((HSORATEXTURE)tex);
@@ -340,7 +338,7 @@ namespace sora {
 	}
 	
 	void SoraSprite::stopEffect(SoraImageEffect* _eff) {
-		IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
+		ImageEffectList::iterator eff = vEffects.begin();
 		while(eff != vEffects.end()) {
 			if((*eff) == _eff) {
 				delete _eff;
@@ -361,7 +359,7 @@ namespace sora {
 	}
 	
 	void SoraSprite::clearEffects() {
-		IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
+		ImageEffectList::iterator eff = vEffects.begin();
 		while(eff != vEffects.end()) {
 			if((*eff) != NULL) {
 				delete (*eff);
@@ -374,7 +372,7 @@ namespace sora {
 	
 	uint32 SoraSprite::update(float32 dt) {
 		if(!vEffects.empty()) {
-			IMAGE_EFFECT_LIST::iterator eff = vEffects.begin();
+			ImageEffectList::iterator eff = vEffects.begin();
 			while(eff != vEffects.end()) {
 				int32 result = (*eff)->update(dt);
 				(*eff)->modify(this);

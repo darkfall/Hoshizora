@@ -178,7 +178,7 @@ namespace sora{
             pCurTarget->attachToRender();
             applyTransform();
 			CurBlendMode = 0;
-            glClearColor(0, 0, 0, 0);
+            glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
 			
 			if(clear)
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -187,7 +187,7 @@ namespace sora{
 			
         } else {
             if(iFrameStart) {
-                glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
+                glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
 				
 				if(clear)
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -885,5 +885,69 @@ namespace sora{
 		flush();
 		currShader = 0;
 	}
+    
+    void SoraiOSGLRenderer_ES2::onExtensionStateChanged(int32 extension, bool state, int32 param) {
+        
+    }
+    
+    void SoraiOSGLRenderer_ES2::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
+		Rect4V rect;
+		
+		if(fWidth != y2-y1 && fWidth != x2-x1) {
+			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
+			
+			rect.x1 = x1; rect.y1 = y1;
+			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
+			rect.x4 = x2; rect.y4 = y2;
+			rect.x3 = x2+fWidth*cosf(rotAng); rect.y3 = y2+fWidth*sinf(rotAng);
+		} else {
+			rect.x1 = x1; rect.y1 = y1;
+			rect.x2 = x2; rect.y2 = y1;
+			rect.x3 = x2; rect.y3 = y2;
+			rect.x4 = x1; rect.y4 = y2;
+		}
+		sora::SoraQuad quad;
+		
+		quad.tex = NULL;
+		
+		quad.v[0].x   = rect.x1;
+		quad.v[0].y   = rect.y1;
+		quad.v[0].col = color;
+		
+		quad.v[1].x   = rect.x2;
+		quad.v[1].y   = rect.y2;
+		quad.v[1].col = color;
+		
+		quad.v[2].x   = rect.x3;
+		quad.v[2].y   = rect.y3;
+		quad.v[2].col = color;
+		
+		quad.v[3].x   = rect.x4;
+		quad.v[3].y   = rect.y4;
+		quad.v[3].col = color;
+		
+		int i;
+		for (i = 0; i < 4; ++i) {
+			quad.v[i].z = z;
+		}
+		
+		quad.blend = BLEND_DEFAULT;
+		
+		renderQuad(quad);
+	}
+	
+	void SoraiOSGLRenderer_ES2::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+		renderRect(x1, y1, x2, y1+1.f, 1.f, color, z);
+		renderRect(x2, y1, x2+1.f, y2, 1.f, color, z);
+		renderRect(x2, y2, x1, y2+1.f, 1.f, color, z);
+		renderRect(x1, y2, x1+1.f, y1, 1.f, color, z);
+	}
 
+    void SoraiOSGLRenderer_ES2::setIcon(const SoraString& icon) {
+        
+    }
+    
+    void SoraiOSGLRenderer_ES2::setCursor(const SoraString& cursor) {
+        
+    }
 } // namespace sora

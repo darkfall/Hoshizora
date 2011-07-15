@@ -34,8 +34,6 @@ namespace sora {
         void createTarget() {
             renderTarget = SORA->createTarget(SORA->getScreenWidth(), SORA->getScreenHeight(), false);
 
-            if(!renderTarget)
-                THROW_SORA_EXCEPTION("Error creating target for debug renderer");
         }
         
         void setFont(SoraFont* font) {

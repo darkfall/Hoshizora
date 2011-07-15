@@ -2,11 +2,31 @@
 #define SORA_PHYSICAL_OBJECT_H_
 
 #include "SoraObject.h"
-#include "SoraPhysicalWorld.h"
+#include "SoraDelegate.h"
+
+#include "Box2D/Box2D.h"
 
 namespace sora {
     
 #define OBJ_PHYSICAL 0x0000300
+    
+    
+    class SoraPhysicalObject;
+    
+    enum ContactPhase {
+        CONTACT_BEGIN,
+        CONTACT_END,
+    };
+    
+    struct SoraPhysicalContactInfo {
+        SoraPhysicalObject* contactObject1;
+        SoraPhysicalObject* contactObject2;
+        b2Vec2 normal;
+        b2Vec2 position;
+        bool isTouching;
+        
+        ContactPhase phase;
+    };
 
 	class SoraPhysicalObject: public SoraObject {
 	public:
@@ -30,6 +50,8 @@ namespace sora {
 
 		void setAngularSpeed(float32 omega);
 		float32 getAngularSpeed() const;
+        
+        void createJoint(SoraPhysicalObject* obj);
 		
 		void setMass(float32 mass);
 		void setMassF(float32 mass, float32 massx, float32 massy);
@@ -60,11 +82,17 @@ namespace sora {
 		b2Vec2 getLocalAnchor() const;
 		float32 getLocalAnchorX() const;
 		float32 getLocalAnchorY() const;
+        
+        typedef SoraAbstractDelegate<SoraPhysicalContactInfo>* ContactDelegate;
+        
+        void setContactDelegate(ContactDelegate delegate);
+        ContactDelegate getContactDelegate() const;
 
 	private:
 		b2Body* body;
-
 		b2Vec2 localAnchor;
+        
+        ContactDelegate mContactDelegate;
 	};
 
 } // namespace sora

@@ -116,7 +116,7 @@ namespace sora{
 	
 	void SoraiOSGLRenderer::applyTransform() {
         if(!pCurTarget) {
-            /*glViewport(0, 0,
+            glViewport(0, 0,
                        _oglWindowInfo.width,
                        _oglWindowInfo.height);
             glMatrixMode(GL_PROJECTION);
@@ -127,11 +127,12 @@ namespace sora{
                     , 0.f, -1.f, 1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
+            
             glTranslatef(_oglWindowInfo.x-_oglWindowInfo.dx, _oglWindowInfo.y-_oglWindowInfo.dy, 0.f); //Set Center Coodinates
             glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
             glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
 			
-            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);*/
+            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
         } else {
             glViewport(0, 0,
                        pCurTarget->getWidth(),
@@ -164,7 +165,7 @@ namespace sora{
             pCurTarget->attachToRender();
             applyTransform();
 			CurBlendMode = 0;
-            glClearColor(0, 0, 0, 0);
+            glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
 			
 			if(clear)
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -172,14 +173,12 @@ namespace sora{
 				glClear(GL_DEPTH_BUFFER_BIT);
 			
         } else {
-            if(iFrameStart) {
-                glClearColor((float)(color>>24&0xFF)/0xff, (float)(color>>16&0xFF)/0xff, (float)(color>>8&0xFF)/0xff, (float)(color&0xFF)/0xff);
-				
-				if(clear)
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				else
-					glClear(GL_DEPTH_BUFFER_BIT);
-            }
+            glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
+            
+            if(clear)
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            else
+                glClear(GL_DEPTH_BUFFER_BIT);
         }
         
 	}
@@ -473,9 +472,6 @@ namespace sora{
 			p2h = i;
 		}
 		
-		printf("%d %d , %d, %d\n", w, h, p2w, p2h);
-		
-		
 		SoraTexture* tex = new SoraTexture(texid,
 										   p2w,
 										   p2h,
@@ -730,43 +726,7 @@ namespace sora{
 	}
 
 	void SoraiOSGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
-		int32 width = w;
-		int32 height = h;
-		if(pCurTarget) {
-			width = pCurTarget->getWidth();
-			height = pCurTarget->getHeight();
-		} else {
-			width = _oglWindowInfo.width;
-			height = _oglWindowInfo.height;
-		}
-		
-		if(w==0 && h==0) {
-			_oglWindowInfo.width = width;
-			_oglWindowInfo.height = height;
-			_oglWindowInfo.x = x;
-			_oglWindowInfo.y = y;
-		} else {
-			if(x<0) { w+=x; x=0; }
-			if(y<0) { h+=y; y=0; }
-			
-			if(x+w > width) w=width-x;
-			if(y+h > height) h=height-y;
-			
-			_oglWindowInfo.width = width;
-			_oglWindowInfo.height = height;
-			_oglWindowInfo.x = x;
-			_oglWindowInfo.y = y;
-		}
-		
-        flush();
-		applyTransform();
-	}
-	
-	void SoraiOSGLRenderer::setTransformWindowSize(float32 w, float32 h) {
-		_oglWindowInfo.width = w!=0.f?w:mainWindow->getWindowWidth();
-		_oglWindowInfo.height = h!=0.f?h:mainWindow->getWindowHeight();
-		applyTransform();
-
+		glScissor(x, y, w, h);
 	}
 
 	void SoraiOSGLRenderer::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
@@ -782,6 +742,8 @@ namespace sora{
 	}
 
 	ulong32 SoraiOSGLRenderer::createTarget(int width, int height, bool zbuffer) {
+        return 0;
+        
 		SoraRenderTargetiOSGL* t = new SoraRenderTargetiOSGL(width, height, zbuffer);
 		liTargets.push_back((SoraRenderTarget*)t);
 		return (ulong32)t;
@@ -864,4 +826,68 @@ namespace sora{
 		currShader = 0;
 	}
 
+    void SoraiOSGLRenderer::onExtensionStateChanged(int32 extension, bool state, int32 param) {
+
+    }
+    
+    void SoraiOSGLRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
+		Rect4V rect;
+		
+		if(fWidth != y2-y1 && fWidth != x2-x1) {
+			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
+			
+			rect.x1 = x1; rect.y1 = y1;
+			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
+			rect.x4 = x2; rect.y4 = y2;
+			rect.x3 = x2+fWidth*cosf(rotAng); rect.y3 = y2+fWidth*sinf(rotAng);
+		} else {
+			rect.x1 = x1; rect.y1 = y1;
+			rect.x2 = x2; rect.y2 = y1;
+			rect.x3 = x2; rect.y3 = y2;
+			rect.x4 = x1; rect.y4 = y2;
+		}
+		sora::SoraQuad quad;
+		
+		quad.tex = NULL;
+		
+		quad.v[0].x   = rect.x1;
+		quad.v[0].y   = rect.y1;
+		quad.v[0].col = color;
+		
+		quad.v[1].x   = rect.x2;
+		quad.v[1].y   = rect.y2;
+		quad.v[1].col = color;
+		
+		quad.v[2].x   = rect.x3;
+		quad.v[2].y   = rect.y3;
+		quad.v[2].col = color;
+		
+		quad.v[3].x   = rect.x4;
+		quad.v[3].y   = rect.y4;
+		quad.v[3].col = color;
+		
+		int i;
+		for (i = 0; i < 4; ++i) {
+			quad.v[i].z = z;
+		}
+		
+		quad.blend = BLEND_DEFAULT;
+		
+		renderQuad(quad);
+	}
+	
+	void SoraiOSGLRenderer::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+		renderRect(x1, y1, x2, y1+1.f, 1.f, color, z);
+		renderRect(x2, y1, x2+1.f, y2, 1.f, color, z);
+		renderRect(x2, y2, x1, y2+1.f, 1.f, color, z);
+		renderRect(x1, y2, x1+1.f, y1, 1.f, color, z);
+	}
+    
+    void SoraiOSGLRenderer::setIcon(const SoraString& icon) {
+        
+    }
+    
+    void SoraiOSGLRenderer::setCursor(const SoraString& cursor) {
+        
+    }
 } // namespace sora

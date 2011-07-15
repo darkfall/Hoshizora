@@ -1,4 +1,6 @@
 #include "SoraPhysicalObject.h"
+#include "SoraPhysicalWorld.h"
+#include "Debug/SoraInternalLogger.h"
 
 namespace sora {
 
@@ -6,23 +8,29 @@ namespace sora {
 		body = SoraPhysicalWorld::Instance()->createBody(PHYSICAL_WORLD->pixel2b2cor(posx), PHYSICAL_WORLD->pixel2b2cor(posy), shape, dynamicBody, density);
 		if(body) {
             localAnchor.Set(0.f, 0.f);
+            body->SetUserData(this);
         } else
             DebugPtr->log("Error craeing physical body");
         setType(OBJ_PHYSICAL);
+        mContactDelegate = NULL;
 	}
 
 	SoraPhysicalObject::SoraPhysicalObject(const b2BodyDef& bodyDef, const b2FixtureDef& fixtureDef) {
 		body = SoraPhysicalWorld::Instance()->createBody(bodyDef, fixtureDef);
 		if(body) {
             localAnchor.Set(0.f, 0.f);
+            body->SetUserData(this);
         } else
             DebugPtr->log("Error craeing physical body");
         setType(OBJ_PHYSICAL);
+        mContactDelegate = NULL;
 	}
 
 	SoraPhysicalObject::~SoraPhysicalObject() {
         if(body)
             SoraPhysicalWorld::Instance()->destroyBody(body);
+        if(mContactDelegate)
+            delete mContactDelegate;
 	}
 
 	void SoraPhysicalObject::createFixture(const b2FixtureDef& fdef) {
@@ -184,6 +192,16 @@ namespace sora {
 	b2Vec2 SoraPhysicalObject::getLocalAnchor() const {
 		return localAnchor;
 	}
+    
+    void SoraPhysicalObject::createJoint(SoraPhysicalObject* obj) {
+        b2RevoluteJointDef jdef;
+        jdef.bodyA = getBody();
+        jdef.bodyB = obj->getBody();
+        jdef.localAnchorA = getLocalAnchor();
+        jdef.localAnchorB = obj->getLocalAnchor();
+        
+        SoraPhysicalWorld::Instance()->createJoint(jdef);
+    }
 
 	void SoraPhysicalObject::add(SoraObject* obj) {
         if(!body)
@@ -217,6 +235,7 @@ namespace sora {
         } else
             DebugPtr->log("Error craeing physical body");
         setType(OBJ_PHYSICAL);
+        mContactDelegate = NULL;
 	}
 
 	void SoraPhysicalObject::setAsBox(float32 w, float32 h, float32 density) {
@@ -228,4 +247,14 @@ namespace sora {
 		b2CircleShape s = PHYSICAL_WORLD->generateCircle(r);
 		createFixture(s, density);
 	}
+    
+    void SoraPhysicalObject::setContactDelegate(ContactDelegate delegate) {
+        if(mContactDelegate != NULL)
+            delete mContactDelegate;
+        mContactDelegate = delegate;
+    }
+    
+    SoraPhysicalObject::ContactDelegate SoraPhysicalObject::getContactDelegate() const {
+        return mContactDelegate;
+    }
 } // namespace sora

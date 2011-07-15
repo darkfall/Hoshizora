@@ -87,29 +87,34 @@ namespace sora {
 		ulong32	getColor(int32 i = 0);
 
 		
-		// 设置字间距
 		void	setKerningWidth(float32 kerning);
 		void	setKerningHeight(float32 kerning);
 
-		// 获取字间距
-		float32	getKerningWidth();
-		float32	getKerningHeight();
+		float32	getKerningWidth() const;
+		float32	getKerningHeight() const;
 
 		float32	getStringWidth(const wchar_t* text);
 		float32 getStringHeight(const wchar_t* pwstr);
-		float32	getHeight();
+		float32	getHeight() const;
 
-		// 字体大小
-		uint32	getFontSize();
+		uint32	getFontSize() const;
 		void	setFontSize(uint32 size);
 	
-		// 获取字符宽度
 		float32	getWidthFromCharacter(wchar_t c, bool original = false);
 		
 		// font effects
 		
 		void setScale(float32 scale);
 		void setCharRotation(float32 rot);
+        
+        void setLineWidth(float32 width);
+        float32 getLineWidth() const;
+        
+        float32 getCharRotation() const;
+        float32 getScale() const;
+        
+        void setLineRotation(float32 rot, bool rotateChar=false);
+        float32 getLineRotation() const;
 		
 	private:
 		SoraFTFont();
@@ -120,6 +125,7 @@ namespace sora {
 				
 		float32 kerningWidth;
 		float32 kerningHeight;
+        float32 lineWidth;
 
 		bool attached;
 		uint32 size;		
@@ -130,8 +136,9 @@ namespace sora {
 		FTFace* ft_face;
 		std::vector<FTGlyph> ft_glyphs;
 		
-		float32 charRotation;
 		float32 scale;
+		float32 charRotation;
+        float32 lineRotation;
 	};
 } // namespace sora
 

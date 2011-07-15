@@ -9,6 +9,7 @@
 
 #include "SoraActor.h"
 #include "SoraModifierAdapter.h"
+#include "SoraCore.h"
 
 namespace sora {
 
@@ -141,13 +142,13 @@ namespace sora {
     }
 
     void SoraActor::moveTo(float32 px, float32 py, float32 inTime) {
-        new SoraModiferAdapter<SoraObject>(this, 
+        /*new SoraModifierAdapter<SoraObject>(this, 
                                            CreateEffectTransitions(getPositionX(), 
                                                                    getPositionY(),
                                                                    px, 
                                                                    py,
                                                                    inTime, 
-                                                                   IMAGE_EFFECT_ONCE));
+                                                                   IMAGE_EFFECT_ONCE));*/
         
     }
     

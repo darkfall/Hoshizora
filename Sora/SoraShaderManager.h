@@ -41,6 +41,13 @@ namespace sora {
         RevShaderMap mRevShaders;
     };
     
+    static SoraShader* CreateShader(const SoraWString& file, const SoraString& entry, int32 type) {
+        return SoraShaderManager::Instance()->createShader(file, entry, type);
+    }
+    
+    static SoraShader* CreateUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
+        return SoraShaderManager::Instance()->createUniqueShader(file, entry, type);
+    }
     
 } // namespace sora
 

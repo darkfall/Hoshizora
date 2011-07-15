@@ -76,7 +76,13 @@ namespace sora {
 		void flush();
         
         void snapshot(const SoraString& path);
-		
+		void onExtensionStateChanged(int32 extension, bool state, int32 param);
+        void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z);
+        void renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z);
+
+        void setIcon(const SoraString& icon);
+        void setCursor(const SoraString& cursor);
+        
 	private:
 		void applyTransform();
 		void bindTexture(SoraTexture* tex);

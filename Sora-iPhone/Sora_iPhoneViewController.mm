@@ -28,7 +28,7 @@
 
 - (void)awakeFromNib
 {
-    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
     
     if (!aContext) {
         aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];

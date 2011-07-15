@@ -139,8 +139,8 @@ namespace sora {
 
 		bool bVFlip, bHFlip, bCFlip;
 		
-		typedef std::list<SoraImageEffect*> IMAGE_EFFECT_LIST;
-		IMAGE_EFFECT_LIST vEffects;
+		typedef std::list<SoraImageEffect*> ImageEffectList;
+		ImageEffectList vEffects;
 
 		SoraCore* sora;
 		SoraQuad quad;

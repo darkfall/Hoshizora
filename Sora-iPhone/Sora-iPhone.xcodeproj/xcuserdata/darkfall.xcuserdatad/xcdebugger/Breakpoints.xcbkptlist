@@ -73,11 +73,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/SoraiOSGLRenderer.cpp"
-         timestampString = "331973576.962872"
+         timestampString = "332412219.813503"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "815"
-         endingLineNumber = "815"
+         startingLineNumber = "777"
+         endingLineNumber = "777"
          landmarkName = "SoraiOSGLRenderer::_glVersionCheck()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -101,11 +101,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SoraiOSMainWindow.h"
-         timestampString = "331970687.769864"
+         timestampString = "332412805.807724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "37"
-         endingLineNumber = "37"
+         startingLineNumber = "38"
+         endingLineNumber = "38"
          landmarkName = "renderFunc()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -125,20 +125,6 @@
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraiOSMainWindow.h"
-         timestampString = "331972939.632289"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
-         landmarkName = "renderFunc()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
@@ -164,6 +150,34 @@
          endingLineNumber = "368"
          landmarkName = "SoraiOSGLRenderer_ES2::flush()"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "SoraiOSMainWindow.h"
+         timestampString = "332412502.177446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "init()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "SoraiOSMainWindow.h"
+         timestampString = "332412805.807724"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
+         landmarkName = "renderFunc()"
+         landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

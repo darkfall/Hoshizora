@@ -26,13 +26,13 @@ namespace sora {
     };
     
     template<typename T>
-    class SORA_API SoraModiferAdapter: public SoraAbstractModiferAdapter {
+    class SORA_API SoraModifierAdapter: public SoraAbstractModiferAdapter {
     public:
-        SoraModiferAdapter(T* obj) {
+        SoraModifierAdapter(T* obj) {
             assert(obj != NULL);
             mObj = obj;
         }
-        SoraModiferAdapter(T* obj, SoraModifier<T>* modi) {
+        SoraModifierAdapter(T* obj, SoraModifier<T>* modi) {
             mObj = obj;
             add(modi);
         }
@@ -64,13 +64,17 @@ namespace sora {
         }
         
     protected:
-        SoraModiferAdapter();
+        SoraModifierAdapter();
         
         typedef std::list<SoraModifier<T>*> ModifierList;
 		ModifierList mModifiers;
         T* mObj;
     };
     
+    template<typename MT>
+    SoraModifierAdapter<MT>* CreateModifierAdapter(MT* obj, SoraModifier<MT*> modifier) {
+        return new SoraModifierAdapter<MT>(obj, modifier);
+    }
 } // namespace sora
 
 

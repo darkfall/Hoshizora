@@ -1,4 +1,6 @@
 #include "SoraPhysicalWorld.h"
+#include "SoraPlugin.h"
+#include "SoraCore.h"
 
 #ifdef SORA_PHYSICAL_THREAD
 #include "SoraThread/SoraThread.h"
@@ -6,7 +8,7 @@
 #include "Debug/SoraAutoProfile.h"
 #endif
 
-#include "SoraCore.h"
+#include "SoraPhysicalObject.h"
 
 namespace sora {
     
@@ -80,6 +82,72 @@ namespace sora {
 #endif
     };
     
+    class SoraB2ContactListener: public b2ContactListener {
+    public:
+        
+        void BeginContact(b2Contact* contact) {
+            SoraPhysicalObject* fA = (SoraPhysicalObject*)contact->GetFixtureA()->GetBody()->GetUserData();
+            SoraPhysicalObject* fB = (SoraPhysicalObject*)contact->GetFixtureB()->GetBody()->GetUserData();
+            if(fA != NULL) {
+                if(fA->getContactDelegate() != NULL) {
+                    SoraPhysicalContactInfo info;
+                    info.contactObject1 = fA;
+                    info.contactObject2 = fB;
+                    info.normal = contact->GetManifold()->localNormal;
+                    info.position = contact->GetManifold()->localPoint;
+                    info.isTouching = contact->IsTouching();
+                    info.phase = CONTACT_BEGIN;
+                    
+                    fA->getContactDelegate()->notify(fA, info);
+                }
+            } 
+            if(fB != NULL) {
+                if(fB->getContactDelegate() != NULL) {
+                    SoraPhysicalContactInfo info;
+                    info.contactObject1 = fB;
+                    info.contactObject2 = fA;
+                    info.normal = contact->GetManifold()->localNormal;
+                    info.position = contact->GetManifold()->localPoint;
+                    info.isTouching = contact->IsTouching();
+                    info.phase = CONTACT_BEGIN;
+                    
+                    fB->getContactDelegate()->notify(fB, info);
+                }
+            }
+        }
+        
+        void EndContact(b2Contact* contact) {
+            SoraPhysicalObject* fA = (SoraPhysicalObject*)contact->GetFixtureA()->GetBody()->GetUserData();
+            SoraPhysicalObject* fB = (SoraPhysicalObject*)contact->GetFixtureB()->GetBody()->GetUserData();
+            if(fA != NULL) {
+                if(fA->getContactDelegate() != NULL) {
+                    SoraPhysicalContactInfo info;
+                    info.contactObject1 = fA;
+                    info.contactObject2 = fB;
+                    info.normal = contact->GetManifold()->localNormal;
+                    info.position = contact->GetManifold()->localPoint;
+                    info.isTouching = contact->IsTouching();
+                    info.phase = CONTACT_END;
+                    
+                    fA->getContactDelegate()->notify(fA, info);
+                }
+            } 
+            if(fB != NULL) {
+                if(fB->getContactDelegate() != NULL) {
+                    SoraPhysicalContactInfo info;
+                    info.contactObject1 = fB;
+                    info.contactObject2 = fA;
+                    info.normal = contact->GetManifold()->localNormal;
+                    info.position = contact->GetManifold()->localPoint;
+                    info.isTouching = contact->IsTouching();
+                    info.phase = CONTACT_END;
+                    
+                    fB->getContactDelegate()->notify(fB, info);
+                }
+            }
+        }
+    };
+    
     static SoraPhysicalWorldPlugin* g_phy_plugin;
     
     SoraPhysicalWorld::SoraPhysicalWorld(): 
@@ -104,9 +172,15 @@ namespace sora {
             delete physicalWorld;
         }
         physicalWorld = new b2World(b2Vec2(gravityx, gravityy), doSleep);
-        
-        worldGravity = b2Vec2(gravityx, gravityy);
-        bInitialized = true;
+        if(!physicalWorld)
+            THROW_SORA_EXCEPTION("Error creating box2d world");
+        else {
+            worldGravity = b2Vec2(gravityx, gravityy);
+            bInitialized = true;
+            
+            SoraB2ContactListener* contactListener = new SoraB2ContactListener;
+            physicalWorld->SetContactListener(contactListener);
+        }
     }
     
     void SoraPhysicalWorld::stepWorld() {

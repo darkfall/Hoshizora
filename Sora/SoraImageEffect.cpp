@@ -218,7 +218,7 @@ namespace sora {
 	}
 	
 	SoraImageEffectList::~SoraImageEffectList() {
-		IMAGE_EFFECT_LIST::iterator itEffect = mImageEffects.begin();
+		ImageEffectList::iterator itEffect = mImageEffects.begin();
 		while(itEffect != mImageEffects.end()) {
 			delete *itEffect;
 			*itEffect = NULL;
@@ -253,12 +253,12 @@ namespace sora {
 		mCurrEffect	= getListHead();
 	}
 	
-	void SoraImageEffectList::modify(SoraObject* obj) {
+	void SoraImageEffectList::modify(SoraSprite* spr) {
 		if(mCurrEffect)
-			mCurrEffect->modify(obj);
+			mCurrEffect->modify(spr);
 	}
     
-    SoraModifier<SoraObject>* SoraImageEffectList::clone() {
+    SoraModifier<SoraSprite>* SoraImageEffectList::clone() {
         SoraImageEffectList* newlist = new SoraImageEffectList(*this);
         newlist->mImageEffects = this->mImageEffects;
         newlist->mReverse = this->mReverse;
@@ -271,7 +271,7 @@ namespace sora {
 		if(mCurrEffect) {
 			int32 result = mCurrEffect->update(delta);
 			if(result == IMAGE_EFFECT_END) {
-				IMAGE_EFFECT_LIST::iterator next = std::find(mImageEffects.begin(), mImageEffects.end(), mCurrEffect);
+				ImageEffectList::iterator next = std::find(mImageEffects.begin(), mImageEffects.end(), mCurrEffect);
 				if(next != mImageEffects.end()) {
 					if(!mReverse) {
 						++next; 
@@ -329,13 +329,11 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectFade::modify(SoraObject* obj) {
-		SoraSprite* spr = dynamic_cast<SoraSprite*>(obj);
-        if(spr)
-            spr->setColor(CSETA(spr->getColor(), get1st()*255));
+	void SoraImageEffectFade::modify(SoraSprite* spr) {
+		spr->setColor(CSETA(spr->getColor(), get1st()*255));
 	}
     
-    SoraModifier<SoraObject>* SoraImageEffectFade::clone() {
+    SoraModifier<SoraSprite>* SoraImageEffectFade::clone() {
         return new SoraImageEffectFade(*this);
     }
 
@@ -359,13 +357,11 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectScale::modify(SoraObject* obj) {
-        SoraSprite* spr = dynamic_cast<SoraSprite*>(obj);
-        if(spr)
-            spr->setScale(get1st(), get2nd());
+	void SoraImageEffectScale::modify(SoraSprite* spr) {
+        spr->setScale(get1st(), get2nd());
 	}
     
-    SoraModifier<SoraObject>* SoraImageEffectScale::clone() {
+    SoraModifier<SoraSprite>* SoraImageEffectScale::clone() {
         return new SoraImageEffectScale(*this);
     }
 
@@ -389,14 +385,12 @@ namespace sora {
 		start(_mode, _time);
 	}
     
-    SoraModifier<SoraObject>* SoraImageEffectTransitions::clone() {
+    SoraModifier<SoraSprite>* SoraImageEffectTransitions::clone() {
         return new SoraImageEffectTransitions(*this);
     }
 	
-	void SoraImageEffectTransitions::modify(SoraObject* obj) {
-		SoraSprite* spr = dynamic_cast<SoraSprite*>(obj);
-        if(spr)
-            spr->setZ(get3rd());
+	void SoraImageEffectTransitions::modify(SoraSprite* spr) {
+        spr->setPosition(get1st(), get2nd());
 	}
 	
 	SoraImageEffectColorTransitions::SoraImageEffectColorTransitions(const SoraColorRGBA& s, const SoraColorRGBA& end, float32 _time, IMAGE_EFFECT_MODE _mode,
@@ -419,13 +413,11 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectColorTransitions::modify(SoraObject* obj) {
-		SoraSprite* spr = dynamic_cast<SoraSprite*>(obj);
-        if(spr)
-            spr->setColor(SoraColorRGBA::GetHWColor(get1st(), get2nd(), get3rd(), get4th()), -1);
+	void SoraImageEffectColorTransitions::modify(SoraSprite* spr) {
+		spr->setColor(SoraColorRGBA::GetHWColor(get1st(), get2nd(), get3rd(), get4th()), -1);
 	}
     
-    SoraModifier<SoraObject>* SoraImageEffectColorTransitions::clone() {
+    SoraModifier<SoraSprite>* SoraImageEffectColorTransitions::clone() {
         return new SoraImageEffectColorTransitions(*this);
     }
 	
@@ -449,13 +441,11 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	void SoraImageEffectRotation::modify(SoraObject* obj) {
-		SoraSprite* spr = dynamic_cast<SoraSprite*>(obj);
-        if(spr)
-            spr->setRotation(get1st());
+	void SoraImageEffectRotation::modify(SoraSprite* spr) {
+		spr->setRotation(get1st());
 	}
     
-    SoraModifier<SoraObject>* SoraImageEffectRotation::clone() {
+    SoraModifier<SoraSprite>* SoraImageEffectRotation::clone() {
         return new SoraImageEffectRotation(*this);
     }
 

@@ -4,8 +4,6 @@
 #include "SoraPlatform.h"
 #include "SoraException.h"
 #include "SoraSingleton.h"
-#include "SoraPlugin.h"
-#include "SoraCore.h"
 
 #include "Box2D/Box2D.h"
 
@@ -87,6 +85,23 @@ namespace sora {
     };
     
 #define PHYSICAL_WORLD SoraPhysicalWorld::Instance()
+    
+    static b2PolygonShape B2CreateBox(float32 w, float32 h, float32 cx=0.f, float32 cy=0.f, float32 rot=0.f) {
+        return SoraPhysicalWorld::Instance()->generateBox(w, h, cx, cy, rot);
+    }
+    
+    static b2CircleShape B2CreateCircle(float32 r) {
+        return SoraPhysicalWorld::Instance()->generateCircle(r);
+    }
+    
+    static b2PolygonShape B2CreatePolygen(b2Vec2* vertices, size_t count) {
+        return SoraPhysicalWorld::Instance()->generatePolygen(vertices, count);
+    }
+    
+    static b2PolygonShape B2CreateEdge(float32 v1, float32 v2, float32 v3, float32 v4) {
+        return SoraPhysicalWorld::Instance()->generateEdge(v1, v3, v3, v4);
+    }
+    
 
 } // namespace sora
 

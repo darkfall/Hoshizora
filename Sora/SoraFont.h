@@ -32,16 +32,16 @@ namespace sora {
 		virtual void	setKerningHeight(float32 kerning) = 0;
 
 		// get kernings
-		virtual float32	getKerningWidth() = 0;
-		virtual float32	getKerningHeight() = 0;
+		virtual float32	getKerningWidth() const = 0;
+		virtual float32	getKerningHeight() const = 0;
 
 		// get font dimensions
 		virtual float32	getStringWidth(const wchar_t* text) = 0;
 		virtual float32 getStringHeight(const wchar_t* text) = 0;
-		virtual float32	getHeight() = 0;
+		virtual float32	getHeight() const = 0;
 
-		// get font size
-		virtual uint32	getFontSize() = 0;
+		// get/set font size
+		virtual uint32	getFontSize() const = 0;
 		virtual void	setFontSize(uint32 size) = 0;
 
 		// get width of a char
@@ -50,6 +50,17 @@ namespace sora {
 		// font effects
 		virtual void setCharRotation(float32 rot) = 0;
 		virtual void setScale(float32 scale) = 0;
+        
+        // get/set line width
+        virtual void setLineWidth(float32 width) = 0;
+        virtual float32 getLineWidth() const= 0;
+        
+        virtual float32 getCharRotation() const = 0;
+        virtual float32 getScale() const = 0;
+        
+        // set/get line rotation
+        virtual void setLineRotation(float32 rot, bool rotateChar=false) = 0;
+        virtual float32 getLineRotation() const = 0;
 	};
 
 } // namespace sora
