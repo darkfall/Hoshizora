@@ -352,7 +352,7 @@ namespace sora {
     }
                             
     template<class TOBJ, class TARGS>
-    static SoraDelegate<TOBJ, TARGS, true> Delegate(TOBJ* obj, void (TOBJ::*NotifyMethod)(TARGS&)) {
+    static SoraDelegate<TOBJ, TARGS, false> Delegate(TOBJ* obj, void (TOBJ::*NotifyMethod)(TARGS&)) {
         return SoraDelegate<TOBJ, TARGS, false>(obj, NotifyMethod);
     }
     
@@ -394,6 +394,53 @@ namespace sora {
     template<class TARGS>
     static SoraExpireDelegate<TARGS> Delegate(void (*NotifyMethod)(TARGS&), SoraTimestamp::TimeDiff expireMs) {
         return SoraExpireDelegate<TARGS>(Delegate<TARGS, false>(NotifyMethod), expireMs);
+    }
+    
+    
+    
+    template<class TOBJ, class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(TOBJ* obj, void (TOBJ::*NotifyMethod)(void*, TARGS&)) {
+        return SoraDelegate<TOBJ, TARGS, true>(obj, NotifyMethod).clone();
+    }
+    
+    template<class TOBJ, class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(TOBJ* obj, void (TOBJ::*NotifyMethod)(TARGS&)) {
+        return SoraDelegate<TOBJ, TARGS, false>(obj, NotifyMethod).clone();
+    }
+    
+    template<class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(void (*NotifyMethod)(const void* sender, TARGS&)) {
+        return SoraFunctionDelegate<TARGS, true, true>(NotifyMethod).clone();
+    }
+    
+    template<class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(void (*NotifyMethod)(void* sender, TARGS&)) {
+        return SoraFunctionDelegate<TARGS, true, false>(NotifyMethod).clone();
+    }
+    
+    template<class TOBJ, class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(TOBJ* obj, void (TOBJ::*NotifyMethod)(const void*, TARGS&), SoraTimestamp::TimeDiff expireMs) {
+        return SoraExpireDelegate<TARGS>(Delegate<TOBJ, TARGS, true>(obj, NotifyMethod), expireMs).clone();
+    }
+    
+    template<class TOBJ, class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(TOBJ* obj, void (TOBJ::*NotifyMethod)(TARGS&), SoraTimestamp::TimeDiff expireMs) {
+        return SoraExpireDelegate<TARGS>(Delegate<TOBJ, TARGS, false>(obj, NotifyMethod), expireMs).clone();
+    }
+    
+    template<class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(void (*NotifyMethod)(const void*, TARGS&), SoraTimestamp::TimeDiff expireMs) {
+        return SoraExpireDelegate<TARGS>(Delegate<TARGS, true, true>(NotifyMethod), expireMs).clone();
+    }
+    
+    template<class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(void (*NotifyMethod)(void*, TARGS&), SoraTimestamp::TimeDiff expireMs) {
+        return SoraExpireDelegate<TARGS>(Delegate<TARGS, true, false>(NotifyMethod), expireMs).clone();
+    }
+    
+    template<class TARGS>
+    static SoraAbstractDelegate<TARGS>* DelegatePtr(void (*NotifyMethod)(TARGS&), SoraTimestamp::TimeDiff expireMs) {
+        return SoraExpireDelegate<TARGS>(Delegate<TARGS, false>(NotifyMethod), expireMs).clone();
     }
                             
 } // namespace sora

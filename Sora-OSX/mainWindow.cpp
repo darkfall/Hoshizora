@@ -120,13 +120,14 @@ bool mainWindow::updateFunc() {
 }
 
 bool mainWindow::renderFunc() {
-	pCanvas->beginRender();
-	//sora::SORA->beginZBufferSort();
+	pCanvas->beginRender(0x000000FF);
+	sora::SORA->beginZBufferSort();
+    pSpr2->render();
 
-	//pSpr->setColor(0xFFFFFFFF);
-    //pSpr->render4V(100.f, 200.f, 700.f, 200.f, 700.f, 600.f, 100.f, 600.f);
-    
-	//sora::SORA->endZBufferSort();
+    pressAnyKey->render();
+
+//    pSpr->render();
+	sora::SORA->endZBufferSort();
 
 	pCanvas->finishRender();
 	
@@ -146,9 +147,10 @@ bool mainWindow::renderFunc() {
 	//	ps->render();
 	}
         
-      //  customSprite->render();
+     //   customSprite->render();
         
-	//pCanvas->render();
+        pCanvas->render();
+
         gifSprite->update(sora::SORA->getDelta());
         gifSprite->render();
 	}
@@ -187,12 +189,18 @@ void downloadDelegate(sora::SoraHttpFile& file) {
 
 #include "SoraModifierAdapter.h"
 
+void mainWindow::onScreenBufferRender(ulong32& tex) {
+    pScreenSpr->setTexture(tex);
+    pScreenSpr->render(100.f, 100.f);
+}
+
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
     
    
+    sora::SORA->registerFullscreenBufferDelegate(sora::DelegatePtr(this, &mainWindow::onScreenBufferRender));
 	/*file.downloadFileWithDelegate("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", Delegate(downloadDelegate).clone());*/
     
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
@@ -201,6 +209,7 @@ void mainWindow::init() {
 		file.setEventHandler(this);
 		file.downloadFileTo("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", L"~/Desktop/download.png");
 	}*/
+    //sora::SORA->enableFullscreenBuffer(false);
 	
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
@@ -229,9 +238,9 @@ void mainWindow::init() {
 	
 	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
 	
-	pSpr = sora::SORA->createSprite(L"ArmA2-v1.02-MSAA-01x.png");
+	pSpr = sora::SORA->createSprite(L"background.png");
     
-    pSpr->setCenter(pSpr->getSpriteWidth()/2, pSpr->getSpriteHeight()/2);
+    //pSpr->setCenter(pSpr->getSpriteWidth()/2, pSpr->getSpriteHeight()/2);
     //pSpr->setScale(3.f, 3.f);
     customSprite = new sora::SoraCustomShapeSprite(pSpr, sora::SORA_TRIANGLES);
     
@@ -239,15 +248,17 @@ void mainWindow::init() {
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
 	
+    pScreenSpr = new sora::SoraSprite(NULL);
+    
+    pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(1.f);
+    pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
+    pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.f);
+    
 	ps = new sora::SoraParticleManager;
 	ps->setGlobalSprite(sora::SORA->createSprite(L"pics/particles.png"));
 	ps->emitS(L"astar.sps", 200.f, 100.f);
 	
 	
-	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(1.f);
-	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
-	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.0f); 
-    
     gifSprite = new sora::SoraGifSprite;
     gifSprite->load(L"giftest.gif");
     gifSprite->setFrameRate(24);
