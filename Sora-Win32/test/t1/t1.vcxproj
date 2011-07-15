@@ -193,10 +193,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraCustomShapeSprite.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraGeometry.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraPlatformerGeomtry.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraPrefab.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraBaseGestureTypeRecognizer.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGesture.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGestureRecognizer.h" />
@@ -470,6 +466,7 @@
     <ClInclude Include="..\..\..\Sora\SoraFolderResourceManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraFont.h" />
     <ClInclude Include="..\..\..\Sora\SoraFontManager.h" />
+    <ClInclude Include="..\..\..\Sora\SoraFullscreenBufferHandler.h" />
     <ClInclude Include="..\..\..\Sora\SoraHandleManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraHotkey.h" />
     <ClInclude Include="..\..\..\Sora\SoraImageEffect.h" />
@@ -495,6 +492,7 @@
     <ClInclude Include="..\..\..\Sora\SoraPlatform.h" />
     <ClInclude Include="..\..\..\Sora\SoraPlugin.h" />
     <ClInclude Include="..\..\..\Sora\SoraPluginManager.h" />
+    <ClInclude Include="..\..\..\Sora\SoraPrefab.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderSystem.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderSystemExtension.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderTarget.h" />
@@ -502,6 +500,7 @@
     <ClInclude Include="..\..\..\Sora\SoraResourceFileFinder.h" />
     <ClInclude Include="..\..\..\Sora\SoraResourceManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraShader.h" />
+    <ClInclude Include="..\..\..\Sora\SoraShaderManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraSingleton.h" />
     <ClInclude Include="..\..\..\Sora\SoraSoundFile.h" />
     <ClInclude Include="..\..\..\Sora\SoraSoundSystem.h" />
@@ -565,9 +564,6 @@
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraCustomShapeSprite.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraPlatformerGeomtry.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraPrefab.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraBaseGestureRecognizer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGesture.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGestureRecognizer.cpp" />
@@ -756,6 +752,7 @@
     <ClCompile Include="..\..\..\Sora\SoraFileChangeEvent.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFileUtility.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraFullscreenBufferHandler.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraHandleManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraHotKey.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
@@ -774,6 +771,7 @@
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraResourceFileFinder.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraShader.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraShaderManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraSprite.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraStringConv.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraTexture.cpp" />

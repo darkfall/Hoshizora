@@ -1368,19 +1368,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraGestureRecognizer\SoraGestureRecognizer.h">
       <Filter>Plugins\gesturerecognizer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraPlatformerGeomtry.h">
-      <Filter>Plugins\genericObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraPrefab.h">
-      <Filter>Plugins\genericObjects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraCustomShapeSprite.h">
-      <Filter>Plugins\genericObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.h">
-      <Filter>Plugins\genericObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraGenericObjects\SoraGeometry.h">
       <Filter>Plugins\genericObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.h">
@@ -1501,6 +1489,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraRenderSystemExtension.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraShaderManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraFullscreenBufferHandler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraPrefab.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -2207,16 +2204,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraGestureRecognizer\SoraBaseGestureRecognizer.cpp">
       <Filter>Plugins\gesturerecognizer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraPlatformerGeomtry.cpp">
-      <Filter>Plugins\genericObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraPrefab.cpp">
-      <Filter>Plugins\genericObjects</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraCustomShapeSprite.cpp">
-      <Filter>Plugins\genericObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraGenericObjects\SoraEntity.cpp">
       <Filter>Plugins\genericObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.cpp">
@@ -2289,6 +2277,12 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraRenderSystemExtension.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraShaderManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraFullscreenBufferHandler.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>

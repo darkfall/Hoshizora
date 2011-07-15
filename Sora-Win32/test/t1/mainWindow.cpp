@@ -120,14 +120,15 @@ bool mainWindow::updateFunc() {
 
 bool mainWindow::renderFunc() {
 	pCanvas->beginRender();
-	//sora::SORA->beginZBufferSort();
+	sora::SORA->beginZBufferSort();
 
-	//pSpr->setColor(0xFFFFFFFF);
-    //pSpr->render4V(100.f, 200.f, 700.f, 200.f, 700.f, 600.f, 100.f, 600.f);
-    pSpr->setColor(0xFFFF0000);
-    pSpr->render4V(300.f, 300.f, 500.f, 300.f, 700.f, 500.f, 100.f, 500.f);
+	pSpr2->render();
+
+    pressAnyKey->render();
+
+    pSpr->render();
     
-	//sora::SORA->endZBufferSort();
+	sora::SORA->endZBufferSort();
 
 	pCanvas->finishRender();
 	
