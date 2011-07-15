@@ -48,6 +48,8 @@ public:
 	void onFileChangeEvent(sora::SoraFileChangeEvent* ev);
 
 	void threadtest(void* arg);
+
+	void onScreenBufferRender(ulong32& tex);
     
 private:
 	sora::SoraCore* sora;
@@ -57,6 +59,7 @@ private:
     sora::SoraSprite* pSpr;
 	sora::SoraSprite* pSpr2;
 	sora::SoraSprite* pressAnyKey;
+	sora::SoraSprite* pScreenSpr;
 	
 	sora::SoraShader* shader;
 					

@@ -178,6 +178,7 @@ bool CALL HGE_Impl::Gfx_BeginScene(HTARGET targ)
 	}
 
 	pD3DDevice->BeginScene();
+	CurBlendMode = 0;
 	pVB->Lock( 0, 0, (VOID**)&VertArray, 0 );
 
 	return true;
@@ -642,7 +643,19 @@ void HGE_Impl::_SetBlendMode(int blend)
 	}
 	if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND))
 	{
-		if(blend & BLEND_ALPHABLEND) pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+		if(blend & BLEND_ALPHABLEND) {
+			if(pCurTarget) {
+				pD3DDevice->SetRenderState( D3DRS_SEPARATEALPHABLENDENABLE, TRUE );			
+				pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+				pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+				pD3DDevice->SetRenderState( D3DRS_SRCBLENDALPHA, D3DBLEND_ONE );
+				pD3DDevice->SetRenderState( D3DRS_DESTBLENDALPHA, D3DBLEND_INVSRCALPHA );
+			} else {
+				pD3DDevice->SetRenderState( D3DRS_SEPARATEALPHABLENDENABLE, FALSE ); 
+				pD3DDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+				pD3DDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+			}
+		}
 		else pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 	}
 
@@ -1185,12 +1198,12 @@ bool HGE_Impl::_init_lost()
 
 	nPrim=0;
 	CurPrimType=HGEPRIM_QUADS;
-	CurBlendMode = BLEND_DEFAULT;
+	CurBlendMode = 0;
 	CurTexture = NULL;
 	CurShader = NULL;
 
 	pD3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_FALSE ); 
-	CurBlendMode = BLEND_DEFAULT;
+	CurBlendMode = 0;
 
 	pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
 	pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);

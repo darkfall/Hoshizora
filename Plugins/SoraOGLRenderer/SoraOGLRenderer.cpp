@@ -205,7 +205,7 @@ namespace sora{
             pCurTarget->attachToRender();
             applyTransform();
 			CurBlendMode = 0;
-            glClearColor((float)(color>>24&0xFF)/255.0, (float)(color>>16&0xFF)/255.0, (float)(color>>8&0xFF)/255.0, (float)(color&0xFF)/255.0);
+            glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
 			
 			if(clear)
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -213,7 +213,7 @@ namespace sora{
 				glClear(GL_DEPTH_BUFFER_BIT);
 			
         } else {
-            glClearColor((float)(color>>24&0xFF)/255.0, (float)(color>>16&0xFF)/255.0, (float)(color>>8&0xFF)/255.0, (float)(color&0xFF)/255.0);
+            glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
             
             if(clear)
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -252,11 +252,15 @@ namespace sora{
 
 		if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND)) {
 			if(blend & BLEND_ALPHABLEND) {
+#ifndef OS_WIN32
                 if(pCurTarget)
                     // alpha trick with FBO transparent background
                     // see http://www.opengl.org/discussion_boards/ubbthreads.php?ubb=showflat&Number=257628
+
                     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
                 else 
+#endif
                     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);      //Alpha blending
             }
 			else

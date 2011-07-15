@@ -831,7 +831,7 @@ namespace sora {
             if(t == 0) {
                 bMainScene = true;
                 bScreenBufferAttached = true;
-                pRenderSystem->beginScene(0x000000FF, mScreenBuffer, true);
+                pRenderSystem->beginScene(0x00000000, mScreenBuffer, true);
             } else {
                 bMainScene = false;
                 bScreenBufferAttached = false;

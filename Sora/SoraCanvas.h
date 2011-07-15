@@ -28,7 +28,7 @@ namespace sora {
         void render();
         uint32 update(float32 dt);
         
-        void beginRender(ulong32 col=0x000000FF);
+        void beginRender(ulong32 col=0xFF000000);
         void finishRender();
 
 		void setZ(float32 z);

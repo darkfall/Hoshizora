@@ -119,15 +119,12 @@ bool mainWindow::updateFunc() {
 }
 
 bool mainWindow::renderFunc() {
-	pCanvas->beginRender();
+	pCanvas->beginRender(0);
+	
 	sora::SORA->beginZBufferSort();
 
-	pSpr2->render();
+	
 
-    pressAnyKey->render();
-
-    pSpr->render();
-    
 	sora::SORA->endZBufferSort();
 
 	pCanvas->finishRender();
@@ -148,11 +145,17 @@ bool mainWindow::renderFunc() {
 	//	ps->render();
 	}
         
-        customSprite->render();
+       // customSprite->render();
         
+    pSpr->render();
+
+    pressAnyKey->render();
+	
+	pSpr2->render();
+    
 		gifSprite->update(sora::SORA->getDelta());
 		gifSprite->render();
-	//pCanvas->render();
+		pCanvas->render();
         
         std::string renderMode;
         switch(customSprite->getRenderMode()) {
@@ -198,17 +201,25 @@ void test() {
 	THROW_SORA_EXCEPTION("test");
 }
 
+void mainWindow::onScreenBufferRender(ulong32& tex) {
+	pScreenSpr->setTexture(tex);
+	pScreenSpr->render(100.f, 100.f);
+}
+
 void mainWindow::init() {
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
 
+	//sora::SORA->enableFullscreenBuffer(false);
 	/*double testSize = sora::SoraHttpFile::getRemoteFileSize("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png");
 	if(testSize != 0.0) {
 		sora::SORA->messageBox(sora::vamssg("%f", testSize), "test", MB_OK);
 		file.setEventHandler(this);
 		file.downloadFileTo("http://www.gamemastercn.com/wp-content/uploads/2011/05/angel_600_338.png.pagespeed.ce.T4FzGASQ6s.png", L"~/Desktop/download.png");
 	}*/
+	pScreenSpr = new sora::SoraSprite(NULL);
+	sora::SORA->registerFullscreenBufferDelegate(sora::DelegatePtr(this, &mainWindow::onScreenBufferRender));
 	
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
@@ -244,15 +255,15 @@ void mainWindow::init() {
 	pressAnyKey = sora::SORA->createSprite(L"road.png");
 	pSpr2 = sora::SORA->createSprite(L"grass.png");
 	
+	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(1.f);
+	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
+	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.f);
+
 	ps = new sora::SoraParticleManager;
 	ps->setGlobalSprite(sora::SORA->createSprite(L"pics/particles.png"));
 	ps->emitS(L"astar.sps", 200.f, 100.f);
 	
-	
-	pSpr->setBlendMode(BLEND_DEFAULT_Z); pSpr->setZ(1.f);
-	pressAnyKey->setBlendMode(BLEND_DEFAULT_Z); pressAnyKey->setZ(0.5f);
-	pSpr2->setBlendMode(BLEND_DEFAULT_Z); pSpr2->setZ(0.0f); 
-    
+
     gifSprite = new sora::SoraGifSprite;
     gifSprite->load(L"giftest.gif");
 	gifSprite->setPosition(100.f, 100.f);
