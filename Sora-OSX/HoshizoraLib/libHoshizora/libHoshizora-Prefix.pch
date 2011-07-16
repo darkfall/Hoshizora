@@ -1,0 +1,6 @@
+//
+// Prefix header for all source files of the 'libHoshizora' target in the 'libHoshizora' project
+//
+
+#include <iostream>
+
