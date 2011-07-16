@@ -8,7 +8,7 @@
 
 #include "SoraEvent.h"
 
-typedef enum {
+enum {
 	SORA_KEY_0 = 0x30,
 	SORA_KEY_1,
 	SORA_KEY_2,
@@ -120,7 +120,7 @@ typedef enum {
 	SORA_KEY_APPS = 0x5D,
 };
 
-typedef enum {
+enum {
 	SORA_JOYSTICK_1 = 0,
 	SORA_JOYSTICK_2,
 	SORA_JOYSTICK_3,
@@ -139,7 +139,7 @@ typedef enum {
 	SORA_JOYSTICK_16,
 };
 
-typedef enum {
+enum {
 	SORA_INPUT_PRESSED = 0,
 	SORA_INPUT_KEYDOWN = 1,
 	SORA_INPUT_KEYUP = 2,
@@ -149,7 +149,7 @@ typedef enum {
 	SORA_INPUT_MOUSEWHEEL = 6,
 };
 
-typedef enum {
+enum {
 	SORA_INPUT_FLAG_SHIFT		= 1,
 	SORA_INPUT_FLAG_CTRL		= 2,
 	SORA_INPUT_FLAG_ALT			= 4,
@@ -159,7 +159,7 @@ typedef enum {
 	SORA_INPUT_FLAG_REPEAT		= 64,
 };
 
-typedef enum {
+enum {
 	SORA_JOYSTICK_PRESSED = 0,
 	SORA_JOYSTICK_UP	  = 1,
 	SORA_JOYSTICK_DOWN	  = 2,

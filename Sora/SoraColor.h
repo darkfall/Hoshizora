@@ -10,6 +10,7 @@
 #define _SORA_COLOR_H_
 
 #include "SoraPlatform.h"
+#include <cmath>
 
 namespace sora {
 
@@ -24,8 +25,8 @@ namespace sora {
 #define CSETB(col,b)		(((col) & 0xFFFFFF00) + uint32(b))
 
     inline float32 ColorNormalize(float32 c) {
-        if(c < 0.0) c = 0.0;
-        else if(c > 1.0) c = 1.0;
+        if(c < 0.0f) c = 0.0f;
+        else if(c > 1.0f) c = 1.0f;
         return c;
     }
     

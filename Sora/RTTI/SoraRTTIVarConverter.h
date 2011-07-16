@@ -101,7 +101,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, short> {
 	public:
-		int operator()(__IN value) {
+		short operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -133,7 +133,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, unsigned short> {
 	public:
-		int operator()(__IN value) {
+		unsigned short operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -165,7 +165,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, unsigned char> {
 	public:
-		int operator()(__IN value) {
+		unsigned char operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -195,7 +195,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, long> {
 	public:
-		int operator()(__IN value) {
+		long operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -227,7 +227,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, unsigned long> {
 	public:
-		int operator()(__IN value) {
+		unsigned long operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -259,7 +259,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, int64_t> {
 	public:
-		int operator()(__IN value) {
+		int64_t operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -291,7 +291,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, uint64_t> {
 	public:
-		int operator()(__IN value) {
+		uint64_t operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -323,7 +323,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, unsigned int> {
 	public:
-		int operator()(__IN value) {
+		unsigned int operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -417,7 +417,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, double> {
 	public:
-		float operator()(__IN value) {
+		double operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -449,7 +449,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, std::string> {
 	public:
-		float operator()(__IN value) {
+		std::string operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			
@@ -537,7 +537,7 @@ namespace sora {
 	template<class __IN>
 	class RTTIVarConvertTo<__IN, std::wstring> {
 	public:
-		float operator()(__IN value) {
+		std::wstring operator()(__IN value) {
 			SoraRTTIType* type = RTTITypeOfPtr((__IN*)0);
 			int typeTag = type->getTag();
 			

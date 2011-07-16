@@ -99,7 +99,7 @@ namespace sora {
 		render(x, y, text, false, false);
 	}
 	
-	void SoraSpriteFont::setColor(ulong32 dwColor, int32 i) {
+	void SoraSpriteFont::setColor(uint32 dwColor, int32 i) {
 		if(mFontSprite)
 			mFontSprite->setColor(dwColor, i);
 	}

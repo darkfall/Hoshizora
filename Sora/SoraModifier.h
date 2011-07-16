@@ -53,7 +53,6 @@ namespace sora {
         ModifierList mModifiers;
         int32 mCurrModifier;
         bool mRepeat;
-        bool mRepeatState;
     };
     
     template<typename MT>
@@ -78,30 +77,22 @@ namespace sora {
         if(mModifiers.size() != 0) {
             int32 result = mModifiers[mCurrModifier]->update(dt);
             if(result == ModifierUpdateEnd) {
-                if(!mRepeat)
-                    ++mCurrModifier;
-                else 
-                    mRepeatState==false?mCurrModifier+=1:mCurrModifier-=1;
-                
+                ++mCurrModifier;
+            
                 if(!mRepeat) {
                     if(mCurrModifier >= mModifiers.size()) {
                         clear();
                     } else 
                         mModifiers[mCurrModifier]->reset();
                 } else {
-                    if(!mRepeatState) {
-                        if(mCurrModifier >= mModifiers.size())
-                            mCurrModifier = mModifiers.size() - 1;
-                    } else {
-                        if(mCurrModifier < 0)
-                            mCurrModifier = 0;
-                    }
+                    if(mCurrModifier >= mModifiers.size())
+                        mCurrModifier = 0;
+                  
                     mModifiers[mCurrModifier]->reset();
-                    mRepeatState = !mRepeatState;
-            
                 }
             }
         }
+        return 0;
     }
     
     template<typename MT>

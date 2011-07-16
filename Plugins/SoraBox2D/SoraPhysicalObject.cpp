@@ -1,5 +1,7 @@
 #include "SoraPhysicalObject.h"
 #include "SoraPhysicalWorld.h"
+#include "SoraCore.h"
+
 #include "Debug/SoraInternalLogger.h"
 
 namespace sora {
@@ -280,9 +282,45 @@ namespace sora {
     
     void SoraPhysicalObject::render() {
         SoraObject::render();
+        if(mDrawBoundingBox) {
+            b2AABB box = getBoundingBox();
+            sora::SORA->renderBox(box.upperBound.x, box.upperBound.y, box.lowerBound.x, box.lowerBound.y, COLOR_RED.GetHWColor());
+            printf("%f, %f, %f, %f\n", box.upperBound.x, box.upperBound.y, box.lowerBound.x, box.lowerBound.y);
+        }
     }
     
     SoraSprite* SoraPhysicalObject::getRenderer() const {
         return mRenderer;
+    }
+    
+    b2Fixture* SoraPhysicalObject::getFixture() const {
+        if(body)
+            return body->GetFixtureList();
+        return NULL;
+    }
+   
+    b2AABB SoraPhysicalObject::getBoundingBox() const {
+        if(body) {
+            b2AABB box;
+            box.upperBound = b2Vec2(-10000.f, -10000.f);
+            box.lowerBound = b2Vec2(10000.f, 10000.f);
+
+            b2Fixture* fixture = body->GetFixtureList();
+            while(fixture != NULL) {
+                b2AABB tmpBox = fixture->GetAABB();
+                box.Combine(box, tmpBox);
+                
+                fixture = fixture->GetNext();
+            }
+                
+            box.upperBound = B2CorToPixel(box.upperBound);
+            box.lowerBound = B2CorToPixel(box.lowerBound);
+            return box;
+        }
+        return b2AABB();
+    }
+    
+    void SoraPhysicalObject::enableDrawBoundingBox(bool flag) {
+        mDrawBoundingBox = flag;
     }
 } // namespace sora

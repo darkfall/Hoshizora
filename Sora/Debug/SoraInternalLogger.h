@@ -15,7 +15,7 @@ namespace sora {
 	class SoraCore;
 	
 	
-	typedef enum {
+    enum {
 		LOG_LEVEL_NORMAL = 1,
 		LOG_LEVEL_ERROR = 2, 
 		LOG_LEVEL_WARNING = 3,

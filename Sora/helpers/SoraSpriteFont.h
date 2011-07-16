@@ -23,7 +23,7 @@ namespace sora {
 		void	print(float32 x, float32 y, int32 align, const wchar_t *format, ...);
 		void	render(float32 x, float32 y, int32 align, const wchar_t* text);
 		
-		void	setColor(ulong32 dwColor, int32 i = -1);
+		void	setColor(uint32 dwColor, int32 i = -1);
 		ulong32	getColor(int32 i);
 		
 		void	setKerningWidth(float32 kerning);

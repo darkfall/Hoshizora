@@ -174,6 +174,8 @@ namespace sora {
 
 	uint32 SoraFTFont::getGlyphByChar(wchar_t c) {
 		unsigned int idx = FT_Get_Char_Index(ft_face->face, c);
+        if(idx == 0)
+            return idx;
 
 		if((idx && !ft_glyphs[idx-1].cached) || ft_glyphs[idx-1].size != size) {
 			ft_glyphs[idx-1].size = size;
@@ -306,22 +308,13 @@ namespace sora {
 	}
 
 	void SoraFTFont::print(float32 x, float32 y, int32 align, const wchar_t* format, ...) {
-		va_list	ArgPtr;
-
-#ifdef HAS_WSTRING
-		wchar_t Message[1024] = {0};
-		va_start(ArgPtr, format);
-		vswprintf(Message, 1024, format, ArgPtr);
-		va_end(ArgPtr);
-		render(x, y, align, Message);
-		
-#else
-		char Message[1024] = {0};
-		va_start(ArgPtr, format);
-		vsprintf(Message, ws2sfast(format).c_str(), ArgPtr);
-		va_end(ArgPtr);
-		render(x, y, align,  s2wsfast(Message).c_str());
-#endif
+		va_list l;
+		va_start(l, format);
+        
+		wchar_t text[1024];
+		vswprintf(text, 1024, format, l);
+        
+		render(x, y, align, text);
 	}
 
 	void SoraFTFont::render(float32 x, float32 y, const wchar_t* pwstr, bool bhcenter, bool bvcenter) {

@@ -3,7 +3,7 @@
  *  OpenGLES Study 1
  *
  *  Created by griffin clare on 09��8��30��.
- *  Copyright 2009 __MyCompanyName__. All rights reserved.
+ *  Copyright 2009 Robert Bu. All rights reserved.
  *
  */
 #ifndef _SoraINI_H_

@@ -59,8 +59,8 @@ namespace sora {
         
         inline float32 pixel2b2cor(float32 px) { return px / coordScalar; }
         inline float32 b2cor2pixel(float32 cor) { return cor * coordScalar; }
-        inline b2Vec2 pixel2b2cor(b2Vec2& px) { return b2Vec2(px.x / coordScalar, px.y / coordScalar); }
-        inline b2Vec2 b2cor2pixel(b2Vec2& cor) { return b2Vec2(cor.x * coordScalar, cor.y * coordScalar); }
+        inline b2Vec2 pixel2b2cor(const b2Vec2& px) { return b2Vec2(px.x / coordScalar, px.y / coordScalar); }
+        inline b2Vec2 b2cor2pixel(const b2Vec2& cor) { return b2Vec2(cor.x * coordScalar, cor.y * coordScalar); }
         
         // wrappers to help build shapes fast
         b2PolygonShape generateBox(float32 w, float32 h, float32 cx=0.f, float32 cy=0.f, float32 rot=0.f);
@@ -94,11 +94,11 @@ namespace sora {
         return SoraPhysicalWorld::Instance()->b2cor2pixel(cor);
     }
     
-    static b2Vec2 PixelToB2Cor(b2Vec2& px) {
+    static b2Vec2 PixelToB2Cor(const b2Vec2& px) {
         return SoraPhysicalWorld::Instance()->pixel2b2cor(px);
     }
     
-    static b2Vec2 B2CorToPixel(b2Vec2& cor) {
+    static b2Vec2 B2CorToPixel(const b2Vec2& cor) {
         return SoraPhysicalWorld::Instance()->b2cor2pixel(cor);
     }
     
@@ -115,7 +115,7 @@ namespace sora {
     }
     
     static b2PolygonShape B2CreateEdge(float32 v1, float32 v2, float32 v3, float32 v4) {
-        return SoraPhysicalWorld::Instance()->generateEdge(v1, v3, v3, v4);
+        return SoraPhysicalWorld::Instance()->generateEdge(v1, v2, v3, v4);
     }
     
 

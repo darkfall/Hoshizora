@@ -101,6 +101,8 @@
 
 #endif
 
+#include <stdint.h>
+
 //namespace sora
 //{
 #if defined(_MSC_VER)

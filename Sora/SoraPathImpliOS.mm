@@ -34,20 +34,25 @@ namespace sora {
         else
             THROW_SORA_EXCEPTION("Cannot get env string");
     }
+    
     std::string SoraPathImpl::currentImpl() {
         return [[[NSBundle mainBundle] bundlePath] UTF8String];
     }
+    
     std::string SoraPathImpl::homeImpl() {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
 		return (NSString2String(basePath)+"/");
     }
+    
     std::string SoraPathImpl::tempImpl() {
         return homeImpl();
     }
+    
     std::string SoraPathImpl::nullImpl() {
         return currentImpl();
     }
+    
     std::string SoraPathImpl::expandImpl(const std::string path) {
         std::string result;
         std::string::const_iterator it  = path.begin();
@@ -86,6 +91,7 @@ namespace sora {
         std::string path = [[[NSBundle mainBundle] bundlePath] UTF8String];
         return path + "/";
     }
+    
     std::string SoraPathImpl::writtableImpl() {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;

@@ -124,7 +124,7 @@ namespace sora {
 	}
 	
 	void SoraConsole::drawTab() {
-		ulong32 hCol = 0xFF909090;
+		uint32 hCol = 0xFF909090;
 		SORA->renderRect(mPositionX+mWidth-120.f, 
 						 mPositionY+mHeight-mFontHeight, 
 						 mPositionX+mWidth-60.f,

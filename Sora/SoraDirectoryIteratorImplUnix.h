@@ -10,6 +10,7 @@
 #define Sora_SoraDirectoryIteratorImplUnix_h
 
 #include "SoraPath.h"
+#include "SoraException.h"
 #include <dirent.h>
 
 namespace sora {

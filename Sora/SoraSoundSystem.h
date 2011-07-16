@@ -3,7 +3,7 @@
  *  Sora
  *
  *  Created by griffin clare on 11/25/10.
- *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
 

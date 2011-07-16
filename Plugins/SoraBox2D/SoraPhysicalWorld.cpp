@@ -46,6 +46,7 @@ namespace sora {
             
             SoraGlobalProfiler::Instance()->printProfile("PhysicalWorldThread");
 #endif
+            mWorld->getCurrentWorld()->DrawDebugData();
         }
         
 #ifdef SORA_PHYSICAL_THREAD
@@ -148,17 +149,60 @@ namespace sora {
         }
     };
     
+    class SoraBox2DDebugDraw: public b2DebugDraw {
+    public:
+        void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
+            for(int i=0; i<vertexCount-1; ++i) {
+                b2Vec2 ru = B2CorToPixel(vertices[i]);
+                b2Vec2 rl = B2CorToPixel(vertices[i+1]);
+                sora::SORA->renderRect(ru.x, ru.y, rl.x, rl.y+1.f, rl.x-ru.x, CARGB(1.f, color.r, color.g, color.b));
+            }
+        }
+        
+        /// Draw a solid closed polygon provided in CCW order.
+        void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
+            for(int i=0; i<vertexCount-1; ++i) {
+                b2Vec2 ru = B2CorToPixel(vertices[i]);
+                b2Vec2 rl = B2CorToPixel(vertices[i+1]);
+                sora::SORA->renderRect(ru.x, ru.y, rl.x, rl.y+1.f, rl.x-ru.x, CARGB(1.f, color.r, color.g, color.b));
+            }
+        }
+        
+        /// Draw a circle.
+        void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color) {
+            
+        }
+        
+        /// Draw a solid circle.
+        void DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color) {
+            
+        }
+        
+        /// Draw a line segment.
+        void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color) {
+            sora::SORA->renderRect(p1.x, p1.y, p2.x, p2.y, p2.x-p1.x, CARGB(1.f, color.r, color.g, color.b));
+        }
+        
+        /// Draw a transform. Choose your own length scale.
+        /// @param xf a transform.
+        void DrawTransform(const b2Transform& xf) {
+     
+        }
+    };
+    
     static SoraPhysicalWorldPlugin* g_phy_plugin;
+    static SoraBox2DDebugDraw* g_phy_debugdraw;
     
     SoraPhysicalWorld::SoraPhysicalWorld(): 
     velocityIteration(10), 
     positionIteration(8), 
     bInitialized(false), 
     bPluginInstalled(false), 
-    coordScalar(100), 
+    coordScalar(32.f), 
     physicalWorld(NULL) {
         g_phy_plugin = new SoraPhysicalWorldPlugin(this);
         SORA->addFrameListener(g_phy_plugin);
+        bPluginInstalled = true;
     }
     
     SoraPhysicalWorld::~SoraPhysicalWorld() { 
@@ -180,6 +224,10 @@ namespace sora {
             
             SoraB2ContactListener* contactListener = new SoraB2ContactListener;
             physicalWorld->SetContactListener(contactListener);
+            /*
+            g_phy_debugdraw = new SoraBox2DDebugDraw;
+            g_phy_debugdraw->SetFlags(b2DebugDraw::e_aabbBit | b2DebugDraw::e_shapeBit);
+            physicalWorld->SetDebugDraw(g_phy_debugdraw);*/
         }
     }
     

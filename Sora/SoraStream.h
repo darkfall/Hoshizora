@@ -89,7 +89,7 @@ namespace sora {
 			_buf.insert(_buf.begin(), buf, buf + len);
 		}
         
-		inline int read(uint8 * buf, size_t len) {
+		inline size_t read(uint8 * buf, size_t len) {
 			if(_pos + len > _buf.size())
 				len = _buf.size() - _pos;
 			if(len == 0)

@@ -90,14 +90,14 @@ namespace sora {
 		else
 			filePath = [[NSString alloc] initWithUTF8String: "~/"];
 		
-		int result = [openDlg runModalForDirectory:filePath
+		ulong32 result = [openDlg runModalForDirectory:filePath
 											  file:nil 
 											 types:fileTypes];
 		
 		if (result == NSOKButton) {
             [filePath release];
 			NSArray *filesToOpen = [openDlg filenames];
-			int count = [filesToOpen count];
+			ulong32 count = [filesToOpen count];
 			if(count > 0) {
 				std::string fileName = [[filesToOpen objectAtIndex:0] UTF8String];
 				return sora::s2ws(fileName);

@@ -59,7 +59,7 @@ namespace sora {
 				texRefs[uiKey] = 0;
 			}
 			
-			SET_ENV_INT("CORE_TEXMAP_SIZE", texMap.size());
+			SET_ENV_INT("CORE_TEXMAP_SIZE", (int32)texMap.size());
 		}
 		
 		void remove(HSORATEXTURE tex) {
@@ -70,7 +70,7 @@ namespace sora {
 				texMapRv.erase(p);
 			}
 			
-			SET_ENV_INT("CORE_TEXMAP_SIZE", texMap.size());
+			SET_ENV_INT("CORE_TEXMAP_SIZE", (int32)texMap.size());
 		}
 		
 		void del(HSORATEXTURE tex) {
@@ -81,7 +81,7 @@ namespace sora {
 				texMapRv.erase(p);
 			}
 			
-			SET_ENV_INT("CORE_TEXMAP_SIZE", texMap.size());
+			SET_ENV_INT("CORE_TEXMAP_SIZE", (int32)texMap.size());
 		}
 		
 		void addRf(const SoraWString& key) {

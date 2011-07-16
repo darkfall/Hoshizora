@@ -173,6 +173,7 @@ namespace sora {
         
         bool notify(const void* sender, TARGS& args) {
             (*mReceiverMethod)(sender, args);
+            return true;
         }
         
         SoraAbstractDelegate<TARGS>* clone() const {
@@ -217,6 +218,7 @@ namespace sora {
         bool notify(const void* sender, TARGS& args) {
             void* ncsender = const_cast<void*>(sender);
             (*mReceiverMethod)(ncsender, args);
+            return true;
         }
         
         SoraAbstractDelegate<TARGS>* clone() const {
@@ -260,6 +262,7 @@ namespace sora {
         
         bool notify(const void* sender, TARGS& args) {
             (*mReceiverMethod)(args);
+            return true;
         }
         
         SoraAbstractDelegate<TARGS>* clone() const {

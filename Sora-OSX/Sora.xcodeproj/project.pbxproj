@@ -1717,6 +1717,7 @@
 		883806021342587B00A47BD9 /* SoraBox2D */ = {
 			isa = PBXGroup;
 			children = (
+				887C5CB713D1D16E0009E508 /* Modifiers */,
 				883806031342587B00A47BD9 /* Box2D */,
 				883806541342587B00A47BD9 /* SoraPhysicalObject.h */,
 				883806531342587B00A47BD9 /* SoraPhysicalObject.cpp */,
@@ -2258,11 +2259,18 @@
 			path = modifiers;
 			sourceTree = "<group>";
 		};
+		887C5CB713D1D16E0009E508 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		887D5B7213BC17300088A4CC /* SoraGenericObjects */ = {
 			isa = PBXGroup;
 			children = (
-				882E622113CDE28400B6A74C /* SoraActor.h */,
 				887D5B7313BC17300088A4CC /* SoraActor.cpp */,
+				882E622113CDE28400B6A74C /* SoraActor.h */,
 				886EB0B013BDA14B0048ED09 /* SoraCustomShapeSprite.h */,
 				886EB0B113BDA1540048ED09 /* SoraCustomShapeSprite.cpp */,
 			);

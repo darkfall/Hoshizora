@@ -3,7 +3,7 @@
  *  Plugin Concept
  *
  *  Created by griffin clare on 8/23/10.
- *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
 

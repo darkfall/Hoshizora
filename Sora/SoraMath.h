@@ -3,7 +3,7 @@
  *  Plugin Concept
  *
  *  Created by griffin clare on 8/27/10.
- *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
 #ifndef SORA_TYPES_H_
@@ -100,7 +100,7 @@ namespace sora {
 	}
     
     inline uint16 flipBytes(uint16 value) {
-        return ((value >> 8) && 0x00FF) | ((value << 8) & 0xFF00);
+        return ((value >> 8) & 0x00FF) | ((value << 8) & 0xFF00);
     }
     
     inline uint32 flipBytes(uint32 value) {

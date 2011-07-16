@@ -85,22 +85,27 @@ namespace sora {
     
     inline SoraString& SoraString::operator=(const std::string& str) {
         mString = s2ws(str);
+        return *this;
     }
     
     inline SoraString& SoraString::operator=(const std::wstring& str) {
         mString = str;
+        return *this;
     }
     
     inline SoraString& SoraString::operator=(const char* str) {
         mString = s2ws(str);
+        return *this;
     }
     
     inline SoraString& SoraString::operator=(const wchar_t* str) {
         mString = str;
+        return *this;
     }
     
     inline SoraString& SoraString::operator=(const SoraString& str) {
         mString = str.mString;
+        return *this;
     }
     
     inline bool SoraString::operator == (const std::string& str) {

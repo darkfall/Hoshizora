@@ -84,9 +84,6 @@ bool mainWindow::updateFunc() {
         if(mouseReleased) {
             float32 x, y;
             sora::SORA->getMousePos(&x, &y);
-            platformerGeo->addVertex(x-platformerGeo->getPositionX(), y-platformerGeo->getPositionY());
-            platformerGeo->create();
-
             mouseReleased = false;
         }
     } else 
@@ -160,7 +157,6 @@ bool mainWindow::renderFunc() {
         py2->render();
         //platformerGeo->update(sora::SORA->getDelta());
         //platformerGeo->render();
-        printf("%f, %f\n", py2->getPositionX(), py2->getPositionY());
         mEdge->render(0.f, 0.f);
 	}
 	//obj.update(sora::SORA->getDelta());
@@ -294,20 +290,22 @@ void mainWindow::init() {
     obj.doScript(L"mybullettest.lua");
     
     
-    platformerGeo = new sora::SoraPlatformerGeometry(sora::SORA->createTexture(L"geotest.png"));
-    platformerGeo->addVertex(0.f, 0.f);
-    platformerGeo->addVertex(400.f, 0.f);
-    platformerGeo->addVertex(400.f, 301.f);
-    platformerGeo->addVertex(0, 301.f);
     
-    py1 = sora::RenderablePhysicalOject(0.f, 0.f, sora::B2CreateBox(400, 301, 0, 0), sora::SORA->createSprite(L"geotest.png"));
-    py2 = sora::RenderablePhysicalOject(100.f, 0.f, sora::B2CreateBox(400, 301, 500, 0), sora::SORA->createSprite(L"geotest.png"));
+    py1 = sora::RenderablePhysicalOject(200.f, 200.f, sora::B2CreateBox(200.f, 150.f), sora::SORA->createSprite(L"geotest.png"));
+    //py2 = sora::RenderablePhysicalOject(100.f, 0.f, sora::B2CreateBox(400, 301, 500, 0), sora::SORA->createSprite(L"geotest.png"));
     
+    py1->enableDrawBoundingBox(true);
+    //py2->enableDrawBoundingBox(true);
     
     mEdge = new sora::SoraSprite(NULL);
     mEdge->setColor(0xFFFFFFFF);
     mEdge->setTextureRect(0, 0, 800, 20);
-    py2 = sora::RenderablePhysicalOject(0.f,400.f, sora::B2CreateBox(1024.f, 20.f), mEdge, false);
+    py2 = sora::RenderablePhysicalOject(0.f,0.f, sora::B2CreateEdge(0.f, 0.f, 1024.f, 0.f), mEdge, false);
+    py2->createFixture(sora::B2CreateEdge(0.f, 0.f, 0.f, 800.f), 1.f);
+    py2->createFixture(sora::B2CreateEdge(980.f, 0.f, 980, 800.f), 1.f);
+    py2->createFixture(sora::B2CreateEdge(0.f, 700.f, 1024.f, 700.f), 1.f);
+    py2->enableDrawBoundingBox(true);
+
 }
 
 void mainWindow::onFileChangeEvent(sora::SoraFileChangeEvent* cev) {
@@ -316,15 +314,15 @@ void mainWindow::onFileChangeEvent(sora::SoraFileChangeEvent* cev) {
 
 void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
 	if(kev->isKeyPressed(SORA_KEY_1))
-        platformerGeo->setVertexMode(sora::SORA_TRIANGLES);
+        customSprite->setRenderMode(sora::SORA_TRIANGLES);
     else if(kev->isKeyPressed(SORA_KEY_2))
-        platformerGeo->setVertexMode(sora::SORA_TRIANGLES_FAN);
+        customSprite->setRenderMode(sora::SORA_TRIANGLES_FAN);
     else if(kev->isKeyPressed(SORA_KEY_3))
-        platformerGeo->setVertexMode(sora::SORA_TRIANGLES_STRIP);
+        customSprite->setRenderMode(sora::SORA_TRIANGLES_STRIP);
     else if(kev->isKeyPressed(SORA_KEY_4))
         customSprite->setRenderMode(sora::SORA_QUAD);
     else if(kev->isKeyPressed(SORA_KEY_5))
-        platformerGeo->clearVertices();
+        customSprite->clearVertices();
     else if(kev->isKeyPressed(SORA_KEY_6))
         customSprite->saveVertciesToFile(L"vertices.raw");
     else if(kev->isKeyPressed(SORA_KEY_7)) {

@@ -9,7 +9,7 @@
 #ifndef Sora_SoraPathImplUnix_h
 #define Sora_SoraPathImplUnix_h
 
-#include "SoraPath.h"
+#include "SoraPlatform.h"
 #include "SoraException.h"
 
 #include <pwd.h>

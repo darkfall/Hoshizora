@@ -799,12 +799,12 @@ namespace sora {
 			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
 	}
 
-	void SoraCore::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, ulong32 color, float32 z) {
+	void SoraCore::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
 		assert(bInitialized==true);
 		pRenderSystem->renderRect(x1, y1, x2, y2, fWidth, color, z);
 	}
 	
-	void SoraCore::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, ulong32 color, float32 z) {
+	void SoraCore::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
 		assert(bInitialized==true);
 		pRenderSystem->renderBox(x1, y1, x2, y2, color, z);
 	}

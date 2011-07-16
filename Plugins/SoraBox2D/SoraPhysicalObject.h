@@ -79,6 +79,8 @@ namespace sora {
 		bool isActive();
 
 		b2Body* getBody() const;
+        b2Fixture* getFixture() const;
+        b2AABB getBoundingBox() const;
 
 		void add(SoraObject* obj);
 
@@ -93,6 +95,8 @@ namespace sora {
         ContactDelegate getContactDelegate() const;
         
         SoraSprite* getRenderer() const;
+        
+        void enableDrawBoundingBox(bool flag);
 
 	private:
 		b2Body* body;
@@ -100,11 +104,14 @@ namespace sora {
         
         SoraSprite* mRenderer;
         ContactDelegate mContactDelegate;
+        
+        bool mDrawBoundingBox;
 	};
     
     static SoraPhysicalObject* RenderablePhysicalOject(float32 x, float32 y, const b2Shape& shape, SoraSprite* spr, bool dynamic=true) {
         SoraPhysicalObject* obj = new SoraPhysicalObject(x, y, shape, 1.f, dynamic);
         obj->add(spr);
+        spr->setCenter(spr->getSpriteWidth()/2, spr->getSpriteHeight()/2);
         return obj;
     }
 } // namespace sora

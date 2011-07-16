@@ -59,7 +59,7 @@ namespace sora {
 		~SoraConsole();
 	
 	public:	
-		typedef enum {
+        enum {
 			TAB_CMDLINE = 1,
 			TAB_MSSG = 2,
 		};

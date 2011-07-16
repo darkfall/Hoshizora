@@ -17,6 +17,8 @@
 #include "SoraPathImplWindows.h"
 #elif defined(OS_IOS)
 #include "SoraPathImpliOS.h"
+#elif defined(OS_OSX)
+#include "SoraPathImplOSX.h"
 #else
 #include "SoraPathImplUnix.h"
 #endif
@@ -94,7 +96,7 @@ namespace sora {
         bool isDirectory() const;
         bool isFile() const;
         
-        int depth() const;
+        size_t depth() const;
         
         std::string getBaseName() const;        
         std::string getFileName() const;
@@ -207,7 +209,7 @@ namespace sora {
         return mName;
     }
     
-    inline int SoraPath::depth() const {
+    inline size_t SoraPath::depth() const {
         return mDirs.size();
     }
     

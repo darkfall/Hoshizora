@@ -85,14 +85,16 @@ namespace sora {
     }
     
     uint32 SoraActor::update(float32 dt) {
-        if(m_Sprite)
-            return m_Sprite->update(dt);
-        if(m_PropLua)
-            m_PropLua->update(dt);
-        if(m_PropPhysics) {
-            m_PropPhysics->update(dt);
-            setPosition(m_PropPhysics->getPositionX(), 
-                        m_PropPhysics->getPositionY());
+        if(m_Sprite) {
+            m_Sprite->update(dt);
+            if(m_PropLua)
+                m_PropLua->update(dt);
+            if(m_PropPhysics) {
+                m_PropPhysics->update(dt);
+                setPosition(m_PropPhysics->getPositionX(), 
+                            m_PropPhysics->getPositionY());
+                m_Sprite->setRotation(m_PropPhysics->getAngle());
+            }
         }
         return 0;
     }
