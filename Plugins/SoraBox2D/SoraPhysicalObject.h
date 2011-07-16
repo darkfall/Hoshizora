@@ -47,25 +47,25 @@ namespace sora {
 		void createFixture(const b2Shape& shape, float32 density=0.f);
 		void destroyFixture(b2Fixture* def);
 
-		void setSpeed(float32 x, float32 y);
-		b2Vec2 getSpeed() const;
+		void    setSpeed(float32 x, float32 y);
+		b2Vec2  getSpeed() const;
 		float32 getSpeedX() const;
 		float32 getSpeedY() const;
 
-		void setAngularSpeed(float32 omega);
+		void    setAngularSpeed(float32 omega);
 		float32 getAngularSpeed() const;
         
         void createJoint(SoraPhysicalObject* obj);
 		
-		void setMass(float32 mass);
-		void setMassF(float32 mass, float32 massx, float32 massy);
+		void    setMass(float32 mass);
+		void    setMassF(float32 mass, float32 massx, float32 massy);
 		float32 getMass() const;
 
 		void applyForce(float32 fx, float32 fy);
 		void applyForceF(float32 fx, float32 fy, float32 px, float32 py);
 
 		float32 getAngle() const;
-		void getPosition(float32&x, float32 &y);
+		void    getPosition(float32&x, float32 &y);
         float32 getPositionX();
         float32 getPositionY();
 
@@ -82,8 +82,8 @@ namespace sora {
 
 		void add(SoraObject* obj);
 
-		void setLocalAnchor(float32 x, float32 y);
-		b2Vec2 getLocalAnchor() const;
+		void    setLocalAnchor(float32 x, float32 y);
+		b2Vec2  getLocalAnchor() const;
 		float32 getLocalAnchorX() const;
 		float32 getLocalAnchorY() const;
         
