@@ -20,10 +20,10 @@ namespace sora {
 	 *  Base class for geometry
 	 **/
 	
-	class SoraGeometry: public SoraObject, public SoraPrefab {
+	class SoraGeometry: public SoraPrefab {
 	public:
-		SoraGeometry();
-		~SoraGeometry();
+		SoraGeometry() {}
+		~SoraGeometry() {}
 
 	};
 	

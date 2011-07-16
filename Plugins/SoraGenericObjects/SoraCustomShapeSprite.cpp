@@ -280,7 +280,6 @@ namespace sora {
         if(!file)
             return false;
         
-        fwrite("SVTX", 4, 1, file);
         cFileWriteT(file, (int32)mVertexMap.size());
         cFileWriteT(file, mRenderMode);
         
@@ -302,45 +301,67 @@ namespace sora {
         return true;
     }
     
-    bool SoraCustomShapeSprite::loadVerticesFromFile(const SoraWString& path) {
-        FILE* file = sora_fopenw(path.c_str(), "rb");
-        if(!file)
-            return false;
+    SoraStream SoraCustomShapeSprite::writeToStream() {
+        SoraStream stream;
+        stream << (int32)mVertexMap.size();
+        stream << mRenderMode;
+        VERTEX_MAP::iterator itVertex = mVertexMap.begin();
+        while(itVertex != mVertexMap.end()) {            
+            SoraVertex vertex = itVertex->second;
+            stream << vertex.x;
+            stream << vertex.y;
+            stream << vertex.z;
+            stream << vertex.tx;
+            stream << vertex.ty;
+            stream << vertex.col;
+            
+            ++itVertex;
+        }
+        return stream;
+    }
+    
+    bool SoraCustomShapeSprite::loadFromData(void* data, ulong32 datasize) {
+        SoraMemoryBuffer buffer(data, datasize);
         
         clearVertices();
         
-        char ident[5];
-        fread(ident, 4, 1, file);
-        ident[4] = '\0';
-        if(!strcmp(ident, "SVTX") == 0)
-            return false;
-        
         int32 size;
         bool error = false;
-
-        size = cFileReadT<int32>(file, error);
-        mRenderMode = cFileReadT<int32>(file, error);
+        
+        buffer.read(&size);
+        buffer.read(&mRenderMode);
         for(int32 i=0; i<size; ++i) {
             SoraVertex vertex;            
             //int32 hid = cFileReadT<int32>(file, error);
             
-            vertex.x = cFileReadT<float32>(file, error);
-            vertex.y = cFileReadT<float32>(file, error);
-            vertex.z = cFileReadT<float32>(file, error);
-            vertex.tx = cFileReadT<float32>(file, error);
-            vertex.ty = cFileReadT<float32>(file, error);
-            vertex.col = cFileReadT<uint32>(file, error);
+            error = !buffer.read(&vertex.x);
+            error = !buffer.read(&vertex.y);
+            error = !buffer.read(&vertex.z);
+            error = !buffer.read(&vertex.tx);
+            error = !buffer.read(&vertex.ty);
+            error = !buffer.read(&vertex.col);
             
-            if(error) {
-                fclose(file);
-                return false;
-            }
-        
+            if(error)
+                THROW_SORA_EXCEPTION("Invalid vertex data file");
+            
             addVertex(vertex);
         }
         
-        fclose(file);
         return true;
+    }
+    
+    bool SoraCustomShapeSprite::loadVerticesFromFile(const SoraWString& path) {
+        SoraResourceFileAuto data(path);
+        if(!data.isValid())
+            return false;
+        
+        return loadFromData(data, data.size());
+    }
+    
+    SoraVertex* SoraCustomShapeSprite::buildAndGetVertexList() {
+        if(!mVertexBufferBuilt)
+            buildVertexBuffer();
+        return mVertexBuffer;
     }
     
 } // namespace sora

@@ -3,6 +3,7 @@
 
 #include "SoraObject.h"
 #include "SoraDelegate.h"
+#include "SoraSprite.h"
 
 #include "Box2D/Box2D.h"
 
@@ -38,6 +39,9 @@ namespace sora {
 		SoraPhysicalObject(float32 posx, float32 posy, const b2Shape& shape, float32 density, bool dynamicBody=true);
 		SoraPhysicalObject(const b2BodyDef& bodyDef, const b2FixtureDef& fixtureDef);
 		virtual ~SoraPhysicalObject();
+        
+        virtual uint32 update(float32 dt);
+        virtual void render();
 		
 		void createFixture(const b2FixtureDef& def);
 		void createFixture(const b2Shape& shape, float32 density=0.f);
@@ -61,9 +65,9 @@ namespace sora {
 		void applyForceF(float32 fx, float32 fy, float32 px, float32 py);
 
 		float32 getAngle() const;
-		b2Vec2 getPosition() const;
-		float32 getPositionX() const;
-		float32 getPositionY() const;
+		void getPosition(float32&x, float32 &y);
+        float32 getPositionX();
+        float32 getPositionY();
 
 		void setBullet(bool flag);
 		bool isBullet();
@@ -87,14 +91,22 @@ namespace sora {
         
         void setContactDelegate(ContactDelegate delegate);
         ContactDelegate getContactDelegate() const;
+        
+        SoraSprite* getRenderer() const;
 
 	private:
 		b2Body* body;
 		b2Vec2 localAnchor;
         
+        SoraSprite* mRenderer;
         ContactDelegate mContactDelegate;
 	};
-
+    
+    static SoraPhysicalObject* RenderablePhysicalOject(float32 x, float32 y, const b2Shape& shape, SoraSprite* spr, bool dynamic=true) {
+        SoraPhysicalObject* obj = new SoraPhysicalObject(x, y, shape, 1.f, dynamic);
+        obj->add(spr);
+        return obj;
+    }
 } // namespace sora
 
 #endif

@@ -86,6 +86,22 @@ namespace sora {
     
 #define PHYSICAL_WORLD SoraPhysicalWorld::Instance()
     
+    static float32 PixelToB2Cor(float32 px) {
+        return SoraPhysicalWorld::Instance()->pixel2b2cor(px);
+    }
+    
+    static float32 B2CorToPixel(float32 cor) {
+        return SoraPhysicalWorld::Instance()->b2cor2pixel(cor);
+    }
+    
+    static b2Vec2 PixelToB2Cor(b2Vec2& px) {
+        return SoraPhysicalWorld::Instance()->pixel2b2cor(px);
+    }
+    
+    static b2Vec2 B2CorToPixel(b2Vec2& cor) {
+        return SoraPhysicalWorld::Instance()->b2cor2pixel(cor);
+    }
+    
     static b2PolygonShape B2CreateBox(float32 w, float32 h, float32 cx=0.f, float32 cy=0.f, float32 rot=0.f) {
         return SoraPhysicalWorld::Instance()->generateBox(w, h, cx, cy, rot);
     }

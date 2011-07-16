@@ -5,7 +5,7 @@
 namespace sora {
 
 	SoraPhysicalObject::SoraPhysicalObject(float32 posx, float32 posy, const b2Shape& shape, float density, bool dynamicBody) {
-		body = SoraPhysicalWorld::Instance()->createBody(PHYSICAL_WORLD->pixel2b2cor(posx), PHYSICAL_WORLD->pixel2b2cor(posy), shape, dynamicBody, density);
+		body = SoraPhysicalWorld::Instance()->createBody(posx, posy, shape, dynamicBody, density);
 		if(body) {
             localAnchor.Set(0.f, 0.f);
             body->SetUserData(this);
@@ -13,6 +13,7 @@ namespace sora {
             DebugPtr->log("Error craeing physical body");
         setType(OBJ_PHYSICAL);
         mContactDelegate = NULL;
+        mRenderer = NULL;
 	}
 
 	SoraPhysicalObject::SoraPhysicalObject(const b2BodyDef& bodyDef, const b2FixtureDef& fixtureDef) {
@@ -24,6 +25,7 @@ namespace sora {
             DebugPtr->log("Error craeing physical body");
         setType(OBJ_PHYSICAL);
         mContactDelegate = NULL;
+        mRenderer = NULL;
 	}
 
 	SoraPhysicalObject::~SoraPhysicalObject() {
@@ -118,25 +120,30 @@ namespace sora {
         return 0.f;
 	}
 
-	b2Vec2 SoraPhysicalObject::getPosition() const {
+    void SoraPhysicalObject::getPosition(float32&x, float32 &y) {
         if(!body)
-            return b2Vec2(0.f, 0.f);;
+            return;
+
+        b2Vec2 cor = body->GetPosition();
+        x = B2CorToPixel(cor.x);
+        y = B2CorToPixel(cor.y);
+    }
+    
+    float32 SoraPhysicalObject::getPositionX() {
+        if(!body)
+            return 0.f;
         
-		b2Vec2 pos = body->GetPosition();
-		return b2Vec2(PHYSICAL_WORLD->b2cor2pixel(pos.x), PHYSICAL_WORLD->b2cor2pixel(pos.y));
-	}
-
-	float32 SoraPhysicalObject::getPositionX() const {
-		if(body)
-            return PHYSICAL_WORLD->b2cor2pixel(body->GetPosition().x);
-        return 0.f;
-	}
-
-	float32 SoraPhysicalObject::getPositionY() const {
-		if(body)
-            return PHYSICAL_WORLD->b2cor2pixel(body->GetPosition().y);
-        return 0.f;
-	}
+        b2Vec2 cor = body->GetPosition();
+        return B2CorToPixel(cor.x);
+    }
+    
+    float32 SoraPhysicalObject::getPositionY() {
+        if(!body)
+            return 0.f;
+        
+        b2Vec2 cor = body->GetPosition();
+        return B2CorToPixel(cor.y);
+    }
 
 	void SoraPhysicalObject::setBullet(bool flag) {
 		if(body)
@@ -218,7 +225,12 @@ namespace sora {
 			jdef.localAnchorB = py->getLocalAnchor();
 
 			SoraPhysicalWorld::Instance()->createJoint(jdef);
-		}
+		} else {
+            SoraSprite* spr = dynamic_cast<SoraSprite*>(obj);
+            if(spr != NULL) {
+                mRenderer = spr;
+            }
+        }
         SoraObject::add(obj);
 	}
 
@@ -236,6 +248,7 @@ namespace sora {
             DebugPtr->log("Error craeing physical body");
         setType(OBJ_PHYSICAL);
         mContactDelegate = NULL;
+        mRenderer = NULL;
 	}
 
 	void SoraPhysicalObject::setAsBox(float32 w, float32 h, float32 density) {
@@ -256,5 +269,20 @@ namespace sora {
     
     SoraPhysicalObject::ContactDelegate SoraPhysicalObject::getContactDelegate() const {
         return mContactDelegate;
+    }
+    
+    uint32 SoraPhysicalObject::update(float32 dt) {
+        SoraObject::update(dt);
+        if(mRenderer) {
+            mRenderer->setRotation(getAngle());
+        }
+    }
+    
+    void SoraPhysicalObject::render() {
+        SoraObject::render();
+    }
+    
+    SoraSprite* SoraPhysicalObject::getRenderer() const {
+        return mRenderer;
     }
 } // namespace sora

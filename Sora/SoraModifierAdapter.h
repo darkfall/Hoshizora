@@ -72,7 +72,7 @@ namespace sora {
     };
     
     template<typename MT>
-    SoraModifierAdapter<MT>* CreateModifierAdapter(MT* obj, SoraModifier<MT*> modifier) {
+    SoraModifierAdapter<MT>* SORA_API CreateModifierAdapter(MT* obj, SoraModifier<MT*> modifier) {
         return new SoraModifierAdapter<MT>(obj, modifier);
     }
 } // namespace sora

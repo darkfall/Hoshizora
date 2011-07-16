@@ -12,6 +12,10 @@ namespace sora {
     }
     
     SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h): shaderContext(NULL) {
+        if(w == 0.f)
+            w = (float32)SORA->getTextureWidth(tex);
+        if(h == 0.f)
+            h = (float32)SORA->getTextureHeight(tex);
         _init((SoraTexture*)tex, x, y, w, h);
 		_initDefaults();
 		setTextureRect(x, y, w, h);
@@ -89,15 +93,17 @@ namespace sora {
 	}
 
 	void SoraSprite::setTextureRect(float32 x, float32 y, float32 width, float32 height) {
-		if(!texture)
-			return;
-		
 		float tx1, ty1, tx2, ty2;
 		
 		textureRect.x1=x;
 		textureRect.y1=y;
 		textureRect.x2=width;
 		textureRect.y2=height;
+        
+        sprWidth = (int32)width;
+        sprHeight = (int32)height;
+        if(!texture)
+			return;
 
 		tx1=textureRect.x1/texture->mTextureWidth; ty1=textureRect.y1/texture->mTextureHeight;
 		tx2=(textureRect.x1+width)/texture->mTextureWidth; ty2=(textureRect.y1+height)/texture->mTextureHeight;
@@ -107,8 +113,6 @@ namespace sora {
 		quad.v[2].tx=tx2; quad.v[2].ty=ty2; 
 		quad.v[3].tx=tx1; quad.v[3].ty=ty2; 
 		
-        sprWidth = (int32)width;
-        sprHeight = (int32)height;
 	}
 
 	

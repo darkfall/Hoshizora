@@ -34,8 +34,7 @@ namespace sora {
 		virtual void    setPosition(float32 _x, float32 _y);
 		virtual float32 getPositionX();
 		virtual float32 getPositionY();
-		
-        void getPosition(float32& _x, float32& _y);
+        virtual void    getPosition(float32& _x, float32& _y);
 		
 		SubObjectList   getObjList() const;
 		SoraObject*     getParent() const;

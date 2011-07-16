@@ -94,7 +94,7 @@ namespace sora {
                     info.contactObject1 = fA;
                     info.contactObject2 = fB;
                     info.normal = contact->GetManifold()->localNormal;
-                    info.position = contact->GetManifold()->localPoint;
+                    info.position = B2CorToPixel(contact->GetManifold()->localPoint);
                     info.isTouching = contact->IsTouching();
                     info.phase = CONTACT_BEGIN;
                     
@@ -107,7 +107,7 @@ namespace sora {
                     info.contactObject1 = fB;
                     info.contactObject2 = fA;
                     info.normal = contact->GetManifold()->localNormal;
-                    info.position = contact->GetManifold()->localPoint;
+                    info.position = B2CorToPixel(contact->GetManifold()->localPoint);
                     info.isTouching = contact->IsTouching();
                     info.phase = CONTACT_BEGIN;
                     
@@ -125,7 +125,7 @@ namespace sora {
                     info.contactObject1 = fA;
                     info.contactObject2 = fB;
                     info.normal = contact->GetManifold()->localNormal;
-                    info.position = contact->GetManifold()->localPoint;
+                    info.position = B2CorToPixel(contact->GetManifold()->localPoint);
                     info.isTouching = contact->IsTouching();
                     info.phase = CONTACT_END;
                     
@@ -138,7 +138,7 @@ namespace sora {
                     info.contactObject1 = fB;
                     info.contactObject2 = fA;
                     info.normal = contact->GetManifold()->localNormal;
-                    info.position = contact->GetManifold()->localPoint;
+                    info.position = B2CorToPixel(contact->GetManifold()->localPoint);
                     info.isTouching = contact->IsTouching();
                     info.phase = CONTACT_END;
                     

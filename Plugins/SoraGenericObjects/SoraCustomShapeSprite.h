@@ -67,6 +67,11 @@ namespace sora {
         bool saveVertciesToFile(const SoraWString& file);
         bool loadVerticesFromFile(const SoraWString& file);
         
+        SoraStream writeToStream();
+        bool loadFromData(void* data, ulong32 size);
+        
+        SoraVertex* buildAndGetVertexList();
+        
     private:
         inline void buildVertexBuffer();
         

@@ -9,6 +9,17 @@
 #ifndef Sora_SoraPlatformerPlatform_h
 #define Sora_SoraPlatformerPlatform_h
 
+#include "SoraBox2D/SoraPhysicalObject.h"
+
+namespace sora {
+    
+    class SoraPlatformerPlatform: public SoraObject {
+        
+    };
+    
+    
+} // namespace sora
+
 
 
 #endif

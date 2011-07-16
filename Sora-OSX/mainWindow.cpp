@@ -70,9 +70,6 @@ int32 posy = 0;
 bool mouseReleased = true;
 
 
-sora::SoraCountDownLatch* countDownLatch;
-sora::SoraBlockingQueue<int> blockingQueue;
-
 float32 cx = 300.f, cy = 400.f, cz = 1.f;
 void transform3d(float32& x, float32& y, float32 z) {
 	float scale = (cz - z) / cz;
@@ -87,8 +84,10 @@ bool mainWindow::updateFunc() {
         if(mouseReleased) {
             float32 x, y;
             sora::SORA->getMousePos(&x, &y);
-            customSprite->addScreenMappingVertex(x, y);
-            //      mouseReleased = false;
+            platformerGeo->addVertex(x-platformerGeo->getPositionX(), y-platformerGeo->getPositionY());
+            platformerGeo->create();
+
+            mouseReleased = false;
         }
     } else 
         mouseReleased = true;
@@ -121,6 +120,9 @@ bool mainWindow::updateFunc() {
     return false;
 }
 
+sora::SoraPhysicalObject* py1;
+sora::SoraPhysicalObject* py2;
+sora::SoraSprite* mEdge;
 
 bool mainWindow::renderFunc() {
 	pCanvas->beginRender(0x000000FF);
@@ -138,7 +140,6 @@ bool mainWindow::renderFunc() {
 	sora::GCN_GLOBAL->gcnLogic();
 	sora::GCN_GLOBAL->gcnDraw();
     
-    sora::SoraPhysicalWorld::Instance()->initBox2DWorld(0.f, 1.f);
     
     
 	{
@@ -153,11 +154,14 @@ bool mainWindow::renderFunc() {
         }
         
         //   customSprite->render();
-        
-        pCanvas->render();
-        
-        gifSprite->update(sora::SORA->getDelta());
-        gifSprite->render();
+        py1->update(sora::SORA->getDelta());
+        py2->update(sora::SORA->getDelta());
+        py1->render();
+        py2->render();
+        //platformerGeo->update(sora::SORA->getDelta());
+        //platformerGeo->render();
+        printf("%f, %f\n", py2->getPositionX(), py2->getPositionY());
+        mEdge->render(0.f, 0.f);
 	}
 	//obj.update(sora::SORA->getDelta());
     
@@ -190,7 +194,6 @@ void mainWindow::onDownloadEvent(sora::SoraHttpDownloadEvent* ev) {
 	file.writeToFile(L"./test.png");
 }
 
-sora::SoraThreadPool threadPool;
 
 void downloadDelegate(sora::SoraHttpFile& file) {
     sora::SORA->messageBox(sora::vamssg("downloadtime: %d", file.getDownloadTime()), "test", MB_OK);
@@ -206,6 +209,8 @@ void mainWindow::onScreenBufferRender(ulong32& tex) {
 }
 
 void mainWindow::init() {
+    sora::SoraPhysicalWorld::Instance()->initBox2DWorld(0.f, 1.f);
+
 	registerEventFunc(this, &mainWindow::onMenuEvent);
 	registerEventFunc(this, &mainWindow::onDownloadEvent);
 	registerEventFunc(this, &mainWindow::onFileChangeEvent);
@@ -245,23 +250,12 @@ void mainWindow::init() {
 	pFont = sora::SORA->createFont(L"cour.ttf", 16);
 	pFont->setColor(0xFFFFCC00);
     
-    new sora::SoraModifierAdapter<sora::SoraFont>(pFont,
-                                                  sora::CreateModifierList(new sora::SoraFontRotationModifier(0.f, 360.f, 10.f, true, false),
-                                                                           new sora::SoraFontScaleModifier(1.f, 2.f, 5.f),
-                                                                           true));
-
-    
 	pCanvas = new sora::SoraBaseCanvas(800, 600);
     
 	sora::GCN_GLOBAL->initGUIChan(L"Bank Gothic Medium BT.ttf", 16);
     
 	pSpr = sora::SORA->createSprite(L"background.png");
-    
-    new sora::SoraModifierAdapter<sora::SoraSprite>(pSpr,
-                                                    sora::CreateEffectList(sora::CreateEffectFade(0.f, 1.f, 5.f),
-                                                                           sora::CreateEffectTransitions(0.f, 0.f, 100.f, 100.f, 5.f),
-                                                                           sora::IMAGE_EFFECT_PINGPONG));
-    
+
     //pSpr->setCenter(pSpr->getSpriteWidth()/2, pSpr->getSpriteHeight()/2);
     //pSpr->setScale(3.f, 3.f);
     customSprite = new sora::SoraCustomShapeSprite(pSpr, sora::SORA_TRIANGLES);
@@ -290,8 +284,7 @@ void mainWindow::init() {
 	gifSprite->setPosition(100.f, 100.f);
     
 	sora::SORA_EVENT_MANAGER->registerFileChangeEventHandler(L"test.lua", this);
-    
-    
+
     sora::SoraPhysicalWorld::Instance()->initBox2DWorld(0.f, 1.f);
     
     mead::exportBulletManager(obj.getState());
@@ -300,43 +293,43 @@ void mainWindow::init() {
     mead::globalBulletManagerInit();
     obj.doScript(L"mybullettest.lua");
     
-    sora::SoraThreadTask task;
-    task.setAsMemberFunc(&mainWindow::test, this);
-    task.setArg(&blockingQueue);
     
-    threadPool.start(2);
-    threadPool.run(task);
+    platformerGeo = new sora::SoraPlatformerGeometry(sora::SORA->createTexture(L"geotest.png"));
+    platformerGeo->addVertex(0.f, 0.f);
+    platformerGeo->addVertex(400.f, 0.f);
+    platformerGeo->addVertex(400.f, 301.f);
+    platformerGeo->addVertex(0, 301.f);
+    
+    py1 = sora::RenderablePhysicalOject(0.f, 0.f, sora::B2CreateBox(400, 301, 0, 0), sora::SORA->createSprite(L"geotest.png"));
+    py2 = sora::RenderablePhysicalOject(100.f, 0.f, sora::B2CreateBox(400, 301, 500, 0), sora::SORA->createSprite(L"geotest.png"));
+    
+    
+    mEdge = new sora::SoraSprite(NULL);
+    mEdge->setColor(0xFFFFFFFF);
+    mEdge->setTextureRect(0, 0, 800, 20);
+    py2 = sora::RenderablePhysicalOject(0.f,400.f, sora::B2CreateBox(1024.f, 20.f), mEdge, false);
 }
 
 void mainWindow::onFileChangeEvent(sora::SoraFileChangeEvent* cev) {
 	sora::SORA->messageBoxW(cev->getChangedFile().c_str(), L"test", MB_OK);
 }
 
-void mainWindow::test(void* arg) {
-    sora::SoraBlockingQueue<int>* blockingQueue = static_cast<sora::SoraBlockingQueue<int>*>(arg);
-    for(;;)
-        printf("taking from blocking queue: %d\n", blockingQueue->take());
-}
-
 void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
 	if(kev->isKeyPressed(SORA_KEY_1))
-        customSprite->setRenderMode(sora::SORA_TRIANGLES);
+        platformerGeo->setVertexMode(sora::SORA_TRIANGLES);
     else if(kev->isKeyPressed(SORA_KEY_2))
-        customSprite->setRenderMode(sora::SORA_TRIANGLES_FAN);
+        platformerGeo->setVertexMode(sora::SORA_TRIANGLES_FAN);
     else if(kev->isKeyPressed(SORA_KEY_3))
-        customSprite->setRenderMode(sora::SORA_TRIANGLES_STRIP);
+        platformerGeo->setVertexMode(sora::SORA_TRIANGLES_STRIP);
     else if(kev->isKeyPressed(SORA_KEY_4))
         customSprite->setRenderMode(sora::SORA_QUAD);
     else if(kev->isKeyPressed(SORA_KEY_5))
-        customSprite->clearVertices();
+        platformerGeo->clearVertices();
     else if(kev->isKeyPressed(SORA_KEY_6))
         customSprite->saveVertciesToFile(L"vertices.raw");
     else if(kev->isKeyPressed(SORA_KEY_7)) {
         if(!customSprite->loadVerticesFromFile(L"vertices.raw"))
             sora::SORA->messageBox("sc", "sc", MB_OK);
-    }
-    else if(kev->isKeyPressed(SORA_KEY_9)) {
-        blockingQueue.put(sora::SORA->randomInt(0, 9999));
     }
     
 }

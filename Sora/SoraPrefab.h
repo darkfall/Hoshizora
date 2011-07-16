@@ -11,6 +11,7 @@
 #define SORA_PREFAB_H_
 
 #include "SoraObject.h"
+#include "SoraStream.h"
 
 namespace sora {
 	
@@ -20,10 +21,10 @@ namespace sora {
      *  Must be able to load and save to file to save the state
 	 **/
 	
-	class SoraPrefab: public SoraObject {
+	class SORA_API SoraPrefab: public SoraObject {
 	public:
-        virtual bool saveToFile(const SoraWString& file) = 0;
-        virtual bool loadFromFile(const SoraWString& file) = 0;
+        virtual bool        loadFromData(void* data, ulong32 size) = 0;
+        virtual SoraStream  saveToStream() = 0;
 	};
 	
 	

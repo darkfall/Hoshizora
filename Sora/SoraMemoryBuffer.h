@@ -64,6 +64,19 @@ namespace sora {
 			}
 			return 0;
 		}
+        
+        template<typename T>
+        bool read(T* t) {
+            if(!valid()) return 0;
+			if(currPos == length) return 0;
+			
+			ulong32 size = sizeof(T);
+			if(currPos+size <= length) {
+                memcpy(t, (void*)(get()+currPos), size);
+                return true;
+            }
+            return false;
+        }
 
 		/* 
 		 read a block of memory, size specified

@@ -19,7 +19,7 @@ namespace sora {
     
     class SoraShader;
     
-    class SoraShaderManager: public SoraSingleton<SoraShaderManager> {
+    class SORA_API SoraShaderManager: public SoraSingleton<SoraShaderManager> {
     protected:
         friend class SoraSingleton<SoraShaderManager>;
         SoraShaderManager();
@@ -41,11 +41,11 @@ namespace sora {
         RevShaderMap mRevShaders;
     };
     
-    static SoraShader* CreateShader(const SoraWString& file, const SoraString& entry, int32 type) {
+    static SORA_API SoraShader* CreateShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createShader(file, entry, type);
     }
     
-    static SoraShader* CreateUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
+    static SORA_API SoraShader* CreateUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createUniqueShader(file, entry, type);
     }
     

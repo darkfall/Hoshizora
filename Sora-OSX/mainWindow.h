@@ -22,6 +22,7 @@
 #include "SoraNetwork/clsockets/PassiveSocket.h"
 
 #include "SoraFileChangeEvent.h"
+#include "SoraPlatformerPrefabs/SoraPlatformerGeomtry.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -82,6 +83,7 @@ private:
 	sora::SoraLuaObject obj;
 	
 	sora::SoraHttpFile file;
+    sora::SoraPlatformerGeometry* platformerGeo;
 	
 	CActiveSocket asocket;
 	CPassiveSocket psocket;
