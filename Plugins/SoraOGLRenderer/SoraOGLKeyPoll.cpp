@@ -183,7 +183,7 @@ namespace sora {
 
 		int32 skey = glfwkey_to_sorakey(key);
 
-		char chr = toasciiWithFlag(key, (glfwGetKey(GLFW_KEY_LSHIFT) == GLFW_PRESS || glfwGetKey(GLFW_KEY_RSHIFT) == GLFW_PRESS) ? SORA_INPUT_FLAG_SHIFT : 0);
+		char chr = toasciiWithFlag(skey, (glfwGetKey(GLFW_KEY_LSHIFT) == GLFW_PRESS || glfwGetKey(GLFW_KEY_RSHIFT) == GLFW_PRESS) ? SORA_INPUT_FLAG_SHIFT : 0);
         
         keypoll::publishInputedKey(skey, type, chr);
 	}

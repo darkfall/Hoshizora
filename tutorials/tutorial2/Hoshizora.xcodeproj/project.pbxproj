@@ -10,7 +10,7 @@
 		88768A9313D1DF610071C8C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88768A9213D1DF610071C8C1 /* main.cpp */; };
 		88768A9E13D1E3090071C8C1 /* geotest.png in Resources */ = {isa = PBXBuildFile; fileRef = 88768A9D13D1E3090071C8C1 /* geotest.png */; };
 		887692B613D1FC8A0071C8C1 /* libHoshizora.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 887692B513D1FC8A0071C8C1 /* libHoshizora.dylib */; };
-		887692B813D1FC970071C8C1 /* libHoshizora.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 887692B513D1FC8A0071C8C1 /* libHoshizora.dylib */; };
+		8876949613D30F860071C8C1 /* libHoshizora.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 887692B513D1FC8A0071C8C1 /* libHoshizora.dylib */; };
 		887721A013D1DCD800CC479E /* SoraMainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8877219D13D1DCD800CC479E /* SoraMainWindow.cpp */; };
 		887721A413D1DCDE00CC479E /* Hoshizora-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 887721A113D1DCDE00CC479E /* Hoshizora-Info.plist */; };
 		887C5CC813D1D2E90009E508 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887C5CC713D1D2E90009E508 /* Cocoa.framework */; };
@@ -39,13 +39,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		887692B713D1FC910071C8C1 /* CopyFiles */ = {
+		8876949413D30F810071C8C1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				887692B813D1FC970071C8C1 /* libHoshizora.dylib in CopyFiles */,
+				8876949613D30F860071C8C1 /* libHoshizora.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,8 +281,8 @@
 				887C5CBF13D1D2E90009E508 /* Sources */,
 				887C5CC013D1D2E90009E508 /* Frameworks */,
 				887C5CC113D1D2E90009E508 /* Resources */,
-				887692B713D1FC910071C8C1 /* CopyFiles */,
-				887692B913D1FC990071C8C1 /* ShellScript */,
+				8876949413D30F810071C8C1 /* CopyFiles */,
+				8876949713D30F880071C8C1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -330,7 +330,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		887692B913D1FC990071C8C1 /* ShellScript */ = {
+		8876949713D30F880071C8C1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -395,7 +395,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -424,6 +424,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;

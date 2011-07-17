@@ -19,6 +19,21 @@
 #endif
 
 namespace sora {
+    
+    SoraInternalLogger* SoraInternalLogger::mInstance = NULL;
+    
+    SoraInternalLogger* SoraInternalLogger::Instance() {
+        if(!mInstance)
+            mInstance = new SoraInternalLogger;
+        return mInstance;
+    }
+    
+    void SoraInternalLogger::Destroy() {
+        if(mInstance) {
+            delete mInstance;
+            mInstance = NULL;
+        }
+    }
 	
 	SoraInternalLogger::SoraInternalLogger() {
 #ifdef OS_PSP

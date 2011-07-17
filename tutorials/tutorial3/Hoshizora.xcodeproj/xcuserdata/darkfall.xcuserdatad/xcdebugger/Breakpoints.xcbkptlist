@@ -9,11 +9,39 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SoraMainWindow.cpp"
-         timestampString = "332525420.147244"
+         timestampString = "332587084.938435"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "31"
-         endingLineNumber = "31"
+         startingLineNumber = "33"
+         endingLineNumber = "33"
+         landmarkName = "MainWindow::renderFunc()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "SoraMainWindow.cpp"
+         timestampString = "332587084.938435"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
+         landmarkName = "MainWindow::init()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "SoraMainWindow.cpp"
+         timestampString = "332587075.945338"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "19"
+         endingLineNumber = "19"
          landmarkName = "MainWindow::renderFunc()"
          landmarkType = "5">
       </FileBreakpoint>

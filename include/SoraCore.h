@@ -90,7 +90,7 @@ namespace sora {
         void    setVerticalSync(bool flag);
 
 		// render system APIs
-		void beginScene(ulong32 c=0xFF000000, ulong32 h=0, bool clear=true);
+		void beginScene(uint32 c=0xFF000000, ulong32 h=0, bool clear=true);
 		void endScene();
 
 		HSORATARGET     createTarget(int width, int height, bool zbuffer=true);

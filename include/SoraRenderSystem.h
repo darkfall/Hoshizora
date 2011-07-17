@@ -30,7 +30,7 @@ namespace sora {
 	public:
 		virtual bool update() = 0;
 
-		virtual void beginScene(ulong32 c, ulong32 t, bool clear=true) = 0;
+		virtual void beginScene(uint32 c, ulong32 t, bool clear=true) = 0;
 		virtual void endScene() = 0;
 		
 		virtual void beginFrame() = 0;

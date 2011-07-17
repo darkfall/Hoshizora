@@ -40,6 +40,22 @@ extern "C" {
 }
 
 namespace sora {
+    
+    SoraCore* SoraCore::mInstance = NULL;
+    
+    SoraCore* SoraCore::Instance() {
+        if(!mInstance)
+            mInstance = new SoraCore;
+        return mInstance;
+    }
+    
+    void SoraCore::Destroy() {
+        if(mInstance) {
+            mInstance->shutDown();
+            delete mInstance;
+            mInstance = NULL;
+        }
+    }
 	
 	SoraCore::SoraCore() {
 		bMainWindowSet = false;

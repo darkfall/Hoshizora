@@ -7,6 +7,7 @@
 //
 
 #include "SoraMainWindow.h"
+#include "SoraCore.h"
 
 bool MainWindow::updateFunc() {
     return false;
@@ -17,5 +18,5 @@ bool MainWindow::renderFunc() {
 }
 
 void MainWindow::init() {
-    
+    sora::SORA->setFPS(60);
 }

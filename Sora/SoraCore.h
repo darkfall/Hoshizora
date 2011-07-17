@@ -32,14 +32,15 @@ namespace sora {
 	
 	class SoraCamera;
 	
-	class SORA_API SoraCore: public SoraSingleton<SoraCore>, public SoraEventHandler {
+	class SORA_API SoraCore: public SoraEventHandler {
 	protected:
-		friend class SoraSingleton<SoraCore>;
-
 		SoraCore();
 		~SoraCore() { }
 
 	public:
+        static SoraCore* Instance();
+        static void Destroy();
+        
 		void start();
 		void shutDown();
 
@@ -274,6 +275,8 @@ namespace sora {
         void registerFullscreenBufferDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate);
 		
 	private:
+        static SoraCore* mInstance;
+        
 		inline void _registerCoreCmds();
 		
 		inline void _checkCoreComponents();

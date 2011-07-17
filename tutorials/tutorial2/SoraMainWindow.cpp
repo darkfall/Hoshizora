@@ -41,6 +41,7 @@ bool MainWindow::renderFunc() {
 }
 
 void MainWindow::init() {
+    sora::SORA->setFPS(60);
     mSprite = sora::SORA->createSprite(L"geotest.png");
     if(!mSprite)
         THROW_SORA_EXCEPTION("Error creating sprite");

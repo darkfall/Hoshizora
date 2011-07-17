@@ -16,6 +16,21 @@
 #include "../Debug/SoraInternalLogger.h"
 
 namespace sora {
+    
+    SoraConsole* SoraConsole::mInstance = NULL;
+    
+    SoraConsole* SoraConsole::Instance() {
+        if(!mInstance)
+            mInstance = new SoraConsole;
+        return mInstance;
+    }
+    
+    void SoraConsole::Destroy() {
+        if(mInstance) {
+            delete mInstance;
+            mInstance = NULL;
+        }
+    }
 
 	SoraConsole::SoraConsole(): mStartLine(0) {
 		registerEventFunc(this, &SoraConsole::onKeyEvent);

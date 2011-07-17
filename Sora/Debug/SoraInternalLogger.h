@@ -22,8 +22,7 @@ namespace sora {
 		LOG_LEVEL_NOTICE = 4,
 	};
 
-	class SORA_API SoraInternalLogger: public SoraSingleton<SoraInternalLogger>, public SoraEventHandler {
-		friend class SoraSingleton<SoraInternalLogger>;
+	class SORA_API SoraInternalLogger: public SoraEventHandler {
 		friend class SoraCore;
 		
 	protected:
@@ -31,6 +30,9 @@ namespace sora {
 		~SoraInternalLogger();
 		
 	public:
+        static SoraInternalLogger* Instance();
+        static void Destroy();
+        
 		typedef struct _LogMssg {
 			SoraString mLog;
 			int32 mLogLevel;
@@ -68,6 +70,8 @@ namespace sora {
 		size_t logSize() const;
 		
 	private:
+        static SoraInternalLogger* mInstance;
+        
 		std::vector<LogMssg> vMssg;
 	};
 	

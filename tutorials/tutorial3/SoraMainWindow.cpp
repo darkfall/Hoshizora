@@ -1,4 +1,4 @@
-﻿//
+//
 //  SoraMainWindow.cpp
 //  Hoshizora
 //
@@ -16,7 +16,9 @@ bool MainWindow::updateFunc() {
 }
 
 bool MainWindow::renderFunc() {
-    sora::SORA->beginScene();
+    sora::SoraCore* inst = sora::SoraCore::Instance();
+  
+    inst->beginScene();
     
     if(mFont) {
         mFont->setLineWidth(0.f);
@@ -53,6 +55,9 @@ bool MainWindow::renderFunc() {
         mFont->setLineRotation(0.f);
         mFont->setScale(1.3f);
         mFont->render(300.f, 300.f, L"字体图像放大功能");
+        
+        mFont->setScale(1.f);
+        mFont->print(0.f, getWindowHeight()-30.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.4f", sora::SORA->getFPS());
     }
 
     sora::SORA->endScene();
@@ -61,6 +66,7 @@ bool MainWindow::renderFunc() {
 }
 
 void MainWindow::init() {
+    sora::SORA->setFPS(60);
     mFont = sora::SORA->createFont(L"simsum.ttf", 24);
     if(!mFont)
         THROW_SORA_EXCEPTION("Error creating font");

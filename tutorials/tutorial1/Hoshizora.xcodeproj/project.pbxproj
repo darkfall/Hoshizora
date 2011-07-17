@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		88768A9313D1DF610071C8C1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88768A9213D1DF610071C8C1 /* main.cpp */; };
 		887692AC13D1FC240071C8C1 /* libHoshizora.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 887692AB13D1FC240071C8C1 /* libHoshizora.dylib */; };
-		887692B213D1FC500071C8C1 /* libHoshizora.dylib in Copy Files (1 item) */ = {isa = PBXBuildFile; fileRef = 887692AB13D1FC240071C8C1 /* libHoshizora.dylib */; };
+		8876949E13D30FFC0071C8C1 /* libHoshizora.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 887692AB13D1FC240071C8C1 /* libHoshizora.dylib */; };
 		887721A013D1DCD800CC479E /* SoraMainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8877219D13D1DCD800CC479E /* SoraMainWindow.cpp */; };
 		887721A413D1DCDE00CC479E /* Hoshizora-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 887721A113D1DCDE00CC479E /* Hoshizora-Info.plist */; };
 		887C5CC813D1D2E90009E508 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887C5CC713D1D2E90009E508 /* Cocoa.framework */; };
@@ -36,15 +36,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		887692B113D1FC490071C8C1 /* Copy Files (1 item) */ = {
+		8876949C13D30FF60071C8C1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				887692B213D1FC500071C8C1 /* libHoshizora.dylib in Copy Files (1 item) */,
+				8876949E13D30FFC0071C8C1 /* libHoshizora.dylib in CopyFiles */,
 			);
-			name = "Copy Files (1 item)";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -269,8 +268,8 @@
 				887C5CBF13D1D2E90009E508 /* Sources */,
 				887C5CC013D1D2E90009E508 /* Frameworks */,
 				887C5CC113D1D2E90009E508 /* Resources */,
-				887692B113D1FC490071C8C1 /* Copy Files (1 item) */,
-				887692B313D1FC520071C8C1 /* ShellScript */,
+				8876949C13D30FF60071C8C1 /* CopyFiles */,
+				8876949F13D30FFD0071C8C1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -315,7 +314,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		887692B313D1FC520071C8C1 /* ShellScript */ = {
+		8876949F13D30FFD0071C8C1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

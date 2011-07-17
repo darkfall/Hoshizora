@@ -5,6 +5,21 @@
 //#include "SoraLuaStateManager.h"
 
 namespace sora {
+    
+    SoraEventManager* SoraEventManager::mInstance = NULL;
+    
+    SoraEventManager* SoraEventManager::Instance() {
+        if(!mInstance)
+            mInstance = new SoraEventManager;
+        return mInstance;
+    }
+    
+    void SoraEventManager::Destroy() {
+        if(mInstance) {
+            delete mInstance;
+            mInstance = NULL;
+        }
+    }
 	
 	SoraEventHandlerPack::SoraEventHandlerPack() {
 		registerEventFunc(this, &SoraEventHandlerPack::onTimerEvent);

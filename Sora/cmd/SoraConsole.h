@@ -51,14 +51,15 @@ namespace sora {
 		std::string mResults;
 	};
 	
-	class SORA_API SoraConsole: public SoraSingleton<SoraConsole>, public SoraEventHandler {
+	class SORA_API SoraConsole: public SoraEventHandler {
 	protected:
-		friend class SoraSingleton<SoraConsole>;
-		
 		SoraConsole();
 		~SoraConsole();
 	
 	public:	
+        static SoraConsole* Instance();
+        static void Destroy();
+        
         enum {
 			TAB_CMDLINE = 1,
 			TAB_MSSG = 2,
@@ -106,6 +107,8 @@ namespace sora {
         void setUseSysTerm(bool flag);
 		
 	private:
+        static SoraConsole* mInstance;
+        
 		void drawCmds();
 		void drawMssg();
 		void drawTab();
