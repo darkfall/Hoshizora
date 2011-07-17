@@ -21,6 +21,23 @@
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge_impl.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\crc32.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\crypt.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\deflate.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\inffast.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\inffixed.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\inflate.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\inftrees.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\ioapi.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\iowin32.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\mztools.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\trees.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\unzip.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\zconf.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\zconf.in.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\zip.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\zlib.h" />
+    <ClInclude Include="..\..\Sora\ZLIB\zutil.h" />
     <ClInclude Include="SoraMainWindow.h" />
     <ClInclude Include="Starter.h" />
   </ItemGroup>
@@ -34,6 +51,23 @@
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
+    <ClCompile Include="..\..\Sora\ZLIB\adler32.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\compress.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\crc32.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\deflate.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\gzio.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\infback.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\inffast.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\inflate.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\inftrees.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\ioapi.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\iowin32.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\mztools.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\trees.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\uncompr.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\unzip.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\zip.c" />
+    <ClCompile Include="..\..\Sora\ZLIB\zutil.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SoraMainWindow.cpp" />
   </ItemGroup>

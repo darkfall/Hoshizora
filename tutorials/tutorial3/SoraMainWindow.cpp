@@ -1,4 +1,4 @@
-//
+﻿//
 //  SoraMainWindow.cpp
 //  Hoshizora
 //

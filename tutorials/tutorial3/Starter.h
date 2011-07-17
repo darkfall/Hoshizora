@@ -21,7 +21,6 @@
 
 #pragma comment(linker, "/NODEFAULTLIB:libcmt.lib")
 #pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
-#pragma comment(linker, "/NODEFAULTLIB:msvcprt.lib")
 #endif
 
 static void registerComponents() {

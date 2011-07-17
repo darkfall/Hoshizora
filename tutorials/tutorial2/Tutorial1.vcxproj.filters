@@ -10,6 +10,9 @@
     <Filter Include="Plugins\SoraHGERenderer">
       <UniqueIdentifier>{d3d0d793-0350-4018-b954-87bfe887e944}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\zlib">
+      <UniqueIdentifier>{b83e2d65-18c2-478c-8f1e-85cacd4b8c9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoraMainWindow.h">
@@ -42,6 +45,57 @@
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h">
       <Filter>Plugins\SoraHGERenderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inffast.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inffixed.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inflate.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inftrees.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\ioapi.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\iowin32.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\mztools.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\trees.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\unzip.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zconf.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zconf.in.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zip.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zlib.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zutil.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\crc32.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\crypt.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\deflate.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -70,6 +124,57 @@
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp">
       <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\gzio.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\infback.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inffast.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inflate.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inftrees.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\ioapi.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\iowin32.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\mztools.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\trees.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\uncompr.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\unzip.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\zip.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\zutil.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\adler32.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\compress.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\crc32.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\deflate.c">
+      <Filter>Plugins\zlib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

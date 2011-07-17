@@ -25,7 +25,7 @@ int main(int argv, char** argc) {
 
 #else
 
-#pragma comment(lib, "HoshizoraStatic.lib")
+#pragma comment(lib, "Hoshizora.lib")
 
 int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,

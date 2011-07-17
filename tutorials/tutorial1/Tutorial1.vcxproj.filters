@@ -7,6 +7,12 @@
     <Filter Include="Plugins">
       <UniqueIdentifier>{76a8adcd-c907-4043-824d-94e58d22d4c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\zlib">
+      <UniqueIdentifier>{38932f00-0403-401d-9768-f19e0b218081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\hgeRenderer">
+      <UniqueIdentifier>{9c522a57-9400-4fec-a7c0-e2a32bc1f155}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -15,26 +21,77 @@
     <ClCompile Include="SoraMainWindow.cpp">
       <Filter>Tutorial1</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inflate.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inftrees.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\ioapi.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\iowin32.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\mztools.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\trees.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\uncompr.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\unzip.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\zip.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\zutil.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\adler32.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\compress.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\crc32.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\deflate.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\gzio.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\infback.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sora\ZLIB\inffast.c">
+      <Filter>Plugins\zlib</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgeresource.cpp">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesprite.cpp">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,29 +101,80 @@
     <ClInclude Include="Starter.h">
       <Filter>Tutorial1</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inflate.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inftrees.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\ioapi.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\iowin32.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\mztools.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\trees.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\unzip.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zconf.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zconf.in.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zip.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zlib.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\zutil.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\crc32.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\crypt.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\deflate.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inffast.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sora\ZLIB\inffixed.h">
+      <Filter>Plugins\zlib</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge.h">
-      <Filter>Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgecolor.h">
-      <Filter>Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgerect.h">
-      <Filter>Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgesprite.h">
-      <Filter>Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgevector.h">
-      <Filter>Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge_impl.h">
-      <Filter>Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h">
-      <Filter>Plugins</Filter>
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge_impl.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgecolor.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgerect.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgesprite.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgevector.h">
+      <Filter>Plugins\hgeRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h">
+      <Filter>Plugins\hgeRenderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
