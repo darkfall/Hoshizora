@@ -19,13 +19,13 @@ namespace sora {
 	
 	class SORA_API SoraCamera: public SoraObject {
 	public:
-		SoraCamera(float32 x, float32 y);
-		~SoraCamera();
+		SoraCamera(float32 x, float32 y) {}
+		~SoraCamera() {}
 		
-		void addTransform(SoraImageEffect* effect);
+		void addTransform(SoraImageEffect* effect) {}
 		
-		void render();
-		uint32 update(float32 dt);
+		void render() {}
+		uint32 update(float32 dt) { return 0; }
 		
 	private:
 		typedef std::list<SoraImageEffect*> TRANSFORM_LIST;

@@ -13,249 +13,917 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件\Sora">
-      <UniqueIdentifier>{9e362f1d-a778-4985-9baa-ef234feab0fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Sora\defaults">
-      <UniqueIdentifier>{ffa28692-e02a-44f1-b5c1-cf5e649f1318}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Plugins">
-      <UniqueIdentifier>{28760306-b4c6-454b-9bf2-c044d6ff35e9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Sora\SoraResourceManager.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\AutoContainer.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraSingleton.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\cmd\CoreCmds.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraSoundSystem.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\cmd\SoraConsole.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraSprite.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\common.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraString.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\CoreTransform.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraStringConv.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\CoreTransformer.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraTexture.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Debug\SoraAutoProfile.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraTextureMap.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Debug\SoraDebugRenderer.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraTimer.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Debug\SoraGlobalProfiler.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraTypeInfo.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Debug\SoraInternalLogger.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraWindowInfo.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\timer.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\HoshiNoSora.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\Rect4V.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraAutoPtr.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraColor.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraComponentType.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraCore.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraEvent.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraEventManager.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraException.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraFont.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraFontManager.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraInfiniteRendererCallback.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraInput.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraInternalLogger.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraKeyInfo.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraMath.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraMiscTool.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraPlatform.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraPlugin.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraPluginManager.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraRenderSystem.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\SoraRenderTarget.h">
-      <Filter>头文件\Sora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\Defaults\SoraDefaultMiscTool.h">
-      <Filter>头文件\Sora\defaults</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\Defaults\SoraDefaultTimer.h">
-      <Filter>头文件\Sora\defaults</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Sora\Defaults\SoraDefaultTimerPlugin.h">
-      <Filter>头文件\Sora\defaults</Filter>
+    <ClInclude Include="..\Sora\Defaults\orz.h">
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\Defaults\SoraDefaultLogger.h">
-      <Filter>头文件\Sora\defaults</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraFileBase.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Defaults\SoraDefaultMiscTool.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraObject.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Defaults\SoraDefaultTimer.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\hgevector.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Defaults\SoraMiscTool_iOS.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\md5lib.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Defaults\SoraMiscTool_OSX.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\QuickList.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\Defaults\SoraMiscTool_Win32.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Defaults\SoraTimer_OSX.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Defaults\SoraTimer_PSP.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Defaults\SoraTimer_Win32.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\graphicEffects.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\GridMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\hash.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\helpers\SoraAssetManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\helpers\SoraBooter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\helpers\SoraDllHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\helpers\SoraInputSimulator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\helpers\SoraMenuBar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\helpers\SoraMutableSprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\helpers\SoraSpriteFont.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\helpers\SoraZSorter.h">
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\hgerect.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sora\SoraFileUtility.h">
-      <Filter>头文件\Sora</Filter>
+    <ClInclude Include="..\Sora\hgevector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Hoshizora.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\autolink.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\features.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\forwards.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\json.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\json_batchallocator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\reader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\value.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\json\writer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\llexer\llexer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\lMemFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\MemoryUsage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\modifiers\SoraFontModifiers.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\modifiers\SoraObjectModifiers.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\osxfilewrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\PartitionTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\quaternion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\QuickList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\hgeRandom.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-alti.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params11213.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params1279.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params132049.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params19937.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params216091.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params2281.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params4253.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params44497.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params607.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-params86243.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT-sse2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Random\SFMT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Rect4V.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\RefCounted.h">
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTI.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIClass.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIClassManager.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIConstructor.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIException.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIField.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIFunctor.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIMethod.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIType.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTITypeDecl.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIVar.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIVarAccess.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIVarConverter.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraRTTIVarDefaultValue.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Sora\RTTI\SoraSingleton.h">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Serializable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\Sora2DMatrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraAny.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraAutoPtr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraCanvas.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraColor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraComponentType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraConstantStrings.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraCore.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraDelegate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraDirectoryIterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraDirectoryIteratorImplUnix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraDirectoryIteratorImplWindows.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraEnvValues.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraEventManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraException.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFileBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFileChangeEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFileStream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFileUtility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFolderResourceManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFont.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFontManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFrameListener.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFSM.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraFullscreenBufferHandler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraGraphicEffect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraHandleManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraHotkey.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraImageEffect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraInfiniteRendererCallback.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraINIFile\SoraINIFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraInput.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraInputQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\soraiOSFileUtility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraiOSStringConv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraKeyInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraLocalizer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraMath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraMemoryBuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraMemoryFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraMiscTool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraModifier.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraModifierAdapter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraMoviePlayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraMoviePlayerNull.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraNamedObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraNotification.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraNotificationCenter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraObjectHandle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraObserver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraOSXFileUtility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPathImpliOS.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPathImplOSX.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPathImplUnix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPathImplWindows.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPlatform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPlaybackEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPlugin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPluginManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraPrefab.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraRenderSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraRenderSystemExtension.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraRenderTarget.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraResourceFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraResourceFileFinder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraResourceManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraScene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraShaderManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraSingleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraSingletonHolder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraSoundFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraSoundSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraSprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraStream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraString.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraStringConv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraStringTokenlizer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraTextureMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraTimer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraTimerEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraTimestamp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraTypeInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\SoraWindowInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\stringId.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\support\kalloc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\support\md5lib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\TemplateTransformer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\tinyXML\tinystr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\tinyXML\tinyxml.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\uncopyable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\vector3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\win32filewrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\WindowsStackTrace.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\crc32.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\crypt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\deflate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\inffast.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\inffixed.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\inflate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\inftrees.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\ioapi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\iowin32.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\mztools.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\trees.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\unzip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\zconf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\zconf.in.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\zip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\zlib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sora\ZLIB\zutil.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Sora\SoraSprite.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\cmd\CoreCmds.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\SoraStringConv.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\cmd\SoraConsole.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\SoraTexture.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\CoreTransform.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\timer.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\Debug\SoraInternalLogger.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\SoraCore.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\Defaults\orz.c">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\SoraEvent.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\graphicEffects.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\SoraEventManager.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\helpers\SoraAssetManager.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\SoraPluginManger.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\helpers\SoraBooter.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\SoraObject.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\helpers\SoraDllHelper.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\hgevector.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\helpers\SoraInputSimulator.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sora\md5lib.cpp">
-      <Filter>头文件\Sora</Filter>
+    <ClCompile Include="..\Sora\helpers\SoraMenuBar.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\helpers\SoraMutableSprite.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\helpers\SoraSpriteFont.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\helpers\SoraZSorter.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\Sora\hgerect.cpp">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\hgevector.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\json\json_reader.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\json\json_value.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\json\json_writer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\llexer\llexer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\modifiers\SoraFontModifiers.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\modifiers\SoraObjectModifiers.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\Random\SFMT.c">
+      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\Sora\RTTI\SoraRTTIClass.cpp">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\Sora\RTTI\SoraRTTIClassManager.cpp">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\Sora\RTTI\SoraRTTIField.cpp">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\Sora\RTTI\SoraRTTIMethod.cpp">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\Sora\RTTI\SoraRTTIType.cpp">
-      <Filter>头文件\Sora</Filter>
+      <Filter>头文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sora\SoraAny.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraCamera.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraCanvas.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraCore.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraDelegate.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraDirectoryIterator.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraEnvValues.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraEvent.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraEventManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraException.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraFileChangeEvent.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraFileStream.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraFileUtility.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraFolderResourceManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraFSM.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraFullscreenBufferHandler.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraHandleManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraHotKey.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraImageEffect.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraINIFile\SoraINIFile.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraInputQueue.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraLocalizer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraMemoryBuffer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraModifierAdapter.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraNotification.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraNotificationCenter.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraObject.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraObjectHandle.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraObserver.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraPath.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraPluginManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraRenderSystem.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraRenderSystemExtension.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraResourceFile.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraResourceFileFinder.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraScene.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraShader.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraShaderManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraSprite.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraString.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraStringConv.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraStringTokenlizer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraTexture.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraTimerEvent.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\SoraTimestamp.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\support\kalloc.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\support\md5lib.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\tinyXML\tinystr.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\tinyXML\tinyxml.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\tinyXML\tinyxmlerror.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\tinyXML\tinyxmlparser.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\win32filewrapper.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\adler32.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\compress.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\crc32.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\deflate.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\gzio.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\infback.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\inffast.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\inflate.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\inftrees.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\ioapi.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\iowin32.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\mztools.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\trees.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\uncompr.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\unzip.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\zip.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sora\ZLIB\zutil.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Sora\json\json_internalarray.inl">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\Sora\json\json_internalmap.inl">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\Sora\json\json_valueiterator.inl">
+      <Filter>头文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -28,7 +28,7 @@ namespace sora {
         SORA_EXTENSION_FSAA = 0x0001,
     };
         
-    class SoraRenderSystemExtension: public SoraSingleton<SoraRenderSystemExtension> {
+    class SORA_API SoraRenderSystemExtension: public SoraSingleton<SoraRenderSystemExtension> {
     protected:
         friend class SoraSingleton<SoraRenderSystemExtension>;
         

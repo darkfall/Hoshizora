@@ -14,7 +14,7 @@
 
 namespace sora {
 	
-	class SoraRefCounted: uncopyable {
+	class SORA_API SoraRefCounted: uncopyable {
     public:
         SoraRefCounted(): counter(1) {}
         

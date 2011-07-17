@@ -1,4 +1,4 @@
-//
+﻿//
 //  SoraMainWindow.cpp
 //  Hoshizora
 //
@@ -25,15 +25,17 @@ bool MainWindow::renderFunc() {
         mFont->setColor(0xFFFFFFFF);
         mFont->setScale(1.f);
         mFont->render(50.f, 0.f, L"Hello World from Hoshizora!");
-        
-        mFont->render(50.f, 50.f, sora::FONT_ALIGNMENT_LEFT, L"来自Sora引擎的Hello World :)");
-        
-        mFont->render(100.f, 100.f, sora::FONT_ALIGNMENT_CENTER, L"中对齐");
-        mFont->render(300.f, 100.f, sora::FONT_ALIGNMENT_RIGHT, L"右对齐");
-        
+
         mFont->setLineWidth(150.f);
         mFont->render(50.f, 150.f, L"最大行宽150像素下字符的渲染, 超出部分自动换行");
         
+        
+        mFont->render(50.f, 50.f, sora::FONT_ALIGNMENT_LEFT, L"来自Sora引擎的Hello World! :)");
+
+		mFont->render(100.f, 200.f, sora::FONT_ALIGNMENT_CENTER, L"中对齐");
+
+        mFont->render(300.f, 100.f, sora::FONT_ALIGNMENT_RIGHT, L"右对齐");
+
         mFont->setLineWidth(0.f);
         mFont->setColor(0xFFFF0000, 0);
         mFont->setColor(0xFF00FF00, 1);
@@ -52,7 +54,7 @@ bool MainWindow::renderFunc() {
         mFont->setScale(1.3f);
         mFont->render(300.f, 300.f, L"字体图像放大功能");
     }
-    
+
     sora::SORA->endScene();
     
     return false;

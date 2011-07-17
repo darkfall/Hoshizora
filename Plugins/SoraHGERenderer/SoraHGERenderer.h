@@ -23,7 +23,7 @@ namespace sora {
 
 		bool update();
 
-		void beginScene(ulong32 color=0, ulong32 target=0, bool clear=true);
+		void beginScene(uint32 color=0, ulong32 target=0, bool clear=true);
 		void endScene();
 		
 		void beginFrame() {}

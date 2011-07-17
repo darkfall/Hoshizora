@@ -33,7 +33,7 @@ namespace sora {
 
 	#define INVALID_FP_RET_ADDR_VALUE 0x0000000
     
-    std::string DisplaySymbolDetails(DWORD dwAddress) {
+    static std::string DisplaySymbolDetails(DWORD dwAddress) {
        DWORD64 displacement = 0;
 	   ULONG64 buffer[(sizeof(SYMBOL_INFO) + MAX_SYM_NAME*sizeof(TCHAR) + sizeof(ULONG64) - 1) / sizeof(ULONG64)];
 
@@ -64,7 +64,7 @@ namespace sora {
 	   return info;
 	}
 
-	std::string WalkTheStack(){
+	static std::string WalkTheStack(){
        DWORD _ebp = INVALID_FP_RET_ADDR_VALUE;
 	   DWORD dwIPOfCurrentFunction = (DWORD)&WalkTheStack;
 
@@ -104,7 +104,7 @@ namespace sora {
 	   return stackTrace;
 	}
 
-	std::string getStackTrace() {
+	static std::string getStackTrace() {
 		HANDLE process = GetCurrentProcess();
 		if(SymInitialize(process, NULL, TRUE)) {
 			std::string result = WalkTheStack();

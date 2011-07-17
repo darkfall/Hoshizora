@@ -19,6 +19,7 @@
 
 #pragma comment(linker, "/NODEFAULTLIB:libcmt.lib")
 #pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
+#pragma comment(linker, "/NODEFAULTLIB:msvcprt.lib")
 #endif
 
 static void registerComponents() {
@@ -28,7 +29,7 @@ static void registerComponents() {
     sora->registerRenderSystem(new sora::SoraOGLRenderer);
     sora->registerInput(new sora::SoraOGLInput);
 #else
-    sora->registerRenderSystem(new sora::SoraHGERenederer);
+    sora->registerRenderSystem(new sora::SoraHGERenderer);
     sora->registerInput(new sora::SoraHGEInput);
 #endif
 }
@@ -40,7 +41,7 @@ static void startWithWindow(sora::SoraWindowInfoBase* window) {
     sora->start();
 }
 
-static void terminate() {
+static void shutdown() {
     sora::SoraCore::Instance()->shutDown();
 }
 

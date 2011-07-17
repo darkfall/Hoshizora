@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Tutorial1">
+      <UniqueIdentifier>{57e2432b-b250-4619-a45f-5cfe14adcf6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{76a8adcd-c907-4043-824d-94e58d22d4c7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Tutorial1</Filter>
+    </ClCompile>
+    <ClCompile Include="SoraMainWindow.cpp">
+      <Filter>Tutorial1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgeresource.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesprite.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SoraMainWindow.h">
+      <Filter>Tutorial1</Filter>
+    </ClInclude>
+    <ClInclude Include="Starter.h">
+      <Filter>Tutorial1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgecolor.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgerect.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgesprite.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgevector.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge_impl.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

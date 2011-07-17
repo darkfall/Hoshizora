@@ -193,7 +193,6 @@ namespace sora {
 	#define OS_PSP
 #endif
 
-
 // we are building a dll
 #if defined(OS_WIN32) 
     #if defined(SORA_DLL_EXPORT)
@@ -206,6 +205,8 @@ namespace sora {
 #else
     #define SORA_API
 #endif
+
+#include "ZLIB/zlib.h"
 
 #ifndef OS_PSP
 #include <string>

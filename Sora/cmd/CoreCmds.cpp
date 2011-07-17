@@ -18,6 +18,8 @@
 
 namespace sora {
 
+	static SoraCore* sora;
+
 	SoraCoreCmdHandler::SoraCoreCmdHandler() {
 		registerEventFunc(this, &SoraCoreCmdHandler::onCmdEvent);
 		

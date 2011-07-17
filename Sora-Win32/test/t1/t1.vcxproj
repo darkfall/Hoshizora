@@ -426,6 +426,8 @@
     <ClInclude Include="..\..\..\Sora\json\writer.h" />
     <ClInclude Include="..\..\..\Sora\llexer\llexer.h" />
     <ClInclude Include="..\..\..\Sora\MemoryUsage.h" />
+    <ClInclude Include="..\..\..\Sora\modifiers\SoraFontModifiers.h" />
+    <ClInclude Include="..\..\..\Sora\modifiers\SoraObjectModifiers.h" />
     <ClInclude Include="..\..\..\Sora\quaternion.h" />
     <ClInclude Include="..\..\..\Sora\QuickList.h" />
     <ClInclude Include="..\..\..\Sora\Random\hgeRandom.h" />
@@ -739,6 +741,8 @@
     <ClCompile Include="..\..\..\Sora\json\json_value.cpp" />
     <ClCompile Include="..\..\..\Sora\json\json_writer.cpp" />
     <ClCompile Include="..\..\..\Sora\llexer\llexer.cpp" />
+    <ClCompile Include="..\..\..\Sora\modifiers\SoraFontModifiers.cpp" />
+    <ClCompile Include="..\..\..\Sora\modifiers\SoraObjectModifiers.cpp" />
     <ClCompile Include="..\..\..\Sora\Random\SFMT.c" />
     <ClCompile Include="..\..\..\Sora\SoraAny.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraCanvas.cpp" />

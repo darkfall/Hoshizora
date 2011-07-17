@@ -13,15 +13,16 @@
 #include "SoraOGLRenderer/SoraOGLInput.h"
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 
+#include "SoraFreetypeFont/SoraFTFontManager.h"
+
 #ifdef OS_WIN32
 #include "SoraHGERenderer/SoraHGERenderer.h"
 #include "SoraHGERenderer/SoraHGEInput.h"
 
 #pragma comment(linker, "/NODEFAULTLIB:libcmt.lib")
 #pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
+#pragma comment(linker, "/NODEFAULTLIB:msvcprt.lib")
 #endif
-
-#include "SoraFreetypeFont/SoraFTFontManager.h"
 
 static void registerComponents() {
     sora::SoraCore* sora = sora::SoraCore::Instance();
@@ -30,10 +31,10 @@ static void registerComponents() {
     sora->registerRenderSystem(new sora::SoraOGLRenderer);
     sora->registerInput(new sora::SoraOGLInput);
 #else
-    sora->registerRenderSystem(new sora::SoraHGERenederer);
+    sora->registerRenderSystem(new sora::SoraHGERenderer);
     sora->registerInput(new sora::SoraHGEInput);
 #endif
-    sora->registerFontManager(new sora::SoraFTFontManager);
+	sora->registerFontManager(new sora::SoraFTFontManager);
 }
 
 static void startWithWindow(sora::SoraWindowInfoBase* window) {
@@ -43,7 +44,7 @@ static void startWithWindow(sora::SoraWindowInfoBase* window) {
     sora->start();
 }
 
-static void terminate() {
+static void shutdown() {
     sora::SoraCore::Instance()->shutDown();
 }
 

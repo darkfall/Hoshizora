@@ -22,7 +22,7 @@
 
 namespace sora {
     
-    class SoraScene: public SoraObject {
+    class SORA_API SoraScene: public SoraObject {
     public:
         
         /**
@@ -31,10 +31,10 @@ namespace sora {
          *  Howerver, when enabled, you should not put the render task between beginScene and endScene
          *  Otherwise would cause the whole render stuff mess up
          **/
-        void enableRenderAsCanvas(bool flag);
+		void enableRenderAsCanvas(bool flag) {}
         
-        void render();
-        uint32 update(float32 dt);
+		void render() {}
+		uint32 update(float32 dt) { return 0;}
         
     private:
         bool mRenderAsCanvas;

@@ -832,7 +832,7 @@ namespace sora {
         pRenderSystem->setViewPoint(x, y, z);
     }
 
-	void SoraCore::beginScene(ulong32 c, ulong32 t, bool clear) {
+	void SoraCore::beginScene(uint32 c, ulong32 t, bool clear) {
 		assert(bInitialized==true);
         if(mScreenBuffer && bEnableScreenBuffer) {
             if(t == 0) {

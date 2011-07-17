@@ -41,11 +41,11 @@ namespace sora {
         RevShaderMap mRevShaders;
     };
     
-    static SORA_API SoraShader* CreateShader(const SoraWString& file, const SoraString& entry, int32 type) {
+    static SoraShader* CreateShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createShader(file, entry, type);
     }
     
-    static SORA_API SoraShader* CreateUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
+    static SoraShader* CreateUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createUniqueShader(file, entry, type);
     }
     

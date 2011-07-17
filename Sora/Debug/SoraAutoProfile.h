@@ -36,7 +36,7 @@ namespace sora {
 #endif
 	}
 	
-	struct SoraAutoProfile {
+	struct SORA_API SoraAutoProfile {
 		SoraAutoProfile(const char* name): sName(name), startTime(getCurrentSystemTime()) { }
 		~SoraAutoProfile() {
 			uint64 endTime = getCurrentSystemTime();

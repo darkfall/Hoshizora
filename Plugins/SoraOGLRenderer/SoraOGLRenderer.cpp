@@ -191,7 +191,7 @@ namespace sora{
         }
 	}
 
-	void SoraOGLRenderer::_glBeginScene(ulong32 color, ulong32 t, bool clear) {
+	void SoraOGLRenderer::_glBeginScene(uint32 color, ulong32 t, bool clear) {
 		int32 width = _oglWindowInfo.width;
 		int32 height = _oglWindowInfo.height;
 
@@ -298,7 +298,7 @@ namespace sora{
 		}
 	}
 
-	void SoraOGLRenderer::beginScene(ulong32 color, ulong32 target, bool clear) {
+	void SoraOGLRenderer::beginScene(uint32 color, ulong32 target, bool clear) {
 		_glBeginScene(color, target, clear);
 	}
 

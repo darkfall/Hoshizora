@@ -16,15 +16,15 @@
 namespace sora {
     
     namespace keypoll {
-        void publishInputedKey(int32 key, int32 type, char keyChr);
-        bool getQueueEvent(SoraKeyEvent& ev);
-        void setQueueInput(SoraInput* input);
-        void clearInputQueue();
+        void SORA_API publishInputedKey(int32 key, int32 type, char keyChr);
+        bool SORA_API getQueueEvent(SoraKeyEvent& ev);
+        void SORA_API setQueueInput(SoraInput* input);
+        void SORA_API clearInputQueue();
         
-        int32 addGlobalHotKey(const SoraHotkey& hotkey, SoraEventHandler* handler);
-        void delGlobalHotkey(int32 hid);
-        void setGlobalHotkey(int32 hid, const SoraHotkey& hotkey);
-        void clearGlobalHotkeys();
+        int32 SORA_API addGlobalHotKey(const SoraHotkey& hotkey, SoraEventHandler* handler);
+        void SORA_API delGlobalHotkey(int32 hid);
+        void SORA_API setGlobalHotkey(int32 hid, const SoraHotkey& hotkey);
+        void SORA_API clearGlobalHotkeys();
     }
 }
 

@@ -23,7 +23,7 @@ namespace sora {
 	};
 
 	/* from loliEngine rewrite */
-	class CoreTransform {
+	class SORA_API CoreTransform {
 	public:
 		CoreTransform(float32 _f): f1(_f), bClean(false), iKind(TRANSFORM_1F) {}
 		CoreTransform(float32 _f1, float32 _f2): f1(_f1), f2(_f2), bClean(false), iKind(TRANSFORM_2F) {}

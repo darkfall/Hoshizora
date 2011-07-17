@@ -118,6 +118,9 @@
     <Filter Include="Plugins\SoraThread">
       <UniqueIdentifier>{f9c1f298-6803-4699-b960-972d1d911231}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\modifiers">
+      <UniqueIdentifier>{1d530af8-9ec9-4571-af23-50be0b9fa5b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sora\hgerect.h">
@@ -1500,6 +1503,12 @@
     <ClInclude Include="..\..\..\Sora\SoraPrefab.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\modifiers\SoraFontModifiers.h">
+      <Filter>头文件\modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\modifiers\SoraObjectModifiers.h">
+      <Filter>头文件\modifiers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -2284,6 +2293,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraFullscreenBufferHandler.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\modifiers\SoraObjectModifiers.cpp">
+      <Filter>头文件\modifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\modifiers\SoraFontModifiers.cpp">
+      <Filter>头文件\modifiers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

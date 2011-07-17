@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{76a8adcd-c907-4043-824d-94e58d22d4c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SoraHGERenderer">
+      <UniqueIdentifier>{d3d0d793-0350-4018-b954-87bfe887e944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tutorial3">
+      <UniqueIdentifier>{57e2432b-b250-4619-a45f-5cfe14adcf6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\SoraFreetypeFont">
+      <UniqueIdentifier>{dfefe8a3-336a-4bee-83f9-fe8aa33a1327}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SoraMainWindow.h">
+      <Filter>Tutorial3</Filter>
+    </ClInclude>
+    <ClInclude Include="Starter.h">
+      <Filter>Tutorial3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge_impl.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgecolor.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgerect.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgesprite.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hgevector.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.h">
+      <Filter>Plugins\SoraFreetypeFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.h">
+      <Filter>Plugins\SoraFreetypeFont</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Tutorial3</Filter>
+    </ClCompile>
+    <ClCompile Include="SoraMainWindow.cpp">
+      <Filter>Tutorial3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgeresource.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesprite.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp">
+      <Filter>Plugins\SoraFreetypeFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.cpp">
+      <Filter>Plugins\SoraFreetypeFont</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\Plugins\SoraFreetypeFont\freetype244ST.lib">
+      <Filter>Plugins\SoraFreetypeFont</Filter>
+    </Library>
+  </ItemGroup>
+</Project>

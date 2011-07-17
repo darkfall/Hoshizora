@@ -21,7 +21,7 @@
 
 namespace sora {
 	
-	class SoraGlobalProfiler: public SoraSingleton<SoraGlobalProfiler> {
+	class SORA_API SoraGlobalProfiler: public SoraSingleton<SoraGlobalProfiler> {
 		friend class SoraSingleton<SoraGlobalProfiler>;
 	public:
 		struct s_profile {

@@ -23,7 +23,7 @@ namespace sora {
 
 		bool update();
 
-		void beginScene(ulong32 color=0, ulong32 target=0, bool clear=true);
+		void beginScene(uint32 color=0, ulong32 target=0, bool clear=true);
 		void endScene();
 		
 		void beginFrame();
@@ -94,7 +94,7 @@ namespace sora {
 		inline void _glInitialize();
 		inline void _glEndFrame();
 		inline void _glBeginFrame();
-		inline void _glBeginScene(ulong32 color, ulong32 target, bool clear);
+		inline void _glBeginScene(uint32 color, ulong32 target, bool clear);
 		inline void _glEndScene();
 		inline int32 _glTextureGetWidth(ulong32 tex, bool bOriginal=false);
 		inline int32 _glTextureGetHeight(ulong32 tex, bool bOriginal=false);

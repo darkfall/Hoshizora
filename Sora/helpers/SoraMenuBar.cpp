@@ -8,8 +8,8 @@
  */
 
 #include "SoraMenuBar.h"
-#include "SoraCore.h"
-#include "SoraEventManager.h"
+#include "../SoraCore.h"
+#include "../SoraEventManager.h"
 
 namespace sora {
 

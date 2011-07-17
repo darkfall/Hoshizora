@@ -15,12 +15,25 @@
  *  Basic Rendering
  **/
 
+#ifndef OS_WIN32
+
 int main(int argv, char** argc) {
-    try {
-        registerComponents();
-        startWithWindow(new MainWindow);
-        terminate();
-    } catch(const sora::SoraException& exp) {
-        sora::SORA->messageBox(exp.what(), "Fatal Error :(", MB_OK | MB_ICONERROR);
-    }
+    registerComponents();
+    startWithWindow(new MainWindow);
+    shutdown();
 }
+
+#else
+
+#pragma comment(lib, "HoshizoraStatic.lib")
+
+int APIENTRY WinMain(HINSTANCE hInstance,
+					   HINSTANCE hPrevInstance,
+					   LPSTR    lpCmdLine,
+					   int       nCmdShow) {
+	registerComponents();
+    startWithWindow(new MainWindow);
+    shutdown();
+}
+
+#endif

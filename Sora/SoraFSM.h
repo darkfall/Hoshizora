@@ -22,7 +22,7 @@ namespace sora {
     
     class SoraFSMManager;
     
-    class SoraFSMState {
+    class SORA_API SoraFSMState {
     public:
         SoraFSMState(): mInitiated(false), mManager(NULL) {}
         
@@ -42,7 +42,7 @@ namespace sora {
         SoraFSMManager* mManager;
     };
     
-    class SoraFSMManager {
+    class SORA_API SoraFSMManager {
     public:
         SoraFSMManager();
         ~SoraFSMManager();

@@ -16,6 +16,7 @@
 #include "Rect4V.h"
 #include "SoraInfiniteRendererCallback.h"
 
+#undef SORA_USE_SHADER
 #ifdef SORA_USE_SHADER
 #include "SoraShader/SoraCGD3D9Shader.h"
 #endif
@@ -57,7 +58,7 @@ namespace sora{
 		return false;
 	}
 
-	void SoraHGERenderer::beginScene(ulong32 color, ulong32 target, bool clear) {
+	void SoraHGERenderer::beginScene(uint32 color, ulong32 target, bool clear) {
 		pHGE->Gfx_BeginScene(target);
 		if(clear)
 			pHGE->Gfx_Clear(color);

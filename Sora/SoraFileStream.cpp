@@ -51,6 +51,7 @@ namespace sora {
         if(append) {
             SetFilePointer(file, 0, NULL, FILE_END);
         }
+		return true;
     }
     
     void SoraFileStreamWin32::close() {
