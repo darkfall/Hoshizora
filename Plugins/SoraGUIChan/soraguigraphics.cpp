@@ -43,10 +43,6 @@ namespace gcn
         else {
             mClipNull = false;
 
-            sora->setClipping(top.x,
-                              top.y,
-                              top.width,
-                              top.height);
             sora->setTransform(0,
                                0,
                                (float)top.xOffset,
@@ -54,6 +50,11 @@ namespace gcn
 							    0.f,
 								1.f,
 								1.f);
+            
+            sora->setClipping(top.x,
+                              top.y,
+                              top.width,
+                              top.height);
         }
         return result;
     }
@@ -77,10 +78,6 @@ namespace gcn
             else {
                 mClipNull = false;
                 
-                sora->setClipping(top.x,
-								  top.y,
-								  top.width,
-								  top.height);
                 sora->setTransform(0,
                                    0,
                                    (float)top.xOffset,
@@ -88,6 +85,11 @@ namespace gcn
 								   0.f,
 								   1.f,
 								   1.f);
+                
+                sora->setClipping(top.x,
+								  top.y,
+								  top.width,
+								  top.height);
             }
         }
     }

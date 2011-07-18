@@ -744,7 +744,7 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
-		glScissor(x-500, y-500, w+500, h+500);
+        glScissor(x, _oglWindowInfo.height-(y+h), w, h);
 	}
     
     void SoraOGLRenderer::setVerticalSync(bool flag) {
