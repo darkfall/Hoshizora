@@ -626,7 +626,7 @@ uint32 SoraSpriteAnimation::getCurrAnimationIndex() const {
 void SoraSpriteAnimation::init() {
     if(texturePath.size() != 0) {
 		setTexture(sora::SORA->createTexture(s2ws(texturePath)));
-		if(texture != NULL) {
+		if(mTexture != NULL) {
 			if(anmCount != 0 && anmNodes[0].texList.size() != 0)
 				setTextureRect((float32)anmNodes[0].texList[0].tx, 
 										   (float32)anmNodes[0].texList[0].ty, 

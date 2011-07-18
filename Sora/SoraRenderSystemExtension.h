@@ -28,14 +28,15 @@ namespace sora {
         SORA_EXTENSION_FSAA = 0x0001,
     };
         
-    class SORA_API SoraRenderSystemExtension: public SoraSingleton<SoraRenderSystemExtension> {
-    protected:
-        friend class SoraSingleton<SoraRenderSystemExtension>;
-        
+    class SORA_API SoraRenderSystemExtension {
+    protected:        
         SoraRenderSystemExtension();
         ~SoraRenderSystemExtension();
         
     public:
+        static SoraRenderSystemExtension* Instance();
+        static void Destroy();
+        
         void    registerExtension(ExtensionFeature extension);
         int32   getExtensionParam(ExtensionFeature extension);
         void    setExtensionParam(ExtensionFeature extension, int32 param);
@@ -46,6 +47,8 @@ namespace sora {
         bool    isExtensionEnabled(ExtensionFeature extension);
     
     private:
+        static SoraRenderSystemExtension* mInstance;
+        
         void setEnvValue(ExtensionFeature extension, int32 param);
         
         typedef std::map<ExtensionFeature, int32> ExtensionFeatureMap;

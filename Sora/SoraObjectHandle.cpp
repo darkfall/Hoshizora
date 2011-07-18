@@ -9,12 +9,20 @@
 #include "SoraObjectHandle.h"
 
 namespace sora {
-            
-
+    
+    static SoraObject* g_ObjectMap[MAX_OBJECT_SIZE];
+    static std::list<SoraObject*> g_ObjectList;
+    static uint32 g_ObjectSize = 0;
+    
     SoraObjectHandle::SoraObjectHandle(SoraObject* obj):
     m_HandleId(obj->getHandleId()),
     m_UniqueId(obj->getUniqueId()) {
         g_ObjectMap[m_HandleId] = obj;
+        ++g_ObjectSize;
+    }
+    
+    SoraObjectHandle::~SoraObjectHandle() {
+        --g_ObjectSize;
     }
     
     SoraObjectHandle::SoraObjectHandle(SoraHandle handle, SoraUniqueId uid):
@@ -59,5 +67,9 @@ namespace sora {
     void SoraObjectHandle::freeObjectHandle(SoraHandle handle) {
         assert(handle < MAX_OBJECT_SIZE);
         g_ObjectMap[handle] = NULL;
+    }
+    
+    uint32 SoraObjectHandle::getGlobalObjectSize() {
+        return g_ObjectSize;
     }
 } // namespace sora

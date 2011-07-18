@@ -193,7 +193,6 @@ namespace sora {
 	#define OS_PSP
 #endif
 
-#define SORA_DLL_EXPORT
 
 // we are building a dll
 #if defined(OS_WIN32) 

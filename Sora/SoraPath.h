@@ -44,10 +44,10 @@ namespace sora {
         
         SoraPath();
         SoraPath(bool absolute);
-        SoraPath(const std::string& path);
-        SoraPath(const std::wstring& path);
-        SoraPath(const char* path);
-        SoraPath(const wchar_t* path);
+        explicit SoraPath(const std::string& path);
+        explicit SoraPath(const std::wstring& path);
+        explicit SoraPath(const char* path);
+        explicit SoraPath(const wchar_t* path);
         SoraPath(const std::wstring& path, Style style);
         SoraPath(const std::string& path, Style style);
         SoraPath(const wchar_t* path, Style style);

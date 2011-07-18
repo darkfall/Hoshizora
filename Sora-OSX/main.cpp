@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
   //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
 	
     sora::SoraGestureRecognizer::Instance();
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new peMainWindow);
 	sora->start();
 		
 	return 0;

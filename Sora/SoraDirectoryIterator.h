@@ -20,11 +20,11 @@ namespace sora {
     public:
         SoraDirectoryIterator();
         SoraDirectoryIterator(const SoraDirectoryIterator& iterator);
-        SoraDirectoryIterator(const std::string& path);
-        SoraDirectoryIterator(const std::wstring& path);
-        SoraDirectoryIterator(const char* path);
-        SoraDirectoryIterator(const wchar_t* path);
-        SoraDirectoryIterator(const SoraPath& path);
+        explicit SoraDirectoryIterator(const std::string& path);
+        explicit SoraDirectoryIterator(const std::wstring& path);
+        explicit SoraDirectoryIterator(const char* path);
+        explicit SoraDirectoryIterator(const wchar_t* path);
+        explicit SoraDirectoryIterator(const SoraPath& path);
         ~SoraDirectoryIterator();
         
         std::string name() const;

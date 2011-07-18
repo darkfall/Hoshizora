@@ -225,7 +225,7 @@ namespace sora {
     }
     
     SoraPath& SoraPath::makeAbsolute() {
-        return makeAbsolute(current());
+        return makeAbsolute(SoraPath(current()));
     }
     
     SoraPath& SoraPath::makeAbsolute(const SoraPath& base) {

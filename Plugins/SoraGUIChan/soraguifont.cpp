@@ -68,10 +68,10 @@ namespace gcn
 
     void SoraGUIFont::drawString(Graphics *graphics, const std::string &text, int x, int y)
     {
-        ClipRectangle const &top = graphics->getCurrentClipArea();
+       /* ClipRectangle const &top = graphics->getCurrentClipArea();
 
         x += top.xOffset;
-        y += top.yOffset;
+        y += top.yOffset;*/
 
         Color color = graphics->getColor();
 		

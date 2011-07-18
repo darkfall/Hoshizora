@@ -8,6 +8,7 @@
  */
 
 #include "SoraCanvas.h"
+#include "SoraCore.h"
 
 namespace sora {
         

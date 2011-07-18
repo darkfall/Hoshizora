@@ -19,25 +19,95 @@
 
 #include "SoraPlatform.h"
 #include "SoraObject.h"
+#include "SoraCanvas.h"
+#include "SoraLayer.h"
+
+#include <map>
 
 namespace sora {
     
     class SORA_API SoraScene: public SoraObject {
     public:
+        SoraScene(int32 width, int32 height);
+        ~SoraScene();
+        
+        float32 getWidth() const;
+        float32 getHeight() const;
+        void    adjustSize(int32 width, int32 height);
+        
+        void setParent(SoraObject* obj);
+        
+        void    setRotation(float32 rot);
+        float32 getRotation() const;
+        
+        void setScale(float32 scaleh, float32 scalev);
+        void getScale(float32* scaleh, float32* scalev);
+        
         
         /**
-         *  If enabled
-         *  Then the scene would try to render itself to a RenderTarget using SoraBaseCanvas
-         *  Howerver, when enabled, you should not put the render task between beginScene and endScene
-         *  Otherwise would cause the whole render stuff mess up
+         *  add function inherited from SoraObject
+         *  would use obj->getName() as the name of the object
+         *  add layerDepth = 0(bottom layer) for layer 
+         *  if the object being added is a scene
+         *  would treat as subscene
          **/
-		void enableRenderAsCanvas(bool flag) {}
+        void add(SoraObject* obj);
+        /**
+         *  Add a object to the scene
+         *  @param obj, object to add
+         *  @param layerDepth, the layer depth of a layer, if the layer does not exist, then 
+                a new layer with layerDepth would be added to the scene
+         **/
+        void add(SoraObject* obj, int32 layerDepth);
         
-		void render() {}
-		uint32 update(float32 dt) { return 0;}
+        /**
+         *  Add a layer to the scene
+         *  @param layer, the layer to be added
+         *  @retval, the new layer
+         **/
+        SoraLayer* addLayer(int32 layerDepth);
+        
+        /**
+         *  Remove a layer from the scene
+         *  Would remove all objects attached to the layer
+         *  @param layerDepth, the depth of the layer to be removed
+         **/
+        void removeLayer(int32 layerDepth);
+        
+        /**
+         *  Set the depth of the layer
+         *  Would adjust render sequence
+         *  Notice that use SoraLayer::setLayerDepth wouldn't have any effect on the scene
+         *  @param layerDepth, the depth of the layer to be set
+         *  @param newDepth, the new depth for the layer
+         **/
+        void setLayerDepth(int32 layerDepth, int32 newDepth);
+        
+        /**
+         *  Combine two layers together
+         *  The depth would be the depth of the first layer
+         *  @param layer1, the first layer to combine
+         *  @param layer2, the second layer to combine
+         **/
+        void combineLayer(int32 layer1, int32 layer2);
+        
+        SoraLayer* getLayer(int32 layerDepth) const;
+        SoraLayer* operator[](int32 layerDepth) const;
+        
+		virtual void    render();
+		virtual uint32  update(float32 dt);
         
     private:
-        bool mRenderAsCanvas;
+        int32 mWidth, mHeight;
+        int32 mRealWidth, mRealHeight;
+        
+        float32 mRotation;
+        float32 mHScale, mVScale;
+        
+        typedef std::map<int32, SoraLayer*> LayerMap;
+        LayerMap mLayers;
+        
+        SoraScene* mParentScene;
     };
     
     

@@ -11,6 +11,19 @@
 
 namespace sora {
     
+    SoraRenderSystemExtension* SoraRenderSystemExtension::mInstance = NULL;
+    
+    SoraRenderSystemExtension* SoraRenderSystemExtension::Instance() {
+        if(!mInstance)
+            mInstance = new SoraRenderSystemExtension;
+        return mInstance;
+    }
+    
+    void SoraRenderSystemExtension::Destroy() {
+        if(mInstance)
+            delete mInstance;
+    }
+    
     SoraRenderSystemExtension::SoraRenderSystemExtension() {
         
     }

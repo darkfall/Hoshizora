@@ -47,7 +47,7 @@ namespace sora {
     }
     
     uint32 SoraMovieSprite::update(float32 dt) {
-        if(quad.tex == NULL || mMoviePlayer == NULL)
+        if(mQuad.tex == NULL || mMoviePlayer == NULL)
             return 0;
         
         if(mMoviePlayer->isPlaying() && mMoviePlayer->frameChanged()) {

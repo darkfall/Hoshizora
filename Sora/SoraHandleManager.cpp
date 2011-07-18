@@ -14,7 +14,6 @@ namespace sora {
     SoraHandleManager::SoraHandleManager():
     m_NextUniqueId(0),
     m_NextUniqueHandle(0) {
-        memset(g_ObjectMap, 0, sizeof(SoraObject*)*MAX_OBJECT_SIZE);
     }
     
     SoraHandle SoraHandleManager::getUniqueHandle() {

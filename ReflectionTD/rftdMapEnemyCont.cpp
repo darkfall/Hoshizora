@@ -211,13 +211,13 @@ namespace rftd {
 		}
 		
 		if(state == MAP_STATE_SPAWNING) {
-			SubObjectList::iterator itObj = mSubObjs.begin();
-			while(itObj != mSubObjs.end()) {
-				rftdEnemyObject* enemyObject = static_cast<rftdEnemyObject*>(*itObj);
+			SoraObject* objects = getObjList();
+			while(objects != NULL) {
+				rftdEnemyObject* enemyObject = static_cast<rftdEnemyObject*>(objects);
 				if(enemyObject != NULL && enemyObject->isFinished()) {
-					del(*itObj);
+					del(objects);
 				}
-				++itObj;
+				objects = objects->next();
 			}
 		} else if(state == MAP_STATE_WAITING_FOR_NEXT_LEVEL) {
 			currLevelInternval += dt;
@@ -261,7 +261,7 @@ namespace rftd {
 	}
 	
 	int32 rftdMapEnemyCont::getEnemySize() const {
-		return getObjList().size();
+		return getObjSize();
 	}
 	
 	std::wstring rftdMapEnemyCont::getCurrLevelName() const {

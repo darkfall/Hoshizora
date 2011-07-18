@@ -4,7 +4,14 @@
 
 namespace sora {
 
-	SoraObject::SoraObject(): mType(0), mParent(0), mPosx(0.f), mPosy(0.f) {
+	SoraObject::SoraObject(): 
+    mParent(NULL),
+    mSubObjects(NULL), 
+    mNext(NULL),
+    mPosx(0.f), 
+    mPosy(0.f),
+    mType(0), 
+    mSubObjectSize(0) {
         mUniqueId = GetNextUniqueId();
         mHandleId = FindFreeHandleSlot();
         
@@ -14,26 +21,31 @@ namespace sora {
 
 	SoraObject::~SoraObject(){
 		if(mParent) mParent->del(this);
+        SoraObject* obj = mSubObjects;
+        while(obj != NULL) {
+            obj->setParent(NULL);
+            obj = obj->next();
+        }
         
         FreeHandleSlot(mHandleId);
 	}
 	
 	uint32 SoraObject::update(float32 dt){
-		SubObjectList::iterator itObj = mSubObjs.begin();
-		while(itObj != mSubObjs.end()) {
-			(*itObj)->update(dt);
-			++itObj;
-		}
+        SoraObject* obj = mSubObjects;
+        while(obj != NULL) {
+            obj->update(dt);
+            obj = obj->next();
+        }
 	
 		return 0;
 	}
 	
 	void SoraObject::render() {
-		SubObjectList::iterator itObj = mSubObjs.begin();
-		while(itObj != mSubObjs.end()) {
-			(*itObj)->render();
-			++itObj;
-		}
+        SoraObject* obj = mSubObjects;
+        while(obj != NULL) {
+            obj->render();
+            obj = obj->next();
+        }
 	}
 	
 	void SoraObject::setPosition(float32 _x, float32 _y) {
@@ -57,29 +69,56 @@ namespace sora {
             return mPosy;
         return mPosy+mParent->getPositionY();
 	}
+    
+    float32 SoraObject::getAbsolutePositionX() {
+        return mPosx;
+    }
+    
+    float32 SoraObject::getAbsolutePositionY() {
+        return mPosy;
+    }
 
 	void SoraObject::add(SoraObject* o){
-		mSubObjs.push_back(o);
-        o->mParent = this;
+        if(mSubObjects) {
+            SoraObject* obj = mSubObjects;
+            while(obj->next() != NULL)
+                obj = obj->next();
+            obj->mNext = o;
+            o->setParent(this);
+        } else {
+            mSubObjects = o;
+            o->setParent(this);
+        }
+        
+        ++mSubObjectSize;
 	}
     
-    void SoraObject::setParent(SoraObject* o) {
-        this->mParent = o;
+    SoraObject* SoraObject::next() const {
+        return mNext;
     }
-/*
-void SoraObject::addlua(LuaPlus::LuaObject p) {
-	if(p.IsUserData()) {
-		add(static_cast<SoraObject*>(*(void**)p.GetUserData()));
-	}
-}*/
 
-	void SoraObject::del(SoraObject* o){
-		mSubObjs.remove(o);
-        o->mParent = 0;
+	void SoraObject::del(SoraObject* o) {
+        if(mSubObjects == o)
+            mSubObjects = mSubObjects->next();
+        else if(mSubObjects) {
+            SoraObject* obj = mSubObjects;
+            while(obj != NULL && obj->next() != o)
+                obj = obj->next();
+            if(obj != NULL) {
+                obj->mNext = o->mNext;
+                o->setParent(NULL);
+                
+                --mSubObjectSize;
+            }
+        }
 	}
+    
+    void SoraObject::delAll() {
+        mSubObjects = NULL;
+    }
 	
-	SoraObject::SubObjectList SoraObject::getObjList() const {
-		return mSubObjs;
+	SoraObject* SoraObject::getObjList() const {
+		return mSubObjects;
 	}
 	
 	SoraObject* SoraObject::getParent() const {
@@ -87,7 +126,7 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 	}
 
 	SoraObject* SoraObject::getObjByName(const SoraString& n) {
-        return getObjByName(str2id(n));
+        return getObjByName(GetUniqueStringId(n));
 	}
     
     SoraObject* SoraObject::getObjByName(stringId sid) {        
@@ -95,12 +134,12 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
 			return this;
 		}
 		
-		SubObjectList::iterator itObj = mSubObjs.begin();
-		while(itObj != mSubObjs.end()) {
-			if((*itObj)->getName() == sid)
-				return *itObj;
-			++itObj;
-		}
+		SoraObject* obj = mSubObjects;
+        while(obj != NULL) {
+            if(obj->getName() == sid) {
+                return obj;
+            }
+        }
 		return NULL;
     }
 	
@@ -120,4 +159,32 @@ void SoraObject::addlua(LuaPlus::LuaObject p) {
         return mUniqueId;
     }
 
+    SoraObjectHandle SoraObject::getHandle() {
+        return SoraObjectHandle(this);
+    }
+    
+    void SoraObject::setParent(SoraObject* obj) {
+        mParent = obj;
+    }
+    
+    int32 SoraObject::getObjSize() const {
+        return mSubObjectSize;
+    }
+    
+    SoraObject& SoraObject::operator =(const SoraObject& rhs) {
+        if(&rhs != this) {
+            mParent = rhs.mParent;
+            mSubObjects = rhs.mSubObjects;
+            mNext = rhs.mNext;
+            
+            mPosx = rhs.mPosx;
+            mPosy = rhs.mPosy;
+            mType = rhs.mType;
+        }
+        return *this;
+    }
+    
+    SoraObject* SoraObject::operator[](const SoraString& name) {
+        return getObjByName(name);
+    }
 } // namespace sora

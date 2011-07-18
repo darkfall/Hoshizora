@@ -24,6 +24,8 @@ namespace sora {
     
     class SORA_API SoraFSMState {
     public:
+        friend class SoraFSMManager;
+        
         SoraFSMState(): mInitiated(false), mManager(NULL) {}
         
         virtual void onInitiate() {}
@@ -36,7 +38,7 @@ namespace sora {
         
         virtual void onEnter() {}
         virtual void onLeave() {}
-        
+                
     private:
         bool mInitiated;
         SoraFSMManager* mManager;
@@ -47,16 +49,24 @@ namespace sora {
         SoraFSMManager();
         ~SoraFSMManager();
         
-        void addState(SoraFSMState* state, const SoraString& name);
+        SoraFSMManager& defState(SoraFSMState* state, const SoraString& name);
         void delState(const SoraString& name);
         
         void switchToState(const SoraString& name);
+        void switchToState(SoraFSMState* state);
+
+        void setGlobalState(SoraFSMState* state);
         
         SoraFSMState* getCurrentState() const;
         SoraFSMState* getPreviousState() const;
         SoraFSMState* getGlobalState() const;
-
-        void setGlobalState(SoraFSMState* state);
+        
+        void onUpdate(float32 dt);
+        void onRender();
+        
+        bool returnToPreviousState();
+        
+        static SoraFSMManager& defaultFSMManager();
         
         SoraFSMState* operator[](const SoraString& name);
         

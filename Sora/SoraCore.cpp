@@ -35,6 +35,8 @@
 #include "SoraCamera.h"
 #include "SoraRenderSystemExtension.h"
 
+#include <stack>
+
 extern "C" {
 #include "Random/SFMT.h"
 }
@@ -42,6 +44,50 @@ extern "C" {
 namespace sora {
     
     SoraCore* SoraCore::mInstance = NULL;
+    
+    struct TransformData {
+        float32 x;
+        float32 y;
+        float32 dx;
+        float32 dy;
+        float32 rot;
+        float32 hscale;
+        float32 vscale;
+        
+        void set(float32 _x, float32 _y, float32 _dx, float32 _dy, float32 _rot, float32 _hscale, float32 _vscale) {
+            x = _x;
+            y = _y;
+            dx = _dx;
+            dy = _dy;
+            rot = _rot;
+            hscale = _hscale;
+            vscale = _vscale;
+        }
+    };
+    
+    struct ClippingData {
+        float32 x;
+        float32 y;
+        float32 w;
+        float32 h;
+        
+        void set(float32 _x, float32 _y, float32 _w, float32 _h) {
+            x = _x;
+            y = _y;
+            w = _w;
+            h = _h;
+        }
+    };
+    
+    
+    namespace {
+        static std::stack<TransformData> g_TransformStack;
+        static std::stack<ClippingData> g_ClippingStack;
+        
+        static TransformData g_CurrentTransform;
+        static ClippingData g_CurrentClipping;
+    }
+    
     
     SoraCore* SoraCore::Instance() {
         if(!mInstance)
@@ -262,7 +308,7 @@ namespace sora {
                 }
                 
                 if(!bPauseRender) {
-                    DEBUG_RENDERER->render();
+                    SoraDebugRenderer::Instance()->render();
                     
                     SoraMenuBar::Instance()->update();
                     SoraMenuBar::Instance()->render();
@@ -421,7 +467,7 @@ namespace sora {
 				bMainWindowSet = true;
 				mainWindow = info;
                 mainWindow->setActive(true);
-			
+                
 				DebugPtr->log(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
 							  LOG_LEVEL_NOTICE);
                 
@@ -456,7 +502,9 @@ namespace sora {
         SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
 		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
 		
-		
+        g_CurrentTransform.set(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
+        g_CurrentClipping.set(0.f, 0.f, iScreenWidth, iScreenHeight);
+        
 		return 0;
 	}
 
@@ -828,19 +876,15 @@ namespace sora {
 	void SoraCore::setClipping(int32 x, int32 y, int32 w, int32 h) {
 		assert(bInitialized==true);
 		pRenderSystem->setClipping(x, y, w, h);
+        
+        g_CurrentClipping.set(x, y, w, h);
 	}
 
 	void SoraCore::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
 		assert(bInitialized==true);
 		pRenderSystem->setTransform(x, y, dx, dy, rot, hscale, vscale);
-	}
-	
-	void SoraCore::pushTransformMatrix() {
-		assert(bInitialized==true);
-	}
-	
-	void SoraCore::popTransformMatrix() {
-		assert(bInitialized==true);
+        
+        g_CurrentTransform.set(x, y, dx, dy, rot, hscale, vscale);
 	}
     
     void SoraCore::setViewPoint(float32 x, float32 y, float32 z) {
@@ -1333,5 +1377,40 @@ namespace sora {
     
     void SoraCore::registerFullscreenBufferDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate) {
         SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate);
+    }
+    
+    void SoraCore::pushTransformMatrix() {
+        g_TransformStack.push(g_CurrentTransform);
+    }
+    
+    void SoraCore::popTransformMatrix() {
+        if(!g_TransformStack.empty()) {
+            g_CurrentTransform = g_TransformStack.top();
+            g_TransformStack.pop();
+            
+            setTransform(g_CurrentTransform.x,
+                         g_CurrentTransform.y,
+                         g_CurrentTransform.dx,
+                         g_CurrentTransform.dy,
+                         g_CurrentTransform.rot,
+                         g_CurrentTransform.hscale,
+                         g_CurrentTransform.vscale);
+        }
+    }
+   
+    void SoraCore::pushClippingMatrix() {
+        g_ClippingStack.push(g_CurrentClipping);
+    }
+    
+    void SoraCore::popClippingMatrix() {
+        if(!g_ClippingStack.empty()) {
+            g_CurrentClipping = g_ClippingStack.top();
+            g_ClippingStack.pop();
+            
+            setClipping(g_CurrentClipping.x,
+                        g_CurrentClipping.y,
+                        g_CurrentClipping.w,
+                        g_CurrentClipping.h);
+        }
     }
 } // namespace sora

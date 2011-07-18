@@ -219,6 +219,7 @@
 		88A2124E138E4BFB0019C5AA /* SoraCompressedTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A2124D138E4BFB0019C5AA /* SoraCompressedTexture.cpp */; };
 		88A8652313732C9B003A3CDE /* SoraEnvValues.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A8652113732C9B003A3CDE /* SoraEnvValues.cpp */; };
 		88A8653B13732FAA003A3CDE /* EnvVarExport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A8653913732FAA003A3CDE /* EnvVarExport.cpp */; };
+		88A8D69013D409C9007A6488 /* SoraLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A8D68F13D409C9007A6488 /* SoraLayer.cpp */; };
 		88AD7F6E13415856000F4F68 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AD7F6713415856000F4F68 /* json_reader.cpp */; };
 		88AD7F6F13415856000F4F68 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AD7F6813415856000F4F68 /* json_value.cpp */; };
 		88AD7F7013415856000F4F68 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AD7F6A13415856000F4F68 /* json_writer.cpp */; };
@@ -1035,6 +1036,8 @@
 		88A8653913732FAA003A3CDE /* EnvVarExport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnvVarExport.cpp; sourceTree = "<group>"; };
 		88A8653A13732FAA003A3CDE /* EnvVarExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvVarExport.h; sourceTree = "<group>"; };
 		88A865BD137339B9003A3CDE /* MemoryUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryUsage.h; sourceTree = "<group>"; };
+		88A8D68E13D403BE007A6488 /* SoraLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLayer.h; sourceTree = "<group>"; };
+		88A8D68F13D409C9007A6488 /* SoraLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraLayer.cpp; sourceTree = "<group>"; };
 		88AD7F5F13415856000F4F68 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
 		88AD7F6013415856000F4F68 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		88AD7F6113415856000F4F68 /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = features.h; sourceTree = "<group>"; };
@@ -3217,6 +3220,8 @@
 				887C59C613CF2AB40009E508 /* SoraPrefab.h */,
 				8876934D13D20A6D0071C8C1 /* SoraFSM.h */,
 				8876934E13D20A740071C8C1 /* SoraFSM.cpp */,
+				88A8D68E13D403BE007A6488 /* SoraLayer.h */,
+				88A8D68F13D409C9007A6488 /* SoraLayer.cpp */,
 				8876935013D20A790071C8C1 /* SoraScene.h */,
 				8876935113D20A7F0071C8C1 /* SoraScene.cpp */,
 			);
@@ -3821,6 +3826,7 @@
 				887C5B0F13D094D60009E508 /* SoraObjectModifiers.cpp in Sources */,
 				8876934F13D20A740071C8C1 /* SoraFSM.cpp in Sources */,
 				8876935213D20A7F0071C8C1 /* SoraScene.cpp in Sources */,
+				88A8D69013D409C9007A6488 /* SoraLayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

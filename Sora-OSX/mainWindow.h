@@ -16,13 +16,10 @@
 #include "SoraParticleSystem/SoraParticleSystem.h"
 #include "SoraLua/SoraLuaObject.h"
 
-#include "SoraHttpFile/SoraHttpFile.h"
-
-#include "SoraNetwork/clsockets/ActiveSocket.h"
-#include "SoraNetwork/clsockets/PassiveSocket.h"
-
 #include "SoraFileChangeEvent.h"
 #include "SoraPlatformerPrefabs/SoraPlatformerGeomtry.h"
+
+#include "SoraScene.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -45,48 +42,14 @@ public:
 	bool isWindowSubWindow() { return false; }	
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }
-    
-    void test(void* arg);
 	
 	void onKeyEvent(sora::SoraKeyEvent* kev);
-	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);
-	void onDownloadEvent(sora::SoraHttpDownloadEvent* ev);
-	void onFileChangeEvent(sora::SoraFileChangeEvent* ev);
-    
-    const char* getIcon() {
-        return "./t1.png";
-    }
-    
-    const char* getCursor() {
-        return "./t1c.png";
-    }
-    
-    void onScreenBufferRender(ulong32& tex);
-	
+    	
 private:
 	sora::SoraCore* sora;
-	
-	sora::SoraBaseCanvas* pCanvas;
-                    
-    sora::SoraSprite* pSpr;
-	sora::SoraSprite* pSpr2;
-	sora::SoraSprite* pressAnyKey;
-    sora::SoraSprite* pScreenSpr;
-	
-	sora::SoraShader* shader;
-					
-    sora::SoraFont* pFont;
-	sora::SoraParticleManager* ps;
-	sora::SoraSprite* psSpr;
-	sora::SoraBaseCanvas* canvas1;
-	
-	sora::SoraLuaObject obj;
-	
-	sora::SoraHttpFile file;
-    sora::SoraPlatformerGeometry* platformerGeo;
-	
-	CActiveSocket asocket;
-	CPassiveSocket psocket;
+    
+    sora::SoraScene* mScene1;
+    sora::SoraScene* mScene2;
 };
 
 #endif

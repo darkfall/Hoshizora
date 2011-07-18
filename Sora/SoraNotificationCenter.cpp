@@ -21,7 +21,8 @@ namespace sora {
     }
     
     void SoraNotificationCenter::addObserver(const SoraAbstractObserver& observer) {
-        mObservers.push_back(observer.clone());
+        SoraAutoPtr<SoraAbstractObserver> ap(observer.clone());
+        mObservers.push_back(ap);
     }
     
     void SoraNotificationCenter::removeObserver(const SoraAbstractObserver& observer) {

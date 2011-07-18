@@ -38,10 +38,11 @@ namespace sora {
         SoraNotificationCenter();
         ~SoraNotificationCenter();
         
-        void addObserver(const SoraAbstractObserver& observer);
-        void removeObserver(const SoraAbstractObserver& observer);
-        void postNotification(SoraNotification* Notification);
-        bool hasObservers() const;
+        void    addObserver(const SoraAbstractObserver& observer);
+        void    removeObserver(const SoraAbstractObserver& observer);
+        void    postNotification(SoraNotification* Notification);
+        bool    hasObservers() const;
+        
         std::size_t countObservers() const;
         static SoraNotificationCenter& defaultCenter();
         

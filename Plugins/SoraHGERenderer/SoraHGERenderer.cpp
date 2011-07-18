@@ -120,6 +120,8 @@ namespace sora{
 			
 			setVerticalSync(false);
 			windowInfo->init();
+        
+            SET_ENV_STRING("RENDERER_DRIVER", videoInfo());
 
 			pMainWindow = windowInfo;
 			return (SoraWindowHandle)pMainWindow;
@@ -357,7 +359,7 @@ namespace sora{
 	}
 
 	SoraWString SoraHGERenderer::videoInfo() {
-		SoraWString str(L"Driver: HGE+DX9");
+		SoraWString str(L"DirectX 9");
 		return str;
 	}
 
