@@ -31,8 +31,8 @@ namespace sora {
         SoraScene(int32 width, int32 height);
         ~SoraScene();
         
-        float32 getWidth() const;
-        float32 getHeight() const;
+        int32	getWidth() const;
+        int32	getHeight() const;
         void    adjustSize(int32 width, int32 height);
         
         void setParent(SoraObject* obj);

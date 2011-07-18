@@ -20,6 +20,8 @@
 #pragma comment(lib,"d3dx9.lib")
 #pragma comment(lib,"d3d9.lib")
 
+#include <string>
+
 #define HGE_VERSION 0x180
 
 #ifdef HGEDLL
@@ -405,15 +407,16 @@ public:
 	virtual	void			CALL SetShaderChanged(bool flag) = 0;
 	virtual unsigned long		CALL	getVideoDeviceHandle() = 0;
 
-	virtual void				_UpdateMouse() = 0;
-	virtual void				_InputInit() = 0;
-	virtual void				_ClearQueue() = 0;
+	virtual void		CALL		_UpdateMouse() = 0;
+	virtual void		CALL		_InputInit() = 0;
+	virtual void		CALL		_ClearQueue() = 0;
 
-	virtual void			enableFSAA() = 0;
-	virtual void			disableFSAA() = 0;
+	virtual void		CALL	enableFSAA() = 0;
+	virtual void		CALL	disableFSAA() = 0;
 	
-	virtual void				_Resize(int width, int height) = 0;
-	virtual void				_AdjustWindow() = 0;
+	virtual void			CALL	_Resize(int width, int height) = 0;
+	virtual void			CALL	_AdjustWindow() = 0;
+	virtual std::string		CALL	getDeviceInfo() = 0;
 	IDirect3DDevice9*		pD3DDevice;
 
 };

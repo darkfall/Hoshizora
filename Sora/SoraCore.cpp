@@ -66,12 +66,12 @@ namespace sora {
     };
     
     struct ClippingData {
-        float32 x;
-        float32 y;
-        float32 w;
-        float32 h;
+        int32 x;
+        int32 y;
+        int32 w;
+        int32 h;
         
-        void set(float32 _x, float32 _y, float32 _w, float32 _h) {
+        void set(int32 _x, int32 _y, int32 _w, int32 _h) {
             x = _x;
             y = _y;
             w = _w;
@@ -503,7 +503,7 @@ namespace sora {
 		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
 		
         g_CurrentTransform.set(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
-        g_CurrentClipping.set(0.f, 0.f, iScreenWidth, iScreenHeight);
+        g_CurrentClipping.set(0, 0, iScreenWidth, iScreenHeight);
         
 		return 0;
 	}

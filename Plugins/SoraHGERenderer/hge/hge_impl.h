@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <d3d9.h>
 #include <d3dx9.h>
+#include <string>
 //#include <d3dx8.h>
 
 #define DEMO
@@ -150,6 +151,7 @@ public:
 	virtual void		CALL	Texture_Unlock(HTEXTURE tex);
 
 	virtual unsigned long CALL getVideoDeviceHandle();
+	virtual std::string CALL getDeviceInfo();
 	virtual void	CALL SetShaderChanged(bool flag) { shaderChanged = flag; }
 	//////// Implementation ////////
 
@@ -157,8 +159,8 @@ public:
 	void				_FocusChange(bool bAct);
 	void				_PostError(char *error);
 
-	void enableFSAA();
-	void disableFSAA();
+	void CALL enableFSAA();
+	void CALL disableFSAA();
 
 
 	HINSTANCE			hInstance;
@@ -252,8 +254,8 @@ public:
 	bool				_GfxInit();
 	void				_GfxDone();
 	bool				_GfxRestore();
-	void				_AdjustWindow();
-	void				_Resize(int width, int height);
+	void		CALL		_AdjustWindow();
+	void		CALL		_Resize(int width, int height);
 	bool				_init_lost();
 	void				CALL _render_batch(bool bEndScene=false);
 	int					_format_id(D3DFORMAT fmt);
@@ -277,9 +279,9 @@ public:
 	bool				bCaptured;
 	char				keyz[256];
 	CInputEventList*	queue;
-	void				_UpdateMouse();
-	void				_InputInit();
-	void				_ClearQueue();
+	void			CALL	_UpdateMouse();
+	void			CALL	_InputInit();
+	void			CALL	_ClearQueue();
 	void				_BuildEvent(int type, int key, int scan, int flags, int x, int y);
 
 	#define	ERROR_NOKEYBOARD	0x10
@@ -294,6 +296,8 @@ public:
 	DIJOYSTATE          joyState;
 	DIJOYSTATE          lastJoyState;
 	bool				haveJoy;
+
+	std::string			deviceInfo;
 
 	int					_DIInit();
 	void				_DIRelease();

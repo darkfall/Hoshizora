@@ -50,7 +50,10 @@ namespace gcn
             sora->setTransform(0,
                                0,
                                (float)top.xOffset,
-							   (float)top.yOffset);
+							   (float)top.yOffset,
+							    0.f,
+								1.f,
+								1.f);
         }
         return result;
     }
@@ -81,7 +84,10 @@ namespace gcn
                 sora->setTransform(0,
                                    0,
                                    (float)top.xOffset,
-								   (float)top.yOffset);
+								   (float)top.yOffset,
+								   0.f,
+								   1.f,
+								   1.f);
             }
         }
     }

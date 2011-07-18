@@ -58,7 +58,10 @@ namespace sora {
 			int32 index = static_cast<int32>(*p);
 			if(index >= 0 && index < 128) {
 				if(mCharPos[index]) {
-					mFontSprite->setTextureRect(mCharPos[index], 0, mWidth, mHeight);
+					mFontSprite->setTextureRect((float32)mCharPos[index],
+												0.f, 
+												(float32)mWidth, 
+												(float32)mHeight);
 					mFontSprite->setRotation(mRotation);
 					mFontSprite->setScale(mScale, mScale);
 				
@@ -151,7 +154,7 @@ namespace sora {
 	}
 	
 	uint32 SoraSpriteFont::getFontSize() {
-		return static_cast<float32>(mWidth);
+		return static_cast<uint32>(mWidth);
 	}
 	
 	float32	SoraSpriteFont::getWidthFromCharacter(wchar_t c, bool original) {

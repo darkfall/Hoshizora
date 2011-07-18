@@ -15,6 +15,7 @@
 #include "../SoraCore.h"
 #include "../SoraLocalizer.h"
 #include "../SoraEventManager.h"
+#include "../SoraObjectHandle.h"
 
 namespace sora {
 
@@ -89,7 +90,7 @@ namespace sora {
 					cev->setResults("EnvValue "+params[1]+" has been set to "+params[2]);
 					
 				} else if(p1Prev.compare("float") == 0 && params.size() >= 3) {
-					float32 val = atof(params[2].c_str());
+					float32 val = (float32)atof(params[2].c_str());
 					
 					SET_ENV_FLOAT(params[1].c_str(), val);
 					
@@ -112,7 +113,7 @@ namespace sora {
 				} 
 				
 				else if(p1Prev.compare("file_check_interval") == 0 && params.size() >= 1) {
-					SoraEventManager::Instance()->setFileChangeDetectionInterval(atof(params[0].c_str()));
+					SoraEventManager::Instance()->setFileChangeDetectionInterval((float32)atof(params[0].c_str()));
 				}
 			}
 		}
@@ -147,7 +148,7 @@ namespace sora {
 				} 
 			} else {
 				if(p1Prev.compare("objnum") == 0) {
-					cev->setResults(vamssg("Current alive SoraObject number = %d", SoraObject::members.size()));
+					cev->setResults(vamssg("Current alive SoraObject number = %d", SoraObjectHandle::getGlobalObjectSize()));
 			
 				} else if(p1Prev.compare("memuse") == 0) {
 					cev->setResults(vamssg("Current memory use = %dkb", sora->getEngineMemoryUsage()));

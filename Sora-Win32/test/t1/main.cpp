@@ -63,11 +63,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 //	sora->registerSoundSystem(new sora::SoraAudiereSoundSystem);
 	
-	sora::SoraDirectoryIterator it = "./";
-	while(!it.isEnd()) {
-		sora::DebugPtr->log(it.name());
-		++it;
-	}
 	sora->setFPS(60);
 
 	sora->setRenderSystemExtensionParam(0x0001, 4);

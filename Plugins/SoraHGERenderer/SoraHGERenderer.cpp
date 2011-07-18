@@ -121,7 +121,7 @@ namespace sora{
 			setVerticalSync(false);
 			windowInfo->init();
         
-            SET_ENV_STRING("RENDERER_DRIVER", videoInfo());
+            SET_ENV_STRING("RENDERER_DRIVER", pHGE->getDeviceInfo());
 
 			pMainWindow = windowInfo;
 			return (SoraWindowHandle)pMainWindow;

@@ -260,7 +260,7 @@ namespace sora {
 				int offy = ft_glyphs[n-1].size - ft_glyphs[n-1].top;
 
 				sprite->setTexture(ft_glyphs[n-1].tex);
-				sprite->setTextureRect(0, 0, imgw, imgh);
+				sprite->setTextureRect(0.f, 0.f, imgw, imgh);
             //    sprite->setCenter(imgw/2.f, imgh/2.f);
                 sprite->setRotation(charRotation);
 				sprite->setScale(scale, scale);

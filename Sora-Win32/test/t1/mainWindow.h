@@ -16,9 +16,8 @@
 #include "SoraParticleSystem/SoraParticleSystem.h"
 #include "SoraLua/SoraLuaObject.h"
 
-#include "SoraHttpFile/SoraHttpFile.h"
-
 #include "SoraFileChangeEvent.h"
+#include "SoraScene.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -43,34 +42,12 @@ public:
 	bool hideMouse() { return false; }
 	
 	void onKeyEvent(sora::SoraKeyEvent* kev);
-	void onMenuEvent(sora::SoraMenuBarClickEvent* ev);
-	void onDownloadEvent(sora::SoraHttpDownloadEvent* ev);
-	void onFileChangeEvent(sora::SoraFileChangeEvent* ev);
-
-	void threadtest(void* arg);
-
-	void onScreenBufferRender(ulong32& tex);
-    
+    	
 private:
 	sora::SoraCore* sora;
-	
-	sora::SoraBaseCanvas* pCanvas;
-                    
-    sora::SoraSprite* pSpr;
-	sora::SoraSprite* pSpr2;
-	sora::SoraSprite* pressAnyKey;
-	sora::SoraSprite* pScreenSpr;
-	
-	sora::SoraShader* shader;
-					
-    sora::SoraFont* pFont;
-	sora::SoraParticleManager* ps;
-	sora::SoraSprite* psSpr;
-	sora::SoraBaseCanvas* canvas1;
-	
-	sora::SoraLuaObject obj;
-	
-	sora::SoraHttpFile file;
+    
+    sora::SoraScene* mScene1;
+    sora::SoraScene* mScene2;
 };
 
 #endif

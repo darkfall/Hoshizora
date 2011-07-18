@@ -12,8 +12,8 @@
 namespace sora {
     
     SoraScene::SoraScene(int32 width, int32 height):
-    mRealWidth(0.f),
-    mRealHeight(0.f),
+    mRealWidth(0),
+    mRealHeight(0),
     mRotation(0.f),
     mHScale(1.f),
     mVScale(1.f),
@@ -30,11 +30,11 @@ namespace sora {
         mLayers.clear();
     }
     
-    float32 SoraScene::getWidth() const {
+    int32 SoraScene::getWidth() const {
         return mWidth;
     }
     
-    float32 SoraScene::getHeight() const {
+    int32 SoraScene::getHeight() const {
         return mHeight;
     }
 
@@ -68,9 +68,9 @@ namespace sora {
             int32 maxRight = (int32)mParent->getPositionX() + mParentScene->getWidth();
             int32 maxBottom = (int32)mParent->getPositionY() + mParentScene->getHeight();
             if(getPositionX() + mWidth > maxRight)
-                mWidth = (getPositionX() + mWidth) - maxRight;
+                mWidth = (int32)(getPositionX() + mWidth) - maxRight;
             if(getPositionY() + mHeight > maxBottom)
-                mHeight = (getPositionY() + mHeight) - maxBottom;
+                mHeight = (int32)(getPositionY() + mHeight) - maxBottom;
         }
     }
     
@@ -161,7 +161,7 @@ namespace sora {
                                  mHScale,
                                  mVScale);
         sora::SORA->pushClippingMatrix();
-        sora::SORA->setClipping(getPositionX(), getPositionY(), mWidth, mHeight);
+        sora::SORA->setClipping((int32)getPositionX(), (int32)getPositionY(), mWidth, mHeight);
         
         LayerMap::iterator itLayer = mLayers.begin();
         while(itLayer != mLayers.end()) {

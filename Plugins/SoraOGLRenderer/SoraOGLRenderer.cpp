@@ -198,7 +198,7 @@ namespace sora{
 
             pCurTarget->attachToRender();
 			CurBlendMode = 0;
-            glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
+            glClearColor(CGETR(color)/255.0, CGETG(color)/255.0, CGETB(color)/255.0, CGETA(color)/255.0);
 			
 			if(clear)
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -206,7 +206,7 @@ namespace sora{
 				glClear(GL_DEPTH_BUFFER_BIT);
 			
         } else {
-            glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
+            glClearColor(CGETR(color)/255.0, CGETG(color)/255.0, CGETB(color)/255.0, CGETA(color)/255.0);
             
             if(clear)
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

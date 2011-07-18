@@ -205,6 +205,7 @@
     <ClInclude Include="..\..\..\Sora\soraiOSFileUtility.h" />
     <ClInclude Include="..\..\..\Sora\SoraiOSStringConv.h" />
     <ClInclude Include="..\..\..\Sora\SoraKeyInfo.h" />
+    <ClInclude Include="..\..\..\Sora\SoraLayer.h" />
     <ClInclude Include="..\..\..\Sora\SoraLocalizer.h" />
     <ClInclude Include="..\..\..\Sora\SoraMath.h" />
     <ClInclude Include="..\..\..\Sora\SoraMemoryBuffer.h" />
@@ -333,6 +334,7 @@
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraINIFile\SoraINIFile.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraInputQueue.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraLayer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraLocalizer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraMemoryBuffer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraModifierAdapter.cpp" />

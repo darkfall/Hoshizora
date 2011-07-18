@@ -25,6 +25,7 @@ namespace sora {
             SoraObject::add(obj);
             obj = obj->next();
         }
+		return *this;
     }
     
     SoraLayer& SoraLayer::removeDuplicate(const SoraLayer& layer) {
@@ -33,6 +34,7 @@ namespace sora {
             SoraObject::del(obj);
             obj = obj->next();
         }
+		return *this;
     }
     
     void SoraLayer::setLayerDepth(int32 depth) {

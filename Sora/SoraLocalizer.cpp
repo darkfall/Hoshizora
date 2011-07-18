@@ -10,6 +10,19 @@
 #include "SoraLocalizer.h"
 
 namespace sora {
+
+	SoraLocalizer* SoraLocalizer::mInstance = NULL;
+
+	SoraLocalizer* SoraLocalizer::Instance() {
+		if(!mInstance)
+			mInstance = new SoraLocalizer;
+		return mInstance;
+	}
+
+	void SoraLocalizer::Destroy() {
+		if(mInstance)
+			delete mInstance;
+	}
 	
 	SoraLocalizer::~SoraLocalizer() {
 	}
@@ -29,19 +42,19 @@ namespace sora {
 		return "\0";
 	}
 	
-	bool SoraLocalizer::readLocaleString(llexer* confLexer, LOCALE_STRING_MAP& strMap) {
+	bool SoraLocalizer::readLocaleString(llexer* confLexer, LocaleStringMap& strMap) {
 		SoraString strIdent = confLexer->getCurrLexeme();
 		if(!readToken(confLexer, TOKEN_TYPE_OP)) return false;
 		if(!readToken(confLexer, TOKEN_TYPE_STRING)) return false;
-		strMap[strIdent] = s2ws(confLexer->getCurrLexeme());
+		strMap[GetUniqueStringId(strIdent)] = s2ws(confLexer->getCurrLexeme());
 		return true;
 	}
 	
-	bool SoraLocalizer::readLocaleResource(llexer* confLexer, LOCALE_STRING_MAP& strMap) {
+	bool SoraLocalizer::readLocaleResource(llexer* confLexer, LocaleStringMap& strMap) {
 		SoraString strIdent = confLexer->getCurrLexeme();
 		if(!readToken(confLexer, TOKEN_TYPE_OP)) return false;
 		if(!readToken(confLexer, TOKEN_TYPE_STRING)) return false;
-		strMap[strIdent] = s2ws(confLexer->getCurrLexeme());
+		strMap[GetUniqueStringId(strIdent)] = s2ws(confLexer->getCurrLexeme());
 		return true;
 	}
 	
@@ -61,7 +74,7 @@ namespace sora {
 		void* confData = SoraCore::Instance()->getResourceFile(confPath, confSize);
 		if(confData && confLexer->loadFileMem(confData, confSize) == LEX_NO_ERROR) {
 			SoraString localeIdent;
-			LOCALE_STRING_MAP localeStrMap;
+			LocaleStringMap localeStrMap;
 			
 			Token token = confLexer->getNextToken();
 			while(token != TOKEN_TYPE_END_OF_STREAM && token != TOKEN_TYPE_INVALID_INPUT) {
@@ -110,14 +123,14 @@ namespace sora {
 	}
 	
 	SoraWString SoraLocalizer::getStr(const SoraString& ident) {
-		LOCALE_STRING_MAP::iterator itStr = currentLocaleMap->second.find(ident);
+		LocaleStringMap::iterator itStr = currentLocaleMap->second.find(GetUniqueStringId(ident));
 		if(itStr != currentLocaleMap->second.end())
 			return itStr->second;
-		return L"\0";
+		return std::wstring();
 	}
 
 	void SoraLocalizer::setCurrentLocale(const SoraString& localeIdent) {
-		LOCALE_CONF_MAP::iterator itConf = localeConfs.find(localeIdent);
+		LocaleConfMap::iterator itConf = localeConfs.find(localeIdent);
 		if(itConf != localeConfs.end()) {
 			currentLocale = localeIdent;
 			currentLocaleW = s2ws(localeIdent);

@@ -89,7 +89,7 @@ void CALL HGE_Impl::Gfx_SetTransform(float x, float y, float dx, float dy, float
 		D3DXMatrixTranslation(&matView, -x, -y, 0.0f);
 		D3DXMatrixScaling(&tmp, hscale, vscale, 1.0f);
 		D3DXMatrixMultiply(&matView, &matView, &tmp);
-		D3DXMatrixRotationZ(&tmp, -rot);
+		D3DXMatrixRotationZ(&tmp, rot);
 		D3DXMatrixMultiply(&matView, &matView, &tmp);
 		D3DXMatrixTranslation(&tmp, x+dx, y+dy, 0.0f);
 		D3DXMatrixMultiply(&matView, &matView, &tmp);
@@ -694,6 +694,10 @@ void HGE_Impl::disableFSAA() {
 		pD3DDevice->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, FALSE);
 }
 
+std::string HGE_Impl::getDeviceInfo() {
+	return deviceInfo;
+}
+
 bool HGE_Impl::_GfxInit()
 {
 	static const char *szFormats[]={"UNKNOWN", "R5G6B5", "X1R5G5B5", "A1R5G5B5", "X8R8G8B8", "A8R8G8B8"};
@@ -714,13 +718,13 @@ bool HGE_Impl::_GfxInit()
 // Get adapter info
 
 	pD3D->GetAdapterIdentifier(D3DADAPTER_DEFAULT, 0, &AdID);
-	System_Log("D3D Driver: %s",AdID.Driver);
-	System_Log("Description: %s",AdID.Description);
-	System_Log("Version: %d.%d.%d.%d",
+	char dd[256];
+	sprintf(dd, "D3D Driver: %s Description: %s Version: %d.%d.%d.%d", AdID.Driver, AdID.Description,
 			HIWORD(AdID.DriverVersion.HighPart),
 			LOWORD(AdID.DriverVersion.HighPart),
 			HIWORD(AdID.DriverVersion.LowPart),
 			LOWORD(AdID.DriverVersion.LowPart));
+	deviceInfo = dd;
 
 // Set up Windowed presentation parameters
 	

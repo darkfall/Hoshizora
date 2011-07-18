@@ -27,7 +27,7 @@ namespace sora {
 	HSORARESOURCE SoraFolderResourceManager::loadResourcePack(const SoraWString& folder) {
 		//if(!SoraFileUtility::fileExists(folder)) {
 			folders.push_back(folderDescription(folder));
-			return folders.back().folderHash;
+			return (HSORARESOURCE)folders.back().folderHash;
 		//}
 		return 0;
 	}
