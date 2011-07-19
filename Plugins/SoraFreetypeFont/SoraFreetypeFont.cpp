@@ -268,7 +268,7 @@ namespace sora {
  
                 if(lineRotation == 0.f) {
                     x += (getWidthFromCharacter(*pwstr) + kerningWidth);
-                    if(lineWidth != 0.f && x >= lineWidth+ox) {
+                    if(lineWidth != 0.f && x >= lineWidth+ox-size) {
                         y += getHeight() + kerningHeight;
                         x = ox;
                         if(align != FONT_ALIGNMENT_LEFT) {
@@ -365,7 +365,7 @@ namespace sora {
  
                 if(lineRotation == 0.f) {
                     x += (getWidthFromCharacter(*pwstr) + kerningWidth);
-                    if(lineWidth != 0.f && x >= lineWidth+ox) {
+                    if(lineWidth != 0.f && x >= lineWidth+ox-size) {
                         y += getHeight() + kerningHeight;
                         x = ox;
                         if(bhcenter || bvcenter) {
@@ -418,9 +418,19 @@ namespace sora {
 	
 	float32 SoraFTFont::getStringHeight(const wchar_t* pwstr) {
 		float height = getHeight();
+		float w = 0.f;
 		for(const wchar_t* p = pwstr; *p; ++p) {
 			if(*p == L'\n')
 				height += getHeight();
+			else {
+				if(lineWidth != 0.f) {
+					w += getWidthFromCharacter(*pwstr);
+					if(w >= lineWidth) {
+						height += getHeight();
+						w = 0.f;
+					}
+				}
+			}
 		}
 		return height;
 	}

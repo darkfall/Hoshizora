@@ -12,7 +12,21 @@
 #include "SoraCore.h"
 
 namespace sora {
-    
+    SoraShaderManager* SoraShaderManager::mInstance = NULL;
+
+	SoraShaderManager* SoraShaderManager::Instance() {
+		if(!mInstance)
+			mInstance = new SoraShaderManager;
+		return mInstance;
+	}
+
+	void SoraShaderManager::Destroy() {
+		if(mInstance) {
+			delete mInstance;
+			mInstance = NULL;
+		}
+	}
+
     SoraShaderManager::SoraShaderManager() {
         
     }

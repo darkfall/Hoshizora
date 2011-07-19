@@ -19,13 +19,15 @@ namespace sora {
     
     class SoraShader;
     
-    class SORA_API SoraShaderManager: public SoraSingleton<SoraShaderManager> {
+    class SORA_API SoraShaderManager {
     protected:
-        friend class SoraSingleton<SoraShaderManager>;
         SoraShaderManager();
         ~SoraShaderManager();
         
     public:
+		static SoraShaderManager* Instance();
+		static void Destroy();
+
         // return the same shader if it have benn created by the manager
         SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
         
@@ -35,6 +37,8 @@ namespace sora {
         void freeShader(SoraShader* shader);
         
     private:
+		static SoraShaderManager* mInstance;
+
         typedef std::map<stringId, SoraShader*> ShaderMap;
         typedef std::map<SoraShader*, stringId> RevShaderMap;
         ShaderMap mShaders;
