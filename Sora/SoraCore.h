@@ -126,7 +126,7 @@ namespace sora {
 		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
 
-		void renderRect	(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, uint32 color=0xFFFFFFFF, float32 z=0.0f);
+		void renderRect     (float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, uint32 color=0xFFFFFFFF, float32 z=0.0f);
 		void renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
 		void setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
@@ -167,9 +167,9 @@ namespace sora {
 		HSORARESOURCE loadResourcePack	(const SoraWString& file);
 		void	attachResourcePack		(HSORARESOURCE pfile);
 		void	detachResourcePack		(HSORARESOURCE handle);
-		void*	getResourceFile		(const SoraWString& file, ulong32& size);
+		void*	getResourceFile         (const SoraWString& file, ulong32& size);
 		void*	readResourceFile		(const SoraWString& file, ulong32 size);
-		ulong32 getResourceFileSize	(const SoraWString& file);
+		ulong32 getResourceFileSize     (const SoraWString& file);
 		void	freeResourceFile		(void* p);
 		void	enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
 	
@@ -273,7 +273,7 @@ namespace sora {
          * This is required for fullscreen post shader effects
          **/
         void enableFullscreenBuffer(bool flag);
-        void registerFullscreenBufferDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate);
+        void registerFullscreenBufferDelegate(const SoraAbstractDelegate<HSORATEXTURE>& delegate);
 		
 	private:
         static SoraCore* mInstance;

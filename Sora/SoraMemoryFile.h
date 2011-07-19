@@ -21,8 +21,7 @@ namespace sora {
 	/* memory file with auto data count reference */
 	class SORA_API SoraMemoryFile: 
 				public SoraMemoryBuffer,
-				public SoraNamedObject,
-				public AutoListElement<SoraMemoryFile> {
+				public SoraNamedObject {
 	public:
 		SoraMemoryFile(const SoraWString& filename): dataPtr(NULL) { read(filename); }
 		SoraMemoryFile(stringId filename): dataPtr(NULL) { read(filename); }
@@ -40,12 +39,6 @@ namespace sora {
 		}
 					
 		void read(const SoraWString& filename) {
-			Members::iterator itObj = std::find_if(members.begin(), members.end(), std::bind2nd(compareObjectName(), str2id(filename)));
-			if(itObj != members.end()) {
-				*this = **itObj;
-				return;
-			}
-			
 			ulong32 size;
 			void* pData = SORA->getResourceFile(filename, size);
 			if(pData && size != 0) {

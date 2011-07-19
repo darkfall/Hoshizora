@@ -433,16 +433,6 @@ namespace sora {
 		
 		if(pMiscTool) delete pMiscTool;
 		
-		// free all memory files
-		SoraMemoryFile::Members memoryFiles = SoraMemoryFile::members;
-		SoraMemoryFile::Members::iterator itMember = memoryFiles.begin();
-		while(itMember != memoryFiles.end()) {
-			delete *itMember;
-			*itMember = NULL;
-			
-			++itMember;
-		}
-		
 		SoraEventManager::Destroy();
 		// force exiting
 		exit(0);
@@ -1379,8 +1369,8 @@ namespace sora {
         }
     }
     
-    void SoraCore::registerFullscreenBufferDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate) {
-        SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate);
+    void SoraCore::registerFullscreenBufferDelegate(const SoraAbstractDelegate<HSORATEXTURE>& delegate) {
+        SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate.clone());
     }
     
     void SoraCore::pushTransformMatrix() {

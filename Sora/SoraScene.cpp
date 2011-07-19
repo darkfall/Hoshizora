@@ -197,10 +197,15 @@ namespace sora {
                                     mWidth,
                                     mHeight);
         } else {
-            sora::SORA->setClipping((int32)mCamera->getPositionX(),
-                                    (int32)mCamera->getPositionY(),
-                                    (int32)mCamera->getViewWidth(),
-                                    (int32)mCamera->getViewHeight());
+            int32 rWidth = mWidth > (int32)mCamera->getViewWidth() ? (int32)mCamera->getViewWidth() : mWidth;
+            int32 rHeight = mHeight > (int32)mCamera->getViewHeight() ? (int32)mCamera->getViewHeight() : mHeight;
+            int32 rx = (int32)getPositionX() < (int32)mCamera->getPositionX() ? (int32)mCamera->getPositionX(): (int32)getPositionX();
+            int32 ry = (int32)getPositionY() < (int32)mCamera->getPositionY() ? (int32)mCamera->getPositionY(): (int32)getPositionY();
+            
+            sora::SORA->setClipping(rx,
+                                    ry,
+                                    rWidth,
+                                    rHeight);
         }
         
         LayerMap::iterator itLayer = mLayers.begin();

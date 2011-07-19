@@ -323,6 +323,8 @@
 		88B3882513C431F2008AF50E /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387FC13C431F1008AF50E /* libxml2.2.dylib */; };
 		88B3882613C431F2008AF50E /* libzvbi.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B387FD13C431F1008AF50E /* libzvbi.0.dylib */; };
 		88B3882813C43843008AF50E /* SoraException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B3882713C43842008AF50E /* SoraException.cpp */; };
+		88B5C0C013D5CB780034B874 /* AutoContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B5C0BF13D5CB780034B874 /* AutoContainer.cpp */; };
+		88B5C0C213D5CCF90034B874 /* SoraExternalRenderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B5C0C113D5CCF90034B874 /* SoraExternalRenderObject.cpp */; };
 		88B6F80013CB1CB4005F2E0D /* SoraDirectoryIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6F7FF13CB1CB4005F2E0D /* SoraDirectoryIterator.cpp */; };
 		88B6F80313CB2941005F2E0D /* SoraModifierAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B6F80213CB2941005F2E0D /* SoraModifierAdapter.cpp */; };
 		88BA9E03135A972100C282EB /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88BA9E01135A972100C282EB /* SoraSpriteAnimation.cpp */; };
@@ -1258,6 +1260,9 @@
 		88B387FC13C431F1008AF50E /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libxml2.2.dylib; sourceTree = "<group>"; };
 		88B387FD13C431F1008AF50E /* libzvbi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libzvbi.0.dylib; sourceTree = "<group>"; };
 		88B3882713C43842008AF50E /* SoraException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraException.cpp; sourceTree = "<group>"; };
+		88B5C0BE13D5CAB50034B874 /* SoraExternalRenderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraExternalRenderObject.h; sourceTree = "<group>"; };
+		88B5C0BF13D5CB780034B874 /* AutoContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AutoContainer.cpp; sourceTree = "<group>"; };
+		88B5C0C113D5CCF90034B874 /* SoraExternalRenderObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraExternalRenderObject.cpp; sourceTree = "<group>"; };
 		88B6F7FC13CB18AF005F2E0D /* SoraDirectoryIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDirectoryIterator.h; sourceTree = "<group>"; };
 		88B6F7FD13CB18BD005F2E0D /* SoraDirectoryIteratorImplWindows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDirectoryIteratorImplWindows.h; sourceTree = "<group>"; };
 		88B6F7FE13CB18C6005F2E0D /* SoraDirectoryIteratorImplUnix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDirectoryIteratorImplUnix.h; sourceTree = "<group>"; };
@@ -3079,6 +3084,7 @@
 				88D87D2512A09A66007D6865 /* Hoshizora.h */,
 				8860324C138119BB00C3B63B /* RefCounted.h */,
 				88374D8C1325A12900369B12 /* AutoContainer.h */,
+				88B5C0BF13D5CB780034B874 /* AutoContainer.cpp */,
 				889BFD4312BF4D23002D8A2F /* CoreTransformer.h */,
 				88A8652213732C9B003A3CDE /* SoraEnvValues.h */,
 				88A8652113732C9B003A3CDE /* SoraEnvValues.cpp */,
@@ -3225,6 +3231,8 @@
 				887C59C613CF2AB40009E508 /* SoraPrefab.h */,
 				8876934D13D20A6D0071C8C1 /* SoraFSM.h */,
 				8876934E13D20A740071C8C1 /* SoraFSM.cpp */,
+				88B5C0BE13D5CAB50034B874 /* SoraExternalRenderObject.h */,
+				88B5C0C113D5CCF90034B874 /* SoraExternalRenderObject.cpp */,
 				88A8D68E13D403BE007A6488 /* SoraLayer.h */,
 				88A8D68F13D409C9007A6488 /* SoraLayer.cpp */,
 				8876935013D20A790071C8C1 /* SoraScene.h */,
@@ -3833,6 +3841,8 @@
 				8876935213D20A7F0071C8C1 /* SoraScene.cpp in Sources */,
 				88A8D69013D409C9007A6488 /* SoraLayer.cpp in Sources */,
 				88457DF013D532BC0051435C /* SoraCameraModifiers.cpp in Sources */,
+				88B5C0C013D5CB780034B874 /* AutoContainer.cpp in Sources */,
+				88B5C0C213D5CCF90034B874 /* SoraExternalRenderObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

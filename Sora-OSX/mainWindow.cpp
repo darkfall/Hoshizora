@@ -54,6 +54,8 @@
 #include "SoraModifierAdapter.h"
 #include "modifiers/SoraFontModifiers.h"
 
+#include "SoraExternalRenderObject.h"
+
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
@@ -77,6 +79,17 @@ bool mainWindow::updateFunc() {
     
 }
 
+sora::SoraSprite* spr;
+
+void myRenderFunc(sora::SoraObject& obj) {
+    spr->render();
+    
+    sora::SoraLayer* layer = dynamic_cast<sora::SoraLayer*>(&obj);
+    if(layer != NULL) {
+        printf("%f, %f, %d\n", layer->getPositionX(), layer->getPositionY(), layer->getLayerDepth());
+    }
+}
+
 bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
@@ -96,23 +109,26 @@ void mainWindow::init() {
     mScene2 = new sora::SoraScene(1000, 1000);
     
     mCamera = new sora::SoraCamera(100, 100.f, 500.f, 500.f);
-    mCamera->zoomTo(2.f, 2.f, 20.f);
+  //  mCamera->zoomTo(2.f, 2.f, 20.f);
     mScene1->setCamera(mCamera);
     
     mScene1->add(mScene2);
     sora::SoraSprite* bg = sora::SORA->createSprite(L"background.png");
     mScene1->add(bg, 0);
     
-    sora::SoraSprite* spr = sora::SORA->createSprite(L"geotest.png");
+    mScene2->add(new sora::SoraExternalRenderObject(sora::Delegate(myRenderFunc)), 1);
+    spr = sora::SORA->createSprite(L"geotest.png");
     spr->setCenter(100, 100);
+    
     //spr->setPosition(300, 300);
-    mScene2->add(spr);
+  //  mScene2->add(spr);
     mScene2->setPosition(200.f, 200.f);
   //  mScene2->setRotation(sora::F_PI_4/2);
  //   mScene2->setScale(2.f, 2.f);
     
     sora::SoraScene* mScene3 = new sora::SoraScene(150, 150);
-    mScene3->add(sora::SORA->createSprite(L"test.png"));
+    mScene3->add(sora::SORA->createSprite(L"test.png"), 1);
+    mScene3->add(sora::SORA->createSprite(L"bullet2.png"), 0);
     mScene2->add(mScene3);
   //  mScene3->setRotation(sora::F_PI_4);
     

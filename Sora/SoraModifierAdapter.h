@@ -11,7 +11,8 @@
 
 #include "SoraPlatform.h"
 #include "SoraImageEffect.h"
-#include "AutoContainer.h"
+
+#include <list>
 
 namespace sora {
     
@@ -20,9 +21,18 @@ namespace sora {
      *  Such as SoraObject
      **/
     
-    class SORA_API SoraAbstractModiferAdapter: public AutoListElement<SoraAbstractModiferAdapter> {
+    class SORA_API SoraAbstractModiferAdapter {
+    protected:
+        SoraAbstractModiferAdapter();
+        virtual ~SoraAbstractModiferAdapter();
+        
     public:
+        typedef std::list<SoraAbstractModiferAdapter*> Members;
+
         virtual void update(float32 dt) = 0;
+        
+    public:
+        static Members members;
     };
     
     template<typename T>

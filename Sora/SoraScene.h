@@ -118,7 +118,7 @@ namespace sora {
         
         float32 mRotation;
         float32 mHScale, mVScale;
-                
+                        
         typedef std::map<int32, SoraLayer*> LayerMap;
         LayerMap mLayers;
         

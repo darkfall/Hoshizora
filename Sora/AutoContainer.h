@@ -40,7 +40,7 @@ namespace sora {
 	public:		
 		static Members members;
 	};
-	
+    
 	template<typename T>
 	std::list<T*> AutoListElement<T>::members;
 	
