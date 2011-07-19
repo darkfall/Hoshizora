@@ -719,11 +719,9 @@ bool HGE_Impl::_GfxInit()
 
 	pD3D->GetAdapterIdentifier(D3DADAPTER_DEFAULT, 0, &AdID);
 	char dd[256];
-	sprintf(dd, "D3D Driver: %s Description: %s Version: %d.%d.%d.%d", AdID.Driver, AdID.Description,
+	sprintf(dd, "DirectX 9 Graphic: %s Version: %d.%d", AdID.Description,
 			HIWORD(AdID.DriverVersion.HighPart),
-			LOWORD(AdID.DriverVersion.HighPart),
-			HIWORD(AdID.DriverVersion.LowPart),
-			LOWORD(AdID.DriverVersion.LowPart));
+			LOWORD(AdID.DriverVersion.HighPart));
 	deviceInfo = dd;
 
 // Set up Windowed presentation parameters
