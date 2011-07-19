@@ -765,7 +765,7 @@ namespace sora{
 		_oglWindowInfo.y		=	y;
 		_oglWindowInfo.dx		=	dx;
 		_oglWindowInfo.dy		=	dy;
-		_oglWindowInfo.rot		=	rot;
+		_oglWindowInfo.rot		=	RAD_DGR(rot);
 		_oglWindowInfo.hscale	=	hscale!=0.f?hscale:1.f;
 		_oglWindowInfo.vscale	=	vscale!=0.f?hscale:1.f;
 
