@@ -30,21 +30,25 @@ namespace sora {
         FreeHandleSlot(mHandleId);
 	}
 	
-	uint32 SoraObject::update(float32 dt){
-        SoraObject* obj = mSubObjects;
-        while(obj != NULL) {
-            obj->update(dt);
-            obj = obj->next();
+	uint32 SoraObject::update(float32 dt) {
+        if(mSubObjectSize != 0) {
+            SoraObject* obj = mSubObjects;
+            while(obj != NULL) {
+                obj->update(dt);
+                obj = obj->next();
+            }
         }
 	
 		return 0;
 	}
 	
 	void SoraObject::render() {
-        SoraObject* obj = mSubObjects;
-        while(obj != NULL) {
-            obj->render();
-            obj = obj->next();
+        if(mSubObjectSize != 0) {
+            SoraObject* obj = mSubObjects;
+            while(obj != NULL) {
+                obj->render();
+                obj = obj->next();
+            }
         }
 	}
 	

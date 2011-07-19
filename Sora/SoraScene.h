@@ -21,6 +21,7 @@
 #include "SoraObject.h"
 #include "SoraCanvas.h"
 #include "SoraLayer.h"
+#include "SoraCamera.h"
 
 #include <map>
 
@@ -30,20 +31,7 @@ namespace sora {
     public:
         SoraScene(int32 width, int32 height);
         ~SoraScene();
-        
-        int32	getWidth() const;
-        int32	getHeight() const;
-        void    adjustSize(int32 width, int32 height);
-        
-        void setParent(SoraObject* obj);
-        
-        void    setRotation(float32 rot);
-        float32 getRotation() const;
-        
-        void setScale(float32 scaleh, float32 scalev);
-        void getScale(float32* scaleh, float32* scalev);
-        
-        
+    
         /**
          *  add function inherited from SoraObject
          *  would use obj->getName() as the name of the object
@@ -97,17 +85,48 @@ namespace sora {
 		virtual void    render();
 		virtual uint32  update(float32 dt);
         
+        int32	getWidth() const;
+        int32	getHeight() const;
+        void    adjustSize(int32 width, int32 height);
+        
+        void    setParent(SoraObject* obj);
+        
+        void    setRotation(float32 rot);
+        float32 getRotation() const;
+        
+        void    setScale(float32 scaleh, float32 scalev);
+        void    getScale(float32* scaleh, float32* scalev);
+        
+        void    rotateTo(float32 rot, float32 inTime);
+        void    moveTo(float32 x, float32 y, float32 inTime);
+        void    scaleTo(float32 hs, float32 vs, float32 inTime);
+        
+        void    setPosition(float32 x, float32 y);
+        
+        void    enableRenderToCanvas(bool flag);
+        bool    isRenderToCanvasEnabled() const;
+        SoraBaseCanvas* getCanvas() const;
+        
+        void        setCamera(SoraCamera* camera);
+        SoraCamera* getCamera() const;
+        
     private:
+        void _adjustSize();
+        
         int32 mWidth, mHeight;
         int32 mRealWidth, mRealHeight;
         
         float32 mRotation;
         float32 mHScale, mVScale;
-        
+                
         typedef std::map<int32, SoraLayer*> LayerMap;
         LayerMap mLayers;
         
         SoraScene* mParentScene;
+        SoraCamera* mCamera;
+
+        bool mRenderToCanvas;
+        SoraBaseCanvas* mCanvas;
     };
     
     

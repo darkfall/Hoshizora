@@ -54,9 +54,11 @@ int main(int argc, char* argv[]) {
 	sora->registerFontManager(new sora::SoraFTFontManager);
 	sora->registerInput(new sora::SoraOGLInput);
   //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
-	
+
     sora::SoraGestureRecognizer::Instance();
-	sora->createWindow(new peMainWindow);
+	sora->createWindow(new mainWindow);
+  //  sora::SORA->enableFullscreenBuffer(true);
+
 	sora->start();
 		
 	return 0;

@@ -22,7 +22,7 @@ namespace sora {
     
     int32 SoraFontRotationModifier::update(float32 dt) {
         mCurrTime += dt;
-        mCurrVal = (mEnd - mBegin) * (mCurrTime / mInTime) + mBegin;
+        mCurrVal = slerp(mBegin, mEnd, mCurrTime/mInTime);
         if(mCurrTime >= mInTime) {
             return ModifierUpdateEnd;
         }
@@ -55,7 +55,7 @@ namespace sora {
     
     int32 SoraFontScaleModifier::update(float32 dt) {
         mCurrTime += dt;
-        mCurrVal = (mEnd - mBegin) * (mCurrTime / mInTime) + mBegin;
+        mCurrVal = slerp(mBegin, mEnd, mCurrTime/mInTime);
         if(mCurrTime >= mInTime) {
             return ModifierUpdateEnd;
         }

@@ -28,14 +28,17 @@ namespace sora {
     template<typename T>
     class SORA_API SoraModifierAdapter: public SoraAbstractModiferAdapter {
     public:
-        SoraModifierAdapter(T* obj) {
+        SoraModifierAdapter(T* obj, bool retain=false) {
             assert(obj != NULL);
             mObj = obj;
+            mRetain = retain;
         }
-        SoraModifierAdapter(T* obj, SoraModifier<T>* modi) {
+        SoraModifierAdapter(T* obj, SoraModifier<T>* modi, bool retain=false) {
             mObj = obj;
             add(modi);
+            mRetain = retain;
         }
+        
         void update(float32 dt) {
             if(!mModifiers.empty()) {
                 typename ModifierList::iterator itModifier = mModifiers.begin();
@@ -52,8 +55,10 @@ namespace sora {
                     }
                     ++itModifier;
                 }
-            } else 
-                delete this;
+            } else {
+                if(!mRetain)
+                    delete this;
+            }
         }
         
         void add(SoraModifier<T>* modi) {
@@ -69,11 +74,13 @@ namespace sora {
         typedef std::list<SoraModifier<T>*> ModifierList;
 		ModifierList mModifiers;
         T* mObj;
+    
+        bool mRetain;
     };
     
     template<typename MT>
-    SORA_API SoraModifierAdapter<MT>* CreateModifierAdapter(MT* obj, SoraModifier<MT*> modifier) {
-        return new SoraModifierAdapter<MT>(obj, modifier);
+    static SoraModifierAdapter<MT>* CreateModifierAdapter(MT* obj, SoraModifier<MT>* modifier, bool retain=false) {
+        return new SoraModifierAdapter<MT>(obj, modifier, retain);
     }
 } // namespace sora
 

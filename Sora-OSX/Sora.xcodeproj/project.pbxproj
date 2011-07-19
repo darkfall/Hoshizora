@@ -92,6 +92,7 @@
 		88452D0E138F9CBF0045D130 /* CloseModifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88452D0D138F9CBF0045D130 /* CloseModifier.cpp */; };
 		88452D58138FAB970045D130 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88452D55138FAB970045D130 /* Sound.cpp */; };
 		88452EC91390D81B0045D130 /* LabelSliderLinker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88452EC81390D81B0045D130 /* LabelSliderLinker.cpp */; };
+		88457DF013D532BC0051435C /* SoraCameraModifiers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88457DEF13D532BC0051435C /* SoraCameraModifiers.cpp */; };
 		88504B9912ECDB4E009B9F45 /* SFMT.c in Sources */ = {isa = PBXBuildFile; fileRef = 88504B9712ECDB4E009B9F45 /* SFMT.c */; };
 		8851F6F1135FA97900091C9C /* libfmodexL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8851F6F0135FA97900091C9C /* libfmodexL.dylib */; };
 		8859220213C187AA00EF986E /* OSXIconWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8859220113C187AA00EF986E /* OSXIconWrapper.mm */; };
@@ -670,6 +671,8 @@
 		88452EC71390D81B0045D130 /* LabelSliderLinker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelSliderLinker.h; sourceTree = "<group>"; };
 		88452EC81390D81B0045D130 /* LabelSliderLinker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LabelSliderLinker.cpp; sourceTree = "<group>"; };
 		884530971390F75B0045D130 /* peMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = peMainWindow.h; path = ../SoraParticleEditor/peMainWindow.h; sourceTree = SOURCE_ROOT; };
+		88457DEE13D532B60051435C /* SoraCameraModifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCameraModifiers.h; sourceTree = "<group>"; };
+		88457DEF13D532BC0051435C /* SoraCameraModifiers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraCameraModifiers.cpp; sourceTree = "<group>"; };
 		884CC87312F88E1300FD18FC /* TemplateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateTransformer.h; sourceTree = "<group>"; };
 		88504B8A12ECDB4E009B9F45 /* SFMT-alti.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFMT-alti.h"; sourceTree = "<group>"; };
 		88504B8B12ECDB4E009B9F45 /* SFMT-params.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFMT-params.h"; sourceTree = "<group>"; };
@@ -2264,6 +2267,8 @@
 				887C5A7C13D0857F0009E508 /* SoraFontModifiers.cpp */,
 				887C5A8013D093F40009E508 /* SoraObjectModifiers.h */,
 				887C5B0E13D094D60009E508 /* SoraObjectModifiers.cpp */,
+				88457DEE13D532B60051435C /* SoraCameraModifiers.h */,
+				88457DEF13D532BC0051435C /* SoraCameraModifiers.cpp */,
 			);
 			path = modifiers;
 			sourceTree = "<group>";
@@ -3827,6 +3832,7 @@
 				8876934F13D20A740071C8C1 /* SoraFSM.cpp in Sources */,
 				8876935213D20A7F0071C8C1 /* SoraScene.cpp in Sources */,
 				88A8D69013D409C9007A6488 /* SoraLayer.cpp in Sources */,
+				88457DF013D532BC0051435C /* SoraCameraModifiers.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

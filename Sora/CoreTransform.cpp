@@ -1,6 +1,71 @@
 #include "CoreTransform.h"
 
 namespace sora {
+    
+    CoreTransform::CoreTransform(float32 _f): 
+    f1(_f), 
+    bClean(false), 
+    iKind(TRANSFORM_1F) {
+    }
+    
+    CoreTransform::CoreTransform(float32 _f1, float32 _f2): 
+    f1(_f1), 
+    f2(_f2), 
+    bClean(false), 
+    iKind(TRANSFORM_2F) {
+    }
+    
+    CoreTransform::CoreTransform(float32 _f1, float32 _f2, float32 _f3): 
+    f1(_f1), 
+    f2(_f2), 
+    f3(_f3), 
+    bClean(false), 
+    iKind(TRANSFORM_3F) {
+    }
+    
+    CoreTransform::CoreTransform(float32 _f1, float32 _f2, float32 _f3, float32 _f4):
+    f1(_f1), 
+    f2(_f2), 
+    f3(_f3), 
+    f4(_f4), 
+    bClean(false), 
+    iKind(TRANSFORM_4F) {
+    }
+	
+    CoreTransform::CoreTransform():
+    bClean(true), 
+    iKind(0) {
+    }
+    
+    void CoreTransform::Set(float32 _f) { 
+        f1 = _f; 
+        bClean = false;
+        iKind = TRANSFORM_1F;
+    }
+    
+    void CoreTransform::Set(float32 _f1, float32 _f2) {
+        f1 = _f1; 
+        f2 = _f2;
+        bClean = false;
+        iKind = TRANSFORM_2F;
+    }
+    
+    void CoreTransform::Set(float32 _f1, float32 _f2, float32 _f3) { 
+        f1 = _f1;
+        f2 = _f2; 
+        f3 = _f3;
+        bClean = false; 
+        iKind = TRANSFORM_3F;
+    }
+    
+    void CoreTransform::Set(float32 _f1, float32 _f2, float32 _f3, float32 _f4) {
+        f1 = _f1;
+        f2 = _f2;
+        f3 = _f3;
+        f4 = _f4;
+        bClean = false;
+        iKind = TRANSFORM_4F; 
+    }
 	
 	CoreTransform CoreTransform::GetDist(const CoreTransform& t2, int divider) {
 		if(divider == 0)
@@ -22,7 +87,7 @@ namespace sora {
 		return *this;
 	}
 
-	CoreTransform CoreTransform::operator / (float32 divider) {
+	CoreTransform CoreTransform::operator / (float32 divider) const {
 		if(bClean) return *this;
 	
 		switch (iKind) {
@@ -34,7 +99,7 @@ namespace sora {
 		return *this;
 	}
 
-	CoreTransform CoreTransform::operator + (const CoreTransform& rhs) {
+	CoreTransform CoreTransform::operator + (const CoreTransform& rhs) const {
 		if(bClean) return rhs;
 		
 		if(iKind != rhs.GetKind()) {
@@ -52,7 +117,7 @@ namespace sora {
 	}
 
 	
-	CoreTransform CoreTransform::operator - (const CoreTransform& rhs) {
+	CoreTransform CoreTransform::operator - (const CoreTransform& rhs) const {
 		if(bClean) return rhs;
 		
 		if(iKind != rhs.GetKind()) {
@@ -69,7 +134,7 @@ namespace sora {
 		return *this;
 	}	
 
-	CoreTransform CoreTransform::operator * (float32 m) {
+	CoreTransform CoreTransform::operator * (float32 m) const {
 		if(bClean) return *this;
 	
 		switch (iKind) {
@@ -154,7 +219,7 @@ namespace sora {
 		return 0.f;
 	}
 
-	bool CoreTransform::operator == (const CoreTransform& rhs) {
+	bool CoreTransform::operator == (const CoreTransform& rhs) const {
 		if(bClean) return false;;
 	
 		if(iKind != rhs.GetKind()) return false;

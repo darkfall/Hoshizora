@@ -56,10 +56,6 @@ namespace sora {
 		pingpongState = 0;
 		startTime = pauseTime = topauseTime = 0.f;
 		t_curr = t_src;
-		
-		if(!t_transformer) {
-			t_transformer = new CoreLinearTransformer<CoreTransform>;
-		}
 	}
 	
 	void SoraImageEffect::restart() {
@@ -153,8 +149,12 @@ namespace sora {
 						}
 						break;
 				}
-			} else
-				if(t_transformer) t_curr = t_transformer->slerp(t_src, t_dst, startTime/effectTime);
+			} else {
+				if(t_transformer) 
+                    t_curr = t_transformer->slerp(t_src, t_dst, startTime/effectTime);
+                else 
+                    t_curr = slerp(t_src, t_dst, startTime/effectTime);
+            }
 			
 		}
 		return states;

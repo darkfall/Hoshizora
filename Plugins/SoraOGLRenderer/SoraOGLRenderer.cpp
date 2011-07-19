@@ -163,13 +163,15 @@ namespace sora{
                     , 0.f, 1.f, -1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
-            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
+            
+            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
             glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
             glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
-            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
-            
+            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
+
+
         } else {
-            glViewport(0, 0,
+            glViewport(0,  0,
                        pCurTarget->getWidth(),
                        pCurTarget->getHeight());
             glMatrixMode(GL_PROJECTION);
@@ -178,12 +180,14 @@ namespace sora{
                     pCurTarget->getWidth(),
                     0
                     , pCurTarget->getHeight(), 1.f, -1.f);
+            
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
-            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
+            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
             glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
             glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
-            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
+            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
+
         }
 	}
 
@@ -197,6 +201,7 @@ namespace sora{
 			height = pCurTarget->getHeight();
 
             pCurTarget->attachToRender();
+            setTransform(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
 			CurBlendMode = 0;
             glClearColor(CGETR(color)/255.0f, CGETG(color)/255.0f, CGETB(color)/255.0f, CGETA(color)/255.0f);
 			
@@ -223,6 +228,9 @@ namespace sora{
 
             pCurTarget->detachFromRender();
             pCurTarget = 0;
+            
+            setTransform(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
+            setClipping();
         } else
             iFrameStart = 0;
 		//else
@@ -744,7 +752,16 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
-        glScissor(x, _oglWindowInfo.height-(y+h), w, h);
+        if(w == 0 && h == 0) {
+            w = _oglWindowInfo.width;
+            h = _oglWindowInfo.height;
+        }
+        if(!pCurTarget) {
+            glScissor(x, _oglWindowInfo.height-(y+h), w, h);
+        }
+        else {
+             glScissor(x, y, w, h);
+        }
 	}
     
     void SoraOGLRenderer::setVerticalSync(bool flag) {

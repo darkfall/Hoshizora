@@ -15,16 +15,45 @@
 
 namespace sora {
     
-    class SoraObjectTransitionModifier: public SoraModifier<SoraObject> {
+    template<typename T>
+    class SORA_API SoraTransitionModifier: public SoraModifier<T> {
     public:
-        SoraObjectTransitionModifier(float32 startx, float32 starty, float32 endx, float32 endy, float32 inTime);
-        SoraObjectTransitionModifier(const SoraVector& start, const SoraVector& end, float32 inTime);
+        SoraTransitionModifier(float32 startx, float32 starty, float32 endx, float32 endy, float32 inTime):
+        mBegin(startx, starty),
+        mEnd(endx, endy),
+        mInTime(inTime) {
+            mCurrValue = mBegin;
+            mCurrTime = 0.f;
+        }
+        SoraTransitionModifier(const SoraVector& start, const SoraVector& end, float32 inTime):
+        mBegin(start),
+        mEnd(end),
+        mInTime(inTime) {
+            mCurrValue = mBegin;
+            mCurrTime = 0.f;
+        }
         
-        int32   update(float32 dt);
-        void    modify(SoraObject* obj);
-        void    reset();
+        int32 update(float32 dt) {
+            mCurrTime += dt;
+            mCurrValue = slerp(mBegin, mEnd, mCurrTime/mInTime);
+            if(mCurrTime >= mInTime) {
+                return ModifierUpdateEnd;
+            }
+            return 0;
+        }
         
-        SoraModifier<SoraObject>* clone();
+        void modify(T* obj) {
+            obj->setPosition(mCurrValue.x, mCurrValue.y);
+        }
+    
+        void reset() {
+            mCurrValue = mBegin;
+            mCurrTime = 0.f;
+        }
+        
+        SoraModifier<T>* clone()  {
+            return new SoraTransitionModifier<T>(mBegin, mEnd, mInTime);
+        }
         
     private:
         SoraVector mBegin;
@@ -34,6 +63,7 @@ namespace sora {
         float32 mCurrTime;
     };
     
+    typedef SoraTransitionModifier<SoraObject> SoraObjectPositionModifier;
     
     
 } // namespace sora

@@ -83,6 +83,7 @@ namespace sora {
 		void	setFPS(int32 fps);
 		float32 getFPS();
 		float32 getDelta();
+        float32 getAbsoluteDelta();
 		float32 getTime();
 		int32	getFrameCount();
 		void	setTimeScale(float32 scale);

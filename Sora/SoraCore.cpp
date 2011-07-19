@@ -630,6 +630,10 @@ namespace sora {
 			return pTimer->getDelta();
 		return 1.f;
 	}
+    
+    float32 SoraCore::getAbsoluteDelta() {
+        return pTimer->getDelta();
+    }
 
 	float32 SoraCore::getTime() {
 		return pTimer->getTime();
@@ -1413,4 +1417,5 @@ namespace sora {
                         g_CurrentClipping.h);
         }
     }
+    
 } // namespace sora

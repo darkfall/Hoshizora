@@ -80,6 +80,7 @@ bool mainWindow::updateFunc() {
 bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
+//    mScene1->getCanvas()->render();
     sora::SORA->endScene();
     
 	return false;
@@ -91,23 +92,31 @@ void mainWindow::init() {
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
    
     mScene1 = new sora::SoraScene(getWindowWidth(), getWindowHeight());
-    mScene2 = new sora::SoraScene(300, 300);
+ //   mScene1->enableRenderToCanvas(true);
+    mScene2 = new sora::SoraScene(1000, 1000);
+    
+    mCamera = new sora::SoraCamera(100, 100.f, 500.f, 500.f);
+    mCamera->zoomTo(2.f, 2.f, 20.f);
+    mScene1->setCamera(mCamera);
     
     mScene1->add(mScene2);
-    
     sora::SoraSprite* bg = sora::SORA->createSprite(L"background.png");
     mScene1->add(bg, 0);
     
     sora::SoraSprite* spr = sora::SORA->createSprite(L"geotest.png");
+    spr->setCenter(100, 100);
+    //spr->setPosition(300, 300);
     mScene2->add(spr);
     mScene2->setPosition(200.f, 200.f);
   //  mScene2->setRotation(sora::F_PI_4/2);
-    mScene2->setScale(2.f, 2.f);
+ //   mScene2->setScale(2.f, 2.f);
     
     sora::SoraScene* mScene3 = new sora::SoraScene(150, 150);
     mScene3->add(sora::SORA->createSprite(L"test.png"));
     mScene2->add(mScene3);
-    mScene3->setRotation(90);
+  //  mScene3->setRotation(sora::F_PI_4);
+    
+   // mScene2->moveTo(800.f, 400.f, 10.f);
 }
 
 void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
