@@ -20,8 +20,10 @@ namespace sora {
 	}
 
 	void SoraLocalizer::Destroy() {
-		if(mInstance)
+		if(mInstance) {
 			delete mInstance;
+			mInstance = NULL;
+		}
 	}
 	
 	SoraLocalizer::~SoraLocalizer() {

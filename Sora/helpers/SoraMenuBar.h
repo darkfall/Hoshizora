@@ -106,7 +106,7 @@ namespace sora {
 		SoraEventHandler* mEventHandler;
 	};
 	
-	class SORA_API SoraMenuBar: public SoraSingleton<SoraMenuBar>, public SoraEventHandler {
+	class SORA_API SoraMenuBar: public SoraEventHandler {
     protected:
         friend class SoraSingleton<SoraMenuBar>;
         
@@ -114,7 +114,9 @@ namespace sora {
 		~SoraMenuBar();
 		
     public:
-		
+		static SoraMenuBar* Instance();
+		static void Destroy();
+
 		void addMenu(SoraMenuBarMenu* bar);
 		void delMenu(SoraMenuBarMenu* bar);
 		
@@ -145,6 +147,8 @@ namespace sora {
         void onHotkeyEvent(SoraHotkeyEvent* kev);
 		
 	private:
+		static SoraMenuBar* mInstance;
+
 		inline bool activeMenu(float32 x, float32 y);
 		
 		float32 mMenuBarHeight;

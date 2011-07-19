@@ -13,6 +13,22 @@
 
 namespace sora {
 
+	SoraMenuBar* SoraMenuBar::mInstance = NULL;
+
+	SoraMenuBar* SoraMenuBar::Instance() {
+		if(!mInstance) {
+			mInstance = new SoraMenuBar;
+		}
+		return mInstance;
+	}
+
+	void SoraMenuBar::Destroy() {
+		if(!mInstance) {
+			delete mInstance;
+			mInstance = NULL;
+		}
+	}
+
 	/*void SoraMenuBarClickEvent::setItemName(const std::string& name) {
 		mItemName = name;
 	}

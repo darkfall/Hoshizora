@@ -20,8 +20,10 @@ namespace sora {
     }
     
     void SoraRenderSystemExtension::Destroy() {
-        if(mInstance)
+        if(mInstance) {
             delete mInstance;
+			mInstance = NULL;
+		}
     }
     
     SoraRenderSystemExtension::SoraRenderSystemExtension() {

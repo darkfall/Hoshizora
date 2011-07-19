@@ -11,6 +11,21 @@
 
 namespace sora {
 
+	SoraEnvValues* SoraEnvValues::mInstance = NULL;
+
+	SoraEnvValues* SoraEnvValues::Instance() {
+		if(!mInstance)
+			mInstance = new SoraEnvValues;
+		return mInstance;
+	}
+
+	void SoraEnvValues::Destroy() {
+		if(mInstance) {
+			delete mInstance;
+			mInstance = NULL;
+		}
+	}
+
 	bool SoraEnvValues::getValue(stringId name, bool defaultVal) {
 		VALUE_ITERATOR itVal = values.find(name);
 		if(itVal != values.end()) {

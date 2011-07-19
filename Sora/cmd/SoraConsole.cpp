@@ -174,6 +174,7 @@ namespace sora {
 		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
 		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
 		if(mFont) {			
+			mFont->setLineWidth(mWidth);
 			float32 x = mPositionX + 1.f;
 			float32 y = mPositionY + 1.f;
 			
@@ -185,7 +186,7 @@ namespace sora {
 					
 					if(mHistory[i].mResult.size() != 0) {
 						mFont->setColor(mResultColor);
-						mFont->render(x+mFont->getFontSize()*4, y, FONT_ALIGNMENT_LEFT, mHistory[i].mResult.c_str());
+						mFont->render(x, y, FONT_ALIGNMENT_LEFT, mHistory[i].mResult.c_str());
 						y += mFont->getStringHeight(mHistory[i].mResult.c_str());
 					}
 				}
@@ -199,6 +200,7 @@ namespace sora {
 				mFont->render(mFont->getStringWidth(currLine.c_str()), y, FONT_ALIGNMENT_LEFT, L"|");
 			} else if(mCaretShow >= 1.0f)
 				mCaretShow = 0.0f;
+			mFont->setLineWidth(0.f);
 		}
 	}
 	
@@ -206,6 +208,7 @@ namespace sora {
 		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
 		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
 		if(mFont) {
+			mFont->setLineWidth(mWidth);
 			float32 x = mPositionX + 1.f;
 			float32 y = mPositionY + mHeight - mFontHeight*2 - 1.f;
 			
@@ -240,6 +243,7 @@ namespace sora {
 				if(y <= mPositionY + 1)
 					break;
 			}
+			mFont->setLineWidth(0.f);
 		}
 	}
 	
