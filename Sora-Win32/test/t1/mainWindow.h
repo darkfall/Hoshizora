@@ -17,6 +17,7 @@
 #include "SoraLua/SoraLuaObject.h"
 
 #include "SoraFileChangeEvent.h"
+
 #include "SoraScene.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
@@ -48,6 +49,7 @@ private:
     
     sora::SoraScene* mScene1;
     sora::SoraScene* mScene2;
+    sora::SoraCamera* mCamera;
 };
 
 #endif

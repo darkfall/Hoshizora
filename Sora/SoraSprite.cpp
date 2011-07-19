@@ -123,7 +123,7 @@ namespace sora {
 
 	
 	void SoraSprite::render() {
-        render(gePositionX(), getPositionY());
+        render(getPositionX(), getPositionY());
     }
 
 	void SoraSprite::render(float32 x, float32 y) {

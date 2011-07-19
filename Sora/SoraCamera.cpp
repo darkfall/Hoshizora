@@ -27,7 +27,7 @@ namespace sora {
     mVZoom(1.f),
     mRotation(0.f),
     mPropChanged(true) {
-        mViewRect.Set(0.f, 0.f, SORA->getScreenWidth(), SORA->getScreenHeight());
+        mViewRect.Set(0.f, 0.f, (float32)SORA->getScreenWidth(), (float32)SORA->getScreenHeight());
     }
     
     SoraCamera::~SoraCamera() {
@@ -91,9 +91,10 @@ namespace sora {
     uint32 SoraCamera::update(float32 dt) {
         if(mPropChanged) {
             sora::SORA->setTransform(getPositionX(), getPositionY(), 0.f, 0.f, mRotation, mHZoom, mVZoom);
-            sora::SORA->setClipping(getPositionX(), getPositionY(), mViewRect.x2, mViewRect.y2);
+            sora::SORA->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);
             mPropChanged = false;
         }
+		return 0;
     }
     
     void SoraCamera::render() {
@@ -109,7 +110,7 @@ namespace sora {
     
     void SoraCamera::apply() {
         sora::SORA->setTransform(getPositionX(), getPositionY(), 0.f, 0.f, mRotation, mHZoom, mVZoom);
-        sora::SORA->setClipping(getPositionX(), getPositionY(), mViewRect.x2, mViewRect.y2);
+        sora::SORA->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);
     }
     
     void SoraCamera::moveTo(float32 x, float32 y, float32 inTime) {

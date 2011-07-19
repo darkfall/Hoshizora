@@ -124,7 +124,7 @@ namespace sora {
     
     inline int32 slerp(int32 start, int32 end, float32 r) {
         r >= 1.f ? r = 1.f: r;
-        return start + (end - start) * r;
+        return (int32)(start + (end - start) * r);
     }
     
     inline SoraVector slerp(const SoraVector& start, const SoraVector& end, float32 r) {

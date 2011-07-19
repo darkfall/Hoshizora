@@ -1518,6 +1518,9 @@
     <ClInclude Include="..\..\..\Sora\SoraLayer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\modifiers\SoraCameraModifiers.h">
+      <Filter>头文件\modifiers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\hgerect.cpp">
@@ -2316,6 +2319,12 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraLayer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\modifiers\SoraCameraModifiers.cpp">
+      <Filter>头文件\modifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraCamera.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
