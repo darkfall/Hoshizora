@@ -106,9 +106,7 @@ namespace sora {
         
         void setUseSysTerm(bool flag);
 		
-	private:
-        static SoraConsole* mInstance;
-        
+	private:        
 		void drawCmds();
 		void drawMssg();
 		void drawTab();

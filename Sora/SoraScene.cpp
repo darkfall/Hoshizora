@@ -110,7 +110,6 @@ namespace sora {
             THROW_SORA_EXCEPTION("Error creating new layer");
         else {
             mLayers.insert(std::make_pair(layerDepth, layer));
-            layer->setPosition(getPositionX(), getPositionY());
         }
         return layer;
     }
@@ -197,10 +196,10 @@ namespace sora {
                                     mWidth,
                                     mHeight);
         } else {
-            int32 rWidth = mWidth > (int32)mCamera->getViewWidth() ? (int32)mCamera->getViewWidth() : mWidth;
-            int32 rHeight = mHeight > (int32)mCamera->getViewHeight() ? (int32)mCamera->getViewHeight() : mHeight;
             int32 rx = (int32)getPositionX() < (int32)mCamera->getPositionX() ? (int32)mCamera->getPositionX(): (int32)getPositionX();
             int32 ry = (int32)getPositionY() < (int32)mCamera->getPositionY() ? (int32)mCamera->getPositionY(): (int32)getPositionY();
+            int32 rWidth = mCamera->getPositionX()+mCamera->getViewWidth()-rx;
+            int32 rHeight = mCamera->getPositionY()+mCamera->getViewHeight()-ry;
             
             sora::SORA->setClipping(rx,
                                     ry,

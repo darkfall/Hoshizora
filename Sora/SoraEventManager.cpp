@@ -6,7 +6,9 @@
 
 namespace sora {
     
-    SoraEventManager* SoraEventManager::mInstance = NULL;
+    namespace {
+        static SoraEventManager* mInstance = NULL;
+    }
     
     SoraEventManager* SoraEventManager::Instance() {
         if(!mInstance)

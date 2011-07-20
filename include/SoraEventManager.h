@@ -44,7 +44,7 @@ namespace sora {
 		EVENT_HANDLER_CONT evHandlers;
 	};
 
-	class SoraEventManager {
+	class SORACALL SoraEventManager {
 		SoraEventManager();
 		~SoraEventManager();
 		
@@ -54,58 +54,56 @@ namespace sora {
         
 		//~SoraEventManager();
 
-		void SORACALL registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev);
-		void SORACALL unregisterEvent(const SoraString& eventName);
-		void SORACALL unregisterHandlerFromEvent(const SoraString& eventName, SoraEventHandler* handler);
+		void registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev);
+		void unregisterEvent(const SoraString& eventName);
+		void unregisterHandlerFromEvent(const SoraString& eventName, SoraEventHandler* handler);
 
 		/*
 		 if ev == 0 in registerEvent
 		 then call this sendMessage will do nothing
 		 */
-		void SORACALL sendMessage(const SoraString& eventName, const SoraString& params, ulong32 receiver=0);
+		void sendMessage(const SoraString& eventName, const SoraString& params, ulong32 receiver=0);
 		/*
 		 publish events to a all handlers under eventName
 		 */
-		void SORACALL sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 receiver=0);
+		void sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 receiver=0);
 		
 		/*
 		 create a timer event
 		 handler would receive a event, event type = SoraTimerEvent after time seconds
 		 */
-		void SORACALL createTimerEvent(SoraEventHandler* handler, float32 time, bool repeat=false);
-		void SORACALL createTimerEvent(const SoraEventHandlerPack& pack, float32 time, bool repeat=false);
+		void createTimerEvent(SoraEventHandler* handler, float32 time, bool repeat=false);
+		void createTimerEvent(const SoraEventHandlerPack& pack, float32 time, bool repeat=false);
 		/*
 		 register a timer event
 		 inheritate your class from SoraTimerEvent to pass your data to handler
 		 */
-		void SORACALL registerTimerEvent(SoraEventHandler* handler, SoraTimerEvent* ev, float32 time, bool repeat=false);
-		void SORACALL unregisterTimerEvent(SoraEventHandler* handler);
-		void SORACALL registerTimerEvent(const SoraEventHandlerPack& handler, SoraTimerEvent* ev, float32 time, bool repeat=false);
-		void SORACALL unregisterTimerEvent(SoraEventHandlerPack* handler);
+		void registerTimerEvent(SoraEventHandler* handler, SoraTimerEvent* ev, float32 time, bool repeat=false);
+		void unregisterTimerEvent(SoraEventHandler* handler);
+		void registerTimerEvent(const SoraEventHandlerPack& handler, SoraTimerEvent* ev, float32 time, bool repeat=false);
+		void unregisterTimerEvent(SoraEventHandlerPack* handler);
 		
 		/*
 		 you should call this in your key event pool in order to let components know there is a key input event 
 		 */
-		void SORACALL publishInputEvent(SoraKeyEvent* kev);
+		void publishInputEvent(SoraKeyEvent* kev);
 		/*
 		 register key input event handlers
 		 */
-		void SORACALL registerInputEventHandler(SoraEventHandler* handler);
-		void SORACALL unregisterInputEventHandler(SoraEventHandler* handler);
+		void registerInputEventHandler(SoraEventHandler* handler);
+		void unregisterInputEventHandler(SoraEventHandler* handler);
 		
 		
 		/*
 		 register file change event handler
 		 */
-		void SORACALL registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler);
-		void SORACALL unregisterFileChangeEventHandler(SoraEventHandler* handler);
-		void SORACALL setFileChangeDetectionInterval(float32 interval);
+		void registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler);
+		void unregisterFileChangeEventHandler(SoraEventHandler* handler);
+		void setFileChangeDetectionInterval(float32 interval);
 		
-		void SORACALL update(float32 dt);
+		void update(float32 dt);
 
-	private:
-        static SoraEventManager* mInstance;
-        
+	private:        
 		class SoraEventInfo {
 		public:
 			friend class SoraEventManager;

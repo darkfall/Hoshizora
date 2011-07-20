@@ -326,7 +326,9 @@ static void msleep(uint32_t msec) {
  use RTTI for SoraEvents and so on,
  if disabled, then SoraEvent must give it's unique name for type identification
 */
+#ifndef SORA_DLL_EXPORT
 #define SORA_USE_RTTI
+#endif
 
 /*
  if disabled, all exception would be disabled

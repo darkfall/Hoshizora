@@ -317,6 +317,7 @@ namespace sora {
                     
                     SoraConsole::Instance()->render();
                     
+                    SoraEventManager::Instance()->update(getDelta());
                     
                     if(bMainScene) {
                         bMainScene = false;

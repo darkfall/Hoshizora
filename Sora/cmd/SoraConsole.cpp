@@ -17,7 +17,9 @@
 
 namespace sora {
     
-    SoraConsole* SoraConsole::mInstance = NULL;
+    namespace {
+        static SoraConsole* mInstance = NULL;
+    }
     
     SoraConsole* SoraConsole::Instance() {
         if(!mInstance)

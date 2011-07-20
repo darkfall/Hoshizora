@@ -50,7 +50,7 @@ namespace sora {
     }
     
     void SoraCamera::setZoom(float32 h, float32 v) {
-        if(mHZoom != h && mVZoom != v) {
+        if(mHZoom != h || mVZoom != v) {
             mHZoom = h;
             mVZoom = v;
             mPropChanged = true;
@@ -70,7 +70,7 @@ namespace sora {
     }
     
     void SoraCamera::setPosition(float32 x, float32 y) {
-        if(mPosx != x && mPosy != y) {
+        if(mPosx != x || mPosy != y) {
             mPropChanged = true;
             SoraObject::setPosition(x, y);
         }

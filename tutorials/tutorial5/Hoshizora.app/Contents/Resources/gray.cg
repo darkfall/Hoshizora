@@ -1,0 +1,15 @@
+struct output {
+  float4 color : COLOR;
+};
+
+output Gray(float2 texCoord: TEXCOORD0,
+                     uniform sampler2D decals: TEX0)
+{
+   output OUT;
+   float4 col = tex2D(decals, texCoord);
+   col -= tex2D(decals, texCoord.xy-0.003)*2.7f;
+    col += tex2D(decals, texCoord.xy+0.003)*2.7f;
+    col.rgb = (col.r+col.g+col.b)/3.0;
+   	OUT.color = col;
+   return OUT;
+}
