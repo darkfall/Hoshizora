@@ -28,7 +28,7 @@ namespace sora {
         }
     }
     
-    SoraFSMManager& SoraFSMManager::defState(SoraFSMState* state, const char* name) {
+    SoraFSMManager& SoraFSMManager::defState(SoraFSMState* state, const SoraString& name) {
         stringId uniqueId = GetUniqueStringId(name);
         mStates.insert(std::make_pair(uniqueId, state));
         state->onInitiate();
@@ -36,7 +36,7 @@ namespace sora {
         return *this;
     }
     
-    void SoraFSMManager::delState(const char* name) {
+    void SoraFSMManager::delState(const SoraString& name) {
         stringId uniqueId = GetUniqueStringId(name);
         FSMStateMap::iterator itState = mStates.find(uniqueId);
         if(itState != mStates.end()) {
@@ -46,7 +46,7 @@ namespace sora {
         }
     }
     
-    void SoraFSMManager::switchToState(const char* name) {
+    void SoraFSMManager::switchToState(const SoraString& name) {
         stringId uniqueId = GetUniqueStringId(name);
         FSMStateMap::iterator itState = mStates.find(uniqueId);
         if(itState != mStates.end()) {
@@ -106,7 +106,7 @@ namespace sora {
         mGlobalState = state;
     }
     
-    SoraFSMState* SoraFSMManager::operator[](const char* name) {
+    SoraFSMState* SoraFSMManager::operator[](const SoraString& name) {
         stringId uniqueId = GetUniqueStringId(name);
         FSMStateMap::iterator itState = mStates.find(uniqueId);
         if(itState != mStates.end()) {

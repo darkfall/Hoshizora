@@ -15,7 +15,7 @@ namespace sora {
     
     class SoraMoviePlayerNull: public SoraMoviePlayer {
     public:
-        virtual bool openMedia(const wchar_t* filePath, const char* dis="RGBA") { return false; }
+        virtual bool openMedia(const SoraWString& filePath, const SoraString& dis="RGBA") { return false; }
         virtual void play() {} 
         virtual void stop() {}
         virtual void pause() { }

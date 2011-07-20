@@ -24,10 +24,10 @@ public:
 	
 	virtual void registerPlugin(SoraPlugin* pPlugin);
 	
-	virtual void unistallPlugin(const char* sPluginName);
+	virtual void unistallPlugin(const SoraString& sPluginName);
 	virtual void unistallPlugin(SoraPlugin* pPlugin);
 	
-	virtual SoraPlugin* getPlugin(const char* sPluginName);
+	virtual SoraPlugin* getPlugin(const SoraString& sPluginName);
     
     virtual void update();
 	

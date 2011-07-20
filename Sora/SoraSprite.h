@@ -115,7 +115,7 @@ namespace sora {
         
         void        attachShader(SoraShader*);
         void        detachShader(SoraShader*);
-        SoraShader* attachShader(const wchar_t* shaderPath, const char* entry, SORA_SHADER_TYPE type);
+        SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);
         bool        hasShader() const;
         void        clearShader();
 		

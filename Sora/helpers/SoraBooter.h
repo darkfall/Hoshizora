@@ -17,7 +17,7 @@ namespace sora {
 	
 	class SoraBooter {
 	public:
-		static void loadExPlugins(const wchar_t* bootPath);
+		static void loadExPlugins(const SoraWString& bootPath);
 	};
 	
 } // namespace sora

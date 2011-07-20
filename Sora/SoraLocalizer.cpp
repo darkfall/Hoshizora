@@ -67,13 +67,13 @@ namespace sora {
 						 MB_OK | MB_ICONERROR);
 	}
 	
-	bool SoraLocalizer::addLocaleConf(const wchar_t* confPath) {
+	bool SoraLocalizer::addLocaleConf(const SoraWString& confPath) {
 		llexer* confLexer = new llexer;
 		confLexer->addOperator("@", 1);
 		confLexer->addOperator("=", 2);
 		
 		ulong32 confSize;
-		void* confData = SoraCore::Instance()->getResourceFile(confPath.c_str(), confSize);
+		void* confData = SoraCore::Instance()->getResourceFile(confPath, confSize);
 		if(confData && confLexer->loadFileMem(confData, confSize) == LEX_NO_ERROR) {
 			SoraString localeIdent;
 			LocaleStringMap localeStrMap;
@@ -124,14 +124,14 @@ namespace sora {
 		return false;
 	}
 	
-	SoraWString SoraLocalizer::getStr(const char* ident) {
+	SoraWString SoraLocalizer::getStr(const SoraString& ident) {
 		LocaleStringMap::iterator itStr = currentLocaleMap->second.find(GetUniqueStringId(ident));
 		if(itStr != currentLocaleMap->second.end())
 			return itStr->second;
 		return std::wstring();
 	}
 
-	void SoraLocalizer::setCurrentLocale(const char* localeIdent) {
+	void SoraLocalizer::setCurrentLocale(const SoraString& localeIdent) {
 		LocaleConfMap::iterator itConf = localeConfs.find(localeIdent);
 		if(itConf != localeConfs.end()) {
 			currentLocale = localeIdent;

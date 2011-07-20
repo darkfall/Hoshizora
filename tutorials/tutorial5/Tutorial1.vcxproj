@@ -21,6 +21,12 @@
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge_impl.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
+    <ClInclude Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackMemory.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackReader.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.h" />
     <ClInclude Include="..\..\Sora\ZLIB\crc32.h" />
     <ClInclude Include="..\..\Sora\ZLIB\crypt.h" />
     <ClInclude Include="..\..\Sora\ZLIB\deflate.h" />
@@ -51,6 +57,12 @@
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackMemory.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackReader.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.cpp" />
     <ClCompile Include="..\..\Sora\ZLIB\adler32.c" />
     <ClCompile Include="..\..\Sora\ZLIB\compress.c" />
     <ClCompile Include="..\..\Sora\ZLIB\crc32.c" />
@@ -109,8 +121,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)\..\..\Plugins\SoraFreetypeFont\;$(ProjectDir)\..\..\Sora;$(ProjectDir)\..\..\Plugins;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\..\..\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\..\..\Plugins\SoraFreetypeFont\;$(ProjectDir)\..\..\Sora;$(ProjectDir)\..\..\Plugins\cg;$(ProjectDir)\..\..\Plugins;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\..\Plugins\cg;$(ProjectDir)\..\..\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

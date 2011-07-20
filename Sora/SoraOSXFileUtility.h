@@ -14,7 +14,7 @@
 
 namespace sora {
 	SoraWString osxApplicationPath();
-	bool osxFileExists(const wchar_t* path);
+	bool osxFileExists(const SoraWString& path);
 } // namespace sora
 
 #endif

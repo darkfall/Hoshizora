@@ -15,10 +15,10 @@ class SoraMiscToolWin32: public SoraDefaultMiscTool {
 public:
 	SoraMiscToolWin32(): _hWnd(0) { }
 
-	int32 messageBox(const char* sMessage, const char* sTitle, int32 msgCode) {
+	int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
 		return MessageBoxA(_hWnd, sMessage.c_str(), sTitle.c_str(), msgCode);
 	}
-	int32 messageBox(const wchar_t* sMessage, const wchar_t* sTitle, int32 msgCode) { 
+	int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
 		return MessageBoxW(_hWnd, sMessage.c_str(), sTitle.c_str(), msgCode);
 	}
 

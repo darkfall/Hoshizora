@@ -47,19 +47,19 @@ namespace sora {
 		 if the ident of the conf already exist, then the old one would be replaced
 		 @param confPath, path of the configuration file
 		 */
-		bool addLocaleConf(const wchar_t* confPath);
+		bool addLocaleConf(const SoraWString& confPath);
 		
 		/*
 		 get a str depend on current locale
 		 @param ident, string ident id in the configuration file
 		 */
-		SoraWString getStr(const char* ident);
+		SoraWString getStr(const SoraString& ident);
 		
 		/*
 		 set current locale, this would affect the result of getStr
 		 @param localeIdent, locale ident id in the configuration file
 		 */
-		void setCurrentLocale(const char* localeIdent);
+		void setCurrentLocale(const SoraString& localeIdent);
 		SoraString getCurrentLocale() const { return currentLocale; }
 		
 		

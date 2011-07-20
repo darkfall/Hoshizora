@@ -106,7 +106,7 @@ namespace sora {
 		return mShaders.end();
 	}
 	    
-    SoraShader* SoraShaderContext::attachShader(const wchar_t* file, const char* entry, int32 type) {
+    SoraShader* SoraShaderContext::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
         if(getError() != 0) return NULL;
 		
 		SoraShader* shader = createShader(file, entry, type);

@@ -30,7 +30,7 @@ struct INISectorValue {
 	SoraString key;
 	SoraString value;
 	
-	INISectorValue(const char* _key, const char* _value): key(_key), value(_value) {} 
+	INISectorValue(const SoraString& _key, const SoraString& _value): key(_key), value(_value) {} 
 };
 
 struct INISector {
@@ -45,25 +45,25 @@ public:
 	SoraINIFile();
 	~SoraINIFile();
 	
-	int32 readFile(const wchar_t* path);
+	int32 readFile(const SoraWString& path);
 	int32 readFileMem(void* ptr, ulong32 size);
 	void closeFile();
 	
-	int32		getInt(const char* section, const char* name, int32 iDefault=0);
-	SoraString  getString(const char* section, const char* name, const char* sDefault);
-	float32		getFloat(const char* section, const char* name, float32 fDefault=0.f);
-	bool		getBool(const char* section, const char* name, bool bDefault=false);
+	int32		getInt(const SoraString& section, const SoraString& name, int32 iDefault=0);
+	SoraString  getString(const SoraString& section, const SoraString& name, const SoraString& sDefault);
+	float32		getFloat(const SoraString& section, const SoraString& name, float32 fDefault=0.f);
+	bool		getBool(const SoraString& section, const SoraString& name, bool bDefault=false);
 	
-	void writeInt(const char* section, const char* name, int32 iValue);
-	void writeString(const char* section, const char* name, const char* sValue);
-	void writeFloat(const char* section, const char* name, float32 fValue);
+	void writeInt(const SoraString& section, const SoraString& name, int32 iValue);
+	void writeString(const SoraString& section, const SoraString& name, const SoraString& sValue);
+	void writeFloat(const SoraString& section, const SoraString& name, float32 fValue);
 	
-	vector<INISectorValue> getSector(const char* section);
+	vector<INISectorValue> getSector(const SoraString& section);
 	
 	void Commit();
 
 private:	
-	itSector GetSectorByName(const char* section);
+	itSector GetSectorByName(const SoraString& section);
 	
 	SoraWString sFile;
 	bool bFileWrite;

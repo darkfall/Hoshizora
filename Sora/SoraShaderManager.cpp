@@ -35,7 +35,7 @@ namespace sora {
         
     }
     
-    SoraShader* SoraShaderManager::createShader(const wchar_t* file, const char* entry, int32 type) {
+    SoraShader* SoraShaderManager::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
         stringId sid = GetUniqueStringId(file);
         ShaderMap::iterator itShader = mShaders.find(sid);
         if(itShader != mShaders.end()) {
@@ -52,7 +52,7 @@ namespace sora {
         return shader;
     }
     
-    SoraShader* SoraShaderManager::createUniqueShader(const wchar_t* file, const char* entry, int32 type) {
+    SoraShader* SoraShaderManager::createUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
         
         SoraShader* shader = SoraCore::Instance()->createShader(file, entry, (SORA_SHADER_TYPE)type);
         if(!shader) {

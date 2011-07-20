@@ -54,19 +54,19 @@ namespace sora {
         
 		//~SoraEventManager();
 
-		void registerEvent(const char* eventName, SoraEventHandler* handler, SoraEvent* ev);
-		void unregisterEvent(const char* eventName);
-		void unregisterHandlerFromEvent(const char* eventName, SoraEventHandler* handler);
+		void registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev);
+		void unregisterEvent(const SoraString& eventName);
+		void unregisterHandlerFromEvent(const SoraString& eventName, SoraEventHandler* handler);
 
 		/*
 		 if ev == 0 in registerEvent
 		 then call this sendMessage will do nothing
 		 */
-		void sendMessage(const char* eventName, const char* params, ulong32 receiver=0);
+		void sendMessage(const SoraString& eventName, const SoraString& params, ulong32 receiver=0);
 		/*
 		 publish events to a all handlers under eventName
 		 */
-		void sendMessage(const char* eventName, SoraEvent* ev, ulong32 receiver=0);
+		void sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 receiver=0);
 		
 		/*
 		 create a timer event
@@ -97,7 +97,7 @@ namespace sora {
 		/*
 		 register file change event handler
 		 */
-		void registerFileChangeEventHandler(const wchar_t* file, SoraEventHandler* handler);
+		void registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler);
 		void unregisterFileChangeEventHandler(SoraEventHandler* handler);
 		void setFileChangeDetectionInterval(float32 interval);
 		
@@ -113,7 +113,7 @@ namespace sora {
 
 			SoraString eventId;
 
-			SoraEventInfo(const char* ev, SoraEventHandler* h, SoraEvent* e) :
+			SoraEventInfo(const SoraString& ev, SoraEventHandler* h, SoraEvent* e) :
 				eventId(ev), handler(h), ev(e) {}
 		};
 		
@@ -176,7 +176,7 @@ namespace sora {
 	
 	class SoraLuaEvent: public SoraEvent {
 	public:
-		SoraLuaEvent(const char* _func, const char* _param) {
+		SoraLuaEvent(const SoraString& _func, const SoraString& _param) {
 			func = _func;
 			param = _param;
 		}

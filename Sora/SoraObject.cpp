@@ -129,7 +129,7 @@ namespace sora {
 		return mParent;
 	}
 
-	SoraObject* SoraObject::getObjByName(const char* n) {
+	SoraObject* SoraObject::getObjByName(const SoraString& n) {
         return getObjByName(GetUniqueStringId(n));
 	}
     
@@ -188,7 +188,7 @@ namespace sora {
         return *this;
     }
     
-    SoraObject* SoraObject::operator[](const char* name) {
+    SoraObject* SoraObject::operator[](const SoraString& name) {
         return getObjByName(name);
     }
 } // namespace sora

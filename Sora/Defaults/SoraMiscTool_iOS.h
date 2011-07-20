@@ -21,8 +21,8 @@ namespace sora {
 	
 	class SoraMiscTooliOS: public SoraDefaultMiscTool {
 	public:		
-		int32 messageBox(const char* sMessage, const char* sTitle, int32 msgCode);
-		int32 messageBox(const wchar_t* sMessage, const wchar_t* sTitle, int32 msgCode) { 
+		int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode);
+		int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
 			return messageBox(ws2s(sMessage), ws2s(sTitle), msgCode);
 		}
 		

@@ -16,7 +16,7 @@ namespace sora {
 	
 	class SORA_API SoraSpriteFont: public SoraFont {
 	public:
-		SoraSpriteFont(const wchar_t* font, const char* sequance, int32 width, int32 height);
+		SoraSpriteFont(const SoraWString& font, const SoraString& sequance, int32 width, int32 height);
 		~SoraSpriteFont();
 		
 		void	render(float32 x, float32 y, const wchar_t* text, bool hcenter = false, bool vcenter = false);
@@ -44,7 +44,7 @@ namespace sora {
 		void setScale(float32 scale);
 
 	private:
-		inline void buildPosMap(const char*);
+		inline void buildPosMap(const SoraString&);
 		
 		SoraSprite* mFontSprite;
 		

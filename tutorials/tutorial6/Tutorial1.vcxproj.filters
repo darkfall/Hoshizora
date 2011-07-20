@@ -7,22 +7,25 @@
     <Filter Include="Plugins\SoraHGERenderer">
       <UniqueIdentifier>{d3d0d793-0350-4018-b954-87bfe887e944}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tutorial3">
-      <UniqueIdentifier>{57e2432b-b250-4619-a45f-5cfe14adcf6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Plugins\SoraFreetypeFont">
       <UniqueIdentifier>{dfefe8a3-336a-4bee-83f9-fe8aa33a1327}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins\zlib">
       <UniqueIdentifier>{2c99ac0a-5002-4e1f-9e8a-06e7ada8a8fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\Zipresource">
+      <UniqueIdentifier>{ee1f50d8-d42e-4157-9f4c-b607563bfeed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tutorial5">
+      <UniqueIdentifier>{57e2432b-b250-4619-a45f-5cfe14adcf6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoraMainWindow.h">
-      <Filter>Tutorial3</Filter>
+      <Filter>Tutorial5</Filter>
     </ClInclude>
     <ClInclude Include="Starter.h">
-      <Filter>Tutorial3</Filter>
+      <Filter>Tutorial5</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h">
       <Filter>Plugins\SoraHGERenderer</Filter>
@@ -105,13 +108,28 @@
     <ClInclude Include="..\..\Sora\ZLIB\crypt.h">
       <Filter>Plugins\zlib</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.h">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.h">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.h">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackMemory.h">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackReader.h">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Tutorial3</Filter>
+      <Filter>Tutorial5</Filter>
     </ClCompile>
     <ClCompile Include="SoraMainWindow.cpp">
-      <Filter>Tutorial3</Filter>
+      <Filter>Tutorial5</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp">
       <Filter>Plugins\SoraHGERenderer</Filter>
@@ -190,6 +208,21 @@
     </ClCompile>
     <ClCompile Include="..\..\Sora\ZLIB\deflate.c">
       <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.cpp">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.cpp">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackMemory.cpp">
+      <Filter>Plugins\Zipresource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackReader.cpp">
+      <Filter>Plugins\Zipresource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

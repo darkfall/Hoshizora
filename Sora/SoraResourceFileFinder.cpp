@@ -22,7 +22,7 @@ namespace sora {
 		resourceManagers.push_back(SoraAutoPtr<SoraResourceManager>(rm));
 	}
 	
-	void SoraResourceFileFinder::detachResourceManager(const wchar_t* name) {
+	void SoraResourceFileFinder::detachResourceManager(const SoraWString& name) {
 		for(size_t i=0; i<resourceManagers.size(); ++i) {
 			if(name.compare(resourceManagers[i]->getName()) == 0) {
 				resourceManagers.erase(resourceManagers.begin()+i);
@@ -31,7 +31,7 @@ namespace sora {
 		}
 	}
 	
-	void* SoraResourceFileFinder::readResourceFile(const wchar_t* file, ulong32 size) {
+	void* SoraResourceFileFinder::readResourceFile(const SoraWString& file, ulong32 size) {
 		void* data;
 		for(size_t i=0; i<resourceManagers.size(); ++i) {
 			if((data = resourceManagers[i]->readResourceFile(file, size)) != NULL)
@@ -40,7 +40,7 @@ namespace sora {
 		return 0;
 	}
 	
-	void* SoraResourceFileFinder::getResourceFile(const wchar_t* file, ulong32& size) {
+	void* SoraResourceFileFinder::getResourceFile(const SoraWString& file, ulong32& size) {
 		void* data;
 		for(size_t i=0; i<resourceManagers.size(); ++i) {
 			if((data = resourceManagers[i]->getResourceFile(file, size)) != NULL)
@@ -49,7 +49,7 @@ namespace sora {
 		return 0;
 	}
 	
-	ulong32 SoraResourceFileFinder::getResourceFileSize(const wchar_t* file) { 
+	ulong32 SoraResourceFileFinder::getResourceFileSize(const SoraWString& file) { 
 		ulong32 size;
 		for(size_t i=0; i<resourceManagers.size(); ++i) {
 			if((size = resourceManagers[i]->getResourceFileSize(file)) != 0)
@@ -63,7 +63,7 @@ namespace sora {
 			delete (uint8*)p;
 	}
 	
-	ulong32	SoraResourceFileFinder::loadResourcePack(const wchar_t* file) {
+	ulong32	SoraResourceFileFinder::loadResourcePack(const SoraWString& file) {
 		size_t dotPos = file.rfind('.');
 		SoraWString fileFormat;
 		if(dotPos != SoraWString::npos) {
@@ -100,7 +100,7 @@ namespace sora {
 		}
 	}
 	
-	bool SoraResourceFileFinder::enumFiles(std::vector<SoraWString>& cont, const wchar_t* folder) {
+	bool SoraResourceFileFinder::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
 		for(size_t i=1; i<resourceManagers.size(); ++i) {
 			SoraResourceManager* prm = *resourceManagers[i];
 			

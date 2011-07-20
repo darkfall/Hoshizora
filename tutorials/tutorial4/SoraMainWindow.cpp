@@ -58,7 +58,7 @@ void MainWindow::init() {
 
     sora::SORA->getConsole()->registerCmdHandler(this, "message");
     
-    ulong32 resourcePack = sora::SORA->loadResourcePack(std::wstring(L"resource.zip"));
+    ulong32 resourcePack = sora::SORA->loadResourcePack(L"resource.zip");
     if(!resourcePack)
         THROW_SORA_EXCEPTION("Error loading resource pack");
     else

@@ -17,7 +17,7 @@
 
 namespace soraosx {
 	
-	void enumFilesInFolder(std::vector<SoraWString>& cont, const wchar_t* folder);
+	void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder);
 	
 } // namespace soraosx
 

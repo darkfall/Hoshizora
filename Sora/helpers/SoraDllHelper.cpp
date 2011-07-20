@@ -28,14 +28,14 @@ namespace sora {
 		}
 	}
 	
-	ulong32 SoraDllHelper::getdl(const char* name) {
+	ulong32 SoraDllHelper::getdl(const SoraString& name) {
 		DLL_MAP::iterator itDll = mOpenedDll.find(name);
 		if(itDll != mOpenedDll.end())
 			return itDll->second;
 		return 0;
 	}
 
-	ulong32 SoraDllHelper::opendl(const char* path) {
+	ulong32 SoraDllHelper::opendl(const SoraString& path) {
 		ulong32 result = 0;
 		
 #ifndef OS_WIN32
@@ -69,7 +69,7 @@ namespace sora {
 		}
 	}
 	
-	void* SoraDllHelper::getProc(ulong32 handle, const char* name) {
+	void* SoraDllHelper::getProc(ulong32 handle, const SoraString& name) {
 #ifndef OS_WIN32
 		return dlsym((void*)handle, name.c_str());
 #else

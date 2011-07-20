@@ -73,7 +73,7 @@ namespace sora {
 		void setTab(int32 tabid);
 		int32 getTab() const { return mTab; }
 		
-		void registerCmdHandler(SoraEventHandler* handler, const char* cmd);
+		void registerCmdHandler(SoraEventHandler* handler, const std::string& cmd);
 		void onKeyEvent(SoraKeyEvent* kev);
         void onHotkeyEvent(SoraHotkeyEvent* hev);
 		

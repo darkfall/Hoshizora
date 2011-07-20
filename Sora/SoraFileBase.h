@@ -15,7 +15,7 @@ namespace sora {
 		SoraFileBase(): isopen(false) {}
 		virtual ~SoraFileBase() {}
 
-		virtual int32 readFile(const wchar_t* sFile) = 0;
+		virtual int32 readFile(const SoraWString& sFile) = 0;
 		virtual int32 readFileMem(void* pstr, ulong32 filesize) = 0;
 		virtual void  closeFile() = 0;
 		

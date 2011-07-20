@@ -74,7 +74,7 @@ namespace sora {
          add a sample texture
          may use as TEX1 in shader
          */
-		virtual void setTexture(const char* decalName, ulong32 tex) = 0;
+		virtual void setTexture(const SoraString& decalName, ulong32 tex) = 0;
 
 		/*
 			Get the type of the shader
@@ -120,7 +120,7 @@ namespace sora {
          * @param type, the type of the shader, see SORA_SHADER_TYPE
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
-        virtual SoraShader* createShader(const wchar_t* file, const char* entry, int32 type) = 0;
+        virtual SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type) = 0;
         
 		/**
          * attach a shader to context
@@ -129,7 +129,7 @@ namespace sora {
          * @param type, the type of the shader, see SORA_SHADER_TYPE
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
-        SoraShader* attachShader(const wchar_t* file, const char* entry, int32 type);
+        SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
                 
         /**
          *   get shader list

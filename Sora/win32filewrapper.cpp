@@ -13,7 +13,7 @@
 
 namespace sorawin32 {
 
-void enumFilesInFolder(std::vector<SoraWString>& cont, const wchar_t* folder) {
+void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
 		WIN32_FIND_DATAW FindData;
 		SoraWString newFolder = folder+L"\\*";
 	

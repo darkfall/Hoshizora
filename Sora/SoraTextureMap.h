@@ -44,7 +44,7 @@ namespace sora {
 			}
 		}
 
-		void add(const wchar_t* key, HSORATEXTURE tex) {			
+		void add(const SoraWString& key, HSORATEXTURE tex) {			
 			stringId uiKey = str2id(key);
 			TEX_MAP::iterator pos = texMap.find(uiKey);
 			if(pos == texMap.end()) {
@@ -84,7 +84,7 @@ namespace sora {
 			SET_ENV_INT("CORE_TEXMAP_SIZE", (int32)texMap.size());
 		}
 		
-		void addRf(const wchar_t* key) {
+		void addRf(const SoraWString& key) {
 			stringId uiKey = str2id(key);
 			texRefs[uiKey]++;
 		}
@@ -109,7 +109,7 @@ namespace sora {
 			}
 		}
 		
-		HSORATEXTURE get(const wchar_t* key) {
+		HSORATEXTURE get(const SoraWString& key) {
 			stringId uiKey = str2id(key);
 			TEX_MAP::iterator p = texMap.find(uiKey);
 			if(p != texMap.end()) {

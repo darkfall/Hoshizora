@@ -33,7 +33,7 @@ void SoraINIFile::closeFile() {
     set_open(false);
 }
 
-int32 SoraINIFile::readFile(const wchar_t* path) {
+int32 SoraINIFile::readFile(const SoraWString& path) {
 	FILE* fp = fopen(ws2s(path).c_str(), "r");
 	if(fp) {
 		ulong32 size = 0;
@@ -126,7 +126,7 @@ int32 SoraINIFile::readFile(const wchar_t* path) {
 		return true;
 	}
 
-SoraString SoraINIFile::getString(const char* section, const char* name, const char* sDefault) {
+SoraString SoraINIFile::getString(const SoraString& section, const SoraString& name, const SoraString& sDefault) {
 	vector<INISector>::iterator p = sec.begin();
 	for(p = sec.begin(); p != sec.end(); ++p) {
 		if(p->name.compare(section) == 0) {
@@ -146,7 +146,7 @@ SoraString SoraINIFile::getString(const char* section, const char* name, const c
 	return sDefault;
 }
 
-float32 SoraINIFile::getFloat(const char* section, const char* name, float32 fDefault) {
+float32 SoraINIFile::getFloat(const SoraString& section, const SoraString& name, float32 fDefault) {
 	vector<INISector>::iterator p = sec.begin();
 	for(p = sec.begin(); p != sec.end(); ++p) {
 		if(p->name.compare(section) == 0) {
@@ -166,7 +166,7 @@ float32 SoraINIFile::getFloat(const char* section, const char* name, float32 fDe
 	return fDefault;
 }
 
-int32 SoraINIFile::getInt(const char* section, const char* name, int32 iDefault) {
+int32 SoraINIFile::getInt(const SoraString& section, const SoraString& name, int32 iDefault) {
 	vector<INISector>::iterator p = sec.begin();
 	for(p = sec.begin(); p != sec.end(); ++p) {
 		if(p->name.compare(section) == 0) {
@@ -186,7 +186,7 @@ int32 SoraINIFile::getInt(const char* section, const char* name, int32 iDefault)
 	return iDefault;
 }
 
-bool SoraINIFile::getBool(const char* section, const char* name, bool bDefault) {
+bool SoraINIFile::getBool(const SoraString& section, const SoraString& name, bool bDefault) {
 	vector<INISector>::iterator p = sec.begin();
 	for(p = sec.begin(); p != sec.end(); ++p) {
 		if(p->name.compare(section) == 0) {
@@ -214,7 +214,7 @@ bool SoraINIFile::getBool(const char* section, const char* name, bool bDefault) 
 	return bDefault;
 }
 
-void SoraINIFile::writeInt(const char* section, const char* name, int32 iValue) {
+void SoraINIFile::writeInt(const SoraString& section, const SoraString& name, int32 iValue) {
 	bFileWrite = true;
 	if(section.compare("public") == 0)
 		publicSec.value.push_back(INISectorValue(name, int_to_str(iValue)));
@@ -260,7 +260,7 @@ void SoraINIFile::writeInt(const char* section, const char* name, int32 iValue) 
 	}		
 }
 
-void SoraINIFile::writeFloat(const char* section, const char* name, float32 fValue) {
+void SoraINIFile::writeFloat(const SoraString& section, const SoraString& name, float32 fValue) {
 	bFileWrite = true;
 	if(section.compare("public") == 0)
 		publicSec.value.push_back(INISectorValue(name, fp_to_str(fValue)));
@@ -306,7 +306,7 @@ void SoraINIFile::writeFloat(const char* section, const char* name, float32 fVal
 	}	
 }
 
-void SoraINIFile::writeString(const char* section, const char* name, const char* sValue) {
+void SoraINIFile::writeString(const SoraString& section, const SoraString& name, const SoraString& sValue) {
 	bFileWrite = true;
 	if(section.compare("public") == 0)
 		publicSec.value.push_back(INISectorValue(name, sValue));
@@ -378,7 +378,7 @@ void SoraINIFile::Commit() {
 	file.close();
 }
 	
-vector<INISectorValue> SoraINIFile::getSector(const char* section) {
+vector<INISectorValue> SoraINIFile::getSector(const SoraString& section) {
 	if(section.compare("public") == 0)
 		return publicSec.value;
 	
@@ -388,7 +388,7 @@ vector<INISectorValue> SoraINIFile::getSector(const char* section) {
 	return ns;
 }
 	
-vector<INISector>::iterator SoraINIFile::GetSectorByName(const char* section) {
+vector<INISector>::iterator SoraINIFile::GetSectorByName(const SoraString& section) {
 	itSector s = sec.begin();
 	while( s != sec.end() ) {
 		if(s->name.compare(section) == 0) return s;

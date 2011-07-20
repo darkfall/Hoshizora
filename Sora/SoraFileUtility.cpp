@@ -20,7 +20,7 @@
 
 namespace sora {
 
- bool SoraFileUtility::fileExists(const wchar_t* filepath) {
+ bool SoraFileUtility::fileExists(const SoraWString& filepath) {
 #ifdef WIN32
 			return PathFileExists(filepath.c_str())?true:false;
 #elif defined(OS_OSX)
@@ -35,7 +35,7 @@ namespace sora {
 			return true;
 		}
 		
-	 SoraWString SoraFileUtility::getAbsolutePath(const wchar_t* filePath) {
+	 SoraWString SoraFileUtility::getAbsolutePath(const SoraWString& filePath) {
 #ifdef WIN32
 			wchar_t buffer[MAX_PATH];
 			GetCurrentDirectoryW(MAX_PATH, buffer);
@@ -55,7 +55,7 @@ namespace sora {
 		 because ios limit writting files in app
 		 also some part of osx
 		 */
-	 SoraWString SoraFileUtility::getWrittablePath(const wchar_t* filePath) {
+	 SoraWString SoraFileUtility::getWrittablePath(const SoraWString& filePath) {
 #ifndef OS_IOS
 			return getAbsolutePath(filePath);
 #else
@@ -78,17 +78,17 @@ namespace sora {
 			return L"./";
 		}
 
-	 SoraWString SoraFileUtility::getFontPath(const wchar_t* file) {
+	 SoraWString SoraFileUtility::getFontPath(const SoraWString& file) {
          std::wstring fontPath = SoraPath::fontW();
          return fontPath + file;
      }
 
-	 SoraWString SoraFileUtility::getFullPath(const wchar_t* file) {
+	 SoraWString SoraFileUtility::getFullPath(const SoraWString& file) {
 			return (getApplicationPath() + L"/" + file);
 		}
 		
 		// get file name from path
-	 SoraWString SoraFileUtility::getFileName(const wchar_t* file) {
+	 SoraWString SoraFileUtility::getFileName(const SoraWString& file) {
 			SoraWString op = file;
 			for(size_t i=0; i<op.size(); ++i)
 				if(op[i] == L'\\')
@@ -99,7 +99,7 @@ namespace sora {
 			return op;
 		}
 		
-	 SoraString SoraFileUtility::getFileName(const char* file) {
+	 SoraString SoraFileUtility::getFileName(const SoraString& file) {
 			SoraString op = file;
 			for(size_t i=0; i<op.size(); ++i)
 				if(op[i] == '\\')
@@ -155,7 +155,7 @@ namespace sora {
 			return 0;
 		}
 		
-	 bool SoraFileUtility::isFont(const wchar_t* file) {
+	 bool SoraFileUtility::isFont(const SoraWString& file) {
 			if(file.find(L".ttf") != std::string::npos ||
 			   file.find(L".TTF") != std::string::npos ||
 			   file.find(L".otf") != std::string::npos ||

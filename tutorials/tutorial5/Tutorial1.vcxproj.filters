@@ -16,6 +16,9 @@
     <Filter Include="Plugins\zlib">
       <UniqueIdentifier>{2c99ac0a-5002-4e1f-9e8a-06e7ada8a8fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\zip">
+      <UniqueIdentifier>{9adaf755-2f7d-4852-981b-dcd59659f835}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoraMainWindow.h">
@@ -105,6 +108,24 @@
     <ClInclude Include="..\..\Sora\ZLIB\crypt.h">
       <Filter>Plugins\zlib</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.h">
+      <Filter>Plugins\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.h">
+      <Filter>Plugins\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.h">
+      <Filter>Plugins\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackMemory.h">
+      <Filter>Plugins\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackReader.h">
+      <Filter>Plugins\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.h">
+      <Filter>Plugins\SoraHGERenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -190,6 +211,24 @@
     </ClCompile>
     <ClCompile Include="..\..\Sora\ZLIB\deflate.c">
       <Filter>Plugins\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.cpp">
+      <Filter>Plugins\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp">
+      <Filter>Plugins\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackMemory.cpp">
+      <Filter>Plugins\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackReader.cpp">
+      <Filter>Plugins\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.cpp">
+      <Filter>Plugins\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp">
+      <Filter>Plugins\SoraHGERenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

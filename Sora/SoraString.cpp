@@ -103,7 +103,7 @@ namespace sora {
         return *this;
     }
     
-    inline SoraString& SoraString::operator=(const char* str) {
+    inline SoraString& SoraString::operator=(const SoraString& str) {
         mString = str.mString;
         return *this;
     }

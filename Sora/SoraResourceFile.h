@@ -24,11 +24,11 @@ namespace sora {
 	public:
         SoraResourceFileAuto();
 		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
-		SoraResourceFileAuto(const wchar_t* file, bool retain=false);
-        SoraResourceFileAuto(const wchar_t* file, ulong32 size, bool retain=false);
+		SoraResourceFileAuto(const SoraWString& file, bool retain=false);
+        SoraResourceFileAuto(const SoraWString& file, ulong32 size, bool retain=false);
 		~SoraResourceFileAuto();
         
-        SoraResourceFileAuto& operator=(const wchar_t* file);
+        SoraResourceFileAuto& operator=(const SoraWString& file);
 		
 		void* getData() const;
 		ulong32 getSize() const;

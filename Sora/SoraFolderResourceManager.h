@@ -26,25 +26,25 @@ namespace sora {
 		SoraFolderResourceManager();
 		~SoraFolderResourceManager() {}
 		
-		HSORARESOURCE	loadResourcePack	(const wchar_t* folder);
+		HSORARESOURCE	loadResourcePack	(const SoraWString& folder);
 		void			attachResourcePack	(HSORARESOURCE handle);
 		void			detachResourcePack  (HSORARESOURCE handle);
 		
-		void* readResourceFile(const wchar_t* file, ulong32 size);
-		void* getResourceFile(const wchar_t* file, ulong32& size);
-		ulong32 getResourceFileSize(const wchar_t* file);
+		void* readResourceFile(const SoraWString& file, ulong32 size);
+		void* getResourceFile(const SoraWString& file, ulong32& size);
+		ulong32 getResourceFileSize(const SoraWString& file);
 		void freeResourceFile(void* p);
 		
 		SoraWString getName() const		{ return L"FolderRM"; }
 		SoraWString getFormat() const	{ return L""; }
-		bool isFormatSupported(const wchar_t* format) const { return format.size()==0; }
+		bool isFormatSupported(const SoraWString& format) const { return format.size()==0; }
 		
-		bool enumFiles(std::vector<SoraWString>& cont, const wchar_t* folder);
+		bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
 	private:
 		struct folderDescription {
 			SoraWString folderName;
 			stringId folderHash;
-			folderDescription(const wchar_t* folder): folderName(folder), folderHash(crc32(folder)) {}
+			folderDescription(const SoraWString& folder): folderName(folder), folderHash(crc32(folder)) {}
 		};
 		typedef std::vector<folderDescription> FOLDER_CONT;
 		FOLDER_CONT folders;
@@ -53,7 +53,7 @@ namespace sora {
 		typedef hash_map</*fileNameHash*/stringId, /*fileFullPath*/SoraWString> FILE_CACHE;
 		FILE_CACHE fileCache;
 		
-		inline FILE* openFile(const wchar_t* fileName);
+		inline FILE* openFile(const SoraWString& fileName);
 	};
 
 	

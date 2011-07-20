@@ -44,7 +44,7 @@ namespace sora {
         int32           getObjSize() const;
         SoraObject*     next() const;
 				
-		SoraObject* getObjByName(const char* n);
+		SoraObject* getObjByName(const SoraString& n);
         SoraObject* getObjByName(stringId sid);
 		
 		uint32  getType() const;
@@ -59,7 +59,7 @@ namespace sora {
          **/
         SoraObject& operator =(const SoraObject& rhs);
         
-        SoraObject* operator[](const char* name);
+        SoraObject* operator[](const SoraString& name);
         
 	protected:
 		SoraObject* mParent;

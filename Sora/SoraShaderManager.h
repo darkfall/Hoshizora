@@ -29,10 +29,10 @@ namespace sora {
 		static void Destroy();
 
         // return the same shader if it have benn created by the manager
-        SoraShader* createShader(const wchar_t* file, const char* entry, int32 type);
+        SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
         
         // would create a new shader whether it exists in the manager or not
-        SoraShader* createUniqueShader(const wchar_t* file, const char* entry, int32 type);
+        SoraShader* createUniqueShader(const SoraWString& file, const SoraString& entry, int32 type);
         
         void freeShader(SoraShader* shader);
         
@@ -45,11 +45,11 @@ namespace sora {
         RevShaderMap mRevShaders;
     };
     
-    static SoraShader* CreateShader(const wchar_t* file, const char* entry, int32 type) {
+    static SoraShader* CreateShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createShader(file, entry, type);
     }
     
-    static SoraShader* CreateUniqueShader(const wchar_t* file, const char* entry, int32 type) {
+    static SoraShader* CreateUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createUniqueShader(file, entry, type);
     }
     

@@ -69,7 +69,7 @@ namespace sora {
             debugRenderItems.push_back(item);
         }
         
-		void addString(const hgeVector& point, const wchar_t* str, const SoraColorRGBA& color=COLOR_BLACK, float32 depth=0.f) {
+		void addString(const hgeVector& point, const SoraWString& str, const SoraColorRGBA& color=COLOR_BLACK, float32 depth=0.f) {
             debugRenderItem item(ITEM_LINE);
             item.pos = point;
             item.color = color;

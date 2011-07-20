@@ -23,8 +23,8 @@ namespace sora {
 	public:		
 		inline int32 msgCodeTokCFNotificationLevel(int32 msgCode);
 		
-		int32 messageBox(const char* sMessage, const char* sTitle, int32 msgCode);
-		int32 messageBox(const wchar_t* sMessage, const wchar_t* sTitle, int32 msgCode);
+		int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode);
+		int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode);
 		
 		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
 		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
