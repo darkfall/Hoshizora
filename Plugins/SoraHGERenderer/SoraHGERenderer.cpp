@@ -16,7 +16,6 @@
 #include "Rect4V.h"
 #include "SoraInfiniteRendererCallback.h"
 
-#undef SORA_USE_SHADER
 #ifdef SORA_USE_SHADER
 #include "SoraShader/SoraCGD3D9Shader.h"
 #endif
