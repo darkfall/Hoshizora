@@ -34,7 +34,7 @@ namespace sora {
     };
     
     template<class MT>
-    class SORA_API SoraModifierList: public SoraModifier<MT> {
+    class SoraModifierList: public SoraModifier<MT> {
     public:
         typedef SoraModifier<MT>* ModifierPtr;
         

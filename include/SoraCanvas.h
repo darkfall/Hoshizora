@@ -11,9 +11,8 @@
 #define SORA_CANVAS_H_
 
 #include "SoraPlatform.h"
-#include "SoraObject.h"
-#include "SoraCore.h"
-#include "SoraFont.h"
+#include "SoraSprite.h"
+#include "SoraShader.h"
 
 namespace sora {
 	
@@ -52,7 +51,6 @@ namespace sora {
         inline void _detachTarget();
         
 		ulong32 canvasTarget;
-		
         SoraSprite* pCanvasSprite;
         
         bool bSceneBegan;

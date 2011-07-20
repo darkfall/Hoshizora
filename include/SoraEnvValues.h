@@ -18,8 +18,7 @@
 
 namespace sora {
 	
-	class SORA_API SoraEnvValues: public SoraSingleton<SoraEnvValues> {
-		friend class SoraSingleton<SoraEnvValues>;
+	class SORA_API SoraEnvValues {
 		friend class EnvValuesExporter;
 		
 	protected:
@@ -27,6 +26,9 @@ namespace sora {
 		~SoraEnvValues() {}
 		
 	public:
+		static SoraEnvValues* Instance();
+		static void Destroy();
+
 		bool			getValue		(stringId name, bool defaultVal);
 		int32			getValue		(stringId name, int32 defaultVal);
 		float32			getValue		(stringId name, float32 defaultVal);
@@ -62,6 +64,7 @@ namespace sora {
 		void removeData		(stringId name);
 
 	private:
+		static SoraEnvValues* mInstance;
 		enum {
 			VALUE_INT = 1,
 			VALUE_BOOL = 2,

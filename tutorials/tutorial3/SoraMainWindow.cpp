@@ -11,7 +11,6 @@
 #include "SoraMath.h"
 
 bool MainWindow::updateFunc() {
-    
     return false;
 }
 

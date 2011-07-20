@@ -23,19 +23,19 @@ namespace sora {
 	};
 
 	/* from loliEngine rewrite */
-	class CoreTransform {
+	class SORA_API CoreTransform {
 	public:
-		CoreTransform(float32 _f): f1(_f), bClean(false), iKind(TRANSFORM_1F) {}
-		CoreTransform(float32 _f1, float32 _f2): f1(_f1), f2(_f2), bClean(false), iKind(TRANSFORM_2F) {}
-		CoreTransform(float32 _f1, float32 _f2, float32 _f3): f1(_f1), f2(_f2), f3(_f3), bClean(false), iKind(TRANSFORM_3F) {}
-		CoreTransform(float32 _f1, float32 _f2, float32 _f3, float32 _f4): f1(_f1), f2(_f2), f3(_f3), f4(_f4), bClean(false), iKind(TRANSFORM_4F) {}
+		CoreTransform(float32 _f);
+		CoreTransform(float32 _f1, float32 _f2);
+		CoreTransform(float32 _f1, float32 _f2, float32 _f3);
+		CoreTransform(float32 _f1, float32 _f2, float32 _f3, float32 _f4);
 	
-		CoreTransform(): bClean(true), iKind(0) {}
+		CoreTransform();
 			
-		void Set(float32 _f) { f1 = _f; bClean = false; iKind = TRANSFORM_1F; }
-		void Set(float32 _f1, float32 _f2) { f1 = _f1; f2 = _f2; bClean = false; iKind = TRANSFORM_2F; }
-		void Set(float32 _f1, float32 _f2, float32 _f3) { f1 = _f1; f2 = _f2; f3 = _f3; bClean = false; iKind = TRANSFORM_3F; }
-		void Set(float32 _f1, float32 _f2, float32 _f3, float32 _f4) { f1 = _f1; f2 = _f2; f3 = _f3; f4 = _f4; bClean = false; iKind = TRANSFORM_4F; }
+		void Set(float32 _f);
+		void Set(float32 _f1, float32 _f2);
+		void Set(float32 _f1, float32 _f2, float32 _f3);
+		void Set(float32 _f1, float32 _f2, float32 _f3, float32 _f4);
 	
 		int GetKind() const { return iKind; }
 	
@@ -46,16 +46,16 @@ namespace sora {
 	
 		CoreTransform GetDist(const CoreTransform& t2, int divider);
 	
-		CoreTransform operator / (float32 divider);
-		CoreTransform operator * (float32 m);
-		CoreTransform operator - (const CoreTransform& rhs);
-		CoreTransform operator + (const CoreTransform& rhs);
+		CoreTransform operator / (float32 divider) const;
+		CoreTransform operator * (float32 m) const;
+		CoreTransform operator - (const CoreTransform& rhs) const;
+		CoreTransform operator + (const CoreTransform& rhs) const;
 		void operator = (const CoreTransform& rhs);
 	
 		CoreTransform& operator += (const CoreTransform& rhs);
 		CoreTransform& operator -= (const CoreTransform& rhs);
 		
-		bool operator == (const CoreTransform& rhs);
+		bool operator == (const CoreTransform& rhs) const;
 			
 	private:
 		float32 f1, f2, f3, f4;

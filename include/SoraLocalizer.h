@@ -36,10 +36,12 @@ namespace sora {
 		"GameTitle.png"="GameTitle_CHN.png" etc
 	 */
 			
-	class SORA_API SoraLocalizer: public SoraSingleton<SoraLocalizer> {
+	class SORA_API SoraLocalizer {
 		friend class SoraSingleton<SoraLocalizer>;
 		
 	public:
+		static SoraLocalizer* Instance();
+		static void Destroy();
 		/*
 		 add a locale configuration file
 		 if the ident of the conf already exist, then the old one would be replaced
@@ -69,10 +71,12 @@ namespace sora {
 		SoraWString localizeResourceName(SoraWString& resourceName);
 		
 	private:
-		typedef hash_map<SoraString, SoraWString> LOCALE_STRING_MAP;		
-		typedef map<SoraString, LOCALE_STRING_MAP > LOCALE_CONF_MAP;
-		LOCALE_CONF_MAP localeConfs;
-		LOCALE_CONF_MAP::iterator currentLocaleMap;
+		static SoraLocalizer* mInstance;
+
+		typedef hash_map<stringId, SoraWString> LocaleStringMap;		
+		typedef map<SoraString, LocaleStringMap > LocaleConfMap;
+		LocaleConfMap localeConfs;
+		LocaleConfMap::iterator currentLocaleMap;
 		
 		SoraString currentLocale;
 		SoraWString currentLocaleW;
@@ -80,8 +84,8 @@ namespace sora {
 	protected:
 		inline bool readToken(llexer* lexer, Token tokenExpected);
 		inline SoraString readLocaleIdent(llexer* lexer);
-		inline bool readLocaleString(llexer* lexer, LOCALE_STRING_MAP& strMap);
-		inline bool readLocaleResource(llexer* lexer, LOCALE_STRING_MAP& strMap);
+		inline bool readLocaleString(llexer* lexer, LocaleStringMap& strMap);
+		inline bool readLocaleResource(llexer* lexer, LocaleStringMap& strMap);
 		
 		void reportError(llexer* lexer);
 		

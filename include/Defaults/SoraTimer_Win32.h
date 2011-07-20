@@ -20,14 +20,12 @@ namespace sora {
 		friend class SoraCore;
 
 	public:
-		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; nFrameCounter = 0; fTimeScale = 1.f; }
+		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; nFrameCounter = 0; }
 		void setFPS(int32 fps) { desiredFPS = (float32)fps; }
 		float32 getDelta() { return fDeltaTime; }
 		float32 getFPS() { return fFPS; }
 		float32 getTime() { return fTime; }
 		int32 getFrameCount() { return nFrameCounter; }
-		void setTimeScale(float32 ts) { fTimeScale = ts; }
-		float32 getTimeScale() { return fTimeScale; }
 		uint64 getCurrentSystemTime() { 
 			LONGLONG  TimePrecision;
 			LARGE_INTEGER Frequency;
@@ -92,19 +90,17 @@ namespace sora {
 
 		    if (lastTime <= (NowTime - TimeInterval) && lastTime >= (NowTime - (TimeInterval * 2)))
 			{
-				fDeltaTime = (float)((double)(TimeInterval) / (double)(TimePrecision)) * fTimeScale;
+				fDeltaTime = (float)((double)(TimeInterval) / (double)(TimePrecision));
 		        lastTime += TimeInterval;
 			}
 		    else
 			{
-				fDeltaTime = (float)((double)(NowTime - lastTime) / (double)(TimePrecision)) * fTimeScale;
+				fDeltaTime = (float)((double)(NowTime - lastTime) / (double)(TimePrecision));
 		        lastTime = NowTime;
 			}
 			long long t = (NowTime-lastTime);
-			//log<<t<<" "<<fDeltaTime<<std::endl;
 			if(fDeltaTime >= 1.f) 
 				fDeltaTime = 1.f / desiredFPS;
-	//		fDeltaTime *= fTimeScale;
 
 			nFrameCounter++;
 			fTime += fDeltaTime;
@@ -117,7 +113,6 @@ namespace sora {
 		int32 oldTimeStamp;
 		float32 fDeltaTime, fTime, fFPS;
 		int32 nFrameCounter;
-		float32 fTimeScale;
 	};
 
 } // namespace sora

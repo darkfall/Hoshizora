@@ -29,17 +29,16 @@
 #include <map>
 
 namespace sora {
-	
-	class SoraCamera;
-	
-	class SORA_API SoraCore: public SoraSingleton<SoraCore>, public SoraEventHandler {
+		
+	class SORA_API SoraCore: public SoraEventHandler {
 	protected:
-		friend class SoraSingleton<SoraCore>;
-
 		SoraCore();
 		~SoraCore() { }
 
 	public:
+        static SoraCore* Instance();
+        static void Destroy();
+        
 		void start();
 		void shutDown();
 
@@ -82,6 +81,7 @@ namespace sora {
 		void	setFPS(int32 fps);
 		float32 getFPS();
 		float32 getDelta();
+        float32 getAbsoluteDelta();
 		float32 getTime();
 		int32	getFrameCount();
 		void	setTimeScale(float32 scale);
@@ -124,7 +124,7 @@ namespace sora {
 		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
 
-		void renderRect	(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, uint32 color=0xFFFFFFFF, float32 z=0.0f);
+		void renderRect     (float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, uint32 color=0xFFFFFFFF, float32 z=0.0f);
 		void renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
 		void setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
@@ -165,9 +165,9 @@ namespace sora {
 		HSORARESOURCE loadResourcePack	(const SoraWString& file);
 		void	attachResourcePack		(HSORARESOURCE pfile);
 		void	detachResourcePack		(HSORARESOURCE handle);
-		void*	getResourceFile		(const SoraWString& file, ulong32& size);
+		void*	getResourceFile         (const SoraWString& file, ulong32& size);
 		void*	readResourceFile		(const SoraWString& file, ulong32 size);
-		ulong32 getResourceFileSize	(const SoraWString& file);
+		ulong32 getResourceFileSize     (const SoraWString& file);
 		void	freeResourceFile		(void* p);
 		void	enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
 	
@@ -261,9 +261,6 @@ namespace sora {
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
 		
-		void setMainCamera(SoraCamera* camera);
-		SoraCamera* getMainCamera() const;
-		
 		void enablePluginDetection(bool flag);
         
         /**
@@ -271,9 +268,11 @@ namespace sora {
          * This is required for fullscreen post shader effects
          **/
         void enableFullscreenBuffer(bool flag);
-        void registerFullscreenBufferDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate);
+        void registerFullscreenBufferDelegate(const SoraAbstractDelegate<HSORATEXTURE>& delegate);
 		
 	private:
+        static SoraCore* mInstance;
+        
 		inline void _registerCoreCmds();
 		
 		inline void _checkCoreComponents();
@@ -305,7 +304,8 @@ namespace sora {
 
         bool bMainScene;
 		bool bFrameSync;
-		float32 time;
+		float32 mTime;
+        float32 mTimeScale;
 
 		SoraWindowInfoBase* mainWindow;
 		SoraShaderContext* shaderContext;
@@ -316,9 +316,7 @@ namespace sora {
         bool bScreenBufferAttached;
         ulong32 mScreenBuffer;
         SoraSprite* mScreenBufferSprite;
-		
-		SoraCamera* mainCamera;
-		
+				
 		typedef std::list<SoraFrameListener*> FRAME_LISTENER_CONT;
 		FRAME_LISTENER_CONT frameListeners;
 

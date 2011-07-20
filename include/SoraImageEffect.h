@@ -180,8 +180,8 @@ namespace sora {
 							 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
 							 CoreTransformer<CoreTransform>* transformer=0);
 		
-        void modify(SoraSprite* obj);
-        SoraModifier<SoraSprite>* clone();
+		void modify(SoraSprite* obj) {}
+		SoraModifier<SoraSprite>* clone() { return NULL; }
 	};
 
 	class SORA_API SoraImageEffectScale: public SoraImageEffect {

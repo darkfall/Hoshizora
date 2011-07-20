@@ -29,7 +29,7 @@ namespace sora {
 	class SORA_API SoraAutoPtr {
 	public:
 		SoraAutoPtr(): ptr(NULL), refCount(NULL) {}
-		SoraAutoPtr(T* t): ptr(t), refCount(NULL) { reference_count_init(); }
+		explicit SoraAutoPtr(T* t): ptr(t), refCount(NULL) { reference_count_init(); }
 		SoraAutoPtr(const SoraAutoPtr<T>& rhs): ptr(NULL), refCount(NULL) { *this = rhs; }
 		~SoraAutoPtr() { reference_count_dec(); }
 		
@@ -158,10 +158,6 @@ namespace sora {
 				return *refCount;
 			return 0;
 		}
-		
-        operator T* () {
-            return ptr;
-        }
         
 		bool operator == (const SoraAutoPtr<T>& rhs) {
 			return ptr == rhs.ptr;

@@ -21,7 +21,7 @@ namespace sora {
      *  Base class for delegate
      */
     template<typename TARG>
-    class SORA_API SoraAbstractDelegate {
+    class SoraAbstractDelegate {
     public:
         SoraAbstractDelegate(void* target): mTarget(target) {
         //    assert(target != NULL);
@@ -49,7 +49,7 @@ namespace sora {
     };
     
     template<class TOBJ, class TARGS, bool withSenter=true>
-    class SORA_API SoraDelegate: public SoraAbstractDelegate<TARGS> {
+    class SoraDelegate: public SoraAbstractDelegate<TARGS> {
     public:
         typedef void (TOBJ::*NotifyMethod)(const void*, TARGS&);
         
@@ -96,7 +96,7 @@ namespace sora {
     };
     
     template<class TOBJ, class TARGS>
-    class SORA_API SoraDelegate<TOBJ, TARGS, false>: public SoraAbstractDelegate<TARGS> {
+    class SoraDelegate<TOBJ, TARGS, false>: public SoraAbstractDelegate<TARGS> {
     public:
         typedef void (TOBJ::*NotifyMethod)(TARGS&);
         
@@ -144,7 +144,7 @@ namespace sora {
     
     // enables to use a C Function as Delegate
     template<class TARGS, bool hasSender=true, bool senderIsConst=false>
-    class SORA_API SoraFunctionDelegate: public SoraAbstractDelegate<TARGS> {
+    class SoraFunctionDelegate: public SoraAbstractDelegate<TARGS> {
     public:
         typedef void (*NotifyMethod)(const void*, TARGS&);
         
@@ -233,7 +233,7 @@ namespace sora {
     };
 
     template<class TARGS, bool senderIsConst>
-    class SORA_API SoraFunctionDelegate<TARGS, false, senderIsConst>: public SoraAbstractDelegate<TARGS> {
+    class SoraFunctionDelegate<TARGS, false, senderIsConst>: public SoraAbstractDelegate<TARGS> {
     public:
         typedef void (*NotifyMethod)(TARGS&);
         
@@ -277,7 +277,7 @@ namespace sora {
     };
     
     template<class TARGS>
-    class SORA_API SoraExpireDelegate: public SoraAbstractDelegate<TARGS> {
+    class SoraExpireDelegate: public SoraAbstractDelegate<TARGS> {
     public:
         SoraExpireDelegate():
         SoraAbstractDelegate<TARGS>(NULL),

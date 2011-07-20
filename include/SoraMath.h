@@ -16,6 +16,7 @@
 #include "SoraPlatform.h"
 #include "hgevector.h"
 #include "hgerect.h"
+#include "CoreTransform.h"
 
 namespace sora {
 
@@ -114,6 +115,26 @@ namespace sora {
     
     inline int32 flipBytes(int32 value) {
         return int32(flipBytes(uint32(value)));
+    }
+    
+    inline float32 slerp(float32 start, float32 end, float32 r) {
+        r >= 1.f ? r = 1.f: r;
+        return start + (end - start) * r;
+    }
+    
+    inline int32 slerp(int32 start, int32 end, float32 r) {
+        r >= 1.f ? r = 1.f: r;
+        return (int32)(start + (end - start) * r);
+    }
+    
+    inline SoraVector slerp(const SoraVector& start, const SoraVector& end, float32 r) {
+        r >= 1.f ? r = 1.f: r;
+        return start + (end - start) * r;
+    }
+    
+    inline CoreTransform slerp(const CoreTransform& start, const CoreTransform& end, float32 r) {
+        r >= 1.f ? r = 1.f: r;
+        return start + (end - start) * r;
     }
 } // namespace sora
 

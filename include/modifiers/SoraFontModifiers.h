@@ -9,8 +9,8 @@
 #ifndef Sora_SoraFontModifiers_h
 #define Sora_SoraFontModifiers_h
 
-#include "SoraModifier.h"
-#include "SoraFont.h"
+#include "../SoraModifier.h"
+#include "../SoraFont.h"
 
 namespace sora {
     

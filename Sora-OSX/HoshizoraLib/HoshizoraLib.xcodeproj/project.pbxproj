@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8874DA7613D6758B00FBC7BE /* SoraCameraModifiers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8874DA7413D6758B00FBC7BE /* SoraCameraModifiers.cpp */; };
+		8874DA7713D6758B00FBC7BE /* SoraCameraModifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = 8874DA7513D6758B00FBC7BE /* SoraCameraModifiers.h */; };
 		88768F9113D1FA440071C8C1 /* libHoshizora.h in Headers */ = {isa = PBXBuildFile; fileRef = 88768F9013D1FA440071C8C1 /* libHoshizora.h */; };
 		88768F9413D1FA440071C8C1 /* libHoshizora.cp in Sources */ = {isa = PBXBuildFile; fileRef = 88768F9313D1FA440071C8C1 /* libHoshizora.cp */; };
 		887690E113D1FAF30071C8C1 /* AutoContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 88768F9E13D1FAF20071C8C1 /* AutoContainer.h */; };
@@ -317,6 +319,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8874DA7413D6758B00FBC7BE /* SoraCameraModifiers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraCameraModifiers.cpp; sourceTree = "<group>"; };
+		8874DA7513D6758B00FBC7BE /* SoraCameraModifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCameraModifiers.h; sourceTree = "<group>"; };
 		88768F8D13D1FA440071C8C1 /* libHoshizora-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libHoshizora-Prefix.pch"; sourceTree = "<group>"; };
 		88768F8E13D1FA440071C8C1 /* libHoshizoraProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = libHoshizoraProj.xcconfig; sourceTree = "<group>"; };
 		88768F8F13D1FA440071C8C1 /* libHoshizoraTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = libHoshizoraTarget.xcconfig; sourceTree = "<group>"; };
@@ -980,6 +984,8 @@
 		88768FEC13D1FAF20071C8C1 /* modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				8874DA7413D6758B00FBC7BE /* SoraCameraModifiers.cpp */,
+				8874DA7513D6758B00FBC7BE /* SoraCameraModifiers.h */,
 				88768FED13D1FAF20071C8C1 /* SoraFontModifiers.cpp */,
 				88768FEE13D1FAF20071C8C1 /* SoraFontModifiers.h */,
 				88768FEF13D1FAF20071C8C1 /* SoraObjectModifiers.cpp */,
@@ -1322,6 +1328,7 @@
 				8876920F13D1FAF30071C8C1 /* zip.h in Headers */,
 				8876921013D1FAF30071C8C1 /* zlib.h in Headers */,
 				8876921213D1FAF30071C8C1 /* zutil.h in Headers */,
+				8874DA7713D6758B00FBC7BE /* SoraCameraModifiers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1475,6 +1482,7 @@
 				8876920A13D1FAF30071C8C1 /* unzip.c in Sources */,
 				8876920E13D1FAF30071C8C1 /* zip.c in Sources */,
 				8876921113D1FAF30071C8C1 /* zutil.c in Sources */,
+				8874DA7613D6758B00FBC7BE /* SoraCameraModifiers.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

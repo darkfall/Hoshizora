@@ -11,7 +11,8 @@
 
 #include "SoraPlatform.h"
 #include "SoraImageEffect.h"
-#include "AutoContainer.h"
+
+#include <list>
 
 namespace sora {
     
@@ -20,22 +21,53 @@ namespace sora {
      *  Such as SoraObject
      **/
     
-    class SORA_API SoraAbstractModiferAdapter: public AutoListElement<SoraAbstractModiferAdapter> {
+    class SORA_API SoraAbstractModiferAdapter {
+    protected:
+        SoraAbstractModiferAdapter();
+        virtual ~SoraAbstractModiferAdapter();
+        
+        void insert();
+        void remove();
+        
     public:
+        typedef std::list<SoraAbstractModiferAdapter*> Members;
+
         virtual void update(float32 dt) = 0;
+        
+    public:
+        static Members members;
     };
     
     template<typename T>
     class SORA_API SoraModifierAdapter: public SoraAbstractModiferAdapter {
     public:
-        SoraModifierAdapter(T* obj) {
+        SoraModifierAdapter(T* obj, bool retain=false, bool insert=true) {
             assert(obj != NULL);
             mObj = obj;
+            mRetain = retain;
+            
+            mInsert = insert;
+            if(mInsert)
+                SoraAbstractModiferAdapter::insert();
+            else
+                mRetain = true;
         }
-        SoraModifierAdapter(T* obj, SoraModifier<T>* modi) {
+        SoraModifierAdapter(T* obj, SoraModifier<T>* modi, bool retain=false, bool insert=true) {
             mObj = obj;
             add(modi);
+            mRetain = retain;
+            
+            mInsert = insert;
+            if(mInsert)
+                SoraAbstractModiferAdapter::insert();
+            else
+                mRetain = true;
         }
+        virtual ~SoraModifierAdapter() {
+            if(mInsert)
+                SoraAbstractModiferAdapter::remove();
+        }
+        
         void update(float32 dt) {
             if(!mModifiers.empty()) {
                 typename ModifierList::iterator itModifier = mModifiers.begin();
@@ -52,8 +84,10 @@ namespace sora {
                     }
                     ++itModifier;
                 }
-            } else 
-                delete this;
+            } else {
+                if(!mRetain)
+                    delete this;
+            }
         }
         
         void add(SoraModifier<T>* modi) {
@@ -69,11 +103,14 @@ namespace sora {
         typedef std::list<SoraModifier<T>*> ModifierList;
 		ModifierList mModifiers;
         T* mObj;
+    
+        bool mRetain;
+        bool mInsert;
     };
     
     template<typename MT>
-    SoraModifierAdapter<MT>* SORA_API CreateModifierAdapter(MT* obj, SoraModifier<MT*> modifier) {
-        return new SoraModifierAdapter<MT>(obj, modifier);
+    static SoraModifierAdapter<MT>* CreateModifierAdapter(MT* obj, SoraModifier<MT>* modifier, bool retain=false, bool insert=true) {
+        return new SoraModifierAdapter<MT>(obj, modifier, retain, insert);
     }
 } // namespace sora
 

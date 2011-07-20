@@ -13,7 +13,7 @@
 
 namespace sora {
     
-    class uncopyable {
+    class SORA_API uncopyable {
     protected:
         uncopyable() {}
         ~uncopyable() {}

@@ -32,7 +32,7 @@ namespace sora {
 		Class to hold a shader
 		Automatically created and managed by SoraShaderContext
 	*/
-	class SORA_API SoraShader: public SoraNamedObject, public AutoListElement<SoraShader> {
+	class SORA_API SoraShader: public SoraNamedObject {
 		friend class SoraShaderContext;
 		
 	public:

@@ -42,7 +42,7 @@ namespace sora {
 	
 	class SoraOSXTimer: public SoraTimer {
 	public:
-		SoraOSXTimer(): fpsInterval(SORA_FPS_INFINITE), frameCounter(0), fps(0.f), fTime(0.f), fTimeScale(1.f) {
+		SoraOSXTimer(): fpsInterval(SORA_FPS_INFINITE), frameCounter(0), fps(0.f), fTime(0.f) {
 			time = mach_absolute_time();
 			oldtime = time;
 		}
@@ -56,8 +56,6 @@ namespace sora {
 		float32 getDelta()	{ return fdt; }
 		float32 getTime() { return fTime; }
 		int32 getFrameCount() { return frameCounter; }
-		void setTimeScale(float32 ts) { fTimeScale = ts; }
-		float32 getTimeScale() { return fTimeScale; }
 		uint64 getCurrentSystemTime() { return mach_absolute_time(); }
 		
 		bool update() {
@@ -65,7 +63,7 @@ namespace sora {
 				if(oldtime != time) {
 					oldtime = time;
 					time = mach_absolute_time();
-					fdt = dtToMil(time-oldtime) / 1000.f * fTimeScale;
+					fdt = dtToMil(time-oldtime) / 1000.f;
 					fps = 1.f / (dtToMil(time-oldtime)/1000.f);;
 				} else {
 					time = mach_absolute_time();
@@ -89,10 +87,10 @@ namespace sora {
 			time = mach_absolute_time();
 			
 			if(oldtime <= time - fpsInterval && oldtime >= time - (fpsInterval*2)) {
-				fdt = dtToMil(fpsInterval) / 1000.f * fTimeScale;
+				fdt = dtToMil(fpsInterval) / 1000.f;
 				oldtime += fpsInterval;
 			} else {
-				fdt = dtToMil(time-oldtime) / 1000.f * fTimeScale;
+				fdt = dtToMil(time-oldtime) / 1000.f;
 				oldtime = time;
 			}
 			if(fdt >= 1.f)
@@ -125,7 +123,6 @@ namespace sora {
 		float32 fdt;
 		int32 frameCounter;
 		float32 fTime;
-		float32 fTimeScale;
 	};
 	
 } // namespace sora

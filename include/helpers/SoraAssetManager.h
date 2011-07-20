@@ -19,8 +19,8 @@ namespace sora {
 	protected:
 		friend class SoraSingleton<SoraAssetManager>;
 		
-		SoraAssetManager();
-		~SoraAssetManager();
+		SoraAssetManager() {}
+		~SoraAssetManager() {}
 		
 	public:
 		

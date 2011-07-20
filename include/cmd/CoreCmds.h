@@ -12,19 +12,15 @@
 
 #include "../SoraPlatform.h"
 #include "../SoraEvent.h"
+#include "SoraConsole.h"
 
 namespace sora {
-	
-	class SoraConsoleEvent;
-	class SoraCore;
-	
-	class SoraCoreCmdHandler: public SoraEventHandler, public SoraSingleton<SoraCoreCmdHandler> {
+
+	class SORA_API SoraCoreCmdHandler: public SoraEventHandler, public SoraSingleton<SoraCoreCmdHandler> {
 	protected:
 		friend class SoraSingleton<SoraCoreCmdHandler>;
 		SoraCoreCmdHandler();
 		
-		sora::SoraCore* sora;
-
 	public:
 		inline void _doCmdSet(SoraConsoleEvent* cev, const std::vector<std::string>& params);
 		inline void _doCmdGet(SoraConsoleEvent* cev, const std::vector<std::string>& params);

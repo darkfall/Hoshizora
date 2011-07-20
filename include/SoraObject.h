@@ -1,27 +1,23 @@
+#ifndef _SORA_OBJECT_H
+#define _SORA_OBJECT_H
+
 #include "SoraPlatform.h"
 #include "SoraException.h"
 #include "SoraEvent.h"
 #include "SoraAutoPtr.h"
-
-//#include <LuaPlus.h>
-
-#ifndef _SORA_OBJECT_H
-#define _SORA_OBJECT_H
-
+#include "SoraNamedObject.h"
 #include <algorithm>
 #include <list>
-#include "SoraAutoPtr.h"
-#include "SoraNamedObject.h"
-#include "AutoContainer.h"
+
 
 namespace sora {
+    
+    class SoraObjectHandle;
 
-	class SORA_API SoraObject: public SoraEventHandler, public SoraNamedObject, public AutoListElement<SoraObject> {
+	class SORA_API SoraObject: public SoraEventHandler, public SoraNamedObject {
 	public:
         friend class SoraObjectHandle;
         
-		typedef std::list<SoraObject*> SubObjectList;
-		
 		SoraObject();
 		virtual ~SoraObject();
 
@@ -30,15 +26,23 @@ namespace sora {
 		
 		virtual void	add(SoraObject* pobj);
 		virtual void	del(SoraObject* pobj);
+        virtual void    delAll();
 		
 		virtual void    setPosition(float32 _x, float32 _y);
 		virtual float32 getPositionX();
 		virtual float32 getPositionY();
         virtual void    getPosition(float32& _x, float32& _y);
-		
-		SubObjectList   getObjList() const;
+        
+        virtual float32 getAbsolutePositionX();
+        virtual float32 getAbsolutePositionY();
+        
+        virtual void    setParent(SoraObject* obj);
+        
+		SoraObject*     getObjList() const;
 		SoraObject*     getParent() const;
-        void            setParent(SoraObject* obj);
+        
+        int32           getObjSize() const;
+        SoraObject*     next() const;
 				
 		SoraObject* getObjByName(const SoraString& n);
         SoraObject* getObjByName(stringId sid);
@@ -46,17 +50,29 @@ namespace sora {
 		uint32  getType() const;
 		void    setType(uint32 t);
 	
-        SoraHandle      getHandleId() const;
-        SoraUniqueId    getUniqueId() const;
+        SoraHandle          getHandleId() const;
+        SoraUniqueId        getUniqueId() const;
+        SoraObjectHandle    getHandle();
+        
+        /**
+         *  handleId and UniqueId for the object cannot be copied
+         **/
+        SoraObject& operator =(const SoraObject& rhs);
+        
+        SoraObject* operator[](const SoraString& name);
         
 	protected:
 		SoraObject* mParent;
-		SubObjectList mSubObjs;
+        SoraObject* mSubObjects;
+        SoraObject* mNext;
 		
 		float32 mPosx;
         float32 mPosy;
 		uint32 mType;
         
+        int32 mSubObjectSize;
+        
+    private:
         SoraHandle mHandleId;
         SoraUniqueId mUniqueId;
     };

@@ -10,8 +10,9 @@
 #ifndef HGERECT_H
 #define HGERECT_H
 
+#include "SoraPlatform.h"
 
-class hgeRect
+class SORA_API hgeRect
 {
 public:
 	float	x1, y1, x2, y2;

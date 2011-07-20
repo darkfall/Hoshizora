@@ -14,9 +14,12 @@
 /*
 ** Fast 1.0/sqrtf(float) routine
 */
-float InvSqrt(float x);
 
-class hgeVector
+#include "SoraPlatform.h"
+
+float SORA_API InvSqrt(float x);
+
+class SORA_API hgeVector
 {
 public:
 	float	x,y;

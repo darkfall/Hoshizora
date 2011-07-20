@@ -24,6 +24,14 @@ namespace sora {
 #define CSETG(col,g)		(((col) & 0xFFFF00FF) + (uint32(g)<<8))
 #define CSETB(col,b)		(((col) & 0xFFFFFF00) + uint32(b))
 
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
+
     inline float32 ColorNormalize(float32 c) {
         if(c < 0.0f) c = 0.0f;
         else if(c > 1.0f) c = 1.0f;
@@ -109,6 +117,9 @@ namespace sora {
         SoraColorHSV operator*(const SoraColorHSV& c) const {
             return SoraColorHSV(h*c.h, s*c.s, v*c.v, a*c.a);
         }
+		SoraColorHSV operator*(float32 c) const {
+			return SoraColorHSV(h*c, s*c, v*c, a*c);
+		}
         SoraColorHSV operator/(float32 c) const {
             assert(c != 0.f);
             return SoraColorHSV(h/c, s/c, v/c, a/c);

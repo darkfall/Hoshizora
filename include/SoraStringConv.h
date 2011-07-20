@@ -22,13 +22,13 @@
 namespace sora {
 	//extern "C" {
 	//INT -> STRING
-	std::string int_to_str(int32 n);
+	SORA_API std::string int_to_str(int32 n);
 
 	//FLOAT -> STRING
-	std::string fp_to_str(float32 x);
+	SORA_API std::string fp_to_str(float32 x);
 
-	std::string ws2s(const std::wstring& ws);
-	std::wstring s2ws(const std::string& s);
+	SORA_API std::string ws2s(const std::wstring& ws);
+	SORA_API std::wstring s2ws(const std::string& s);
     
 	template<typename T>
 	std::string anyToString(const T& t, int precision) {
@@ -43,10 +43,10 @@ namespace sora {
 		return str.str();
 	}
 	
-	std::string ws2sfast(const std::wstring& ws);
-	std::wstring s2wsfast(const std::string& s);	
+	SORA_API std::string ws2sfast(const std::wstring& ws);
+	SORA_API std::wstring s2wsfast(const std::string& s);	
 
-	void deliStr(std::vector<std::string>& c, const std::string& str, char deli);
+	SORA_API void deliStr(std::vector<std::string>& c, const std::string& str, char deli);
 	//}
 
 } // namespace sora

@@ -13,14 +13,12 @@
 
 namespace sora {
     
-    const uint32 MAX_OBJECT_SIZE = 65535;
-    static SoraObject* g_ObjectMap[MAX_OBJECT_SIZE];
+    const uint32 MAX_OBJECT_SIZE = 65525;
 
     class SoraObjectHandle {
     public:
-        SoraObjectHandle();
         explicit SoraObjectHandle(SoraObject* obj);
-        SoraObjectHandle(SoraHandle handle, SoraUniqueId uid);
+        ~SoraObjectHandle();
         
         SoraObject* toObject();
         
@@ -34,8 +32,12 @@ namespace sora {
         SoraUniqueId getUniqueId() const;
         
         static void freeObjectHandle(SoraHandle handle);
+        static uint32 getGlobalObjectSize();
         
     private:
+        SoraObjectHandle(SoraHandle handle, SoraUniqueId uid);
+        SoraObjectHandle();
+
         SoraHandle m_HandleId;
         SoraUniqueId m_UniqueId;
     }; 

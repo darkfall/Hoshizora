@@ -44,13 +44,14 @@ namespace sora {
 		EVENT_HANDLER_CONT evHandlers;
 	};
 
-	class SoraEventManager: public SoraSingleton<SoraEventManager> {
-		friend class SoraSingleton<SoraEventManager>;
-		
+	class SoraEventManager {
 		SoraEventManager();
 		~SoraEventManager();
 		
 	public:
+        static SoraEventManager* Instance();
+        static void Destroy();
+        
 		//~SoraEventManager();
 
 		void SORACALL registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev);
@@ -103,6 +104,8 @@ namespace sora {
 		void SORACALL update(float32 dt);
 
 	private:
+        static SoraEventManager* mInstance;
+        
 		class SoraEventInfo {
 		public:
 			friend class SoraEventManager;

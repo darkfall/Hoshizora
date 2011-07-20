@@ -66,86 +66,84 @@ namespace sora {
 
 		virtual uint32 update(float32 dt);
 
-		void setTexture(HSORATEXTURE tex);
-		
-		void setTextureRect(float32 x, float32 y, float32 width, float32 height);
+		void    setTexture(HSORATEXTURE tex);
+		void    setTextureRect(float32 x, float32 y, float32 width, float32 height);
 		hgeRect getTextureRect() const;
 		
-		void setColor(uint32 c, int32 i=-1);
-		uint32 getColor(int32 i=0) const;
+		void    setColor(uint32 c, int32 i=-1);
+		uint32  getColor(int32 i=0) const;
 
-		void setZ(float32 z, int32 i=-1);
+		void    setZ(float32 z, int32 i=-1);
 		float32 getZ(int32 i=0) const;
 
-		void setCenter(float32 x, float32 y);
-		void getCenter(float32& x, float32& y);
+		void    setCenter(float32 x, float32 y);
+		void    getCenter(float32& x, float32& y);
 		float32 getCenterX() const;
 		float32 getCenterY() const;
 
-		void setFlip(bool hflag, bool vflag, bool bFlipCenter=true);
-		bool getHFlip() const;
-		bool getVFlip() const;
+		void    setFlip(bool hflag, bool vflag, bool bFlipCenter=true);
+		bool    getHFlip() const;
+		bool    getVFlip() const;
 
-		void setBlendMode(int32 mode);
-		int32  getBlendMode() const;
+		void    setBlendMode(int32 mode);
+		int32   getBlendMode() const;
 
-		int32 getTextureWidth(bool bOriginal=true) const;
-		int32 getTextureHeight(bool bOriginal=true) const;
-		int32 getSpriteWidth() const;
-		int32 getSpriteHeight() const;
-		int32 getSpritePosX() const;
-		int32 getSpritePosY() const;
+		int32   getTextureWidth(bool bOriginal=true) const;
+		int32   getTextureHeight(bool bOriginal=true) const;
+		int32   getSpriteWidth() const;
+		int32   getSpriteHeight() const;
+		int32   getSpritePosX() const;
+		int32   getSpritePosY() const;
 
-		void setScale(float32 h, float32 v);
+		void    setScale(float32 h, float32 v);
 		float32 getVScale() const;
 		float32 getHScale() const;
 
-		void setRotation(float32 r);
+		void    setRotation(float32 r);
 		float32 getRotation() const;
-		void setRotationZ(float32 rz);
+		void    setRotationZ(float32 rz);
 		float32 getRotationZ() const;
 
-		uint32* getPixelData() const;
-        void unlockPixelData();
-		HSORATEXTURE getTexture() const;
+		uint32*         getPixelData() const;
+        void            unlockPixelData();
+		HSORATEXTURE    getTexture() const;
 		
 		void addEffect(SoraImageEffect* effect);
 		void stopEffect(SoraImageEffect* effect);
 		void clearEffects();
 		bool hasEffect() const;
         
-        void attachShader(SoraShader*);
-        void detachShader(SoraShader*);
+        void        attachShader(SoraShader*);
+        void        detachShader(SoraShader*);
         SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);
-        bool hasShader() const;
-        void clearShader();
+        bool        hasShader() const;
+        void        clearShader();
 		
 	protected:
-       
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
         
-		SoraSprite() { shaderContext = NULL; texture=0; _initDefaults(); }
-		SoraSprite(SoraSprite&) { }
+		SoraSprite();
+		SoraSprite(SoraSprite&);
 
 		void _initDefaults();
-		SoraTexture* texture;
+		SoraTexture* mTexture;
 		
-		hgeRect textureRect;
-        int32 sprWidth, sprHeight;
+		hgeRect mTextureRect;
+        int32 mSprWidth, mSprHeight;
 
-		float32 rot, rotZ;
-		float32 centerX, centerY;
-		float32 vscale, hscale;
+		float32 mRotation, mRotationZ;
+		float32 mCenterX, mCenterY;
+		float32 mVScale, mHScale;
 
 		bool bVFlip, bHFlip, bCFlip;
 		
 		typedef std::list<SoraImageEffect*> ImageEffectList;
 		ImageEffectList vEffects;
 
-		SoraCore* sora;
-		SoraQuad quad;
+		SoraCore* mSora;
+		SoraQuad mQuad;
         
-        SoraShaderContext* shaderContext;
+        SoraShaderContext* mShaderContext;
 	};
 
 } // namespace sora
