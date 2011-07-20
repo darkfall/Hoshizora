@@ -134,8 +134,10 @@ namespace sora {
 		prevShaderContext = NULL;
         shaderContext = NULL;
         tempShaderContext = NULL;
-		mainCamera = NULL;
         mScreenBuffer = NULL;
+        
+        mTime = 0.f;
+        mTimeScale = 1.0f;
 
 		pPluginManager = new SoraPluginManager;
 		pResourceFileFinder = new SoraResourceFileFinder;
@@ -329,7 +331,7 @@ namespace sora {
                     }
                 }
                 
-                time += pTimer->getDelta();
+                mTime += pTimer->getDelta();
                 
                 pRenderSystem->endFrame();
                 
@@ -617,7 +619,7 @@ namespace sora {
 
 	float32 SoraCore::getDelta() {
 		if(!bFrameSync)
-			return pTimer->getDelta();
+			return pTimer->getDelta() * mTimeScale;
 		return 1.f;
 	}
     
@@ -645,12 +647,11 @@ namespace sora {
 
 	void SoraCore::setTimeScale(float32 scale) {
 		SET_ENV_FLOAT("CORE_TIMER_TIME_SCALE", scale);
-
-		pTimer->setTimeScale(scale);
+		mTimeScale = scale;
 	}
 
 	float32 SoraCore::getTimeScale() {
-		return pTimer->getTimeScale();
+		return mTimeScale;
 	}
     
     void SoraCore::setVerticalSync(bool flag) {
@@ -1312,18 +1313,8 @@ namespace sora {
 		pRenderSystem->setCursor(cursor);
 	}
 	
-	
-	void SoraCore::setMainCamera(SoraCamera* camera) {
-		assert(camera != NULL);
-		mainCamera = camera;
-	}
-	
 	void SoraCore::enablePluginDetection(bool flag) {
 		bDisablePluginDetection = !flag;
-	}
-	
-	SoraCamera* SoraCore::getMainCamera() const {
-		return mainCamera;
 	}
 
     void SoraCore::_modifierAdapterUpdate() {

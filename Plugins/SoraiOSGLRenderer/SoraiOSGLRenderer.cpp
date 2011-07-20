@@ -124,17 +124,18 @@ namespace sora{
             glOrthof(0.f,
                     _oglWindowInfo.width,
                     _oglWindowInfo.height
-                    , 0.f, -1.f, 1.f);
+                    , 0.f, 1.f, -1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             
-            glTranslatef(_oglWindowInfo.x-_oglWindowInfo.dx, _oglWindowInfo.y-_oglWindowInfo.dy, 0.f); //Set Center Coodinates
+            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
             glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
             glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
-			
-            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
+            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
+            
+            
         } else {
-            glViewport(0, 0,
+            glViewport(0,  0,
                        pCurTarget->getWidth(),
                        pCurTarget->getHeight());
             glMatrixMode(GL_PROJECTION);
@@ -142,14 +143,14 @@ namespace sora{
             glOrthof(0,
                     pCurTarget->getWidth(),
                     0
-                    , pCurTarget->getHeight(), -1.f, 1.f);
+                    , pCurTarget->getHeight(), 1.f, -1.f);
+            
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
-            glTranslatef(0.f, 0.f, 0.f); //Set Center Coodinates
-            glRotatef(0.f, -0.f, 0.f, 1.f);
-            glScalef(1.f, 1.f, 1.0f);//
-			
-            glTranslatef(0.f, 0.f, 0.f);
+            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
+            glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
+            glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
+            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
         }
 	}
 	
@@ -190,7 +191,8 @@ namespace sora{
 			pCurTarget->detachFromRender();
             pCurTarget = 0;
 			
-            applyTransform();
+            setTransform(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
+            setClipping();
         } else 
             iFrameStart = 0;
 		//else
@@ -726,7 +728,16 @@ namespace sora{
 	}
 
 	void SoraiOSGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
-		glScissor(x, y, w, h);
+		if(w == 0 && h == 0) {
+            w = _oglWindowInfo.width;
+            h = _oglWindowInfo.height;
+        }
+        if(!pCurTarget) {
+            glScissor(x, _oglWindowInfo.height-(y+h), w, h);
+        }
+        else {
+            glScissor(x, y, w, h);
+        }
 	}
 
 	void SoraiOSGLRenderer::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {

@@ -225,15 +225,7 @@ namespace sora {
         if(mRenderToCanvas && mCanvas)
             mCanvas->finishRender();
     }
-    
-    void SoraScene::rotateTo(float32 rot, float32 inTime) {
-        
-    }
-    
-    void SoraScene::scaleTo(float32 hs, float32 vs, float32 inTime) {
-        
-    }
-    
+
     void SoraScene::moveTo(float32 x, float32 y, float32 inTime) {
         CreateModifierAdapter(this, 
                               new ScenePositionModifier(getPositionX(),

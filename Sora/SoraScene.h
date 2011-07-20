@@ -97,9 +97,7 @@ namespace sora {
         void    setScale(float32 scaleh, float32 scalev);
         void    getScale(float32* scaleh, float32* scalev);
         
-        void    rotateTo(float32 rot, float32 inTime);
         void    moveTo(float32 x, float32 y, float32 inTime);
-        void    scaleTo(float32 hs, float32 vs, float32 inTime);
         
         void    setPosition(float32 x, float32 y);
         

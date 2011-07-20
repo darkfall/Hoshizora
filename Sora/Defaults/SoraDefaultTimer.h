@@ -17,7 +17,7 @@
 namespace sora {
 	class SoraDefaultTimer: public SoraTimer {
 	public:
-		SoraDefaultTimer(): fpsInterval(SORA_FPS_INFINITE), frameCounter(0), fps(0.f), fTime(0.f), fTimeScale(1.f) {
+		SoraDefaultTimer(): fpsInterval(SORA_FPS_INFINITE), frameCounter(0), fps(0.f), fTime(0.f) {
 			time.update();
 			oldtime = time;
 		}
@@ -31,8 +31,6 @@ namespace sora {
 		float32 getDelta()	{ return fdt; }
 		int32 getFrameCount() { return frameCounter; }
 		float32 getTime() {  return fTime; }
-		void setTimeScale(float32 ts) { fTimeScale = ts; }
-		float32 getTimeScale() { return fTimeScale; }
 		uint64 getCurrentSystemTime() {
             SoraTimestamp currtime;
             return currtime.epochMicroseconds();
@@ -66,10 +64,10 @@ namespace sora {
             time.update();
             
             if(oldtime <= time - fpsInterval && oldtime >= time - (fpsInterval*2)) {
-				fdt = fpsInterval / (float32)(1000*1000) * fTimeScale;
+				fdt = fpsInterval / (float32)(1000*1000);
 				oldtime += fpsInterval;
 			} else {
-				fdt = (time-oldtime) / (float32)(1000*1000) * fTimeScale;
+				fdt = (time-oldtime) / (float32)(1000*1000);
 				oldtime = time;
 			}
 			/* too long */
@@ -91,9 +89,7 @@ namespace sora {
 		
 		float32 fTime;
 		int32 frameCounter;
-		
-		float32 fTimeScale;
-	};
+    };
 }
 
 #endif

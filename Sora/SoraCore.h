@@ -29,9 +29,7 @@
 #include <map>
 
 namespace sora {
-	
-	class SoraCamera;
-	
+		
 	class SORA_API SoraCore: public SoraEventHandler {
 	protected:
 		SoraCore();
@@ -263,9 +261,6 @@ namespace sora {
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
 		
-		void setMainCamera(SoraCamera* camera);
-		SoraCamera* getMainCamera() const;
-		
 		void enablePluginDetection(bool flag);
         
         /**
@@ -309,7 +304,8 @@ namespace sora {
 
         bool bMainScene;
 		bool bFrameSync;
-		float32 time;
+		float32 mTime;
+        float32 mTimeScale;
 
 		SoraWindowInfoBase* mainWindow;
 		SoraShaderContext* shaderContext;
@@ -320,9 +316,7 @@ namespace sora {
         bool bScreenBufferAttached;
         ulong32 mScreenBuffer;
         SoraSprite* mScreenBufferSprite;
-		
-		SoraCamera* mainCamera;
-		
+				
 		typedef std::list<SoraFrameListener*> FRAME_LISTENER_CONT;
 		FRAME_LISTENER_CONT frameListeners;
 

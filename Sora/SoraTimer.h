@@ -24,8 +24,6 @@ namespace sora {
 		virtual bool update() = 0;
 		virtual float32 getTime() = 0;
 		virtual int32 getFrameCount() = 0;
-		virtual void setTimeScale(float32 scale) = 0;
-		virtual float32 getTimeScale() = 0;
 		virtual uint64 getCurrentSystemTime() = 0;
 	};
 }

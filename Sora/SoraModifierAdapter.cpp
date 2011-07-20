@@ -13,11 +13,17 @@ namespace sora {
     SoraAbstractModiferAdapter::Members SoraAbstractModiferAdapter::members;
     
     SoraAbstractModiferAdapter::SoraAbstractModiferAdapter() {
-        members.push_back(this);
+        
     }
     
     SoraAbstractModiferAdapter::~SoraAbstractModiferAdapter() {
-        members.remove(this);
     }
         
+    void SoraAbstractModiferAdapter::insert() {
+        members.push_back(this);
+    }
+    
+    void SoraAbstractModiferAdapter::remove() {
+        members.remove(this);
+    }
 } // namespace sora

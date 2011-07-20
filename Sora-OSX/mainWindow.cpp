@@ -53,7 +53,7 @@
 
 #include "SoraModifierAdapter.h"
 #include "modifiers/SoraFontModifiers.h"
-
+#include "modifiers/SoraCameraModifiers.h"
 #include "SoraExternalRenderObject.h"
 
 
@@ -90,9 +90,12 @@ void myRenderFunc(sora::SoraObject& obj) {
     }
 }
 
+sora::SoraModifierAdapter<sora::SoraCamera>* ma;
+
 bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
+    ma->update(sora::SORA->getDelta());
 //    mScene1->getCanvas()->render();
     sora::SORA->endScene();
     
@@ -111,6 +114,12 @@ void mainWindow::init() {
     mCamera = new sora::SoraCamera(100, 100.f, 500.f, 500.f);
   //  mCamera->zoomTo(2.f, 2.f, 20.f);
     mScene1->setCamera(mCamera);
+    
+    ma = sora::CreateModifierAdapter(mCamera, new sora::SoraCameraPositionModifier(mCamera->getPositionX(),
+                                                                              mCamera->getPositionY(),
+                                                                              200.f,
+                                                                              200.f,
+                                                                              5.f), false, false);
     
     mScene1->add(mScene2);
     sora::SoraSprite* bg = sora::SORA->createSprite(L"background.png");
