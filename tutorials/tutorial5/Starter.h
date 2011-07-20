@@ -9,6 +9,7 @@
 #ifndef Hoshizora_Starter_h
 #define Hoshizora_Starter_h
 
+
 #include "SoraCore.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
 #include "SoraOGLRenderer/SoraOGLRenderer.h"

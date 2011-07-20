@@ -5,6 +5,7 @@
 //  Created by Ruiwei Bu on 7/16/11.
 //  Copyright 2011 Robert Bu. All rights reserved.
 //
+#define SORA_DLL_EXPORT
 
 #include "SoraCore.h"
 #include "Starter.h"

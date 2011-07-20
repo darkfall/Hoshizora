@@ -42,6 +42,7 @@
 		886E032013D68309003433BE /* geotest.png in Resources */ = {isa = PBXBuildFile; fileRef = 886E031F13D68308003433BE /* geotest.png */; };
 		886E032613D68615003433BE /* bloom.cg in Resources */ = {isa = PBXBuildFile; fileRef = 886E032513D68615003433BE /* bloom.cg */; };
 		886E032813D68829003433BE /* gray.cg in Resources */ = {isa = PBXBuildFile; fileRef = 886E032713D68829003433BE /* gray.cg */; };
+		886E047313D72519003433BE /* Cg.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 886E047213D72519003433BE /* Cg.framework */; };
 		887C5CC813D1D2E90009E508 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887C5CC713D1D2E90009E508 /* Cocoa.framework */; };
 		887C5D9013D1D3730009E508 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887C5D8913D1D3730009E508 /* Cg.framework */; };
 		887C5D9113D1D3730009E508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887C5D8A13D1D3730009E508 /* AudioToolbox.framework */; };
@@ -59,6 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				886E047313D72519003433BE /* Cg.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +295,7 @@
 		886E031F13D68308003433BE /* geotest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geotest.png; sourceTree = SOURCE_ROOT; };
 		886E032513D68615003433BE /* bloom.cg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bloom.cg; sourceTree = SOURCE_ROOT; };
 		886E032713D68829003433BE /* gray.cg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gray.cg; sourceTree = SOURCE_ROOT; };
+		886E047213D72519003433BE /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = ../../../../../Library/Frameworks/Cg.framework; sourceTree = "<group>"; };
 		887C5CC313D1D2E90009E508 /* Hoshizora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hoshizora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		887C5CC713D1D2E90009E508 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		887C5CCA13D1D2E90009E508 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -682,6 +685,7 @@
 		887C5CB813D1D2E90009E508 = {
 			isa = PBXGroup;
 			children = (
+				886E047213D72519003433BE /* Cg.framework */,
 				886E031413D67D8B003433BE /* libHoshizora.dylib */,
 				886E020B13D67D61003433BE /* SoraFreetypeFont */,
 				886E02BE13D67D61003433BE /* SoraOGLRenderer */,
