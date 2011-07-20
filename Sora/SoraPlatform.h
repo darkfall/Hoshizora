@@ -198,13 +198,17 @@ namespace sora {
 #if defined(OS_WIN32) 
     #if defined(SORA_DLL_EXPORT)
         #define SORA_API __declspec(dllexport)
+		#define SORA_EXTERN extern
     #elif defined(SORA_DLL_IMPORT)
         #define SORA_API __declspec(dllimport)
+		#define SORA_EXTERN extern
     #else
 		#define SORA_API
+		#define SORA_EXTERN
 	#endif
 #else
     #define SORA_API
+	#define SORA_EXTERN
 #endif
 
 #include "ZLIB/zlib.h"

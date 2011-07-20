@@ -630,6 +630,9 @@
     <ClInclude Include="..\..\..\Sora\SoraLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\modifiers\SoraCameraModifiers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sora\cmd\CoreCmds.cpp">
@@ -921,6 +924,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraLayer.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\modifiers\SoraCameraModifiers.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
