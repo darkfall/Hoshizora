@@ -17,16 +17,16 @@ namespace sora {
 		}
 		inline ~SoraDefaultLogger() {  file.close(); };
 
-		inline void setFile(const SoraString& file) { logfilepath = file; }
+		inline void setFile(const char* file) { logfilepath = file; }
 
-		inline void log(const SoraString& str) {
+		inline void log(const char* str) {
 		//	std::fstream file(logfile.c_str(), std::ios::app);
 			if(!file.is_open()) return;
 
 			file<<str;
 		//	file.close();
 		}
-		inline void log(const SoraWString& str) {
+		inline void log(const wchar_t* str) {
 		/*	std::fstream file;
 #if defined(__APPLE_CC__) || defined(__GNUC__)
 			file.open(logfile.c_str(), (std::_Ios_Openmode)(std::ios::app || std::ios::out));

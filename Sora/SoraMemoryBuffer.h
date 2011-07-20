@@ -45,7 +45,7 @@ namespace sora {
 			return push(&t, sizeof(t));
 		}
 		
-		bool writeToFile(const SoraWString& path);
+		bool writeToFile(const wchar_t* path);
 
 		/* 
 		 read a block of memory, size = sizeof(T) 

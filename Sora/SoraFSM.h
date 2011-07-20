@@ -49,10 +49,10 @@ namespace sora {
         SoraFSMManager();
         ~SoraFSMManager();
         
-        SoraFSMManager& defState(SoraFSMState* state, const SoraString& name);
-        void delState(const SoraString& name);
+        SoraFSMManager& defState(SoraFSMState* state, const char* name);
+        void delState(const char* name);
         
-        void switchToState(const SoraString& name);
+        void switchToState(const char* name);
         void switchToState(SoraFSMState* state);
 
         void setGlobalState(SoraFSMState* state);
@@ -68,7 +68,7 @@ namespace sora {
         
         static SoraFSMManager& defaultFSMManager();
         
-        SoraFSMState* operator[](const SoraString& name);
+        SoraFSMState* operator[](const char* name);
         
     private:
         typedef std::map<stringId, SoraFSMState*> FSMStateMap;

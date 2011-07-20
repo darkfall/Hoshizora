@@ -73,14 +73,14 @@ namespace sora {
 			delete mFileChangeEventPublisher;
 	}
 	
-	void SoraEventManager::registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev) {
-		EVENT_ID eid = BKDRHash(eventName.c_str());
+	void SoraEventManager::registerEvent(const char* eventName, SoraEventHandler* handler, SoraEvent* ev) {
+		EVENT_ID eid = BKDRHash(eventName);
 		evMap[eid].push_back(SoraEventInfo(eventName, handler, ev));
 	}
 
-	void SoraEventManager::sendMessage(const SoraString& eventName, const SoraString& params, ulong32 hreceiver) {
+	void SoraEventManager::sendMessage(const char* eventName, const char* params, ulong32 hreceiver) {
 		SoraEventHandler* receiver = (SoraEventHandler*)hreceiver;
-		EVENT_ID eid = BKDRHash(eventName.c_str());
+		EVENT_ID eid = BKDRHash(eventName);
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
 		if(itEvent == evMap.end()) {
 			// ·¢ËÍ¸øluaobjects
@@ -116,7 +116,7 @@ namespace sora {
 	//	SoraLuaObjectManager::Instance()->sendMessage(eventName, params, hreceiver);
 	}
 	
-	void SoraEventManager::sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 hreceiver) {
+	void SoraEventManager::sendMessage(const char* eventName, SoraEvent* ev, ulong32 hreceiver) {
 		SoraEventHandler* receiver = (SoraEventHandler*)hreceiver;
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
@@ -149,14 +149,14 @@ namespace sora {
 		}
 	}
 	
-	void SoraEventManager::unregisterEvent(const SoraString& eventName) {
+	void SoraEventManager::unregisterEvent(const char* eventName) {
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
 		if(itEvent != evMap.end())
 			evMap.erase(itEvent);
 	}
 	
-	void SoraEventManager::unregisterHandlerFromEvent(const SoraString& eventName, SoraEventHandler* handler) {
+	void SoraEventManager::unregisterHandlerFromEvent(const char* eventName, SoraEventHandler* handler) {
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
 		if(itEvent != evMap.end()) {
@@ -267,7 +267,7 @@ namespace sora {
 		}
 	}
 	
-	void SORACALL SoraEventManager::registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler) {
+	void SORACALL SoraEventManager::registerFileChangeEventHandler(const wchar_t* file, SoraEventHandler* handler) {
 		if(mFileChangeEventPublisher == NULL)
 			mFileChangeEventPublisher = new SoraFileChangeEventPublisher;
 		

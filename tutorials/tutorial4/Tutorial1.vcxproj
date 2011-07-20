@@ -21,6 +21,11 @@
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\hge\hge_impl.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.h" />
     <ClInclude Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackMemory.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\PackReader.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.h" />
+    <ClInclude Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.h" />
     <ClInclude Include="..\..\Sora\ZLIB\crc32.h" />
     <ClInclude Include="..\..\Sora\ZLIB\crypt.h" />
     <ClInclude Include="..\..\Sora\ZLIB\deflate.h" />
@@ -51,6 +56,11 @@
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp" />
     <ClCompile Include="..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackMemory.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\PackReader.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipFile.cpp" />
+    <ClCompile Include="..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.cpp" />
     <ClCompile Include="..\..\Sora\ZLIB\adler32.c" />
     <ClCompile Include="..\..\Sora\ZLIB\compress.c" />
     <ClCompile Include="..\..\Sora\ZLIB\crc32.c" />
@@ -78,7 +88,7 @@
     <ProjectGuid>{E10A367D-75B3-4501-85A0-972B25D3DE02}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Tutorial1</RootNamespace>
-    <ProjectName>Tutorial3</ProjectName>
+    <ProjectName>Tutorial4</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

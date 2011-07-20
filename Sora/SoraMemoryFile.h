@@ -23,7 +23,7 @@ namespace sora {
 				public SoraMemoryBuffer,
 				public SoraNamedObject {
 	public:
-		SoraMemoryFile(const SoraWString& filename): dataPtr(NULL) { read(filename); }
+		SoraMemoryFile(const wchar_t* filename): dataPtr(NULL) { read(filename); }
 		SoraMemoryFile(stringId filename): dataPtr(NULL) { read(filename); }
 		SoraMemoryFile(): dataPtr(NULL) {}
 					
@@ -38,9 +38,9 @@ namespace sora {
 			}
 		}
 					
-		void read(const SoraWString& filename) {
+		void read(const wchar_t* filename) {
 			ulong32 size;
-			void* pData = SORA->getResourceFile(filename, size);
+			void* pData = SORA->getResourceFile(filename.c_str(), size);
 			if(pData && size != 0) {
 				memoryFile.set(pData, size);
 				setName(str2id(filename));

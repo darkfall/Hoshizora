@@ -30,7 +30,7 @@ namespace sora {
 	class SORA_API SoraNamedObject: public Serializable {
 	public:
 		SoraNamedObject(): mName(0) {}
-		SoraNamedObject(const SoraString& _name): mName(str2id(_name)) {}
+		SoraNamedObject(const char* _name): mName(str2id(_name)) {}
 		SoraNamedObject(stringId sid): mName(sid) {}
 		virtual ~SoraNamedObject() {}
 		

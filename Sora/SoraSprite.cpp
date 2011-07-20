@@ -400,7 +400,7 @@ namespace sora {
 		return 0;
 	}
     
-    SoraShader* SoraSprite::attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type) {
+    SoraShader* SoraSprite::attachShader(const wchar_t* shaderPath, const char* entry, SORA_SHADER_TYPE type) {
         if(!mShaderContext) {
             mShaderContext = mSora->createShaderContext();
             if(!mShaderContext)

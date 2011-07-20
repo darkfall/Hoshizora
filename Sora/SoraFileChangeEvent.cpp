@@ -26,7 +26,7 @@ namespace sora {
 		SoraEventManager::Instance()->createTimerEvent(this, mCheckInternval, true);
 	}
 	
-	void SoraFileChangeEventPublisher::addEventHandler(const SoraWString& file, SoraEventHandler* handler) {	
+	void SoraFileChangeEventPublisher::addEventHandler(const wchar_t* file, SoraEventHandler* handler) {	
 		FILE_CHANGE_MAP::iterator itFile = mChangeListeners.find(file);
 		if(itFile != mChangeListeners.end()) {
 			mChangeListeners[file].mHandlers.push_back(handler);

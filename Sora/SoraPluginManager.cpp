@@ -32,7 +32,7 @@ void SoraPluginManager::registerPlugin(SoraPlugin* pPlugin) {
 	}
 }
 
-void SoraPluginManager::unistallPlugin(const SoraString& sPluginName) {
+void SoraPluginManager::unistallPlugin(const char* sPluginName) {
 	itPlugin plugin = pPluginList.begin();
 	while(plugin != pPluginList.end()) {
 		if((*plugin)->getName().compare(sPluginName) == 0) {
@@ -58,7 +58,7 @@ void SoraPluginManager::unistallPlugin(SoraPlugin* pPlugin) {
 	}
 }
 
-SoraPlugin* SoraPluginManager::getPlugin(const SoraString& sPluginName) {
+SoraPlugin* SoraPluginManager::getPlugin(const char* sPluginName) {
 	itPlugin plugin = pPluginList.begin();
 	while(plugin != pPluginList.end()) {
 		if((*plugin)->getName().compare(sPluginName) == 0) {

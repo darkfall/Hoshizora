@@ -22,9 +22,9 @@ namespace sora {
 	class SORA_API SoraFileChangeEvent: public SoraEvent {
 	public:
 		SoraFileChangeEvent() {}
-		SoraFileChangeEvent(const SoraWString& file): mChangedFile(file) {}
+		SoraFileChangeEvent(const wchar_t* file): mChangedFile(file) {}
 		
-		void setChangedFile(const SoraWString& file) {
+		void setChangedFile(const wchar_t* file) {
 			mChangedFile = file;
 		}
 		
@@ -45,7 +45,7 @@ namespace sora {
 		SoraFileChangeEventPublisher();
 		
 		void setInterval(float32 interval);
-		void addEventHandler(const SoraWString& file, SoraEventHandler* handler);
+		void addEventHandler(const wchar_t* file, SoraEventHandler* handler);
 		void delEventHandler(SoraEventHandler* handler);
 		void onCheckTimerEvent(SoraTimerEvent* event);
 		

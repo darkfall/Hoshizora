@@ -18,7 +18,7 @@
 
 namespace sorawin32 {
 
-	void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& path);
+	void enumFilesInFolder(std::vector<SoraWString>& cont, const wchar_t* path);
 
 } // namespace sorawin32
 

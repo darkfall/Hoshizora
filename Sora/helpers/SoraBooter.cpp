@@ -33,7 +33,7 @@ namespace sora {
 	typedef SoraPluginManager* (*create_plugin_manager)(void);
 	typedef SoraFontManager* (*create_font_manager)(void);
 
-	void SoraBooter::loadExPlugins(const SoraWString& path) {
+	void SoraBooter::loadExPlugins(const wchar_t* path) {
 		std::vector<SoraWString> plugins;
 		SORA->enumFilesInFolder(plugins, path);
 		if(plugins.size() != 0) {

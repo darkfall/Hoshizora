@@ -20,21 +20,21 @@ namespace sora {
 		SoraDefaultMiscTool(){}
 		virtual ~SoraDefaultMiscTool() { }
 
-		virtual void setLogFile(const SoraString& sfile) { }
+		virtual void setLogFile(const char* sfile) { }
 
-		virtual int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
+		virtual int32 messageBox(const char* sMessage, const char* sTitle, int32 msgCode) {
 			DebugPtr->log("MessageBox: "+sTitle + ": " + sMessage);
 			return 0;
 		}
-		virtual int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
+		virtual int32 messageBox(const wchar_t* sMessage, const wchar_t* sTitle, int32 msgCode) { 
 			DebugPtr->log(L"MessageBox: "+ sTitle + L": " + sMessage);
 			return 0;
 		}
 	
-		virtual void log(const SoraString& sMessage) {
+		virtual void log(const char* sMessage) {
 			DebugPtr->log(sMessage);
 		}
-		virtual void log(const SoraWString& sMessage) {
+		virtual void log(const wchar_t* sMessage) {
 			DebugPtr->log(sMessage);
 		}
 		

@@ -204,7 +204,7 @@ namespace sora {
             if(pRenderSystem)
                 pRenderSystem->start(pTimer);
         } catch(const SoraException& exp) {
-            _postError(exp.what());
+            _postError(exp.what().c_str());
         }
 	}
 
@@ -339,7 +339,7 @@ namespace sora {
                 keypoll::clearInputQueue();
             }
         } catch (const SoraException& exp) {
-            messageBox(exp.what(), "A Error Happened :(", MB_OK | MB_ICONERROR);
+            messageBox(exp.what().c_str(), "A Error Happened :(", MB_OK | MB_ICONERROR);
         }
         
 	}
@@ -388,11 +388,11 @@ namespace sora {
 		bInitialized = true;
 	}
 
-	void SoraCore::postError(const SoraString& string) {
+	void SoraCore::postError(const char* string) {
 		_postError(string);
 	}
 
-	void SoraCore::_postError(const SoraString& string) {
+	void SoraCore::_postError(const char* string) {
 		if(!bMessageBoxErrorPost)
 			DebugPtr->log(string, LOG_LEVEL_ERROR);
 		else
@@ -512,7 +512,7 @@ namespace sora {
 		pRenderSystem->setWindowSize(w, h);
 	}
 
-	void SoraCore::setWindowTitle(const SoraWString& title) {
+	void SoraCore::setWindowTitle(const wchar_t* title) {
 		assert(bInitialized == true);
 
 		pRenderSystem->setWindowTitle(title);
@@ -660,7 +660,7 @@ namespace sora {
         pRenderSystem->setVerticalSync(flag);
     }
 
-	HSORARESOURCE SoraCore::loadResourcePack(const SoraWString& file) {
+	HSORARESOURCE SoraCore::loadResourcePack(const wchar_t* file) {
 		return pResourceFileFinder->loadResourcePack(file);
 	}
 
@@ -672,7 +672,7 @@ namespace sora {
 		pResourceFileFinder->detachResourcePack(handle);
 	}
 
-	void* SoraCore::getResourceFile(const SoraWString& sfile, ulong32& size) {
+	void* SoraCore::getResourceFile(const wchar_t* sfile, ulong32& size) {
 		return pResourceFileFinder->getResourceFile(sfile, size);
 	}
 
@@ -680,15 +680,15 @@ namespace sora {
 		return pResourceFileFinder->freeResourceFile(p);
 	}
 
-	void* SoraCore::readResourceFile(const SoraWString& sfile, ulong32 size) {
+	void* SoraCore::readResourceFile(const wchar_t* sfile, ulong32 size) {
 		return pResourceFileFinder->readResourceFile(sfile, size);
 	}
 
-	ulong32 SoraCore::getResourceFileSize(const SoraWString& file) {
+	ulong32 SoraCore::getResourceFileSize(const wchar_t* file) {
 		return pResourceFileFinder->getResourceFileSize(file);
 	}
     
-    SoraShader* SoraCore::createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type) {
+    SoraShader* SoraCore::createShader(const wchar_t* file, const char* entry, SORA_SHADER_TYPE type) {
         if(shaderContext == NULL) {
             shaderContext = createShaderContext();
             if(shaderContext == NULL)
@@ -735,7 +735,7 @@ namespace sora {
         }
     }
 
-	HSORATEXTURE SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
+	HSORATEXTURE SoraCore::createTexture(const wchar_t* sTexturePath, bool bCache, bool bMipmap)	{
 		assert(bInitialized==true);
 		HSORATEXTURE tex;
 		if((tex = SoraTextureMap::Instance()->get(sTexturePath)) != 0) return tex;
@@ -815,7 +815,7 @@ namespace sora {
 		return pRenderSystem->getVideoDeviceHandle();
 	}
 
-	SoraSprite* SoraCore::createSprite(const SoraWString& sPath) {
+	SoraSprite* SoraCore::createSprite(const wchar_t* sPath) {
 		assert(bInitialized==true);
 		HSORATEXTURE tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
@@ -1069,7 +1069,7 @@ namespace sora {
 		return pMiscTool->fileSaveDialog(filter, defaultPath, defaultExt);
 	}
 
-	int32 SoraCore::messageBox(const SoraString& sMssg, const SoraString& sTitle, int32 iCode) {
+	int32 SoraCore::messageBox(const char* sMssg, const char* sTitle, int32 iCode) {
 		if(!pMiscTool)
 			return 0;
 		
@@ -1077,7 +1077,7 @@ namespace sora {
 		return pMiscTool->messageBox(sMssg, sTitle, iCode);
 	}
 
-	int32 SoraCore::messageBoxW(const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode) {
+	int32 SoraCore::messageBoxW(const wchar_t* sMssg, const wchar_t* sTitle, int32 iCode) {
 		if(!pMiscTool)
 			return 0;
 		
@@ -1089,7 +1089,7 @@ namespace sora {
 		DebugPtr->log(sMssg, level);
 	}
 
-	void SoraCore::logw(const SoraWString& sMssg, int32 level) {
+	void SoraCore::logw(const wchar_t* sMssg, int32 level) {
 		DebugPtr->log(ws2s(sMssg), level);
 	}
 	
@@ -1111,11 +1111,11 @@ namespace sora {
 		pPluginManager->unistallPlugin(pPlugin);
 	}
 
-	void SoraCore::unistallPluginS(const SoraString& sPluginName) {
+	void SoraCore::unistallPluginS(const char* sPluginName) {
 		pPluginManager->unistallPlugin(sPluginName);
 	}
 
-	SoraPlugin* SoraCore::getPlugin(const SoraString& sPluginName) {
+	SoraPlugin* SoraCore::getPlugin(const char* sPluginName) {
 		return pPluginManager->getPlugin(sPluginName);
 	}
 
@@ -1149,7 +1149,7 @@ namespace sora {
 		return (float32)genrand_real1();
 	}
 
-	SoraFont* SoraCore::createFont(const SoraWString& font, int32 size) {
+	SoraFont* SoraCore::createFont(const wchar_t* font, int32 size) {
 		if(!pFontManager) {
 			_postError("FontManager not available");
 			return 0;
@@ -1201,7 +1201,7 @@ namespace sora {
 		pFontManager->releaseFont(font);
 	}
 	
-	void SoraCore::enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
+	void SoraCore::enumFilesInFolder(std::vector<SoraWString>& cont, const wchar_t* folder) {
 		pResourceFileFinder->enumFiles(cont, folder);
 	}
 
@@ -1209,7 +1209,7 @@ namespace sora {
 		bFrameSync = flag;
 	}
 	
-	SoraMusicFile* SoraCore::createMusicFile(const SoraWString& musicName, bool bStream) {
+	SoraMusicFile* SoraCore::createMusicFile(const wchar_t* musicName, bool bStream) {
 		if(!pSoundSystem) {
 			_postError("SoraCore::createMusicFile: no soundsystem available");
 			return NULL;
@@ -1218,7 +1218,7 @@ namespace sora {
 		return pSoundSystem->createMusicFile(musicName, bStream);
 	}
 	
-	SoraSoundEffectFile* SoraCore::createSoundEffectFile(const SoraWString& se) {
+	SoraSoundEffectFile* SoraCore::createSoundEffectFile(const wchar_t* se) {
 		if(!pSoundSystem) {
 			_postError("SoraCore::createSoundEffectFile: no soundsystem available");
 			return NULL;
@@ -1245,11 +1245,11 @@ namespace sora {
 		return pSoundSystem->createSoundEffectFile();
     }
     
-    void SoraCore::execute(const SoraString& appPath, const SoraString& args) {
-        system((appPath+" "+args).c_str());
+    void SoraCore::execute(const char* appPath, const char* args) {
+        system((std::string(appPath)+" "+args).c_str());
     }
     
-    void SoraCore::snapshot(const SoraString& path) {
+    void SoraCore::snapshot(const char* path) {
         assert(bInitialized == true);
         return pRenderSystem->snapshot(path);
     }
@@ -1304,12 +1304,12 @@ namespace sora {
 		SoraMenuBar::Instance()->setEnabled(flag);
 	}
 
-	void SoraCore::setIcon(const SoraString& icon) {
+	void SoraCore::setIcon(const char* icon) {
 		assert(bInitialized);
 		pRenderSystem->setIcon(icon);
 	}
 
-	void SoraCore::setCursor(const SoraString& cursor) {
+	void SoraCore::setCursor(const char* cursor) {
 		assert(bInitialized);
 		pRenderSystem->setCursor(cursor);
 	}

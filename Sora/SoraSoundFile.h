@@ -26,7 +26,7 @@ namespace sora {
 	public:
 		virtual ~SoraMusicFile() {}
 		
-		virtual int32 readFile(const SoraWString& sFilePath) = 0;
+		virtual int32 readFile(const wchar_t* sFilePath) = 0;
 		virtual int32 readFileMem(void* ptr, ulong32 size) = 0;
 		virtual void closeFile() = 0;
 
@@ -63,7 +63,7 @@ namespace sora {
 	public:
 		virtual ~SoraSoundEffectFile() {}
 		
-		virtual int32 readFile(const SoraWString& sFilePath) = 0;
+		virtual int32 readFile(const wchar_t* sFilePath) = 0;
 		virtual int32 readFileMem(void* ptr, ulong32 size) = 0;
 		virtual void closeFile() = 0;
 

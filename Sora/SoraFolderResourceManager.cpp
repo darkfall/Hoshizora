@@ -24,7 +24,7 @@ namespace sora {
         loadResourcePack(SoraPath::fontW());
     }
 
-	HSORARESOURCE SoraFolderResourceManager::loadResourcePack(const SoraWString& folder) {
+	HSORARESOURCE SoraFolderResourceManager::loadResourcePack(const wchar_t* folder) {
 		//if(!SoraFileUtility::fileExists(folder)) {
 			folders.push_back(folderDescription(folder));
 			return (HSORARESOURCE)folders.back().folderHash;
@@ -45,7 +45,7 @@ namespace sora {
 		}
 	}
 
-	FILE* SoraFolderResourceManager::openFile(const SoraWString& fileName) {
+	FILE* SoraFolderResourceManager::openFile(const wchar_t* fileName) {
 		FILE* pfile = NULL;
 		FILE_CACHE::iterator itFile = fileCache.find(str2idnc(fileName));
 		if(itFile != fileCache.end()) {
@@ -67,7 +67,7 @@ namespace sora {
 		return pfile;
 	}
 
-	void* SoraFolderResourceManager::readResourceFile(const SoraWString& file, ulong32 size) {
+	void* SoraFolderResourceManager::readResourceFile(const wchar_t* file, ulong32 size) {
 		FILE* pfile = openFile(file);
 		if(pfile != NULL) {
             uint8* pdata = new uint8[size+1];
@@ -80,7 +80,7 @@ namespace sora {
 		return 0;
 	}
 
-	void* SoraFolderResourceManager::getResourceFile(const SoraWString& file, ulong32& size) {
+	void* SoraFolderResourceManager::getResourceFile(const wchar_t* file, ulong32& size) {
 		FILE* pfile = openFile(file);
 		if(pfile != NULL) {
 			fseek(pfile, 0, SEEK_END);
@@ -97,7 +97,7 @@ namespace sora {
 		return 0;
 	}
 
-	ulong32 SoraFolderResourceManager::getResourceFileSize(const SoraWString& file) {
+	ulong32 SoraFolderResourceManager::getResourceFileSize(const wchar_t* file) {
 		FILE* pfile = openFile(file);
 		if(pfile != NULL) {
 			ulong32 size;
@@ -115,7 +115,7 @@ namespace sora {
 		if(p) delete (uint8*)p;
 	}
 	
-	bool SoraFolderResourceManager::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
+	bool SoraFolderResourceManager::enumFiles(std::vector<SoraWString>& cont, const wchar_t* folder) {
 #ifdef WIN32
 		sorawin32::enumFilesInFolder(cont, folder);
 #endif

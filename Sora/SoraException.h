@@ -37,17 +37,17 @@
 namespace sora {
 	class SORA_API SoraException {
 	public:
-		SoraException(const SoraString& mssg, const SoraString& function, const SoraString& file, const SoraString& line):
+		SoraException(const char* mssg, const char* function, const char* file, const char* line):
 				mMssg(mssg), mFunction(function), mFile(file), mLine(line) {}
-		SoraException(const SoraWString& mssg, const SoraString& function, const SoraString& file, const SoraString& line):
+		SoraException(const wchar_t* mssg, const char* function, const char* file, const char* line):
 				mMssg(ws2s(mssg)), mFunction(function), mFile(file), mLine(line) {}
-		SoraException(const SoraString& mssg, const SoraString& function, const SoraString& file, int line):
+		SoraException(const char* mssg, const char* function, const char* file, int line):
 				mMssg(mssg), mFunction(function), mFile(file), mLine(int_to_str(line)) {}
-		SoraException(const SoraString& mssg, const SoraString& function, const SoraString& file):
+		SoraException(const char* mssg, const char* function, const char* file):
 				mMssg(mssg), mFunction(function), mFile(file), mLine("?") {}
-		SoraException(const SoraString& mssg, const SoraString& function):
+		SoraException(const char* mssg, const char* function):
 				mMssg(mssg), mFunction(function) {}
-		SoraException(const SoraString& mssg):
+		SoraException(const char* mssg):
 				mMssg(mssg), mFunction("?"), mFile("?"), mLine("?") {}
 		
 		// get a formatted exception mssg
@@ -59,10 +59,10 @@ namespace sora {
 			
 			return fmssg;
 		}
-		const SoraString& mssg() const		{ return mMssg; }
-		const SoraString& function() const	{ return mFunction; }
-		const SoraString& file() const		{ return mFile; }
-		const SoraString& line() const		{ return mLine; }
+		const char* mssg() const		{ return mMssg.c_str(); }
+		const char* function() const	{ return mFunction.c_str(); }
+		const char* file() const		{ return mFile.c_str(); }
+		const char* line() const		{ return mLine.c_str(); }
 		uint32 nline() const { return atoi(mLine.c_str()); }
         
         /*

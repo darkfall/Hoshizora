@@ -91,7 +91,7 @@ namespace sora {
             pCanvasSprite->detachShader(shader);
 	}
 	
-	SoraShader* SoraBaseCanvas::attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type) {
+	SoraShader* SoraBaseCanvas::attachShader(const wchar_t* shaderPath, const char* entry, SORA_SHADER_TYPE type) {
         if(pCanvasSprite)
             return pCanvasSprite->attachShader(shaderPath, entry, type);
         return NULL;

@@ -263,8 +263,8 @@ namespace sora {
         sora::SORA->setGlobalHotkey(mActiveKeyId, key);
     }
 	
-	void SoraConsole::registerCmdHandler(SoraEventHandler* handler, const std::string& cmd) {
-		mHandlers[cmd] = handler;
+	void SoraConsole::registerCmdHandler(SoraEventHandler* handler, const char* cmd) {
+		mHandlers[std::string(cmd)] = handler;
 	}
 	
 	void SoraConsole::setFont(SoraFont* font) {

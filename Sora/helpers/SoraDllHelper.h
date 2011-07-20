@@ -24,10 +24,10 @@ namespace sora {
 		~SoraDllHelper();
 		
 	public:
-		ulong32 opendl(const SoraString& path);
-		ulong32 getdl(const SoraString& name);
+		ulong32 opendl(const char* path);
+		ulong32 getdl(const char* name);
 		void closedl(ulong32);
-		void* getProc(ulong32 handle, const SoraString& name);
+		void* getProc(ulong32 handle, const char* name);
 		
 	private:
 		typedef std::map<SoraString, ulong32> DLL_MAP;

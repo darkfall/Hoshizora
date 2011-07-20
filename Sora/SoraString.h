@@ -32,7 +32,7 @@ namespace sora {
         SoraString& operator=(const std::wstring& str);
         SoraString& operator=(const char* str);
         SoraString& operator=(const wchar_t* str);
-        SoraString& operator=(const SoraString& str);
+        SoraString& operator=(const char* str);
         
         bool operator == (const std::string& str);
         bool operator == (const std::wstring& str);
@@ -86,7 +86,7 @@ namespace sora {
         std::wstring mString;
     };
     
-    std::string operator+(const char* str, const SoraString& sorastr) {
+    std::string operator+(const char* str, const char* sorastr) {
         std::string stdstr(str);
         return stdstr + sorastr.gets();
     }
