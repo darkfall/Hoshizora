@@ -127,6 +127,10 @@ namespace sora {
 				switch(mode) {
 					case IMAGE_EFFECT_ONCE:
 						states = IMAGE_EFFECT_END;
+                        if(mDelegatePtr != NULL) {
+                            mDelegatePtr->notify(this, states);
+                        }
+                        
 						t_curr = t_dst;
 						break;
 						
@@ -169,6 +173,10 @@ namespace sora {
 				currRepeatTimes = 0;
 				states = IMAGE_EFFECT_END;
 				started = 0;
+                
+                if(mDelegatePtr != NULL) {
+                    mDelegatePtr->notify(this, states);
+                }
                 return true;
 			}
 		}
@@ -291,8 +299,13 @@ namespace sora {
 								mCurrEffect->start(IMAGE_EFFECT_ONCE, mCurrEffect->getEffectTime());
 								
 								return IMAGE_EFFECT_PLAYING;
-							} else
+							} else {
+                                if(mDelegatePtr != NULL) {
+                                    mDelegatePtr->notify(this, states);
+                                }
+                                
 								return IMAGE_EFFECT_END;
+                            }
 						}
 					} else {
 						if(next == mImageEffects.begin()) {
@@ -302,8 +315,13 @@ namespace sora {
 								mCurrEffect->start(IMAGE_EFFECT_ONCE, mCurrEffect->getEffectTime());
 								
 								return IMAGE_EFFECT_PLAYING;
-							} else
+							} else {
+                                if(mDelegatePtr != NULL) {
+                                    mDelegatePtr->notify(this, states);
+                                }
+                
 								return IMAGE_EFFECT_END;
+                            }
 						}
 						
 						--next;

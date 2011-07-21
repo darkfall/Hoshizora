@@ -77,29 +77,29 @@ void transform3d(float32& x, float32& y, float32 z) {
 
 bool mainWindow::updateFunc() {
     
+    mScene1->update(sora::SORA->getDelta());
+    return false;
 }
 
 sora::SoraSprite* spr;
 
 void myRenderFunc(sora::SoraObject& obj) {
     spr->render();
-    
     sora::SoraLayer* layer = dynamic_cast<sora::SoraLayer*>(&obj);
-    if(layer != NULL) {
-        printf("%f, %f, %d\n", layer->getPositionX(), layer->getPositionY(), layer->getLayerDepth());
-    }
-}
 
-sora::SoraModifierAdapter<sora::SoraCamera>* ma;
+}
 
 bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
-    ma->update(sora::SORA->getDelta());
 //    mScene1->getCanvas()->render();
     sora::SORA->endScene();
     
 	return false;
+}
+
+void delegatetest(void* sender, int32& res) {
+    sora::SORA->messageBox("test", "test", MB_OK);
 }
 
 void mainWindow::init() {
@@ -115,11 +115,7 @@ void mainWindow::init() {
   //  mCamera->zoomTo(2.f, 2.f, 20.f);
     mScene1->setCamera(mCamera);
     
-    ma = sora::CreateModifierAdapter(mCamera, new sora::SoraCameraPositionModifier(mCamera->getPositionX(),
-                                                                              mCamera->getPositionY(),
-                                                                              200.f,
-                                                                              200.f,
-                                                                              5.f), false, false);
+    
     
     mScene1->add(mScene2);
     sora::SoraSprite* bg = sora::SORA->createSprite(L"background.png");
@@ -129,8 +125,11 @@ void mainWindow::init() {
     spr = sora::SORA->createSprite(L"geotest.png");
     spr->setCenter(100, 100);
     
+    spr->addEffect(sora::CreateEffectListWithDelegate(new sora::SoraImageEffectTransitions(0.f, 0.f, 100.f, 100.f, 5.f),
+                                                      sora::Delegate(delegatetest)));
+    
     //spr->setPosition(300, 300);
-  //  mScene2->add(spr);
+    mScene2->add(spr);
     mScene2->setPosition(200.f, 200.f);
   //  mScene2->setRotation(sora::F_PI_4/2);
  //   mScene2->setScale(2.f, 2.f);

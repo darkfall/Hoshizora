@@ -203,8 +203,8 @@ namespace sora {
             
             sora::SORA->setClipping(rx,
                                     ry,
-                                    rWidth,
-                                    rHeight);
+                                    rWidth>mWidth?mWidth:rWidth,
+                                    rHeight>mHeight?mHeight:rHeight);
         }
         
         LayerMap::iterator itLayer = mLayers.begin();
@@ -238,6 +238,7 @@ namespace sora {
         LayerMap::iterator itLayer = mLayers.begin();
         while(itLayer != mLayers.end()) {
             itLayer->second->update(dt);
+            ++itLayer;
         }
         
         /**

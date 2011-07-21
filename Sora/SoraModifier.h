@@ -10,6 +10,7 @@
 #define Sora_SoraModifier_h
 
 #include "SoraAutoPtr.h"
+#include "SoraDelegate.h"
 
 namespace sora {
     
@@ -24,6 +25,7 @@ namespace sora {
     class SORA_API SoraModifier {
     public:
         typedef SoraAutoPtr<SoraModifier> Ptr;
+        typedef SoraAbstractDelegate<int32> Delegate;
         
         virtual int32   update(float32 dt) = 0;
         virtual void    modify(MT* object) = 0;
@@ -31,6 +33,17 @@ namespace sora {
         virtual SoraModifier<MT>* clone() = 0;
         
         virtual void reset() {}
+        
+        void setFinishDelegate(const Delegate& del) {
+            mDelegatePtr = del.clone();
+        }
+        
+        Delegate* getFinishDelegate() const {
+            return mDelegatePtr;
+        }
+        
+    protected:
+        Delegate* mDelegatePtr;
     };
     
     template<class MT>
@@ -82,6 +95,11 @@ namespace sora {
                 if(!mRepeat) {
                     if(mCurrModifier >= mModifiers.size()) {
                         clear();
+
+                        if(SoraModifier<MT>::getFinishDelegate() != NULL) {
+                            SoraModifier<MT>::getFinishDelegate()->notify(this, mCurrModifier);
+                        }
+                        return ModifierUpdateEnd;
                     } else 
                         mModifiers[mCurrModifier]->reset();
                 } else {
@@ -222,6 +240,135 @@ namespace sora {
         list->add(eff6);
         list->add(eff7);
         list->add(eff8);
+        return list;
+    }
+    
+    
+    template<class MT>
+    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
+                                                                const typename SoraModifier<MT>::Delegate& del, bool repeat = false) {
+        SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
+        list->add(eff1);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    template<class MT>
+    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
+                                                                SoraModifier<MT>* eff2, 
+                                                                const typename SoraModifier<MT>::Delegate& del, bool repeat = false) {
+        SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
+        list->add(eff1);
+        list->add(eff2);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    template<class MT>
+    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
+                                                                SoraModifier<MT>* eff2, 
+                                                                SoraModifier<MT>* eff3, 
+                                                                const typename SoraModifier<MT>::Delegate& del, bool repeat = false) {
+        SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    template<class MT>
+    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
+                                                                SoraModifier<MT>* eff2, 
+                                                                SoraModifier<MT>* eff3, 
+                                                                SoraModifier<MT>* eff4, 
+                                                                const typename SoraModifier<MT>::Delegate& del,  bool repeat = false) {
+        SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    template<class MT>
+    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
+                                                                SoraModifier<MT>* eff2, 
+                                                                SoraModifier<MT>* eff3, 
+                                                                SoraModifier<MT>* eff4, 
+                                                                SoraModifier<MT>* eff5, 
+                                                                const typename SoraModifier<MT>::Delegate& del,  bool repeat = false) {
+        SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    template<class MT>
+    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
+                                                                SoraModifier<MT>* eff2, 
+                                                                SoraModifier<MT>* eff3, 
+                                                                SoraModifier<MT>* eff4, 
+                                                                SoraModifier<MT>* eff5,
+                                                                SoraModifier<MT>* eff6, 
+                                                                const typename SoraModifier<MT>::Delegate& del,  bool repeat = false) {
+        SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    template<class MT>
+    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
+                                                                SoraModifier<MT>* eff2, 
+                                                                SoraModifier<MT>* eff3, 
+                                                                SoraModifier<MT>* eff4, 
+                                                                SoraModifier<MT>* eff5,
+                                                                SoraModifier<MT>* eff6, 
+                                                                SoraModifier<MT>* eff7, 
+                                                                const typename SoraModifier<MT>::Delegate& del,  bool repeat = false) {
+        SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        list->add(eff7);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    template<class MT>
+    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
+                                                                SoraModifier<MT>* eff2, 
+                                                                SoraModifier<MT>* eff3, 
+                                                                SoraModifier<MT>* eff4, 
+                                                                SoraModifier<MT>* eff5,
+                                                                SoraModifier<MT>* eff6, 
+                                                                SoraModifier<MT>* eff7,
+                                                                SoraModifier<MT>* eff8, 
+                                                                const typename SoraModifier<MT>::Delegate& del,  bool repeat = false) {
+        SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        list->add(eff7);
+        list->add(eff8);
+        list->setFinishDelegate(del);
         return list;
     }
     

@@ -109,7 +109,7 @@ namespace sora {
 		bool checkRepeatTimes();
 
 		uint16 etype;
-		int8 states;
+		int32 states;
 		IMAGE_EFFECT_MODE mode;
 
 		float32 startTime;
@@ -293,6 +293,78 @@ namespace sora {
         return new IERotation(start, end, time, mode, transformer);
     }
     
+    static IEFade* CreateEffectFadeWithDelegate(float32 src, float32 dst, float32 time,
+                                                const SoraModifier<SoraSprite>::Delegate& del,
+                                                IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                CoreTransformer<CoreTransform>* transformer=0) {
+        IEFade* eff = new IEFade(src, dst, time, mode, transformer);
+        eff->setFinishDelegate(del);
+        return eff;
+    }
+    
+    static IEScale* CreateEffectScaleWithDelegate(float32 src, float32 dst, float32 time, 
+                                                  const SoraModifier<SoraSprite>::Delegate& del,
+                                                  IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                  CoreTransformer<CoreTransform>* transformer=0) {
+        IEScale* eff = new IEScale(src, dst, time, mode, transformer);
+        eff->setFinishDelegate(del);
+        return eff;
+    }
+    
+    static IEScale* CreateEffectScaleWithDelegate(float32 srcV, float32 dstV, float32 srcH, float32 dstH, float32 time,
+                                                  const SoraModifier<SoraSprite>::Delegate& del, 
+                                                  IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                  CoreTransformer<CoreTransform>* transformer=0) {
+        IEScale* eff = new IEScale(srcV, dstV, srcH, dstH, time, mode, transformer);
+        eff->setFinishDelegate(del);
+        return eff;
+    }
+    
+    static IETransitions* CreateEffectTransitionsWithDelegate(float32 sx, float32 sy, float32 sz, float32 dx, float32 dy, float32 dz, float32 time, 
+                                                              const SoraModifier<SoraSprite>::Delegate& del,
+                                                              IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                              CoreTransformer<CoreTransform>* transformer=0) {
+        IETransitions* eff = new IETransitions(sx, sy, sz, dx, dy, dz, time, mode, transformer);
+        eff->setFinishDelegate(del);
+        return eff;
+    }
+    
+    static IETransitions* CreateEffectTransitionsWithDelegate(float32 sx, float32 sy, float32 dx, float32 dy, float32 time, 
+                                                              const SoraModifier<SoraSprite>::Delegate& del,
+                                                              IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                              CoreTransformer<CoreTransform>* transformer=0) {
+        IETransitions* eff = new IETransitions(sx, sy, dx, dy, time, mode, transformer);
+        eff->setFinishDelegate(del);
+        return eff;
+    }
+    
+    static IEColorTransitions* CreateColorTransitionsWithDelegate(const SoraColorRGBA& start, const SoraColorRGBA& end, float32 time, 
+                                                                  const SoraModifier<SoraSprite>::Delegate& del,
+                                                                  IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                                  CoreTransformer<CoreTransform>* transformer=0) {
+        IEColorTransitions* eff = new IEColorTransitions(start, end, time, mode, transformer);
+        eff->setFinishDelegate(del);
+        return eff;
+    }
+    
+    static IEColorTransitions* CreateColorTransitionsWithDelegate(long32 start, ulong32 end, float32 time, 
+                                                                  const SoraModifier<SoraSprite>::Delegate& del,
+                                                                  IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                                  CoreTransformer<CoreTransform>* transformer=0) {
+        IEColorTransitions* eff = new IEColorTransitions(start, end, time, mode, transformer);
+        eff->setFinishDelegate(del);
+        return eff;
+    }
+    
+    static IERotation* CreateEffectRotationWithDelegate(float32 start, float32 end, float32 time,
+                                                        const SoraModifier<SoraSprite>::Delegate& del,
+                                                        IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE,
+                                                        CoreTransformer<CoreTransform>* transformer=0) {
+        IERotation* eff = new IERotation(start, end, time, mode, transformer);
+        eff->setFinishDelegate(del);
+        return eff;
+    }
+    
     static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
@@ -393,6 +465,127 @@ namespace sora {
         list->add(eff6);
         list->add(eff7);
         list->add(eff8);
+        return list;
+    }
+    
+    
+    static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1,
+                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1,
+                                                             SoraImageEffect* eff2,
+                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1, 
+                                                             SoraImageEffect* eff2, 
+                                                             SoraImageEffect* eff3,
+                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1, 
+                                                             SoraImageEffect* eff2, 
+                                                             SoraImageEffect* eff3, 
+                                                             SoraImageEffect* eff4,
+                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1,  
+                                                             SoraImageEffect* eff2, 
+                                                             SoraImageEffect* eff3, 
+                                                             SoraImageEffect* eff4, 
+                                                             SoraImageEffect* eff5,
+                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1,  
+                                                             SoraImageEffect* eff2, 
+                                                             SoraImageEffect* eff3, 
+                                                             SoraImageEffect* eff4, 
+                                                             SoraImageEffect* eff5,
+                                                             SoraImageEffect* eff6,
+                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1,  
+                                                             SoraImageEffect* eff2, 
+                                                             SoraImageEffect* eff3, 
+                                                             SoraImageEffect* eff4, 
+                                                             SoraImageEffect* eff5,
+                                                             SoraImageEffect* eff6, 
+                                                             SoraImageEffect* eff7,
+                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        list->add(eff7);
+        list->setFinishDelegate(del);
+        return list;
+    }
+    
+    static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1,  
+                                                             SoraImageEffect* eff2, 
+                                                             SoraImageEffect* eff3, 
+                                                             SoraImageEffect* eff4, 
+                                                             SoraImageEffect* eff5,
+                                                             SoraImageEffect* eff6, 
+                                                             SoraImageEffect* eff7,
+                                                             SoraImageEffect* eff8,
+                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+        SoraImageEffectList* list = new SoraImageEffectList(mode);
+        list->add(eff1);
+        list->add(eff2);
+        list->add(eff3);
+        list->add(eff4);
+        list->add(eff5);
+        list->add(eff6);
+        list->add(eff7);
+        list->add(eff8);
+        list->setFinishDelegate(del);
         return list;
     }
 
