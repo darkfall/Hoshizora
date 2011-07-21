@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SoraMainWindow.cpp"
-         timestampString = "332827108.041306"
+         timestampString = "332920820.415699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "26"
-         endingLineNumber = "26"
+         startingLineNumber = "30"
+         endingLineNumber = "30"
          landmarkName = "MainWindow::renderFunc()"
          landmarkType = "5">
       </FileBreakpoint>

@@ -38,6 +38,7 @@ public:
     
     void onKeyEvent(sora::SoraKeyEvent* kev);
     void onScreenBufferRender(sora::HSORATEXTURE& tex);
+    void onImageEffectEnd(const void* sender, int32& reserved);
     
 private:
     sora::SoraFont* mFont;

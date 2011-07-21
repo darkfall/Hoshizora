@@ -350,7 +350,7 @@ namespace sora {
     };
     
     template<class TOBJ, class TARGS>
-    static SoraDelegate<TOBJ, TARGS, true> Delegate(TOBJ* obj, void (TOBJ::*NotifyMethod)(void*, TARGS&)) {
+    static SoraDelegate<TOBJ, TARGS, true> Delegate(TOBJ* obj, void (TOBJ::*NotifyMethod)(const void*, TARGS&)) {
         return SoraDelegate<TOBJ, TARGS, true>(obj, NotifyMethod);
     }
                             

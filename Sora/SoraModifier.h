@@ -27,6 +27,8 @@ namespace sora {
         typedef SoraAutoPtr<SoraModifier> Ptr;
         typedef SoraAbstractDelegate<int32> Delegate;
         
+        SoraModifier(): mDelegatePtr(NULL) {}
+        
         virtual int32   update(float32 dt) = 0;
         virtual void    modify(MT* object) = 0;
         

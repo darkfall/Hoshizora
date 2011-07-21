@@ -13,7 +13,7 @@
 
 /**
  *  Hoshizora Tutorial 5
- *  Fullscreen Buffer, Shader & Modifier
+ *  Fullscreen Buffer, Shader & Modifier, and Delegate
  **/
 
 

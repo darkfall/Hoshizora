@@ -22,6 +22,10 @@ bool MainWindow::updateFunc() {
     return false;
 }
 
+void MainWindow::onImageEffectEnd(const void* sender, int32& reserved) {
+    sora::SORA->messageBox("Image Effect ended", "Notifcication", MB_OK | MB_ICONINFORMATION);
+}
+
 bool MainWindow::renderFunc() {
     sora::SoraCore* inst = sora::SoraCore::Instance();  
     inst->beginScene();
@@ -31,7 +35,7 @@ bool MainWindow::renderFunc() {
     
     if(mFont) {
         mFont->render(0.f, getWindowHeight()-100.f, sora::FONT_ALIGNMENT_LEFT, 
-                      L"Usage: Press 1 to apple effect to font\n    Press 2 to attach a bloom shader for the fullscreen Buffer\n    Press 3 to attach a coloreffect shader to the fullscreen Buffer\n   Press 4 to detach the shaders\n     Press 5 to animate sprite");
+                      L"Usage: Press 1 to apple effect to font\n    Press 2 to attach a bloom shader for the fullscreen Buffer\n    Press 3 to attach a coloreffect shader to the fullscreen Buffer\n   Press 4 to detach the shaders\n     Press 5 to animate sprite with finish delegate");
         mFont->render(getWindowWidth()/2, getWindowHeight()/2, sora::FONT_ALIGNMENT_CENTER, L"Resource loaded from zip file");
     }
     
@@ -56,12 +60,13 @@ void MainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
         mBuffer->clearShader();
     } 
     else if(kev->isKeyPressed(SORA_KEY_5)) {
-        mSprite->addEffect(sora::CreateEffectList(new sora::SoraImageEffectTransitions(0.f, 0.f, 100.f, 0.f, 2.f),
-                                                  new sora::SoraImageEffectTransitions(100.f, 0.f, 100.f, 100.f, 2.f),
-                                                  new sora::SoraImageEffectTransitions(100.f, 100.f, 0.f, 100.f, 2.f),
-                                                  new sora::SoraImageEffectTransitions(0.f, 100.f, 0.f, 0.f, 2.f),
-                                                  new sora::SoraImageEffectColorTransitions(0xFFFFFFFF, 0x00000000, 2.f),
-                                                  new sora::SoraImageEffectColorTransitions(0x00000000, 0xFFFFFFFF, 2.f)));
+        mSprite->addEffect(sora::CreateEffectListWithDelegate(new sora::SoraImageEffectTransitions(0.f, 0.f, 100.f, 0.f, 2.f),
+                                                              new sora::SoraImageEffectTransitions(100.f, 0.f, 100.f, 100.f, 2.f),
+                                                              new sora::SoraImageEffectTransitions(100.f, 100.f, 0.f, 100.f, 2.f),
+                                                              new sora::SoraImageEffectTransitions(0.f, 100.f, 0.f, 0.f, 2.f),
+                                                              new sora::SoraImageEffectColorTransitions(0xFFFFFFFF, 0x00000000, 2.f),
+                                                              new sora::SoraImageEffectColorTransitions(0x00000000, 0xFFFFFFFF, 2.f),
+                                                              sora::Delegate(this, &MainWindow::onImageEffectEnd)));
     }
 }
 
