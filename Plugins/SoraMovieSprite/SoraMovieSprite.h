@@ -23,6 +23,7 @@ namespace sora {
 		~SoraMovieSprite();
 		
 		uint32 update(float32 dt);
+        void play();
 		
         void addMovieFilter(SoraMovieFilter* movieFilter);
         void addPostProcessor(SoraShader* postProcessor);

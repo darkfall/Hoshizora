@@ -81,7 +81,7 @@ namespace sora {
 		bool setParameterfv(const char* name, float32* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
         bool getParameterfv(const char* name, float32* val, uint32 size);
-        bool getParameteriv(const char* name, int32* val, uint32 size);
+        bool getParameteriv(const char* name, int32* val, uint32 size);             
         
         
 	private:
@@ -92,7 +92,7 @@ namespace sora {
 		GLuint mProgram;
 		
 		std::string mTexture1Name;
-		GLuint mTexture1;
+		ulong32 mTexture1;
 		
 		void printProgramError();
 		void printShaderError();

@@ -7,12 +7,19 @@
  *
  */
 
+#include "SoraPlatform.h"
 #include "SoraGLSLShader.h"
 #include "SoraException.h"
 #include "SoraResourceFile.h"
 #include "SoraTexture.h"
 
 #include "Debug/SoraInternalLogger.h"
+
+#ifdef OS_OSX
+#include <OpenGL/gl.h> 
+#include <OpenGL/glext.h>
+#include <OpenGL/glu.h>
+#endif
 
 namespace sora {
 	

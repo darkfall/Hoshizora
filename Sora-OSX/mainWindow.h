@@ -21,6 +21,8 @@
 
 #include "SoraScene.h"
 
+#include "SoraMovieSprite/SoraMovieSprite.h"
+
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
 	mainWindow();
@@ -51,6 +53,9 @@ private:
     sora::SoraScene* mScene1;
     sora::SoraScene* mScene2;
     sora::SoraCamera* mCamera;
+    
+    sora::SoraMoviePlayer* mMoviePlayer;
+    sora::SoraMovieSprite* mMovieSprite;
 };
 
 #endif

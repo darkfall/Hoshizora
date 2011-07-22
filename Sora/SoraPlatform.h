@@ -168,11 +168,11 @@ namespace sora {
 #define strcmpnocase strcasecmp
 #endif
 
-#if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+#if defined(__MAC_OS_X_VERSION_MIN_REQUIRED)
 
 	#define OS_OSX
 
-#elif defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
+#elif defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 
 	#define OS_IOS
 

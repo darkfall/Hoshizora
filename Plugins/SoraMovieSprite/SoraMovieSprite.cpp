@@ -28,6 +28,11 @@ namespace sora {
         mMoviePlayer->stop();
     }
     
+    void SoraMovieSprite::play() {
+        if(mMoviePlayer)
+            mMoviePlayer->play();
+    }
+    
     void SoraMovieSprite::addMovieFilter(SoraMovieFilter* movieFilter) {
         mMovieFilters.push_back(movieFilter);
     }

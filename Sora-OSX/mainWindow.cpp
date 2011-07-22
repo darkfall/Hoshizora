@@ -56,6 +56,7 @@
 #include "modifiers/SoraCameraModifiers.h"
 #include "SoraExternalRenderObject.h"
 
+#include "libvlc/SoraVlcMoviePlayer.h"
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
@@ -93,6 +94,8 @@ bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
 //    mScene1->getCanvas()->render();
+    mMovieSprite->update(sora::SORA->getDelta());
+    mMovieSprite->render();
     sora::SORA->endScene();
     
 	return false;
@@ -140,6 +143,10 @@ void mainWindow::init() {
     mScene2->add(mScene3);
   //  mScene3->setRotation(sora::F_PI_4);
     
+    mMoviePlayer = new sora::SoraVlcMoviePlayer();
+   // mMoviePlayer->openMedia(L"AMV_Scenario.mp4");
+    mMovieSprite = new sora::SoraMovieSprite(mMoviePlayer, L"AMV_Scenario.mp4");
+    mMovieSprite->play();
    // mScene2->moveTo(800.f, 400.f, 10.f);
 }
 
