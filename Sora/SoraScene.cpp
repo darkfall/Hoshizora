@@ -19,8 +19,8 @@ namespace sora {
     mRealWidth(0),
     mRealHeight(0),
     mRotation(0.f),
-    mHScale(0.f),
-    mVScale(0.f),
+    mHScale(1.f),
+    mVScale(1.f),
     mParentScene(NULL),
     mCamera(NULL),
     mCanvas(NULL) {

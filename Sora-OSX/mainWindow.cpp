@@ -94,8 +94,8 @@ bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
 //    mScene1->getCanvas()->render();
-    mMovieSprite->update(sora::SORA->getDelta());
-    mMovieSprite->render();
+  //  mMovieSprite->update(sora::SORA->getDelta());
+   // mMovieSprite->render();
     sora::SORA->endScene();
     
 	return false;
@@ -128,8 +128,6 @@ void mainWindow::init() {
     spr = sora::SORA->createSprite(L"geotest.png");
     spr->setCenter(100, 100);
     
-    spr->addEffect(sora::CreateEffectListWithDelegate(new sora::SoraImageEffectTransitions(0.f, 0.f, 100.f, 100.f, 5.f),
-                                                      sora::Delegate(delegatetest)));
     
     //spr->setPosition(300, 300);
     mScene2->add(spr);
@@ -141,12 +139,12 @@ void mainWindow::init() {
     mScene3->add(sora::SORA->createSprite(L"test.png"), 1);
     mScene3->add(sora::SORA->createSprite(L"bullet2.png"), 0);
     mScene2->add(mScene3);
+    
+    sora::CreateModifierAdapter(mScene2, new sora::SoraTransitionModifier<sora::SoraScene>(0.f, 0.f, 300.f, 300.f, 2.f));
   //  mScene3->setRotation(sora::F_PI_4);
     
     mMoviePlayer = new sora::SoraVlcMoviePlayer();
    // mMoviePlayer->openMedia(L"AMV_Scenario.mp4");
-    mMovieSprite = new sora::SoraMovieSprite(mMoviePlayer, L"AMV_Scenario.mp4");
-    mMovieSprite->play();
    // mScene2->moveTo(800.f, 400.f, 10.f);
 }
 
