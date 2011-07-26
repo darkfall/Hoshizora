@@ -1,0 +1,32 @@
+struct output {
+  float4 color : COLOR;
+};
+
+uniform float rate = 0.125;
+
+output Bloom(float2 texCoord: TEXCOORD0,
+                     uniform sampler2D decals: TEX0)
+{
+   float4 sum = 0.0;
+   int i;
+   int j;
+   
+   output OUT;
+   for(i=-4; i<4; i++) {
+   		for(j=-3; j<3; j++) {
+   			sum += tex2D(decals, texCoord+float2(j,i)*0.004) * rate;
+   		}
+   }
+   float4 col = tex2D(decals, texCoord);
+   sum = sum * sum;
+   if(col.r < 0.3) {
+   		OUT.color = sum*0.012 + col;
+   } else {
+   		if(col.r < 0.5) {
+   			OUT.color = sum*0.009 + col;
+   		} else {
+   			OUT.color = sum*0.0075 + col;
+   		}
+   }
+   return OUT;
+}
