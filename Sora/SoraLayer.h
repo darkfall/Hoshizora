@@ -22,7 +22,7 @@ namespace sora {
     class SORA_API SoraLayer: public SoraObject {
     public:
         SoraLayer(int32 layerDepth);
-        ~SoraLayer();
+        virtual ~SoraLayer();
         
         bool operator < (const SoraLayer& rhs);
         

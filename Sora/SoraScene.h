@@ -48,6 +48,9 @@ namespace sora {
          **/
         void add(SoraObject* obj, int32 layerDepth);
         
+        
+        void del(SoraObject* obj, int32 layer);
+        
         /**
          *  Add a layer to the scene
          *  @param layer, the layer to be added

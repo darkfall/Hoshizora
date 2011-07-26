@@ -1545,9 +1545,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "86"
-         endingLineNumber = "86"
-         landmarkName = "SoraObject::add(SoraObject* o)"
-         landmarkType = "5">
+         endingLineNumber = "86">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

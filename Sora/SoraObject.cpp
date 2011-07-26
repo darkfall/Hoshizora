@@ -26,7 +26,9 @@ namespace sora {
             obj->setParent(NULL);
             obj = obj->next();
         }
-        
+        mNext = NULL;
+        mSubObjects = NULL;
+        mParent = NULL;
         FreeHandleSlot(mHandleId);
 	}
 	
@@ -83,6 +85,9 @@ namespace sora {
     }
 
 	void SoraObject::add(SoraObject* o){
+        if(o == this) 
+            return;
+        
         if(mSubObjects) {
             SoraObject* obj = mSubObjects;
             while(obj->next() != NULL)
@@ -100,8 +105,14 @@ namespace sora {
     SoraObject* SoraObject::next() const {
         return mNext;
     }
+    
+    void SoraObject::setNext(SoraObject* obj) {
+        mNext = obj;
+    }
 
 	void SoraObject::del(SoraObject* o) {
+        if(o == NULL || o == this)
+            return;
         if(mSubObjects == o)
             mSubObjects = mSubObjects->next();
         else if(mSubObjects) {

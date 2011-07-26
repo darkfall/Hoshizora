@@ -49,6 +49,8 @@ namespace sora {
 		
 		uint32  getType() const;
 		void    setType(uint32 t);
+        
+        void        setNext(SoraObject* obj);
 	
         SoraHandle          getHandleId() const;
         SoraUniqueId        getUniqueId() const;

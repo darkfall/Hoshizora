@@ -14,6 +14,7 @@
 #include "json/json.h"
 
 namespace sora {
+    
     sora::SoraSprite* parseSprite(Json::Value& val);
     
     SoraSpriteParser::SoraSpriteParser() {
@@ -28,6 +29,7 @@ namespace sora {
         SPRITE_MAP::iterator itSprite = mSprites.find(str2id(name));
         if(itSprite != mSprites.end()) {
             SpriteStore store = itSprite->second;
+            store.mSprite->setNext(NULL);
             return store.mSprite;
         }
         return NULL;
@@ -37,8 +39,10 @@ namespace sora {
         SPRITE_MAP::iterator itSprite = mSprites.find(str2id(name));
         if(itSprite != mSprites.end()) {
             SpriteStore store = itSprite->second;
-            if(store.mIsAnimation) 
+            if(store.mIsAnimation)  {
+                 store.mSprite->setNext(NULL);
                 return dynamic_cast<SoraSpriteAnimation*>(store.mSprite);
+            }
         }
         return NULL;
     }
@@ -85,11 +89,17 @@ namespace sora {
         if(root.isMember("sprites")) {
             Json::Value sprites = root["sprites"];
             if(sprites.isArray()) {
-                for(size_t i=0; i<sprites.size(); ++i) {
+                for(int i=0; i<sprites.size(); ++i) {
                     Json::Value sprVal = sprites[i];
                     if(sprVal.isMember("name")) {
                         std::string name = sprVal["name"].asString();
                         if(!name.empty()) {
+                            /*SPRITE_MAP::iterator itSprite = mSprites.find(str2id(name));
+                            if(itSprite != mSprites.end()) {
+                               delete itSprite->second.mSprite;
+                                mSprites.erase(itSprite);
+                                return true;
+                            }*/
                             SoraSprite* sprite = parseSprite(sprVal);
                             bool isAnimation = false;
                             if(sprVal.isMember("animation"))
@@ -97,9 +107,10 @@ namespace sora {
                             
                             if(sprite != NULL) 
                                 mSprites.insert(std::make_pair(str2id(name), SpriteStore(sprite, isAnimation)));
-                            else
+                            else {
                                 THROW_SORA_EXCEPTION(vamssg("Failed to parse sprite with val name = %s", name.c_str()));
-                            return true;
+                                return false;
+                            }
                         }
                     }  
                 }
@@ -111,7 +122,14 @@ namespace sora {
                 if(sprVal.isMember("name")) {
                     std::string name = sprVal["name"].asString();
                     if(!name.empty()) {
+                        /*SPRITE_MAP::iterator itSprite = mSprites.find(str2id(name));
+                        if(itSprite != mSprites.end()) {
+                           // delete itSprite->second.mSprite;
+                            //mSprites.erase(itSprite);
+                            return true;
+                        }*/
                         SoraSprite* sprite = parseSprite(sprVal);
+                        
                         bool isAnimation = false;
                         if(sprVal.isMember("animation"))
                             isAnimation = true;
@@ -194,7 +212,7 @@ namespace sora {
 				if(shader) {
 					Json::Value paramArray = shaderVal["params"];
 					if(paramArray.isArray()) {
-						for(size_t i=0; i<paramArray.size(); ++i) {
+						for(int i=0; i<paramArray.size(); ++i) {
 							Json::Value param = paramArray[i];
 							
 							std::string paramName;
@@ -214,14 +232,14 @@ namespace sora {
 								
 								if(paramType == PARAM_TYPE_INT) {
 									int32* paramVals = new int32[paramSize];
-									for(size_t j=0; j<paramList.size(); ++j)
+									for(int j=0; j<paramList.size(); ++j)
 										paramVals[j] = paramList[j].asInt();
 									shader->setParameteriv(paramName.c_str(), paramVals, paramSize);
 									delete paramVals;
 									
 								} else if(paramType == PARAM_TYPE_FLOAT) {
 									float32* paramVals = new float32[paramSize];
-									for(size_t j=0; j<paramList.size(); ++j)
+									for(int j=0; j<paramList.size(); ++j)
 										paramVals[j] = (float32)paramList[j].asDouble();
 									shader->setParameterfv(paramName.c_str(), paramVals, paramSize);
 									delete paramVals;
@@ -276,7 +294,7 @@ namespace sora {
     
 	inline void parseEffects(sora::SoraSprite* pSprite, Json::Value& effectArray) {
 		if(effectArray.isArray()) {
-			for(size_t i=0; i<effectArray.size(); ++i) {
+			for(int i=0; i<effectArray.size(); ++i) {
 				Json::Value effectObj = effectArray[i];
 				
 				int32 ieType = 0;

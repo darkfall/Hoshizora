@@ -565,6 +565,7 @@ LANM_TEX SoraSpriteAnimation::getCurrTex() {
 	if(currNodeId != -1) {
 		if(currAnmIndex < anmNodes[currNodeId].texList.size())
 			return anmNodes[currNodeId].texList[currAnmIndex];
+        return anmNodes[currNodeId].texList[0];
 	}
 	return anmNodes[0].texList[0];
 }

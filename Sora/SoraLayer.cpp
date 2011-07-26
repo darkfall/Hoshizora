@@ -16,7 +16,7 @@ namespace sora {
     }
     
     SoraLayer::~SoraLayer() {
-        
+     //   mSubObjects = NULL;
     }
     
     SoraLayer& SoraLayer::combine(const SoraLayer& layer) {

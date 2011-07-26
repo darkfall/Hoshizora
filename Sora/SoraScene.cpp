@@ -63,6 +63,14 @@ namespace sora {
                 subScene->setCamera(mCamera);
         }
     }
+    
+    void SoraScene::del(SoraObject* obj, int32 layer) {
+        LayerMap::iterator itLayer = mLayers.find(layer);
+        if(itLayer != mLayers.end()) {
+            SoraLayer* layer = itLayer->second;
+            layer->del(obj);
+        }
+    }
 
     
     void SoraScene::setParent(SoraObject* obj) {
@@ -94,9 +102,7 @@ namespace sora {
         LayerMap::iterator itLayer = mLayers.find(layerDepth);
         if(itLayer != mLayers.end()) {
             SoraLayer* layer = itLayer->second;
-            if(layer->getLayerDepth() == layerDepth) {
-                layer->add(obj);
-            }
+            layer->add(obj);
         } else {
             SoraLayer* layer = addLayer(layerDepth);
             if(layer)
