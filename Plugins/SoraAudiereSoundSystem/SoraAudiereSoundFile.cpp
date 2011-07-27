@@ -83,6 +83,7 @@ namespace sora {
 				}
 				sound->setPosition(0);
 				sound->play();
+                sound->setRepeat(true);
 			}
 		}
 		void SoraAudiereMusicFile::stop() { 

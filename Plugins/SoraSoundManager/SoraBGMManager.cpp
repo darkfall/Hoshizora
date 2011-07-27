@@ -77,6 +77,7 @@ namespace sora {
 		musicFile->registerEventHandler(this);
 		
 		musicFile->play();
+        musicFile->setRepeat(1);
 		musicFile->setVolume(bgmVolume);
 		if(bgmPitch != -2.f)
 			musicFile->setPitch(bgmPitch);

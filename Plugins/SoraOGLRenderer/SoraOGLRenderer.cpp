@@ -22,6 +22,7 @@
 #include "SoraRenderSystemExtension.h"
 #include "SoraOGLKeyPoll.h"
 
+#undef SORA_USE_SHADER
 #ifdef SORA_USE_SHADER
 #include "SoraShader/SoraCGGLShader.h"
 #endif
