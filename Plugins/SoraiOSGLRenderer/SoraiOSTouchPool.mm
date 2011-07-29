@@ -34,7 +34,7 @@ namespace sora {
 			info.phase = TOUCHPHASE_BEGAN;
 			info.tapCount = [touch tapCount];
 			info.delta = [touch timestamp];
-			
+
 			g_touch->mTouchInfos.push_back(info);
 		}
 	}
@@ -55,7 +55,6 @@ namespace sora {
 			info.phase = TOUCHPHASE_MOVED;
 			info.tapCount = [touch tapCount];
 			info.delta = [touch timestamp];
-			
 			g_touch->mTouchInfos[i] = info;
 		}
 	}
@@ -115,24 +114,26 @@ namespace sora {
 			touch = [touchArray objectAtIndex:i];
 			CGPoint p = [touch locationInView: view];
 			
-			SoraiOSTouchInfo info = g_touch->getTouch(i);
+            SoraiOSTouchInfo info;
+            info = g_touch->getTouch(i);
 			
+                        
 			if(info.x != 0.f || info.y != 0.f)
 				info.dx = p.x - info.x; info.dy = p.y - info.y;
 			info.x = p.x; info.y = p.y;
 			switch ([touch phase]) {
-				case UITouchPhaseBegan: info.phase = TOUCHPHASE_BEGAN; break;
-				case UITouchPhaseStationary: info.phase = TOUCHPHASE_STATIONARY; break;
-				case UITouchPhaseMoved: info.phase = TOUCHPHASE_MOVED; break;
-				case UITouchPhaseEnded: info.phase = TOUCHPHASE_ENDED; break;
-				case UITouchPhaseCancelled: info.phase = TOUCHPHASE_CANCLED; break;
+				case UITouchPhaseBegan:         info.phase = TOUCHPHASE_BEGAN; break;
+				case UITouchPhaseStationary:    info.phase = TOUCHPHASE_STATIONARY; break;
+				case UITouchPhaseMoved:         info.phase = TOUCHPHASE_MOVED; break;
+				case UITouchPhaseEnded:         info.phase = TOUCHPHASE_ENDED; break;
+				case UITouchPhaseCancelled:     info.phase = TOUCHPHASE_CANCLED; break;
 			}
 			info.fingerId = i;
 			info.tapCount = [touch tapCount];
 			if(info.timestamp != 0.f)
 				info.delta = [touch timestamp] - info.timestamp;
 			info.timestamp = [touch timestamp];
-			
+
 		//	printf("building ios input date, fingerid=%d, posx,y=%f,%f, deltax,y=%f, %f, timestamp=%f, tapcount=%d, phase=%d\n",
 		//		   info.fingerId, info.x, info.y, info.dx, info.dy, info.delta, info.tapCount, info.phase);
 			

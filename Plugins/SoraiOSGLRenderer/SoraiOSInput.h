@@ -92,8 +92,9 @@ namespace sora {
 		int32 getTouchCount() const { return touchCount; }
 		
 		SoraiOSTouchInfo getTouch(int32 fingerId) {
-			//assert(fingerId < mTouchInfos.size());
-			return mTouchInfos[fingerId];
+		//	if(fingerId < mTouchInfos.size())
+                return mTouchInfos[fingerId];
+         //   return SoraiOSTouchInfo();
 		}
 		
 	private:

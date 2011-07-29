@@ -38,11 +38,9 @@ public:
 		sora::GCN_GLOBAL->gcnLogic();
 
 		sora::GCN_GLOBAL->gcnDraw();
-    //    pBG->setTexture(0);
         
 		if(pFont)
             pFont->print(0.f, getWindowHeight()-20, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.2f", sora::SORA->getFPS());
-		//sprm->render(0.f, 0.f, 0.f);
 		sora::SORA->endScene();
 		
 		return false;
@@ -77,10 +75,15 @@ public:
 		
 		sc->add(di);
 		
+        printf("%s\n", sora::iOSDeviceTypeToString(sora::getiOSDeviceType()).c_str());
 	}
 	
-	int32 getWindowWidth() { return sora::iOSGetScreenWidth(bScreenRotated); }
-	int32 getWindowHeight() { return sora::iOSGetScreenHeight(bScreenRotated); }
+	int32 getWindowWidth() { 
+        return sora::iOSGetScreenWidth(bScreenRotated);
+    }
+	int32 getWindowHeight() { 
+        return sora::iOSGetScreenHeight(bScreenRotated);
+    }
 	
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }

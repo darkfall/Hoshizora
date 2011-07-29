@@ -282,6 +282,7 @@
 		88EFBBE213E3120300B66F63 /* SoraLuaStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8813E3120300B66F63 /* SoraLuaStateManager.cpp */; };
 		88EFBBE313E3120300B66F63 /* spriteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8A13E3120300B66F63 /* spriteWrapper.cpp */; };
 		88EFBBEB13E31A9600B66F63 /* SoraModifierAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBBEA13E31A9600B66F63 /* SoraModifierAdapter.cpp */; };
+		88EFBBFF13E320F800B66F63 /* SoraiOSDeviceHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBBFE13E320F800B66F63 /* SoraiOSDeviceHelper.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -886,6 +887,7 @@
 		88EFBB8B13E3120300B66F63 /* spriteWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spriteWrapper.h; sourceTree = "<group>"; };
 		88EFBB8C13E3120300B66F63 /* TinkerExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinkerExport.h; sourceTree = "<group>"; };
 		88EFBBEA13E31A9600B66F63 /* SoraModifierAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraModifierAdapter.cpp; sourceTree = "<group>"; };
+		88EFBBFE13E320F800B66F63 /* SoraiOSDeviceHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSDeviceHelper.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Sora_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sora_iPhone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1625,6 +1627,7 @@
 				88B1C07F13A7C1F800EC541D /* Apple */,
 				88B1C08713A7C1F800EC541D /* soil */,
 				88B1C09313A7C1F800EC541D /* SoraiOSDeviceHelper.h */,
+				88EFBBFE13E320F800B66F63 /* SoraiOSDeviceHelper.mm */,
 				88B1C09413A7C1F800EC541D /* SoraiOSGLRenderer.cpp */,
 				88B1C09513A7C1F800EC541D /* SoraiOSGLRenderer.h */,
 				8896363D13C989C7004CF8AD /* SoraiOSGLRenderer _ES2.cpp */,
@@ -2143,6 +2146,7 @@
 				88EFBBE213E3120300B66F63 /* SoraLuaStateManager.cpp in Sources */,
 				88EFBBE313E3120300B66F63 /* spriteWrapper.cpp in Sources */,
 				88EFBBEB13E31A9600B66F63 /* SoraModifierAdapter.cpp in Sources */,
+				88EFBBFF13E320F800B66F63 /* SoraiOSDeviceHelper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2213,6 +2217,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -2234,6 +2239,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -18,95 +18,29 @@
 // OS_IPAD for 1024*768
 #ifdef OS_IOS
 
-#import <UIKit/UIDevice.h>
 #include "SoraFileUtility.h"
-#include "soraiOSFileUtility.h"
+#include "Wrapper.h"
 
 namespace sora {
+    
+    // ios device type constants
+    static const int IOS_NORMAL = 1;
+    static const int IOS_RETINA = 2;
+    static const int IOS_IPAD = 3;
+    
+    int32 getiOSDeviceType();
+    std::string iOSDeviceTypeToString(int32 type);
 
-static bool _IS_IPAD() {
-	return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
-}
+    bool _IS_IPAD();
+    bool _IS_RETINA_DISPLAY();
+    
+    int32 iOSGetScreenWidth(bool rot);
+    int32 iOSGetScreenHeight(bool rot);
 
-static bool _IS_RETINA_DISPLAY() {
-	if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && ([UIScreen mainScreen].scale == 2.0)) { 
-		return true; 
-	}	
-	return false; 
-}
-
-static int32 iOSGetScreenWidth(int rot=0) {
-	if(_IS_IPAD()) {
-		return rot==1?1024:768;
-	} else {
-	//	if(_IS_RETINA_DISPLAY())
-	//		return rot==1?960:640;
-	//	else
-			return rot==1?480:320;
-	}
-	return 0;
-}
-
-static int32 iOSGetScreenHeight(int rot=0) {
-	if(_IS_IPAD()) {
-		return rot==1?768:1024;
-	} else {
-	//	if(_IS_RETINA_DISPLAY())
-	//		return rot==1?640:960;
-	//	else
-			return rot==1?320:480;
-	}
-	return 0;
-}
-
-
-static SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRetina=true) {
-	if(appendRetina && _IS_RETINA_DISPLAY()) {
-		SoraWString fn = origName.substr(0, origName.rfind(L"."));
-		SoraWString ext = origName.substr(origName.rfind(L"."), origName.size());
-		return sora::SoraFileUtility::getApplicationPath() + fn + L"@2x" + ext;
-	}
-	return sora::SoraFileUtility::getApplicationPath() + origName;
-}
+    SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRetina=true);
+    SoraWString iOSGetDocumentResourceName(const SoraWString& origName, bool appendRetina=true);
 	
-	static SoraWString iOSGetDocumentResourceName(const SoraWString& origName, bool appendRetina=true) {
-		if(appendRetina && _IS_RETINA_DISPLAY()) {
-			SoraWString fn = origName.substr(0, origName.rfind(L"."));
-			SoraWString ext = origName.substr(origName.rfind(L"."), origName.size());
-			return appDocumentPath() + fn + L"@2x" + ext;
-		}
-		return appDocumentPath() + origName;
-	}
-	
-	//Objc NSString 和 String 的相互转换
-	static std::string NSString2String(NSString* nss) {
-		std::string buffer([nss UTF8String]);
-		return buffer;
-	}
-	
-	static NSString* string2NSString(const std::string& str) {
-		NSString* buffer = [[NSString alloc] initWithUTF8String:str.c_str()];
-		return buffer;
-	}
-	
-	static NSString* string2NSString(const char* str) {
-		NSString* buffer = [[NSString alloc] initWithUTF8String:str];
-		return buffer;
-	}
-	
-	static NSString* wstring2NSString(const std::wstring& ws) {
-		char* data = (char*)ws.data();
-		unsigned size = ws.size() * sizeof(wchar_t);
-		
-#if TARGET_RT_BIG_ENDIAN
-		const NSStringEncoding kEncoding_wchar_t = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF32BE);
-#else
-		const NSStringEncoding kEncoding_wchar_t = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF32LE);
-#endif
-		
-		NSString* result = [[[NSString alloc] initWithBytes:data length:size encoding:kEncoding_wchar_t] autorelease];
-		return result;
-	}
+    NSString* wstring2NSString(const std::wstring& ws);
 	/*
 	 Family: Hiragino Kaku Gothic ProN W3 
 	 Font: HiraKakuProN-W3 

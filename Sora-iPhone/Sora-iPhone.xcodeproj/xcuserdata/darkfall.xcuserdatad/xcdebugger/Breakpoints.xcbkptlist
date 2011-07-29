@@ -155,11 +155,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SoraiOSMainWindow.h"
-         timestampString = "332412502.177446"
+         timestampString = "333652974.677822"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
          landmarkName = "init()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -175,6 +175,20 @@
          startingLineNumber = "40"
          endingLineNumber = "40"
          landmarkName = "renderFunc()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "SoraiOSMainWindow.h"
+         timestampString = "333652974.677822"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
+         landmarkName = "getWindowWidth()"
          landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>

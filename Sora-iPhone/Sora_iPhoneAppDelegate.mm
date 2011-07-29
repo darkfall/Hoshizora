@@ -17,7 +17,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window.rootViewController = self.viewController;
-	
+	CGRect  rect = [[UIScreen mainScreen] bounds];
+    [window setFrame:rect];
     return YES;
 }
 
