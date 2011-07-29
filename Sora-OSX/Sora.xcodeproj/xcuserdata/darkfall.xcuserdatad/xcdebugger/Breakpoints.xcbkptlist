@@ -1517,9 +1517,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "98"
-         endingLineNumber = "98"
-         landmarkName = "mainWindow::renderFunc()"
-         landmarkType = "5">
+         endingLineNumber = "98">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1569,9 +1567,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "90"
-         endingLineNumber = "90"
-         landmarkName = "myRenderFunc(sora::SoraObject&amp; obj)"
-         landmarkType = "7">
+         endingLineNumber = "90">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

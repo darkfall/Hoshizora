@@ -58,6 +58,17 @@
 
 #include "libvlc/SoraVlcMoviePlayer.h"
 
+#include <block.h>
+
+typedef int (^IntBlock)();
+
+IntBlock downCounter(int start) {
+    __block int i = start;
+    return Block_copy( ^int() {
+        return i--;
+    });
+}
+
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
     

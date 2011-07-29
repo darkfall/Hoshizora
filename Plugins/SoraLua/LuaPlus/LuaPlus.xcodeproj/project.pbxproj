@@ -193,7 +193,7 @@
 		8881A93A13332D9A007F0D7B /* lwstrlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lwstrlib.c; sourceTree = "<group>"; };
 		8881A93B13332D9A007F0D7B /* popen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = popen.c; sourceTree = "<group>"; };
 		8881A93C13332D9A007F0D7B /* premake.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = premake.lua; sourceTree = "<group>"; };
-		D2AAC0630554660B00DB518D /* libLuaPlus.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libLuaPlus.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC0630554660B00DB518D /* LuaPlus */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.dylib"; path = LuaPlus; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,7 +321,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC0630554660B00DB518D /* libLuaPlus.dylib */,
+				D2AAC0630554660B00DB518D /* LuaPlus */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -396,7 +396,7 @@
 			);
 			name = LuaPlus;
 			productName = LuaPlus;
-			productReference = D2AAC0630554660B00DB518D /* libLuaPlus.dylib */;
+			productReference = D2AAC0630554660B00DB518D /* LuaPlus */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -497,7 +497,7 @@
 				INSTALL_PATH = ./;
 				OBJROOT = "$(SYMROOT)";
 				PRODUCT_NAME = LuaPlus;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SYMROOT = build;
 				ZERO_LINK = YES;
@@ -520,7 +520,7 @@
 				OBJROOT = "$(SYMROOT)";
 				ONLY_LINK_ESSENTIAL_SYMBOLS = YES;
 				PRODUCT_NAME = luaplus;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;

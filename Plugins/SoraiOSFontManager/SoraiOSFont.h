@@ -61,17 +61,17 @@ namespace sora {
 		void	setKerningHeight(float32 kerning);
 		
 		// get kernings
-		float32	getKerningWidth();
-		float32	getKerningHeight();
+		float32	getKerningWidth() const;
+		float32	getKerningHeight() const;
 		
 		// get font dimensions
 		float32	getStringWidth(const wchar_t* text);
-		float32	getHeight();
+		float32	getHeight() const;
 		
 		float32 getStringHeight(const wchar_t* text);
 		
 		// get font size
-		uint32	getFontSize();
+		uint32	getFontSize() const;
         void    setFontSize(uint32 newsize);
 		
 		// get width of a char
@@ -81,6 +81,17 @@ namespace sora {
 		void setCharRotation(float32 rot);
 		void setScale(float32 scale);
 		
+        // get/set line width
+        void setLineWidth(float32 width);
+        float32 getLineWidth() const;
+        
+        float32 getCharRotation() const;
+        float32 getScale() const;
+        
+        // set/get line rotation
+        void setLineRotation(float32 rot, bool rotateChar=false);
+        float32 getLineRotation() const;
+                
 	private:
 		SoraSprite* pfSpr;
 		SoraCore* CORE;
@@ -94,6 +105,8 @@ namespace sora {
 		
 		float32 charRotation;
 		float32 scale;
+        float32 lineWidth;
+        float32 lineRotation;
 	};
 	
 } // namespace sora

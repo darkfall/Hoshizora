@@ -150,12 +150,6 @@ namespace sora {
 
 #include <cassert>
 
-
-#ifdef __APPLE_CC__
-#include <Availability.h>
-#endif
-
-
 #if defined(SORA_STD_CALL)
 #define SORACALL __stdcall
 #else
@@ -168,28 +162,24 @@ namespace sora {
 #define strcmpnocase strcasecmp
 #endif
 
-#if defined(__MAC_OS_X_VERSION_MIN_REQUIRED)
-
-	#define OS_OSX
-
-#elif defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
-
-	#define OS_IOS
-
+// apple os ( osx / ios )
+#if defined(__APPLE__) || defined(__APPLE_CC__)
+    #if !defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
+        #define OS_OSX
+    #else
+        #define OS_IOS
+    #endif
+// android
 #elif defined(__ANDROID__)
-
 	#define OS_ANDROID
-
+// windows
 #elif defined(_WIN32) || defined(_MSC_VER)
-
 	#define OS_WIN32
-
+// linux
 #elif defined(linux) || defined(__linux)
-
     #define OS_LINUX
-
-#elif defined(_PSP)		
-
+// psp
+#elif defined(_PSP)
 	#define OS_PSP
 #endif
 

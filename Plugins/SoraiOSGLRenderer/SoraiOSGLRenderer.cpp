@@ -240,7 +240,7 @@ namespace sora{
 		g_timer = timer;
 	}
 
-	void SoraiOSGLRenderer::beginScene(ulong32 color, ulong32 target, bool clear) {
+	void SoraiOSGLRenderer::beginScene(uint32 color, ulong32 target, bool clear) {
 		_glBeginScene(color, target, clear);
 	}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   version = "1.3">
+   version = "1.8">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D2AAC0620554660B00DB518D"
-               BuildableName = "libLuaPlus.dylib"
+               BuildableName = "LuaPlus"
                BlueprintName = "LuaPlus"
                ReferencedContainer = "container:LuaPlus.xcodeproj">
             </BuildableReference>
