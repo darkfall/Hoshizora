@@ -17,11 +17,8 @@
 #include "SoraLua/SoraLuaObject.h"
 
 #include "SoraFileChangeEvent.h"
-#include "SoraPlatformerPrefabs/SoraPlatformerGeomtry.h"
 
 #include "SoraScene.h"
-
-#include "SoraMovieSprite/SoraMovieSprite.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
@@ -53,9 +50,6 @@ private:
     sora::SoraScene* mScene1;
     sora::SoraScene* mScene2;
     sora::SoraCamera* mCamera;
-    
-    sora::SoraMoviePlayer* mMoviePlayer;
-    sora::SoraMovieSprite* mMovieSprite;
 };
 
 #endif

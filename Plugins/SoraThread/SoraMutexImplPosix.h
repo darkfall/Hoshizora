@@ -34,12 +34,12 @@ namespace sora {
         
         inline void lockImpl() {
             if(pthread_mutex_lock(&mutex))
-                THROW_SORA_EXCEPTION("Cannot lock mutex");
+                THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock mutex");
         }
         
         inline void unlockImpl() {
             if(pthread_mutex_unlock(&mutex))
-                THROW_SORA_EXCEPTION("Cannot lock mutex");
+                THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock mutex");
         }
         
         inline void* getSysMutexImpl() {

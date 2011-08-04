@@ -36,7 +36,7 @@ namespace sora {
 				if(texRefs[p->first] == 0) {
 					SoraCore::Instance()->releaseTexture(p->second);
 #ifdef _DEBUG
-					DebugPtr->log(vamssg("Free Texture: %lu, tex=%s\n", p->second, (id2str(p->second)).c_str()));
+					log_mssg(vamssg("Free Texture: %lu, tex=%s\n", p->second, (id2str(p->second)).c_str()));
 #endif
 					texMapRv.erase(texMapRv.find(p->second));
 					texMap.erase(p);

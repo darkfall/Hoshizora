@@ -177,7 +177,7 @@ namespace sora {
     static void FreeShader(SoraShader* shader) {
         SoraShaderContext* context = shader->getShaderContext();
         if(!context)
-            THROW_SORA_EXCEPTION("Caught wild shader without ShaderContext, possible bug");
+            THROW_SORA_EXCEPTION(IllegalStateException, "Caught wild shader without ShaderContext, possible bug");
         else context->detachShader(shader);
     }
 

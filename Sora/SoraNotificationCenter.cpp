@@ -29,7 +29,7 @@ namespace sora {
         for(ObserverList::iterator it = mObservers.begin();
             it != mObservers.end();
             ++it) {
-            if(observer.equals(***it)) {
+            if(observer.equals(*(*it).get())) {
                 mObservers.erase(it);
                 return;
             }

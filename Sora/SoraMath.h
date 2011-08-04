@@ -16,6 +16,7 @@
 #include "SoraPlatform.h"
 #include "hgevector.h"
 #include "hgerect.h"
+#include "vector3.h"
 #include "CoreTransform.h"
 
 namespace sora {
@@ -37,6 +38,7 @@ namespace sora {
 	
 	typedef hgeVector SoraVector;
 	typedef hgeRect SoraRect;
+    typedef vector3 SoraVector3;
     
     inline bool floatEqual(float32 f1, float32 f2) {
         return fabs(f1 - f2) < 0.0000001;

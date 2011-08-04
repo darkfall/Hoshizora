@@ -27,7 +27,7 @@ namespace sora {
         }
         
         if(!pMusicFile) {
-            DebugPtr->log("error converting event data object to playbackeventHandler", 
+            log_mssg("error converting event data object to playbackeventHandler", 
 						  LOG_LEVEL_ERROR);
             return FMOD_ERR_EVENT_FAILED;
         }
@@ -42,7 +42,7 @@ namespace sora {
     SoraFMODMusicFile::SoraFMODMusicFile(bool bStream) {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
-            DebugPtr->log("Creating FMODMusicFile: No FMOD System available", LOG_LEVEL_ERROR);
+            log_mssg("Creating FMODMusicFile: No FMOD System available", LOG_LEVEL_ERROR);
         
         pSound = NULL;
         pChannel = NULL;
@@ -58,7 +58,7 @@ namespace sora {
     SoraFMODMusicFile::SoraFMODMusicFile(const SoraWString& path, bool bStream) {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
-            DebugPtr->log(vamssg("Creating %s: No FMOD System available", ws2s(path).c_str()),
+            log_mssg(vamssg("Creating %s: No FMOD System available", ws2s(path).c_str()),
 						  LOG_LEVEL_ERROR);
         bIsStream = bStream;
         
@@ -77,7 +77,7 @@ namespace sora {
                 readFileMem(data, size);
                 SORA->freeResourceFile(data);
              } else 
-                DebugPtr->log(vamssg("Creating %s: File not exists", ws2s(path).c_str()),
+                log_mssg(vamssg("Creating %s: File not exists", ws2s(path).c_str()),
 							  LOG_LEVEL_ERROR);
         } else {
             readFile(path);
@@ -275,7 +275,7 @@ namespace sora {
     SoraFMODSoundEffectFile::SoraFMODSoundEffectFile() {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
-            DebugPtr->log("Creating FMODSoundEffectFile: No FMOD System available");
+            log_mssg("Creating FMODSoundEffectFile: No FMOD System available");
             
         pSound = NULL;
         pChannel = NULL;
@@ -288,7 +288,7 @@ namespace sora {
     SoraFMODSoundEffectFile::SoraFMODSoundEffectFile(const SoraWString& path) {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
-            DebugPtr->log(vamssg("Creating %s: No FMOD System available", ws2s(path).c_str()),
+            log_mssg(vamssg("Creating %s: No FMOD System available", ws2s(path).c_str()),
 						  LOG_LEVEL_ERROR);
         
         pSound = NULL;
@@ -306,7 +306,7 @@ namespace sora {
                 readFileMem(data, size);
                 SORA->freeResourceFile(data);
             } else 
-                DebugPtr->log(vamssg("Creating %s: File not exists", ws2s(path).c_str()),
+                log_mssg(vamssg("Creating %s: File not exists", ws2s(path).c_str()),
 							  LOG_LEVEL_ERROR);
         } else {
             readFile(path);

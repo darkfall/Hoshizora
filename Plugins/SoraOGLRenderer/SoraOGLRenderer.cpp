@@ -320,18 +320,18 @@ namespace sora{
                            , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN)) {
             if(FSAASamples == 0) {
                 glfwTerminate();
-                THROW_SORA_EXCEPTION("Error initializing GLFW");
+                THROW_SORA_EXCEPTION(SystemException, "Error initializing GLFW");
             } else {
                 glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 0);
                 if(!glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
                                   , 8, 8, 8, 8, 16, 0, windowInfo->isWindowed()?GLFW_WINDOW:GLFW_FULLSCREEN)) {
                     glfwTerminate();
-                    THROW_SORA_EXCEPTION("Error initializing GLFW");
+                    THROW_SORA_EXCEPTION(SystemException, "Error initializing GLFW");
                 }
             }
         }
         if(glfwGetWindowParam(GLFW_FSAA_SAMPLES) != FSAASamples) {
-            THROW_SORA_EXCEPTION(vamssg("Error creating window with FSAA sample = %d", FSAASamples));
+            THROW_SORA_EXCEPTION(SystemException, vamssg("Error creating window with FSAA sample = %d", FSAASamples));
         }
         
 		glfwSetWindowTitle(windowInfo->getWindowName().c_str());
@@ -353,7 +353,6 @@ namespace sora{
 			glfwDisable(GLFW_MOUSE_CURSOR);
 
 		bFullscreen = !windowInfo->isWindowed();
-		windowInfo->init();
         
         if(windowInfo->getIcon() != NULL)
             setIcon(mainWindow->getIcon());
@@ -515,7 +514,7 @@ namespace sora{
         glBindTexture(GL_TEXTURE_2D, 0);
 
 		if(!texId) {
-			THROW_SORA_EXCEPTION("Error creating texture");
+			THROW_SORA_EXCEPTION(SystemException, "Error creating texture");
 			return 0;
 		}
 		SoraTexture* tex = new SoraTexture(texId,
@@ -855,7 +854,7 @@ namespace sora{
 		
 		currShader = context;
 		if(!currShader->attachShaderList()) {
-			DebugPtr->log("SoraOGLRenderer: Error attaching shader list");
+			log_mssg("SoraOGLRenderer: Error attaching shader list");
 		}
 	}
 

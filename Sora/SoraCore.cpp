@@ -27,8 +27,12 @@
 #include "helpers/SoraInputSimulator.h"
 #include "helpers/SoraZSorter.h"
 #include "helpers/SoraBooter.h"
+#include "helpers/SoraMenuBar.h"
+
+#include "timer/SoraSimpleTimerManager.h"
 
 #include "cmd/CoreCmds.h"
+
 
 #include "MemoryUsage.h"
 #include "Rect4V.h"
@@ -86,6 +90,8 @@ namespace sora {
         
         static TransformData g_CurrentTransform;
         static ClippingData g_CurrentClipping;
+        
+        SoraKeyPool* g_keypool;
     }
     
     
@@ -173,21 +179,31 @@ namespace sora {
         try {
             if(!bDisablePluginDetection) 
                 SoraBooter::loadExPlugins(L"./sora/plugins");
-            
-            _checkCoreComponents();
-
+        } catch(const SoraException& exp) {
+            _postError(exp.what());
+        }
+        _checkCoreComponents();
+        
+        try {
             // no main window created
             if(!bMainWindowSet) {
-                THROW_SORA_EXCEPTION("No main window created");
+                THROW_SORA_EXCEPTION(SystemException, "No main window created");
                 shutDown();
             }
             if(!bInitialized) {
-                THROW_SORA_EXCEPTION("Sora not initialized");
+                THROW_SORA_EXCEPTION(SystemException, "Sora not initialized");
                 shutDown();
             }
-            
-            
-            // create render target for debug renderer
+        } catch(const SoraException& exp) {
+            _postError(exp.what());
+            shutDown();
+        }
+        
+        // registering global keypool
+        g_keypool = new SoraKeyPool;
+        
+        try {
+        // create render target for debug renderer
 #ifdef DEBUG
             DEBUG_RENDERER->createTarget();
 #endif
@@ -196,16 +212,17 @@ namespace sora {
                 mScreenBuffer = pRenderSystem->createTarget(iScreenWidth, iScreenHeight);
                 if(!mScreenBuffer) {
                     bEnableScreenBuffer = false;
-                    THROW_SORA_EXCEPTION("Error creating fullscreen buffer, fullscreen posteffect maybe disabled");
+                    THROW_SORA_EXCEPTION(SystemException, "Error creating fullscreen buffer, fullscreen posteffect maybe disabled");
                 }
                 SoraFullscreenBufferHandler::Instance();
             }
             
-            if(pRenderSystem)
-                pRenderSystem->start(pTimer);
         } catch(const SoraException& exp) {
             _postError(exp.what());
         }
+        
+        if(pRenderSystem)
+            pRenderSystem->start(pTimer);
 	}
 
 	void SoraCore::_frameListenerStart() {
@@ -238,7 +255,7 @@ namespace sora {
 		PROFILE("CORE_UPDATE");
 #endif
 
-        try {
+     //   try {
             if(!bPaused && !bPauseSound) {
                 {
 #ifdef PROFILE_CORE_UPDATE
@@ -258,8 +275,10 @@ namespace sora {
 #ifdef PROFILE_CORE_UPDATE
                     PROFILE("UPDATE_MAINWINDOW");
 #endif
-                    mainWindow->updateFunc();
                     _modifierAdapterUpdate();
+                    SoraSimpleTimerManager::Instance()->update(getDelta());
+                    
+                    mainWindow->updateFunc();
                 }
                 
                 {
@@ -309,15 +328,8 @@ namespace sora {
                     _frameListenerEnd();
                 }
                 
-                if(!bPauseRender) {
-                    SoraDebugRenderer::Instance()->render();
-                    
-                    SoraMenuBar::Instance()->update();
-                    SoraMenuBar::Instance()->render();
-                    
-                    SoraConsole::Instance()->render();
-                    
-                    SoraEventManager::Instance()->update(getDelta());
+                if(!bPauseRender) {                    
+                   SoraEventManager::Instance()->update(getDelta());
                     
                     if(bMainScene) {
                         bMainScene = false;
@@ -332,15 +344,14 @@ namespace sora {
                     }
                 }
                 
+                
                 mTime += pTimer->getDelta();
                 
                 pRenderSystem->endFrame();
-                
-                keypoll::clearInputQueue();
             }
-        } catch (const SoraException& exp) {
+     /*   } catch (const SoraException& exp) {
             messageBox(exp.what(), "A Error Happened :(", MB_OK | MB_ICONERROR);
-        }
+        }*/
         
 	}
 
@@ -353,8 +364,7 @@ namespace sora {
 		if(!pInput) {
 			bHasInput = false;
 			_postError("SoraCore::CheckCoreComponents: No Input provided");
-			DebugPtr->log("No Input available, input related API disabled", 
-						  LOG_LEVEL_WARNING);
+			DebugPtr->warning("No Input available, input related API disabled");
 		}
 
 		if(!pPluginManager) {
@@ -369,20 +379,18 @@ namespace sora {
 
 		if(!pFontManager) {
 			_postError("SoraCore::CheckCoreComponents: no FontManager available");
-			DebugPtr->log("No FontManager available, font related API disabled", 
-						  LOG_LEVEL_WARNING);
+			DebugPtr->warning("No FontManager available, font related API disabled");
 		}
 		
 		if(!pSoundSystem) {
 			_postError("SoraCore::CheckCoreComponents: no SoundSystem available");
-			DebugPtr->log("No SoundSystem available, sound related API disabled", 
-						  LOG_LEVEL_WARNING);
+			DebugPtr->warning("No SoundSystem available, sound related API disabled");
 		}
 
 		// no render system available, fatal error
 		// cause currently there's no cross-platform render system HoshiNoSora implemented
 		if(!pRenderSystem) {
-			THROW_SORA_EXCEPTION("no render system available");
+			THROW_SORA_EXCEPTION(SystemException, "no render system available");
 		}
 
 		bInitialized = true;
@@ -394,7 +402,7 @@ namespace sora {
 
 	void SoraCore::_postError(const SoraString& string) {
 		if(!bMessageBoxErrorPost)
-			DebugPtr->log(string, LOG_LEVEL_ERROR);
+			log_mssg(string, LOG_LEVEL_ERROR);
 		else
 			pMiscTool->messageBox(string, "Some Error Happened :(", MB_ICONERROR | MB_OK);
 	}
@@ -434,10 +442,9 @@ namespace sora {
 			delete pSoundSystem;
 		}
 		
+        if(g_keypool) delete g_keypool;
 		if(pMiscTool) delete pMiscTool;
-		
-		SoraEventManager::Destroy();
-		// force exiting
+				// force exiting
 		exit(0);
 	}
 
@@ -449,20 +456,21 @@ namespace sora {
             SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
             SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
 			
-            sora::SoraConsole::Instance();
-            sora::SoraCoreCmdHandler::Instance();
-            
 			ulong32 result = pRenderSystem->createWindow(info);
 			if(result) {
+                new SoraSimpleTimerManager;
+                sora::SoraConsole::Instance();
+                sora::SoraCoreCmdHandler::Instance();
+                
 				if(pInput != NULL)
 					pInput->setWindowHandle(result);
 				pMiscTool->setMainWindowHandle(result);
 				bMainWindowSet = true;
 				mainWindow = info;
                 mainWindow->setActive(true);
-                
-				DebugPtr->log(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
-							  LOG_LEVEL_NOTICE);
+                mainWindow->init();
+
+				DebugPtr->notice(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()));
                 
 				return result;
 			} else {
@@ -479,7 +487,7 @@ namespace sora {
                 mainWindow->reinit();
             mainWindow->setActive(true);
             
-			DebugPtr->log(vamssg("Set MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
+			log_mssg(vamssg("Set MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
 						  LOG_LEVEL_NOTICE);
 			
 			if(info->getWindowWidth() != iScreenWidth || info->getWindowHeight() != iScreenHeight) {
@@ -550,7 +558,7 @@ namespace sora {
 		pInput = input;
 		bHasInput = true;
         
-        keypoll::setQueueInput(input);
+        SoraKeyPool::setQueueInput(input);
 	}
 
 	void SoraCore::registerResourceManager(SoraResourceManager* pResourceManager) {
@@ -728,7 +736,7 @@ namespace sora {
         if(!tempShaderContext) {
             tempShaderContext = createShaderContext();
             if(!tempShaderContext)
-                THROW_SORA_EXCEPTION("No shader context available :(");
+                THROW_SORA_EXCEPTION(SystemException, "No shader context available :(");
         }
         if(tempShaderContext) {
             tempShaderContext->attachShader(shader);
@@ -1005,7 +1013,7 @@ namespace sora {
 	}
 
 	bool SoraCore::getKeyEvent(SoraKeyEvent& ev) {
-		if(bHasInput) return keypoll::getQueueEvent(ev);
+		if(bHasInput) return SoraKeyPool::getQueueEvent(ev);
 		return false;
 	}
 
@@ -1040,19 +1048,19 @@ namespace sora {
 	}
     
     int32 SoraCore::registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler) {
-        return keypoll::addGlobalHotKey(key, handler);
+        return SoraKeyPool::addGlobalHotKey(key, handler);
     }
     
     void SoraCore::setGlobalHotkey(int32 hid, const SoraHotkey& key) {
-        keypoll::setGlobalHotkey(hid, key);
+        SoraKeyPool::setGlobalHotkey(hid, key);
     }
     
     void SoraCore::unregisterGlobalHotkey(int32 hid) {
-        keypoll::delGlobalHotkey(hid);
+        SoraKeyPool::delGlobalHotkey(hid);
     }
     
     void SoraCore::clearGlobalHotkeys() {
-        keypoll::clearGlobalHotkeys();
+        SoraKeyPool::clearGlobalHotkeys();
     }
 	
 	SoraWString SoraCore::fileOpenDialog(const char* filter, const char* defaultPath) {
@@ -1086,11 +1094,11 @@ namespace sora {
 	}
 
 	void SoraCore::log(const SoraString& sMssg, int32 level) {
-		DebugPtr->log(sMssg, level);
+		log_mssg(sMssg, level);
 	}
 
 	void SoraCore::logw(const SoraWString& sMssg, int32 level) {
-		DebugPtr->log(ws2s(sMssg), level);
+		log_mssg(ws2s(sMssg), level);
 	}
 	
 	void SoraCore::logf(const char* format, ...) {
@@ -1100,7 +1108,7 @@ namespace sora {
 		vsprintf(Message, format, ArgPtr);
 		va_end(ArgPtr);
 		
-		DebugPtr->log(Message);
+		log_mssg(Message);
 	}
 
 	void SoraCore::registerPlugin(SoraPlugin* pPlugin) {
@@ -1227,7 +1235,7 @@ namespace sora {
 		return pSoundSystem->createSoundEffectFile(se);
 	}
     
-    SoraMusicFile* SORACALL SoraCore::createMusicFile(bool bStream) {
+    SoraMusicFile* SoraCore::createMusicFile(bool bStream) {
         if(!pSoundSystem) {
 			_postError("SoraCore::createMusicFile: no soundsystem available");
 			return NULL;
@@ -1236,7 +1244,7 @@ namespace sora {
         return pSoundSystem->createMusicFile(bStream);
     }
     
-    SoraSoundEffectFile* SORACALL SoraCore::createSoundEffectFile() {
+    SoraSoundEffectFile* SoraCore::createSoundEffectFile() {
         if(!pSoundSystem) {
 			_postError("SoraCore::createSoundEffectFile: no soundsystem available");
 			return NULL;
@@ -1254,16 +1262,12 @@ namespace sora {
         return pRenderSystem->snapshot(path);
     }
 
-	uint64 SoraCore::getEngineMemoryUsage() {
+	uint64 SoraCore::getEngineMemoryUsage() const {
 		return getMemoryUsage();
 	}
 	
 	void SORACALL SoraCore::enableMessageBoxErrorPost(bool bFlag) { 
 		bMessageBoxErrorPost = bFlag;
-	}
-	
-	SoraConsole* SoraCore::getConsole() const {
-		return SoraConsole::Instance();
 	}
 	
 	void SoraCore::setSystemFont(const wchar_t* font, int32 fontSize) {
@@ -1294,14 +1298,6 @@ namespace sora {
 	
 	bool SoraCore::isPaused() {
 		return bPaused;
-	}
-	
-	SoraMenuBar* SoraCore::getMenuBar() const {
-		return SoraMenuBar::Instance();
-	}
-	
-	void SoraCore::enableMenuBar(bool flag) {
-		SoraMenuBar::Instance()->setEnabled(flag);
 	}
 
 	void SoraCore::setIcon(const SoraString& icon) {
@@ -1357,7 +1353,7 @@ namespace sora {
         if(flag && !mScreenBuffer) {
             mScreenBuffer = createTarget(getScreenWidth(), getScreenHeight());
             if(!mScreenBuffer)
-                THROW_SORA_EXCEPTION("Error creating screen buffer, fullscreen buffer maybe disabled. :(");
+                THROW_SORA_EXCEPTION(SystemException, "Error creating screen buffer, fullscreen buffer maybe disabled. :(");
         }
     }
     
@@ -1400,4 +1396,35 @@ namespace sora {
         }
     }
     
+    uint64 SoraCore::getResourceMemoryUsage() const {
+        return SoraResourceFileFinder::ResourceMemory / 1024;
+    }
+    
+    void SoraCore::addMouseListener(SoraMouseListener* listener, int priority) {
+        SoraKeyPool::addMouseListener(listener, priority);
+    }
+    
+    void SoraCore::addKeyListener(SoraKeyListener* listener, int priority) {
+        SoraKeyPool::addKeyListener(listener, priority);
+    }
+    
+    void SoraCore::addJoystickListener(SoraJoystickListener* listener, int priority) {
+        SoraKeyPool::addJoystickListener(listener, priority);
+    }
+    
+    void SoraCore::delMouseListener(SoraMouseListener* listener) {
+        SoraKeyPool::delMouseListener(listener);
+    }
+    
+    void SoraCore::delKeyListener(SoraKeyListener* listener) {
+        SoraKeyPool::delKeyListener(listener);
+    }
+    
+    void SoraCore::delJoystickListener(SoraJoystickListener* listener) {
+        SoraKeyPool::delJoystickListener(listener);
+    }
+    
+    SimpleTimerPtr SoraCore::createTimer(const ITimerManager::TimerFunc& func) {
+        return SoraSimpleTimerManager::Instance()->createTimer(func);
+    }
 } // namespace sora

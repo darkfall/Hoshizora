@@ -22,6 +22,8 @@ namespace sora {
     
     class SoraFSMManager;
     
+    const int32 SoraFSMStateUpdateEnd = -1;
+    
     class SORA_API SoraFSMState {
     public:
         friend class SoraFSMManager;
@@ -33,7 +35,7 @@ namespace sora {
             delete this;
         }
         
-        virtual void onUpdate(float32 dt) {}
+        virtual int32 onUpdate(float32 dt) { return SoraFSMStateUpdateEnd; }
         virtual void onRender() {}
         
         virtual void onEnter() {}
@@ -46,15 +48,20 @@ namespace sora {
     
     class SORA_API SoraFSMManager {
     public:
+        typedef std::string EventType;
+        
         SoraFSMManager();
         ~SoraFSMManager();
         
         SoraFSMManager& defState(SoraFSMState* state, const SoraString& name);
         void delState(const SoraString& name);
         
+        void defTrans(const SoraString& state1, const EventType& event, const SoraString& state2);
+        void delTrans(const SoraString& state, const EventType& event);
+        
+        void postEvent(const EventType& event);
+        
         void switchToState(const SoraString& name);
-        void switchToState(SoraFSMState* state);
-
         void setGlobalState(SoraFSMState* state);
         
         SoraFSMState* getCurrentState() const;
@@ -71,8 +78,17 @@ namespace sora {
         SoraFSMState* operator[](const SoraString& name);
         
     private:
+        void switchToState(SoraFSMState* state);
+
         typedef std::map<stringId, SoraFSMState*> FSMStateMap;
         FSMStateMap mStates;
+        
+        typedef std::map<EventType, SoraFSMState*> StateEventMap;
+        struct EventTrans {
+            StateEventMap EventMap;
+        };
+        typedef std::map<SoraFSMState*, EventTrans> StateTransitionMap;
+        StateTransitionMap mTransitions;
         
         SoraFSMState* mGlobalState;
         SoraFSMState* mCurrentState;

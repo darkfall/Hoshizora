@@ -20,11 +20,11 @@
 #include "SoraEnvValues.h"
 #include "SoraResourceFile.h"
 #include "SoraDelegate.h"
+#include "SoraInputListeners.h"
+#include "SoraHotkey.h"
 
+#include "timer/ITimerManager.h"
 #include "Debug/SoraInternalLogger.h"
-
-#include "helpers/SoraMenuBar.h"
-#include "cmd/SoraConsole.h"
 
 #include <map>
 
@@ -54,11 +54,11 @@ namespace sora {
 		void registerInput			(SoraInput* pInput);
 		void registerFontManager	(SoraFontManager* pFontManager);
 		void registerSoundSystem	(SoraSoundSystem* pSoundSystem);
-		
+        
 		void registerMiscTool		(SoraMiscTool* pMiscTool);
 		void registerPluginManager  (SoraPluginManager* pPluginManager);
 		void registerTimer			(SoraTimer* pTimer);
-        
+            
         SoraRenderSystem*   getRenderSystem() const;
         SoraInput*          getInput() const;
         SoraMiscTool*       getMiscTool() const;
@@ -66,7 +66,7 @@ namespace sora {
         SoraTimer*          getTimer() const;
         SoraFontManager*    getFontManager() const;
         SoraSoundSystem*    getSoundSystem() const;
-
+        
 		void registerPlugin         (SoraPlugin* pPlugin);
 		void unistallPlugin         (SoraPlugin* pPlugin);
 		void unistallPluginS		(const SoraString& sPluginName);
@@ -88,6 +88,8 @@ namespace sora {
 		float32 getTimeScale();
 		uint64  getCurrentSystemTime();
         void    setVerticalSync(bool flag);
+        
+        SimpleTimerPtr createTimer(const ITimerManager::TimerFunc& func);
 
 		// render system APIs
 		void beginScene(uint32 c=0xFF000000, ulong32 h=0, bool clear=true);
@@ -226,6 +228,15 @@ namespace sora {
         SoraMusicFile* 			createMusicFile(bool bStream=false);
         SoraSoundEffectFile* 	createSoundEffectFile();
         
+        void addMouseListener(SoraMouseListener* listener, int priority=0);
+        void addKeyListener(SoraKeyListener* listener, int priority=0);
+        void addJoystickListener(SoraJoystickListener* listener, int priority=0);
+        
+        void delMouseListener(SoraMouseListener* listener);
+        void delKeyListener(SoraKeyListener* listener);
+        void delJoystickListener(SoraJoystickListener* listener);
+        
+        
         void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
         void execute(const SoraString& appPath, const SoraString& args);
         void snapshot(const SoraString& path);
@@ -237,7 +248,7 @@ namespace sora {
 		SoraWString videoInfo();
 		void		flush();
 
-		void postError	(const SoraString& sMssg);
+		void postError(const SoraString& sMssg);
 
 		/*
 		 if enabled
@@ -245,16 +256,22 @@ namespace sora {
 		 which suggest all caculation based on delta would sync by frame
 		 */
 		void setFrameSync(bool flag);
-
+ 
 		/* frame listener functions */
 		void addFrameListener(SoraFrameListener* listener);
 		void delFrameListener(SoraFrameListener* listener);
 		
-		uint64 getEngineMemoryUsage();
-		
-		SoraConsole*    getConsole() const;
-        void            enableMenuBar(bool flag);
-		SoraMenuBar*    getMenuBar() const;
+        /**
+         *  Memory usage calculated by Operating System
+         *  libproc for Linux
+         **/
+		uint64 getEngineMemoryUsage() const;
+        /**
+         *  Memory usage calculated by SoraResourceFileFinder
+         *  Only calculates resource allocation and free
+         *  (Library managed memory not included, such as gl texture)
+         **/
+        uint64 getResourceMemoryUsage() const;
 		
 		void setSystemFont(const wchar_t* font, int32 fontSize);
 		

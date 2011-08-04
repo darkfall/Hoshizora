@@ -101,6 +101,7 @@ namespace sora {
     
     SoraFileStreamPosix::SoraFileStreamPosix() {
         nocache = false;
+        file = NULL;
     }
     
     SoraFileStreamPosix::~SoraFileStreamPosix() {

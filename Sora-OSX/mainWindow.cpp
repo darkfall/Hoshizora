@@ -11,44 +11,10 @@
 #include "SoraEventManager.h"
 #include "SoraLocalizer.h"
 
-#include "graphicEffects.h"
-
-#include "SoraGUIChan/guichansetup.h"
-#include "gcnExtend/gcnDraggableImageButtonIncubator.h"
-#include "gcnExtend/gcnSelectableContainer.h"
-#include "gcnExtend/gcnDraggableIcon.h"
-#include "gcnExtend/gcnConnectable.h"
-
-#include "SoraSoundManager/SoraBGMManager.h"
-#include "SoraSoundManager/SoundManagerLuaExport.h"
-
-#include "SoraSpriteAnimation/AnimationLuaExport.h"
-
-#include "SoraLua/SoraLuaExport.h"
-
-#include "SoraPNGOps/SoraCompressedTexture.h"
-
-#include "SoraGUIChan/Modifiers/CloseModifier.h"
-
-#include "SoraPNGOps/SoraPNGOptimizer.h"
 #include "Debug/SoraAutoProfile.h"
 
 #include "cmd/SoraConsole.h"
-
-#include "SoraGifSprite/SoraGifSprite.h"
-#include "SoraGenericObjects/SoraCustomShapeSprite.h"
-
-#include "../MEAD/bulletLuaExport.h"
 #include "SoraSoundManager/SoundManagerLuaExport.h"
-
-#include "SoraThread/SoraThreadPool.h"
-
-#include "SoraThread/SoraCountDownLatch.h"
-#include "SoraThread/SoraBlockingQueue.h"
-
-#include "SoraBox2D/SoraPhysicalWorld.h"
-#include "SoraBox2D/SoraPhysicalObject.h"
-
 #include "SoraShaderManager.h"
 
 #include "SoraModifierAdapter.h"
@@ -56,18 +22,7 @@
 #include "modifiers/SoraCameraModifiers.h"
 #include "SoraExternalRenderObject.h"
 
-#include "libvlc/SoraVlcMoviePlayer.h"
-
-#include <block.h>
-
-typedef int (^IntBlock)();
-
-IntBlock downCounter(int start) {
-    __block int i = start;
-    return Block_copy( ^int() {
-        return i--;
-    });
-}
+#include "timer/SoraSimpleTimerManager.h"
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
@@ -116,7 +71,50 @@ void delegatetest(void* sender, int32& res) {
     sora::SORA->messageBox("test", "test", MB_OK);
 }
 
+void myFunc(float& delta) {
+    std::ostringstream msg;
+    msg << "Timer Delta: "<<delta;
+    sora::SORA->messageBox(msg.str(), "test", MB_OK);
+}
+
+sora::SimpleTimerPtr timer;
+#include "SoraDelegateConvert.h"
+
+class listenerTest: public sora::SoraMouseListener {
+public:
+    void mouseMoved(sora::SoraMouseEvent& evt) {
+        printf("%s: %f %f\n", "Mouse Moved", evt.getX(), evt.getY());
+    }
+    
+    void mouseClicked(sora::SoraMouseEvent& evt) {
+        printf("%s: %f %f\n", "Mouse Click", evt.getX(), evt.getY());
+
+    }
+    
+    void mouseReleased(sora::SoraMouseEvent& evt) {
+        printf("%s: %f %f\n", "Mouse Release", evt.getX(), evt.getY());
+
+    }
+    
+    void mouseDragged(sora::SoraMouseEvent& evt) {
+        printf("%s: %f %f\n", "Mouse Drag", evt.getX(), evt.getY());
+
+    }
+    
+    void mouseWheelUp(sora::SoraMouseEvent& evt) {
+        printf("%s: %f %f\n", "Mouse Wheel Up", evt.getX(), evt.getY());
+
+    }
+    
+    void mouseWheelDown(sora::SoraMouseEvent& evt) {
+        printf("%s: %f %f\n", "Mouse Wheel Down", evt.getX(), evt.getY());
+        
+    }
+};
+
 void mainWindow::init() {
+    sora::SoraCore::Instance()->addMouseListener(new listenerTest);
+    
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
@@ -154,7 +152,6 @@ void mainWindow::init() {
     sora::CreateModifierAdapter(mScene2, new sora::SoraTransitionModifier<sora::SoraScene>(0.f, 0.f, 300.f, 300.f, 2.f));
   //  mScene3->setRotation(sora::F_PI_4);
     
-    mMoviePlayer = new sora::SoraVlcMoviePlayer();
    // mMoviePlayer->openMedia(L"AMV_Scenario.mp4");
    // mScene2->moveTo(800.f, 400.f, 10.f);
 }

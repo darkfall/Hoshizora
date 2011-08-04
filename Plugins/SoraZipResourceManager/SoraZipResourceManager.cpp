@@ -31,7 +31,7 @@ namespace sora {
 	SoraZipFile* SoraZipResourceManager::getResourcePack(HSORARESOURCE handle) {
 		RESOURCE_PACK::iterator p = resourcePacks.find(handle);
 		if( p != resourcePacks.end() ) 
-			return p->second.pointer();
+			return p->second.get();
 		return 0;
 	}
 

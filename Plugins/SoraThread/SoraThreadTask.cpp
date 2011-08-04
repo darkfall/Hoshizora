@@ -11,8 +11,6 @@
 
 namespace sora {
     
-    
-    
     SoraThreadTask::SoraThreadTask():
     iarg(NULL) {
         
@@ -26,7 +24,7 @@ namespace sora {
     void SoraThreadTask::setAsCFunc(void (*ThreadFunc)(void* arg)) {
         SoraCThreadTask* cTask = new SoraCThreadTask(ThreadFunc);
         if(!cTask)
-            THROW_SORA_EXCEPTION("Error creating member thread task");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error creating member thread task");
         else
             func = cTask;
     }
@@ -43,15 +41,15 @@ namespace sora {
         return func.valid();
     }
     
-    void SoraThreadTask::run() const {
+    void SoraThreadTask::run() {
         if(func.valid()) {
-            SoraThreadTaskImpl* realFunc = func.pointer();
+            SoraThreadTaskImpl* realFunc = func.get();
             realFunc->operator ()(iarg);
         } else
-            DebugPtr->log("SoraThreadtask::run - invalid func ptr");
+            log_mssg("SoraThreadtask::run - invalid func ptr");
     }
     
-    void SoraThreadTask::operator()() const {
+    void SoraThreadTask::operator()() {
         run();
     }
     

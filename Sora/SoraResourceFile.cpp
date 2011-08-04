@@ -25,17 +25,19 @@ namespace sora {
 	}
 	
 	SoraResourceFileAuto::SoraResourceFileAuto(const SoraWString& file, bool retain):
-	mRetain(retain) {
+	mRetain(retain),
+    mName(file) {
 		mData = SORA->getResourceFile(file, mSize);
 		if(!mData)
-			DebugPtr->log(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+			log_mssg(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
 	}
     
     SoraResourceFileAuto::SoraResourceFileAuto(const SoraWString& file, ulong32 size, bool retain):
-    mRetain(retain) {
+    mRetain(retain),
+    mName(file)  {
         mData = SORA->readResourceFile(file, size);
         if(!mData)
-			DebugPtr->log(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+			log_mssg(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
     }
 	
 	SoraResourceFileAuto::~SoraResourceFileAuto() {
@@ -47,8 +49,9 @@ namespace sora {
     SoraResourceFileAuto& SoraResourceFileAuto::operator=(const SoraWString& file) {
         mData = SORA->getResourceFile(file, mSize);
 		if(!mData)
-			DebugPtr->log(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+			log_mssg(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
         mRetain = false;
+        mName = file;
 		return *this;
     }
     

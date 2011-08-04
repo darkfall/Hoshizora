@@ -5,7 +5,7 @@
 #include "Hoshizora.h"
 #include "SoraGUIChan/guichansetup.h"
 #include "SoraEventManager.h"
-#include "SoraINIFile/SoraINIFile.h"
+#include "ini/SoraINIFile.h"
 
 #include "editorWindow.h"
 

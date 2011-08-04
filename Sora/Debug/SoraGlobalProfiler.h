@@ -37,7 +37,7 @@ namespace sora {
 		void storeProfile(const char* name, uint64 elapsedTime) {
 			PROFILE_CONT::iterator itprofile = profiles.find(name);
 			if(itprofile == profiles.end()) {
-				DebugPtr->log(vamssg("ProfileName=%s, time=%llu\n", name, elapsedTime), LOG_LEVEL_NOTICE);
+				log_mssg(vamssg("ProfileName=%s, time=%llu\n", name, elapsedTime), LOG_LEVEL_NOTICE);
 			}
 			profiles[name] = s_profile(name, elapsedTime);
 		}
@@ -45,7 +45,7 @@ namespace sora {
 		void printProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				DebugPtr->log(vamssg("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
+				log_mssg(vamssg("ProfileName=%s, time=%llu\n", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
 							  LOG_LEVEL_NOTICE);
 				++itprofile;
 			}
@@ -54,7 +54,7 @@ namespace sora {
 		void logProfiles() {
 			PROFILE_CONT::iterator itprofile = profiles.begin();
 			while(itprofile != profiles.end()) {
-				DebugPtr->log(vamssg("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
+				log_mssg(vamssg("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
 							   LOG_LEVEL_NOTICE);
 				++itprofile;
 			}
@@ -72,7 +72,7 @@ namespace sora {
 		void printProfile(const char* name) {
 			PROFILE_CONT::iterator itprofile = profiles.find(name);
 			if(itprofile != profiles.end()) {
-				DebugPtr->log(vamssg("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
+				log_mssg(vamssg("ProfileName=%s, time=%llu", itprofile->second.sName.c_str(), itprofile->second.elapsedTime),
 							  LOG_LEVEL_NOTICE);
 			}
 		}

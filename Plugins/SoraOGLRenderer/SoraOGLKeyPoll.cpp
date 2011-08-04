@@ -185,7 +185,7 @@ namespace sora {
 
 		char chr = toasciiWithFlag(skey, (glfwGetKey(GLFW_KEY_LSHIFT) == GLFW_PRESS || glfwGetKey(GLFW_KEY_RSHIFT) == GLFW_PRESS) ? SORA_INPUT_FLAG_SHIFT : 0);
         
-        keypoll::publishInputedKey(skey, type, chr);
+        SoraKeyPool::publishInputedKey(skey, type, chr);
 	}
 	
 	void glfwMouseCallback(int key, int action) {
@@ -200,7 +200,7 @@ namespace sora {
 			case GLFW_MOUSE_BUTTON_MIDDLE: skey = SORA_KEY_MBUTTON; break;
 		}
 		
-		keypoll::publishInputedKey(skey, type, 0);
+		SoraKeyPool::publishInputedKey(skey, type, 0);
 	}
 
 } // namespace sora

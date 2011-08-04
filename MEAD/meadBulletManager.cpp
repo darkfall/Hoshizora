@@ -13,7 +13,7 @@
 #include "SoraCore.h"
 
 namespace mead {
-
+    
 	meadBulletManager::meadBulletManager() {
 		mScreenRect.Set(-64.f, -64.f, sora::SORA->getScreenWidth()+64.f, sora::SORA->getScreenHeight()+64.f);
 	}

@@ -13,7 +13,6 @@
 #include "SoraEventManager.h"
 #include "SoraASSMState.h"
 #include "stringId.h"
-#include "lMemFile.h"
 #include "SoraTimerEvent.h"
 
 #include "SoraASSMEvent.h"

@@ -9,6 +9,7 @@
 
 #include "SoraFSM.h"
 #include "SoraSingletonHolder.h"
+#include "SoraException.h"
 
 namespace sora {
     
@@ -123,5 +124,42 @@ namespace sora {
         return *fsm.get();
     }
     
+    void SoraFSMManager::defTrans(const SoraString& state1, const EventType& event, const SoraString& state2) {
+        stringId sid1 = GetUniqueStringId(state1);
+        stringId sid2 = GetUniqueStringId(state2);
+        
+        FSMStateMap::iterator itState1 = mStates.find(sid1);
+        FSMStateMap::iterator itState2 = mStates.find(sid2);
+        if(itState1 != mStates.end() &&
+           itState2 != mStates.end()) {
+            mTransitions[itState1->second].EventMap.insert(std::make_pair(event, itState2->second));
+        } else 
+            THROW_SORA_EXCEPTION(NotFoundException, "State name not exist");
+    }
+    
+    void SoraFSMManager::delTrans(const SoraString& state, const EventType& event) {
+        stringId sid = GetUniqueStringId(state);
+        
+        FSMStateMap::iterator itState = mStates.find(sid);
+        if(itState != mStates.end()) {
+            StateTransitionMap::iterator itTrans = mTransitions.find(itState->second);
+            if(itTrans != mTransitions.end()) {
+                StateEventMap::iterator itEvent = itTrans->second.EventMap.find(event);
+                if(itEvent != itTrans->second.EventMap.end()) {
+                    itTrans->second.EventMap.erase(itEvent);
+                }
+            }
+        }
+    }
+    
+    void SoraFSMManager::postEvent(const EventType& event) {
+        StateTransitionMap::iterator itTrans = mTransitions.find(mCurrentState);
+        if(itTrans != mTransitions.end()) {
+            StateEventMap::iterator itEvent = itTrans->second.EventMap.find(event);
+            if(itEvent != itTrans->second.EventMap.end()) {
+                switchToState(itEvent->second);
+            }
+        }
+    }
     
 } // namespace sora

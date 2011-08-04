@@ -23,7 +23,7 @@ namespace sora {
             if (val)
                 return std::string(val);
             else
-                THROW_SORA_EXCEPTION("Cannot get env string");
+                THROW_SORA_EXCEPTION(NotFoundException, "Cannot get env string");
         }
         
         static std::string currentImpl() {
@@ -32,7 +32,7 @@ namespace sora {
             if(getcwd(cwd, sizeof(cwd)))
                 path = cwd;
             else 
-                THROW_SORA_EXCEPTION("Cannot get current directory");
+                THROW_SORA_EXCEPTION(NotFoundException, "Cannot get current directory");
             std::string::size_type n = path.size();
             if(n > 0 && path[n-1] != '/')
                 path.append("/");

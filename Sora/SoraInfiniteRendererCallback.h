@@ -7,6 +7,11 @@
 #include "SoraCore.h"
 
 namespace sora{
+    
+    /**
+     * For intergration with some other engine that requires C function callback
+     **/
+    
 	static SoraTimer* g_timer;
 
 	static bool bool_updateFrame() {

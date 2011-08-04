@@ -49,27 +49,6 @@ using std::hash_map;
 }
 #endif
 
-#ifdef USE_KMALLOC
-	#include "support/kalloc.h"
-	#define mymalloc kmalloc
-	#define myfree kfree
-	#define myrealloc krealloc
-#else
-	#define mymalloc malloc
-	#define myfree free
-	#define myrealloc realloc
-#endif
-
-#ifdef USE_TR1_SHARED_PTR
-
-#include <tr1/memory>
-#define SoraSharedPtr std::tr1::shared_ptr
-
-#else
-#define SoraSharedPtr SoraAutoPtr
-#endif
-
-
 #ifndef __GNUC__
 
 static inline int lrint (double const x) { // Round to nearest integer
@@ -100,6 +79,7 @@ static inline int lrint (double const x) { // Round to nearest integer
 #endif
 
 #include "SoraConfig.h"
+#include "SoraMemory.h"
 
 typedef		long			long32;
 typedef		unsigned long	ulong32;
@@ -225,13 +205,6 @@ typedef std::wstring SoraWString;
 #endif
 
 
-// android resolution definitions
-#ifdef OS_ANDROID
-
-
-
-#endif
-
 #ifdef OS_WIN32
 #define sora_fopenw(path, mode) _wfopen(path, TEXT(mode))
 
@@ -267,9 +240,6 @@ static void msleep(uint32_t msec) {
 	}
 }
 
-/*
- Thread Independent Variables
- */
 
 #define MB_OK				1
 #define MB_OKCANCEL			2
@@ -288,6 +258,11 @@ static void msleep(uint32_t msec) {
 #endif
 
 
+#define sora_assert assert
+
+/*
+ Thread Independent Variables
+ */
 #ifdef _MSC_VER
 #define ThreadLocal __declspec(thread)
 #elif defined(__GNUC__) && !defined(OS_OSX) && !defined(OS_IOS)
@@ -324,6 +299,11 @@ static void msleep(uint32_t msec) {
  if disabled, all exception would be disabled
 */
 #define SORA_USE_EXCEPTION
+
+/*
+ if disabled, SoraSimpleFSM would not use a NULL state as initial state
+*/
+#define SORA_FSM_USE_NULL
 
 
 

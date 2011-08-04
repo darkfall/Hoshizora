@@ -65,8 +65,8 @@ namespace sora {
         void setAsMemberFunc(void (T::*ThreadFunc)(void* args), T* obj);
         void setAsCFunc(void (*ThreadFunc)(void* arg));
         
-        void run() const;
-        void operator()() const;
+        void run();
+        void operator()();
         
         void setArg(void* arg);
         void* getArg() const;
@@ -89,7 +89,7 @@ namespace sora {
     void SoraThreadTask::setAsMemberFunc(void (T::*ThreadFunc)(void* args), T* obj) {
         SoraMemberThreadTask<T>* memberTask = new SoraMemberThreadTask<T>(ThreadFunc, obj);
         if(!memberTask)
-            THROW_SORA_EXCEPTION("Error creating member thread task");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error creating member thread task");
         else
             func = memberTask;
     }

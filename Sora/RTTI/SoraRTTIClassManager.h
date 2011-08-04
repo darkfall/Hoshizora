@@ -37,7 +37,7 @@
 
 namespace sora {
 	
-	class SoraRTTIClassManager: public SoraSingleton<SoraRTTIClassManager> {
+	class SoraRTTIClassManager {
 	protected:
 		friend class SoraSingleton<SoraRTTIClassManager>;
 		
@@ -45,6 +45,7 @@ namespace sora {
 		~SoraRTTIClassManager();
 		
 	public:
+        static SoraRTTIClassManager* Instance();
 		
 		void addClass(SoraRTTIClassDescriptor* pclass);
 		

@@ -17,7 +17,7 @@
 namespace sora {
 	
 	/*
-	 inheritant objects from this to create a obj list,
+	 Inherit objects from this to create a obj list,
 	 whenever the object is created, it will be add to the list
 	 whenever the object is destroyed, it will deleted from the list
 	 */
@@ -25,8 +25,29 @@ namespace sora {
 	template<typename T>
 	class AutoListElement {
 	public:
-		typedef std::list<T*> Members;
-	
+		typedef typename std::list<T*> Members;
+        typedef typename Members::iterator iterator;
+        typedef typename Members::const_iterator const_iterator;
+        
+        
+        static iterator begin() {
+            return members.begin();
+        }
+        
+        static iterator end() {
+            return members.end();
+        }
+        
+        static const_iterator const_begin() {
+            const Members& m = members;
+            return m.begin();
+        }
+        
+        static const_iterator const_end() {
+            const Members& m = members;
+            return m.end();
+        }
+        
 	protected:
 		AutoListElement() {
 			members.push_back(static_cast<T*> (this));
@@ -41,9 +62,63 @@ namespace sora {
 		static Members members;
 	};
     
-	template<typename T>
-	std::list<T*> AutoListElement<T>::members;
-	
+    /**
+     * Inherit bject form this to create a obj list
+     * You must call insert and remove by yourself to get the object insert into 
+     * the list
+     **/
+    template<typename T>
+    class AutoListElement2 {
+    public:
+		typedef typename std::list<T*> Members;
+        typedef typename Members::iterator iterator;
+        typedef typename Members::const_iterator const_iterator;
+        
+        void link() {
+            if(!mInList) {
+                members.push_back(static_cast<T*>(this));
+                mInList = true;
+            }
+        }
+        
+        void unlink() {
+            if(mInList) {
+                members.remove(static_cast<T*>(this));
+                mInList = false;
+            }
+        }
+        
+        void isLinked() const {
+            return mInList;
+        }
+        
+        static iterator begin() {
+            return members.begin();
+        }
+        
+        static iterator end() {
+            return members.end();
+        }
+        
+        static const_iterator const_begin() {
+            const Members& m = members;
+            return m.begin();
+        }
+        
+        static const_iterator const_end() {
+            const Members& m = members;
+            return m.end();
+        }
+        
+        
+    public:
+        static Members members;
+        
+    private:
+        bool mInList;
+    };
+
+  	
 } // namespace sora
 
 

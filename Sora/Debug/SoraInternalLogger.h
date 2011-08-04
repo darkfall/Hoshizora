@@ -105,6 +105,30 @@ namespace sora {
 	
 	typedef SoraInternalLogger Debug;
 	static SoraInternalLogger* DebugPtr = SoraInternalLogger::Instance();
+    
+    inline void log_mssg(const std::string& log, int32 level=LOG_LEVEL_NORMAL) {
+        DebugPtr->log(log, level);
+    }
+    
+    inline void log_mssg(const std::wstring& log, int32 level=LOG_LEVEL_NORMAL) {
+        DebugPtr->log(log, level);
+    }
+    
+    inline void log_error(const std::string& log) {
+        DebugPtr->error(log);
+    }
+    
+    inline void log_warning(const std::string& log) {
+        DebugPtr->warning(log);
+    }
+    
+    inline void log_notice(const std::string& log) {
+        DebugPtr->notice(log);
+    }
+    
+    inline void log_normal(const std::string& log) {
+        DebugPtr->normal(log);
+    }
 	
 #define DEBUG_LOG_HANDLE SoraInternalLogger::Instance()
 	//} // namespace internal

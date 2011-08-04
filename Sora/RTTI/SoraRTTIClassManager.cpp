@@ -31,6 +31,11 @@
 #include "SoraRTTIClassManager.h"
 
 namespace sora {
+    
+    SoraRTTIClassManager* SoraRTTIClassManager::Instance() {
+        static SoraRTTIClassManager instance;
+        return &instance;
+    }
 
 	SoraRTTIClassManager::SoraRTTIClassManager() {
 	}

@@ -14,7 +14,7 @@
 
 namespace sora {
 	
-	class SoraMutableSprite: public SoraSprite {
+	class SORA_API SoraMutableSprite: public SoraSprite {
 	public:
 		SoraMutableSprite(HSORATEXTURE tex);
 		

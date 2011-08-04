@@ -53,7 +53,7 @@ namespace sora {
 		typedef hash_map</*fileNameHash*/stringId, /*fileFullPath*/SoraWString> FILE_CACHE;
 		FILE_CACHE fileCache;
 		
-		inline FILE* openFile(const SoraWString& fileName);
+		inline SoraWString getFullPath(const SoraWString& fileName);
 	};
 
 	

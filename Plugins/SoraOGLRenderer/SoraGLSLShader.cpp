@@ -33,7 +33,7 @@ namespace sora {
 		if (infologLength > 0) {
 			infoLog = (char *)malloc(infologLength);
 			glGetProgramInfoLog(mProgram, infologLength, &charsWritten, infoLog);
-			DebugPtr->log(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
+			log_mssg(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
 			free(infoLog);
 		}
 		
@@ -50,7 +50,7 @@ namespace sora {
 		if (infologLength > 0) {
 			infoLog = (char *)malloc(infologLength);
 			glGetShaderInfoLog(mShader, infologLength, &charsWritten, infoLog);
-			DebugPtr->log(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
+			log_mssg(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
 			free(infoLog);
 		}
 	}
@@ -74,7 +74,7 @@ namespace sora {
 		
 		
 		if(mShader == 0) {			
-			THROW_SORA_EXCEPTION("Error creating glsl shader");
+			THROW_SORA_EXCEPTION(RuntimeException, "Error creating glsl shader");
 			mType = 0;
 			return false;
 		}
@@ -278,7 +278,7 @@ namespace sora {
             if (infologLength > 0) {
                 infoLog = (char *)malloc(infologLength);
                 glGetProgramInfoLog(mProgram, infologLength, &charsWritten, infoLog);
-                DebugPtr->log(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
+                log_mssg(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
                 free(infoLog);
             }
         }

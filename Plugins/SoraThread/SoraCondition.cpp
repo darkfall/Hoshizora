@@ -24,7 +24,7 @@ namespace sora {
 #if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
         if(pthread_cond_wait(&cond,
                              static_cast<pthread_mutex_t*>(_mutex.getSysMutex())))
-            THROW_SORA_EXCEPTION("Error wait");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error wait");
 #else
         if(_win32_pthread_cond_wait(&cond,
                                     static_cast<pthread_mutex_t*>(_mutex.getSysMutex())))
@@ -35,20 +35,20 @@ namespace sora {
     void SoraCondition::notify() {
 #if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
         if(pthread_cond_signal(&cond))
-            THROW_SORA_EXCEPTION("Error notify");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error notify");
 #else
         if(_win32_pthread_cond_signal(&cond))
-            THROW_SORA_EXCEPTION("Error notify");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error notify");
 #endif
     }
     
     void SoraCondition::notifyAll() {
 #if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
         if(pthread_cond_broadcast(&cond))
-            THROW_SORA_EXCEPTION("Error notify all");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error notify all");
 #else
         if(_win32_pthread_cond_broadcast(&cond))
-            THROW_SORA_EXCEPTION("Error notify all");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error notify all");
 #endif
     }
     

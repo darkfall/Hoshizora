@@ -72,7 +72,7 @@ namespace sora {
 		if(!easy_handle) {
 			easy_handle = curl_easy_init();
 			if(!easy_handle)
-				THROW_SORA_EXCEPTION("unable to alloc CURL handle");
+				THROW_SORA_EXCEPTION(SystemException, "unable to alloc CURL handle");
 		}
 	}
 

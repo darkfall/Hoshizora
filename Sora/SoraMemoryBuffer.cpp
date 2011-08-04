@@ -17,7 +17,7 @@ namespace sora {
 	currPos(0), length(_length) {
 		apCData = (uint8*)pData;
 		// to avoid release data
-		apCData.inc_ref_count();
+		apCData.assign(apCData);
 	}
 	
 	SoraMemoryBuffer::~SoraMemoryBuffer() {}
@@ -26,20 +26,18 @@ namespace sora {
 		currPos = 0;
 		length = _length;
 		apCData = (uint8*)pData;
-		apCData.inc_ref_count();
+		apCData.assign(apCData);
 	}
 	
 	/* alloc a block of memory */
 	bool SoraMemoryBuffer::alloc(ulong32 size) {
-		if(valid()) {
-			apCData.release();
-		}
+		
 		/* round size to be divisible by 16 */
 		//	size = (size + 15) & uint32(-16);
 		uint8* data = new uint8[size];
 		if(!data) return false;
 		memset(data, 0, length);
-		apCData = data;
+		apCData.assign(data);
 		length = size;
 		seek(0);
 		return true;
@@ -52,8 +50,7 @@ namespace sora {
 			memcpy(tmpData, (void*)(get()), realSize);
 			length = realSize;
 			
-			apCData.release();
-			apCData = tmpData;
+			apCData.assign(tmpData);
 		}
 	}
 	
@@ -88,8 +85,6 @@ namespace sora {
 		}
 		return false;
 	}
-	
-	
 	
 	bool SoraMemoryBuffer::writeToFile(const SoraWString& path) {
 		FILE* pFile = sora_fopenw(path.c_str(), "wb");
@@ -140,16 +135,16 @@ namespace sora {
 		return result;
 	}
 	
-	uint8* SoraMemoryBuffer::get() { return apCData.pointer(); }
+	uint8* SoraMemoryBuffer::get() { return apCData.get(); }
 	uint8* SoraMemoryBuffer::get(ulong32 offset) { 
 		if(offset > length) offset = 0;
-		return (apCData.pointer()+offset);
+		return (apCData.get()+offset);
 	}
 	
 	template<typename datatype> 
 	datatype& SoraMemoryBuffer::get(ulong32 offset) const { 
 		if(offset > length+sizeof(datatype)) offset = 0;
-		return *(datatype*)(apCData.pointer()+offset);
+		return *(datatype*)(apCData.get()+offset);
 	}
 	
 	bool SoraMemoryBuffer::seek(ulong32 pos) {

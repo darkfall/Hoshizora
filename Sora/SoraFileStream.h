@@ -74,6 +74,7 @@ namespace sora {
      POSIX implemention
      */
     class SORA_API SoraFileStreamPosix: public SoraFileStreamBasic {
+    public:
         SoraFileStreamPosix();
         virtual ~SoraFileStreamPosix();
         virtual bool open(const std::string& filename, bool canwrite = false, bool append = false, bool nocache = false);

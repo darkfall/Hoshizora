@@ -24,67 +24,159 @@ using std::map;
 namespace sora {
 	
 #define sora_safe_delete(ptr) { if(ptr) delete ptr; ptr=0; }
+    
+    namespace autoptr {
+        
+        class RefCounter {
+        public:
+            RefCounter(): mRef(1) {}
+            void incRef() {
+                ++mRef;
+            }
+            int decRef() {
+                return --mRef;
+            }
+            int getRef() const {
+                return mRef;
+            }
+            
+        private:
+            int32 mRef;
+        };
+        
+        template<class C>
+        struct ReleasePolicy {
+        public:
+            static void release(C* obj) {
+                delete obj;
+            }
+        };
+        
+        template<class C>
+        struct ReleaseArrayPolicy {
+        public:
+            static void release(C* obj) {
+                delete []obj;
+            }
+        };
+    }
 	
-	template<typename T>
+    
+	template<typename T, class RC=autoptr::RefCounter, class RP=autoptr::ReleasePolicy<T> >
 	class SORA_API SoraAutoPtr {
 	public:
-		SoraAutoPtr(): ptr(NULL), refCount(NULL) {}
-		explicit SoraAutoPtr(T* t): ptr(t), refCount(NULL) { reference_count_init(); }
-		SoraAutoPtr(const SoraAutoPtr<T>& rhs): ptr(NULL), refCount(NULL) { *this = rhs; }
-		~SoraAutoPtr() { reference_count_dec(); }
+		SoraAutoPtr(): ptr(NULL), counter(new RC) {}
 		
-		void alloc() {
-			if(ptr) reference_count_dec();
-			ptr = new T; 
-			reference_count_init();
-		}
-		void release() {
-			if(ptr) reference_count_dec();
-		}
+        explicit SoraAutoPtr(T* t): ptr(t), counter(new RC) { 
+        }
+        
+        template<class Other, class OtherRP>
+		SoraAutoPtr(const SoraAutoPtr<Other, RC, OtherRP>& rhs): 
+        counter(rhs.counter),
+        ptr(const_cast<Other*>(rhs.get())) {
+            counter->incRef();
+        }
+        
+        SoraAutoPtr(const SoraAutoPtr& rhs):
+        counter(rhs.counter),
+        ptr(rhs.ptr) {
+            counter->incRef();
+        }
+            
+        ~SoraAutoPtr() { 
+            release();
+        }
 		
-		void inc_ref_count() {
-			++(*refCount);
+		SoraAutoPtr& assign(T* _ptr) {
+            if(get() != _ptr) {
+                RC* tmp = new RC;
+                release();
+                counter = tmp;
+                ptr = _ptr;
+            }
+            return *this;
+        }
+        
+        SoraAutoPtr& assign(const SoraAutoPtr& ptr) {
+            if(&ptr != this) {
+                SoraAutoPtr tmp(ptr);
+                swap(tmp);
+            }
+            return *this;
+        }
+        
+        template<class Other, class OtherRP>
+        SoraAutoPtr& assign(const SoraAutoPtr<Other, RC, OtherRP>& _ptr) {
+            if(_ptr.get() != ptr) {
+                SoraAutoPtr tmp(ptr);
+                swap(tmp);
+            }
+            return *this;
+        }
+      
+        void reset(T* ptr) {
+            assign(ptr);
+        }
+
+		SoraAutoPtr& operator=(const SoraAutoPtr& rhs) { 
+			return assign(rhs);
 		}
-		
-		void operator=(const SoraAutoPtr<T>& rhs) { 
-			if(ptr == rhs.ptr) {
-				assert(refCount == rhs.refCount);
-				return;
-			}
-			if(ptr != NULL) {
-				reference_count_dec();
-			}
-			ptr = rhs.ptr;
-			refCount = rhs.refCount;
-			++(*refCount);
+		SoraAutoPtr& operator=(T* rhs) {
+            return assign(rhs);
 		}
-		void operator=(T* rptr) {
-			if(ptr != NULL) {
-				if(typeid(rptr) != typeid(ptr)) {
-					THROW_SORA_EXCEPTION("SoraAutoPrt::operator =: different pointer type assignment");
-				}
-			
-				reference_count_dec();
-				ptr = rptr;
-				reference_count_init();
-			} else {
-				ptr = rptr;
-				reference_count_init();
-			}
-		}
-		
+        template<class Other, class OtherRP>
+        SoraAutoPtr& operator=(const SoraAutoPtr<Other, RC, OtherRP>& _ptr) {
+            return assign<Other>(_ptr);
+        }
+        
+        void swap(SoraAutoPtr& rhs) {
+            std::swap(ptr, rhs.ptr);
+            std::swap(counter, rhs.counter);
+        }
+        
+        template<class Other>
+        SoraAutoPtr<Other, RC, RP> cast() const {
+            Other* other = dynamic_cast<Other*>(ptr);
+            if(other) {
+                return SoraAutoPtr<Other, RC, RP>(counter, other);
+            }
+            return SoraAutoPtr<Other, RC, RP>();
+        }
+        
+        template<class Other>
+		SoraAutoPtr<Other, RC, RP> unsafeCast() const {
+            Other* other = static_cast<Other*>(ptr);
+            return SoraAutoPtr<Other, RC, RP>(counter, other);
+        }
+        
+        T* get() {
+            return ptr;
+        }
+        const T* get() const {
+            return ptr;
+        }
+        
 		T* operator->() {
-			if(ptr == 0) {
-				THROW_SORA_EXCEPTION("SoraAutoPtr::operator ->: pointer not allocted");
-			}
-			return ptr;
+			return deref();
 		}
-		T* operator*() {
-			if(ptr == 0) {
-				THROW_SORA_EXCEPTION("SoraAutoPtr::operator *: pointer not allocted");
-			}
-			return ptr;
+        const T* operator->() const {
+            return deref();
+        }
+    
+		T& operator*() {
+			return *deref();
 		}
+        const T& operator*() const {
+			return *deref();
+		}
+        
+        operator T*() {
+            return ptr;
+        }
+        operator const T*() const {
+            return ptr;
+        }
+        
         
         bool operator !()const {
             return ptr == 0;
@@ -151,12 +243,9 @@ namespace sora {
             return ptr==0;
         }
 
-		T* pointer() const { return ptr; }
-        T* get() const { return ptr; }
+		
 		int32 ref_count() const { 
-			if(refCount)
-				return *refCount;
-			return 0;
+			return counter->getRef();
 		}
         
 		bool operator == (const SoraAutoPtr<T>& rhs) {
@@ -164,30 +253,42 @@ namespace sora {
 		}
 		
 	private:
-		T* ptr;
-		int32* refCount;
-		
-	protected:
-		inline void reference_count_init() {
-			if(refCount != NULL)
-				sora_safe_delete(refCount);
-
-			refCount = new int;
-			*refCount = 1;
-		}
-		
-		inline void reference_count_dec() {
-			if(refCount == NULL) return;
-			--(*refCount);
-			if(*refCount == 0) {
-				sora_safe_delete(ptr);
-				sora_safe_delete(refCount);
-			}
-		}
-				
-		void* operator new(size_t);
-		//void operator delete(void*);
+		T* deref() const {
+            if(!ptr)
+                THROW_SORA_EXCEPTION(NullPointerException, "");
+            return ptr;
+        }
+        
+        void release() {
+            sora_assert(counter);
+            int i = counter->decRef();
+            if(i == 0) {
+                RP::release(ptr);
+                ptr = 0;
+                
+                delete counter;
+                counter = 0;
+            }
+        }
+        
+        SoraAutoPtr(RC* pCounter, T* pPtr):
+        counter(pCounter), ptr(pPtr) {
+            sora_assert(pCounter);
+            pCounter->incRef();
+        }
+        
+    private:
+        RC* counter;
+        T* ptr;
+        
+        template<class OC, class ORC, class OPR>
+        friend class SoraAutoPtr;
 	};
+    
+    template <class C, class RC, class RP>
+    inline void swap(SoraAutoPtr<C, RC, RP>& p1, SoraAutoPtr<C, RC, RP>& p2) {
+        p1.swap(p2);
+    }
 	
 	template<typename T>
 	class SoraSharedClass: public SoraAutoPtr<T> {

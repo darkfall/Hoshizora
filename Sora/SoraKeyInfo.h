@@ -167,77 +167,8 @@ enum {
 
 namespace sora {
 	
-	static bool isKeyPrintable(int key) {
-		if((key >= SORA_KEY_0 && key <= SORA_KEY_9) ||
-		   (key >= SORA_KEY_A && key <= SORA_KEY_Z) ||
-		   (key == SORA_KEY_GRAVE) ||
-		   (key == SORA_KEY_MINUS) ||
-		   (key == SORA_KEY_EQUALS) ||
-		   (key == SORA_KEY_BACKSLASH) ||
-		   (key == SORA_KEY_LBRACKET) ||
-		   (key == SORA_KEY_RBRACKET) ||
-		   (key == SORA_KEY_SEMICOLON) ||
-		   (key == SORA_KEY_APOSTROPHE) ||
-		   (key == SORA_KEY_COMMA) ||
-		   (key == SORA_KEY_PERIOD) ||
-		   (key == SORA_KEY_SLASH) ||
-		   (key == SORA_KEY_SPACE)
-		   )
-			return true;
-		return false;
-	}
-	
-	static char toasciiWithFlag(int key, int flag) {
-		char chr = '?';
-		if((key >= SORA_KEY_0 && key <= SORA_KEY_9) ||
-		   (key >= SORA_KEY_A && key <= SORA_KEY_Z))
-		   chr = toascii(key);
-		else {
-			switch(key) {
-				case SORA_KEY_GRAVE: chr = '`';  break;
-				case SORA_KEY_MINUS: chr = '-'; break;
-				case SORA_KEY_EQUALS: chr = '=';  break;
-				case SORA_KEY_BACKSLASH: chr = '\\';  break;
-				case SORA_KEY_LBRACKET: chr = '[';  break;
-				case SORA_KEY_RBRACKET: chr = ']';  break;
-				case SORA_KEY_SEMICOLON: chr = ';';  break;
-				case SORA_KEY_APOSTROPHE: chr = '\'';  break;
-				case SORA_KEY_COMMA: chr = ',';  break;
-				case SORA_KEY_PERIOD: chr = '.';  break;
-				case SORA_KEY_SLASH: chr = '/';  break;
-				case SORA_KEY_SPACE: chr = ' '; break;
-			}
-		}
-		
-		if(flag & SORA_INPUT_FLAG_SHIFT) {
-			switch(key) {
-				case SORA_KEY_1: chr = '!'; break;
-				case SORA_KEY_2: chr = '@'; break;
-				case SORA_KEY_3: chr = '#'; break;
-				case SORA_KEY_4: chr = '$'; break;
-				case SORA_KEY_5: chr = '%'; break;
-				case SORA_KEY_6: chr = '^'; break;
-				case SORA_KEY_7: chr = '&'; break;
-				case SORA_KEY_8: chr = '*'; break;
-				case SORA_KEY_9: chr = '('; break;
-				case SORA_KEY_0: chr = ')'; break;
-				case SORA_KEY_GRAVE: chr = '~';  break;
-				case SORA_KEY_MINUS: chr = '_'; break;
-				case SORA_KEY_EQUALS: chr = '+';  break;
-				case SORA_KEY_BACKSLASH: chr = '|';  break;
-				case SORA_KEY_LBRACKET: chr = '{';  break;
-				case SORA_KEY_RBRACKET: chr = '}';  break;
-				case SORA_KEY_SEMICOLON: chr = ':';  break;
-				case SORA_KEY_APOSTROPHE: chr = '"';  break;
-				case SORA_KEY_COMMA: chr = '<';  break;
-				case SORA_KEY_PERIOD: chr = '>';  break;
-				case SORA_KEY_SLASH: chr = '?';  break;
-			}
-		} else 
-			if(key >= SORA_KEY_A && key <= SORA_KEY_Z)
-				chr = tolower(chr);
-		return chr;
-	}
+    bool isKeyPrintable(int key);
+    char toasciiWithFlag(int key, int flag);
 	
 	class SORA_API SoraKeyEvent: public SoraEvent {
 	public:
@@ -248,59 +179,82 @@ namespace sora {
 		int		wheel;			// wheel shift
 		float	x;				// mouse cursor x-coordinate
 		float	y;				// mouse cursor y-coordinate
+        bool    isIME;          // is ime key
+        
+        int getType() const;
+        bool isIMEKey() const;
 		
-		bool isKeyDown() const {
-			return type == SORA_INPUT_KEYDOWN;
-		}
+		bool isKeyDown() const;
+		bool isKeyUp() const;
 		
-		bool isKeyUp() const {
-			return type == SORA_INPUT_KEYUP;
-		}
+		int getKey() const;
+		bool isKeyPressed(int k) const;
+		bool isKeyReleased(int k) const;
 		
-		int getKey() const {
-			return key;
-		}
+		bool isShiftFlag() const;
+		bool isCtrlFlag() const;
+		bool isAltFlag() const;
 		
-		bool isKeyPressed(int k) const {
-			return isKeyDown() && k == key;
-		}
-		
-		bool isKeyReleased(int k) const {
-			return isKeyUp() && k == key;
-		}
-		
-		bool isShiftFlag() const {
-			return (flags & SORA_INPUT_FLAG_SHIFT) ? true : false;
-		}
-		
-		bool isCtrlFlag() const {
-			return (flags & SORA_INPUT_FLAG_CTRL) ? true : false;
-		}
-		
-		bool isAltFlag() const {
-			return (flags & SORA_INPUT_FLAG_ALT) ? true : false;
-		}
-		
-		bool isMouseLButtonDown() const {
-			return isKeyDown() && key == SORA_KEY_LBUTTON;
-		}
-		
-		bool isMouseRButtonDown() const {
-			return isKeyDown() && key == SORA_KEY_RBUTTON;
-		}
-		
-		bool isMouseLButtonUp() const {
-			return isKeyUp() && key == SORA_KEY_LBUTTON;
-		}
-		
-		bool isMouseRButtonUp() const {
-			return isKeyUp() && key == SORA_KEY_RBUTTON;
-		}
+        bool isNumber() const;
+        bool isLetter() const;
+        bool isPrintable() const;
 		
 #ifndef SORA_USE_RTTI
 		SORA_EVENT_IDENTIFIER(18446744071251492855ULL);
 #endif
-	};  
+	};
+    
+    class SORA_API SoraMouseEvent: public SoraKeyEvent {
+    public:
+        SoraMouseEvent(int key,
+                       int type,
+                       float x,
+                       float y,
+                       int wheel);
+        
+        enum {
+            MOVED = 0,
+            PRESSED,
+            RELEASED,
+            DRAGGED,
+            WHEEL_MOVED_DOWN,
+            WHEEL_MOVED_UP,
+        };
+        
+        int clickCount;
+        bool leftBtnDown;
+        bool rightBtnDown;
+        bool middleBtnDown;
+        
+        int getClickCount() const;
+        float32 getX() const;
+        float32 getY() const;
+        
+        bool isMouseLButtonDown() const;
+        bool isMouseMButtonDown() const;
+		bool isMouseRButtonDown() const;
+		
+		bool isMouseLButtonUp() const;
+        bool isMouseMButtonUp() const;
+		bool isMouseRButtonUp() const;
+        
+        
+#ifndef SORA_USE_RTTI
+        SORA_EVENT_IDENTIFIER(str2id("SoraMouseEvent"));
+#endif
+    };
+    
+    class SORA_API SoraJoystickEvent: public SoraKeyEvent {
+    public:
+        // which joystick
+        int joystickId;    
+        
+        int getJoystickId() const;
+        
+#ifndef SORA_USE_RTTI
+        SORA_EVENT_IDENTIFIER(str2id("SoraJoystickEvent"));
+#endif
+    };
 }
 
 #endif

@@ -30,7 +30,7 @@ namespace sora {
     
     void SoraThreadPool::start(int32 numThreads) {
         if(!threads.empty())
-            THROW_SORA_EXCEPTION("Threads already running in pool!");
+            THROW_SORA_EXCEPTION(ExistsException, "Threads already running in pool!");
         
         running = true;
         threads.reserve(numThreads);
@@ -56,7 +56,7 @@ namespace sora {
         }
     }
     
-    void SoraThreadPool::run(const SoraThreadTask& task) {
+    void SoraThreadPool::run(SoraThreadTask& task) {
         if(threads.empty())
             task();
         else {
@@ -87,7 +87,7 @@ namespace sora {
             }
         }
         catch(const SoraException& exp) {
-            DebugPtr->log(exp.what());
+            log_mssg(exp.what());
         }
     }
     

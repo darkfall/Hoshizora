@@ -11,6 +11,7 @@
 #define SORA_RESOURCE_FILE_H_
 
 #include "SoraPlatform.h"
+#include "uncopyable.h"
 
 namespace sora {
 	
@@ -20,7 +21,7 @@ namespace sora {
 	 *	this class can also request for a resource file directly
 	 **/
 	
-	class SORA_API SoraResourceFileAuto {
+	class SORA_API SoraResourceFileAuto: uncopyable {
 	public:
         SoraResourceFileAuto();
 		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
@@ -50,6 +51,8 @@ namespace sora {
 		void* mData;
 		ulong32 mSize;
 		bool mRetain;
+        
+        SoraWString mName;
 	};
 	
 } // namespace sora

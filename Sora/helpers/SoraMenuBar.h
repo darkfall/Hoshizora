@@ -16,13 +16,14 @@
 #include "../SoraFont.h"
 #include "../SoraPlugin.h"
 #include "../SoraHotkey.h"
+#include "../SoraFrameListener.h"
 
 namespace sora {
 	
 	class SoraMenuBarItem;
 	class SoraMenuBar;
 	
-	class SoraMenuBarClickEvent: public SoraEvent {
+	class SORA_API SoraMenuBarClickEvent: public SoraEvent {
 	public:		
 	//	std::wstring getItemName() const;
 	//	void setItemName(const std::wstring& name);
@@ -106,7 +107,7 @@ namespace sora {
 		SoraEventHandler* mEventHandler;
 	};
 	
-	class SORA_API SoraMenuBar: public SoraEventHandler {
+	class SORA_API SoraMenuBar: public SoraEventHandler, public SoraFrameListener {
     protected:
         friend class SoraSingleton<SoraMenuBar>;
         
@@ -145,6 +146,9 @@ namespace sora {
 		void diactiveMenus();
         
         void onHotkeyEvent(SoraHotkeyEvent* kev);
+        
+        void onFrameStart();
+        void onFrameEnd();
 		
 	private:
 		static SoraMenuBar* mInstance;

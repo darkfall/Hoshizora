@@ -18,7 +18,7 @@
 
 namespace sora {
 	
-	class SoraInputSimulator {
+	class SORA_API SoraInputSimulator {
 	public:
 		static void simulateKey(int32 key, int32 state);
 		static void simulateEvent(SoraKeyEvent* ev);

@@ -24,7 +24,7 @@ namespace sora {
             mDir = opendir(p.toString().c_str());
             
             if(!mDir)
-                THROW_SORA_EXCEPTION("Error opening dir");
+                THROW_SORA_EXCEPTION(PathNotFoundException, "Error opening dir");
             else
                 next();
         }

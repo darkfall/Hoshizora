@@ -6,21 +6,9 @@
 
 namespace sora {
     
-    namespace {
-        static SoraEventManager* mInstance = NULL;
-    }
-    
     SoraEventManager* SoraEventManager::Instance() {
-        if(!mInstance)
-            mInstance = new SoraEventManager;
-        return mInstance;
-    }
-    
-    void SoraEventManager::Destroy() {
-        if(mInstance) {
-            delete mInstance;
-            mInstance = NULL;
-        }
+        static SoraEventManager instance;
+        return &instance;
     }
 	
 	SoraEventHandlerPack::SoraEventHandlerPack() {
@@ -237,8 +225,8 @@ namespace sora {
 	void SoraEventManager::publishInputEvent(SoraKeyEvent* kev) {
 		INPUT_EVENT_HANDLER_LIST::iterator itHandler = iehList.begin();
 		while(itHandler != iehList.end()) {
-			if((*itHandler)) {
-				(*itHandler)->handleEvent(kev);
+			if(itHandler->second) {
+				itHandler->second->handleEvent(kev);
 				++itHandler;
 				
 				if(kev->isConsumed())
@@ -247,12 +235,19 @@ namespace sora {
 		}
 	}
 	
-	void SoraEventManager::registerInputEventHandler(SoraEventHandler* handler) {
-		iehList.push_back(handler);
+	void SoraEventManager::registerInputEventHandler(SoraEventHandler* handler, int32 priority) {
+		iehList.insert(std::make_pair(priority, handler));
 	}
 	
 	void SoraEventManager::unregisterInputEventHandler(SoraEventHandler* handler) {
-		iehList.remove(handler);
+		INPUT_EVENT_HANDLER_LIST::iterator itHandler = iehList.begin();
+		while(itHandler != iehList.end()) {
+            if(itHandler->second == handler) {
+                iehList.erase(itHandler);
+                break;
+            }
+            ++itHandler;
+        }
 	}
 	
 	void SoraEventManager::SoraTimerEventInfo::update(float32 dt) {

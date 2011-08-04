@@ -108,7 +108,7 @@ namespace sora {
                             if(sprite != NULL) 
                                 mSprites.insert(std::make_pair(str2id(name), SpriteStore(sprite, isAnimation)));
                             else {
-                                THROW_SORA_EXCEPTION(vamssg("Failed to parse sprite with val name = %s", name.c_str()));
+                                THROW_SORA_EXCEPTION(SyntaxException, vamssg("Failed to parse sprite with val name = %s", name.c_str()));
                                 return false;
                             }
                         }
@@ -137,7 +137,7 @@ namespace sora {
                         if(sprite != NULL) 
                             mSprites.insert(std::make_pair(str2id(name), SpriteStore(sprite, isAnimation)));
                         else
-                            THROW_SORA_EXCEPTION(vamssg("Failed to parse sprite with val name = %s", name.c_str()));
+                            THROW_SORA_EXCEPTION(SyntaxException, vamssg("Failed to parse sprite with val name = %s", name.c_str()));
                         return true;
                     }
                 }

@@ -1,51 +1,17 @@
 #include <iostream>
 
-
 #include "SoraCore.h"
 
 #include "SoraWindowInfo.h"
-
 #include "SoraFont.h"
 
-#include "SoraZipResourceManager/SoraZipResourceManager.h"
-#include "SoraFreetypeFont/SoraFTFontManager.h"
-
-#include "testMainWindow.h"
-#include "rfMainWindow.h"
-#include "mainWindow.h"
-
-#include "SoraLocalizer.h"
-
-#include "SoraMemoryFile.h"
-
-#include "vlcTestWindow.h"
-
-#include "SoraGUIChan/XmlGui.h"
-#include "SoraGUIChan/Jsongui.h"
-
-#include "Debug/SoraAutoProfile.h"
-
-#include "../AnimationEditor/aeMainWindow.h"
-#include "../SoraParticleEditor/peMainWindow.h"
-
-//#include "GLFW3/SoraOGLInputGLFW3.h"
-//#include "GLFW3/SoraOGLRenderer.h"
 #include "SoraFMODSoundSystem/SoraFMODSoundSystem.h"
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
+#include "SoraFreetypeFont/SoraFTFontManager.h"
+#include "SoraZipResourceManager/SoraZipResourceManager.h"
 
-#include "../mead/meadMainWindow.h"
-#include "../ReflectionTD/rftdMainWindow.h"
-
-#include "SoraLua/SoraLuaMainWindow.h"
-
-#include "SoraGestureRecognizer/SoraGestureRecognizer.h"
-
-#include "SoraPath.h"
-
-#include "SoraStringTokenlizer.h"
-
-#include "SoraDirectoryIterator.h"
+#include "mainWindow.h"
 
 int main(int argc, char* argv[]) {
 	sora::SoraCore* sora = sora::SoraCore::Instance();
@@ -55,8 +21,7 @@ int main(int argc, char* argv[]) {
 	sora->registerInput(new sora::SoraOGLInput);
   //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
 
-    sora::SoraGestureRecognizer::Instance();
-	sora->createWindow(new aeMainWindow);
+	sora->createWindow(new mainWindow);
   //  sora::SORA->enableFullscreenBuffer(true);
 
 	sora->start();

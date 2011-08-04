@@ -24,7 +24,7 @@ namespace sora {
     
     static bool FMOD_ERROR_CHECK(FMOD_RESULT result) {
         if(result != FMOD_OK) {
-            DebugPtr->log(vamssg("FMOD ERROR: error (%d) %s\n", result, FMOD_ErrorString(result)),
+            log_mssg(vamssg("FMOD ERROR: error (%d) %s\n", result, FMOD_ErrorString(result)),
 						  LOG_LEVEL_ERROR);
             return false;
         }
@@ -48,13 +48,13 @@ namespace sora {
     public:
         FMOD::System* getSystem() const {
             if(!pSystem)
-                THROW_SORA_EXCEPTION("No FMODSystem available");
+                THROW_SORA_EXCEPTION(NullPointerException, "No FMODSystem available");
             return pSystem;
         }
         
         bool init(int maxchannel, unsigned int initFlags, char*externalArgs) {
             if(pSystem)
-                THROW_SORA_EXCEPTION("FMOD System already exists");
+                THROW_SORA_EXCEPTION(ExistsException, "FMOD System already exists");
             else {
                 FMOD_RESULT result = FMOD::System_Create(&pSystem);
                 if(FMOD_ERROR_CHECK(result)) {

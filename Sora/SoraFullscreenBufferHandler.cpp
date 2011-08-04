@@ -32,7 +32,7 @@ namespace sora {
             } else {
                 mBufferSprite = new SoraSprite(bufferTex);
                 if(!mBufferSprite) {
-                    THROW_SORA_EXCEPTION("No buffer sprite available");
+                    THROW_SORA_EXCEPTION(NullPointerException, "No buffer sprite available");
                 }
             }
         } else 

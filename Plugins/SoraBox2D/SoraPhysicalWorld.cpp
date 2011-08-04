@@ -217,7 +217,7 @@ namespace sora {
         }
         physicalWorld = new b2World(b2Vec2(gravityx, gravityy), doSleep);
         if(!physicalWorld)
-            THROW_SORA_EXCEPTION("Error creating box2d world");
+            THROW_SORA_EXCEPTION(SystemException, "Error creating box2d world");
         else {
             worldGravity = b2Vec2(gravityx, gravityy);
             bInitialized = true;

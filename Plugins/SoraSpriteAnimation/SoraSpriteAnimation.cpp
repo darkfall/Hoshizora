@@ -13,8 +13,8 @@
 
 #include "hash.h"
 #include "common.h"
+#include "SoraMemoryBuffer.h"
 #include "SoraCore.h"
-#include "lMemFile.h"
 #include <cassert>
 
 namespace sora {
@@ -194,7 +194,7 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
 	
 	bool err = false;
 	if(panm) {
-		lMemFile* pmfile = new lMemFile(pData, size);
+		SoraMemoryBuffer* pmfile = new SoraMemoryBuffer(pData, size);
 		
 		char strHeader[5];
 		pmfile->read(strHeader, 4);
@@ -391,7 +391,7 @@ SoraSpriteAnimation::SoraSpriteAnimation(const std::wstring& anmPath):
 		
 		bool err = false;
 		if(pData) {
-			lMemFile* pmfile = new lMemFile(pData, size);
+			SoraMemoryBuffer* pmfile = new SoraMemoryBuffer(pData, size);
 			
 			char strHeader[5];
 			pmfile->read(strHeader, 4);

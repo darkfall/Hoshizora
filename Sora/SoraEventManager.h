@@ -50,7 +50,6 @@ namespace sora {
 		
 	public:
         static SoraEventManager* Instance();
-        static void Destroy();
         
 		//~SoraEventManager();
 
@@ -90,7 +89,7 @@ namespace sora {
 		/*
 		 register key input event handlers
 		 */
-		void registerInputEventHandler(SoraEventHandler* handler);
+		void registerInputEventHandler(SoraEventHandler* handler, int32 priority=0);
 		void unregisterInputEventHandler(SoraEventHandler* handler);
 		
 		
@@ -166,7 +165,7 @@ namespace sora {
 		TIMER_EVENT_LIST tevList;
 		float32 currTime;
 		
-		typedef std::list<SoraEventHandler*> INPUT_EVENT_HANDLER_LIST;
+		typedef std::multimap<int32/* priority */, SoraEventHandler*> INPUT_EVENT_HANDLER_LIST;
 		INPUT_EVENT_HANDLER_LIST iehList;
 		
 		inline void freeTimerEvent(TIMER_EVENT_LIST::iterator ittev);

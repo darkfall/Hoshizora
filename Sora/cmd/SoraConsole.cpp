@@ -37,12 +37,15 @@ namespace sora {
 	SoraConsole::SoraConsole(): mStartLine(0) {
 		registerEventFunc(this, &SoraConsole::onKeyEvent);
         registerEventFunc(this, &SoraConsole::onHotkeyEvent);
-		SORA_EVENT_MANAGER->registerInputEventHandler(this);
-		
+		SORA_EVENT_MANAGER->registerInputEventHandler(this, 9999);
+        
+        SoraCore::Instance()->addFrameListener(this);
+        
 		reset();
 	}
 	
 	SoraConsole::~SoraConsole() {
+        SoraCore::Instance()->delFrameListener(this);
 	}
 	
 	void SoraConsole::reset() {
@@ -427,6 +430,13 @@ namespace sora {
 		}
 	}
 	
+    void SoraConsole::onFrameStart() {
+    //    update(SoraCore::Instance()->getDelta());
+    }
+    
+    void SoraConsole::onFrameEnd() {
+        render();
+    }
 
 
 

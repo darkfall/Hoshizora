@@ -43,7 +43,7 @@ namespace sora {
                 
                 fclose(fl);
 			} else {
-				DebugPtr->log(vamssg("unable to open file %s", ws2s(file).c_str()));
+				log_mssg(vamssg("unable to open file %s", ws2s(file).c_str()));
 			}
 		}
 	}

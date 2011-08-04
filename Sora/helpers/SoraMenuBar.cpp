@@ -228,9 +228,13 @@ namespace sora {
 	mEnabled(false) {
         mActiveKeyId = SORA->registerGlobalHotkey(SoraHotkey(SORA_KEY_F1), this);
         registerEventFunc(this, &SoraMenuBar::onHotkeyEvent);
+        
+        SoraCore::Instance()->addFrameListener(this);
 	}
 	
 	SoraMenuBar::~SoraMenuBar() {
+        SoraCore::Instance()->delFrameListener(this);
+        
 		clear();
 	}
 	
@@ -402,4 +406,11 @@ namespace sora {
 		return mEnabled;
 	}
 
+    void SoraMenuBar::onFrameStart() {
+        update();
+    }
+    
+    void SoraMenuBar::onFrameEnd() {
+        render();
+    }
 } // namespace sora

@@ -118,7 +118,6 @@ namespace sora{
 			pHGE->System_Initiate();
 			
 			setVerticalSync(false);
-			windowInfo->init();
         
             SET_ENV_STRING("RENDERER_DRIVER", pHGE->getDeviceInfo());
 

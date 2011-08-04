@@ -46,7 +46,7 @@ namespace sora {
 
     void SoraScene::adjustSize(int32 width, int32 height) {
         if(width == 0 || height == 0)
-            THROW_SORA_EXCEPTION("Attempt to create a empty scene with width or height = 0");
+            THROW_SORA_EXCEPTION(InvalidArgumentException, "Attempt to create a empty scene with width or height = 0");
         
         mWidth = mRealWidth = width;
         mHeight = mRealHeight = height;
@@ -113,7 +113,7 @@ namespace sora {
     SoraLayer* SoraScene::addLayer(int32 layerDepth) {
         SoraLayer* layer = new SoraLayer(layerDepth);
         if(!layer)
-            THROW_SORA_EXCEPTION("Error creating new layer");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error creating new layer");
         else {
             mLayers.insert(std::make_pair(layerDepth, layer));
         }
@@ -284,7 +284,7 @@ namespace sora {
             if(!mCanvas) {
                 mCanvas = new SoraBaseCanvas(mRealWidth, mRealHeight);
                 if(!mCanvas)
-                    THROW_SORA_EXCEPTION("Error creating canvas");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Error creating canvas");
             }
         }
     }

@@ -190,6 +190,10 @@ namespace sora {
         return std::string();
     }
     
+    std::wstring SoraPath::toWString() const {
+        return s2ws(toString());
+    }
+    
     SoraPath& SoraPath::parseDirectory(const std::string& path) {
         assign(path);
         return makeDirectory();
@@ -558,12 +562,12 @@ namespace sora {
                 char d = *it++;
                 if(it != end && *it == ':') {
                     if(mAbsolute || !((d >= 'a' && d <= 'z') || (d >= 'A' && d <= 'Z'))) 
-                        THROW_SORA_EXCEPTION("Error parsing path");
+                        THROW_SORA_EXCEPTION(InvalidArgumentException, "Error parsing path");
                     mAbsolute = true;
                     mDevice += d;
                     ++it;
                     if(it == end || (*it != '\\' && *it != '/'))
-                       THROW_SORA_EXCEPTION("Error parsing path");
+                       THROW_SORA_EXCEPTION(InvalidArgumentException, "Error parsing path");
                     ++it;
                 } else 
                     --it;

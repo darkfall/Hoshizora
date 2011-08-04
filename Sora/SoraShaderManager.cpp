@@ -44,7 +44,7 @@ namespace sora {
         
         SoraShader* shader = SoraCore::Instance()->createShader(file, entry, (SORA_SHADER_TYPE)type);
         if(!shader) {
-            THROW_SORA_EXCEPTION(vamssg("Error creating shader %s", ws2s(file).c_str()));
+            THROW_SORA_EXCEPTION(RuntimeException, vamssg("Error creating shader %s", ws2s(file).c_str()));
             return NULL;
         }
         mShaders.insert(std::make_pair(sid, shader));
@@ -56,7 +56,7 @@ namespace sora {
         
         SoraShader* shader = SoraCore::Instance()->createShader(file, entry, (SORA_SHADER_TYPE)type);
         if(!shader) {
-            THROW_SORA_EXCEPTION(vamssg("Error creating shader %s", ws2s(file).c_str()));
+            THROW_SORA_EXCEPTION(RuntimeException, vamssg("Error creating shader %s", ws2s(file).c_str()));
             return NULL;
         }
         return shader;
@@ -69,7 +69,7 @@ namespace sora {
             if(itShader != mShaders.end())
                 mShaders.erase(itShader);
             else
-                THROW_SORA_EXCEPTION("Shader map does not match rev shader map, some error maybe happened");
+                THROW_SORA_EXCEPTION(RuntimeException, "Shader map does not match rev shader map, some error maybe happened");
             mRevShaders.erase(itShaderRev);
         }
         FreeShader(shader);

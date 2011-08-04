@@ -151,8 +151,11 @@ namespace sora {
 					cev->setResults(vamssg("Current alive SoraObject number = %d", SoraObjectHandle::getGlobalObjectSize()));
 			
 				} else if(p1Prev.compare("memuse") == 0) {
-					cev->setResults(vamssg("Current memory use = %dkb", sora->getEngineMemoryUsage()));
+					cev->setResults(vamssg("Current memory use = %llukb", uint64(sora->getEngineMemoryUsage())));
 
+				} else if(p1Prev.compare("rmemuse") == 0) {
+					cev->setResults(vamssg("Current resource memory use = %llukb", uint64(sora->getResourceMemoryUsage())));
+                    
 				} else if(p1Prev.compare("int") == 0 && params.size() >= 2) {
 					cev->setResults("EnvValue "+vamssg("%s = %d", params[1].c_str(), GET_ENV_INT(params[1].c_str(), 0)));
 					
@@ -174,7 +177,7 @@ namespace sora {
 		if(cev->getCmd().compare("log") == 0) {
 			if(params.size() > 0) {
 				for(size_t i=0; i<params.size(); ++i) {
-					DebugPtr->log(params[i]);
+					log_mssg(params[i]);
 				}
 			}
 		} else if(cev->getCmd().compare("exit") == 0) {

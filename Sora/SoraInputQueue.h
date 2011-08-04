@@ -12,20 +12,46 @@
 #include "SoraKeyInfo.h"
 #include "SoraHotkey.h"
 #include "SoraInput.h"
+#include "SoraInputListeners.h"
+#include "SoraFrameListener.h"
+
+#include <stack>
 
 namespace sora {
-    
-    namespace keypoll {
-        void SORA_API publishInputedKey(int32 key, int32 type, char keyChr);
-        bool SORA_API getQueueEvent(SoraKeyEvent& ev);
-        void SORA_API setQueueInput(SoraInput* input);
-        void SORA_API clearInputQueue();
         
-        int32 SORA_API addGlobalHotKey(const SoraHotkey& hotkey, SoraEventHandler* handler);
-        void SORA_API delGlobalHotkey(int32 hid);
-        void SORA_API setGlobalHotkey(int32 hid, const SoraHotkey& hotkey);
-        void SORA_API clearGlobalHotkeys();
-    }
+    class SORA_API SoraKeyPool: public SoraFrameListener {
+    private:
+        SoraKeyPool();
+        ~SoraKeyPool();
+        void onFrameStart();
+        void onFrameEnd();
+        
+        friend class SoraCore;
+        
+    public:        
+        typedef std::stack<SoraKeyEvent> IteratorType;
+
+        static void publishInputedKey(int32 key, int32 type, char keyChr);
+        static bool getQueueEvent(SoraKeyEvent& ev);
+        static void setQueueInput(SoraInput* input);
+        static void clearInputQueue();
+        
+        static int32 addGlobalHotKey(const SoraHotkey& hotkey, SoraEventHandler* handler);
+        static void delGlobalHotkey(int32 hid);
+        static void setGlobalHotkey(int32 hid, const SoraHotkey& hotkey);
+        static void clearGlobalHotkeys();
+        
+        static void addMouseListener(SoraMouseListener* mouseListener, int prio=0);
+        static void addKeyListener(SoraKeyListener* keyListener, int prio=0);
+        // joystick listener may not work now cause joystick support is not finished yet
+        static void addJoystickListener(SoraJoystickListener* joyListener, int prio=0);
+        
+        static void delMouseListener(SoraMouseListener* mouseListener);
+        static void delKeyListener(SoraKeyListener* keyListener);
+        static void delJoystickListener(SoraJoystickListener* joyListener);
+        
+        static void pollListenerEvents();
+    };
 }
 
 

@@ -33,7 +33,7 @@ namespace sora {
             if(n < max) {
                 ++n;
             } else {
-                THROW_SORA_EXCEPTION("Cannot signal semaphore, exceed maximun");
+                THROW_SORA_EXCEPTION(RuntimeException, "Cannot signal semaphore, exceed maximun");
             }
             cond.notify();
         }

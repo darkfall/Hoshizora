@@ -19,62 +19,103 @@
 #include "../SoraFileUtility.h"
 
 namespace sora {
-	
-	SoraDllHelper::~SoraDllHelper() {
-		DLL_MAP::iterator itDll = mOpenedDll.begin();
-		while(itDll != mOpenedDll.end()) {
-			closedl(itDll->second);
-			++itDll;
-		}
-	}
-	
-	ulong32 SoraDllHelper::getdl(const SoraString& name) {
-		DLL_MAP::iterator itDll = mOpenedDll.find(name);
-		if(itDll != mOpenedDll.end())
-			return itDll->second;
-		return 0;
-	}
+    
+#ifdef OS_WIN32
+    
+    class SoraDynLibraryImpl {
+    public:
+        bool open(const char* path) {
+            module = LoadLibraryhA(path);
+            if(module == NULL) {
+                DebugPtr->error(vamssg("Error locating dll %s", path));
+                return false;
+            }
+            return true;
+        }
+        void close() {
+            if(module) {
+                FreeLibrary(module);
+            }
+            module = NULL;
+        }
+        void* getProc(const char* proc) {
+            if(module) {
+                return GetProcAddress(module, proc);
+            }
+            return NULL;
+        }
+        
+    private:
+        HMODULE module;
+    };
+    
+#elif defined(OS_OSX) || defined(OS_LINUX) || defined(OS_IOS) 
+    
+    class SoraDynLibraryImpl {
+    public:
+        bool open(const char* path) {
+            dyn = dlopen(path, RTLD_LOCAL);
+            if(!dyn) {
+                DebugPtr->error(dlerror());
+                return false;
+            }
+            return true;
+        }
+        void close() {
+            if(dyn)
+                dlclose(dyn);
+            dyn = NULL;
+        }
+        void* getProc(const char* proc) {
+            if(dyn) {
+                return dlsym(dyn, proc);
+            }
+            return NULL;
+        }
+        
+    private:
+        void* dyn;
+    };
+    
+#else
+    
+    // null impl
+    
+    class SoraDynLibraryImpl {
+    public:
+        bool open(const char* path) { return false; }
+        void close() {}
+        void* getProc(const char* proc) { return NULL; }
+    };
+    
+#endif
+    
+    SoraDynLibrary::SoraDynLibrary(): mImpl(new SoraDynLibraryImpl) {
+        
+    }
+    
+    SoraDynLibrary::SoraDynLibrary(const char* path): mImpl(new SoraDynLibraryImpl) {
+        mImpl->open(path);
+    }
+    
+    SoraDynLibrary::~SoraDynLibrary() {
+        if(mImpl) {
+            mImpl->close();
+            delete mImpl;
+        }
+    }
+    
+    bool SoraDynLibrary::open(const char* path) {
+        return mImpl->open(path);
+    }
+    
+    void SoraDynLibrary::close() {
+        mImpl->close();
+    }
+    
+    void* SoraDynLibrary::getProc(const char* name) {
+        return mImpl->getProc(name);
+    }
 
-	ulong32 SoraDllHelper::opendl(const SoraString& path) {
-		ulong32 result = 0;
-		
-#ifndef OS_WIN32
-		void* h = dlopen(path.c_str(), RTLD_NOW | RTLD_GLOBAL);
-		if(h != NULL)
-			result = (ulong32)h;
-		else
-			DebugPtr->log(dlerror(), LOG_LEVEL_ERROR);
-#else
-		result = (ulong32)LoadLibraryA(path.c_str());
-#endif
-		if(result != 0) {
-			mOpenedDll[SoraFileUtility::getFileName(path)] = result;
-		}
-		return result;
-	}
-	
-	void SoraDllHelper::closedl(ulong32 handle) {
-#ifndef OS_WIN32
-		dlclose((void*)handle);
-#else
-		FreeLibrary((HMODULE)handle);
-#endif
-		DLL_MAP::iterator itDll = mOpenedDll.begin();
-		while(itDll != mOpenedDll.end()) {
-			if(itDll->second == handle) {
-				mOpenedDll.erase(itDll);
-				break;
-			}
-			++itDll;
-		}
-	}
-	
-	void* SoraDllHelper::getProc(ulong32 handle, const SoraString& name) {
-#ifndef OS_WIN32
-		return dlsym((void*)handle, name.c_str());
-#else
-		return (void*)GetProcAddress((HMODULE)handle, name.c_str());
-#endif
-	}
 
 } // namespace sora

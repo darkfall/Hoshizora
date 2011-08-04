@@ -342,7 +342,7 @@ namespace sora {
             error = !buffer.read(&vertex.col);
             
             if(error)
-                THROW_SORA_EXCEPTION("Invalid vertex data file");
+                THROW_SORA_EXCEPTION(SyntaxException, "Invalid vertex data file");
             
             addVertex(vertex);
         }

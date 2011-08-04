@@ -38,7 +38,8 @@ namespace sora {
         }
         
         ~SoraAny() {
-            delete mContent;
+            if(mContent)
+                delete mContent;
         }
         
         SoraAny& swap(SoraAny& rhs) {
@@ -116,7 +117,7 @@ namespace sora {
     ValueType AnyCast(const SoraAny& operand) {
         ValueType* result = AnyCast<ValueType>(const_cast<SoraAny*>(&operand));
         if(!result)
-            THROW_SORA_EXCEPTION("Faild to conver between const any types");
+            THROW_SORA_EXCEPTION(BadCastException, "Faild to conver between const any types");
         return *result;
     }
     
@@ -124,7 +125,7 @@ namespace sora {
     ValueType AnyCast(SoraAny& operand) {
         ValueType* result = AnyCast<ValueType>(&operand);
         if(!result)
-            THROW_SORA_EXCEPTION("Faild to conver between const any types");
+            THROW_SORA_EXCEPTION(BadCastException, "Faild to conver between const any types");
         return *result;
     }
     
@@ -132,7 +133,7 @@ namespace sora {
     const ValueType& RefAnyCast(const SoraAny& operand) {
         ValueType* result = AnyCast<ValueType>(const_cast<SoraAny*>(&operand));
         if(!result)
-            THROW_SORA_EXCEPTION("Faild to conver between const any types");
+            THROW_SORA_EXCEPTION(BadCastException, "Faild to conver between const any types");
         return *result;
     }
     
@@ -146,6 +147,59 @@ namespace sora {
         return AnyCast<ValueType>(const_cast<SoraAny*>(operand));
     }
     
+    static bool isAnyInt(const SoraAny& any) {
+        return any.type() == typeid(int32);
+    }
+    
+    static bool isAnyFloat(const SoraAny& any) {
+        return any.type() == typeid(float);
+    }
+    
+    static bool isAnyUInt(const SoraAny& any) {
+        return any.type() == typeid(uint32);
+    }
+    
+    static bool isAnyDouble(const SoraAny& any) {
+        return any.type() == typeid(double);
+    }
+    
+    static bool isAnyLong(const SoraAny& any) {
+        return any.type() == typeid(long32);
+    }
+    
+    static bool isAnyChar(const SoraAny& any) {
+        return any.type() == typeid(char);
+    }
+    
+    static bool isAnyUChar(const SoraAny& any) {
+        return any.type() == typeid(unsigned char);
+    }
+    
+    static bool isAnyULong(const SoraAny& any) {
+        return any.type() == typeid(ulong32);
+    }
+    
+    static bool isAnyInt64(const SoraAny& any) {
+        return any.type() == typeid(int64);
+    }
+    
+    static bool isAnyUInt64(const SoraAny& any) {
+        return any.type() == typeid(uint64);
+    }
+    
+ /*   static bool isAnyStringId(const SoraAny& any) {
+        return any.type() == typeid(stringId);
+    }
+   */ 
+    template<typename T>
+    static bool isAnyType(const SoraAny& any) {
+        return any.type() == typeid(T);
+    }
+    
+    template<typename T>
+    const char* getTypeName() {
+        return typeid(T).name();
+    }
 } // namespace sora
 
 #endif

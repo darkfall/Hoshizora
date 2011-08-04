@@ -39,61 +39,59 @@ namespace sora {
 		if(plugins.size() != 0) {
 			for(size_t i=0; i<plugins.size(); ++i) {
 				
-				SoraDllHelper* dlhelper = SoraDllHelper::Instance();
-				
-				ulong32 dlHandle = dlhelper->opendl(sora::ws2sfast(plugins[i].c_str()));
-				if(dlHandle != 0) {
-					
-					create_render_system fnrs = (create_render_system)dlhelper->getProc(dlHandle, "create_render_system");
+				SoraDynLibrary dll;
+                				
+				if(dll.open(sora::ws2sfast(plugins[i]).c_str())) {
+					create_render_system fnrs = (create_render_system)dll.getProc("create_render_system");
 					if(fnrs != NULL) {
 						SoraRenderSystem* rs = fnrs();
 						if(rs != NULL)
 							SORA->registerRenderSystem(rs);
 					}
 					
-					create_input fni = (create_input)dlhelper->getProc(dlHandle, "create_input");
+					create_input fni = (create_input)dll.getProc("create_input");
 					if(fni) {
 						SoraInput* input = fni();
 						if(input != NULL)
 							SORA->registerInput(input);
 					}
 					
-					create_misctool fnmt = (create_misctool)dlhelper->getProc(dlHandle, "create_misctool");
+					create_misctool fnmt = (create_misctool)dll.getProc("create_misctool");
 					if(fnmt != NULL) {
 						SoraMiscTool* ms = fnmt();
 						if(ms != NULL)
 							SORA->registerMiscTool(ms);
 					}
 					
-					create_timer fnt = (create_timer)dlhelper->getProc(dlHandle, "create_timer");
+					create_timer fnt = (create_timer)dll.getProc("create_timer");
 					if(fnt != NULL) {
 						SoraTimer* timer = fnt();
 						if(timer != NULL)
 							SORA->registerTimer(timer);
 					}
 					
-					create_sound_system fnss = (create_sound_system)dlhelper->getProc(dlHandle, "create_sound_system");
+					create_sound_system fnss = (create_sound_system)dll.getProc("create_sound_system");
 					if(fnss != NULL) {
 						SoraSoundSystem* ss = fnss();
 						if(ss != NULL)
 							SORA->registerSoundSystem(ss);
 					}
 					
-					create_resource_manager fnrm = (create_resource_manager)dlhelper->getProc(dlHandle, "create_resource_manager");
+					create_resource_manager fnrm = (create_resource_manager)dll.getProc("create_resource_manager");
 					if(fnrm != NULL) {
 						SoraResourceManager* rm = fnrm();
 						if(rm != NULL)
 							SORA->registerResourceManager(rm);
 					}
 					
-					create_plugin_manager fnpm = (create_plugin_manager)dlhelper->getProc(dlHandle, "create_plugin_manager");
+					create_plugin_manager fnpm = (create_plugin_manager)dll.getProc("create_plugin_manager");
 					if(fnpm != NULL) {
 						SoraPluginManager* pm = fnpm();
 						if(pm != NULL)
 							SORA->registerPluginManager(pm);
 					}
 					
-					create_font_manager fnfm = (create_font_manager)dlhelper->getProc(dlHandle, "create_font_manager");
+					create_font_manager fnfm = (create_font_manager)dll.getProc("create_font_manager");
 					if(fnfm != NULL) {
 						SoraFontManager* fm = fnfm();
 						if(fm != NULL)

@@ -11,6 +11,8 @@
 #include "SoraResourceManager.h"
 
 namespace sora {
+    
+    ulong32 SoraResourceFileFinder::ResourceMemory = 0;
 	
 	SoraResourceFileFinder::SoraResourceFileFinder() {
 	}
@@ -19,48 +21,74 @@ namespace sora {
 	}
 	
 	void SoraResourceFileFinder::attachResourceManager(SoraResourceManager* rm) {
-		resourceManagers.push_back(SoraAutoPtr<SoraResourceManager>(rm));
+		mResourceManagers.push_back(SoraAutoPtr<SoraResourceManager>(rm));
 	}
 	
 	void SoraResourceFileFinder::detachResourceManager(const SoraWString& name) {
-		for(size_t i=0; i<resourceManagers.size(); ++i) {
-			if(name.compare(resourceManagers[i]->getName()) == 0) {
-				resourceManagers.erase(resourceManagers.begin()+i);
+		for(size_t i=0; i<mResourceManagers.size(); ++i) {
+			if(name.compare(mResourceManagers[i]->getName()) == 0) {
+				mResourceManagers.erase(mResourceManagers.begin()+i);
 				break;
 			}
 		}
 	}
-	
+
 	void* SoraResourceFileFinder::readResourceFile(const SoraWString& file, ulong32 size) {
 		void* data;
-		for(size_t i=0; i<resourceManagers.size(); ++i) {
-			if((data = resourceManagers[i]->readResourceFile(file, size)) != NULL)
+		for(size_t i=0; i<mResourceManagers.size(); ++i) {
+			if((data = mResourceManagers[i]->readResourceFile(file, size)) != NULL) {
+                ResourceMemory += size;
+                
+                AutoPtrType resource(static_cast<uint8*>(data));
+                
+                ResourceInfo info;
+                info.mResource = resource;
+                info.mSize = size;
+                mResources.insert(std::make_pair((ulong32)data, info));
+                
 				return data;
+            }
 		}
 		return 0;
 	}
 	
 	void* SoraResourceFileFinder::getResourceFile(const SoraWString& file, ulong32& size) {
 		void* data;
-		for(size_t i=0; i<resourceManagers.size(); ++i) {
-			if((data = resourceManagers[i]->getResourceFile(file, size)) != NULL)
+		for(size_t i=0; i<mResourceManagers.size(); ++i) {
+			if((data = mResourceManagers[i]->getResourceFile(file, size)) != NULL) {
+                ResourceMemory += size;
+                
+                AutoPtrType resource(static_cast<uint8*>(data));
+                
+                ResourceInfo info;
+                info.mResource = resource;
+                info.mSize = size;
+                mResources.insert(std::make_pair((ulong32)data, info));
+
 				return data;
+            }
 		}
 		return 0;
 	}
 	
 	ulong32 SoraResourceFileFinder::getResourceFileSize(const SoraWString& file) { 
 		ulong32 size;
-		for(size_t i=0; i<resourceManagers.size(); ++i) {
-			if((size = resourceManagers[i]->getResourceFileSize(file)) != 0)
+		for(size_t i=0; i<mResourceManagers.size(); ++i) {
+			if((size = mResourceManagers[i]->getResourceFileSize(file)) != 0) {
+
 				return size;
+            }
 		}
 		return 0;
 	}
 	
 	void SoraResourceFileFinder::freeResourceFile(void* p) {
-		if(p) 
-			delete (uint8*)p;
+		sora_assert(p);
+        AvailableResourceMap::iterator itResource = mResources.find((ulong32)p);
+        if(itResource != mResources.end()) {
+            ResourceMemory -= itResource->second.mSize;
+            mResources.erase(itResource);
+        }
 	}
 	
 	ulong32	SoraResourceFileFinder::loadResourcePack(const SoraWString& file) {
@@ -69,11 +97,9 @@ namespace sora {
 		if(dotPos != SoraWString::npos) {
 			fileFormat = file.substr(dotPos+1, file.size());
 		}
-#ifdef _DEBUG
-		printf("load resource pack, %s, format: %s\n", ws2s(file).c_str(), ws2s(fileFormat).c_str());
-#endif
-		for(size_t i=1; i<resourceManagers.size(); ++i) {
-			SoraResourceManager* prm = *resourceManagers[i];
+
+		for(size_t i=1; i<mResourceManagers.size(); ++i) {
+			SoraResourceManager* prm = mResourceManagers[i].get();
 				
 			ulong32 r = prm->loadResourcePack(file);
 			if(r) {
@@ -82,10 +108,10 @@ namespace sora {
 			}
 		}
 		/*
-		 resourceManagers[0] = sorafodlerresoucemanager
+		 mResourceManagers[0] = sorafodlerresoucemanager
 		 just add the pack as a folder
 		 */
-		resourceManagers[0]->attachResourcePack(resourceManagers[0]->loadResourcePack(file));
+		mResourceManagers[0]->attachResourcePack(mResourceManagers[0]->loadResourcePack(file));
 		return 0;
 	}
 	
@@ -95,19 +121,19 @@ namespace sora {
 	}
 	
 	void SoraResourceFileFinder::detachResourcePack(ulong32 handle) {
-		for(size_t i=0; i<resourceManagers.size(); ++i) {
-			resourceManagers[i]->detachResourcePack(handle);
+		for(size_t i=0; i<mResourceManagers.size(); ++i) {
+			mResourceManagers[i]->detachResourcePack(handle);
 		}
 	}
 	
 	bool SoraResourceFileFinder::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
-		for(size_t i=1; i<resourceManagers.size(); ++i) {
-			SoraResourceManager* prm = *resourceManagers[i];
+		for(size_t i=1; i<mResourceManagers.size(); ++i) {
+			SoraResourceManager* prm = mResourceManagers[i].get();
 			
 			if(prm->enumFiles(cont, folder))
 				return true;
 		}
 		
-		return resourceManagers[0]->enumFiles(cont, folder);
+		return mResourceManagers[0]->enumFiles(cont, folder);
 	}
 } // namespace sora

@@ -14,7 +14,7 @@
 #include "rfMapRenderer.h"
 
 #include "guichansetup.h"
-#include "gcnImageButton2.h"
+#include "gcnExtend/gcnImageButton2.h"
 
 #include "lsAnimatedSprite.h"
 

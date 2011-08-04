@@ -214,7 +214,7 @@ namespace sora {
 
 	void SoraPhysicalObject::add(SoraObject* obj) {
         if(!body)
-            THROW_SORA_EXCEPTION("Body not available");
+            THROW_SORA_EXCEPTION(NullPointerException, "Body not available");
         
 		// if is a physical object, connect the body to a joint
 		if(obj->getType() == OBJ_PHYSICAL) {

@@ -13,13 +13,13 @@ namespace sora {
 	bool FTFace::load(const char* name, uint32 size) {
 		if(size == 0) {
 			if(FT_New_Face(library, name, 0, &face)) {
-				THROW_SORA_EXCEPTION("Error creating new face");
+				THROW_SORA_EXCEPTION(RuntimeException, "Error creating new face");
 				return false;
 			}
 			fontDataBuffer = NULL;
 		} else {
 			if(FT_New_Memory_Face(library, (FT_Bytes)name, size, 0, &face)) {
-				THROW_SORA_EXCEPTION("Error creating new face");
+				THROW_SORA_EXCEPTION(RuntimeException, "Error creating new face");
 				return false;
 			}
 			fontDataBuffer = (void*)name;
@@ -135,7 +135,7 @@ namespace sora {
 		sora = SoraCore::Instance();
 		sprite = new SoraSprite(NULL);
 		if(!sprite)
-			THROW_SORA_EXCEPTION("error creating font sprite");
+			THROW_SORA_EXCEPTION(RuntimeException, "error creating font sprite");
 		
 	}
 
@@ -156,7 +156,7 @@ namespace sora {
 		try {
 			ft_glyphs.resize(ft_face->face->num_glyphs);
 		} catch(std::exception& e) {
-			THROW_SORA_EXCEPTION(e.what());
+			THROW_SORA_EXCEPTION(RuntimeException, e.what());
 		}
 		for(int i = 0; i < ft_face->face->num_glyphs; i++) {
 			ft_glyphs[i].sora = sora;

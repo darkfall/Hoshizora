@@ -29,7 +29,7 @@ namespace sora {
         void start(int32 numThreads);
         void stop();
         
-        void run(const SoraThreadTask&);
+        void run(SoraThreadTask&);
         
     private:
         void runInThread(void* arg);

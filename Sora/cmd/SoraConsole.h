@@ -16,7 +16,7 @@
 #include "../SoraEvent.h"
 #include "../SoraKeyInfo.h"
 #include "../SoraHotkey.h"
-
+#include "../SoraFrameListener.h"
 #include "../SoraFont.h"
 
 namespace sora {
@@ -51,7 +51,7 @@ namespace sora {
 		std::string mResults;
 	};
 	
-	class SORA_API SoraConsole: public SoraEventHandler {
+	class SORA_API SoraConsole: public SoraEventHandler, public SoraFrameListener {
 	protected:
 		SoraConsole();
 		~SoraConsole();
@@ -106,6 +106,9 @@ namespace sora {
         
         void setUseSysTerm(bool flag);
 		
+        void onFrameStart();
+        void onFrameEnd();
+        
 	private:        
 		void drawCmds();
 		void drawMssg();
@@ -121,7 +124,6 @@ namespace sora {
 		float32 mUpDownTime, mDownDownTime;
 		
 		bool mMssgReachTop;
-        
         bool mUseSysTerm;
 		
 		int32 mTab;

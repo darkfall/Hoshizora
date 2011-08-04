@@ -59,7 +59,7 @@ namespace sora {
                 break;
                 
             default:
-                THROW_SORA_EXCEPTION("Missing Actor Type");
+                THROW_SORA_EXCEPTION(InvalidArgumentException, "Missing Actor Type");
         }
     }
     

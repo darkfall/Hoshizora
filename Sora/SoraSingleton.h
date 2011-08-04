@@ -11,11 +11,12 @@
 #define SORA_SINGLETON_H_
 
 #include "SoraPlatform.h"
+#include "uncopyable.h"
 
 namespace sora {
 	
 	template<class T>
-	class SoraSingleton {
+	class SoraSingleton: uncopyable {
 	public:
 		static T* Instance() {
 			if(!pInstance) pInstance = new T();
@@ -34,9 +35,7 @@ namespace sora {
 
 	private:
 		static T* pInstance;
-		SoraSingleton(const SoraSingleton& singleton);
-		SoraSingleton& operator=(const SoraSingleton& singleton);
-	
+        
 	protected:
 		SoraSingleton() {}
 		virtual ~SoraSingleton() {}
@@ -44,6 +43,42 @@ namespace sora {
 
 	template<class T>
 	T* SoraSingleton<T>::pInstance = NULL;
+    
+    /**
+     *  You add the following for use with the singleton
+     *  template<> T* SoraDirectSingleton<T>::_singleton = NULL
+     **/
+    
+    template<class T>
+    class SoraDirectSingleton: uncopyable {
+    protected:
+        static T * _singleton;
+   
+    public:
+        SoraDirectSingleton() {
+            assert( !_singleton );
+#if defined( _MSC_VER ) && _MSC_VER < 1200
+            int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1;
+            _singleton = (T*)((int)this + offset);
+#else
+            _singleton = static_cast< T* >( this );
+#endif
+        }
+        
+        virtual ~SoraDirectSingleton() {
+            assert(_singleton);
+            _singleton = NULL;
+        }
+        
+        static T& RefInstance() {
+            assert(_singleton);
+            return(*_singleton);
+        }
+        
+        static T* Instance() {
+            return (_singleton);
+        }
+    };
  
 	
 } // namespace sora

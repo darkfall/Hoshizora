@@ -15,7 +15,7 @@ namespace sora {
     SoraBaseCanvas::SoraBaseCanvas(int32 w, int32 h, bool bDepthBuffer) {
         canvasTarget = SORA->createTarget(w, h, bDepthBuffer);
 		if(!canvasTarget) {
-			DebugPtr->log("Error creating render target");
+			log_mssg("Error creating render target");
             return;
         }
         pCanvasSprite = new SoraSprite(0);
@@ -25,7 +25,7 @@ namespace sora {
 		pCanvasSprite->unlockPixelData();*/
         
 		if(!canvasTarget || !pCanvasSprite) {
-            DebugPtr->log("Error creating render target");
+            log_mssg("Error creating render target");
             return;
         }
     }
@@ -77,7 +77,7 @@ namespace sora {
     void SoraBaseCanvas::finishRender() {
         if(canvasTarget) {
             if(!bSceneBegan)
-                THROW_SORA_EXCEPTION("Render not began");
+                THROW_SORA_EXCEPTION(IllegalStateException, "Render not began");
             SORA->endScene();
         }
     }
