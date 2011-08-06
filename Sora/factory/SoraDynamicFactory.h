@@ -11,9 +11,28 @@
 
 #include "../SoraPlatform.h"
 #include "../SoraException.h"
-#include "../SoraInstantiator.h"
+#include "../common.h"
+#include "../uncopyable.h"
+
+#include <map>
 
 namespace sora {
+    
+    template<class BASE>
+    class SORA_API SoraAbstractInstantiator: uncopyable {
+    public:
+        virtual ~SoraAbstractInstantiator() {}
+        
+        virtual BASE* createInstance() const = 0;
+    };
+    
+    template<class BASE, class C>
+    class SORA_API SoraInstantiator: public SoraAbstractInstantiator<BASE> {
+    public:
+        BASE* createInstance() const {
+            return new C;
+        }
+    };
     
     /**
      * A helper that manages allow users to create a class instance by it's name
@@ -22,27 +41,31 @@ namespace sora {
      * Unlike SoraRTTI, no any constructor support
      **/    
     template<class BASE>
-    class SORA_API SoraDynamicFactory {
+    class SORA_API SoraDynamicFactory: uncopyable {
     public:
-        typedef SoraAbstracteInstantiator<BASE> AbstractFactory;
+        typedef SoraAbstractInstantiator<BASE> AbstractFactory;
         
-        template<class C>
-        void registerClass(const std::string& name) {
-            registerClass(name, new SoraInstantiator<BASE, C>());
+        ~SoraDynamicFactory() {
+            for_each(mFactory.begin(), mFactory.end(), DeleteSTLPairPtr());
         }
         
         template<class C>
-        void registerClass(const std::string& name, AbstractFactory* factory) {
-            FactoryMap::iterator itFactory = mFactory.find(name);
+        void registerClass(const std::string& name) {
+            registerClass<C>(name, new SoraInstantiator<BASE, C>());
+        }
+        
+        template<class C>
+        void registerClass(const std::string& name, AbstractFactory* instantiator) {
+            typename FactoryMap::iterator itFactory = mFactory.find(name);
             
             if(itFactory == mFactory.end()) {
-                mFactory[name] = factory;
+                mFactory[name] = instantiator;
             } else 
                 THROW_SORA_EXCEPTION(ExistsException, "Class already exists");
         }
         
         void unregisterClass(const std::string& name) {
-            FactoryMap::iterator itFactory = mFactory.find(name);
+            typename FactoryMap::iterator itFactory = mFactory.find(name);
         
             if(itFactory != mFactory.end()) {
                 delete itFactory->second;
@@ -51,16 +74,19 @@ namespace sora {
         }
         
         bool isClass(const std::string& name) {
-            FactoryMap::iterator itFactory = mFactory.find(name);
+            typename FactoryMap::iterator itFactory = mFactory.find(name);
             return itFactory != mFactory.end();
         }
         
         BASE* createInstance(const std::string& name) {
-            FactoryMap::iterator itFactory = mFactory.find(name);
+            typename FactoryMap::iterator itFactory = mFactory.find(name);
             if(itFactory != mFactory.end()) {
                 return itFactory->second->createInstance();
+            } else {
+                std::ostringstream msg;
+                msg << "Class with "<<name<<" Not found in Factory";
+                THROW_SORA_EXCEPTION(NotFoundException, msg.str());
             }
-            THROW_SORA_EXCEPTION(NotFoundException, vamssg("Factory not found for class %s", name.c_str()));
             return NULL;
         }
         

@@ -19,16 +19,12 @@ namespace sora {
     
     /**
      * A Simple Signal Implemention based on the thought of boost::signal
-     * However we don't use boost library now, so we don't have some advanced function
+     * However we don't use boost library now, so
      * Callback based on SoraDelegate
      *
      * Users can connect to a signal to show interest on a specific event
      * Users can disconnect to the signal at anytime
      * When a specific event happened, all connected function would be notified
-     *
-     * Trying to hide template arguments from the users is not easy
-     * Maybe there are some better ways to implement this without boost
-     * But it just works
      **/
     
     template<typename RT, typename TARG>

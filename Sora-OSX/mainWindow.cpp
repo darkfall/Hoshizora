@@ -77,44 +77,7 @@ void myFunc(float& delta) {
     sora::SORA->messageBox(msg.str(), "test", MB_OK);
 }
 
-sora::SimpleTimerPtr timer;
-#include "SoraDelegateConvert.h"
-
-class listenerTest: public sora::SoraMouseListener {
-public:
-    void mouseMoved(sora::SoraMouseEvent& evt) {
-        printf("%s: %f %f\n", "Mouse Moved", evt.getX(), evt.getY());
-    }
-    
-    void mouseClicked(sora::SoraMouseEvent& evt) {
-        printf("%s: %f %f\n", "Mouse Click", evt.getX(), evt.getY());
-
-    }
-    
-    void mouseReleased(sora::SoraMouseEvent& evt) {
-        printf("%s: %f %f\n", "Mouse Release", evt.getX(), evt.getY());
-
-    }
-    
-    void mouseDragged(sora::SoraMouseEvent& evt) {
-        printf("%s: %f %f\n", "Mouse Drag", evt.getX(), evt.getY());
-
-    }
-    
-    void mouseWheelUp(sora::SoraMouseEvent& evt) {
-        printf("%s: %f %f\n", "Mouse Wheel Up", evt.getX(), evt.getY());
-
-    }
-    
-    void mouseWheelDown(sora::SoraMouseEvent& evt) {
-        printf("%s: %f %f\n", "Mouse Wheel Down", evt.getX(), evt.getY());
-        
-    }
-};
-
 void mainWindow::init() {
-    sora::SoraCore::Instance()->addMouseListener(new listenerTest);
-    
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);

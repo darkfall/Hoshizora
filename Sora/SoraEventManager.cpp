@@ -10,50 +10,8 @@ namespace sora {
         static SoraEventManager instance;
         return &instance;
     }
-	
-	SoraEventHandlerPack::SoraEventHandlerPack() {
-		registerEventFunc(this, &SoraEventHandlerPack::onTimerEvent);
-	}
-	
-	SoraEventHandlerPack& SoraEventHandlerPack::add(SoraEventHandler* handler) {
-		evHandlers.push_back(handler);
-		return *this;
-	}
-	
-	void SoraEventHandlerPack::onTimerEvent(SoraTimerEvent* ev) {
-		EVENT_HANDLER_CONT::iterator itHandler = evHandlers.begin();
-		while(itHandler != evHandlers.end()) {
-			if((*itHandler)) {
-				SoraTimerEvent* ccev = const_cast<SoraTimerEvent*>(ev);
-				(*itHandler)->handleEvent((ccev));
-				++itHandler;
-                
-                if(ccev->isConsumed())
-                    break;
-			} else {
-				itHandler = evHandlers.erase(itHandler);
-			}
-		}
-	}
-	
-	void SoraEventHandlerPack::publishEvent(SoraEvent* ev) {
-		EVENT_HANDLER_CONT::iterator itHandler = evHandlers.begin();
-		while(itHandler != evHandlers.end()) {
-			if((*itHandler)) {
-				ev->setSource((*itHandler));
-				(*itHandler)->handleEvent(ev);
-				++itHandler;
-			} else {
-				itHandler = evHandlers.erase(itHandler);
-			}
-		}
-	}
-	
-	void SoraEventHandlerPack::unRegister(SoraEventHandler* handler) {
-		evHandlers.remove(handler);
-	}
 
-	SoraEventManager::SoraEventManager(): currTime(0.f), mFileChangeEventPublisher(NULL) {
+	SoraEventManager::SoraEventManager(): mFileChangeEventPublisher(NULL) {
 	}
 	
 	SoraEventManager::~SoraEventManager() {
@@ -71,7 +29,6 @@ namespace sora {
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
 		if(itEvent == evMap.end()) {
-			// ·¢ËÍ¸øluaobjects
 		//	SoraLuaObjectManager::Instance()->sendMessage(eventName, params, hreceiver);
 			return;
 		}
@@ -168,24 +125,17 @@ namespace sora {
 		tevList.push_back(new SoraTimerEventInfo(handler, ev, time, 0.f, repeat)); 
 	}
 	
-	void SoraEventManager::registerTimerEvent(const SoraEventHandlerPack& pack, SoraTimerEvent* ev, float32 time, bool repeat) {
-		tevList.push_back(new SoraTimerEventInfo(pack, ev, time, 0.f, repeat));
-	}
-	
 	void SoraEventManager::freeTimerEvent(TIMER_EVENT_LIST::iterator ittev) {
 		delete (*ittev);
 		(*ittev) = 0;
 	}
 	
 	void SoraEventManager::update(float32 dt) {
-		currTime += dt;
 		if(tevList.size() != 0) {
 			TIMER_EVENT_LIST::iterator ittev = tevList.begin();
 			while(ittev != tevList.end()) {
-				
 				(*ittev)->update(dt);
-				if((*ittev)->handlerPack.evHandlers.empty()) {
-					freeTimerEvent(ittev);
+				if((*ittev)->handler == NULL) {
 					ittev = tevList.erase(ittev);
 					continue;
 				}
@@ -198,25 +148,10 @@ namespace sora {
 		TIMER_EVENT_LIST::iterator ittev = tevList.begin();
 		while(ittev != tevList.end()) {
 			if((*ittev)) {
-				(*ittev)->handlerPack.unRegister(handler);
-				if((*ittev)->handlerPack.evHandlers.empty()) {
-					freeTimerEvent(ittev);
-					tevList.erase(ittev);
-				}
+				tevList.erase(ittev);
 			} else {
 				ittev = tevList.erase(ittev);
 				continue;
-			}
-			++ittev;
-		}
-	}
-	
-	void SoraEventManager::unregisterTimerEvent(SoraEventHandlerPack* pack) {
-		TIMER_EVENT_LIST::iterator ittev = tevList.begin();
-		while(ittev != tevList.end()) {
-			if(pack == (&(*ittev)->handlerPack)) {
-				freeTimerEvent(ittev);
-				tevList.erase(ittev);
 			}
 			++ittev;
 		}
@@ -251,15 +186,23 @@ namespace sora {
 	}
 	
 	void SoraEventManager::SoraTimerEventInfo::update(float32 dt) {
-		currTime += dt;
-		totalTime += dt;
-		if(currTime >= time) {
-			ev->setTime(currTime);
+		float32 timepass = currTime + dt;
+        unsigned int step = static_cast<unsigned int>(timepass / dt);
+        
+        totalTime += dt;
+
+        if(step > 0) {
+            ev->setTime(currTime);
 			ev->setTotalTime(totalTime);
-			handlerPack.onTimerEvent(ev);
-			
-			currTime = 0.f;
-		}
+            
+            sora_assert(handler);
+            handler->handleEvent(ev);
+            
+            if(!repeat) 
+                handler = NULL;
+            
+            currTime -= step * time;
+        }
 	}
 	
 	void SORACALL SoraEventManager::registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler) {

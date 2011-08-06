@@ -163,7 +163,16 @@ namespace sora {
 	#define OS_PSP
 #endif
 
-#define SORA_DLL_EXPORT
+/**
+ * Ensure that dll_export is default when building under windows with /MD or /MDd
+ *  Unless SORA_STATIC is specified for static library
+ **/
+#if defined(OS_WIN32) && defined(_DLL)
+    #if !defined(SORA_DLL_EXPORT) && !defined(SORA_STATIC) && !defined(SORA_DLL_IMPORT)
+        #define SORA_DLL_EXPORT
+    #endif
+#endif
+
 // we are building a dll
 #if defined(OS_WIN32) 
     #if defined(SORA_DLL_EXPORT)
@@ -260,6 +269,24 @@ static void msleep(uint32_t msec) {
 
 #define sora_assert assert
 
+namespace sora {
+    template<bool x> struct STATIC_ASSERTION_FAILURE;
+    template<> struct STATIC_ASSERTION_FAILURE<true> { enum {Value = 1}; };
+    template<int x> struct static_assert_test{};
+}
+
+
+#define SORA_JOIN(x, y) SORA_DO_JOIN(x, y)
+#define SORA_DO_JOIN(x ,y) SORA_DO_JOIN_2(x, y)
+#define SORA_DO_JOIN_2(x, y) x##y
+
+#define sora_static_assert(B) \
+    typedef ::sora::static_assert_test<\
+        sizeof(::sora::STATIC_ASSERTION_FAILURE<(bool)(B)>)>\
+            SORA_JOIN(__sora_static_assert_typedef_, __LINE__)
+
+
+
 /*
  Thread Independent Variables
  */
@@ -305,6 +332,26 @@ static void msleep(uint32_t msec) {
 */
 #define SORA_FSM_USE_NULL
 
+/*
+ enable this if you are using sora in multithread environment
+ currently unimplemented, reverved for future use
+*/
+//#define SORA_ENABLE_MULTI_THREAD
+
+/*
+ // default:
+ // 8 bit system channel
+ // 24 bit user channel
+ 
+ // if use uint64
+ // 16 bit system channel
+ // 48 bit user channel
+ 
+ // if use uint16
+ // 8 bit system channel
+ // 8 bit user channel
+*/
+typedef uint32 EventChannelType;
 
 
 /****************

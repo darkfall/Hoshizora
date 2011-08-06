@@ -31,7 +31,6 @@ namespace sora {
 		void operator() (const std::pair<Ty1, Ty2>& ptr) const {
 			if(ptr.second) {
 				delete ptr.second;
-				ptr.second = 0;
 			}
 		}
 	};

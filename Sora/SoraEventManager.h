@@ -27,22 +27,11 @@ namespace sora {
 	 You should care about the memory by yourself
 	 ALL Timered events would be deleted automatically except those passed by yourself
 	 ****/
-		
-	class SORA_API SoraEventHandlerPack: public SoraEventHandler {
-		friend class SoraEventManager;
-		
-	public:
-		SoraEventHandlerPack();
-		SoraEventHandlerPack& add(SoraEventHandler* handler) ;
-		void onTimerEvent(SoraTimerEvent* ev);
-		void publishEvent(SoraEvent* ev);
-		
-		void unRegister(SoraEventHandler* handler);
-		
-	protected:
-		typedef std::list<SoraEventHandler*> EVENT_HANDLER_CONT;
-		EVENT_HANDLER_CONT evHandlers;
-	};
+    
+    /***
+     For compability issues, SoraEventManager doesn't use SoraEventWorld
+     So use with care
+     ***/
 
 	class SORA_API SoraEventManager {
 		SoraEventManager();
@@ -67,21 +56,22 @@ namespace sora {
 		 */
 		void sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 receiver=0);
 		
+        /***
+         * Timer Events are deprecated
+         * Suggest use timer/SoraSimpleTimer instead
+         **/
 		/*
 		 create a timer event
 		 handler would receive a event, event type = SoraTimerEvent after time seconds
 		 */
 		void createTimerEvent(SoraEventHandler* handler, float32 time, bool repeat=false);
-		void createTimerEvent(const SoraEventHandlerPack& pack, float32 time, bool repeat=false);
 		/*
 		 register a timer event
 		 inheritate your class from SoraTimerEvent to pass your data to handler
 		 */
 		void registerTimerEvent(SoraEventHandler* handler, SoraTimerEvent* ev, float32 time, bool repeat=false);
 		void unregisterTimerEvent(SoraEventHandler* handler);
-		void registerTimerEvent(const SoraEventHandlerPack& handler, SoraTimerEvent* ev, float32 time, bool repeat=false);
-		void unregisterTimerEvent(SoraEventHandlerPack* handler);
-		
+	
 		/*
 		 you should call this in your key event pool in order to let components know there is a key input event 
 		 */
@@ -132,7 +122,7 @@ namespace sora {
 				}
 			}
 			
-			SoraEventHandlerPack handlerPack;
+			SoraEventHandler* handler;
 			SoraTimerEvent* ev;
 			
 			float32 time;
@@ -146,24 +136,16 @@ namespace sora {
 			SoraTimerEventInfo(SoraEventHandler* h, float32 _time, float32 _currTime, bool _repeat) :
 				time(_time), repeat(_repeat), internalte(true), currTime(_currTime), totalTime(0.f) {
 					ev = new SoraTimerEvent;
-					handlerPack.add(h);
+					handler = h;
 				}
 			SoraTimerEventInfo(SoraEventHandler* h, SoraTimerEvent* _ev, float32 _time, float32 _currTime, bool _repeat) :
 				ev(_ev), time(_time), repeat(_repeat), internalte(false), currTime(_currTime), totalTime(0.f) {
-					handlerPack.add(h);
-				}
-			SoraTimerEventInfo(const SoraEventHandlerPack& pack, float32 _time, float32 _currTime, bool _repeat):
-				handlerPack(pack), time(_time), repeat(_repeat), currTime(_currTime), totalTime(0.f) {
-					ev = new SoraTimerEvent;
-				}
-			SoraTimerEventInfo(const SoraEventHandlerPack& pack, SoraTimerEvent* _ev, float32 _time, float32 _currTime, bool _repeat) :
-				ev(_ev), time(_time), repeat(_repeat), internalte(false), handlerPack(pack), currTime(_currTime), totalTime(0.f) {
+					handler = h;
 				}
 		};
 		
 		typedef std::list<SoraTimerEventInfo*> TIMER_EVENT_LIST;
 		TIMER_EVENT_LIST tevList;
-		float32 currTime;
 		
 		typedef std::multimap<int32/* priority */, SoraEventHandler*> INPUT_EVENT_HANDLER_LIST;
 		INPUT_EVENT_HANDLER_LIST iehList;
@@ -171,7 +153,7 @@ namespace sora {
 		inline void freeTimerEvent(TIMER_EVENT_LIST::iterator ittev);
 		
 		SoraFileChangeEventPublisher* mFileChangeEventPublisher;
-	};
+    };
 	
 	class SoraLuaEvent: public SoraEvent {
 	public:

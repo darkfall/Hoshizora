@@ -21,13 +21,11 @@
 #include <cassert>
 
 namespace sora {
-	
-#define MAX_NAME_LENGTH 1024
-	
+		
 	/*
 	 Base class for all objects that have a name
 	 */
-	class SORA_API SoraNamedObject: public Serializable {
+	class SORA_API SoraNamedObject {
 	public:
 		SoraNamedObject(): mName(0) {}
 		SoraNamedObject(const SoraString& _name): mName(str2id(_name)) {}
@@ -36,21 +34,6 @@ namespace sora {
 		
 		void setName(stringId n) { mName = n; }
 		stringId getName() const { return mName; }
-		
-		virtual void serialize(SoraStream& bufferStream) {
-            std::string strData = id2str(mName).c_str();
-			bufferStream<<strData;
-		}
-		virtual void unserialize(SoraStream& bufferStream) {
-            std::string strData;
-            bufferStream>>strData;
-            setName(str2id(strData));
-		}
-		
-		// be default
-		// a named object is serializable
-		// serialized file is length(4 bytes) + name(length)
-		virtual bool serializable() { return true; }
 		
 	protected:
 		stringId mName;

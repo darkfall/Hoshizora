@@ -9,9 +9,16 @@
 #include "SoraInputQueue.h"
 #include "SoraModifierAdapter.h"
 #include "SoraFullscreenBufferHandler.h"
+#include "SoraSystemEvents.h"
+#include "SoraPlaybackEvent.h"
+#include "SoraTimerEvent.h"
+#include "SoraKeyInfo.h"
+#include "SoraFileChangeEvent.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
+
+#include "event/SoraEventFactory.h"
 
 #include "Defaults/SoraTimer_OSX.h"
 #include "Defaults/SoraTimer_Win32.h"
@@ -32,7 +39,6 @@
 #include "timer/SoraSimpleTimerManager.h"
 
 #include "cmd/CoreCmds.h"
-
 
 #include "MemoryUsage.h"
 #include "Rect4V.h"
@@ -151,6 +157,14 @@ namespace sora {
         
 		setRandomSeed(rand());
         initConstantStrings();
+        _registerEventTypes();
+        
+        try {
+            if(!bDisablePluginDetection) 
+                SoraBooter::loadExPlugins(L"./sora/plugins");
+        } catch(const SoraException& exp) {
+            _postError(exp.what());
+        }
 	}
 
 	void SoraCore::_initializeTimer() {
@@ -176,12 +190,6 @@ namespace sora {
 	}
 
 	void SoraCore::start() {
-        try {
-            if(!bDisablePluginDetection) 
-                SoraBooter::loadExPlugins(L"./sora/plugins");
-        } catch(const SoraException& exp) {
-            _postError(exp.what());
-        }
         _checkCoreComponents();
         
         try {
@@ -406,6 +414,19 @@ namespace sora {
 		else
 			pMiscTool->messageBox(string, "Some Error Happened :(", MB_ICONERROR | MB_OK);
 	}
+    
+    void SoraCore::_registerEventTypes() {
+        SoraEventFactory* factory = SoraEventFactory::Instance();
+        factory->registerEvent<SoraPlaybackEvent>("PlaybackEvent");
+        factory->registerEvent<SoraFileChangeEvent>("FileChangeEvent");
+        factory->registerEvent<SoraKeyEvent>("KeyEvent");
+      //  factory->registerEvent<SoraMouseEvent>("MouseEvent");
+       // factory->registerEvent<SoraJoystickEvent>("JoystickEvent");
+        factory->registerEvent<SoraTimerEvent>("TimerEvent");
+        factory->registerEvent<SoraConsoleEvent>("ConsoleEvent");
+        factory->registerEvent<SoraMenuBarClickEvent>("MenubarEvent");
+        factory->registerEvent<SoraHotkeyEvent>("HotkeyEvent");
+    }
 
 	ulong32 SoraCore::getMainWindowHandle() {
 		return pRenderSystem->getMainWindowHandle();

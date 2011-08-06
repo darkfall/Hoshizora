@@ -117,7 +117,7 @@ namespace sora {
     }
     
     namespace {
-        static SoraSingletonHolder<SoraFSMManager> fsm;
+        static SoraSingletonHolder<SoraFSMManager, void> fsm;
     }
     
     SoraFSMManager& SoraFSMManager::defaultFSMManager() {

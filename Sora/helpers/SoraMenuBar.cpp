@@ -38,7 +38,7 @@ namespace sora {
 	}*/
 	
 	SoraMenuBarItem* SoraMenuBarClickEvent::getItem() const {
-		return (SoraMenuBarItem*)pEventSource;
+		return (SoraMenuBarItem*)mSender;
 	}
 	
 	SoraMenuBarMenu::SoraMenuBarMenu(const std::wstring& barName): 

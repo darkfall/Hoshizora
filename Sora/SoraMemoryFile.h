@@ -54,12 +54,7 @@ namespace sora {
 		ulong32 size() {
 			return memoryFile.size();
 		}
-                        
-		virtual void unserialize(SoraStream& bufferStream) {
-			SoraNamedObject::unserialize(bufferStream);
-			read(getName());
-		}
-					
+                        	
 	private:
 		struct compareObjectName: public std::binary_function<SoraMemoryFile*, stringId, bool> {
 			bool operator() (SoraNamedObject* obj, stringId name) const {

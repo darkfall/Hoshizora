@@ -42,6 +42,10 @@
 #pragma warning(disable:4996) // VC++ 8.0 deprecation warnings
 #pragma warning(disable:4351) // new behavior: elements of array '...' will be default initialized
 #pragma warning(disable:4675) // resolved overload was found by argument-dependent lookup
+
+#pragma warning(disable:4786)  // identifier truncation warning
+#pragma warning(disable:4503)  // decorated name length exceeded - mainly a problem with STLPort
+#pragma warning(disable:4284)  // return type for operator -> is not UDT
 #endif
 
 #if defined(__intEL_COMPILER)

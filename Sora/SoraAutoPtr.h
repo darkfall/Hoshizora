@@ -19,6 +19,9 @@ using std::map;
 
 /*
  a simple reference counted auto pointer implemention
+ notice: behave more like boost::shared_ptr or tr1::sharedptr but not std::auto_ptr
+ if you want auto_ptr, use std::auto_ptr instead
+ this is not a std::auto_ptr implemention, but reference counted shared ptr
  */
 
 namespace sora {

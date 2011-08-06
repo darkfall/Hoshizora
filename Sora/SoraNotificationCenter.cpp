@@ -54,7 +54,7 @@ namespace sora {
     }
     
     namespace {
-        static SoraSingletonHolder<SoraNotificationCenter> sh;
+        static SoraSingletonHolder<SoraNotificationCenter, void> sh;
     }
     
     SoraNotificationCenter& SoraNotificationCenter::defaultCenter() {

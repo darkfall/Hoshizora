@@ -43,6 +43,19 @@ namespace sora {
         return SoraAny(func(arg1, arg2)); \
     }
     
+    /**
+     * RTTI Check 
+     **/
+    template<typename T1, typename T2>
+    bool isClassSame(T1* t1, T2* t2) {
+        return (&typeid(*t1) == &typeid(*t2) ||
+                typeid(*t1) == typeid(t2));
+    }
+    template<typename T1, typename T2>
+    bool isClassClass(T1* t1) {
+        return (&typeid(*t1) == &typeid(T2) ||
+                typeid(*t1) == typeid(T2));
+    }
 } // namespace sora
 
 

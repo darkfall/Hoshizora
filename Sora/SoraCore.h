@@ -296,6 +296,7 @@ namespace sora {
 		inline void _postError(const SoraString& str);
 		inline void _initializeTimer();
 		inline void _initializeMiscTool();
+        inline void _registerEventTypes();
 
 		SoraMiscTool*			pMiscTool;
 		SoraRenderSystem*		pRenderSystem;
