@@ -39,6 +39,32 @@ namespace sora {
         static SoraCore* Instance();
         static void Destroy();
         
+        class Parameter {
+        public:
+            Parameter(bool loadPlugins=true, bool renderToBuffer=false, bool postErrorByMessageBox=false):
+            mLoadPlugins(loadPlugins),
+            mRenderToBuffer(renderToBuffer),
+            mMesageBoxErrorPost(postErrorByMessageBox) {
+                
+            }
+            
+            void setLoadPlugin(bool flag) { mLoadPlugins = flag; }
+            void setRenderToBuffer(bool flag) { mRenderToBuffer = flag; }
+            void setPostErrorByMessageBox(bool flag) { mMesageBoxErrorPost = flag; }
+            
+            bool isLoadPlugins() const { return mLoadPlugins; }
+            bool isRenderToBuffer() const { return mRenderToBuffer; }
+            bool isPostErrorByMessageBox() const { return mMesageBoxErrorPost; }
+            
+            
+        private:
+            bool mLoadPlugins;
+            bool mRenderToBuffer;
+            bool mMesageBoxErrorPost;
+        };
+        
+        void init(const Parameter& param = Parameter());
+        
 		void start();
 		void shutDown();
 
@@ -115,10 +141,6 @@ namespace sora {
         SoraShaderContext*  createShaderContext();
 		void                attachShaderContext(SoraShaderContext* context);
 		void                detachShaderContext();
-        SoraShader*         createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
-        void                freeShader(SoraShader* shader);
-        // for convinience to attach a single shader but not a whole context, also use detachShaderContext to detach the shader
-        void                attachShader(SoraShader* shader);
 
 		SoraSprite* createSprite (const SoraWString& sPath);
 
@@ -253,7 +275,6 @@ namespace sora {
 		/*
 		 if enabled
 		 getDelta would always return 1.f
-		 which suggest all caculation based on delta would sync by frame
 		 */
 		void setFrameSync(bool flag);
  
@@ -325,10 +346,8 @@ namespace sora {
 		float32 mTime;
         float32 mTimeScale;
 
-		SoraWindowInfoBase* mainWindow;
-		SoraShaderContext* shaderContext;
-        SoraShaderContext* tempShaderContext;
-        SoraShaderContext* prevShaderContext;
+		SoraWindowInfoBase* mMainWindow;
+        SoraShaderContext* mPrevShaderContext;
         
         bool bEnableScreenBuffer;
         bool bScreenBufferAttached;

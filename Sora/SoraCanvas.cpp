@@ -81,33 +81,7 @@ namespace sora {
             SORA->endScene();
         }
     }
-    
-	void SoraBaseCanvas::attachShader(SoraShader* shader) {
-        if(pCanvasSprite)
-            pCanvasSprite->attachShader(shader);
-	}
-	void SoraBaseCanvas::detachShader(SoraShader* shader) {
-        if(pCanvasSprite)
-            pCanvasSprite->detachShader(shader);
-	}
-	
-	SoraShader* SoraBaseCanvas::attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type) {
-        if(pCanvasSprite)
-            return pCanvasSprite->attachShader(shaderPath, entry, type);
-        return NULL;
-	}
-	
-	bool SoraBaseCanvas::hasShader() const {
-        if(pCanvasSprite)
-            return pCanvasSprite->hasShader();
-        return false;
-	}
-	
-	void SoraBaseCanvas::clearShader() {
-        if(pCanvasSprite)
-            return pCanvasSprite->clearShader();
-	}
-	
+    	
 	void SoraBaseCanvas::addEffect(SoraImageEffect* effect) {
         if(pCanvasSprite)
             return pCanvasSprite->addEffect(effect);

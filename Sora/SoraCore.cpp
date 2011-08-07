@@ -19,6 +19,7 @@
 #include "Defaults/SoraDefaultTimer.h"
 
 #include "event/SoraEventFactory.h"
+#include "event/SoraEventWorld.h"
 
 #include "Defaults/SoraTimer_OSX.h"
 #include "Defaults/SoraTimer_Win32.h"
@@ -141,11 +142,9 @@ namespace sora {
 		pRenderSystem = NULL;
 		pSoundSystem = NULL;
         
-		mainWindow = NULL;
+		mMainWindow = NULL;
 		
-		prevShaderContext = NULL;
-        shaderContext = NULL;
-        tempShaderContext = NULL;
+		mPrevShaderContext = NULL;
         mScreenBuffer = NULL;
         
         mTime = 0.f;
@@ -166,6 +165,14 @@ namespace sora {
             _postError(exp.what());
         }
 	}
+    
+    void SoraCore::init(const Parameter& param) {
+        enablePluginDetection(param.isLoadPlugins());
+        
+        enableMessageBoxErrorPost(param.isPostErrorByMessageBox());
+        
+        enableFullscreenBuffer(param.isRenderToBuffer());
+    }
 
 	void SoraCore::_initializeTimer() {
 #if defined(OS_OSX) || defined(OS_IOS)
@@ -258,7 +265,7 @@ namespace sora {
 	}
 
 	void SoraCore::update() {
-		assert(bInitialized == true);
+		sora_assert(bInitialized == true);
 #ifdef PROFILE_CORE_UPDATE
 		PROFILE("CORE_UPDATE");
 #endif
@@ -286,7 +293,7 @@ namespace sora {
                     _modifierAdapterUpdate();
                     SoraSimpleTimerManager::Instance()->update(getDelta());
                     
-                    mainWindow->updateFunc();
+                    mMainWindow->updateFunc();
                 }
                 
                 {
@@ -294,6 +301,7 @@ namespace sora {
                     PROFILE("UPDATE_EVENT_MANAGER");
 #endif
                     SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
+                    SoraEventWorld::defaultWorld().update(getDelta());
                 }
                 
                 {
@@ -317,14 +325,14 @@ namespace sora {
                     pRenderSystem->update();
                 }
             } else 
-                mainWindow->pauseFunc();
+                mMainWindow->pauseFunc();
             
             if(!bPaused && !bPauseRender) {
                 {
 #ifdef PROFILE_CORE_UPDATE
                     PROFILE("RENDER_MAINWINDOW");
 #endif
-                    mainWindow->renderFunc();
+                    mMainWindow->renderFunc();
                 }
             }
             
@@ -442,10 +450,8 @@ namespace sora {
 
 	void SoraCore::shutDown() {
 		//SoraTextureMap::Instance()->Destroy();
-        if(mainWindow)
-            delete mainWindow;
-        if(shaderContext)
-            delete shaderContext;
+        if(mMainWindow)
+            delete mMainWindow;
         
 		if(bHasInput) delete pInput;
 		if(pPluginManager) delete pPluginManager;
@@ -470,7 +476,7 @@ namespace sora {
 	}
 
 	ulong32 SoraCore::createWindow(SoraWindowInfoBase* info) {
-		if(mainWindow == NULL) {
+		if(mMainWindow == NULL) {
 			iScreenWidth = info->getWindowWidth();
 			iScreenHeight = info->getWindowHeight();
             
@@ -487,11 +493,11 @@ namespace sora {
 					pInput->setWindowHandle(result);
 				pMiscTool->setMainWindowHandle(result);
 				bMainWindowSet = true;
-				mainWindow = info;
-                mainWindow->setActive(true);
-                mainWindow->init();
+				mMainWindow = info;
+                mMainWindow->setActive(true);
+                mMainWindow->init();
 
-				DebugPtr->notice(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()));
+				DebugPtr->notice(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mMainWindow->getWindowName().c_str()));
                 
 				return result;
 			} else {
@@ -500,15 +506,15 @@ namespace sora {
 				return 0;
 			}
 		} else {
-            mainWindow->setActive(false);
-			mainWindow = info;
-            if(mainWindow->isActive())
-                mainWindow->init();
+            mMainWindow->setActive(false);
+			mMainWindow = info;
+            if(mMainWindow->isActive())
+                mMainWindow->init();
             else 
-                mainWindow->reinit();
-            mainWindow->setActive(true);
+                mMainWindow->reinit();
+            mMainWindow->setActive(true);
             
-			log_mssg(vamssg("Set MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mainWindow->getWindowName().c_str()),
+			log_mssg(vamssg("Set MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mMainWindow->getWindowName().c_str()),
 						  LOG_LEVEL_NOTICE);
 			
 			if(info->getWindowWidth() != iScreenWidth || info->getWindowHeight() != iScreenHeight) {
@@ -531,7 +537,7 @@ namespace sora {
 	}
 
 	void SoraCore::setWindowSize(int32 w, int32 h) {
-		assert(bInitialized == true);
+		sora_assert(bInitialized == true);
 		if(SoraConsole::Instance()->getWidth() == iScreenWidth-2) {
 			SoraConsole::Instance()->setSize(w-2.f, SoraConsole::Instance()->getHeight()>h?h:SoraConsole::Instance()->getHeight());
 		}
@@ -542,25 +548,25 @@ namespace sora {
 	}
 
 	void SoraCore::setWindowTitle(const SoraWString& title) {
-		assert(bInitialized == true);
+		sora_assert(bInitialized == true);
 
 		pRenderSystem->setWindowTitle(title);
 	}
 
 	void SoraCore::setWindowPos(int32 px, int32 py) {
-		assert(bInitialized == true);
+		sora_assert(bInitialized == true);
 
 		pRenderSystem->setWindowPos(px, py);
 	}
 
 	void SoraCore::setFullscreen(bool flag) {
-		assert(bInitialized == true);
+		sora_assert(bInitialized == true);
 
 		pRenderSystem->setFullscreen(flag);
 	}
 
 	bool SoraCore::isFullscreen() {
-		assert(bInitialized == true);
+		sora_assert(bInitialized == true);
 
 		return pRenderSystem->isFullscreen();
 	}
@@ -717,55 +723,27 @@ namespace sora {
 		return pResourceFileFinder->getResourceFileSize(file);
 	}
     
-    SoraShader* SoraCore::createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type) {
-        if(shaderContext == NULL) {
-            shaderContext = createShaderContext();
-            if(shaderContext == NULL)
-                return NULL;
-        }
-        return shaderContext->createShader(file, entry, type);
-    }
-    
-    void SoraCore::freeShader(SoraShader* shader) {
-        FreeShader(shader);
-    }
-
     SoraShaderContext* SoraCore::createShaderContext() {
-        assert(bInitialized == true);
+        sora_assert(bInitialized == true);
         return pRenderSystem->createShaderContext();
     }
     
 	void SoraCore::attachShaderContext(SoraShaderContext* context) {
-        assert(bInitialized == true);
+        sora_assert(bInitialized == true);
         pRenderSystem->attachShaderContext(context);
 		
-		prevShaderContext = context;
+		mPrevShaderContext = context;
 	}
 
 	void SoraCore::detachShaderContext() {
-        assert(bInitialized == true);
+        sora_assert(bInitialized == true);
         pRenderSystem->detachShaderContext();
         
-        if(tempShaderContext) {
-            tempShaderContext->clear();
-        }
-		
-		prevShaderContext = NULL;
+		mPrevShaderContext = NULL;
 	}
     
-    void SoraCore::attachShader(SoraShader* shader) {
-        if(!tempShaderContext) {
-            tempShaderContext = createShaderContext();
-            if(!tempShaderContext)
-                THROW_SORA_EXCEPTION(SystemException, "No shader context available :(");
-        }
-        if(tempShaderContext) {
-            tempShaderContext->attachShader(shader);
-        }
-    }
-
 	HSORATEXTURE SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		HSORATEXTURE tex;
 		if((tex = SoraTextureMap::Instance()->get(sTexturePath)) != 0) return tex;
 		ulong32 size;
@@ -783,22 +761,22 @@ namespace sora {
 	}
 
 	HSORATEXTURE SoraCore::createTextureWH(int w, int h) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		return (HSORATEXTURE)pRenderSystem->createTextureWH(w, h);
 	}
 
 	HSORATEXTURE SoraCore::createTextureFromRawData(uint32* data, int32 w, int32 h) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		return (HSORATEXTURE)pRenderSystem->createTextureFromRawData(data, w, h);
 	}
 
 	HSORATEXTURE SoraCore::createTextureFromMem(void* data, ulong32 size) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		return (HSORATEXTURE)pRenderSystem->createTextureFromMem(data, size);
 	}
 
 	uint32* SoraCore::textureLock(HSORATEXTURE ht) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		return pRenderSystem->textureLock((SoraTexture*)ht);
 	}
 
@@ -808,7 +786,7 @@ namespace sora {
 	}
 	
 	void SoraCore::releaseTexture(HSORATEXTURE pTexture) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
         if(!pTexture) return;
 		SoraTextureMap::Instance()->del(pTexture);
         pRenderSystem->releaseTexture((SoraTexture*)pTexture);
@@ -840,12 +818,12 @@ namespace sora {
 	}
 
 	ulong32 SoraCore::getVideoDeviceHandle() {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		return pRenderSystem->getVideoDeviceHandle();
 	}
 
 	SoraSprite* SoraCore::createSprite(const SoraWString& sPath) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		HSORATEXTURE tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
 			SoraSprite* pspr = new SoraSprite(tex);
@@ -864,61 +842,61 @@ namespace sora {
 	}
 	
 	void SoraCore::renderQuad(SoraQuad& quad) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		if(bZBufferArea) {
-			SoraZSorter::renderQuad(quad, prevShaderContext);
+			SoraZSorter::renderQuad(quad, mPrevShaderContext);
 		} else 
 			pRenderSystem->renderQuad(quad);
 	}
 
 	void SoraCore::renderTriple(SoraTriple& trip) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		
 		if(bZBufferArea) {
-			SoraZSorter::renderTriple(trip, prevShaderContext);
+			SoraZSorter::renderTriple(trip, mPrevShaderContext);
 		} else 
 			pRenderSystem->renderTriple(trip);
 	}
 	
 	void SoraCore::renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
-		assert(bInitialized == true);
+		sora_assert(bInitialized == true);
 		if(bZBufferArea) {
-			SoraZSorter::renderWithVertices(tex, blendMode, vertices, vsize, mode, prevShaderContext);
+			SoraZSorter::renderWithVertices(tex, blendMode, vertices, vsize, mode, mPrevShaderContext);
 		} else 	
 			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
 	}
 
 	void SoraCore::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		pRenderSystem->renderRect(x1, y1, x2, y2, fWidth, color, z);
 	}
 	
 	void SoraCore::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		pRenderSystem->renderBox(x1, y1, x2, y2, color, z);
 	}
 
 	void SoraCore::setClipping(int32 x, int32 y, int32 w, int32 h) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		pRenderSystem->setClipping(x, y, w, h);
         
         g_CurrentClipping.set(x, y, w, h);
 	}
 
 	void SoraCore::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		pRenderSystem->setTransform(x, y, dx, dy, rot, hscale, vscale);
         
         g_CurrentTransform.set(x, y, dx, dy, rot, hscale, vscale);
 	}
     
     void SoraCore::setViewPoint(float32 x, float32 y, float32 z) {
-        assert(bInitialized==true);
+        sora_assert(bInitialized==true);
         pRenderSystem->setViewPoint(x, y, z);
     }
 
 	void SoraCore::beginScene(uint32 c, ulong32 t, bool clear) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
         if(mScreenBuffer && bEnableScreenBuffer) {
             if(t == 0) {
                 bMainScene = true;
@@ -938,7 +916,7 @@ namespace sora {
         }
 	}
 	void SoraCore::endScene() {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		if(!bMainScene) {
             pRenderSystem->endScene();
             if(mScreenBuffer && bEnableScreenBuffer && bScreenBufferAttached) 
@@ -947,17 +925,17 @@ namespace sora {
 	}
 
 	ulong32 SoraCore::createTarget(int width, int height, bool zbuffer) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		return pRenderSystem->createTarget(width==0?iScreenWidth:width, height==0?iScreenHeight:height, zbuffer);
 	}
 
 	void SoraCore::freeTarget(ulong32 t) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		pRenderSystem->freeTarget(t);
 	}
 
 	ulong32 SoraCore::getTargetTexture(ulong32 t) {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		return pRenderSystem->getTargetTexture(t);
 	}
 
@@ -1093,7 +1071,7 @@ namespace sora {
 	
 	SoraWString SoraCore::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
 		if(!pMiscTool)
-			return L"\0";
+			return SoraWString();
 		
 		return pMiscTool->fileSaveDialog(filter, defaultPath, defaultExt);
 	}
@@ -1149,7 +1127,7 @@ namespace sora {
 	}
 
 	SoraWString SoraCore::videoInfo() {
-		assert(bInitialized==true);
+		sora_assert(bInitialized==true);
 		return pRenderSystem->videoInfo();
 	}
 
@@ -1279,7 +1257,7 @@ namespace sora {
     }
     
     void SoraCore::snapshot(const SoraString& path) {
-        assert(bInitialized == true);
+        sora_assert(bInitialized == true);
         return pRenderSystem->snapshot(path);
     }
 
@@ -1322,12 +1300,12 @@ namespace sora {
 	}
 
 	void SoraCore::setIcon(const SoraString& icon) {
-		assert(bInitialized);
+		sora_assert(bInitialized);
 		pRenderSystem->setIcon(icon);
 	}
 
 	void SoraCore::setCursor(const SoraString& cursor) {
-		assert(bInitialized);
+		sora_assert(bInitialized);
 		pRenderSystem->setCursor(cursor);
 	}
 	

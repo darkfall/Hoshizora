@@ -80,8 +80,8 @@ namespace sora {
     SORA_EXCEPTION_IMPL(UnhandledException,             LogicException,     "Unhandled exception")
     
     SORA_EXCEPTION_IMPL(RuntimeException,               SoraException,      "Runtime exception")
-    SORA_EXCEPTION_IMPL(NotFoundException,              RuntimeException,   "Not found")
-    SORA_EXCEPTION_IMPL(ExistsException,                RuntimeException,   "Exists")
+    SORA_EXCEPTION_IMPL(NotFoundException,              RuntimeException,   "Item Not found")
+    SORA_EXCEPTION_IMPL(ExistsException,                RuntimeException,   "Item Exists")
     SORA_EXCEPTION_IMPL(TimeoutException,               RuntimeException,   "Timeout")
     SORA_EXCEPTION_IMPL(SystemException,                RuntimeException,   "System exception")
     SORA_EXCEPTION_IMPL(RegularExpressionException,     RuntimeException,   "Error in regular expression")

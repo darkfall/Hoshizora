@@ -13,6 +13,7 @@
 #include "../SoraException.h"
 #include "../common.h"
 #include "../uncopyable.h"
+#include "../Debug/SoraInternalLogger.h"
 
 #include <map>
 
@@ -61,7 +62,7 @@ namespace sora {
             if(itFactory == mFactory.end()) {
                 mFactory[name] = instantiator;
             } else 
-                THROW_SORA_EXCEPTION(ExistsException, "Class already exists");
+                THROW_SORA_EXCEPTION(ExistsException, vamssg("Class %s already exists", name.c_str()));
         }
         
         void unregisterClass(const std::string& name) {

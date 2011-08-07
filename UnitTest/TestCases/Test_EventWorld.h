@@ -93,6 +93,7 @@ namespace SoraUnit {
                                                              __LINE__,
                                                              __FILE__));
             }
+            mResult += result->toString();
             
         }
         int countTestCases() {

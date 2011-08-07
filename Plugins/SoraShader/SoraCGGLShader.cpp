@@ -35,7 +35,7 @@ namespace sora {
             }
 		}
 		
-		if(!shader || shader->getType() == 0) {
+		if(!shader || shader->getError() != ShaderNoError) {
 			if(shader) delete shader;
 			return NULL;
 		}
@@ -59,14 +59,13 @@ namespace sora {
 				log_mssg(vamssg("SoraShaderContext: %s", cgGetLastListing(context)),
 							  LOG_LEVEL_ERROR);
 			}			
-			setType(0);
+			setError(1);
 		}
 	}
 
 	SoraCGGLShader::SoraCGGLShader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile) {
-		setType(type);
+		mType = type;
 		this->context = context;
-        
         this->profile = profile;
 		
 		ulong32 size;
@@ -83,7 +82,7 @@ namespace sora {
 			checkError(context);
 			cgGLLoadProgram(program);
 		} else {
-			setType(0);
+			setError(1);
 		}
 
 		textureParam = 0;

@@ -7,7 +7,7 @@
 #include "hgerect.h"
 #include "SoraImageEffect.h"
 #include "SoraObject.h"
-#include "SoraShader.h"
+#include "SoraShaderEnabled.h"
 
 #include <list>
 
@@ -53,7 +53,7 @@ namespace sora {
         SoraTriple(): tex(NULL) {}
 	};
 
-	class SORA_API SoraSprite: public SoraObject {
+	class SORA_API SoraSprite: public SoraShaderEnabledObject {
 	public:
         SoraSprite(HSORATEXTURE tex);
         SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 width, float32 height);
@@ -112,12 +112,6 @@ namespace sora {
 		void stopEffect(SoraImageEffect* effect);
 		void clearEffects();
 		bool hasEffect() const;
-        
-        void        attachShader(SoraShader*);
-        void        detachShader(SoraShader*);
-        SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);
-        bool        hasShader() const;
-        void        clearShader();
 		
 	protected:
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
@@ -142,9 +136,7 @@ namespace sora {
 
 		SoraCore* mSora;
 		SoraQuad mQuad;
-        
-        SoraShaderContext* mShaderContext;
-	};
+    };
 
 } // namespace sora
 

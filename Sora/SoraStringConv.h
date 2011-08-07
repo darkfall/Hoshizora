@@ -47,7 +47,13 @@ namespace sora {
 	SORA_API std::wstring s2wsfast(const std::string& s);	
 
 	SORA_API void deliStr(std::vector<std::string>& c, const std::string& str, char deli);
-	//}
+    
+    class SoraStringConverter {
+    public:
+        static std::string wstringToString(const std::wstring& ws);
+        static std::wstring stringToWString(const std::string& s);
+    };
+
 
 } // namespace sora
 

@@ -88,18 +88,18 @@ void mainWindow::init() {
     
     mCamera = new sora::SoraCamera(100, 100.f, 500.f, 500.f);
   //  mCamera->zoomTo(2.f, 2.f, 20.f);
-    mScene1->setCamera(mCamera);
+//    mScene1->setCamera(mCamera);
     
     
     
     mScene1->add(mScene2);
     sora::SoraSprite* bg = sora::SORA->createSprite(L"background.png");
+
     mScene1->add(bg, 0);
     
     mScene2->add(new sora::SoraExternalRenderObject(sora::Delegate(myRenderFunc)), 1);
     spr = sora::SORA->createSprite(L"geotest.png");
     spr->setCenter(100, 100);
-    
     
     //spr->setPosition(300, 300);
     mScene2->add(spr);

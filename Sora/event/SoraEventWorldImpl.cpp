@@ -54,7 +54,7 @@ namespace sora {
     }
     
     void SoraEventWorldImpl::shutdown() {
-        float32 dt = SoraCore::Instance()->getAbsoluteDelta();
+        float32 dt = 0.f;
         while(!(mCurrEvtList->empty() && mNextEvtList->empty())) {
             update(dt);
         }

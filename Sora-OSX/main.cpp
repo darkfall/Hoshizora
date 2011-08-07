@@ -19,14 +19,11 @@
 
 #include "mainWindow.h"
 
-int main(int argc, char* argv[]) {
+#include "SoraTimestamp.h"
+
+int main(int argc, char* argv[]) {    
+
 	sora::SoraCore* sora = sora::SoraCore::Instance();
-    
-    SoraUnit::UnitTest_EventWorld* evtTest = new SoraUnit::UnitTest_EventWorld;
-    SoraUnit::TestResult* result = new SoraUnit::TestResult;
-    
-    SET_AND_RUN_TEST(evtTest, result);
-    
     
 	sora->registerRenderSystem(new sora::SoraOGLRenderer);
 	sora->registerResourceManager(new sora::SoraZipResourceManager);

@@ -14,8 +14,8 @@
 namespace sora {
 
 	SoraShader::SoraShader() {
-		mType = 0;
-        bInternal = true;
+		mType = UNKNOWN_SHADEr;
+        mErrorCode = ShaderNoError;
         mShaderContext = NULL;
 	}
 	
@@ -75,47 +75,32 @@ namespace sora {
         return mType;
     }
     
-    void SoraShader::setType(int32 t) { 
-        mType = t;
-    };
-    
-    void SoraShader::setInternal(bool flag) { 
-        bInternal = flag;
-    }
-    
     SoraShaderContext* SoraShader::getShaderContext() const {
         return mShaderContext;
     }
+    
+    void SoraShader::setError(int32 error) {
+        mErrorCode = error;
+    }
+    
+    int32 SoraShader::getError() const {
+        return mErrorCode;
+    }
 	
 	SoraShaderContext::SoraShaderContext() {
-		err = 0;
 	}
 	
 	SoraShaderContext::~SoraShaderContext() {
 		clear();
 	}
 	
-	std::list<SoraShader*>::iterator SoraShaderContext::getShaderIterator(SoraShader* shader) {
-		ShaderList::iterator itShader = mShaders.begin();
-		while(itShader != mShaders.end()) {
-			if(shader == (*itShader)) {
-				return itShader;
-			}
-			++itShader;
-		}
-		return mShaders.end();
-	}
-	    
     SoraShader* SoraShaderContext::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
-        if(getError() != 0) return NULL;
-		
-		SoraShader* shader = createShader(file, entry, type);
-        if(shader) {
-            shader->setName(GetUniqueStringId(file));
-            shader->bInternal = true;
-            attachShader(shader);
-            return shader;
-        }
+        if(type == FRAGMENT_SHADER)
+            return attachFragmentShader(file, entry);
+        else if(type == VERTEX_SHADER)
+            return attachVertexShader(file, entry);
+        else 
+            THROW_SORA_EXCEPTION(RuntimeException, "Unknown shader type");
         return NULL;
     }
 	
@@ -124,85 +109,109 @@ namespace sora {
 	}
 
 	bool SoraShaderContext::attachShaderList() {
-		if(getError() != 0) return false;
-
-		ShaderList::const_iterator itShader = mShaders.begin();
-		int32 er = 1;
-		
-		while(itShader != mShaders.end()) {
-			if((*itShader) != NULL) {
-				(*itShader)->attach();
-				if((*itShader)->mType == 0) er = 0;
-			}
-			++itShader;
-		}
-		return er==1?true:false;
+        bool result = true;
+        if(mVertexShader.get())
+            result = mVertexShader->attach();
+        if(mFragmentShader.get())
+            result = mFragmentShader->attach();
+        return result;
 	}
+    
+    bool SoraShaderContext::detachShaderList() {
+        bool result = true;
+        if(mVertexShader.get())
+            result = mVertexShader->detach();
+        if(mFragmentShader.get())
+            result = mFragmentShader->detach();
+        return result;
+    }
 	
 	void SoraShaderContext::detachFromRender() {
 		SoraCore::Instance()->detachShaderContext();
 	}
     
-	bool SoraShaderContext::detachShaderList() {
-		if(err != 0) return false;
-
-		ShaderList::iterator itShader = mShaders.begin();
-		int32 er = 1;
-		
-		while(itShader != mShaders.end()) {
-			if((*itShader) != NULL) {
-				(*itShader)->detach();
-				if((*itShader)->mType == 0) er = 1;
-			}
-			++itShader;
-		}	
-		return er==1?true:false;
-	}
-	
-	void SoraShaderContext::detachShader(SoraShader* shader) {
-		if(err != 0) return;
-		
-		ShaderList::iterator itShader = getShaderIterator(shader);
-		if(itShader != mShaders.end()) {
-            if((*itShader)->bInternal) {
-                delete (*itShader);
-                (*itShader) = 0;
-            }
-            mShaders.erase(itShader);
-		}
-	}
-	
-    const SoraShaderContext::ShaderList& SoraShaderContext::getShaders() const { 
-        return mShaders;
+	void SoraShaderContext::detachFragmentShader() {
+        mFragmentShader.reset();
     }
     
-    void SoraShaderContext::attachShader(SoraShader* shader) { 
-        assert(shader != NULL); 
-        mShaders.push_back(shader);
+    void SoraShaderContext::detachVertexShader() {
+        mVertexShader.reset();
     }
     
 	void SoraShaderContext::clear() {
-		ShaderList::iterator itShader = mShaders.begin();
-		while(itShader != mShaders.end()) {
-			if((*itShader) && (*itShader)->bInternal) {
-				delete (*itShader);
-				(*itShader) = 0;
-			}
-            ++itShader;
-		}
-		mShaders.clear();
+		mFragmentShader.reset();
+        mVertexShader.reset();
 	}
     
-    void SoraShaderContext::setError(int32 error) { 
-        err = error;
+    SoraShader* SoraShaderContext::attachFragmentShader(const SoraWString& file, const SoraString& entry) {
+        SoraShader* shader = createShader(file, entry, FRAGMENT_SHADER);
+        if(!shader)
+            THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
+        if(shader->getError() != ShaderNoError) {
+            shader->release();
+            THROW_SORA_EXCEPTION(RuntimeException, vamssg("Shader returned with error code %d", shader->getError()));
+            return NULL;
+        }
+        mFragmentShader.assign(shader);
+        return shader;
     }
     
-    int32 SoraShaderContext::getError() const { 
-        return err;
+    SoraShader* SoraShaderContext::attachVertexShader(const SoraWString& file, const SoraString& entry) {
+        SoraShader* shader = createShader(file, entry, VERTEX_SHADER);
+        if(!shader)
+            THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
+        if(shader->getError() != ShaderNoError) {
+            shader->release();
+            THROW_SORA_EXCEPTION(RuntimeException, vamssg("Shader returned with error code %d", shader->getError()));
+            return NULL;
+        }
+        mVertexShader.assign(shader);
+        return shader;
     }
     
-    uint32 SoraShaderContext::size() const { 
-        return mShaders.size();
+    SoraShader* SoraShaderContext::getFragmentShader() const {
+        return mFragmentShader.get();
+    }
+    
+    SoraShader* SoraShaderContext::getVertexShader() const {
+        return mVertexShader.get();
     }
 	
+    void SoraShaderContext::attachShader(SoraShader* shader) {
+        sora_assert(shader);
+        if(shader->getType() == FRAGMENT_SHADER)
+            attachFragmentShader(shader);
+        else if(shader->getType() == VERTEX_SHADER)
+            attachVertexShader(shader);
+        else 
+            THROW_SORA_EXCEPTION(RuntimeException, "Unknown shader type");
+    }
+    
+    void SoraShaderContext::attachFragmentShader(SoraShader* shader) {
+        sora_assert(shader);
+        
+        shader->duplicate();
+        mFragmentShader.assign(shader);
+    }
+    
+    void SoraShaderContext::attachVertexShader(SoraShader* shader) {
+        sora_assert(shader);
+        
+        shader->duplicate();
+        mVertexShader.assign(shader);
+    }
+    
+    void SoraShaderContext::detachShader(SoraShader* shader) {
+        sora_assert(shader);
+        
+        if(shader->getType() == FRAGMENT_SHADER && shader == mFragmentShader.get())
+            detachFragmentShader();
+        else if(shader->getType() == VERTEX_SHADER && shader == mVertexShader.get())
+            detachVertexShader();
+    }
+    
+    bool SoraShaderContext::isAvailable() {
+        return (mFragmentShader.get() != NULL || mVertexShader.get() != NULL);
+    }
+    
 } // namespace sora

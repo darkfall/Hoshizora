@@ -49,17 +49,17 @@ namespace sora {
         
         template<class C>
         struct ReleasePolicy {
-        public:
             static void release(C* obj) {
-                delete obj;
+                if(obj)
+                    delete obj;
             }
         };
         
         template<class C>
         struct ReleaseArrayPolicy {
-        public:
             static void release(C* obj) {
-                delete []obj;
+                if(obj)
+                    delete []obj;
             }
         };
     }
@@ -117,7 +117,7 @@ namespace sora {
             return *this;
         }
       
-        void reset(T* ptr) {
+        void reset(T* ptr=NULL) {
             assign(ptr);
         }
 
@@ -155,7 +155,7 @@ namespace sora {
         T* get() {
             return ptr;
         }
-        const T* get() const {
+        T* get() const {
             return ptr;
         }
         

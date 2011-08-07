@@ -14,17 +14,22 @@
 #include "SoraPlatform.h"
 #include "AutoContainer.h"
 #include "SoraNamedObject.h"
+#include "SoraAutoPtr.h"
+#include "RefCounted.h"
 
 #include <list>
 
 namespace sora {
 	
 	typedef enum {
+        UNKNOWN_SHADEr = 0,
 		/* vertex shader */
 		VERTEX_SHADER = 1,
 		/* fragment shader */
 		FRAGMENT_SHADER = 2,
-	} SORA_SHADER_TYPE;
+	};
+    
+    const int ShaderNoError = 0;
     
     class SoraShaderContext;
 	
@@ -32,7 +37,7 @@ namespace sora {
 		Class to hold a shader
 		Automatically created and managed by SoraShaderContext
 	*/
-	class SORA_API SoraShader: public SoraNamedObject {
+	class SORA_API SoraShader: public SoraRefCounted {
 		friend class SoraShaderContext;
 		
 	public:
@@ -81,14 +86,12 @@ namespace sora {
 			See SORA_SHADER_TYPE
 		 */
 		int32 getType() const;
-        void setType(int32 t);
-		
-		void setInternal(bool flag);
-        
         SoraShaderContext* getShaderContext() const;
+        
+        void setError(int32 error);
+        int32 getError() const;
 
 	protected:
-        bool bInternal;
 		/* 
 		 Attach the shader to render
 		 Applies to the rendering after attach
@@ -101,8 +104,24 @@ namespace sora {
 		virtual bool detach() = 0;
         
         uint32 mType;
+        int32 mErrorCode;
         SoraShaderContext* mShaderContext;
 	};
+    
+    template<class T>
+    struct ShaderReleasePolicy {
+        static void release(T* obj) {
+            
+        }
+    };
+    
+    template<>
+    struct ShaderReleasePolicy<SoraShader> {
+        static void release(SoraShader* shader) {
+            if(shader)
+                shader->release();
+        }
+    };
 	
 	class SORA_API SoraShaderContext {
 	public:
@@ -117,7 +136,7 @@ namespace sora {
          * create a shader from context, not attach
          * @param file, the path of the shader file to attach
          * @param entry, entry function of the shader
-         * @param type, the type of the shader, see SORA_SHADER_TYPE
+         * @param type, the type of the shader
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
         virtual SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type) = 0;
@@ -126,38 +145,44 @@ namespace sora {
          * attach a shader to context
          * @param file, the path of the shader file to attach
          * @param entry, entry function of the shader
-         * @param type, the type of the shader, see SORA_SHADER_TYPE
+         * @param type, the type of the shader
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
         SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
-                
+        
         /**
-         *   get shader list
+         * Create and attach a fragment shader
+         * Would through a RuntimeException in case there is a error
          **/
-        const ShaderList& getShaders() const;
+        SoraShader* attachFragmentShader(const SoraWString& file, const SoraString& entry);
+        /**
+         * Create and attach a vertex shader
+         * Would through a RuntimeException in case there is a error
+         **/
+        SoraShader* attachVertexShader(const SoraWString& file, const SoraString& entry);
         
         void attachShader(SoraShader* shader);
-		/**
-		 *	detach a shader from context
-		 *	@param shader, the handle to the shader, the retval of attachShader
-		 **/
-		void detachShader(SoraShader* shader);
+        void attachFragmentShader(SoraShader* shader);
+        void attachVertexShader(SoraShader* shader);
+        
+        SoraShader* getFragmentShader() const;
+        SoraShader* getVertexShader() const;
+                
+		void detachFragmentShader();
+        void detachVertexShader();
+        
+        void detachShader(SoraShader* shader);
+        
+        bool isAvailable();
 
 		/**
          * attach all shaders in context to render
-         * @retval, succeed or not
 		 */
 		void attachToRender();
 		/**
          * detach all shaders in context from render
-         * @retval, succeed or not
 		 */
 		void detachFromRender();
-        
-        void	setError(int32 error);
-        int32	getError() const;
-        
-        uint32 size() const;
         
 		/*
 		called by render system
@@ -166,13 +191,13 @@ namespace sora {
 		virtual bool attachShaderList();
 		virtual bool detachShaderList();
 		
-	protected:
-		inline ShaderList::iterator getShaderIterator(SoraShader* shader);
-		
-		ShaderList mShaders;
-		
-		int32 err;
-	};
+	protected:		        
+                
+        typedef SoraAutoPtr<SoraShader, autoptr::RefCounter, ShaderReleasePolicy<SoraShader> > ShaderPtr;
+        
+        ShaderPtr mVertexShader;
+        ShaderPtr mFragmentShader;
+    };
     
     static void FreeShader(SoraShader* shader) {
         SoraShaderContext* context = shader->getShaderContext();

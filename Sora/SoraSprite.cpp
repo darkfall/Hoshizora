@@ -6,18 +6,17 @@
 namespace sora {
     
     SoraSprite::SoraSprite()  { 
-        mShaderContext = NULL; 
         mTexture=0; 
         _initDefaults();
     }
 
-    SoraSprite::SoraSprite(HSORATEXTURE tex): mShaderContext(NULL) {
+    SoraSprite::SoraSprite(HSORATEXTURE tex) {
         SoraTexture* ptex = tex==0?NULL:(SoraTexture*)tex;
         _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mTextureWidth:1.f, ptex!=NULL?ptex->mTextureHeight:1.f);
 		_initDefaults();
     }
     
-    SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h): mShaderContext(NULL) {
+    SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h) {
         if(w == 0.f)
             w = (float32)SORA->getTextureWidth(tex);
         if(h == 0.f)
@@ -86,8 +85,6 @@ namespace sora {
 		bVFlip = bHFlip = false;
 		mRotation = mRotationZ = 0.f;
 		mCenterX = mCenterY = 0.f;
-		if(mShaderContext)
-			clearShader();
 		if(hasEffect())
 			clearEffects();
 		setPosition(0.f, 0.f);
@@ -177,11 +174,9 @@ namespace sora {
 			}
 		}
 		
-        if(hasShader()) 
-            mSora->attachShaderContext(mShaderContext);
+        attachShaderToRender();
 		mSora->renderQuad(mQuad);
-        if(hasShader())
-            mSora->detachShaderContext();
+        detachShaderFromRender();
 	}
 
 	void SoraSprite::render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4) {
@@ -190,19 +185,15 @@ namespace sora {
 		mQuad.v[2].x = x3; mQuad.v[2].y = y3;
 		mQuad.v[3].x = x4; mQuad.v[3].y = y4;
 		
-        if(hasShader()) 
-            mSora->attachShaderContext(mShaderContext);
+        attachShaderToRender();
 		mSora->renderQuad(mQuad);
-        if(hasShader()) 
-            mSora->detachShaderContext();
+        detachShaderFromRender();
 	}
 
 	void SoraSprite::renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode) {
-		if(hasShader()) 
-            mSora->attachShaderContext(mShaderContext);
+		attachShaderToRender();
 		mSora->renderWithVertices((HSORATEXTURE)mQuad.tex, mQuad.blend, vertices, size, mode);
-		if(hasShader()) 
-            mSora->detachShaderContext();
+		detachShaderFromRender();
 	}
 	
 	void SoraSprite::setColor(uint32 c, int32 i) {
@@ -400,50 +391,12 @@ namespace sora {
 		return 0;
 	}
     
-    SoraShader* SoraSprite::attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type) {
-        if(!mShaderContext) {
-            mShaderContext = mSora->createShaderContext();
-            if(!mShaderContext)
-                return NULL;
-        }
-        SoraShader* shader = mShaderContext->attachShader(shaderPath, entry, type);
-	    return shader;
-    }
-    
-    void SoraSprite::attachShader(SoraShader* shader) {
-        if(!mShaderContext) {
-            mShaderContext = mSora->createShaderContext();
-            if(!mShaderContext)
-                return;
-        }
-        mShaderContext->attachShader(shader);
-		shader->setInternal(false);
-    }
-    
-    void SoraSprite::detachShader(SoraShader* shader) {
-        if(mShaderContext) {
-            mShaderContext->detachShader(shader);
-        }
-    }
-    
-    bool SoraSprite::hasShader() const {
-        return (mShaderContext != NULL && mShaderContext->size() != 0);
-    }
-	
-	bool SoraSprite::hasEffect() const {
-		return !vEffects.empty();
-	}
-    
-    void SoraSprite::clearShader() {
-        if(mShaderContext) {
-            delete mShaderContext;
-            mShaderContext = 0;
-        }
-    }
-    
     HSORATEXTURE SoraSprite::getTexture() const {
         return (HSORATEXTURE)mTexture;
     }
     
+    bool SoraSprite::hasEffect() const {
+        return !vEffects.empty();
+    }
 	
 } // namespace sora

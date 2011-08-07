@@ -12,6 +12,7 @@
 		8801A8B813ED9EF100B9A779 /* SoraEventWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8B113ED9EF100B9A779 /* SoraEventWorld.cpp */; };
 		8801A8B913ED9EF100B9A779 /* SoraEventWorldImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8B313ED9EF100B9A779 /* SoraEventWorldImpl.cpp */; };
 		8801A8BC13ED9F5600B9A779 /* SoraEventManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8BA13ED9F5500B9A779 /* SoraEventManager.cpp */; };
+		8801A8BF13EE800300B9A779 /* SoraShaderEnabled.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8BE13EE800100B9A779 /* SoraShaderEnabled.cpp */; };
 		8802D4BF135FA8C2001FD2D8 /* SoraFMODSoundFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8802D4BA135FA8C2001FD2D8 /* SoraFMODSoundFile.cpp */; };
 		8802D4C0135FA8C2001FD2D8 /* SoraFMODSoundSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8802D4BC135FA8C2001FD2D8 /* SoraFMODSoundSystem.cpp */; };
 		881182D312C8A60500B3A316 /* osxfilewrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 881182D212C8A60500B3A316 /* osxfilewrapper.mm */; };
@@ -224,6 +225,8 @@
 		8801A8B413ED9EF100B9A779 /* SoraEventWorldImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraEventWorldImpl.h; sourceTree = "<group>"; };
 		8801A8BA13ED9F5500B9A779 /* SoraEventManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraEventManager.cpp; sourceTree = "<group>"; };
 		8801A8BB13ED9F5500B9A779 /* SoraEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraEventManager.h; sourceTree = "<group>"; };
+		8801A8BD13EE674700B9A779 /* SoraShaderEnabled.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraShaderEnabled.h; sourceTree = "<group>"; };
+		8801A8BE13EE800100B9A779 /* SoraShaderEnabled.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraShaderEnabled.cpp; sourceTree = "<group>"; };
 		8802D4BA135FA8C2001FD2D8 /* SoraFMODSoundFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraFMODSoundFile.cpp; sourceTree = "<group>"; };
 		8802D4BB135FA8C2001FD2D8 /* SoraFMODSoundFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFMODSoundFile.h; sourceTree = "<group>"; };
 		8802D4BC135FA8C2001FD2D8 /* SoraFMODSoundSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraFMODSoundSystem.cpp; sourceTree = "<group>"; };
@@ -1467,6 +1470,10 @@
 				88C367DA13B7D0D800990FEF /* SoraFileChangeEvent.cpp */,
 				88240CFA12C5811B009498F7 /* SoraShader.h */,
 				88240CF912C5811B009498F7 /* SoraShader.cpp */,
+				887C59BD13CF1B7D0009E508 /* SoraShaderManager.h */,
+				887C59BE13CF1C690009E508 /* SoraShaderManager.cpp */,
+				8801A8BD13EE674700B9A779 /* SoraShaderEnabled.h */,
+				8801A8BE13EE800100B9A779 /* SoraShaderEnabled.cpp */,
 				88D87D3312A09A66007D6865 /* SoraException.h */,
 				882E19F813E7B1C1005F0109 /* SoraException.cpp */,
 				88D10AB213C30BD900E0002A /* WindowsStackTrace.h */,
@@ -1579,8 +1586,6 @@
 				883767F613BD0E5700DC2543 /* SoraModifier.h */,
 				88B6F80113CB28EA005F2E0D /* SoraModifierAdapter.h */,
 				88B6F80213CB2941005F2E0D /* SoraModifierAdapter.cpp */,
-				887C59BD13CF1B7D0009E508 /* SoraShaderManager.h */,
-				887C59BE13CF1C690009E508 /* SoraShaderManager.cpp */,
 				887C59C613CF2AB40009E508 /* SoraPrefab.h */,
 				889AB55713E59DA5003FDF91 /* SoraSimpleFSM.h */,
 				889AB55813E5A82C003FDF91 /* SoraSimpleFSM.cpp */,
@@ -1900,6 +1905,7 @@
 				8801A8B813ED9EF100B9A779 /* SoraEventWorld.cpp in Sources */,
 				8801A8B913ED9EF100B9A779 /* SoraEventWorldImpl.cpp in Sources */,
 				8801A8BC13ED9F5600B9A779 /* SoraEventManager.cpp in Sources */,
+				8801A8BF13EE800300B9A779 /* SoraShaderEnabled.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

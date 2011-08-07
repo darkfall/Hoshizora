@@ -12,19 +12,10 @@
 #include "SoraCore.h"
 
 namespace sora {
-    SoraShaderManager* SoraShaderManager::mInstance = NULL;
-
+    
 	SoraShaderManager* SoraShaderManager::Instance() {
-		if(!mInstance)
-			mInstance = new SoraShaderManager;
-		return mInstance;
-	}
-
-	void SoraShaderManager::Destroy() {
-		if(mInstance) {
-			delete mInstance;
-			mInstance = NULL;
-		}
+		static SoraShaderManager manager;
+        return &manager;
 	}
 
     SoraShaderManager::SoraShaderManager() {
@@ -35,6 +26,13 @@ namespace sora {
         
     }
     
+    bool SoraShaderManager::init() {
+        mShaderContext = SoraCore::Instance()->createShaderContext();
+        if(!mShaderContext)
+            return false;
+        return true;
+    }
+    
     SoraShader* SoraShaderManager::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
         stringId sid = GetUniqueStringId(file);
         ShaderMap::iterator itShader = mShaders.find(sid);
@@ -42,7 +40,7 @@ namespace sora {
             return itShader->second;
         }
         
-        SoraShader* shader = SoraCore::Instance()->createShader(file, entry, (SORA_SHADER_TYPE)type);
+        SoraShader* shader = mShaderContext->createShader(file, entry, type);
         if(!shader) {
             THROW_SORA_EXCEPTION(RuntimeException, vamssg("Error creating shader %s", ws2s(file).c_str()));
             return NULL;
@@ -53,8 +51,7 @@ namespace sora {
     }
     
     SoraShader* SoraShaderManager::createUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
-        
-        SoraShader* shader = SoraCore::Instance()->createShader(file, entry, (SORA_SHADER_TYPE)type);
+        SoraShader* shader = mShaderContext->createShader(file, entry, type);
         if(!shader) {
             THROW_SORA_EXCEPTION(RuntimeException, vamssg("Error creating shader %s", ws2s(file).c_str()));
             return NULL;
