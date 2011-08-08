@@ -25,7 +25,7 @@ parse for gcn::ImageButton
 #define XML_GUI_H
 
 #include "guichan.hpp"
-#include "tinyXML/tinyxml.h"
+#include "ticpp/tinyxml.h"
 
 #include <map>
 
@@ -50,7 +50,7 @@ public:
 	//@return widget by name
 	gcn::Widget *getWidget(const std::string &name);
 
-    static void parseResponser(gcn::Widget* widget, const std::string& responser, const std::string* type);
+    static void parseResponser(gcn::Widget* widget, const std::string& responser, const char* type);
 
 	//!parse default parameters for all widgets
 	//@param element the xml element

@@ -39,7 +39,7 @@ bool XmlGui::parse(const char* str, ulong32 size) {
 
 	if ( result )
 	{
-		throw GCN_EXCEPTION(("Error parsing xml file."+doc->ErrorDesc()).c_str());
+		throw GCN_EXCEPTION((std::string("Error parsing xml file.")+doc->ErrorDesc()).c_str());
 	}
 	node = doc->FirstChild();
 
@@ -141,7 +141,7 @@ int parseRespondType(const char* respondStr) {
     return irtype;
 }
 
-void XmlGui::parseResponser(gcn::Widget* widget, const std::string& arg, const std::string* type) {
+void XmlGui::parseResponser(gcn::Widget* widget, const std::string& arg, const char* type) {
     if(arg[0] == '@') {
         size_t ap = arg.find("=");
         if(ap != std::string::npos) {
@@ -149,9 +149,9 @@ void XmlGui::parseResponser(gcn::Widget* widget, const std::string& arg, const s
             
             sora::SoraGUIResponserExtern* pResponser = sora::SoraGUIResponserMap::Instance()->getExternalResponser( srcType );
             if(pResponser) {
-                const std::string* respondtypestr = type;
+                const char* respondtypestr = type;
                 if(respondtypestr) {
-                    int irtype = parseRespondType(respondtypestr->c_str());
+                    int irtype = parseRespondType(respondtypestr);
                     sora::SoraGUI::Instance()->registerExternalGUIResponser(widget, 
                                                                             pResponser, 
                                                                             widget->getId(),
@@ -169,9 +169,9 @@ void XmlGui::parseResponser(gcn::Widget* widget, const std::string& arg, const s
     } else {
         sora::SoraGUIResponser* pResponser = sora::SoraGUIResponserMap::Instance()->getResponser( arg );
         if(pResponser) {
-            const std::string* respondtypestr = type;
+            const char* respondtypestr = type;
             if(respondtypestr) {
-                int irtype = parseRespondType(respondtypestr->c_str());
+                int irtype = parseRespondType(respondtypestr);
                 sora::SoraGUI::Instance()->registerGUIResponser(widget, 
                                                                 pResponser, 
                                                                 widget->getId(),
@@ -193,104 +193,104 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 	
 	if(element->Attribute("x"))
 	{
-		int x = atoi(element->Attribute("x")->c_str());
+		int x = atoi(element->Attribute("x"));
 		widget->setX(x);
 	}
 
 
 	if(element->Attribute("y"))
 	{
-		int y = atoi(element->Attribute("y")->c_str());
+		int y = atoi(element->Attribute("y"));
 		widget->setY(y);
 	}
 
 
 	if(element->Attribute("width"))
 	{
-		int w = atoi(element->Attribute("width")->c_str());
+		int w = atoi(element->Attribute("width"));
 		widget->setWidth(w);
 	}
 
 	if(element->Attribute("height"))
 	{
-		int h = atoi(element->Attribute("height")->c_str());
+		int h = atoi(element->Attribute("height"));
 		widget->setHeight(h);
 	}
 
 	if(element->Attribute("basecolor"))
 	{
 		unsigned int color;
-		sscanf(element->Attribute("basecolor")->c_str(),"%x",&color);
+		sscanf(element->Attribute("basecolor"),"%x",&color);
 		widget->setBaseColor(gcn::Color(color));
 	}
 
 	if(element->Attribute("foregroundcolor"))
 	{
 		unsigned int color;
-		sscanf(element->Attribute("foregroundcolor")->c_str(),"%x",&color);
+		sscanf(element->Attribute("foregroundcolor"),"%x",&color);
 		widget->setForegroundColor(gcn::Color(color));
 	}
 
 	if(element->Attribute("backgroundcolor"))
 	{
 		unsigned int color;
-		sscanf(element->Attribute("backgroundcolor")->c_str(),"%x",&color);
+		sscanf(element->Attribute("backgroundcolor"),"%x",&color);
 		widget->setBackgroundColor(gcn::Color(color));
 	}
 
 	if(element->Attribute("framesize"))
 	{
-		int b = atoi(element->Attribute("framesize")->c_str());
+		int b = atoi(element->Attribute("framesize"));
 		widget->setFrameSize(b);
 	}
 	
 	if(element->Attribute("font"))
 	{
-		if(fonts.find(*element->Attribute("font")) != fonts.end())
-			widget->setFont(fonts[*element->Attribute("font")]);
+		if(fonts.find(element->Attribute("font")) != fonts.end())
+			widget->setFont(fonts[element->Attribute("font")]);
 		else {
 			int fontsize;
-			if(element->Attribute("fontsize")) fontsize = atoi(element->Attribute("fontsize")->c_str());
+			if(element->Attribute("fontsize")) fontsize = atoi(element->Attribute("fontsize"));
 			else fontsize = 16;	
-			gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(s2ws(element->Attribute("font")->c_str()), fontsize);
+			gcn::SoraGUIFont* pfont = new gcn::SoraGUIFont(s2ws(element->Attribute("font")), fontsize);
 			if(pfont) {
-				fonts[*element->Attribute("font")] = pfont;
+				fonts[element->Attribute("font")] = pfont;
 				widget->setFont(pfont);
 			}
 		}
 	}
 	
 	if(element->Attribute("visible"))
-		widget->setVisible(checkBool(*element->Attribute("visible")));
+		widget->setVisible(checkBool(element->Attribute("visible")));
 
 	if(element->Attribute("focusable"))
-		widget->setFocusable(checkBool(*element->Attribute("focusable")));
+		widget->setFocusable(checkBool(element->Attribute("focusable")));
 	
 	if(element->Attribute("enabled"))
-		widget->setEnabled(checkBool(*element->Attribute("enabled")));
+		widget->setEnabled(checkBool(element->Attribute("enabled")));
 	
 	if(element->Attribute("tabin"))
-		widget->setTabInEnabled(checkBool(*element->Attribute("tabin")));
+		widget->setTabInEnabled(checkBool(element->Attribute("tabin")));
 
 	if(element->Attribute("tabout"))
-		widget->setTabOutEnabled(checkBool(*element->Attribute("tabout")));
+		widget->setTabOutEnabled(checkBool(element->Attribute("tabout")));
 
 	if(element->Attribute("eventId"))
-		widget->setActionEventId(*element->Attribute("eventId"));
+		widget->setActionEventId(element->Attribute("eventId"));
     
     if(element->Attribute("parent")) {
         if(widget->getParent() == NULL)
-            GCN_GLOBAL->addWidget(widget, (*element->Attribute("parent")).c_str());
+            GCN_GLOBAL->addWidget(widget, element->Attribute("parent"));
     }
 	
 	if(element->Attribute("name")) {
-		widget->setId(element->Attribute("name")->c_str());
+		widget->setId(element->Attribute("name"));
 	}
 	if(element->Attribute("id")) {
-		widget->setId(element->Attribute("id")->c_str());
+		widget->setId(element->Attribute("id"));
 	}
 	if(element->Attribute("responser")) {
-		SoraString arg = element->Attribute("responser")->c_str();
+		SoraString arg = element->Attribute("responser");
 		parseResponser(widget, arg, element->Attribute("responsetype"));
 	}
 }
@@ -301,7 +301,7 @@ void XmlGui::parseContainer(TiXmlElement *element, gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("Container Widget must have a unique name");
@@ -311,7 +311,7 @@ void XmlGui::parseContainer(TiXmlElement *element, gcn::Widget *parent)
 
 
 	if(element->Attribute("opaque"))
-		c->setOpaque(checkBool(*element->Attribute("opaque")));
+		c->setOpaque(checkBool(element->Attribute("opaque")));
 
 
 	parseDefaults(element,c);
@@ -337,10 +337,10 @@ void XmlGui::parseContainer(TiXmlElement *element, gcn::Widget *parent)
 	
 	void XmlGui::parseLabelModifiers(TiXmlElement* element, gcn::Label* label) {
 		if(element->Attribute("name")) {
-			std::string name = *element->Attribute("name");
+			std::string name = element->Attribute("name");
 			if(strcmpnocase(name.c_str(), "SliderLinker") == 0) {
 				if(element->Attribute("object")) {
-					std::string obj = *element->Attribute("object");
+					std::string obj = element->Attribute("object");
 					gcn::Widget* widget = getWidget(obj);
 					if(widget) {
 						gcn::Slider* slider = dynamic_cast<gcn::Slider*> (widget); 
@@ -363,7 +363,7 @@ void XmlGui::parseLabel(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("name"))
 	{
-		name = *element->Attribute("name");
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("Label Widget must have a unique name");
@@ -374,7 +374,7 @@ void XmlGui::parseLabel(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("caption"))
 	{
-		label->setCaption(*element->Attribute("caption"));
+		label->setCaption(element->Attribute("caption"));
 	}
 	
 	TiXmlNode* props = element->FirstChild();
@@ -395,10 +395,10 @@ void XmlGui::parseLabel(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("align"))
 	{
-		if(*element->Attribute("align") == "center" || *element->Attribute("align") == "CENTER")
+		if(element->Attribute("align") == "center" || element->Attribute("align") == "CENTER")
 		{
 			label->setAlignment(gcn::Graphics::CENTER);
-		}else if(*element->Attribute("align") == "left" || *element->Attribute("align") == "LEFT")
+		}else if(element->Attribute("align") == "left" || element->Attribute("align") == "LEFT")
 		{
 			label->setAlignment(gcn::Graphics::LEFT);
 		}else
@@ -417,13 +417,13 @@ void XmlGui::parseImageButton(TiXmlElement *element, gcn::Widget*parent) {
 	if(!element) return;
 
 	std::string name;
-	if(element->Attribute("name")) name = element->Attribute("name")->c_str();
+	if(element->Attribute("name")) name = element->Attribute("name");
 	else throw GCN_EXCEPTION("Button Widget must have a unique name");
 
 	gcn::ImageButton* pButton = 0;
 	gcn::Image* image;
 	if(element->Attribute("image")) {
-		image = gcn::Image::load(*element->Attribute("image"));
+		image = gcn::Image::load(element->Attribute("image"));
 	}
 	if(image) pButton = new gcn::ImageButton(image);
 	parseDefaults(element,pButton);
@@ -442,7 +442,7 @@ void XmlGui::parseButton(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("Button Widget must have a unique name");
@@ -453,15 +453,15 @@ void XmlGui::parseButton(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("caption"))
 	{
-		button->setCaption(*element->Attribute("caption"));
+		button->setCaption(element->Attribute("caption"));
 	}
 
 	if(element->Attribute("align"))
 	{
-		if(*element->Attribute("align") == "center" || *element->Attribute("align") == "CENTER")
+		if(element->Attribute("align") == "center" || element->Attribute("align") == "CENTER")
 		{
 			button->setAlignment(gcn::Graphics::CENTER);
-		}else if(*element->Attribute("align") == "left" || *element->Attribute("align") == "LEFT")
+		}else if(element->Attribute("align") == "left" || element->Attribute("align") == "LEFT")
 		{
 			button->setAlignment(gcn::Graphics::LEFT);
 		}else
@@ -490,7 +490,7 @@ void XmlGui::parseCheckBox(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("Checkbox Widget must have a unique name");
@@ -501,14 +501,14 @@ void XmlGui::parseCheckBox(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("caption"))
 	{
-		checkbox->setCaption(*element->Attribute("caption"));
+		checkbox->setCaption(element->Attribute("caption"));
 	}
 
 	checkbox->adjustSize();
 
 
 	if(element->Attribute("marked"))
-		checkbox->setSelected(checkBool(*element->Attribute("marked")));			
+		checkbox->setSelected(checkBool(element->Attribute("marked")));			
 
 	parseDefaults(element,checkbox);
 	
@@ -528,7 +528,7 @@ void XmlGui::parseRadioButton(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("RadioButton Widget must have a unique name");
@@ -538,17 +538,17 @@ void XmlGui::parseRadioButton(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("caption"))
 	{
-		radio->setCaption(*element->Attribute("caption"));
+		radio->setCaption(element->Attribute("caption"));
 	}
 
 	radio->adjustSize();
 
 
 //	if(element->Attribute("marked"))
-//		radio->setMarked(checkBool(*element->Attribute("marked")));			
+//		radio->setMarked(checkBool(element->Attribute("marked")));			
 	
 	if(element->Attribute("group"))
-		radio->setGroup(*element->Attribute("group"));			
+		radio->setGroup(element->Attribute("group"));			
 	
 	parseDefaults(element,radio);
 
@@ -566,7 +566,7 @@ void XmlGui::parseIcon(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("Icon Widget must have a unique name");
@@ -578,8 +578,8 @@ void XmlGui::parseIcon(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("image"))
 	{
-//		image = new gcn::Image(*element->Attribute("image"));
-		image = gcn::Image::load(*element->Attribute("image"));
+//		image = new gcn::Image(element->Attribute("image"));
+		image = gcn::Image::load(element->Attribute("image"));
 	}
 
 	if(image)
@@ -603,7 +603,7 @@ void XmlGui::parseTextBox(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("TextBox Widget must have a unique name");
@@ -612,15 +612,15 @@ void XmlGui::parseTextBox(TiXmlElement *element,gcn::Widget *parent)
 	gcn::TextBox *textbox = new gcn::TextBox;
 
 	if(element->Attribute("editable"))
-		textbox->setEditable(checkBool(*element->Attribute("editable")));
+		textbox->setEditable(checkBool(element->Attribute("editable")));
 
 	if(element->Attribute("text"))
 	{
-		textbox->setText(sora::s2ws(*element->Attribute("text")).c_str());
+		textbox->setText(sora::s2ws(element->Attribute("text")).c_str());
 	}
 
 	if(element->Attribute("opaque"))
-		textbox->setOpaque(checkBool(*element->Attribute("opaque")));
+		textbox->setOpaque(checkBool(element->Attribute("opaque")));
 
 	parseDefaults(element,textbox);
 
@@ -638,7 +638,7 @@ void XmlGui::parseTextField(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("TextField Widget must have a unique name");
@@ -648,11 +648,11 @@ void XmlGui::parseTextField(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("text"))
 	{
-		textfield->setText(sora::s2ws(*element->Attribute("text")).c_str());
+		textfield->setText(sora::s2ws(element->Attribute("text")).c_str());
 	}
 	
 	if(element->Attribute("numeric"))
-		textfield->enableNumericMode(checkBool(*element->Attribute("numeric")));
+		textfield->enableNumericMode(checkBool(element->Attribute("numeric")));
 
 	parseDefaults(element,textfield);
 
@@ -670,7 +670,7 @@ void XmlGui::parseSlider(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("Slider Widget must have a unique name");
@@ -680,38 +680,38 @@ void XmlGui::parseSlider(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("start"))
 	{
-		double start = atof(element->Attribute("start")->c_str());
+		double start = atof(element->Attribute("start"));
 		
 		slider->setScaleStart(start);
 	}
 
 	if(element->Attribute("end"))
 	{
-		double end = atof(element->Attribute("end")->c_str());
+		double end = atof(element->Attribute("end"));
 		slider->setScaleEnd(end);
 	}
 
 	if(element->Attribute("value"))
 	{
-		double value = atof(element->Attribute("value")->c_str());
+		double value = atof(element->Attribute("value"));
 		slider->setValue(value);
 	}
 
 	if(element->Attribute("markerLength"))
 	{
-		int l = atoi(element->Attribute("markerLength")->c_str());
+		int l = atoi(element->Attribute("markerLength"));
 		slider->setMarkerLength(l);
 	}
 
 	if(element->Attribute("stepLength"))
 	{
-		double l = atof(element->Attribute("stepLength")->c_str());
+		double l = atof(element->Attribute("stepLength"));
 		slider->setStepLength(l);
 	}
 
 	if(element->Attribute("orientation"))
 	{
-		if(*element->Attribute("orientation") == "HORIZONTAL" || *element->Attribute("orientation") == "horizontal")
+		if(element->Attribute("orientation") == "HORIZONTAL" || element->Attribute("orientation") == "horizontal")
 			slider->setOrientation(gcn::Slider::HORIZONTAL);
 		else slider->setOrientation(gcn::Slider::VERTICAL);
 	}
@@ -734,7 +734,7 @@ void XmlGui::parseWindow(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = *element->Attribute("name");
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("Window Widget must have a unique name");
@@ -745,28 +745,28 @@ void XmlGui::parseWindow(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("caption"))
 	{
-		window->setCaption(*element->Attribute("caption"));
+		window->setCaption(element->Attribute("caption"));
 	}
 
 	if(element->Attribute("tabbing"))
 	{
-		window->setPadding(checkBool(*element->Attribute("tabbing")));
+		window->setPadding(checkBool(element->Attribute("tabbing")));
 	}
 
 	if(element->Attribute("movable"))
 	{
-		window->setMovable(checkBool(*element->Attribute("movable")));
+		window->setMovable(checkBool(element->Attribute("movable")));
 	}
 
 	if(element->Attribute("titleBarHeight"))
 	{
-		int h = atoi(element->Attribute("titleBarHeight")->c_str());
+		int h = atoi(element->Attribute("titleBarHeight"));
 		window->setTitleBarHeight(h);
 	}
 
 
 	if(element->Attribute("opaque"))
-		window->setOpaque(checkBool(*element->Attribute("opaque")));
+		window->setOpaque(checkBool(element->Attribute("opaque")));
 
 
 	parseDefaults(element,window);
@@ -802,7 +802,7 @@ void XmlGui::parseScrollArea(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("ScrollArea Widget must have a unique name");
@@ -813,42 +813,42 @@ void XmlGui::parseScrollArea(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("hPolicy"))
 	{
-		if(*element->Attribute("hPolicy") == "ALWAYS" || *element->Attribute("hPolicy") == "always")
+		if(element->Attribute("hPolicy") == "ALWAYS" || element->Attribute("hPolicy") == "always")
 			scroll->setHorizontalScrollPolicy(gcn::ScrollArea::SHOW_ALWAYS);
-		else if(*element->Attribute("hPolicy") == "NEVER" || *element->Attribute("hPolicy") == "never")
+		else if(element->Attribute("hPolicy") == "NEVER" || element->Attribute("hPolicy") == "never")
 			scroll->setHorizontalScrollPolicy(gcn::ScrollArea::SHOW_NEVER);
 	}
 
 	if(element->Attribute("vPolicy"))
 	{
-		if(*element->Attribute("vPolicy") == "ALWAYS" || *element->Attribute("vPolicy") == "always")
+		if(element->Attribute("vPolicy") == "ALWAYS" || element->Attribute("vPolicy") == "always")
 			scroll->setVerticalScrollPolicy(gcn::ScrollArea::SHOW_ALWAYS);
-		else if(*element->Attribute("vPolicy") == "NEVER" || *element->Attribute("vPolicy") == "never")
+		else if(element->Attribute("vPolicy") == "NEVER" || element->Attribute("vPolicy") == "never")
 			scroll->setVerticalScrollPolicy(gcn::ScrollArea::SHOW_NEVER);
 	}
 
 	if(element->Attribute("vScrollAmount"))
 	{
 		int h;
-		sscanf(element->Attribute("vScrollAmount")->c_str(),"%d",&h);
+		sscanf(element->Attribute("vScrollAmount"),"%d",&h);
 		scroll->setVerticalScrollAmount(h);
 	}
 
 	if(element->Attribute("hScrollAmount"))
 	{
-		int h = atoi(element->Attribute("hScrollAmount")->c_str());
+		int h = atoi(element->Attribute("hScrollAmount"));
 		scroll->setHorizontalScrollAmount(h);
 	}
 
 	if(element->Attribute("scrollBarWidth"))
 	{
-		int w = atoi(element->Attribute("scrollbarWidth")->c_str());
+		int w = atoi(element->Attribute("scrollbarWidth"));
 		scroll->setScrollbarWidth(w);
 	}
 
 	if(element->Attribute("content"))
 	{
-		gcn::Widget *content = getWidget(*element->Attribute("content"));
+		gcn::Widget *content = getWidget(element->Attribute("content"));
 		if(content)
 		{
 			scroll->setContent(content);
@@ -891,7 +891,7 @@ void XmlGui::parseDropdown(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("DropDown Widget must have a unique name");
@@ -927,7 +927,7 @@ void XmlGui::parseDropdown(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("selected"))
 	{
-		int s = atoi(element->Attribute("selected")->c_str());
+		int s = atoi(element->Attribute("selected"));
 		dropdown->setSelected(s);
 	}
 
@@ -944,7 +944,7 @@ void XmlGui::parseListbox(TiXmlElement *element,gcn::Widget *parent)
 	std::string name;
 	if(element->Attribute("name"))
 	{
-		name = element->Attribute("name")->c_str();
+		name = element->Attribute("name");
 	}else
 	{
 		throw GCN_EXCEPTION("ListBox Widget must have a unique name");
@@ -980,7 +980,7 @@ void XmlGui::parseListbox(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("selected"))
 	{
-		int s = atoi(element->Attribute("selected")->c_str());
+		int s = atoi(element->Attribute("selected"));
 		listbox->setSelected(s);
 	}
 
