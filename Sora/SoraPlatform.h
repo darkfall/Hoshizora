@@ -240,9 +240,9 @@ static void msleep(uint32_t msec) {
 	struct timespec* t1 = &timeout1;
 	
 	t0->tv_sec = msec / 1000;
-	t0->tv_nsec = (msec % 1000) * (1000 * 1000);
-	
+	t0->tv_nsec = (msec % 1000) * (1000 * 1000);	
 	while ((nanosleep(t0, t1) == (-1)) && (errno == EINTR)) {
+
 		tmp = t0;
 		t0 = t1;
 		t1 = tmp;

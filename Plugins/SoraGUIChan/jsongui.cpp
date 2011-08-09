@@ -14,7 +14,6 @@
 #include "guichansetup.h"
 
 #include "Debug/SoraInternalLogger.h"
-
 #include "Modifiers/LabelSliderLinker.h"
 
 #include "SoraCore.h"
@@ -489,7 +488,7 @@ namespace sora {
             textbox->setEditable(val["editable"].asBool());
         
         if(val.isMember("text")) {
-            textbox->setText(sora::s2ws(val["text"].asString()).c_str());
+            textbox->setText(val["text"].asString().c_str());
         }
         
         if(val.isMember("opaque"))
@@ -511,7 +510,7 @@ namespace sora {
         gcn::TextField *textField = new gcn::TextField;
     
         if(val.isMember("text")) {
-            textField->setText(sora::s2ws(val["text"].asString()).c_str());
+            textField->setText(val["text"].asString().c_str());
         }
 		
 		if(val.isMember("numeric")) 
@@ -857,13 +856,13 @@ namespace sora {
 
 	Json::Value& JsonGuiWritter::writeTextBox(Json::Value& inValue, gcn::TextBox* widget) {
 		inValue["editable"] = JValue(widget->isEditable());
-		inValue["text"] = JValue(ws2s(widget->getText()));
+		inValue["text"] = JValue((widget->getText()));
 		
 		return inValue;
 	}
 
 	Json::Value& JsonGuiWritter::writeTextField(Json::Value& inValue, gcn::TextField* widget) {
-		inValue["text"] = JValue(ws2s(widget->getText()));
+		inValue["text"] = JValue((widget->getText()));
 
 		return inValue;
 	}

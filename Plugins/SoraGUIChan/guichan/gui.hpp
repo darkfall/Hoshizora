@@ -60,6 +60,7 @@ namespace gcn
     class KeyListener;
 	class SoundLoader;
     class Widget;
+    class Style;
 
     // The following comment will appear in the doxygen main page.
     /**
@@ -122,6 +123,22 @@ namespace gcn
          * @since 0.1.0
          */
         virtual Widget* getTop() const;
+        
+        /**
+         * Set the global style of the widgets
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         */
+        virtual void setStyle(Style* style);
+        
+        /**
+         * Get the global style of the widgets
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         */
+        virtual Style* getStyle() const;
 
         /**
          * Sets the graphics object to use for drawing.
@@ -516,6 +533,11 @@ namespace gcn
          * Used to properly distribute mouse events.
          */
         std::deque<Widget*> mWidgetWithMouseQueue;
+        
+        /**
+         * Holds the global style of the widgets
+         */
+        Style* mStyle;
     };
 }
 

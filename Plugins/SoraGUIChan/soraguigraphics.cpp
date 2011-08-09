@@ -11,8 +11,10 @@
 
 namespace gcn
 {
-    SoraGUIGraphics::SoraGUIGraphics()
-        :mClipNull(false) {
+    SoraGUIGraphics::SoraGUIGraphics():
+    mHardwareColor(0),
+    mClipNull(false),
+    mGlobalTransparency(1.f) {
         sora = sora::SoraCore::Instance();
 
         mHardwareColor = 0;
@@ -69,9 +71,6 @@ namespace gcn
         else {
             const ClipRectangle top = mClipStack.top();
 
-            // HGE won't let you set clip areas
-            // that have zero width or height
-            // so we have to check for that.
             if (top.width == 0 || top.height == 0) {
                 mClipNull = true;
             }
@@ -132,11 +131,6 @@ namespace gcn
         if (mClipNull) {
             return;
         }
-/*
-        ClipRectangle const top = mClipStack.top();
-
-        x += top.xOffset;
-        y += top.yOffset;*/
 
         sora->renderRect((float)x, (float)y, (float)x + 1.f, (float)y, 1.f, mHardwareColor, GUI_Z);
     }
@@ -174,14 +168,7 @@ namespace gcn
                 x1++;
             }
         }
-/*
-        ClipRectangle const top = mClipStack.top();
-
-        x1 += top.xOffset;
-        y1 += top.yOffset;
-        x2 += top.xOffset;
-        y2 += top.yOffset;
-*/
+        
 		sora->renderRect((float)x1, (float)y1, (float)x2, (float)y2, 1.f, mHardwareColor, GUI_Z);
     }
 
@@ -194,14 +181,7 @@ namespace gcn
         float y1 = (float)rectangle.y;
         float x2 = (float)rectangle.x + rectangle.width;
         float y2 = (float)rectangle.y + rectangle.height;
-/*
-        ClipRectangle const top = mClipStack.top();
-
-        x1 += top.xOffset;
-        y1 += top.yOffset;
-        x2 += top.xOffset;
-        y2 += top.yOffset;
-*/
+        
         sora->renderRect(x1, y1, x2, y1+1.f, 1.f, mHardwareColor, GUI_Z);
         sora->renderRect(x2, y1, x2+1.f, y2, 1.f, mHardwareColor, GUI_Z);
         sora->renderRect(x2, y2, x1, y2+1.f, 1.f, mHardwareColor, GUI_Z);
@@ -217,13 +197,6 @@ namespace gcn
         float y1 = (float)rectangle.y;
         float x2 = (float)rectangle.x + rectangle.width;
         float y2 = (float)rectangle.y + rectangle.height;
-/*
-        ClipRectangle const top = mClipStack.top();
-
-        x1 += top.xOffset;
-        y1 += top.yOffset;
-        x2 += top.xOffset;
-        y2 += top.yOffset;*/
 
 		sora::SoraQuad quad;
 
@@ -258,10 +231,18 @@ namespace gcn
     void SoraGUIGraphics::setColor(const Color &color) {
         mColor = color;
 
-        mHardwareColor = CARGB(color.a, color.r, color.g, color.b);
+        mHardwareColor = CARGB(color.a * mGlobalTransparency, color.r, color.g, color.b);
     }
 
     const Color& SoraGUIGraphics::getColor() const {
         return  mColor;
+    }
+    
+    void SoraGUIGraphics::setGlobalTransparency(float32 a) {
+        mGlobalTransparency = a;
+    }
+    
+    float32 SoraGUIGraphics::getGlobalTransparency() const {
+        return mGlobalTransparency;
     }
 }

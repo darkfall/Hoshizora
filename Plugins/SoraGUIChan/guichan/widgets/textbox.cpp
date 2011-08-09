@@ -47,13 +47,11 @@
 
 #include "guichan/widgets/textbox.hpp"
 
-//#include "guichan/hge/gfxfont.h"
 #include "guichan/basiccontainer.hpp"
 #include "guichan/font.hpp"
 #include "guichan/graphics.hpp"
 #include "guichan/key.hpp"
 #include "guichan/mouseinput.hpp"
-#include "guichan/StringConv.h"
 
 namespace gcn
 {
@@ -64,7 +62,7 @@ namespace gcn
         mEditable = true;
         mOpaque = true;
 
-        setText(L"");
+        setText(std::string());
 
         setFocusable(true);
 
@@ -73,7 +71,7 @@ namespace gcn
         adjustSize();
     }
 
-    TextBox::TextBox(const std::wstring& text)
+    TextBox::TextBox(const std::string& text)
     {
         mCaretColumn = 0;
         mCaretRow = 0;
@@ -89,20 +87,20 @@ namespace gcn
         adjustSize();
     }
 
-    void TextBox::setText(const std::wstring& text)
+    void TextBox::setText(const std::string& text)
     {
         mCaretColumn = 0;
         mCaretRow = 0;
 
         mTextRows.clear();
 
-        std::wstring::size_type pos, lastPos = 0;
+        std::string::size_type pos, lastPos = 0;
         int length;
         do
         {
-            pos = text.find(L"\n", lastPos);
+            pos = text.find("\n", lastPos);
 
-            if (pos != std::wstring::npos)
+            if (pos != std::string::npos)
             {
                 length = pos - lastPos;
             }
@@ -110,11 +108,11 @@ namespace gcn
             {
                 length = text.size() - lastPos;
             }
-            std::wstring sub = text.substr(lastPos, length);
+            std::string sub = text.substr(lastPos, length);
             mTextRows.push_back(sub);
             lastPos = pos + 1;
 
-        } while (pos != std::wstring::npos);
+        } while (pos != std::string::npos);
 
         adjustSize();
     }
@@ -131,7 +129,7 @@ namespace gcn
 
         if (isFocused() && isEditable())
         {
-			drawCaret(graphics, getFont()->getWidth(ws2s(mTextRows[mCaretRow].substr(0, mCaretColumn))), mCaretRow * getFont()->getHeight());
+			drawCaret(graphics, getFont()->getWidth(mTextRows[mCaretRow].substr(0, mCaretColumn)), mCaretRow * getFont()->getHeight());
         }
 
         graphics->setColor(getForegroundColor());
@@ -140,7 +138,7 @@ namespace gcn
         for (i = 0; i < mTextRows.size(); i++)
         {
             // Move the text one pixel so we can have a caret before a letter.
-            graphics->drawText(ws2s(mTextRows[i]), 1, i * getFont()->getHeight());
+            graphics->drawText(mTextRows[i], 1, i * getFont()->getHeight());
         }
     }
 
@@ -161,7 +159,7 @@ namespace gcn
                 mCaretRow = mTextRows.size() - 1;
             }
 
-            mCaretColumn = getFont()->getStringIndexAt(ws2s(mTextRows[mCaretRow]), mouseEvent.getX());
+            mCaretColumn = getFont()->getStringIndexAt((mTextRows[mCaretRow]), mouseEvent.getX());
         }
     }
 
@@ -326,14 +324,14 @@ namespace gcn
         else if(key.getValue() == Key::TAB
                 && mEditable)
         {
-            mTextRows[mCaretRow].insert(mCaretColumn,std::wstring(L"    "));
+            mTextRows[mCaretRow].insert(mCaretColumn, std::string("    "));
             mCaretColumn += 4;
         }
 
         else if (key.isCharacter()
                  && mEditable)
         {
-            mTextRows[mCaretRow].insert(mCaretColumn,std::wstring(1,(char)key.getValue()));
+            mTextRows[mCaretRow].insert(mCaretColumn, std::string(1,(char)key.getValue()));
             ++mCaretColumn;
         }
 
@@ -354,7 +352,7 @@ namespace gcn
 				szImeChar[2]='\0';
 			}
 
-			mTextRows[mCaretRow].insert(mCaretColumn, s2ws(szImeChar));
+			mTextRows[mCaretRow].insert(mCaretColumn, szImeChar);
 			++mCaretColumn;
 		}
 
@@ -370,7 +368,7 @@ namespace gcn
         int width = 0;
         for (i = 0; i < mTextRows.size(); ++i)
         {
-            int w = getFont()->getWidth(ws2s(mTextRows[i]));
+            int w = getFont()->getWidth(mTextRows[i]);
             if (width < w)
             {
                 width = w;
@@ -464,12 +462,12 @@ namespace gcn
         return mCaretColumn;
     }
 
-    const std::wstring& TextBox::getTextRow(int row) const
+    const std::string& TextBox::getTextRow(int row) const
     {
         return mTextRows[row];
     }
 
-    void TextBox::setTextRow(int row, const std::wstring& text)
+    void TextBox::setTextRow(int row, const std::string& text)
     {
         mTextRows[row] = text;
 
@@ -486,19 +484,19 @@ namespace gcn
         return mTextRows.size();
     }
 
-    std::wstring TextBox::getText() const
+    std::string TextBox::getText() const
     {
         if (mTextRows.size() == 0)
         {
-            return std::wstring(L"");
+            return std::string(std::string());
         }
 
         int i;
-        std::wstring text;
+        std::string text;
 
         for (i = 0; i < (int)mTextRows.size() - 1; ++i)
         {
-            text = text + mTextRows[i] + L"\n";
+            text = text + mTextRows[i] + "\n";
         }
 
         text = text + mTextRows[i];
@@ -514,7 +512,7 @@ namespace gcn
     void TextBox::scrollToCaret()
     {
         Rectangle scroll;
-        scroll.x = getFont()->getWidth(ws2s(mTextRows[mCaretRow].substr(0, mCaretColumn)));
+        scroll.x = getFont()->getWidth(mTextRows[mCaretRow].substr(0, mCaretColumn));
         scroll.y = getFont()->getHeight() * mCaretRow;
         scroll.width = getFont()->getWidth(" ");
         scroll.height = getFont()->getHeight() + 2; // add 2 for some extra space
@@ -532,7 +530,7 @@ namespace gcn
         return mEditable;
     }
 
-    void TextBox::addRow(const std::wstring row)
+    void TextBox::addRow(const std::string row)
     {
         mTextRows.push_back(row);
         adjustSize();

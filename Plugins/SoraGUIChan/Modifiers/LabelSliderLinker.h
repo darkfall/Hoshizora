@@ -11,6 +11,7 @@
 #define SORA_GCN_LABEL_SLIDER_LINKER_H_
 
 #include "../guichan.hpp"
+#include "../guichan/modifier.hpp"
 
 namespace gcn {
 	

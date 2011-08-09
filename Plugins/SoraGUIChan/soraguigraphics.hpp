@@ -62,6 +62,10 @@ namespace gcn
         bool pushClipArea(Rectangle area);
 
         void popClipArea();
+        
+        void setGlobalTransparency(float32 a);
+        
+        float32 getGlobalTransparency() const;
 		
     protected:
         sora::SoraCore* sora;
@@ -69,6 +73,7 @@ namespace gcn
 		Color mColor;
         uint32 mHardwareColor;
         bool mClipNull;
+        float mGlobalTransparency;
     };
 }
 

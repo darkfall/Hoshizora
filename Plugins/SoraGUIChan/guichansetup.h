@@ -17,16 +17,15 @@
 
 namespace sora {
 		
-	class gcnInitializer: public sora::SoraSingleton<gcnInitializer> {
-		friend class sora::SoraSingleton<gcnInitializer>;
-		
-		gcnInitializer(): 
-			mGUIChan(NULL),
-			mGlobalFont(NULL),
-			mInput(NULL),
-			mImageLoader(NULL),
-			mGraphics(NULL),
-			mSoundLoader(NULL) {
+	class gcnInitializer: public SoraFrameListener {
+	public:        
+        gcnInitializer(): 
+        mGUIChan(NULL),
+        mGlobalFont(NULL),
+        mInput(NULL),
+        mImageLoader(NULL),
+        mGraphics(NULL),
+        mSoundLoader(NULL) {
 		}
 		
 		~gcnInitializer() {
@@ -41,19 +40,16 @@ namespace sora {
 			if(mSoundLoader)
 				delete mSoundLoader;
 		}
-		
-	public:
-        class gcnListener: public SoraFrameListener {
-        public:
-            gcnListener(gcnInitializer* initializer): pinitializer(initializer) {}
-            
-            void onFrameStart()  {}
-            void onFrameEnd() {
-                pinitializer->gcnLogic();
-            }
-        private:
-            gcnInitializer* pinitializer;
-        };
+        
+        void onFrameStart()  {}
+        void onFrameEnd() {
+            gcnLogic();
+        }
+        
+        static gcnInitializer* Instance() {
+            static gcnInitializer instance;
+            return &instance;
+        }
         
 		gcn::Gui* getGui() const { return mGUIChan; }
 		
@@ -64,11 +60,14 @@ namespace sora {
 		
 			mInput = new gcn::SoraGUIInput;
 			mGUIChan->setInput(mInput);
+            
 			mImageLoader = new gcn::SoraGUIImageLoader;
 			gcn::Image::setImageLoader(mImageLoader);
-			mGraphics = new gcn::SoraGUIGraphics;
+			
+            mGraphics = new gcn::SoraGUIGraphics;
 			mGUIChan->setGraphics(mGraphics);
-			mSoundLoader = new gcn::SoraGUISoundLoader;
+			
+            mSoundLoader = new gcn::SoraGUISoundLoader;
 			mGUIChan->setSoundLoader(mSoundLoader);
 			
 			if(font) { 
@@ -79,8 +78,7 @@ namespace sora {
 					return false;
 			}
 			
-            gcnListener* plistener = new gcnListener(this);
-            SORA->addFrameListener(plistener);
+            SoraCore::Instance()->addFrameListener(this);
 			
 			createTop();
 			return true;
@@ -115,7 +113,8 @@ namespace sora {
                 try {
                     pWidget = pTop->findWidgetById(sid.c_str());
                 } catch(gcn::Exception& exp) {
-                    SORA->log("guilib exception: "+exp.getMessage());
+                    log_error("guilib exception: "+exp.getMessage());
+                    return NULL;
                 }
                 return pWidget;
             }
@@ -147,7 +146,7 @@ namespace sora {
                     return;
                 }
             } catch(gcn::Exception& exp) {
-                SORA->log("guilib exception: "+exp.getMessage());
+                log_error("guilib exception: "+exp.getMessage());
             }
         }
         
@@ -170,7 +169,7 @@ namespace sora {
                     return;
                 }
             } catch(gcn::Exception& exp) {
-                SORA->log("guilib exception: "+exp.getMessage());
+                log_error("guilib exception: "+exp.getMessage());
             }
         }
 		
@@ -200,19 +199,19 @@ namespace sora {
 		
 		
 		void setGlobalBackgroundColor(ulong32 col) {
-			gcn::Widget::setGlobalBackgroundColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
+			gcn::Style::setGlobalBackgroundColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
 		}
 		
 		void setGlobalForegroundColor(ulong32 col) {
-			gcn::Widget::setGlobalForegroundColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
+			gcn::Style::setGlobalForegroundColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
 		}
 		
 		void setGlobalBaseColor(ulong32 col) {
-			gcn::Widget::setGlobalBaseColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
+			gcn::Style::setGlobalBaseColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
 		}
 		
 		void setGlobalSelectionColor(ulong32 col) {
-			gcn::Widget::setGlobalSelectionColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
+			gcn::Style::setGlobalSelectionColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
 		}
 		
 	private:

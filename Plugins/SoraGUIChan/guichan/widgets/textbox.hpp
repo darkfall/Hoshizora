@@ -74,7 +74,7 @@ namespace gcn
          *
          * @param text The default text of the text box.
          */
-        TextBox(const std::wstring& text);
+        TextBox(const std::string& text);
 
         /**
          * Sets the text of the text box.
@@ -82,7 +82,7 @@ namespace gcn
          * @param text The text of the text box.
          * @see getText
          */
-        void setText(const std::wstring& text);
+        void setText(const std::string& text);
 
         /**
          * Gets the text of the text box.
@@ -90,7 +90,7 @@ namespace gcn
          * @return The text of the text box.
          * @see setText
          */
-        std::wstring getText() const;
+        std::string getText() const;
 
         /**
          * Gets a certain row from the text.
@@ -99,7 +99,7 @@ namespace gcn
          * @return A row from the text of the text box.
          * @see setTextRow
          */
-        const std::wstring& getTextRow(int row) const;
+        const std::string& getTextRow(int row) const;
 
         /**
          * Sets the text of a certain row of the text.
@@ -108,7 +108,7 @@ namespace gcn
          * @param text The text to set in the given row number.
          * @see getTextRow
          */
-        void setTextRow(int row, const std::wstring& text);
+        void setTextRow(int row, const std::string& text);
 
         /**
          * Gets the number of rows in the text.
@@ -202,7 +202,7 @@ namespace gcn
          *
          * @param row The row to add.
          */
-        virtual void addRow(const std::wstring row);
+        virtual void addRow(const std::string row);
 
         /**
          * Checks if the text box is opaque. An opaque text box will draw
@@ -262,7 +262,7 @@ namespace gcn
         /**
          * Holds all the rows of the text.
          */
-        std::vector<std::wstring> mTextRows;
+        std::vector<std::string> mTextRows;
 
         /**
          * Holds the current column of the caret.

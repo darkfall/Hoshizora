@@ -94,7 +94,7 @@ void mainWindow::init() {
     
     mScene1->add(mScene2);
     sora::SoraSprite* bg = sora::SORA->createSprite(L"background.png");
-
+    bg->setCenter(300.f, 200.f);
     mScene1->add(bg, 0);
     
     mScene2->add(new sora::SoraExternalRenderObject(sora::Delegate(myRenderFunc)), 1);

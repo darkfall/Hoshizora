@@ -284,7 +284,7 @@ namespace sora {
 		
         /**
          *  Memory usage calculated by Operating System
-         *  libproc for Linux
+         *  libproc required for Linux
          **/
 		uint64 getEngineMemoryUsage() const;
         /**

@@ -1867,46 +1867,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "main.cpp"
-         timestampString = "334400902.864285"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "27"
-         endingLineNumber = "27"
-         landmarkName = "main(int argc, char* argv[])"
-         landmarkType = "7">
-         <Locations>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "main"
-               urlString = "file://localhost/main.cpp"
-               timestampString = "334073179.289954"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "40"
-               endingLineNumber = "40">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "__static_initialization_and_destruction_0"
-               urlString = "file://localhost/main.cpp"
-               timestampString = "334073179.290333"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "40"
-               endingLineNumber = "40">
-            </Location>
-         </Locations>
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/signal/SoraSignal.h"
          timestampString = "334257804.24534"
@@ -2375,20 +2335,6 @@
          startingLineNumber = "48"
          endingLineNumber = "48"
          landmarkName = "update(float32 dt)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "main.cpp"
-         timestampString = "334400902.864285"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "27"
-         endingLineNumber = "27"
-         landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint

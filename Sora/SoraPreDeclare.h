@@ -43,6 +43,7 @@ namespace sora {
         return SoraAny(func(arg1, arg2)); \
     }
     
+#ifdef SORA_USE_RTTI
     /**
      * RTTI Check 
      **/
@@ -55,6 +56,8 @@ namespace sora {
     bool isClassClass(T1* t1) {
         return (&typeid(*t1) == &typeid(T2) ||
                 typeid(*t1) == typeid(T2));
+        
+#endif
     }
 } // namespace sora
 

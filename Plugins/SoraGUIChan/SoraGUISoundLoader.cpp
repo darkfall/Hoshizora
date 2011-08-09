@@ -29,10 +29,6 @@ namespace gcn {
 	}
 
 	Sound* SoraGUISoundLoader::load(const std::string& soundName) {
-		return load(sora::s2ws(soundName));
-	}
-	
-	Sound* SoraGUISoundLoader::load(const std::wstring& soundName) {
 		sora::stringId soundid = sora::str2id(soundName);
 		SoraGUISound* psound = new SoraGUISound;
 		
@@ -41,7 +37,7 @@ namespace gcn {
 			psound->pfile = itSound->second;
 			return psound;
 		} else {
-			sora::SoraSoundEffectFile* psefile = sora::SORA->createSoundEffectFile(soundName);
+			sora::SoraSoundEffectFile* psefile = sora::SORA->createSoundEffectFile(sora::s2ws(soundName));
 			if(psefile != NULL) {
 				mSoundMap[soundid] = psefile;
 				psound->pfile = psefile;

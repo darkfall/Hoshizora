@@ -616,7 +616,7 @@ void XmlGui::parseTextBox(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("text"))
 	{
-		textbox->setText(sora::s2ws(element->Attribute("text")).c_str());
+		textbox->setText(element->Attribute("text"));
 	}
 
 	if(element->Attribute("opaque"))
@@ -648,7 +648,7 @@ void XmlGui::parseTextField(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("text"))
 	{
-		textfield->setText(sora::s2ws(element->Attribute("text")).c_str());
+		textfield->setText(element->Attribute("text"));
 	}
 	
 	if(element->Attribute("numeric"))

@@ -31,7 +31,7 @@ namespace sora {
             return mHotkeyId;
         }
         
-        SORA_EVENT_IDENTIFIER(str2id("SoraHotkeyEvent"));
+        SORA_EVENT_IDENTIFIER(18446744072805578078ULL);
         
     private:
         SoraHotkey* mHotkey;

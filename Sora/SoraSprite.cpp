@@ -398,5 +398,27 @@ namespace sora {
     bool SoraSprite::hasEffect() const {
         return !vEffects.empty();
     }
+    
+    SoraRect SoraSprite::getBoundingBox() const {
+        SoraRect rect;
+        
+        float32 tx1, ty1, tx2, ty2;
+		float32 sint, cost;
+        
+		tx1 = -mCenterX*mHScale;
+		ty1 = -mCenterY*mVScale;
+		tx2 = (mTextureRect.x2-mCenterX)*mHScale;
+		ty2 = (mTextureRect.y2-mCenterY)*mVScale;
+		
+		cost = cosf(mRotation);
+        sint = sinf(mRotation);
+			
+        rect.x1  = tx1*cost - ty1*sint + getPositionX();
+        rect.x2  = tx2*cost - ty2*sint + getPositionX();
+        rect.y1  = tx1*sint + ty1*cost + getPositionY();	 
+        rect.y2  = tx2*sint + ty2*cost + getPositionY();
+        
+        return rect;
+    }
 	
 } // namespace sora

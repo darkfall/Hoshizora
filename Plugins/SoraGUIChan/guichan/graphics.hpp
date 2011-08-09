@@ -274,6 +274,30 @@ namespace gcn
                               int x,
                               int y,
                               Alignment alignment = LEFT);
+        
+        
+        /**
+         * Set global transparency when drawing the widgets
+         * This will override the transparency of all widgets
+         * If a widget is already transparent, then the final transparency would be
+         * WidgetTransparency * GlobalTransparency
+         *
+         * @param the global transparency
+         * @author Robert Bu(darkfall)(darkfall)
+         * @since GuiChan for Hoshizora
+         **/
+        virtual void setGlobalTransparency(float a) {
+        };
+        
+        /**
+         * Get the global transparency
+         *
+         * @author Robert Bu(darkfall)(darkfall)
+         * @since GuiChan for Hoshizor
+         **/
+        virtual float getGlobalTransparency() const {
+            return 0.f;
+        };
 
     protected:
         /**

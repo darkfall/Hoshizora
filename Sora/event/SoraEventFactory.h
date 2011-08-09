@@ -28,7 +28,7 @@ namespace sora {
         
         /**
          * If name is ignored, would create a SoraSystemEvent
-         * Otherwise throw NotFoundException
+         * Otherwise if name is not recognized throw NotFoundException
          **/
         SoraEvent* createEvent(const std::string& t=std::string());
         

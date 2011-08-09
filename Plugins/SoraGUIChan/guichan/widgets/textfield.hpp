@@ -73,7 +73,7 @@ namespace gcn
          *
          * @param text The default text of the text field.
          */
-        TextField(const std::wstring& text);
+        TextField(const std::string& text);
 
         /**
          * Sets the text of the text field.
@@ -81,7 +81,7 @@ namespace gcn
          * @param text The text of the text field.
          * @see getText
          */
-        void setText(const std::wstring& text);
+        void setText(const std::string& text);
 
         /**
          * Gets the text of the text field.
@@ -89,7 +89,7 @@ namespace gcn
          * @return The text of the text field.
          * @see setText
          */
-        const std::wstring& getText() const;
+        const std::string& getText() const;
 
         /**
          * Adjusts the size of the text field to fit the text.
@@ -173,7 +173,7 @@ namespace gcn
         /**
          * Holds the text of the text box.
          */
-        std::wstring mText;
+        std::string mText;
 		
 		bool mNumericMode;
 

@@ -45,11 +45,11 @@
 #define GCN_WIDGET_HPP
 
 #include <list>
+#include <vector>
 #include <string>
 
 #include "guichan/color.hpp"
 #include "guichan/rectangle.hpp"
-#include "guichan/Modifier.h"
 
 namespace gcn
 {
@@ -66,6 +66,8 @@ namespace gcn
     class MouseInput;
     class MouseListener;
     class WidgetListener;
+    class BirthListener;
+    class Modifier;
 
     /**
      * Abstract class for widgets of Guichan. It contains basic functions 
@@ -516,6 +518,28 @@ namespace gcn
          * @since 0.1.0
          */
         void removeDeathListener(DeathListener* deathListener);
+        
+        /**
+         * Adds a birth listener to the widget. When a birth event is 
+         * fired by the widget the birth listeners of the widget will
+         * get notified
+         *
+         * @param birthListener The birth listener to add
+         * @see removeBirthListener
+         * @author Robter Bu
+         * @since GuiChan for Hoshizora
+         */
+        void addBirthListener(BirthListener* birthListener);
+        
+        /**
+         * Removes an added birth listener from the widget
+         *
+         * @param birthListener The birth listener to add
+         * @see addBirthListener
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         */
+        void removeBirthListener(BirthListener* birthListener);
 
         /**
          * Adds a mouse listener to the widget. When a mouse event is 
@@ -596,6 +620,14 @@ namespace gcn
          * @since 0.8.0
          */
         void removeWidgetListener(WidgetListener* widgetListener);
+        
+        /**
+         * Distributes birth events to all of the widget's listeners.
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         */
+        void distributeBirthEvent();
 
         /**
          * Sets the action event identifier of the widget. The identifier is
@@ -836,6 +868,15 @@ namespace gcn
          * @since 0.7.0
          */
         virtual const std::list<FocusListener*>& _getFocusListeners();
+        
+        /**
+         * Get the birth listeners of the widget
+         *
+         * @return The birth listeners of the widget
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         */
+        virtual const std::list<BirthListener*>& _getBirthListeners();
 		 
         /**
          * Gets the area of the widget occupied by the widget's children.
@@ -965,39 +1006,54 @@ namespace gcn
 		
 		/**
 	  	 * Gets the modifiers of the widget
+         * 
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
 		 */
-		virtual const std::list<Modifier*> _getModifiers();
+		virtual const std::vector<Modifier*>& _getModifiers();
 		
 		/**
 		 * Add a modifier to the modifier list
 		 * Modifier would be automatically deleted if Modifier::isFinished() == true
 		 * @see removeModifier
+         * 
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
 		 */
 		virtual void addModifier(Modifier* modifier);
 		
 		/**
 		 * Remove a modifier from the modifier list
 		 * @see addModifier
+         * 
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
 		 */
 		virtual void removeModifier(Modifier* modifier);
+        
+        /**
+         * Update the modifier list
+         * Automatically called by logic function
+         * When you make your own widget, remembere to call Widiget::logic in your logic function
+         * Or call this function every frame
+         * 
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         **/
+        virtual void updateModifierList();
 		
 		/**
 		 * Sets the alpha color of the widget
 		 * Applys to background, foreground, selection and baseColor
 		 * @param color, the alpha color value, range from 0 to 255
+         * 
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
 		 */
 		virtual void setAlpha(int alpha);
 		
-		
-		static void setGlobalBackgroundColor(const Color& col);
-		static void setGlobalForegroundColor(const Color& col);
-		static void setGlobalBaseColor(const Color& col);
-		static void setGlobalSelectionColor(const Color& col);
 
-		static Color getGlobalBackgroundColor();
-		static Color getGlobalForegroundColor();
-		static Color getGlobalBaseColor();
-		static Color getGlobalSelectionColor();
+       
 	
 	protected:
         /**
@@ -1125,6 +1181,18 @@ namespace gcn
          * Typdef.
          */
         typedef WidgetListenerList::iterator WidgetListenerIterator;
+        
+        /**
+         * Typedef
+         */
+        typedef std::list<BirthListener*> BirthListenerList;
+        
+        typedef BirthListenerList::iterator BirthListenerIterator;
+        
+        /**
+         * Holds the birth listeners of the widget
+         */
+        BirthListenerList mBirthListeners;
 
         /**
          * Holds the foreground color of the widget.
@@ -1145,11 +1213,6 @@ namespace gcn
          * Holds the selection color of the widget.
          */
         Color mSelectionColor;
-		
-		static Color mGlobalForegroundColor;
-		static Color mGlobalBackgroundColor;
-		static Color mGlobalBaseColor;
-		static Color mGlobalSelectionColor;
 
         /**
          * Holds the focus handler used by the widget.
@@ -1236,9 +1299,11 @@ namespace gcn
 		
 		/**
 		 * Holds the list of all modifiers
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
 		 */
-		typedef std::list<Modifier*> ModifierList;
-		typedef std::list<Modifier*>::iterator ModifierIterator;
+		typedef std::vector<Modifier*> ModifierList;
+		typedef std::vector<Modifier*>::iterator ModifierIterator;
 		
 		ModifierList mModifiers;
     };

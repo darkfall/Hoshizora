@@ -57,7 +57,8 @@
 #include "guichan/mouseinput.hpp"
 #include "guichan/mouselistener.hpp"
 #include "guichan/widget.hpp"
-#include "guichan/SoundLoader.h"
+#include "guichan/SoundLoader.hpp"
+#include "guichan/style.hpp"
 
 namespace gcn
 {
@@ -76,7 +77,8 @@ namespace gcn
              mLastMouseX(0),
              mLastMouseY(0),
              mClickCount(1),
-             mLastMouseDragButton(0)
+             mLastMouseDragButton(0),
+             mStyle(NULL)
     {
         mFocusHandler = new FocusHandler();
     }
@@ -1001,5 +1003,14 @@ namespace gcn
             widget = parent;
             parent = (Widget*)swap->getParent();
         }
+    }
+    
+    void Gui::setStyle(Style* style) {
+      //  assert(style);
+        mStyle = style;
+    }
+    
+    Style* Gui::getStyle() const {
+        return mStyle;
     }
 }

@@ -22,6 +22,8 @@
 #include "SoraTimestamp.h"
 
 int main(int argc, char* argv[]) {    
+    
+    std::cout<<sora::GetUniqueStringId("SoraHotkeyEvent")<<std::endl<<sora::GetUniqueStringId("SoraMouseEvent")<<std::endl<<sora::GetUniqueStringId("SoraJoystickEvent");
 
 	sora::SoraCore* sora = sora::SoraCore::Instance();
     

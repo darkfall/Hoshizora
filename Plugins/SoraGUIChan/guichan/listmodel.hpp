@@ -73,8 +73,6 @@ namespace gcn
          */
         virtual int getNumberOfElements() = 0;
 		
-		virtual void pushElement(const std::string& str) = 0;
-
         /**
          * Gets an element at a certain index in the list.
          *
@@ -82,6 +80,28 @@ namespace gcn
          * @return An element as a string at the a certain index.
          */
         virtual std::string getElementAt(int i) = 0;
+        
+        /**
+         * Push a element into the tail of the list
+         *
+         * @param the element to add
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         */
+        virtual void pushElement(const std::string& elmnt) {
+            
+        }
+        
+        /**
+         * Push a element into the tail of the list
+         *
+         * @param the element to add
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         */
+        virtual void setElementAt(int i, const std::string& elmnt) {
+            
+        }
     };
 }
 

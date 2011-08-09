@@ -47,12 +47,10 @@
 
 #include "guichan/widgets/textfield.hpp"
 
-//#include "guichan/hge/gfxfont.h"
 #include "guichan/font.hpp"
 #include "guichan/graphics.hpp"
 #include "guichan/key.hpp"
 #include "guichan/mouseinput.hpp"
-#include "guichan/StringConv.h"
 
 namespace gcn
 {
@@ -68,7 +66,7 @@ namespace gcn
         addKeyListener(this);
     }
 
-    TextField::TextField(const std::wstring& text)
+    TextField::TextField(const std::string& text)
     {
         mCaretPosition = 0;
         mXScroll = 0;
@@ -82,7 +80,7 @@ namespace gcn
         addKeyListener(this);
     }
 
-    void TextField::setText(const std::wstring& text)
+    void TextField::setText(const std::string& text)
     {
         if(text.size() < mCaretPosition )
         {
@@ -102,7 +100,7 @@ namespace gcn
 	
 	int TextField::getNumber() const {
 		if(mNumericMode) 
-			return atoi(ws2s(getText()).c_str());
+			return atoi(getText().c_str());
 		return 0;
 	}
 
@@ -140,12 +138,12 @@ namespace gcn
 
         if (isFocused())
         {
-            drawCaret(graphics, getFont()->getWidth(ws2s(mText.substr(0, mCaretPosition))) - mXScroll);
+            drawCaret(graphics, getFont()->getWidth(mText.substr(0, mCaretPosition)) - mXScroll);
         }
 
         graphics->setColor(getForegroundColor());
         graphics->setFont(getFont());
-		graphics->drawText(ws2s(mText).c_str(), 3 - mXScroll, 1);
+		graphics->drawText(mText.c_str(), 3 - mXScroll, 1);
 
         graphics->popClipArea();
     }
@@ -168,7 +166,7 @@ namespace gcn
     {
         if (mouseEvent.getButton() == MouseEvent::LEFT)
         {
-            mCaretPosition = getFont()->getStringIndexAt(ws2s(mText), mouseEvent.getX() + mXScroll);
+            mCaretPosition = getFont()->getStringIndexAt(mText, mouseEvent.getX() + mXScroll);
             fixScroll();
         }
     }
@@ -226,11 +224,11 @@ namespace gcn
                  && key.getValue() != Key::TAB)
         {
 			if(!mNumericMode) {
-				mText.insert(mCaretPosition, std::wstring(1,(char)key.getValue()));
+				mText.insert(mCaretPosition, std::string(1,(char)key.getValue()));
 				++mCaretPosition;
 			} else {
 				if(key.isNumber()) {
-					mText.insert(mCaretPosition, std::wstring(1,(char)key.getValue()));
+					mText.insert(mCaretPosition, std::string(1,(char)key.getValue()));
 					++mCaretPosition;
 				}
 			}
@@ -253,7 +251,7 @@ namespace gcn
 				szImeChar[2]='\0';
 			}
 
-			mText.insert(mCaretPosition, s2ws(szImeChar));
+			mText.insert(mCaretPosition, szImeChar);
 			 ++mCaretPosition;
 		}
 
@@ -267,7 +265,7 @@ namespace gcn
 
     void TextField::adjustSize()
     {
-		setWidth(getFont()->getWidth(ws2s(mText)) + 7);
+		setWidth(getFont()->getWidth(mText) + 7);
         adjustHeight();
 
         fixScroll();
@@ -282,7 +280,7 @@ namespace gcn
     {
         if (isFocused())
         {
-            int caretX = getFont()->getWidth(ws2s(mText.substr(0, mCaretPosition)));
+            int caretX = getFont()->getWidth(mText.substr(0, mCaretPosition));
 
             if (caretX - mXScroll >= getWidth() - 4)
             {
@@ -319,7 +317,7 @@ namespace gcn
         return mCaretPosition;
     }
 
-    const std::wstring& TextField::getText() const
+    const std::string& TextField::getText() const
     {
         return mText;
     }

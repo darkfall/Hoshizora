@@ -29,7 +29,6 @@ namespace gcn {
 		virtual ~SoraGUISoundLoader();
 		
 		gcn::Sound* load(const std::string& soundName);
-		gcn::Sound* load(const std::wstring& soundName);
 		
 	private:
 		typedef sora::hash_map<sora::stringId, sora::SoraSoundEffectFile*> SOUND_MAP;

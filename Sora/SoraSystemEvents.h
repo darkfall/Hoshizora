@@ -48,9 +48,15 @@ namespace sora {
         float32 mDelta;
     };
     
+#ifdef SORA_USE_RTTI
     static bool IsSystemEvent(SoraEvent* evt) {
         return isClassClass<SoraEvent, SoraSystemEvent>(evt);
     }
+#else
+    static bool IsSystemEvent(SoraEvent* evt) {
+        return evt->getEventIdentifier() == 18446744070299896253LL;
+    }
+#endif
     
     
 } // namespace sora

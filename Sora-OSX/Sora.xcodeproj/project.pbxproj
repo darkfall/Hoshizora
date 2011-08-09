@@ -43,7 +43,6 @@
 		8801A97413EF79C200B9A779 /* rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A90E13EF79C200B9A779 /* rectangle.cpp */; };
 		8801A97513EF79C200B9A779 /* selectionevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A91013EF79C200B9A779 /* selectionevent.cpp */; };
 		8801A97613EF79C200B9A779 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A91313EF79C200B9A779 /* Sound.cpp */; };
-		8801A97713EF79C200B9A779 /* StringConv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A91613EF79C200B9A779 /* StringConv.cpp */; };
 		8801A97813EF79C200B9A779 /* widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A91813EF79C200B9A779 /* widget.cpp */; };
 		8801A97913EF79C200B9A779 /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A91C13EF79C200B9A779 /* button.cpp */; };
 		8801A97A13EF79C200B9A779 /* checkbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A91E13EF79C200B9A779 /* checkbox.cpp */; };
@@ -218,6 +217,9 @@
 		88C2017813E47BA200C039A0 /* SoraDeltaWatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C2017713E47B9C00C039A0 /* SoraDeltaWatch.cpp */; };
 		88C3666313B79C9200990FEF /* SoraBooter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C3666213B79C9200990FEF /* SoraBooter.cpp */; };
 		88C367DB13B7D0D800990FEF /* SoraFileChangeEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C367DA13B7D0D800990FEF /* SoraFileChangeEvent.cpp */; };
+		88D87C3713F199E10027BF81 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87C3613F199E10027BF81 /* animation.cpp */; };
+		88D87C3913F19F090027BF81 /* style.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87C3813F19F080027BF81 /* style.cpp */; };
+		88D87C3B13F1A21D0027BF81 /* modifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87C3A13F1A21D0027BF81 /* modifier.cpp */; };
 		88D87D5712A09A66007D6865 /* hgerect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2112A09A66007D6865 /* hgerect.cpp */; };
 		88D87D5812A09A66007D6865 /* hgevector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2312A09A66007D6865 /* hgevector.cpp */; };
 		88D87D5A12A09A66007D6865 /* SoraCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D2D12A09A66007D6865 /* SoraCore.cpp */; };
@@ -301,12 +303,8 @@
 		8801A8D713EF79C200B9A779 /* cliprectangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cliprectangle.hpp; sourceTree = "<group>"; };
 		8801A8D813EF79C200B9A779 /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
 		8801A8D913EF79C200B9A779 /* color.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = color.hpp; sourceTree = "<group>"; };
-		8801A8DB13EF79C200B9A779 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		8801A8DC13EF79C200B9A779 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
 		8801A8DE13EF79C200B9A779 /* adjustingcontainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjustingcontainer.cpp; sourceTree = "<group>"; };
 		8801A8DF13EF79C200B9A779 /* adjustingcontainer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = adjustingcontainer.hpp; sourceTree = "<group>"; };
-		8801A8E013EF79C200B9A779 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		8801A8E113EF79C200B9A779 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
 		8801A8E213EF79C200B9A779 /* deathlistener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = deathlistener.hpp; sourceTree = "<group>"; };
 		8801A8E313EF79C200B9A779 /* defaultfont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = defaultfont.cpp; sourceTree = "<group>"; };
 		8801A8E413EF79C200B9A779 /* defaultfont.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = defaultfont.hpp; sourceTree = "<group>"; };
@@ -341,10 +339,7 @@
 		8801A90113EF79C200B9A779 /* keyinput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyinput.cpp; sourceTree = "<group>"; };
 		8801A90213EF79C200B9A779 /* keyinput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyinput.hpp; sourceTree = "<group>"; };
 		8801A90313EF79C200B9A779 /* keylistener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keylistener.hpp; sourceTree = "<group>"; };
-		8801A90413EF79C200B9A779 /* listmodel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = listmodel.hpp; sourceTree = "<group>"; };
-		8801A90513EF79C200B9A779 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		8801A90613EF79C200B9A779 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
-		8801A90713EF79C200B9A779 /* Modifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Modifier.h; sourceTree = "<group>"; };
+		8801A90413EF79C200B9A779 /* listmodel.hpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; path = listmodel.hpp; sourceTree = "<group>"; };
 		8801A90813EF79C200B9A779 /* mouseevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mouseevent.cpp; sourceTree = "<group>"; };
 		8801A90913EF79C200B9A779 /* mouseevent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mouseevent.hpp; sourceTree = "<group>"; };
 		8801A90A13EF79C200B9A779 /* mouseinput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mouseinput.cpp; sourceTree = "<group>"; };
@@ -357,10 +352,8 @@
 		8801A91113EF79C200B9A779 /* selectionevent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = selectionevent.hpp; sourceTree = "<group>"; };
 		8801A91213EF79C200B9A779 /* selectionlistener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = selectionlistener.hpp; sourceTree = "<group>"; };
 		8801A91313EF79C200B9A779 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
-		8801A91413EF79C200B9A779 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
-		8801A91513EF79C200B9A779 /* SoundLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundLoader.h; sourceTree = "<group>"; };
-		8801A91613EF79C200B9A779 /* StringConv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringConv.cpp; sourceTree = "<group>"; };
-		8801A91713EF79C200B9A779 /* StringConv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringConv.h; sourceTree = "<group>"; };
+		8801A91413EF79C200B9A779 /* Sound.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sound.hpp; sourceTree = "<group>"; };
+		8801A91513EF79C200B9A779 /* SoundLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundLoader.hpp; sourceTree = "<group>"; };
 		8801A91813EF79C200B9A779 /* widget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = widget.cpp; sourceTree = "<group>"; };
 		8801A91913EF79C200B9A779 /* widget.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = widget.hpp; sourceTree = "<group>"; };
 		8801A91A13EF79C200B9A779 /* widgetlistener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = widgetlistener.hpp; sourceTree = "<group>"; };
@@ -429,6 +422,10 @@
 		8801A95B13EF79C200B9A779 /* SoraGUISoundLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGUISoundLoader.h; sourceTree = "<group>"; };
 		8801A95C13EF79C200B9A779 /* xmlgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = xmlgui.cpp; sourceTree = "<group>"; };
 		8801A95D13EF79C200B9A779 /* xmlgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xmlgui.h; sourceTree = "<group>"; };
+		8801A99513F1266000B9A779 /* birthListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = birthListener.h; sourceTree = "<group>"; };
+		8801A99613F1892600B9A779 /* animation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animation.hpp; sourceTree = "<group>"; };
+		8801A99713F1893F00B9A779 /* style.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = style.hpp; sourceTree = "<group>"; };
+		8801A99813F18D6400B9A779 /* modifier.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = modifier.hpp; sourceTree = "<group>"; };
 		8802D4BA135FA8C2001FD2D8 /* SoraFMODSoundFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraFMODSoundFile.cpp; sourceTree = "<group>"; };
 		8802D4BB135FA8C2001FD2D8 /* SoraFMODSoundFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFMODSoundFile.h; sourceTree = "<group>"; };
 		8802D4BC135FA8C2001FD2D8 /* SoraFMODSoundSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraFMODSoundSystem.cpp; sourceTree = "<group>"; };
@@ -864,6 +861,9 @@
 		88CE59A112C1CE6A00C551F0 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector3.h; sourceTree = "<group>"; };
 		88CFF7E812C6D562002A9F75 /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		88D10AB213C30BD900E0002A /* WindowsStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowsStackTrace.h; sourceTree = "<group>"; };
+		88D87C3613F199E10027BF81 /* animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
+		88D87C3813F19F080027BF81 /* style.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = style.cpp; sourceTree = "<group>"; };
+		88D87C3A13F1A21D0027BF81 /* modifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = modifier.cpp; sourceTree = "<group>"; };
 		88D87D1E12A09A66007D6865 /* SoraDefaultLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDefaultLogger.h; sourceTree = "<group>"; };
 		88D87D1F12A09A66007D6865 /* SoraDefaultMiscTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDefaultMiscTool.h; sourceTree = "<group>"; };
 		88D87D2012A09A66007D6865 /* SoraDefaultTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDefaultTimer.h; sourceTree = "<group>"; };
@@ -1077,6 +1077,7 @@
 				8801A8D913EF79C200B9A779 /* color.hpp */,
 				8801A8DA13EF79C200B9A779 /* contrib */,
 				8801A8E213EF79C200B9A779 /* deathlistener.hpp */,
+				8801A99513F1266000B9A779 /* birthListener.h */,
 				8801A8E313EF79C200B9A779 /* defaultfont.cpp */,
 				8801A8E413EF79C200B9A779 /* defaultfont.hpp */,
 				8801A8E513EF79C200B9A779 /* event.cpp */,
@@ -1111,9 +1112,12 @@
 				8801A90213EF79C200B9A779 /* keyinput.hpp */,
 				8801A90313EF79C200B9A779 /* keylistener.hpp */,
 				8801A90413EF79C200B9A779 /* listmodel.hpp */,
-				8801A90513EF79C200B9A779 /* Makefile.am */,
-				8801A90613EF79C200B9A779 /* Makefile.in */,
-				8801A90713EF79C200B9A779 /* Modifier.h */,
+				8801A99813F18D6400B9A779 /* modifier.hpp */,
+				88D87C3A13F1A21D0027BF81 /* modifier.cpp */,
+				8801A99613F1892600B9A779 /* animation.hpp */,
+				88D87C3613F199E10027BF81 /* animation.cpp */,
+				8801A99713F1893F00B9A779 /* style.hpp */,
+				88D87C3813F19F080027BF81 /* style.cpp */,
 				8801A90813EF79C200B9A779 /* mouseevent.cpp */,
 				8801A90913EF79C200B9A779 /* mouseevent.hpp */,
 				8801A90A13EF79C200B9A779 /* mouseinput.cpp */,
@@ -1126,10 +1130,8 @@
 				8801A91113EF79C200B9A779 /* selectionevent.hpp */,
 				8801A91213EF79C200B9A779 /* selectionlistener.hpp */,
 				8801A91313EF79C200B9A779 /* Sound.cpp */,
-				8801A91413EF79C200B9A779 /* Sound.h */,
-				8801A91513EF79C200B9A779 /* SoundLoader.h */,
-				8801A91613EF79C200B9A779 /* StringConv.cpp */,
-				8801A91713EF79C200B9A779 /* StringConv.h */,
+				8801A91413EF79C200B9A779 /* Sound.hpp */,
+				8801A91513EF79C200B9A779 /* SoundLoader.hpp */,
 				8801A91813EF79C200B9A779 /* widget.cpp */,
 				8801A91913EF79C200B9A779 /* widget.hpp */,
 				8801A91A13EF79C200B9A779 /* widgetlistener.hpp */,
@@ -1141,8 +1143,6 @@
 		8801A8DA13EF79C200B9A779 /* contrib */ = {
 			isa = PBXGroup;
 			children = (
-				8801A8DB13EF79C200B9A779 /* Makefile.am */,
-				8801A8DC13EF79C200B9A779 /* Makefile.in */,
 				8801A8DD13EF79C200B9A779 /* widgets */,
 			);
 			path = contrib;
@@ -1153,8 +1153,6 @@
 			children = (
 				8801A8DE13EF79C200B9A779 /* adjustingcontainer.cpp */,
 				8801A8DF13EF79C200B9A779 /* adjustingcontainer.hpp */,
-				8801A8E013EF79C200B9A779 /* Makefile.am */,
-				8801A8E113EF79C200B9A779 /* Makefile.in */,
 			);
 			path = widgets;
 			sourceTree = "<group>";
@@ -2317,7 +2315,6 @@
 				8801A97413EF79C200B9A779 /* rectangle.cpp in Sources */,
 				8801A97513EF79C200B9A779 /* selectionevent.cpp in Sources */,
 				8801A97613EF79C200B9A779 /* Sound.cpp in Sources */,
-				8801A97713EF79C200B9A779 /* StringConv.cpp in Sources */,
 				8801A97813EF79C200B9A779 /* widget.cpp in Sources */,
 				8801A97913EF79C200B9A779 /* button.cpp in Sources */,
 				8801A97A13EF79C200B9A779 /* checkbox.cpp in Sources */,
@@ -2347,6 +2344,9 @@
 				8801A99213EF79C200B9A779 /* SoraGUISound.cpp in Sources */,
 				8801A99313EF79C200B9A779 /* SoraGUISoundLoader.cpp in Sources */,
 				8801A99413EF79C200B9A779 /* xmlgui.cpp in Sources */,
+				88D87C3713F199E10027BF81 /* animation.cpp in Sources */,
+				88D87C3913F19F090027BF81 /* style.cpp in Sources */,
+				88D87C3B13F1A21D0027BF81 /* modifier.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

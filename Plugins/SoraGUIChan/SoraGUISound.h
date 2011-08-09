@@ -19,7 +19,6 @@ namespace gcn {
 		friend class SoraGUISoundLoader;
 		
 		SoraGUISound(const std::string& name);
-		SoraGUISound(const std::wstring& name);
 		SoraGUISound();
 		
 	public:

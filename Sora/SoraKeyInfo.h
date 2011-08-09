@@ -240,7 +240,7 @@ namespace sora {
         
         
 #ifndef SORA_USE_RTTI
-        SORA_EVENT_IDENTIFIER(str2id("SoraMouseEvent"));
+        SORA_EVENT_IDENTIFIER(18446744070821151360ULL);
 #endif
     };
     
@@ -252,7 +252,7 @@ namespace sora {
         int getJoystickId() const;
         
 #ifndef SORA_USE_RTTI
-        SORA_EVENT_IDENTIFIER(str2id("SoraJoystickEvent"));
+        SORA_EVENT_IDENTIFIER(18446744073365881885ULL);
 #endif
     };
 }

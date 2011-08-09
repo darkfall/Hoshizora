@@ -61,6 +61,11 @@
 #include "guichan/mouseinput.hpp"
 #include "guichan/mouselistener.hpp"
 #include "guichan/widgetlistener.hpp"
+#include "guichan/birthListener.h"
+#include "guichan/style.hpp"
+#include "guichan/modifier.hpp"
+
+#include <assert.h>
 
 namespace gcn
 {
@@ -69,10 +74,10 @@ namespace gcn
     std::list<Widget*> Widget::mWidgets;
 
     Widget::Widget()
-            : mForegroundColor(mGlobalForegroundColor),
-              mBackgroundColor(mGlobalBackgroundColor),
-              mBaseColor(mGlobalBaseColor),
-              mSelectionColor(mGlobalSelectionColor),
+            : mForegroundColor(Style::getGlobalForegroundColor()),
+              mBackgroundColor(Style::getGlobalBackgroundColor()),
+              mBaseColor(Style::getGlobalBaseColor()),
+              mSelectionColor(Style::getGlobalSelectionColor()),
               mFocusHandler(NULL),
               mInternalFocusHandler(NULL),
               mParent(NULL),
@@ -99,8 +104,8 @@ namespace gcn
 		
 		ModifierIterator itModifier = mModifiers.begin();
 		while(itModifier != mModifiers.end()) {
-			delete (*itModifier);
-			(*itModifier) = NULL;
+			if((*itModifier)->isAutoRelease())
+                (*itModifier)->release();
 			
 			++itModifier;
 		}
@@ -453,6 +458,16 @@ namespace gcn
     {
         mWidgetListeners.remove(widgetListener);
     }
+    
+    void Widget::addBirthListener(BirthListener* birthListener)
+    {
+        mBirthListeners.push_back(birthListener);
+    }
+    
+    void Widget::removeBirthListener(BirthListener* birthListener)
+    {
+        mBirthListeners.remove(birthListener);
+    }
 
     void Widget::getAbsolutePosition(int& x, int& y) const
     {
@@ -683,9 +698,9 @@ namespace gcn
     {
         WidgetListenerIterator iter;
 
+        Event event(this);
         for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
         {
-            Event event(this);
             (*iter)->widgetResized(event);
         }
     }
@@ -694,9 +709,9 @@ namespace gcn
     {
         WidgetListenerIterator iter;
 
+        Event event(this);
         for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
         {
-            Event event(this);
             (*iter)->widgetMoved(event);
         }
     }
@@ -705,9 +720,9 @@ namespace gcn
     {
         WidgetListenerIterator iter;
 
+        Event event(this);
         for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
         {
-            Event event(this);
             (*iter)->widgetHidden(event);
         }
     }
@@ -726,10 +741,19 @@ namespace gcn
     {
         WidgetListenerIterator iter;
 
+        Event event(this);
         for (iter = mWidgetListeners.begin(); iter != mWidgetListeners.end(); ++iter)
         {
-            Event event(this);
             (*iter)->widgetShown(event);
+        }
+    }
+    
+    void Widget::distributeBirthEvent() {
+        BirthListenerIterator iter;
+        
+        Event event(this);
+        for (iter = mBirthListeners.begin(); iter != mBirthListeners.end(); ++iter) {
+            (*iter)->birth(event);
         }
     }
 
@@ -742,23 +766,42 @@ namespace gcn
     }
 	
 	void Widget::logic() {
-		ModifierIterator iter;
-		
-		for (iter = mModifiers.begin(); iter != mModifiers.end(); ++iter) {
-			(*iter)->update(this);
-		}
+		updateModifierList();
 	}
+    
+    void Widget::updateModifierList() {
+        ModifierIterator iter = mModifiers.begin();
+        ModifierIterator end = mModifiers.end();
+        
+        while(iter != end) {
+            (*iter)->update(this);
+            if((*iter)->isFinished()) {
+                if((*iter)->isAutoRelease()) {
+                    (*iter)->release();
+                    iter = mModifiers.erase(iter);
+                    continue;
+                }
+            }
+            ++iter;
+        }
+    }
 	
-	const std::list<Modifier*> Widget::_getModifiers() {
+	const std::vector<Modifier*>& Widget::_getModifiers() {
 		return mModifiers;
 	}
 	
 	void Widget::addModifier(Modifier* modifier) {
-		mModifiers.push_back(modifier);
+		assert(modifier);
+        
+        mModifiers.push_back(modifier);
+        modifier->setOwner(this);
 	}
 	
 	void Widget::removeModifier(Modifier* modifier) {
-		mModifiers.remove(modifier);
+        assert(modifier);
+        
+        mModifiers.erase(std::remove(mModifiers.begin(), mModifiers.end(), modifier), mModifiers.end());
+        modifier->setOwner(NULL);
 	}
 	
 	void Widget::setAlpha(int alpha) {
@@ -771,40 +814,7 @@ namespace gcn
 		mBackgroundColor.a = alpha;
 	}
 
-	Color Widget::mGlobalBackgroundColor(0xffffff);
-	Color Widget::mGlobalForegroundColor(0x000000);
-	Color Widget::mGlobalBaseColor(0x808090);
-	Color Widget::mGlobalSelectionColor(0xc3d9ff);
-
-	void Widget::setGlobalBackgroundColor(const Color& col) {
-		mGlobalBackgroundColor = col;
-	}
-	
-	void Widget::setGlobalForegroundColor(const Color& col) {
-		mGlobalForegroundColor = col;
-	}
-	
-	void Widget::setGlobalBaseColor(const Color& col) {
-		mGlobalBaseColor = col;
-	}
-	
-	void Widget::setGlobalSelectionColor(const Color& col) {
-		mGlobalSelectionColor = col;
-	}
-	
-	Color Widget::getGlobalBackgroundColor() {
-		return mGlobalBackgroundColor;
-	}
-	
-	Color Widget::getGlobalForegroundColor() {
-		return mGlobalForegroundColor;
-	}
-	
-	Color Widget::getGlobalBaseColor() {
-		return mGlobalBaseColor;
-	}
-	
-	Color Widget::getGlobalSelectionColor() {
-		return mGlobalSelectionColor;
-	}
+    const std::list<BirthListener*>& Widget::_getBirthListeners() {
+        return mBirthListeners;
+    }
 }

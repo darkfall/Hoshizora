@@ -7,8 +7,8 @@
  *
  */
 
-#include "Sound.h"
-#include "SoundLoader.h"
+#include "Sound.hpp"
+#include "SoundLoader.hpp"
 
 namespace gcn {
 
@@ -29,13 +29,6 @@ namespace gcn {
 	}
 
 	Sound* Sound::load(const std::string& soundName) {
-		if(mSoundLoader) {
-			return mSoundLoader->load(soundName);
-		}
-		return NULL;
-	}
-	
-	Sound* Sound::load(const std::wstring& soundName) {
 		if(mSoundLoader) {
 			return mSoundLoader->load(soundName);
 		}

@@ -29,12 +29,12 @@ namespace sora {
         virtual void    delAll();
 		
 		virtual void    setPosition(float32 _x, float32 _y);
-		virtual float32 getPositionX();
-		virtual float32 getPositionY();
-        virtual void    getPosition(float32& _x, float32& _y);
+		virtual float32 getPositionX() const;
+		virtual float32 getPositionY() const;
+        virtual void    getPosition(float32& _x, float32& _y)  const;
         
-        virtual float32 getAbsolutePositionX();
-        virtual float32 getAbsolutePositionY();
+        virtual float32 getAbsolutePositionX() const;
+        virtual float32 getAbsolutePositionY() const;
         
         virtual void    setParent(SoraObject* obj);
         

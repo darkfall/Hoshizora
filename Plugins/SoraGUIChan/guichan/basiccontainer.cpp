@@ -241,6 +241,9 @@ namespace gcn
 
         widget->_setParent(this);
         widget->addDeathListener(this);
+        
+        // birth listener support added by Robert Bu
+        widget->distributeBirthEvent();
     }
 
     void BasicContainer::remove(Widget* widget)

@@ -97,9 +97,10 @@
 /*
  * extended by Robert Bu
  */
-#include <guichan/Modifier.h>
-#include <guichan/Sound.h>
-#include <guichan/SoundLoader.h>
+#include <guichan/Sound.hpp>
+#include <guichan/SoundLoader.hpp>
+#include <guichan/style.hpp>
+#include <guichan/animation.hpp>
 
 #include "guichan/platform.hpp"
 

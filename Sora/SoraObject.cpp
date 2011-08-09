@@ -59,28 +59,28 @@ namespace sora {
 		mPosy = _y;
 	}
 	
-	void SoraObject::getPosition(float32& _x, float32& _y) {
+	void SoraObject::getPosition(float32& _x, float32& _y) const {
 		_x = getPositionX();
 		_y = getPositionY();
 	}
 	
-	float32 SoraObject::getPositionX() {
+	float32 SoraObject::getPositionX() const {
         if(!mParent)
             return mPosx;
         return mPosx+mParent->getPositionX();
 	}
 	
-	float32 SoraObject::getPositionY() {
+	float32 SoraObject::getPositionY() const {
         if(!mParent)
             return mPosy;
         return mPosy+mParent->getPositionY();
 	}
     
-    float32 SoraObject::getAbsolutePositionX() {
+    float32 SoraObject::getAbsolutePositionX() const {
         return mPosx;
     }
     
-    float32 SoraObject::getAbsolutePositionY() {
+    float32 SoraObject::getAbsolutePositionY() const {
         return mPosy;
     }
 
