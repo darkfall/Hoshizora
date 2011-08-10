@@ -379,8 +379,9 @@ namespace sora {
 				(*eff)->modify(this);
 				
 				if(result == IMAGE_EFFECT_END) {     
-					delete (*eff);
-					(*eff) = 0;
+					if((*eff)->isAutoRelease()) {
+                        (*eff)->release();
+                    }
 					
 					eff = vEffects.erase(eff);
 					continue;

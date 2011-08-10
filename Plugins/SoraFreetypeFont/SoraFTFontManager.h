@@ -42,8 +42,6 @@ namespace sora {
 		SoraString fileName;
 		FTFace* face;
 		
-		SoraMemoryBuffer memoryHold;
-
 		bool operator < (const SFTFace& other) const {
 			return strcmp(fileName.c_str(), other.fileName.c_str()) < 0;
 		}

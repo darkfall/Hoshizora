@@ -39,7 +39,7 @@ namespace sora {
 		
 		init();
 		bZDepth = false;
-
+		bRotate3v = false;
 	}
 
 	SoraParticleSystem::SoraParticleSystem(const SoraWString& str, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
@@ -54,7 +54,7 @@ namespace sora {
 		
 		init();
 		bZDepth = false;
-
+		bRotate3v = false;
 	}
 
 	void SoraParticleSystem::setZDepthEnabled(bool flag) {

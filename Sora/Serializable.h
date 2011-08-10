@@ -10,10 +10,10 @@
 #ifndef SORA_SERIALIZABLE_H__
 #define SORA_SERIALIZABLE_H__
 
+#include "SoraStream.h"
+
 namespace sora {
-	
-	class SoraMemoryBuffer;
-	
+		
 	class Serializable {
 	public:
 		virtual void serialize(SoraStream& bufferStream) = 0;

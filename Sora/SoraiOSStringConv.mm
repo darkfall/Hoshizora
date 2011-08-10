@@ -32,7 +32,9 @@ namespace sora {
 	
 	std::wstring iOSString2WString(const std::string& str) {
 		NSString* nsstr = [[NSString alloc] initWithUTF8String: str.c_str()];
-		return NSStringToStringW(nsstr);
+        std::wstring wstr = NSStringToStringW(nsstr);
+        [nsstr release];
+        return wstr;
 	}
 	
 	std::string iOSWString2String(const std::wstring& str) {

@@ -27,6 +27,7 @@ namespace gcn {
 	class SoundLoader {
 	public:
 		virtual Sound* load(const std::string& soundName) = 0;
+        virtual void play(const std::string& soundName) = 0;
     };
 	
 } // namespace gcn

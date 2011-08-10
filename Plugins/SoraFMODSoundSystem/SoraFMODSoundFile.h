@@ -29,7 +29,7 @@ namespace sora {
 		void pause();
 		void resume();
         
-		// 0 - 100
+		// 0 - 1
 		void setVolume(float32 vol);
 		// -1.0 - 1.0
 		void setPan(float32 pan);
@@ -48,8 +48,8 @@ namespace sora {
 		
 		int32 getLength() const;
 		
-		void setRepeat(int32 loopCount);
-		int32 isRepeat() const;
+		void setRepeat(bool flag);
+		bool isRepeat() const;
 		bool isPlaying() const;
         
     private:
@@ -92,8 +92,8 @@ namespace sora {
 		float32 getPitch() const;
 		float32 getVolume() const;
         
-        void setRepeat(int32 loopCount);
-		int32 isRepeat() const;
+        void setRepeat(bool flag);
+		bool isRepeat() const;
 		bool isPlaying() const;
         
     private:

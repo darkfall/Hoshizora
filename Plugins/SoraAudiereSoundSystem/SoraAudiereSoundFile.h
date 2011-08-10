@@ -42,8 +42,8 @@ namespace sora {
 
 		int32 getLength() const;
 		
-		void setRepeat(int32 flag);
-		int32 isRepeat() const;
+		void setRepeat(bool flag);
+		bool isRepeat() const;
 		bool isPlaying() const;
 
 	private:
@@ -85,8 +85,8 @@ namespace sora {
 		float32 getVolume() const;
 
 		// todo 
-		void setRepeat(int32 flag) {}
-		int32 isRepeat() const { return 0; }
+		void setRepeat(bool flag) {}
+		bool isRepeat() const { return 0; }
 		bool isPlaying() const { return false; }
 
 	private:

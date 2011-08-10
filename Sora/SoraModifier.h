@@ -24,17 +24,26 @@ namespace sora {
     template<class MT>
     class SORA_API SoraModifier {
     public:
-        typedef SoraAutoPtr<SoraModifier> Ptr;
+        typedef SoraAutoPtr<SoraModifier> PtrType;
         typedef SoraAbstractDelegate<int32> Delegate;
         
-        SoraModifier(): mDelegatePtr(NULL) {}
+        SoraModifier(bool autoRelease=true):
+        mDelegatePtr(NULL),
+        mAutoRelease(autoRelease) {
+        }
+        
+        virtual ~SoraModifier() {
+            if(mDelegatePtr)
+                delete mDelegatePtr;
+        }
         
         virtual int32   update(float32 dt) = 0;
         virtual void    modify(MT* object) = 0;
         
         virtual SoraModifier<MT>* clone() = 0;
         
-        virtual void reset() {}
+        virtual void reset() {
+        }
         
         void setFinishDelegate(const Delegate& del) {
             mDelegatePtr = del.clone();
@@ -44,8 +53,21 @@ namespace sora {
             return mDelegatePtr;
         }
         
+        virtual void release() {
+            delete this;
+        }
+        
+        void setAutoRelease(bool flag) {
+            mAutoRelease = flag;
+        }
+        
+        bool isAutoRelease() const {
+            return mAutoRelease;
+        }
+        
     protected:
         Delegate* mDelegatePtr;
+        bool mAutoRelease;
     };
     
     template<class MT>
@@ -124,14 +146,29 @@ namespace sora {
     
     template<typename MT>
     void SoraModifierList<MT>::clear() {
-        for(size_t i=0; i<mModifiers.size(); ++i)
-            delete mModifiers[i];
+        typename ModifierList::iterator itModifier = mModifiers.begin();
+        while(itModifier != mModifiers.end()) {
+            if((*itModifier)->isAutoRelease()) {
+                (*itModifier)->release();
+            }
+            ++itModifier;
+        }
         mModifiers.clear();
     }
     
     template<typename MT>
     SoraModifier<MT>* SoraModifierList<MT>::clone() {
-        return NULL;
+        SoraModifierList<MT>* c = new SoraModifierList<MT>(mRepeat);
+        typename ModifierList::iterator itModifier = mModifiers.begin();
+        while(itModifier != mModifiers.end()) {
+            SoraModifier<MT>* mod = (*itModifier)->clone();
+            if(mod != NULL) {
+                c->add(mod);
+            }
+            ++itModifier;
+        }
+        c->mCurrModifier = mCurrModifier;
+        return c;
     }
     
     template<class MT>

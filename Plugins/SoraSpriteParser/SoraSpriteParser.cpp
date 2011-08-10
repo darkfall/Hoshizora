@@ -189,7 +189,7 @@ namespace sora {
 				
 				std::string shaderFile;
 				std::string shaderEntry;
-				sora::SORA_SHADER_TYPE shaderType;
+				int32 shaderType;
 				if(shaderVal.isMember("file")) 
 					shaderFile = shaderVal["file"].asString();
 				else

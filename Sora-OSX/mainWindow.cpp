@@ -62,6 +62,9 @@ bool mainWindow::renderFunc() {
 //    mScene1->getCanvas()->render();
   //  mMovieSprite->update(sora::SORA->getDelta());
    // mMovieSprite->render();
+    
+    sora::SoraResourceFileAuto file(L"test.txt");
+    mFont->render(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, sora::s2ws((const char*)file.data()).c_str());
     sora::SORA->endScene();
     
 	return false;
@@ -89,7 +92,9 @@ void mainWindow::init() {
     mCamera = new sora::SoraCamera(100, 100.f, 500.f, 500.f);
   //  mCamera->zoomTo(2.f, 2.f, 20.f);
 //    mScene1->setCamera(mCamera);
-    
+    mFont = sora::SORA->createFont(L"font.otf", 20);
+    if(!mFont)
+        sora::SORA->messageBox("sds", "Sds", MB_OK);
     
     
     mScene1->add(mScene2);

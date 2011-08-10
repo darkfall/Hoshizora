@@ -136,7 +136,7 @@ namespace sora {
     std::string ws2s(const std::wstring& ws) {
 #ifdef WIN32
         return WChar2Ansi(ws);
-#elif defined(OS_IOS)
+#elif defined(OS_IOS) || defined(OS_OSX)
         return iOSWString2String(ws);
 #endif
         std::string curLocale = setlocale(LC_ALL, NULL);        // curLocale = "C";
@@ -156,7 +156,7 @@ namespace sora {
     {
 #ifdef WIN32
         return Ansi2WChar(s, s.size());
-#elif defined(OS_IOS)
+#elif defined(OS_IOS) || defined(OS_OSX)
         return iOSString2WString(s);
 #endif
         setlocale(LC_ALL, "chs"); 

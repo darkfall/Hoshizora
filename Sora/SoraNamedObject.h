@@ -16,7 +16,6 @@
 #include <list>
 #include <algorithm>
 
-#include "SoraMemoryBuffer.h"
 #include "Serializable.h"
 #include <cassert>
 
@@ -82,10 +81,6 @@ namespace sora {
 		
 		size_t size() { return objList.size(); }
 		size_t count() { return objList.size(); }
-		
-		void serialize(SoraMemoryBuffer& memoryStream) {}
-		void unserialize(SoraMemoryBuffer& memoryStream) {}
-		bool serializable() { return false; }
 		
 	private:
 		struct compareObjectName: public std::binary_function<SoraNamedObject*, stringId, bool> {

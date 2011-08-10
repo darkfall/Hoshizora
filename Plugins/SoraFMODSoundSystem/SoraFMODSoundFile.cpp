@@ -173,8 +173,7 @@ namespace sora {
     
     void SoraFMODMusicFile::setVolume(float32 vol) {
         if(pChannel)
-            // scale to 0-1
-            pChannel->setVolume(vol/100.f);
+            pChannel->setVolume(vol);
 		volume = vol;
     }
     
@@ -195,8 +194,6 @@ namespace sora {
             float32 vol;
             FMOD_RESULT result = pChannel->getVolume(&vol);
             FMOD_ERROR_CHECK(result);
-            // scale to 0-100
-            vol *= 100.f;
             return vol;
         }
         return 0.f;
@@ -249,16 +246,16 @@ namespace sora {
         return 0;
     }
     
-    void SoraFMODMusicFile::setRepeat(int32 loopCount) {
+    void SoraFMODMusicFile::setRepeat(bool flag) {
         if(pChannel)
-            pChannel->setLoopCount(loopCount);
+            pChannel->setMode(flag ? FMOD_LOOP_NORMAL: FMOD_LOOP_OFF);
     }
     
-    int32 SoraFMODMusicFile::isRepeat() const {
+    bool SoraFMODMusicFile::isRepeat() const {
         if(pChannel) {
-            int lc = 0;
-            pChannel->getLoopCount(&lc);
-            return lc;
+            FMOD_MODE mode;
+            pChannel->getMode(&mode);
+            return mode & FMOD_LOOP_NORMAL;
         }
         return 0;
     }
@@ -377,8 +374,7 @@ namespace sora {
     
     void SoraFMODSoundEffectFile::setVolume(float32 vol) {
         if(pChannel)
-            // scale to 0-1
-            pChannel->setVolume(vol/100.f);
+            pChannel->setVolume(vol);
 		volume = vol;
     }
     
@@ -399,8 +395,6 @@ namespace sora {
             float32 vol;
             FMOD_RESULT result = pChannel->getVolume(&vol);
             FMOD_ERROR_CHECK(result);
-            // scale to 0-100
-            vol *= 100.f;
             return vol;
         }
         return 0.f;
@@ -428,16 +422,16 @@ namespace sora {
         
     }
     
-    void SoraFMODSoundEffectFile::setRepeat(int32 loopCount) {
+        void SoraFMODSoundEffectFile::setRepeat(bool flag) {
         if(pChannel)
-            pChannel->setLoopCount(loopCount);
+            pChannel->setMode(flag ? FMOD_LOOP_NORMAL: FMOD_LOOP_OFF);
     }
     
-    int32 SoraFMODSoundEffectFile::isRepeat() const {
+    bool SoraFMODSoundEffectFile::isRepeat() const {
         if(pChannel) {
-            int lc = 0;
-            pChannel->getLoopCount(&lc);
-            return lc;
+            FMOD_MODE mode;
+            pChannel->getMode(&mode);
+            return mode & FMOD_LOOP_NORMAL;
         }
         return 0;
     }

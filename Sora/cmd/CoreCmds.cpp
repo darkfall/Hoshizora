@@ -168,7 +168,9 @@ namespace sora {
 					
 				} else if(p1Prev.compare("string") == 0 && params.size() >= 2) {					
 					cev->setResults("EnvValue "+vamssg("%s = %s", params[1].c_str(), GET_ENV_STRING(params[1].c_str(), "???").c_str()));
-				}
+				} else if(p1Prev.compare("fps") == 0) {
+                    cev->setResults(vamssg("FPS: %.2f", sora->getFPS()));
+                }
 			}
 		}
 	}

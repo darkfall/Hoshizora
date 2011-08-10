@@ -6,19 +6,32 @@
 namespace sora {
 		
 	SoraImageEffect::SoraImageEffect(): 
-		etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL),
-		currRepeatTimes(0), repeatTimes(0) {
+    SoraModifier<SoraSprite>(true),
+    etype(IMAGE_EFFECT_NONE), 
+    states(IMAGE_EFFECT_NOTSTART), 
+    t_transformer(NULL),
+    currRepeatTimes(0), 
+    repeatTimes(0) {
 	}
+    
 	SoraImageEffect::SoraImageEffect(CoreTransformer<CoreTransform>* transformer): 
-		currRepeatTimes(0), repeatTimes(0) { 
+    SoraModifier<SoraSprite>(true), 
+    currRepeatTimes(0),
+    repeatTimes(0) { 
             if(transformer) {
                 t_transformer = transformer->clone();
             } else 
                 t_transformer = NULL;
 	}
+    
 	SoraImageEffect::SoraImageEffect(IMAGE_EFFECT_MODE _mode): 
-		mode(_mode), etype(IMAGE_EFFECT_NONE), states(IMAGE_EFFECT_NOTSTART), t_transformer(NULL), 
-		currRepeatTimes(0), repeatTimes(-1) { 
+    SoraModifier<SoraSprite>(true),
+    mode(_mode), 
+    etype(IMAGE_EFFECT_NONE), 
+    states(IMAGE_EFFECT_NOTSTART), 
+    t_transformer(NULL), 
+    currRepeatTimes(0), 
+    repeatTimes(-1) { 
 	}
 	
 	SoraImageEffect::~SoraImageEffect() {

@@ -10,6 +10,7 @@
 #include "SoraGUISoundLoader.h"
 #include "SoraGUISound.h"
 #include "SoraCore.h"
+#include "debug/SoraInternalLogger.h"
 
 namespace gcn {
 	
@@ -20,10 +21,9 @@ namespace gcn {
 	SoraGUISoundLoader::~SoraGUISoundLoader() {
 		Sound::setSoundLoader(NULL);
 		
-		for(SOUND_MAP::iterator itSound = mSoundMap.begin(); itSound != mSoundMap.end(); ++itSound) {
+		for(SoundMap::iterator itSound = mSoundMap.begin(); itSound != mSoundMap.end(); ++itSound) {
 			if(itSound->second != NULL) {
 				delete (itSound->second);
-				itSound->second = NULL;
 			}
 		}
 	}
@@ -32,7 +32,7 @@ namespace gcn {
 		sora::stringId soundid = sora::str2id(soundName);
 		SoraGUISound* psound = new SoraGUISound;
 		
-		SOUND_MAP::iterator itSound = mSoundMap.find(soundid);
+		SoundMap::iterator itSound = mSoundMap.find(soundid);
 		if(itSound != mSoundMap.end() && (itSound->second != NULL)) {
 			psound->pfile = itSound->second;
 			return psound;
@@ -42,10 +42,25 @@ namespace gcn {
 				mSoundMap[soundid] = psefile;
 				psound->pfile = psefile;
 				return psound;
-			}
+			} else
+                sora::log_error("SoraGUISoundLoader: Error loading sound file");
 		}
 		
 		return NULL;
 	}
+    
+    void SoraGUISoundLoader::play(const std::string& soundName) {
+        sora::stringId soundid = sora::str2id(soundName);
+        SoundMap::iterator itSound = mSoundMap.find(soundid);
+		if(itSound != mSoundMap.end() && (itSound->second != NULL)) {
+            itSound->second->play();
+        } else {
+            Sound* sound = load(soundName);
+            if(sound) {
+                sound->play();
+                delete sound;
+            }
+        }
+    }
 
 } // namespace gcn

@@ -76,8 +76,9 @@ namespace sora {
                     (*itModifier)->modify(mObj);
                     
                     if(result == sora::ModifierUpdateEnd) {     
-                        delete (*itModifier);
-                        (*itModifier) = 0;
+                        if((*itModifier)->isAutoRelease()) {
+                            (*itModifier)->release();
+                        }
                         
                         itModifier = mModifiers.erase(itModifier);
                         continue;
@@ -93,6 +94,7 @@ namespace sora {
         void add(SoraModifier<T>* modi) {
             mModifiers.push_back(modi);
         }
+        
         void del(SoraModifier<T>* modi) {
             mModifiers.remove(modi);
         }

@@ -50,6 +50,8 @@ private:
     sora::SoraScene* mScene1;
     sora::SoraScene* mScene2;
     sora::SoraCamera* mCamera;
+    
+    sora::SoraFont* mFont;
 };
 
 #endif

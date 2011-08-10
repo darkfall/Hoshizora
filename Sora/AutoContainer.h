@@ -62,6 +62,9 @@ namespace sora {
 		static Members members;
 	};
     
+    template<typename T>
+    typename AutoListElement<T>::Members AutoListElement<T>::members;
+    
     /**
      * Inherit bject form this to create a obj list
      * You must call insert and remove by yourself to get the object insert into 
@@ -117,6 +120,9 @@ namespace sora {
     private:
         bool mInList;
     };
+    
+    template<typename T>
+    typename AutoListElement2<T>::Members AutoListElement2<T>::members;
 
   	
 } // namespace sora

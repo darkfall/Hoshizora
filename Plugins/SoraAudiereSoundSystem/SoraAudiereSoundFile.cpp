@@ -157,11 +157,11 @@ namespace sora {
 			return 0;
 		}
 		
-		void SoraAudiereMusicFile::setRepeat(int32 loopCount) { 
+		void SoraAudiereMusicFile::setRepeat(bool loopCount) { 
 			if(is_open()) sound->setRepeat(loopCount);
 		}
 
-		int32 SoraAudiereMusicFile::isRepeat() const { 
+		bool SoraAudiereMusicFile::isRepeat() const { 
 			if(is_open()) return sound->getRepeat();
 			return false;
 		}

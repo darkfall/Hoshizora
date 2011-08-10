@@ -3,10 +3,11 @@
 
 #include "SoraPlatform.h"
 #include "SoraException.h"
-#include "SoraEventChannel.h"
 #include "SoraTypeInfo.h"
 #include "SoraAutoPtr.h"
 #include "stringId.h"
+#include "event/SoraEventChannel.h"
+
 
 #include <map>
 

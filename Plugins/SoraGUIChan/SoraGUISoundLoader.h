@@ -18,6 +18,8 @@
 
 #include "SoraSoundFile.h"
 
+#include <map>
+
 namespace gcn {
 	
 	/*
@@ -29,10 +31,11 @@ namespace gcn {
 		virtual ~SoraGUISoundLoader();
 		
 		gcn::Sound* load(const std::string& soundName);
+        void play(const std::string& soundName);
 		
 	private:
-		typedef sora::hash_map<sora::stringId, sora::SoraSoundEffectFile*> SOUND_MAP;
-		SOUND_MAP mSoundMap;
+		typedef std::map<sora::stringId, sora::SoraSoundEffectFile*> SoundMap;
+		SoundMap mSoundMap;
 	};
 	
 } // namespace sora

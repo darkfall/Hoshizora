@@ -35,7 +35,7 @@ namespace sora {
 		virtual void pause() = 0;
 		virtual void resume() = 0;
 
-		// 0 - 100
+		// 0 - 1
 		virtual void setVolume(float32 vol) = 0;
 		// -1.0 - 1.0
 		virtual void setPan(float32 pan) = 0;
@@ -54,8 +54,8 @@ namespace sora {
 		
 		virtual int32 getLength() const = 0;
 		
-		virtual void setRepeat(int32 flag) = 0;
-		virtual int32 isRepeat() const = 0;
+		virtual void setRepeat(bool flag) = 0;
+		virtual bool isRepeat() const = 0;
 		virtual bool isPlaying() const = 0;
 	};
 
@@ -84,8 +84,8 @@ namespace sora {
 		virtual float32 getPitch() const = 0;
 		virtual float32 getVolume() const = 0;
         
-        virtual void setRepeat(int32 flag) = 0;
-		virtual int32 isRepeat() const = 0;
+        virtual void setRepeat(bool flag) = 0;
+		virtual bool isRepeat() const = 0;
 		virtual bool isPlaying() const = 0;
 	};
 

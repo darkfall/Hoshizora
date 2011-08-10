@@ -365,13 +365,15 @@ namespace sora {
         return eff;
     }
     
-    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, 
+                                                 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         return list;
     }
     
-    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, SoraImageEffect* eff2, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+    static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, SoraImageEffect* eff2, 
+                                                 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -380,7 +382,8 @@ namespace sora {
     
     static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, 
                                                  SoraImageEffect* eff2, 
-                                                 SoraImageEffect* eff3, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                 SoraImageEffect* eff3, 
+                                                 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -391,7 +394,8 @@ namespace sora {
     static SoraImageEffectList* CreateEffectList(SoraImageEffect* eff1, 
                                                  SoraImageEffect* eff2, 
                                                  SoraImageEffect* eff3, 
-                                                 SoraImageEffect* eff4, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                 SoraImageEffect* eff4, 
+                                                 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -404,7 +408,8 @@ namespace sora {
                                                  SoraImageEffect* eff2, 
                                                  SoraImageEffect* eff3, 
                                                  SoraImageEffect* eff4, 
-                                                 SoraImageEffect* eff5, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                 SoraImageEffect* eff5, 
+                                                 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -419,7 +424,8 @@ namespace sora {
                                                  SoraImageEffect* eff3, 
                                                  SoraImageEffect* eff4, 
                                                  SoraImageEffect* eff5,
-                                                 SoraImageEffect* eff6, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                 SoraImageEffect* eff6, 
+                                                 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -436,7 +442,8 @@ namespace sora {
                                                  SoraImageEffect* eff4, 
                                                  SoraImageEffect* eff5,
                                                  SoraImageEffect* eff6, 
-                                                 SoraImageEffect* eff7, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                 SoraImageEffect* eff7, 
+                                                 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -455,7 +462,8 @@ namespace sora {
                                                  SoraImageEffect* eff5,
                                                  SoraImageEffect* eff6, 
                                                  SoraImageEffect* eff7,
-                                                 SoraImageEffect* eff8, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                 SoraImageEffect* eff8, 
+                                                 IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -470,7 +478,8 @@ namespace sora {
     
     
     static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1,
-                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                             const SoraModifier<SoraSprite>::Delegate& del, 
+                                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->setFinishDelegate(del);
@@ -479,7 +488,8 @@ namespace sora {
     
     static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1,
                                                              SoraImageEffect* eff2,
-                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                             const SoraModifier<SoraSprite>::Delegate& del, 
+                                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -490,7 +500,8 @@ namespace sora {
     static SoraImageEffectList* CreateEffectListWithDelegate(SoraImageEffect* eff1, 
                                                              SoraImageEffect* eff2, 
                                                              SoraImageEffect* eff3,
-                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                             const SoraModifier<SoraSprite>::Delegate& del, 
+                                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -503,7 +514,8 @@ namespace sora {
                                                              SoraImageEffect* eff2, 
                                                              SoraImageEffect* eff3, 
                                                              SoraImageEffect* eff4,
-                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                             const SoraModifier<SoraSprite>::Delegate& del, 
+                                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -518,7 +530,8 @@ namespace sora {
                                                              SoraImageEffect* eff3, 
                                                              SoraImageEffect* eff4, 
                                                              SoraImageEffect* eff5,
-                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                             const SoraModifier<SoraSprite>::Delegate& del, 
+                                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -535,7 +548,8 @@ namespace sora {
                                                              SoraImageEffect* eff4, 
                                                              SoraImageEffect* eff5,
                                                              SoraImageEffect* eff6,
-                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                             const SoraModifier<SoraSprite>::Delegate& del, 
+                                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -554,7 +568,8 @@ namespace sora {
                                                              SoraImageEffect* eff5,
                                                              SoraImageEffect* eff6, 
                                                              SoraImageEffect* eff7,
-                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                             const SoraModifier<SoraSprite>::Delegate& del, 
+                                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
@@ -575,7 +590,8 @@ namespace sora {
                                                              SoraImageEffect* eff6, 
                                                              SoraImageEffect* eff7,
                                                              SoraImageEffect* eff8,
-                                                             const SoraModifier<SoraSprite>::Delegate& del, IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
+                                                             const SoraModifier<SoraSprite>::Delegate& del, 
+                                                             IMAGE_EFFECT_MODE mode=IMAGE_EFFECT_ONCE) {
         SoraImageEffectList* list = new SoraImageEffectList(mode);
         list->add(eff1);
         list->add(eff2);
