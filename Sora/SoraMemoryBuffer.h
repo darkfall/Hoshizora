@@ -73,6 +73,7 @@ namespace sora {
 			ulong32 size = sizeof(T);
 			if(currPos+size <= length) {
                 memcpy(t, (void*)(get()+currPos), size);
+                currPos += size;
                 return true;
             }
             return false;

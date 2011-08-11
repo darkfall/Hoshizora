@@ -96,8 +96,8 @@ namespace sora {
 		inline void _glBeginFrame();
 		inline void _glBeginScene(uint32 color, ulong32 target, bool clear);
 		inline void _glEndScene();
-		inline int32 _glTextureGetWidth(ulong32 tex, bool bOriginal=false);
-		inline int32 _glTextureGetHeight(ulong32 tex, bool bOriginal=false);
+		inline int32 _glTextureGetWidth(int32 tex, bool bOriginal=false);
+		inline int32 _glTextureGetHeight(int32 tex, bool bOriginal=false);
 		inline void _glSetProjectionMatrix(int32 w, int32 h);
 		inline void _glSetBlendMode(int32 mode);
 

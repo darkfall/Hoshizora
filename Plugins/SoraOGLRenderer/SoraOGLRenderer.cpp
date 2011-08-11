@@ -22,15 +22,13 @@
 #include "SoraRenderSystemExtension.h"
 #include "SoraOGLKeyPoll.h"
 
+#undef SORA_USE_SHADER
 #ifdef SORA_USE_SHADER
 #include "SoraShader/SoraCGGLShader.h"
 #endif
 
 #include "glfw/GL/glfw.h"
-
-extern "C" {
 #include "soil/SOIL.h"
-}
 
 #ifdef OS_OSX
 #include "OSXIconWrapper.h"
@@ -410,7 +408,7 @@ namespace sora{
 		return (ulong32)this;
 	}
 
-	int32 SoraOGLRenderer::_glTextureGetWidth(ulong32 tex, bool bOriginal) {
+	int32 SoraOGLRenderer::_glTextureGetWidth(int32 tex, bool bOriginal) {
 		GLint w;
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
@@ -418,7 +416,7 @@ namespace sora{
 		return w;
 	}
 
-	int32 SoraOGLRenderer::_glTextureGetHeight(ulong32 tex, bool bOriginal) {
+	int32 SoraOGLRenderer::_glTextureGetHeight(int32 tex, bool bOriginal) {
 		GLint h;
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);

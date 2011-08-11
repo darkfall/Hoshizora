@@ -41,7 +41,7 @@ namespace sora {
             return mType;
         }
         
-        SORA_EVENT_IDENTIFIER(18446744070299896253LL);
+        SORA_EVENT_IDENTIFIER(18446744070299896253ULL);
         
     private:
         int32 mType;

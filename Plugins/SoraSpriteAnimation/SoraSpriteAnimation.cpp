@@ -188,6 +188,8 @@ int SoraSpriteAnimationPacker::pack2(const char* pstrTex, const char* pstrDest) 
 		return 0;
 	return 1;
 }
+    
+#define _DEBUG
 
 SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned long size) {
 	SoraSpriteAnimation* panm = new SoraSpriteAnimation;
@@ -203,6 +205,7 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
 		if(strcmp(strHeader, LANM_HEADER) != 0)
 			err = true;
 		
+        printf("%s\n", strHeader);
         if(!err) {
             uint32 texSize;
 			err = !pmfile->read(&texSize);
@@ -210,7 +213,7 @@ SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned lon
 			err = !pmfile->read(texturePath, texSize);
 			texturePath[texSize] = '\0';
 			panm->texturePath = texturePath;
-
+            printf("%s\n", texturePath);
 			delete texturePath;
 		}
 		

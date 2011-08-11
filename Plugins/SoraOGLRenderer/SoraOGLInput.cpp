@@ -98,8 +98,4 @@ namespace sora {
 		return false;
 	}
 	
-	int32 translateSpeicalKey(int32 okey) {
-		return 0;
-	}
-	
 } // namespace sora
