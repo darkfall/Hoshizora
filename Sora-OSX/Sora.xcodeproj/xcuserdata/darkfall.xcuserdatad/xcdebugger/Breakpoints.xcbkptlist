@@ -715,7 +715,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "871"
-         endingLineNumber = "871">
+         endingLineNumber = "871"
+         landmarkName = "SoraOGLRenderer::snapshot(const SoraString&amp; path)"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

@@ -691,6 +691,26 @@
 		887F2C15139C6DE800F534D5 /* SoraZSorter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraZSorter.cpp; sourceTree = "<group>"; };
 		887F2C19139C739800F534D5 /* CoreCmds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreCmds.h; sourceTree = "<group>"; };
 		887F2C1A139C739800F534D5 /* CoreCmds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreCmds.cpp; sourceTree = "<group>"; };
+		888478D213FC66DF009F6B06 /* SoraFunction0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction0.h; sourceTree = "<group>"; };
+		888478D313FC66DF009F6B06 /* SoraFunction1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction1.h; sourceTree = "<group>"; };
+		888478D413FC66DF009F6B06 /* SoraFunction10.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction10.h; sourceTree = "<group>"; };
+		888478D513FC66DF009F6B06 /* SoraFunction11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction11.h; sourceTree = "<group>"; };
+		888478D613FC66DF009F6B06 /* SoraFunction12.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction12.h; sourceTree = "<group>"; };
+		888478D713FC66DF009F6B06 /* SoraFunction2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction2.h; sourceTree = "<group>"; };
+		888478D813FC66DF009F6B06 /* SoraFunction3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction3.h; sourceTree = "<group>"; };
+		888478D913FC66DF009F6B06 /* SoraFunction4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction4.h; sourceTree = "<group>"; };
+		888478DA13FC66DF009F6B06 /* SoraFunction5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction5.h; sourceTree = "<group>"; };
+		888478DB13FC66DF009F6B06 /* SoraFunction6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction6.h; sourceTree = "<group>"; };
+		888478DC13FC66DF009F6B06 /* SoraFunction7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction7.h; sourceTree = "<group>"; };
+		888478DD13FC66DF009F6B06 /* SoraFunction8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction8.h; sourceTree = "<group>"; };
+		888478DE13FC66DF009F6B06 /* SoraFunction9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction9.h; sourceTree = "<group>"; };
+		888478DF13FC66DF009F6B06 /* SoraFunctionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunctionBase.h; sourceTree = "<group>"; };
+		888478E013FC66DF009F6B06 /* SoraFunctionFoward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunctionFoward.h; sourceTree = "<group>"; };
+		888478E113FC66DF009F6B06 /* SoraFunctionInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunctionInclude.h; sourceTree = "<group>"; };
+		888478E213FC66DF009F6B06 /* SoraFunctionTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunctionTemplate.h; sourceTree = "<group>"; };
+		888478E313FC66DF009F6B06 /* SoraBind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraBind.h; sourceTree = "<group>"; };
+		888478E413FC66DF009F6B06 /* SoraFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFunction.h; sourceTree = "<group>"; };
+		888478E513FC66DF009F6B06 /* SoraMemfun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMemfun.h; sourceTree = "<group>"; };
 		8884F64713A1F60500BEC5AB /* SoraMutableSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMutableSprite.h; sourceTree = "<group>"; };
 		8884F65F13A1F8C200BEC5AB /* SoraMutableSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraMutableSprite.cpp; sourceTree = "<group>"; };
 		8884F79B13A2926D00BEC5AB /* SoraSpriteFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSpriteFont.h; sourceTree = "<group>"; };
@@ -1603,6 +1623,41 @@
 			path = helpers;
 			sourceTree = "<group>";
 		};
+		888478D013FC66DF009F6B06 /* function */ = {
+			isa = PBXGroup;
+			children = (
+				888478D113FC66DF009F6B06 /* detail */,
+				888478E313FC66DF009F6B06 /* SoraBind.h */,
+				888478E413FC66DF009F6B06 /* SoraFunction.h */,
+				888478E513FC66DF009F6B06 /* SoraMemfun.h */,
+			);
+			path = function;
+			sourceTree = "<group>";
+		};
+		888478D113FC66DF009F6B06 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				888478D213FC66DF009F6B06 /* SoraFunction0.h */,
+				888478D313FC66DF009F6B06 /* SoraFunction1.h */,
+				888478D413FC66DF009F6B06 /* SoraFunction10.h */,
+				888478D513FC66DF009F6B06 /* SoraFunction11.h */,
+				888478D613FC66DF009F6B06 /* SoraFunction12.h */,
+				888478D713FC66DF009F6B06 /* SoraFunction2.h */,
+				888478D813FC66DF009F6B06 /* SoraFunction3.h */,
+				888478D913FC66DF009F6B06 /* SoraFunction4.h */,
+				888478DA13FC66DF009F6B06 /* SoraFunction5.h */,
+				888478DB13FC66DF009F6B06 /* SoraFunction6.h */,
+				888478DC13FC66DF009F6B06 /* SoraFunction7.h */,
+				888478DD13FC66DF009F6B06 /* SoraFunction8.h */,
+				888478DE13FC66DF009F6B06 /* SoraFunction9.h */,
+				888478DF13FC66DF009F6B06 /* SoraFunctionBase.h */,
+				888478E013FC66DF009F6B06 /* SoraFunctionFoward.h */,
+				888478E113FC66DF009F6B06 /* SoraFunctionInclude.h */,
+				888478E213FC66DF009F6B06 /* SoraFunctionTemplate.h */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
 		889AB54613E546CE003FDF91 /* entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1775,6 +1830,7 @@
 				889AB55013E582FA003FDF91 /* asset */,
 				889AB54C13E5826C003FDF91 /* timer */,
 				889AB54B13E57AA5003FDF91 /* signal */,
+				888478D013FC66DF009F6B06 /* function */,
 				88C2017913E480EE00C039A0 /* factory */,
 				889AB54613E546CE003FDF91 /* entity */,
 				88C2017C13E4812900C039A0 /* event */,

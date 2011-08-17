@@ -13,6 +13,9 @@
 #include "SoraFunctionBase.h"
 #include "SoraFunctionFoward.h"
 
+#include <functional>
+#include <cassert>
+
 namespace sora {
     
 #ifdef SORA_FUNCTION_NUM_ARGS

@@ -10,10 +10,6 @@
 #ifndef SORA_AUTO_PTR_H_
 #define SORA_AUTO_PTR_H_
 
-#include <typeinfo>
-#include <map>
-using std::map;
-
 #include "SoraPlatform.h"
 #include "SoraException.h"
 
