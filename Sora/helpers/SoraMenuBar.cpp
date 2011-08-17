@@ -89,12 +89,12 @@ namespace sora {
 			
 			mFont->setColor(0xFF000000);
 			if(mActive) {
-				SORA->renderRect(mPosX, 0.f, mPosX+mWidth, posy, mWidth, 0xCCFFFFFF);
+				SORA->fillBox(mPosX, 0.f, mPosX+mWidth, posy, 0xCCFFFFFF);
 			}
 			mFont->render(mPosX+10.f, distHeight, mBarName.c_str(), false, true);
 			
 			if(mActive) {
-				SORA->renderRect(mPosX, posy, mPosX+mWidth, posy*(mItems.size()+1), mWidth, 0xCCFFFFFF);
+				SORA->fillBox(mPosX, posy, mPosX+mWidth, posy*(mItems.size()+1), 0xCCFFFFFF);
 				
 				for(size_t i=0; i<mItems.size(); ++i) {
 					if(mItems[i].isAvailable())
@@ -103,7 +103,7 @@ namespace sora {
 						mFont->setColor(0xFFDDDDDD);
 					
 					if(mCurrentItem == i && mItems[i].isAvailable()) {
-						SORA->renderRect(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), mWidth, 0xCCFFFFFF);
+						SORA->fillBox(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), 0xCCFFFFFF);
 					}
 					SORA->renderBox(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), 0xFF000000);
 					
@@ -270,7 +270,7 @@ namespace sora {
 		
 		if(mActive || mShowAlways) {
 			float32 screenWidth = (float32)SORA->getScreenWidth();
-			SORA->renderRect(0.f, 0.f, screenWidth, mMenuBarHeight, screenWidth, 0x99FFFFFF);
+			SORA->fillBox(0.f, 0.f, screenWidth, mMenuBarHeight, 0x99FFFFFF);
 			SORA->renderBox(0.f, 0.f, screenWidth-1.f, mMenuBarHeight-1.f, 0xFFAAAAAA);
 			
 			MENUBAR_LIST::iterator itMenu = mMenus.begin();

@@ -143,7 +143,6 @@ namespace sora {
         }
         
 	private:
-        
 		uint8* apCData;
 		ulong32 length;
 		ulong32 realSize;

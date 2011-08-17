@@ -17,7 +17,7 @@
 
 namespace sora {
     
-    class SoraHandleManager: public SoraSingleton<SoraHandleManager> {
+    class SORA_API SoraHandleManager: public SoraSingleton<SoraHandleManager> {
     protected:
         friend class SoraSingleton<SoraHandleManager>;
         SoraHandleManager();

@@ -145,17 +145,15 @@ namespace sora {
 	
 	void SoraConsole::drawTab() {
 		uint32 hCol = 0xFF909090;
-		SORA->renderRect(mPositionX+mWidth-120.f, 
+		SORA->fillBox(mPositionX+mWidth-120.f, 
 						 mPositionY+mHeight-mFontHeight, 
 						 mPositionX+mWidth-60.f,
 						 mPositionY+mHeight,
-						 60.f,
 						 mTab==TAB_CMDLINE?hCol:mBackgroundColor);
-		SORA->renderRect(mPositionX+mWidth-60.f, 
+		SORA->fillBox(mPositionX+mWidth-60.f, 
 						 mPositionY+mHeight-mFontHeight, 
 						 mPositionX+mWidth,
 						 mPositionY+mHeight,
-						 60.f,
 						 mTab==TAB_MSSG?hCol:mBackgroundColor);
 		SORA->renderBox(mPositionX+mWidth-120.f, 
 						mPositionY+mHeight-mFontHeight, 
@@ -177,7 +175,7 @@ namespace sora {
 	
 	void SoraConsole::drawCmds() {
 		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
-		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
+		SORA->fillBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mBackgroundColor);
 		if(mFont) {			
 			mFont->setLineWidth(mWidth);
 			float32 x = mPositionX + 1.f;
@@ -211,7 +209,7 @@ namespace sora {
 	
 	void SoraConsole::drawMssg() {
 		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
-		SORA->renderRect(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mWidth, mBackgroundColor);
+		SORA->fillBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mBackgroundColor);
 		if(mFont) {
 			mFont->setLineWidth(mWidth);
 			float32 x = mPositionX + 1.f;

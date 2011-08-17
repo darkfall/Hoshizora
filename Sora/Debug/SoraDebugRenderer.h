@@ -130,10 +130,12 @@ namespace sora {
             
             void render() {
                 switch(type) {
-                    case ITEM_LINE: SORA->renderRect(pos.x, pos.y, extra.x, extra.y, width, color.GetHWColor(), depth); break;
+                    case ITEM_LINE: SORA->renderLine(pos.x, pos.y, extra.x, extra.y, color.GetHWColor(), depth); break;
                     case ITEM_AABB: 
                         if(!bFill)
-                            SORA->renderRect(pos.x, pos.y, pos.x+extra.x, pos.y+extra.y, width, color.GetHWColor(), depth); 
+                            SORA->renderBox(pos.x, pos.y, pos.x+extra.x, pos.y+extra.y, color.GetHWColor(), depth); 
+                        else 
+                            SORA->fillBox(pos.x, pos.y, pos.x+extra.x, pos.y+extra.y, color.GetHWColor(), depth); 
                         break;
                     case ITEM_CIRCLE:
                         break;

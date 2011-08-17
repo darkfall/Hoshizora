@@ -132,7 +132,7 @@ namespace gcn
             return;
         }
 
-        sora->renderRect((float)x, (float)y, (float)x + 1.f, (float)y, 1.f, mHardwareColor, GUI_Z);
+        sora->renderLine((float)x, (float)y, (float)x + 1.f, (float)y, mHardwareColor, GUI_Z);
     }
 
     void SoraGUIGraphics::drawLine(int x1, int y1, int x2, int y2) {
@@ -169,7 +169,7 @@ namespace gcn
             }
         }
         
-		sora->renderRect((float)x1, (float)y1, (float)x2, (float)y2, 1.f, mHardwareColor, GUI_Z);
+		sora->renderLine((float)x1, (float)y1, (float)x2, (float)y2, mHardwareColor, GUI_Z);
     }
 
     void SoraGUIGraphics::drawRectangle(const Rectangle &rectangle) {
@@ -182,10 +182,10 @@ namespace gcn
         float x2 = (float)rectangle.x + rectangle.width;
         float y2 = (float)rectangle.y + rectangle.height;
         
-        sora->renderRect(x1, y1, x2, y1+1.f, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x2, y1, x2+1.f, y2, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x2, y2, x1, y2+1.f, 1.f, mHardwareColor, GUI_Z);
-        sora->renderRect(x1, y2, x1+1.f, y1, 1.f, mHardwareColor, GUI_Z);
+        sora->renderLine(x1, y1, x2, y1+1.f, mHardwareColor, GUI_Z);
+        sora->renderLine(x2, y1, x2+1.f, y2, mHardwareColor, GUI_Z);
+        sora->renderLine(x2, y2, x1, y2+1.f, mHardwareColor, GUI_Z);
+        sora->renderLine(x1, y2, x1+1.f, y1, mHardwareColor, GUI_Z);
     }
 
     void SoraGUIGraphics::fillRectangle(const Rectangle &rectangle) {

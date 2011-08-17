@@ -28,6 +28,10 @@ namespace sora {
         
     protected:
         SoraThreadImpl(): active(false) {}
+        
+        ~SoraThreadImpl() {
+            exitImpl();
+        }
     
         inline int32 startImpl() {
             if(!thread_task.isValid() || active) {

@@ -7,7 +7,7 @@
 
 namespace sora {
     
-	class SoraStream: public SoraSharedClass<SoraStream> {
+	class SORA_API SoraStream: public SoraSharedClass<SoraStream> {
 	public:
 		SoraStream(): _pos(0) {}
 		SoraStream(const uint8* buf, size_t len): _pos(0) {

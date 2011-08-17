@@ -865,14 +865,19 @@ namespace sora {
 			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
 	}
 
-	void SoraCore::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
+	void SoraCore::renderLine(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
 		sora_assert(bInitialized==true);
-		pRenderSystem->renderRect(x1, y1, x2, y2, fWidth, color, z);
+		pRenderSystem->renderLine(x1, y1, x2, y2, color, z);
 	}
 	
 	void SoraCore::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
 		sora_assert(bInitialized==true);
 		pRenderSystem->renderBox(x1, y1, x2, y2, color, z);
+	}
+    
+    void SoraCore::fillBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+		sora_assert(bInitialized==true);
+		pRenderSystem->fillBox(x1, y1, x2, y2, color, z);
 	}
 
 	void SoraCore::setClipping(int32 x, int32 y, int32 w, int32 h) {
