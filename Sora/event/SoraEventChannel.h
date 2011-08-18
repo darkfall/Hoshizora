@@ -179,6 +179,7 @@ namespace sora {
     
     SoraEventChannel& SoraEventChannel::clear() {
         mChannel = 0;
+		return *this;
     }
     
     void SoraEventChannel::add(const SoraEventChannel& channel) {

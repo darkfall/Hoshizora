@@ -51,7 +51,7 @@ static int CreatePipeChild(HANDLE* child, HANDLE* inH, HANDLE* outH, HANDLE* err
 	// Lets Redirect Console StdHandles - easy enough
 
 	// Dup the child handle to get separate handles for stdout and err,
-    hNul = CreateFile("NUL",
+    hNul = CreateFileA("NUL",
                       GENERIC_READ | GENERIC_WRITE,
                       FILE_SHARE_READ | FILE_SHARE_WRITE,
                       NULL, OPEN_EXISTING,
@@ -68,7 +68,7 @@ static int CreatePipeChild(HANDLE* child, HANDLE* inH, HANDLE* outH, HANDLE* err
         si.hStdOutput = ChildOut;
 		si.hStdError    = redirect_stderr_to_stdout ? ChildOut : ChildErr;
         si.hStdInput    = ChildIn;
-        if (CreateProcess(NULL, (char*)Command, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi) == TRUE)
+        if (CreateProcessA(NULL, (char*)Command, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi) == TRUE)
         {
             CloseHandle(pi.hThread);        // Thread handle not needed
             //fprintf(stderr, "create process success\n");
@@ -119,7 +119,7 @@ DWORD RunSilent(const char* cmd)
 	StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
 	StartupInfo.wShowWindow = SW_HIDE;
 
-	if (!CreateProcess( NULL, commandBuffer, NULL, NULL, FALSE,
+	if (!CreateProcessA( NULL, commandBuffer, NULL, NULL, FALSE,
 		CREATE_NEW_CONSOLE, 
 		NULL, 
 		NULL,

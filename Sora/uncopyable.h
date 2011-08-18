@@ -14,10 +14,9 @@
 namespace sora {
     
     class SORA_API uncopyable {
-    protected:
-        uncopyable() {}
-        ~uncopyable() {}
-	
+	protected:
+		uncopyable() {}
+		
     private:
         const uncopyable& operator=(const uncopyable&);
         uncopyable(const uncopyable&);

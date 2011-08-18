@@ -58,12 +58,12 @@ namespace sora {
 			if(error == CG_COMPILER_ERROR) {
 				SoraCore::Instance()->log(std::string("SoraShaderContext: ")+cgGetLastListing(context), LOG_LEVEL_ERROR);
 			}			
-			setType(0);
+			setError(1);
 		}
 	}
 	
 	SoraCGD3D9Shader::SoraCGD3D9Shader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile) {
-		setType(type);
+		mType = type;
 		
 		this->context = context;
         this->profile = profile;
@@ -83,7 +83,7 @@ namespace sora {
 			cgD3D9LoadProgram(program, true, 0);
 			checkError(context);
 		} else {
-			setType(0);
+			setError(1);
 		}	
 
 		textureParam = 0;

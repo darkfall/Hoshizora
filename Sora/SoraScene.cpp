@@ -202,10 +202,10 @@ namespace sora {
                                     mWidth,
                                     mHeight);
         } else {
-            int32 rx = (int32)getPositionX() < (int32)mCamera->getPositionX() ? (int32)mCamera->getPositionX(): (int32)getPositionX();
-            int32 ry = (int32)getPositionY() < (int32)mCamera->getPositionY() ? (int32)mCamera->getPositionY(): (int32)getPositionY();
-            int32 rWidth = mCamera->getPositionX()+mCamera->getViewWidth()-rx;
-            int32 rHeight = mCamera->getPositionY()+mCamera->getViewHeight()-ry;
+            int32 rx = getPositionX() < mCamera->getPositionX() ? (int32)mCamera->getPositionX(): (int32)getPositionX();
+            int32 ry = getPositionY() < mCamera->getPositionY() ? (int32)mCamera->getPositionY(): (int32)getPositionY();
+            int32 rWidth = (int32)mCamera->getPositionX()+mCamera->getViewWidth()-rx;
+            int32 rHeight = (int32)mCamera->getPositionY()+mCamera->getViewHeight()-ry;
             
             sora::SORA->setClipping(rx,
                                     ry,

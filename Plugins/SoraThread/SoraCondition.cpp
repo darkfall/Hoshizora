@@ -28,7 +28,7 @@ namespace sora {
 #else
         if(_win32_pthread_cond_wait(&cond,
                                     static_cast<pthread_mutex_t*>(_mutex.getSysMutex())))
-            THROW_SORA_EXCEPTION("Error wait");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error wait");
 #endif
     }
     

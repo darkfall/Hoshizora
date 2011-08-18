@@ -28,7 +28,7 @@ namespace sora {
             if(mFH == INVALID_HANDLE_VALUE) {
 				DWORD error = GetLastError();
                 if(error != ERROR_NO_MORE_FILES) 
-                    THROW_SORA_EXCEPTION("Error when iterating files");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Error when iterating files");
             } else {
                 mCurrent = mFD.cFileName;
                 if(mCurrent == "." || mCurrent == "..")

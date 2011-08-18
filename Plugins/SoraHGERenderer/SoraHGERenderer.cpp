@@ -32,7 +32,7 @@ namespace sora{
 		SoraRenderSystemExtension::Instance()->registerExtension(SORA_EXTENSION_FSAA);
 
 		if(!pHGE) {
-			throw SORA_EXCEPTION("Error initiazing HGE");
+			throw SORA_EXCEPTION(SystemException, "Error initiazing HGE");
 		}
 
 		currShader = 0;
@@ -197,7 +197,7 @@ namespace sora{
 			tex->mOriginalHeight		= pHGE->Texture_GetHeight(htex, true);
 			return tex;
 		} else
-			throw SORA_EXCEPTION("Error creating Texture");
+			throw SORA_EXCEPTION(SystemException, "Error creating Texture");
 		return 0;
 	}
 	
@@ -213,7 +213,7 @@ namespace sora{
 			tex->mOriginalHeight	= pHGE->Texture_GetHeight(htex, true);
 			return tex;
 		} else 
-			throw SORA_EXCEPTION("Error creating texture");
+			throw SORA_EXCEPTION(SystemException, "Error creating texture");
 		return 0;
 	}
 
@@ -228,7 +228,7 @@ namespace sora{
 			tex->mOriginalWidth		= w;
 			return tex;
 		} else
-			throw SORA_EXCEPTION("Error creating Texture");
+			throw SORA_EXCEPTION(SystemException, "Error creating Texture");
 		return 0;
 	}
 
@@ -247,7 +247,7 @@ namespace sora{
 			tex->mOriginalWidth		= w;
 			return tex;
 		} else
-			throw SORA_EXCEPTION("Error creating Texture");
+			throw SORA_EXCEPTION(SystemException, "Error creating Texture");
 		return 0;
 	}
 

@@ -66,6 +66,7 @@
 #include "guichan/modifier.hpp"
 
 #include <assert.h>
+#include <algorithm>
 
 namespace gcn
 {

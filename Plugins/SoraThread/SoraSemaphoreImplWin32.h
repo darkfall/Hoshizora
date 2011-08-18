@@ -31,7 +31,7 @@ namespace sora {
         
         void setImpl() {
             if(!ReleaseSemaphore(sema, 1, NULL)) {
-                THROW_SORA_EXCEPTION("cannot signal semaphore");
+                THROW_SORA_EXCEPTION(RuntimeException, "cannot signal semaphore");
             }
         }
         
@@ -40,7 +40,7 @@ namespace sora {
                 case WAIT_OBJECT_0:
                     return;
                 default:
-                    THROW_SORA_EXCEPTION("Wait for semaphore failed");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Wait for semaphore failed");
             }
         }
 
