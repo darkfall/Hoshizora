@@ -13,15 +13,10 @@ namespace sora {
     SoraFullscreenBufferHandler::SoraFullscreenBufferHandler() {
         mBufferSprite = new SoraSprite(0);
         assert(mBufferSprite);
-        
-        mDelegate = NULL;
     }
     
     SoraFullscreenBufferHandler::~SoraFullscreenBufferHandler() {
-        if(mDelegate) {
-            delete mDelegate;
-            mDelegate = NULL;
-        }
+
     }
     
     void SoraFullscreenBufferHandler::onBufferRender(HSORATEXTURE bufferTex) {
@@ -36,12 +31,10 @@ namespace sora {
                 }
             }
         } else 
-            mDelegate->notify(this, bufferTex);
+            mDelegate(bufferTex);
     }
 
-    void SoraFullscreenBufferHandler::registerDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate) {
-        if(mDelegate != NULL)
-            delete mDelegate;
+    void SoraFullscreenBufferHandler::registerDelegate(const DelegateFuncType& delegate) {
         mDelegate = delegate;
     }
     

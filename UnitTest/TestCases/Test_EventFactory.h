@@ -20,9 +20,7 @@ namespace SoraUnit {
     
     class UnitTest_Event: public Test {
     public:
-        void run(TestResult* result) {
-            sora::SoraCore* sora = sora::SoraCore::Instance();
-            
+        void run(TestResult* result) {            
             sora::SoraEvent* pbEvent = sora::SoraEventFactory::Instance()->createEvent("PlaybackEvent");
             sora::SoraEvent* timerEvent = sora::SoraEventFactory::Instance()->createEvent("TimerEvent");
             sora::SoraEvent* fcEvent = sora::SoraEventFactory::Instance()->createEvent("FileChangeEvent");

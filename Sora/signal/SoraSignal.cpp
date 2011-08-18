@@ -10,6 +10,15 @@
 
 namespace sora {
     
-    
+    namespace signal {
+        SignalImpl::~SignalImpl() {
+            IteratorType it = mConnections.begin();
+            while(it != mConnections.end()) {
+                it->second.setControl(false);
+                ++it;
+            }
+            mConnections.clear();
+        }
+    }
     
 } // namespace sora

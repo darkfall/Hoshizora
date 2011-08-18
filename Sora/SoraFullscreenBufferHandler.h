@@ -14,6 +14,7 @@
 #include "SoraEvent.h"
 #include "SoraDelegate.h"
 #include "SoraSprite.h"
+#include "function/SoraFunction.h"
 
 namespace sora {
     
@@ -26,13 +27,15 @@ namespace sora {
         
     public:
         void onBufferRender(HSORATEXTURE buffer);
-        void registerDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate);
+        
+        typedef SoraFunction<void(HSORATEXTURE)> DelegateFuncType;
+        void registerDelegate(const DelegateFuncType& delegate);
         
     private:
         SoraSprite* mBufferSprite;
         ulong32 mBufferTarget;
         
-        SoraAbstractDelegate<HSORATEXTURE>* mDelegate;
+        DelegateFuncType mDelegate;
     };
     
 } // namespace sora

@@ -14,12 +14,14 @@
 #import <Foundation/Foundation.h>
 
 namespace sora {
-	
-	inline std::wstring NSStringToStringW ( NSString* Str ) {   
+    
+	inline std::wstring NSStringToStringW ( NSString* Str ) { 
 		NSStringEncoding pEncode    =   CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingUTF32LE );   
 		NSData* pSData              =   [ Str dataUsingEncoding : pEncode ];    
 		
-		return std::wstring ( (wchar_t*) [ pSData bytes ], [ pSData length] / sizeof ( wchar_t ) );   
+        std::wstring result = std::wstring ( (wchar_t*) [ pSData bytes ], [ pSData length] / sizeof ( wchar_t ) ); 
+     //   [pSData release];
+        return result;
 	}   
 	
 	inline NSString* StringWToNSString ( const std::wstring& Str ) {   

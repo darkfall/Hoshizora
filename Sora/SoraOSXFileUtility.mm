@@ -22,7 +22,9 @@ namespace sora {
 	
 	bool osxFileExists(const SoraWString& path) {
 		NSString* nsPath = [[NSString alloc] initWithUTF8String:ws2s(path).c_str()];
-		return [[NSFileManager defaultManager] fileExistsAtPath:nsPath];
+		bool result = [[NSFileManager defaultManager] fileExistsAtPath:nsPath];
+        [nsPath release];
+        return result;
 	}
 } // namespace sora
 

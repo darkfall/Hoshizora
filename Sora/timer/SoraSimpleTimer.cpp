@@ -18,7 +18,7 @@ namespace sora {
     mTimes(0),
     mEnabled(false),
     mPaused(false),
-    mTimerFunc(func.clone()),
+    mTimerFunc(func),
     mInterval(0.f),
     mStartedTime(0.f),
     mPrevDelta(0.f),
@@ -30,9 +30,6 @@ namespace sora {
 
     SoraSimpleTimer::~SoraSimpleTimer() {
         mOwner->removeTimer(this);
-        
-        if(mTimerFunc)
-            delete mTimerFunc;
     }
     
     bool SoraSimpleTimer::start(TimeType interval, uint32 times, TimeType start) {
@@ -48,6 +45,7 @@ namespace sora {
         mStartedTime = start;
         
         mEnabled = true;
+        return true;
     }
     
     void SoraSimpleTimer::stop() {
@@ -59,7 +57,7 @@ namespace sora {
     }
     
     SoraSimpleTimer::TimeType SoraSimpleTimer::play() {
-        mTimerFunc->notify(this, mCurrDelta);
+        mTimerFunc(this, mCurrDelta);
         return mCurrDelta;
     }
     
@@ -73,12 +71,11 @@ namespace sora {
         mStartedTime += dt;
         
         if(step > 0) {
-            bool result = false;
             if(mTimes == 0) {
-                if(!mTimerFunc->notify(this, mPrevDelta))
+                if(!mTimerFunc(this, mPrevDelta))
                     return false;
             } else {
-                if(!mTimerFunc->notify(this, mPrevDelta))
+                if(!mTimerFunc(this, mPrevDelta))
                     return false;
                 mTimes -= 1;
                 if(mTimes <= 0) {

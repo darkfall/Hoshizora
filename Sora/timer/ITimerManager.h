@@ -12,6 +12,7 @@
 #include "../SoraSingleton.h"
 #include "../SoraPlatform.h"
 #include "../SoraDelegate.h"
+#include "../function/SoraFunction.h"
 
 namespace sora {
     
@@ -25,7 +26,7 @@ namespace sora {
     class ITimerManager: public SoraDirectSingleton<ITimerManager> {
     public:
         typedef float32 TimeType;
-        typedef SoraAbstractDelegate< /* Interval */TimeType, bool> TimerFunc;
+        typedef SoraFunction<bool(SoraSimpleTimer*, TimeType)> TimerFunc;
         
         virtual bool update(TimeType dt) = 0;
         virtual SimpleTimerPtr createTimer(const TimerFunc& func) = 0;

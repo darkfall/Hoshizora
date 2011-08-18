@@ -113,8 +113,6 @@ namespace sora {
 		float32 getTimeScale();
 		uint64  getCurrentSystemTime();
         void    setVerticalSync(bool flag);
-        
-        SimpleTimerPtr createTimer(const ITimerManager::TimerFunc& func);
 
 		// render system APIs
 		void beginScene(uint32 c=0xFF000000, ulong32 h=0, bool clear=true);
@@ -243,8 +241,8 @@ namespace sora {
 		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
 		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
 
-		SoraFont* createFont(const SoraWString& fontName, int size);
-		void releaseFont(SoraFont* font);
+		SoraFont*   createFont(const SoraWString& fontName, int size);
+		void        releaseFont(SoraFont* font);
 		
 		SoraMusicFile* 			createMusicFile(const SoraWString& musicName, bool bStream=true);
 		SoraSoundEffectFile* 	createSoundEffectFile(const SoraWString& se);
@@ -307,7 +305,9 @@ namespace sora {
          * This is required for fullscreen post shader effects
          **/
         void enableFullscreenBuffer(bool flag);
-        void registerFullscreenBufferDelegate(const SoraAbstractDelegate<HSORATEXTURE>& delegate);
+                
+        typedef SoraFunction<void(HSORATEXTURE)> FullScreenBufferDelegateType;
+        void registerFullscreenBufferDelegate(const FullScreenBufferDelegateType& delegate);
 		
 	private:
         static SoraCore* mInstance;

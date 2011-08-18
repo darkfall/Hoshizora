@@ -11,7 +11,7 @@
 
 #include "../SoraPlatform.h"
 #include "../SoraTimestamp.h"
-#include "../SoraDelegate.h"
+#include "../function/SoraFunction.h"
 #include "../AutoContainer.h"
 #include "../uncopyable.h"
 
@@ -22,13 +22,16 @@ namespace sora {
     class SoraSimpleTimer {
     public:
         typedef float32 TimeType;
-        typedef SoraAbstractDelegate< /* Delta */TimeType, bool> TimerFunc;
+        typedef SoraFunction<bool(SoraSimpleTimer*, TimeType)> TimerFunc;
         
         SoraSimpleTimer(const TimerFunc& func, ITimerManager* owner);
         virtual ~SoraSimpleTimer();
     
-        // minimum delta depends on current framerate
-        // for example minimun delta = 1
+        /*
+         *  As the timer update depends on SoraCore update
+         *  minimum interval depends on current framerate
+         *  For FPS = 60, minimum interval = 1000/60 ~= 17ms
+         */
         virtual bool start(TimeType interval, uint32 times, TimeType start);
         virtual void stop();
         virtual void pause(bool flag);
@@ -38,6 +41,8 @@ namespace sora {
         
         bool isPaused() const;
         bool isEnabled() const;
+        
+        
         void setEnable(bool flag);
         
         // time since the timer has started
@@ -49,7 +54,7 @@ namespace sora {
         uint32 mTimes;
         bool mEnabled;
         bool mPaused;
-        TimerFunc* mTimerFunc;
+        TimerFunc mTimerFunc;
         
         TimeType mInterval;
         TimeType mStartedTime;

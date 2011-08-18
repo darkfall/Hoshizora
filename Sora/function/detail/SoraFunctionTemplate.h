@@ -106,18 +106,20 @@ namespace sora {
         template<typename R SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_PARAM>
         class SORA_FUNCTION {
         public:
+            typedef SORA_FUNCTION<R SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS> self_type;
+
             template<typename Functor>
             SORA_FUNCTION(const Functor& functor):
             mInvoker(0),
             mReleaser(0),
-            mRelease(false) {
+            mRefCount(NULL) {
                 this->assign_to(functor);
             }
             
             SORA_FUNCTION():
             mInvoker(0),
             mReleaser(0),
-            mRelease(false) {
+            mRefCount(NULL) {
                 
             }
             
@@ -126,11 +128,15 @@ namespace sora {
             }
             
             void clear() {
-                if(mInvoker && mRelease) {
-                    if(mReleaser)
-                        mReleaser(mPtr);
-                    
-                    mRelease = false;
+                if(mInvoker && mRefCount) {
+                    --*mRefCount;
+                    if(*mRefCount <= 0) {
+                        delete mRefCount;
+                        
+                        if(mReleaser)
+                            mReleaser(mPtr);
+                    }
+                    mRefCount = NULL;
                     mReleaser = NULL;
                     mInvoker = NULL;
                 }
@@ -156,7 +162,7 @@ namespace sora {
             
             typedef R (*invoker_type)(any_ptr SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS);
             typedef void (*releaser_type)(any_ptr);
-            
+      
         private:
             
             template<typename Functor>
@@ -179,7 +185,8 @@ namespace sora {
                 mReleaser = &releaser_type::release;
                 
                 mPtr = make_any_pointer(new Functor(f));
-                mRelease = true;
+                mRefCount = new int;
+                *mRefCount = 1;
             }
             
             template<typename Functor>
@@ -191,29 +198,31 @@ namespace sora {
             void assign_to(Functor f, function_obj_ref_tag tag) {
                 
             }
-
-        private:
+            
+        protected:
             any_ptr mPtr;
             invoker_type mInvoker;
             releaser_type mReleaser;
-            bool mRelease;
+            int* mRefCount;
         };
-        
+
         template<SORA_FUNCTION_TEMPLATE_PARAM>
         class SORA_FUNCTION<void SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS> {
         public:
+            typedef SORA_FUNCTION<void SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS> self_type;
+            
             template<typename Functor>
             SORA_FUNCTION(const Functor& functor):
             mInvoker(0),
             mReleaser(0),
-            mRelease(false) {
+            mRefCount(NULL) {
                 this->assign_to(functor);
             }
             
             SORA_FUNCTION():
             mInvoker(0),
             mReleaser(0),
-            mRelease(false) {
+            mRefCount(NULL) {
                 
             }
             
@@ -222,11 +231,15 @@ namespace sora {
             }
             
             void clear() {
-                if(mInvoker && mRelease) {
-                    if(mReleaser)
-                        mReleaser(mPtr);
-                    
-                    mRelease = false;
+                if(mInvoker && mRefCount) {
+                    --*mRefCount;
+                    if(*mRefCount <= 0) {
+                        delete mRefCount;
+                        
+                        if(mReleaser)
+                            mReleaser(mPtr);
+                    }
+                    mRefCount = NULL;
                     mReleaser = NULL;
                     mInvoker = NULL;
                 }
@@ -243,7 +256,7 @@ namespace sora {
             inline void operator()(SORA_FUNCTION_PARAMS) {
                 assert(mInvoker);
                 
-                return mInvoker(mPtr SORA_FUNCTION_COMMA SORA_FUNCTION_ARGS);
+                mInvoker(mPtr SORA_FUNCTION_COMMA SORA_FUNCTION_ARGS);
             }
             
             operator bool() {
@@ -275,7 +288,7 @@ namespace sora {
                 mReleaser = &releaser_type::release;
                 
                 mPtr = make_any_pointer(new Functor(f));
-                mRelease = true;
+                mRefCount = new int(1);
             }
             
             template<typename Functor>
@@ -288,13 +301,14 @@ namespace sora {
                 
             }
             
-        private:
+        protected:
             any_ptr mPtr;
             invoker_type mInvoker;
             releaser_type mReleaser;
-            bool mRelease;
+            int* mRefCount;
         };
-                                   
+        
+        
     } // namespace detail
     
     
@@ -308,6 +322,7 @@ namespace sora {
     {
     public:
         typedef detail::SORA_FUNCTION<R SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS> base_type;
+        typedef SoraFunction<R(SORA_FUNCTION_TEMPLATE_ARGS)> self_type;
 #if SORA_FUNCTION_NUM_ARGS == 1
         typedef T0 argument_type;
 #elif SORA_FUNCTOR_NUM_ARGS == 2
@@ -330,6 +345,106 @@ namespace sora {
         SoraFunction<R(SORA_FUNCTION_TEMPLATE_ARGS)>& operator=(Functor f) {
             base_type::assign_to(f);
             return *this;
+        }
+        
+        
+        self_type& operator=(const self_type& rhs) {
+            if(this != &rhs) {
+                base_type::clear();
+                
+                this->mPtr = rhs.mPtr;
+                this->mInvoker = rhs.mInvoker;
+                this->mReleaser = rhs.mReleaser;
+                this->mRefCount = rhs.mRefCount;
+                
+                if(this->mRefCount != NULL) {
+                    ++*this->mRefCount;
+                }
+            }
+            return *this;
+        }
+        
+        SoraFunction(const self_type& rhs) {
+            if(this != &rhs) {
+                base_type::clear();
+                
+                this->mPtr = rhs.mPtr;
+                this->mInvoker = rhs.mInvoker;
+                this->mReleaser = rhs.mReleaser;
+                this->mRefCount = rhs.mRefCount;
+                
+                if(this->mRefCount != NULL) {
+                    ++*this->mRefCount;
+                }
+            }
+        }
+    };
+    
+    template<SORA_FUNCTION_TEMPLATE_PARAM>
+    class SoraFunction<void(SORA_FUNCTION_TEMPLATE_ARGS)>: public detail::SORA_FUNCTION<void SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS>
+#if SORA_FUNCTION_NUM_ARGS == 1
+    , public std::unary_function<T0, void>
+#elif SORA_FUNCTOR_NUM_ARGS == 2
+    , public std::binary_function<T0, T1, void> 
+#endif
+    {
+    public:
+        typedef detail::SORA_FUNCTION<void SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS> base_type;
+        typedef SoraFunction<void(SORA_FUNCTION_TEMPLATE_ARGS)> self_type;
+#if SORA_FUNCTION_NUM_ARGS == 1
+        typedef T0 argument_type;
+#elif SORA_FUNCTOR_NUM_ARGS == 2
+        typedef T0 first_argument_type;
+        typedef T1 second_argument_type;
+#endif
+        
+        template<typename Functor>
+        SoraFunction(Functor f):
+        base_type(f) {
+            
+        }
+        
+        SoraFunction():
+        base_type() {
+            
+        }
+        
+        template<typename Functor>
+        SoraFunction<void(SORA_FUNCTION_TEMPLATE_ARGS)>& operator=(Functor f) {
+            base_type::assign_to(f);
+            return *this;
+        }
+        
+        
+        self_type& operator=(const self_type& rhs) {
+            if(this != &rhs) {
+                base_type::clear();
+                
+                this->mPtr = rhs.mPtr;
+                this->mInvoker = rhs.mInvoker;
+                this->mReleaser = rhs.mReleaser;
+                this->mRefCount = rhs.mRefCount;
+                
+                if(this->mRefCount != NULL) {
+                    ++*this->mRefCount;
+                }
+            }
+            return *this;
+        }
+        
+        SoraFunction(const self_type& rhs) {
+            if(this != &rhs) {
+                base_type::clear();
+                
+                this->mPtr = rhs.mPtr;
+                this->mInvoker = rhs.mInvoker;
+                this->mReleaser = rhs.mReleaser;
+                this->mRefCount = rhs.mRefCount;
+                
+                if(this->mRefCount != NULL) {
+                    ++*this->mRefCount;
+                }
+            }
         }
     };
     

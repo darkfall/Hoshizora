@@ -9,21 +9,7 @@
 #ifndef SoraPreprocessor_h
 #define SoraPreprocessor_h
 
-namespace sora {
-    template<bool x> struct STATIC_ASSERTION_FAILURE;
-    template<> struct STATIC_ASSERTION_FAILURE<true> { enum {Value = 1}; };
-    template<int x> struct static_assert_test{};
-}
-
-
-#define SORA_JOIN(x, y) SORA_DO_JOIN(x, y)
-#define SORA_DO_JOIN(x ,y) SORA_DO_JOIN_2(x, y)
-#define SORA_DO_JOIN_2(x, y) x##y
-
-#define sora_static_assert(B) \
-    typedef ::sora::static_assert_test<\
-    sizeof(::sora::STATIC_ASSERTION_FAILURE<(bool)(B)>)>\
-    SORA_JOIN(__sora_static_assert_typedef_, __LINE__)
+#include "SoraPreDeclare.h"
 
 #define SORA_REPEAT_1_0(m, d)
 #define SORA_REPEAT_1_1(m, d) m(0, d)

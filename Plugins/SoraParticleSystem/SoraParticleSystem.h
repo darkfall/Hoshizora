@@ -211,7 +211,7 @@ namespace sora {
 
 	class SoraParticleManager {
 		friend class SoraParticleSystem;
-		typedef map<HSORAPARTICLE, SoraParticleSystem*> PARTICLE_MAP;
+		typedef std::map<HSORAPARTICLE, SoraParticleSystem*> PARTICLE_MAP;
 
 	public:
 		SoraParticleManager();

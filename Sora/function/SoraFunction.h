@@ -23,4 +23,13 @@
 #include "detail/SoraFunction11.h"
 #include "detail/SoraFunction12.h"
 
+namespace sora {
+    
+    template<typename SIG, typename T>
+    static SoraFunction<SIG> MakeFunction(const T& t) {
+        return SoraFunction<SIG>(t);
+    }
+    
+} // namespace sora
+
 #endif

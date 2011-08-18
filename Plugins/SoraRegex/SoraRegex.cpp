@@ -236,6 +236,7 @@ namespace sora {
                 result += subject[pos++];
         }
         subject = result;
+        return pos;
     }
     
     bool SoraRegex::match(const std::string& subject, const std::string& pattern, int options) {

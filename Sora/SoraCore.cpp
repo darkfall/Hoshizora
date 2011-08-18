@@ -156,13 +156,6 @@ namespace sora {
 		setRandomSeed(rand());
         initConstantStrings();
         _registerEventTypes();
-        
-        try {
-            if(!bDisablePluginDetection) 
-                SoraBooter::loadExPlugins(L"./sora/plugins");
-        } catch(const SoraException& exp) {
-            _postError(exp.what());
-        }
 	}
     
     void SoraCore::init(const Parameter& param) {
@@ -171,6 +164,13 @@ namespace sora {
         enableMessageBoxErrorPost(param.isPostErrorByMessageBox());
         
         enableFullscreenBuffer(param.isRenderToBuffer());
+        
+        try {
+            if(!bDisablePluginDetection) 
+                SoraBooter::loadExPlugins(L"./sora/plugins");
+        } catch(const SoraException& exp) {
+            _postError(exp.what());
+        }
     }
 
 	void SoraCore::_initializeTimer() {
@@ -1360,8 +1360,8 @@ namespace sora {
         }
     }
     
-    void SoraCore::registerFullscreenBufferDelegate(const SoraAbstractDelegate<HSORATEXTURE>& delegate) {
-        SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate.clone());
+    void SoraCore::registerFullscreenBufferDelegate(const SoraFunction<void(HSORATEXTURE)>& delegate) {
+        SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate);
     }
     
     void SoraCore::pushTransformMatrix() {
@@ -1427,7 +1427,4 @@ namespace sora {
         SoraKeyPool::delJoystickListener(listener);
     }
     
-    SimpleTimerPtr SoraCore::createTimer(const ITimerManager::TimerFunc& func) {
-        return SoraSimpleTimerManager::Instance()->createTimer(func);
-    }
 } // namespace sora

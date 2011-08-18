@@ -24,7 +24,31 @@
 
 #include "timer/SoraSimpleTimerManager.h"
 
+#include "signal/SoraSignal.h"
+
+int t1() {
+    sora::SORA->messageBox("t1", "t1", MB_OK);
+    return 1;
+}
+
+int t2() {
+    sora::SORA->messageBox("t1", "t1", MB_OK);
+    return 2;
+}
+
+void t3(int, int ,int , int, int, int, int, int) {
+    
+}
+
+
+
 mainWindow::mainWindow() {
+    sora::SoraSignal<void(int, int ,int , int, int, int, int, int)> signal;
+    sora::SoraConnection con1 = signal.connect(t3);
+    
+    signal.sig(1, 2, 3, 4, 5, 6, 7 ,8);
+    
+    
 	sora = sora::SoraCore::Instance();
     
 	registerEventFunc(this, &mainWindow::onKeyEvent);
@@ -80,10 +104,26 @@ void myFunc(float& delta) {
     sora::SORA->messageBox(msg.str(), "test", MB_OK);
 }
 
+class test {
+public:
+    bool timerFunc(sora::SoraSimpleTimer* timer, float interval) {
+        printf("lalal\n");  
+        return true;
+    }
+};
+
+sora::SimpleTimerPtr timer;
+test tttt1;
+#include "function/SoraBind.h"
+#include "timer/SoraSimpleTimerManager.h"
+
 void mainWindow::init() {
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
+    
+    timer = sora::CreateSimpleTimer(sora::Bind(&tttt1, &test::timerFunc));
+    timer->start(0.1, 0, 0);
    
     mScene1 = new sora::SoraScene(getWindowWidth(), getWindowHeight());
  //   mScene1->enableRenderToCanvas(true);
