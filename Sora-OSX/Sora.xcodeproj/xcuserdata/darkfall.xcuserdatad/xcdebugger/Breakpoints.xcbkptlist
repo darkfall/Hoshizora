@@ -2372,7 +2372,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "34"
          endingLineNumber = "34"
-         landmarkName = "SoraShaderEnabledObject::attachFragmentShader(const SoraWString&amp; file, const SoraString&amp; entry)"
+         landmarkName = "SoraShaderEnabledObject::attachShader(const SoraWString&amp; file, const SoraString&amp; entry, int32 type)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
