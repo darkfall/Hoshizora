@@ -183,7 +183,7 @@ namespace guiwrapper {
         gcn::Widget* w = getWidgetByHandle(h);
         if(w) {
             std::string type = responseType;
-            XmlGui::parseResponser(w, responser, &type);
+            XmlGui::parseResponser(w, responser, type.c_str());
         }
     }
     

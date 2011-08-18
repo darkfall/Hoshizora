@@ -12,6 +12,7 @@
 
 #include "SoraResourceFile.h"
 #include "SoraCore.h"
+#include "SoraMemoryBuffer.h"
 
 #ifdef OS_WIN32
 #pragma comment(lib, "giflib.lib")

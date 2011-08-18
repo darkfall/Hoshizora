@@ -5,7 +5,7 @@ namespace sora {
 	SoraHGEInput::SoraHGEInput() {
 		hge = hgeCreate(HGE_VERSION);
 		if(!hge)
-			throw SORA_EXCEPTION("Error creating hge");
+			throw SORA_EXCEPTION(SystemException, "Error creating hge");
 	}
 
 	SoraHGEInput::~SoraHGEInput() {

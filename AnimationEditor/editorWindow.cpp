@@ -15,14 +15,7 @@ using namespace sora;
 
 animationEditorWindow::animationEditorWindow() {
 	SoraGUIResponserMap::Instance()->registerResponser("AnimationPanel", this);
-	
-#ifdef OS_WIN32
-	fileopener.SetFilter(L"AnimationConfig(*.txt)\0*.txt\0\0");
-	fileopener.SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
-#elif defined(OS_OSX)
-    fileopener.SetFilter("txt;");
-    fileopener.SetDefaultPath(ws2s(SoraFileUtility::getApplicationPath()).c_str());
-#endif
+
 	pAnimatedSprite = 0;
 	pAvailableAnimations = 0;
 }
@@ -49,18 +42,9 @@ gcn::Widget* animationEditorWindow::loadGUIConfig(const SoraWString& confPath) {
 
 void animationEditorWindow::action() {
 	if(getID().compare("Open") == 0) {
-#ifdef OS_OSX
-		char path[512], title[128];
-		if(fileopener.FileOpenDlg(0, path, title)) {
-			loadAnimation(path);
-		}
-#elif defined(OS_WIN32) 
-		wchar_t path[512], title[128];
-		path[0] = '\0'; title[0] = '\0';
-		if(fileopener.FileOpenDlg((HWND)SORA->getMainWindowHandle(), path, title)) {
-			loadAnimation(ws2s(path));
-		}
-#endif
+		SoraWString path;
+		path = SoraCore::Instance()->fileOpenDialog("AnimationConfig(*.txt)\0*.txt\0\0", sora::ws2s(SoraFileUtility::getApplicationPath().c_str()).c_str());
+		loadAnimation(sora::ws2s(path));
 	} else if(getID().compare("Refresh") == 0) {
 		loadAnimation(currentAnm);
 	} else if(getID().compare("PlayFrameRate") == 0) {

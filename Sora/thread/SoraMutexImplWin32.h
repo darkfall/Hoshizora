@@ -34,7 +34,7 @@ namespace sora {
             try {
                 EnterCriticalSection(&cs);
             } catch(...) {
-                THROW_SORA_EXCEPTION("Cannot lock mutex");
+                THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock mutex");
             }
         }
         
@@ -42,7 +42,7 @@ namespace sora {
             try {
                 LeaveCriticalSection(&cs);
             } catch(...) {
-                THROW_SORA_EXCEPTION("Cannot lock mutex");
+                THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock mutex");
             }
         }
         

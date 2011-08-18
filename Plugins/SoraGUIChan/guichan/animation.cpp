@@ -6,7 +6,7 @@
 //  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
 //
 
-#include "guichan/animation.h"
+#include "guichan/animation.hpp"
 
 namespace gcn {
     

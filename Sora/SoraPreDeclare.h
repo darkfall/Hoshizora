@@ -56,9 +56,10 @@ namespace sora {
     bool isClassClass(T1* t1) {
         return (&typeid(*t1) == &typeid(T2) ||
                 typeid(*t1) == typeid(T2));
-        
-#endif
+
     }
+	        
+#endif
 } // namespace sora
 
 

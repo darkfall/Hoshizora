@@ -14,6 +14,7 @@
 #include "../SoraAutoPtr.h"
 #include "../SoraDelegate.h"
 
+#include <map>
 
 namespace sora {
     

@@ -18,6 +18,8 @@
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
 
+#include "function/SoraFunction.h"
+
 
 #define HGE_RENDERER
 
@@ -68,7 +70,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	sora->setRenderSystemExtensionParam(0x0001, 4);
 	
 //	sora->createWindowLua(L"resource/scripts/luamaintest.lua");
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new aeMainWindow);
 	sora->start();
 		
 	return 0;

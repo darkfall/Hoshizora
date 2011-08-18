@@ -119,7 +119,6 @@ namespace sora {
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
         
 		SoraSprite();
-		SoraSprite(SoraSprite&);
 
 		void _initDefaults();
 		SoraTexture* mTexture;
@@ -138,6 +137,9 @@ namespace sora {
 
 		SoraCore* mSora;
 		SoraQuad mQuad;
+
+	private:
+		SoraSprite(SoraSprite&);
     };
 
 } // namespace sora

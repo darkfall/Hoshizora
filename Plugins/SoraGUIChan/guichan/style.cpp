@@ -6,7 +6,7 @@
 //  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
 //
 
-#include "guichan/style.h"
+#include "guichan/style.hpp"
 
 namespace gcn {
     

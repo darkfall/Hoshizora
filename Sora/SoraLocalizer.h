@@ -74,7 +74,7 @@ namespace sora {
 		static SoraLocalizer* mInstance;
 
 		typedef hash_map<stringId, SoraWString> LocaleStringMap;		
-		typedef map<SoraString, LocaleStringMap > LocaleConfMap;
+		typedef std::map<SoraString, LocaleStringMap > LocaleConfMap;
 		LocaleConfMap localeConfs;
 		LocaleConfMap::iterator currentLocaleMap;
 		

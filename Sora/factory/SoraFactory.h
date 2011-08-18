@@ -83,9 +83,9 @@ namespace sora {
         SoraAutoPtr<SoraFactoryCreatorFuncBase<T> > mCreatorImpl;
     };
     
-    template<typename interface>
-    interface* SoraFactoryCtorDelegate(void* sender, NamedValueList* param) {
-        return new interface();
+    template<typename inter>
+    inter* SoraFactoryCtorDelegate(void* sender, NamedValueList* param) {
+        return new inter();
     }
     
     template<typename T>

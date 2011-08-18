@@ -41,10 +41,6 @@
 #include "../MEAD/bulletLuaExport.h"
 #include "SoraSoundManager/SoundManagerLuaExport.h"
 
-#include "SoraThread/SoraThreadPool.h"
-
-#include "SoraThread/SoraCountDownLatch.h"
-#include "SoraThread/SoraBlockingQueue.h"
 #include "SoraShaderManager.h"
 
 #include "SoraModifierAdapter.h"

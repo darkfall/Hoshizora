@@ -69,7 +69,7 @@ namespace sora {
 	void* SoraFolderResourceManager::readResourceFile(const SoraWString& file, ulong32 size) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file))) {
-            uint8* pdata = (uint8*)sora_malloc(stream.size()+1);
+            uint8* pdata = (uint8*)sora_malloc((ulong32)stream.size()+1);
 			if(pdata != NULL) {
                 if(stream.read(pdata, size) != size) {
                 
@@ -84,7 +84,7 @@ namespace sora {
 	void* SoraFolderResourceManager::getResourceFile(const SoraWString& file, ulong32& size) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file))) {
-            uint8* pdata = (uint8*)sora_malloc(stream.size()+1);
+            uint8* pdata = (uint8*)sora_malloc((ulong32)stream.size()+1);
 			if(pdata != NULL) {
                 size = stream.read(pdata, stream.size());
                 pdata[size] = 0;
@@ -97,7 +97,7 @@ namespace sora {
 	ulong32 SoraFolderResourceManager::getResourceFileSize(const SoraWString& file) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file))) {
-            return stream.size();
+            return (ulong32)stream.size();
         }
         return 0;
 	}

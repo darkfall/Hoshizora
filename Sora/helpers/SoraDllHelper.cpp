@@ -25,7 +25,7 @@ namespace sora {
     class SoraDynLibraryImpl {
     public:
         bool open(const char* path) {
-            module = LoadLibraryhA(path);
+            module = LoadLibraryA(path);
             if(module == NULL) {
                 DebugPtr->error(vamssg("Error locating dll %s", path));
                 return false;
