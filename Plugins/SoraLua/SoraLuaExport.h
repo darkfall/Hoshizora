@@ -76,7 +76,7 @@ namespace sora {
             .def("log", &SoraCore::log)
             .def("execute", &SoraCore::execute)
             .def("setFrameSync", &SoraCore::setFrameSync)
-			.def("renderRect", &SoraCore::renderRect)
+			.def("renderRect", &SoraCore::renderLine)
 			.def("setWindowSize", &SoraCore::setWindowSize)
 			.def("pause", &SoraCore::pause)
 			.def("resume", &SoraCore::resume);

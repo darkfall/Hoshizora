@@ -21,12 +21,6 @@
 
 #include "SoraSpriteAnimation/SoraSpriteAnimation.h"
 
-#ifdef WIN32
-#include "DarkLib/FileDlg.h"
-#else
-#include "DarkLib/FileDlgOsx.h"
-#endif
-
 class animationEditorWindow: public sora::SoraGUIResponser  {
 public:
 	animationEditorWindow();
@@ -45,7 +39,6 @@ public:
 private:
 	sora::SoraFont* pFont;
 	
-	FileDlg fileopener;
 	gcn::ListBox* pAvailableAnimations;
 	
 	sora::SoraSpriteAnimation* pAnimatedSprite;

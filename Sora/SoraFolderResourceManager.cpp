@@ -97,7 +97,7 @@ namespace sora {
 	ulong32 SoraFolderResourceManager::getResourceFileSize(const SoraWString& file) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file))) {
-            return stream.size();
+            return (ulong32)stream.size();
         }
         return 0;
 	}

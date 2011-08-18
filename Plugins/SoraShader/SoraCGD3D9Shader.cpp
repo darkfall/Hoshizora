@@ -63,8 +63,12 @@ namespace sora {
 	}
 	
 	SoraCGD3D9Shader::SoraCGD3D9Shader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile) {
+<<<<<<< HEAD
 		mType = type;
 		
+=======
+		this->mType = type;
+>>>>>>> b309d05f510b64aedc21204c44a68455c68d0b5c
 		this->context = context;
         this->profile = profile;
 

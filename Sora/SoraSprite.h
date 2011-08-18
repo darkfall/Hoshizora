@@ -117,7 +117,10 @@ namespace sora {
 		
 	protected:
 		SoraSprite();
+<<<<<<< HEAD
         void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
+=======
+>>>>>>> b309d05f510b64aedc21204c44a68455c68d0b5c
 
 		void _initDefaults();
 		SoraTexture* mTexture;
@@ -136,7 +139,11 @@ namespace sora {
 
 		SoraCore* mSora;
 		SoraQuad mQuad;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> b309d05f510b64aedc21204c44a68455c68d0b5c
 	private:
 		SoraSprite(SoraSprite&);
     };
