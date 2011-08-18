@@ -135,7 +135,7 @@ static void setprogdir (lua_State *L) {
   const char* luaplusdllName = "luaplus51-1200.dll";
 #endif // _DEBUG
 
-  DWORD n = GetModuleFileNameA(GetModuleHandle(luaplusdllName), buff, nsize);
+  DWORD n = GetModuleFileNameA(GetModuleHandleA(luaplusdllName), buff, nsize);
   if (n == 0 || n == nsize || (lb = strrchr(buff, '\\')) == NULL)
     luaL_error(L, "unable to get ModuleFileName");
   else {
@@ -145,10 +145,10 @@ static void setprogdir (lua_State *L) {
 
 #ifndef NDEBUG
       strcpy(lb, "\\lua51.debug.dll");
-      LoadLibrary(buff);
+      LoadLibraryA(buff);
 
       strcpy(lb, "\\lua5.1.debug.dll");
-      LoadLibrary(buff);
+      LoadLibraryA(buff);
 #else // _DEBUG
       strcpy(lb, "\\lua51.dll");
       LoadLibrary(buff);

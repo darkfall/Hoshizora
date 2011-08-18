@@ -132,7 +132,7 @@ namespace sora {
     }
     
     uint32 SoraEventHandler::update(float32 dt) {
-        
+        return 0;
     }
     
 } // namespace sora

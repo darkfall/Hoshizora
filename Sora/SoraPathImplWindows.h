@@ -21,7 +21,7 @@ namespace sora {
     public:
         static std::string getEnvImpl(const std::string& name) {
             DWORD len = GetEnvironmentVariableA(name.c_str(), 0, 0);
-            if (len == 0) THROW_SORA_EXCEPTION("Cannot get current directory");
+            if (len == 0) THROW_SORA_EXCEPTION(RuntimeException, "Cannot get current directory");
             char* buffer = new char[len];
             GetEnvironmentVariableA(name.c_str(), buffer, len);
             std::string result(buffer);
@@ -37,7 +37,7 @@ namespace sora {
                     result.append("\\");
                 return result;
             }
-            else THROW_SORA_EXCEPTION("Cannot get current directory");
+            else THROW_SORA_EXCEPTION(RuntimeException, "Cannot get current directory");
         }
         static std::string homeImpl() {
             std::string result = getEnvImpl("HOMEDRIVE");
@@ -56,7 +56,7 @@ namespace sora {
                     result.append("\\");
                 return result;
             } else
-                THROW_SORA_EXCEPTION("Cannot get temp directory");
+                THROW_SORA_EXCEPTION(RuntimeException, "Cannot get temp directory");
         }
         static std::string nullImpl() {
             return "NUL:";

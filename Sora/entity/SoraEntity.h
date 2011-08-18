@@ -17,8 +17,8 @@ namespace sora {
     
     class SORA_API SoraEntity: public SoraObject {
     public:
-        SoraEntity();
-        virtual ~SoraEntity();
+		SoraEntity() {}
+		virtual ~SoraEntity() {}
         
         
     protected:

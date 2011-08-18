@@ -20,7 +20,7 @@ namespace sora {
      * Base class from objects that can render with shader
      **/
     
-    class SoraShaderEnabledObject: public SoraObject {
+    class SORA_API SoraShaderEnabledObject: public SoraObject {
     public:
         SoraShaderEnabledObject();
         virtual ~SoraShaderEnabledObject();

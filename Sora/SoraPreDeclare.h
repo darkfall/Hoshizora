@@ -57,8 +57,9 @@ namespace sora {
         return (&typeid(*t1) == &typeid(T2) ||
                 typeid(*t1) == typeid(T2));
         
-#endif
     }
+	
+#endif
 } // namespace sora
 
 
