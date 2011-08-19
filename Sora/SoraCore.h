@@ -37,7 +37,6 @@ namespace sora {
 
 	public:
         static SoraCore* Instance();
-        static void Destroy();
         
         class Parameter {
         public:
@@ -140,6 +139,7 @@ namespace sora {
 		void                detachShaderContext();
 
 		SoraSprite* createSprite (const SoraWString& sPath);
+        void renderSprite(const SoraWString& path, float32 x=0.f, float32 y=0.f);
 
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
@@ -150,7 +150,7 @@ namespace sora {
         void fillBox        (float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
         
 		void setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
-		void setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
+		void setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=1.f, float32 vscale=1.f);
 		
 		void pushTransformMatrix();
 		void popTransformMatrix();
@@ -308,7 +308,15 @@ namespace sora {
                 
         typedef SoraFunction<void(HSORATEXTURE)> FullScreenBufferDelegateType;
         void registerFullscreenBufferDelegate(const FullScreenBufferDelegateType& delegate);
-		
+        
+        /**
+         *  transform a 3d point to 2d using a far point as view
+         **/
+        void        setFarPoint(const SoraVector3& ptFar);
+        SoraVector3 getFarPoint() const;
+        float       transform3DPoint(SoraVector3* point);
+		float       transform3DPoint(float* x, float* y, float* z);
+        
 	private:
         static SoraCore* mInstance;
         
@@ -319,6 +327,7 @@ namespace sora {
 		inline void _initializeTimer();
 		inline void _initializeMiscTool();
         inline void _registerEventTypes();
+        inline void _updateEnd();
 
 		SoraMiscTool*			pMiscTool;
 		SoraRenderSystem*		pRenderSystem;
@@ -363,6 +372,7 @@ namespace sora {
         inline void _modifierAdapterUpdate();
 		
 		bool bZBufferArea;
+        SoraVector3 mFarPoint;
     };
 
 

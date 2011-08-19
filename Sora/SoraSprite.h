@@ -3,8 +3,7 @@
 
 #include "SoraTexture.h"
 #include "SoraColor.h"
-
-#include "hgerect.h"
+#include "SoraMath.h"
 #include "SoraImageEffect.h"
 #include "SoraObject.h"
 #include "SoraShaderEnabled.h"
@@ -61,6 +60,7 @@ namespace sora {
 
         virtual void render();
         virtual void render(float32 x, float32 y);
+        virtual void renderInBox(float32 x1, float32 y1, float32 x2, float32 y2);
         virtual void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
 		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
 
@@ -75,6 +75,8 @@ namespace sora {
 
 		void    setZ(float32 z, int32 i=-1);
 		float32 getZ(int32 i=0) const;
+        
+        void    setPosition(float32 x, float32 y);
 
 		void    setCenter(float32 x, float32 y);
 		void    getCenter(float32& x, float32& y);
@@ -101,9 +103,7 @@ namespace sora {
 
 		void    setRotation(float32 r);
 		float32 getRotation() const;
-		void    setRotationZ(float32 rz);
-		float32 getRotationZ() const;
-
+		
 		uint32*         getPixelData() const;
         void            unlockPixelData();
 		HSORATEXTURE    getTexture() const;
@@ -117,26 +117,29 @@ namespace sora {
 		
 	protected:
 		SoraSprite();
-        void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
+        
+        inline void _initDefaults();
+        inline void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
 
-		void _initDefaults();
-		SoraTexture* mTexture;
+        inline void buildQuad(float32 x, float32 y);
 		
 		hgeRect mTextureRect;
-        int32 mSprWidth, mSprHeight;
+        int32   mSprWidth, mSprHeight;
 
-		float32 mRotation, mRotationZ;
+		float32 mRotation;
 		float32 mCenterX, mCenterY;
 		float32 mVScale, mHScale;
 
 		bool bVFlip, bHFlip, bCFlip;
+        bool bPropChanged;
 		
 		typedef std::list<SoraImageEffect*> ImageEffectList;
 		ImageEffectList vEffects;
 
-		SoraCore* mSora;
 		SoraQuad mQuad;
 
+        static SoraCore* mSora;
+        
 	private:
 		SoraSprite(SoraSprite&);
     };

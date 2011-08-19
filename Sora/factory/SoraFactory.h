@@ -11,77 +11,13 @@
 
 #include "../SoraPlatform.h"
 #include "../SoraPreDeclare.h"
+#include "../SoraAutoPtr.h"
+#include "../function/SoraFunction.h"
 
 #include "../uncopyable.h"
-#include "../SoraAutoPtr.h"
+
 
 namespace sora {
-    
-    template<typename T>
-    class SoraFactoryCreatorFuncBase {
-    public:
-        virtual T* doCreate(NamedValueList* param) = 0;
-    };
-    
-    template<typename T>
-    class SoraFactoryCreatorCFunc: public SoraFactoryCreatorFuncBase<T> {
-    public:
-        typedef T* (*CreatorFn)(NamedValueList*);
-        SoraFactoryCreatorCFunc(CreatorFn fn):
-        mFunc(fn) {
-            
-        }
-        
-        T* doCreate(NamedValueList* param) {
-            return mFunc(param);
-        }
-        
-    private:
-        CreatorFn mFunc;
-    };
-    
-    template<typename T, typename Obj>
-    class SoraFactoryCreatorMemberFunc: public SoraFactoryCreatorFuncBase<T> {
-    public:
-        typedef T* (Obj::*CreatorFn)(NamedValueList*);
-        SoraFactoryCreatorMemberFunc(Obj* obj, CreatorFn fn):
-        mObj(obj),
-        mFunc(fn) {
-            
-        }
-        
-        T* doCreate(NamedValueList* param) {
-            return (mObj->*mFunc)(param);
-        }
-        
-    private:
-        CreatorFn mFunc;
-        Obj* mObj;
-    };
-    
-    template<typename T>
-    class SORA_API SoraFactoryCreator {
-    public:
-        SoraFactoryCreator(typename SoraFactoryCreatorCFunc<T>::CreatorFn fn) {
-            mCreatorImpl = new SoraFactoryCreatorCFunc<T>(fn);
-        }
-        
-        template<typename Obj> 
-        SoraFactoryCreator(Obj* obj, 
-                           typename SoraFactoryCreatorMemberFunc<T, Obj>::CreatorFn fn) {
-            mCreatorImpl = new SoraFactoryCreatorMemberFunc<T, Obj>(fn, obj);
-        }
-        
-        ~SoraFactoryCreator() {
-        }
-        
-        T* operator()(NamedValueList* param) {
-            return (*mCreatorImpl).doCreate(param);
-        }
-        
-    private:
-        SoraAutoPtr<SoraFactoryCreatorFuncBase<T> > mCreatorImpl;
-    };
     
     template<typename inter>
     inter* SoraFactoryCtorDelegate(void* sender, NamedValueList* param) {
@@ -108,7 +44,7 @@ namespace sora {
     template<class T, const char* TypeName>
     class SORA_API SoraFactory: public SoraAbstractFactory<T> {
     public:
-        typedef SoraFactoryCreator<T> CreatorFn;
+        typedef SoraFunction<T(NamedValueList*)> CreatorFn;
         typedef std::map<std::string, CreatorFn> CreatorFnMap;
         
     public:
@@ -135,7 +71,7 @@ namespace sora {
         
         template<typename product>
         void reg_ctor(const std::string& instanceName) {
-            reg(instanceName, SoraFactoryCreator<product>(SoraFactoryCtorDelegate<product>));
+            reg(instanceName, CreatorFn(SoraFactoryCtorDelegate<product>));
         }
         
     private:

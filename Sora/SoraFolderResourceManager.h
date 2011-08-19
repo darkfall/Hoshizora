@@ -13,11 +13,12 @@
 #include "SoraResourceManager.h"
 #include "SoraFileUtility.h"
 #include "stringId.h"
-#include <vector>
 
 #include "hash.h"
 #include "osxfilewrapper.h"
 #include "win32filewrapper.h"
+
+#include <map>
 
 namespace sora {
 	
@@ -50,7 +51,7 @@ namespace sora {
 		FOLDER_CONT folders;
 		SoraWString applicationPath;
 		
-		typedef hash_map</*fileNameHash*/stringId, /*fileFullPath*/SoraWString> FILE_CACHE;
+		typedef std::map</*fileNameHash*/stringId, /*fileFullPath*/SoraWString> FILE_CACHE;
 		FILE_CACHE fileCache;
 		
 		inline SoraWString getFullPath(const SoraWString& fileName);

@@ -13,7 +13,7 @@
 
 namespace sorawin32 {
 
-void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
+    void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
 		WIN32_FIND_DATAW FindData;
 		SoraWString newFolder = folder+L"\\*";
 	
@@ -30,7 +30,7 @@ void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder
 				   tmpPath += L'/';
 				   tmpPath += FindData.cFileName;
 
-              enumFilesInFolder(cont, tmpPath);    //如果是文件夹，第归调用扫描
+              enumFilesInFolder(cont, tmpPath);  
 		}
 		else {
 			cont.push_back(folder+L"/"+fName);
@@ -48,7 +48,7 @@ void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder
 						tmpPath += L'/';
 						tmpPath += FindData.cFileName;
 
-						enumFilesInFolder(cont, tmpPath);    //如果是文件夹，第归调用扫描
+						enumFilesInFolder(cont, tmpPath);
 				}
 				else {
 					cont.push_back(folder+L"/"+fName);
@@ -56,7 +56,7 @@ void enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder
 			}
 		}
 		FindClose(hFile);
-}
+    }
 
 } // namespace sorawin32
 

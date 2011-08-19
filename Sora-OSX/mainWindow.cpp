@@ -26,29 +26,7 @@
 
 #include "signal/SoraSignal.h"
 
-int t1() {
-    sora::SORA->messageBox("t1", "t1", MB_OK);
-    return 1;
-}
-
-int t2() {
-    sora::SORA->messageBox("t1", "t1", MB_OK);
-    return 2;
-}
-
-void t3(int, int ,int , int, int, int, int, int) {
-    
-}
-
-
-
 mainWindow::mainWindow() {
-    sora::SoraSignal<void(int, int ,int , int, int, int, int, int)> signal;
-    sora::SoraConnection con1 = signal.connect(t3);
-    
-    signal.sig(1, 2, 3, 4, 5, 6, 7 ,8);
-    
-    
 	sora = sora::SoraCore::Instance();
     
 	registerEventFunc(this, &mainWindow::onKeyEvent);
@@ -83,47 +61,22 @@ void myRenderFunc(sora::SoraObject& obj) {
 bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
-//    mScene1->getCanvas()->render();
-  //  mMovieSprite->update(sora::SORA->getDelta());
-   // mMovieSprite->render();
     
-    sora::SoraResourceFileAuto file(L"test.txt");
-    mFont->render(0.f, 0.f, sora::FONT_ALIGNMENT_LEFT, sora::s2ws((const char*)file.data()).c_str());
+    
+    sora::SORA->renderSprite(L"sea.png");
+    
     sora::SORA->endScene();
     
 	return false;
 }
 
-void delegatetest(void* sender, int32& res) {
-    sora::SORA->messageBox("test", "test", MB_OK);
-}
 
-void myFunc(float& delta) {
-    std::ostringstream msg;
-    msg << "Timer Delta: "<<delta;
-    sora::SORA->messageBox(msg.str(), "test", MB_OK);
-}
-
-class test {
-public:
-    bool timerFunc(sora::SoraSimpleTimer* timer, float interval) {
-        printf("lalal\n");  
-        return true;
-    }
-};
-
-sora::SimpleTimerPtr timer;
-test tttt1;
-#include "function/SoraBind.h"
 #include "timer/SoraSimpleTimerManager.h"
 
 void mainWindow::init() {
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
-    
-    timer = sora::CreateSimpleTimer(sora::Bind(&tttt1, &test::timerFunc));
-    timer->start(0.1, 0, 0);
    
     mScene1 = new sora::SoraScene(getWindowWidth(), getWindowHeight());
  //   mScene1->enableRenderToCanvas(true);
@@ -157,11 +110,15 @@ void mainWindow::init() {
     mScene3->add(sora::SORA->createSprite(L"bullet2.png"), 0);
     mScene2->add(mScene3);
     
-    sora::CreateModifierAdapter(mScene2, new sora::SoraTransitionModifier<sora::SoraScene>(0.f, 0.f, 300.f, 300.f, 2.f));
-  //  mScene3->setRotation(sora::F_PI_4);
+
+    mSocket1.setup(ZMQ_DEALER);
+    mSocket2.setup(ZMQ_ROUTER);
     
-   // mMoviePlayer->openMedia(L"AMV_Scenario.mp4");
-   // mScene2->moveTo(800.f, 400.f, 10.f);
+    if(!mSocket2.bind("tcp://localhost:5555"))
+        std::cout<<mSocket2.getLastErrorMessage()<<"\n";
+    if(!mSocket1.connect("tcp://localhost:5555"))
+        std::cout<<mSocket1.getLastErrorMessage()<<"\n";
+    
 }
 
 void mainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {

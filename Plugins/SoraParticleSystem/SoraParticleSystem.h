@@ -57,10 +57,10 @@ namespace sora {
 		float32 fMinSpin;
 		float32 fMaxSpin;
 		
-		vector3 emitPos;
-		vector3 emitRange;
-		vector3 minDirection;
-		vector3 maxDirection;
+		Vector3 emitPos;
+		Vector3 emitRange;
+		Vector3 minDirection;
+		Vector3 maxDirection;
 
 		SoraColorRGBA dwMinStartColor;
 		SoraColorRGBA dwMaxStartColor;
@@ -98,8 +98,8 @@ namespace sora {
 		float32 fCurrSpin;
 		float32 fSpin;
 		
-		vector3 position;
-		vector3 direction;
+		Vector3 position;
+		Vector3 direction;
 		float32 fSpeed;
 
 		SoraColorRGBA dwCurrColor;
@@ -202,7 +202,7 @@ namespace sora {
 		float32 z;
 		
 		bool bRotate3v;
-		quaternion quatRotation;
+		Quaternion quatRotation;
 		
 		hgeRect hrBoundingBox;
 		

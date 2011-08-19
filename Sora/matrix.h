@@ -151,6 +151,9 @@ namespace sora {
 		
 		matrixMul(mat);
 	}
+    
+    typedef Sora2DMatrix Matrix3x3;
+    
 } // namepsace sora
 
 #endif // SORA_2D_MATRIX_H_

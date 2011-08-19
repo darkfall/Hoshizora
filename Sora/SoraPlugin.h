@@ -33,7 +33,7 @@ namespace sora {
 		virtual void unistall() {}
 		
 		// calls every frame
-		virtual void update() {}
+		virtual void update(float32 dt) {}
         
         // calls when reinitialise a plugin under some special situations
         virtual void reinitialise() {}

@@ -30,6 +30,7 @@ namespace sora {
         void setDelta(float32 dt) { 
             mDelta = dt;
         }
+        
         float32 getDelta() const { 
             return mDelta;
         }
@@ -37,6 +38,7 @@ namespace sora {
         void setType(int32 type) {
             mType = type;
         }
+        
         int32 getType() const { 
             return mType;
         }
@@ -54,7 +56,7 @@ namespace sora {
     }
 #else
     static bool IsSystemEvent(SoraEvent* evt) {
-        return evt->getEventIdentifier() == 18446744070299896253LL;
+        return evt->getEventIdentifier() == 18446744070299896253ULL;
     }
 #endif
     

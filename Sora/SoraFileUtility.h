@@ -31,10 +31,6 @@ namespace sora {
 		
 		static SoraString getFileName(const SoraString& file);
 		
-		static void* readFile(const char* pstrFilePath, ulong32& size);
-
-		
-		static void* readFileWithSize(const char* pstrFile, ulong32 size);
 		static bool isFont(const SoraWString& file);
 	};
 

@@ -3,54 +3,53 @@
 
 #include <cmath>
 #include <cassert>
-#include "SoraMath.h"
 
 namespace sora {
 
-	class vector3 {
+	class Vector3 {
 	public:
-		static const vector3 ZERO;
+		static const Vector3 ZERO;
 		
-		vector3(): x(0.f), y(0.f), z(0.f) {}
-		vector3(float _x, float _y, float _z): x(_x), y(_y), z(_z) {}
-		vector3(const vector3& rhs): x(rhs.x), y(rhs.y), z(rhs.z) {}
+		Vector3(): x(0.f), y(0.f), z(0.f) {}
+		Vector3(float _x, float _y, float _z): x(_x), y(_y), z(_z) {}
+		Vector3(const Vector3& rhs): x(rhs.x), y(rhs.y), z(rhs.z) {}
 		
 		void set(float _x, float _y, float _z) {
 			x = _x; y = _y; z = _z;
 		}
 
-		vector3& operator=(const vector3& rhs)  {
+		Vector3& operator=(const Vector3& rhs)  {
 			x = rhs.x; y = rhs.y; z = rhs.z;
 			return *this;
 		}
 
-		vector3 operator-(const vector3& rhs) const {
-			return vector3(x-rhs.x, y-rhs.y, z-rhs.z);
+		Vector3 operator-(const Vector3& rhs) const {
+			return Vector3(x-rhs.x, y-rhs.y, z-rhs.z);
 		}
-		vector3 operator+(const vector3& rhs) const {
-			return vector3(x+rhs.x, y+rhs.y, z+rhs.z);
+		Vector3 operator+(const Vector3& rhs) const {
+			return Vector3(x+rhs.x, y+rhs.y, z+rhs.z);
 		}
-		vector3 operator*(float f) const {
-			return vector3(x*f, y*f, z*f);
+		Vector3 operator*(float f) const {
+			return Vector3(x*f, y*f, z*f);
 		}
-		vector3 operator/(float f) const {
+		Vector3 operator/(float f) const {
 			assert(f != 0);
-			return vector3(x/f, y/f, z/f);
+			return Vector3(x/f, y/f, z/f);
 		}
-		vector3& operator+=(const vector3& rhs) {
+		Vector3& operator+=(const Vector3& rhs) {
 			x += rhs.x; y += rhs.y; z += rhs.z;
 			return *this;
 		}
-		vector3& operator-=(const vector3& rhs) {
+		Vector3& operator-=(const Vector3& rhs) {
 			x -= rhs.x; y -= rhs.y; z -= rhs.z;
 			return *this;
 		}
 	
-		float dot(const vector3& rhs) const {
+		float dot(const Vector3& rhs) const {
 			return x*rhs.x+y*rhs.y+z*rhs.z;
 		}
-		vector3 cross(const vector3& rhs) const {
-			return vector3(-z*rhs.y+y*rhs.z, z*rhs.x-x*rhs.z, -y*rhs.x+x*rhs.y);
+		Vector3 cross(const Vector3& rhs) const {
+			return Vector3(-z*rhs.y+y*rhs.z, z*rhs.x-x*rhs.z, -y*rhs.x+x*rhs.y);
 		}
 	
 		float length() const {
@@ -61,18 +60,18 @@ namespace sora {
 			return x*x+y*y+z*z;
 		}
 	
-		vector3 normalize() const {
+		Vector3 normalize() const {
 			float inv = 1/length();
-			return vector3(x*inv, y*inv, z*inv);
+			return Vector3(x*inv, y*inv, z*inv);
 		}
 	
-		vector3 negate() const {
-			return vector3(-x, -y, -z);
+		Vector3 negate() const {
+			return Vector3(-x, -y, -z);
 		}
 
 		float x, y, z;
 	};
-
+    
 } // namespace rfMath
 
 #endif

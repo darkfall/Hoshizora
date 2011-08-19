@@ -12,20 +12,32 @@ namespace sora {
 
 	class SORA_API SoraFileBase {
     public:
-		SoraFileBase(): isopen(false) {}
-		virtual ~SoraFileBase() {}
-
-		virtual int32 readFile(const SoraWString& sFile) = 0;
-		virtual int32 readFileMem(void* pstr, ulong32 filesize) = 0;
-		virtual void  closeFile() = 0;
+		SoraFileBase(): 
+        mIsOpen(false) {
+        }
 		
-		bool  is_open() const { return isopen; }
-		void  set_open(bool flag) { isopen = flag; }
+        virtual ~SoraFileBase() {
+        }
+		
+		bool is_open() const { 
+            return mIsOpen;
+        }
+		void  set_open(bool flag) { 
+            mIsOpen = flag;
+        }
+        
+        SoraWString getFilePath() const {
+            return mFilePath;
+        }
+        
+        void setFilePath(const SoraWString& path) {
+            mFilePath = path;
+        }
 
-	protected:
-		SoraWString sFilePath;
+	private:
+		SoraWString mFilePath;
 
-		bool isopen;
+		bool mIsOpen;
 	};
 
 } // namespace sora

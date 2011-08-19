@@ -22,7 +22,10 @@ namespace sora {
     template<int FRAME_COUNT = 10>
     class SORA_API SoraDeltaWatch {
     public:
-        SoraDeltaWatch(): mCurrDelta(0.f) {}
+        SoraDeltaWatch(): 
+        mCurrDelta(0.f) {
+        
+        }
         
         void update();
         

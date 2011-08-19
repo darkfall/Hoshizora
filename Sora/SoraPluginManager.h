@@ -15,27 +15,28 @@
 
 namespace sora {
 
-class SORA_API SoraPluginManager {
-	typedef std::list<SoraPlugin*>::iterator itPlugin;
-	
-public:
-	SoraPluginManager() {}
-	virtual ~SoraPluginManager();
-	
-	virtual void registerPlugin(SoraPlugin* pPlugin);
-	
-	virtual void unistallPlugin(const SoraString& sPluginName);
-	virtual void unistallPlugin(SoraPlugin* pPlugin);
-	
-	virtual SoraPlugin* getPlugin(const SoraString& sPluginName);
-    
-    virtual void update();
-	
-private:
-	std::list<SoraPlugin*> pPluginList;
-	
-	bool bIsInitialised;
-};
+    class SORA_API SoraPluginManager {
+        typedef std::list<SoraPlugin*> PluginList;
+        typedef PluginList::iterator PluginIterator;
+        
+    public:
+        SoraPluginManager() {}
+        virtual ~SoraPluginManager();
+        
+        virtual void registerPlugin(SoraPlugin* pPlugin);
+        
+        virtual void unistallPlugin(const SoraString& sPluginName);
+        virtual void unistallPlugin(SoraPlugin* pPlugin);
+        
+        virtual SoraPlugin* getPlugin(const SoraString& sPluginName);
+        
+        virtual void update(float32 dt);
+        
+    private:
+        PluginList mPluginList;
+        
+        bool bIsInitialised;
+    };
 
 } // namespace sora
 

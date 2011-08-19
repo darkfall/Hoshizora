@@ -29,7 +29,7 @@ namespace sora {
      *  Modified for Hoshizora by Griffin Bu
      **/
     
-    class SORA_API SoraRegex: public uncopyable {
+    class SORA_API SoraRegex: uncopyable {
     public:
         enum Options {
             // case insensitive matching

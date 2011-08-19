@@ -109,51 +109,7 @@ namespace sora {
 				op.erase(0, rspos+1);
 			return op;
 		}
-		
-	 void* SoraFileUtility::readFile(const char* pstrFilePath, ulong32& size) {
-			FILE* file = fopen(pstrFilePath, "rb");
-			if(file) {
-				fseek(file, 0L, SEEK_END);
-				size = ftell(file);
-				fseek(file, 0L, SEEK_SET);
-				
-				void* buffer = malloc(size);
-				if(buffer) {
-					ulong32 readsize = fread(buffer, 1, size, file);
-					fclose(file);
-					if(readsize != size) {
-						free(buffer);
-						return 0;
-					}
-					
-					fclose(file);
-					return buffer;
-				}
-				fclose(file);
-			}
-			return 0;
-		}
-
-		
-	 void* SoraFileUtility::readFileWithSize(const char* pstrFile, ulong32 size) {
-			FILE* file = fopen(pstrFile, "rb");
-			if(file) {
-				void* buffer = malloc(size);
-				if(buffer) {
-					ulong32 readsize = fread(buffer, 1, size, file);
-					fclose(file);
-					if(readsize != size) {
-						free(buffer);
-						return 0;
-					}
-					
-					fclose(file);
-					return buffer;
-				}
-				fclose(file);
-			}
-			return 0;
-		}
+	
 		
 	 bool SoraFileUtility::isFont(const SoraWString& file) {
 			if(file.find(L".ttf") != std::string::npos ||

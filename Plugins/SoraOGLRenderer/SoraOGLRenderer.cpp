@@ -69,7 +69,7 @@ namespace sora{
 	}
 
 	void SoraOGLRenderer::shutdown() {
-		std::list<SoraRenderTarget*>::iterator itt = liTargets.begin();
+		std::list<SoraRenderTargetOG*>::iterator itt = liTargets.begin();
 		while(itt != liTargets.end()) {
 			delete (*itt);
 			++itt;
@@ -790,14 +790,14 @@ namespace sora{
 
 	ulong32 SoraOGLRenderer::createTarget(int width, int height, bool zbuffer) {
 		SoraRenderTargetOG* t = new SoraRenderTargetOG(width, height, zbuffer);
-		liTargets.push_back((SoraRenderTarget*)t);
+		liTargets.push_back((SoraRenderTargetOG*)t);
 		return (ulong32)t;
 	}
 
 	void SoraOGLRenderer::freeTarget(ulong32 t) {
-		SoraRenderTarget* pt = (SoraRenderTarget*)t;
+		SoraRenderTargetOG* pt = (SoraRenderTargetOG*)t;
 		if(!pt) return;
-		std::list<SoraRenderTarget*>::iterator itt = liTargets.begin();
+		std::list<SoraRenderTargetOG*>::iterator itt = liTargets.begin();
 		while(itt != liTargets.end()) {
 			if((*itt) == pt) {
 				delete pt;

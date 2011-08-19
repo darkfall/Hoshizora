@@ -131,7 +131,7 @@ namespace sora {
 
 		SoraTimer* pTimer;
 
-		std::list<SoraRenderTarget*> liTargets;
+		std::list<SoraRenderTargetOG*> liTargets;
 		SoraRenderTargetOG* pCurTarget;
 
 		bool bShaderAvailable;

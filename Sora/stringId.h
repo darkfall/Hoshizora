@@ -12,12 +12,13 @@
 
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
-#include "hash.h"
 #include "SoraStringConv.h"
+#include "hash.h"
 
 namespace sora {
 	
 	typedef uint64 stringId;
+    typedef stringId SoraStringId;
 
 	class SoraStringManager: public SoraSingleton<SoraStringManager> {
 		friend class SoraSingleton<SoraStringManager>;

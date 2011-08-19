@@ -13,6 +13,7 @@
 #include "SoraTimerEvent.h"
 #include "SoraKeyInfo.h"
 #include "SoraFileChangeEvent.h"
+#include "SoraFastRenderer.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
@@ -89,7 +90,6 @@ namespace sora {
         }
     };
     
-    
     namespace {
         static std::stack<TransformData> g_TransformStack;
         static std::stack<ClippingData> g_ClippingStack;
@@ -100,19 +100,10 @@ namespace sora {
         SoraKeyPool* g_keypool;
     }
     
-    
     SoraCore* SoraCore::Instance() {
         if(!mInstance)
             mInstance = new SoraCore;
         return mInstance;
-    }
-    
-    void SoraCore::Destroy() {
-        if(mInstance) {
-            mInstance->shutDown();
-            delete mInstance;
-            mInstance = NULL;
-        }
     }
 	
 	SoraCore::SoraCore() {
@@ -235,6 +226,8 @@ namespace sora {
             _postError(exp.what());
         }
         
+        SoraFastRenderer::Instance();
+        
         if(pRenderSystem)
             pRenderSystem->start(pTimer);
 	}
@@ -314,7 +307,7 @@ namespace sora {
 #ifdef PROFILE_CORE_UPDATE
                     PROFILE("UPDATE_PLUGINS");
 #endif
-                    pPluginManager->update();
+                    pPluginManager->update(getDelta());
                 }
                 
                 {
@@ -346,17 +339,7 @@ namespace sora {
                 if(!bPauseRender) {                    
                    SoraEventManager::Instance()->update(getDelta());
                     
-                    if(bMainScene) {
-                        bMainScene = false;
-                        pRenderSystem->endScene();
-                        
-                        if(mScreenBuffer && bEnableScreenBuffer) {
-                            pRenderSystem->beginScene(0, 0, true);
-                            SoraFullscreenBufferHandler::Instance()->onBufferRender(getTargetTexture(mScreenBuffer));
-                            pRenderSystem->endScene();
-                            bScreenBufferAttached = false;
-                        }
-                    }
+                    _updateEnd();
                 }
                 
                 
@@ -369,6 +352,20 @@ namespace sora {
         }*/
         
 	}
+    
+    void SoraCore::_updateEnd() {
+        if(bMainScene) {
+            bMainScene = false;
+            pRenderSystem->endScene();
+            
+            if(mScreenBuffer && bEnableScreenBuffer) {
+                pRenderSystem->beginScene(0, 0, true);
+                SoraFullscreenBufferHandler::Instance()->onBufferRender(getTargetTexture(mScreenBuffer));
+                pRenderSystem->endScene();
+                bScreenBufferAttached = false;
+            }
+        }
+    }
 
 	void SoraCore::flush() {
 		if(pRenderSystem)
@@ -839,6 +836,10 @@ namespace sora {
 			}
 		}
 	}
+    
+    void SoraCore::renderSprite(const SoraWString& path, float32 x, float32 y) {
+        SoraFastRenderer::Instance()->renderSprite(path, x, y);
+    }
 	
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		sora_assert(bInitialized==true);
@@ -1425,6 +1426,34 @@ namespace sora {
     
     void SoraCore::delJoystickListener(SoraJoystickListener* listener) {
         SoraKeyPool::delJoystickListener(listener);
+    }
+    
+    void SoraCore::setFarPoint(const SoraVector3& ptFar) {
+        mFarPoint = ptFar;
+    }
+    
+    SoraVector3 SoraCore::getFarPoint() const {
+        return mFarPoint;
+    }
+    
+    float SoraCore::transform3DPoint(SoraVector3* point) {
+        if(mFarPoint.z == 0.f)
+            return 1.f;
+        
+        float scale = (mFarPoint.z - point->z) / mFarPoint.z;
+        point->x = (point->x - mFarPoint.x) * scale + mFarPoint.x;
+        point->y = (point->y - mFarPoint.y) * scale + mFarPoint.y;
+        return scale;
+    }
+    
+    float SoraCore::transform3DPoint(float* x, float* y, float* z) {
+        if(mFarPoint.z == 0.f)
+            return 1.f;
+        
+        float scale = (mFarPoint.z - *z) / mFarPoint.z;
+        *x = (*x - mFarPoint.x) * scale + mFarPoint.x;
+        *y = (*y - mFarPoint.y) * scale + mFarPoint.y;
+        return scale;
     }
     
 } // namespace sora
