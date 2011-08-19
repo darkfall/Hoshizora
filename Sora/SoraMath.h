@@ -18,6 +18,7 @@
 #include "hgerect.h"
 #include "vector3.h"
 #include "CoreTransform.h"
+#include "quaternion.h"
 
 namespace sora {
 
@@ -39,6 +40,7 @@ namespace sora {
 	typedef hgeVector SoraVector;
 	typedef hgeRect SoraRect;
     typedef Vector3 SoraVector3;
+    typedef Quaternion SoraQuaternion;
     
     inline bool floatEqual(float32 f1, float32 f2) {
         return fabs(f1 - f2) < 0.0000001;

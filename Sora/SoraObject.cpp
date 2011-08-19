@@ -8,8 +8,8 @@ namespace sora {
     mParent(NULL),
     mSubObjects(NULL), 
     mNext(NULL),
-    mPosx(0.f), 
-    mPosy(0.f),
+    mPositionSource(NULL),
+    mPosition(SoraVector3()),
     mType(0), 
     mSubObjectSize(0) {
         mUniqueId = GetNextUniqueId();
@@ -53,35 +53,48 @@ namespace sora {
             }
         }
 	}
+    
+    void SoraObject::setPositionSource(PositionSource source) {
+        mPositionSource = source;
+        mPosition = mPositionSource->getPosition();
+    }
 	
-	void SoraObject::setPosition(float32 _x, float32 _y) {
-		mPosx = _x;
-		mPosy = _y;
+	void SoraObject::setPosition(float32 x, float32 y) {
+        if(mPositionSource) {
+            mPositionSource->setPosition(x, y);
+            mPosition = mPositionSource->getPosition();
+        } else {
+            mPosition.x = x;
+            mPosition.y = y;
+        }
 	}
 	
-	void SoraObject::getPosition(float32& _x, float32& _y) const {
-		_x = getPositionX();
-		_y = getPositionY();
+	void SoraObject::getPosition(float32& x, float32& y) const {
+		x = getPositionX();
+		y = getPositionY();
 	}
 	
 	float32 SoraObject::getPositionX() const {
+        float32 x = mPositionSource ? mPositionSource->getPositionX() : mPosition.x;
         if(!mParent)
-            return mPosx;
-        return mPosx+mParent->getPositionX();
+            return x;
+        return x+mParent->getPositionX();
 	}
 	
 	float32 SoraObject::getPositionY() const {
+        float32 y = mPositionSource ? mPositionSource->getPositionY() : mPosition.y;
+
         if(!mParent)
-            return mPosy;
-        return mPosy+mParent->getPositionY();
+            return y;
+        return y+mParent->getPositionY();
 	}
     
     float32 SoraObject::getAbsolutePositionX() const {
-        return mPosx;
+        return mPositionSource ? mPositionSource->getPositionX() : mPosition.x;
     }
     
     float32 SoraObject::getAbsolutePositionY() const {
-        return mPosy;
+        return mPositionSource ? mPositionSource->getPositionY() : mPosition.y;
     }
 
 	void SoraObject::add(SoraObject* o){
@@ -184,19 +197,6 @@ namespace sora {
     
     int32 SoraObject::getObjSize() const {
         return mSubObjectSize;
-    }
-    
-    SoraObject& SoraObject::operator =(const SoraObject& rhs) {
-        if(&rhs != this) {
-            mParent = rhs.mParent;
-            mSubObjects = rhs.mSubObjects;
-            mNext = rhs.mNext;
-            
-            mPosx = rhs.mPosx;
-            mPosy = rhs.mPosy;
-            mType = rhs.mType;
-        }
-        return *this;
     }
     
     SoraObject* SoraObject::operator[](const SoraString& name) {

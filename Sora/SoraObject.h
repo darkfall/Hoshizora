@@ -6,6 +6,7 @@
 #include "SoraEvent.h"
 #include "SoraAutoPtr.h"
 #include "SoraNamedObject.h"
+#include "SoraMovable.h"
 #include <algorithm>
 #include <list>
 
@@ -27,6 +28,9 @@ namespace sora {
 		virtual void	add(SoraObject* pobj);
 		virtual void	del(SoraObject* pobj);
         virtual void    delAll();
+        
+        typedef SoraMovable* PositionSource;
+        void setPositionSource(PositionSource source);
 		
 		virtual void    setPosition(float32 _x, float32 _y);
 		virtual float32 getPositionX() const;
@@ -56,25 +60,28 @@ namespace sora {
         SoraUniqueId        getUniqueId() const;
         SoraObjectHandle    getHandle();
         
-        /**
-         *  handleId and UniqueId for the object cannot be copied
-         **/
-        SoraObject& operator =(const SoraObject& rhs);
-        
         SoraObject* operator[](const SoraString& name);
         
 	protected:
+       
 		SoraObject* mParent;
         SoraObject* mSubObjects;
         SoraObject* mNext;
 		
-		float32 mPosx;
-        float32 mPosy;
+		PositionSource mPositionSource;
+        SoraVector3 mPosition;
+        
 		uint32 mType;
         
         int32 mSubObjectSize;
         
     private:
+        /**
+         *  handleId and UniqueId for the object cannot be copied
+         **/
+        SoraObject(const SoraObject& rhs);
+        SoraObject& operator =(const SoraObject& rhs);
+        
         SoraHandle mHandleId;
         SoraUniqueId mUniqueId;
     };

@@ -52,9 +52,8 @@ bool mainWindow::updateFunc() {
 
 sora::SoraSprite* spr;
 
-void myRenderFunc(sora::SoraObject& obj) {
+void myRenderFunc(sora::SoraObject* obj) {
     spr->render();
-    sora::SoraLayer* layer = dynamic_cast<sora::SoraLayer*>(&obj);
 
 }
 
@@ -62,9 +61,7 @@ bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
     
-    
-    sora::SORA->renderSprite(L"sea.png");
-    
+
     sora::SORA->endScene();
     
 	return false;
@@ -83,6 +80,7 @@ void mainWindow::init() {
     mScene2 = new sora::SoraScene(1000, 1000);
     
     mCamera = new sora::SoraCamera(100, 100.f, 500.f, 500.f);
+
   //  mCamera->zoomTo(2.f, 2.f, 20.f);
 //    mScene1->setCamera(mCamera);
     mFont = sora::SORA->createFont(L"font.otf", 20);
@@ -95,13 +93,14 @@ void mainWindow::init() {
     bg->setCenter(300.f, 200.f);
     mScene1->add(bg, 0);
     
-    mScene2->add(new sora::SoraExternalRenderObject(sora::Delegate(myRenderFunc)), 1);
+    mScene2->add(new sora::SoraExternalRenderObject(myRenderFunc), -1);
     spr = sora::SORA->createSprite(L"geotest.png");
     spr->setCenter(100, 100);
     
     //spr->setPosition(300, 300);
     mScene2->add(spr);
     mScene2->setPosition(200.f, 200.f);
+    mScene2->moveTo(300.f, 300.f, 10.f);
   //  mScene2->setRotation(sora::F_PI_4/2);
  //   mScene2->setScale(2.f, 2.f);
     
@@ -109,15 +108,6 @@ void mainWindow::init() {
     mScene3->add(sora::SORA->createSprite(L"test.png"), 1);
     mScene3->add(sora::SORA->createSprite(L"bullet2.png"), 0);
     mScene2->add(mScene3);
-    
-
-    mSocket1.setup(ZMQ_DEALER);
-    mSocket2.setup(ZMQ_ROUTER);
-    
-    if(!mSocket2.bind("tcp://localhost:5555"))
-        std::cout<<mSocket2.getLastErrorMessage()<<"\n";
-    if(!mSocket1.connect("tcp://localhost:5555"))
-        std::cout<<mSocket1.getLastErrorMessage()<<"\n";
     
 }
 

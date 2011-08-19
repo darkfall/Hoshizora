@@ -63,6 +63,8 @@ namespace sora {
         float32 mCurrTime;
     };
     
+    typedef SoraTransitionModifier<SoraMovable> SoraMovablePositionModifier;
+
     typedef SoraTransitionModifier<SoraObject> SoraObjectPositionModifier;
     
     

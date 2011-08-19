@@ -108,11 +108,14 @@ namespace sora {
             typename StateMap::iterator itState = mStateMap.find(mCurrState);
             if(itState == mStateMap.end()) {
                 // should we allow this?
-                itState = mStateMap.insert(std::make_pair(state, state_trans()));
+                state_trans trans;
+                trans.mTransitions.insert(std::make_pair(event, stateto));
+                mStateMap.insert(std::make_pair(state, trans));
+            } else {
+                itState->second.mTransitions.insert(std::make_pair(event, stateto));
             }
-            
-            itState->second.mTransitions.insert(std::make_pair(event, stateto));
         }
+        
         void delTrans(state_type state, event_type event) {
             typename StateMap::iterator itState = mStateMap.find(mCurrState);
             if(itState != mStateMap.end()) {

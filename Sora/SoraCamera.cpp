@@ -70,7 +70,7 @@ namespace sora {
     }
     
     void SoraCamera::setPosition(float32 x, float32 y) {
-        if(mPosx != x || mPosy != y) {
+        if(getPositionX() != x || getPositionY() != y) {
             mPropChanged = true;
             SoraObject::setPosition(x, y);
         }
@@ -147,16 +147,4 @@ namespace sora {
         zoomTo(r->mHZoom, r->mVZoom, inTime);
     }
     
-    SoraCamera& SoraCamera::operator=(const SoraCamera& rhs) {
-        if(&rhs != this) {
-            this->mHZoom = rhs.mHZoom;
-            this->mVZoom = rhs.mVZoom;
-            this->mRotation = rhs.mRotation;
-            this->mPosx = rhs.mPosx;
-            this->mPosy = rhs.mPosy;
-            
-            SoraObject::operator=(rhs);
-        }
-        return *this;
-    }
 } // namespace sora

@@ -13,16 +13,33 @@
 #include "../SoraSimpleFSM.h"
 #include "../SoraPreDeclare.h"
 
+#include "SoraEntityListener.h"
+
 namespace sora {
+    
     
     class SORA_API SoraEntity: public SoraObject {
     public:
 		SoraEntity() {}
 		virtual ~SoraEntity() {}
         
+        typedef EntityFsmType::StateType FsmStateType;
+        typedef EntityFsmType::EventType FsmEventType;
+        
+        void addFsmState(const FsmStateType&);
+        void addFsmTransition(const FsmStateType&, const FsmEventType&, const FsmStateType&);
+        void setFsmState(const FsmStateType&);
+        void processFsmEvent(const FsmEventType&);
+        const FsmStateType& getCurrentFsmState() const;
+        
+    private:
+        void onEnter(const EntityFsmType&, const EntityFsmType::StateType&);
+        void onExit(const EntityFsmType&, const EntityFsmType::StateType&);
         
     protected:
         NamedValueList mProperties;
+        
+        EntityFsmType mFsm;
     };
     
 } // namespace sora

@@ -48,9 +48,7 @@ namespace sora {
          *  Position, rotation and zoom applies
          **/
         void transformTo(SoraCamera* r, float32 inTime);
-        
-        SoraCamera& operator=(const SoraCamera& rhs);
-		
+        		
         virtual uint32 update(float32 dt);
         virtual void render();
         
