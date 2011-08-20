@@ -389,8 +389,6 @@
     <ClInclude Include="..\..\..\Sora\factory\SoraDynamicFactory.h" />
     <ClInclude Include="..\..\..\Sora\factory\SoraFactory.h" />
     <ClInclude Include="..\..\..\Sora\factory\SoraRTTIFactory.h" />
-<<<<<<< HEAD
-=======
     <ClInclude Include="..\..\..\Sora\function\detail\SoraFunction0.h" />
     <ClInclude Include="..\..\..\Sora\function\detail\SoraFunction1.h" />
     <ClInclude Include="..\..\..\Sora\function\detail\SoraFunction10.h" />
@@ -411,7 +409,6 @@
     <ClInclude Include="..\..\..\Sora\function\SoraBind.h" />
     <ClInclude Include="..\..\..\Sora\function\SoraFunction.h" />
     <ClInclude Include="..\..\..\Sora\function\SoraMemfun.h" />
->>>>>>> b309d05f510b64aedc21204c44a68455c68d0b5c
     <ClInclude Include="..\..\..\Sora\graphicEffects.h" />
     <ClInclude Include="..\..\..\Sora\GridMap.h" />
     <ClInclude Include="..\..\..\Sora\hash.h" />
