@@ -21,20 +21,7 @@
 
 #include "SoraTimestamp.h"
 
-void myFunc() throw() {
-    throw std::bad_cast();
-}
-
-void test() {
-    try {
-        myFunc();
-    } catch(...) {
-        sora::SORA->messageBox("test", "test", MB_OK);
-    }
-}
-
 int main(int argc, char* argv[]) {    
-    test();
     
     sora::InitAndCreateSoraCore(new mainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */

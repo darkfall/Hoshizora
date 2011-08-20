@@ -24,11 +24,12 @@ namespace sora {
         typedef std::deque<std::pair<ListenerType*, bool> > ListenerList;
 
         virtual ~SoraListenerManager() {
-            while(mListenerList.size() != 0) {
-                std::pair<ListenerType*, bool> val = mListenerList.pop();
-                if(val.second) {
-                    delete val.first;
+            typename ListenerList::iterator it = mListenerList.begin();
+            while(it != mListenerList.end()) {
+                if(it->second) {
+                    delete it->first;
                 }
+                ++it;
             }
         }
         
