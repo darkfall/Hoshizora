@@ -10,9 +10,8 @@
 #define Sora_SoraPreDeclare_h
 
 #include "SoraPlatform.h"
-#include "SoraAutoPtr.h"
 #include "SoraAny.h"
-
+#include "stringId.h"
 #include <string>
 #include <map>
 
@@ -27,6 +26,16 @@ namespace sora {
 #endif
     
     typedef std::map<std::string, SoraAny> NamedValueList;
+    
+    // cast a value in NamedValueList to T
+    // would throw BadCastException if conversation fails
+    template<typename T>
+    static T GetTFromNamedValueList(const std::string& val, const NamedValueList& list) {
+        NamedValueList::const_iterator it = list.find(val);
+        if(it != list.end()) {
+            return AnyCast<T>(it->second);
+        }
+    }
     
 #define RT_FUNC_TO_ANY_RT_FUNC(func) \
     SoraAny SoraAnyFuncImpl0() { \
@@ -58,6 +67,28 @@ namespace sora {
                 typeid(*t1) == typeid(T2));
     }
 #endif
+    
+    // runtime def & not def
+    
+    static std::map<stringId, int> g_define_map;
+    
+    static void SoraDefine(const std::string& f, int val=0) {
+        g_define_map.insert(std::make_pair(GetUniqueStringId(f), val));
+    }
+    
+    static bool SoraIfDefined(const std::string& f) {
+        std::map<stringId, int>::const_iterator it = g_define_map.find(GetUniqueStringId(f));
+        if(it != g_define_map.end())
+            return true;
+        return false;
+    }
+    
+#define SORA_DEFINE(name) \
+    SoraDefine(#name)
+    
+#define SORA_IF_DEFINED(name) \
+    SoraIfDefined(#name)
+    
 } // namespace sora
 
 

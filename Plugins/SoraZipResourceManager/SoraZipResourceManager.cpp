@@ -1,7 +1,8 @@
 #include "SoraZipResourceManager.h"
+#include "SoraCore.h"
 
 namespace sora {
-
+    
 	SoraZipResourceManager::~SoraZipResourceManager() {
 		resourcePacks.clear();
 	}
@@ -101,4 +102,10 @@ namespace sora {
 		}
 		return false;
 	}
+    
+    
+#ifdef SORA_AUTOMATIC_REGISTER
+    SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerResourceManager(new SoraZipResourceManager()));
+#endif
+    
 } // namespace sora;

@@ -21,32 +21,40 @@
  */
 
 
-#ifdef __GNUC__
+#if defined(__GNUC__)
 	#if __GNUC__ >= 4
 		#include <tr1/unordered_map>
-namespace sora {
-	
-    using std::tr1::unordered_map;
-#define hash_map unordered_map
-}
+        namespace sora {
+            using std::tr1::unordered_map;
+            #define hash_map unordered_map
+        }
 	#else
 		#include <ext/hash_map>
-namespace sora {
-
-		using __gnu_cxx::hash_map;
-}
+        namespace sora {
+            using __gnu_cxx::hash_map;
+        }
 	#endif
+
+#elif defined(_MSC_VER)
+
+#if _MSC_VER >= 1600
+    #include <unordered_map>
+    namespace sora {
+        using std::tr1::unordered_map;
+    }
+
 #else
-	#include <hash_map>
-#endif
+    namespace sora {
+        using std::hash_map;
+    }
+#endif 
 
-#ifdef WIN32
+#else
 
-namespace sora {
-
-using std::hash_map;
-
-}
+    #include <map>
+    namespace sora {
+        #define hash_map std::map
+    }
 #endif
 
 #ifndef __GNUC__
@@ -110,19 +118,16 @@ typedef int64_t  int64;
 namespace sora {
 	typedef ulong32 HSORASPRITE;
 	typedef ulong32 HSORATEXTURE;
-	typedef ulong32 HGUIWIDGET;
     typedef ulong32 HSORATARGET;
 	
 	enum {
-		SORA_LINE				= 0x0001,
-		SORA_TRIANGLES			= 0x0002,
-		SORA_TRIANGLES_FAN		= 0x0003,
-		SORA_TRIANGLES_STRIP	= 0x0004,
-		SORA_QUAD				= 0x0005,
+		SORA_LINE = 1,
+		SORA_TRIANGLES,
+		SORA_TRIANGLES_FAN,
+		SORA_TRIANGLES_STRIP,
+		SORA_QUAD,
 	};
-    
-    
-    
+
     typedef int32 SoraHandle;
     typedef int32 SoraUniqueId;
 } // namespace sora
@@ -197,10 +202,6 @@ namespace sora {
 typedef std::string SoraString;
 typedef std::wstring SoraWString;
 
-/*#include "SoraString.h"
-namespace sora {
-    typedef SoraString SoraWString;
-}*/
 #define HAS_WSTRING
 
 #else
@@ -287,13 +288,62 @@ namespace sora {
 
 
 
+#define SORA_STATIC_INSTANCE_DECALRE(T) \
+    static T* Instance(); \
+
+#define SORA_STATIC_INSTANCE_IMP(T) \
+    T* T::Instance() { \
+        static T instance; \
+        return &instance; \
+    }
+
+// this macro runs a seg of code when the app starts using static init for classes
+// useful for plugins to register itself to sora
+
+#define SORA_UNIQUE_NAME(name) \
+    SORA_JOIN(name, __LINE__)
+
+#define SORA_STATIC_RUN_CODE_I(name, code) \
+namespace { \
+    static struct name { \
+       name() { \
+            code; \
+        } \
+    } SORA_JOIN(g_, name); \
+}
+
+#define SORA_STATIC_RUN_CODE(code) \
+    SORA_STATIC_RUN_CODE_I(SORA_UNIQUE_NAME(sora_static_), code) 
+
+#define SORA_STATIC_INIT_I(name, FN) \
+namespace { \
+    static struct name { \
+        name() { \
+            static int counter = 0; \
+            if(counter++ > 0) return; \
+            FN(); \
+        } \
+    } g_##name; \
+}
+
+#define SORA_STATIC_INIT(FN) \
+    SORA_STATIC_INIT_I(sora_static_init_##FN, FN)
+
+#define SORA_STATIC_RUN_CODE_FN(name, code) \
+namespace { \
+    static void sora_static_fn_##name() { \
+        code; \
+    } \
+    SORA_STATIC_INIT(sora_static_fn_##name) \
+}
+
 /*
  Thread Independent Variables
  */
 #ifdef _MSC_VER
-#define ThreadLocal __declspec(thread)
+    #define ThreadLocal __declspec(thread)
 #elif defined(__GNUC__) && !defined(OS_OSX) && !defined(OS_IOS)
-#define ThreadLocal __thread
+    #define ThreadLocal __thread
 #else
 // some platforms such as Mac OS X does not support TLS
 // so we might need some other solutions
@@ -353,13 +403,6 @@ namespace sora {
 */
 typedef uint32 EventChannelType;
 
-
-/****************
-	Below are compile options for plugins
-	Depends on the plugins you use
-	I put them here for convinience
-******************/
-
 /*
 	SoraThread Plugin Option
 	If SORA_WIN32_PTHREAD have been defined, then SoraThread would try to use external pthread library under Windows
@@ -370,6 +413,17 @@ typedef uint32 EventChannelType;
 //#define SORA_WIN32_PTHREAD
 #endif
 
+
+/*
+ automatically register plugins
+ depends on plugin implemention
+ plugins can choose to use this macro to define whether to 
+ register itself to sora when the app starts
+ for example: 
+ render systems can register itself when the app starts
+ default: on
+ */
+#define SORA_AUTOMATIC_REGISTER
 
 
 #endif // _SORA_PLATFORM_H_

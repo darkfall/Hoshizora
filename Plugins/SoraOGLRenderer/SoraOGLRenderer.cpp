@@ -48,7 +48,7 @@ static GLfloat mUVs[MAX_VERTEX_BUFFER<<1];
 static GLubyte mColors[MAX_VERTEX_BUFFER<<2];
 
 namespace sora{
-
+    
 	SoraOGLRenderer::SoraOGLRenderer() {
 		pCurTarget = 0;
 		uGLShaderProgram = 0;
@@ -963,5 +963,11 @@ namespace sora{
 		renderLine(x2, y2, x1, y2+1.f, color, z);
 		renderLine(x1, y2, x1+1.f, y1, color, z);
 	}
+    
+    
+#ifdef SORA_AUTOMATIC_REGISTER
+    SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerRenderSystem(new SoraOGLRenderer()));
+#endif
+
 
 } // namespace sora

@@ -37,6 +37,8 @@
 #include "helpers/SoraBooter.h"
 #include "helpers/SoraMenuBar.h"
 
+#include "factory/SoraSpriteFactory.h"
+
 #include "timer/SoraSimpleTimerManager.h"
 
 #include "cmd/CoreCmds.h"
@@ -101,9 +103,8 @@ namespace sora {
     }
     
     SoraCore* SoraCore::Instance() {
-        if(!mInstance)
-            mInstance = new SoraCore;
-        return mInstance;
+        static SoraCore instance;
+        return &instance;
     }
 	
 	SoraCore::SoraCore() {
@@ -146,8 +147,13 @@ namespace sora {
         
 		setRandomSeed(rand());
         initConstantStrings();
+        
         _registerEventTypes();
+        _regGlobalProducts();
 	}
+    
+    void SoraCore::_regGlobalProducts() {
+    }
     
     void SoraCore::init(const Parameter& param) {
         enablePluginDetection(param.isLoadPlugins());

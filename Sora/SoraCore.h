@@ -328,6 +328,7 @@ namespace sora {
 		inline void _initializeMiscTool();
         inline void _registerEventTypes();
         inline void _updateEnd();
+        inline void _regGlobalProducts();
 
 		SoraMiscTool*			pMiscTool;
 		SoraRenderSystem*		pRenderSystem;
@@ -375,6 +376,14 @@ namespace sora {
         SoraVector3 mFarPoint;
     };
 
+    inline SORA_API SoraCore* InitAndCreateSoraCore(SoraWindowInfoBase* window, const SoraCore::Parameter& param = SoraCore::Parameter()) {
+        SoraCore* instance = SoraCore::Instance();
+        instance->init(param);
+        instance->createWindow(window);
+        return instance;
+    }
+    
+    typedef SoraCore::Parameter SoraCoreParameter;
 
 #define SORA SoraCore::Instance()
 

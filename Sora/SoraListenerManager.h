@@ -37,7 +37,7 @@ namespace sora {
         
         ListenerType* getListener(const std::string& tag) const;
         
-    private:
+    protected:
         ListenerMap mListenerMap;
         
         ListenerList mListenerList;

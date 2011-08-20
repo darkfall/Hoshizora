@@ -68,6 +68,7 @@ bool mainWindow::renderFunc() {
 }
 
 
+#include "factory/SoraSpriteFactory.h"
 #include "timer/SoraSimpleTimerManager.h"
 
 void mainWindow::init() {
@@ -94,7 +95,7 @@ void mainWindow::init() {
     mScene1->add(bg, 0);
     
     mScene2->add(new sora::SoraExternalRenderObject(myRenderFunc), -1);
-    spr = sora::SORA->createSprite(L"geotest.png");
+    spr = sora::CreateSpriteType("sprite", L"geotest.png");
     spr->setCenter(100, 100);
     
     //spr->setPosition(300, 300);

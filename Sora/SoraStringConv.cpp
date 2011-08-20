@@ -203,5 +203,14 @@ namespace sora {
         return ws2s(str);
     }
 
+    std::string tolowerstring(const std::string& s) {
+        std::string result = s;
+        std::transform(s.begin(), s.end(), result.begin(), tolower);
+    }
+    
+    std::string toupperstring(const std::string& s) {
+        std::string result = s;
+        std::transform(s.begin(), s.end(), result.begin(), toupper);
+    }
 
 } // namespace sora

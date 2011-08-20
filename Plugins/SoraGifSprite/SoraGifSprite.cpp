@@ -8,11 +8,12 @@
  */
 
 #include "SoraGifSprite.h"
-#include "gif_lib.h"
-
 #include "SoraResourceFile.h"
 #include "SoraCore.h"
 #include "SoraMemoryBuffer.h"
+
+#include "gif_lib.h"
+#include "json/json.h"
 
 #ifdef OS_WIN32
 #pragma comment(lib, "giflib.lib")
@@ -20,6 +21,16 @@
 
 namespace sora {
     
+    SoraSprite* GifCreatorFn(const std::wstring& path, Json::Value* val) {
+        SoraGifSprite* spr = new SoraGifSprite(path);
+        if(spr && val) {
+            if(val->isMember("frame_rate")) {
+                spr->setFrameRate((*val)["frame_rate"].asInt());
+            }
+        }
+        return spr;
+    }
+        
     static int InterlacedOffset[] = { 0, 4, 2, 1 }; /* The way Interlaced image should. */
     static int InterlacedJumps[] = { 8, 8, 4, 2 };    /* be read - offsets and jumps... */
     
@@ -260,5 +271,7 @@ namespace sora {
     int32 SoraGifSprite::getCurrFrame() const {
         return mCurrFrame;
     }
+
+    SORA_STATIC_RUN_CODE(REGISTER_SPRITE_PRODUCT("gif", GifCreatorFn));
 
 } // namespace sora

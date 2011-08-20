@@ -12,6 +12,14 @@
 
 namespace sora {
     
+    SoraEntity::SoraEntity() {
+        
+    }
+    
+    SoraEntity::~SoraEntity() {
+        
+    }
+    
     void SoraEntity::addFsmState(const FsmStateType& state) {
         mFsm.add(state);
     }
@@ -31,18 +39,30 @@ namespace sora {
         FuncType fnExit = Bind(this, &SoraEntity::onExit);
         
         mFsm.procEvent(evt, fnEnter, fnExit);
+        listeners_fsmEventHandled(*this, mFsm, evt);
     }
     
     const SoraEntity::FsmStateType& SoraEntity::getCurrentFsmState() const {
         return mFsm.curr();
     }
     
-    void SoraEntity::onEnter(const EntityFsmType&, const EntityFsmType::StateType&) {
-        
+    void SoraEntity::onEnter(const EntityFsmType& fsm, const EntityFsmType::StateType& state) {
+        listeners_fsmEnterState(*this, fsm, state);
     }
     
-    void SoraEntity::onExit(const EntityFsmType&, const EntityFsmType::StateType&) {
-        
+    void SoraEntity::onExit(const EntityFsmType& fsm, const EntityFsmType::StateType& state) {
+        listeners_fsmExitState(*this, fsm, state);
     }
     
+    bool SoraEntity::attachVM(ScriptVMPtr ptr, const SoraString& tag) {
+        return mScriptVM.attachVM(ptr, tag);
+    }
+    
+    ScriptVMPtr SoraEntity::detachVM(const SoraString& tag) {
+        return mScriptVM.detachVM(tag);
+    }
+   
+    ScriptVMPtr SoraEntity::getVM(const SoraString& tag) const {
+        return mScriptVM.getVM(tag);
+    }
 } // namespace sora

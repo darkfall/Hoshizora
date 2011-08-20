@@ -8,11 +8,11 @@
 
 #include "SoraFMODSoundSystem.h"
 #include "SoraFMODSoundFile.h"
-
+#include "SoraCore.h"
 #include "debug/SoraInternalLogger.h"
 
 namespace sora {
-
+    
     SoraFMODSoundSystem::SoraFMODSoundSystem() {
         pfs = SoraFMODSystem::Instance();
     }
@@ -44,5 +44,9 @@ namespace sora {
     void SoraFMODSoundSystem::update() {
         pfs->update();
     }
+    
+#ifdef SORA_AUTOMATIC_REGISTER
+    SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerSoundSystem(new SoraFMODSoundSystem()));
+#endif
    
 } // namespace sora

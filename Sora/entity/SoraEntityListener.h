@@ -11,6 +11,7 @@
 
 #include "../SoraObject.h"
 #include "../SoraListenerManager.h"
+#include "../SoraIteratorHelper.h"
 
 namespace sora {
     
@@ -22,33 +23,51 @@ namespace sora {
     public:
         virtual ~SoraEntityListener() { }
          
-        void onFsmEnterState(SoraEntity& ent, const EntityFsmType& fsm, const EntityFsmType::StateType& state);
-        void onFsmExitState(SoraEntity& ent, const EntityFsmType& fsm, const EntityFsmType::StateType& state);
+        virtual void onFsmEventHandled(SoraEntity& ent, const EntityFsmType& fsm, const EntityFsmType::StateType& state) {}
+        virtual void onFsmEnterState(SoraEntity& ent, const EntityFsmType& fsm, const EntityFsmType::StateType& state) {}
+        virtual void onFsmExitState(SoraEntity& ent, const EntityFsmType& fsm, const EntityFsmType::StateType& state) {}
         
-        void onInit(SoraEntity& ent);
-        void onUpdate(SoraEntity& ent);
+        virtual void onInit(SoraEntity& ent) {}
+        virtual void onUpdate(SoraEntity& ent) {}
     };
     
     class SoraEntityListenerManager: public SoraListenerManager<SoraEntityListener> {
     protected:
+        typedef ConstVectorIterator<ListenerList> IteratorType;
+        
         void listeners_init(SoraEntity& entity) {
-            
+            IteratorType it(mListenerList);
+            while(it.hasMoreElements()) {
+                it.getNextRef().first->onInit(entity);
+            }
         }
         
         void listeners_update(SoraEntity& entity) {
-            
+            IteratorType it(mListenerList);
+            while(it.hasMoreElements()) {
+                it.getNextRef().first->onUpdate(entity);
+            }
         }
         
-        void listeners_fsmEventHandled(SoraEntity& entity) {
-            
+        void listeners_fsmEventHandled(SoraEntity& entity, const EntityFsmType& fsm, const EntityFsmType::StateType& state) {
+            IteratorType it(mListenerList);
+            while(it.hasMoreElements()) {
+                it.getNextRef().first->onFsmEventHandled(entity, fsm, state);
+            }
         }
         
-        void listeners_fsmEnterState(SoraEntity& entity) {
-            
+        void listeners_fsmEnterState(SoraEntity& entity, const EntityFsmType& fsm, const EntityFsmType::StateType& state) {
+            IteratorType it(mListenerList);
+            while(it.hasMoreElements()) {
+                it.getNextRef().first->onFsmEnterState(entity, fsm, state);
+            }
         }
         
-        void listeners_fsmExitState(SoraEntity& entity) {
-            
+        void listeners_fsmExitState(SoraEntity& entity, const EntityFsmType& fsm, const EntityFsmType::StateType& state) {
+            IteratorType it(mListenerList);
+            while(it.hasMoreElements()) {
+                it.getNextRef().first->onFsmExitState(entity, fsm, state);
+            }
         }
         
     };

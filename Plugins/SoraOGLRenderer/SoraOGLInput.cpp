@@ -14,9 +14,10 @@
 #include <vector>
 
 #include "SoraOGLKeyPoll.h"
+#include "SoraCore.h"
 
 namespace sora {
-	
+
 	SoraOGLInput::SoraOGLInput() {
 		glfwSetKeyCallback(glfwKeyCallback);
 		glfwSetMouseButtonCallback(glfwMouseCallback);
@@ -97,5 +98,10 @@ namespace sora {
 	bool SoraOGLInput::hasJoy() {
 		return false;
 	}
+    
+    
+#ifdef SORA_AUTOMATIC_REGISTER
+    SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerInput(new SoraOGLInput()));
+#endif
 	
 } // namespace sora

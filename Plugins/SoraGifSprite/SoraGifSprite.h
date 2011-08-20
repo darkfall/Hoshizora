@@ -12,6 +12,9 @@
 
 #include "SoraSprite.h"
 
+#include "SoraPreDeclare.h"
+#include "factory/SoraSpriteFactory.h"
+
 namespace sora {
 	
 	class SoraGifSprite: public SoraSprite {
@@ -35,8 +38,6 @@ namespace sora {
         int32 getCurrFrame() const;
 		
 		virtual uint32 update(float32 dt);
-
-		void setPixelFormat(int32 rev);
         
     private:
         void init();
@@ -55,7 +56,7 @@ namespace sora {
         float32 mFrameInterval;
         float32 mFrameCount;
 	};
-	
+    	
 } // namespace sora
 
 #endif // SORA_GIF_SPRITE_H_

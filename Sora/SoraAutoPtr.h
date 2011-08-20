@@ -176,6 +176,9 @@ namespace sora {
             return ptr;
         }
         
+        operator bool() {
+            return ptr != 0;
+        }
         
         bool operator !()const {
             return ptr == 0;

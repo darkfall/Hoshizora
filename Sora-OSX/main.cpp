@@ -21,19 +21,28 @@
 
 #include "SoraTimestamp.h"
 
+void myFunc() throw() {
+    throw std::bad_cast();
+}
+
+void test() {
+    try {
+        myFunc();
+    } catch(...) {
+        sora::SORA->messageBox("test", "test", MB_OK);
+    }
+}
+
 int main(int argc, char* argv[]) {    
-	sora::SoraCore* sora = sora::SoraCore::Instance();
+    test();
     
-	sora->registerRenderSystem(new sora::SoraOGLRenderer);
-	sora->registerResourceManager(new sora::SoraZipResourceManager);
-	sora->registerFontManager(new sora::SoraFTFontManager);
-	sora->registerInput(new sora::SoraOGLInput);
-  //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
-
-	sora->createWindow(new mainWindow);
-  //  sora::SORA->enableFullscreenBuffer(true);
-
-	sora->start();
+    sora::InitAndCreateSoraCore(new mainWindow, 
+                                sora::SoraCoreParameter(/* load plugins */
+                                                        false,
+                                                        /* use fullscreen buffer */
+                                                        false,
+                                                        /* post error using messagebox */
+                                                        false))->start();
 		
 	return 0;
 }

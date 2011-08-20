@@ -20,55 +20,55 @@
 
 namespace sora {
 
-struct LANM_HEAD {
-	uint8 anmCount; // 1
-};
-
-struct LANM_TEX {
-	uint32 tx;
-	uint32 ty;
-	uint32 tw;
-	uint32 th;
-	
-	LANM_TEX(): tx(0), ty(0), tw(0), th(0) {}
-	LANM_TEX(uint32 x, uint32 y, uint32 w, uint32 h): tx(x), ty(y), tw(w), th(h) {}
-};
-
-struct LANM_NODE {
-	uint8 anmId;	
-	std::string name;
-	uint32 nameHash;
-	uint32 anmFrame;
-	
-	typedef std::vector<LANM_TEX> ANM_TEX_LIST;
-	ANM_TEX_LIST texList;
-};
-
-class SoraSpriteAnimation;
-
-class SORA_API SoraSpriteAnimationPacker {
-public:
-	static int pack(const char* pstrScript, const char* pstrDest);
-	int pack2(const char* pstrTex, const char* dest);
-	
-	static SoraSpriteAnimation* unpack(const SoraString& pstrlanm);
-	static SoraSpriteAnimation* unpack(const SoraWString& pstrlanm);
-	static SoraSpriteAnimation* unpack(void* pData, unsigned long size);
-	
-	static int unpackToFile(const char* pstrlanm);
-	
-	void setDefaultAnm(const char* name);
-	uint32 addNode(const char* name, uint32 frame);
-	void addNodeTex(uint32 nodeId, uint32 tx, uint32 ty, uint32 tw, uint32 th);
-	
-	void clear();
-	
-private:
-	typedef std::vector<LANM_NODE> ANM_NODE_LIST;
-	ANM_NODE_LIST anmNodes;
-	
-	std::string defaultName;
-};
+    struct LANM_HEAD {
+        uint8 anmCount; // 1
+    };
+    
+    struct LANM_TEX {
+        uint32 tx;
+        uint32 ty;
+        uint32 tw;
+        uint32 th;
+        
+        LANM_TEX(): tx(0), ty(0), tw(0), th(0) {}
+        LANM_TEX(uint32 x, uint32 y, uint32 w, uint32 h): tx(x), ty(y), tw(w), th(h) {}
+    };
+    
+    struct LANM_NODE {
+        uint8 anmId;	
+        std::string name;
+        uint32 nameHash;
+        uint32 anmFrame;
+        
+        typedef std::vector<LANM_TEX> ANM_TEX_LIST;
+        ANM_TEX_LIST texList;
+    };
+    
+    class SoraSpriteAnimation;
+    
+    class SORA_API SoraSpriteAnimationPacker {
+    public:
+        static int pack(const char* pstrScript, const char* pstrDest);
+        int pack2(const char* pstrTex, const char* dest);
+        
+        static SoraSpriteAnimation* unpack(const SoraString& pstrlanm);
+        static SoraSpriteAnimation* unpack(const SoraWString& pstrlanm);
+        static SoraSpriteAnimation* unpack(void* pData, unsigned long size);
+        
+        static int unpackToFile(const char* pstrlanm);
+        
+        void setDefaultAnm(const char* name);
+        uint32 addNode(const char* name, uint32 frame);
+        void addNodeTex(uint32 nodeId, uint32 tx, uint32 ty, uint32 tw, uint32 th);
+        
+        void clear();
+        
+    private:
+        typedef std::vector<LANM_NODE> ANM_NODE_LIST;
+        ANM_NODE_LIST anmNodes;
+        
+        std::string defaultName;
+    };
 	
 #define PACK_ANIMATION(script, dest) SoraSpriteAnimationPacker::pack(script, dest)
 #define UNPACK_ANIMATION(script) SoraSpriteAnimationPacker::unpack(script)
@@ -82,86 +82,88 @@ private:
 		ANCHOR_MIDDLE=5,
 	} ANIMATION_SPRITE_ANCHOR;
 	
-class SORA_API SoraSpriteAnimation: public SoraSprite {
-	friend class SoraSpriteAnimationPacker;
-	
-public:
-	SoraSpriteAnimation(const std::wstring& anmPath);
-	virtual ~SoraSpriteAnimation();
-	
-	typedef LANM_TEX SoraAnimationRect;
-
-	virtual uint32 update(float dt);
-    virtual void render();
-	SoraAnimationRect getCurrTex();
-	
-	/*
-	 plays the default anm
-	 */
-	void play();
-	/*
-	 plays a anime
-	 @param name, name of the anime
-	 @param bLoop, is loop
-	 @param bQueue, is put the anime in playing queue, if false, then the anime would start playing immediately
-	 */
-	void playEx(const char* name, bool bLoop=true, bool bQueue=false);
-	
-	void pause();
-	void resume();
-	
-	void setDefaultAnimation(const char* name);
-	
-	uint32 getAnimationSize() const;
-	uint32 getCurrAnimationIndex() const;
-	
-	bool isPlaying() const;
-	
-	std::string getAnimationName(size_t id) const;
-	std::string getCurrentAnimationName() const;
+    class SORA_API SoraSpriteAnimation: public SoraSprite {
+        friend class SoraSpriteAnimationPacker;
+        
+    public:
+        SoraSpriteAnimation(const std::wstring& anmPath);
+        virtual ~SoraSpriteAnimation();
+        
+        typedef LANM_TEX SoraAnimationRect;
+        
+        virtual uint32 update(float dt);
+        virtual void render();
+        SoraAnimationRect getCurrTex();
+        
+        /*
+         plays the default anm
+         */
+        void play();
+        /*
+         plays a anime
+         @param name, name of the anime
+         @param bLoop, is loop
+         @param bQueue, is put the anime in playing queue, if false, then the anime would start playing immediately
+         */
+        void playEx(const char* name, bool bLoop=true, bool bQueue=false);
+        
+        void pause();
+        void resume();
+        
+        void setDefaultAnimation(const char* name);
+        
+        uint32 getAnimationSize() const;
+        uint32 getCurrAnimationIndex() const;
+        
+        bool isPlaying() const;
+        
+        std::string getAnimationName(size_t id) const;
+        std::string getCurrentAnimationName() const;
 		
-	void setAnchor(int32 anchor);
-	ANIMATION_SPRITE_ANCHOR getAnchor() const;
+        void setAnchor(int32 anchor);
+        int32 getAnchor() const;
 		
-private:
-    void init();
-	inline void toNextAnm();
-	inline void toCurrAnmNode();
-	
-	SoraSpriteAnimation();
-	
-	SoraSpriteAnimation(const SoraSpriteAnimation&);
-	SoraSpriteAnimation& operator=(const SoraSpriteAnimation&);
-	
-	typedef std::vector<LANM_NODE> ANM_NODE_LIST;
-	ANM_NODE_LIST anmNodes;
-	
-	inline int getNodeIdByAnmId(uint32 anmId);
-	
-	uint32 anmCount;
-	uint32 defaultNameHash;
-	std::string defaultName;
-	
-	uint32 currId;
-	uint32 currAnmIndex;
-	uint32 currTime;
-	uint32 totalTime;
-	uint32 distTime;
-	
-	uint32 defaultId;
-	uint32 currNodeId;
-	
-	bool bIsPlaying;
-	bool bPaused;
-	bool bLoop;
+    private:
+        void init();
+        inline void toNextAnm();
+        inline void toCurrAnmNode();
+        
+        SoraSpriteAnimation();
+        
+        SoraSpriteAnimation(const SoraSpriteAnimation&);
+        SoraSpriteAnimation& operator=(const SoraSpriteAnimation&);
+        
+        typedef std::vector<LANM_NODE> ANM_NODE_LIST;
+        ANM_NODE_LIST anmNodes;
+        
+        inline int getNodeIdByAnmId(uint32 anmId);
+        
+        uint32 anmCount;
+        uint32 defaultNameHash;
+        std::string defaultName;
+        
+        uint32 currId;
+        uint32 currAnmIndex;
+        uint32 currTime;
+        uint32 totalTime;
+        uint32 distTime;
+        
+        uint32 defaultId;
+        uint32 currNodeId;
+        
+        bool bIsPlaying;
+        bool bPaused;
+        bool bLoop;
+        
+        std::string texturePath;
+        
+        typedef std::stack<uint8> ANM_QUEUE;
+        ANM_QUEUE anmQueue;
+        
+        ANIMATION_SPRITE_ANCHOR sprAnchor;
+    };
     
-    std::string texturePath;
-    
-	typedef std::stack<uint8> ANM_QUEUE;
-	ANM_QUEUE anmQueue;
-	
-	ANIMATION_SPRITE_ANCHOR sprAnchor;
-};
+    typedef SoraSpriteAnimation SoraAnimatedSprite;
     
 } // namespace sora
 

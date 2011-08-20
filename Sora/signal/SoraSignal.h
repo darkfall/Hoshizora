@@ -74,6 +74,8 @@ namespace sora {
         template<typename SIG>
         class BasicConnection: public ConnectionBase {
         public:
+            typedef typename Slot<SIG>::FuncType FuncType;
+            
             sora::SoraAutoPtr<Slot<SIG> > slot;
             
             bool isValid() {
@@ -147,7 +149,8 @@ namespace sora {
     class SORA_API SoraSignalBase: public signal::SignalImpl {
     public:
         typedef SoraConnection ConnectionType; 
-        
+        typedef typename signal::BasicConnection<SIG>::FuncType slot_type;
+
         template<typename F>
         ConnectionType connect(const F& f) {
             return connect(0, f);
@@ -185,6 +188,7 @@ namespace sora {
     public:
         RT sig() {
             typedef SoraSignalBase<RT(void)> base_type;
+            
             typename base_type::ConnectionMap::iterator itConnection = base_type::mConnections.begin();
             
             RT rtVal;

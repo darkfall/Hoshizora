@@ -48,11 +48,14 @@ namespace sora {
 
 	SORA_API void deliStr(std::vector<std::string>& c, const std::string& str, char deli);
     
-    class SoraStringConverter {
+    class SORA_API SoraStringConverter {
     public:
         static std::string wstringToString(const std::wstring& ws);
         static std::wstring stringToWString(const std::string& s);
     };
+    
+    SORA_API std::string tolowerstring(const std::string& s);
+    SORA_API std::string toupperstring(const std::string& s);
 
 
 } // namespace sora

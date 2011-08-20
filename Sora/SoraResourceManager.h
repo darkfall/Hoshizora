@@ -18,10 +18,10 @@ namespace sora {
 		virtual void			attachResourcePack	(HSORARESOURCE handle) = 0;
 		virtual void			detachResourcePack  (HSORARESOURCE handle) = 0;
 		
-		virtual void* readResourceFile      (const SoraWString& file, ulong32 size) = 0;
-		virtual void* getResourceFile       (const SoraWString& file, ulong32& size) = 0;
-		virtual ulong32 getResourceFileSize (const SoraWString& file) = 0;
-		virtual void freeResourceFile(void* p) = 0;
+		virtual void*   readResourceFile        (const SoraWString& file, ulong32 size) = 0;
+		virtual void*   getResourceFile         (const SoraWString& file, ulong32& size) = 0;
+		virtual ulong32 getResourceFileSize     (const SoraWString& file) = 0;
+		virtual void    freeResourceFile        (void* p) = 0;
 
 		/* name of this resource manager */
 		virtual SoraWString getName() const = 0;

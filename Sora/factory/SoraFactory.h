@@ -12,6 +12,7 @@
 #include "../SoraPlatform.h"
 #include "../SoraPreDeclare.h"
 #include "../SoraAutoPtr.h"
+#include "../SoraStringConv.h"
 #include "../function/SoraFunction.h"
 
 #include "../uncopyable.h"
@@ -19,65 +20,126 @@
 
 namespace sora {
     
-    template<typename inter>
-    inter* SoraFactoryCtorDelegate(void* sender, NamedValueList* param) {
-        return new inter();
+    template<typename base, typename product>
+    base* SoraFactoryCtorDelegate0() {
+        return new product();
     }
     
+    template<typename base, typename product, typename A0>
+    base* SoraFactoryCtorDelegate1(A0 a0) {
+        return new product(a0);
+    }
+    
+    template<typename base, typename product, typename A0, typename A1>
+    base* SoraFactoryCtorDelegate1(A0 a0, A1 a1) {
+        return new product(a0, a1);
+    }
+    
+    template<typename T, typename SIG>
+    struct SoraAbstractFactory;
+    
     template<typename T>
-    class SORA_API SoraAbstractFactory: uncopyable {
+    struct SoraAbstractFactory<T, T*()> {
     public:
-        typedef T* PointerType;
-        typedef NamedValueList* ParameterType;
-        typedef NamedValueList::iterator ParameterIterator;
-        
-    public:
-        SoraAbstractFactory() {}
-        virtual ~SoraAbstractFactory() {}
-        
-        virtual const std::string& getTypeName() const = 0;
-        
-        virtual PointerType createInstance(const std::string& instanceName, ParameterType parameter) = 0;
-    };
-    
-    
-    template<class T, const char* TypeName>
-    class SORA_API SoraFactory: public SoraAbstractFactory<T> {
-    public:
-        typedef SoraFunction<T(NamedValueList*)> CreatorFn;
+        typedef SoraFunction<T*()> CreatorFn;
         typedef std::map<std::string, CreatorFn> CreatorFnMap;
         
-    public:
-        virtual const std::string& getTypeName() const {
-            static std::string type(TypeName);
-            return type;
+        typedef SoraAbstractFactory<T, T*()> SelfType;
+        static SelfType* Instance() {
+            static SelfType instance;
+            return &instance;
         }
         
-        virtual T* createInstance(const std::string& instanceName, NamedValueList* parameter=NULL) {
-            typename CreatorFnMap::iterator itCreator = mCreators.find(instanceName);
-            if(itCreator != mCreators.end()) {
-                NamedValueList* param = parameter;
-                if(param == NULL) {
-                    static NamedValueList _emptyParamList;
-                    param = &_emptyParamList;
-                }
-                return itCreator->second(param);
-            }
+        T* createInstance(const std::string& name) {
+            typename CreatorFnMap::iterator it = mCreators.find(name);
+            if(it != mCreators.end()) {
+                return it->second();
+            } else
+                THROW_SORA_EXCEPTION(NotFoundException, "No required product founded");
         }
         
-        void reg(const std::string& instanceName, CreatorFn fn) {
-            mCreators.insert(std::make_pair(instanceName, fn));
+        template<typename FN>
+        void reg(const std::string& name, FN fn) {
+            mCreators[name] = fn;
         }
         
         template<typename product>
-        void reg_ctor(const std::string& instanceName) {
-            reg(instanceName, CreatorFn(SoraFactoryCtorDelegate<product>));
+        void reg_ctor(const std::string& name) {
+            mCreators[name] = CreatorFn(SoraFactoryCtorDelegate0<T, product>);
         }
         
-    private:
+    protected:
         CreatorFnMap mCreators;
     };
     
+    template<typename T, typename A0>
+    class SoraAbstractFactory<T, T*(A0)> {
+    public:
+        typedef SoraFunction<T*(A0)> CreatorFn;
+        typedef std::map<std::string, CreatorFn> CreatorFnMap;
+        
+        typedef SoraAbstractFactory<T, T*(A0)> SelfType;
+        static SelfType* Instance() {
+            static SelfType instance;
+            return &instance;
+        }
+        
+        T* createInstance(const std::string& name, A0 a0) {
+            typename CreatorFnMap::iterator it = mCreators.find(name);
+            if(it != mCreators.end()) {
+                return it->second(a0);
+            } else
+                THROW_SORA_EXCEPTION(NotFoundException, "No required product founded");
+        }
+        
+        template<typename FN>
+        void reg(const std::string& name, FN fn) {
+            mCreators[name] = fn;
+        }
+        
+        template<typename product>
+        void reg_ctor(const std::string& name) {
+            mCreators[name] = CreatorFn(SoraFactoryCtorDelegate1<T, product, A0>);
+        }
+        
+    protected:
+        CreatorFnMap mCreators;
+    };
+    
+    template<typename T, typename A0, typename A1>
+    class SoraAbstractFactory<T, T*(A0, A1)> {
+    public:
+        typedef SoraFunction<T*(A0, A1)> CreatorFn;
+        typedef std::map<std::string, CreatorFn> CreatorFnMap;
+        
+        typedef SoraAbstractFactory<T, T*(A0, A1)> SelfType;
+        static SelfType* Instance() {
+            static SelfType instance;
+            return &instance;
+        }
+        
+        T* createInstance(const std::string& name, A0 a0, A1 a1) {
+            typename CreatorFnMap::iterator it = mCreators.find(name);
+            if(it != mCreators.end()) {
+                return it->second(a0, a1);
+            } else
+                THROW_SORA_EXCEPTION(NotFoundException, "No required product founded");
+        }
+        
+        template<typename FN>
+        void reg(const std::string& name, FN fn) {
+            mCreators[name] = fn;
+        }
+        
+        template<typename product>
+        void reg_ctor(const std::string& name) {
+            mCreators[name] = CreatorFn(SoraFactoryCtorDelegate1<T, product, A0, A1>);
+        }
+        
+    protected:
+        CreatorFnMap mCreators;
+    };
+
 } // namespace sora
 
 

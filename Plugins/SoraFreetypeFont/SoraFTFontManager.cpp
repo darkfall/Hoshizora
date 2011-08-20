@@ -1,4 +1,5 @@
 #include "SoraFTFontManager.h"
+#include "SoraCore.h"
 
 namespace sora {
 
@@ -15,7 +16,6 @@ namespace sora {
 		
 		delete lib;
 	}
-
 	
 	template<typename T1, typename T2>
 	int SoraFTFontManager::find(T1 &con, T2 &f) {
@@ -116,5 +116,9 @@ namespace sora {
 
 		return font;
 	}
+    
+#ifdef SORA_AUTOMATIC_REGISTER
+    SORA_STATIC_RUN_CODE_FN(test, sora::SoraCore::Instance()->registerFontManager(new SoraFTFontManager));
+#endif
 
 } // namespace sora
