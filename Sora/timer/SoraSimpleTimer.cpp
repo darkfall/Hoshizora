@@ -48,6 +48,7 @@ namespace sora {
         mStartedTime = start;
         
         mEnabled = true;
+		return true;
     }
     
     void SoraSimpleTimer::stop() {
