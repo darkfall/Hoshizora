@@ -206,11 +206,13 @@ namespace sora {
     std::string tolowerstring(const std::string& s) {
         std::string result = s;
         std::transform(s.begin(), s.end(), result.begin(), tolower);
+		return result;
     }
     
     std::string toupperstring(const std::string& s) {
         std::string result = s;
         std::transform(s.begin(), s.end(), result.begin(), toupper);
+		return result;
     }
 
 } // namespace sora

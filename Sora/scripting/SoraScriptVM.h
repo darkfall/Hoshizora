@@ -15,12 +15,12 @@
 
 namespace sora {
     
-    class IScriptingSystem;
-    class IScript;
-    class IScriptVM;
+    class SoraScriptingSystem;
+    class SoraScript;
+    class SoraScriptVM;
     
-    typedef SoraAutoPtr<IScript> ScriptPtr;
-    typedef SoraAutoPtr<IScriptVM> ScriptVMPtr;
+    typedef SoraAutoPtr<SoraScript> ScriptPtr;
+    typedef SoraAutoPtr<SoraScriptVM> ScriptVMPtr;
     
     /**
      * Interfaces for work with script
@@ -36,7 +36,7 @@ namespace sora {
     public:
         virtual ~SoraScriptVM() {}
         
-        virtual IScriptingSystem* getCreator() const = 0;
+        virtual SoraScriptingSystem* getCreator() const = 0;
         virtual void execute(ScriptPtr script) = 0;
         virtual void callVoidFunc(const SoraString& funcName) = 0;
     };

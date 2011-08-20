@@ -15,6 +15,7 @@
 
 #include "SoraSingleton.h"
 #include <string>
+#include <map>
 
 namespace sora {
 	
@@ -85,7 +86,7 @@ namespace sora {
 			uint8 VALUE_TYPE;
 		};
 		
-		typedef hash_map<stringId, VALUE_STORE> GLOBAL_VALUE_MAP;
+		typedef std::map<stringId, VALUE_STORE> GLOBAL_VALUE_MAP;
 		typedef GLOBAL_VALUE_MAP::iterator VALUE_ITERATOR;
 		GLOBAL_VALUE_MAP values;
 	};

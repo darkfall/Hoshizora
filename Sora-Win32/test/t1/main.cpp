@@ -3,8 +3,6 @@
 #include "SoraCore.h"
 
 #include "SoraWindowInfo.h"
-#include "SoraRenderTarget.h"
-
 #include "SoraFont.h"
 
 #include "SoraZipResourceManager/SoraZipResourceManager.h"
@@ -49,28 +47,14 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 					   int       nCmdShow) {
 
 
-	sora::SoraCore* sora = sora::SoraCore::Instance();
-	sora->registerResourceManager(new sora::SoraZipResourceManager);
-	sora->registerFontManager(new sora::SoraFTFontManager);
-	sora->registerSoundSystem(new sora::SoraAudiereSoundSystem);
-	
-	// remember to change USE_HGE_KEYMAP between USE_GLFW_KEYMAP in SoraPlatform.h when using different renderers 
-#ifdef HGE_RENDERER
-	sora->registerRenderSystem(new sora::SoraHGERenderer);
-	sora->registerInput(new sora::SoraHGEInput);
-#else
-	sora->registerRenderSystem(new sora::SoraOGLRenderer);
-	sora->registerInput(new sora::SoraOGLInput);
-#endif
-
-//	sora->registerSoundSystem(new sora::SoraAudiereSoundSystem);
-	
+	sora::SoraCore* sora = sora::InitAndCreateSoraCore(new aeMainWindow,
+														sora::SoraCoreParameter(/* load plugins */
+																				false,
+																				/* render to buffer */
+																				false,
+																				/* message box error post */
+																				false));
 	sora->setFPS(60);
-
-	sora->setRenderSystemExtensionParam(0x0001, 4);
-	
-//	sora->createWindowLua(L"resource/scripts/luamaintest.lua");
-	sora->createWindow(new aeMainWindow);
 	sora->start();
 		
 	return 0;

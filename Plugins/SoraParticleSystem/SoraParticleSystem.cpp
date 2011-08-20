@@ -360,7 +360,7 @@ namespace sora {
 		node.position.set(pheader.emitPos.x+core->randomFloat(-pheader.emitRange.x, pheader.emitRange.x),
 						  pheader.emitPos.y+core->randomFloat(-pheader.emitRange.y, pheader.emitRange.y),
 						  pheader.emitPos.z+core->randomFloat(-pheader.emitRange.z, pheader.emitRange.z));
-		node.direction = vector3(core->randomFloat(pheader.minDirection.x, pheader.maxDirection.x),
+		node.direction = Vector3(core->randomFloat(pheader.minDirection.x, pheader.maxDirection.x),
 								 core->randomFloat(pheader.minDirection.y, pheader.maxDirection.y),
 								 core->randomFloat(pheader.minDirection.z, pheader.maxDirection.z)).normalize();
 		

@@ -30,8 +30,7 @@ namespace sora {
 		friend class SoraSingleton<SoraAudiereDevice>;
 	public:
 		void Destroy() {
-			if(device)
-				device->unref();
+
 		}
 		bool setupDevice(const char* name, const char* param) {
 			device = audiere::OpenDevice(name, param);

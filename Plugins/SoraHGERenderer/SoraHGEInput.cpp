@@ -1,4 +1,5 @@
 #include "SoraHGEInput.h"
+#include "SoraCore.h"
 
 namespace sora {
 
@@ -93,5 +94,8 @@ namespace sora {
 		return hge->Input_HaveJoy();
 	}
 
-	
+#ifdef SORA_AUTOMATIC_REGISTER
+	SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerInput(new SoraHGEInput));
+#endif
+
 } // namespace sora

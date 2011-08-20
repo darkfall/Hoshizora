@@ -165,11 +165,14 @@ namespace sora {
     }
     
     void pollMouseInput() {
-        float32 curMouseX, curMouseY;
+        if(!g_input)
+			return;
+
+		float32 curMouseX, curMouseY;
         int mouseWheel;
         bool leftBtn, rightBtn, middleBtn;
         
-        g_input->getMousePos(&curMouseX, &curMouseY);
+		g_input->getMousePos(&curMouseX, &curMouseY);
         mouseWheel = g_input->getMouseWheel();
         
         leftBtn = g_input->getKeyState(SORA_KEY_LBUTTON)==SORA_INPUT_KEYDOWN;

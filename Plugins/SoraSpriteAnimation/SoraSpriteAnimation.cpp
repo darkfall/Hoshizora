@@ -38,7 +38,7 @@ namespace sora {
     
     SoraSprite* SpriteAnimationCreatorFn(const std::wstring& path, Json::Value* val) {
         SoraSpriteAnimation* spr = UNPACK_ANIMATION(path);
-        if(spr && val) {
+        if(spr && val != NULL) {
             ParseJsonSpriteDef(spr, val);
             
             if(val->isMember("anchor")) {

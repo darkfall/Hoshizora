@@ -19,7 +19,7 @@ namespace sora {
     
     typedef SoraSimpleFSM<SoraString, SoraString> EntityFsmType;
 
-    class SoraEntityListener {
+    class SORA_API SoraEntityListener {
     public:
         virtual ~SoraEntityListener() { }
          
@@ -31,7 +31,7 @@ namespace sora {
         virtual void onUpdate(SoraEntity& ent) {}
     };
     
-    class SoraEntityListenerManager: public SoraListenerManager<SoraEntityListener> {
+    class SORA_API SoraEntityListenerManager: public SoraListenerManager<SoraEntityListener> {
     protected:
         typedef ConstVectorIterator<ListenerList> IteratorType;
         
@@ -73,6 +73,5 @@ namespace sora {
     };
     
 } // namespace sora
-
 
 #endif

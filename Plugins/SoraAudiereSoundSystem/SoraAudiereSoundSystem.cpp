@@ -7,7 +7,6 @@
 #include "hash.h"
 #include "SoraAudiereSoundFile.h"
 
-
 namespace sora {
 
 	SoraAudiereSoundSystem::SoraAudiereSoundSystem() {
@@ -58,5 +57,9 @@ namespace sora {
     SoraSoundEffectFile* SoraAudiereSoundSystem::createSoundEffectFile() {
         return new SoraAudiereSoundEffectFile;
     }
+
+#ifdef SORA_AUTOMATIC_REGISTER
+	SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerSoundSystem(new SoraAudiereSoundSystem));
+#endif
 
 } // namespace sora

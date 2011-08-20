@@ -197,11 +197,7 @@ namespace sora{
 			tex->mOriginalHeight		= pHGE->Texture_GetHeight(htex, true);
 			return tex;
 		} else
-<<<<<<< HEAD
-			throw SORA_EXCEPTION(SystemException, "Error creating Texture");
-=======
 			throw SORA_EXCEPTION(RuntimeException, "Error creating Texture");
->>>>>>> b309d05f510b64aedc21204c44a68455c68d0b5c
 		return 0;
 	}
 	
@@ -216,12 +212,8 @@ namespace sora{
 			tex->mOriginalWidth		= pHGE->Texture_GetWidth(htex, true);
 			tex->mOriginalHeight	= pHGE->Texture_GetHeight(htex, true);
 			return tex;
-		} else 
-<<<<<<< HEAD
-			throw SORA_EXCEPTION(SystemException, "Error creating texture");
-=======
+		} else
 			throw SORA_EXCEPTION(RuntimeException, "Error creating texture");
->>>>>>> b309d05f510b64aedc21204c44a68455c68d0b5c
 		return 0;
 	}
 
@@ -236,11 +228,7 @@ namespace sora{
 			tex->mOriginalWidth		= w;
 			return tex;
 		} else
-<<<<<<< HEAD
-			throw SORA_EXCEPTION(SystemException, "Error creating Texture");
-=======
 			throw SORA_EXCEPTION(RuntimeException, "Error creating Texture");
->>>>>>> b309d05f510b64aedc21204c44a68455c68d0b5c
 		return 0;
 	}
 
@@ -259,11 +247,7 @@ namespace sora{
 			tex->mOriginalWidth		= w;
 			return tex;
 		} else
-<<<<<<< HEAD
-			throw SORA_EXCEPTION(SystemException, "Error creating Texture");
-=======
 			throw SORA_EXCEPTION(RuntimeException, "Error creating Texture");
->>>>>>> b309d05f510b64aedc21204c44a68455c68d0b5c
 		return 0;
 	}
 
@@ -475,4 +459,9 @@ namespace sora{
 		renderLine(x2, y2, x1, y2+1.f, color, z);
 		renderLine(x1, y2, x1+1.f, y1, color, z);
 	}
+
+#ifdef SORA_AUTOMATIC_REGISTER
+	SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerRenderSystem(new SoraHGERenderer));
+#endif
+
 } // namespace sora

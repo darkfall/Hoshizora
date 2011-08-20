@@ -32,8 +32,8 @@ namespace sora {
     class SoraConnection;
     
     namespace signal {
-        
-        class SignalImpl {
+ 
+        class SORA_API SignalImpl {
         public:                        
             typedef std::multimap<int, SoraConnection> ConnectionMap;
             typedef std::multimap<int, SoraConnection>::iterator IteratorType;
@@ -49,7 +49,7 @@ namespace sora {
         };
         
         template<typename SIG>
-        class Slot {
+        class SORA_API Slot {
         public:
             bool isValid() {
                 return fn;
@@ -59,7 +59,7 @@ namespace sora {
             FuncType fn;
         };
         
-        class ConnectionBase {
+        class SORA_API ConnectionBase {
         public:
             virtual bool isValid() = 0;
             virtual void disconnect() = 0;
@@ -72,7 +72,7 @@ namespace sora {
         };
         
         template<typename SIG>
-        class BasicConnection: public ConnectionBase {
+        class SORA_API BasicConnection: public ConnectionBase {
         public:
             typedef typename Slot<SIG>::FuncType FuncType;
             

@@ -136,10 +136,10 @@ namespace mead {
 			float32 moveSpeed = (float32)(isSlow?mPlayerStates[PLAYER_SLOW_MOVE_SPEED]:mPlayerStates[PLAYER_MOVE_SPEED]);
 		
 			// check if the player is within the screen
-			if(mPosx-mSpriteWidth_2 <= mScreenRect.x1) left = false;
-			else if(mPosx+mSpriteWidth_2 >= mScreenRect.x2) right = false;
-			if(mPosy-mSpriteHeight_2 <= mScreenRect.y1) up = false;
-			else if(mPosy+mSpriteHeight_2 >= mScreenRect.y2) down = false;
+			if(mPosition.x-mSpriteWidth_2 <= mScreenRect.x1) left = false;
+			else if(mPosition.x+mSpriteWidth_2 >= mScreenRect.x2) right = false;
+			if(mPosition.y-mSpriteHeight_2 <= mScreenRect.y1) up = false;
+			else if(mPosition.y+mSpriteHeight_2 >= mScreenRect.y2) down = false;
 			
 			if(left)
 				playAnimation("moveleft", true, false);
@@ -147,19 +147,19 @@ namespace mead {
 				playAnimation("moveright", true, false);
 			
 			if((up || down) && (left || right)) {
-				if(up) mPosy -= moveSpeed * sinf(sora::F_PI_4);
-				else mPosy += moveSpeed * sinf(sora::F_PI_4);
+				if(up) mPosition.y -= moveSpeed * sinf(sora::F_PI_4);
+				else mPosition.y += moveSpeed * sinf(sora::F_PI_4);
 				
-				if(left) mPosx -= moveSpeed * cosf(sora::F_PI_4);
-				else mPosx += moveSpeed * cosf(sora::F_PI_4);
+				if(left) mPosition.x -= moveSpeed * cosf(sora::F_PI_4);
+				else mPosition.x += moveSpeed * cosf(sora::F_PI_4);
 			} else if(down) {
-				mPosy += moveSpeed;
+				mPosition.y += moveSpeed;
 			} else if(up) {
-				mPosy -= moveSpeed;
+				mPosition.y -= moveSpeed;
 			} else if(right) {
-				mPosx += moveSpeed;
+				mPosition.x += moveSpeed;
 			} else if(left) {
-				mPosx -= moveSpeed;
+				mPosition.x -= moveSpeed;
 			} else 
 				playAnimation("stand", true, false);
 		}	

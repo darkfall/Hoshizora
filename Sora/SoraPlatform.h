@@ -41,6 +41,7 @@
     #include <unordered_map>
     namespace sora {
         using std::tr1::unordered_map;
+		#define hash_map unordered_map
     }
 
 #else

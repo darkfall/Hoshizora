@@ -36,11 +36,10 @@ namespace sora {
 #define REGISTER_SPRITE_PRODUCT(name, fn) \
     GlobalSpriteFactory->reg(name, fn);
     
-    static SORA_API SoraSprite* CreateSpriteType(const std::string& type, const SoraWString& path, Json::Value* val=NULL) {
+    static SoraSprite* CreateSpriteType(const std::string& type, const SoraWString& path, Json::Value* val=NULL) {
         return GlobalSpriteFactory->createInstance(type, path, val);
     }
-    
-    
+   
     SORA_API void ParseJsonSpriteDef(SoraSprite* sprite, const Json::Value& val);
     
 }
