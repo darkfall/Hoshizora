@@ -92,8 +92,8 @@ namespace sora {
         SoraSoundSystem*    getSoundSystem() const;
         
 		void registerPlugin         (SoraPlugin* pPlugin);
-		void unistallPlugin         (SoraPlugin* pPlugin);
-		void unistallPluginS		(const SoraString& sPluginName);
+		SoraPlugin* unistallPlugin  (SoraPlugin* pPlugin);
+		SoraPlugin* unistallPlugin  (const SoraString& sPluginName);
 		SoraPlugin* getPlugin		(const SoraString& sPluginName);
         
         bool  isRenderSystemExtensionEnabled(int32 extension);

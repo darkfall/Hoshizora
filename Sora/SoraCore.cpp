@@ -1125,12 +1125,12 @@ namespace sora {
 		pPluginManager->registerPlugin(pPlugin);
 	}
 
-	void SoraCore::unistallPlugin(SoraPlugin* pPlugin) {
-		pPluginManager->unistallPlugin(pPlugin);
+	SoraPlugin* SoraCore::unistallPlugin(SoraPlugin* pPlugin) {
+		return pPluginManager->unistallPlugin(pPlugin);
 	}
 
-	void SoraCore::unistallPluginS(const SoraString& sPluginName) {
-		pPluginManager->unistallPlugin(sPluginName);
+	SoraPlugin* SoraCore::unistallPlugin(const SoraString& sPluginName) {
+		return pPluginManager->unistallPlugin(sPluginName);
 	}
 
 	SoraPlugin* SoraCore::getPlugin(const SoraString& sPluginName) {
