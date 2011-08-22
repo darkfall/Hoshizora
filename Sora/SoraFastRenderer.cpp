@@ -14,7 +14,6 @@ namespace sora {
     
     SoraFastRenderer::SoraFastRenderer():
     mAutoReleaseTime(DefaultAutoReleaseTime) {
-        SoraCore::Instance()->registerPlugin(this);
     }
     
     SoraFastRenderer::~SoraFastRenderer() {
@@ -72,7 +71,7 @@ namespace sora {
         return mAutoReleaseTime;
     }
     
-    void SoraFastRenderer::update(float32 dt) {
+    void SoraFastRenderer::onUpdate(float32 dt) {
         SpriteCacheMap::iterator itSprite = mSpriteCache.begin();
         while(itSprite != mSpriteCache.end()) {
             if(itSprite->second.mSprite != NULL) {

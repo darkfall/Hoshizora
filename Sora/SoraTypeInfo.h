@@ -21,6 +21,10 @@ namespace sora {
 		bool operator < (const SoraTypeInfo& rhs) const {
 			return _typeInfo.before(rhs._typeInfo) != 0;
 		}
+        
+        std::string name() {
+            return _typeInfo.name();
+        }
 
 	private:
 		const std::type_info& _typeInfo;
@@ -35,6 +39,10 @@ namespace sora {
 		bool operator < (const SoraTypeInfo& rhs) const {
 			return _typeInfo < rhs._typeInfo;
 		}
+        
+        std::string name() {
+            return GetStringByUniqueId(_typeInfo);
+        }
 		
 	private:
 		stringId _typeInfo;

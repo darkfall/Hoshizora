@@ -12,69 +12,51 @@
 namespace sora {
 
     SoraPluginManager::~SoraPluginManager() {
-        PluginIterator itPlugin = mPluginList.begin();
-        while(itPlugin != mPluginList.end()) {
-            if(bIsInitialised) (*itPlugin)->shutdown();
+        PluginIterator itPlugin = mPluginMap.begin();
+        while(itPlugin != mPluginMap.end()) {
+            SoraPlugin* plugin = itPlugin->second;
             
-            (*itPlugin)->unistall();
+            plugin->shutdown();
+            plugin->unistall();
             
             ++itPlugin;
         }
-        mPluginList.clear();
+        mPluginMap.clear();
     }
     
-    void SoraPluginManager::registerPlugin(SoraPlugin* pPlugin) {
-        if(pPlugin) {
-            pPlugin->install();
-            mPluginList.push_back(pPlugin);
+    void SoraPluginManager::registerPlugin(SoraPlugin* plugin) {
+        sora_assert(plugin);
+        sora_assert(!plugin->getName().empty());
+        
+        plugin->install();
+        mPluginMap.insert(std::make_pair(plugin->getName(), plugin));
+        
+        plugin->initialise();
+    }
+    
+    SoraPlugin* SoraPluginManager::unistallPlugin(const SoraString& name) {
+        PluginIterator itPlugin = mPluginMap.find(name);
+        if(itPlugin != mPluginMap.end()) {
+            SoraPlugin* plugin = itPlugin->second;
             
-            if(bIsInitialised) pPlugin->initialise();
-        }
-    }
-    
-    void SoraPluginManager::unistallPlugin(const SoraString& sPluginName) {
-        PluginIterator itPlugin = mPluginList.begin();
-        while(itPlugin != mPluginList.end()) {
-            if((*itPlugin)->getName().compare(sPluginName) == 0) {
-                if(bIsInitialised) (*itPlugin)->shutdown();
+            plugin->shutdown();
+            plugin->unistall();
                 
-                (*itPlugin)->unistall();
-                
-                itPlugin = mPluginList.erase(itPlugin);
-            } else ++itPlugin;
-        }
-    }
-    
-    void SoraPluginManager::unistallPlugin(SoraPlugin* pPlugin) {
-        PluginIterator itPlugin = mPluginList.begin();
-        while(itPlugin != mPluginList.end()) {
-            if(*itPlugin == pPlugin) {
-                if(bIsInitialised) (*itPlugin)->shutdown();
-                
-                (*itPlugin)->unistall();
-                
-                itPlugin = mPluginList.erase(itPlugin);
-            } else ++itPlugin;
-        }
-    }
-    
-    SoraPlugin* SoraPluginManager::getPlugin(const SoraString& sPluginName) {
-        PluginIterator itPlugin = mPluginList.begin();
-        while(itPlugin != mPluginList.end()) {
-            if((*itPlugin)->getName().compare(sPluginName) == 0) {
-                return (*itPlugin);
-            }
-            ++itPlugin;
+            mPluginMap.erase(itPlugin);
+            return plugin;
         }
         return 0;
     }
     
-    void SoraPluginManager::update(float32 dt) {
-        PluginIterator itPlugin = mPluginList.begin();
-        while(itPlugin != mPluginList.end()) {
-            (*itPlugin)->update(dt);
-            ++itPlugin;
-        }
+    SoraPlugin* SoraPluginManager::unistallPlugin(SoraPlugin* plugin) {
+        return unistallPlugin(plugin->getName());
+    }
+    
+    SoraPlugin* SoraPluginManager::getPlugin(const SoraString& name) {
+        PluginIterator itPlugin = mPluginMap.find(name);
+        if(itPlugin != mPluginMap.end())
+            return itPlugin->second;
+        return 0;
     }
 
 } // namespace sora

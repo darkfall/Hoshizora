@@ -67,6 +67,12 @@ bool mainWindow::renderFunc() {
 	return false;
 }
 
+void myFunc(sora::SoraConsoleEvent* evt) {
+    sora::SORA->messageBox(evt->getCmd(), evt->getParams(), MB_OK);
+}
+
+SORA_DEF_CONSOLE_EVT_FUNC(myFunc, "test");
+
 
 #include "factory/SoraSpriteFactory.h"
 #include "timer/SoraSimpleTimerManager.h"

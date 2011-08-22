@@ -11,7 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraSprite.h"
-#include "SoraPlugin.h"
+#include "SoraAutoUpdate.h"
 #include "stringId.h"
 
 #include <map>
@@ -20,7 +20,7 @@ namespace sora {
     
     const float32 DefaultAutoReleaseTime = 10.f;
     
-    class SoraFastRenderer: public SoraPlugin {
+    class SoraFastRenderer: public SoraAutoUpdate {
     protected:
         SoraFastRenderer();
         ~SoraFastRenderer();
@@ -38,7 +38,7 @@ namespace sora {
         void    setAutoReleaseTime(float32 time);
         float32 getAutoReleaseTime() const;
         
-        void update(float32 dt);
+        void onUpdate(float32 dt);
         
         const SoraString getName() const {
             return "FastRenderer";

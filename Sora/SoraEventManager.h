@@ -169,6 +169,10 @@ namespace sora {
 		std::string func;
 		std::string param;
 	};
+    
+    static void RegisterInputEventHandler(SoraEventHandler* handler) {
+        SoraEventManager::Instance()->registerInputEventHandler(handler);
+    }
 	
 #define SORA_EVENT_MANAGER SoraEventManager::Instance()
 } // namespace sora

@@ -14,6 +14,7 @@
 #include "SoraKeyInfo.h"
 #include "SoraFileChangeEvent.h"
 #include "SoraFastRenderer.h"
+#include "SoraAutoUpdate.h"
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
@@ -264,6 +265,7 @@ namespace sora {
 
 	void SoraCore::update() {
 		sora_assert(bInitialized == true);
+        float32 dt = bFrameSync?1.f:pTimer->getDelta();
 #ifdef PROFILE_CORE_UPDATE
 		PROFILE("CORE_UPDATE");
 #endif
@@ -289,7 +291,7 @@ namespace sora {
                     PROFILE("UPDATE_MAINWINDOW");
 #endif
                     _modifierAdapterUpdate();
-                    SoraSimpleTimerManager::Instance()->update(getDelta());
+                    SoraSimpleTimerManager::Instance()->update(dt);
                     
                     mMainWindow->updateFunc();
                 }
@@ -298,8 +300,8 @@ namespace sora {
 #ifdef PROFILE_CORE_UPDATE
                     PROFILE("UPDATE_EVENT_MANAGER");
 #endif
-                    SORA_EVENT_MANAGER->update(bFrameSync?1.f:pTimer->getDelta());
-                    SoraEventWorld::defaultWorld().update(getDelta());
+                    SoraEventManager::Instance()->update(dt);
+                    SoraEventWorld::defaultWorld().update(dt);
                 }
                 
                 {
@@ -311,9 +313,9 @@ namespace sora {
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UPDATE_PLUGINS");
+                    PROFILE("UPDATE_AUTO_UPDATE_OBJS");
 #endif
-                    pPluginManager->update(getDelta());
+                    SoraAutoUpdate::updateList(dt);
                 }
                 
                 {
@@ -343,8 +345,6 @@ namespace sora {
                 }
                 
                 if(!bPauseRender) {                    
-                   SoraEventManager::Instance()->update(getDelta());
-                    
                     _updateEnd();
                 }
                 

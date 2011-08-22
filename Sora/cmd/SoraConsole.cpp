@@ -11,6 +11,7 @@
 
 #include "../SoraEventManager.h"
 #include "../SoraCore.h"
+#include "../SoraFont.h"
 
 #include "../SoraStringConv.h"
 #include "../Debug/SoraInternalLogger.h"
@@ -20,6 +21,8 @@ namespace sora {
     namespace {
         static SoraConsole* mInstance = NULL;
     }
+    
+    std::map<std::string, SoraEventHandler*> SoraConsole::mHandlers;
     
     SoraConsole* SoraConsole::Instance() {
         if(!mInstance)
@@ -37,7 +40,7 @@ namespace sora {
 	SoraConsole::SoraConsole(): mStartLine(0) {
 		registerEventFunc(this, &SoraConsole::onKeyEvent);
         registerEventFunc(this, &SoraConsole::onHotkeyEvent);
-		SORA_EVENT_MANAGER->registerInputEventHandler(this, 9999);
+        SoraEventManager::Instance()->registerInputEventHandler(this, 9999);
         
         SoraCore::Instance()->addFrameListener(this);
         
@@ -187,10 +190,12 @@ namespace sora {
 					mFont->render(x, y, FONT_ALIGNMENT_LEFT, (L"> "+mHistory[i].mCmd).c_str());
 					y += mFontHeight;
 					
-					if(mHistory[i].mResult.size() != 0) {
-						mFont->setColor(mResultColor);
-						mFont->render(x, y, FONT_ALIGNMENT_LEFT, mHistory[i].mResult.c_str());
-						y += mFont->getStringHeight(mHistory[i].mResult.c_str());
+                    CmdHistory* his = &mHistory[i];
+					std::vector<std::wstring>::iterator it = his->mResults.begin();
+                    for(it; it != his->mResults.end(); ++it) {
+                        mFont->setColor(mResultColor);
+                        mFont->render(x, y, FONT_ALIGNMENT_LEFT, it->c_str());
+                        y += mFont->getStringHeight(it->c_str());
 					}
 				}
 			}
@@ -275,6 +280,40 @@ namespace sora {
 			mFontHeight = (int32)mFont->getHeight();
 		}
 	}
+    
+    SoraFont* SoraConsole::getFont() const {
+        return mFont;
+    }
+    
+    int32 SoraConsole::getTab() const { 
+        return mTab;
+    }
+    
+    std::string SoraConsole::getCurrentLine() const { 
+        return mCurrentLine;
+    }
+    
+    uint32 SoraConsole::getCaretRow() const { 
+        return mCaretRow;
+    }
+    
+    uint32 SoraConsole::getCaretPosition() const { 
+        return mCaretPosition;
+    }
+    
+    void SoraConsole::setPosition(float32 posx, float32 posy) { 
+        mPositionX = posx; 
+        mPositionY = posy;
+    }
+    
+    void SoraConsole::setSize(float32 width, float32 height) { 
+        mWidth = width; 
+        mHeight = height; 
+    }
+    
+    bool SoraConsole::isActive() const { 
+        return mActive;
+    }
 	
 	void SoraConsole::publishCmd(const std::string& cmd, const char* params) {
 		if(cmd.compare("clear") == 0) {
@@ -285,7 +324,7 @@ namespace sora {
 			return;
 		}
 		
-		CMD_HANDLER_MAP::iterator itHandler = mHandlers.find(cmd);
+		CommandHandlerMap::iterator itHandler = mHandlers.find(cmd);
 		
 		CmdHistory history;
 		if(params != NULL)
@@ -301,7 +340,11 @@ namespace sora {
 			
 			itHandler->second->handleEvent(&cev);
 
-			history.mResult = s2wsfast(cev.getResults());
+            SoraConsoleEvent::iterator it = cev.begin();
+            while(it != cev.end()) {
+                history.mResults.push_back(s2wsfast(*it));
+                ++it;
+            }
 		} else {
             if(mUseSysTerm)
                 SORA->execute(cmd, params!=NULL?params:"");
@@ -311,8 +354,11 @@ namespace sora {
 		mCurrLine += 1;
 		mCurrHeight += mFontHeight;
 		if(mFont) {
-			if(history.mResult.size() != 0)
-				mCurrHeight += (int32)mFont->getStringHeight(history.mResult.c_str());
+			if(history.mResults.size() != 0) {
+                std::vector<std::wstring>::iterator it = history.mResults.begin();
+                for(it; it != history.mResults.end(); ++it) 
+                    mCurrHeight += (int32)mFont->getStringHeight(it->c_str());
+            }
 		}
 		if(mCurrHeight >= mHeight-1-mFontHeight) {
 			mStartLine += 1;

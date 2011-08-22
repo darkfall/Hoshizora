@@ -31,11 +31,6 @@ namespace sora {
         mName(0),
         mSender(NULL),
         mReceiver(NULL) {
-#ifndef SORA_USE_RTTI
-			eventIdentifier = 0;
-#else
-            
-#endif
 		}
 
         void setSource(SoraEventHandler* source) { 
@@ -84,10 +79,7 @@ namespace sora {
 		stringId mName;
         SoraEventHandler* mSender;
         SoraEventHandler* mReceiver;
-		
-#ifndef SORA_USE_RTTI
-		stringId eventIdentifier;
-#endif
+        
         SoraEventChannel mChannel;
 	};
  
@@ -227,6 +219,28 @@ namespace sora {
 		_handlers[SoraTypeInfo(tmp.getEventIdentifier())] = new SoraFuncFunctionHandler<EventT>(evFn);
 #endif
 	}
+    
+    /**
+     * Helper macro that defines a event handler class [func]##EventHandler
+     * With a global static access func Instance()
+     * And when it handles [evtType] event
+     * It will call [func]
+     **/
+#define SORA_DEF_FUNC_AS_EVENT_HANDLER(func, evtType) \
+namespace { \
+    struct func##EventHandler: public sora::SoraEventHandler { \
+        func##EventHandler() { \
+            registerEventFunc(this, &func##EventHandler::onEvent); \
+        } \
+        void onEvent(evtType* evt) { \
+            func(evt); \
+        } \
+        static func##EventHandler* Instance() { \
+            static func##EventHandler instance; \
+            return &instance; \
+        } \
+    }; \
+}
 
 } // namespace sora
 

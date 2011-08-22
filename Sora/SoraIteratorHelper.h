@@ -101,6 +101,25 @@ namespace sora {
         IteratorType mEnd;
         IteratorType mCurr;
     };
+    
+    // helper macro to define a iterable class
+    // container type must have both iterator and const_iterator;
+#define SORA_ITERABLE(type, cont) \
+    typedef type::iterator iterator; \
+    typedef type::const_iterator const_iterator; \
+    inline iterator begin() { \
+        return cont.begin(); \
+    } \
+    inline iterator end() { \
+        return cont.end(); \
+    } \
+    inline const_iterator begin() const { \
+        return cont.begin(); \
+    } \
+    inline const_iterator end() const { \
+        return cont.end(); \
+    }
+    
 }
 
 #endif

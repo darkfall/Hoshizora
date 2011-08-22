@@ -69,16 +69,16 @@ namespace sora {
 						int32 width = atoi(params[1].c_str());
 						sora->setWindowSize(width, sora->getScreenHeight());
 						
-						cev->setResults("Window.Width seted to "+params[1]);
+						cev->pushResult("Window.Width seted to "+params[1]);
 					} else if(p1Param.compare("height") == 0) {
 						int32 height = atoi(params[1].c_str());
 						sora->setWindowSize(sora->getScreenWidth(), height);
 						
-						cev->setResults("Window.Height seted to "+params[1]);
+						cev->pushResult("Window.Height seted to "+params[1]);
 					} else if(p1Param.compare("title") == 0) {
 						sora->setWindowTitle(s2ws(params[1]).c_str());
 						
-						cev->setResults("Window.Title seted to "+params[1]);
+						cev->pushResult("Window.Title seted to "+params[1]);
 					}
 				}
 			} else  {
@@ -87,14 +87,14 @@ namespace sora {
 					
 					SET_ENV_INT(params[1].c_str(), val);
 					
-					cev->setResults("EnvValue "+params[1]+" has been set to "+params[2]);
+					cev->pushResult("EnvValue "+params[1]+" has been set to "+params[2]);
 					
 				} else if(p1Prev.compare("float") == 0 && params.size() >= 3) {
 					float32 val = (float32)atof(params[2].c_str());
 					
 					SET_ENV_FLOAT(params[1].c_str(), val);
 					
-					cev->setResults("EnvValue "+params[1]+" has been set to "+params[2]);
+					cev->pushResult("EnvValue "+params[1]+" has been set to "+params[2]);
 					
 				} else if(p1Prev.compare("bool") == 0 && params.size() >= 3) {
 					bool val = false;
@@ -104,12 +104,12 @@ namespace sora {
 					
 					SET_ENV_BOOL(params[1].c_str(), val);
 					
-					cev->setResults("EnvValue "+params[1]+" has been set to "+params[2]);
+					cev->pushResult("EnvValue "+params[1]+" has been set to "+params[2]);
 					
 				} else if(p1Prev.compare("string") == 0 && params.size() >= 3) {					
 					SET_ENV_STRING(params[1].c_str(), params[2].c_str());
 					
-					cev->setResults("EnvValue "+params[1]+" has been set to "+params[2]);
+					cev->pushResult("EnvValue "+params[1]+" has been set to "+params[2]);
 				} 
 				
 				else if(p1Prev.compare("file_check_interval") == 0 && params.size() >= 1) {
@@ -136,40 +136,40 @@ namespace sora {
 					std::string p1Param = p1.substr(dotPos+1, p1.size());
 					
 					if(p1Param.compare("width") == 0) {
-						cev->setResults(vamssg("Window.Width = %d", sora->getScreenWidth()));
+						cev->pushResult(vamssg("Window.Width = %d", sora->getScreenWidth()));
 										
 					} else if(p1Param.compare("height") == 0) {
-						cev->setResults(vamssg("Window.Width = %d", sora->getScreenHeight()));
+						cev->pushResult(vamssg("Window.Width = %d", sora->getScreenHeight()));
 										
 					} else if(p1Param.compare("title") == 0) {
-						cev->setResults(vamssg("Window.Width = %s", sora->getMainWindow()->getWindowName().c_str()));
+						cev->pushResult(vamssg("Window.Width = %s", sora->getMainWindow()->getWindowName().c_str()));
 					
 					} 
 				} 
 			} else {
 				if(p1Prev.compare("objnum") == 0) {
-					cev->setResults(vamssg("Current alive SoraObject number = %d", SoraObjectHandle::getGlobalObjectSize()));
+					cev->pushResult(vamssg("Current alive SoraObject number = %d", SoraObjectHandle::getGlobalObjectSize()));
 			
 				} else if(p1Prev.compare("memuse") == 0) {
-					cev->setResults(vamssg("Current memory use = %llukb", uint64(sora->getEngineMemoryUsage())));
+					cev->pushResult(vamssg("Current memory use = %llukb", uint64(sora->getEngineMemoryUsage())));
 
 				} else if(p1Prev.compare("rmemuse") == 0) {
-					cev->setResults(vamssg("Current resource memory use = %llukb", uint64(sora->getResourceMemoryUsage())));
+					cev->pushResult(vamssg("Current resource memory use = %llukb", uint64(sora->getResourceMemoryUsage())));
                     
 				} else if(p1Prev.compare("int") == 0 && params.size() >= 2) {
-					cev->setResults("EnvValue "+vamssg("%s = %d", params[1].c_str(), GET_ENV_INT(params[1].c_str(), 0)));
+					cev->pushResult("EnvValue "+vamssg("%s = %d", params[1].c_str(), GET_ENV_INT(params[1].c_str(), 0)));
 					
 				} else if(p1Prev.compare("float") == 0 && params.size() >= 2) {
-					cev->setResults("EnvValue "+vamssg("%s = %f", params[1].c_str(), GET_ENV_FLOAT(params[1].c_str(), 0.f)));
+					cev->pushResult("EnvValue "+vamssg("%s = %f", params[1].c_str(), GET_ENV_FLOAT(params[1].c_str(), 0.f)));
 
 					
 				} else if(p1Prev.compare("bool") == 0 && params.size() >= 2) {
-					cev->setResults("EnvValue "+vamssg("%s = %s", params[1].c_str(), GET_ENV_BOOL(params[1].c_str(), false)?"true":"false"));
+					cev->pushResult("EnvValue "+vamssg("%s = %s", params[1].c_str(), GET_ENV_BOOL(params[1].c_str(), false)?"true":"false"));
 					
 				} else if(p1Prev.compare("string") == 0 && params.size() >= 2) {					
-					cev->setResults("EnvValue "+vamssg("%s = %s", params[1].c_str(), GET_ENV_STRING(params[1].c_str(), "???").c_str()));
+					cev->pushResult("EnvValue "+vamssg("%s = %s", params[1].c_str(), GET_ENV_STRING(params[1].c_str(), "???").c_str()));
 				} else if(p1Prev.compare("fps") == 0) {
-                    cev->setResults(vamssg("FPS: %.2f", sora->getFPS()));
+                    cev->pushResult(vamssg("FPS: %.2f", sora->getFPS()));
                 }
 			}
 		}
@@ -191,7 +191,7 @@ namespace sora {
 					DebugPtr->writeToFile(params[i].c_str());
 					result += params[i] + ", ";
 				}
-				cev->setResults(result);
+				cev->pushResult(result);
 			}
 		} else if(cev->getCmd().compare("setlocale") == 0) {
 			if(params.size() == 1) {

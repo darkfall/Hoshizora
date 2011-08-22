@@ -11,31 +11,27 @@
 #define SORA_PLUGIN_MANAGER_H
 
 #include "SoraPlugin.h"
-#include <list>
+#include <map>
 
 namespace sora {
 
     class SORA_API SoraPluginManager {
-        typedef std::list<SoraPlugin*> PluginList;
-        typedef PluginList::iterator PluginIterator;
+        typedef std::map<SoraString, SoraPlugin*> PluginMap;
+        typedef PluginMap::iterator PluginIterator;
         
     public:
         SoraPluginManager() {}
         virtual ~SoraPluginManager();
         
-        virtual void registerPlugin(SoraPlugin* pPlugin);
+        virtual void registerPlugin(SoraPlugin* plugin);
         
-        virtual void unistallPlugin(const SoraString& sPluginName);
-        virtual void unistallPlugin(SoraPlugin* pPlugin);
+        virtual SoraPlugin* unistallPlugin(const SoraString& name);
+        virtual SoraPlugin* unistallPlugin(SoraPlugin* plugin);
         
-        virtual SoraPlugin* getPlugin(const SoraString& sPluginName);
-        
-        virtual void update(float32 dt);
-        
+        virtual SoraPlugin* getPlugin(const SoraString& pluginname);
+                
     private:
-        PluginList mPluginList;
-        
-        bool bIsInitialised;
+        PluginMap mPluginMap;
     };
 
 } // namespace sora

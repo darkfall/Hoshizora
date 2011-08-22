@@ -20,6 +20,7 @@ namespace sora {
     
     void SoraEventHandler::handleEvent(SoraEvent* event) {
         sora_assert(event);
+              
 #ifdef SORA_USE_RTTI
         Handlers::iterator it = _handlers.find(SoraTypeInfo(typeid(*event)));
 #else

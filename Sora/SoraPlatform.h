@@ -300,6 +300,8 @@ namespace sora {
 
 // this macro runs a seg of code when the app starts using static init for classes
 // useful for plugins to register itself to sora
+// however, static run code's name may conflict if they are in the same line of the project
+// so use of SORA_STATIC_INIT_I is suggested
 
 #define SORA_UNIQUE_NAME(name) \
     SORA_JOIN(name, __LINE__)

@@ -13,8 +13,10 @@
 #include "SoraPlatform.h"
 #include "SoraSoundFile.h"
 #include "SoraSingleton.h"
-#include "SoraPlugin.h"
+#include "SoraAutoUpdate.h"
 #include "stringId.h"
+
+#include "signal/SoraSignal.h"
 
 namespace sora {
 	
@@ -26,18 +28,14 @@ namespace sora {
 	 a bgm would play in loop mode
 	 */
 	
-	class SoraBGMManager: public SoraSingleton<SoraBGMManager>, public SoraEventHandler, public SoraPlugin {
+	class SoraBGMManager: public SoraSingleton<SoraBGMManager>, public SoraEventHandler, public SoraAutoUpdate {
 		friend class SoraSingleton<SoraBGMManager>;
 	 
 	protected:
 		SoraBGMManager();
 		~SoraBGMManager();
 		
-		/*
-		 update the bgm manager
-		 inheritated from SoraPlugin
-		 */
-		void update();
+		void onUpdate(float dt);
 		const SoraString getName() const { return "SoraBGMManager"; }
 		
 		void onPlaybackEvent(SoraPlaybackEvent* event);
@@ -133,6 +131,9 @@ namespace sora {
 		 */
 		void enableRandomBGMQueuePlay(bool flag);
 		bool isRandomBGMQueuePlayEnabled() const;
+        
+        template<typename T>
+        SoraConnection subscribeToPlaybackEvent(const T& func);
 		
 	private:
 		inline void _clearBGMQueue();
@@ -193,6 +194,9 @@ namespace sora {
 		};
 		typedef std::map<uint32, BGSInfo*> BGS_MAP;
 		BGS_MAP mBGSounds;
+        
+        typedef SoraSignal<void(SoraPlaybackEvent*)> PlaybackSignal;
+        PlaybackSignal mPlaybackSignal;
 	};
 	
 } // namespace sora

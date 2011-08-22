@@ -16,7 +16,6 @@ namespace sora {
 										mCurrFadeInTime(-1.f), mCurrFadeOutTime(-1.f), mFadeInTime(0.f), mFadeOutTime(0.f), 
 										mStopAtEnd(false), mRandomBGMQueuePlay(false), mPaused(false),
 										mPrevBGMId(-1), mCurrBGMId(-1) {
-		SORA->registerPlugin(this);
 		registerEventFunc(this, &SoraBGMManager::onPlaybackEvent);
 	
 		SET_ENV_FLOAT("BGM_VOLUME", bgmVolume);
@@ -195,12 +194,10 @@ namespace sora {
 		return mRandomBGMQueuePlay;
 	}
 	
-	void SoraBGMManager::update() {
+	void SoraBGMManager::onUpdate(float32 delta) {
 		if(mPaused)
 			return; 
-		
-		float32 delta = SORA->getDelta();
-		
+				
 		if(mCurrFadeOutTime != -1.f && mPrevBGMId != -1) {
 			if(mCurrFadeOutTime < mFadeOutTime) {
 				mCurrFadeOutTime += delta;
@@ -231,6 +228,8 @@ namespace sora {
 		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
 			toNextBGM();
 		}
+        
+        mPlaybackSignal(event);
 	}
 	
 	
@@ -307,5 +306,10 @@ namespace sora {
 			mBGSounds.erase(itBgs);
 		}
 	}
+    
+    template<typename T>
+    SoraConnection SoraBGMManager::subscribeToPlaybackEvent(const T& func) {
+        return mPlaybackSignal.connect(func);
+    }
 
 } // namespace sora

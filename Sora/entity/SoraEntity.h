@@ -16,6 +16,7 @@
 #include "../scripting/SoraScriptVMHolder.h"
 
 #include "SoraEntityListener.h"
+#include "SoraComponentHolder.h"
 
 namespace sora {
     
@@ -42,6 +43,11 @@ namespace sora {
         template<typename T>
         SoraConnection subscribeToVMDetached(T);
         
+        void addComponent(const std::string& name, SoraComponent* co);
+        SoraComponent* removeComponent(const std::string& name);
+        SoraComponent* removeComponent(const SoraComponent* co);
+        SoraComponent* getComponent(const std::string& name);
+        
     private:
         void onEnter(const EntityFsmType&, const EntityFsmType::StateType&);
         void onExit(const EntityFsmType&, const EntityFsmType::StateType&);
@@ -52,6 +58,8 @@ namespace sora {
         EntityFsmType mFsm;
         
         SoraScriptVMHolder mScriptVM;
+        
+        SoraComponentHolder mComponents;
     };
     
     template<typename T>

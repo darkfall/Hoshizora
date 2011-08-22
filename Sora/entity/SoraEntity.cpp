@@ -65,4 +65,20 @@ namespace sora {
     ScriptVMPtr SoraEntity::getVM(const SoraString& tag) const {
         return mScriptVM.getVM(tag);
     }
+    
+    void SoraEntity::addComponent(const std::string& name, SoraComponent* co) {
+        mComponents.addComponent(name, co);
+    }
+    
+    SoraComponent* SoraEntity::removeComponent(const std::string& name) {
+        return mComponents.removeComponent(name);
+    }
+    
+    SoraComponent* SoraEntity::removeComponent(const SoraComponent* co) {
+        return mComponents.removeComponent(co);
+    }
+    
+    SoraComponent* SoraEntity::getComponent(const std::string& name) {
+        return mComponents.getComponent(name);
+    }
 } // namespace sora

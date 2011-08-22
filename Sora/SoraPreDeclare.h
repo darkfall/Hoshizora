@@ -78,9 +78,7 @@ namespace sora {
     
     static bool SoraIfDefined(const std::string& f) {
         std::map<stringId, int>::const_iterator it = g_define_map.find(GetUniqueStringId(f));
-        if(it != g_define_map.end())
-            return true;
-        return false;
+        return it != g_define_map.end();
     }
     
 #define SORA_DEFINE(name) \
@@ -88,6 +86,43 @@ namespace sora {
     
 #define SORA_IF_DEFINED(name) \
     SoraIfDefined(#name)
+    
+    
+    /**
+     *  helper macro to define a field which have a get##name and set##name
+     *  @param field type, such as int, float
+     *  @param name name to be used as get(name) and set(name)
+     *  Must be used within the class
+     */
+#define SORA_CLASS_DEF_FIELD_SET_GET(type, name, pref) \
+    private: \
+        type pref##name; \
+    public: \
+        type get##name() const { \
+            return pref##name; \
+        } \
+    void set##name(type val) { \
+        pref##name = val; \
+    }
+    
+    /**
+     *  helper macro to define a field which have a get##name and set##name
+     *  @param field type, such as int, float
+     *  @param name name to be used as get(name) and set(name)
+     *  @param name prefix of the variable, the defined variable would be pref##name
+     *  Must be used within the class
+     */
+#define SORA_CLASS_DEF_FIELD_SET_GET_P(type, name, pref) \
+    private: \
+        type pref##name; \
+    public: \
+        type get##name() const { \
+            return pref##name; \
+        } \
+        void set##name(type val) { \
+            pref##name = val; \
+        }
+
     
 } // namespace sora
 

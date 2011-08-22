@@ -156,6 +156,8 @@ namespace sora {
     
     SORA_EXCEPTION_DEF(SORA_API, ApplicationException,  SoraException)
     SORA_EXCEPTION_DEF(SORA_API, BadCastException,      RuntimeException)
+    SORA_EXCEPTION_DEF(SORA_API, RttiException,         RuntimeException)
+
     
 } // namespace sora
 
