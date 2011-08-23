@@ -10,25 +10,9 @@
 #ifndef SORA_CORE_CMDS_H_
 #define SORA_CORE_CMDS_H_
 
-#include "../SoraPlatform.h"
-#include "../SoraEvent.h"
-#include "SoraConsole.h"
-
 namespace sora {
 
-	class SORA_API SoraCoreCmdHandler: public SoraEventHandler, public SoraSingleton<SoraCoreCmdHandler> {
-	protected:
-		friend class SoraSingleton<SoraCoreCmdHandler>;
-		SoraCoreCmdHandler();
-		
-	public:
-		inline void _doCmdSet(SoraConsoleEvent* cev, const std::vector<std::string>& params);
-		inline void _doCmdGet(SoraConsoleEvent* cev, const std::vector<std::string>& params);
-		inline void _doCmdMisc(SoraConsoleEvent* cev, const std::vector<std::string>& params);
-			
-		void onCmdEvent(SoraConsoleEvent* cev);
-	};
-	
+    
 } // namespace sora
 
 #endif // SORA_CORE_CMDS_H_

@@ -13,7 +13,7 @@
 #include "SoraResourceFile.h"
 #include "SoraTexture.h"
 
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 #ifdef OS_OSX
 #include <OpenGL/gl.h> 

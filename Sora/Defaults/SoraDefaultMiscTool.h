@@ -11,7 +11,7 @@
 #define SORA_DEFAULT_MISC_TOOL_H
 
 #include "../SoraMiscTool.h"
-#include "../Debug/SoraInternalLogger.h"
+#include "../SoraLogger.h"
 
 namespace sora {
 	

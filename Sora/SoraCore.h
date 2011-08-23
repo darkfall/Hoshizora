@@ -22,9 +22,9 @@
 #include "SoraDelegate.h"
 #include "SoraInputListeners.h"
 #include "SoraHotkey.h"
+#include "SoraLogger.h"
 
 #include "timer/ITimerManager.h"
-#include "Debug/SoraInternalLogger.h"
 
 #include <map>
 
@@ -195,7 +195,7 @@ namespace sora {
 		void	enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
 	
 		bool    isMainWindowSet() { return bMainWindowSet; }
-		ulong32 createWindow(SoraWindowInfoBase* info);
+		bool    createWindow(SoraWindowInfoBase* info);
 		void    setWindowSize(int32 w, int32 h);
 		void    setWindowTitle(const SoraWString& title);
 		void    setWindowPos(int32 px, int32 py);
@@ -329,6 +329,9 @@ namespace sora {
         inline void _registerEventTypes();
         inline void _updateEnd();
         inline void _regGlobalProducts();
+		inline void _frameListenerStart();
+		inline void _frameListenerEnd();
+        inline void _modifierAdapterUpdate();
 
 		SoraMiscTool*			pMiscTool;
 		SoraRenderSystem*		pRenderSystem;
@@ -367,10 +370,6 @@ namespace sora {
 				
 		typedef std::list<SoraFrameListener*> FRAME_LISTENER_CONT;
 		FRAME_LISTENER_CONT frameListeners;
-
-		inline void _frameListenerStart();
-		inline void _frameListenerEnd();
-        inline void _modifierAdapterUpdate();
 		
 		bool bZBufferArea;
         SoraVector3 mFarPoint;

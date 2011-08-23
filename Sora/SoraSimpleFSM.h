@@ -10,7 +10,7 @@
 #define Sora_SoraSimpleStateMachine_h
 
 #include "SoraPlatform.h"
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 #include <map>
 #include <string>
 

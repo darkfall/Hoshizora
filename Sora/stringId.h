@@ -86,19 +86,19 @@ namespace sora {
 	#define str2idnc(str) SORA_STR_MANAGER->getStringIdNoCache(str)
     
     static stringId GetUniqueStringId(const std::string& name) {
-        return SORA_STR_MANAGER->getStringId(name);
+        return SoraStringManager::Instance()->getStringId(name);
     }
     
     static stringId GetUniqueStringId(const std::wstring& name) {
-        return SORA_STR_MANAGER->getStringId(name);
+        return SoraStringManager::Instance()->getStringId(name);
     }
     
     static SoraString GetStringByUniqueId(stringId sid) {
-        return SORA_STR_MANAGER->getStringById(sid);
+        return SoraStringManager::Instance()->getStringById(sid);
     }
     
     static SoraWString GetStringByUniqueIdW(stringId sid) {
-        return SORA_STR_MANAGER->getStringByIdW(sid);
+        return SoraStringManager::Instance()->getStringByIdW(sid);
     }
 } // namespace sora
 

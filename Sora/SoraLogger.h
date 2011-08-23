@@ -14,8 +14,6 @@
 namespace sora {
     
     
-}
-
-
+} // namespace sora
 
 #endif

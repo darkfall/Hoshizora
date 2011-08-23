@@ -29,7 +29,7 @@
 #include "Defaults/SoraMiscTool_OSX.h"
 #include "Defaults/SoraMiscTool_iOS.h"
 
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 #include "Debug/SoraAutoProfile.h"
 #include "Debug/SoraDebugRenderer.h"
 
@@ -42,7 +42,7 @@
 
 #include "timer/SoraSimpleTimerManager.h"
 
-#include "cmd/CoreCmds.h"
+#include "cmd/SoraConsole.h"
 
 #include "MemoryUsage.h"
 #include "Rect4V.h"
@@ -151,6 +151,8 @@ namespace sora {
         
         _registerEventTypes();
         _regGlobalProducts();
+        
+        new SoraSimpleTimerManager;
 	}
     
     void SoraCore::_regGlobalProducts() {
@@ -193,9 +195,7 @@ namespace sora {
 		pMiscTool = new SoraDefaultMiscTool;
 	}
 
-	void SoraCore::start() {
-        _checkCoreComponents();
-        
+	void SoraCore::start() {        
         try {
             // no main window created
             if(!bMainWindowSet) {
@@ -207,12 +207,17 @@ namespace sora {
                 shutDown();
             }
         } catch(const SoraException& exp) {
-            _postError(exp.what());
+            messageBox(exp.what(), "fatal error", MB_OK);
             shutDown();
         }
         
+        _checkCoreComponents();
+        
         // registering global keypool
         g_keypool = new SoraKeyPool;
+        
+        // startup consoles
+        sora::SoraConsole::Instance();
         
         try {
         // create render target for debug renderer
@@ -477,7 +482,7 @@ namespace sora {
 		exit(0);
 	}
 
-	ulong32 SoraCore::createWindow(SoraWindowInfoBase* info) {
+	bool SoraCore::createWindow(SoraWindowInfoBase* info) {
 		if(mMainWindow == NULL) {
 			iScreenWidth = info->getWindowWidth();
 			iScreenHeight = info->getWindowHeight();
@@ -487,11 +492,7 @@ namespace sora {
 			
 			ulong32 result = pRenderSystem->createWindow(info);
 			if(result) {
-                new SoraSimpleTimerManager;
-                sora::SoraConsole::Instance();
-                sora::SoraCoreCmdHandler::Instance();
-                
-				if(pInput != NULL)
+                if(pInput != NULL)
 					pInput->setWindowHandle(result);
 				pMiscTool->setMainWindowHandle(result);
 				bMainWindowSet = true;
@@ -501,11 +502,9 @@ namespace sora {
 
 				DebugPtr->notice(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mMainWindow->getWindowName().c_str()));
                 
-				return result;
 			} else {
 				_postError("SoraCore::createWindow, createWindow failed");
-				shutDown();
-				return 0;
+				return false;
 			}
 		} else {
             mMainWindow->setActive(false);
@@ -535,7 +534,7 @@ namespace sora {
         g_CurrentTransform.set(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
         g_CurrentClipping.set(0, 0, iScreenWidth, iScreenHeight);
         
-		return 0;
+		return true;
 	}
 
 	void SoraCore::setWindowSize(int32 w, int32 h) {

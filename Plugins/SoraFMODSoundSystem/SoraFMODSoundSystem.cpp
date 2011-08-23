@@ -9,7 +9,7 @@
 #include "SoraFMODSoundSystem.h"
 #include "SoraFMODSoundFile.h"
 #include "SoraCore.h"
-#include "debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 namespace sora {
     

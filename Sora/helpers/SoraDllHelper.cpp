@@ -14,7 +14,7 @@
 #else
 #endif 
 
-#include "../Debug/SoraInternalLogger.h"
+#include "../SoraLogger.h"
 
 #include "../SoraFileUtility.h"
 

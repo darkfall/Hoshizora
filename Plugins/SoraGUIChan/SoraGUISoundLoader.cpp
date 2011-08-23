@@ -10,7 +10,7 @@
 #include "SoraGUISoundLoader.h"
 #include "SoraGUISound.h"
 #include "SoraCore.h"
-#include "debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 namespace gcn {
 	

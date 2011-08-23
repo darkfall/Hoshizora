@@ -9,14 +9,19 @@
 #ifndef Sora_SoraPropertyHolder_h
 #define Sora_SoraPropertyHolder_h
 
-#include "SoraDynRTTIClass.h"
+#include "SoraProperty.h"
+#include "../SoraIteratorHelper.h"
+
+#include <map>
 
 namespace sora {
     
+    template<typename KeyType>
     struct SoraPropertyHolder {
-        typedef std::map<std::string, SoraProperty*> PropertyMap;
-        typedef PropertyMap::const_iterator ConstPropertyIterator;
-        typedef PropertyMap::iterator PropertyIterator;
+        typedef KeyType PropertyKeyType;
+        typedef std::map<PropertyKeyType, SoraPropertyInfo*> PropertyMap;
+        typedef typename PropertyMap::const_iterator ConstPropertyIterator;
+        typedef typename PropertyMap::iterator PropertyIterator;
 
         SoraPropertyHolder() {
             
@@ -24,69 +29,39 @@ namespace sora {
         
         virtual ~SoraPropertyHolder() {}
         
-        virtual SoraDynRTTIClass* getClass() const = 0;
+        SoraPropertyInfo* get(const PropertyKeyType& name) const {
+            ConstPropertyIterator it = mProperties.find(name);
+            if(it == mProperties.end()) {
+                return NULL;
+            }
+            sora_assert(it->second);
+            return it->second;
+        }
         
-        template<typename T>
-        bool getValue(const std::string& name, T& retValue) const {
+        bool add(const PropertyKeyType& name, SoraPropertyInfo* prop) {
             PropertyIterator it = mProperties.find(name);
             if(it == mProperties.end()) {
-                return false;
+                mProperties[name] = prop;
+                return true;
             }
-            sora_assert(it->second);
-            return it->second->getValue<T>(retValue);
+            return false;
         }
         
-        template<typename T>
-        bool setValue(const std::string& name, T& val) {
+        SoraPropertyInfo* remove(const PropertyKeyType& name) {
             PropertyIterator it = mProperties.find(name);
-            if(it == mProperties.end())
-                return false;
-            sora_assert(it->second);
-            return it->second->setValue<T>(val);
+            if(it != mProperties.end()) {
+                SoraPropertyInfo* prop = it->second;
+                mProperties.erase(it);
+                return prop;
+            }
+            return NULL;
         }
         
-        void init() {
-            initProperties(*getClass(), mProperties);
+        size_t size() const {
+            return mProperties.size();
         }
         
-    private:
-        void initProperties(const SoraDynRTTIClass& cls, PropertyMap& properties) {
-            typedef SoraDynRTTIClass::ParentClassMap ParentClassMap;
-
-            const ParentClassMap& parentClass = cls.getParents();
-            ParentClassMap::const_iterator it = parentClass.begin();
-            ParentClassMap::const_iterator end = parentClass.end();
-            for(; it != end; ++it) {
-                initProperties(*(it->second), properties);
-            }
-            
-            typedef SoraDynRTTIClass::PropertyInfoMap PropertyInfoMap;
-            
-            const PropertyInfoMap& defs = cls.getProperties();
-            PropertyInfoMap::const_iterator itDef = defs.begin();
-            PropertyInfoMap::const_iterator defEnd = defs.end();
-            for(; itDef != defEnd; ++itDef) {
-                const SoraPropertyInfo& def = itDef->second;
-                if(def.getName().empty()) {
-                    log_warning("warning: empty property name in class "+cls.getName()+". skipping.");
-                    continue;
-                }
-                
-                ConstPropertyIterator itProp = mProperties.find(def.getName());
-                if(itProp != mProperties.end()) {
-                    mProperties[def.getName()] = def.create();
-                } else {
-                    const SoraPropertyInfo& baseDef = itProp->second->getInfo();
-                    log_warning("warning: class  "+cls.getName()+" attempts to override inherited property "+def.getName());
-                    if(def.getType() == baseDef.getType()) {
-                        log_warning("warning: overriding accepted");
-                        itProp->second->setValue(def.getDefaultValue());
-                    } else {
-                        log_warning("warning: type mismatch, cannot override default value");
-                    }
-                }
-            }
-        }
+        SORA_ITERABLE(typename PropertyMap, mProperties)
         
     private:
         PropertyMap mProperties;

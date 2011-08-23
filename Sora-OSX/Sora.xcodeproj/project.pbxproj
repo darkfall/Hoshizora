@@ -544,6 +544,7 @@
 		8852982013EC4A0600AFFBAD /* SoraSystemEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSystemEvents.h; sourceTree = "<group>"; };
 		885518CD1401EF6D0098B14E /* SoraAutoUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraAutoUpdate.h; sourceTree = "<group>"; };
 		885518CE1401EFC30098B14E /* SoraAutoUpdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraAutoUpdate.cpp; sourceTree = "<group>"; };
+		885518D1140325D20098B14E /* SoraMessageEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMessageEvent.h; sourceTree = "<group>"; };
 		8859220013C1876400EF986E /* OSXIconWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSXIconWrapper.h; sourceTree = "<group>"; };
 		8859220113C187AA00EF986E /* OSXIconWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OSXIconWrapper.mm; sourceTree = "<group>"; };
 		8859220313C1886000EF986E /* SoraiOSStringConv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSStringConv.h; sourceTree = "<group>"; };
@@ -1391,6 +1392,7 @@
 				8852981013EAEA5600AFFBAD /* SoraMessage.cpp */,
 				8852981213EAED2E00AFFBAD /* SoraListener.h */,
 				8852981313EAEFAB00AFFBAD /* SoraListener.cpp */,
+				885518D1140325D20098B14E /* SoraMessageEvent.h */,
 			);
 			path = message;
 			sourceTree = "<group>";

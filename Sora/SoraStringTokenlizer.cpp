@@ -113,4 +113,8 @@ namespace sora {
     void SoraStringTokenlizer::operator=(const char* str) {
         parse(str, std::string());
     }
+    
+    size_t SoraStringTokenlizer::size() const {
+        return mTokens.size();
+    }
 } // namespace sora

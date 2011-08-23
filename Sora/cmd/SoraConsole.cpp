@@ -12,9 +12,9 @@
 #include "../SoraEventManager.h"
 #include "../SoraCore.h"
 #include "../SoraFont.h"
-
+#include "../SoraStringTokenlizer.h"
 #include "../SoraStringConv.h"
-#include "../Debug/SoraInternalLogger.h"
+#include "../SoraLogger.h"
 
 namespace sora {
     
@@ -270,7 +270,12 @@ namespace sora {
     }
 	
 	void SoraConsole::registerCmdHandler(SoraEventHandler* handler, const std::string& cmd) {
-		mHandlers[cmd] = handler;
+        SoraStringTokenlizer tokens(cmd);
+        SoraStringTokenlizer::iterator it = tokens.begin();
+        while(it != tokens.end()) {
+            mHandlers[*it] = handler;
+            ++it;
+        }
 	}
 	
 	void SoraConsole::setFont(SoraFont* font) {

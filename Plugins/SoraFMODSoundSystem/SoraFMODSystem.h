@@ -13,7 +13,7 @@
 #include "fmod/fmod_errors.h"
 
 #include "SoraSingleton.h"
-#include "debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 #include "SoraPlatform.h"
 #ifdef OS_WIN32

@@ -13,7 +13,7 @@
 #include "../SoraException.h"
 #include "../common.h"
 #include "../uncopyable.h"
-#include "../Debug/SoraInternalLogger.h"
+#include "../SoraLogger.h"
 
 #include <map>
 

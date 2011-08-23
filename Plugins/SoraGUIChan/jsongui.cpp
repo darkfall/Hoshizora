@@ -13,7 +13,7 @@
 #include "guichansora.hpp"
 #include "guichansetup.h"
 
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 #include "Modifiers/LabelSliderLinker.h"
 
 #include "SoraCore.h"

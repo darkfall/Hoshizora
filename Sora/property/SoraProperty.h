@@ -12,32 +12,14 @@
 #include "../SoraAny.h"
 #include "../SoraTypeInfo.h"
 #include "../SoraLogger.h"
+#include "../SoraException.h"
+
+#include "../uncopyable.h"
 
 namespace sora {
-    
-    struct SoraProperty;
-    
-    struct SoraPropertyInfo {
-        SoraPropertyInfo(bool readonly=false):
-        mReadOnly(readonly) { }
         
-        SoraPropertyInfo& operator=(const SoraPropertyInfo& rhs) {
-            if(this != &rhs) {
-                mName = rhs.mName;
-                mDescription = rhs.mDescription;
-                mType = rhs.mType;
-                mDefaultValue = rhs.mDefaultValue;
-                return *this;
-            }
-        }
-        
-        template<typename T>
-        SoraPropertyInfo(const std::string& name, const T& defaultValue, const std::string& description=std::string(), bool readonly=false):
-        mName(name),
-        mDescription(description),
-        mType(typeid(T).name()),
-        mDefaultValue(defaultValue),
-        mReadOnly(readonly) {
+    struct SoraPropertyInfo: uncopyable {
+        virtual ~SoraPropertyInfo() {
             
         }
         
@@ -49,79 +31,180 @@ namespace sora {
             return mDescription;
         }
         
-        std::string getType() const {
+        const std::type_info& getType() const {
             return mType;
         }
         
-        SoraAny getDefaultValue() const {
-            return mDefaultValue;
+        bool isReadOnly() const {
+            return mReadOnly;
         }
         
-        SoraProperty* create() const;
+    private:
         
+        SoraPropertyInfo(const std::string& name, const std::type_info& type, const std::string& description=std::string(), bool readonly=false):
+        mName(name),
+        mDescription(description),
+        mType(type),
+        mReadOnly(readonly) {
+            
+        }
+                
     private:
         std::string mName;
         std::string mDescription;
-        std::string mType;
-        
-        SoraAny mDefaultValue;
-        
+                
+        const std::type_info& mType;
         bool mReadOnly;
     };
     
-    struct SoraProperty {
+    template<typename T>
+    struct SoraProperty: public SoraPropertyInfo {
         friend class SoraPropertyInfo;
         
-        template<typename T>
+        SoraProperty(const std::string& name, const T& defaultValue, const std::string& description=std::string(), bool readonly=false):
+        SoraPropertyInfo(name, typeid(T), description, readonly),
+        mValue(defaultValue) {
+            
+        }
+
         bool setValue(const T& v) {
-            if(mReadOnly)
+            if(isReadOnly())
                 return false;
             
-            try {
-                AnyCast<T>(mValue);
-                mValue = v;
-                return true;
-            } catch(BadCastException&) {
-                log_error("SoraProperty::setValue(): type missmatch"+mInfo.getType()+" expected, got "+typeid(v).name());
-                return false;
-            }
+            mValue = v;
+            return true;
         }
         
-        template<typename T>
-        bool getValue(T& v) const {
-            try {
-                v = AnyCast<T>(mValue);
-            } catch (BadCastException&) {
-                return false;
-            }
+        T getValue() const {
+            return AnyCast<T>(mValue);
         }
         
         void setValue(const SoraAny& v) {
             mValue = v;
         }
         
-        const SoraPropertyInfo& getInfo() const {
-            return mInfo;
+    private:
+        SoraAny mValue;
+    };
+    
+    template<typename T>
+    SoraProperty<T>& TryCastProperty(SoraPropertyInfo& prop) {
+        if(typeid(T) != prop.getType()) {
+            THROW_SORA_EXCEPTION(BadCastException, std::string("Invalid cast between ")+typeid(T).name()+" "+prop.getType().name());
+        }
+        return static_cast<SoraProperty<T>& >(prop);
+    }
+    
+    template<typename T>
+    T TryGetProperty(const SoraPropertyInfo& prop) {
+        try {
+            SoraProperty<T>& prop = TryCastProperty<T>(prop);
+            return prop.getValue();
+        } catch(BadCastException) {
+            
+        }
+    }
+    
+    template<typename T>
+    bool TrySetProperty(SoraPropertyInfo& prop, const T& newVal) {
+        try {
+            SoraProperty<T>& prop = TryCastProperty<T>(prop);
+            prop.setValue(newVal);
+            return true;
+        } catch(BadCastException) {
+            return false;
+        }
+    }
+    
+    struct SoraPropertyPtr {
+        SoraPropertyPtr():
+        mProperty(0) {
+            
         }
         
-    private:
-        SoraProperty(const SoraPropertyInfo& info, const SoraAny& defaultVal, const bool readonly):
-        mValue(defaultVal),
-        mInfo(info),
-        mReadOnly(readonly) {
+        SoraPropertyPtr(SoraPropertyInfo* prop):
+        mProperty(prop) {
+            
+        }
+        
+        bool valid() {
+            return mProperty != NULL;
+        }
+        
+        SoraPropertyInfo* get() {
+            return mProperty;
+        }
+        
+        template<typename T>
+        bool is() {
+            if(!valid()) {
+                return false;
+            }
+            
+            try {
+                TryCastProperty<T>(*mProperty);
+                return true;
+            } catch(BadCastException) {
+                return false;
+            }
+        }
+        
+        template<typename T>
+        T to() {
+            if(!valid()) {
+                THROW_SORA_EXCEPTION(NullPointerException, "Ptr not valid");
+            }
+            
+            if(is<T>()) {
+                return TryGetProperty<T>(*mProperty);
+            }
+        }
+        
+        template<typename T>
+        T unsafeTo() {
+            if(!valid()) {
+                THROW_SORA_EXCEPTION(NullPointerException, "Ptr not valid");
+            }
+            
+            return static_cast<SoraProperty<T>&>(*mProperty).getValue();
+        }
+        
+        template<typename T>
+        void set(const T& val) {
+            if(!valid()) {
+                THROW_SORA_EXCEPTION(NullPointerException, "Ptr not valid");
+            }
+            
+            if(is<T>()) {
+                TrySetProperty<T>(*mProperty, val);
+            }
+        }
+        
+        template<typename T>
+        void unsafeSet(const T& val) {
+            if(!valid()) {
+                THROW_SORA_EXCEPTION(NullPointerException, "Ptr not valid");
+            }
+            
+            SoraProperty<T>& prop = static_cast<SoraProperty<T>&>(*mProperty);
+            prop.setValue(val);
+        }
+        
+        SoraPropertyPtr& operator=(const SoraPropertyPtr& rhs) {
+            if(this != &rhs) {
+                mProperty = rhs.mProperty;
+            }
+            return *this;
+        }
+        
+        SoraPropertyPtr(const SoraPropertyPtr& rhs):
+        mProperty(rhs.mProperty) {
             
         }
         
     private:
-        SoraAny mValue;
-        const SoraPropertyInfo& mInfo;
-        bool mReadOnly;
+        SoraPropertyInfo* mProperty;
     };
-    
-    
-    inline SoraProperty* SoraPropertyInfo::create() const {
-        return new SoraProperty(*this, mDefaultValue, mReadOnly);
-    }
 
 } // namespace sora
 

@@ -7,7 +7,7 @@
 //
 
 #include "SoraThreadTask.h"
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 namespace sora {
     

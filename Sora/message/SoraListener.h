@@ -11,7 +11,7 @@
 
 #include "../SoraPlatform.h"
 #include "../SoraDelegate.h"
-#include "../Debug/SoraInternalLogger.h"
+#include "../SoraLogger.h"
 
 #include "SoraMessage.h"
 

@@ -10,7 +10,7 @@
 #include "CoreCmds.h"
 #include "SoraConsole.h"
 
-#include "../Debug/SoraInternalLogger.h"
+#include "../SoraLogger.h"
 
 #include "../SoraCore.h"
 #include "../SoraLocalizer.h"
@@ -19,38 +19,7 @@
 
 namespace sora {
 
-	static SoraCore* sora;
-
-	SoraCoreCmdHandler::SoraCoreCmdHandler() {
-		registerEventFunc(this, &SoraCoreCmdHandler::onCmdEvent);
-		
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "set");
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "get");
-
-		
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "log");
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "save");
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "exit");
-		
-		sora::SoraConsole::Instance()->registerCmdHandler(this, "setlocale");
-		
-		sora = SoraCore::Instance();
-	}
-	
-	void SoraCoreCmdHandler::onCmdEvent(SoraConsoleEvent* cev) {
-		std::vector<std::string> params;
-		deliStr(params, cev->getParams().c_str(), ' ');
-		
-		if(cev->getCmd().compare("set") == 0) {
-			_doCmdSet(cev, params);
-		} else if(cev->getCmd().compare("get") == 0) {
-			_doCmdGet(cev, params);
-		} else {
-			_doCmdMisc(cev, params);
-		}
-	}
-	
-	void SoraCoreCmdHandler::_doCmdSet(SoraConsoleEvent* cev, const std::vector<std::string>& params) {
+    void _doCmdSet(SoraConsoleEvent* cev, const std::vector<std::string>& params) {
 		if(params.size() > 0) {
 			std::string p1 = params[0];
 			size_t dotPos = p1.find('.');
@@ -60,23 +29,23 @@ namespace sora {
 			} else {
 				p1Prev = p1;
 			}
-
+            
 			if(dotPos != std::string::npos) {
 				if(p1Prev.compare("window") == 0 && params.size() >= 2) {
 					std::string p1Param = p1.substr(dotPos+1, p1.size());
 					
 					if(p1Param.compare("width") == 0) {
 						int32 width = atoi(params[1].c_str());
-						sora->setWindowSize(width, sora->getScreenHeight());
+						SoraCore::Instance()->setWindowSize(width, SoraCore::Instance()->getScreenHeight());
 						
 						cev->pushResult("Window.Width seted to "+params[1]);
 					} else if(p1Param.compare("height") == 0) {
 						int32 height = atoi(params[1].c_str());
-						sora->setWindowSize(sora->getScreenWidth(), height);
+						SoraCore::Instance()->setWindowSize(SoraCore::Instance()->getScreenWidth(), height);
 						
 						cev->pushResult("Window.Height seted to "+params[1]);
 					} else if(p1Param.compare("title") == 0) {
-						sora->setWindowTitle(s2ws(params[1]).c_str());
+						SoraCore::Instance()->setWindowTitle(s2ws(params[1]).c_str());
 						
 						cev->pushResult("Window.Title seted to "+params[1]);
 					}
@@ -119,7 +88,7 @@ namespace sora {
 		}
 	}
 	
-	void SoraCoreCmdHandler::_doCmdGet(SoraConsoleEvent* cev, const std::vector<std::string>& params) {
+	void _doCmdGet(SoraConsoleEvent* cev, const std::vector<std::string>& params) {
 		std::string results;
 		if(params.size() > 0) {
 			std::string p1 = params[0];
@@ -136,32 +105,32 @@ namespace sora {
 					std::string p1Param = p1.substr(dotPos+1, p1.size());
 					
 					if(p1Param.compare("width") == 0) {
-						cev->pushResult(vamssg("Window.Width = %d", sora->getScreenWidth()));
-										
+						cev->pushResult(vamssg("Window.Width = %d", SoraCore::Instance()->getScreenWidth()));
+                        
 					} else if(p1Param.compare("height") == 0) {
-						cev->pushResult(vamssg("Window.Width = %d", sora->getScreenHeight()));
-										
+						cev->pushResult(vamssg("Window.Width = %d", SoraCore::Instance()->getScreenHeight()));
+                        
 					} else if(p1Param.compare("title") == 0) {
-						cev->pushResult(vamssg("Window.Width = %s", sora->getMainWindow()->getWindowName().c_str()));
-					
+						cev->pushResult(vamssg("Window.Width = %s", SoraCore::Instance()->getMainWindow()->getWindowName().c_str()));
+                        
 					} 
 				} 
 			} else {
 				if(p1Prev.compare("objnum") == 0) {
 					cev->pushResult(vamssg("Current alive SoraObject number = %d", SoraObjectHandle::getGlobalObjectSize()));
-			
+                    
 				} else if(p1Prev.compare("memuse") == 0) {
-					cev->pushResult(vamssg("Current memory use = %llukb", uint64(sora->getEngineMemoryUsage())));
-
+					cev->pushResult(vamssg("Current memory use = %llukb", uint64(SoraCore::Instance()->getEngineMemoryUsage())));
+                    
 				} else if(p1Prev.compare("rmemuse") == 0) {
-					cev->pushResult(vamssg("Current resource memory use = %llukb", uint64(sora->getResourceMemoryUsage())));
+					cev->pushResult(vamssg("Current resource memory use = %llukb", uint64(SoraCore::Instance()->getResourceMemoryUsage())));
                     
 				} else if(p1Prev.compare("int") == 0 && params.size() >= 2) {
 					cev->pushResult("EnvValue "+vamssg("%s = %d", params[1].c_str(), GET_ENV_INT(params[1].c_str(), 0)));
 					
 				} else if(p1Prev.compare("float") == 0 && params.size() >= 2) {
 					cev->pushResult("EnvValue "+vamssg("%s = %f", params[1].c_str(), GET_ENV_FLOAT(params[1].c_str(), 0.f)));
-
+                    
 					
 				} else if(p1Prev.compare("bool") == 0 && params.size() >= 2) {
 					cev->pushResult("EnvValue "+vamssg("%s = %s", params[1].c_str(), GET_ENV_BOOL(params[1].c_str(), false)?"true":"false"));
@@ -169,13 +138,13 @@ namespace sora {
 				} else if(p1Prev.compare("string") == 0 && params.size() >= 2) {					
 					cev->pushResult("EnvValue "+vamssg("%s = %s", params[1].c_str(), GET_ENV_STRING(params[1].c_str(), "???").c_str()));
 				} else if(p1Prev.compare("fps") == 0) {
-                    cev->pushResult(vamssg("FPS: %.2f", sora->getFPS()));
+                    cev->pushResult(vamssg("FPS: %.2f", SoraCore::Instance()->getFPS()));
                 }
 			}
 		}
 	}
 	
-	void SoraCoreCmdHandler::_doCmdMisc(SoraConsoleEvent* cev, const std::vector<std::string>& params) {
+	void _doCmdMisc(SoraConsoleEvent* cev, const std::vector<std::string>& params) {
 		if(cev->getCmd().compare("log") == 0) {
 			if(params.size() > 0) {
 				for(size_t i=0; i<params.size(); ++i) {
@@ -183,7 +152,7 @@ namespace sora {
 				}
 			}
 		} else if(cev->getCmd().compare("exit") == 0) {
-			sora->shutDown();
+			SoraCore::Instance()->shutDown();
 		} else if(cev->getCmd().compare("save") == 0) {
 			if(params.size() > 0) {
 				std::string result = "Log have been wrote to ";
@@ -196,10 +165,24 @@ namespace sora {
 		} else if(cev->getCmd().compare("setlocale") == 0) {
 			if(params.size() == 1) {
 				SoraLocalizer::Instance()->setCurrentLocale(params[0]);
+                cev->pushResult("locale has been set to "+params[0]);
 			}
 		}
-			
 	}
 	
+	void onCmdEvent(SoraConsoleEvent* cev) {
+		std::vector<std::string> params;
+		deliStr(params, cev->getParams().c_str(), ' ');
+		
+		if(cev->getCmd().compare("set") == 0) {
+			_doCmdSet(cev, params);
+		} else if(cev->getCmd().compare("get") == 0) {
+			_doCmdGet(cev, params);
+		} else {
+			_doCmdMisc(cev, params);
+		}
+	}
 	
-} // namespace sora
+    SORA_DEF_CONSOLE_EVT_FUNC(onCmdEvent, "set,get,setlocale,exit,log,save");
+    
+} // namespace SoraCore::Instance()

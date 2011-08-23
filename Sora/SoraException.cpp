@@ -115,5 +115,6 @@ namespace sora {
     
     SORA_EXCEPTION_IMPL(ApplicationException,   SoraException,      "Application exception")
     SORA_EXCEPTION_IMPL(BadCastException,       RuntimeException,   "Bad cast exception")
+    SORA_EXCEPTION_IMPL(RttiException,          RuntimeException,   "Rtti exception")
 
 } // namespace sora

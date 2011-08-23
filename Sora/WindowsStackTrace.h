@@ -21,7 +21,7 @@
 #pragma comment(lib, "dbghelp.lib")
 
 #include <string>
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 /**
  * Retrived From

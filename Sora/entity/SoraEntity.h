@@ -20,6 +20,27 @@
 
 namespace sora {
     
+#define SORA_DEF_ENTITY(class, description) \
+    SORA_DEF_DYN_RTTI_CLASS(class, description) \
+    public: \
+        static ::sora::SoraEntity* create() { \
+            ::sora::SoraEntity* ent = new class(); \
+            return ent; \
+        } \
+        static void destroy(::sora::SoraEntity* ent) { \
+            if(ent) \
+                delete ent; \
+        } \
+        static class* cast(::sora::SoraEntity*);
+    
+#define SORA_IMPL_ENTITY(class) \
+        SORA_IMPL_DYN_RTTI_CLASS(class) \
+        class* class::cast(::sora::SoraEntity* ent) { \
+            return dynamic_cast<class*>(ent); \
+        }
+    
+    typedef DynRttiClassKeyType PropertyId;
+    
     class SORA_API SoraEntity: public SoraObject, public SoraEntityListenerManager {
     public:
 		SoraEntity();
@@ -48,17 +69,45 @@ namespace sora {
         SoraComponent* removeComponent(const SoraComponent* co);
         SoraComponent* getComponent(const std::string& name);
         
+        SORA_DEF_ENTITY(SoraEntity, "Entity")
+        
+    public:
+        struct SORA_API PropertyAccess: uncopyable {
+            friend class SoraEntity;
+
+            PropertyAccess(SoraDynRTTIClass& holder, const SoraEntity& owner):
+            mHolder(holder),
+            mOwner(owner) { }
+            
+            const SoraEntity& getOwner() const;
+            
+            bool has(const PropertyId& pid);
+            bool add(const PropertyId& pid, SoraPropertyInfo* prop);
+            bool add(const PropertyId& pid, SoraPropertyPtr prop);
+            SoraPropertyInfo* remove(const PropertyId& pid, bool release=true);
+            
+            SoraPropertyPtr get(const PropertyId& pid) const;
+            
+            size_t size() const;
+            
+        private:
+            const SoraEntity& mOwner;
+            SoraDynRTTIClass& mHolder;
+        };
+        
+        PropertyAccess& getProperty();
+        
+    private:
+        PropertyAccess mPropertyAccess;
+        
     private:
         void onEnter(const EntityFsmType&, const EntityFsmType::StateType&);
         void onExit(const EntityFsmType&, const EntityFsmType::StateType&);
         
     protected:
-        NamedValueList mProperties;
-        
         EntityFsmType mFsm;
         
         SoraScriptVMHolder mScriptVM;
-        
         SoraComponentHolder mComponents;
     };
     

@@ -8,7 +8,7 @@
 
 #include "SoraThreadPool.h"
 #include "common.h"
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 #include <stdio.h>
 #include <algorithm>

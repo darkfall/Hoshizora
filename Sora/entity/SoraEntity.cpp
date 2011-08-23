@@ -12,7 +12,11 @@
 
 namespace sora {
     
-    SoraEntity::SoraEntity() {
+    SORA_IMPL_ENTITY(SoraEntity)
+    
+    SoraEntity::SoraEntity():
+    mPropertyAccess(*getRttiClass(),
+                    *this) {
         
     }
     
@@ -80,5 +84,38 @@ namespace sora {
     
     SoraComponent* SoraEntity::getComponent(const std::string& name) {
         return mComponents.getComponent(name);
+    }
+    
+    bool SoraEntity::PropertyAccess::has(const PropertyId& pid) {
+        return mHolder.hasProperty(pid);
+    }
+    
+    bool SoraEntity::PropertyAccess::add(const PropertyId& pid, SoraPropertyInfo* prop) {
+        return mHolder.addProperty(pid, prop);
+    }
+    
+    bool SoraEntity::PropertyAccess::add(const PropertyId& pid, SoraPropertyPtr prop) {
+        return mHolder.addProperty(pid, prop);
+    }
+    
+    SoraPropertyPtr SoraEntity::PropertyAccess::get(const PropertyId& pid) const {
+        return mHolder.getProperty(pid);
+    }
+    
+    size_t SoraEntity::PropertyAccess::size() const {
+        return mHolder.size();
+    }
+    
+    SoraEntity::PropertyAccess& SoraEntity::getProperty() {
+        return mPropertyAccess;
+    }
+    
+    SoraPropertyInfo* SoraEntity::PropertyAccess::remove(const PropertyId& pid, bool release) {
+        SoraPropertyInfo* info = mHolder.removeProperty(pid);
+        if(release) {
+            delete info;
+            info = 0;
+        }
+        return info;
     }
 } // namespace sora

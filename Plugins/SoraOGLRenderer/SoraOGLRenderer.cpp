@@ -9,7 +9,7 @@
 
 #include "SoraOGLRenderer.h"
 
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 #include "SoraStringConv.h"
 #include "SoraFileUtility.h"

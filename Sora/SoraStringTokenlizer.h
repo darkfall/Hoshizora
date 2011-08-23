@@ -37,6 +37,8 @@ namespace sora {
         iterator begin();
         iterator end();
         
+        size_t size() const;
+        
         void operator=(const std::string& str);
         void operator=(const char* str);
         

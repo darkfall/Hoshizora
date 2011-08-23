@@ -12,7 +12,7 @@
 #include "SoraEventManager.h"
 #include "SoraInputQueue.h"
 
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 #include <vector>
 

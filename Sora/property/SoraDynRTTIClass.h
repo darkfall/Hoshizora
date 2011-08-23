@@ -13,16 +13,31 @@
  * Dynamic RTTI class with properties and can be added and deleted in runtime
  **/
 
-#include "SoraProperty.h"
+#include "SoraPropertyHolder.h"
+
 #include "../SoraException.h"
 
 #include <map>
 
 namespace sora {
     
+    typedef std::string DynRttiClassKeyType;
+
+    class SoraDynRTTIClass;
+    
+    struct SoraDynRTTIClassManager {
+        typedef std::map<std::string, SoraDynRTTIClass*> ClassPtrMap;
+        
+        static void insert(SoraDynRTTIClass* cls);
+        static SoraDynRTTIClass* get(const std::string& name);
+        static void erase(SoraDynRTTIClass* cls);
+        
+    private:
+        static ClassPtrMap mClasses;
+    };
+
     class SoraDynRTTIClass {
-    public:
-        typedef std::map<std::string, SoraPropertyInfo> PropertyInfoMap;
+    public:        
         typedef std::map<std::string, SoraDynRTTIClass*> ParentClassMap;
 
         typedef std::vector<std::string> StringList;
@@ -34,7 +49,6 @@ namespace sora {
         
         SoraDynRTTIClass(const std::string& name, const SoraDynRTTIClass& parent):
         mName(name),
-        mProperties(parent.mProperties),
         mParents(parent.mParents) {
             
         }
@@ -49,20 +63,56 @@ namespace sora {
         
         void addParent(const std::string& name) {
             if(!name.empty())
-                mParents[name] = NULL;
+                mParents[name] = SoraDynRTTIClassManager::get(name);
         }
         
-        const PropertyInfoMap& getProperties() const {
-            return mProperties;
+        void delParent(const std::string& name) {
+            if(!name.empty()) {
+                ParentClassMap::iterator it = mParents.find(name);
+                if(it != mParents.end())
+                    mParents.erase(it);
+            }
         }
         
-        void addProperty(const SoraPropertyInfo& prop) {
-            mProperties[prop.getName()] = prop;
+        /**
+         * May throw a NullPointerException
+         **/
+        SoraPropertyPtr getProperty(const DynRttiClassKeyType& key) const {
+            SoraPropertyInfo* prop = mProperties.get(key);
+            if(prop == NULL) {
+                ParentClassMap::const_iterator itParent = mParents.begin();
+                for(itParent; itParent != mParents.end(); ++itParent) {
+                    SoraPropertyPtr propPtr = itParent->second->getProperty(key);
+                    if(propPtr.valid()) 
+                        return propPtr;
+                }
+            }
+            return SoraPropertyPtr();
+        }
+        
+        bool addProperty(const DynRttiClassKeyType& key, SoraPropertyInfo* prop) {
+            return mProperties.add(key, prop);
+        }
+        
+        bool addProperty(const DynRttiClassKeyType& key, SoraPropertyPtr prop) {
+            return mProperties.add(key, prop.get());
+        }
+        
+        bool hasProperty(const DynRttiClassKeyType& key) {
+            return getProperty(key).valid();
+        }
+        
+        SoraPropertyInfo* removeProperty(const DynRttiClassKeyType& key) {
+            return mProperties.remove(key);
+        }
+        
+        size_t size() const {
+            return mProperties.size();
         }
         
     private:
         std::string mName;
-        PropertyInfoMap mProperties;
+        SoraPropertyHolder<DynRttiClassKeyType> mProperties;
         
         ParentClassMap mParents;
         
@@ -72,53 +122,8 @@ namespace sora {
             mParents[name] = cls;
         }
     };
-    
-    struct SoraDynRTTIClassManager {
-        typedef std::map<std::string, SoraDynRTTIClass*> ClassPtrMap;
 
-        void insert(SoraDynRTTIClass* cls) {
-            sora_assert(cls);
-            
-            ClassPtrMap::const_iterator it = mClasses.find(cls->getName());
-            if(it != mClasses.end())
-                THROW_SORA_EXCEPTION(RttiException, "Class already registered");
-            
-            const SoraDynRTTIClass::ParentClassMap& parents = cls->getParents();
-            if(!parents.empty()) {
-                typedef SoraDynRTTIClass::ParentClassMap::const_iterator iterator;
-                iterator it = parents.begin();
-                while(it != parents.end()) {
-                    SoraDynRTTIClass* parentCls = get(it->first);
-                    if(parentCls != NULL)
-                        cls->setParent(it->first, parentCls);
-                    else
-                        THROW_SORA_EXCEPTION(RttiException, "Parent class not found in Class Manager");
-                    
-                    ++it;
-                }
-            }
-            
-            mClasses.insert(std::make_pair(cls->getName(), cls));
-        }
         
-        SoraDynRTTIClass* get(const std::string& name) const {
-            ClassPtrMap::const_iterator it = mClasses.find(name);
-            if(it != mClasses.end()) 
-                return it->second;
-            return NULL;
-        }
-        
-        void erase(SoraDynRTTIClass* cls) {
-            sora_assert(cls);
-            ClassPtrMap::const_iterator it = mClasses.find(cls->getName());
-            if(it != mClasses.end())
-                mClasses.erase(cls->getName());
-        }
-        
-    private:
-        ClassPtrMap mClasses;
-    };
-    
     /**
      * Helper macro to insert rtti class definition into a class
      * Must be used within a class
@@ -127,24 +132,24 @@ namespace sora {
     
 #define SORA_DEF_DYN_RTTI_CLASS(class, description) \
     public: \
-        static std::string className() { \
+        static std::string getClassName() { \
             return std::string(#class); \
         } \
-        static std::string classDescription() { \
+        static std::string getClassDescription() { \
             return std::string(description); \
         } \
-        static sora::SoraDynRTTIClass* cls() { \
+        static sora::SoraDynRTTIClass* getRttiClass() { \
             return &rtti_cls; \
         } \
     private: \
         static sora::SoraDynRTTIClass rtti_cls; \
-    public: \
+    public: 
 
 #define SORA_IMPL_DYN_RTTI_CLASS(class) \
-    ::sora::SoraDynRTTIClass class::rtti_cls(class::className());
+    ::sora::SoraDynRTTIClass class::rtti_cls(class::getClassName());
     
 #define SORA_IMPL_DYN_RTTI_CLASS_1(class, parent) \
-    ::sora::SoraDynRTTIClass class::rtti_cls(class::className(), parent);
+    ::sora::SoraDynRTTIClass class::rtti_cls(class::getClassName(), parent);
     
     
 } // namespace sora

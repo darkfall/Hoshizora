@@ -122,6 +122,7 @@ namespace sora {
     mContext(NULL),
     mSocket(NULL),
     mDelegate(NULL),
+    mThread(NULL),
     mLastEvent(EVT_NOTHING),
     mErrorMssg(std::string()) {
 

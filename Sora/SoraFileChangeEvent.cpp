@@ -10,7 +10,7 @@
 #include "SoraFileChangeEvent.h"
 #include "SoraEventManager.h"
 
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
 
 namespace sora {
 	
