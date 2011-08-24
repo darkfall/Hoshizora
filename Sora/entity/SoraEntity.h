@@ -64,10 +64,14 @@ namespace sora {
         template<typename T>
         SoraConnection subscribeToVMDetached(T);
         
-        void addComponent(const std::string& name, SoraComponent* co);
-        SoraComponent* removeComponent(const std::string& name);
+        void addComponent(const SoraString& name, SoraComponent* co);
+        SoraComponent* removeComponent(const SoraString& name);
         SoraComponent* removeComponent(const SoraComponent* co);
-        SoraComponent* getComponent(const std::string& name);
+        SoraComponent* getComponent(const SoraString& name);
+        
+        template<typename T>
+        void sendMessage(const MessageIdType& message, const T& data);
+        void sendMessageT(SoraMessageEvent* message);
         
         SORA_DEF_ENTITY(SoraEntity, "Entity")
         
@@ -120,6 +124,12 @@ namespace sora {
     SoraConnection SoraEntity::subscribeToVMDetached(T fn) {
         return mScriptVM.subscribeToVMDetached(fn);
     }
+    
+    template<typename T>
+    void SoraEntity::sendMessage(const MessageIdType& message, const T& data) {
+        mComponents.sendMessage(message, data);
+    }
+    
 } // namespace sora
 
 

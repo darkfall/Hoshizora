@@ -33,6 +33,7 @@ namespace sora {
             virtual bool init() = 0;
             virtual void shutdown() = 0;
             virtual void broadcasting(SoraEvent* evt) = 0;
+            virtual void broadcastingDirect(SoraEvent* evt) = 0;
         };
     }
     
@@ -45,6 +46,7 @@ namespace sora {
         bool init();
         void shutdown();
         void broadcasting(SoraEvent* evt);
+        void broadcastingDirect(SoraEvent* evt);
     };
     
 #else 
@@ -62,13 +64,12 @@ namespace sora {
         bool init();
         void shutdown();
         
-        /**
-         * Event maybe temporary stored in the world
-         * So DO NOT use temporary variables as event
-         **/
         void broadcasting(SoraEvent* evt);
+        void broadcastingDirect(SoraEvent* evt);
         
     private:
+        inline void doBroadCasting(SoraEvent* evt, bool destroy=true);
+        
         bool addHandler(SoraEventHandler* handler);
         void removeHandler(SoraEventHandler* handler);
         

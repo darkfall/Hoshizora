@@ -24,6 +24,9 @@ namespace sora {
 
 		virtual	uint32	update(float32 dt);
 		virtual void	render();
+        
+        // inherited from SoraEventHandler
+        virtual void    onUpdate(float32 dt);
 		
 		virtual void	add(SoraObject* pobj);
 		virtual void	del(SoraObject* pobj);
@@ -54,7 +57,7 @@ namespace sora {
 		uint32  getType() const;
 		void    setType(uint32 t);
         
-        void        setNext(SoraObject* obj);
+        void    setNext(SoraObject* obj);
 	
         SoraHandle          getHandleId() const;
         SoraUniqueId        getUniqueId() const;

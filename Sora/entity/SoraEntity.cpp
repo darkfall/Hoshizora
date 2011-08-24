@@ -17,7 +17,8 @@ namespace sora {
     SoraEntity::SoraEntity():
     mPropertyAccess(*getRttiClass(),
                     *this) {
-        
+        // entity can handle SoraMessageEvent and send message to components
+        registerEventFunc(this, &SoraEntity::sendMessageT);
     }
     
     SoraEntity::~SoraEntity() {
@@ -87,7 +88,10 @@ namespace sora {
     }
     
     bool SoraEntity::PropertyAccess::has(const PropertyId& pid) {
-        return mHolder.hasProperty(pid);
+        if(!mHolder.hasProperty(pid)) {
+            return mHolder.hasProperty(pid);
+        }
+        return true;
     }
     
     bool SoraEntity::PropertyAccess::add(const PropertyId& pid, SoraPropertyInfo* prop) {
@@ -99,11 +103,15 @@ namespace sora {
     }
     
     SoraPropertyPtr SoraEntity::PropertyAccess::get(const PropertyId& pid) const {
-        return mHolder.getProperty(pid);
+        SoraPropertyPtr prop =  mHolder.getProperty(pid);
+        if(!prop.valid()) {
+            return mHolder.getProperty(pid);
+        }
+        return prop;
     }
     
     size_t SoraEntity::PropertyAccess::size() const {
-        return mHolder.size();
+        return mHolder.getPropertySize();
     }
     
     SoraEntity::PropertyAccess& SoraEntity::getProperty() {
@@ -117,5 +125,9 @@ namespace sora {
             info = 0;
         }
         return info;
+    }
+    
+    void SoraEntity::sendMessageT(SoraMessageEvent* message) {
+        mComponents.sendMessage(message);
     }
 } // namespace sora

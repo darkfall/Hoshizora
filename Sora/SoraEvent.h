@@ -136,8 +136,9 @@ namespace sora {
         /** 
          * This function would ignore whether the handler is enabled in EventWorld
          *  or not
+         * For compability with older versions of Sora
          **/
-		void handleEvent(SoraEvent*);
+		virtual void handleEvent(SoraEvent*);
 
 		template <class T, class EventT>
 		void registerEventFunc(T*, void (T::*memFn)(EventT*));
@@ -150,6 +151,7 @@ namespace sora {
          **/
         bool listenning(const SoraEventChannel& channel);
         void setChannel(const SoraEventChannel& channel);
+        void fillChannel();
         const SoraEventChannel getChannel() const;
         
         void addChannel(const SoraEventChannel& channel);
@@ -167,7 +169,7 @@ namespace sora {
         SoraEventWorld* getWorld(void);
         bool isEnabled();
         
-        virtual	uint32 update(float32 dt);
+        virtual	void onUpdate(float32 dt);
 	
 	private:
         /**

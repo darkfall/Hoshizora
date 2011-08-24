@@ -21,6 +21,7 @@
 
 #include "SoraTimestamp.h"
 
+
 int main(int argc, char* argv[]) {    
     
     sora::InitAndCreateSoraCore(new mainWindow, 

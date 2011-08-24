@@ -18,26 +18,25 @@ namespace sora {
      * Template class for a event that contains a message 
      * and AnyData
      **/
+
+    typedef SoraString MessageIdType;
     
-    template<typename T>
     class SoraMessageEvent: public SoraEvent {
-    public:
-        typedef T MessageType;
-        
+    public:        
         SoraMessageEvent() { }
         
-        SoraMessageEvent(EventType message):
+        SoraMessageEvent(MessageIdType message):
         mMessageType(message) { }
         
         template<typename T>
-        SoraMessageEvent(EventType message, const T& data):
+        SoraMessageEvent(MessageIdType message, const T& data):
         mMessageType(message),
         mData(data) { }
         
         virtual ~SoraMessageEvent() { } 
         
-        EventType getMessageType() const {
-            return mEventType;
+        MessageIdType getMessage() const {
+            return mMessageType;
         }
         
         template<typename T>
@@ -51,7 +50,7 @@ namespace sora {
         }
         
     private:
-        MessageType mMessageType;
+        MessageIdType mMessageType;
         SoraAny mData;
     };
     

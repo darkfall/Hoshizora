@@ -96,7 +96,7 @@ namespace sora {
     };
     
     template<typename TSource, typename TTarget, typename T>
-    SoraListener<TSource, TTarget, T> MakeListener(const SoraAbstractDelegate<T, void>& fn) {
+    SoraListener<TSource, TTarget, T>* MakeListener(const SoraAbstractDelegate<T, void>& fn) {
         return new SoraListener<TSource, TTarget, T>(fn);
     }
     

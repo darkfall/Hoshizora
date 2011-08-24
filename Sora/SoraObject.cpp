@@ -54,6 +54,10 @@ namespace sora {
         }
 	}
     
+    void SoraObject::onUpdate(float32 dt) {
+        update(dt);
+    }
+    
     void SoraObject::setPositionSource(PositionSource source) {
         mPositionSource = source;
         mPosition = mPositionSource->getPosition();

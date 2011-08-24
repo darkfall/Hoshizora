@@ -10,6 +10,5 @@
 
 namespace sora {
     
-    SORA_IMPL_COMPONENT(SoraComponent)
     
 }

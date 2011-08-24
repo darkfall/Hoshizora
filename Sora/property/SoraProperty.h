@@ -13,11 +13,39 @@
 #include "../SoraTypeInfo.h"
 #include "../SoraLogger.h"
 #include "../SoraException.h"
+#include "../signal/SoraSignal.h"
 
 #include "../uncopyable.h"
 
 namespace sora {
+    /*    
+    class SoraProperty;
         
+    struct SoraPropertyBase {
+        virtual const PropertyIdent& getName() const = 0;
+        
+        virtual SoraStringId getTypeIdentifier() const = 0;
+        
+        virtual void fromString(const PropertyIdent& str) = 0;
+        virtual PropertyIdent toString() = 0;
+    };
+        
+    namespace property {
+    
+        template<typename T>
+        struct ValueHolder {
+            ValueHolder(const T& val, const PropertyIdent& name):
+            mValue(val),
+            mName(name) { }
+
+            T mValue;
+            PropertyIdent mName;
+            
+            typedef ::sora::SoraSignal<void(const SoraProperty&, const T&)> ValueChangedSignalType;
+            ValueChangedSignalType mValueChangedSignal;
+        };
+    } // namespace property*/
+    
     struct SoraPropertyInfo: uncopyable {
         virtual ~SoraPropertyInfo() {
             
@@ -38,8 +66,6 @@ namespace sora {
         bool isReadOnly() const {
             return mReadOnly;
         }
-        
-    private:
         
         SoraPropertyInfo(const std::string& name, const std::type_info& type, const std::string& description=std::string(), bool readonly=false):
         mName(name),
@@ -205,6 +231,21 @@ namespace sora {
     private:
         SoraPropertyInfo* mProperty;
     };
+    
+    template<typename T>
+    SoraProperty<T>* MakePointerProperty(const std::string& name, T* t) {
+        return new SoraProperty<T*>(name, *t);
+    }
+    
+    template<typename T>
+    SoraProperty<T>* MakeValueProperty(const std::string& name, const T& t) {
+        return new SoraProperty<T>(name, t);
+    }
+    
+    template<typename T>
+    SoraProperty<T>* MakeFunctionProperty(const std::string& name, const T& t) {
+        return new SoraProperty<T>(name, t);
+    }
 
 } // namespace sora
 

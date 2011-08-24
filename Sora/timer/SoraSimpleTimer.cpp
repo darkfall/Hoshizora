@@ -45,11 +45,7 @@ namespace sora {
         mStartedTime = start;
         
         mEnabled = true;
-<<<<<<< HEAD
         return true;
-=======
-		return true;
->>>>>>> a3b0d925b0f1a7829ecfd0b18fc3e6e1337e37a3
     }
     
     void SoraSimpleTimer::stop() {

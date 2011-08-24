@@ -76,7 +76,20 @@ namespace sora {
         
         void shutdown();
         
+        /**
+         * Event maybe temporary queued in the world
+         * And be destroyed after published
+         * So DO NOT use temporary variables as event
+         * and DO USE SoraEventFactory to create the event
+         **/
         void broadcasting(SoraEvent* evet);
+        
+        /**
+         * Publish the event imnediately
+         * No queue implemented
+         * And temporary event is acceptable
+         **/
+        void broadcastingDirect(SoraEvent* event);
         
         static SoraEventWorld& defaultWorld(const Parameter& param = Parameter());
         

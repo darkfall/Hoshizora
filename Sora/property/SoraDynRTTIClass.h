@@ -77,7 +77,7 @@ namespace sora {
         /**
          * May throw a NullPointerException
          **/
-        SoraPropertyPtr getProperty(const DynRttiClassKeyType& key) const {
+        virtual SoraPropertyPtr getProperty(const DynRttiClassKeyType& key) const {
             SoraPropertyInfo* prop = mProperties.get(key);
             if(prop == NULL) {
                 ParentClassMap::const_iterator itParent = mParents.begin();
@@ -90,23 +90,23 @@ namespace sora {
             return SoraPropertyPtr();
         }
         
-        bool addProperty(const DynRttiClassKeyType& key, SoraPropertyInfo* prop) {
+        virtual bool addProperty(const DynRttiClassKeyType& key, SoraPropertyInfo* prop) {
             return mProperties.add(key, prop);
         }
         
-        bool addProperty(const DynRttiClassKeyType& key, SoraPropertyPtr prop) {
+        virtual bool addProperty(const DynRttiClassKeyType& key, SoraPropertyPtr prop) {
             return mProperties.add(key, prop.get());
         }
         
-        bool hasProperty(const DynRttiClassKeyType& key) {
+        virtual bool hasProperty(const DynRttiClassKeyType& key) {
             return getProperty(key).valid();
         }
         
-        SoraPropertyInfo* removeProperty(const DynRttiClassKeyType& key) {
+        virtual SoraPropertyInfo* removeProperty(const DynRttiClassKeyType& key) {
             return mProperties.remove(key);
         }
         
-        size_t size() const {
+        size_t getPropertySize() const {
             return mProperties.size();
         }
         

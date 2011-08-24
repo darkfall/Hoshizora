@@ -28,7 +28,7 @@ namespace sora {
      * All sprite creation based on json in core goes there
      **/
     
-    typedef SoraAbstractFactory<SoraSprite, SoraSprite*(const std::wstring&, Json::Value*)> SoraSpriteFactory;
+    typedef SoraAbstractFactory<SoraSprite, SoraSprite*(const SoraWString&, Json::Value*)> SoraSpriteFactory;
         
 #define GlobalSpriteFactory \
     SoraSpriteFactory::Instance()
@@ -36,8 +36,13 @@ namespace sora {
 #define REGISTER_SPRITE_PRODUCT(name, fn) \
     GlobalSpriteFactory->reg(name, fn);
     
+    template<typename T>
+    static void RegisterSpriteType(const std::string& type, const T& fn) {
+        SoraSpriteFactory::Instance()->reg(type, fn);
+    }
+    
     static SoraSprite* CreateSpriteType(const std::string& type, const SoraWString& path, Json::Value* val=NULL) {
-        return GlobalSpriteFactory->createInstance(type, path, val);
+        return SoraSpriteFactory::Instance()->createInstance(type, path, val);
     }
    
     SORA_API void ParseJsonSpriteDef(SoraSprite* sprite, const Json::Value& val);

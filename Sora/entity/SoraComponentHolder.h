@@ -10,6 +10,8 @@
 #define Sora_SoraComponentHolder_h
 
 #include "SoraComponent.h"
+#include "../message/SoraMessageEvent.h"
+
 #include "uncopyable.h"
 
 namespace sora {
@@ -18,19 +20,49 @@ namespace sora {
         SoraComponentHolder() {}
         
         /**
-         * Add a component, may throw a ExistsExceptio
+         * Add a component, may throw a ExistsException
          **/
-        void addComponent(const std::string& tag, SoraComponent* cop);
+        void addComponent(const SoraString& tag, SoraComponent* cop);
         
-        SoraComponent* removeComponent(const std::string& tag);
+        SoraComponent* removeComponent(const SoraString& tag);
         SoraComponent* removeComponent(const SoraComponent*);
         
-        SoraComponent* getComponent(const std::string& tag);
+        SoraComponent* getComponent(const SoraString& tag) const;
+        
+        template<typename T>
+        void sendMessage(const MessageIdType& message, const T& data);
+        void sendMessage(SoraMessageEvent* message);
+        
+        /**
+         * Basic property access
+         * You can use delimeters to access component properties
+         * Such as Movement.speedx
+         * Because we need to tokenlize pid here, it's less efficient
+         * Suggesting use property access methods directly in components
+         **/
+        bool hasProperty(const DynRttiClassKeyType& pid);
+        bool addProperty(const DynRttiClassKeyType& pid, SoraPropertyInfo* prop);
+        bool addProperty(const DynRttiClassKeyType& pid, SoraPropertyPtr prop);
+        SoraPropertyPtr getProperty(const DynRttiClassKeyType& pid);
         
     private:
-        typedef std::map<std::string, SoraComponent*> ComponentMap;
+        typedef std::map<SoraString, SoraComponent*> ComponentMap;
         ComponentMap mComponents;
     };
+    
+    template<typename T>
+    void SoraComponentHolder::sendMessage(const MessageIdType& message, const T& data) {
+        ComponentMap::const_iterator it = mComponents.begin();
+        
+        SoraMessageEvent mssgEvt(message, data);
+        while(it != mComponents.end()) {
+            it->second->onMessage(&mssgEvt);
+            if(mssgEvt.isConsumed()) {
+                break;
+            }
+            ++it;
+        }
+    }
     
 } // namespace sora
 

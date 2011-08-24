@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880087E51404ADA00083B166 /* SoraEventRouter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087E41404ADA00083B166 /* SoraEventRouter.cpp */; };
 		8801A8B513ED9EF100B9A779 /* SoraEventChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8AB13ED9EF100B9A779 /* SoraEventChannel.cpp */; };
 		8801A8B613ED9EF100B9A779 /* SoraEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8AD13ED9EF100B9A779 /* SoraEventFactory.cpp */; };
 		8801A8B813ED9EF100B9A779 /* SoraEventWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8B113ED9EF100B9A779 /* SoraEventWorld.cpp */; };
@@ -276,6 +277,10 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		880087E214049B140083B166 /* SoraTypeSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTypeSerializer.h; sourceTree = "<group>"; };
+		880087E31404AC940083B166 /* SoraEventRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraEventRouter.h; sourceTree = "<group>"; };
+		880087E41404ADA00083B166 /* SoraEventRouter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraEventRouter.cpp; sourceTree = "<group>"; };
+		880087E61404B8FB0083B166 /* SoraComponentFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraComponentFactory.h; sourceTree = "<group>"; };
 		8801A8A113ED0E2C00B9A779 /* UnitTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestCase.h; sourceTree = "<group>"; };
 		8801A8A213ED0E5200B9A779 /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.h; sourceTree = "<group>"; };
 		8801A8A313ED0FC300B9A779 /* SoraUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraUnit.h; sourceTree = "<group>"; };
@@ -1780,6 +1785,7 @@
 				88D7EAA61401E70300FB852B /* SoraComponent.cpp */,
 				88D7EAA11401E61400FB852B /* SoraComponentHolder.h */,
 				88D7EAA41401E6E200FB852B /* SoraComponentHolder.cpp */,
+				880087E61404B8FB0083B166 /* SoraComponentFactory.h */,
 			);
 			path = entity;
 			sourceTree = "<group>";
@@ -1927,6 +1933,8 @@
 		88C2017C13E4812900C039A0 /* event */ = {
 			isa = PBXGroup;
 			children = (
+				880087E31404AC940083B166 /* SoraEventRouter.h */,
+				880087E41404ADA00083B166 /* SoraEventRouter.cpp */,
 				8801A8AB13ED9EF100B9A779 /* SoraEventChannel.cpp */,
 				8801A8AC13ED9EF100B9A779 /* SoraEventChannel.h */,
 				8801A8AD13ED9EF100B9A779 /* SoraEventFactory.cpp */,
@@ -1948,6 +1956,7 @@
 				88D7EA9B1401BC2500FB852B /* SoraDynRTTIClass.cpp */,
 				88D7EA9D1401CDE600FB852B /* SoraPropertyHolder.h */,
 				88D7EA9E1401D24600FB852B /* SoraPropertyHolder.cpp */,
+				880087E214049B140083B166 /* SoraTypeSerializer.h */,
 			);
 			path = property;
 			sourceTree = "<group>";
@@ -1966,6 +1975,7 @@
 				88C2017913E480EE00C039A0 /* factory */,
 				889AB54613E546CE003FDF91 /* entity */,
 				88C2017C13E4812900C039A0 /* event */,
+				885AB35813FF8431006AC2B3 /* scripting */,
 				887F2C10139C6DDA00F534D5 /* helpers */,
 				887F239C1399F41700F534D5 /* cmd */,
 				88AE8E45138D3D2300825F00 /* RTTI */,
@@ -1980,7 +1990,6 @@
 				88AD7F5E13415855000F4F68 /* json */,
 				88DCE61A13666885005FBBE0 /* support */,
 				887C5A7A13D07A540009E508 /* modifiers */,
-				885AB35813FF8431006AC2B3 /* scripting */,
 				88D87D2112A09A66007D6865 /* hgerect.cpp */,
 				88D87D2212A09A66007D6865 /* hgerect.h */,
 				88D87D2312A09A66007D6865 /* hgevector.cpp */,
@@ -2580,6 +2589,7 @@
 				88D7EAA51401E6E200FB852B /* SoraComponentHolder.cpp in Sources */,
 				88D7EAA71401E70300FB852B /* SoraComponent.cpp in Sources */,
 				885518CF1401EFC30098B14E /* SoraAutoUpdate.cpp in Sources */,
+				880087E51404ADA00083B166 /* SoraEventRouter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

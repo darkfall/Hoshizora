@@ -27,12 +27,7 @@ namespace sora {
         if(mShaderContext) {
             return mShaderContext->attachShader(file, entry, type);
         }
-<<<<<<< HEAD
-
         return NULL;
-=======
-		return NULL;
->>>>>>> a3b0d925b0f1a7829ecfd0b18fc3e6e1337e37a3
     }
     
     SoraShader* SoraShaderEnabledObject::attachFragmentShader(const SoraWString& file, const SoraString& entry) {

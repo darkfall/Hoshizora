@@ -81,37 +81,46 @@ namespace sora {
                                     handler));
     }
     
+    void SoraEventWorldImpl::doBroadCasting(SoraEvent* evt, bool destroy) {
+        if(IsSystemEvent(evt)) {
+            SoraSystemEvent* evt = static_cast<SoraSystemEvent*>((evt));
+            switch(evt->getType()) {
+                case SYS_EVT_ADD_HANDLER:
+                    addHandler(evt->getSource());
+                    break;
+                case SYS_EVT_DEL_HANDLER:
+                    addHandler(evt->getSource());
+                    break;
+            }
+        } else {
+            SoraEventHandler* receiver = evt->getReceiver();
+            if(receiver) 
+                receiver->handleEvent(evt);
+            else {
+                EventHandlerList::iterator itHandler = mHandlers.begin();
+                while(itHandler != mHandlers.end()) {
+                    if((*itHandler)->isEnabled() && (*itHandler)->getChannel().listenning(evt->getChannel())) {
+                        (*itHandler)->handleWorldEvent(evt);
+                    }
+                    ++itHandler;
+                }
+            }
+        }
+        
+        if(destroy)
+            mFactory->destroyEvent(evt);
+    }
+    
+    void SoraEventWorldImpl::broadcastingDirect(SoraEvent* evt) {
+        doBroadCasting(evt, false);
+    }
+    
     void SoraEventWorldImpl::update(float32 dt) {
         EventList::iterator itEvent = mCurrEvtList->begin();
         EventList::iterator itEnd = mCurrEvtList->end();
         
         for(itEvent; itEvent != itEnd; ++itEvent) {
-            if(IsSystemEvent(*itEvent)) {
-                SoraSystemEvent* evt = static_cast<SoraSystemEvent*>((*itEvent));
-                switch(evt->getType()) {
-                    case SYS_EVT_ADD_HANDLER:
-                        addHandler((*itEvent)->getSource());
-                        break;
-                    case SYS_EVT_DEL_HANDLER:
-                        addHandler((*itEvent)->getSource());
-                        break;
-                }
-            } else {
-                SoraEventHandler* receiver = (*itEvent)->getReceiver();
-                if(receiver) 
-                    receiver->handleEvent(*itEvent);
-                else {
-                    EventHandlerList::iterator itHandler = mHandlers.begin();
-                    while(itHandler != mHandlers.end()) {
-                        if((*itHandler)->isEnabled() && (*itHandler)->getChannel().listenning((*itEvent)->getChannel())) {
-                            (*itHandler)->handleWorldEvent(*itEvent);
-                        }
-                        ++itHandler;
-                    }
-                }
-            }
-            
-            mFactory->destroyEvent(*itEvent);
+            doBroadCasting(*itEnd);
         }
                            
         EventHandlerList::iterator itHandler = mHandlers.begin();

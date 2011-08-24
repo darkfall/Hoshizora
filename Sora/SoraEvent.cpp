@@ -33,7 +33,7 @@ namespace sora {
     
     void SoraEventHandler::handleSystemEvent(SoraSystemEvent* evt) {
         if(mEnableUpdate && evt->getType() == SYS_EVT_UPDATE) {
-            update(evt->getDelta());
+            onUpdate(evt->getDelta());
             if(mUpdateReceiveEvent)
                 handleEvent(evt);
         }
@@ -104,6 +104,10 @@ namespace sora {
         mChannel = channel;
     }
     
+    void SoraEventHandler::fillChannel() {
+        mChannel.fill();
+    }
+    
     const SoraEventChannel SoraEventHandler::getChannel() const {
         return mChannel;
     }
@@ -132,8 +136,8 @@ namespace sora {
         
     }
     
-    uint32 SoraEventHandler::update(float32 dt) {
-        return 0;
+    void SoraEventHandler::onUpdate(float32 dt) {
+        
     }
     
 } // namespace sora
