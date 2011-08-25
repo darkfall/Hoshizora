@@ -15,6 +15,8 @@
 #include "../SoraDelegate.h"
 #include "../function/SoraFunction.h"
 
+#include "uncopyable.h"
+
 #include <map>
 
 namespace sora {

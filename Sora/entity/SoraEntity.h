@@ -72,7 +72,7 @@ namespace sora {
         template<typename T>
         void sendMessage(const MessageIdType& message, const T& data);
         void sendMessageT(SoraMessageEvent* message);
-        
+                
         SORA_DEF_ENTITY(SoraEntity, "Entity")
         
     public:

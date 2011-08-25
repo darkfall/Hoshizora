@@ -372,7 +372,7 @@ namespace { \
  if disabled, then SoraEvent must give it's unique name for type identification
 */
 #if !defined(SORA_DLL_EXPORT) && !defined(SORA_DLL_IMPORT)
-#define SORA_USE_RTTI
+//#define SORA_USE_RTTI
 #endif
 
 /*

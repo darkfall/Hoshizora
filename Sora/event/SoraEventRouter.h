@@ -6,11 +6,11 @@
 //  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
 //
 
-#ifndef Sora_SoraMessageRouter_h
-#define Sora_SoraMessageRouter_h
+#ifndef Sora_SoraEventRouter_h
+#define Sora_SoraEventRouter_h
 
-#include "SoraEventWorld.h"
 #include "../signal/SoraSignal.h"
+#include "../SoraEvent.h"
 
 namespace sora {
     
@@ -19,8 +19,12 @@ namespace sora {
      * Event it's not a EventHandler
      * Useful for message handling
      **/
-    struct SoraEventRouter: public SoraEventHandler {
-        typedef SoraEvent EventType;
+    class SoraEvent;
+    
+    template<typename T = sora::SoraEvent>
+    class SoraEventRouter: public SoraEventHandler {
+    public:
+        typedef T EventType;
         typedef SoraSignal<void(EventType*)> SignalType;
         
         SoraEventRouter();
@@ -30,7 +34,7 @@ namespace sora {
          * Redirect events to signal connections
          * Inherited from SoraEventHandler
          **/
-        virtual void handleEvent(SoraEvent*);
+        void handleEvent(SoraEvent*);
         
         /**
          * Connect to the router using direct function
@@ -40,17 +44,14 @@ namespace sora {
          * EventHandlers can use like SoraBind(this, &MY_CLASS::handleEvent)
          * and let it handle the event itself
          **/
-        template<typename T>
-        SoraConnection connect(const T&);
+        template<typename FN>
+        SoraConnection connect(const FN& func) {
+            return mConnections.connect(SignalType::slot_type(func));
+        }
         
-    private:
+    protected:
         SignalType mConnections;
     };
-    
-    template<typename T>
-    SoraConnection SoraEventRouter::connect(const T& func) {
-        return mConnections.connect(SignalType::slot_type(func));
-    }
     
 } // namespace sora
 

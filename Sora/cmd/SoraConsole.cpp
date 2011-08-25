@@ -61,7 +61,7 @@ namespace sora {
 		mResultColor = 0xFF22DD00;
 		
 		mActive = false;
-		mActiveKeyId = SORA->registerGlobalHotkey(SoraHotkey(SORA_KEY_GRAVE), this);
+		mActiveKeyId = SoraCore::Instance()->registerGlobalHotkey(SoraHotkey(SORA_KEY_GRAVE), this);
 		
 		mBackspaceDown = false;
 		mBackspaceTime = 0.f;

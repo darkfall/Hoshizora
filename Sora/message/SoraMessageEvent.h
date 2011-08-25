@@ -40,14 +40,19 @@ namespace sora {
         }
         
         template<typename T>
-        void setData(const T& data) {
+        inline void setData(const T& data) {
             mData = data;
         }
         
+        /**
+         * May throw a exception
+         **/
         template<typename T>
-        T getData() const {
+        inline T getData() const {
             return AnyCast<T>(mData);
         }
+        
+        SORA_EVENT_IDENTIFIER(str2id("SoraMessageEvent"));
         
     private:
         MessageIdType mMessageType;

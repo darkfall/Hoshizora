@@ -16,7 +16,6 @@
 #include <list>
 #include <algorithm>
 
-#include "Serializable.h"
 #include <cassert>
 
 namespace sora {
@@ -38,7 +37,7 @@ namespace sora {
 		stringId mName;
 	};
 	
-	class SORA_API SoraNamedObjectList: public Serializable {
+	class SORA_API SoraNamedObjectList {
 	public:
 		typedef std::list<SoraNamedObject*> OBJ_LIST;
 

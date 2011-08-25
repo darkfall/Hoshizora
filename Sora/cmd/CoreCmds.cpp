@@ -16,6 +16,7 @@
 #include "../SoraLocalizer.h"
 #include "../SoraEventManager.h"
 #include "../SoraObjectHandle.h"
+#include "../SoraGlobalMessageRouter.h"
 
 namespace sora {
 
@@ -164,7 +165,7 @@ namespace sora {
 			}
 		} else if(cev->getCmd().compare("setlocale") == 0) {
 			if(params.size() == 1) {
-				SoraLocalizer::Instance()->setCurrentLocale(params[0]);
+                SendMessage("setlocale", params[0]);
                 cev->pushResult("locale has been set to "+params[0]);
 			}
 		}

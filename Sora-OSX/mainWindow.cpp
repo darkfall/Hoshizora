@@ -54,7 +54,6 @@ sora::SoraSprite* spr;
 
 void myRenderFunc(sora::SoraObject* obj) {
     spr->render();
-
 }
 
 bool mainWindow::renderFunc() {

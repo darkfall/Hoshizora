@@ -35,10 +35,10 @@ namespace sora {
         typedef SoraMovable* PositionSource;
         void setPositionSource(PositionSource source);
 		
-		virtual void    setPosition(float32 _x, float32 _y);
+		virtual void    setPosition(float32 x, float32 y);
 		virtual float32 getPositionX() const;
 		virtual float32 getPositionY() const;
-        virtual void    getPosition(float32& _x, float32& _y)  const;
+        virtual void    getPosition(float32& x, float32& y) const;
         
         virtual float32 getAbsolutePositionX() const;
         virtual float32 getAbsolutePositionY() const;

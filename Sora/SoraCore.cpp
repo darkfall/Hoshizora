@@ -1460,5 +1460,5 @@ namespace sora {
         *y = (*y - mFarPoint.y) * scale + mFarPoint.y;
         return scale;
     }
-    
+
 } // namespace sora

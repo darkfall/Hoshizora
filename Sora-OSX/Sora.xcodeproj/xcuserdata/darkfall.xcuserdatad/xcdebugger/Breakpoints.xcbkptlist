@@ -313,11 +313,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraLocalizer.cpp"
-         timestampString = "322465520.97877"
+         timestampString = "335916407.91738"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
          landmarkName = "SoraLocalizer::addLocaleConf(const SoraWString&amp; confPath)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -383,11 +383,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "335807335.446652"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47">
+         startingLineNumber = "45"
+         endingLineNumber = "45">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -409,11 +409,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "335807335.446652"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "58"
-         endingLineNumber = "58">
+         startingLineNumber = "56"
+         endingLineNumber = "56">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -627,11 +627,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "428"
-         endingLineNumber = "428"
+         startingLineNumber = "427"
+         endingLineNumber = "427"
          landmarkName = "mainWindow::onKeyEvent(sora::SoraKeyEvent* kev)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -641,11 +641,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "408"
-         endingLineNumber = "408"
+         startingLineNumber = "407"
+         endingLineNumber = "407"
          landmarkName = "mainWindow::onKeyEvent(sora::SoraKeyEvent* kev)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -821,11 +821,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "396"
-         endingLineNumber = "396"
+         startingLineNumber = "395"
+         endingLineNumber = "395"
          landmarkName = "mainWindow::onKeyEvent(sora::SoraKeyEvent* kev)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -849,11 +849,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "409"
-         endingLineNumber = "409"
+         startingLineNumber = "408"
+         endingLineNumber = "408"
          landmarkName = "mainWindow::onKeyEvent(sora::SoraKeyEvent* kev)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1031,11 +1031,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "390"
-         endingLineNumber = "390"
+         startingLineNumber = "389"
+         endingLineNumber = "389"
          landmarkName = "mainWindow::onKeyEvent(sora::SoraKeyEvent* kev)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1097,11 +1097,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "307"
-         endingLineNumber = "307"
+         startingLineNumber = "306"
+         endingLineNumber = "306"
          landmarkName = "mainWindow::onKeyEvent(sora::SoraKeyEvent* kev)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1403,11 +1403,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335423650.139122"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
          landmarkName = "mainWindow::renderFunc()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1431,11 +1431,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraObject.cpp"
-         timestampString = "335423021.397109"
+         timestampString = "335912865.494352"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99">
+         startingLineNumber = "103"
+         endingLineNumber = "103">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1455,11 +1455,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335423650.139122"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
          landmarkName = "myRenderFunc(sora::SoraObject* obj)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -1525,11 +1525,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
          landmarkName = "mainWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1539,11 +1539,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "335807335.446652"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "40"
-         endingLineNumber = "40"
+         startingLineNumber = "38"
+         endingLineNumber = "38"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
@@ -1553,11 +1553,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
+         timestampString = "335914593.34743"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
          landmarkName = "mainWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1623,11 +1623,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/signal/SoraSignal.h"
-         timestampString = "335520391.285567"
+         timestampString = "335937578.630334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "154"
-         endingLineNumber = "154">
+         startingLineNumber = "156"
+         endingLineNumber = "156">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1635,11 +1635,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/signal/SoraSignal.h"
-         timestampString = "335520391.285567"
+         timestampString = "335937578.630334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
          landmarkName = "connect(int32 priority, const F&amp; f)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -1759,11 +1759,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/signal/SoraSignal.h"
-         timestampString = "335520391.285567"
+         timestampString = "335937578.630334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155">
+         startingLineNumber = "157"
+         endingLineNumber = "157">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1811,11 +1811,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/signal/SoraSignal.h"
-         timestampString = "335520391.285567"
+         timestampString = "335937578.630334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "171"
-         endingLineNumber = "171"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
          landmarkName = "connect(int32 priority, const F&amp; f)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -1867,11 +1867,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/signal/SoraSignal.h"
-         timestampString = "335520391.285567"
+         timestampString = "335937578.630334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "175"
-         endingLineNumber = "175"
+         startingLineNumber = "177"
+         endingLineNumber = "177"
          landmarkName = "connect(int32 priority, const F&amp; f)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -1881,11 +1881,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/signal/SoraSignal.h"
-         timestampString = "335347409.758488"
+         timestampString = "335937578.630334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "39"
-         endingLineNumber = "39">
+         startingLineNumber = "41"
+         endingLineNumber = "41">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1897,9 +1897,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "320"
-         endingLineNumber = "320"
-         landmarkName = "SoraKeyPool::pollListenerEvents()"
-         landmarkType = "5">
+         endingLineNumber = "320">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1912,7 +1910,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "319"
          endingLineNumber = "319"
-         landmarkName = "SoraKeyPool::pollListenerEvents()"
+         landmarkName = "SoraKeyPool::onFrameEnd()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2047,11 +2045,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334337356.87053"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "38"
-         endingLineNumber = "38"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
          landmarkName = "onSystemEvent(sora::SoraSystemEvent* evt)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -2061,11 +2059,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339381.112443"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "61"
-         endingLineNumber = "61"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
          landmarkName = "run(TestResult* result)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2075,11 +2073,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339531.65866"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
          landmarkName = "run(TestResult* result)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2089,11 +2087,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339381.112443"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
          landmarkName = "run(TestResult* result)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2117,11 +2115,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334338601.157239"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
          landmarkName = "onMyEvent(myEvent* evt)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -2131,11 +2129,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339531.65866"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "73"
-         endingLineNumber = "73"
+         startingLineNumber = "75"
+         endingLineNumber = "75"
          landmarkName = "run(TestResult* result)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2145,11 +2143,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339531.65866"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "87"
-         endingLineNumber = "87"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
          landmarkName = "run(TestResult* result)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2159,11 +2157,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339531.65866"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
          landmarkName = "run(TestResult* result)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2173,25 +2171,25 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339531.65866"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "83"
-         endingLineNumber = "83"
-         landmarkName = "run(TestResult* result)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339531.65866"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "85"
          endingLineNumber = "85"
+         landmarkName = "run(TestResult* result)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
+         timestampString = "335937052.425013"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "run(TestResult* result)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2255,11 +2253,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/UnitTest/TestCases/Test_EventWorld.h"
-         timestampString = "334339406.877437"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "48"
-         endingLineNumber = "48"
+         startingLineNumber = "50"
+         endingLineNumber = "50"
          landmarkName = "update(float32 dt)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -2475,46 +2473,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "mainWindow.cpp"
-         timestampString = "335648497.958778"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "104"
-         endingLineNumber = "104"
-         landmarkName = "mainWindow::init()"
-         landmarkType = "5">
-         <Locations>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "mainWindow::init()"
-               urlString = "file://localhost/mainWindow.cpp"
-               timestampString = "335499354.394853"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "98"
-               endingLineNumber = "98">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "__static_initialization_and_destruction_0"
-               urlString = "file://localhost/mainWindow.cpp"
-               timestampString = "335499354.395199"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "98"
-               endingLineNumber = "98">
-            </Location>
-         </Locations>
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraFreetypeFont/SoraFTFontManager.cpp"
          timestampString = "335506931.391492"
@@ -2571,11 +2529,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "335807335.446652"
+         timestampString = "335937052.425013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "32"
-         endingLineNumber = "32"
+         startingLineNumber = "30"
+         endingLineNumber = "30"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
@@ -2585,11 +2543,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraCore.h"
-         timestampString = "335717140.908321"
+         timestampString = "335936474.780594"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "379"
-         endingLineNumber = "379"
+         startingLineNumber = "382"
+         endingLineNumber = "382"
          landmarkName = "InitAndCreateSoraCore(SoraWindowInfoBase* window, const SoraCore::Parameter&amp; param = SoraCore::Parameter())"
          landmarkType = "7">
       </FileBreakpoint>
@@ -2625,11 +2583,149 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/signal/SoraSignal.h"
-         timestampString = "335516283.257337"
+         timestampString = "335937578.630334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79">
+         startingLineNumber = "81"
+         endingLineNumber = "81">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/SoraLocalizer.cpp"
+         timestampString = "335936474.780594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
+         landmarkName = "SoraLocalizer::onMessage(SoraMessageEvent* message)"
+         landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "sora::SoraLocalizer::onMessage(sora::SoraMessageEvent*)"
+               urlString = "file://localhost/SoraLocalizer.cpp"
+               timestampString = "335938188.668378"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "40"
+               endingLineNumber = "40">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "__static_initialization_and_destruction_0"
+               urlString = "file://localhost/SoraLocalizer.cpp"
+               timestampString = "335938188.668708"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "40"
+               endingLineNumber = "40">
+            </Location>
+         </Locations>
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/cmd/SoraConsole.cpp"
+         timestampString = "335936578.936423"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "389"
+         endingLineNumber = "389"
+         landmarkName = "SoraConsole::onKeyEvent(SoraKeyEvent* kev)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/SoraEvent.cpp"
+         timestampString = "335936678.808036"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "23"
+         endingLineNumber = "23"
+         landmarkName = "SoraEventHandler::handleEvent(SoraEvent* event)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/message/SoraMessageRouter.h"
+         timestampString = "335937833.690878"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "handleEvent(SoraEvent* evt)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/message/SoraMessageRouter.h"
+         timestampString = "335937833.690878"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
+         landmarkName = "handleEvent(SoraEvent* evt)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/SoraGlobalMessageRouter.h"
+         timestampString = "335938169.084384"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
+         landmarkName = "SoraGlobalMessageRouter::acceptMessage(const MessageIdType&amp; message, const T&amp; fn)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/SoraGlobalMessageRouter.cpp"
+         timestampString = "335938169.084384"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "19"
+         endingLineNumber = "19"
+         landmarkName = "SoraGlobalMessageRouter::sendMessage(SoraMessageEvent* evt)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/message/SoraMessageRouter.h"
+         timestampString = "335937859.869742"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "handleEvent(SoraEvent* evt)"
+         landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>
    <SymbolicBreakpoints>

@@ -27,6 +27,10 @@ namespace sora {
         SoraComponentFactory::Instance()->createInstance(name, entity);
     }
     
+    static void DestroyComponent(SoraComponent* comp) {
+        delete comp;
+    }
+    
 } // namespace sora
 
 

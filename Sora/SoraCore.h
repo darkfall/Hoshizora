@@ -29,7 +29,7 @@
 #include <map>
 
 namespace sora {
-		
+    
 	class SORA_API SoraCore: public SoraEventHandler {
 	protected:
 		SoraCore();
@@ -316,7 +316,7 @@ namespace sora {
         SoraVector3 getFarPoint() const;
         float       transform3DPoint(SoraVector3* point);
 		float       transform3DPoint(float* x, float* y, float* z);
-        
+   
 	private:
         static SoraCore* mInstance;
         
@@ -383,7 +383,8 @@ namespace sora {
     }
     
     typedef SoraCore::Parameter SoraCoreParameter;
-
+    
+    
 #define SORA SoraCore::Instance()
 
 } // namespace sora

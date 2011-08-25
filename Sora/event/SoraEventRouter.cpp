@@ -11,15 +11,13 @@
 
 namespace sora {
     
-    struct TempEventHandler {
-        
-    };
-    
-    SoraEventRouter::SoraEventRouter() {
+    template<typename T>
+    SoraEventRouter<T>::SoraEventRouter() {
         
     }
     
-    void SoraEventRouter::handleEvent(SoraEvent* evt) {
+    template<typename T>
+    void SoraEventRouter<T>::handleEvent(SoraEvent* evt) {
         mConnections.sig(evt);
     }
 

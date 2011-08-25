@@ -8,6 +8,8 @@
  */
 
 #include "SoraLocalizer.h"
+#include "SoraGlobalMessageRouter.h"
+#include "function/SoraBind.h"
 
 namespace sora {
 
@@ -25,10 +27,25 @@ namespace sora {
 			mInstance = NULL;
 		}
 	}
+    
+    SoraLocalizer::SoraLocalizer() {
+        AcceptMessage("setlocale", sora::Bind(this, &SoraLocalizer::onMessage));
+    }
 	
 	SoraLocalizer::~SoraLocalizer() {
 	}
 	
+    void SoraLocalizer::onMessage(SoraMessageEvent* message) {
+        try {
+            SoraString data = message->getData<SoraString>();
+            setCurrentLocale(data);
+            
+            message->consume();
+        } catch(...) {
+            
+        }
+    }
+    
 	bool SoraLocalizer::readToken(llexer* lexer, Token tokenExpected) {
 		return (lexer->getNextToken() == tokenExpected);
 	}

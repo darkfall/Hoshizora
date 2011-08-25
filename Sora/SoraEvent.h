@@ -16,9 +16,12 @@ namespace sora {
     class SoraEventHandler;
 	
 #define SORA_EVENT_IDENTIFIER(ident) \
-    virtual sora::stringId getEventIdentifier() const { \
+    sora::SoraStringId getEventIdentifier() const { \
+        return ident; \
+    } \
+    static sora::SoraStringId GetEventIdentifier() { \
 		return ident; \
-	} \
+	}
     
 	class SORA_API SoraEvent {
 	protected:
@@ -40,10 +43,10 @@ namespace sora {
             return mSender;
         }
 		
-		void setName(stringId _name) { 
+		void setName(SoraStringId _name) { 
             mName = _name;
         }
-		stringId getName() const { 
+		SoraStringId getName() const { 
             return mName;
         }
 		
@@ -51,10 +54,7 @@ namespace sora {
 		void consume() { mConsumed = true; }
 		bool isConsumed() const { return mConsumed; }
 		
-#ifndef SORA_USE_RTTI
-		virtual stringId getEventIdentifier() const = 0;
-#endif
-		
+        virtual SoraStringId getEventIdentifier() const = 0;
         /**
          * added for event world
          **/
@@ -86,7 +86,7 @@ namespace sora {
 	class SORA_API SoraHandlerFunctionBase {
 	public:
 		virtual ~SoraHandlerFunctionBase() {};
-		void exec(SoraEvent* event) { call(event);}
+		inline void exec(SoraEvent* event) { call(event);}
 
 	private:
 		virtual void call(SoraEvent*) = 0;
@@ -98,7 +98,7 @@ namespace sora {
 		typedef void (T::*MemberFunc)(EventT*);
 		SoraMemberFunctionHandler(T* instance, MemberFunc memFn) : _instance(instance), _function(memFn) {};
 
-		void call(SoraEvent* event) {
+		inline void call(SoraEvent* event) {
 			(_instance->*_function)(static_cast<EventT*>(event));
 		}
 
@@ -114,7 +114,7 @@ namespace sora {
 		 
 		SoraFuncFunctionHandler(EventFunc func): _func(func) {}
 		
-		void call(SoraEvent* ev) {
+		inline void call(SoraEvent* ev) {
 			_func(static_cast<EventT*>(ev));
 		}
 		

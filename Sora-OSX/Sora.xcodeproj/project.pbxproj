@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		880087E51404ADA00083B166 /* SoraEventRouter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087E41404ADA00083B166 /* SoraEventRouter.cpp */; };
+		880087EA140559A40083B166 /* SoraConfigurationTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087E9140559A40083B166 /* SoraConfigurationTree.cpp */; };
+		880087ED140559FE0083B166 /* SoraConfigurationLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087EC140559FE0083B166 /* SoraConfigurationLoader.cpp */; };
+		880087FE14057B570083B166 /* ticpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087F514057B570083B166 /* ticpp.cpp */; };
+		880087FF14057B570083B166 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087F814057B570083B166 /* tinystr.cpp */; };
+		8800880014057B570083B166 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087FA14057B570083B166 /* tinyxml.cpp */; };
+		8800880114057B570083B166 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087FC14057B570083B166 /* tinyxmlerror.cpp */; };
+		8800880214057B570083B166 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880087FD14057B570083B166 /* tinyxmlparser.cpp */; };
+		880088051405EF2F0083B166 /* SoraGlobalMessageRouter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880088041405EF2B0083B166 /* SoraGlobalMessageRouter.cpp */; };
 		8801A8B513ED9EF100B9A779 /* SoraEventChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8AB13ED9EF100B9A779 /* SoraEventChannel.cpp */; };
 		8801A8B613ED9EF100B9A779 /* SoraEventFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8AD13ED9EF100B9A779 /* SoraEventFactory.cpp */; };
 		8801A8B813ED9EF100B9A779 /* SoraEventWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8B113ED9EF100B9A779 /* SoraEventWorld.cpp */; };
 		8801A8B913ED9EF100B9A779 /* SoraEventWorldImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8B313ED9EF100B9A779 /* SoraEventWorldImpl.cpp */; };
 		8801A8BC13ED9F5600B9A779 /* SoraEventManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8BA13ED9F5500B9A779 /* SoraEventManager.cpp */; };
 		8801A8BF13EE800300B9A779 /* SoraShaderEnabled.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8BE13EE800100B9A779 /* SoraShaderEnabled.cpp */; };
-		8801A8CA13EF79AF00B9A779 /* ticpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8C113EF79AF00B9A779 /* ticpp.cpp */; };
-		8801A8CB13EF79AF00B9A779 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8C413EF79AF00B9A779 /* tinystr.cpp */; };
-		8801A8CC13EF79AF00B9A779 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8C613EF79AF00B9A779 /* tinyxml.cpp */; };
-		8801A8CD13EF79AF00B9A779 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8C813EF79AF00B9A779 /* tinyxmlerror.cpp */; };
-		8801A8CE13EF79AF00B9A779 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8C913EF79AF00B9A779 /* tinyxmlparser.cpp */; };
 		8801A95E13EF79C200B9A779 /* actionevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8D113EF79C200B9A779 /* actionevent.cpp */; };
 		8801A95F13EF79C200B9A779 /* basiccontainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8D413EF79C200B9A779 /* basiccontainer.cpp */; };
 		8801A96013EF79C200B9A779 /* cliprectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8801A8D613EF79C200B9A779 /* cliprectangle.cpp */; };
@@ -281,6 +284,26 @@
 		880087E31404AC940083B166 /* SoraEventRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraEventRouter.h; sourceTree = "<group>"; };
 		880087E41404ADA00083B166 /* SoraEventRouter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraEventRouter.cpp; sourceTree = "<group>"; };
 		880087E61404B8FB0083B166 /* SoraComponentFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraComponentFactory.h; sourceTree = "<group>"; };
+		880087E8140554240083B166 /* SoraConfigurationTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraConfigurationTree.h; sourceTree = "<group>"; };
+		880087E9140559A40083B166 /* SoraConfigurationTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraConfigurationTree.cpp; sourceTree = "<group>"; };
+		880087EB140559F60083B166 /* SoraConfigurationLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraConfigurationLoader.h; sourceTree = "<group>"; };
+		880087EC140559FE0083B166 /* SoraConfigurationLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraConfigurationLoader.cpp; sourceTree = "<group>"; };
+		880087EE140564250083B166 /* SoraMessageRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMessageRouter.h; sourceTree = "<group>"; };
+		880087F014057B420083B166 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
+		880087F114057B420083B166 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
+		880087F214057B420083B166 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
+		880087F314057B420083B166 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
+		880087F514057B570083B166 /* ticpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ticpp.cpp; sourceTree = "<group>"; };
+		880087F614057B570083B166 /* ticpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ticpp.h; sourceTree = "<group>"; };
+		880087F714057B570083B166 /* ticpprc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ticpprc.h; sourceTree = "<group>"; };
+		880087F814057B570083B166 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
+		880087F914057B570083B166 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
+		880087FA14057B570083B166 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		880087FB14057B570083B166 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		880087FC14057B570083B166 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		880087FD14057B570083B166 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		880088031405EB6A0083B166 /* SoraGlobalMessageRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGlobalMessageRouter.h; sourceTree = "<group>"; };
+		880088041405EF2B0083B166 /* SoraGlobalMessageRouter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraGlobalMessageRouter.cpp; sourceTree = "<group>"; };
 		8801A8A113ED0E2C00B9A779 /* UnitTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestCase.h; sourceTree = "<group>"; };
 		8801A8A213ED0E5200B9A779 /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.h; sourceTree = "<group>"; };
 		8801A8A313ED0FC300B9A779 /* SoraUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraUnit.h; sourceTree = "<group>"; };
@@ -302,15 +325,6 @@
 		8801A8BB13ED9F5500B9A779 /* SoraEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraEventManager.h; sourceTree = "<group>"; };
 		8801A8BD13EE674700B9A779 /* SoraShaderEnabled.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraShaderEnabled.h; sourceTree = "<group>"; };
 		8801A8BE13EE800100B9A779 /* SoraShaderEnabled.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraShaderEnabled.cpp; sourceTree = "<group>"; };
-		8801A8C113EF79AF00B9A779 /* ticpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ticpp.cpp; sourceTree = "<group>"; };
-		8801A8C213EF79AF00B9A779 /* ticpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ticpp.h; sourceTree = "<group>"; };
-		8801A8C313EF79AF00B9A779 /* ticpprc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ticpprc.h; sourceTree = "<group>"; };
-		8801A8C413EF79AF00B9A779 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
-		8801A8C513EF79AF00B9A779 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
-		8801A8C613EF79AF00B9A779 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
-		8801A8C713EF79AF00B9A779 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
-		8801A8C813EF79AF00B9A779 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
-		8801A8C913EF79AF00B9A779 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		8801A8D113EF79C200B9A779 /* actionevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = actionevent.cpp; sourceTree = "<group>"; };
 		8801A8D213EF79C200B9A779 /* actionevent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actionevent.hpp; sourceTree = "<group>"; };
 		8801A8D313EF79C200B9A779 /* actionlistener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actionlistener.hpp; sourceTree = "<group>"; };
@@ -506,7 +520,6 @@
 		88374D8C1325A12900369B12 /* AutoContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoContainer.h; sourceTree = "<group>"; };
 		88374E371325A9B600369B12 /* SoraMemoryBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMemoryBuffer.h; sourceTree = "<group>"; };
 		88374E391325A9B600369B12 /* SoraNamedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraNamedObject.h; sourceTree = "<group>"; };
-		8837504E1325F42900369B12 /* Serializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serializable.h; sourceTree = "<group>"; };
 		883767F613BD0E5700DC2543 /* SoraModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraModifier.h; sourceTree = "<group>"; };
 		8842BABE13C5BB680077171F /* SoraTimestamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraTimestamp.cpp; sourceTree = "<group>"; };
 		8842BABF13C5BB680077171F /* SoraTimestamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTimestamp.h; sourceTree = "<group>"; };
@@ -947,7 +960,6 @@
 		88D87D2912A09A66007D6865 /* Rect4V.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect4V.h; sourceTree = "<group>"; };
 		88D87D2A12A09A66007D6865 /* SoraAutoPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraAutoPtr.h; sourceTree = "<group>"; };
 		88D87D2B12A09A66007D6865 /* SoraColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraColor.h; sourceTree = "<group>"; };
-		88D87D2C12A09A66007D6865 /* SoraComponentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraComponentType.h; sourceTree = "<group>"; };
 		88D87D2D12A09A66007D6865 /* SoraCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraCore.cpp; sourceTree = "<group>"; };
 		88D87D2E12A09A66007D6865 /* SoraCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCore.h; sourceTree = "<group>"; };
 		88D87D2F12A09A66007D6865 /* SoraEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraEvent.cpp; sourceTree = "<group>"; };
@@ -1081,6 +1093,44 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		880087E71405541B0083B166 /* configuration */ = {
+			isa = PBXGroup;
+			children = (
+				880087E8140554240083B166 /* SoraConfigurationTree.h */,
+				880087E9140559A40083B166 /* SoraConfigurationTree.cpp */,
+				880087EB140559F60083B166 /* SoraConfigurationLoader.h */,
+				880087EC140559FE0083B166 /* SoraConfigurationLoader.cpp */,
+			);
+			path = configuration;
+			sourceTree = "<group>";
+		};
+		880087EF14057B400083B166 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				880087F014057B420083B166 /* rapidxml.hpp */,
+				880087F114057B420083B166 /* rapidxml_iterators.hpp */,
+				880087F214057B420083B166 /* rapidxml_print.hpp */,
+				880087F314057B420083B166 /* rapidxml_utils.hpp */,
+			);
+			path = xml;
+			sourceTree = "<group>";
+		};
+		880087F414057B570083B166 /* ticpp */ = {
+			isa = PBXGroup;
+			children = (
+				880087F514057B570083B166 /* ticpp.cpp */,
+				880087F614057B570083B166 /* ticpp.h */,
+				880087F714057B570083B166 /* ticpprc.h */,
+				880087F814057B570083B166 /* tinystr.cpp */,
+				880087F914057B570083B166 /* tinystr.h */,
+				880087FA14057B570083B166 /* tinyxml.cpp */,
+				880087FB14057B570083B166 /* tinyxml.h */,
+				880087FC14057B570083B166 /* tinyxmlerror.cpp */,
+				880087FD14057B570083B166 /* tinyxmlparser.cpp */,
+			);
+			path = ticpp;
+			sourceTree = "<group>";
+		};
 		8801A8A813ED899100B9A779 /* TestCases */ = {
 			isa = PBXGroup;
 			children = (
@@ -1090,25 +1140,10 @@
 			path = TestCases;
 			sourceTree = "<group>";
 		};
-		8801A8C013EF79AB00B9A779 /* ticpp */ = {
-			isa = PBXGroup;
-			children = (
-				8801A8C113EF79AF00B9A779 /* ticpp.cpp */,
-				8801A8C213EF79AF00B9A779 /* ticpp.h */,
-				8801A8C313EF79AF00B9A779 /* ticpprc.h */,
-				8801A8C413EF79AF00B9A779 /* tinystr.cpp */,
-				8801A8C513EF79AF00B9A779 /* tinystr.h */,
-				8801A8C613EF79AF00B9A779 /* tinyxml.cpp */,
-				8801A8C713EF79AF00B9A779 /* tinyxml.h */,
-				8801A8C813EF79AF00B9A779 /* tinyxmlerror.cpp */,
-				8801A8C913EF79AF00B9A779 /* tinyxmlparser.cpp */,
-			);
-			path = ticpp;
-			sourceTree = "<group>";
-		};
 		8801A8CF13EF79C200B9A779 /* SoraGUIChan */ = {
 			isa = PBXGroup;
 			children = (
+				880087F414057B570083B166 /* ticpp */,
 				8801A8D013EF79C200B9A779 /* guichan */,
 				8801A93E13EF79C200B9A779 /* guichan.hpp */,
 				8801A93F13EF79C200B9A779 /* guichansetup.h */,
@@ -1398,6 +1433,7 @@
 				8852981213EAED2E00AFFBAD /* SoraListener.h */,
 				8852981313EAEFAB00AFFBAD /* SoraListener.cpp */,
 				885518D1140325D20098B14E /* SoraMessageEvent.h */,
+				880087EE140564250083B166 /* SoraMessageRouter.h */,
 			);
 			path = message;
 			sourceTree = "<group>";
@@ -1977,18 +2013,19 @@
 				88C2017C13E4812900C039A0 /* event */,
 				885AB35813FF8431006AC2B3 /* scripting */,
 				887F2C10139C6DDA00F534D5 /* helpers */,
+				880087E71405541B0083B166 /* configuration */,
 				887F239C1399F41700F534D5 /* cmd */,
 				88AE8E45138D3D2300825F00 /* RTTI */,
 				884E91C312DEADC000598D7E /* Experimental */,
 				88D87D1D12A09A66007D6865 /* Defaults */,
 				88240CA112C5803C009498F7 /* ZLIB */,
-				8801A8C013EF79AB00B9A779 /* ticpp */,
 				88504BE612ECE420009B9F45 /* Debug */,
 				88DD59FE12E040510081AE6C /* llexer */,
 				88504B8812ECDB4E009B9F45 /* Random */,
 				88C2016D13E4573100C039A0 /* ini */,
 				88AD7F5E13415855000F4F68 /* json */,
 				88DCE61A13666885005FBBE0 /* support */,
+				880087EF14057B400083B166 /* xml */,
 				887C5A7A13D07A540009E508 /* modifiers */,
 				88D87D2112A09A66007D6865 /* hgerect.cpp */,
 				88D87D2212A09A66007D6865 /* hgerect.h */,
@@ -2024,8 +2061,6 @@
 				8842BABF13C5BB680077171F /* SoraTimestamp.h */,
 				8842BABE13C5BB680077171F /* SoraTimestamp.cpp */,
 				88D87D2B12A09A66007D6865 /* SoraColor.h */,
-				8837504E1325F42900369B12 /* Serializable.h */,
-				88D87D2C12A09A66007D6865 /* SoraComponentType.h */,
 				88D87D2E12A09A66007D6865 /* SoraCore.h */,
 				88D87D2D12A09A66007D6865 /* SoraCore.cpp */,
 				887C59C713CFDEB60009E508 /* SoraFullscreenBufferHandler.h */,
@@ -2168,6 +2203,8 @@
 				88D7EA981401B30800FB852B /* SoraLogger.h */,
 				885518CD1401EF6D0098B14E /* SoraAutoUpdate.h */,
 				885518CE1401EFC30098B14E /* SoraAutoUpdate.cpp */,
+				880088031405EB6A0083B166 /* SoraGlobalMessageRouter.h */,
+				880088041405EF2B0083B166 /* SoraGlobalMessageRouter.cpp */,
 			);
 			name = Sora;
 			path = ../Sora;
@@ -2503,11 +2540,6 @@
 				8801A8B913ED9EF100B9A779 /* SoraEventWorldImpl.cpp in Sources */,
 				8801A8BC13ED9F5600B9A779 /* SoraEventManager.cpp in Sources */,
 				8801A8BF13EE800300B9A779 /* SoraShaderEnabled.cpp in Sources */,
-				8801A8CA13EF79AF00B9A779 /* ticpp.cpp in Sources */,
-				8801A8CB13EF79AF00B9A779 /* tinystr.cpp in Sources */,
-				8801A8CC13EF79AF00B9A779 /* tinyxml.cpp in Sources */,
-				8801A8CD13EF79AF00B9A779 /* tinyxmlerror.cpp in Sources */,
-				8801A8CE13EF79AF00B9A779 /* tinyxmlparser.cpp in Sources */,
 				8801A95E13EF79C200B9A779 /* actionevent.cpp in Sources */,
 				8801A95F13EF79C200B9A779 /* basiccontainer.cpp in Sources */,
 				8801A96013EF79C200B9A779 /* cliprectangle.cpp in Sources */,
@@ -2590,6 +2622,14 @@
 				88D7EAA71401E70300FB852B /* SoraComponent.cpp in Sources */,
 				885518CF1401EFC30098B14E /* SoraAutoUpdate.cpp in Sources */,
 				880087E51404ADA00083B166 /* SoraEventRouter.cpp in Sources */,
+				880087EA140559A40083B166 /* SoraConfigurationTree.cpp in Sources */,
+				880087ED140559FE0083B166 /* SoraConfigurationLoader.cpp in Sources */,
+				880087FE14057B570083B166 /* ticpp.cpp in Sources */,
+				880087FF14057B570083B166 /* tinystr.cpp in Sources */,
+				8800880014057B570083B166 /* tinyxml.cpp in Sources */,
+				8800880114057B570083B166 /* tinyxmlerror.cpp in Sources */,
+				8800880214057B570083B166 /* tinyxmlparser.cpp in Sources */,
+				880088051405EF2F0083B166 /* SoraGlobalMessageRouter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

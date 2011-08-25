@@ -25,6 +25,8 @@ namespace SoraUnit {
         std::string getMssg() const {
             return "My Event";
         }
+        
+        SORA_EVENT_IDENTIFIER(sora::str2id("myEvent"))
     };
     
     class myEventHandler: public sora::SoraEventHandler {

@@ -99,7 +99,6 @@ namespace sora {
 		return false;
 	}
     
-    
 #ifdef SORA_AUTOMATIC_REGISTER
     SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerInput(new SoraOGLInput()));
 #endif

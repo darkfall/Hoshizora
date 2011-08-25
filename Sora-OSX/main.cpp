@@ -21,8 +21,11 @@
 
 #include "SoraTimestamp.h"
 
+#include "message/SoraMessageRouter.h"
 
 int main(int argc, char* argv[]) {    
+    
+    printf("%ull\n", sora::GetUniqueStringId("SoraMessageEvent"));
     
     sora::InitAndCreateSoraCore(new mainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */
