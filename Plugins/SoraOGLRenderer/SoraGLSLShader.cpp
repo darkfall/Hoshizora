@@ -12,7 +12,6 @@
 #include "SoraException.h"
 #include "SoraResourceFile.h"
 #include "SoraTexture.h"
-
 #include "SoraLogger.h"
 
 #ifdef OS_OSX

@@ -7,13 +7,15 @@
 //
 
 #include "SoraEventRouter.h"
+#include "SoraEventWorld.h"
 #include "../SoraPreDeclare.h"
 
 namespace sora {
     
     template<typename T>
     SoraEventRouter<T>::SoraEventRouter() {
-        
+        SoraEventWorld::defaultWorld().enter(this);
+        SoraEventHandler::enableUpdate();
     }
     
     template<typename T>

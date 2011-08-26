@@ -162,7 +162,7 @@ namespace sora {
         bool isInWorld(SoraEventWorld* world) const;
         bool isInWorld() const;
         
-        void enableUpate(bool receiveEvent = false);
+        void enableUpdate(bool receiveEvent = false);
         void disableUpdate();
         bool isEnableUpdate() const;
         

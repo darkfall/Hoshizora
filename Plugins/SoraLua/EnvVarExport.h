@@ -12,18 +12,16 @@
 
 #include "SoraEnvValues.h"
 #include "luaclass.h"
+#include "SoraLuaExporter.h"
 
 namespace sora {
 	
-	// this exports all value symbols in the manager to lua
-	class EnvValuesExporter {
-	public:
-		static void exportValues(LuaPlus::LuaState* state);
-	};
+	void lua_export_env_val(LuaPlus::LuaState* state);
 	
-	void exportEnvValuesManager(LuaPlus::LuaState* state);
-	
-	
+#if	SORA_LUA_CHECK_AUTO_EXPORT_SYMBOL(SORA_LUA_AUTO_EXPORT_ENV_VAL)
+    SORA_LUA_AUTO_EXPORT_FUNC(lua_export_env_val)
+#endif
+    
 } // namespace sora
 
 #endif // GLOBAL_VALUES_LUA_EXPORT_H_

@@ -12,6 +12,9 @@
 #include "SoraGUIChan/SoraGUI.h"
 #include "SoraGUIChan/guichansetup.h"
 
+// requires lua
+#include "SoraLua/SoraLuaExporter.h"
+
 #include "SoraLuaStateManager.h"
 #include "SoraLuaObject.h"
 #include "stringId.h"
@@ -44,8 +47,11 @@ namespace sora {
 
 namespace guiwrapper {
     
-    void export_guilibobj(sora::SoraLuaObject* obj);
     void export_guilib(LuaPlus::LuaState* state);
+    
+#if	SORA_LUA_CHECK_AUTO_EXPORT_SYMBOL(SORA_LUA_AUTO_EXPORT_GUI)
+    SORA_LUA_AUTO_EXPORT_FUNC(export_guilib)
+#endif
     
     bool loadXmlGui(const SoraWString& xmlPath);
     bool loadJsonGui(const SoraWString& jsonPath);

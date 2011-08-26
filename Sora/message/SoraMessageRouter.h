@@ -39,14 +39,16 @@ namespace sora {
          * Inherited from SoraEventHandler
          **/
         void handleEvent(SoraEvent* evt) {
-            SoraMessageEvent::GetEventIdentifier();
-            evt->getEventIdentifier();
+            if(evt->getReceiver() != NULL)
+                evt->getReceiver()->handleEvent(evt);
+            else {
 #ifdef SORA_USE_RTTI
-            if(isClassClass<SoraEvent, SoraMessageEvent>(evt))
+                if(isClassClass<SoraEvent, SoraMessageEvent>(evt))
 #else
-            if(evt->getEventIdentifier() == SoraMessageEvent::GetEventIdentifier())
+                if(evt->getEventIdentifier() == SoraMessageEvent::GetEventIdentifier())
 #endif
-                sendMessage(static_cast<SoraMessageEvent*>(evt));
+                    sendMessage(static_cast<SoraMessageEvent*>(evt));
+            }
         }
         
         /**

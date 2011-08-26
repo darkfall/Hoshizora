@@ -1045,11 +1045,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraCore.cpp"
-         timestampString = "335718697.946127"
+         timestampString = "335998629.639566"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1296"
-         endingLineNumber = "1296">
+         startingLineNumber = "1299"
+         endingLineNumber = "1299">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2515,11 +2515,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraCore.cpp"
-         timestampString = "335718697.946127"
+         timestampString = "335998629.639566"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "621"
-         endingLineNumber = "621"
+         startingLineNumber = "624"
+         endingLineNumber = "624"
          landmarkName = "SoraCore::registerFontManager(SoraFontManager* fontManager)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2543,11 +2543,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraCore.h"
-         timestampString = "335936474.780594"
+         timestampString = "335998629.639566"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "382"
-         endingLineNumber = "382"
+         startingLineNumber = "379"
+         endingLineNumber = "379"
          landmarkName = "InitAndCreateSoraCore(SoraWindowInfoBase* window, const SoraCore::Parameter&amp; param = SoraCore::Parameter())"
          landmarkType = "7">
       </FileBreakpoint>
@@ -2662,34 +2662,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
-         filePath = "/Users/darkfall/SoraGit/Sora/message/SoraMessageRouter.h"
-         timestampString = "335937833.690878"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "handleEvent(SoraEvent* evt)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/darkfall/SoraGit/Sora/message/SoraMessageRouter.h"
-         timestampString = "335937833.690878"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
-         landmarkName = "handleEvent(SoraEvent* evt)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraGlobalMessageRouter.h"
          timestampString = "335938169.084384"
          startingColumnNumber = "9223372036854775807"
@@ -2712,20 +2684,6 @@
          endingLineNumber = "19"
          landmarkName = "SoraGlobalMessageRouter::sendMessage(SoraMessageEvent* evt)"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/darkfall/SoraGit/Sora/message/SoraMessageRouter.h"
-         timestampString = "335937859.869742"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "handleEvent(SoraEvent* evt)"
-         landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>
    <SymbolicBreakpoints>

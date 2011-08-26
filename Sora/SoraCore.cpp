@@ -38,6 +38,8 @@
 #include "helpers/SoraBooter.h"
 #include "helpers/SoraMenuBar.h"
 
+#include "message/SoraMessageEvent.h"
+
 #include "factory/SoraSpriteFactory.h"
 
 #include "timer/SoraSimpleTimerManager.h"
@@ -441,6 +443,7 @@ namespace sora {
         factory->registerEvent<SoraConsoleEvent>("ConsoleEvent");
         factory->registerEvent<SoraMenuBarClickEvent>("MenubarEvent");
         factory->registerEvent<SoraHotkeyEvent>("HotkeyEvent");
+        factory->registerEvent<SoraMessageEvent>("MessageEvent");
     }
 
 	ulong32 SoraCore::getMainWindowHandle() {

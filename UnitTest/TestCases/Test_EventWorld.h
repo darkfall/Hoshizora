@@ -67,7 +67,7 @@ namespace SoraUnit {
                 
                 sora::SoraEventHandler* handler1 = new sora::SoraEventHandler;
                 myEventHandler* handler2 = new myEventHandler;
-                handler2->enableUpate(true);
+                handler2->enableUpdate(true);
                 
                 world.enter(handler1);
                 world.enter(handler2);

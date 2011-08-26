@@ -14,9 +14,11 @@
 #include "SoraBGMManager.h"
 #include "SoraSoundEffectManager.h"
 
+#include "SoraLua/SoraLuaExporter.h"
+
 namespace sora {
 
-	static void exportSoundManager(LuaPlus::LuaState* state) {
+	static void lua_export_soundmanager(LuaPlus::LuaState* state) {
 		gge::LuaClass<sora::SoraBGMManager>(state, "BGMManager", sora::SoraBGMManager::Instance())
 			.def("play", &sora::SoraBGMManager::play)
 			.def("stop", &sora::SoraBGMManager::stop)
@@ -45,6 +47,10 @@ namespace sora {
 			.def("setVolume", &sora::SoraSoundEffectManager::setVolume);
 	}
 	
+#if	SORA_LUA_CHECK_AUTO_EXPORT_SYMBOL(SORA_LUA_AUTO_EXPORT_BGM_MANAGER)
+    SORA_LUA_AUTO_EXPORT_FUNC(lua_export_soundmanager)
+#endif
+    
 }
 
 #endif

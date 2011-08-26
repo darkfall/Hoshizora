@@ -19,7 +19,6 @@ namespace sora {
      * Event it's not a EventHandler
      * Useful for message handling
      **/
-    class SoraEvent;
     
     template<typename T = sora::SoraEvent>
     class SoraEventRouter: public SoraEventHandler {

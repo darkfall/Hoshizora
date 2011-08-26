@@ -4,69 +4,66 @@
 
 extern "C" {
 #include "pluto.h"
-//#pragma comment(lib, "Libs/pluto.lib")
 }
 
 #include "SoraLuaStateManager.h"
 #include "SoraLuaExport.h"
 
-#include "Debug/SoraInternalLogger.h"
+#include "SoraLogger.h"
+#include "SoraLuaExporter.h"
 
 namespace sora {
 	
 	using namespace LuaPlus;
 	
-	SoraLuaObject::SoraLuaObject() {
+	SoraLuaObject::SoraLuaObject(bool heavy) {
 		luaState = LuaState::Create(true);
 
-        if(luaState) {
-            SoraLuaExport::export_constants(luaState);
-            SoraLuaExport::export_soracore(luaState);
-            SoraLuaExport::export_sprites(luaState);
-            SoraLuaExport::export_font(luaState);
+        if(luaState && heavy) {
+            SoraLuaExporter::OnExport(luaState);
 
+            // pluto
             luaopen_pluto(luaState->GetCState());
-
-            //LuaStateRefMap[(ulong32)luaState] = 1;
+           
             SoraLuaObjectManager::Instance()->registerLuaObject(this);
-            setType(OBJ_LUA);
+            
+            // set self
+            getGlobals().SetInteger("SELF", SoraObject::getUniqueId());
+            
         } else 
-            DebugPtr->log("Error creating LuaState");
+            log_error("Error creating LuaState");
 	}
 
-	SoraLuaObject::SoraLuaObject(const SoraWString& scriptPath) {
+	SoraLuaObject::SoraLuaObject(const SoraWString& scriptPath, bool heavy) {
 		luaState = LuaState::Create(true);
-		if(luaState) {
-            SoraLuaExport::export_constants(luaState);
-            SoraLuaExport::export_soracore(luaState);
-            SoraLuaExport::export_sprites(luaState);
-            SoraLuaExport::export_font(luaState);
+		if(luaState && heavy) {
+            SoraLuaExporter::OnExport(luaState);
 		
+            // pluto
             luaopen_pluto(luaState->GetCState());
 
-                //LuaStateRefMap[(ulong32)luaState] = 1;
             SoraLuaObjectManager::Instance()->registerLuaObject(this);
-            setType(OBJ_LUA);
+            
+            // set self
+            getGlobals().SetInteger("SELF", SoraObject::getUniqueId());
 
             doScript(scriptPath);
         } else 
-            DebugPtr->log("Error creating LuaState");
+            log_error("Error creating LuaState");
 	}
 
-	SoraLuaObject::SoraLuaObject(LuaState* state) {
+	SoraLuaObject::SoraLuaObject(LuaState* state, bool heavy) {
 		luaState = state;
-		//LuaStateRefMap[(ulong32)luaState] = 1;
-		if(luaState) {
-            setType(OBJ_LUA);
-            SoraLuaObjectManager::Instance()->registerLuaObject(this);
-        } else 
-            DebugPtr->log("Error creating LuaState");
+        sora_assert(luaState);
+        
+        // set self
+        getGlobals().SetInteger("SELF", SoraObject::getUniqueId());
+        
+        SoraLuaObjectManager::Instance()->registerLuaObject(this);
 	}
 
 	SoraLuaObject::~SoraLuaObject() {
-	//	LuaStateRefMap[(ulong32)luaState]--;
-	//	if(LuaStateRefMap[(ulong32)luaState] == 0)
-			LuaState::Destroy(luaState);
+        LuaState::Destroy(luaState);
 		SoraLuaObjectManager::Instance()->unregisterLuaObject(this);
 	}
 

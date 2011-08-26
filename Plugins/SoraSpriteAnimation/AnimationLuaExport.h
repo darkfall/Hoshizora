@@ -11,32 +11,16 @@
 #define SORA_ANIMATION_LUA_EXPORT_H_
 
 #include "SoraLua/LuaPlusHelper.h"
-#include "SoraSpriteAnimation.h"
+#include "SoraLua/SoraLuaExporter.h"
 
 namespace sora {
 	
-	static void exportSpriteAnimation(LuaPlus::LuaState* state) {
-		LuaClass<SoraSpriteAnimation>(state)
-			.create<const std::wstring&>("AnimatedSprite")
-			.destroy("Free")
-			.def("update", &SoraSpriteAnimation::update)
-			.def("render", &SoraSpriteAnimation::render)
-			.def("play", &SoraSpriteAnimation::play)
-			.def("playEx", &SoraSpriteAnimation::play)
-			.def("pause", &SoraSpriteAnimation::pause)
-			.def("resume", &SoraSpriteAnimation::resume)
-			.def("setDefaultAnimation", &SoraSpriteAnimation::setDefaultAnimation)
-			.def("setAnchor", &SoraSpriteAnimation::setAnchor);
-		
-		LuaObject globals = state->GetGlobals();
-		globals.SetInteger("ANCHOR_UPPER_LEFT", ANCHOR_UPPER_LEFT);
-		globals.SetInteger("ANCHOR_UPPER_RIGHT", ANCHOR_UPPER_RIGHT);
-		globals.SetInteger("ANCHOR_LOWER_LEFT", ANCHOR_LOWER_LEFT);
-		globals.SetInteger("ANCHOR_LOWER_RIGHT", ANCHOR_LOWER_RIGHT);
-		globals.SetInteger("ANCHOR_MIDDLE", ANCHOR_MIDDLE);
+    void lua_export_sprite_animation(LuaPlus::LuaState* state);
 
-	}
-	
+#if	SORA_LUA_CHECK_AUTO_EXPORT_SYMBOL(SORA_LUA_AUTO_EXPORT_ANIMATED_SPRITE)
+    SORA_LUA_AUTO_EXPORT_FUNC(lua_export_sprite_animation)
+#endif
+    
 }
 
 

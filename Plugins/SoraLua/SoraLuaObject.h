@@ -21,13 +21,11 @@
 
 namespace sora {
 
-#define OBJ_LUA 0x00000200
-
 	class SoraLuaObject: public SoraObject {	 
 	public:												 
-		SoraLuaObject();
-		SoraLuaObject(const SoraWString& scriptPath);
-		SoraLuaObject(LuaPlus::LuaState* state);
+		SoraLuaObject(bool heavy=true);
+		SoraLuaObject(const SoraWString& scriptPath, bool heavy=true);
+		SoraLuaObject(LuaPlus::LuaState* state, bool heavy=true);
 		virtual ~SoraLuaObject();
         
         uint32 update(float32 dt);
@@ -66,8 +64,6 @@ namespace sora {
 		
 	private:
 		LuaPlus::LuaState* luaState;
-		
-		LuaPlus::LuaObject envObject;
 	};
 
 } // namespace sora

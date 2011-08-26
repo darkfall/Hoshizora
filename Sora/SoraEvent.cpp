@@ -62,7 +62,7 @@ namespace sora {
         return mEnableUpdate;
     }
     
-    void SoraEventHandler::enableUpate(bool receiveEvent) {
+    void SoraEventHandler::enableUpdate(bool receiveEvent) {
         mUpdateReceiveEvent = receiveEvent;
         mEnableUpdate = true;
     }

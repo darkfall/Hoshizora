@@ -332,6 +332,9 @@ namespace { \
 #define SORA_STATIC_INIT(FN) \
     SORA_STATIC_INIT_I(sora_static_init_##FN, FN)
 
+#define SORA_STATIC_RUN_FN(FN) \
+    SORA_STATIC_INIT(FN)
+
 #define SORA_STATIC_RUN_CODE_FN(name, code) \
 namespace { \
     static void sora_static_fn_##name() { \

@@ -7,7 +7,7 @@
 //
 
 
-#include "guichanWrapper.h"
+#include "guichanLuaWrapper.h"
 
 #include "SoraGUIChan/guichansetup.h"
 #include "SoraGUIChan/xmlgui.h"

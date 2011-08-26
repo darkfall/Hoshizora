@@ -23,11 +23,11 @@
 
 #include "message/SoraMessageRouter.h"
 
+#include "SoraLua/SoraLuaMainWindow.h"
+
 int main(int argc, char* argv[]) {    
-    
-    printf("%ull\n", sora::GetUniqueStringId("SoraMessageEvent"));
-    
-    sora::InitAndCreateSoraCore(new mainWindow, 
+        
+    sora::InitAndCreateSoraCore(new sora::SoraLuaMainWindow(L"LuaMainWindow.lua"), 
                                 sora::SoraCoreParameter(/* load plugins */
                                                         false,
                                                         /* use fullscreen buffer */
