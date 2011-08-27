@@ -65,8 +65,6 @@ namespace mead {
 		mead::globalBulletManagerInit();
 		mead::exportBulletManager(luaObject.getState());
 		mead::exportGlobal(luaObject.getState());
-		sora::exportSoundManager(luaObject.getState());
-		sora::exportSpriteAnimation(luaObject.getState());
 		
 		luaObject.doScript(L"mybullettest.lua");
 	}

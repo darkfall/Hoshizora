@@ -78,8 +78,6 @@ namespace mead {
 		
 		exportBulletManager(state);
 		exportGlobal(state);
-		sora::exportSoundManager(state);
-		sora::exportSpriteAnimation(state);
 	}
 	
 	void meadBoss::setPosition(float32 x, float32 y) {

@@ -121,9 +121,6 @@
     <Filter Include="头文件\thread">
       <UniqueIdentifier>{6a5ee93e-1065-449d-ae92-704129f7810e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\ticpp">
-      <UniqueIdentifier>{96149ee8-825a-48af-aee0-0737497f3d3c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\RTTi">
       <UniqueIdentifier>{f44d7db7-5b11-4f6c-9eab-b87727f96b9c}</UniqueIdentifier>
     </Filter>
@@ -144,6 +141,9 @@
     </Filter>
     <Filter Include="Plugins\gui">
       <UniqueIdentifier>{6ad2e5be-7c24-447e-8cc6-d6a1a3f229f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\properties">
+      <UniqueIdentifier>{c147dcf9-f023-4f23-a8c4-fbf16f5df11f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -735,14 +735,8 @@
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lzio.h">
       <Filter>Plugins\SoraLua\Luaplus</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\pluto.h">
-      <Filter>Plugins\SoraLua\Luaplus</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\srm.h">
       <Filter>Plugins\SoraLua\Luaplus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraLua\guichanWrapper.h">
-      <Filter>Plugins\SoraLua</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaExport.h">
       <Filter>Plugins\SoraLua</Filter>
@@ -1022,18 +1016,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\thread\SoraThreadTask.h">
       <Filter>头文件\thread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\ticpp\ticpp.h">
-      <Filter>头文件\ticpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\ticpp\ticpprc.h">
-      <Filter>头文件\ticpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\ticpp\tinystr.h">
-      <Filter>头文件\ticpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\ticpp\tinyxml.h">
-      <Filter>头文件\ticpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraTimestamp.h">
       <Filter>头文件</Filter>
@@ -1722,6 +1704,69 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan.hpp">
       <Filter>Plugins\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\ticpp.h">
+      <Filter>Plugins\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\ticpprc.h">
+      <Filter>Plugins\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinystr.h">
+      <Filter>Plugins\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxml.h">
+      <Filter>Plugins\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraAutoUpdate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponentHolder.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraEntityListener.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponent.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponentFactory.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\message\SoraMessageRouter.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\message\SoraMessageEvent.h">
+      <Filter>头文件\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\event\SoraEventRouter.h">
+      <Filter>头文件\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaConfig.h">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaExporter.h">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\property\SoraPropertyHolder.h">
+      <Filter>头文件\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\property\SoraTypeSerializer.h">
+      <Filter>头文件\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\property\SoraDynRTTIClass.h">
+      <Filter>头文件\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\property\SoraProperty.h">
+      <Filter>头文件\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraGlobalMessageRouter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgetFactory.hpp">
+      <Filter>Plugins\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraLua\pluto.h">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp">
@@ -1967,17 +2012,11 @@
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lzio.c">
       <Filter>Plugins\SoraLua\Luaplus</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\pluto.c">
-      <Filter>Plugins\SoraLua\Luaplus</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\print.c">
       <Filter>Plugins\SoraLua\Luaplus</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\srm.c">
       <Filter>Plugins\SoraLua\Luaplus</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraLua\guichanWrapper.cpp">
-      <Filter>Plugins\SoraLua</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaObject.cpp">
       <Filter>Plugins\SoraLua</Filter>
@@ -2188,21 +2227,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\thread\SoraThreadTask.cpp">
       <Filter>头文件\thread</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\ticpp\ticpp.cpp">
-      <Filter>头文件\ticpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\ticpp\tinystr.cpp">
-      <Filter>头文件\ticpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\ticpp\tinyxml.cpp">
-      <Filter>头文件\ticpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\ticpp\tinyxmlerror.cpp">
-      <Filter>头文件\ticpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\ticpp\tinyxmlparser.cpp">
-      <Filter>头文件\ticpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraTimestamp.cpp">
       <Filter>头文件</Filter>
@@ -2596,6 +2620,60 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\Modifiers\TimedWidget.cpp">
       <Filter>Plugins\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\ticpp.cpp">
+      <Filter>Plugins\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinystr.cpp">
+      <Filter>Plugins\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxml.cpp">
+      <Filter>Plugins\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxmlerror.cpp">
+      <Filter>Plugins\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxmlparser.cpp">
+      <Filter>Plugins\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraAutoUpdate.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\entity\SoraComponent.cpp">
+      <Filter>头文件\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\entity\SoraComponentHolder.cpp">
+      <Filter>头文件\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\event\SoraEventRouter.cpp">
+      <Filter>头文件\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaExporter.cpp">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\property\SoraPropertyHolder.cpp">
+      <Filter>头文件\properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\property\SoraDynRTTIClass.cpp">
+      <Filter>头文件\properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\property\SoraProperty.cpp">
+      <Filter>头文件\properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraGlobalMessageRouter.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaExport.cpp">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgetFactory.cpp">
+      <Filter>Plugins\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraLua\pluto.c">
+      <Filter>Plugins\SoraLua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.cpp">
+      <Filter>Plugins\SpriteAnimation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

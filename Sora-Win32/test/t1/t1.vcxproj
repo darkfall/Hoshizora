@@ -237,6 +237,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\SoundLoader.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\style.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widget.hpp" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgetFactory.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgetlistener.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\button.hpp" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\checkbox.hpp" />
@@ -269,6 +270,10 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUIResponserMap.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUISound.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\ticpp.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\ticpprc.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinystr.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxml.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\xmlgui.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge_impl.h" />
@@ -276,7 +281,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\EnvVarExport.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraLua\guichanWrapper.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaAutoBlock.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaCall.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaFunction.h" />
@@ -319,9 +323,11 @@
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lundump.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lvm.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lzio.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\src\pluto.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\srm.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\pluto.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaConfig.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaExport.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaExporter.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaObject.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaStateManager.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\spriteWrapper.h" />
@@ -366,9 +372,14 @@
     <ClInclude Include="..\..\..\Sora\Defaults\SoraMiscTool_Win32.h" />
     <ClInclude Include="..\..\..\Sora\Defaults\SoraTimer_OSX.h" />
     <ClInclude Include="..\..\..\Sora\Defaults\SoraTimer_Win32.h" />
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponent.h" />
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponentFactory.h" />
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponentHolder.h" />
     <ClInclude Include="..\..\..\Sora\entity\SoraEntity.h" />
+    <ClInclude Include="..\..\..\Sora\entity\SoraEntityListener.h" />
     <ClInclude Include="..\..\..\Sora\event\SoraEventChannel.h" />
     <ClInclude Include="..\..\..\Sora\event\SoraEventFactory.h" />
+    <ClInclude Include="..\..\..\Sora\event\SoraEventRouter.h" />
     <ClInclude Include="..\..\..\Sora\event\SoraEventWorld.h" />
     <ClInclude Include="..\..\..\Sora\event\SoraEventWorldImpl.h" />
     <ClInclude Include="..\..\..\Sora\Experimental\AutoList.h" />
@@ -405,6 +416,8 @@
     <ClInclude Include="..\..\..\Sora\MemoryUsage.h" />
     <ClInclude Include="..\..\..\Sora\message\SoraListener.h" />
     <ClInclude Include="..\..\..\Sora\message\SoraMessage.h" />
+    <ClInclude Include="..\..\..\Sora\message\SoraMessageEvent.h" />
+    <ClInclude Include="..\..\..\Sora\message\SoraMessageRouter.h" />
     <ClInclude Include="..\..\..\Sora\modifiers\SoraCameraModifiers.h" />
     <ClInclude Include="..\..\..\Sora\modifiers\SoraFontModifiers.h" />
     <ClInclude Include="..\..\..\Sora\modifiers\SoraObjectModifiers.h" />
@@ -413,6 +426,10 @@
     <ClInclude Include="..\..\..\Sora\notification\SoraObserver.h" />
     <ClInclude Include="..\..\..\Sora\osxfilewrapper.h" />
     <ClInclude Include="..\..\..\Sora\PartitionTree.h" />
+    <ClInclude Include="..\..\..\Sora\property\SoraDynRTTIClass.h" />
+    <ClInclude Include="..\..\..\Sora\property\SoraProperty.h" />
+    <ClInclude Include="..\..\..\Sora\property\SoraPropertyHolder.h" />
+    <ClInclude Include="..\..\..\Sora\property\SoraTypeSerializer.h" />
     <ClInclude Include="..\..\..\Sora\quaternion.h" />
     <ClInclude Include="..\..\..\Sora\QuickList.h" />
     <ClInclude Include="..\..\..\Sora\Random\hgeRandom.h" />
@@ -453,6 +470,7 @@
     <ClInclude Include="..\..\..\Sora\Sora2DMatrix.h" />
     <ClInclude Include="..\..\..\Sora\SoraAny.h" />
     <ClInclude Include="..\..\..\Sora\SoraAutoPtr.h" />
+    <ClInclude Include="..\..\..\Sora\SoraAutoUpdate.h" />
     <ClInclude Include="..\..\..\Sora\SoraCamera.h" />
     <ClInclude Include="..\..\..\Sora\SoraCanvas.h" />
     <ClInclude Include="..\..\..\Sora\SoraColor.h" />
@@ -482,6 +500,7 @@
     <ClInclude Include="..\..\..\Sora\SoraFrameListener.h" />
     <ClInclude Include="..\..\..\Sora\SoraFSM.h" />
     <ClInclude Include="..\..\..\Sora\SoraFullscreenBufferHandler.h" />
+    <ClInclude Include="..\..\..\Sora\SoraGlobalMessageRouter.h" />
     <ClInclude Include="..\..\..\Sora\SoraGraphicEffect.h" />
     <ClInclude Include="..\..\..\Sora\SoraHandleManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraHotkey.h" />
@@ -574,10 +593,6 @@
     <ClInclude Include="..\..\..\Sora\thread\SoraThreadLocal.h" />
     <ClInclude Include="..\..\..\Sora\thread\SoraThreadPool.h" />
     <ClInclude Include="..\..\..\Sora\thread\SoraThreadTask.h" />
-    <ClInclude Include="..\..\..\Sora\ticpp\ticpp.h" />
-    <ClInclude Include="..\..\..\Sora\ticpp\ticpprc.h" />
-    <ClInclude Include="..\..\..\Sora\ticpp\tinystr.h" />
-    <ClInclude Include="..\..\..\Sora\ticpp\tinyxml.h" />
     <ClInclude Include="..\..\..\Sora\timer\ITimerManager.h" />
     <ClInclude Include="..\..\..\Sora\timer\SoraFixedStepUpdater.h" />
     <ClInclude Include="..\..\..\Sora\timer\SoraSimpleTimer.h" />
@@ -660,6 +675,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\Sound.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\style.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widget.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgetFactory.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\button.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\checkbox.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\widgets\container.cpp" />
@@ -687,6 +703,11 @@
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\soraguiinput.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraGUISound.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\SoraGUISoundLoader.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\ticpp.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinystr.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\xmlgui.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp" />
@@ -696,7 +717,6 @@
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHttpFile\SoraHttpFile.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\EnvVarExport.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraLua\guichanWrapper.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlus.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlusAddons.c" />
@@ -740,9 +760,11 @@
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lundump.c" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lvm.c" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\lzio.c" />
-    <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\pluto.c" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\src\print.c" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\srm.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\pluto.c" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaExport.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaExporter.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaObject.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaStateManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\spriteWrapper.cpp" />
@@ -750,6 +772,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\PackMemory.cpp" />
@@ -774,9 +797,12 @@
     <ClCompile Include="..\..\..\Sora\CoreTransform.cpp" />
     <ClCompile Include="..\..\..\Sora\Debug\SoraInternalLogger.cpp" />
     <ClCompile Include="..\..\..\Sora\Defaults\orz.c" />
+    <ClCompile Include="..\..\..\Sora\entity\SoraComponent.cpp" />
+    <ClCompile Include="..\..\..\Sora\entity\SoraComponentHolder.cpp" />
     <ClCompile Include="..\..\..\Sora\entity\SoraEntity.cpp" />
     <ClCompile Include="..\..\..\Sora\event\SoraEventChannel.cpp" />
     <ClCompile Include="..\..\..\Sora\event\SoraEventFactory.cpp" />
+    <ClCompile Include="..\..\..\Sora\event\SoraEventRouter.cpp" />
     <ClCompile Include="..\..\..\Sora\event\SoraEventWorld.cpp" />
     <ClCompile Include="..\..\..\Sora\event\SoraEventWorldImpl.cpp" />
     <ClCompile Include="..\..\..\Sora\factory\SoraSpriteFactory.cpp" />
@@ -803,6 +829,9 @@
     <ClCompile Include="..\..\..\Sora\notification\SoraNotification.cpp" />
     <ClCompile Include="..\..\..\Sora\notification\SoraNotificationCenter.cpp" />
     <ClCompile Include="..\..\..\Sora\notification\SoraObserver.cpp" />
+    <ClCompile Include="..\..\..\Sora\property\SoraDynRTTIClass.cpp" />
+    <ClCompile Include="..\..\..\Sora\property\SoraProperty.cpp" />
+    <ClCompile Include="..\..\..\Sora\property\SoraPropertyHolder.cpp" />
     <ClCompile Include="..\..\..\Sora\Random\SFMT.c" />
     <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIClass.cpp" />
     <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIClassManager.cpp" />
@@ -812,6 +841,7 @@
     <ClCompile Include="..\..\..\Sora\scripting\SoraScriptVMHolder.cpp" />
     <ClCompile Include="..\..\..\Sora\signal\SoraSignal.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraAny.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraAutoUpdate.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraCamera.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraCanvas.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraCore.cpp" />
@@ -829,6 +859,7 @@
     <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFSM.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraFullscreenBufferHandler.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraGlobalMessageRouter.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraHandleManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraHotKey.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
@@ -869,11 +900,6 @@
     <ClCompile Include="..\..\..\Sora\thread\SoraThreadImplWin32.cpp" />
     <ClCompile Include="..\..\..\Sora\thread\SoraThreadPool.cpp" />
     <ClCompile Include="..\..\..\Sora\thread\SoraThreadTask.cpp" />
-    <ClCompile Include="..\..\..\Sora\ticpp\ticpp.cpp" />
-    <ClCompile Include="..\..\..\Sora\ticpp\tinystr.cpp" />
-    <ClCompile Include="..\..\..\Sora\ticpp\tinyxml.cpp" />
-    <ClCompile Include="..\..\..\Sora\ticpp\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\..\Sora\ticpp\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\Sora\timer\ITimerManager.cpp" />
     <ClCompile Include="..\..\..\Sora\timer\SoraSimpleTimer.cpp" />
     <ClCompile Include="..\..\..\Sora\timer\SoraSimpleTimerManager.cpp" />

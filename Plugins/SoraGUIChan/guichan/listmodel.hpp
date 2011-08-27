@@ -123,8 +123,12 @@ namespace gcn
             if(i >= 0 && i <= mElements.size())
                 mElements.erase(mElements.begin()+i);
         }
+
+		virtual void clearElements() {
+			mElements.clear();
+		}
         
-    private:
+    protected:
         typedef std::vector<std::string> StringList;
         StringList mElements;
     };

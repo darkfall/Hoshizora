@@ -270,11 +270,11 @@ namespace reflection {
 	void rfShapeBox::draw(gcn::Graphics* graphics) {		
 		if(getImage() != NULL) {
 			if(currentState == STATE_WAITFORLIGHT)
-				getImage()->setColor(waitForLightColor);
+				graphics->setColor(waitForLightColor);
 			else if(currentState == STATE_LIGHTED)
-				getImage()->setColor(lightedColor);
+				graphics->setColor(lightedColor);
 			else 
-				getImage()->setColor(gcn::Color(255, 255, 255));
+				graphics->setColor(gcn::Color(255, 255, 255));
 		}
 		DraggableImageButton::draw(graphics);
 		

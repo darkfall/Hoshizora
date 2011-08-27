@@ -19,9 +19,9 @@ namespace sora {
      * Must be used within a class that derives from SoraComponent
      **/
     
-#define SORA_IMPL_COMPONENT(class) \
+#define SORA_IMPL_COMPONENT(cls) \
     virtual std::string getName() const { \
-        return std::string(#class); \
+        return std::string(#cls); \
     }
     
     class SoraEntity;
@@ -63,7 +63,9 @@ namespace sora {
          * Better be the class name
          * Suggest use SORA_IMPL_COMPONENT to implement this in your own class
          **/
-        virtual std::string getName() const = 0;
+        virtual std::string getName() const {
+			return "ComponentBase";
+		}
         
         /**
          * Components must implement message protocol 

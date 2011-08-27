@@ -173,7 +173,7 @@ namespace reflection {
 		props["state"] = mapState;
 		props["x"] = getX();
 		props["y"] = getY();
-		props["bgImage"] = getImage()->getName();
+	//	props["bgImage"] = getImage()->getName();
 		props["name" ] = getId();
 		props["width"] = getWidth();
 		props["height"] = getHeight();

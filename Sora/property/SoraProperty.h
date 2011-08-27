@@ -46,7 +46,7 @@ namespace sora {
         };
     } // namespace property*/
     
-    struct SoraPropertyInfo: uncopyable {
+    struct SORA_API SoraPropertyInfo: uncopyable {
         virtual ~SoraPropertyInfo() {
             
         }
@@ -84,7 +84,7 @@ namespace sora {
     };
     
     template<typename T>
-    struct SoraProperty: public SoraPropertyInfo {
+    struct SORA_API SoraProperty: public SoraPropertyInfo {
         friend class SoraPropertyInfo;
         
         SoraProperty(const std::string& name, const T& defaultValue, const std::string& description=std::string(), bool readonly=false):

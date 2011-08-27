@@ -21,9 +21,7 @@ namespace sora {
     namespace {
         static SoraConsole* mInstance = NULL;
     }
-    
-    std::map<std::string, SoraEventHandler*> SoraConsole::mHandlers;
-    
+   
     SoraConsole* SoraConsole::Instance() {
         if(!mInstance)
             mInstance = new SoraConsole;
@@ -273,7 +271,7 @@ namespace sora {
         SoraStringTokenlizer tokens(cmd);
         SoraStringTokenlizer::iterator it = tokens.begin();
         while(it != tokens.end()) {
-            mHandlers[*it] = handler;
+            getCommandHandlerMap()[*it] = handler;
             ++it;
         }
 	}
@@ -329,14 +327,14 @@ namespace sora {
 			return;
 		}
 		
-		CommandHandlerMap::iterator itHandler = mHandlers.find(cmd);
+		CommandHandlerMap::iterator itHandler = getCommandHandlerMap().find(cmd);
 		
 		CmdHistory history;
 		if(params != NULL)
 			history.mCmd = s2wsfast(cmd+" "+params);
 		else
 			history.mCmd = s2wsfast(cmd);
-		if(itHandler != mHandlers.end()) {
+		if(itHandler != getCommandHandlerMap().end()) {
 			SoraConsoleEvent cev;
 			
 			cev.setCmd(cmd);

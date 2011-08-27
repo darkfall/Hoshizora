@@ -10,10 +10,8 @@
 
 namespace sora {
     
-    SoraLuaExporter::ExporterSignal SoraLuaExporter::mExporter;
-    
     void SoraLuaExporter::OnExport(LuaPlus::LuaState* state) {
-        mExporter.sig(state);
+        getExporter().sig(state);
     }
     
 } // namespace sora

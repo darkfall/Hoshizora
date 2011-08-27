@@ -136,8 +136,11 @@ namespace sora {
 		int32 mTab;
 		
 		typedef std::map<std::string, SoraEventHandler*> CommandHandlerMap;
-		static CommandHandlerMap mHandlers;
-	
+		static CommandHandlerMap& getCommandHandlerMap() {
+			static CommandHandlerMap instance;
+			return instance;
+		}
+
 		std::string mCurrentLine;
 		typedef struct {
 			std::wstring mCmd;

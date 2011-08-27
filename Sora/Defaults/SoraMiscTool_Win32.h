@@ -26,17 +26,24 @@ public:
 	void setMainWindowHandle(ulong32 mainWindowHandle) { _hWnd = (HWND)mainWindowHandle; }
 	
 	SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
-        std::string realfilter("My Files ("+filter+")\0");
-        
-        if(filter) {
-            SoraStringTokenlizer tokens(filter);
+        char rfilter[128];
+		if(filter != NULL) {
+			strcpy(rfilter, std::string(std::string("My Files(")+filter+") ").c_str());
+			int32 pos = strlen(rfilter);
+
+			SoraStringTokenlizer tokens(filter);
             SoraStringTokenlizer::iterator it = tokens.begin();
             while(it != tokens.end()) {
-                realfilter += "*."+*it+";";
+                strcat(rfilter, "*.");
+				strcat(rfilter, (*it).c_str());
+				if(it != tokens.end()-1)
+					strcat(rfilter, ";");
                 ++it;
             }
-            realfilter += "\0\0";
-        }
+			rfilter[pos-1] = '\0';
+            rfilter[strlen(rfilter)] = '\0';
+			rfilter[strlen(rfilter)+1] = '\0';
+		}
         
 		 OPENFILENAMEA ofn;
 		 ofn.lStructSize       = sizeof(OPENFILENAME);
@@ -71,7 +78,7 @@ public:
 			 ofn.lpstrInitialDir = defaultPath;
 		 ofn.lpstrDefExt = NULL;
 		 if(filter)
-			 ofn.lpstrFilter = realfilter;
+			 ofn.lpstrFilter = filter != NULL ? rfilter : NULL;
 		 
 		 if(GetOpenFileNameA(&ofn))
 			return sora::s2ws(fileName);
@@ -79,17 +86,24 @@ public:
 	}
 	
 	SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
-		std::string realfilter("My Files ("+filter+")\0");
-        
-        if(filter) {
-            SoraStringTokenlizer tokens(filter);
+		char rfilter[128];
+		if(filter != NULL) {
+			strcpy(rfilter, std::string(std::string("My Files(")+filter+") ").c_str());
+			int32 pos = strlen(rfilter);
+
+			SoraStringTokenlizer tokens(filter);
             SoraStringTokenlizer::iterator it = tokens.begin();
             while(it != tokens.end()) {
-                realfilter += "*."+*it+";";
+                strcat(rfilter, "*.");
+				strcat(rfilter, (*it).c_str());
+				if(it != tokens.end()-1)
+					strcat(rfilter, ";");
                 ++it;
             }
-            realfilter += "\0\0";
-        }
+			rfilter[pos-1] = '\0';
+            rfilter[strlen(rfilter)] = '\0';
+			rfilter[strlen(rfilter)+1] = '\0';
+		}
         
         OPENFILENAMEA ofn;
 		 ofn.lStructSize       = sizeof(OPENFILENAME);
@@ -125,7 +139,7 @@ public:
 		 if(defaultExt)
 			ofn.lpstrDefExt = defaultExt;
 		 if(filter)
-			 ofn.lpstrFilter = realfilter;
+			 ofn.lpstrFilter = filter != NULL ? rfilter : NULL;
 		 
 		 if(GetSaveFileNameA(&ofn))
 			 return sora::s2ws(fileName);

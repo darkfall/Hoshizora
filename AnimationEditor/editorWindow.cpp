@@ -43,7 +43,7 @@ gcn::Widget* animationEditorWindow::loadGUIConfig(const SoraWString& confPath) {
 void animationEditorWindow::action() {
 	if(getID().compare("Open") == 0) {
 		SoraWString path;
-		path = SoraCore::Instance()->fileOpenDialog("AnimationConfig(*.txt)\0*.txt\0\0", sora::ws2s(SoraFileUtility::getApplicationPath().c_str()).c_str());
+		path = SoraCore::Instance()->fileOpenDialog("txt", sora::ws2s(SoraFileUtility::getApplicationPath().c_str()).c_str());
 		loadAnimation(sora::ws2s(path));
 	} else if(getID().compare("Refresh") == 0) {
 		loadAnimation(currentAnm);
@@ -78,11 +78,11 @@ void animationEditorWindow::loadAnimation(const SoraString& path) {
 			pAnimatedSprite->play();
 			
 			if(pAvailableAnimations) {
-				JsonListModel* jlm = (JsonListModel*)pAvailableAnimations->getListModel();
+				gcn::ListModel* jlm = (gcn::ListModel*)pAvailableAnimations->getListModel();
 				if(!jlm)
-					jlm = new JsonListModel;
+					jlm = new gcn::ListModel;
 				else
-					jlm->items.clear();
+					jlm->clearElements();
 				
 				for(int i=0; i<pAnimatedSprite->getAnimationSize(); ++i) {
 					jlm->pushElement(pAnimatedSprite->getAnimationName(i));
@@ -92,8 +92,8 @@ void animationEditorWindow::loadAnimation(const SoraString& path) {
 				
 				currentAnm = path;
 				std::string canm = pAnimatedSprite->getCurrentAnimationName();
-				for(int i=0; i<jlm->items.size(); ++i) {
-					if(jlm->items[i].compare(canm) == 0) {
+				for(int i=0; i<jlm->getNumberOfElements(); ++i) {
+					if(jlm->getElementAt(i).compare(canm) == 0) {
 						pAvailableAnimations->setSelected(i);
 						break;
 					}
