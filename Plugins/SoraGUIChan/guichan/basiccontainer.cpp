@@ -406,6 +406,8 @@ namespace gcn
             Message mssg(this,
                          NULL,
                          message);
+            
+            Widget::onMessage(mssg);
 
             WidgetListIterator iter;
             for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
@@ -415,17 +417,26 @@ namespace gcn
     }
     
     void BasicContainer::sendMessage(const Message& mssg) {
-        WidgetListIterator iter;
-        for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
-            (*iter)->onMessage(mssg);
-        }
+        if(mssg.getReceiver() != this) {
+            if(mssg.getReceiver() == NULL)
+                Widget::onMessage(mssg);
+            
+            WidgetListIterator iter;
+            for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
+                (*iter)->onMessage(mssg);
+            }
+        } else
+            Widget::onMessage(mssg);
     }
     
     void BasicContainer::onMessage(const Message& mssg) {
         if(mssg.getReceiver() != this) {
+            if(mssg.getReceiver() == NULL)
+                Widget::onMessage(mssg);
             sendMessage(mssg);
-        } else
+        } else {
             Widget::onMessage(mssg);
+        }
     }
     
     void BasicContainer::setAlpha(int alpha) {

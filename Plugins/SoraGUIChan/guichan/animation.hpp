@@ -1,9 +1,9 @@
 //
 //  animation.h
-//  Sora
+//  Guichan_Sora
 //
-//  Created by Ruiwei Bu on 8/9/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu(darkfall) 8/9/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_animation_h

@@ -26,7 +26,15 @@ namespace gcn {
 	
 	class SoundLoader {
 	public:
+        /**
+         * Load a sound with given file
+         **/
 		virtual Sound* load(const std::string& soundName) = 0;
+        
+        /**
+         * Play a sound directly
+         * Implemention should cache for performance
+         **/
         virtual void play(const std::string& soundName) = 0;
     };
 	

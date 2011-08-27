@@ -862,12 +862,12 @@ namespace gcn
     }
     
     void Widget::sendMessage(const std::string& mssg, const std::string& receiver) {
-        if(receiver == getId())
+        if(receiver == getId() || receiver.empty())
             onMessage(Message(this, this, mssg));
     }
     
     void Widget::sendMessage(const Message& mssg) {
-        if(mssg.getReceiver() == this)
+        if(mssg.getReceiver() == this || mssg.getReceiver() == NULL)
             onMessage(mssg);
     }
     

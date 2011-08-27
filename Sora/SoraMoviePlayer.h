@@ -3,7 +3,7 @@
 //  Sora
 //
 //  Created by Griffin Bu on 3/21/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef SORA_MOVIE_PLAYER_H_
