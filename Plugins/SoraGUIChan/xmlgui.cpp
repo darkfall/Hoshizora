@@ -327,7 +327,7 @@ void XmlGui::parseContainer(TiXmlElement *element, gcn::Widget *parent)
 
 			parseWidgets(e,c);
 
-			child = doc->IterateChildren(child);
+			child = element->IterateChildren(child);
 		}
 	}
 	
@@ -386,7 +386,7 @@ void XmlGui::parseLabel(TiXmlElement *element,gcn::Widget *parent)
 				parseLabelModifiers(selmnts, label);
 			}
 			
-			props = props->IterateChildren(props);
+			props = element->IterateChildren(props);
 		}
 	}
 	
@@ -780,7 +780,7 @@ void XmlGui::parseWindow(TiXmlElement *element,gcn::Widget *parent)
 		{
 			TiXmlElement *e = child->ToElement();
 			parseWidgets(e,window);
-			child = doc->IterateChildren(child);
+			child = element->IterateChildren(child);
 		}
 	}
 
@@ -902,21 +902,21 @@ void XmlGui::parseDropdown(TiXmlElement *element,gcn::Widget *parent)
 
 	parseDefaults(element,dropdown);
 
-	XmlListModel *listmodel;
+    gcn::ListModel *listmodel;
 	//parsing child elements
 	TiXmlNode *child = element->FirstChild();
 
 	if(child)
 	{
 
-		listmodel = new XmlListModel;
+		listmodel = new gcn::ListModel;
 
 		while(child)
 		{
 			TiXmlElement *e = child->ToElement();
 			if(e->Value() == "li")
 			{
-				listmodel->items.push_back(e->FirstChild()->Value());
+				listmodel->pushElement(e->FirstChild()->Value());
 			}
 			child = doc->IterateChildren(child);
 		}
@@ -955,21 +955,21 @@ void XmlGui::parseListbox(TiXmlElement *element,gcn::Widget *parent)
 
 	parseDefaults(element,listbox);
 
-	XmlListModel *listmodel;
+	gcn::ListModel *listmodel;
 	//parsing child elements
 	TiXmlNode *child = element->FirstChild();
 
 	if(child)
 	{
 
-		listmodel = new XmlListModel;
+		listmodel = new gcn::ListModel;
 
 		while(child)
 		{
 			TiXmlElement *e = child->ToElement();
 			if(e->Value() == "li")
 			{
-				listmodel->items.push_back(e->FirstChild()->Value());
+				listmodel->pushElement(e->FirstChild()->Value());
 			}
 			child = doc->IterateChildren(child);
 		}
@@ -1019,17 +1019,6 @@ void XmlGui::addFont(const std::string &name, gcn::Font *font)
 {
 	if(font)
 		fonts[name] = font;
-}
-
-
-int XmlListModel::getNumberOfElements()
-{
-	return items.size();
-}
-
-std::string XmlListModel::getElementAt(int i)
-{
-	return items[i];
 }
 
 } //namespace sora

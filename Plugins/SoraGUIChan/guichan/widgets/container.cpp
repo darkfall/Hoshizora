@@ -109,4 +109,8 @@ namespace gcn
     {
         return BasicContainer::findWidgetById(id);
     }
+    
+    void Container::onMessage(const Message& mssg) {
+        BasicContainer::onMessage(mssg);
+    }
 }

@@ -7,8 +7,12 @@
 //
 
 #include "guichan/animation.hpp"
+#include "guichan/widget.hpp"
 
 namespace gcn {
+    
+    std::string Animation::MessageStart = "anm_start";
+    std::string Animation::MessageEnd = "anm_end";
     
     Animation::Animation(int time):
     Modifier(true),
@@ -47,7 +51,21 @@ namespace gcn {
     }
     
     float Animation::getCurrTimeRatio() const {
-        return (float)mCurrTime / mTotalTime;
+        if(!isFinished())
+            return (float)mCurrTime / mTotalTime;
+        return 1.f;
+    }
+    
+    void Animation::onAdd(Widget* widget) {
+        widget->sendMessage(Animation::MessageStart);
+    }
+   
+    void Animation::onRemove(Widget* widget) {
+        widget->sendMessage(Animation::MessageEnd);
+    }
+    
+    void Animation::onRelease(Widget* widget) {
+        widget->sendMessage(Animation::MessageEnd);
     }
     
 } // namespace gcn

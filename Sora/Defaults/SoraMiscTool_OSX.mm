@@ -15,6 +15,8 @@
 #import <Cocoa/Cocoa.h>	
 #import <Foundation/Foundation.h>
 
+#include "../SoraStringTokenlizer.h"
+
 namespace sora {
 	
 	inline int32 SoraMiscToolOSX::msgCodeTokCFNotificationLevel(int32 msgCode) {
@@ -73,14 +75,13 @@ namespace sora {
 		
 		NSMutableArray* fileTypes = nil;
 		if(filter != NULL) {
-			SoraString strFilter = filter;
 			fileTypes = [NSMutableArray arrayWithObject:@"*"];
-			size_t prevPos = 0;
-			for(size_t i=0; i<strFilter.size(); ++i) {
-				if(filter[i] == ';') {
-					[fileTypes addObject: [[NSString alloc] initWithUTF8String: strFilter.substr(prevPos, i).c_str()]];
-					prevPos = i+1;
-				}
+			
+            SoraStringTokenlizer tokens(filter);
+            SoraStringTokenlizer::iterator it = tokens.begin();
+            while(it != tokens.end()) {
+                [fileTypes addObject: [[NSString alloc] initWithUTF8String: (*it).c_str()]];
+                ++it;
 			}
 		}
 		
@@ -91,11 +92,12 @@ namespace sora {
 			filePath = [[NSString alloc] initWithUTF8String: "~/"];
 		
 		ulong32 result = [openDlg runModalForDirectory:filePath
-											  file:nil 
-											 types:fileTypes];
+                                                       file:nil 
+                                                       types:fileTypes];
 		
 		if (result == NSOKButton) {
             [filePath release];
+            
 			NSArray *filesToOpen = [openDlg filenames];
 			ulong32 count = [filesToOpen count];
 			if(count > 0) {
@@ -109,6 +111,7 @@ namespace sora {
 	SoraWString SoraMiscToolOSX::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
 		NSSavePanel* saveDlg = [NSSavePanel savePanel];
 		
+        NSString* fileExt = nil;
 		if(defaultExt != NULL) {
 			NSString* fileExt = [[NSString alloc] initWithUTF8String: defaultExt];
 			[saveDlg setRequiredFileType:fileExt];
@@ -121,13 +124,18 @@ namespace sora {
 			filePath = [[NSString alloc] initWithUTF8String: "~/"];
 		
 		int result = [saveDlg runModalForDirectory:filePath
-											  file:nil];
+                                                   file:nil];
 		
 		if (result == NSOKButton) {
             [filePath release];
+            [fileExt release];
+            
 			std::string fileName = [[saveDlg filename] UTF8String];
 			return sora::s2ws(fileName);
 		}
+        [filePath release];
+        [fileExt release];
+        
 		return L"\0";
 		
 	}

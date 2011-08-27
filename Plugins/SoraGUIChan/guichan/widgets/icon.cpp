@@ -110,6 +110,7 @@ namespace gcn
         {
             const int x = (getWidth() - mImage->getWidth()) / 2;
             const int y = (getHeight() - mImage->getHeight()) / 2;
+            graphics->setColor(getForegroundColor());
             graphics->drawImage(mImage, x, y);
         }
     }

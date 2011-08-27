@@ -64,6 +64,9 @@
 #include "guichan/birthListener.h"
 #include "guichan/style.hpp"
 #include "guichan/modifier.hpp"
+#include "guichan/style.hpp"
+#include "guichan/animation.hpp"
+#include "guichan/widgetFactory.hpp"
 
 #include <assert.h>
 #include <algorithm>
@@ -71,15 +74,13 @@
 namespace gcn
 {
     Font* Widget::mGlobalFont = NULL;
+    Style* Widget::mGlobalStyle = NULL;
+    
     DefaultFont Widget::mDefaultFont;
     std::list<Widget*> Widget::mWidgets;
 
     Widget::Widget()
-            : mForegroundColor(Style::getGlobalForegroundColor()),
-              mBackgroundColor(Style::getGlobalBackgroundColor()),
-              mBaseColor(Style::getGlobalBaseColor()),
-              mSelectionColor(Style::getGlobalSelectionColor()),
-              mFocusHandler(NULL),
+            : mFocusHandler(NULL),
               mInternalFocusHandler(NULL),
               mParent(NULL),
               mFrameSize(0),
@@ -88,9 +89,16 @@ namespace gcn
               mTabIn(true),
               mTabOut(true),
               mEnabled(true),
-              mCurrentFont(NULL)
+              mCurrentFont(NULL),
+              mStyle(Style::DefaultStyle()),
+              mAlpha(255)
     {
         mWidgets.push_back(this);
+        
+        mForegroundColor = mStyle->getForegroundColor();
+        mBackgroundColor = mStyle->getBackgroundColor();
+        mBaseColor = mStyle->getBaseColor();
+        mSelectionColor = mStyle->getSelectionColor();
     }
 
     Widget::~Widget()
@@ -774,34 +782,46 @@ namespace gcn
         ModifierIterator iter = mModifiers.begin();
         ModifierIterator end = mModifiers.end();
         
-        while(iter != end) {
+        for(iter; iter != end; ++iter) {
             (*iter)->update(this);
             if((*iter)->isFinished()) {
                 if((*iter)->isAutoRelease()) {
+                    (*iter)->onRelease(this);
                     (*iter)->release();
                     iter = mModifiers.erase(iter);
                     continue;
                 }
             }
-            ++iter;
         }
     }
 	
 	const std::vector<Modifier*>& Widget::_getModifiers() {
 		return mModifiers;
 	}
+    
+    Modifier* Widget::findModifierByName(const std::string& name) const {
+        ModifierList::const_iterator it = mModifiers.begin();
+        while(it != mModifiers.end()) {
+            if((*it)->getName() == name)
+                return (*it);
+            ++it;
+        }
+        return NULL;
+    }
 	
 	void Widget::addModifier(Modifier* modifier) {
 		assert(modifier);
         
         mModifiers.push_back(modifier);
         modifier->setOwner(this);
+        modifier->onAdd(this);
 	}
 	
 	void Widget::removeModifier(Modifier* modifier) {
         assert(modifier);
         
         mModifiers.erase(std::remove(mModifiers.begin(), mModifiers.end(), modifier), mModifiers.end());
+        modifier->onRemove(this);
         modifier->setOwner(NULL);
 	}
 	
@@ -813,9 +833,76 @@ namespace gcn
 		mBaseColor.a = alpha;
 		mSelectionColor.a = alpha;
 		mBackgroundColor.a = alpha;
+        
+        mAlpha = alpha;
 	}
+    
+    int Widget::getAlpha() const {
+        return mAlpha;
+    }
 
     const std::list<BirthListener*>& Widget::_getBirthListeners() {
         return mBirthListeners;
     }
+    
+    void Widget::setStyle(Style* style) {
+        mStyle = style;
+    }
+    
+    Style* Widget::getStyle() const {
+        return mStyle;
+    }
+    
+    void Widget::setGlobalStyle(Style* style) {
+        mGlobalStyle = style;
+    }
+    
+    Style* Widget::getGlobalStyle() {
+        return mGlobalStyle;
+    }
+    
+    void Widget::sendMessage(const std::string& mssg, const std::string& receiver) {
+        if(receiver == getId())
+            onMessage(Message(this, this, mssg));
+    }
+    
+    void Widget::sendMessage(const Message& mssg) {
+        if(mssg.getReceiver() == this)
+            onMessage(mssg);
+    }
+    
+    void Widget::onMessage(const Message& mssg) {
+        // default message process
+        if(mssg.getMessage() == Animation::MessageStart) {
+            setEnabled(false);
+        } else if(mssg.getMessage() == Animation::MessageEnd) {
+            setEnabled(true);
+        }
+    }
+    
+    Message::Message(Widget* sender,
+                     Widget* receiver,
+                     const std::string& mssg):
+    mSender(sender),
+    mReceiver(receiver),
+    mMessage(mssg) {
+        
+    }
+    
+    Widget* Message::getSender() const {
+        return mSender;
+    }
+    
+    Widget* Message::getReceiver() const {
+        return mReceiver;
+    }
+    
+    const std::string& Message::getMessage() const {
+        return mMessage;
+    }
+    
+    Widget* Widget::createWidget(const std::string& key) {
+        return CreateWidget(key);
+    }
+    
 }

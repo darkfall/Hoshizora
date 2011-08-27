@@ -168,14 +168,6 @@ private:
 	TiXmlDocument *doc;
 };
 
-class XmlListModel : public gcn::ListModel
-{
-public:
-    virtual int getNumberOfElements();
-    virtual std::string getElementAt(int i);
-	virtual void pushElement(const std::string& str) { items.push_back(str); }
-	std::vector<std::string> items;
-};
 
 } // namespace sora
 

@@ -10,42 +10,83 @@
 
 namespace gcn {
     
-	Color Style::mGlobalBackgroundColor(0xffffff);
-	Color Style::mGlobalForegroundColor(0x000000);
-	Color Style::mGlobalBaseColor(0x808090);
-	Color Style::mGlobalSelectionColor(0xc3d9ff);
+    std::string StyleStringContainer::getStyleString(const std::string& key) const {
+        StyleStringMap::const_iterator it = mStyleStrings.find(key);
+        if(it != mStyleStrings.end())
+            return it->second;
+        return std::string();
+    }
     
-	void Style::setGlobalBackgroundColor(const Color& col) {
+    void StyleStringContainer::setStyleString(const std::string& key, const std::string& val) {
+        StyleStringMap::iterator it = mStyleStrings.find(key);
+        if(it != mStyleStrings.end())
+            it->second = val;
+        else
+            mStyleStrings.insert(std::make_pair(key, val));
+    }
+    
+    Style* Style::DefaultStyle() {
+        static Style global_style;
+        return &global_style;
+    }
+    
+    Style::Style():
+    mGlobalBackgroundColor(0xffffff),
+    mGlobalForegroundColor(0x000000),
+    mGlobalBaseColor(0x808090),
+    mGlobalSelectionColor(0xc3d9ff) {
+        
+    }
+    
+	void Style::setBackgroundColor(const Color& col) {
 		mGlobalBackgroundColor = col;
 	}
 	
-	void Style::setGlobalForegroundColor(const Color& col) {
+	void Style::setForegroundColor(const Color& col) {
 		mGlobalForegroundColor = col;
 	}
 	
-	void Style::setGlobalBaseColor(const Color& col) {
+	void Style::setBaseColor(const Color& col) {
 		mGlobalBaseColor = col;
 	}
 	
-	void Style::setGlobalSelectionColor(const Color& col) {
+	void Style::setSelectionColor(const Color& col) {
 		mGlobalSelectionColor = col;
 	}
 	
-	Color Style::getGlobalBackgroundColor() {
+	Color Style::getBackgroundColor() {
 		return mGlobalBackgroundColor;
 	}
 	
-	Color Style::getGlobalForegroundColor() {
+	Color Style::getForegroundColor() {
 		return mGlobalForegroundColor;
 	}
 	
-	Color Style::getGlobalBaseColor() {
+	Color Style::getBaseColor() {
 		return mGlobalBaseColor;
 	}
 	
-	Color Style::getGlobalSelectionColor() {
+	Color Style::getSelectionColor() {
 		return mGlobalSelectionColor;
 	}
     
+    std::string Style::getStyleString(const std::string& key) const {
+        return mStyleStrings.getStyleString(key);
+    }
+    
+    void Style::setStyleString(const std::string& key, const std::string& val) {
+        mStyleStrings.setStyleString(key, val);
+    }
+    
+    Color Style::getStyleColor(const std::string& col) const {
+        StyleColorMap::const_iterator it = mStyleColors.find(col);
+        if(it != mStyleColors.end())
+            return it->second;
+        return gcn::Color();
+    }
+    
+    void Style::setStyleColor(const std::string& key, const gcn::Color& col) {
+        mStyleColors[key] = col;
+    }
     
 } // namespace gcn

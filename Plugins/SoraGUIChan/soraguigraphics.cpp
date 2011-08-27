@@ -116,6 +116,7 @@ namespace gcn
         dstY += top.yOffset;*/
 
         soraImage->getSprite()->setTextureRect((float)srcX, (float)srcY, (float)width, (float)height);
+        soraImage->getSprite()->setColor(mHardwareColor);
         soraImage->getSprite()->render((float)dstX, (float)dstY);
     }
 
@@ -217,6 +218,8 @@ namespace gcn
         quad.v[3].x   = x1;
         quad.v[3].y   = y2;
         quad.v[3].col = mHardwareColor;
+        
+        printf("%d\n", CGETA(mHardwareColor));
 
         int i;
         for (i = 0; i < 4; ++i)	{
@@ -230,7 +233,8 @@ namespace gcn
 
     void SoraGUIGraphics::setColor(const Color &color) {
         mColor = color;
-
+        mColor.a *= mGlobalTransparency;
+        
         mHardwareColor = CARGB(color.a * mGlobalTransparency, color.r, color.g, color.b);
     }
 

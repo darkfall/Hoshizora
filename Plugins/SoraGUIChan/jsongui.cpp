@@ -562,10 +562,10 @@ namespace sora {
 		if(val.isMember("items")) {
 			Json::Value items = val["items"];
 			if(items.isArray()) {
-				JsonListModel* listModel = new JsonListModel;
+                gcn::ListModel* listModel = new gcn::ListModel;
 
 				for(int i=0; i<items.size(); ++i) {
-					listModel->items.push_back(items[i].asString());
+					listModel->pushElement(items[i].asString());
 				}
 				listbox->setListModel(listModel);
 			}
@@ -593,10 +593,10 @@ namespace sora {
 		if(val.isMember("items")) {
 			Json::Value items = val["items"];
 			if(items.isArray()) {
-				JsonListModel* listModel = new JsonListModel;
+				gcn::ListModel* listModel = new gcn::ListModel;
 				
 				for(int i=0; i<items.size(); ++i) {
-					listModel->items.push_back(items[i].asString());
+					listModel->pushElement(items[i].asString());
 				}
 				dropdown->setListModel(listModel);
 			} 

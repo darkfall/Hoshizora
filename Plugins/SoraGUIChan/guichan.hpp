@@ -94,13 +94,17 @@
 #include <guichan/widgets/textfield.hpp>
 #include <guichan/widgets/window.hpp>
 
-/*
- * extended by Robert Bu
- */
+/**
+ *  Guichan for Hoshizora extensions
+ *  @author Robert Bu
+ **/
 #include <guichan/Sound.hpp>
 #include <guichan/SoundLoader.hpp>
 #include <guichan/style.hpp>
 #include <guichan/animation.hpp>
+#include <guichan/widgetFactory.hpp>
+#include <guichan/modifierFactory.hpp>
+#include <guichan/animationFactory.hpp>
 
 #include "guichan/platform.hpp"
 

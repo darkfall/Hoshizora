@@ -50,7 +50,7 @@ namespace gcn
 			mSoraSprite->setColor(CARGB(col.a, col.r, col.g, col.b));
 	}
 	
-	gcn::Color SoraGUIImage::getColor() {
+	gcn::Color SoraGUIImage::getColor() const {
 		if(mSoraSprite) {
 			ulong32 hardwareColor = mSoraSprite->getColor();
 			return gcn::Color(CGETR(hardwareColor),

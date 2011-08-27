@@ -3,6 +3,7 @@
 
 #include "../SoraStringConv.h"
 #include "../SoraPlatform.h"
+#include "../SoraStringTokenlizer.h"
 #include "SoraDefaultMiscTool.h"
 
 #ifdef OS_WIN32
@@ -25,7 +26,19 @@ public:
 	void setMainWindowHandle(ulong32 mainWindowHandle) { _hWnd = (HWND)mainWindowHandle; }
 	
 	SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
-		OPENFILENAMEA ofn;
+        std::string realfilter("My Files ("+filter+")\0");
+        
+        if(filter) {
+            SoraStringTokenlizer tokens(filter);
+            SoraStringTokenlizer::iterator it = tokens.begin();
+            while(it != tokens.end()) {
+                realfilter += "*."+*it+";";
+                ++it;
+            }
+            realfilter += "\0\0";
+        }
+        
+		 OPENFILENAMEA ofn;
 		 ofn.lStructSize       = sizeof(OPENFILENAME);
 		 ofn.hwndOwner         = _hWnd;
 		 ofn.hInstance         = NULL;
@@ -58,7 +71,7 @@ public:
 			 ofn.lpstrInitialDir = defaultPath;
 		 ofn.lpstrDefExt = NULL;
 		 if(filter)
-			 ofn.lpstrFilter = filter;
+			 ofn.lpstrFilter = realfilter;
 		 
 		 if(GetOpenFileNameA(&ofn))
 			return sora::s2ws(fileName);
@@ -66,7 +79,19 @@ public:
 	}
 	
 	SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
-		OPENFILENAMEA ofn;
+		std::string realfilter("My Files ("+filter+")\0");
+        
+        if(filter) {
+            SoraStringTokenlizer tokens(filter);
+            SoraStringTokenlizer::iterator it = tokens.begin();
+            while(it != tokens.end()) {
+                realfilter += "*."+*it+";";
+                ++it;
+            }
+            realfilter += "\0\0";
+        }
+        
+        OPENFILENAMEA ofn;
 		 ofn.lStructSize       = sizeof(OPENFILENAME);
 		 ofn.hwndOwner         = _hWnd;
 		 ofn.hInstance         = NULL;
@@ -100,7 +125,7 @@ public:
 		 if(defaultExt)
 			ofn.lpstrDefExt = defaultExt;
 		 if(filter)
-			 ofn.lpstrFilter = filter;
+			 ofn.lpstrFilter = realfilter;
 		 
 		 if(GetSaveFileNameA(&ofn))
 			 return sora::s2ws(fileName);

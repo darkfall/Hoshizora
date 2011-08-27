@@ -76,18 +76,6 @@ namespace sora {
         WIDGET_MAP widgets;
     };
 	
-	class JsonListModel : public gcn::ListModel {
-	public:
-		virtual int getNumberOfElements() { return items.size(); }
-		virtual std::string getElementAt(int i) { 
-			if(i < (int)items.size())
-				return items[i];
-			return "null";
-		}
-		virtual void pushElement(const std::string& str) { items.push_back(str); }
-		
-		std::vector<std::string> items;
-	};
 	
 	class JsonGuiWritter {
 	public:

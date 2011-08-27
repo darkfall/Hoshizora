@@ -57,7 +57,7 @@ namespace gcn
 		virtual void setTextureRect(const Rectangle& rect);
 		
 		virtual void setColor(const Color& color);
-		virtual gcn::Color getColor();
+		virtual gcn::Color getColor() const;
 		virtual void setRotation(float rot);
 		
 		virtual std::string getName();

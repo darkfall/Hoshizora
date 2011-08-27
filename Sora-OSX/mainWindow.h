@@ -54,9 +54,6 @@ private:
     sora::SoraCamera* mCamera;
     
     sora::SoraFont* mFont;
-    
-    sora::SoraSocket mSocket1;
-    sora::SoraSocket mSocket2;
 };
 
 #endif

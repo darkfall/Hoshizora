@@ -45,8 +45,10 @@
 #define GCN_LISTMODEL_HPP
 
 #include <string>
+#include <vector>
 
 #include "guichan/platform.hpp"
+
 
 namespace gcn
 {
@@ -71,7 +73,9 @@ namespace gcn
          *
          * @return The number of elements in the list
          */
-        virtual int getNumberOfElements() = 0;
+        virtual int getNumberOfElements() {
+            return static_cast<int>(mElements.size());
+        }
 		
         /**
          * Gets an element at a certain index in the list.
@@ -79,7 +83,11 @@ namespace gcn
          * @param i An index in the list.
          * @return An element as a string at the a certain index.
          */
-        virtual std::string getElementAt(int i) = 0;
+        virtual std::string getElementAt(int i) {
+            if(i >= 0 && i <= mElements.size())
+                return mElements[i];
+            return std::string();
+        }
         
         /**
          * Push a element into the tail of the list
@@ -89,7 +97,7 @@ namespace gcn
          * @since GuiChan for Hoshizora
          */
         virtual void pushElement(const std::string& elmnt) {
-            
+            mElements.push_back(elmnt);
         }
         
         /**
@@ -100,8 +108,25 @@ namespace gcn
          * @since GuiChan for Hoshizora
          */
         virtual void setElementAt(int i, const std::string& elmnt) {
-            
+            if(i >= 0 && i <= mElements.size())
+                mElements[i] = elmnt;
         }
+        
+        /**
+         * Remove a element at
+         *
+         * @parma the element index
+         * @author Robert Bu(darkfall)
+         * @since Guichan for Hoshizora
+         */
+        virtual void removeElementAt(int i)  {
+            if(i >= 0 && i <= mElements.size())
+                mElements.erase(mElements.begin()+i);
+        }
+        
+    private:
+        typedef std::vector<std::string> StringList;
+        StringList mElements;
     };
 }
 

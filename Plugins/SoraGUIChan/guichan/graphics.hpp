@@ -281,9 +281,10 @@ namespace gcn
          * This will override the transparency of all widgets
          * If a widget is already transparent, then the final transparency would be
          * WidgetTransparency * GlobalTransparency
+         * Notice that some renderer's can choose not to support this
          *
          * @param the global transparency
-         * @author Robert Bu(darkfall)(darkfall)
+         * @author Robert Bu(darkfall)
          * @since GuiChan for Hoshizora
          **/
         virtual void setGlobalTransparency(float a) {
@@ -292,7 +293,7 @@ namespace gcn
         /**
          * Get the global transparency
          *
-         * @author Robert Bu(darkfall)(darkfall)
+         * @author Robert Bu(darkfall)
          * @since GuiChan for Hoshizor
          **/
         virtual float getGlobalTransparency() const {

@@ -146,10 +146,11 @@ namespace gcn
          */
         virtual Widget* findWidgetById(const std::string &id);
 
-
         // Inherited from Widget
 
         virtual void draw(Graphics* graphics);
+        
+        virtual void onMessage(const Message& mssg);
 
     protected:
         /**

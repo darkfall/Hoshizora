@@ -171,13 +171,8 @@ namespace gcn
          * @since 0.5.0
          */
         virtual void putPixel(int x, int y, const Color& color) = 0;
-		
-		virtual void setColor(const Color& color) = 0;
-		virtual gcn::Color getColor() = 0;
-		virtual void setRotation(float rot) = 0;
-		
-		
-		virtual void setTextureRect(const Rectangle& rect) = 0;
+        
+        virtual void setTextureRect(const Rectangle& rect) = 0;
 		
 		/*
 		 extension
@@ -185,6 +180,13 @@ namespace gcn
 		virtual void setName(const std::string&) = 0;
 		virtual std::string getName() = 0;
 
+		virtual void setColor(const Color& color) = 0;
+		virtual gcn::Color getColor() const = 0;
+		virtual void setRotation(float rot) = 0;
+		
+		virtual void setTextureRect(const Rectangle& rect) = 0;
+		
+        
         /**
          * Converts the image, if possible, to display format.
          *

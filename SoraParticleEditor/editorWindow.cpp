@@ -1,5 +1,4 @@
 #include "editorWindow.h"
-#include "Darklib/FileDlgOsx.h"
 
 #include "peMainWindow.h"
 
@@ -10,10 +9,6 @@ gcn::Window* pStartColorPanel;
 gcn::Window* pEndColorPanel;
 
 std::wstring sCurrParticleFile = L"Default.sps";
-
-#if defined(OS_OSX) || defined(OS_WIN32)
-FileDlg* fileDlg;
-#endif
 
 bool bOpenFinished = false;
 bool bMouseDown = false;
@@ -124,24 +119,24 @@ public:
 			std::cout<<ev->getParams()<<std::endl;
 			if(ev->getParams().compare("on") == 0) {
 				bShowBoundingBox = true;
-				ev->setResults("bouding box show enabled");
+				ev->pushResult("bouding box show enabled");
 			}
 			else if(ev->getParams().compare("off") == 0) {
 				bShowBoundingBox = false;
-				ev->setResults("bouding box show disabled");
+				ev->pushResult("bouding box show disabled");
 			}
 			
 		} else if(ev->getCmd().compare("showgui") == 0) {
 			if(ev->getParams().compare("on") == 0) {
 				sora::GCN_GLOBAL->getTop()->setEnabled(true);
 				sora::GCN_GLOBAL->getTop()->setVisible(true);
-				ev->setResults("gui show enabled");
+				ev->pushResult("gui show enabled");
 
 			} else if(ev->getParams().compare("off") == 0) {
 				sora::GCN_GLOBAL->getTop()->setEnabled(false);
 				sora::GCN_GLOBAL->getTop()->setVisible(false);
 				
-				ev->setResults("gui show disabled");
+				ev->pushResult("gui show disabled");
 			}
 		} else if(ev->getCmd().compare("moveto") == 0) {
 			std::vector<std::string> params;
@@ -511,176 +506,69 @@ void loadBGSprite(const SoraWString& path) {
 //	pbgSpr->setCenter(pbgSpr->getSpriteWidth()/2, pbgSpr->getSpriteHeight()/2);
 }
 
-void applyFilterSps() {
-#ifdef WIN32	
-	fileDlg->SetFilter(TEXT("SoraParticleFile (*.sps)\0*.sps\0\0"));
-	fileDlg->SetDefaultExt(L".sps\0");	
-#else	
-	fileDlg->SetFilter("sps;");
-	fileDlg->SetDefaultExt("sps");	
-#endif
-}
-void applyFilterImage() {
-#ifdef WIN32	
-	fileDlg->SetFilter(TEXT("ImageFiles (*.png,*.bmp,*.jpg)\0*.png;*.bmp;*.jpg\0\0"));
-	fileDlg->SetDefaultExt(L".png\0");	
-#else	
-	fileDlg->SetFilter("png;bmp;jpg");
-	fileDlg->SetDefaultExt("png");	
-#endif
-}
-
 class OptionPanelButtonResponser: public SoraGUIResponser {
 	void action() {
-	if(getID().compare("RestoreDefault") == 0) {
-		peffect->killAll();
-		peffect->emit(sCurrParticleFile, pspr);
-	
-		restoreValue();
-	} else if(getID().compare("Open") == 0) {
-#if defined(OS_OSX) || defined(OS_WIN32)
-
-		if(bOpenFinished) {
-			peffect->restart();
-			bOpenFinished = false;
-			return;
-		}
-
-#ifdef WIN32
-		wchar_t fileTitleBuffer[512];
-		wchar_t filePathBuffer[512];
-
-		fileTitleBuffer[0] = '\0';
-		filePathBuffer[0] = '\0';
-		
-		applyFilterSps();
-		if(fileDlg->FileOpenDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
-			sCurrParticleFile = filePathBuffer;
-			
-			delete peffect;
-			peffect = new SoraParticleSystem;
-			peffect->emit(sCurrParticleFile, pspr);
-			bOpenFinished = true;
-			
-			restoreValue();
-			peffect->fire();
-			return;
-			
-#elif defined(OS_OSX)
-		char fileTitleBuffer[512];
-		char filePathBuffer[512];
-			
-		fileTitleBuffer[0] = '\0';
-		filePathBuffer[0] = '\0';
-			
-		applyFilterSps();
-			SoraWString particleFile = sora::SORA->fileOpenDialog("sps;", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
-
-		if(particleFile.size() != 0) {	
-			sCurrParticleFile = particleFile;
-			
-			delete peffect;
-			peffect = new SoraParticleSystem;
-			peffect->emit(sCurrParticleFile, pspr);
-			bOpenFinished = true;
-			
-			restoreValue();
-			peffect->fire();
-			return;
-#endif
-			
-			
-		}
-#endif
-	} else if(getID().compare("Save") == 0) {
-		peffect->saveScript(sCurrParticleFile);
-	} else if(getID().compare("SaveAs") == 0) {
-		
-#ifdef WIN32
-		wchar_t fileTitleBuffer[512];
-		wchar_t filePathBuffer[512];
-		fileTitleBuffer[0] = '\0';
-		filePathBuffer[0] = '\0';
-
-		applyFilterSps();
-		if(fileDlg->FileSaveDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
-			sCurrParticleFile = filePathBuffer;
-		}
-		
-#elif defined(OS_OSX)
-		char fileTitleBuffer[512];
-		char filePathBuffer[512];
-		fileTitleBuffer[0] = '\0';
-		filePathBuffer[0] = '\0';
-		
-		applyFilterSps();
-		if(fileDlg->FileSaveDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
-			sCurrParticleFile = s2ws(filePathBuffer);
-		}
-#endif
-		
-		peffect->saveScript(sCurrParticleFile);
-
-	}  else if(getID().compare("FPS") == 0) {
-		gcn::Slider* ps = (gcn::Slider*)getSource();
-		sora::SORA->setFPS(ps->getValue());
-		
-	} else if(getID().compare("TextureRect") == 0) {
-		gcn::Slider* ps = (gcn::Slider*)getSource();
-		int v = (int)ps->getValue() % peMainWindowLoader::Instance()->getRow();
-		int h = (int)ps->getValue() / peMainWindowLoader::Instance()->getRow();
-		peffect->pheader.texX = v*peMainWindowLoader::Instance()->getTexWidth();
-		peffect->pheader.texY = h*peMainWindowLoader::Instance()->getTexHeight();
-		peffect->pheader.texW = peMainWindowLoader::Instance()->getTexWidth();
-		peffect->pheader.texH = peMainWindowLoader::Instance()->getTexHeight();
-		
-		sora::DebugPtr->log(vamssg("%.2f, %.2f, %.2f, %.2f", peffect->pheader.texX, peffect->pheader.texY,peffect->pheader.texW, peffect->pheader.texH));
-	} else if(getID().compare("ParticleSprite") == 0) {
-#ifdef WIN32
-		wchar_t fileTitleBuffer[512];
-		wchar_t filePathBuffer[512];
-		fileTitleBuffer[0] = '\0';
-		filePathBuffer[0] = '\0';
-		
-		applyFilterImage();
-		if(fileDlg->FileOpenDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
-			loadParticleSprite(filePathBuffer);
-		}
-#elif defined(OS_OSX)
-		char fileTitleBuffer[512];
-		char filePathBuffer[512];
-		fileTitleBuffer[0] = '\0';
-		filePathBuffer[0] = '\0';
-		
-		applyFilterImage();
-		if(fileDlg->FileOpenDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
-			loadParticleSprite(s2ws(filePathBuffer));
-		}
-#endif
-	} else if(getID().compare("BGSprite") == 0) {
-#ifdef WIN32
-		wchar_t fileTitleBuffer[512];
-		wchar_t filePathBuffer[512];
-		fileTitleBuffer[0] = '\0';
-		filePathBuffer[0] = '\0';
-		
-		applyFilterImage();
-		if(fileDlg->FileOpenDlg((HWND)SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
-			loadBGSprite(filePathBuffer);
-		}
-#elif defined(OS_OSX)
-		char fileTitleBuffer[512];
-		char filePathBuffer[512];
-		fileTitleBuffer[0] = '\0';
-		filePathBuffer[0] = '\0';
-		
-		applyFilterImage();
-		if(fileDlg->FileOpenDlg(SoraCore::Instance()->getMainWindowHandle(), filePathBuffer, fileTitleBuffer)) {
-			loadBGSprite(s2ws(filePathBuffer));
-		}
-#endif
-	}
-	}
+        if(getID().compare("RestoreDefault") == 0) {
+            peffect->killAll();
+            peffect->emit(sCurrParticleFile, pspr);
+            
+            restoreValue();
+        } else if(getID().compare("Open") == 0) {
+            if(bOpenFinished) {
+                peffect->restart();
+                bOpenFinished = false;
+                return;
+            }
+            
+            
+            SoraWString particleFile = sora::SORA->fileOpenDialog("sps", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
+            
+            if(particleFile.size() != 0) {				
+                delete peffect;
+                peffect = new SoraParticleSystem;
+                peffect->emit(particleFile, pspr);
+                bOpenFinished = true;
+                
+                restoreValue();
+                peffect->fire();
+                return;
+                
+            }
+        } else if(getID().compare("Save") == 0) {
+            peffect->saveScript(sCurrParticleFile);
+        } else if(getID().compare("SaveAs") == 0) {
+            
+            SoraWString particleFile = sora::SORA->fileSaveDialog("sps", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str(), "sps");
+            
+            if(!particleFile.empty()) {
+                peffect->saveScript(particleFile);
+            }
+            
+        }  else if(getID().compare("FPS") == 0) {
+            gcn::Slider* ps = (gcn::Slider*)getSource();
+            sora::SORA->setFPS(ps->getValue());
+            
+        } else if(getID().compare("TextureRect") == 0) {
+            gcn::Slider* ps = (gcn::Slider*)getSource();
+            int v = (int)ps->getValue() % peMainWindowLoader::Instance()->getRow();
+            int h = (int)ps->getValue() / peMainWindowLoader::Instance()->getRow();
+            peffect->pheader.texX = v*peMainWindowLoader::Instance()->getTexWidth();
+            peffect->pheader.texY = h*peMainWindowLoader::Instance()->getTexHeight();
+            peffect->pheader.texW = peMainWindowLoader::Instance()->getTexWidth();
+            peffect->pheader.texH = peMainWindowLoader::Instance()->getTexHeight();
+            
+        } else if(getID().compare("ParticleSprite") == 0) {
+            
+            SoraWString imageFile = sora::SORA->fileOpenDialog("jpg;png;bmp;jpeg", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
+            
+            loadParticleSprite(imageFile);
+            
+        } else if(getID().compare("BGSprite") == 0) {
+            SoraWString imageFile = sora::SORA->fileOpenDialog("jpg;png;bmp;jpeg", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
+            
+            loadBGSprite(imageFile);
+        }
+    }
 };
 
 #include "SoraGUIChan/guichansetup.h"
@@ -784,6 +672,8 @@ void editorWindow::render() {
 	}
 }
 
+#include "SoraGUIChan/guichan/AnimationFadeIn.h"
+
 gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 	gcn::Widget* pprev = GCN_GLOBAL->findWidget("SoraWindow");
 	if(pprev != NULL) {
@@ -804,6 +694,7 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 	if(pXmlParser->parse((const char*)pdata, size)) {
 		gcn::Widget* pWindow = pXmlParser->getWidget("SoraWindow");
 		pWindow->setDimension(gcn::Rectangle(0, 0, SORA->getScreenWidth(), SORA->getScreenHeight()));
+        pWindow->addModifier(new gcn::AnimationFadeIn(0, 255, 120));
 		GCN_GLOBAL->getTop()->add( pWindow );
 
 	//	pspr = SORA->createSprite(L"pics/particles.png");
@@ -899,14 +790,6 @@ gcn::Widget* editorWindow::loadXML(const SoraWString& xmlPath) {
 		labelLoadValue();
 		restoreValue();
 		
-#if defined(OS_OSX) || defined(OS_WIN32)
-		fileDlg = new FileDlg();
-#ifdef OS_OSX
-		fileDlg->SetDefaultPath(ws2s(SoraFileUtility::getApplicationPath()).c_str());
-#else
-		fileDlg->SetDefaultPath(SoraFileUtility::getApplicationPath().c_str());
-#endif
-#endif
 		new PEConsoleCmdHandler;
 
 		return pWindow;

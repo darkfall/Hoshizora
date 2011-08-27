@@ -61,6 +61,7 @@ namespace gcn
 	class SoundLoader;
     class Widget;
     class Style;
+    class Message;
 
     // The following comment will appear in the doxygen main page.
     /**
@@ -130,7 +131,7 @@ namespace gcn
          * @author Robert Bu(darkfall)
          * @since GuiChan for Hoshizora
          */
-        virtual void setStyle(Style* style);
+        virtual void setGlobalStyle(Style* style);
         
         /**
          * Get the global style of the widgets
@@ -138,7 +139,32 @@ namespace gcn
          * @author Robert Bu(darkfall)
          * @since GuiChan for Hoshizora
          */
-        virtual Style* getStyle() const;
+        virtual Style* getGlobalStyle() const;
+        
+        /**
+         * Find a widget by the given id
+         * Available if only the top widget is a subclass of BasicContainer
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         **/
+        virtual Widget* findWidgetById(const std::string& id);
+        
+        /**
+         * Send a message to a widget or all widgets
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         **/
+        virtual void sendMessage(const std::string& mssg, const std::string& receiver);
+        
+        /**
+         * Send a message to a widget or all widgets
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         **/
+        virtual void sendMessage(const Message& mssg);
 
         /**
          * Sets the graphics object to use for drawing.
@@ -270,6 +296,25 @@ namespace gcn
          * @since 0.5.0
          */
         virtual void removeGlobalKeyListener(KeyListener* keyListener);
+        
+        /**
+         * Set global widget alpha color
+         * Applies to Graphics::setGlobalTransparency
+         * Range 0 - 1
+         *
+         * @author Robert Bu(darkfall)
+         * @since Guichan for Hoshizora
+         **/
+        virtual void setAlpha(float alpha);
+        
+        /**
+         * Get global widget alpha color
+         * Applies to Graphics::setGlobalTransparency
+         *
+         * @author Robert Bu(darkfall)
+         * @since Guichan for Hoshizora
+         **/
+        virtual float getAlpha() const;
 
     protected:
         /**
@@ -533,11 +578,6 @@ namespace gcn
          * Used to properly distribute mouse events.
          */
         std::deque<Widget*> mWidgetWithMouseQueue;
-        
-        /**
-         * Holds the global style of the widgets
-         */
-        Style* mStyle;
     };
 }
 

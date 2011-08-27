@@ -25,9 +25,11 @@
 
 #include "SoraLua/SoraLuaMainWindow.h"
 
+#include "../SoraParticleEditor/peMainWindow.h"
+
 int main(int argc, char* argv[]) {    
         
-    sora::InitAndCreateSoraCore(new sora::SoraLuaMainWindow(L"LuaMainWindow.lua"), 
+    sora::InitAndCreateSoraCore(new peMainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */
                                                         false,
                                                         /* use fullscreen buffer */
