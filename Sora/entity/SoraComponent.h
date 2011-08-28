@@ -33,19 +33,15 @@ namespace sora {
          * Otherwise only the component itself would be informed of the existence
          * of other components
          **/
-        SoraComponent(SoraEntity* owner, bool heavyWeight=true):
-        SoraDynRTTIClass(getName()),
+        SoraComponent(const std::string& name, bool heavyWeight=true):
+        SoraDynRTTIClass(name),
         mHeavyWeight(heavyWeight),
-        mOwner(owner) {
+        mOwner(0) {
             
         }
                 
         virtual ~SoraComponent() {}
         
-        /**
-         * Owner set/get function
-         * Use with care
-         **/
         SoraEntity* getOwner() const {
             return mOwner;
         }
@@ -63,9 +59,7 @@ namespace sora {
          * Better be the class name
          * Suggest use SORA_IMPL_COMPONENT to implement this in your own class
          **/
-        virtual std::string getName() const {
-			return "ComponentBase";
-		}
+        virtual std::string getName() const = 0;
         
         /**
          * Components must implement message protocol 
@@ -99,7 +93,7 @@ namespace sora {
         /**
          * Message that triggers when component being updated
          **/
-        virtual void onUpdate() { }
+        virtual void onUpdate(float dt) { }
         
         /**
          * Message that triggers when component being rendered

@@ -104,20 +104,11 @@ namespace sora {
 		}
         
         gcn::Widget* findWidget(const SoraString& sid) {
-            gcn::Container* pTop = getTop();
-            if(pTop) {
-                if(sid.compare("top") == 0)
-                    return pTop;
-                
-                gcn::Widget* pWidget = 0;
-                try {
-                    pWidget = pTop->findWidgetById(sid.c_str());
-                } catch(gcn::Exception& exp) {
-                    log_error("guilib exception: "+exp.getMessage());
-                    return NULL;
-                }
-                return pWidget;
-            }
+            if(sid.compare("top") == 0)
+                return getTop();
+            
+            gcn::Widget* pWidget = mGUIChan->findWidgetById(sid);
+            return pWidget;
             return NULL;
         }
         

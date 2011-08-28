@@ -12,11 +12,13 @@
 #include "../SoraObject.h"
 #include "../SoraSimpleFSM.h"
 #include "../SoraPreDeclare.h"
+#include "../SoraStringTokenlizer.h"
 
 #include "../scripting/SoraScriptVMHolder.h"
 
 #include "SoraEntityListener.h"
 #include "SoraComponentHolder.h"
+
 
 namespace sora {
     
@@ -64,7 +66,9 @@ namespace sora {
         template<typename T>
         SoraConnection subscribeToVMDetached(T);
         
-        void addComponent(const SoraString& name, SoraComponent* co);
+        bool hasComponent(const SoraString& name) const;
+        void addComponent(SoraComponent* co);
+        void addComponent(const std::string& name);
         SoraComponent* removeComponent(const SoraString& name);
         SoraComponent* removeComponent(const SoraComponent* co);
         SoraComponent* getComponent(const SoraString& name);
@@ -72,38 +76,32 @@ namespace sora {
         template<typename T>
         void sendMessage(const MessageIdType& message, const T& data);
         void sendMessageT(SoraMessageEvent* message);
-                
+        void sendMessageTo(const SoraString& comp, SoraMessageEvent* message);
+        
+        virtual void render();
+        virtual uint32 update(float dt);
+        virtual void onUpdate(float dt);
+        
+        size_t getPropertySize() const;
+        bool hasProperty(const PropertyId& pid);
+        void addProperty(SoraPropertyBase* prop);
+        SoraPropertyBase* getPropertyBase(const PropertyId& pid) const;
+        SoraPropertyBase* removeProperty(const PropertyId& pid, bool release=true);
+        
+        // template property accessors
+        template<typename T>
+        void addProperty(const PropertyId& pid, const T& prop);
+        template<typename T>
+        void setProperty(const PropertyId& pid, const T& prop);
+        template<typename T>
+        T getProperty(const PropertyId& pid);
+        template<typename T>
+        SoraProperty<T>* getPropertyPtr(const PropertyId& pid) const;
+        template<typename T>
+        T getProperty(const PropertyId& pid, const T& defaultValue) const;
+        
         SORA_DEF_ENTITY(SoraEntity, "Entity")
-        
-    public:
-        struct SORA_API PropertyAccess: uncopyable {
-            friend class SoraEntity;
-
-            PropertyAccess(SoraDynRTTIClass& holder, const SoraEntity& owner):
-            mHolder(holder),
-            mOwner(owner) { }
-            
-            const SoraEntity& getOwner() const;
-            
-            bool has(const PropertyId& pid);
-            bool add(const PropertyId& pid, SoraPropertyInfo* prop);
-            bool add(const PropertyId& pid, SoraPropertyPtr prop);
-            SoraPropertyInfo* remove(const PropertyId& pid, bool release=true);
-            
-            SoraPropertyPtr get(const PropertyId& pid) const;
-            
-            size_t size() const;
-            
-        private:
-            const SoraEntity& mOwner;
-            SoraDynRTTIClass& mHolder;
-        };
-        
-        PropertyAccess& getProperty();
-        
-    private:
-        PropertyAccess mPropertyAccess;
-        
+                
     private:
         void onEnter(const EntityFsmType&, const EntityFsmType::StateType&);
         void onExit(const EntityFsmType&, const EntityFsmType::StateType&);
@@ -113,21 +111,71 @@ namespace sora {
         
         SoraScriptVMHolder mScriptVM;
         SoraComponentHolder mComponents;
+        SoraDynRTTIClass& mHolder;
     };
     
     template<typename T>
-    SoraConnection SoraEntity::subscribeToVMAttached(T fn) {
+    inline SoraConnection SoraEntity::subscribeToVMAttached(T fn) {
         return mScriptVM.subscribeToVMAttached(fn);
     }
     
     template<typename T>
-    SoraConnection SoraEntity::subscribeToVMDetached(T fn) {
+    inline SoraConnection SoraEntity::subscribeToVMDetached(T fn) {
         return mScriptVM.subscribeToVMDetached(fn);
     }
     
     template<typename T>
-    void SoraEntity::sendMessage(const MessageIdType& message, const T& data) {
+    inline void SoraEntity::sendMessage(const MessageIdType& message, const T& data) {
         mComponents.sendMessage(message, data);
+    }
+    
+    template<typename T>
+    inline void SoraEntity::addProperty(const PropertyId& pid, const T& prop) {
+        return mHolder.addProperty(pid, prop);
+    }
+    
+    template<typename T>
+    inline void SoraEntity::setProperty(const PropertyId& pid, const T& prop) {
+        SoraStringTokenlizer tokens(pid);
+        if(tokens.size() == 1)
+            mHolder.setProperty(pid, prop);
+        else if(tokens.size() == 2) {
+            SoraComponent* cop = getComponent(tokens.front());
+            if(cop != NULL)
+                cop->setProperty(tokens.back(), prop);
+        }
+    }
+    
+    template<typename T>
+    inline T SoraEntity::getProperty(const PropertyId& pid) {
+        SoraPropertyBase* prop = getPropertyBase(pid);
+        if(prop) {
+            SoraProperty<T>* tprop = PropertyCast<T>(prop);
+            if(tprop)
+                return tprop->get();
+        }
+        return SoraTypeSerializer::defaultValue<T>();
+    }
+    
+    template<typename T>
+    inline SoraProperty<T>* SoraEntity::getPropertyPtr(const PropertyId& pid) const {
+        SoraPropertyBase* prop = getPropertyBase(pid);
+        if(prop) {
+            SoraProperty<T>* tprop = PropertyCast<T>(prop);
+            return tprop;
+        }
+        return 0;
+    }
+    
+    template<typename T>
+    inline T SoraEntity::getProperty(const PropertyId& pid, const T& defaultValue) const {
+        SoraPropertyBase* prop = getPropertyBase(pid);
+        if(prop) {
+            SoraProperty<T>* tprop = PropertyCast<T>(prop);
+            if(tprop)
+                return tprop->get();
+        }
+        return defaultValue;
     }
     
 } // namespace sora

@@ -26,6 +26,12 @@
 
 #include "signal/SoraSignal.h"
 
+#include "entity/SoraEntity.h"
+#include "../Components/RenderComponent.h"
+#include "../Components/PositionComponent.h"
+
+#include "SoraStringTokenlizer.h"
+
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
     
@@ -44,7 +50,23 @@ void transform3d(float32& x, float32& y, float32 z) {
 	z = 0.f;
 }
 
+sora::SoraEntity entity;
+
+void handleCommand(sora::SoraConsoleEvent* evt) {
+    sora::SoraStringTokenlizer token(evt->getParams(), " ");
+    if(token.size() == 2) {
+        printf("%f\n", atof(token.back().c_str()));
+        entity.setProperty(token.front(), (float)atof(token.back().c_str()));
+        sora::SoraPropertyBase* p = entity.getPropertyBase(token.front());
+        evt->pushResult(std::string("Property ")+token.front()+" to "+p->toString());
+    }
+}
+
+SORA_DEF_CONSOLE_EVT_FUNC(handleCommand, "setprop");
+
 bool mainWindow::updateFunc() {
+    
+    entity.update(sora::SORA->getDelta());
     
     mScene1->update(sora::SORA->getDelta());
     return false;
@@ -60,6 +82,7 @@ bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
     
+    entity.render();
 
     sora::SORA->endScene();
     
@@ -77,6 +100,10 @@ SORA_DEF_CONSOLE_EVT_FUNC(myFunc, "test");
 #include "timer/SoraSimpleTimerManager.h"
 
 void mainWindow::init() {
+    
+    entity.addComponent(new sora::component::PositionComponent());
+    entity.addComponent(new sora::component::RenderComponent(L"background.png"));
+    
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);

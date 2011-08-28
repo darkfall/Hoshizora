@@ -9,14 +9,14 @@
 #include "SoraEntity.h"
 #include "../function/SoraFunction.h"
 #include "../function/SoraBind.h"
+#include "SoraComponentFactory.h"
 
 namespace sora {
     
     SORA_IMPL_ENTITY(SoraEntity)
     
     SoraEntity::SoraEntity():
-    mPropertyAccess(*getRttiClass(),
-                    *this) {
+    mHolder(*getRttiClass()) {
         // entity can handle SoraMessageEvent and send message to components
         registerEventFunc(this, &SoraEntity::sendMessageT);
     }
@@ -71,63 +71,82 @@ namespace sora {
         return mScriptVM.getVM(tag);
     }
     
-    void SoraEntity::addComponent(const std::string& name, SoraComponent* co) {
-        mComponents.addComponent(name, co);
+    void SoraEntity::addComponent(SoraComponent* co) {
+        sora_assert(co);
+        co->setOwner(this);
+        mComponents.addComponent(co);
+    }
+    
+    void SoraEntity::addComponent(const SoraString& name) {
+        SoraComponent* cop = CreateComponent(name);
+        if(cop)
+            addComponent(cop);
     }
     
     SoraComponent* SoraEntity::removeComponent(const std::string& name) {
-        return mComponents.removeComponent(name);
+        SoraComponent* cop = mComponents.removeComponent(name);
+        if(cop)
+            cop->setOwner(0);
     }
     
     SoraComponent* SoraEntity::removeComponent(const SoraComponent* co) {
-        return mComponents.removeComponent(co);
+        SoraComponent* cop =  mComponents.removeComponent(co);
+        if(cop)
+            cop->setOwner(0);
     }
     
     SoraComponent* SoraEntity::getComponent(const std::string& name) {
         return mComponents.getComponent(name);
     }
     
-    bool SoraEntity::PropertyAccess::has(const PropertyId& pid) {
+    bool SoraEntity::hasComponent(const SoraString& name) const {
+        return mComponents.hasComponent(name);
+    }
+    
+    bool SoraEntity::hasProperty(const PropertyId& pid) {
         if(!mHolder.hasProperty(pid)) {
             return mHolder.hasProperty(pid);
         }
         return true;
     }
     
-    bool SoraEntity::PropertyAccess::add(const PropertyId& pid, SoraPropertyInfo* prop) {
-        return mHolder.addProperty(pid, prop);
+    void SoraEntity::addProperty(SoraPropertyBase* prop) {
+        return mHolder.addProperty(prop);
     }
     
-    bool SoraEntity::PropertyAccess::add(const PropertyId& pid, SoraPropertyPtr prop) {
-        return mHolder.addProperty(pid, prop);
-    }
-    
-    SoraPropertyPtr SoraEntity::PropertyAccess::get(const PropertyId& pid) const {
-        SoraPropertyPtr prop =  mHolder.getProperty(pid);
-        if(!prop.valid()) {
-            return mHolder.getProperty(pid);
+    SoraPropertyBase* SoraEntity::getPropertyBase(const PropertyId& pid) const {
+        SoraPropertyBase* prop =  mHolder.getPropertyBase(pid);
+        if(prop == 0) {
+            return mComponents.getProperty(pid);
         }
         return prop;
     }
     
-    size_t SoraEntity::PropertyAccess::size() const {
+    size_t SoraEntity::getPropertySize() const {
         return mHolder.getPropertySize();
     }
     
-    SoraEntity::PropertyAccess& SoraEntity::getProperty() {
-        return mPropertyAccess;
-    }
-    
-    SoraPropertyInfo* SoraEntity::PropertyAccess::remove(const PropertyId& pid, bool release) {
-        SoraPropertyInfo* info = mHolder.removeProperty(pid);
-        if(release) {
-            delete info;
-            info = 0;
-        }
-        return info;
+    SoraPropertyBase* SoraEntity::removeProperty(const PropertyId& pid, bool release) {
+        return mHolder.removeProperty(pid, release);
     }
     
     void SoraEntity::sendMessageT(SoraMessageEvent* message) {
         mComponents.sendMessage(message);
+    }
+    
+    void SoraEntity::sendMessageTo(const SoraString& comp, SoraMessageEvent* message) {
+        mComponents.sendMessageTo(comp, message);
+    }
+
+    void SoraEntity::onUpdate(float dt) {
+        update(dt);
+    }
+    
+    uint32 SoraEntity::update(float dt) {
+        mComponents.onUpdate(dt);
+    }
+    
+    void SoraEntity::render() {
+        mComponents.onRender();
     }
 } // namespace sora

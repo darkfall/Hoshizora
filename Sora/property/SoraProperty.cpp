@@ -1,9 +1,14 @@
 //
 //  SoraProperty.cpp
-//  Sora
+//  SoraProperty
 //
-//  Created by Ruiwei Bu on 8/21/11.
-//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
+//  Created by Ruiwei Bu on 8/27/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #include "SoraProperty.h"
+
+namespace sora {
+    
+    
+} // namespace sora

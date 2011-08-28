@@ -22,16 +22,22 @@ namespace sora {
         /**
          * Add a component, may throw a ExistsException
          **/
-        void addComponent(const SoraString& tag, SoraComponent* cop);
+        void addComponent(SoraComponent* cop);
         
         SoraComponent* removeComponent(const SoraString& tag);
         SoraComponent* removeComponent(const SoraComponent*);
         
         SoraComponent* getComponent(const SoraString& tag) const;
         
+        bool hasComponent(const SoraString& tag) const;
+        
         template<typename T>
         void sendMessage(const MessageIdType& message, const T& data);
         void sendMessage(SoraMessageEvent* message);
+        void sendMessageTo(const SoraString& to, SoraMessageEvent* message);
+        
+        void onUpdate(float32 dt);
+        void onRender();
         
         /**
          * Basic property access
@@ -41,9 +47,8 @@ namespace sora {
          * Suggesting use property access methods directly in components
          **/
         bool hasProperty(const DynRttiClassKeyType& pid);
-        bool addProperty(const DynRttiClassKeyType& pid, SoraPropertyInfo* prop);
-        bool addProperty(const DynRttiClassKeyType& pid, SoraPropertyPtr prop);
-        SoraPropertyPtr getProperty(const DynRttiClassKeyType& pid);
+        void addProperty(const DynRttiClassKeyType& pid, SoraPropertyBase* prop);
+        SoraPropertyBase* getProperty(const DynRttiClassKeyType& pid) const;
         
     private:
         typedef std::map<SoraString, SoraComponent*> ComponentMap;

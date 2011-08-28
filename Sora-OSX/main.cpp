@@ -29,7 +29,7 @@
 
 int main(int argc, char* argv[]) {    
         
-    sora::InitAndCreateSoraCore(new peMainWindow, 
+    sora::InitAndCreateSoraCore(new mainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */
                                                         false,
                                                         /* use fullscreen buffer */
