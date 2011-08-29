@@ -900,21 +900,39 @@ namespace sora{
 		
 		quad.tex = NULL;
 		
-		quad.v[0].x   = x1;
-		quad.v[0].y   = y1;
-		quad.v[0].col = color;
-		
-		quad.v[1].x   = x2;
-		quad.v[1].y   = y1;
-		quad.v[1].col = color;
-		
-		quad.v[2].x   = x2;
-		quad.v[2].y   = y2;
-		quad.v[2].col = color;
-		
-		quad.v[3].x   = x1;
-		quad.v[3].y   = y2;
-		quad.v[3].col = color;
+        if(abs(x2-x1) == 1.f || abs(y2-y1) == 1.f) {
+            quad.v[0].x   = x1;
+            quad.v[0].y   = y1;
+            quad.v[0].col = color;
+            
+            quad.v[1].x   = x2;
+            quad.v[1].y   = y1;
+            quad.v[1].col = color;
+            
+            quad.v[2].x   = x2;
+            quad.v[2].y   = y2;
+            quad.v[2].col = color;
+            
+            quad.v[3].x   = x1;
+            quad.v[3].y   = y2;
+            quad.v[3].col = color;
+        } else {
+            quad.v[0].x   = x1-0.5f;
+            quad.v[0].y   = y1-0.5f;
+            quad.v[0].col = color;
+            
+            quad.v[1].x   = x1+0.5f;
+            quad.v[1].y   = y1+0.5f;
+            quad.v[1].col = color;
+            
+            quad.v[2].x   = x2-0.5f;
+            quad.v[2].y   = y2-0.5f;
+            quad.v[2].col = color;
+            
+            quad.v[3].x   = x2+0.5f;
+            quad.v[3].y   = y2+0.5f;
+            quad.v[3].col = color;
+        }
 		
 		int i;
 		for (i = 0; i < 4; ++i) {

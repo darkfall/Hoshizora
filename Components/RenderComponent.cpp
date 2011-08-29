@@ -2,7 +2,7 @@
 //  RenderComponent.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/27/11.
+//  Created by Robert Bu on 8/27/11.
 //  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
 //
 
@@ -10,6 +10,9 @@
 #include "SoraCore.h"
 #include "factory/SoraSpriteFactory.h"
 #include "entity/SoraEntity.h"
+
+#include "debug/SoraAutoProfile.h"
+#include "debug/SoraGlobalProfiler.h"
 
 namespace sora {
     
@@ -70,8 +73,10 @@ namespace sora {
         }
         
         void RenderComponent::onRender() {
+            PROFILE("render");
             mSprite->render(getOwner()->getProperty("Position.x", 0.f),
                             getOwner()->getProperty("Position.y", 0.f));
+            printf("%llu\n", SoraGlobalProfiler::Instance()->getProfile("render").elapsedTime);
         }
         
     } // namespace component

@@ -307,6 +307,7 @@
 		88D87D6112A09A66007D6865 /* SoraStringConv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D4D12A09A66007D6865 /* SoraStringConv.cpp */; };
 		88D87D6212A09A66007D6865 /* SoraTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D4F12A09A66007D6865 /* SoraTexture.cpp */; };
 		88D87D6312A09A66007D6865 /* SoraTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88D87D5512A09A66007D6865 /* SoraTimerEvent.cpp */; };
+		88DA9082140B43F000FA617E /* ImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DA9081140B43F000FA617E /* ImageButton.cpp */; };
 		88DCB28912DE475300C0B009 /* SoraResourceFileFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB28812DE475300C0B009 /* SoraResourceFileFinder.cpp */; };
 		88DCB37612DE7ABA00C0B009 /* SoraFolderResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB37512DE7ABA00C0B009 /* SoraFolderResourceManager.cpp */; };
 		88DCB3CE12DE837C00C0B009 /* SoraOSXFileUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB3CD12DE837C00C0B009 /* SoraOSXFileUtility.mm */; };
@@ -1244,6 +1245,9 @@
 		88D87D5412A09A66007D6865 /* SoraWindowInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraWindowInfo.h; sourceTree = "<group>"; };
 		88D87D5512A09A66007D6865 /* SoraTimerEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraTimerEvent.cpp; sourceTree = "<group>"; };
 		88D87D5612A09A66007D6865 /* SoraTimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTimerEvent.h; sourceTree = "<group>"; };
+		88DA907E140B159E00FA617E /* animationlistener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animationlistener.h; sourceTree = "<group>"; };
+		88DA9080140B3C6000FA617E /* ImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageButton.h; sourceTree = "<group>"; };
+		88DA9081140B43F000FA617E /* ImageButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageButton.cpp; sourceTree = "<group>"; };
 		88DCB24012DE165000C0B009 /* SoraResourceFileFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraResourceFileFinder.h; sourceTree = "<group>"; };
 		88DCB28812DE475300C0B009 /* SoraResourceFileFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraResourceFileFinder.cpp; sourceTree = "<group>"; };
 		88DCB37412DE7ABA00C0B009 /* SoraFolderResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraFolderResourceManager.h; sourceTree = "<group>"; };
@@ -1688,6 +1692,7 @@
 		8801A8CF13EF79C200B9A779 /* SoraGUIChan */ = {
 			isa = PBXGroup;
 			children = (
+				88DA907F140B3C0000FA617E /* widgets */,
 				880088F31406EBFA0083B166 /* guichanLuaWrapper.cpp */,
 				880088F41406EBFA0083B166 /* guichanLuaWrapper.h */,
 				880087F414057B570083B166 /* ticpp */,
@@ -1804,6 +1809,7 @@
 				8800890214083C600083B166 /* styleholder.cpp */,
 				8801A91B13EF79C200B9A779 /* widgets */,
 				8800891514085AC20083B166 /* AnimationFadeIn.h */,
+				88DA907E140B159E00FA617E /* animationlistener.h */,
 			);
 			path = guichan;
 			sourceTree = "<group>";
@@ -2831,6 +2837,15 @@
 			path = Defaults;
 			sourceTree = "<group>";
 		};
+		88DA907F140B3C0000FA617E /* widgets */ = {
+			isa = PBXGroup;
+			children = (
+				88DA9080140B3C6000FA617E /* ImageButton.h */,
+				88DA9081140B43F000FA617E /* ImageButton.cpp */,
+			);
+			path = widgets;
+			sourceTree = "<group>";
+		};
 		88DCE61A13666885005FBBE0 /* support */ = {
 			isa = PBXGroup;
 			children = (
@@ -3263,6 +3278,7 @@
 				88008910140850D70083B166 /* editorWindow.cpp in Sources */,
 				88008914140854C20083B166 /* SoraParticleSystem.cpp in Sources */,
 				880395B41409890700E159E7 /* RenderComponent.cpp in Sources */,
+				88DA9082140B43F000FA617E /* ImageButton.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

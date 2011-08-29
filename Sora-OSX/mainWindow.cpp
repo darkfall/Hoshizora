@@ -55,7 +55,6 @@ sora::SoraEntity entity;
 void handleCommand(sora::SoraConsoleEvent* evt) {
     sora::SoraStringTokenlizer token(evt->getParams(), " ");
     if(token.size() == 2) {
-        printf("%f\n", atof(token.back().c_str()));
         entity.setProperty(token.front(), (float)atof(token.back().c_str()));
         sora::SoraPropertyBase* p = entity.getPropertyBase(token.front());
         evt->pushResult(std::string("Property ")+token.front()+" to "+p->toString());
