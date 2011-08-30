@@ -111,28 +111,28 @@ namespace sora {
                     if(isPressed()) {
                         if(mBtnTexClick) {
                             graphics->setColor(mBtnColorClick);
-                            graphics->drawImage(mBtnTexClick);
+                            graphics->drawImage(mBtnTexClick, getX(), getY());
                         }
                     } else if(isHasMouse()) {
                         if(mBtnTexHover) {
                             graphics->setColor(mBtnColorHover);
-                            graphics->drawImage(mBtnTexHover);
+                            graphics->drawImage(mBtnTexHover, getX(), getY());
                         }
                     } else if(isFocused()) {
                         if(mBtnTexFocus) {
                             graphics->setColor(mBtnColorFocus);
-                            graphics->drawImage(mBtnTexFocus);
+                            graphics->drawImage(mBtnTexFocus, getX(), getY());
                         }
                     } else {
                         if(mBtnTexNormal) {
                             graphics->setColor(mBtnColorNormal);
-                            graphics->drawImage(mBtnTexNormal);
+                            graphics->drawImage(mBtnTexNormal, getX(), getY());
                         }
                     }
                 } else {
                     if(mBtnTexUnavail) {
                         graphics->setColor(mBtnColorUnavail);
-                        graphics->drawImage(mBtnTexUnavail);
+                        graphics->drawImage(mBtnTexUnavail, getX(), getY());
                     }
                 }
             }

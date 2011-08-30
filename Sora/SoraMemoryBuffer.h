@@ -51,33 +51,10 @@ namespace sora {
 		 read a block of memory, size = sizeof(T) 
 		 */
 		template<typename T>
-		T read() {
-			if(!valid()) return 0;
-			if(currPos == length) return 0;
-			
-			ulong32 size = sizeof(T);
-			if(currPos+size <= length) {
-				T t;
-				memcpy(&t, (void*)(get()+currPos), size);
-				currPos += size;
-				return t;
-			}
-			return 0;
-		}
+		T read();
         
         template<typename T>
-        bool read(T* t) {
-            if(!valid()) return 0;
-			if(currPos == length) return 0;
-			
-			ulong32 size = sizeof(T);
-			if(currPos+size <= length) {
-                memcpy(t, (void*)(get()+currPos), size);
-                currPos += size;
-                return true;
-            }
-            return false;
-        }
+        bool read(T* t);
 
 		/* 
 		 read a block of memory, size specified
@@ -150,6 +127,35 @@ namespace sora {
         bool mInternal;
 	};
 	
+    
+    template<typename T>
+    inline T SoraMemoryBuffer::read() {
+        if(!valid()) return 0;
+        if(currPos == length) return 0;
+        
+        ulong32 size = sizeof(T);
+        if(currPos+size <= length) {
+            T t;
+            memcpy(&t, (void*)(get()+currPos), size);
+            currPos += size;
+            return t;
+        }
+        return 0;
+    }
+    
+    template<typename T>
+    inline bool SoraMemoryBuffer::read(T* t) {
+        if(!valid()) return 0;
+        if(currPos == length) return 0;
+        
+        ulong32 size = sizeof(T);
+        if(currPos+size <= length) {
+            memcpy(t, (void*)(get()+currPos), size);
+            currPos += size;
+            return true;
+        }
+        return false;
+    }
 }
 
 #endif

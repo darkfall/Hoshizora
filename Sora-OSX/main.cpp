@@ -22,9 +22,6 @@
 #include "SoraTimestamp.h"
 
 #include "message/SoraMessageRouter.h"
-
-#include "SoraLua/SoraLuaMainWindow.h"
-
 #include "../SoraParticleEditor/peMainWindow.h"
 
 int main(int argc, char* argv[]) {    

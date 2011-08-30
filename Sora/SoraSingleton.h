@@ -11,12 +11,11 @@
 #define SORA_SINGLETON_H_
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
 
 namespace sora {
 	
 	template<class T>
-	class SoraSingleton: uncopyable {
+	class SoraSingleton {
 	public:
 		static T* Instance() {
 			if(!pInstance) pInstance = new T();
@@ -50,7 +49,7 @@ namespace sora {
      **/
     
     template<class T>
-    class SoraDirectSingleton: uncopyable {
+    class SoraDirectSingleton {
     protected:
         static T * _singleton;
    

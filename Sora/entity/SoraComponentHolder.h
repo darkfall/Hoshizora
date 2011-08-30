@@ -29,6 +29,11 @@ namespace sora {
         
         SoraComponent* getComponent(const SoraString& tag) const;
         
+        // get component and cast
+        // may throw exceptions
+        template<typename T>
+        T* getComponentT(const SoraString& tag) const;
+        
         bool hasComponent(const SoraString& tag) const;
         
         template<typename T>
@@ -56,7 +61,7 @@ namespace sora {
     };
     
     template<typename T>
-    void SoraComponentHolder::sendMessage(const MessageIdType& message, const T& data) {
+    inline void SoraComponentHolder::sendMessage(const MessageIdType& message, const T& data) {
         ComponentMap::const_iterator it = mComponents.begin();
         
         SoraMessageEvent mssgEvt(message, data);
@@ -67,6 +72,18 @@ namespace sora {
             }
             ++it;
         }
+    }
+    
+    template<typename T>
+    inline T* SoraComponentHolder::getComponentT(const SoraString& tag) const {
+        ComponentMap::const_iterator it = mComponents.find(tag);
+        if(it != mComponents.end()) {
+            if(it->second->getName() == T::GetName()) {
+                return static_cast<T>(it->second);
+            } else 
+                THROW_SORA_EXCEPTION(BadCastException, "Different component type");
+        } else
+            THROW_SORA_EXCEPTION(NotFoundException, "Component not found");
     }
     
 } // namespace sora

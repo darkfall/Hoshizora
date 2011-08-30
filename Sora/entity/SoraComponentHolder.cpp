@@ -38,7 +38,7 @@ namespace sora {
         ComponentMap::const_iterator it = mComponents.find(tag);
         if(it != mComponents.end())
             return it->second;
-        return NULL;
+        return 0;
     }
     
     SoraComponent* SoraComponentHolder::removeComponent(const SoraString& tag) {
@@ -59,7 +59,7 @@ namespace sora {
             co->onRemove();
             return co;
         }
-        return NULL;
+        return 0;
     }
     
     SoraComponent* SoraComponentHolder::removeComponent(const SoraComponent* co) {
@@ -83,7 +83,7 @@ namespace sora {
                 return co2;
             }
         }
-        return NULL;
+        return 0;
     }
     
     void SoraComponentHolder::sendMessage(SoraMessageEvent* message) {

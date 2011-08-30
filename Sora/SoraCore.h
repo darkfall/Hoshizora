@@ -174,13 +174,13 @@ namespace sora {
 		void enableMessageBoxErrorPost(bool bFlag);
 
 		/*generates a int32 random number using SFMT*/
-		void	setRandomSeed(int32 seed);
-		int32	getRandomSeed();
-		int32	randomInt(int32 min, int32 max);
-		float32 randomFloat(float32 min, float32 max);
-		int32	randomIntNoRange();
+		static void     setRandomSeed(int32 seed);
+		static int32    getRandomSeed();
+		static int32    randomInt(int32 min, int32 max);
+		static float32  randomFloat(float32 min, float32 max);
+		static int32    randomIntNoRange();
 		/*generates a float32 random number range [0, 1] using SFMT*/
-		float32 randomFloatNoRange();
+		static float32  randomFloatNoRange();
 
 		int32 getScreenWidth();
 		int32 getScreenHeight();
@@ -352,7 +352,7 @@ namespace sora {
 		bool bPauseRender;
 		bool bPauseSound;
 
-		int32 iRandomSeed;
+		static int32 iRandomSeed;
 		int32 iScreenWidth, iScreenHeight;
 
         bool bMainScene;

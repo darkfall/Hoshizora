@@ -13,8 +13,6 @@
 #include "SoraCore.h"
 #include "SoraCanvas.h"
 #include "SoraPlatform.h"
-#include "SoraParticleSystem/SoraParticleSystem.h"
-#include "SoraLua/SoraLuaObject.h"
 
 #include "SoraFileChangeEvent.h"
 

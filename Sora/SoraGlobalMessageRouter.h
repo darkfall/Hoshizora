@@ -50,7 +50,7 @@ namespace sora {
     }
     
     template<typename T>
-    SoraConnection SoraGlobalMessageRouter::acceptMessage(const MessageIdType& message, const T& fn) {
+    inline SoraConnection SoraGlobalMessageRouter::acceptMessage(const MessageIdType& message, const T& fn) {
         MessageRouterMap::iterator it = mMessageRouters.find(message);
         if(it != mMessageRouters.end()) {
             return it->second.connect(fn);
@@ -61,27 +61,27 @@ namespace sora {
     }
     
     template<typename T>
-    SoraConnection SoraGlobalMessageRouter::acceptMessage(const T& fn) {
+    inline SoraConnection SoraGlobalMessageRouter::acceptMessage(const T& fn) {
         return mRouter.connect(fn);
     }
     
     template<typename T>
-    static SoraConnection AcceptMessage(const MessageIdType& mssg, const T& fn) {
+    inline SoraConnection AcceptMessage(const MessageIdType& mssg, const T& fn) {
         return SoraGlobalMessageRouter::Instance()->acceptMessage(mssg, fn);
     }
     
     template<typename T>
-    static SoraConnection AcceptMessage(const T& fn) {
+    inline SoraConnection AcceptMessage(const T& fn) {
         return SoraGlobalMessageRouter::Instance()->acceptMessage(fn);
     }
     
     template<typename T>
-    static void SendMessage(const MessageIdType& mssg, const T& data) {
+    inline void SendMessage(const MessageIdType& mssg, const T& data) {
         return SoraGlobalMessageRouter::Instance()->sendMessage<T>(mssg, data);
     }
     
     template<typename T>
-    static void SendMessage(SoraMessageEvent* evt) {
+    inline void SendMessage(SoraMessageEvent* evt) {
         return SoraGlobalMessageRouter::Instance()->sendMessage(evt);
     }
     

@@ -485,6 +485,7 @@ void loadParticleSprite(const SoraWString& path) {
 		pspr = SORA->createSprite(L"pics/particles.png");
 	}
 
+    pspr->setTextureRect(0.f, 0.f, pspr->getSpriteWidth(), pspr->getSpriteHeight());
 	peffect->setSprite(pspr);
 	peffect->restart();
 }

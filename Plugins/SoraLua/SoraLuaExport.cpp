@@ -32,10 +32,7 @@ namespace sora {
         .def("createTextureWH", &SoraCore::createTextureWH)
         .def("setClipping", &SoraCore::setClipping)
         .def("setTransform", &SoraCore::setTransform)
-        .def("setRandomSeed", &SoraCore::setRandomSeed)
-        .def("getRandomSeed", &SoraCore::getRandomSeed)
-        .def("randomInt", &SoraCore::randomInt)
-        .def("randomFloat", &SoraCore::randomFloat)
+       
         .def("getScreenWidth", &SoraCore::getScreenWidth)
         .def("getScreenHeight", &SoraCore::getScreenHeight)
         .def("loadResourcePack", &SoraCore::loadResourcePack)

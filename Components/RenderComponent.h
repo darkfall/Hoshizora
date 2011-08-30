@@ -40,7 +40,7 @@ namespace sora {
             void onUpdate(float dt);
             void onRender();
             
-            SORA_IMPL_COMPONENT(Render);
+            SORA_DEF_COMPONENT(Render);
             
         private:
             bool mInternalSprite;

@@ -14,7 +14,6 @@
 #include "Debug/SoraAutoProfile.h"
 
 #include "cmd/SoraConsole.h"
-#include "SoraSoundManager/SoundManagerLuaExport.h"
 #include "SoraShaderManager.h"
 
 #include "SoraModifierAdapter.h"
@@ -31,6 +30,8 @@
 #include "../Components/PositionComponent.h"
 
 #include "SoraStringTokenlizer.h"
+
+#include "SoraParticleSystem2/Emitters/CircleEmitter.h"
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
@@ -100,8 +101,16 @@ SORA_DEF_CONSOLE_EVT_FUNC(myFunc, "test");
 
 void mainWindow::init() {
     
-    entity.addComponent(new sora::component::PositionComponent());
-    entity.addComponent(new sora::component::RenderComponent(L"background.png"));
+    sora::particle::CircleEmitter* emitter = new sora::particle::CircleEmitter;
+    emitter->setPosition(300, 300);
+    emitter->setSprite(L"textures/Particle004.png");
+    emitter->setParticleLifeTime(10.f);
+    emitter->setSpeed(10.f);
+    emitter->setEmitInterval(1.f);
+    emitter->setLifeTime(10.f);
+    emitter->fireAt(300, 300);
+    emitter->setEmitNum(10);
+    entity.addComponent(emitter);
     
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));

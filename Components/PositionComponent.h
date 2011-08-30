@@ -27,7 +27,7 @@ namespace sora {
             
             void onMessage(SoraMessageEvent* evt) {}
             
-            SORA_IMPL_COMPONENT(Position);
+            SORA_DEF_COMPONENT(Position);
         };
         
     } // namespace component

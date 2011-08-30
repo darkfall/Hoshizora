@@ -61,6 +61,8 @@ namespace sora {
     
     SoraCore* SoraCore::mInstance = NULL;
     
+    int SoraCore::iRandomSeed = rand();
+    
     struct TransformData {
         float32 x;
         float32 y;

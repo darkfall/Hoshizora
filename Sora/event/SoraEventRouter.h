@@ -11,6 +11,7 @@
 
 #include "../signal/SoraSignal.h"
 #include "../SoraEvent.h"
+#include "SoraEventWorld.h"
 
 namespace sora {
     
@@ -51,6 +52,18 @@ namespace sora {
     protected:
         SignalType mConnections;
     };
+    
+    
+    template<typename T>
+    SoraEventRouter<T>::SoraEventRouter() {
+        SoraEventWorld::defaultWorld().enter(this);
+        SoraEventHandler::enableUpdate();
+    }
+    
+    template<typename T>
+    inline void SoraEventRouter<T>::handleEvent(SoraEvent* evt) {
+        mConnections.sig(evt);
+    }
     
 } // namespace sora
 
