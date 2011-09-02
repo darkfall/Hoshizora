@@ -1049,7 +1049,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1299"
-         endingLineNumber = "1299">
+         endingLineNumber = "1299"
+         landmarkName = "SoraCore::endZBufferSort()"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2517,9 +2519,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "624"
-         endingLineNumber = "624"
-         landmarkName = "SoraCore::registerFontManager(SoraFontManager* fontManager)"
-         landmarkType = "5">
+         endingLineNumber = "624">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

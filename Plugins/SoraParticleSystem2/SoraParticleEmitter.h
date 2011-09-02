@@ -12,6 +12,7 @@
 #include "entity/SoraComponent.h"
 #include "SoraSprite.h"
 #include "SoraParticleNode.h"
+#include "SoraParticleModifier.h"
 
 namespace sora {
 
@@ -52,8 +53,10 @@ namespace sora {
             void onUpdate(float dt);
             void onRender();
             
-            virtual void onMessage(SoraMessageEvent* evt);
+            void addModifier(ParticleModifier* mod);
+            ParticleModifier* delModifier(ParticleModifier* mod, bool release=false);
             
+            virtual void onMessage(SoraMessageEvent* evt);
             
             // emit a particle and insert into list
             // you can override it to add atrributes to it
@@ -80,6 +83,9 @@ namespace sora {
             bool mPaused;
             SoraVector mPosition;
             SoraRect mBoundingBox;
+            
+            typedef std::list<ParticleModifier*> ParticleModifierList;
+            ParticleModifierList mModifiers;
         };
         
     } // namepace particle

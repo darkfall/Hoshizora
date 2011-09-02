@@ -35,9 +35,6 @@ namespace sora {
         
     };
     
-#define SORA_DEF_LUA_AUTO_EXPORT_FUNC(func) \
-    sora::SoraLuaExporter::ConnectExporterFunc(func);
-    
     /**
      * Helper macro that help check a symbol has been defined and register an export func
      **/

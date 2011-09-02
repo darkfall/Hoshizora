@@ -9,13 +9,15 @@
 #ifndef Sora_CircleEmitter_h
 #define Sora_CircleEmitter_h
 
-#include "../SoraBasicParticleEmitter.h"
+#include "../SoraParticleEmitter.h"
+#include "../SoraBasicParticleModifier.h"
+
 
 namespace sora {
     
     namespace particle {
         
-        class CircleEmitter: public BasicParticleEmitter {
+        class CircleEmitter: public ParticleEmitter {
         public:
             CircleEmitter(int mode = MODE_ALL);
             

@@ -1,19 +1,20 @@
 //
-//  SoraBasicParticleEmitter.cpp
+//  SoraBasicParticleModifier.cpp
 //  Sora
 //
 //  Created by Ruiwei Bu on 8/29/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
-#include "SoraBasicParticleEmitter.h"
+#include "SoraBasicParticleModifier.h"
+#include "SoraParticleNode.h"
 #include "SoraCore.h"
 
 namespace sora {
     
     namespace particle {
         
-        BasicParticleEmitter::BasicParticleEmitter():
+        BasicParticleModifier::BasicParticleModifier():
         mSpeed(0.f),
         mSpin(0.f),
         mFriction(0.f),
@@ -27,94 +28,94 @@ namespace sora {
             
         }
         
-        void BasicParticleEmitter::setSpeed(float speed) {
+        void BasicParticleModifier::setSpeed(float speed) {
             mSpeed = speed;
         }
         
-        float BasicParticleEmitter::getSpeed() {
+        float BasicParticleModifier::getSpeed() {
             return mSpeed;
         }
         
-        void BasicParticleEmitter::setSpin(float spin) {
+        void BasicParticleModifier::setSpin(float spin) {
             mSpin = spin;
         }
         
-        float BasicParticleEmitter::getSpin() const {
+        float BasicParticleModifier::getSpin() const {
             return mSpin;
         }
         
-        void BasicParticleEmitter::setScale(float start, float end) {
+        void BasicParticleModifier::setScale(float start, float end) {
             mStartScale.x = mStartScale.y = start;
             mEndScale.x = mEndScale.y = end;
         }
         
-        void BasicParticleEmitter::setScale(const SoraVector& start, const SoraVector& end) {
+        void BasicParticleModifier::setScale(const SoraVector& start, const SoraVector& end) {
             mStartScale = start;
             mEndScale = end;
         }
         
-        SoraVector BasicParticleEmitter::getScaleStart() const {
+        SoraVector BasicParticleModifier::getScaleStart() const {
             return mStartScale;
         }
         
-        SoraVector BasicParticleEmitter::getScaleEnd() const {
+        SoraVector BasicParticleModifier::getScaleEnd() const {
             return mEndScale;
         }
         
-        void BasicParticleEmitter::setColor(uint32 start, uint32 end) {
+        void BasicParticleModifier::setColor(uint32 start, uint32 end) {
             mStartColor = start;
             mEndColor = end;
         }
         
-        uint32 BasicParticleEmitter::getStartColor() const {
+        uint32 BasicParticleModifier::getStartColor() const {
             return mStartColor;
         }
         
-        uint32 BasicParticleEmitter::getEndColor() const {
+        uint32 BasicParticleModifier::getEndColor() const {
             return mEndColor;
         }
         
-        void BasicParticleEmitter::setFriction(float friction) {
+        void BasicParticleModifier::setFriction(float friction) {
             mFriction = friction;
         }
         
-        float BasicParticleEmitter::getFriction() const {
+        float BasicParticleModifier::getFriction() const {
             return mFriction;
         }
         
-        void BasicParticleEmitter::setTriganleAcceleration(float taccel) {
+        void BasicParticleModifier::setTriganleAcceleration(float taccel) {
             mTrigAcceleration = taccel;
         }
         
-        float BasicParticleEmitter::getTriangleAcceleration() const {
+        float BasicParticleModifier::getTriangleAcceleration() const {
             return mTrigAcceleration;
         }
         
-        void BasicParticleEmitter::setAcceleration(const SoraVector& accel) {
+        void BasicParticleModifier::setAcceleration(const SoraVector& accel) {
             mAcceleration = accel;
         }
         
-        SoraVector BasicParticleEmitter::getAcceleration() const {
+        SoraVector BasicParticleModifier::getAcceleration() const {
             return mAcceleration;
         }
         
-        void BasicParticleEmitter::setGravity(float gravity) {
+        void BasicParticleModifier::setGravity(float gravity) {
             mGravity = gravity;
         }
         
-        float BasicParticleEmitter::getGravity() const {
+        float BasicParticleModifier::getGravity() const {
             return mGravity;
         }
         
-        float BasicParticleEmitter::getParticleLifeTime() const {
+        float BasicParticleModifier::getParticleLifeTime() const {
             return mParticleLifeTime;
         }
         
-        void BasicParticleEmitter::setParticleLifeTime(float life) {
+        void BasicParticleModifier::setParticleLifeTime(float life) {
             mParticleLifeTime = life;
         }
         
-        void BasicParticleEmitter::emitBasic(BasicParticleNode* node) {
+        void BasicParticleModifier::modify(ParticleNode* node) {
             node->mFriction = mFriction;
             node->mAcceleration = mAcceleration;
             node->mScale = mStartScale;
@@ -126,8 +127,6 @@ namespace sora {
             
             node->mTrigAcc = mTrigAcceleration;
             node->mGravity = mGravity;
-            
-            ParticleEmitter::emit(node);
         }
         
     } // namespace particle

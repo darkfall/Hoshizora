@@ -39,22 +39,16 @@ namespace sora {
                     if(mEmitNum != 0) {
                         float dr = F_PI / mEmitNum;
                         for(int i=0; i<mEmitNum; ++i) {
-                            BasicParticleNode* node = new BasicParticleNode(getPosition(), getParticleLifeTime());
-                            node->mSpeed.x = getSpeed() * cosf(dr * i);
-                            node->mSpeed.y = getSpeed() * sinf(dr * i);
-                            emitBasic(node);
+                            ParticleNode* node = new ParticleNode(getPosition());
+                            emit(node);
                         }
                     }
                     break;
                 case MODE_LOOP:
                     if(mEmitNum != 0) {
                         for(int i=0; i<mEmitNum; ++i) {
-                            BasicParticleNode* node = new BasicParticleNode(getPosition(), getParticleLifeTime());
-                            node->mSpeed.x = getSpeed() * cosf(mCurrRadius * i);
-                            node->mSpeed.y = getSpeed() * sinf(mCurrRadius * i);
-                            emitBasic(node);
-                            
-                            mCurrRadius += mRadiusInterval;
+                            ParticleNode* node = new ParticleNode(getPosition());
+                            emit(node);
                         }
                     }
                     break;

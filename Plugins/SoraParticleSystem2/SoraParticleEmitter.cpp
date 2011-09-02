@@ -73,6 +73,13 @@ namespace sora {
             sora_assert(node);
             
             node->mSprite = mSprite;
+            
+            if(mModifiers.size() != 0) {
+                ParticleModifierList::iterator it = mModifiers.begin();
+                for(; it != mModifiers.end(); ++it) {
+                    (*it)->modify(node);
+                }
+            }  
             mParticles.push_back(node);
         }
         
@@ -195,6 +202,25 @@ namespace sora {
                     log_error("ParticleEmitter: invalid setposition message 'error data type'");
                 }
             }
+        }
+        
+        void ParticleEmitter::addModifier(ParticleModifier* mod) {
+            mModifiers.push_back(mod);
+        }
+        
+        ParticleModifier* ParticleEmitter::delModifier(ParticleModifier* mod, bool release) {
+            ParticleModifierList::iterator it = mModifiers.begin();
+            for(; it != mModifiers.end(); ++it) {
+                if((*it) == mod) {
+                    ParticleModifier* mod = *it;
+                    if(release) {
+                        delete mod;
+                    }
+                    mModifiers.erase(it);
+                    return mod;
+                }
+            }
+            return 0; 
         }
     } // namespace particle
     

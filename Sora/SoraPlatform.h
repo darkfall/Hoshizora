@@ -289,7 +289,7 @@ namespace sora {
 
 
 
-#define SORA_STATIC_INSTANCE_DECALRE(T) \
+#define SORA_STATIC_INSTANCE_DECLARE(T) \
     static T* Instance(); \
 
 #define SORA_STATIC_INSTANCE_IMP(T) \

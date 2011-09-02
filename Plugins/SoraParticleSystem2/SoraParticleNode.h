@@ -11,6 +11,7 @@
 
 #include "SoraMath.h"
 #include "SoraColor.h"
+#include "SoraSprite.h"
 
 namespace sora {
     
@@ -19,12 +20,21 @@ namespace sora {
     namespace particle {
         
         struct ParticleNode {
-            ParticleNode(const SoraVector& pos, float life):
+            ParticleNode(const SoraVector& pos):
             mPosition(pos),
             mCurrLifetime(0.f),
-            mLifetime(life),
+            mLifetime(0.f),
             mDead(false),
-            mSprite(0) {
+            mSprite(0),
+            mFriction(0.f),
+            mTrigAcc(0.f),
+            mGravity(0.f),
+            mScale(SoraVector(1.f, 1.f)),
+            mScaleVar(SoraVector(0.f, 0.f)),
+            mSpin(0.f),
+            mSpinVar(0.f),
+            mColor(0xFFFFFFFF),
+            mColorVar(0) {
                 
             }
             
@@ -33,6 +43,21 @@ namespace sora {
                    
             float32 mCurrLifetime;
             float32 mLifetime;
+            
+            float32 mFriction;
+            SoraVector mAcceleration;
+            
+            float32 mTrigAcc;
+            float32 mGravity;
+            
+            SoraVector mScale;
+            SoraVector mScaleVar;
+            
+            float32 mSpin;
+            float32 mSpinVar;
+            
+            uint32 mColor;
+            uint32 mColorVar;
             
             bool mDead;
             SoraSprite* mSprite;
@@ -46,14 +71,43 @@ namespace sora {
                     return;
                 
                 mPosition += mSpeed * dt;
+                
+                
+                mSpeed += mAcceleration * dt;
+                
+                if(mFriction != 0.f) {
+                    float angle = mSpeed.Angle();
+                    float df = mFriction * dt;
+                    mSpeed -= SoraVector(df * cosf(angle),
+                                         dt * sinf(angle));
+                }
+                
+                if(mTrigAcc != 0.f)
+                    mPosition.Rotate(mTrigAcc * dt);
+                
+                if(mGravity != 0.f)
+                    mPosition.y += mGravity * dt;
+                
+                mScale += mScaleVar * dt;
+                
+                if(mSpinVar != 0.f)
+                    mSpin += mSpinVar * dt;
+                
+                if(mColorVar != 0)
+                    mColor += mColorVar * dt;
                                
-                mCurrLifetime += dt;
-                if(mCurrLifetime >= mLifetime)
-                    mDead = true;
+                if(mLifetime != 0.f) {
+                    mCurrLifetime += dt;
+                    if(mCurrLifetime >= mLifetime)
+                        mDead = true;
+                }
             }
             
             virtual void render() {
                 if(!mDead && mSprite) {
+                    mSprite->setRotation(mSpin);
+                    mSprite->setScale(mScale.x, mScale.y);
+                    mSprite->setColor(mColor);
                     mSprite->render(mPosition.x, mPosition.y);
                 }
             }

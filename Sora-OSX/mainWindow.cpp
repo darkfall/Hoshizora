@@ -104,8 +104,6 @@ void mainWindow::init() {
     sora::particle::CircleEmitter* emitter = new sora::particle::CircleEmitter;
     emitter->setPosition(300, 300);
     emitter->setSprite(L"textures/Particle004.png");
-    emitter->setParticleLifeTime(10.f);
-    emitter->setSpeed(10.f);
     emitter->setEmitInterval(1.f);
     emitter->setLifeTime(10.f);
     emitter->fireAt(300, 300);
