@@ -49,7 +49,7 @@ namespace sora {
         
     private:
         pthread_rwlock_t rwl;
-    }
+    };
     
 }
 

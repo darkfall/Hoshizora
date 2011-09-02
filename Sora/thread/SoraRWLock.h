@@ -37,7 +37,7 @@ namespace sora {
         void unlock() {
             unlockImpl();
         }
-    }
+    };
     
 } // namespace sora
 
