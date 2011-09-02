@@ -1,9 +1,0 @@
-ObjectColor {
-	Id: 1
-	Color: (255 0 0)
-}
-
-ObjectColor {
-	Id: 2
-	Color: (0 192 255)
-}
