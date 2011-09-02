@@ -1,1 +1,0 @@
-This folder is for your own projects.
