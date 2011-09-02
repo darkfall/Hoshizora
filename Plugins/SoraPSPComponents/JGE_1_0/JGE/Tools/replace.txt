@@ -1,0 +1,182 @@
+                      Replace Commander 32 v3.00
+                Copyrighted 2003 by Robert F. Gage II
+                        All Rights Reserved
+                       ---------------------
+
+Description:
+------------
+This program is a command line program that will search and replace
+text strings in text files.  It can replace a string with another
+feather case or non case sensitive.  It can find and remove lines of
+text out of a file or add lines to a file.
+
+
+Legal Mumbo Jumbo:
+-------------------
+This program comes without warrantee of any kind!  The author,
+distributor, or any other person or company can not and will not be
+responsible for the use of this program.
+
+Any problems that are encountered with this program should be send
+by EMail to the author as soon as possible.  And the author will
+make corrections as needed.
+
+
+Program Use:
+------------
+The program may be used free of charge to both public and privet
+company at no charge.  It may also be used for any purpose as long
+as this text files accompanies the program and that the program is
+not used for any illegal use.
+
+
+Syntax:
+-------
+Replac32 "search string" "replace string" workfile [options]
+Replac32 "search string" replacefile workfile /S [options]
+Replac32 "search string" workfile /R [options]
+
+General use:
+Replace Commander will search through the file "filename" for the
+occurrence of the "search string" and then replace it with the
+"replace string".  Exceptions to this is when "/R" or /S" options
+are used.
+
+
+"search string"        
+The string that will be looked for in the file "filename".
+                       
+"replace string"       
+The string that will be replace the search string.
+
+workfile              
+The file that the search will be performed on.
+
+replacefile
+The file that will be used to replace that found string. "/S" (only)
+
+Search Types:
+/S
+When this option is added then one must supply a file name of a text
+file that will be used as the replace string.  When the search string
+is found it will be replaced with the first line of text in the 
+replacefile.
+
+/F
+This search type will replace every occurrence of the search string
+with the entire contents of the replacefile.
+
+/R
+When the search string is found, the entire line of text that is
+found will be simply removed.  There is no "replace string" used
+with this options.
+
+Options...
+/I                     
+Will ignore the case of the item that is searched for.
+(searches are case sensitive by default)
+
+/L
+When the search string is found it will first remove the entire line
+of text that the search string is in and will add "replace string"
+to the line that was removed.
+
+/E
+Will add the replace string to the end of the line of test that has
+the search string in it.
+
+/O #
+Will search for the occurrence of the string but will only replace
+the occurrence line specified by #.  So if the search string is
+found on 6 different lines in a file then it will replace only the
+search string that is on the # found line.
+
+/N #
+Will search for the occurrence only on line number #.
+
+
+Example:
+--------
+If you wish to add your program to the path setting in autoexec.bat
+then you could use the following commands.  For example I use
+"c:\program" as the path to our program:
+
+
+Our current autoexec.bat file looks like this:
+
+---------------
+
+@echo off
+
+path=c:\windows\;c:\windows\command\;c:\program;c:\other
+
+c:\windows\win
+
+---------------
+
+
+To remove the "c:\program" out of the path setting we would use the
+following commands:
+
+replace "c:\program" "" c:\autoexec.bat /i
+replace ";;" ";" c:\autoexec.bat
+
+Note:  The second replace command is to replace the two ; in the
+path line that will be formed by removing c:\program.  We could use
+;c:\program on the first command but this would be pointless because
+it could be at the beginning and not have a ; in front of it.
+
+To add "c:\program" you could use the following command:
+
+echo path=%path%;c:\program >>c:\autoexec.bat
+
+But in the case to this autoexec.bat file you would run into a
+problem because windows would be executed before the path setting
+would be set.  So you could use the following replace options to fix
+that:
+
+replace "path=" "path=c:\program;" c:\autoexec.bat /i /o 1
+
+If you would like to add your path option to the end you could use:
+
+replace "path=" ";c:\program" c:\autoexec.bat /i /o 1 /e
+
+on both of the previous commands I used the "/o 1" option.  This is
+incase there are mutable lines of "set path=" in the autoexec.bat
+file, it would only perform this operation on the first one found.
+
+Please note that it is also possible for the path statement to be
+set using the "Path" command and thus you would not have the
+existence of "path=" in your autoexec.bat file.  For this reason we
+could use the following options commands:
+
+replace "path " "set path=" c:\autoexec.bat /i
+
+we would do this command before the other commands.  It would then
+convert any path command over to the "set path=" option..
+
+Just keep in mind that the search is performed on ALL lines in the
+autoexec.bat file so if the autoexec.bat file has other statements's
+that include the string "path " or "path=" it could mess things up
+for you.  But this is just given as an example.
+
+
+What's different with Replace Commander 32 and non 32?
+------------------------------------------------------
+Basically Replace Commander 32 is a windows95/NT and newer 32bit
+program.  The main advantage with the 32 version is the ability
+to support long file names!
+
+
+Known Problems
+--------------
+Because Replace Commander works on standard ascii files (carriage
+return and line feed for each line), it will always make sure
+that the workfile ends with a blank line.
+
+
+Contact the author!
+-------------------
+Bobby Gage
+http://bobby.mydis.org
+bgage@frederickmd.com

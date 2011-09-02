@@ -1,0 +1,91 @@
+// !$*UTF8*$!
+{
+	887C5CBA13D1D2E90009E508 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 88ECF1D213D906B00085585D /* Hoshizora */;
+		activeTarget = 887C5CC213D1D2E90009E508 /* Hoshizora */;
+		addToTargets = (
+			887C5CC213D1D2E90009E508 /* Hoshizora */,
+		);
+		codeSenseManager = 88ECF1F413D906D00085585D /* Code sense */;
+		executables = (
+			88ECF1D213D906B00085585D /* Hoshizora */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1008,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 332990128;
+			PBXWorkspaceStateSaveDate = 332990128;
+		};
+		sourceControlManager = 88ECF1F313D906D00085585D /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	887C5CC213D1D2E90009E508 /* Hoshizora */ = {
+		activeExec = 0;
+		executables = (
+			88ECF1D213D906B00085585D /* Hoshizora */,
+		);
+	};
+	88ECF1D213D906B00085585D /* Hoshizora */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = Hoshizora;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	88ECF1F313D906D00085585D /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	88ECF1F413D906D00085585D /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+}

@@ -1,0 +1,21 @@
+TARGET = TTFDemo
+OBJS = src/GameApp.o src/GameLauncher.o 
+
+BUILD_PRX = 1
+PSP_FW_VERSION=371
+
+CFLAGS = -O2 -G0 -Wall -DDEVHOOK -DPSPFW3XX
+CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
+ASFLAGS = $(CXXFLAGS)
+
+INCDIR = ../../JGE/include ../../JGE/include/psp ../../JGE/include/psp/freetype2 ../../JGE/src
+LIBDIR = ../../JGE/lib/psp
+LDFLAGS =
+LIBS = -ljge300 -lfreetype -ljpeg -lgif -lpng -lz -lm -lmikmod -lpsppower -lpspmpeg -lpspaudiocodec -lpspaudiolib -lpspaudio -lpspgum -lpspgu -lpsprtc -lstdc++
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = JGE++ TTF Demo
+PSP_EBOOT_ICON = icon.png
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak

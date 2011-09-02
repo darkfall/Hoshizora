@@ -1,0 +1,61 @@
+/*
+ *  SoraOGLKeyPoll.cpp
+ *  Sora
+ *
+ *  Created by GriffinBu on 12/12/10.
+ *  Copyright 2010 Griffin Bu(Project L). All rights reserved.
+ *
+ */
+#include "SoraOGLKeyPoll.h"
+#include "Debug/SoraInternalLogger.h"
+#include "SoraEventManager.h"
+#include <vector>
+
+namespace sora {
+
+	typedef std::vector<SoraKeyEvent> VKEYEVENT_POLL;
+	static VKEYEVENT_POLL keyPoll;
+
+	void glfwKeyCallback(GLFWwindow window, int key, int action) {
+		SoraKeyEvent ev;
+		if(action == GLFW_PRESS) ev.type = SORA_INPUT_KEYDOWN;
+		else ev.type = SORA_INPUT_KEYUP;
+
+		ev.key = key;
+		ev.flags = 0;
+		if(glfwGetKey(window, GLFW_KEY_LSHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RSHIFT) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_SHIFT;
+		if(glfwGetKey(window, GLFW_KEY_LALT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RALT) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_ALT;
+		if(glfwGetKey(window, GLFW_KEY_LCTRL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RCTRL) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_CTRL;
+		if(glfwGetKey(window, GLFW_KEY_CAPS_LOCK) == GLFW_PRESS) ev.flags |= SORA_INPUT_FLAG_CAPSLOCK;
+		if(glfwGetKey(window, GLFW_KEY_SCROLL_LOCK)) ev.flags |= SORA_INPUT_FLAG_SCROLLLOCK;
+
+		if(key > 0 && key < 255)
+			ev.chr = (char)key;
+		else ev.chr = 0;
+	//	ev.wheel = glfwGetMouseWheel(window);
+		int32 x, y;
+		glfwGetMousePos(window, &x, &y);
+		ev.x = x;
+		ev.y = y;
+		
+		INT_LOG::debugPrintf("ev, char: %c, wheel: %d, x, y: %d, %d, flag: %d, key: %d\n", ev.chr, ev.wheel, x, y, ev.flags, ev.key);		
+		
+		SORA_EVENT_MANAGER->publishInputEvent(&ev);
+		keyPoll.push_back(ev);
+	}
+
+	void clearPoll() {
+		keyPoll.clear();
+	}
+
+	bool getEv(SoraKeyEvent& ev) {
+		if(keyPoll.size() != 0) {
+			ev = keyPoll.back();
+			keyPoll.pop_back();
+			return true;
+		} else return false;
+	}
+
+} // namespace sora
+
+

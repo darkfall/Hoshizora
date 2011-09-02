@@ -1,0 +1,105 @@
+<?xml version="1.0" standalone="no" ?>
+
+<script name="right dance" type="ANIMATION_TYPE_ONCE_AND_STAY" framerate="20">
+
+  <frame id="1">
+    <obj>
+      <settings quad="left01" x="80" y="71.5" flip="1" />
+    </obj>
+  </frame>
+  <frame id="2">
+    <obj>
+      <settings quad="left02" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="3">
+    <obj>
+      <settings quad="left03" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="4">
+    <obj>
+      <settings quad="left04" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="5">
+    <obj>
+      <settings quad="left05" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="6">
+    <obj>
+      <settings quad="left06" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="7">
+    <obj>
+      <settings quad="left07" x="80" y="71.5" flip="1" />
+    </obj>
+  </frame>
+  <frame id="8">
+    <obj>
+      <settings quad="left08" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="9">
+    <obj>
+      <settings quad="left09" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="10">
+    <obj>
+      <settings quad="left10" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="11">
+    <obj>
+      <settings quad="left11" x="80" y="71.5" flip="1" />
+    </obj>
+  </frame>
+  <frame id="12">
+    <obj>
+      <settings quad="left12" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="13">
+    <obj>
+      <settings quad="left13" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="14">
+    <obj>
+      <settings quad="left14" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="15">
+    <obj>
+      <settings quad="left15" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="16">
+    <obj>
+      <settings quad="left16" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="17">
+    <obj>
+      <settings quad="left17" x="80" y="71.5" flip="1" />
+    </obj>
+  </frame>
+  <frame id="18">
+    <obj>
+      <settings quad="left18" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="19">
+    <obj>
+      <settings quad="left19" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+  <frame id="20">
+    <obj>
+      <settings quad="left20" x="80" y="71" flip="1" />
+    </obj>
+  </frame>
+</script>
