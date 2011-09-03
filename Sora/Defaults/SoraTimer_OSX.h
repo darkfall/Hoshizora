@@ -10,8 +10,8 @@
 #ifndef SORA_OSX_TIMER_H_
 #define SORA_OSX_TIMER_H_
 
-#include "../SoraTimer.h"
-#include "../SoraPlatform.h"
+#include "SoraTimer.h"
+#include "SoraPlatform.h"
 
 #if defined(OS_OSX) || defined(OS_IOS)
 

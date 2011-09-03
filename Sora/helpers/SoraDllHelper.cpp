@@ -14,9 +14,9 @@
 #else
 #endif 
 
-#include "../SoraLogger.h"
+#include "SoraLogger.h"
 
-#include "../SoraFileUtility.h"
+#include "SoraFileUtility.h"
 
 namespace sora {
     

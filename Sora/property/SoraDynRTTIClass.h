@@ -15,7 +15,7 @@
 
 #include "SoraPropertyHolder.h"
 
-#include "../SoraException.h"
+#include "SoraException.h"
 
 #include <map>
 

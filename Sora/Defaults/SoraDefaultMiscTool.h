@@ -10,8 +10,8 @@
 #ifndef SORA_DEFAULT_MISC_TOOL_H
 #define SORA_DEFAULT_MISC_TOOL_H
 
-#include "../SoraMiscTool.h"
-#include "../SoraLogger.h"
+#include "SoraMiscTool.h"
+#include "SoraLogger.h"
 
 namespace sora {
 	

@@ -10,8 +10,8 @@
 
 #include "SoraInternalLogger.h"
 
-#include "../SoraEventManager.h"
-#include "../SoraEvent.h"
+#include "SoraEventManager.h"
+#include "SoraEvent.h"
 
 #ifdef OS_PSP
 #include <pspkernel.h>

@@ -9,7 +9,7 @@
 
 #include "SoraSpriteFont.h"
 
-#include "../SoraCore.h"
+#include "SoraCore.h"
 
 namespace sora {
 

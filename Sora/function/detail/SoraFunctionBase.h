@@ -9,7 +9,7 @@
 #ifndef SoraFunctionImpl_h
 #define SoraFunctionImpl_h
 
-#include "../../SoraTypeTraits.h"
+#include "SoraTypeTraits.h"
 
 namespace sora {
     

@@ -11,16 +11,16 @@
 
 #include "SoraDllHelper.h"
 
-#include "../SoraCore.h"
+#include "SoraCore.h"
 
-#include "../SoraRenderSystem.h"
-#include "../SoraMiscTool.h"
-#include "../SoraTimer.h"
-#include "../SoraInput.h"
-#include "../SoraFontManager.h"
-#include "../SoraSoundSystem.h"
-#include "../SoraResourceManager.h"
-#include "../SoraPluginManager.h"
+#include "SoraRenderSystem.h"
+#include "SoraMiscTool.h"
+#include "SoraTimer.h"
+#include "SoraInput.h"
+#include "SoraFontManager.h"
+#include "SoraSoundSystem.h"
+#include "SoraResourceManager.h"
+#include "SoraPluginManager.h"
 
 namespace sora {
 	

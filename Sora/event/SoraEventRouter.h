@@ -9,8 +9,8 @@
 #ifndef Sora_SoraEventRouter_h
 #define Sora_SoraEventRouter_h
 
-#include "../signal/SoraSignal.h"
-#include "../SoraEvent.h"
+#include "signal/SoraSignal.h"
+#include "SoraEvent.h"
 #include "SoraEventWorld.h"
 
 namespace sora {

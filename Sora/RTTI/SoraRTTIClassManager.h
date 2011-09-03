@@ -30,7 +30,7 @@
 #ifndef SORA_RTTI_CLASS_MANAGER_H_
 #define SORA_RTTI_CLASS_MANAGER_H_
 
-#include "../SoraSingleton.h"
+#include "SoraSingleton.h"
 #include "SoraRTTIClass.h"
 
 #include <map>

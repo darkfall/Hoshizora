@@ -3668,13 +3668,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
-					./../Plugins/AngelScript,
-					./../Plugins/SoraGUIChan,
-					./../Plugins/SoraFreetypeFont,
-					./../Plugins/,
-					./../Plugins/SoraLuaBind/LuaBind,
-					./../Plugins/libvlc/osx/include,
-					./../Plugins/SoraBox2D,
+					"\"$(SRCROOT)/../Plugins/SoraGUIChan\"",
+					"\"$(SRCROOT)/../Plugins/SoraFreetypeFont\"",
+					"\"$(SRCROOT)/../Plugins/\"",
+					"\"$(SRCROOT)/../Plugins/SoraLuaBind/LuaBind\"",
+					"\"$(SRCROOT)/../Plugins/libvlc/osx/include\"",
+					"\"$(SRCROOT)/../Plugins/SoraBox2D\"",
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
@@ -3716,13 +3715,12 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
-					./../Plugins/AngelScript,
-					./../Plugins/SoraGUIChan,
-					./../Plugins/SoraFreetypeFont,
-					./../Plugins/,
-					./../Plugins/SoraLuaBind/LuaBind,
-					./../Plugins/libvlc/osx/include,
-					./../Plugins/SoraBox2D,
+					"\"$(SRCROOT)/../Plugins/SoraGUIChan\"",
+					"\"$(SRCROOT)/../Plugins/SoraFreetypeFont\"",
+					"\"$(SRCROOT)/../Plugins/\"",
+					"\"$(SRCROOT)/../Plugins/SoraLuaBind/LuaBind\"",
+					"\"$(SRCROOT)/../Plugins/libvlc/osx/include\"",
+					"\"$(SRCROOT)/../Plugins/SoraBox2D\"",
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (

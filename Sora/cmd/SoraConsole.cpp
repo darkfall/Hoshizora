@@ -9,12 +9,12 @@
 
 #include "SoraConsole.h"
 
-#include "../SoraEventManager.h"
-#include "../SoraCore.h"
-#include "../SoraFont.h"
-#include "../SoraStringTokenlizer.h"
-#include "../SoraStringConv.h"
-#include "../SoraLogger.h"
+#include "SoraEventManager.h"
+#include "SoraCore.h"
+#include "SoraFont.h"
+#include "SoraStringTokenlizer.h"
+#include "SoraStringConv.h"
+#include "SoraLogger.h"
 
 namespace sora {
     

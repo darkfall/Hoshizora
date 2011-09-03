@@ -9,9 +9,9 @@
 #ifndef Sora_SoraListener_h
 #define Sora_SoraListener_h
 
-#include "../SoraPlatform.h"
-#include "../SoraDelegate.h"
-#include "../SoraLogger.h"
+#include "SoraPlatform.h"
+#include "SoraDelegate.h"
+#include "SoraLogger.h"
 
 #include "SoraMessage.h"
 

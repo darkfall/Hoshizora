@@ -9,8 +9,8 @@
 #ifndef Sora_SoraComponent_h
 #define Sora_SoraComponent_h
 
-#include "../property/SoraDynRTTIClass.h"
-#include "../message/SoraMessageEvent.h"
+#include "property/SoraDynRTTIClass.h"
+#include "message/SoraMessageEvent.h"
 
 namespace sora {
     

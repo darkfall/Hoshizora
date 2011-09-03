@@ -10,13 +10,13 @@
 #ifndef SORA_MENU_BAR_H_
 #define SORA_MENU_BAR_H_
 
-#include "../SoraPlatform.h"
-#include "../SoraSingleton.h"
-#include "../SoraEvent.h"
-#include "../SoraFont.h"
-#include "../SoraPlugin.h"
-#include "../SoraHotkey.h"
-#include "../SoraFrameListener.h"
+#include "SoraPlatform.h"
+#include "SoraSingleton.h"
+#include "SoraEvent.h"
+#include "SoraFont.h"
+#include "SoraPlugin.h"
+#include "SoraHotkey.h"
+#include "SoraFrameListener.h"
 
 namespace sora {
 	

@@ -10,7 +10,7 @@
 #define Sora_SoraComponentHolder_h
 
 #include "SoraComponent.h"
-#include "../message/SoraMessageEvent.h"
+#include "message/SoraMessageEvent.h"
 
 #include "SoraUncopyable.h"
 

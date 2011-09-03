@@ -8,8 +8,8 @@
 
 #include "SoraSpriteFactory.h"
 
-#include "../SoraSprite.h"
-#include "../SoraCore.h"
+#include "SoraSprite.h"
+#include "SoraCore.h"
 
 namespace sora {
     

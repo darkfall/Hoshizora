@@ -9,8 +9,8 @@
 #ifndef Sora_SoraMessage_h
 #define Sora_SoraMessage_h
 
-#include "../SoraPlatform.h"
-#include "../SoraAny.h"
+#include "SoraPlatform.h"
+#include "SoraAny.h"
 
 namespace sora {
     

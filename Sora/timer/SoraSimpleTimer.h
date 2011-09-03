@@ -9,11 +9,11 @@
 #ifndef Sora_Timer_SoraTimer_h
 #define Sora_Timer_SoraTimer_h
 
-#include "../SoraPlatform.h"
-#include "../SoraTimestamp.h"
-#include "../SoraFunction.h"
-#include "../SoraUncopyable.h"
-#include "../util/SoraAutoContainer.h"
+#include "SoraPlatform.h"
+#include "SoraTimestamp.h"
+#include "SoraFunction.h"
+#include "SoraUncopyable.h"
+#include "util/SoraAutoContainer.h"
 
 namespace sora {
     

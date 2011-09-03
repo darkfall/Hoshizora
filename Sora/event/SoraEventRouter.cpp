@@ -7,7 +7,7 @@
 //
 
 #include "SoraEventRouter.h"
-#include "../SoraPreDeclare.h"
+#include "SoraPreDeclare.h"
 
 namespace sora {
    

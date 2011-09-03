@@ -1,11 +1,11 @@
 #ifndef SORA_CORE_LOGGER_H
 #define SORA_CORE_LOGGER_H
 
-#include "../SoraPlatform.h"
-#include "../SoraSingleton.h"
-#include "../SoraStringConv.h"
-#include "../SoraEvent.h"
-#include "../SoraTimerEvent.h"
+#include "SoraPlatform.h"
+#include "SoraSingleton.h"
+#include "SoraStringConv.h"
+#include "SoraEvent.h"
+#include "SoraTimerEvent.h"
 
 #include <vector>
 #include <fstream>

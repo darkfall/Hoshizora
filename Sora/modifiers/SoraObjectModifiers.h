@@ -9,9 +9,9 @@
 #ifndef Sora_SoraObjectModifiers_h
 #define Sora_SoraObjectModifiers_h
 
-#include "../SoraObject.h"
-#include "../SoraModifier.h"
-#include "../SoraMath.h"
+#include "SoraObject.h"
+#include "SoraModifier.h"
+#include "SoraMath.h"
 
 namespace sora {
     

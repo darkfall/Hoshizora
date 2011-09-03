@@ -9,7 +9,7 @@
 #ifndef Sora_SoraComponentFFactory_h
 #define Sora_SoraComponentFFactory_h
 
-#include "../factory/SoraFactory.h"
+#include "factory/SoraFactory.h"
 #include "SoraComponent.h"
 
 namespace sora {

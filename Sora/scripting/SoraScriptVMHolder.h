@@ -10,7 +10,7 @@
 #define Sora_SoraScriptVMHolder_h
 
 #include "SoraScriptVM.h"
-#include "../signal/SoraSignal.h"
+#include "signal/SoraSignal.h"
 
 #include <map>
 

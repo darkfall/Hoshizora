@@ -10,8 +10,8 @@
 #ifndef SORA_GLOBAL_PROFILER_H_
 #define SORA_GLOBAL_PROFILER_H_
 
-#include "../SoraCore.h"
-#include "../SoraSingleton.h"
+#include "SoraCore.h"
+#include "SoraSingleton.h"
 
 #include <iostream>
 #include <fstream>

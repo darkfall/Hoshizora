@@ -7,8 +7,8 @@
 //
 
 #include "SoraComponentHolder.h"
-#include "../SoraException.h"
-#include "../SoraStringTokenlizer.h"
+#include "SoraException.h"
+#include "SoraStringTokenlizer.h"
 
 namespace sora {
     

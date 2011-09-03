@@ -9,11 +9,11 @@
 #ifndef Sora_SoraSignal_h
 #define Sora_SoraSignal_h
 
-#include "../SoraPlatform.h"
-#include "../SoraAny.h"
-#include "../SoraAutoPtr.h"
-#include "../SoraDelegate.h"
-#include "../function/SoraFunction.h"
+#include "SoraPlatform.h"
+#include "SoraAny.h"
+#include "SoraAutoPtr.h"
+#include "SoraDelegate.h"
+#include "function/SoraFunction.h"
 
 #include "SoraUncopyable.h"
 

@@ -9,10 +9,10 @@
 #ifndef Sora_SoraCameraModifiers_h
 #define Sora_SoraCameraModifiers_h
 
-#include "../SoraPlatform.h"
-#include "../SoraModifier.h"
-#include "../SoraMath.h"
-#include "../SoraCamera.h"
+#include "SoraPlatform.h"
+#include "SoraModifier.h"
+#include "SoraMath.h"
+#include "SoraCamera.h"
 
 #include "SoraObjectModifiers.h"
 

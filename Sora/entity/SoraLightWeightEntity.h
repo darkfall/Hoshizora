@@ -9,14 +9,14 @@
 #ifndef Sora_SoraLightWeightEntity_h
 #define Sora_SoraLightWeightEntity_h
 
-#include "../SoraObject.h"
-#include "../SoraSimpleFSM.h"
-#include "../SoraPreDeclare.h"
-#include "../SoraStringTokenlizer.h"
-#include "../scripting/SoraScriptVMHolder.h"
-#include "../property/SoraPropertyHolder.h"
+#include "SoraObject.h"
+#include "SoraSimpleFSM.h"
+#include "SoraPreDeclare.h"
+#include "SoraStringTokenlizer.h"
+#include "scripting/SoraScriptVMHolder.h"
+#include "property/SoraPropertyHolder.h"
 
-#include "../property/SoraDynRTTIClass.h"
+#include "property/SoraDynRTTIClass.h"
 #include "SoraComponentHolder.h"
 
 namespace sora {

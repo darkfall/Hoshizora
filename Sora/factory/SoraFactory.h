@@ -9,13 +9,13 @@
 #ifndef Sora_SoraFactory_h
 #define Sora_SoraFactory_h
 
-#include "../SoraPlatform.h"
-#include "../SoraPreDeclare.h"
-#include "../SoraAutoPtr.h"
-#include "../SoraStringConv.h"
-#include "../function/SoraFunction.h"
+#include "SoraPlatform.h"
+#include "SoraPreDeclare.h"
+#include "SoraAutoPtr.h"
+#include "SoraStringConv.h"
+#include "function/SoraFunction.h"
 
-#include "../SoraUncopyable.h"
+#include "SoraUncopyable.h"
 
 
 namespace sora {

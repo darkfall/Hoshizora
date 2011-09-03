@@ -15,9 +15,9 @@
 
 #include <cstdio>
 
-#include "../SoraPlatform.h"
-#include "../SoraException.h"
-#include "../SoraFileBase.h"
+#include "SoraPlatform.h"
+#include "SoraException.h"
+#include "SoraFileBase.h"
 
 namespace sora {
 

@@ -9,9 +9,9 @@
 #ifndef Sora_SoraScriptVM_h
 #define Sora_SoraScriptVM_h
 
-#include "../SoraPlatform.h"
-#include "../SoraAutoPtr.h"
-#include "../SoraUncopyable.h"
+#include "SoraPlatform.h"
+#include "SoraAutoPtr.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     

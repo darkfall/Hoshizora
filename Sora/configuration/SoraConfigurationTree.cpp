@@ -8,7 +8,7 @@
 
 #include "SoraConfigurationTree.h"
 
-#include "../SoraStringTokenlizer.h"
+#include "SoraStringTokenlizer.h"
 
 namespace sora {
     

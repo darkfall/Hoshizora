@@ -10,8 +10,8 @@
 #define Sora_SoraMessageRouter_h
 
 #include "SoraMessageEvent.h"
-#include "../event/SoraEventRouter.h"
-#include "../SoraPreDeclare.h"
+#include "event/SoraEventRouter.h"
+#include "SoraPreDeclare.h"
 
 namespace sora {
     

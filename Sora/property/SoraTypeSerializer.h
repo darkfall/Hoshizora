@@ -12,8 +12,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "../SoraPlatform.h"
-#include "../SoraStringConv.h"
+#include "SoraPlatform.h"
+#include "SoraStringConv.h"
 
 namespace sora {
     

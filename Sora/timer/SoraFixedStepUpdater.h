@@ -9,7 +9,7 @@
 #ifndef Sora_SoraFixedStepUpdater_h
 #define Sora_SoraFixedStepUpdater_h
 
-#include "../SoraPlatform.h"
+#include "SoraPlatform.h"
 
 namespace sora {
     

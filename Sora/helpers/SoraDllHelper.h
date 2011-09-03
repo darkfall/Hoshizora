@@ -10,8 +10,8 @@
 #ifndef SORA_DYNAMIC_LIBRARY_HELPER
 #define SORA_DYNAMIC_LIBRARY_HELPER
 
-#include "../SoraPlatform.h"
-#include "../SoraSingleton.h"
+#include "SoraPlatform.h"
+#include "SoraSingleton.h"
 
 #include <map>
 

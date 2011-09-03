@@ -11,8 +11,8 @@
 
 #include "SoraFactory.h"
 
-#include "../json/json.h"
-#include "../SoraSprite.h"
+#include "json/json.h"
+#include "SoraSprite.h"
 
 namespace sora {
     

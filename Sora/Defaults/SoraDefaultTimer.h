@@ -10,7 +10,7 @@
 #ifndef SORA_OSX_TIMER_H
 #define SORA_OSX_TIMER_H
 
-#include "../SoraTimer.h"
+#include "SoraTimer.h"
 
 #include "SoraTimestamp.h"
 

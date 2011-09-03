@@ -9,8 +9,8 @@
 #ifndef Sora_SoraMessageEvent_h
 #define Sora_SoraMessageEvent_h
 
-#include "../SoraEvent.h"
-#include "../SoraAny.h"
+#include "SoraEvent.h"
+#include "SoraAny.h"
 
 namespace sora {
     

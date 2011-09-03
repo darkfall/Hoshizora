@@ -9,7 +9,7 @@
 // this is a template header replys on macro definitions 
 // must not have multiple-inclusion protection
 
-#include "../../SoraPreprocessor.h"
+#include "SoraPreprocessor.h"
 #include "SoraFunctionBase.h"
 #include "SoraFunctionFoward.h"
 

@@ -9,10 +9,10 @@
 #ifndef Sora_ITimerManager_h
 #define Sora_ITimerManager_h
 
-#include "../SoraSingleton.h"
-#include "../SoraPlatform.h"
-#include "../SoraDelegate.h"
-#include "../function/SoraFunction.h"
+#include "SoraSingleton.h"
+#include "SoraPlatform.h"
+#include "SoraDelegate.h"
+#include "function/SoraFunction.h"
 
 namespace sora {
     

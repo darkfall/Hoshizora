@@ -10,8 +10,8 @@
 #ifndef SORA_BOOTER_H_
 #define SORA_BOOTER_H_
 
-#include "../SoraPlatform.h"
-#include "../SoraSingleton.h"
+#include "SoraPlatform.h"
+#include "SoraSingleton.h"
 
 namespace sora {
 	

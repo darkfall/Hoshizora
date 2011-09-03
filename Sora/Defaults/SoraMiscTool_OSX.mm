@@ -15,7 +15,7 @@
 #import <Cocoa/Cocoa.h>	
 #import <Foundation/Foundation.h>
 
-#include "../SoraStringTokenlizer.h"
+#include "SoraStringTokenlizer.h"
 
 namespace sora {
 	

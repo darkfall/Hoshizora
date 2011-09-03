@@ -10,13 +10,13 @@
 #include "CoreCmds.h"
 #include "SoraConsole.h"
 
-#include "../SoraLogger.h"
+#include "SoraLogger.h"
 
-#include "../SoraCore.h"
-#include "../SoraLocalizer.h"
-#include "../SoraEventManager.h"
-#include "../SoraObjectHandle.h"
-#include "../SoraGlobalMessageRouter.h"
+#include "SoraCore.h"
+#include "SoraLocalizer.h"
+#include "SoraEventManager.h"
+#include "SoraObjectHandle.h"
+#include "SoraGlobalMessageRouter.h"
 
 namespace sora {
 

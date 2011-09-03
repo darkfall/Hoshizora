@@ -1557,9 +1557,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "153"
-         endingLineNumber = "153"
-         landmarkName = "mainWindow::init()"
-         landmarkType = "5">
+         endingLineNumber = "153">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

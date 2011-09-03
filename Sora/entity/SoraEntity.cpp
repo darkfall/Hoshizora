@@ -7,8 +7,8 @@
 //
 
 #include "SoraEntity.h"
-#include "../function/SoraFunction.h"
-#include "../function/SoraBind.h"
+#include "function/SoraFunction.h"
+#include "function/SoraBind.h"
 #include "SoraComponentFactory.h"
 
 namespace sora {

@@ -9,8 +9,8 @@
 #ifndef Sora_SoraConfigurationTree_h
 #define Sora_SoraConfigurationTree_h
 
-#include "../SoraPlatform.h"
-#include "../SoraIteratorHelper.h"
+#include "SoraPlatform.h"
+#include "SoraIteratorHelper.h"
 
 #include <map>
 

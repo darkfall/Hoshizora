@@ -10,13 +10,13 @@
 #ifndef SORA_COMMAND_LINE_H_
 #define SORA_COMMAND_LINE_H_
 
-#include "../SoraPlatform.h"
-#include "../SoraEvent.h"
-#include "../SoraKeyInfo.h"
-#include "../SoraHotkey.h"
-#include "../SoraFrameListener.h"
-#include "../SoraIteratorHelper.h"
-#include "../SoraPreDeclare.h"
+#include "SoraPlatform.h"
+#include "SoraEvent.h"
+#include "SoraKeyInfo.h"
+#include "SoraHotkey.h"
+#include "SoraFrameListener.h"
+#include "SoraIteratorHelper.h"
+#include "SoraPreDeclare.h"
 
 #include <vector>
 
