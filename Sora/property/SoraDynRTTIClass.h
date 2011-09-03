@@ -14,7 +14,6 @@
  **/
 
 #include "SoraPropertyHolder.h"
-
 #include "SoraException.h"
 
 #include <map>
@@ -25,7 +24,7 @@ namespace sora {
 
     class SoraDynRTTIClass;
     
-    struct SoraDynRTTIClassManager {
+    struct SORA_API SoraDynRTTIClassManager {
         typedef std::map<std::string, SoraDynRTTIClass*> ClassPtrMap;
         
         static void insert(SoraDynRTTIClass* cls);
@@ -36,7 +35,7 @@ namespace sora {
         static ClassPtrMap mClasses;
     };
 
-    class SoraDynRTTIClass {
+    class SORA_API SoraDynRTTIClass {
     public:        
         typedef std::map<std::string, SoraDynRTTIClass*> ParentClassMap;
 
