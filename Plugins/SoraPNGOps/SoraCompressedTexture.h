@@ -12,6 +12,7 @@
 
 #include "SoraCore.h"
 #include "RectPlacement.h"
+#include "SoraMath.h"
 
 namespace sora {
 	
@@ -37,7 +38,7 @@ namespace sora {
 		 */
 		bool addSprite(SoraSprite* spr, const SoraString& descriptor);
 		
-		hgeRect getSpriteRect(const SoraString& descriptor);
+		SoraRect getSpriteRect(const SoraString& descriptor);
 		void delSprite(const SoraString& descriptor);
 		
 		SoraSprite* getSprite(const SoraString& descriptor);

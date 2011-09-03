@@ -157,7 +157,7 @@ namespace mead {
 		sora::SoraSpriteAnimation* mSprite;
 		float32 mSpriteWidth_2, mSpriteHeight_2;
 
-		hgeRect mScreenRect;
+		sora::SoraRect mScreenRect;
 		float32 mCollisionPointRadius;
 
 		typedef std::map<int32/*itemid*/, int32/*item number*/> ITEM_NUMBER_MAP;

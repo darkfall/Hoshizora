@@ -27,7 +27,7 @@ namespace sora {
     }
     
     static SoraComponent* CreateComponent(const SoraString& name) {
-        SoraComponentFactory::Instance()->createInstance(name);
+        return SoraComponentFactory::Instance()->createInstance(name);
     }
     
     static void DestroyComponent(SoraComponent* comp) {

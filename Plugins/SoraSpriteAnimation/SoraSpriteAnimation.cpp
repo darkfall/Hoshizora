@@ -218,8 +218,6 @@ namespace sora {
         return 1;
     }
     
-#define _DEBUG
-    
     SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(void* pData, unsigned long size) {
         SoraSpriteAnimation* panm = new SoraSpriteAnimation;
         

@@ -97,13 +97,13 @@ namespace sora {
 		return NULL;
 	}
 	
-	hgeRect SoraCompressedTexture::getSpriteRect(const SoraString& descriptor) {
+	SoraRect SoraCompressedTexture::getSpriteRect(const SoraString& descriptor) {
 		SPRITE_MAP::iterator itSprite = mSpriteMap.find(descriptor);
 		if(itSprite != mSpriteMap.end()) {
 			CRectPlacement::TRect rect = itSprite->second.mDestRect;
-			return hgeRect(rect.x, rect.y, rect.w, rect.h);
+			return SoraRect(rect.x, rect.y, rect.w, rect.h);
 		}
-		return hgeRect();
+		return SoraRect();
 	}
 	
 	HSORATEXTURE SoraCompressedTexture::getTexture() const {

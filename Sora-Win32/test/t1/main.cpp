@@ -47,7 +47,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 					   int       nCmdShow) {
 
 
-	sora::SoraCore* sora = sora::InitAndCreateSoraCore(new aeMainWindow,
+	sora::SoraCore* sora = sora::InitAndCreateSoraCore(new mead::meadMainWindow,
 														sora::SoraCoreParameter(/* load plugins */
 																				false,
 																				/* render to buffer */

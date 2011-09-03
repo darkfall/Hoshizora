@@ -360,10 +360,6 @@ namespace { \
 #define snprintf _snprintf
 #endif
 
-#ifndef _DEBUG
-#define _DEBUG
-#endif
-
 /*
  flag for shaders in render system
  disable this to get rid of shader

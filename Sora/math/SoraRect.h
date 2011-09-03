@@ -54,7 +54,7 @@ namespace sora {
             x1 = x - r;
             y1 = y - r;
             x2 = x + r;
-            y2 + y + r;
+            y2 = y + r;
         }
         
         void encapsulate(float x, float y) {

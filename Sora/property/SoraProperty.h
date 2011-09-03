@@ -36,8 +36,8 @@ namespace sora  {
         
     } // namespace property
     
-    struct SoraPropertyBase {
-        
+    class SoraPropertyBase {
+	public:
         virtual ~SoraPropertyBase() {}
         
         virtual const std::string& getName() const = 0;

@@ -4,11 +4,8 @@
 #include "SoraException.h"
 #include "SoraPlatform.h"
 #include "SoraColor.h"
-#include "SoraVector.h"
-
-#include "SoraCoreTransform.h"
-#include "SoraCoreTransformer.h"
-
+#include "SoraMath.h"
+#include "math/SoraCoreTransformer.h"
 #include "SoraModifier.h"
 #include <list>
 

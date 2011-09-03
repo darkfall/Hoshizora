@@ -10,9 +10,6 @@
 #include "mainWindow.h"
 #include "SoraEventManager.h"
 #include "SoraLocalizer.h"
-
-#include "graphicEffects.h"
-
 #include "SoraGUIChan/guichansetup.h"
 #include "gcnExtend/gcnDraggableImageButtonIncubator.h"
 #include "gcnExtend/gcnSelectableContainer.h"

@@ -10,7 +10,7 @@
 #ifndef MEAD_BULLET_H_
 #define MEAD_BULLET_H_
 
-#include "hgerect.h"
+#include "SoraMath.h"
 #include "SoraPlatform.h"
 #include "SoraSprite.h"
 #include "SoraColor.h"
@@ -25,8 +25,8 @@ namespace mead {
 		// bulletid
 		uint32 bulletId;
 		// texture rect for the bullet
-		hgeRect texRect;
-		hgeRect screenRect;
+		sora::SoraRect texRect;
+		sora::SoraRect screenRect;
 		
 		int32 getBulletId() { return bulletId; }
 		
@@ -168,7 +168,7 @@ namespace mead {
 			isCollision(false), isGraze(true), isShow(true), isDied(false), isImmortal(false), isDownReflection(false), isAlphaBlend(true) {
 		}
 		
-		meadBullet(float32 posx, float32 posy, float32 s, float32 d, uint32 tid, uint32 st, const hgeRect& rect): 
+		meadBullet(float32 posx, float32 posy, float32 s, float32 d, uint32 tid, uint32 st, const sora::SoraRect& rect): 
 			positionX(posx), positionY(posy), speed(s), direction(d), texId(tid), texRect(rect), shootTime(st),
 			originPointX(0.f), originPointY(0.f), speedX(0.f), speedY(0.f), 
 			incrementalSpeed(0.f), incrementalSpeedX(0.f), incrementalSpeedY(0.f),
@@ -226,13 +226,13 @@ namespace mead {
 					} else {
 						float32 laserPosX = positionX - laserLength * cosf(direction);
 						float32 laserPosY = positionY + laserLength * sinf(direction);
-						if(!screenRect.TestPoint(laserPosX, laserPosY)) {
+						if(!screenRect.testPoint(laserPosX, laserPosY)) {
 							isDied = true;
 							currDiedEffectTime = diedEffectTime;
 						}
 					}
 				} else
-				if(!screenRect.TestPoint(positionX, positionY)) {
+				if(!screenRect.testPoint(positionX, positionY)) {
 					if(reflectionTimes == 0 || (!isDownReflection && positionY >= screenRect.y2)) {
 						isDied = true;
 						currDiedEffectTime = diedEffectTime;

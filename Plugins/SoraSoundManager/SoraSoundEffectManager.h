@@ -13,7 +13,7 @@
 #include "SoraPlatform.h"
 #include "SoraSoundFile.h"
 #include "SoraSingleton.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 namespace sora {
 		

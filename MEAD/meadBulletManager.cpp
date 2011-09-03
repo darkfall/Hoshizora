@@ -15,7 +15,7 @@
 namespace mead {
     
 	meadBulletManager::meadBulletManager() {
-		mScreenRect.Set(-64.f, -64.f, sora::SORA->getScreenWidth()+64.f, sora::SORA->getScreenHeight()+64.f);
+		mScreenRect.set(-64.f, -64.f, sora::SORA->getScreenWidth()+64.f, sora::SORA->getScreenHeight()+64.f);
 	}
 	
 	meadBulletManager::~meadBulletManager() {
@@ -72,7 +72,7 @@ namespace mead {
 									} else if(strcmpnocase(lexeme, "TexRect") == 0) {
 										lexer->getNextToken();
 										if(lexer->getNextToken() == TOKEN_TYPE_DELIM_OPEN_PAREN) {
-											hgeRect rect;
+											sora::SoraRect rect;
 											lexer->getNextToken(); rect.x1 = (float)atof(lexer->getCurrLexeme());
 											lexer->getNextToken(); rect.y1 = (float)atof(lexer->getCurrLexeme());
 											lexer->getNextToken(); rect.x2 = (float)atof(lexer->getCurrLexeme());
@@ -135,7 +135,7 @@ namespace mead {
 		}
 	}
 	
-	void meadBulletManager::setScreenRect(const hgeRect& rect) {
+	void meadBulletManager::setScreenRect(const sora::SoraRect& rect) {
 		mScreenRect = rect;
 	}
 
@@ -263,7 +263,7 @@ namespace mead {
 	}
 	
 	void meadBulletManager::setScreenRectAABB(float32 x, float32 y, float32 x2, float32 y2) {
-		mScreenRect.Set(x, y, x2, y2);
+		mScreenRect.set(x, y, x2, y2);
 	}
 	
 	meadBullet* meadBulletManager::getBullet(ulong32 handle) {

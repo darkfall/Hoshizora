@@ -18,11 +18,10 @@
 #include "SoraMath.h"
 #include "json/json.h"
 #include "SoraGUIChan/jsongui.h"
-#include "hgevector.h"
 
 namespace reflection {
 
-	typedef hgeVector rfPoint;
+	typedef sora::SoraVector rfPoint;
 	typedef sora::SoraObject rfObject;
 	typedef float32 rfFloat;
 	typedef double rfDouble;

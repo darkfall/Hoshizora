@@ -47,7 +47,7 @@ namespace mead {
 		mPlayerStates[PLAYER_HIGH_SCORE]		= 0;
 		mPlayerStates[PLAYER_IS_IMMUNE]			= false;
 		
-		mScreenRect.Set(0.f, 0.f, (float32)sora::SORA->getScreenWidth(), (float32)sora::SORA->getScreenHeight());
+		mScreenRect.set(0.f, 0.f, (float32)sora::SORA->getScreenWidth(), (float32)sora::SORA->getScreenHeight());
 		mCollisionPointRadius = 1.f;
 		
 		sora = sora::SoraCore::Instance();
@@ -307,7 +307,7 @@ namespace mead {
 	}
 	
 	void meadPlayer::setScreenRect(float32 x, float32 y, float32 x1, float32 y1) {
-		mScreenRect.Set(x, y, x1, y1);
+		mScreenRect.set(x, y, x1, y1);
 	}
 	
 	void meadPlayer::setCollisionPointRadius(float32 r) {

@@ -14,13 +14,13 @@
 #include "SoraSoundFile.h"
 #include "SoraSingleton.h"
 #include "SoraAutoUpdate.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 #include "signal/SoraSignal.h"
 
 namespace sora {
 	
-	typedef stringId BGMId;
+	typedef SoraStringId BGMId;
 	
 	/*
 	 simple interface for bgm management

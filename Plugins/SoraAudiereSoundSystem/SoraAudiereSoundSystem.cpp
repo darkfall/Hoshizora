@@ -1,11 +1,9 @@
 #include "SoraAudiereSoundSystem.h"
-
 #include "SoraAudiereDevice.h"
-
 #include "SoraCore.h"
-
-#include "hash.h"
 #include "SoraAudiereSoundFile.h"
+
+#include "util/SoraHash.h"
 
 namespace sora {
 

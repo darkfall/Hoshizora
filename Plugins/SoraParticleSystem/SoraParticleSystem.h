@@ -3,18 +3,10 @@
 
 #include "SoraCore.h"
 #include "SoraSprite.h"
-
 #include "SoraException.h"
 #include "SoraPlatform.h"
-
 #include "SoraColor.h"
-
-#include "SoraRect.h"
-#include "SoraVector.h"
-#include "SoraVector3.h"
-
-/* SoraQuaternion for rotation 3v */
-#include "SoraQuaternion.h"
+#include "SoraMath.h"
 
 #include <vector>
 #include <map>

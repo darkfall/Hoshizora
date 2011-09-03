@@ -13,7 +13,6 @@
 
 #include "SoraFileUtility.h"
 #include "SoraMath.h"
-#include "Rect4V.h"
 #include "SoraInfiniteRendererCallback.h"
 
 #ifdef SORA_USE_SHADER

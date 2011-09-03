@@ -12,11 +12,10 @@
 
 #include "meadBullet.h"
 
-#include "QuickList.h"
 #include "SoraColor.h"
 #include "SoraSprite.h"
 
-#include "AutoContainer.h"
+#include "util/SoraAutoContainer.h"
 
 namespace mead {
 	
@@ -48,7 +47,7 @@ namespace mead {
 		// if bForce == true, then even immortal bullet would be cleared
 		void clearBulletList(bool bForce=false);
 		
-		void setScreenRect(const hgeRect& rect);
+		void setScreenRect(const sora::SoraRect& rect);
 		void setScreenRectAABB(float32 x, float32 y, float32 x2, float32 y2);
 		
 		bool isBulletValid(ulong32 handle);
@@ -62,7 +61,7 @@ namespace mead {
 		void* getBulletDirect(ulong32 handle);
 		
 	private:
-		typedef QuickList<meadBullet*> BULLET_LIST;
+		typedef std::list<meadBullet*> BULLET_LIST;
 		typedef sora::hash_map<ulong32, meadBullet*> BULLET_MAP;
 		
 		// bullet list 
@@ -76,12 +75,12 @@ namespace mead {
 		BULLET_SPRITE_MAP mBulletSprites;
 		
 		struct BulletConfigNode {
-			hgeRect mTextureRect;
+			sora::SoraRect mTextureRect;
 			sora::SoraColorRGBA mShootColor;
 			
 			uint32 mTextureId;
 			
-			BulletConfigNode(const hgeRect& rect, const sora::SoraColorRGBA& color, uint32 texid):
+			BulletConfigNode(const sora::SoraRect& rect, const sora::SoraColorRGBA& color, uint32 texid):
 			mTextureRect(rect), mShootColor(color), mTextureId(texid) {}
 			
 			BulletConfigNode() {}
@@ -93,7 +92,7 @@ namespace mead {
 		BULLET_CONFIG_MAP mBulletConfigs;
 
 		
-		hgeRect mScreenRect;
+		sora::SoraRect mScreenRect;
 	};
 	
 } // namespace mead;

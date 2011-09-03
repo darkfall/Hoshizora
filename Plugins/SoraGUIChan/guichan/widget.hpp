@@ -1430,8 +1430,8 @@ namespace gcn
      * @since Guichan for Hoshizora
      **/
     
-    struct GCN_CORE_DECLSPEC Message {
-        
+    class GCN_CORE_DECLSPEC Message {
+	public:
         Message(Widget* sender,
                 Widget* receiver,
                 const std::string& mssg);

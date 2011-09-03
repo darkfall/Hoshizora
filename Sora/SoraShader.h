@@ -12,11 +12,10 @@
 #define SORA_SHADER_H__
 
 #include "SoraPlatform.h"
-#include "SoraAutoContainer.h"
 #include "SoraNamedObject.h"
 #include "SoraAutoPtr.h"
 #include "SoraRefCounted.h"
-
+#include "util/SoraAutoContainer.h"
 #include <list>
 
 namespace sora {

@@ -9,8 +9,6 @@
 
 
 #include "SoraRenderSystem.h"
-#include "SoraRect4v.h"
-
 namespace sora {
 
 

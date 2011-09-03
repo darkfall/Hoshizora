@@ -47,7 +47,7 @@
 #include "cmd/SoraConsole.h"
 
 #include "SoraMemoryUsage.h"
-#include "SoraRect4v.h"
+#include "SoraMath.h"
 #include "SoraCamera.h"
 #include "SoraRenderSystemExtension.h"
 

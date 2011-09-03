@@ -145,6 +145,12 @@
     <Filter Include="头文件\properties">
       <UniqueIdentifier>{c147dcf9-f023-4f23-a8c4-fbf16f5df11f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\math">
+      <UniqueIdentifier>{aa305dc6-ccfc-4694-9040-990f78e63571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\util">
+      <UniqueIdentifier>{6dfff374-a2b6-4625-afa1-894f708ae6f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.h">
@@ -915,9 +921,6 @@
     <ClInclude Include="..\..\..\Sora\modifiers\SoraCameraModifiers.h">
       <Filter>头文件\modifiers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\entity\SoraEntity.h">
-      <Filter>头文件\entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\event\SoraEventChannel.h">
       <Filter>头文件\event</Filter>
     </ClInclude>
@@ -1026,76 +1029,16 @@
     <ClInclude Include="..\..\..\Sora\SoraWindowInfo.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\stringId.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\TemplateTransformer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\uncopyable.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\vector3.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\win32filewrapper.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\WindowsStackTrace.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\AutoContainer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\common.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\CoreTransform.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\CoreTransformer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\graphicEffects.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\GridMap.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\hash.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\hgerect.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\hgevector.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\Hoshizora.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\MemoryUsage.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\osxfilewrapper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\PartitionTree.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\quaternion.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\QuickList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\Rect4V.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RefCounted.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\Serializable.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\Sora2DMatrix.h">
@@ -1719,18 +1662,6 @@
     <ClInclude Include="..\..\..\Sora\SoraAutoUpdate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\entity\SoraComponentHolder.h">
-      <Filter>头文件\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\entity\SoraEntityListener.h">
-      <Filter>头文件\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\entity\SoraComponent.h">
-      <Filter>头文件\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\entity\SoraComponentFactory.h">
-      <Filter>头文件\entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\message\SoraMessageRouter.h">
       <Filter>头文件\message</Filter>
     </ClInclude>
@@ -1746,18 +1677,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaExporter.h">
       <Filter>Plugins\SoraLua</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\property\SoraPropertyHolder.h">
-      <Filter>头文件\properties</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\property\SoraTypeSerializer.h">
-      <Filter>头文件\properties</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\property\SoraDynRTTIClass.h">
-      <Filter>头文件\properties</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\property\SoraProperty.h">
-      <Filter>头文件\properties</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraGlobalMessageRouter.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -1766,6 +1685,69 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraLua\pluto.h">
       <Filter>Plugins\SoraLua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraCoreTransform.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraCoreTransformer.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraMath.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraMatrix3x3.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraQuaternion.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraRect.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraRect4V.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraVector.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraVector3.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\util\SoraAutoContainer.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\util\SoraHash.h">
+      <Filter>头文件\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\property\SoraDynRTTIClass.h">
+      <Filter>头文件\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\property\SoraProperty.h">
+      <Filter>头文件\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\property\SoraPropertyHolder.h">
+      <Filter>头文件\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\property\SoraTypeSerializer.h">
+      <Filter>头文件\properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponent.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponentFactory.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraComponentHolder.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraEntity.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraEntityListener.h">
+      <Filter>头文件\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\entity\SoraLightWeightEntity.h">
+      <Filter>头文件\entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2177,9 +2159,6 @@
     <ClCompile Include="..\..\..\Sora\modifiers\SoraCameraModifiers.cpp">
       <Filter>头文件\modifiers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\entity\SoraEntity.cpp">
-      <Filter>头文件\entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\event\SoraEventChannel.cpp">
       <Filter>头文件\event</Filter>
     </ClCompile>
@@ -2232,21 +2211,6 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\win32filewrapper.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\AutoContainer.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\CoreTransform.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\graphicEffects.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\hgerect.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\hgevector.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraAny.cpp">
@@ -2639,26 +2603,11 @@
     <ClCompile Include="..\..\..\Sora\SoraAutoUpdate.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\entity\SoraComponent.cpp">
-      <Filter>头文件\entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\entity\SoraComponentHolder.cpp">
-      <Filter>头文件\entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\event\SoraEventRouter.cpp">
       <Filter>头文件\event</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaExporter.cpp">
       <Filter>Plugins\SoraLua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\property\SoraPropertyHolder.cpp">
-      <Filter>头文件\properties</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\property\SoraDynRTTIClass.cpp">
-      <Filter>头文件\properties</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\property\SoraProperty.cpp">
-      <Filter>头文件\properties</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraGlobalMessageRouter.cpp">
       <Filter>头文件</Filter>
@@ -2674,6 +2623,30 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.cpp">
       <Filter>Plugins\SpriteAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\math\SoraCoreTransform.cpp">
+      <Filter>头文件\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\property\SoraDynRTTIClass.cpp">
+      <Filter>头文件\properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\property\SoraProperty.cpp">
+      <Filter>头文件\properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\property\SoraTypeSerializer.cpp">
+      <Filter>头文件\properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\entity\SoraComponent.cpp">
+      <Filter>头文件\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\entity\SoraComponentHolder.cpp">
+      <Filter>头文件\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\entity\SoraEntity.cpp">
+      <Filter>头文件\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\entity\SoraLightWeightEntity.cpp">
+      <Filter>头文件\entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
