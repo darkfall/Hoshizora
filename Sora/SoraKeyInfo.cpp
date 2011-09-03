@@ -177,11 +177,11 @@ namespace sora {
         return !middleBtnDown;
     }
     
-    float32 SoraMouseEvent::getX() const {
+    float SoraMouseEvent::getX() const {
         return x;
     }
     
-    float32 SoraMouseEvent::getY() const {
+    float SoraMouseEvent::getY() const {
         return y;
     }
     

@@ -12,7 +12,7 @@
 #include "SoraPlatform.h"
 #include "SoraShader.h"
 #include "SoraObject.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     

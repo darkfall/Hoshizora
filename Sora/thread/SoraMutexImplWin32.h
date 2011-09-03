@@ -16,11 +16,11 @@
 #include <windows.h>
 
 #include "SoraException.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     
-    class SoraMutexLockImpl: public uncopyable {
+    class SoraMutexLockImpl: public SoraUncopyable {
     protected:
         SoraMutexLockImpl() {
             InitializeCriticalSectionAndSpinCount(&cs, 4000);

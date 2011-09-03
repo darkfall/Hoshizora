@@ -49,12 +49,12 @@ namespace sora {
 		
 		void setFPS(int32 fps) {
 			fpsInterval = 1.f / fps * (1000*1000*1000);
-			this->fps = (float32)fps;
+			this->fps = (float)fps;
 		}
 		
-		float32 getFPS()	{ return fps; }
-		float32 getDelta()	{ return fdt; }
-		float32 getTime() { return fTime; }
+		float getFPS()	{ return fps; }
+		float getDelta()	{ return fdt; }
+		float getTime() { return fTime; }
 		int32 getFrameCount() { return frameCounter; }
 		uint64 getCurrentSystemTime() { return mach_absolute_time(); }
 		
@@ -119,10 +119,10 @@ namespace sora {
 		
 		uint64_t time, oldtime;
 		uint64_t fpsInterval;
-		float32 fps;
-		float32 fdt;
+		float fps;
+		float fdt;
 		int32 frameCounter;
-		float32 fTime;
+		float fTime;
 	};
 	
 } // namespace sora

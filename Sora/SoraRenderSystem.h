@@ -1,8 +1,8 @@
 /*
  *  SoraRenderSystem.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/24/10.
+ *  Created by Robert Bu on 8/24/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -57,13 +57,13 @@ namespace sora {
 		virtual void renderTriple(SoraTriple& trip) = 0;
 		virtual void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) = 0;
 
-		virtual void renderLine(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f) = 0;
-		virtual void renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f) = 0;
-        virtual void fillBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f) = 0;
+		virtual void renderLine(float x1, float y1, float x2, float y2, uint32 color, float z=0.f) = 0;
+		virtual void renderBox(float x1, float y1, float x2, float y2, uint32 color, float z=0.f) = 0;
+        virtual void fillBox(float x1, float y1, float x2, float y2, uint32 color, float z=0.f) = 0;
         
 		virtual void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0) = 0;
-		virtual void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f) = 0;
-        virtual void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f) = 0;
+		virtual void setTransform(float x=0.f, float y=0.f, float dx=0.f, float dy=0.f, float rot=0.f, float hscale=0.f, float vscale=0.f) = 0;
+        virtual void setViewPoint(float x=0.f, float y=0.f, float z=0.f) = 0;
         
 		virtual void shutdown() = 0;
 		virtual ulong32 getMainWindowHandle() = 0;

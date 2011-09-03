@@ -10,13 +10,13 @@
 #define Sora_SoraThreadTask_h
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 #include "SoraAutoPtr.h"
 
 namespace sora {
     
-    class SoraThreadTaskImpl: uncopyable {
+    class SoraThreadTaskImpl: SoraUncopyable {
     public:
         virtual void operator()(void* arg) = 0;
     };

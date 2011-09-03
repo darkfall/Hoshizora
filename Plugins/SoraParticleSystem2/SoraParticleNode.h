@@ -41,20 +41,20 @@ namespace sora {
             SoraVector mSpeed;
             SoraVector mPosition;
                    
-            float32 mCurrLifetime;
-            float32 mLifetime;
+            float mCurrLifetime;
+            float mLifetime;
             
-            float32 mFriction;
+            float mFriction;
             SoraVector mAcceleration;
             
-            float32 mTrigAcc;
-            float32 mGravity;
+            float mTrigAcc;
+            float mGravity;
             
             SoraVector mScale;
             SoraVector mScaleVar;
             
-            float32 mSpin;
-            float32 mSpinVar;
+            float mSpin;
+            float mSpinVar;
             
             uint32 mColor;
             uint32 mColorVar;
@@ -66,7 +66,7 @@ namespace sora {
                 return mDead;
             }
             
-            virtual void transform(float32 dt) {
+            virtual void transform(float dt) {
                 if(mDead)
                     return;
                 
@@ -76,14 +76,14 @@ namespace sora {
                 mSpeed += mAcceleration * dt;
                 
                 if(mFriction != 0.f) {
-                    float angle = mSpeed.Angle();
+                    float angle = mSpeed.angle();
                     float df = mFriction * dt;
                     mSpeed -= SoraVector(df * cosf(angle),
                                          dt * sinf(angle));
                 }
                 
                 if(mTrigAcc != 0.f)
-                    mPosition.Rotate(mTrigAcc * dt);
+                    mPosition.rotate(mTrigAcc * dt);
                 
                 if(mGravity != 0.f)
                     mPosition.y += mGravity * dt;

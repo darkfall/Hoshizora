@@ -15,7 +15,7 @@
 #include "../SoraStringConv.h"
 #include "../function/SoraFunction.h"
 
-#include "../uncopyable.h"
+#include "../SoraUncopyable.h"
 
 
 namespace sora {

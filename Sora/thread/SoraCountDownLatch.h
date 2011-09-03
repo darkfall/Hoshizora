@@ -17,7 +17,7 @@
 
 namespace sora {
     
-    class SoraCountDownLatch: uncopyable {
+    class SoraCountDownLatch: SoraUncopyable {
     public:
         explicit SoraCountDownLatch(int32 count);
         

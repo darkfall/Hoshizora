@@ -1,6 +1,6 @@
 #include "SoraImageEffect.h"
 
-#include "CoreTransformer.h"
+#include "SoraCoreTransformer.h"
 #include "SoraSprite.h"
 
 namespace sora {
@@ -14,7 +14,7 @@ namespace sora {
     repeatTimes(0) {
 	}
     
-	SoraImageEffect::SoraImageEffect(CoreTransformer<CoreTransform>* transformer): 
+	SoraImageEffect::SoraImageEffect(SoraCoreTransformer<SoraCoreTransform>* transformer): 
     SoraModifier<SoraSprite>(true), 
     currRepeatTimes(0),
     repeatTimes(0) { 
@@ -54,7 +54,7 @@ namespace sora {
         return (states == IMAGE_EFFECT_END || states == IMAGE_EFFECT_NOTSTART);
     }
 	
-	void SoraImageEffect::start(IMAGE_EFFECT_MODE _mode, float32 time) {
+	void SoraImageEffect::start(IMAGE_EFFECT_MODE _mode, float time) {
 		effectTime = time;
 		if(effectTime == 0.f) {
 			states = IMAGE_EFFECT_END;
@@ -95,7 +95,7 @@ namespace sora {
 		states = IMAGE_EFFECT_PAUSED;
 	}
 	
-	void SoraImageEffect::pauseForTime(float32 t) {
+	void SoraImageEffect::pauseForTime(float t) {
 		assert(t != 0.f);
 		pause();
 		topauseTime = t;
@@ -107,7 +107,7 @@ namespace sora {
 		states = IMAGE_EFFECT_PLAYING;
 	}
 	
-	float32 SoraImageEffect::getTime() {
+	float SoraImageEffect::getTime() {
 		if(started == 1) {
 			if(paused == 1) {
 				return pauseTime;
@@ -117,13 +117,13 @@ namespace sora {
 		return 0.f;
 	}
 	
-	void SoraImageEffect::setTransformer(CoreTransformer<CoreTransform>* transformer) {
+	void SoraImageEffect::setTransformer(SoraCoreTransformer<SoraCoreTransform>* transformer) {
 		assert(transformer != 0);
 		if(t_transformer) delete t_transformer;
 		t_transformer = transformer;
 	}
 	
-	int32 SoraImageEffect::update(float32 delta) {
+	int32 SoraImageEffect::update(float delta) {
 		if(started == 1) {
 			if(paused == 1) {
 				pauseTime += delta;
@@ -270,7 +270,7 @@ namespace sora {
 		return mListMode;
 	}
 	
-	void SoraImageEffectList::start(IMAGE_EFFECT_MODE mode, float32 time) {
+	void SoraImageEffectList::start(IMAGE_EFFECT_MODE mode, float time) {
 		mCurrEffect	= getListHead();
 	}
 	
@@ -288,7 +288,7 @@ namespace sora {
         return newlist;
     }
 
-	int32 SoraImageEffectList::update(float32 delta) {
+	int32 SoraImageEffectList::update(float delta) {
 		if(mCurrEffect) {
 			int32 result = mCurrEffect->update(delta);
 			if(result == IMAGE_EFFECT_END) {
@@ -350,8 +350,8 @@ namespace sora {
 		return IMAGE_EFFECT_END;
 	}
 	
-	SoraImageEffectFade::SoraImageEffectFade(float32 src, float32 dst, float32 _time, IMAGE_EFFECT_MODE _mode,
-											 CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectFade::SoraImageEffectFade(float src, float dst, float _time, IMAGE_EFFECT_MODE _mode,
+											 SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		src<dst?etype = IMAGE_EFFECT_FADEIN:etype = IMAGE_EFFECT_FADEOUT;
 		t_src.Set(src);
@@ -368,8 +368,8 @@ namespace sora {
         return new SoraImageEffectFade(*this);
     }
 
-	SoraImageEffectScale::SoraImageEffectScale(float32 src, float32 dst, float32 _time, IMAGE_EFFECT_MODE _mode,
-											   CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectScale::SoraImageEffectScale(float src, float dst, float _time, IMAGE_EFFECT_MODE _mode,
+											   SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		src<dst?etype = IMAGE_EFFECT_SCALEIN:etype = IMAGE_EFFECT_SCALEOUT;
 		t_src.Set(src, src);
@@ -378,8 +378,8 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	SoraImageEffectScale::SoraImageEffectScale(float32 srcV, float32 dstV, float32 srcH, float32 dstH, float32 _time, IMAGE_EFFECT_MODE _mode,
-											   CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectScale::SoraImageEffectScale(float srcV, float dstV, float srcH, float dstH, float _time, IMAGE_EFFECT_MODE _mode,
+											   SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		etype = IMAGE_EFFECT_TENSILE;
 		t_src.Set(srcV, srcH);
@@ -396,8 +396,8 @@ namespace sora {
         return new SoraImageEffectScale(*this);
     }
 
-	SoraImageEffectTransitions::SoraImageEffectTransitions(float32 sx, float32 sy, float32 sz, float32 dx, float32 dy, float32 dz, float32 _time, IMAGE_EFFECT_MODE _mode,
-														   CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectTransitions::SoraImageEffectTransitions(float sx, float sy, float sz, float dx, float dy, float dz, float _time, IMAGE_EFFECT_MODE _mode,
+														   SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		etype = IMAGE_EFFECT_TRANSITIONS_Z;
 		t_src.Set(sx, sy, sz);
@@ -406,8 +406,8 @@ namespace sora {
 		start(_mode, _time);
 	}
 
-	SoraImageEffectTransitions::SoraImageEffectTransitions(float32 sx, float32 sy, float32 dx, float32 dy, float32 _time, IMAGE_EFFECT_MODE _mode,
-														   CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectTransitions::SoraImageEffectTransitions(float sx, float sy, float dx, float dy, float _time, IMAGE_EFFECT_MODE _mode,
+														   SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		etype = IMAGE_EFFECT_TRANSITIONS;
 		t_src.Set(sx, sy, 0.f);
@@ -424,8 +424,8 @@ namespace sora {
         spr->setPosition(get1st(), get2nd());
 	}
 	
-	SoraImageEffectColorTransitions::SoraImageEffectColorTransitions(const SoraColorRGBA& s, const SoraColorRGBA& end, float32 _time, IMAGE_EFFECT_MODE _mode,
-																	 CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectColorTransitions::SoraImageEffectColorTransitions(const SoraColorRGBA& s, const SoraColorRGBA& end, float _time, IMAGE_EFFECT_MODE _mode,
+																	 SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		etype = IMAGE_EFFECT_COLOR_TRANSITION;
 		t_src.Set(s.r, s.g, s.b, s.a);
@@ -434,8 +434,8 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	SoraImageEffectColorTransitions::SoraImageEffectColorTransitions(ulong32 s, ulong32 end, float32 _time, IMAGE_EFFECT_MODE _mode,
-																	 CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectColorTransitions::SoraImageEffectColorTransitions(ulong32 s, ulong32 end, float _time, IMAGE_EFFECT_MODE _mode,
+																	 SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		etype = IMAGE_EFFECT_COLOR_TRANSITION;
 		t_src.Set((float)CGETR(s)/255.f, (float)CGETG(s)/255.f, (float)CGETB(s)/255.f, (float)CGETA(s)/255.f);
@@ -452,8 +452,8 @@ namespace sora {
         return new SoraImageEffectColorTransitions(*this);
     }
 	
-	SoraImageEffectRotation::SoraImageEffectRotation(float32 s, float32 e, float32 _time, IMAGE_EFFECT_MODE _mode,
-													 CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectRotation::SoraImageEffectRotation(float s, float e, float _time, IMAGE_EFFECT_MODE _mode,
+													 SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		etype = IMAGE_EFFECT_ROTATE;
 		t_src.Set(s);
@@ -462,8 +462,8 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	SoraImageEffectRotation::SoraImageEffectRotation(float32 s, float32 sz, float32 e, float32 ez, float32 _time, IMAGE_EFFECT_MODE _mode,
-													 CoreTransformer<CoreTransform>* transformer):
+	SoraImageEffectRotation::SoraImageEffectRotation(float s, float sz, float e, float ez, float _time, IMAGE_EFFECT_MODE _mode,
+													 SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		etype = IMAGE_EFFECT_ROTATE_Z;
 		t_src.Set(s, sz);

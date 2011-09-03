@@ -21,10 +21,10 @@ namespace sora {
 
 	public:
 		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; nFrameCounter = 0; }
-		void setFPS(int32 fps) { desiredFPS = (float32)fps; }
-		float32 getDelta() { return fDeltaTime; }
-		float32 getFPS() { return fFPS; }
-		float32 getTime() { return fTime; }
+		void setFPS(int32 fps) { desiredFPS = (float)fps; }
+		float getDelta() { return fDeltaTime; }
+		float getFPS() { return fFPS; }
+		float getTime() { return fTime; }
 		int32 getFrameCount() { return nFrameCounter; }
 		uint64 getCurrentSystemTime() { 
 			LONGLONG  TimePrecision;
@@ -109,9 +109,9 @@ namespace sora {
 		}
 
 	private:
-		float32 desiredFPS;
+		float desiredFPS;
 		int32 oldTimeStamp;
-		float32 fDeltaTime, fTime, fFPS;
+		float fDeltaTime, fTime, fFPS;
 		int32 nFrameCounter;
 	};
 

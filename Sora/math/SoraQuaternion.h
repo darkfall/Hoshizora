@@ -1,5 +1,5 @@
 /*
- *  Quaternion.h
+ *  SoraQuaternion.h
  *  lParticle
  *
  *  Created by GriffinBu on 12/21/10.
@@ -10,38 +10,38 @@
 #ifndef RF_QUATERNION_H_
 #define RF_QUATERNION_H_
 
-#include "Vector3.h"
+#include "SoraVector3.h"
 
 namespace sora {
 	
-	class Quaternion {
+	class SoraQuaternion {
 	public:
-		Quaternion(float _x, float _y, float _z, float _w):
+		SoraQuaternion(float _x, float _y, float _z, float _w):
 			w(_w), x(_x), y(_y), z(_z) {}
-		Quaternion(const Quaternion& quad):
+		SoraQuaternion(const SoraQuaternion& quad):
 			w(quad.w), x(quad.x), y(quad.y), z(quad.z) {}
-		Quaternion():
+		SoraQuaternion():
 			w(0.), x(0.), y(0.), z(0.) {}
 		
 		void set(float _x, float _y, float _z, float _w) {
 			x = _x; y = _y; z = _z; w = _w;
 		}
 		
-		void set(const Quaternion& quad) {
+		void set(const SoraQuaternion& quad) {
 			x = quad.x; y = quad.y; z = quad.z; w = quad.w;
 		}
 		
-		Vector3 get() {
-			return Vector3(x, y, z);
+		SoraVector3 get() {
+			return SoraVector3(x, y, z);
 		}
 		
-		inline Quaternion& operator=(const Quaternion& rhs) {
+		inline SoraQuaternion& operator=(const SoraQuaternion& rhs) {
 			x=rhs.x; y=rhs.y; z = rhs.z; w=rhs.w;
 			return *this;
 		}
 		
-		inline const Quaternion operator*(const Quaternion& rhs) {
-			Quaternion ans;
+		inline const SoraQuaternion operator*(const SoraQuaternion& rhs) {
+			SoraQuaternion ans;
 			float d1, d2, d3, d4;
 			d1 = w*rhs.w;
 			d2 = -x*rhs.x;
@@ -82,7 +82,7 @@ namespace sora {
 			w = coshalfangle;
 		}
 		
-		void makeRotate(float angle, const Vector3& vec) {
+		void makeRotate(float angle, const SoraVector3& vec) {
 			makeRotate(angle, vec.x, vec.y, vec.z);
 		}
 		
@@ -100,7 +100,7 @@ namespace sora {
 			w = ch0*ch1*ch2 - sh0*sh1*sh2;
 		}
 		
-		Vector3 rotate(const Vector3& v) const {
+		SoraVector3 rotate(const SoraVector3& v) const {
 			float ux = w*v.x + y*v.z - z*v.y;
 			float uy = w*v.y + z*v.x - x*v.z;
 			float uz = w*v.z + x*v.y - y*v.x;
@@ -108,7 +108,7 @@ namespace sora {
 			float vx = -uw*x + ux*w - uy*z + uz*y;
 			float vy = -uw*y + uy*w - uz*x + ux*z;
 			float vz = -uw*z + uz*w - ux*y + uz*x;
-			return Vector3(vx, vy, vz);
+			return SoraVector3(vx, vy, vz);
 		}
 		
 		void getRotate(float& angle, float& _x, float& _y, float& _z) const {
@@ -125,15 +125,15 @@ namespace sora {
 			}
 		}
 		
-		void getRotate(float& angle, Vector3& vec) const {
+		void getRotate(float& angle, SoraVector3& vec) const {
 			getRotate(angle, vec.x, vec.y, vec.z);
 		}
 		
-		void slerp(float t, const Quaternion& from, const Quaternion& to) {
+		void slerp(float t, const SoraQuaternion& from, const SoraQuaternion& to) {
 			const float epsilon = 0.00001f;
 			float cosomega, scale_from, scale_to;
 			
-			Quaternion quatTo(to);
+			SoraQuaternion quatTo(to);
 			
 			cosomega = from.x*to.x + from.y*to.y + from.z*to.z + from.w*to.w;
 			if(cosomega < 0.0f) {

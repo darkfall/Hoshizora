@@ -21,7 +21,7 @@
 
 namespace sora {
         
-    class SoraThreadPool: uncopyable {
+    class SoraThreadPool: SoraUncopyable {
     public:
         explicit SoraThreadPool(const std::string& name = std::string());
         ~SoraThreadPool();

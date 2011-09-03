@@ -86,7 +86,7 @@ namespace sora {
         SoraLayer* operator[](int32 layerDepth) const;
         
 		virtual void    render();
-		virtual uint32  update(float32 dt);
+		virtual uint32  update(float dt);
         
         int32	getWidth() const;
         int32	getHeight() const;
@@ -94,15 +94,15 @@ namespace sora {
         
         void    setParent(SoraObject* obj);
         
-        void    setRotation(float32 rot);
-        float32 getRotation() const;
+        void    setRotation(float rot);
+        float getRotation() const;
         
-        void    setScale(float32 scaleh, float32 scalev);
-        void    getScale(float32* scaleh, float32* scalev);
+        void    setScale(float scaleh, float scalev);
+        void    getScale(float* scaleh, float* scalev);
         
-        void    moveTo(float32 x, float32 y, float32 inTime);
+        void    moveTo(float x, float y, float inTime);
         
-        void    setPosition(float32 x, float32 y);
+        void    setPosition(float x, float y);
         
         void    enableRenderToCanvas(bool flag);
         bool    isRenderToCanvasEnabled() const;
@@ -117,8 +117,8 @@ namespace sora {
         int32 mWidth, mHeight;
         int32 mRealWidth, mRealHeight;
         
-        float32 mRotation;
-        float32 mHScale, mVScale;
+        float mRotation;
+        float mHScale, mVScale;
                         
         typedef std::map<int32, SoraLayer*> LayerMap;
         LayerMap mLayers;

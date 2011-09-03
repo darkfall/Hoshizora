@@ -15,7 +15,7 @@
 #include "../SoraDelegate.h"
 #include "../function/SoraFunction.h"
 
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 #include <map>
 
@@ -110,13 +110,14 @@ namespace sora {
             }
         }
         bool isValid() {
-            sora_assert(con.get());
-            return con->isValid();
+            if(con.get())
+                return con->isValid();
+            return false;
         }
         
         void disconnect() {
-            sora_assert(con.get());
-            con->disconnect();
+            if(con.get())
+                con->disconnect();
         }
         
         bool operator ==(const SoraConnection &rhs) {

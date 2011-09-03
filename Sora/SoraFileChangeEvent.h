@@ -44,7 +44,7 @@ namespace sora {
 	public:
 		SoraFileChangeEventPublisher();
 		
-		void setInterval(float32 interval);
+		void setInterval(float interval);
 		void addEventHandler(const SoraWString& file, SoraEventHandler* handler);
 		void delEventHandler(SoraEventHandler* handler);
 		void onCheckTimerEvent(SoraTimerEvent* event);
@@ -60,7 +60,7 @@ namespace sora {
 		typedef std::map<SoraWString, FileChangeInfo> FILE_CHANGE_MAP;
 		FILE_CHANGE_MAP mChangeListeners;
 		
-		float32 mCheckInternval;
+		float mCheckInternval;
 	};
 	
 	

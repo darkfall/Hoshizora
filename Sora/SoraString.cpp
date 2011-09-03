@@ -9,7 +9,7 @@
 #include "SoraString.h"
 #include "SoraException.h"
 #include "SoraStringConv.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 namespace sora {
     

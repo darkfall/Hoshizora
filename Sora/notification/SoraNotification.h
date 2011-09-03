@@ -10,7 +10,7 @@
 #define Sora_SoraNotification_h
 
 #include "SoraPlatform.h"
-#include "RefCounted.h"
+#include "SoraRefCounted.h"
 #include "SoraAutoPtr.h"
 
 namespace sora {

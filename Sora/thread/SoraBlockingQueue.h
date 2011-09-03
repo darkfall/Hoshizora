@@ -20,7 +20,7 @@
 namespace sora {
     
     template<typename T>
-    class SoraBlockingQueue: uncopyable {
+    class SoraBlockingQueue: SoraUncopyable {
     public:
         SoraBlockingQueue():
         mutex(),

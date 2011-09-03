@@ -18,11 +18,11 @@
 #endif
 
 #include "SoraException.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     
-    class SoraRWLockImpl: public uncopyable {
+    class SoraRWLockImpl: public SoraUncopyable {
     protected:
         SoraRWLockImpl() {
             pthread_rwlock_init(&rwl, NULL);

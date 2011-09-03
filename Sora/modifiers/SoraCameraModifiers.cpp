@@ -10,7 +10,7 @@
 
 namespace sora {
 
-    SoraCameraZoomModifier::SoraCameraZoomModifier(float32 starth, float32 startv, float32 hz, float32 hv, float32 inTime):
+    SoraCameraZoomModifier::SoraCameraZoomModifier(float starth, float startv, float hz, float hv, float inTime):
     mTime(inTime),
     mCurrTime(0.f),
     mEndZoom(hz, hv),
@@ -18,7 +18,7 @@ namespace sora {
         mCurrZoom = mStartZoom;
     }
     
-    int32 SoraCameraZoomModifier::update(float32 dt) {
+    int32 SoraCameraZoomModifier::update(float dt) {
         mCurrTime += dt;
         mCurrZoom = slerp(mStartZoom, mEndZoom, mCurrTime/mTime);
 
@@ -45,7 +45,7 @@ namespace sora {
                                           mTime);
     }
     
-    SoraCameraRotationModifier::SoraCameraRotationModifier(float32 start, float32 end, float32 inTime):
+    SoraCameraRotationModifier::SoraCameraRotationModifier(float start, float end, float inTime):
     mTime(inTime),
     mCurrTime(0.f),
     mStart(start),
@@ -53,7 +53,7 @@ namespace sora {
         mCurrRot = mStart;
     }
     
-    int32 SoraCameraRotationModifier::update(float32 dt) {
+    int32 SoraCameraRotationModifier::update(float dt) {
         mCurrTime += dt;
         mCurrRot = slerp(mStart, mEnd, mCurrTime/mTime);
         

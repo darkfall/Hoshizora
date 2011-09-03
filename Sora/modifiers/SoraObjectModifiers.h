@@ -18,14 +18,14 @@ namespace sora {
     template<typename T>
     class SORA_API SoraTransitionModifier: public SoraModifier<T> {
     public:
-        SoraTransitionModifier(float32 startx, float32 starty, float32 endx, float32 endy, float32 inTime):
+        SoraTransitionModifier(float startx, float starty, float endx, float endy, float inTime):
         mBegin(startx, starty),
         mEnd(endx, endy),
         mInTime(inTime) {
             mCurrValue = mBegin;
             mCurrTime = 0.f;
         }
-        SoraTransitionModifier(const SoraVector& start, const SoraVector& end, float32 inTime):
+        SoraTransitionModifier(const SoraVector& start, const SoraVector& end, float inTime):
         mBegin(start),
         mEnd(end),
         mInTime(inTime) {
@@ -33,7 +33,7 @@ namespace sora {
             mCurrTime = 0.f;
         }
         
-        int32 update(float32 dt) {
+        int32 update(float dt) {
             mCurrTime += dt;
             mCurrValue = slerp(mBegin, mEnd, mCurrTime/mInTime);
             if(mCurrTime >= mInTime) {
@@ -59,8 +59,8 @@ namespace sora {
         SoraVector mBegin;
         SoraVector mEnd;
         SoraVector mCurrValue;
-        float32 mInTime;
-        float32 mCurrTime;
+        float mInTime;
+        float mCurrTime;
     };
     
     typedef SoraTransitionModifier<SoraMovable> SoraMovablePositionModifier;

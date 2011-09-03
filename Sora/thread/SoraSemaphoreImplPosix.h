@@ -14,7 +14,7 @@
 namespace sora {
     
     
-    class SoraSemaphoreImpl: public uncopyable {
+    class SoraSemaphoreImpl: public SoraUncopyable {
     public:
         SoraSemaphoreImpl(int _n, int _max):
         mutex(),

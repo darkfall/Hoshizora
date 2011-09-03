@@ -60,7 +60,7 @@ namespace sora {
 					cev->pushResult("EnvValue "+params[1]+" has been set to "+params[2]);
 					
 				} else if(p1Prev.compare("float") == 0 && params.size() >= 3) {
-					float32 val = (float32)atof(params[2].c_str());
+					float val = (float)atof(params[2].c_str());
 					
 					SET_ENV_FLOAT(params[1].c_str(), val);
 					
@@ -83,7 +83,7 @@ namespace sora {
 				} 
 				
 				else if(p1Prev.compare("file_check_interval") == 0 && params.size() >= 1) {
-					SoraEventManager::Instance()->setFileChangeDetectionInterval((float32)atof(params[0].c_str()));
+					SoraEventManager::Instance()->setFileChangeDetectionInterval((float)atof(params[0].c_str()));
 				}
 			}
 		}

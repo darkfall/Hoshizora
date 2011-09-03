@@ -8,7 +8,7 @@
 namespace sora {
 
 	int32 SoraParticleSystem::mMaxParticleNum = 2000;
-	float32 SoraParticleSystem::mMaxParticleDistance = 500.f;
+	float SoraParticleSystem::mMaxParticleDistance = 500.f;
 
 	bool isParticleDead(const SoraParticleNode& node) {
 		return node.bDead;
@@ -27,7 +27,7 @@ namespace sora {
 
 	}
 
-	SoraParticleSystem::SoraParticleSystem(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
+	SoraParticleSystem::SoraParticleSystem(const SoraParticleHeader& header, SoraSprite* pSpr, float x, float y, float z) {
 		pheader = header;
 		pSprite = pSpr;
 		core = SoraCore::Instance();
@@ -42,7 +42,7 @@ namespace sora {
 		bRotate3v = false;
 	}
 
-	SoraParticleSystem::SoraParticleSystem(const SoraWString& str, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
+	SoraParticleSystem::SoraParticleSystem(const SoraWString& str, SoraSprite* pSpr, float x, float y, float z) {
 		_parseScript(str);
 		pSprite = pSpr;
 		core = SoraCore::Instance();
@@ -61,7 +61,7 @@ namespace sora {
 		bZDepth = flag;
 	}
 
-	void SoraParticleSystem::setZDepth(float32 depth) {
+	void SoraParticleSystem::setZDepth(float depth) {
 		z = depth;
 	}
 
@@ -69,11 +69,11 @@ namespace sora {
 		return bZDepth;
 	}
 
-	float32 SoraParticleSystem::getZDepth() const {
+	float SoraParticleSystem::getZDepth() const {
 		return z;
 	}
 
-	void SoraParticleSystem::emit(const SoraWString& str, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
+	void SoraParticleSystem::emit(const SoraWString& str, SoraSprite* pSpr, float x, float y, float z) {
 		_parseScript(str);
 		pSprite = pSpr;
 	
@@ -89,7 +89,7 @@ namespace sora {
 
 	}
 
-	void SoraParticleSystem::emit(const SoraParticleHeader& header, SoraSprite* pSpr, float32 x, float32 y, float32 z) {
+	void SoraParticleSystem::emit(const SoraParticleHeader& header, SoraSprite* pSpr, float x, float y, float z) {
 		pheader = header;
 		pSprite = pSpr;
 		
@@ -105,7 +105,7 @@ namespace sora {
 
 	}
 	
-	void SoraParticleSystem::setTextureRect(float32 x, float32 y, float32 w, float32 h) {
+	void SoraParticleSystem::setTextureRect(float x, float y, float w, float h) {
 		pheader.texX = x;
 		pheader.texY = y;
 		pheader.texW = w;
@@ -117,7 +117,7 @@ namespace sora {
 	
 	void SoraParticleSystem::init() {
 		if(pSprite) {
-			pSprite->setCenter((float32)pSprite->getSpriteWidth()/2, (float32)pSprite->getSpriteHeight()/2);
+			pSprite->setCenter((float)pSprite->getSpriteWidth()/2, (float)pSprite->getSpriteHeight()/2);
 			pSprite->setBlendMode(pheader.blendMode);
 			pSprite->setTextureRect(pheader.texX, pheader.texY, pheader.texW, pheader.texH);
 		}
@@ -127,7 +127,7 @@ namespace sora {
 		
 		particles.clear();
 		
-		hrBoundingBox.Set(pheader.emitPos.x-pSprite->getTextureWidth()/2*pheader.fMaxStartScale, 
+		hrBoundingBox.set(pheader.emitPos.x-pSprite->getTextureWidth()/2*pheader.fMaxStartScale, 
 						  pheader.emitPos.y-pSprite->getTextureHeight()/2*pheader.fMaxStartScale, 
 						  pheader.emitPos.x+pSprite->getTextureWidth()/2*pheader.fMaxStartScale, 
 						  pheader.emitPos.y+pSprite->getTextureHeight()/2*pheader.fMaxStartScale);
@@ -162,7 +162,7 @@ namespace sora {
 		init();
 	}
 
-	void SoraParticleSystem::fireAt(float32 x, float32 y, float32 z) {
+	void SoraParticleSystem::fireAt(float x, float y, float z) {
 		bActive = true;
 		init();
 		pheader.emitPos.set(x, y, z);
@@ -170,7 +170,7 @@ namespace sora {
 		hrBoundingBox.y1 = y;
 	}
 
-	void SoraParticleSystem::moveTo(float32 x, float32 y, float32 z, bool bKill) {
+	void SoraParticleSystem::moveTo(float x, float y, float z, bool bKill) {
 		if(bKill) killAll();
 		pheader.emitPos.set(x, y, z);
 		hrBoundingBox.x1 = x;
@@ -190,7 +190,7 @@ namespace sora {
 		return node.bDead;
 	}
 	
-	void SoraParticleSystem::update(float32 dt) {
+	void SoraParticleSystem::update(float dt) {
 		if(dt > 0.1f) return;
 		
 		particles.erase(std::remove_if(particles.begin(), particles.end(), isParticleDied), particles.end());
@@ -314,7 +314,7 @@ namespace sora {
 		
 		for(PARTICLES::iterator p=particles.begin(); p!=particles.end(); ++p) {
 			if(!p->bDead) {
-				float32 scale = (1.f - p->position.z / fMaxDistance) + 0.01f;
+				float scale = (1.f - p->position.z / fMaxDistance) + 0.01f;
 				if(scale > 1.f) scale = 1.f;
 				else if(scale < 0.f) scale = 0.f;
 				pSprite->setColor( CSETA(p->dwCurrColor.GetHWColor(), p->dwCurrColor.a * 255 * scale ) );
@@ -344,8 +344,8 @@ namespace sora {
 		node.dwColorVar = (dwEnd - dwStart) / node.fLifetime;
 		
 		node.fCurrScale = core->randomFloat(pheader.fMinStartScale, pheader.fMaxStartScale);
-		float32 fStart = node.fCurrScale;
-		float32 fEnd = core->randomFloat(pheader.fMinEndScale, pheader.fMaxEndScale);
+		float fStart = node.fCurrScale;
+		float fEnd = core->randomFloat(pheader.fMinEndScale, pheader.fMaxEndScale);
 		node.fScaleVar = (fEnd - fStart) / node.fLifetime;
 		
 		node.fCurrSpin = 0.f;
@@ -360,7 +360,7 @@ namespace sora {
 		node.position.set(pheader.emitPos.x+core->randomFloat(-pheader.emitRange.x, pheader.emitRange.x),
 						  pheader.emitPos.y+core->randomFloat(-pheader.emitRange.y, pheader.emitRange.y),
 						  pheader.emitPos.z+core->randomFloat(-pheader.emitRange.z, pheader.emitRange.z));
-		node.direction = Vector3(core->randomFloat(pheader.minDirection.x, pheader.maxDirection.x),
+		node.direction = SoraVector3(core->randomFloat(pheader.minDirection.x, pheader.maxDirection.x),
 								 core->randomFloat(pheader.minDirection.y, pheader.maxDirection.y),
 								 core->randomFloat(pheader.minDirection.z, pheader.maxDirection.z)).normalize();
 		
@@ -380,7 +380,7 @@ namespace sora {
 		return pheader.blendMode;
 	}
 	
-	void SoraParticleSystem::rotate(float32 roll, float32 pitch, float32 yaw) {
+	void SoraParticleSystem::rotate(float roll, float pitch, float yaw) {
 		quatRotation.makeRotate(roll, pitch, yaw);
 		bRotate3v = true;
 		
@@ -483,7 +483,7 @@ namespace sora {
 		}
 	}
 
-	void SoraParticleManager::fireAt(HSORAPARTICLE h, float32 x, float32 y, float32 z) {
+	void SoraParticleManager::fireAt(HSORAPARTICLE h, float x, float y, float z) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			p->second->fireAt(x, y, z);
@@ -527,7 +527,7 @@ namespace sora {
 		}
 	}
 
-	void SoraParticleManager::update(float32 dt) {
+	void SoraParticleManager::update(float dt) {
 		PARTICLE_MAP::iterator p = particles.begin();
 		while( p != particles.end() ) {
 			p->second->update(dt);
@@ -539,7 +539,7 @@ namespace sora {
 		}
 	}
 
-	HSORAPARTICLE SoraParticleManager::emit(const SoraParticleHeader& header, float32 x, float32 y, float32 z) {
+	HSORAPARTICLE SoraParticleManager::emit(const SoraParticleHeader& header, float x, float y, float z) {
 		if(pGlobalSprite == 0)
 			THROW_SORA_EXCEPTION(IllegalStateException, "Error emit Particle, no global particle sprites set");
 		
@@ -551,7 +551,7 @@ namespace sora {
 		return (HSORAPARTICLE)par;
 	}
 
-	HSORAPARTICLE SoraParticleManager::emitS(const SoraWString& s, float32 x, float32 y, float32 z) {
+	HSORAPARTICLE SoraParticleManager::emitS(const SoraWString& s, float x, float y, float z) {
 		if(pGlobalSprite == 0)
 			THROW_SORA_EXCEPTION(IllegalStateException,"Error emit Particle, no global particle sprites set");
 		

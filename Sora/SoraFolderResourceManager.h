@@ -12,9 +12,9 @@
 
 #include "SoraResourceManager.h"
 #include "SoraFileUtility.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
-#include "hash.h"
+#include "util/SoraHash.h"
 #include "osxfilewrapper.h"
 #include "win32filewrapper.h"
 
@@ -44,14 +44,14 @@ namespace sora {
 	private:
 		struct folderDescription {
 			SoraWString folderName;
-			stringId folderHash;
+			SoraStringId folderHash;
 			folderDescription(const SoraWString& folder): folderName(folder), folderHash(crc32(folder)) {}
 		};
 		typedef std::vector<folderDescription> FOLDER_CONT;
 		FOLDER_CONT folders;
 		SoraWString applicationPath;
 		
-		typedef std::map</*fileNameHash*/stringId, /*fileFullPath*/SoraWString> FILE_CACHE;
+		typedef std::map</*fileNameHash*/SoraStringId, /*fileFullPath*/SoraWString> FILE_CACHE;
 		FILE_CACHE fileCache;
 		
 		inline SoraWString getFullPath(const SoraWString& fileName);

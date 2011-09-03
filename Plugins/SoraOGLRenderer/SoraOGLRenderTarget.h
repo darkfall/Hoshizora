@@ -2,7 +2,7 @@
  *  SoraOGLRenderTarget.h
  *  SoraPureCore
  *
- *  Created by griffin clare on 11/19/10.
+ *  Created by Robert Bu on 11/19/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */

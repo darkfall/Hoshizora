@@ -31,7 +31,7 @@ namespace sora {
         return &renderer;
     }
     
-    void SoraFastRenderer::renderSprite(const SoraWString& path, float32 x, float32 y) {
+    void SoraFastRenderer::renderSprite(const SoraWString& path, float x, float y) {
         SoraStringId sid = GetUniqueStringId(path);
         
         SpriteCacheMap::iterator itSprite = mSpriteCache.find(sid);
@@ -63,15 +63,15 @@ namespace sora {
         }
     }
     
-    void SoraFastRenderer::setAutoReleaseTime(float32 time) {
+    void SoraFastRenderer::setAutoReleaseTime(float time) {
         mAutoReleaseTime = time;
     }
     
-    float32 SoraFastRenderer::getAutoReleaseTime() const {
+    float SoraFastRenderer::getAutoReleaseTime() const {
         return mAutoReleaseTime;
     }
     
-    void SoraFastRenderer::onUpdate(float32 dt) {
+    void SoraFastRenderer::onUpdate(float dt) {
         SpriteCacheMap::iterator itSprite = mSpriteCache.begin();
         while(itSprite != mSpriteCache.end()) {
             if(itSprite->second.mSprite != NULL) {

@@ -5,7 +5,7 @@
 #include "SoraException.h"
 #include "SoraTypeInfo.h"
 #include "SoraAutoPtr.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 #include "event/SoraEventChannel.h"
 
 
@@ -76,7 +76,7 @@ namespace sora {
     
 		bool mConsumed;
 		
-		stringId mName;
+		SoraStringId mName;
         SoraEventHandler* mSender;
         SoraEventHandler* mReceiver;
         
@@ -169,7 +169,7 @@ namespace sora {
         SoraEventWorld* getWorld(void);
         bool isEnabled();
         
-        virtual	void onUpdate(float32 dt);
+        virtual	void onUpdate(float dt);
 	
 	private:
         /**

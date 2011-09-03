@@ -29,7 +29,7 @@ namespace gcn {
 	}
 
 	Sound* SoraGUISoundLoader::load(const std::string& soundName) {
-		sora::stringId soundid = sora::str2id(soundName);
+		sora::SoraStringId soundid = sora::str2id(soundName);
 		SoraGUISound* psound = new SoraGUISound;
 		
 		SoundMap::iterator itSound = mSoundMap.find(soundid);
@@ -50,7 +50,7 @@ namespace gcn {
 	}
     
     void SoraGUISoundLoader::play(const std::string& soundName) {
-        sora::stringId soundid = sora::str2id(soundName);
+        sora::SoraStringId soundid = sora::str2id(soundName);
         SoundMap::iterator itSound = mSoundMap.find(soundid);
 		if(itSound != mSoundMap.end() && (itSound->second != NULL)) {
             itSound->second->play();

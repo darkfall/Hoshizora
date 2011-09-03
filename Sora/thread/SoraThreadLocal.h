@@ -17,12 +17,12 @@
 #include "pthread.h"
 #endif
 
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     
     template<typename T>
-    class SoraThreadLocal: uncopyable {
+    class SoraThreadLocal: SoraUncopyable {
     public:
         SoraThreadLocal() {
             pthread_key_create(&key, &SoraThreadLocal::destructor);

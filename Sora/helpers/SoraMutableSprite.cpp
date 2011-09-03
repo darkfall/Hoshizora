@@ -65,14 +65,14 @@ namespace sora {
 		SoraSprite::render();
 	}
 	
-	void SoraMutableSprite::render(float32 x, float32 y) {
+	void SoraMutableSprite::render(float x, float y) {
 		if(mChanged)
 			applyChange();
 		
 		SoraSprite::render(x, y);
 	}
 	
-	void SoraMutableSprite::render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4) {
+	void SoraMutableSprite::render4V(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
 		if(mChanged)
 			applyChange();
 		

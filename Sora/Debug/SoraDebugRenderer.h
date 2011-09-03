@@ -40,7 +40,7 @@ namespace sora {
             pFont = font;
         }
 		
-		void addLine(const hgeVector& point1, const hgeVector& point2, float32 width, const SoraColorRGBA& color=COLOR_BLACK, float32 depth=0.f) {
+		void addLine(const SoraVector& point1, const SoraVector& point2, float width, const SoraColorRGBA& color=COLOR_BLACK, float depth=0.f) {
             debugRenderItem item(ITEM_LINE);
             item.pos = point1;
             item.color = color;
@@ -50,7 +50,7 @@ namespace sora {
             debugRenderItems.push_back(item);
         }
         
-		void addAABB(const hgeVector& point, const hgeVector& wh, bool bFill=false, const SoraColorRGBA& color=COLOR_BLACK, float32 depth=0.f) {
+		void addAABB(const SoraVector& point, const SoraVector& wh, bool bFill=false, const SoraColorRGBA& color=COLOR_BLACK, float depth=0.f) {
             debugRenderItem item(ITEM_LINE);
             item.pos = point;
             item.color = color;
@@ -60,7 +60,7 @@ namespace sora {
             debugRenderItems.push_back(item);
         }
         
-		void addCricle(const hgeVector& point, float32 radius, const SoraColorRGBA& color=COLOR_BLACK, float32 depth=0.f) {
+		void addCricle(const SoraVector& point, float radius, const SoraColorRGBA& color=COLOR_BLACK, float depth=0.f) {
             debugRenderItem item(ITEM_LINE);
             item.pos = point;
             item.color = color;
@@ -69,7 +69,7 @@ namespace sora {
             debugRenderItems.push_back(item);
         }
         
-		void addString(const hgeVector& point, const SoraWString& str, const SoraColorRGBA& color=COLOR_BLACK, float32 depth=0.f) {
+		void addString(const SoraVector& point, const SoraWString& str, const SoraColorRGBA& color=COLOR_BLACK, float depth=0.f) {
             debugRenderItem item(ITEM_LINE);
             item.pos = point;
             item.color = color;
@@ -112,16 +112,16 @@ namespace sora {
         };
         
 		struct debugRenderItem {
-			hgeVector pos;
+			SoraVector pos;
 			SoraColorRGBA color;
 			
-			hgeVector extra;
-			float32 depth;
+			SoraVector extra;
+			float depth;
 			
 			SoraWString str;
 			
 			uint32 type;
-            float32 width;
+            float width;
             bool bFill;
             
             SoraFont* pFont;

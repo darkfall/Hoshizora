@@ -29,13 +29,13 @@ namespace sora {
         
         void update();
         
-        float32 getDelta() const;
+        float getDelta() const;
         
     private:
-        typedef std::deque<float32> FrameQueue;
+        typedef std::deque<float> FrameQueue;
         FrameQueue mFrames;
         
-        float32 mCurrDelta;
+        float mCurrDelta;
     };
     
     

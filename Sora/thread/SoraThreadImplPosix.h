@@ -23,7 +23,7 @@
 
 namespace sora {
     
-    class SoraThreadImpl: uncopyable {
+    class SoraThreadImpl: SoraUncopyable {
         friend class SoraThread;
         
     protected:

@@ -18,10 +18,10 @@ namespace sora {
 	public:
 		SoraOGLInput();
 		
-		void	getMousePos(float32 *x, float32 *y);
-		void	setMousePos(float32 x, float32 y);
-		float32 getMousePosX();
-		float32 getMousePosY();
+		void	getMousePos(float *x, float *y);
+		void	setMousePos(float x, float y);
+		float getMousePosX();
+		float getMousePosY();
 		int32	getMouseWheel();
 		bool	isMouseOver();
 		bool	keyDown(int32 key);

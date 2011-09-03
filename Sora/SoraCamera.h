@@ -19,45 +19,45 @@ namespace sora {
 	class SORA_API SoraCamera: public SoraObject {
 	public:
         SoraCamera();
-		SoraCamera(float32 x, float32 y, float32 viewWidth, float32 viewHeight);
+		SoraCamera(float x, float y, float viewWidth, float viewHeight);
 		~SoraCamera();
 		
-        void    setZoom(float32 h, float32 v);
-        void    setRotation(float32 rot);
+        void    setZoom(float h, float v);
+        void    setRotation(float rot);
         
-        void    setViewRect(float32 width, float32 height);
-        float32 getViewWidth() const;
-        float32 getViewHeight() const;
+        void    setViewRect(float width, float height);
+        float getViewWidth() const;
+        float getViewHeight() const;
         
-        void    getZoom(float32* h, float32* v);
-        float32 getRotation() const;
-        float32 getHZoom() const;
-        float32 getVZoom() const;
+        void    getZoom(float* h, float* v);
+        float getRotation() const;
+        float getHZoom() const;
+        float getVZoom() const;
         
-        void    setPosition(float32 x, float32 y);
+        void    setPosition(float x, float y);
         /**
          *  Modifier helper functions
          *  Use SoraModifierAdapter as applier
          **/
-        void moveTo(float32 x, float32 y, float32 inTime);
-        void rotateTo(float32 newRot, float32 inTime);
-        void zoomTo(float32 hz, float32 vz, float32 inTime);
+        void moveTo(float x, float y, float inTime);
+        void rotateTo(float newRot, float inTime);
+        void zoomTo(float hz, float vz, float inTime);
         
         /**
          *  Transform to another camera
          *  Position, rotation and zoom applies
          **/
-        void transformTo(SoraCamera* r, float32 inTime);
+        void transformTo(SoraCamera* r, float inTime);
         		
-        virtual uint32 update(float32 dt);
+        virtual uint32 update(float dt);
         virtual void render();
         
         void apply();
         
 	private:
-        float32 mHZoom;
-        float32 mVZoom;
-        float32 mRotation;
+        float mHZoom;
+        float mVZoom;
+        float mRotation;
         
         SoraRect mViewRect;
         

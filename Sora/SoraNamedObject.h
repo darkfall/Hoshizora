@@ -10,8 +10,8 @@
 #ifndef _SORA_ASSM_NAMED_OBJECT_H_
 #define _SORA_ASSM_NAMED_OBJECT_H_
 
-#include "stringId.h"
-#include "common.h"
+#include "SoraStringId.h"
+#include "SoraCommon.h"
 
 #include <list>
 #include <algorithm>
@@ -27,14 +27,14 @@ namespace sora {
 	public:
 		SoraNamedObject(): mName(0) {}
 		SoraNamedObject(const SoraString& _name): mName(str2id(_name)) {}
-		SoraNamedObject(stringId sid): mName(sid) {}
+		SoraNamedObject(SoraStringId sid): mName(sid) {}
 		virtual ~SoraNamedObject() {}
 		
-		void setName(stringId n) { mName = n; }
-		stringId getName() const { return mName; }
+		void setName(SoraStringId n) { mName = n; }
+		SoraStringId getName() const { return mName; }
 		
 	protected:
-		stringId mName;
+		SoraStringId mName;
 	};
 	
 	class SORA_API SoraNamedObjectList {
@@ -47,14 +47,14 @@ namespace sora {
 		void addObject(SoraNamedObject* obj) { objList.push_back(obj); }
 		void delObject(SoraNamedObject* obj) { objList.remove(obj); }
 		
-		SoraNamedObject* getObjectByName(stringId name) {
+		SoraNamedObject* getObjectByName(SoraStringId name) {
 			OBJ_LIST::iterator itObj = std::find_if(objList.begin(), objList.end(), std::bind2nd(compareObjectName(), name));
 			if(itObj != objList.end())
 				return *itObj;
 			return NULL;
 		}
 		
-		void removeObjectByName(stringId name) {
+		void removeObjectByName(SoraStringId name) {
 			OBJ_LIST::iterator itPos = std::remove_if(objList.begin(), objList.end(), std::bind2nd(compareObjectName(), name));
 			for_each(itPos,
 					 objList.end(),
@@ -82,8 +82,8 @@ namespace sora {
 		size_t count() { return objList.size(); }
 		
 	private:
-		struct compareObjectName: public std::binary_function<SoraNamedObject*, stringId, bool> {
-			bool operator() (SoraNamedObject* obj, stringId name) const {
+		struct compareObjectName: public std::binary_function<SoraNamedObject*, SoraStringId, bool> {
+			bool operator() (SoraNamedObject* obj, SoraStringId name) const {
 				return name == obj->getName();
 			}
 		};

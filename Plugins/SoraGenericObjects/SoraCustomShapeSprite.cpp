@@ -9,7 +9,7 @@
 #include "SoraCustomShapeSprite.h"
 #include "SoraCore.h"
 #include "SoraMemoryBuffer.h"
-#include "common.h"
+#include "SoraCommon.h"
 
 namespace sora {
     

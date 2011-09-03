@@ -13,13 +13,13 @@
 
 namespace sora {
 
-    SoraCamera::SoraCamera(float32 x, float32 y, float32 viewWidth, float32 viewHeight):
+    SoraCamera::SoraCamera(float x, float y, float viewWidth, float viewHeight):
     mHZoom(1.f),
     mVZoom(1.f),
     mRotation(0.f),
     mPropChanged(true){
         setPosition(x, y);
-        mViewRect.Set(x, y, viewWidth, viewHeight);
+        mViewRect.set(x, y, viewWidth, viewHeight);
     }
     
     SoraCamera::SoraCamera():
@@ -27,29 +27,29 @@ namespace sora {
     mVZoom(1.f),
     mRotation(0.f),
     mPropChanged(true) {
-        mViewRect.Set(0.f, 0.f, (float32)SORA->getScreenWidth(), (float32)SORA->getScreenHeight());
+        mViewRect.set(0.f, 0.f, (float)SORA->getScreenWidth(), (float)SORA->getScreenHeight());
     }
     
     SoraCamera::~SoraCamera() {
         
     }
     
-    void SoraCamera::setViewRect(float32 width, float32 height) {
-        mViewRect.Set(getPositionX(),
+    void SoraCamera::setViewRect(float width, float height) {
+        mViewRect.set(getPositionX(),
                       getPositionY(),
                       width,
                       height);
         mPropChanged = true;
     }
-    float32 SoraCamera::getViewWidth() const {
+    float SoraCamera::getViewWidth() const {
         return mViewRect.x2;
     }
     
-    float32 SoraCamera::getViewHeight() const {
+    float SoraCamera::getViewHeight() const {
         return mViewRect.y2;
     }
     
-    void SoraCamera::setZoom(float32 h, float32 v) {
+    void SoraCamera::setZoom(float h, float v) {
         if(mHZoom != h || mVZoom != v) {
             mHZoom = h;
             mVZoom = v;
@@ -57,38 +57,38 @@ namespace sora {
         }
     }
     
-    void SoraCamera::setRotation(float32 rot) {
+    void SoraCamera::setRotation(float rot) {
         if(mRotation != rot) {
             mRotation = rot;
             mPropChanged = true;
         }
     }
     
-    void SoraCamera::getZoom(float32* h, float32* v) {
+    void SoraCamera::getZoom(float* h, float* v) {
         *h = mHZoom;
         *v = mVZoom;
     }
     
-    void SoraCamera::setPosition(float32 x, float32 y) {
+    void SoraCamera::setPosition(float x, float y) {
         if(getPositionX() != x || getPositionY() != y) {
             mPropChanged = true;
             SoraObject::setPosition(x, y);
         }
     }
     
-    float32 SoraCamera::getRotation() const {
+    float SoraCamera::getRotation() const {
         return mRotation;
     }
     
-    float32 SoraCamera::getHZoom() const {
+    float SoraCamera::getHZoom() const {
         return mHZoom;
     }
     
-    float32 SoraCamera::getVZoom() const {
+    float SoraCamera::getVZoom() const {
         return mVZoom;
     }
 
-    uint32 SoraCamera::update(float32 dt) {
+    uint32 SoraCamera::update(float dt) {
         if(mPropChanged) {
             sora::SORA->setTransform(getPositionX(), getPositionY(), 0.f, 0.f, mRotation, mHZoom, mVZoom);
             sora::SORA->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);
@@ -113,7 +113,7 @@ namespace sora {
         sora::SORA->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);
     }
     
-    void SoraCamera::moveTo(float32 x, float32 y, float32 inTime) {
+    void SoraCamera::moveTo(float x, float y, float inTime) {
         CreateModifierAdapter(this, 
                               new SoraCameraPositionModifier(getPositionX(),
                                                              getPositionY(),
@@ -123,14 +123,14 @@ namespace sora {
 
     }
     
-    void SoraCamera::rotateTo(float32 newRot, float32 inTime) {
+    void SoraCamera::rotateTo(float newRot, float inTime) {
         CreateModifierAdapter(this,
                               new SoraCameraRotationModifier(mRotation,
                                                              newRot,
                                                              inTime));
     }
 
-    void SoraCamera::zoomTo(float32 hz, float32 vz, float32 inTime) {
+    void SoraCamera::zoomTo(float hz, float vz, float inTime) {
         CreateModifierAdapter(this,
                               new SoraCameraZoomModifier(mHZoom,
                                                          mVZoom,
@@ -140,7 +140,7 @@ namespace sora {
                                               
     }
     
-    void SoraCamera::transformTo(SoraCamera* r, float32 inTime) {
+    void SoraCamera::transformTo(SoraCamera* r, float inTime) {
         assert(r);
         moveTo(r->getPositionX(), r->getPositionY(), inTime);
         rotateTo(r->getRotation(), inTime);

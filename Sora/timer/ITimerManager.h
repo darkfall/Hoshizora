@@ -25,7 +25,7 @@ namespace sora {
     
     class ITimerManager: public SoraDirectSingleton<ITimerManager> {
     public:
-        typedef float32 TimeType;
+        typedef float TimeType;
         typedef SoraFunction<bool(SoraSimpleTimer*, TimeType)> TimerFunc;
         
         virtual bool update(TimeType dt) = 0;

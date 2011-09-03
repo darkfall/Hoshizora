@@ -1,8 +1,8 @@
 /*
  *  SoraOGLRenderer.cpp
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/23/10.
+ *  Created by Robert Bu on 8/23/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -14,7 +14,7 @@
 #include "SoraStringConv.h"
 #include "SoraFileUtility.h"
 #include "SoraMath.h"
-#include "Rect4V.h"
+#include "SoraRect4v.h"
 #include "SoraColor.h"
 
 #include "SoraCore.h"
@@ -769,13 +769,13 @@ namespace sora{
             glfwSwapInterval(0);
     }
 
-    void SoraOGLRenderer::setViewPoint(float32 x, float32 y, float32 z) {
+    void SoraOGLRenderer::setViewPoint(float x, float y, float z) {
         _oglWindowInfo.x = x;
         _oglWindowInfo.y = y;
         _oglWindowInfo.z = z;
     }
 
-	void SoraOGLRenderer::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
+	void SoraOGLRenderer::setTransform(float x, float y, float dx, float dy, float rot, float hscale, float vscale) {
 		_oglWindowInfo.x		=	x;
 		_oglWindowInfo.y		=	y;
 		_oglWindowInfo.dx		=	dx;
@@ -895,7 +895,7 @@ namespace sora{
 #endif // OS_WIN32
     }
     
-    void SoraOGLRenderer::renderLine(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+    void SoraOGLRenderer::renderLine(float x1, float y1, float x2, float y2, uint32 color, float z) {
 		sora::SoraQuad quad;
 		
 		quad.tex = NULL;
@@ -944,7 +944,7 @@ namespace sora{
 		renderQuad(quad);
 	}
     
-    void SoraOGLRenderer::fillBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+    void SoraOGLRenderer::fillBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
         sora::SoraQuad quad;
 		
 		quad.tex = NULL;
@@ -975,7 +975,7 @@ namespace sora{
 		renderQuad(quad);
     }
 	
-	void SoraOGLRenderer::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+	void SoraOGLRenderer::renderBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
 		renderLine(x1, y1, x2, y1+1.f, color, z);
 		renderLine(x2, y1, x2+1.f, y2, color, z);
 		renderLine(x2, y2, x1, y2+1.f, color, z);

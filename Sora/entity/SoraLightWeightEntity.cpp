@@ -68,6 +68,10 @@ namespace sora {
         return mHolder.addProperty(prop);
     }
     
+    void SoraLightWeightEntity::onMessage(SoraMessageEvent* evt) {
+        
+    }
+    
     SoraPropertyBase* SoraLightWeightEntity::getPropertyBase(const PropertyId& pid) const {
         SoraPropertyBase* prop =  mHolder.getPropertyBase(pid);
         if(prop == 0) {
@@ -85,7 +89,10 @@ namespace sora {
     }
     
     void SoraLightWeightEntity::sendMessageT(SoraMessageEvent* message) {
-        mComponents.sendMessage(message);
+        if(message->getReceiver() == this)
+            this->onMessage(message);
+        else 
+            mComponents.sendMessage(message);
     }
     
     void SoraLightWeightEntity::sendMessageTo(const SoraString& comp, SoraMessageEvent* message) {

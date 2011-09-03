@@ -395,7 +395,7 @@ namespace sora {
             return false;
         }
         
-        bool canWidgetSetValue(gcn::Widget* widget, float32 val) {
+        bool canWidgetSetValue(gcn::Widget* widget, float val) {
             gcn::Slider* s = dynamic_cast<gcn::Slider*>(widget);
             if(s) {
                 s->setValue(val);
@@ -445,16 +445,16 @@ namespace sora {
             return "\0";
         }
         
-        void setWidgetValue(ulong32 h, float32 val) {
+        void setWidgetValue(ulong32 h, float val) {
             gcn::Widget* w = getWidgetByHandle(h);
             if(w) canWidgetSetValue(w, val);
         }
         
-        void setGlobalAlpha(float32 alpha) {
+        void setGlobalAlpha(float alpha) {
             GCN_GLOBAL->getGui()->setAlpha(alpha);
         }
       
-        float32 getGlobalAlpha() {
+        float getGlobalAlpha() {
             return GCN_GLOBAL->getGui()->getAlpha();
         }
         

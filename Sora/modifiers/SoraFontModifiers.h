@@ -16,40 +16,40 @@ namespace sora {
     
     class SORA_API SoraFontRotationModifier: public SoraModifier<SoraFont> {
     public:
-        SoraFontRotationModifier(float32 begin, float32 end, float32 inTime, bool mLineRotation=true, bool mRotateChar=false);
+        SoraFontRotationModifier(float begin, float end, float inTime, bool mLineRotation=true, bool mRotateChar=false);
     
-        int32   update(float32 dt);
+        int32   update(float dt);
         void    modify(SoraFont* font);
         void    reset();
 
         SoraModifier<SoraFont>* clone();
         
     private:
-        float32 mBegin;
-        float32 mEnd;
-        float32 mCurrVal;
-        float32 mInTime;
-        float32 mCurrTime;
+        float mBegin;
+        float mEnd;
+        float mCurrVal;
+        float mInTime;
+        float mCurrTime;
         bool mLineRotation;
         bool mRotateChar;
     };
     
     class SORA_API SoraFontScaleModifier: public SoraModifier<SoraFont> {
     public:
-        SoraFontScaleModifier(float32 begin, float32 end, float32 inTime);
+        SoraFontScaleModifier(float begin, float end, float inTime);
         
-        int32   update(float32 dt);
+        int32   update(float dt);
         void    modify(SoraFont* font);
         void    reset();
         
         SoraModifier<SoraFont>* clone();
         
     private:
-        float32 mBegin;
-        float32 mEnd;
-        float32 mCurrVal;
-        float32 mInTime;
-        float32 mCurrTime;
+        float mBegin;
+        float mEnd;
+        float mCurrVal;
+        float mInTime;
+        float mCurrTime;
     };
 } // namespace sora
 

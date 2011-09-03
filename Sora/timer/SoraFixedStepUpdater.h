@@ -20,7 +20,7 @@ namespace sora {
     template<typename T>
     class SoraFixedStepUpdater {
     public:
-        inline SoraFixedStepUpdater(float32 stepTime):
+        inline SoraFixedStepUpdater(float stepTime):
         mUpdateObj(NULL),
         mStepTime(stepTime),
         mAccumulator(0.f) {
@@ -39,7 +39,7 @@ namespace sora {
                 mUpdateObj = NULL;
         }
         
-        inline uint32 update(float32 interval) {
+        inline uint32 update(float interval) {
             uint32 result = 0;
             if(mUpdateObj) {
                 mAccumulator += interval;
@@ -55,8 +55,8 @@ namespace sora {
         
     private:
         T* mUpdateObj;
-        const float32 mStepTime;
-        float32 mAccumulator;
+        const float mStepTime;
+        float mAccumulator;
     };
     
 } // namespace sora

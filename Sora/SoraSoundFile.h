@@ -36,18 +36,18 @@ namespace sora {
 		virtual void resume() = 0;
 
 		// 0 - 1
-		virtual void setVolume(float32 vol) = 0;
+		virtual void setVolume(float vol) = 0;
 		// -1.0 - 1.0
-		virtual void setPan(float32 pan) = 0;
+		virtual void setPan(float pan) = 0;
 		// 0.5 - 2.0
-		virtual void setPitch(float32 pitch) = 0;
+		virtual void setPitch(float pitch) = 0;
 
-		virtual float32 getPan() const = 0;
-		virtual float32 getPitch() const = 0;
-		virtual float32 getVolume() const = 0;
+		virtual float getPan() const = 0;
+		virtual float getPitch() const = 0;
+		virtual float getVolume() const = 0;
 
-		virtual void setPosition(float32 x, float32 y, float32 z) = 0;
-		virtual void getPosition(float32& x, float32& y, float32& z) = 0;
+		virtual void setPosition(float x, float y, float z) = 0;
+		virtual void getPosition(float& x, float& y, float& z) = 0;
         
         virtual void setMusicPosition(int32 pos) = 0;
         virtual int32 getMusicPosition() const = 0;
@@ -70,19 +70,19 @@ namespace sora {
 		virtual void play() = 0;
 		virtual void stop() = 0;
         
-        virtual void setPosition(float32 x, float32 y, float32 z) = 0;
-        virtual void getPosition(float32& x, float32& y, float32& z) = 0;
+        virtual void setPosition(float x, float y, float z) = 0;
+        virtual void getPosition(float& x, float& y, float& z) = 0;
 
 		// 0 - 1
-		virtual void setVolume(float32 vol) = 0;
+		virtual void setVolume(float vol) = 0;
 		// -1.0 - 1.0
-		virtual void setPan(float32 pan) = 0;
+		virtual void setPan(float pan) = 0;
 		// 0.5 - 2.0
-		virtual void setPitch(float32 pitch) = 0;
+		virtual void setPitch(float pitch) = 0;
 
-		virtual float32 getPan() const = 0;
-		virtual float32 getPitch() const = 0;
-		virtual float32 getVolume() const = 0;
+		virtual float getPan() const = 0;
+		virtual float getPitch() const = 0;
+		virtual float getVolume() const = 0;
         
         virtual void setRepeat(bool flag) = 0;
 		virtual bool isRepeat() const = 0;

@@ -20,28 +20,28 @@ namespace fontWrapper {
 		return (ulong32)sora::SORA->createFont(fontName, size);
 	}
 	
-	static void renderString(ulong32 font, float32 x, float32 y, int32 alignment, const std::wstring& str) {
+	static void renderString(ulong32 font, float x, float y, int32 alignment, const std::wstring& str) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			pfont->render(x, y, alignment, str.c_str());
 		}
 	}
 	
-	static void setKerningWidth(ulong32 font, float32 kw) {
+	static void setKerningWidth(ulong32 font, float kw) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			pfont->setKerningWidth(kw);
 		}
 	}
 	
-	static void setKerningHeight(ulong32 font, float32 kh) {
+	static void setKerningHeight(ulong32 font, float kh) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			pfont->setKerningHeight(kh);
 		}
 	}
 	
-	static float32 getKerningWidth(ulong32 font) {
+	static float getKerningWidth(ulong32 font) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			return pfont->getKerningWidth();
@@ -49,7 +49,7 @@ namespace fontWrapper {
 		return 0.f;
 	}
 	
-	static float32 getKerningHeight(ulong32 font) {
+	static float getKerningHeight(ulong32 font) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			return pfont->getKerningHeight();

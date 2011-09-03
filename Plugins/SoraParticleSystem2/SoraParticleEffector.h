@@ -9,11 +9,11 @@
 #ifndef Sora_SoraParticleEffector_2_h
 #define Sora_SoraParticleEffector_2_h
 
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     
-    struct SoraParticleEffector: uncopyable {
+    struct SoraParticleEffector: SoraUncopyable {
         
     };
     

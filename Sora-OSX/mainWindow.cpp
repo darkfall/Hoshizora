@@ -43,8 +43,8 @@ mainWindow::mainWindow() {
 mainWindow::~mainWindow() {
 }
 
-float32 cx = 300.f, cy = 400.f, cz = 1.f;
-void transform3d(float32& x, float32& y, float32 z) {
+float cx = 300.f, cy = 400.f, cz = 1.f;
+void transform3d(float& x, float& y, float z) {
 	float scale = (cz - z) / cz;
 	x = (x - cx) * scale + cx;
 	y = (y - cy) * scale + cy;

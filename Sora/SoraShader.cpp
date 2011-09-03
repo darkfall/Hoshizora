@@ -2,7 +2,7 @@
  *  SoraShader.cpp
  *  SoraPureCore
  *
- *  Created by griffin clare on 11/21/10.
+ *  Created by Robert Bu on 11/21/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -23,26 +23,26 @@ namespace sora {
 		
 	}
 	
-	bool SoraShader::setParameter1f(const char* name, float32 v1) {
-		float32 arr[1];
+	bool SoraShader::setParameter1f(const char* name, float v1) {
+		float arr[1];
 		arr[0] = v1;
 		return setParameterfv(name, arr, 1);
 	}
 	
-	bool SoraShader::setParameter2f(const char* name, float32 v1, float32 v2) {
-		float32 arr[2];
+	bool SoraShader::setParameter2f(const char* name, float v1, float v2) {
+		float arr[2];
 		arr[0] = v1; arr[1] = v2;
 		return setParameterfv(name, arr, 2);
 	}
 	
-	bool SoraShader::setParameter3f(const char* name, float32 v1, float32 v2, float32 v3) {
-		float32 arr[3];
+	bool SoraShader::setParameter3f(const char* name, float v1, float v2, float v3) {
+		float arr[3];
 		arr[0] = v1; arr[1] = v2; arr[2] = v3;
 		return setParameterfv(name, arr, 3);
 	}
 	
-	bool SoraShader::setParameter4f(const char* name, float32 v1, float32 v2, float32 v3, float32 v4) {
-		float32 arr[4];
+	bool SoraShader::setParameter4f(const char* name, float v1, float v2, float v3, float v4) {
+		float arr[4];
 		arr[0] = v1; arr[1] = v2; arr[2] = v3; arr[3] = v4;
 		return setParameterfv(name, arr, 4);
 	}

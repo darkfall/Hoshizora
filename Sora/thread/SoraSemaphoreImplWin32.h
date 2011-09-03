@@ -17,7 +17,7 @@
 
 namespace sora {
     
-    class SoraSemaphoreImpl: public uncopyable {
+    class SoraSemaphoreImpl: public SoraUncopyable {
     public:
         SoraSemaphoreImpl(int n, int max) {
             assert( n>=0 && max>0 && n<=max);

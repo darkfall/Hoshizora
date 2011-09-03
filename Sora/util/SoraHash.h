@@ -36,9 +36,9 @@ namespace sora {
 		return (hash & 0x7FFFFFFF);
 	}
 
-	inline unsigned int floatHash(float32 f) {
+	inline unsigned int floatHash(float f) {
 		typedef union {
-			float32 f;
+			float f;
 			uint32 u;
 		} U32;
 		

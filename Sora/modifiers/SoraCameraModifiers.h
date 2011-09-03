@@ -20,17 +20,17 @@ namespace sora {
     
     class SORA_API SoraCameraZoomModifier: public SoraModifier<SoraCamera> {
     public:
-        SoraCameraZoomModifier(float32 starth, float32 startv, float32 hz, float32 hv, float32 inTime);
+        SoraCameraZoomModifier(float starth, float startv, float hz, float hv, float inTime);
         
-        int32   update(float32 dt);
+        int32   update(float dt);
         void    modify(SoraCamera* camera);
         void    reset();
         
         SoraModifier<SoraCamera>* clone();
         
     private:
-        float32 mTime;
-        float32 mCurrTime;
+        float mTime;
+        float mCurrTime;
         SoraVector mCurrZoom;
         SoraVector mEndZoom;
         SoraVector mStartZoom;
@@ -38,20 +38,20 @@ namespace sora {
     
     class SORA_API SoraCameraRotationModifier: public SoraModifier<SoraCamera> {
     public:
-        SoraCameraRotationModifier(float32 start, float32 end, float32 inTime);
+        SoraCameraRotationModifier(float start, float end, float inTime);
         
-        int32   update(float32 dt);
+        int32   update(float dt);
         void    modify(SoraCamera* camera);
         void    reset();
         
         SoraModifier<SoraCamera>* clone();
         
     private:
-        float32 mTime;
-        float32 mCurrTime;
-        float32 mStart;
-        float32 mEnd;
-        float32 mCurrRot;
+        float mTime;
+        float mCurrTime;
+        float mStart;
+        float mEnd;
+        float mCurrRot;
     };
     
     typedef SoraTransitionModifier<SoraCamera> SoraCameraPositionModifier;

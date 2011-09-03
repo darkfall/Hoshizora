@@ -31,27 +31,27 @@ namespace sora {
             return mPosition;
         }
         
-        inline void setPosition(float32 x, float32 y) {
+        inline void setPosition(float x, float y) {
             setPosition(SoraVector3(x, y, mPosition.z));
         }
         
-        inline float32 getPositionX() {
+        inline float getPositionX() {
             return getPosition().x;
         }
         
-        inline float32 getPositionY() {
+        inline float getPositionY() {
             return getPosition().y;
         }
         
-        inline float32 getPositionZ() {
+        inline float getPositionZ() {
             return getPosition().z;
         }
         
-        virtual void setRotation(float32 r) {
+        virtual void setRotation(float r) {
             mRotation = r;
         }
         
-        virtual float32 getRotation() const {
+        virtual float getRotation() const {
             return mRotation;
         }
         
@@ -60,7 +60,7 @@ namespace sora {
         }
         
     private:
-        float32 mRotation;
+        float mRotation;
         // SoraQuaternion mRotation;
         
         SoraVector3 mPosition;

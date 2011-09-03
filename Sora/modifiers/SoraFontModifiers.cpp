@@ -10,7 +10,7 @@
 
 namespace sora {
     
-    SoraFontRotationModifier::SoraFontRotationModifier(float32 begin, float32 end, float32 inTime, bool lineRotation, bool rotateChar):
+    SoraFontRotationModifier::SoraFontRotationModifier(float begin, float end, float inTime, bool lineRotation, bool rotateChar):
     mBegin(begin),
     mEnd(end),
     mInTime(inTime),
@@ -20,7 +20,7 @@ namespace sora {
         mCurrVal = mBegin;
     }
     
-    int32 SoraFontRotationModifier::update(float32 dt) {
+    int32 SoraFontRotationModifier::update(float dt) {
         mCurrTime += dt;
         mCurrVal = slerp(mBegin, mEnd, mCurrTime/mInTime);
         if(mCurrTime >= mInTime) {
@@ -45,7 +45,7 @@ namespace sora {
         return new SoraFontRotationModifier(mBegin, mEnd, mInTime, mLineRotation, mRotateChar);
     }
     
-    SoraFontScaleModifier::SoraFontScaleModifier(float32 begin, float32 end, float32 inTime):
+    SoraFontScaleModifier::SoraFontScaleModifier(float begin, float end, float inTime):
     mBegin(begin),
     mEnd(end),
     mInTime(inTime) {
@@ -53,7 +53,7 @@ namespace sora {
         mCurrVal = begin;
     }
     
-    int32 SoraFontScaleModifier::update(float32 dt) {
+    int32 SoraFontScaleModifier::update(float dt) {
         mCurrTime += dt;
         mCurrVal = slerp(mBegin, mEnd, mCurrTime/mInTime);
         if(mCurrTime >= mInTime) {

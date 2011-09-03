@@ -26,7 +26,7 @@ namespace sora {
 		}
 	}
 
-	bool SoraEnvValues::getValue(stringId name, bool defaultVal) {
+	bool SoraEnvValues::getValue(SoraStringId name, bool defaultVal) {
 		VALUE_ITERATOR itVal = values.find(name);
 		if(itVal != values.end()) {
 			switch(itVal->second.VALUE_TYPE) {
@@ -38,7 +38,7 @@ namespace sora {
 		return defaultVal;
 	}
 	
-	int32 SoraEnvValues::getValue(stringId name, int32 defaultVal) {
+	int32 SoraEnvValues::getValue(SoraStringId name, int32 defaultVal) {
 		VALUE_ITERATOR itVal = values.find(name);
 		if(itVal != values.end()) {
 			switch(itVal->second.VALUE_TYPE) {
@@ -51,12 +51,12 @@ namespace sora {
 		return defaultVal;
 	}
 	
-	float32	SoraEnvValues::getValue(stringId name, float32 defaultVal) {
+	float	SoraEnvValues::getValue(SoraStringId name, float defaultVal) {
 		VALUE_ITERATOR itVal = values.find(name);
 		if(itVal != values.end()) {
 			switch(itVal->second.VALUE_TYPE) {
 				case VALUE_BOOL: return itVal->second.data.boolVal?1.f:0.f;
-				case VALUE_INT: return (float32)itVal->second.data.intVal;
+				case VALUE_INT: return (float)itVal->second.data.intVal;
 				case VALUE_FLOAT: return itVal->second.data.floatVal;
 				default: break;
 			}
@@ -64,7 +64,7 @@ namespace sora {
 		return defaultVal;
 	}
 	
-	std::string	SoraEnvValues::getValue(stringId name, const std::string& defaultVal) {
+	std::string	SoraEnvValues::getValue(SoraStringId name, const std::string& defaultVal) {
 		VALUE_ITERATOR itVal = values.find(name);
 		if(itVal != values.end()) {
 			switch(itVal->second.VALUE_TYPE) {
@@ -75,7 +75,7 @@ namespace sora {
 		return defaultVal;
 	}
 	
-	std::wstring SoraEnvValues::getValue(stringId name, const std::wstring& defaultVal) {
+	std::wstring SoraEnvValues::getValue(SoraStringId name, const std::wstring& defaultVal) {
 		VALUE_ITERATOR itVal = values.find(name);
 		if(itVal != values.end()) {
 			switch(itVal->second.VALUE_TYPE) {
@@ -86,7 +86,7 @@ namespace sora {
 		return defaultVal;
 	}
 	
-	void* SoraEnvValues::getValue(stringId name) {
+	void* SoraEnvValues::getValue(SoraStringId name) {
 		VALUE_ITERATOR itVal = values.find(name);
 		if(itVal != values.end()) {
 			switch(itVal->second.VALUE_TYPE) {
@@ -97,42 +97,42 @@ namespace sora {
 		return NULL;
 	}
 	
-	void SoraEnvValues::setValue(stringId name, bool val) {
+	void SoraEnvValues::setValue(SoraStringId name, bool val) {
 		VALUE_STORE myData;
 		myData.VALUE_TYPE = VALUE_BOOL;
 		myData.data.boolVal = val;
 		values[name] = myData;
 	}
 	
-	void SoraEnvValues::setValue(stringId name, int32 val) {
+	void SoraEnvValues::setValue(SoraStringId name, int32 val) {
 		VALUE_STORE myData;
 		myData.VALUE_TYPE = VALUE_INT;
 		myData.data.intVal = val;
 		values[name] = myData;
 	}
 	
-	void SoraEnvValues::setValue(stringId name, float32 val) {
+	void SoraEnvValues::setValue(SoraStringId name, float val) {
 		VALUE_STORE myData;
 		myData.VALUE_TYPE = VALUE_FLOAT;
 		myData.data.floatVal = val;
 		values[name] = myData;
 	}
 	
-	void SoraEnvValues::setValue(stringId name, const std::string& val) {
+	void SoraEnvValues::setValue(SoraStringId name, const std::string& val) {
 		VALUE_STORE myData;
 		myData.VALUE_TYPE = VALUE_STRING;
 		myData.data.stringVal = str2id(val);
 		values[name] = myData;
 	}
 	
-	void SoraEnvValues::setValue(stringId name, const std::wstring& val) {
+	void SoraEnvValues::setValue(SoraStringId name, const std::wstring& val) {
 		VALUE_STORE myData;
 		myData.VALUE_TYPE = VALUE_STRING;
 		myData.data.stringVal = str2id(val);
 		values[name] = myData;
 	}
 	
-	void SoraEnvValues::setValue(stringId name, void* data) {
+	void SoraEnvValues::setValue(SoraStringId name, void* data) {
 		VALUE_STORE myData;
 		myData.VALUE_TYPE = VALUE_USERDATA;
 		myData.userData = data;
@@ -140,32 +140,32 @@ namespace sora {
 	}
 	
 	bool SoraEnvValues::getBool(const std::string& name, bool defaultVal) {
-		stringId sname = str2id(name);
+		SoraStringId sname = str2id(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	int32 SoraEnvValues::getInt(const std::string& name, int32 defaultVal) {
-		stringId sname = str2id(name);
+		SoraStringId sname = str2id(name);
 		return getValue(sname, defaultVal);
 	}
 	
-	float32	SoraEnvValues::getFloat(const std::string& name, float32 defaultVal) {
-		stringId sname = str2id(name);
+	float	SoraEnvValues::getFloat(const std::string& name, float defaultVal) {
+		SoraStringId sname = str2id(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	std::string	SoraEnvValues::getString(const std::string& name, const std::string& defaultVal) {
-		stringId sname = str2id(name);
+		SoraStringId sname = str2id(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	std::wstring SoraEnvValues::getWString(const std::string& name, const std::wstring& defaultVal) {
-		stringId sname = str2id(name);
+		SoraStringId sname = str2id(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	void* SoraEnvValues::getData(const std::string& name) {
-		stringId sname = str2id(name);
+		SoraStringId sname = str2id(name);
 		return getValue(sname);
 	}
 	
@@ -177,7 +177,7 @@ namespace sora {
 		setValue(str2id(name), val);
 	}
 	
-	void SoraEnvValues::setFloat(const std::string& name, float32 val) {
+	void SoraEnvValues::setFloat(const std::string& name, float val) {
 		setValue(str2id(name), val);
 	}
 	
@@ -197,7 +197,7 @@ namespace sora {
 		setValue(str2id(name), (void*)NULL);
 	}
 	
-	void SoraEnvValues::removeData(stringId name) {
+	void SoraEnvValues::removeData(SoraStringId name) {
 		setValue(name, (void*)NULL);
 	}
 	

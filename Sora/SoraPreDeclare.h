@@ -11,7 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraAny.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 #include <string>
 #include <map>
 
@@ -55,14 +55,14 @@ namespace sora {
     
     // runtime def & not def
     
-    static std::map<stringId, int> g_define_map;
+    static std::map<SoraStringId, int> g_define_map;
     
     static void SoraDefine(const std::string& f, int val=0) {
         g_define_map.insert(std::make_pair(GetUniqueStringId(f), val));
     }
     
     static bool SoraIfDefined(const std::string& f) {
-        std::map<stringId, int>::const_iterator it = g_define_map.find(GetUniqueStringId(f));
+        std::map<SoraStringId, int>::const_iterator it = g_define_map.find(GetUniqueStringId(f));
         return it != g_define_map.end();
     }
     

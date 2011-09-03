@@ -34,7 +34,7 @@ namespace sora {
     }
     
     SoraShader* SoraShaderManager::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
-        stringId sid = GetUniqueStringId(file);
+        SoraStringId sid = GetUniqueStringId(file);
         ShaderMap::iterator itShader = mShaders.find(sid);
         if(itShader != mShaders.end()) {
             return itShader->second;

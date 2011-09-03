@@ -12,7 +12,7 @@
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
 #include "SoraShader.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 #include <map>
 
 namespace sora {
@@ -38,8 +38,8 @@ namespace sora {
     private:
         SoraShaderContext* mShaderContext;
         
-        typedef std::map<stringId, SoraShader*> ShaderMap;
-        typedef std::map<SoraShader*, stringId> RevShaderMap;
+        typedef std::map<SoraStringId, SoraShader*> ShaderMap;
+        typedef std::map<SoraShader*, SoraStringId> RevShaderMap;
         ShaderMap mShaders;
         RevShaderMap mRevShaders;
     };

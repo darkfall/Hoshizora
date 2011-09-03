@@ -99,9 +99,9 @@ namespace sora {
 									delete paramVals;
 									
 								} else if(paramType == PARAM_TYPE_FLOAT) {
-									float32* paramVals = new float32[paramSize];
+									float* paramVals = new float[paramSize];
 									for(int j=0; j<paramList.size(); ++j)
-										paramVals[j] = (float32)paramList[j].asDouble();
+										paramVals[j] = (float)paramList[j].asDouble();
 									shader->setParameterfv(paramName.c_str(), paramVals, paramSize);
 									delete paramVals;
 									
@@ -168,9 +168,9 @@ namespace sora {
 				if(effectObj.isMember("mode"))
 					ieMode = identToIEPlayType(effectObj["mode"].asString());
 				
-				float32 time = 1.0;
+				float time = 1.0;
 				if(effectObj.isMember("time"))
-					time = (float32)effectObj["time"].asDouble();
+					time = (float)effectObj["time"].asDouble();
 				
 				Json::Value startParam = effectObj["start"];
 				Json::Value endParam = effectObj["end"];
@@ -178,8 +178,8 @@ namespace sora {
 					switch (ieType) {
 						case IE_TYPE_FADE:
 							if(startParam.size() >= 1 && endParam.size() >= 1) {
-								pSprite->addEffect(new sora::SoraImageEffectFade((float32)startParam[(Json::UInt)0].asDouble(),
-																				 (float32)endParam[(Json::UInt)0].asDouble(),
+								pSprite->addEffect(new sora::SoraImageEffectFade((float)startParam[(Json::UInt)0].asDouble(),
+																				 (float)endParam[(Json::UInt)0].asDouble(),
 																				 time,
 																				 ieMode));
 							}
@@ -187,8 +187,8 @@ namespace sora {
                             
 						case IE_TYPE_ROTATION:
 							if(startParam.size() >= 1 && endParam.size() >= 1) {
-								pSprite->addEffect(new sora::SoraImageEffectRotation((float32)startParam[(Json::UInt)0].asDouble(),
-																					 (float32)endParam[(Json::UInt)0].asDouble(),
+								pSprite->addEffect(new sora::SoraImageEffectRotation((float)startParam[(Json::UInt)0].asDouble(),
+																					 (float)endParam[(Json::UInt)0].asDouble(),
 																					 time,
 																					 ieMode));
 							}
@@ -196,10 +196,10 @@ namespace sora {
                             
 						case IE_TYPE_TRANSITION:
 							if(startParam.size() >= 2 && endParam.size() >= 2) {
-								pSprite->addEffect(new sora::SoraImageEffectTransitions((float32)startParam[(Json::UInt)0].asDouble(),
-																						(float32)startParam[1].asDouble(),
-																						(float32)endParam[(Json::UInt)0].asDouble(),
-																						(float32)endParam[1].asDouble(),
+								pSprite->addEffect(new sora::SoraImageEffectTransitions((float)startParam[(Json::UInt)0].asDouble(),
+																						(float)startParam[1].asDouble(),
+																						(float)endParam[(Json::UInt)0].asDouble(),
+																						(float)endParam[1].asDouble(),
 																						time,
 																						ieMode));
 							}
@@ -207,13 +207,13 @@ namespace sora {
                             
 						case IE_TYPE_COLOR:
 							if(startParam.size() >=3 && endParam.size() >= 3) {
-								sora::SoraColorRGBA startCol((float32)startParam[(Json::UInt)0].asDouble(),
-															 (float32)startParam[1].asDouble(),
-															 (float32)startParam[2].asDouble(),
+								sora::SoraColorRGBA startCol((float)startParam[(Json::UInt)0].asDouble(),
+															 (float)startParam[1].asDouble(),
+															 (float)startParam[2].asDouble(),
 															 1.0);
-								sora::SoraColorRGBA endCol((float32)endParam[(Json::UInt)0].asDouble(),
-														   (float32)endParam[1].asDouble(),
-														   (float32)endParam[2].asDouble(),
+								sora::SoraColorRGBA endCol((float)endParam[(Json::UInt)0].asDouble(),
+														   (float)endParam[1].asDouble(),
+														   (float)endParam[2].asDouble(),
 														   1.0);
 								
 								pSprite->addEffect(new sora::SoraImageEffectColorTransitions(startCol,
@@ -225,15 +225,15 @@ namespace sora {
 							
 						case IE_TYPE_SCALE:
 							if(startParam.size() == 1 && endParam.size() == 1) {
-								pSprite->addEffect(new sora::SoraImageEffectScale((float32)startParam[(Json::UInt)0].asDouble(),
-																				  (float32)endParam[(Json::UInt)0].asDouble(),
+								pSprite->addEffect(new sora::SoraImageEffectScale((float)startParam[(Json::UInt)0].asDouble(),
+																				  (float)endParam[(Json::UInt)0].asDouble(),
 																				  time,
 																				  ieMode));
 							} else if(startParam.size() >= 2 && endParam.size() >= 2) {
-								pSprite->addEffect(new sora::SoraImageEffectScale((float32)startParam[(Json::UInt)0].asDouble(),
-																				  (float32)startParam[1].asDouble(),
-																				  (float32)endParam[(Json::UInt)0].asDouble(),
-																				  (float32)endParam[1].asDouble(),
+								pSprite->addEffect(new sora::SoraImageEffectScale((float)startParam[(Json::UInt)0].asDouble(),
+																				  (float)startParam[1].asDouble(),
+																				  (float)endParam[(Json::UInt)0].asDouble(),
+																				  (float)endParam[1].asDouble(),
 																				  time,
 																				  ieMode));
 							}
@@ -265,20 +265,20 @@ namespace sora {
 		if(val.isMember("center")) {
 			Json::Value centerVal = val["center"];
 			if(centerVal.isMember("x") && centerVal.isMember("y"))
-				pSprite->setCenter((float32)centerVal["x"].asInt(),
-								   (float32)centerVal["y"].asInt());
+				pSprite->setCenter((float)centerVal["x"].asInt(),
+								   (float)centerVal["y"].asInt());
 		}
 		
 		if(val.isMember("scale")) {
 			Json::Value scale = val["scale"];
 			if(scale.isMember("v") && scale.isMember("h"))  {
-				pSprite->setScale((float32)scale["v"].asDouble(), 
-								  (float32)scale["h"].asDouble());
+				pSprite->setScale((float)scale["v"].asDouble(), 
+								  (float)scale["h"].asDouble());
 			}
 		}
 		
 		if(val.isMember("rotation")) {
-			pSprite->setRotation(sora::DGR_RAD((float32)val["rotation"].asDouble()));
+			pSprite->setRotation(sora::DGR_RAD((float)val["rotation"].asDouble()));
 		}
 	}
     

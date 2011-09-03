@@ -54,7 +54,7 @@ namespace sora {
     }
     
     void SoraEventWorldImpl::shutdown() {
-        float32 dt = 0.f;
+        float dt = 0.f;
         while(!(mCurrEvtList->empty() && mNextEvtList->empty())) {
             update(dt);
         }
@@ -115,7 +115,7 @@ namespace sora {
         doBroadCasting(evt, false);
     }
     
-    void SoraEventWorldImpl::update(float32 dt) {
+    void SoraEventWorldImpl::update(float dt) {
         EventList::iterator itEvent = mCurrEvtList->begin();
         EventList::iterator itEnd = mCurrEvtList->end();
         

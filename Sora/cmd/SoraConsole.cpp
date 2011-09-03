@@ -76,7 +76,7 @@ namespace sora {
 		mWidth = SoraCore::Instance()->getScreenWidth()-2.f;
 		mHeight = 300.f;
 		if(mHeight > SoraCore::Instance()->getScreenHeight())
-			mHeight = (float32)SoraCore::Instance()->getScreenHeight();
+			mHeight = (float)SoraCore::Instance()->getScreenHeight();
 		
 		mFont = NULL;
 		mFontHeight = 20;
@@ -92,7 +92,7 @@ namespace sora {
 	
 	void SoraConsole::render() {
 		if(mActive) {
-			float32 delta = SORA->getDelta();
+			float delta = SORA->getDelta();
 			if(mTab == TAB_CMDLINE) {
 				drawCmds();
 				
@@ -179,8 +179,8 @@ namespace sora {
 		SORA->fillBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mBackgroundColor);
 		if(mFont) {			
 			mFont->setLineWidth(mWidth);
-			float32 x = mPositionX + 1.f;
-			float32 y = mPositionY + 1.f;
+			float x = mPositionX + 1.f;
+			float y = mPositionY + 1.f;
 			
 			if(mHistory.size() != 0) {
 				for(size_t i=mStartLine; i<mCurrLine; ++i) {
@@ -215,12 +215,12 @@ namespace sora {
 		SORA->fillBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mBackgroundColor);
 		if(mFont) {
 			mFont->setLineWidth(mWidth);
-			float32 x = mPositionX + 1.f;
-			float32 y = mPositionY + mHeight - mFontHeight*2 - 1.f;
+			float x = mPositionX + 1.f;
+			float y = mPositionY + mHeight - mFontHeight*2 - 1.f;
 			
 			std::vector<SoraInternalLogger::LogMssg> debugMssg = DebugPtr->get();
 			
-			float32 starty = y;
+			float starty = y;
 			for(int32 i=mCurrLine; i>=0; --i) {
 				starty -= mFont->getStringHeight(s2wsfast(debugMssg[i].mLog).c_str());
 				if(starty <= mPositionY + mFontHeight)
@@ -304,12 +304,12 @@ namespace sora {
         return mCaretPosition;
     }
     
-    void SoraConsole::setPosition(float32 posx, float32 posy) { 
+    void SoraConsole::setPosition(float posx, float posy) { 
         mPositionX = posx; 
         mPositionY = posy;
     }
     
-    void SoraConsole::setSize(float32 width, float32 height) { 
+    void SoraConsole::setSize(float width, float height) { 
         mWidth = width; 
         mHeight = height; 
     }

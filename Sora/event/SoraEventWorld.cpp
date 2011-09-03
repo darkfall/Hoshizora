@@ -36,7 +36,7 @@ namespace sora {
         
     }
     
-    void SoraEventWorld::update(float32 dt) {
+    void SoraEventWorld::update(float dt) {
         if(mFixedStep) {
             uint32 step = static_cast<uint32>(dt / SoraCore::Instance()->getDelta());
             for(uint32 i=0; i<step; ++i)

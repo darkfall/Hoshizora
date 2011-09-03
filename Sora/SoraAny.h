@@ -188,7 +188,7 @@ namespace sora {
     }
     
  /*   static bool isAnyStringId(const SoraAny& any) {
-        return any.type() == typeid(stringId);
+        return any.type() == typeid(SoraStringId);
     }
    */ 
     template<typename T>

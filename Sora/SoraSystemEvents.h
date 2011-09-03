@@ -27,11 +27,11 @@ namespace sora {
         SoraSystemEvent(): mType(-1) {}
         SoraSystemEvent(int32 type): mType(SYS_EVT_UPDATE) {}
         
-        void setDelta(float32 dt) { 
+        void setDelta(float dt) { 
             mDelta = dt;
         }
         
-        float32 getDelta() const { 
+        float getDelta() const { 
             return mDelta;
         }
         
@@ -47,7 +47,7 @@ namespace sora {
         
     private:
         int32 mType;
-        float32 mDelta;
+        float mDelta;
     };
     
 #ifdef SORA_USE_RTTI

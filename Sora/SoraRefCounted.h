@@ -10,11 +10,11 @@
 #ifndef SORA_REF_COUNTED_H_
 #define SORA_REF_COUNTED_H_
 
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
 	
-	class SORA_API SoraRefCounted: uncopyable {
+	class SORA_API SoraRefCounted: SoraUncopyable {
     public:
         SoraRefCounted(): counter(1) {}
         

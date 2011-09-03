@@ -32,7 +32,7 @@ namespace sora {
     public:
         typedef std::list<SoraAbstractModiferAdapter*> Members;
 
-        virtual void update(float32 dt) = 0;
+        virtual void update(float dt) = 0;
         
     public:
         static Members members;
@@ -68,7 +68,7 @@ namespace sora {
                 SoraAbstractModiferAdapter::remove();
         }
         
-        void update(float32 dt) {
+        void update(float dt) {
             if(!mModifiers.empty()) {
                 typename ModifierList::iterator itModifier = mModifiers.begin();
                 while(itModifier != mModifiers.end()) {

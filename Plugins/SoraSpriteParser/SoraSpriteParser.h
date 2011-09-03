@@ -11,7 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 #include "json/json.h"
 
 #include "SoraSpriteAnimation/SoraSpriteAnimation.h"

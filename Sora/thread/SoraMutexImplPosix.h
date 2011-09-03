@@ -11,7 +11,7 @@
 
 #include "SoraPlatform.h"
 
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 #include "SoraException.h"
 
 #ifndef OS_WIN32
@@ -22,7 +22,7 @@
 
 namespace sora {
     
-    class SoraMutexLockImpl: uncopyable {
+    class SoraMutexLockImpl: SoraUncopyable {
     protected:
         SoraMutexLockImpl() {
             pthread_mutex_init(&mutex, NULL);

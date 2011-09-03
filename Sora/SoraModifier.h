@@ -37,7 +37,7 @@ namespace sora {
                 delete mDelegatePtr;
         }
         
-        virtual int32   update(float32 dt) = 0;
+        virtual int32   update(float dt) = 0;
         virtual void    modify(MT* object) = 0;
         
         virtual SoraModifier<MT>* clone() = 0;
@@ -79,7 +79,7 @@ namespace sora {
         ~SoraModifierList();
         
         void    add(SoraModifier<MT>* modi);
-        int32   update(float32 dt);
+        int32   update(float dt);
         void    modify(MT* obj);
         void    clear();
         
@@ -110,7 +110,7 @@ namespace sora {
     }
     
     template<typename MT>
-    int32 SoraModifierList<MT>::update(float32 dt) {
+    int32 SoraModifierList<MT>::update(float dt) {
         if(mModifiers.size() != 0) {
             int32 result = mModifiers[mCurrModifier]->update(dt);
             if(result == ModifierUpdateEnd) {

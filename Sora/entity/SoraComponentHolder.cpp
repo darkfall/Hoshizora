@@ -133,7 +133,7 @@ namespace sora {
         return 0;
     }
     
-    void SoraComponentHolder::onUpdate(float32 dt) {
+    void SoraComponentHolder::onUpdate(float dt) {
         ComponentMap::const_iterator it = mComponents.begin();
         while(it != mComponents.end()) {
             it->second->onUpdate(dt);

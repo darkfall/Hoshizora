@@ -55,33 +55,33 @@ namespace sora {
 	class SORA_API SoraSprite: public SoraShaderEnabledObject {
 	public:
         SoraSprite(HSORATEXTURE tex);
-        SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 width, float32 height);
+        SoraSprite(HSORATEXTURE tex, float x, float y, float width, float height);
 		virtual ~SoraSprite();
 
         virtual void render();
-        virtual void render(float32 x, float32 y);
-        virtual void renderInBox(float32 x1, float32 y1, float32 x2, float32 y2);
-        virtual void render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4);
+        virtual void render(float x, float y);
+        virtual void renderInBox(float x1, float y1, float x2, float y2);
+        virtual void render4V(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
 
-		virtual uint32 update(float32 dt);
+		virtual uint32 update(float dt);
 
 		void    setTexture(HSORATEXTURE tex);
-		void    setTextureRect(float32 x, float32 y, float32 width, float32 height);
-		hgeRect getTextureRect() const;
+		void    setTextureRect(float x, float y, float width, float height);
+		SoraRect getTextureRect() const;
 		
 		void    setColor(uint32 c, int32 i=-1);
 		uint32  getColor(int32 i=0) const;
 
-		void    setZ(float32 z, int32 i=-1);
-		float32 getZ(int32 i=0) const;
+		void    setZ(float z, int32 i=-1);
+		float getZ(int32 i=0) const;
         
-        void    setPosition(float32 x, float32 y);
+        void    setPosition(float x, float y);
 
-		void    setCenter(float32 x, float32 y);
-		void    getCenter(float32& x, float32& y);
-		float32 getCenterX() const;
-		float32 getCenterY() const;
+		void    setCenter(float x, float y);
+		void    getCenter(float& x, float& y);
+		float getCenterX() const;
+		float getCenterY() const;
 
 		void    setFlip(bool hflag, bool vflag, bool bFlipCenter=true);
 		bool    getHFlip() const;
@@ -97,12 +97,12 @@ namespace sora {
 		int32   getSpritePosX() const;
 		int32   getSpritePosY() const;
 
-		void    setScale(float32 h, float32 v);
-		float32 getVScale() const;
-		float32 getHScale() const;
+		void    setScale(float h, float v);
+		float getVScale() const;
+		float getHScale() const;
 
-		void    setRotation(float32 r);
-		float32 getRotation() const;
+		void    setRotation(float r);
+		float getRotation() const;
 		
 		uint32*         getPixelData() const;
         void            unlockPixelData();
@@ -119,16 +119,16 @@ namespace sora {
 		SoraSprite();
         
         inline void _initDefaults();
-        inline void _init(SoraTexture* tex, float32 x, float32 y, float32 w, float32 h);
+        inline void _init(SoraTexture* tex, float x, float y, float w, float h);
 
-        inline void buildQuad(float32 x, float32 y);
+        inline void buildQuad(float x, float y);
 		
-		hgeRect mTextureRect;
+		SoraRect mTextureRect;
         int32   mSprWidth, mSprHeight;
 
-		float32 mRotation;
-		float32 mCenterX, mCenterY;
-		float32 mVScale, mHScale;
+		float mRotation;
+		float mCenterX, mCenterY;
+		float mVScale, mHScale;
 
 		bool bVFlip, bHFlip, bCFlip;
         bool bPropChanged;

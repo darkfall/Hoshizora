@@ -10,7 +10,7 @@
 #define Sora_SoraRegex_h
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 #include <vector>
 
 
@@ -29,7 +29,7 @@ namespace sora {
      *  Modified for Hoshizora by Griffin Bu
      **/
     
-    class SORA_API SoraRegex: uncopyable {
+    class SORA_API SoraRegex: SoraUncopyable {
     public:
         enum Options {
             // case insensitive matching

@@ -17,11 +17,11 @@
 #include "SoraPlatform.h"
 #include "SoraAutoPtr.h"
 #include "SoraStream.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
 
-	class SORA_API SoraMemoryBuffer: uncopyable {
+	class SORA_API SoraMemoryBuffer: SoraUncopyable {
 	public:
 		SoraMemoryBuffer();
 		SoraMemoryBuffer(void* pData, ulong32 _length);

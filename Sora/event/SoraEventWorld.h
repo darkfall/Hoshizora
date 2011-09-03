@@ -12,7 +12,7 @@
 #include "SoraPlatform.h"
 #include "SoraScopedPtr.h"
 #include "SoraEvent.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     
@@ -23,7 +23,7 @@ namespace sora {
      * Notice: Event go through SoraEventWorld must be constructed by SoraEventFactory
      **/
     
-    class SORA_API SoraEventWorld: uncopyable {
+    class SORA_API SoraEventWorld: SoraUncopyable {
     public:
         typedef SoraEventHandler* EventHandlerPtr;
         
@@ -67,7 +67,7 @@ namespace sora {
         SoraEventWorld(const Parameter& param = Parameter());
         ~SoraEventWorld();
         
-        void update(float32 dt);
+        void update(float dt);
         
         void enter(EventHandlerPtr eh);
         void leave(EventHandlerPtr eh);

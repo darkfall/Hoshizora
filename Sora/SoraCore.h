@@ -103,13 +103,13 @@ namespace sora {
         int32 getRenderSystemExtensionParam(int32 extension);
 
 		void	setFPS(int32 fps);
-		float32 getFPS();
-		float32 getDelta();
-        float32 getAbsoluteDelta();
-		float32 getTime();
+		float getFPS();
+		float getDelta();
+        float getAbsoluteDelta();
+		float getTime();
 		int32	getFrameCount();
-		void	setTimeScale(float32 scale);
-		float32 getTimeScale();
+		void	setTimeScale(float scale);
+		float getTimeScale();
 		uint64  getCurrentSystemTime();
         void    setVerticalSync(bool flag);
 
@@ -139,18 +139,18 @@ namespace sora {
 		void                detachShaderContext();
 
 		SoraSprite* createSprite (const SoraWString& sPath);
-        void renderSprite(const SoraWString& path, float32 x=0.f, float32 y=0.f);
+        void renderSprite(const SoraWString& path, float x=0.f, float y=0.f);
 
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
 
-        void renderLine     (float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
-		void renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
-        void fillBox        (float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
+        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+        void fillBox        (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
         
 		void setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
-		void setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=1.f, float32 vscale=1.f);
+		void setTransform	(float x=0.f, float y=0.f, float dx=0.f, float dy=0.f, float rot=0.f, float hscale=1.f, float vscale=1.f);
 		
 		void pushTransformMatrix();
 		void popTransformMatrix();
@@ -177,10 +177,10 @@ namespace sora {
 		static void     setRandomSeed(int32 seed);
 		static int32    getRandomSeed();
 		static int32    randomInt(int32 min, int32 max);
-		static float32  randomFloat(float32 min, float32 max);
+		static float  randomFloat(float min, float max);
 		static int32    randomIntNoRange();
-		/*generates a float32 random number range [0, 1] using SFMT*/
-		static float32  randomFloatNoRange();
+		/*generates a float random number range [0, 1] using SFMT*/
+		static float  randomFloatNoRange();
 
 		int32 getScreenWidth();
 		int32 getScreenHeight();
@@ -203,10 +203,10 @@ namespace sora {
 		bool    isFullscreen();
 
 		// inputs
-		void	getMousePos(float32 *x, float32 *y);
-		float32 getMousePosX();
-		float32 getMousePosY();
-		void	setMousePos(float32 x, float32 y);
+		void	getMousePos(float *x, float *y);
+		float getMousePosX();
+		float getMousePosY();
+		void	setMousePos(float x, float y);
 		int		getMouseWheel();
 		bool	isMouseOver();
 		bool	keyDown(int32 key);
@@ -258,7 +258,7 @@ namespace sora {
         void delJoystickListener(SoraJoystickListener* listener);
         
         
-        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
+        void setViewPoint(float x=0.f, float y=0.f, float z=0.f);
         void execute(const SoraString& appPath, const SoraString& args);
         void snapshot(const SoraString& path);
 		/*
@@ -357,8 +357,8 @@ namespace sora {
 
         bool bMainScene;
 		bool bFrameSync;
-		float32 mTime;
-        float32 mTimeScale;
+		float mTime;
+        float mTimeScale;
 
 		SoraWindowInfoBase* mMainWindow;
         SoraShaderContext* mPrevShaderContext;

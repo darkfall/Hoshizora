@@ -2,7 +2,7 @@
  *  SoraShader.h
  *  SoraPureCore
  *
- *  Created by griffin clare on 11/21/10.
+ *  Created by Robert Bu on 11/21/10.
  *  Copyright 2010 GameMaster&. All rights reserved.
  *
  */
@@ -12,10 +12,10 @@
 #define SORA_SHADER_H__
 
 #include "SoraPlatform.h"
-#include "AutoContainer.h"
+#include "SoraAutoContainer.h"
 #include "SoraNamedObject.h"
 #include "SoraAutoPtr.h"
-#include "RefCounted.h"
+#include "SoraRefCounted.h"
 
 #include <list>
 
@@ -52,7 +52,7 @@ namespace sora {
 			@param size, the size of the value array
 			@retval, succeed or not
 		 */
-		virtual bool setParameterfv(const char* name, float32* val, uint32 size) = 0;
+		virtual bool setParameterfv(const char* name, float* val, uint32 size) = 0;
 		/*
 			Set a parameteri
 			@param name, the name of the parameter to set
@@ -62,13 +62,13 @@ namespace sora {
 		 */
 		virtual bool setParameteriv(const char* name, int32* val, uint32 size) = 0;
         
-        virtual bool getParameterfv(const char* name, float32* val, uint32 size) = 0;
+        virtual bool getParameterfv(const char* name, float* val, uint32 size) = 0;
         virtual bool getParameteriv(const char* name, int32* val, uint32 size) = 0;
 		
-		bool setParameter1f(const char* name, float32 v1);
-		bool setParameter2f(const char* name, float32 v1, float32 v2);
-		bool setParameter3f(const char* name, float32 v1, float32 v2, float32 v3);
-		bool setParameter4f(const char* name, float32 v1, float32 v2, float32 v3, float32 v4);
+		bool setParameter1f(const char* name, float v1);
+		bool setParameter2f(const char* name, float v1, float v2);
+		bool setParameter3f(const char* name, float v1, float v2, float v3);
+		bool setParameter4f(const char* name, float v1, float v2, float v3, float v4);
 
 		bool setParameter1i(const char* name, int32 v1);
 		bool setParameter2i(const char* name, int32 v1, int32 v2);

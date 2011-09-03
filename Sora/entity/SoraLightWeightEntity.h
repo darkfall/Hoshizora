@@ -71,6 +71,7 @@ namespace sora {
         virtual void render();
         virtual uint32 update(float dt);
         virtual void onUpdate(float dt);
+        virtual void onMessage(SoraMessageEvent* evt);
         
         size_t getPropertySize() const;
         bool hasProperty(const PropertyId& pid);
@@ -100,7 +101,9 @@ namespace sora {
     
     template<typename T>
     inline void SoraLightWeightEntity::sendMessage(const MessageIdType& message, const T& data) {
-        mComponents.sendMessage(message, data);
+        SoraMessageEvent mssg(mssg, data);
+        this->onMessage(&mssg);
+        mComponents.sendMessage(&mssg);
     }
     
     template<typename T>

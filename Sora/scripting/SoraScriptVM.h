@@ -11,7 +11,7 @@
 
 #include "../SoraPlatform.h"
 #include "../SoraAutoPtr.h"
-#include "../uncopyable.h"
+#include "../SoraUncopyable.h"
 
 namespace sora {
     
@@ -32,7 +32,7 @@ namespace sora {
         virtual void setData(const SoraString& data) = 0;
     };
     
-    class SORA_API SoraScriptVM: uncopyable {
+    class SORA_API SoraScriptVM: SoraUncopyable {
     public:
         virtual ~SoraScriptVM() {}
         

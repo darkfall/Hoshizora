@@ -12,13 +12,13 @@
 #include "SoraPlatform.h"
 #include "SoraSprite.h"
 #include "SoraAutoUpdate.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 #include <map>
 
 namespace sora {
     
-    const float32 DefaultAutoReleaseTime = 10.f;
+    const float DefaultAutoReleaseTime = 10.f;
     
     class SoraFastRenderer: public SoraAutoUpdate {
     protected:
@@ -28,24 +28,24 @@ namespace sora {
     public:        
         static SoraFastRenderer* Instance();
      
-        void renderSprite(const SoraWString& path, float32 x=0.f, float32 y=0.f);
+        void renderSprite(const SoraWString& path, float x=0.f, float y=0.f);
         
         /**
          * Set the auto release of the cached sprites
          * If a sprite have not been used for a long time (larger than auto release time)
          * It would be purged from the memory
          **/
-        void    setAutoReleaseTime(float32 time);
-        float32 getAutoReleaseTime() const;
+        void    setAutoReleaseTime(float time);
+        float getAutoReleaseTime() const;
         
-        void onUpdate(float32 dt);
+        void onUpdate(float dt);
         
         const SoraString getName() const {
             return "FastRenderer";
         }
         
     private:
-        float32 mAutoReleaseTime;
+        float mAutoReleaseTime;
         
         struct SpriteInfo {
             SpriteInfo():
@@ -54,9 +54,9 @@ namespace sora {
             }
             
             SoraSprite* mSprite;
-            float32 mIdleTime;
+            float mIdleTime;
         };
-        typedef std::map<stringId, SpriteInfo> SpriteCacheMap;
+        typedef std::map<SoraStringId, SpriteInfo> SpriteCacheMap;
         SpriteCacheMap mSpriteCache;
     };
     

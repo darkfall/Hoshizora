@@ -155,7 +155,7 @@ namespace sora {
             for(int i=0; i<vertexCount-1; ++i) {
                 b2Vec2 ru = B2CorToPixel(vertices[i]);
                 b2Vec2 rl = B2CorToPixel(vertices[i+1]);
-                sora::SORA->renderRect(ru.x, ru.y, rl.x, rl.y+1.f, rl.x-ru.x, CARGB(1.f, color.r, color.g, color.b));
+                sora::SORA->renderBox(ru.x, ru.y, rl.x, rl.y+1.f, rl.x-ru.x, CARGB(1.f, color.r, color.g, color.b));
             }
         }
         
@@ -164,7 +164,7 @@ namespace sora {
             for(int i=0; i<vertexCount-1; ++i) {
                 b2Vec2 ru = B2CorToPixel(vertices[i]);
                 b2Vec2 rl = B2CorToPixel(vertices[i+1]);
-                sora::SORA->renderRect(ru.x, ru.y, rl.x, rl.y+1.f, rl.x-ru.x, CARGB(1.f, color.r, color.g, color.b));
+                sora::SORA->renderBox(ru.x, ru.y, rl.x, rl.y+1.f, rl.x-ru.x, CARGB(1.f, color.r, color.g, color.b));
             }
         }
         
@@ -180,7 +180,7 @@ namespace sora {
         
         /// Draw a line segment.
         void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color) {
-            sora::SORA->renderRect(p1.x, p1.y, p2.x, p2.y, p2.x-p1.x, CARGB(1.f, color.r, color.g, color.b));
+            sora::SORA->renderBox(p1.x, p1.y, p2.x, p2.y, p2.x-p1.x, CARGB(1.f, color.r, color.g, color.b));
         }
         
         /// Draw a transform. Choose your own length scale.

@@ -17,7 +17,7 @@
 
 namespace sora {
     
-    class SoraCondition: public uncopyable {
+    class SoraCondition: public SoraUncopyable {
     public:
         explicit SoraCondition(SoraMutexLock& mutex):
         _mutex(mutex) {

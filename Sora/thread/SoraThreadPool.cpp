@@ -7,7 +7,7 @@
 //
 
 #include "SoraThreadPool.h"
-#include "common.h"
+#include "SoraCommon.h"
 #include "SoraLogger.h"
 
 #include <stdio.h>

@@ -17,7 +17,7 @@
 
 #include "SoraLuaStateManager.h"
 #include "SoraLuaObject.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 namespace sora {
 
@@ -34,8 +34,8 @@ namespace sora {
         
         ulong32 createWidget(const SoraString& ident, const SoraString& id);
         
-        void setGlobalAlpha(float32 alpha);
-        float32 getGlobalAlpha();
+        void setGlobalAlpha(float alpha);
+        float getGlobalAlpha();
         
         void setWidgetAlpha(ulong32 h, int32 alpha);
         int32 getWidgetAlpha(ulong32 h);
@@ -105,7 +105,7 @@ namespace sora {
         void showWidgetPart(ulong32 h, int32 x, int32 y, int32 wd, int32 ht);
         
         bool canWidgetSetCaption(gcn::Widget* Widget, const SoraString& caption);
-        bool canWidgetSetValue(gcn::Widget* Widget, float32 val);
+        bool canWidgetSetValue(gcn::Widget* Widget, float val);
         bool canWidgetSetOpaque(gcn::Widget* widget, bool flag);
         
         void setWidgetOpaque(ulong32 h, bool flag);
@@ -114,7 +114,7 @@ namespace sora {
         void setWidgetCaption(ulong32 h, const SoraString& caption);
         SoraString getWidgetCaption(ulong32 h);
         
-        void setWidgetValue(ulong32 h, float32 val);
+        void setWidgetValue(ulong32 h, float val);
     } // namespace guiwrapper
     
     

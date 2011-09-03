@@ -1,5 +1,5 @@
 /*
- *  uncopyable.h
+ *  SoraUncopyable.h
  *  Sora
  *
  *  Created by GriffinBu on 12/18/10.
@@ -13,13 +13,13 @@
 
 namespace sora {
     
-    class SORA_API uncopyable {
+    class SORA_API SoraUncopyable {
 	protected:
-		uncopyable() {}
+		SoraUncopyable() {}
 		
     private:
-        const uncopyable& operator=(const uncopyable&);
-        uncopyable(const uncopyable&);
+        const SoraUncopyable& operator=(const SoraUncopyable&);
+        SoraUncopyable(const SoraUncopyable&);
     };
 }
 

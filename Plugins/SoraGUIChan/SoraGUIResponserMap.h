@@ -20,7 +20,7 @@ namespace sora {
 		}
 
 		void registerResponser(const SoraString& id, SoraGUIResponser* responser) {
-			_resMap.insert(std::make_pair<stringId, SoraGUIResponser*>(str2id(id), responser));
+			_resMap.insert(std::make_pair<SoraStringId, SoraGUIResponser*>(str2id(id), responser));
 		}
 		SoraGUIResponser* getResponser(const SoraString& id) {
             ResponserMap::iterator itResponser = _resMap.find(str2id(id));
@@ -31,7 +31,7 @@ namespace sora {
 
         // in xml, use responser = "@handleType=src" to indicate this gui uses a external responser
 		void registerExternalResponser(const SoraString& handleType, SoraGUIResponserExtern* responser) {
-			_extMap.insert(std::make_pair<stringId, SoraGUIResponserExtern*>(str2id(handleType), responser));
+			_extMap.insert(std::make_pair<SoraStringId, SoraGUIResponserExtern*>(str2id(handleType), responser));
 		}
         SoraGUIResponserExtern* getExternalResponser(const SoraString& handleType) {
             ExternalResponserMap::iterator itResponser = _extMap.find(str2id(handleType));
@@ -40,7 +40,7 @@ namespace sora {
 			return 0;
         }
         
-        stringId getHandleSrcFromWidgetHandle(ulong32 handle) {
+        SoraStringId getHandleSrcFromWidgetHandle(ulong32 handle) {
             HandleSrcMap::iterator itHandleSrc = widgetSrc.find(handle);
             if(itHandleSrc != widgetSrc.end())
                 return itHandleSrc->second;
@@ -52,13 +52,13 @@ namespace sora {
         }
         
 	private:
-        typedef hash_map<ulong32, stringId> HandleSrcMap;
+        typedef hash_map<ulong32, SoraStringId> HandleSrcMap;
         HandleSrcMap widgetSrc;
         
-		typedef std::map<stringId, SoraGUIResponser*> ResponserMap;
+		typedef std::map<SoraStringId, SoraGUIResponser*> ResponserMap;
 		ResponserMap _resMap;
     
-        typedef std::map<stringId, SoraGUIResponserExtern*> ExternalResponserMap;
+        typedef std::map<SoraStringId, SoraGUIResponserExtern*> ExternalResponserMap;
 		ExternalResponserMap _extMap;
 	};
 } // namespace sora

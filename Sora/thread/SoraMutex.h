@@ -10,7 +10,7 @@
 #define Sora_SoraMutex_h
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 
 #if !defined(OS_WIN32) || defined(SORA_WIN32_PTHREAD)
@@ -41,7 +41,7 @@ namespace sora {
         }
     };
     
-    class SoraMutexGuard: uncopyable {
+    class SoraMutexGuard: SoraUncopyable {
     public:
         explicit SoraMutexGuard(SoraMutexLock& mutex): _mutex(mutex) {
             _mutex.lock();

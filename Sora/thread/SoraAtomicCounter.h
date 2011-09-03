@@ -10,7 +10,7 @@
 #define Sora_SoraAutomicCounter_h
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 #include "SoraMutex.h"
 

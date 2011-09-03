@@ -1,6 +1,6 @@
 #include "SoraEventManager.h"
 
-#include "hash.h"
+#include "util/SoraHash.h"
 
 //#include "SoraLuaStateManager.h"
 
@@ -117,11 +117,11 @@ namespace sora {
 		}
 	}
 	
-	void SoraEventManager::createTimerEvent(SoraEventHandler* handler, float32 time, bool repeat) {
+	void SoraEventManager::createTimerEvent(SoraEventHandler* handler, float time, bool repeat) {
 		tevList.push_back(new SoraTimerEventInfo(handler, time, 0.f, repeat)); 
 	}
 	
-	void SoraEventManager::registerTimerEvent(SoraEventHandler* handler, SoraTimerEvent* ev, float32 time, bool repeat) {
+	void SoraEventManager::registerTimerEvent(SoraEventHandler* handler, SoraTimerEvent* ev, float time, bool repeat) {
 		tevList.push_back(new SoraTimerEventInfo(handler, ev, time, 0.f, repeat)); 
 	}
 	
@@ -130,7 +130,7 @@ namespace sora {
 		(*ittev) = 0;
 	}
 	
-	void SoraEventManager::update(float32 dt) {
+	void SoraEventManager::update(float dt) {
 		if(tevList.size() != 0) {
 			TIMER_EVENT_LIST::iterator ittev = tevList.begin();
 			while(ittev != tevList.end()) {
@@ -185,8 +185,8 @@ namespace sora {
         }
 	}
 	
-	void SoraEventManager::SoraTimerEventInfo::update(float32 dt) {
-		float32 timepass = currTime + dt;
+	void SoraEventManager::SoraTimerEventInfo::update(float dt) {
+		float timepass = currTime + dt;
         unsigned int step = static_cast<unsigned int>(timepass / dt);
         
         totalTime += dt;
@@ -219,7 +219,7 @@ namespace sora {
 		mFileChangeEventPublisher->delEventHandler(handler);
 	}
 	
-	void SORACALL SoraEventManager::setFileChangeDetectionInterval(float32 interval) {
+	void SORACALL SoraEventManager::setFileChangeDetectionInterval(float interval) {
 		if(!mFileChangeEventPublisher)
 			return;
 		

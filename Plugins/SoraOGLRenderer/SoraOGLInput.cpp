@@ -23,26 +23,26 @@ namespace sora {
 		glfwSetMouseButtonCallback(glfwMouseCallback);
 	}
 
-	void SoraOGLInput::getMousePos(float32 *x, float32 *y) {
+	void SoraOGLInput::getMousePos(float *x, float *y) {
 		int32 ix, iy;
 		glfwGetMousePos(&ix, &iy);
-		*x = (float32)ix; *y = (float32)iy; 
+		*x = (float)ix; *y = (float)iy; 
 	}
 
-	void SoraOGLInput::setMousePos(float32 x, float32 y) {
+	void SoraOGLInput::setMousePos(float x, float y) {
 		glfwSetMousePos((int32)x, (int32)y);
 	}
 
-	float32 SoraOGLInput::getMousePosX() {
+	float SoraOGLInput::getMousePosX() {
 		int32 ix, iy;
 		glfwGetMousePos(&ix, &iy);
-		return (float32)ix;
+		return (float)ix;
 	}
 
-	float32 SoraOGLInput::getMousePosY() {
+	float SoraOGLInput::getMousePosY() {
 		int32 ix, iy;
 		glfwGetMousePos(&ix, &iy);
-		return (float32)iy;
+		return (float)iy;
 	}
 
 	int32 SoraOGLInput::getMouseWheel() {

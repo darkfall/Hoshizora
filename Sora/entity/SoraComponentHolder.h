@@ -12,11 +12,11 @@
 #include "SoraComponent.h"
 #include "../message/SoraMessageEvent.h"
 
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     
-    struct SORA_API SoraComponentHolder: uncopyable {
+    struct SORA_API SoraComponentHolder: SoraUncopyable {
         SoraComponentHolder() {}
         
         /**
@@ -41,7 +41,7 @@ namespace sora {
         void sendMessage(SoraMessageEvent* message);
         void sendMessageTo(const SoraString& to, SoraMessageEvent* message);
         
-        void onUpdate(float32 dt);
+        void onUpdate(float dt);
         void onRender();
         
         /**
