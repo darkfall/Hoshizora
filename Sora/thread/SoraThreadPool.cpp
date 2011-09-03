@@ -2,12 +2,12 @@
 //  SoraThreadPool.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/6/11.
+//  Created by Robert Bu on 7/6/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #include "SoraThreadPool.h"
-#include "common.h"
+#include "SoraCommon.h"
 #include "SoraLogger.h"
 
 #include <stdio.h>

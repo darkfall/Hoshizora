@@ -14,7 +14,6 @@
 #include "Debug/SoraAutoProfile.h"
 
 #include "cmd/SoraConsole.h"
-#include "SoraSoundManager/SoundManagerLuaExport.h"
 #include "SoraShaderManager.h"
 
 #include "SoraModifierAdapter.h"
@@ -26,6 +25,14 @@
 
 #include "signal/SoraSignal.h"
 
+#include "entity/SoraEntity.h"
+#include "../Components/RenderComponent.h"
+#include "../Components/PositionComponent.h"
+
+#include "SoraStringTokenlizer.h"
+
+#include "SoraParticleSystem2/Emitters/CircleEmitter.h"
+
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();
     
@@ -36,15 +43,30 @@ mainWindow::mainWindow() {
 mainWindow::~mainWindow() {
 }
 
-float32 cx = 300.f, cy = 400.f, cz = 1.f;
-void transform3d(float32& x, float32& y, float32 z) {
+float cx = 300.f, cy = 400.f, cz = 1.f;
+void transform3d(float& x, float& y, float z) {
 	float scale = (cz - z) / cz;
 	x = (x - cx) * scale + cx;
 	y = (y - cy) * scale + cy;
 	z = 0.f;
 }
 
+sora::SoraEntity entity;
+
+void handleCommand(sora::SoraConsoleEvent* evt) {
+    sora::SoraStringTokenlizer token(evt->getParams(), " ");
+    if(token.size() == 2) {
+        entity.setProperty(token.front(), (float)atof(token.back().c_str()));
+        sora::SoraPropertyBase* p = entity.getPropertyBase(token.front());
+        evt->pushResult(std::string("Property ")+token.front()+" to "+p->toString());
+    }
+}
+
+SORA_DEF_CONSOLE_EVT_FUNC(handleCommand, "setprop");
+
 bool mainWindow::updateFunc() {
+    
+    entity.update(sora::SORA->getDelta());
     
     mScene1->update(sora::SORA->getDelta());
     return false;
@@ -60,6 +82,7 @@ bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
     
+    entity.render();
 
     sora::SORA->endScene();
     
@@ -77,6 +100,16 @@ SORA_DEF_CONSOLE_EVT_FUNC(myFunc, "test");
 #include "timer/SoraSimpleTimerManager.h"
 
 void mainWindow::init() {
+    
+    sora::particle::CircleEmitter* emitter = new sora::particle::CircleEmitter;
+    emitter->setPosition(300, 300);
+    emitter->setSprite(L"textures/Particle004.png");
+    emitter->setEmitInterval(1.f);
+    emitter->setLifeTime(10.f);
+    emitter->fireAt(300, 300);
+    emitter->setEmitNum(10);
+    entity.addComponent(emitter);
+    
     sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);

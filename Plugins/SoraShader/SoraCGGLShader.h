@@ -28,9 +28,9 @@ namespace sora {
 	public:
 		
 		void setTexture(const SoraString& decalName, ulong32 tex);
-		bool setParameterfv(const char* name, float32* val, uint32 size);
+		bool setParameterfv(const char* name, float* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
-        bool getParameterfv(const char* name, float32* val, uint32 size);
+        bool getParameterfv(const char* name, float* val, uint32 size);
         bool getParameteriv(const char* name, int32* val, uint32 size);
         
 	private:

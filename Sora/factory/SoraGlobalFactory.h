@@ -2,7 +2,7 @@
 //  SoraGlobalJsonFactory.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/19/11.
+//  Created by Robert Bu on 8/19/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -19,7 +19,7 @@ namespace sora {
 #define REG_GLOBAL_PRODUCT_1(T, NAME, FN, A0) \
     SoraAbstractFactory<T, A0>::Instance()->reg(name, fn);
 
-#defien REG_GLOBAL_PRODUCT_2(T, name, FN, A1) \
+#defien REG_GLOBAL_PRODUCT_2(T, name, FN, A0, A1) \
     SoraAbstractFactory<T, A0, A1>::Instance()->reg(name, fn);
     
 } // namespace sora

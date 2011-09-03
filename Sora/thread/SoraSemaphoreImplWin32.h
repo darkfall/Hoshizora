@@ -2,7 +2,7 @@
 //  SoraSemaphoreImplWin32.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/8/11.
+//  Created by Robert Bu on 7/8/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 
 namespace sora {
     
-    class SoraSemaphoreImpl: public uncopyable {
+    class SoraSemaphoreImpl: public SoraUncopyable {
     public:
         SoraSemaphoreImpl(int n, int max) {
             assert( n>=0 && max>0 && n<=max);

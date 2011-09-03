@@ -2,7 +2,7 @@
 //  SoraNotification.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/11/11.
+//  Created by Robert Bu on 7/11/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #define Sora_SoraNotification_h
 
 #include "SoraPlatform.h"
-#include "RefCounted.h"
+#include "SoraRefCounted.h"
 #include "SoraAutoPtr.h"
 
 namespace sora {

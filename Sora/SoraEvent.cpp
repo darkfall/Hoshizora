@@ -136,7 +136,7 @@ namespace sora {
         
     }
     
-    void SoraEventHandler::onUpdate(float32 dt) {
+    void SoraEventHandler::onUpdate(float dt) {
         
     }
     

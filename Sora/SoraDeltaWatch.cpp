@@ -2,7 +2,7 @@
 //  SoraDeltaWatch.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/31/11.
+//  Created by Robert Bu on 7/31/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -13,7 +13,7 @@ namespace sora {
     
     template<int FRAME_COUNT>
     void SoraDeltaWatch<FRAME_COUNT>::update() {
-        float32 delta = SORA->getDelta();
+        float delta = SORA->getDelta();
         
         mFrames.push_back(delta);
         if(mFrames.size() >= FRAME_COUNT)
@@ -27,7 +27,7 @@ namespace sora {
     }
     
     template<int FRAME_COUNT>
-    float32 SoraDeltaWatch<FRAME_COUNT>::getDelta() const {
+    float SoraDeltaWatch<FRAME_COUNT>::getDelta() const {
         return mCurrDelta;
     }
     

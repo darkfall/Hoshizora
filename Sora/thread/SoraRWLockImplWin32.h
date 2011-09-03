@@ -2,7 +2,7 @@
 //  SoraRWLockImplWin32.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/7/11.
+//  Created by Robert Bu on 7/7/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -18,7 +18,7 @@
 
 namespace sora {
     
-    class SoraRWLockImpl: public uncopyable {
+    class SoraRWLockImpl: public SoraUncopyable {
     protected:
         SoraRWLockImpl():
         readers(0),
@@ -50,7 +50,7 @@ namespace sora {
                     ReleaseMutex(mutex);
                     break;
                 default:
-                    THROW_SORA_EXCEPTION("Cannot lock reader/writer lock");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock reader/writer lock");
             }
         }
         
@@ -71,7 +71,7 @@ namespace sora {
                     break;
                 default:
                     removeWriter();
-                    THROW_SORA_EXCEPTION("Cannot lock reader/writer lock");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock reader/writer lock");
             }
         }
         
@@ -86,7 +86,7 @@ namespace sora {
                     ReleaseMutex(mutex);
                     break;
                 default:
-                    THROW_SORA_EXCEPTION("Cannot unlock reader/writer lock");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Cannot unlock reader/writer lock");
             }
         }
         
@@ -103,7 +103,7 @@ namespace sora {
                     ReleaseMutex(mutex);
                     break;
                 default:
-                    THROW_SORA_EXCEPTION("Cannot lock reader/writer lock");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock reader/writer lock");
             }
         }
         
@@ -115,7 +115,7 @@ namespace sora {
                     ReleaseMutex(mutex);
                     break;
                 default:
-                    THROW_SORA_EXCEPTION("Cannot lock reader/writers lock");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock reader/writers lock");
             }
         }
         

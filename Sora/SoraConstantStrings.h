@@ -9,7 +9,7 @@
 #ifndef SORA_CONSTANT_STRINGS_H_
 #define SORA_CONSTANT_STRINGS_H_
 
-#include "stringId.h"
+#include "SoraStringId.h"
 
 namespace sora {
 	/*

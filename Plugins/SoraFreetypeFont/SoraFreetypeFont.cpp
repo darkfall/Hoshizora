@@ -184,17 +184,17 @@ namespace sora {
 		return idx;
 	}
 
-	float32 SoraFTFont::getWidthFromCharacter(wchar_t c, bool bOriginal) {
+	float SoraFTFont::getWidthFromCharacter(wchar_t c, bool bOriginal) {
 		unsigned int n = getGlyphByChar(c);
 		if(n > 0 && n < ft_glyphs.size()) {
 			int w = ft_glyphs[n-1].texw;
 			int left = ft_glyphs[n-1].left;
-			if (w + left > 0) return (float32)(w+left);
+			if (w + left > 0) return (float)(w+left);
 		}
 		if(c >= 0x2000) {
-			return (float32)ft_glyphs[0].size;
+			return (float)ft_glyphs[0].size;
 		} else {
-			return (float32)ft_glyphs[0].size / 2;
+			return (float)ft_glyphs[0].size / 2;
 		}
 	}
 
@@ -206,23 +206,23 @@ namespace sora {
 		sprite->setColor(c, i);
 	}
 	
-	void SoraFTFont::setKerningHeight(float32 kh) {
+	void SoraFTFont::setKerningHeight(float kh) {
 		kerningHeight = kh;
 	}
 
-	float32 SoraFTFont::getKerningHeight() const {
+	float SoraFTFont::getKerningHeight() const {
 		return kerningHeight;
 	}
 
-	void SoraFTFont::setKerningWidth(float32 kw) {
+	void SoraFTFont::setKerningWidth(float kw) {
 		kerningWidth = kw;
 	}
 	
-	float32 SoraFTFont::getKerningWidth() const {
+	float SoraFTFont::getKerningWidth() const {
 		return kerningWidth;
 	}
 
-	void SoraFTFont::render(float32 x, float32 y, int32 align, const wchar_t* pwstr) {
+	void SoraFTFont::render(float x, float y, int32 align, const wchar_t* pwstr) {
 		float ox = x;
 		if(align != FONT_ALIGNMENT_LEFT) {
 			if(align == FONT_ALIGNMENT_RIGHT)
@@ -298,7 +298,7 @@ namespace sora {
                         }
                     }
                 } else {
-                    float32 dist = (getWidthFromCharacter(*pwstr) + kerningWidth);
+                    float dist = (getWidthFromCharacter(*pwstr) + kerningWidth);
                     x += dist * cosf(lineRotation);
                     y += dist * sinf(lineRotation);
                 }       
@@ -307,7 +307,7 @@ namespace sora {
 		}
 	}
 
-	void SoraFTFont::print(float32 x, float32 y, int32 align, const wchar_t* format, ...) {
+	void SoraFTFont::print(float x, float y, int32 align, const wchar_t* format, ...) {
 		va_list l;
 		va_start(l, format);
         
@@ -317,7 +317,7 @@ namespace sora {
 		render(x, y, align, text);
 	}
 
-	void SoraFTFont::render(float32 x, float32 y, const wchar_t* pwstr, bool bhcenter, bool bvcenter) {
+	void SoraFTFont::render(float x, float y, const wchar_t* pwstr, bool bhcenter, bool bvcenter) {
 		float ox = x;
 		if(bhcenter || bvcenter) {
 			if(bhcenter)
@@ -397,7 +397,7 @@ namespace sora {
                         }
                     }
                 } else {
-                    float32 dist = (getWidthFromCharacter(*pwstr) + kerningWidth);
+                    float dist = (getWidthFromCharacter(*pwstr) + kerningWidth);
                     x += dist * cosf(lineRotation);
                     y += dist * sinf(lineRotation);
                 }
@@ -406,7 +406,7 @@ namespace sora {
 		}
 	}
 
-	float32 SoraFTFont::getStringWidth(const wchar_t* pwstr) {
+	float SoraFTFont::getStringWidth(const wchar_t* pwstr) {
 		float width = 0.f;
 		for(const wchar_t* p = pwstr; *p; ++p) {
 			if(*p == L'\n')
@@ -416,7 +416,7 @@ namespace sora {
 		return width;
 	}
 	
-	float32 SoraFTFont::getStringHeight(const wchar_t* pwstr) {
+	float SoraFTFont::getStringHeight(const wchar_t* pwstr) {
 		float height = getHeight();
 		float w = 0.f;
 		for(const wchar_t* p = pwstr; *p; ++p) {
@@ -435,9 +435,9 @@ namespace sora {
 		return height;
 	}
 
-	float32 SoraFTFont::getHeight() const {
+	float SoraFTFont::getHeight() const {
 		if(!ft_glyphs.empty())
-			return (float32)size+kerningHeight;
+			return (float)size+kerningHeight;
 		return 0.f;
 	}
 
@@ -449,31 +449,31 @@ namespace sora {
 		size = s;
 	}
 	
-	void SoraFTFont::setCharRotation(float32 rot) {
+	void SoraFTFont::setCharRotation(float rot) {
 		charRotation = DGR_RAD(rot);
 	}
 	
-	void SoraFTFont::setScale(float32 s) {
+	void SoraFTFont::setScale(float s) {
 		scale = s;
 	}
     
-    void SoraFTFont::setLineWidth(float32 width) {
+    void SoraFTFont::setLineWidth(float width) {
         lineWidth = width;
     }
     
-    float32 SoraFTFont::getLineWidth() const {
+    float SoraFTFont::getLineWidth() const {
         return lineWidth;
     }
     
-    float32 SoraFTFont::getCharRotation() const {
+    float SoraFTFont::getCharRotation() const {
         return charRotation;
     }
     
-    float32 SoraFTFont::getScale() const {
+    float SoraFTFont::getScale() const {
         return scale;
     }
 
-    void SoraFTFont::setLineRotation(float32 rot, bool rotateChar) {
+    void SoraFTFont::setLineRotation(float rot, bool rotateChar) {
         lineRotation = DGR_RAD(rot);
         if(rotateChar)
             setCharRotation(rot);
@@ -481,7 +481,7 @@ namespace sora {
             setCharRotation(0.f);
     }
     
-    float32 SoraFTFont::getLineRotation() const {
+    float SoraFTFont::getLineRotation() const {
         return lineRotation;
     }
 } // namespace sora

@@ -37,7 +37,7 @@ namespace sora {
             delete pCanvasSprite;
     }
 
-	void SoraBaseCanvas::setZ(float32 z) {
+	void SoraBaseCanvas::setZ(float z) {
         if(pCanvasSprite)
             pCanvasSprite->setZ(z);
 	}
@@ -54,7 +54,7 @@ namespace sora {
         }
     }
     
-    uint32 SoraBaseCanvas::update(float32 dt) {
+    uint32 SoraBaseCanvas::update(float dt) {
         if(pCanvasSprite)
             pCanvasSprite->update(dt);
 		return 0;

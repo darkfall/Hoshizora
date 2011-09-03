@@ -74,45 +74,45 @@ namespace sora {
 		 * @param align Alignment specificator. May be one of these: HGETEXT_LEFT, HGETEXT_RIGHT, HGETEXT_CENTER. 
 		 * @param string the string to be rendered
 		*/
-		void	render(float32 x, float32 y, const wchar_t* text, bool hcenter = false, bool vcenter = false);
+		void	render(float x, float y, const wchar_t* text, bool hcenter = false, bool vcenter = false);
 		/**
 			render with alignments
 		*/
-		void	print(float32 x, float32 y, int32 align, const wchar_t *format, ...);
-		void	render(float32 x, float32 y, int32 align, const wchar_t* text);
+		void	print(float x, float y, int32 align, const wchar_t *format, ...);
+		void	render(float x, float y, int32 align, const wchar_t* text);
 
 		void	setColor(ulong32 dwColor, int32 i = -1);
 		ulong32	getColor(int32 i = 0);
 
 		
-		void	setKerningWidth(float32 kerning);
-		void	setKerningHeight(float32 kerning);
+		void	setKerningWidth(float kerning);
+		void	setKerningHeight(float kerning);
 
-		float32	getKerningWidth() const;
-		float32	getKerningHeight() const;
+		float	getKerningWidth() const;
+		float	getKerningHeight() const;
 
-		float32	getStringWidth(const wchar_t* text);
-		float32 getStringHeight(const wchar_t* pwstr);
-		float32	getHeight() const;
+		float	getStringWidth(const wchar_t* text);
+		float getStringHeight(const wchar_t* pwstr);
+		float	getHeight() const;
 
 		uint32	getFontSize() const;
 		void	setFontSize(uint32 size);
 	
-		float32	getWidthFromCharacter(wchar_t c, bool original = false);
+		float	getWidthFromCharacter(wchar_t c, bool original = false);
 		
 		// font effects
 		
-		void setScale(float32 scale);
-		void setCharRotation(float32 rot);
+		void setScale(float scale);
+		void setCharRotation(float rot);
         
-        void setLineWidth(float32 width);
-        float32 getLineWidth() const;
+        void setLineWidth(float width);
+        float getLineWidth() const;
         
-        float32 getCharRotation() const;
-        float32 getScale() const;
+        float getCharRotation() const;
+        float getScale() const;
         
-        void setLineRotation(float32 rot, bool rotateChar=false);
-        float32 getLineRotation() const;
+        void setLineRotation(float rot, bool rotateChar=false);
+        float getLineRotation() const;
 		
 	private:
 		SoraFTFont();
@@ -121,9 +121,9 @@ namespace sora {
 		SoraCore* sora;
 		SoraSprite* sprite;
 				
-		float32 kerningWidth;
-		float32 kerningHeight;
-        float32 lineWidth;
+		float kerningWidth;
+		float kerningHeight;
+        float lineWidth;
 
 		bool attached;
 		uint32 size;		
@@ -134,9 +134,9 @@ namespace sora {
 		FTFace* ft_face;
 		std::vector<FTGlyph> ft_glyphs;
 		
-		float32 scale;
-		float32 charRotation;
-        float32 lineRotation;
+		float scale;
+		float charRotation;
+        float lineRotation;
 	};
 } // namespace sora
 

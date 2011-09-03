@@ -20,7 +20,7 @@ namespace sora {
 		SoraEventManager::Instance()->createTimerEvent(this, mCheckInternval, true);
 	}
 	
-	void SoraFileChangeEventPublisher::setInterval(float32 interval) {
+	void SoraFileChangeEventPublisher::setInterval(float interval) {
 		mCheckInternval = interval;
 		SoraEventManager::Instance()->unregisterTimerEvent(this);
 		SoraEventManager::Instance()->createTimerEvent(this, mCheckInternval, true);

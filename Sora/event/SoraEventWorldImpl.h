@@ -2,7 +2,7 @@
 //  SoraEventWorldImpl.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/5/11.
+//  Created by Robert Bu on 8/5/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraScopedPtr.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 #include <vector>
 
@@ -23,10 +23,10 @@ namespace sora {
     class SoraEventFactory;
     
     namespace detail {
-        struct EventWorldImpl: uncopyable {
+        struct EventWorldImpl: SoraUncopyable {
             virtual ~EventWorldImpl() {}
             
-            virtual void update(float32 dt) = 0;
+            virtual void update(float dt) = 0;
             virtual void enter(SoraEventHandler* handler) = 0;
             virtual void leave(SoraEventHandler* handler) = 0;
             
@@ -40,7 +40,7 @@ namespace sora {
 #ifdef SORA_ENABLE_MULTI_THREAD
     class SoraEventWorldImpl: public detail::EventWorldImpl {
     public:
-        void update(float32 dt);
+        void update(float dt);
         void enter(SoraEventHandler* handler);
         void leave(SoraEventHandler* handler);
         bool init();
@@ -58,7 +58,7 @@ namespace sora {
         SoraEventWorldImpl();
         ~SoraEventWorldImpl();
         
-        void update(float32 dt);
+        void update(float dt);
         void enter(SoraEventHandler* handler);
         void leave(SoraEventHandler* handler);
         bool init();

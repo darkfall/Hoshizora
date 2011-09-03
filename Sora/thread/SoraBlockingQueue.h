@@ -2,7 +2,7 @@
 //  SoraBlockingQueue.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/6/11.
+//  Created by Robert Bu on 7/6/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -20,7 +20,7 @@
 namespace sora {
     
     template<typename T>
-    class SoraBlockingQueue: uncopyable {
+    class SoraBlockingQueue: SoraUncopyable {
     public:
         SoraBlockingQueue():
         mutex(),

@@ -1,252 +1,191 @@
 //
 //  SoraProperty.h
-//  Sora
+//  SoraProperty
 //
-//  Created by Ruiwei Bu on 8/21/11.
-//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
+//  Created by Ruiwei Bu on 8/27/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#ifndef Sora_SoraProperty_h
-#define Sora_SoraProperty_h
+#ifndef SoraProperty_SoraProperty_h
+#define SoraProperty_SoraProperty_h
 
-#include "../SoraAny.h"
-#include "../SoraTypeInfo.h"
-#include "../SoraLogger.h"
-#include "../SoraException.h"
-#include "../signal/SoraSignal.h"
+#include <string>
 
-#include "../uncopyable.h"
+#include "SoraTypeSerializer.h"
 
-namespace sora {
-    /*    
-    class SoraProperty;
-        
-    struct SoraPropertyBase {
-        virtual const PropertyIdent& getName() const = 0;
-        
-        virtual SoraStringId getTypeIdentifier() const = 0;
-        
-        virtual void fromString(const PropertyIdent& str) = 0;
-        virtual PropertyIdent toString() = 0;
-    };
-        
-    namespace property {
+namespace sora  {
     
+    namespace property {
+        
         template<typename T>
         struct ValueHolder {
-            ValueHolder(const T& val, const PropertyIdent& name):
-            mValue(val),
-            mName(name) { }
-
             T mValue;
-            PropertyIdent mName;
+            std::string mName;
             
-            typedef ::sora::SoraSignal<void(const SoraProperty&, const T&)> ValueChangedSignalType;
-            ValueChangedSignalType mValueChangedSignal;
+            ValueHolder():
+            mValue(SoraTypeSerializer::defaultValue<T>()) {}
+            
+            ValueHolder(const std::string& name, const T& defaultValue):
+            mName(name),
+            mValue(defaultValue) {}
+            
+            ValueHolder<T>* clone() const {
+                return new ValueHolder<T>(mName, mValue);
+            }
         };
-    } // namespace property*/
+        
+    } // namespace property
     
-    struct SORA_API SoraPropertyInfo: uncopyable {
-        virtual ~SoraPropertyInfo() {
+    struct SoraPropertyBase {
+        
+        virtual ~SoraPropertyBase() {}
+        
+        virtual const std::string& getName() const = 0;
+    
+        virtual bool isNull() const = 0;
+        
+        virtual std::string toString() const =0;
+        virtual void setFromString(const std::string& value) = 0;
+        
+        virtual int getTypeId() const = 0;
             
-        }
-        
-        std::string getName() const {
-            return mName;
-        }
-        
-        std::string getDescription() const {
-            return mDescription;
-        }
-        
-        const std::type_info& getType() const {
-            return mType;
-        }
-        
-        bool isReadOnly() const {
-            return mReadOnly;
-        }
-        
-        SoraPropertyInfo(const std::string& name, const std::type_info& type, const std::string& description=std::string(), bool readonly=false):
-        mName(name),
-        mDescription(description),
-        mType(type),
-        mReadOnly(readonly) {
-            
-        }
-                
     private:
         std::string mName;
-        std::string mDescription;
-                
-        const std::type_info& mType;
-        bool mReadOnly;
     };
     
-    template<typename T>
-    struct SORA_API SoraProperty: public SoraPropertyInfo {
-        friend class SoraPropertyInfo;
+    template<typename T, class S=SoraTypeSerializer>
+    class SoraProperty: public SoraPropertyBase {
+    public:
+        typedef S Serializer;
         
-        SoraProperty(const std::string& name, const T& defaultValue, const std::string& description=std::string(), bool readonly=false):
-        SoraPropertyInfo(name, typeid(T), description, readonly),
-        mValue(defaultValue) {
-            
-        }
-
-        bool setValue(const T& v) {
-            if(isReadOnly())
-                return false;
-            
-            mValue = v;
-            return true;
-        }
-        
-        T getValue() const {
-            return AnyCast<T>(mValue);
-        }
-        
-        void setValue(const SoraAny& v) {
-            mValue = v;
-        }
-        
-    private:
-        SoraAny mValue;
-    };
-    
-    template<typename T>
-    SoraProperty<T>& TryCastProperty(SoraPropertyInfo& prop) {
-        if(typeid(T) != prop.getType()) {
-            THROW_SORA_EXCEPTION(BadCastException, std::string("Invalid cast between ")+typeid(T).name()+" "+prop.getType().name());
-        }
-        return static_cast<SoraProperty<T>& >(prop);
-    }
-    
-    template<typename T>
-    T TryGetProperty(const SoraPropertyInfo& prop) {
-        try {
-            SoraProperty<T>& prop = TryCastProperty<T>(prop);
-            return prop.getValue();
-        } catch(BadCastException) {
-            
-        }
-    }
-    
-    template<typename T>
-    bool TrySetProperty(SoraPropertyInfo& prop, const T& newVal) {
-        try {
-            SoraProperty<T>& prop = TryCastProperty<T>(prop);
-            prop.setValue(newVal);
-            return true;
-        } catch(BadCastException) {
-            return false;
-        }
-    }
-    
-    struct SoraPropertyPtr {
-        SoraPropertyPtr():
-        mProperty(0) {
+        SoraProperty():
+        mIsDefault(true) {
             
         }
         
-        SoraPropertyPtr(SoraPropertyInfo* prop):
-        mProperty(prop) {
-            
+        SoraProperty(const SoraProperty& rhs):
+        mIsDefault(false),
+        mData(rhs.mData) {
         }
         
-        bool valid() {
-            return mProperty != NULL;
+        SoraProperty(const std::string& name, const T& defaultValue=SoraTypeSerializer::defaultValue<T>()):
+        mIsDefault(true),
+        mData(name, defaultValue) {            
         }
         
-        SoraPropertyInfo* get() {
-            return mProperty;
+        virtual ~SoraProperty() {
         }
         
-        template<typename T>
-        bool is() {
-            if(!valid()) {
-                return false;
-            }
-            
-            try {
-                TryCastProperty<T>(*mProperty);
-                return true;
-            } catch(BadCastException) {
-                return false;
-            }
-        }
-        
-        template<typename T>
-        T to() {
-            if(!valid()) {
-                THROW_SORA_EXCEPTION(NullPointerException, "Ptr not valid");
-            }
-            
-            if(is<T>()) {
-                return TryGetProperty<T>(*mProperty);
-            }
-        }
-        
-        template<typename T>
-        T unsafeTo() {
-            if(!valid()) {
-                THROW_SORA_EXCEPTION(NullPointerException, "Ptr not valid");
-            }
-            
-            return static_cast<SoraProperty<T>&>(*mProperty).getValue();
-        }
-        
-        template<typename T>
         void set(const T& val) {
-            if(!valid()) {
-                THROW_SORA_EXCEPTION(NullPointerException, "Ptr not valid");
-            }
-            
-            if(is<T>()) {
-                TrySetProperty<T>(*mProperty, val);
+            if(mData.mValue != val) {
+                T oldVal = mData.mValue;
+                mData.mValue = val;
+                
+                mIsDefault = false;
             }
         }
         
-        template<typename T>
-        void unsafeSet(const T& val) {
-            if(!valid()) {
-                THROW_SORA_EXCEPTION(NullPointerException, "Ptr not valid");
-            }
-            
-            SoraProperty<T>& prop = static_cast<SoraProperty<T>&>(*mProperty);
-            prop.setValue(val);
+        const T& get() const {
+            return mData.mValue;
         }
         
-        SoraPropertyPtr& operator=(const SoraPropertyPtr& rhs) {
-            if(this != &rhs) {
-                mProperty = rhs.mProperty;
-            }
-            return *this;
+        virtual bool isNull() const {
+            return mIsDefault;
         }
         
-        SoraPropertyPtr(const SoraPropertyPtr& rhs):
-        mProperty(rhs.mProperty) {
-            
+        virtual const std::string& getName() const {
+            return mData.mName;
+        }
+        
+        virtual std::string toString() const {
+            return Serializer::toString(mData.mValue);
+        }
+        
+        virtual void setFromString(const std::string& str) {
+            mIsDefault = false;
+            Serializer::fromString(str, &mData.mValue);
+        }
+        
+        virtual int getTypeId() const {
+            return Serializer::getTypeId(mData.mValue);
+        }
+        
+        SoraProperty<T, S> operator=(const SoraProperty<T, S>& rhs);
+        SoraProperty<T, S> operator=(const T& rhs);
+        
+        bool operator==(const SoraProperty<T, S>& rhs);
+        bool operator==(const T& rhs);
+        
+        bool operator!=(const SoraProperty<T, S>& rhs);
+        bool operator!=(const T& rhs);
+        
+        bool operator>(const SoraProperty<T, S>& rhs);
+        bool operator>(const T& rhs);
+        
+        bool operator<(const SoraProperty<T, S>& rhs);
+        bool operator<(const T& rhs);
+        
+        operator T() const {
+            return mData->mValue;
         }
         
     private:
-        SoraPropertyInfo* mProperty;
+        bool mIsDefault;
+        property::ValueHolder<T> mData;
     };
     
-    template<typename T>
-    SoraProperty<T>* MakePointerProperty(const std::string& name, T* t) {
-        return new SoraProperty<T*>(name, *t);
+    template<typename T, class S>
+    inline SoraProperty<T, S> SoraProperty<T, S>::operator=(const SoraProperty<T, S>& rhs) {
+        mData = rhs.mData.clone();
+        return *this;
     }
     
-    template<typename T>
-    SoraProperty<T>* MakeValueProperty(const std::string& name, const T& t) {
-        return new SoraProperty<T>(name, t);
+    template<typename T, class S>
+    inline SoraProperty<T, S> SoraProperty<T, S>::operator=(const T& rhs) {
+        set(rhs);
+        return *this;
     }
     
-    template<typename T>
-    SoraProperty<T>* MakeFunctionProperty(const std::string& name, const T& t) {
-        return new SoraProperty<T>(name, t);
+    template<typename T, class S>
+    inline bool SoraProperty<T, S>::operator==(const SoraProperty<T, S>& rhs) {
+        return mData.mValue == rhs.mData.mValue;
     }
-
+    
+    template<typename T, class S>
+    inline bool SoraProperty<T, S>::operator==(const T& rhs) {
+        return mData.mValue == rhs;
+    }
+    
+    template<typename T, class S>
+    inline bool SoraProperty<T, S>::operator!=(const SoraProperty<T, S>& rhs) {
+        return mData.mValue != rhs.mData.mValue;
+    }
+    
+    template<typename T, class S>
+    inline bool SoraProperty<T, S>::operator!=(const T& rhs) {
+        return mData.mValue != rhs;
+    }
+    
+    template<typename T, class S>
+    inline bool SoraProperty<T, S>::operator>(const SoraProperty<T, S>& rhs) {
+        return mData.mValue > rhs.mData.mValue;
+    }
+   
+    template<typename T, class S>
+    inline bool SoraProperty<T, S>::operator>(const T& rhs) {
+        return mData.mValue > rhs.mValue;
+    }
+    
+    template<typename T, class S>
+    inline bool SoraProperty<T, S>::operator<(const SoraProperty<T, S>& rhs) {
+        return mData.mValue < rhs.mData.mValue;
+    }
+ 
+    template<typename T, class S>
+    inline bool SoraProperty<T, S>::operator<(const T& rhs) {
+        return mData.mValue < rhs;
+    }
+    
 } // namespace sora
 
 

@@ -25,12 +25,12 @@ namespace sora {
         virtual ~SoraBaseCanvas();
         
         void render();
-        uint32 update(float32 dt);
+        uint32 update(float dt);
         
         void beginRender(ulong32 col=0xFF000000);
         void finishRender();
 
-		void setZ(float32 z);
+		void setZ(float z);
 		void setBlendMode(int32 mode);
         
 		void addEffect(SoraImageEffect* effect);

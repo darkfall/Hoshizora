@@ -2,7 +2,7 @@
 //  SoraScene.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/17/11.
+//  Created by Robert Bu on 7/17/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -231,7 +231,7 @@ namespace sora {
             mCanvas->finishRender();
     }
 
-    void SoraScene::moveTo(float32 x, float32 y, float32 inTime) {
+    void SoraScene::moveTo(float x, float y, float inTime) {
         CreateModifierAdapter(this, 
                               new ScenePositionModifier(getPositionX(),
                                                         getPositionY(),
@@ -240,7 +240,7 @@ namespace sora {
                                                         inTime));
     }
     
-    uint32 SoraScene::update(float32 dt) {        
+    uint32 SoraScene::update(float dt) {        
         LayerMap::iterator itLayer = mLayers.begin();
         while(itLayer != mLayers.end()) {
             itLayer->second->update(dt);
@@ -255,25 +255,25 @@ namespace sora {
     }
 
     
-    void SoraScene::setRotation(float32 rot) {
+    void SoraScene::setRotation(float rot) {
         mRotation = rot;
     }
     
-    float32 SoraScene::getRotation() const {
+    float SoraScene::getRotation() const {
         return mRotation;
     }
     
-    void SoraScene::setScale(float32 scaleh, float32 scalev) {
+    void SoraScene::setScale(float scaleh, float scalev) {
         mHScale = scaleh;
         mVScale = scalev;
     }
     
-    void SoraScene::getScale(float32* scaleh, float32* scalev) {
+    void SoraScene::getScale(float* scaleh, float* scalev) {
         *scaleh = mHScale;
         *scalev = mVScale;
     }
     
-    void SoraScene::setPosition(float32 x, float32 y) {
+    void SoraScene::setPosition(float x, float y) {
         SoraObject::setPosition(x, y);
         _adjustSize();
     }

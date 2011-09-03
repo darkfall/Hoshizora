@@ -2,7 +2,7 @@
 //  SoraLuaExporter.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/25/11.
+//  Created by Robert Bu on 8/25/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -34,9 +34,6 @@ namespace sora {
     private:
         
     };
-    
-#define SORA_DEF_LUA_AUTO_EXPORT_FUNC(func) \
-    sora::SoraLuaExporter::ConnectExporterFunc(func);
     
     /**
      * Helper macro that help check a symbol has been defined and register an export func

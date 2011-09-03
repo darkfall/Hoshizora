@@ -112,7 +112,7 @@ namespace sora {
 		return (getType() != 0);
 	}
 
-	bool SoraCGGLShader::setParameterfv(const char* name, float32* fv, uint32 size) {
+	bool SoraCGGLShader::setParameterfv(const char* name, float* fv, uint32 size) {
 		if(getType() == 0) return false;
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);
@@ -150,7 +150,7 @@ namespace sora {
 		return (getType() != 0);
 	}
     
-    bool SoraCGGLShader::getParameterfv(const char* name, float32* val, uint32 size) {
+    bool SoraCGGLShader::getParameterfv(const char* name, float* val, uint32 size) {
         if(getType() == 0) return false;
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);

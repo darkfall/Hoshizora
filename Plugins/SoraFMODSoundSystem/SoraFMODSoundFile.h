@@ -30,18 +30,18 @@ namespace sora {
 		void resume();
         
 		// 0 - 1
-		void setVolume(float32 vol);
+		void setVolume(float vol);
 		// -1.0 - 1.0
-		void setPan(float32 pan);
+		void setPan(float pan);
 		// 0.5 - 2.0
-		void setPitch(float32 pitch);
+		void setPitch(float pitch);
         
-		float32 getPan() const;
-		float32 getPitch() const;
-		float32 getVolume() const;
+		float getPan() const;
+		float getPitch() const;
+		float getVolume() const;
         
-		void setPosition(float32 x, float32 y, float32 z);
-		void getPosition(float32& x, float32& y, float32& z);
+		void setPosition(float x, float y, float z);
+		void getPosition(float& x, float& y, float& z);
         
         void setMusicPosition(int32 pos);
         int32 getMusicPosition() const;
@@ -60,9 +60,9 @@ namespace sora {
         bool bIsStream;
         void *pSoundData;
 		
-		float32 volume;
-		float32 pitch;
-		float32 pan;
+		float volume;
+		float pitch;
+		float pan;
     };
     
     class SoraFMODSoundEffectFile : public SoraSoundEffectFile {
@@ -78,19 +78,19 @@ namespace sora {
 		void play();
 		void stop();
         
-        void setPosition(float32 x, float32 y, float32 z);
-        void getPosition(float32& x, float32& y, float32& z);
+        void setPosition(float x, float y, float z);
+        void getPosition(float& x, float& y, float& z);
         
 		// 0 - 1
-		void setVolume(float32 vol);
+		void setVolume(float vol);
 		// -1.0 - 1.0
-		void setPan(float32 pan);
+		void setPan(float pan);
 		// 0.5 - 2.0
-		void setPitch(float32 pitch);
+		void setPitch(float pitch);
         
-		float32 getPan() const;
-		float32 getPitch() const;
-		float32 getVolume() const;
+		float getPan() const;
+		float getPitch() const;
+		float getVolume() const;
         
         void setRepeat(bool flag);
 		bool isRepeat() const;
@@ -102,9 +102,9 @@ namespace sora {
         FMOD::Sound* pSound;
         FMOD::Channel* pChannel;
 		
-		float32 volume;
-		float32 pitch;
-		float32 pan;
+		float volume;
+		float pitch;
+		float pan;
         
         void *pSoundData;
     };

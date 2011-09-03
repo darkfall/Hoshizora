@@ -10,7 +10,7 @@
 #define JSON_GUI_H_
 
 #include "SoraPlatform.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 #include "json/json.h"
 
 #include "SoraGUI.h"
@@ -69,10 +69,10 @@ namespace sora {
         
         bool opened;
         
-        typedef std::map<stringId, JsonGuiParseFunc> EXTENSION_FUNC_MAP;
+        typedef std::map<SoraStringId, JsonGuiParseFunc> EXTENSION_FUNC_MAP;
         EXTENSION_FUNC_MAP extensionFuncs;
         
-        typedef std::map<stringId, gcn::Widget*> WIDGET_MAP;
+        typedef std::map<SoraStringId, gcn::Widget*> WIDGET_MAP;
         WIDGET_MAP widgets;
     };
 	

@@ -32,7 +32,7 @@ namespace sora {
         FreeHandleSlot(mHandleId);
 	}
 	
-	uint32 SoraObject::update(float32 dt) {
+	uint32 SoraObject::update(float dt) {
         if(mSubObjectSize != 0) {
             SoraObject* obj = mSubObjects;
             while(obj != NULL) {
@@ -54,7 +54,7 @@ namespace sora {
         }
 	}
     
-    void SoraObject::onUpdate(float32 dt) {
+    void SoraObject::onUpdate(float dt) {
         update(dt);
     }
     
@@ -63,7 +63,7 @@ namespace sora {
         mPosition = mPositionSource->getPosition();
     }
 	
-	void SoraObject::setPosition(float32 x, float32 y) {
+	void SoraObject::setPosition(float x, float y) {
         if(mPositionSource) {
             mPositionSource->setPosition(x, y);
             mPosition = mPositionSource->getPosition();
@@ -73,31 +73,31 @@ namespace sora {
         }
 	}
 	
-	void SoraObject::getPosition(float32& x, float32& y) const {
+	void SoraObject::getPosition(float& x, float& y) const {
 		x = getPositionX();
 		y = getPositionY();
 	}
 	
-	float32 SoraObject::getPositionX() const {
-        float32 x = mPositionSource ? mPositionSource->getPositionX() : mPosition.x;
+	float SoraObject::getPositionX() const {
+        float x = mPositionSource ? mPositionSource->getPositionX() : mPosition.x;
         if(!mParent)
             return x;
         return x+mParent->getPositionX();
 	}
 	
-	float32 SoraObject::getPositionY() const {
-        float32 y = mPositionSource ? mPositionSource->getPositionY() : mPosition.y;
+	float SoraObject::getPositionY() const {
+        float y = mPositionSource ? mPositionSource->getPositionY() : mPosition.y;
 
         if(!mParent)
             return y;
         return y+mParent->getPositionY();
 	}
     
-    float32 SoraObject::getAbsolutePositionX() const {
+    float SoraObject::getAbsolutePositionX() const {
         return mPositionSource ? mPositionSource->getPositionX() : mPosition.x;
     }
     
-    float32 SoraObject::getAbsolutePositionY() const {
+    float SoraObject::getAbsolutePositionY() const {
         return mPositionSource ? mPositionSource->getPositionY() : mPosition.y;
     }
 
@@ -161,7 +161,7 @@ namespace sora {
         return getObjByName(GetUniqueStringId(n));
 	}
     
-    SoraObject* SoraObject::getObjByName(stringId sid) {        
+    SoraObject* SoraObject::getObjByName(SoraStringId sid) {        
 		if(mName == sid) {
 			return this;
 		}

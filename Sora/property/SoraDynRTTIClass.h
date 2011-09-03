@@ -2,7 +2,7 @@
 //  SoraRTTIClass.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/21/11.
+//  Created by Robert Bu on 8/21/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -74,36 +74,43 @@ namespace sora {
             }
         }
         
+        
+        template<typename T>
+        void addProperty(const DynRttiClassKeyType& key, const T& prop);
+        template<typename T>
+        void setProperty(const DynRttiClassKeyType& key, const T& prop);
+        template<typename T>
+        T getProperty(const DynRttiClassKeyType& key) const;
+        template<typename T>
+        SoraProperty<T>* getPropertyPtr(const DynRttiClassKeyType& key) const;
+        template<typename T>
+        T getProperty(const DynRttiClassKeyType& key, const T& defaultValue) const;
+    
         /**
          * May throw a NullPointerException
          **/
-        virtual SoraPropertyPtr getProperty(const DynRttiClassKeyType& key) const {
-            SoraPropertyInfo* prop = mProperties.get(key);
+        virtual SoraPropertyBase* getPropertyBase(const DynRttiClassKeyType& key) const {
+            SoraPropertyBase* prop = mProperties.getPropertyBase(key);
             if(prop == NULL) {
                 ParentClassMap::const_iterator itParent = mParents.begin();
                 for(itParent; itParent != mParents.end(); ++itParent) {
-                    SoraPropertyPtr propPtr = itParent->second->getProperty(key);
-                    if(propPtr.valid()) 
-                        return propPtr;
+                    SoraPropertyBase* propPtr = itParent->second->getPropertyBase(key);
+                    return propPtr;
                 }
             }
-            return SoraPropertyPtr();
+            return prop;
         }
         
-        virtual bool addProperty(const DynRttiClassKeyType& key, SoraPropertyInfo* prop) {
-            return mProperties.add(key, prop);
-        }
-        
-        virtual bool addProperty(const DynRttiClassKeyType& key, SoraPropertyPtr prop) {
-            return mProperties.add(key, prop.get());
+        virtual void addProperty(SoraPropertyBase* prop) {
+            mProperties.addProperty(prop);
         }
         
         virtual bool hasProperty(const DynRttiClassKeyType& key) {
-            return getProperty(key).valid();
+            return mProperties.hasProperty(key);
         }
         
-        virtual SoraPropertyInfo* removeProperty(const DynRttiClassKeyType& key) {
-            return mProperties.remove(key);
+        virtual SoraPropertyBase* removeProperty(const DynRttiClassKeyType& key, bool release=false) {
+            return mProperties.removeProperty(key, release);
         }
         
         size_t getPropertySize() const {
@@ -112,7 +119,7 @@ namespace sora {
         
     private:
         std::string mName;
-        SoraPropertyHolder<DynRttiClassKeyType> mProperties;
+        SoraPropertyHolder mProperties;
         
         ParentClassMap mParents;
         
@@ -122,7 +129,48 @@ namespace sora {
             mParents[name] = cls;
         }
     };
+    
+    template<typename T>
+    inline void SoraDynRTTIClass::addProperty(const DynRttiClassKeyType& key, const T& prop) {
+        addProperty(new SoraProperty<T>(key, prop));
+    }
+    
+    template<typename T>
+    inline void SoraDynRTTIClass::setProperty(const DynRttiClassKeyType& key, const T& prop) {
+        mProperties.setProperty(key, prop);
+    }
+    
+    template<typename T>
+    inline T SoraDynRTTIClass::getProperty(const DynRttiClassKeyType& key) const {
+        SoraPropertyBase* prop = getPropertyBase(key);
+        if(prop) {
+            SoraProperty<T>* tprop = PropertyCast<T>(prop);
+            if(tprop)
+                return tprop->get();
+        }
+        return SoraTypeSerializer::defaultValue<T>();
+    }
+    
+    template<typename T>
+    inline SoraProperty<T>* SoraDynRTTIClass::getPropertyPtr(const DynRttiClassKeyType& key) const {
+        SoraPropertyBase* prop = getPropertyBase(key);
+        if(prop) {
+            SoraProperty<T>* tprop = PropertyCast<T>(prop);
+            return tprop;
+        }
+        return 0;
+    }
 
+    template<typename T>
+    inline T SoraDynRTTIClass::getProperty(const DynRttiClassKeyType& key, const T& defaultValue) const {
+        SoraPropertyBase* prop = getPropertyBase(key);
+        if(prop) {
+            SoraProperty<T>* tprop = PropertyCast<T>(prop);
+            if(tprop)
+                return tprop->get();
+        }
+        return defaultValue;
+    }
         
     /**
      * Helper macro to insert rtti class definition into a class

@@ -169,6 +169,8 @@ namespace gcn
         virtual void keyPressed(KeyEvent& keyEvent);
 
         virtual void keyReleased(KeyEvent& keyEvent);
+        
+        virtual bool isHasMouse() const;
 
     protected:
         /**

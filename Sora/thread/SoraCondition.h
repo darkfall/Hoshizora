@@ -2,7 +2,7 @@
 //  SoraCondition.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/5/11.
+//  Created by Robert Bu on 7/5/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 
 namespace sora {
     
-    class SoraCondition: public uncopyable {
+    class SoraCondition: public SoraUncopyable {
     public:
         explicit SoraCondition(SoraMutexLock& mutex):
         _mutex(mutex) {

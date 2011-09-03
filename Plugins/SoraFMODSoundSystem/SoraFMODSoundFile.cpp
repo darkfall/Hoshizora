@@ -171,27 +171,27 @@ namespace sora {
         }
     }
     
-    void SoraFMODMusicFile::setVolume(float32 vol) {
+    void SoraFMODMusicFile::setVolume(float vol) {
         if(pChannel)
             pChannel->setVolume(vol);
 		volume = vol;
     }
     
-    void SoraFMODMusicFile::setPan(float32 pan) {
+    void SoraFMODMusicFile::setPan(float pan) {
         if(pChannel)
             pChannel->setPan(pan);
 		this->pan = pan;
     }
     
-    void SoraFMODMusicFile::setPitch(float32 pitch) {
+    void SoraFMODMusicFile::setPitch(float pitch) {
       //  if(pChannel)
       //      pChannel->setPitch(
 		this->pitch = pitch;
     }
     
-    float32 SoraFMODMusicFile::getVolume() const {
+    float SoraFMODMusicFile::getVolume() const {
         if(pChannel) {
-            float32 vol;
+            float vol;
             FMOD_RESULT result = pChannel->getVolume(&vol);
             FMOD_ERROR_CHECK(result);
             return vol;
@@ -199,13 +199,13 @@ namespace sora {
         return 0.f;
     }
     
-    float32 SoraFMODMusicFile::getPitch() const {
+    float SoraFMODMusicFile::getPitch() const {
         return 0.f;
     }
     
-    float32 SoraFMODMusicFile::getPan() const {
+    float SoraFMODMusicFile::getPan() const {
         if(pChannel) {
-            float32 pan;
+            float pan;
             FMOD_RESULT result = pChannel->getPan(&pan);
             FMOD_ERROR_CHECK(result);
             return pan;
@@ -213,11 +213,11 @@ namespace sora {
         return 0.f;
     }
     
-    void SoraFMODMusicFile::setPosition(float32 x, float32 y, float32 z) {
+    void SoraFMODMusicFile::setPosition(float x, float y, float z) {
         
     }
     
-    void SoraFMODMusicFile::getPosition(float32 &x, float32 &y, float32 &z) {
+    void SoraFMODMusicFile::getPosition(float &x, float &y, float &z) {
     
     }
     
@@ -372,27 +372,27 @@ namespace sora {
         }
     }
     
-    void SoraFMODSoundEffectFile::setVolume(float32 vol) {
+    void SoraFMODSoundEffectFile::setVolume(float vol) {
         if(pChannel)
             pChannel->setVolume(vol);
 		volume = vol;
     }
     
-    void SoraFMODSoundEffectFile::setPan(float32 pan) {
+    void SoraFMODSoundEffectFile::setPan(float pan) {
         if(pChannel)
             pChannel->setPan(pan);
 		this->pan = pan;
     }
     
-    void SoraFMODSoundEffectFile::setPitch(float32 pitch) {
+    void SoraFMODSoundEffectFile::setPitch(float pitch) {
         //  if(pChannel)
         //      pChannel->setPitch(
 		this->pitch = pitch;
     }
     
-    float32 SoraFMODSoundEffectFile::getVolume() const {
+    float SoraFMODSoundEffectFile::getVolume() const {
         if(pChannel) {
-            float32 vol;
+            float vol;
             FMOD_RESULT result = pChannel->getVolume(&vol);
             FMOD_ERROR_CHECK(result);
             return vol;
@@ -400,13 +400,13 @@ namespace sora {
         return 0.f;
     }
     
-    float32 SoraFMODSoundEffectFile::getPitch() const {
+    float SoraFMODSoundEffectFile::getPitch() const {
         return 0.f;
     }
     
-    float32 SoraFMODSoundEffectFile::getPan() const {
+    float SoraFMODSoundEffectFile::getPan() const {
         if(pChannel) {
-            float32 pan;
+            float pan;
             FMOD_RESULT result = pChannel->getPan(&pan);
             FMOD_ERROR_CHECK(result);
             return pan;
@@ -414,11 +414,11 @@ namespace sora {
         return 0.f;
     }
     
-    void SoraFMODSoundEffectFile::setPosition(float32 x, float32 y, float32 z) {
+    void SoraFMODSoundEffectFile::setPosition(float x, float y, float z) {
         
     }
     
-    void SoraFMODSoundEffectFile::getPosition(float32 &x, float32 &y, float32 &z) {
+    void SoraFMODSoundEffectFile::getPosition(float &x, float &y, float &z) {
         
     }
     

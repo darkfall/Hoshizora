@@ -1,8 +1,8 @@
 /*
  *  SoraOGLRenderer.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/23/10.
+ *  Created by Robert Bu on 8/23/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -58,14 +58,14 @@ namespace sora {
 		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode);
         
-        void renderLine     (float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
-		void renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
-        void fillBox        (float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
+        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+        void fillBox        (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
 
 		void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
-		void setTransform(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=1.f, float32 vscale=1.f);
-		void setTransformWindowSize(float32 w, float32 h);
-        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
+		void setTransform(float x=0.f, float y=0.f, float dx=0.f, float dy=0.f, float rot=0.f, float hscale=1.f, float vscale=1.f);
+		void setTransformWindowSize(float w, float h);
+        void setViewPoint(float x=0.f, float y=0.f, float z=0.f);
         void setVerticalSync(bool flag);
 
 		ulong32 getMainWindowHandle() { return (ulong32)mainWindow; }
@@ -116,10 +116,10 @@ namespace sora {
 		int32 windowHeight;
 
 		struct _SoraOGLWindowInfo {
-			float32 x, y, z;
-			float32 dx, dy;
-			float32 rot;
-			float32 hscale, vscale;
+			float x, y, z;
+			float dx, dy;
+			float rot;
+			float hscale, vscale;
 			int32 width, height;
 			
 			_SoraOGLWindowInfo(): hscale(1.f), vscale(1.f), x(0.f), y(0.f), z(0.f), dx(0.f), dy(0.f), rot(0.f), width(0), height(0) {}

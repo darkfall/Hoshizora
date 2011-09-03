@@ -13,8 +13,8 @@
 #include "SoraException.h"
 #include "SoraPlatform.h"
 #include "SoraAutoPtr.h"
-#include "stringId.h"
-#include "RefCounted.h"
+#include "SoraStringId.h"
+#include "SoraRefCounted.h"
 #include <vector>
 #include <map>
 
@@ -59,7 +59,7 @@ namespace sora {
             AutoPtrType mResource;
             ulong32 mSize;
         };
-        typedef std::map<stringId, ResourceInfo> AvailableResourceMap;
+        typedef std::map<SoraStringId, ResourceInfo> AvailableResourceMap;
         AvailableResourceMap mResources;
 	};
 	

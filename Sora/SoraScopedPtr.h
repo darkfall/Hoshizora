@@ -2,7 +2,7 @@
 //  SoraScopedPtr.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/5/11.
+//  Created by Robert Bu on 8/5/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #define Sora_SoraScopedPtr_h
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     
@@ -19,7 +19,7 @@ namespace sora {
      **/
     
     template<class T>
-    class SoraScopedPtr: uncopyable {
+    class SoraScopedPtr: SoraUncopyable {
     public:
         explicit SoraScopedPtr(T* _ptr):
         ptr(_ptr) {

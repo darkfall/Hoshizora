@@ -2,7 +2,7 @@
 //  SoraLuaExport.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/25/11.
+//  Created by Robert Bu on 8/25/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -32,10 +32,7 @@ namespace sora {
         .def("createTextureWH", &SoraCore::createTextureWH)
         .def("setClipping", &SoraCore::setClipping)
         .def("setTransform", &SoraCore::setTransform)
-        .def("setRandomSeed", &SoraCore::setRandomSeed)
-        .def("getRandomSeed", &SoraCore::getRandomSeed)
-        .def("randomInt", &SoraCore::randomInt)
-        .def("randomFloat", &SoraCore::randomFloat)
+       
         .def("getScreenWidth", &SoraCore::getScreenWidth)
         .def("getScreenHeight", &SoraCore::getScreenHeight)
         .def("loadResourcePack", &SoraCore::loadResourcePack)

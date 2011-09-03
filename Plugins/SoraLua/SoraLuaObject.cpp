@@ -167,7 +167,7 @@ namespace sora {
 		return luaState->GetGlobal(name.c_str()).GetInteger();
 	}
 
-	float32 SoraLuaObject::getFloat(const SoraString& name) {
+	float SoraLuaObject::getFloat(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetFloat();
 	}
 
@@ -203,7 +203,7 @@ namespace sora {
         }
     }
 	
-    uint32 SoraLuaObject::update(float32 dt) {
+    uint32 SoraLuaObject::update(float dt) {
         LuaObject obj = get("update");
         if(obj.IsFunction()) {
             LuaFunction<void> func = obj;

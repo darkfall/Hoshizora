@@ -28,7 +28,7 @@ namespace sora {
 		SoraLuaObject(LuaPlus::LuaState* state, bool heavy=true);
 		virtual ~SoraLuaObject();
         
-        uint32 update(float32 dt);
+        uint32 update(float dt);
         void render();
 
 		int32 doScript(const SoraWString& scriptPath);
@@ -50,7 +50,7 @@ namespace sora {
 
 		// simple wrappers to help get data easily
 		int32 getInteger(const SoraString& name);
-		float32 getFloat(const SoraString& name);
+		float getFloat(const SoraString& name);
 		double getDouble(const SoraString& name);
 		SoraString getString(const SoraString& name);
 	//	SoraWString getWString(const SoraString& name);

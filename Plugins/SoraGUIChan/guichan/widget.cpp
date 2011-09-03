@@ -850,6 +850,8 @@ namespace gcn
     }
     
     Style* Widget::getStyle() const {
+        if(mStyle == NULL)
+            return mGlobalStyle;
         return mStyle;
     }
     
@@ -872,12 +874,15 @@ namespace gcn
     }
     
     void Widget::onMessage(const Message& mssg) {
-        // default message process
-        if(mssg.getMessage() == Animation::MessageStart) {
-            setEnabled(false);
-        } else if(mssg.getMessage() == Animation::MessageEnd) {
-            setEnabled(true);
-        }
+       
+    }
+    
+    void Widget::animationBegan(Animation* animation) {
+        setEnabled(false);
+    }
+    
+    void Widget::animationEnded(Animation* aniamtion) {
+        setEnabled(true);
     }
     
     Message::Message(Widget* sender,

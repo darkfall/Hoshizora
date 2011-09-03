@@ -2,7 +2,7 @@
 //  SoraThreadImplPosix.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/7/11.
+//  Created by Robert Bu on 7/7/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -23,7 +23,7 @@
 
 namespace sora {
     
-    class SoraThreadImpl: uncopyable {
+    class SoraThreadImpl: SoraUncopyable {
         friend class SoraThread;
         
     protected:

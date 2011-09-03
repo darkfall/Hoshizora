@@ -7,6 +7,12 @@
 
 namespace sora {
     
+    /**
+     *  Original form Poco C++ Library by Applied Infomatics
+     *  Modified for Hoshizora and add wstring support by Robert Bu
+     **/
+
+    
 	class SORA_API SoraStream: public SoraSharedClass<SoraStream> {
 	public:
 		SoraStream(): _pos(0) {}

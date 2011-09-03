@@ -106,7 +106,7 @@ namespace sora {
 		mTexture1 = ((SoraTexture*)tex)->mTextureID;
 	}
 	
-	bool SoraGLSLShader::setParameterfv(const char* name, float32* val, uint32 size) {
+	bool SoraGLSLShader::setParameterfv(const char* name, float* val, uint32 size) {
 		if(mType == 0)
 			return false;
 		
@@ -172,7 +172,7 @@ namespace sora {
 		return true;
 	}
 	
-	bool SoraGLSLShader::getParameterfv(const char* name, float32* val, uint32 size) {
+	bool SoraGLSLShader::getParameterfv(const char* name, float* val, uint32 size) {
 		if(mType == 0)
 			return false;
 		

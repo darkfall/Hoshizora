@@ -227,8 +227,8 @@ namespace sora {
         bool middleBtnDown;
         
         int getClickCount() const;
-        float32 getX() const;
-        float32 getY() const;
+        float getX() const;
+        float getY() const;
         
         bool isMouseLButtonDown() const;
         bool isMouseMButtonDown() const;

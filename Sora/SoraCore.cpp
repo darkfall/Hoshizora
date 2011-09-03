@@ -46,8 +46,8 @@
 
 #include "cmd/SoraConsole.h"
 
-#include "MemoryUsage.h"
-#include "Rect4V.h"
+#include "SoraMemoryUsage.h"
+#include "SoraRect4v.h"
 #include "SoraCamera.h"
 #include "SoraRenderSystemExtension.h"
 
@@ -61,16 +61,18 @@ namespace sora {
     
     SoraCore* SoraCore::mInstance = NULL;
     
+    int SoraCore::iRandomSeed = rand();
+    
     struct TransformData {
-        float32 x;
-        float32 y;
-        float32 dx;
-        float32 dy;
-        float32 rot;
-        float32 hscale;
-        float32 vscale;
+        float x;
+        float y;
+        float dx;
+        float dy;
+        float rot;
+        float hscale;
+        float vscale;
         
-        void set(float32 _x, float32 _y, float32 _dx, float32 _dy, float32 _rot, float32 _hscale, float32 _vscale) {
+        void set(float _x, float _y, float _dx, float _dy, float _rot, float _hscale, float _vscale) {
             x = _x;
             y = _y;
             dx = _dx;
@@ -272,7 +274,7 @@ namespace sora {
 
 	void SoraCore::update() {
 		sora_assert(bInitialized == true);
-        float32 dt = bFrameSync?1.f:pTimer->getDelta();
+        float dt = bFrameSync?1.f:pTimer->getDelta();
 #ifdef PROFILE_CORE_UPDATE
 		PROFILE("CORE_UPDATE");
 #endif
@@ -653,21 +655,21 @@ namespace sora {
         return pSoundSystem;
     }
 
-	float32 SoraCore::getFPS() {
+	float SoraCore::getFPS() {
 		return pTimer->getFPS();
 	}
 
-	float32 SoraCore::getDelta() {
+	float SoraCore::getDelta() {
 		if(!bFrameSync)
 			return pTimer->getDelta() * mTimeScale;
 		return 1.f;
 	}
     
-    float32 SoraCore::getAbsoluteDelta() {
+    float SoraCore::getAbsoluteDelta() {
         return pTimer->getDelta();
     }
 
-	float32 SoraCore::getTime() {
+	float SoraCore::getTime() {
 		return pTimer->getTime();
 	}
 
@@ -685,12 +687,12 @@ namespace sora {
 		return pTimer->getFrameCount();
 	}
 
-	void SoraCore::setTimeScale(float32 scale) {
+	void SoraCore::setTimeScale(float scale) {
 		SET_ENV_FLOAT("CORE_TIMER_TIME_SCALE", scale);
 		mTimeScale = scale;
 	}
 
-	float32 SoraCore::getTimeScale() {
+	float SoraCore::getTimeScale() {
 		return mTimeScale;
 	}
     
@@ -845,7 +847,7 @@ namespace sora {
 		}
 	}
     
-    void SoraCore::renderSprite(const SoraWString& path, float32 x, float32 y) {
+    void SoraCore::renderSprite(const SoraWString& path, float x, float y) {
         SoraFastRenderer::Instance()->renderSprite(path, x, y);
     }
 	
@@ -874,17 +876,17 @@ namespace sora {
 			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
 	}
 
-	void SoraCore::renderLine(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+	void SoraCore::renderLine(float x1, float y1, float x2, float y2, uint32 color, float z) {
 		sora_assert(bInitialized==true);
 		pRenderSystem->renderLine(x1, y1, x2, y2, color, z);
 	}
 	
-	void SoraCore::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+	void SoraCore::renderBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
 		sora_assert(bInitialized==true);
 		pRenderSystem->renderBox(x1, y1, x2, y2, color, z);
 	}
     
-    void SoraCore::fillBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
+    void SoraCore::fillBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
 		sora_assert(bInitialized==true);
 		pRenderSystem->fillBox(x1, y1, x2, y2, color, z);
 	}
@@ -896,14 +898,14 @@ namespace sora {
         g_CurrentClipping.set(x, y, w, h);
 	}
 
-	void SoraCore::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
+	void SoraCore::setTransform(float x, float y, float dx, float dy, float rot, float hscale, float vscale) {
 		sora_assert(bInitialized==true);
 		pRenderSystem->setTransform(x, y, dx, dy, rot, hscale, vscale);
         
         g_CurrentTransform.set(x, y, dx, dy, rot, hscale, vscale);
 	}
     
-    void SoraCore::setViewPoint(float32 x, float32 y, float32 z) {
+    void SoraCore::setViewPoint(float x, float y, float z) {
         sora_assert(bInitialized==true);
         pRenderSystem->setViewPoint(x, y, z);
     }
@@ -960,21 +962,21 @@ namespace sora {
 		return iScreenWidth;
 	}
 
-	void SoraCore::getMousePos(float32 *x, float32 *y) {
+	void SoraCore::getMousePos(float *x, float *y) {
 		if(bHasInput) pInput->getMousePos(x, y);
 	}
 
-	float32 SoraCore::getMousePosX() {
+	float SoraCore::getMousePosX() {
 		if(bHasInput) return pInput->getMousePosX();
 		return 0.f;
 	}
 
-	float32 SoraCore::getMousePosY() {
+	float SoraCore::getMousePosY() {
 		if(bHasInput) return pInput->getMousePosY();
 		return 0.f;
 	}
 
-	void SoraCore::setMousePos(float32 x, float32 y) {
+	void SoraCore::setMousePos(float x, float y) {
 		if(bHasInput) pInput->setMousePos(x, y);
 	}
 
@@ -1157,16 +1159,16 @@ namespace sora {
 		return (int32)(min+genrand_real1()*(max-min));
 	}
 
-	float32 SoraCore::randomFloat(float32 min, float32 max) {
-		return (float32)(min+genrand_real1()*(max-min));
+	float SoraCore::randomFloat(float min, float max) {
+		return (float)(min+genrand_real1()*(max-min));
 	}
 
 	int32 SoraCore::randomIntNoRange() {
 		return gen_rand32();
 	}
 
-	float32 SoraCore::randomFloatNoRange() {
-		return (float32)genrand_real1();
+	float SoraCore::randomFloatNoRange() {
+		return (float)genrand_real1();
 	}
 
 	SoraFont* SoraCore::createFont(const SoraWString& font, int32 size) {
@@ -1334,7 +1336,7 @@ namespace sora {
         }
         
         SoraAbstractModiferAdapter::Members::iterator itModifier = modifierAdapaterList.begin();
-        float32 dt = getDelta();
+        float dt = getDelta();
         while(itModifier != modifierAdapaterList.end()) {
             (*itModifier)->update(dt);
             ++itModifier;

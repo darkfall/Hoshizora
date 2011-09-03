@@ -90,7 +90,7 @@ gcn::Slider* slMaxAngle;
 void restoreValue();
 
 
-void labelApplyValue(gcn::Label* l, const std::wstring& str, float32 val) {
+void labelApplyValue(gcn::Label* l, const std::wstring& str, float val) {
 	l->setCaption(sora::ws2s(str)+"("+sora::fp_to_str(val)+")");
 }
 void labelLoadValue();
@@ -485,6 +485,7 @@ void loadParticleSprite(const SoraWString& path) {
 		pspr = SORA->createSprite(L"pics/particles.png");
 	}
 
+    pspr->setTextureRect(0.f, 0.f, pspr->getSpriteWidth(), pspr->getSpriteHeight());
 	peffect->setSprite(pspr);
 	peffect->restart();
 }
@@ -497,7 +498,7 @@ void loadBGSprite(const SoraWString& path) {
 		SORA->messageBoxW(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
 	}
 	
-	/*float32 scale1 = 1.0, scale2 = 1.0;
+	/*float scale1 = 1.0, scale2 = 1.0;
 	if(pbgSpr->getSpriteWidth() > 1024)
 		scale1 = pbgSpr->getSpriteWidth() / 1024.f;
 	if(pbgSpr->getSpriteHeight() > 768)
@@ -632,9 +633,9 @@ void editorWindow::update() {
 	}
 	
 	if(sora::SORA->keyDown(SORA_KEY_LBUTTON)) {
-		float32 x, y;
+		float x, y;
 		sora::SORA->getMousePos(&x, &y);
-		if(peffect->isActive() && peffect->getBoundingBox().TestPoint(x, y)) {
+		if(peffect->isActive() && peffect->getBoundingBox().testPoint(x, y)) {
 			bMouseDown = true;
 		}
 	} else {
@@ -643,7 +644,7 @@ void editorWindow::update() {
 
 	
 	if(bMouseDown) {
-		float32 x, y;
+		float x, y;
 		sora::SORA->getMousePos(&x, &y);
 		peffect->moveTo(x, y, peffect->pheader.emitPos.z);
 		
@@ -659,7 +660,7 @@ void editorWindow::render() {
 	
 	peffect->render();
 	if(bShowBoundingBox) {
-		hgeRect box = peffect->getBoundingBox();
+		SoraRect box = peffect->getBoundingBox();
 		sora::SORA->renderBox(box.x1, box.y1, box.x2, box.y2, 0xFFFFFFFF);
 	}
 	

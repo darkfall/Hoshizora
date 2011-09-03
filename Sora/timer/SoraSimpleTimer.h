@@ -2,7 +2,7 @@
 //  SoraTimer.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/4/11.
+//  Created by Robert Bu on 8/4/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -11,9 +11,9 @@
 
 #include "../SoraPlatform.h"
 #include "../SoraTimestamp.h"
-#include "../function/SoraFunction.h"
-#include "../AutoContainer.h"
-#include "../uncopyable.h"
+#include "../SoraFunction.h"
+#include "../SoraUncopyable.h"
+#include "../util/SoraAutoContainer.h"
 
 namespace sora {
     
@@ -21,7 +21,7 @@ namespace sora {
     
     class SoraSimpleTimer {
     public:
-        typedef float32 TimeType;
+        typedef float TimeType;
         typedef SoraFunction<bool(SoraSimpleTimer*, TimeType)> TimerFunc;
         
         SoraSimpleTimer(const TimerFunc& func, ITimerManager* owner);

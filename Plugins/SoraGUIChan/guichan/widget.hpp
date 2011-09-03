@@ -50,6 +50,7 @@
 
 #include "guichan/color.hpp"
 #include "guichan/rectangle.hpp"
+#include "guichan/animationlistener.h"
 
 namespace gcn
 {
@@ -70,7 +71,6 @@ namespace gcn
     class Modifier;
     class Style;
     class Message;
-
     /**
      * Abstract class for widgets of Guichan. It contains basic functions 
      * every widget should have.
@@ -82,7 +82,7 @@ namespace gcn
      * @author Per Larsson.
      * @since 0.1.0
      */
-    class GCN_CORE_DECLSPEC Widget
+    class GCN_CORE_DECLSPEC Widget: public AnimationListener
     {
     public:
         /**
@@ -1148,11 +1148,15 @@ namespace gcn
          **/
         virtual void onMessage(const Message& mssg);
         
-        
         /**
          * Global widget factory access
          **/
         static Widget* createWidget(const std::string& name);
+        
+        // inherited from AnimationListener
+        
+        void animationBegan(Animation* animation);
+        void animationEnded(Animation* aniamtion);
         	
 	protected:
         /**

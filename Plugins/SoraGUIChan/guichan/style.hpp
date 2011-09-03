@@ -2,7 +2,7 @@
 //  style.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/9/11.
+//  Created by Robert Bu on 8/9/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -10,12 +10,15 @@
 #define Sora_style_h
 
 #include "guichan/color.hpp"
+#include "guichan/rectangle.hpp"
 #include "guichan/platform.hpp"
 
 #include <string>
 #include <map>
 
 namespace gcn {
+    
+    class Image;
 
     /**
      * The base class contains the style configuration of the gui widgets
@@ -28,24 +31,23 @@ namespace gcn {
      */
     
     /**
-     * Struct for containing style strings
+     * Struct for holding images
      **/
-    struct GCN_CORE_DECLSPEC StyleStringContainer {
-       
-        typedef std::map<std::string, std::string> StyleStringMap;
-
-        /**
-         * Get a style string with key
-         **/
-        std::string getStyleString(const std::string& key) const;
+    struct GCN_CORE_DECLSPEC ImageContainer {
+        typedef std::map<std::string, Image*> ImageMap;
         
-        /**
-         * Set a style string
-         **/
-        void setStyleString(const std::string& key, const std::string& val);
-                
+        Image* get(const std::string& key) const;
+        
+        Image* load(const std::string& key, const std::string& image);
+        
+        bool has(const std::string& key) const;
+        
+        void release(const std::string& key);
+       
+        void releaseAll();
+        
     private:
-        StyleStringMap mStyleStrings;
+        ImageMap mImages;
     };
     
     class GCN_CORE_DECLSPEC Style {
@@ -112,27 +114,55 @@ namespace gcn {
          * This is useful for configuring widget appearances
          * @Param the key of the style string
          **/
-        std::string getStyleString(const std::string& key) const;
+        std::string getString(const std::string& key) const;
         
         /**
          * Set a style string with key
-         * This is useful for configuring widget appearances
-         * For example, in your gui configuration, you can set button_surface to button_surface.png
-         * Then in you button widget, you can get the button_surface value and load the image
          * @Param the key of the style string
          * @Param the style string value
          **/
-        void setStyleString(const std::string& key, const std::string& val);
+        void setString(const std::string& key, const std::string& val);
+        
+        /**
+         * Check a string available or not
+         **/
+        bool hasString(const std::string& key) const;
         
         /**
          * Get a style color with key
          **/
-        gcn::Color getStyleColor(const std::string& key) const;
+        gcn::Color getColor(const std::string& key) const;
         
         /**
          * Set a style color with given key
          **/
-        void setStyleColor(const std::string& key, const gcn::Color& col);
+        void setColor(const std::string& key, const gcn::Color& col);
+        
+        /**
+         * Check a color available or not
+         **/
+        bool hasColor(const std::string& key) const;
+        
+        
+        /**
+         * Get a rectangle with key
+         **/
+        gcn::Rectangle getRect(const std::string& key) const;
+        
+        /**
+         * Set a rectangle with given key
+         **/
+        void setRect(const std::string& key, const gcn::Rectangle& rect);
+        
+        /**
+         * Check a rect available or not
+         **/
+        bool hasRect(const std::string& key) const;
+        
+        /**
+         * Get the image container
+         **/
+        ImageContainer& image();
         
     private:
         /**
@@ -152,10 +182,16 @@ namespace gcn {
          */
         Color mGlobalSelectionColor;
         
-        StyleStringContainer mStyleStrings;
+        typedef std::map<std::string, std::string> StyleStringMap;
+        StyleStringMap mStyleStrings;        
         
         typedef std::map<std::string, gcn::Color> StyleColorMap;
         StyleColorMap mStyleColors;
+        
+        typedef std::map<std::string, gcn::Rectangle> StyleRectMap;
+        StyleRectMap mStyleRects;
+        
+        ImageContainer mImageCont;
     };
     
 } // namespace gcn

@@ -2,25 +2,25 @@
 //  SoraDynamicFactory.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/2/11.
+//  Created by Robert Bu on 8/2/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraDynamicFactory_h
 #define Sora_SoraDynamicFactory_h
 
-#include "../SoraPlatform.h"
-#include "../SoraException.h"
-#include "../common.h"
-#include "../uncopyable.h"
-#include "../SoraLogger.h"
+#include "SoraPlatform.h"
+#include "SoraException.h"
+#include "SoraCommon.h"
+#include "SoraUncopyable.h"
+#include "SoraLogger.h"
 
 #include <map>
 
 namespace sora {
     
     template<class BASE>
-    class SORA_API SoraAbstractInstantiator: uncopyable {
+    class SORA_API SoraAbstractInstantiator: SoraUncopyable {
     public:
         virtual ~SoraAbstractInstantiator() {}
         
@@ -42,7 +42,7 @@ namespace sora {
      * Unlike SoraRTTI, no any constructor support
      **/    
     template<class BASE>
-    class SORA_API SoraDynamicFactory: uncopyable {
+    class SORA_API SoraDynamicFactory: SoraUncopyable {
     public:
         typedef SoraAbstractInstantiator<BASE> AbstractFactory;
         

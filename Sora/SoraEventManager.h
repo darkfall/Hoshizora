@@ -15,9 +15,7 @@
 #include "SoraKeyInfo.h"
 #include "SoraFileChangeEvent.h"
 
-#include "QuickList.h"
-#include "hash.h"
-
+#include "util/SoraHash.h"
 #include "support/md5lib.h"
 
 namespace sora {
@@ -64,12 +62,12 @@ namespace sora {
 		 create a timer event
 		 handler would receive a event, event type = SoraTimerEvent after time seconds
 		 */
-		void createTimerEvent(SoraEventHandler* handler, float32 time, bool repeat=false);
+		void createTimerEvent(SoraEventHandler* handler, float time, bool repeat=false);
 		/*
 		 register a timer event
 		 inheritate your class from SoraTimerEvent to pass your data to handler
 		 */
-		void registerTimerEvent(SoraEventHandler* handler, SoraTimerEvent* ev, float32 time, bool repeat=false);
+		void registerTimerEvent(SoraEventHandler* handler, SoraTimerEvent* ev, float time, bool repeat=false);
 		void unregisterTimerEvent(SoraEventHandler* handler);
 	
 		/*
@@ -88,9 +86,9 @@ namespace sora {
 		 */
 		void registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler);
 		void unregisterFileChangeEventHandler(SoraEventHandler* handler);
-		void setFileChangeDetectionInterval(float32 interval);
+		void setFileChangeDetectionInterval(float interval);
 		
-		void update(float32 dt);
+		void update(float dt);
 
 	private:        
 		class SoraEventInfo {
@@ -125,20 +123,20 @@ namespace sora {
 			SoraEventHandler* handler;
 			SoraTimerEvent* ev;
 			
-			float32 time;
-			float32 currTime;
-			float32 totalTime;
+			float time;
+			float currTime;
+			float totalTime;
 			bool repeat;
 			bool internalte;
 			
-			void update(float32 dt);
+			void update(float dt);
 			
-			SoraTimerEventInfo(SoraEventHandler* h, float32 _time, float32 _currTime, bool _repeat) :
+			SoraTimerEventInfo(SoraEventHandler* h, float _time, float _currTime, bool _repeat) :
 				time(_time), repeat(_repeat), internalte(true), currTime(_currTime), totalTime(0.f) {
 					ev = new SoraTimerEvent;
 					handler = h;
 				}
-			SoraTimerEventInfo(SoraEventHandler* h, SoraTimerEvent* _ev, float32 _time, float32 _currTime, bool _repeat) :
+			SoraTimerEventInfo(SoraEventHandler* h, SoraTimerEvent* _ev, float _time, float _currTime, bool _repeat) :
 				ev(_ev), time(_time), repeat(_repeat), internalte(false), currTime(_currTime), totalTime(0.f) {
 					handler = h;
 				}

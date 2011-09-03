@@ -2,7 +2,7 @@
  *  SoraINIFile.h
  *  OpenGLES Study 1
  *
- *  Created by griffin clare on 09��8��30��.
+ *  Created by Robert Bu on 09��8��30��.
  *  Copyright 2009 Robert Bu. All rights reserved.
  *
  */
@@ -51,12 +51,12 @@ public:
 	
 	int32		getInt(const SoraString& section, const SoraString& name, int32 iDefault=0);
 	SoraString  getString(const SoraString& section, const SoraString& name, const SoraString& sDefault);
-	float32		getFloat(const SoraString& section, const SoraString& name, float32 fDefault=0.f);
+	float		getFloat(const SoraString& section, const SoraString& name, float fDefault=0.f);
 	bool		getBool(const SoraString& section, const SoraString& name, bool bDefault=false);
 	
 	void writeInt(const SoraString& section, const SoraString& name, int32 iValue);
 	void writeString(const SoraString& section, const SoraString& name, const SoraString& sValue);
-	void writeFloat(const SoraString& section, const SoraString& name, float32 fValue);
+	void writeFloat(const SoraString& section, const SoraString& name, float fValue);
 	
 	vector<INISectorValue> getSector(const SoraString& section);
 	

@@ -22,11 +22,11 @@ namespace sora {
 		SoraObject();
 		virtual ~SoraObject();
 
-		virtual	uint32	update(float32 dt);
+		virtual	uint32	update(float dt);
 		virtual void	render();
         
         // inherited from SoraEventHandler
-        virtual void    onUpdate(float32 dt);
+        virtual void    onUpdate(float dt);
 		
 		virtual void	add(SoraObject* pobj);
 		virtual void	del(SoraObject* pobj);
@@ -35,13 +35,13 @@ namespace sora {
         typedef SoraMovable* PositionSource;
         void setPositionSource(PositionSource source);
 		
-		virtual void    setPosition(float32 x, float32 y);
-		virtual float32 getPositionX() const;
-		virtual float32 getPositionY() const;
-        virtual void    getPosition(float32& x, float32& y) const;
+		virtual void    setPosition(float x, float y);
+		virtual float getPositionX() const;
+		virtual float getPositionY() const;
+        virtual void    getPosition(float& x, float& y) const;
         
-        virtual float32 getAbsolutePositionX() const;
-        virtual float32 getAbsolutePositionY() const;
+        virtual float getAbsolutePositionX() const;
+        virtual float getAbsolutePositionY() const;
         
         virtual void    setParent(SoraObject* obj);
         
@@ -52,7 +52,7 @@ namespace sora {
         SoraObject*     next() const;
 				
 		SoraObject* getObjByName(const SoraString& n);
-        SoraObject* getObjByName(stringId sid);
+        SoraObject* getObjByName(SoraStringId sid);
 		
 		uint32  getType() const;
 		void    setType(uint32 t);

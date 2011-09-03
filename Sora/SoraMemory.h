@@ -2,7 +2,7 @@
 //  SoraMemory.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/31/11.
+//  Created by Robert Bu on 7/31/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -49,6 +49,10 @@ namespace sora {
     
     static void setGlobalRealloc(SoraMemoryAllocFunc::ReallocFunc re) {
         g_memory_allocator.sora_realloc = re;
+    }
+    
+    inline void* _sora_realloc(void* ptr, size_t size) {
+        return realloc(ptr, size);
     }
     
     inline void* sora_malloc(size_t size) {

@@ -2,7 +2,7 @@
 //  SoraShaderManager.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/14/11.
+//  Created by Robert Bu on 7/14/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -34,7 +34,7 @@ namespace sora {
     }
     
     SoraShader* SoraShaderManager::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
-        stringId sid = GetUniqueStringId(file);
+        SoraStringId sid = GetUniqueStringId(file);
         ShaderMap::iterator itShader = mShaders.find(sid);
         if(itShader != mShaders.end()) {
             return itShader->second;

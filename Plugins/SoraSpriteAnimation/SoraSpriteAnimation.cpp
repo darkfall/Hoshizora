@@ -15,8 +15,8 @@
 #include "json/json.h"
 #include "llexer/llexer.h"
 
-#include "hash.h"
-#include "common.h"
+#include "util/SoraHash.h"
+#include "SoraCommon.h"
 
 #include <cassert>
 
@@ -661,10 +661,10 @@ namespace sora {
             setTexture(sora::SORA->createTexture(s2ws(texturePath)));
             if(mQuad.tex != NULL) {
                 if(anmCount != 0 && anmNodes[0].texList.size() != 0)
-                    setTextureRect((float32)anmNodes[0].texList[0].tx, 
-                                   (float32)anmNodes[0].texList[0].ty, 
-                                   (float32)anmNodes[0].texList[0].tw, 
-                                   (float32)anmNodes[0].texList[0].th);
+                    setTextureRect((float)anmNodes[0].texList[0].tx, 
+                                   (float)anmNodes[0].texList[0].ty, 
+                                   (float)anmNodes[0].texList[0].tw, 
+                                   (float)anmNodes[0].texList[0].th);
             } else 
                 SORA->logf("error loading sprite from %s", texturePath.c_str());
         }
@@ -673,7 +673,7 @@ namespace sora {
     
     void SoraSpriteAnimation::render() {
         LANM_TEX texRect = getCurrTex();
-        setTextureRect((float32)texRect.tx, (float32)texRect.ty, (float32)texRect.tw, (float32)texRect.th);
+        setTextureRect((float)texRect.tx, (float)texRect.ty, (float)texRect.tw, (float)texRect.th);
         SoraSprite::render(getPositionX(), getPositionY());
     }
 	
@@ -690,10 +690,10 @@ namespace sora {
 	void SoraSpriteAnimation::setAnchor(int32 anchor) {
 		switch (anchor) {
 			case ANCHOR_UPPER_LEFT: setCenter(0.f, 0.f); break;
-			case ANCHOR_UPPER_RIGHT: setCenter((float32)getSpriteWidth(), 0.f); break;
-			case ANCHOR_LOWER_RIGHT: setCenter((float32)getSpriteWidth(), (float32)getSpriteHeight()); break;
-			case ANCHOR_LOWER_LEFT: setCenter(0.f, (float32)getSpriteHeight()); break;
-			case ANCHOR_MIDDLE: setCenter((float32)getSpriteWidth()/2, (float32)getSpriteHeight()/2); break;
+			case ANCHOR_UPPER_RIGHT: setCenter((float)getSpriteWidth(), 0.f); break;
+			case ANCHOR_LOWER_RIGHT: setCenter((float)getSpriteWidth(), (float)getSpriteHeight()); break;
+			case ANCHOR_LOWER_LEFT: setCenter(0.f, (float)getSpriteHeight()); break;
+			case ANCHOR_MIDDLE: setCenter((float)getSpriteWidth()/2, (float)getSpriteHeight()/2); break;
 		}
 	}
 	

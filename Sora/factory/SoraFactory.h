@@ -2,7 +2,7 @@
 //  SoraFactory.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/31/11.
+//  Created by Robert Bu on 7/31/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -15,7 +15,7 @@
 #include "../SoraStringConv.h"
 #include "../function/SoraFunction.h"
 
-#include "../uncopyable.h"
+#include "../SoraUncopyable.h"
 
 
 namespace sora {

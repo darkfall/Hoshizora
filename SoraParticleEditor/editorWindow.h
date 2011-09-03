@@ -34,7 +34,7 @@ public:
 private:
 	sora::SoraFont* pFont;
 	
-	float32 mBGPosX, mBGPosY;
+	float mBGPosX, mBGPosY;
 };
 
 #endif

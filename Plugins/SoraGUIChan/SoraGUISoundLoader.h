@@ -14,7 +14,7 @@
 
 #include "SoraSingleton.h"
 #include "SoraPlatform.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 #include "SoraSoundFile.h"
 
@@ -34,7 +34,7 @@ namespace gcn {
         void play(const std::string& soundName);
 		
 	private:
-		typedef std::map<sora::stringId, sora::SoraSoundEffectFile*> SoundMap;
+		typedef std::map<sora::SoraStringId, sora::SoraSoundEffectFile*> SoundMap;
 		SoundMap mSoundMap;
 	};
 	

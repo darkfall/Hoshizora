@@ -2,7 +2,7 @@
 //  SoraComponentHolder.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/21/11.
+//  Created by Robert Bu on 8/21/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -12,10 +12,11 @@
 
 namespace sora {
     
-    void SoraComponentHolder::addComponent(const SoraString& tag, SoraComponent* cop) {
-        if(getComponent(tag) != NULL)
+    void SoraComponentHolder::addComponent(SoraComponent* cop) {
+        printf("%s\n", cop->getName().c_str());
+        if(getComponent(cop->getName()) != NULL)
             THROW_SORA_EXCEPTION(ExistsException, "Component already exists!");
-        mComponents.insert(std::make_pair(tag, cop));
+        mComponents.insert(std::make_pair(cop->getName(), cop));
         
         ComponentMap::iterator it = mComponents.begin();
         while(it != mComponents.end()) {
@@ -29,13 +30,15 @@ namespace sora {
             
             ++it;
         }
+        
+        cop->onInit();
     }
     
     SoraComponent* SoraComponentHolder::getComponent(const SoraString& tag) const {
         ComponentMap::const_iterator it = mComponents.find(tag);
         if(it != mComponents.end())
             return it->second;
-        return NULL;
+        return 0;
     }
     
     SoraComponent* SoraComponentHolder::removeComponent(const SoraString& tag) {
@@ -53,9 +56,10 @@ namespace sora {
                 ++itComp;
             }
             
+            co->onRemove();
             return co;
         }
-        return NULL;
+        return 0;
     }
     
     SoraComponent* SoraComponentHolder::removeComponent(const SoraComponent* co) {
@@ -74,10 +78,12 @@ namespace sora {
                     }
                     ++itComp;
                 }
+                
+                co2->onRemove();
                 return co2;
             }
         }
-        return NULL;
+        return 0;
     }
     
     void SoraComponentHolder::sendMessage(SoraMessageEvent* message) {
@@ -91,6 +97,13 @@ namespace sora {
         }
     }
     
+    void SoraComponentHolder::sendMessageTo(const SoraString& to, SoraMessageEvent* message) {
+        ComponentMap::const_iterator it = mComponents.find(to);
+        if(it != mComponents.end()) {
+            it->second->onMessage(message);
+        }
+    }
+    
     bool SoraComponentHolder::hasProperty(const DynRttiClassKeyType& pid) {
         SoraStringTokenlizer token(pid);
         if(token.size() == 2) {
@@ -101,33 +114,43 @@ namespace sora {
         return false;
     }
     
-    bool SoraComponentHolder::addProperty(const DynRttiClassKeyType& pid, SoraPropertyInfo* prop) {
+    void SoraComponentHolder::addProperty(const DynRttiClassKeyType& pid, SoraPropertyBase* prop) {
         SoraStringTokenlizer token(pid);
         if(token.size() == 2) {
-            SoraComponent* comp = getComponent(token.first());
+            SoraComponent* comp = getComponent(token.front());
             if(comp)
-                return comp->addProperty(token.last(), prop);
+                comp->addProperty(token.last(), prop);
         }
-        return false;
     }
     
-    bool SoraComponentHolder::addProperty(const DynRttiClassKeyType& pid, SoraPropertyPtr prop) {
+    SoraPropertyBase* SoraComponentHolder::getProperty(const DynRttiClassKeyType& pid) const {
         SoraStringTokenlizer token(pid);
         if(token.size() == 2) {
-            SoraComponent* comp = getComponent(token.first());
+            SoraComponent* comp = getComponent(token.front());
             if(comp)
-                return comp->addProperty(token.last(), prop);
+                return comp->getPropertyBase(token.back());
         }
-        return false;
+        return 0;
     }
     
-    SoraPropertyPtr SoraComponentHolder::getProperty(const DynRttiClassKeyType& pid) {
-        SoraStringTokenlizer token(pid);
-        if(token.size() == 2) {
-            SoraComponent* comp = getComponent(token.first());
-            if(comp)
-                return comp->getProperty(token.last());
+    void SoraComponentHolder::onUpdate(float dt) {
+        ComponentMap::const_iterator it = mComponents.begin();
+        while(it != mComponents.end()) {
+            it->second->onUpdate(dt);
+            ++it;
         }
-        return SoraPropertyPtr();
+    }
+    
+    void SoraComponentHolder::onRender() {
+        ComponentMap::const_iterator it = mComponents.begin();
+        while(it != mComponents.end()) {
+            it->second->onRender();
+            ++it;
+        }
+    }
+    
+    bool SoraComponentHolder::hasComponent(const SoraString& tag) const {
+        ComponentMap::const_iterator it = mComponents.begin();
+        return it != mComponents.end();
     }
 } // namespace sora

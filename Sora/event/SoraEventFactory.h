@@ -2,7 +2,7 @@
 //  SoraEventFactory.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/6/11.
+//  Created by Robert Bu on 8/6/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -51,25 +51,25 @@ namespace sora {
     };
     
     template<typename T>
-    void SoraEventFactory::registerEvent(const std::string& name) {
+    inline void SoraEventFactory::registerEvent(const std::string& name) {
         SoraDynamicFactory<SoraEvent>::registerClass<T>(name);
     }
     
     template<typename T>
-    void SoraEventFactory::registerEvent(const std::string& name, InstantiatorType* instantiator) {
+    inline void SoraEventFactory::registerEvent(const std::string& name, InstantiatorType* instantiator) {
         SoraDynamicFactory<SoraEvent>::registerClass<T>(name, instantiator);
     }
     
-    static SoraEvent* CreateEvent(const std::string& name) {
+    inline SoraEvent* CreateEvent(const std::string& name) {
         return SoraEventFactory::Instance()->createEvent(name);
     }
     
-    static void DestroyEvent(SoraEvent* evt) {
+    inline void DestroyEvent(SoraEvent* evt) {
         return SoraEventFactory::Instance()->destroyEvent(evt);
     }
     
     template<typename T>
-    static void RegisterEvent(const std::string& name) {
+    inline void RegisterEvent(const std::string& name) {
         SoraEventFactory::Instance()->registerEvent<T>(name);
     }
 } // namespace sora

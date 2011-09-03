@@ -53,7 +53,7 @@ namespace sora {
 	
 	bool SoraMenuBarMenu::update() {
 		if(mActive) {
-			float32 x, y;
+			float x, y;
 			SORA->getMousePos(&x, &y);
 			mCurrentItem = -1;
 			
@@ -82,8 +82,8 @@ namespace sora {
 	
 	void SoraMenuBarMenu::render() {
 		if(mFont) {
-			float32 distHeight = (mParent->getMenuBarHeight()-mItemHeight)/2;
-			float32 posy = mParent->getMenuBarHeight();
+			float distHeight = (mParent->getMenuBarHeight()-mItemHeight)/2;
+			float posy = mParent->getMenuBarHeight();
 
 			SORA->renderBox(mPosX, 0.f, mPosX+mWidth, posy, 0xFF000000);
 			
@@ -159,21 +159,21 @@ namespace sora {
 		return mParent;
 	}
 	
-	bool SoraMenuBarMenu::testPoint(float32 x, float32 y) {
+	bool SoraMenuBarMenu::testPoint(float x, float y) {
 		return (x >= mPosX && x <= mPosX+mWidth && y >= 0.f && y <= mItemHeight);
 	}
 	
 	void SoraMenuBarMenu::adjustWidth() {
 		if(mFont) {
 			for(size_t i=0; i<mItems.size(); ++i) {
-				float32 width = mFont->getStringWidth(mItems[i].getName().c_str());
+				float width = mFont->getStringWidth(mItems[i].getName().c_str());
 				if(mWidth < width+20.f)
 					mWidth = width+20.f;
 			}
 		}
 	}
 	
-	float32 SoraMenuBarMenu::getWidth() const {
+	float SoraMenuBarMenu::getWidth() const {
 		return mWidth;
 	}
 	
@@ -218,7 +218,7 @@ namespace sora {
 		return mAvailable;
 	}
 	
-	SoraMenuBar::SoraMenuBar(float32 height): 
+	SoraMenuBar::SoraMenuBar(float height): 
 	mFont(NULL),
 	mMenuBarHeight(height),
 	mMenuBarLength(0.f),
@@ -269,7 +269,7 @@ namespace sora {
 			return;
 		
 		if(mActive || mShowAlways) {
-			float32 screenWidth = (float32)SORA->getScreenWidth();
+			float screenWidth = (float)SORA->getScreenWidth();
 			SORA->fillBox(0.f, 0.f, screenWidth, mMenuBarHeight, 0x99FFFFFF);
 			SORA->renderBox(0.f, 0.f, screenWidth-1.f, mMenuBarHeight-1.f, 0xFFAAAAAA);
 			
@@ -281,7 +281,7 @@ namespace sora {
 		}
 	}
 	
-	bool SoraMenuBar::activeMenu(float32 x, float32 y) {
+	bool SoraMenuBar::activeMenu(float x, float y) {
 		MENUBAR_LIST::iterator itMenu = mMenus.begin();
 		while(itMenu != mMenus.end()) {
 			if(!(*itMenu)->isActive() && (*itMenu)->testPoint(x, y)) {
@@ -304,7 +304,7 @@ namespace sora {
 		if(!mEnabled || mMenus.size() == 0)
 			return;
 		
-		float32 posx, posy;
+		float posx, posy;
 		SORA->getMousePos(&posx, &posy);
 		
 		if(mActive || mShowAlways) {
@@ -376,11 +376,11 @@ namespace sora {
 		return mFont;
 	}
 	
-	float32 SoraMenuBar::getMenuBarHeight() const {
+	float SoraMenuBar::getMenuBarHeight() const {
 		return mMenuBarHeight;
 	}
 	
-	void SoraMenuBar::setMenuBarHeight(float32 height) {
+	void SoraMenuBar::setMenuBarHeight(float height) {
 		mMenuBarHeight = height;
 	}
 	

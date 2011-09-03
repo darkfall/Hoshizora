@@ -126,7 +126,7 @@ namespace sora {
     
     SoraShader* SoraActor::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
         if(m_Sprite)
-            return m_Sprite->attachShader(file, entry, (SORA_SHADER_TYPE)type);
+            return m_Sprite->attachShader(file, entry, type);
         return NULL;
     }
     

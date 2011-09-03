@@ -2,7 +2,7 @@
 //  SoraSpriteParser.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/4/11.
+//  Created by Robert Bu on 7/4/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 #include "json/json.h"
 
 #include "SoraSpriteAnimation/SoraSpriteAnimation.h"

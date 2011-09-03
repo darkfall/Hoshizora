@@ -94,8 +94,8 @@ namespace sora {
 		bool isActive() const;
 		void setActiveKey(const SoraHotkey& key);
 		
-		void setPosition(float32 posx, float32 posy);
-		void setSize(float32 width, float32 height);
+		void setPosition(float posx, float posy);
+		void setSize(float width, float height);
         
         void setUseSysTerm(bool flag);
 		
@@ -110,11 +110,11 @@ namespace sora {
         SORA_CLASS_DEF_FIELD_SET_GET_P(uint32, CaretColor, m)
 		SORA_CLASS_DEF_FIELD_SET_GET_P(uint32, ResultColor, m)
         
-		SORA_CLASS_DEF_FIELD_SET_GET_P(float32, Width, m)
-        SORA_CLASS_DEF_FIELD_SET_GET_P(float32, Height, m)
+		SORA_CLASS_DEF_FIELD_SET_GET_P(float, Width, m)
+        SORA_CLASS_DEF_FIELD_SET_GET_P(float, Height, m)
         
-		SORA_CLASS_DEF_FIELD_SET_GET_P(float32, PositionX, m)
-        SORA_CLASS_DEF_FIELD_SET_GET_P(float32, PositionY, m)
+		SORA_CLASS_DEF_FIELD_SET_GET_P(float, PositionX, m)
+        SORA_CLASS_DEF_FIELD_SET_GET_P(float, PositionY, m)
 		
 	private:        
 		void drawCmds();
@@ -125,10 +125,10 @@ namespace sora {
 		int32 mActiveKeyId;
 		
 		bool mBackspaceDown;
-		float32 mBackspaceTime;
+		float mBackspaceTime;
 		
 		bool mUpDown, mDownDown;
-		float32 mUpDownTime, mDownDownTime;
+		float mUpDownTime, mDownDownTime;
 		
 		bool mMssgReachTop;
         bool mUseSysTerm;
@@ -158,7 +158,7 @@ namespace sora {
 		int32 mCurrLine;
 		int32 mStartLine;
 		int32 mCurrHeight;
-		float32 mCaretShow;
+		float mCaretShow;
 	};
 	
 #define SORA_DEF_CONSOLE_EVT_FUNC(func, cmd) \

@@ -2,7 +2,7 @@
 //  SoraRegex.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/1/11.
+//  Created by Robert Bu on 8/1/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #define Sora_SoraRegex_h
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 #include <vector>
 
 
@@ -29,7 +29,7 @@ namespace sora {
      *  Modified for Hoshizora by Griffin Bu
      **/
     
-    class SORA_API SoraRegex: uncopyable {
+    class SORA_API SoraRegex: SoraUncopyable {
     public:
         enum Options {
             // case insensitive matching

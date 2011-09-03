@@ -2,29 +2,32 @@
 //  SoraComponentFactory.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/23/11.
+//  Created by Robert Bu on 8/23/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
-#ifndef Sora_SoraComponentFactory_h
-#define Sora_SoraComponentFactory_h
+#ifndef Sora_SoraComponentFFactory_h
+#define Sora_SoraComponentFFactory_h
 
 #include "../factory/SoraFactory.h"
-
 #include "SoraComponent.h"
-#include "SoraEntity.h"
 
 namespace sora {
     
-    typedef SoraAbstractFactory<SoraComponent*, SoraComponent*(SoraEntity&)> SoraComponentFactory;
+    typedef SoraAbstractFactory<SoraComponent, SoraComponent*(void)> SoraComponentFactory;
     
     template<typename T>
     static void RegisterComponent(const SoraString& name, const T& fn) {
         SoraComponentFactory::Instance()->reg(name, fn);
     }
     
-    static SoraComponent* CreateComponent(const SoraString& name, SoraEntity& entity) {
-        SoraComponentFactory::Instance()->createInstance(name, entity);
+    template<typename T>
+    static void RegisterComponent(const SoraString& name) {
+        SoraComponentFactory::Instance()->reg_ctor<T>(name);
+    }
+    
+    static SoraComponent* CreateComponent(const SoraString& name) {
+        SoraComponentFactory::Instance()->createInstance(name);
     }
     
     static void DestroyComponent(SoraComponent* comp) {

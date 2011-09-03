@@ -8,11 +8,11 @@
 #include "SoraPlatform.h"
 #include "SoraEnvValues.h"
 
-#include "stringId.h"
+#include "SoraStringId.h"
 #include <map>
 
 /* hash functions */
-#include "hash.h"
+#include "util/SoraHash.h"
 
 namespace sora {
 	
@@ -45,7 +45,7 @@ namespace sora {
 		}
 
 		void add(const SoraWString& key, HSORATEXTURE tex) {			
-			stringId uiKey = str2id(key);
+			SoraStringId uiKey = str2id(key);
 			TEX_MAP::iterator pos = texMap.find(uiKey);
 			if(pos == texMap.end()) {
 				texMap[uiKey] = tex;
@@ -85,7 +85,7 @@ namespace sora {
 		}
 		
 		void addRf(const SoraWString& key) {
-			stringId uiKey = str2id(key);
+			SoraStringId uiKey = str2id(key);
 			texRefs[uiKey]++;
 		}
 		
@@ -110,7 +110,7 @@ namespace sora {
 		}
 		
 		HSORATEXTURE get(const SoraWString& key) {
-			stringId uiKey = str2id(key);
+			SoraStringId uiKey = str2id(key);
 			TEX_MAP::iterator p = texMap.find(uiKey);
 			if(p != texMap.end()) {
 				//SoraTexture* tex = (SoraTexture*)p->second;
@@ -128,7 +128,7 @@ namespace sora {
             return false;
         }
         
-        stringId getTextureName(HSORATEXTURE tex) {
+        SoraStringId getTextureName(HSORATEXTURE tex) {
             TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
                 return p->second;
@@ -137,12 +137,12 @@ namespace sora {
         }
 		
 	private:
-		typedef hash_map<stringId, HSORATEXTURE> TEX_MAP;
+		typedef hash_map<SoraStringId, HSORATEXTURE> TEX_MAP;
 		TEX_MAP texMap;
-		typedef hash_map<HSORATEXTURE, stringId> TEXMAP_RV;
+		typedef hash_map<HSORATEXTURE, SoraStringId> TEXMAP_RV;
 		TEXMAP_RV texMapRv;
 		
-		typedef hash_map<stringId, int32> TEX_USE_COUNT;
+		typedef hash_map<SoraStringId, int32> TEX_USE_COUNT;
 		TEX_USE_COUNT texRefs;
 	};
 };

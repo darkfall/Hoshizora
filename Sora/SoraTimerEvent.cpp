@@ -20,15 +20,15 @@ namespace sora {
 		paused = 0;
 	}
 
-	float32 timer::getPausedTime() const {
+	float timer::getPausedTime() const {
 		return pauseTime;
 	}
 
-	float32 timer::getStartedTime() const {
+	float timer::getStartedTime() const {
 		return startTime;
 	}
 
-	float32 timer::getTime() const {
+	float timer::getTime() const {
 		if(started == 1) {
 			if(paused == 1) {
 				return pauseTime;
@@ -46,7 +46,7 @@ namespace sora {
 		return paused;
 	}
 
-	uint32 timer::update(float32 delta) {
+	uint32 timer::update(float delta) {
 		if(started == 1) {
 			if(paused == 1) {
 				pauseTime += delta;

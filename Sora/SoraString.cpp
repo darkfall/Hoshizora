@@ -2,14 +2,14 @@
 //  SoraString.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/13/11.
+//  Created by Robert Bu on 7/13/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #include "SoraString.h"
 #include "SoraException.h"
 #include "SoraStringConv.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 namespace sora {
     

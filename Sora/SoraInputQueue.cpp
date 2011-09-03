@@ -2,7 +2,7 @@
 //  SoraInputQueue.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/2/11.
+//  Created by Robert Bu on 7/2/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -36,7 +36,7 @@ namespace sora {
     static HotkeyCont g_hotkeys;
     static int32 g_next_hotkeyid = 0;
     
-    float32 g_mousex = 0.f, g_mousey = 0.f;
+    float g_mousex = 0.f, g_mousey = 0.f;
     bool g_lbuttondown = false, g_rbuttondown = false, g_mbuttondown = false;
     
     typedef std::queue<SoraMouseEvent> MouseEventCont;
@@ -168,7 +168,7 @@ namespace sora {
         if(!g_input)
 			return;
 
-		float32 curMouseX, curMouseY;
+		float curMouseX, curMouseY;
         int mouseWheel;
         bool leftBtn, rightBtn, middleBtn;
         

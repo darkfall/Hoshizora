@@ -57,15 +57,15 @@ namespace gcn {
     }
     
     void Animation::onAdd(Widget* widget) {
-        widget->sendMessage(Animation::MessageStart);
+        widget->animationBegan(this);
     }
    
     void Animation::onRemove(Widget* widget) {
-        widget->sendMessage(Animation::MessageEnd);
+        widget->animationEnded(this);
     }
     
     void Animation::onRelease(Widget* widget) {
-        widget->sendMessage(Animation::MessageEnd);
+        widget->animationEnded(this);
     }
     
 } // namespace gcn

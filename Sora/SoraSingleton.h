@@ -1,8 +1,8 @@
 /*
  *  SoraSingleton.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/24/10.
+ *  Created by Robert Bu on 8/24/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -11,12 +11,11 @@
 #define SORA_SINGLETON_H_
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
 
 namespace sora {
 	
 	template<class T>
-	class SoraSingleton: uncopyable {
+	class SoraSingleton {
 	public:
 		static T* Instance() {
 			if(!pInstance) pInstance = new T();
@@ -50,7 +49,7 @@ namespace sora {
      **/
     
     template<class T>
-    class SoraDirectSingleton: uncopyable {
+    class SoraDirectSingleton {
     protected:
         static T * _singleton;
    

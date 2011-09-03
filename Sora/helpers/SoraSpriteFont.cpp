@@ -41,7 +41,7 @@ namespace sora {
 		}
 	}
 
-	void SoraSpriteFont::render(float32 x, float32 y, const wchar_t* text, bool hcenter , bool vcenter) {
+	void SoraSpriteFont::render(float x, float y, const wchar_t* text, bool hcenter , bool vcenter) {
 		if(!mFontSprite)
 			return;
 		
@@ -58,10 +58,10 @@ namespace sora {
 			int32 index = static_cast<int32>(*p);
 			if(index >= 0 && index < 128) {
 				if(mCharPos[index]) {
-					mFontSprite->setTextureRect((float32)mCharPos[index],
+					mFontSprite->setTextureRect((float)mCharPos[index],
 												0.f, 
-												(float32)mWidth, 
-												(float32)mHeight);
+												(float)mWidth, 
+												(float)mHeight);
 					mFontSprite->setRotation(mRotation);
 					mFontSprite->setScale(mScale, mScale);
 				
@@ -74,7 +74,7 @@ namespace sora {
 		}
 	}
 	
-	void SoraSpriteFont::print(float32 x, float32 y, int32 align, const wchar_t *format, ...) {
+	void SoraSpriteFont::print(float x, float y, int32 align, const wchar_t *format, ...) {
 		va_list	ArgPtr;
 #ifdef HAS_WSTRING
 		wchar_t Message[1024] = {0};
@@ -93,7 +93,7 @@ namespace sora {
 		
 	}
 	
-	void SoraSpriteFont::render(float32 x, float32 y, int32 align, const wchar_t* text) {
+	void SoraSpriteFont::render(float x, float y, int32 align, const wchar_t* text) {
 		if(align == FONT_ALIGNMENT_RIGHT)
 			x -= getStringWidth(text);
 		else if(align == FONT_ALIGNMENT_CENTER)
@@ -113,59 +113,59 @@ namespace sora {
 		return 0;
 	}
 	
-	void SoraSpriteFont::setKerningWidth(float32 kerning) {
+	void SoraSpriteFont::setKerningWidth(float kerning) {
 		mKerningWidth = kerning;
 	}
 	
-	void SoraSpriteFont::setKerningHeight(float32 kerning) {
+	void SoraSpriteFont::setKerningHeight(float kerning) {
 		mKerningHeight = kerning;
 	}
 	
-	float32	SoraSpriteFont::getKerningWidth() {
+	float	SoraSpriteFont::getKerningWidth() {
 		return mKerningWidth;
 	}
 	
-	float32	SoraSpriteFont::getKerningHeight() {
+	float	SoraSpriteFont::getKerningHeight() {
 		return mKerningHeight;
 	}
 	
-	float32	SoraSpriteFont::getStringWidth(const wchar_t* text) {
+	float	SoraSpriteFont::getStringWidth(const wchar_t* text) {
 		const wchar_t* p = text;
 		
-		float32 w = 0.f;
+		float w = 0.f;
 		while(*p) {
 			w += mWidth;
 		}
 		return w;
 	}
 	
-	float32 SoraSpriteFont::getStringHeight(const wchar_t* text) {
+	float SoraSpriteFont::getStringHeight(const wchar_t* text) {
 		const wchar_t* p = text;
 		
-		float32 h = static_cast<float32>(mHeight);
+		float h = static_cast<float>(mHeight);
 		while(*p)
 			if(*p == L'\n')
 				h += mHeight;
 		return h;
 	}
 	
-	float32	SoraSpriteFont::getHeight() {
-		return static_cast<float32>(mHeight);
+	float	SoraSpriteFont::getHeight() {
+		return static_cast<float>(mHeight);
 	}
 	
 	uint32 SoraSpriteFont::getFontSize() {
 		return static_cast<uint32>(mWidth);
 	}
 	
-	float32	SoraSpriteFont::getWidthFromCharacter(wchar_t c, bool original) {
-		return static_cast<float32> (mWidth);
+	float	SoraSpriteFont::getWidthFromCharacter(wchar_t c, bool original) {
+		return static_cast<float> (mWidth);
 	}
 	
-	void SoraSpriteFont::setCharRotation(float32 rot) {
+	void SoraSpriteFont::setCharRotation(float rot) {
 		mRotation = rot;
 	}
 	
-	void SoraSpriteFont::setScale(float32 scale) {
+	void SoraSpriteFont::setScale(float scale) {
 		mScale = scale;
 	}
 	

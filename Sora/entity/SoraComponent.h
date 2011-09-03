@@ -2,7 +2,7 @@
 //  SoraComponent.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/21/11.
+//  Created by Robert Bu on 8/21/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -19,12 +19,20 @@ namespace sora {
      * Must be used within a class that derives from SoraComponent
      **/
     
-#define SORA_IMPL_COMPONENT(cls) \
+    /**
+     * Helper macro to define component name
+     * Also insert a static GetName method to help fast cast between types
+     **/
+#define SORA_DEF_COMPONENT(cls) \
     virtual std::string getName() const { \
         return std::string(#cls); \
+    } \
+    static const std::string& GetName() { \
+        static std::string name(#cls); \
+        return name; \
     }
     
-    class SoraEntity;
+    class SoraLightWeightEntity;
     
     struct SORA_API SoraComponent: public SoraDynRTTIClass {
         /**
@@ -33,24 +41,20 @@ namespace sora {
          * Otherwise only the component itself would be informed of the existence
          * of other components
          **/
-        SoraComponent(SoraEntity* owner, bool heavyWeight=true):
-        SoraDynRTTIClass(getName()),
+        SoraComponent(const std::string& name, bool heavyWeight=true):
+        SoraDynRTTIClass(name),
         mHeavyWeight(heavyWeight),
-        mOwner(owner) {
+        mOwner(0) {
             
         }
                 
         virtual ~SoraComponent() {}
         
-        /**
-         * Owner set/get function
-         * Use with care
-         **/
-        SoraEntity* getOwner() const {
+        SoraLightWeightEntity* getOwner() const {
             return mOwner;
         }
         
-        void setOwner(SoraEntity* entity) {
+        void setOwner(SoraLightWeightEntity* entity) {
             mOwner = entity;
         }
         
@@ -63,9 +67,7 @@ namespace sora {
          * Better be the class name
          * Suggest use SORA_IMPL_COMPONENT to implement this in your own class
          **/
-        virtual std::string getName() const {
-			return "ComponentBase";
-		}
+        virtual std::string getName() const = 0;
         
         /**
          * Components must implement message protocol 
@@ -99,7 +101,7 @@ namespace sora {
         /**
          * Message that triggers when component being updated
          **/
-        virtual void onUpdate() { }
+        virtual void onUpdate(float dt) { }
         
         /**
          * Message that triggers when component being rendered
@@ -111,7 +113,7 @@ namespace sora {
         
     private:
         bool mHeavyWeight;
-        SoraEntity* mOwner;
+        SoraLightWeightEntity* mOwner;
     };
     
 } // namespace sora

@@ -2,7 +2,7 @@
  *  SoraINIFile.cpp
  *  OpenGLES Study 1
  *
- *  Created by griffin clare on 09��8��30��.
+ *  Created by Robert Bu on 09��8��30��.
  *  Copyright 2009 Robert Bu. All rights reserved.
  *
  */
@@ -146,7 +146,7 @@ SoraString SoraINIFile::getString(const SoraString& section, const SoraString& n
 	return sDefault;
 }
 
-float32 SoraINIFile::getFloat(const SoraString& section, const SoraString& name, float32 fDefault) {
+float SoraINIFile::getFloat(const SoraString& section, const SoraString& name, float fDefault) {
 	vector<INISector>::iterator p = sec.begin();
 	for(p = sec.begin(); p != sec.end(); ++p) {
 		if(p->name.compare(section) == 0) {
@@ -260,7 +260,7 @@ void SoraINIFile::writeInt(const SoraString& section, const SoraString& name, in
 	}		
 }
 
-void SoraINIFile::writeFloat(const SoraString& section, const SoraString& name, float32 fValue) {
+void SoraINIFile::writeFloat(const SoraString& section, const SoraString& name, float fValue) {
 	bFileWrite = true;
 	if(section.compare("public") == 0)
 		publicSec.value.push_back(INISectorValue(name, fp_to_str(fValue)));

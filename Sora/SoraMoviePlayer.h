@@ -34,8 +34,8 @@ namespace sora {
         virtual bool isPlaying() const = 0;
         virtual bool isPaused() const = 0;
         
-        virtual float32 getPlayRate() const = 0;
-        virtual void setPlayRate(float32 rate) = 0;
+        virtual float getPlayRate() const = 0;
+        virtual void setPlayRate(float rate) = 0;
         
         virtual uint64 getLength() const = 0;
         virtual float getFPS() const = 0;

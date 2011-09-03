@@ -2,7 +2,7 @@
 //  SoraDeltaWatch.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/31/11.
+//  Created by Robert Bu on 7/31/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -29,13 +29,13 @@ namespace sora {
         
         void update();
         
-        float32 getDelta() const;
+        float getDelta() const;
         
     private:
-        typedef std::deque<float32> FrameQueue;
+        typedef std::deque<float> FrameQueue;
         FrameQueue mFrames;
         
-        float32 mCurrDelta;
+        float mCurrDelta;
     };
     
     

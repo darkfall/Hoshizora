@@ -2,7 +2,7 @@
 //  SoraKeyInfo.cpp
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/30/11.
+//  Created by Robert Bu on 7/30/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -177,11 +177,11 @@ namespace sora {
         return !middleBtnDown;
     }
     
-    float32 SoraMouseEvent::getX() const {
+    float SoraMouseEvent::getX() const {
         return x;
     }
     
-    float32 SoraMouseEvent::getY() const {
+    float SoraMouseEvent::getY() const {
         return y;
     }
     

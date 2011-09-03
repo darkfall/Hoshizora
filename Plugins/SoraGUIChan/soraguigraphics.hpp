@@ -63,9 +63,9 @@ namespace gcn
 
         void popClipArea();
         
-        void setGlobalTransparency(float32 a);
+        void setGlobalTransparency(float a);
         
-        float32 getGlobalTransparency() const;
+        float getGlobalTransparency() const;
 		
     protected:
         sora::SoraCore* sora;

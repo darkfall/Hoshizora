@@ -2,7 +2,7 @@
 //  SoraPreDeclare.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/31/11.
+//  Created by Robert Bu on 7/31/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraAny.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 #include <string>
 #include <map>
 
@@ -23,7 +23,7 @@ namespace sora {
     #define SoraSharedPtr std::tr1::shared_ptr 
 #else
     #define SoraSharedPtr SoraAutoPtr
-#endif
+#endif // USE_TR1_SHARED_PTR
     
     typedef std::map<std::string, SoraAny> NamedValueList;
     
@@ -35,21 +35,6 @@ namespace sora {
         if(it != list.end()) {
             return AnyCast<T>(it->second);
         }
-    }
-    
-#define RT_FUNC_TO_ANY_RT_FUNC(func) \
-    SoraAny SoraAnyFuncImpl0() { \
-        return SoraAny(func()); \
-    }
-    
-#define RT_FUNC_TO_ANY_RT_FUNC1(func, p1) \
-    SoraAny SoraAnyFuncImpl1(p1 arg1) { \
-        return SoraAny(func(arg1)); \
-    }
-    
-#define RT_FUNC_TO_ANY_RT_FUNC2(func, p1, p2) \
-    SoraAny SoraAnyFuncImpl2(p1 arg1, p2 arg2) { \
-        return SoraAny(func(arg1, arg2)); \
     }
     
 #ifdef SORA_USE_RTTI
@@ -70,14 +55,14 @@ namespace sora {
     
     // runtime def & not def
     
-    static std::map<stringId, int> g_define_map;
+    static std::map<SoraStringId, int> g_define_map;
     
     static void SoraDefine(const std::string& f, int val=0) {
         g_define_map.insert(std::make_pair(GetUniqueStringId(f), val));
     }
     
     static bool SoraIfDefined(const std::string& f) {
-        std::map<stringId, int>::const_iterator it = g_define_map.find(GetUniqueStringId(f));
+        std::map<SoraStringId, int>::const_iterator it = g_define_map.find(GetUniqueStringId(f));
         return it != g_define_map.end();
     }
     
@@ -94,15 +79,15 @@ namespace sora {
      *  @param name name to be used as get(name) and set(name)
      *  Must be used within the class
      */
-#define SORA_CLASS_DEF_FIELD_SET_GET(type, name, pref) \
+#define SORA_CLASS_DEF_FIELD_SET_GET(type, name) \
     private: \
-        type pref##name; \
+        type name; \
     public: \
         type get##name() const { \
-            return pref##name; \
+            return name; \
         } \
     void set##name(type val) { \
-        pref##name = val; \
+        name = val; \
     }
     
     /**

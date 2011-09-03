@@ -1,8 +1,8 @@
 /*
  *  SoraPlatform.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/24/10.
+ *  Created by Robert Bu on 8/24/10.
  *  Copyright 2010 Griffin Bu(Project HoshiNoSora). All rights reserved.
  *
  */
@@ -289,7 +289,7 @@ namespace sora {
 
 
 
-#define SORA_STATIC_INSTANCE_DECALRE(T) \
+#define SORA_STATIC_INSTANCE_DECLARE(T) \
     static T* Instance(); \
 
 #define SORA_STATIC_INSTANCE_IMP(T) \

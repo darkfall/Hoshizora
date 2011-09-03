@@ -242,11 +242,11 @@ namespace gcn
         return  mColor;
     }
     
-    void SoraGUIGraphics::setGlobalTransparency(float32 a) {
+    void SoraGUIGraphics::setGlobalTransparency(float a) {
         mGlobalTransparency = a;
     }
     
-    float32 SoraGUIGraphics::getGlobalTransparency() const {
+    float SoraGUIGraphics::getGlobalTransparency() const {
         return mGlobalTransparency;
     }
 }

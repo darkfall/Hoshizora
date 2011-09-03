@@ -2,7 +2,7 @@
 //  SoraRWLockPosix.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/7/11.
+//  Created by Robert Bu on 7/7/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -18,11 +18,11 @@
 #endif
 
 #include "SoraException.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
     
-    class SoraRWLockImpl: public uncopyable {
+    class SoraRWLockImpl: public SoraUncopyable {
     protected:
         SoraRWLockImpl() {
             pthread_rwlock_init(&rwl, NULL);
@@ -49,7 +49,7 @@ namespace sora {
         
     private:
         pthread_rwlock_t rwl;
-    }
+    };
     
 }
 

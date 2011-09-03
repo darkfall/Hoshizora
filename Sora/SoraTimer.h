@@ -1,8 +1,8 @@
 /*
  *  SoraTimer.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/24/10.
+ *  Created by Robert Bu on 8/24/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -19,10 +19,10 @@ namespace sora {
 	class SORA_API SoraTimer {
 	public:
 		virtual void setFPS(int32 fps) = 0;
-		virtual float32 getDelta() = 0;
-		virtual float32 getFPS() = 0;
+		virtual float getDelta() = 0;
+		virtual float getFPS() = 0;
 		virtual bool update() = 0;
-		virtual float32 getTime() = 0;
+		virtual float getTime() = 0;
 		virtual int32 getFrameCount() = 0;
 		virtual uint64 getCurrentSystemTime() = 0;
 	};

@@ -2,7 +2,7 @@
 //  SoraFSM.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/17/11.
+//  Created by Robert Bu on 7/17/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -15,7 +15,7 @@
  **/
 
 #include "SoraPlatform.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 #include <map>
 
 namespace sora {
@@ -35,7 +35,7 @@ namespace sora {
             delete this;
         }
         
-        virtual int32 onUpdate(float32 dt) { return SoraFSMStateUpdateEnd; }
+        virtual int32 onUpdate(float dt) { return SoraFSMStateUpdateEnd; }
         virtual void onRender() {}
         
         virtual void onEnter() {}
@@ -68,7 +68,7 @@ namespace sora {
         SoraFSMState* getPreviousState() const;
         SoraFSMState* getGlobalState() const;
         
-        void onUpdate(float32 dt);
+        void onUpdate(float dt);
         void onRender();
         
         bool returnToPreviousState();
@@ -80,7 +80,7 @@ namespace sora {
     private:
         void switchToState(SoraFSMState* state);
 
-        typedef std::map<stringId, SoraFSMState*> FSMStateMap;
+        typedef std::map<SoraStringId, SoraFSMState*> FSMStateMap;
         FSMStateMap mStates;
         
         typedef std::map<EventType, SoraFSMState*> StateEventMap;

@@ -2,7 +2,7 @@
 //  ITimerManager.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/4/11.
+//  Created by Robert Bu on 8/4/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
@@ -25,7 +25,7 @@ namespace sora {
     
     class ITimerManager: public SoraDirectSingleton<ITimerManager> {
     public:
-        typedef float32 TimeType;
+        typedef float TimeType;
         typedef SoraFunction<bool(SoraSimpleTimer*, TimeType)> TimerFunc;
         
         virtual bool update(TimeType dt) = 0;

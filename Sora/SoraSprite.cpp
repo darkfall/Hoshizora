@@ -24,21 +24,21 @@ namespace sora {
 		_initDefaults();
     }
     
-    SoraSprite::SoraSprite(HSORATEXTURE tex, float32 x, float32 y, float32 w, float32 h) {
+    SoraSprite::SoraSprite(HSORATEXTURE tex, float x, float y, float w, float h) {
         if(!mSora)
             mSora = SoraCore::Instance();
         
         if(w == 0.f)
-            w = (float32)SORA->getTextureWidth(tex);
+            w = (float)SORA->getTextureWidth(tex);
         if(h == 0.f)
-            h = (float32)SORA->getTextureHeight(tex);
+            h = (float)SORA->getTextureHeight(tex);
         
         _init((SoraTexture*)tex, x, y, w, h);
 		_initDefaults();
 		setTextureRect(x, y, w, h);
     }
     
-    void SoraSprite::_init(SoraTexture* tex, float32 x, float32 y, float32 width, float32 height) {
+    void SoraSprite::_init(SoraTexture* tex, float x, float y, float width, float height) {
         float texx1, texy1, texx2, texy2;
 		
 		mTextureRect.x1 = x; mTextureRect.y1 = y;
@@ -88,7 +88,7 @@ namespace sora {
         
 		SoraTexture* ptex = (SoraTexture*)tex;
 		if(ptex)
-			_init(ptex, 0.f, 0.f, (float32)ptex->mTextureWidth, (float32)ptex->mTextureHeight);
+			_init(ptex, 0.f, 0.f, (float)ptex->mTextureWidth, (float)ptex->mTextureHeight);
 	}
 
 	void SoraSprite::_initDefaults() {
@@ -110,7 +110,7 @@ namespace sora {
 		setType(SPRITE_TYPE);
 	}
 
-	void SoraSprite::setTextureRect(float32 x, float32 y, float32 width, float32 height) {
+	void SoraSprite::setTextureRect(float x, float y, float width, float height) {
 		float tx1, ty1, tx2, ty2;
 		
 		mTextureRect.x1=x;
@@ -135,7 +135,7 @@ namespace sora {
 		mQuad.v[3].tx=tx1; mQuad.v[3].ty=ty2; 
 	}
     
-    void SoraSprite::setPosition(float32 x, float32 y) {
+    void SoraSprite::setPosition(float x, float y) {
         bPropChanged = true;
         SoraShaderEnabledObject::setPosition(x, y);
     }
@@ -144,9 +144,9 @@ namespace sora {
         render(getPositionX(), getPositionY());
     }
     
-    void SoraSprite::buildQuad(float32 x, float32 y) {
-        float32 tx1, ty1, tx2, ty2;
-		float32 sint, cost;
+    void SoraSprite::buildQuad(float x, float y) {
+        float tx1, ty1, tx2, ty2;
+		float sint, cost;
         
 		tx1 = -mCenterX*mHScale;
 		ty1 = -mCenterY*mVScale;
@@ -180,7 +180,7 @@ namespace sora {
 		}
     }
 
-	void SoraSprite::render(float32 x, float32 y) {
+	void SoraSprite::render(float x, float y) {
 		if(bPropChanged || x != getPositionX() || y != getPositionY()) {
             buildQuad(x, y);
             bPropChanged = false;
@@ -191,7 +191,7 @@ namespace sora {
         detachShaderFromRender();
 	}
     
-    void SoraSprite::renderInBox(float32 x1, float32 y1, float32 x2, float32 y2) {
+    void SoraSprite::renderInBox(float x1, float y1, float x2, float y2) {
         mQuad.v[0].x = x1; mQuad.v[0].y = y1;
         mQuad.v[1].x = x2; mQuad.v[1].y = y1;
         mQuad.v[2].x = x2; mQuad.v[2].y = y2;
@@ -204,7 +204,7 @@ namespace sora {
         detachShaderFromRender();
     }
 
-	void SoraSprite::render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4) {
+	void SoraSprite::render4V(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
 		mQuad.v[0].x = x1; mQuad.v[0].y = y1;
 		mQuad.v[1].x = x2; mQuad.v[1].y = y2;
 		mQuad.v[2].x = x3; mQuad.v[2].y = y3;
@@ -234,14 +234,14 @@ namespace sora {
 		return mQuad.v[i].col;
 	}
 	
-	void SoraSprite::setZ(float32 z, int32 i) {
+	void SoraSprite::setZ(float z, int32 i) {
 		if(i != -1)
 			mQuad.v[i].z = z;
 		else
 			mQuad.v[0].z = mQuad.v[1].z = mQuad.v[2].z = mQuad.v[3].z = z;
 	}
 
-	float32 SoraSprite::getZ(int32 i)  const{
+	float SoraSprite::getZ(int32 i)  const{
 		return mQuad.v[i].z;
 	}
 
@@ -262,18 +262,18 @@ namespace sora {
         mSora->textureUnlock((HSORASPRITE)mQuad.tex);
     }
 
-	hgeRect SoraSprite::getTextureRect() const {
+	SoraRect SoraSprite::getTextureRect() const {
 		return mTextureRect;
 	}
 
-	void SoraSprite::setCenter(float32 x, float32 y) { 
+	void SoraSprite::setCenter(float x, float y) { 
 		mCenterX = x;
 		mCenterY = y;
         
         bPropChanged = true;
 	}
 
-	void SoraSprite::getCenter(float32& x, float32& y) {
+	void SoraSprite::getCenter(float& x, float& y) {
 		y = mCenterY;
 		x = mCenterX;
 	}
@@ -330,28 +330,28 @@ namespace sora {
 		return (int32)(mSprHeight);
 	}
 
-	void SoraSprite::setScale(float32 h, float32 v) {
+	void SoraSprite::setScale(float h, float v) {
 		mVScale = v;
 		mHScale = h;
         
         bPropChanged = true;
 	}
 
-	float32 SoraSprite::getVScale()  const{
+	float SoraSprite::getVScale()  const{
 		return mVScale;
 	}
 
-	float32 SoraSprite::getHScale()  const{
+	float SoraSprite::getHScale()  const{
 		return mHScale;
 	}
 
-	void SoraSprite::setRotation(float32 r) { 
+	void SoraSprite::setRotation(float r) { 
 		mRotation = r;
         
         bPropChanged = true;
 	}
 
-	float32 SoraSprite::getRotation()  const{
+	float SoraSprite::getRotation()  const{
 		return mRotation;
 	}
 
@@ -363,11 +363,11 @@ namespace sora {
 		return bVFlip;
 	}
 
-	float32 SoraSprite::getCenterX()  const{
+	float SoraSprite::getCenterX()  const{
 		return mCenterX;
 	}
 
-	float32 SoraSprite::getCenterY()  const{
+	float SoraSprite::getCenterY()  const{
 		return mCenterY;
 	}
 
@@ -400,7 +400,7 @@ namespace sora {
 		vEffects.clear();
 	}
 	
-	uint32 SoraSprite::update(float32 dt) {
+	uint32 SoraSprite::update(float dt) {
 		if(!vEffects.empty()) {
 			ImageEffectList::iterator eff = vEffects.begin();
 			while(eff != vEffects.end()) {
@@ -432,8 +432,8 @@ namespace sora {
     SoraRect SoraSprite::getBoundingBox() const {
         SoraRect rect;
         
-        float32 tx1, ty1, tx2, ty2;
-		float32 sint, cost;
+        float tx1, ty1, tx2, ty2;
+		float sint, cost;
         
 		tx1 = -mCenterX*mHScale;
 		ty1 = -mCenterY*mVScale;

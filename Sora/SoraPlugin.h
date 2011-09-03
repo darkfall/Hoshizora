@@ -1,8 +1,8 @@
 /*
  *  SoraPlugin.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/22/10.
+ *  Created by Robert Bu on 8/22/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -11,11 +11,11 @@
 #define SORA_PLUGIN_H
 
 #include "SoraPlatform.h"
-#include "uncopyable.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
 
-	class SORA_API SoraPlugin: public uncopyable {
+	class SORA_API SoraPlugin: public SoraUncopyable {
 	public:	
         SoraPlugin() {}
         virtual ~SoraPlugin() {}
@@ -33,7 +33,7 @@ namespace sora {
 		virtual void unistall() {}
 		
 		// calls every frame
-		virtual void update(float32 dt) {}
+		virtual void update(float dt) {}
         
         // calls when reinitialise a plugin under some special situations
         virtual void reinitialise() {}

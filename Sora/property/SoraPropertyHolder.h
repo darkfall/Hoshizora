@@ -1,72 +1,194 @@
 //
 //  SoraPropertyHolder.h
-//  Sora
+//  SoraProperty
 //
-//  Created by Ruiwei Bu on 8/21/11.
-//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
+//  Created by Ruiwei Bu on 8/27/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#ifndef Sora_SoraPropertyHolder_h
-#define Sora_SoraPropertyHolder_h
+#ifndef SoraProperty_SoraPropertyHolder_h
+#define SoraProperty_SoraPropertyHolder_h
 
 #include "SoraProperty.h"
-#include "../SoraIteratorHelper.h"
 
 #include <map>
 
 namespace sora {
     
-    template<typename KeyType>
-    struct SoraPropertyHolder {
-        typedef KeyType PropertyKeyType;
-        typedef std::map<PropertyKeyType, SoraPropertyInfo*> PropertyMap;
-        typedef typename PropertyMap::const_iterator ConstPropertyIterator;
-        typedef typename PropertyMap::iterator PropertyIterator;
-
-        SoraPropertyHolder() {
-            
+    class SoraPropertyHolder {
+    public:
+        SoraPropertyHolder() { }
+        ~SoraPropertyHolder() { 
+            removeAllProperties();
         }
         
-        virtual ~SoraPropertyHolder() {}
+        bool hasProperty(const std::string& name);
         
-        SoraPropertyInfo* get(const PropertyKeyType& name) const {
-            ConstPropertyIterator it = mProperties.find(name);
-            if(it == mProperties.end()) {
-                return NULL;
-            }
-            sora_assert(it->second);
-            return it->second;
-        }
+        template<typename T>
+        SoraProperty<T>* addProperty(const std::string& name, const T& defaultValue);
+        void addProperty(SoraPropertyBase* property);
         
-        bool add(const PropertyKeyType& name, SoraPropertyInfo* prop) {
-            PropertyIterator it = mProperties.find(name);
-            if(it == mProperties.end()) {
-                mProperties[name] = prop;
-                return true;
-            }
-            return false;
-        }
+        template<typename T>
+        SoraProperty<T> getProperty(const std::string& name) const;
         
-        SoraPropertyInfo* remove(const PropertyKeyType& name) {
-            PropertyIterator it = mProperties.find(name);
-            if(it != mProperties.end()) {
-                SoraPropertyInfo* prop = it->second;
-                mProperties.erase(it);
-                return prop;
-            }
-            return NULL;
-        }
+        template<typename T>
+        SoraProperty<T>* getPropertyPtr(const std::string& name) const;
         
-        size_t size() const {
-            return mProperties.size();
-        }
+        template<typename T>
+        void setProperty(const std::string& name, const T& val);
         
-        SORA_ITERABLE(typename PropertyMap, mProperties)
+        template<typename T>
+        T getProperty(const std::string& name, T defaultValue) const;
         
-    private:
+        SoraPropertyBase* getPropertyBase(const std::string& name) const;
+        
+        SoraPropertyBase* removeProperty(const std::string& name, bool release=false);
+        void removeAllProperties();
+        
+        typedef std::map<std::string, SoraPropertyBase*> PropertyMap;
+        const PropertyMap& getProperties() const;
+        
+        size_t size() const;
+        
+    protected:
         PropertyMap mProperties;
     };
     
+    inline bool SoraPropertyHolder::hasProperty(const std::string& name) {
+        PropertyMap::iterator it = mProperties.find(name);
+        return it != mProperties.end();
+    }
+    
+    // cast using type id
+    template<typename T>
+    inline SoraProperty<T>* PropertyCast(SoraPropertyBase* ptr) {
+        if(ptr->getTypeId() == SoraTypeSerializer::getTypeId<T>())
+            return static_cast<SoraProperty<T>*>(ptr);
+        return NULL;
+    }
+    
+    // cast using Rtti dynamic_cast
+    template<typename T>
+    inline SoraProperty<T>* PropertyRttiCast(SoraPropertyBase* ptr) {
+        SoraProperty<T>* prop = dynamic_cast<SoraProperty<T>*>(ptr);
+        return prop;
+    }
+    
+    template<typename T>
+    inline SoraProperty<T>* SoraPropertyHolder::addProperty(const std::string& name, const T& defaultValue) {
+        PropertyMap::iterator it = mProperties.find(name);
+        if(it != mProperties.end()) {
+            SoraProperty<T>* prop = PropertyCast<T>(it->second);
+            if(prop)
+                return prop;
+        }
+        
+        SoraProperty<T>* prop = new SoraProperty<T>(name);
+        prop->set(defaultValue);
+        mProperties.insert(std::make_pair(name, prop));
+        return prop;
+    }
+    
+    inline void SoraPropertyHolder::addProperty(SoraPropertyBase* prop) {
+        PropertyMap::iterator it = mProperties.find(prop->getName());
+        if(it == mProperties.end()) {
+            mProperties.insert(std::make_pair(prop->getName(), prop));
+        }
+    }
+    
+    template<typename T>
+    inline SoraProperty<T> SoraPropertyHolder::getProperty(const std::string& name) const {
+        PropertyMap::const_iterator it = mProperties.find(name);
+        if(it != mProperties.end()) {
+            SoraProperty<T>* prop = PropertyCast<T>(it->second);
+            if(prop) {
+                return *prop;
+            } else {
+                SoraProperty<T> tprop(name);
+                tprop.setFromString(it->second->toString());
+                return tprop;
+            }
+        }
+        return SoraProperty<T>();
+    }
+    
+    template<typename T>
+    T SoraPropertyHolder::getProperty(const std::string& name, T defaultValue) const {
+        PropertyMap::const_iterator it = mProperties.find(name);
+        if(it != mProperties.end()) {
+            SoraProperty<T>* prop = PropertyCast<T>(it->second);
+            if(prop) {
+                return prop->get();
+            } 
+        }
+        return defaultValue;
+    }
+    
+    inline SoraPropertyBase* SoraPropertyHolder::getPropertyBase(const std::string& name) const {
+        PropertyMap::const_iterator it = mProperties.find(name);
+        if(it != mProperties.end()) {
+            return it->second;
+        }
+        return NULL;
+    }
+    
+    inline SoraPropertyBase* SoraPropertyHolder::removeProperty(const std::string& name, bool release) {
+        PropertyMap::iterator it = mProperties.find(name);
+        if(it != mProperties.end()) {
+            SoraPropertyBase* prop = it->second;
+            mProperties.erase(it);
+            
+            if(release) {
+                delete prop;
+                prop = 0;
+            }
+            return prop;
+        }
+        return 0;
+    }
+    
+    template<typename T>
+    SoraProperty<T>* SoraPropertyHolder::getPropertyPtr(const std::string& name) const {
+        PropertyMap::const_iterator it = mProperties.find(name);
+        if(it != mProperties.end()) {
+            SoraProperty<T>* prop = PropertyCast<T>(it->second);
+            if(prop)
+                return prop;
+        }
+        return NULL;
+    }
+    
+    template<typename T>
+    void SoraPropertyHolder::setProperty(const std::string& name, const T& val) {
+        PropertyMap::iterator it = mProperties.find(name);
+        if(it != mProperties.end()) {
+            SoraProperty<T>* prop = PropertyCast<T>(it->second);
+            if(prop)
+                prop->set(val);
+            else {
+                // force set
+                // should we allow this?
+                it->second->setFromString(SoraTypeSerializer::toString(val));
+            }
+        }
+    }
+    
+    inline void SoraPropertyHolder::removeAllProperties() {
+        PropertyMap::iterator it = mProperties.begin();
+        for(; it != mProperties.end(); ++it) {
+            delete it->second;
+        }
+        mProperties.clear();
+    }
+    
+    inline const SoraPropertyHolder::PropertyMap& SoraPropertyHolder::getProperties() const {
+        return mProperties;
+    }
+    
+    inline size_t SoraPropertyHolder::size() const {
+        return mProperties.size();
+    }
 } // namespace sora
+
 
 #endif
