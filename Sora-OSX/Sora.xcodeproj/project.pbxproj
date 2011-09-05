@@ -3707,6 +3707,8 @@
 					"\"$(SRCROOT)/../Plugins/SoraThread\"",
 					"\"$(SRCROOT)/../Sora/thread\"",
 					"\"$(SRCROOT)/../Plugins/SoraNetwork/zeromq\"",
+					"\"$(SRCROOT)/../Plugins/SoraVlcMoviePlayer/osx/lib\"",
+					"\"$(SRCROOT)/../Plugins/SoraVlcMoviePlayer/win32/lib\"",
 				);
 				PRODUCT_NAME = Sora;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
@@ -3754,6 +3756,8 @@
 					"\"$(SRCROOT)/../Plugins/SoraThread\"",
 					"\"$(SRCROOT)/../Sora/thread\"",
 					"\"$(SRCROOT)/../Plugins/SoraNetwork/zeromq\"",
+					"\"$(SRCROOT)/../Plugins/SoraVlcMoviePlayer/osx/lib\"",
+					"\"$(SRCROOT)/../Plugins/SoraVlcMoviePlayer/win32/lib\"",
 				);
 				PRODUCT_NAME = Sora;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
