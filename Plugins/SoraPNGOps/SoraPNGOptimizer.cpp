@@ -22,7 +22,7 @@ namespace sora {
 		unsigned char a;
 	};
 	
-	bool SoraPNGOptimizer::optimizePNGTex(HSORATEXTURE tex) {
+	bool SoraPNGOptimizer::optimizePNGTex(SoraTextureHandle tex) {
 		int32 width = sora::SORA->getTextureWidth(tex, true);
 		int32 height = sora::SORA->getTextureHeight(tex, true);
 		int32 pitch = sora::SORA->getTextureWidth(tex, false);
@@ -71,7 +71,7 @@ namespace sora {
 	
 	bool SoraPNGOptimizer::optimizePNGFromAndWriteToFile(const SoraWString& file, const wchar_t* output) {
 		if(SoraFileUtility::fileExists(file)) {
-			HSORATEXTURE tex = sora::SORA->createTexture(file, false);
+			SoraTextureHandle tex = sora::SORA->createTexture(file, false);
 			if(tex) {
 				int32 width = sora::SORA->getTextureWidth(tex, true);
 				int32 height = sora::SORA->getTextureHeight(tex, true);
@@ -129,7 +129,7 @@ namespace sora {
 		return false;
 	}
 	
-	bool SoraPNGOptimizer::optimizeTexAndWriteToFile(HSORATEXTURE tex, const SoraWString& output) {
+	bool SoraPNGOptimizer::optimizeTexAndWriteToFile(SoraTextureHandle tex, const SoraWString& output) {
 		int32 width = sora::SORA->getTextureWidth(tex, true);
 		int32 height = sora::SORA->getTextureHeight(tex, true);
 		int32 pitch = sora::SORA->getTextureWidth(tex, false);
@@ -138,7 +138,7 @@ namespace sora {
 		if(col) {
 			optimizePNGData(col, width, height, pitch);
 			
-			FILE* pf = sora_fopenw(output, "wb");
+			FILE* pf = sora_fopenw(output.c_str(), "wb");
 			if(!pf) {
 				sora::SORA->textureUnlock(tex);
 				sora::SORA->releaseTexture(tex);
@@ -159,14 +159,14 @@ namespace sora {
 		return false;
 	}
 	
-	bool SoraPNGOptimizer::writeTexToFile(HSORATEXTURE tex, const SoraWString& output) {
+	bool SoraPNGOptimizer::writeTexToFile(SoraTextureHandle tex, const SoraWString& output) {
 		int32 width = sora::SORA->getTextureWidth(tex, true);
 		int32 height = sora::SORA->getTextureHeight(tex, true);
 		int32 pitch = sora::SORA->getTextureWidth(tex, false);
 		
 		uint32* col = sora::SORA->textureLock(tex);
 		if(col) {			
-			FILE* pf = sora_fopenw(output, "wb");
+			FILE* pf = sora_fopenw(output.c_str(), "wb");
 			if(!pf) {
 				sora::SORA->textureUnlock(tex);
 				sora::SORA->releaseTexture(tex);

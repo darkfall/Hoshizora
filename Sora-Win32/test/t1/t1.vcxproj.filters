@@ -18,9 +18,6 @@
     <Filter Include="Plugins\hgeRenderer">
       <UniqueIdentifier>{58085291-7515-49cd-aa99-c92d1ababfc2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugins\zipResourceManager">
-      <UniqueIdentifier>{3c8e0f9a-1b8a-47d0-b721-949fc3118fab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Plugins\hgeRenderer\hge">
       <UniqueIdentifier>{dd18c601-8445-4ac4-8431-422cf9e4b32d}</UniqueIdentifier>
     </Filter>
@@ -151,6 +148,12 @@
     <Filter Include="头文件\util">
       <UniqueIdentifier>{6dfff374-a2b6-4625-afa1-894f708ae6f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\io">
+      <UniqueIdentifier>{396909e7-dd10-4c1e-b5fd-0573de3e7100}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\io\zip">
+      <UniqueIdentifier>{8572ede7-99ac-442c-be1a-2ceed87be620}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.h">
@@ -161,21 +164,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.h">
       <Filter>Plugins\hgeRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\MyFileReader.h">
-      <Filter>Plugins\zipResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\PackMemory.h">
-      <Filter>Plugins\zipResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\PackReader.h">
-      <Filter>Plugins\zipResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\SoraZipFile.h">
-      <Filter>Plugins\zipResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.h">
-      <Filter>Plugins\zipResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftconfig.h">
       <Filter>Plugins\FreetypeFont</Filter>
@@ -1029,16 +1017,7 @@
     <ClInclude Include="..\..\..\Sora\SoraWindowInfo.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\win32filewrapper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\WindowsStackTrace.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\Hoshizora.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\osxfilewrapper.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\Sora2DMatrix.h">
@@ -1104,19 +1083,10 @@
     <ClInclude Include="..\..\..\Sora\SoraExternalRenderObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraFileBase.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraFileChangeEvent.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraFileStream.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraFileUtility.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraFolderResourceManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraFont.h">
@@ -1291,9 +1261,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraSprite.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraStream.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraString.h">
@@ -1749,6 +1716,30 @@
     <ClInclude Include="..\..\..\Sora\entity\SoraLightWeightEntity.h">
       <Filter>头文件\entity</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\io\SoraFileStream.h">
+      <Filter>头文件\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\io\SoraFolderResourceManager.h">
+      <Filter>头文件\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\io\SoraStream.h">
+      <Filter>头文件\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\io\SoraFileBase.h">
+      <Filter>头文件\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\io\zip\SoraZipFile.h">
+      <Filter>头文件\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\io\zip\SoraZipResourceManager.h">
+      <Filter>头文件\io\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\event\SoraEventWorldHolder.h">
+      <Filter>头文件\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraSoundSystemThread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp">
@@ -1759,21 +1750,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp">
       <Filter>Plugins\hgeRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\MyFileReader.cpp">
-      <Filter>Plugins\zipResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\PackMemory.cpp">
-      <Filter>Plugins\zipResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\PackReader.cpp">
-      <Filter>Plugins\zipResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\SoraZipFile.cpp">
-      <Filter>Plugins\zipResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraZipResourceManager\SoraZipResourceManager.cpp">
-      <Filter>Plugins\zipResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\ZLIB\deflate.c">
       <Filter>头文件\zlib</Filter>
@@ -2210,9 +2186,6 @@
     <ClCompile Include="..\..\..\Sora\SoraTimestamp.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\win32filewrapper.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraAny.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -2249,13 +2222,7 @@
     <ClCompile Include="..\..\..\Sora\SoraFileChangeEvent.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraFileStream.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraFileUtility.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraFolderResourceManager.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraFSM.cpp">
@@ -2648,6 +2615,24 @@
     <ClCompile Include="..\..\..\Sora\entity\SoraLightWeightEntity.cpp">
       <Filter>头文件\entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Sora\io\SoraFolderResourceManager.cpp">
+      <Filter>头文件\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\io\SoraFileStream.cpp">
+      <Filter>头文件\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\io\zip\SoraZipResourceManager.cpp">
+      <Filter>头文件\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\io\zip\SoraZipFile.cpp">
+      <Filter>头文件\io\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\event\SoraEventWorldHolder.cpp">
+      <Filter>头文件\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraSoundSystemThread.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Sora\json\json_internalarray.inl">
@@ -2673,9 +2658,6 @@
     </None>
     <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaState.inl">
       <Filter>Plugins\SoraLua\Luaplus</Filter>
-    </None>
-    <None Include="..\..\..\Sora\osxfilewrapper.mm">
-      <Filter>头文件</Filter>
     </None>
     <None Include="..\..\..\Sora\SoraiOSFileUtility.mm">
       <Filter>头文件</Filter>

@@ -4,7 +4,6 @@
 #include "SoraFileUtility.h"
 #include "SoraEventManager.h"
 #include "SoraConstantStrings.h"
-#include "SoraFolderResourceManager.h"
 #include "SoraInputQueue.h"
 #include "SoraModifierAdapter.h"
 #include "SoraFullscreenBufferHandler.h"
@@ -46,6 +45,7 @@
 
 #include "cmd/SoraConsole.h"
 
+#include "io/SoraFolderResourceManager.h"
 #include "io/zip/SoraZipResourceManager.h"
 
 #include "SoraMemoryUsage.h"

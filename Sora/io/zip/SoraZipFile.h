@@ -1,8 +1,8 @@
 #ifndef SORA_ZIP_FILE
 #define SORA_ZIP_FILE
 
-#include "SoraFileBase.h"
 #include "SoraStringConv.h"
+#include "io/SoraFileBase.h"
 
 #include "ZLIB/unzip.h"
 

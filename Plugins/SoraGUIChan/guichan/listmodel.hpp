@@ -84,7 +84,7 @@ namespace gcn
          * @return An element as a string at the a certain index.
          */
         virtual std::string getElementAt(int i) {
-            if(i >= 0 && i <= mElements.size())
+            if(i >= 0 && i <= (int)mElements.size())
                 return mElements[i];
             return std::string();
         }
@@ -108,7 +108,7 @@ namespace gcn
          * @since GuiChan for Hoshizora
          */
         virtual void setElementAt(int i, const std::string& elmnt) {
-            if(i >= 0 && i <= mElements.size())
+            if(i >= 0 && i <= (int)mElements.size())
                 mElements[i] = elmnt;
         }
         
@@ -120,7 +120,7 @@ namespace gcn
          * @since Guichan for Hoshizora
          */
         virtual void removeElementAt(int i)  {
-            if(i >= 0 && i <= mElements.size())
+            if(i >= 0 && i <= (int)mElements.size())
                 mElements.erase(mElements.begin()+i);
         }
 

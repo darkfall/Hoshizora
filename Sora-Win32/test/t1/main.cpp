@@ -5,7 +5,6 @@
 #include "SoraWindowInfo.h"
 #include "SoraFont.h"
 
-#include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraFreetypeFont/SoraFTFontManager.h"
 
 #include "SoraHGERenderer/SoraHGERenderer.h"
@@ -47,12 +46,14 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 					   int       nCmdShow) {
 
 
-	sora::SoraCore* sora = sora::InitAndCreateSoraCore(new mead::meadMainWindow,
+	sora::SoraCore* sora = sora::InitAndCreateSoraCore(new mainWindow,
 														sora::SoraCoreParameter(/* load plugins */
 																				false,
 																				/* render to buffer */
 																				false,
 																				/* message box error post */
+																				false,
+																				true,
 																				false));
 	sora->setFPS(60);
 	sora->start();

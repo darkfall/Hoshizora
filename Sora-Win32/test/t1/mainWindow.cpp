@@ -74,9 +74,13 @@ bool mainWindow::renderFunc() {
     
 	return false;
 }
+sora::SoraMusicFile* mu = 0;
 
 void mainWindow::init() {
-    sora::SORA->setFPS(60);
+	mu = sora::SORA->createMusicFile(L"Kalimba.mp3", true);
+	if(mu)
+		mu->play();
+	sora::SORA->setFPS(60);
 	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
    

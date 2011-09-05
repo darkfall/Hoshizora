@@ -16,8 +16,8 @@
 
 #include "SoraPlatform.h"
 #include "SoraAutoPtr.h"
-#include "SoraStream.h"
 #include "SoraUncopyable.h"
+#include "io/SoraStream.h"
 
 namespace sora {
 

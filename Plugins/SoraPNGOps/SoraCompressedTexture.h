@@ -43,8 +43,8 @@ namespace sora {
 		
 		SoraSprite* getSprite(const SoraString& descriptor);
 		
-		HSORATEXTURE compress();
-		HSORATEXTURE getTexture() const;
+		SoraTextureHandle compress();
+		SoraTextureHandle getTexture() const;
 		
 		bool compressToFile(const SoraWString& file);
 		bool loadCompressedFile(const SoraWString& file);
@@ -59,7 +59,7 @@ namespace sora {
 		typedef std::map<SoraString, PLACED_SPRITE> SPRITE_MAP;
 		SPRITE_MAP mSpriteMap;
 		
-		HSORATEXTURE mTexture;
+		SoraTextureHandle mTexture;
 		int32 mTextureWidth;
 		int32 mTextureHeight;
 		

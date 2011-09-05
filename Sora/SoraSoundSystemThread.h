@@ -9,7 +9,7 @@
 #ifndef Sora_SoraSoundSystemThread_h
 #define Sora_SoraSoundSystemThread_h
 
-#include "SoraThread.h"
+#include "thread/SoraThread.h"
 
 namespace sora {
     

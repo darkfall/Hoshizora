@@ -16,13 +16,13 @@ namespace sora {
 	
 	class SoraPNGOptimizer {
 	public:
-		static bool optimizePNGTex(HSORATEXTURE tex);
+		static bool optimizePNGTex(SoraTextureHandle tex);
 		static void optimizePNGData(uint32* data, int32 width, int32 height, int32 pitch);
 		
 		static bool optimizePNGFromAndWriteToFile(const SoraWString& file, const wchar_t* output);
 		
-		static bool optimizeTexAndWriteToFile(HSORATEXTURE tex, const SoraWString& output);
-		static bool writeTexToFile(HSORATEXTURE tex, const SoraWString& output);
+		static bool optimizeTexAndWriteToFile(SoraTextureHandle tex, const SoraWString& output);
+		static bool writeTexToFile(SoraTextureHandle tex, const SoraWString& output);
 	};
 	
 }

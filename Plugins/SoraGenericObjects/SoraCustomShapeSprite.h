@@ -11,7 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraSprite.h"
-#include "SoraStream.h"
+#include "SoraIO.h"
 
 namespace sora {
     
