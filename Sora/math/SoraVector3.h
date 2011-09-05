@@ -53,7 +53,7 @@ namespace sora {
 		}
 	
 		float length() const {
-			return sqrt(x*x+y*y+z*z);
+			return (float)sqrtf(x*x+y*y+z*z);
 		}
 	
 		float sqrLength() const {

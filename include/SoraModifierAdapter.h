@@ -2,8 +2,8 @@
 //  SoraImageEffectAutomator.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/11/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/11/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraImageEffectAutomator_h
@@ -32,7 +32,7 @@ namespace sora {
     public:
         typedef std::list<SoraAbstractModiferAdapter*> Members;
 
-        virtual void update(float32 dt) = 0;
+        virtual void update(float dt) = 0;
         
     public:
         static Members members;
@@ -68,7 +68,7 @@ namespace sora {
                 SoraAbstractModiferAdapter::remove();
         }
         
-        void update(float32 dt) {
+        void update(float dt) {
             if(!mModifiers.empty()) {
                 typename ModifierList::iterator itModifier = mModifiers.begin();
                 while(itModifier != mModifiers.end()) {
@@ -76,8 +76,9 @@ namespace sora {
                     (*itModifier)->modify(mObj);
                     
                     if(result == sora::ModifierUpdateEnd) {     
-                        delete (*itModifier);
-                        (*itModifier) = 0;
+                        if((*itModifier)->isAutoRelease()) {
+                            (*itModifier)->release();
+                        }
                         
                         itModifier = mModifiers.erase(itModifier);
                         continue;
@@ -93,6 +94,7 @@ namespace sora {
         void add(SoraModifier<T>* modi) {
             mModifiers.push_back(modi);
         }
+        
         void del(SoraModifier<T>* modi) {
             mModifiers.remove(modi);
         }

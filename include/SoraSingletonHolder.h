@@ -2,8 +2,8 @@
 //  SoraSingletonHolder.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/11/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/11/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraSingletonHolder_h
@@ -16,7 +16,7 @@ namespace sora {
      * static SoraSingletonHolder<MyClass> MyClass etc
      **/
     
-    template<class T>
+    template<class T, typename P>
     class SORA_API SoraSingletonHolder {
     public:
         SoraSingletonHolder():
@@ -25,11 +25,34 @@ namespace sora {
         }
         
         ~SoraSingletonHolder() {
-            delete mInstance;
+            if(mInstance)
+                delete mInstance;
         }
         
-        T* get() {
-            if(!mInstance) mInstance = new T;
+        T* get(P arg) {
+            if(!mInstance) mInstance = new T(arg);
+            return mInstance;
+        }
+        
+    private:
+        T* mInstance;
+    };
+    
+    template<typename T>
+    class SORA_API SoraSingletonHolder<T, void> {
+    public:
+        SoraSingletonHolder():
+        mInstance(0) {
+            
+        }
+        
+        ~SoraSingletonHolder() {
+            if(mInstance)
+                delete mInstance;
+        }
+        
+        T* get(void) {
+            if(!mInstance) mInstance = new T();
             return mInstance;
         }
         

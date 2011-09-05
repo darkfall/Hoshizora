@@ -17,18 +17,18 @@
 #include "SoraPlatform.h"
 #include "SoraAutoPtr.h"
 #include "SoraStream.h"
+#include "SoraUncopyable.h"
 
 namespace sora {
 
-	/*
-	 memory buffer using autoptr
-	 */
-	class SORA_API SoraMemoryBuffer {
+	class SORA_API SoraMemoryBuffer: SoraUncopyable {
 	public:
 		SoraMemoryBuffer();
 		SoraMemoryBuffer(void* pData, ulong32 _length);
 		
 		virtual ~SoraMemoryBuffer();
+        
+        void release();
 		
 		void set(void* pData, ulong32 _length);
 		
@@ -51,32 +51,10 @@ namespace sora {
 		 read a block of memory, size = sizeof(T) 
 		 */
 		template<typename T>
-		T read() {
-			if(!valid()) return 0;
-			if(currPos == length) return 0;
-			
-			ulong32 size = sizeof(T);
-			if(currPos+size <= length) {
-				T t;
-				memcpy(&t, (void*)(get()+currPos), size);
-				currPos += size;
-				return t;
-			}
-			return 0;
-		}
+		T read();
         
         template<typename T>
-        bool read(T* t) {
-            if(!valid()) return 0;
-			if(currPos == length) return 0;
-			
-			ulong32 size = sizeof(T);
-			if(currPos+size <= length) {
-                memcpy(t, (void*)(get()+currPos), size);
-                return true;
-            }
-            return false;
-        }
+        bool read(T* t);
 
 		/* 
 		 read a block of memory, size specified
@@ -93,16 +71,19 @@ namespace sora {
 		uint8* get();
 		uint8* get(ulong32 offset);
 		
-		template<typename datatype> datatype& get(ulong32 offset) const;
+		template<typename datatype> 
+        datatype& get(ulong32 offset) const { 
+            if(offset > length+sizeof(datatype)) offset = 0;
+            return *(datatype*)(apCData+offset);
+        }
+        
 		bool seek(ulong32 pos);
 		
 		ulong32 size() const;
 		ulong32 realsize() const;
 		ulong32 offset() const;
 		bool valid() const;
-		
-		SoraMemoryBuffer& operator=(const SoraMemoryBuffer& rhs);
-        
+		        
         template<typename T>
         inline SoraMemoryBuffer& operator << (const T& val) {
             push(&val, sizeof(T));
@@ -123,7 +104,7 @@ namespace sora {
         
         inline SoraMemoryBuffer& operator >> (std:: string& val) {
             ulong32 n = currPos;
-            const char* data = (const char*)apCData.get();
+            const char* data = (const char*)apCData;
             while(n < realSize && data[n] != '\0') {
                 ++n;
             }
@@ -139,12 +120,42 @@ namespace sora {
         }
         
 	private:
-		SoraAutoPtr<uint8> apCData;
+		uint8* apCData;
 		ulong32 length;
 		ulong32 realSize;
 		ulong32 currPos;
+        bool mInternal;
 	};
 	
+    
+    template<typename T>
+    inline T SoraMemoryBuffer::read() {
+        if(!valid()) return 0;
+        if(currPos == length) return 0;
+        
+        ulong32 size = sizeof(T);
+        if(currPos+size <= length) {
+            T t;
+            memcpy(&t, (void*)(get()+currPos), size);
+            currPos += size;
+            return t;
+        }
+        return 0;
+    }
+    
+    template<typename T>
+    inline bool SoraMemoryBuffer::read(T* t) {
+        if(!valid()) return 0;
+        if(currPos == length) return 0;
+        
+        ulong32 size = sizeof(T);
+        if(currPos+size <= length) {
+            memcpy(t, (void*)(get()+currPos), size);
+            currPos += size;
+            return true;
+        }
+        return false;
+    }
 }
 
 #endif

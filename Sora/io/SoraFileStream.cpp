@@ -156,14 +156,14 @@ namespace sora {
     }
     
     uint32 SoraFileStreamPosix::read(void* data, uint32 len) {
-        return fread(data, 1, len, file);
+        return (uint32)fread(data, 1, len, file);
     }
     
     uint32 SoraFileStreamPosix::write(const void* data, uint32 len) {
         if(nocache) 
-            return fwrite(data, 1, len, file);
+            return (uint32)fwrite(data, 1, len, file);
         else {
-            uint32 size = fwrite(data, 1, len, file);
+            uint32 size = (uint32)fwrite(data, 1, len, file);
             fflush(file);
             return size;
         }

@@ -2,8 +2,8 @@
 //  SoraObjectHandle.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/13/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/13/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraObjectHandle_h
@@ -15,7 +15,7 @@ namespace sora {
     
     const uint32 MAX_OBJECT_SIZE = 65525;
 
-    class SoraObjectHandle {
+    class SORA_API SoraObjectHandle {
     public:
         explicit SoraObjectHandle(SoraObject* obj);
         ~SoraObjectHandle();

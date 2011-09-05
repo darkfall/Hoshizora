@@ -10,12 +10,12 @@
 #ifndef SORA_BOOTER_H_
 #define SORA_BOOTER_H_
 
-#include "../SoraPlatform.h"
-#include "../SoraSingleton.h"
+#include "SoraPlatform.h"
+#include "SoraSingleton.h"
 
 namespace sora {
 	
-	class SoraBooter {
+	class SORA_API SoraBooter {
 	public:
 		static void loadExPlugins(const SoraWString& bootPath);
 	};

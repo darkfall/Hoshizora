@@ -46,7 +46,7 @@ namespace sora {
 	inline void parseShader(sora::SoraSprite* pSprite, const Json::Value& shaderArray) {
 		if(shaderArray.isArray()) {
 			for(size_t i=0; i<shaderArray.size(); ++i) {
-				Json::Value shaderVal = shaderArray[i];
+				Json::Value shaderVal = shaderArray[(unsigned int)i];
 				
 				std::string shaderFile;
 				std::string shaderEntry;
@@ -210,11 +210,11 @@ namespace sora {
 								sora::SoraColorRGBA startCol((float)startParam[(Json::UInt)0].asDouble(),
 															 (float)startParam[1].asDouble(),
 															 (float)startParam[2].asDouble(),
-															 1.0);
+															 1.0f);
 								sora::SoraColorRGBA endCol((float)endParam[(Json::UInt)0].asDouble(),
 														   (float)endParam[1].asDouble(),
 														   (float)endParam[2].asDouble(),
-														   1.0);
+														   1.0f);
 								
 								pSprite->addEffect(new sora::SoraImageEffectColorTransitions(startCol,
 																							 endCol,

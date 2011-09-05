@@ -14,6 +14,7 @@
 #include "modifiers/SoraFontModifiers.h"
 
 #include "SoraDelegate.h"
+#include "SoraFunction.h"
 #include "SoraShaderManager.h"
 
 bool MainWindow::updateFunc() {
@@ -70,42 +71,45 @@ void MainWindow::onKeyEvent(sora::SoraKeyEvent* kev) {
     }
 }
 
-void MainWindow::onScreenBufferRender(sora::HSORATEXTURE& tex) {
+void MainWindow::onScreenBufferRender(sora::SoraTextureHandle tex) {
     mBuffer->setTexture(tex);
     mBuffer->render();
 }
+#include "SoraPath.h"
+#include "SoraOSXFileUtility.h"
 
 void MainWindow::init() {
     sora::SORA->setFPS(60);    
-    
+    printf("%s\n", sora::ws2s(sora::osxApplicationPath()).c_str());
+
     registerEventFunc(this, &MainWindow::onKeyEvent);
     sora::SoraEventManager::Instance()->registerInputEventHandler(this);
     
     ulong32 resourcePack = sora::SORA->loadResourcePack(L"resource.zip");
     if(!resourcePack)
-        THROW_SORA_EXCEPTION("Error loading resource pack");
+        THROW_SORA_EXCEPTION(RuntimeException, "Error loading resource pack");
     else
         sora::SORA->attachResourcePack(resourcePack);
     
     mFont = sora::SORA->createFont(L"ThonburiBold.ttf", 16);
     if(!mFont)
-        THROW_SORA_EXCEPTION("Error creating font");
+        THROW_SORA_EXCEPTION(RuntimeException, "Error creating font");
     
     mSprite = sora::SORA->createSprite(L"geotest.png");
     if(!mSprite)
-        THROW_SORA_EXCEPTION("Error creating sprite");
+        THROW_SORA_EXCEPTION(RuntimeException, "Error creating sprite");
     
     // creating a empty sprite for screen buffer
     mBuffer = new sora::SoraSprite(NULL);
     // attach a shader to it
     mShader1 = sora::CreateShader(L"bloom.cg", "Bloom", sora::FRAGMENT_SHADER);
     if(!mShader1)
-        THROW_SORA_EXCEPTION("Error creating shader");
+        THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
     mShader2 = sora::CreateShader(L"gray.cg", "Gray", sora::FRAGMENT_SHADER);
     if(!mShader2)
-        THROW_SORA_EXCEPTION("Error creating shader");
+        THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
     
     // enable fullscreen buffer
     sora::SORA->enableFullscreenBuffer(true);
-    sora::SORA->registerFullscreenBufferDelegate(sora::Delegate(this, &MainWindow::onScreenBufferRender));
+    sora::SORA->registerFullscreenBufferDelegate(sora::Bind(this, &MainWindow::onScreenBufferRender));
 }

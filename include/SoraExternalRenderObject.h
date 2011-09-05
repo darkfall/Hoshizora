@@ -2,8 +2,8 @@
 //  SoraExternalRenderObject.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/19/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/19/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraExternalRenderObject_h
@@ -12,6 +12,7 @@
 #include "SoraPlatform.h"
 #include "SoraObject.h"
 #include "SoraDelegate.h"
+#include "function/SoraFunction.h"
 
 namespace sora {
     
@@ -23,19 +24,36 @@ namespace sora {
     
     class SORA_API SoraExternalRenderObject: public SoraObject {
     public:
-        typedef SoraAbstractDelegate<SoraObject> RenderDelegate;
+        typedef SoraFunction<void(SoraObject*)> RenderDelegate;
         
         SoraExternalRenderObject();
-        SoraExternalRenderObject(const RenderDelegate& delegate);
-        ~SoraExternalRenderObject();
-        
-        void setDelegate(const RenderDelegate& delegate);
+        template<typename F>
+        SoraExternalRenderObject(const F& delegate);
+ 
+        template<typename F>
+        void setDelegate(const F& delegate);
  
         virtual void render();
         
     private:
-        RenderDelegate* mDelegate;
+        RenderDelegate mDelegate;
     };
+    
+    template<typename F>
+    SoraExternalRenderObject::SoraExternalRenderObject(const F& delegate) {
+        mDelegate = delegate;
+    }
+    
+    template<typename F>
+    void SoraExternalRenderObject::setDelegate(const F& delegate) {
+        mDelegate = delegate;
+    }
+    
+    void SoraExternalRenderObject::render() {
+        if(mDelegate && this->getParent()) {
+            mDelegate(this->getParent());
+        }
+    }
     
 }
 

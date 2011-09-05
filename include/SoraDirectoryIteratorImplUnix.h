@@ -2,8 +2,8 @@
 //  SoraDirectoryIteratorImplUnix.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/11/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/11/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraDirectoryIteratorImplUnix_h
@@ -24,7 +24,7 @@ namespace sora {
             mDir = opendir(p.toString().c_str());
             
             if(!mDir)
-                THROW_SORA_EXCEPTION("Error opening dir");
+                THROW_SORA_EXCEPTION(PathNotFoundException, "Error opening dir");
             else
                 next();
         }

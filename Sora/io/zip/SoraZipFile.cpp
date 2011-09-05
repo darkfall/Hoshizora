@@ -61,7 +61,7 @@ namespace sora {
             _sstrupr(file);
             
             uLong nSeekPos = unzGetOffset(hFile);
-            m_Seeker.insert(TSEEKER::value_type(szCurrentFile, fileInfo(file, info.uncompressed_size, nSeekPos)));
+            m_Seeker.insert(TSEEKER::value_type(file, fileInfo(file, info.uncompressed_size, nSeekPos)));
             
             result = unzGoToNextFile(hFile);
         }

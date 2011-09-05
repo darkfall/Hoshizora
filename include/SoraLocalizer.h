@@ -14,6 +14,8 @@
 #include "SoraStringConv.h"
 #include "SoraSingleton.h"
 #include "SoraCore.h"
+
+#include "message/SoraMessageEvent.h"
 #include "llexer/llexer.h"
 
 #include <map>
@@ -69,12 +71,14 @@ namespace sora {
 		 for example, myResource.png would be localized as myResource_CHN.png if current locale is CHN
 		 */
 		SoraWString localizeResourceName(SoraWString& resourceName);
+        
+        void onMessage(SoraMessageEvent* message);
 		
 	private:
 		static SoraLocalizer* mInstance;
 
-		typedef hash_map<stringId, SoraWString> LocaleStringMap;		
-		typedef map<SoraString, LocaleStringMap > LocaleConfMap;
+		typedef hash_map<SoraStringId, SoraWString> LocaleStringMap;		
+		typedef std::map<SoraString, LocaleStringMap > LocaleConfMap;
 		LocaleConfMap localeConfs;
 		LocaleConfMap::iterator currentLocaleMap;
 		
@@ -91,7 +95,7 @@ namespace sora {
 		
 		inline const wchar_t* strToWideStr(const char*);
 		
-		SoraLocalizer() {}
+		SoraLocalizer();
 		~SoraLocalizer();
 	};
 	

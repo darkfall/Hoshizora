@@ -30,14 +30,14 @@
 #ifndef SORA_RTTI_CLASS_MANAGER_H_
 #define SORA_RTTI_CLASS_MANAGER_H_
 
-#include "../SoraSingleton.h"
+#include "SoraSingleton.h"
 #include "SoraRTTIClass.h"
 
 #include <map>
 
 namespace sora {
 	
-	class SoraRTTIClassManager: public SoraSingleton<SoraRTTIClassManager> {
+	class SoraRTTIClassManager {
 	protected:
 		friend class SoraSingleton<SoraRTTIClassManager>;
 		
@@ -45,6 +45,7 @@ namespace sora {
 		~SoraRTTIClassManager();
 		
 	public:
+        static SoraRTTIClassManager* Instance();
 		
 		void addClass(SoraRTTIClassDescriptor* pclass);
 		

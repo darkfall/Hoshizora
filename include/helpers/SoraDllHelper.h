@@ -10,29 +10,29 @@
 #ifndef SORA_DYNAMIC_LIBRARY_HELPER
 #define SORA_DYNAMIC_LIBRARY_HELPER
 
-#include "../SoraPlatform.h"
-#include "../SoraSingleton.h"
+#include "SoraPlatform.h"
+#include "SoraSingleton.h"
 
 #include <map>
 
 namespace sora {
+    
+    class SoraDynLibraryImpl;
 	
-	class SORA_API SoraDllHelper: public SoraSingleton<SoraDllHelper> {
-		friend class SoraSingleton<SoraDllHelper>;
-		
-		SoraDllHelper() {}
-		~SoraDllHelper();
-		
-	public:
-		ulong32 opendl(const SoraString& path);
-		ulong32 getdl(const SoraString& name);
-		void closedl(ulong32);
-		void* getProc(ulong32 handle, const SoraString& name);
-		
-	private:
-		typedef std::map<SoraString, ulong32> DLL_MAP;
-		DLL_MAP mOpenedDll;
-	};
+    class SORA_API SoraDynLibrary {
+    public:
+        SoraDynLibrary();
+        SoraDynLibrary(const char* path);
+        ~SoraDynLibrary();
+        
+        bool open(const char* path);
+        void close();
+        
+        void* getProc(const char* name);
+        
+    private:
+        SoraDynLibraryImpl* mImpl;
+    };
 	
 } // namespace sora
 

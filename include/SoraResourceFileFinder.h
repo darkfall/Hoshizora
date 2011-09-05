@@ -13,7 +13,8 @@
 #include "SoraException.h"
 #include "SoraPlatform.h"
 #include "SoraAutoPtr.h"
-
+#include "SoraStringId.h"
+#include "SoraRefCounted.h"
 #include <vector>
 #include <map>
 
@@ -29,7 +30,7 @@ namespace sora {
 		void attachResourceManager(SoraResourceManager* rm);
 		void detachResourceManager(const SoraWString& name);
 		
-		ulong32	loadResourcePack (const SoraWString& file);
+		ulong32	loadResourcePack    (const SoraWString& file);
 		void	attachResourcePack	(ulong32 handle);
 		void	detachResourcePack  (ulong32 handle);
 		
@@ -39,10 +40,27 @@ namespace sora {
 		void freeResourceFile(void* p);
 		
 		bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
-		
+        
+        static ulong32 ResourceMemory;
+        
 	private:		
 		typedef std::vector<SoraAutoPtr<SoraResourceManager> > RESOURCE_MANAGER_CONT;
-		RESOURCE_MANAGER_CONT resourceManagers;
+		RESOURCE_MANAGER_CONT mResourceManagers;
+        
+        template<class C>
+        struct ReleasePolicy {
+            static void release(C* ptr) {
+                sora_free(static_cast<void*>(ptr));
+            }
+        };
+        
+        typedef SoraAutoPtr<uint8, autoptr::RefCounter, ReleasePolicy<uint8> > AutoPtrType;
+        struct ResourceInfo {
+            AutoPtrType mResource;
+            ulong32 mSize;
+        };
+        typedef std::map<SoraStringId, ResourceInfo> AvailableResourceMap;
+        AvailableResourceMap mResources;
 	};
 	
 }

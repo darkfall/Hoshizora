@@ -2,8 +2,8 @@
 //  SoraDirectoryIteratorImplWindows.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/11/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/11/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraDirectoryIteratorImplWindows_h
@@ -28,7 +28,7 @@ namespace sora {
             if(mFH == INVALID_HANDLE_VALUE) {
 				DWORD error = GetLastError();
                 if(error != ERROR_NO_MORE_FILES) 
-                    THROW_SORA_EXCEPTION("Error when iterating files");
+                    THROW_SORA_EXCEPTION(RuntimeException, "Error when iterating files");
             } else {
                 mCurrent = mFD.cFileName;
                 if(mCurrent == "." || mCurrent == "..")

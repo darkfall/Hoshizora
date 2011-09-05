@@ -2,7 +2,7 @@
  *  SoraShader.h
  *  SoraPureCore
  *
- *  Created by griffin clare on 11/21/10.
+ *  Created by Robert Bu on 11/21/10.
  *  Copyright 2010 GameMaster&. All rights reserved.
  *
  */
@@ -12,19 +12,23 @@
 #define SORA_SHADER_H__
 
 #include "SoraPlatform.h"
-#include "AutoContainer.h"
 #include "SoraNamedObject.h"
-
+#include "SoraAutoPtr.h"
+#include "SoraRefCounted.h"
+#include "util/SoraAutoContainer.h"
 #include <list>
 
 namespace sora {
 	
 	typedef enum {
+        UNKNOWN_SHADEr = 0,
 		/* vertex shader */
 		VERTEX_SHADER = 1,
 		/* fragment shader */
 		FRAGMENT_SHADER = 2,
-	} SORA_SHADER_TYPE;
+	};
+    
+    const int ShaderNoError = 0;
     
     class SoraShaderContext;
 	
@@ -32,7 +36,7 @@ namespace sora {
 		Class to hold a shader
 		Automatically created and managed by SoraShaderContext
 	*/
-	class SORA_API SoraShader: public SoraNamedObject {
+	class SORA_API SoraShader: public SoraRefCounted {
 		friend class SoraShaderContext;
 		
 	public:
@@ -47,7 +51,7 @@ namespace sora {
 			@param size, the size of the value array
 			@retval, succeed or not
 		 */
-		virtual bool setParameterfv(const char* name, float32* val, uint32 size) = 0;
+		virtual bool setParameterfv(const char* name, float* val, uint32 size) = 0;
 		/*
 			Set a parameteri
 			@param name, the name of the parameter to set
@@ -57,13 +61,13 @@ namespace sora {
 		 */
 		virtual bool setParameteriv(const char* name, int32* val, uint32 size) = 0;
         
-        virtual bool getParameterfv(const char* name, float32* val, uint32 size) = 0;
+        virtual bool getParameterfv(const char* name, float* val, uint32 size) = 0;
         virtual bool getParameteriv(const char* name, int32* val, uint32 size) = 0;
 		
-		bool setParameter1f(const char* name, float32 v1);
-		bool setParameter2f(const char* name, float32 v1, float32 v2);
-		bool setParameter3f(const char* name, float32 v1, float32 v2, float32 v3);
-		bool setParameter4f(const char* name, float32 v1, float32 v2, float32 v3, float32 v4);
+		bool setParameter1f(const char* name, float v1);
+		bool setParameter2f(const char* name, float v1, float v2);
+		bool setParameter3f(const char* name, float v1, float v2, float v3);
+		bool setParameter4f(const char* name, float v1, float v2, float v3, float v4);
 
 		bool setParameter1i(const char* name, int32 v1);
 		bool setParameter2i(const char* name, int32 v1, int32 v2);
@@ -81,14 +85,12 @@ namespace sora {
 			See SORA_SHADER_TYPE
 		 */
 		int32 getType() const;
-        void setType(int32 t);
-		
-		void setInternal(bool flag);
-        
         SoraShaderContext* getShaderContext() const;
+        
+        void setError(int32 error);
+        int32 getError() const;
 
 	protected:
-        bool bInternal;
 		/* 
 		 Attach the shader to render
 		 Applies to the rendering after attach
@@ -101,8 +103,24 @@ namespace sora {
 		virtual bool detach() = 0;
         
         uint32 mType;
+        int32 mErrorCode;
         SoraShaderContext* mShaderContext;
 	};
+    
+    template<class T>
+    struct ShaderReleasePolicy {
+        static void release(T* obj) {
+            
+        }
+    };
+    
+    template<>
+    struct ShaderReleasePolicy<SoraShader> {
+        static void release(SoraShader* shader) {
+            if(shader)
+                shader->release();
+        }
+    };
 	
 	class SORA_API SoraShaderContext {
 	public:
@@ -117,7 +135,7 @@ namespace sora {
          * create a shader from context, not attach
          * @param file, the path of the shader file to attach
          * @param entry, entry function of the shader
-         * @param type, the type of the shader, see SORA_SHADER_TYPE
+         * @param type, the type of the shader
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
         virtual SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type) = 0;
@@ -126,38 +144,44 @@ namespace sora {
          * attach a shader to context
          * @param file, the path of the shader file to attach
          * @param entry, entry function of the shader
-         * @param type, the type of the shader, see SORA_SHADER_TYPE
+         * @param type, the type of the shader
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
         SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
-                
+        
         /**
-         *   get shader list
+         * Create and attach a fragment shader
+         * Would through a RuntimeException in case there is a error
          **/
-        const ShaderList& getShaders() const;
+        SoraShader* attachFragmentShader(const SoraWString& file, const SoraString& entry);
+        /**
+         * Create and attach a vertex shader
+         * Would through a RuntimeException in case there is a error
+         **/
+        SoraShader* attachVertexShader(const SoraWString& file, const SoraString& entry);
         
         void attachShader(SoraShader* shader);
-		/**
-		 *	detach a shader from context
-		 *	@param shader, the handle to the shader, the retval of attachShader
-		 **/
-		void detachShader(SoraShader* shader);
+        void attachFragmentShader(SoraShader* shader);
+        void attachVertexShader(SoraShader* shader);
+        
+        SoraShader* getFragmentShader() const;
+        SoraShader* getVertexShader() const;
+                
+		void detachFragmentShader();
+        void detachVertexShader();
+        
+        void detachShader(SoraShader* shader);
+        
+        bool isAvailable();
 
 		/**
          * attach all shaders in context to render
-         * @retval, succeed or not
 		 */
 		void attachToRender();
 		/**
          * detach all shaders in context from render
-         * @retval, succeed or not
 		 */
 		void detachFromRender();
-        
-        void	setError(int32 error);
-        int32	getError() const;
-        
-        uint32 size() const;
         
 		/*
 		called by render system
@@ -166,18 +190,18 @@ namespace sora {
 		virtual bool attachShaderList();
 		virtual bool detachShaderList();
 		
-	protected:
-		inline ShaderList::iterator getShaderIterator(SoraShader* shader);
-		
-		ShaderList mShaders;
-		
-		int32 err;
-	};
+	protected:		        
+                
+        typedef SoraAutoPtr<SoraShader, autoptr::RefCounter, ShaderReleasePolicy<SoraShader> > ShaderPtr;
+        
+        ShaderPtr mVertexShader;
+        ShaderPtr mFragmentShader;
+    };
     
     static void FreeShader(SoraShader* shader) {
         SoraShaderContext* context = shader->getShaderContext();
         if(!context)
-            THROW_SORA_EXCEPTION("Caught wild shader without ShaderContext, possible bug");
+            THROW_SORA_EXCEPTION(IllegalStateException, "Caught wild shader without ShaderContext, possible bug");
         else context->detachShader(shader);
     }
 

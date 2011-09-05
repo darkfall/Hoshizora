@@ -1,8 +1,8 @@
 /*
  *  SoraMiscTool.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/24/10.
+ *  Created by Robert Bu on 8/24/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -10,8 +10,8 @@
 #ifndef SORA_DEFAULT_MISC_TOOL_H
 #define SORA_DEFAULT_MISC_TOOL_H
 
-#include "../SoraMiscTool.h"
-#include "../Debug/SoraInternalLogger.h"
+#include "SoraMiscTool.h"
+#include "SoraLogger.h"
 
 namespace sora {
 	
@@ -23,19 +23,19 @@ namespace sora {
 		virtual void setLogFile(const SoraString& sfile) { }
 
 		virtual int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
-			DebugPtr->log("MessageBox: "+sTitle + ": " + sMessage);
+			log_mssg("MessageBox: "+sTitle + ": " + sMessage);
 			return 0;
 		}
 		virtual int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
-			DebugPtr->log(L"MessageBox: "+ sTitle + L": " + sMessage);
+			log_mssg(L"MessageBox: "+ sTitle + L": " + sMessage);
 			return 0;
 		}
 	
 		virtual void log(const SoraString& sMessage) {
-			DebugPtr->log(sMessage);
+			log_mssg(sMessage);
 		}
 		virtual void log(const SoraWString& sMessage) {
-			DebugPtr->log(sMessage);
+			log_mssg(sMessage);
 		}
 		
 		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {

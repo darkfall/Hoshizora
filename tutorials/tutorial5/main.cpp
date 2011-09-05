@@ -17,6 +17,7 @@
  **/
 
 
+
 #ifndef OS_WIN32
 
 int main(int argv, char** argc) {
@@ -33,6 +34,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,
 					   LPSTR    lpCmdLine,
 					   int       nCmdShow) {
+    
 	registerComponents();
     startWithWindow(new MainWindow);
     shutdown();

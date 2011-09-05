@@ -3,63 +3,90 @@
 
 #include "SoraPlatform.h"
 #include "SoraException.h"
+#include "SoraTypeInfo.h"
+#include "SoraAutoPtr.h"
+#include "SoraStringId.h"
+#include "event/SoraEventChannel.h"
+
 
 #include <map>
-#include "SoraTypeInfo.h"
-#include "stringId.h"
 
 namespace sora {
 
     class SoraEventHandler;
 	
 #define SORA_EVENT_IDENTIFIER(ident) \
-	virtual sora::stringId getEventIdentifier() const { \
+    sora::SoraStringId getEventIdentifier() const { \
+        return ident; \
+    } \
+    static sora::SoraStringId GetEventIdentifier() { \
 		return ident; \
-	} \
+	}
     
 	class SORA_API SoraEvent {
 	protected:
+        friend class SoraEventFactory;
 		virtual ~SoraEvent() {};
         
     public:
-        SoraEvent(): pEventSource(NULL), bConsumed(false) {
-#ifndef SORA_USE_RTTI
-			eventIdentifier = 0;
-#endif
+        SoraEvent(): 
+        mConsumed(false),
+        mName(0),
+        mSender(NULL),
+        mReceiver(NULL) {
 		}
 
-        void setSource(SoraEventHandler* source) { pEventSource = source; }
-        SoraEventHandler* getSource() const { return pEventSource; }
+        void setSource(SoraEventHandler* source) { 
+            mSender = source; 
+        }
+        SoraEventHandler* getSource() const { 
+            return mSender;
+        }
 		
-		void setName(stringId _name) { name = _name; }
-		stringId getName() const { return name; }
+		void setName(SoraStringId _name) { 
+            mName = _name;
+        }
+		SoraStringId getName() const { 
+            return mName;
+        }
 		
 		// consume a event
-		void consume() { bConsumed = true; }
-		bool isConsumed() const { return bConsumed; }
+		void consume() { mConsumed = true; }
+		bool isConsumed() const { return mConsumed; }
 		
-#ifndef SORA_USE_RTTI
-		virtual stringId getEventIdentifier() const = 0;
-#endif
-		
-		// base event not serializable
-		virtual bool serializable() { return false; }
+        virtual SoraStringId getEventIdentifier() const = 0;
+        /**
+         * added for event world
+         **/
+        inline void setChannel(const SoraEventChannel& channel) {
+            mChannel = channel;
+        }
+        inline void setReceiver(SoraEventHandler* receiver) {
+            mReceiver = receiver;
+        }
+        inline SoraEventChannel getChannel() const {
+            return mChannel;
+        }
+        inline SoraEventHandler* getReceiver() const {
+            return mReceiver;
+        }
 		
     protected:
-		bool bConsumed;
+        inline void init(const SoraEvent& evt);
+    
+		bool mConsumed;
 		
-		stringId name;
-        SoraEventHandler* pEventSource;
-		
-#ifndef SORA_USE_RTTI
-		stringId eventIdentifier;
-#endif
+		SoraStringId mName;
+        SoraEventHandler* mSender;
+        SoraEventHandler* mReceiver;
+        
+        SoraEventChannel mChannel;
 	};
-
+ 
 	class SORA_API SoraHandlerFunctionBase {
 	public:
 		virtual ~SoraHandlerFunctionBase() {};
-		void exec(SoraEvent* event) { call(event);}
+		inline void exec(SoraEvent* event) { call(event);}
 
 	private:
 		virtual void call(SoraEvent*) = 0;
@@ -71,7 +98,7 @@ namespace sora {
 		typedef void (T::*MemberFunc)(EventT*);
 		SoraMemberFunctionHandler(T* instance, MemberFunc memFn) : _instance(instance), _function(memFn) {};
 
-		void call(SoraEvent* event) {
+		inline void call(SoraEvent* event) {
 			(_instance->*_function)(static_cast<EventT*>(event));
 		}
 
@@ -87,18 +114,31 @@ namespace sora {
 		 
 		SoraFuncFunctionHandler(EventFunc func): _func(func) {}
 		
-		void call(SoraEvent* ev) {
+		inline void call(SoraEvent* ev) {
 			_func(static_cast<EventT*>(ev));
 		}
 		
 	private:
 		EventFunc _func;
 	};
+    
+    class SoraEventWorld;
+    class SoraSystemEvent;
 
-	class SORA_API SoraEventHandler {
+	class SORA_API SoraEventHandler: public SoraSharedClass<SoraEventHandler> {
+        friend class SoraEventWorldImpl;
+        friend class SoraEventWorld;
+        
 	public:
-		~SoraEventHandler();
-		void handleEvent(SoraEvent*);
+        SoraEventHandler();
+		virtual ~SoraEventHandler();
+        
+        /** 
+         * This function would ignore whether the handler is enabled in EventWorld
+         *  or not
+         * For compability with older versions of Sora
+         **/
+		virtual void handleEvent(SoraEvent*);
 
 		template <class T, class EventT>
 		void registerEventFunc(T*, void (T::*memFn)(EventT*));
@@ -106,10 +146,61 @@ namespace sora {
 		template <class EventT>
 		void registerEventFunc(void (*evFn)(EventT*));
 		
-		// base eventHandler not serializable
-		virtual bool serializable() { return false; }
-	
+        /**
+         * added for event world
+         **/
+        bool listenning(const SoraEventChannel& channel);
+        void setChannel(const SoraEventChannel& channel);
+        void fillChannel();
+        const SoraEventChannel getChannel() const;
+        
+        void addChannel(const SoraEventChannel& channel);
+        void removeChannel(const SoraEventChannel& channel);
+        
+        void clearChannel();
+        
+        bool isInWorld(SoraEventWorld* world) const;
+        bool isInWorld() const;
+        
+        void enableUpdate(bool receiveEvent = false);
+        void disableUpdate();
+        bool isEnableUpdate() const;
+        
+        SoraEventWorld* getWorld(void);
+        bool isEnabled();
+        
+        virtual	void onUpdate(float dt);
+        // on debug render
+        // must turnon SoraCore::enableDebugDraw to enable
+        // and must belongs to defaultEventWorld
+        virtual void onDebugRender();
+        
+        virtual void onEnable();
+        virtual void onDisable();
+        
 	private:
+        /**
+         * Directly handle system event without RTTI check, for performance
+         **/
+        void handleSystemEvent(SoraSystemEvent* evt);
+        /**
+         * Event through SoraEventWorld
+         * Would check whether the handler is enabled or not
+         * Default: No
+         **/
+        void handleWorldEvent(SoraEvent* evt);
+        
+        void enable(SoraEventWorld* world);
+        void disable();
+        
+    private:
+        bool mEnabled;
+        SoraEventWorld* mWorld;
+        SoraEventChannel mChannel;
+        
+        bool mEnableUpdate;
+        bool mUpdateReceiveEvent;
+        
 		typedef std::map<SoraTypeInfo, SoraHandlerFunctionBase*> Handlers;
 		Handlers _handlers;
 	};
@@ -134,6 +225,28 @@ namespace sora {
 		_handlers[SoraTypeInfo(tmp.getEventIdentifier())] = new SoraFuncFunctionHandler<EventT>(evFn);
 #endif
 	}
+    
+    /**
+     * Helper macro that defines a event handler class [func]##EventHandler
+     * With a global static access func Instance()
+     * And when it handles [evtType] event
+     * It will call [func]
+     **/
+#define SORA_DEF_FUNC_AS_EVENT_HANDLER(func, evtType) \
+namespace { \
+    struct func##EventHandler: public sora::SoraEventHandler { \
+        func##EventHandler() { \
+            registerEventFunc(this, &func##EventHandler::onEvent); \
+        } \
+        void onEvent(evtType* evt) { \
+            func(evt); \
+        } \
+        static func##EventHandler* Instance() { \
+            static func##EventHandler instance; \
+            return &instance; \
+        } \
+    }; \
+}
 
 } // namespace sora
 

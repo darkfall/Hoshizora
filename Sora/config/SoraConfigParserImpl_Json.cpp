@@ -49,6 +49,7 @@ namespace sora {
             mCurrPath = "/";
         }
         mOpened = true;
+        return true;
     }
     
     void SoraConfigParserJsonImpl::close() {
@@ -127,6 +128,7 @@ namespace sora {
         else
             mCurrPath.assign(mCurrPath.toString() + "/" + node + "/"); 
         mCurrChildIndex = -1;
+        return true;
     }
     
     bool SoraConfigParserJsonImpl::toFirstChild(const std::string& name) {
@@ -302,6 +304,7 @@ namespace sora {
             mWrittingNode = Json::Value();
             mIsWritting = true;
         }
+        return true;
     }
     
     void SoraConfigParserJsonImpl::endNode() {

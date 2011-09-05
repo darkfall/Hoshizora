@@ -11,7 +11,7 @@
 
 #include "SoraPath.h"
 #include "SoraException.h"
-
+#include "SoraOSXFileUtility.h"
 #include <pwd.h>
 
 namespace sora {
@@ -109,7 +109,7 @@ namespace sora {
         }
         
         static std::string resourceImpl() {
-            return "../Resources/";
+            return osxApplicationPath()+"/Resources/";
         }
         
         static std::string writtableImpl() {

@@ -2,8 +2,8 @@
 //  SoraScene.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/17/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/17/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraScene_h
@@ -48,6 +48,9 @@ namespace sora {
          **/
         void add(SoraObject* obj, int32 layerDepth);
         
+        
+        void del(SoraObject* obj, int32 layer);
+        
         /**
          *  Add a layer to the scene
          *  @param layer, the layer to be added
@@ -83,7 +86,7 @@ namespace sora {
         SoraLayer* operator[](int32 layerDepth) const;
         
 		virtual void    render();
-		virtual uint32  update(float32 dt);
+		virtual uint32  update(float dt);
         
         int32	getWidth() const;
         int32	getHeight() const;
@@ -91,15 +94,15 @@ namespace sora {
         
         void    setParent(SoraObject* obj);
         
-        void    setRotation(float32 rot);
-        float32 getRotation() const;
+        void    setRotation(float rot);
+        float getRotation() const;
         
-        void    setScale(float32 scaleh, float32 scalev);
-        void    getScale(float32* scaleh, float32* scalev);
+        void    setScale(float scaleh, float scalev);
+        void    getScale(float* scaleh, float* scalev);
         
-        void    moveTo(float32 x, float32 y, float32 inTime);
+        void    moveTo(float x, float y, float inTime);
         
-        void    setPosition(float32 x, float32 y);
+        void    setPosition(float x, float y);
         
         void    enableRenderToCanvas(bool flag);
         bool    isRenderToCanvasEnabled() const;
@@ -114,8 +117,8 @@ namespace sora {
         int32 mWidth, mHeight;
         int32 mRealWidth, mRealHeight;
         
-        float32 mRotation;
-        float32 mHScale, mVScale;
+        float mRotation;
+        float mHScale, mVScale;
                         
         typedef std::map<int32, SoraLayer*> LayerMap;
         LayerMap mLayers;

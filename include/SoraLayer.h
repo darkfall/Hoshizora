@@ -2,8 +2,8 @@
 //  SoraLayer.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/18/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/18/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraLayer_h
@@ -22,7 +22,7 @@ namespace sora {
     class SORA_API SoraLayer: public SoraObject {
     public:
         SoraLayer(int32 layerDepth);
-        ~SoraLayer();
+        virtual ~SoraLayer();
         
         bool operator < (const SoraLayer& rhs);
         

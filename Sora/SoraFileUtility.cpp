@@ -42,7 +42,7 @@ namespace sora {
 			
 			return SoraWString(buffer)+L"/"+filePath;
 #elif defined(OS_OSX)
-			return osxApplicationPath()+L"/"+filePath;
+			return osxApplicationPathW()+L"/"+filePath;
 #elif defined(OS_IOS)
 			return appResourcePath()+L"/"+filePath;
 #endif
@@ -71,7 +71,7 @@ namespace sora {
 			
 			return SoraWString(buffer)+L"/";
 #elif defined(OS_OSX)
-			return osxApplicationPath()+L"/";
+			return osxApplicationPathW()+L"/";
 #elif defined(OS_IOS)
 			return appResourcePath()+L"/";
 #endif

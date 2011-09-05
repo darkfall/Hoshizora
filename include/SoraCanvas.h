@@ -12,33 +12,27 @@
 
 #include "SoraPlatform.h"
 #include "SoraSprite.h"
-#include "SoraShader.h"
+
 
 namespace sora {
 	
 	/*
 		Base class for canvas which render things onto a texture, using RenderTarget
 	 */
-	class SORA_API SoraBaseCanvas: public SoraObject {
+	class SORA_API SoraBaseCanvas: public SoraShaderEnabledObject {
 	public:
         SoraBaseCanvas(int32 width, int32 height, bool bDepthBuffer=true);
         virtual ~SoraBaseCanvas();
         
         void render();
-        uint32 update(float32 dt);
+        uint32 update(float dt);
         
         void beginRender(ulong32 col=0xFF000000);
         void finishRender();
 
-		void setZ(float32 z);
+		void setZ(float z);
 		void setBlendMode(int32 mode);
-
-        void attachShader(SoraShader*);
-        void detachShader(SoraShader*);
-        SoraShader* attachShader(const SoraWString& shaderPath, const SoraString& entry, SORA_SHADER_TYPE type);
-        bool hasShader() const;
-        void clearShader();
-		
+        
 		void addEffect(SoraImageEffect* effect);
 		void stopEffect(SoraImageEffect* effect);
 		void clearEffects();

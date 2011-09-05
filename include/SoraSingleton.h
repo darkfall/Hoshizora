@@ -1,8 +1,8 @@
 /*
  *  SoraSingleton.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/24/10.
+ *  Created by Robert Bu on 8/24/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -34,9 +34,7 @@ namespace sora {
 
 	private:
 		static T* pInstance;
-		SoraSingleton(const SoraSingleton& singleton);
-		SoraSingleton& operator=(const SoraSingleton& singleton);
-	
+        
 	protected:
 		SoraSingleton() {}
 		virtual ~SoraSingleton() {}
@@ -44,6 +42,42 @@ namespace sora {
 
 	template<class T>
 	T* SoraSingleton<T>::pInstance = NULL;
+    
+    /**
+     *  You add the following for use with the singleton
+     *  template<> T* SoraDirectSingleton<T>::_singleton = NULL
+     **/
+    
+    template<class T>
+    class SoraDirectSingleton {
+    protected:
+        static T * _singleton;
+   
+    public:
+        SoraDirectSingleton() {
+            assert( !_singleton );
+#if defined( _MSC_VER ) && _MSC_VER < 1200
+            int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1;
+            _singleton = (T*)((int)this + offset);
+#else
+            _singleton = static_cast< T* >( this );
+#endif
+        }
+        
+        virtual ~SoraDirectSingleton() {
+            assert(_singleton);
+            _singleton = NULL;
+        }
+        
+        static T& RefInstance() {
+            assert(_singleton);
+            return(*_singleton);
+        }
+        
+        static T* Instance() {
+            return (_singleton);
+        }
+    };
  
 	
 } // namespace sora

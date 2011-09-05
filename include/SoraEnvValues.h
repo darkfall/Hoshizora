@@ -11,10 +11,11 @@
 #define SORA_ENV_VALUES_H_
 
 #include "SoraPlatform.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 #include "SoraSingleton.h"
 #include <string>
+#include <map>
 
 namespace sora {
 	
@@ -29,39 +30,39 @@ namespace sora {
 		static SoraEnvValues* Instance();
 		static void Destroy();
 
-		bool			getValue		(stringId name, bool defaultVal);
-		int32			getValue		(stringId name, int32 defaultVal);
-		float32			getValue		(stringId name, float32 defaultVal);
-		std::string		getValue		(stringId name, const std::string& defaultVal);
-		std::wstring	getValue		(stringId name, const std::wstring& defaultVal);
-		void*			getValue		(stringId name);
+		bool			getValue		(SoraStringId name, bool defaultVal);
+		int32			getValue		(SoraStringId name, int32 defaultVal);
+		float			getValue		(SoraStringId name, float defaultVal);
+		std::string		getValue		(SoraStringId name, const std::string& defaultVal);
+		std::wstring	getValue		(SoraStringId name, const std::wstring& defaultVal);
+		void*			getValue		(SoraStringId name);
 		
-		void setValue	(stringId name, bool val);
-		void setValue	(stringId name, int32 val);
-		void setValue	(stringId name, float32 val);
-		void setValue	(stringId name, const std::string& val);
-		void setValue	(stringId name, const std::wstring& val);
-		void setValue	(stringId name, void* data);
+		void setValue	(SoraStringId name, bool val);
+		void setValue	(SoraStringId name, int32 val);
+		void setValue	(SoraStringId name, float val);
+		void setValue	(SoraStringId name, const std::string& val);
+		void setValue	(SoraStringId name, const std::wstring& val);
+		void setValue	(SoraStringId name, void* data);
 		
 		// for script export
 		// because there's no polyphormism in scripts
 		// and it's hard in scripts to use string id
 		bool			getBool		(const std::string& name, bool defaultVal);
 		int32			getInt		(const std::string& name, int32 defaultVal);
-		float32			getFloat	(const std::string& name, float32 defaultVal);
+		float			getFloat	(const std::string& name, float defaultVal);
 		std::string		getString	(const std::string& name, const std::string& defaultVal);
 		std::wstring	getWString	(const std::string& name, const std::wstring& defaultVal);
 		void*			getData		(const std::string& name);
 		
 		void setBool		(const std::string& name, bool val);
 		void setInt			(const std::string& name, int32 val);
-		void setFloat		(const std::string& name, float32 val);
+		void setFloat		(const std::string& name, float val);
 		void setString		(const std::string& name, const std::string& val);
 		void setWString		(const std::string& name, const std::wstring& val);
 		void setData		(const std::string& name, void* data);
 		
 		void removeData		(const std::string& name);
-		void removeData		(stringId name);
+		void removeData		(SoraStringId name);
 
 	private:
 		static SoraEnvValues* mInstance;
@@ -77,15 +78,15 @@ namespace sora {
 			union {
 				bool boolVal;
 				int32 intVal;
-				float32 floatVal;
-				stringId stringVal;
+				float floatVal;
+				SoraStringId stringVal;
 			} data;
 			
 			void* userData;
 			uint8 VALUE_TYPE;
 		};
 		
-		typedef hash_map<stringId, VALUE_STORE> GLOBAL_VALUE_MAP;
+		typedef std::map<SoraStringId, VALUE_STORE> GLOBAL_VALUE_MAP;
 		typedef GLOBAL_VALUE_MAP::iterator VALUE_ITERATOR;
 		GLOBAL_VALUE_MAP values;
 	};

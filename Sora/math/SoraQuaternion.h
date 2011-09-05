@@ -21,7 +21,7 @@ namespace sora {
 		SoraQuaternion(const SoraQuaternion& quad):
 			w(quad.w), x(quad.x), y(quad.y), z(quad.z) {}
 		SoraQuaternion():
-			w(0.), x(0.), y(0.), z(0.) {}
+			w(0.f), x(0.f), y(0.f), z(0.f) {}
 		
 		void set(float _x, float _y, float _z, float _w) {
 			x = _x; y = _y; z = _z; w = _w;
@@ -72,7 +72,7 @@ namespace sora {
 		}
 		
 		void makeRotate(float angle, float _x, float _y, float _z) {
-			float inversenorm = (float)1.0f/sqrt(x*x + y*y + z*z);
+			float inversenorm = (float)1.0f/sqrtf(x*x + y*y + z*z);
 			float coshalfangle = cosf(0.5f*angle);
 			float sinhalfangle = sinf(0.5f*angle);
 			
@@ -87,12 +87,12 @@ namespace sora {
 		}
 		
 		void makeRotate(float roll, float pitch, float yaw) {
-			float sh0 = sin(0.5f*roll);
-			float ch0 = cos(0.5f*roll);
-			float sh1 = sin(0.5f*pitch);
-			float ch1 = cos(0.5f*pitch);
-			float sh2 = sin(0.5f*yaw);
-			float ch2 = cos(0.5f*yaw);
+			float sh0 = sinf(0.5f*roll);
+			float ch0 = cosf(0.5f*roll);
+			float sh1 = sinf(0.5f*pitch);
+			float ch1 = cosf(0.5f*pitch);
+			float sh2 = sinf(0.5f*yaw);
+			float ch2 = cosf(0.5f*yaw);
 			
 			x = sh0*ch1*ch2 + ch0*sh1*sh2;
 			y = ch0*sh2*ch1 + sh0*ch2*sh1;
@@ -112,7 +112,7 @@ namespace sora {
 		}
 		
 		void getRotate(float& angle, float& _x, float& _y, float& _z) const {
-			float sinhalfangle = sqrt(x*x + y*y + z*z);
+			float sinhalfangle = sqrtf(x*x + y*y + z*z);
 			angle = 2.f * atan2f(sinhalfangle, w);
 			if(sinhalfangle) {
 				_x = x / sinhalfangle;
@@ -142,10 +142,10 @@ namespace sora {
 			}
 			
 			if((1.0 - cosomega) > epsilon) {
-				float omega = acos(cosomega);
-				float invsinomega = 1.0f/sin(omega);
-				scale_from = sin((1.0f-t)*omega)*invsinomega;
-				scale_to = sin(t*omega)*invsinomega;
+				float omega = acosf(cosomega);
+				float invsinomega = 1.0f/sinf(omega);
+				scale_from = sinf((1.0f-t)*omega)*invsinomega;
+				scale_to = sinf(t*omega)*invsinomega;
 			} else {
 				scale_from = 1.0f - t;
 				scale_to = t;

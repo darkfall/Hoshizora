@@ -14,7 +14,6 @@
 #include "SoraOGLRenderer/SoraOGLInput.h"
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 
-#include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraFreetypeFont/SoraFTFontManager.h"
 
 #ifdef OS_WIN32
@@ -27,16 +26,6 @@
 
 static void registerComponents() {
     sora::SoraCore* sora = sora::SoraCore::Instance();
-    
-#ifndef OS_WIN32
-    sora->registerRenderSystem(new sora::SoraOGLRenderer);
-    sora->registerInput(new sora::SoraOGLInput);
-#else
-    sora->registerRenderSystem(new sora::SoraHGERenderer);
-    sora->registerInput(new sora::SoraHGEInput);
-#endif
-	sora->registerFontManager(new sora::SoraFTFontManager);
-    sora->registerResourceManager(new sora::SoraZipResourceManager);
 }
 
 static void startWithWindow(sora::SoraWindowInfoBase* window) {

@@ -14,7 +14,6 @@
 #include "SoraStringConv.h"
 #include "SoraFileUtility.h"
 #include "SoraMath.h"
-#include "SoraRect4v.h"
 #include "SoraColor.h"
 
 #include "SoraCore.h"

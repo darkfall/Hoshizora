@@ -2,8 +2,8 @@
 //  SoraShaderManager.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/14/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/14/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraShaderManager_h
@@ -11,13 +11,11 @@
 
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
-
-#include "stringId.h"
+#include "SoraShader.h"
+#include "SoraStringId.h"
 #include <map>
 
 namespace sora {
-    
-    class SoraShader;
     
     class SORA_API SoraShaderManager {
     protected:
@@ -26,9 +24,10 @@ namespace sora {
         
     public:
 		static SoraShaderManager* Instance();
-		static void Destroy();
+        
+        bool init();
 
-        // return the same shader if it have benn created by the manager
+        // return the same shader if it have been created by the manager
         SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
         
         // would create a new shader whether it exists in the manager or not
@@ -37,10 +36,10 @@ namespace sora {
         void freeShader(SoraShader* shader);
         
     private:
-		static SoraShaderManager* mInstance;
-
-        typedef std::map<stringId, SoraShader*> ShaderMap;
-        typedef std::map<SoraShader*, stringId> RevShaderMap;
+        SoraShaderContext* mShaderContext;
+        
+        typedef std::map<SoraStringId, SoraShader*> ShaderMap;
+        typedef std::map<SoraShader*, SoraStringId> RevShaderMap;
         ShaderMap mShaders;
         RevShaderMap mRevShaders;
     };
@@ -49,8 +48,24 @@ namespace sora {
         return SoraShaderManager::Instance()->createShader(file, entry, type);
     }
     
+    static SoraShader* CreateFragmentShader(const SoraWString& file, const SoraString& entry) {
+        return SoraShaderManager::Instance()->createShader(file, entry, FRAGMENT_SHADER);
+    }
+    
+    static SoraShader* CreateVertexShader(const SoraWString& file, const SoraString& entry) {
+        return SoraShaderManager::Instance()->createShader(file, entry, VERTEX_SHADER);
+    }
+    
     static SoraShader* CreateUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createUniqueShader(file, entry, type);
+    }
+    
+    static SoraShader* CreateUniqueFragmentShader(const SoraWString& file, const SoraString& entry) {
+        return SoraShaderManager::Instance()->createUniqueShader(file, entry, FRAGMENT_SHADER);
+    }
+    
+    static SoraShader* CreateUniqueVertexShader(const SoraWString& file, const SoraString& entry) {
+        return SoraShaderManager::Instance()->createUniqueShader(file, entry, VERTEX_SHADER);
     }
     
 } // namespace sora

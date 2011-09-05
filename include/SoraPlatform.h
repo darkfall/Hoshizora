@@ -1,8 +1,8 @@
 /*
  *  SoraPlatform.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/24/10.
+ *  Created by Robert Bu on 8/24/10.
  *  Copyright 2010 Griffin Bu(Project HoshiNoSora). All rights reserved.
  *
  */
@@ -21,54 +21,42 @@
  */
 
 
-#ifdef __GNUC__
+#if defined(__GNUC__)
 	#if __GNUC__ >= 4
 		#include <tr1/unordered_map>
-namespace sora {
-	
-    using std::tr1::unordered_map;
-#define hash_map unordered_map
-}
+        namespace sora {
+            using std::tr1::unordered_map;
+            #define hash_map unordered_map
+        }
 	#else
 		#include <ext/hash_map>
-namespace sora {
-
-		using __gnu_cxx::hash_map;
-}
+        namespace sora {
+            using __gnu_cxx::hash_map;
+        }
 	#endif
-#else
-	#include <hash_map>
-#endif
 
-#ifdef WIN32
+#elif defined(_MSC_VER)
 
-namespace sora {
-
-using std::hash_map;
-
-}
-#endif
-
-#ifdef USE_KMALLOC
-	#include "support/kalloc.h"
-	#define mymalloc kmalloc
-	#define myfree kfree
-	#define myrealloc krealloc
-#else
-	#define mymalloc malloc
-	#define myfree free
-	#define myrealloc realloc
-#endif
-
-#ifdef USE_TR1_SHARED_PTR
-
-#include <tr1/memory>
-#define SoraSharedPtr std::tr1::shared_ptr
+#if _MSC_VER >= 1600
+    #include <unordered_map>
+    namespace sora {
+        using std::tr1::unordered_map;
+		#define hash_map unordered_map
+    }
 
 #else
-#define SoraSharedPtr SoraAutoPtr
-#endif
+    namespace sora {
+        using std::hash_map;
+    }
+#endif 
 
+#else
+
+    #include <map>
+    namespace sora {
+        #define hash_map std::map
+    }
+#endif
 
 #ifndef __GNUC__
 
@@ -100,6 +88,7 @@ static inline int lrint (double const x) { // Round to nearest integer
 #endif
 
 #include "SoraConfig.h"
+#include "SoraMemory.h"
 
 typedef		long			long32;
 typedef		unsigned long	ulong32;
@@ -128,33 +117,25 @@ typedef int64_t  int64;
 #include <stdint.h>
 
 namespace sora {
-	typedef ulong32 HSORASPRITE;
-	typedef ulong32 HSORATEXTURE;
-	typedef ulong32 HGUIWIDGET;
-    typedef ulong32 HSORATARGET;
-	
-	enum {
-		SORA_LINE				= 0x0001,
-		SORA_TRIANGLES			= 0x0002,
-		SORA_TRIANGLES_FAN		= 0x0003,
-		SORA_TRIANGLES_STRIP	= 0x0004,
-		SORA_QUAD				= 0x0005,
-	};
-    
-    
-    
     typedef int32 SoraHandle;
     typedef int32 SoraUniqueId;
+    
+	typedef ulong32 SoraSpriteHandle;
+	typedef ulong32 SoraTextureHandle;
+    typedef ulong32 SoraTargetHandle;
+	
+	enum {
+		SORA_LINE = 1,
+		SORA_TRIANGLES,
+		SORA_TRIANGLES_FAN,
+		SORA_TRIANGLES_STRIP,
+		SORA_QUAD,
+	};
+
 } // namespace sora
 
 
 #include <cassert>
-
-
-#ifdef __APPLE_CC__
-#include <Availability.h>
-#endif
-
 
 #if defined(SORA_STD_CALL)
 #define SORACALL __stdcall
@@ -168,32 +149,37 @@ namespace sora {
 #define strcmpnocase strcasecmp
 #endif
 
-#if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-
-	#define OS_OSX
-
-#elif defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
-
-	#define OS_IOS
-
+// apple os ( osx / ios )
+#if defined(__APPLE__) || defined(__APPLE_CC__)
+    #if !defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
+        #define OS_OSX
+    #else
+        #define OS_IOS
+    #endif
+// android
 #elif defined(__ANDROID__)
-
 	#define OS_ANDROID
-
+// windows
 #elif defined(_WIN32) || defined(_MSC_VER)
-
 	#define OS_WIN32
-
+// linux
 #elif defined(linux) || defined(__linux)
-
     #define OS_LINUX
-
-#elif defined(_PSP)		
-
+// psp
+#elif defined(_PSP)
 	#define OS_PSP
 #endif
 
-#define SORA_DLL_EXPORT
+/**
+ * Ensure that dll_export is default when building under windows with /MD or /MDd
+ *  Unless SORA_STATIC is specified for static library
+ **/
+#if defined(OS_WIN32) && defined(_DLL)
+    #if !defined(SORA_DLL_EXPORT) && !defined(SORA_STATIC) && !defined(SORA_DLL_IMPORT)
+        #define SORA_DLL_EXPORT
+    #endif
+#endif
+
 // we are building a dll
 #if defined(OS_WIN32) 
     #if defined(SORA_DLL_EXPORT)
@@ -218,10 +204,6 @@ namespace sora {
 typedef std::string SoraString;
 typedef std::wstring SoraWString;
 
-/*#include "SoraString.h"
-namespace sora {
-    typedef SoraString SoraWString;
-}*/
 #define HAS_WSTRING
 
 #else
@@ -234,13 +216,6 @@ namespace std {
 typedef std::wstring SoraWString;
 #endif
 
-
-// android resolution definitions
-#ifdef OS_ANDROID
-
-
-
-#endif
 
 #ifdef OS_WIN32
 #define sora_fopenw(path, mode) _wfopen(path, TEXT(mode))
@@ -268,18 +243,15 @@ static void msleep(uint32_t msec) {
 	struct timespec* t1 = &timeout1;
 	
 	t0->tv_sec = msec / 1000;
-	t0->tv_nsec = (msec % 1000) * (1000 * 1000);
-	
+	t0->tv_nsec = (msec % 1000) * (1000 * 1000);	
 	while ((nanosleep(t0, t1) == (-1)) && (errno == EINTR)) {
+
 		tmp = t0;
 		t0 = t1;
 		t1 = tmp;
 	}
 }
 
-/*
- Thread Independent Variables
- */
 
 #define MB_OK				1
 #define MB_OKCANCEL			2
@@ -298,10 +270,87 @@ static void msleep(uint32_t msec) {
 #endif
 
 
+#define sora_assert assert
+
+namespace sora {
+    template<bool x> struct STATIC_ASSERTION_FAILURE;
+    template<> struct STATIC_ASSERTION_FAILURE<true> { enum {Value = 1}; };
+    template<int x> struct static_assert_test{};
+}
+
+
+#define SORA_JOIN(x, y) SORA_DO_JOIN(x, y)
+#define SORA_DO_JOIN(x ,y) SORA_DO_JOIN_2(x, y)
+#define SORA_DO_JOIN_2(x, y) x##y
+
+#define sora_static_assert(B) \
+    typedef ::sora::static_assert_test<\
+        sizeof(::sora::STATIC_ASSERTION_FAILURE<(bool)(B)>)>\
+            SORA_JOIN(__sora_static_assert_typedef_, __LINE__)
+
+
+
+#define SORA_STATIC_INSTANCE_DECLARE(T) \
+    static T* Instance(); \
+
+#define SORA_STATIC_INSTANCE_IMP(T) \
+    T* T::Instance() { \
+        static T instance; \
+        return &instance; \
+    }
+
+// this macro runs a seg of code when the app starts using static init for classes
+// useful for plugins to register itself to sora
+// however, static run code's name may conflict if they are in the same line of the project
+// so use of SORA_STATIC_INIT_I is suggested
+
+#define SORA_UNIQUE_NAME(name) \
+    SORA_JOIN(name, __LINE__)
+
+#define SORA_STATIC_RUN_CODE_I(name, code) \
+namespace { \
+    static struct name { \
+       name() { \
+            code; \
+        } \
+    } SORA_JOIN(g_, name); \
+}
+
+#define SORA_STATIC_RUN_CODE(code) \
+    SORA_STATIC_RUN_CODE_I(SORA_UNIQUE_NAME(sora_static_), code) 
+
+#define SORA_STATIC_INIT_I(name, FN) \
+namespace { \
+    static struct name { \
+        name() { \
+            static int counter = 0; \
+            if(counter++ > 0) return; \
+            FN(); \
+        } \
+    } g_##name; \
+}
+
+#define SORA_STATIC_INIT(FN) \
+    SORA_STATIC_INIT_I(sora_static_init_##FN, FN)
+
+#define SORA_STATIC_RUN_FN(FN) \
+    SORA_STATIC_INIT(FN)
+
+#define SORA_STATIC_RUN_CODE_FN(name, code) \
+namespace { \
+    static void sora_static_fn_##name() { \
+        code; \
+    } \
+    SORA_STATIC_INIT(sora_static_fn_##name) \
+}
+
+/*
+ Thread Independent Variables
+ */
 #ifdef _MSC_VER
-#define ThreadLocal __declspec(thread)
+    #define ThreadLocal __declspec(thread)
 #elif defined(__GNUC__) && !defined(OS_OSX) && !defined(OS_IOS)
-#define ThreadLocal __thread
+    #define ThreadLocal __thread
 #else
 // some platforms such as Mac OS X does not support TLS
 // so we might need some other solutions
@@ -310,10 +359,6 @@ static void msleep(uint32_t msec) {
 
 #ifndef __GNUC__
 #define snprintf _snprintf
-#endif
-
-#ifndef _DEBUG
-#define _DEBUG
 #endif
 
 /*
@@ -326,8 +371,8 @@ static void msleep(uint32_t msec) {
  use RTTI for SoraEvents and so on,
  if disabled, then SoraEvent must give it's unique name for type identification
 */
-#ifndef SORA_DLL_EXPORT
-#define SORA_USE_RTTI
+#if !defined(SORA_DLL_EXPORT) && !defined(SORA_DLL_IMPORT)
+//#define SORA_USE_RTTI
 #endif
 
 /*
@@ -335,13 +380,31 @@ static void msleep(uint32_t msec) {
 */
 #define SORA_USE_EXCEPTION
 
+/*
+ if disabled, SoraSimpleFSM would not use a NULL state as initial state
+*/
+#define SORA_FSM_USE_NULL
 
+/*
+ enable this if you are using sora in multithread environment
+ currently unimplemented, reverved for future use
+*/
+//#define SORA_ENABLE_MULTI_THREAD
 
-/****************
-	Below are compile options for plugins
-	Depends on the plugins you use
-	I put them here for convinience
-******************/
+/*
+ // default:
+ // 8 bit system channel
+ // 24 bit user channel
+ 
+ // if use uint64
+ // 16 bit system channel
+ // 48 bit user channel
+ 
+ // if use uint16
+ // 8 bit system channel
+ // 8 bit user channel
+*/
+typedef uint32 EventChannelType;
 
 /*
 	SoraThread Plugin Option
@@ -353,6 +416,30 @@ static void msleep(uint32_t msec) {
 //#define SORA_WIN32_PTHREAD
 #endif
 
+
+/*
+ automatically register plugins
+ depends on plugin implemention
+ plugins can choose to use this macro to define whether to 
+ register itself to sora when the app starts
+ for example: 
+ render systems can register itself when the app starts
+ default: on
+ */
+#define SORA_AUTOMATIC_REGISTER
+
+
+/**
+ uncomment this to enable auto debug render event receiving
+ and also you must enable DebugRender in SoraCore
+ **/
+//#define SORA_DEBUG_RENDER
+
+/**
+ * Enable core zip file pack support(in resource file manager)
+ * Comment this to disable
+ **/
+#define SORA_ZIP_PACK_SUPPORT
 
 
 #endif // _SORA_PLATFORM_H_

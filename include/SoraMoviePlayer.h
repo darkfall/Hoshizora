@@ -3,7 +3,7 @@
 //  Sora
 //
 //  Created by Griffin Bu on 3/21/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef SORA_MOVIE_PLAYER_H_
@@ -34,8 +34,8 @@ namespace sora {
         virtual bool isPlaying() const = 0;
         virtual bool isPaused() const = 0;
         
-        virtual float32 getPlayRate() const = 0;
-        virtual void setPlayRate(float32 rate) = 0;
+        virtual float getPlayRate() const = 0;
+        virtual void setPlayRate(float rate) = 0;
         
         virtual uint64 getLength() const = 0;
         virtual float getFPS() const = 0;

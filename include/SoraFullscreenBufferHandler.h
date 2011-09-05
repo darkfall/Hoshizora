@@ -2,8 +2,8 @@
 //  SoraFullscreenBufferHandler.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/15/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/15/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraFullscreenBufferHandler_h
@@ -14,6 +14,7 @@
 #include "SoraEvent.h"
 #include "SoraDelegate.h"
 #include "SoraSprite.h"
+#include "function/SoraFunction.h"
 
 namespace sora {
     
@@ -25,14 +26,16 @@ namespace sora {
         ~SoraFullscreenBufferHandler();
         
     public:
-        void onBufferRender(HSORATEXTURE buffer);
-        void registerDelegate(SoraAbstractDelegate<HSORATEXTURE>* delegate);
+        void onBufferRender(SoraTextureHandle buffer);
+        
+        typedef SoraFunction<void(SoraTextureHandle)> DelegateFuncType;
+        void registerDelegate(const DelegateFuncType& delegate);
         
     private:
         SoraSprite* mBufferSprite;
         ulong32 mBufferTarget;
         
-        SoraAbstractDelegate<HSORATEXTURE>* mDelegate;
+        DelegateFuncType mDelegate;
     };
     
 } // namespace sora

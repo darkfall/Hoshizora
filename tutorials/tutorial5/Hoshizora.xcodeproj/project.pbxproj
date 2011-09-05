@@ -21,18 +21,12 @@
 		886E02F913D67D61003433BE /* image_DXT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02CA13D67D61003433BE /* image_DXT.cpp */; };
 		886E02FB13D67D61003433BE /* image_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02CD13D67D61003433BE /* image_helper.cpp */; };
 		886E02FD13D67D61003433BE /* SOIL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02D013D67D61003433BE /* SOIL.cpp */; };
-		886E02FE13D67D61003433BE /* soil.html in Resources */ = {isa = PBXBuildFile; fileRef = 886E02D213D67D61003433BE /* soil.html */; };
 		886E030013D67D61003433BE /* stb_image_aug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02D413D67D61003433BE /* stb_image_aug.cpp */; };
 		886E030113D67D61003433BE /* SoraGLSLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02D813D67D61003433BE /* SoraGLSLShader.cpp */; };
 		886E030213D67D61003433BE /* SoraOGLInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02DA13D67D61003433BE /* SoraOGLInput.cpp */; };
 		886E030313D67D61003433BE /* SoraOGLKeyPoll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02DC13D67D61003433BE /* SoraOGLKeyPoll.cpp */; };
 		886E030413D67D61003433BE /* SoraOGLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02DE13D67D61003433BE /* SoraOGLRenderer.cpp */; };
 		886E030513D67D61003433BE /* SoraOGLRenderTarget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02E013D67D61003433BE /* SoraOGLRenderTarget.cpp */; };
-		886E030613D67D61003433BE /* MyFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02E313D67D61003433BE /* MyFileReader.cpp */; };
-		886E030713D67D61003433BE /* PackMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02E513D67D61003433BE /* PackMemory.cpp */; };
-		886E030813D67D61003433BE /* PackReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02E713D67D61003433BE /* PackReader.cpp */; };
-		886E030913D67D61003433BE /* SoraZipFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02E913D67D61003433BE /* SoraZipFile.cpp */; };
-		886E030A13D67D61003433BE /* SoraZipResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E02EB13D67D61003433BE /* SoraZipResourceManager.cpp */; };
 		886E031013D67D76003433BE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E030C13D67D75003433BE /* main.cpp */; };
 		886E031113D67D76003433BE /* SoraMainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886E030D13D67D75003433BE /* SoraMainWindow.cpp */; };
 		886E031313D67D82003433BE /* resource.zip in Resources */ = {isa = PBXBuildFile; fileRef = 886E031213D67D82003433BE /* resource.zip */; };
@@ -259,7 +253,6 @@
 		886E02CE13D67D61003433BE /* image_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_helper.h; sourceTree = "<group>"; };
 		886E02D013D67D61003433BE /* SOIL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SOIL.cpp; sourceTree = "<group>"; };
 		886E02D113D67D61003433BE /* SOIL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOIL.h; sourceTree = "<group>"; };
-		886E02D213D67D61003433BE /* soil.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = soil.html; sourceTree = "<group>"; };
 		886E02D413D67D61003433BE /* stb_image_aug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image_aug.cpp; sourceTree = "<group>"; };
 		886E02D513D67D61003433BE /* stb_image_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_aug.h; sourceTree = "<group>"; };
 		886E02D613D67D61003433BE /* stbi_DDS_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug.h; sourceTree = "<group>"; };
@@ -274,16 +267,6 @@
 		886E02DF13D67D61003433BE /* SoraOGLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderer.h; sourceTree = "<group>"; };
 		886E02E013D67D61003433BE /* SoraOGLRenderTarget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLRenderTarget.cpp; sourceTree = "<group>"; };
 		886E02E113D67D61003433BE /* SoraOGLRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderTarget.h; sourceTree = "<group>"; };
-		886E02E313D67D61003433BE /* MyFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyFileReader.cpp; sourceTree = "<group>"; };
-		886E02E413D67D61003433BE /* MyFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFileReader.h; sourceTree = "<group>"; };
-		886E02E513D67D61003433BE /* PackMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PackMemory.cpp; sourceTree = "<group>"; };
-		886E02E613D67D61003433BE /* PackMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackMemory.h; sourceTree = "<group>"; };
-		886E02E713D67D61003433BE /* PackReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PackReader.cpp; sourceTree = "<group>"; };
-		886E02E813D67D61003433BE /* PackReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackReader.h; sourceTree = "<group>"; };
-		886E02E913D67D61003433BE /* SoraZipFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraZipFile.cpp; sourceTree = "<group>"; };
-		886E02EA13D67D61003433BE /* SoraZipFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraZipFile.h; sourceTree = "<group>"; };
-		886E02EB13D67D61003433BE /* SoraZipResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraZipResourceManager.cpp; sourceTree = "<group>"; };
-		886E02EC13D67D61003433BE /* SoraZipResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraZipResourceManager.h; sourceTree = "<group>"; };
 		886E030C13D67D75003433BE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 		886E030D13D67D75003433BE /* SoraMainWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraMainWindow.cpp; sourceTree = SOURCE_ROOT; };
 		886E030E13D67D76003433BE /* SoraMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMainWindow.h; sourceTree = SOURCE_ROOT; };
@@ -639,31 +622,12 @@
 				886E02CE13D67D61003433BE /* image_helper.h */,
 				886E02D013D67D61003433BE /* SOIL.cpp */,
 				886E02D113D67D61003433BE /* SOIL.h */,
-				886E02D213D67D61003433BE /* soil.html */,
 				886E02D413D67D61003433BE /* stb_image_aug.cpp */,
 				886E02D513D67D61003433BE /* stb_image_aug.h */,
 				886E02D613D67D61003433BE /* stbi_DDS_aug.h */,
 				886E02D713D67D61003433BE /* stbi_DDS_aug_c.h */,
 			);
 			path = soil;
-			sourceTree = "<group>";
-		};
-		886E02E213D67D61003433BE /* SoraZipResourceManager */ = {
-			isa = PBXGroup;
-			children = (
-				886E02E313D67D61003433BE /* MyFileReader.cpp */,
-				886E02E413D67D61003433BE /* MyFileReader.h */,
-				886E02E513D67D61003433BE /* PackMemory.cpp */,
-				886E02E613D67D61003433BE /* PackMemory.h */,
-				886E02E713D67D61003433BE /* PackReader.cpp */,
-				886E02E813D67D61003433BE /* PackReader.h */,
-				886E02E913D67D61003433BE /* SoraZipFile.cpp */,
-				886E02EA13D67D61003433BE /* SoraZipFile.h */,
-				886E02EB13D67D61003433BE /* SoraZipResourceManager.cpp */,
-				886E02EC13D67D61003433BE /* SoraZipResourceManager.h */,
-			);
-			name = SoraZipResourceManager;
-			path = ../../Plugins/SoraZipResourceManager;
 			sourceTree = "<group>";
 		};
 		886E030B13D67D66003433BE /* source */ = {
@@ -689,7 +653,6 @@
 				886E031413D67D8B003433BE /* libHoshizora.dylib */,
 				886E020B13D67D61003433BE /* SoraFreetypeFont */,
 				886E02BE13D67D61003433BE /* SoraOGLRenderer */,
-				886E02E213D67D61003433BE /* SoraZipResourceManager */,
 				886E030B13D67D66003433BE /* source */,
 				887C5CC613D1D2E90009E508 /* Frameworks */,
 				887C5CC413D1D2E90009E508 /* Products */,
@@ -781,7 +744,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				886E02FE13D67D61003433BE /* soil.html in Resources */,
 				886E031313D67D82003433BE /* resource.zip in Resources */,
 				886E032013D68309003433BE /* geotest.png in Resources */,
 				886E032613D68615003433BE /* bloom.cg in Resources */,
@@ -824,11 +786,6 @@
 				886E030313D67D61003433BE /* SoraOGLKeyPoll.cpp in Sources */,
 				886E030413D67D61003433BE /* SoraOGLRenderer.cpp in Sources */,
 				886E030513D67D61003433BE /* SoraOGLRenderTarget.cpp in Sources */,
-				886E030613D67D61003433BE /* MyFileReader.cpp in Sources */,
-				886E030713D67D61003433BE /* PackMemory.cpp in Sources */,
-				886E030813D67D61003433BE /* PackReader.cpp in Sources */,
-				886E030913D67D61003433BE /* SoraZipFile.cpp in Sources */,
-				886E030A13D67D61003433BE /* SoraZipResourceManager.cpp in Sources */,
 				886E031013D67D76003433BE /* main.cpp in Sources */,
 				886E031113D67D76003433BE /* SoraMainWindow.cpp in Sources */,
 				886E031A13D67DEE003433BE /* SoraCGGLShader.cpp in Sources */,

@@ -37,7 +37,7 @@ public:
 	bool hideMouse() { return false; }
     
     void onKeyEvent(sora::SoraKeyEvent* kev);
-    void onScreenBufferRender(sora::HSORATEXTURE& tex);
+    void onScreenBufferRender(sora::SoraTextureHandle tex);
     void onImageEffectEnd(const void* sender, int32& reserved);
     
 private:

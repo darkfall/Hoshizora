@@ -10,19 +10,20 @@
 #ifndef SORA_MENU_BAR_H_
 #define SORA_MENU_BAR_H_
 
-#include "../SoraPlatform.h"
-#include "../SoraSingleton.h"
-#include "../SoraEvent.h"
-#include "../SoraFont.h"
-#include "../SoraPlugin.h"
-#include "../SoraHotkey.h"
+#include "SoraPlatform.h"
+#include "SoraSingleton.h"
+#include "SoraEvent.h"
+#include "SoraFont.h"
+#include "SoraPlugin.h"
+#include "SoraHotkey.h"
+#include "SoraFrameListener.h"
 
 namespace sora {
 	
 	class SoraMenuBarItem;
 	class SoraMenuBar;
 	
-	class SoraMenuBarClickEvent: public SoraEvent {
+	class SORA_API SoraMenuBarClickEvent: public SoraEvent {
 	public:		
 	//	std::wstring getItemName() const;
 	//	void setItemName(const std::wstring& name);
@@ -60,11 +61,11 @@ namespace sora {
 		void setActive(bool flag);
 		bool isActive() const;
 		
-		bool testPoint(float32 x, float32 y);
+		bool testPoint(float x, float y);
 		void setFont(SoraFont* font);
 		
 		void adjustWidth();
-		float32 getWidth() const;
+		float getWidth() const;
 		
 		std::wstring getName() const;
 		
@@ -72,9 +73,9 @@ namespace sora {
 		std::wstring mBarName;
 		SoraFont* mFont;
 		
-		float32 mPosX;
-		float32 mWidth;
-		float32 mItemHeight;
+		float mPosX;
+		float mWidth;
+		float mItemHeight;
 		
 		int32 mCurrentItem;
 		
@@ -106,11 +107,11 @@ namespace sora {
 		SoraEventHandler* mEventHandler;
 	};
 	
-	class SORA_API SoraMenuBar: public SoraEventHandler {
+	class SORA_API SoraMenuBar: public SoraEventHandler, public SoraFrameListener {
     protected:
         friend class SoraSingleton<SoraMenuBar>;
         
-        SoraMenuBar(float32 height = 30);
+        SoraMenuBar(float height = 30);
 		~SoraMenuBar();
 		
     public:
@@ -128,8 +129,8 @@ namespace sora {
 		void setFont(SoraFont* font);
 		SoraFont* getFont() const;
 		
-		float32 getMenuBarHeight() const;
-		void setMenuBarHeight(float32 height);
+		float getMenuBarHeight() const;
+		void setMenuBarHeight(float height);
 		
 		void setShowAlways(bool flag);
 		bool isShowAlways() const;
@@ -145,18 +146,21 @@ namespace sora {
 		void diactiveMenus();
         
         void onHotkeyEvent(SoraHotkeyEvent* kev);
+        
+        void onFrameStart();
+        void onFrameEnd();
 		
 	private:
 		static SoraMenuBar* mInstance;
 
-		inline bool activeMenu(float32 x, float32 y);
+		inline bool activeMenu(float x, float y);
 		
-		float32 mMenuBarHeight;
+		float mMenuBarHeight;
 		SoraFont* mFont;
         
         int32 mActiveKeyId;
 		
-		float32 mMenuBarLength;
+		float mMenuBarLength;
 		
 		typedef std::list<SoraMenuBarMenu*> MENUBAR_LIST;
 		MENUBAR_LIST mMenus;

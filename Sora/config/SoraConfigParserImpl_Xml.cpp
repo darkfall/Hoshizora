@@ -37,7 +37,9 @@ namespace sora {
         mDocument = new pugi::xml_document;
         if(mDocument->load_buffer(data, size)) {
             mCurrNode = mDocument->root();
+            return true;
         }
+        return false;
     }
     
     bool SoraConfigParserXmlImpl::create() {
@@ -46,6 +48,7 @@ namespace sora {
         }
         mDocument = new pugi::xml_document;
         mCurrNode = mDocument->root();
+        return true;
     }
     
     void SoraConfigParserXmlImpl::close() {

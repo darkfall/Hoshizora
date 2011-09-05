@@ -2,8 +2,8 @@
 //  SoraHotkey.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/1/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/1/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_SoraHotkey_h
@@ -31,7 +31,7 @@ namespace sora {
             return mHotkeyId;
         }
         
-        SORA_EVENT_IDENTIFIER(str2id("SoraHotkeyEvent"));
+        SORA_EVENT_IDENTIFIER(18446744072805578078ULL);
         
     private:
         SoraHotkey* mHotkey;

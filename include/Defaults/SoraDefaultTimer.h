@@ -1,8 +1,8 @@
 /*
  *  SoraDefaultTimer.h
- *  Plugin Concept
+ *  Hoshizora
  *
- *  Created by griffin clare on 8/24/10.
+ *  Created by Robert Bu on 8/24/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -10,7 +10,7 @@
 #ifndef SORA_OSX_TIMER_H
 #define SORA_OSX_TIMER_H
 
-#include "../SoraTimer.h"
+#include "SoraTimer.h"
 
 #include "SoraTimestamp.h"
 
@@ -24,13 +24,13 @@ namespace sora {
 		
 		void setFPS(int32 fps) {
 			fpsInterval = (uint64)((1.f / fps) * 1000 * 1000);
-			this->fps = (float32)fps;
+			this->fps = (float)fps;
 		}
 		
-		float32 getFPS()	{ return fps; }
-		float32 getDelta()	{ return fdt; }
+		float getFPS()	{ return fps; }
+		float getDelta()	{ return fdt; }
 		int32 getFrameCount() { return frameCounter; }
-		float32 getTime() {  return fTime; }
+		float getTime() {  return fTime; }
 		uint64 getCurrentSystemTime() {
             SoraTimestamp currtime;
             return currtime.epochMicroseconds();
@@ -39,7 +39,7 @@ namespace sora {
 		bool update() {
 			if(fpsInterval == SORA_FPS_INFINITE) {
 				if(!(time == oldtime)) {
-					fps = 1.f / ((time - oldtime)/(float32)(1000*1000));
+					fps = 1.f / ((time - oldtime)/(float)(1000*1000));
 					oldtime = time;
 					time.update();
 				} else {
@@ -64,10 +64,10 @@ namespace sora {
             time.update();
             
             if(oldtime <= time - fpsInterval && oldtime >= time - (fpsInterval*2)) {
-				fdt = fpsInterval / (float32)(1000*1000);
+				fdt = fpsInterval / (float)(1000*1000);
 				oldtime += fpsInterval;
 			} else {
-				fdt = (time-oldtime) / (float32)(1000*1000);
+				fdt = (time-oldtime) / (float)(1000*1000);
 				oldtime = time;
 			}
 			/* too long */
@@ -84,10 +84,10 @@ namespace sora {
 	private:
 		SoraTimestamp time, oldtime;
 		uint64 fpsInterval;
-        float32 fps;
-		float32 fdt;
+        float fps;
+		float fdt;
 		
-		float32 fTime;
+		float fTime;
 		int32 frameCounter;
     };
 }

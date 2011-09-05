@@ -37,15 +37,14 @@ namespace sora {
         
         virtual void reinit() {}
         
-        void setActive(bool flag) {
-            mActive = flag;
-        }
+        bool isActive() const { return mActive; }
         
-        bool isActive() const {
-            return mActive;
-        }
+        virtual bool isConsoleApp() { return false; }
         
     private:
+        friend class SoraCore;
+        void setActive(bool flag) { mActive = flag; }
+        
         bool mActive;
 	};
 	

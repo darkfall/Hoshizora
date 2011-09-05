@@ -13,7 +13,8 @@
 #include "SoraPlatform.h"
 
 namespace sora {
-	SoraWString osxApplicationPath();
+	SoraWString osxApplicationPathW();
+    SoraString osxApplicationPath();
 	bool osxFileExists(const SoraWString& path);
 } // namespace sora
 

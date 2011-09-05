@@ -35,6 +35,7 @@ namespace sora {
         if(mImpl) {
             return mImpl->open(path);
         }
+        return false;
     }
     
     bool SoraConfigParser::open(void* data, ulong32 size, ConfigType type) {
@@ -47,6 +48,7 @@ namespace sora {
         if(mImpl) {
             return mImpl->open(data, size);
         }
+        return false;
     }
     
     bool SoraConfigParser::open(const std::string& string, ConfigType type) {

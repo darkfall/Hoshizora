@@ -2,8 +2,8 @@
 //  Any.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 7/8/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 7/8/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_Any_h
@@ -38,7 +38,8 @@ namespace sora {
         }
         
         ~SoraAny() {
-            delete mContent;
+            if(mContent)
+                delete mContent;
         }
         
         SoraAny& swap(SoraAny& rhs) {
@@ -101,51 +102,104 @@ namespace sora {
     };
     
     template<typename ValueType>
-    ValueType* AnyCast(SoraAny* operand) {
+    inline ValueType* AnyCast(SoraAny* operand) {
         return operand && operand->type() == typeid(ValueType) ?
         &static_cast<SoraAny::Holder<ValueType>*>(operand->mContent)->mHeld
         : 0;
     }
     
     template<typename ValueType>
-    const ValueType* AnyCast(const SoraAny* operand) {
+    inline const ValueType* AnyCast(const SoraAny* operand) {
         return AnyCast<ValueType>(const_cast<SoraAny*>(operand));
     }
     
     template<typename ValueType>
-    ValueType AnyCast(const SoraAny& operand) {
+    inline ValueType AnyCast(const SoraAny& operand) {
         ValueType* result = AnyCast<ValueType>(const_cast<SoraAny*>(&operand));
         if(!result)
-            THROW_SORA_EXCEPTION("Faild to conver between const any types");
+            THROW_SORA_EXCEPTION(BadCastException, "Faild to conver between const any types");
         return *result;
     }
     
     template<typename ValueType>
-    ValueType AnyCast(SoraAny& operand) {
+    inline ValueType AnyCast(SoraAny& operand) {
         ValueType* result = AnyCast<ValueType>(&operand);
         if(!result)
-            THROW_SORA_EXCEPTION("Faild to conver between const any types");
+            THROW_SORA_EXCEPTION(BadCastException, "Faild to conver between const any types");
         return *result;
     }
     
     template<typename ValueType>
-    const ValueType& RefAnyCast(const SoraAny& operand) {
+    inline const ValueType& RefAnyCast(const SoraAny& operand) {
         ValueType* result = AnyCast<ValueType>(const_cast<SoraAny*>(&operand));
         if(!result)
-            THROW_SORA_EXCEPTION("Faild to conver between const any types");
+            THROW_SORA_EXCEPTION(BadCastException, "Faild to conver between const any types");
         return *result;
     }
     
     template<typename ValueType>
-    ValueType* UnsafeAnyCast(SoraAny* operand) {
+    inline ValueType* UnsafeAnyCast(SoraAny* operand) {
         return &static_cast<SoraAny::Holder<ValueType>*>(operand->mContent)->mHeld;
     }
     
     template<typename ValueType>
-    const ValueType* UnsafeAnyCast(const SoraAny* operand) {
+    inline const ValueType* UnsafeAnyCast(const SoraAny* operand) {
         return AnyCast<ValueType>(const_cast<SoraAny*>(operand));
     }
     
+    inline bool isAnyInt(const SoraAny& any) {
+        return any.type() == typeid(int32);
+    }
+    
+    inline bool isAnyFloat(const SoraAny& any) {
+        return any.type() == typeid(float);
+    }
+    
+    inline bool isAnyUInt(const SoraAny& any) {
+        return any.type() == typeid(uint32);
+    }
+    
+    inline bool isAnyDouble(const SoraAny& any) {
+        return any.type() == typeid(double);
+    }
+    
+    inline bool isAnyLong(const SoraAny& any) {
+        return any.type() == typeid(long32);
+    }
+    
+    inline bool isAnyChar(const SoraAny& any) {
+        return any.type() == typeid(char);
+    }
+    
+    inline bool isAnyUChar(const SoraAny& any) {
+        return any.type() == typeid(unsigned char);
+    }
+    
+    inline bool isAnyULong(const SoraAny& any) {
+        return any.type() == typeid(ulong32);
+    }
+    
+    inline bool isAnyInt64(const SoraAny& any) {
+        return any.type() == typeid(int64);
+    }
+    
+    inline bool isAnyUInt64(const SoraAny& any) {
+        return any.type() == typeid(uint64);
+    }
+    
+ /*   static bool isAnyStringId(const SoraAny& any) {
+        return any.type() == typeid(SoraStringId);
+    }
+   */ 
+    template<typename T>
+    inline bool isAnyType(const SoraAny& any) {
+        return any.type() == typeid(T);
+    }
+    
+    template<typename T>
+    inline char* getTypeName() {
+        return typeid(T).name();
+    }
 } // namespace sora
 
 #endif

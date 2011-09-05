@@ -20,7 +20,7 @@
 
 namespace sora {
 
-    void _doCmdSet(SoraConsoleEvent* cev, const std::vector<std::string>& params) {
+    static void _doCmdSet(SoraConsoleEvent* cev, const std::vector<std::string>& params) {
 		if(params.size() > 0) {
 			std::string p1 = params[0];
 			size_t dotPos = p1.find('.');

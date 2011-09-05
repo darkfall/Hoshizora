@@ -20,16 +20,16 @@
 #include "SoraEnvValues.h"
 #include "SoraResourceFile.h"
 #include "SoraDelegate.h"
+#include "SoraInputListeners.h"
+#include "SoraHotkey.h"
+#include "SoraLogger.h"
 
-#include "Debug/SoraInternalLogger.h"
-
-#include "helpers/SoraMenuBar.h"
-#include "cmd/SoraConsole.h"
+#include "timer/ITimerManager.h"
 
 #include <map>
 
 namespace sora {
-		
+    
 	class SORA_API SoraCore: public SoraEventHandler {
 	protected:
 		SoraCore();
@@ -37,7 +37,39 @@ namespace sora {
 
 	public:
         static SoraCore* Instance();
-        static void Destroy();
+        
+        class Parameter {
+        public:
+            Parameter(bool loadPlugins=true, bool renderToBuffer=false, bool postErrorByMessageBox=false, bool seperateSSthread=false, bool debugRender=false):
+            mLoadPlugins(loadPlugins),
+            mRenderToBuffer(renderToBuffer),
+            mMesageBoxErrorPost(postErrorByMessageBox),
+            mSeperateSoundSystemThread(seperateSSthread), 
+            mDebugRender(debugRender) {
+                
+            }
+            
+            void setLoadPlugin(bool flag) { mLoadPlugins = flag; }
+            void setRenderToBuffer(bool flag) { mRenderToBuffer = flag; }
+            void setPostErrorByMessageBox(bool flag) { mMesageBoxErrorPost = flag; }
+            void setSeprateSoundSystemThread(bool flag) { mSeperateSoundSystemThread = flag; }
+            void setDebugRender(bool flag) { mDebugRender = flag; }
+            
+            bool isLoadPlugins() const { return mLoadPlugins; }
+            bool isRenderToBuffer() const { return mRenderToBuffer; }
+            bool isPostErrorByMessageBox() const { return mMesageBoxErrorPost; }
+            bool isSeperateSoundSystemThread() const { return mSeperateSoundSystemThread; }
+            bool isDebugRender() const { return mDebugRender; }
+            
+        private:
+            bool mLoadPlugins;
+            bool mRenderToBuffer;
+            bool mMesageBoxErrorPost;
+            bool mSeperateSoundSystemThread;
+            bool mDebugRender;
+        };
+        
+        void init(const Parameter& param = Parameter());
         
 		void start();
 		void shutDown();
@@ -54,11 +86,11 @@ namespace sora {
 		void registerInput			(SoraInput* pInput);
 		void registerFontManager	(SoraFontManager* pFontManager);
 		void registerSoundSystem	(SoraSoundSystem* pSoundSystem);
-		
+        
 		void registerMiscTool		(SoraMiscTool* pMiscTool);
 		void registerPluginManager  (SoraPluginManager* pPluginManager);
 		void registerTimer			(SoraTimer* pTimer);
-        
+            
         SoraRenderSystem*   getRenderSystem() const;
         SoraInput*          getInput() const;
         SoraMiscTool*       getMiscTool() const;
@@ -66,10 +98,10 @@ namespace sora {
         SoraTimer*          getTimer() const;
         SoraFontManager*    getFontManager() const;
         SoraSoundSystem*    getSoundSystem() const;
-
-		void registerPlugin         (SoraPlugin* pPlugin);
-		void unistallPlugin         (SoraPlugin* pPlugin);
-		void unistallPluginS		(const SoraString& sPluginName);
+        
+		void        registerPlugin         (SoraPlugin* pPlugin);
+		SoraPlugin* unistallPlugin  (SoraPlugin* pPlugin);
+		SoraPlugin* unistallPlugin  (const SoraString& sPluginName);
 		SoraPlugin* getPlugin		(const SoraString& sPluginName);
         
         bool  isRenderSystemExtensionEnabled(int32 extension);
@@ -79,13 +111,13 @@ namespace sora {
         int32 getRenderSystemExtensionParam(int32 extension);
 
 		void	setFPS(int32 fps);
-		float32 getFPS();
-		float32 getDelta();
-        float32 getAbsoluteDelta();
-		float32 getTime();
+		float   getFPS();
+		float   getDelta();
+        float   getAbsoluteDelta();
+		float   getTime();
 		int32	getFrameCount();
-		void	setTimeScale(float32 scale);
-		float32 getTimeScale();
+		void	setTimeScale(float scale);
+		float   getTimeScale();
 		uint64  getCurrentSystemTime();
         void    setVerticalSync(bool flag);
 
@@ -93,41 +125,40 @@ namespace sora {
 		void beginScene(uint32 c=0xFF000000, ulong32 h=0, bool clear=true);
 		void endScene();
 
-		HSORATARGET     createTarget(int width, int height, bool zbuffer=true);
+		SoraTargetHandle     createTarget(int width, int height, bool zbuffer=true);
 		void            freeTarget(ulong32 t);
-		HSORATEXTURE    getTargetTexture(ulong32 t);
+		SoraTextureHandle    getTargetTexture(ulong32 t);
 
-		HSORATEXTURE createTexture(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
-		HSORATEXTURE createTextureWH(int32 w, int32 h);
-		HSORATEXTURE createTextureFromRawData(uint32* data, int32 w, int32 h);
-		HSORATEXTURE createTextureFromMem(void* data, ulong32 size);
-		uint32*		 textureLock(HSORATEXTURE);
-        void		 textureUnlock(HSORATEXTURE);
-		int32		 getTextureWidth(HSORATEXTURE, bool origin=false);
-		int32		 getTextureHeight(HSORATEXTURE, bool origin=false);
+		SoraTextureHandle createTexture(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
+		SoraTextureHandle createTextureWH(int32 w, int32 h);
+		SoraTextureHandle createTextureFromRawData(uint32* data, int32 w, int32 h);
+		SoraTextureHandle createTextureFromMem(void* data, ulong32 size);
+		uint32*		 textureLock(SoraTextureHandle);
+        void		 textureUnlock(SoraTextureHandle);
+		int32		 getTextureWidth(SoraTextureHandle, bool origin=false);
+		int32		 getTextureHeight(SoraTextureHandle, bool origin=false);
 		// depends on render system, may have different meaning
-		ulong32		 getTextureId(HSORATEXTURE);
-		void		 releaseTexture(HSORATEXTURE pTexture);
+		ulong32		 getTextureId(SoraTextureHandle);
+		void		 releaseTexture(SoraTextureHandle pTexture);
         void         clearTextureMap();
 
         SoraShaderContext*  createShaderContext();
 		void                attachShaderContext(SoraShaderContext* context);
 		void                detachShaderContext();
-        SoraShader*         createShader(const SoraWString& file, const SoraString& entry, SORA_SHADER_TYPE type);
-        void                freeShader(SoraShader* shader);
-        // for convinience to attach a single shader but not a whole context, also use detachShaderContext to detach the shader
-        void                attachShader(SoraShader* shader);
 
 		SoraSprite* createSprite (const SoraWString& sPath);
+        void renderSprite(const SoraWString& path, float x=0.f, float y=0.f);
 
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
-		void renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
+		void renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
 
-		void renderRect     (float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth=1.f, uint32 color=0xFFFFFFFF, float32 z=0.0f);
-		void renderBox		(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z=0.f);
+        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+        void fillBox        (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+        
 		void setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
-		void setTransform	(float32 x=0.f, float32 y=0.f, float32 dx=0.f, float32 dy=0.f, float32 rot=0.f, float32 hscale=0.f, float32 vscale=0.f);
+		void setTransform	(float x=0.f, float y=0.f, float dx=0.f, float dy=0.f, float rot=0.f, float hscale=1.f, float vscale=1.f);
 		
 		void pushTransformMatrix();
 		void popTransformMatrix();
@@ -148,16 +179,36 @@ namespace sora {
 		ulong32 getMainWindowHandle();
 		SoraWindowInfoBase* getMainWindow();
 
+        /*
+         Core Features
+         See SoraCore::Params for initial config
+         */
 		void enableMessageBoxErrorPost(bool bFlag);
+        bool isMessageBoxErrorPostEnabled() const;
+        /**
+         * Enable Fullscreen buffer would cause everything be renderered to a screen texture buffer then render to screen
+         * This is required for fullscreen post shader effects
+         **/
+        void enableFullscreenBuffer(bool flag);
+        bool isFullscreenBufferEnabled() const;
+        
+		void enablePluginDetection(bool flag);
+        bool isPluginDetectionEnabled() const;
+        
+        void enableSeperateSoundSystemThread(bool flag);
+        bool isSeperateSoundSystemThread() const;
+        
+        void enableDebugRender(bool flag);
+        bool isDebugRenderEnabled() const;
 
 		/*generates a int32 random number using SFMT*/
-		void	setRandomSeed(int32 seed);
-		int32	getRandomSeed();
-		int32	randomInt(int32 min, int32 max);
-		float32 randomFloat(float32 min, float32 max);
-		int32	randomIntNoRange();
-		/*generates a float32 random number range [0, 1] using SFMT*/
-		float32 randomFloatNoRange();
+		static void     setRandomSeed(int32 seed);
+		static int32    getRandomSeed();
+		static int32    randomInt(int32 min, int32 max);
+		static float    randomFloat(float min, float max);
+		static int32    randomIntNoRange();
+		/*generates a float random number range [0, 1] using SFMT*/
+		static float    randomFloatNoRange();
 
 		int32 getScreenWidth();
 		int32 getScreenHeight();
@@ -172,7 +223,7 @@ namespace sora {
 		void	enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
 	
 		bool    isMainWindowSet() { return bMainWindowSet; }
-		ulong32 createWindow(SoraWindowInfoBase* info);
+		bool    createWindow(SoraWindowInfoBase* info);
 		void    setWindowSize(int32 w, int32 h);
 		void    setWindowTitle(const SoraWString& title);
 		void    setWindowPos(int32 px, int32 py);
@@ -180,10 +231,10 @@ namespace sora {
 		bool    isFullscreen();
 
 		// inputs
-		void	getMousePos(float32 *x, float32 *y);
-		float32 getMousePosX();
-		float32 getMousePosY();
-		void	setMousePos(float32 x, float32 y);
+		void	getMousePos(float *x, float *y);
+		float   getMousePosX();
+		float   getMousePosY();
+		void	setMousePos(float x, float y);
 		int		getMouseWheel();
 		bool	isMouseOver();
 		bool	keyDown(int32 key);
@@ -218,15 +269,24 @@ namespace sora {
 		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
 		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
 
-		SoraFont* createFont(const SoraWString& fontName, int size);
-		void releaseFont(SoraFont* font);
+		SoraFont*   createFont(const SoraWString& fontName, int size);
+		void        releaseFont(SoraFont* font);
 		
 		SoraMusicFile* 			createMusicFile(const SoraWString& musicName, bool bStream=true);
 		SoraSoundEffectFile* 	createSoundEffectFile(const SoraWString& se);
         SoraMusicFile* 			createMusicFile(bool bStream=false);
         SoraSoundEffectFile* 	createSoundEffectFile();
         
-        void setViewPoint(float32 x=0.f, float32 y=0.f, float32 z=0.f);
+        void addMouseListener(SoraMouseListener* listener, int priority=0);
+        void addKeyListener(SoraKeyListener* listener, int priority=0);
+        void addJoystickListener(SoraJoystickListener* listener, int priority=0);
+        
+        void delMouseListener(SoraMouseListener* listener);
+        void delKeyListener(SoraKeyListener* listener);
+        void delJoystickListener(SoraJoystickListener* listener);
+        
+        
+        void setViewPoint(float x=0.f, float y=0.f, float z=0.f);
         void execute(const SoraString& appPath, const SoraString& args);
         void snapshot(const SoraString& path);
 		/*
@@ -237,39 +297,46 @@ namespace sora {
 		SoraWString videoInfo();
 		void		flush();
 
-		void postError	(const SoraString& sMssg);
+		void postError(const SoraString& sMssg);
 
 		/*
 		 if enabled
 		 getDelta would always return 1.f
-		 which suggest all caculation based on delta would sync by frame
 		 */
 		void setFrameSync(bool flag);
-
+ 
 		/* frame listener functions */
 		void addFrameListener(SoraFrameListener* listener);
 		void delFrameListener(SoraFrameListener* listener);
 		
-		uint64 getEngineMemoryUsage();
-		
-		SoraConsole*    getConsole() const;
-        void            enableMenuBar(bool flag);
-		SoraMenuBar*    getMenuBar() const;
+        /**
+         *  Memory usage calculated by Operating System
+         *  libproc required for Linux
+         **/
+		uint64 getEngineMemoryUsage() const;
+        /**
+         *  Memory usage calculated by SoraResourceFileFinder
+         *  Only calculates resource allocation and free
+         *  (Library managed memory not included, such as gl texture)
+         **/
+        uint64 getResourceMemoryUsage() const;
 		
 		void setSystemFont(const wchar_t* font, int32 fontSize);
 		
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
-		
-		void enablePluginDetection(bool flag);
+                
+        typedef SoraFunction<void(SoraTextureHandle)> FullScreenBufferDelegateType;
+        void registerFullscreenBufferDelegate(const FullScreenBufferDelegateType& delegate);
         
         /**
-         * Enable Fullscreen buffer would cause everything be renderered to a screen texture buffer then render to screen
-         * This is required for fullscreen post shader effects
+         *  transform a 3d point to 2d using a far point as view
          **/
-        void enableFullscreenBuffer(bool flag);
-        void registerFullscreenBufferDelegate(const SoraAbstractDelegate<HSORATEXTURE>& delegate);
-		
+        void        setFarPoint(const SoraVector3& ptFar);
+        SoraVector3 getFarPoint() const;
+        float       transform3DPoint(SoraVector3* point);
+		float       transform3DPoint(float* x, float* y, float* z);
+        
 	private:
         static SoraCore* mInstance;
         
@@ -279,6 +346,12 @@ namespace sora {
 		inline void _postError(const SoraString& str);
 		inline void _initializeTimer();
 		inline void _initializeMiscTool();
+        inline void _registerEventTypes();
+        inline void _updateEnd();
+        inline void _regGlobalProducts();
+		inline void _frameListenerStart();
+		inline void _frameListenerEnd();
+        inline void _modifierAdapterUpdate();
 
 		SoraMiscTool*			pMiscTool;
 		SoraRenderSystem*		pRenderSystem;
@@ -294,23 +367,23 @@ namespace sora {
 		bool bInitialized;
 		bool bHasInput;
 		bool bDisablePluginDetection;
-		
+        bool bSeperateSoundSystemThread;
+		bool bDebugRender;
+        
 		bool bPaused;
 		bool bPauseRender;
 		bool bPauseSound;
 
-		int32 iRandomSeed;
+		static int32 iRandomSeed;
 		int32 iScreenWidth, iScreenHeight;
 
         bool bMainScene;
 		bool bFrameSync;
-		float32 mTime;
-        float32 mTimeScale;
+		float mTime;
+        float mTimeScale;
 
-		SoraWindowInfoBase* mainWindow;
-		SoraShaderContext* shaderContext;
-        SoraShaderContext* tempShaderContext;
-        SoraShaderContext* prevShaderContext;
+		SoraWindowInfoBase* mMainWindow;
+        SoraShaderContext* mPrevShaderContext;
         
         bool bEnableScreenBuffer;
         bool bScreenBufferAttached;
@@ -319,15 +392,21 @@ namespace sora {
 				
 		typedef std::list<SoraFrameListener*> FRAME_LISTENER_CONT;
 		FRAME_LISTENER_CONT frameListeners;
-
-		inline void _frameListenerStart();
-		inline void _frameListenerEnd();
-        inline void _modifierAdapterUpdate();
 		
 		bool bZBufferArea;
+        SoraVector3 mFarPoint;
     };
 
-
+    inline SORA_API SoraCore* InitAndCreateSoraCore(SoraWindowInfoBase* window, const SoraCore::Parameter& param = SoraCore::Parameter()) {
+        SoraCore* instance = SoraCore::Instance();
+        instance->init(param);
+        instance->createWindow(window);
+        return instance;
+    }
+    
+    typedef SoraCore::Parameter SoraCoreParameter;
+    
+    
 #define SORA SoraCore::Instance()
 
 } // namespace sora
