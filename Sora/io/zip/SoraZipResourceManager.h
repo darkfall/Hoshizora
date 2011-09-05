@@ -13,7 +13,7 @@
 
 namespace sora {
 
-	typedef ulong32 HSORARESOURCE;
+	typedef ulong32 SoraResourceHandle;
 	
 	class SoraZipResourceManager: public SoraResourceManager {
 		typedef std::map<ulong32, SoraAutoPtr<SoraZipFile> > RESOURCE_PACK;
@@ -21,10 +21,10 @@ namespace sora {
 	public:
 		~SoraZipResourceManager();
 
-		HSORARESOURCE	loadResourcePack	(const SoraWString& file);
-		void			attachResourcePack	(HSORARESOURCE handle);
-		void			detachResourcePack  (HSORARESOURCE handle);
-		SoraZipFile*	getResourcePack		(HSORARESOURCE handle);
+		SoraResourceHandle	loadResourcePack	(const SoraWString& file);
+		void			attachResourcePack	(SoraResourceHandle handle);
+		void			detachResourcePack  (SoraResourceHandle handle);
+		SoraZipFile*	getResourcePack		(SoraResourceHandle handle);
 
 		void* readResourceFile				(const SoraWString& file, ulong32 size);
 		void* getResourceFile				(const SoraWString& file, ulong32& size);

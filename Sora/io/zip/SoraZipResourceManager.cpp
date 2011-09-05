@@ -7,29 +7,30 @@ namespace sora {
 		resourcePacks.clear();
 	}
 
-	HSORARESOURCE SoraZipResourceManager::loadResourcePack(const SoraWString& file) {
+	SoraResourceHandle SoraZipResourceManager::loadResourcePack(const SoraWString& file) {
 		SoraZipFile* pfile = new SoraZipFile;
 		if(pfile) {
 			if(pfile->open(file)) {
-				return (HSORARESOURCE)pfile;
-			}			
-			return 0;
+                attachResourcePack((SoraResourceHandle)pfile);
+				return (SoraResourceHandle)pfile;
+			}
 		}
+        delete pfile;
 		return 0;
 	}
 
-	void SoraZipResourceManager::attachResourcePack(HSORARESOURCE file) {
+	void SoraZipResourceManager::attachResourcePack(SoraResourceHandle file) {
 		SoraAutoPtr<SoraZipFile> t((SoraZipFile*)file);
 		resourcePacks[(ulong32)file] = t;
 	}
 
-	void SoraZipResourceManager::detachResourcePack(HSORARESOURCE handle) {
+	void SoraZipResourceManager::detachResourcePack(SoraResourceHandle handle) {
 		RESOURCE_PACK::iterator p = resourcePacks.find(handle);
 		if( p != resourcePacks.end() ) 
 			resourcePacks.erase( p );
 	}
 
-	SoraZipFile* SoraZipResourceManager::getResourcePack(HSORARESOURCE handle) {
+	SoraZipFile* SoraZipResourceManager::getResourcePack(SoraResourceHandle handle) {
 		RESOURCE_PACK::iterator p = resourcePacks.find(handle);
 		if( p != resourcePacks.end() ) 
 			return p->second.get();

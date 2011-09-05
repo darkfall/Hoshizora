@@ -24,6 +24,9 @@ namespace sora {
         loadResourcePack(SoraPath::resourceW());
 #endif
         loadResourcePack(SoraPath::fontW());
+#ifdef OS_OSX
+        loadResourcePack(L"./");
+#endif
     }
 
 	HSORARESOURCE SoraFolderResourceManager::loadResourcePack(const SoraWString& folder) {

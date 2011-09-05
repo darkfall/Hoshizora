@@ -14,33 +14,27 @@
 #import <Foundation/Foundation.h>
 
 namespace sora {
-    
-	inline std::wstring NSStringToStringW ( NSString* Str ) { 
-		NSStringEncoding pEncode    =   CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingUTF32LE );   
-		NSData* pSData              =   [ Str dataUsingEncoding : pEncode ];    
-		
-        std::wstring result = std::wstring ( (wchar_t*) [ pSData bytes ], [ pSData length] / sizeof ( wchar_t ) ); 
-     //   [pSData release];
-        return result;
-	}   
-	
-	inline NSString* StringWToNSString ( const std::wstring& Str ) {   
-		NSString* pString = [ [ NSString alloc ]    
-							 initWithBytes : (char*)Str.data()   
-							 length : Str.size() * sizeof(wchar_t)   
-                             encoding : CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingUTF32LE ) ];   
-		return pString;   
-	} 
 	
 	std::wstring iOSString2WString(const std::string& str) {
 		NSString* nsstr = [[NSString alloc] initWithUTF8String: str.c_str()];
-        std::wstring wstr = NSStringToStringW(nsstr);
+        NSStringEncoding pEncode    =   CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingUTF32LE );   
+		NSData* pSData              =   [ nsstr dataUsingEncoding : pEncode ];    
+		
+        std::wstring result = std::wstring ( (wchar_t*) [ pSData bytes ], [ pSData length] / sizeof ( wchar_t ) ); 
+
         [nsstr release];
-        return wstr;
+        return result;
 	}
 	
 	std::string iOSWString2String(const std::wstring& str) {
-		return [StringWToNSString(str) UTF8String];
+        NSString* pString = [ [ NSString alloc ]    
+							 initWithBytes : (char*)str.data()   
+							 length : str.size() * sizeof(wchar_t)   
+                             encoding : CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingUTF32LE ) ];   
+        
+        std::string result = [pString UTF8String];
+        [pString release];
+		return result;
 	}
 
 
