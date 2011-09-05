@@ -24,14 +24,44 @@
 #include "message/SoraMessageRouter.h"
 #include "../SoraParticleEditor/peMainWindow.h"
 
+#include "SoraConfigUtil.h"
+
+class consoleWindow: public sora::SoraWindowInfoBase {
+public:
+	consoleWindow() {}
+	~consoleWindow() {}
+	
+	bool updateFunc() {}
+	bool renderFunc() {}
+	void init() {} 
+	
+	int32 getWindowWidth() { return 1024; }
+	int32 getWindowHeight() { return 768; }
+	
+	int32 getWindowPosX() { return 0; }
+	int32 getWindowPosY() { return 0; }
+	
+	SoraString getWindowName() { return "Reflection"; }
+	SoraString getWindowId() { return "MainWindow"; }
+	
+	bool isWindowSubWindow() { return false; }	
+	bool isWindowed() { return true; }
+	bool hideMouse() { return false; }
+    
+    bool isConsoleApp() { return true; }
+};
+
 int main(int argc, char* argv[]) {    
+
         
-    sora::InitAndCreateSoraCore(new peMainWindow, 
+    sora::InitAndCreateSoraCore(new mainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */
                                                         false,
                                                         /* use fullscreen buffer */
                                                         false,
                                                         /* post error using messagebox */
+                                                        false,
+                                                        true,
                                                         false))->start();
 		
 	return 0;

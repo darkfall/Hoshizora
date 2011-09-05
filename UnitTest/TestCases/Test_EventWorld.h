@@ -82,7 +82,7 @@ namespace SoraUnit {
                                                            __LINE__,
                                                            __FILE__));
                 }
-                world.broadcasting(myevt);
+                world.broadcast(myevt);
                 world.update(0.1f);
                 
                 world.update(0.1f);

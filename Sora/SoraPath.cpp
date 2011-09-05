@@ -320,7 +320,8 @@ namespace sora {
     }
     
     void SoraPath::popDirectory() {
-        mDirs.pop_back();
+        if(!mDirs.empty())
+            mDirs.pop_back();
     }
     
     void SoraPath::setFileName(const std::string& name) {

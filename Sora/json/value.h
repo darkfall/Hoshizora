@@ -375,6 +375,8 @@ namespace Json {
 
       iterator begin();
       iterator end();
+       
+      const Value* parent() const;
 
    private:
       Value &resolveReference( const char *key, 
@@ -443,6 +445,8 @@ namespace Json {
       int memberNameIsStatic_ : 1;       // used by the ValueInternalMap container.
 # endif
       CommentInfo *comments_;
+       
+      const Value* parent_;
    };
 
 

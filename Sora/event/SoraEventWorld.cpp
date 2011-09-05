@@ -11,6 +11,8 @@
 #include "SoraSingletonHolder.h"
 #include "SoraException.h"
 #include "SoraSystemEvents.h"
+#include "SoraEventFactory.h"
+#include "SoraEventWorldHolder.h"
 #include "SoraCore.h"
 
 namespace sora {
@@ -30,10 +32,12 @@ namespace sora {
         
         if(!init()) 
             THROW_SORA_EXCEPTION(RuntimeException, "Error initializing SoraEventWorld");
+        
+        SoraEventWorldHolder::Instance()->registerEventWorld(this);
     }
     
     SoraEventWorld::~SoraEventWorld() {
-        
+        SoraEventWorldHolder::Instance()->removeEventWorld(this);
     }
     
     void SoraEventWorld::update(float dt) {
@@ -48,6 +52,7 @@ namespace sora {
     
     void SoraEventWorld::enter(EventHandlerPtr handler) {
         handler->enable(this);
+        handler->onEnable();
         mImpl->enter(handler);
     }
     
@@ -57,6 +62,7 @@ namespace sora {
         }
         
         handler->disable();
+        handler->onDisable();
         mImpl->leave(handler);
     }
     
@@ -64,11 +70,30 @@ namespace sora {
         return mImpl->init();
     }
     
-    void SoraEventWorld::broadcasting(SoraEvent* evt) {
+    void SoraEventWorld::broadcast(SoraEvent* evt) {
         if(IsSystemEvent(evt)) {
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Cannot broadcasting a system event");
         }
         mImpl->broadcasting(evt);
+    }
+    
+    void SoraEventWorld::broadcastDirect(SoraEvent* evt) {
+        if(IsSystemEvent(evt)) {
+            THROW_SORA_EXCEPTION(InvalidArgumentException, "Cannot broadcasting a system event");
+        }
+        mImpl->broadcastingDirect(evt);
+    }
+    
+    void SoraEventWorld::broadcast(const std::string& event) {
+        SoraEvent* evt = CreateEvent(event);
+        if(evt != 0)
+            broadcast(evt);
+    }
+   
+    void SoraEventWorld::broadcastDirect(const std::string& event) {
+        SoraEvent* evt = CreateEvent(event);
+        if(evt != 0)
+            broadcastDirect(evt);
     }
     
     namespace {

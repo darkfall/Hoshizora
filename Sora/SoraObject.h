@@ -27,7 +27,7 @@ namespace sora {
         
         // inherited from SoraEventHandler
         virtual void    onUpdate(float dt);
-		
+        
 		virtual void	add(SoraObject* pobj);
 		virtual void	del(SoraObject* pobj);
         virtual void    delAll();
@@ -36,12 +36,12 @@ namespace sora {
         void setPositionSource(PositionSource source);
 		
 		virtual void    setPosition(float x, float y);
-		virtual float getPositionX() const;
-		virtual float getPositionY() const;
+		virtual float   getPositionX() const;
+		virtual float   getPositionY() const;
         virtual void    getPosition(float& x, float& y) const;
         
-        virtual float getAbsolutePositionX() const;
-        virtual float getAbsolutePositionY() const;
+        virtual float   getAbsolutePositionX() const;
+        virtual float   getAbsolutePositionY() const;
         
         virtual void    setParent(SoraObject* obj);
         

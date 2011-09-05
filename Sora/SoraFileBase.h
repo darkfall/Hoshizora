@@ -4,9 +4,6 @@
 #include <fstream>
 
 #include "SoraPlatform.h"
-#include "SoraException.h"
-#include "SoraNamedObject.h"
-//#include "SoraStringConv.h"
 
 namespace sora {
 

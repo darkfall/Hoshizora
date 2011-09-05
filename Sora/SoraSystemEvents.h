@@ -19,7 +19,8 @@ namespace sora {
         SYS_EVT_ON_ENABLE,
         SYS_EVT_ON_DISABLE,
         SYS_EVT_ADD_HANDLER,
-        SYS_EVT_DEL_HANDLER
+        SYS_EVT_DEL_HANDLER,
+        SYT_EVT_ON_DEBUG_RENDER,
     };
     
     class SORA_API SoraSystemEvent: public SoraEvent {

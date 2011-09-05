@@ -36,6 +36,8 @@ namespace sora {
             onUpdate(evt->getDelta());
             if(mUpdateReceiveEvent)
                 handleEvent(evt);
+        } else if(evt->getType() == SYT_EVT_ON_DEBUG_RENDER) {
+            onDebugRender();
         }
     }
     
@@ -137,6 +139,10 @@ namespace sora {
     }
     
     void SoraEventHandler::onUpdate(float dt) {
+        
+    }
+    
+    void SoraEventHandler::onDebugRender() {
         
     }
     

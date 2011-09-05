@@ -82,14 +82,21 @@ namespace sora {
          * So DO NOT use temporary variables as event
          * and DO USE SoraEventFactory to create the event
          **/
-        void broadcasting(SoraEvent* evet);
+        void broadcast(SoraEvent* evet);
         
         /**
          * Publish the event imnediately
          * No queue implemented
          * And temporary event is acceptable
+         * But it's unefficient if you broadcast directly many times in a frame
          **/
-        void broadcastingDirect(SoraEvent* event);
+        void broadcastDirect(SoraEvent* event);
+        
+        /**
+         * Create a event from EventFactory and broadcast
+         **/
+        void broadcast(const std::string& event);
+        void broadcastDirect(const std::string& event);
         
         static SoraEventWorld& defaultWorld(const Parameter& param = Parameter());
         

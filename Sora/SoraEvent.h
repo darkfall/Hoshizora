@@ -170,7 +170,14 @@ namespace sora {
         bool isEnabled();
         
         virtual	void onUpdate(float dt);
-	
+        // on debug render
+        // must turnon SoraCore::enableDebugDraw to enable
+        // and must belongs to defaultEventWorld
+        virtual void onDebugRender();
+        
+        virtual void onEnable();
+        virtual void onDisable();
+        
 	private:
         /**
          * Directly handle system event without RTTI check, for performance
@@ -185,9 +192,6 @@ namespace sora {
         
         void enable(SoraEventWorld* world);
         void disable();
-        
-        virtual void onEnable();
-        virtual void onDisable();
         
     private:
         bool mEnabled;

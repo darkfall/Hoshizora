@@ -125,9 +125,20 @@ namespace sora {
                            
         EventHandlerList::iterator itHandler = mHandlers.begin();
         mUpdateEvt->setDelta(dt);
+        
+#ifdef SORA_DEBUG_RENDER
+        SoraSystemEvent debugRenderEvent;
+        debugRenderEvent.setType(SYT_EVT_ON_DEBUG_RENDER);
+        bool isDebugRender = SoraCore::Instance()->isDebugRenderEnabled();
+#endif
+        
         while (itHandler != mHandlers.end()) {
             if((*itHandler)->isEnabled()) {
                 (*itHandler)->handleSystemEvent(mUpdateEvt);
+#ifdef SORA_DEBUG_RENDER
+                if(isDebugRender)
+                    (*itHandler)->handleSystemEvent(&debugRenderEvent);
+#endif
             }
             ++itHandler;
         }

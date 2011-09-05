@@ -980,17 +980,26 @@ Value::operator[]( UInt index )
 #ifndef JSON_VALUE_USE_INTERNAL_MAP
    CZString key( index );
    ObjectValues::iterator it = value_.map_->lower_bound( key );
-   if ( it != value_.map_->end()  &&  (*it).first == key )
-      return (*it).second;
+    if ( it != value_.map_->end()  &&  (*it).first == key ) {
+        Value& val = const_cast<Value&>(it->second);
+        val.parent_ = this;
+        return val;
+    }
 
    ObjectValues::value_type defaultValue( key, null );
    it = value_.map_->insert( it, defaultValue );
+    it->second.parent_ = this;
    return (*it).second;
 #else
    return value_.array_->resolveReference( index );
 #endif
 }
 
+    const Value* Value::parent() const {
+        if(parent_)
+            return parent_;
+        return &null;
+    }
 
 const Value &
 Value::operator[]( UInt index ) const
@@ -1003,9 +1012,13 @@ Value::operator[]( UInt index ) const
    ObjectValues::const_iterator it = value_.map_->find( key );
    if ( it == value_.map_->end() )
       return null;
-   return (*it).second;
+    Value& val = const_cast<Value&>(it->second);
+    val.parent_ = this;
+    return val;
 #else
    Value *value = value_.array_->find( index );
+    if(value)
+        value->parent_ = this;
    return value ? *value : null;
 #endif
 }
@@ -1035,6 +1048,7 @@ Value::resolveReference( const char *key,
    ObjectValues::value_type defaultValue( actualKey, null );
    it = value_.map_->insert( it, defaultValue );
    Value &value = (*it).second;
+    value.parent_ = this;
    return value;
 #else
    return value_.map_->resolveReference( key, isStatic );
@@ -1046,7 +1060,9 @@ Value
 Value::get( UInt index, 
             const Value &defaultValue ) const
 {
-   const Value *value = &((*this)[index]);
+    Value *value = const_cast<Value*>(&((*this)[index]));
+    if(value)
+        value->parent_ = this;
    return value == &null ? defaultValue : *value;
 }
 
@@ -1070,9 +1086,13 @@ Value::operator[]( const char *key ) const
    ObjectValues::const_iterator it = value_.map_->find( actualKey );
    if ( it == value_.map_->end() )
       return null;
-   return (*it).second;
+    Value& val = const_cast<Value&>(it->second);
+    val.parent_ = this;
+    return val;
 #else
    const Value *value = value_.map_->find( key );
+    if(value)
+        value->parent_ = this;
    return value ? *value : null;
 #endif
 }
@@ -1125,7 +1145,9 @@ Value
 Value::get( const char *key, 
             const Value &defaultValue ) const
 {
-   const Value *value = &((*this)[key]);
+    Value *value = const_cast<Value*>(&((*this)[key]));
+    if(value)
+        value->parent_ = this;
    return value == &null ? defaultValue : *value;
 }
 

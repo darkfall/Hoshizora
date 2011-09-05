@@ -40,25 +40,33 @@ namespace sora {
         
         class Parameter {
         public:
-            Parameter(bool loadPlugins=true, bool renderToBuffer=false, bool postErrorByMessageBox=false):
+            Parameter(bool loadPlugins=true, bool renderToBuffer=false, bool postErrorByMessageBox=false, bool seperateSSthread=false, bool debugRender=false):
             mLoadPlugins(loadPlugins),
             mRenderToBuffer(renderToBuffer),
-            mMesageBoxErrorPost(postErrorByMessageBox) {
+            mMesageBoxErrorPost(postErrorByMessageBox),
+            mSeperateSoundSystemThread(seperateSSthread), 
+            mDebugRender(debugRender) {
                 
             }
             
             void setLoadPlugin(bool flag) { mLoadPlugins = flag; }
             void setRenderToBuffer(bool flag) { mRenderToBuffer = flag; }
             void setPostErrorByMessageBox(bool flag) { mMesageBoxErrorPost = flag; }
+            void setSeprateSoundSystemThread(bool flag) { mSeperateSoundSystemThread = flag; }
+            void setDebugRender(bool flag) { mDebugRender = flag; }
             
             bool isLoadPlugins() const { return mLoadPlugins; }
             bool isRenderToBuffer() const { return mRenderToBuffer; }
             bool isPostErrorByMessageBox() const { return mMesageBoxErrorPost; }
+            bool isSeperateSoundSystemThread() const { return mSeperateSoundSystemThread; }
+            bool isDebugRender() const { return mDebugRender; }
             
         private:
             bool mLoadPlugins;
             bool mRenderToBuffer;
             bool mMesageBoxErrorPost;
+            bool mSeperateSoundSystemThread;
+            bool mDebugRender;
         };
         
         void init(const Parameter& param = Parameter());
@@ -91,7 +99,7 @@ namespace sora {
         SoraFontManager*    getFontManager() const;
         SoraSoundSystem*    getSoundSystem() const;
         
-		void registerPlugin         (SoraPlugin* pPlugin);
+		void        registerPlugin         (SoraPlugin* pPlugin);
 		SoraPlugin* unistallPlugin  (SoraPlugin* pPlugin);
 		SoraPlugin* unistallPlugin  (const SoraString& sPluginName);
 		SoraPlugin* getPlugin		(const SoraString& sPluginName);
@@ -103,13 +111,13 @@ namespace sora {
         int32 getRenderSystemExtensionParam(int32 extension);
 
 		void	setFPS(int32 fps);
-		float getFPS();
-		float getDelta();
-        float getAbsoluteDelta();
-		float getTime();
+		float   getFPS();
+		float   getDelta();
+        float   getAbsoluteDelta();
+		float   getTime();
 		int32	getFrameCount();
 		void	setTimeScale(float scale);
-		float getTimeScale();
+		float   getTimeScale();
 		uint64  getCurrentSystemTime();
         void    setVerticalSync(bool flag);
 
@@ -171,16 +179,36 @@ namespace sora {
 		ulong32 getMainWindowHandle();
 		SoraWindowInfoBase* getMainWindow();
 
+        /*
+         Core Features
+         See SoraCore::Params for initial config
+         */
 		void enableMessageBoxErrorPost(bool bFlag);
+        bool isMessageBoxErrorPostEnabled() const;
+        /**
+         * Enable Fullscreen buffer would cause everything be renderered to a screen texture buffer then render to screen
+         * This is required for fullscreen post shader effects
+         **/
+        void enableFullscreenBuffer(bool flag);
+        bool isFullscreenBufferEnabled() const;
+        
+		void enablePluginDetection(bool flag);
+        bool isPluginDetectionEnabled() const;
+        
+        void enableSeperateSoundSystemThread(bool flag);
+        bool isSeperateSoundSystemThread() const;
+        
+        void enableDebugRender(bool flag);
+        bool isDebugRenderEnabled() const;
 
 		/*generates a int32 random number using SFMT*/
 		static void     setRandomSeed(int32 seed);
 		static int32    getRandomSeed();
 		static int32    randomInt(int32 min, int32 max);
-		static float  randomFloat(float min, float max);
+		static float    randomFloat(float min, float max);
 		static int32    randomIntNoRange();
 		/*generates a float random number range [0, 1] using SFMT*/
-		static float  randomFloatNoRange();
+		static float    randomFloatNoRange();
 
 		int32 getScreenWidth();
 		int32 getScreenHeight();
@@ -204,8 +232,8 @@ namespace sora {
 
 		// inputs
 		void	getMousePos(float *x, float *y);
-		float getMousePosX();
-		float getMousePosY();
+		float   getMousePosX();
+		float   getMousePosY();
 		void	setMousePos(float x, float y);
 		int		getMouseWheel();
 		bool	isMouseOver();
@@ -297,14 +325,6 @@ namespace sora {
 		
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
-		
-		void enablePluginDetection(bool flag);
-        
-        /**
-         * Enable Fullscreen buffer would cause everything be renderered to a screen texture buffer then render to screen
-         * This is required for fullscreen post shader effects
-         **/
-        void enableFullscreenBuffer(bool flag);
                 
         typedef SoraFunction<void(HSORATEXTURE)> FullScreenBufferDelegateType;
         void registerFullscreenBufferDelegate(const FullScreenBufferDelegateType& delegate);
@@ -316,7 +336,7 @@ namespace sora {
         SoraVector3 getFarPoint() const;
         float       transform3DPoint(SoraVector3* point);
 		float       transform3DPoint(float* x, float* y, float* z);
-   
+        
 	private:
         static SoraCore* mInstance;
         
@@ -347,7 +367,9 @@ namespace sora {
 		bool bInitialized;
 		bool bHasInput;
 		bool bDisablePluginDetection;
-		
+        bool bSeperateSoundSystemThread;
+		bool bDebugRender;
+        
 		bool bPaused;
 		bool bPauseRender;
 		bool bPauseSound;

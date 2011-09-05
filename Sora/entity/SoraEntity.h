@@ -11,8 +11,6 @@
 
 #include "SoraLightWeightEntity.h"
 #include "SoraEntityListener.h"
-#include "SoraSimpleFSM.h"
-#include "signal/SoraSignal.h"
 
 namespace sora {
     

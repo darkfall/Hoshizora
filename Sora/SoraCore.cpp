@@ -50,6 +50,7 @@
 #include "SoraMath.h"
 #include "SoraCamera.h"
 #include "SoraRenderSystemExtension.h"
+#include "SoraSoundSystemThread.h"
 
 #include <stack>
 
@@ -126,6 +127,7 @@ namespace sora {
 		bDisablePluginDetection = false;
         bEnableScreenBuffer = false;
         bScreenBufferAttached = false;
+        bSeperateSoundSystemThread = false;
 
 		_initializeTimer();
 		_initializeMiscTool();
@@ -175,6 +177,10 @@ namespace sora {
         } catch(const SoraException& exp) {
             _postError(exp.what());
         }
+        
+        enableDebugRender(param.isDebugRender());
+        
+        enableSeperateSoundSystemThread(param.isSeperateSoundSystemThread());
     }
 
 	void SoraCore::_initializeTimer() {
@@ -244,6 +250,11 @@ namespace sora {
         
         SoraFastRenderer::Instance();
         
+        if(bSeperateSoundSystemThread && pSoundSystem != 0) {
+            SoraSoundSystemThread::Instance()->setSoundSystem(pSoundSystem);
+            SoraSoundSystemThread::Instance()->start();
+        }
+        
         if(pRenderSystem)
             pRenderSystem->start(pTimer);
 	}
@@ -285,7 +296,12 @@ namespace sora {
 #ifdef PROFILE_CORE_UPDATE
                     PROFILE("UPDATE_SOUNDSYSTEM");
 #endif
-                    if(pSoundSystem) pSoundSystem->update();
+                    if(!bSeperateSoundSystemThread) {
+                        if(pSoundSystem) 
+                            pSoundSystem->update();
+                    } else {
+                        SoraSoundSystemThread::Instance()->onUpdate(dt);
+                    }
                 }
             }
             
@@ -460,7 +476,7 @@ namespace sora {
 		return pRenderSystem->isActive();
 	}
 
-	void SoraCore::shutDown() {
+	void SoraCore::shutDown() {        
 		//SoraTextureMap::Instance()->Destroy();
         if(mMainWindow)
             delete mMainWindow;
@@ -477,17 +493,32 @@ namespace sora {
 		delete pResourceFileFinder;
 		
 		if(pSoundSystem) {
-			pSoundSystem->shutdown();
+            if(bSeperateSoundSystemThread)
+                SoraSoundSystemThread::Destroy();
+            else
+                pSoundSystem->shutdown();
 			delete pSoundSystem;
 		}
 		
         if(g_keypool) delete g_keypool;
 		if(pMiscTool) delete pMiscTool;
-				// force exiting
+		// force exiting
 		exit(0);
 	}
 
 	bool SoraCore::createWindow(SoraWindowInfoBase* info) {
+        sora_assert(info);
+        
+        if(info->isConsoleApp()) {
+            mMainWindow = info;
+            bMainWindowSet = true;
+            mMainWindow = info;
+            mMainWindow->setActive(true);
+            mMainWindow->init();
+            
+            log_notice("Created console app");
+            return true;
+        }
 		if(mMainWindow == NULL) {
 			iScreenWidth = info->getWindowWidth();
 			iScreenHeight = info->getWindowHeight();
@@ -505,7 +536,7 @@ namespace sora {
                 mMainWindow->setActive(true);
                 mMainWindow->init();
 
-				DebugPtr->notice(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mMainWindow->getWindowName().c_str()));
+				log_notice(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mMainWindow->getWindowName().c_str()));
                 
 			} else {
 				_postError("SoraCore::createWindow, createWindow failed");
@@ -520,8 +551,7 @@ namespace sora {
                 mMainWindow->reinit();
             mMainWindow->setActive(true);
             
-			log_mssg(vamssg("Set MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mMainWindow->getWindowName().c_str()),
-						  LOG_LEVEL_NOTICE);
+			log_notice(vamssg("Set MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mMainWindow->getWindowName().c_str()));
 			
 			if(info->getWindowWidth() != iScreenWidth || info->getWindowHeight() != iScreenHeight) {
 				iScreenWidth = info->getWindowWidth();
@@ -1465,5 +1495,32 @@ namespace sora {
         *y = (*y - mFarPoint.y) * scale + mFarPoint.y;
         return scale;
     }
+    
+    void SoraCore::enableSeperateSoundSystemThread(bool flag) {
+        bSeperateSoundSystemThread = flag;
+    }
+    
+    bool SoraCore::isSeperateSoundSystemThread() const {
+        return bSeperateSoundSystemThread;
+    }
+    
+    void SoraCore::enableDebugRender(bool flag) {
+        bDebugRender = flag;
+    }
+    
+    bool SoraCore::isDebugRenderEnabled() const {
+        return bDebugRender;
+    }
 
+    bool SoraCore::isMessageBoxErrorPostEnabled() const {
+        return bMessageBoxErrorPost;
+    }
+    
+    bool SoraCore::isPluginDetectionEnabled() const {
+        return bDisablePluginDetection;
+    }
+    
+    bool SoraCore::isFullscreenBufferEnabled() const {
+        return bEnableScreenBuffer;
+    }
 } // namespace sora

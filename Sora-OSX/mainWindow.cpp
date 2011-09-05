@@ -99,7 +99,13 @@ SORA_DEF_CONSOLE_EVT_FUNC(myFunc, "test");
 #include "factory/SoraSpriteFactory.h"
 #include "timer/SoraSimpleTimerManager.h"
 
+sora::SoraMusicFile* file = 0;
+
 void mainWindow::init() {
+    
+    file = sora::SoraCore::Instance()->createMusicFile(SoraWString(L"02.mp3"), true);
+    if(file)
+        file->play();
     
     sora::particle::CircleEmitter* emitter = new sora::particle::CircleEmitter;
     emitter->setPosition(300, 300);

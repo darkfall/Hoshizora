@@ -2,9 +2,9 @@
  *  SoraConfig.h
  *  Sora
  *
- *  Created by Griffin Bu on 6/12/11.
- *  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
- *
+ *  Created by Robert Bu on 6/12/11.
+ *  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
+ *  Retrived From Poco C++ Library
  */
 
 #ifndef SORA_CONFIG_H_

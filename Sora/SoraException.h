@@ -34,7 +34,6 @@
 
 #endif
 
-#include "SoraPlatform.h"
 #include "SoraStringConv.h"
 
 namespace sora {

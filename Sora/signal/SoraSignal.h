@@ -23,12 +23,10 @@ namespace sora {
     
     /**
      * A Simple Signal Implemention based on the thought of boost::signal
-     * However we don't use boost library now, so
-     * Callback based on SoraFunction
      *
-     * Users can connect to a signal to show interest on a specific event
+     * Users can connect to a signal
      * Users can disconnect to the signal at anytime
-     * When a specific event happened, all connected function would be notified
+     * When a specific event happened, all connection would be notified
      **/
     
     class SoraConnection;

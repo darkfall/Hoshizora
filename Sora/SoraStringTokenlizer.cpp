@@ -82,7 +82,8 @@ namespace sora {
                     mTokens.push_back( str.substr(start, end-start) );
                     break;
                 }
-                mTokens.push_back( str.substr(start, end-start) );
+                if(end != start)
+                    mTokens.push_back( str.substr(start, end-start) );
                 
                 ++end; 
                 while((deli.find(str[end]) != std::string::npos || isSpace(str[end])) && end < str.size()) ++end;

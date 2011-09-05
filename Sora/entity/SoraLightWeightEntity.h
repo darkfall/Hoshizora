@@ -9,14 +9,7 @@
 #ifndef Sora_SoraLightWeightEntity_h
 #define Sora_SoraLightWeightEntity_h
 
-#include "SoraObject.h"
-#include "SoraSimpleFSM.h"
-#include "SoraPreDeclare.h"
-#include "SoraStringTokenlizer.h"
-#include "scripting/SoraScriptVMHolder.h"
-#include "property/SoraPropertyHolder.h"
-
-#include "property/SoraDynRTTIClass.h"
+#include "prerequisites.h"
 #include "SoraComponentHolder.h"
 
 namespace sora {
@@ -40,7 +33,6 @@ namespace sora {
         return dynamic_cast<class*>(ent); \
     }
     
-    typedef std::string PropertyId;
     
     /**
      * Entity with base component and property supoort

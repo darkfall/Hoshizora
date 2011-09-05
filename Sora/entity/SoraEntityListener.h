@@ -9,9 +9,7 @@
 #ifndef Sora_SoraObjectListener_h
 #define Sora_SoraObjectListener_h
 
-#include "SoraObject.h"
-#include "SoraListenerManager.h"
-#include "SoraIteratorHelper.h"
+#include "prerequisites.h"
 
 namespace sora {
     

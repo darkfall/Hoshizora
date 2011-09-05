@@ -41,19 +41,24 @@ namespace sora {
             int32 result = pthread_create(&thread, NULL, SoraThreadImpl::entry, this);
             return result;
         }
+        
         inline int32 startWithTaskImpl(const SoraThreadTask& task) {
             setThreadTaskImpl(task);
             return startImpl();
         }
         
         inline void joinImpl() {
-            if(active)
+            if(active) {
                 pthread_join(thread, 0);
+                setActiveImpl(false);
+            }
         }
         
         inline void exitImpl() {
-            if(active)
+            if(active) {
                 pthread_exit(&thread);
+                setActiveImpl(false);
+            }
         }
         
         inline bool isActiveImpl() const {
