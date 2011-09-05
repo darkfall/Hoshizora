@@ -20,7 +20,7 @@ namespace sora {
         if(task.isValid())
             task( );
         
-        pt->exitImpl();
+        pt->setActiveImpl(false);
         return 0;
     }
 

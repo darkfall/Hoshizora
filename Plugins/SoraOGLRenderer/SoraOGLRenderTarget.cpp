@@ -29,7 +29,7 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 #ifndef WIN32
 		SoraTexture* objtex = (SoraTexture*)SoraCore::Instance()->createTextureWH(_w, _h);
         glTex = objtex->mTextureID;
-        tex = (HSORATEXTURE)objtex;
+        tex = (SoraTextureHandle)objtex;
 		
 		if((gl_error = glGetError()) != GL_NO_ERROR) {
 			err = 1;

@@ -25,7 +25,7 @@ namespace sora {
 			in->unlockPixelData();
 			if(!::gaussBlur(outputData, (int32)tex->mTextureWidth, (int32)tex->mTextureHeight, sigma, radius))
 				THROW_SORA_EXCEPTION(RuntimeException, "failed gauss blur sprite");
-			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((HSORATEXTURE)outtex);
+			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((SoraTextureHandle)outtex);
 			uint32* odata = out->getPixelData(false);
 			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			free(outputData);
@@ -53,7 +53,7 @@ namespace sora {
 			in->unlockPixelData();
 			if(!::gray(outputData, (int32)tex->mTextureWidth, (int32)tex->mTextureHeight))
 				THROW_SORA_EXCEPTION(RuntimeException, "failed gray sprite");
-			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((HSORATEXTURE)outtex);
+			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((SoraTextureHandle)outtex);
 			uint32* odata = out->getPixelData(false);
 			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			free(outputData);
@@ -81,7 +81,7 @@ namespace sora {
 			in->unlockPixelData();
 			if(!::reverse(outputData, (int32)tex->mTextureWidth, (int32)tex->mTextureHeight))
 				THROW_SORA_EXCEPTION(RuntimeException, "failed reverse sprite");
-			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((HSORATEXTURE)outtex);
+			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((SoraTextureHandle)outtex);
 			uint32* odata = out->getPixelData(false);
 			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			free(outputData);
@@ -110,7 +110,7 @@ namespace sora {
 			if(!::alphaMix(outputData, src->getPixelData(), (int32)tex->mTextureWidth, (int32)tex->mTextureHeight, 
 															(int32)src->getTextureWidth(), (int32)src->getTextureHeight(), a, posx, posy))
 				THROW_SORA_EXCEPTION(RuntimeException, "failed alphaMix sprite");
-			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((HSORATEXTURE)outtex);
+			SoraSprite* out = (SoraSprite*)SoraCore::Instance()->createSpriteTex((SoraTextureHandle)outtex);
 			uint32* odata = out->getPixelData(false);
 			memcpy(odata, outputData, tex->mTextureHeight*tex->mTextureWidth*sizeof(uint32));
 			free(outputData);

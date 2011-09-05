@@ -94,7 +94,7 @@ namespace sora {
 		__z_buffer_insert_node(node, z);
 	}
 	
-	void SoraZSorter::renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode, SoraShaderContext* shader) {
+	void SoraZSorter::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode, SoraShaderContext* shader) {
 		// use z 0
 		int32 z = static_cast<int32>(vertices[0].z * 1000);
 		__Z_BUFFER_NODE node;
@@ -139,7 +139,7 @@ namespace sora {
 				} else if(node->size != 0) {
 					if(node->shader)
 						SORA->attachShaderContext(node->shader);
-					SORA->renderWithVertices((HSORATEXTURE)node->tex, node->blend, node->vertex, node->size, node->drawMode);
+					SORA->renderWithVertices((SoraTextureHandle)node->tex, node->blend, node->vertex, node->size, node->drawMode);
 					SORA->detachShaderContext();
 				}
 				node = node->next;

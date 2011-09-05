@@ -25,7 +25,7 @@ namespace gcn
             throw GCN_EXCEPTION(std::string("Unable to load: ") + filename);
         }
 
-        SoraGUIImage *image = new SoraGUIImage((sora::HSORATEXTURE)tex);
+        SoraGUIImage *image = new SoraGUIImage((sora::SoraTextureHandle)tex);
 		image->setName(filename);
 		
         if (convertToDisplayFormat)

@@ -6,7 +6,7 @@
 namespace gcn
 {
 
-    SoraGUIImage::SoraGUIImage(sora::HSORATEXTURE texture)
+    SoraGUIImage::SoraGUIImage(sora::SoraTextureHandle texture)
         : mTexture(texture)
     {
         sora = sora::SoraCore::Instance();

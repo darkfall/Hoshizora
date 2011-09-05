@@ -125,21 +125,21 @@ namespace sora {
 		void beginScene(uint32 c=0xFF000000, ulong32 h=0, bool clear=true);
 		void endScene();
 
-		HSORATARGET     createTarget(int width, int height, bool zbuffer=true);
+		SoraTargetHandle     createTarget(int width, int height, bool zbuffer=true);
 		void            freeTarget(ulong32 t);
-		HSORATEXTURE    getTargetTexture(ulong32 t);
+		SoraTextureHandle    getTargetTexture(ulong32 t);
 
-		HSORATEXTURE createTexture(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
-		HSORATEXTURE createTextureWH(int32 w, int32 h);
-		HSORATEXTURE createTextureFromRawData(uint32* data, int32 w, int32 h);
-		HSORATEXTURE createTextureFromMem(void* data, ulong32 size);
-		uint32*		 textureLock(HSORATEXTURE);
-        void		 textureUnlock(HSORATEXTURE);
-		int32		 getTextureWidth(HSORATEXTURE, bool origin=false);
-		int32		 getTextureHeight(HSORATEXTURE, bool origin=false);
+		SoraTextureHandle createTexture(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
+		SoraTextureHandle createTextureWH(int32 w, int32 h);
+		SoraTextureHandle createTextureFromRawData(uint32* data, int32 w, int32 h);
+		SoraTextureHandle createTextureFromMem(void* data, ulong32 size);
+		uint32*		 textureLock(SoraTextureHandle);
+        void		 textureUnlock(SoraTextureHandle);
+		int32		 getTextureWidth(SoraTextureHandle, bool origin=false);
+		int32		 getTextureHeight(SoraTextureHandle, bool origin=false);
 		// depends on render system, may have different meaning
-		ulong32		 getTextureId(HSORATEXTURE);
-		void		 releaseTexture(HSORATEXTURE pTexture);
+		ulong32		 getTextureId(SoraTextureHandle);
+		void		 releaseTexture(SoraTextureHandle pTexture);
         void         clearTextureMap();
 
         SoraShaderContext*  createShaderContext();
@@ -151,7 +151,7 @@ namespace sora {
 
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
-		void renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
+		void renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
 
         void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
 		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
@@ -326,7 +326,7 @@ namespace sora {
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
                 
-        typedef SoraFunction<void(HSORATEXTURE)> FullScreenBufferDelegateType;
+        typedef SoraFunction<void(SoraTextureHandle)> FullScreenBufferDelegateType;
         void registerFullscreenBufferDelegate(const FullScreenBufferDelegateType& delegate);
         
         /**

@@ -14,7 +14,7 @@ namespace sora {
         _initDefaults();
     }
 
-    SoraSprite::SoraSprite(HSORATEXTURE tex) {
+    SoraSprite::SoraSprite(SoraTextureHandle tex) {
         if(!mSora)
             mSora = SoraCore::Instance();
         
@@ -24,7 +24,7 @@ namespace sora {
 		_initDefaults();
     }
     
-    SoraSprite::SoraSprite(HSORATEXTURE tex, float x, float y, float w, float h) {
+    SoraSprite::SoraSprite(SoraTextureHandle tex, float x, float y, float w, float h) {
         if(!mSora)
             mSora = SoraCore::Instance();
         
@@ -68,9 +68,9 @@ namespace sora {
 			mSprWidth = 1;
 			mSprHeight = 1;
 		}
-		if(mQuad.tex && SoraTextureMap::Instance()->exist((HSORATEXTURE)tex)) {
-			setName(SoraTextureMap::Instance()->getTextureName((HSORATEXTURE)tex));
-			SoraTextureMap::Instance()->addRf((HSORATEXTURE)tex);
+		if(mQuad.tex && SoraTextureMap::Instance()->exist((SoraTextureHandle)tex)) {
+			setName(SoraTextureMap::Instance()->getTextureName((SoraTextureHandle)tex));
+			SoraTextureMap::Instance()->addRf((SoraTextureHandle)tex);
 		}
     }
 
@@ -79,10 +79,10 @@ namespace sora {
         clearShader();
 	}
 
-	void SoraSprite::setTexture(HSORATEXTURE tex) {
+	void SoraSprite::setTexture(SoraTextureHandle tex) {
         if(mQuad.tex) {
-            if(SoraTextureMap::Instance()->exist((HSORATEXTURE)mQuad.tex)) {
-                SoraTextureMap::Instance()->decRf((HSORATEXTURE)mQuad.tex);
+            if(SoraTextureMap::Instance()->exist((SoraTextureHandle)mQuad.tex)) {
+                SoraTextureMap::Instance()->decRf((SoraTextureHandle)mQuad.tex);
             }
         }
         
@@ -219,7 +219,7 @@ namespace sora {
 
 	void SoraSprite::renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode) {
 		attachShaderToRender();
-		mSora->renderWithVertices((HSORATEXTURE)mQuad.tex, mQuad.blend, vertices, size, mode);
+		mSora->renderWithVertices((SoraTextureHandle)mQuad.tex, mQuad.blend, vertices, size, mode);
 		detachShaderFromRender();
 	}
 	
@@ -254,12 +254,12 @@ namespace sora {
 	}
 
 	uint32* SoraSprite::getPixelData() const {
-		return mSora->textureLock((HSORATEXTURE)mQuad.tex);
+		return mSora->textureLock((SoraTextureHandle)mQuad.tex);
 		return 0;
 	}
     
     void SoraSprite::unlockPixelData() {
-        mSora->textureUnlock((HSORASPRITE)mQuad.tex);
+        mSora->textureUnlock((SoraSpriteHandle)mQuad.tex);
     }
 
 	SoraRect SoraSprite::getTextureRect() const {
@@ -421,8 +421,8 @@ namespace sora {
 		return 0;
 	}
     
-    HSORATEXTURE SoraSprite::getTexture() const {
-        return (HSORATEXTURE)mQuad.tex;
+    SoraTextureHandle SoraSprite::getTexture() const {
+        return (SoraTextureHandle)mQuad.tex;
     }
     
     bool SoraSprite::hasEffect() const {

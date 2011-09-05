@@ -9,7 +9,6 @@
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraOGLRenderer/SoraOGLInput.h"
 #include "SoraFreetypeFont/SoraFTFontManager.h"
-#include "SoraZipResourceManager/SoraZipResourceManager.h"
 
 #include "SoraEventFactory.h"
 

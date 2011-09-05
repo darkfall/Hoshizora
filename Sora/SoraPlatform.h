@@ -117,9 +117,12 @@ typedef int64_t  int64;
 #include <stdint.h>
 
 namespace sora {
-	typedef ulong32 HSORASPRITE;
-	typedef ulong32 HSORATEXTURE;
-    typedef ulong32 HSORATARGET;
+    typedef int32 SoraHandle;
+    typedef int32 SoraUniqueId;
+    
+	typedef ulong32 SoraSpriteHandle;
+	typedef ulong32 SoraTextureHandle;
+    typedef ulong32 SoraTargetHandle;
 	
 	enum {
 		SORA_LINE = 1,
@@ -129,8 +132,6 @@ namespace sora {
 		SORA_QUAD,
 	};
 
-    typedef int32 SoraHandle;
-    typedef int32 SoraUniqueId;
 } // namespace sora
 
 
@@ -426,6 +427,19 @@ typedef uint32 EventChannelType;
  default: on
  */
 #define SORA_AUTOMATIC_REGISTER
+
+
+/**
+ uncomment this to enable auto debug render event receiving
+ and also you must enable DebugRender in SoraCore
+ **/
+//#define SORA_DEBUG_RENDER
+
+/**
+ * Enable core zip file pack support(in resource file manager)
+ * Comment this to disable
+ **/
+#define SORA_ZIP_PACK_SUPPORT
 
 
 #endif // _SORA_PLATFORM_H_

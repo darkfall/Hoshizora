@@ -40,7 +40,7 @@ namespace sora {
 		SoraCore  *sora;
 
 		void init() {}
-		HSORATEXTURE createTexture( unsigned int *data, int w, int h );
+		SoraTextureHandle createTexture( unsigned int *data, int w, int h );
 
 		void cache(unsigned int idx);
 		FT_Face *face;
@@ -51,7 +51,7 @@ namespace sora {
 		unsigned int texh;
 		unsigned int imgw;
 		unsigned int imgh;
-		HSORATEXTURE tex;
+		SoraTextureHandle tex;
 		int offset;
 		unsigned char *image;
 	};

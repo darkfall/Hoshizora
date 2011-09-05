@@ -103,6 +103,13 @@ sora::SoraMusicFile* file = 0;
 
 void mainWindow::init() {
     
+    ulong32 pack = sora::SoraCore::Instance()->loadResourcePack(L"Textures.zip");
+    if(pack) {
+        sora::SoraCore::Instance()->attachResourcePack(pack);
+        sora::SoraSprite* spr = sora::SoraCore::Instance()->createSprite(L"Particle002.png");
+        sora_assert(spr);
+    }
+    
     file = sora::SoraCore::Instance()->createMusicFile(SoraWString(L"02.mp3"), true);
     if(file)
         file->play();

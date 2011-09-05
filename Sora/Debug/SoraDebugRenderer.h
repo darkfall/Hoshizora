@@ -150,7 +150,7 @@ namespace sora {
 		
 		DEBUG_RENDER_ITEMS debugRenderItems;
         
-        HSORATARGET renderTarget;
+        SoraTargetHandle renderTarget;
         SoraSprite* pRenderSprite;
         SoraFont* pFont;
 	};

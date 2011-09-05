@@ -19,7 +19,7 @@ namespace sora {
 
     }
     
-    void SoraFullscreenBufferHandler::onBufferRender(HSORATEXTURE bufferTex) {
+    void SoraFullscreenBufferHandler::onBufferRender(SoraTextureHandle bufferTex) {
         if(!mDelegate) {    
             if(mBufferSprite) {
                 mBufferSprite->setTexture(bufferTex);

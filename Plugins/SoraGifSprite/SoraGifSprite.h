@@ -44,7 +44,7 @@ namespace sora {
         void clear();
         
         struct GifFrameNode {
-            HSORATEXTURE mFrameTex;
+            SoraTextureHandle mFrameTex;
             uint32 mFrameWidth, mFrameHeight;
         };
         

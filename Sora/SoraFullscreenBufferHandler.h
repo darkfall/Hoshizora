@@ -26,9 +26,9 @@ namespace sora {
         ~SoraFullscreenBufferHandler();
         
     public:
-        void onBufferRender(HSORATEXTURE buffer);
+        void onBufferRender(SoraTextureHandle buffer);
         
-        typedef SoraFunction<void(HSORATEXTURE)> DelegateFuncType;
+        typedef SoraFunction<void(SoraTextureHandle)> DelegateFuncType;
         void registerDelegate(const DelegateFuncType& delegate);
         
     private:

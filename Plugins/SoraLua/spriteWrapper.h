@@ -16,58 +16,58 @@ namespace spritewrapper {
     
     using namespace sora;
     
-    HSORASPRITE createSprite(const SoraWString& path);
-    HSORASPRITE createSpriteWithTex(HSORATEXTURE tex);
-    HSORASPRITE createSpriteWithTexEx(HSORATEXTURE tex, float x, float y, float w, float h);
-	HSORASPRITE createSpriteWH(int32 w, int32 h);
+    SoraSpriteHandle createSprite(const SoraWString& path);
+    SoraSpriteHandle createSpriteWithTex(SoraTextureHandle tex);
+    SoraSpriteHandle createSpriteWithTexEx(SoraTextureHandle tex, float x, float y, float w, float h);
+	SoraSpriteHandle createSpriteWH(int32 w, int32 h);
 	
-	HSORATEXTURE createTexture(const SoraWString& path);
-	HSORATEXTURE createTextureWH(int32 w, int32 h);
-	void releaseTexture(HSORATEXTURE tex);
+	SoraTextureHandle createTexture(const SoraWString& path);
+	SoraTextureHandle createTextureWH(int32 w, int32 h);
+	void releaseTexture(SoraTextureHandle tex);
     
-    void setTextureRect	(HSORASPRITE h, float x, float y, float w, float fh);
-    void setColor		(HSORASPRITE h, float r, float g, float b, float a);
-	void setVertexColor (HSORASPRITE h, float r, float g, float b, float a, int32 i);
-	void setAlpha		(HSORASPRITE h, float a);
-    void setZ			(HSORASPRITE h, float z, int32 i=-1);
-    ulong32 getColor	(HSORASPRITE h, int32 i=-1);
-    float getZ		(HSORASPRITE h, int32 i=-1);
-    void setCenter		(HSORASPRITE h, float x, float y);
-    float getCenterX	(HSORASPRITE h);
-    float getCenterY	(HSORASPRITE h);
-    void setFlip		(HSORASPRITE h, bool hf, bool vf);
-    bool getVFlip		(HSORASPRITE h);
-    bool getHFlip		(HSORASPRITE h);
+    void setTextureRect	(SoraSpriteHandle h, float x, float y, float w, float fh);
+    void setColor		(SoraSpriteHandle h, float r, float g, float b, float a);
+	void setVertexColor (SoraSpriteHandle h, float r, float g, float b, float a, int32 i);
+	void setAlpha		(SoraSpriteHandle h, float a);
+    void setZ			(SoraSpriteHandle h, float z, int32 i=-1);
+    ulong32 getColor	(SoraSpriteHandle h, int32 i=-1);
+    float getZ		(SoraSpriteHandle h, int32 i=-1);
+    void setCenter		(SoraSpriteHandle h, float x, float y);
+    float getCenterX	(SoraSpriteHandle h);
+    float getCenterY	(SoraSpriteHandle h);
+    void setFlip		(SoraSpriteHandle h, bool hf, bool vf);
+    bool getVFlip		(SoraSpriteHandle h);
+    bool getHFlip		(SoraSpriteHandle h);
     
-    int32 getTextureWidth		(HSORASPRITE h);
-    int32 getTextureHeight		(HSORASPRITE h);
-    int32 getSpriteWidth		(HSORASPRITE h);
-    int32 getSpriteHeight		(HSORASPRITE h);
-    void setScale				(HSORASPRITE h, float vs, float hs);
-    float getVScale			(HSORASPRITE h);
-    float getHScale			(HSORASPRITE h);
-    void setRotation			(HSORASPRITE h, float r);
-    float getRotation			(HSORASPRITE h);
-	HSORATEXTURE getTexture		(HSORASPRITE h);
+    int32 getTextureWidth		(SoraSpriteHandle h);
+    int32 getTextureHeight		(SoraSpriteHandle h);
+    int32 getSpriteWidth		(SoraSpriteHandle h);
+    int32 getSpriteHeight		(SoraSpriteHandle h);
+    void setScale				(SoraSpriteHandle h, float vs, float hs);
+    float getVScale			(SoraSpriteHandle h);
+    float getHScale			(SoraSpriteHandle h);
+    void setRotation			(SoraSpriteHandle h, float r);
+    float getRotation			(SoraSpriteHandle h);
+	SoraTextureHandle getTexture		(SoraSpriteHandle h);
 
-    void addEffect  (HSORASPRITE h, ulong32 eff);
-    void stopEffect (HSORASPRITE h, ulong32 eff);
-    void clearEffects (HSORASPRITE h);
-    bool hasEffect  (HSORASPRITE h);
+    void addEffect  (SoraSpriteHandle h, ulong32 eff);
+    void stopEffect (SoraSpriteHandle h, ulong32 eff);
+    void clearEffects (SoraSpriteHandle h);
+    bool hasEffect  (SoraSpriteHandle h);
     
-    void update(HSORASPRITE h);
-    void render(HSORASPRITE h);
-    void renderWithPos(HSORASPRITE h, float x, float y);
+    void update(SoraSpriteHandle h);
+    void render(SoraSpriteHandle h);
+    void renderWithPos(SoraSpriteHandle h, float x, float y);
     
-    float getPosX(HSORASPRITE h);
-    float getPosY(HSORASPRITE h);
-    void setPosition(HSORASPRITE h, float x, float y);
+    float getPosX(SoraSpriteHandle h);
+    float getPosY(SoraSpriteHandle h);
+    void setPosition(SoraSpriteHandle h, float x, float y);
     
-    void setBlendMode		(HSORASPRITE h, int32 mode);
-    int32 getBlendMode		(HSORASPRITE h);
+    void setBlendMode		(SoraSpriteHandle h, int32 mode);
+    int32 getBlendMode		(SoraSpriteHandle h);
 	
 	
-	ulong32 attachShader(HSORASPRITE h, const SoraWString& shader, const SoraString& entry, int32 type);
+	ulong32 attachShader(SoraSpriteHandle h, const SoraWString& shader, const SoraString& entry, int32 type);
 	
 	void setShaderParam1f(ulong32 shader, const char* name, float param);
 	void setShaderParam2f(ulong32 shader, const char* name, float p1, float p2);
@@ -81,7 +81,7 @@ namespace spritewrapper {
 	
 	void setShaderTextureParam(ulong32 shader, const char* name, ulong32 tex);
     
-    void release (HSORASPRITE h);
+    void release (SoraSpriteHandle h);
 } // namespace spritewrapper
 
 

@@ -12,42 +12,42 @@
 
 namespace spritewrapper {
     
-    HSORASPRITE createSprite(const SoraWString& path) {
-        return (HSORASPRITE)SORA->createSprite(path);
+    SoraSpriteHandle createSprite(const SoraWString& path) {
+        return (SoraSpriteHandle)SORA->createSprite(path);
     }
     
-    HSORASPRITE createSpriteWithTex(HSORATEXTURE tex) {
-        return (HSORASPRITE)(new SoraSprite(tex));
+    SoraSpriteHandle createSpriteWithTex(SoraTextureHandle tex) {
+        return (SoraSpriteHandle)(new SoraSprite(tex));
     }
     
-    HSORASPRITE createSpriteWithTexEx(HSORATEXTURE tex, float x, float y, float w, float h) {
-        return (HSORASPRITE)(new SoraSprite(tex, x, y, w, h));
+    SoraSpriteHandle createSpriteWithTexEx(SoraTextureHandle tex, float x, float y, float w, float h) {
+        return (SoraSpriteHandle)(new SoraSprite(tex, x, y, w, h));
     }
     
-	HSORASPRITE createSpriteWH(int32 w, int32 h){
-		return (HSORASPRITE)(new SoraSprite(SORA->createTextureWH(w, h)));
+	SoraSpriteHandle createSpriteWH(int32 w, int32 h){
+		return (SoraSpriteHandle)(new SoraSprite(SORA->createTextureWH(w, h)));
 	}
 	
-	HSORATEXTURE createTexture(const SoraWString& path) {
+	SoraTextureHandle createTexture(const SoraWString& path) {
 		return SORA->createTexture(path);
 	}
 	
-	HSORATEXTURE createTextureWH(int32 w, int32 h) {
+	SoraTextureHandle createTextureWH(int32 w, int32 h) {
 		return SORA->createTextureWH(w, h);
 	}
 	
-	void releaseTexture(HSORATEXTURE tex) {
+	void releaseTexture(SoraTextureHandle tex) {
 		SORA->releaseTexture(tex);
 	}
 	
-    void setTextureRect(HSORASPRITE h, float x, float y, float w, float fh) {
+    void setTextureRect(SoraSpriteHandle h, float x, float y, float w, float fh) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setTextureRect(x, y, w, fh);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    void setColor(HSORASPRITE h, float r, float g, float b, float a) {
+    void setColor(SoraSpriteHandle h, float r, float g, float b, float a) {
         SoraSprite* p = (SoraSprite*)(h);
 		SoraColorRGBA color(r, g, b, a);
         if(p) p->setColor(color.GetHWColor(), -1);
@@ -55,7 +55,7 @@ namespace spritewrapper {
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
 	
-	void setVertexColor(HSORASPRITE h, float r, float g, float b, float a, int32 i) {
+	void setVertexColor(SoraSpriteHandle h, float r, float g, float b, float a, int32 i) {
 		SoraSprite* p = (SoraSprite*)(h);
 		SoraColorRGBA color(r, g, b, a);
         if(p) p->setColor(color.GetHWColor(), i);
@@ -63,14 +63,14 @@ namespace spritewrapper {
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
 	}
     
-    void setZ(HSORASPRITE h, float z, int32 i) {
+    void setZ(SoraSpriteHandle h, float z, int32 i) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setZ(z, i);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    ulong32 getColor(HSORASPRITE h, int32 i) {
+    ulong32 getColor(SoraSpriteHandle h, int32 i) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getColor(i);
         else
@@ -78,7 +78,7 @@ namespace spritewrapper {
         return 0;
     }
     
-    float getZ(HSORASPRITE h, int32 i) {
+    float getZ(SoraSpriteHandle h, int32 i) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getZ(i);
         else
@@ -86,14 +86,14 @@ namespace spritewrapper {
         return 0;
     }
     
-    void setCenter(HSORASPRITE h, float x, float y) {
+    void setCenter(SoraSpriteHandle h, float x, float y) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setCenter(x, y);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    float getCenterX(HSORASPRITE h) {
+    float getCenterX(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getCenterX();
         else
@@ -101,7 +101,7 @@ namespace spritewrapper {
         return 0.f;
     }
     
-    float getCenterY(HSORASPRITE h) {
+    float getCenterY(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getCenterY();
         else
@@ -109,14 +109,14 @@ namespace spritewrapper {
         return 0.f;
     }
     
-    void setFlip(HSORASPRITE h, bool hf, bool vf) {
+    void setFlip(SoraSpriteHandle h, bool hf, bool vf) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setFlip(hf, vf);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    bool getVFlip(HSORASPRITE h) {
+    bool getVFlip(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getVFlip();
         else
@@ -124,7 +124,7 @@ namespace spritewrapper {
         return false;
     }
     
-    bool getHFlip(HSORASPRITE h) {
+    bool getHFlip(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getHFlip();
         else
@@ -132,7 +132,7 @@ namespace spritewrapper {
         return false;
     }
     
-    int32 getTextureWidth(HSORASPRITE h) {
+    int32 getTextureWidth(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getTextureWidth();
         else
@@ -140,7 +140,7 @@ namespace spritewrapper {
         return 0;
     }
     
-    int32 getTextureHeight(HSORASPRITE h) {
+    int32 getTextureHeight(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getTextureHeight();
         else
@@ -148,7 +148,7 @@ namespace spritewrapper {
         return 0;
     }
     
-    int32 getSpriteWidth(HSORASPRITE h) {
+    int32 getSpriteWidth(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getSpriteWidth();
         else
@@ -156,7 +156,7 @@ namespace spritewrapper {
         return 0;
     }
     
-    int32 getSpriteHeight(HSORASPRITE h) {
+    int32 getSpriteHeight(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getSpriteHeight();
         else
@@ -164,14 +164,14 @@ namespace spritewrapper {
         return 0;
     }
     
-    void setScale(HSORASPRITE h, float vs, float hs) {
+    void setScale(SoraSpriteHandle h, float vs, float hs) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setScale(vs, hs);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    float getVScale(HSORASPRITE h) {
+    float getVScale(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getVScale();
         else
@@ -179,7 +179,7 @@ namespace spritewrapper {
         return 0.f;
     }
     
-    float getHScale(HSORASPRITE h) {
+    float getHScale(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getHScale();
         else
@@ -187,14 +187,14 @@ namespace spritewrapper {
         return 0.f;
     }
     
-    void setRotation(HSORASPRITE h, float r) {
+    void setRotation(SoraSpriteHandle h, float r) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setRotation(r);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    float getRotation(HSORASPRITE h) {
+    float getRotation(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getRotation();
         else
@@ -202,14 +202,14 @@ namespace spritewrapper {
         return 0.f;
     }
     
-    void setBlendMode(HSORASPRITE h, int32 mode) {
+    void setBlendMode(SoraSpriteHandle h, int32 mode) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setBlendMode(mode);
         else 
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    int32 getBlendMode(HSORASPRITE h) {
+    int32 getBlendMode(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getBlendMode();
         else
@@ -217,28 +217,28 @@ namespace spritewrapper {
         return 0;
     }
     
-    void addEffect  (HSORASPRITE h, ulong32 eff) {
+    void addEffect  (SoraSpriteHandle h, ulong32 eff) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->addEffect((SoraImageEffect*)eff);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    void stopEffect (HSORASPRITE h, ulong32 eff) {
+    void stopEffect (SoraSpriteHandle h, ulong32 eff) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->stopEffect((SoraImageEffect*)eff);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    void clearEffects (HSORASPRITE h) {
+    void clearEffects (SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->clearEffects();
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    bool hasEffect  (HSORASPRITE h) {
+    bool hasEffect  (SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->hasEffect();
         else
@@ -246,49 +246,49 @@ namespace spritewrapper {
         return false;
     }
     
-    void update(HSORASPRITE h) {
+    void update(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->update(sora::SORA->getDelta());
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    void render(HSORASPRITE h) {
+    void render(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->render();
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    void renderWithPos(HSORASPRITE h, float x, float y) {
+    void renderWithPos(SoraSpriteHandle h, float x, float y) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->render(x, y);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    float getPosX(HSORASPRITE h) {
+    float getPosX(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getPositionX();
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    float getPosY(HSORASPRITE h) {
+    float getPosY(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) return p->getPositionY();
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
     
-    void setPosition(HSORASPRITE h, float x, float y) {
+    void setPosition(SoraSpriteHandle h, float x, float y) {
         SoraSprite* p = (SoraSprite*)(h);
         if(p) p->setPosition(x, y);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
 	
-	ulong32 getTexture(HSORASPRITE h) {
+	ulong32 getTexture(SoraSpriteHandle h) {
 		SoraSprite* p = (SoraSprite*)(h);
         if(p) {
 			return p->getTexture();
@@ -296,7 +296,7 @@ namespace spritewrapper {
 		return 0;
 	}
 	
-    void release(HSORASPRITE h) {
+    void release(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)h;
         if(p) {
             delete p;
@@ -304,7 +304,7 @@ namespace spritewrapper {
         }
     }
 	
-	void setAlpha(HSORASPRITE h, float a) {
+	void setAlpha(SoraSpriteHandle h, float a) {
 		SoraSprite* p = (SoraSprite*)h;
 		if(p) {
 			SoraColorRGBA col = p->getColor();
@@ -313,7 +313,7 @@ namespace spritewrapper {
 		}
 	}
 	
-	ulong32 attachShader(HSORASPRITE h, const SoraWString& shader, const SoraString& entry, int32 type) {
+	ulong32 attachShader(SoraSpriteHandle h, const SoraWString& shader, const SoraString& entry, int32 type) {
 		SoraSprite* p = (SoraSprite*)h;
 		if(p) {
 			return (ulong32)p->attachShader(shader, entry, type);

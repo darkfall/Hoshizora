@@ -44,7 +44,7 @@ namespace sora {
 			}
 		}
 
-		void add(const SoraWString& key, HSORATEXTURE tex) {			
+		void add(const SoraWString& key, SoraTextureHandle tex) {			
 			SoraStringId uiKey = str2id(key);
 			TEX_MAP::iterator pos = texMap.find(uiKey);
 			if(pos == texMap.end()) {
@@ -62,7 +62,7 @@ namespace sora {
 			SET_ENV_INT("CORE_TEXMAP_SIZE", (int32)texMap.size());
 		}
 		
-		void remove(HSORATEXTURE tex) {
+		void remove(SoraTextureHandle tex) {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {					
 				texRefs.erase(texRefs.find(p->second));
@@ -73,7 +73,7 @@ namespace sora {
 			SET_ENV_INT("CORE_TEXMAP_SIZE", (int32)texMap.size());
 		}
 		
-		void del(HSORATEXTURE tex) {
+		void del(SoraTextureHandle tex) {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
 				texRefs.erase(texRefs.find(p->second));
@@ -89,14 +89,14 @@ namespace sora {
 			texRefs[uiKey]++;
 		}
 		
-		void addRf(HSORATEXTURE tex) {
+		void addRf(SoraTextureHandle tex) {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
 				texRefs[p->second]++;
 			}
 		}
 		
-		void decRf(HSORATEXTURE tex) {
+		void decRf(SoraTextureHandle tex) {
 			TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
 				texRefs[p->second]--;
@@ -109,7 +109,7 @@ namespace sora {
 			}
 		}
 		
-		HSORATEXTURE get(const SoraWString& key) {
+		SoraTextureHandle get(const SoraWString& key) {
 			SoraStringId uiKey = str2id(key);
 			TEX_MAP::iterator p = texMap.find(uiKey);
 			if(p != texMap.end()) {
@@ -120,7 +120,7 @@ namespace sora {
 			return 0;
 		}
         
-        bool exist(HSORATEXTURE tex) {
+        bool exist(SoraTextureHandle tex) {
             TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {	
                 return true;
@@ -128,7 +128,7 @@ namespace sora {
             return false;
         }
         
-        SoraStringId getTextureName(HSORATEXTURE tex) {
+        SoraStringId getTextureName(SoraTextureHandle tex) {
             TEXMAP_RV::iterator p = texMapRv.find(tex);
 			if(p != texMapRv.end()) {
                 return p->second;
@@ -137,9 +137,9 @@ namespace sora {
         }
 		
 	private:
-		typedef hash_map<SoraStringId, HSORATEXTURE> TEX_MAP;
+		typedef hash_map<SoraStringId, SoraTextureHandle> TEX_MAP;
 		TEX_MAP texMap;
-		typedef hash_map<HSORATEXTURE, SoraStringId> TEXMAP_RV;
+		typedef hash_map<SoraTextureHandle, SoraStringId> TEXMAP_RV;
 		TEXMAP_RV texMapRv;
 		
 		typedef hash_map<SoraStringId, int32> TEX_USE_COUNT;

@@ -22,7 +22,7 @@ namespace sora {
 	
 	static void tinker_export_sprite(lua_State* L) {
 		lua_tinker::class_add<SoraSprite>(L, "SoraSprite");
-		lua_tinker::class_con<SoraSprite>(L, &lua_tinker::constructor<HSORATARGET>);
+		lua_tinker::class_con<SoraSprite>(L, &lua_tinker::constructor<SoraTargetHandle>);
 	}
 	
 } // namespace sora

@@ -46,6 +46,8 @@
 
 #include "cmd/SoraConsole.h"
 
+#include "io/zip/SoraZipResourceManager.h"
+
 #include "SoraMemoryUsage.h"
 #include "SoraMath.h"
 #include "SoraCamera.h"
@@ -151,6 +153,9 @@ namespace sora {
 		pPluginManager = new SoraPluginManager;
 		pResourceFileFinder = new SoraResourceFileFinder;
 		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
+#ifdef SORA_ZIP_PACK_SUPPORT
+        pResourceFileFinder->attachResourceManager(new SoraZipResourceManager);
+#endif
         
 		setRandomSeed(rand());
         initConstantStrings();
@@ -778,14 +783,14 @@ namespace sora {
 		mPrevShaderContext = NULL;
 	}
     
-	HSORATEXTURE SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
+	SoraTextureHandle SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
 		sora_assert(bInitialized==true);
-		HSORATEXTURE tex;
+		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sTexturePath)) != 0) return tex;
 		ulong32 size;
 		void* data = getResourceFile(sTexturePath, size);
 		if(data) {
-			tex = (HSORATEXTURE)pRenderSystem->createTextureFromMem(data, size, bMipmap);
+			tex = (SoraTextureHandle)pRenderSystem->createTextureFromMem(data, size, bMipmap);
 			if(bCache) {
 				SoraTextureMap::Instance()->add(sTexturePath, tex);
 			}
@@ -796,53 +801,53 @@ namespace sora {
 		return 0;
 	}
 
-	HSORATEXTURE SoraCore::createTextureWH(int w, int h) {
+	SoraTextureHandle SoraCore::createTextureWH(int w, int h) {
 		sora_assert(bInitialized==true);
-		return (HSORATEXTURE)pRenderSystem->createTextureWH(w, h);
+		return (SoraTextureHandle)pRenderSystem->createTextureWH(w, h);
 	}
 
-	HSORATEXTURE SoraCore::createTextureFromRawData(uint32* data, int32 w, int32 h) {
+	SoraTextureHandle SoraCore::createTextureFromRawData(uint32* data, int32 w, int32 h) {
 		sora_assert(bInitialized==true);
-		return (HSORATEXTURE)pRenderSystem->createTextureFromRawData(data, w, h);
+		return (SoraTextureHandle)pRenderSystem->createTextureFromRawData(data, w, h);
 	}
 
-	HSORATEXTURE SoraCore::createTextureFromMem(void* data, ulong32 size) {
+	SoraTextureHandle SoraCore::createTextureFromMem(void* data, ulong32 size) {
 		sora_assert(bInitialized==true);
-		return (HSORATEXTURE)pRenderSystem->createTextureFromMem(data, size);
+		return (SoraTextureHandle)pRenderSystem->createTextureFromMem(data, size);
 	}
 
-	uint32* SoraCore::textureLock(HSORATEXTURE ht) {
+	uint32* SoraCore::textureLock(SoraTextureHandle ht) {
 		sora_assert(bInitialized==true);
 		return pRenderSystem->textureLock((SoraTexture*)ht);
 	}
 
-	void SoraCore::textureUnlock(HSORATEXTURE h) {
+	void SoraCore::textureUnlock(SoraTextureHandle h) {
 		if(!bInitialized) throw SoraException("Sora not initialized");;
 		pRenderSystem->textureUnlock((SoraTexture*)h);
 	}
 	
-	void SoraCore::releaseTexture(HSORATEXTURE pTexture) {
+	void SoraCore::releaseTexture(SoraTextureHandle pTexture) {
 		sora_assert(bInitialized==true);
         if(!pTexture) return;
 		SoraTextureMap::Instance()->del(pTexture);
         pRenderSystem->releaseTexture((SoraTexture*)pTexture);
 	}
 	
-	int32 SoraCore::getTextureWidth(HSORATEXTURE tex, bool origin) {
+	int32 SoraCore::getTextureWidth(SoraTextureHandle tex, bool origin) {
 		SoraTexture* ptex = (SoraTexture*)tex;
 		if(ptex)
 			return (origin?ptex->mOriginalWidth:ptex->mTextureWidth);
 		return 0;
 	}
 	
-	int32 SoraCore::getTextureHeight(HSORATEXTURE tex, bool origin) {
+	int32 SoraCore::getTextureHeight(SoraTextureHandle tex, bool origin) {
 		SoraTexture* ptex = (SoraTexture*)tex;
 		if(ptex)
 			return (origin?ptex->mOriginalHeight:ptex->mTextureHeight);
 		return 0;
 	}
 	
-	ulong32	SoraCore::getTextureId(HSORATEXTURE tex) {
+	ulong32	SoraCore::getTextureId(SoraTextureHandle tex) {
 		SoraTexture* ptex = (SoraTexture*)tex;
 		if(ptex)
 			return ptex->mTextureID;
@@ -860,7 +865,7 @@ namespace sora {
 
 	SoraSprite* SoraCore::createSprite(const SoraWString& sPath) {
 		sora_assert(bInitialized==true);
-		HSORATEXTURE tex;
+		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
 			SoraSprite* pspr = new SoraSprite(tex);
 			pspr->setName(str2id(sPath));
@@ -898,7 +903,7 @@ namespace sora {
 			pRenderSystem->renderTriple(trip);
 	}
 	
-	void SoraCore::renderWithVertices(HSORATEXTURE tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
+	void SoraCore::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
 		sora_assert(bInitialized == true);
 		if(bZBufferArea) {
 			SoraZSorter::renderWithVertices(tex, blendMode, vertices, vsize, mode, mPrevShaderContext);
@@ -1401,7 +1406,7 @@ namespace sora {
         }
     }
     
-    void SoraCore::registerFullscreenBufferDelegate(const SoraFunction<void(HSORATEXTURE)>& delegate) {
+    void SoraCore::registerFullscreenBufferDelegate(const SoraFunction<void(SoraTextureHandle)>& delegate) {
         SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate);
     }
     

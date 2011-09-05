@@ -166,7 +166,7 @@ namespace sora {
                     
                     free(ScreenBuffer);
                     
-                    HSORATEXTURE frameTex = SORA->createTextureFromRawData(bits, node.mFrameWidth, node.mFrameHeight);
+                    SoraTextureHandle frameTex = SORA->createTextureFromRawData(bits, node.mFrameWidth, node.mFrameHeight);
                     if(frameTex)
                         node.mFrameTex = frameTex;
                     else {

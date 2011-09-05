@@ -54,8 +54,8 @@ namespace sora {
 
 	class SORA_API SoraSprite: public SoraShaderEnabledObject {
 	public:
-        SoraSprite(HSORATEXTURE tex);
-        SoraSprite(HSORATEXTURE tex, float x, float y, float width, float height);
+        SoraSprite(SoraTextureHandle tex);
+        SoraSprite(SoraTextureHandle tex, float x, float y, float width, float height);
 		virtual ~SoraSprite();
 
         virtual void render();
@@ -66,7 +66,7 @@ namespace sora {
 
 		virtual uint32 update(float dt);
 
-		void    setTexture(HSORATEXTURE tex);
+		void    setTexture(SoraTextureHandle tex);
 		void    setTextureRect(float x, float y, float width, float height);
 		SoraRect getTextureRect() const;
 		
@@ -106,7 +106,7 @@ namespace sora {
 		
 		uint32*         getPixelData() const;
         void            unlockPixelData();
-		HSORATEXTURE    getTexture() const;
+		SoraTextureHandle    getTexture() const;
 		
 		void addEffect(SoraImageEffect* effect);
 		void stopEffect(SoraImageEffect* effect);

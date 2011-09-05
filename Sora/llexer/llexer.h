@@ -6,8 +6,8 @@
  *  Copyright 2010 RobertBu(Project L). All rights reserved.
  *
  */
-#ifndef _LLEXER_H_
-#define _LLEXER_H_
+#ifndef _SORA_LEXER_H_
+#define _SORA_LEXER_H_
 
 #include <cstdio>
 #include <cstring>
@@ -29,6 +29,7 @@
 #ifndef WIN32
 #define stricmp strcasecmp
 #endif
+
 
 typedef int Token;
 

@@ -117,8 +117,8 @@ namespace sora {
 		}
 	}
 
-	HSORATEXTURE FTGlyph::createTexture(unsigned int *data, int w, int h) {
-		HSORATEXTURE tex = sora->createTextureFromRawData(data, w, h);
+	SoraTextureHandle FTGlyph::createTexture(unsigned int *data, int w, int h) {
+		SoraTextureHandle tex = sora->createTextureFromRawData(data, w, h);
 		return tex;
 	}
 

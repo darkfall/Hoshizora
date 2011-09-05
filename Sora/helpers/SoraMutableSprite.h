@@ -16,7 +16,7 @@ namespace sora {
 	
 	class SORA_API SoraMutableSprite: public SoraSprite {
 	public:
-		SoraMutableSprite(HSORATEXTURE tex);
+		SoraMutableSprite(SoraTextureHandle tex);
 		
 		uint32 getPixel(int32 x, int32 y);
 		void   putPixel(int32 x, int32 y, uint32 col);

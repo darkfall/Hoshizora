@@ -30,7 +30,7 @@ void SoraINIFile::closeFile() {
 	if(bFileWrite) Commit();
 
 	sec.clear();	
-    set_open(false);
+    setOpen(false);
 }
 
 int32 SoraINIFile::readFile(const SoraWString& path) {
@@ -53,7 +53,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 			return result;
 		}
 	}
-    set_open(false);
+    setOpen(false);
 	return false;
 }
 	
@@ -68,7 +68,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 	}
 	
 	int32 SoraINIFile::readFileMem(void* pData, ulong32 size) {
-		if(is_open()) closeFile();
+		if(isOpen()) closeFile();
 		
 		sec.clear();
 		
@@ -121,280 +121,280 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 			}
 		}
 		
-        set_open(true);
+        setOpen(true);
 		bMemoryFile = true;
 		return true;
 	}
 
-SoraString SoraINIFile::getString(const SoraString& section, const SoraString& name, const SoraString& sDefault) {
-	vector<INISector>::iterator p = sec.begin();
-	for(p = sec.begin(); p != sec.end(); ++p) {
-		if(p->name.compare(section) == 0) {
-			vector<INISectorValue>::iterator p2 = p->value.begin();
-			for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
-				if(p2->key.compare(name) == 0) {
-					return p2->value;
-				}
-			}
-		}
-	}
-	vector<INISectorValue>::iterator p2 = publicSec.value.begin();
-	for(p2 = publicSec.value.begin(); p2 != publicSec.value.end(); ++p2) {
-		if(p2->key.compare(name) == 0)
-			return p2->value;
-	}
-	return sDefault;
-}
-
-float SoraINIFile::getFloat(const SoraString& section, const SoraString& name, float fDefault) {
-	vector<INISector>::iterator p = sec.begin();
-	for(p = sec.begin(); p != sec.end(); ++p) {
-		if(p->name.compare(section) == 0) {
-			vector<INISectorValue>::iterator p2 = p->value.begin();
-			for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
-				if(p2->key.compare(name) == 0) {
-					return (float)atof(p2->value.c_str());
-				}
-			}
-		}
-	}
-	vector<INISectorValue>::iterator p2 = publicSec.value.begin();
-	for(p2 = publicSec.value.begin(); p2 != publicSec.value.end(); ++p2) {
-		if(p2->key.compare(name) == 0)
-			return (float)atof(p2->value.c_str());
-	}
-	return fDefault;
-}
-
-int32 SoraINIFile::getInt(const SoraString& section, const SoraString& name, int32 iDefault) {
-	vector<INISector>::iterator p = sec.begin();
-	for(p = sec.begin(); p != sec.end(); ++p) {
-		if(p->name.compare(section) == 0) {
-			vector<INISectorValue>::iterator p2 = p->value.begin();
-			for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
-				if(p2->key.compare(name) == 0) {
-					return atoi(p2->value.c_str());
-				}
-			}
-		}
-	}
-	vector<INISectorValue>::iterator p2 = publicSec.value.begin();
-	for(p2 = publicSec.value.begin(); p2 != publicSec.value.end(); ++p2) {
-		if(p2->key.compare(name) == 0)
-			return atoi(p2->value.c_str());
-	}
-	return iDefault;
-}
-
-bool SoraINIFile::getBool(const SoraString& section, const SoraString& name, bool bDefault) {
-	vector<INISector>::iterator p = sec.begin();
-	for(p = sec.begin(); p != sec.end(); ++p) {
-		if(p->name.compare(section) == 0) {
-			vector<INISectorValue>::iterator p2 = p->value.begin();
-			for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
-				if(p2->key.compare(name) == 0) {
-					if(p2->value.compare("true") == 0 || atoi(p2->value.c_str()) != 0) {
-					   return true;
-					}
-					else
-					   return false;
-				}
-			}
-		}
-	}
-	vector<INISectorValue>::iterator p2 = publicSec.value.begin();
-	for(p2 = publicSec.value.begin(); p2 != publicSec.value.end(); ++p2) {
-		if(p2->key.compare(name) == 0)
-			if(p2->value.compare("true") == 0 || atoi(p2->value.c_str()) != 0) {
-				return true;
-			}
-			else
-				return false;
-	}
-	return bDefault;
-}
-
-void SoraINIFile::writeInt(const SoraString& section, const SoraString& name, int32 iValue) {
-	bFileWrite = true;
-	if(section.compare("public") == 0)
-		publicSec.value.push_back(INISectorValue(name, int_to_str(iValue)));
+    SoraString SoraINIFile::getString(const SoraString& section, const SoraString& name, const SoraString& sDefault) {
+        vector<INISector>::iterator p = sec.begin();
+        for(p = sec.begin(); p != sec.end(); ++p) {
+            if(p->name.compare(section) == 0) {
+                vector<INISectorValue>::iterator p2 = p->value.begin();
+                for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
+                    if(p2->key.compare(name) == 0) {
+                        return p2->value;
+                    }
+                }
+            }
+        }
+        vector<INISectorValue>::iterator p2 = publicSec.value.begin();
+        for(p2 = publicSec.value.begin(); p2 != publicSec.value.end(); ++p2) {
+            if(p2->key.compare(name) == 0)
+                return p2->value;
+        }
+        return sDefault;
+    }
+    
+    float SoraINIFile::getFloat(const SoraString& section, const SoraString& name, float fDefault) {
+        vector<INISector>::iterator p = sec.begin();
+        for(p = sec.begin(); p != sec.end(); ++p) {
+            if(p->name.compare(section) == 0) {
+                vector<INISectorValue>::iterator p2 = p->value.begin();
+                for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
+                    if(p2->key.compare(name) == 0) {
+                        return (float)atof(p2->value.c_str());
+                    }
+                }
+            }
+        }
+        vector<INISectorValue>::iterator p2 = publicSec.value.begin();
+        for(p2 = publicSec.value.begin(); p2 != publicSec.value.end(); ++p2) {
+            if(p2->key.compare(name) == 0)
+                return (float)atof(p2->value.c_str());
+        }
+        return fDefault;
+    }
+    
+    int32 SoraINIFile::getInt(const SoraString& section, const SoraString& name, int32 iDefault) {
+        vector<INISector>::iterator p = sec.begin();
+        for(p = sec.begin(); p != sec.end(); ++p) {
+            if(p->name.compare(section) == 0) {
+                vector<INISectorValue>::iterator p2 = p->value.begin();
+                for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
+                    if(p2->key.compare(name) == 0) {
+                        return atoi(p2->value.c_str());
+                    }
+                }
+            }
+        }
+        vector<INISectorValue>::iterator p2 = publicSec.value.begin();
+        for(p2 = publicSec.value.begin(); p2 != publicSec.value.end(); ++p2) {
+            if(p2->key.compare(name) == 0)
+                return atoi(p2->value.c_str());
+        }
+        return iDefault;
+    }
+    
+    bool SoraINIFile::getBool(const SoraString& section, const SoraString& name, bool bDefault) {
+        vector<INISector>::iterator p = sec.begin();
+        for(p = sec.begin(); p != sec.end(); ++p) {
+            if(p->name.compare(section) == 0) {
+                vector<INISectorValue>::iterator p2 = p->value.begin();
+                for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
+                    if(p2->key.compare(name) == 0) {
+                        if(p2->value.compare("true") == 0 || atoi(p2->value.c_str()) != 0) {
+                            return true;
+                        }
+                        else
+                            return false;
+                    }
+                }
+            }
+        }
+        vector<INISectorValue>::iterator p2 = publicSec.value.begin();
+        for(p2 = publicSec.value.begin(); p2 != publicSec.value.end(); ++p2) {
+            if(p2->key.compare(name) == 0)
+                if(p2->value.compare("true") == 0 || atoi(p2->value.c_str()) != 0) {
+                    return true;
+                }
+                else
+                    return false;
+        }
+        return bDefault;
+    }
+    
+    void SoraINIFile::writeInt(const SoraString& section, const SoraString& name, int32 iValue) {
+        bFileWrite = true;
+        if(section.compare("public") == 0)
+            publicSec.value.push_back(INISectorValue(name, int_to_str(iValue)));
+        
+        vector<INISector>::iterator p = sec.begin();
+        
+        bool bFindSection = false;
+        bool bFindValue = false;
+        for(p = sec.begin(); p != sec.end(); ++p) {
+            if(p->name.compare(section) == 0) {
+                bFindSection = true;
+                
+                vector<INISectorValue>::iterator p2 = p->value.begin();
+                for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
+                    if(p2->key.compare(name) == 0) {
+                        bFindValue = true;
+                        
+                        p2->value = int_to_str(iValue);
+                        
+                        //					Commit();
+                        return;
+                    }
+                }
+                
+                if(!bFindValue) {
+                    p->value.push_back(INISectorValue(name, int_to_str(iValue)));
+                    
+                    //				Commit();
+                    return;
+                }
+            }
+        }
+        
+        if(!bFindSection) {
+            INISector tsec;
+            
+            tsec.name = section;
+            tsec.value.push_back(INISectorValue(name, int_to_str(iValue)));
+            sec.push_back(tsec);
+            
+            //		Commit();
+            return;
+        }		
+    }
+    
+    void SoraINIFile::writeFloat(const SoraString& section, const SoraString& name, float fValue) {
+        bFileWrite = true;
+        if(section.compare("public") == 0)
+            publicSec.value.push_back(INISectorValue(name, fp_to_str(fValue)));
+        
+        vector<INISector>::iterator p = sec.begin();
+        
+        bool bFindSection = false;
+        bool bFindValue = false;
+        for(p = sec.begin(); p != sec.end(); ++p) {
+            if(p->name.compare(section) == 0) {
+                bFindSection = true;
+                
+                vector<INISectorValue>::iterator p2 = p->value.begin();
+                for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
+                    if(p2->key.compare(name) == 0) {
+                        bFindValue = true;
+                        
+                        p2->value = fp_to_str(fValue);
+                        
+                        //					Commit();
+                        return;
+                    }
+                }
+                
+                if(!bFindValue) {
+                    p->value.push_back(INISectorValue(name, fp_to_str(fValue)));
+                    
+                    //				Commit();
+                    return;
+                }
+            }
+        }
+        
+        if(!bFindSection) {
+            INISector tsec;
+            
+            tsec.name = section;
+            tsec.value.push_back(INISectorValue(name, fp_to_str(fValue)));
+            sec.push_back(tsec);
+            
+            //		Commit();
+            return;
+        }	
+    }
+    
+    void SoraINIFile::writeString(const SoraString& section, const SoraString& name, const SoraString& sValue) {
+        bFileWrite = true;
+        if(section.compare("public") == 0)
+            publicSec.value.push_back(INISectorValue(name, sValue));
+        
+        vector<INISector>::iterator p = sec.begin();
+        
+        bool bFindSection = false;
+        bool bFindValue = false;
+        for(p = sec.begin(); p != sec.end(); ++p) {
+            if(p->name.compare(section) == 0) {
+                bFindSection = true;
+                
+                vector<INISectorValue>::iterator p2 = p->value.begin();
+                for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
+                    if(p2->key.compare(name) == 0) {
+                        bFindValue = true;
+                        
+                        p2->value = sValue;
+                        
+                        //				Commit();
+                        return;
+                    }
+                }
+                
+                if(!bFindValue) {
+                    p->value.push_back(INISectorValue(name, sValue));
+                    
+                    //			Commit();
+                    return;
+                }
+            }
+        }
+        
+        if(!bFindSection) {
+            INISector tsec;
+            
+            tsec.name = section;
+            tsec.value.push_back(INISectorValue(name, sValue));
+            sec.push_back(tsec);
+            
+            //	Commit();
+            return;
+        }	
+    }
+    
+    void SoraINIFile::Commit() {
+        if(bMemoryFile) return;
+        
+        ofstream file(ws2s(sFile).c_str());
+        if(file.is_open()) {
+            vector<INISectorValue>::iterator ppb = publicSec.value.begin();
+            for(ppb; ppb != publicSec.value.end(); ++ppb)
+                file<<ppb->key<<"="<<ppb->value<<endl;
+            
+            vector<INISector>::iterator p = sec.begin();
+            for(p = sec.begin(); p != sec.end(); ++p) {
+                file<<"["<<p->name<<"]"<<endl;
+                
+                vector<INISectorValue>::iterator p2 = p->value.begin();
+                for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
+                    file<<p2->key<<"="<<p2->value<<endl;
+                }
+                
+                file<<endl;
+            }
+            bFileWrite = false;
+        }
+        
+        file.close();
+    }
 	
-	vector<INISector>::iterator p = sec.begin();
+    vector<INISectorValue> SoraINIFile::getSector(const SoraString& section) {
+        if(section.compare("public") == 0)
+            return publicSec.value;
+        
+        itSector s = GetSectorByName(section);
+        if(s != sec.end()) return s->value;
+        vector<INISectorValue> ns;
+        return ns;
+    }
 	
-	bool bFindSection = false;
-	bool bFindValue = false;
-	for(p = sec.begin(); p != sec.end(); ++p) {
-		if(p->name.compare(section) == 0) {
-			bFindSection = true;
-			
-			vector<INISectorValue>::iterator p2 = p->value.begin();
-			for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
-				if(p2->key.compare(name) == 0) {
-					bFindValue = true;
-					
-					p2->value = int_to_str(iValue);
-					
-//					Commit();
-					return;
-				}
-			}
-			
-			if(!bFindValue) {
-				p->value.push_back(INISectorValue(name, int_to_str(iValue)));
-				
-//				Commit();
-				return;
-			}
-		}
-	}
-	
-	if(!bFindSection) {
-		INISector tsec;
-		
-		tsec.name = section;
-		tsec.value.push_back(INISectorValue(name, int_to_str(iValue)));
-		sec.push_back(tsec);
-		
-//		Commit();
-		return;
-	}		
-}
-
-void SoraINIFile::writeFloat(const SoraString& section, const SoraString& name, float fValue) {
-	bFileWrite = true;
-	if(section.compare("public") == 0)
-		publicSec.value.push_back(INISectorValue(name, fp_to_str(fValue)));
-	
-	vector<INISector>::iterator p = sec.begin();
-	
-	bool bFindSection = false;
-	bool bFindValue = false;
-	for(p = sec.begin(); p != sec.end(); ++p) {
-		if(p->name.compare(section) == 0) {
-			bFindSection = true;
-			
-			vector<INISectorValue>::iterator p2 = p->value.begin();
-			for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
-				if(p2->key.compare(name) == 0) {
-					bFindValue = true;
-					
-					p2->value = fp_to_str(fValue);
-					
-//					Commit();
-					return;
-				}
-			}
-			
-			if(!bFindValue) {
-				p->value.push_back(INISectorValue(name, fp_to_str(fValue)));
-				
-//				Commit();
-				return;
-			}
-		}
-	}
-	
-	if(!bFindSection) {
-		INISector tsec;
-		
-		tsec.name = section;
-		tsec.value.push_back(INISectorValue(name, fp_to_str(fValue)));
-		sec.push_back(tsec);
-		
-//		Commit();
-		return;
-	}	
-}
-
-void SoraINIFile::writeString(const SoraString& section, const SoraString& name, const SoraString& sValue) {
-	bFileWrite = true;
-	if(section.compare("public") == 0)
-		publicSec.value.push_back(INISectorValue(name, sValue));
-	
-	vector<INISector>::iterator p = sec.begin();
-	
-	bool bFindSection = false;
-	bool bFindValue = false;
-	for(p = sec.begin(); p != sec.end(); ++p) {
-		if(p->name.compare(section) == 0) {
-			bFindSection = true;
-			
-			vector<INISectorValue>::iterator p2 = p->value.begin();
-			for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
-				if(p2->key.compare(name) == 0) {
-					bFindValue = true;
-					
-					p2->value = sValue;
-					
-	//				Commit();
-					return;
-				}
-			}
-			
-			if(!bFindValue) {
-				p->value.push_back(INISectorValue(name, sValue));
-				
-	//			Commit();
-				return;
-			}
-		}
-	}
-	
-	if(!bFindSection) {
-		INISector tsec;
-		
-		tsec.name = section;
-		tsec.value.push_back(INISectorValue(name, sValue));
-		sec.push_back(tsec);
-		
-	//	Commit();
-		return;
-	}	
-}
-
-void SoraINIFile::Commit() {
-	if(bMemoryFile) return;
-	
-	ofstream file(ws2s(sFile).c_str());
-	if(file.is_open()) {
-		vector<INISectorValue>::iterator ppb = publicSec.value.begin();
-		for(ppb; ppb != publicSec.value.end(); ++ppb)
-			file<<ppb->key<<"="<<ppb->value<<endl;
-		
-		vector<INISector>::iterator p = sec.begin();
-		for(p = sec.begin(); p != sec.end(); ++p) {
-			file<<"["<<p->name<<"]"<<endl;
-			
-			vector<INISectorValue>::iterator p2 = p->value.begin();
-			for(p2 = p->value.begin(); p2 != p->value.end(); ++p2) {
-				file<<p2->key<<"="<<p2->value<<endl;
-			}
-			
-			file<<endl;
-		}
-		bFileWrite = false;
-	}
-	
-	file.close();
-}
-	
-vector<INISectorValue> SoraINIFile::getSector(const SoraString& section) {
-	if(section.compare("public") == 0)
-		return publicSec.value;
-	
-	itSector s = GetSectorByName(section);
-	if(s != sec.end()) return s->value;
-	vector<INISectorValue> ns;
-	return ns;
-}
-	
-vector<INISector>::iterator SoraINIFile::GetSectorByName(const SoraString& section) {
-	itSector s = sec.begin();
-	while( s != sec.end() ) {
-		if(s->name.compare(section) == 0) return s;
-		++s;
-	}
-	return sec.end();
-}
+    vector<INISector>::iterator SoraINIFile::GetSectorByName(const SoraString& section) {
+        itSector s = sec.begin();
+        while( s != sec.end() ) {
+            if(s->name.compare(section) == 0) return s;
+            ++s;
+        }
+        return sec.end();
+    }
 
 } // namespace sora

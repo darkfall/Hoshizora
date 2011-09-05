@@ -20,7 +20,7 @@
 
 namespace sora {
 
- bool SoraFileUtility::fileExists(const SoraWString& filepath) {
+    bool SoraFileUtility::fileExists(const SoraWString& filepath) {
 #ifdef WIN32
 			return PathFileExists(filepath.c_str())?true:false;
 #elif defined(OS_OSX)

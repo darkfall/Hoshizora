@@ -28,7 +28,7 @@ namespace gcn
          * 
          * Creates an image.
          */
-        SoraGUIImage(sora::HSORATEXTURE tex);
+        SoraGUIImage(sora::SoraTextureHandle tex);
 
         /**
          * Destructor.
@@ -68,7 +68,7 @@ namespace gcn
 		
 		sora::SoraCore* sora;
         sora::SoraSprite *mSoraSprite;
-		sora::HSORATEXTURE mTexture;
+		sora::SoraTextureHandle mTexture;
     };
 }
 

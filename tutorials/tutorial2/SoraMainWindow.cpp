@@ -9,6 +9,7 @@
 #include "SoraMainWindow.h"
 #include "SoraCore.h"
 #include "SoraMath.h"
+#include "SoraPath.h"
 
 bool MainWindow::updateFunc() {
     
@@ -41,6 +42,7 @@ bool MainWindow::renderFunc() {
 }
 
 void MainWindow::init() {
+    printf("%s\n", sora::SoraPath::current().c_str());
     sora::SORA->setFPS(60);
     mSprite = sora::SORA->createSprite(L"geotest.png");
     if(!mSprite)

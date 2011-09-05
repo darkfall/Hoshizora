@@ -107,7 +107,7 @@ namespace sora {
 									
 								} else if(paramType == PARAM_TYPE_TEXTURE) {
                                     std::string texpath = paramList[paramSize-1].asString();
-									HSORATEXTURE tex = SORA->createTexture(s2ws(texpath));
+									SoraTextureHandle tex = SORA->createTexture(s2ws(texpath));
 									if(tex != 0) {
 										shader->setTexture(paramName.c_str(), tex);
 									}
