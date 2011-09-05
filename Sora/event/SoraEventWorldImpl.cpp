@@ -83,8 +83,8 @@ namespace sora {
     
     void SoraEventWorldImpl::doBroadCasting(SoraEvent* evt, bool destroy) {
         if(IsSystemEvent(evt)) {
-            SoraSystemEvent* evt = static_cast<SoraSystemEvent*>((evt));
-            switch(evt->getType()) {
+            SoraSystemEvent* sysevt = static_cast<SoraSystemEvent*>(evt);
+            switch(sysevt->getType()) {
                 case SYS_EVT_ADD_HANDLER:
                     addHandler(evt->getSource());
                     break;

@@ -13,7 +13,7 @@
 #include "SoraResourceManager.h"
 #include "SoraFileUtility.h"
 #include "SoraStringId.h"
-
+#include "SoraLogger.h"
 #include "util/SoraHash.h"
 
 #include <map>

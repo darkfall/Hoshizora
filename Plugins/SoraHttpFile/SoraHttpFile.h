@@ -2,7 +2,6 @@
 #define SORA_HTTP_FILE_H
 
 #include "SoraPlatform.h"
-#include "SoraFileBase.h"
 #include "SoraStringConv.h"
 #include "SoraEvent.h"
 
@@ -10,6 +9,8 @@
 
 #include "curl/curl.h"
 #include "thread/SoraThread.h"
+
+#include "io/SoraFileBase.h"
 
 #ifdef OS_WIN32
 #pragma comment(lib, "libcurl.lib")

@@ -17,7 +17,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraException.h"
-#include "SoraFileBase.h"
+#include "io/SoraFileBase.h"
 
 namespace sora {
 

@@ -106,11 +106,11 @@ namespace sora {
 		return SoraRect();
 	}
 	
-	HSORATEXTURE SoraCompressedTexture::getTexture() const {
+	SoraTextureHandle SoraCompressedTexture::getTexture() const {
 		return mTexture;
 	}
 	
-	HSORATEXTURE SoraCompressedTexture::compress() {
+	SoraTextureHandle SoraCompressedTexture::compress() {
 		mTextureWidth = 1; 
 		while(mTextureWidth < mPlacementRect.GetW()) {
 			mTextureWidth *= 2;
@@ -140,7 +140,7 @@ namespace sora {
 			int32 destY = rect.y;
 			
 			int32 pitch = spr->getTextureWidth(false);
-			hgeRect srcRect = spr->getTextureRect();
+			SoraRect srcRect = spr->getTextureRect();
 			
 			int32 srcX = (int32)srcRect.x1;
 			int32 srcY = (int32)srcRect.y1;
@@ -166,7 +166,7 @@ namespace sora {
 		if(mTexture != 0) {
 			sora::SoraPNGOptimizer::optimizeTexAndWriteToFile(mTexture, file);
 			
-			FILE* desFile = sora_fopenw(file+L"des", "wb");
+			FILE* desFile = sora_fopenw((file+L"des").c_str(), "wb");
 			if(desFile) {
 				fwrite("CMPT", 4, 1, desFile);
 				
@@ -202,7 +202,7 @@ namespace sora {
 	}
 	
 	bool SoraCompressedTexture::loadCompressedFile(const SoraWString& file) {
-		FILE* desFile = sora_fopenw(file, "rb");
+		FILE* desFile = sora_fopenw(file.c_str(), "rb");
 		if(desFile) {
 			char header[5];
 			fread(header, 4, 1, desFile); header[4] = '\0';
