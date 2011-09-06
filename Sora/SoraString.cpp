@@ -6,7 +6,7 @@
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
-#include "SoraString.h"
+#include "util::String.h"
 #include "SoraException.h"
 #include "SoraStringId.h"
 
@@ -57,6 +57,10 @@ namespace sora {
             return GetUniqueStringId(mString);
         }
         
+        size_t String::length() const {
+            return mString.size();
+        }
+        
         inline void String::set(const std::string& str) {
             mString = str;
         }
@@ -71,6 +75,10 @@ namespace sora {
         
         inline void String::set(const wchar_t* str) {
             mString = ws2s(str);
+        }
+        
+        inline SoraStringTokenlizer String::tokenlize() const {
+            return SoraStringTokenlizer(mString);
         }
         
         inline String& String::operator=(const std::string& str) {

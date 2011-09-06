@@ -13,25 +13,25 @@ namespace sora {
 	class SoraZipFile: public SoraFileBase {
 	public:
 		SoraZipFile();
-		SoraZipFile(const SoraWString& filePath);
+		SoraZipFile(const util::String& filePath);
 		~SoraZipFile();
 
-        bool open(const SoraWString& filePath);
+        bool open(const util::String& filePath);
         bool open(void* lpszPackData, uLong nPackSize);
         void close();
 	
         void setPackCode(const char* lpszPackCode);
 
-        void* getFile(const SoraWString& filename, uLong readsize);
+        void* getFile(const util::String& filename, uLong readsize);
 
-        ulong32 getFileSize(const SoraWString& filename);
-        ulong32 getFileCRC(const SoraWString& filename);
+        ulong32 getFileSize(const util::String& filename);
+        ulong32 getFileCRC(const util::String& filename);
 		
-        bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
+        bool enumFiles(std::vector<util::String>& cont, const util::String& folder);
 
 	private:
 		void _releaseFile();
-		void* _getfile(const SoraWString& filename, uLong readsize);
+		void* _getfile(const util::String& filename, uLong readsize);
         void _cache();
         unz_file_info* _getUnzFileInfo(const char* lpszFileName);
         

@@ -98,21 +98,18 @@ SORA_DEF_CONSOLE_EVT_FUNC(myFunc, "test");
 
 #include "factory/SoraSpriteFactory.h"
 #include "timer/SoraSimpleTimerManager.h"
+#include "SoraFileUtility.h"
 
 sora::SoraMusicFile* file = 0;
 
 void mainWindow::init() {
     
     ulong32 pack = sora::SoraCore::Instance()->loadResourcePack(L"Textures.zip");
-    if(pack) {
-        sora::SoraCore::Instance()->attachResourcePack(pack);
-        sora::SoraSprite* spr = sora::SoraCore::Instance()->createSprite(L"Particle002.png");
-        sora_assert(spr);
-    }
-    
-    file = sora::SoraCore::Instance()->createMusicFile(SoraWString(L"02.mp3"), true);
-    if(file)
-        file->play();
+     pack = sora::SoraCore::Instance()->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"/../");
+    pack = sora::SoraCore::Instance()->loadResourcePack(L"~/");
+    pack = sora::SoraCore::Instance()->loadResourcePack(L"/Users/darkfall/Application.app");
+    pack = sora::SoraCore::Instance()->loadResourcePack(L"/Application/myapp.app/Contents/Resources");
+
     
     sora::particle::CircleEmitter* emitter = new sora::particle::CircleEmitter(&entity);
     emitter->setPosition(300, 300);

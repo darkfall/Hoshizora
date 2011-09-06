@@ -28,8 +28,8 @@ namespace sora {
 		virtual int32 init() = 0;
 		virtual void shutdown() = 0;
 		
-        virtual SoraMusicFile* createMusicFile(const SoraWString& path, bool bStream=false) = 0;
-        virtual SoraSoundEffectFile* createSoundEffectFile(const SoraWString& path) = 0;
+        virtual SoraMusicFile* createMusicFile(const util::String& path, bool bStream=false) = 0;
+        virtual SoraSoundEffectFile* createSoundEffectFile(const util::String& path) = 0;
         virtual SoraMusicFile* createMusicFile(bool bStream=false) = 0;
         virtual SoraSoundEffectFile* createSoundEffectFile() = 0;
 		/*

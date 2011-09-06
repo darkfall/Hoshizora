@@ -93,18 +93,18 @@ namespace sora {
             return (ulong32)w;
         }
         
-        ulong32 createWidget(const SoraString& ident, const SoraString& id) {
+        ulong32 createWidget(const util::String& ident, const util::String& id) {
             gcn::Widget* widget = gcn::WidgetFactory::Instance().create(ident);
             if(widget)
                 widget->setId(id);
             return getWidgetHandleByWidget(widget);
         }
         
-        ulong32 getWidgetById(const SoraString& id) {
+        ulong32 getWidgetById(const util::String& id) {
             return (ulong32)GCN_GLOBAL->findWidget(id);
         }
         
-        bool loadXmlGui(const SoraWString& xmlPath, const SoraString& topWindowId) {
+        bool loadXmlGui(const SoraWString& xmlPath, const util::String& topWindowId) {
             XmlGui* pXmlGui = new XmlGui;
             bool result = pXmlGui->parse(xmlPath);
             if(result)
@@ -113,7 +113,7 @@ namespace sora {
             return result;
         }
         
-        bool loadJsonGui(const SoraWString& jsonPath, const SoraString& topWindowId) {
+        bool loadJsonGui(const SoraWString& jsonPath, const util::String& topWindowId) {
             JsonGui* pJsonGui = new JsonGui;
             bool result = pJsonGui->parse(jsonPath);
             if(result)
@@ -122,7 +122,7 @@ namespace sora {
             return result;
         }
         
-        void setWidgetResponser(ulong32 h, const SoraString& responser, const SoraString& responseType) {
+        void setWidgetResponser(ulong32 h, const util::String& responser, const util::String& responseType) {
             gcn::Widget* w = getWidgetByHandle(h);
             if(w) {
                 std::string type = responseType;
@@ -130,7 +130,7 @@ namespace sora {
             }
         }
         
-        void addWidgetToParent(ulong32 h, const SoraString& parent) {
+        void addWidgetToParent(ulong32 h, const util::String& parent) {
             gcn::Widget* w = getWidgetByHandle(h);
             if(w) {
                 GCN_GLOBAL->addWidget(w, parent.c_str());
@@ -263,7 +263,7 @@ namespace sora {
             if(w) w->setSelectionColor(gcn::Color(c));
         }
         
-        void setWidgetFont(ulong32 h, const SoraString& fontName, int32 fontSize) {
+        void setWidgetFont(ulong32 h, const util::String& fontName, int32 fontSize) {
             gcn::Widget* w = getWidgetByHandle(h);
             if(w) {
                 gcn::SoraGUIFont* font = new gcn::SoraGUIFont(s2ws(fontName), fontSize);
@@ -351,12 +351,12 @@ namespace sora {
             return false;
         }
         
-        void setWidgetId(ulong32 h, const SoraString& str) {
+        void setWidgetId(ulong32 h, const util::String& str) {
             gcn::Widget* w = getWidgetByHandle(h);
             if(w) w->setId(str);
         }
         
-        SoraString getWidgetId(ulong32 h) {
+        util::String getWidgetId(ulong32 h) {
             gcn::Widget* w = getWidgetByHandle(h);
             if(w) return w->getId();
             return "\0";
@@ -367,7 +367,7 @@ namespace sora {
             if(w) w->showPart(gcn::Rectangle(x, y, wd, ht));
         }
         
-        bool canWidgetSetCaption(gcn::Widget* widget, const SoraString& caption) {
+        bool canWidgetSetCaption(gcn::Widget* widget, const util::String& caption) {
             gcn::Button* b = dynamic_cast<gcn::Button*>(widget);
             if(b) {
                 b->setCaption(caption); b->adjustSize();
@@ -436,12 +436,12 @@ namespace sora {
             return false;
         }
         
-        void setWidgetCaption(ulong32 h, const SoraString& caption) {
+        void setWidgetCaption(ulong32 h, const util::String& caption) {
             gcn::Widget* w = getWidgetByHandle(h);
             if(w) canWidgetSetCaption(w, caption);
         }
         
-        SoraString getWidgetCaption(ulong32 h) {
+        util::String getWidgetCaption(ulong32 h) {
             return "\0";
         }
         

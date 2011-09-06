@@ -8,31 +8,31 @@
 
 namespace sora {
 
-	typedef ulong32 HSORARESOURCE;
+	typedef ulong32 SoraResourceHandle;
 	
 	class SORA_API SoraResourceManager {
 	public:
 		virtual ~SoraResourceManager() {}
 
-		virtual HSORARESOURCE	loadResourcePack    (const SoraWString& file) = 0;
-		virtual void			attachResourcePack	(HSORARESOURCE handle) = 0;
-		virtual void			detachResourcePack  (HSORARESOURCE handle) = 0;
+		virtual SoraResourceHandle	loadResourcePack    (const util::String& file) = 0;
+		virtual void			attachResourcePack	(SoraResourceHandle handle) = 0;
+		virtual void			detachResourcePack  (SoraResourceHandle handle) = 0;
 		
-		virtual void*   readResourceFile        (const SoraWString& file, ulong32 size) = 0;
-		virtual void*   getResourceFile         (const SoraWString& file, ulong32& size) = 0;
-		virtual ulong32 getResourceFileSize     (const SoraWString& file) = 0;
+		virtual void*   readResourceFile        (const util::String& file, ulong32 size) = 0;
+		virtual void*   getResourceFile         (const util::String& file, ulong32& size) = 0;
+		virtual ulong32 getResourceFileSize     (const util::String& file) = 0;
 		virtual void    freeResourceFile        (void* p) = 0;
 
 		/* name of this resource manager */
-		virtual SoraWString getName() const = 0;
+		virtual util::String getName() const = 0;
     
 		/*
 		 determines if a format is supported by this resource manager
 		 @param format, resource format string, zip etc
 		 */
-		virtual bool isFormatSupported(const SoraWString& format) const = 0;
+		virtual bool isFormatSupported(const util::String& format) const = 0;
 		
-		virtual bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) { return false; }
+		virtual bool enumFiles(std::vector<util::String>& cont, const util::String& folder) { return false; }
 	};
 	
 

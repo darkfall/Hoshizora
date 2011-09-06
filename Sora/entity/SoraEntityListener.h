@@ -15,7 +15,7 @@ namespace sora {
     
     class SoraEntity;
     
-    typedef SoraSimpleFSM<SoraString, SoraString> EntityFsmType;
+    typedef SoraSimpleFSM<util::String, util::String> EntityFsmType;
 
     class SORA_API SoraEntityListener {
     public:

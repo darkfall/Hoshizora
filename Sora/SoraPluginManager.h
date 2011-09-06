@@ -16,7 +16,7 @@
 namespace sora {
 
     class SORA_API SoraPluginManager {
-        typedef std::map<SoraString, SoraPlugin*> PluginMap;
+        typedef std::map<util::String, SoraPlugin*> PluginMap;
         typedef PluginMap::iterator PluginIterator;
         
     public:
@@ -25,10 +25,10 @@ namespace sora {
         
         virtual void registerPlugin(SoraPlugin* plugin);
         
-        virtual SoraPlugin* unistallPlugin(const SoraString& name);
+        virtual SoraPlugin* unistallPlugin(const util::String& name);
         virtual SoraPlugin* unistallPlugin(SoraPlugin* plugin);
         
-        virtual SoraPlugin* getPlugin(const SoraString& pluginname);
+        virtual SoraPlugin* getPlugin(const util::String& pluginname);
                 
     private:
         PluginMap mPluginMap;

@@ -53,15 +53,15 @@ namespace sora {
         SoraFSMManager();
         ~SoraFSMManager();
         
-        SoraFSMManager& defState(SoraFSMState* state, const SoraString& name);
-        void delState(const SoraString& name);
+        SoraFSMManager& defState(SoraFSMState* state, const util::String& name);
+        void delState(const util::String& name);
         
-        void defTrans(const SoraString& state1, const EventType& event, const SoraString& state2);
-        void delTrans(const SoraString& state, const EventType& event);
+        void defTrans(const util::String& state1, const EventType& event, const util::String& state2);
+        void delTrans(const util::String& state, const EventType& event);
         
         void postEvent(const EventType& event);
         
-        void switchToState(const SoraString& name);
+        void switchToState(const util::String& name);
         void setGlobalState(SoraFSMState* state);
         
         SoraFSMState* getCurrentState() const;
@@ -75,7 +75,7 @@ namespace sora {
         
         static SoraFSMManager& defaultFSMManager();
         
-        SoraFSMState* operator[](const SoraString& name);
+        SoraFSMState* operator[](const util::String& name);
         
     private:
         void switchToState(SoraFSMState* state);

@@ -40,12 +40,12 @@ namespace sora {
 
 		SoraWindowHandle createWindow(SoraWindowInfoBase* windowInfo);
 		void setWindowSize(int32 w, int32 h);
-		void setWindowTitle(const SoraWString& title);
+		void setWindowTitle(const util::String& title);
 		void setWindowPos(int32 px, int32 py);
 		void setFullscreen(bool flag);
 		bool isFullscreen();
 
-		SoraTexture* createTexture(const SoraWString& sTexturePath, bool bMipmap=false);
+		SoraTexture* createTexture(const util::String& sTexturePath, bool bMipmap=false);
 		SoraTexture* createTextureWH(int w, int h);
 		SoraTexture* createTextureFromMem(void* ptr, ulong32 size, bool bMipmap=false);
 		SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h);
@@ -75,15 +75,15 @@ namespace sora {
 		void attachShaderContext(SoraShaderContext* context);
 		void detachShaderContext();
 
-		SoraWString videoInfo();
+		util::String videoInfo();
 		ulong32 getVideoDeviceHandle();
 
 		void flush();
         
-        void snapshot(const SoraString& path);
+        void snapshot(const util::String& path);
         
-        void setIcon(const SoraString& icon);
-        void setCursor(const SoraString& cursor);
+        void setIcon(const util::String& icon);
+        void setCursor(const util::String& cursor);
         
         void onExtensionStateChanged(int32 extension, bool state, int32 param);
 

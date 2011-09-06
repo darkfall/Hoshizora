@@ -13,6 +13,7 @@
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
 #include "SoraStringConv.h"
+#include "SoraString.h"
 #include "util/SoraHash.h"
 
 namespace sora {
@@ -25,53 +26,28 @@ namespace sora {
 		
 	public:
         // explicit add strings, no hash implied, be care
-        inline void addString(const std::string& str, SoraStringId sid) {
-            strings[sid] = str;
+        inline void addString(const util::String& str, SoraStringId sid) {
+            strings[sid] = str.get();
         }
         
-        inline void addString(const std::wstring& str, SoraStringId sid) {
-            strings[sid] = ws2s(str);
-        }
-        
-		inline SoraStringId getStringId(const std::string& str) {
-			SoraStringId sid = crc32(str);
+		inline SoraStringId getStringId(const util::String& str) {
+			SoraStringId sid = crc32(str.get());
 			if(strings.find(sid) == strings.end()) {
-				strings[sid] = str;
+				strings[sid] = str.get();
 			}
 			return sid;
 		}
 		
-		static SoraStringId getStringIdNoCache(const std::string& str) {
-			return crc32(str);
+		static SoraStringId getStringIdNoCache(const util::String& str) {
+			return crc32(str.get());
 		}
 		
-		inline SoraStringId getStringId(const std::wstring& str) {
-			SoraStringId sid = crc32(str);
-
-			if(strings.find(sid) == strings.end()) {
-				strings[sid] = ws2s(str);
-			}
-			return sid;
-		}
-		
-		static SoraStringId getStringIdNoCache(const std::wstring& str) {
-			return crc32(str);
-		}
-		
-		inline std::wstring getStringByIdW(SoraStringId sid) {
-			if(sid == 0) return NULL;
-			std::wstring str = s2ws(strings[sid]);
-			if(str.size() != 0)
-				return str;
-			return std::wstring();;
-		}
-		
-		inline std::string getStringById(SoraStringId sid) {
-			if(sid == 0) return NULL;
+		inline util::String getStringById(SoraStringId sid) {
+			if(sid == 0) return util::String();
 			std::string str = strings[sid];
 			if(str.size() != 0)
 				return str;
-			return std::string();
+			return util::String();
 		}
 		
 	private:
@@ -85,24 +61,14 @@ namespace sora {
 	#define id2str(id) SORA_STR_MANAGER->getStringById(id)
 	#define str2idnc(str) SORA_STR_MANAGER->getStringIdNoCache(str)
     
-    inline SoraStringId GetUniqueStringId(const std::string& name, bool cache=false) {
+    inline SoraStringId GetUniqueStringId(const util::String& name, bool cache=false) {
         if(!cache)
-            return crc32(name);
+            return crc32(name.get());
         return SoraStringManager::Instance()->getStringId(name);
     }
     
-    inline SoraStringId GetUniqueStringId(const std::wstring& name, bool cache=false) {
-        if(!cache)
-            return crc32(name);
-        return SoraStringManager::Instance()->getStringId(name);
-    }
-    
-    inline SoraString GetStringByUniqueId(SoraStringId sid) {
+    inline util::String GetStringByUniqueId(SoraStringId sid) {
         return SoraStringManager::Instance()->getStringById(sid);
-    }
-    
-    inline SoraWString GetStringByUniqueIdW(SoraStringId sid) {
-        return SoraStringManager::Instance()->getStringByIdW(sid);
     }
 } // namespace sora
 

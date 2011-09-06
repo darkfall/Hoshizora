@@ -29,7 +29,7 @@ namespace sora {
                 delete mSprite;
         }
         
-        void RenderComponent::setSprite(const SoraWString& path, const SoraString& type) {
+        void RenderComponent::setSprite(const SoraWString& path, const util::String& type) {
             if(type.empty())
                 mSprite = sora::SoraCore::Instance()->createSprite(path);
             else

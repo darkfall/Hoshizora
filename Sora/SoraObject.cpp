@@ -157,7 +157,7 @@ namespace sora {
 		return mParent;
 	}
 
-	SoraObject* SoraObject::getObjByName(const SoraString& n) {
+	SoraObject* SoraObject::getObjByName(const util::String& n) {
         return getObjByName(GetUniqueStringId(n));
 	}
     
@@ -203,7 +203,7 @@ namespace sora {
         return mSubObjectSize;
     }
     
-    SoraObject* SoraObject::operator[](const SoraString& name) {
+    SoraObject* SoraObject::operator[](const util::String& name) {
         return getObjByName(name);
     }
 } // namespace sora

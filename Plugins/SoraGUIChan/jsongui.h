@@ -55,9 +55,9 @@ namespace sora {
         void parseListBox(const Json::Value& val, gcn::Widget* parent);
 		void parseDropDown(const Json::Value& val, gcn::Widget* parent);
 		
-        void registerParseFunc(const SoraString& name, JsonGuiParseFunc func);
+        void registerParseFunc(const util::String& name, JsonGuiParseFunc func);
         
-        gcn::Widget* getWidget(const SoraString& name);
+        gcn::Widget* getWidget(const util::String& name);
         
     private:
 		inline void _parseWidget(const char* name, const Json::Value& val, gcn::Widget* parent);

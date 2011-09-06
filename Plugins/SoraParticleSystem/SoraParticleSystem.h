@@ -111,7 +111,7 @@ namespace sora {
 	public:
 		SoraParticleSystem();
 		SoraParticleSystem(const SoraParticleHeader& header, SoraSprite* pSpr, float x=0.f, float y=0.f, float z=0.f);
-		SoraParticleSystem(const SoraWString& script, SoraSprite* pSpr, float x=0.f, float y=0.f, float z=0.f);
+		SoraParticleSystem(const util::String& script, SoraSprite* pSpr, float x=0.f, float y=0.f, float z=0.f);
 		 
 		// enable z depth buffer when rendering particle
 		void setZDepthEnabled(bool flag);
@@ -125,7 +125,7 @@ namespace sora {
 		void setTextureRect(float x, float y, float w, float h);
 
 		void emit(const SoraParticleHeader& header, SoraSprite* pSpr, float x=0.f, float y=0.f, float z=0.f);
-		void emit(const SoraWString& script, SoraSprite* pSpr, float x=0.f, float y=0.f, float z=0.f);
+		void emit(const util::String& script, SoraSprite* pSpr, float x=0.f, float y=0.f, float z=0.f);
 
 		void render();
 		void update(float dt);
@@ -143,7 +143,7 @@ namespace sora {
 
 		bool isActive() const { return bActive; }
 
-		void saveScript(const SoraWString& script);
+		void saveScript(const util::String& script);
 		int32 getLiveParticle() const { return particles.size(); }
 		
 		void setBlendMode(int32 mode);
@@ -172,7 +172,7 @@ namespace sora {
 		SoraParticleSystem(const SoraParticleSystem&);
 		SoraParticleSystem operator=(const SoraParticleSystem&);
 
-		void _parseScript(const SoraWString& script);
+		void _parseScript(const util::String& script);
 		
 		typedef std::vector<SoraParticleNode> PARTICLES;
 		PARTICLES particles;
@@ -210,7 +210,7 @@ namespace sora {
 		void setGlobalSprite(SoraSprite* globalSprite);
 
 		HSORAPARTICLE emit(const SoraParticleHeader& header, float x=0.f, float y=0.f, float z=0.f);
-		HSORAPARTICLE emitS(const SoraWString& par, float x=0.f, float y=0.f, float z=0.f);
+		HSORAPARTICLE emitS(const util::String& par, float x=0.f, float y=0.f, float z=0.f);
 
 		bool isActive(HSORAPARTICLE h);
 		
@@ -231,7 +231,7 @@ namespace sora {
 		void render();
 		void update(float dt);
 
-		void save(HSORAPARTICLE h, const SoraWString& path);
+		void save(HSORAPARTICLE h, const util::String& path);
 		
 	private:
 		SoraParticleManager(const SoraParticleManager&) {}

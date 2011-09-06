@@ -19,12 +19,12 @@ namespace sora {
 			delete mFileChangeEventPublisher;
 	}
 	
-	void SoraEventManager::registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev) {
+	void SoraEventManager::registerEvent(const util::String& eventName, SoraEventHandler* handler, SoraEvent* ev) {
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		evMap[eid].push_back(SoraEventInfo(eventName, handler, ev));
 	}
 
-	void SoraEventManager::sendMessage(const SoraString& eventName, const SoraString& params, ulong32 hreceiver) {
+	void SoraEventManager::sendMessage(const util::String& eventName, const util::String& params, ulong32 hreceiver) {
 		SoraEventHandler* receiver = (SoraEventHandler*)hreceiver;
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
@@ -61,7 +61,7 @@ namespace sora {
 	//	SoraLuaObjectManager::Instance()->sendMessage(eventName, params, hreceiver);
 	}
 	
-	void SoraEventManager::sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 hreceiver) {
+	void SoraEventManager::sendMessage(const util::String& eventName, SoraEvent* ev, ulong32 hreceiver) {
 		SoraEventHandler* receiver = (SoraEventHandler*)hreceiver;
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
@@ -94,14 +94,14 @@ namespace sora {
 		}
 	}
 	
-	void SoraEventManager::unregisterEvent(const SoraString& eventName) {
+	void SoraEventManager::unregisterEvent(const util::String& eventName) {
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
 		if(itEvent != evMap.end())
 			evMap.erase(itEvent);
 	}
 	
-	void SoraEventManager::unregisterHandlerFromEvent(const SoraString& eventName, SoraEventHandler* handler) {
+	void SoraEventManager::unregisterHandlerFromEvent(const util::String& eventName, SoraEventHandler* handler) {
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
 		if(itEvent != evMap.end()) {
@@ -205,7 +205,7 @@ namespace sora {
         }
 	}
 	
-	void SORACALL SoraEventManager::registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler) {
+	void SORACALL SoraEventManager::registerFileChangeEventHandler(const util::String& file, SoraEventHandler* handler) {
 		if(mFileChangeEventPublisher == NULL)
 			mFileChangeEventPublisher = new SoraFileChangeEventPublisher;
 		

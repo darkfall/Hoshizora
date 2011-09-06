@@ -47,19 +47,19 @@ namespace sora {
 		SoraLightWeightEntity();
 		virtual ~SoraLightWeightEntity();
         
-        bool hasComponent(const SoraString& name) const;
+        bool hasComponent(const util::String& name) const;
         void addComponent(SoraComponent* co);
         void addComponent(const std::string& name);
-        SoraComponent* removeComponent(const SoraString& name);
+        SoraComponent* removeComponent(const util::String& name);
         SoraComponent* removeComponent(const SoraComponent* co);
-        SoraComponent* getComponent(const SoraString& name);
+        SoraComponent* getComponent(const util::String& name);
         template<typename T>
-        T* getComponentT(const SoraString& name) const;
+        T* getComponentT(const util::String& name) const;
         
         template<typename T>
         void sendMessage(const MessageIdType& message, const T& data);
         void sendMessageT(SoraMessageEvent* message);
-        void sendMessageTo(const SoraString& comp, SoraMessageEvent* message);
+        void sendMessageTo(const util::String& comp, SoraMessageEvent* message);
         
         virtual void render();
         virtual uint32 update(float dt);
@@ -144,7 +144,7 @@ namespace sora {
     
     
     template<typename T>
-    inline T* SoraLightWeightEntity::getComponentT(const SoraString& tag) const {
+    inline T* SoraLightWeightEntity::getComponentT(const util::String& tag) const {
         SoraComponent* comp = getComponent(tag);
         if(comp->getName() == T::GetName()) {
             return static_cast<T*>(comp);

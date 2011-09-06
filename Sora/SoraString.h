@@ -4,6 +4,8 @@
 #include <string>
 #include "SoraConfig.h"
 #include "SoraStringConv.h"
+#include "SoraStringTokenlizer.h"
+#include "property/SoraTypeSerializer.h"
 
 namespace sora {
     
@@ -24,6 +26,9 @@ namespace sora {
             const wchar_t* wc_str() const;
             
             uint64 uniqieId() const;
+            size_t length() const;
+            
+            SoraStringTokenlizer tokenlize() const;
             
             void set(const std::string& str);
             void set(const std::wstring& str);
@@ -71,15 +76,14 @@ namespace sora {
             bool asBool() const;
             float asFloat() const;
             
+            template<typename T>
+            void fromAny(const T& any);
+            template<typename T>
+            T toAny() const;
             
         protected:
             std::string mString;
         };
-        
-        std::string operator+(const char* str, const String& sorastr) {
-            std::string stdstr(str);
-            return stdstr + sorastr.get();
-        }
         
         inline int String::asInt() const {
             return atoi(mString.c_str());
@@ -103,6 +107,15 @@ namespace sora {
             return float(atof(mString.c_str()));
         }
         
+        template<typename T>
+        inline void String::fromAny(const T& any) {
+            mString = sora::AnyToString<T>(any);
+        }
+        
+        template<typename T>
+        inline T String::toAny() const {
+            return sora::AnyFromString<T>(mString);
+        }
     }
 } // namespace sora
 

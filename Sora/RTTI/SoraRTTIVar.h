@@ -45,7 +45,7 @@ namespace sora {
 	public:
 		SoraRTTIVar(): SoraRTTIType(0), mValue(RTTIDefaultValue<__T>::Default()), mArraySize(0) {
 		}
-		SoraRTTIVar(__T defaultVal): SoraRTTIType(0), mValue(defaultVal), mArraySize(0) {
+		explicit SoraRTTIVar(__T defaultVal): SoraRTTIType(0), mValue(defaultVal), mArraySize(0) {
 		}
 		virtual ~SoraRTTIVar() {
 		}

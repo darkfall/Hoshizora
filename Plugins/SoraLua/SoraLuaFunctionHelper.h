@@ -16,7 +16,7 @@ namespace sora {
 	
 		
 	template<typename P>
-	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P param) {
+	void callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P param) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
@@ -25,7 +25,7 @@ namespace sora {
 	}
 	
 	template<typename P, typename P2>
-	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2) {
+	void callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
@@ -34,7 +34,7 @@ namespace sora {
 	}
 	
 	template<typename P, typename P2, typename P3>
-	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3) {
+	void callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
@@ -43,7 +43,7 @@ namespace sora {
 	}
 	
 	template<typename P, typename P2, typename P3, typename P4>
-	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4) {
+	void callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
@@ -52,7 +52,7 @@ namespace sora {
 	}
 	
 	template<typename P, typename P2, typename P3, typename P4, typename P5>
-	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5) {
+	void callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
@@ -61,7 +61,7 @@ namespace sora {
 	}
 	
 	template<typename P, typename P2, typename P3, typename P4, typename P5, typename P6>
-	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6) {
+	void callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
@@ -70,7 +70,7 @@ namespace sora {
 	}
 	
 	template<typename P, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7>
-	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7) {
+	void callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
@@ -79,7 +79,7 @@ namespace sora {
 	}
 	
 	template<typename P, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8>
-	void callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8) {
+	void callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunctionVoid realFunc =(LuaPlus::LuaFunctionVoid)func;
@@ -88,7 +88,7 @@ namespace sora {
 	}
 	
 	template<typename RT>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
@@ -97,7 +97,7 @@ namespace sora {
 	}
 	
 	template<typename RT, typename P>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P param) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P param) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
@@ -106,7 +106,7 @@ namespace sora {
 	}
 	
 	template<typename RT, typename P, typename P2>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
@@ -115,7 +115,7 @@ namespace sora {
 	}
 	
 	template<typename RT, typename P, typename P2, typename P3>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
@@ -124,7 +124,7 @@ namespace sora {
 	}
 	
 	template<typename RT, typename P, typename P2, typename P3, typename P4>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
@@ -133,7 +133,7 @@ namespace sora {
 	}
 	
 	template<typename RT, typename P, typename P2, typename P3, typename P4, typename P5>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
@@ -142,7 +142,7 @@ namespace sora {
 	}
 	
 	template<typename RT, typename P, typename P2, typename P3, typename P4, typename P5, typename P6>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
@@ -151,7 +151,7 @@ namespace sora {
 	}
 	
 	template<typename RT, typename P, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;
@@ -160,7 +160,7 @@ namespace sora {
 	}
 	
 	template<typename RT, typename P, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8>
-	RT callLuaFunc(LuaPlus::LuaState* state, const SoraString& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8) {
+	RT callLuaFunc(LuaPlus::LuaState* state, const util::String& name, P p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8) {
 		LuaPlus::LuaObject func = state->GetGlobal(name.c_str());
 		if(func.IsFunction()) {
 			LuaPlus::LuaFunction<RT> realFunc =(LuaPlus::LuaFunction<RT>)func;

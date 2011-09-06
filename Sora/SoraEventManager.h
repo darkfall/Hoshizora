@@ -40,19 +40,19 @@ namespace sora {
         
 		//~SoraEventManager();
 
-		void registerEvent(const SoraString& eventName, SoraEventHandler* handler, SoraEvent* ev);
-		void unregisterEvent(const SoraString& eventName);
-		void unregisterHandlerFromEvent(const SoraString& eventName, SoraEventHandler* handler);
+		void registerEvent(const util::String& eventName, SoraEventHandler* handler, SoraEvent* ev);
+		void unregisterEvent(const util::String& eventName);
+		void unregisterHandlerFromEvent(const util::String& eventName, SoraEventHandler* handler);
 
 		/*
 		 if ev == 0 in registerEvent
 		 then call this sendMessage will do nothing
 		 */
-		void sendMessage(const SoraString& eventName, const SoraString& params, ulong32 receiver=0);
+		void sendMessage(const util::String& eventName, const util::String& params, ulong32 receiver=0);
 		/*
 		 publish events to a all handlers under eventName
 		 */
-		void sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 receiver=0);
+		void sendMessage(const util::String& eventName, SoraEvent* ev, ulong32 receiver=0);
 		
         /***
          * Timer Events are deprecated
@@ -84,7 +84,7 @@ namespace sora {
 		/*
 		 register file change event handler
 		 */
-		void registerFileChangeEventHandler(const SoraWString& file, SoraEventHandler* handler);
+		void registerFileChangeEventHandler(const util::String& file, SoraEventHandler* handler);
 		void unregisterFileChangeEventHandler(SoraEventHandler* handler);
 		void setFileChangeDetectionInterval(float interval);
 		
@@ -98,9 +98,9 @@ namespace sora {
 			SoraEventHandler* handler;
 			SoraEvent* ev;
 
-			SoraString eventId;
+			util::String eventId;
 
-			SoraEventInfo(const SoraString& ev, SoraEventHandler* h, SoraEvent* e) :
+			SoraEventInfo(const util::String& ev, SoraEventHandler* h, SoraEvent* e) :
 				eventId(ev), handler(h), ev(e) {}
 		};
 		
@@ -152,21 +152,6 @@ namespace sora {
 		
 		SoraFileChangeEventPublisher* mFileChangeEventPublisher;
     };
-	
-	class SoraLuaEvent: public SoraEvent {
-	public:
-		SoraLuaEvent(const SoraString& _func, const SoraString& _param) {
-			func = _func;
-			param = _param;
-		}
-		
-#ifndef SORA_USE_RTTI
-		SORA_EVENT_IDENTIFIER(18446744073439210198ULL);
-#endif
-		
-		std::string func;
-		std::string param;
-	};
     
     static void RegisterInputEventHandler(SoraEventHandler* handler) {
         SoraEventManager::Instance()->registerInputEventHandler(handler);

@@ -13,7 +13,7 @@
 
 namespace sora {
 
-	SoraSpriteFont::SoraSpriteFont(const SoraWString& font, const SoraString& sequance, int32 width, int32 height) :
+	SoraSpriteFont::SoraSpriteFont(const util::String& font, const util::String& sequance, int32 width, int32 height) :
 	mFontSprite(NULL),
 	mKerningWidth(0.f), mKerningHeight(0.f),
 	mRotation(0.f), mScale(0.f),
@@ -35,7 +35,7 @@ namespace sora {
 		}
 	}
 	
-	void SoraSpriteFont::buildPosMap(const SoraString& seq) {
+	void SoraSpriteFont::buildPosMap(const util::String& seq) {
 		for(size_t i=0; i<seq.size(); ++i) {
 			mCharPos[(int32)seq[i]] = mWidth*i+1;
 		}

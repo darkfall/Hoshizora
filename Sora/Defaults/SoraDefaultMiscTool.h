@@ -20,29 +20,29 @@ namespace sora {
 		SoraDefaultMiscTool(){}
 		virtual ~SoraDefaultMiscTool() { }
 
-		virtual void setLogFile(const SoraString& sfile) { }
+		virtual void setLogFile(const util::String& sfile) { }
 
-		virtual int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
+		virtual int32 messageBox(const util::String& sMessage, const util::String& sTitle, int32 msgCode) {
 			log_mssg("MessageBox: "+sTitle + ": " + sMessage);
 			return 0;
 		}
-		virtual int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
+		virtual int32 messageBox(const util::String& sMessage, const util::String& sTitle, int32 msgCode) { 
 			log_mssg(L"MessageBox: "+ sTitle + L": " + sMessage);
 			return 0;
 		}
 	
-		virtual void log(const SoraString& sMessage) {
+		virtual void log(const util::String& sMessage) {
 			log_mssg(sMessage);
 		}
-		virtual void log(const SoraWString& sMessage) {
+		virtual void log(const util::String& sMessage) {
 			log_mssg(sMessage);
 		}
 		
-		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+		util::String fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
 			return L"\0";
 		}
 		
-		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+		util::String fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
 			return L"\0";
 		}
 		

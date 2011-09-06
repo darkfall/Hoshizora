@@ -25,7 +25,7 @@ namespace sora {
 	class SoraLuaMainWindow: public SoraWindowInfoBase {
 	public:
 		SoraLuaMainWindow();
-		SoraLuaMainWindow(const SoraWString& scriptPath);
+		SoraLuaMainWindow(const util::String& scriptPath);
 		virtual ~SoraLuaMainWindow();
 		
 		int32 getWindowWidth();
@@ -34,8 +34,8 @@ namespace sora {
 		int32 getWindowPosX();
 		int32 getWindowPosY();
 		
-		SoraString getWindowName();
-		SoraString getWindowId();
+		util::String getWindowName();
+		util::String getWindowId();
 		
 		void init();
 		

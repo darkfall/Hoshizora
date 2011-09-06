@@ -139,13 +139,13 @@ namespace sora {
     mEventHandler(NULL) {
 	}
 	
-	SoraHttpFile::SoraHttpFile(const SoraString& url, SoraEventHandler* handler) {
+	SoraHttpFile::SoraHttpFile(const util::String& url, SoraEventHandler* handler) {
 		mEventHandler = handler;
 		downloadFile(url);
         mDelegate = NULL;
 	}
 	
-	SoraHttpFile::SoraHttpFile(const SoraString& url, const SoraAbstractDelegate<SoraHttpFile>& del) {
+	SoraHttpFile::SoraHttpFile(const util::String& url, const SoraAbstractDelegate<SoraHttpFile>& del) {
 		mDelegate = del.clone();
 		downloadFile(url);
         mEventHandler = NULL;
@@ -160,7 +160,7 @@ namespace sora {
 		isopen = false;
 	}
 
-	bool SoraHttpFile::writeToFile(const SoraWString& file) {
+	bool SoraHttpFile::writeToFile(const util::String& file) {
 		if(getState() == DOWNLOAD_FINISHED) {
 			FILE* fp = sora_fopenw(file.c_str(), "wb");
 			if(fp) {
@@ -172,7 +172,7 @@ namespace sora {
 		return false;
 	}
 
-	bool SoraHttpFile::downloadFile(const SoraString& url) {
+	bool SoraHttpFile::downloadFile(const util::String& url) {
 		// to do
 		if(isopen) return false;
 
@@ -188,7 +188,7 @@ namespace sora {
 		return true;
 	}
 	
-	bool SoraHttpFile::downloadFileTo(const SoraString& url, const SoraWString& file) {
+	bool SoraHttpFile::downloadFileTo(const util::String& url, const util::String& file) {
 		if(isopen) return false;
 		
 		phead.sURL = url;
@@ -207,7 +207,7 @@ namespace sora {
         return mDelegate;
     }
 							   
-	void SoraHttpFile::setDownloadToFile(const SoraWString& file) {
+	void SoraHttpFile::setDownloadToFile(const util::String& file) {
 		mDownloadToFile = file;
 		mDownloadTo = true;
 	}						   
@@ -224,7 +224,7 @@ namespace sora {
 		return mDownloadTo;
 	}
 	
-	SoraWString SoraHttpFile::getDownloadToFile() const {
+	util::String SoraHttpFile::getDownloadToFile() const {
 		return mDownloadToFile;
 	}
 	
@@ -237,12 +237,12 @@ namespace sora {
 		return 0;
 	} 
     
-    bool SoraHttpFile::downloadFileWithDelegate(const SoraString& url, const SoraAbstractDelegate<SoraHttpFile>& del) {
+    bool SoraHttpFile::downloadFileWithDelegate(const util::String& url, const SoraAbstractDelegate<SoraHttpFile>& del) {
         setDelegate(del);
         return downloadFile(url);
     }
 	
-	double SoraHttpFile::getRemoteFileSize(const SoraString& url) {
+	double SoraHttpFile::getRemoteFileSize(const util::String& url) {
 		CURL* handle;
 		handle = curl_easy_init();
 		curl_easy_setopt(handle, CURLOPT_URL, url.c_str());

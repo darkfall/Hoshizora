@@ -20,10 +20,10 @@ namespace sora {
 	class SoraGifSprite: public SoraSprite {
 	public:
 		SoraGifSprite();
-		SoraGifSprite(const SoraWString& gifPath);
+		SoraGifSprite(const util::String& gifPath);
         virtual ~SoraGifSprite();
 		
-		bool load(const SoraWString& gifPath);
+		bool load(const util::String& gifPath);
         
         void setFrameRate(int32 mFrameRate);
         int32 getFrameRate() const;
