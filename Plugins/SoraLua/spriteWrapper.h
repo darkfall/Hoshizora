@@ -67,7 +67,7 @@ namespace spritewrapper {
     int32 getBlendMode		(SoraSpriteHandle h);
 	
 	
-	ulong32 attachShader(SoraSpriteHandle h, const SoraWString& shader, const util::String& entry, int32 type);
+	ulong32 attachShader(SoraSpriteHandle h, const SoraWString& shader, const SoraString& entry, int32 type);
 	
 	void setShaderParam1f(ulong32 shader, const char* name, float param);
 	void setShaderParam2f(ulong32 shader, const char* name, float p1, float p2);

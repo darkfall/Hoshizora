@@ -22,7 +22,7 @@ namespace sora {
 		}
     }
 
-    SoraShader* SoraCGGLShaderContext::createShader(const util::String& file, const util::String& entry, int32 type) {
+    SoraShader* SoraCGGLShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
         SoraCGGLShader* shader = NULL;
         switch (type) {
 			case VERTEX_SHADER: {
@@ -63,7 +63,7 @@ namespace sora {
 		}
 	}
 
-	SoraCGGLShader::SoraCGGLShader(const util::String& file, const util::String& entry, int32 type, CGcontext context, CGprofile profile) {
+	SoraCGGLShader::SoraCGGLShader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile) {
 		mType = type;
 		this->context = context;
         this->profile = profile;
@@ -88,7 +88,7 @@ namespace sora {
 		textureParam = 0;
 	}
 
-	void SoraCGGLShader::setTexture(const util::String& decalName, ulong32 tex) {
+	void SoraCGGLShader::setTexture(const SoraString& decalName, ulong32 tex) {
 		textureParam = cgGetNamedParameter(program, decalName.c_str());
         cgGLSetTextureParameter(textureParam, (GLuint)((SoraTexture*)tex)->mTextureID);
 	}

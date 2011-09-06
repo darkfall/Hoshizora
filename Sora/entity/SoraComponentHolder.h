@@ -26,15 +26,15 @@ namespace sora {
          **/
         void addComponent(SoraComponent* cop);
         
-        SoraComponent* removeComponent(const util::String& tag);
+        SoraComponent* removeComponent(const SoraString& tag);
         SoraComponent* removeComponent(const SoraComponent*);
         
-        SoraComponent* getComponent(const util::String& tag) const;
+        SoraComponent* getComponent(const SoraString& tag) const;
      
-        bool hasComponent(const util::String& tag) const;
+        bool hasComponent(const SoraString& tag) const;
         
         void sendMessage(SoraMessageEvent* message);
-        void sendMessageTo(const util::String& to, SoraMessageEvent* message);
+        void sendMessageTo(const SoraString& to, SoraMessageEvent* message);
         
         void onUpdate(float dt);
         void onRender();
@@ -51,7 +51,7 @@ namespace sora {
         SoraPropertyBase* getProperty(const std::string& pid) const;
         
     private:
-        typedef hash_map<util::String, SoraComponent*> ComponentMap;
+        typedef hash_map<SoraString, SoraComponent*> ComponentMap;
         ComponentMap mComponents;
     };
     

@@ -89,7 +89,7 @@ namespace sora {
 #define SORA_EXCEPTION_IMPL(CLS, BASE, NAME) \
     CLS::CLS(const std::string& mssg, const std::string& function, const std::string& file, int line): \
         BASE(mssg, function, file, line) {} \
-    CLS::CLS(const util::String& mssg, const std::string& function, const std::string& file, int line): \
+    CLS::CLS(const SoraWString& mssg, const std::string& function, const std::string& file, int line): \
         BASE(mssg, function, file, line) {} \
     CLS::CLS(const std::string& mssg): \
         BASE(mssg) {} \

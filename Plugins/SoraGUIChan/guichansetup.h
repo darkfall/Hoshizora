@@ -103,7 +103,7 @@ namespace sora {
 			mGUIChan->setTop(top);
 		}
         
-        gcn::Widget* findWidget(const util::String& sid) {
+        gcn::Widget* findWidget(const SoraString& sid) {
             if(sid.compare("top") == 0)
                 return getTop();
             

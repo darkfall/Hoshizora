@@ -38,7 +38,7 @@ namespace sora {
         // calls when reinitialise a plugin under some special situations
         virtual void reinitialise() {}
 	
-		virtual const util::String getName() const = 0;
+		virtual const SoraString getName() const = 0;
 	};
 
 } // namespace sora

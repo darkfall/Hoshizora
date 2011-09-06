@@ -15,7 +15,7 @@
 namespace sora {
 
 	// to do, delegate
-	int32 SoraMiscTooliOS::messageBox(const util::String& sMessage, const util::String& sTitle, int32 msgCode) {
+	int32 SoraMiscTooliOS::messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
 		NSString* nsMessage = [[NSString alloc] initWithUTF8String:sMessage.c_str()];
 		NSString* nsTitle = [[NSString alloc] initWithUTF8String:sTitle.c_str()];
 		

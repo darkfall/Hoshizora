@@ -38,25 +38,25 @@ namespace sora {
 		
 		virtual void valueChanged() {}
 
-		util::String getID() const { return widgetID; }
+		SoraString getID() const { return widgetID; }
 		gcn::Widget* getSource() const { return source; }
 
-		void setID(const util::String& id) { widgetID = id; }
+		void setID(const SoraString& id) { widgetID = id; }
 		void setSource(gcn::Widget* s) { source = s; }
 	private:
-		util::String widgetID;
+		SoraString widgetID;
 		gcn::Widget* source;
 	};
     
     class SoraGUIResponserExtern: public SoraGUIResponser {
     public:
-      //  util::String getHandleSrc() const { return id2str(SoraGUIResponserMap::Instance()->getHandleSrcFromWidgetHandle((ulong32)getSource())); }
+      //  SoraString getHandleSrc() const { return id2str(SoraGUIResponserMap::Instance()->getHandleSrcFromWidgetHandle((ulong32)getSource())); }
 
     };
 
 	/*class SoraLuaGUIResponser: public SoraGUIResponser {
 	public:
-		SoraLuaGUIResponser(const util::String& luaScript);
+		SoraLuaGUIResponser(const SoraString& luaScript);
 
 		// gcn::ActionEvent
 		void action();

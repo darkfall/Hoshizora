@@ -26,7 +26,7 @@ namespace sora {
         struct ParticleEmitter: SoraComponent {
             ParticleEmitter(SoraLightWeightEntity* ent);
             
-            void setSprite(const util::String& path);
+            void setSprite(const SoraWString& path);
             void setSprite(SoraSprite* spr);
             void setTextureRect(float x, float y, float w, float h);
             SoraSprite* getSprite() const;

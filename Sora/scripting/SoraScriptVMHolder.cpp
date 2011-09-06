@@ -14,7 +14,7 @@ namespace sora {
         
     }
     
-    bool SoraScriptVMHolder::attachVM(ScriptVMPtr ptr, const util::String& tag) {
+    bool SoraScriptVMHolder::attachVM(ScriptVMPtr ptr, const SoraString& tag) {
         if(tag.empty() || !ptr)
             return NULL;
         
@@ -23,7 +23,7 @@ namespace sora {
         return true;
     }
     
-    ScriptVMPtr SoraScriptVMHolder::detachVM(const util::String& tag) {
+    ScriptVMPtr SoraScriptVMHolder::detachVM(const SoraString& tag) {
         VmMap::iterator it = mVMs.find(tag);
         if(it != mVMs.end()) {
             ScriptVMPtr ptr = it->second;
@@ -34,7 +34,7 @@ namespace sora {
         return ScriptVMPtr();
     }
     
-    ScriptVMPtr SoraScriptVMHolder::getVM(const util::String& tag) const {
+    ScriptVMPtr SoraScriptVMHolder::getVM(const SoraString& tag) const {
         VmMap::const_iterator it = mVMs.find(tag);
         if(it != mVMs.end()) {
             return it->second;

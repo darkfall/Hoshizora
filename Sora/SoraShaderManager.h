@@ -28,10 +28,10 @@ namespace sora {
         bool init();
 
         // return the same shader if it have been created by the manager
-        SoraShader* createShader(const util::String& file, const util::String& entry, int32 type);
+        SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
         
         // would create a new shader whether it exists in the manager or not
-        SoraShader* createUniqueShader(const util::String& file, const util::String& entry, int32 type);
+        SoraShader* createUniqueShader(const SoraWString& file, const SoraString& entry, int32 type);
         
         void freeShader(SoraShader* shader);
         
@@ -44,27 +44,27 @@ namespace sora {
         RevShaderMap mRevShaders;
     };
     
-    static SoraShader* CreateShader(const util::String& file, const util::String& entry, int32 type) {
+    static SoraShader* CreateShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createShader(file, entry, type);
     }
     
-    static SoraShader* CreateFragmentShader(const util::String& file, const util::String& entry) {
+    static SoraShader* CreateFragmentShader(const SoraWString& file, const SoraString& entry) {
         return SoraShaderManager::Instance()->createShader(file, entry, FRAGMENT_SHADER);
     }
     
-    static SoraShader* CreateVertexShader(const util::String& file, const util::String& entry) {
+    static SoraShader* CreateVertexShader(const SoraWString& file, const SoraString& entry) {
         return SoraShaderManager::Instance()->createShader(file, entry, VERTEX_SHADER);
     }
     
-    static SoraShader* CreateUniqueShader(const util::String& file, const util::String& entry, int32 type) {
+    static SoraShader* CreateUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
         return SoraShaderManager::Instance()->createUniqueShader(file, entry, type);
     }
     
-    static SoraShader* CreateUniqueFragmentShader(const util::String& file, const util::String& entry) {
+    static SoraShader* CreateUniqueFragmentShader(const SoraWString& file, const SoraString& entry) {
         return SoraShaderManager::Instance()->createUniqueShader(file, entry, FRAGMENT_SHADER);
     }
     
-    static SoraShader* CreateUniqueVertexShader(const util::String& file, const util::String& entry) {
+    static SoraShader* CreateUniqueVertexShader(const SoraWString& file, const SoraString& entry) {
         return SoraShaderManager::Instance()->createUniqueShader(file, entry, VERTEX_SHADER);
     }
     

@@ -62,7 +62,7 @@ namespace sora {
 		mTexture1 = 0;
 	}
 	
-	bool SoraGLSLShader::loadShader(const util::String& file, const util::String& entry, int32 _type) {
+	bool SoraGLSLShader::loadShader(const SoraWString& file, const SoraString& entry, int32 _type) {
 		assert(mProgram != 0);
         mType = _type;
 
@@ -101,7 +101,7 @@ namespace sora {
 			glDeleteShader(mShader);
 	}
 		
-	void SoraGLSLShader::setTexture(const util::String& decalName, ulong32 tex) {
+	void SoraGLSLShader::setTexture(const SoraString& decalName, ulong32 tex) {
 		mTexture1Name = decalName;
 		mTexture1 = ((SoraTexture*)tex)->mTextureID;
 	}
@@ -245,7 +245,7 @@ namespace sora {
 			glDeleteProgram(mProgram);
 	}
 
-	SoraShader* SoraGLSLShaderContext::createShader(const util::String& file, const util::String& entry, int32 type) {
+	SoraShader* SoraGLSLShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
 		if(!mProgram)
 			return NULL;
 		

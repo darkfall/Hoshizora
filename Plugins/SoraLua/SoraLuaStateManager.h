@@ -22,10 +22,10 @@ namespace sora {
 		void unregisterLuaObject(SoraLuaObject* obj);
 		SoraLuaObject* getLuaObject(ulong32 h);
 
-		void sendMessage(const util::String& message, const util::String& params, ulong32 receiver=0);
+		void sendMessage(const SoraString& message, const SoraString& params, ulong32 receiver=0);
 
 	private:
-		void doSendMessage(const util::String& message, const util::String& params, SoraLuaObject* obj);
+		void doSendMessage(const SoraString& message, const SoraString& params, SoraLuaObject* obj);
 
 		typedef map<ulong32, SoraLuaObject*> LUA_OBJECT_MAP;
 

@@ -35,14 +35,14 @@ namespace sora {
         cop->onInit();
     }
     
-    SoraComponent* SoraComponentHolder::getComponent(const util::String& tag) const {
+    SoraComponent* SoraComponentHolder::getComponent(const SoraString& tag) const {
         ComponentMap::const_iterator it = mComponents.find(tag);
         if(it != mComponents.end())
             return it->second;
         return 0;
     }
     
-    SoraComponent* SoraComponentHolder::removeComponent(const util::String& tag) {
+    SoraComponent* SoraComponentHolder::removeComponent(const SoraString& tag) {
         ComponentMap::iterator it = mComponents.find(tag);
         if(it != mComponents.end()) {
             SoraComponent* co = it->second;
@@ -98,7 +98,7 @@ namespace sora {
         }
     }
     
-    void SoraComponentHolder::sendMessageTo(const util::String& to, SoraMessageEvent* message) {
+    void SoraComponentHolder::sendMessageTo(const SoraString& to, SoraMessageEvent* message) {
         ComponentMap::const_iterator it = mComponents.find(to);
         if(it != mComponents.end()) {
             it->second->onMessage(message);
@@ -150,7 +150,7 @@ namespace sora {
         }
     }
     
-    bool SoraComponentHolder::hasComponent(const util::String& tag) const {
+    bool SoraComponentHolder::hasComponent(const SoraString& tag) const {
         ComponentMap::const_iterator it = mComponents.begin();
         return it != mComponents.end();
     }

@@ -145,7 +145,7 @@ void XmlGui::parseResponser(gcn::Widget* widget, const std::string& arg, const c
     if(arg[0] == '@') {
         size_t ap = arg.find("=");
         if(ap != std::string::npos) {
-            util::String srcType = arg.substr(1, ap);
+            SoraString srcType = arg.substr(1, ap);
             
             sora::SoraGUIResponserExtern* pResponser = sora::SoraGUIResponserMap::Instance()->getExternalResponser( srcType );
             if(pResponser) {
@@ -290,7 +290,7 @@ void XmlGui::parseDefaults(TiXmlElement *element, gcn::Widget *widget)
 		widget->setId(element->Attribute("id"));
 	}
 	if(element->Attribute("responser")) {
-		util::String arg = element->Attribute("responser");
+		SoraString arg = element->Attribute("responser");
 		parseResponser(widget, arg, element->Attribute("responsetype"));
 	}
 }

@@ -29,7 +29,7 @@ namespace sora {
         }
     }
     
-    SoraFSMManager& SoraFSMManager::defState(SoraFSMState* state, const util::String& name) {
+    SoraFSMManager& SoraFSMManager::defState(SoraFSMState* state, const SoraString& name) {
         SoraStringId uniqueId = GetUniqueStringId(name);
         mStates.insert(std::make_pair(uniqueId, state));
         state->onInitiate();
@@ -37,7 +37,7 @@ namespace sora {
         return *this;
     }
     
-    void SoraFSMManager::delState(const util::String& name) {
+    void SoraFSMManager::delState(const SoraString& name) {
         SoraStringId uniqueId = GetUniqueStringId(name);
         FSMStateMap::iterator itState = mStates.find(uniqueId);
         if(itState != mStates.end()) {
@@ -47,7 +47,7 @@ namespace sora {
         }
     }
     
-    void SoraFSMManager::switchToState(const util::String& name) {
+    void SoraFSMManager::switchToState(const SoraString& name) {
         SoraStringId uniqueId = GetUniqueStringId(name);
         FSMStateMap::iterator itState = mStates.find(uniqueId);
         if(itState != mStates.end()) {
@@ -107,7 +107,7 @@ namespace sora {
         mGlobalState = state;
     }
     
-    SoraFSMState* SoraFSMManager::operator[](const util::String& name) {
+    SoraFSMState* SoraFSMManager::operator[](const SoraString& name) {
         SoraStringId uniqueId = GetUniqueStringId(name);
         FSMStateMap::iterator itState = mStates.find(uniqueId);
         if(itState != mStates.end()) {
@@ -124,7 +124,7 @@ namespace sora {
         return *fsm.get();
     }
     
-    void SoraFSMManager::defTrans(const util::String& state1, const EventType& event, const util::String& state2) {
+    void SoraFSMManager::defTrans(const SoraString& state1, const EventType& event, const SoraString& state2) {
         SoraStringId sid1 = GetUniqueStringId(state1);
         SoraStringId sid2 = GetUniqueStringId(state2);
         
@@ -137,7 +137,7 @@ namespace sora {
             THROW_SORA_EXCEPTION(NotFoundException, "State name not exist");
     }
     
-    void SoraFSMManager::delTrans(const util::String& state, const EventType& event) {
+    void SoraFSMManager::delTrans(const SoraString& state, const EventType& event) {
         SoraStringId sid = GetUniqueStringId(state);
         
         FSMStateMap::iterator itState = mStates.find(sid);

@@ -16,16 +16,16 @@ class SoraMiscToolWin32: public SoraDefaultMiscTool {
 public:
 	SoraMiscToolWin32(): _hWnd(0) { }
 
-	int32 messageBox(const util::String& sMessage, const util::String& sTitle, int32 msgCode) {
+	int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
 		return MessageBoxA(_hWnd, sMessage.c_str(), sTitle.c_str(), msgCode);
 	}
-	int32 messageBox(const util::String& sMessage, const util::String& sTitle, int32 msgCode) { 
+	int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
 		return MessageBoxW(_hWnd, sMessage.c_str(), sTitle.c_str(), msgCode);
 	}
 
 	void setMainWindowHandle(ulong32 mainWindowHandle) { _hWnd = (HWND)mainWindowHandle; }
 	
-	util::String fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+	SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
         char rfilter[128];
 		if(filter != NULL) {
 			strcpy(rfilter, std::string(std::string("My Files(")+filter+") ").c_str());
@@ -85,7 +85,7 @@ public:
 		 return L"\0";
 	}
 	
-	util::String fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+	SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
 		char rfilter[128];
 		if(filter != NULL) {
 			strcpy(rfilter, std::string(std::string("My Files(")+filter+") ").c_str());

@@ -30,9 +30,9 @@ namespace sora {
         void processFsmEvent(const FsmEventType&);
         const FsmStateType& getCurrentFsmState() const;
         
-        bool attachVM(ScriptVMPtr, const util::String& tag);
-        ScriptVMPtr detachVM(const util::String& tag);
-        ScriptVMPtr getVM(const util::String& tag) const;
+        bool attachVM(ScriptVMPtr, const SoraString& tag);
+        ScriptVMPtr detachVM(const SoraString& tag);
+        ScriptVMPtr getVM(const SoraString& tag) const;
         
         template<typename T>
         SoraConnection subscribeToVMAttached(T);

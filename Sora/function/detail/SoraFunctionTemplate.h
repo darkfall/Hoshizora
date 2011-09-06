@@ -109,7 +109,7 @@ namespace sora {
             typedef SORA_FUNCTION<R SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS> self_type;
 
             template<typename Functor>
-            explicit SORA_FUNCTION(const Functor& functor):
+            SORA_FUNCTION(const Functor& functor):
             mInvoker(0),
             mReleaser(0),
             mRefCount(NULL) {
@@ -212,7 +212,7 @@ namespace sora {
             typedef SORA_FUNCTION<void SORA_FUNCTION_COMMA SORA_FUNCTION_TEMPLATE_ARGS> self_type;
             
             template<typename Functor>
-            explicit SORA_FUNCTION(const Functor& functor):
+            SORA_FUNCTION(const Functor& functor):
             mInvoker(0),
             mReleaser(0),
             mRefCount(NULL) {

@@ -49,20 +49,20 @@ namespace sora {
 		 if the ident of the conf already exist, then the old one would be replaced
 		 @param confPath, path of the configuration file
 		 */
-		bool addLocaleConf(const util::String& confPath);
+		bool addLocaleConf(const SoraWString& confPath);
 		
 		/*
 		 get a str depend on current locale
 		 @param ident, string ident id in the configuration file
 		 */
-		util::String getStr(const util::String& ident);
+		SoraWString getStr(const SoraString& ident);
 		
 		/*
 		 set current locale, this would affect the result of getStr
 		 @param localeIdent, locale ident id in the configuration file
 		 */
-		void setCurrentLocale(const util::String& localeIdent);
-		util::String getCurrentLocale() const { return currentLocale; }
+		void setCurrentLocale(const SoraString& localeIdent);
+		SoraString getCurrentLocale() const { return currentLocale; }
 		
 		
 		/*
@@ -70,24 +70,24 @@ namespace sora {
 		 @param resourceName, the resource name to localize
 		 for example, myResource.png would be localized as myResource_CHN.png if current locale is CHN
 		 */
-		util::String localizeResourceName(util::String& resourceName);
+		SoraWString localizeResourceName(SoraWString& resourceName);
         
         void onMessage(SoraMessageEvent* message);
 		
 	private:
 		static SoraLocalizer* mInstance;
 
-		typedef hash_map<SoraString, util::String> LocaleStringMap;		
+		typedef hash_map<SoraString, SoraWString> LocaleStringMap;		
 		typedef std::map<SoraString, LocaleStringMap > LocaleConfMap;
 		LocaleConfMap localeConfs;
 		LocaleConfMap::iterator currentLocaleMap;
 		
-		util::String currentLocale;
-		util::String currentLocaleW;
+		SoraString currentLocale;
+		SoraWString currentLocaleW;
 		
 	protected:
 		inline bool readToken(llexer* lexer, Token tokenExpected);
-		inline util::String readLocaleIdent(llexer* lexer);
+		inline SoraString readLocaleIdent(llexer* lexer);
 		inline bool readLocaleString(llexer* lexer, LocaleStringMap& strMap);
 		inline bool readLocaleResource(llexer* lexer, LocaleStringMap& strMap);
 		

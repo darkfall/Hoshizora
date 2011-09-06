@@ -65,7 +65,7 @@ namespace sora {
         }
     }
     
-    gcn::Widget* JsonGui::getWidget(const util::String& name) {
+    gcn::Widget* JsonGui::getWidget(const SoraString& name) {
         WIDGET_MAP::iterator itWidget = widgets.find(GetUniqueStringId(name));
         if(itWidget != widgets.end()) {
             return itWidget->second;
@@ -73,7 +73,7 @@ namespace sora {
         return NULL;
     }
     
-    void JsonGui::registerParseFunc(const util::String& name, JsonGuiParseFunc func) {
+    void JsonGui::registerParseFunc(const SoraString& name, JsonGuiParseFunc func) {
         extensionFuncs[GetUniqueStringId(name)] = func;
     }
 	
@@ -206,8 +206,8 @@ namespace sora {
 		}
         
 		if(val.isMember("responser")) {
-			util::String arg = val["responser"].asString();
-			util::String type = val["responsetype"].asString();
+			SoraString arg = val["responser"].asString();
+			SoraString type = val["responsetype"].asString();
 			parseResponser(widget, arg, type.size()==0?NULL:&type);
 		}
         
@@ -627,7 +627,7 @@ namespace sora {
         if(arg[0] == '@') {
             size_t ap = arg.find("=");
             if(ap != std::string::npos) {
-                util::String srcType = arg.substr(1, ap);
+                SoraString srcType = arg.substr(1, ap);
                 
                 sora::SoraGUIResponserExtern* pResponser = sora::SoraGUIResponserMap::Instance()->getExternalResponser( srcType );
                 if(pResponser) {

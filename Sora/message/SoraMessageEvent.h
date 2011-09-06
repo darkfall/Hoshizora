@@ -19,7 +19,7 @@ namespace sora {
      * and AnyData
      **/
 
-    typedef util::String MessageIdType;
+    typedef SoraString MessageIdType;
     
     class SoraMessageEvent: public SoraEvent {
     public:        
