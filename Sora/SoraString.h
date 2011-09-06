@@ -76,7 +76,7 @@ namespace sora {
             std::string mString;
         };
         
-        std::string operator+(const char* str, const String& sorastr) {
+        inline std::string operator+(const char* str, const String& sorastr) {
             std::string stdstr(str);
             return stdstr + sorastr.get();
         }

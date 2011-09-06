@@ -57,12 +57,6 @@ public:
 
 int main(int argc, char* argv[]) {    
     
-    
-    sora::SoraDirectoryIterator it(sora::SoraFileUtility::getApplicationPath());
-    while(!it.isEnd()) {
-        printf("%s\n", it.path().toString().c_str());
-        ++it;
-    }
     sora::InitAndCreateSoraCore(new mainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */
                                                         false,
@@ -70,7 +64,9 @@ int main(int argc, char* argv[]) {
                                                         false,
                                                         /* post error using messagebox */
                                                         false,
+                                                        /* seperate sound engine thread */
                                                         true,
+                                                        /* debug rendering */
                                                         false))->start();
 		
 	return 0;
