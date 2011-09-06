@@ -11,6 +11,7 @@
 
 #include "prerequisites.h"
 #include "SoraComponentHolder.h"
+#include "SoraComponent.h"
 
 namespace sora {
     
@@ -106,13 +107,7 @@ namespace sora {
     template<typename T>
     inline void SoraLightWeightEntity::setProperty(const PropertyId& pid, const T& prop) {
         SoraStringTokenlizer tokens(pid);
-        if(tokens.size() == 1)
-            mHolder.setProperty(pid, prop);
-        else if(tokens.size() == 2) {
-            SoraComponent* cop = getComponent(tokens.front());
-            if(cop != NULL)
-                cop->setProperty(tokens.back(), prop);
-        }
+        mHolder.setProperty(pid, prop);
     }
     
     template<typename T>
@@ -150,7 +145,11 @@ namespace sora {
     
     template<typename T>
     inline T* SoraLightWeightEntity::getComponentT(const SoraString& tag) const {
-        return mComponents.getComponentT<T>(tag);
+        SoraComponent* comp = getComponent(tag);
+        if(comp->getName() == T::GetName()) {
+            return static_cast<T*>(comp);
+        }
+        return 0;
     }
 } // namespace sora
 

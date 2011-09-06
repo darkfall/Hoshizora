@@ -6,7 +6,7 @@
 
 namespace sora {
 
-	struct SoraRect4v {
+	struct SORA_API SoraRect4v {
 		float x1, y1;
 		float x2, y2;
 		float x3, y3;

@@ -9,6 +9,7 @@
 #include "SoraComponentHolder.h"
 #include "SoraException.h"
 #include "SoraStringTokenlizer.h"
+#include "SoraComponent.h"
 
 namespace sora {
     
@@ -109,7 +110,7 @@ namespace sora {
         if(token.size() == 2) {
             SoraComponent* comp = getComponent(token.first());
             if(comp)
-                return comp->hasProperty(token.last());
+                return comp->getProperty(token.last()) != 0;
         }
         return false;
     }
@@ -119,7 +120,7 @@ namespace sora {
         if(token.size() == 2) {
             SoraComponent* comp = getComponent(token.front());
             if(comp)
-                comp->addProperty(token.last(), prop);
+                comp->addProperty(MakeProperty(token.last(), prop));
         }
     }
     
@@ -128,7 +129,7 @@ namespace sora {
         if(token.size() == 2) {
             SoraComponent* comp = getComponent(token.front());
             if(comp)
-                return comp->getPropertyBase(token.back());
+                return comp->getProperty(token.back());
         }
         return 0;
     }

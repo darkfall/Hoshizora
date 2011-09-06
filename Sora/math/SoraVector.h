@@ -10,6 +10,7 @@
 #ifndef SORA_VECTOR_H_
 #define SORA_VECTOR_H_
 
+#include "SoraPlatform.h"
 #include <cmath>
     
 namespace sora {
@@ -30,7 +31,7 @@ namespace sora {
         return fabs(r-l) < 0.00000001f;
     }
     
-    struct SoraVector {
+    struct SORA_API SoraVector {
         float x;
         float y;
         
@@ -65,6 +66,7 @@ namespace sora {
         
         float dot(const SoraVector& rhs) const { return x*rhs.x + y*rhs.y; }
         float length() const { return sqrtf(dot(*this)); }
+        float lengthsq() const { return dot(*this); }
         float angle(const SoraVector* rhs = 0) const {
             if(rhs) {
                 SoraVector s = *this, t = *rhs;

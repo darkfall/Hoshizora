@@ -186,6 +186,19 @@ namespace sora  {
         return mData.mValue < rhs;
     }
     
+    template<typename T>
+    inline SoraPropertyBase* MakeProperty(const std::string& key, const T& val) {
+        return new SoraProperty<T>(key, val);
+    }
+    
+    template<typename T>
+    inline void SetProperty(SoraPropertyBase* prop, const T& val) {
+        if(prop->getTypeId() == SoraTypeSerializer::getTypeId<T>()) {
+            SoraProperty<T>* realprop = static_cast<SoraProperty<T>*>(prop);
+            realprop->set(val);
+        }
+    }
+    
 } // namespace sora
 
 

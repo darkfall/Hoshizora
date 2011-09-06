@@ -1,12 +1,13 @@
 #ifndef RF_VECTOR3_H_
 #define RF_VECTOR3_H_
 
+#include "SoraPlatform.h"
 #include <cmath>
 #include <cassert>
 
 namespace sora {
 
-	class SoraVector3 {
+	class SORA_API SoraVector3 {
 	public:
 		static const SoraVector3 ZERO;
 		

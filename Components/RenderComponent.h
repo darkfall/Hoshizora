@@ -22,9 +22,7 @@ namespace sora {
         
         class RenderComponent: public SoraComponent {
         public:
-            RenderComponent(); 
-            RenderComponent(const SoraWString& spritePath, const SoraString& spriteType=SoraString());
-            
+            RenderComponent(SoraLightWeightEntity* ent);            
             ~RenderComponent();
             
             void setSprite(SoraSprite* spr);
@@ -48,6 +46,9 @@ namespace sora {
             
     //PositionComponent* mPosition;
         };
+        
+        SORA_IMPL_COMPONENT(RenderComponent)
+
         
     } // namespace component
     

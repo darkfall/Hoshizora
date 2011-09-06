@@ -10,6 +10,7 @@
 #define Sora_SoraComponent_h
 
 #include "prerequisites.h"
+#include "factory/SoraFactory.h"
 
 namespace sora {
     
@@ -33,18 +34,18 @@ namespace sora {
     
     class SoraLightWeightEntity;
     
-    struct SORA_API SoraComponent: public SoraDynRTTIClass {
+    class SORA_API SoraComponent {
+    public:
         /**
          * When adding a Heavy weight component in Component Holder
          * All existing components would be informed
          * Otherwise only the component itself would be informed of the existence
          * of other components
          **/
-        SoraComponent(const std::string& name, bool heavyWeight=true):
-        SoraDynRTTIClass(name),
+        SoraComponent(SoraLightWeightEntity* owner, bool heavyWeight=true):
         mHeavyWeight(heavyWeight),
         mOwner(0) {
-            
+            setOwner(owner);
         }
                 
         virtual ~SoraComponent() {}
@@ -55,6 +56,7 @@ namespace sora {
         
         void setOwner(SoraLightWeightEntity* entity) {
             mOwner = entity;
+            onSetOwner(entity);
         }
         
         bool isHeavyWeight() const {
@@ -110,10 +112,41 @@ namespace sora {
          **/
         virtual void onRender() { }
         
+        virtual void onSetOwner(SoraLightWeightEntity* entity) { }
+        
+
+        void addProperty(SoraPropertyBase* prop);
+        
+        SoraPropertyBase* getProperty(const std::string& prop) const;
+        
     private:
         bool mHeavyWeight;
         SoraLightWeightEntity* mOwner;
     };
+    
+    
+    typedef SoraAbstractFactory<SoraComponent, SoraComponent*(SoraLightWeightEntity*)> SoraComponentFactory;
+    
+    template<typename T>
+    static void RegisterComponent(const SoraString& name, const T& fn) {
+        SoraComponentFactory::Instance()->reg(name, fn);
+    }
+    
+    template<typename T>
+    static void RegisterComponent() {
+        SoraComponentFactory::Instance()->reg_ctor<T>(T::GetName());
+    }
+    
+    static SoraComponent* CreateComponent(const SoraString& name, SoraLightWeightEntity* owner) {
+        return SoraComponentFactory::Instance()->createInstance(name, owner);
+    }
+    
+    static void DestroyComponent(SoraComponent* comp) {
+        delete comp;
+    }
+    
+#define SORA_IMPL_COMPONENT(cls) \
+    SORA_STATIC_RUN_CODE_I(sora_comp_reg##cls, ::sora::RegisterComponent<cls>())
     
 } // namespace sora
 

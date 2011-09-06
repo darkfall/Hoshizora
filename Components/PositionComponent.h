@@ -18,11 +18,9 @@ namespace sora {
         
         class PositionComponent: public SoraComponent {
         public:            
-            PositionComponent(float x=0.f, float y=0.f, float z=0.f):
-            SoraComponent(getName(), true) {
-                addProperty("x", x);
-                addProperty("y", y);
-                addProperty("z", z);
+            PositionComponent(SoraLightWeightEntity* ent):
+            SoraComponent(ent, false) {
+                
             }
             
             void onMessage(SoraMessageEvent* evt) {}

@@ -12,7 +12,8 @@ namespace sora {
     
     namespace particle {
         
-        CircleEmitter::CircleEmitter(int mode):
+        CircleEmitter::CircleEmitter(SoraLightWeightEntity* ent, int mode):
+        ParticleEmitter(ent),
         mMode(mode),
         mInterval(0.f),
         mEmitNum(0),

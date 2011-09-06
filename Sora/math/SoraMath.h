@@ -18,25 +18,31 @@
 #include "SoraVector3.h"
 #include "SoraCoreTransform.h"
 #include "SoraQuaternion.h"
+#include "SoraMatrix3x3.h"
 
 namespace sora {
 
-	const float F_PI    = 3.14159265358f;
+	const float F_PI    = 3.1415926535897932384626433832795028841971693993751f;
 	const float F_PI_2  = 1.57079632679f;
 	const float F_PI_4  = 0.78539826339f;
 	const float F_PI_6  = 0.5233333f;
 	const float F_PI_12 = 0.2616667f;
 
 	const double D_PI	  =	3.1415926535897932384626433832795;
-	const double D_PI_2 = 1.5707963267948966192313216916398;
-	const double D_PI_4 = 0.7853981633974483096156608458198;
-	const double D_PI_8 = 0.3926990816987241548078304229099;
+	const double D_PI_2   = 1.5707963267948966192313216916398;
+	const double D_PI_4   = 0.7853981633974483096156608458198;
+	const double D_PI_8   = 0.3926990816987241548078304229099;
 
 	inline float DGR_RAD(float dgr)  {return (float)((D_PI * dgr) / 180.0); }
 	inline float RAD_DGR(float rad)  {return (float)((180.0 * rad) / D_PI); }
     
+    
+#ifndef SORA_TINY
+#define SORA_TINY 0.00000001
+#endif
+    
     inline bool floatEqual(float f1, float f2) {
-        return fabs(f1 - f2) < 0.0000001;
+        return fabs(f1 - f2) < SORA_TINY;
     }
 	
 	template<typename T>

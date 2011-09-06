@@ -30,19 +30,6 @@ namespace sora {
 	SORA_API std::string ws2s(const std::wstring& ws);
 	SORA_API std::wstring s2ws(const std::string& s);
     
-	template<typename T>
-	std::string anyToString(const T& t, int precision) {
-		std::ostringstream str;
-		str << std::fixed << std::setprecision(precision) << t;
-		return str.str();		
-	}
-	template<typename T>
-	std::wstring anyToWString(const T& t, int precision) {
-		std::wostringstream str;
-		str << std::fixed << std::setprecision(precision) << t;
-		return str.str();
-	}
-	
 	SORA_API std::string ws2sfast(const std::wstring& ws);
 	SORA_API std::wstring s2wsfast(const std::string& s);	
 

@@ -51,10 +51,18 @@ public:
 };
 
 #include "HashStringMap.h"
+#include "SoraDirectoryIterator.h"
 #include "debug/SoraAutoProfile.h"
+#include "SoraFileUtility.h"
 
 int main(int argc, char* argv[]) {    
-
+    
+    
+    sora::SoraDirectoryIterator it(sora::SoraFileUtility::getApplicationPath());
+    while(!it.isEnd()) {
+        printf("%s\n", it.path().toString().c_str());
+        ++it;
+    }
     sora::InitAndCreateSoraCore(new mainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */
                                                         false,

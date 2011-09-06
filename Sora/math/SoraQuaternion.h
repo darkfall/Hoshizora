@@ -14,7 +14,7 @@
 
 namespace sora {
 	
-	class SoraQuaternion {
+	class SORA_API SoraQuaternion {
 	public:
 		SoraQuaternion(float _x, float _y, float _z, float _w):
 			w(_w), x(_x), y(_y), z(_z) {}

@@ -21,7 +21,7 @@ namespace sora {
 	 just another 2d matrix implemention
 	 */
 	
-	class SoraMatrix3x3 {
+	class SORA_API SoraMatrix3x3 {
 	private:
 		struct _2DMatrix {
 			double _11, _12, _13;
@@ -44,7 +44,7 @@ namespace sora {
 		inline void rotate(double rotation);
 		inline void rotate(const SoraVector& fwd, const SoraVector& side);
 		inline void transformVector2Ds(std::vector<SoraVector>& vPoints);
-		inline void transformVector2Ds(SoraVector& vPoint);
+		inline void transformVector2D(SoraVector& vPoint);
 		
 		void _11(double val) { matrix._11 = val; }
 		void _12(double val) { matrix._12 = val; }

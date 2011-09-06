@@ -7,7 +7,6 @@
 //
 
 #include "SoraLightWeightEntity.h"
-#include "SoraComponentFactory.h"
 
 namespace sora {
     
@@ -30,7 +29,7 @@ namespace sora {
     }
     
     void SoraLightWeightEntity::addComponent(const SoraString& name) {
-        SoraComponent* cop = CreateComponent(name);
+        SoraComponent* cop = CreateComponent(name, this);
         if(cop)
             addComponent(cop);
     }
@@ -74,9 +73,6 @@ namespace sora {
     
     SoraPropertyBase* SoraLightWeightEntity::getPropertyBase(const PropertyId& pid) const {
         SoraPropertyBase* prop =  mHolder.getPropertyBase(pid);
-        if(prop == 0) {
-            return mComponents.getProperty(pid);
-        }
         return prop;
     }
     

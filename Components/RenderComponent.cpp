@@ -18,17 +18,10 @@ namespace sora {
     
     namespace component {
         
-        RenderComponent::RenderComponent():
-        SoraComponent(getName(), true),
+        RenderComponent::RenderComponent(SoraLightWeightEntity* ent):
+        SoraComponent(ent, true),
         mInternalSprite(false),
         mSprite(0) {
-            
-        }
-                
-        RenderComponent::RenderComponent(const SoraWString& spritePath, const SoraString& spriteType):
-        SoraComponent(getName(), true),
-        mInternalSprite(true) {
-            setSprite(spritePath, spriteType);
         }
         
         RenderComponent::~RenderComponent() {

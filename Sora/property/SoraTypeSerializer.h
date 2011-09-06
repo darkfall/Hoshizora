@@ -14,6 +14,8 @@
 #include <sstream>
 #include "SoraPlatform.h"
 #include "SoraStringConv.h"
+#include "SoraMath.h"
+#include "SoraStringTokenlizer.h"
 
 namespace sora {
     
@@ -44,6 +46,12 @@ namespace sora {
             TYPE_WSTRING,
             
             TYPE_PTR,
+            
+            TYPE_VECTOR2,
+            TYPE_VECTOR3,
+            TYPE_MATRIX33,
+            TYPE_RECT,
+            TYPE_QUATERNION
         };
         
     public:
@@ -284,6 +292,141 @@ namespace sora {
             }
         };
         
+        template<>
+        struct Serializer<SoraVector> {
+            static std::string toString(const SoraVector& val) {
+                std::string str = Serializer<float>::toString(val.x) + "," + Serializer<float>::toString(val.y);
+                return str;
+            }
+            static void fromString(const std::string& val, SoraVector* outValue) {
+                size_t pos = val.find(",");
+                if(pos != std::string::npos) {
+                    Serializer<float>::fromString(val.substr(0, pos), &outValue->x);
+                    Serializer<float>::fromString(val.substr(pos+1, val.size()), &outValue->x);
+                }
+            }
+            static int getTypeId(const SoraVector& val) {
+                return SoraTypeSerializer::TYPE_VECTOR2;
+            }
+            static SoraVector defaultValue() {
+                return SoraVector();
+            }
+        };
+        
+        template<>
+        struct Serializer<SoraVector3> {
+            static std::string toString(const SoraVector3& val) {
+                std::string str = Serializer<float>::toString(val.x) + "," + Serializer<float>::toString(val.y) + "," + Serializer<float>::toString(val.z);
+                return str;
+            }
+            static void fromString(const std::string& val, SoraVector3* outValue) {
+                SoraStringTokenlizer tokens(val, ",");
+                if(tokens.size() == 3) {
+                    SoraStringTokenlizer::iterator it = tokens.begin();
+                    
+                    Serializer<float>::fromString(*it, &outValue->x);
+                    Serializer<float>::fromString(*it, &outValue->y); ++it;
+                    Serializer<float>::fromString(*it, &outValue->z); ++it;
+                }
+            }
+            static int getTypeId(const SoraVector3& val) {
+                return SoraTypeSerializer::TYPE_VECTOR3;
+            }
+            static SoraVector3 defaultValue() {
+                return SoraVector3();
+            }
+        };
+        
+        template<>
+        struct Serializer<SoraMatrix3x3> {
+        public:
+            static std::string toString(const SoraMatrix3x3& val) {
+                std::string str = Serializer<float>::toString(val._11()) + "," + Serializer<float>::toString(val._12()) + "," + Serializer<float>::toString(val._13()) + ","
+                                    + Serializer<float>::toString(val._21()) + "," + Serializer<float>::toString(val._22()) + "," + Serializer<float>::toString(val._23()) + ","
+                                    + Serializer<float>::toString(val._31()) + "," + Serializer<float>::toString(val._32()) + "," + Serializer<float>::toString(val._33());
+                return str;
+            }
+            static void fromString(const std::string& val, SoraMatrix3x3* outValue) {
+                SoraStringTokenlizer tokens(val, ",");
+                if(tokens.size() == 9) {
+                    SoraStringTokenlizer::iterator it = tokens.begin();
+                    
+                    float tmp;
+                    Serializer<float>::fromString(*it, &tmp); outValue->_11(tmp); 
+                    Serializer<float>::fromString(*it, &tmp); outValue->_12(tmp); ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->_13(tmp); ++it; 
+                    Serializer<float>::fromString(*it, &tmp); outValue->_21(tmp); ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->_22(tmp); ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->_23(tmp); ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->_31(tmp); ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->_32(tmp); ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->_33(tmp); ++it;
+                }
+            }
+            static int getTypeId(const SoraMatrix3x3& val) {
+                return SoraTypeSerializer::TYPE_MATRIX33;
+            }
+            static SoraMatrix3x3 defaultValue() {
+                return SoraMatrix3x3();
+            }
+        };
+        
+        template<>
+        struct Serializer<SoraQuaternion> {
+            static std::string toString(const SoraQuaternion& val) {
+                std::string str = Serializer<float>::toString(val.w) + "," 
+                                    + Serializer<float>::toString(val.x) + "," 
+                                    + Serializer<float>::toString(val.y) + ","
+                                    + Serializer<float>::toString(val.z);
+                return str;
+            }
+            static void fromString(const std::string& val, SoraQuaternion* outValue) {
+                SoraStringTokenlizer tokens(val, ",");
+                if(tokens.size() == 4) {
+                    SoraStringTokenlizer::iterator it = tokens.begin();
+                    
+                    Serializer<float>::fromString(*it, &outValue->w);
+                    Serializer<float>::fromString(*it, &outValue->x); ++it;
+                    Serializer<float>::fromString(*it, &outValue->y); ++it;
+                    Serializer<float>::fromString(*it, &outValue->z); ++it;
+                }
+            }
+            static int getTypeId(const SoraQuaternion& val) {
+                return SoraTypeSerializer::TYPE_QUATERNION;
+            }
+            static SoraQuaternion defaultValue() {
+                return SoraQuaternion();
+            }
+        };
+        
+        template<>
+        struct Serializer<SoraRect> {
+            static std::string toString(const SoraRect& val) {
+                std::string str = Serializer<float>::toString(val.x1) + "," 
+                                + Serializer<float>::toString(val.y1) + "," 
+                                + Serializer<float>::toString(val.x2) + ","
+                                + Serializer<float>::toString(val.y2);
+                return str;
+            }
+            static void fromString(const std::string& val, SoraRect* outValue) {
+                SoraStringTokenlizer tokens(val, ",");
+                if(tokens.size() == 4) {
+                    SoraStringTokenlizer::iterator it = tokens.begin();
+                    
+                    Serializer<float>::fromString(*it, &outValue->x1);
+                    Serializer<float>::fromString(*it, &outValue->y1); ++it;
+                    Serializer<float>::fromString(*it, &outValue->x2); ++it;
+                    Serializer<float>::fromString(*it, &outValue->y2); ++it;
+                }
+            }
+            static int getTypeId(const SoraRect& val) {
+                return SoraTypeSerializer::TYPE_RECT;
+            }
+            static SoraRect defaultValue() {
+                return SoraRect();
+            }
+        };
+        
         template<typename T>
         struct Serializer<T*> {
             static std::string toString(const T* val) {
@@ -329,6 +472,22 @@ namespace sora {
         return property::Serializer<T>::getTypeId(defaultValue<T>());
     }
         
+	template<typename T>
+	std::string AnyToString(const T& t) {
+		return SoraTypeSerializer::toString(t);		
+	}
+	template<typename T>
+	std::wstring AnyToWString(const T& t) {
+        return sora::s2wsfast(SoraTypeSerializer::toString(t));
+	}
+    
+    template<typename T>
+    T AnyFromString(const std::string& str) {
+        T tmp;
+        return SoraTypeSerializer::fromString<T>(str, &tmp);
+        return tmp;
+    }
+    
 } // namespace sora
 
 #endif

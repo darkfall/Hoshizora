@@ -9,10 +9,14 @@
 #ifndef Sora_SoraComponentHolder_h
 #define Sora_SoraComponentHolder_h
 
-#include "SoraComponent.h"
+#include "SoraPlatform.h"
 #include "SoraUncopyable.h"
+#include "message/SoraMessageEvent.h"
+#include "property/SoraProperty.h"
 
 namespace sora {
+    
+    class SoraComponent;
     
     struct SORA_API SoraComponentHolder: SoraUncopyable {
         SoraComponentHolder() {}
@@ -26,16 +30,9 @@ namespace sora {
         SoraComponent* removeComponent(const SoraComponent*);
         
         SoraComponent* getComponent(const SoraString& tag) const;
-        
-        // get component and cast
-        // may throw exceptions
-        template<typename T>
-        T* getComponentT(const SoraString& tag) const;
-        
+     
         bool hasComponent(const SoraString& tag) const;
         
-        template<typename T>
-        void sendMessage(const MessageIdType& message, const T& data);
         void sendMessage(SoraMessageEvent* message);
         void sendMessageTo(const SoraString& to, SoraMessageEvent* message);
         
@@ -49,40 +46,14 @@ namespace sora {
          * Because we need to tokenlize pid here, it's less efficient
          * Suggesting use property access methods directly in components
          **/
-        bool hasProperty(const DynRttiClassKeyType& pid);
-        void addProperty(const DynRttiClassKeyType& pid, SoraPropertyBase* prop);
-        SoraPropertyBase* getProperty(const DynRttiClassKeyType& pid) const;
+        bool hasProperty(const std::string& pid);
+        void addProperty(const std::string& pid, SoraPropertyBase* prop);
+        SoraPropertyBase* getProperty(const std::string& pid) const;
         
     private:
         typedef hash_map<SoraString, SoraComponent*> ComponentMap;
         ComponentMap mComponents;
     };
-    
-    template<typename T>
-    inline void SoraComponentHolder::sendMessage(const MessageIdType& message, const T& data) {
-        ComponentMap::const_iterator it = mComponents.begin();
-        
-        SoraMessageEvent mssgEvt(message, data);
-        while(it != mComponents.end()) {
-            it->second->onMessage(&mssgEvt);
-            if(mssgEvt.isConsumed()) {
-                break;
-            }
-            ++it;
-        }
-    }
-    
-    template<typename T>
-    inline T* SoraComponentHolder::getComponentT(const SoraString& tag) const {
-        ComponentMap::const_iterator it = mComponents.find(tag);
-        if(it != mComponents.end()) {
-            if(it->second->getName() == T::GetName()) {
-                return static_cast<T>(it->second);
-            } else 
-                THROW_SORA_EXCEPTION(BadCastException, "Different component type");
-        } else
-            THROW_SORA_EXCEPTION(NotFoundException, "Component not found");
-    }
     
 } // namespace sora
 

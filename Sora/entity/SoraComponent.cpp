@@ -7,8 +7,23 @@
 //
 
 #include "SoraComponent.h"
+#include "SoraLightWeightEntity.h"
 
 namespace sora {
+    
+    void SoraComponent::addProperty(SoraPropertyBase* prop) {
+        if(mOwner != 0) 
+            mOwner->addProperty(prop);
+        else 
+            THROW_SORA_EXCEPTION(RuntimeException, "caught component without owner");
+    }
+    
+    SoraPropertyBase* SoraComponent::getProperty(const std::string& prop) const {
+        if(mOwner != 0)
+            return mOwner->getPropertyBase(prop);
+        else 
+            THROW_SORA_EXCEPTION(RuntimeException, "caught component without owner");
+    }
     
     
 }

@@ -111,7 +111,7 @@ namespace sora {
 		 mResourceManagers[0] = sorafodlerresoucemanager
 		 just add the pack as a folder
 		 */
-		mResourceManagers[0]->attachResourcePack(mResourceManagers[0]->loadResourcePack(file));
+        mResourceManagers[0]->attachResourcePack(mResourceManagers[0]->loadResourcePack(file));
 		return 0;
 	}
 	

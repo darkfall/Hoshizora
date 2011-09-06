@@ -114,7 +114,7 @@ void mainWindow::init() {
     if(file)
         file->play();
     
-    sora::particle::CircleEmitter* emitter = new sora::particle::CircleEmitter;
+    sora::particle::CircleEmitter* emitter = new sora::particle::CircleEmitter(&entity);
     emitter->setPosition(300, 300);
     emitter->setSprite(L"textures/Particle004.png");
     emitter->setEmitInterval(1.f);

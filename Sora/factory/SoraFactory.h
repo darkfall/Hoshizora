@@ -31,7 +31,7 @@ namespace sora {
     }
     
     template<typename base, typename product, typename A0, typename A1>
-    base* SoraFactoryCtorDelegate1(A0 a0, A1 a1) {
+    base* SoraFactoryCtorDelegate2(A0 a0, A1 a1) {
         return new product(a0, a1);
     }
     
@@ -133,7 +133,7 @@ namespace sora {
         
         template<typename product>
         void reg_ctor(const std::string& name) {
-            mCreators[name] = CreatorFn(SoraFactoryCtorDelegate1<T, product, A0, A1>);
+            mCreators[name] = CreatorFn(SoraFactoryCtorDelegate2<T, product, A0, A1>);
         }
         
     protected:
