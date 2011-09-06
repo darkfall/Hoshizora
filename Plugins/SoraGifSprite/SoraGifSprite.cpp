@@ -38,7 +38,7 @@ namespace sora {
         init();
     }
     
-    SoraGifSprite::SoraGifSprite(const SoraWString& path) {
+    SoraGifSprite::SoraGifSprite(const util::String& path) {
         init();
         
         load(path);
@@ -74,7 +74,7 @@ namespace sora {
         mFrames.clear();
     }
     
-    bool SoraGifSprite::load(const SoraWString& path) {
+    bool SoraGifSprite::load(const util::String& path) {
         GifRecordType RecordType;
         GifByteType *Extension;
         GifFileType *GifFileIn = NULL;

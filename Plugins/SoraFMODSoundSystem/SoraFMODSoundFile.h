@@ -17,10 +17,10 @@ namespace sora {
     class SoraFMODMusicFile: public SoraMusicFile {
     public:
         SoraFMODMusicFile(bool bStream);
-        SoraFMODMusicFile(const SoraWString& sFilePath, bool bStream);
+        SoraFMODMusicFile(const util::String& sFilePath, bool bStream);
         ~SoraFMODMusicFile();
 		
-		int32 readFile(const SoraWString& sFilePath);
+		int32 readFile(const util::String& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
 		void closeFile();
         
@@ -68,10 +68,10 @@ namespace sora {
     class SoraFMODSoundEffectFile : public SoraSoundEffectFile {
     public:
         SoraFMODSoundEffectFile();
-        SoraFMODSoundEffectFile(const SoraWString& path);
+        SoraFMODSoundEffectFile(const util::String& path);
         ~SoraFMODSoundEffectFile();
 		
-		int32 readFile(const SoraWString& sFilePath);
+		int32 readFile(const util::String& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
 		void closeFile();
         

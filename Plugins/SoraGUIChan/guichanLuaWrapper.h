@@ -29,10 +29,10 @@ namespace sora {
         SORA_LUA_AUTO_EXPORT_FUNC(export_guilib)
 #endif
         
-        bool loadXmlGui(const SoraWString& xmlPath, const SoraString& topWindowId);
-        bool loadJsonGui(const SoraWString& jsonPath, const SoraString& topWindowId);
+        bool loadXmlGui(const SoraWString& xmlPath, const util::String& topWindowId);
+        bool loadJsonGui(const SoraWString& jsonPath, const util::String& topWindowId);
         
-        ulong32 createWidget(const SoraString& ident, const SoraString& id);
+        ulong32 createWidget(const util::String& ident, const util::String& id);
         
         void setGlobalAlpha(float alpha);
         float getGlobalAlpha();
@@ -44,11 +44,11 @@ namespace sora {
         void widgetSendMessageWithReceiver(ulong32 h, const std::string& message, const std::string& receiver);
         void sendMessageToWidget(const std::string& receiver, const std::string& message);
         
-        ulong32 getWidgetById(const SoraString& id);
-        void addWidgetToParent(ulong32 h, const SoraString& parent);
+        ulong32 getWidgetById(const util::String& id);
+        void addWidgetToParent(ulong32 h, const util::String& parent);
         void removeWidget(ulong32 h);
         
-        void setWidgetResponser(ulong32 h, const SoraString& responser, const SoraString& responsetype);
+        void setWidgetResponser(ulong32 h, const util::String& responser, const util::String& responsetype);
         
         void setWidgetFrameSize(ulong32 h, uint32 framesize);
         uint32 getWidgetFrameSize(ulong32 h);
@@ -83,7 +83,7 @@ namespace sora {
         void setWidgetBackgroundColor(ulong32 h, int32 c);
         void setWidgetSelectionColor(ulong32 h, int32 c);
         
-        void setWidgetFont(ulong32 h, const SoraString& fontName, int32 fontSize);
+        void setWidgetFont(ulong32 h, const util::String& fontName, int32 fontSize);
         
         void requestWidgetFocus(ulong32 h);
         void requestWidgetModalFocus(ulong32 h);
@@ -100,19 +100,19 @@ namespace sora {
         bool isWidgetTabInEnabled(ulong32 h);
         bool isWidgetTabOutEnabled(ulong32 h);
         
-        void setWidgetId(ulong32 h, const SoraString& str);
-        SoraString getWidgetId(ulong32 h);
+        void setWidgetId(ulong32 h, const util::String& str);
+        util::String getWidgetId(ulong32 h);
         void showWidgetPart(ulong32 h, int32 x, int32 y, int32 wd, int32 ht);
         
-        bool canWidgetSetCaption(gcn::Widget* Widget, const SoraString& caption);
+        bool canWidgetSetCaption(gcn::Widget* Widget, const util::String& caption);
         bool canWidgetSetValue(gcn::Widget* Widget, float val);
         bool canWidgetSetOpaque(gcn::Widget* widget, bool flag);
         
         void setWidgetOpaque(ulong32 h, bool flag);
         bool isWidgetOpaque(ulong32 h);
         
-        void setWidgetCaption(ulong32 h, const SoraString& caption);
-        SoraString getWidgetCaption(ulong32 h);
+        void setWidgetCaption(ulong32 h, const util::String& caption);
+        util::String getWidgetCaption(ulong32 h);
         
         void setWidgetValue(ulong32 h, float val);
     } // namespace guiwrapper

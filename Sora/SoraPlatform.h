@@ -208,12 +208,12 @@ typedef std::wstring SoraWString;
 
 #else
 #include <string>
-typedef std::string SoraString;
+typedef std::string util::String;
 namespace std {
 	typedef std::basic_string<wchar_t> wstring;
 	typedef basic_ostringstream<wchar_t> wostringstream;
 }
-typedef std::wstring SoraWString;
+typedef std::wstring util::String;
 #endif
 
 

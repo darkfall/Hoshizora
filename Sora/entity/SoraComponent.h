@@ -128,7 +128,7 @@ namespace sora {
     typedef SoraAbstractFactory<SoraComponent, SoraComponent*(SoraLightWeightEntity*)> SoraComponentFactory;
     
     template<typename T>
-    static void RegisterComponent(const SoraString& name, const T& fn) {
+    static void RegisterComponent(const util::String& name, const T& fn) {
         SoraComponentFactory::Instance()->reg(name, fn);
     }
     
@@ -137,7 +137,7 @@ namespace sora {
         SoraComponentFactory::Instance()->reg_ctor<T>(T::GetName());
     }
     
-    static SoraComponent* CreateComponent(const SoraString& name, SoraLightWeightEntity* owner) {
+    static SoraComponent* CreateComponent(const util::String& name, SoraLightWeightEntity* owner) {
         return SoraComponentFactory::Instance()->createInstance(name, owner);
     }
     

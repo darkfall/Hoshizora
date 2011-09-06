@@ -55,7 +55,7 @@ namespace sora {
         bIsStream = bStream;
     }
     
-    SoraFMODMusicFile::SoraFMODMusicFile(const SoraWString& path, bool bStream) {
+    SoraFMODMusicFile::SoraFMODMusicFile(const util::String& path, bool bStream) {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
             log_mssg(vamssg("Creating %s: No FMOD System available", ws2s(path).c_str()),
@@ -88,7 +88,7 @@ namespace sora {
 		closeFile();
     }
     
-    int32 SoraFMODMusicFile::readFile(const SoraWString& path) {
+    int32 SoraFMODMusicFile::readFile(const util::String& path) {
         if(!pSystem) return 0;
         if(pSound) closeFile();
         
@@ -282,7 +282,7 @@ namespace sora {
 		pitch = 0.f;
     }
     
-    SoraFMODSoundEffectFile::SoraFMODSoundEffectFile(const SoraWString& path) {
+    SoraFMODSoundEffectFile::SoraFMODSoundEffectFile(const util::String& path) {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
             log_mssg(vamssg("Creating %s: No FMOD System available", ws2s(path).c_str()),
@@ -323,7 +323,7 @@ namespace sora {
         }
     }
     
-    int32 SoraFMODSoundEffectFile::readFile(const SoraWString& path) {
+    int32 SoraFMODSoundEffectFile::readFile(const util::String& path) {
         if(!pSystem) return 0;
         if(pSound) closeFile();
         

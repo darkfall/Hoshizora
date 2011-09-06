@@ -17,7 +17,7 @@ namespace sora {
 	
 	class SORA_API SoraBooter {
 	public:
-		static void loadExPlugins(const SoraWString& bootPath);
+		static void loadExPlugins(const util::String& bootPath);
 	};
 	
 } // namespace sora

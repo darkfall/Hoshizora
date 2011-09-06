@@ -35,8 +35,8 @@ public:
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }
 	
-	SoraString getWindowName() { return "Reflection"; }
-	SoraString getWindowId() { return "MainWindow"; }
+    sora::util::String getWindowName() { return "Reflection"; }
+	sora::util::String getWindowId() { return "MainWindow"; }
 	
 	bool isWindowSubWindow() { return false; }	
 	bool isWindowed() { return true; }

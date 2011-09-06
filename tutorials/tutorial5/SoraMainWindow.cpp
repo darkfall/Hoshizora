@@ -77,10 +77,25 @@ void MainWindow::onScreenBufferRender(sora::SoraTextureHandle tex) {
 }
 #include "SoraPath.h"
 #include "SoraOSXFileUtility.h"
+#include "SoraFileUtility.h"
+#include "SoraDirectoryIterator.h"
 
 void MainWindow::init() {
     sora::SORA->setFPS(60);    
-    printf("%s\n", sora::ws2s(sora::osxApplicationPath()).c_str());
+    printf("%s\n", sora::osxApplicationPath().c_str());
+    
+    sora::SORA->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"/../");
+    std::vector<std::wstring> cont;
+    sora::SORA->enumFilesInFolder(cont, sora::SoraFileUtility::getApplicationPath()+L"/../");
+    for(int i=0; i<cont.size(); ++i) {
+        printf("%s\n", sora::ws2s(cont[i]).c_str());
+    }
+    
+    sora::SoraDirectoryIterator it(sora::SoraFileUtility::getApplicationPath()+L"/../");
+    while(!it.isEnd()) {
+        printf("%s\n", it.path().toString().c_str());
+        ++it;
+    }
 
     registerEventFunc(this, &MainWindow::onKeyEvent);
     sora::SoraEventManager::Instance()->registerInputEventHandler(this);

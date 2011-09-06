@@ -25,13 +25,13 @@ namespace sora {
 		friend class SoraSingleton<SoraGlobalProfiler>;
 	public:
 		struct s_profile {
-			SoraString sName;
+			util::String sName;
 			uint64 elapsedTime;
 			
 			s_profile(): elapsedTime(0) {}
 			s_profile(const char* name, uint64 t): sName(name), elapsedTime(t) {}
 		};
-		typedef hash_map<SoraString, s_profile> PROFILE_CONT;
+		typedef hash_map<util::String, s_profile> PROFILE_CONT;
 
 	public:
 		void storeProfile(const char* name, uint64 elapsedTime) {

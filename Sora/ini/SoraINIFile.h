@@ -27,15 +27,15 @@ using std::ofstream;
 using std::endl;
 
 struct INISectorValue {
-	SoraString key;
-	SoraString value;
+	util::String key;
+	util::String value;
 	
-	INISectorValue(const SoraString& _key, const SoraString& _value): key(_key), value(_value) {} 
+	INISectorValue(const util::String& _key, const util::String& _value): key(_key), value(_value) {} 
 };
 
 struct INISector {
 	vector<INISectorValue> value;
-	SoraString name;
+	util::String name;
 };
 
 class SORA_API SoraINIFile: public SoraFileBase {
@@ -45,27 +45,27 @@ public:
 	SoraINIFile();
 	~SoraINIFile();
 	
-	int32 readFile(const SoraWString& path);
+	int32 readFile(const util::String& path);
 	int32 readFileMem(void* ptr, ulong32 size);
 	void closeFile();
 	
-	int32		getInt(const SoraString& section, const SoraString& name, int32 iDefault=0);
-	SoraString  getString(const SoraString& section, const SoraString& name, const SoraString& sDefault);
-	float		getFloat(const SoraString& section, const SoraString& name, float fDefault=0.f);
-	bool		getBool(const SoraString& section, const SoraString& name, bool bDefault=false);
+	int32		getInt(const util::String& section, const util::String& name, int32 iDefault=0);
+	util::String  getString(const util::String& section, const util::String& name, const util::String& sDefault);
+	float		getFloat(const util::String& section, const util::String& name, float fDefault=0.f);
+	bool		getBool(const util::String& section, const util::String& name, bool bDefault=false);
 	
-	void writeInt(const SoraString& section, const SoraString& name, int32 iValue);
-	void writeString(const SoraString& section, const SoraString& name, const SoraString& sValue);
-	void writeFloat(const SoraString& section, const SoraString& name, float fValue);
+	void writeInt(const util::String& section, const util::String& name, int32 iValue);
+	void writeString(const util::String& section, const util::String& name, const util::String& sValue);
+	void writeFloat(const util::String& section, const util::String& name, float fValue);
 	
-	vector<INISectorValue> getSector(const SoraString& section);
+	vector<INISectorValue> getSector(const util::String& section);
 	
 	void Commit();
 
 private:	
-	itSector GetSectorByName(const SoraString& section);
+	itSector GetSectorByName(const util::String& section);
 	
-	SoraWString sFile;
+	util::String sFile;
 	bool bFileWrite;
 	bool bMemoryFile;
 	

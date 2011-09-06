@@ -115,7 +115,7 @@ namespace sora{
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_TEXTURE_2D); 
         
-		SoraString info("OpenGL Version=");
+		util::String info("OpenGL Version=");
 		info += (char*)glGetString(GL_VERSION);
 		SET_ENV_STRING("RENDERER_DRIVER", info);
     }
@@ -372,7 +372,7 @@ namespace sora{
 		_glSetProjectionMatrix(w, h);
 	}
 
-	void SoraOGLRenderer::setWindowTitle(const SoraWString& title) {
+	void SoraOGLRenderer::setWindowTitle(const util::String& title) {
 		glfwSetWindowTitle(ws2s(title).c_str());
 	}
 
@@ -458,7 +458,7 @@ namespace sora{
 		}
 	}
 
-	SoraTexture* SoraOGLRenderer::createTexture(const SoraWString& sTexturePath, bool bMipmap) {
+	SoraTexture* SoraOGLRenderer::createTexture(const util::String& sTexturePath, bool bMipmap) {
 		// to do
 		return 0;
 	}
@@ -832,8 +832,8 @@ namespace sora{
 		return glGetError() != GL_NO_ERROR;
 	}
 
-	SoraWString SoraOGLRenderer::videoInfo() {
-		SoraWString info(L"Driver=OpenGL Version=");
+	util::String SoraOGLRenderer::videoInfo() {
+		util::String info(L"Driver=OpenGL Version=");
 		info += s2ws((char*)glGetString(GL_VERSION));
 
 		return info;
@@ -865,17 +865,17 @@ namespace sora{
 		currShader = 0;
 	}
 
-    void SoraOGLRenderer::snapshot(const SoraString& path) {
+    void SoraOGLRenderer::snapshot(const util::String& path) {
         SOIL_save_screenshot(path.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, SORA->getScreenWidth(), SORA->getScreenHeight());
     }
 
-    void SoraOGLRenderer::setIcon(const SoraString& icon) {
+    void SoraOGLRenderer::setIcon(const util::String& icon) {
 #ifdef OS_OSX
         osx_setDockIcon(icon);
 #endif // OS_OSX
     }
     
-    void SoraOGLRenderer::setCursor(const SoraString& cursor) {
+    void SoraOGLRenderer::setCursor(const util::String& cursor) {
 #ifdef OS_OSX
         osx_setAppCursor(cursor);
 #endif

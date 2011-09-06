@@ -19,10 +19,10 @@ namespace sora {
 			_resMap.clear();
 		}
 
-		void registerResponser(const SoraString& id, SoraGUIResponser* responser) {
+		void registerResponser(const util::String& id, SoraGUIResponser* responser) {
 			_resMap.insert(std::make_pair<SoraStringId, SoraGUIResponser*>(GetUniqueStringId(id), responser));
 		}
-		SoraGUIResponser* getResponser(const SoraString& id) {
+		SoraGUIResponser* getResponser(const util::String& id) {
             ResponserMap::iterator itResponser = _resMap.find(GetUniqueStringId(id));
             if(itResponser != _resMap.end())
                 return itResponser->second;
@@ -30,10 +30,10 @@ namespace sora {
 		}
 
         // in xml, use responser = "@handleType=src" to indicate this gui uses a external responser
-		void registerExternalResponser(const SoraString& handleType, SoraGUIResponserExtern* responser) {
+		void registerExternalResponser(const util::String& handleType, SoraGUIResponserExtern* responser) {
 			_extMap.insert(std::make_pair<SoraStringId, SoraGUIResponserExtern*>(GetUniqueStringId(handleType), responser));
 		}
-        SoraGUIResponserExtern* getExternalResponser(const SoraString& handleType) {
+        SoraGUIResponserExtern* getExternalResponser(const util::String& handleType) {
             ExternalResponserMap::iterator itResponser = _extMap.find(GetUniqueStringId(handleType));
             if(itResponser != _extMap.end())
                 return itResponser->second;
@@ -47,7 +47,7 @@ namespace sora {
             return 0;
         }
         
-        void registerHandleSrc(ulong32 widget, const SoraString& src) {
+        void registerHandleSrc(ulong32 widget, const util::String& src) {
             widgetSrc[widget] = GetUniqueStringId(src);
         }
         

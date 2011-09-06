@@ -28,7 +28,7 @@ namespace sora {
     public:        
         static SoraFastRenderer* Instance();
      
-        void renderSprite(const SoraWString& path, float x=0.f, float y=0.f);
+        void renderSprite(const util::String& path, float x=0.f, float y=0.f);
         
         /**
          * Set the auto release of the cached sprites
@@ -40,7 +40,7 @@ namespace sora {
         
         void onUpdate(float dt);
         
-        const SoraString getName() const {
+        const util::String getName() const {
             return "FastRenderer";
         }
         

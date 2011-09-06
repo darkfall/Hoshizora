@@ -312,7 +312,7 @@ namespace sora {
         return panm;
     }
     
-    SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const SoraString& name) {
+    SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const util::String& name) {
         ulong32 size;
         void* data = SORA->getResourceFile(s2ws(name), size);
         if(data) {
@@ -324,7 +324,7 @@ namespace sora {
         return NULL;
     }
 	
-	SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const SoraWString& name) {
+	SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const util::String& name) {
 		ulong32 size;
 		void* data = SORA->getResourceFile(name, size);
 		if(data) {

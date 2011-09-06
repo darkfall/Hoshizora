@@ -9,9 +9,9 @@ namespace sora {
 
 	class SORA_API SoraFileUtility {
 	public:
-		static bool fileExists(const SoraWString& filepath);
+		static bool fileExists(const util::String& filepath);
 		
-		static SoraWString getAbsolutePath(const SoraWString& filePath);
+		static util::String getAbsolutePath(const util::String& filePath);
 		
 		/* 
 		 get path in which can use to write file
@@ -19,19 +19,19 @@ namespace sora {
 		 because ios limit writting files in app
 		 also some part of osx
 		 */
-		static SoraWString getWrittablePath(const SoraWString& filePath);
+		static util::String getWrittablePath(const util::String& filePath);
 		
-		static SoraWString getApplicationPath();
+		static util::String getApplicationPath();
 
-		static SoraWString getFontPath(const SoraWString& file);
+		static util::String getFontPath(const util::String& file);
 
-		static SoraWString getFullPath(const SoraWString& file);
+		static util::String getFullPath(const util::String& file);
 		// get file name from path
-		static SoraWString getFileName(const SoraWString& file);
+		static util::String getFileName(const util::String& file);
 		
-		static SoraString getFileName(const SoraString& file);
+		static util::String getFileName(const util::String& file);
 		
-		static bool isFont(const SoraWString& file);
+		static bool isFont(const util::String& file);
 	};
 
 } // namespace sora

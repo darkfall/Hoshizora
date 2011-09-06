@@ -20,12 +20,12 @@ namespace sora {
         SoraScriptVMHolder() { }
         ~SoraScriptVMHolder();
         
-        bool attachVM(ScriptVMPtr, const SoraString& tag);
-        ScriptVMPtr detachVM(const SoraString& tag);
-        ScriptVMPtr getVM(const SoraString& tag) const;
+        bool attachVM(ScriptVMPtr, const util::String& tag);
+        ScriptVMPtr detachVM(const util::String& tag);
+        ScriptVMPtr getVM(const util::String& tag) const;
         
-        typedef SoraSignal<void(const SoraString&, ScriptVMPtr)> VMAttachedSignal;
-        typedef SoraSignal<void(const SoraString&, ScriptVMPtr)> VMDetachedSignal;
+        typedef SoraSignal<void(const util::String&, ScriptVMPtr)> VMAttachedSignal;
+        typedef SoraSignal<void(const util::String&, ScriptVMPtr)> VMDetachedSignal;
         
         template<typename T>
         SoraConnection subscribeToVMAttached(T);
@@ -37,7 +37,7 @@ namespace sora {
         VMAttachedSignal mSigAttached;
         VMDetachedSignal mSigDetached;
         
-        typedef std::map<SoraString, ScriptVMPtr> VmMap;
+        typedef std::map<util::String, ScriptVMPtr> VmMap;
         VmMap mVMs;
     };
     

@@ -78,7 +78,7 @@ namespace sora {
          add a sample texture
          may use as TEX1 in shader
          */
-		virtual void setTexture(const SoraString& decalName, ulong32 tex) = 0;
+		virtual void setTexture(const util::String& decalName, ulong32 tex) = 0;
 
 		/*
 			Get the type of the shader
@@ -138,7 +138,7 @@ namespace sora {
          * @param type, the type of the shader
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
-        virtual SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type) = 0;
+        virtual SoraShader* createShader(const util::String& file, const util::String& entry, int32 type) = 0;
         
 		/**
          * attach a shader to context
@@ -147,18 +147,18 @@ namespace sora {
          * @param type, the type of the shader
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
-        SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
+        SoraShader* attachShader(const util::String& file, const util::String& entry, int32 type);
         
         /**
          * Create and attach a fragment shader
          * Would through a RuntimeException in case there is a error
          **/
-        SoraShader* attachFragmentShader(const SoraWString& file, const SoraString& entry);
+        SoraShader* attachFragmentShader(const util::String& file, const util::String& entry);
         /**
          * Create and attach a vertex shader
          * Would through a RuntimeException in case there is a error
          **/
-        SoraShader* attachVertexShader(const SoraWString& file, const SoraString& entry);
+        SoraShader* attachVertexShader(const util::String& file, const util::String& entry);
         
         void attachShader(SoraShader* shader);
         void attachFragmentShader(SoraShader* shader);

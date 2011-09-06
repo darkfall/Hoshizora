@@ -21,7 +21,7 @@ namespace sora {
 		return 0;
 	}
 
-	void SoraLuaObjectManager::sendMessage(const SoraString& mssg, const SoraString& params, ulong32 receiver) {
+	void SoraLuaObjectManager::sendMessage(const util::String& mssg, const util::String& params, ulong32 receiver) {
 		LUA_OBJECT_MAP::iterator itObj = luaObjectMap.begin();
 		
 		while(itObj != luaObjectMap.end()) {
@@ -36,7 +36,7 @@ namespace sora {
 		}
 	}
 
-	void SoraLuaObjectManager::doSendMessage(const SoraString& mssg, const SoraString& params, SoraLuaObject* obj) {
+	void SoraLuaObjectManager::doSendMessage(const util::String& mssg, const util::String& params, SoraLuaObject* obj) {
 		LuaPlus::LuaObject luaObj = obj->get(mssg);
 		if(luaObj.IsFunction()) {
 			LuaPlus::LuaFunction<void> mssgFunc = luaObj;

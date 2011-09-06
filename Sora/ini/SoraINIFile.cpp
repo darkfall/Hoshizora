@@ -33,7 +33,7 @@ void SoraINIFile::closeFile() {
     setOpen(false);
 }
 
-int32 SoraINIFile::readFile(const SoraWString& path) {
+int32 SoraINIFile::readFile(const util::String& path) {
 	FILE* fp = fopen(ws2s(path).c_str(), "r");
 	if(fp) {
 		ulong32 size = 0;
@@ -57,8 +57,8 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 	return false;
 }
 	
-	inline SoraString readLn(const char* pstr, uint32& currPos, ulong32 size) {
-		SoraString buffer;
+	inline util::String readLn(const char* pstr, uint32& currPos, ulong32 size) {
+		util::String buffer;
 		while(pstr[currPos] != '\n' && pstr[currPos] != '\r' && currPos < size) {
 			buffer += pstr[currPos];
 			++currPos;
@@ -75,7 +75,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 		const char* pstrData = (const char*)pData;
 		uint32 currPos = 0;
 
-		SoraString buffer;
+		util::String buffer;
 		INISector section;
 		while(currPos <= size) {
 			buffer = readLn(pstrData, currPos, size);
@@ -83,7 +83,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 				continue;
 			
 			if(buffer[0] != '[') {
-				if(buffer.find('=') == SoraString::npos || buffer[0] == ';') {
+				if(buffer.find('=') == util::String::npos || buffer[0] == ';') {
 					continue;
 				}
 				
@@ -93,12 +93,12 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 				while(buffer[0] == '[') {
 					if(buffer[0] == '[') {
 						size_t right = buffer.find(']');
-						if(right != SoraString::npos) {
+						if(right != util::String::npos) {
 							section.name = buffer.substr(1, right-1);
 							
 							buffer = readLn(pstrData, currPos, size);
 							while(buffer[0] != '[' && currPos <= size) {
-								if(buffer.find('=') == SoraString::npos || buffer[0] == ';') {
+								if(buffer.find('=') == util::String::npos || buffer[0] == ';') {
 									buffer = readLn(pstrData, currPos, size);
 									continue;
 								}
@@ -126,7 +126,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 		return true;
 	}
 
-    SoraString SoraINIFile::getString(const SoraString& section, const SoraString& name, const SoraString& sDefault) {
+    util::String SoraINIFile::getString(const util::String& section, const util::String& name, const util::String& sDefault) {
         vector<INISector>::iterator p = sec.begin();
         for(p = sec.begin(); p != sec.end(); ++p) {
             if(p->name.compare(section) == 0) {
@@ -146,7 +146,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         return sDefault;
     }
     
-    float SoraINIFile::getFloat(const SoraString& section, const SoraString& name, float fDefault) {
+    float SoraINIFile::getFloat(const util::String& section, const util::String& name, float fDefault) {
         vector<INISector>::iterator p = sec.begin();
         for(p = sec.begin(); p != sec.end(); ++p) {
             if(p->name.compare(section) == 0) {
@@ -166,7 +166,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         return fDefault;
     }
     
-    int32 SoraINIFile::getInt(const SoraString& section, const SoraString& name, int32 iDefault) {
+    int32 SoraINIFile::getInt(const util::String& section, const util::String& name, int32 iDefault) {
         vector<INISector>::iterator p = sec.begin();
         for(p = sec.begin(); p != sec.end(); ++p) {
             if(p->name.compare(section) == 0) {
@@ -186,7 +186,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         return iDefault;
     }
     
-    bool SoraINIFile::getBool(const SoraString& section, const SoraString& name, bool bDefault) {
+    bool SoraINIFile::getBool(const util::String& section, const util::String& name, bool bDefault) {
         vector<INISector>::iterator p = sec.begin();
         for(p = sec.begin(); p != sec.end(); ++p) {
             if(p->name.compare(section) == 0) {
@@ -214,7 +214,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         return bDefault;
     }
     
-    void SoraINIFile::writeInt(const SoraString& section, const SoraString& name, int32 iValue) {
+    void SoraINIFile::writeInt(const util::String& section, const util::String& name, int32 iValue) {
         bFileWrite = true;
         if(section.compare("public") == 0)
             publicSec.value.push_back(INISectorValue(name, int_to_str(iValue)));
@@ -260,7 +260,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         }		
     }
     
-    void SoraINIFile::writeFloat(const SoraString& section, const SoraString& name, float fValue) {
+    void SoraINIFile::writeFloat(const util::String& section, const util::String& name, float fValue) {
         bFileWrite = true;
         if(section.compare("public") == 0)
             publicSec.value.push_back(INISectorValue(name, fp_to_str(fValue)));
@@ -306,7 +306,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         }	
     }
     
-    void SoraINIFile::writeString(const SoraString& section, const SoraString& name, const SoraString& sValue) {
+    void SoraINIFile::writeString(const util::String& section, const util::String& name, const util::String& sValue) {
         bFileWrite = true;
         if(section.compare("public") == 0)
             publicSec.value.push_back(INISectorValue(name, sValue));
@@ -378,7 +378,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         file.close();
     }
 	
-    vector<INISectorValue> SoraINIFile::getSector(const SoraString& section) {
+    vector<INISectorValue> SoraINIFile::getSector(const util::String& section) {
         if(section.compare("public") == 0)
             return publicSec.value;
         
@@ -388,7 +388,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         return ns;
     }
 	
-    vector<INISector>::iterator SoraINIFile::GetSectorByName(const SoraString& section) {
+    vector<INISector>::iterator SoraINIFile::GetSectorByName(const util::String& section) {
         itSector s = sec.begin();
         while( s != sec.end() ) {
             if(s->name.compare(section) == 0) return s;

@@ -44,12 +44,12 @@ namespace sora {
 	SoraInternalLogger::~SoraInternalLogger() {
 	}
 	
-	SoraInternalLogger& SoraInternalLogger::operator<<(SoraString& mssg) {
+	SoraInternalLogger& SoraInternalLogger::operator<<(util::String& mssg) {
 		vMssg.push_back(mssg);
 		return *this;
 	}
 	
-	SoraInternalLogger& SoraInternalLogger::operator<<(SoraWString& mssg) {
+	SoraInternalLogger& SoraInternalLogger::operator<<(util::String& mssg) {
 		vMssg.push_back(ws2s(mssg));
 		return *this;
 	}

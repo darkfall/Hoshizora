@@ -28,7 +28,7 @@ namespace sora {
         mComponents.addComponent(co);
     }
     
-    void SoraLightWeightEntity::addComponent(const SoraString& name) {
+    void SoraLightWeightEntity::addComponent(const util::String& name) {
         SoraComponent* cop = CreateComponent(name, this);
         if(cop)
             addComponent(cop);
@@ -52,7 +52,7 @@ namespace sora {
         return mComponents.getComponent(name);
     }
     
-    bool SoraLightWeightEntity::hasComponent(const SoraString& name) const {
+    bool SoraLightWeightEntity::hasComponent(const util::String& name) const {
         return mComponents.hasComponent(name);
     }
     
@@ -91,7 +91,7 @@ namespace sora {
             mComponents.sendMessage(message);
     }
     
-    void SoraLightWeightEntity::sendMessageTo(const SoraString& comp, SoraMessageEvent* message) {
+    void SoraLightWeightEntity::sendMessageTo(const util::String& comp, SoraMessageEvent* message) {
         mComponents.sendMessageTo(comp, message);
     }
     

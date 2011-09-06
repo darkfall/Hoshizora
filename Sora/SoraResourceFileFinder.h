@@ -28,18 +28,18 @@ namespace sora {
 		~SoraResourceFileFinder();
 		
 		void attachResourceManager(SoraResourceManager* rm);
-		void detachResourceManager(const SoraWString& name);
+		void detachResourceManager(const util::String& name);
 		
-		ulong32	loadResourcePack    (const SoraWString& file);
+		ulong32	loadResourcePack    (const util::String& file);
 		void	attachResourcePack	(ulong32 handle);
 		void	detachResourcePack  (ulong32 handle);
 		
-		void* readResourceFile				(const SoraWString& file, ulong32 size);
-		void* getResourceFile				(const SoraWString& file, ulong32& size);
-		ulong32 getResourceFileSize			(const SoraWString& file);
+		void* readResourceFile				(const util::String& file, ulong32 size);
+		void* getResourceFile				(const util::String& file, ulong32& size);
+		ulong32 getResourceFileSize			(const util::String& file);
 		void freeResourceFile(void* p);
 		
-		bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
+		bool enumFiles(std::vector<util::String>& cont, const util::String& folder);
         
         static ulong32 ResourceMemory;
         

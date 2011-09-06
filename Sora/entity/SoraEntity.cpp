@@ -55,15 +55,15 @@ namespace sora {
         listeners_fsmExitState(*this, fsm, state);
     }
     
-    bool SoraEntity::attachVM(ScriptVMPtr ptr, const SoraString& tag) {
+    bool SoraEntity::attachVM(ScriptVMPtr ptr, const util::String& tag) {
         return mScriptVM.attachVM(ptr, tag);
     }
     
-    ScriptVMPtr SoraEntity::detachVM(const SoraString& tag) {
+    ScriptVMPtr SoraEntity::detachVM(const util::String& tag) {
         return mScriptVM.detachVM(tag);
     }
    
-    ScriptVMPtr SoraEntity::getVM(const SoraString& tag) const {
+    ScriptVMPtr SoraEntity::getVM(const util::String& tag) const {
         return mScriptVM.getVM(tag);
     }
     
