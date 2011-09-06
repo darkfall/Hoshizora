@@ -83,7 +83,7 @@ namespace sora {
             mParticles.push_back(node);
         }
         
-        void ParticleEmitter::setSprite(const util::String& path) {
+        void ParticleEmitter::setSprite(const SoraWString& path) {
             if(mInternalSprite && mSprite)
                 delete mSprite;
             mSprite = SoraCore::Instance()->createSprite(path);
@@ -189,7 +189,7 @@ namespace sora {
                 }
             } else if(message == "setsprite") {
                 try {
-                    util::String str = evt->getData<util::String>();
+                    SoraWString str = evt->getData<SoraWString>();
                     setSprite(str);
                 } catch(...) {
                     log_error("ParticleEmitter: invalid setsprite message 'error data type'");

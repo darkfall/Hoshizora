@@ -29,7 +29,7 @@ namespace sora {
     class SORA_API SoraScript {
     public:
         virtual bool isLoaded() = 0;
-        virtual void setData(const util::String& data) = 0;
+        virtual void setData(const SoraString& data) = 0;
     };
     
     class SORA_API SoraScriptVM: SoraUncopyable {
@@ -38,7 +38,7 @@ namespace sora {
         
         virtual SoraScriptingSystem* getCreator() const = 0;
         virtual void execute(ScriptPtr script) = 0;
-        virtual void callVoidFunc(const util::String& funcName) = 0;
+        virtual void callVoidFunc(const SoraString& funcName) = 0;
     };
     
     class SORA_API SoraScriptingSystem {
@@ -49,10 +49,10 @@ namespace sora {
         };
         
         virtual int32 getLanguage() const = 0;
-        virtual util::String getName() const = 0;
+        virtual SoraString getName() const = 0;
         
         virtual ScriptVMPtr createVM() = 0;
-        virtual ScriptPtr createScriptFromFile(const util::String& file) = 0;
+        virtual ScriptPtr createScriptFromFile(const SoraString& file) = 0;
     };
     
 } // namespace sora

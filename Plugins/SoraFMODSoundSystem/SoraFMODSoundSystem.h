@@ -23,8 +23,8 @@ namespace sora {
         int32 init();
 		void shutdown();
 		
-        SoraMusicFile* createMusicFile(const util::String& path, bool bStream=false);
-        SoraSoundEffectFile* createSoundEffectFile(const util::String& path);
+        SoraMusicFile* createMusicFile(const SoraWString& path, bool bStream=false);
+        SoraSoundEffectFile* createSoundEffectFile(const SoraWString& path);
         SoraMusicFile* createMusicFile(bool bStream=false);
         SoraSoundEffectFile* createSoundEffectFile();
 		/*

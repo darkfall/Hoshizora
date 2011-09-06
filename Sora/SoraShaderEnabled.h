@@ -25,9 +25,9 @@ namespace sora {
         SoraShaderEnabledObject();
         virtual ~SoraShaderEnabledObject();
         
-        SoraShader* attachShader(const util::String& file, const util::String& entry, int32 type);
-        SoraShader* attachFragmentShader(const util::String& file, const util::String& entry);
-        SoraShader* attachVertexShader(const util::String& file, const util::String& entry);
+        SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
+        SoraShader* attachFragmentShader(const SoraWString& file, const SoraString& entry);
+        SoraShader* attachVertexShader(const SoraWString& file, const SoraString& entry);
         
         void detachShader(SoraShader* shader);
         void detachFragmentShader();

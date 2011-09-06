@@ -24,7 +24,7 @@ namespace sora {
 		mResourceManagers.push_back(SoraAutoPtr<SoraResourceManager>(rm));
 	}
 	
-	void SoraResourceFileFinder::detachResourceManager(const util::String& name) {
+	void SoraResourceFileFinder::detachResourceManager(const SoraWString& name) {
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			if(name.compare(mResourceManagers[i]->getName()) == 0) {
 				mResourceManagers.erase(mResourceManagers.begin()+i);
@@ -33,7 +33,7 @@ namespace sora {
 		}
 	}
 
-	void* SoraResourceFileFinder::readResourceFile(const util::String& file, ulong32 size) {
+	void* SoraResourceFileFinder::readResourceFile(const SoraWString& file, ulong32 size) {
 		void* data;
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			if((data = mResourceManagers[i]->readResourceFile(file, size)) != NULL) {
@@ -52,7 +52,7 @@ namespace sora {
 		return 0;
 	}
 	
-	void* SoraResourceFileFinder::getResourceFile(const util::String& file, ulong32& size) {
+	void* SoraResourceFileFinder::getResourceFile(const SoraWString& file, ulong32& size) {
 		void* data;
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			if((data = mResourceManagers[i]->getResourceFile(file, size)) != NULL) {
@@ -71,7 +71,7 @@ namespace sora {
 		return 0;
 	}
 	
-	ulong32 SoraResourceFileFinder::getResourceFileSize(const util::String& file) { 
+	ulong32 SoraResourceFileFinder::getResourceFileSize(const SoraWString& file) { 
 		ulong32 size;
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			if((size = mResourceManagers[i]->getResourceFileSize(file)) != 0) {
@@ -91,7 +91,13 @@ namespace sora {
         }
 	}
 	
-	ulong32	SoraResourceFileFinder::loadResourcePack(const util::String& file) {
+	ulong32	SoraResourceFileFinder::loadResourcePack(const SoraWString& file) {
+		size_t dotPos = file.rfind('.');
+		SoraWString fileFormat;
+		if(dotPos != SoraWString::npos) {
+			fileFormat = file.substr(dotPos+1, file.size());
+		}
+
 		for(size_t i=1; i<mResourceManagers.size(); ++i) {
 			SoraResourceManager* prm = mResourceManagers[i].get();
 				
@@ -120,7 +126,7 @@ namespace sora {
 		}
 	}
 	
-	bool SoraResourceFileFinder::enumFiles(std::vector<util::String>& cont, const util::String& folder) {
+	bool SoraResourceFileFinder::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
 		for(size_t i=1; i<mResourceManagers.size(); ++i) {
 			SoraResourceManager* prm = mResourceManagers[i].get();
 			

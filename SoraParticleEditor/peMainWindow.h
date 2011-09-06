@@ -118,8 +118,8 @@ class peMainWindow: public sora::SoraWindowInfoBase {
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }
 		
-	util::String getWindowName()  { return "SoraParticleEditor"; }
-	util::String getWindowId()  { return "MainWindow"; }
+	SoraString getWindowName()  { return "SoraParticleEditor"; }
+	SoraString getWindowId()  { return "MainWindow"; }
 		
 	bool isWindowed() { return true; }
 	bool hideMouse() { return false; }

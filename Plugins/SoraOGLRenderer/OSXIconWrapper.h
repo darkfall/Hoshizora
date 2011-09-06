@@ -15,8 +15,8 @@
 
 namespace sora {
     
-    void osx_setDockIcon(const util::String& iconPath);
-    void osx_setAppCursor(const util::String& cursorPath);
+    void osx_setDockIcon(const SoraString& iconPath);
+    void osx_setAppCursor(const SoraString& cursorPath);
     
     void osx_activeCurrentCursor();
 }

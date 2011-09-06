@@ -26,7 +26,7 @@ namespace sora {
             ~RenderComponent();
             
             void setSprite(SoraSprite* spr);
-            void setSprite(const SoraWString& spritePath, const util::String& spriteType=util::String());
+            void setSprite(const SoraWString& spritePath, const SoraString& spriteType=SoraString());
             
             SoraSprite* getSprite() const;
             

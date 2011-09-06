@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SoraMainWindow.cpp"
-         timestampString = "336996488.51483"
+         timestampString = "336910999.874022"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "103"
-         endingLineNumber = "103"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
          landmarkName = "MainWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SoraMainWindow.cpp"
-         timestampString = "336996488.51483"
+         timestampString = "336910999.874022"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "109"
-         endingLineNumber = "109"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
          landmarkName = "MainWindow::init()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -149,11 +149,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SoraMainWindow.cpp"
-         timestampString = "336996488.51483"
+         timestampString = "336910999.874022"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "98"
-         endingLineNumber = "98"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "MainWindow::init()"
          landmarkType = "5">
          <Locations>
@@ -180,58 +180,6 @@
                endingColumnNumber = "9223372036854775807"
                startingLineNumber = "83"
                endingLineNumber = "83">
-            </Location>
-         </Locations>
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraMainWindow.cpp"
-         timestampString = "336996488.51483"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
-         landmarkName = "MainWindow::init()"
-         landmarkType = "5">
-         <Locations>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "global constructors keyed to _ZN10MainWindow10updateFuncEv"
-               urlString = "file://localhost/SoraMainWindow.cpp"
-               timestampString = "336996489.150594"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "99"
-               endingLineNumber = "99">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "void sora::SoraEventHandler::registerEventFunc&lt;MainWindow, sora::SoraKeyEvent&gt;(MainWindow*, void (MainWindow::*)(sora::SoraKeyEvent*))"
-               urlString = "file://localhost/SoraMainWindow.cpp"
-               timestampString = "336996489.151113"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "99"
-               endingLineNumber = "99">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "sora::SoraModifierAdapter&lt;sora::SoraFont&gt;::update(float)"
-               urlString = "file://localhost/SoraMainWindow.cpp"
-               timestampString = "336996489.151548"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "99"
-               endingLineNumber = "99">
             </Location>
          </Locations>
       </FileBreakpoint>

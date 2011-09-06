@@ -21,7 +21,7 @@ namespace sora {
         }
     }
     
-    SoraShader* SoraShaderEnabledObject::attachShader(const util::String& file, const util::String& entry, int32 type) {
+    SoraShader* SoraShaderEnabledObject::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
         checkShaderContext();
         
         if(mShaderContext) {
@@ -30,11 +30,11 @@ namespace sora {
         return NULL;
     }
     
-    SoraShader* SoraShaderEnabledObject::attachFragmentShader(const util::String& file, const util::String& entry) {
+    SoraShader* SoraShaderEnabledObject::attachFragmentShader(const SoraWString& file, const SoraString& entry) {
         return attachShader(file, entry, FRAGMENT_SHADER);
     }
     
-    SoraShader* SoraShaderEnabledObject::attachVertexShader(const util::String& file, const util::String& entry) {
+    SoraShader* SoraShaderEnabledObject::attachVertexShader(const SoraWString& file, const SoraString& entry) {
         return attachShader(file, entry, VERTEX_SHADER);
     }
     

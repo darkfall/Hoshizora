@@ -34,7 +34,7 @@ namespace sora {
         plugin->initialise();
     }
     
-    SoraPlugin* SoraPluginManager::unistallPlugin(const util::String& name) {
+    SoraPlugin* SoraPluginManager::unistallPlugin(const SoraString& name) {
         PluginIterator itPlugin = mPluginMap.find(name);
         if(itPlugin != mPluginMap.end()) {
             SoraPlugin* plugin = itPlugin->second;
@@ -52,7 +52,7 @@ namespace sora {
         return unistallPlugin(plugin->getName());
     }
     
-    SoraPlugin* SoraPluginManager::getPlugin(const util::String& name) {
+    SoraPlugin* SoraPluginManager::getPlugin(const SoraString& name) {
         PluginIterator itPlugin = mPluginMap.find(name);
         if(itPlugin != mPluginMap.end())
             return itPlugin->second;

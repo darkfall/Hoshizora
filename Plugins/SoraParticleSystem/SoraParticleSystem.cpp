@@ -42,7 +42,7 @@ namespace sora {
 		bRotate3v = false;
 	}
 
-	SoraParticleSystem::SoraParticleSystem(const util::String& str, SoraSprite* pSpr, float x, float y, float z) {
+	SoraParticleSystem::SoraParticleSystem(const SoraWString& str, SoraSprite* pSpr, float x, float y, float z) {
 		_parseScript(str);
 		pSprite = pSpr;
 		core = SoraCore::Instance();
@@ -73,7 +73,7 @@ namespace sora {
 		return z;
 	}
 
-	void SoraParticleSystem::emit(const util::String& str, SoraSprite* pSpr, float x, float y, float z) {
+	void SoraParticleSystem::emit(const SoraWString& str, SoraSprite* pSpr, float x, float y, float z) {
 		_parseScript(str);
 		pSprite = pSpr;
 	
@@ -392,7 +392,7 @@ namespace sora {
 		}*/
 	}
 
-	void SoraParticleSystem::saveScript(const util::String& script) {
+	void SoraParticleSystem::saveScript(const SoraWString& script) {
 		FILE* file = fopen(ws2s(script).c_str(), "wb");
 		if(file) {
 		//	fwrite("SRPS", 4, 1, file);
@@ -401,7 +401,7 @@ namespace sora {
 		}
 	}
 
-	void SoraParticleSystem::_parseScript(const util::String& script) {
+	void SoraParticleSystem::_parseScript(const SoraWString& script) {
 		ulong32 size;
 		void* buffer = SoraCore::Instance()->getResourceFile(script, size);
 		if(buffer) {
@@ -512,7 +512,7 @@ namespace sora {
 		return particles.size();
 	}
 
-	void SoraParticleManager::save(HSORAPARTICLE h, const util::String& path) {
+	void SoraParticleManager::save(HSORAPARTICLE h, const SoraWString& path) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			p->second->saveScript(path);
@@ -551,7 +551,7 @@ namespace sora {
 		return (HSORAPARTICLE)par;
 	}
 
-	HSORAPARTICLE SoraParticleManager::emitS(const util::String& s, float x, float y, float z) {
+	HSORAPARTICLE SoraParticleManager::emitS(const SoraWString& s, float x, float y, float z) {
 		if(pGlobalSprite == 0)
 			THROW_SORA_EXCEPTION(IllegalStateException,"Error emit Particle, no global particle sprites set");
 		

@@ -94,7 +94,7 @@ namespace sora {
 		clear();
 	}
 	
-    SoraShader* SoraShaderContext::attachShader(const util::String& file, const util::String& entry, int32 type) {
+    SoraShader* SoraShaderContext::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
         if(type == FRAGMENT_SHADER)
             return attachFragmentShader(file, entry);
         else if(type == VERTEX_SHADER)
@@ -143,7 +143,7 @@ namespace sora {
         mVertexShader.reset();
 	}
     
-    SoraShader* SoraShaderContext::attachFragmentShader(const util::String& file, const util::String& entry) {
+    SoraShader* SoraShaderContext::attachFragmentShader(const SoraWString& file, const SoraString& entry) {
         SoraShader* shader = createShader(file, entry, FRAGMENT_SHADER);
         if(!shader)
             THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
@@ -156,7 +156,7 @@ namespace sora {
         return shader;
     }
     
-    SoraShader* SoraShaderContext::attachVertexShader(const util::String& file, const util::String& entry) {
+    SoraShader* SoraShaderContext::attachVertexShader(const SoraWString& file, const SoraString& entry) {
         SoraShader* shader = createShader(file, entry, VERTEX_SHADER);
         if(!shader)
             THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");

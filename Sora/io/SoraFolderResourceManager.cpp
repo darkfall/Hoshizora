@@ -29,18 +29,19 @@ namespace sora {
 #endif
     }
 
-	SoraResourceHandle SoraFolderResourceManager::loadResourcePack(const util::String& folder) {
-        folders.push_back(folderDescription(folder));
-        return (SoraResourceHandle)folders.back().folderHash;
-		
+	HSORARESOURCE SoraFolderResourceManager::loadResourcePack(const SoraWString& folder) {
+		//if(!SoraFileUtility::fileExists(folder)) {
+			folders.push_back(folderDescription(folder));
+			return (HSORARESOURCE)folders.back().folderHash;
+		//}
 		return 0;
 	}
 
-	void SoraFolderResourceManager::attachResourcePack(SoraResourceHandle handle) {
+	void SoraFolderResourceManager::attachResourcePack(HSORARESOURCE handle) {
 		// for compability with old version
 	}
 
-	void SoraFolderResourceManager::detachResourcePack(SoraResourceHandle handle) {
+	void SoraFolderResourceManager::detachResourcePack(HSORARESOURCE handle) {
 		for(size_t i=0; i<folders.size(); ++i) {
 			if(folders[i].folderHash == handle) {
 				folders.erase(folders.begin()+i);
@@ -49,7 +50,7 @@ namespace sora {
 		}
 	}
 
-	util::String SoraFolderResourceManager::getFullPath(const util::String& fileName) {
+	SoraWString SoraFolderResourceManager::getFullPath(const SoraWString& fileName) {
 		FILE_CACHE::iterator itFile = fileCache.find(str2idnc(fileName));
 		if(itFile != fileCache.end()) {
 			return itFile->second;
@@ -60,21 +61,20 @@ namespace sora {
 		
 
 		for(size_t i=0; i<folders.size(); ++i) {
-			util::String fullPath = folders[i].folderName.toWString() + fileName;
+			SoraWString fullPath = folders[i].folderName + fileName;
 			if(SoraFileUtility::fileExists(fullPath))
                 return fullPath;
 		}
-        return util::String();
+        return SoraWString();
 	}
 
-	void* SoraFolderResourceManager::readResourceFile(const util::String& file, ulong32 size) {
+	void* SoraFolderResourceManager::readResourceFile(const SoraWString& file, ulong32 size) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file))) {
             uint8* pdata = (uint8*)sora_malloc((ulong32)stream.size()+1);
 			if(pdata != NULL) {
                 if(stream.read(pdata, size) != size) {
-                    sora_free(pdata);
-                    return 0;
+                
                 }
                 pdata[size] = 0;
 				return (void*)pdata;
@@ -83,7 +83,7 @@ namespace sora {
 		return 0;
 	}
 
-	void* SoraFolderResourceManager::getResourceFile(const util::String& file, ulong32& size) {
+	void* SoraFolderResourceManager::getResourceFile(const SoraWString& file, ulong32& size) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file))) {
             uint8* pdata = (uint8*)sora_malloc((ulong32)stream.size()+1);
@@ -96,7 +96,7 @@ namespace sora {
 		return 0;
 	}
 
-	ulong32 SoraFolderResourceManager::getResourceFileSize(const util::String& file) {
+	ulong32 SoraFolderResourceManager::getResourceFileSize(const SoraWString& file) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file))) {
             return (ulong32)stream.size();
@@ -110,7 +110,7 @@ namespace sora {
         }
 	}
 	
-	bool SoraFolderResourceManager::enumFiles(std::vector<util::String>& cont, const util::String& folder) {
+	bool SoraFolderResourceManager::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
         SoraDirectoryIterator itDir(folder);
         while(!itDir.isEnd()) {
             cont.push_back(itDir.path().toWString());

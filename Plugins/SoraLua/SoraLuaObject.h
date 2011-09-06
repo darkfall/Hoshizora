@@ -24,20 +24,20 @@ namespace sora {
 	class SoraLuaObject: public SoraObject {	 
 	public:												 
 		SoraLuaObject(bool heavy=true);
-		SoraLuaObject(const util::String& scriptPath, bool heavy=true);
+		SoraLuaObject(const SoraWString& scriptPath, bool heavy=true);
 		SoraLuaObject(LuaPlus::LuaState* state, bool heavy=true);
 		virtual ~SoraLuaObject();
         
         uint32 update(float dt);
         void render();
 
-		int32 doScript(const util::String& scriptPath);
-		int32 doString(const util::String& str);
+		int32 doScript(const SoraWString& scriptPath);
+		int32 doString(const SoraString& str);
 		int32 doBuffer(const char* buff, size_t size, const char* name);
 
-		int32 loadString(const util::String& str);
+		int32 loadString(const SoraString& str);
 		int32 loadBuffer(const char* buff, size_t size, const char* name);
-		int32 loadScript(const util::String& scriptPath);
+		int32 loadScript(const SoraWString& scriptPath);
 
 		LuaPlus::LuaObject createThread();
 		
@@ -45,20 +45,20 @@ namespace sora {
 		LuaPlus::LuaStackObject createUserData(size_t size);
 
 		LuaPlus::LuaObject getGlobals();
-		LuaPlus::LuaObject get(const util::String& name);
-		LuaPlus::LuaObject operator[](const util::String& name);
+		LuaPlus::LuaObject get(const SoraString& name);
+		LuaPlus::LuaObject operator[](const SoraString& name);
 
 		// simple wrappers to help get data easily
-		int32 getInteger(const util::String& name);
-		float getFloat(const util::String& name);
-		double getDouble(const util::String& name);
-		util::String getString(const util::String& name);
-	//	util::String getWString(const util::String& name);
-		lua_CFunction getCFunction(const util::String& name);
-		void* getUserData(const util::String& name);
-		bool getBoolean(const util::String& name);
+		int32 getInteger(const SoraString& name);
+		float getFloat(const SoraString& name);
+		double getDouble(const SoraString& name);
+		SoraString getString(const SoraString& name);
+	//	SoraWString getWString(const SoraString& name);
+		lua_CFunction getCFunction(const SoraString& name);
+		void* getUserData(const SoraString& name);
+		bool getBoolean(const SoraString& name);
 		
-        void callFuncVoid(const util::String& funcName);
+        void callFuncVoid(const SoraString& funcName);
 	
 		LuaPlus::LuaState* getState() const;
 		

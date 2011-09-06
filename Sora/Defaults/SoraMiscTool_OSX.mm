@@ -33,7 +33,7 @@ namespace sora {
 		return kCFUserNotificationPlainAlertLevel;
 	}
 	
-	int32 SoraMiscToolOSX::messageBox(const util::String& sMessage, const util::String& sTitle, int32 msgCode) {
+	int32 SoraMiscToolOSX::messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
 		CFStringRef header_ref   = CFStringCreateWithCString(NULL, sTitle.c_str(), sTitle.size());
 		CFStringRef message_ref  = CFStringCreateWithCString(NULL, sMessage.c_str(), sMessage.size());
 		
@@ -64,11 +64,11 @@ namespace sora {
 		return 0;
 	}
 	
-	int32 SoraMiscToolOSX::messageBox(const util::String& sMessage, const util::String& sTitle, int32 msgCode) { 
+	int32 SoraMiscToolOSX::messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
 		return messageBox(ws2s(sMessage), ws2s(sTitle), msgCode);
 	}
 
-	util::String SoraMiscToolOSX::fileOpenDialog(const char* filter, const char* defaultPath) {
+	SoraWString SoraMiscToolOSX::fileOpenDialog(const char* filter, const char* defaultPath) {
 		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
 		
 		[openDlg setAllowsMultipleSelection:NO];
@@ -108,7 +108,7 @@ namespace sora {
 		return L"\0";			
 	}
 	
-	util::String SoraMiscToolOSX::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
+	SoraWString SoraMiscToolOSX::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
 		NSSavePanel* saveDlg = [NSSavePanel savePanel];
 		
         NSString* fileExt = nil;

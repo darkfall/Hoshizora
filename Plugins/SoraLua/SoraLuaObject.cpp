@@ -34,7 +34,7 @@ namespace sora {
             log_error("Error creating LuaState");
 	}
 
-	SoraLuaObject::SoraLuaObject(const util::String& scriptPath, bool heavy) {
+	SoraLuaObject::SoraLuaObject(const SoraWString& scriptPath, bool heavy) {
 		luaState = LuaState::Create(true);
 		if(luaState && heavy) {
             SoraLuaExporter::OnExport(luaState);
@@ -67,7 +67,7 @@ namespace sora {
 		SoraLuaObjectManager::Instance()->unregisterLuaObject(this);
 	}
 
-	int32 SoraLuaObject::doScript(const util::String& scriptPath) {
+	int32 SoraLuaObject::doScript(const SoraWString& scriptPath) {
 		ulong32 size;
 		void* pdata = SORA->getResourceFile(scriptPath, size);
 		if(pdata) {
@@ -77,7 +77,7 @@ namespace sora {
 		return 0;
 	}
 
-	int32 SoraLuaObject::doString(const util::String& str) {
+	int32 SoraLuaObject::doString(const SoraString& str) {
 		int32 result = luaState->DoString(str.c_str());
 		if(result != 0) {
 	
@@ -103,7 +103,7 @@ namespace sora {
 		return result;
 	}
 
-	int32 SoraLuaObject::loadScript(const util::String& scriptPath) {
+	int32 SoraLuaObject::loadScript(const SoraWString& scriptPath) {
 		ulong32 size;
 		void* pdata = SORA->getResourceFile(scriptPath, size);
 		if(pdata) {
@@ -113,7 +113,7 @@ namespace sora {
 		return 0;
 	}
 
-	int32 SoraLuaObject::loadString(const util::String& str) {
+	int32 SoraLuaObject::loadString(const SoraString& str) {
 		int32 result = luaState->LoadString(str.c_str());
 		if(result != 0) {
 			
@@ -155,39 +155,39 @@ namespace sora {
 		return luaState->GetGlobals();
 	}
 
-	LuaObject SoraLuaObject::get(const util::String& name) {
+	LuaObject SoraLuaObject::get(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str());
 	}
 
-	LuaObject SoraLuaObject::operator[](const util::String& name) {
+	LuaObject SoraLuaObject::operator[](const SoraString& name) {
 		return luaState->GetGlobal(name.c_str());
 	}
 
-	int32 SoraLuaObject::getInteger(const util::String& name) {
+	int32 SoraLuaObject::getInteger(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetInteger();
 	}
 
-	float SoraLuaObject::getFloat(const util::String& name) {
+	float SoraLuaObject::getFloat(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetFloat();
 	}
 
-	double SoraLuaObject::getDouble(const util::String& name) {
+	double SoraLuaObject::getDouble(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetDouble();
 	}
 
-	util::String SoraLuaObject::getString(const util::String& name) {
+	SoraString SoraLuaObject::getString(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetString();
 	}
 
-	lua_CFunction SoraLuaObject::getCFunction(const util::String& name) {
+	lua_CFunction SoraLuaObject::getCFunction(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetCFunction();
 	}
 
-	void* SoraLuaObject::getUserData(const util::String& name) {
+	void* SoraLuaObject::getUserData(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetUserData();
 	}
 
-	bool SoraLuaObject::getBoolean(const util::String& name) {
+	bool SoraLuaObject::getBoolean(const SoraString& name) {
 		return luaState->GetGlobal(name.c_str()).GetBoolean();
 	}
 
@@ -195,7 +195,7 @@ namespace sora {
 		return luaState;
 	}
 	
-    void SoraLuaObject::callFuncVoid(const util::String& funcName) {
+    void SoraLuaObject::callFuncVoid(const SoraString& funcName) {
         LuaObject obj = get(funcName);
         if(obj.IsFunction()) {
             LuaFunctionVoid func = obj;

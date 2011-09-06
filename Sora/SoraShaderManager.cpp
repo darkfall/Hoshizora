@@ -33,7 +33,7 @@ namespace sora {
         return true;
     }
     
-    SoraShader* SoraShaderManager::createShader(const util::String& file, const util::String& entry, int32 type) {
+    SoraShader* SoraShaderManager::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
         SoraStringId sid = GetUniqueStringId(file);
         ShaderMap::iterator itShader = mShaders.find(sid);
         if(itShader != mShaders.end()) {
@@ -50,7 +50,7 @@ namespace sora {
         return shader;
     }
     
-    SoraShader* SoraShaderManager::createUniqueShader(const util::String& file, const util::String& entry, int32 type) {
+    SoraShader* SoraShaderManager::createUniqueShader(const SoraWString& file, const SoraString& entry, int32 type) {
         SoraShader* shader = mShaderContext->createShader(file, entry, type);
         if(!shader) {
             THROW_SORA_EXCEPTION(RuntimeException, vamssg("Error creating shader %s", ws2s(file).c_str()));

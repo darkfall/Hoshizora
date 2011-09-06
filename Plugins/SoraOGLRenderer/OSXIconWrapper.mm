@@ -20,7 +20,7 @@ namespace sora {
     static NSCursor* current_cursor = NULL;
     static NSImage* cursor_image = NULL;
     
-    void osx_setDockIcon(const util::String& icon) {
+    void osx_setDockIcon(const SoraString& icon) {
         NSString* nsicon = [[NSString alloc] initWithUTF8String:icon.c_str()];
         
         if(dock_image != NULL)
@@ -32,7 +32,7 @@ namespace sora {
         [nsicon release];
     }
     
-    void osx_setAppCursor(const util::String& cursor) {
+    void osx_setAppCursor(const SoraString& cursor) {
         NSString* nscursor = [[NSString alloc] initWithUTF8String:cursor.c_str()];
         
         if(cursor_image != NULL)

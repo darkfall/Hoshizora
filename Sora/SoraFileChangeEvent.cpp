@@ -26,7 +26,7 @@ namespace sora {
 		SoraEventManager::Instance()->createTimerEvent(this, mCheckInternval, true);
 	}
 	
-	void SoraFileChangeEventPublisher::addEventHandler(const util::String& file, SoraEventHandler* handler) {	
+	void SoraFileChangeEventPublisher::addEventHandler(const SoraWString& file, SoraEventHandler* handler) {	
 		FILE_CHANGE_MAP::iterator itFile = mChangeListeners.find(file);
 		if(itFile != mChangeListeners.end()) {
 			mChangeListeners[file].mHandlers.push_back(handler);
@@ -39,7 +39,7 @@ namespace sora {
 				info.mMD5 = md5.hex_digest();
 				info.mHandlers.push_back(handler);
 				
-				mChangeListeners.insert(std::make_pair<util::String, FileChangeInfo>(file, info));
+				mChangeListeners.insert(std::make_pair<SoraWString, FileChangeInfo>(file, info));
                 
                 fclose(fl);
 			} else {

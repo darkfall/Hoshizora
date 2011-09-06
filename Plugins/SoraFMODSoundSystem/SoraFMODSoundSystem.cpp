@@ -25,11 +25,11 @@ namespace sora {
         SoraFMODSystem::Destroy();
     }
     
-    SoraMusicFile* SoraFMODSoundSystem::createMusicFile(const util::String& path, bool bStream) {
+    SoraMusicFile* SoraFMODSoundSystem::createMusicFile(const SoraWString& path, bool bStream) {
         return new SoraFMODMusicFile(path, bStream);
     }
     
-    SoraSoundEffectFile* SoraFMODSoundSystem::createSoundEffectFile(const util::String& path) {
+    SoraSoundEffectFile* SoraFMODSoundSystem::createSoundEffectFile(const SoraWString& path) {
         return new SoraFMODSoundEffectFile(path);
     }
     

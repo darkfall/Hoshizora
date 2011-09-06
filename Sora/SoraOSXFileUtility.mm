@@ -16,15 +16,15 @@
 
 namespace sora {
 	
-	util::String osxApplicationPathW() {
+	SoraWString osxApplicationPathW() {
 		return s2ws([[[NSBundle mainBundle] bundlePath] UTF8String]);
 	}
 	
-    util::String osxApplicationPath() {
+    SoraString osxApplicationPath() {
         return [[[NSBundle mainBundle] bundlePath] UTF8String];
     }
     
-	bool osxFileExists(const util::String& path) {
+	bool osxFileExists(const SoraWString& path) {
 		NSString* nsPath = [[NSString alloc] initWithUTF8String:ws2s(path).c_str()];
 		bool result = [[NSFileManager defaultManager] fileExistsAtPath:nsPath];
         [nsPath release];

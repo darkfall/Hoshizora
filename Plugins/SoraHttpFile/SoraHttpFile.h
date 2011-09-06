@@ -54,11 +54,11 @@ namespace sora {
 			mReceiveTime = time;
 		}
 		
-		util::String getURL() const {
+		SoraString getURL() const {
 			return mURL;
 		}
 		
-		void setURL(const util::String& url) {
+		void setURL(const SoraString& url) {
 			mURL = url;
 		}
 		
@@ -81,7 +81,7 @@ namespace sora {
 		double mReceiveTime;
 		double mDownloadSpeed;
 		
-		util::String mURL;
+		SoraString mURL;
 	};
 
 	typedef struct tagSoraHttpDownloadFile {
@@ -99,7 +99,7 @@ namespace sora {
 	
 	class SoraHttpFileHead {
 	public:
-        util::String sURL;
+        SoraString sURL;
 		SoraHttpFile* httpFile;
 	};
 
@@ -126,7 +126,7 @@ namespace sora {
 		// to do
 		void stop();
 		
-		util::String getURL() const;
+		SoraString getURL() const;
 		SoraMemoryBuffer* getMemoryBuffer() const;
 
 		static size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp);
@@ -146,24 +146,24 @@ namespace sora {
 		
 	public:
 		SoraHttpFile();
-		SoraHttpFile(const util::String& url, SoraEventHandler* handler);
-		SoraHttpFile(const util::String& url, const SoraAbstractDelegate<SoraHttpFile>& del);
+		SoraHttpFile(const SoraString& url, SoraEventHandler* handler);
+		SoraHttpFile(const SoraString& url, const SoraAbstractDelegate<SoraHttpFile>& del);
 		~SoraHttpFile();
 
-		bool downloadFile(const util::String& url);
-		bool downloadFileTo(const util::String& url, const util::String& to);
-		bool downloadFileWithDelegate(const util::String& url, const SoraAbstractDelegate<SoraHttpFile>& del);
+		bool downloadFile(const SoraString& url);
+		bool downloadFileTo(const SoraString& url, const SoraWString& to);
+		bool downloadFileWithDelegate(const SoraString& url, const SoraAbstractDelegate<SoraHttpFile>& del);
         
-		void setDownloadToFile(const util::String& file);
+		void setDownloadToFile(const SoraWString& file);
 		
 		void setEventHandler(SoraEventHandler* handler);
 		SoraEventHandler* getEventHandler() const;
 		
-		bool writeToFile(const util::String& file);
+		bool writeToFile(const SoraWString& file);
 		void setDelegate(const SoraAbstractDelegate<SoraHttpFile>& del);
         SoraAbstractDelegate<SoraHttpFile>* getDelegate();
 		
-		static double getRemoteFileSize(const util::String& url);
+		static double getRemoteFileSize(const SoraString& url);
 		
 		SoraMemoryBuffer* getMemoryBuffer() const;
 		
@@ -171,7 +171,7 @@ namespace sora {
 		double		getDownloadTime() const;
 		double		getDownloadSpeed() const;
 		int32		getState() const;
-		util::String	getURL() const;
+		SoraString	getURL() const;
 
 		void suspend();
 		void resume();
@@ -179,14 +179,14 @@ namespace sora {
 		bool isFinished() const;
 		
 		bool isDownloadToFile() const;
-		util::String getDownloadToFile() const;
+		SoraWString getDownloadToFile() const;
 
 	private:
 		void finishDownload();
 		
 		bool isopen;
 		bool mDownloadTo;
-		util::String mDownloadToFile;
+		SoraWString mDownloadToFile;
 		
 		SoraHttpFileDownloadThread pdownloadthread;
 		SoraAbstractDelegate<SoraHttpFile>* mDelegate;

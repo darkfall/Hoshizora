@@ -19,8 +19,8 @@ namespace sora {
 		virtual int32 getWindowPosX() = 0;
 		virtual int32 getWindowPosY() = 0;
 		
-		virtual util::String getWindowName() = 0;
-		virtual util::String getWindowId() = 0;
+		virtual SoraString getWindowName() = 0;
+		virtual SoraString getWindowId() = 0;
 		
 		virtual void init() = 0;
 		

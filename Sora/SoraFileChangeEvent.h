@@ -22,13 +22,13 @@ namespace sora {
 	class SORA_API SoraFileChangeEvent: public SoraEvent {
 	public:
 		SoraFileChangeEvent() {}
-		SoraFileChangeEvent(const util::String& file): mChangedFile(file) {}
+		SoraFileChangeEvent(const SoraWString& file): mChangedFile(file) {}
 		
-		void setChangedFile(const util::String& file) {
+		void setChangedFile(const SoraWString& file) {
 			mChangedFile = file;
 		}
 		
-		util::String getChangedFile() const {
+		SoraWString getChangedFile() const {
 			return mChangedFile;
 		}
 		
@@ -37,7 +37,7 @@ namespace sora {
 #endif
 	
 	private:
-		util::String mChangedFile;
+		SoraWString mChangedFile;
 	};
 	
 	class SORA_API SoraFileChangeEventPublisher: public SoraEventHandler {
@@ -45,7 +45,7 @@ namespace sora {
 		SoraFileChangeEventPublisher();
 		
 		void setInterval(float interval);
-		void addEventHandler(const util::String& file, SoraEventHandler* handler);
+		void addEventHandler(const SoraWString& file, SoraEventHandler* handler);
 		void delEventHandler(SoraEventHandler* handler);
 		void onCheckTimerEvent(SoraTimerEvent* event);
 		
@@ -57,7 +57,7 @@ namespace sora {
 			CHANGE_HANDLERS mHandlers;
 		};
 		
-		typedef std::map<util::String, FileChangeInfo> FILE_CHANGE_MAP;
+		typedef std::map<SoraWString, FileChangeInfo> FILE_CHANGE_MAP;
 		FILE_CHANGE_MAP mChangeListeners;
 		
 		float mCheckInternval;

@@ -90,8 +90,8 @@ namespace sora {
 			double tempX = (matrix._11*vPoints[i].x) + (matrix._21*vPoints[i].y) + matrix._31;
 			double tempY = (matrix._12*vPoints[i].x) + (matrix._22*vPoints[i].y) + matrix._32;
 			
-			vPoints[i].x = (float)tempX;
-			vPoints[i].y = (float)tempY;
+			vPoints[i].x = tempX;
+			vPoints[i].y = tempY;
 		}
 	}
 	
@@ -99,8 +99,8 @@ namespace sora {
 		double tempX = (matrix._11*vPoint.x) + (matrix._21*vPoint.y) + matrix._31;
 		double tempY = (matrix._12*vPoint.x) + (matrix._22*vPoint.y) + matrix._32;
 		
-		vPoint.x = (float)tempX;
-		vPoint.y = (float)tempY;
+		vPoint.x = tempX;
+		vPoint.y = tempY;
 	}
 	
 	inline void SoraMatrix3x3::createIdentity() {

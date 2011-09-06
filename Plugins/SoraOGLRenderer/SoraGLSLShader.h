@@ -52,7 +52,7 @@ namespace sora {
 		SoraGLSLShaderContext();
 		~SoraGLSLShaderContext();
 		
-        SoraShader* createShader(const util::String& file, const util::String& entry, int32 type);
+        SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
 		
 		virtual bool attachShaderList();
 		virtual bool detachShaderList();
@@ -73,11 +73,11 @@ namespace sora {
 		SoraGLSLShader();
 		~SoraGLSLShader();
 		
-		bool loadShader(const util::String& file, const util::String& entry, int32 type);
+		bool loadShader(const SoraWString& file, const SoraString& entry, int32 type);
 		
 	public:
 		
-		void setTexture(const util::String& decalName, ulong32 tex);
+		void setTexture(const SoraString& decalName, ulong32 tex);
 		bool setParameterfv(const char* name, float* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
         bool getParameterfv(const char* name, float* val, uint32 size);

@@ -11,11 +11,11 @@
 #define SORA_OSX_FILE_UTILITY_H_
 
 #include "SoraPlatform.h"
-#include "SoraString.h"
 
 namespace sora {
-    util::String osxApplicationPath();
-	bool osxFileExists(const util::String& path);
+	SoraWString osxApplicationPathW();
+    SoraString osxApplicationPath();
+	bool osxFileExists(const SoraWString& path);
 } // namespace sora
 
 #endif

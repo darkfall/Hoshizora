@@ -48,7 +48,7 @@ namespace sora {
 			delete pSelectionListener;
 		}
         
-		void registerGUIResponser(gcn::Widget* pWidget, SoraGUIResponser* pResponser, const util::String& responserID, int iResponceType) {
+		void registerGUIResponser(gcn::Widget* pWidget, SoraGUIResponser* pResponser, const SoraString& responserID, int iResponceType) {
 			if(iResponceType & RESPONSEACTION) pWidget->addActionListener(pActionListener);
 			if(iResponceType & RESPONSEDEATH) pWidget->addDeathListener(pDeathListener);
 			if(iResponceType & RESPONSEKEY) pWidget->addKeyListener(pKeyListener);
@@ -68,7 +68,7 @@ namespace sora {
 			SoraGUIResponserMap::Instance()->registerResponser(responserID, pResponser);
 		}
         
-        void registerExternalGUIResponser(gcn::Widget* pWidget, SoraGUIResponserExtern* pResponser, const util::String& responserID, const util::String& handleSrc, int iResponceType) {
+        void registerExternalGUIResponser(gcn::Widget* pWidget, SoraGUIResponserExtern* pResponser, const SoraString& responserID, const SoraString& handleSrc, int iResponceType) {
             if(iResponceType & RESPONSEACTION) pWidget->addActionListener(pActionListener);
 			if(iResponceType & RESPONSEDEATH) pWidget->addDeathListener(pDeathListener);
 			if(iResponceType & RESPONSEKEY) pWidget->addKeyListener(pKeyListener);

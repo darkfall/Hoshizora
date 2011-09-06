@@ -16,7 +16,7 @@ namespace sora {
 
     class SORA_API SoraMoviePlayer: public SoraPlaybackEventHandler {
     public:
-        virtual bool openMedia(const util::String& filePath, const util::String& dis="RGBA") = 0;
+        virtual bool openMedia(const SoraWString& filePath, const SoraString& dis="RGBA") = 0;
         virtual void play() = 0;
         virtual void stop() = 0;
         virtual void pause() = 0;

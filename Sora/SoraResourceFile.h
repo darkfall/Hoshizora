@@ -25,11 +25,11 @@ namespace sora {
 	public:
         SoraResourceFileAuto();
 		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
-		SoraResourceFileAuto(const util::String& file, bool retain=false);
-        SoraResourceFileAuto(const util::String& file, ulong32 size, bool retain=false);
+		SoraResourceFileAuto(const SoraWString& file, bool retain=false);
+        SoraResourceFileAuto(const SoraWString& file, ulong32 size, bool retain=false);
 		~SoraResourceFileAuto();
         
-        SoraResourceFileAuto& operator=(const util::String& file);
+        SoraResourceFileAuto& operator=(const SoraWString& file);
 		
 		void* getData() const;
 		ulong32 getSize() const;
@@ -52,7 +52,7 @@ namespace sora {
 		ulong32 mSize;
 		bool mRetain;
         
-        util::String mName;
+        SoraWString mName;
 	};
 	
 } // namespace sora

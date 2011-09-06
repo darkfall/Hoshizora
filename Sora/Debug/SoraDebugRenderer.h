@@ -69,7 +69,7 @@ namespace sora {
             debugRenderItems.push_back(item);
         }
         
-		void addString(const SoraVector& point, const util::String& str, const SoraColorRGBA& color=COLOR_BLACK, float depth=0.f) {
+		void addString(const SoraVector& point, const SoraWString& str, const SoraColorRGBA& color=COLOR_BLACK, float depth=0.f) {
             debugRenderItem item(ITEM_LINE);
             item.pos = point;
             item.color = color;
@@ -118,7 +118,7 @@ namespace sora {
 			SoraVector extra;
 			float depth;
 			
-			util::String str;
+			SoraWString str;
 			
 			uint32 type;
             float width;

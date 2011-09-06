@@ -17,7 +17,7 @@ namespace sora {
 	SoraLuaMainWindow::SoraLuaMainWindow() {
 	}
 	
-	SoraLuaMainWindow::SoraLuaMainWindow(const util::String& scriptPath) {
+	SoraLuaMainWindow::SoraLuaMainWindow(const SoraWString& scriptPath) {
 		mScriptObj.doScript(scriptPath);
 	}
 		
@@ -40,12 +40,12 @@ namespace sora {
 		return callLuaFunc<int32>(mScriptObj.getState(), "getWindowPosY");
 	}
 	
-	util::String SoraLuaMainWindow::getWindowName() {
-		return callLuaFunc<util::String>(mScriptObj.getState(), "getWindowName");
+	SoraString SoraLuaMainWindow::getWindowName() {
+		return callLuaFunc<SoraString>(mScriptObj.getState(), "getWindowName");
 	}
 	
-	util::String SoraLuaMainWindow::getWindowId() {
-		return callLuaFunc<util::String>(mScriptObj.getState(), "getWindowId");
+	SoraString SoraLuaMainWindow::getWindowId() {
+		return callLuaFunc<SoraString>(mScriptObj.getState(), "getWindowId");
 	}
 	
 	void SoraLuaMainWindow::init() {

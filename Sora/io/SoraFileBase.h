@@ -23,16 +23,16 @@ namespace sora {
             mIsOpen = flag;
         }
         
-        util::String getFilePath() const {
+        SoraWString getFilePath() const {
             return mFilePath;
         }
         
-        void setFilePath(const util::String& path) {
+        void setFilePath(const SoraWString& path) {
             mFilePath = path;
         }
 
 	private:
-		util::String mFilePath;
+		SoraWString mFilePath;
 
 		bool mIsOpen;
 	};

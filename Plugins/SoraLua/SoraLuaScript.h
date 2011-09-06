@@ -31,7 +31,7 @@ namespace sora  {
             return mLoaded;
         }
         
-        virtual void setData(const util::String& data) {
+        virtual void setData(const SoraString& data) {
             mData = data;
             mLoaded = true;
         }
@@ -40,7 +40,7 @@ namespace sora  {
         friend class SoraLuaScriptVM;
         
         bool mLoaded;
-        util::String mData;
+        SoraString mData;
     };
     
     class SORA_API SoraLuaScriptVM: SoraScriptVM {
@@ -59,7 +59,7 @@ namespace sora  {
             mLuaVM.doString(script->mData.c_str());
         }
         
-        virtual void callVoidFunc(const util::String& funcName) {
+        virtual void callVoidFunc(const SoraString& funcName) {
             mLuaVM.callFuncVoid(funcName);
         }
         
@@ -74,7 +74,7 @@ namespace sora  {
         int32 getLanguage() const {
             return L_LUA;
         }
-        util::String getName() const {
+        SoraString getName() const {
             return "lua";
         }
         
@@ -82,10 +82,10 @@ namespace sora  {
             return ScriptVMPtr(new SoraLuaScriptVM());
         }
         
-        virtual ScriptPtr createScriptFromFile(const util::String& file) {
+        virtual ScriptPtr createScriptFromFile(const SoraString& file) {
             SoraResourceFileAuto data(file);
             
-            util::String strData((const char*)data, data.size());
+            SoraString strData((const char*)data, data.size());
             return ScriptPtr(new SoraLuaScript(strData));
         }
     };

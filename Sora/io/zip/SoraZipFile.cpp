@@ -23,7 +23,7 @@ namespace sora {
         setOpen(false);
     }
     
-    SoraZipFile::SoraZipFile(const util::String& filePath) {
+    SoraZipFile::SoraZipFile(const SoraWString& filePath) {
         open(filePath);
     }
     
@@ -31,7 +31,7 @@ namespace sora {
         close();
     }
     
-    bool SoraZipFile::open(const util::String& filePath) {
+    bool SoraZipFile::open(const SoraWString& filePath) {
         if(isOpen()) close();
         
         m_UnzFile = unzOpen(ws2s(filePath).c_str());
@@ -96,7 +96,7 @@ namespace sora {
         }
     }
     
-    void* SoraZipFile::getFile(const util::String& filename, uLong readSize) {
+    void* SoraZipFile::getFile(const SoraWString& filename, uLong readSize) {
         if(isOpen()) {
             if(readSize != 0) {
                 return _getfile(filename, readSize);
@@ -108,13 +108,13 @@ namespace sora {
         return 0;
     }
     
-    void* SoraZipFile::_getfile(const util::String& filename, uLong readSize) {
+    void* SoraZipFile::_getfile(const SoraWString& filename, uLong readSize) {
         const char*	lpszPackCode = packCode.empty() ? 0 : packCode.c_str();
        
-        util::String rfilename = filename;
+        SoraWString rfilename = filename;
         if(getFilePath().size() != 0) {
             size_t packpos = rfilename.find(getFilePath());
-            if(packpos != util::String::npos && packpos == 0) {
+            if(packpos != SoraWString::npos && packpos == 0) {
                 rfilename.erase(0, getFilePath().size()+1);
             }
         }
@@ -177,7 +177,7 @@ namespace sora {
         return 0;
     }
     
-    ulong32 SoraZipFile::getFileSize(const util::String& filename) {
+    ulong32 SoraZipFile::getFileSize(const SoraWString& filename) {
         if(isOpen()) {
             std::string sFileName = ws2s(filename).c_str();
             for (size_t nChar = 0; nChar < sFileName.size(); ++nChar) {
@@ -195,7 +195,7 @@ namespace sora {
         return 0;
     }
     
-    ulong32 SoraZipFile::getFileCRC(const util::String& filename) {
+    ulong32 SoraZipFile::getFileCRC(const SoraWString& filename) {
         if(isOpen()) {
             unz_file_info* lpUnzFileInfo = _getUnzFileInfo(ws2s(filename).c_str());
             return lpUnzFileInfo ? lpUnzFileInfo->crc : 0;
@@ -265,7 +265,7 @@ namespace sora {
         return 0;
     }
 	
-	bool SoraZipFile::enumFiles(std::vector<util::String>& cont, const util::String& folder) {
+	bool SoraZipFile::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) {
 		unzFile hFile = m_UnzFile;
 		int result = unzGoToFirstFile(hFile);
         
