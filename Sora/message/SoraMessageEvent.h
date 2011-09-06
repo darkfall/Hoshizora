@@ -52,7 +52,7 @@ namespace sora {
             return AnyCast<T>(mData);
         }
         
-        SORA_EVENT_IDENTIFIER(str2id("SoraMessageEvent"));
+        SORA_EVENT_IDENTIFIER(GetUniqueStringId("SoraMessageEvent"));
         
     private:
         MessageIdType mMessageType;

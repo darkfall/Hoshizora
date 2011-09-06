@@ -26,7 +26,7 @@ namespace SoraUnit {
             return "My Event";
         }
         
-        SORA_EVENT_IDENTIFIER(sora::str2id("myEvent"))
+        SORA_EVENT_IDENTIFIER(sora::GetUniqueStringId("myEvent"))
     };
     
     class myEventHandler: public sora::SoraEventHandler {

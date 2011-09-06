@@ -65,7 +65,7 @@ namespace sora {
 		SoraString strIdent = confLexer->getCurrLexeme();
 		if(!readToken(confLexer, TOKEN_TYPE_OP)) return false;
 		if(!readToken(confLexer, TOKEN_TYPE_STRING)) return false;
-		strMap[GetUniqueStringId(strIdent)] = s2ws(confLexer->getCurrLexeme());
+		strMap[strIdent] = s2ws(confLexer->getCurrLexeme());
 		return true;
 	}
 	
@@ -73,7 +73,7 @@ namespace sora {
 		SoraString strIdent = confLexer->getCurrLexeme();
 		if(!readToken(confLexer, TOKEN_TYPE_OP)) return false;
 		if(!readToken(confLexer, TOKEN_TYPE_STRING)) return false;
-		strMap[GetUniqueStringId(strIdent)] = s2ws(confLexer->getCurrLexeme());
+		strMap[strIdent] = s2ws(confLexer->getCurrLexeme());
 		return true;
 	}
 	
@@ -142,7 +142,7 @@ namespace sora {
 	}
 	
 	SoraWString SoraLocalizer::getStr(const SoraString& ident) {
-		LocaleStringMap::iterator itStr = currentLocaleMap->second.find(GetUniqueStringId(ident));
+		LocaleStringMap::iterator itStr = currentLocaleMap->second.find(ident);
 		if(itStr != currentLocaleMap->second.end())
 			return itStr->second;
 		return std::wstring();

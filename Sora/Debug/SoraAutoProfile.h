@@ -25,28 +25,18 @@
 
 namespace sora {
 	
-	inline uint64 getCurrentSystemTime() {
-#ifdef OS_PSP
-		uint64 t;
-		sceRtcGetCurrentTick(&t);
-		return t;
-#else
-		SoraTimestamp currTime;
-        return currTime.epochMicroseconds();
-#endif
-	}
-	
 	struct SORA_API SoraAutoProfile {
-		SoraAutoProfile(const char* name): sName(name), startTime(getCurrentSystemTime()) { }
+		SoraAutoProfile(const char* name): 
+        sName(name), 
+        time(sora::SoraTimestamp()) {
+        }
+        
 		~SoraAutoProfile() {
-			uint64 endTime = getCurrentSystemTime();
-			uint64 elapsedtime = endTime - startTime;
-			
-			SORA_PROFILER->storeProfile(sName, elapsedtime);
+			SoraProfiler->storeProfile(sName, time.elapsed());
 		}
 		
 		const char* sName;
-		uint64 startTime;
+        SoraTimestamp time;
 	};
 	
 	#define PROFILE(name) SoraAutoProfile(name)

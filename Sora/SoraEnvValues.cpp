@@ -121,14 +121,14 @@ namespace sora {
 	void SoraEnvValues::setValue(SoraStringId name, const std::string& val) {
 		VALUE_STORE myData;
 		myData.VALUE_TYPE = VALUE_STRING;
-		myData.data.stringVal = str2id(val);
+		myData.data.stringVal = GetUniqueStringId(val);
 		values[name] = myData;
 	}
 	
 	void SoraEnvValues::setValue(SoraStringId name, const std::wstring& val) {
 		VALUE_STORE myData;
 		myData.VALUE_TYPE = VALUE_STRING;
-		myData.data.stringVal = str2id(val);
+		myData.data.stringVal = GetUniqueStringId(val);
 		values[name] = myData;
 	}
 	
@@ -140,61 +140,61 @@ namespace sora {
 	}
 	
 	bool SoraEnvValues::getBool(const std::string& name, bool defaultVal) {
-		SoraStringId sname = str2id(name);
+		SoraStringId sname = GetUniqueStringId(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	int32 SoraEnvValues::getInt(const std::string& name, int32 defaultVal) {
-		SoraStringId sname = str2id(name);
+		SoraStringId sname = GetUniqueStringId(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	float	SoraEnvValues::getFloat(const std::string& name, float defaultVal) {
-		SoraStringId sname = str2id(name);
+		SoraStringId sname = GetUniqueStringId(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	std::string	SoraEnvValues::getString(const std::string& name, const std::string& defaultVal) {
-		SoraStringId sname = str2id(name);
+		SoraStringId sname = GetUniqueStringId(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	std::wstring SoraEnvValues::getWString(const std::string& name, const std::wstring& defaultVal) {
-		SoraStringId sname = str2id(name);
+		SoraStringId sname = GetUniqueStringId(name);
 		return getValue(sname, defaultVal);
 	}
 	
 	void* SoraEnvValues::getData(const std::string& name) {
-		SoraStringId sname = str2id(name);
+		SoraStringId sname = GetUniqueStringId(name);
 		return getValue(sname);
 	}
 	
 	void SoraEnvValues::setBool(const std::string& name, bool val) {
-		setValue(str2id(name), val);
+		setValue(GetUniqueStringId(name), val);
 	}
 	
 	void SoraEnvValues::setInt(const std::string& name, int32 val) {
-		setValue(str2id(name), val);
+		setValue(GetUniqueStringId(name), val);
 	}
 	
 	void SoraEnvValues::setFloat(const std::string& name, float val) {
-		setValue(str2id(name), val);
+		setValue(GetUniqueStringId(name), val);
 	}
 	
 	void SoraEnvValues::setString(const std::string& name, const std::string& val) {
-		setValue(str2id(name), val);
+		setValue(GetUniqueStringId(name), val);
 	}
 	
 	void SoraEnvValues::setWString(const std::string& name, const std::wstring& val) {
-		setValue(str2id(name), val);
+		setValue(GetUniqueStringId(name), val);
 	}
 	
 	void SoraEnvValues::setData(const std::string& name, void* data) {
-		setValue(str2id(name), data);
+		setValue(GetUniqueStringId(name), data);
 	}
 	
 	void SoraEnvValues::removeData(const std::string& name) {
-		setValue(str2id(name), (void*)NULL);
+		setValue(GetUniqueStringId(name), (void*)NULL);
 	}
 	
 	void SoraEnvValues::removeData(SoraStringId name) {

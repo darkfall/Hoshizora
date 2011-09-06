@@ -66,7 +66,7 @@ namespace sora {
     }
     
     gcn::Widget* JsonGui::getWidget(const SoraString& name) {
-        WIDGET_MAP::iterator itWidget = widgets.find(str2id(name));
+        WIDGET_MAP::iterator itWidget = widgets.find(GetUniqueStringId(name));
         if(itWidget != widgets.end()) {
             return itWidget->second;
         }
@@ -74,7 +74,7 @@ namespace sora {
     }
     
     void JsonGui::registerParseFunc(const SoraString& name, JsonGuiParseFunc func) {
-        extensionFuncs[str2id(name)] = func;
+        extensionFuncs[GetUniqueStringId(name)] = func;
     }
 	
 	void JsonGui::_parseWidget(const char* name, const Json::Value& val, gcn::Widget* parent) {
@@ -106,7 +106,7 @@ namespace sora {
 			parseDropDown(val, parent);
 		}
 		else {
-			EXTENSION_FUNC_MAP::iterator itFunc = extensionFuncs.find(str2id(name));
+			EXTENSION_FUNC_MAP::iterator itFunc = extensionFuncs.find(GetUniqueStringId(name));
 			if(itFunc != extensionFuncs.end()) {
 				itFunc->second(val, parent, this);
 			}
@@ -244,7 +244,7 @@ namespace sora {
 		
         addToParent(c, parent);
         if(name.size() != 0)
-			widgets[str2id(name)] = c;
+			widgets[GetUniqueStringId(name)] = c;
     }
     
     void JsonGui::parseWindow(const Json::Value& val, gcn::Widget* parent) {
@@ -287,7 +287,7 @@ namespace sora {
                 
         addToParent(window, parent);
         if(name.size() != 0)
-			widgets[str2id(name)] = window;
+			widgets[GetUniqueStringId(name)] = window;
     }
     
     void JsonGui::parseButton(const Json::Value& val, gcn::Widget* parent) {
@@ -316,7 +316,7 @@ namespace sora {
 		
         addToParent(button, parent);
         if(name.size() != 0)
-			widgets[str2id(name)] = button;
+			widgets[GetUniqueStringId(name)] = button;
     }
     
     void JsonGui::parseSlider(const Json::Value& val, gcn::Widget* parent) {
@@ -351,7 +351,7 @@ namespace sora {
         
         addToParent(slider, parent);
         if(name.size() != 0)
-			widgets[str2id(name)] = slider;
+			widgets[GetUniqueStringId(name)] = slider;
     }
 	
 	void JsonGui::parseLabelModifier(const Json::Value& modifier, gcn::Label* label) {
@@ -406,7 +406,7 @@ namespace sora {
         
         addToParent(label, parent);
 		if(name.size() != 0)
-			widgets[str2id(name)] = label;
+			widgets[GetUniqueStringId(name)] = label;
     }
     
     void JsonGui::parseImageButton(const Json::Value& val, gcn::Widget* parent) {
@@ -427,7 +427,7 @@ namespace sora {
             
             addToParent(pButton, parent);
             if(name.size() != 0)
-				widgets[str2id(name)] = pButton;
+				widgets[GetUniqueStringId(name)] = pButton;
         }
     }
     
@@ -451,7 +451,7 @@ namespace sora {
             
             addToParent(icon, parent);
             if(name.size() != 0)
-				widgets[str2id(name)] = icon;
+				widgets[GetUniqueStringId(name)] = icon;
         }
     }
     
@@ -473,7 +473,7 @@ namespace sora {
 
         addToParent(checkbox, parent);
         if(name.size() != 0)
-			widgets[str2id(name)] = checkbox;
+			widgets[GetUniqueStringId(name)] = checkbox;
     }
     
     void JsonGui::parseTextBox(const Json::Value& val, gcn::Widget* parent) {
@@ -498,7 +498,7 @@ namespace sora {
         
         addToParent(textbox, parent);
         if(name.size() != 0)
-			widgets[str2id(name)] = textbox;
+			widgets[GetUniqueStringId(name)] = textbox;
     }
     
     void JsonGui::parseTextField(const Json::Value& val, gcn::Widget* parent) {
@@ -520,7 +520,7 @@ namespace sora {
         
         addToParent(textField, parent);
         if(name.size() != 0)
-			widgets[str2id(name)] = textField;
+			widgets[GetUniqueStringId(name)] = textField;
     }
     
     void JsonGui::parseRadioButton(const Json::Value& val, gcn::Widget* parent) {
@@ -543,7 +543,7 @@ namespace sora {
         
         addToParent(radio, parent);
         if(name.size() != 0)
-			widgets[str2id(name)] = radio;
+			widgets[GetUniqueStringId(name)] = radio;
     }
 	
 	void JsonGui::parseListBox(const Json::Value& val, gcn::Widget* parent) {
@@ -574,7 +574,7 @@ namespace sora {
 		parseDefaults(val, listbox);
 		addToParent(listbox, parent);
 		if(name.size() != 0)
-			widgets[str2id(name)] = listbox;
+			widgets[GetUniqueStringId(name)] = listbox;
 	}
 	
 	void JsonGui::parseDropDown(const Json::Value& val, gcn::Widget* parent) {
@@ -605,7 +605,7 @@ namespace sora {
 		parseDefaults(val, dropdown);
 		addToParent(dropdown, parent);
 		if(name.size() != 0)
-			widgets[str2id(name)] = dropdown;
+			widgets[GetUniqueStringId(name)] = dropdown;
 	}
     
     int JsonGui::parseRespondType(const char* respondStr) {

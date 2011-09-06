@@ -54,7 +54,7 @@ namespace sora {
         SoraPropertyBase* getProperty(const DynRttiClassKeyType& pid) const;
         
     private:
-        typedef std::map<SoraString, SoraComponent*> ComponentMap;
+        typedef hash_map<SoraString, SoraComponent*> ComponentMap;
         ComponentMap mComponents;
     };
     

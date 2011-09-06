@@ -21,7 +21,7 @@ namespace sora {
 		NSData* pSData              =   [ nsstr dataUsingEncoding : pEncode ];    
 		
         std::wstring result = std::wstring ( (wchar_t*) [ pSData bytes ], [ pSData length] / sizeof ( wchar_t ) ); 
-
+        [pSData release];
         [nsstr release];
         return result;
 	}

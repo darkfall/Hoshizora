@@ -109,7 +109,7 @@ namespace sora {
         }
         
         static std::string resourceImpl() {
-            return osxApplicationPath()+"/Resources/";
+            return osxApplicationPath()+"/Contents/Resources/";
         }
         
         static std::string writtableImpl() {

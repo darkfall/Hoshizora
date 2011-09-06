@@ -95,7 +95,7 @@ namespace sora {
 		PROFILE_CONT profiles;
 	};
 	
-	static SoraGlobalProfiler* SORA_PROFILER = SoraGlobalProfiler::Instance();
+	static SoraGlobalProfiler* SoraProfiler = SoraGlobalProfiler::Instance();
 	
 	
 } // namespace sora

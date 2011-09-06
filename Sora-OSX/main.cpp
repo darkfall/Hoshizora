@@ -50,9 +50,11 @@ public:
     bool isConsoleApp() { return true; }
 };
 
+#include "HashStringMap.h"
+#include "debug/SoraAutoProfile.h"
+
 int main(int argc, char* argv[]) {    
 
-        
     sora::InitAndCreateSoraCore(new mainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */
                                                         false,

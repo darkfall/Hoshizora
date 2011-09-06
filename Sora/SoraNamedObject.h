@@ -26,7 +26,7 @@ namespace sora {
 	class SORA_API SoraNamedObject {
 	public:
 		SoraNamedObject(): mName(0) {}
-		SoraNamedObject(const SoraString& _name): mName(str2id(_name)) {}
+		SoraNamedObject(const SoraString& _name): mName(GetUniqueStringId(_name)) {}
 		SoraNamedObject(SoraStringId sid): mName(sid) {}
 		virtual ~SoraNamedObject() {}
 		

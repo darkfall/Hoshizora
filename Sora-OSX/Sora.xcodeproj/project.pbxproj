@@ -1306,6 +1306,7 @@
 		88DCE61E13666885005FBBE0 /* md5lib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5lib.cpp; sourceTree = "<group>"; };
 		88DCE61F13666885005FBBE0 /* md5lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5lib.h; sourceTree = "<group>"; };
 		88DCE62013666885005FBBE0 /* sort.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sort.hh; sourceTree = "<group>"; };
+		88DCF3171415A43C00843E58 /* HashStringMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashStringMap.h; sourceTree = "<group>"; };
 		88DD0CB112EB77A5005555F6 /* SoraTimer_OSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTimer_OSX.h; sourceTree = "<group>"; };
 		88DD0CBA12EB9311005555F6 /* orz.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = orz.c; sourceTree = "<group>"; };
 		88DD0CBB12EB9311005555F6 /* orz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orz.h; sourceTree = "<group>"; };
@@ -1376,6 +1377,7 @@
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 				8811389E12CC424000C648C7 /* mainWindow.h */,
 				887C59CA13D00CF90009E508 /* mainWindow.cpp */,
+				88DCF3171415A43C00843E58 /* HashStringMap.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";

@@ -32,7 +32,7 @@ namespace sora {
     }
     
     void SoraFastRenderer::renderSprite(const SoraWString& path, float x, float y) {
-        SoraStringId sid = GetUniqueStringId(path);
+        SoraStringId sid = GetUniqueStringId(path, false);
         
         SpriteCacheMap::iterator itSprite = mSpriteCache.find(sid);
         if(itSprite != mSpriteCache.end()) {

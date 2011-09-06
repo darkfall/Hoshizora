@@ -45,7 +45,7 @@ namespace sora {
 		}
 
 		void add(const SoraWString& key, SoraTextureHandle tex) {			
-			SoraStringId uiKey = str2id(key);
+			SoraStringId uiKey = GetUniqueStringId(key);
 			TEX_MAP::iterator pos = texMap.find(uiKey);
 			if(pos == texMap.end()) {
 				texMap[uiKey] = tex;
@@ -85,7 +85,7 @@ namespace sora {
 		}
 		
 		void addRf(const SoraWString& key) {
-			SoraStringId uiKey = str2id(key);
+			SoraStringId uiKey = GetUniqueStringId(key);
 			texRefs[uiKey]++;
 		}
 		
@@ -110,7 +110,7 @@ namespace sora {
 		}
 		
 		SoraTextureHandle get(const SoraWString& key) {
-			SoraStringId uiKey = str2id(key);
+			SoraStringId uiKey = GetUniqueStringId(key);
 			TEX_MAP::iterator p = texMap.find(uiKey);
 			if(p != texMap.end()) {
 				//SoraTexture* tex = (SoraTexture*)p->second;

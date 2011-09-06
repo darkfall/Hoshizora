@@ -25,7 +25,7 @@ namespace sora {
 		return (hash & 0x7FFFFFFF);
 	}
 
-	inline unsigned int BKDRHashW(const wchar_t* str) {
+	inline unsigned int BKDRHash(const wchar_t* str) {
 		unsigned int seed = 131; // 31 131 1313 13131 131313 etc..
 		unsigned int hash = 0;
 	

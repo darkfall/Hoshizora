@@ -19,7 +19,7 @@ namespace sora {
 	unsigned¡¡long¡¡long¡¡num=100ULL;
 	*/
     
-    // str2id("xxx") constants
+    // GetUniqueStringId("xxx") constants
     static const uint64 STR_ID_PLAY_STARTED      = 18446744072169310163ULL;
     static const uint64 STR_ID_PLAY_ENDED        = 18446744071516978624ULL;
     static const uint64 STR_ID_PLAY_PAUSED       = 18446744070414540033ULL;

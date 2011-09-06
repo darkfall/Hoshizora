@@ -45,7 +45,7 @@ namespace sora {
         SoraPropertyBase* removeProperty(const std::string& name, bool release=false);
         void removeAllProperties();
         
-        typedef std::map<std::string, SoraPropertyBase*> PropertyMap;
+        typedef hash_map<std::string, SoraPropertyBase*> PropertyMap;
         const PropertyMap& getProperties() const;
         
         size_t size() const;

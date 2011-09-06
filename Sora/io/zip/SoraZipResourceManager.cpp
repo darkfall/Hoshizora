@@ -20,6 +20,10 @@ namespace sora {
 	}
 
 	void SoraZipResourceManager::attachResourcePack(SoraResourceHandle file) {
+        RESOURCE_PACK::iterator it = resourcePacks.find(file);
+        if(it != resourcePacks.end()) 
+            return;
+        
 		SoraAutoPtr<SoraZipFile> t((SoraZipFile*)file);
 		resourcePacks[(ulong32)file] = t;
 	}

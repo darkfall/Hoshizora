@@ -868,7 +868,7 @@ namespace sora {
 		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
 			SoraSprite* pspr = new SoraSprite(tex);
-			pspr->setName(str2id(sPath));
+			pspr->setName(GetUniqueStringId(sPath));
 			return pspr;
 		} else {
 			tex = createTexture(sPath);
@@ -876,7 +876,7 @@ namespace sora {
 				return new SoraSprite(tex);
 			else {
 				SoraSprite* pspr = new SoraSprite(tex);
-				pspr->setName(str2id(sPath));
+				pspr->setName(GetUniqueStringId(sPath));
 				return pspr;
 			}
 		}
