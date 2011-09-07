@@ -24,33 +24,7 @@ LUA_EXTERN_C_END
 // Extended by Darkfall
 // 2009 - 2010 GameMaster
 #include <string>
-using std::string;
-using std::wstring;
-	static string wideString2String(const wstring& ws) {
-		string curLocale = setlocale(LC_ALL, NULL);        // curLocale = "C";
-		setlocale(LC_ALL, "chs");
-		const wchar_t* _Source = ws.c_str();
-		size_t _Dsize = 2 * ws.size() + 1;
-		char *_Dest = new char[_Dsize];
-		memset(_Dest,0,_Dsize);
-		wcstombs(_Dest,_Source,_Dsize);
-		string result = _Dest;
-		delete []_Dest;
-		setlocale(LC_ALL, curLocale.c_str());
-		return result;
-	}
-	static wstring string2WideString(const string& s) {
-		setlocale(LC_ALL, "chs"); 
-		const char* _Source = s.c_str();
-		size_t _Dsize = s.size() + 1;
-		wchar_t *_Dest = new wchar_t[_Dsize];
-		wmemset(_Dest, 0, _Dsize);
-		mbstowcs(_Dest,_Source,_Dsize);
-		wstring result = _Dest;
-		delete []_Dest;
-		setlocale(LC_ALL, "C");
-		return result;
-	}
+#include "SoraString.h"
 
 // LuaPlus Call Dispatcher
 namespace LPCD
@@ -92,8 +66,9 @@ namespace LPCD
 	inline void Push(lua_State* L, double value)			{  lua_pushnumber(L, (lua_Number)value);  }
 	inline void Push(lua_State* L, float value)				{  lua_pushnumber(L, (lua_Number)value);  }
 	inline void Push(lua_State* L, const char* value)		{  lua_pushstring(L, value);  }
-	inline void Push(lua_State* L, const string& value)		{  lua_pushstring(L, value.c_str()); }
-	inline void Push(lua_State* L, const wstring& value)	{  lua_pushstring(L, wideString2String(value).c_str()); }
+	inline void Push(lua_State* L, const std::string& value)	{  lua_pushstring(L, value.c_str()); }
+	inline void Push(lua_State* L, const std::wstring& value)	{  lua_pushstring(L, sora::ws2s(value).c_str()); }
+    inline void Push(lua_State* L, const ::sora::util::String& value)   {  lua_pushstring(L, ((std::string)value).c_str()); }
 	inline void Push(lua_State* L, const LuaNil&)			{  lua_pushnil(L);  }
 	inline void Push(lua_State* L, lua_CFunction value)		{  lua_pushcclosure(L, value, 0);  }
 	inline void Push(lua_State* L, const void* value)		{  lua_pushlightuserdata(L, (void*)value);  }
@@ -126,14 +101,18 @@ namespace LPCD
 		{  int type = lua_type(L, idx);  return type == LUA_TNUMBER;  }
 	inline bool	Match(TypeWrapper<const char*>, lua_State* L, int idx)
 		{  return lua_type(L, idx) == LUA_TSTRING;  }
-	inline bool Match(TypeWrapper<string>, lua_State* L, int idx)
+	inline bool Match(TypeWrapper<std::string>, lua_State* L, int idx)
 		{ return lua_type(L, idx) == LUA_TSTRING; }
-	inline bool Match(TypeWrapper<wstring>, lua_State* L, int idx)
+	inline bool Match(TypeWrapper<std::wstring>, lua_State* L, int idx)
 		{ return lua_type(L, idx) == LUA_TSTRING; }
-	inline bool Match(TypeWrapper<const string&>, lua_State* L, int idx)
+    inline bool Match(TypeWrapper<sora::util::String>, lua_State* L, int idx)
+        { return lua_type(L, idx) == LUA_TSTRING; }
+	inline bool Match(TypeWrapper<const std::string&>, lua_State* L, int idx)
 		{ return lua_type(L, idx) == LUA_TSTRING; }
-	inline bool Match(TypeWrapper<const wstring&>, lua_State* L, int idx)
+	inline bool Match(TypeWrapper<const std::wstring&>, lua_State* L, int idx)
 		{ return lua_type(L, idx) == LUA_TSTRING; }
+    inline bool Match(TypeWrapper<const sora::util::String&>, lua_State* L, int idx)
+        { return lua_type(L, idx) == LUA_TSTRING; }
 	inline bool	Match(TypeWrapper<lua_State*>, lua_State* L, int idx)
 		{  return lua_type(L, idx) == LUA_TNONE;  }
 	inline bool	Match(TypeWrapper<void*>, lua_State* L, int idx)
@@ -165,14 +144,18 @@ namespace LPCD
 		{  return static_cast<double>(lua_tonumber(L, idx));  }
 	inline const char*		Get(TypeWrapper<const char*>, lua_State* L, int idx)
 		{  return static_cast<const char*>(lua_tostring(L, idx));  }
-	inline string		Get(TypeWrapper<string>, lua_State* L, int idx)
+	inline std::string		Get(TypeWrapper<std::string>, lua_State* L, int idx)
 		{ return static_cast<const char*>(lua_tostring(L, idx)); }
-	inline string		Get(TypeWrapper<const string&>, lua_State* L, int idx)
+	inline std::string		Get(TypeWrapper<const std::string&>, lua_State* L, int idx)
 		{ return static_cast<const char*>(lua_tostring(L, idx)); }
-	inline wstring	Get(TypeWrapper<wstring>, lua_State* L, int idx)
-		{ return string2WideString(static_cast<const char*>(lua_tostring(L, idx))); }
-	inline wstring	Get(TypeWrapper<const wstring&>, lua_State* L, int idx)
-		{ return string2WideString(static_cast<const char*>(lua_tostring(L, idx))); }
+    inline sora::util::String		Get(TypeWrapper<sora::util::String>, lua_State* L, int idx)
+        { return static_cast<const char*>(lua_tostring(L, idx)); }
+	inline std::wstring	Get(TypeWrapper<std::wstring>, lua_State* L, int idx)
+        { return sora::s2ws(static_cast<const char*>(lua_tostring(L, idx))); }
+	inline std::wstring	Get(TypeWrapper<const std::wstring&>, lua_State* L, int idx)
+		{ return sora::s2ws(static_cast<const char*>(lua_tostring(L, idx))); }
+    inline sora::util::String	Get(TypeWrapper<const sora::util::String&>, lua_State* L, int idx)
+        { return static_cast<const char*>(lua_tostring(L, idx)); }
 	inline LuaNil			Get(TypeWrapper<LuaNil>, lua_State* L, int idx)
 		{  (void)L, (void)idx;  return LuaNil();  }
 	inline lua_CFunction	Get(TypeWrapper<lua_CFunction>, lua_State* L, int idx)

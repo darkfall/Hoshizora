@@ -12,6 +12,7 @@
 #include "SoraPlatform.h"
 #include "SoraAny.h"
 #include "SoraStringId.h"
+
 #include <string>
 #include <map>
 
@@ -107,7 +108,6 @@ namespace sora {
         void set##name(type val) { \
             pref##name = val; \
         }
-
     
 } // namespace sora
 

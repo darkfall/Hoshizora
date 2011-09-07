@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include "SoraPlatform.h"
+#include "SoraString.h"
 
 namespace sora {
 
@@ -23,16 +24,16 @@ namespace sora {
             mIsOpen = flag;
         }
         
-        SoraWString getFilePath() const {
+        StringType getFilePath() const {
             return mFilePath;
         }
         
-        void setFilePath(const SoraWString& path) {
+        void setFilePath(const StringType& path) {
             mFilePath = path;
         }
 
 	private:
-		SoraWString mFilePath;
+		StringType mFilePath;
 
 		bool mIsOpen;
 	};

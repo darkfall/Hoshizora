@@ -23,12 +23,14 @@
 #include "SoraInputListeners.h"
 #include "SoraHotkey.h"
 #include "SoraLogger.h"
+#include "SoraString.h"
 
 #include "timer/ITimerManager.h"
 
 #include <map>
 
 namespace sora {
+    
     
 	class SORA_API SoraCore: public SoraEventHandler {
 	protected:
@@ -99,7 +101,7 @@ namespace sora {
         SoraFontManager*    getFontManager() const;
         SoraSoundSystem*    getSoundSystem() const;
         
-		void        registerPlugin         (SoraPlugin* pPlugin);
+		void        registerPlugin  (SoraPlugin* pPlugin);
 		SoraPlugin* unistallPlugin  (SoraPlugin* pPlugin);
 		SoraPlugin* unistallPlugin  (const SoraString& sPluginName);
 		SoraPlugin* getPlugin		(const SoraString& sPluginName);
@@ -126,10 +128,10 @@ namespace sora {
 		void endScene();
 
 		SoraTargetHandle     createTarget(int width, int height, bool zbuffer=true);
-		void            freeTarget(ulong32 t);
+		void                 freeTarget(ulong32 t);
 		SoraTextureHandle    getTargetTexture(ulong32 t);
 
-		SoraTextureHandle createTexture(const SoraWString& sTexturePath, bool bCache=true, bool bMipmap=false);
+		SoraTextureHandle createTexture(const StringType& sTexturePath, bool bCache=true, bool bMipmap=false);
 		SoraTextureHandle createTextureWH(int32 w, int32 h);
 		SoraTextureHandle createTextureFromRawData(uint32* data, int32 w, int32 h);
 		SoraTextureHandle createTextureFromMem(void* data, ulong32 size);
@@ -146,8 +148,8 @@ namespace sora {
 		void                attachShaderContext(SoraShaderContext* context);
 		void                detachShaderContext();
 
-		SoraSprite* createSprite (const SoraWString& sPath);
-        void renderSprite(const SoraWString& path, float x=0.f, float y=0.f);
+		SoraSprite* createSprite (const StringType& sPath);
+        void renderSprite(const StringType& path, float x=0.f, float y=0.f);
 
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
@@ -213,19 +215,19 @@ namespace sora {
 		int32 getScreenWidth();
 		int32 getScreenHeight();
 
-		HSORARESOURCE loadResourcePack	(const SoraWString& file);
-		void	attachResourcePack		(HSORARESOURCE pfile);
-		void	detachResourcePack		(HSORARESOURCE handle);
-		void*	getResourceFile         (const SoraWString& file, ulong32& size);
-		void*	readResourceFile		(const SoraWString& file, ulong32 size);
-		ulong32 getResourceFileSize     (const SoraWString& file);
-		void	freeResourceFile		(void* p);
-		void	enumFilesInFolder		(std::vector<SoraWString>& cont, const SoraWString& folder);
+		SoraResourceHandle  loadResourcePack        (const StringType& file);
+		void                attachResourcePack		(SoraResourceHandle pfile);
+		void                detachResourcePack		(SoraResourceHandle handle);
+		void*               getResourceFile         (const StringType& file, ulong32& size);
+		void*               readResourceFile		(const StringType& file, ulong32 size);
+		ulong32             getResourceFileSize     (const StringType& file);
+		void                freeResourceFile		(void* p);
+		void                enumFilesInFolder		(std::vector<SoraWString>& cont, const StringType& folder);
 	
-		bool    isMainWindowSet() { return bMainWindowSet; }
+		bool    isMainWindowSet();
 		bool    createWindow(SoraWindowInfoBase* info);
 		void    setWindowSize(int32 w, int32 h);
-		void    setWindowTitle(const SoraWString& title);
+		void    setWindowTitle(const StringType& title);
 		void    setWindowPos(int32 px, int32 py);
 		void    setFullscreen(bool flag);
 		bool    isFullscreen();
@@ -260,20 +262,18 @@ namespace sora {
 		
 		void	simulateKey(int32 key, int32 state);
 
-		int32	messageBox	(const SoraString& sMssg, const SoraString& sTitle, int32 iCode);
-		int32	messageBoxW (const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode);
-		void	log         (const SoraString& sMssg, int32 level=LOG_LEVEL_NORMAL);
-		void	logw		(const SoraWString& sMssg, int32 level=LOG_LEVEL_NORMAL);
+		int32	messageBox  (const StringType& sMssg, const StringType& sTitle, int32 iCode);
+		void	log         (const StringType& sMssg, int32 level=LOG_LEVEL_NORMAL);
 		void	logf		(const char* str, ...);
 		
-		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
-		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
+		StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
+		StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
 
-		SoraFont*   createFont(const SoraWString& fontName, int size);
+		SoraFont*   createFont(const StringType& fontName, int size);
 		void        releaseFont(SoraFont* font);
 		
-		SoraMusicFile* 			createMusicFile(const SoraWString& musicName, bool bStream=true);
-		SoraSoundEffectFile* 	createSoundEffectFile(const SoraWString& se);
+		SoraMusicFile* 			createMusicFile(const StringType& musicName, bool bStream=true);
+		SoraSoundEffectFile* 	createSoundEffectFile(const StringType& se);
         SoraMusicFile* 			createMusicFile(bool bStream=false);
         SoraSoundEffectFile* 	createSoundEffectFile();
         
@@ -293,9 +293,9 @@ namespace sora {
 		 for directX, return (ulong32)(pD3DDevice)
 		 for ogl, just return (ulong32)(this)
 		 */
-		ulong32		getVideoDeviceHandle();
-		SoraWString videoInfo();
-		void		flush();
+		ulong32		 getVideoDeviceHandle();
+		StringType videoInfo();
+		void		 flush();
 
 		void postError(const SoraString& sMssg);
 

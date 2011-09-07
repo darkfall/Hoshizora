@@ -14,6 +14,7 @@
 #include "SoraFileUtility.h"
 #include "SoraStringId.h"
 #include "SoraLogger.h"
+#include "SoraPath.h"
 #include "util/SoraHash.h"
 
 #include <map>
@@ -25,34 +26,35 @@ namespace sora {
 		SoraFolderResourceManager();
 		~SoraFolderResourceManager() {}
 		
-		HSORARESOURCE	loadResourcePack	(const SoraWString& folder);
-		void			attachResourcePack	(HSORARESOURCE handle);
-		void			detachResourcePack  (HSORARESOURCE handle);
+		SoraResourceHandle	loadResourcePack	(const StringType& folder);
+		void                attachResourcePack  (SoraResourceHandle handle);
+		void                detachResourcePack  (SoraResourceHandle handle);
 		
-		void* readResourceFile(const SoraWString& file, ulong32 size);
-		void* getResourceFile(const SoraWString& file, ulong32& size);
-		ulong32 getResourceFileSize(const SoraWString& file);
-		void freeResourceFile(void* p);
+		void*   readResourceFile(const StringType& file, ulong32 size);
+		void*   getResourceFile(const StringType& file, ulong32& size);
+		ulong32 getResourceFileSize(const StringType& file);
+		void    freeResourceFile(void* p);
 		
-		SoraWString getName() const		{ return L"FolderRM"; }
-		SoraWString getFormat() const	{ return L""; }
-		bool isFormatSupported(const SoraWString& format) const { return format.size()==0; }
+		StringType getName() const		{ return "FolderRM"; }
+		bool isFormatSupported(const StringType& format) const { return format.size() == 0; }
 		
-		bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
+		bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder);
 	private:
 		struct folderDescription {
-			SoraWString folderName;
+			SoraPath folderName;
 			SoraStringId folderHash;
-			folderDescription(const SoraWString& folder): folderName(folder), folderHash(crc32(folder)) {}
+			folderDescription(const StringType& folder): folderName(folder.get()), folderHash(crc32(folder.get())) {
+                folderName.makeDirectory();
+            }
 		};
 		typedef std::vector<folderDescription> FOLDER_CONT;
 		FOLDER_CONT folders;
-		SoraWString applicationPath;
+		StringType applicationPath;
 		
 		typedef std::map</*fileNameHash*/SoraStringId, /*fileFullPath*/SoraWString> FILE_CACHE;
 		FILE_CACHE fileCache;
 		
-		inline SoraWString getFullPath(const SoraWString& fileName);
+		inline StringType getFullPath(const StringType& fileName);
 	};
 
 	

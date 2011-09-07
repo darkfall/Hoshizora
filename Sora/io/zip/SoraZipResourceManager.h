@@ -21,22 +21,21 @@ namespace sora {
 	public:
 		~SoraZipResourceManager();
 
-		SoraResourceHandle	loadResourcePack	(const SoraWString& file);
-		void			attachResourcePack	(SoraResourceHandle handle);
-		void			detachResourcePack  (SoraResourceHandle handle);
-		SoraZipFile*	getResourcePack		(SoraResourceHandle handle);
+		SoraResourceHandle	loadResourcePack	(const StringType& file);
+		void			attachResourcePack      (SoraResourceHandle handle);
+		void			detachResourcePack      (SoraResourceHandle handle);
+		SoraZipFile*	getResourcePack         (SoraResourceHandle handle);
 
-		void* readResourceFile				(const SoraWString& file, ulong32 size);
-		void* getResourceFile				(const SoraWString& file, ulong32& size);
-		ulong32 getResourceFileSize	(const SoraWString& file);
-		ulong32 getResourceFileCRC	(const SoraWString& file);
+		void* readResourceFile				(const StringType& file, ulong32 size);
+		void* getResourceFile				(const StringType& file, ulong32& size);
+		ulong32 getResourceFileSize	(const StringType& file);
+		ulong32 getResourceFileCRC	(const StringType& file);
 		void  freeResourceFile(void* p);
 		
-		SoraWString getName() const { return L"ZipRM"; }
-		SoraWString getFormat() const { return L"zip;rfResource"; }
-		bool isFormatSupported(const SoraWString& format) const;
+		StringType getName() const { return "ZipRM"; }
+		bool isFormatSupported(const StringType& format) const;
 		
-		bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
+		bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder);
 		
 	private:
 		RESOURCE_PACK resourcePacks;

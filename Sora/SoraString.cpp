@@ -37,122 +37,27 @@ namespace sora {
             
         }
         
-        inline std::string String::get() const {
-            return mString;
-        }
         
-        inline std::wstring String::getw() const {
-            return s2ws(mString);
-        }
-        
-        inline const char* String::c_str() const {
-            return mString.c_str();
-        }
-        
-        inline const wchar_t* String::wc_str() const {
-            return s2ws(mString).c_str();
-        }
-        
-        inline uint64 String::uniqieId() const {
+        uint64 String::uniqueId() const {
             return GetUniqueStringId(mString);
         }
-        
-        inline void String::set(const std::string& str) {
-            mString = str;
-        }
-        
-        inline void String::set(const std::wstring& str) {
-            mString = ws2s(str); 
-        }
-        
-        inline void String::set(const char* str) {
-            mString = str;
-        }
-        
-        inline void String::set(const wchar_t* str) {
-            mString = ws2s(str);
-        }
-        
-        inline String& String::operator=(const std::string& str) {
-             mString = str;
-            return *this;
-        }
-        
-        inline String& String::operator=(const std::wstring& str) {
-            mString = ws2s(str);
-            return *this;
-        }
-        
-        inline String& String::operator=(const char* str) {
-            mString = str;
-            return *this;
-        }
-        
-        inline String& String::operator=(const wchar_t* str) {
-            mString = ws2s(str);
-            return *this;
-        }
-        
-        inline String& String::operator=(const String& str) {
-            mString = str.mString;
-            return *this;
-        }
-        
-        String String::operator+(const std::string& str) const {
-            return mString + str;
-        }
-        
-        String String::operator+(const std::wstring& str) const {
-            return mString + ws2s(str);
-        }
-        
-        String& String::operator+=(const std::string& str) {
-            mString += str;
-            return *this;
-        }
-        
-        String& String::operator+=(const std::wstring& str) {
-            mString += ws2s(str);
-            return *this;
-        }
-        
-        String String::operator+(const char* str) const {
-            return mString + str;
-        }
-        
-        String String::operator+(const wchar_t* str) const {
-            return mString + ws2s(str);
-        }
-        
-        String& String::operator+=(const char* str) {
-            mString += str;
-            return *this;
-        }
-        
-        String& String::operator+=(const wchar_t* str) {
-            mString += ws2s(str);
-            return *this;
-        }
-        
+       
         char String::operator[](size_t index) const {
             return static_cast<char>(mString[index]);
         }
         
-        char String::operator[](int index) const {
-            return static_cast<char>(mString[index]);
-        }
-        
-        char String::at(size_t index) {
+        char String::at(size_t index) const {
             return static_cast<char>(mString[index]); 
         }
         
-        wchar_t String::wat(size_t index) {
+        wchar_t String::wat(size_t index) const {
             return mString[index];
         }
         
-        size_t String::size() {
+        size_t String::size() const {
             return mString.size();
         }
+
         
     }
     

@@ -481,7 +481,7 @@ void loadParticleSprite(const SoraWString& path) {
 	delete pspr;
 	pspr = SORA->createSprite(path);
 	if(pspr == NULL) {
-		SORA->messageBoxW(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
+		SORA->messageBox(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
 		pspr = SORA->createSprite(L"pics/particles.png");
 	}
 
@@ -495,7 +495,7 @@ void loadBGSprite(const SoraWString& path) {
 		delete pbgSpr;
 	pbgSpr = SORA->createSprite(path);
 	if(pbgSpr == NULL) {
-		SORA->messageBoxW(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
+		SORA->messageBox(L"Error loading sprite "+path, L"Error", MB_OK | MB_ICONERROR);
 	}
 	
 	/*float scale1 = 1.0, scale2 = 1.0;

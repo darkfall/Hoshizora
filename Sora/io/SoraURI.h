@@ -66,7 +66,7 @@ namespace sora {
     class SoraURI {
     public:
         SoraURI();
-        SoraURI(const util::String& s);
+        SoraURI(const StringType& s);
         SoraURI(const char* s);
         SoraURI(const SoraURI& s);
         
@@ -74,24 +74,195 @@ namespace sora {
         bool operator==(const SoraURI& rhs) const;
         bool operator!=(const SoraURI& rhs) const;
         
-        void set(const util::String& s);
-        util::String asString() const;
+        void set(const StringType& s);
+        StringType asString() const;
         
         bool isEmpty() const;
         bool isValid() const;
         
         void clear();
-        void setScheme(const util::String& s);
-        const util::String& scheme() const;
-        void setUserInfo(const util::String& s);
-        const util::String& userInfo() const;
-        void setHost(const util::String& s);
-        const util::String& host() const;
-        void setPort(const util::String& s);
-        const util::String& port() const;
-        void setLocalPath(const util::String& s);
-        const util::String& localPath(const util::String& s);
+        void setScheme(const StringType& s);
+        const StringType& scheme() const;
+        void setUserInfo(const StringType& s);
+        const StringType& userInfo() const;
+        void setHost(const StringType& s);
+        const StringType& host() const;
+        void setPort(const StringType& s);
+        const StringType& port() const;
+        void setLocalPath(const StringType& s);
+        const StringType& localPath() const;
+        void setFragment(const StringType& frag);
+        const StringType& fragment() const;
+        void setQuery(const StringType& query);
+        const StringType& query() const;
+        
+        void appendLocalPath(const StringType& path);
+        StringType getTail() const;
+        
+    private:
+        bool split(const StringType& s);
+        StringType build() const;
+        
+        bool mEmpty;
+        StringType mScheme;
+        StringType mUserInfo;
+        StringType mHost;
+        StringType mPort;
+        StringType mLocalPath;
+        StringType mFragment;
+        StringType mQuery;
     };
+    
+    inline SoraURI::SoraURI():
+    mEmpty(true) {
+        
+    }
+    
+    inline SoraURI::SoraURI(const StringType& s):
+    mEmpty(true) {
+        bool validUri = this->split(s);
+        sora_assert(validUri);
+    }
+    
+    inline SoraURI::SoraURI(const char* s):
+    mEmpty(true) {
+        sora_assert(s);
+        bool validUri = this->split(s);
+        sora_assert(validUri);
+    }
+    
+    inline SoraURI::SoraURI(const SoraURI& rhs):
+    mEmpty(rhs.mEmpty),
+    mScheme(rhs.mScheme),
+    mUserInfo(rhs.mUserInfo),
+    mHost(rhs.mHost),
+    mPort(rhs.mPort),
+    mLocalPath(rhs.mLocalPath),
+    mFragment(rhs.mFragment),
+    mQuery(rhs.mQuery) {
+        
+    }
+    
+    inline void SoraURI::operator=(const SoraURI& rhs) {
+        if(this != &rhs) {  
+            mEmpty = rhs.mEmpty;
+            mScheme = rhs.mScheme;
+            mUserInfo = rhs.mUserInfo;
+            mHost = rhs.mHost;
+            mPort = rhs.mPort;
+            mLocalPath = rhs.mLocalPath;
+            mFragment = rhs.mFragment;
+            mQuery = rhs.mQuery;
+        }
+    }
+    
+    inline bool SoraURI::operator==(const SoraURI& rhs) const {
+        if(this->mEmpty && rhs.mEmpty)
+            return true;
+        else {
+            return ((mScheme == rhs.mScheme) &&
+                    (mUserInfo == rhs.mUserInfo) &&
+                    (mHost == rhs.mHost) &&
+                    (mPort == rhs.mPort) &&
+                    (mLocalPath == rhs.mLocalPath) &&
+                    (mFragment == rhs.mFragment) &&
+                    (mQuery == rhs.mQuery));
+        }
+    }
+    
+    inline bool SoraURI::operator!=(const SoraURI& rhs) const {
+        return !(*this == rhs);
+    }
+    
+    inline bool SoraURI::isEmpty() const {
+        return mEmpty;
+    }
+    
+    inline bool SoraURI::isValid() const {
+        return !(mEmpty);
+    }
+    
+    inline void SoraURI::clear() {
+        mEmpty = true;
+        mScheme.clear();
+        mUserInfo.clear();
+        mHost.clear();
+        mPort.clear();
+        mLocalPath.clear();
+        mFragment.clear();
+        mQuery.clear();
+    }
+    
+    inline void SoraURI::set(const StringType& s) {
+        this->split(s);
+    }
+    
+    inline StringType SoraURI::asString() const {
+        return this->build();
+    }
+    
+    inline void SoraURI::setScheme(const StringType& s) {
+        mEmpty = false;
+        mScheme = s;
+    }
+    
+    inline const StringType& SoraURI::scheme() const {
+        return mScheme;
+    }
+    
+    inline void SoraURI::setUserInfo(const StringType& s) {
+        mEmpty = false;
+        mUserInfo = s;
+    }
+    
+    inline const StringType& SoraURI::userInfo() const {
+        return mUserInfo;
+    }
+    
+    inline void SoraURI::setHost(const StringType& s) {
+        mEmpty = false;
+        mHost = s;
+    }
+    
+    inline const StringType& SoraURI::host() const {
+        return mHost;
+    }
+    
+    inline void SoraURI::setPort(const StringType& s) {
+        mEmpty =false;
+        mPort = s;
+    }
+    
+    inline const StringType& SoraURI::port() const {
+        return mPort;
+    }
+    
+    inline void SoraURI::setLocalPath(const StringType& s) {
+        mEmpty = false;
+        mLocalPath = s;
+    }
+    
+    inline const StringType& SoraURI::localPath() const {
+        return mLocalPath;
+    }
+    
+    inline void SoraURI::setFragment(const StringType& s) {
+        mEmpty = false;
+        mFragment = s;
+    }
+    
+    inline const StringType& SoraURI::fragment() const {
+        return mFragment;
+    }
+    
+    inline void SoraURI::setQuery(const StringType& s) {
+        mEmpty = false;
+        mQuery = s;
+    }
+    
+    inline const StringType& SoraURI::query() const {
+        return mQuery;
+    }
     
 } // namespace sora
 

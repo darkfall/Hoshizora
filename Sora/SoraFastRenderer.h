@@ -13,6 +13,7 @@
 #include "SoraSprite.h"
 #include "SoraAutoUpdate.h"
 #include "SoraStringId.h"
+#include "SoraString.h"
 
 #include <map>
 
@@ -28,14 +29,14 @@ namespace sora {
     public:        
         static SoraFastRenderer* Instance();
      
-        void renderSprite(const SoraWString& path, float x=0.f, float y=0.f);
+        void renderSprite(const StringType& path, float x=0.f, float y=0.f);
         
         /**
          * Set the auto release of the cached sprites
          * If a sprite have not been used for a long time (larger than auto release time)
          * It would be purged from the memory
          **/
-        void    setAutoReleaseTime(float time);
+        void  setAutoReleaseTime(float time);
         float getAutoReleaseTime() const;
         
         void onUpdate(float dt);

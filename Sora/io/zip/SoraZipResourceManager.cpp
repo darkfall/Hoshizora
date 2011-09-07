@@ -7,7 +7,7 @@ namespace sora {
 		resourcePacks.clear();
 	}
 
-	SoraResourceHandle SoraZipResourceManager::loadResourcePack(const SoraWString& file) {
+	SoraResourceHandle SoraZipResourceManager::loadResourcePack(const StringType& file) {
 		SoraZipFile* pfile = new SoraZipFile;
 		if(pfile) {
 			if(pfile->open(file)) {
@@ -41,7 +41,7 @@ namespace sora {
 		return 0;
 	}
 
-	void* SoraZipResourceManager::getResourceFile(const SoraWString& file, ulong32& size) {
+	void* SoraZipResourceManager::getResourceFile(const StringType& file, ulong32& size) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
 			ulong32 s;
@@ -59,7 +59,7 @@ namespace sora {
 		if(p) delete (uint8*)(p);
 	}
 
-	ulong32 SoraZipResourceManager::getResourceFileSize(const SoraWString& file) {
+	ulong32 SoraZipResourceManager::getResourceFileSize(const StringType& file) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
 			ulong32 s;
@@ -70,7 +70,7 @@ namespace sora {
 		return 0;
 	}
 
-	ulong32 SoraZipResourceManager::getResourceFileCRC(const SoraWString& file) {
+	ulong32 SoraZipResourceManager::getResourceFileCRC(const StringType& file) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
 			ulong32 s;
@@ -81,7 +81,7 @@ namespace sora {
 		return 0;
 	}
 
-	void* SoraZipResourceManager::readResourceFile(const SoraWString& file, ulong32 size) {
+	void* SoraZipResourceManager::readResourceFile(const StringType& file, ulong32 size) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
 			ulong32 s;
@@ -92,13 +92,11 @@ namespace sora {
 		return 0;
 	}
 	
-	bool SoraZipResourceManager::isFormatSupported(const SoraWString& format) const {
-		if(getFormat().find(format) != std::string::npos) 
-			return true;
-		return false;
+	bool SoraZipResourceManager::isFormatSupported(const StringType& format) const {
+		return format.get() == "zip";
 	}
 	
-	bool SoraZipResourceManager::enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder) { 
+	bool SoraZipResourceManager::enumFiles(std::vector<SoraWString>& cont, const StringType& folder) { 
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
 			if(p->second->enumFiles(cont, folder))

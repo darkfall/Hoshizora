@@ -135,7 +135,7 @@ namespace sora {
 			} else
 				THROW_SORA_EXCEPTION(NotFoundException, "no locale ident read");
 		} else {
-			sora::SORA->messageBoxW(L"Cannot find locale file: "+confPath, L"Error", MB_OK | MB_ICONERROR);
+			sora::SORA->messageBox(L"Cannot find locale file: "+confPath, L"Error", MB_OK | MB_ICONERROR);
 			return false;
 		}
 		return false;

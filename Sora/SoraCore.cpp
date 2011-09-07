@@ -588,10 +588,10 @@ namespace sora {
 		pRenderSystem->setWindowSize(w, h);
 	}
 
-	void SoraCore::setWindowTitle(const SoraWString& title) {
+	void SoraCore::setWindowTitle(const StringType& title) {
 		sora_assert(bInitialized == true);
 
-		pRenderSystem->setWindowTitle(title);
+		pRenderSystem->setWindowTitle((SoraWString)title);
 	}
 
 	void SoraCore::setWindowPos(int32 px, int32 py) {
@@ -736,19 +736,19 @@ namespace sora {
         pRenderSystem->setVerticalSync(flag);
     }
 
-	HSORARESOURCE SoraCore::loadResourcePack(const SoraWString& file) {
+	SoraResourceHandle SoraCore::loadResourcePack(const StringType& file) {
 		return pResourceFileFinder->loadResourcePack(file);
 	}
 
-	void SoraCore::attachResourcePack(HSORARESOURCE pfile) {
+	void SoraCore::attachResourcePack(SoraResourceHandle pfile) {
 		pResourceFileFinder->attachResourcePack(pfile);
 	}
 
-	void SoraCore::detachResourcePack(HSORARESOURCE handle) {
+	void SoraCore::detachResourcePack(SoraResourceHandle handle) {
 		pResourceFileFinder->detachResourcePack(handle);
 	}
 
-	void* SoraCore::getResourceFile(const SoraWString& sfile, ulong32& size) {
+	void* SoraCore::getResourceFile(const StringType& sfile, ulong32& size) {
 		return pResourceFileFinder->getResourceFile(sfile, size);
 	}
 
@@ -756,11 +756,11 @@ namespace sora {
 		return pResourceFileFinder->freeResourceFile(p);
 	}
 
-	void* SoraCore::readResourceFile(const SoraWString& sfile, ulong32 size) {
+	void* SoraCore::readResourceFile(const StringType& sfile, ulong32 size) {
 		return pResourceFileFinder->readResourceFile(sfile, size);
 	}
 
-	ulong32 SoraCore::getResourceFileSize(const SoraWString& file) {
+	ulong32 SoraCore::getResourceFileSize(const StringType& file) {
 		return pResourceFileFinder->getResourceFileSize(file);
 	}
     
@@ -783,7 +783,7 @@ namespace sora {
 		mPrevShaderContext = NULL;
 	}
     
-	SoraTextureHandle SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
+	SoraTextureHandle SoraCore::createTexture(const StringType& sTexturePath, bool bCache, bool bMipmap)	{
 		sora_assert(bInitialized==true);
 		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sTexturePath)) != 0) return tex;
@@ -863,12 +863,12 @@ namespace sora {
 		return pRenderSystem->getVideoDeviceHandle();
 	}
 
-	SoraSprite* SoraCore::createSprite(const SoraWString& sPath) {
+	SoraSprite* SoraCore::createSprite(const StringType& sPath) {
 		sora_assert(bInitialized==true);
 		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
 			SoraSprite* pspr = new SoraSprite(tex);
-			pspr->setName(GetUniqueStringId(sPath));
+			pspr->setName(sPath.uniqueId());
 			return pspr;
 		} else {
 			tex = createTexture(sPath);
@@ -876,13 +876,13 @@ namespace sora {
 				return new SoraSprite(tex);
 			else {
 				SoraSprite* pspr = new SoraSprite(tex);
-				pspr->setName(GetUniqueStringId(sPath));
+				pspr->setName(sPath.uniqueId());
 				return pspr;
 			}
 		}
 	}
     
-    void SoraCore::renderSprite(const SoraWString& path, float x, float y) {
+    void SoraCore::renderSprite(const StringType& path, float x, float y) {
         SoraFastRenderer::Instance()->renderSprite(path, x, y);
     }
 	
@@ -1112,42 +1112,30 @@ namespace sora {
         SoraKeyPool::clearGlobalHotkeys();
     }
 	
-	SoraWString SoraCore::fileOpenDialog(const char* filter, const char* defaultPath) {
+	StringType SoraCore::fileOpenDialog(const char* filter, const char* defaultPath) {
 		if(!pMiscTool)
-			return SoraWString();
+			return StringType();
 		
 		return pMiscTool->fileOpenDialog(filter, defaultPath);
 	}
 	
-	SoraWString SoraCore::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
+	StringType SoraCore::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
 		if(!pMiscTool)
-			return SoraWString();
+			return StringType();
 		
 		return pMiscTool->fileSaveDialog(filter, defaultPath, defaultExt);
 	}
 
-	int32 SoraCore::messageBox(const SoraString& sMssg, const SoraString& sTitle, int32 iCode) {
+	int32 SoraCore::messageBox(const StringType& sMssg, const StringType& sTitle, int32 iCode) {
 		if(!pMiscTool)
 			return 0;
 		
 		pMiscTool->setMainWindowHandle(getMainWindowHandle());
-		return pMiscTool->messageBox(sMssg, sTitle, iCode);
+		return pMiscTool->messageBox((SoraWString)sMssg, (SoraWString)sTitle, iCode);
 	}
-
-	int32 SoraCore::messageBoxW(const SoraWString& sMssg, const SoraWString& sTitle, int32 iCode) {
-		if(!pMiscTool)
-			return 0;
-		
-		pMiscTool->setMainWindowHandle(getMainWindowHandle());
-		return pMiscTool->messageBox(sMssg, sTitle, iCode);
-	}
-
-	void SoraCore::log(const SoraString& sMssg, int32 level) {
-		log_mssg(sMssg, level);
-	}
-
-	void SoraCore::logw(const SoraWString& sMssg, int32 level) {
-		log_mssg(ws2s(sMssg), level);
+    
+	void SoraCore::log(const StringType& sMssg, int32 level) {
+		log_mssg((SoraString)sMssg, level);
 	}
 	
 	void SoraCore::logf(const char* format, ...) {
@@ -1176,7 +1164,7 @@ namespace sora {
 		return pPluginManager->getPlugin(sPluginName);
 	}
 
-	SoraWString SoraCore::videoInfo() {
+	StringType SoraCore::videoInfo() {
 		sora_assert(bInitialized==true);
 		return pRenderSystem->videoInfo();
 	}
@@ -1206,7 +1194,7 @@ namespace sora {
 		return (float)genrand_real1();
 	}
 
-	SoraFont* SoraCore::createFont(const SoraWString& font, int32 size) {
+	SoraFont* SoraCore::createFont(const StringType& font, int32 size) {
 		if(!pFontManager) {
 			_postError("FontManager not available");
 			return 0;
@@ -1258,15 +1246,19 @@ namespace sora {
 		pFontManager->releaseFont(font);
 	}
 	
-	void SoraCore::enumFilesInFolder(std::vector<SoraWString>& cont, const SoraWString& folder) {
+	void SoraCore::enumFilesInFolder(std::vector<SoraWString>& cont, const StringType& folder) {
 		pResourceFileFinder->enumFiles(cont, folder);
 	}
 
 	void SoraCore::setFrameSync(bool flag) {
 		bFrameSync = flag;
 	}
+    
+    bool SoraCore::isMainWindowSet() { 
+        return bMainWindowSet;
+    }
 	
-	SoraMusicFile* SoraCore::createMusicFile(const SoraWString& musicName, bool bStream) {
+	SoraMusicFile* SoraCore::createMusicFile(const StringType& musicName, bool bStream) {
 		if(!pSoundSystem) {
 			_postError("SoraCore::createMusicFile: no soundsystem available");
 			return NULL;
@@ -1275,7 +1267,7 @@ namespace sora {
 		return pSoundSystem->createMusicFile(musicName, bStream);
 	}
 	
-	SoraSoundEffectFile* SoraCore::createSoundEffectFile(const SoraWString& se) {
+	SoraSoundEffectFile* SoraCore::createSoundEffectFile(const StringType& se) {
 		if(!pSoundSystem) {
 			_postError("SoraCore::createSoundEffectFile: no soundsystem available");
 			return NULL;

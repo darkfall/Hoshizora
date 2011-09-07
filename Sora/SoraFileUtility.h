@@ -2,16 +2,16 @@
 #define SORA_FILE_UTILITY_H
 
 #include "SoraPlatform.h"
-
+#include "SoraString.h"
 #include <fstream>
 
 namespace sora {
 
 	class SORA_API SoraFileUtility {
 	public:
-		static bool fileExists(const SoraWString& filepath);
+		static bool fileExists(const StringType& filepath);
 		
-		static SoraWString getAbsolutePath(const SoraWString& filePath);
+		static StringType getAbsolutePath(const StringType& filePath);
 		
 		/* 
 		 get path in which can use to write file
@@ -19,20 +19,16 @@ namespace sora {
 		 because ios limit writting files in app
 		 also some part of osx
 		 */
-		static SoraWString getWrittablePath(const SoraWString& filePath);
+		static StringType getWrittablePath(const StringType& filePath);
 		
-		static SoraWString getApplicationPath();
+		static StringType getApplicationPath();
 
-		static SoraWString getFontPath(const SoraWString& file);
+		static StringType getFontPath(const StringType& file);
 
-		static SoraWString getFullPath(const SoraWString& file);
-		// get file name from path
-		static SoraWString getFileName(const SoraWString& file);
+		static StringType getFullPath(const StringType& file);
 		
-		static SoraString getFileName(const SoraString& file);
-		
-		static bool isFont(const SoraWString& file);
-	};
+		static StringType getFileName(const StringType& file);
+    };
 
 } // namespace sora
 

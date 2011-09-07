@@ -11,6 +11,7 @@
 
 #include "SoraEvent.h"
 #include "SoraPreDeclare.h"
+#include "SoraStringId.h"
 
 namespace sora {
     

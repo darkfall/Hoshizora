@@ -81,9 +81,7 @@ void myRenderFunc(sora::SoraObject* obj) {
 bool mainWindow::renderFunc() {
     sora::SORA->beginScene();
 	mScene1->render();
-    
-    entity.render();
-
+   
     sora::SORA->endScene();
     
 	return false;
@@ -103,7 +101,7 @@ sora::SoraMusicFile* file = 0;
 
 void mainWindow::init() {
     
-    ulong32 pack = sora::SoraCore::Instance()->loadResourcePack(L"Textures.zip");
+    ulong32 pack = sora::SoraCore::Instance()->loadResourcePack("Textures.zip");
     if(pack) {
         sora::SoraCore::Instance()->attachResourcePack(pack);
         sora::SoraSprite* spr = sora::SoraCore::Instance()->createSprite(L"Particle002.png");

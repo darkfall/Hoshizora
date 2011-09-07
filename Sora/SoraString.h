@@ -23,63 +23,52 @@ namespace sora {
             const char* c_str() const;
             const wchar_t* wc_str() const;
             
-            uint64 uniqieId() const;
+            uint64 uniqueId() const;
             
             void set(const std::string& str);
             void set(const std::wstring& str);
             void set(const char* str);
             void set(const wchar_t* str);
             
-            String& operator=(const std::string& str);
-            String& operator=(const std::wstring& str);
-            String& operator=(const char* str);
-            String& operator=(const wchar_t* str);
+            bool operator==(const String& rhs) const;
+            
+            bool operator!=(const std::string& str) const;
+            bool operator!=(const std::wstring& str) const;
+            bool operator!=(const String& rhs) const;
+            
+            bool compare(const std::string& str) const;
+            bool compare(const std::wstring& str) const;
+            bool compare(const String& rhs) const;
+            
             String& operator=(const String& str);
-            
-            String operator+(const std::string& str) const;
-            String operator+(const std::wstring& str) const;
-            String operator+(const char* str) const;
-            String operator+(const wchar_t* str) const;
-            
-            String& operator+=(const std::string& str);
-            String& operator+=(const std::wstring& str);
-            String& operator+=(const char* str);
-            String& operator+=(const wchar_t* str);
-            
-            operator std::string() {
+            String operator+(const String& str) const;
+            String& operator+=(const String& str);
+           
+            operator std::string() const {
                 return mString;
             }
-            operator std::wstring() {
+            operator std::wstring() const {
                 return s2ws(mString);
-            }
-            operator const char*() {
-                return mString.c_str();
-            }
-            operator const wchar_t*() {
-                return s2ws(mString).c_str();
             }
             
             char operator[](size_t index) const;
-            char operator[](int index) const;
             
-            char at(size_t index);
-            wchar_t wat(size_t index);
+            char at(size_t index) const;
+            wchar_t wat(size_t index) const;
             
-            size_t size();
+            size_t size() const;
             
             int asInt() const;
             bool asBool() const;
             float asFloat() const;
             
+            bool isValid() const;
+            
+            void clear();
             
         protected:
             std::string mString;
         };
-        
-        inline std::string operator+(const char* str, const String& sorastr) {
-            std::string stdstr(str);
-            return stdstr + sorastr.get();
-        }
         
         inline int String::asInt() const {
             return atoi(mString.c_str());
@@ -99,11 +88,106 @@ namespace sora {
             return false;
         }
         
+        inline String operator+(const std::string& l, const String& r) {
+            return l + r.get();
+        }
+        
+        inline String operator+(const std::wstring& l, const String& r) {
+            return l + r.getw();
+        }
+        
         inline float String::asFloat() const {
             return float(atof(mString.c_str()));
         }
         
+        
+        inline bool String::compare(const std::string& str) const {
+            return mString == str;
+        }
+        
+        inline bool String::compare(const std::wstring& str) const {
+            return str == s2ws(mString);
+        }
+        
+        inline bool String::operator==(const String& rhs) const {
+            return mString == rhs.mString;
+        }
+        
+        inline bool String::operator!=(const std::string& str) const {
+            return !(*this == str);
+        }
+        
+        inline bool String::operator!=(const std::wstring& str) const {
+            return !(*this == str);
+        }
+        
+        inline bool String::operator!=(const String& rhs) const {
+            return !(*this == rhs);
+        }
+        
+        inline bool String::compare(const String& rhs) const {
+            return mString == rhs.mString;
+        }
+        
+        inline String String::operator+(const String& rhs) const {
+            return mString + rhs;
+        }
+        
+        inline String& String::operator+=(const String& rhs) {
+            mString += rhs;
+            return *this;
+        }
+        
+        inline std::string String::get() const {
+            return mString;
+        }
+        
+        inline std::wstring String::getw() const {
+            return s2ws(mString);
+        }
+        
+        inline const char* String::c_str() const {
+            return mString.c_str();
+        }
+        
+        inline const wchar_t* String::wc_str() const {
+            return s2ws(mString).c_str();
+        }
+        
+        
+        inline void String::set(const std::string& str) {
+            mString = str;
+        }
+        
+        inline void String::set(const std::wstring& str) {
+            mString = ws2s(str); 
+        }
+        
+        inline void String::set(const char* str) {
+            mString = str;
+        }
+        
+        inline void String::set(const wchar_t* str) {
+            mString = ws2s(str);
+        }
+        
+        inline String& String::operator=(const String& str) {
+            mString = str.mString;
+            return *this;
+        }
+        
+        inline bool String::isValid() const {
+            return !mString.empty();
+        }
+        
+        inline void String::clear() {
+            mString.clear();
+        }
+        
     }
+    
+    typedef ::sora::util::String StringType;
+
 } // namespace sora
 
 #endif // SORA_STRING_H

@@ -20,7 +20,7 @@
 
 namespace sora {
 
-    bool SoraFileUtility::fileExists(const SoraWString& filepath) {
+    bool SoraFileUtility::fileExists(const StringType& filepath) {
 #ifdef WIN32
 			return PathFileExists(filepath.c_str())?true:false;
 #elif defined(OS_OSX)
@@ -35,18 +35,18 @@ namespace sora {
 			return true;
 		}
 		
-	 SoraWString SoraFileUtility::getAbsolutePath(const SoraWString& filePath) {
+	 StringType SoraFileUtility::getAbsolutePath(const StringType& filePath) {
 #ifdef WIN32
 			wchar_t buffer[MAX_PATH];
 			GetCurrentDirectoryW(MAX_PATH, buffer);
 			
 			return SoraWString(buffer)+L"/"+filePath;
 #elif defined(OS_OSX)
-			return osxApplicationPathW()+L"/"+filePath;
+            return std::string(osxApplicationPath()+"/")+filePath;
 #elif defined(OS_IOS)
-			return appResourcePath()+L"/"+filePath;
+			return appResourcePath()+"/"+filePath;
 #endif
-			return L"./"+filePath;
+			return "./"+filePath;
 		}
 		
 		/* 
@@ -55,7 +55,7 @@ namespace sora {
 		 because ios limit writting files in app
 		 also some part of osx
 		 */
-	 SoraWString SoraFileUtility::getWrittablePath(const SoraWString& filePath) {
+	 StringType SoraFileUtility::getWrittablePath(const StringType& filePath) {
 #ifndef OS_IOS
 			return getAbsolutePath(filePath);
 #else
@@ -64,7 +64,7 @@ namespace sora {
 			return L"\0";
 		}
 		
-	 SoraWString SoraFileUtility::getApplicationPath() {
+	 StringType SoraFileUtility::getApplicationPath() {
 #ifdef WIN32
 			wchar_t buffer[MAX_PATH];
 			GetCurrentDirectoryW(MAX_PATH, buffer);
@@ -78,28 +78,18 @@ namespace sora {
 			return L"./";
 		}
 
-	 SoraWString SoraFileUtility::getFontPath(const SoraWString& file) {
-         std::wstring fontPath = SoraPath::fontW();
+	 StringType SoraFileUtility::getFontPath(const StringType& file) {
+         StringType fontPath = SoraPath::font() + "/";
          return fontPath + file;
      }
 
-	 SoraWString SoraFileUtility::getFullPath(const SoraWString& file) {
-			return (getApplicationPath() + L"/" + file);
-		}
+	 StringType SoraFileUtility::getFullPath(const StringType& file) {
+         StringType str = getApplicationPath();
+         str += std::string("/" + file);
+         return str;
+     }
 		
-		// get file name from path
-	 SoraWString SoraFileUtility::getFileName(const SoraWString& file) {
-			SoraWString op = file;
-			for(size_t i=0; i<op.size(); ++i)
-				if(op[i] == L'\\')
-					op[i] = L'/';
-			size_t rspos = op.rfind(L"/");
-			if(rspos != SoraWString::npos)
-				op.erase(0, rspos+1);
-			return op;
-		}
-		
-	 SoraString SoraFileUtility::getFileName(const SoraString& file) {
+	 StringType SoraFileUtility::getFileName(const StringType& file) {
 			SoraString op = file;
 			for(size_t i=0; i<op.size(); ++i)
 				if(op[i] == '\\')
@@ -108,16 +98,6 @@ namespace sora {
 			if(rspos != SoraString::npos)
 				op.erase(0, rspos+1);
 			return op;
-		}
-	
-		
-	 bool SoraFileUtility::isFont(const SoraWString& file) {
-			if(file.find(L".ttf") != std::string::npos ||
-			   file.find(L".TTF") != std::string::npos ||
-			   file.find(L".otf") != std::string::npos ||
-			   file.find(L".ttc") != std::string::npos)
-				return true;
-			return false;
 		}
 
 } // namespace sora

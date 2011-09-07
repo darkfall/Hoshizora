@@ -123,6 +123,7 @@ namespace sora {
 	typedef ulong32 SoraSpriteHandle;
 	typedef ulong32 SoraTextureHandle;
     typedef ulong32 SoraTargetHandle;
+    typedef ulong32 SoraResourceHandle;
 	
 	enum {
 		SORA_LINE = 1,

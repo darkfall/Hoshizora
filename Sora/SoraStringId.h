@@ -12,6 +12,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
+#include "SoraString.h"
 #include "SoraStringConv.h"
 #include "util/SoraHash.h"
 
@@ -25,37 +26,20 @@ namespace sora {
 		
 	public:
         // explicit add strings, no hash implied, be care
-        inline void addString(const std::string& str, SoraStringId sid) {
+        inline void addString(const StringType& str, SoraStringId sid) {
             strings[sid] = str;
         }
-        
-        inline void addString(const std::wstring& str, SoraStringId sid) {
-            strings[sid] = ws2s(str);
-        }
-        
-		inline SoraStringId getStringId(const std::string& str) {
-			SoraStringId sid = crc32(str);
+
+		inline SoraStringId getStringId(const StringType& str) {
+			SoraStringId sid = crc32(str.get());
 			if(strings.find(sid) == strings.end()) {
 				strings[sid] = str;
 			}
 			return sid;
 		}
 		
-		static SoraStringId getStringIdNoCache(const std::string& str) {
-			return crc32(str);
-		}
-		
-		inline SoraStringId getStringId(const std::wstring& str) {
-			SoraStringId sid = crc32(str);
-
-			if(strings.find(sid) == strings.end()) {
-				strings[sid] = ws2s(str);
-			}
-			return sid;
-		}
-		
-		static SoraStringId getStringIdNoCache(const std::wstring& str) {
-			return crc32(str);
+		static SoraStringId getStringIdNoCache(const StringType& str) {
+			return crc32(str.get());
 		}
 		
 		inline std::wstring getStringByIdW(SoraStringId sid) {
@@ -85,17 +69,12 @@ namespace sora {
 	#define id2str(id) SORA_STR_MANAGER->getStringById(id)
 	#define str2idnc(str) SORA_STR_MANAGER->getStringIdNoCache(str)
     
-    inline SoraStringId GetUniqueStringId(const std::string& name, bool cache=false) {
+    inline SoraStringId GetUniqueStringId(const StringType& name, bool cache=false) {
         if(!cache)
-            return crc32(name);
+            return crc32(name.get());
         return SoraStringManager::Instance()->getStringId(name);
     }
     
-    inline SoraStringId GetUniqueStringId(const std::wstring& name, bool cache=false) {
-        if(!cache)
-            return crc32(name);
-        return SoraStringManager::Instance()->getStringId(name);
-    }
     
     inline SoraString GetStringByUniqueId(SoraStringId sid) {
         return SoraStringManager::Instance()->getStringById(sid);

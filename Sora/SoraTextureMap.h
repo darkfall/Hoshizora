@@ -1,14 +1,13 @@
 #ifndef SORA_TEXTURE_MAP_H
 #define SORA_TEXTURE_MAP_H
 
+#include "SoraPlatform.h"
 #include "SoraTexture.h"
 #include "SoraSingleton.h"
 #include "SoraException.h"
-#include "SoraCore.h"
-#include "SoraPlatform.h"
 #include "SoraEnvValues.h"
-
 #include "SoraStringId.h"
+#include "SoraCore.h"
 #include <map>
 
 /* hash functions */
@@ -25,7 +24,7 @@ namespace sora {
 	public:
 		~SoraTextureMap() {
 			for(TEX_MAP::iterator p = texMap.begin(); p != texMap.end(); ++p) {
-				SORA->releaseTexture(p->second);
+                SoraCore::Instance()->releaseTexture(p->second);
 			}
 			texMap.clear();
 			texMapRv.clear();
@@ -44,8 +43,8 @@ namespace sora {
 			}
 		}
 
-		void add(const SoraWString& key, SoraTextureHandle tex) {			
-			SoraStringId uiKey = GetUniqueStringId(key);
+		void add(const StringType& key, SoraTextureHandle tex) {			
+			SoraStringId uiKey = key.uniqueId();
 			TEX_MAP::iterator pos = texMap.find(uiKey);
 			if(pos == texMap.end()) {
 				texMap[uiKey] = tex;
@@ -84,8 +83,8 @@ namespace sora {
 			SET_ENV_INT("CORE_TEXMAP_SIZE", (int32)texMap.size());
 		}
 		
-		void addRf(const SoraWString& key) {
-			SoraStringId uiKey = GetUniqueStringId(key);
+		void addRf(const StringType& key) {
+			SoraStringId uiKey = key.uniqueId();
 			texRefs[uiKey]++;
 		}
 		
@@ -109,8 +108,8 @@ namespace sora {
 			}
 		}
 		
-		SoraTextureHandle get(const SoraWString& key) {
-			SoraStringId uiKey = GetUniqueStringId(key);
+		SoraTextureHandle get(const StringType& key) {
+			SoraStringId uiKey = key.uniqueId();
 			TEX_MAP::iterator p = texMap.find(uiKey);
 			if(p != texMap.end()) {
 				//SoraTexture* tex = (SoraTexture*)p->second;
