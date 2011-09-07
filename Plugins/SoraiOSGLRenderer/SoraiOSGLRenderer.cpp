@@ -381,7 +381,7 @@ namespace sora{
 														   &w, &h, &channels);
 		
 		if(!texid) {
-			throw SORA_EXCEPTION("Error loading texture");
+			throw SORA_EXCEPTION(RuntimeException, "Error loading texture");
 		}
 		
 		// ios max texture size = 1024
@@ -454,7 +454,7 @@ namespace sora{
 												0,
 												SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_TEXTURE_REPEATS);
 		if(!texid) {
-			throw SORA_EXCEPTION("Error creating texture");
+			throw SORA_EXCEPTION(RuntimeException, "Error creating texture");
 			return 0;
 		}
 		

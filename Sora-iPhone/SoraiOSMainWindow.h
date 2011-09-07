@@ -47,10 +47,9 @@ public:
 	}
 	
 	void init() {
-		sora::SORA->registerResourceManager(new sora::SoraZipResourceManager);
-		sora::SORA->registerFontManager(new sora::SoraiOSFontManager);
-		sora::SORA->registerInput(new sora::SoraiOSInput);
 		
+		sora::SORA->registerResourceManager(new sora::SoraZipResourceManager);
+        
 		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource"));
 		
         pBG = sora::SORA->createSprite(L"background1.png");
@@ -74,9 +73,7 @@ public:
 		di->setBaseColor(gcn::Color(255, 255, 255, 155));
 		
 		sc->add(di);
-		
-        printf("%s\n", sora::iOSDeviceTypeToString(sora::getiOSDeviceType()).c_str());
-	}
+    }
 	
 	int32 getWindowWidth() { 
         return sora::iOSGetScreenWidth(bScreenRotated);

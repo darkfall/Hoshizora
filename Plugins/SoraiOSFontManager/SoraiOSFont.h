@@ -39,7 +39,7 @@ namespace sora {
 		int32 width;
 	};
 	
-	class SoraiOSFont: SoraFont {
+	class SoraiOSFont: public SoraFont {
 		friend class SoraiOSFontManager;
 		
 	protected:

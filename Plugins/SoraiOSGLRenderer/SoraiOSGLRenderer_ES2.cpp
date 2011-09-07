@@ -44,7 +44,7 @@ namespace sora{
         mES2VertexShader = mES2ShaderContext->createShader(L"vertex.vs", "main", VERTEX_SHADER);
         mES2FragmentShader = mES2ShaderContext->createShader(L"fragment.fs", "main", FRAGMENT_SHADER);
         if(!mES2VertexShader || !mES2FragmentShader)
-            THROW_SORA_EXCEPTION("Error creating shader for ogles2 rendering");
+            THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader for ogles2 rendering");
         mES2ShaderContext->attachShader(mES2VertexShader);
         mES2ShaderContext->attachShader(mES2FragmentShader);
         
@@ -402,7 +402,7 @@ namespace sora{
 														   &w, &h, &channels);
 		
 		if(!texid) {
-			throw SORA_EXCEPTION("Error loading texture");
+			throw SORA_EXCEPTION(RuntimeException, "Error loading texture");
 		}
 		
 		// ios max texture size = 1024
@@ -475,7 +475,7 @@ namespace sora{
 												0,
 												SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_TEXTURE_REPEATS);
 		if(!texid) {
-			throw SORA_EXCEPTION("Error creating texture");
+			throw SORA_EXCEPTION(RuntimeException, "Error creating texture");
 			return 0;
 		}
 		

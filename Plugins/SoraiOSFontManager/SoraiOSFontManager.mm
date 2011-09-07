@@ -30,7 +30,7 @@ namespace sora {
 		
 		SoraiOSFont* pfont = new SoraiOSFont(filename, size);
         if(pfont)
-            mFontMap[filename] = pfont;
+            mFontMap.insert(std::make_pair(filename, pfont));
 		return pfont;
 	}
     

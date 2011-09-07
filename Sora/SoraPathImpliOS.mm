@@ -32,7 +32,7 @@ namespace sora {
         if (val)
             return std::string(val);
         else
-            THROW_SORA_EXCEPTION("Cannot get env string");
+            THROW_SORA_EXCEPTION(RuntimeException, "Cannot get env string");
     }
     
     std::string SoraPathImpl::currentImpl() {

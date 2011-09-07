@@ -13,6 +13,7 @@
 
 #include "rfMapRenderer.h"
 
+#include "SoraiOSDeviceHelper.h"
 /*#include "guichansetup.h"
 #include "gcnImageButton2.h"
 
@@ -54,8 +55,12 @@ public:
 	int32 loadMap(const wchar_t* map, uint16 maxMirror, uint16 maxTime=0);
 	int32 toNextMap();
 	
-	int32 getWindowWidth() { return 320; }
-	int32 getWindowHeight() { return 480; }
+	int32 getWindowWidth() { 
+        return sora::iOSGetScreenWidth(true);
+    }
+	int32 getWindowHeight() { 
+        return sora::iOSGetScreenHeight(true);
+    }
 	
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }

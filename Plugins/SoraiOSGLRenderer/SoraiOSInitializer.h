@@ -17,6 +17,8 @@
 #include "SoraiOSGLRenderer_ES2.h"
 #include "SoraiOSInput.h"
 
+#include "SoraiOSFontManager/SoraiOSFontManager.h"
+
 namespace sora {
 	
 	class SoraiOSInitializer: public SoraSingleton<SoraiOSInitializer> {
@@ -42,11 +44,14 @@ namespace sora {
 			SoraiOSInit(isOGLES2API);
 			
 			try {
+                SORA->registerFontManager(new sora::SoraiOSFontManager);
+                SORA->registerInput(new sora::SoraiOSInput);
+                
 				SORA->createWindow(window);
 				SORA->setFPS(60);
 				SORA->start();
 			} catch(SoraException& e) {
-				printf("EXCEPTION %s\n", e.what().c_str());
+				printf("EXCEPTION %s\n", e.what());
 			}
 		}
 		
