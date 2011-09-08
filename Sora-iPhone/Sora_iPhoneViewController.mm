@@ -12,7 +12,6 @@
 #import "EAGLView.h"
 
 #import "SoraiOSGLRenderer/SoraiOSInitializer.h"
-#import "SoraiOSMainWindow.h"
 #import "rfMainWindow.h"
 #import "anime/aeMainWindow.h"
 
@@ -48,9 +47,9 @@
     animating = FALSE;
     animationFrameInterval = 1;
     self.displayLink = nil;
-
-	// initialize SORA base systems
-	sora::SORA_IOS->SoraiOSStart(new SoraiOSMainWindow);
+        
+    // initialize SORA base systems
+    sora::SORA_IOS->SoraiOSStart(new rfMainWindow);
 }
 
 - (void)dealloc
@@ -148,13 +147,7 @@
 
 - (void)drawFrame
 {
-	if(sora::SORA_IOS->update()) {
-		[(EAGLView *)self.view setFramebuffer];
-		sora::SORA_IOS->SoraiOSUpdateSystems();
-        
-    
-		[(EAGLView *)self.view presentFramebuffer];
-	}
+	[(EAGLView *)self.view update];
 }
 
 - (void)didReceiveMemoryWarning

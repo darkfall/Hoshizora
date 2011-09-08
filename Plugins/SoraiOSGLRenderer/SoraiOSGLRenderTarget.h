@@ -24,11 +24,12 @@ namespace sora {
 class SoraRenderTargetiOSGL {
 	GLuint frameBuffer;
 	GLuint depthBuffer;
+	GLuint glTex;
+    GLuint oldbuffer;
 
     int32 w, h;
 	ulong32 tex;
 	bool zbuffer;
-	int32 err;
     
 public:
 	SoraRenderTargetiOSGL(int32 _w, int32 _h, bool _zbuffer);

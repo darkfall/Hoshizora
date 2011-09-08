@@ -15,7 +15,7 @@
 //#include "SoraGUIChan/guichan.hpp"
 #include "llexer.h"
 #include "SoraiOSDeviceHelper.h"
-/*
+
 class buttonListener: public gcn::ActionListener {
 public:
 	void action(const gcn::ActionEvent& actionEvent) {
@@ -29,7 +29,7 @@ public:
 			mainWindow->tonext();
 		}
 	}
-};*/
+};
 
 rfMainWindow::~rfMainWindow() {
 //	if(pext) delete pext;
@@ -41,10 +41,12 @@ rfMainWindow::~rfMainWindow() {
 	if(pState) delete pState;
 }
 
+sora::SoraSprite* spr;
+
 bool rfMainWindow::renderFunc() {		
 	//CORE->setTransform(0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f);
 
-	CORE->beginScene();
+	CORE->beginScene(0xffff0000, fbo);
 	
 	if(rfState != STATE_LOGO) {
 		pBG->render(0.f, 0.f);
@@ -60,25 +62,32 @@ bool rfMainWindow::renderFunc() {
 			}
 		}
 	
-//		sora::GCN_GLOBAL->gcnLogic();
-//		sora::GCN_GLOBAL->gcnDraw();
+		sora::GCN_GLOBAL->gcnLogic();
+		sora::GCN_GLOBAL->gcnDraw();
 	} else {
-/*		if(pFont) {
+		if(pFont) {
 			pFont->setColor(CARGB(255, 0, 153, 253), 0);
 			pFont->setColor(CARGB(255, 0, 153, 155), 1);
 			pFont->setColor(CARGB(255, 155, 153, 0), 2);
 			pFont->setColor(CARGB(255, 255, 153, 0), 3);
 			pFont->render((float32)getWindowWidth()/2-pFont->getStringWidth(L"Presented By Darkfall")/2, 
 						  (float32)getWindowHeight()/2-96, sora::FONT_ALIGNMENT_LEFT, L"Presented By Darkfall");
-		}*/
+		}
 //		pLogoAnim->render((float32)getWindowWidth()/2-64, (float32)getWindowHeight()/2-64);
 	}
 	CORE->endScene();
+    
+    CORE->beginScene();
+    spr->setTexture(sora::SORA->getTargetTexture(fbo));
+ //   spr->setScale(0.5f, 0.5f);
+    spr->render();
+
+    CORE->endScene();
 	return false;
 }
 
 void rfMainWindow::renderState() {
-/*	if(pFont) {
+	if(pFont) {
 		pFont->setColor(0xFFFFFFFF);
 		pFont->print(10.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"Mirror: ");
 		if(prfMapRenderer->getMaxMirrorNum() != 0) {
@@ -100,8 +109,9 @@ void rfMainWindow::renderState() {
 			pFont->print(300.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"Time: Infinite");
 		
 		pFont->setColor(0xFFFFFFFF);
-		pFont->print(640.f-pFont->getStringWidth(L"Lighted Box:   /    "), 440.f, sora::FONT_ALIGNMENT_LEFT, L"Lighted Box: %d/%d", prfMapRenderer->getBoxGot(), prfMapRenderer->getBoxAim());
-	}*/
+		pFont->print(getWindowWidth()-pFont->getStringWidth(L"Lighted Box:   /    "), getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Lighted Box: %d/%d", prfMapRenderer->getBoxGot(), prfMapRenderer->getBoxAim());
+        pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.2f", sora::SORA->getFPS());
+	}
 }
 
 void rfMainWindow::success() {
@@ -153,7 +163,7 @@ bool rfMainWindow::updateFunc() {
 		if(stateCount > 0.8f) {
 			if(rfState != STATE_PAUSE_MENU) {
 				if(rfState == STATE_FAILED || rfState == STATE_SUCCEED) {
-/*					pext->setVisible(true);
+					pext->setVisible(true);
 					pext->setEnabled(true);
 					switch (rfState) {
 						case STATE_FAILED:
@@ -165,7 +175,7 @@ bool rfMainWindow::updateFunc() {
 							pcontinue->setVisible(true);
 							pcontinue->setEnabled(true);
 							break;
-					}*/
+					}
 					
 					rfState = STATE_PAUSE_MENU;
 				}
@@ -337,11 +347,11 @@ void rfMainWindow::init() {
 		CORE->shutDown();
 	}
 		
-//	pFont = CORE->createFont(L"ARIALN.TTF", 30);
-//	if(pFont) pFont->setColor(0xFFFFFFFF);
+	pFont = CORE->createFont(L"STHeitiSC-Medium", 30);
+	if(pFont) pFont->setColor(0xFFFFFFFF);
 	
 	/* gui part */
-/*	sora::GCN_GLOBAL->initGUIChan(L"ARIALN.TTF", 30);
+	sora::GCN_GLOBAL->initGUIChan(L"STHeitiSC-Medium", 30);
 	sora::GCN_GLOBAL->createTop();
 	gcn::Container* pTop = sora::GCN_GLOBAL->getTop();
 	buttonListener* listener = new buttonListener;
@@ -369,13 +379,15 @@ void rfMainWindow::init() {
 	pext->setEnabled(false);
 	pext->setVisible(false);
 	pcontinue->setEnabled(false);
-	pcontinue->setVisible(false);*/
+	pcontinue->setVisible(false);
 	
 	rfState = STATE_LOGO;
 	logoCount = 0.f;
 //	pLogoAnim = new ls::lsAnimatedSprite(L"patchouli.lanm");
 //	if(!pLogoAnim)
 		rfState = STATE_GAMING;
+    spr = new sora::SoraSprite(0);
+    fbo = sora::SORA->createTarget(getWindowWidth(), getWindowHeight());
 //	else {
 //		pLogoAnim->play();
 //	}

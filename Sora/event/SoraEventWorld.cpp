@@ -39,6 +39,10 @@ namespace sora {
     void SoraEventWorld::update(float32 dt) {
         if(mFixedStep) {
             uint32 step = static_cast<uint32>(dt / SoraCore::Instance()->getDelta());
+            if(step >= 3) {
+                // to many steps?
+                return;
+            }
             for(uint32 i=0; i<step; ++i)
                 mImpl->update(dt);
         } else {

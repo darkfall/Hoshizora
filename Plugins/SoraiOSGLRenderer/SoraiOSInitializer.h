@@ -24,68 +24,30 @@ namespace sora {
 	class SoraiOSInitializer: public SoraSingleton<SoraiOSInitializer> {
 		friend class SoraSingleton<SoraiOSInitializer>;
 		
-		inline void SoraiOSInit(bool isOGLES2API) {
-            if(isOGLES2API)
-                SORA->registerRenderSystem(new SoraiOSGLRenderer_ES2);
-            else
-                SORA->registerRenderSystem(new SoraiOSGLRenderer);
-            
-            mVerticalSync = false;
-		//	input = new SoraiOSInput;
-		//	SORA->registerInput(input);
-		}
+        void SoraiOSInit(bool isOGLES2API, bool multisampling=false);
 		
-        SoraiOSInitializer() {}
+        SoraiOSInitializer(): mVerticalSync(true) {}
         ~SoraiOSInitializer() {}
         
 	public:
 		
-		inline void SoraiOSStart(SoraWindowInfoBase* window, bool isOGLES2API=false) {
-			SoraiOSInit(isOGLES2API);
-			
-			try {
-                SORA->registerFontManager(new sora::SoraiOSFontManager);
-                SORA->registerInput(new sora::SoraiOSInput);
-                
-				SORA->createWindow(window);
-				SORA->setFPS(60);
-				SORA->start();
-			} catch(SoraException& e) {
-				printf("EXCEPTION %s\n", e.what());
-			}
-		}
+        void SoraiOSStart(SoraWindowInfoBase* window, bool isOGLES2API=false);
+		void setTimer(SoraTimer* timer);
 		
-		void setTimer(SoraTimer* timer) { pTimer = timer; }
-		
-        void setVerticalSync(bool flag) {
-            mVerticalSync = flag;
-        }
-        
-		inline bool update() {
-            if(mVerticalSync)
-                return true;
-            else if(pTimer)
-				return pTimer->update();
-			return false;
-		}
-		
-		inline void SoraiOSUpdateSystems() {
-			SORA->update();
-		}
-		
-		inline void SoraiOSShutDown() {
-			SORA->shutDown();
-		}
-		
-		
+        void setVerticalSync(bool flag);
+        bool update();
+        void SoraiOSUpdateSystems();
+        void SoraiOSShutDown();
+        void enableMultisampling(bool flag);
+    
 	private:
-		SoraTimer* pTimer;
+        
+        SoraTimer* pTimer;
 		SoraiOSInput* input;
         
         bool mVerticalSync;
 	};
 
-	
 	static SoraiOSInitializer* SORA_IOS = SoraiOSInitializer::Instance();
 	
 #define GET_IOS_RESOURCE_NAME(name) SoraiOSInitializer::getResourceName(name)

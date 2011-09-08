@@ -1,0 +1,71 @@
+/*
+ *  SoraiOSMainWindow.h
+ *  Sora-iPhone
+ *
+ *  Created by Griffin Bu on 4/20/11.
+ *  Copyright 2011 Studio GameMaster. All rights reserved.
+ *
+ */
+#ifndef SORA_IOS_MAIN_WINDOW_H_
+#define SORA_IOS_MAIN_WINDOW_H_
+
+#include "SoraCore.h"
+#include "SoraiOSDeviceHelper.h"
+
+#include "SoraZipResourceManager/SoraZipResourceManager.h"
+#include "SoraiOSFontManager/SoraiOSFontManager.h"
+
+#include "SoraFont.h"
+#include "SoraFileUtility.h"
+
+namespace sora {
+    
+    /**
+     * Inheritate your window from this window
+     * Only updateFunc, renderFunc, init is supported in inheritance here
+     * Cause iOS won't let you control window size and position or title etc
+     **/
+    
+    class SoraiOSMainWindow: public sora::SoraWindowInfoBase {
+    public:
+        SoraiOSMainWindow(): mScreenRotated(false) { }
+        
+        int32 getWindowWidth() { 
+            return sora::iOSGetScreenWidth(mScreenRotated);
+        }
+        int32 getWindowHeight() { 
+            return sora::iOSGetScreenHeight(mScreenRotated);
+        }
+        
+        int32 getWindowPosX() { return 0; }
+        int32 getWindowPosY() { return 0; }
+        
+        SoraString getWindowName() { return "Hoshizora"; }
+        SoraString getWindowId() { return "MainWindow"; }
+        
+        bool isWindowed() { return false; }
+        bool hideMouse() { return false; }
+        
+        void rotScreen(bool flag) { mScreenRotated = flag; }
+        bool isScreenRoteted() const { return mScreenRotated; }
+        
+        
+        virtual bool updateFunc() {
+            return false;
+        }
+        
+        virtual bool renderFunc() {
+            return false;
+        }
+        
+        virtual void init() { }
+        
+    private:
+        bool mScreenRotated;
+    };
+    
+
+    
+} // namespace sora
+
+#endif

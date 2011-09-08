@@ -30,7 +30,7 @@ namespace sora {
         struct Parameter {
             Parameter():
             mMultitrhead(false),
-            mFixedStep(true) {
+            mFixedStep(false) {
                 
             }
             

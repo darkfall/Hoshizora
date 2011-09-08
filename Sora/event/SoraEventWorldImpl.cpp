@@ -85,7 +85,7 @@ namespace sora {
         EventList::iterator itEvent = mCurrEvtList->begin();
         EventList::iterator itEnd = mCurrEvtList->end();
         
-        for(itEvent; itEvent != itEnd; ++itEvent) {
+        for(;itEvent != itEnd; ++itEvent) {
             if(IsSystemEvent(*itEvent)) {
                 SoraSystemEvent* evt = static_cast<SoraSystemEvent*>((*itEvent));
                 switch(evt->getType()) {

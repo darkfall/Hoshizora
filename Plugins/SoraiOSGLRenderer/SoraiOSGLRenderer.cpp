@@ -20,7 +20,7 @@
 #include "SoraInfiniteRendererCallback.h"
 
 #include "SoraGLSLShader.h"
-
+#include "SoraiOSWrapper.h"
 #include "SoraiOSInitializer.h"
 #include "SOIL/SOIL.h"
 
@@ -169,17 +169,16 @@ namespace sora{
             glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
 			
 			if(clear)
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			else
-				glClear(GL_DEPTH_BUFFER_BIT);
+				glClear(GL_COLOR_BUFFER_BIT);
 			
         } else {
+            // ios gl wrapper
+            setupEAGLFBO();
+            
             glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
             
             if(clear)
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            else
-                glClear(GL_DEPTH_BUFFER_BIT);
+                glClear(GL_COLOR_BUFFER_BIT);
         }
         
 	}
@@ -193,11 +192,10 @@ namespace sora{
 			
             setTransform(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
             setClipping();
-        } else 
+        } else {
             iFrameStart = 0;
-		//else
-		//	glfwSwapBuffers();
-		
+            presentEAGLFBO();
+        }
 	}
 	
 	void SoraiOSGLRenderer::_glSetBlendMode(int32 blend) {
@@ -238,6 +236,7 @@ namespace sora{
 	void SoraiOSGLRenderer::start(SoraTimer* timer) {
 		SORA_IOS->setTimer(timer);
 		g_timer = timer;
+
 	}
 
 	void SoraiOSGLRenderer::beginScene(uint32 color, ulong32 target, bool clear) {
@@ -267,37 +266,16 @@ namespace sora{
 	}
 	
 	void SoraiOSGLRenderer::setWindowSize(int32 w, int32 h) {
-	//	glfwSetWindowSize(w, h);
 	}
 	
 	void SoraiOSGLRenderer::setWindowTitle(const SoraWString& title) {
-	//	glfwSetWindowTitle(ws2s(title).c_str());
 	}
 	
 	void SoraiOSGLRenderer::setWindowPos(int32 px, int32 py) {
-	//	glfwSetWindowPos(px, py);
 	}
 	
 	void SoraiOSGLRenderer::setFullscreen(bool flag) {
-		/*if(bFullscreen == flag)
-			return;
-		
-		endScene();
-		
-		bFullscreen = flag;
-		glfwCloseWindow();
-		glfwOpenWindow(mainWindow->getWindowWidth(), mainWindow->getWindowHeight(),
-					   0, 0, 0, 0,
-					   32,
-					   0,
-					   bFullscreen==true?GLFW_FULLSCREEN:GLFW_WINDOW);
-		glfwSetWindowTitle(mainWindow->getWindowName().c_str());
-		glfwSetWindowCloseCallback(int_exitFunc);
 
-		_glInitialize();
-		_glSetProjectionMatrix(_oglWindowInfo.width, _oglWindowInfo.height);
-		
-		beginScene();*/
 	}
 	
 	bool SoraiOSGLRenderer::isFullscreen() {
@@ -404,9 +382,6 @@ namespace sora{
 			p2h = i;
 		}
 		
-		printf("%d %d %d, %d, %d\n", w, h, channels, p2w, p2h);
-
-		
 		SoraTexture* tex = new SoraTexture(texid,
 										   p2w,
 										   p2h,
@@ -419,6 +394,21 @@ namespace sora{
 		// ios max texture size = 1024
 		if(w > 1024 || h > 1024)
 			return NULL;
+        
+        int i;
+		int p2w, p2h;
+		if((w != 1)) {
+			i = 1;
+			while(i < w)
+				i *= 2;
+			p2w = i;
+		}
+		if((h != 1)) {
+			i = 1;
+			while(i < h)
+				i *= 2;
+			p2h = i;
+		}
 		/*size_t size = w*h*4;
 		GLubyte* bitData = new GLubyte[size];
 		
@@ -435,11 +425,14 @@ namespace sora{
 			
 		glGenTextures(1, &texId);
 		glBindTexture(GL_TEXTURE_2D, texId);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_INT, 0);
-			
-		return new SoraTexture(texId, w, h, w, h);
+		glTexParameterf(texId, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameterf(texId, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameterf(texId, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameterf(texId, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, p2w, p2h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+		return new SoraTexture(texId, p2w, p2h, w, h);
 	}
 	
 	SoraTexture* SoraiOSGLRenderer::createTextureFromRawData(unsigned int* data, int32 w, int32 h) {
@@ -752,9 +745,7 @@ namespace sora{
 		applyTransform();
 	}
 
-	ulong32 SoraiOSGLRenderer::createTarget(int width, int height, bool zbuffer) {
-        return 0;
-        
+	ulong32 SoraiOSGLRenderer::createTarget(int width, int height, bool zbuffer) {        
 		SoraRenderTargetiOSGL* t = new SoraRenderTargetiOSGL(width, height, zbuffer);
 		liTargets.push_back((SoraRenderTarget*)t);
 		return (ulong32)t;
@@ -782,9 +773,6 @@ namespace sora{
 	}
 	
 	bool SoraiOSGLRenderer::_glVersionCheck() {
-	/*	int majorVersion, minorVersion, rev;
-		glfwGetVersion(&majorVersion, &minorVersion, &rev);
-		return majorVersion >= 2;*/
 		return true;
 	}
 	
@@ -795,7 +783,6 @@ namespace sora{
 		return _glVersionCheck();
 	}
 	
-	
 	inline bool SoraiOSGLRenderer::_glCheckError() {
 		return glGetError() != GL_NO_ERROR;
 	}
@@ -804,11 +791,6 @@ namespace sora{
 		SoraWString info(L"Driver=OpenGL Version=");
 		//int mav, miv, rev;
 		info += s2ws((char*)glGetString(GL_VERSION));
-
-		//glfwGetVersion(&mav, &miv, &rev);
-		//info += int_to_str(mav); info+=".";
-		//info += int_to_str(miv); info+=".";
-		//info += int_to_str(rev); info+="\n";
 		return info;
 	}
 	

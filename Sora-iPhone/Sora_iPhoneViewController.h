@@ -15,8 +15,6 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-#import "SoraSprite.h"
-
 @interface Sora_iPhoneViewController : UIViewController
 {
     EAGLContext *context;

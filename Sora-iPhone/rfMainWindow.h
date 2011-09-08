@@ -14,10 +14,11 @@
 #include "rfMapRenderer.h"
 
 #include "SoraiOSDeviceHelper.h"
-/*#include "guichansetup.h"
+#include "SoraiOSGLRenderer/SoraiOSMainWindow.h"
+#include "guichansetup.h"
 #include "gcnImageButton2.h"
 
-#include "lsAnimatedSprite.h"*/
+//#include "lsAnimatedSprite.h"
 
 enum RF_STATE {
 	STATE_LOGO = 0,
@@ -35,7 +36,7 @@ typedef struct {
 	uint16 maxTime;
 } RF_MAP_INFO;
 
-class rfMainWindow: public sora::SoraWindowInfoBase {
+class rfMainWindow: public sora::SoraiOSMainWindow {
 public:
 	~rfMainWindow();
 	
@@ -55,23 +56,6 @@ public:
 	int32 loadMap(const wchar_t* map, uint16 maxMirror, uint16 maxTime=0);
 	int32 toNextMap();
 	
-	int32 getWindowWidth() { 
-        return sora::iOSGetScreenWidth(true);
-    }
-	int32 getWindowHeight() { 
-        return sora::iOSGetScreenHeight(true);
-    }
-	
-	int32 getWindowPosX() { return 0; }
-	int32 getWindowPosY() { return 0; }
-	
-	SoraString getWindowName() { return "Reflection"; }
-	SoraString getWindowId() { return "MainWindow"; }
-	
-	bool isWindowSubWindow() { return false; }	
-	bool isWindowed() { return true; }
-	bool hideMouse() { return false; }
-	
 	size_t getAvailableMapCount() const;
 	
 private:
@@ -81,21 +65,24 @@ private:
 	int32 rfState;
 	float32 stateCount;
 	sora::SoraSprite* pState;
-/*	
+	
 	gcn::ImageButton2* pretry;
 	gcn::ImageButton2* pext;
 	gcn::ImageButton2* pcontinue;
-	*/
+	
 	float32 logoCount;
 //	ls::lsAnimatedSprite* pLogoAnim;
 	
 	sora::SoraCore* CORE;
+    sora::SoraFont* pFont;
 	
 	rf::rfMapRenderer* prfMapRenderer;
 	
 	typedef std::vector<RF_MAP_INFO> RF_MAP_CONT;
 	RF_MAP_CONT availMaps;
 	int32 currMapIndex;
+    
+    ulong32 fbo;
 };
 
 
