@@ -77,7 +77,6 @@ namespace sora {
 		buffer += file;
 		return buffer;
 	}
-	
 
     SoraTexture *mTextureCreate(const char* fileName, bool isFullPath) {
         std::string fullPath;

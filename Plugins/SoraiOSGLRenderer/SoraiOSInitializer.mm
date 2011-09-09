@@ -8,6 +8,8 @@
 
 #include "SoraiOSInitializer.h"
 #include "SoraiOSWrapper.h"
+#include "SoraiOSGLRenderer.h"
+#include "SoraiOSTimer.h"
 
 namespace sora {
     
@@ -17,7 +19,6 @@ namespace sora {
         else
             SORA->registerRenderSystem(new SoraiOSGLRenderer);
         
-        mVerticalSync = true;
         sora::setupMultisampling(multisampling);
     }
     
@@ -27,9 +28,10 @@ namespace sora {
         try {
             SORA->registerFontManager(new sora::SoraiOSFontManager);
             SORA->registerInput(new sora::SoraiOSInput);
+            SORA->registerTimer(new sora::SoraiOSTimer);
             
             SORA->createWindow(window);
-            SORA->setFPS(60);
+            SORA->setFPS(120);
         } catch(SoraException& e) {
             SORA->messageBox(e.what(), "Fatal error", MB_OK);
             SORA->shutDown();
@@ -45,16 +47,13 @@ namespace sora {
         pTimer = timer;
     }
     
-    void SoraiOSInitializer::setVerticalSync(bool flag) {
-        mVerticalSync = flag;
-    }
-    
     bool SoraiOSInitializer::update() {
-        if(mVerticalSync) {
-            return true;
+        if(pTimer->update()) {
+            sora::SoraTimestamp time;
+            sora::SORA_IOS->SoraiOSUpdateSystems();
+        //    printf("%u\n", time.elapsed());
+
         }
-        else if(pTimer)
-            return pTimer->update();
         return false;
     }
     
@@ -66,4 +65,36 @@ namespace sora {
         SORA->shutDown();
     }
     
+    void SoraiOSInitializer::setRenderSystem(SoraiOSGLRenderer* r) {
+        mRenderSystem = r;
+    }
+    
+    void SoraiOSInitializer::setOrientation(int portrait) {
+        mRenderSystem->setOrientation(portrait);
+        
+        switch(portrait) {
+            case ORIENTATION_PORTRAIT:
+                sora::setPortrait(portrait);
+				[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortrait animated:YES];
+				break;
+			case ORIENTATION_PORTRAIT_UPSIDE_DOWN:
+                sora::setPortrait(portrait);
+				[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortraitUpsideDown animated:YES];
+				break;
+			case ORIENTATION_LANDSCAPE_LEFT:
+                sora::setPortrait(portrait);
+				[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight animated:YES];
+				break;
+			case ORIENTATION_LANDSCAPE_RIGHT:
+                sora::setPortrait(portrait);
+				[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeLeft animated:YES];
+				break;
+        }
+    }
+    
+    int SoraiOSInitializer::getOrientation() const {
+        return mRenderSystem->getOrientation();
+    }
+    
+
 } // namespace sora

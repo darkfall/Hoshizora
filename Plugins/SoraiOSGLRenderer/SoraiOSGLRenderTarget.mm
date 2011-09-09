@@ -15,8 +15,8 @@
 #include "EAGLView.h"
 
 namespace sora {
-
-SoraRenderTargetiOSGL::SoraRenderTargetiOSGL(int32 _w, int32 _h, bool _zbuffer):
+    
+    SoraRenderTargetiOSGL::SoraRenderTargetiOSGL(int32 _w, int32 _h, bool _zbuffer):
     w(_w), h(_h), zbuffer(_zbuffer), frameBuffer(0), depthBuffer(0) {
         
         SoraTexture* objtex = (SoraTexture*)SoraCore::Instance()->createTextureWH(_w, _h);
@@ -24,10 +24,10 @@ SoraRenderTargetiOSGL::SoraRenderTargetiOSGL(int32 _w, int32 _h, bool _zbuffer):
         h = objtex->mTextureHeight;
         glTex = objtex->mTextureID;
         tex = (HSORATEXTURE)objtex;
-			
+        
 		// create framebuffer
         glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES, (GLint *) &oldbuffer);
-
+        
 		glGenFramebuffersOES(1, &frameBuffer);
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, frameBuffer);
 		
@@ -47,28 +47,28 @@ SoraRenderTargetiOSGL::SoraRenderTargetiOSGL(int32 _w, int32 _h, bool _zbuffer):
 		}
         
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, oldbuffer);
-}
-
-SoraRenderTargetiOSGL::~SoraRenderTargetiOSGL() {
-	if (tex) {
-		glDeleteTextures(1, (GLuint*)(&((SoraTexture*)tex)->mTextureID));
-        delete (SoraTexture*)tex;
     }
-
-	if (frameBuffer)
-		glDeleteFramebuffersOES(1, (uint32*)(&frameBuffer));
-
-	if (depthBuffer)
-		glDeleteRenderbuffersOES(1, (uint32*)(&depthBuffer));
-}
-
-void SoraRenderTargetiOSGL::attachToRender() {
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES, (GLint *) &oldbuffer);
-	glBindFramebufferOES(GL_FRAMEBUFFER_OES, frameBuffer);
-}
-
-void SoraRenderTargetiOSGL::detachFromRender() {
-    glBindFramebufferOES(GL_FRAMEBUFFER_OES, oldbuffer);
-}
+    
+    SoraRenderTargetiOSGL::~SoraRenderTargetiOSGL() {
+        if (tex) {
+            glDeleteTextures(1, (GLuint*)(&((SoraTexture*)tex)->mTextureID));
+            delete (SoraTexture*)tex;
+        }
+        
+        if (frameBuffer)
+            glDeleteFramebuffersOES(1, (uint32*)(&frameBuffer));
+        
+        if (depthBuffer)
+            glDeleteRenderbuffersOES(1, (uint32*)(&depthBuffer));
+    }
+    
+    void SoraRenderTargetiOSGL::attachToRender() {
+        glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES, (GLint *) &oldbuffer);
+        glBindFramebufferOES(GL_FRAMEBUFFER_OES, frameBuffer);
+    }
+    
+    void SoraRenderTargetiOSGL::detachFromRender() {
+        glBindFramebufferOES(GL_FRAMEBUFFER_OES, oldbuffer);
+    }
 
 } // namespace sora

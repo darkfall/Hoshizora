@@ -26,26 +26,31 @@ namespace sora {
 		
         void SoraiOSInit(bool isOGLES2API, bool multisampling=false);
 		
-        SoraiOSInitializer(): mVerticalSync(true) {}
+        SoraiOSInitializer() {}
         ~SoraiOSInitializer() {}
         
 	public:
 		
         void SoraiOSStart(SoraWindowInfoBase* window, bool isOGLES2API=false);
 		void setTimer(SoraTimer* timer);
-		
-        void setVerticalSync(bool flag);
+		void setRenderSystem(SoraiOSGLRenderer* sys);
+        
         bool update();
         void SoraiOSUpdateSystems();
         void SoraiOSShutDown();
         void enableMultisampling(bool flag);
-    
-	private:
         
+        int32 getScreenWidth();
+        int32 getScreenHeight();
+    
+        void setOrientation(int portrait);
+        int getOrientation() const;
+        
+	private:
         SoraTimer* pTimer;
 		SoraiOSInput* input;
-        
-        bool mVerticalSync;
+    
+        SoraiOSGLRenderer* mRenderSystem;
 	};
 
 	static SoraiOSInitializer* SORA_IOS = SoraiOSInitializer::Instance();

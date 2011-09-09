@@ -9,6 +9,7 @@
 
 #include "SoraiOSTouchPool.h"
 #include "SoraiOSTouchInfo.h"
+#include "SoraiOSWrapper.h"
 
 namespace sora {
 	
@@ -30,6 +31,7 @@ namespace sora {
 			
 			SoraiOSTouchInfo info;
 			info.x = p.x; info.y = p.y;
+            sora::translatePointToView(&info.x, &info.y);
 			info.fingerId = i;
 			info.phase = TOUCHPHASE_BEGAN;
 			info.tapCount = [touch tapCount];
@@ -52,6 +54,8 @@ namespace sora {
 			
 			info.dx = p.x - info.x; info.dy = p.y - info.y;
 			info.x = p.x; info.y = p.y;
+            sora::translatePointToView(&info.x, &info.y);
+
 			info.phase = TOUCHPHASE_MOVED;
 			info.tapCount = [touch tapCount];
 			info.delta = [touch timestamp];
@@ -72,6 +76,8 @@ namespace sora {
 			
 			info.dx = p.x - info.x; info.dy = p.y - info.y;
 			info.x = p.x; info.y = p.y;
+            sora::translatePointToView(&info.x, &info.y);
+
 			info.phase = TOUCHPHASE_ENDED;
 			info.tapCount = [touch tapCount];
 			info.delta = [touch timestamp];
@@ -93,6 +99,8 @@ namespace sora {
 			
 			info.dx = p.x - info.x; info.dy = p.y - info.y;
 			info.x = p.x; info.y = p.y;
+            sora::translatePointToView(&info.x, &info.y);
+
 			info.phase = TOUCHPHASE_CANCLED;
 			info.tapCount = [touch tapCount];
 			info.delta = [touch timestamp];
@@ -116,11 +124,12 @@ namespace sora {
 			
             SoraiOSTouchInfo info;
             info = g_touch->getTouch(i);
-			
                         
 			if(info.x != 0.f || info.y != 0.f)
 				info.dx = p.x - info.x; info.dy = p.y - info.y;
 			info.x = p.x; info.y = p.y;
+            sora::translatePointToView(&info.x, &info.y);
+
 			switch ([touch phase]) {
 				case UITouchPhaseBegan:         info.phase = TOUCHPHASE_BEGAN; break;
 				case UITouchPhaseStationary:    info.phase = TOUCHPHASE_STATIONARY; break;

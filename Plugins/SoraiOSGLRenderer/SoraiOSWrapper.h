@@ -20,6 +20,16 @@ namespace sora {
     void presentEAGLFBO();
     void* getEAGLView();
     void setupMultisampling(bool flag);
+    int getScreenWidth();
+    int getScreenHeight();
+    float getContentsScale();
+    void setPortrait(int p);
+
+    
+    // tranlate a point into corresponding orientation view
+    void translatePointToView(float* x, float *y);
+    // tranlsate a point from view into gl point 
+    void translatePointToGL(float* x, float* y);
     
 } // namespace sora
 

@@ -876,7 +876,6 @@ namespace sora{
 	}
     
     void SoraiOSGLRenderer_ES2::setVerticalSync(bool flag) {
-        SoraiOSInitializer::Instance()->setVerticalSync(flag);
     }
 
 	void SoraiOSGLRenderer_ES2::detachShaderContext() {

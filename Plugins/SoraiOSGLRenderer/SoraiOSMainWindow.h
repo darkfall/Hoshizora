@@ -14,7 +14,7 @@
 
 #include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraiOSFontManager/SoraiOSFontManager.h"
-
+#include "SoraiOSWrapper.h"
 #include "SoraFont.h"
 #include "SoraFileUtility.h"
 
@@ -28,13 +28,13 @@ namespace sora {
     
     class SoraiOSMainWindow: public sora::SoraWindowInfoBase {
     public:
-        SoraiOSMainWindow(): mScreenRotated(false) { }
+        SoraiOSMainWindow() { }
         
         int32 getWindowWidth() { 
-            return sora::iOSGetScreenWidth(mScreenRotated);
+            return sora::getScreenWidth();
         }
         int32 getWindowHeight() { 
-            return sora::iOSGetScreenHeight(mScreenRotated);
+            return sora::getScreenHeight();
         }
         
         int32 getWindowPosX() { return 0; }
@@ -46,10 +46,6 @@ namespace sora {
         bool isWindowed() { return false; }
         bool hideMouse() { return false; }
         
-        void rotScreen(bool flag) { mScreenRotated = flag; }
-        bool isScreenRoteted() const { return mScreenRotated; }
-        
-        
         virtual bool updateFunc() {
             return false;
         }
@@ -60,8 +56,12 @@ namespace sora {
         
         virtual void init() { }
         
+        // ios background application recover event
+        virtual void onApplicationRecover() {
+            
+        }
+        
     private:
-        bool mScreenRotated;
     };
     
 

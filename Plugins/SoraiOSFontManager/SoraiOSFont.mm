@@ -25,6 +25,20 @@ namespace sora {
 			SORA->releaseTexture(tex);
 		}
 	}
+    
+    NSString* wstring2NSString(const SoraWString& ws) {
+        char* data = (char*)ws.data();
+		unsigned size = ws.size() * sizeof(wchar_t);
+		
+#if TARGET_RT_BIG_ENDIAN
+		const NSStringEncoding kEncoding_wchar_t = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF32BE);
+#else
+		const NSStringEncoding kEncoding_wchar_t = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF32LE);
+#endif
+		
+		NSString* result = [[[NSString alloc] initWithBytes:data length:size encoding:kEncoding_wchar_t] autorelease];
+		return result;
+    }
 	
 	stringId iOSFontGlyph::cache(const SoraWString& str, const SoraString& fontName, uint32 fontSize) {
 		if(!cached) {
@@ -40,6 +54,7 @@ namespace sora {
 								  tex2D.pixelsWide, tex2D.pixelsHigh);
 			
 			[nsFontName release];
+        //    [nsBuffer release];
 			
 			width = ptex->mTextureWidth;
 			tex = (HSORATEXTURE)ptex;

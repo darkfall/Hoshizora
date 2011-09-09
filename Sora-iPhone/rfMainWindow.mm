@@ -15,6 +15,7 @@
 //#include "SoraGUIChan/guichan.hpp"
 #include "llexer.h"
 #include "SoraiOSDeviceHelper.h"
+#include "SoraTimestamp.h"
 
 class buttonListener: public gcn::ActionListener {
 public:
@@ -46,22 +47,22 @@ sora::SoraSprite* spr;
 bool rfMainWindow::renderFunc() {		
 	//CORE->setTransform(0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f);
 
-	CORE->beginScene(0xffff0000, fbo);
-	
+	CORE->beginScene(0);
 	if(rfState != STATE_LOGO) {
 		pBG->render(0.f, 0.f);
 		if(prfMapRenderer) {
+            
 			prfMapRenderer->render();
+            
 			renderState();
 		}
 		if(stateCount != 0) {
 			if(pBlackBG) pBlackBG->render(0.f, 0.f);
 			if(pState)  {
 				pState->render();
-				printf("%f\n", sora::SoraColorRGBA(pState->getColor()).a);
 			}
 		}
-	
+        
 		sora::GCN_GLOBAL->gcnLogic();
 		sora::GCN_GLOBAL->gcnDraw();
 	} else {
@@ -73,16 +74,18 @@ bool rfMainWindow::renderFunc() {
 			pFont->render((float32)getWindowWidth()/2-pFont->getStringWidth(L"Presented By Darkfall")/2, 
 						  (float32)getWindowHeight()/2-96, sora::FONT_ALIGNMENT_LEFT, L"Presented By Darkfall");
 		}
-//		pLogoAnim->render((float32)getWindowWidth()/2-64, (float32)getWindowHeight()/2-64);
+        //		pLogoAnim->render((float32)getWindowWidth()/2-64, (float32)getWindowHeight()/2-64);
 	}
-	CORE->endScene();
-    
-    CORE->beginScene();
+		CORE->endScene();
+
+   /* CORE->beginScene();
     spr->setTexture(sora::SORA->getTargetTexture(fbo));
  //   spr->setScale(0.5f, 0.5f);
     spr->render();
 
-    CORE->endScene();
+    
+
+    CORE->endScene();*/
 	return false;
 }
 
@@ -109,7 +112,7 @@ void rfMainWindow::renderState() {
 			pFont->print(300.f, 0.f, sora::FONT_ALIGNMENT_LEFT, L"Time: Infinite");
 		
 		pFont->setColor(0xFFFFFFFF);
-		pFont->print(getWindowWidth()-pFont->getStringWidth(L"Lighted Box:   /    "), getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"Lighted Box: %d/%d", prfMapRenderer->getBoxGot(), prfMapRenderer->getBoxAim());
+		pFont->print(getWindowWidth()-pFont->getStringWidth(L"Lighted Box:   /    "), getWindowHeight()-80.f, sora::FONT_ALIGNMENT_LEFT, L"Lighted Box: %d/%d", prfMapRenderer->getBoxGot(), prfMapRenderer->getBoxAim());
         pFont->print(0.f, getWindowHeight()-40.f, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.2f", sora::SORA->getFPS());
 	}
 }
@@ -249,7 +252,7 @@ int32 rfMainWindow::loadMap(const wchar_t* map, uint16 maxM, uint16 maxT) {
 		
 		return 0;
 	} else {
-		prfMapRenderer->setPosition((getWindowWidth()-prfMapRenderer->getWidth())/2, (getWindowHeight()-prfMapRenderer->getHeight())/2);
+		prfMapRenderer->setPosition(0, 0);
 		prfMapRenderer->setMaxMirrorNum(maxM);
 		prfMapRenderer->setMaxTime(maxT);
 	}
@@ -326,7 +329,7 @@ void rfMainWindow::init() {
 	printf("%s\n", sora::ws2s(sora::SoraFileUtility::getApplicationPath()+L"resource.SoraResource").c_str());
 	CORE->attachResourcePack(CORE->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource"));
 	
-	pBG = CORE->createSprite(L"background1.png");
+	pBG = CORE->createSprite(L"magicCircle.png");
 	//if(pBG) pBG->setScale(pBG->getTextureWidth()/getWindowWidth(), pBG->getTextureHeight()/getWindowHeight());
 	pBlackBG = CORE->createSprite(L"blackbg.png");
 	

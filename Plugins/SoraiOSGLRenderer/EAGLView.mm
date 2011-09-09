@@ -45,6 +45,17 @@
                                         nil];
     }
     
+    UIDevice *device = [UIDevice currentDevice];	
+	[device beginGeneratingDeviceOrientationNotifications];
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self
+		   selector:@selector(orientationChanged:)
+			   name:UIDeviceOrientationDidChangeNotification
+			 object:device];
+    
+    if(sora::_IS_RETINA_DISPLAY())
+        self.contentScaleFactor = 2.0;
+    
     sora::setEAGLView(self);
     multisampling = true;
     initialized = true;
@@ -220,9 +231,8 @@
 }
 
 - (void) update {
-    if(initialized && sora::SORA_IOS->update()) {
-        sora::SORA_IOS->SoraiOSUpdateSystems();
-    }
+    if(initialized)
+        sora::SORA_IOS->update();
 }
 
 - (void)setFramebuffer
@@ -311,7 +321,6 @@
 
 }
 
-
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self touchesChangedWithEvent:event];
 }
@@ -321,10 +330,43 @@
 
 }
 
+- (void)orientationChanged:(NSNotification *)note {
+    switch([[note object] orientation]) {
+        case UIDeviceOrientationPortrait:
+            sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_PORTRAIT);
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_PORTRAIT_UPSIDE_DOWN);
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_LANDSCAPE_LEFT);
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_LANDSCAPE_RIGHT);
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)layoutSubviews
 {
     // The framebuffer will be re-created at the beginning of the next setFramebuffer method call.
     [self deleteFramebuffer];
+}
+
+- (int)getScreenWidth {
+    return framebufferWidth / [self contentScaleFactor];
+}
+
+- (int)getScreenHeight {
+    return framebufferHeight / [self contentScaleFactor];
+}
+
+- (float)getContentsScale {
+    if(sora::isUseRetina())
+        return [self contentScaleFactor];
+    return 1.0;
 }
 
 @end

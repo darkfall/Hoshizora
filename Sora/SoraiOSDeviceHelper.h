@@ -40,7 +40,14 @@ namespace sora {
     SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRetina=true);
     SoraWString iOSGetDocumentResourceName(const SoraWString& origName, bool appendRetina=true);
 	
-    NSString* wstring2NSString(const std::wstring& ws);
+    
+    /**
+     *  Must be called initialization
+     *  If not, glViewport and glortho are still mapped to (320,480) and resources with @2x are ignored
+     *  Otherwise, will double the scrensize and will deal with resources with @2x and scale resources without @2x
+     **/ 
+    void setUseRetina(bool flag);
+    bool isUseRetina();
 	/*
 	 Family: Hiragino Kaku Gothic ProN W3 
 	 Font: HiraKakuProN-W3 

@@ -14,6 +14,14 @@
 #include "SoraiOSGLRenderTarget.h"
 
 namespace sora {
+
+    // ios portraits
+    enum {
+        ORIENTATION_PORTRAIT,
+        ORIENTATION_PORTRAIT_UPSIDE_DOWN,
+        ORIENTATION_LANDSCAPE_LEFT,
+        ORIENTATION_LANDSCAPE_RIGHT
+    };
 	
 	class SoraiOSGLRenderer: public SoraRenderSystem {
 	public:
@@ -83,10 +91,14 @@ namespace sora {
         void setIcon(const SoraString& icon);
         void setCursor(const SoraString& cursor);
         
+        void setOrientation(int por);
+        int getOrientation() const;
+        
+        void tranlatePointToGL(float* x, float* y);
+        
 	private:
 		void applyTransform();
 		void bindTexture(SoraTexture* tex);
-		
 		
 		inline int32 _modeToGLMode(int32 mode);
 		inline void _glInitialize();
@@ -130,15 +142,13 @@ namespace sora {
 		std::list<SoraRenderTarget*> liTargets;
 		SoraRenderTargetiOSGL* pCurTarget;
 		
-		bool bShaderAvailable;
-		GLuint uGLShaderProgram;
-
 		GLuint mCurrTexture;
 
 		SoraShaderContext* currShader;
 
-		bool bFullscreen;
 		int iFrameStart;
+        
+        int mOrientation;
 	};
 } // namespace sora
 

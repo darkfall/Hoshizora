@@ -24,6 +24,8 @@
 		8834C337135F7AE7006A20F6 /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C335135F7AE7006A20F6 /* SoraSpriteAnimation.cpp */; };
 		8834C349135F7B85006A20F6 /* SoraiOSFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8834C346135F7B85006A20F6 /* SoraiOSFont.mm */; };
 		8834C34A135F7B85006A20F6 /* SoraiOSFontManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8834C347135F7B85006A20F6 /* SoraiOSFontManager.mm */; };
+		884029271419291800F9DD84 /* magicCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 884029261419291800F9DD84 /* magicCircle@2x.png */; };
+		8840292B1419B95400F9DD84 /* SoraiOSDeviceHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8840292A1419B95400F9DD84 /* SoraiOSDeviceHelper.mm */; };
 		884CC5A612F6537B00FD18FC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59712F6537B00FD18FC /* CoreGraphics.framework */; };
 		887E2823136115CD00803DA6 /* gcnImageButton2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E281A136115CD00803DA6 /* gcnImageButton2.cpp */; };
 		887E2824136115CD00803DA6 /* gcnDraggableImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 887E281C136115CD00803DA6 /* gcnDraggableImageButton.cpp */; };
@@ -328,7 +330,6 @@
 		88EFBBE113E3120300B66F63 /* SoraLuaObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8613E3120300B66F63 /* SoraLuaObject.cpp */; };
 		88EFBBE213E3120300B66F63 /* SoraLuaStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8813E3120300B66F63 /* SoraLuaStateManager.cpp */; };
 		88EFBBE313E3120300B66F63 /* spriteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8A13E3120300B66F63 /* spriteWrapper.cpp */; };
-		88EFBBFF13E320F800B66F63 /* SoraiOSDeviceHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBBFE13E320F800B66F63 /* SoraiOSDeviceHelper.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -362,6 +363,10 @@
 		8834C346135F7B85006A20F6 /* SoraiOSFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoraiOSFont.mm; path = ../Plugins/SoraiOSFontManager/SoraiOSFont.mm; sourceTree = SOURCE_ROOT; };
 		8834C347135F7B85006A20F6 /* SoraiOSFontManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoraiOSFontManager.mm; path = ../Plugins/SoraiOSFontManager/SoraiOSFontManager.mm; sourceTree = SOURCE_ROOT; };
 		8834C348135F7B85006A20F6 /* SoraiOSFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraiOSFontManager.h; path = ../Plugins/SoraiOSFontManager/SoraiOSFontManager.h; sourceTree = SOURCE_ROOT; };
+		884029261419291800F9DD84 /* magicCircle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magicCircle@2x.png"; sourceTree = "<group>"; };
+		884029281419660600F9DD84 /* SoraiOSTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSTimer.h; sourceTree = "<group>"; };
+		884029291419B95400F9DD84 /* SoraiOSDeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSDeviceHelper.h; sourceTree = "<group>"; };
+		8840292A1419B95400F9DD84 /* SoraiOSDeviceHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSDeviceHelper.mm; sourceTree = "<group>"; };
 		884CC58A12F6537B00FD18FC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		884CC59212F6537B00FD18FC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		884CC59312F6537B00FD18FC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -426,7 +431,6 @@
 		88B1C09013A7C1F800EC541D /* stb_image_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_aug.h; sourceTree = "<group>"; };
 		88B1C09113A7C1F800EC541D /* stbi_DDS_aug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug.h; sourceTree = "<group>"; };
 		88B1C09213A7C1F800EC541D /* stbi_DDS_aug_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug_c.h; sourceTree = "<group>"; };
-		88B1C09313A7C1F800EC541D /* SoraiOSDeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSDeviceHelper.h; sourceTree = "<group>"; };
 		88B1C09413A7C1F800EC541D /* SoraiOSGLRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraiOSGLRenderer.cpp; sourceTree = "<group>"; };
 		88B1C09513A7C1F800EC541D /* SoraiOSGLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSGLRenderer.h; sourceTree = "<group>"; };
 		88B1C09613A7C1F800EC541D /* SoraiOSGLRenderTarget.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSGLRenderTarget.mm; sourceTree = "<group>"; };
@@ -1095,7 +1099,6 @@
 		88EFBB8A13E3120300B66F63 /* spriteWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spriteWrapper.cpp; sourceTree = "<group>"; };
 		88EFBB8B13E3120300B66F63 /* spriteWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spriteWrapper.h; sourceTree = "<group>"; };
 		88EFBB8C13E3120300B66F63 /* TinkerExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinkerExport.h; sourceTree = "<group>"; };
-		88EFBBFE13E320F800B66F63 /* SoraiOSDeviceHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSDeviceHelper.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Sora_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sora_iPhone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1170,6 +1173,7 @@
 				88057FAC135EBBBF00B1535B /* resource.SoraResource */,
 				88058041135EC07E00B1535B /* data.rfResource */,
 				889782A813071E6500A69ADE /* magicCircle.png */,
+				884029261419291800F9DD84 /* magicCircle@2x.png */,
 				28EC4C5811D54ECE0027AA9F /* Sora_iPhoneViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Sora_iPhone-Info.plist */,
@@ -1309,8 +1313,6 @@
 			children = (
 				88B1C07F13A7C1F800EC541D /* Apple */,
 				88B1C08713A7C1F800EC541D /* soil */,
-				88B1C09313A7C1F800EC541D /* SoraiOSDeviceHelper.h */,
-				88EFBBFE13E320F800B66F63 /* SoraiOSDeviceHelper.mm */,
 				88B1C09413A7C1F800EC541D /* SoraiOSGLRenderer.cpp */,
 				88B1C09513A7C1F800EC541D /* SoraiOSGLRenderer.h */,
 				8896363D13C989C7004CF8AD /* SoraiOSGLRenderer_ES2.cpp */,
@@ -1333,6 +1335,7 @@
 				88DFE17E1417F38D00CA711D /* EAGLView.h */,
 				88DFE17F1417F38D00CA711D /* EAGLView.mm */,
 				88DFE1811417F77300CA711D /* SoraiOSMainWindow.h */,
+				884029281419660600F9DD84 /* SoraiOSTimer.h */,
 			);
 			name = SoraiOSGLRenderer;
 			path = ../Plugins/SoraiOSGLRenderer;
@@ -1373,6 +1376,8 @@
 		88C8523C14172C5900FB39EC /* Sora */ = {
 			isa = PBXGroup;
 			children = (
+				884029291419B95400F9DD84 /* SoraiOSDeviceHelper.h */,
+				8840292A1419B95400F9DD84 /* SoraiOSDeviceHelper.mm */,
 				88C8523D14172C5900FB39EC /* AutoContainer.cpp */,
 				88C8523E14172C5900FB39EC /* AutoContainer.h */,
 				88C8523F14172C5900FB39EC /* cmd */,
@@ -2350,6 +2355,7 @@
 				88C8551114172E3800FB39EC /* Makefile.in in Resources */,
 				88C8552214172E3800FB39EC /* Makefile.am in Resources */,
 				88C8552314172E3800FB39EC /* Makefile.in in Resources */,
+				884029271419291800F9DD84 /* magicCircle@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2449,7 +2455,6 @@
 				88EFBBE113E3120300B66F63 /* SoraLuaObject.cpp in Sources */,
 				88EFBBE213E3120300B66F63 /* SoraLuaStateManager.cpp in Sources */,
 				88EFBBE313E3120300B66F63 /* spriteWrapper.cpp in Sources */,
-				88EFBBFF13E320F800B66F63 /* SoraiOSDeviceHelper.mm in Sources */,
 				88C853D814172C5A00FB39EC /* AutoContainer.cpp in Sources */,
 				88C853D914172C5A00FB39EC /* CoreCmds.cpp in Sources */,
 				88C853DA14172C5A00FB39EC /* SoraConsole.cpp in Sources */,
@@ -2644,6 +2649,7 @@
 				88DFE1801417F38D00CA711D /* EAGLView.mm in Sources */,
 				88DFE183141810BA00CA711D /* SoraiOSInitializer.mm in Sources */,
 				88DFE186141811EE00CA711D /* SoraiOSWrapper.mm in Sources */,
+				8840292B1419B95400F9DD84 /* SoraiOSDeviceHelper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

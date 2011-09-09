@@ -35,9 +35,6 @@ namespace sora{
 
 	SoraiOSGLRenderer::SoraiOSGLRenderer() {
 		pCurTarget = 0;
-		uGLShaderProgram = 0;
-		
-		bShaderAvailable = _glShaderCheck();
 		
 		mCurrTexture = -1;
 		
@@ -111,28 +108,46 @@ namespace sora{
 		glLoadIdentity();
 		//Creating an orthoscopic view matrix going from -1 -> 1 in each
 		//dimension on the screen (x, y, z).
-		glOrthof(0.f, w, h, 0.f, -1.f, 1.f);
+		glOrthof(0.f, 320, 480, 0.f, -1.f, 1.f);
 	}
 	
 	void SoraiOSGLRenderer::applyTransform() {
         if(!pCurTarget) {
+            float w = _oglWindowInfo.width * getContentsScale();
+            float h = _oglWindowInfo.height * getContentsScale();
+            
             glViewport(0, 0,
-                       _oglWindowInfo.width,
-                       _oglWindowInfo.height);
+                       w, h);
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
             glOrthof(0.f,
-                    _oglWindowInfo.width,
-                    _oglWindowInfo.height
-                    , 0.f, 1.f, -1.f);
+                     w, h
+                     , 0.f, 1.f, -1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             
             glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
-            glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
+            switch(mOrientation) {
+                case ORIENTATION_LANDSCAPE_LEFT:
+                    glRotatef(90+_oglWindowInfo.rot,0,0,1);
+                    glTranslatef(0, -w, 0);
+                    break;
+                case ORIENTATION_LANDSCAPE_RIGHT:
+                    glRotatef(-90+_oglWindowInfo.rot,0,0,1);
+                    glTranslatef(-h, 0 ,0);
+                    break;
+                case ORIENTATION_PORTRAIT_UPSIDE_DOWN:
+                    glTranslatef(w/2,h/2,0);
+                    glRotatef(180+_oglWindowInfo.rot,0,0,1);
+                    glTranslatef(-w/2,-h/2,0);
+                    break;
+                case ORIENTATION_PORTRAIT:
+                    glRotatef(_oglWindowInfo.rot, 0.f, 0.f, 1.f);
+                    break;
+            }
             glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
             glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
-            
+ 
             
         } else {
             glViewport(0,  0,
@@ -202,16 +217,28 @@ namespace sora{
 		if(blend != CurBlendMode)
 			flush();
 		
-		//		glDisable(GL_ALPHA_TEST);
+        //		glDisable(GL_ALPHA_TEST);
 		glEnable(GL_BLEND); // Enable Blending
 		
+		if((blend & BLEND_SRCALPHA) != (CurBlendMode & BLEND_SRCALPHA))
+			if(blend & BLEND_SRCALPHA)
+				glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
+        
 		if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND)) {
-			if(blend & BLEND_ALPHABLEND)
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);      //Alpha blending
+			if(blend & BLEND_ALPHABLEND) {
+                if(pCurTarget)
+                    // alpha trick with FBO transparent background
+                    // see http://www.opengl.org/discussion_boards/ubbthreads.php?ubb=showflat&Number=257628
+                    
+                    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+                
+                else 
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);      //Alpha blending
+            }
 			else
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE); //Addictive
 		}
-		
+        
 		if((blend & BLEND_ZWRITE) != (CurBlendMode & BLEND_ZWRITE)) {
 			if(blend & BLEND_ZWRITE) {
                 glEnable(GL_DEPTH_TEST);
@@ -219,12 +246,12 @@ namespace sora{
                 glDisable(GL_DEPTH_TEST);
             }
 		}
-		
+        
 		if((blend & BLEND_COLORADD) != (CurBlendMode & BLEND_COLORADD)) {
 			if(blend & BLEND_COLORADD) glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ADD);
 			else glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		}
-
+        
 		CurBlendMode = blend;
 	}
 	
@@ -235,8 +262,8 @@ namespace sora{
 	
 	void SoraiOSGLRenderer::start(SoraTimer* timer) {
 		SORA_IOS->setTimer(timer);
+        SORA_IOS->setRenderSystem(this);
 		g_timer = timer;
-
 	}
 
 	void SoraiOSGLRenderer::beginScene(uint32 color, ulong32 target, bool clear) {
@@ -257,7 +284,6 @@ namespace sora{
 		_glSetProjectionMatrix(_oglWindowInfo.width, _oglWindowInfo.height);
 		applyTransform();
 		
-		bFullscreen = /*windowInfo->isWindowed()*/ true;
 		windowInfo->init();		
 
 		return (ulong32)windowInfo;
@@ -279,7 +305,7 @@ namespace sora{
 	}
 	
 	bool SoraiOSGLRenderer::isFullscreen() {
-		return bFullscreen;
+        return true;
 	}
 	
 	ulong32 SoraiOSGLRenderer::getVideoDeviceHandle() {
@@ -809,7 +835,6 @@ namespace sora{
 	}
     
     void SoraiOSGLRenderer::setVerticalSync(bool flag) {
-        SoraiOSInitializer::Instance()->setVerticalSync(flag);
     }
 
 	void SoraiOSGLRenderer::detachShaderContext() {
@@ -882,5 +907,13 @@ namespace sora{
     
     void SoraiOSGLRenderer::setCursor(const SoraString& cursor) {
         
+    }
+    
+    void SoraiOSGLRenderer::setOrientation(int por) {
+        mOrientation = por;
+    }
+    
+    int SoraiOSGLRenderer::getOrientation() const {
+        return mOrientation;
     }
 } // namespace sora

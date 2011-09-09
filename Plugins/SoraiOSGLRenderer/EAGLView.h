@@ -36,11 +36,15 @@
 
 @property (nonatomic, retain) EAGLContext *context;
 
+- (int)getScreenWidth;
+- (int)getScreenHeight;
+- (float)getContentsScale;
 - (void)enableMultiSampling:(BOOL)flag;
 - (BOOL)isMultiSamplingEnabled;
 
 - (void)setupMSAABuffer;
 - (void)deleteMSAABuffer;
+- (void)orientationChanged:(NSNotification*)note;
 
 
 - (void)update;
