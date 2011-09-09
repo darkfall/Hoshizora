@@ -18,6 +18,7 @@
 #include <vector>
 #include <map>
 
+
 namespace sora {
 	
 	class SoraResourceManager;

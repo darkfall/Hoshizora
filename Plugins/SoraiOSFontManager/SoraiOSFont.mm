@@ -9,7 +9,6 @@
 
 #include "SoraiOSFont.h"
 #include "SoraCore.h"
-#include "SoraiOSGLRenderer/SoraiOSDeviceHelper.h"
 
 namespace sora {
 

@@ -53,8 +53,10 @@
 			   name:UIDeviceOrientationDidChangeNotification
 			 object:device];
     
-    if(sora::_IS_RETINA_DISPLAY())
+    if(sora::_IS_RETINA_DISPLAY()) {
         self.contentScaleFactor = 2.0;
+        sora::setScaleFactor(2.0f);
+    }
     
     sora::setEAGLView(self);
     multisampling = true;

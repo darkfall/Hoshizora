@@ -21,6 +21,11 @@ namespace sora {
 		int32 mOriginalWidth, mOriginalHeight;
 
 		SoraTextureDataRef dataRef;
+        
+#ifdef OS_IOS
+        // if not retina texture and the device supports retina display, we need to scale the texture
+        bool mIsRetinaTexture;
+#endif
 	};
 
 } // namespace sora

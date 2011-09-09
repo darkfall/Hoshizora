@@ -2,6 +2,10 @@
 #include "SoraHandleManager.h"
 #include "SoraObjectHandle.h"
 
+#ifdef OS_IOS
+#include "SoraiOSDeviceHelper.h"
+#endif
+
 namespace sora {
 
 	SoraObject::SoraObject(): 
@@ -57,6 +61,7 @@ namespace sora {
 	void SoraObject::setPosition(float32 _x, float32 _y) {
 		mPosx = _x;
 		mPosy = _y;
+
 	}
 	
 	void SoraObject::getPosition(float32& _x, float32& _y) const {

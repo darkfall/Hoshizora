@@ -8,12 +8,20 @@ namespace sora {
 		mTextureHeight = height;
 		mOriginalWidth = width;
 		mOriginalHeight = height;
+        
+#ifdef OS_IOS
+        mIsRetinaTexture = false;
+#endif
 	}
 
 	SoraTexture::SoraTexture() {
 		mTextureID = 0;
 		mTextureWidth = mTextureHeight = 0;
 		mOriginalWidth = mOriginalHeight = 0;
+        
+#ifdef OS_IOS
+        mIsRetinaTexture = false;
+#endif
 	}
 
 } // namespace sora

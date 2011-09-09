@@ -3,6 +3,10 @@
 #include "SoraTextureMap.h"
 #include "SoraCore.h"
 
+#ifdef OS_IOS
+#include "SoraiOSDeviceHelper.h"
+#endif
+
 namespace sora {
     
     SoraSprite::SoraSprite()  { 
@@ -81,7 +85,15 @@ namespace sora {
 	}
 
 	void SoraSprite::_initDefaults() {
-		mVScale = mHScale = 1.f;
+        mVScale = mHScale = 1.f;
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            if(mTexture && !mTexture->mIsRetinaTexture) {
+                mVScale = mHScale = getScaleFactor();
+            }
+        }
+#endif
+        
 		bVFlip = bHFlip = false;
 		mRotation = mRotationZ = 0.f;
 		mCenterX = mCenterY = 0.f;
@@ -96,6 +108,13 @@ namespace sora {
 	}
 
 	void SoraSprite::setTextureRect(float32 x, float32 y, float32 width, float32 height) {
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            float scale = sora::getScaleFactor();
+            x *= scale; y *= scale;
+            width *= scale; height *= scale;
+        }
+#endif
 		float tx1, ty1, tx2, ty2;
 		
 		mTextureRect.x1=x;
@@ -114,16 +133,20 @@ namespace sora {
 		mQuad.v[0].tx=tx1; mQuad.v[0].ty=ty1; 
 		mQuad.v[1].tx=tx2; mQuad.v[1].ty=ty1; 
 		mQuad.v[2].tx=tx2; mQuad.v[2].ty=ty2; 
-		mQuad.v[3].tx=tx1; mQuad.v[3].ty=ty2; 
-		
+		mQuad.v[3].tx=tx1; mQuad.v[3].ty=ty2;
 	}
-
 	
 	void SoraSprite::render() {
         render(getPositionX(), getPositionY());
     }
 
 	void SoraSprite::render(float32 x, float32 y) {
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            x *= sora::getScaleFactor();
+            y *= sora::getScaleFactor();
+        }
+#endif
 		float32 tx1, ty1, tx2, ty2;
 		float32 sint, cost;
 	
@@ -180,10 +203,19 @@ namespace sora {
 	}
 
 	void SoraSprite::render4V(float32 x1, float32 y1, float32 x2, float32 y2, float32 x3, float32 y3, float32 x4, float32 y4) {
+#ifdef OS_IOS
+        float scale = sora::getScaleFactor();
+        
+		mQuad.v[0].x = x1 * scale; mQuad.v[0].y = y1 * scale;
+		mQuad.v[1].x = x2 * scale; mQuad.v[1].y = y2 * scale;
+		mQuad.v[2].x = x3 * scale; mQuad.v[2].y = y3 * scale;
+		mQuad.v[3].x = x4 * scale; mQuad.v[3].y = y4 * scale;
+#else
 		mQuad.v[0].x = x1; mQuad.v[0].y = y1;
 		mQuad.v[1].x = x2; mQuad.v[1].y = y2;
 		mQuad.v[2].x = x3; mQuad.v[2].y = y3;
 		mQuad.v[3].x = x4; mQuad.v[3].y = y4;
+#endif
 		
         attachShaderToRender();
 		mSora->renderQuad(mQuad);
@@ -300,6 +332,16 @@ namespace sora {
 	void SoraSprite::setScale(float32 h, float32 v) {
 		mVScale = v;
 		mHScale = h;
+        
+        // scale resources that are not retina resource(@2x)
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            if(mTexture && !mTexture->mIsRetinaTexture) {
+                mVScale *= getScaleFactor();
+                mHScale *= getScaleFactor();
+            }
+        }
+#endif
 	}
 
 	float32 SoraSprite::getVScale()  const{

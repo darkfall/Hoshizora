@@ -22,6 +22,7 @@
 #include "SoraGLSLShader.h"
 #include "SoraiOSWrapper.h"
 #include "SoraiOSInitializer.h"
+#include "SoraiOSDeviceHelper.h"
 #include "SOIL/SOIL.h"
 
 const uint32 MAX_VERTEX_BUFFER = 2048;
@@ -849,7 +850,16 @@ namespace sora{
     }
     
     void SoraiOSGLRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
-		Rect4V rect;
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            x1 *= 2;
+            y1 *= 2;
+            y2 *= 2;
+            x2 *= 2;
+            fWidth *= 2;
+        }
+#endif
+        Rect4V rect;
 		
 		if(fWidth != y2-y1 && fWidth != x2-x1) {
 			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;

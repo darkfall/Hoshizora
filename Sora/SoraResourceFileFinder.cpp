@@ -10,6 +10,11 @@
 #include "SoraResourceFileFinder.h"
 #include "SoraResourceManager.h"
 
+
+#ifdef OS_IOS
+#include "SoraiOSDeviceHelper.h"
+#endif
+
 namespace sora {
     
     ulong32 SoraResourceFileFinder::ResourceMemory = 0;
@@ -34,7 +39,7 @@ namespace sora {
 	}
 
 	void* SoraResourceFileFinder::readResourceFile(const SoraWString& file, ulong32 size) {
-		void* data;
+        void* data;
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			if((data = mResourceManagers[i]->readResourceFile(file, size)) != NULL) {
                 ResourceMemory += size;

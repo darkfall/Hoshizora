@@ -40,7 +40,8 @@ namespace sora {
     SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRetina=true);
     SoraWString iOSGetDocumentResourceName(const SoraWString& origName, bool appendRetina=true);
 	
-    
+    void setScaleFactor(float factor);
+    float getScaleFactor();
     /**
      *  Must be called initialization
      *  If not, glViewport and glortho are still mapped to (320,480) and resources with @2x are ignored

@@ -51,6 +51,13 @@ extern "C" {
 #include "Random/SFMT.h"
 }
 
+
+#ifdef OS_IOS
+#include "SoraiOSDeviceHelper.h"
+#endif
+
+#include "SoraPath.h"
+
 namespace sora {
     
     SoraCore* SoraCore::mInstance = NULL;
@@ -742,6 +749,47 @@ namespace sora {
 	}
     
 	HSORATEXTURE SoraCore::createTexture(const SoraWString& sTexturePath, bool bCache, bool bMipmap)	{
+        
+#ifdef OS_IOS
+        SoraWString realPath = sTexturePath;
+        SoraWString tmpPath = realPath;
+        size_t dotpos = tmpPath.rfind(L".");
+        bool isRetinaTexture = false;
+        
+        // ios resource auto get
+        if(_IS_RETINA_DISPLAY()) {
+            tmpPath.insert(dotpos, L"@2x");
+            if(SoraFileUtility::fileExists(SoraPath::resourceW() + tmpPath)) {
+                realPath = tmpPath;
+                isRetinaTexture = true;
+            }
+        } else if(_IS_IPAD()) {
+            tmpPath.insert(dotpos, L"~ipad");
+            if(SoraFileUtility::fileExists(SoraPath::resourceW() + tmpPath)) {
+                realPath = tmpPath;
+            }
+        }
+
+        sora_assert(bInitialized==true);
+		HSORATEXTURE tex;
+		if((tex = SoraTextureMap::Instance()->get(SoraPath::resourceW() + realPath)) != 0) return tex;
+		ulong32 size;
+		void* data = getResourceFile(realPath, size);
+		if(data) {
+			tex = (HSORATEXTURE)pRenderSystem->createTextureFromMem(data, size, bMipmap);
+			if(tex) {
+                ((SoraTexture*)tex)->mIsRetinaTexture = isRetinaTexture;
+                
+                if(bCache) {
+                    SoraTextureMap::Instance()->add(realPath, tex);
+                }
+            }
+            
+			freeResourceFile(data);
+			return tex;
+		}
+		return 0;
+#else
 		sora_assert(bInitialized==true);
 		HSORATEXTURE tex;
 		if((tex = SoraTextureMap::Instance()->get(sTexturePath)) != 0) return tex;
@@ -757,6 +805,8 @@ namespace sora {
 			return tex;
 		}
 		return 0;
+#endif // OS_IOS
+        
 	}
 
 	HSORATEXTURE SoraCore::createTextureWH(int w, int h) {
