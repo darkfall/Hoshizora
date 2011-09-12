@@ -21,7 +21,7 @@ void loadBGSprite(const SoraWString& path);
 class editorWindow: public sora::SoraEventHandler {
 public:
 	editorWindow();
-	~editorWindow();
+	~editorWindow(){}
 
 	void update();
 	void render();

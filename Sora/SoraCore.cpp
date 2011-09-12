@@ -1245,7 +1245,7 @@ namespace sora {
 		else
 			_postError("Error loading Font: "+ws2s(font));
 #endif
-		return ff;
+		return f;
 	}
 
 	void SoraCore::releaseFont(SoraFont* font) {

@@ -564,6 +564,8 @@ class OptionPanelButtonResponser: public SoraGUIResponser {
 			
 			restoreValue();
 			peffect->fire();
+
+			sora::log_mssg(sora::vamssg("%f, %f, %f, %f", peffect->pheader.fMaxEndScale, peffect->pheader.fMinEndScale, peffect->pheader.fMaxStartScale, peffect->pheader.fMinStartScale));
 			return;
 			
 #elif defined(OS_OSX)
