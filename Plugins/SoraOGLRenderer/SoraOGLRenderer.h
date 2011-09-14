@@ -84,11 +84,13 @@ namespace sora {
         void onExtensionStateChanged(int32 extension, bool state, int32 param);
         void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z);
         void renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z);
+        
+        void getDesktopResolution(float* w, float* h);
+        void setQueryVideoModeCallback(QueryVideoMode func);
 
 	private:
 		void applyTransform();
 		void bindTexture(SoraTexture* tex);
-		
 		
 		inline int32 _modeToGLMode(int32 mode);
 		inline void _glInitialize();
@@ -127,20 +129,19 @@ namespace sora {
 		int32 CurBlendMode;
 		int32 CurDrawMode;
 
-		SoraTimer* pTimer;
-
 		std::list<SoraRenderTarget*> liTargets;
 		SoraRenderTargetOG* pCurTarget;
 
 		bool bShaderAvailable;
 		GLuint uGLShaderProgram;
-
 		GLuint mCurrTexture;
 
 		SoraShaderContext* currShader;
 
 		bool bFullscreen;
 		int iFrameStart;
+        
+        QueryVideoMode mVideoModeFunc;
 	};
 } // namespace sora
 

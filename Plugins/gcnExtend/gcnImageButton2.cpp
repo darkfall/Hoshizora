@@ -157,8 +157,8 @@ namespace gcn {
 	
 	void ImageButton2::mouseEntered(MouseEvent& mouseEvent) {
 		if(mouseEvent.getSource() == this) {
-			if(mEnterSound)
-				mEnterSound->play();
+	//		if(mEnterSound)
+	//			mEnterSound->play();
 		}
 	}
 	

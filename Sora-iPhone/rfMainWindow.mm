@@ -216,12 +216,12 @@ void rfMainWindow::retry() {
 			
 			stateCount = 0.01f;
 			rfState = STATE_RV_RETRY;
-	/*		
+			
 			pext->setVisible(false);
 			pext->setEnabled(false);
 			
 			pretry->setVisible(false);
-			pretry->setEnabled(false);*/
+			pretry->setEnabled(false);
 		}
 	}
 }
@@ -234,12 +234,12 @@ void rfMainWindow::tonext() {
 			
 			stateCount = 0.01f;
 			rfState = STATE_RV_CONT;
-		/*	
+			
 			pext->setVisible(false);
 			pext->setEnabled(false);
 			
 			pcontinue->setVisible(false);
-			pcontinue->setEnabled(false);*/
+			pcontinue->setEnabled(false);
 		}
 	}
 }
@@ -377,12 +377,12 @@ void rfMainWindow::init() {
 	pcontinue->addActionListener(listener);
 	pTop->add(pcontinue);
 	
-	pretry->setEnabled(false);
+/*	pretry->setEnabled(false);
 	pretry->setVisible(false);
 	pext->setEnabled(false);
 	pext->setVisible(false);
 	pcontinue->setEnabled(false);
-	pcontinue->setVisible(false);
+	pcontinue->setVisible(false);*/
 	
 	rfState = STATE_LOGO;
 	logoCount = 0.f;

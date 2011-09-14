@@ -21,6 +21,10 @@
 
 #include "SoraTimestamp.h"
 
+void queryFunc(float w, float h) {
+    printf("Video mode: %f, %f\n", w, h);
+}
+
 int main(int argc, char* argv[]) {    
     
     std::cout<<sora::GetUniqueStringId("SoraHotkeyEvent")<<std::endl<<sora::GetUniqueStringId("SoraMouseEvent")<<std::endl<<sora::GetUniqueStringId("SoraJoystickEvent");
@@ -32,6 +36,13 @@ int main(int argc, char* argv[]) {
 	sora->registerFontManager(new sora::SoraFTFontManager);
 	sora->registerInput(new sora::SoraOGLInput);
   //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
+    
+    float w, h;
+    sora->getDesktopResolution(&w, &h);
+    printf("%f, %f\n", w, h);
+    
+    sora->setQueryVideoModeCallback(queryFunc);
+    
 
 	sora->createWindow(new mainWindow);
   //  sora::SORA->enableFullscreenBuffer(true);

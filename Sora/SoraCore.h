@@ -307,6 +307,14 @@ namespace sora {
          **/
         void enableFullscreenBuffer(bool flag);
         void registerFullscreenBufferDelegate(const SoraAbstractDelegate<HSORATEXTURE>& delegate);
+        
+        void getDesktopResolution(float* w, float* h);
+        /**
+         * Video Mode queries,
+         * The func would be called when the rendering system trying to query desktop screen modes
+         * before the window created
+         */
+        void setQueryVideoModeCallback(SoraRenderSystem::QueryVideoMode func);
 		
 	private:
         static SoraCore* mInstance;

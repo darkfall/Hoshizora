@@ -14,9 +14,9 @@
 namespace sora {
     
     void SoraiOSInitializer::SoraiOSInit(bool isOGLES2API, bool multisampling) {
-        if(isOGLES2API)
-            SORA->registerRenderSystem(new SoraiOSGLRenderer_ES2);
-        else
+       // if(isOGLES2API)
+       //     SORA->registerRenderSystem(new SoraiOSGLRenderer_ES2);
+       // else
             SORA->registerRenderSystem(new SoraiOSGLRenderer);
         
         sora::setupMultisampling(multisampling);

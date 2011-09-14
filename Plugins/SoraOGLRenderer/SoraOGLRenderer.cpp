@@ -63,8 +63,12 @@ namespace sora{
 		iFrameStart = 1;
 		CurBlendMode = 0;
         
+        mVideoModeFunc = 0;
+        
         // FSAA params must be set by users before creating the main window
         SoraRenderSystemExtension::Instance()->registerExtension(SORA_EXTENSION_FSAA);
+        
+        glfwInit();
 	}
 
 	SoraOGLRenderer::~SoraOGLRenderer() {
@@ -309,10 +313,7 @@ namespace sora{
 	}
 
 	SoraWindowHandle SoraOGLRenderer::createWindow(SoraWindowInfoBase* windowInfo) {
-		glfwInit();
-        
         int32 FSAASamples = SoraRenderSystemExtension::Instance()->getExtensionParam(SORA_EXTENSION_FSAA);
-        
         glfwOpenWindowHint(GLFW_FSAA_SAMPLES, FSAASamples);
         
 		if(!glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
@@ -330,7 +331,7 @@ namespace sora{
             }
         }
         if(glfwGetWindowParam(GLFW_FSAA_SAMPLES) != FSAASamples) {
-            THROW_SORA_EXCEPTION(SystemException, vamssg("Error creating window with FSAA sample = %d", FSAASamples));
+            log_error(vamssg("Error creating window with FSAA sample = %d", FSAASamples));
         }
         
 		glfwSetWindowTitle(windowInfo->getWindowName().c_str());
@@ -948,5 +949,25 @@ namespace sora{
 		renderRect(x2, y2, x1, y2+1.f, 1.f, color, z);
 		renderRect(x1, y2, x1+1.f, y1, 1.f, color, z);
 	}
+    
+    void SoraOGLRenderer::getDesktopResolution(float* w, float* h) {
+        GLFWvidmode mode;
+        glfwGetDesktopMode(&mode);
+        *w = mode.Width;
+        *h = mode.Height;
+    }
+    
+    void SoraOGLRenderer::setQueryVideoModeCallback(QueryVideoMode func) {
+        mVideoModeFunc = func;
+        
+        if(mVideoModeFunc) {
+            // max 24?
+            GLFWvidmode mode[24];
+            int count = glfwGetVideoModes(&mode[0], 24);
+            for(int i=0; i<count; ++i) {
+                mVideoModeFunc(mode[i].Width, mode[i].Height);
+            }
+        }
+    }
 
 } // namespace sora

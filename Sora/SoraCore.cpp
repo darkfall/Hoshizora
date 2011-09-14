@@ -1245,7 +1245,7 @@ namespace sora {
 		else
 			_postError("Error loading Font: "+ws2s(font));
 #endif
-		return f;
+		return ff;
 	}
 
 	void SoraCore::releaseFont(SoraFont* font) {
@@ -1474,5 +1474,16 @@ namespace sora {
     
     SimpleTimerPtr SoraCore::createTimer(const ITimerManager::TimerFunc& func) {
         return SoraSimpleTimerManager::Instance()->createTimer(func);
+    }
+    
+    void SoraCore::getDesktopResolution(float* w, float* h) {
+        if(pRenderSystem) {
+            pRenderSystem->getDesktopResolution(w, h);
+        }
+    }
+    
+    void SoraCore::setQueryVideoModeCallback(SoraRenderSystem::QueryVideoMode func) {
+        if(pRenderSystem)
+            pRenderSystem->setQueryVideoModeCallback(func);
     }
 } // namespace sora

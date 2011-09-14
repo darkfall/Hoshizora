@@ -59,10 +59,7 @@ namespace sora{
 		//delete mainWindow;
 	}
 
-	void SoraiOSGLRenderer::_glInitialize() {
-		glShadeModel(GL_SMOOTH);                    // Enables Smooth Shading
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);      // 4-byte pixel alignment
-		
+	void SoraiOSGLRenderer::_glInitialize() {		
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClearStencil(0);                          // clear stencil buffer
         
@@ -925,5 +922,16 @@ namespace sora{
     
     int SoraiOSGLRenderer::getOrientation() const {
         return mOrientation;
+    }
+    
+    void SoraiOSGLRenderer::getDesktopResolution(float* w, float* h) {
+        *w = sora::getScreenWidth();
+        *h = sora::getScreenHeight();
+    }
+    
+    void SoraiOSGLRenderer::setQueryVideoModeCallback(QueryVideoMode func) {
+        if(func) {
+            func(getScreenWidth(), getScreenHeight());
+        }
     }
 } // namespace sora

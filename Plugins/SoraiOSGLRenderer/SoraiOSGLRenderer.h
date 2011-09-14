@@ -96,6 +96,9 @@ namespace sora {
         
         void tranlatePointToGL(float* x, float* y);
         
+        void getDesktopResolution(float* w, float* h);
+        void setQueryVideoModeCallback(QueryVideoMode func);
+        
 	private:
 		void applyTransform();
 		void bindTexture(SoraTexture* tex);
