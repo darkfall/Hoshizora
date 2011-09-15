@@ -327,6 +327,7 @@
 		88EFBBE213E3120300B66F63 /* SoraLuaStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8813E3120300B66F63 /* SoraLuaStateManager.cpp */; };
 		88EFBBE313E3120300B66F63 /* spriteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8A13E3120300B66F63 /* spriteWrapper.cpp */; };
 		88F6D4251421B68400DF0227 /* AccelerometerController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D4241421B68400DF0227 /* AccelerometerController.mm */; };
+		88F6D4F61421D9E800DF0227 /* widgetFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D4F41421D9E800DF0227 /* widgetFactory.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1091,6 +1092,8 @@
 		88F6D4231421B68400DF0227 /* AccelerometerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerController.h; sourceTree = "<group>"; };
 		88F6D4241421B68400DF0227 /* AccelerometerController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccelerometerController.mm; sourceTree = "<group>"; };
 		88F6D4261421BB3600DF0227 /* GyroScopeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GyroScopeController.h; sourceTree = "<group>"; };
+		88F6D4F41421D9E800DF0227 /* widgetFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = widgetFactory.cpp; sourceTree = "<group>"; };
+		88F6D4F51421D9E800DF0227 /* widgetFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = widgetFactory.hpp; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Sora_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sora_iPhone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1978,6 +1981,8 @@
 				88C8547B14172E3800FB39EC /* defaultfont.hpp */,
 				88C8547C14172E3800FB39EC /* event.cpp */,
 				88C8547D14172E3800FB39EC /* event.hpp */,
+				88F6D4F41421D9E800DF0227 /* widgetFactory.cpp */,
+				88F6D4F51421D9E800DF0227 /* widgetFactory.hpp */,
 				88C8547E14172E3800FB39EC /* exception.cpp */,
 				88C8547F14172E3800FB39EC /* exception.hpp */,
 				88C8548014172E3800FB39EC /* focushandler.cpp */,
@@ -2634,6 +2639,7 @@
 				88DFE186141811EE00CA711D /* SoraiOSWrapper.mm in Sources */,
 				8840292B1419B95400F9DD84 /* SoraiOSDeviceHelper.mm in Sources */,
 				88F6D4251421B68400DF0227 /* AccelerometerController.mm in Sources */,
+				88F6D4F61421D9E800DF0227 /* widgetFactory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
