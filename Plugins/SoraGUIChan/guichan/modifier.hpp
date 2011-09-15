@@ -10,6 +10,8 @@
 #ifndef SORA_GCN_MODIFIER_BASE_H_
 #define SORA_GCN_MODIFIER_BASE_H_
 
+#include <string>
+
 namespace gcn {
 	
 	class Widget;
@@ -77,7 +79,30 @@ namespace gcn {
         virtual void setOwner(Widget* widget);
         
         Widget* getOwner() const;
+        
+        /**
+         * Would be called automatically when added to a widget
+         **/
+        virtual void onAdd(Widget* owner) { }
 
+        /**
+         * Would be called automatically when removed from a widget
+         **/
+        virtual void onRemove(Widget* owner) { }
+        
+        /**
+         * Would be called automatically before release() is called
+         **/
+        virtual void onRelease(Widget* owner) { }
+        
+        /**
+         * Get the name of the modifier
+         * Should be unique so better be the class name
+         * This name also would be used in ModifierFactory
+         * Used in Widget::findModifierByName
+         **/
+        virtual std::string getName() const = 0;
+        
 	protected:
 		bool mFinished;
         bool mAutoRelease;

@@ -43,6 +43,16 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+ /*
+  * Extension Part of Guichan Made by Robert Bu (darkfall)
+  * Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
+  *
+  * Visit: 
+  * www.gamemastercn.com 
+  * darkfall@gamemastercn.com 
+  */
+
+
 #ifndef GCN_GUICHAN_HPP
 #define GCN_GUICHAN_HPP
 
@@ -94,13 +104,17 @@
 #include <guichan/widgets/textfield.hpp>
 #include <guichan/widgets/window.hpp>
 
-/*
- * extended by Robert Bu
- */
+/**
+ *  Guichan for Hoshizora extensions
+ *  @author Robert Bu
+ **/
 #include <guichan/Sound.hpp>
 #include <guichan/SoundLoader.hpp>
 #include <guichan/style.hpp>
 #include <guichan/animation.hpp>
+#include <guichan/widgetFactory.hpp>
+#include <guichan/modifierFactory.hpp>
+#include <guichan/animationFactory.hpp>
 
 #include "guichan/platform.hpp"
 

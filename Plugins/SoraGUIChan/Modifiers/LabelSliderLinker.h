@@ -25,6 +25,9 @@ namespace gcn {
 		
 		virtual void update(Widget* widget);
 		
+        std::string getName() const {
+            return "LabelSliderLinker";
+        }
 	private:
 		Slider* mSlider;
 		

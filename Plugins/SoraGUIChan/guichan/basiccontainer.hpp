@@ -106,6 +106,32 @@ namespace gcn
         // Inherited from DeathListener
 
         virtual void death(const Event& event);
+        
+        /**
+         * Finds a widget given an id. This function can be useful
+         * when implementing a GUI generator for Guichan, such as
+         * the ability to create a Guichan GUI from an XML file.
+         *
+         * @param id The id to find a widget by.
+         * @return The widget with the corrosponding id, 
+         NULL of no widget is found.
+         */
+        virtual Widget* findWidgetById(const std::string& id);
+        
+        // Inherited from Widget
+        // Send Mesage to child widgets
+        
+        virtual void sendMessage(const std::string& message, const std::string& receiver=std::string());
+   
+        virtual void sendMessage(const Message& mssg);
+       
+        // basic container would route messages to child widgets
+        // unless receiver is itself
+        
+        virtual void onMessage(const Message& mssg);
+        
+
+		virtual void setAlpha(int alpha);
 
     protected:
         /**
@@ -143,17 +169,6 @@ namespace gcn
          * container.
          */
         virtual void logicChildren();
-
-        /**
-         * Finds a widget given an id. This function can be useful
-         * when implementing a GUI generator for Guichan, such as
-         * the ability to create a Guichan GUI from an XML file.
-         *
-         * @param id The id to find a widget by.
-         * @return The widget with the corrosponding id, 
-                   NULL of no widget is found.
-         */
-        virtual Widget* findWidgetById(const std::string& id);
 
         /**
          * Typedef.

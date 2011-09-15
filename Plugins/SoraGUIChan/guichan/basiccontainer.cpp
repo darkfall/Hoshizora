@@ -393,4 +393,58 @@ namespace gcn
 
         return NULL;
     }
+    
+    void BasicContainer::sendMessage(const std::string& message, const std::string& widgetId) {
+        if(!widgetId.empty()) {
+            Widget* widget = findWidgetById(widgetId);
+        
+            Message mssg(this,
+                         widget,
+                         message);
+            widget->onMessage(mssg);
+        } else {
+            Message mssg(this,
+                         NULL,
+                         message);
+            
+            Widget::onMessage(mssg);
+
+            WidgetListIterator iter;
+            for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
+                (*iter)->onMessage(mssg);
+            }
+        }
+    }
+    
+    void BasicContainer::sendMessage(const Message& mssg) {
+        if(mssg.getReceiver() != this) {
+            if(mssg.getReceiver() == NULL)
+                Widget::onMessage(mssg);
+            
+            WidgetListIterator iter;
+            for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
+                (*iter)->onMessage(mssg);
+            }
+        } else
+            Widget::onMessage(mssg);
+    }
+    
+    void BasicContainer::onMessage(const Message& mssg) {
+        if(mssg.getReceiver() != this) {
+            if(mssg.getReceiver() == NULL)
+                Widget::onMessage(mssg);
+            sendMessage(mssg);
+        } else {
+            Widget::onMessage(mssg);
+        }
+    }
+    
+    void BasicContainer::setAlpha(int alpha) {
+        Widget::setAlpha(alpha);
+        
+        WidgetListIterator iter;
+        for (iter = mWidgets.begin(); iter != mWidgets.end(); iter++) {
+            (*iter)->setAlpha(alpha);
+        }
+    }
 }

@@ -280,4 +280,8 @@ namespace gcn
         mMousePressed = false;
         mKeyPressed = false;
     }
+    
+    bool Button::isHasMouse() const {
+        return mHasMouse;
+    }
 }

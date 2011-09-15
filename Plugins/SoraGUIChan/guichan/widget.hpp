@@ -50,6 +50,7 @@
 
 #include "guichan/color.hpp"
 #include "guichan/rectangle.hpp"
+#include "guichan/animationlistener.h"
 
 namespace gcn
 {
@@ -68,7 +69,8 @@ namespace gcn
     class WidgetListener;
     class BirthListener;
     class Modifier;
-
+    class Style;
+    class Message;
     /**
      * Abstract class for widgets of Guichan. It contains basic functions 
      * every widget should have.
@@ -80,7 +82,7 @@ namespace gcn
      * @author Per Larsson.
      * @since 0.1.0
      */
-    class GCN_CORE_DECLSPEC Widget
+    class GCN_CORE_DECLSPEC Widget: public AnimationListener
     {
     public:
         /**
@@ -1032,6 +1034,16 @@ namespace gcn
 		virtual void removeModifier(Modifier* modifier);
         
         /**
+         * Find a modifier by it's name
+         * @see addModifer
+         * @see removeModifer
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         */
+        virtual Modifier* findModifierByName(const std::string& name) const;
+        
+        /**
          * Update the modifier list
          * Automatically called by logic function
          * When you make your own widget, remembere to call Widiget::logic in your logic function
@@ -1045,16 +1057,107 @@ namespace gcn
 		/**
 		 * Sets the alpha color of the widget
 		 * Applys to background, foreground, selection and baseColor
+         * And also stores the value
 		 * @param color, the alpha color value, range from 0 to 255
-         * 
+         * @see getAlpha
+         *
          * @author Robert Bu(darkfall)
          * @since GuiChan for Hoshizora
 		 */
 		virtual void setAlpha(int alpha);
 		
+        /**
+         * Gets the alpha color of the widget
+         * @see setAlpha
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+		 */
+        virtual int getAlpha() const;
 
+        /**
+         * Set the style of this widget
+         * @param the style to set
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         * @see getStyle
+         **/
+        virtual void setStyle(Style*);
+        
+        /**
+         * Get the style of the widget
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         * @see setStyle
+         **/
+        virtual Style* getStyle() const;
+        
+        /**
+         * Get the global style for every widget
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         * @see getStyle, setStyle, setGlobalStyle
+         **/
+        static Style* getGlobalStyle();
+        
+        /**
+         * Set the global style for every widget
+         *
+         * @author Robert Bu(darkfall)
+         * @since GuiChan for Hoshizora
+         * @see getStyle, setStyle, getGlobalStyle
+         **/
+        static void setGlobalStyle(Style*);
+        
+        /**
+         * Send a message to child widgets(if there are)
+         * If receiver is empty and this is not a container
+         * Will send to the widget itself(call onMessage)
+         * @param the message to send
+         * @param receiver id, if empty then send to all
+         *
+         * @author Robert Bu(darkfalL)
+         * @since Guichan for Hoshizora
+         * @see onMessage, setId, getId
+         **/
+        virtual void sendMessage(const std::string& message, const std::string& receiver=std::string());
        
-	
+        /**
+         * Send a premade message to child widgets(if there are)
+         * If receiver is NULL and this is not a container
+         * Will send to the widget itself(call onMessage)
+         * @param the message to send
+         *
+         * @author Robert Bu(darkfalL)
+         * @since Guichan for Hoshizora
+         * @see onMessage, setId, getId
+         **/
+        virtual void sendMessage(const Message& mssg);
+        
+        /**
+         * When receiving a message from other widgets
+         * This func would be called automatically
+         * @param the message received
+         *
+         * @author Robert Bu(darkfalL)
+         * @since Guichan for Hoshizora
+         * @see sendMessage, setId, getId
+         **/
+        virtual void onMessage(const Message& mssg);
+        
+        /**
+         * Global widget factory access
+         **/
+        static Widget* createWidget(const std::string& name);
+        
+        // inherited from AnimationListener
+        
+        void animationBegan(Animation* animation);
+        void animationEnded(Animation* aniamtion);
+        	
 	protected:
         /**
          * Distributes an action event to all action listeners
@@ -1306,6 +1409,53 @@ namespace gcn
 		typedef std::vector<Modifier*>::iterator ModifierIterator;
 		
 		ModifierList mModifiers;
+        
+        /**
+         * Stores the reference of the style
+         **/
+        Style* mStyle;
+        
+        /**
+         * Holds the global style
+         **/
+        static Style* mGlobalStyle;
+        
+        int mAlpha;
+    };
+    
+    /**
+     * Base class for widget messages
+     *
+     * @author Robert Bu(darkfall)
+     * @since Guichan for Hoshizora
+     **/
+    
+    struct GCN_CORE_DECLSPEC Message {
+        
+        Message(Widget* sender,
+                Widget* receiver,
+                const std::string& mssg);
+        
+        /**
+         * Get the message sender
+         **/
+        Widget* getSender() const;
+        
+        /**
+         * Get the message receiver
+         **/
+        Widget* getReceiver() const;
+        
+        /**
+         * Get the message
+         **/
+        const std::string& getMessage() const;
+        
+    private:
+        Widget* mSender;
+        Widget* mReceiver;
+        
+        std::string mMessage;
     };
 }
 

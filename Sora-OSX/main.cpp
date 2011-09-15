@@ -21,6 +21,8 @@
 
 #include "SoraTimestamp.h"
 
+#include "../SoraParticleEditor/peMainWindow.h"
+
 void queryFunc(float w, float h) {
     printf("Video mode: %f, %f\n", w, h);
 }
@@ -37,14 +39,7 @@ int main(int argc, char* argv[]) {
 	sora->registerInput(new sora::SoraOGLInput);
   //  sora->registerSoundSystem(new sora::SoraFMODSoundSystem);
     
-    float w, h;
-    sora->getDesktopResolution(&w, &h);
-    printf("%f, %f\n", w, h);
-    
-    sora->setQueryVideoModeCallback(queryFunc);
-    
-
-	sora->createWindow(new mainWindow);
+	sora->createWindow(new peMainWindow);
   //  sora::SORA->enableFullscreenBuffer(true);
 
 	sora->start();

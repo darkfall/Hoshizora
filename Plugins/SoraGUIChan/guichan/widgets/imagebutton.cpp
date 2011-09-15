@@ -146,8 +146,10 @@ namespace gcn
 
         if (isPressed())
         {
-            if(mImage)
+            if(mImage) {
+                graphics->setColor(getForegroundColor());
                 graphics->drawImage(mImage, textX + 1, textY + 1);
+            }
         }
         else
         {

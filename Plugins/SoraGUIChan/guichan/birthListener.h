@@ -2,8 +2,8 @@
 //  birthListener.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 8/9/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu on 8/9/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_birthListener_h
@@ -34,7 +34,7 @@ namespace gcn
         
         /**
          * Called when a widget births(added to a container). It is used to be able to recieve
-         * a notification when a death of a widget occurs.
+         * a notification when a birth of a widget occurs.
          *
          * @param event The event of the death.
          */

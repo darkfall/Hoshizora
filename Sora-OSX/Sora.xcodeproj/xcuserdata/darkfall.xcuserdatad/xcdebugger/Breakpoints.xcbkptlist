@@ -383,11 +383,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "337662819.739407"
+         timestampString = "337761737.463983"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57">
+         startingLineNumber = "52"
+         endingLineNumber = "52">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -409,11 +409,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "337662819.739407"
+         timestampString = "337761737.463983"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68">
+         startingLineNumber = "63"
+         endingLineNumber = "63">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1537,11 +1537,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "337662819.739407"
+         timestampString = "337761737.463983"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
@@ -2049,11 +2049,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "337662819.739407"
+         timestampString = "337761737.463983"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
+         startingLineNumber = "35"
+         endingLineNumber = "35"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>
@@ -2451,25 +2451,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "main.cpp"
-         timestampString = "337662819.739407"
+         timestampString = "337761737.463983"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "31"
-         endingLineNumber = "31"
-         landmarkName = "main(int argc, char* argv[])"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "main.cpp"
-         timestampString = "337662758.385089"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "33"
+         endingLineNumber = "33"
          landmarkName = "main(int argc, char* argv[])"
          landmarkType = "7">
       </FileBreakpoint>

@@ -59,6 +59,8 @@
 #include "guichan/widget.hpp"
 #include "guichan/SoundLoader.hpp"
 #include "guichan/style.hpp"
+#include "guichan/widgetfactory.hpp"
+#include "guichan/styleholder.hpp"
 
 namespace gcn
 {
@@ -77,10 +79,12 @@ namespace gcn
              mLastMouseX(0),
              mLastMouseY(0),
              mClickCount(1),
-             mLastMouseDragButton(0),
-             mStyle(NULL)
+             mLastMouseDragButton(0)
     {
         mFocusHandler = new FocusHandler();
+        
+        RegisterCoreWidgets();
+        setGlobalStyle(Style::DefaultStyle());
     }
 
     Gui::~Gui()
@@ -1005,12 +1009,43 @@ namespace gcn
         }
     }
     
-    void Gui::setStyle(Style* style) {
-      //  assert(style);
-        mStyle = style;
+    void Gui::setGlobalStyle(Style* style) {
+        Widget::setGlobalStyle(style);
     }
     
-    Style* Gui::getStyle() const {
-        return mStyle;
+    Style* Gui::getGlobalStyle() const {
+        return Widget::getGlobalStyle();
     }
+    
+    Widget* Gui::findWidgetById(const std::string& id) {
+        gcn::BasicContainer* cont = dynamic_cast<gcn::BasicContainer*>(getTop());
+        if(cont) {
+            return cont->findWidgetById(id);
+        }
+        return NULL;
+    }
+    
+    void Gui::sendMessage(const std::string& mssg, const std::string& receiver) {
+        if(getTop() != NULL) {
+            getTop()->sendMessage(mssg, receiver);
+        }
+    }
+    
+    void Gui::sendMessage(const Message& mssg) {
+        if(getTop() != NULL) {
+            getTop()->sendMessage(mssg);
+        }
+    }
+    
+    void Gui::setAlpha(float alpha) {
+        if(mGraphics)
+            mGraphics->setGlobalTransparency(alpha);
+    }
+    
+    float Gui::getAlpha() const {
+        if(mGraphics)
+            return mGraphics->getGlobalTransparency();
+        return 1.f;
+    }
+    
 }

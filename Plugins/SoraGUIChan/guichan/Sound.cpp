@@ -7,8 +7,8 @@
  *
  */
 
-#include "Sound.hpp"
-#include "SoundLoader.hpp"
+#include "guichan/Sound.hpp"
+#include "guichan/SoundLoader.hpp"
 
 namespace gcn {
 

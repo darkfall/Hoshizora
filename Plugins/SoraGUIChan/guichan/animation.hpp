@@ -1,9 +1,9 @@
 //
 //  animation.h
-//  Sora
+//  Guichan_Sora
 //
-//  Created by Ruiwei Bu on 8/9/11.
-//  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+//  Created by Robert Bu(darkfall) 8/9/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
 #ifndef Sora_animation_h
@@ -16,9 +16,9 @@ namespace gcn {
     
     /**
      * The base class represents a kind of gui animation
-     * Animation details are archived by subclasses
-     * It a kind of modifier so it's safe to apply a animation 
-     * to a widget by calling the addModifier function of the widget
+     * Animation details should be implemented by subclasses
+     * It's also a kind of modifier so it's easy to apply a animation 
+     *  to a widget by calling the addModifier function of the widget
      * 
      * @author Robert Bu(darkfall)
      * @since GuiChan for Hoshizora
@@ -26,6 +26,10 @@ namespace gcn {
     
     class GCN_CORE_DECLSPEC Animation: public Modifier {
     public:
+        // constant animation message strings
+        static std::string MessageStart;
+        static std::string MessageEnd;
+        
         Animation(int time);
         
         virtual ~Animation() {}
@@ -75,6 +79,13 @@ namespace gcn {
          * Would return 1 if the animation had finished
          */
         float getCurrTimeRatio() const;
+        
+        // inherited from Modifier
+        virtual void onAdd(Widget* widget);
+        virtual void onRemove(Widget* widget);
+        virtual void onRelease(Widget* widget);
+        
+        virtual std::string getName() const = 0;
         
     protected:
         int mTotalTime;
