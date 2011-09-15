@@ -419,6 +419,10 @@ public:
 	virtual std::string		CALL	getDeviceInfo() = 0;
 	IDirect3DDevice9*		pD3DDevice;
 
+	typedef void (*QueryVideoModeFunc)(float w, float h);
+	virtual void setQueryVideoModeFunc(QueryVideoModeFunc func) = 0;
+	virtual void getDesktopResolution(float* w, float* h) = 0;
+
 };
 
 extern "C" { EXPORT HGE * CALL hgeCreate(int ver); }

@@ -1239,13 +1239,13 @@ namespace sora {
 			return f;
 		}
 #else
-		SoraFont* ff = pFontManager->getFont(ws2s(font).c_str(), size);
-		if(ff)
-			SoraConsole::Instance()->setFont(ff);
+		SoraFont* f = pFontManager->getFont(ws2s(font).c_str(), size);
+		if(f)
+			SoraConsole::Instance()->setFont(f);
 		else
 			_postError("Error loading Font: "+ws2s(font));
 #endif
-		return ff;
+		return f;
 	}
 
 	void SoraCore::releaseFont(SoraFont* font) {

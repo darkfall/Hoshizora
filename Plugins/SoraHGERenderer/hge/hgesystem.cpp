@@ -573,6 +573,7 @@ void CALL HGE_Impl::System_Snapshot(const char *filename)
 HGE_Impl::HGE_Impl()
 {
 	hInstance=GetModuleHandle(0);
+	vmQueryFunc = 0;
 	hwnd=0;
 	bActive=false;
 	szError[0]=0;

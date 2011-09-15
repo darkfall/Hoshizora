@@ -443,4 +443,22 @@ namespace sora{
 		renderRect(x2, y2, x1, y2+1.f, 1.f, color, z);
 		renderRect(x1, y2, x1+1.f, y1, 1.f, color, z);
 	}
+
+	void SoraHGERenderer::getDesktopResolution(float* w, float *h) {
+		DWORD dwWidth = GetSystemMetrics(SM_CXSCREEN);
+		DWORD dwHeight = GetSystemMetrics(SM_CYSCREEN);
+		*w = (float)dwWidth;
+		*h = (float)dwHeight;	
+	}
+	
+	void SoraHGERenderer::setQueryVideoModeCallback(QueryVideoMode func) {
+		DEVMODE mode;
+		mode.dmSize = sizeof(DEVMODE);
+		int n = 0;
+
+		while(EnumDisplaySettings(0, n, &mode) != 0) {
+			func(mode.dmPelsWidth, mode.dmPelsHeight);
+			++n;
+		}
+	}
 } // namespace sora

@@ -10,7 +10,7 @@
 #include "hge_impl.h"
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "SoraException.h"
+#include "debug/SoraInternalLogger.h"
 
 void CALL HGE_Impl::Gfx_Clear(DWORD color)
 {
@@ -724,6 +724,16 @@ bool HGE_Impl::_GfxInit()
 			LOWORD(AdID.DriverVersion.HighPart));
 	deviceInfo = dd;
 
+	if(vmQueryFunc) {
+		nModes=pD3D->GetAdapterModeCount(D3DADAPTER_DEFAULT, D3DFMT_X8R8G8B8);
+		for(i=0;i<nModes;i++)
+		{
+			pD3D->EnumAdapterModes(D3DADAPTER_DEFAULT, D3DFMT_X8R8G8B8, i, &Mode);
+			
+			vmQueryFunc((float)Mode.Width, (float)Mode.Height);
+		}
+	}
+
 // Set up Windowed presentation parameters
 	
 	if(FAILED(pD3D->GetAdapterDisplayMode(D3DADAPTER_DEFAULT, &Mode)) || Mode.Format==D3DFMT_UNKNOWN) 
@@ -751,7 +761,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_2_SAMPLES, NULL)))
 						d3dppW.MultiSampleType = D3DMULTISAMPLE_2_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_error("Hardware does not support the value of multisample");
 					break;
 				case 4: 
 					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
@@ -759,7 +769,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_4_SAMPLES, NULL)))
 						d3dppW.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_error("Hardware does not support the value of multisample");
 					break;
 				case 8: 
 					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
@@ -767,7 +777,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_8_SAMPLES, NULL)))
 						d3dppW.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_error("Hardware does not support the value of multisample");
 					break;
 			}
 		}
@@ -833,7 +843,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_2_SAMPLES, NULL)))
 						d3dppFS.MultiSampleType = D3DMULTISAMPLE_2_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_error("Hardware does not support the value of multisample");
 					break;
 				case 4: 
 					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
@@ -841,7 +851,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_4_SAMPLES, NULL)))
 						d3dppFS.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_error("Hardware does not support the value of multisample");
 					break;
 				case 8: 
 					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
@@ -849,7 +859,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_8_SAMPLES, NULL)))
 						d3dppFS.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_error("Hardware does not support the value of multisample");
 					break;
 			}
 		}
@@ -1211,4 +1221,15 @@ bool HGE_Impl::_init_lost()
 	pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 
 	return true;
+}
+
+void HGE_Impl::setQueryVideoModeFunc(QueryVideoModeFunc func) {
+	vmQueryFunc = func;
+}
+
+void HGE_Impl::getDesktopResolution(float* w, float* h) {
+	DWORD dwWidth = GetSystemMetrics(SM_CXBORDER);
+	DWORD dwHeight = GetSystemMetrics(SM_CYBORDER);
+	*w = (float)dwWidth;
+	*h = (float)dwHeight;
 }
