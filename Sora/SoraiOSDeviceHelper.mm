@@ -13,6 +13,7 @@
 
 #import <UIKit/UIkit.h>
 #import <UIKit/UIDevice.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 namespace sora {
     
@@ -98,6 +99,10 @@ namespace sora {
     
     float getScaleFactor() {
         return g_scaleFactor;
+    }
+    
+    void vabriateDevice() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     }
     
 } // namespace sora

@@ -6,90 +6,188 @@
 #include "SoraStringConv.h"
 
 namespace sora {
-
-	class SoraString {
-    public:
-        SoraString();
-        SoraString(const std::string& str, bool fastConvert=false);
-        SoraString(const std::wstring& str, bool fastConvert=false);
-        SoraString(const char* str, bool fastConvert=false);
-        SoraString(const wchar_t* str, bool fastConvert=false);
+    
+    namespace util {
         
-        std::wstring get() const;
-        std::string gets() const;
+        class String {
+        public:
+            String();
+            String(const std::string& str);
+            String(const std::wstring& str);
+            String(const char* str);
+            String(const wchar_t* str);
+            
+            std::string get() const;
+            std::wstring getw() const;
+            
+            const char* c_str() const;
+            const wchar_t* wc_str() const;
+            
+            uint64 uniqueId() const;
+            
+            void set(const std::string& str);
+            void set(const std::wstring& str);
+            void set(const char* str);
+            void set(const wchar_t* str);
+            
+            bool operator==(const String& rhs) const;
+            
+            bool operator!=(const std::string& str) const;
+            bool operator!=(const std::wstring& str) const;
+            bool operator!=(const String& rhs) const;
+            
+            bool compare(const std::string& str) const;
+            bool compare(const std::wstring& str) const;
+            bool compare(const String& rhs) const;
+            
+            String& operator=(const String& str);
+            String operator+(const String& str) const;
+            String& operator+=(const String& str);
+            
+            operator std::string() const {
+                return mString;
+            }
+            operator std::wstring() const {
+                return s2ws(mString);
+            }
+            
+            char operator[](size_t index) const;
+            
+            char at(size_t index) const;
+            wchar_t wat(size_t index) const;
+            
+            size_t size() const;
+            
+            int asInt() const;
+            bool asBool() const;
+            float asFloat() const;
+            
+            bool isValid() const;
+            
+            void clear();
+            
+        protected:
+            std::string mString;
+        };
         
-        const char* c_str() const;
-        const wchar_t* wc_str() const;
-        
-        uint64 uniqieId() const;
-        
-        void set(const std::string& str, bool fastConvert=false);
-        void set(const std::wstring& str, bool fastConvert=false);
-        void set(const char* str, bool fastConvert=false);
-        void set(const wchar_t* str, bool fastConvert=false);
-        
-        SoraString& operator=(const std::string& str);
-        SoraString& operator=(const std::wstring& str);
-        SoraString& operator=(const char* str);
-        SoraString& operator=(const wchar_t* str);
-        SoraString& operator=(const SoraString& str);
-        
-        bool operator == (const std::string& str);
-        bool operator == (const std::wstring& str);
-        
-        bool compare(const std::string& str);
-        bool compare(const std::wstring& str);
-        bool compare(const char* str);
-        bool compare(const wchar_t* str);
-        
-        size_t find(const std::string& str);
-        size_t find(const std::wstring& str);
-        
-        size_t find(const char* str);
-        size_t find(const wchar_t* str);
-        
-        size_t find(char t);
-        size_t find(wchar_t t);
-        
-        SoraString operator+(const std::string& str);
-        SoraString operator+(const std::wstring& str);
-        SoraString operator+(const char* str);
-        SoraString operator+(const wchar_t* str);
-        
-        SoraString& operator+=(const std::string& str);
-        SoraString& operator+=(const std::wstring& str);
-        SoraString& operator+=(const char* str);
-        SoraString& operator+=(const wchar_t* str);
-        
-        operator std::string() {
-            return ws2s(mString);
+        inline int String::asInt() const {
+            return atoi(mString.c_str());
         }
-        operator std::wstring() {
+        
+        inline bool String::asBool() const {
+            static const char* bools[] = {
+                "no", "yes", "off", "on", "false", "true", 0
+            };
+            int i = 0;
+            while(bools[i] != 0) {
+                if(mString == bools[i]) {
+                    return 1 == (i & 1);
+                }
+                ++i;
+            }
+            return false;
+        }
+        
+        inline String operator+(const std::string& l, const String& r) {
+            return l + r.get();
+        }
+        
+        inline String operator+(const std::wstring& l, const String& r) {
+            return l + r.getw();
+        }
+        
+        inline float String::asFloat() const {
+            return float(atof(mString.c_str()));
+        }
+        
+        
+        inline bool String::compare(const std::string& str) const {
+            return mString == str;
+        }
+        
+        inline bool String::compare(const std::wstring& str) const {
+            return str == s2ws(mString);
+        }
+        
+        inline bool String::operator==(const String& rhs) const {
+            return mString == rhs.mString;
+        }
+        
+        inline bool String::operator!=(const std::string& str) const {
+            return !(*this == str);
+        }
+        
+        inline bool String::operator!=(const std::wstring& str) const {
+            return !(*this == str);
+        }
+        
+        inline bool String::operator!=(const String& rhs) const {
+            return !(*this == rhs);
+        }
+        
+        inline bool String::compare(const String& rhs) const {
+            return mString == rhs.mString;
+        }
+        
+        inline String String::operator+(const String& rhs) const {
+            return mString + rhs;
+        }
+        
+        inline String& String::operator+=(const String& rhs) {
+            mString += rhs;
+            return *this;
+        }
+        
+        inline std::string String::get() const {
             return mString;
         }
-        operator const char*() {
-            return ws2s(mString).c_str();
+        
+        inline std::wstring String::getw() const {
+            return s2ws(mString);
         }
-        operator const wchar_t*() {
+        
+        inline const char* String::c_str() const {
             return mString.c_str();
         }
         
-        char operator[](size_t index) const;
-        char operator[](int index) const;
+        inline const wchar_t* String::wc_str() const {
+            return s2ws(mString).c_str();
+        }
         
-        char at(size_t index);
-        wchar_t wat(size_t index);
         
-        size_t size();
+        inline void String::set(const std::string& str) {
+            mString = str;
+        }
         
-    protected:
-        std::wstring mString;
-    };
-    
-    std::string operator+(const char* str, const SoraString& sorastr) {
-        std::string stdstr(str);
-        return stdstr + sorastr.gets();
+        inline void String::set(const std::wstring& str) {
+            mString = ws2s(str); 
+        }
+        
+        inline void String::set(const char* str) {
+            mString = str;
+        }
+        
+        inline void String::set(const wchar_t* str) {
+            mString = ws2s(str);
+        }
+        
+        inline String& String::operator=(const String& str) {
+            mString = str.mString;
+            return *this;
+        }
+        
+        inline bool String::isValid() const {
+            return !mString.empty();
+        }
+        
+        inline void String::clear() {
+            mString.clear();
+        }
+        
     }
+    
+    typedef ::sora::util::String StringType;
+    
 } // namespace sora
 
 #endif // SORA_STRING_H

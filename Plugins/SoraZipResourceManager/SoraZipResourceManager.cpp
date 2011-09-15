@@ -9,7 +9,7 @@ namespace sora {
 	HSORARESOURCE SoraZipResourceManager::loadResourcePack(const SoraWString& file) {
 		SoraZipFile* pfile = new SoraZipFile;
 		if(pfile) {
-			if(pfile->readFile(file)) {
+			if(pfile->open(file)) {
 				return (HSORARESOURCE)pfile;
 			}			
 			return 0;

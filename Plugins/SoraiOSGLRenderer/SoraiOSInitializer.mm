@@ -11,6 +11,8 @@
 #include "SoraiOSGLRenderer.h"
 #include "SoraiOSTimer.h"
 
+#import "AccelerometerController.h"
+
 namespace sora {
     
     void SoraiOSInitializer::SoraiOSInit(bool isOGLES2API, bool multisampling) {
@@ -92,8 +94,35 @@ namespace sora {
         }
     }
     
+    static AccelerometerController* g_accl_controler = 0;
+    
     int SoraiOSInitializer::getOrientation() const {
         return mRenderSystem->getOrientation();
+    }
+    
+    void SoraiOSInitializer::enableAccelerometer(bool flag) {
+        if(flag) {
+            g_accl_controler = [AccelerometerController alloc];
+            [g_accl_controler prepare];
+        } else {
+            if(g_accl_controler) {
+                [g_accl_controler stop];
+                [g_accl_controler release];
+                g_accl_controler = 0;
+            }
+        }
+    }
+    
+    void SoraiOSInitializer::getAccelerometerAttr(float* x, float* y, float* z) {
+        if(g_accl_controler) {
+            *x = g_accl_controler.x;
+            *y = g_accl_controler.y;
+            *z = g_accl_controler.z;
+        } else {
+            *x = 0.f;
+            *y = 0.f;
+            *z = 0.f;
+        }
     }
     
 

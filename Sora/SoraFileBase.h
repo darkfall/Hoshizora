@@ -14,14 +14,13 @@ namespace sora {
     public:
 		SoraFileBase(): isopen(false) {}
 		virtual ~SoraFileBase() {}
-
-		virtual int32 readFile(const SoraWString& sFile) = 0;
-		virtual int32 readFileMem(void* pstr, ulong32 filesize) = 0;
-		virtual void  closeFile() = 0;
 		
 		bool  is_open() const { return isopen; }
 		void  set_open(bool flag) { isopen = flag; }
 
+        void setFilePath(const SoraWString& path) { sFilePath = path; }
+        const SoraWString& getFilePath() const { return sFilePath; }
+        
 	protected:
 		SoraWString sFilePath;
 

@@ -42,9 +42,6 @@
 		889636F713C9F46B004CF8AD /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889636F613C9F46B004CF8AD /* MediaPlayer.framework */; };
 		8896370F13C9F4AB004CF8AD /* SoraiOSMoviePlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8896370C13C9F4AB004CF8AD /* SoraiOSMoviePlayer.mm */; };
 		8896371013C9F4AB004CF8AD /* SoraiOSMoviePlayerImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8896370E13C9F4AB004CF8AD /* SoraiOSMoviePlayerImpl.mm */; };
-		8897815E13071CA100A69ADE /* MyFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897815413071CA100A69ADE /* MyFileReader.cpp */; };
-		8897815F13071CA100A69ADE /* PackMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897815613071CA100A69ADE /* PackMemory.cpp */; };
-		8897816013071CA100A69ADE /* PackReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897815813071CA100A69ADE /* PackReader.cpp */; };
 		8897816113071CA100A69ADE /* SoraZipFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897815A13071CA100A69ADE /* SoraZipFile.cpp */; };
 		8897816213071CA100A69ADE /* SoraZipResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8897815C13071CA100A69ADE /* SoraZipResourceManager.cpp */; };
 		8897826013071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8897825B13071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm */; };
@@ -185,7 +182,6 @@
 		88C8544F14172C5A00FB39EC /* SoraSimpleTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C853AC14172C5A00FB39EC /* SoraSimpleTimer.cpp */; };
 		88C8545014172C5A00FB39EC /* SoraSimpleTimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C853AE14172C5A00FB39EC /* SoraSimpleTimerManager.cpp */; };
 		88C8545114172C5A00FB39EC /* win32filewrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C853B214172C5A00FB39EC /* win32filewrapper.cpp */; };
-		88C8545214172C5A00FB39EC /* windowsExceptionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C853B414172C5A00FB39EC /* windowsExceptionHandler.cpp */; };
 		88C8545314172C5A00FB39EC /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 88C853B814172C5A00FB39EC /* adler32.c */; };
 		88C8545414172C5A00FB39EC /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 88C853B914172C5A00FB39EC /* compress.c */; };
 		88C8545514172C5A00FB39EC /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 88C853BA14172C5A00FB39EC /* crc32.c */; };
@@ -330,6 +326,7 @@
 		88EFBBE113E3120300B66F63 /* SoraLuaObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8613E3120300B66F63 /* SoraLuaObject.cpp */; };
 		88EFBBE213E3120300B66F63 /* SoraLuaStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8813E3120300B66F63 /* SoraLuaStateManager.cpp */; };
 		88EFBBE313E3120300B66F63 /* spriteWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88EFBB8A13E3120300B66F63 /* spriteWrapper.cpp */; };
+		88F6D4251421B68400DF0227 /* AccelerometerController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D4241421B68400DF0227 /* AccelerometerController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -398,12 +395,6 @@
 		8896370C13C9F4AB004CF8AD /* SoraiOSMoviePlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSMoviePlayer.mm; sourceTree = "<group>"; };
 		8896370D13C9F4AB004CF8AD /* SoraiOSMoviePlayerImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSMoviePlayerImpl.h; sourceTree = "<group>"; };
 		8896370E13C9F4AB004CF8AD /* SoraiOSMoviePlayerImpl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSMoviePlayerImpl.mm; sourceTree = "<group>"; };
-		8897815413071CA100A69ADE /* MyFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyFileReader.cpp; sourceTree = "<group>"; };
-		8897815513071CA100A69ADE /* MyFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFileReader.h; sourceTree = "<group>"; };
-		8897815613071CA100A69ADE /* PackMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PackMemory.cpp; sourceTree = "<group>"; };
-		8897815713071CA100A69ADE /* PackMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackMemory.h; sourceTree = "<group>"; };
-		8897815813071CA100A69ADE /* PackReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PackReader.cpp; sourceTree = "<group>"; };
-		8897815913071CA100A69ADE /* PackReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackReader.h; sourceTree = "<group>"; };
 		8897815A13071CA100A69ADE /* SoraZipFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraZipFile.cpp; sourceTree = "<group>"; };
 		8897815B13071CA100A69ADE /* SoraZipFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraZipFile.h; sourceTree = "<group>"; };
 		8897815C13071CA100A69ADE /* SoraZipResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraZipResourceManager.cpp; sourceTree = "<group>"; };
@@ -799,8 +790,6 @@
 		88C853B114172C5A00FB39EC /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector3.h; sourceTree = "<group>"; };
 		88C853B214172C5A00FB39EC /* win32filewrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = win32filewrapper.cpp; sourceTree = "<group>"; };
 		88C853B314172C5A00FB39EC /* win32filewrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = win32filewrapper.h; sourceTree = "<group>"; };
-		88C853B414172C5A00FB39EC /* windowsExceptionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = windowsExceptionHandler.cpp; sourceTree = "<group>"; };
-		88C853B514172C5A00FB39EC /* windowsExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = windowsExceptionHandler.h; sourceTree = "<group>"; };
 		88C853B614172C5A00FB39EC /* WindowsStackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowsStackTrace.h; sourceTree = "<group>"; };
 		88C853B814172C5A00FB39EC /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adler32.c; sourceTree = "<group>"; };
 		88C853B914172C5A00FB39EC /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress.c; sourceTree = "<group>"; };
@@ -1099,6 +1088,9 @@
 		88EFBB8A13E3120300B66F63 /* spriteWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spriteWrapper.cpp; sourceTree = "<group>"; };
 		88EFBB8B13E3120300B66F63 /* spriteWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spriteWrapper.h; sourceTree = "<group>"; };
 		88EFBB8C13E3120300B66F63 /* TinkerExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinkerExport.h; sourceTree = "<group>"; };
+		88F6D4231421B68400DF0227 /* AccelerometerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerController.h; sourceTree = "<group>"; };
+		88F6D4241421B68400DF0227 /* AccelerometerController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccelerometerController.mm; sourceTree = "<group>"; };
+		88F6D4261421BB3600DF0227 /* GyroScopeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GyroScopeController.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Sora_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sora_iPhone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1293,12 +1285,6 @@
 		8897815313071CA100A69ADE /* SoraZipResourceManager */ = {
 			isa = PBXGroup;
 			children = (
-				8897815413071CA100A69ADE /* MyFileReader.cpp */,
-				8897815513071CA100A69ADE /* MyFileReader.h */,
-				8897815613071CA100A69ADE /* PackMemory.cpp */,
-				8897815713071CA100A69ADE /* PackMemory.h */,
-				8897815813071CA100A69ADE /* PackReader.cpp */,
-				8897815913071CA100A69ADE /* PackReader.h */,
 				8897815A13071CA100A69ADE /* SoraZipFile.cpp */,
 				8897815B13071CA100A69ADE /* SoraZipFile.h */,
 				8897815C13071CA100A69ADE /* SoraZipResourceManager.cpp */,
@@ -1336,6 +1322,9 @@
 				88DFE17F1417F38D00CA711D /* EAGLView.mm */,
 				88DFE1811417F77300CA711D /* SoraiOSMainWindow.h */,
 				884029281419660600F9DD84 /* SoraiOSTimer.h */,
+				88F6D4231421B68400DF0227 /* AccelerometerController.h */,
+				88F6D4241421B68400DF0227 /* AccelerometerController.mm */,
+				88F6D4261421BB3600DF0227 /* GyroScopeController.h */,
 			);
 			name = SoraiOSGLRenderer;
 			path = ../Plugins/SoraiOSGLRenderer;
@@ -1581,8 +1570,6 @@
 				88C853B114172C5A00FB39EC /* vector3.h */,
 				88C853B214172C5A00FB39EC /* win32filewrapper.cpp */,
 				88C853B314172C5A00FB39EC /* win32filewrapper.h */,
-				88C853B414172C5A00FB39EC /* windowsExceptionHandler.cpp */,
-				88C853B514172C5A00FB39EC /* windowsExceptionHandler.h */,
 				88C853B614172C5A00FB39EC /* WindowsStackTrace.h */,
 				88C853B714172C5A00FB39EC /* ZLIB */,
 			);
@@ -2367,9 +2354,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				8897815E13071CA100A69ADE /* MyFileReader.cpp in Sources */,
-				8897815F13071CA100A69ADE /* PackMemory.cpp in Sources */,
-				8897816013071CA100A69ADE /* PackReader.cpp in Sources */,
 				8897816113071CA100A69ADE /* SoraZipFile.cpp in Sources */,
 				8897816213071CA100A69ADE /* SoraZipResourceManager.cpp in Sources */,
 				8897826013071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm in Sources */,
@@ -2572,7 +2556,6 @@
 				88C8544F14172C5A00FB39EC /* SoraSimpleTimer.cpp in Sources */,
 				88C8545014172C5A00FB39EC /* SoraSimpleTimerManager.cpp in Sources */,
 				88C8545114172C5A00FB39EC /* win32filewrapper.cpp in Sources */,
-				88C8545214172C5A00FB39EC /* windowsExceptionHandler.cpp in Sources */,
 				88C8545314172C5A00FB39EC /* adler32.c in Sources */,
 				88C8545414172C5A00FB39EC /* compress.c in Sources */,
 				88C8545514172C5A00FB39EC /* crc32.c in Sources */,
@@ -2650,6 +2633,7 @@
 				88DFE183141810BA00CA711D /* SoraiOSInitializer.mm in Sources */,
 				88DFE186141811EE00CA711D /* SoraiOSWrapper.mm in Sources */,
 				8840292B1419B95400F9DD84 /* SoraiOSDeviceHelper.mm in Sources */,
+				88F6D4251421B68400DF0227 /* AccelerometerController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2737,8 +2721,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					../../Plugins,
-					../../Sora,
+					../Plugins,
+					../Plugins/SoraGUIChan,
+					../Sora,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

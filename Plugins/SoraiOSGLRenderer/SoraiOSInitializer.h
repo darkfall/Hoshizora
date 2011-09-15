@@ -46,6 +46,9 @@ namespace sora {
         void setOrientation(int portrait);
         int getOrientation() const;
         
+        void enableAccelerometer(bool flag);
+        void getAccelerometerAttr(float* x, float* y, float* z);
+        
 	private:
         SoraTimer* pTimer;
 		SoraiOSInput* input;
@@ -55,8 +58,6 @@ namespace sora {
 
 	static SoraiOSInitializer* SORA_IOS = SoraiOSInitializer::Instance();
 	
-#define GET_IOS_RESOURCE_NAME(name) SoraiOSInitializer::getResourceName(name)
-
 } // namespace sora
 
 #endif // SORA_IPHONE_DELEGATE_H_

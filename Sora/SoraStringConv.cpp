@@ -2,7 +2,7 @@
  *  SoraStringConv.cpp
  *  KuiIP
  *
- *  Created by griffin clare on 5/6/10.
+ *  Created by Robert Bu on 5/6/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */
@@ -52,7 +52,7 @@ namespace sora {
         return buffer;
     }
     
-    std::string fp_to_str(float32 x)
+    std::string fp_to_str(float x)
     {
         char *str = NULL;            
         char *integral = NULL;           
@@ -202,6 +202,17 @@ namespace sora {
     std::string SoraStringConverter::wstringToString(const std::wstring& str) {
         return ws2s(str);
     }
-
-
+    
+    std::string tolowerstring(const std::string& s) {
+        std::string result = s;
+        std::transform(s.begin(), s.end(), result.begin(), tolower);
+		return result;
+    }
+    
+    std::string toupperstring(const std::string& s) {
+        std::string result = s;
+        std::transform(s.begin(), s.end(), result.begin(), toupper);
+		return result;
+    }
+    
 } // namespace sora

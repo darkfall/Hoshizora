@@ -1,41 +1,55 @@
 #ifndef SORA_ZIP_FILE
 #define SORA_ZIP_FILE
 
-#include "SoraFileBase.h"
 #include "SoraStringConv.h"
+#include "SoraFileBase.h"
 
-#include "PackReader.h"
-#include "MyFileReader.h"
+#include "ZLIB/unzip.h"
+
+#include <map>
 
 namespace sora {
-
+    
 	class SoraZipFile: public SoraFileBase {
 	public:
 		SoraZipFile();
 		SoraZipFile(const SoraWString& filePath);
 		~SoraZipFile();
-
-		virtual int32 readFile(const SoraWString& filePath);
-		virtual int32 readFileMem(void* lpszPackData, uLong nPackSize);
-		virtual void  closeFile();
-	
-		virtual void setPackCode(const char* lpszPackCode);
-
-		virtual void* getFile(const SoraWString& filename, uLong readsize);
-
-		virtual uLong getFileSize(const SoraWString& filename);
-		virtual uLong getFileCRC(const SoraWString& filename);
+        
+        bool open(const SoraWString& filePath);
+        bool open(void* lpszPackData, uLong nPackSize);
+        void close();
+        
+        void setPackCode(const char* lpszPackCode);
+        
+        void* getFile(const SoraWString& filename, uLong readsize);
+        
+        ulong32 getFileSize(const SoraWString& filename);
+        ulong32 getFileCRC(const SoraWString& filename);
 		
-		virtual bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
-
+        bool enumFiles(std::vector<SoraWString>& cont, const SoraWString& folder);
+        
 	private:
 		void _releaseFile();
 		void* _getfile(const SoraWString& filename, uLong readsize);
-
+        void _cache();
+        unz_file_info* _getUnzFileInfo(const char* lpszFileName);
+        
 		std::string packCode;
-        SoraWString mFilePath;
-
-		BOGY::PackReader* pReader;
+        
+        unzFile m_UnzFile;		// modeRead
+        unz_file_info	m_UnzFileInfo;	
+        
+        struct fileInfo {
+            std::string fileName;
+            uLong fileSize;
+            uLong seekPos;
+            
+            fileInfo(const std::string& _fileName, uLong _fileSize, uLong _seekPos): fileName(_fileName), fileSize(_fileSize), seekPos(_seekPos) {}
+        };
+        
+        typedef std::map<std::string, fileInfo> TSEEKER; 
+        TSEEKER m_Seeker;
 	};
 } //namespace sora
 

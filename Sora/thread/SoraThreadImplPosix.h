@@ -43,13 +43,17 @@ namespace sora {
         }
         
         inline void joinImpl() {
-            if(active)
+            if(active) {
                 pthread_join(thread, 0);
+                active = false;
+            }
         }
         
         inline void exitImpl() {
-            if(active)
+            if(active) {
                 pthread_exit(&thread);
+                active = false;
+            }
         }
         
         inline bool isActiveImpl() const {

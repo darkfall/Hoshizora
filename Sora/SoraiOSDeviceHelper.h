@@ -42,9 +42,13 @@ namespace sora {
 	
     void setScaleFactor(float factor);
     float getScaleFactor();
+    
+    // only works for iPhone
+    void vabriteDevice();
+    
     /**
-     *  Must be called initialization
-     *  If not, glViewport and glortho are still mapped to (320,480) and resources with @2x are ignored
+     *  Must be called before initialization
+     *  If not, glViewport and glortho are still mapped to (320,480) and resources with @2x are ignored for retina displays
      *  Otherwise, will double the scrensize and will deal with resources with @2x and scale resources without @2x
      **/ 
     void setUseRetina(bool flag);
