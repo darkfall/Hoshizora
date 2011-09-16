@@ -44,9 +44,12 @@ rfMainWindow::~rfMainWindow() {
 
 sora::SoraSprite* spr;
 
-bool rfMainWindow::renderFunc() {		
-	//CORE->setTransform(0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f);
 
+sora::SoraMusicFile* bgm;
+sora::SoraSoundEffectFile* se;
+bool rfMainWindow::renderFunc() {		
+	//CORE->setTransform(0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f)
+    
 	CORE->beginScene(0);
 	if(rfState != STATE_LOGO) {
 		pBG->render(0.f, 0.f);
@@ -322,13 +325,17 @@ size_t rfMainWindow::getAvailableMapCount() const {
 #include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraFileUtility.h"
 
+
 void rfMainWindow::init() {
 	CORE = sora::SoraCore::Instance();
 	
 	CORE->registerResourceManager(new sora::SoraZipResourceManager);
-	printf("%s\n", sora::ws2s(sora::SoraFileUtility::getApplicationPath()+L"resource.SoraResource").c_str());
 	CORE->attachResourcePack(CORE->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource"));
 	
+    bgm = CORE->createMusicFile(L"02.mp3", true);
+    se = CORE->createSoundEffectFile(SoraWString(L"click_08.wav"));
+    bgm->play();
+    
 	pBG = CORE->createSprite(L"magicCircle.png");
 	//if(pBG) pBG->setScale(pBG->getTextureWidth()/getWindowWidth(), pBG->getTextureHeight()/getWindowHeight());
 	pBlackBG = CORE->createSprite(L"blackbg.png");

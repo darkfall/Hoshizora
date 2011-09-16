@@ -61,6 +61,10 @@
     sora::setEAGLView(self);
     multisampling = true;
     initialized = true;
+    
+    msaaFramebuffer = nil;
+    msaaColorBuffer = nil;
+    msaaDepthBuffer = nil;
 
     return self;
 }
@@ -71,7 +75,7 @@
 
     [self deleteMSAABuffer];
     [self deleteFramebuffer];    
-    [context release];
+ //   [context release];
     
     [super dealloc];
 }

@@ -24,9 +24,9 @@ namespace sora {
 	class SORA_API SoraResourceFileAuto: uncopyable {
 	public:
         SoraResourceFileAuto();
-		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
-		SoraResourceFileAuto(const SoraWString& file, bool retain=false);
-        SoraResourceFileAuto(const SoraWString& file, ulong32 size, bool retain=false);
+        SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
+		explicit SoraResourceFileAuto(const SoraWString& file, bool retain=false);
+        explicit SoraResourceFileAuto(const SoraWString& file, ulong32 size, bool retain=false);
 		~SoraResourceFileAuto();
         
         SoraResourceFileAuto& operator=(const SoraWString& file);

@@ -13,27 +13,27 @@
 
 #import "AccelerometerController.h"
 
+#include "SoraiOSFontManager/SoraiOSFontManager.h"
+#include "SoraiOSSoundSystem/SoraiOSSoundSystem.h"
+
 namespace sora {
     
     void SoraiOSInitializer::SoraiOSInit(bool isOGLES2API, bool multisampling) {
-       // if(isOGLES2API)
-       //     SORA->registerRenderSystem(new SoraiOSGLRenderer_ES2);
-       // else
-            SORA->registerRenderSystem(new SoraiOSGLRenderer);
+        SORA->registerRenderSystem(new SoraiOSGLRenderer);
         
         sora::setupMultisampling(multisampling);
     }
     
-    void SoraiOSInitializer::SoraiOSStart(SoraWindowInfoBase* window, bool isOGLES2API) {
-        SoraiOSInit(isOGLES2API);
+    void SoraiOSInitializer::SoraiOSStart(SoraWindowInfoBase* window, const SoraOALParameters& soundParams, bool multisampling) {
+        SoraiOSInit(false, multisampling);
         
         try {
             SORA->registerFontManager(new sora::SoraiOSFontManager);
+            SORA->registerSoundSystem(new sora::SoraiOSSoundSystem(soundParams));
             SORA->registerInput(new sora::SoraiOSInput);
             SORA->registerTimer(new sora::SoraiOSTimer);
             
             SORA->createWindow(window);
-            SORA->setFPS(120);
         } catch(SoraException& e) {
             SORA->messageBox(e.what(), "Fatal error", MB_OK);
             SORA->shutDown();
@@ -53,8 +53,6 @@ namespace sora {
         if(pTimer->update()) {
             sora::SoraTimestamp time;
             sora::SORA_IOS->SoraiOSUpdateSystems();
-        //    printf("%u\n", time.elapsed());
-
         }
         return false;
     }

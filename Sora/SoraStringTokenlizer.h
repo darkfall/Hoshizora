@@ -22,7 +22,7 @@ namespace sora {
         typedef Iterator iterator;
         
         SoraStringTokenlizer();
-        SoraStringTokenlizer(const std::string& str);
+        explicit SoraStringTokenlizer(const std::string& str);
         SoraStringTokenlizer(const std::string& str, const std::string& deli);
         
         void parse(const std::string& str);

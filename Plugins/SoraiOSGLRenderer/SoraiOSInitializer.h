@@ -17,7 +17,7 @@
 #include "SoraiOSGLRenderer_ES2.h"
 #include "SoraiOSInput.h"
 
-#include "SoraiOSFontManager/SoraiOSFontManager.h"
+#include "SoraiOSSoundSystem/SoraOALParam.h"
 
 namespace sora {
 	
@@ -31,7 +31,7 @@ namespace sora {
         
 	public:
 		
-        void SoraiOSStart(SoraWindowInfoBase* window, bool isOGLES2API=false);
+        void SoraiOSStart(SoraWindowInfoBase* window, const SoraOALParameters& soundParams=SoraOALParameters(), bool multisampling=false);
 		void setTimer(SoraTimer* timer);
 		void setRenderSystem(SoraiOSGLRenderer* sys);
         

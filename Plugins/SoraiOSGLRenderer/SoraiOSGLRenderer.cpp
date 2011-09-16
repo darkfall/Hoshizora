@@ -282,8 +282,6 @@ namespace sora{
 		_glSetProjectionMatrix(_oglWindowInfo.width, _oglWindowInfo.height);
 		applyTransform();
 		
-		windowInfo->init();		
-
 		return (ulong32)windowInfo;
 		
 		return 0;
