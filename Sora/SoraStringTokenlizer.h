@@ -41,6 +41,8 @@ namespace sora {
         void operator=(const char* str);
         
         const TokenContainer& getTokens() const;
+        
+        size_t size() const;
     
     protected:
         bool isSpace(char c);

@@ -355,10 +355,14 @@
 		88FA185D1422AAD100B207BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FA185C1422AAD100B207BB /* AVFoundation.framework */; };
 		88FA185F1422AAD100B207BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FA185E1422AAD100B207BB /* AVFoundation.framework */; };
 		88FA18651422AAD100B207BB /* SoraOALController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18641422AAD100B207BB /* SoraOALController.mm */; };
-		88FA18671422B2EA00B207BB /* SoraiOSSoundFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18661422B2E900B207BB /* SoraiOSSoundFile.mm */; };
-		88FA18691422B89900B207BB /* SoraiOSSoundSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18681422B89900B207BB /* SoraiOSSoundSystem.mm */; };
 		88FA186D1422BB6700B207BB /* 02.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FA186B1422BB6700B207BB /* 02.mp3 */; };
 		88FA186E1422BB6700B207BB /* click_08.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FA186C1422BB6700B207BB /* click_08.wav */; };
+		88FA18A61422D96900B207BB /* SoraiOSSoundFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18A21422D96900B207BB /* SoraiOSSoundFile.mm */; };
+		88FA18A71422D96900B207BB /* SoraiOSSoundSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18A41422D96900B207BB /* SoraiOSSoundSystem.mm */; };
+		88FA18B51422D9D000B207BB /* SoraConfigParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18AA1422D9D000B207BB /* SoraConfigParser.cpp */; };
+		88FA18B61422D9D000B207BB /* SoraConfigParserImpl_Json.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18AD1422D9D000B207BB /* SoraConfigParserImpl_Json.cpp */; };
+		88FA18B71422D9D000B207BB /* SoraConfigParserImpl_Xml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18AF1422D9D000B207BB /* SoraConfigParserImpl_Xml.cpp */; };
+		88FA18B81422D9D000B207BB /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18B31422D9D000B207BB /* pugixml.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1184,15 +1188,26 @@
 		88FA18401422AAD100B207BB /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		88FA185C1422AAD100B207BB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		88FA185E1422AAD100B207BB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		88FA18601422AAD100B207BB /* SoraiOSSoundFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSSoundFile.h; sourceTree = "<group>"; };
-		88FA18611422AAD100B207BB /* SoraiOSSoundSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSSoundSystem.h; sourceTree = "<group>"; };
 		88FA18631422AAD100B207BB /* SoraOALController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOALController.h; sourceTree = "<group>"; };
 		88FA18641422AAD100B207BB /* SoraOALController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraOALController.mm; sourceTree = "<group>"; };
-		88FA18661422B2E900B207BB /* SoraiOSSoundFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSSoundFile.mm; sourceTree = "<group>"; };
-		88FA18681422B89900B207BB /* SoraiOSSoundSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSSoundSystem.mm; sourceTree = "<group>"; };
-		88FA186A1422B92300B207BB /* SoraOALParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOALParam.h; sourceTree = "<group>"; };
 		88FA186B1422BB6700B207BB /* 02.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 02.mp3; path = "../Sora-OSX/build/Debug/02.mp3"; sourceTree = "<group>"; };
 		88FA186C1422BB6700B207BB /* click_08.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_08.wav; path = "../Sora-OSX/build/Debug/click_08.wav"; sourceTree = "<group>"; };
+		88FA18A11422D96900B207BB /* SoraiOSSoundFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSSoundFile.h; sourceTree = "<group>"; };
+		88FA18A21422D96900B207BB /* SoraiOSSoundFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSSoundFile.mm; sourceTree = "<group>"; };
+		88FA18A31422D96900B207BB /* SoraiOSSoundSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSSoundSystem.h; sourceTree = "<group>"; };
+		88FA18A41422D96900B207BB /* SoraiOSSoundSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSSoundSystem.mm; sourceTree = "<group>"; };
+		88FA18A51422D96900B207BB /* SoraOALParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraOALParam.h; sourceTree = "<group>"; };
+		88FA18A91422D9D000B207BB /* prerequisites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prerequisites.h; sourceTree = "<group>"; };
+		88FA18AA1422D9D000B207BB /* SoraConfigParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraConfigParser.cpp; sourceTree = "<group>"; };
+		88FA18AB1422D9D000B207BB /* SoraConfigParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraConfigParser.h; sourceTree = "<group>"; };
+		88FA18AC1422D9D000B207BB /* SoraConfigParserImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraConfigParserImpl.h; sourceTree = "<group>"; };
+		88FA18AD1422D9D000B207BB /* SoraConfigParserImpl_Json.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraConfigParserImpl_Json.cpp; sourceTree = "<group>"; };
+		88FA18AE1422D9D000B207BB /* SoraConfigParserImpl_Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraConfigParserImpl_Json.h; sourceTree = "<group>"; };
+		88FA18AF1422D9D000B207BB /* SoraConfigParserImpl_Xml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraConfigParserImpl_Xml.cpp; sourceTree = "<group>"; };
+		88FA18B01422D9D000B207BB /* SoraConfigParserImpl_Xml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraConfigParserImpl_Xml.h; sourceTree = "<group>"; };
+		88FA18B21422D9D000B207BB /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
+		88FA18B31422D9D000B207BB /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
+		88FA18B41422D9D000B207BB /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hpp; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Sora_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sora_iPhone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1474,6 +1489,8 @@
 		88C8523C14172C5900FB39EC /* Sora */ = {
 			isa = PBXGroup;
 			children = (
+				88FA18A81422D9D000B207BB /* config */,
+				88FA18B11422D9D000B207BB /* xml */,
 				884029291419B95400F9DD84 /* SoraiOSDeviceHelper.h */,
 				8840292A1419B95400F9DD84 /* SoraiOSDeviceHelper.mm */,
 				88C8523D14172C5900FB39EC /* AutoContainer.cpp */,
@@ -2373,13 +2390,13 @@
 			isa = PBXGroup;
 			children = (
 				88FA17FF1422AAD100B207BB /* ObjectAL */,
-				88FA186A1422B92300B207BB /* SoraOALParam.h */,
-				88FA18601422AAD100B207BB /* SoraiOSSoundFile.h */,
-				88FA18661422B2E900B207BB /* SoraiOSSoundFile.mm */,
-				88FA18611422AAD100B207BB /* SoraiOSSoundSystem.h */,
-				88FA18681422B89900B207BB /* SoraiOSSoundSystem.mm */,
 				88FA18631422AAD100B207BB /* SoraOALController.h */,
 				88FA18641422AAD100B207BB /* SoraOALController.mm */,
+				88FA18A11422D96900B207BB /* SoraiOSSoundFile.h */,
+				88FA18A21422D96900B207BB /* SoraiOSSoundFile.mm */,
+				88FA18A31422D96900B207BB /* SoraiOSSoundSystem.h */,
+				88FA18A41422D96900B207BB /* SoraiOSSoundSystem.mm */,
+				88FA18A51422D96900B207BB /* SoraOALParam.h */,
 			);
 			name = SoraiOSSoundSystem;
 			path = ../Plugins/SoraiOSSoundSystem;
@@ -2489,6 +2506,31 @@
 				88FA18401422AAD100B207BB /* SynthesizeSingleton.h */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		88FA18A81422D9D000B207BB /* config */ = {
+			isa = PBXGroup;
+			children = (
+				88FA18A91422D9D000B207BB /* prerequisites.h */,
+				88FA18AA1422D9D000B207BB /* SoraConfigParser.cpp */,
+				88FA18AB1422D9D000B207BB /* SoraConfigParser.h */,
+				88FA18AC1422D9D000B207BB /* SoraConfigParserImpl.h */,
+				88FA18AD1422D9D000B207BB /* SoraConfigParserImpl_Json.cpp */,
+				88FA18AE1422D9D000B207BB /* SoraConfigParserImpl_Json.h */,
+				88FA18AF1422D9D000B207BB /* SoraConfigParserImpl_Xml.cpp */,
+				88FA18B01422D9D000B207BB /* SoraConfigParserImpl_Xml.h */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		88FA18B11422D9D000B207BB /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				88FA18B21422D9D000B207BB /* pugiconfig.hpp */,
+				88FA18B31422D9D000B207BB /* pugixml.cpp */,
+				88FA18B41422D9D000B207BB /* pugixml.hpp */,
+			);
+			path = xml;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2893,8 +2935,12 @@
 				88FA185A1422AAD100B207BB /* OALAudioFile.m in Sources */,
 				88FA185B1422AAD100B207BB /* OALTools.m in Sources */,
 				88FA18651422AAD100B207BB /* SoraOALController.mm in Sources */,
-				88FA18671422B2EA00B207BB /* SoraiOSSoundFile.mm in Sources */,
-				88FA18691422B89900B207BB /* SoraiOSSoundSystem.mm in Sources */,
+				88FA18A61422D96900B207BB /* SoraiOSSoundFile.mm in Sources */,
+				88FA18A71422D96900B207BB /* SoraiOSSoundSystem.mm in Sources */,
+				88FA18B51422D9D000B207BB /* SoraConfigParser.cpp in Sources */,
+				88FA18B61422D9D000B207BB /* SoraConfigParserImpl_Json.cpp in Sources */,
+				88FA18B71422D9D000B207BB /* SoraConfigParserImpl_Xml.cpp in Sources */,
+				88FA18B81422D9D000B207BB /* pugixml.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
