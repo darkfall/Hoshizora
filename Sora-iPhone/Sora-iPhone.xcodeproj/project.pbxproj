@@ -203,11 +203,7 @@
 		88C854F914172E3800FB39EC /* basiccontainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8546A14172E3800FB39EC /* basiccontainer.cpp */; };
 		88C854FA14172E3800FB39EC /* cliprectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8546D14172E3800FB39EC /* cliprectangle.cpp */; };
 		88C854FB14172E3800FB39EC /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8546F14172E3800FB39EC /* color.cpp */; };
-		88C854FC14172E3800FB39EC /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 88C8547214172E3800FB39EC /* Makefile.am */; };
-		88C854FD14172E3800FB39EC /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 88C8547314172E3800FB39EC /* Makefile.in */; };
 		88C854FE14172E3800FB39EC /* adjustingcontainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8547514172E3800FB39EC /* adjustingcontainer.cpp */; };
-		88C854FF14172E3800FB39EC /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 88C8547714172E3800FB39EC /* Makefile.am */; };
-		88C8550014172E3800FB39EC /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 88C8547814172E3800FB39EC /* Makefile.in */; };
 		88C8550114172E3800FB39EC /* defaultfont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8547A14172E3800FB39EC /* defaultfont.cpp */; };
 		88C8550214172E3800FB39EC /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8547C14172E3800FB39EC /* event.cpp */; };
 		88C8550314172E3800FB39EC /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8547E14172E3800FB39EC /* exception.cpp */; };
@@ -223,8 +219,6 @@
 		88C8550D14172E3800FB39EC /* key.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8549414172E3800FB39EC /* key.cpp */; };
 		88C8550E14172E3800FB39EC /* keyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8549614172E3800FB39EC /* keyevent.cpp */; };
 		88C8550F14172E3800FB39EC /* keyinput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8549814172E3800FB39EC /* keyinput.cpp */; };
-		88C8551014172E3800FB39EC /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 88C8549C14172E3800FB39EC /* Makefile.am */; };
-		88C8551114172E3800FB39EC /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 88C8549D14172E3800FB39EC /* Makefile.in */; };
 		88C8551214172E3800FB39EC /* modifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C8549E14172E3800FB39EC /* modifier.cpp */; };
 		88C8551314172E3800FB39EC /* mouseevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C854A014172E3800FB39EC /* mouseevent.cpp */; };
 		88C8551414172E3800FB39EC /* mouseinput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88C854A214172E3800FB39EC /* mouseinput.cpp */; };
@@ -871,12 +865,8 @@
 		88C8546E14172E3800FB39EC /* cliprectangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cliprectangle.hpp; sourceTree = "<group>"; };
 		88C8546F14172E3800FB39EC /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
 		88C8547014172E3800FB39EC /* color.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = color.hpp; sourceTree = "<group>"; };
-		88C8547214172E3800FB39EC /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		88C8547314172E3800FB39EC /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
 		88C8547514172E3800FB39EC /* adjustingcontainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adjustingcontainer.cpp; sourceTree = "<group>"; };
 		88C8547614172E3800FB39EC /* adjustingcontainer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = adjustingcontainer.hpp; sourceTree = "<group>"; };
-		88C8547714172E3800FB39EC /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		88C8547814172E3800FB39EC /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
 		88C8547914172E3800FB39EC /* deathlistener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = deathlistener.hpp; sourceTree = "<group>"; };
 		88C8547A14172E3800FB39EC /* defaultfont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = defaultfont.cpp; sourceTree = "<group>"; };
 		88C8547B14172E3800FB39EC /* defaultfont.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = defaultfont.hpp; sourceTree = "<group>"; };
@@ -912,8 +902,6 @@
 		88C8549914172E3800FB39EC /* keyinput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyinput.hpp; sourceTree = "<group>"; };
 		88C8549A14172E3800FB39EC /* keylistener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keylistener.hpp; sourceTree = "<group>"; };
 		88C8549B14172E3800FB39EC /* listmodel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = listmodel.hpp; sourceTree = "<group>"; };
-		88C8549C14172E3800FB39EC /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		88C8549D14172E3800FB39EC /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
 		88C8549E14172E3800FB39EC /* modifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = modifier.cpp; sourceTree = "<group>"; };
 		88C8549F14172E3800FB39EC /* modifier.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = modifier.hpp; sourceTree = "<group>"; };
 		88C854A014172E3800FB39EC /* mouseevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mouseevent.cpp; sourceTree = "<group>"; };
@@ -2136,8 +2124,6 @@
 				88C8549914172E3800FB39EC /* keyinput.hpp */,
 				88C8549A14172E3800FB39EC /* keylistener.hpp */,
 				88C8549B14172E3800FB39EC /* listmodel.hpp */,
-				88C8549C14172E3800FB39EC /* Makefile.am */,
-				88C8549D14172E3800FB39EC /* Makefile.in */,
 				88C8549E14172E3800FB39EC /* modifier.cpp */,
 				88C8549F14172E3800FB39EC /* modifier.hpp */,
 				88C854A014172E3800FB39EC /* mouseevent.cpp */,
@@ -2167,8 +2153,6 @@
 		88C8547114172E3800FB39EC /* contrib */ = {
 			isa = PBXGroup;
 			children = (
-				88C8547214172E3800FB39EC /* Makefile.am */,
-				88C8547314172E3800FB39EC /* Makefile.in */,
 				88C8547414172E3800FB39EC /* widgets */,
 			);
 			path = contrib;
@@ -2179,8 +2163,6 @@
 			children = (
 				88C8547514172E3800FB39EC /* adjustingcontainer.cpp */,
 				88C8547614172E3800FB39EC /* adjustingcontainer.hpp */,
-				88C8547714172E3800FB39EC /* Makefile.am */,
-				88C8547814172E3800FB39EC /* Makefile.in */,
 			);
 			path = widgets;
 			sourceTree = "<group>";
@@ -2605,12 +2587,6 @@
 				88C853F314172C5A00FB39EC /* json_internalmap.inl in Resources */,
 				88C853F614172C5A00FB39EC /* json_valueiterator.inl in Resources */,
 				88C8543F14172C5A00FB39EC /* pthreadVC2.dll in Resources */,
-				88C854FC14172E3800FB39EC /* Makefile.am in Resources */,
-				88C854FD14172E3800FB39EC /* Makefile.in in Resources */,
-				88C854FF14172E3800FB39EC /* Makefile.am in Resources */,
-				88C8550014172E3800FB39EC /* Makefile.in in Resources */,
-				88C8551014172E3800FB39EC /* Makefile.am in Resources */,
-				88C8551114172E3800FB39EC /* Makefile.in in Resources */,
 				88C8552214172E3800FB39EC /* Makefile.am in Resources */,
 				88C8552314172E3800FB39EC /* Makefile.in in Resources */,
 				884029271419291800F9DD84 /* magicCircle@2x.png in Resources */,
@@ -2963,6 +2939,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Sora_iPhone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Plugins/SoraLua\"",
@@ -2986,6 +2963,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Sora_iPhone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Plugins/SoraLua\"",

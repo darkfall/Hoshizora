@@ -241,6 +241,7 @@
 		88F6D4AC1421D7C400DF0227 /* widgetFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88F6D4A91421D7C400DF0227 /* widgetFactory.cpp */; };
 		88FA18F41423E45400B207BB /* SoraZipFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18F01423E45400B207BB /* SoraZipFile.cpp */; };
 		88FA18F51423E45400B207BB /* SoraZipResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FA18F21423E45400B207BB /* SoraZipResourceManager.cpp */; };
+		88FA1B5914251DAA00B207BB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FA1B5814251DAA00B207BB /* OpenAL.framework */; };
 		88FABD85129F271900B6A1D8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABD84129F271900B6A1D8 /* AudioToolbox.framework */; };
 		88FABDCA129F2A9C00B6A1D8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */; };
 		88FABDD5129F2AA200B6A1D8 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */; };
@@ -953,6 +954,7 @@
 		88FA18F11423E45400B207BB /* SoraZipFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraZipFile.h; sourceTree = "<group>"; };
 		88FA18F21423E45400B207BB /* SoraZipResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraZipResourceManager.cpp; sourceTree = "<group>"; };
 		88FA18F31423E45400B207BB /* SoraZipResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraZipResourceManager.h; sourceTree = "<group>"; };
+		88FA1B5814251DAA00B207BB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		88FABD84129F271900B6A1D8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
@@ -966,6 +968,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88FA1B5914251DAA00B207BB /* OpenAL.framework in Frameworks */,
 				88F3D53F1286376C001F52E9 /* OpenGL.framework in Frameworks */,
 				88F3D5D3128637A2001F52E9 /* Foundation.framework in Frameworks */,
 				88FD360B128E8367004DED08 /* Cocoa.framework in Frameworks */,
@@ -1721,6 +1724,7 @@
 		88B0906A12B80C5100777409 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				88FA1B5814251DAA00B207BB /* OpenAL.framework */,
 				88BF9F6D135AA63200BB8E70 /* Cg.framework */,
 				88FABD84129F271900B6A1D8 /* AudioToolbox.framework */,
 				88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */,
