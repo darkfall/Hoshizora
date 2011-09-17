@@ -76,7 +76,7 @@ namespace sora {
         
         inline bool String::asBool() const {
             static const char* bools[] = {
-                "no", "yes", "off", "on", "false", "true", 0
+                "no", "yes", "off", "on", "false", "true", "0", "1", 0
             };
             int i = 0;
             while(bools[i] != 0) {

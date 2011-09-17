@@ -1398,11 +1398,6 @@ namespace sora {
     
     void SoraCore::enableFullscreenBuffer(bool flag) {
         bEnableScreenBuffer = flag;
-        if(flag && !mScreenBuffer) {
-            mScreenBuffer = createTarget(getScreenWidth(), getScreenHeight());
-            if(!mScreenBuffer)
-                THROW_SORA_EXCEPTION(SystemException, "Error creating screen buffer, fullscreen buffer maybe disabled. :(");
-        }
     }
     
     void SoraCore::registerFullscreenBufferDelegate(const SoraAbstractDelegate<HSORATEXTURE>& delegate) {
