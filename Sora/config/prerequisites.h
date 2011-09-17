@@ -12,12 +12,18 @@
 #include "SoraPlatform.h"
 #include "SoraUncopyable.h"
 #include "SoraMemoryBuffer.h"
+#include "SoraString.h"
 
 namespace sora {
     
     enum ConfigType {
+        // reserved, DO NOT USE
+        CONFIG_UNKNOWN = -1,
+        
         CONFIG_XML = 1,
         CONFIG_JSON,
+        CONFIG_INI,
+        CONFIG_AUTO_DETECT = 10,
     };
     
 } // namespace sora

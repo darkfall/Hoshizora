@@ -355,6 +355,7 @@
 		88E345B6136EF747000B67C8 /* SoraiOSStringConv.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88E345B5136EF747000B67C8 /* SoraiOSStringConv.mm */; };
 		88F3D53F1286376C001F52E9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F3D53C1286376C001F52E9 /* OpenGL.framework */; };
 		88F3D5D3128637A2001F52E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F3D5D2128637A2001F52E9 /* Foundation.framework */; };
+		88FA192D1424649500B207BB /* SoraGameAppDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88FA192C1424649500B207BB /* SoraGameAppDef.cpp */; };
 		88FABD85129F271900B6A1D8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABD84129F271900B6A1D8 /* AudioToolbox.framework */; };
 		88FABDCA129F2A9C00B6A1D8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */; };
 		88FABDD5129F2AA200B6A1D8 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */; };
@@ -1328,6 +1329,9 @@
 		88E345B5136EF747000B67C8 /* SoraiOSStringConv.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSStringConv.mm; sourceTree = "<group>"; };
 		88F3D53C1286376C001F52E9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		88F3D5D2128637A2001F52E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		88FA192B1424634500B207BB /* SoraGameAppDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGameAppDef.h; sourceTree = "<group>"; };
+		88FA192C1424649500B207BB /* SoraGameAppDef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraGameAppDef.cpp; sourceTree = "<group>"; };
+		88FA192E1424799D00B207BB /* SoraGameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGameState.h; sourceTree = "<group>"; };
 		88FABD84129F271900B6A1D8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		88FABDC9129F2A9C00B6A1D8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		88FABDD4129F2AA200B6A1D8 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
@@ -2521,6 +2525,9 @@
 		8894BFE41412F1820013CE36 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				88FA192B1424634500B207BB /* SoraGameAppDef.h */,
+				88FA192C1424649500B207BB /* SoraGameAppDef.cpp */,
+				88FA192E1424799D00B207BB /* SoraGameState.h */,
 				884BE69D141632A900839FAD /* SoraGameApp.h */,
 				884BE69E141632B400839FAD /* SoraGameApp.cpp */,
 			);
@@ -3464,6 +3471,7 @@
 				8800093F1414BFA1009044C8 /* SoraZipResourceManager.cpp in Sources */,
 				884BE69C1416321900839FAD /* SoraURI.cpp in Sources */,
 				884BE69F141632B400839FAD /* SoraGameApp.cpp in Sources */,
+				88FA192D1424649500B207BB /* SoraGameAppDef.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 
 
 #include "SoraMemoryBuffer.h"
+#include "io/SoraFileStream.h"
 
 namespace sora {
 	
@@ -101,17 +102,14 @@ namespace sora {
 		return false;
 	}
 	
-	bool SoraMemoryBuffer::writeToFile(const SoraWString& path) {
-		FILE* pFile = sora_fopenw(path.c_str(), "wb");
-		if(pFile) {
-			ulong32 wrote = fwrite((void*)(get()), realSize, 1, pFile);
-			if(wrote != realSize) {
-				fclose(pFile);
-				return false;
-			}
-		}
-		fclose(pFile);
-		return true;
+	bool SoraMemoryBuffer::writeToFile(const StringType& path) {
+		SoraFileStream stream;
+        if(stream.open(path.get(), true)) {
+            stream.write((void*)get(), realSize);
+            stream.close();
+            return true;
+        }
+        return true;
 	}
 	
 	ulong32 SoraMemoryBuffer::read(void* pv, ulong32 size) {

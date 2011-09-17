@@ -11,6 +11,8 @@
 #include "SoraConfigParserImpl_Xml.h"
 #include "SoraConfigParserImpl_Json.h"
 
+#include "SoraResourceFile.h"
+
 namespace sora {
     
     SoraConfigParser::SoraConfigParser():
@@ -22,13 +24,64 @@ namespace sora {
         close();
     }
     
-    bool SoraConfigParser::open(const std::wstring& path, ConfigType type) {
+    ConfigType SoraConfigParser::fileNameToConfigType(const StringType& path) {
+        std::string name = path.get();
+        if(name.find(".xml") != std::string::npos) {
+            return CONFIG_XML;
+        } else if(name.find(".json") != std::string::npos) {
+            return CONFIG_JSON;
+        } else if(name.find(".ini") != std::string::npos) {
+            return CONFIG_INI;
+        }
+        return CONFIG_UNKNOWN;
+    }
+    
+    inline bool isSpace(char c) {
+        return c == '\n' || c == ' ' || c == '\r' || c == '\t';
+    }
+    
+    ConfigType SoraConfigParser::fileDataToConfigType(void* data, ulong32 size) {
+        const char* cdata = static_cast<const char*>(data);
+        size_t pos = 0;
+        while(pos < size && isSpace(cdata[pos])) {
+            ++pos;
+        }
+        switch(cdata[pos]) {
+            // xml starts with '<'
+            case '<':
+                return CONFIG_XML;
+            // json starts with '{'
+            case '{':
+                return CONFIG_JSON;
+                
+            default:
+                return CONFIG_INI;
+        }
+        return CONFIG_UNKNOWN;
+    }
+    
+    bool SoraConfigParser::open(const StringType& path, ConfigType type) {
+        if(mImpl) {
+            close();
+        }
         switch(type) {
             case CONFIG_JSON:
                 mImpl = new SoraConfigParserJsonImpl;
                 break;
             case CONFIG_XML:
                 mImpl = new SoraConfigParserXmlImpl;
+                break;
+            case CONFIG_AUTO_DETECT:
+                ConfigType type = fileNameToConfigType(path);
+                if(type != CONFIG_UNKNOWN)
+                    return open(path, type);
+                else {
+                    SoraResourceFileAuto resource(path);
+                    if(resource.isValid()) {
+                        return open(resource, resource.size(), CONFIG_AUTO_DETECT);
+                    }
+                    return false;
+                }
                 break;
                 
         }
@@ -39,9 +92,22 @@ namespace sora {
     }
     
     bool SoraConfigParser::open(void* data, ulong32 size, ConfigType type) {
+        if(mImpl) {
+            close();
+        }
         switch(type) {
             case CONFIG_JSON:
                 mImpl = new SoraConfigParserJsonImpl;
+                break;
+            case CONFIG_XML:
+                mImpl = new SoraConfigParserXmlImpl;
+                break;
+            case CONFIG_AUTO_DETECT:
+                ConfigType type = fileDataToConfigType(data, size);
+                if(type != CONFIG_UNKNOWN) {
+                    return open(data, size, type);
+                }
+                return false;
                 break;
                 
         }
@@ -51,11 +117,11 @@ namespace sora {
         return false;
     }
     
-    bool SoraConfigParser::open(const std::string& string, ConfigType type) {
+    bool SoraConfigParser::openString(const std::string& string, ConfigType type) {
         return open((void*)string.c_str(), (ulong32)string.size(), type);
     }
     
-    bool SoraConfigParser::writeToFile(const std::wstring& path) {
+    bool SoraConfigParser::writeToFile(const StringType& path) {
         sora_assert(mImpl);
         return mImpl->writeToFile(path);
     }
@@ -196,6 +262,11 @@ namespace sora {
     void SoraConfigParser::setFloat(const std::string& attr, float val) {
         sora_assert(mImpl);
         return mImpl->setFloat(attr, val);
+    }
+    
+    void SoraConfigParser::setValue(const std::string& val) {
+        sora_assert(mImpl);
+        mImpl->setValue(val);
     }
     
 } // namespace sora

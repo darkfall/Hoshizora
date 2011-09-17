@@ -55,7 +55,29 @@ public:
 #include "debug/SoraAutoProfile.h"
 #include "SoraFileUtility.h"
 
+#include "app/SoraGameApp.h"
+#include "app/SoraGameState.h"
+
+class initState: public sora::SoraGameState {
+public:
+    void onRender() {
+        
+    }
+};
+
 int main(int argc, char* argv[]) {    
+    
+    sora::SoraGameAppDef def("config.xml");
+    sora::SoraGameApp app(def);
+    
+    app.addState(new initState, "init");
+    app.run("init");
+    
+    return 0;
+
+}
+
+void oldInit() {
     
     sora::InitAndCreateSoraCore(new mainWindow, 
                                 sora::SoraCoreParameter(/* load plugins */
@@ -68,6 +90,6 @@ int main(int argc, char* argv[]) {
                                                         true,
                                                         /* debug rendering */
                                                         false))->start();
-		
-	return 0;
+    
+
 }

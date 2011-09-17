@@ -11,7 +11,6 @@
 
 #include "prerequisites.h"
 #include "SoraComponentHolder.h"
-#include "SoraComponent.h"
 
 namespace sora {
     
@@ -34,6 +33,7 @@ namespace sora {
         return dynamic_cast<class*>(ent); \
     }
     
+    class SoraComponent;
     
     /**
      * Entity with base component and property supoort
@@ -142,15 +142,6 @@ namespace sora {
         return defaultValue;
     }
     
-    
-    template<typename T>
-    inline T* SoraLightWeightEntity::getComponentT(const SoraString& tag) const {
-        SoraComponent* comp = getComponent(tag);
-        if(comp->getName() == T::GetName()) {
-            return static_cast<T*>(comp);
-        }
-        return 0;
-    }
 } // namespace sora
 
 

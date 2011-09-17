@@ -19,7 +19,7 @@ namespace sora {
         mIsWritting = false;
     }
     
-    bool SoraConfigParserJsonImpl::open(const std::wstring& path) {
+    bool SoraConfigParserJsonImpl::open(const StringType& path) {
         SoraResourceFileAuto file(path);
         if(file.isValid()) {
             return open(file, file.size());
@@ -282,7 +282,7 @@ namespace sora {
         return mRootValue.toStyledString();
     }
     
-    bool SoraConfigParserJsonImpl::writeToFile(const std::wstring& file) {
+    bool SoraConfigParserJsonImpl::writeToFile(const StringType& file) {
         sora_assert(mOpened);
         
         Json::StyledWriter writer;
@@ -313,6 +313,14 @@ namespace sora {
         if(mIsWritting) {
             mIsWritting = false;
             mCurrValue[mWritingNodeName] = mWrittingNode;
+        }
+    }
+    
+    void SoraConfigParserJsonImpl::setValue(const std::string& val) {
+        sora_assert(mOpened);
+        
+        if(mIsWritting) {
+            mWrittingNode = Json::Value(val);
         }
     }
     

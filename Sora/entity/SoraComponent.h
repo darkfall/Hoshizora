@@ -11,6 +11,7 @@
 
 #include "prerequisites.h"
 #include "factory/SoraFactory.h"
+#include "SoraLightWeightEntity.h"
 
 namespace sora {
     
@@ -31,9 +32,7 @@ namespace sora {
         static std::string name(#cls); \
         return name; \
     }
-    
-    class SoraLightWeightEntity;
-    
+        
     class SORA_API SoraComponent {
     public:
         /**
@@ -114,8 +113,8 @@ namespace sora {
         
         virtual void onSetOwner(SoraLightWeightEntity* entity) { }
         
-
-        void addProperty(SoraPropertyBase* prop);
+        template<typename T>
+        void addProperty(const std::string& name, const T& val);
         
         SoraPropertyBase* getProperty(const std::string& prop) const;
         
@@ -124,6 +123,13 @@ namespace sora {
         SoraLightWeightEntity* mOwner;
     };
     
+    template<typename T>
+    void SoraComponent::addProperty(const std::string& name, const T& val) {
+        if(mOwner != 0) 
+            mOwner->addProperty(MakeProperty(getName()+"."+name, val));
+        else 
+            THROW_SORA_EXCEPTION(RuntimeException, "caught component without owner");
+    }
     
     typedef SoraAbstractFactory<SoraComponent, SoraComponent*(SoraLightWeightEntity*)> SoraComponentFactory;
     
@@ -143,6 +149,15 @@ namespace sora {
     
     static void DestroyComponent(SoraComponent* comp) {
         delete comp;
+    }
+    
+    template<typename T>
+    inline T* ComponentCast(SoraComponent* comp) {
+        sora_assert(comp);
+        if(comp->getName() == T::GetName()) {
+            return static_cast<T*>(comp);
+        }
+        return 0;
     }
     
 #define SORA_IMPL_COMPONENT(cls) \

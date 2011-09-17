@@ -107,9 +107,9 @@ namespace sora {
         mGlobalState = state;
     }
     
-    SoraFSMState* SoraFSMManager::operator[](const SoraString& name) {
+    SoraFSMState* SoraFSMManager::operator[](const SoraString& name) const {
         SoraStringId uniqueId = GetUniqueStringId(name);
-        FSMStateMap::iterator itState = mStates.find(uniqueId);
+        FSMStateMap::const_iterator itState = mStates.find(uniqueId);
         if(itState != mStates.end()) {
             return itState->second;
         }

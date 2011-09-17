@@ -12,6 +12,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraUncopyable.h"
+#include "SoraString.h"
 
 namespace sora {
 	
@@ -25,11 +26,11 @@ namespace sora {
 	public:
         SoraResourceFileAuto();
 		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
-		SoraResourceFileAuto(const SoraWString& file, bool retain=false);
-        SoraResourceFileAuto(const SoraWString& file, ulong32 size, bool retain=false);
+		explicit SoraResourceFileAuto(const StringType& file, bool retain=false);
+        SoraResourceFileAuto(const StringType& file, ulong32 size, bool retain=false);
 		~SoraResourceFileAuto();
         
-        SoraResourceFileAuto& operator=(const SoraWString& file);
+        SoraResourceFileAuto& operator=(const StringType& file);
 		
 		void* getData() const;
 		ulong32 getSize() const;

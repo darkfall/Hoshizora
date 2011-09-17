@@ -20,10 +20,10 @@ namespace sora {
     public:
         SoraConfigParserJsonImpl();
         
-        bool open(const std::wstring& path);
+        bool open(const StringType& path);
         bool open(void* data, ulong32 size);
         bool create();
-        bool writeToFile(const std::wstring& path);
+        bool writeToFile(const StringType& path);
         std::string writeToString() const;
         
         void close();
@@ -56,6 +56,7 @@ namespace sora {
         bool beginNode(const std::string& name);
         void endNode();
                 
+        void setValue(const std::string& val);
         void setString(const std::string& attr, const std::string& val);
         void setBool(const std::string& attr, bool val);
         void setInt(const std::string& attr, int32 val);

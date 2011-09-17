@@ -39,17 +39,6 @@ namespace sora {
         void onUpdate(float dt);
         void onRender();
         
-        /**
-         * Basic property access
-         * You can use delimeters to access component properties
-         * Such as Movement.speedx
-         * Because we need to tokenlize pid here, it's less efficient
-         * Suggesting use property access methods directly in components
-         **/
-        bool hasProperty(const std::string& pid);
-        void addProperty(const std::string& pid, SoraPropertyBase* prop);
-        SoraPropertyBase* getProperty(const std::string& pid) const;
-        
     private:
         typedef hash_map<SoraString, SoraComponent*> ComponentMap;
         ComponentMap mComponents;

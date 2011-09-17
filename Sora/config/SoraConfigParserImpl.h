@@ -10,6 +10,7 @@
 #define Sora_SoraConfigParserImpl_h
 
 #include "SoraPlatform.h"
+#include "SoraString.h"
 
 #include <vector>
 
@@ -20,10 +21,10 @@ namespace sora {
         SoraConfigParserImpl() {}
         virtual ~SoraConfigParserImpl() {}
         
-        virtual bool open(const std::wstring& path) = 0;
+        virtual bool open(const StringType& path) = 0;
         virtual bool open(void* data, ulong32 size) = 0;
         virtual bool create() = 0;
-        virtual bool writeToFile(const std::wstring& path) = 0;
+        virtual bool writeToFile(const StringType& path) = 0;
         virtual std::string writeToString() const = 0;
         
         virtual void close() = 0;
@@ -56,6 +57,7 @@ namespace sora {
         virtual bool beginNode(const std::string& name) = 0;
         virtual void endNode() = 0;
                 
+        virtual void setValue(const std::string& val) = 0;
         virtual void setString(const std::string& attr, const std::string& val) = 0;
         virtual void setBool(const std::string& attr, bool val) = 0;
         virtual void setInt(const std::string& attr, int32 val) = 0;

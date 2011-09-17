@@ -104,7 +104,7 @@ namespace sora {
             it->second->onMessage(message);
         }
     }
-    
+ /*   
     bool SoraComponentHolder::hasProperty(const DynRttiClassKeyType& pid) {
         SoraStringTokenlizer token(pid);
         if(token.size() == 2) {
@@ -132,7 +132,7 @@ namespace sora {
                 return comp->getProperty(token.back());
         }
         return 0;
-    }
+    }*/
     
     void SoraComponentHolder::onUpdate(float dt) {
         ComponentMap::const_iterator it = mComponents.begin();

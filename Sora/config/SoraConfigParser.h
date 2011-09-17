@@ -23,11 +23,11 @@ namespace sora {
         SoraConfigParser();
         ~SoraConfigParser();
         
-        bool open(const std::wstring& path, ConfigType type);
-        bool open(void* data, ulong32 size, ConfigType type);
-        bool open(const std::string& string, ConfigType type);
+        bool open(const StringType& path, ConfigType type=CONFIG_AUTO_DETECT);
+        bool open(void* data, ulong32 size, ConfigType type=CONFIG_AUTO_DETECT);
+        bool openString(const std::string& string, ConfigType type=CONFIG_AUTO_DETECT);
         bool create();
-        bool writeToFile(const std::wstring& path);
+        bool writeToFile(const StringType& path);
         std::string writeToString() const;
         
         void close();
@@ -63,44 +63,44 @@ namespace sora {
         std::vector<std::string> getAttributes() const;
         
         /**
-         * get current node as string
+         * get node attribute as string
          */
         std::string getString(const std::string& attr) const;
         /**
-         * get current node as bool
+         * get node attribute as bool
          */
         std::wstring getWString(const std::string& attr) const;
         /**
-         * get current node as bool
+         * get node attribute as bool
          */
         bool getBool(const std::string& attr) const;
         /**
-         * get current node as bool
+         * get node attribute as bool
          */
         int32 getInt(const std::string& attr) const;
         /**
-         * get current node as bool
+         * get node attribute as bool
          */
         float getFloat(const std::string& attr) const;
         
         /**
-         * get current node as optinal string
+         * get node attribute as optinal string
          */
         std::string getString(const std::string& attr, const std::string& opt) const;
         /**
-         * get current node as optinal bool
+         * get node attribute as optinal bool
          */
         std::wstring getWString(const std::string& attr, const std::wstring& opt) const;
         /**
-         * get current node as optinal bool
+         * get node attribute as optinal bool
          */
         bool getBool(const std::string& attr, bool opt) const;
         /**
-         * get current node as optinal bool
+         * get node attribute as optinal bool
          */
         int32 getInt(const std::string& attr, int32 opt) const;
         /**
-         * get current node as optinal bool
+         * get node attribute as optinal bool
          */
         float getFloat(const std::string& attr, float opt) const;
         
@@ -111,6 +111,10 @@ namespace sora {
         bool beginNode(const std::string& nodeName);
         void endNode();
         
+        /**
+         * set the value of current node
+         **/
+        void setValue(const std::string& val);
         /**
          * set a string attribute under current node
          **/
@@ -133,6 +137,9 @@ namespace sora {
         void setFloat(const std::string& attr, float val);
         
     private:
+        ConfigType fileNameToConfigType(const StringType& path);
+        ConfigType fileDataToConfigType(void* data, ulong32 size);
+        
         SoraConfigParserImpl* mImpl;
     };
     

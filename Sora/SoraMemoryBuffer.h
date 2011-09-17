@@ -17,6 +17,7 @@
 #include "SoraPlatform.h"
 #include "SoraAutoPtr.h"
 #include "SoraUncopyable.h"
+#include "SoraString.h"
 #include "io/SoraStream.h"
 
 namespace sora {
@@ -45,7 +46,7 @@ namespace sora {
 			return push(&t, sizeof(t));
 		}
 		
-		bool writeToFile(const SoraWString& path);
+		bool writeToFile(const StringType& path);
 
 		/* 
 		 read a block of memory, size = sizeof(T) 

@@ -9,6 +9,69 @@
 #ifndef Sora_SoraGameApp_h
 #define Sora_SoraGameApp_h
 
+#include "SoraPlatform.h"
+#include "SoraFSM.h"
+#include "SoraGameAppDef.h"
+#include "SoraString.h"
+#include "SoraWindowInfo.h"
+#include "SoraAutoPtr.h"
+
+namespace sora {
+    
+    /**
+     * A high-level game app control class that works above SoraWindowInfoBase
+     * States can be added and find by a tag
+     **/
+    
+    class SoraGameState;
+    typedef SoraGameState* GameStatePtr;
+    
+    class SoraGameApp {
+    public:
+        SoraGameApp(const SoraGameAppDef& def);
+        
+        void run(const std::string& initState);
+        
+        void addState(GameStatePtr state, const std::string& tag);
+        GameStatePtr getState(const std::string& tag) const;
+        void setState(const std::string& tag);
+        
+        void defStateTrans(const std::string& state1, const SoraFSMManager::EventType& evt, const std::string& state2);
+        void postEvent(const SoraFSMManager::EventType& evt);
+        
+        SoraWindow* getWindow() const;
+        
+    private:
+        class GameAppWindow: public SoraWindow {
+        public:
+            GameAppWindow(const SoraGameAppDef& def, SoraFSMManager& manager);
+            
+            bool updateFunc();
+            bool renderFunc();
+            void init();
+            
+            int32 getWindowWidth();
+            int32 getWindowHeight();
+            
+            int32 getWindowPosX();
+            int32 getWindowPosY();
+            
+            SoraString getWindowName();
+            SoraString getWindowId();
+            
+            bool isWindowed();
+            bool hideMouse();
+            
+        private:
+            SoraGameAppDef mDef;
+            SoraFSMManager& mFSMManager;
+        };
+        
+        GameAppWindow* mWindow;
+        SoraFSMManager mFSMManager;
+    };
+    
+} // namespace sora
 
 
 #endif

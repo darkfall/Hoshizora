@@ -32,6 +32,7 @@ namespace sora {
         
         virtual void onInitiate() {}
         virtual void onDestroy() {
+            mManager = 0;
             delete this;
         }
         
@@ -40,6 +41,10 @@ namespace sora {
         
         virtual void onEnter() {}
         virtual void onLeave() {}
+        
+        SoraFSMManager* getManager() const {
+            return mManager;
+        }
                 
     private:
         bool mInitiated;
@@ -75,7 +80,7 @@ namespace sora {
         
         static SoraFSMManager& defaultFSMManager();
         
-        SoraFSMState* operator[](const SoraString& name);
+        SoraFSMState* operator[](const SoraString& name) const;
         
     private:
         void switchToState(SoraFSMState* state);

@@ -7,6 +7,8 @@
 //
 
 #include "SoraLightWeightEntity.h"
+#include "SoraComponent.h"
+#include "SoraComponentHolder.h"
 
 namespace sora {
     
@@ -64,7 +66,7 @@ namespace sora {
     }
     
     void SoraLightWeightEntity::addProperty(SoraPropertyBase* prop) {
-        return mHolder.addProperty(prop);
+        mHolder.addProperty(prop);
     }
     
     void SoraLightWeightEntity::onMessage(SoraMessageEvent* evt) {

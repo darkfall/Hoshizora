@@ -48,6 +48,8 @@ namespace sora {
         bool mActive;
 	};
 	
+    typedef SoraWindowInfoBase SoraWindow;
+    
 } // namespace sora
 	
 
