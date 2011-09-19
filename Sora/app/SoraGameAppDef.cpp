@@ -20,7 +20,13 @@ namespace sora {
     Icon(std::string()),
     Cursor(std::string()),
     WindowTitle("Sora App"),
-    WindowId("MainWindow") {
+    WindowId("MainWindow"),
+    Window(0) {
+        
+    }
+    
+    SoraGameAppDef::SoraGameAppDef(SoraWindowInfoBase* window):
+    Window(window) {
         
     }
     
@@ -50,7 +56,7 @@ namespace sora {
                 log_error("no /app/window node exists in window config, default used");
             }
             if(parser.toNode("/app/feature")) {
-                SoraCoreParameter feature(
+                SoraCoreFeature feature(
                                           parser.getBool("load_plugin", false),
                                           parser.getBool("fsb", false),
                                           parser.getBool("msgbox_show_error", false),

@@ -26,7 +26,10 @@ namespace sora {
 		friend class SoraShaderContext;
 		friend class SoraCGD3D9ShaderContext;
 
-		SoraCGD3D9Shader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile);
+		SoraCGD3D9Shader();
+		bool load(const StringType& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile);
+		bool loadFromMem(const char* data, const SoraString& entry, int32 type, CGcontext context, CGprofile profile);
+		
 		~SoraCGD3D9Shader();
 		
 	public:
@@ -62,8 +65,8 @@ namespace sora {
 		SoraCGD3D9ShaderContext();
 		~SoraCGD3D9ShaderContext();
 
-		SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
-
+		SoraShader* createShader(const StringType& file, const SoraString& entry, int32 type);
+		SoraShader* createShaderFromMem(const char* data, const SoraString& entry, int32 type);
 		CGcontext context;
         CGprofile fragmentProfile;
         CGprofile vertexProfile;

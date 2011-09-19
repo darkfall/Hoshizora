@@ -52,7 +52,8 @@ namespace sora {
 		SoraGLSLShaderContext();
 		~SoraGLSLShaderContext();
 		
-        SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
+        SoraShader* createShader(const StringType& file, const SoraString& entry, int32 type);
+        SoraShader* createShaderFromMem(const char* data, const SoraString& entry, int32 type);
 		
 		virtual bool attachShaderList();
 		virtual bool detachShaderList();
@@ -73,7 +74,8 @@ namespace sora {
 		SoraGLSLShader();
 		~SoraGLSLShader();
 		
-		bool loadShader(const SoraWString& file, const SoraString& entry, int32 type);
+		bool loadShader(const StringType& file, const SoraString& entry, int32 type);
+        bool loadShaderFromMem(const char* data, const SoraString& entry, int32 type);
 		
 	public:
 		

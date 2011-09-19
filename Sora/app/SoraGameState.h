@@ -16,7 +16,7 @@ namespace sora {
     
     class SoraGameApp;
     
-    class SoraGameState: public SoraFSMState {
+    class SORA_API SoraGameState: public SoraFSMState {
     public:
         SoraGameApp* getGameApp() const {
             return mGameApp;

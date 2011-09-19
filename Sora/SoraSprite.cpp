@@ -1,5 +1,5 @@
 #include "SoraSprite.h"
-
+#include "SoraModifierAdapter.h"
 #include "SoraTextureMap.h"
 #include "SoraCore.h"
 
@@ -400,18 +400,17 @@ namespace sora {
 		vEffects.clear();
 	}
 	
-	uint32 SoraSprite::update(float dt) {
+	int32 SoraSprite::update(float dt) {
+        SoraObject::update(dt);
+        
 		if(!vEffects.empty()) {
 			ImageEffectList::iterator eff = vEffects.begin();
 			while(eff != vEffects.end()) {
-				int32 result = (*eff)->update(dt);
+				bool result = (*eff)->update(dt);
 				(*eff)->modify(this);
 				
-				if(result == IMAGE_EFFECT_END) {     
-					if((*eff)->isAutoRelease()) {
-                        (*eff)->release();
-                    }
-					
+				if(result) {     
+					(*eff)->release();
 					eff = vEffects.erase(eff);
 					continue;
 				}
@@ -449,6 +448,63 @@ namespace sora {
         rect.y2  = tx2*sint + ty2*cost + getPositionY();
         
         return rect;
+    }
+    
+    SoraSprite* SoraSprite::LoadFromFile(const StringType& file) {
+        SoraTextureHandle tex = SoraTexture::LoadFromFile(file);
+        if(tex)
+            return new SoraSprite(tex);
+        return 0;
+    }
+    
+    SoraSprite* SoraSprite::LoadFromRawData(uint32* data, int32 w, int32 h) {
+        SoraTextureHandle tex = SoraTexture::LoadFromRawData(data, w, h);
+        if(tex)
+            return new SoraSprite(tex);
+        return 0;
+    }
+    
+    void SoraSprite::fadeTo(float to, float t) {
+        addModifierAdapter(CreateModifierAdapter(this, CreateEffectFade(CGETA(getColor())/255.f,
+                                                                        to,
+                                                                        t)));
+    }
+    
+    void SoraSprite::rotateTo(float to, float t) {
+        addModifierAdapter(CreateModifierAdapter(this, CreateEffectRotation(getRotation(),
+                                                                            to,
+                                                                            t)));
+    }
+    
+    void SoraSprite::scaleTo(float h, float v, float t) {
+        addModifierAdapter(CreateModifierAdapter(this, CreateEffectScale(getHScale(),
+                                                                         getVScale(),
+                                                                         h,
+                                                                         v,
+                                                                         t)));
+    }
+    
+    void SoraSprite::fadeToAndNotify(float to, float t, const NotificationFunc& func) {
+        addModifierAdapter(CreateModifierAdapterWithNotification(this, CreateEffectFade(CGETA(getColor())/255.f,
+                                                                                        to,
+                                                                                        t),
+                                                                 func));
+    }
+    
+    void SoraSprite::rotateTo(float to, float t, const NotificationFunc& func) {
+        addModifierAdapter(CreateModifierAdapterWithNotification(this, CreateEffectRotation(getRotation(),
+                                                                                            to,
+                                                                                            t),
+                                                                 func));
+    }
+    
+    void SoraSprite::scaleTo(float h, float v, float t, const NotificationFunc& func) {
+        addModifierAdapter(CreateModifierAdapterWithNotification(this, CreateEffectScale(getHScale(),
+                                                                                         getVScale(),
+                                                                                         h,
+                                                                                         v,
+                                                                                         t),
+                                                                 func));
     }
 	
 } // namespace sora

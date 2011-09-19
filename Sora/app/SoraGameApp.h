@@ -26,7 +26,7 @@ namespace sora {
     class SoraGameState;
     typedef SoraGameState* GameStatePtr;
     
-    class SoraGameApp {
+    class SORA_API SoraGameApp {
     public:
         SoraGameApp(const SoraGameAppDef& def);
         
@@ -40,6 +40,9 @@ namespace sora {
         void postEvent(const SoraFSMManager::EventType& evt);
         
         SoraWindow* getWindow() const;
+    
+        static void BeginScene(uint32 c=0xFF000000, SoraTargetHandle h=0, bool clear=true);
+        static void EndScene();
         
     private:
         class GameAppWindow: public SoraWindow {
@@ -67,7 +70,7 @@ namespace sora {
             SoraFSMManager& mFSMManager;
         };
         
-        GameAppWindow* mWindow;
+        SoraWindow* mWindow;
         SoraFSMManager mFSMManager;
     };
     

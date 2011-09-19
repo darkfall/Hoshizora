@@ -220,7 +220,7 @@ namespace sora {
         return mFrameRate;
     }
     
-    uint32 SoraGifSprite::update(float dt) {
+    int32 SoraGifSprite::update(float dt) {
         SoraSprite::update(dt);
         
         if(mFrames.size() == 0)

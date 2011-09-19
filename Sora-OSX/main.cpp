@@ -5,91 +5,84 @@
 #include "SoraWindowInfo.h"
 #include "SoraFont.h"
 
-#include "SoraFMODSoundSystem/SoraFMODSoundSystem.h"
-#include "SoraOGLRenderer/SoraOGLRenderer.h"
-#include "SoraOGLRenderer/SoraOGLInput.h"
-#include "SoraFreetypeFont/SoraFTFontManager.h"
-
-#include "SoraEventFactory.h"
-
-#include "../UnitTest/TestCases/Test_EventFactory.h"
-#include "../UnitTest/TestCases/Test_EventWorld.h"
-#include "../UnitTest/UnitTestSuite.h"
-
 #include "mainWindow.h"
 
 #include "SoraTimestamp.h"
 
-#include "message/SoraMessageRouter.h"
 #include "../SoraParticleEditor/peMainWindow.h"
 
 #include "SoraConfigUtil.h"
 
-class consoleWindow: public sora::SoraWindowInfoBase {
-public:
-	consoleWindow() {}
-	~consoleWindow() {}
-	
-	bool updateFunc() {}
-	bool renderFunc() {}
-	void init() {} 
-	
-	int32 getWindowWidth() { return 1024; }
-	int32 getWindowHeight() { return 768; }
-	
-	int32 getWindowPosX() { return 0; }
-	int32 getWindowPosY() { return 0; }
-	
-	SoraString getWindowName() { return "Reflection"; }
-	SoraString getWindowId() { return "MainWindow"; }
-	
-	bool isWindowSubWindow() { return false; }	
-	bool isWindowed() { return true; }
-	bool hideMouse() { return false; }
-    
-    bool isConsoleApp() { return true; }
-};
-
-#include "HashStringMap.h"
 #include "SoraDirectoryIterator.h"
-#include "debug/SoraAutoProfile.h"
 #include "SoraFileUtility.h"
+#include "SoraFont.h"
+#include "SoraText.h"
 
 #include "app/SoraGameApp.h"
 #include "app/SoraGameState.h"
+#include "SoraMath.h"
 
-class initState: public sora::SoraGameState {
+#include "SoraFunction.h"
+#include "SoraPostEffect.h"
+
+class GameInitState: public sora::SoraGameState {
 public:
     void onRender() {
-        
+        sora::SoraGameApp::BeginScene();
+        mBg.render();
+        mText.render();
+        sora::SoraGameApp::EndScene();
     }
+    
+    void onUpdate(float dt) {
+        mBg.update(dt);
+    }
+    
+    void onEnter() {
+        sora::SoraResourceFileAuto fontData("Bank Gothic Medium BT.ttf");
+        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 40, "BankGothic");
+        if(mFont) {
+            mText.set(L"Hello World!", mFont);
+            mText.renderToSprite();
+            
+            sora::SoraFont::Release(mFont);
+        }
+        
+        mBg.setTexture(sora::SoraTexture::LoadFromFile("test.png"));
+        mBg.moveTo(100, 100, 1);
+        mBg.fadeToAndNotify(0.f, 1.f, sora::Bind(this, &GameInitState::onFadeFinish));
+        
+        mPostEffect.attachFragmentShader("HDRBlur.cg", "HDRBlur");
+        
+        mMusic = sora::SoraSoundSystem::LoadMusicFromFile("02.mp3");
+        if(mMusic) {
+            mMusic->setRepeat(true);
+            mMusic->play();
+        }
+    }
+    
+    void onFadeFinish(sora::SoraSprite* obj) {
+        obj->fadeTo(1.f, 2.f);
+        obj->addEffect(sora::CreateEffectFade(0.f, 1.f, 1.f, sora::IMAGE_EFFECT_PINGPONG));
+    }
+    
+private:
+    sora::SoraFont* mFont;
+    sora::SoraText mText;
+    sora::SoraSprite mBg;
+    sora::SoraMusicFile* mMusic;
+    
+    sora::SoraPostEffect mPostEffect;
 };
 
 int main(int argc, char* argv[]) {    
-    
+        
     sora::SoraGameAppDef def("config.xml");
     sora::SoraGameApp app(def);
     
-    app.addState(new initState, "init");
+    app.addState(new GameInitState, "init");
     app.run("init");
     
     return 0;
-
-}
-
-void oldInit() {
-    
-    sora::InitAndCreateSoraCore(new mainWindow, 
-                                sora::SoraCoreParameter(/* load plugins */
-                                                        false,
-                                                        /* use fullscreen buffer */
-                                                        false,
-                                                        /* post error using messagebox */
-                                                        false,
-                                                        /* seperate sound engine thread */
-                                                        true,
-                                                        /* debug rendering */
-                                                        false))->start();
-    
 
 }

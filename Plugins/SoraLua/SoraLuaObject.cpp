@@ -203,7 +203,7 @@ namespace sora {
         }
     }
 	
-    uint32 SoraLuaObject::update(float dt) {
+    int32 SoraLuaObject::update(float dt) {
         LuaObject obj = get("update");
         if(obj.IsFunction()) {
             LuaFunction<void> func = obj;

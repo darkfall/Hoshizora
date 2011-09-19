@@ -86,7 +86,7 @@ namespace sora {
         SoraLayer* operator[](int32 layerDepth) const;
         
 		virtual void    render();
-		virtual uint32  update(float dt);
+		virtual int32   update(float dt);
         
         int32	getWidth() const;
         int32	getHeight() const;
@@ -95,7 +95,7 @@ namespace sora {
         void    setParent(SoraObject* obj);
         
         void    setRotation(float rot);
-        float getRotation() const;
+        float   getRotation() const;
         
         void    setScale(float scaleh, float scalev);
         void    getScale(float* scaleh, float* scalev);

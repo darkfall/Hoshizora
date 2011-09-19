@@ -10,35 +10,29 @@
 #define Sora_SoraModifier_h
 
 #include "SoraAutoPtr.h"
-#include "SoraDelegate.h"
+#include "SoraFunction.h"
 
 namespace sora {
     
     /**
      *  Base class for Modifiers
      **/
-    enum {
-        ModifierUpdateEnd = -1
-    };
         
     template<class MT>
     class SORA_API SoraModifier {
     public:
         typedef SoraAutoPtr<SoraModifier> PtrType;
-        typedef SoraAbstractDelegate<int32> Delegate;
+        typedef SoraFunction<void(SoraModifier*)> Delegate;
         
         SoraModifier(bool autoRelease=true):
-        mDelegatePtr(NULL),
         mAutoRelease(autoRelease) {
         }
         
         virtual ~SoraModifier() {
-            if(mDelegatePtr)
-                delete mDelegatePtr;
         }
         
-        virtual int32   update(float dt) = 0;
-        virtual void    modify(MT* object) = 0;
+        virtual bool update(float dt) = 0;
+        virtual void modify(MT* object) = 0;
         
         virtual SoraModifier<MT>* clone() = 0;
         
@@ -46,15 +40,16 @@ namespace sora {
         }
         
         void setFinishDelegate(const Delegate& del) {
-            mDelegatePtr = del.clone();
+            mDelegate = del;
         }
         
-        Delegate* getFinishDelegate() const {
-            return mDelegatePtr;
+        const Delegate& getFinishDelegate() const {
+            return mDelegate;
         }
         
         virtual void release() {
-            delete this;
+            if(isAutoRelease())
+                delete this;
         }
         
         void setAutoRelease(bool flag) {
@@ -66,7 +61,7 @@ namespace sora {
         }
         
     protected:
-        Delegate* mDelegatePtr;
+        Delegate mDelegate;
         bool mAutoRelease;
     };
     
@@ -79,7 +74,7 @@ namespace sora {
         ~SoraModifierList();
         
         void    add(SoraModifier<MT>* modi);
-        int32   update(float dt);
+        bool    update(float dt);
         void    modify(MT* obj);
         void    clear();
         
@@ -110,20 +105,19 @@ namespace sora {
     }
     
     template<typename MT>
-    int32 SoraModifierList<MT>::update(float dt) {
+    bool SoraModifierList<MT>::update(float dt) {
         if(mModifiers.size() != 0) {
-            int32 result = mModifiers[mCurrModifier]->update(dt);
-            if(result == ModifierUpdateEnd) {
+            if(mModifiers[mCurrModifier]->update(dt)) {
                 ++mCurrModifier;
             
                 if(!mRepeat) {
                     if(mCurrModifier >= mModifiers.size()) {
                         clear();
 
-                        if(SoraModifier<MT>::getFinishDelegate() != NULL) {
-                            SoraModifier<MT>::getFinishDelegate()->notify(this, mCurrModifier);
+                        if(SoraModifier<MT>::mDelegate) {
+                            SoraModifier<MT>::mDelegate(this);
                         }
-                        return ModifierUpdateEnd;
+                        return true;
                     } else 
                         mModifiers[mCurrModifier]->reset();
                 } else {
@@ -134,7 +128,7 @@ namespace sora {
                 }
             }
         }
-        return 0;
+        return false;
     }
     
     template<typename MT>
@@ -167,19 +161,20 @@ namespace sora {
             }
             ++itModifier;
         }
+        c->mDelegate = SoraModifier<MT>::mDelegate;
         c->mCurrModifier = mCurrModifier;
         return c;
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1, bool repeat = false) {
+    inline SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1, bool repeat = false) {
         SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
         list->add(eff1);
         return list;
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1, SoraModifier<MT>* eff2, bool repeat = false) {
+    inline SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1, SoraModifier<MT>* eff2, bool repeat = false) {
         SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
         list->add(eff1);
         list->add(eff2);
@@ -187,7 +182,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1, 
+    inline SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1, 
                                                     SoraModifier<MT>* eff2, 
                                                     SoraModifier<MT>* eff3, bool repeat = false) {
         SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
@@ -198,7 +193,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1, 
+    inline SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1, 
                                                     SoraModifier<MT>* eff2, 
                                                     SoraModifier<MT>* eff3, 
                                                     SoraModifier<MT>* eff4, bool repeat = false) {
@@ -211,7 +206,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1,  
+    inline SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1,  
                                                     SoraModifier<MT>* eff2, 
                                                     SoraModifier<MT>* eff3, 
                                                     SoraModifier<MT>* eff4, 
@@ -226,7 +221,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1,  
+    inline SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1,  
                                                     SoraModifier<MT>* eff2, 
                                                     SoraModifier<MT>* eff3, 
                                                     SoraModifier<MT>* eff4, 
@@ -243,7 +238,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1,  
+    inline SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1,  
                                                     SoraModifier<MT>* eff2, 
                                                     SoraModifier<MT>* eff3, 
                                                     SoraModifier<MT>* eff4, 
@@ -262,7 +257,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1,  
+    inline SoraModifierList<MT>* CreateModifierList(SoraModifier<MT>* eff1,  
                                                     SoraModifier<MT>* eff2, 
                                                     SoraModifier<MT>* eff3, 
                                                     SoraModifier<MT>* eff4, 
@@ -284,7 +279,7 @@ namespace sora {
     
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
+    inline SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
                                                                 const typename SoraModifier<MT>::Delegate& del, bool repeat = false) {
         SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
         list->add(eff1);
@@ -293,7 +288,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
+    inline SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
                                                                 SoraModifier<MT>* eff2, 
                                                                 const typename SoraModifier<MT>::Delegate& del, bool repeat = false) {
         SoraModifierList<MT>* list = new SoraModifierList<MT>(repeat);
@@ -304,7 +299,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
+    inline SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
                                                                 SoraModifier<MT>* eff2, 
                                                                 SoraModifier<MT>* eff3, 
                                                                 const typename SoraModifier<MT>::Delegate& del, bool repeat = false) {
@@ -317,7 +312,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
+    inline SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1, 
                                                                 SoraModifier<MT>* eff2, 
                                                                 SoraModifier<MT>* eff3, 
                                                                 SoraModifier<MT>* eff4, 
@@ -332,7 +327,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
+    inline SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
                                                                 SoraModifier<MT>* eff2, 
                                                                 SoraModifier<MT>* eff3, 
                                                                 SoraModifier<MT>* eff4, 
@@ -349,7 +344,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
+    inline SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
                                                                 SoraModifier<MT>* eff2, 
                                                                 SoraModifier<MT>* eff3, 
                                                                 SoraModifier<MT>* eff4, 
@@ -368,7 +363,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
+    inline SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
                                                                 SoraModifier<MT>* eff2, 
                                                                 SoraModifier<MT>* eff3, 
                                                                 SoraModifier<MT>* eff4, 
@@ -389,7 +384,7 @@ namespace sora {
     }
     
     template<class MT>
-    static SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
+    inline SoraModifierList<MT>* CreateModifierListWithDelegate(SoraModifier<MT>* eff1,  
                                                                 SoraModifier<MT>* eff2, 
                                                                 SoraModifier<MT>* eff3, 
                                                                 SoraModifier<MT>* eff4, 

@@ -15,55 +15,66 @@ namespace sora {
     
     // base class for all movable things
     
-    class SoraMovable {
-    public:
+    struct SoraMovable {
         SoraMovable():
-        mRotation(0.f), 
-        mPosition(SoraVector3()) {
+        x(0.f),
+        y(0.f),
+        z(0.f) {
             
         }
         
-        virtual void setPosition(const SoraVector3& position) {
-            mPosition = position;
+        explicit SoraMovable(const SoraVector3& pos):
+        x(pos.x),
+        y(pos.y),
+        z(pos.z) {
+        
         }
         
-        virtual SoraVector3 getPosition() const {
-            return mPosition;
+        SoraMovable(float _x, float _y, float _z):
+        x(_x),
+        y(_y),
+        z(_z) {
+            
         }
         
-        inline void setPosition(float x, float y) {
-            setPosition(SoraVector3(x, y, mPosition.z));
+        float x;
+        float y;
+        float z;
+        
+        void setPosition(const SoraVector3& pos) {
+            x = pos.x;
+            y = pos.y;
+            z = pos.z;
         }
         
-        inline float getPositionX() {
-            return getPosition().x;
+        void setPosition(float x, float y) {
+            this->x = x;
+            this->y = y;
         }
         
-        inline float getPositionY() {
-            return getPosition().y;
+        float getPositionX() const {
+            return x;
         }
         
-        inline float getPositionZ() {
-            return getPosition().z;
+        float getPositionY() const {
+            return y;
         }
         
-        virtual void setRotation(float r) {
-            mRotation = r;
+        float getPositionZ() const {
+            return z;
         }
         
-        virtual float getRotation() const {
-            return mRotation;
+        void translate(const SoraVector3& v, float t) {
+            x += v.x * t;
+            y += v.y * t;
+            z += v.z * t;
         }
         
-        inline void translate(const SoraVector3& delta) {
-            setPosition(mPosition + delta);
+        void translate(float vx, float vy, float t) {
+            x += vx * t;
+            y += vy * t;
         }
         
-    private:
-        float mRotation;
-        // SoraQuaternion mRotation;
-        
-        SoraVector3 mPosition;
     };
     
     

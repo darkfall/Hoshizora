@@ -30,6 +30,7 @@ namespace sora {
         
         typedef SoraFunction<void(SoraTextureHandle)> DelegateFuncType;
         void registerDelegate(const DelegateFuncType& delegate);
+        void unregisterDelegate();
         
     private:
         SoraSprite* mBufferSprite;

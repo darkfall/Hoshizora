@@ -91,7 +91,7 @@ namespace sora {
         
         typedef LANM_TEX SoraAnimationRect;
         
-        virtual uint32 update(float dt);
+        virtual int32 update(float dt);
         virtual void render();
         SoraAnimationRect getCurrTex();
         

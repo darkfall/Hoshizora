@@ -38,13 +38,13 @@ namespace sora {
 			createIdentity();
 		}
 		
-		inline void createIdentity();
-		inline void translate(double x, double y);
-		inline void scale(double x, double y);
-		inline void rotate(double rotation);
-		inline void rotate(const SoraVector& fwd, const SoraVector& side);
-		inline void transformVector2Ds(std::vector<SoraVector>& vPoints);
-		inline void transformVector2D(SoraVector& vPoint);
+        void createIdentity();
+        void translate(double x, double y);
+        void scale(double x, double y);
+        void rotate(double rotation);
+        void rotate(const SoraVector& fwd, const SoraVector& side);
+        void transformVector2Ds(std::vector<SoraVector>& vPoints);
+        void transformVector2D(SoraVector& vPoint);
 		
 		void _11(double val) { matrix._11 = val; }
 		void _12(double val) { matrix._12 = val; }

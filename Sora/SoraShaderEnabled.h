@@ -13,6 +13,7 @@
 #include "SoraShader.h"
 #include "SoraObject.h"
 #include "SoraUncopyable.h"
+#include "SoraString.h"
 
 namespace sora {
     
@@ -25,9 +26,9 @@ namespace sora {
         SoraShaderEnabledObject();
         virtual ~SoraShaderEnabledObject();
         
-        SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
-        SoraShader* attachFragmentShader(const SoraWString& file, const SoraString& entry);
-        SoraShader* attachVertexShader(const SoraWString& file, const SoraString& entry);
+        SoraShader* attachShader(const StringType& file, const SoraString& entry, int32 type);
+        SoraShader* attachFragmentShader(const StringType& file, const SoraString& entry);
+        SoraShader* attachVertexShader(const StringType& file, const SoraString& entry);
         
         void detachShader(SoraShader* shader);
         void detachFragmentShader();

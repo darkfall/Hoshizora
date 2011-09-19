@@ -54,6 +54,7 @@ namespace sora {
 
 	class SORA_API SoraSprite: public SoraShaderEnabledObject {
 	public:
+        SoraSprite();
         SoraSprite(SoraTextureHandle tex);
         SoraSprite(SoraTextureHandle tex, float x, float y, float width, float height);
 		virtual ~SoraSprite();
@@ -64,7 +65,7 @@ namespace sora {
         virtual void render4V(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
 
-		virtual uint32 update(float dt);
+		virtual int32 update(float dt);
 
 		void    setTexture(SoraTextureHandle tex);
 		void    setTextureRect(float x, float y, float width, float height);
@@ -74,14 +75,14 @@ namespace sora {
 		uint32  getColor(int32 i=0) const;
 
 		void    setZ(float z, int32 i=-1);
-		float getZ(int32 i=0) const;
+		float   getZ(int32 i=0) const;
         
         void    setPosition(float x, float y);
 
 		void    setCenter(float x, float y);
 		void    getCenter(float& x, float& y);
-		float getCenterX() const;
-		float getCenterY() const;
+		float   getCenterX() const;
+		float   getCenterY() const;
 
 		void    setFlip(bool hflag, bool vflag, bool bFlipCenter=true);
 		bool    getHFlip() const;
@@ -98,11 +99,11 @@ namespace sora {
 		int32   getSpritePosY() const;
 
 		void    setScale(float h, float v);
-		float getVScale() const;
-		float getHScale() const;
+		float   getVScale() const;
+		float   getHScale() const;
 
 		void    setRotation(float r);
-		float getRotation() const;
+		float   getRotation() const;
 		
 		uint32*         getPixelData() const;
         void            unlockPixelData();
@@ -113,11 +114,21 @@ namespace sora {
 		void clearEffects();
 		bool hasEffect() const;
         
-        SoraRect getBoundingBox() const;
-		
-	protected:
-		SoraSprite();
+        void fadeTo(float to, float t);
+        void rotateTo(float to, float t);
+        void scaleTo(float h, float v, float t);
         
+        typedef SoraFunction<void(SoraSprite*)> NotificationFunc;
+        void fadeToAndNotify(float to, float t, const NotificationFunc& func);
+        void rotateTo(float to, float t, const NotificationFunc& func);
+        void scaleTo(float h, float v, float t, const NotificationFunc& func);
+        
+        SoraRect getBoundingBox() const;
+        
+        static SoraSprite* LoadFromFile(const StringType& file);
+        static SoraSprite* LoadFromRawData(uint32* data, int32 w, int32 h);
+		
+	protected:        
         inline void _initDefaults();
         inline void _init(SoraTexture* tex, float x, float y, float w, float h);
 

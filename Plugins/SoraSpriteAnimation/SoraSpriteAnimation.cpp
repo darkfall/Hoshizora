@@ -541,7 +541,7 @@ namespace sora {
         return -1;
     }
     
-    uint32 SoraSpriteAnimation::update(float dt) {
+    int32 SoraSpriteAnimation::update(float dt) {
         SoraSprite::update(dt);
         
         if(!bIsPlaying) return 0;

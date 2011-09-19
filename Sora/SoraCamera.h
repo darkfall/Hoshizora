@@ -49,7 +49,7 @@ namespace sora {
          **/
         void transformTo(SoraCamera* r, float inTime);
         		
-        virtual uint32 update(float dt);
+        virtual int32 update(float dt);
         virtual void render();
         
         void apply();

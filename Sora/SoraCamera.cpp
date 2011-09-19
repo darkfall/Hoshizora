@@ -88,7 +88,7 @@ namespace sora {
         return mVZoom;
     }
 
-    uint32 SoraCamera::update(float dt) {
+    int32 SoraCamera::update(float dt) {
         if(mPropChanged) {
             sora::SORA->setTransform(getPositionX(), getPositionY(), 0.f, 0.f, mRotation, mHZoom, mVZoom);
             sora::SORA->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);

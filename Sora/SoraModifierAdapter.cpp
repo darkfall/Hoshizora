@@ -10,20 +10,4 @@
 
 namespace sora {
     
-    SoraAbstractModiferAdapter::Members SoraAbstractModiferAdapter::members;
-    
-    SoraAbstractModiferAdapter::SoraAbstractModiferAdapter() {
-        
-    }
-    
-    SoraAbstractModiferAdapter::~SoraAbstractModiferAdapter() {
-    }
-        
-    void SoraAbstractModiferAdapter::insert() {
-        members.push_back(this);
-    }
-    
-    void SoraAbstractModiferAdapter::remove() {
-        members.remove(this);
-    }
 } // namespace sora

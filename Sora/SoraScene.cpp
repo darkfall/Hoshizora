@@ -240,7 +240,7 @@ namespace sora {
                                                         inTime));
     }
     
-    uint32 SoraScene::update(float dt) {        
+    int32 SoraScene::update(float dt) {        
         LayerMap::iterator itLayer = mLayers.begin();
         while(itLayer != mLayers.end()) {
             itLayer->second->update(dt);

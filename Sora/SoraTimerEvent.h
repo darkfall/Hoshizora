@@ -24,30 +24,6 @@ namespace sora {
 		float totalTime;
 	};
 
-	class timer {
-	public:
-		void start();
-		void stop();
-
-		void pause();
-		void resume();
-
-		float getTime() const ;
-		float getPausedTime() const ;
-		float getStartedTime() const ;
-
-		virtual uint32 update(float delta);
-		
-		uint8 isStarted();
-		uint8 isPaused();
-
-	private:
-		float startTime;
-		float pauseTime;
-		
-		uint8 started;
-		uint8 paused;
-	};
 
 } // namespace sora
 

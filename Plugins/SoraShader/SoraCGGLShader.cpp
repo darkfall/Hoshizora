@@ -22,15 +22,40 @@ namespace sora {
 		}
     }
 
-    SoraShader* SoraCGGLShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
+    SoraShader* SoraCGGLShaderContext::createShader(const StringType& file, const SoraString& entry, int32 type) {
         SoraCGGLShader* shader = NULL;
         switch (type) {
 			case VERTEX_SHADER: {
-                shader = new SoraCGGLShader(file, entry, type, context, vertexProfile);
+                shader = new SoraCGGLShader();
+                shader->load(file, entry, type, context, vertexProfile);
                 break;
             }
 			case FRAGMENT_SHADER: {
-                shader = new SoraCGGLShader(file, entry, type, context, fragmentProfile);
+                shader = new SoraCGGLShader();
+                shader->load(file, entry, type, context, fragmentProfile);
+                break;
+            }
+		}
+		
+		if(!shader || shader->getError() != ShaderNoError) {
+			if(shader) delete shader;
+			return NULL;
+		}
+        shader->mShaderContext = this;
+        return shader;
+    }
+    
+    SoraShader* SoraCGGLShaderContext::createShaderFromMem(const char* data, const SoraString& entry, int32 type) {
+        SoraCGGLShader* shader = NULL;
+        switch (type) {
+			case VERTEX_SHADER: {
+                shader = new SoraCGGLShader();
+                shader->loadFromMem(data, entry, type, context, vertexProfile);
+                break;
+            }
+			case FRAGMENT_SHADER: {
+                shader = new SoraCGGLShader();
+                shader->loadFromMem(data, entry, type, context, fragmentProfile);
                 break;
             }
 		}
@@ -63,8 +88,12 @@ namespace sora {
 		}
 	}
 
-	SoraCGGLShader::SoraCGGLShader(const SoraWString& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile) {
-		mType = type;
+	SoraCGGLShader::SoraCGGLShader() {
+		
+	}
+    
+    bool SoraCGGLShader::load(const StringType& file, const SoraString& entry, int32 type, CGcontext context, CGprofile profile) {
+        mType = type;
 		this->context = context;
         this->profile = profile;
 		
@@ -83,9 +112,37 @@ namespace sora {
 			cgGLLoadProgram(program);
 		} else {
 			setError(1);
+            return false;
 		}
-
+        
 		textureParam = 0;
+        return true;
+    }
+    
+    bool SoraCGGLShader::loadFromMem(const char* data, const SoraString& entry, int32 type, CGcontext context, CGprofile profile) {
+		mType = type;
+        sora_assert(data);
+                    
+		this->context = context;
+        this->profile = profile;
+		
+		if(data) {
+            program = cgCreateProgram(context,
+									  CG_SOURCE,
+									  data,
+									  profile,
+									  entry.c_str(),
+									  NULL);
+            
+			checkError(context);
+			cgGLLoadProgram(program);
+		} else {
+			setError(1);
+            return false;
+		}
+        
+		textureParam = 0;
+        return true;
 	}
 
 	void SoraCGGLShader::setTexture(const SoraString& decalName, ulong32 tex) {

@@ -16,8 +16,11 @@ namespace sora {
     
     // a simple container class that defines the main window of the game
     
-    struct SoraGameAppDef {
+    class SoraWindowInfoBase;
+    
+    struct SORA_API SoraGameAppDef {
         SoraGameAppDef();
+        SoraGameAppDef(SoraWindowInfoBase* window);
         /**
          * Config must contain the following node
          *  /App/Window
@@ -52,6 +55,9 @@ namespace sora {
         std::string WindowTitle;
         // default: "MainWindow"
         std::string WindowId;
+        
+        // external window
+        SoraWindowInfoBase* Window;
     };
     
 } // namespace sora

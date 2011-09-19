@@ -13,7 +13,6 @@
 
 #include "SoraPlatform.h"
 #include "SoraSoundFile.h"
-#include "SoraMoviePlayer.h"
 
 namespace sora {
 	
@@ -28,15 +27,17 @@ namespace sora {
 		virtual int32 init() = 0;
 		virtual void shutdown() = 0;
 		
-        virtual SoraMusicFile* createMusicFile(const SoraWString& path, bool bStream=false) = 0;
+        virtual SoraMusicFile* createMusicFile(const SoraWString& path, bool bStream=true) = 0;
         virtual SoraSoundEffectFile* createSoundEffectFile(const SoraWString& path) = 0;
-        virtual SoraMusicFile* createMusicFile(bool bStream=false) = 0;
+        virtual SoraMusicFile* createMusicFile(bool bStream=true) = 0;
         virtual SoraSoundEffectFile* createSoundEffectFile() = 0;
 		/*
 			update sound device
 		*/
 		virtual void update() = 0;
-
+        
+        static SoraMusicFile* LoadMusicFromFile(const StringType& path, bool isStream=true);
+        static SoraSoundEffectFile* LoadSoundEffectFromFile(const StringType& path);
 	};
 	
 } // namespace sora

@@ -65,7 +65,10 @@ namespace sora {
     }
     
     SoraGameApp::SoraGameApp(const SoraGameAppDef& def) {
-        mWindow = new SoraGameApp::GameAppWindow(def, mFSMManager);
+        if(def.Window == 0)
+            mWindow = new SoraGameApp::GameAppWindow(def, mFSMManager);
+        else
+            mWindow = def.Window;
     }
     
     void SoraGameApp::run(const std::string& initState) {
@@ -107,6 +110,14 @@ namespace sora {
     
     void SoraGameApp::postEvent(const SoraFSMManager::EventType& evt) {
         mFSMManager.postEvent(evt);
+    }
+    
+    void SoraGameApp::BeginScene(uint32 c, SoraTargetHandle h, bool clear) {
+        SoraCore::Instance()->beginScene(c, h, clear);
+    }
+    
+    void SoraGameApp::EndScene() {
+        SoraCore::Instance()->endScene();
     }
     
 } // namespace sora

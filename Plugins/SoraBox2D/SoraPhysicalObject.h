@@ -40,7 +40,7 @@ namespace sora {
 		SoraPhysicalObject(const b2BodyDef& bodyDef, const b2FixtureDef& fixtureDef);
 		virtual ~SoraPhysicalObject();
         
-        virtual uint32 update(float32 dt);
+        virtual int32 update(float32 dt);
         virtual void render();
 		
 		void createFixture(const b2FixtureDef& def);

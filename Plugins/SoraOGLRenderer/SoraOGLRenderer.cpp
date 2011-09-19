@@ -21,7 +21,6 @@
 #include "SoraRenderSystemExtension.h"
 #include "SoraOGLKeyPoll.h"
 
-#undef SORA_USE_SHADER
 #ifdef SORA_USE_SHADER
 #include "SoraShader/SoraCGGLShader.h"
 #endif
@@ -144,7 +143,7 @@ namespace sora{
 		glLoadIdentity();
 		//Creating an orthoscopic view matrix going from -1 -> 1 in each
 		//dimension on the screen (x, y, z).
-		glOrtho(0.f, w, h, 0.f, -1.f, 1.f);
+		glOrtho(0.f, w, h, 0.f, 1.f, -1.f);
 	}
 
 	void SoraOGLRenderer::applyTransform() {
@@ -160,11 +159,11 @@ namespace sora{
                     , 0.f, 1.f, -1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
-            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
-
+            
+            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
             glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
             glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
-            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
+            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
 
 
         } else {
@@ -180,12 +179,11 @@ namespace sora{
             
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
-            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
-
+            
+            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
             glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
             glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
-            glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
-
+            glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
         }
 	}
 

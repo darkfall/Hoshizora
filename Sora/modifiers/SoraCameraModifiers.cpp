@@ -18,14 +18,14 @@ namespace sora {
         mCurrZoom = mStartZoom;
     }
     
-    int32 SoraCameraZoomModifier::update(float dt) {
+    bool SoraCameraZoomModifier::update(float dt) {
         mCurrTime += dt;
         mCurrZoom = slerp(mStartZoom, mEndZoom, mCurrTime/mTime);
 
         if(mCurrTime >= mTime) {
-            return ModifierUpdateEnd;
+            return true;
         }
-        return 0;
+        return false;
     }
     
     void SoraCameraZoomModifier::modify(SoraCamera* camera) {
@@ -53,14 +53,14 @@ namespace sora {
         mCurrRot = mStart;
     }
     
-    int32 SoraCameraRotationModifier::update(float dt) {
+    bool SoraCameraRotationModifier::update(float dt) {
         mCurrTime += dt;
         mCurrRot = slerp(mStart, mEnd, mCurrTime/mTime);
         
         if(mCurrTime >= mTime) {
-            return ModifierUpdateEnd;
+            return true;
         }
-        return 0;
+        return false;
     }
     
     void SoraCameraRotationModifier::modify(SoraCamera* camera) {

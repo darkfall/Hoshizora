@@ -1,6 +1,8 @@
 #include "SoraObject.h"
 #include "SoraHandleManager.h"
 #include "SoraObjectHandle.h"
+#include "SoraModifierAdapter.h"
+#include "modifiers/SoraObjectModifiers.h"
 
 namespace sora {
 
@@ -8,8 +10,7 @@ namespace sora {
     mParent(NULL),
     mSubObjects(NULL), 
     mNext(NULL),
-    mPositionSource(NULL),
-    mPosition(SoraVector3()),
+    mPosition(SoraMovable()),
     mType(0), 
     mSubObjectSize(0) {
         mUniqueId = GetNextUniqueId();
@@ -32,7 +33,7 @@ namespace sora {
         FreeHandleSlot(mHandleId);
 	}
 	
-	uint32 SoraObject::update(float dt) {
+	int32 SoraObject::update(float dt) {
         if(mSubObjectSize != 0) {
             SoraObject* obj = mSubObjects;
             while(obj != NULL) {
@@ -40,7 +41,19 @@ namespace sora {
                 obj = obj->next();
             }
         }
-	
+        
+        ModifierAdapterList::iterator it = mModifierAdapters.begin();
+        ModifierAdapterList::iterator end = mModifierAdapters.end();
+        while(it != end) {
+            SoraAbstractModifierAdapter* adapter = (*it);
+            if(adapter->update(dt)) {
+                delete adapter;
+                it = mModifierAdapters.erase(it);
+                continue;
+            }
+            ++it;
+        }
+
 		return 0;
 	}
 	
@@ -54,39 +67,52 @@ namespace sora {
         }
 	}
     
+    void SoraObject::moveTo(float x, float y, float t) {
+        addModifierAdapter(
+                           CreateModifierAdapter(this,
+                                                 new SoraObjectPositionModifier(getPositionX(),
+                                                                                getPositionY(),
+                                                                                x,
+                                                                                y,
+                                                                                t)));
+        
+    }
+    
+    void SoraObject::moveToAndNotify(float x, float y, float t, const SoraFunction<void(SoraObject*)>& onFinish) {
+        addModifierAdapter(
+                           CreateModifierAdapterWithNotification(this,
+                                                                 new SoraObjectPositionModifier(getPositionX(),
+                                                                                                getPositionY(),
+                                                                                                x,
+                                                                                                y,
+                                                                                                t),
+                                                                 onFinish));
+                                                 
+    }
+    
     void SoraObject::onUpdate(float dt) {
         update(dt);
     }
-    
-    void SoraObject::setPositionSource(PositionSource source) {
-        mPositionSource = source;
-        mPosition = mPositionSource->getPosition();
-    }
 	
 	void SoraObject::setPosition(float x, float y) {
-        if(mPositionSource) {
-            mPositionSource->setPosition(x, y);
-            mPosition = mPositionSource->getPosition();
-        } else {
-            mPosition.x = x;
-            mPosition.y = y;
-        }
+        mPosition.x = x;
+        mPosition.y = y;
 	}
 	
-	void SoraObject::getPosition(float& x, float& y) const {
-		x = getPositionX();
-		y = getPositionY();
+	void SoraObject::getPosition(float* x, float* y) const {
+		*x = getPositionX();
+		*y = getPositionY();
 	}
 	
 	float SoraObject::getPositionX() const {
-        float x = mPositionSource ? mPositionSource->getPositionX() : mPosition.x;
+        float x = mPosition.x;
         if(!mParent)
             return x;
         return x+mParent->getPositionX();
 	}
 	
 	float SoraObject::getPositionY() const {
-        float y = mPositionSource ? mPositionSource->getPositionY() : mPosition.y;
+        float y = mPosition.y;
 
         if(!mParent)
             return y;
@@ -94,11 +120,11 @@ namespace sora {
 	}
     
     float SoraObject::getAbsolutePositionX() const {
-        return mPositionSource ? mPositionSource->getPositionX() : mPosition.x;
+        return mPosition.x;
     }
     
     float SoraObject::getAbsolutePositionY() const {
-        return mPositionSource ? mPositionSource->getPositionY() : mPosition.y;
+        return mPosition.y;
     }
 
 	void SoraObject::add(SoraObject* o){
@@ -206,4 +232,38 @@ namespace sora {
     SoraObject* SoraObject::operator[](const SoraString& name) {
         return getObjByName(name);
     }
+    
+    void SoraObject::setName(const StringType& name) {
+        setName(name.uniqueId());
+    }
+    
+    void SoraObject::setName(SoraStringId n) { 
+        mName = n; 
+    }
+   
+    SoraStringId SoraObject::getName() const { 
+        return mName;
+    }
+    
+    void SoraObject::addModifierAdapter(SoraAbstractModifierAdapter* adapter) {
+        mModifierAdapters.push_back(adapter);
+    }
+    
+    void SoraObject::removeModifierAdapter(SoraAbstractModifierAdapter* adapter) {
+        mModifierAdapters.remove(adapter);
+    }
+    
+    bool SoraObject::hasModifierAdapter() const {
+        return !mModifierAdapters.empty();
+    }
+    
+    void SoraObject::clearModifierAdapters() {
+        ModifierAdapterList::iterator it = mModifierAdapters.begin();
+        ModifierAdapterList::iterator end = mModifierAdapters.end();
+        for(; it != end; ++it) {
+            delete (*it);
+        }
+        mModifierAdapters.clear();
+    }
+            
 } // namespace sora

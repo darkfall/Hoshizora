@@ -21,9 +21,7 @@
 namespace sora {
     
     class SoraFSMManager;
-    
-    const int32 SoraFSMStateUpdateEnd = -1;
-    
+        
     class SORA_API SoraFSMState {
     public:
         friend class SoraFSMManager;
@@ -36,7 +34,7 @@ namespace sora {
             delete this;
         }
         
-        virtual int32 onUpdate(float dt) { return SoraFSMStateUpdateEnd; }
+        virtual void onUpdate(float dt) {}
         virtual void onRender() {}
         
         virtual void onEnter() {}

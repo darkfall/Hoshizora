@@ -126,7 +126,7 @@ namespace sora {
 		bPaused = false;
 		bPauseRender = false;
 		bPauseSound = false;
-		bDisablePluginDetection = false;
+		bPluginDetection = false;
         bEnableScreenBuffer = false;
         bScreenBufferAttached = false;
         bSeperateSoundSystemThread = false;
@@ -169,23 +169,69 @@ namespace sora {
     void SoraCore::_regGlobalProducts() {
     }
     
-    void SoraCore::init(const Parameter& param) {
-        enablePluginDetection(param.isLoadPlugins());
-        
-        enableMessageBoxErrorPost(param.isPostErrorByMessageBox());
-        
-        enableFullscreenBuffer(param.isRenderToBuffer());
-        
+    void SoraCore::init(const Feature& param) {
+        if(param.LoadPlugins) {
+            enableCoreFeature(FeatureLoadPlugin);
+        }
+        if(param.MessageBoxErrorPost) {
+            enableCoreFeature(FeatureMessageBoxErrorPost);
+        }
+        if(param.RenderToBuffer) {
+            enableCoreFeature(FeatureRenderToBuffer);
+        }
+        if(param.DebugRender) {
+            enableCoreFeature(FeatureDebugRendering);
+        }
+        if(param.SeperateSoundSystemThread) {
+            enableCoreFeature(FeatureSeperateSoundSystem);
+        }
+      
         try {
-            if(!bDisablePluginDetection) 
+            if(bPluginDetection) 
                 SoraBooter::loadExPlugins(L"./sora/plugins");
         } catch(const SoraException& exp) {
             _postError(exp.what());
         }
-        
-        enableDebugRender(param.isDebugRender());
-        
-        enableSeperateSoundSystemThread(param.isSeperateSoundSystemThread());
+    }
+    
+    void SoraCore::enableCoreFeature(CoreFeatures feature) {
+        switch(feature) {
+            case FeatureLoadPlugin:
+                bPluginDetection = true;
+                break;
+            case FeatureRenderToBuffer:
+                bEnableScreenBuffer = true;
+                break;
+            case FeatureMessageBoxErrorPost:
+                bMessageBoxErrorPost = true;
+                break;
+            case FeatureSeperateSoundSystem:
+                bSeperateSoundSystemThread = true;
+                break;
+            case FeatureDebugRendering:
+                bDebugRender = true;
+                break;
+        }
+    }
+    
+    void SoraCore::disableCoreFeature(CoreFeatures feature) {
+        switch(feature) {
+            case FeatureLoadPlugin:
+                bPluginDetection = false;
+                break;
+            case FeatureRenderToBuffer:
+                bEnableScreenBuffer = false;
+                break;
+            case FeatureMessageBoxErrorPost:
+                bMessageBoxErrorPost = false;
+                break;
+            case FeatureSeperateSoundSystem:
+                bSeperateSoundSystemThread = false;
+                break;
+            case FeatureDebugRendering:
+                bDebugRender = false;
+                break;
+        }
     }
 
 	void SoraCore::_initializeTimer() {
@@ -237,7 +283,7 @@ namespace sora {
         try {
         // create render target for debug renderer
 #ifdef DEBUG
-            DEBUG_RENDERER->createTarget();
+//            DEBUG_RENDERER->createTarget();
 #endif
             
             if(bEnableScreenBuffer) {
@@ -320,7 +366,6 @@ namespace sora {
 #ifdef PROFILE_CORE_UPDATE
                     PROFILE("UPDATE_MAINWINDOW");
 #endif
-                    _modifierAdapterUpdate();
                     SoraSimpleTimerManager::Instance()->update(dt);
                     
                     mMainWindow->updateFunc();
@@ -460,8 +505,7 @@ namespace sora {
         factory->registerEvent<SoraPlaybackEvent>("PlaybackEvent");
         factory->registerEvent<SoraFileChangeEvent>("FileChangeEvent");
         factory->registerEvent<SoraKeyEvent>("KeyEvent");
-      //  factory->registerEvent<SoraMouseEvent>("MouseEvent");
-       // factory->registerEvent<SoraJoystickEvent>("JoystickEvent");
+
         factory->registerEvent<SoraTimerEvent>("TimerEvent");
         factory->registerEvent<SoraConsoleEvent>("ConsoleEvent");
         factory->registerEvent<SoraMenuBarClickEvent>("MenubarEvent");
@@ -940,11 +984,6 @@ namespace sora {
         g_CurrentTransform.set(x, y, dx, dy, rot, hscale, vscale);
 	}
     
-    void SoraCore::setViewPoint(float x, float y, float z) {
-        sora_assert(bInitialized==true);
-        pRenderSystem->setViewPoint(x, y, z);
-    }
-
 	void SoraCore::beginScene(uint32 c, ulong32 t, bool clear) {
 		sora_assert(bInitialized==true);
         if(mScreenBuffer && bEnableScreenBuffer) {
@@ -1201,41 +1240,56 @@ namespace sora {
 		}
 
 #ifndef OS_IOS
-		SoraString fontName = ws2s(font);
-		
-		SoraFont* f;
-		if(pFontManager->fontExists(fontName.c_str())) {
-			f = pFontManager->getFont(fontName.c_str(), size, 0, 0);
-			return f;
+		if(pFontManager->fontExists(font.c_str())) {
+            return pFontManager->getFont(font.c_str(), size, 0, 0);
 		}
-		
-      /*  if(SoraFileUtility::fileExists(font)) {
-            f = pFontManager->getFont(fontName.c_str(), size);
 
-			if(SoraConsole::Instance()->getFont() == NULL)
-				SoraConsole::Instance()->setFont(f);
-            return f;
-        }*/
 		ulong32 s;
 		void* p = getResourceFile(font, s);
 		if(p) {
-			SoraFont* f = pFontManager->getFont((const char*)p, size, s-1, ws2s(font).c_str());
-			//freeResourceFile(p);
-			if(SoraConsole::Instance()->getFont() == NULL)
-				SoraConsole::Instance()->setFont(f);
-			if(SoraMenuBar::Instance()->getFont() == NULL)
-				SoraMenuBar::Instance()->setFont(f);
+			SoraFont* f = pFontManager->getFont((const char*)p, size, s-1, font.c_str());
+			if(getSystemFont() == 0)
+                setSystemFont(f);
 			return f;
 		}
 #else
-		SoraFont* ff = pFontManager->getFont(ws2s(font).c_str(), size);
-		if(ff)
-			SoraConsole::Instance()->setFont(ff);
-		else
-			_postError("Error loading Font: "+ws2s(font));
+		SoraFont* ff = pFontManager->getFont(font.c_str(), size);
+		if(!ff)
+            _postError("Error loading Font: "+font);
+        else {
+            if(getSystemFont() == 0)
+                setSystemFont(f);
+        }
 #endif
 		return 0;
 	}
+    
+    SoraFont* SoraCore::createFont(void* data, ulong32 size, uint32 fontSize, const StringType& fileName) {
+        if(!pFontManager) {
+			_postError("FontManager not available");
+			return 0;
+		}
+        
+#ifndef OS_IOS		
+		if(pFontManager->fontExists(fileName.c_str())) {
+            return pFontManager->getFont(fileName.c_str(), size, 0, 0);
+		}
+		
+		SoraFont* f = pFontManager->getFont((const char*)data, fontSize, size, fileName.c_str());
+        if(getSystemFont() == 0)
+            setSystemFont(f);
+        return f;
+#else
+        SoraFont* ff = pFontManager->getFont(font.c_str(), size);
+		if(!ff)
+            _postError("Error loading Font: "+font);
+        else {
+            if(getSystemFont() == 0)
+                setSystemFont(f);
+        }
+#endif
+		return 0;
+    }
 
 	void SoraCore::releaseFont(SoraFont* font) {
 		if(!pFontManager) {
@@ -1307,14 +1361,18 @@ namespace sora {
 		return getMemoryUsage();
 	}
 	
-	void SORACALL SoraCore::enableMessageBoxErrorPost(bool bFlag) { 
-		bMessageBoxErrorPost = bFlag;
-	}
+    SoraFont* SoraCore::getSystemFont() const {
+        return mSystemFont;
+    }
+    
+    void SoraCore::setSystemFont(SoraFont* font) {
+        mSystemFont = font;
+    }
 	
 	void SoraCore::setSystemFont(const wchar_t* font, int32 fontSize) {
-		SoraFont* ff = createFont(font, fontSize);
-		SoraConsole::Instance()->setFont(ff);
-		SoraMenuBar::Instance()->setFont(ff);
+		mSystemFont = createFont(font, fontSize);
+		SoraConsole::Instance()->setFont(mSystemFont);
+		SoraMenuBar::Instance()->setFont(mSystemFont);
 	}
 	
 	void SoraCore::beginZBufferSort() {
@@ -1351,25 +1409,6 @@ namespace sora {
 		pRenderSystem->setCursor(cursor);
 	}
 	
-	void SoraCore::enablePluginDetection(bool flag) {
-		bDisablePluginDetection = !flag;
-	}
-
-    void SoraCore::_modifierAdapterUpdate() {
-        SoraAbstractModiferAdapter::Members modifierAdapaterList = SoraAbstractModiferAdapter::members;
-        
-        if(modifierAdapaterList.size() == 0) {
-            return;
-        }
-        
-        SoraAbstractModiferAdapter::Members::iterator itModifier = modifierAdapaterList.begin();
-        float dt = getDelta();
-        while(itModifier != modifierAdapaterList.end()) {
-            (*itModifier)->update(dt);
-            ++itModifier;
-        }
-    }
-    
     void  SoraCore::enableRenderSystemExtension(int32 extesion) {
         EnableRenderSystemExtension((ExtensionFeature)extesion);
     }
@@ -1377,6 +1416,7 @@ namespace sora {
     void  SoraCore::disableRenderSystemExtension(int32 extension) {
         DisableRenderSystemExtension((ExtensionFeature)extension);
     }
+    
     void  SoraCore::setRenderSystemExtensionParam(int32 extension, int32 param) {
         SetRenderSystemExtensionParam((ExtensionFeature)extension, param);
     }
@@ -1389,12 +1429,12 @@ namespace sora {
         return IsRenderSystemExtensionEnabled((ExtensionFeature)ext);
     }
     
-    void SoraCore::enableFullscreenBuffer(bool flag) {
-        bEnableScreenBuffer = flag;
-    }
-    
     void SoraCore::registerFullscreenBufferDelegate(const SoraFunction<void(SoraTextureHandle)>& delegate) {
         SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate);
+    }
+    
+    void SoraCore::unregisterFullscreenBufferDelegate() {
+        SoraFullscreenBufferHandler::Instance()->unregisterDelegate();
     }
     
     void SoraCore::pushTransformMatrix() {
@@ -1488,31 +1528,4 @@ namespace sora {
         return scale;
     }
     
-    void SoraCore::enableSeperateSoundSystemThread(bool flag) {
-        bSeperateSoundSystemThread = flag;
-    }
-    
-    bool SoraCore::isSeperateSoundSystemThread() const {
-        return bSeperateSoundSystemThread;
-    }
-    
-    void SoraCore::enableDebugRender(bool flag) {
-        bDebugRender = flag;
-    }
-    
-    bool SoraCore::isDebugRenderEnabled() const {
-        return bDebugRender;
-    }
-
-    bool SoraCore::isMessageBoxErrorPostEnabled() const {
-        return bMessageBoxErrorPost;
-    }
-    
-    bool SoraCore::isPluginDetectionEnabled() const {
-        return bDisablePluginDetection;
-    }
-    
-    bool SoraCore::isFullscreenBufferEnabled() const {
-        return bEnableScreenBuffer;
-    }
 } // namespace sora

@@ -76,7 +76,7 @@ namespace sora {
 		IMAGE_EFFECT_MODE getMode() const { return mode; }
 
 		virtual void start(IMAGE_EFFECT_MODE mode, float time);
-		virtual int32 update(float delta);
+		virtual bool update(float delta);
 		
 		virtual void modify(SoraSprite* sprite) = 0;
 		
@@ -143,7 +143,7 @@ namespace sora {
 		void setListMode(IMAGE_EFFECT_MODE mode);
 		IMAGE_EFFECT_MODE getListMode() const;
 		
-		virtual int32 update(float delta);
+		virtual bool update(float delta);
 		virtual void start(IMAGE_EFFECT_MODE mode, float time);
 		
 		virtual void modify(SoraSprite* obj);

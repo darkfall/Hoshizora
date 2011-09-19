@@ -8,13 +8,13 @@
  */
 
 #include "SoraShader.h"
-
+#include "SoraShaderManager.h"
 #include "SoraCore.h"
 
 namespace sora {
 
 	SoraShader::SoraShader() {
-		mType = UNKNOWN_SHADEr;
+		mType = UNKNOWN_SHADER;
         mErrorCode = ShaderNoError;
         mShaderContext = NULL;
 	}
@@ -22,7 +22,7 @@ namespace sora {
 	SoraShader::~SoraShader() {
 		
 	}
-	
+
 	bool SoraShader::setParameter1f(const char* name, float v1) {
 		float arr[1];
 		arr[0] = v1;
@@ -94,7 +94,7 @@ namespace sora {
 		clear();
 	}
 	
-    SoraShader* SoraShaderContext::attachShader(const SoraWString& file, const SoraString& entry, int32 type) {
+    SoraShader* SoraShaderContext::attachShader(const StringType& file, const SoraString& entry, int32 type) {
         if(type == FRAGMENT_SHADER)
             return attachFragmentShader(file, entry);
         else if(type == VERTEX_SHADER)
@@ -143,7 +143,7 @@ namespace sora {
         mVertexShader.reset();
 	}
     
-    SoraShader* SoraShaderContext::attachFragmentShader(const SoraWString& file, const SoraString& entry) {
+    SoraShader* SoraShaderContext::attachFragmentShader(const StringType& file, const SoraString& entry) {
         SoraShader* shader = createShader(file, entry, FRAGMENT_SHADER);
         if(!shader)
             THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
@@ -156,7 +156,7 @@ namespace sora {
         return shader;
     }
     
-    SoraShader* SoraShaderContext::attachVertexShader(const SoraWString& file, const SoraString& entry) {
+    SoraShader* SoraShaderContext::attachVertexShader(const StringType& file, const SoraString& entry) {
         SoraShader* shader = createShader(file, entry, VERTEX_SHADER);
         if(!shader)
             THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
@@ -213,5 +213,25 @@ namespace sora {
     bool SoraShaderContext::isAvailable() {
         return (mFragmentShader.get() != NULL || mVertexShader.get() != NULL);
     }
+    
+    void SoraShader::Free(SoraShader* shader) {
+        SoraShaderContext* context = shader->getShaderContext();
+        if(!context)
+            THROW_SORA_EXCEPTION(IllegalStateException, "Caught wild shader without ShaderContext, possible bug");
+        else context->detachShader(shader);
+    }
+    
+    SoraShader* SoraShader::LoadFromFile(const StringType& file, const SoraString& entry, int32 type) {
+        return SoraShaderManager::Instance()->createShader(file, entry, type);
+    }
+    
+    SoraShader* SoraShader::LoadFromMemory(const char* data, const SoraString& entry, int32 type) {
+        return SoraShaderManager::Instance()->createShaderFromMem(data, entry, type);
+    }
+    
+    SoraShaderContext* SoraShaderContext::Create() {
+        return SoraCore::Instance()->createShaderContext();
+    }
+
     
 } // namespace sora

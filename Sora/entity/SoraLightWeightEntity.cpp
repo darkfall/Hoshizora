@@ -101,7 +101,7 @@ namespace sora {
         update(dt);
     }
     
-    uint32 SoraLightWeightEntity::update(float dt) {
+    int32 SoraLightWeightEntity::update(float dt) {
         mComponents.onUpdate(dt);
         return 0;
     }

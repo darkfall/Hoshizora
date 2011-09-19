@@ -22,7 +22,7 @@ namespace sora {
     public:
         SoraCameraZoomModifier(float starth, float startv, float hz, float hv, float inTime);
         
-        int32   update(float dt);
+        bool    update(float dt);
         void    modify(SoraCamera* camera);
         void    reset();
         
@@ -40,7 +40,7 @@ namespace sora {
     public:
         SoraCameraRotationModifier(float start, float end, float inTime);
         
-        int32   update(float dt);
+        bool    update(float dt);
         void    modify(SoraCamera* camera);
         void    reset();
         

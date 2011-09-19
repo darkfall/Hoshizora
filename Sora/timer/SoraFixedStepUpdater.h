@@ -39,7 +39,7 @@ namespace sora {
                 mUpdateObj = NULL;
         }
         
-        inline uint32 update(float interval) {
+        inline int32 update(float interval) {
             uint32 result = 0;
             if(mUpdateObj) {
                 mAccumulator += interval;

@@ -38,6 +38,10 @@ namespace sora {
         mDelegate = delegate;
     }
     
+    void SoraFullscreenBufferHandler::unregisterDelegate() {
+        mDelegate.clear();
+    }
+    
     
     
 } // namespace sora

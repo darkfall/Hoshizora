@@ -20,13 +20,13 @@ namespace sora {
         mCurrVal = mBegin;
     }
     
-    int32 SoraFontRotationModifier::update(float dt) {
+    bool SoraFontRotationModifier::update(float dt) {
         mCurrTime += dt;
         mCurrVal = slerp(mBegin, mEnd, mCurrTime/mInTime);
         if(mCurrTime >= mInTime) {
-            return ModifierUpdateEnd;
+            return true;
         }
-        return 0;
+        return false;
     }
     
     void SoraFontRotationModifier::reset() {
@@ -53,13 +53,13 @@ namespace sora {
         mCurrVal = begin;
     }
     
-    int32 SoraFontScaleModifier::update(float dt) {
+    bool SoraFontScaleModifier::update(float dt) {
         mCurrTime += dt;
         mCurrVal = slerp(mBegin, mEnd, mCurrTime/mInTime);
         if(mCurrTime >= mInTime) {
-            return ModifierUpdateEnd;
+            return true;
         }
-        return 0;
+        return false;
     }
     
     void SoraFontScaleModifier::reset() {

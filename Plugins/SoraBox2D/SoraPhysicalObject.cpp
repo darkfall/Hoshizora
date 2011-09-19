@@ -273,7 +273,7 @@ namespace sora {
         return mContactDelegate;
     }
     
-    uint32 SoraPhysicalObject::update(float32 dt) {
+    int32 SoraPhysicalObject::update(float32 dt) {
         SoraObject::update(dt);
         if(mRenderer) {
             mRenderer->setRotation(getAngle());

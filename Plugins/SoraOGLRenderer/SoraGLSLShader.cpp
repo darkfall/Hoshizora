@@ -62,9 +62,9 @@ namespace sora {
 		mTexture1 = 0;
 	}
 	
-	bool SoraGLSLShader::loadShader(const SoraWString& file, const SoraString& entry, int32 _type) {
+	bool SoraGLSLShader::loadShader(const StringType& file, const SoraString& entry, int32 type) {
 		assert(mProgram != 0);
-        mType = _type;
+        mType = type;
 
 		if(mType == FRAGMENT_SHADER) 
 			mShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -73,7 +73,6 @@ namespace sora {
 		
 		
 		if(mShader == 0) {			
-			THROW_SORA_EXCEPTION(RuntimeException, "Error creating glsl shader");
 			mType = 0;
 			return false;
 		}
@@ -95,6 +94,34 @@ namespace sora {
 		}
 		return true;
 	}
+    
+    bool SoraGLSLShader::loadShaderFromMem(const char* data, const SoraString& entry, int32 type) {
+        mType = type;
+        
+		if(mType == FRAGMENT_SHADER) 
+			mShader = glCreateShader(GL_FRAGMENT_SHADER);
+		else
+			mShader = glCreateShader(GL_VERTEX_SHADER);
+		
+		
+		if(mShader == 0) {			
+			mType = 0;
+			return false;
+		}
+		
+		glShaderSource(mShader, 1, &data, NULL);
+        glCompileShader(mShader);
+        
+        int success;
+        glGetShaderiv(mShader, GL_COMPILE_STATUS, &success);
+        if (success == 0) {
+            printShaderError();
+            mType = 0;
+            
+            return false;
+        }
+		return true;
+    }
 	
 	SoraGLSLShader::~SoraGLSLShader() {
 		if(mShader != 0)
@@ -245,7 +272,7 @@ namespace sora {
 			glDeleteProgram(mProgram);
 	}
 
-	SoraShader* SoraGLSLShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
+	SoraShader* SoraGLSLShaderContext::createShader(const StringType& file, const SoraString& entry, int32 type) {
 		if(!mProgram)
 			return NULL;
 		
@@ -255,6 +282,17 @@ namespace sora {
         shader->loadShader(file, entry, type);
         return shader;
 	}
+    
+    SoraShader* SoraGLSLShaderContext::createShaderFromMem(const char* data, const SoraString& entry, int32 type) {
+        if(!mProgram)
+			return NULL;
+		
+		SoraGLSLShader* shader = new SoraGLSLShader();
+		shader->mProgram = mProgram;
+		shader->mContext = this;
+        shader->loadShaderFromMem(data, entry, type);
+        return shader;
+    }
 	
 	bool SoraGLSLShaderContext::attachShaderList() {
         if(!mProgram)

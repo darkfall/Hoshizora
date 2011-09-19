@@ -9,7 +9,7 @@
 
 #include "SoraBooter.h"
 
-#include "SoraDllHelper.h"
+#include "SoraDynLibrary.h"
 
 #include "SoraCore.h"
 

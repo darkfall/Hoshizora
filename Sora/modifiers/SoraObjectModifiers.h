@@ -33,13 +33,13 @@ namespace sora {
             mCurrTime = 0.f;
         }
         
-        int32 update(float dt) {
+        bool update(float dt) {
             mCurrTime += dt;
             mCurrValue = slerp(mBegin, mEnd, mCurrTime/mInTime);
             if(mCurrTime >= mInTime) {
-                return ModifierUpdateEnd;
+                return true;
             }
-            return 0;
+            return false;
         }
         
         void modify(T* obj) {

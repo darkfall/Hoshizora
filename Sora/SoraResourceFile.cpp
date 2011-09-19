@@ -79,18 +79,6 @@ namespace sora {
 		return mData;
 	}
 	
-	SoraResourceFileAuto::operator unsigned long*() {
-		return static_cast<unsigned long*>(mData);
-	}
-	
-	SoraResourceFileAuto::operator unsigned int*() {
-		return static_cast<unsigned int*>(mData);
-	}
-	
-	SoraResourceFileAuto::operator unsigned char*() {
-		return static_cast<unsigned char*>(mData);
-	}
-	
 	SoraResourceFileAuto::operator char*() {
 		return static_cast<char*>(mData);
 	}

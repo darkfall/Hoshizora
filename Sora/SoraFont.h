@@ -3,6 +3,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraImageEffect.h"
+#include "SoraString.h"
 
 namespace sora {
 
@@ -37,7 +38,7 @@ namespace sora {
 
 		// get font dimensions
 		virtual float	getStringWidth(const wchar_t* text) = 0;
-		virtual float getStringHeight(const wchar_t* text) = 0;
+		virtual float   getStringHeight(const wchar_t* text) = 0;
 		virtual float	getHeight() const = 0;
 
 		// get/set font size
@@ -52,7 +53,7 @@ namespace sora {
 		virtual void setScale(float scale) = 0;
         
         // get/set line width
-        virtual void setLineWidth(float width) = 0;
+        virtual void  setLineWidth(float width) = 0;
         virtual float getLineWidth() const= 0;
         
         virtual float getCharRotation() const = 0;
@@ -61,6 +62,10 @@ namespace sora {
         // set/get line rotation
         virtual void setLineRotation(float rot, bool rotateChar=false) = 0;
         virtual float getLineRotation() const = 0;
+        
+        static SoraFont* LoadFromFile(const StringType& font, uint32 size);
+        static SoraFont* LoadFromMemory(void* data, ulong32 size, uint32 fontSize, const StringType& name);
+        static void Release(SoraFont* font);
 	};
 
 } // namespace sora

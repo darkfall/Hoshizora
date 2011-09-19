@@ -33,7 +33,7 @@ namespace sora {
 		float	getKerningHeight();
 		
 		float	getStringWidth(const wchar_t* text);
-		float getStringHeight(const wchar_t* text);
+		float   getStringHeight(const wchar_t* text);
 		float	getHeight();
 		
 		uint32	getFontSize();

@@ -10,109 +10,90 @@
 #define Sora_SoraImageEffectAutomator_h
 
 #include "SoraPlatform.h"
-#include "SoraImageEffect.h"
-
+#include "SoraModifier.h"
+#include "SoraFunction.h"
 #include <list>
 
 namespace sora {
     
     /**
-     *  Adapter that helps apply modifiers to any class
+     *  Adapter that helps apply modifiers to any class that can manage a modifier
      *  Such as SoraObject
      **/
     
-    class SORA_API SoraAbstractModiferAdapter {
-    protected:
-        SoraAbstractModiferAdapter();
-        virtual ~SoraAbstractModiferAdapter();
-        
-        void insert();
-        void remove();
-        
+    class SORA_API SoraAbstractModifierAdapter {
     public:
-        typedef std::list<SoraAbstractModiferAdapter*> Members;
+        virtual ~SoraAbstractModifierAdapter() {}
 
-        virtual void update(float dt) = 0;
-        
-    public:
-        static Members members;
+        virtual bool update(float dt) = 0;
     };
     
     template<typename T>
-    class SORA_API SoraModifierAdapter: public SoraAbstractModiferAdapter {
+    class SORA_API SoraModifierAdapter: public SoraAbstractModifierAdapter {
     public:
-        SoraModifierAdapter(T* obj, bool retain=false, bool insert=true) {
-            assert(obj != NULL);
+        SoraModifierAdapter(T* obj, SoraModifier<T>* modi, bool insert=false) {
             mObj = obj;
-            mRetain = retain;
+            mModifier = modi;
             
             mInsert = insert;
             if(mInsert)
-                SoraAbstractModiferAdapter::insert();
-            else
-                mRetain = true;
+                obj->addModifierAdapter(this);
         }
-        SoraModifierAdapter(T* obj, SoraModifier<T>* modi, bool retain=false, bool insert=true) {
-            mObj = obj;
-            add(modi);
-            mRetain = retain;
-            
-            mInsert = insert;
-            if(mInsert)
-                SoraAbstractModiferAdapter::insert();
-            else
-                mRetain = true;
-        }
+        
         virtual ~SoraModifierAdapter() {
             if(mInsert)
-                SoraAbstractModiferAdapter::remove();
+                mObj->removeModifierAdapter(this);
         }
         
-        void update(float dt) {
-            if(!mModifiers.empty()) {
-                typename ModifierList::iterator itModifier = mModifiers.begin();
-                while(itModifier != mModifiers.end()) {
-                    int32 result = (*itModifier)->update(dt);
-                    (*itModifier)->modify(mObj);
-                    
-                    if(result == sora::ModifierUpdateEnd) {     
-                        if((*itModifier)->isAutoRelease()) {
-                            (*itModifier)->release();
-                        }
-                        
-                        itModifier = mModifiers.erase(itModifier);
-                        continue;
+        typedef SoraFunction<void(T*)> FinishNotification;
+        void setFinishNotification(const FinishNotification& func) {
+            mOnFinish = func;
+        }
+        
+        bool update(float dt) {
+            if(mModifier) {
+                bool result = mModifier->update(dt);
+                mModifier->modify(mObj);
+                
+                if(result) { 
+                    if(mOnFinish) {
+                        mOnFinish(mObj);
                     }
-                    ++itModifier;
+                    
+                    if(mModifier->isAutoRelease()) {
+                        mModifier->release();
+                        mModifier = 0;
+                        return true;
+                    }
                 }
-            } else {
-                if(!mRetain)
-                    delete this;
             }
-        }
-        
-        void add(SoraModifier<T>* modi) {
-            mModifiers.push_back(modi);
-        }
-        
-        void del(SoraModifier<T>* modi) {
-            mModifiers.remove(modi);
+            return false;
         }
         
     protected:
         SoraModifierAdapter();
         
-        typedef std::list<SoraModifier<T>*> ModifierList;
-		ModifierList mModifiers;
         T* mObj;
+        SoraModifier<T>* mModifier;
+        
+        FinishNotification mOnFinish;
     
-        bool mRetain;
         bool mInsert;
     };
     
     template<typename MT>
-    static SoraModifierAdapter<MT>* CreateModifierAdapter(MT* obj, SoraModifier<MT>* modifier, bool retain=false, bool insert=true) {
-        return new SoraModifierAdapter<MT>(obj, modifier, retain, insert);
+    inline SoraModifierAdapter<MT>* CreateModifierAdapter(MT* obj, SoraModifier<MT>* modifier, bool insert=false) {
+        return new SoraModifierAdapter<MT>(obj, modifier, insert);
+    }
+    
+    template<typename MT>
+    inline SoraModifierAdapter<MT>* CreateModifierAdapterWithNotification(MT* obj, 
+                                                                          SoraModifier<MT>* modifier, 
+                                                                          const SoraFunction<void(MT*)>& notify,
+                                                                          bool insert=false) {
+        SoraModifierAdapter<MT>* adapter = new SoraModifierAdapter<MT>(obj, modifier, insert);
+        adapter->setFinishNotification(notify);
+        return adapter;
     }
 } // namespace sora
 

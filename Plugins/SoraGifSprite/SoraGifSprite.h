@@ -37,7 +37,7 @@ namespace sora {
         int32 getFrameSize() const;
         int32 getCurrFrame() const;
 		
-		virtual uint32 update(float dt);
+		virtual int32 update(float dt);
         
     private:
         void init();

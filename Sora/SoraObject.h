@@ -5,8 +5,8 @@
 #include "SoraException.h"
 #include "SoraEvent.h"
 #include "SoraAutoPtr.h"
-#include "SoraNamedObject.h"
 #include "SoraMovable.h"
+#include "SoraFunction.h"
 #include <algorithm>
 #include <list>
 
@@ -14,15 +14,16 @@
 namespace sora {
     
     class SoraObjectHandle;
+    class SoraAbstractModifierAdapter;
 
-	class SORA_API SoraObject: public SoraEventHandler, public SoraNamedObject {
+	class SORA_API SoraObject: public SoraEventHandler {
 	public:
         friend class SoraObjectHandle;
         
 		SoraObject();
 		virtual ~SoraObject();
 
-		virtual	uint32	update(float dt);
+		virtual	int32	update(float dt);
 		virtual void	render();
         
         // inherited from SoraEventHandler
@@ -31,17 +32,14 @@ namespace sora {
 		virtual void	add(SoraObject* pobj);
 		virtual void	del(SoraObject* pobj);
         virtual void    delAll();
-        
-        typedef SoraMovable* PositionSource;
-        void setPositionSource(PositionSource source);
-		
+    	
 		virtual void    setPosition(float x, float y);
-		virtual float   getPositionX() const;
-		virtual float   getPositionY() const;
-        virtual void    getPosition(float& x, float& y) const;
+        float   getPositionX() const;
+        float   getPositionY() const;
+        void    getPosition(float* x, float* y) const;
         
-        virtual float   getAbsolutePositionX() const;
-        virtual float   getAbsolutePositionY() const;
+        float   getAbsolutePositionX() const;
+        float   getAbsolutePositionY() const;
         
         virtual void    setParent(SoraObject* obj);
         
@@ -63,6 +61,29 @@ namespace sora {
         SoraUniqueId        getUniqueId() const;
         SoraObjectHandle    getHandle();
         
+        void setName(const StringType& name);
+        void setName(SoraStringId n);
+		SoraStringId getName() const;
+        
+        void moveTo(float x, float y, float t);
+        
+        typedef SoraFunction<void(SoraObject*)> NotificationFunc;
+        void moveToAndNotify(float x, float y, float t, const NotificationFunc& onFinish);
+        
+    public:
+        
+        void addModifierAdapter(SoraAbstractModifierAdapter* adapter);
+        void removeModifierAdapter(SoraAbstractModifierAdapter* adapter);
+        bool hasModifierAdapter() const;
+        void clearModifierAdapters();
+        
+    private:
+        
+        typedef std::list<SoraAbstractModifierAdapter*> ModifierAdapterList;
+        ModifierAdapterList mModifierAdapters;
+		
+	protected:
+		
         SoraObject* operator[](const SoraString& name);
         
 	protected:
@@ -71,12 +92,12 @@ namespace sora {
         SoraObject* mSubObjects;
         SoraObject* mNext;
 		
-		PositionSource mPositionSource;
-        SoraVector3 mPosition;
+		SoraMovable mPosition;
         
 		uint32 mType;
         
         int32 mSubObjectSize;
+        SoraStringId mName;
         
     private:
         /**

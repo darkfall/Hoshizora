@@ -62,7 +62,7 @@ namespace sora {
         void sendMessageTo(const SoraString& comp, SoraMessageEvent* message);
         
         virtual void render();
-        virtual uint32 update(float dt);
+        virtual int32 update(float dt);
         virtual void onUpdate(float dt);
         virtual void onMessage(SoraMessageEvent* evt);
         

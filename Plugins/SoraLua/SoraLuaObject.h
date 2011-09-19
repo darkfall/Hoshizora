@@ -28,7 +28,7 @@ namespace sora {
 		SoraLuaObject(LuaPlus::LuaState* state, bool heavy=true);
 		virtual ~SoraLuaObject();
         
-        uint32 update(float dt);
+        int32 update(float dt);
         void render();
 
 		int32 doScript(const SoraWString& scriptPath);

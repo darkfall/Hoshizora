@@ -406,8 +406,8 @@ namespace sora {
 		void* buffer = SoraCore::Instance()->getResourceFile(script, size);
 		if(buffer) {
 			memcpy(&pheader, buffer, size);
+            SORA->freeResourceFile(buffer);
 		}
-		SORA->freeResourceFile(buffer);
 	}
 	
 	void SoraParticleSystem::addEffector(SoraParticleEffector* effector) {

@@ -31,7 +31,6 @@
 
 namespace sora {
     
-    
 	class SORA_API SoraCore: public SoraEventHandler {
 	protected:
 		SoraCore();
@@ -40,38 +39,25 @@ namespace sora {
 	public:
         static SoraCore* Instance();
         
-        class Parameter {
+        struct Feature {
         public:
-            Parameter(bool loadPlugins=true, bool renderToBuffer=false, bool postErrorByMessageBox=false, bool seperateSSthread=false, bool debugRender=false):
-            mLoadPlugins(loadPlugins),
-            mRenderToBuffer(renderToBuffer),
-            mMesageBoxErrorPost(postErrorByMessageBox),
-            mSeperateSoundSystemThread(seperateSSthread), 
-            mDebugRender(debugRender) {
+            Feature(bool loadPlugins=true, bool renderToBuffer=false, bool postErrorByMessageBox=false, bool seperateSSthread=false, bool debugRender=false):
+            LoadPlugins(loadPlugins),
+            RenderToBuffer(renderToBuffer),
+            MessageBoxErrorPost(postErrorByMessageBox),
+            SeperateSoundSystemThread(seperateSSthread), 
+            DebugRender(debugRender) {
                 
             }
             
-            void setLoadPlugin(bool flag) { mLoadPlugins = flag; }
-            void setRenderToBuffer(bool flag) { mRenderToBuffer = flag; }
-            void setPostErrorByMessageBox(bool flag) { mMesageBoxErrorPost = flag; }
-            void setSeprateSoundSystemThread(bool flag) { mSeperateSoundSystemThread = flag; }
-            void setDebugRender(bool flag) { mDebugRender = flag; }
-            
-            bool isLoadPlugins() const { return mLoadPlugins; }
-            bool isRenderToBuffer() const { return mRenderToBuffer; }
-            bool isPostErrorByMessageBox() const { return mMesageBoxErrorPost; }
-            bool isSeperateSoundSystemThread() const { return mSeperateSoundSystemThread; }
-            bool isDebugRender() const { return mDebugRender; }
-            
-        private:
-            bool mLoadPlugins;
-            bool mRenderToBuffer;
-            bool mMesageBoxErrorPost;
-            bool mSeperateSoundSystemThread;
-            bool mDebugRender;
+            bool LoadPlugins;
+            bool RenderToBuffer;
+            bool MessageBoxErrorPost;
+            bool SeperateSoundSystemThread;
+            bool DebugRender;
         };
         
-        void init(const Parameter& param = Parameter());
+        void init(const Feature& param = Feature());
         
 		void start();
 		void shutDown();
@@ -124,7 +110,7 @@ namespace sora {
         void    setVerticalSync(bool flag);
 
 		// render system APIs
-		void beginScene(uint32 c=0xFF000000, ulong32 h=0, bool clear=true);
+		void beginScene(uint32 c=0xFF000000, SoraTargetHandle h=0, bool clear=true);
 		void endScene();
 
 		SoraTargetHandle     createTarget(int width, int height, bool zbuffer=true);
@@ -180,28 +166,20 @@ namespace sora {
 		 */
 		ulong32 getMainWindowHandle();
 		SoraWindowInfoBase* getMainWindow();
-
-        /*
-         Core Features
-         See SoraCore::Params for initial config
-         */
-		void enableMessageBoxErrorPost(bool bFlag);
-        bool isMessageBoxErrorPostEnabled() const;
+        
         /**
-         * Enable Fullscreen buffer would cause everything be renderered to a screen texture buffer then render to screen
-         * This is required for fullscreen post shader effects
+         * Core Feature enums
          **/
-        void enableFullscreenBuffer(bool flag);
-        bool isFullscreenBufferEnabled() const;
+        enum CoreFeatures {
+            FeatureLoadPlugin = 1,
+            FeatureRenderToBuffer,
+            FeatureMessageBoxErrorPost,
+            FeatureSeperateSoundSystem,
+            FeatureDebugRendering,
+        };
         
-		void enablePluginDetection(bool flag);
-        bool isPluginDetectionEnabled() const;
-        
-        void enableSeperateSoundSystemThread(bool flag);
-        bool isSeperateSoundSystemThread() const;
-        
-        void enableDebugRender(bool flag);
-        bool isDebugRenderEnabled() const;
+        void enableCoreFeature(CoreFeatures feature);
+        void disableCoreFeature(CoreFeatures feature);
 
 		/*generates a int32 random number using SFMT*/
 		static void     setRandomSeed(int32 seed);
@@ -270,6 +248,7 @@ namespace sora {
 		StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
 
 		SoraFont*   createFont(const StringType& fontName, int size);
+        SoraFont*   createFont(void* data, ulong32 size, uint32 fontSize, const StringType& fileName);
 		void        releaseFont(SoraFont* font);
 		
 		SoraMusicFile* 			createMusicFile(const StringType& musicName, bool bStream=true);
@@ -285,8 +264,6 @@ namespace sora {
         void delKeyListener(SoraKeyListener* listener);
         void delJoystickListener(SoraJoystickListener* listener);
         
-        
-        void setViewPoint(float x=0.f, float y=0.f, float z=0.f);
         void execute(const SoraString& appPath, const SoraString& args);
         void snapshot(const SoraString& path);
 		/*
@@ -294,7 +271,7 @@ namespace sora {
 		 for ogl, just return (ulong32)(this)
 		 */
 		ulong32		 getVideoDeviceHandle();
-		StringType videoInfo();
+		StringType   videoInfo();
 		void		 flush();
 
 		void postError(const SoraString& sMssg);
@@ -321,13 +298,16 @@ namespace sora {
          **/
         uint64 getResourceMemoryUsage() const;
 		
+        void setSystemFont(SoraFont* font);
 		void setSystemFont(const wchar_t* font, int32 fontSize);
-		
+		SoraFont* getSystemFont() const;
+        
 		void setIcon(const SoraString& icon);
 		void setCursor(const SoraString& cursor);
                 
         typedef SoraFunction<void(SoraTextureHandle)> FullScreenBufferDelegateType;
         void registerFullscreenBufferDelegate(const FullScreenBufferDelegateType& delegate);
+        void unregisterFullscreenBufferDelegate();
         
         /**
          *  transform a 3d point to 2d using a far point as view
@@ -366,7 +346,7 @@ namespace sora {
 		bool bMessageBoxErrorPost;
 		bool bInitialized;
 		bool bHasInput;
-		bool bDisablePluginDetection;
+		bool bPluginDetection;
         bool bSeperateSoundSystemThread;
 		bool bDebugRender;
         
@@ -395,18 +375,18 @@ namespace sora {
 		
 		bool bZBufferArea;
         SoraVector3 mFarPoint;
+        SoraFont* mSystemFont;
     };
 
-    inline SORA_API SoraCore* InitAndCreateSoraCore(SoraWindowInfoBase* window, const SoraCore::Parameter& param = SoraCore::Parameter()) {
+    inline SORA_API SoraCore* InitAndCreateSoraCore(SoraWindowInfoBase* window, const SoraCore::Feature& param = SoraCore::Feature()) {
         SoraCore* instance = SoraCore::Instance();
         instance->init(param);
         instance->createWindow(window);
         return instance;
     }
     
-    typedef SoraCore::Parameter SoraCoreParameter;
-    
-    
+    typedef SoraCore::Feature SoraCoreFeature;
+        
 #define SORA SoraCore::Instance()
 
 } // namespace sora

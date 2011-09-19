@@ -9,6 +9,7 @@
 
 #include "SoraCanvas.h"
 #include "SoraCore.h"
+#include "SoraModifierAdapter.h"
 
 namespace sora {
         
@@ -19,11 +20,7 @@ namespace sora {
             return;
         }
         pCanvasSprite = new SoraSprite(0);
-		
-		/*uint32* data = pCanvasSprite->getPixelData();
-		memset(data, 0, w*h*4);
-		pCanvasSprite->unlockPixelData();*/
-        
+		  
 		if(!canvasTarget || !pCanvasSprite) {
             log_mssg("Error creating render target");
             return;
@@ -54,7 +51,7 @@ namespace sora {
         }
     }
     
-    uint32 SoraBaseCanvas::update(float dt) {
+    int32 SoraBaseCanvas::update(float dt) {
         if(pCanvasSprite)
             pCanvasSprite->update(dt);
 		return 0;
@@ -102,5 +99,60 @@ namespace sora {
             return pCanvasSprite->hasEffect();
         return false;
 	}
+    
+    void SoraBaseCanvas::fadeTo(float to, float t) {
+        if(pCanvasSprite)
+            pCanvasSprite->addModifierAdapter(CreateModifierAdapter(pCanvasSprite, 
+                                                                    CreateEffectFade(CGETA(pCanvasSprite->getColor())/255.f,
+                                                                                        to,
+                                                                                        t)));
+    }
+    
+    void SoraBaseCanvas::rotateTo(float to, float t) {
+        if(pCanvasSprite)
+            pCanvasSprite->addModifierAdapter(CreateModifierAdapter(pCanvasSprite, 
+                                                                    CreateEffectRotation(pCanvasSprite->getRotation(),
+                                                                                            to,
+                                                                                            t)));
+    }
+    
+    void SoraBaseCanvas::scaleTo(float h, float v, float t) {
+        if(pCanvasSprite)
+            pCanvasSprite->addModifierAdapter(CreateModifierAdapter(pCanvasSprite, 
+                                                                    CreateEffectScale(pCanvasSprite->getHScale(),
+                                                                                        pCanvasSprite->getVScale(),
+                                                                                        h,
+                                                                                        v,
+                                                                                        t)));
+    }
+    
+    void SoraBaseCanvas::fadeToAndNotify(float to, float t, const NotificationFunc& func) {
+        if(pCanvasSprite)
+            pCanvasSprite->addModifierAdapter(CreateModifierAdapterWithNotification(pCanvasSprite, 
+                                                                                    CreateEffectFade(CGETA(pCanvasSprite->getColor()),
+                                                                                                        to,
+                                                                                                        t),
+                                                                                    func));
+    }
+    
+    void SoraBaseCanvas::rotateTo(float to, float t, const NotificationFunc& func) {
+        if(pCanvasSprite)
+            pCanvasSprite->addModifierAdapter(CreateModifierAdapterWithNotification(pCanvasSprite, 
+                                                                                    CreateEffectRotation(pCanvasSprite->getRotation(),
+                                                                                                            to,
+                                                                                                            t),
+                                                                                    func));
+    }
+    
+    void SoraBaseCanvas::scaleTo(float h, float v, float t, const NotificationFunc& func) {
+        if(pCanvasSprite)
+            pCanvasSprite->addModifierAdapter(CreateModifierAdapterWithNotification(pCanvasSprite, 
+                                                                                    CreateEffectScale(pCanvasSprite->getHScale(),
+                                                                                                        pCanvasSprite->getVScale(),
+                                                                                                        h,
+                                                                                                        v,
+                                                                                                        t),
+                                                                                    func));
+    }
     
 } // namespace sora

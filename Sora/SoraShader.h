@@ -15,13 +15,14 @@
 #include "SoraNamedObject.h"
 #include "SoraAutoPtr.h"
 #include "SoraRefCounted.h"
+#include "SoraString.h"
 #include "util/SoraAutoContainer.h"
 #include <list>
 
 namespace sora {
 	
 	typedef enum {
-        UNKNOWN_SHADEr = 0,
+        UNKNOWN_SHADER = 0,
 		/* vertex shader */
 		VERTEX_SHADER = 1,
 		/* fragment shader */
@@ -38,11 +39,14 @@ namespace sora {
 	*/
 	class SORA_API SoraShader: public SoraRefCounted {
 		friend class SoraShaderContext;
-		
+        
 	public:
         SoraShader();
-		virtual ~SoraShader();
-		
+        virtual ~SoraShader();
+        
+        static SoraShader* LoadFromFile(const StringType& file, const SoraString& entry, int32 type);
+        static SoraShader* LoadFromMemory(const char* data, const SoraString& entry, int32 type);
+        static void Free(SoraShader* shader);
 		
 		/*
 			Set a parameterf
@@ -123,13 +127,15 @@ namespace sora {
     };
 	
 	class SORA_API SoraShaderContext {
-	public:
+    public:
+        SoraShaderContext();
+        virtual ~SoraShaderContext();
+
         typedef std::list<SoraShader*> ShaderList;
 
-		SoraShaderContext();
-		virtual ~SoraShaderContext();
-		
 		void clear();
+        
+        static SoraShaderContext* Create();
         
         /**
          * create a shader from context, not attach
@@ -138,8 +144,9 @@ namespace sora {
          * @param type, the type of the shader
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
-        virtual SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type) = 0;
-        
+        virtual SoraShader* createShader(const StringType& file, const SoraString& entry, int32 type) = 0;
+        virtual SoraShader* createShaderFromMem(const char* data, const SoraString& entry, int32 type) = 0;
+       
 		/**
          * attach a shader to context
          * @param file, the path of the shader file to attach
@@ -147,18 +154,18 @@ namespace sora {
          * @param type, the type of the shader
          * @retval, the handle to the attached shader, is 0 if attach failed
 		 */
-        SoraShader* attachShader(const SoraWString& file, const SoraString& entry, int32 type);
+        SoraShader* attachShader(const StringType& file, const SoraString& entry, int32 type);
         
         /**
          * Create and attach a fragment shader
          * Would through a RuntimeException in case there is a error
          **/
-        SoraShader* attachFragmentShader(const SoraWString& file, const SoraString& entry);
+        SoraShader* attachFragmentShader(const StringType& file, const SoraString& entry);
         /**
          * Create and attach a vertex shader
          * Would through a RuntimeException in case there is a error
          **/
-        SoraShader* attachVertexShader(const SoraWString& file, const SoraString& entry);
+        SoraShader* attachVertexShader(const StringType& file, const SoraString& entry);
         
         void attachShader(SoraShader* shader);
         void attachFragmentShader(SoraShader* shader);
@@ -197,13 +204,6 @@ namespace sora {
         ShaderPtr mVertexShader;
         ShaderPtr mFragmentShader;
     };
-    
-    static void FreeShader(SoraShader* shader) {
-        SoraShaderContext* context = shader->getShaderContext();
-        if(!context)
-            THROW_SORA_EXCEPTION(IllegalStateException, "Caught wild shader without ShaderContext, possible bug");
-        else context->detachShader(shader);
-    }
 
 } // namespace sora
 

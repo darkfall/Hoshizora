@@ -18,7 +18,7 @@ namespace sora {
     public:
         SoraFontRotationModifier(float begin, float end, float inTime, bool mLineRotation=true, bool mRotateChar=false);
     
-        int32   update(float dt);
+        bool   update(float dt);
         void    modify(SoraFont* font);
         void    reset();
 
@@ -38,7 +38,7 @@ namespace sora {
     public:
         SoraFontScaleModifier(float begin, float end, float inTime);
         
-        int32   update(float dt);
+        bool   update(float dt);
         void    modify(SoraFont* font);
         void    reset();
         

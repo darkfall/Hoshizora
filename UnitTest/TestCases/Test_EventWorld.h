@@ -46,7 +46,7 @@ namespace SoraUnit {
             mEvent += std::string("Received custom event: ")+evt->getMssg() + "\n";
         }
         
-        uint32 update(float32 dt) {
+        int32 update(float32 dt) {
             mEvent += std::string("Updated\n");
         }
         

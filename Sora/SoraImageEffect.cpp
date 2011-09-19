@@ -122,7 +122,7 @@ namespace sora {
 		t_transformer = transformer;
 	}
 	
-	int32 SoraImageEffect::update(float delta) {
+	bool SoraImageEffect::update(float delta) {
 		if(started == 1) {
 			if(paused == 1) {
 				pauseTime += delta;
@@ -130,7 +130,7 @@ namespace sora {
 					if(pauseTime > topauseTime)
 						resume();
 				
-				return states;
+				return false;
 			}
 			
 			startTime += delta;
@@ -139,8 +139,8 @@ namespace sora {
 				switch(mode) {
 					case IMAGE_EFFECT_ONCE:
 						states = IMAGE_EFFECT_END;
-                        if(mDelegatePtr != NULL) {
-                            mDelegatePtr->notify(this, states);
+                        if(mDelegate) {
+                            mDelegate(this);
                         }
                         
 						t_curr = t_dst;
@@ -173,7 +173,7 @@ namespace sora {
             }
 			
 		}
-		return states;
+		return states==IMAGE_EFFECT_END;
 	}
 	
 	bool SoraImageEffect::checkRepeatTimes() {
@@ -186,8 +186,8 @@ namespace sora {
 				states = IMAGE_EFFECT_END;
 				started = 0;
                 
-                if(mDelegatePtr != NULL) {
-                    mDelegatePtr->notify(this, states);
+                if(mDelegate) {
+                    mDelegate(this);
                 }
                 return true;
 			}
@@ -287,7 +287,7 @@ namespace sora {
         return newlist;
     }
 
-	int32 SoraImageEffectList::update(float delta) {
+	bool SoraImageEffectList::update(float delta) {
 		if(mCurrEffect) {
 			int32 result = mCurrEffect->update(delta);
 			if(result == IMAGE_EFFECT_END) {
@@ -305,18 +305,18 @@ namespace sora {
 								mCurrEffect->swap();
 								mCurrEffect->start(IMAGE_EFFECT_ONCE, mCurrEffect->getEffectTime());
 								
-								return IMAGE_EFFECT_PLAYING;
+								return false;
 							} else if(mListMode == IMAGE_EFFECT_REPEAT) {
 								mCurrEffect = getListHead();
 								mCurrEffect->start(IMAGE_EFFECT_ONCE, mCurrEffect->getEffectTime());
 								
-								return IMAGE_EFFECT_PLAYING;
+								return false;
 							} else {
-                                if(mDelegatePtr != NULL) {
-                                    mDelegatePtr->notify(this, states);
+                                if(mDelegate) {
+                                    mDelegate(this);
                                 }
                                 
-								return IMAGE_EFFECT_END;
+								return true;
                             }
 						}
 					} else {
@@ -328,11 +328,11 @@ namespace sora {
 								
 								return IMAGE_EFFECT_PLAYING;
 							} else {
-                                if(mDelegatePtr != NULL) {
-                                    mDelegatePtr->notify(this, states);
+                                if(mDelegate) {
+                                    mDelegate(this);
                                 }
                 
-								return IMAGE_EFFECT_END;
+								return true;
                             }
 						}
 						
@@ -344,9 +344,9 @@ namespace sora {
 					}
 				}
 			}
-			return IMAGE_EFFECT_PLAYING;
+			return false;
 		}
-		return IMAGE_EFFECT_END;
+		return true;
 	}
 	
 	SoraImageEffectFade::SoraImageEffectFade(float src, float dst, float _time, IMAGE_EFFECT_MODE _mode,

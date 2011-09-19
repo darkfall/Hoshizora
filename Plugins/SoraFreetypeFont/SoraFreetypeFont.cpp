@@ -6,7 +6,7 @@ namespace sora {
 		if(loaded) {
 			FT_Done_Face(face);
 			if(fontDataBuffer)
-				sora::SORA->freeResourceFile(fontDataBuffer);
+				sora_free(fontDataBuffer);
 		}
 	}
 
@@ -18,11 +18,14 @@ namespace sora {
 			}
 			fontDataBuffer = NULL;
 		} else {
-			if(FT_New_Memory_Face(library, (FT_Bytes)name, size, 0, &face)) {
+            fontDataBuffer = sora_malloc(size);
+            if(fontDataBuffer)
+                memcpy(fontDataBuffer, (void*)name, size);
+            
+			if(FT_New_Memory_Face(library, (FT_Bytes)fontDataBuffer, size, 0, &face)) {
 				THROW_SORA_EXCEPTION(RuntimeException, "Error creating new face");
 				return false;
 			}
-			fontDataBuffer = (void*)name;
 		}
 
 		loaded = true;

@@ -25,8 +25,8 @@ namespace sora {
 	class SORA_API SoraResourceFileAuto: SoraUncopyable {
 	public:
         SoraResourceFileAuto();
-		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
 		explicit SoraResourceFileAuto(const StringType& file, bool retain=false);
+		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
         SoraResourceFileAuto(const StringType& file, ulong32 size, bool retain=false);
 		~SoraResourceFileAuto();
         
@@ -40,9 +40,6 @@ namespace sora {
 		
 		operator void*();
 		operator char*();
-		operator unsigned int*();
-		operator unsigned long*();
-		operator unsigned char*();
 		operator int*();
 		operator long*();
 		

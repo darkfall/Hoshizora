@@ -25,7 +25,7 @@ namespace sora {
         virtual ~SoraBaseCanvas();
         
         void render();
-        uint32 update(float dt);
+        int32 update(float dt);
         
         void beginRender(ulong32 col=0xFF000000);
         void finishRender();
@@ -39,6 +39,15 @@ namespace sora {
 		bool hasEffect() const;
         
         SoraSprite* getCanvasSprite() const;
+        
+        void fadeTo(float to, float t);
+        void rotateTo(float to, float t);
+        void scaleTo(float h, float v, float t);
+        
+        typedef SoraFunction<void(SoraSprite*)> NotificationFunc;
+        void fadeToAndNotify(float to, float t, const NotificationFunc& func);
+        void rotateTo(float to, float t, const NotificationFunc& func);
+        void scaleTo(float h, float v, float t, const NotificationFunc& func);
         
 	private:
         inline void _attachTarget();
