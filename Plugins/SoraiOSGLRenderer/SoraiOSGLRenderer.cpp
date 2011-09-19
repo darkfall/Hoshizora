@@ -381,7 +381,8 @@ namespace sora{
 														   &w, &h, &channels);
 		
 		if(!texid) {
-			throw SORA_EXCEPTION(RuntimeException, "Error loading texture");
+			log_error("Error loading texture");
+            return 0;
 		}
 		
 		// ios max texture size = 1024

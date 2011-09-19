@@ -331,7 +331,9 @@ void rfMainWindow::init() {
 	
 	CORE->registerResourceManager(new sora::SoraZipResourceManager);
 	CORE->attachResourcePack(CORE->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource"));
-	
+	printf("%s\n", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
+    printf("%d, %d\n", getWindowWidth(), getWindowHeight());
+    
     bgm = CORE->createMusicFile(L"02.mp3", true);
     se = CORE->createSoundEffectFile(SoraWString(L"click_08.wav"));
     bgm->play();
@@ -384,12 +386,12 @@ void rfMainWindow::init() {
 	pcontinue->addActionListener(listener);
 	pTop->add(pcontinue);
 	
-/*	pretry->setEnabled(false);
+	pretry->setEnabled(false);
 	pretry->setVisible(false);
 	pext->setEnabled(false);
 	pext->setVisible(false);
 	pcontinue->setEnabled(false);
-	pcontinue->setVisible(false);*/
+	pcontinue->setVisible(false);
 	
 	rfState = STATE_LOGO;
 	logoCount = 0.f;

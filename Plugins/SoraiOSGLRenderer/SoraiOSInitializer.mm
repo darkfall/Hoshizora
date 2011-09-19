@@ -33,11 +33,12 @@ namespace sora {
             SORA->registerInput(new sora::SoraiOSInput);
             SORA->registerTimer(new sora::SoraiOSTimer);
             
-            SORA->createWindow(window);
         } catch(SoraException& e) {
             SORA->messageBox(e.what(), "Fatal error", MB_OK);
             SORA->shutDown();
         }
+        
+        SORA->createWindow(window);
         SORA->start();
     }
     
@@ -53,6 +54,7 @@ namespace sora {
         if(pTimer->update()) {
             sora::SoraTimestamp time;
             sora::SORA_IOS->SoraiOSUpdateSystems();
+            printf("%d\n", time.elapsed());
         }
         return false;
     }

@@ -85,8 +85,10 @@ namespace sora {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file))) {
             uint8* pdata = (uint8*)sora_malloc((ulong32)stream.size()+1);
+            memset(pdata, 0, stream.size());
 			if(pdata != NULL) {
                 size = stream.read(pdata, stream.size());
+
                 pdata[size] = 0;
 				return (void*)pdata;
 			}

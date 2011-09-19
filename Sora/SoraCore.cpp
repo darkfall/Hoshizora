@@ -775,6 +775,7 @@ namespace sora {
 		if((tex = SoraTextureMap::Instance()->get(SoraPath::resourceW() + realPath)) != 0) return tex;
 		ulong32 size;
 		void* data = getResourceFile(realPath, size);
+        printf("%s\n", (const char*)data+12);
 		if(data) {
 			tex = (HSORATEXTURE)pRenderSystem->createTextureFromMem(data, size, bMipmap);
 			if(tex) {
