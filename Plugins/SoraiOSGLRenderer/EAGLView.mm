@@ -55,7 +55,6 @@
     
     if(sora::_IS_RETINA_DISPLAY()) {
         self.contentScaleFactor = 2.0;
-        sora::setScaleFactor(2.0f);
     }
     
     sora::setEAGLView(self);
@@ -337,22 +336,26 @@
 }
 
 - (void)orientationChanged:(NSNotification *)note {
+    sora::iOSOrientation orientation;
+    
     switch([[note object] orientation]) {
         case UIDeviceOrientationPortrait:
-            sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_PORTRAIT);
+            orientation = sora::ORIENTATION_PORTRAIT;
             break;
         case UIDeviceOrientationPortraitUpsideDown:
-            sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_PORTRAIT_UPSIDE_DOWN);
+            orientation = sora::ORIENTATION_PORTRAIT_UPSIDE_DOWN;
             break;
         case UIDeviceOrientationLandscapeLeft:
-            sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_LANDSCAPE_LEFT);
+            orientation = sora::ORIENTATION_LANDSCAPE_LEFT;
             break;
         case UIDeviceOrientationLandscapeRight:
-            sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_LANDSCAPE_RIGHT);
+            orientation =  sora::ORIENTATION_LANDSCAPE_RIGHT;
             break;
         default:
             break;
     }
+    
+    sora::SoraiOSInitializer::Instance()->setOrientation(orientation);
 }
 
 - (void)layoutSubviews
@@ -367,6 +370,14 @@
 
 - (int)getScreenHeight {
     return framebufferHeight / [self contentScaleFactor];
+}
+
+- (int)getViewWidth {
+    return framebufferWidth;
+}
+
+- (int)getViewHeight {
+    return framebufferHeight;
 }
 
 - (float)getContentsScale {

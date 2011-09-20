@@ -16,6 +16,8 @@
 #include "llexer.h"
 #include "SoraiOSDeviceHelper.h"
 #include "SoraTimestamp.h"
+#include "SoraiOSInitializer.h"
+
 
 class buttonListener: public gcn::ActionListener {
 public:
@@ -49,7 +51,7 @@ sora::SoraMusicFile* bgm;
 sora::SoraSoundEffectFile* se;
 bool rfMainWindow::renderFunc() {		
 	//CORE->setTransform(0.f, 0.f, 0.f, 0.f, 1.f, 1.f, 1.f)
-    
+
 	CORE->beginScene(0);
 	if(rfState != STATE_LOGO) {
 		pBG->render(0.f, 0.f);
@@ -81,11 +83,12 @@ bool rfMainWindow::renderFunc() {
 	}
 		CORE->endScene();
 
-   /* CORE->beginScene();
+  /*  CORE->beginScene();
     spr->setTexture(sora::SORA->getTargetTexture(fbo));
  //   spr->setScale(0.5f, 0.5f);
     spr->render();
 
+    
     
 
     CORE->endScene();*/
@@ -325,7 +328,6 @@ size_t rfMainWindow::getAvailableMapCount() const {
 #include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraFileUtility.h"
 
-
 void rfMainWindow::init() {
 	CORE = sora::SoraCore::Instance();
 	
@@ -337,6 +339,8 @@ void rfMainWindow::init() {
     bgm = CORE->createMusicFile(L"02.mp3", true);
     se = CORE->createSoundEffectFile(SoraWString(L"click_08.wav"));
     bgm->play();
+    
+    sora::SORA_IOS->enableAccelerometer(true);
     
 	pBG = CORE->createSprite(L"magicCircle.png");
 	//if(pBG) pBG->setScale(pBG->getTextureWidth()/getWindowWidth(), pBG->getTextureHeight()/getWindowHeight());
@@ -400,6 +404,8 @@ void rfMainWindow::init() {
 		rfState = STATE_GAMING;
     spr = new sora::SoraSprite(0);
     fbo = sora::SORA->createTarget(getWindowWidth(), getWindowHeight());
+    
+//    sora::SORA->enableFullscreenBuffer(true);
 //	else {
 //		pLogoAnim->play();
 //	}

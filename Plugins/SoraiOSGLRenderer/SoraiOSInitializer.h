@@ -20,6 +20,8 @@
 #include "SoraiOSSoundSystem/SoraOALParam.h"
 
 namespace sora {
+    
+    class SoraiOSMainWindow;
 	
 	class SoraiOSInitializer: public SoraSingleton<SoraiOSInitializer> {
 		friend class SoraSingleton<SoraiOSInitializer>;
@@ -27,11 +29,11 @@ namespace sora {
         void SoraiOSInit(bool isOGLES2API, bool multisampling=false);
 		
         SoraiOSInitializer() {}
-        ~SoraiOSInitializer() {}
+        ~SoraiOSInitializer();
         
 	public:
 		
-        void SoraiOSStart(SoraWindowInfoBase* window, const SoraOALParameters& soundParams=SoraOALParameters(), bool multisampling=false);
+        void SoraiOSStart(SoraiOSMainWindow* window, const SoraOALParameters& soundParams=SoraOALParameters(), bool multisampling=false);
 		void setTimer(SoraTimer* timer);
 		void setRenderSystem(SoraiOSGLRenderer* sys);
         
@@ -40,20 +42,30 @@ namespace sora {
         void SoraiOSShutDown();
         void enableMultisampling(bool flag);
         
-        int32 getScreenWidth();
-        int32 getScreenHeight();
-    
-        void setOrientation(int portrait);
-        int getOrientation() const;
+        // affect gyroscope and accelemeter update
+        // and must be set before you enable the acceleromter or gyroscope
+        // otherwise a restart is needed
+        void setDeviceUpdateInterval(float interval);
+        
+        void setOrientation(iOSOrientation orientation);
+        iOSOrientation getOrientation() const;
         
         void enableAccelerometer(bool flag);
         void getAccelerometerAttr(float* x, float* y, float* z);
+        
+        void enableGyroscope(bool flag);
+        void getGyroscopeAttr(float* x, float* y, float *z);
+        
+        SoraiOSMainWindow* getMainWindow() const;
         
 	private:
         SoraTimer* pTimer;
 		SoraiOSInput* input;
     
+        SoraiOSMainWindow* mMainWindow;
         SoraiOSGLRenderer* mRenderSystem;
+        
+        float mDeviceUpdateInterval;
 	};
 
 	static SoraiOSInitializer* SORA_IOS = SoraiOSInitializer::Instance();

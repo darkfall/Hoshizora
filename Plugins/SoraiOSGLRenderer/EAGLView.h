@@ -38,6 +38,9 @@
 
 - (int)getScreenWidth;
 - (int)getScreenHeight;
+- (int)getViewWidth;
+- (int)getViewHeight;
+
 - (float)getContentsScale;
 - (void)enableMultiSampling:(BOOL)flag;
 - (BOOL)isMultiSamplingEnabled;

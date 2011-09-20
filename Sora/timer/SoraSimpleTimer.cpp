@@ -74,7 +74,6 @@ namespace sora {
         mStartedTime += dt;
         
         if(step > 0) {
-            bool result = false;
             if(mTimes == 0) {
                 if(!mTimerFunc->notify(this, mPrevDelta))
                     return false;

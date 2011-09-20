@@ -230,7 +230,12 @@ namespace sora {
 #endif
             
             if(bEnableScreenBuffer) {
+#ifndef OS_IOS
                 mScreenBuffer = pRenderSystem->createTarget(iScreenWidth, iScreenHeight);
+#else
+                float scale = _IS_RETINA_DISPLAY() ? 2.0 : 1.0;
+                mScreenBuffer = pRenderSystem->createTarget(iScreenWidth*scale, iScreenHeight*scale);
+#endif
                 if(!mScreenBuffer) {
                     bEnableScreenBuffer = false;
                     THROW_SORA_EXCEPTION(SystemException, "Error creating fullscreen buffer, fullscreen posteffect maybe disabled");
@@ -775,7 +780,6 @@ namespace sora {
 		if((tex = SoraTextureMap::Instance()->get(SoraPath::resourceW() + realPath)) != 0) return tex;
 		ulong32 size;
 		void* data = getResourceFile(realPath, size);
-        printf("%s\n", (const char*)data+12);
 		if(data) {
 			tex = (HSORATEXTURE)pRenderSystem->createTextureFromMem(data, size, bMipmap);
 			if(tex) {
@@ -951,7 +955,7 @@ namespace sora {
             if(t == 0) {
                 bMainScene = true;
                 bScreenBufferAttached = true;
-                pRenderSystem->beginScene(0x00000000, mScreenBuffer, true);
+                pRenderSystem->beginScene(0xFF000000, mScreenBuffer, true);
             } else {
                 bMainScene = false;
                 bScreenBufferAttached = false;

@@ -12,17 +12,10 @@
 
 #include "SoraRenderSystem.h"
 #include "SoraiOSGLRenderTarget.h"
+#include "SoraiOSDeviceHelper.h"
 
 namespace sora {
 
-    // ios portraits
-    enum {
-        ORIENTATION_PORTRAIT,
-        ORIENTATION_PORTRAIT_UPSIDE_DOWN,
-        ORIENTATION_LANDSCAPE_LEFT,
-        ORIENTATION_LANDSCAPE_RIGHT
-    };
-	
 	class SoraiOSGLRenderer: public SoraRenderSystem {
 	public:
 		SoraiOSGLRenderer();
@@ -91,8 +84,8 @@ namespace sora {
         void setIcon(const SoraString& icon);
         void setCursor(const SoraString& cursor);
         
-        void setOrientation(int por);
-        int getOrientation() const;
+        void setOrientation(iOSOrientation por);
+        iOSOrientation getOrientation() const;
         
         void tranlatePointToGL(float* x, float* y);
         
@@ -151,7 +144,7 @@ namespace sora {
 
 		int iFrameStart;
         
-        int mOrientation;
+        iOSOrientation mOrientation;
 	};
 } // namespace sora
 

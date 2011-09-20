@@ -37,6 +37,13 @@ namespace sora {
             return sora::getScreenHeight();
         }
         
+        int32 getViewWidth() {
+            return sora::getViewWidth();
+        }
+        int32 getViewHeight() {
+            return sora::getViewHeight();
+        }
+        
         int32 getWindowPosX() { return 0; }
         int32 getWindowPosY() { return 0; }
         
@@ -56,10 +63,15 @@ namespace sora {
         
         virtual void init() { }
         
-        // ios background application recover event
-        virtual void onApplicationRecover() {
-            
+        // ios delegates
+        virtual void applicationWillResignActive() {}
+        virtual void applicationDidBecomeActive() {}
+        
+        virtual void didChangeStatusBarOrientation(iOSOrientation newOrientation, iOSOrientation oldOrientation) {
+        
         }
+        
+        virtual void didReceiveMemoryWarning() {}
         
     private:
     };

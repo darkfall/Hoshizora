@@ -28,6 +28,14 @@ namespace sora {
     static const int IOS_RETINA = 2;
     static const int IOS_IPAD = 3;
     
+    // ios portraits
+    enum iOSOrientation {
+        ORIENTATION_PORTRAIT,
+        ORIENTATION_PORTRAIT_UPSIDE_DOWN,
+        ORIENTATION_LANDSCAPE_LEFT,
+        ORIENTATION_LANDSCAPE_RIGHT
+    };
+    
     int32 getiOSDeviceType();
     std::string iOSDeviceTypeToString(int32 type);
 
@@ -40,7 +48,6 @@ namespace sora {
     SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRetina=true);
     SoraWString iOSGetDocumentResourceName(const SoraWString& origName, bool appendRetina=true);
 	
-    void setScaleFactor(float factor);
     float getScaleFactor();
     
     // only works for iPhone

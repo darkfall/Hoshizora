@@ -91,14 +91,8 @@ namespace sora {
         return g_useRetina;
     }
     
-    static float g_scaleFactor = 1.0;
-    
-    void setScaleFactor(float factor) {
-        g_scaleFactor = factor;
-    }
-    
     float getScaleFactor() {
-        return g_scaleFactor;
+        return _IS_RETINA_DISPLAY() ? 2.0 : 1.0;
     }
     
     void vabriateDevice() {

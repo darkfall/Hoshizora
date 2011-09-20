@@ -41,7 +41,7 @@ namespace sora {
             return mType;
         }
         
-        SORA_EVENT_IDENTIFIER(18446744070299896253LL);
+        SORA_EVENT_IDENTIFIER(18446744070299896253ULL);
         
     private:
         int32 mType;
@@ -54,7 +54,7 @@ namespace sora {
     }
 #else
     static bool IsSystemEvent(SoraEvent* evt) {
-        return evt->getEventIdentifier() == 18446744070299896253LL;
+        return evt->getEventIdentifier() == 18446744070299896253ULL;
     }
 #endif
     

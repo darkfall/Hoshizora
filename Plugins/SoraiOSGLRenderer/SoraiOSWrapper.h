@@ -10,6 +10,7 @@
 #define Sora_iPhone_SoraiOSWrapper_h
 
 #include "SoraPlatform.h"
+#include "SoraiOSDeviceHelper.h"
 
 #ifdef OS_IOS
 
@@ -20,11 +21,14 @@ namespace sora {
     void presentEAGLFBO();
     void* getEAGLView();
     void setupMultisampling(bool flag);
+    
     int getScreenWidth();
     int getScreenHeight();
+    int getViewWidth();
+    int getViewHeight();
+    
     float getContentsScale();
-    void setPortrait(int p);
-
+    void setOrientation(iOSOrientation p);
     
     // tranlate a point into corresponding orientation view
     void translatePointToView(float* x, float *y);

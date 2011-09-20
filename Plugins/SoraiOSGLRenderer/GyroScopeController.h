@@ -11,10 +11,25 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-@interface GyroScopeController : NSObject {
-@private
-    
+@interface SoraiOSGyroScopeController : NSObject {
+    CMMotionManager* motionManager;
+    float x;
+    float y;
+    float z;
+    float interval;
 }
+
+- (void)prepare;
+- (void)stop;
+- (void)setInterval:(float)interval;
+
+@property(nonatomic, retain) CMMotionManager* motionManager;
+
+@property(nonatomic, readonly) float x;
+@property(nonatomic, readonly) float y;
+@property(nonatomic, readonly) float z;
+@property(nonatomic, readonly) float interval;
+
 @end
 
 

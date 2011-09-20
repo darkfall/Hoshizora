@@ -17,7 +17,7 @@
 namespace sora {
     
     static EAGLView* g_view = 0;
-    static int g_portrait = ORIENTATION_PORTRAIT;
+    static iOSOrientation g_orientation = ORIENTATION_PORTRAIT;
     
     void setEAGLView(void* view) {
         g_view = (EAGLView*)view;
@@ -40,32 +40,45 @@ namespace sora {
     }
     
     int getScreenWidth() {
-        if(g_portrait == ORIENTATION_LANDSCAPE_LEFT || g_portrait == ORIENTATION_LANDSCAPE_RIGHT) {
-           return iOSGetScreenHeight(false);
+        if(g_orientation == ORIENTATION_LANDSCAPE_LEFT || g_orientation == ORIENTATION_LANDSCAPE_RIGHT) {
+           return [g_view getScreenHeight];
         }
         return [g_view getScreenWidth];
     }
     
     int getScreenHeight() {
-        if(g_portrait == ORIENTATION_LANDSCAPE_LEFT || g_portrait == ORIENTATION_LANDSCAPE_RIGHT) {
+        if(g_orientation == ORIENTATION_LANDSCAPE_LEFT || g_orientation == ORIENTATION_LANDSCAPE_RIGHT) {
             return [g_view getScreenWidth];
         }
         return [g_view getScreenHeight];
+    }
+    
+    int getViewWidth() {
+        if(g_orientation == ORIENTATION_LANDSCAPE_LEFT || g_orientation == ORIENTATION_LANDSCAPE_RIGHT) {
+            return [g_view getViewHeight];
+        }
+        return [g_view getViewWidth];
+    }
+    
+    int getViewHeight() {
+        if(g_orientation == ORIENTATION_LANDSCAPE_LEFT || g_orientation == ORIENTATION_LANDSCAPE_RIGHT) {
+            return [g_view getViewWidth];
+        }
+        return [g_view getViewHeight];
     }
     
     float getContentsScale() {
         return [g_view getContentsScale];
     }
     
-    void setPortrait(int flag) {
-        g_portrait = flag;
+    void setOrientation(iOSOrientation flag) {
+        g_orientation = flag;
     }
-    
     
     void translatePointToView(float* x, float* y) {        
         float newX = iOSGetScreenWidth(false) - *x;
         float newY = iOSGetScreenHeight(false) - *y;
-        switch(g_portrait) {
+        switch(g_orientation) {
             case ORIENTATION_PORTRAIT_UPSIDE_DOWN:
                 *x = newX;
                 *y = newY;
@@ -84,7 +97,7 @@ namespace sora {
     void translatePointToGL(float* x, float *y) {
         float newX = iOSGetScreenWidth(false) - *x;
         float newY = iOSGetScreenHeight(false) - *y;
-        switch(g_portrait) {
+        switch(g_orientation) {
             case ORIENTATION_PORTRAIT_UPSIDE_DOWN:
                 *x = newX;
                 *y = newY;

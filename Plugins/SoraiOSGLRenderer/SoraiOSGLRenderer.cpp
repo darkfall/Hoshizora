@@ -915,11 +915,11 @@ namespace sora{
         
     }
     
-    void SoraiOSGLRenderer::setOrientation(int por) {
+    void SoraiOSGLRenderer::setOrientation(iOSOrientation por) {
         mOrientation = por;
     }
     
-    int SoraiOSGLRenderer::getOrientation() const {
+    iOSOrientation SoraiOSGLRenderer::getOrientation() const {
         return mOrientation;
     }
     

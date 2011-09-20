@@ -9,17 +9,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AccelerometerController : NSObject <UIAccelerometerDelegate> {
+@interface SoraiOSAccelerometerController : NSObject <UIAccelerometerDelegate> {
 @private
     float x, y, z;
+    float interval;
 }
 
 @property(nonatomic,readonly) float x;
 @property(nonatomic,readonly) float y;
 @property(nonatomic,readonly) float z;
+@property(nonatomic,readonly) float interval;
 
 - (void) prepare;
 - (void) stop;
+- (void) setInterval:(float)interval;
 
 
 @end

@@ -9,16 +9,17 @@
 
 #include "AccelerometerController.h"
 
-@implementation AccelerometerController
+@implementation SoraiOSAccelerometerController
 
 @synthesize x;
 @synthesize y;
 @synthesize z;
+@synthesize interval;
 
 - (void) prepare {
 	UIAccelerometer* accelerometer = [UIAccelerometer sharedAccelerometer];
 	
-	accelerometer.updateInterval = 1.f/60.f;
+	accelerometer.updateInterval = interval;
 	accelerometer.delegate = self;
 }
 
@@ -32,6 +33,10 @@
     x = accl.x;
     y = accl.y;
     z = accl.z;
+}
+
+- (void)setInterval:(float)_interval {
+    interval = _interval;
 }
 
 @end
