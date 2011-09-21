@@ -38,7 +38,8 @@ namespace sora {
     Icon(std::string()),
     Cursor(std::string()),
     WindowTitle("Sora App"),
-    WindowId("MainWindow") {
+    WindowId("MainWindow"),
+    Window(0) {
         SoraConfigParser parser;
         if(parser.open(loadFromConfig, CONFIG_AUTO_DETECT)) {
             if(parser.toNode("/app/window")) {
