@@ -784,10 +784,6 @@ namespace sora {
 		return pResourceFileFinder->loadResourcePack(file);
 	}
 
-	void SoraCore::attachResourcePack(SoraResourceHandle pfile) {
-		pResourceFileFinder->attachResourcePack(pfile);
-	}
-
 	void SoraCore::detachResourcePack(SoraResourceHandle handle) {
 		pResourceFileFinder->detachResourcePack(handle);
 	}
@@ -1297,6 +1293,9 @@ namespace sora {
 			return;
 		}
 		
+        if(font == this->getSystemFont()) {
+            setSystemFont((SoraFont*)0);
+        }
 		pFontManager->releaseFont(font);
 	}
 	
@@ -1528,4 +1527,22 @@ namespace sora {
         return scale;
     }
     
+    SoraMusicFile* SoraCore::createMusicFileFromMemory(void* pdata, ulong32 size) {
+        if(pSoundSystem)
+            return pSoundSystem->createMusicFileFromMemory(pdata, size);
+        return 0;
+    }
+    
+    SoraSoundEffectFile* SoraCore::createSoundEffectFileFromMemory(void* pdata, ulong32 size) {
+        if(pSoundSystem)
+            return pSoundSystem->createSoundEffectFileFromMemory(pdata, size);
+        return 0;
+    }
+    
+#ifdef SORA_ENABLE_MULTI_THREAD
+
+    void SoraCore::loadResourceFileAsync(const StringType& file, const SoraResourceFileFinder::AsyncNotification& handler, void* puserdata) {
+        pResourceFileFinder->loadResourceFileAsync(file, handler, puserdata);
+    }
+#endif    
 } // namespace sora

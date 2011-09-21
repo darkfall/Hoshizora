@@ -75,10 +75,32 @@ private:
     sora::SoraPostEffect mPostEffect;
 };
 
+static int count = 0;
+void asyncLoad(void* data,ulong32 size,void* userdata) {
+    printf("** loaded data with size: %d, c : %d\n", size, count);
+    sora::SoraResourceManager::FreeResourceFile(data);
+    ++count;
+}
+struct myClass {
+    void asyncLoad(void* data,ulong32 size,void* userdata) {
+        printf("** loaded data with size: %d, c : %d\n", size, count);
+        sora::SoraResourceManager::FreeResourceFile(data);
+        ++count;
+    }
+};
+
 int main(int argc, char* argv[]) {    
         
     sora::SoraGameAppDef def("config.xml");
     sora::SoraGameApp app(def);
+    
+    sora::SoraResourceManager::LoadAndAttachResourcePack("Textures.zip");
+    
+    myClass* obj = new myClass;
+    for(int i=0; i<1000; ++i) {
+        sora::SoraResourceManager::LoadResourceFileAsync("Textures/Particle006.png", asyncLoad);
+        sora::SoraResourceManager::LoadResourceFileAsync("02.mp3", sora::Bind(obj, &myClass::asyncLoad));
+    }
     
     app.addState(new GameInitState, "init");
     app.run("init");

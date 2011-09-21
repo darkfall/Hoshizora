@@ -40,7 +40,7 @@ namespace sora {
         void onRender();
         
     private:
-        typedef hash_map<SoraString, SoraComponent*> ComponentMap;
+        typedef sora_hash_map<SoraString, SoraComponent*> ComponentMap;
         ComponentMap mComponents;
     };
     

@@ -37,7 +37,7 @@ namespace sora {
         };
     }
     
-#ifdef SORA_ENABLE_MULTI_THREAD
+/*#ifdef SORA_ENABLE_MULTI_THREAD
     class SoraEventWorldImpl: public detail::EventWorldImpl {
     public:
         void update(float dt);
@@ -49,7 +49,7 @@ namespace sora {
         void broadcastingDirect(SoraEvent* evt);
     };
     
-#else 
+#else */
     class SoraEventWorldImpl: public detail::EventWorldImpl {
     public:
         typedef std::vector<SoraEvent*> EventList;
@@ -82,7 +82,7 @@ namespace sora {
         SoraScopedPtr<EventList> mCurrEvtList;
         SoraScopedPtr<EventList> mNextEvtList;
     };
-#endif // SORA_ENABLE_MULTI_THREAD
+//#endif // SORA_ENABLE_MULTI_THREAD
     
 } // namespace sora
 

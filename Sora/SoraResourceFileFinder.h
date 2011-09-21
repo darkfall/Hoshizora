@@ -15,8 +15,14 @@
 #include "SoraAutoPtr.h"
 #include "SoraStringId.h"
 #include "SoraRefCounted.h"
+#include "SoraFunction.h"
 #include <vector>
 #include <map>
+
+#ifdef SORA_ENABLE_MULTI_THREAD
+#include "thread/SoraThreadPool.h"
+#include "thread/SoraMutex.h"
+#endif
 
 namespace sora {
 	
@@ -31,7 +37,6 @@ namespace sora {
 		void detachResourceManager(const StringType& name);
 		
 		ulong32	loadResourcePack    (const StringType& file);
-		void	attachResourcePack	(ulong32 handle);
 		void	detachResourcePack  (ulong32 handle);
 		
 		void*   readResourceFile			(const StringType& file, ulong32 size);
@@ -42,6 +47,18 @@ namespace sora {
 		bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder);
         
         static ulong32 ResourceMemory;
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        typedef SoraFunction<void(void*, ulong32, void*)> AsyncNotification;
+        void loadResourceFileAsync(const StringType& file, const AsyncNotification& notification, void* userdata);
+    private:
+        struct IoThreadParam {
+            AsyncNotification mNotification;
+            StringType mName;
+            void* mUserData;
+        };
+        void ioThreadFunc(void* arg);
+#endif
         
 	private:		
 		typedef std::vector<SoraAutoPtr<SoraResourceManager> > RESOURCE_MANAGER_CONT;
@@ -61,6 +78,12 @@ namespace sora {
         };
         typedef std::map<SoraStringId, ResourceInfo> AvailableResourceMap;
         AvailableResourceMap mResources;
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        SoraThreadPool mIOThreadPool;
+        SoraMutexLock mIOMutex;
+        SoraMutexLock mThreadMutex;
+#endif
 	};
 	
 }

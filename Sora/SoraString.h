@@ -43,6 +43,9 @@ namespace sora {
             String& operator=(const String& str);
             String operator+(const String& str) const;
             String& operator+=(const String& str);
+            
+            bool operator<(const String& rhs) const;
+            bool operator>(const String& rhs) const;
            
             operator std::string() const {
                 return mString;
@@ -184,6 +187,13 @@ namespace sora {
             mString.clear();
         }
         
+        inline bool String::operator<(const String& rhs) const {
+            return mString < rhs.mString;
+        }
+        
+        inline bool String::operator>(const String& rhs) const {
+            return mString > rhs.mString;
+        }
     }
     
     typedef ::sora::util::String StringType;

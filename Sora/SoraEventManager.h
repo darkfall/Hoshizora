@@ -106,7 +106,7 @@ namespace sora {
 		
 		typedef uint32 EVENT_ID;
 		typedef std::vector<SoraEventInfo> EVENT_LIST;
-		typedef hash_map<EVENT_ID, EVENT_LIST > EVENT_MAP;
+		typedef sora_hash_map<EVENT_ID, EVENT_LIST > EVENT_MAP;
 		EVENT_MAP evMap;
 		
 		class SoraTimerEventInfo {

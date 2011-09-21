@@ -18,6 +18,11 @@ namespace sora {
 	}
 	
 	SoraResourceFileFinder::~SoraResourceFileFinder() {
+#ifdef SORA_ENABLE_MULTI_THREAD
+        SoraMutexGuard guard(mThreadMutex);
+
+        mIOThreadPool.stop();
+#endif
 	}
 	
 	void SoraResourceFileFinder::attachResourceManager(SoraResourceManager* rm) {
@@ -37,6 +42,9 @@ namespace sora {
 		void* data;
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			if((data = mResourceManagers[i]->readResourceFile(file, size)) != NULL) {
+#ifdef SORA_ENABLE_MULTI_THREAD
+                SoraMutexGuard guard(mIOMutex);
+#endif
                 ResourceMemory += size;
                 
                 AutoPtrType resource(static_cast<uint8*>(data));
@@ -56,6 +64,9 @@ namespace sora {
 		void* data;
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			if((data = mResourceManagers[i]->getResourceFile(file, size)) != NULL) {
+#ifdef SORA_ENABLE_MULTI_THREAD
+                SoraMutexGuard guard(mIOMutex);
+#endif
                 ResourceMemory += size;
                 
                 AutoPtrType resource(static_cast<uint8*>(data));
@@ -83,7 +94,13 @@ namespace sora {
 	}
 	
 	void SoraResourceFileFinder::freeResourceFile(void* p) {
-		sora_assert(p);
+		if(!p)
+            return;
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        SoraMutexGuard guard(mIOMutex);
+#endif
+        
         AvailableResourceMap::iterator itResource = mResources.find((ulong32)p);
         if(itResource != mResources.end()) {
             ResourceMemory -= itResource->second.mSize;
@@ -109,11 +126,6 @@ namespace sora {
 		return 0;
 	}
 	
-	void SoraResourceFileFinder::attachResourcePack(ulong32 file) {
-		// simply does nothing
-		// for compability with old versions
-	}
-	
 	void SoraResourceFileFinder::detachResourcePack(ulong32 handle) {
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			mResourceManagers[i]->detachResourcePack(handle);
@@ -130,4 +142,34 @@ namespace sora {
 		
 		return mResourceManagers[0]->enumFiles(cont, folder);
 	}
+    
+#ifdef SORA_ENABLE_MULTI_THREAD
+    
+    void SoraResourceFileFinder::ioThreadFunc(void* arg) {
+        
+        IoThreadParam* param = static_cast<IoThreadParam*>(arg);
+        ulong32 size;
+        void* pdata = getResourceFile(param->mName, size);
+        param->mNotification(pdata, size, param->mUserData);
+        
+        delete param;
+    }
+    
+    void SoraResourceFileFinder::loadResourceFileAsync(const StringType& file, const AsyncNotification& notification, void* userdata) {
+        if(!mIOThreadPool.isRunning()) {
+            mIOThreadPool.start(SORA_MAX_IO_THREAD);
+        }
+        SoraThreadTask task(&SoraResourceFileFinder::ioThreadFunc, this);
+        IoThreadParam* param = new IoThreadParam;
+        param->mName = file;
+        param->mNotification = notification;
+        param->mUserData = userdata;
+        task.setArg(param);
+        
+        SoraMutexGuard guard(mThreadMutex);
+        mIOThreadPool.run(task);
+    }
+    
+#endif
+    
 } // namespace sora

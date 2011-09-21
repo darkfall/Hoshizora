@@ -46,13 +46,15 @@ namespace sora {
     }
     
     void SoraThreadPool::stop() {
-        running = false;
-        cond.notifyAll();
-        
-        THREAD_LIST::iterator itThread = threads.begin();
-        while(itThread != threads.end()) {
-            (*itThread)->join();
-            ++itThread;
+        if(running) {
+            running = false;
+            cond.notifyAll();
+            
+            THREAD_LIST::iterator itThread = threads.begin();
+            while(itThread != threads.end()) {
+                (*itThread)->join();
+                ++itThread;
+            }
         }
     }
     
@@ -87,8 +89,12 @@ namespace sora {
             }
         }
         catch(const SoraException& exp) {
-            log_mssg(exp.what());
+            log_error(exp.what());
         }
+    }
+    
+    bool SoraThreadPool::isRunning() const {
+        return running;
     }
     
     

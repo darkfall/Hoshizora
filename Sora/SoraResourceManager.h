@@ -4,7 +4,7 @@
 #include "SoraPlatform.h"
 #include "SoraException.h"
 #include "SoraString.h"
-#include <vector>
+#include "SoraFunction.h"
 
 namespace sora {
 	
@@ -31,6 +31,19 @@ namespace sora {
 		virtual bool isFormatSupported(const StringType& format) const = 0;
 		
 		virtual bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder) { return false; }
+        
+        static SoraResourceHandle LoadAndAttachResourcePack(const StringType& file);
+        static void DetachResourcePack(SoraResourceHandle handle);
+        static void* LoadResourceFile(const StringType& file, ulong32* size);
+        static ulong32 GetResourceFileSize(const StringType& file);
+        static void FreeResourceFile(void* p);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        
+        typedef SoraFunction<void(void*, ulong32, void*)> AsyncNotification;
+        static void LoadResourceFileAsync(const StringType& file, const AsyncNotification& handler, void* puserdata=0);
+        
+#endif
 	};
 	
 

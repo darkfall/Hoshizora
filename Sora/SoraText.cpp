@@ -147,8 +147,11 @@ namespace sora {
                 SoraCore::Instance()->endScene();
                 
                 mTextSprite = new SoraSprite(SoraCore::Instance()->getTargetTexture(mTarget));
+                
+                return mTextSprite;
             }
         }
+        return 0;
     }
     
     SoraRect SoraText::getBoundingBox() const {

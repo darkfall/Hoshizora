@@ -26,6 +26,7 @@ namespace sora {
     
     bool SoraGameApp::GameAppWindow::renderFunc() {
         mFSMManager.onRender();
+        return false;
     }
     
     void SoraGameApp::GameAppWindow::init() {

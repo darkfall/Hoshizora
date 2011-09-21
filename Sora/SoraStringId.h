@@ -59,7 +59,7 @@ namespace sora {
 		}
 		
 	private:
-		typedef hash_map<SoraStringId, std::string> STR_MAP;
+		typedef sora_hash_map<SoraStringId, std::string> STR_MAP;
 		STR_MAP strings;
 	};
 	

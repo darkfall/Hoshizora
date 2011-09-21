@@ -194,14 +194,17 @@ namespace sora {
 		int32 getScreenHeight();
 
 		SoraResourceHandle  loadResourcePack        (const StringType& file);
-		void                attachResourcePack		(SoraResourceHandle pfile);
 		void                detachResourcePack		(SoraResourceHandle handle);
 		void*               getResourceFile         (const StringType& file, ulong32& size);
 		void*               readResourceFile		(const StringType& file, ulong32 size);
 		ulong32             getResourceFileSize     (const StringType& file);
 		void                freeResourceFile		(void* p);
 		void                enumFilesInFolder		(std::vector<SoraWString>& cont, const StringType& folder);
-	
+
+#ifdef SORA_ENABLE_MULTI_THREAD
+        void                loadResourceFileAsync   (const StringType& file, const SoraResourceFileFinder::AsyncNotification& handler, void* puserdata);
+#endif
+        
 		bool    isMainWindowSet();
 		bool    createWindow(SoraWindowInfoBase* info);
 		void    setWindowSize(int32 w, int32 h);
@@ -251,6 +254,8 @@ namespace sora {
         SoraFont*   createFont(void* data, ulong32 size, uint32 fontSize, const StringType& fileName);
 		void        releaseFont(SoraFont* font);
 		
+        SoraMusicFile*          createMusicFileFromMemory(void* pdata, ulong32 size);
+        SoraSoundEffectFile*    createSoundEffectFileFromMemory(void* pdata, ulong32 size);
 		SoraMusicFile* 			createMusicFile(const StringType& musicName, bool bStream=true);
 		SoraSoundEffectFile* 	createSoundEffectFile(const StringType& se);
         SoraMusicFile* 			createMusicFile(bool bStream=false);

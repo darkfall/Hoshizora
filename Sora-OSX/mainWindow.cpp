@@ -102,11 +102,7 @@ sora::SoraMusicFile* file = 0;
 void mainWindow::init() {
     
     ulong32 pack = sora::SoraCore::Instance()->loadResourcePack("Textures.zip");
-    if(pack) {
-        sora::SoraCore::Instance()->attachResourcePack(pack);
-        sora::SoraSprite* spr = sora::SoraCore::Instance()->createSprite(L"Particle002.png");
-        sora_assert(spr);
-    }
+
     
     file = sora::SoraCore::Instance()->createMusicFile(SoraWString(L"02.mp3"), true);
     if(file)
@@ -122,7 +118,7 @@ void mainWindow::init() {
     entity.addComponent(emitter);
     
     sora::SORA->setFPS(60);
-	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
+	sora::SORA->loadResourcePack(L"resource.SoraResource");
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
    
     mScene1 = new sora::SoraScene(getWindowWidth(), getWindowHeight());

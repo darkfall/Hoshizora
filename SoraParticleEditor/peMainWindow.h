@@ -90,7 +90,7 @@ class peMainWindow: public sora::SoraWindowInfoBase {
 		sora::GCN_GLOBAL->setGlobalBaseColor(0xFF999999);
 	
 
-		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
+		sora::SORA->loadResourcePack(L"resource.SoraResource");
 		sora::SORA->setSystemFont(L"cour.ttf", 16);
 
 		sora::SORA->setFPS(60);

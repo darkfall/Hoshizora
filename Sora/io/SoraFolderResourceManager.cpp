@@ -48,7 +48,7 @@ namespace sora {
 	}
 
 	StringType SoraFolderResourceManager::getFullPath(const StringType& fileName) {
-		FILE_CACHE::iterator itFile = fileCache.find(str2idnc(fileName.get()));
+		FILE_CACHE::iterator itFile = fileCache.find(fileName);
 		if(itFile != fileCache.end()) {
 			return itFile->second;
 		}

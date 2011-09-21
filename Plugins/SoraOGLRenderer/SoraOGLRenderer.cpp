@@ -509,7 +509,7 @@ namespace sora{
         glBindTexture(GL_TEXTURE_2D, 0);
 
 		if(!texId) {
-			THROW_SORA_EXCEPTION(SystemException, "Error creating texture");
+			log_error("Error creating texture");
 			return 0;
 		}
 		SoraTexture* tex = new SoraTexture(texId,

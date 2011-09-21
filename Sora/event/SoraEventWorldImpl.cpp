@@ -14,10 +14,10 @@
 
 namespace sora {
     
-#ifdef SORA_ENABLE_MULTI_TRHEAD
+//#ifdef SORA_ENABLE_MULTI_TRHEAD
 
 
-#else 
+//#else 
     
     SoraEventWorldImpl::SoraEventWorldImpl():
     mHandlers(),
@@ -150,6 +150,6 @@ namespace sora {
     void SoraEventWorldImpl::swapEventList() throw() {
         mCurrEvtList->swap(*mNextEvtList.get());
     }
-#endif // SORA_ENABLE_MULTI_TRHEAD
+//#endif // SORA_ENABLE_MULTI_TRHEAD
 
 } // namespace sora

@@ -31,6 +31,8 @@ namespace sora {
         
         void run(SoraThreadTask&);
         
+        bool isRunning() const;
+        
     private:
         void runInThread(void* arg);
         SoraThreadTask take();

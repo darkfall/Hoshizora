@@ -136,12 +136,12 @@ namespace sora {
         }
 		
 	private:
-		typedef hash_map<SoraStringId, SoraTextureHandle> TEX_MAP;
+		typedef sora_hash_map<SoraStringId, SoraTextureHandle> TEX_MAP;
 		TEX_MAP texMap;
-		typedef hash_map<SoraTextureHandle, SoraStringId> TEXMAP_RV;
+		typedef sora_hash_map<SoraTextureHandle, SoraStringId> TEXMAP_RV;
 		TEXMAP_RV texMapRv;
 		
-		typedef hash_map<SoraStringId, int32> TEX_USE_COUNT;
+		typedef sora_hash_map<SoraStringId, int32> TEX_USE_COUNT;
 		TEX_USE_COUNT texRefs;
 	};
 };

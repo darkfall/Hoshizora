@@ -16,6 +16,8 @@
 namespace sora {
 	
 	std::wstring iOSString2WString(const std::string& str) {
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        
 		NSString* nsstr = [[NSString alloc] initWithUTF8String: str.c_str()];
         NSStringEncoding pEncode    =   CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingUTF32LE );   
 		NSData* pSData              =   [ nsstr dataUsingEncoding : pEncode ];    
@@ -23,10 +25,14 @@ namespace sora {
         std::wstring result = std::wstring ( (wchar_t*) [ pSData bytes ], [ pSData length] / sizeof ( wchar_t ) ); 
      //   [pSData release];
         [nsstr release];
+        
+        [pool release];
         return result;
 	}
 	
 	std::string iOSWString2String(const std::wstring& str) {
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
         NSString* pString = [ [ NSString alloc ]    
 							 initWithBytes : (char*)str.data()   
 							 length : str.size() * sizeof(wchar_t)   
@@ -34,6 +40,9 @@ namespace sora {
         
         std::string result = [pString UTF8String];
         [pString release];
+        
+        [pool release];
+
 		return result;
 	}
 

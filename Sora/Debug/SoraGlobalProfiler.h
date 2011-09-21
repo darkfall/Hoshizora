@@ -31,7 +31,7 @@ namespace sora {
 			s_profile(): elapsedTime(0) {}
 			s_profile(const char* name, uint64 t): sName(name), elapsedTime(t) {}
 		};
-		typedef hash_map<SoraString, s_profile> PROFILE_CONT;
+		typedef sora_hash_map<SoraString, s_profile> PROFILE_CONT;
 
 	public:
 		void storeProfile(const char* name, uint64 elapsedTime) {

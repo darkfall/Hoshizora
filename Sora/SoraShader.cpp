@@ -146,10 +146,10 @@ namespace sora {
     SoraShader* SoraShaderContext::attachFragmentShader(const StringType& file, const SoraString& entry) {
         SoraShader* shader = createShader(file, entry, FRAGMENT_SHADER);
         if(!shader)
-            THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
+            log_error("Error creating shader");
         if(shader->getError() != ShaderNoError) {
             shader->release();
-            THROW_SORA_EXCEPTION(RuntimeException, vamssg("Shader returned with error code %d", shader->getError()));
+            log_error(vamssg("Shader returned with error code %d", shader->getError()));
             return NULL;
         }
         mFragmentShader.assign(shader);
@@ -159,10 +159,10 @@ namespace sora {
     SoraShader* SoraShaderContext::attachVertexShader(const StringType& file, const SoraString& entry) {
         SoraShader* shader = createShader(file, entry, VERTEX_SHADER);
         if(!shader)
-            THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader");
+            log_error("Error creating shader");
         if(shader->getError() != ShaderNoError) {
             shader->release();
-            THROW_SORA_EXCEPTION(RuntimeException, vamssg("Shader returned with error code %d", shader->getError()));
+            log_error(vamssg("Shader returned with error code %d", shader->getError()));
             return NULL;
         }
         mVertexShader.assign(shader);

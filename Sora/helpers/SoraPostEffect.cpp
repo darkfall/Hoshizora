@@ -41,11 +41,11 @@ namespace sora {
     }
     
     SoraShader* SoraPostEffect::attachFragmentShader(const StringType& file, const SoraString& entry) {
-        mSprite->attachFragmentShader(file, entry);
+        return mSprite->attachFragmentShader(file, entry);
     }
     
     SoraShader* SoraPostEffect::attachVertexShader(const StringType& file, const SoraString& entry) {
-        mSprite->attachVertexShader(file, entry);
+        return mSprite->attachVertexShader(file, entry);
     }
     
     void SoraPostEffect::detachFragmentShader() {

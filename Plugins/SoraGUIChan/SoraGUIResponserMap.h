@@ -52,7 +52,7 @@ namespace sora {
         }
         
 	private:
-        typedef hash_map<ulong32, SoraStringId> HandleSrcMap;
+        typedef sora_hash_map<ulong32, SoraStringId> HandleSrcMap;
         HandleSrcMap widgetSrc;
         
 		typedef std::map<SoraStringId, SoraGUIResponser*> ResponserMap;

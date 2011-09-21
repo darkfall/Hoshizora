@@ -25,13 +25,12 @@
 	#if __GNUC__ >= 4
 		#include <tr1/unordered_map>
         namespace sora {
-            using std::tr1::unordered_map;
-            #define hash_map unordered_map
+            #define sora_hash_map std::tr1::unordered_map
         }
 	#else
 		#include <ext/hash_map>
         namespace sora {
-            using __gnu_cxx::hash_map;
+            #define sora_hash_map __gnu_cxx::hash_map
         }
 	#endif
 
@@ -40,13 +39,12 @@
 #if _MSC_VER >= 1600
     #include <unordered_map>
     namespace sora {
-        using std::tr1::unordered_map;
-		#define hash_map unordered_map
+		#define sora_hash_map std::tr1::unordered_map
     }
 
 #else
     namespace sora {
-        using std::hash_map;
+        #define sora_hash_map std::hash_map
     }
 #endif 
 
@@ -54,7 +52,7 @@
 
     #include <map>
     namespace sora {
-        #define hash_map std::map
+        #define sora_hash_map std::map
     }
 #endif
 
@@ -390,7 +388,9 @@ namespace { \
  enable this if you are using sora in multithread environment
  currently unimplemented, reverved for future use
 */
-//#define SORA_ENABLE_MULTI_THREAD
+#define SORA_ENABLE_MULTI_THREAD
+
+#define SORA_MAX_IO_THREAD 2
 
 /*
  // default:

@@ -57,7 +57,7 @@ namespace sora {
             SoraSprite* mSprite;
             float mIdleTime;
         };
-        typedef hash_map<SoraStringId, SpriteInfo> SpriteCacheMap;
+        typedef sora_hash_map<SoraStringId, SpriteInfo> SpriteCacheMap;
         SpriteCacheMap mSpriteCache;
     };
     

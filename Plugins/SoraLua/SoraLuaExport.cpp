@@ -36,7 +36,6 @@ namespace sora {
         .def("getScreenWidth", &SoraCore::getScreenWidth)
         .def("getScreenHeight", &SoraCore::getScreenHeight)
         .def("loadResourcePack", &SoraCore::loadResourcePack)
-        .def("attachResourcePack", &SoraCore::attachResourcePack)
         .def("detachResourcePack", &SoraCore::detachResourcePack)
         .def("readResourceFile", &SoraCore::readResourceFile)
         .def("getResourceFileSize", &SoraCore::getResourceFileSize)

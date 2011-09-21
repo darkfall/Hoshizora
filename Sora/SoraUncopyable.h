@@ -11,9 +11,11 @@
 #ifndef SORA_UNCOPYABLE_H_
 #define SORA_UNCOPYABLE_H_
 
+#include "SoraPlatform.h"
+
 namespace sora {
     
-    class SoraUncopyable {
+    class SORA_API SoraUncopyable {
 	protected:
 		SoraUncopyable() {}
 		

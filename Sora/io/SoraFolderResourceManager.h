@@ -51,7 +51,7 @@ namespace sora {
 		FOLDER_CONT folders;
 		StringType applicationPath;
 		
-		typedef std::map</*fileNameHash*/SoraStringId, /*fileFullPath*/SoraWString> FILE_CACHE;
+		typedef std::map</*fileNameHash*/StringType, /*fileFullPath*/StringType> FILE_CACHE;
 		FILE_CACHE fileCache;
 		
 		inline StringType getFullPath(const StringType& fileName);
