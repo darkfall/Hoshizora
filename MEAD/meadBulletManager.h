@@ -62,14 +62,14 @@ namespace mead {
 		
 	private:
 		typedef std::list<meadBullet*> BULLET_LIST;
-		typedef sora::hash_map<ulong32, meadBullet*> BULLET_MAP;
+		typedef sora_hash_map<ulong32, meadBullet*> BULLET_MAP;
 		
 		// bullet list 
 		BULLET_LIST mBullets;
 		// bullet buffer for fast get bullet 
 		BULLET_MAP mBulletBuffer;
 		
-		typedef sora::hash_map<uint32/*texid*/, sora::SoraSprite*> BULLET_SPRITE_MAP;
+		typedef sora_hash_map<uint32/*texid*/, sora::SoraSprite*> BULLET_SPRITE_MAP;
 		
 		// bullet sprite map
 		BULLET_SPRITE_MAP mBulletSprites;
@@ -86,7 +86,7 @@ namespace mead {
 			BulletConfigNode() {}
 		};
 		
-		typedef sora::hash_map<uint32/*bulletid*/, BulletConfigNode> BULLET_CONFIG_MAP;
+		typedef sora_hash_map<uint32/*bulletid*/, BulletConfigNode> BULLET_CONFIG_MAP;
 		
 		// bullet config map
 		BULLET_CONFIG_MAP mBulletConfigs;

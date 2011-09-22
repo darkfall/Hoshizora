@@ -53,10 +53,10 @@ namespace sora {
 		float32 getVolume() const;
 		
 	private:
-		typedef sora::hash_map<SoundEffectId, SoraSoundEffectFile*> SOUND_EFFECT_MAP;
+		typedef sora_hash_map<SoundEffectId, SoraSoundEffectFile*> SOUND_EFFECT_MAP;
 		SOUND_EFFECT_MAP mSoundEffects;
 		
-		typedef sora::hash_map<stringId, SoraSoundEffectFile*> LOADED_EFFECT_MAP;
+		typedef sora_hash_map<stringId, SoraSoundEffectFile*> LOADED_EFFECT_MAP;
 		LOADED_EFFECT_MAP mLoadedEffects;
 		
 		float32 effectVolume;

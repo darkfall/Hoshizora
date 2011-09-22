@@ -56,6 +56,27 @@ namespace sora {
         return new SoraAudiereSoundEffectFile;
     }
 
+	SoraMusicFile* SoraAudiereSoundSystem::createMusicFileFromMemory(void* data, ulong32 size) {
+		SoraAudiereMusicFile* bgm = new SoraAudiereMusicFile(true);
+		
+		int32 result = bgm->readFileMem(data, size);
+		if(result == SORASOUND_SUCCESS) {
+			return bgm;
+		}
+		delete bgm;
+		return 0;
+	}
+
+	SoraSoundEffectFile* SoraAudiereSoundSystem::createSoundEffectFileFromMemory(void* data, ulong32 size) {
+		SoraAudiereSoundEffectFile* seFile = new SoraAudiereSoundEffectFile;
+		int32 result = seFile->readFileMem(data, size);
+		if(result == SORASOUND_SUCCESS) {
+			return seFile;
+		}
+		delete seFile;
+		return 0;
+	}
+	
 #ifdef SORA_AUTOMATIC_REGISTER
 	SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerSoundSystem(new SoraAudiereSoundSystem));
 #endif

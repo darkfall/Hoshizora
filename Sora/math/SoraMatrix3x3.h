@@ -24,9 +24,9 @@ namespace sora {
 	class SORA_API SoraMatrix3x3 {
 	private:
 		struct _2DMatrix {
-			double _11, _12, _13;
-			double _21, _22, _23;
-			double _31, _32, _33;
+			float _11, _12, _13;
+			float _21, _22, _23;
+			float _31, _32, _33;
 		};
 		
 		_2DMatrix matrix;
@@ -39,32 +39,32 @@ namespace sora {
 		}
 		
         void createIdentity();
-        void translate(double x, double y);
-        void scale(double x, double y);
-        void rotate(double rotation);
+        void translate(float x, float y);
+        void scale(float x, float y);
+        void rotate(float rotation);
         void rotate(const SoraVector& fwd, const SoraVector& side);
         void transformVector2Ds(std::vector<SoraVector>& vPoints);
         void transformVector2D(SoraVector& vPoint);
 		
-		void _11(double val) { matrix._11 = val; }
-		void _12(double val) { matrix._12 = val; }
-		void _13(double val) { matrix._13 = val; }
-		void _21(double val) { matrix._21 = val; }
-		void _22(double val) { matrix._22 = val; }
-		void _23(double val) { matrix._23 = val; }
-		void _31(double val) { matrix._31 = val; }
-		void _32(double val) { matrix._32 = val; }
-		void _33(double val) { matrix._33 = val; }
+		void _11(float val) { matrix._11 = val; }
+		void _12(float val) { matrix._12 = val; }
+		void _13(float val) { matrix._13 = val; }
+		void _21(float val) { matrix._21 = val; }
+		void _22(float val) { matrix._22 = val; }
+		void _23(float val) { matrix._23 = val; }
+		void _31(float val) { matrix._31 = val; }
+		void _32(float val) { matrix._32 = val; }
+		void _33(float val) { matrix._33 = val; }
 		
-		double _11() const { return matrix._11; }
-		double _12() const { return matrix._12; }
-		double _13() const { return matrix._13; }
-		double _21() const { return matrix._21; }
-		double _22() const { return matrix._22; }
-		double _23() const { return matrix._23; }
-		double _31() const { return matrix._31; }
-		double _32() const { return matrix._32; }
-		double _33() const { return matrix._33; }
+		float _11() const { return matrix._11; }
+		float _12() const { return matrix._12; }
+		float _13() const { return matrix._13; }
+		float _21() const { return matrix._21; }
+		float _22() const { return matrix._22; }
+		float _23() const { return matrix._23; }
+		float _31() const { return matrix._31; }
+		float _32() const { return matrix._32; }
+		float _33() const { return matrix._33; }
 	};
 	
 	inline void SoraMatrix3x3::matrixMul(_2DMatrix& rhs) {
@@ -87,20 +87,20 @@ namespace sora {
 	
 	inline void SoraMatrix3x3::transformVector2Ds(std::vector<SoraVector>& vPoints) {
 		for(uint32 i=0; i<vPoints.size(); ++i) {
-			double tempX = (matrix._11*vPoints[i].x) + (matrix._21*vPoints[i].y) + matrix._31;
-			double tempY = (matrix._12*vPoints[i].x) + (matrix._22*vPoints[i].y) + matrix._32;
+			float tempX = (matrix._11*vPoints[i].x) + (matrix._21*vPoints[i].y) + matrix._31;
+			float tempY = (matrix._12*vPoints[i].x) + (matrix._22*vPoints[i].y) + matrix._32;
 			
-			vPoints[i].x = tempX;
-			vPoints[i].y = tempY;
+			vPoints[i].x = (float)tempX;
+			vPoints[i].y = (float)tempY;
 		}
 	}
 	
 	inline void SoraMatrix3x3::transformVector2D(SoraVector& vPoint) {
-		double tempX = (matrix._11*vPoint.x) + (matrix._21*vPoint.y) + matrix._31;
-		double tempY = (matrix._12*vPoint.x) + (matrix._22*vPoint.y) + matrix._32;
+		float tempX = (matrix._11*vPoint.x) + (matrix._21*vPoint.y) + matrix._31;
+		float tempY = (matrix._12*vPoint.x) + (matrix._22*vPoint.y) + matrix._32;
 		
-		vPoint.x = tempX;
-		vPoint.y = tempY;
+		vPoint.x = (float)tempX;
+		vPoint.y = (float)tempY;
 	}
 	
 	inline void SoraMatrix3x3::createIdentity() {
@@ -109,7 +109,7 @@ namespace sora {
 		matrix._31 = 0; matrix._33 = 0; matrix._33 = 1;
 	}
 	
-	inline void SoraMatrix3x3::translate(double x, double y) {
+	inline void SoraMatrix3x3::translate(float x, float y) {
 		SoraMatrix3x3::_2DMatrix mat;
 		
 		mat._11 = 1; mat._12 = 0; mat._13 = 0;
@@ -119,7 +119,7 @@ namespace sora {
 		matrixMul(mat);
 	}
 	
-	inline void SoraMatrix3x3::scale(double xscale, double yscale) {
+	inline void SoraMatrix3x3::scale(float xscale, float yscale) {
 		SoraMatrix3x3::_2DMatrix mat;
 		
 		mat._11 = xscale; mat._12 = 0; mat._13 = 0;
@@ -129,11 +129,11 @@ namespace sora {
 		matrixMul(mat);
 	}
 	
-	inline void SoraMatrix3x3::rotate(double rot) {
+	inline void SoraMatrix3x3::rotate(float rot) {
 		SoraMatrix3x3::_2DMatrix mat;
 		
-		double sinv = sin(rot);
-		double cosv = cos(rot);
+		float sinv = sin(rot);
+		float cosv = cos(rot);
 		
 		mat._11 = cosv; mat._12 = sinv; mat._13 = 0;
 		mat._21 = -sinv; mat._22 = cosv; mat._23 = 0;

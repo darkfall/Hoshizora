@@ -11,8 +11,8 @@ namespace sora {
 
 		cgD3D9SetDevice((IDirect3DDevice9*)(SoraCore::Instance()->getVideoDeviceHandle()));
         
-        vertexProfile = CG_PROFILE_VS_2_X;
-        fragmentProfile = CG_PROFILE_PS_2_X;
+        vertexProfile = cgD3D9GetLatestVertexProfile();
+        fragmentProfile = cgD3D9GetLatestPixelProfile();
 		cgD3D9GetOptimalOptions(vertexProfile);
 		cgD3D9GetOptimalOptions(fragmentProfile);
 	}
@@ -103,7 +103,7 @@ namespace sora {
 									  data,
 									  profile,
 									  entry.c_str(),
-									  NULL);
+									  0);
 			sora::SORA->freeResourceFile((void*)data);
 			
 			checkError(context);
@@ -128,7 +128,7 @@ namespace sora {
 								  data,
 								  profile,
 								  entry.c_str(),
-								  NULL);
+								  0);
 			
 		checkError(context);
 		cgD3D9LoadProgram(program, true, 0);

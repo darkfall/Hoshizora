@@ -35,7 +35,6 @@
 #include "SoraGifSprite/SoraGifSprite.h"
 #include "SoraGenericObjects/SoraCustomShapeSprite.h"
 
-#include "../MEAD/bulletLuaExport.h"
 #include "SoraSoundManager/SoundManagerLuaExport.h"
 
 #include "SoraShaderManager.h"
@@ -81,7 +80,7 @@ void mainWindow::init() {
 	if(mu)
 		mu->play();
 	sora::SORA->setFPS(60);
-	sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(L"resource.SoraResource"));
+	sora::SORA->loadResourcePack(L"resource.SoraResource");
 	sora::SORA->setSystemFont(L"cour.ttf", 16);
    
     mScene1 = new sora::SoraScene(getWindowWidth(), getWindowHeight());

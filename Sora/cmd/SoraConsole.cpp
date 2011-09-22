@@ -487,6 +487,4 @@ namespace sora {
         render();
     }
 
-
-
 } // namespace sora

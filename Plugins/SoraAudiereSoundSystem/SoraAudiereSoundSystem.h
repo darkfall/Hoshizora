@@ -22,6 +22,9 @@ namespace sora {
         SoraSoundEffectFile* createSoundEffectFile(const SoraWString& path);
         SoraMusicFile* createMusicFile(bool bStream);
         SoraSoundEffectFile* createSoundEffectFile();
+
+		SoraMusicFile* createMusicFileFromMemory(void* data, ulong32 size);
+		SoraSoundEffectFile* createSoundEffectFileFromMemory(void* data, ulong32 size);
 	};
 
 } // namespace sora 

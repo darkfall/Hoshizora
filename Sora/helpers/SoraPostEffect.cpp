@@ -9,7 +9,7 @@
 #include "SoraPostEffect.h"
 #include "SoraSprite.h"
 #include "SoraCore.h"
-#include "SoraBind.h"
+#include "function/SoraBind.h"
 
 namespace sora {
     

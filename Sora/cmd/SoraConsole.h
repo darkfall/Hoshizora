@@ -115,7 +115,7 @@ namespace sora {
         
 		SORA_CLASS_DEF_FIELD_SET_GET_P(float, PositionX, m)
         SORA_CLASS_DEF_FIELD_SET_GET_P(float, PositionY, m)
-		
+
 	private:        
 		void drawCmds();
 		void drawMssg();

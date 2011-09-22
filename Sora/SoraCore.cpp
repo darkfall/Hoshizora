@@ -1061,6 +1061,9 @@ namespace sora {
 	}
 
 	bool SoraCore::keyDown(int32 key) {
+		if(sora::SoraConsole::Instance()->isActive())
+			return false;
+
 		int32 simulateState = SoraInputSimulator::getKeyState(key);
 		if(simulateState != -1)
 			return simulateState == SORA_INPUT_KEYDOWN;
@@ -1070,6 +1073,9 @@ namespace sora {
 	}
 
 	bool SoraCore::keyUp(int32 key) {
+		if(sora::SoraConsole::Instance()->isActive())
+			return false;
+
 		int32 simulateState = SoraInputSimulator::getKeyState(key);
 		if(simulateState != -1)
 			return simulateState == SORA_INPUT_KEYUP;
@@ -1083,12 +1089,15 @@ namespace sora {
 	}
 
 	int32 SoraCore::getKeyState(int32 key) {
+		if(sora::SoraConsole::Instance()->isActive())
+			return SORA_INPUT_KEYUP;
+
 		int32 simulateState = SoraInputSimulator::getKeyState(key);
 		if(simulateState != -1)
 			return simulateState;
 		
 		if(bHasInput) return pInput->getKeyState(key);
-		return false;
+		return SORA_INPUT_KEYUP;
 	}
 
 	char* SoraCore::getKeyName(int32 key) {
