@@ -491,14 +491,14 @@ namespace sora {
                                                                  func));
     }
     
-    void SoraSprite::rotateTo(float to, float t, const NotificationFunc& func) {
+    void SoraSprite::rotateToAndNotify(float to, float t, const NotificationFunc& func) {
         addModifierAdapter(CreateModifierAdapterWithNotification(this, CreateEffectRotation(getRotation(),
                                                                                             to,
                                                                                             t),
                                                                  func));
     }
     
-    void SoraSprite::scaleTo(float h, float v, float t, const NotificationFunc& func) {
+    void SoraSprite::scaleToAndNotify(float h, float v, float t, const NotificationFunc& func) {
         addModifierAdapter(CreateModifierAdapterWithNotification(this, CreateEffectScale(getHScale(),
                                                                                          getVScale(),
                                                                                          h,

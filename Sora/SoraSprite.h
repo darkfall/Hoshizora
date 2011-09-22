@@ -120,8 +120,8 @@ namespace sora {
         
         typedef SoraFunction<void(SoraSprite*)> NotificationFunc;
         void fadeToAndNotify(float to, float t, const NotificationFunc& func);
-        void rotateTo(float to, float t, const NotificationFunc& func);
-        void scaleTo(float h, float v, float t, const NotificationFunc& func);
+        void rotateToAndNotify(float to, float t, const NotificationFunc& func);
+        void scaleToAndNotify(float h, float v, float t, const NotificationFunc& func);
         
         SoraRect getBoundingBox() const;
         

@@ -145,8 +145,10 @@ namespace sora {
     
     SoraShader* SoraShaderContext::attachFragmentShader(const StringType& file, const SoraString& entry) {
         SoraShader* shader = createShader(file, entry, FRAGMENT_SHADER);
-        if(!shader)
+        if(!shader) {
             log_error("Error creating shader");
+            return 0;
+        }
         if(shader->getError() != ShaderNoError) {
             shader->release();
             log_error(vamssg("Shader returned with error code %d", shader->getError()));

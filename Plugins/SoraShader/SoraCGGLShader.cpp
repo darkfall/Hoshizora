@@ -78,11 +78,9 @@ namespace sora {
 		CGerror error;
 		const char* str = cgGetLastErrorString(&error);
 		if(error != CG_NO_ERROR) {
-			log_mssg(vamssg("SoraShader: %s\n", str),
-					   LOG_LEVEL_ERROR);
+			printf("%s\n", vamssg("SoraShader: %s\n", str).c_str());
 			if(error == CG_COMPILER_ERROR) {
-				log_mssg(vamssg("SoraShaderContext: %s", cgGetLastListing(context)),
-							  LOG_LEVEL_ERROR);
+				printf("%s\n", (vamssg("SoraShaderContext: %s", cgGetLastListing(context))).c_str());
 			}			
 			setError(1);
 		}

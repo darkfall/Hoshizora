@@ -1366,6 +1366,9 @@ namespace sora {
     
     void SoraCore::setSystemFont(SoraFont* font) {
         mSystemFont = font;
+        
+		SoraConsole::Instance()->setFont(mSystemFont);
+		SoraMenuBar::Instance()->setFont(mSystemFont);
     }
 	
 	void SoraCore::setSystemFont(const wchar_t* font, int32 fontSize) {

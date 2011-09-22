@@ -268,10 +268,12 @@ namespace sora {
     }
 	
 	void SoraConsole::registerCmdHandler(SoraEventHandler* handler, const std::string& cmd) {
-        SoraStringTokenlizer tokens(cmd);
+        SoraStringTokenlizer tokens(cmd, ",");
         SoraStringTokenlizer::iterator it = tokens.begin();
+        
+        CommandHandlerMap& cmap = getCommandHandlerMap();
         while(it != tokens.end()) {
-            getCommandHandlerMap()[*it] = handler;
+            cmap[*it] = handler;
             ++it;
         }
 	}
