@@ -170,4 +170,11 @@ namespace sora {
                       
     }
     
+    void SoraText::Render(const SoraWString& str, float x, float y) {
+        SoraFont* font = SoraCore::Instance()->getSystemFont();
+        if(font != 0) {
+            font->render(x, y, str.c_str());
+        }
+    }
+    
 } // namespace sora

@@ -14,9 +14,9 @@
 
 namespace sora {
     
-    class SORA_API SoraMouseListener {
+    class SORA_API SoraInputListener {
     public:
-        virtual ~SoraMouseListener() {}
+        virtual ~SoraInputListener() {}
         
         virtual void mouseMoved(SoraMouseEvent& event) { }
         virtual void mouseDragged(SoraMouseEvent& event) { }
@@ -24,23 +24,14 @@ namespace sora {
         virtual void mouseWheelDown(SoraMouseEvent& event) { }
         virtual void mouseClicked(SoraMouseEvent& event) { }
         virtual void mouseReleased(SoraMouseEvent& event) { }
-    };
-    
-    class SORA_API SoraKeyListener {
-    public:
-        virtual ~SoraKeyListener() {}
-        
+                
         virtual void keyPressed(SoraKeyEvent& event) { }
         virtual void keyReleased(SoraKeyEvent& event) { }
-    };
-    
-    class SORA_API SoraJoystickListener {
-    public:
-        virtual ~SoraJoystickListener() {}
-        
+
         virtual void joystickPressed(SoraJoystickEvent& event) { }
         virtual void joystickRelesed(SoraJoystickEvent& event) { }
     };
+
     
 } // namespace sora
 

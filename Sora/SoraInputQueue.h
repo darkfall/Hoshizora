@@ -19,10 +19,10 @@
 
 namespace sora {
         
-    class SORA_API SoraKeyPool: public SoraFrameListener {
+    class SORA_API SoraKeyPoll: public SoraFrameListener {
     private:
-        SoraKeyPool();
-        ~SoraKeyPool();
+        SoraKeyPoll();
+        ~SoraKeyPoll();
         void onFrameStart();
         void onFrameEnd();
         
@@ -41,14 +41,8 @@ namespace sora {
         static void setGlobalHotkey(int32 hid, const SoraHotkey& hotkey);
         static void clearGlobalHotkeys();
         
-        static void addMouseListener(SoraMouseListener* mouseListener, int prio=0);
-        static void addKeyListener(SoraKeyListener* keyListener, int prio=0);
-        // joystick listener may not work now cause joystick support is not finished yet
-        static void addJoystickListener(SoraJoystickListener* joyListener, int prio=0);
-        
-        static void delMouseListener(SoraMouseListener* mouseListener);
-        static void delKeyListener(SoraKeyListener* keyListener);
-        static void delJoystickListener(SoraJoystickListener* joyListener);
+        static void AddInputListener(SoraInputListener* mouseListener, int prio=0);
+        static void DelInputListener(SoraInputListener* joyListener);
         
         static void pollListenerEvents();
     };

@@ -20,7 +20,9 @@ namespace sora {
     
     void SoraEventHandler::handleEvent(SoraEvent* event) {
         sora_assert(event);
-              
+        
+#ifndef SORA_EVENT_GENERIC
+        
 #ifdef SORA_USE_RTTI
         Handlers::iterator it = _handlers.find(SoraTypeInfo(typeid(*event)));
 #else
@@ -29,6 +31,10 @@ namespace sora {
         if(it != _handlers.end()) {
             it->second->exec(event);
         }
+        
+#else
+        this->onEvent(event);
+#endif
     }
     
     void SoraEventHandler::handleSystemEvent(SoraSystemEvent* evt) {
@@ -50,10 +56,8 @@ namespace sora {
     SoraEventHandler::SoraEventHandler():
     mEnabled(false),
     mWorld(NULL),
-    mChannel(),
     mEnableUpdate(false),
     mUpdateReceiveEvent(false) {
-        mChannel.fill();
     }
                 
     bool SoraEventHandler::isEnabled() {
@@ -98,34 +102,6 @@ namespace sora {
         return mWorld != NULL;
     }
     
-    bool SoraEventHandler::listenning(const SoraEventChannel& channel) {
-        return mChannel.listenning(channel);
-    }
-    
-    void SoraEventHandler::setChannel(const SoraEventChannel& channel) {
-        mChannel = channel;
-    }
-    
-    void SoraEventHandler::fillChannel() {
-        mChannel.fill();
-    }
-    
-    const SoraEventChannel SoraEventHandler::getChannel() const {
-        return mChannel;
-    }
-    
-    void SoraEventHandler::addChannel(const SoraEventChannel& channel) {
-        mChannel.add(channel);
-    }
-    
-    void SoraEventHandler::removeChannel(const SoraEventChannel& channel) {
-        mChannel.remove(channel);
-    }
-    
-    void SoraEventHandler::clearChannel() {
-        mChannel.clear();
-    }
-    
     SoraEventWorld* SoraEventHandler::getWorld() {
         return mWorld;
     }
@@ -145,5 +121,12 @@ namespace sora {
     void SoraEventHandler::onDebugRender() {
         
     }
+    
+    
+#ifdef SORA_EVENT_GENERIC
+    void SoraEventHandler::onEvent(SoraEvent* event) {
+        
+    }
+#endif
     
 } // namespace sora

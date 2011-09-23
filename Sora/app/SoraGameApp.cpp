@@ -9,6 +9,7 @@
 #include "SoraGameApp.h"
 #include "SoraCore.h"
 #include "SoraGameState.h"
+#include "SoraInputQueue.h"
 
 namespace sora {
     
@@ -102,7 +103,15 @@ namespace sora {
     }
     
     void SoraGameApp::setState(const std::string& tag) {
+        SoraFSMState* state = mFSMManager.getCurrentState();
+        if(state)
+            SoraKeyPoll::DelInputListener(static_cast<SoraGameState*>(state));
+        
         mFSMManager.switchToState(tag);
+        
+        state = mFSMManager.getCurrentState();
+        if(state)
+            SoraKeyPoll::AddInputListener(static_cast<SoraGameState*>(state));
     }
     
     void SoraGameApp::defStateTrans(const std::string& state1, const SoraFSMManager::EventType& type, const std::string& state2) {
@@ -110,7 +119,15 @@ namespace sora {
     }
     
     void SoraGameApp::postEvent(const SoraFSMManager::EventType& evt) {
+        SoraFSMState* state = mFSMManager.getCurrentState();
+        if(state)
+            SoraKeyPoll::DelInputListener(static_cast<SoraGameState*>(state));
+        
         mFSMManager.postEvent(evt);
+        
+        state = mFSMManager.getCurrentState();
+        if(state)
+            SoraKeyPoll::AddInputListener(static_cast<SoraGameState*>(state));
     }
     
     void SoraGameApp::BeginScene(uint32 c, SoraTargetHandle h, bool clear) {
@@ -119,6 +136,20 @@ namespace sora {
     
     void SoraGameApp::EndScene() {
         SoraCore::Instance()->endScene();
+    }
+    
+    int32 SoraGameApp::getWindowWidth() const {
+        if(mWindow) {
+            return mWindow->getWindowWidth();
+        }
+        return 0;
+    }
+    
+    int32 SoraGameApp::getWindowHeight() const {
+        if(mWindow) {
+            return mWindow->getWindowHeight();
+        }
+        return 0;
     }
     
 } // namespace sora

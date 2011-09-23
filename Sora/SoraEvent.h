@@ -6,8 +6,6 @@
 #include "SoraTypeInfo.h"
 #include "SoraAutoPtr.h"
 #include "SoraStringId.h"
-#include "event/SoraEventChannel.h"
-
 
 #include <map>
 
@@ -31,7 +29,7 @@ namespace sora {
     public:
         SoraEvent(): 
         mConsumed(false),
-        mName(0),
+        mName(StringType()),
         mSender(NULL),
         mReceiver(NULL) {
 		}
@@ -43,10 +41,10 @@ namespace sora {
             return mSender;
         }
 		
-		void setName(SoraStringId _name) { 
+		void setName(StringType _name) { 
             mName = _name;
         }
-		SoraStringId getName() const { 
+		StringType getName() const { 
             return mName;
         }
 		
@@ -55,17 +53,9 @@ namespace sora {
 		bool isConsumed() const { return mConsumed; }
 		
         virtual SoraStringId getEventIdentifier() const = 0;
-        /**
-         * added for event world
-         **/
-        inline void setChannel(const SoraEventChannel& channel) {
-            mChannel = channel;
-        }
+       
         inline void setReceiver(SoraEventHandler* receiver) {
             mReceiver = receiver;
-        }
-        inline SoraEventChannel getChannel() const {
-            return mChannel;
         }
         inline SoraEventHandler* getReceiver() const {
             return mReceiver;
@@ -76,12 +66,10 @@ namespace sora {
     
 		bool mConsumed;
 		
-		SoraStringId mName;
+		StringType mName;
         SoraEventHandler* mSender;
         SoraEventHandler* mReceiver;
-        
-        SoraEventChannel mChannel;
-	};
+    };
  
 	class SORA_API SoraHandlerFunctionBase {
 	public:
@@ -137,6 +125,7 @@ namespace sora {
          * This function would ignore whether the handler is enabled in EventWorld
          *  or not
          * For compability with older versions of Sora
+         * And see SORA_EVENT_GENERIC for event handling function
          **/
 		virtual void handleEvent(SoraEvent*);
 
@@ -145,19 +134,6 @@ namespace sora {
 		
 		template <class EventT>
 		void registerEventFunc(void (*evFn)(EventT*));
-		
-        /**
-         * added for event world
-         **/
-        bool listenning(const SoraEventChannel& channel);
-        void setChannel(const SoraEventChannel& channel);
-        void fillChannel();
-        const SoraEventChannel getChannel() const;
-        
-        void addChannel(const SoraEventChannel& channel);
-        void removeChannel(const SoraEventChannel& channel);
-        
-        void clearChannel();
         
         bool isInWorld(SoraEventWorld* world) const;
         bool isInWorld() const;
@@ -178,6 +154,10 @@ namespace sora {
         virtual void onEnable();
         virtual void onDisable();
         
+#ifdef SORA_EVENT_GENERIC
+        virtual void onEvent(SoraEvent* event);
+#endif
+        
 	private:
         /**
          * Directly handle system event without RTTI check, for performance
@@ -196,7 +176,6 @@ namespace sora {
     private:
         bool mEnabled;
         SoraEventWorld* mWorld;
-        SoraEventChannel mChannel;
         
         bool mEnableUpdate;
         bool mUpdateReceiveEvent;

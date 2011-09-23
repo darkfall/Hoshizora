@@ -14,7 +14,7 @@ namespace sora {
         sora_assert(state != NULL);
         
         SoraCore* pCore = SoraCore::Instance();
-        gge::LuaClass<SoraCore>(state, "SoraCore", pCore)
+        gge::LuaClass<SoraCore>(state, "Core", pCore)
         .def("setFPS", &SoraCore::setFPS)
         .def("getFPS", &SoraCore::getFPS)
         .def("getFrameCount", &SoraCore::getFrameCount)
@@ -65,7 +65,7 @@ namespace sora {
     void lua_export_sprites(LuaState* state) {
         sora_assert(state != NULL);
         
-        LuaModule(state, "spritelib")
+        LuaModule(state, "Sprite")
         .def("createSprite", &spritewrapper::createSprite)
         .def("createSpriteWithTex", &spritewrapper::createSpriteWithTex)
         .def("createSpriteWithTexEx", &spritewrapper::createSpriteWithTexEx)
@@ -131,7 +131,7 @@ namespace sora {
     }
     
     void lua_export_font(LuaState* state) {
-        LuaModule(state, "fontlib")
+        LuaModule(state, "Font")
         .def("createFont", &fontWrapper::createFont)
         .def("renderString", &fontWrapper::renderString)
         .def("setKerningWidth", &fontWrapper::setKerningWidth)

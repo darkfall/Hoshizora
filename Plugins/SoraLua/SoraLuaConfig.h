@@ -20,23 +20,23 @@ namespace sora {
      **/
 #define SORA_LUA_AUTO_EXPORT_ALL 0
     
-    // SoraEnvValues class -> ENV_VAR
+    // SoraEnvValues class -> Env
     
 #define SORA_LUA_AUTO_EXPORT_ENV_VAL 1
 
-    // SoraFont -> fontlib
+    // SoraFont -> Font
     
 #define SORA_LUA_AUTO_EXPORT_FONT 1
 
-    // SoraGuichan -> guilib
+    // SoraGuichan -> Gui
     
 #define SORA_LUA_AUTO_EXPORT_GUI 1
     
-    // SoraSprite -> spritelib
+    // SoraSprite -> Sprite
     
 #define SORA_LUA_AUTO_EXPORT_SPRITE 1
     
-    // SoraCore class -> SoraCore
+    // SoraCore class -> Core
     
 #define SORA_LUA_AUTO_EXPORT_CORE 1
     

@@ -13,7 +13,7 @@
 namespace sora {
 
 	void lua_export_env_val(LuaPlus::LuaState* state) {
-		gge::LuaClass<SoraEnvValues>(state, "ENV_VAR", SoraEnvValues::Instance())
+		gge::LuaClass<SoraEnvValues>(state, "EnvVar", SoraEnvValues::Instance())
 			.def("getBool",		&SoraEnvValues::getBool)
 			.def("getInt",		&SoraEnvValues::getInt)
 			.def("getFloat",	&SoraEnvValues::getFloat)

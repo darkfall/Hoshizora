@@ -61,6 +61,12 @@ namespace sora {
          **/
         SoraSprite* renderToSprite();
         
+        
+        /**
+         * ONLY works when system font had been set in SoraCore
+         **/
+        static void Render(const SoraWString& str, float x, float y);
+        
     private:
         void release();
         

@@ -42,27 +42,23 @@ namespace sora {
     typedef std::queue<SoraMouseEvent> MouseEventCont;
     MouseEventCont g_mouseEvents;
     
-    typedef std::map<int32, SoraMouseListener*> MouseListenerMap;
-    typedef std::map<int32, SoraKeyListener*> KeyListenerMap;
-    typedef std::map<int32, SoraJoystickListener*> JoystickListenerMap;
+    typedef std::map<int32, SoraInputListener*> InputListenerMap;
     
-    MouseListenerMap g_mouseListeners;
-    KeyListenerMap g_keyListeners;
-    JoystickListenerMap g_joystickListeners;
+    InputListenerMap g_inputListeners;
     
-    void SoraKeyPool::setQueueInput(SoraInput* input) {
+    void SoraKeyPoll::setQueueInput(SoraInput* input) {
         g_input = input;
     }
     
-    SoraKeyPool::SoraKeyPool() {
+    SoraKeyPoll::SoraKeyPoll() {
         SoraCore::Instance()->addFrameListener(this);
     }
     
-    SoraKeyPool::~SoraKeyPool() {
+    SoraKeyPoll::~SoraKeyPoll() {
         SoraCore::Instance()->delFrameListener(this);
     }
     
-    void SoraKeyPool::clearInputQueue() {
+    void SoraKeyPoll::clearInputQueue() {
         g_keyPool.clear();
     }
     
@@ -77,7 +73,7 @@ namespace sora {
         }
     }
     
-    void SoraKeyPool::publishInputedKey(int32 key, int32 type, char keyChr) {
+    void SoraKeyPoll::publishInputedKey(int32 key, int32 type, char keyChr) {
         if(!g_input)
             return;
         
@@ -114,8 +110,8 @@ namespace sora {
             SORA_EVENT_MANAGER->publishInputEvent(&ev);
         
         // key listeners
-        KeyListenerMap::iterator itListener = g_keyListeners.begin();
-        while(itListener != g_keyListeners.end()) {
+        InputListenerMap::iterator itListener = g_inputListeners.begin();
+        while(itListener != g_inputListeners.end()) {
             if(ev.isKeyDown())
                 itListener->second->keyPressed(ev);
             else 
@@ -127,7 +123,7 @@ namespace sora {
             g_keyPool.push_back(ev);
     }
     
-    bool SoraKeyPool::getQueueEvent(SoraKeyEvent& event) {
+    bool SoraKeyPoll::getQueueEvent(SoraKeyEvent& event) {
         if(g_keyPool.size() == 0)
             return false;
         
@@ -137,13 +133,13 @@ namespace sora {
         return true;
     }
     
-    int32 SoraKeyPool::addGlobalHotKey(const SoraHotkey& hotkey, SoraEventHandler* handler) {
+    int32 SoraKeyPoll::addGlobalHotKey(const SoraHotkey& hotkey, SoraEventHandler* handler) {
         g_hotkeys.push_back(HotkeyNode(hotkey, g_next_hotkeyid, handler));
         ++g_next_hotkeyid;
         return g_next_hotkeyid-1;
     }
     
-    void SoraKeyPool::delGlobalHotkey(int32 hid) {
+    void SoraKeyPoll::delGlobalHotkey(int32 hid) {
         for(int i = 0; i<g_hotkeys.size(); ++i)
             if(g_hotkeys[i].mId == hid) {
                 g_hotkeys.erase(g_hotkeys.begin()+i);
@@ -151,7 +147,7 @@ namespace sora {
             }
     }
     
-    void SoraKeyPool::setGlobalHotkey(int32 hid, const SoraHotkey& hotkey) {
+    void SoraKeyPoll::setGlobalHotkey(int32 hid, const SoraHotkey& hotkey) {
         for(int i = 0; i<g_hotkeys.size(); ++i)
             if(g_hotkeys[i].mId == hid) {
                 g_hotkeys[i].mHotkey = hotkey;
@@ -159,7 +155,7 @@ namespace sora {
             }
     }
     
-    void SoraKeyPool::clearGlobalHotkeys() {
+    void SoraKeyPoll::clearGlobalHotkeys() {
         g_hotkeys.clear();
         g_next_hotkeyid = 0;
     }
@@ -262,69 +258,38 @@ namespace sora {
         g_mbuttondown = middleBtn;
     }
 
-    void SoraKeyPool::addMouseListener(SoraMouseListener* mouseListener, int prio) {
-        g_mouseListeners.insert(std::make_pair(prio, mouseListener));
+    void SoraKeyPoll::AddInputListener(SoraInputListener* mouseListener, int prio) {
+        g_inputListeners.insert(std::make_pair(prio, mouseListener));
     }
     
-    void SoraKeyPool::addKeyListener(SoraKeyListener* keyListener, int prio) {
-        g_keyListeners.insert(std::make_pair(prio, keyListener));
-    }
-    
-    void SoraKeyPool::addJoystickListener(SoraJoystickListener* joyListener, int prio) {
-        g_joystickListeners.insert(std::make_pair(prio, joyListener));
-    }
-    
-    void SoraKeyPool::delMouseListener(SoraMouseListener* mouseListener) {
-        MouseListenerMap::iterator itListener = g_mouseListeners.begin();
-        while(itListener != g_mouseListeners.end()) {
+    void SoraKeyPoll::DelInputListener(SoraInputListener* mouseListener) {
+        InputListenerMap::iterator itListener = g_inputListeners.begin();
+        while(itListener != g_inputListeners.end()) {
             if(itListener->second == mouseListener) {
-                g_mouseListeners.erase(itListener);
+                g_inputListeners.erase(itListener);
                 break;
             }
             ++itListener;
         }
     }
     
-    void SoraKeyPool::delKeyListener(SoraKeyListener* keyListener) {
-        KeyListenerMap::iterator itListener = g_keyListeners.begin();
-        while(itListener != g_keyListeners.end()) {
-            if(itListener->second == keyListener) {
-                g_keyListeners.erase(itListener);
-                break;
-            }
-            ++itListener;
-        }
-    }
-    
-    void SoraKeyPool::delJoystickListener(SoraJoystickListener* joyListener) {
-        JoystickListenerMap::iterator itListener = g_joystickListeners.begin();
-        while(itListener != g_joystickListeners.end()) {
-            if(itListener->second == joyListener) {
-                g_joystickListeners.erase(itListener);
-                break;
-            }
-            ++itListener;
-        }
-    }
-    
-    
-    void SoraKeyPool::onFrameStart() {
+    void SoraKeyPoll::onFrameStart() {
         
     }
     
-    void SoraKeyPool::onFrameEnd() {
+    void SoraKeyPoll::onFrameEnd() {
         pollMouseInput();
         pollListenerEvents();
         clearInputQueue();
     }
     
-    void SoraKeyPool::pollListenerEvents() {
+    void SoraKeyPoll::pollListenerEvents() {
         while(!g_mouseEvents.empty()) {
             SoraMouseEvent mevent = g_mouseEvents.front();
             g_mouseEvents.pop();
             
-            MouseListenerMap::iterator itListener = g_mouseListeners.begin();
-            while(itListener != g_mouseListeners.end()) {
+            InputListenerMap::iterator itListener = g_inputListeners.begin();
+            while(itListener != g_inputListeners.end()) {
                 int type = mevent.type;
                 switch(type) {
                     case SoraMouseEvent::MOVED:

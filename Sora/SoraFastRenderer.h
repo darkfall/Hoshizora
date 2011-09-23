@@ -29,7 +29,7 @@ namespace sora {
     public:        
         static SoraFastRenderer* Instance();
      
-        void renderSprite(const StringType& path, float x=0.f, float y=0.f);
+        void renderSprite(const StringType& path, float x, float y, float r=0.f, float sh=1.f, float sr=1.f);
         
         /**
          * Set the auto release of the cached sprites

@@ -25,9 +25,13 @@ namespace sora {
     }
     
 	bool osxFileExists(const SoraWString& path) {
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+        
 		NSString* nsPath = [[NSString alloc] initWithUTF8String:ws2s(path).c_str()];
 		bool result = [[NSFileManager defaultManager] fileExistsAtPath:nsPath];
         [nsPath release];
+        
+        [pool release];
         return result;
 	}
 } // namespace sora

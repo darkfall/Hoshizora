@@ -31,14 +31,18 @@ namespace sora {
         return &renderer;
     }
     
-    void SoraFastRenderer::renderSprite(const StringType& path, float x, float y) {
+    void SoraFastRenderer::renderSprite(const StringType& path, float x, float y, float r, float sh, float sv) {
         SoraStringId sid = path.uniqueId();
         
         SpriteCacheMap::iterator itSprite = mSpriteCache.find(sid);
         if(itSprite != mSpriteCache.end()) {
-            if(itSprite->second.mSprite != NULL) {
+            SoraSprite* spr = itSprite->second.mSprite;
+            
+            if(spr != NULL) {
                 // render and reset idle time
-                itSprite->second.mSprite->render(x, y);
+                spr->setRotation(r);
+                spr->setScale(sh, sv);
+                spr->render(x, y);
                 itSprite->second.mIdleTime = 0.f;
             } else {
                 SoraSprite* sprite = SoraCore::Instance()->createSprite(path);
@@ -46,6 +50,8 @@ namespace sora {
                     itSprite->second.mSprite = sprite;
                     itSprite->second.mIdleTime = 0.f;
                     
+                    sprite->setRotation(r);
+                    sprite->setScale(sh, sv);
                     sprite->render(x, y);
                 }
                     
@@ -58,6 +64,9 @@ namespace sora {
                 info.mIdleTime = 0.f;
                 
                 mSpriteCache.insert(std::make_pair(sid, info));
+                
+                sprite->setRotation(r);
+                sprite->setScale(sh, sv);
                 sprite->render(x, y);
             }
         }

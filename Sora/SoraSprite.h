@@ -127,6 +127,7 @@ namespace sora {
         
         static SoraSprite* LoadFromFile(const StringType& file);
         static SoraSprite* LoadFromRawData(uint32* data, int32 w, int32 h);
+        static void Render(const StringType& file, float x, float y, float r=0.f, float sh=1.f, float sv=1.f);
 		
 	protected:        
         inline void _initDefaults();

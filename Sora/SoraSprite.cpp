@@ -2,6 +2,7 @@
 #include "SoraModifierAdapter.h"
 #include "SoraTextureMap.h"
 #include "SoraCore.h"
+#include "SoraFastRenderer.h"
 
 namespace sora {
     
@@ -462,6 +463,10 @@ namespace sora {
         if(tex)
             return new SoraSprite(tex);
         return 0;
+    }
+    
+    void SoraSprite::Render(const StringType& file, float x, float y, float r, float sh, float sv) {
+        SoraFastRenderer::Instance()->renderSprite(file, x, y, r, sh, sv);
     }
     
     void SoraSprite::fadeTo(float to, float t) {

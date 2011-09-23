@@ -44,6 +44,9 @@ namespace sora {
         static void BeginScene(uint32 c=0xFF000000, SoraTargetHandle h=0, bool clear=true);
         static void EndScene();
         
+        int32 getWindowWidth() const;
+        int32 getWindowHeight() const;
+        
     private:
         class GameAppWindow: public SoraWindow {
         public:

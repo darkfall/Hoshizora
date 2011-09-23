@@ -135,7 +135,6 @@ namespace sora {
 		void                detachShaderContext();
 
 		SoraSprite* createSprite (const StringType& sPath);
-        void renderSprite(const StringType& path, float x=0.f, float y=0.f);
 
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
@@ -261,13 +260,8 @@ namespace sora {
         SoraMusicFile* 			createMusicFile(bool bStream=false);
         SoraSoundEffectFile* 	createSoundEffectFile();
         
-        void addMouseListener(SoraMouseListener* listener, int priority=0);
-        void addKeyListener(SoraKeyListener* listener, int priority=0);
-        void addJoystickListener(SoraJoystickListener* listener, int priority=0);
-        
-        void delMouseListener(SoraMouseListener* listener);
-        void delKeyListener(SoraKeyListener* listener);
-        void delJoystickListener(SoraJoystickListener* listener);
+        void addInputListener(SoraInputListener* listener, int priority=0);
+        void delInputListener(SoraInputListener* listener);
         
         void execute(const SoraString& appPath, const SoraString& args);
         void snapshot(const SoraString& path);

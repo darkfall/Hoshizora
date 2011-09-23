@@ -443,5 +443,15 @@ typedef uint32 EventChannelType;
 #define SORA_ZIP_PACK_SUPPORT
 
 
+/**
+ * Defines the event receiving type
+ * If defined, eventfunc registering is not required
+ * All Event handling goes through SoraEventHandler::onEvent
+ * this maybe faster but difficult to know the event type
+ * Default: OFF
+ **/
+//#define SORA_EVENT_GENERIC
+
+
 #endif // _SORA_PLATFORM_H_
 

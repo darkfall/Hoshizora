@@ -25,7 +25,7 @@ namespace sora {
         void export_guilib(LuaPlus::LuaState* state) {
             assert(state != NULL);
             
-            LuaModule(state, "guilib")
+            LuaModule(state, "Gui")
             .def("loadXmlGui", &guiwrapper::loadXmlGui)
             .def("loadJsonGui", &guiwrapper::loadJsonGui)
             .def("createWidget", &guiwrapper::createWidget)

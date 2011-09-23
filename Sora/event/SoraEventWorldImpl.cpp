@@ -99,7 +99,7 @@ namespace sora {
             else {
                 EventHandlerList::iterator itHandler = mHandlers.begin();
                 while(itHandler != mHandlers.end()) {
-                    if((*itHandler)->isEnabled() && (*itHandler)->getChannel().listenning(evt->getChannel())) {
+                    if((*itHandler)->isEnabled()) {
                         (*itHandler)->handleWorldEvent(evt);
                     }
                     ++itHandler;

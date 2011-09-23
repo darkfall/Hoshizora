@@ -11,16 +11,18 @@
 
 #include "SoraPlatform.h"
 #include "SoraFSM.h"
+#include "SoraInputListeners.h"
 
 namespace sora {
     
     class SoraGameApp;
     
-    class SORA_API SoraGameState: public SoraFSMState {
+    class SORA_API SoraGameState: public SoraFSMState, public SoraInputListener {
     public:
         SoraGameApp* getGameApp() const {
             return mGameApp;
         }
+        
         
     private:
         friend class SoraGameApp;

@@ -107,7 +107,7 @@ namespace sora {
         static TransformData g_CurrentTransform;
         static ClippingData g_CurrentClipping;
         
-        SoraKeyPool* g_keypool;
+        SoraKeyPoll* g_keypool;
     }
     
     SoraCore* SoraCore::Instance() {
@@ -158,7 +158,6 @@ namespace sora {
 #endif
         
 		setRandomSeed(rand());
-        initConstantStrings();
         
         _registerEventTypes();
         _regGlobalProducts();
@@ -275,7 +274,7 @@ namespace sora {
         _checkCoreComponents();
         
         // registering global keypool
-        g_keypool = new SoraKeyPool;
+        g_keypool = new SoraKeyPoll;
         
         // startup consoles
         sora::SoraConsole::Instance();
@@ -670,7 +669,7 @@ namespace sora {
 		pInput = input;
 		bHasInput = true;
         
-        SoraKeyPool::setQueueInput(input);
+        SoraKeyPoll::setQueueInput(input);
 	}
 
 	void SoraCore::registerResourceManager(SoraResourceManager* pResourceManager) {
@@ -921,10 +920,6 @@ namespace sora {
 			}
 		}
 	}
-    
-    void SoraCore::renderSprite(const StringType& path, float x, float y) {
-        SoraFastRenderer::Instance()->renderSprite(path, x, y);
-    }
 	
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		sora_assert(bInitialized==true);
@@ -1106,7 +1101,7 @@ namespace sora {
 	}
 
 	bool SoraCore::getKeyEvent(SoraKeyEvent& ev) {
-		if(bHasInput) return SoraKeyPool::getQueueEvent(ev);
+		if(bHasInput) return SoraKeyPoll::getQueueEvent(ev);
 		return false;
 	}
 
@@ -1141,19 +1136,19 @@ namespace sora {
 	}
     
     int32 SoraCore::registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler) {
-        return SoraKeyPool::addGlobalHotKey(key, handler);
+        return SoraKeyPoll::addGlobalHotKey(key, handler);
     }
     
     void SoraCore::setGlobalHotkey(int32 hid, const SoraHotkey& key) {
-        SoraKeyPool::setGlobalHotkey(hid, key);
+        SoraKeyPoll::setGlobalHotkey(hid, key);
     }
     
     void SoraCore::unregisterGlobalHotkey(int32 hid) {
-        SoraKeyPool::delGlobalHotkey(hid);
+        SoraKeyPoll::delGlobalHotkey(hid);
     }
     
     void SoraCore::clearGlobalHotkeys() {
-        SoraKeyPool::clearGlobalHotkeys();
+        SoraKeyPoll::clearGlobalHotkeys();
     }
 	
 	StringType SoraCore::fileOpenDialog(const char* filter, const char* defaultPath) {
@@ -1487,28 +1482,12 @@ namespace sora {
         return SoraResourceFileFinder::ResourceMemory / 1024;
     }
     
-    void SoraCore::addMouseListener(SoraMouseListener* listener, int priority) {
-        SoraKeyPool::addMouseListener(listener, priority);
+    void SoraCore::addInputListener(SoraInputListener* listener, int priority) {
+        SoraKeyPoll::AddInputListener(listener, priority);
     }
     
-    void SoraCore::addKeyListener(SoraKeyListener* listener, int priority) {
-        SoraKeyPool::addKeyListener(listener, priority);
-    }
-    
-    void SoraCore::addJoystickListener(SoraJoystickListener* listener, int priority) {
-        SoraKeyPool::addJoystickListener(listener, priority);
-    }
-    
-    void SoraCore::delMouseListener(SoraMouseListener* listener) {
-        SoraKeyPool::delMouseListener(listener);
-    }
-    
-    void SoraCore::delKeyListener(SoraKeyListener* listener) {
-        SoraKeyPool::delKeyListener(listener);
-    }
-    
-    void SoraCore::delJoystickListener(SoraJoystickListener* listener) {
-        SoraKeyPool::delJoystickListener(listener);
+    void SoraCore::delInputListener(SoraInputListener* listener) {
+        SoraKeyPoll::DelInputListener(listener);
     }
     
     void SoraCore::setFarPoint(const SoraVector3& ptFar) {

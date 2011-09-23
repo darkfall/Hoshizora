@@ -13,13 +13,12 @@
 #include "SoraString.h"
 #include "SoraRect.h"
 #include "SoraObject.h"
+#include "SoraSprite.h"
 
 #include <map>
 
 namespace sora {
-    
-    class SoraSprite;
-    
+        
     class SoraAnimation: public SoraObject {
     public:
         SoraAnimation();
@@ -58,7 +57,7 @@ namespace sora {
             int32 mTexWidth;
             int32 mTexHeight;
             
-            inline void get(int32 index, SoraRect& rect) {
+            inline void get(int32 index, SoraSprite* sprite) {
                 if(index < 0)
                     index = mCount + index;
                 if(index > mCount)
@@ -66,7 +65,7 @@ namespace sora {
                 
                 int32 row = index / mCol;
                 int32 col = index % mCol;
-                rect.set((col-1)*mTexWidth, (row-1)*mTexHeight, mTexWidth, mTexHeight);
+                sprite->setTextureRect((col-1)*mTexWidth, (row-1)*mTexHeight, mTexWidth, mTexHeight);
             }
         };
         

@@ -57,12 +57,11 @@ namespace sora {
                 log_error("no /app/window node exists in window config, default used");
             }
             if(parser.toNode("/app/feature")) {
-                SoraCoreFeature feature(
-                                          parser.getBool("load_plugin", false),
-                                          parser.getBool("fsb", false),
-                                          parser.getBool("msgbox_show_error", false),
-                                          parser.getBool("seperate_sound_thread", false),
-                                          parser.getBool("debug_render", false));
+                SoraCoreFeature feature(parser.getBool("load_plugin", false),
+                                        parser.getBool("fsb", false),
+                                        parser.getBool("msgbox_show_error", false),
+                                        parser.getBool("seperate_sound_thread", false),
+                                        parser.getBool("debug_render", false));
                 SoraCore::Instance()->init(feature);
             }
         }
