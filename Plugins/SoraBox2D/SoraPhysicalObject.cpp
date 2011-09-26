@@ -285,7 +285,6 @@ namespace sora {
         if(mDrawBoundingBox) {
             b2AABB box = getBoundingBox();
             sora::SORA->renderBox(box.upperBound.x, box.upperBound.y, box.lowerBound.x, box.lowerBound.y, COLOR_RED.GetHWColor());
-            printf("%f, %f, %f, %f\n", box.upperBound.x, box.upperBound.y, box.lowerBound.x, box.lowerBound.y);
         }
     }
     

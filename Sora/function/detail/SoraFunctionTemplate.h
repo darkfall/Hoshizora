@@ -196,7 +196,7 @@ namespace sora {
             
             template<typename Functor>
             void assign_to(Functor f, function_obj_ref_tag tag) {
-                
+                // ?
             }
             
         protected:
@@ -298,7 +298,7 @@ namespace sora {
             
             template<typename Functor>
             void assign_to(Functor f, function_obj_ref_tag tag) {
-                
+                // ?
             }
             
         protected:

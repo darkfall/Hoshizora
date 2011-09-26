@@ -43,6 +43,7 @@ namespace sora {
          **/
         SoraComponent(SoraLightWeightEntity* owner, bool heavyWeight=true):
         mHeavyWeight(heavyWeight),
+        mPropertyNoClassName(false),
         mOwner(0) {
             setOwner(owner);
         }
@@ -60,6 +61,17 @@ namespace sora {
         
         bool isHeavyWeight() const {
             return mHeavyWeight;
+        }
+        
+        /**
+         * If true, when adding property, would not append component class name 
+         **/
+        void setPropertyNoClassName(bool flag) {
+            mPropertyNoClassName = flag;
+        }
+        
+        bool isPropertyNoClassName() const {
+            return mPropertyNoClassName;
         }
         
         /**
@@ -120,13 +132,19 @@ namespace sora {
         
     private:
         bool mHeavyWeight;
+        bool mPropertyNoClassName;
         SoraLightWeightEntity* mOwner;
     };
     
     template<typename T>
     void SoraComponent::addProperty(const std::string& name, const T& val) {
-        if(mOwner != 0) 
-            mOwner->addProperty(MakeProperty(getName()+"."+name, val));
+        if(mOwner != 0) {
+            if(mPropertyNoClassName) {
+                mOwner->addProperty(MakeProperty(name, val));
+            } else {
+                mOwner->addProperty(MakeProperty(getName()+"."+name, val));
+            }
+        }
         else 
             THROW_SORA_EXCEPTION(RuntimeException, "caught component without owner");
     }
@@ -148,12 +166,16 @@ namespace sora {
     }
     
     static void DestroyComponent(SoraComponent* comp) {
-        delete comp;
+        sora_assert(comp);
+        if(comp)
+            delete comp;
     }
     
     template<typename T>
     inline T* ComponentCast(SoraComponent* comp) {
-        sora_assert(comp);
+        if(!comp)
+            return 0;
+        
         if(comp->getName() == T::GetName()) {
             return static_cast<T*>(comp);
         }

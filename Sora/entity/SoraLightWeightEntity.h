@@ -15,7 +15,6 @@
 namespace sora {
     
 #define SORA_DEF_ENTITY(class, description) \
-    SORA_DEF_DYN_RTTI_CLASS(class, description) \
     public: \
         static ::sora::SoraLightWeightEntity* create() { \
             ::sora::SoraLightWeightEntity* ent = new class(); \
@@ -28,7 +27,6 @@ namespace sora {
         static class* cast(::sora::SoraLightWeightEntity*);
     
 #define SORA_IMPL_ENTITY(class) \
-    SORA_IMPL_DYN_RTTI_CLASS(class) \
     class* class::cast(::sora::SoraLightWeightEntity* ent) { \
         return dynamic_cast<class*>(ent); \
     }
@@ -53,8 +51,6 @@ namespace sora {
         SoraComponent* removeComponent(const SoraString& name);
         SoraComponent* removeComponent(const SoraComponent* co);
         SoraComponent* getComponent(const SoraString& name);
-        template<typename T>
-        T* getComponentT(const SoraString& name) const;
         
         template<typename T>
         void sendMessage(const MessageIdType& message, const T& data);
@@ -84,17 +80,19 @@ namespace sora {
         template<typename T>
         T getProperty(const PropertyId& pid, const T& defaultValue) const;
         
+        // deep copy properties to another entity
+        void copyPropertyMap(SoraLightWeightEntity* entity);
+        
         SORA_DEF_ENTITY(SoraLightWeightEntity, "SoraEntity")
         
     protected:
-        SoraScriptVMHolder mScriptVM;
         SoraComponentHolder mComponents;
-        SoraDynRTTIClass& mHolder;
+        SoraPropertyHolder mHolder;
     };
     
     template<typename T>
     inline void SoraLightWeightEntity::sendMessage(const MessageIdType& message, const T& data) {
-        SoraMessageEvent mssg(mssg, data);
+        SoraMessageEvent mssg(message, data);
         this->onMessage(&mssg);
         mComponents.sendMessage(&mssg);
     }

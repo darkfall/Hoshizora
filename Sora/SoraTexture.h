@@ -3,6 +3,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraString.h"
+#include "math/SoraVector.h"
 
 namespace sora {
 
@@ -28,7 +29,19 @@ namespace sora {
         
         static SoraTextureHandle LoadFromFile(const StringType& file);
         static SoraTextureHandle LoadFromRawData(uint32* data, int32 w, int32 h);
+        static SoraTextureHandle LoadFromMemory(uint32* data, ulong32 size);
         static SoraTextureHandle CreateEmpty(int32 w, int32 h);
+        
+        static uint32* GetData(SoraTextureHandle handle);
+        static void PutData(SoraTextureHandle data);
+        
+        static int32 GetWidth(SoraTextureHandle handle);
+        static int32 GetHeight(SoraTextureHandle handle);
+        static int32 GetOriginalWidth(SoraTextureHandle handle);
+        static int32 GetOriginalHeight(SoraTextureHandle handle);
+        static SoraVector GetSize(SoraTextureHandle handle);
+        static SoraVector GetOriginalSize(SoraTextureHandle handle);
+        
         static void Release(SoraTextureHandle h);
 	};
 

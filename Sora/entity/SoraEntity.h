@@ -47,8 +47,6 @@ namespace sora {
         EntityFsmType mFsm;
         
         SoraScriptVMHolder mScriptVM;
-        SoraComponentHolder mComponents;
-        SoraDynRTTIClass& mHolder;
     };
     
     template<typename T>

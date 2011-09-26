@@ -468,7 +468,7 @@ namespace sora{
 
 		texid = SOIL_load_OGL_texture_and_info_from_memory((const unsigned char* const)ptr,
 														  size,
-														  SOIL_LOAD_RGBA,
+														  SOIL_LOAD_AUTO,
 														  SOIL_CREATE_NEW_ID,
 														  (bMipmap ? SOIL_FLAG_MIPMAPS : 0)
 														  | /*SOIL_FLAG_POWER_OF_TWO | */SOIL_FLAG_TEXTURE_REPEATS/*| SOIL_FLAG_INVERT_Y*/,

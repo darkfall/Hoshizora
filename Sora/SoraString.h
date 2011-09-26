@@ -60,6 +60,7 @@ namespace sora {
             wchar_t wat(size_t index) const;
             
             size_t size() const;
+            bool empty() const;
             
             int asInt() const;
             bool asBool() const;
@@ -193,6 +194,10 @@ namespace sora {
         
         inline bool String::operator>(const String& rhs) const {
             return mString > rhs.mString;
+        }
+        
+        inline bool String::empty() const {
+            return mString.empty();
         }
     }
     

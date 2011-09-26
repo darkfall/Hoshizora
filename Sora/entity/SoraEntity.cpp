@@ -12,8 +12,7 @@
 
 namespace sora {
         
-    SoraEntity::SoraEntity():
-    mHolder(*getRttiClass()) {
+    SoraEntity::SoraEntity() {
         // entity can handle SoraMessageEvent and send message to components
     }
     

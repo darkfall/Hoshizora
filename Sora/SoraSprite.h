@@ -14,8 +14,6 @@ namespace sora {
 
 	class SoraCore;
 	
-#define SPRITE_TYPE 0x00000010
-
 	#define	BLEND_COLORADD		1
 	#define	BLEND_COLORMUL		0
 	#define	BLEND_ALPHABLEND	2
@@ -34,6 +32,7 @@ namespace sora {
 		float			tx, ty;		// texture coordinates
 		
 		SoraVertex(): z(0.0f), col(0xFFFFFFFF) {}
+        SoraVertex(float _x, float _y, float _tx, float _ty): x(_x), y(_y), tx(_tx), ty(_ty) {}
 	};
 	
 	struct SoraQuad {
@@ -127,6 +126,7 @@ namespace sora {
         
         static SoraSprite* LoadFromFile(const StringType& file);
         static SoraSprite* LoadFromRawData(uint32* data, int32 w, int32 h);
+        static SoraSprite* LoadFromMemory(uint32* data, ulong32 size);
         static void Render(const StringType& file, float x, float y, float r=0.f, float sh=1.f, float sv=1.f);
 		
 	protected:        

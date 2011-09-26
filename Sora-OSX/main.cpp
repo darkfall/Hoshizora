@@ -205,7 +205,7 @@ private:
 
 int main(int argc, char* argv[]) {    
         
-    sora::SoraGameAppDef def("config.xml");
+    sora::SoraGameAppDef def(new mainWindow);
     sora::SoraGameApp app(def);
     
     app.addState(new GameInitState, "init");

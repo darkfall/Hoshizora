@@ -26,8 +26,6 @@
 #include "signal/SoraSignal.h"
 
 #include "entity/SoraEntity.h"
-#include "../Components/RenderComponent.h"
-#include "../Components/PositionComponent.h"
 
 #include "SoraStringTokenlizer.h"
 
@@ -51,23 +49,9 @@ void transform3d(float& x, float& y, float z) {
 	z = 0.f;
 }
 
-sora::SoraEntity entity;
-
-void handleCommand(sora::SoraConsoleEvent* evt) {
-    sora::SoraStringTokenlizer token(evt->getParams(), " ");
-    if(token.size() == 2) {
-        entity.setProperty(token.front(), (float)atof(token.back().c_str()));
-        sora::SoraPropertyBase* p = entity.getPropertyBase(token.front());
-        evt->pushResult(std::string("Property ")+token.front()+" to "+p->toString());
-    }
-}
-
-SORA_DEF_CONSOLE_EVT_FUNC(handleCommand, "setprop");
 
 bool mainWindow::updateFunc() {
-    
-    entity.update(sora::SORA->getDelta());
-    
+        
     mScene1->update(sora::SORA->getDelta());
     return false;
 }
@@ -107,15 +91,6 @@ void mainWindow::init() {
     file = sora::SoraCore::Instance()->createMusicFile(SoraWString(L"02.mp3"), true);
     if(file)
         file->play();
-    
-    sora::particle::CircleEmitter* emitter = new sora::particle::CircleEmitter(&entity);
-    emitter->setPosition(300, 300);
-    emitter->setSprite(L"textures/Particle004.png");
-    emitter->setEmitInterval(1.f);
-    emitter->setLifeTime(10.f);
-    emitter->fireAt(300, 300);
-    emitter->setEmitNum(10);
-    entity.addComponent(emitter);
     
     sora::SORA->setFPS(60);
 	sora::SORA->loadResourcePack(L"resource.SoraResource");

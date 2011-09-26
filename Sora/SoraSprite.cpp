@@ -107,9 +107,7 @@ namespace sora {
 		setPosition(0.f, 0.f);
         
 		mQuad.blend=BLEND_DEFAULT;
-		
-		setType(SPRITE_TYPE);
-	}
+    }
 
 	void SoraSprite::setTextureRect(float x, float y, float width, float height) {
 		float tx1, ty1, tx2, ty2;
@@ -460,6 +458,13 @@ namespace sora {
     
     SoraSprite* SoraSprite::LoadFromRawData(uint32* data, int32 w, int32 h) {
         SoraTextureHandle tex = SoraTexture::LoadFromRawData(data, w, h);
+        if(tex)
+            return new SoraSprite(tex);
+        return 0;
+    }
+    
+    SoraSprite* SoraSprite::LoadFromMemory(uint32* data, ulong32 size) {
+        SoraTextureHandle tex = SoraTexture::LoadFromMemory(data, size);
         if(tex)
             return new SoraSprite(tex);
         return 0;

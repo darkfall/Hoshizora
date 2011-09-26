@@ -26,13 +26,13 @@ namespace sora {
         void    setRotation(float rot);
         
         void    setViewRect(float width, float height);
-        float getViewWidth() const;
-        float getViewHeight() const;
-        
+        float   getViewWidth() const;
+        float   getViewHeight() const;
+            
         void    getZoom(float* h, float* v);
-        float getRotation() const;
-        float getHZoom() const;
-        float getVZoom() const;
+        float   getRotation() const;
+        float   getHZoom() const;
+        float   getVZoom() const;
         
         void    setPosition(float x, float y);
         /**

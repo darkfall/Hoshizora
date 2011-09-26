@@ -13,7 +13,11 @@ namespace sora {
     
     SoraPropertyBase* SoraComponent::getProperty(const std::string& prop) const {
         if(mOwner != 0)
-            return mOwner->getPropertyBase(prop);
+            if(mPropertyNoClassName) {
+                return mOwner->getPropertyBase(prop);
+            } else {
+                return mOwner->getPropertyBase(getName()+"."+prop);
+            }
         else 
             THROW_SORA_EXCEPTION(RuntimeException, "caught component without owner");
     }
