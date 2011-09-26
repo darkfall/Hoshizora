@@ -336,10 +336,6 @@ void rfMainWindow::init() {
 	printf("%s\n", sora::ws2s(sora::SoraFileUtility::getApplicationPath()).c_str());
     printf("%d, %d\n", getWindowWidth(), getWindowHeight());
     
-    bgm = CORE->createMusicFile(L"02.mp3", true);
-    se = CORE->createSoundEffectFile(SoraWString(L"click_08.wav"));
-    bgm->play();
-    
     sora::SORA_IOS->enableAccelerometer(true);
     
 	pBG = CORE->createSprite(L"magicCircle.png");

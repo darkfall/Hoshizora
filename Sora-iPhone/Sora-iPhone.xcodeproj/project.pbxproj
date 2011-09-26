@@ -19,6 +19,7 @@
 		88057F95135EBA4D00B1535B /* rfMapRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */; };
 		88057FAD135EBBBF00B1535B /* resource.SoraResource in Resources */ = {isa = PBXBuildFile; fileRef = 88057FAC135EBBBF00B1535B /* resource.SoraResource */; };
 		88058042135EC07E00B1535B /* data.rfResource in Resources */ = {isa = PBXBuildFile; fileRef = 88058041135EC07E00B1535B /* data.rfResource */; };
+		880D06D214301728005CB649 /* MainWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 880D06D114301727005CB649 /* MainWindow.mm */; };
 		8834C31F135F7A47006A20F6 /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C31A135F7A47006A20F6 /* editorWindow.cpp */; };
 		8834C320135F7A47006A20F6 /* editorWindow.json in Resources */ = {isa = PBXBuildFile; fileRef = 8834C31C135F7A47006A20F6 /* editorWindow.json */; };
 		8834C337135F7AE7006A20F6 /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C335135F7AE7006A20F6 /* SoraSpriteAnimation.cpp */; };
@@ -370,6 +371,8 @@
 		88057F93135EBA4D00B1535B /* rfMapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMapRenderer.h; sourceTree = "<group>"; };
 		88057FAC135EBBBF00B1535B /* resource.SoraResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = resource.SoraResource; path = "../Sora-OSX/build/Debug/resource.SoraResource"; sourceTree = SOURCE_ROOT; };
 		88058041135EC07E00B1535B /* data.rfResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.rfResource; path = ../Resources/data.rfResource; sourceTree = SOURCE_ROOT; };
+		880D06D01430171E005CB649 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
+		880D06D114301727005CB649 /* MainWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainWindow.mm; sourceTree = "<group>"; };
 		8829063C135FE427006EF84A /* editorWindow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = editorWindow.json; path = anime/editorWindow.json; sourceTree = "<group>"; };
 		8834C318135F7A47006A20F6 /* aeMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aeMainWindow.h; sourceTree = "<group>"; };
 		8834C31A135F7A47006A20F6 /* editorWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = editorWindow.cpp; sourceTree = "<group>"; };
@@ -1226,6 +1229,7 @@
 				88057F88135EBA4000B1535B /* Reflection */,
 				8834C317135F7A47006A20F6 /* anime */,
 				88C8523C14172C5900FB39EC /* Sora */,
+				880D06CF14301680005CB649 /* CatchIt */,
 				8897825A13071CCD00A69ADE /* Sora_iPhoneAppDelegate.h */,
 				8897825B13071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm */,
 				8897825C13071CCD00A69ADE /* Sora_iPhoneViewController.h */,
@@ -1305,6 +1309,16 @@
 			name = Reflection;
 			path = ../Reflection;
 			sourceTree = SOURCE_ROOT;
+		};
+		880D06CF14301680005CB649 /* CatchIt */ = {
+			isa = PBXGroup;
+			children = (
+				880D06D01430171E005CB649 /* MainWindow.h */,
+				880D06D114301727005CB649 /* MainWindow.mm */,
+			);
+			name = CatchIt;
+			path = ../CatchIt;
+			sourceTree = "<group>";
 		};
 		8834C317135F7A47006A20F6 /* anime */ = {
 			isa = PBXGroup;
@@ -2893,6 +2907,7 @@
 				8895231F142818B1006673C1 /* AppDelegate.mm in Sources */,
 				8895232114281A2E006673C1 /* GryoScopeController.mm in Sources */,
 				8895232514282F88006673C1 /* SOIL.c in Sources */,
+				880D06D214301728005CB649 /* MainWindow.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

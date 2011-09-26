@@ -64,6 +64,8 @@
     msaaFramebuffer = nil;
     msaaColorBuffer = nil;
     msaaDepthBuffer = nil;
+    
+    enableOrientation = true;
 
     return self;
 }
@@ -336,26 +338,28 @@
 }
 
 - (void)orientationChanged:(NSNotification *)note {
-    sora::iOSOrientation orientation;
-    
-    switch([[note object] orientation]) {
-        case UIDeviceOrientationPortrait:
-            orientation = sora::ORIENTATION_PORTRAIT;
-            break;
-        case UIDeviceOrientationPortraitUpsideDown:
-            orientation = sora::ORIENTATION_PORTRAIT_UPSIDE_DOWN;
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            orientation = sora::ORIENTATION_LANDSCAPE_LEFT;
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            orientation =  sora::ORIENTATION_LANDSCAPE_RIGHT;
-            break;
-        default:
-            break;
+    if(enableOrientation) {
+        sora::iOSOrientation orientation;
+        
+        switch([[note object] orientation]) {
+            case UIDeviceOrientationPortrait:
+                orientation = sora::ORIENTATION_PORTRAIT;
+                break;
+            case UIDeviceOrientationPortraitUpsideDown:
+                orientation = sora::ORIENTATION_PORTRAIT_UPSIDE_DOWN;
+                break;
+            case UIDeviceOrientationLandscapeLeft:
+                orientation = sora::ORIENTATION_LANDSCAPE_LEFT;
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                orientation =  sora::ORIENTATION_LANDSCAPE_RIGHT;
+                break;
+            default:
+                break;
+        }
+        
+        sora::SoraiOSInitializer::Instance()->setOrientation(orientation);
     }
-    
-    sora::SoraiOSInitializer::Instance()->setOrientation(orientation);
 }
 
 - (void)layoutSubviews
@@ -384,6 +388,14 @@
     if(sora::isUseRetina())
         return [self contentScaleFactor];
     return 1.0;
+}
+
+- (void)enableOrientationChange:(BOOL)flag {
+    enableOrientation = flag;
+}
+
+- (bool)isOrientationChangeEnabled {
+    return enableOrientation;
 }
 
 @end

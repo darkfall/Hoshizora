@@ -32,6 +32,8 @@
     
     bool multisampling;
     GLuint msaaFramebuffer, msaaColorBuffer, msaaDepthBuffer;
+    
+    bool enableOrientation;
 }
 
 @property (nonatomic, retain) EAGLContext *context;
@@ -56,5 +58,8 @@
 - (void)destroyFramebuffer:(GLuint)buffer;
 - (BOOL)presentFramebuffer;
 - (BOOL)presentFramebuffer2:(GLuint)buffer;
+
+- (void)enableOrientationChange:(BOOL)flag;
+- (bool)isOrientationChangeEnabled;
 
 @end
