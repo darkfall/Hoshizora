@@ -61,11 +61,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/SoraiOSGLRenderer.cpp"
-         timestampString = "337822723.010327"
+         timestampString = "338108307.041715"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "796"
-         endingLineNumber = "796">
+         startingLineNumber = "797"
+         endingLineNumber = "797">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -80,20 +80,6 @@
          endingLineNumber = "96"
          landmarkName = "SoraShaderContext::attachShader(const SoraWString&amp; file, const SoraString&amp; entry, int32 type)"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraiOSMainWindow.h"
-         timestampString = "332412805.807724"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "38"
-         endingLineNumber = "38"
-         landmarkName = "renderFunc()"
-         landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -141,90 +127,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraiOSMainWindow.h"
-         timestampString = "337064225.342195"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
-         landmarkName = "init()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraiOSMainWindow.h"
-         timestampString = "332412805.807724"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "40"
-         endingLineNumber = "40"
-         landmarkName = "renderFunc()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraiOSMainWindow.h"
-         timestampString = "337064225.342195"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
-         landmarkName = "getWindowWidth()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraiOSMainWindow.h"
-         timestampString = "337064162.546247"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "43"
-         endingLineNumber = "43"
-         landmarkName = "renderFunc()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraiOSMainWindow.h"
-         timestampString = "337064237.091318"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "renderFunc()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SoraiOSMainWindow.h"
-         timestampString = "337064254.77414"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
-         landmarkName = "init()"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSFontManager/SoraiOSFontManager.mm"
          timestampString = "337064360.682108"
@@ -255,11 +157,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "289"
-         endingLineNumber = "289"
+         startingLineNumber = "288"
+         endingLineNumber = "288"
          landmarkName = "-presentFramebuffer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -283,11 +185,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "rfMainWindow.mm"
-         timestampString = "337827953.186332"
+         timestampString = "338178015.117151"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
          landmarkName = "rfMainWindow::updateFunc()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -311,11 +213,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Sora/SoraCore.cpp"
-         timestampString = "337240204.703117"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "302"
-         endingLineNumber = "302"
+         startingLineNumber = "307"
+         endingLineNumber = "307"
          landmarkName = "SoraCore::update()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -325,11 +227,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "239"
-         endingLineNumber = "239"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
          landmarkName = "-update"
          landmarkType = "5">
       </FileBreakpoint>
@@ -339,11 +241,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "251"
-         endingLineNumber = "251"
+         startingLineNumber = "250"
+         endingLineNumber = "250"
          landmarkName = "-setFramebuffer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -353,11 +255,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "284"
-         endingLineNumber = "284"
+         startingLineNumber = "283"
+         endingLineNumber = "283"
          landmarkName = "-presentFramebuffer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -381,11 +283,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "274"
-         endingLineNumber = "274"
+         startingLineNumber = "273"
+         endingLineNumber = "273"
          landmarkName = "-presentFramebuffer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -395,11 +297,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "271"
-         endingLineNumber = "271"
+         startingLineNumber = "270"
+         endingLineNumber = "270"
          landmarkName = "-presentFramebuffer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -409,11 +311,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "265"
-         endingLineNumber = "265"
+         startingLineNumber = "264"
+         endingLineNumber = "264"
          landmarkName = "-setFramebuffer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -428,7 +330,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "192"
          endingLineNumber = "192"
-         landmarkName = "SoraiOSGLRenderer::_glBeginScene(ulong32 color, ulong32 t, bool clear)"
+         landmarkName = "SoraiOSGLRenderer::_glEndScene()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -437,12 +339,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "rfMainWindow.mm"
-         timestampString = "337827953.186332"
+         timestampString = "338178015.117151"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
-         landmarkName = "rfMainWindow::renderState()"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "rfMainWindow::renderFunc()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -465,11 +367,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "234"
-         endingLineNumber = "234"
+         startingLineNumber = "233"
+         endingLineNumber = "233"
          landmarkName = "-deleteFramebuffer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -479,11 +381,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/EAGLView.mm"
-         timestampString = "337821331.377032"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "235"
-         endingLineNumber = "235"
+         startingLineNumber = "234"
+         endingLineNumber = "234"
          landmarkName = "-deleteFramebuffer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -507,11 +409,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/SoraiOSWrapper.mm"
-         timestampString = "337239524.146627"
+         timestampString = "338172954.679466"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
          landmarkName = "translatePointToView(float* x, float* y)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -521,11 +423,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "rfMainWindow.mm"
-         timestampString = "337489715.609476"
+         timestampString = "338170988.104258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "23"
-         endingLineNumber = "23">
+         startingLineNumber = "25"
+         endingLineNumber = "25"
+         landmarkName = "action(const gcn::ActionEvent&amp; actionEvent)"
+         landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -533,40 +437,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "rfMainWindow.mm"
-         timestampString = "337827953.186332"
+         timestampString = "338178015.117151"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "172"
-         endingLineNumber = "172"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
          landmarkName = "rfMainWindow::updateFunc()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/darkfall/SoraGit/Plugins/SoraGUIChan/guichan/widgets/button.cpp"
-         timestampString = "337489862.658994"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "255"
-         endingLineNumber = "255"
-         landmarkName = "Button::keyPressed(KeyEvent&amp; keyEvent)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/darkfall/SoraGit/Plugins/SoraGUIChan/guichan/widgets/button.cpp"
-         timestampString = "337489863.638731"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "267"
-         endingLineNumber = "267"
-         landmarkName = "Button::keyReleased(KeyEvent&amp; keyEvent)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -755,20 +631,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "rfMainWindow.mm"
-         timestampString = "337827953.186332"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "336"
-         endingLineNumber = "336"
-         landmarkName = "rfMainWindow::init()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSSoundSystem/SoraiOSSoundFile.mm"
          timestampString = "337827905.260886"
@@ -777,6 +639,132 @@
          startingLineNumber = "62"
          endingLineNumber = "62"
          landmarkName = "SoraiOSMusicFile::play()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "rfMainWindow.mm"
+         timestampString = "338178015.117151"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "337"
+         endingLineNumber = "337"
+         landmarkName = "rfMainWindow::init()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "rfMainWindow.mm"
+         timestampString = "338178015.117151"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "335"
+         endingLineNumber = "335"
+         landmarkName = "rfMainWindow::init()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/SoraiOSGLRenderer.cpp"
+         timestampString = "338106907.636296"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "375"
+         endingLineNumber = "375"
+         landmarkName = "SoraiOSGLRenderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/soil/stb_image_aug.cpp"
+         timestampString = "338109613.047697"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2365"
+         endingLineNumber = "2365"
+         landmarkName = "do_png(png *p, int *x, int *y, int *n, int req_comp)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "rfMainWindow.mm"
+         timestampString = "338695171.205628"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "341"
+         endingLineNumber = "341"
+         landmarkName = "rfMainWindow::init()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/SoraFolderResourceManager.cpp"
+         timestampString = "338108353.888865"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "SoraFolderResourceManager::getResourceFile(const SoraWString&amp; file, ulong32&amp; size)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Sora/SoraCore.cpp"
+         timestampString = "338172954.679466"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "784"
+         endingLineNumber = "784"
+         landmarkName = "SoraCore::createTexture(const SoraWString&amp; sTexturePath, bool bCache, bool bMipmap)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/darkfall/SoraGit/Plugins/SoraiOSGLRenderer/soil/stb_image_aug.cpp"
+         timestampString = "338109328.062597"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2216"
+         endingLineNumber = "2216"
+         landmarkName = "parse_png_file(png *z, int scan, int req_comp)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Sora_iPhoneAppDelegate.mm"
+         timestampString = "338174836.131553"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "19"
+         endingLineNumber = "19"
+         landmarkName = "-application:didFinishLaunchingWithOptions:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
