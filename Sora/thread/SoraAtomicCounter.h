@@ -54,7 +54,13 @@ namespace sora {
         struct ImplType {
             mutable SoraMutexLock mutex;
             volatile int value;
-        }
+            
+            ImplType(int v=0):
+            value(v) { }
+            
+            ImplType(const ImplType& rhs):
+            value(rhs.value) {}
+        };
 #endif
         ImplType counter;
     };

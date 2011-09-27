@@ -11,7 +11,7 @@
 #ifdef OS_IOS
 
 #include <Foundation/Foundation.h>
-
+#include "SoraLogger.h"
 #include "soraiOSFileUtility.h"
 
 namespace sora {
@@ -31,8 +31,10 @@ namespace sora {
         const char* val = getenv(name.c_str());
         if (val)
             return std::string(val);
-        else
-            THROW_SORA_EXCEPTION("Cannot get env string");
+        else {
+            log_error("SoraPath::getEnvImpl: Cannot get env string");
+            return std::string();
+        }
     }
     
     std::string SoraPathImpl::currentImpl() {

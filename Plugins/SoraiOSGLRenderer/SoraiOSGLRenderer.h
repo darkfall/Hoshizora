@@ -11,10 +11,17 @@
 #define _SORA_IOSGL_RENDERER_H_
 
 #include "SoraRenderSystem.h"
-#include "SoraiOSGLRenderTarget.h"
+#include "SoraiOSDeviceHelper.h"
+
+#ifdef OS_IOS
+#include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h>
+#endif
 
 namespace sora {
-	
+    
+    class SoraRenderTargetiOSGL;
+
 	class SoraiOSGLRenderer: public SoraRenderSystem {
 	public:
 		SoraiOSGLRenderer();
@@ -77,16 +84,25 @@ namespace sora {
         
         void snapshot(const SoraString& path);
 		void onExtensionStateChanged(int32 extension, bool state, int32 param);
-        void renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z);
-        void renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z);
+        
+        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+        void fillBox        (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
 
         void setIcon(const SoraString& icon);
         void setCursor(const SoraString& cursor);
         
+        void setOrientation(iOSOrientation por);
+        iOSOrientation getOrientation() const;
+        
+        void tranlatePointToGL(float* x, float* y);
+        
+        void getDesktopResolution(float* w, float* h);
+        void setQueryVideoModeCallback(QueryVideoMode func);
+        
 	private:
 		void applyTransform();
 		void bindTexture(SoraTexture* tex);
-		
 		
 		inline int32 _modeToGLMode(int32 mode);
 		inline void _glInitialize();
@@ -127,18 +143,16 @@ namespace sora {
 		
 		SoraTimer* pTimer;
 		
-		std::list<SoraRenderTarget*> liTargets;
+		std::list<SoraRenderTargetiOSGL*> liTargets;
 		SoraRenderTargetiOSGL* pCurTarget;
 		
-		bool bShaderAvailable;
-		GLuint uGLShaderProgram;
-
 		GLuint mCurrTexture;
 
 		SoraShaderContext* currShader;
 
-		bool bFullscreen;
 		int iFrameStart;
+        
+        iOSOrientation mOrientation;
 	};
 } // namespace sora
 

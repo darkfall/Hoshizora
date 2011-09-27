@@ -77,42 +77,41 @@ namespace sora {
 		buffer += file;
 		return buffer;
 	}
-	
 
-SoraTexture *mTextureCreate(const char* fileName, bool isFullPath) {
-	std::string fullPath;
-	if(!isFullPath) {
-		fullPath = fileName;
-		if(fullPath.find('/') != std::string::npos) {
-			std::string sDir = fullPath.substr(0, fullPath.rfind('/'));
-			std::string sName = fullPath.substr(fullPath.rfind('/')+1, fullPath.size());
-			
-			fullPath = getPath(sName.c_str(), sDir.c_str());
-		}
-		else fullPath = getPath(fileName);
-	}
-	else fullPath=fileName;
-	
-	printf("%s, %s\n", fileName, fullPath.c_str());
-	if(fullPath.size() == 0)
-		return 0;
+    SoraTexture *mTextureCreate(const char* fileName, bool isFullPath) {
+        std::string fullPath;
+        if(!isFullPath) {
+            fullPath = fileName;
+            if(fullPath.find('/') != std::string::npos) {
+                std::string sDir = fullPath.substr(0, fullPath.rfind('/'));
+                std::string sName = fullPath.substr(fullPath.rfind('/')+1, fullPath.size());
+                
+                fullPath = getPath(sName.c_str(), sDir.c_str());
+            }
+            else fullPath = getPath(fileName);
+        }
+        else fullPath=fileName;
+        
+        printf("%s, %s\n", fileName, fullPath.c_str());
+        if(fullPath.size() == 0)
+            return 0;
 		
-	NSString *name = [[NSString alloc] initWithUTF8String:fullPath.c_str()];
+        NSString *name = [[NSString alloc] initWithUTF8String:fullPath.c_str()];
 		
-	Texture2D *tex = [[Texture2D alloc] initWithImagePath: name];
-	if(tex) {
-		SoraTexture *texture = new SoraTexture([tex name], tex.contentSize.width, tex.contentSize.height,
-											   tex.pixelsWide, tex.pixelsHigh);
-		[tex release];
-		[name release];
-		
-		return texture;
-		
-	} else {
-		[name release];
-		return 0;
-	}
-}
+        Texture2D *tex = [[Texture2D alloc] initWithImagePath: name];
+        if(tex) {
+            SoraTexture *texture = new SoraTexture([tex name], tex.contentSize.width, tex.contentSize.height,
+                                                   tex.pixelsWide, tex.pixelsHigh);
+            [tex release];
+            [name release];
+            
+            return texture;
+            
+        } else {
+            [name release];
+            return 0;
+        }
+    }
 
 	SoraTexture *mTextureCreateWithData(void* pData, ulong32 size) {
 		NSData* data = [[NSData alloc] initWithBytes:pData length:size];
@@ -149,68 +148,68 @@ SoraTexture *mTextureCreate(const char* fileName, bool isFullPath) {
 		return 0;
 	}
 						  
-SoraTexture *mPVRTextureCreate(const char* fileName) {
-	NSString* path = [[NSString alloc] initWithUTF8String:fileName];
+    SoraTexture *mPVRTextureCreate(const char* fileName) {
+        NSString* path = [[NSString alloc] initWithUTF8String:fileName];
+        
+        PVRTexture *pvrTexture = [PVRTexture pvrTextureWithContentsOfFile:path];
+        if(pvrTexture) {
+            SoraTexture* tex = new SoraTexture([pvrTexture name], [pvrTexture width], [pvrTexture height],
+                                               [pvrTexture width], [pvrTexture height]);
+            return tex;
+        }
+        return nil;
+    }
 	
-	PVRTexture *pvrTexture = [PVRTexture pvrTextureWithContentsOfFile:path];
-	if(pvrTexture) {
-		SoraTexture* tex = new SoraTexture([pvrTexture name], [pvrTexture width], [pvrTexture height],
-														[pvrTexture width], [pvrTexture height]);
-		return tex;
-	}
-	return nil;
-}
-	
-
-SoraTexture *mFontTextureCreate(const char* fontName, float w, float h, float size, float *charWidths, float *actualHeight) {
-	NSString* fn = [[NSString alloc] initWithUTF8String:fontName];
-	Texture2D *tex = [[Texture2D alloc] makeASCIIBitmapFont:CGSizeMake(w, h) 
-												   fontName:fn 
-												   fontSize:size 
-											 charWidthArray:charWidths 
-												 fontHeight:actualHeight];
-	
-	SoraTexture *texture = new SoraTexture([tex name], 
-									  tex.contentSize.width, 
-									  tex.contentSize.height, 
-									  tex.pixelsWide, 
-									  tex.pixelsHigh);
-	
-	[tex release];
-	
-	return texture;
-	
-}
-
-SoraTexture *mStringTextureCreate(const char* _str, const char* _fontName, float w, float h, float _fontSize) {
-	NSString *str = [[NSString alloc] initWithUTF8String:_str];
-	NSString *fn  = [[NSString alloc] initWithUTF8String:_fontName];
-	Texture2D *tex = [[Texture2D alloc] initWithString:str dimensions:CGSizeMake(w, h)
-											 alignment:UITextAlignmentLeft fontName:fn fontSize:_fontSize];
-	
-	SoraTexture *texture = new SoraTexture([tex name], tex.contentSize.width, tex.contentSize.height,
-									 tex.pixelsWide, tex.pixelsHigh);
-	
-	[tex release];
-//	[str release];
-//	[fn  release];
-	
-	return texture;
-}
-
-SoraTexture *mStringTextureCreate(const char* _str, const char* _fontName, float _fontSize) {
-	NSString *str = [[NSString alloc] initWithUTF8String:_str];
-	NSString *fn  = [[NSString alloc] initWithUTF8String:_fontName];
-	Texture2D *tex = [[Texture2D alloc] initWithString:str fontName:fn fontSize:_fontSize];
-	
-	SoraTexture *texture = new SoraTexture([tex name], tex.contentSize.width, tex.contentSize.height,
-									 tex.pixelsWide, tex.pixelsHigh);
-	
-	[tex release];
-	[str release];
-	[fn  release];
-	
-	return texture;
-}
+    
+    SoraTexture *mFontTextureCreate(const char* fontName, float w, float h, float size, float *charWidths, float *actualHeight) {
+        NSString* fn = [[NSString alloc] initWithUTF8String:fontName];
+        Texture2D *tex = [[Texture2D alloc] makeASCIIBitmapFont:CGSizeMake(w, h) 
+                                                       fontName:fn 
+                                                       fontSize:size 
+                                                 charWidthArray:charWidths 
+                                                     fontHeight:actualHeight];
+        
+        SoraTexture *texture = new SoraTexture([tex name], 
+                                               tex.contentSize.width, 
+                                               tex.contentSize.height, 
+                                               tex.pixelsWide, 
+                                               tex.pixelsHigh);
+        
+        [tex release];
+        
+        return texture;
+        
+    }
+    
+    SoraTexture *mStringTextureCreate(const char* _str, const char* _fontName, float w, float h, float _fontSize) {
+        NSString *str = [[NSString alloc] initWithUTF8String:_str];
+        NSString *fn  = [[NSString alloc] initWithUTF8String:_fontName];
+        Texture2D *tex = [[Texture2D alloc] initWithString:str dimensions:CGSizeMake(w, h)
+                                                 alignment:UITextAlignmentLeft fontName:fn fontSize:_fontSize];
+        
+        SoraTexture *texture = new SoraTexture([tex name], tex.contentSize.width, tex.contentSize.height,
+                                               tex.pixelsWide, tex.pixelsHigh);
+        
+        [tex release];
+        //	[str release];
+        //	[fn  release];
+        
+        return texture;
+    }
+    
+    SoraTexture *mStringTextureCreate(const char* _str, const char* _fontName, float _fontSize) {
+        NSString *str = [[NSString alloc] initWithUTF8String:_str];
+        NSString *fn  = [[NSString alloc] initWithUTF8String:_fontName];
+        Texture2D *tex = [[Texture2D alloc] initWithString:str fontName:fn fontSize:_fontSize];
+        
+        SoraTexture *texture = new SoraTexture([tex name], tex.contentSize.width, tex.contentSize.height,
+                                               tex.pixelsWide, tex.pixelsHigh);
+        
+        [tex release];
+        [str release];
+        [fn  release];
+        
+        return texture;
+    }
 
 } // namespace sora

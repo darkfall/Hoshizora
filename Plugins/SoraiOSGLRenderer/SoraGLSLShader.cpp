@@ -67,7 +67,7 @@ namespace sora {
 		
 		
 		if(mShader == 0) {			
-			THROW_SORA_EXCEPTION("Error creating glsl shader");
+			THROW_SORA_EXCEPTION(RuntimeException, "Error creating glsl shader");
 			mType = 0;
 			return false;
 		}

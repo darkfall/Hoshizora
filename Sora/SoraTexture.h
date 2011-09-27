@@ -27,6 +27,11 @@ namespace sora {
         void* mUserData;
 		SoraTextureDataRef dataRef;
         
+#ifdef OS_IOS
+        // if not retina texture and the device supports retina display, we need to scale the texture
+        bool mIsRetinaTexture;
+#endif
+        
         static SoraTextureHandle LoadFromFile(const StringType& file);
         static SoraTextureHandle LoadFromRawData(uint32* data, int32 w, int32 h);
         static SoraTextureHandle LoadFromMemory(uint32* data, ulong32 size);

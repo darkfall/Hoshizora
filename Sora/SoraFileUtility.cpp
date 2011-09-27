@@ -44,7 +44,7 @@ namespace sora {
 #elif defined(OS_OSX)
             return std::string(osxApplicationPath()+"/")+filePath;
 #elif defined(OS_IOS)
-			return appResourcePath()+"/"+filePath;
+			return appApplicationPath()+L"/"+filePath;
 #endif
 			return "./"+filePath;
 		}

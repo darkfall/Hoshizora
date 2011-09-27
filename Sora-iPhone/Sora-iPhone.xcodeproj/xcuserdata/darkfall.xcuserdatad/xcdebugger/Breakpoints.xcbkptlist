@@ -65,7 +65,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "797"
-         endingLineNumber = "797">
+         endingLineNumber = "797"
+         landmarkName = "SoraiOSGLRenderer::_glVersionCheck()"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -218,7 +220,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "307"
          endingLineNumber = "307"
-         landmarkName = "SoraCore::update()"
+         landmarkName = "SoraCore::start()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -330,7 +332,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "192"
          endingLineNumber = "192"
-         landmarkName = "SoraiOSGLRenderer::_glEndScene()"
+         landmarkName = "SoraiOSGLRenderer::_glBeginScene(ulong32 color, ulong32 t, bool clear)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -344,7 +346,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "86"
          endingLineNumber = "86"
-         landmarkName = "rfMainWindow::renderFunc()"
+         landmarkName = "rfMainWindow::renderState()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -427,9 +429,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "25"
-         endingLineNumber = "25"
-         landmarkName = "action(const gcn::ActionEvent&amp; actionEvent)"
-         landmarkType = "7">
+         endingLineNumber = "25">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -735,9 +735,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "784"
-         endingLineNumber = "784"
-         landmarkName = "SoraCore::createTexture(const SoraWString&amp; sTexturePath, bool bCache, bool bMipmap)"
-         landmarkType = "5">
+         endingLineNumber = "784">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

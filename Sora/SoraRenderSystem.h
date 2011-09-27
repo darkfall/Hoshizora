@@ -93,6 +93,10 @@ namespace sora {
 		virtual void setCursor(const SoraString& cursor) = 0;
         
         virtual void onExtensionStateChanged(int32 extension, bool state, int32 param) = 0;
+        
+        typedef void (*QueryVideoMode)(float w, float h);
+        virtual void getDesktopResolution(float* w, float* h) = 0;
+        virtual void setQueryVideoModeCallback(QueryVideoMode func) = 0;
 	};
 
 } // namespace sora

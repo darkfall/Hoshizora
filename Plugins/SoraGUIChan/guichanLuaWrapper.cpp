@@ -12,7 +12,7 @@
 #include "SoraGUIChan/guichansetup.h"
 #include "SoraGUIChan/xmlgui.h"
 #include "SoraGUIChan/jsongui.h"
-#include "LuaPlusHelper.h"
+#include "SoraLua/LuaPlusHelper.h"
 
 namespace sora {
     

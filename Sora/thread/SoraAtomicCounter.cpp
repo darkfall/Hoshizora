@@ -68,7 +68,7 @@ namespace sora {
     }
     
     SoraAtomicCounter::SoraAtomicCounter(const SoraAtomicCounter& _counter):
-    counter(_counter.value) {
+    counter(_counter.counter) {
     }
     
     SoraAtomicCounter::~SoraAtomicCounter() {

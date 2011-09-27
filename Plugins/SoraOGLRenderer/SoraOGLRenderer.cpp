@@ -978,6 +978,27 @@ namespace sora{
 		renderLine(x2, y2, x1, y2+1.f, color, z);
 		renderLine(x1, y2, x1+1.f, y1, color, z);
 	}
+	
+	 void SoraOGLRenderer::getDesktopResolution(float* w, float* h) {
+        GLFWvidmode mode;
+        glfwGetDesktopMode(&mode);
+        *w = mode.Width;
+        *h = mode.Height;
+    }
+    
+    void SoraOGLRenderer::setQueryVideoModeCallback(QueryVideoMode func) {
+        mVideoModeFunc = func;
+        
+        if(mVideoModeFunc) {
+            // max 24?
+            GLFWvidmode mode[24];
+            int count = glfwGetVideoModes(&mode[0], 24);
+            for(int i=0; i<count; ++i) {
+                mVideoModeFunc(mode[i].Width, mode[i].Height);
+            }
+        }
+    }
+
     
     
 #ifdef SORA_AUTOMATIC_REGISTER

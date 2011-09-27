@@ -68,7 +68,7 @@ namespace sora {
         VertexArray::iterator it = mVertices.begin();
         VertexArray::iterator end = mVertices.end();
         
-        int index = 0;
+        //int index = 0;
         for(; it != end; ++it) {
             memcpy(vertex, &(*it), sizeof(SoraVertex));
             ++vertex;

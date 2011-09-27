@@ -12,7 +12,7 @@
 #import "EAGLView.h"
 
 #import "SoraiOSGLRenderer/SoraiOSInitializer.h"
-#import "SoraiOSMainWindow.h"
+#import "mainWindow.h"
 #import "rfMainWindow.h"
 #import "anime/aeMainWindow.h"
 
@@ -50,7 +50,7 @@
     self.displayLink = nil;
 
 	// initialize SORA base systems
-	sora::SORA_IOS->SoraiOSStart(new SoraiOSMainWindow);
+	sora::SORA_IOS->SoraiOSStart(new mainwindow);
 }
 
 - (void)dealloc

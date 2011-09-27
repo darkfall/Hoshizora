@@ -14,7 +14,7 @@
 // THIS MUST BE INCLUDED BY .MM FILE
 
 // iphone resolution
-// retina display for iPod Touch 4gen or iPhone 4 gen and up
+// retina display(960*640) for iPod Touch 4gen or iPhone 4 gen and up
 // OS_IPAD for 1024*768
 #ifdef OS_IOS
 
@@ -28,19 +28,38 @@ namespace sora {
     static const int IOS_RETINA = 2;
     static const int IOS_IPAD = 3;
     
+    // ios portraits
+    enum iOSOrientation {
+        ORIENTATION_PORTRAIT,
+        ORIENTATION_PORTRAIT_UPSIDE_DOWN,
+        ORIENTATION_LANDSCAPE_LEFT,
+        ORIENTATION_LANDSCAPE_RIGHT
+    };
+    
     int32 getiOSDeviceType();
     std::string iOSDeviceTypeToString(int32 type);
-
+    
     bool _IS_IPAD();
     bool _IS_RETINA_DISPLAY();
     
     int32 iOSGetScreenWidth(bool rot);
     int32 iOSGetScreenHeight(bool rot);
-
+    
     SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRetina=true);
     SoraWString iOSGetDocumentResourceName(const SoraWString& origName, bool appendRetina=true);
 	
-    NSString* wstring2NSString(const std::wstring& ws);
+    float getScaleFactor();
+    
+    // only works for iPhone
+    void vabriteDevice();
+    
+    /**
+     *  Must be called before initialization
+     *  If not, glViewport and glortho are still mapped to (320,480) and resources with @2x are ignored for retina displays
+     *  Otherwise, will double the scrensize and will deal with resources with @2x and scale resources without @2x
+     **/ 
+    void setUseRetina(bool flag);
+    bool isUseRetina();
 	/*
 	 Family: Hiragino Kaku Gothic ProN W3 
 	 Font: HiraKakuProN-W3 
@@ -116,8 +135,8 @@ namespace sora {
 	 Family: STHeiti K 
 	 Font: STHeitiK-Medium 
 	 Font: STHeitiK-Light
-	*/
-
+     */
+    
 } // namespace sora
 
 #endif // OS_IOS

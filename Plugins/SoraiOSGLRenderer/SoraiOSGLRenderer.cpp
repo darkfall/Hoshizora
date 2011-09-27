@@ -13,15 +13,16 @@
 #include "SoraInternalLogger.h"
 #include "SoraFileUtility.h"
 #include "SoraMath.h"
-#include "Rect4V.h"
 #include "SoraColor.h"
+#include "SoraiOSGLRenderTarget.h"
 
 #include "SoraCore.h"
 #include "SoraInfiniteRendererCallback.h"
 
 #include "SoraGLSLShader.h"
-
+#include "SoraiOSWrapper.h"
 #include "SoraiOSInitializer.h"
+#include "SoraiOSDeviceHelper.h"
 #include "SOIL/SOIL.h"
 
 const uint32 MAX_VERTEX_BUFFER = 2048;
@@ -35,9 +36,6 @@ namespace sora{
 
 	SoraiOSGLRenderer::SoraiOSGLRenderer() {
 		pCurTarget = 0;
-		uGLShaderProgram = 0;
-		
-		bShaderAvailable = _glShaderCheck();
 		
 		mCurrTexture = -1;
 		
@@ -51,7 +49,7 @@ namespace sora{
 	}
 
 	void SoraiOSGLRenderer::shutdown() {
-		std::list<SoraRenderTarget*>::iterator itt = liTargets.begin();
+		std::list<SoraRenderTargetiOSGL*>::iterator itt = liTargets.begin();
 		while(itt != liTargets.end()) {
 			delete (*itt);
 			++itt;
@@ -61,10 +59,7 @@ namespace sora{
 		//delete mainWindow;
 	}
 
-	void SoraiOSGLRenderer::_glInitialize() {
-		glShadeModel(GL_SMOOTH);                    // Enables Smooth Shading
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);      // 4-byte pixel alignment
-		
+	void SoraiOSGLRenderer::_glInitialize() {		
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClearStencil(0);                          // clear stencil buffer
         
@@ -111,28 +106,46 @@ namespace sora{
 		glLoadIdentity();
 		//Creating an orthoscopic view matrix going from -1 -> 1 in each
 		//dimension on the screen (x, y, z).
-		glOrthof(0.f, w, h, 0.f, -1.f, 1.f);
+		glOrthof(0.f, 320, 480, 0.f, -1.f, 1.f);
 	}
 	
 	void SoraiOSGLRenderer::applyTransform() {
         if(!pCurTarget) {
+            float w = _oglWindowInfo.width * getContentsScale();
+            float h = _oglWindowInfo.height * getContentsScale();
+            
             glViewport(0, 0,
-                       _oglWindowInfo.width,
-                       _oglWindowInfo.height);
+                       w, h);
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
             glOrthof(0.f,
-                    _oglWindowInfo.width,
-                    _oglWindowInfo.height
-                    , 0.f, 1.f, -1.f);
+                     w, h
+                     , 0.f, 1.f, -1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             
             glTranslatef(-_oglWindowInfo.x, -_oglWindowInfo.y, 0.f);
-            glRotatef(_oglWindowInfo.rot, -0.f, 0.f, 1.f);
+            switch(mOrientation) {
+                case ORIENTATION_LANDSCAPE_LEFT:
+                    glRotatef(90+_oglWindowInfo.rot,0,0,1);
+                    glTranslatef(0, -w, 0);
+                    break;
+                case ORIENTATION_LANDSCAPE_RIGHT:
+                    glRotatef(-90+_oglWindowInfo.rot,0,0,1);
+                    glTranslatef(-h, 0 ,0);
+                    break;
+                case ORIENTATION_PORTRAIT_UPSIDE_DOWN:
+                    glTranslatef(w/2,h/2,0);
+                    glRotatef(180+_oglWindowInfo.rot,0,0,1);
+                    glTranslatef(-w/2,-h/2,0);
+                    break;
+                case ORIENTATION_PORTRAIT:
+                    glRotatef(_oglWindowInfo.rot, 0.f, 0.f, 1.f);
+                    break;
+            }
             glScalef(_oglWindowInfo.hscale, _oglWindowInfo.vscale, 1.0f);//Transformation follows order scale->rotation->displacement
             glTranslatef(_oglWindowInfo.x+_oglWindowInfo.dx, _oglWindowInfo.y+_oglWindowInfo.dy, 0.f); //Set Center Coodinates
-            
+ 
             
         } else {
             glViewport(0,  0,
@@ -169,17 +182,16 @@ namespace sora{
             glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
 			
 			if(clear)
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			else
-				glClear(GL_DEPTH_BUFFER_BIT);
+				glClear(GL_COLOR_BUFFER_BIT);
 			
         } else {
+            // ios gl wrapper
+            setupEAGLFBO();
+            
             glClearColor(CGETR(color), CGETG(color), CGETB(color), CGETA(color));
             
             if(clear)
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            else
-                glClear(GL_DEPTH_BUFFER_BIT);
+                glClear(GL_COLOR_BUFFER_BIT);
         }
         
 	}
@@ -193,27 +205,38 @@ namespace sora{
 			
             setTransform(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
             setClipping();
-        } else 
+        } else {
             iFrameStart = 0;
-		//else
-		//	glfwSwapBuffers();
-		
+            presentEAGLFBO();
+        }
 	}
 	
 	void SoraiOSGLRenderer::_glSetBlendMode(int32 blend) {
 		if(blend != CurBlendMode)
 			flush();
 		
-		//		glDisable(GL_ALPHA_TEST);
+        //		glDisable(GL_ALPHA_TEST);
 		glEnable(GL_BLEND); // Enable Blending
 		
+		if((blend & BLEND_SRCALPHA) != (CurBlendMode & BLEND_SRCALPHA))
+			if(blend & BLEND_SRCALPHA)
+				glBlendFunc(GL_SRC_ALPHA, GL_SRC_ALPHA);
+        
 		if((blend & BLEND_ALPHABLEND) != (CurBlendMode & BLEND_ALPHABLEND)) {
-			if(blend & BLEND_ALPHABLEND)
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);      //Alpha blending
+			if(blend & BLEND_ALPHABLEND) {
+                if(pCurTarget)
+                    // alpha trick with FBO transparent background
+                    // see http://www.opengl.org/discussion_boards/ubbthreads.php?ubb=showflat&Number=257628
+                    
+                    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+                
+                else 
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);      //Alpha blending
+            }
 			else
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE); //Addictive
 		}
-		
+        
 		if((blend & BLEND_ZWRITE) != (CurBlendMode & BLEND_ZWRITE)) {
 			if(blend & BLEND_ZWRITE) {
                 glEnable(GL_DEPTH_TEST);
@@ -221,12 +244,12 @@ namespace sora{
                 glDisable(GL_DEPTH_TEST);
             }
 		}
-		
+        
 		if((blend & BLEND_COLORADD) != (CurBlendMode & BLEND_COLORADD)) {
 			if(blend & BLEND_COLORADD) glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ADD);
 			else glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		}
-
+        
 		CurBlendMode = blend;
 	}
 	
@@ -237,6 +260,7 @@ namespace sora{
 	
 	void SoraiOSGLRenderer::start(SoraTimer* timer) {
 		SORA_IOS->setTimer(timer);
+        SORA_IOS->setRenderSystem(this);
 		g_timer = timer;
 	}
 
@@ -258,50 +282,26 @@ namespace sora{
 		_glSetProjectionMatrix(_oglWindowInfo.width, _oglWindowInfo.height);
 		applyTransform();
 		
-		bFullscreen = /*windowInfo->isWindowed()*/ true;
-		windowInfo->init();		
-
 		return (ulong32)windowInfo;
 		
 		return 0;
 	}
 	
 	void SoraiOSGLRenderer::setWindowSize(int32 w, int32 h) {
-	//	glfwSetWindowSize(w, h);
 	}
 	
 	void SoraiOSGLRenderer::setWindowTitle(const SoraWString& title) {
-	//	glfwSetWindowTitle(ws2s(title).c_str());
 	}
 	
 	void SoraiOSGLRenderer::setWindowPos(int32 px, int32 py) {
-	//	glfwSetWindowPos(px, py);
 	}
 	
 	void SoraiOSGLRenderer::setFullscreen(bool flag) {
-		/*if(bFullscreen == flag)
-			return;
-		
-		endScene();
-		
-		bFullscreen = flag;
-		glfwCloseWindow();
-		glfwOpenWindow(mainWindow->getWindowWidth(), mainWindow->getWindowHeight(),
-					   0, 0, 0, 0,
-					   32,
-					   0,
-					   bFullscreen==true?GLFW_FULLSCREEN:GLFW_WINDOW);
-		glfwSetWindowTitle(mainWindow->getWindowName().c_str());
-		glfwSetWindowCloseCallback(int_exitFunc);
 
-		_glInitialize();
-		_glSetProjectionMatrix(_oglWindowInfo.width, _oglWindowInfo.height);
-		
-		beginScene();*/
 	}
 	
 	bool SoraiOSGLRenderer::isFullscreen() {
-		return bFullscreen;
+        return true;
 	}
 	
 	ulong32 SoraiOSGLRenderer::getVideoDeviceHandle() {
@@ -381,12 +381,10 @@ namespace sora{
 														   &w, &h, &channels);
 		
 		if(!texid) {
-			throw SORA_EXCEPTION("Error loading texture");
+			log_error("Error loading texture");
+            return 0;
 		}
 		
-		// ios max texture size = 1024
-		if(w > 1024 || h > 1024)
-			return NULL;
 		
 		// because theres no glgettextureleveliv, so we need to handle this by ourself
 		int i;
@@ -404,9 +402,6 @@ namespace sora{
 			p2h = i;
 		}
 		
-		printf("%d %d %d, %d, %d\n", w, h, channels, p2w, p2h);
-
-		
 		SoraTexture* tex = new SoraTexture(texid,
 										   p2w,
 										   p2h,
@@ -419,6 +414,21 @@ namespace sora{
 		// ios max texture size = 1024
 		if(w > 1024 || h > 1024)
 			return NULL;
+        
+        int i;
+		int p2w, p2h;
+		if((w != 1)) {
+			i = 1;
+			while(i < w)
+				i *= 2;
+			p2w = i;
+		}
+		if((h != 1)) {
+			i = 1;
+			while(i < h)
+				i *= 2;
+			p2h = i;
+		}
 		/*size_t size = w*h*4;
 		GLubyte* bitData = new GLubyte[size];
 		
@@ -435,11 +445,14 @@ namespace sora{
 			
 		glGenTextures(1, &texId);
 		glBindTexture(GL_TEXTURE_2D, texId);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_INT, 0);
-			
-		return new SoraTexture(texId, w, h, w, h);
+		glTexParameterf(texId, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameterf(texId, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameterf(texId, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameterf(texId, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, p2w, p2h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+		return new SoraTexture(texId, p2w, p2h, w, h);
 	}
 	
 	SoraTexture* SoraiOSGLRenderer::createTextureFromRawData(unsigned int* data, int32 w, int32 h) {
@@ -454,7 +467,7 @@ namespace sora{
 												0,
 												SOIL_FLAG_POWER_OF_TWO | SOIL_FLAG_TEXTURE_REPEATS);
 		if(!texid) {
-			throw SORA_EXCEPTION("Error creating texture");
+			throw SORA_EXCEPTION(RuntimeException, "Error creating texture");
 			return 0;
 		}
 		
@@ -475,8 +488,8 @@ namespace sora{
 		}
 		
 		SoraTexture* tex = new SoraTexture(texid,
-										   p2w,
-										   p2h,
+										   w,
+										   h,
 										   w,
 										   h);
 		return tex;
@@ -752,18 +765,16 @@ namespace sora{
 		applyTransform();
 	}
 
-	ulong32 SoraiOSGLRenderer::createTarget(int width, int height, bool zbuffer) {
-        return 0;
-        
+	ulong32 SoraiOSGLRenderer::createTarget(int width, int height, bool zbuffer) {        
 		SoraRenderTargetiOSGL* t = new SoraRenderTargetiOSGL(width, height, zbuffer);
-		liTargets.push_back((SoraRenderTarget*)t);
+		liTargets.push_back((SoraRenderTargetiOSGL*)t);
 		return (ulong32)t;
 	}
 
 	void SoraiOSGLRenderer::freeTarget(ulong32 t) {
-		SoraRenderTarget* pt = (SoraRenderTarget*)t;
+		SoraRenderTargetiOSGL* pt = (SoraRenderTargetiOSGL*)t;
 		if(!pt) return;
-		std::list<SoraRenderTarget*>::iterator itt = liTargets.begin();
+		std::list<SoraRenderTargetiOSGL*>::iterator itt = liTargets.begin();
 		while(itt != liTargets.end()) {
 			if((*itt) == pt) {
 				delete pt;
@@ -782,9 +793,6 @@ namespace sora{
 	}
 	
 	bool SoraiOSGLRenderer::_glVersionCheck() {
-	/*	int majorVersion, minorVersion, rev;
-		glfwGetVersion(&majorVersion, &minorVersion, &rev);
-		return majorVersion >= 2;*/
 		return true;
 	}
 	
@@ -795,7 +803,6 @@ namespace sora{
 		return _glVersionCheck();
 	}
 	
-	
 	inline bool SoraiOSGLRenderer::_glCheckError() {
 		return glGetError() != GL_NO_ERROR;
 	}
@@ -804,16 +811,12 @@ namespace sora{
 		SoraWString info(L"Driver=OpenGL Version=");
 		//int mav, miv, rev;
 		info += s2ws((char*)glGetString(GL_VERSION));
-
-		//glfwGetVersion(&mav, &miv, &rev);
-		//info += int_to_str(mav); info+=".";
-		//info += int_to_str(miv); info+=".";
-		//info += int_to_str(rev); info+="\n";
 		return info;
 	}
 	
 	SoraShaderContext* SoraiOSGLRenderer::createShaderContext() {
-		return new SoraGLSLShaderContext();
+		//return new SoraGLSLShaderContext();
+        return 0;
 	}
 	
 	void SoraiOSGLRenderer::snapshot(const SoraString& file) {
@@ -827,7 +830,6 @@ namespace sora{
 	}
     
     void SoraiOSGLRenderer::setVerticalSync(bool flag) {
-        SoraiOSInitializer::Instance()->setVerticalSync(flag);
     }
 
 	void SoraiOSGLRenderer::detachShaderContext() {
@@ -841,41 +843,44 @@ namespace sora{
 
     }
     
-    void SoraiOSGLRenderer::renderRect(float32 x1, float32 y1, float32 x2, float32 y2, float32 fWidth, uint32 color, float32 z) {
-		Rect4V rect;
-		
-		if(fWidth != y2-y1 && fWidth != x2-x1) {
-			float rotAng = atan2f(y2-y1, x2-x1)-F_PI_4;
-			
-			rect.x1 = x1; rect.y1 = y1;
-			rect.x2 = x1+fWidth*cosf(rotAng); rect.y2 = y1+fWidth*sinf(rotAng);
-			rect.x4 = x2; rect.y4 = y2;
-			rect.x3 = x2+fWidth*cosf(rotAng); rect.y3 = y2+fWidth*sinf(rotAng);
-		} else {
-			rect.x1 = x1; rect.y1 = y1;
-			rect.x2 = x2; rect.y2 = y1;
-			rect.x3 = x2; rect.y3 = y2;
-			rect.x4 = x1; rect.y4 = y2;
-		}
+    void SoraiOSGLRenderer::renderLine(float x1, float y1, float x2, float y2, uint32 color, float z) {
 		sora::SoraQuad quad;
 		
 		quad.tex = NULL;
 		
-		quad.v[0].x   = rect.x1;
-		quad.v[0].y   = rect.y1;
-		quad.v[0].col = color;
-		
-		quad.v[1].x   = rect.x2;
-		quad.v[1].y   = rect.y2;
-		quad.v[1].col = color;
-		
-		quad.v[2].x   = rect.x3;
-		quad.v[2].y   = rect.y3;
-		quad.v[2].col = color;
-		
-		quad.v[3].x   = rect.x4;
-		quad.v[3].y   = rect.y4;
-		quad.v[3].col = color;
+        if(abs(x2-x1) == 1.f || abs(y2-y1) == 1.f) {
+            quad.v[0].x   = x1;
+            quad.v[0].y   = y1;
+            quad.v[0].col = color;
+            
+            quad.v[1].x   = x2;
+            quad.v[1].y   = y1;
+            quad.v[1].col = color;
+            
+            quad.v[2].x   = x2;
+            quad.v[2].y   = y2;
+            quad.v[2].col = color;
+            
+            quad.v[3].x   = x1;
+            quad.v[3].y   = y2;
+            quad.v[3].col = color;
+        } else {
+            quad.v[0].x   = x1-0.5f;
+            quad.v[0].y   = y1-0.5f;
+            quad.v[0].col = color;
+            
+            quad.v[1].x   = x1+0.5f;
+            quad.v[1].y   = y1+0.5f;
+            quad.v[1].col = color;
+            
+            quad.v[2].x   = x2-0.5f;
+            quad.v[2].y   = y2-0.5f;
+            quad.v[2].col = color;
+            
+            quad.v[3].x   = x2+0.5f;
+            quad.v[3].y   = y2+0.5f;
+            quad.v[3].col = color;
+        }
 		
 		int i;
 		for (i = 0; i < 4; ++i) {
@@ -886,12 +891,43 @@ namespace sora{
 		
 		renderQuad(quad);
 	}
+    
+    void SoraiOSGLRenderer::fillBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
+        sora::SoraQuad quad;
+		
+		quad.tex = NULL;
+		
+		quad.v[0].x   = x1;
+		quad.v[0].y   = y1;
+		quad.v[0].col = color;
+		
+		quad.v[1].x   = x2;
+		quad.v[1].y   = y1;
+		quad.v[1].col = color;
+		
+		quad.v[2].x   = x2;
+		quad.v[2].y   = y2;
+		quad.v[2].col = color;
+		
+		quad.v[3].x   = x1;
+		quad.v[3].y   = y2;
+		quad.v[3].col = color;
+		
+		int i;
+		for (i = 0; i < 4; ++i) {
+			quad.v[i].z = z;
+		}
+		
+		quad.blend = BLEND_DEFAULT;
+		
+		renderQuad(quad);
+    }
 	
-	void SoraiOSGLRenderer::renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z) {
-		renderRect(x1, y1, x2, y1+1.f, 1.f, color, z);
-		renderRect(x2, y1, x2+1.f, y2, 1.f, color, z);
-		renderRect(x2, y2, x1, y2+1.f, 1.f, color, z);
-		renderRect(x1, y2, x1+1.f, y1, 1.f, color, z);
+	void SoraiOSGLRenderer::renderBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
+		renderLine(x1, y1, x2, y1+1.f, color, z);
+		renderLine(x2, y1, x2+1.f, y2, color, z);
+		renderLine(x2, y2, x1, y2+1.f, color, z);
+		renderLine(x1, y2, x1+1.f, y1, color, z);
 	}
     
     void SoraiOSGLRenderer::setIcon(const SoraString& icon) {
@@ -900,5 +936,24 @@ namespace sora{
     
     void SoraiOSGLRenderer::setCursor(const SoraString& cursor) {
         
+    }
+    
+    void SoraiOSGLRenderer::setOrientation(iOSOrientation por) {
+        mOrientation = por;
+    }
+    
+    iOSOrientation SoraiOSGLRenderer::getOrientation() const {
+        return mOrientation;
+    }
+    
+    void SoraiOSGLRenderer::getDesktopResolution(float* w, float* h) {
+        *w = sora::getScreenWidth();
+        *h = sora::getScreenHeight();
+    }
+    
+    void SoraiOSGLRenderer::setQueryVideoModeCallback(QueryVideoMode func) {
+        if(func) {
+            func(getScreenWidth(), getScreenHeight());
+        }
     }
 } // namespace sora

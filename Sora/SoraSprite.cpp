@@ -4,6 +4,10 @@
 #include "SoraCore.h"
 #include "SoraFastRenderer.h"
 
+#ifdef OS_IOS
+#include "SoraiOSDeviceHelper.h"
+#endif
+
 namespace sora {
     
     SoraCore* SoraSprite::mSora = NULL;
@@ -94,6 +98,14 @@ namespace sora {
 
 	void SoraSprite::_initDefaults() {
 		mVScale = mHScale = 1.f;
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            if(mQuad.tex && !mQuad.tex->mIsRetinaTexture) {
+                mVScale = mHScale = getScaleFactor();
+            }
+        }
+#endif
+        
 		mRotation = 0.f;
 		mCenterX = mCenterY = 0.f;
 
@@ -111,6 +123,13 @@ namespace sora {
 
 	void SoraSprite::setTextureRect(float x, float y, float width, float height) {
 		float tx1, ty1, tx2, ty2;
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            float scale = sora::getScaleFactor();
+            x *= scale; y *= scale;
+            width *= scale; height *= scale;
+        }
+#endif
 		
 		mTextureRect.x1=x;
 		mTextureRect.y1=y;
@@ -146,6 +165,13 @@ namespace sora {
     void SoraSprite::buildQuad(float x, float y) {
         float tx1, ty1, tx2, ty2;
 		float sint, cost;
+        
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            x *= sora::getScaleFactor();
+            y *= sora::getScaleFactor();
+        }
+#endif
         
 		tx1 = -mCenterX*mHScale;
 		ty1 = -mCenterY*mVScale;
@@ -204,10 +230,20 @@ namespace sora {
     }
 
 	void SoraSprite::render4V(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
+#ifdef OS_IOS
+        float scale = sora::getScaleFactor();
+        
+		mQuad.v[0].x = x1 * scale; mQuad.v[0].y = y1 * scale;
+		mQuad.v[1].x = x2 * scale; mQuad.v[1].y = y2 * scale;
+		mQuad.v[2].x = x3 * scale; mQuad.v[2].y = y3 * scale;
+		mQuad.v[3].x = x4 * scale; mQuad.v[3].y = y4 * scale;
+#else
 		mQuad.v[0].x = x1; mQuad.v[0].y = y1;
 		mQuad.v[1].x = x2; mQuad.v[1].y = y2;
 		mQuad.v[2].x = x3; mQuad.v[2].y = y3;
 		mQuad.v[3].x = x4; mQuad.v[3].y = y4;
+#endif
+
         
         bPropChanged = true;
 		
@@ -332,6 +368,15 @@ namespace sora {
 	void SoraSprite::setScale(float h, float v) {
 		mVScale = v;
 		mHScale = h;
+        
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            if(mQuad.tex && !mQuad.tex->mIsRetinaTexture) {
+                mVScale *= getScaleFactor();
+                mHScale *= getScaleFactor();
+            }
+        }
+#endif
         
         bPropChanged = true;
 	}

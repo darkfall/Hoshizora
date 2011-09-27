@@ -15,8 +15,8 @@
 // requires lua
 #include "SoraLua/SoraLuaExporter.h"
 
-#include "SoraLuaStateManager.h"
-#include "SoraLuaObject.h"
+#include "SoraLua/SoraLuaStateManager.h"
+#include "SoraLua/SoraLuaObject.h"
 #include "SoraStringId.h"
 
 namespace sora {

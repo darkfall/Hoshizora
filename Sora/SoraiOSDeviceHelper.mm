@@ -13,6 +13,7 @@
 
 #import <UIKit/UIkit.h>
 #import <UIKit/UIDevice.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 namespace sora {
     
@@ -47,7 +48,7 @@ namespace sora {
         }	
         return false; 
     }
- 
+    
     int32 iOSGetScreenWidth(bool rot) {
         CGRect rect = [[UIScreen mainScreen] bounds];
         if(rot)
@@ -59,7 +60,7 @@ namespace sora {
         CGRect rect = [[UIScreen mainScreen] bounds];
         if(rot)
             return rect.size.width;
-        return rect.size.height;
+        return rect.size.height ;
     }
     
     SoraWString iOSGetResourceName(const SoraWString& origName, bool appendRetina) {
@@ -79,21 +80,24 @@ namespace sora {
 		}
 		return appDocumentPath() + origName;
 	}
-	
-    NSString* wstring2NSString(const std::wstring& ws) {
-		char* data = (char*)ws.data();
-		unsigned size = ws.size() * sizeof(wchar_t);
-		
-#if TARGET_RT_BIG_ENDIAN
-		const NSStringEncoding kEncoding_wchar_t = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF32BE);
-#else
-		const NSStringEncoding kEncoding_wchar_t = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF32LE);
-#endif
-		
-		NSString* result = [[[NSString alloc] initWithBytes:data length:size encoding:kEncoding_wchar_t] autorelease];
-		return result;
-	}
     
+    static bool g_useRetina = true;
+    
+    void setUseRetina(bool flag) {
+        g_useRetina = flag;
+    }
+    
+    bool isUseRetina() {
+        return g_useRetina;
+    }
+    
+    float getScaleFactor() {
+        return _IS_RETINA_DISPLAY() ? 2.0 : 1.0;
+    }
+    
+    void vabriateDevice() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
     
 } // namespace sora
 

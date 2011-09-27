@@ -6,13 +6,14 @@
  *  Copyright 2011 Studio GameMaster. All rights reserved.
  *
  */
-#ifndef SORA_IOS_MAIN_WINDOW_H_
-#define SORA_IOS_MAIN_WINDOW_H_
+#ifndef SORA_IOS_TEST_MAIN_WINDOW_H
+#define SORA_IOS_TEST_MAIN_WINDOW_H
 
 #include "SoraCore.h"
 #include "SoraiOSDeviceHelper.h"
 
-#include "SoraZipResourceManager/SoraZipResourceManager.h"
+#include "SoraiOSGLRenderer/SoraiOSMainWindow.h"
+
 #include "SoraFileUtility.h"
 #include "SoraiOSFontManager/SoraiOSFontManager.h"
 
@@ -23,9 +24,9 @@
 #include "gcnExtend/gcnDraggableImageButtonIncubator.h"
 #include "gcnExtend/gcnSelectableContainer.h"
 
-class SoraiOSMainWindow: public sora::SoraWindowInfoBase {
+class mainwindow: public sora::SoraiOSMainWindow {
 public:
-	SoraiOSMainWindow(): bScreenRotated(false) {}
+	mainwindow(): bScreenRotated(false) {}
 	
 	virtual bool updateFunc() {
 		return false;
@@ -47,11 +48,7 @@ public:
 	}
 	
 	void init() {
-		sora::SORA->registerResourceManager(new sora::SoraZipResourceManager);
-		sora::SORA->registerFontManager(new sora::SoraiOSFontManager);
-		sora::SORA->registerInput(new sora::SoraiOSInput);
-		
-		sora::SORA->attachResourcePack(sora::SORA->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource"));
+		sora::SORA->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource");
 		
         pBG = sora::SORA->createSprite(L"background1.png");
 
@@ -78,25 +75,6 @@ public:
         printf("%s\n", sora::iOSDeviceTypeToString(sora::getiOSDeviceType()).c_str());
 	}
 	
-	int32 getWindowWidth() { 
-        return sora::iOSGetScreenWidth(bScreenRotated);
-    }
-	int32 getWindowHeight() { 
-        return sora::iOSGetScreenHeight(bScreenRotated);
-    }
-	
-	int32 getWindowPosX() { return 0; }
-	int32 getWindowPosY() { return 0; }
-	
-	SoraString getWindowName() { return "HoshiNoSora"; }
-	SoraString getWindowId() { return "MainWindow"; }
-	
-	bool isWindowSubWindow() { return false; }	
-	bool isWindowed() { return false; }
-	bool hideMouse() { return false; }
-	
-	void rotScreen(bool flag) { bScreenRotated = flag; }
-    bool isScreenRoteted() const { return bScreenRotated; }
 	
 private:
 	bool bScreenRotated;

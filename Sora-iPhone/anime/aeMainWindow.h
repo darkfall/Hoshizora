@@ -14,7 +14,6 @@
 #include "SoraGUIChan/guichansetup.h"
 
 #include "editorWindow.h"
-#include "SoraZipResourceManager/SoraZipResourceManager.h"
 #include "SoraFileUtility.h"
 #include "SoraiOSFontManager/SoraiOSFontManager.h"
 #include "SoraiOSGLRenderer/SoraiOSInput.h"
@@ -39,7 +38,6 @@ class aeMainWindow: public sora::SoraWindowInfoBase {
 	}
 	
 	void init() {		
-		sora::SORA->registerResourceManager(new sora::SoraZipResourceManager);
 		sora::SORA->registerFontManager(new sora::SoraiOSFontManager);
 		sora::SORA->registerInput(new sora::SoraiOSInput);
 		

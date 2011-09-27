@@ -27,9 +27,11 @@ namespace sora {
 		}
 		
 		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+            return SoraWString();
 		}
 		
 		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+            return SoraWString();
 		}
 	};
 	

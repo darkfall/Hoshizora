@@ -86,6 +86,9 @@ namespace sora {
         void setCursor(const SoraString& cursor);
         
         void onExtensionStateChanged(int32 extension, bool state, int32 param);
+        
+        void getDesktopResolution(float* w, float* h);
+        void setQueryVideoModeCallback(QueryVideoMode func);
 
 	private:
 		void applyTransform();

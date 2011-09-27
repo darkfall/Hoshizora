@@ -17,7 +17,7 @@
 
 // for [Texture2D initWithString]
 #include "SoraiOSGLRenderer/Apple/Texture2D.h"
-#include "stringId.h"
+#include "SoraStringId.h"
 
 namespace sora {
 	
@@ -33,13 +33,13 @@ namespace sora {
 		
 		void release();
 		
-		HSORATEXTURE tex;
+		SoraTextureHandle tex;
 		Texture2D* tex2D;
 		stringId sid;
 		int32 width;
 	};
 	
-	class SoraiOSFont: SoraFont {
+	class SoraiOSFont: public SoraFont {
 		friend class SoraiOSFontManager;
 		
 	protected:
@@ -101,7 +101,7 @@ namespace sora {
 		
 		uint32 size;
 		SoraString fontName;
-		hash_map<ulong32, iOSFontGlyph> ft_glyphs;
+		sora_hash_map<ulong32, iOSFontGlyph> ft_glyphs;
 		
 		float32 charRotation;
 		float32 scale;

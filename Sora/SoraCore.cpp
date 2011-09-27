@@ -54,6 +54,13 @@
 #include "SoraRenderSystemExtension.h"
 #include "SoraSoundSystemThread.h"
 
+#ifdef OS_IOS
+#include "SoraiOSDeviceHelper.h"
+#include "SoraiOSGLRenderer/SoraiOSWrapper.h"
+#endif
+
+#include "SoraPath.h"
+
 #include <stack>
 
 extern "C" {
@@ -823,6 +830,46 @@ namespace sora {
 	}
     
 	SoraTextureHandle SoraCore::createTexture(const StringType& sTexturePath, bool bCache, bool bMipmap)	{
+#ifdef OS_IOS
+        SoraWString realPath = sTexturePath;
+        SoraWString tmpPath = realPath;
+        size_t dotpos = tmpPath.rfind(L".");
+        bool isRetinaTexture = false;
+        
+        // ios resource auto get
+        if(_IS_RETINA_DISPLAY()) {
+            tmpPath.insert(dotpos, L"@2x");
+            if(SoraFileUtility::fileExists(SoraPath::resourceW() + tmpPath)) {
+                realPath = tmpPath;
+                isRetinaTexture = true;
+            }
+        } else if(_IS_IPAD()) {
+            tmpPath.insert(dotpos, L"~ipad");
+            if(SoraFileUtility::fileExists(SoraPath::resourceW() + tmpPath)) {
+                realPath = tmpPath;
+            }
+        }
+        
+        sora_assert(bInitialized==true);
+		SoraTextureHandle tex;
+		if((tex = SoraTextureMap::Instance()->get(SoraPath::resourceW() + realPath)) != 0) return tex;
+		ulong32 size;
+		void* data = getResourceFile(realPath, size);
+		if(data) {
+			tex = (SoraTextureHandle)pRenderSystem->createTextureFromMem(data, size, bMipmap);
+			if(tex) {
+                ((SoraTexture*)tex)->mIsRetinaTexture = isRetinaTexture;
+                
+                if(bCache) {
+                    SoraTextureMap::Instance()->add(realPath, tex);
+                }
+            }
+            
+			freeResourceFile(data);
+			return tex;
+		}
+		return 0;
+#else
 		sora_assert(bInitialized==true);
 		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sTexturePath)) != 0) return tex;
@@ -838,6 +885,7 @@ namespace sora {
 			return tex;
 		}
 		return 0;
+#endif
 	}
 
 	SoraTextureHandle SoraCore::createTextureWH(int w, int h) {
@@ -1004,7 +1052,7 @@ namespace sora {
         }
 	}
 
-	ulong32 SoraCore::createTarget(int width, int height, bool zbuffer) {
+	SoraTargetHandle SoraCore::createTarget(int width, int height, bool zbuffer) {
 		sora_assert(bInitialized==true);
 		return pRenderSystem->createTarget(width==0?iScreenWidth:width, height==0?iScreenHeight:height, zbuffer);
 	}
@@ -1258,7 +1306,7 @@ namespace sora {
             _postError("Error loading Font: "+font);
         else {
             if(getSystemFont() == 0)
-                setSystemFont(f);
+                setSystemFont(ff);
         }
 #endif
 		return 0;
@@ -1280,13 +1328,12 @@ namespace sora {
             setSystemFont(f);
         return f;
 #else
-        SoraFont* ff = pFontManager->getFont(font.c_str(), size);
-		if(!ff)
-            _postError("Error loading Font: "+font);
-        else {
-            if(getSystemFont() == 0)
-                setSystemFont(f);
-        }
+        // ios not supporting memory font now
+        SoraFont* f = pFontManager->getFont((const char*)data, fontSize, size-1, fileName.c_str());
+        if(getSystemFont() == 0)
+            setSystemFont(f);
+        return f;
+        return 0;
 #endif
 		return 0;
     }

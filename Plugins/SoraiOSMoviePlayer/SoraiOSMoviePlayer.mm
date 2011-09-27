@@ -57,7 +57,7 @@ namespace sora {
     }
     
     bool SoraiOSMoviePlayer::getMute() {
-        
+        return false;
     }
     
     void SoraiOSMoviePlayer::setTime(uint64 newtime) {
