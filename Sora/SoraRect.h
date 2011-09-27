@@ -9,6 +9,7 @@
 #ifndef SORA_RECT_H
 #define SORA_RECT_H
 
+#include "SoraPlatform.h"
 #include "SoraVector.h"
 
 namespace sora {

@@ -16,7 +16,7 @@ namespace sora {
 
     SoraSprite::SoraSprite(HSORATEXTURE tex) {
         SoraTexture* ptex = tex==0?NULL:(SoraTexture*)tex;
-        _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mOriginalWidth:1.f, ptex!=NULL?ptex->mOriginalHeight:1.f);
+        _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mTextureWidth:1.f, ptex!=NULL?ptex->mTextureHeight:1.f);
 		_initDefaults();
     }
     
@@ -55,8 +55,8 @@ namespace sora {
 		mQuad.v[3].tx = texx1; mQuad.v[3].ty = texy2;
 		
 		if(tex) {
-	       mSprWidth = static_cast<int32>(tex->mOriginalWidth);
-	       mSprHeight = static_cast<int32>(tex->mOriginalHeight);
+	       mSprWidth = static_cast<int32>(tex->mTextureWidth);
+	       mSprHeight = static_cast<int32>(tex->mTextureHeight);
 		} else {
 			mSprWidth = 1;
 			mSprHeight = 1;

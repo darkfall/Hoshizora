@@ -403,8 +403,8 @@ namespace sora{
 		}
 		
 		SoraTexture* tex = new SoraTexture(texid,
-										   p2w,
-										   p2h,
+										   w,
+										   h,
 										   w,
 										   h);
 		return tex;

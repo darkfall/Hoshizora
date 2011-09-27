@@ -19,7 +19,7 @@ namespace sora {
     mRotation(0.f),
     mPropChanged(true){
         setPosition(x, y);
-        mViewRect.Set(x, y, viewWidth, viewHeight);
+        mViewRect.set(x, y, viewWidth, viewHeight);
     }
     
     SoraCamera::SoraCamera():
@@ -27,7 +27,7 @@ namespace sora {
     mVZoom(1.f),
     mRotation(0.f),
     mPropChanged(true) {
-        mViewRect.Set(0.f, 0.f, (float32)SORA->getScreenWidth(), (float32)SORA->getScreenHeight());
+        mViewRect.set(0.f, 0.f, (float32)SORA->getScreenWidth(), (float32)SORA->getScreenHeight());
     }
     
     SoraCamera::~SoraCamera() {
@@ -35,7 +35,7 @@ namespace sora {
     }
     
     void SoraCamera::setViewRect(float32 width, float32 height) {
-        mViewRect.Set(getPositionX(),
+        mViewRect.set(getPositionX(),
                       getPositionY(),
                       width,
                       height);

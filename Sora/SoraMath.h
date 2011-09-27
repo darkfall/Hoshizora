@@ -18,6 +18,7 @@
 #include "hgerect.h"
 #include "SoraVector.h"
 #include "vector3.h"
+#include "SoraRect.h"
 #include "CoreTransform.h"
 
 namespace sora {
@@ -37,7 +38,6 @@ namespace sora {
 	inline float32 RAD_DGR(float32 rad)  {return (float32)((180.0 * rad) / D_PI); }
 	
 	
-	typedef hgeRect SoraRect;
     typedef vector3 SoraVector3;
     
     inline bool floatEqual(float32 f1, float32 f2) {
