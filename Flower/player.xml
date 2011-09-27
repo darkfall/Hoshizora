@@ -1,5 +1,19 @@
 <players>
-	<player id="LocalPlayer" texture="robo"/>
-	<player id="RemotePlayer" texture="robo"/>
-	<player id="AIPlayer" texture="robo"/>
+	<player 
+        id="LocalPlayer" 
+        texture="robo"
+        
+        collision_x="0.0"
+        collision_y="0.0"
+        collision_width="32"
+        collision_height="32"
+    />
+	<player 
+        id="RemotePlayer" 
+        texture="robo"
+    />
+	<player 
+        id="AIPlayer" 
+        texture="robo"
+    />
 </players>

@@ -448,6 +448,7 @@
 		882164FC143162AC00A2ED5A /* player.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = player.xml; path = ../Flower/player.xml; sourceTree = "<group>"; };
 		882164FF143169A400A2ED5A /* HudController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudController.h; sourceTree = "<group>"; };
 		88216500143169AA00A2ED5A /* HudController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HudController.cpp; sourceTree = "<group>"; };
+		8821650214318EA000A2ED5A /* SoraRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraRect.h; sourceTree = "<group>"; };
 		8829063C135FE427006EF84A /* editorWindow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = editorWindow.json; path = anime/editorWindow.json; sourceTree = "<group>"; };
 		8834C318135F7A47006A20F6 /* aeMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aeMainWindow.h; sourceTree = "<group>"; };
 		8834C31A135F7A47006A20F6 /* editorWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = editorWindow.cpp; sourceTree = "<group>"; };
@@ -1840,6 +1841,7 @@
 				88C853B614172C5A00FB39EC /* WindowsStackTrace.h */,
 				88C853B714172C5A00FB39EC /* ZLIB */,
 				8806B40814305638005118A3 /* SoraVector.h */,
+				8821650214318EA000A2ED5A /* SoraRect.h */,
 			);
 			name = Sora;
 			path = ../Sora;

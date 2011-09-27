@@ -11,7 +11,7 @@
 
 #include "SoraSprite.h"
 #include "SoraObject.h"
-
+#include "SoraRect.h"
 #include "../controller/defines.h"
 
 namespace flower {
@@ -35,12 +35,15 @@ namespace flower {
         
         void moveTo(float x, float y, float speed);
         
+        void setCollisionRect(const sora::SoraRect& rect);
+        
         void die();
         
     protected:
         static float mMaxSpeed;
         static PlayerController* mPlayerController;
                 
+        sora::SoraRect mCollisionRect;
         sora::SoraSprite* mTexture;
         
         float mToX, mToY;
