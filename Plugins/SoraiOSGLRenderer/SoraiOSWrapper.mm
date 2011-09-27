@@ -111,6 +111,14 @@ namespace sora {
                 break;
         }
     }
+    
+    void enableOrientation(bool flag) {
+        [g_view enableOrientationChange:flag];
+    }
+    
+    bool isOrientationEnabled() {
+        return [g_view isOrientationChangeEnabled];
+    }
 } // namespace sora
 
 #endif // OS_IOS

@@ -12,8 +12,9 @@
 #include "SoraiOSGLRenderer/SoraiOSMainWindow.h"
 
 #include "SoraFSM.h"
+#include "SoraGameApp.h"
 
-namespace ci {
+namespace flower {
     
     class MainWindow: public sora::SoraiOSMainWindow {
     public:
@@ -26,10 +27,10 @@ namespace ci {
         void applicationDidBecomeActive();
         
     private:
-        
+        sora::SoraFSMManager mFSManager;
     };
     
-} // namespace ci
+} // namespace flower
 
 
 

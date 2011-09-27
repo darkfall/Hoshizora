@@ -1,0 +1,5 @@
+<players>
+	<player id="LocalPlayer" texture="robo"/>
+	<player id="RemotePlayer" texture="robo"/>
+	<player id="AIPlayer" texture="robo"/>
+</players>

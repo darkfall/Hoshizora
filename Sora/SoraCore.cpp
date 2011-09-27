@@ -54,6 +54,7 @@ extern "C" {
 
 #ifdef OS_IOS
 #include "SoraiOSDeviceHelper.h"
+#include "SoraiOSGLRenderer/SoraiOSWrapper.h"
 #endif
 
 #include "SoraPath.h"
@@ -994,11 +995,19 @@ namespace sora {
 	}
 
 	int32 SoraCore::getScreenHeight() {
+#ifndef OS_IOS
 		return iScreenHeight;
+#else
+        return sora::getScreenHeight();
+#endif
 	}
 
 	int32 SoraCore::getScreenWidth() {
+#ifndef OS_IOS
 		return iScreenWidth;
+#else
+        return sora::getScreenWidth();
+#endif
 	}
 
 	void SoraCore::getMousePos(float32 *x, float32 *y) {

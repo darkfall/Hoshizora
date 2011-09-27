@@ -27,6 +27,9 @@ namespace sora {
     int getViewWidth();
     int getViewHeight();
     
+    void enableOrientation(bool flag);
+    bool isOrientationEnabled();
+    
     float getContentsScale();
     void setOrientation(iOSOrientation p);
     

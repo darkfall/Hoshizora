@@ -193,11 +193,15 @@ namespace sora {
     std::string SoraConfigParserXmlImpl::getString(const std::string& attr) const {
         sora_assert(mDocument);
         
-        if(attr.empty())
-            return mCurrNode.name();
+        if(attr.empty()) {
+            return mCurrNode.child_value();
+        }
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return std::string(attribute.value());
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            return c;
         }
         return std::string();
     }
@@ -211,9 +215,16 @@ namespace sora {
     bool SoraConfigParserXmlImpl::getBool(const std::string& attr) const {
         sora_assert(mDocument);
         
+        if(attr.empty()) {
+            return false;
+        }
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return attribute.as_bool();
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            if(!c.empty())
+                return false;
         }
         return false;
     }
@@ -221,9 +232,16 @@ namespace sora {
     int32 SoraConfigParserXmlImpl::getInt(const std::string& attr) const {
         sora_assert(mDocument);
         
+        if(attr.empty()) {
+            return atoi(mCurrNode.child_value());
+        }
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return attribute.as_int();
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            if(!c.empty())
+                return atoi(c.c_str());
         }
         return 0;
     }
@@ -231,9 +249,16 @@ namespace sora {
     float SoraConfigParserXmlImpl::getFloat(const std::string& attr) const {
         sora_assert(mDocument);
         
+        if(attr.empty()) {
+            return atof(mCurrNode.child_value());
+        }
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return attribute.as_float();
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            if(!c.empty())
+                return atof(c.c_str());
         }
         return 0.f;
     }
@@ -242,10 +267,14 @@ namespace sora {
         sora_assert(mDocument);
         
         if(attr.empty())
-            return mCurrNode.name();
+            return mCurrNode.child_value();
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return attribute.value();
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            if(!c.empty())
+                return c;
         }
         return opt;
     }
@@ -253,9 +282,15 @@ namespace sora {
     std::wstring SoraConfigParserXmlImpl::getWString(const std::string& attr, const std::wstring& opt) const {
         sora_assert(mDocument);
         
+        if(attr.empty())
+            return s2ws(mCurrNode.child_value());
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return s2ws(attribute.value());
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            if(!c.empty())
+                return s2ws(c);
         }
         return opt;
     }
@@ -263,9 +298,16 @@ namespace sora {
     bool SoraConfigParserXmlImpl::getBool(const std::string& attr, bool opt) const {
         sora_assert(mDocument);
         
+        if(attr.empty()) {
+            return false;;
+        }
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return attribute.as_bool();
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            if(!c.empty())
+                return false;
         }
         return opt;
     }
@@ -273,9 +315,15 @@ namespace sora {
     int32 SoraConfigParserXmlImpl::getInt(const std::string& attr, int32 opt) const {
         sora_assert(mDocument);
         
+        if(attr.empty())
+            return atoi(mCurrNode.child_value());
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return attribute.as_int();
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            if(!c.empty())
+                return atoi(c.c_str());
         }
         return opt;
     }
@@ -283,13 +331,19 @@ namespace sora {
     float SoraConfigParserXmlImpl::getFloat(const std::string& attr, float opt) const {
         sora_assert(mDocument);
         
+        if(attr.empty())
+            return atof(mCurrNode.child_value());
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return attribute.as_float();
+        } else {
+            std::string c = mCurrNode.child_value(attr.c_str());
+            if(!c.empty())
+                return atof(c.c_str());
         }
         return opt;
     }
-
+    
     std::string SoraConfigParserXmlImpl::writeToString() const {
         sora_assert(mDocument);
         
@@ -303,7 +357,7 @@ namespace sora {
         
         return mDocument->save_file(path.c_str());
     }
-
+    
     bool SoraConfigParserXmlImpl::beginNode(const std::string& name) {
         sora_assert(mDocument);
         
@@ -318,6 +372,7 @@ namespace sora {
     void SoraConfigParserXmlImpl::endNode() {
         toParent();
     }
+    
     
     void SoraConfigParserXmlImpl::setString(const std::string& attr, const std::string& val) {
         sora_assert(mDocument);

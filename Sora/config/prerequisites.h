@@ -18,6 +18,10 @@ namespace sora {
     enum ConfigType {
         CONFIG_XML = 1,
         CONFIG_JSON,
+        CONFIG_INI,
+
+        CONFIG_AUTO_DETECT,
+        CONFIG_UNKNOWN,
     };
     
 } // namespace sora

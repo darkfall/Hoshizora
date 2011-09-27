@@ -1,0 +1,6 @@
+<config
+	SEVolume="1.0"
+	BGMVolume="1.0"
+	MaxSpeed="400.0"
+	ControlMode="Accelerometer"
+/>

@@ -1,0 +1,5 @@
+<items>
+	<node name="basic" score="1" weight="1.0" texture="box"/>
+</items>
+<speedthreshold value="100.0"/>
+<gravity value="10.0"/>

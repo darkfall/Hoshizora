@@ -112,6 +112,10 @@ namespace sora {
 	typedef ulong32 HSORATEXTURE;
 	typedef ulong32 HGUIWIDGET;
     typedef ulong32 HSORATARGET;
+    
+    typedef ulong32 SoraSpriteHandle;
+    typedef ulong32 SoraTextureHandle;
+    typedef ulong32 SoraTargetHandle;
 	
 	enum {
 		SORA_LINE				= 0x0001,

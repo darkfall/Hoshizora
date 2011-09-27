@@ -35,7 +35,7 @@ namespace sora {
             delete this;
         }
         
-        virtual int32 onUpdate(float32 dt) { return SoraFSMStateUpdateEnd; }
+        virtual void onUpdate(float32 dt) {}
         virtual void onRender() {}
         
         virtual void onEnter() {}
@@ -75,7 +75,7 @@ namespace sora {
         
         static SoraFSMManager& defaultFSMManager();
         
-        SoraFSMState* operator[](const SoraString& name);
+        SoraFSMState* operator[](const SoraString& name) const;
         
     private:
         void switchToState(SoraFSMState* state);

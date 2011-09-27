@@ -56,6 +56,9 @@ namespace sora {
         void enableGyroscope(bool flag);
         void getGyroscopeAttr(float* x, float* y, float *z);
         
+        void enableOrientationChange(bool flag);
+        bool isOrientationChangeEnabled() const;
+        
         SoraiOSMainWindow* getMainWindow() const;
         
 	private:

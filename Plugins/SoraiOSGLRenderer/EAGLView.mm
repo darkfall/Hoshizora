@@ -56,6 +56,7 @@
     if(sora::_IS_RETINA_DISPLAY()) {
         self.contentScaleFactor = 2.0;
     }
+    printf("%f, %f, %f\n", self.contentScaleFactor, ((CAEAGLLayer *)self.layer).contentsScale, [UIScreen mainScreen].scale);
     
     sora::setEAGLView(self);
     multisampling = true;
@@ -262,6 +263,8 @@
             else
                 glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
             
+            glColor4f(0.f, 0.f, 0.f, 0.f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glViewport(0, 0, framebufferWidth, framebufferHeight);
         }
 }

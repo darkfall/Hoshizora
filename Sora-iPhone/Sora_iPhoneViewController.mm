@@ -12,8 +12,8 @@
 #import "EAGLView.h"
 
 #import "SoraiOSGLRenderer/SoraiOSInitializer.h"
-#import "rfMainWindow.h"
-#import "anime/aeMainWindow.h"
+
+#include "../Flower/MainWindow.h"
 
 @interface Sora_iPhoneViewController ()
 @property (nonatomic, retain) EAGLContext *context;
@@ -48,8 +48,7 @@
     animationFrameInterval = 1;
     self.displayLink = nil;
         
-    // initialize SORA base systems
-    sora::SORA_IOS->SoraiOSStart(new rfMainWindow);
+    sora::SoraiOSInitializer::Instance()->SoraiOSStart(new flower::MainWindow);
 }
 
 - (void)dealloc

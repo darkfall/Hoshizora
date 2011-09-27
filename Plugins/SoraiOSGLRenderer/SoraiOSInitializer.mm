@@ -24,7 +24,8 @@ namespace sora {
     static SoraiOSAppDelegate* g_app_delegate = 0;
 
     void SoraiOSInitializer::SoraiOSInit(bool isOGLES2API, bool multisampling) {
-        SORA->registerRenderSystem(new SoraiOSGLRenderer);
+        mRenderSystem = new SoraiOSGLRenderer;
+        SORA->registerRenderSystem(mRenderSystem);
         
         sora::setupMultisampling(multisampling);
         g_app_delegate = [[SoraiOSAppDelegate alloc] init];
@@ -73,7 +74,7 @@ namespace sora {
     bool SoraiOSInitializer::update() {
         if(pTimer->update()) {
             sora::SoraTimestamp time;
-            sora::SORA_IOS->SoraiOSUpdateSystems();
+            SoraiOSUpdateSystems();
         }
         return false;
     }
@@ -170,6 +171,14 @@ namespace sora {
                 g_gyro_controller = 0;
             }
         }
+    }
+    
+    void SoraiOSInitializer::enableOrientationChange(bool flag) {
+        sora::enableOrientation(flag);
+    }
+    
+    bool SoraiOSInitializer::isOrientationChangeEnabled() const {
+        return sora::isOrientationEnabled();
     }
     
     void SoraiOSInitializer::getGyroscopeAttr(float* x, float* y, float* z) {

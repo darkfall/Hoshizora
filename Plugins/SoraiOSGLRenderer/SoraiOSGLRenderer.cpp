@@ -385,9 +385,6 @@ namespace sora{
             return 0;
 		}
 		
-		// ios max texture size = 1024
-		if(w > 1024 || h > 1024)
-			return NULL;
 		
 		// because theres no glgettextureleveliv, so we need to handle this by ourself
 		int i;

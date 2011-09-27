@@ -6,8 +6,8 @@ namespace sora {
 		mTextureID = texid;
 		mTextureWidth = width;
 		mTextureHeight = height;
-		mOriginalWidth = width;
-		mOriginalHeight = height;
+		mOriginalWidth = oriwidth;
+		mOriginalHeight = oriheight;
         
 #ifdef OS_IOS
         mIsRetinaTexture = false;

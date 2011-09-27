@@ -15,11 +15,37 @@
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		88057F8D135EBA4000B1535B /* rfMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88057F8B135EBA4000B1535B /* rfMap.cpp */; };
-		88057F94135EBA4D00B1535B /* rfMainWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88057F90135EBA4D00B1535B /* rfMainWindow.mm */; };
-		88057F95135EBA4D00B1535B /* rfMapRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */; };
 		88057FAD135EBBBF00B1535B /* resource.SoraResource in Resources */ = {isa = PBXBuildFile; fileRef = 88057FAC135EBBBF00B1535B /* resource.SoraResource */; };
 		88058042135EC07E00B1535B /* data.rfResource in Resources */ = {isa = PBXBuildFile; fileRef = 88058041135EC07E00B1535B /* data.rfResource */; };
-		880D06D214301728005CB649 /* MainWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 880D06D114301727005CB649 /* MainWindow.mm */; };
+		880D06FC143019B1005CB649 /* SoraGameApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880D06F6143019B1005CB649 /* SoraGameApp.cpp */; };
+		880D06FD143019B1005CB649 /* SoraGameAppDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880D06F8143019B1005CB649 /* SoraGameAppDef.cpp */; };
+		880D06FE143019B1005CB649 /* SoraGameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880D06FA143019B1005CB649 /* SoraGameState.cpp */; };
+		882164B11430714900A2ED5A /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = 882164B01430714900A2ED5A /* background1.png */; };
+		882164B31430716200A2ED5A /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = 882164B21430716200A2ED5A /* box.png */; };
+		882164D514310CFD00A2ED5A /* ItemController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164B714310CFD00A2ED5A /* ItemController.cpp */; };
+		882164D614310CFD00A2ED5A /* MapController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164B914310CFD00A2ED5A /* MapController.cpp */; };
+		882164D714310CFD00A2ED5A /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164BB14310CFD00A2ED5A /* PlayerController.cpp */; };
+		882164D814310CFD00A2ED5A /* ScoreController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164BD14310CFD00A2ED5A /* ScoreController.cpp */; };
+		882164D914310CFD00A2ED5A /* ThemeController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164BF14310CFD00A2ED5A /* ThemeController.cpp */; };
+		882164DA14310CFD00A2ED5A /* bomb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164C214310CFD00A2ED5A /* bomb.cpp */; };
+		882164DB14310CFD00A2ED5A /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164C414310CFD00A2ED5A /* connection.cpp */; };
+		882164DC14310CFD00A2ED5A /* item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164C614310CFD00A2ED5A /* item.cpp */; };
+		882164DD14310CFD00A2ED5A /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164C814310CFD00A2ED5A /* object.cpp */; };
+		882164DE14310CFD00A2ED5A /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164CA14310CFD00A2ED5A /* player.cpp */; };
+		882164DF14310CFD00A2ED5A /* theme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164CC14310CFD00A2ED5A /* theme.cpp */; };
+		882164E014310CFD00A2ED5A /* ItemConfig.xml in Resources */ = {isa = PBXBuildFile; fileRef = 882164CE14310CFD00A2ED5A /* ItemConfig.xml */; };
+		882164E114310CFD00A2ED5A /* MainWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 882164D014310CFD00A2ED5A /* MainWindow.mm */; };
+		882164E214310CFD00A2ED5A /* StateMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164D114310CFD00A2ED5A /* StateMenu.cpp */; };
+		882164E314310CFD00A2ED5A /* theme_basic.xml in Resources */ = {isa = PBXBuildFile; fileRef = 882164D314310CFD00A2ED5A /* theme_basic.xml */; };
+		882164E414310CFD00A2ED5A /* ThemeConfig.xml in Resources */ = {isa = PBXBuildFile; fileRef = 882164D414310CFD00A2ED5A /* ThemeConfig.xml */; };
+		882164E614310F5200A2ED5A /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = 882164E514310F5200A2ED5A /* flower.png */; };
+		882164E81431112C00A2ED5A /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 882164E71431112C00A2ED5A /* bg.png */; };
+		882164EF14311CF900A2ED5A /* GameModeController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164EE14311CF900A2ED5A /* GameModeController.cpp */; };
+		882164F514315C5100A2ED5A /* ConfigController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164F414315C5000A2ED5A /* ConfigController.cpp */; };
+		882164FA14315EC000A2ED5A /* localplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882164F914315EC000A2ED5A /* localplayer.cpp */; };
+		882164FD143162AC00A2ED5A /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 882164FB143162AB00A2ED5A /* config.xml */; };
+		882164FE143162AC00A2ED5A /* player.xml in Resources */ = {isa = PBXBuildFile; fileRef = 882164FC143162AC00A2ED5A /* player.xml */; };
+		88216501143169AB00A2ED5A /* HudController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88216500143169AA00A2ED5A /* HudController.cpp */; };
 		8834C31F135F7A47006A20F6 /* editorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C31A135F7A47006A20F6 /* editorWindow.cpp */; };
 		8834C320135F7A47006A20F6 /* editorWindow.json in Resources */ = {isa = PBXBuildFile; fileRef = 8834C31C135F7A47006A20F6 /* editorWindow.json */; };
 		8834C337135F7AE7006A20F6 /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C335135F7AE7006A20F6 /* SoraSpriteAnimation.cpp */; };
@@ -365,14 +391,63 @@
 		88057F8A135EBA4000B1535B /* rfCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfCommon.h; sourceTree = "<group>"; };
 		88057F8B135EBA4000B1535B /* rfMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rfMap.cpp; sourceTree = "<group>"; };
 		88057F8C135EBA4000B1535B /* rfMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMap.h; sourceTree = "<group>"; };
-		88057F90135EBA4D00B1535B /* rfMainWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = rfMainWindow.mm; sourceTree = "<group>"; };
-		88057F91135EBA4D00B1535B /* rfMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMainWindow.h; sourceTree = "<group>"; };
-		88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rfMapRenderer.cpp; sourceTree = "<group>"; };
-		88057F93135EBA4D00B1535B /* rfMapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rfMapRenderer.h; sourceTree = "<group>"; };
 		88057FAC135EBBBF00B1535B /* resource.SoraResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = resource.SoraResource; path = "../Sora-OSX/build/Debug/resource.SoraResource"; sourceTree = SOURCE_ROOT; };
 		88058041135EC07E00B1535B /* data.rfResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.rfResource; path = ../Resources/data.rfResource; sourceTree = SOURCE_ROOT; };
-		880D06D01430171E005CB649 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
-		880D06D114301727005CB649 /* MainWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainWindow.mm; sourceTree = "<group>"; };
+		8806B40814305638005118A3 /* SoraVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraVector.h; sourceTree = "<group>"; };
+		880D06F6143019B1005CB649 /* SoraGameApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraGameApp.cpp; sourceTree = "<group>"; };
+		880D06F7143019B1005CB649 /* SoraGameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGameApp.h; sourceTree = "<group>"; };
+		880D06F8143019B1005CB649 /* SoraGameAppDef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraGameAppDef.cpp; sourceTree = "<group>"; };
+		880D06F9143019B1005CB649 /* SoraGameAppDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGameAppDef.h; sourceTree = "<group>"; };
+		880D06FA143019B1005CB649 /* SoraGameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraGameState.cpp; sourceTree = "<group>"; };
+		880D06FB143019B1005CB649 /* SoraGameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraGameState.h; sourceTree = "<group>"; };
+		882164B01430714900A2ED5A /* background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background1.png; path = ../Resources/background1.png; sourceTree = "<group>"; };
+		882164B21430716200A2ED5A /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = box.png; path = ../Resources/box.png; sourceTree = "<group>"; };
+		882164B614310CFD00A2ED5A /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		882164B714310CFD00A2ED5A /* ItemController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ItemController.cpp; sourceTree = "<group>"; };
+		882164B814310CFD00A2ED5A /* ItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemController.h; sourceTree = "<group>"; };
+		882164B914310CFD00A2ED5A /* MapController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapController.cpp; sourceTree = "<group>"; };
+		882164BA14310CFD00A2ED5A /* MapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
+		882164BB14310CFD00A2ED5A /* PlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerController.cpp; sourceTree = "<group>"; };
+		882164BC14310CFD00A2ED5A /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
+		882164BD14310CFD00A2ED5A /* ScoreController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreController.cpp; sourceTree = "<group>"; };
+		882164BE14310CFD00A2ED5A /* ScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreController.h; sourceTree = "<group>"; };
+		882164BF14310CFD00A2ED5A /* ThemeController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThemeController.cpp; sourceTree = "<group>"; };
+		882164C014310CFD00A2ED5A /* ThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeController.h; sourceTree = "<group>"; };
+		882164C214310CFD00A2ED5A /* bomb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bomb.cpp; sourceTree = "<group>"; };
+		882164C314310CFD00A2ED5A /* bomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bomb.h; sourceTree = "<group>"; };
+		882164C414310CFD00A2ED5A /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = connection.cpp; sourceTree = "<group>"; };
+		882164C514310CFD00A2ED5A /* connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection.h; sourceTree = "<group>"; };
+		882164C614310CFD00A2ED5A /* item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = item.cpp; sourceTree = "<group>"; };
+		882164C714310CFD00A2ED5A /* item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = item.h; sourceTree = "<group>"; };
+		882164C814310CFD00A2ED5A /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object.cpp; sourceTree = "<group>"; };
+		882164C914310CFD00A2ED5A /* object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = object.h; sourceTree = "<group>"; };
+		882164CA14310CFD00A2ED5A /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
+		882164CB14310CFD00A2ED5A /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
+		882164CC14310CFD00A2ED5A /* theme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = theme.cpp; sourceTree = "<group>"; };
+		882164CD14310CFD00A2ED5A /* theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theme.h; sourceTree = "<group>"; };
+		882164CE14310CFD00A2ED5A /* ItemConfig.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = ItemConfig.xml; path = ../Flower/ItemConfig.xml; sourceTree = "<group>"; };
+		882164CF14310CFD00A2ED5A /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
+		882164D014310CFD00A2ED5A /* MainWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainWindow.mm; sourceTree = "<group>"; };
+		882164D114310CFD00A2ED5A /* StateMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateMenu.cpp; sourceTree = "<group>"; };
+		882164D214310CFD00A2ED5A /* StateMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateMenu.h; sourceTree = "<group>"; };
+		882164D314310CFD00A2ED5A /* theme_basic.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = theme_basic.xml; path = ../Flower/theme_basic.xml; sourceTree = "<group>"; };
+		882164D414310CFD00A2ED5A /* ThemeConfig.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = ThemeConfig.xml; path = ../Flower/ThemeConfig.xml; sourceTree = "<group>"; };
+		882164E514310F5200A2ED5A /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flower.png; path = ../Flower/flower.png; sourceTree = "<group>"; };
+		882164E71431112C00A2ED5A /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = ../Flower/bg.png; sourceTree = "<group>"; };
+		882164ED14311CF200A2ED5A /* GameModeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModeController.h; sourceTree = "<group>"; };
+		882164EE14311CF900A2ED5A /* GameModeController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameModeController.cpp; sourceTree = "<group>"; };
+		882164F014311D0500A2ED5A /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
+		882164F1143157F700A2ED5A /* ScoreInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreInfo.h; sourceTree = "<group>"; };
+		882164F314315C4A00A2ED5A /* ConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigController.h; sourceTree = "<group>"; };
+		882164F414315C5000A2ED5A /* ConfigController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigController.cpp; sourceTree = "<group>"; };
+		882164F614315E6300A2ED5A /* localplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = localplayer.h; sourceTree = "<group>"; };
+		882164F714315E6800A2ED5A /* aiplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiplayer.h; sourceTree = "<group>"; };
+		882164F814315E7000A2ED5A /* remoteplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = remoteplayer.h; sourceTree = "<group>"; };
+		882164F914315EC000A2ED5A /* localplayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = localplayer.cpp; sourceTree = "<group>"; };
+		882164FB143162AB00A2ED5A /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = config.xml; path = ../Flower/config.xml; sourceTree = "<group>"; };
+		882164FC143162AC00A2ED5A /* player.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = player.xml; path = ../Flower/player.xml; sourceTree = "<group>"; };
+		882164FF143169A400A2ED5A /* HudController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudController.h; sourceTree = "<group>"; };
+		88216500143169AA00A2ED5A /* HudController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HudController.cpp; sourceTree = "<group>"; };
 		8829063C135FE427006EF84A /* editorWindow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = editorWindow.json; path = anime/editorWindow.json; sourceTree = "<group>"; };
 		8834C318135F7A47006A20F6 /* aeMainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aeMainWindow.h; sourceTree = "<group>"; };
 		8834C31A135F7A47006A20F6 /* editorWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = editorWindow.cpp; sourceTree = "<group>"; };
@@ -1229,15 +1304,11 @@
 				88057F88135EBA4000B1535B /* Reflection */,
 				8834C317135F7A47006A20F6 /* anime */,
 				88C8523C14172C5900FB39EC /* Sora */,
-				880D06CF14301680005CB649 /* CatchIt */,
+				882164B414310CFD00A2ED5A /* Flower */,
 				8897825A13071CCD00A69ADE /* Sora_iPhoneAppDelegate.h */,
 				8897825B13071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm */,
 				8897825C13071CCD00A69ADE /* Sora_iPhoneViewController.h */,
 				8897825D13071CCD00A69ADE /* Sora_iPhoneViewController.mm */,
-				88057F90135EBA4D00B1535B /* rfMainWindow.mm */,
-				88057F91135EBA4D00B1535B /* rfMainWindow.h */,
-				88057F92135EBA4D00B1535B /* rfMapRenderer.cpp */,
-				88057F93135EBA4D00B1535B /* rfMapRenderer.h */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -1258,6 +1329,15 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				882164FB143162AB00A2ED5A /* config.xml */,
+				882164FC143162AC00A2ED5A /* player.xml */,
+				882164CE14310CFD00A2ED5A /* ItemConfig.xml */,
+				882164D314310CFD00A2ED5A /* theme_basic.xml */,
+				882164D414310CFD00A2ED5A /* ThemeConfig.xml */,
+				882164E71431112C00A2ED5A /* bg.png */,
+				882164B21430716200A2ED5A /* box.png */,
+				882164E514310F5200A2ED5A /* flower.png */,
+				882164B01430714900A2ED5A /* background1.png */,
 				888AC6101427299D00859221 /* background.png */,
 				88FA186B1422BB6700B207BB /* 02.mp3 */,
 				88FA186C1422BB6700B207BB /* click_08.wav */,
@@ -1310,14 +1390,80 @@
 			path = ../Reflection;
 			sourceTree = SOURCE_ROOT;
 		};
-		880D06CF14301680005CB649 /* CatchIt */ = {
+		880D06F5143019B1005CB649 /* app */ = {
 			isa = PBXGroup;
 			children = (
-				880D06D01430171E005CB649 /* MainWindow.h */,
-				880D06D114301727005CB649 /* MainWindow.mm */,
+				880D06F6143019B1005CB649 /* SoraGameApp.cpp */,
+				880D06F7143019B1005CB649 /* SoraGameApp.h */,
+				880D06F8143019B1005CB649 /* SoraGameAppDef.cpp */,
+				880D06F9143019B1005CB649 /* SoraGameAppDef.h */,
+				880D06FA143019B1005CB649 /* SoraGameState.cpp */,
+				880D06FB143019B1005CB649 /* SoraGameState.h */,
 			);
-			name = CatchIt;
-			path = ../CatchIt;
+			path = app;
+			sourceTree = "<group>";
+		};
+		882164B414310CFD00A2ED5A /* Flower */ = {
+			isa = PBXGroup;
+			children = (
+				882164B514310CFD00A2ED5A /* controller */,
+				882164C114310CFD00A2ED5A /* core */,
+				882164CF14310CFD00A2ED5A /* MainWindow.h */,
+				882164D014310CFD00A2ED5A /* MainWindow.mm */,
+				882164D114310CFD00A2ED5A /* StateMenu.cpp */,
+				882164D214310CFD00A2ED5A /* StateMenu.h */,
+			);
+			name = Flower;
+			path = ../Flower;
+			sourceTree = "<group>";
+		};
+		882164B514310CFD00A2ED5A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				882164B614310CFD00A2ED5A /* Common.h */,
+				882164F014311D0500A2ED5A /* defines.h */,
+				882164B714310CFD00A2ED5A /* ItemController.cpp */,
+				882164B814310CFD00A2ED5A /* ItemController.h */,
+				882164B914310CFD00A2ED5A /* MapController.cpp */,
+				882164BA14310CFD00A2ED5A /* MapController.h */,
+				882164BB14310CFD00A2ED5A /* PlayerController.cpp */,
+				882164BC14310CFD00A2ED5A /* PlayerController.h */,
+				882164BD14310CFD00A2ED5A /* ScoreController.cpp */,
+				882164BE14310CFD00A2ED5A /* ScoreController.h */,
+				882164BF14310CFD00A2ED5A /* ThemeController.cpp */,
+				882164C014310CFD00A2ED5A /* ThemeController.h */,
+				882164ED14311CF200A2ED5A /* GameModeController.h */,
+				882164EE14311CF900A2ED5A /* GameModeController.cpp */,
+				882164F314315C4A00A2ED5A /* ConfigController.h */,
+				882164F414315C5000A2ED5A /* ConfigController.cpp */,
+				882164FF143169A400A2ED5A /* HudController.h */,
+				88216500143169AA00A2ED5A /* HudController.cpp */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		882164C114310CFD00A2ED5A /* core */ = {
+			isa = PBXGroup;
+			children = (
+				882164C214310CFD00A2ED5A /* bomb.cpp */,
+				882164C314310CFD00A2ED5A /* bomb.h */,
+				882164C414310CFD00A2ED5A /* connection.cpp */,
+				882164C514310CFD00A2ED5A /* connection.h */,
+				882164C614310CFD00A2ED5A /* item.cpp */,
+				882164C714310CFD00A2ED5A /* item.h */,
+				882164C814310CFD00A2ED5A /* object.cpp */,
+				882164C914310CFD00A2ED5A /* object.h */,
+				882164CA14310CFD00A2ED5A /* player.cpp */,
+				882164CB14310CFD00A2ED5A /* player.h */,
+				882164F714315E6800A2ED5A /* aiplayer.h */,
+				882164F614315E6300A2ED5A /* localplayer.h */,
+				882164F914315EC000A2ED5A /* localplayer.cpp */,
+				882164F814315E7000A2ED5A /* remoteplayer.h */,
+				882164CC14310CFD00A2ED5A /* theme.cpp */,
+				882164CD14310CFD00A2ED5A /* theme.h */,
+				882164F1143157F700A2ED5A /* ScoreInfo.h */,
+			);
+			path = core;
 			sourceTree = "<group>";
 		};
 		8834C317135F7A47006A20F6 /* anime */ = {
@@ -1483,6 +1629,7 @@
 		88C8523C14172C5900FB39EC /* Sora */ = {
 			isa = PBXGroup;
 			children = (
+				880D06F5143019B1005CB649 /* app */,
 				88FA18A81422D9D000B207BB /* config */,
 				88FA18B11422D9D000B207BB /* xml */,
 				884029291419B95400F9DD84 /* SoraiOSDeviceHelper.h */,
@@ -1692,6 +1839,7 @@
 				88C853B314172C5A00FB39EC /* win32filewrapper.h */,
 				88C853B614172C5A00FB39EC /* WindowsStackTrace.h */,
 				88C853B714172C5A00FB39EC /* ZLIB */,
+				8806B40814305638005118A3 /* SoraVector.h */,
 			);
 			name = Sora;
 			path = ../Sora;
@@ -2580,6 +2728,15 @@
 				88FA186E1422BB6700B207BB /* click_08.wav in Resources */,
 				888AC60B1427262200859221 /* magicCircle@2x.png in Resources */,
 				888AC6111427299D00859221 /* background.png in Resources */,
+				882164B11430714900A2ED5A /* background1.png in Resources */,
+				882164B31430716200A2ED5A /* box.png in Resources */,
+				882164E014310CFD00A2ED5A /* ItemConfig.xml in Resources */,
+				882164E314310CFD00A2ED5A /* theme_basic.xml in Resources */,
+				882164E414310CFD00A2ED5A /* ThemeConfig.xml in Resources */,
+				882164E614310F5200A2ED5A /* flower.png in Resources */,
+				882164E81431112C00A2ED5A /* bg.png in Resources */,
+				882164FD143162AC00A2ED5A /* config.xml in Resources */,
+				882164FE143162AC00A2ED5A /* player.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2596,8 +2753,6 @@
 				8897826013071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm in Sources */,
 				8897826113071CCD00A69ADE /* Sora_iPhoneViewController.mm in Sources */,
 				88057F8D135EBA4000B1535B /* rfMap.cpp in Sources */,
-				88057F94135EBA4D00B1535B /* rfMainWindow.mm in Sources */,
-				88057F95135EBA4D00B1535B /* rfMapRenderer.cpp in Sources */,
 				8834C31F135F7A47006A20F6 /* editorWindow.cpp in Sources */,
 				8834C337135F7AE7006A20F6 /* SoraSpriteAnimation.cpp in Sources */,
 				8834C349135F7B85006A20F6 /* SoraiOSFont.mm in Sources */,
@@ -2907,7 +3062,26 @@
 				8895231F142818B1006673C1 /* AppDelegate.mm in Sources */,
 				8895232114281A2E006673C1 /* GryoScopeController.mm in Sources */,
 				8895232514282F88006673C1 /* SOIL.c in Sources */,
-				880D06D214301728005CB649 /* MainWindow.mm in Sources */,
+				880D06FC143019B1005CB649 /* SoraGameApp.cpp in Sources */,
+				880D06FD143019B1005CB649 /* SoraGameAppDef.cpp in Sources */,
+				880D06FE143019B1005CB649 /* SoraGameState.cpp in Sources */,
+				882164D514310CFD00A2ED5A /* ItemController.cpp in Sources */,
+				882164D614310CFD00A2ED5A /* MapController.cpp in Sources */,
+				882164D714310CFD00A2ED5A /* PlayerController.cpp in Sources */,
+				882164D814310CFD00A2ED5A /* ScoreController.cpp in Sources */,
+				882164D914310CFD00A2ED5A /* ThemeController.cpp in Sources */,
+				882164DA14310CFD00A2ED5A /* bomb.cpp in Sources */,
+				882164DB14310CFD00A2ED5A /* connection.cpp in Sources */,
+				882164DC14310CFD00A2ED5A /* item.cpp in Sources */,
+				882164DD14310CFD00A2ED5A /* object.cpp in Sources */,
+				882164DE14310CFD00A2ED5A /* player.cpp in Sources */,
+				882164DF14310CFD00A2ED5A /* theme.cpp in Sources */,
+				882164E114310CFD00A2ED5A /* MainWindow.mm in Sources */,
+				882164E214310CFD00A2ED5A /* StateMenu.cpp in Sources */,
+				882164EF14311CF900A2ED5A /* GameModeController.cpp in Sources */,
+				882164F514315C5100A2ED5A /* ConfigController.cpp in Sources */,
+				882164FA14315EC000A2ED5A /* localplayer.cpp in Sources */,
+				88216501143169AB00A2ED5A /* HudController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

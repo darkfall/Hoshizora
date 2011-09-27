@@ -16,7 +16,7 @@ namespace sora {
 
     SoraSprite::SoraSprite(HSORATEXTURE tex) {
         SoraTexture* ptex = tex==0?NULL:(SoraTexture*)tex;
-        _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mTextureWidth:1.f, ptex!=NULL?ptex->mTextureHeight:1.f);
+        _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mOriginalWidth:1.f, ptex!=NULL?ptex->mOriginalHeight:1.f);
 		_initDefaults();
     }
     
