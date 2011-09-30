@@ -35,7 +35,7 @@ namespace sora {
         
         bool update(float dt) {
             mCurrTime += dt;
-            mCurrValue = slerp(mBegin, mEnd, mCurrTime/mInTime);
+            mCurrValue = lerp(mBegin, mEnd, mCurrTime/mInTime);
             if(mCurrTime >= mInTime) {
                 return true;
             }

@@ -145,6 +145,30 @@ namespace sora {
 		}
 		return *this;
 	}
+    
+    SoraCoreTransform SoraCoreTransform::operator * (const SoraCoreTransform& rhs) const {
+        if(bClean) return *this;
+        
+		switch (iKind) {
+			case TRANSFORM_1F: return SoraCoreTransform(f1*rhs.f1); break;
+			case TRANSFORM_2F: {
+                float x = f1 * rhs.f1;
+                float y = f2 * rhs.f2;
+                return SoraCoreTransform(x, y);
+                break;
+            }
+                
+			case TRANSFORM_3F: {
+                float x = f1 * rhs.f1;
+                float y = f2 * rhs.f2;
+                float z = f3 * rhs.f3;
+                return SoraCoreTransform(x, y, z);
+                break;
+            }
+			case TRANSFORM_4F: return SoraCoreTransform(f1*rhs.f1, f2*rhs.f2, f3*rhs.f3, f4*rhs.f4); break;
+		}
+		return *this;
+    }
 
 	void SoraCoreTransform::operator = (const SoraCoreTransform& rhs) {
 		iKind = rhs.iKind;

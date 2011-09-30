@@ -13,7 +13,7 @@
 
 // THIS MUST BE INCLUDED BY .MM FILE
 
-// iphone resolution
+// iphone resolution(480*320)
 // retina display(960*640) for iPod Touch 4gen or iPhone 4 gen and up
 // OS_IPAD for 1024*768
 #ifdef OS_IOS

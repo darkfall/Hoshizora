@@ -29,9 +29,11 @@ namespace sora {
         void start(int32 numThreads);
         void stop();
         
-        void run(SoraThreadTask&);
+        void run(const SoraThreadTask&);
         
         bool isRunning() const;
+        
+        static SoraThreadPool& defaultPool();
         
     private:
         void runInThread(void* arg);

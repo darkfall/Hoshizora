@@ -22,7 +22,7 @@ namespace sora {
     
     bool SoraFontRotationModifier::update(float dt) {
         mCurrTime += dt;
-        mCurrVal = slerp(mBegin, mEnd, mCurrTime/mInTime);
+        mCurrVal = lerp(mBegin, mEnd, mCurrTime/mInTime);
         if(mCurrTime >= mInTime) {
             return true;
         }
@@ -55,7 +55,7 @@ namespace sora {
     
     bool SoraFontScaleModifier::update(float dt) {
         mCurrTime += dt;
-        mCurrVal = slerp(mBegin, mEnd, mCurrTime/mInTime);
+        mCurrVal = lerp(mBegin, mEnd, mCurrTime/mInTime);
         if(mCurrTime >= mInTime) {
             return true;
         }

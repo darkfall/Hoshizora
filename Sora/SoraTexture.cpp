@@ -2,22 +2,28 @@
 #include "SoraCore.h"
 
 namespace sora {
-
+    
 	SoraTexture::SoraTexture(ulong32 texid, int32 width, int32 height, int32 oriwidth, int32 oriheight) {
 		mTextureID = texid;
 		mTextureWidth = width;
 		mTextureHeight = height;
-		mOriginalWidth = width;
-		mOriginalHeight = height;
-        mUserData = 0;
+		mOriginalWidth = oriwidth;
+		mOriginalHeight = oriheight;
+        
+#ifdef OS_IOS
+        mIsRetinaTexture = false;
+#endif
 	}
-
+    
 	SoraTexture::SoraTexture() {
 		mTextureID = 0;
 		mTextureWidth = mTextureHeight = 0;
 		mOriginalWidth = mOriginalHeight = 0;
-        mUserData = 0;
-	}
+        
+#ifdef OS_IOS
+        mIsRetinaTexture = false;
+#endif
+    }
     
     SoraTextureHandle SoraTexture::LoadFromFile(const StringType& file) {
         return SoraCore::Instance()->createTexture(file);

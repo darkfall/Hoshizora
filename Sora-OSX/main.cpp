@@ -27,6 +27,8 @@
 
 #include "cmd/SoraConsole.h"
 
+#include "SoraTask.h"
+
 
 float lx, ly, rx, ry;
 float maxsize, maxiteration, iterinc;
@@ -81,6 +83,11 @@ SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_ite
 
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
+    GameInitState():
+    taskManager(true) {
+        
+    }
+    
     void onRender() {
         sora::SoraGameApp::BeginScene();
         mBg.render();
@@ -137,6 +144,28 @@ public:
     }
     
     void onEnter() {
+        mBg.setTexture(sora::SoraTexture::CreateEmpty(sora::SoraCore::Instance()->getScreenWidth(), 
+                                                      sora::SoraCore::Instance()->getScreenHeight()));
+        
+        mShader = mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet");
+        lx = -2.5f;
+        ly = 1.0f;
+        rx = -2.f;
+        ry = 2.f;
+        maxsize = 2.f;
+        maxiteration = 90.f;
+        iterinc = 1.f;
+
+        sora::SoraTask* task = new sora::SoraTask("ResourceLoad", sora::Bind(this, &GameInitState::load));
+        taskManager.start(task);
+        
+        while(task->state() == sora::SoraAbstractTask::TaskRunning) {
+            
+        }
+        
+    }
+    
+    void load(sora::SoraTask* task) {
         sora::SoraResourceFileAuto fontData("Bank Gothic Medium BT.ttf");
         mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
         if(!mFont) {
@@ -146,26 +175,15 @@ public:
             
             mText2.setFont(mFont);
             mText2.setText(L"left/right arrow to move lx, up/down arrow to move ly\na/d to move rx, w/s to move ry\n\
-`(grave) key to open console, available commands:\nset_lx, set_ly, set_rx, set_ry, set_max_size, set_max_iteration, set_iteration_increment\n\
-set_cg,set_cr,set_cb");
+                           `(grave) key to open console, available commands:\nset_lx, set_ly, set_rx, set_ry, set_max_size, set_max_iteration, set_iteration_increment\n\
+                           set_cg,set_cr,set_cb");
             mText2.setPosition(0.f, sora::SoraCore::Instance()->getScreenHeight()-mFont->getHeight()*5.5);
         }
         
         registerEventFunc(this, &GameInitState::onKeyEvent);
         sora::SoraEventManager::Instance()->registerInputEventHandler(this);
         
-        mBg.setTexture(sora::SoraTexture::CreateEmpty(sora::SoraCore::Instance()->getScreenWidth(), 
-                                                      sora::SoraCore::Instance()->getScreenHeight()));
-            
-        mShader = mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet");
-        lx = -2.5f;
-        ly = 1.0f;
-        rx = -2.f;
-        ry = 2.f;
-        maxsize = 2.f;
-        maxiteration = 90.f;
-        iterinc = 1.f;
-        
+               
         sora::SoraConfigParser parser;
         if(parser.open("mset.xml")) {
             if(parser.toNode("/mset")) {
@@ -185,7 +203,6 @@ set_cg,set_cr,set_cb");
         if(!mShader) {
             sora::SoraCore::Instance()->messageBox("Error loading MadelbrotSet shader, see log for detail error", "error", MB_OK);
         }
-        
     }
     
     void onFadeFinish(sora::SoraSprite* obj) {
@@ -200,6 +217,8 @@ private:
     sora::SoraSprite mBg;
     
     sora::SoraShader* mShader;
+    
+    sora::SoraTaskManager taskManager;
 };
 
 

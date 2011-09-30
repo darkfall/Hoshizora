@@ -48,6 +48,7 @@ namespace sora {
 	
 		SoraCoreTransform operator / (float divider) const;
 		SoraCoreTransform operator * (float m) const;
+        SoraCoreTransform operator * (const SoraCoreTransform& rhs) const;
 		SoraCoreTransform operator - (const SoraCoreTransform& rhs) const;
 		SoraCoreTransform operator + (const SoraCoreTransform& rhs) const;
 		void operator = (const SoraCoreTransform& rhs);

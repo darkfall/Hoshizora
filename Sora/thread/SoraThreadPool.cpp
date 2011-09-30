@@ -10,6 +10,8 @@
 #include "SoraCommon.h"
 #include "SoraLogger.h"
 
+#include "SoraSingletonHolder.h"
+
 #include <stdio.h>
 #include <algorithm>
 
@@ -58,7 +60,7 @@ namespace sora {
         }
     }
     
-    void SoraThreadPool::run(SoraThreadTask& task) {
+    void SoraThreadPool::run(const SoraThreadTask& task) {
         if(threads.empty())
             task();
         else {
@@ -97,5 +99,12 @@ namespace sora {
         return running;
     }
     
+    namespace {
+        static SoraSingletonHolder<SoraThreadPool, void> mInstance;
+    }
+    
+    SoraThreadPool& SoraThreadPool::defaultPool() {
+        return *mInstance.get();
+    }
     
 } // namespace sora

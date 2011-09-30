@@ -1,4 +1,5 @@
 #include "SoraZipFile.h"
+#include "SoraMemory.h"
 #include <string>
 #include <iostream>
 #include <memory.h>
@@ -154,7 +155,9 @@ namespace sora {
                     if (readSize > _UnzFileInfo.uncompressed_size)
                         readSize = _UnzFileInfo.uncompressed_size;
                     
-                    uint8* buffer = new uint8[readSize];
+                    uint8* buffer = (uint8*)sora_malloc(readSize);
+                    sora_assert(buffer);
+                    
                     memset(buffer, 0, readSize);
                     
                     int nReadBytes = unzReadCurrentFile(hZipFile, buffer, readSize);

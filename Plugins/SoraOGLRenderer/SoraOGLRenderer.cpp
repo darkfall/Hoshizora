@@ -987,14 +987,12 @@ namespace sora{
     }
     
     void SoraOGLRenderer::setQueryVideoModeCallback(QueryVideoMode func) {
-        mVideoModeFunc = func;
-        
-        if(mVideoModeFunc) {
+        if(func) {
             // max 24?
             GLFWvidmode mode[24];
             int count = glfwGetVideoModes(&mode[0], 24);
             for(int i=0; i<count; ++i) {
-                mVideoModeFunc(mode[i].Width, mode[i].Height);
+                func(mode[i].Width, mode[i].Height);
             }
         }
     }

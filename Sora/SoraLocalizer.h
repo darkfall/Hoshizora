@@ -92,9 +92,7 @@ namespace sora {
 		inline bool readLocaleResource(llexer* lexer, LocaleStringMap& strMap);
 		
 		void reportError(llexer* lexer);
-		
-		inline const wchar_t* strToWideStr(const char*);
-		
+				
 		SoraLocalizer();
 		~SoraLocalizer();
 	};

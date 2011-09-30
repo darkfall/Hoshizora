@@ -20,7 +20,7 @@ namespace sora {
     
     bool SoraCameraZoomModifier::update(float dt) {
         mCurrTime += dt;
-        mCurrZoom = slerp(mStartZoom, mEndZoom, mCurrTime/mTime);
+        mCurrZoom = lerp(mStartZoom, mEndZoom, mCurrTime/mTime);
 
         if(mCurrTime >= mTime) {
             return true;
@@ -55,7 +55,7 @@ namespace sora {
     
     bool SoraCameraRotationModifier::update(float dt) {
         mCurrTime += dt;
-        mCurrRot = slerp(mStart, mEnd, mCurrTime/mTime);
+        mCurrRot = lerp(mStart, mEnd, mCurrTime/mTime);
         
         if(mCurrTime >= mTime) {
             return true;

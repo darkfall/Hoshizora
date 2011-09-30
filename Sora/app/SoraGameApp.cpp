@@ -11,6 +11,10 @@
 #include "SoraGameState.h"
 #include "SoraInputQueue.h"
 
+#ifdef OS_IOS
+#include "SoraiOSGLRenderer/SoraiOSInitializer.h"
+#endif
+
 namespace sora {
     
     SoraGameApp::GameAppWindow::GameAppWindow(const SoraGameAppDef& def, SoraFSMManager& manager):
@@ -21,61 +25,112 @@ namespace sora {
     
     bool SoraGameApp::GameAppWindow::updateFunc() {
         float32 dt = SoraCore::Instance()->getDelta();
+        if(mDef.Window)
+            mDef.Window->updateFunc();
         mFSMManager.onUpdate(dt);
         return false;
     }
     
     bool SoraGameApp::GameAppWindow::renderFunc() {
+        if(mDef.Window)
+            mDef.Window->renderFunc();
         mFSMManager.onRender();
         return false;
     }
     
     void SoraGameApp::GameAppWindow::init() {
-        
+        if(mDef.Window)
+            mDef.Window->init();
     }
     
+#ifndef OS_IOS
+    
     int32 SoraGameApp::GameAppWindow::getWindowWidth() { 
+        if(mDef.Window)
+            return mDef.Window->getWindowWidth();
         return mDef.WindowWidth;
     }
     
     int32 SoraGameApp::GameAppWindow::getWindowHeight() { 
+        if(mDef.Window)
+            return mDef.Window->getWindowHeight();
         return mDef.WindowHeight;
     }
     
     int32 SoraGameApp::GameAppWindow::getWindowPosX() { 
+        if(mDef.Window)
+            return mDef.Window->getWindowPosX();
         return mDef.WindowPosX;
     }
     
     int32 SoraGameApp::GameAppWindow::getWindowPosY() { 
+        if(mDef.Window)
+            return mDef.Window->getWindowPosY();
         return mDef.WindowPosY;
     }
     
     SoraString SoraGameApp::GameAppWindow::getWindowName() { 
+        if(mDef.Window)
+            return mDef.Window->getWindowName();
         return mDef.WindowTitle;
     }
     
     SoraString SoraGameApp::GameAppWindow::getWindowId() { 
+        if(mDef.Window)
+            return mDef.Window->getWindowId();
         return mDef.WindowId; 
     }
     
     bool SoraGameApp::GameAppWindow::isWindowed() { 
+        if(mDef.Window)
+            return mDef.Window->isWindowed();
         return mDef.WindowMode; 
     }
     
     bool SoraGameApp::GameAppWindow::hideMouse() { 
+        if(mDef.Window)
+            return mDef.Window->hideMouse();
         return mDef.HideMouse;
     }
     
+#else
+    
+    void SoraGameApp::GameAppWindow::applicationWillResignActive() {
+        if(mDef.Window)
+            static_cast<SoraiOSMainWindow*>(mDef.Window)->applicationWillResignActive();
+    }
+    
+    void SoraGameApp::GameAppWindow::applicationDidBecomeActive() {
+        if(mDef.Window)
+            static_cast<SoraiOSMainWindow*>(mDef.Window)->applicationDidBecomeActive();
+    }
+    
+    void SoraGameApp::GameAppWindow::didReceiveMemoryWarning() {
+        if(mDef.Window)
+            static_cast<SoraiOSMainWindow*>(mDef.Window)->didReceiveMemoryWarning();
+    }
+    
+    void SoraGameApp::GameAppWindow::didChangeStatusBarOrientation(iOSOrientation newOrientation, iOSOrientation oldOrientation) {
+        if(mDef.Window)
+            static_cast<SoraiOSMainWindow*>(mDef.Window)->didChangeStatusBarOrientation(newOrientation, oldOrientation);
+    }
+     
+#endif // SORA_IOS 
+    
     SoraGameApp::SoraGameApp(const SoraGameAppDef& def) {
-        if(def.Window == 0)
-            mWindow = new SoraGameApp::GameAppWindow(def, mFSMManager);
-        else
-            mWindow = def.Window;
+        mWindow = new SoraGameApp::GameAppWindow(def, mFSMManager);
+        
+#ifdef OS_IOS
+        if(def.Window &&
+           ! dynamic_cast<SoraiOSMainWindow*>(def.Window))
+            THROW_SORA_EXCEPTION(SystemException, "iOS must use SoraiOSMainWindow");
+#endif
     }
     
     void SoraGameApp::run(const std::string& initState) {
         GameStatePtr state = getState(initState);
         if(state) {
+#ifndef OS_IOS
             // first create main window
             SoraCore::Instance()->createWindow(mWindow);
             
@@ -84,6 +139,9 @@ namespace sora {
             
             // app starts!
             SoraCore::Instance()->start();
+#else
+            SoraiOSInitializer::Instance()->SoraiOSStart(static_cast<SoraiOSMainWindow*>(mWindow));
+#endif
         } else
             THROW_SORA_EXCEPTION(SystemException, "Cannot find initial state");
     }

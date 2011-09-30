@@ -13,8 +13,7 @@
 
 #import "SoraiOSGLRenderer/SoraiOSInitializer.h"
 #import "mainWindow.h"
-#import "rfMainWindow.h"
-#import "anime/aeMainWindow.h"
+#include "../flower/MainWindow.h"
 
 @interface Sora_iPhoneViewController ()
 @property (nonatomic, retain) EAGLContext *context;
@@ -50,7 +49,7 @@
     self.displayLink = nil;
 
 	// initialize SORA base systems
-	sora::SORA_IOS->SoraiOSStart(new mainwindow);
+	sora::SORA_IOS->SoraiOSStart(new flower::MainWindow);
 }
 
 - (void)dealloc

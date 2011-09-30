@@ -32,10 +32,10 @@ namespace sora {
 			log_mssg(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
 	}
     
-    SoraResourceFileAuto::SoraResourceFileAuto(const StringType& file, ulong32 size, bool retain):
+    SoraResourceFileAuto::SoraResourceFileAuto(const StringType& file, ulong32 pos, ulong32 size, bool retain):
     mRetain(retain),
     mName(file)  {
-        mData = SORA->readResourceFile(file, size);
+        mData = SORA->readResourceFile(file, pos, size);
         if(!mData)
 			log_mssg(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
     }

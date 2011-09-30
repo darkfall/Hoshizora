@@ -16,6 +16,10 @@
 #include "SoraWindowInfo.h"
 #include "SoraAutoPtr.h"
 
+#ifdef OS_IOS
+#include "SoraiOSGLRenderer/SoraiOSMainWindow.h"
+#endif
+
 namespace sora {
     
     /**
@@ -48,6 +52,7 @@ namespace sora {
         int32 getWindowHeight() const;
         
     private:
+#ifndef OS_IOS
         class GameAppWindow: public SoraWindow {
         public:
             GameAppWindow(const SoraGameAppDef& def, SoraFSMManager& manager);
@@ -72,6 +77,27 @@ namespace sora {
             SoraGameAppDef mDef;
             SoraFSMManager& mFSMManager;
         };
+#else
+        class GameAppWindow: public SoraiOSMainWindow {
+        public:
+            GameAppWindow(const SoraGameAppDef& def, SoraFSMManager& manager);
+            
+            bool updateFunc();
+            bool renderFunc();
+            void init();
+            
+            void applicationWillResignActive();
+            void applicationDidBecomeActive();
+        
+            void didReceiveMemoryWarning();
+            void didChangeStatusBarOrientation(iOSOrientation newOrientation, iOSOrientation oldOrientation);
+            
+        private:
+            SoraGameAppDef mDef;
+            SoraFSMManager& mFSMManager;
+        };
+        
+#endif
         
         SoraWindow* mWindow;
         SoraFSMManager mFSMManager;

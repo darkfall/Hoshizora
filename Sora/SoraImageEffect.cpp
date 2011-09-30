@@ -167,9 +167,9 @@ namespace sora {
 				}
 			} else {
 				if(t_transformer) 
-                    t_curr = t_transformer->slerp(t_src, t_dst, startTime/effectTime);
+                    t_curr = t_transformer->transform(t_src, t_dst, startTime/effectTime);
                 else 
-                    t_curr = slerp(t_src, t_dst, startTime/effectTime);
+                    t_curr = lerp(t_src, t_dst, startTime/effectTime);
             }
 			
 		}

@@ -38,10 +38,10 @@ namespace sora {
 		}
 	}
 
-	void* SoraResourceFileFinder::readResourceFile(const StringType& file, ulong32 size) {
+	void* SoraResourceFileFinder::readResourceFile(const StringType& file, ulong32 pos, ulong32 size) {
 		void* data;
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
-			if((data = mResourceManagers[i]->readResourceFile(file, size)) != NULL) {
+			if((data = mResourceManagers[i]->readResourceFile(file, pos, size)) != NULL) {
 #ifdef SORA_ENABLE_MULTI_THREAD
                 SoraMutexGuard guard(mIOMutex);
 #endif

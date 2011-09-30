@@ -153,6 +153,8 @@
 		880D0684142F2A96005CB649 /* SoraSpritePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880D0683142F2A96005CB649 /* SoraSpritePool.cpp */; };
 		880D0688142F3CBD005CB649 /* SpriteController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880D0687142F3CBC005CB649 /* SpriteController.cpp */; };
 		881DDC5A13BEF44000A0A4CE /* SoraInputQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881DDC5813BEF43F00A0A4CE /* SoraInputQueue.cpp */; };
+		881F219E14355650009DA610 /* SoraTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F219C14355650009DA610 /* SoraTask.cpp */; };
+		881F21A21435700D009DA610 /* SoraTaskManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21A11435700C009DA610 /* SoraTaskManager.cpp */; };
 		8821653914321A2100A2ED5A /* SoraiOSDeviceHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8821653814321A2000A2ED5A /* SoraiOSDeviceHelper.mm */; };
 		88240CC412C5803D009498F7 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 88240CA212C5803C009498F7 /* adler32.c */; };
 		88240CC512C5803D009498F7 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 88240CA312C5803C009498F7 /* compress.c */; };
@@ -773,6 +775,12 @@
 		8811389E12CC424000C648C7 /* mainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainWindow.h; sourceTree = "<group>"; };
 		881DDC5813BEF43F00A0A4CE /* SoraInputQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraInputQueue.cpp; sourceTree = "<group>"; };
 		881DDC5913BEF43F00A0A4CE /* SoraInputQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraInputQueue.h; sourceTree = "<group>"; };
+		881F219C14355650009DA610 /* SoraTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraTask.cpp; sourceTree = "<group>"; };
+		881F219D14355650009DA610 /* SoraTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTask.h; sourceTree = "<group>"; };
+		881F219F14355658009DA610 /* SoraTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTask.h; sourceTree = "<group>"; };
+		881F21A014357005009DA610 /* SoraTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTaskManager.h; sourceTree = "<group>"; };
+		881F21A11435700C009DA610 /* SoraTaskManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraTaskManager.cpp; sourceTree = "<group>"; };
+		881F21A3143587B0009DA610 /* SoraTaskNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTaskNotification.h; sourceTree = "<group>"; };
 		8820969D12EF5EB600FB7FFF /* SoraDebugRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoraDebugRenderer.h; path = Debug/SoraDebugRenderer.h; sourceTree = "<group>"; };
 		8821653714321A1000A2ED5A /* SoraiOSDeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraiOSDeviceHelper.h; sourceTree = "<group>"; };
 		8821653814321A2000A2ED5A /* SoraiOSDeviceHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SoraiOSDeviceHelper.mm; sourceTree = "<group>"; };
@@ -2088,6 +2096,18 @@
 			path = ../Plugins/SoraSpritePool;
 			sourceTree = "<group>";
 		};
+		881F219B1435564F009DA610 /* task */ = {
+			isa = PBXGroup;
+			children = (
+				881F219D14355650009DA610 /* SoraTask.h */,
+				881F219C14355650009DA610 /* SoraTask.cpp */,
+				881F21A014357005009DA610 /* SoraTaskManager.h */,
+				881F21A11435700C009DA610 /* SoraTaskManager.cpp */,
+				881F21A3143587B0009DA610 /* SoraTaskNotification.h */,
+			);
+			path = task;
+			sourceTree = "<group>";
+		};
 		88240CA112C5803C009498F7 /* ZLIB */ = {
 			isa = PBXGroup;
 			children = (
@@ -3249,6 +3269,8 @@
 				882AF2E1142A8A9C00D55647 /* SoraAnimation.cpp */,
 				8821653714321A1000A2ED5A /* SoraiOSDeviceHelper.h */,
 				8821653814321A2000A2ED5A /* SoraiOSDeviceHelper.mm */,
+				881F219F14355658009DA610 /* SoraTask.h */,
+				881F219B1435564F009DA610 /* task */,
 			);
 			name = Sora;
 			path = ../Sora;
@@ -3822,6 +3844,8 @@
 				880D0684142F2A96005CB649 /* SoraSpritePool.cpp in Sources */,
 				880D0688142F3CBD005CB649 /* SpriteController.cpp in Sources */,
 				8821653914321A2100A2ED5A /* SoraiOSDeviceHelper.mm in Sources */,
+				881F219E14355650009DA610 /* SoraTask.cpp in Sources */,
+				881F21A21435700D009DA610 /* SoraTaskManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

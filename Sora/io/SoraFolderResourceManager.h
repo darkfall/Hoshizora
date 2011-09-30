@@ -30,7 +30,7 @@ namespace sora {
 		void                attachResourcePack  (SoraResourceHandle handle);
 		void                detachResourcePack  (SoraResourceHandle handle);
 		
-		void*   readResourceFile(const StringType& file, ulong32 size);
+		void*   readResourceFile(const StringType& file, ulong32 pos, ulong32 size);
 		void*   getResourceFile(const StringType& file, ulong32& size);
 		ulong32 getResourceFileSize(const StringType& file);
 		void    freeResourceFile(void* p);

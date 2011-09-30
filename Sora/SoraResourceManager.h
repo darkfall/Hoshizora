@@ -16,7 +16,7 @@ namespace sora {
 		virtual void                attachResourcePack	(SoraResourceHandle handle) = 0;
 		virtual void                detachResourcePack  (SoraResourceHandle handle) = 0;
 		
-		virtual void*   readResourceFile        (const StringType& file, ulong32 size) = 0;
+		virtual void*   readResourceFile        (const StringType& file, ulong32 pos, ulong32 size) = 0;
 		virtual void*   getResourceFile         (const StringType& file, ulong32& size) = 0;
 		virtual ulong32 getResourceFileSize     (const StringType& file) = 0;
 		virtual void    freeResourceFile        (void* p) = 0;

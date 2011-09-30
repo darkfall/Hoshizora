@@ -65,16 +65,20 @@ namespace sora {
         return StringType();
 	}
 
-	void* SoraFolderResourceManager::readResourceFile(const StringType& file, ulong32 size) {
+	void* SoraFolderResourceManager::readResourceFile(const StringType& file, ulong32 pos, ulong32 size) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file).get())) {
             uint8* pdata = (uint8*)sora_malloc((ulong32)stream.size()+1);
 			if(pdata != NULL) {
-                if(stream.read(pdata, size) != size) {
+                sora_assert(pos + size <= stream.size());
                 
+                stream.pos(pos, SoraFileStream::Begin);
+                if(stream.read(pdata, size) != size) {
+                    sora_free(pdata);
+                    return 0;
                 }
                 pdata[size] = 0;
-				return (void*)pdata;
+                return (void*)pdata;
 			}
 		}
 		return 0;

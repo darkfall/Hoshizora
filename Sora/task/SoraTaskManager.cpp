@@ -1,0 +1,126 @@
+//
+//  SoraTaskManager.cpp
+//  Sora
+//
+//  Created by Ruiwei Bu on 9/29/11.
+//  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
+//
+
+#include "SoraTaskManager.h"
+#include "SoraTask.h"
+#include "SoraTaskNotification.h"
+
+namespace sora {
+        
+    SoraTaskManager::SoraTaskManager(bool multithreaded) {
+        mMultiThread = multithreaded;
+        
+        if(multithreaded) {
+#ifndef SORA_ENABLE_MULTI_THREAD
+            THROW_SORA_EXCEPTION(RuntimeException, "cannot use multithreaded task manager when SORA_ENABLE_MULTI_THREAD is not enabled");
+#else
+      
+            mThreadPool.start(1);
+#endif
+        }
+    }
+    
+    SoraTaskManager::~SoraTaskManager() {
+#ifdef SORA_ENABLE_MULTI_THREAD
+        if(mMultiThread) 
+            joinAll();
+#else
+        cancelAll();
+#endif
+    }
+    
+    void SoraTaskManager::taskRun(void* task) {
+        sora_assert(task);
+        
+        SoraAbstractTask* rtask = static_cast<SoraAbstractTask*>(task);
+        rtask->run();
+    }
+    
+    void SoraTaskManager::start(SoraAbstractTask* task) {
+        sora_assert(task);
+        
+        mTasks.push_back(TaskPtr(task));
+    
+        task->setOwner(this);
+        
+#ifndef SORA_ENABLE_MULTI_THREAD
+        task->run();
+#else
+        SoraMutexGuard guard(mMutex);
+        mThreadPool.run(ThreadTask(&SoraTaskManager::taskRun, this, task));
+#endif
+    }
+    
+    void SoraTaskManager::cancelAll() {
+#ifdef SORA_ENABLE_MULTI_THREAD
+        joinAll();
+#else
+        TaskList::iterator it = mTasks.begin();
+        TaskList::iterator end = mTasks.end();
+        
+        for(; it != end; ++it) 
+            (*it)->cancel();
+#endif
+    }
+    
+#ifdef SORA_ENABLE_MULTI_THREAD
+    void SoraTaskManager::joinAll() {
+        SoraMutexGuard guard(mMutex);
+        
+        TaskList::iterator it = mTasks.begin();
+        TaskList::iterator end = mTasks.end();
+        
+        for(; it != end; ++it) 
+            (*it)->cancel();
+        
+        mThreadPool.stop();
+    }
+#endif
+    
+    void SoraTaskManager::taskFinished(SoraAbstractTask* task) {
+        SoraTaskNotification notification(SoraTaskNotification::TaskFinished, task);
+        
+        mNoficationSig(&notification);
+    }
+    
+    void SoraTaskManager::taskStarted(SoraAbstractTask* task) {
+        SoraTaskNotification notification(SoraTaskNotification::TaskStarted, task);
+        
+        mNoficationSig(&notification);
+    }
+    
+    void SoraTaskManager::taskCanceld(SoraAbstractTask* task) {
+        SoraTaskNotification notification(SoraTaskNotification::TaskCanceled, task);
+        
+        mNoficationSig(&notification);
+    }
+    
+    void SoraTaskManager::taskProgress(SoraAbstractTask* task) {
+        SoraTaskNotification notification(SoraTaskNotification::TaskProgress, task);
+        
+        mNoficationSig(&notification);
+    }
+    
+    SoraAbstractTask* SoraTaskManager::taskByName(const std::string& name) const {
+        TaskList::const_iterator it = mTasks.begin();
+        TaskList::const_iterator end = mTasks.end();
+        
+        for(; it != end; ++it)
+            if((*it)->getName() == name)
+                return (*it).get();
+    }
+    
+    int SoraTaskManager::count() const {
+        return mTasks.size();
+    }
+    
+    const SoraTaskManager::TaskList& SoraTaskManager::allTasks() const {
+        return mTasks;
+    }
+    
+} // namespace sora

@@ -27,7 +27,7 @@ namespace sora {
         SoraResourceFileAuto();
 		explicit SoraResourceFileAuto(const StringType& file, bool retain=false);
 		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
-        SoraResourceFileAuto(const StringType& file, ulong32 size, bool retain=false);
+        SoraResourceFileAuto(const StringType& file, ulong32 pos, ulong32 size, bool retain=false);
 		~SoraResourceFileAuto();
         
         SoraResourceFileAuto& operator=(const StringType& file);

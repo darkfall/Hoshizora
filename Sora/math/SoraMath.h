@@ -120,24 +120,16 @@ namespace sora {
         return int32(flipBytes(uint32(value)));
     }
     
-    inline float slerp(float start, float end, float r) {
-        r >= 1.f ? r = 1.f: r;
-        return start + (end - start) * r;
+    template <typename T>
+    inline T lerp(const T& t1, const T& t2, float t) {
+        return t1 + (t2-t1) * t;
     }
     
-    inline int32 slerp(int32 start, int32 end, float r) {
-        r >= 1.f ? r = 1.f: r;
-        return (int32)(start + (end - start) * r);
-    }
-    
-    inline SoraVector slerp(const SoraVector& start, const SoraVector& end, float r) {
-        r >= 1.f ? r = 1.f: r;
-        return start + (end - start) * r;
-    }
-    
-    inline SoraCoreTransform slerp(const SoraCoreTransform& start, const SoraCoreTransform& end, float r) {
-        r >= 1.f ? r = 1.f: r;
-        return start + (end - start) * r;
+    template<typename T>
+    inline T slerp(const T& t1, const T& t2, float t) {
+        float a = acos(t1 * t2);
+        float sina = sin(a);
+        return (sin(1-t) * a) / sina * t1 + sin(t * a) / sina * t2;
     }
         
     

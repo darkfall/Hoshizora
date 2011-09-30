@@ -195,7 +195,7 @@ namespace sora {
 		SoraResourceHandle  loadResourcePack        (const StringType& file);
 		void                detachResourcePack		(SoraResourceHandle handle);
 		void*               getResourceFile         (const StringType& file, ulong32& size);
-		void*               readResourceFile		(const StringType& file, ulong32 size);
+		void*               readResourceFile		(const StringType& file, ulong32 pos, ulong32 size);
 		ulong32             getResourceFileSize     (const StringType& file);
 		void                freeResourceFile		(void* p);
 		void                enumFilesInFolder		(std::vector<SoraWString>& cont, const StringType& folder);

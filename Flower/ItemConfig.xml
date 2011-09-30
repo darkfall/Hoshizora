@@ -1,0 +1,6 @@
+<objects>
+	<node name="basic" score="1" weight="1.0" texture="flower"/>
+    <node name="bomb1" score="-1" weight="1.0" texture="bomb1"/>
+</objects>
+<speedthreshold value="100.0"/>
+<gravity value="10.0"/>

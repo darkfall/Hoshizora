@@ -41,7 +41,7 @@ namespace sora {
         return func.valid();
     }
     
-    void SoraThreadTask::run() {
+    void SoraThreadTask::run() const {
         if(func.valid()) {
             SoraThreadTaskImpl* realFunc = func.get();
             realFunc->operator ()(iarg);
@@ -49,7 +49,7 @@ namespace sora {
             log_mssg("SoraThreadtask::run - invalid func ptr");
     }
     
-    void SoraThreadTask::operator()() {
+    void SoraThreadTask::operator()() const {
         run();
     }
     

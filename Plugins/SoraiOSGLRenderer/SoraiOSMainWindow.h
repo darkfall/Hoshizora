@@ -66,9 +66,7 @@ namespace sora {
         virtual void applicationWillResignActive() {}
         virtual void applicationDidBecomeActive() {}
         
-        virtual void didChangeStatusBarOrientation(iOSOrientation newOrientation, iOSOrientation oldOrientation) {
-        
-        }
+        virtual void didChangeStatusBarOrientation(iOSOrientation newOrientation, iOSOrientation oldOrientation) {}
         
         virtual void didReceiveMemoryWarning() {}
         

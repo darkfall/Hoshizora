@@ -81,12 +81,25 @@ namespace sora {
 		return 0;
 	}
 
-	void* SoraZipResourceManager::readResourceFile(const StringType& file, ulong32 size) {
+	void* SoraZipResourceManager::readResourceFile(const StringType& file, ulong32 pos, ulong32 size) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
 			ulong32 s;
-			if( (s = p->second->getFileSize( file ) ) != 0 )
-				return p->second->getFile( file, size );
+			if( (s = p->second->getFileSize( file ) ) != 0 ) {
+                
+                sora_assert( pos + size <= s );
+                
+				void* data = p->second->getFile( file, s );
+                if(data) {
+                    void* sizedata = sora_malloc(size);
+                    sora_assert(sizedata);
+                    
+                    memcpy(sizedata, (uint8*)data+pos, size);
+                    sora_free(data);
+                    
+                    return sizedata;
+                }
+            }
 			++p;
 		}
 		return 0;

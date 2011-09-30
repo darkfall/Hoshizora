@@ -802,8 +802,8 @@ namespace sora {
 		return pResourceFileFinder->freeResourceFile(p);
 	}
 
-	void* SoraCore::readResourceFile(const StringType& sfile, ulong32 size) {
-		return pResourceFileFinder->readResourceFile(sfile, size);
+	void* SoraCore::readResourceFile(const StringType& sfile, ulong32 pos, ulong32 size) {
+		return pResourceFileFinder->readResourceFile(sfile, pos, size);
 	}
 
 	ulong32 SoraCore::getResourceFileSize(const StringType& file) {
@@ -1068,11 +1068,19 @@ namespace sora {
 	}
 
 	int32 SoraCore::getScreenHeight() {
+#ifndef OS_IOS
 		return iScreenHeight;
+#else
+        return sora::getScreenHeight();
+#endif
 	}
-
+    
 	int32 SoraCore::getScreenWidth() {
+#ifndef OS_IOS
 		return iScreenWidth;
+#else
+        return sora::getScreenWidth();
+#endif
 	}
 
 	void SoraCore::getMousePos(float *x, float *y) {
@@ -1308,6 +1316,7 @@ namespace sora {
             if(getSystemFont() == 0)
                 setSystemFont(ff);
         }
+        return ff;
 #endif
 		return 0;
 	}

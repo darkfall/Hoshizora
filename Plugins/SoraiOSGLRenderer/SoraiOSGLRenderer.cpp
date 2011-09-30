@@ -403,8 +403,8 @@ namespace sora{
 		}
 		
 		SoraTexture* tex = new SoraTexture(texid,
-										   p2w,
-										   p2h,
+										   w,
+										   h,
 										   w,
 										   h);
 		return tex;
@@ -449,7 +449,7 @@ namespace sora{
         glTexParameterf(texId, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexParameterf(texId, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameterf(texId, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, p2w, p2h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
         glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 		return new SoraTexture(texId, p2w, p2h, w, h);

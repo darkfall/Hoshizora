@@ -390,22 +390,8 @@ namespace { \
 */
 #define SORA_ENABLE_MULTI_THREAD
 
-#define SORA_MAX_IO_THREAD 2
+#define SORA_MAX_IO_THREAD 1
 
-/*
- // default:
- // 8 bit system channel
- // 24 bit user channel
- 
- // if use uint64
- // 16 bit system channel
- // 48 bit user channel
- 
- // if use uint16
- // 8 bit system channel
- // 8 bit user channel
-*/
-typedef uint32 EventChannelType;
 
 /*
 	SoraThread Plugin Option

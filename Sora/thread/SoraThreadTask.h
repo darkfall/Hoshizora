@@ -65,8 +65,8 @@ namespace sora {
         void setAsMemberFunc(void (T::*ThreadFunc)(void* args), T* obj);
         void setAsCFunc(void (*ThreadFunc)(void* arg));
         
-        void run();
-        void operator()();
+        void run() const;
+        void operator()() const;
         
         void setArg(void* arg);
         void* getArg() const;
@@ -95,14 +95,17 @@ namespace sora {
     }
     
     template<typename T>
-    static SoraThreadTask ThreadTask(void (T::*ThreadFunc)(void*), T* obj) {
+    static SoraThreadTask ThreadTask(void (T::*ThreadFunc)(void*), T* obj, void* arg) {
         SoraThreadTask task;
         task.setAsMemberFunc(ThreadFunc, obj);
+        task.setArg(arg);
         return task;
     }
     
-    static SoraThreadTask ThreadTask(void (*ThreadFunc)(void*)) {
-        return SoraThreadTask(ThreadFunc);
+    static SoraThreadTask ThreadTask(void (*ThreadFunc)(void*), void* arg) {
+        SoraThreadTask task(ThreadFunc);
+        task.setArg(arg);
+        return task;
     }
 } // namespace sora
 

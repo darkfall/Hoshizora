@@ -1,0 +1,5 @@
+<theme>
+	<spr name="flower" path="flower.png"/>
+    <spr name="bomb1" path="bomb-4.png"/>
+	<spr name="robo" path="box.png"/>
+</theme>

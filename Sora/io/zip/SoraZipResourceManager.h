@@ -26,7 +26,7 @@ namespace sora {
 		void			detachResourcePack      (SoraResourceHandle handle);
 		SoraZipFile*	getResourcePack         (SoraResourceHandle handle);
 
-		void* readResourceFile				(const StringType& file, ulong32 size);
+		void* readResourceFile				(const StringType& file, ulong32 pos, ulong32 size);
 		void* getResourceFile				(const StringType& file, ulong32& size);
 		ulong32 getResourceFileSize	(const StringType& file);
 		ulong32 getResourceFileCRC	(const StringType& file);

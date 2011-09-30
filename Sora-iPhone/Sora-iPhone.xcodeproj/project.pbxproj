@@ -15,6 +15,33 @@
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		88058042135EC07E00B1535B /* data.rfResource in Resources */ = {isa = PBXBuildFile; fileRef = 88058041135EC07E00B1535B /* data.rfResource */; };
+		881F21461432591B009DA610 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 881F21151432591B009DA610 /* bg.png */; };
+		881F21471432591B009DA610 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 881F21161432591B009DA610 /* config.xml */; };
+		881F21481432591B009DA610 /* ConfigController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21191432591B009DA610 /* ConfigController.cpp */; };
+		881F21491432591B009DA610 /* GameModeController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F211C1432591B009DA610 /* GameModeController.cpp */; };
+		881F214A1432591B009DA610 /* HudController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F211E1432591B009DA610 /* HudController.cpp */; };
+		881F214B1432591B009DA610 /* ObjectController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21201432591B009DA610 /* ObjectController.cpp */; };
+		881F214C1432591B009DA610 /* MapController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21221432591B009DA610 /* MapController.cpp */; };
+		881F214D1432591B009DA610 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21241432591B009DA610 /* PlayerController.cpp */; };
+		881F214E1432591B009DA610 /* ScoreController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21261432591B009DA610 /* ScoreController.cpp */; };
+		881F214F1432591B009DA610 /* ThemeController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21281432591B009DA610 /* ThemeController.cpp */; };
+		881F21501432591B009DA610 /* bomb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F212C1432591B009DA610 /* bomb.cpp */; };
+		881F21511432591B009DA610 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F212E1432591B009DA610 /* connection.cpp */; };
+		881F21521432591B009DA610 /* item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21301432591B009DA610 /* item.cpp */; };
+		881F21531432591B009DA610 /* localplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21321432591B009DA610 /* localplayer.cpp */; };
+		881F21541432591B009DA610 /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21341432591B009DA610 /* object.cpp */; };
+		881F21551432591B009DA610 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21361432591B009DA610 /* player.cpp */; };
+		881F21561432591B009DA610 /* theme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F213A1432591B009DA610 /* theme.cpp */; };
+		881F21571432591B009DA610 /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = 881F213C1432591B009DA610 /* flower.png */; };
+		881F21581432591B009DA610 /* ItemConfig.xml in Resources */ = {isa = PBXBuildFile; fileRef = 881F213D1432591B009DA610 /* ItemConfig.xml */; };
+		881F21591432591B009DA610 /* machinarium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 881F213E1432591B009DA610 /* machinarium.jpg */; };
+		881F215A1432591B009DA610 /* MainWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 881F21401432591B009DA610 /* MainWindow.mm */; };
+		881F215B1432591B009DA610 /* player.xml in Resources */ = {isa = PBXBuildFile; fileRef = 881F21411432591B009DA610 /* player.xml */; };
+		881F215C1432591B009DA610 /* StateMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F21421432591B009DA610 /* StateMenu.cpp */; };
+		881F215D1432591B009DA610 /* theme_basic.xml in Resources */ = {isa = PBXBuildFile; fileRef = 881F21441432591B009DA610 /* theme_basic.xml */; };
+		881F215E1432591B009DA610 /* ThemeConfig.xml in Resources */ = {isa = PBXBuildFile; fileRef = 881F21451432591B009DA610 /* ThemeConfig.xml */; };
+		881F2160143286F9009DA610 /* bomb-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 881F215F143286F8009DA610 /* bomb-4.png */; };
+		881F2163143549CB009DA610 /* SoraTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F2162143549C8009DA610 /* SoraTask.cpp */; };
 		8829063F135FE427006EF84A /* editorWindow.json in Resources */ = {isa = PBXBuildFile; fileRef = 8829063C135FE427006EF84A /* editorWindow.json */; };
 		8834C337135F7AE7006A20F6 /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C335135F7AE7006A20F6 /* SoraSpriteAnimation.cpp */; };
 		884CC59912F6537B00FD18FC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58A12F6537B00FD18FC /* UIKit.framework */; };
@@ -334,6 +361,56 @@
 		32CA4F630368D1EE00C91783 /* Sora_iPhone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sora_iPhone_Prefix.pch; sourceTree = "<group>"; };
 		88057EB0135EB28100B1535B /* mainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainWindow.h; sourceTree = "<group>"; };
 		88058041135EC07E00B1535B /* data.rfResource */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.rfResource; path = ../Resources/data.rfResource; sourceTree = SOURCE_ROOT; };
+		881F21151432591B009DA610 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		881F21161432591B009DA610 /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
+		881F21181432591B009DA610 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		881F21191432591B009DA610 /* ConfigController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigController.cpp; sourceTree = "<group>"; };
+		881F211A1432591B009DA610 /* ConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigController.h; sourceTree = "<group>"; };
+		881F211B1432591B009DA610 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
+		881F211C1432591B009DA610 /* GameModeController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameModeController.cpp; sourceTree = "<group>"; };
+		881F211D1432591B009DA610 /* GameModeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModeController.h; sourceTree = "<group>"; };
+		881F211E1432591B009DA610 /* HudController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HudController.cpp; sourceTree = "<group>"; };
+		881F211F1432591B009DA610 /* HudController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudController.h; sourceTree = "<group>"; };
+		881F21201432591B009DA610 /* ObjectController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectController.cpp; sourceTree = "<group>"; };
+		881F21211432591B009DA610 /* ObjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectController.h; sourceTree = "<group>"; };
+		881F21221432591B009DA610 /* MapController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapController.cpp; sourceTree = "<group>"; };
+		881F21231432591B009DA610 /* MapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
+		881F21241432591B009DA610 /* PlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerController.cpp; sourceTree = "<group>"; };
+		881F21251432591B009DA610 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
+		881F21261432591B009DA610 /* ScoreController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreController.cpp; sourceTree = "<group>"; };
+		881F21271432591B009DA610 /* ScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreController.h; sourceTree = "<group>"; };
+		881F21281432591B009DA610 /* ThemeController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThemeController.cpp; sourceTree = "<group>"; };
+		881F21291432591B009DA610 /* ThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeController.h; sourceTree = "<group>"; };
+		881F212B1432591B009DA610 /* aiplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiplayer.h; sourceTree = "<group>"; };
+		881F212C1432591B009DA610 /* bomb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bomb.cpp; sourceTree = "<group>"; };
+		881F212D1432591B009DA610 /* bomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bomb.h; sourceTree = "<group>"; };
+		881F212E1432591B009DA610 /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = connection.cpp; sourceTree = "<group>"; };
+		881F212F1432591B009DA610 /* connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection.h; sourceTree = "<group>"; };
+		881F21301432591B009DA610 /* item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = item.cpp; sourceTree = "<group>"; };
+		881F21311432591B009DA610 /* item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = item.h; sourceTree = "<group>"; };
+		881F21321432591B009DA610 /* localplayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = localplayer.cpp; sourceTree = "<group>"; };
+		881F21331432591B009DA610 /* localplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = localplayer.h; sourceTree = "<group>"; };
+		881F21341432591B009DA610 /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object.cpp; sourceTree = "<group>"; };
+		881F21351432591B009DA610 /* object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = object.h; sourceTree = "<group>"; };
+		881F21361432591B009DA610 /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
+		881F21371432591B009DA610 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
+		881F21381432591B009DA610 /* remoteplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = remoteplayer.h; sourceTree = "<group>"; };
+		881F21391432591B009DA610 /* ScoreInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreInfo.h; sourceTree = "<group>"; };
+		881F213A1432591B009DA610 /* theme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = theme.cpp; sourceTree = "<group>"; };
+		881F213B1432591B009DA610 /* theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theme.h; sourceTree = "<group>"; };
+		881F213C1432591B009DA610 /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flower.png; sourceTree = "<group>"; };
+		881F213D1432591B009DA610 /* ItemConfig.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ItemConfig.xml; sourceTree = "<group>"; };
+		881F213E1432591B009DA610 /* machinarium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = machinarium.jpg; sourceTree = "<group>"; };
+		881F213F1432591B009DA610 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
+		881F21401432591B009DA610 /* MainWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainWindow.mm; sourceTree = "<group>"; };
+		881F21411432591B009DA610 /* player.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = player.xml; sourceTree = "<group>"; };
+		881F21421432591B009DA610 /* StateMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateMenu.cpp; sourceTree = "<group>"; };
+		881F21431432591B009DA610 /* StateMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateMenu.h; sourceTree = "<group>"; };
+		881F21441432591B009DA610 /* theme_basic.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = theme_basic.xml; sourceTree = "<group>"; };
+		881F21451432591B009DA610 /* ThemeConfig.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ThemeConfig.xml; sourceTree = "<group>"; };
+		881F215F143286F8009DA610 /* bomb-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-4.png"; sourceTree = "<group>"; };
+		881F2161143549B7009DA610 /* SoraTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTask.h; sourceTree = "<group>"; };
+		881F2162143549C8009DA610 /* SoraTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraTask.cpp; sourceTree = "<group>"; };
 		8829063C135FE427006EF84A /* editorWindow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = editorWindow.json; path = anime/editorWindow.json; sourceTree = "<group>"; };
 		8834C335135F7AE7006A20F6 /* SoraSpriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSpriteAnimation.cpp; sourceTree = "<group>"; };
 		8834C336135F7AE7006A20F6 /* SoraSpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSpriteAnimation.h; sourceTree = "<group>"; };
@@ -1149,6 +1226,7 @@
 				88F62C29143223B1008E1ECF /* AVFoundation.framework */,
 				884CC35F12F6530100FD18FC /* Sora */,
 				88F6270814321CD5008E1ECF /* Sora */,
+				881F21141432591B009DA610 /* Flower */,
 				8897825A13071CCD00A69ADE /* Sora_iPhoneAppDelegate.h */,
 				8897825B13071CCD00A69ADE /* Sora_iPhoneAppDelegate.mm */,
 				8897825C13071CCD00A69ADE /* Sora_iPhoneViewController.h */,
@@ -1205,6 +1283,78 @@
 				887E28351361161800803DA6 /* OpenAL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		881F21141432591B009DA610 /* Flower */ = {
+			isa = PBXGroup;
+			children = (
+				881F21151432591B009DA610 /* bg.png */,
+				881F21161432591B009DA610 /* config.xml */,
+				881F21171432591B009DA610 /* controller */,
+				881F212A1432591B009DA610 /* core */,
+				881F213C1432591B009DA610 /* flower.png */,
+				881F213D1432591B009DA610 /* ItemConfig.xml */,
+				881F213E1432591B009DA610 /* machinarium.jpg */,
+				881F213F1432591B009DA610 /* MainWindow.h */,
+				881F21401432591B009DA610 /* MainWindow.mm */,
+				881F21411432591B009DA610 /* player.xml */,
+				881F215F143286F8009DA610 /* bomb-4.png */,
+				881F21421432591B009DA610 /* StateMenu.cpp */,
+				881F21431432591B009DA610 /* StateMenu.h */,
+				881F21441432591B009DA610 /* theme_basic.xml */,
+				881F21451432591B009DA610 /* ThemeConfig.xml */,
+			);
+			name = Flower;
+			path = ../Flower;
+			sourceTree = "<group>";
+		};
+		881F21171432591B009DA610 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				881F21181432591B009DA610 /* Common.h */,
+				881F21191432591B009DA610 /* ConfigController.cpp */,
+				881F211A1432591B009DA610 /* ConfigController.h */,
+				881F211B1432591B009DA610 /* defines.h */,
+				881F211C1432591B009DA610 /* GameModeController.cpp */,
+				881F211D1432591B009DA610 /* GameModeController.h */,
+				881F211E1432591B009DA610 /* HudController.cpp */,
+				881F211F1432591B009DA610 /* HudController.h */,
+				881F21201432591B009DA610 /* ObjectController.cpp */,
+				881F21211432591B009DA610 /* ObjectController.h */,
+				881F21221432591B009DA610 /* MapController.cpp */,
+				881F21231432591B009DA610 /* MapController.h */,
+				881F21241432591B009DA610 /* PlayerController.cpp */,
+				881F21251432591B009DA610 /* PlayerController.h */,
+				881F21261432591B009DA610 /* ScoreController.cpp */,
+				881F21271432591B009DA610 /* ScoreController.h */,
+				881F21281432591B009DA610 /* ThemeController.cpp */,
+				881F21291432591B009DA610 /* ThemeController.h */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		881F212A1432591B009DA610 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				881F212B1432591B009DA610 /* aiplayer.h */,
+				881F212C1432591B009DA610 /* bomb.cpp */,
+				881F212D1432591B009DA610 /* bomb.h */,
+				881F212E1432591B009DA610 /* connection.cpp */,
+				881F212F1432591B009DA610 /* connection.h */,
+				881F21301432591B009DA610 /* item.cpp */,
+				881F21311432591B009DA610 /* item.h */,
+				881F21321432591B009DA610 /* localplayer.cpp */,
+				881F21331432591B009DA610 /* localplayer.h */,
+				881F21341432591B009DA610 /* object.cpp */,
+				881F21351432591B009DA610 /* object.h */,
+				881F21361432591B009DA610 /* player.cpp */,
+				881F21371432591B009DA610 /* player.h */,
+				881F21381432591B009DA610 /* remoteplayer.h */,
+				881F21391432591B009DA610 /* ScoreInfo.h */,
+				881F213A1432591B009DA610 /* theme.cpp */,
+				881F213B1432591B009DA610 /* theme.h */,
+			);
+			path = core;
 			sourceTree = "<group>";
 		};
 		8834C334135F7AE7006A20F6 /* SoraSpriteAnimation */ = {
@@ -1436,6 +1586,8 @@
 				88F628BF14321CD5008E1ECF /* util */,
 				88F628C214321CD5008E1ECF /* xml */,
 				88F628C614321CD5008E1ECF /* ZLIB */,
+				881F2161143549B7009DA610 /* SoraTask.h */,
+				881F2162143549C8009DA610 /* SoraTask.cpp */,
 			);
 			name = Sora;
 			path = ../Sora;
@@ -2474,6 +2626,15 @@
 				88F62AC714321CEC008E1ECF /* Makefile.in in Resources */,
 				88F62ADA14321CEC008E1ECF /* Makefile.am in Resources */,
 				88F62ADB14321CEC008E1ECF /* Makefile.in in Resources */,
+				881F21461432591B009DA610 /* bg.png in Resources */,
+				881F21471432591B009DA610 /* config.xml in Resources */,
+				881F21571432591B009DA610 /* flower.png in Resources */,
+				881F21581432591B009DA610 /* ItemConfig.xml in Resources */,
+				881F21591432591B009DA610 /* machinarium.jpg in Resources */,
+				881F215B1432591B009DA610 /* player.xml in Resources */,
+				881F215D1432591B009DA610 /* theme_basic.xml in Resources */,
+				881F215E1432591B009DA610 /* ThemeConfig.xml in Resources */,
+				881F2160143286F9009DA610 /* bomb-4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2762,6 +2923,24 @@
 				88F62C4A143223D8008E1ECF /* gcnProgressBar.cpp in Sources */,
 				88F62C4B143223D8008E1ECF /* gcnSelectableContainer.cpp in Sources */,
 				88F62C4C143223D8008E1ECF /* gcnWidgetSwitcher.cpp in Sources */,
+				881F21481432591B009DA610 /* ConfigController.cpp in Sources */,
+				881F21491432591B009DA610 /* GameModeController.cpp in Sources */,
+				881F214A1432591B009DA610 /* HudController.cpp in Sources */,
+				881F214B1432591B009DA610 /* ObjectController.cpp in Sources */,
+				881F214C1432591B009DA610 /* MapController.cpp in Sources */,
+				881F214D1432591B009DA610 /* PlayerController.cpp in Sources */,
+				881F214E1432591B009DA610 /* ScoreController.cpp in Sources */,
+				881F214F1432591B009DA610 /* ThemeController.cpp in Sources */,
+				881F21501432591B009DA610 /* bomb.cpp in Sources */,
+				881F21511432591B009DA610 /* connection.cpp in Sources */,
+				881F21521432591B009DA610 /* item.cpp in Sources */,
+				881F21531432591B009DA610 /* localplayer.cpp in Sources */,
+				881F21541432591B009DA610 /* object.cpp in Sources */,
+				881F21551432591B009DA610 /* player.cpp in Sources */,
+				881F21561432591B009DA610 /* theme.cpp in Sources */,
+				881F215A1432591B009DA610 /* MainWindow.mm in Sources */,
+				881F215C1432591B009DA610 /* StateMenu.cpp in Sources */,
+				881F2163143549CB009DA610 /* SoraTask.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2772,6 +2951,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2783,6 +2963,7 @@
 				GCC_PREFIX_HEADER = Sora_iPhone_Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Sora_iPhone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Plugins/SoraLua\"",
@@ -2796,6 +2977,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2805,6 +2987,7 @@
 				GCC_PREFIX_HEADER = Sora_iPhone_Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "Sora_iPhone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../Plugins/SoraLua\"",
@@ -2830,6 +3013,7 @@
 					../Plugins/SoraGUIChan,
 					../Sora,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
@@ -2851,6 +3035,7 @@
 					../../Plugins,
 					../../Sora,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
