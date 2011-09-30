@@ -9,6 +9,7 @@
 #include "SoraTaskManager.h"
 #include "SoraTask.h"
 #include "SoraTaskNotification.h"
+#include "SoraSingletonHolder.h"
 
 namespace sora {
         
@@ -121,6 +122,18 @@ namespace sora {
     
     const SoraTaskManager::TaskList& SoraTaskManager::allTasks() const {
         return mTasks;
+    }
+    
+    namespace  {
+        SoraSingletonHolder<SoraTaskManager, bool> mTaskManager;
+        SoraSingletonHolder<SoraTaskManager, bool> mMultiThreadedTaskManager;
+    }
+    
+    SoraTaskManager& SoraTaskManager::defaultManager(bool multiThreaded) {
+        if(multiThreaded)
+            return *mTaskManager.get(false);
+        else
+            return *mMultiThreadedTaskManager.get(true);
     }
     
 } // namespace sora

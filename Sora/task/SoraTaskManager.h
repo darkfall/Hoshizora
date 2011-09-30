@@ -66,6 +66,8 @@ namespace sora {
         template<typename T>
         SoraConnection subscribeToNotification(const T& func);
         
+        static SoraTaskManager& defaultManager(bool multiThreaded=false);
+        
     private:
         bool mMultiThread;
         
