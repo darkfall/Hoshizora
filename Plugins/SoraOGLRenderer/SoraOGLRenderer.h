@@ -58,8 +58,8 @@ namespace sora {
 		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode);
         
-        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
-		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f);
+		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float lineWidth=1.f, float z=0.f);
         void fillBox        (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
 
 		void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0);

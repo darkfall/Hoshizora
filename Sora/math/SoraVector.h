@@ -98,6 +98,22 @@ namespace sora {
             x = v.x; y = v.y;
             return *this;
         }
+        
+        SoraVector normal(const SoraVector& rhs){
+            SoraVector normal;
+            
+            normal.x = this->y - rhs.y;
+            normal.y = rhs.x - this->x;
+            float len = sqrt(normal.x * normal.x + normal.y * normal.y);
+            if(len == 0.f) {
+                return SoraVector();
+            }
+            
+            normal.x /= len;
+            normal.y /= len;
+            
+            return normal;
+        }
     };
     
     inline SoraVector operator *(const float s, const SoraVector& v) {

@@ -92,7 +92,8 @@ namespace sora {
 		float	getKerningHeight() const;
 
 		float	getStringWidth(const wchar_t* text);
-		float getStringHeight(const wchar_t* pwstr);
+		float   getStringHeight(const wchar_t* pwstr);
+        SoraVector getStringDimensions(const wchar_t* text);
 		float	getHeight() const;
 
 		uint32	getFontSize() const;

@@ -52,7 +52,9 @@ namespace sora {
 #ifndef SORA_ENABLE_MULTI_THREAD
         task->run();
 #else
-        SoraMutexGuard guard(mMutex);
+        MUTEX_LOCK(mMutex);
+        
+        task->mState = sora::SoraAbstractTask::TaskPreparing;
         mThreadPool.run(ThreadTask(&SoraTaskManager::taskRun, this, task));
 #endif
     }
@@ -130,10 +132,24 @@ namespace sora {
     }
     
     SoraTaskManager& SoraTaskManager::defaultManager(bool multiThreaded) {
-        if(multiThreaded)
+        if(!multiThreaded)
             return *mTaskManager.get(false);
         else
             return *mMultiThreadedTaskManager.get(true);
     }
+    
+    void SoraTaskManager::StartTask(sora::SoraAbstractTask* task) {
+        sora_assert(task);
+        
+        defaultManager(false).start(task);
+    }
+    
+#ifdef SORA_ENABLE_MULTI_THREAD
+    void SoraTaskManager::StartAsyncTask(sora::SoraAbstractTask* task) {
+        sora_assert(task);
+        
+        defaultManager(true).start(task);
+    }
+#endif
     
 } // namespace sora

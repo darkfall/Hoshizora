@@ -16,7 +16,7 @@ namespace sora {
     SoraText::SoraText():
     mFont(0),
     mFontSize(20),
-    mStyle(FONT_ALIGNMENT_LEFT),
+    mStyle(AlignmentLeft),
     mColor(SoraColorRGBA()),
     mRotation(0.f),
     mCharRotation(0.f),
@@ -31,7 +31,7 @@ namespace sora {
     SoraText::SoraText(const SoraWString& str, SoraFont* font):
     mFont(font),
     mFontSize(font->getFontSize()),
-    mStyle(FONT_ALIGNMENT_LEFT),
+    mStyle(AlignmentLeft),
     mColor(SoraColorRGBA()),
     mRotation(0.f),
     mCharRotation(0.f),
@@ -48,30 +48,58 @@ namespace sora {
     void SoraText::set(const SoraWString& str, SoraFont* font) {
         mText = str;
         mFont = font;
+        
+        if(mRenderToSprite && mTarget && mTextSprite) {
+            spriteRender();
+        }
     }
     
     void SoraText::setText(const SoraWString& str) {
         mText = str;
+        
+        if(mRenderToSprite && mTarget && mTextSprite) {
+            spriteRender();
+        }
     }
     
     void SoraText::setFont(SoraFont* font) {
         mFont = font;
+        
+        if(mRenderToSprite && mTarget && mTextSprite) {
+            spriteRender();
+        }
     }
     
-    void SoraText::setStyle(int32 style) {
+    void SoraText::setStyle(TextStyle style) {
         mStyle = style;
+        
+        if(mRenderToSprite && mTarget && mTextSprite) {
+            spriteRender();
+        }
     }
     
     void SoraText::setColor(const SoraColorRGBA& col) {
         mColor = col;
+        
+        if(mRenderToSprite && mTarget && mTextSprite) {
+            spriteRender();
+        }
     }
     
     void SoraText::setRotation(float rotation) {
         mRotation = rotation;
+        
+        if(mRenderToSprite && mTarget && mTextSprite) {
+            spriteRender();
+        }
     }
     
     void SoraText::setCharRotation(float rotation) {
         mCharRotation = rotation;
+        
+        if(mRenderToSprite && mTarget && mTextSprite) {
+            spriteRender();
+        }
     }
     
     float SoraText::getRotation() const {
@@ -86,7 +114,7 @@ namespace sora {
         return mColor;
     }
     
-    int32 SoraText::getStyle() const {
+    SoraText::TextStyle SoraText::getStyle() const {
         return mStyle;
     }
     
@@ -106,7 +134,7 @@ namespace sora {
             mFont->setCharRotation(mCharRotation);
             mFont->setLineRotation(mRotation);
             mFont->setColor(mColor.GetHWColor());
-            mFont->print(getPositionX(), getPositionY(), mStyle, mText.c_str());
+            mFont->print(getPositionX(), getPositionY(), (int32)mStyle, mText.c_str());
         }
     }
     
@@ -128,30 +156,58 @@ namespace sora {
         }
         if(mTextSprite) {
             delete mTextSprite;
+            mTextSprite = 0;
         }
     }
     
-    SoraSprite* SoraText::renderToSprite() {
+    void SoraText::spriteRender() {
+        SoraVector dimensions = mFont->getStringDimensions(mText.c_str());
+
+        SoraCore::Instance()->beginScene(0, mTarget);
+        
+        if(mFont) {
+            mFont->setCharRotation(mCharRotation);
+            mFont->setLineRotation(mRotation);
+            mFont->setColor(mColor.GetHWColor());
+            if(mStyle != AlignmentLeft) {
+                if(mStyle == AlignmentRight) {
+                    mFont->print(dimensions.x, 0.f, (int32)mStyle, mText.c_str());
+                } else {
+                    mFont->print((float)((int32)dimensions.x >> 1), 0.f, (int32)mStyle, mText.c_str());
+                }
+            } else {
+                mFont->print(0.f, 0.f, (int32)mStyle, mText.c_str());
+            }
+        }
+        
+        SoraCore::Instance()->endScene();
+    }
+    
+    void SoraText::enableRenderToSprite(bool flag) {
+        mRenderToSprite = flag;
         if(mTarget != 0 || mTextSprite != 0) {
             release();
         }
-        
-        if(mFont && !mText.empty()) {
-            mTarget = SoraCore::Instance()->createTarget(mFont->getStringWidth(mText.c_str()), mFont->getHeight());
-            if(mTarget) {
-                // render the text
-                SoraCore::Instance()->beginScene(0, mTarget);
+      
+        if(mRenderToSprite) {
+            if(mFont && !mText.empty()) {
+                SoraVector dimensions = mFont->getStringDimensions(mText.c_str());
                 
-                render();
-                
-                SoraCore::Instance()->endScene();
-                
-                mTextSprite = new SoraSprite(SoraCore::Instance()->getTargetTexture(mTarget));
-                
-                return mTextSprite;
+                mTarget = SoraCore::Instance()->createTarget(dimensions.x,
+                                                             dimensions.y);
+                if(mTarget) {
+                    // render the text
+                    spriteRender();
+                    
+                    mTextSprite = new SoraSprite(SoraCore::Instance()->getTargetTexture(mTarget));
+                    sora_assert(mTextSprite);
+                }
             }
         }
-        return 0;
+    }
+    
+    SoraSprite* SoraText::getSprite() const {
+        return mTextSprite;
     }
     
     SoraRect SoraText::getBoundingBox() const {

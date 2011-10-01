@@ -85,8 +85,8 @@ namespace sora {
         void snapshot(const SoraString& path);
 		void onExtensionStateChanged(int32 extension, bool state, int32 param);
         
-        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
-		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float width, float z=0.f);
+		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float width, float z=0.f);
         void fillBox        (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
 
         void setIcon(const SoraString& icon);

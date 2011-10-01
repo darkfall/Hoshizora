@@ -80,8 +80,8 @@ namespace sora {
 		void setCursor(const SoraString& cursor);
 		
 		void onExtensionStateChanged(int32 extension, bool state, int32 param);
-        void renderLine(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z);
-        void renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z);
+        void renderLine(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float width, float32 z);
+        void renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float width, float32 z);
 		void fillBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z);
 
 		void getDesktopResolution(float* w, float *y);

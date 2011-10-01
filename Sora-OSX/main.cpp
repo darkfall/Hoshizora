@@ -8,9 +8,6 @@
 #include "mainWindow.h"
 
 #include "SoraTimestamp.h"
-
-#include "../SoraParticleEditor/peMainWindow.h"
-
 #include "SoraConfigUtil.h"
 
 #include "SoraDirectoryIterator.h"
@@ -28,7 +25,7 @@
 #include "cmd/SoraConsole.h"
 
 #include "SoraTask.h"
-
+#include "SoraShape.h"
 
 float lx, ly, rx, ry;
 float maxsize, maxiteration, iterinc;
@@ -83,16 +80,19 @@ SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_ite
 
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
-    GameInitState():
-    taskManager(true) {
+    GameInitState() {
         
     }
     
     void onRender() {
         sora::SoraGameApp::BeginScene();
-        mBg.render();
+        
+  //      mBg.render();
         mText.render();
         mText2.render();
+        
+        mShape.render();
+        
         sora::SoraGameApp::EndScene();
     }
     
@@ -137,6 +137,7 @@ public:
         }
         
         mText.setText(sora::s2ws(sora::vamssg("lx: %.2f ly: %.2f rx: %.2f ry: %.2f\nmax_size: %.2f max_iteration: %.2f iteration_increment: %.2f", lx, ly, rx, ry, maxsize, maxiteration, iterinc)));
+        mText.enableRenderToSprite(true);
         
     }
     
@@ -157,15 +158,23 @@ public:
         iterinc = 1.f;
 
         sora::SoraTask* task = new sora::SoraTask("ResourceLoad", sora::Bind(this, &GameInitState::load));
-        taskManager.start(task);
+        sora::SoraTaskManager::StartAsyncTask(task);
         
-        while(task->state() == sora::SoraAbstractTask::TaskRunning) {
-            
-        }
+        WaitForTaskFinish(task);
         
+        mText2.setStyle(sora::SoraText::AlignmentCenter);
+
+        mText2.enableRenderToSprite(true);
+        mText.setStyle(sora::SoraText::AlignmentRight);
+        mShape.enableRenderToSprite(true);
+
     }
     
     void load(sora::SoraTask* task) {
+        mShape = sora::SoraShape::Fan(200.f, 200.f, 100.f, 0.f, sora::DGR_RAD(135.f), 0xFFFF0000);
+        mShape.setPosition(100.f, 100.f);
+
+        
         sora::SoraResourceFileAuto fontData("Bank Gothic Medium BT.ttf");
         mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
         if(!mFont) {
@@ -175,14 +184,12 @@ public:
             
             mText2.setFont(mFont);
             mText2.setText(L"left/right arrow to move lx, up/down arrow to move ly\na/d to move rx, w/s to move ry\n\
-                           `(grave) key to open console, available commands:\nset_lx, set_ly, set_rx, set_ry, set_max_size, set_max_iteration, set_iteration_increment\n\
-                           set_cg,set_cr,set_cb");
+`(grave) key to open console, available commands:\nset_lx, set_ly, set_rx, set_ry, set_max_size, set_max_iteration, set_iteration_increment\n\
+set_cg, set_cr, set_cb");
             mText2.setPosition(0.f, sora::SoraCore::Instance()->getScreenHeight()-mFont->getHeight()*5.5);
         }
         
-        registerEventFunc(this, &GameInitState::onKeyEvent);
-        sora::SoraEventManager::Instance()->registerInputEventHandler(this);
-        
+        registerEventFunc(this, &GameInitState::onKeyEvent);        
                
         sora::SoraConfigParser parser;
         if(parser.open("mset.xml")) {
@@ -216,9 +223,9 @@ private:
     sora::SoraText mText2;
     sora::SoraSprite mBg;
     
-    sora::SoraShader* mShader;
+    sora::SoraShape mShape;
     
-    sora::SoraTaskManager taskManager;
+    sora::SoraShader* mShader;
 };
 
 

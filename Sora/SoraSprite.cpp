@@ -34,9 +34,9 @@ namespace sora {
             mSora = SoraCore::Instance();
         
         if(w == 0.f)
-            w = (float)SORA->getTextureWidth(tex);
+            w = (float)SoraTexture::GetWidth(tex);
         if(h == 0.f)
-            h = (float)SORA->getTextureHeight(tex);
+            h = (float)SoraTexture::GetHeight(tex);
         
         _init((SoraTexture*)tex, x, y, w, h);
 		_initDefaults();

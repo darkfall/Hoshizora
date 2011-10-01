@@ -27,7 +27,7 @@
     GLint framebufferHeight;
     
     // The OpenGL ES names for the framebuffer and renderbuffer used to render to this view.
-    GLuint defaultFramebuffer, colorRenderbuffer;
+    GLuint defaultFramebuffer, colorRenderbuffer, depthBuffer;
     bool initialized;
     
     bool multisampling;
@@ -54,7 +54,7 @@
 
 - (void)update;
 - (void)setFramebuffer;
-- (GLuint)createFramebuffer:(GLuint)width height:(GLuint)height tex:(GLuint)tex;
+//- (GLuint)createFramebuffer:(GLuint)width height:(GLuint)height tex:(GLuint)tex;
 - (void)destroyFramebuffer:(GLuint)buffer;
 - (BOOL)presentFramebuffer;
 - (BOOL)presentFramebuffer2:(GLuint)buffer;

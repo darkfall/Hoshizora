@@ -55,6 +55,10 @@ namespace sora {
         SoraMutexLock& _mutex;
     };
     
+    typedef SoraMutexLock SoraMutex;
+    
+#define MUTEX_LOCK(x) SoraMutexGuard SORA_UNIQUE_NAME(_mutex_guard)(x)
+    
     // prevent use of SoraMutexGuard(my_mutex)
 #define SoraMutexGuard(x) error "Missing mutex guard object name"
     

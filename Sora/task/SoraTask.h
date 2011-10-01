@@ -21,12 +21,15 @@ namespace sora {
     class SoraTaskManager;
     
     class SoraAbstractTask {
+        friend class SoraTaskManager;
+        
     public:
         enum TaskState {
             TaskIdle,
             TaskRunning,
             TaskCanceling,
             TaskFinished,
+            TaskPreparing,
         };
         
         SoraAbstractTask(const std::string& name);
@@ -70,6 +73,10 @@ namespace sora {
     private:
         FuncType mFunc;
     };
+    
+    
+#define WaitForTaskFinish(task) while(task->state() == sora::SoraAbstractTask::TaskPreparing || \
+                                      task->state() == sora::SoraAbstractTask::TaskRunning);
     
     
 } // namespace sora

@@ -361,7 +361,6 @@ namespace sora {
 
 				sprite->setTexture(ft_glyphs[n-1].tex);
 				sprite->setTextureRect(0, 0, imgw, imgh);
-            //    sprite->setCenter(imgw/2.f, imgh/2.f);
 				sprite->setRotation(charRotation);
 				sprite->setScale(scale, scale);
 				sprite->render(x+offx, y+offy);
@@ -424,12 +423,12 @@ namespace sora {
 		float w = 0.f;
 		for(const wchar_t* p = pwstr; *p; ++p) {
 			if(*p == L'\n')
-				height += getHeight();
+				height += getHeight() + kerningHeight;
 			else {
 				if(lineWidth != 0.f) {
-					w += getWidthFromCharacter(*pwstr);
+					w += getWidthFromCharacter(*pwstr) + kerningWidth;
 					if(w >= lineWidth) {
-						height += getHeight();
+						height += getHeight() + kerningHeight;
 						w = 0.f;
 					}
 				}
@@ -437,6 +436,33 @@ namespace sora {
 		}
 		return height;
 	}
+    
+    SoraVector SoraFTFont::getStringDimensions(const wchar_t* text) {
+        float height = getHeight();
+        float width = 0.f;
+		float w = 0.f;
+		for(const wchar_t* p = text; *p; ++p) {
+			if(*p == L'\n') {
+				height += getHeight() + kerningHeight;
+                if(width < w)
+                    width = w;
+                w = 0.f;
+            }
+			else {
+                w += getWidthFromCharacter(*text) + kerningWidth;
+
+				if(lineWidth != 0.f) {
+					if(w >= lineWidth) {
+						height += getHeight() + kerningHeight;
+						w = 0.f;
+					}
+				}
+			}
+		}
+        if(width < w)
+            width = w;
+		return SoraVector(width+10.f, height+10.f);
+    }
 
 	float SoraFTFont::getHeight() const {
 		if(!ft_glyphs.empty())

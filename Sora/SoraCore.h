@@ -27,6 +27,10 @@
 
 #include "timer/ITimerManager.h"
 
+#ifdef SORA_ENABLE_MULTI_THREAD
+#include "SoraMutex.h"
+#endif
+
 #include <map>
 
 namespace sora {
@@ -123,11 +127,9 @@ namespace sora {
 		SoraTextureHandle createTextureFromMem(void* data, ulong32 size);
 		uint32*		 textureLock(SoraTextureHandle);
         void		 textureUnlock(SoraTextureHandle);
-		int32		 getTextureWidth(SoraTextureHandle, bool origin=false);
-		int32		 getTextureHeight(SoraTextureHandle, bool origin=false);
 		// depends on render system, may have different meaning
 		ulong32		 getTextureId(SoraTextureHandle);
-		void		 releaseTexture(SoraTextureHandle pTexture);
+		void		 releaseTexture(SoraTextureHandle);
         void         clearTextureMap();
 
         SoraShaderContext*  createShaderContext();
@@ -140,8 +142,8 @@ namespace sora {
 		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
 
-        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
-		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
+        void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f);
+		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float lineWidth=1.f, float z=0.f);
         void fillBox        (float x1, float y1, float x2, float y2, uint32 color, float z=0.f);
         
 		void setClipping	(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
@@ -201,7 +203,15 @@ namespace sora {
 		void                enumFilesInFolder		(std::vector<SoraWString>& cont, const StringType& folder);
 
 #ifdef SORA_ENABLE_MULTI_THREAD
-        void                loadResourceFileAsync   (const StringType& file, const SoraResourceFileFinder::AsyncNotification& handler, void* puserdata);
+        void  loadResourceFileAsync   (const StringType& file, const SoraResourceFileFinder::AsyncNotification& handler, void* puserdata);
+        
+        /*
+         These calls must exist in the main thread
+         After multithreadedRendering begins
+         It's safe to call rendering functions in another thread
+         */
+        void beginMultithreadedRendering();
+        void endMultithreadedRendering();
 #endif
         
 		bool    isMainWindowSet();
@@ -375,6 +385,11 @@ namespace sora {
 		bool bZBufferArea;
         SoraVector3 mFarPoint;
         SoraFont* mSystemFont;
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        bool bMultithreadedRendering;
+        SoraMutex mRenderingLock;
+#endif
     };
 
     inline SORA_API SoraCore* InitAndCreateSoraCore(SoraWindowInfoBase* window, const SoraCore::Feature& param = SoraCore::Feature()) {

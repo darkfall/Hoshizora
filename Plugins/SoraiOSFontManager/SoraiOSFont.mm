@@ -220,7 +220,7 @@ namespace sora {
 					ft_glyphs[sid] = cglyph;
 				}
 			}
-			width += cglyph.width;
+			width += cglyph.width + kerningWidth;
         }
 		return width;
     }
@@ -229,10 +229,37 @@ namespace sora {
 		float32 height = getHeight();
 		for(const wchar_t* p = pwstr; *p; ++p) {
             if(*p == L'\n')
-				height += getHeight();
+				height += getHeight() + kerningHeight;
 		}
 		return height;
 	}
+    
+    SoraVector SoraiOSFont::getStringDimensions(const wchar_t* text) {
+        float height = getHeight();
+        float width = 0.f;
+		float w = 0.f;
+		for(const wchar_t* p = text; *p; ++p) {
+			if(*p == L'\n') {
+				height += getHeight() + kerningHeight;
+                if(width < w)
+                    width = w;
+                w = 0.f;
+            }
+			else {
+                w += getWidthFromCharacter(*text) + kerningWidth;
+                
+				if(lineWidth != 0.f) {
+					if(w >= lineWidth) {
+						height += getHeight() + kerningHeight;
+						w = 0.f;
+					}
+				}
+			}
+		}
+        if(width < w)
+            width = w;
+		return SoraVector(width+10.f, height+10.f);
+    }
     
     float32 SoraiOSFont::getWidthFromCharacter(wchar_t character, bool original) {
         stringId sid = crc32(&character, 1);
@@ -258,7 +285,6 @@ namespace sora {
     uint32 SoraiOSFont::getFontSize() const {
         return size;
     }
-    
     
     void SoraiOSFont::setScale(float32 s) {
         scale = s;

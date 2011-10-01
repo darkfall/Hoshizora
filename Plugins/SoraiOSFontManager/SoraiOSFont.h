@@ -69,6 +69,7 @@ namespace sora {
 		float32	getHeight() const;
 		
 		float32 getStringHeight(const wchar_t* text);
+        SoraVector getStringDimensions(const wchar_t* text);
 		
 		// get font size
 		uint32	getFontSize() const;

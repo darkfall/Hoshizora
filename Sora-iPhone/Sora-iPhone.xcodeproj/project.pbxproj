@@ -41,15 +41,8 @@
 		881F215D1432591B009DA610 /* theme_basic.xml in Resources */ = {isa = PBXBuildFile; fileRef = 881F21441432591B009DA610 /* theme_basic.xml */; };
 		881F215E1432591B009DA610 /* ThemeConfig.xml in Resources */ = {isa = PBXBuildFile; fileRef = 881F21451432591B009DA610 /* ThemeConfig.xml */; };
 		881F2160143286F9009DA610 /* bomb-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 881F215F143286F8009DA610 /* bomb-4.png */; };
-		881F2163143549CB009DA610 /* SoraTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881F2162143549C8009DA610 /* SoraTask.cpp */; };
 		8829063F135FE427006EF84A /* editorWindow.json in Resources */ = {isa = PBXBuildFile; fileRef = 8829063C135FE427006EF84A /* editorWindow.json */; };
 		8834C337135F7AE7006A20F6 /* SoraSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834C335135F7AE7006A20F6 /* SoraSpriteAnimation.cpp */; };
-		884CC59912F6537B00FD18FC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC58A12F6537B00FD18FC /* UIKit.framework */; };
-		884CC5A112F6537B00FD18FC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59212F6537B00FD18FC /* QuartzCore.framework */; };
-		884CC5A212F6537B00FD18FC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59312F6537B00FD18FC /* OpenGLES.framework */; };
-		884CC5A312F6537B00FD18FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59412F6537B00FD18FC /* Foundation.framework */; };
-		884CC5A412F6537B00FD18FC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59512F6537B00FD18FC /* UIKit.framework */; };
-		884CC5A512F6537B00FD18FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59612F6537B00FD18FC /* Foundation.framework */; };
 		884CC5A612F6537B00FD18FC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 884CC59712F6537B00FD18FC /* CoreGraphics.framework */; };
 		887E28361361161800803DA6 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887E28351361161800803DA6 /* OpenAL.framework */; };
 		887E283C1361162400803DA6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887E283B1361162400803DA6 /* AudioToolbox.framework */; };
@@ -410,7 +403,6 @@
 		881F21451432591B009DA610 /* ThemeConfig.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ThemeConfig.xml; sourceTree = "<group>"; };
 		881F215F143286F8009DA610 /* bomb-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-4.png"; sourceTree = "<group>"; };
 		881F2161143549B7009DA610 /* SoraTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTask.h; sourceTree = "<group>"; };
-		881F2162143549C8009DA610 /* SoraTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraTask.cpp; sourceTree = "<group>"; };
 		8829063C135FE427006EF84A /* editorWindow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = editorWindow.json; path = anime/editorWindow.json; sourceTree = "<group>"; };
 		8834C335135F7AE7006A20F6 /* SoraSpriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSpriteAnimation.cpp; sourceTree = "<group>"; };
 		8834C336135F7AE7006A20F6 /* SoraSpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSpriteAnimation.h; sourceTree = "<group>"; };
@@ -1195,12 +1187,6 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
 				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
-				884CC59912F6537B00FD18FC /* UIKit.framework in Frameworks */,
-				884CC5A112F6537B00FD18FC /* QuartzCore.framework in Frameworks */,
-				884CC5A212F6537B00FD18FC /* OpenGLES.framework in Frameworks */,
-				884CC5A312F6537B00FD18FC /* Foundation.framework in Frameworks */,
-				884CC5A412F6537B00FD18FC /* UIKit.framework in Frameworks */,
-				884CC5A512F6537B00FD18FC /* Foundation.framework in Frameworks */,
 				884CC5A612F6537B00FD18FC /* CoreGraphics.framework in Frameworks */,
 				887E28361361161800803DA6 /* OpenAL.framework in Frameworks */,
 				887E283C1361162400803DA6 /* AudioToolbox.framework in Frameworks */,
@@ -1587,7 +1573,6 @@
 				88F628C214321CD5008E1ECF /* xml */,
 				88F628C614321CD5008E1ECF /* ZLIB */,
 				881F2161143549B7009DA610 /* SoraTask.h */,
-				881F2162143549C8009DA610 /* SoraTask.cpp */,
 			);
 			name = Sora;
 			path = ../Sora;
@@ -2581,6 +2566,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0410;
 				ORGANIZATIONNAME = "Studio GameMaster";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Sora-iPhone" */;
@@ -2940,7 +2926,6 @@
 				881F21561432591B009DA610 /* theme.cpp in Sources */,
 				881F215A1432591B009DA610 /* MainWindow.mm in Sources */,
 				881F215C1432591B009DA610 /* StateMenu.cpp in Sources */,
-				881F2163143549CB009DA610 /* SoraTask.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3015,7 +3000,6 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3038,7 +3022,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

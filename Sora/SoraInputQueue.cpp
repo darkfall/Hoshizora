@@ -17,8 +17,8 @@ namespace sora {
     
     static SoraInput* g_input = NULL;
     
-    typedef std::vector<SoraKeyEvent> KeyPool;
-    static KeyPool g_keyPool;
+    typedef std::vector<SoraKeyEvent> KeyPoll;
+    static KeyPoll g_keyPoll;
     
     struct HotkeyNode {
         SoraHotkey mHotkey;
@@ -59,7 +59,7 @@ namespace sora {
     }
     
     void SoraKeyPoll::clearInputQueue() {
-        g_keyPool.clear();
+        g_keyPoll.clear();
     }
     
     void checkHotkey(SoraKeyEvent* kev) {
@@ -120,15 +120,15 @@ namespace sora {
         }
 
         if(!ev.isConsumed())
-            g_keyPool.push_back(ev);
+            g_keyPoll.push_back(ev);
     }
     
     bool SoraKeyPoll::getQueueEvent(SoraKeyEvent& event) {
-        if(g_keyPool.size() == 0)
+        if(g_keyPoll.size() == 0)
             return false;
         
-        event = g_keyPool.back();
-        g_keyPool.pop_back();
+        event = g_keyPoll.back();
+        g_keyPoll.pop_back();
         
         return true;
     }

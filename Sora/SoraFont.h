@@ -4,6 +4,7 @@
 #include "SoraPlatform.h"
 #include "SoraImageEffect.h"
 #include "SoraString.h"
+#include "SoraVector.h"
 
 namespace sora {
 
@@ -39,6 +40,7 @@ namespace sora {
 		// get font dimensions
 		virtual float	getStringWidth(const wchar_t* text) = 0;
 		virtual float   getStringHeight(const wchar_t* text) = 0;
+        virtual SoraVector getStringDimensions(const wchar_t* text) = 0;
 		virtual float	getHeight() const = 0;
 
 		// get/set font size

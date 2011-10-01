@@ -68,6 +68,12 @@ namespace sora {
         
         static SoraTaskManager& defaultManager(bool multiThreaded=false);
         
+        // start managed in defaultManager
+        static void StartTask(SoraAbstractTask* task);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        static void StartAsyncTask(SoraAbstractTask* task);
+#endif
+        
     private:
         bool mMultiThread;
         
@@ -87,7 +93,7 @@ namespace sora {
     inline SoraConnection SoraTaskManager::subscribeToNotification(const T& func) {
         return mNoficationSig.connect(func);
     }
-    
+
 } // namespace sora
 
 

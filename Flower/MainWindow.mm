@@ -40,7 +40,7 @@ namespace flower {
         ConfigController::LoadConfig(L"config.xml");
         PlayerController::Instance()->loadConfig(L"player.xml");
         
-        HudController::Instance()->setFont(L"Courier", 20);
+        HudController::Instance()->setFont(L"STHeitiSC-Medium", 20);
         
         mFSManager.switchToState("menu");
 

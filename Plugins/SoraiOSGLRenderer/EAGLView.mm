@@ -136,40 +136,6 @@
 
 }
 
-- (GLuint)createFramebuffer:(GLuint)width height:(GLuint)height tex:(GLuint)tex {
-    GLuint frameBuffer;
-    GLuint depthBuffer;
-    
-    if (context)
-    {        
-        GLuint oldbuffer;
-		// create framebuffer
-        glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES, (GLint *) &oldbuffer);
-        
-		glGenFramebuffersOES(1, &frameBuffer);
-		glBindFramebufferOES(GL_FRAMEBUFFER_OES, frameBuffer);
-		
-		glFramebufferTexture2DOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_TEXTURE_2D, tex, NULL);
-        
-		//create depth buffer
-		glGenRenderbuffersOES(1, &depthBuffer);
-        glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthBuffer);
-        [context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer *)self.layer];
-        glBindRenderbufferOES(GL_RENDERBUFFER_OES, 0);
-        
-        glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, depthBuffer);
-    
-        
-		GLenum status = glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES);
-		if(status != GL_FRAMEBUFFER_COMPLETE_OES) {
-            sora::log_error("Error creating Render Target");
-		}
-		glBindFramebufferOES(GL_FRAMEBUFFER_OES, oldbuffer);
-        
-    }
-    return frameBuffer;
-}
-
 - (void)destroyFramebuffer:(GLuint)buffer {
     glDeleteFramebuffersOES(1, &buffer);
 }
@@ -192,6 +158,11 @@
         glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &framebufferHeight);
 		        
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
+        
+        glGenRenderbuffers(1, &depthBuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, framebufferWidth, framebufferHeight);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
         
         if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
             NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));

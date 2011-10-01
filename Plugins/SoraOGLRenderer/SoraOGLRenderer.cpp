@@ -892,48 +892,32 @@ namespace sora{
 #endif // OS_WIN32
     }
     
-    void SoraOGLRenderer::renderLine(float x1, float y1, float x2, float y2, uint32 color, float z) {
+    void SoraOGLRenderer::renderLine(float x1, float y1, float x2, float y2, uint32 color, float width, float z) {
 		sora::SoraQuad quad;
 		
 		quad.tex = NULL;
 		
-        if(abs(x2-x1) == 1.f || abs(y2-y1) == 1.f) {
-            quad.v[0].x   = x1;
-            quad.v[0].y   = y1;
-            quad.v[0].col = color;
-            
-            quad.v[1].x   = x2;
-            quad.v[1].y   = y1;
-            quad.v[1].col = color;
-            
-            quad.v[2].x   = x2;
-            quad.v[2].y   = y2;
-            quad.v[2].col = color;
-            
-            quad.v[3].x   = x1;
-            quad.v[3].y   = y2;
-            quad.v[3].col = color;
-        } else {
-            quad.v[0].x   = x1-0.5f;
-            quad.v[0].y   = y1-0.5f;
-            quad.v[0].col = color;
-            
-            quad.v[1].x   = x1+0.5f;
-            quad.v[1].y   = y1+0.5f;
-            quad.v[1].col = color;
-            
-            quad.v[2].x   = x2-0.5f;
-            quad.v[2].y   = y2-0.5f;
-            quad.v[2].col = color;
-            
-            quad.v[3].x   = x2+0.5f;
-            quad.v[3].y   = y2+0.5f;
-            quad.v[3].col = color;
-        }
+        SoraVector p1(x1, y1);
+        SoraVector p2(x2, y2);
+        
+        // Compute the extrusion direction
+        SoraVector normal = p1.normal(p2);
+        normal *= width / 2;
+        
+        SoraVector q1 = p1 - normal;
+        SoraVector q2 = p2 - normal;
+        SoraVector q3 = p2 + normal;
+        SoraVector q4 = p1 + normal;
+        
+        quad.v[0].x = q1.x; quad.v[0].y = q1.y;
+        quad.v[1].x = q2.x; quad.v[1].y = q2.y;
+        quad.v[2].x = q3.x; quad.v[2].y = q3.y;
+        quad.v[3].x = q4.x; quad.v[3].y = q4.y;
 		
 		int i;
 		for (i = 0; i < 4; ++i) {
 			quad.v[i].z = z;
+            quad.v[i].col = color;
 		}
 		
 		quad.blend = BLEND_DEFAULT;
@@ -972,11 +956,11 @@ namespace sora{
 		renderQuad(quad);
     }
 	
-	void SoraOGLRenderer::renderBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
-		renderLine(x1, y1, x2, y1+1.f, color, z);
-		renderLine(x2, y1, x2+1.f, y2, color, z);
-		renderLine(x2, y2, x1, y2+1.f, color, z);
-		renderLine(x1, y2, x1+1.f, y1, color, z);
+	void SoraOGLRenderer::renderBox(float x1, float y1, float x2, float y2, uint32 color, float lineWidth, float z) {
+		renderLine(x1, y1, x2, y1+1.f, color, lineWidth, z);
+		renderLine(x2, y1, x2+1.f, y2, color, lineWidth, z);
+		renderLine(x2, y2, x1, y2+1.f, color, lineWidth, z);
+		renderLine(x1, y2, x1+1.f, y1, color, lineWidth, z);
 	}
 	
 	 void SoraOGLRenderer::getDesktopResolution(float* w, float* h) {

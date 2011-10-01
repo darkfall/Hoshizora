@@ -26,6 +26,12 @@ namespace sora {
     
     class SORA_API SoraText: public SoraObject {
     public:
+        enum TextStyle {
+            AlignmentLeft = 1,
+            AlignmentRight = 2,
+            AlignmentCenter = 3,
+        };
+        
         SoraText();
         SoraText(const SoraWString& str, SoraFont* font);
         virtual ~SoraText();
@@ -34,12 +40,12 @@ namespace sora {
         
         void setText(const SoraWString& str);
         void setFont(SoraFont* font);
-        void setStyle(int32 style);
+        void setStyle(TextStyle style);
         void setColor(const SoraColorRGBA& col);
         void setRotation(float rotation);
         void setCharRotation(float crotation);
 
-        int32 getStyle() const;
+        TextStyle getStyle() const;
         SoraFont* getFont() const;
         const SoraWString& getText() const;
         const SoraColorRGBA& getColor() const;
@@ -59,8 +65,8 @@ namespace sora {
          * And after this call, the rendering of the text will change to static sprite rendering and set* function will not work
          * Though some functions would continue to work suchas fadeto etc
          **/
-        SoraSprite* renderToSprite();
-        
+        void enableRenderToSprite(bool flag);
+        SoraSprite* getSprite() const;
         
         /**
          * ONLY works when system font had been set in SoraCore
@@ -68,16 +74,18 @@ namespace sora {
         static void Render(const SoraWString& str, float x, float y);
         
     private:
+        void spriteRender();
         void release();
         
         SoraFont* mFont;
         uint32 mFontSize;
-        int32 mStyle;
+        TextStyle mStyle;
         SoraColorRGBA mColor;
         float mRotation;
         float mCharRotation;
         SoraWString mText;
         
+        bool mRenderToSprite;
         SoraTargetHandle mTarget;
         SoraSprite* mTextSprite;
     };

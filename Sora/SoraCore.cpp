@@ -29,6 +29,8 @@
 #include "Defaults/SoraMiscTool_iOS.h"
 
 #include "SoraLogger.h"
+#include "SoraString.h"
+
 #include "Debug/SoraAutoProfile.h"
 #include "Debug/SoraDebugRenderer.h"
 
@@ -114,7 +116,7 @@ namespace sora {
         static TransformData g_CurrentTransform;
         static ClippingData g_CurrentClipping;
         
-        SoraKeyPoll* g_keypool;
+        SoraKeyPoll* g_keypoll;
     }
     
     SoraCore* SoraCore::Instance() {
@@ -137,6 +139,7 @@ namespace sora {
         bEnableScreenBuffer = false;
         bScreenBufferAttached = false;
         bSeperateSoundSystemThread = false;
+        bMultithreadedRendering = false;
 
 		_initializeTimer();
 		_initializeMiscTool();
@@ -194,7 +197,7 @@ namespace sora {
       
         try {
             if(bPluginDetection) 
-                SoraBooter::loadExPlugins(L"./sora/plugins");
+                SoraBooter::loadExPlugins(L"plugins");
         } catch(const SoraException& exp) {
             _postError(exp.what());
         }
@@ -281,7 +284,7 @@ namespace sora {
         _checkCoreComponents();
         
         // registering global keypool
-        g_keypool = new SoraKeyPoll;
+        g_keypoll = new SoraKeyPoll;
         
         // startup consoles
         sora::SoraConsole::Instance();
@@ -555,7 +558,7 @@ namespace sora {
 			delete pSoundSystem;
 		}
 		
-        if(g_keypool) delete g_keypool;
+        if(g_keypoll) delete g_keypoll;
 		if(pMiscTool) delete pMiscTool;
 		// force exiting
 		exit(0);
@@ -817,42 +820,50 @@ namespace sora {
     
 	void SoraCore::attachShaderContext(SoraShaderContext* context) {
         sora_assert(bInitialized == true);
-        pRenderSystem->attachShaderContext(context);
+        if(!bZBufferArea)
+            pRenderSystem->attachShaderContext(context);
 		
 		mPrevShaderContext = context;
 	}
 
 	void SoraCore::detachShaderContext() {
         sora_assert(bInitialized == true);
-        pRenderSystem->detachShaderContext();
+        if(!bZBufferArea)
+            pRenderSystem->detachShaderContext();
         
 		mPrevShaderContext = NULL;
 	}
     
 	SoraTextureHandle SoraCore::createTexture(const StringType& sTexturePath, bool bCache, bool bMipmap)	{
+        sora_assert(bInitialized == true);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 #ifdef OS_IOS
-        SoraWString realPath = sTexturePath;
-        SoraWString tmpPath = realPath;
-        size_t dotpos = tmpPath.rfind(L".");
+        std::string realPath = sTexturePath;
+        std::string tmpPath = realPath;
+        size_t dotpos = tmpPath.rfind(".");
         bool isRetinaTexture = false;
         
         // ios resource auto get
         if(_IS_RETINA_DISPLAY()) {
-            tmpPath.insert(dotpos, L"@2x");
-            if(SoraFileUtility::fileExists(SoraPath::resourceW() + tmpPath)) {
+            tmpPath.insert(dotpos, "@2x");
+            if(SoraFileUtility::fileExists(SoraPath::resource() + tmpPath)) {
                 realPath = tmpPath;
                 isRetinaTexture = true;
             }
         } else if(_IS_IPAD()) {
-            tmpPath.insert(dotpos, L"~ipad");
-            if(SoraFileUtility::fileExists(SoraPath::resourceW() + tmpPath)) {
+            tmpPath.insert(dotpos, "@ipad");
+            if(SoraFileUtility::fileExists(SoraPath::resource() + tmpPath)) {
                 realPath = tmpPath;
             }
         }
         
         sora_assert(bInitialized==true);
 		SoraTextureHandle tex;
-		if((tex = SoraTextureMap::Instance()->get(SoraPath::resourceW() + realPath)) != 0) return tex;
+		if((tex = SoraTextureMap::Instance()->get(SoraPath::resource() + realPath)) != 0) return tex;
 		ulong32 size;
 		void* data = getResourceFile(realPath, size);
 		if(data) {
@@ -870,7 +881,6 @@ namespace sora {
 		}
 		return 0;
 #else
-		sora_assert(bInitialized==true);
 		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sTexturePath)) != 0) return tex;
 		ulong32 size;
@@ -889,51 +899,67 @@ namespace sora {
 	}
 
 	SoraTextureHandle SoraCore::createTextureWH(int w, int h) {
-		sora_assert(bInitialized==true);
+        sora_assert(bInitialized==true);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		return (SoraTextureHandle)pRenderSystem->createTextureWH(w, h);
 	}
 
 	SoraTextureHandle SoraCore::createTextureFromRawData(uint32* data, int32 w, int32 h) {
-		sora_assert(bInitialized==true);
+        sora_assert(bInitialized==true);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		return (SoraTextureHandle)pRenderSystem->createTextureFromRawData(data, w, h);
 	}
 
 	SoraTextureHandle SoraCore::createTextureFromMem(void* data, ulong32 size) {
 		sora_assert(bInitialized==true);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		return (SoraTextureHandle)pRenderSystem->createTextureFromMem(data, size);
 	}
 
 	uint32* SoraCore::textureLock(SoraTextureHandle ht) {
 		sora_assert(bInitialized==true);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		return pRenderSystem->textureLock((SoraTexture*)ht);
 	}
 
 	void SoraCore::textureUnlock(SoraTextureHandle h) {
-		if(!bInitialized) throw SoraException("Sora not initialized");;
+        sora_assert(bInitialized==true);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		pRenderSystem->textureUnlock((SoraTexture*)h);
 	}
 	
 	void SoraCore::releaseTexture(SoraTextureHandle pTexture) {
 		sora_assert(bInitialized==true);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
         if(!pTexture) return;
 		SoraTextureMap::Instance()->del(pTexture);
         pRenderSystem->releaseTexture((SoraTexture*)pTexture);
 	}
-	
-	int32 SoraCore::getTextureWidth(SoraTextureHandle tex, bool origin) {
-		SoraTexture* ptex = (SoraTexture*)tex;
-		if(ptex)
-			return (origin?ptex->mOriginalWidth:ptex->mTextureWidth);
-		return 0;
-	}
-	
-	int32 SoraCore::getTextureHeight(SoraTextureHandle tex, bool origin) {
-		SoraTexture* ptex = (SoraTexture*)tex;
-		if(ptex)
-			return (origin?ptex->mOriginalHeight:ptex->mTextureHeight);
-		return 0;
-	}
-	
+
 	ulong32	SoraCore::getTextureId(SoraTextureHandle tex) {
 		SoraTexture* ptex = (SoraTexture*)tex;
 		if(ptex)
@@ -942,6 +968,10 @@ namespace sora {
 	}
 
 	void SoraCore::clearTextureMap() {
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		SoraTextureMap::Instance()->clear();
 	}
 
@@ -951,6 +981,10 @@ namespace sora {
 	}
 
 	SoraSprite* SoraCore::createSprite(const StringType& sPath) {
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		sora_assert(bInitialized==true);
 		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sPath)) != 0) {
@@ -971,7 +1005,12 @@ namespace sora {
 	
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		sora_assert(bInitialized==true);
+        
 		if(bZBufferArea) {
+#ifdef SORA_ENABLE_MULTI_THREAD
+            if(bMultithreadedRendering)
+                MUTEX_LOCK(mRenderingLock);
+#endif
 			SoraZSorter::renderQuad(quad, mPrevShaderContext);
 		} else 
 			pRenderSystem->renderQuad(quad);
@@ -981,6 +1020,10 @@ namespace sora {
 		sora_assert(bInitialized==true);
 		
 		if(bZBufferArea) {
+#ifdef SORA_ENABLE_MULTI_THREAD
+            if(bMultithreadedRendering)
+                MUTEX_LOCK(mRenderingLock);
+#endif
 			SoraZSorter::renderTriple(trip, mPrevShaderContext);
 		} else 
 			pRenderSystem->renderTriple(trip);
@@ -988,29 +1031,46 @@ namespace sora {
 	
 	void SoraCore::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
 		sora_assert(bInitialized == true);
+        
 		if(bZBufferArea) {
+#ifdef SORA_ENABLE_MULTI_THREAD
+            if(bMultithreadedRendering)
+                MUTEX_LOCK(mRenderingLock);
+#endif
 			SoraZSorter::renderWithVertices(tex, blendMode, vertices, vsize, mode, mPrevShaderContext);
 		} else 	
 			pRenderSystem->renderWithVertices((SoraTexture*)tex, blendMode, vertices, vsize, mode);
 	}
 
-	void SoraCore::renderLine(float x1, float y1, float x2, float y2, uint32 color, float z) {
+	void SoraCore::renderLine(float x1, float y1, float x2, float y2, uint32 color, float w, float z) {
 		sora_assert(bInitialized==true);
-		pRenderSystem->renderLine(x1, y1, x2, y2, color, z);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+		pRenderSystem->renderLine(x1, y1, x2, y2, color, w, z);
 	}
 	
-	void SoraCore::renderBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
+	void SoraCore::renderBox(float x1, float y1, float x2, float y2, uint32 color, float w, float z) {
 		sora_assert(bInitialized==true);
-		pRenderSystem->renderBox(x1, y1, x2, y2, color, z);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+		pRenderSystem->renderBox(x1, y1, x2, y2, color, w, z);
 	}
     
     void SoraCore::fillBox(float x1, float y1, float x2, float y2, uint32 color, float z) {
 		sora_assert(bInitialized==true);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
 		pRenderSystem->fillBox(x1, y1, x2, y2, color, z);
 	}
 
 	void SoraCore::setClipping(int32 x, int32 y, int32 w, int32 h) {
 		sora_assert(bInitialized==true);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
 		pRenderSystem->setClipping(x, y, w, h);
         
         g_CurrentClipping.set(x, y, w, h);
@@ -1018,6 +1078,9 @@ namespace sora {
 
 	void SoraCore::setTransform(float x, float y, float dx, float dy, float rot, float hscale, float vscale) {
 		sora_assert(bInitialized==true);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
 		pRenderSystem->setTransform(x, y, dx, dy, rot, hscale, vscale);
         
         g_CurrentTransform.set(x, y, dx, dy, rot, hscale, vscale);
@@ -1025,6 +1088,10 @@ namespace sora {
     
 	void SoraCore::beginScene(uint32 c, ulong32 t, bool clear) {
 		sora_assert(bInitialized==true);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
         if(mScreenBuffer && bEnableScreenBuffer) {
             if(t == 0) {
                 bMainScene = true;
@@ -1045,6 +1112,10 @@ namespace sora {
 	}
 	void SoraCore::endScene() {
 		sora_assert(bInitialized==true);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		if(!bMainScene) {
             pRenderSystem->endScene();
             if(mScreenBuffer && bEnableScreenBuffer && bScreenBufferAttached) 
@@ -1054,16 +1125,28 @@ namespace sora {
 
 	SoraTargetHandle SoraCore::createTarget(int width, int height, bool zbuffer) {
 		sora_assert(bInitialized==true);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		return pRenderSystem->createTarget(width==0?iScreenWidth:width, height==0?iScreenHeight:height, zbuffer);
 	}
 
 	void SoraCore::freeTarget(ulong32 t) {
 		sora_assert(bInitialized==true);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		pRenderSystem->freeTarget(t);
 	}
 
 	ulong32 SoraCore::getTargetTexture(ulong32 t) {
 		sora_assert(bInitialized==true);
+#ifdef SORA_ENABLE_MULTI_THREAD
+        sora_assert(!bMultithreadedRendering);
+#endif
+        
 		return pRenderSystem->getTargetTexture(t);
 	}
 
@@ -1591,5 +1674,16 @@ namespace sora {
     void SoraCore::loadResourceFileAsync(const StringType& file, const SoraResourceFileFinder::AsyncNotification& handler, void* puserdata) {
         pResourceFileFinder->loadResourceFileAsync(file, handler, puserdata);
     }
+    
+    void SoraCore::beginMultithreadedRendering() {
+        bMultithreadedRendering = true;
+        beginZBufferSort();
+    }
+    
+    void SoraCore::endMultithreadedRendering() {
+        bMultithreadedRendering = false;
+        endZBufferSort();
+    }
+    
 #endif    
 } // namespace sora
