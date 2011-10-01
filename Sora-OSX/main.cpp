@@ -166,14 +166,14 @@ public:
 
         mText2.enableRenderToSprite(true);
         mText.setStyle(sora::SoraText::AlignmentRight);
+        
+        mShape.setTexture(sora::SoraTexture::LoadFromFile("background.png"));
         mShape.enableRenderToSprite(true);
 
     }
     
     void load(sora::SoraTask* task) {
-        mShape = sora::SoraShape::Fan(200.f, 200.f, 100.f, 0.f, sora::DGR_RAD(135.f), 0xFFFF0000);
-        mShape.setPosition(100.f, 100.f);
-
+        mShape = sora::SoraShape::Line(200.f, 200.f, 800.f, 800.f, 30.f, 0xFFFFFFFF);
         
         sora::SoraResourceFileAuto fontData("Bank Gothic Medium BT.ttf");
         mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");

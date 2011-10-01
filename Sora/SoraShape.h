@@ -43,6 +43,9 @@ namespace sora {
         void setRenderMode(int32 mode);
         int32 getRenderMode() const;
         
+        void setTexture(SoraTextureHandle texture);
+        SoraTextureHandle getTexture() const;
+        
         void enableOutline(float width, uint32 color);
         void disableOutline();
         void setOutlineOnly(bool flag);
@@ -52,10 +55,6 @@ namespace sora {
         SoraVertex* compile();
         
         size_t size() const;
-        
-        void setTexture(SoraTextureHandle texture);
-        SoraTextureHandle getTexture() const;
-        
         SoraShape& operator=(const SoraShape& rhs);
         
         /**

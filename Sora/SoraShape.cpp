@@ -86,10 +86,23 @@ namespace sora {
         VertexArray::iterator it = mVertices.begin();
         VertexArray::iterator end = mVertices.end();
         
+        int32 textureWidth = 0;
+        int32 textureHeight = 0;
+        if(mTexture) {
+            textureWidth = SoraTexture::GetOriginalWidth(mTexture);
+            textureHeight = SoraTexture::GetOriginalHeight(mTexture);
+        }
+        
         //int index = 0;
         SoraVertex* tmpVertex = vertex;
         for(; it != end; ++it) {
             memcpy(tmpVertex, &(*it), sizeof(SoraVertex));
+            
+            if(mTexture && tmpVertex->tx == 0.f && tmpVertex->ty == 0.f) {
+                tmpVertex->tx = (float)tmpVertex->x / textureWidth;
+                tmpVertex->ty = (float)tmpVertex->y / textureHeight;
+            }
+            
             ++tmpVertex;
         }
         memcpy(tmpVertex, &(*mVertices.begin()), sizeof(SoraVertex));
@@ -193,6 +206,8 @@ namespace sora {
     
     void SoraShape::setTexture(SoraTextureHandle texture) {
         mTexture = texture;
+        
+        mCompiled = false;
     }
     
     SoraTextureHandle SoraShape::getTexture() const {
@@ -245,14 +260,19 @@ namespace sora {
         if(mRenderToSprite) {
             if(!mRenderTarget) {
                 float farW = 0.f, farH = 0.f;
-                VertexArray::iterator it = mVertices.begin();
-                VertexArray::iterator end = mVertices.end();
-                
-                for(; it != end; ++it) {
-                    if(farW < it->x)
-                        farW = it->x;
-                    if(farH < it->y)
-                        farH = it->y;
+                if(!mTexture) {
+                    VertexArray::iterator it = mVertices.begin();
+                    VertexArray::iterator end = mVertices.end();
+                    
+                    for(; it != end; ++it) {
+                        if(farW < it->x)
+                            farW = it->x;
+                        if(farH < it->y)
+                            farH = it->y;
+                    }
+                } else {
+                    farW = SoraTexture::GetOriginalWidth(mTexture);
+                    farH = SoraTexture::GetOriginalHeight(mTexture);
                 }
                 mRenderTarget = SoraCore::Instance()->createTarget((int32)farW+1, (int32)farH+1);
                 
@@ -261,6 +281,7 @@ namespace sora {
                     sora_assert(mSprite);
                 }
                 
+                mCompiled = false;
                 spriteRender();
             }
         } else {

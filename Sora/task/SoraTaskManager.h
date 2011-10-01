@@ -49,19 +49,19 @@ namespace sora {
         void taskProgress(SoraAbstractTask* task);
         
     public:
+        typedef SoraAutoPtr<SoraAbstractTask>           TaskPtr;
+        typedef std::list<TaskPtr>                      TaskList;
+        typedef SoraSignal<void(SoraTaskNotification*)> NotificationSignal;
+        
         SoraAbstractTask* taskByName(const std::string& name) const;
         
         int count() const;
         
         bool isMultiThreaded() const;
         
-        typedef SoraAutoPtr<SoraAbstractTask> TaskPtr;
-        typedef std::list<TaskPtr> TaskList;
-        
         const TaskList& allTasks() const;
         
         // notifications would be posted under SoraTaskNotification subclass
-        typedef SoraSignal<void(SoraTaskNotification*)> NotificationSignal;
         
         template<typename T>
         SoraConnection subscribeToNotification(const T& func);
