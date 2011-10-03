@@ -69,7 +69,7 @@ namespace atd {
                 SoraMessageEvent evt(SID_EVENT_BULLET_SHOOT, bullet);
                 // evt.setSource(getOwner())
                 
-                getOwner()->sendMessageT(&evt);
+                getOwner()->sendMessage(&evt);
                 
                 mBullets.push_back(bullet);
             }

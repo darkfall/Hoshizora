@@ -116,17 +116,6 @@ namespace sora {
         }
     };
     
-    template<typename TSource, typename TTarget, typename T>
-    inline SoraMessage<TSource, TTarget, T>* MakeMessage(const T& v,
-                                                  TSource src = message::traits<TSource, TTarget>::kNoSource,
-                                                  TTarget tgt = message::traits<TSource, TTarget>::kNoTarget) {
-        return new SoraMessage<T, TSource, TTarget>(v, src, tgt);
-    }
-    
-    template<typename T>
-    inline void DestroyMessage(T* msg) {
-        delete msg;
-    }
     
 } // namespace sora 
 

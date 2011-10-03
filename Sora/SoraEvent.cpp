@@ -3,6 +3,7 @@
 #include "SoraPreDeclare.h"
 
 #include "event/SoraEventWorld.h"
+#include "message/SoraMessageEvent.h"
 
 namespace sora {
 
@@ -20,6 +21,10 @@ namespace sora {
     
     void SoraEventHandler::handleEvent(SoraEvent* event) {
         sora_assert(event);
+        
+        if(event->getEventIdentifier() == SoraMessageEvent::GetEventIdentifier()) {
+            onMessage(static_cast<SoraMessageEvent*>(event));
+        }
         
 #ifndef SORA_EVENT_GENERIC
         
@@ -122,6 +127,9 @@ namespace sora {
         
     }
     
+    void SoraEventHandler::onMessage(SoraMessageEvent* message) {
+        
+    }
     
 #ifdef SORA_EVENT_GENERIC
     void SoraEventHandler::onEvent(SoraEvent* event) {

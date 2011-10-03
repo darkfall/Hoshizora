@@ -23,7 +23,7 @@ namespace sora {
         SoraObject* obj = layer.getObjList();
         while(obj != NULL) {
             SoraObject::add(obj);
-            obj = obj->next();
+            obj = obj->getNext();
         }
 		return *this;
     }
@@ -32,7 +32,7 @@ namespace sora {
         SoraObject* obj = layer.getObjList();
         while(obj != NULL) {
             SoraObject::del(obj);
-            obj = obj->next();
+            obj = obj->getNext();
         }
 		return *this;
     }
@@ -50,12 +50,12 @@ namespace sora {
         
         while(objA != NULL) {
             layer.add(objA);
-            objA = objA->next();
+            objA = objA->getNext();
         }
         
         while(objB != NULL) {
             SoraObject::add(objB);
-            objB = objB->next();
+            objB = objB->getNext();
         }
     }
     
@@ -64,7 +64,7 @@ namespace sora {
         SoraObject* obj = getObjList();
         while(obj != NULL) {
             layer->add(obj);
-            obj = obj->next();
+            obj = obj->getNext();
         }
         return layer;
     }

@@ -80,7 +80,8 @@ namespace atd {
         }
         
         void onMoveEnd(TrackerMover& source) {
-            mObject->sendMessage(SID_EVENT_DAMAGE, mAttack);
+            SoraMessageEvent message(SID_EVENT_DAMAGE, mAttack);
+            mObject->sendMessage(&message);
             mIsDead = true;
         }
         

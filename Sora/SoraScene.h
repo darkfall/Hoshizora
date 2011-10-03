@@ -92,7 +92,7 @@ namespace sora {
         int32	getHeight() const;
         void    adjustSize(int32 width, int32 height);
         
-        void    setParent(SoraObject* obj);
+        void    onParentChange(SoraObject* obj);
         
         void    setRotation(float rot);
         float   getRotation() const;
@@ -102,7 +102,7 @@ namespace sora {
         
         void    moveTo(float x, float y, float inTime);
         
-        void    setPosition(float x, float y);
+        void    onPositionChange(float x, float y);
         
         void    enableRenderToCanvas(bool flag);
         bool    isRenderToCanvasEnabled() const;

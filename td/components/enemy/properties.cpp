@@ -7,6 +7,7 @@
 //
 
 #include "properties.h"
+#include "message/SoraMessageEvent.h"
 
 namespace atd {
     
@@ -34,8 +35,10 @@ namespace atd {
     void Property::onDamage(int atk) {
         if(mHealth > 0) {
             mHealth -= atk > mDefense ? atk - mDefense : 1;
-            if(mHealth <= 0)
-                getOwner()->sendMessage(SID_EVENT_DEAD, mHealth);
+            if(mHealth <= 0) {
+                sora::SoraMessageEvent evt(SID_EVENT_DEAD, mHealth);
+                getOwner()->sendMessage(&evt);
+            }
         }
     }
     

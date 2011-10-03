@@ -2,9 +2,13 @@
 #include "SoraHandleManager.h"
 #include "SoraObjectHandle.h"
 #include "SoraModifierAdapter.h"
+
 #include "modifiers/SoraObjectModifiers.h"
+
 #include "physics/SoraPhysicBody.h"
 #include "physics/SoraPhysicWorld.h"
+
+#include "message/SoraMessageEvent.h"
 
 namespace sora {
 
@@ -29,7 +33,7 @@ namespace sora {
         SoraObject* obj = mSubObjects;
         while(obj != NULL) {
             obj->setParent(NULL);
-            obj = obj->next();
+            obj = obj->getNext();
         }
         mNext = NULL;
         mSubObjects = NULL;
@@ -46,7 +50,7 @@ namespace sora {
             SoraObject* obj = mSubObjects;
             while(obj != NULL) {
                 obj->update(dt);
-                obj = obj->next();
+                obj = obj->getNext();
             }
         }
         
@@ -77,7 +81,7 @@ namespace sora {
             SoraObject* obj = mSubObjects;
             while(obj != NULL) {
                 obj->render();
-                obj = obj->next();
+                obj = obj->getNext();
             }
         }
 	}
@@ -112,6 +116,7 @@ namespace sora {
 	void SoraObject::setPosition(float x, float y) {
         mPosition.x = x;
         mPosition.y = y;
+        onPositionChange(x, y);
 	}
 	
 	void SoraObject::getPosition(float* x, float* y) const {
@@ -148,8 +153,8 @@ namespace sora {
         
         if(mSubObjects) {
             SoraObject* obj = mSubObjects;
-            while(obj->next() != NULL)
-                obj = obj->next();
+            while(obj->getNext() != NULL)
+                obj = obj->getNext();
             obj->mNext = o;
             o->setParent(this);
         } else {
@@ -160,7 +165,7 @@ namespace sora {
         ++mSubObjectSize;
 	}
     
-    SoraObject* SoraObject::next() const {
+    SoraObject* SoraObject::getNext() const {
         return mNext;
     }
     
@@ -172,11 +177,11 @@ namespace sora {
         if(o == NULL || o == this)
             return;
         if(mSubObjects == o)
-            mSubObjects = mSubObjects->next();
+            mSubObjects = mSubObjects->getNext();
         else if(mSubObjects) {
             SoraObject* obj = mSubObjects;
-            while(obj != NULL && obj->next() != o)
-                obj = obj->next();
+            while(obj != NULL && obj->getNext() != o)
+                obj = obj->getNext();
             if(obj != NULL) {
                 obj->mNext = o->mNext;
                 o->setParent(NULL);
@@ -238,6 +243,7 @@ namespace sora {
     
     void SoraObject::setParent(SoraObject* obj) {
         mParent = obj;
+        onParentChange(obj);
     }
     
     int32 SoraObject::getObjSize() const {
@@ -305,6 +311,30 @@ namespace sora {
             delete (*it);
         }
         mModifierAdapters.clear();
+    }
+    
+    void SoraObject::onPositionChange(float x, float y) {
+        
+    }
+    
+    void SoraObject::onParentChange(SoraObject* parent) {
+        
+    }
+    
+    void SoraObject::onMessage(SoraMessageEvent* message) {
+        sora_assert(message);
+        
+        if(message->getReceiver() == this)
+            this->onMessage(message);
+        else {
+            SoraObject* obj = getObjList();
+            do {
+                obj->onMessage(message);
+                
+                obj = obj->getNext();
+            } while(!message->isConsumed() && obj != 0);
+        }
+
     }
             
 } // namespace sora

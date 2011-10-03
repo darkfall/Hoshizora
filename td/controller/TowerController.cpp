@@ -28,7 +28,7 @@ namespace atd {
         TowerList::const_iterator end = mTowers.end();
         
         for(; it != end; ++it) {
-            (*it)->sendMessageT(evt);
+            (*it)->sendMessage(evt);
         }
     }
     

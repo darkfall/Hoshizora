@@ -73,12 +73,11 @@ namespace sora {
     }
 
     
-    void SoraScene::setParent(SoraObject* obj) {
+    void SoraScene::onParentChange(SoraObject* obj) {
         if(obj == NULL) {
             mParentScene = NULL;
             adjustSize(mRealWidth, mRealHeight);
         }
-        SoraObject::setParent(obj);
         
         SoraScene* parentScene = dynamic_cast<SoraScene*>(obj);
         if(parentScene != NULL) {
@@ -273,8 +272,7 @@ namespace sora {
         *scalev = mVScale;
     }
     
-    void SoraScene::setPosition(float x, float y) {
-        SoraObject::setPosition(x, y);
+    void SoraScene::onPositionChange(float x, float y) {
         _adjustSize();
     }
     
@@ -304,7 +302,7 @@ namespace sora {
             SoraScene* scene = dynamic_cast<SoraScene*>(objects);
             if(scene != NULL)
                 scene->setCamera(mCamera);
-            objects = objects->next();
+            objects = objects->getNext();
         }
     }
     

@@ -17,7 +17,6 @@ namespace sora {
     SoraLightWeightEntity::SoraLightWeightEntity():
     mHolder() {
         // entity can handle SoraMessageEvent and send message to components
-        registerEventFunc(this, &SoraLightWeightEntity::sendMessageT);
     }
     
     SoraLightWeightEntity::~SoraLightWeightEntity() {
@@ -71,6 +70,7 @@ namespace sora {
     
     void SoraLightWeightEntity::onMessage(SoraMessageEvent* evt) {
        // mComponents.sendMessage(evt);
+        sendMessage(evt);
     }
     
     SoraPropertyBase* SoraLightWeightEntity::getPropertyBase(const PropertyId& pid) const {
@@ -86,7 +86,7 @@ namespace sora {
         return mHolder.removeProperty(pid, release);
     }
     
-    void SoraLightWeightEntity::sendMessageT(SoraMessageEvent* message) {
+    void SoraLightWeightEntity::sendMessage(SoraMessageEvent* message) {
         if(message->getReceiver() == this)
             this->onMessage(message);
         else 

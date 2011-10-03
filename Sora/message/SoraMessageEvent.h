@@ -59,6 +59,18 @@ namespace sora {
         SoraAny mData;
     };
     
+    template<typename T>
+    inline SoraMessageEvent* MakeMessage(const std::string& name, const T& data) {
+        return new SoraMessageEvent(name, data);
+    }
+    
+    template<typename T>
+    inline void DestroyMessage(SoraMessageEvent* message) {
+        sora_assert(message);
+        
+        delete message;
+    }
+    
 } // namespace sora
 
 

@@ -52,9 +52,7 @@ namespace sora {
         SoraComponent* removeComponent(const SoraComponent* co);
         SoraComponent* getComponent(const SoraString& name);
         
-        template<typename T>
-        void sendMessage(const MessageIdType& message, const T& data);
-        void sendMessageT(SoraMessageEvent* message);
+        void sendMessage(SoraMessageEvent* message);
         void sendMessageTo(const SoraString& comp, SoraMessageEvent* message);
         
         virtual void render();
@@ -89,13 +87,6 @@ namespace sora {
         SoraComponentHolder mComponents;
         SoraPropertyHolder mHolder;
     };
-    
-    template<typename T>
-    inline void SoraLightWeightEntity::sendMessage(const MessageIdType& message, const T& data) {
-        SoraMessageEvent mssg(message, data);
-        this->onMessage(&mssg);
-        mComponents.sendMessage(&mssg);
-    }
     
     template<typename T>
     inline void SoraLightWeightEntity::addProperty(const PropertyId& pid, const T& prop) {

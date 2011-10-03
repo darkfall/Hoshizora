@@ -28,7 +28,8 @@ namespace atd {
                 mEnemyList.push_back(EnemyConnect(enemy, 
                                                   enemy->subscribeToEnemyDeath(sora::Bind(this, &Sensor::onEnemyDied))));
                 
-                getOwner()->sendMessage(SID_EVENT_ENEMY_ENTER, enemy);
+                SoraMessageEvent evt(SID_EVENT_ENEMY_ENTER, enemy);
+                getOwner()->sendMessage(&evt);
             }
         }
     }
@@ -42,7 +43,8 @@ namespace atd {
                 mEnemyList.erase(it);
                 
                 // send message
-                getOwner()->sendMessage(SID_EVENT_ENEMY_DEATH, enemy);
+                SoraMessageEvent evt(SID_EVENT_ENEMY_DEATH, enemy);
+                getOwner()->sendMessage(&evt);
                 break;
             }
         }
@@ -100,7 +102,8 @@ namespace atd {
             if(!mSenseCircle.testPoint(it->enemy->getPosition())) {
                 it->conn.disconnect();
                 
-                getOwner()->sendMessage(SID_EVENT_ENEMY_LEAVE, it->enemy);
+                SoraMessageEvent evt(SID_EVENT_ENEMY_LEAVE, it->enemy);
+                getOwner()->sendMessage(&evt);
                 
                 it = mEnemyList.erase(it);
             }

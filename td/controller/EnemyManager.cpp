@@ -25,7 +25,7 @@ namespace atd {
         Enemy::const_iterator end = Enemy::end();
         
         for(; it != end; ++it) {
-            (*it)->sendMessageT(evt);
+            (*it)->sendMessage(evt);
         }
     }
     

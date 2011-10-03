@@ -46,7 +46,8 @@ namespace atd {
                 mObject->setPosition(mEnd);
 
                 if(mMovingPoints.size() == 0) {
-                    getOwner()->sendMessage(SID_EVENT_MOVE_END, this);
+                    SoraMessageEvent evt(SID_EVENT_MOVE_END, this);
+                    getOwner()->sendMessage(&evt);
                 } else {
                     mEnd.clear();
                 }

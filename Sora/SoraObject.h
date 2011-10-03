@@ -18,6 +18,7 @@ namespace sora {
     class SoraPhysicBody;
     class SoraPhysicFixtureDef;
     class SoraPhysicBodyDef;
+    class SoraMessageEvent;
 
 	class SORA_API SoraObject: public SoraEventHandler {
 	public:
@@ -32,11 +33,15 @@ namespace sora {
         // inherited from SoraEventHandler
         virtual void    onUpdate(float dt);
         
+        virtual void    onPositionChange(float x, float y);
+        virtual void    onParentChange(SoraObject* parent);
+        virtual void    onMessage(SoraMessageEvent* message);
+        
 		virtual void	add(SoraObject* pobj);
 		virtual void	del(SoraObject* pobj);
         virtual void    delAll();
     	
-		virtual void    setPosition(float x, float y);
+        void    setPosition(float x, float y);
         float   getPositionX() const;
         float   getPositionY() const;
         void    getPosition(float* x, float* y) const;
@@ -44,13 +49,13 @@ namespace sora {
         float   getAbsolutePositionX() const;
         float   getAbsolutePositionY() const;
         
-        virtual void    setParent(SoraObject* obj);
+        void    setParent(SoraObject* obj);
         
 		SoraObject*     getObjList() const;
 		SoraObject*     getParent() const;
         
         int32           getObjSize() const;
-        SoraObject*     next() const;
+        SoraObject*     getNext() const;
 				
 		SoraObject* getObjByName(const SoraString& n);
         SoraObject* getObjByName(SoraStringId sid);
@@ -58,8 +63,6 @@ namespace sora {
 		uint32  getType() const;
 		void    setType(uint32 t);
         
-        void    setNext(SoraObject* obj);
-	
         SoraHandle          getHandleId() const;
         SoraUniqueId        getUniqueId() const;
         SoraObjectHandle    getHandle();
@@ -90,7 +93,8 @@ namespace sora {
         void clearModifierAdapters();
         
     private:
-        
+        void  setNext(SoraObject* obj);
+
         typedef std::list<SoraAbstractModifierAdapter*> ModifierAdapterList;
         ModifierAdapterList mModifierAdapters;
 		

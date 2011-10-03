@@ -12,7 +12,8 @@
 namespace sora {
 
     class SoraEventHandler;
-	
+	class SoraMessageEvent;
+    
 #define SORA_EVENT_IDENTIFIER(ident) \
     sora::SoraStringId getEventIdentifier() const { \
         return ident; \
@@ -153,6 +154,7 @@ namespace sora {
         
         virtual void onEnable();
         virtual void onDisable();
+        virtual void onMessage(SoraMessageEvent* message);
         
 #ifdef SORA_EVENT_GENERIC
         virtual void onEvent(SoraEvent* event);
