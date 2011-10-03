@@ -26,10 +26,10 @@ namespace sora {
     class SoraiOSMusicFile: public SoraMusicFile {
     public:
         SoraiOSMusicFile(bool bStream);
-        SoraiOSMusicFile(const SoraWString& sFilePath, bool bStream);
+        SoraiOSMusicFile(const StringType& sFilePath, bool bStream);
         ~SoraiOSMusicFile();
 		
-		int32 readFile(const SoraWString& sFilePath);
+		int32 readFile(const StringType& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
 		void closeFile();
         
@@ -70,10 +70,10 @@ namespace sora {
     class SoraiOSSoundEffectFile : public SoraSoundEffectFile {
     public:
         SoraiOSSoundEffectFile();
-        SoraiOSSoundEffectFile(const SoraWString& path);
+        SoraiOSSoundEffectFile(const StringType& path);
         ~SoraiOSSoundEffectFile();
 		
-		int32 readFile(const SoraWString& sFilePath);
+		int32 readFile(const StringType& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
 		void closeFile();
         

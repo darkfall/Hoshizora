@@ -44,7 +44,7 @@ namespace sora {
 		ulong32 getResourceFileSize			(const StringType& file);
 		void    freeResourceFile(void* p);
 		
-		bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder);
+		bool enumFiles(std::vector<StringType>& cont, const StringType& folder);
         
         static ulong32 ResourceMemory;
         

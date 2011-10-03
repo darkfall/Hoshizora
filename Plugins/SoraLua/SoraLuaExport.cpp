@@ -297,9 +297,9 @@ namespace sora {
         global.SetInteger("MB_ICONSTOP", MB_ICONSTOP);
         global.SetInteger("MB_ICONERROR", MB_ICONERROR);
         
-        global.SetInteger("IMAGE_EFFECT_ONCE", IMAGE_EFFECT_ONCE);
-        global.SetInteger("IMAGE_EFFECT_PINGPONG", IMAGE_EFFECT_PINGPONG);
-        global.SetInteger("IMAGE_EFFECT_REPEAT", IMAGE_EFFECT_REPEAT);
+        global.SetInteger("ImageEffectOnce", ImageEffectOnce);
+        global.SetInteger("ImageEffectPingpong", ImageEffectPingpong);
+        global.SetInteger("ImageEffectRepeat", ImageEffectRepeat);
         
         global.SetInteger("FRAGMENT_SHADER", FRAGMENT_SHADER);
         global.SetInteger("VERTEX_SHADER", VERTEX_SHADER);

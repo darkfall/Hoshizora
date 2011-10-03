@@ -11,11 +11,12 @@
 #define SORA_IOS_FILE_UTILITY_H_
 
 #include "SoraPlatform.h"
+#include "SoraString.h"
 
 namespace sora {
-	SoraWString appResourcePath();
-	SoraWString appApplicationPath();
-	SoraWString appDocumentPath();
+	StringType appResourcePath();
+	StringType appApplicationPath();
+	StringType appDocumentPath();
 	
 	bool appFileExists(const SoraWString& path);
 } // namespace sora

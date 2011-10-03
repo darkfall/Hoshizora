@@ -25,7 +25,7 @@ public:
 
 	void setMainWindowHandle(ulong32 mainWindowHandle) { _hWnd = (HWND)mainWindowHandle; }
 	
-	SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+	StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
         char rfilter[128];
 		if(filter != NULL) {
 			strcpy(rfilter, std::string(std::string("My Files(")+filter+") ").c_str());
@@ -81,11 +81,11 @@ public:
 			 ofn.lpstrFilter = filter != NULL ? rfilter : NULL;
 		 
 		 if(GetOpenFileNameA(&ofn))
-			return sora::s2ws(fileName);
-		 return L"\0";
+			return fileName;
+		 return "\0";
 	}
 	
-	SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+	StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
 		char rfilter[128];
 		if(filter != NULL) {
 			strcpy(rfilter, std::string(std::string("My Files(")+filter+") ").c_str());
@@ -142,8 +142,8 @@ public:
 			 ofn.lpstrFilter = filter != NULL ? rfilter : NULL;
 		 
 		 if(GetSaveFileNameA(&ofn))
-			 return sora::s2ws(fileName);
-		 return L"\0";
+			 return fileName;
+		 return "\0";
 	}
 	
 

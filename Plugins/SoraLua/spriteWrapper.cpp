@@ -414,24 +414,24 @@ namespace spritewrapper {
 namespace imageeffectwrapper {
     
     ulong32 makeEffect_fade(float src, float dst, float time, int32 mode) {
-        return (ulong32)(new SoraImageEffectFade(src, dst, time, (sora::IMAGE_EFFECT_MODE)mode));
+        return (ulong32)(new SoraImageEffectFade(src, dst, time, (sora::ImageEffectMode)mode));
     }
     ulong32 makeEffect_transitions(float sx, float sy, float dx, float dy, float time, int32 mode) {
-        return (ulong32)(new SoraImageEffectTransitions(sx, sy, dx, dy, time, (sora::IMAGE_EFFECT_MODE)mode));
+        return (ulong32)(new SoraImageEffectTransitions(sx, sy, dx, dy, time, (sora::ImageEffectMode)mode));
     }
     ulong32 makeEffect_scale_tensile(float sv, float dv, float sh, float dh, float time, int32 mode) {
-        return (ulong32)(new SoraImageEffectScale(sv, dv, sh, dh, time, (sora::IMAGE_EFFECT_MODE)mode));
+        return (ulong32)(new SoraImageEffectScale(sv, dv, sh, dh, time, (sora::ImageEffectMode)mode));
     }
     ulong32 makeEffect_scale(float s, float d, float time, int32 mode) {
-        return (ulong32)(new SoraImageEffectScale(s, d, time, (sora::IMAGE_EFFECT_MODE)mode));
+        return (ulong32)(new SoraImageEffectScale(s, d, time, (sora::ImageEffectMode)mode));
     }
     ulong32 makeEffect_colorTransitions(ulong32 start, ulong32 end, float time, int32 mode) {
-        return (ulong32)(new SoraImageEffectColorTransitions(start, end, time, (sora::IMAGE_EFFECT_MODE)mode));
+        return (ulong32)(new SoraImageEffectColorTransitions(start, end, time, (sora::ImageEffectMode)mode));
     }
     ulong32 makeEffect_rotation(float start, float end, float time, int32 mode) {
-        return (ulong32)(new SoraImageEffectRotation(start, end, time, (sora::IMAGE_EFFECT_MODE)mode));
+        return (ulong32)(new SoraImageEffectRotation(start, end, time, (sora::ImageEffectMode)mode));
     }
     ulong32 makeEffect_rotationZ(float start, float zstart, float end, float zend, float time, int32 mode) {
-		return (ulong32)(new SoraImageEffectRotation(start, zstart, end, zend, time, (sora::IMAGE_EFFECT_MODE)mode));
+		return (ulong32)(new SoraImageEffectRotation(start, zstart, end, zend, time, (sora::ImageEffectMode)mode));
 	}
 }

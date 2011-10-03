@@ -268,18 +268,17 @@ namespace sora {
         return 0;
     }
 	
-	bool SoraZipFile::enumFiles(std::vector<SoraWString>& cont, const StringType& folder) {
+	bool SoraZipFile::enumFiles(std::vector<StringType>& cont, const StringType& folder) {
 		unzFile hFile = m_UnzFile;
 		int result = unzGoToFirstFile(hFile);
         
-        std::wstring wfolder = (std::wstring)folder;
 		while(result == UNZ_OK) {
 			unz_file_info info;
 			char szCurrentFile[512];
 			unzGetCurrentFileInfo(hFile, &info, szCurrentFile, 512, NULL, 0, NULL, 0);
 			
-            std::wstring tmpFile = s2ws(szCurrentFile);
-            if(tmpFile.find(wfolder) != std::wstring::npos)
+            std::string tmpFile = szCurrentFile;
+            if(tmpFile.find(folder) != std::wstring::npos)
                 cont.push_back(tmpFile);
             
 			result = unzGoToNextFile(hFile);

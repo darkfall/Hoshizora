@@ -49,7 +49,7 @@ namespace sora {
             mSource(src),
             mTarget(tgt),
             mTypeName(msgTypeName.empty() ?
-                      getTypeName<T>(): 
+                      GetTypeName<T>(): 
                       msgTypeName) {
             
             }

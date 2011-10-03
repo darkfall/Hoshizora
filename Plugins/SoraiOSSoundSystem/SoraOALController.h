@@ -34,7 +34,7 @@ namespace sora {
         // we will reserve 32(maximum) number of channels for effects;
         static ALChannelSource* getChannelSource();
         
-        static ALBuffer* loadBuffer(const SoraWString& file);
+        static ALBuffer* loadBuffer(const StringType& file);
         
         static void releaseBuffer(ALBuffer* buffer);
         // release all allocated buffers

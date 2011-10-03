@@ -35,7 +35,7 @@ namespace sora {
 		StringType getName() const { return "ZipRM"; }
 		bool isFormatSupported(const StringType& format) const;
 		
-		bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder);
+		bool enumFiles(std::vector<StringType>& cont, const StringType& folder);
 		
 	private:
 		RESOURCE_PACK resourcePacks;

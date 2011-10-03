@@ -29,7 +29,7 @@ namespace sora {
 			return appFileExists(filepath);
 #endif
 			std::ifstream file;
-			file.open(ws2s(filepath).c_str());
+			file.open(filepath.c_str());
 			if(!file.is_open()) return false;
 			file.close();
 			return true;
@@ -59,9 +59,9 @@ namespace sora {
 #ifndef OS_IOS
 			return getAbsolutePath(filePath);
 #else
-			return appDocumentPath()+L"/"+filePath;
+			return appDocumentPath()+"/"+filePath;
 #endif
-			return L"\0";
+			return "\0";
 		}
 		
 	 StringType SoraFileUtility::getApplicationPath() {
@@ -71,11 +71,11 @@ namespace sora {
 			
 			return SoraWString(buffer)+L"/";
 #elif defined(OS_OSX)
-			return osxApplicationPathW()+L"/";
+			return osxApplicationPath()+"/";
 #elif defined(OS_IOS)
-			return appResourcePath()+L"/";
+			return appResourcePath()+"/";
 #endif
-			return L"./";
+			return "./";
 		}
 
 	 StringType SoraFileUtility::getFontPath(const StringType& file) {

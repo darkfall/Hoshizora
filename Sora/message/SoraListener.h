@@ -72,7 +72,7 @@ namespace sora {
         }
         
         SoraListener(const HandleFuncType& fn):
-        message::ListenerBase<TSource, TTarget>(getTypeName<TMsg>()),
+        message::ListenerBase<TSource, TTarget>(GetTypeName<TMsg>()),
         mHandleFunc(fn.clone()) {
             
         }

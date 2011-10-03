@@ -11,23 +11,49 @@
 
 #include "SoraPlatform.h"
 #include "SoraMath.h"
-#include "SoraVertex.h"
+#include "util/SoraArray.h"
 
 namespace sora {
     
     class SoraPhysicShape {
     public:
+        SoraPhysicShape();
+        
         enum ShapeType {
+            ShapeNone,
             ShapeEdge,
             ShapeBox,
             ShapeCircle,
             ShapePolygon, 
         };
         
-        virtual void setAsEdge(float x1, float y1, float x2, float y2) = 0;
-        virtual void setAsBox(float w, float h, float centerX, float centerY, float rotation) = 0;
-        virtual void setAsCircle(float r) = 0;
-        virtual void setAsPolygon(SoraVertex* vertices, uint32 size) = 0;
+        void setAsEdge(float x1, float y1, float x2, float y2);
+        void setAsBox(float w, float h, float centerX, float centerY, float rotation);
+        void setAsCircle(float r);
+        void setAsPolygon(SoraVector* vertices, uint32 size);
+        
+        ShapeType type() const;
+        
+        static SoraPhysicShape EdgeAsShape(float x1, float y1, float x2, float y2);
+        static SoraPhysicShape BoxAsShape(float w, float h, float centerx, float centery, float rotation);
+        static SoraPhysicShape CircleAsShape(float r);
+        static SoraPhysicShape PolygonAsShape(SoraVector* vertices, uint32 size);
+        
+        typedef SoraArray<SoraVector> VertexArray;
+        
+        /**
+         *  for edge
+                mVertices[0] = p1; mVertices[1] = p2;
+         *  for box
+                mVertices[0] = w/h; mVertices[1] = center;
+         *  for circle
+                mVertices[0] = r/r;
+         *  for polygon
+                mVertices = vertice list;
+         **/
+        VertexArray mVertices;
+        
+        ShapeType mType;
     };
     
 } // namespace sora

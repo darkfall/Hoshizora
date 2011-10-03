@@ -26,12 +26,12 @@ namespace sora {
 			return messageBox(ws2s(sMessage), ws2s(sTitle), msgCode);
 		}
 		
-		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
-            return SoraWString();
+		StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+            return StringType();
 		}
 		
-		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
-            return SoraWString();
+		StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+            return StringType();
 		}
 	};
 	

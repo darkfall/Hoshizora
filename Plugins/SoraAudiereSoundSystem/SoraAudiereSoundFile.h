@@ -6,6 +6,7 @@
 #include "SoraSoundFile.h"
 #include "SoraStringConv.h"
 #include "SoraSingleton.h"
+#include "SoraString.h"
 
 namespace sora {
 
@@ -14,7 +15,7 @@ namespace sora {
 		SoraAudiereMusicFile(bool stream=true);
 		~SoraAudiereMusicFile();
 
-		int32 readFile(const SoraWString& sFilePath);
+		int32 readFile(const StringType& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
 		void closeFile();
 
@@ -47,7 +48,7 @@ namespace sora {
 		bool isPlaying() const;
 
 	private:
-		inline void _parseName(const SoraWString& path);
+		inline void _parseName(const StringType& path);
 		void* data;
 
 		bool bIsStream;
@@ -61,7 +62,7 @@ namespace sora {
 		SoraAudiereSoundEffectFile(int type = audiere::MULTIPLE) { iSoundEffectType = type; }
 		~SoraAudiereSoundEffectFile();
 
-		int32 readFile(const SoraWString& sFilePath);
+		int32 readFile(const StringType& sFilePath);
 		int32 readFileMem(void* ptr, ulong32 size);
 		void closeFile();
 
@@ -90,7 +91,7 @@ namespace sora {
 		bool isPlaying() const { return false; }
 
 	private:
-        inline void _parseName(const SoraWString& path);
+        inline void _parseName(const StringType& path);
 		void* data;
 
 		audiere::SoundEffectPtr se;	

@@ -30,6 +30,11 @@
 #include "SoraLogger.h"
 #include "SoraResourceFile.h"
 
+#include "SoraBox2dPhysics/SoraBox2dPhysicWorld.h"
+#include "physics/SoraPhysicDef.h"
+#include "physics/SoraPhysicShape.h"
+#include "physics/SoraPhysicBody.h"
+
 float lx, ly, rx, ry;
 float maxsize, maxiteration, iterinc;
 float cr, cg, cb;
@@ -90,9 +95,14 @@ public:
     void onRender() {
         sora::SoraGameApp::BeginScene();
         
-  //      mBg.render();
-        mText.render();
-        mText2.render();
+        mBg.render();
+        
+        sora::SoraRect r = mBg.getPhysicBody()->getBoundingBox();
+        sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
+                                              r.x2, r.y2, 0xFFFF0000);
+       
+       // mText.render();
+       // mText2.render();
         
         mShape.render();
         
@@ -148,10 +158,18 @@ public:
     }
     
     void onEnter() {
-        mBg.setTexture(sora::SoraTexture::CreateEmpty(sora::SoraCore::Instance()->getScreenWidth(), 
-                                                      sora::SoraCore::Instance()->getScreenHeight()));
+        sora::SoraCore::Instance()->registerPhysicWorld(new sora::SoraBox2dPhysicWorld(0.f, 1.f, true));
+
+        mBg.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
+        mBg.setColor(0xFF00FF00);
         
-        mShader = mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet");
+        mBg.setPosition(200.f, 200.f);
+        mBg.createPhysicBody(sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 
+                                                                                          100.f, 0.f, 0.f, 0.f)),
+                                                        1.f,
+                                                        0.f,
+                                                        0.f);
+        mShader = /* mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet")*/ 0;
         lx = -2.5f;
         ly = 1.0f;
         rx = -2.f;
@@ -176,7 +194,7 @@ public:
     }
     
     void load(sora::SoraTask* task) {
-     
+        
         mShape = sora::SoraShape::Arc(200.f, 200.f, 150.f, 0.f, sora::DegreeToRadius(90.f), 3.f, 0xFFFFFFFF);
         mShape.enableOutline(3.f, 0xFFFF0000);
         mShape.setClosed(true);
@@ -220,7 +238,7 @@ set_cg, set_cr, set_cb");
     
     void onFadeFinish(sora::SoraSprite* obj) {
         obj->fadeTo(1.f, 2.f);
-        obj->addEffect(sora::CreateEffectFade(0.f, 1.f, 1.f, sora::IMAGE_EFFECT_PINGPONG));
+        obj->addEffect(sora::CreateEffectFade(0.f, 1.f, 1.f, sora::ImageEffectPingpong));
     }
     
 private:

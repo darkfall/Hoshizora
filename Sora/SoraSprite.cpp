@@ -4,6 +4,8 @@
 #include "SoraCore.h"
 #include "SoraFastRenderer.h"
 
+#include "physics/SoraPhysicBody.h"
+
 #ifdef OS_IOS
 #include "SoraiOSDeviceHelper.h"
 #endif
@@ -461,6 +463,13 @@ namespace sora {
 				++eff;
 			}
 		}
+        
+        if(mPhysicBody) {
+            SoraVector ccenter = mPhysicBody->getLocalCenter();
+            setCenter(ccenter.x, ccenter.y);
+            
+            setRotation(mPhysicBody->getRotation());
+        }
 		return 0;
 	}
     

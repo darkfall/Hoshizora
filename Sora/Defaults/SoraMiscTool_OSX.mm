@@ -68,7 +68,7 @@ namespace sora {
 		return messageBox(ws2s(sMessage), ws2s(sTitle), msgCode);
 	}
 
-	SoraWString SoraMiscToolOSX::fileOpenDialog(const char* filter, const char* defaultPath) {
+	StringType SoraMiscToolOSX::fileOpenDialog(const char* filter, const char* defaultPath) {
 		NSOpenPanel* openDlg = [NSOpenPanel openPanel];
 		
 		[openDlg setAllowsMultipleSelection:NO];
@@ -102,13 +102,13 @@ namespace sora {
 			ulong32 count = [filesToOpen count];
 			if(count > 0) {
 				std::string fileName = [[filesToOpen objectAtIndex:0] UTF8String];
-				return sora::s2ws(fileName);
+				return fileName;
 			}
 		}
-		return L"\0";			
+		return "\0";			
 	}
 	
-	SoraWString SoraMiscToolOSX::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
+	StringType SoraMiscToolOSX::fileSaveDialog(const char* filter, const char* defaultPath, const char* defaultExt) {
 		NSSavePanel* saveDlg = [NSSavePanel savePanel];
 		
         NSString* fileExt = nil;
@@ -131,12 +131,12 @@ namespace sora {
             [fileExt release];
             
 			std::string fileName = [[saveDlg filename] UTF8String];
-			return sora::s2ws(fileName);
+			return fileName;
 		}
         [filePath release];
         [fileExt release];
         
-		return L"\0";
+		return "\0";
 		
 	}
 

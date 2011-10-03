@@ -15,6 +15,9 @@ namespace sora {
     
     class SoraObjectHandle;
     class SoraAbstractModifierAdapter;
+    class SoraPhysicBody;
+    class SoraPhysicFixtureDef;
+    class SoraPhysicBodyDef;
 
 	class SORA_API SoraObject: public SoraEventHandler {
 	public:
@@ -70,6 +73,15 @@ namespace sora {
         typedef SoraFunction<void(SoraObject*)> NotificationFunc;
         void moveToAndNotify(float x, float y, float t, const NotificationFunc& onFinish);
         
+        /**
+         * If a physic body is binded, the object would update itself and move itself to
+         * the body's position everyframe
+         **/
+        void            attachPhysicBody(SoraPhysicBody* body, bool autoRelease=false);
+        void            createPhysicBody(const SoraPhysicFixtureDef& fixtureDef, float mass, float centerX, float centerY);
+        void            detachPhysicBody();
+        SoraPhysicBody* getPhysicBody() const;
+        
     public:
         
         void addModifierAdapter(SoraAbstractModifierAdapter* adapter);
@@ -98,6 +110,9 @@ namespace sora {
         
         int32 mSubObjectSize;
         SoraStringId mName;
+        
+        bool mAutoReleasePhysicBody;
+        SoraPhysicBody* mPhysicBody;
         
     private:
         /**

@@ -79,8 +79,8 @@ namespace sora {
 		void    setRotation(float r);
 		float   getRotation() const;
 		
-		uint32*         getPixelData() const;
-        void            unlockPixelData();
+		uint32*              getPixelData() const;
+        void                 unlockPixelData();
 		SoraTextureHandle    getTexture() const;
 		
 		void addEffect(SoraImageEffect* effect);

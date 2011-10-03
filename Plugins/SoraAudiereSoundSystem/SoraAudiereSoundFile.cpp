@@ -22,7 +22,7 @@ namespace sora {
 			SORA->freeResourceFile(data);
 	}
 
-		int32 SoraAudiereMusicFile::readFile(const SoraWString& sFilePath) {
+		int32 SoraAudiereMusicFile::readFile(const StringType& sFilePath) {
 			if(isOpen()) closeFile();
             
             _parseName(sFilePath);
@@ -170,9 +170,9 @@ namespace sora {
 			return false;
 		}
 
-		void SoraAudiereMusicFile::_parseName(const SoraWString& path) {
-            SoraWString musicName;
-			SoraWString s = path;
+		void SoraAudiereMusicFile::_parseName(const StringType& path) {
+            StringType musicName;
+			StringType s = path;
 			for(size_t i=0; i<s.size(); ++i) {
 				if(s[i] == L'\\') s[i] = L'/';
 			}
@@ -191,7 +191,7 @@ namespace sora {
 				SORA->freeResourceFile(data);
 		}
 
-		int32 SoraAudiereSoundEffectFile::readFile(const SoraWString& sFilePath) {
+		int32 SoraAudiereSoundEffectFile::readFile(const StringType& sFilePath) {
 			if(isOpen()) closeFile();
             
             _parseName(sFilePath);
@@ -276,9 +276,9 @@ namespace sora {
 			return 0.f;
 		}
 
-    void SoraAudiereSoundEffectFile::_parseName(const SoraWString& path) {
-        SoraWString seName;
-        SoraWString s = path;
+    void SoraAudiereSoundEffectFile::_parseName(const StringType& path) {
+        StringType seName;
+        StringType s = path;
         for(size_t i=0; i<s.size(); ++i) {
             if(s[i] == L'\\') s[i] = L'/';
         }

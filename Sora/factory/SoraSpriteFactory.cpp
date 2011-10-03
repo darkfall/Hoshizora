@@ -143,14 +143,14 @@ namespace sora {
 		return 0;
 	}
 	
-	inline sora::IMAGE_EFFECT_MODE identToIEPlayType(const std::string& str) {
+	inline sora::ImageEffectMode identToIEPlayType(const std::string& str) {
 		if(strcmpnocase(str.c_str(), "repeat") == 0)
-			return sora::IMAGE_EFFECT_REPEAT;
+			return sora::ImageEffectRepeat;
 		else if(strcmpnocase(str.c_str(), "once") == 0)
-			return sora::IMAGE_EFFECT_ONCE;
+			return sora::ImageEffectOnce;
 		else if(strcmpnocase(str.c_str(), "pingpong") == 0)
-			return sora::IMAGE_EFFECT_PINGPONG;
-		return sora::IMAGE_EFFECT_REPEAT;
+			return sora::ImageEffectPingpong;
+		return sora::ImageEffectRepeat;
 	}
     
 	inline void parseEffects(sora::SoraSprite* pSprite, const Json::Value& effectArray) {
@@ -159,7 +159,7 @@ namespace sora {
 				Json::Value effectObj = effectArray[i];
 				
 				int32 ieType = 0;
-				sora::IMAGE_EFFECT_MODE ieMode = sora::IMAGE_EFFECT_REPEAT;
+				sora::ImageEffectMode ieMode = sora::ImageEffectRepeat;
 				if(effectObj.isMember("type")) 
 					ieType = identToIEType(effectObj["type"].asString());
 				if(ieType == 0)

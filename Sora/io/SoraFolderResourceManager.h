@@ -38,7 +38,7 @@ namespace sora {
 		StringType getName() const		{ return "FolderRM"; }
 		bool isFormatSupported(const StringType& format) const { return format.size() == 0; }
 		
-		bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder);
+		bool enumFiles(std::vector<StringType>& cont, const StringType& folder);
 	private:
 		struct folderDescription {
 			SoraPath folderName;

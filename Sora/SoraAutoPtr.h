@@ -58,6 +58,13 @@ namespace sora {
                     delete []obj;
             }
         };
+        
+        
+        struct FreeReleasePolicy {
+            static void release(void* obj) {
+                sora_free(obj);
+            }
+        };
     }
 	
     

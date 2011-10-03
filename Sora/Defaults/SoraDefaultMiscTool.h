@@ -38,12 +38,12 @@ namespace sora {
 			log_mssg(sMessage);
 		}
 		
-		SoraWString fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
-			return L"\0";
+		StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
+			return "\0";
 		}
 		
-		SoraWString fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
-			return L"\0";
+		StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
+			return "\0";
 		}
 		
 		virtual void setMainWindowHandle(ulong32 handle) { }

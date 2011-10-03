@@ -5,7 +5,7 @@
 #include "SoraEvent.h"
 #include "SoraConstantStrings.h"
 #include "SoraPlaybackEvent.h"
-
+#include "SoraString.h"
 #include "io/SoraFileBase.h"
 
 namespace sora {
@@ -13,20 +13,12 @@ namespace sora {
 	/*
 	 virtual sound file base classes
 	 */
-
-	enum SORA_SOUND_FILE_OPEN_CODE {
-		SORASOUND_SUCCESS = 1,
-		SORASOUND_FAILED_OPEN_DEVICE = -1,
-		SORASOUND_FAILED_OPEN_SOUND = -2,
-		SORASOUND_FAILED_OPEN_DISK_FILE = -4,
-		SORASOUND_FAILED_OPEN_MEMORY_FILE = -3,
-	};
     
 	class SORA_API SoraMusicFile: public SoraFileBase, public SoraPlaybackEventHandler {
 	public:
 		virtual ~SoraMusicFile() {}
 		
-		virtual int32 readFile(const SoraWString& sFilePath) = 0;
+		virtual int32 readFile(const StringType& sFilePath) = 0;
 		virtual int32 readFileMem(void* ptr, ulong32 size) = 0;
 		virtual void closeFile() = 0;
 
@@ -63,7 +55,7 @@ namespace sora {
 	public:
 		virtual ~SoraSoundEffectFile() {}
 		
-		virtual int32 readFile(const SoraWString& sFilePath) = 0;
+		virtual int32 readFile(const StringType& sFilePath) = 0;
 		virtual int32 readFileMem(void* ptr, ulong32 size) = 0;
 		virtual void closeFile() = 0;
 

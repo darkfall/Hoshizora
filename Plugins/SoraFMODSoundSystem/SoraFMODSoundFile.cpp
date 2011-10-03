@@ -55,10 +55,10 @@ namespace sora {
         bIsStream = bStream;
     }
     
-    SoraFMODMusicFile::SoraFMODMusicFile(const SoraWString& path, bool bStream) {
+    SoraFMODMusicFile::SoraFMODMusicFile(const StringType& path, bool bStream) {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
-            log_mssg(vamssg("Creating %s: No FMOD System available", ws2s(path).c_str()),
+            log_mssg(vamssg("Creating %s: No FMOD System available", path.c_str()),
 						  LOG_LEVEL_ERROR);
         bIsStream = bStream;
         
@@ -77,7 +77,7 @@ namespace sora {
                 readFileMem(data, size);
                 SORA->freeResourceFile(data);
              } else 
-                log_mssg(vamssg("Creating %s: File not exists", ws2s(path).c_str()),
+                log_mssg(vamssg("Creating %s: File not exists", path.c_str()),
 							  LOG_LEVEL_ERROR);
         } else {
             readFile(path);
@@ -88,15 +88,15 @@ namespace sora {
 		closeFile();
     }
     
-    int32 SoraFMODMusicFile::readFile(const SoraWString& path) {
+    int32 SoraFMODMusicFile::readFile(const StringType& path) {
         if(!pSystem) return 0;
         if(pSound) closeFile();
         
         FMOD_RESULT result;
         if(!bIsStream)
-            result = pSystem->createSound(ws2s(path).c_str(), FMOD_CREATESAMPLE | FMOD_SOFTWARE | FMOD_2D, 0, &pSound);
+            result = pSystem->createSound(path.c_str(), FMOD_CREATESAMPLE | FMOD_SOFTWARE | FMOD_2D, 0, &pSound);
         else 
-            result = pSystem->createStream(ws2s(path).c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM, 0, &pSound);
+            result = pSystem->createStream(path.c_str(), FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM, 0, &pSound);
         return FMOD_ERROR_CHECK(result)==FMOD_OK?1:0;
     }
     
@@ -282,10 +282,10 @@ namespace sora {
 		pitch = 0.f;
     }
     
-    SoraFMODSoundEffectFile::SoraFMODSoundEffectFile(const SoraWString& path) {
+    SoraFMODSoundEffectFile::SoraFMODSoundEffectFile(const StringType& path) {
         pSystem = SoraFMODSystem::Instance()->getSystem();
         if(!pSystem)
-            log_mssg(vamssg("Creating %s: No FMOD System available", ws2s(path).c_str()),
+            log_mssg(vamssg("Creating %s: No FMOD System available", path.c_str()),
 						  LOG_LEVEL_ERROR);
         
         pSound = NULL;
@@ -303,7 +303,7 @@ namespace sora {
                 readFileMem(data, size);
                 SORA->freeResourceFile(data);
             } else 
-                log_mssg(vamssg("Creating %s: File not exists", ws2s(path).c_str()),
+                log_mssg(vamssg("Creating %s: File not exists", path.c_str()),
 							  LOG_LEVEL_ERROR);
         } else {
             readFile(path);
@@ -323,12 +323,12 @@ namespace sora {
         }
     }
     
-    int32 SoraFMODSoundEffectFile::readFile(const SoraWString& path) {
+    int32 SoraFMODSoundEffectFile::readFile(const StringType& path) {
         if(!pSystem) return 0;
         if(pSound) closeFile();
         
         FMOD_RESULT result;
-        result = pSystem->createSound(ws2s(path).c_str(), FMOD_CREATESAMPLE | FMOD_SOFTWARE | FMOD_2D, 0, &pSound);
+        result = pSystem->createSound(path.c_str(), FMOD_CREATESAMPLE | FMOD_SOFTWARE | FMOD_2D, 0, &pSound);
     
         return FMOD_ERROR_CHECK(result)==FMOD_OK?1:0;
     }

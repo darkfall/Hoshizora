@@ -58,8 +58,8 @@ namespace sora {
         return mChannelSource;
     }
     
-    ALBuffer* SoraOALController::loadBuffer(const SoraWString& file) {
-        NSString* path = [[NSString alloc] initWithUTF8String:ws2s(file).c_str()];
+    ALBuffer* SoraOALController::loadBuffer(const StringType& file) {
+        NSString* path = [[NSString alloc] initWithUTF8String:file.c_str()];
         
         ALBuffer* buffer = [[[OpenALManager sharedInstance] bufferFromFile:path] retain];
         if(buffer) {

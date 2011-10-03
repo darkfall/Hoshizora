@@ -15,7 +15,7 @@ namespace sora {
         mMusicTrack = [[OALAudioTrack alloc] init];
     }
     
-    SoraiOSMusicFile::SoraiOSMusicFile(const SoraWString& sFilePath, bool bStream) {
+    SoraiOSMusicFile::SoraiOSMusicFile(const StringType& sFilePath, bool bStream) {
         bIsStream = bStream;
         mMusicTrack = [[OALAudioTrack alloc] init];
         
@@ -27,9 +27,9 @@ namespace sora {
             [mMusicTrack release];
     }
     
-    int32 SoraiOSMusicFile::readFile(const SoraWString& sFilePath) {
+    int32 SoraiOSMusicFile::readFile(const StringType& sFilePath) {
         if(!bIsStream) {
-            NSString* path = [[[NSString alloc] initWithUTF8String:ws2s(sFilePath).c_str()] retain];
+            NSString* path = [[[NSString alloc] initWithUTF8String:sFilePath.c_str()] retain];
             if(mMusicTrack) {
                 bool result = [mMusicTrack preloadFile: path];
                 [path release];
@@ -146,7 +146,7 @@ namespace sora {
         mPan = 0.f;
     }
     
-    SoraiOSSoundEffectFile::SoraiOSSoundEffectFile(const SoraWString& path) {
+    SoraiOSSoundEffectFile::SoraiOSSoundEffectFile(const StringType& path) {
         readFile(path);
         mRepeat = false;
         mVolume = 1.f;
@@ -159,7 +159,7 @@ namespace sora {
             SoraOALController::releaseBuffer(mBuffer);
     }
     
-    int32 SoraiOSSoundEffectFile::readFile(const SoraWString& sFilePath) {
+    int32 SoraiOSSoundEffectFile::readFile(const StringType& sFilePath) {
         mBuffer = SoraOALController::loadBuffer(sFilePath);
         return mBuffer != nil;
     }

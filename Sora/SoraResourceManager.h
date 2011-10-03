@@ -29,7 +29,7 @@ namespace sora {
 		 */
 		virtual bool isFormatSupported(const StringType& format) const = 0;
 		
-		virtual bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder) { return false; }
+		virtual bool enumFiles(std::vector<StringType>& cont, const StringType& folder) { return false; }
         
         static SoraResourceHandle LoadAndAttachResourcePack(const StringType& file);
         static void DetachResourcePack(SoraResourceHandle handle);

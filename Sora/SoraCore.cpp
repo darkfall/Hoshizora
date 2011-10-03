@@ -34,6 +34,8 @@
 #include "SoraHotkey.h"
 #include "SoraLogger.h"
 
+#include "physics/SoraPhysicWorld.h"
+
 #ifdef SORA_ENABLE_MULTI_THREAD
 #include "SoraMutex.h"
 #endif
@@ -174,6 +176,7 @@ namespace sora {
 		pFontManager = NULL;
 		pRenderSystem = NULL;
 		pSoundSystem = NULL;
+        pPhysicWorld = NULL;
         
 		mMainWindow = NULL;
 		
@@ -360,14 +363,14 @@ namespace sora {
 		sora_assert(bInitialized == true);
         float dt = bFrameSync?1.f:pTimer->getDelta();
 #ifdef PROFILE_CORE_UPDATE
-		PROFILE("CORE_UPDATE");
+		PROFILE("CoreUpdate");
 #endif
 
      //   try {
             if(!bPaused && !bPauseSound) {
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UPDATE_SOUNDSYSTEM");
+                    PROFILE("UpdateSoundSystem");
 #endif
                     if(!bSeperateSoundSystemThread) {
                         if(pSoundSystem) 
@@ -386,7 +389,7 @@ namespace sora {
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UPDATE_MAINWINDOW");
+                    PROFILE("UpdateMainWindow");
 #endif
                     SoraSimpleTimerManager::Instance()->update(dt);
                     
@@ -395,7 +398,7 @@ namespace sora {
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UPDATE_EVENT_MANAGER");
+                    PROFILE("UpdateEventManager");
 #endif
                     SoraEventManager::Instance()->update(dt);
                     SoraEventWorld::defaultWorld().update(dt);
@@ -403,16 +406,23 @@ namespace sora {
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("FRAMELISTENER_START");
+                    PROFILE("FrameListenerStart");
 #endif
                     _frameListenerStart();
                 }
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UPDATE_AUTO_UPDATE_OBJS");
+                    PROFILE("UpdateAutoUpdate");
 #endif
                     SoraAutoUpdate::updateList(dt);
+                }
+                
+                if(pPhysicWorld) {
+#ifdef PROFILE_CORE_UPDATE
+                    PROFILE("UpdatePhysicalWorld");
+#endif
+                        pPhysicWorld->update(dt);
                 }
                 
                 {
@@ -427,7 +437,7 @@ namespace sora {
             if(!bPaused && !bPauseRender) {
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("RENDER_MAINWINDOW");
+                    PROFILE("RenderMainWindow");
 #endif
                     mMainWindow->renderFunc();
                 }
@@ -478,28 +488,27 @@ namespace sora {
 	void SoraCore::_checkCoreComponents() {
 		if(!pInput) {
 			bHasInput = false;
-			_postError("SoraCore::CheckCoreComponents: No Input provided");
-			DebugPtr->warning("No Input available, input related API disabled");
+			log_warning("SoraCore::CheckCoreComponents: No Input provided");
 		}
 
 		if(!pPluginManager) {
 			pPluginManager = new SoraPluginManager;
-			_postError("SoraCore::CheckCoreComponents: No PluginManager registered, using default plugin manager");
+			log_warning("SoraCore::CheckCoreComponents: No PluginManager registered, using default plugin manager");
 		}
 
 		if(!pMiscTool) {
 			pMiscTool = new SoraDefaultMiscTool;
-			_postError("SoraCore::CheckCoreComponents: No MiscTool registered, using default tool");
+			log_warning("SoraCore::CheckCoreComponents: No MiscTool registered, using default tool");
 		}
 
 		if(!pFontManager) {
 			_postError("SoraCore::CheckCoreComponents: no FontManager available");
-			DebugPtr->warning("No FontManager available, font related API disabled");
+			log_warning("No FontManager available, font related API disabled");
 		}
 		
 		if(!pSoundSystem) {
 			_postError("SoraCore::CheckCoreComponents: no SoundSystem available");
-			DebugPtr->warning("No SoundSystem available, sound related API disabled");
+			log_warning("No SoundSystem available, sound related API disabled");
 		}
 
 		// no render system available, fatal error
@@ -556,7 +565,8 @@ namespace sora {
 		if(pPluginManager) delete pPluginManager;
 		if(pTimer) delete pTimer;
 		if(pFontManager) delete pFontManager;
-
+        if(pPhysicWorld) delete pPhysicWorld;
+        
 		if(bInitialized) {
 			pRenderSystem->shutdown();
 			delete pRenderSystem;
@@ -634,8 +644,8 @@ namespace sora {
 			}
 		}
         
-        SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
-		SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
+        SET_ENV_INT("ScreenWidth", iScreenWidth);
+		SET_ENV_INT("ScreenHeight", iScreenHeight);
 		
         g_CurrentTransform.set(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
         g_CurrentClipping.set(0, 0, iScreenWidth, iScreenHeight);
@@ -728,6 +738,11 @@ namespace sora {
 		pFontManager = fontManager;
 	}
     
+    void SoraCore::registerPhysicWorld(SoraPhysicWorld* physicWorld) {
+        if(pPhysicWorld) delete pPhysicWorld;
+        pPhysicWorld = physicWorld;
+    }
+    
     SoraRenderSystem* SoraCore::getRenderSystem() const {
         return pRenderSystem;
     }
@@ -754,6 +769,10 @@ namespace sora {
     
     SoraSoundSystem* SoraCore::getSoundSystem() const {
         return pSoundSystem;
+    }
+    
+    SoraPhysicWorld* SoraCore::getPhysicWorld() const {
+        return pPhysicWorld;
     }
 
 	float SoraCore::getFPS() {
@@ -1441,7 +1460,7 @@ namespace sora {
 		pFontManager->releaseFont(font);
 	}
 	
-	void SoraCore::enumFilesInFolder(std::vector<SoraWString>& cont, const StringType& folder) {
+	void SoraCore::enumFilesInFolder(std::vector<StringType>& cont, const StringType& folder) {
 		pResourceFileFinder->enumFiles(cont, folder);
 	}
 

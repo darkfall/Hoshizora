@@ -35,6 +35,7 @@ namespace sora {
     class SoraWindowInfoBase;
     class SoraMutexLock;
     class SoraInputListener;
+    class SoraPhysicWorld;
     
 	class SORA_API SoraCore {
 	protected:
@@ -74,15 +75,15 @@ namespace sora {
 		void resume();
 		bool isPaused();
 
-		void registerRenderSystem	(SoraRenderSystem* pRenderSystem);
-		void registerResourceManager(SoraResourceManager* pResourceManager);
-		void registerInput			(SoraInput* pInput);
-		void registerFontManager	(SoraFontManager* pFontManager);
-		void registerSoundSystem	(SoraSoundSystem* pSoundSystem);
-        
-		void registerMiscTool		(SoraMiscTool* pMiscTool);
-		void registerPluginManager  (SoraPluginManager* pPluginManager);
-		void registerTimer			(SoraTimer* pTimer);
+		void registerRenderSystem	(SoraRenderSystem* renderSystem);
+		void registerResourceManager(SoraResourceManager* resourceManager);
+		void registerInput			(SoraInput* input);
+		void registerFontManager	(SoraFontManager* fontManager);
+		void registerSoundSystem	(SoraSoundSystem* soundSystem);
+		void registerMiscTool		(SoraMiscTool* miscTool);
+		void registerPluginManager  (SoraPluginManager* pluginManager);
+		void registerTimer			(SoraTimer* timer);
+        void registerPhysicWorld    (SoraPhysicWorld* physicWorld);
             
         SoraRenderSystem*   getRenderSystem() const;
         SoraInput*          getInput() const;
@@ -91,6 +92,7 @@ namespace sora {
         SoraTimer*          getTimer() const;
         SoraFontManager*    getFontManager() const;
         SoraSoundSystem*    getSoundSystem() const;
+        SoraPhysicWorld*    getPhysicWorld() const;
         
 		void        registerPlugin  (SoraPlugin* pPlugin);
 		SoraPlugin* unistallPlugin  (SoraPlugin* pPlugin);
@@ -203,7 +205,6 @@ namespace sora {
 		
 		static void    simulateKey(int32 key, int32 state);
 
-
 		int32 getScreenWidth();
 		int32 getScreenHeight();
 
@@ -213,7 +214,7 @@ namespace sora {
 		void*               readResourceFile		(const StringType& file, ulong32 pos, ulong32 size);
 		ulong32             getResourceFileSize     (const StringType& file);
 		void                freeResourceFile		(void* p);
-		void                enumFilesInFolder		(std::vector<SoraWString>& cont, const StringType& folder);
+		void                enumFilesInFolder		(std::vector<StringType>& cont, const StringType& folder);
 
 #ifdef SORA_ENABLE_MULTI_THREAD
         void  loadResourceFileAsync   (const StringType& file, const SoraResourceFileFinder::AsyncNotification& handler, void* puserdata);
@@ -330,7 +331,6 @@ namespace sora {
         static SoraCore* mInstance;
         
 		inline void _registerCoreCmds();
-		
 		inline void _checkCoreComponents();
 		inline void _postError(const SoraString& str);
 		inline void _initializeTimer();
@@ -350,6 +350,7 @@ namespace sora {
 		SoraTimer*				pTimer;
 		SoraFontManager*		pFontManager;
 		SoraSoundSystem*		pSoundSystem;
+        SoraPhysicWorld*        pPhysicWorld;
 
 		bool bMainWindowSet;
 		bool bMessageBoxErrorPost;
@@ -387,16 +388,9 @@ namespace sora {
         
 #ifdef SORA_ENABLE_MULTI_THREAD
         bool bMultithreadedRendering;
-        SoraMutex mRenderingLock;
+        SoraMutexLock mRenderingLock;
 #endif
     };
-
-    inline SORA_API SoraCore* InitAndCreateSoraCore(SoraWindowInfoBase* window, const SoraCore::Feature& param = SoraCore::Feature()) {
-        SoraCore* instance = SoraCore::Instance();
-        instance->init(param);
-        instance->createWindow(window);
-        return instance;
-    }
     
     typedef SoraCore::Feature SoraCoreFeature;
         

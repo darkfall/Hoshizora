@@ -3,6 +3,8 @@
 #include "SoraObjectHandle.h"
 #include "SoraModifierAdapter.h"
 #include "modifiers/SoraObjectModifiers.h"
+#include "physics/SoraPhysicBody.h"
+#include "physics/SoraPhysicWorld.h"
 
 namespace sora {
 
@@ -12,7 +14,9 @@ namespace sora {
     mNext(NULL),
     mPosition(SoraMovable()),
     mType(0), 
-    mSubObjectSize(0) {
+    mSubObjectSize(0),
+    mAutoReleasePhysicBody(true),
+    mPhysicBody(0) {
         mUniqueId = GetNextUniqueId();
         mHandleId = FindFreeHandleSlot();
         
@@ -31,6 +35,10 @@ namespace sora {
         mSubObjects = NULL;
         mParent = NULL;
         FreeHandleSlot(mHandleId);
+        
+        if(mAutoReleasePhysicBody && mPhysicBody) {
+            SoraPhysicWorld::DestroyBody(mPhysicBody);
+        }
 	}
 	
 	int32 SoraObject::update(float dt) {
@@ -42,16 +50,23 @@ namespace sora {
             }
         }
         
-        ModifierAdapterList::iterator it = mModifierAdapters.begin();
-        ModifierAdapterList::iterator end = mModifierAdapters.end();
-        while(it != end) {
-            SoraAbstractModifierAdapter* adapter = (*it);
-            if(adapter->update(dt)) {
-                delete adapter;
-                it = mModifierAdapters.erase(it);
-                continue;
+        if(mModifierAdapters.size() != 0) {
+            ModifierAdapterList::iterator it = mModifierAdapters.begin();
+            ModifierAdapterList::iterator end = mModifierAdapters.end();
+            while(it != end) {
+                SoraAbstractModifierAdapter* adapter = (*it);
+                if(adapter->update(dt)) {
+                    delete adapter;
+                    it = mModifierAdapters.erase(it);
+                    continue;
+                }
+                ++it;
             }
-            ++it;
+        }
+        
+        if(mPhysicBody) {
+            SoraVector pos = mPhysicBody->getPosition();
+            setPosition(pos.x, pos.y);
         }
 
 		return 0;
@@ -243,6 +258,32 @@ namespace sora {
    
     SoraStringId SoraObject::getName() const { 
         return mName;
+    }
+    
+    void SoraObject::attachPhysicBody(SoraPhysicBody* body, bool autoRelease) {
+        mPhysicBody = body;
+        mAutoReleasePhysicBody = autoRelease;
+    }
+    
+    void SoraObject::createPhysicBody(const SoraPhysicFixtureDef& fixtureDef, float mass, float centerX, float centerY) {
+        SoraPhysicBodyDef def;
+        def.mType = SoraPhysicBodyDef::DynamicBody;
+        def.mPosition = SoraVector(getPositionX(), getPositionY());
+        
+        mPhysicBody = sora::SoraPhysicWorld::CreateBody(def);
+        if(mPhysicBody) {
+            mPhysicBody->createFixture(fixtureDef);
+            mPhysicBody->setMass(mass, centerX, centerY);
+            mAutoReleasePhysicBody = true;
+        }
+    }
+    
+    void SoraObject::detachPhysicBody() {
+        mPhysicBody = 0;
+    }
+    
+    SoraPhysicBody* SoraObject::getPhysicBody() const {
+        return mPhysicBody;
     }
     
     void SoraObject::addModifierAdapter(SoraAbstractModifierAdapter* adapter) {

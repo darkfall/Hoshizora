@@ -111,10 +111,10 @@ namespace sora {
         }
 	}
 	
-	bool SoraFolderResourceManager::enumFiles(std::vector<SoraWString>& cont, const StringType& folder) {
+	bool SoraFolderResourceManager::enumFiles(std::vector<StringType>& cont, const StringType& folder) {
         SoraDirectoryIterator itDir(folder.get());
         while(!itDir.isEnd()) {
-            cont.push_back(itDir.path().toWString());
+            cont.push_back(itDir.path().toString());
             ++itDir;
         }
 		return true;

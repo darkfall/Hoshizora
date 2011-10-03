@@ -132,7 +132,7 @@ namespace sora {
 		}
 	}
 	
-	bool SoraResourceFileFinder::enumFiles(std::vector<SoraWString>& cont, const StringType& folder) {
+	bool SoraResourceFileFinder::enumFiles(std::vector<StringType>& cont, const StringType& folder) {
 		for(size_t i=1; i<mResourceManagers.size(); ++i) {
 			SoraResourceManager* prm = mResourceManagers[i].get();
 			

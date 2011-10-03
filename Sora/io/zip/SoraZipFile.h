@@ -27,7 +27,7 @@ namespace sora {
         ulong32 getFileSize(const StringType& filename);
         ulong32 getFileCRC(const StringType& filename);
 		
-        bool enumFiles(std::vector<SoraWString>& cont, const StringType& folder);
+        bool enumFiles(std::vector<StringType>& cont, const StringType& folder);
 
 	private:
 		void _releaseFile();

@@ -109,7 +109,7 @@ namespace sora {
 		return format.get() == "zip";
 	}
 	
-	bool SoraZipResourceManager::enumFiles(std::vector<SoraWString>& cont, const StringType& folder) { 
+	bool SoraZipResourceManager::enumFiles(std::vector<StringType>& cont, const StringType& folder) { 
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
 			if(p->second->enumFiles(cont, folder))
