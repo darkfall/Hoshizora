@@ -14,7 +14,7 @@
 
 #include "SoraWindowInfo.h"
 
-#include "SoraSprite.h"
+#include "SoraVertex.h"
 #include "SoraTexture.h"
 #include "SoraTimer.h"
 #include "SoraShader.h"

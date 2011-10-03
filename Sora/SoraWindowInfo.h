@@ -3,7 +3,6 @@
 
 #include "SoraPlatform.h"
 #include "SoraEvent.h"
-#include "SoraException.h"
 
 namespace sora {
 

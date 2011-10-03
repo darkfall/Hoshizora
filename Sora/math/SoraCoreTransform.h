@@ -8,11 +8,10 @@
  *
  */
 
-#ifndef CORE_TRANSFORM_H
-#define CORE_TRANSFORM_H
+#ifndef SoraCoreTransform_H
+#define SoraCoreTransform_H
 
 #include "SoraPlatform.h"
-#include "SoraException.h"
 
 namespace sora {
 	enum {

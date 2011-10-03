@@ -3,6 +3,8 @@
 #include "guichan/exception.hpp"
 #include "guichan/rectangle.hpp"
 
+#include "SoraSprite.h"
+
 namespace gcn
 {
 

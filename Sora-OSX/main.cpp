@@ -27,6 +27,9 @@
 #include "SoraTask.h"
 #include "SoraShape.h"
 
+#include "SoraLogger.h"
+#include "SoraResourceFile.h"
+
 float lx, ly, rx, ry;
 float maxsize, maxiteration, iterinc;
 float cr, cg, cb;
@@ -136,7 +139,7 @@ public:
             mShader->setParameter1f("iteration_increment", iterinc);
         }
         
-        mText.setText(sora::s2ws(sora::vamssg("lx: %.2f ly: %.2f rx: %.2f ry: %.2f\nmax_size: %.2f max_iteration: %.2f iteration_increment: %.2f", lx, ly, rx, ry, maxsize, maxiteration, iterinc)));
+        mText.setText(sora::StringType(sora::vamssg("lx: %.2f ly: %.2f rx: %.2f ry: %.2f\nmax_size: %.2f max_iteration: %.2f iteration_increment: %.2f", lx, ly, rx, ry, maxsize, maxiteration, iterinc)).getw());
         mText.enableRenderToSprite(true);
         
     }
@@ -173,7 +176,10 @@ public:
     }
     
     void load(sora::SoraTask* task) {
-        mShape = sora::SoraShape::Line(200.f, 200.f, 800.f, 800.f, 30.f, 0xFFFFFFFF);
+     
+        mShape = sora::SoraShape::Arc(200.f, 200.f, 150.f, 0.f, sora::DegreeToRadius(90.f), 3.f, 0xFFFFFFFF);
+        mShape.enableOutline(3.f, 0xFFFF0000);
+        mShape.setClosed(true);
         
         sora::SoraResourceFileAuto fontData("Bank Gothic Medium BT.ttf");
         mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
@@ -231,7 +237,7 @@ private:
 
 int main(int argc, char* argv[]) {    
         
-    sora::SoraGameAppDef def(new mainWindow);
+    sora::SoraGameAppDef def("config.xml");
     sora::SoraGameApp app(def);
     
     app.addState(new GameInitState, "init");

@@ -38,6 +38,15 @@ namespace sora {
          **/
         explicit SoraGameAppDef(const StringType& loadFromConfig /* json or xml or ini */);
         
+        SoraGameAppDef(int32 wwidth, int32 wheight, int32 wposx, int32 wposy, bool windowedMode, bool hideMouse, const std::string& title):
+        WindowWidth(wwidth),
+        WindowHeight(wheight),
+        WindowPosX(wposx),
+        WindowPosY(wposy),
+        WindowMode(windowedMode),
+        HideMouse(hideMouse),
+        WindowTitle(title) {}
+        
         // window size
         int32 WindowWidth, WindowHeight;
         // window pos

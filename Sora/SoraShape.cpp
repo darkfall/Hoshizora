@@ -8,13 +8,12 @@
 
 #include "SoraShape.h"
 #include "SoraCore.h"
-
+#include "SoraSprite.h"
 
 namespace sora {
     
     SoraShape::SoraShape(SoraTextureHandle handle, int32 mode):
     mCompiled(false),
-    mCompiledVertex(0),
     mRenderMode(mode),
     mTexture(handle),
     mOutline(false),
@@ -72,20 +71,16 @@ namespace sora {
         }
     }
     
-    SoraVertex* SoraShape::compile() {
+    void SoraShape::compile() {
         if(mVertices.size() == 0)
-            return 0;
+            return;
         
-        if(mCompiled && mCompiledVertex)
-            return mCompiledVertex;
+        if(mCompiled)
+            return;
         
-        SoraVertex* vertex;
-        vertex = new SoraVertex[mVertices.size()+1];
-        sora_assert(vertex);
-        
-        VertexArray::iterator it = mVertices.begin();
-        VertexArray::iterator end = mVertices.end();
-        
+        if(!mTexture)
+            return;
+       
         int32 textureWidth = 0;
         int32 textureHeight = 0;
         if(mTexture) {
@@ -93,28 +88,20 @@ namespace sora {
             textureHeight = SoraTexture::GetOriginalHeight(mTexture);
         }
         
-        //int index = 0;
-        SoraVertex* tmpVertex = vertex;
-        for(; it != end; ++it) {
-            memcpy(tmpVertex, &(*it), sizeof(SoraVertex));
-            
-            if(mTexture && tmpVertex->tx == 0.f && tmpVertex->ty == 0.f) {
-                tmpVertex->tx = (float)tmpVertex->x / textureWidth;
-                tmpVertex->ty = (float)tmpVertex->y / textureHeight;
+        VertexArray::iterator it = mVertices.begin();
+        VertexArray::iterator end = mVertices.end();
+        
+        for(; it != end; ++it) {            
+            if(mTexture && it->tx == 0.f && it->ty == 0.f) {
+                it->tx = (float)it->x / textureWidth;
+                it->ty = (float)it->y / textureHeight;
             }
-            
-            ++tmpVertex;
         }
-        memcpy(tmpVertex, &(*mVertices.begin()), sizeof(SoraVertex));
-        
-        mCompiledVertex = vertex;
-        
+    
         mCompiled = true;
         
         if(mRenderToSprite && mSprite && mRenderTarget)
             spriteRender();
-
-        return mCompiledVertex;
     }
     
     void SoraShape::setRenderMode(int32 mode) {
@@ -126,25 +113,28 @@ namespace sora {
     }
     
     void SoraShape::spriteRender() {
-        compile();
+        if(!mCompiled && mTexture)
+            compile();
+        
         SoraCore* core = SoraCore::Instance();
 
         core->beginScene(0, mRenderTarget);
         if(!mOutlineOnly) {
-            core->renderWithVertices(mTexture, BLEND_DEFAULT, mCompiledVertex, mVertices.size(), mRenderMode);
+            core->renderWithVertices(mTexture, BLEND_DEFAULT, mVertices.begin(), mVertices.size(), mRenderMode);
         }
         
         if(mOutline) {
-            SoraVertex* vertex = mCompiledVertex.get();
-            int32 end = mVertices.size();
-            if(!mClosed) 
-                end -= 1;
+            VertexArray::iterator it = mVertices.begin();
+            VertexArray::iterator end = mVertices.end() - 1;
             
-            for(int i=0; i<end; ++i){
-                SoraVertex* next = vertex + 1;
-                core->renderLine(vertex->x, vertex->y, next->x, next->y, mOutlineColor, mOutlineWidth);
-                
-                ++vertex;
+            for(; it != end; ++it) {
+                core->renderLine(it->x, it->y, (it+1)->x, (it+1)->y, mOutlineColor, mOutlineWidth);
+            }
+            if(mClosed) {
+                core->renderLine(mVertices.back().x,
+                                 mVertices.back().y,
+                                 mVertices.front().x,
+                                 mVertices.front().y, mOutlineColor, mOutlineWidth);
             }
         }
         core->endScene();
@@ -158,26 +148,28 @@ namespace sora {
             return;
         }
         
-        if(!mCompiled || !mCompiledVertex)
+        if(!mCompiled && mTexture != 0)
             compile();
-        
-        sora_assert(mCompiled && mCompiledVertex);
-        
+                
         core->pushTransformMatrix();
         core->setTransform(0.f, 0.f, getPositionX(), getPositionY());
         
         if(!mOutlineOnly) {
-            core->renderWithVertices(mTexture, BLEND_DEFAULT, mCompiledVertex, mVertices.size(), mRenderMode);
+            core->renderWithVertices(mTexture, BLEND_DEFAULT, mVertices.begin(), mVertices.size(), mRenderMode);
         }
         
         if(mOutline) {
-            SoraVertex* vertex = mCompiledVertex.get();
-            int32 end = mClosed ? mVertices.size(): mVertices.size() - 1;
-            for(int i=0; i<end; ++i){
-                SoraVertex* next = vertex + 1;
-                core->renderLine(vertex->x, vertex->y, next->x, next->y, mOutlineColor, mOutlineWidth);
-                
-                ++vertex;
+            VertexArray::iterator it = mVertices.begin();
+            VertexArray::iterator end = mVertices.end() - 1;
+            
+            for(; it != end; ++it) {
+                core->renderLine(it->x, it->y, (it+1)->x, (it+1)->y, mOutlineColor, mOutlineWidth);
+            }
+            if(mClosed) {
+                core->renderLine(mVertices.back().x,
+                                 mVertices.back().y,
+                                 mVertices.front().x,
+                                 mVertices.front().y, mOutlineColor, mOutlineWidth);
             }
         }
 
@@ -218,7 +210,6 @@ namespace sora {
         if(this != &rhs) {
             mVertices = rhs.mVertices;
             mCompiled = false;
-            mCompiledVertex.reset();
             
             mRenderMode = rhs.mRenderMode;
             mTexture = rhs.mTexture;
@@ -228,14 +219,7 @@ namespace sora {
             mOutlineColor = rhs.mOutlineColor;
             mOutlineOnly = rhs.mOutlineOnly;
             
-            if(mRenderTarget) {
-                sora::SoraCore::Instance()->freeTarget(mRenderTarget);
-                mRenderTarget = 0;
-            }
-            if(mSprite) {
-                delete mSprite;
-                mSprite = 0;
-            }
+            this->enableRenderToSprite(rhs.mRenderToSprite);
         }
     }
 
@@ -294,6 +278,10 @@ namespace sora {
                 mSprite = 0;
             }
         }
+    }
+    
+    const SoraArray<SoraVertex>& SoraShape::getVertexArray() const {
+        return mVertices;
     }
     
     SoraSprite* SoraShape::getSprite() const {

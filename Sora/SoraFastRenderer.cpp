@@ -9,6 +9,7 @@
 #include "SoraFastRenderer.h"
 #include "SoraCore.h"
 #include "SoraException.h"
+#include "SoraSprite.h"
 
 namespace sora {
     
@@ -92,5 +93,9 @@ namespace sora {
             }
             ++itSprite;
         }
+    }
+    
+    void SoraFastRenderer::RenderSprite(const StringType& path, float x, float y, float r, float sh, float sr) {
+        SoraFastRenderer::RenderSprite(path, x, y, r, sh, sr);
     }
 } // namespace sora

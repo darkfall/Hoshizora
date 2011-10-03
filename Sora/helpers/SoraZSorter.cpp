@@ -9,6 +9,7 @@
 
 #include "SoraZSorter.h"
 #include "SoraCore.h"
+#include "SoraSprite.h"
 
 namespace sora {
 	

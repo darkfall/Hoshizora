@@ -10,19 +10,20 @@
 #include "SoraCanvas.h"
 #include "SoraCore.h"
 #include "SoraModifierAdapter.h"
+#include "SoraLogger.h"
 
 namespace sora {
         
     SoraBaseCanvas::SoraBaseCanvas(int32 w, int32 h, bool bDepthBuffer) {
         canvasTarget = SORA->createTarget(w, h, bDepthBuffer);
 		if(!canvasTarget) {
-			log_mssg("Error creating render target");
+			log_mssg("SoraBaseCanvas: Error creating render target");
             return;
         }
         pCanvasSprite = new SoraSprite(0);
 		  
 		if(!canvasTarget || !pCanvasSprite) {
-            log_mssg("Error creating render target");
+            log_mssg("SoraBaseCanvas: Error creating render target");
             return;
         }
     }

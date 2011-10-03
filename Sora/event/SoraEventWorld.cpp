@@ -23,7 +23,7 @@ namespace sora {
             mImpl.reset(new SoraEventWorldImpl());
 #else 
             mImpl.reset(new SoraEventWorldImpl());
-            THROW_SORA_EXCEPTION(RuntimeException, "You must enable SORA_ENALB_MULTI_THREAD to use multi threaded EventWorld");
+            THROW_SORA_EXCEPTION(RuntimeException, "You must enable SORA_ENALBE_MULTI_THREAD to use multi threaded EventWorld");
 #endif
         } else {
             mImpl.reset(new SoraEventWorldImpl());

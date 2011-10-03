@@ -2,7 +2,6 @@
 #define SORA_RESOURCE_MANAGER_H
 
 #include "SoraPlatform.h"
-#include "SoraException.h"
 #include "SoraString.h"
 #include "SoraFunction.h"
 

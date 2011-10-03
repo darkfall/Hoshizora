@@ -11,7 +11,8 @@
 #define SORA_ZSORTER_H_
 
 #include "SoraPlatform.h"
-#include "SoraSprite.h"
+#include "SoraVertex.h"
+#include "SoraShader.h"
 
 namespace sora {
 	

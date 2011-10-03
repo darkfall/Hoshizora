@@ -8,6 +8,7 @@
 
 #include "SoraShaderEnabled.h"
 #include "SoraCore.h"
+#include "SoraLogger.h"
 
 namespace sora {
     
@@ -96,7 +97,7 @@ namespace sora {
         if(!mShaderContext) {
             mShaderContext = SoraCore::Instance()->createShaderContext();
             if(!mShaderContext)
-                log_error("error creating shader context");
+                log_error("SoraShaderEnabledObject: error creating shader context");
         }
     }
     

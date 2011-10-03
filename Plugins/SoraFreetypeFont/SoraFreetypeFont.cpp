@@ -1,4 +1,5 @@
 #include "SoraFreetypeFont.h"
+#include "SoraSprite.h"
 
 namespace sora {
 	

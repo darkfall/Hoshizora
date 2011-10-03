@@ -20,6 +20,9 @@
 #include "SoraInfiniteRendererCallback.h"
 #include "SoraRenderSystemExtension.h"
 #include "SoraOGLKeyPoll.h"
+#include "SoraEnvValues.h"
+
+#include "SoraSprite.h"
 
 #ifdef SORA_USE_SHADER
 #include "SoraShader/SoraCGGLShader.h"
@@ -849,7 +852,7 @@ namespace sora{
 		
 		currShader = context;
 		if(!currShader->attachShaderList()) {
-			log_mssg("SoraOGLRenderer: Error attaching shader list");
+			log_error("SoraOGLRenderer: Error attaching shader list");
 		}
 	}
 
@@ -858,7 +861,7 @@ namespace sora{
 			return;
 		
 		if(!currShader->detachShaderList())
-			SoraCore::Instance()->log("SoraOGLRenderer: Error detaching shader list");
+			log_error("SoraOGLRenderer: Error detaching shader list");
 		flush();
 		currShader = 0;
 	}

@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef CORE_TRANSFORMER_H_
-#define CORE_TRANSFORMER_H_
+#ifndef SoraCoreTransformer_H
+#define SoraCoreTransformer_H
 
 #include "SoraPlatform.h"
 #include "SoraMath.h"

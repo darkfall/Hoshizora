@@ -9,6 +9,7 @@
 #endif
 
 #include "SoraPhysicalObject.h"
+#include "SoraFrameListener.h"
 
 namespace sora {
     

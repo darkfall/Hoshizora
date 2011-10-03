@@ -11,6 +11,7 @@
 #include "SoraOGLRenderTarget.h"
 #include "SoraTexture.h"
 #include "SoraCore.h"
+#include "SoraLogger.h"
 
 #ifdef WIN32
 #include <GL/GL.h>
@@ -67,7 +68,7 @@ SoraRenderTargetOG::SoraRenderTargetOG(int32 _w, int32 _h, bool _zbuffer):
 		glDisable(GL_TEXTURE_2D);
 		
 		if(err != 0)
-			SORA->log("Error creating Render Target");
+			log_error("SoraOGLRenderTarget: Error creating Render Target");
 #endif
 }
 
@@ -92,7 +93,7 @@ void SoraRenderTargetOG::attachToRender() {
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frameBuffer);
 	GLuint gl_error;
 	if((gl_error = glGetError()) != GL_NO_ERROR) {
-	    SORA->log("error detach rendtarget");
+	    log_error("SoraOGLRenderTarget: error detach rendtarget");
 	}
 #endif
 }
@@ -102,7 +103,7 @@ void SoraRenderTargetOG::detachFromRender() {
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
     GLuint gl_error;
     if((gl_error = glGetError()) != GL_NO_ERROR) {
-	    SORA->log("error detach rendtarget");
+	    log_error("SoraOGLRenderTarget: error detach rendtarget");
 	}
 #endif
 }

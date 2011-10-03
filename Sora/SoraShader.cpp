@@ -10,6 +10,7 @@
 #include "SoraShader.h"
 #include "SoraShaderManager.h"
 #include "SoraCore.h"
+#include "SoraLogger.h"
 
 namespace sora {
 

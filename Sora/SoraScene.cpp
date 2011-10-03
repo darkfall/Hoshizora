@@ -8,7 +8,7 @@
 
 #include "SoraScene.h"
 #include "SoraCore.h"
-
+#include "SoraLogger.h"
 #include "Modifiers/SoraObjectModifiers.h"
 
 namespace sora {
@@ -152,7 +152,7 @@ namespace sora {
             mLayers.insert(std::make_pair(layerA->getLayerDepth(), layerA));
             mLayers.insert(std::make_pair(layerB->getLayerDepth(), layerB));
         } else {
-            DebugPtr->error(vamssg("Error combining layer %d and %d", layer1, layer2));
+            log_warning(vamssg("SoraScene: Error combining layer %d and %d", layer1, layer2));
         }
     }
     

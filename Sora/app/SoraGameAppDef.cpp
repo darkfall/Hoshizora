@@ -8,7 +8,10 @@
 
 #include "SoraGameAppDef.h"
 #include "SoraCore.h"
+#include "SoraLogger.h"
+
 #include "config/SoraConfigParser.h"
+#include "helpers/SoraBooter.h"
 
 namespace sora {
     
@@ -63,6 +66,13 @@ namespace sora {
                                         parser.getBool("seperate_sound_thread", false),
                                         parser.getBool("debug_render", false));
                 SoraCore::Instance()->init(feature);
+                
+                if(parser.getBool("load_plugin", false)) {
+                    std::string plugin_path = parser.getString("plugin_path");
+                    if(!plugin_path.empty()) {
+                        SoraBooter::loadExPlugins(plugin_path);
+                    }
+                }
             }
         }
     }

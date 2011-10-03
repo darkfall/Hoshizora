@@ -12,8 +12,9 @@
 
 #include "SoraGUIChan/guichansora.hpp"
 #include "SoraGUIChan/guichan.hpp"
-
 #include "SoraCore.h"
+#include "SoraFrameListener.h"
+#include "SoraLogger.h"
 
 namespace sora {
 		

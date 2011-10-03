@@ -11,12 +11,11 @@
 
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
-#include "SoraEvent.h"
-#include "SoraDelegate.h"
-#include "SoraSprite.h"
 #include "function/SoraFunction.h"
 
 namespace sora {
+    
+    class SoraSprite;
     
     class SoraFullscreenBufferHandler: public SoraSingleton<SoraFullscreenBufferHandler> {
     protected:  

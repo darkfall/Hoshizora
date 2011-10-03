@@ -16,6 +16,7 @@
 #include "SoraCore.h"
 #include "SoraFont.h"
 
+#include "SoraSprite.h"
 
 namespace sora {
 	

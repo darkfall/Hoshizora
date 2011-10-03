@@ -147,43 +147,43 @@ namespace sora {
         return AnyCast<ValueType>(const_cast<SoraAny*>(operand));
     }
     
-    inline bool isAnyInt(const SoraAny& any) {
+    inline bool IsAnyInt(const SoraAny& any) {
         return any.type() == typeid(int32);
     }
     
-    inline bool isAnyFloat(const SoraAny& any) {
+    inline bool IsAnyFloat(const SoraAny& any) {
         return any.type() == typeid(float);
     }
     
-    inline bool isAnyUInt(const SoraAny& any) {
+    inline bool IsAnyUInt(const SoraAny& any) {
         return any.type() == typeid(uint32);
     }
     
-    inline bool isAnyDouble(const SoraAny& any) {
+    inline bool IsAnyDouble(const SoraAny& any) {
         return any.type() == typeid(double);
     }
     
-    inline bool isAnyLong(const SoraAny& any) {
+    inline bool IsAnyLong(const SoraAny& any) {
         return any.type() == typeid(long32);
     }
     
-    inline bool isAnyChar(const SoraAny& any) {
+    inline bool IsAnyChar(const SoraAny& any) {
         return any.type() == typeid(char);
     }
     
-    inline bool isAnyUChar(const SoraAny& any) {
+    inline bool IsAnyUChar(const SoraAny& any) {
         return any.type() == typeid(unsigned char);
     }
     
-    inline bool isAnyULong(const SoraAny& any) {
+    inline bool IsAnyULong(const SoraAny& any) {
         return any.type() == typeid(ulong32);
     }
     
-    inline bool isAnyInt64(const SoraAny& any) {
+    inline bool IsAnyInt64(const SoraAny& any) {
         return any.type() == typeid(int64);
     }
     
-    inline bool isAnyUInt64(const SoraAny& any) {
+    inline bool IsAnyUInt64(const SoraAny& any) {
         return any.type() == typeid(uint64);
     }
     
@@ -192,12 +192,12 @@ namespace sora {
     }
    */ 
     template<typename T>
-    inline bool isAnyType(const SoraAny& any) {
+    inline bool IsAnyType(const SoraAny& any) {
         return any.type() == typeid(T);
     }
     
     template<typename T>
-    inline char* getTypeName() {
+    inline const char* GetTypeName() {
         return typeid(T).name();
     }
 } // namespace sora

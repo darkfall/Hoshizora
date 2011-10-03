@@ -12,12 +12,13 @@
 
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
+#include "SoraString.h"
 
 namespace sora {
 	
 	class SORA_API SoraBooter {
 	public:
-		static void loadExPlugins(const SoraWString& bootPath);
+		static void loadExPlugins(const StringType& bootPath);
 	};
 	
 } // namespace sora

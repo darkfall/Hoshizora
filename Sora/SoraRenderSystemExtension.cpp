@@ -8,6 +8,8 @@
 
 #include "SoraRenderSystemExtension.h"
 #include "SoraCore.h"
+#include "SoraRenderSystem.h"
+#include "SoraEnvValues.h"
 
 namespace sora {
     

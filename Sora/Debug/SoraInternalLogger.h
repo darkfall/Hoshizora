@@ -4,8 +4,6 @@
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
 #include "SoraStringConv.h"
-#include "SoraEvent.h"
-#include "SoraTimerEvent.h"
 
 #include <vector>
 #include <fstream>
@@ -22,7 +20,7 @@ namespace sora {
 		LOG_LEVEL_NOTICE = 4,
 	};
 
-	class SORA_API SoraInternalLogger: public SoraEventHandler {
+	class SORA_API SoraInternalLogger {
 		friend class SoraCore;
 		
 	protected:

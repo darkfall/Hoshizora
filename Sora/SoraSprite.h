@@ -7,6 +7,7 @@
 #include "SoraImageEffect.h"
 #include "SoraObject.h"
 #include "SoraShaderEnabled.h"
+#include "SoraVertex.h"
 
 #include <list>
 
@@ -24,32 +25,6 @@ namespace sora {
 
 	#define BLEND_DEFAULT		(BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_NOZWRITE)
 	#define BLEND_DEFAULT_Z		(BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_ZWRITE)
-
-	struct SoraVertex {
-		float			x, y;		// screen position    
-		float			z;			// Z-buffer depth 0..1
-		uint32			col;		// color
-		float			tx, ty;		// texture coordinates
-		
-		SoraVertex(): z(0.0f), col(0xFFFFFFFF) {}
-        SoraVertex(float _x, float _y, float _tx, float _ty): x(_x), y(_y), tx(_tx), ty(_ty) {}
-	};
-	
-	struct SoraQuad {
-		SoraVertex		v[4];
-		SoraTexture*	tex;
-		int				blend;
-        
-        SoraQuad(): tex(NULL) {}
-	};
-	
-	struct SoraTriple {
-		SoraVertex		v[3];
-		SoraTexture*	tex;
-		int				blend;
-        
-        SoraTriple(): tex(NULL) {}
-	};
 
 	class SORA_API SoraSprite: public SoraShaderEnabledObject {
 	public:

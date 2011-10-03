@@ -30,6 +30,8 @@
 #include "SoraStringTokenlizer.h"
 
 #include "SoraParticleSystem2/Emitters/CircleEmitter.h"
+#include "SoraEventManager.h"
+#include "SoraEvent.h"
 
 mainWindow::mainWindow() {
 	sora = sora::SoraCore::Instance();

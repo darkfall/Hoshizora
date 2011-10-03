@@ -17,6 +17,8 @@
 #include "SoraEventManager.h"
 #include "SoraObjectHandle.h"
 #include "SoraGlobalMessageRouter.h"
+#include "SoraEnvValues.h"
+#include "SoraWindowInfo.h"
 
 namespace sora {
 

@@ -17,6 +17,7 @@
 
 #include "util/SoraHash.h"
 #include "SoraCommon.h"
+#include "SoraLogger.h"
 
 #include <cassert>
 
@@ -664,7 +665,7 @@ namespace sora {
                                    (float)anmNodes[0].texList[0].tw, 
                                    (float)anmNodes[0].texList[0].th);
             } else 
-                SORA->logf("error loading sprite from %s", texturePath.c_str());
+                log_error(vamssg("SoraSpriteAnimation: error loading sprite from %s", texturePath.c_str()));
         }
         play();
     }

@@ -14,6 +14,7 @@
 #include "SoraObject.h"
 #include "SoraTexture.h"
 #include "SoraAutoPtr.h"
+#include "util/SoraArray.h"
 
 namespace sora {
     
@@ -52,7 +53,13 @@ namespace sora {
         
         void render();
         
-        SoraVertex* compile();
+        /**
+         * Compute the vertices' texture coordinates(if texture is binded)
+         * Only affect vertices' with tx && ty == 0.f
+         * Does not need for no texture shapes
+         * Normally you do not need to call this unless you enabled render to sprite and then changed the shape
+         **/
+        void compile();
         
         size_t size() const;
         SoraShape& operator=(const SoraShape& rhs);
@@ -65,6 +72,8 @@ namespace sora {
          **/
         void enableRenderToSprite(bool flag);
         SoraSprite* getSprite() const;
+        
+        const SoraArray<SoraVertex>& getVertexArray() const;
         
         /**
          * Set the shape is closed shape or not
@@ -87,14 +96,13 @@ namespace sora {
     private:
         void spriteRender();
         
-        typedef std::vector<SoraVertex> VertexArray;
+        typedef SoraArray<SoraVertex> VertexArray;
         VertexArray mVertices;
-        
-        bool mCompiled;
-        SoraAutoPtr<SoraVertex> mCompiledVertex;
-        
+                
         int32 mRenderMode;
         SoraTextureHandle mTexture;
+        
+        bool mCompiled;
         
         bool mOutline;
         float mOutlineWidth;

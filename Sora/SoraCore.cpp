@@ -14,6 +14,29 @@
 #include "SoraFileChangeEvent.h"
 #include "SoraFastRenderer.h"
 #include "SoraAutoUpdate.h"
+#include "SoraFrameListener.h"
+
+#include "SoraRenderSystem.h"
+#include "SoraResourceManager.h"
+#include "SoraInput.h"
+#include "SoraMiscTool.h"
+#include "SoraPluginManager.h"
+#include "SoraTimer.h"
+#include "SoraFontManager.h"
+#include "SoraSoundSystem.h"
+#include "SoraResourceFileFinder.h"
+#include "SoraShader.h"
+#include "SoraFrameListener.h"
+#include "SoraEnvValues.h"
+#include "SoraResourceFile.h"
+#include "SoraDelegate.h"
+#include "SoraInputListeners.h"
+#include "SoraHotkey.h"
+#include "SoraLogger.h"
+
+#ifdef SORA_ENABLE_MULTI_THREAD
+#include "SoraMutex.h"
+#endif
 
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
@@ -194,19 +217,12 @@ namespace sora {
         if(param.SeperateSoundSystemThread) {
             enableCoreFeature(FeatureSeperateSoundSystem);
         }
-      
-        try {
-            if(bPluginDetection) 
-                SoraBooter::loadExPlugins(L"plugins");
-        } catch(const SoraException& exp) {
-            _postError(exp.what());
-        }
     }
     
     void SoraCore::enableCoreFeature(CoreFeatures feature) {
         switch(feature) {
             case FeatureLoadPlugin:
-                bPluginDetection = true;
+                SoraBooter::loadExPlugins(L"plugins");
                 break;
             case FeatureRenderToBuffer:
                 bEnableScreenBuffer = true;
@@ -225,9 +241,6 @@ namespace sora {
     
     void SoraCore::disableCoreFeature(CoreFeatures feature) {
         switch(feature) {
-            case FeatureLoadPlugin:
-                bPluginDetection = false;
-                break;
             case FeatureRenderToBuffer:
                 bEnableScreenBuffer = false;
                 break;
@@ -581,8 +594,8 @@ namespace sora {
 			iScreenWidth = info->getWindowWidth();
 			iScreenHeight = info->getWindowHeight();
             
-            SET_ENV_INT("CORE_SCREEN_WIDTH", iScreenWidth);
-            SET_ENV_INT("CORE_SCREEN_HEIGHT", iScreenHeight);
+            SET_ENV_INT("ScreenWidth", iScreenWidth);
+            SET_ENV_INT("ScreenHeight", iScreenHeight);
 			
 			ulong32 result = pRenderSystem->createWindow(info);
 			if(result) {
@@ -766,7 +779,7 @@ namespace sora {
 	}
 
 	void SoraCore::setFPS(int32 fps) {
-		SET_ENV_INT("CORE_TIMER_SET_FPS", fps);
+		SET_ENV_INT("Fps", fps);
 		
 		pTimer->setFPS(fps);
 	}
@@ -776,7 +789,7 @@ namespace sora {
 	}
 
 	void SoraCore::setTimeScale(float scale) {
-		SET_ENV_FLOAT("CORE_TIMER_TIME_SCALE", scale);
+		SET_ENV_FLOAT("TimeScale", scale);
 		mTimeScale = scale;
 	}
 
@@ -1310,20 +1323,6 @@ namespace sora {
 		
 		pMiscTool->setMainWindowHandle(getMainWindowHandle());
 		return pMiscTool->messageBox((SoraWString)sMssg, (SoraWString)sTitle, iCode);
-	}
-    
-	void SoraCore::log(const StringType& sMssg, int32 level) {
-		log_mssg((SoraString)sMssg, level);
-	}
-	
-	void SoraCore::logf(const char* format, ...) {
-		va_list	ArgPtr;
-		char Message[1024] = {0};
-		va_start(ArgPtr, format);
-		vsprintf(Message, format, ArgPtr);
-		va_end(ArgPtr);
-		
-		log_mssg(Message);
 	}
 
 	void SoraCore::registerPlugin(SoraPlugin* pPlugin) {

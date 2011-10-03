@@ -2,40 +2,41 @@
 #define SORA_INTERNAL_CORE
 
 #include "SoraPlatform.h"
-#include "SoraSingleton.h"
-#include "SoraAutoPtr.h"
-#include "SoraException.h"
-
-#include "SoraRenderSystem.h"
-#include "SoraResourceManager.h"
-#include "SoraInput.h"
-#include "SoraMiscTool.h"
-#include "SoraPluginManager.h"
-#include "SoraTimer.h"
-#include "SoraFontManager.h"
-#include "SoraSoundSystem.h"
-#include "SoraResourceFileFinder.h"
-#include "SoraShader.h"
-#include "SoraFrameListener.h"
-#include "SoraEnvValues.h"
-#include "SoraResourceFile.h"
-#include "SoraDelegate.h"
-#include "SoraInputListeners.h"
-#include "SoraHotkey.h"
-#include "SoraLogger.h"
 #include "SoraString.h"
-
-#include "timer/ITimerManager.h"
-
-#ifdef SORA_ENABLE_MULTI_THREAD
-#include "SoraMutex.h"
-#endif
+#include "SoraMath.h"
+#include "SoraKeyInfo.h"
+#include "SoraResourceFileFinder.h"
+#include "SoraVertex.h"
+#include "function/SoraFunction.h"
 
 #include <map>
+#include <list>
 
 namespace sora {
     
-	class SORA_API SoraCore: public SoraEventHandler {
+    class SoraSprite;
+    class SoraInput;
+    class SoraRenderSystem;
+    class SoraPluginManager;
+    class SoraResourceManager;
+    class SoraShader;
+    class SoraShaderContext;
+    class SoraFrameListener;
+    class SoraFontManager;
+    class SoraTimer;
+    class SoraMiscTool;
+    class SoraSoundSystem;
+    class SoraEventHandler;
+    class SoraMusicFile;
+    class SoraSoundEffectFile;
+    class SoraPlugin;
+    class SoraHotkey;
+    class SoraFont;
+    class SoraWindowInfoBase;
+    class SoraMutexLock;
+    class SoraInputListener;
+    
+	class SORA_API SoraCore {
 	protected:
 		SoraCore();
 		~SoraCore() { }
@@ -121,16 +122,16 @@ namespace sora {
 		void                 freeTarget(ulong32 t);
 		SoraTextureHandle    getTargetTexture(ulong32 t);
 
-		SoraTextureHandle createTexture(const StringType& sTexturePath, bool bCache=true, bool bMipmap=false);
-		SoraTextureHandle createTextureWH(int32 w, int32 h);
-		SoraTextureHandle createTextureFromRawData(uint32* data, int32 w, int32 h);
-		SoraTextureHandle createTextureFromMem(void* data, ulong32 size);
-		uint32*		 textureLock(SoraTextureHandle);
-        void		 textureUnlock(SoraTextureHandle);
+		SoraTextureHandle   createTexture(const StringType& sTexturePath, bool bCache=true, bool bMipmap=false);
+		SoraTextureHandle   createTextureWH(int32 w, int32 h);
+		SoraTextureHandle   createTextureFromRawData(uint32* data, int32 w, int32 h);
+		SoraTextureHandle   createTextureFromMem(void* data, ulong32 size);
+		uint32*             textureLock(SoraTextureHandle);
+        void                textureUnlock(SoraTextureHandle);
 		// depends on render system, may have different meaning
-		ulong32		 getTextureId(SoraTextureHandle);
-		void		 releaseTexture(SoraTextureHandle);
-        void         clearTextureMap();
+		ulong32             getTextureId(SoraTextureHandle);
+		void                releaseTexture(SoraTextureHandle);
+        void                clearTextureMap();
 
         SoraShaderContext*  createShaderContext();
 		void                attachShaderContext(SoraShaderContext* context);
@@ -190,6 +191,18 @@ namespace sora {
 		static int32    randomIntNoRange();
 		/*generates a float random number range [0, 1] using SFMT*/
 		static float    randomFloatNoRange();
+                
+        /**
+         *  register a global hotkey and it's conresponding event handler
+         *  @returnval the id of the registered hotkey
+         */
+        static int32   registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler);
+        static void    unregisterGlobalHotkey(int32 hid);
+        static void    setGlobalHotkey(int32 hid, const SoraHotkey& key);
+        static void    clearGlobalHotkeys();
+		
+		static void    simulateKey(int32 key, int32 state);
+
 
 		int32 getScreenWidth();
 		int32 getScreenHeight();
@@ -240,21 +253,8 @@ namespace sora {
 		bool	joyKeyState(int32 key, unsigned char state);
 		bool	setJoyKey(int32 key);
 		bool	hasJoy();
-        
-        /**
-         *  register a global hotkey and it's conresponding event handler
-         *  @returnval the id of the registered hotkey
-         */
-        int32   registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler);
-        void    unregisterGlobalHotkey(int32 hid);
-        void    setGlobalHotkey(int32 hid, const SoraHotkey& key);
-        void    clearGlobalHotkeys();
-		
-		void	simulateKey(int32 key, int32 state);
-
+     
 		int32	messageBox  (const StringType& sMssg, const StringType& sTitle, int32 iCode);
-		void	log         (const StringType& sMssg, int32 level=LOG_LEVEL_NORMAL);
-		void	logf		(const char* str, ...);
 		
 		StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
 		StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
@@ -273,7 +273,7 @@ namespace sora {
         void addInputListener(SoraInputListener* listener, int priority=0);
         void delInputListener(SoraInputListener* listener);
         
-        void execute(const SoraString& appPath, const SoraString& args);
+        static void execute(const SoraString& appPath, const SoraString& args);
         void snapshot(const SoraString& path);
 		/*
 		 for directX, return (ulong32)(pD3DDevice)
@@ -377,7 +377,6 @@ namespace sora {
         bool bEnableScreenBuffer;
         bool bScreenBufferAttached;
         ulong32 mScreenBuffer;
-        SoraSprite* mScreenBufferSprite;
 				
 		typedef std::list<SoraFrameListener*> FRAME_LISTENER_CONT;
 		FRAME_LISTENER_CONT frameListeners;

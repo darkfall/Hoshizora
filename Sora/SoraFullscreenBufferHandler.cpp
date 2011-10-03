@@ -7,6 +7,7 @@
 //
 
 #include "SoraFullscreenBufferHandler.h"
+#include "SoraSprite.h"
 
 namespace sora {
     

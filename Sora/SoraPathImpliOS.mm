@@ -89,6 +89,7 @@ namespace sora {
         roots.clear();
         roots.push_back(currentImpl());
     }
+    
     std::string SoraPathImpl::resourceImpl() {
         std::string path = [[[NSBundle mainBundle] bundlePath] UTF8String];
         return path + "/";

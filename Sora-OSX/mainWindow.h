@@ -17,8 +17,7 @@
 #include "SoraFileChangeEvent.h"
 
 #include "SoraScene.h"
-
-#include "SoraNetwork/SoraSocket.h"
+#include "SoraWindowInfo.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:

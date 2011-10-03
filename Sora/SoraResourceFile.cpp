@@ -9,6 +9,7 @@
 
 #include "SoraResourceFile.h"
 #include "SoraCore.h"
+#include "SoraLogger.h"
 
 namespace sora {
     SoraResourceFileAuto::SoraResourceFileAuto():
@@ -29,7 +30,7 @@ namespace sora {
     mName(file) {
 		mData = SORA->getResourceFile(file, mSize);
 		if(!mData)
-			log_mssg(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", ws2s(file).c_str()));
 	}
     
     SoraResourceFileAuto::SoraResourceFileAuto(const StringType& file, ulong32 pos, ulong32 size, bool retain):
@@ -37,7 +38,7 @@ namespace sora {
     mName(file)  {
         mData = SORA->readResourceFile(file, pos, size);
         if(!mData)
-			log_mssg(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", ws2s(file).c_str()));
     }
 	
 	SoraResourceFileAuto::~SoraResourceFileAuto() {
@@ -49,7 +50,7 @@ namespace sora {
     SoraResourceFileAuto& SoraResourceFileAuto::operator=(const StringType& file) {
         mData = SORA->getResourceFile(file, mSize);
 		if(!mData)
-			log_mssg(vamssg("Error loading resource file: %s", ws2s(file).c_str()));
+			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", ws2s(file).c_str()));
         mRetain = false;
         mName = file;
 		return *this;

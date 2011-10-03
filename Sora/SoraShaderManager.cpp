@@ -10,6 +10,7 @@
 #include "SoraShader.h"
 #include "SoraException.h"
 #include "SoraCore.h"
+#include "SoraLogger.h"
 
 namespace sora {
     
@@ -36,7 +37,7 @@ namespace sora {
     SoraShader* SoraShaderManager::createShader(const StringType& file, const SoraString& entry, int32 type) {
         SoraShader* shader = mShaderContext->createShader(file, entry, type);
         if(!shader) {
-            THROW_SORA_EXCEPTION(RuntimeException, vamssg("Error creating shader %s", file.c_str()));
+            log_error(vamssg("SoraShaderManager: Error creating shader %s", file.c_str()));
             return NULL;
         }
         return shader;
@@ -45,7 +46,7 @@ namespace sora {
     SoraShader* SoraShaderManager::createShaderFromMem(const char* data, const SoraString& entry, int32 type) {
         SoraShader* shader = mShaderContext->createShaderFromMem(data, entry, type);
         if(!shader) {
-            THROW_SORA_EXCEPTION(RuntimeException, "Error creating shader from mem");
+            log_error("SoraShaderManager: Error creating shader from mem");
             return NULL;
         }
         return shader;

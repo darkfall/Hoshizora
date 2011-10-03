@@ -8,8 +8,9 @@
  */
 
 #include "SoraSpriteFont.h"
-
+#include "SoraSprite.h"
 #include "SoraCore.h"
+#include "SoraLogger.h"
 
 namespace sora {
 
@@ -25,7 +26,7 @@ namespace sora {
 			buildPosMap(sequance);
 			memset(mCharPos, 0, sizeof(int32)*128);
 		} else
-			log_mssg("Error creating font "+ws2s(font));
+			log_error("SoraSpriteFont: Error creating font "+ws2s(font));
 	}
 	
 	SoraSpriteFont::~SoraSpriteFont() {

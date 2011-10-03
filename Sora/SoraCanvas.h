@@ -13,7 +13,6 @@
 #include "SoraPlatform.h"
 #include "SoraSprite.h"
 
-
 namespace sora {
 	
 	/*
