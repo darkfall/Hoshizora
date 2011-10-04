@@ -11,6 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "physics/SoraPhysicWorld.h"
+#include "physics/SoraPhysicListener.h"
 
 #include "Box2D/Box2D.h"
 
@@ -20,13 +21,16 @@ namespace sora {
         
     class SoraBox2dPhysicWorld: public SoraPhysicWorld {
     public:
+        friend class SoraB2ContactListener;
+        
         SoraBox2dPhysicWorld(float gravityX, float gravityY, bool doSleep=true);
         ~SoraBox2dPhysicWorld();
         
-        SoraPhysicBody* createBody(const SoraPhysicBodyDef& def) const;
+        SoraPhysicBody* createBody(const SoraPhysicBodyDef& def);
         void destroyBody(SoraPhysicBody* body);
         
-        void createJoint(SoraPhysicBody* b1, SoraPhysicBody* b2);
+        SoraPhysicJoint* createJoint(const SoraPhysicJointDef& def);
+        void destroyJoint(SoraPhysicJoint* joint);
         
         uint32 bodyCount();
         
@@ -36,6 +40,8 @@ namespace sora {
         void delContactListener(SoraPhysicContactListener* listener);
 
     private:
+        void publishContact(const SoraPhysicContactInfo& info, bool start);
+        
         b2World* mWorld;
         
         int32 mVelocityIteration;

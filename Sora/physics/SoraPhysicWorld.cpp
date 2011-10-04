@@ -24,10 +24,17 @@ namespace sora {
             world->destroyBody(body);
     }
     
-    void SoraPhysicWorld::CreateJoint(SoraPhysicBody* b1, SoraPhysicBody* b2) {
+    SoraPhysicJoint* SoraPhysicWorld::CreateJoint(const SoraPhysicJointDef& def) {
         SoraPhysicWorld* world = SoraCore::Instance()->getPhysicWorld();
         if(world)
-            world->createJoint(b1, b2);
+            return world->createJoint(def);
+        return 0;
+    }
+    
+    void SoraPhysicWorld::DestroyJoint(SoraPhysicJoint* joint) {
+        SoraPhysicWorld* world = SoraCore::Instance()->getPhysicWorld();
+        if(world)
+            world->destroyJoint(joint);
     }
     
     void SoraPhysicWorld::AddContactListener(SoraPhysicContactListener* listener) {

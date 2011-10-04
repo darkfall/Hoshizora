@@ -59,6 +59,8 @@ namespace sora {
         
         mBody = world->CreateBody(&bodyDef);
         sora_assert(mBody);
+        
+        mBody->SetUserData(this);
     }
     
     SoraBox2dPhysicBody::~SoraBox2dPhysicBody() {

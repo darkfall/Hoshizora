@@ -7,6 +7,7 @@
 #include "SoraAutoPtr.h"
 #include "SoraMovable.h"
 #include "SoraFunction.h"
+
 #include <algorithm>
 #include <list>
 
@@ -81,7 +82,7 @@ namespace sora {
          * the body's position everyframe
          **/
         void            attachPhysicBody(SoraPhysicBody* body, bool autoRelease=false);
-        void            createPhysicBody(const SoraPhysicFixtureDef& fixtureDef, float mass, float centerX, float centerY);
+        void            createPhysicBody(const SoraPhysicBodyDef& def, const SoraPhysicFixtureDef& fixtureDef, float mass, float centerX, float centerY);
         void            detachPhysicBody();
         SoraPhysicBody* getPhysicBody() const;
         

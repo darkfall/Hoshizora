@@ -86,6 +86,8 @@ void msetCommands(sora::SoraConsoleEvent* evt) {
 
 SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_iteration,set_max_size,set_iteration_increment,set_cr,set_cg,set_cb");
 
+sora::SoraPhysicBody* body;
+
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
@@ -96,14 +98,19 @@ public:
         sora::SoraGameApp::BeginScene();
         
         mBg.render();
+        mBg2.render();
         
         sora::SoraRect r = mBg.getPhysicBody()->getBoundingBox();
+        sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
+                                              r.x2, r.y2, 0xFFFF0000);
+        
+        r = mBg2.getPhysicBody()->getBoundingBox();
         sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
                                               r.x2, r.y2, 0xFFFF0000);
        
        // mText.render();
        // mText2.render();
-        
+                
         mShape.render();
         
         sora::SoraGameApp::EndScene();
@@ -111,6 +118,8 @@ public:
     
     void onUpdate(float dt) {
         mBg.update(dt);
+        mBg2.update(dt);
+        
         if(sora::SoraCore::Instance()->keyDown(SORA_KEY_R)) {
             mShader = mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet");
             if(!mShader) {
@@ -157,6 +166,15 @@ public:
     void onKeyEvent(sora::SoraKeyEvent* keyEvent) {
     }
     
+    void onMouseDragged(sora::SoraMouseEvent& from, sora::SoraMouseEvent& to) {
+        float d =  atan2f(to.y - from.y,
+                          to.x - from.x);
+        mBg.getPhysicBody()->applyLinearImpulse(cosf(d),
+                                                sinf(d),
+                                                50.f,
+                                                0.f);
+    }
+    
     void onEnter() {
         sora::SoraCore::Instance()->registerPhysicWorld(new sora::SoraBox2dPhysicWorld(0.f, 1.f, true));
 
@@ -164,11 +182,23 @@ public:
         mBg.setColor(0xFF00FF00);
         
         mBg.setPosition(200.f, 200.f);
-        mBg.createPhysicBody(sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 
-                                                                                          100.f, 0.f, 0.f, 0.f)),
+        mBg.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::DynamicBody),
+                             sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 
+                                                                                          100.f, 0.f, 0.f, 10.f)),
                                                         1.f,
                                                         0.f,
                                                         0.f);
+        
+        mBg2.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
+        mBg2.setColor(0xFFFF0000);
+        mBg2.setPosition(0.f, 600.f);
+        mBg2.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::StaticBody),
+                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(800.f, 10.f, 400.f, 5.f, 0.f)),
+                              1.f,
+                              0.f,
+                              0.f);
+        
+        
         mShader = /* mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet")*/ 0;
         lx = -2.5f;
         ly = 1.0f;
@@ -246,6 +276,7 @@ private:
     sora::SoraText mText;
     sora::SoraText mText2;
     sora::SoraSprite mBg;
+    sora::SoraSprite mBg2;
     
     sora::SoraShape mShape;
     

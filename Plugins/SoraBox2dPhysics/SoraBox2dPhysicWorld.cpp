@@ -8,9 +8,55 @@
 
 #include "SoraBox2dPhysicWorld.h"
 #include "SoraBox2dPhysicBody.h"
+#include "SoraBox2dPhysicJoint.h"
 
 namespace sora {
+    
+    class SoraB2ContactListener: public b2ContactListener {
+    public:
+        SoraB2ContactListener(SoraBox2dPhysicWorld* world):
+        mWorld(world) { }
         
+        void BeginContact(b2Contact* contact) {
+            SoraBox2dPhysicBody* fA = (SoraBox2dPhysicBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+            SoraBox2dPhysicBody* fB = (SoraBox2dPhysicBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+            if(fA && fB) {
+                SoraPhysicContactInfo info;
+                
+                info.mBodyA = fA;
+                info.mBodyB = fB;
+                b2Vec2 normal = contact->GetManifold()->localNormal;
+                info.mNormal = SoraVector(normal.x, normal.y);
+                b2Vec2 pos = SoraBox2dPhysicBody::ScaleFrom(contact->GetManifold()->localPoint);
+                info.mPosition = SoraVector(pos.x, pos.y);
+                info.mIsTouching = contact->IsTouching();
+                
+                mWorld->publishContact(info, true);
+            }
+        }
+        
+        void EndContact(b2Contact* contact) {
+            SoraBox2dPhysicBody* fA = (SoraBox2dPhysicBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+            SoraBox2dPhysicBody* fB = (SoraBox2dPhysicBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+            if(fA && fB) {
+                SoraPhysicContactInfo info;
+                
+                info.mBodyA = fA;
+                info.mBodyB = fB;
+                b2Vec2 normal = contact->GetManifold()->localNormal;
+                info.mNormal = SoraVector(normal.x, normal.y);
+                b2Vec2 pos = SoraBox2dPhysicBody::ScaleFrom(contact->GetManifold()->localPoint);
+                info.mPosition = SoraVector(pos.x, pos.y);
+                info.mIsTouching = contact->IsTouching();
+                
+                mWorld->publishContact(info, false);
+            }
+        }
+        
+    private:
+        SoraBox2dPhysicWorld* mWorld;
+    };
+            
     SoraBox2dPhysicWorld::SoraBox2dPhysicWorld(float gx, float gy, bool doSleep):
     mWorld(0),
     mVelocityIteration(10), 
@@ -19,13 +65,16 @@ namespace sora {
     mGravityY(gy) {
         mWorld = new b2World(b2Vec2(mGravityX, mGravityY), doSleep);
         sora_assert(mWorld);
+        
+        SoraB2ContactListener* listener = new SoraB2ContactListener(this);
+        mWorld->SetContactListener(listener);
     }
     
     SoraBox2dPhysicWorld::~SoraBox2dPhysicWorld() {
         delete mWorld;
     }
     
-    SoraPhysicBody* SoraBox2dPhysicWorld::createBody(const SoraPhysicBodyDef& def) const {
+    SoraPhysicBody* SoraBox2dPhysicWorld::createBody(const SoraPhysicBodyDef& def) {
         SoraBox2dPhysicBody* body = new SoraBox2dPhysicBody(def, mWorld);
         return body;
     }
@@ -34,8 +83,31 @@ namespace sora {
         delete body;
     }
     
-    void SoraBox2dPhysicWorld::createJoint(SoraPhysicBody* b1, SoraPhysicBody* b2) {
+    SoraPhysicJoint* SoraBox2dPhysicWorld::createJoint(const SoraPhysicJointDef& def) {
+        sora_assert(mWorld);
+        sora_assert(def.mType != SoraPhysicJointDef::None);
         
+        b2DistanceJointDef b2def;
+        b2def.Initialize(static_cast<SoraBox2dPhysicBody*>(def.mBodyA)->mBody,
+                         static_cast<SoraBox2dPhysicBody*>(def.mBodyB)->mBody,
+                         static_cast<SoraBox2dPhysicBody*>(def.mBodyA)->mBody->GetWorldCenter(),
+                         static_cast<SoraBox2dPhysicBody*>(def.mBodyB)->mBody->GetWorldCenter());
+        
+        b2Joint* joint = mWorld->CreateJoint(&b2def);
+        
+        SoraBox2dPhysicJoint* myJoint = new SoraBox2dPhysicJoint;
+        myJoint->mUserData = joint;
+        myJoint->mBodyA = def.mBodyA;
+        myJoint->mBodyB = def.mBodyB;
+        return myJoint;
+    }
+    
+    void SoraBox2dPhysicWorld::destroyJoint(SoraPhysicJoint* joint) {
+        sora_assert(mWorld);
+        sora_assert(joint);
+        
+        mWorld->DestroyJoint(static_cast<b2Joint*>(joint->mUserData));
+        delete joint;
     }
     
     uint32 SoraBox2dPhysicWorld::bodyCount() {
@@ -54,5 +126,23 @@ namespace sora {
     void SoraBox2dPhysicWorld::delContactListener(SoraPhysicContactListener* listener) {
         mContactListeners.remove(listener);
     }
+    
+    void SoraBox2dPhysicWorld::publishContact(const SoraPhysicContactInfo& info, bool start) {
+        if(!mContactListeners.empty()) {
+            ContactListenerList::const_iterator it = mContactListeners.begin();
+            ContactListenerList::const_iterator end = mContactListeners.end();
+            
+            for(; it != end; ++it) {
+                if(start) {
+                    (*it)->onContactBegin(info);
+                } else {
+                    (*it)->onContactEnd(info);
+                }
+            }
+        }
+    }
+    
+    
+
     
 } // namespace sora

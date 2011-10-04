@@ -10,14 +10,20 @@
 #define Sora_SoraPhysicJoint_h
 
 #include "SoraPlatform.h"
+#include "SoraMath.h"
 
 namespace sora {
     
     class SoraPhysicBody;
     
     struct SoraPhysicJoint {
-        SoraPhysicBody* mBody1;
-        SoraPhysicBody* mBody2;
+        virtual SoraVector getAnchorA() = 0;
+        virtual SoraVector getAnchorB() = 0;
+        
+        SoraPhysicBody* mBodyA;
+        SoraPhysicBody* mBodyB;
+        
+        void* mUserData;
     };
     
 } // namespace sora

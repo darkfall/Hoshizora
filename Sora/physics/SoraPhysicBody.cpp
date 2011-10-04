@@ -7,6 +7,7 @@
 //
 
 #include "SoraPhysicBody.h"
+#include "SoraCore.h"
 
 namespace sora {
     
@@ -38,6 +39,16 @@ namespace sora {
     
     const SoraPhysicBodyDef& SoraPhysicBody::getDef() const {
         return mDef;
+    }
+    
+    void SoraPhysicBody::render() {
+        SoraRect bbox = getBoundingBox();
+        sora::SoraCore::Instance()->renderBox(bbox.x1,
+                                              bbox.y1,
+                                              bbox.x2,
+                                              bbox.y2,
+                                              1.f,
+                                              0xFFFFFFFF);
     }
     
 } // namespace sora

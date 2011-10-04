@@ -38,6 +38,7 @@ namespace sora {
     
     float g_mousex = 0.f, g_mousey = 0.f;
     bool g_lbuttondown = false, g_rbuttondown = false, g_mbuttondown = false;
+    SoraMouseEvent g_prevEvent;
     
     typedef std::queue<SoraMouseEvent> MouseEventCont;
     MouseEventCont g_mouseEvents;
@@ -110,13 +111,15 @@ namespace sora {
             SORA_EVENT_MANAGER->publishInputEvent(&ev);
         
         // key listeners
-        InputListenerMap::iterator itListener = g_inputListeners.begin();
-        while(itListener != g_inputListeners.end()) {
-            if(ev.isKeyDown())
-                itListener->second->keyPressed(ev);
-            else 
-                itListener->second->keyReleased(ev);
-            ++itListener;
+        if(!g_inputListeners.empty()) {
+            InputListenerMap::iterator itListener = g_inputListeners.begin();
+            while(itListener != g_inputListeners.end()) {
+                if(ev.isKeyDown())
+                    itListener->second->onKeyPressed(ev);
+                else 
+                    itListener->second->onKeyReleased(ev);
+                ++itListener;
+            }
         }
 
         if(!ev.isConsumed())
@@ -178,7 +181,7 @@ namespace sora {
         if(g_mousex != curMouseX ||
            g_mousey != curMouseY) {
             g_mouseEvents.push(SoraMouseEvent(0,
-                                              SoraMouseEvent::MOVED,
+                                              SoraMouseEvent::Moved,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
@@ -188,14 +191,14 @@ namespace sora {
         
         if(mouseWheel > 0) {
             g_mouseEvents.push(SoraMouseEvent(0,
-                                              SoraMouseEvent::WHEEL_MOVED_UP,
+                                              SoraMouseEvent::WheelUp,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
         }
         if(mouseWheel < 0) {
             g_mouseEvents.push(SoraMouseEvent(0,
-                                              SoraMouseEvent::WHEEL_MOVED_DOWN,
+                                              SoraMouseEvent::WheelDown,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
@@ -203,7 +206,7 @@ namespace sora {
         
         if(!g_lbuttondown && leftBtn) {
             g_mouseEvents.push(SoraMouseEvent(SORA_KEY_LBUTTON,
-                                              SoraMouseEvent::PRESSED,
+                                              SoraMouseEvent::Pressed,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
@@ -211,7 +214,7 @@ namespace sora {
         
         if(!g_rbuttondown && rightBtn) {
             g_mouseEvents.push(SoraMouseEvent(SORA_KEY_RBUTTON,
-                                              SoraMouseEvent::PRESSED,
+                                              SoraMouseEvent::Pressed,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
@@ -220,7 +223,7 @@ namespace sora {
         
         if(!g_mbuttondown && middleBtn) {
             g_mouseEvents.push(SoraMouseEvent(SORA_KEY_MBUTTON,
-                                              SoraMouseEvent::PRESSED,
+                                              SoraMouseEvent::Pressed,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
@@ -229,7 +232,7 @@ namespace sora {
         
         if(g_lbuttondown && !leftBtn) {
             g_mouseEvents.push(SoraMouseEvent(SORA_KEY_LBUTTON,
-                                              SoraMouseEvent::RELEASED,
+                                              SoraMouseEvent::Released,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
@@ -237,7 +240,7 @@ namespace sora {
         
         if(g_rbuttondown && !rightBtn) {
             g_mouseEvents.push(SoraMouseEvent(SORA_KEY_RBUTTON,
-                                              SoraMouseEvent::RELEASED,
+                                              SoraMouseEvent::Released,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
@@ -246,7 +249,7 @@ namespace sora {
         
         if(g_mbuttondown && !middleBtn) {
             g_mouseEvents.push(SoraMouseEvent(SORA_KEY_MBUTTON,
-                                              SoraMouseEvent::RELEASED,
+                                              SoraMouseEvent::Released,
                                               curMouseX,
                                               curMouseY,
                                               mouseWheel));
@@ -284,34 +287,43 @@ namespace sora {
     }
     
     void SoraKeyPoll::pollListenerEvents() {
-        while(!g_mouseEvents.empty()) {
-            SoraMouseEvent mevent = g_mouseEvents.front();
-            g_mouseEvents.pop();
-            
-            InputListenerMap::iterator itListener = g_inputListeners.begin();
-            while(itListener != g_inputListeners.end()) {
-                int type = mevent.type;
-                switch(type) {
-                    case SoraMouseEvent::MOVED:
-                        if(!g_lbuttondown)
-                            itListener->second->mouseMoved(mevent);
-                        else {
-                            mevent.type = SoraMouseEvent::DRAGGED;
-                            itListener->second->mouseDragged(mevent);
-                        }
-                        break;
-                    case SoraMouseEvent::PRESSED:
-                        itListener->second->mouseClicked(mevent); break;
-                    case SoraMouseEvent::RELEASED:
-                        itListener->second->mouseReleased(mevent); break;
-                    case SoraMouseEvent::WHEEL_MOVED_UP:
-                        itListener->second->mouseWheelUp(mevent); break;
-                    case SoraMouseEvent::WHEEL_MOVED_DOWN:
-                        itListener->second->mouseWheelDown(mevent); break;
-                    default:
-                        break;
+        if(!g_inputListeners.empty() && !g_mouseEvents.empty()) {
+            while(!g_mouseEvents.empty()) {
+                SoraMouseEvent mevent = g_mouseEvents.front();
+                g_mouseEvents.pop();
+                
+                InputListenerMap::iterator itListener = g_inputListeners.begin();
+                while(itListener != g_inputListeners.end()) {
+                    switch(mevent.type) {
+                        case SoraMouseEvent::Moved:
+                            if(!g_lbuttondown)
+                                itListener->second->onMouseMoved(mevent);
+                            else {
+                                mevent.type = SoraMouseEvent::Dragged;
+                                itListener->second->onMouseDragged(g_prevEvent, mevent);
+                                
+                                g_prevEvent = mevent;
+                            }
+                            break;
+                        case SoraMouseEvent::Pressed:
+                            itListener->second->onMouseClicked(mevent); 
+                            g_prevEvent = mevent;
+                            break;
+                        
+                        case SoraMouseEvent::Released:
+                            itListener->second->onMouseReleased(mevent); 
+                            break;
+                        
+                        case SoraMouseEvent::WheelUp:
+                            itListener->second->onMouseWheelUp(mevent); 
+                            break;
+                        
+                        case SoraMouseEvent::WheelDown:
+                            itListener->second->onMouseWheelDown(mevent); 
+                            break;
+                    }
+                    ++itListener;
                 }
-                ++itListener;
             }
         }
         // to do joystick event

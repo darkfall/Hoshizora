@@ -29,6 +29,8 @@ namespace sora {
         void        setUserData(void* data);
         void*       getUserData() const;
         
+        virtual void render();
+        
         virtual void createFixture(const SoraPhysicFixtureDef& def) = 0;
         
         virtual void setMass(float mass, float centerX, float centerY) = 0;

@@ -14,6 +14,8 @@
 
 namespace sora {
     
+    class SoraPhysicBody;
+    
     struct SoraPhysicFixtureDef {
         float mFriction;
         float mDensity;
@@ -39,12 +41,36 @@ namespace sora {
         BodyType mType;
         SoraVector mPosition;
         
-        SoraPhysicBodyDef():
-        mType(DynamicBody) { }
+        SoraPhysicBodyDef(BodyType type=DynamicBody):
+        mType(type) { }
         
         SoraPhysicBodyDef(BodyType type, const SoraVector& pos):
         mType(type),
         mPosition(pos) { }
+    };
+    
+    struct SoraPhysicJointDef {
+        enum JointType {
+            None = -1,
+            RevoluteJoint,
+            PrismaticJoint,
+            DistanceJoint,
+            LineJoint,
+        };
+        
+        JointType mType;
+        SoraPhysicBody* mBodyA;
+        SoraPhysicBody* mBodyB;
+        
+        SoraPhysicJointDef():
+        mType(None),
+        mBodyA(0),
+        mBodyB(0) { }
+        
+        SoraPhysicJointDef(JointType type, SoraPhysicBody* b1, SoraPhysicBody* b2):
+        mType(type),
+        mBodyA(b1),
+        mBodyB(b2) { }
     };
     
 } // namespace sora

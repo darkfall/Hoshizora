@@ -271,12 +271,8 @@ namespace sora {
         mAutoReleasePhysicBody = autoRelease;
     }
     
-    void SoraObject::createPhysicBody(const SoraPhysicFixtureDef& fixtureDef, float mass, float centerX, float centerY) {
-        SoraPhysicBodyDef def;
-        def.mType = SoraPhysicBodyDef::DynamicBody;
-        def.mPosition = SoraVector(getPositionX(), getPositionY());
-        
-        mPhysicBody = sora::SoraPhysicWorld::CreateBody(def);
+    void SoraObject::createPhysicBody(const SoraPhysicBodyDef& def, const SoraPhysicFixtureDef& fixtureDef, float mass, float centerX, float centerY) {        
+        mPhysicBody = sora::SoraPhysicWorld::CreateBody(SoraPhysicBodyDef(def.mType, SoraVector(getPositionX(), getPositionY())));
         if(mPhysicBody) {
             mPhysicBody->createFixture(fixtureDef);
             mPhysicBody->setMass(mass, centerX, centerY);

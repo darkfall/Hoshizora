@@ -15,9 +15,9 @@ namespace sora {
     
     class SoraPhysicBody;
     
-    class SoraPhysicContactInfo {
-        SoraPhysicBody* mBody1;
-        SoraPhysicBody* mBody2;
+    struct SoraPhysicContactInfo {
+        SoraPhysicBody* mBodyA;
+        SoraPhysicBody* mBodyB;
         
         // optional part
         // may not be filled depends on physical engine
@@ -29,8 +29,8 @@ namespace sora {
     
     class SoraPhysicContactListener {
     public:
-        virtual void contactBegin(const SoraPhysicContactInfo& info) = 0;
-        virtual void contactEnd(const SoraPhysicContactInfo& info) = 0
+        virtual void onContactBegin(const SoraPhysicContactInfo& info) = 0;
+        virtual void onContactEnd(const SoraPhysicContactInfo& info) = 0;
     };
     
     

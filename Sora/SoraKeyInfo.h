@@ -206,29 +206,35 @@ namespace sora {
     
     class SORA_API SoraMouseEvent: public SoraKeyEvent {
     public:
+        enum {
+            None = -1,
+            Moved = 0,
+            Pressed,
+            Released,
+            Dragged,
+            WheelDown,
+            WheelUp,
+        };
+        
+        SoraMouseEvent();
+        
         SoraMouseEvent(int key,
                        int type,
                        float x,
                        float y,
                        int wheel);
         
-        enum {
-            MOVED = 0,
-            PRESSED,
-            RELEASED,
-            DRAGGED,
-            WHEEL_MOVED_DOWN,
-            WHEEL_MOVED_UP,
-        };
-        
+       
         int clickCount;
         bool leftBtnDown;
         bool rightBtnDown;
         bool middleBtnDown;
+        float dragDirection;
         
         int getClickCount() const;
         float getX() const;
         float getY() const;
+        float getDragDirection() const;
         
         bool isMouseLButtonDown() const;
         bool isMouseMButtonDown() const;
@@ -237,6 +243,7 @@ namespace sora {
 		bool isMouseLButtonUp() const;
         bool isMouseMButtonUp() const;
 		bool isMouseRButtonUp() const;
+        
         
         
 #ifndef SORA_USE_RTTI

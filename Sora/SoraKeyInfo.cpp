@@ -148,6 +148,10 @@ namespace sora {
         y = _y;
         wheel = _wheel;
     }
+    
+    SoraMouseEvent::SoraMouseEvent() {
+        type = None;
+    }
 
     int SoraMouseEvent::getClickCount() const {
         return clickCount;
@@ -188,4 +192,9 @@ namespace sora {
     int SoraJoystickEvent::getJoystickId() const {
         return joystickId;
     }
+    
+    float SoraMouseEvent::getDragDirection() const {
+        return dragDirection;
+    }
+    
 } // namespace sora

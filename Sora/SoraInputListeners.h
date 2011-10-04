@@ -18,18 +18,18 @@ namespace sora {
     public:
         virtual ~SoraInputListener() {}
         
-        virtual void mouseMoved(SoraMouseEvent& event) { }
-        virtual void mouseDragged(SoraMouseEvent& event) { }
-        virtual void mouseWheelUp(SoraMouseEvent& event) { }
-        virtual void mouseWheelDown(SoraMouseEvent& event) { }
-        virtual void mouseClicked(SoraMouseEvent& event) { }
-        virtual void mouseReleased(SoraMouseEvent& event) { }
+        virtual void onMouseMoved(SoraMouseEvent& event) { }
+        virtual void onMouseDragged(SoraMouseEvent& from, SoraMouseEvent& to) { }
+        virtual void onMouseWheelUp(SoraMouseEvent& event) { }
+        virtual void onMouseWheelDown(SoraMouseEvent& event) { }
+        virtual void onMouseClicked(SoraMouseEvent& event) { }
+        virtual void onMouseReleased(SoraMouseEvent& event) { }
                 
-        virtual void keyPressed(SoraKeyEvent& event) { }
-        virtual void keyReleased(SoraKeyEvent& event) { }
+        virtual void onKeyPressed(SoraKeyEvent& event) { }
+        virtual void onKeyReleased(SoraKeyEvent& event) { }
 
-        virtual void joystickPressed(SoraJoystickEvent& event) { }
-        virtual void joystickRelesed(SoraJoystickEvent& event) { }
+        virtual void onJoystickPressed(SoraJoystickEvent& event) { }
+        virtual void onJoystickRelesed(SoraJoystickEvent& event) { }
     };
 
     

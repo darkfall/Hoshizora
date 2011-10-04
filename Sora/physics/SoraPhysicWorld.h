@@ -15,17 +15,20 @@
 namespace sora {
     
     class SoraPhysicBody;
+    class SoraPhysicJoint;
     class SoraPhysicBodyDef;
+    class SoraPhysicJointDef;
     class SoraPhysicContactListener;
     
     class SoraPhysicWorld {
     public:
         virtual ~SoraPhysicWorld() {}
         
-        virtual SoraPhysicBody* createBody(const SoraPhysicBodyDef& def) const = 0;
+        virtual SoraPhysicBody* createBody(const SoraPhysicBodyDef& def) = 0;
         virtual void destroyBody(SoraPhysicBody* body) = 0;
         
-        virtual void createJoint(SoraPhysicBody* b1, SoraPhysicBody* b2) = 0;
+        virtual SoraPhysicJoint* createJoint(const SoraPhysicJointDef& def) = 0;
+        virtual void destroyJoint(SoraPhysicJoint* joint) = 0;
         
         virtual uint32 bodyCount() = 0;
         
@@ -34,11 +37,12 @@ namespace sora {
         virtual void addContactListener(SoraPhysicContactListener* listener) = 0;
         virtual void delContactListener(SoraPhysicContactListener* listener) = 0;
         
-        static SoraPhysicBody* CreateBody(const SoraPhysicBodyDef& def);
-        static void            DestroyBody(SoraPhysicBody* body);
-        static void            CreateJoint(SoraPhysicBody* b1, SoraPhysicBody* b2);
-        static void            AddContactListener(SoraPhysicContactListener* listener);
-        static void            DelContactListener(SoraPhysicContactListener* listener);
+        static SoraPhysicBody*  CreateBody(const SoraPhysicBodyDef& def);
+        static void             DestroyBody(SoraPhysicBody* body);
+        static SoraPhysicJoint* CreateJoint(const SoraPhysicJointDef& def);
+        static void             DestroyJoint(SoraPhysicJoint* joint);
+        static void             AddContactListener(SoraPhysicContactListener* listener);
+        static void             DelContactListener(SoraPhysicContactListener* listener);
     };
     
 } // namespace sora

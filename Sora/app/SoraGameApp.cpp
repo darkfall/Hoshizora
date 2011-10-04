@@ -136,6 +136,7 @@ namespace sora {
             
             // then init the first state
             mFSMManager.switchToState(initState);
+            SoraKeyPoll::AddInputListener(static_cast<SoraGameState*>(state));
             
             // app starts!
             SoraCore::Instance()->start();
