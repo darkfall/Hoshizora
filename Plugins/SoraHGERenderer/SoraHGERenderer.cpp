@@ -20,8 +20,8 @@
 #endif
 
 #include "SoraRenderSystemExtension.h"
-
-#include "Debug/SoraInternalLogger.h"
+#include "SoraEnvValues.h"
+#include "SoraLogger.h"
 
 namespace sora{
 	
@@ -461,11 +461,11 @@ namespace sora{
 		renderLine(x1, y2, x1+1.f, y1, color, lineWidth, z);
 	}
 	
-	void SoraHGERenderer::getDesktopResolution(float* w, float *h) {
+	void SoraHGERenderer::getDesktopResolution(int* w, int *h) {
 		DWORD dwWidth = GetSystemMetrics(SM_CXSCREEN);
 		DWORD dwHeight = GetSystemMetrics(SM_CYSCREEN);
-		*w = (float)dwWidth;
-		*h = (float)dwHeight;	
+		*w = dwWidth;
+		*h = dwHeight;	
 	}
 
 	void SoraHGERenderer::setQueryVideoModeCallback(QueryVideoMode func) {

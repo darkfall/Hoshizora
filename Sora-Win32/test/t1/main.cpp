@@ -8,7 +8,6 @@
 #include "mainWindow.h"
 
 #include "SoraTimestamp.h"
-
 #include "SoraConfigUtil.h"
 
 #include "SoraDirectoryIterator.h"
@@ -24,17 +23,26 @@
 #include "helpers/SoraPostEffect.h"
 
 #include "cmd/SoraConsole.h"
-#include "SoraEventManager.h"
 
+#include "SoraTask.h"
+#include "SoraShape.h"
+
+#include "SoraLogger.h"
+#include "SoraResourceFile.h"
+
+#include "SoraBox2dPhysics/SoraBox2dPhysicWorld.h"
+#include "physics/SoraPhysicDef.h"
+#include "physics/SoraPhysicShape.h"
+#include "physics/SoraPhysicBody.h"
+
+float lx, ly, rx, ry;
+float maxsize, maxiteration, iterinc;
+float cr, cg, cb;
 
 #ifdef OS_WIN32
 #pragma comment(linker, "/NODEFAULTLIB:libcmt.lib")
 #pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
 #endif
-
-float lx, ly, rx, ry;
-float maxsize, maxiteration, iterinc;
-float cr, cg, cb;
 
 void msetCommands(sora::SoraConsoleEvent* evt) {
     std::string cmd = evt->getCmd();
@@ -83,18 +91,40 @@ void msetCommands(sora::SoraConsoleEvent* evt) {
 
 SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_iteration,set_max_size,set_iteration_increment,set_cr,set_cg,set_cb");
 
+sora::SoraPhysicBody* body;
+
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
+    GameInitState() {
+        
+    }
+    
     void onRender() {
         sora::SoraGameApp::BeginScene();
+        
         mBg.render();
-        mText.render();
-        mText2.render();
+        mBg2.render();
+        
+        sora::SoraRect r = mBg.getPhysicBody()->getBoundingBox();
+        sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
+                                              r.x2, r.y2, 0xFFFF0000);
+        
+        r = mBg2.getPhysicBody()->getBoundingBox();
+        sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
+                                              r.x2, r.y2, 0xFFFF0000);
+       
+       // mText.render();
+       // mText2.render();
+                
+        mShape.render();
+        
         sora::SoraGameApp::EndScene();
     }
     
     void onUpdate(float dt) {
         mBg.update(dt);
+        mBg2.update(dt);
+        
         if(sora::SoraCore::Instance()->keyDown(SORA_KEY_R)) {
             mShader = mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet");
             if(!mShader) {
@@ -133,16 +163,79 @@ public:
             mShader->setParameter1f("iteration_increment", iterinc);
         }
         
-        mText.setText(sora::s2ws(sora::vamssg("lx: %.2f ly: %.2f\nrx: %.2f ry: %.2f\nmax_size: %.2f max_iteration: %.2f iteration_increment: %.2f", lx, ly, rx, ry, maxsize, maxiteration, iterinc)));
+        mText.setText(sora::StringType(sora::vamssg("lx: %.2f ly: %.2f rx: %.2f ry: %.2f\nmax_size: %.2f max_iteration: %.2f iteration_increment: %.2f", lx, ly, rx, ry, maxsize, maxiteration, iterinc)).getw());
+        mText.enableRenderToSprite(true);
         
     }
     
     void onKeyEvent(sora::SoraKeyEvent* keyEvent) {
     }
     
+    void onMouseDragged(sora::SoraMouseEvent& from, sora::SoraMouseEvent& to) {
+        float d =  atan2f(to.y - from.y,
+                          to.x - from.x);
+        mBg.getPhysicBody()->applyLinearImpulse(cosf(d),
+                                                sinf(d),
+                                                50.f,
+                                                0.f);
+    }
+    
     void onEnter() {
-        sora::SoraResourceFileAuto fontData("cour.ttf");
-        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "cour");
+        sora::SoraCore::Instance()->registerPhysicWorld(new sora::SoraBox2dPhysicWorld(0.f, 1.f, true));
+
+        mBg.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
+        mBg.setColor(0xFF00FFFF);
+        
+        mBg.setPosition(200.f, 200.f);
+        mBg.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::DynamicBody),
+                             sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 
+                                                                                          100.f, 0.f, 0.f, 10.f)),
+                                                        1.f,
+                                                        0.f,
+                                                        0.f);
+        
+        mBg2.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
+        mBg2.setColor(0xFFFF00FF);
+        mBg2.setPosition(0.f, 600.f);
+        mBg2.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::StaticBody),
+                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(800.f, 10.f, 400.f, 5.f, 0.f)),
+                              1.f,
+                              0.f,
+                              0.f);
+        
+        
+        mShader = /* mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet")*/ 0;
+        lx = -2.5f;
+        ly = 1.0f;
+        rx = -2.f;
+        ry = 2.f;
+        maxsize = 2.f;
+        maxiteration = 90.f;
+        iterinc = 1.f;
+
+        sora::SoraTask* task = new sora::SoraTask("ResourceLoad", sora::Bind(this, &GameInitState::load));
+        sora::SoraTaskManager::StartAsyncTask(task);
+        
+        WaitForTaskFinish(task);
+        
+        mText2.setStyle(sora::SoraText::AlignmentCenter);
+
+        mText2.enableRenderToSprite(true);
+        mText.setStyle(sora::SoraText::AlignmentRight);
+        
+        mShape.setTexture(sora::SoraTexture::LoadFromFile("background.png"));
+        mShape.enableRenderToSprite(true);
+
+    }
+    
+    void load(sora::SoraTask* task) {
+        
+        mShape = sora::SoraShape::Arc(200.f, 200.f, 150.f, 0.f, sora::DegreeToRadius(90.f), 3.f, 0xFFFFFFFF);
+        mShape.enableOutline(3.f, 0xFFFF0000);
+        mShape.setClosed(true);
+        
+        sora::SoraResourceFileAuto fontData("Bank Gothic Medium BT.ttf");
+        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
         if(!mFont) {
             sora::SoraCore::Instance()->messageBox("Error loading font", "error", MB_OK | MB_ICONERROR);
         } else {
@@ -155,21 +248,8 @@ set_cg, set_cr, set_cb");
             mText2.setPosition(0.f, sora::SoraCore::Instance()->getScreenHeight()-mFont->getHeight()*5.5);
         }
         
-        registerEventFunc(this, &GameInitState::onKeyEvent);
-        sora::SoraEventManager::Instance()->registerInputEventHandler(this);
-        
-        mBg.setTexture(sora::SoraTexture::CreateEmpty(sora::SoraCore::Instance()->getScreenWidth(), 
-                                                      sora::SoraCore::Instance()->getScreenHeight()));
-            
-        mShader = mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet");
-        lx = -2.5f;
-        ly = 1.0f;
-        rx = -2.f;
-        ry = 2.f;
-        maxsize = 2.f;
-        maxiteration = 90.f;
-        iterinc = 1.f;
-        
+        registerEventFunc(this, &GameInitState::onKeyEvent);        
+               
         sora::SoraConfigParser parser;
         if(parser.open("mset.xml")) {
             if(parser.toNode("/mset")) {
@@ -189,12 +269,11 @@ set_cg, set_cr, set_cb");
         if(!mShader) {
             sora::SoraCore::Instance()->messageBox("Error loading MadelbrotSet shader, see log for detail error", "error", MB_OK);
         }
-        
     }
     
     void onFadeFinish(sora::SoraSprite* obj) {
         obj->fadeTo(1.f, 2.f);
-        obj->addEffect(sora::CreateEffectFade(0.f, 1.f, 1.f, sora::IMAGE_EFFECT_PINGPONG));
+        obj->addEffect(sora::CreateEffectFade(0.f, 1.f, 1.f, sora::ImageEffectPingpong));
     }
     
 private:
@@ -202,6 +281,9 @@ private:
     sora::SoraText mText;
     sora::SoraText mText2;
     sora::SoraSprite mBg;
+    sora::SoraSprite mBg2;
+    
+    sora::SoraShape mShape;
     
     sora::SoraShader* mShader;
 };
@@ -210,8 +292,7 @@ private:
 int APIENTRY WinMain(HINSTANCE hInstance,
 					   HINSTANCE hPrevInstance,
 					   LPSTR    lpCmdLine,
-					   int       nCmdShow) {
-    
+					   int       nCmdShow) {    
         
     sora::SoraGameAppDef def("config.xml");
     sora::SoraGameApp app(def);

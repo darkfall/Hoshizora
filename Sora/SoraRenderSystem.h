@@ -94,8 +94,8 @@ namespace sora {
         
         virtual void onExtensionStateChanged(int32 extension, bool state, int32 param) = 0;
         
-        typedef void (*QueryVideoMode)(float w, float h);
-        virtual void getDesktopResolution(float* w, float* h) = 0;
+        typedef void (*QueryVideoMode)(int w, int h);
+        virtual void getDesktopResolution(int* w, int* h) = 0;
         virtual void setQueryVideoModeCallback(QueryVideoMode func) = 0;
 	};
 

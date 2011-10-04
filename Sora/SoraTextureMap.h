@@ -8,6 +8,7 @@
 #include "SoraEnvValues.h"
 #include "SoraStringId.h"
 #include "SoraCore.h"
+#include "SoraLogger.h"
 #include <map>
 
 /* hash functions */

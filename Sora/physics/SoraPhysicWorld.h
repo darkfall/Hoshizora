@@ -16,9 +16,9 @@ namespace sora {
     
     class SoraPhysicBody;
     class SoraPhysicJoint;
-    class SoraPhysicBodyDef;
-    class SoraPhysicJointDef;
     class SoraPhysicContactListener;
+    struct SoraPhysicBodyDef;
+    struct SoraPhysicJointDef;
     
     class SoraPhysicWorld {
     public:

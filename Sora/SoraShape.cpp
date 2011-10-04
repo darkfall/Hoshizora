@@ -221,6 +221,7 @@ namespace sora {
             
             this->enableRenderToSprite(rhs.mRenderToSprite);
         }
+		return *this;
     }
 
     SoraVector SoraShape::computeNormal(const SoraVector& p1, const SoraVector& p2) {

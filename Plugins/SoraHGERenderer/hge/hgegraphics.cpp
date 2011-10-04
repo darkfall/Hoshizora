@@ -10,7 +10,7 @@
 #include "hge_impl.h"
 #include <d3d9.h>
 #include <d3dx9.h>
-#include "SoraException.h"
+#include "SoraLogger.h"
 
 void CALL HGE_Impl::Gfx_Clear(DWORD color)
 {
@@ -751,7 +751,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_2_SAMPLES, NULL)))
 						d3dppW.MultiSampleType = D3DMULTISAMPLE_2_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_mssg("Hardware does not support the value of multisample");
 					break;
 				case 4: 
 					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
@@ -759,7 +759,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_4_SAMPLES, NULL)))
 						d3dppW.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_mssg("Hardware does not support the value of multisample");
 					break;
 				case 8: 
 					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
@@ -767,7 +767,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_8_SAMPLES, NULL)))
 						d3dppW.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_mssg("Hardware does not support the value of multisample");
 					break;
 			}
 		}
@@ -833,7 +833,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_2_SAMPLES, NULL)))
 						d3dppFS.MultiSampleType = D3DMULTISAMPLE_2_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_mssg("Hardware does not support the value of multisample");
 					break;
 				case 4: 
 					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
@@ -841,7 +841,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_4_SAMPLES, NULL)))
 						d3dppFS.MultiSampleType = D3DMULTISAMPLE_4_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_mssg("Hardware does not support the value of multisample");
 					break;
 				case 8: 
 					if(SUCCEEDED(pD3D->CheckDeviceMultiSampleType( D3DADAPTER_DEFAULT, 
@@ -849,7 +849,7 @@ bool HGE_Impl::_GfxInit()
 					D3DMULTISAMPLE_8_SAMPLES, NULL)))
 						d3dppFS.MultiSampleType = D3DMULTISAMPLE_8_SAMPLES; 
 					else 
-						THROW_SORA_EXCEPTION(SystemException, "Hardware does not support the value of multisample");
+						sora::log_mssg("Hardware does not support the value of multisample");
 					break;
 			}
 		}

@@ -9,6 +9,7 @@
 
 #include "SoraBGMManager.h"
 #include "SoraCore.h"
+#include "SoraEnvValues.h"
 
 namespace sora {
 
@@ -18,7 +19,7 @@ namespace sora {
 										mPrevBGMId(-1), mCurrBGMId(-1) {
 		registerEventFunc(this, &SoraBGMManager::onPlaybackEvent);
 	
-		SET_ENV_FLOAT("BGM_VOLUME", bgmVolume);
+		SET_ENV_FLOAT("BgmVolume", bgmVolume);
 	}
 	
 	void SoraBGMManager::_clearBGMQueue() {
@@ -146,7 +147,7 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::setVolume(float32 volume) { 
-		SET_ENV_FLOAT("BGM_VOLUME", bgmVolume);
+		SET_ENV_FLOAT("BgmVolume", bgmVolume);
 		
 		if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size())
 			mBGMQueue[mCurrBGMId]->setVolume(volume);

@@ -17,9 +17,9 @@ namespace sora {
     class SoraObjectHandle;
     class SoraAbstractModifierAdapter;
     class SoraPhysicBody;
-    class SoraPhysicFixtureDef;
-    class SoraPhysicBodyDef;
     class SoraMessageEvent;
+    struct SoraPhysicFixtureDef;
+    struct SoraPhysicBodyDef;
 
 	class SORA_API SoraObject: public SoraEventHandler {
 	public:

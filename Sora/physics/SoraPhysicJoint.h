@@ -16,7 +16,8 @@ namespace sora {
     
     class SoraPhysicBody;
     
-    struct SoraPhysicJoint {
+    class SoraPhysicJoint {
+	public:
         virtual SoraVector getAnchorA() = 0;
         virtual SoraVector getAnchorB() = 0;
         

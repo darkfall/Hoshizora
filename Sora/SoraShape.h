@@ -18,7 +18,7 @@
 
 namespace sora {
     
-    class SoraVertex;
+    struct SoraVertex;
     class SoraSprite;
     
     /**

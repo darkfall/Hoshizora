@@ -6,8 +6,8 @@
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
-#ifndef HTL_SoraSignal_h
-#define HTL_SoraSignal_h
+#ifndef SORA_SoraSignal_Header_h
+#define SORA_SoraSignal_Header_h
 
 #include "signal/SoraSignal.h"
 

@@ -746,7 +746,7 @@ namespace sora{
 	}
 
 	bool SoraOGLRenderer::isActive() {
-		return static_cast<bool>(glfwGetWindowParam(GLFW_ACTIVE));
+		return glfwGetWindowParam(GLFW_ACTIVE) ? true : false;
 	}
 
 	void SoraOGLRenderer::setClipping(int32 x, int32 y, int32 w, int32 h) {
@@ -966,7 +966,7 @@ namespace sora{
 		renderLine(x1, y2, x1+1.f, y1, color, lineWidth, z);
 	}
 	
-	 void SoraOGLRenderer::getDesktopResolution(float* w, float* h) {
+	 void SoraOGLRenderer::getDesktopResolution(int* w, int* h) {
         GLFWvidmode mode;
         glfwGetDesktopMode(&mode);
         *w = mode.Width;

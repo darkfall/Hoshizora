@@ -4,7 +4,7 @@
 #include "SoraPlatform.h"
 #include "SoraImageEffect.h"
 #include "SoraString.h"
-#include "SoraVector.h"
+#include "math/SoraVector.h"
 
 namespace sora {
 

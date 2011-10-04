@@ -19,6 +19,7 @@
 #include "SoraFileChangeEvent.h"
 
 #include "SoraScene.h"
+#include "SoraWindowInfo.h"
 
 class mainWindow: public sora::SoraWindowInfoBase {
 public:

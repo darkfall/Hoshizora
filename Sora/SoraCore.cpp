@@ -37,7 +37,7 @@
 #include "physics/SoraPhysicWorld.h"
 
 #ifdef SORA_ENABLE_MULTI_THREAD
-#include "SoraMutex.h"
+#include "thread/SoraMutex.h"
 #endif
 
 #include "Defaults/SoraDefaultMiscTool.h"

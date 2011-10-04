@@ -39,12 +39,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraBox2dPhysics;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraGifSprite;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraHttpFile;$(ProjectDir)../../../Plugins/SoraThread;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/SoraFMODSoundSystem/;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraBox2dPhysics;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)../../../Plugins/SoraFMODSoundSystem/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/fmod;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -87,6 +87,45 @@
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnProgressBar.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnSelectableContainer.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Box2D.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2BroadPhase.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Collision.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Distance.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2DynamicTree.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2TimeOfImpact.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2CircleShape.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2PolygonShape.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2Shape.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2BlockAllocator.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2Math.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2Settings.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2StackAllocator.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Body.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2ContactManager.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Fixture.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Island.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2TimeStep.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2World.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2WorldCallbacks.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2CircleContact.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2Contact.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2ContactSolver.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2PolygonContact.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2TOISolver.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2DistanceJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2FrictionJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2GearJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2Joint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2LineJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2MouseJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2PrismaticJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2PulleyJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2RevoluteJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2WeldJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicBody.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicJoint.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicWorld.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftconfig.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftheader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\freetype\config\ftmodule.h" />
@@ -254,6 +293,11 @@
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinystr.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxml.h" />
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\xmlgui.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hgecolor.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge_impl.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\EnvVarExport.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaAutoBlock.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaCall.h" />
@@ -305,20 +349,8 @@
     <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaObject.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\SoraLuaStateManager.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\spriteWrapper.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\glfw\GL\glfw.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\OSXIconWrapper.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_helper.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\SOIL.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stbi_DDS_aug.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stbi_DDS_aug_c.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stb_image_aug.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLInput.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLKeyPoll.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.h" />
     <ClInclude Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h" />
-    <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.h" />
@@ -350,7 +382,6 @@
     <ClInclude Include="..\..\..\Sora\entity\SoraEntity.h" />
     <ClInclude Include="..\..\..\Sora\entity\SoraEntityListener.h" />
     <ClInclude Include="..\..\..\Sora\entity\SoraLightWeightEntity.h" />
-    <ClInclude Include="..\..\..\Sora\event\SoraEventChannel.h" />
     <ClInclude Include="..\..\..\Sora\event\SoraEventFactory.h" />
     <ClInclude Include="..\..\..\Sora\event\SoraEventRouter.h" />
     <ClInclude Include="..\..\..\Sora\event\SoraEventWorld.h" />
@@ -408,6 +439,12 @@
     <ClInclude Include="..\..\..\Sora\notification\SoraNotification.h" />
     <ClInclude Include="..\..\..\Sora\notification\SoraNotificationCenter.h" />
     <ClInclude Include="..\..\..\Sora\notification\SoraObserver.h" />
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicBody.h" />
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicDef.h" />
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicJoint.h" />
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicListener.h" />
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicShape.h" />
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicWorld.h" />
     <ClInclude Include="..\..\..\Sora\property\SoraDynRTTIClass.h" />
     <ClInclude Include="..\..\..\Sora\property\SoraProperty.h" />
     <ClInclude Include="..\..\..\Sora\property\SoraPropertyHolder.h" />
@@ -427,20 +464,6 @@
     <ClInclude Include="..\..\..\Sora\Random\SFMT-params86243.h" />
     <ClInclude Include="..\..\..\Sora\Random\SFMT-sse2.h" />
     <ClInclude Include="..\..\..\Sora\Random\SFMT.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTI.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIClass.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIClassManager.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIConstructor.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIException.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIField.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIFunctor.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIMethod.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIType.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTITypeDecl.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIVar.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIVarAccess.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIVarConverter.h" />
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIVarDefaultValue.h" />
     <ClInclude Include="..\..\..\Sora\scripting\SoraScriptVM.h" />
     <ClInclude Include="..\..\..\Sora\scripting\SoraScriptVMHolder.h" />
     <ClInclude Include="..\..\..\Sora\signal\SoraSignal.h" />
@@ -522,6 +545,8 @@
     <ClInclude Include="..\..\..\Sora\SoraShader.h" />
     <ClInclude Include="..\..\..\Sora\SoraShaderEnabled.h" />
     <ClInclude Include="..\..\..\Sora\SoraShaderManager.h" />
+    <ClInclude Include="..\..\..\Sora\SoraShape.h" />
+    <ClInclude Include="..\..\..\Sora\SoraSignal.h" />
     <ClInclude Include="..\..\..\Sora\SoraSimpleFSM.h" />
     <ClInclude Include="..\..\..\Sora\SoraSingleton.h" />
     <ClInclude Include="..\..\..\Sora\SoraSingletonHolder.h" />
@@ -543,6 +568,9 @@
     <ClInclude Include="..\..\..\Sora\SoraWindowInfo.h" />
     <ClInclude Include="..\..\..\Sora\support\kalloc.h" />
     <ClInclude Include="..\..\..\Sora\support\md5lib.h" />
+    <ClInclude Include="..\..\..\Sora\task\SoraTask.h" />
+    <ClInclude Include="..\..\..\Sora\task\SoraTaskManager.h" />
+    <ClInclude Include="..\..\..\Sora\task\SoraTaskNotification.h" />
     <ClInclude Include="..\..\..\Sora\thread\pthread.h" />
     <ClInclude Include="..\..\..\Sora\thread\sched.h" />
     <ClInclude Include="..\..\..\Sora\thread\semaphore.h" />
@@ -602,6 +630,44 @@
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnProgressBar.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnSelectableContainer.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2BroadPhase.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2CollideCircle.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2CollidePolygon.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Collision.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Distance.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2DynamicTree.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2TimeOfImpact.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2CircleShape.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2PolygonShape.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2BlockAllocator.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2Math.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2Settings.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2StackAllocator.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Body.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2ContactManager.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Fixture.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Island.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2World.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2WorldCallbacks.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2CircleContact.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2Contact.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2ContactSolver.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2PolygonContact.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2TOISolver.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2DistanceJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2FrictionJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2GearJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2Joint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2LineJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2MouseJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2PulleyJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2WeldJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicBody.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicJoint.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicWorld.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFTFontManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\guichan\actionevent.cpp" />
@@ -667,6 +733,12 @@
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\ticpp\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\xmlgui.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeresource.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\EnvVarExport.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaObject.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaPlus.cpp" />
@@ -719,16 +791,8 @@
     <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaObject.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\SoraLuaStateManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\spriteWrapper.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_helper.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\SOIL.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\stb_image_aug.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLInput.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLKeyPoll.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp" />
-    <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraBGMManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.cpp" />
@@ -746,7 +810,6 @@
     <ClCompile Include="..\..\..\Sora\entity\SoraComponentHolder.cpp" />
     <ClCompile Include="..\..\..\Sora\entity\SoraEntity.cpp" />
     <ClCompile Include="..\..\..\Sora\entity\SoraLightWeightEntity.cpp" />
-    <ClCompile Include="..\..\..\Sora\event\SoraEventChannel.cpp" />
     <ClCompile Include="..\..\..\Sora\event\SoraEventFactory.cpp" />
     <ClCompile Include="..\..\..\Sora\event\SoraEventRouter.cpp" />
     <ClCompile Include="..\..\..\Sora\event\SoraEventWorld.cpp" />
@@ -779,15 +842,13 @@
     <ClCompile Include="..\..\..\Sora\notification\SoraNotification.cpp" />
     <ClCompile Include="..\..\..\Sora\notification\SoraNotificationCenter.cpp" />
     <ClCompile Include="..\..\..\Sora\notification\SoraObserver.cpp" />
+    <ClCompile Include="..\..\..\Sora\physics\SoraPhysicBody.cpp" />
+    <ClCompile Include="..\..\..\Sora\physics\SoraPhysicJoint.cpp" />
+    <ClCompile Include="..\..\..\Sora\physics\SoraPhysicShape.cpp" />
+    <ClCompile Include="..\..\..\Sora\physics\SoraPhysicWorld.cpp" />
     <ClCompile Include="..\..\..\Sora\property\SoraDynRTTIClass.cpp" />
-    <ClCompile Include="..\..\..\Sora\property\SoraProperty.cpp" />
     <ClCompile Include="..\..\..\Sora\property\SoraTypeSerializer.cpp" />
     <ClCompile Include="..\..\..\Sora\Random\SFMT.c" />
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIClass.cpp" />
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIClassManager.cpp" />
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIField.cpp" />
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIMethod.cpp" />
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIType.cpp" />
     <ClCompile Include="..\..\..\Sora\scripting\SoraScriptVMHolder.cpp" />
     <ClCompile Include="..\..\..\Sora\signal\SoraSignal.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraAny.cpp" />
@@ -812,7 +873,6 @@
     <ClCompile Include="..\..\..\Sora\SoraHandleManager.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraHotKey.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp" />
-    <ClCompile Include="..\..\..\Sora\SoraInputListeners.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraInputQueue.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraKeyInfo.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraLayer.cpp" />
@@ -831,6 +891,7 @@
     <ClCompile Include="..\..\..\Sora\SoraShader.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraShaderEnabled.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraShaderManager.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraShape.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraSimpleFSM.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraSoundSystem.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraSoundSystemThread.cpp" />
@@ -844,6 +905,8 @@
     <ClCompile Include="..\..\..\Sora\SoraTimestamp.cpp" />
     <ClCompile Include="..\..\..\Sora\support\kalloc.c" />
     <ClCompile Include="..\..\..\Sora\support\md5lib.cpp" />
+    <ClCompile Include="..\..\..\Sora\task\SoraTask.cpp" />
+    <ClCompile Include="..\..\..\Sora\task\SoraTaskManager.cpp" />
     <ClCompile Include="..\..\..\Sora\thread\SoraAtomicCounter.cpp" />
     <ClCompile Include="..\..\..\Sora\thread\SoraCondition.cpp" />
     <ClCompile Include="..\..\..\Sora\thread\SoraCountDownLatch.cpp" />

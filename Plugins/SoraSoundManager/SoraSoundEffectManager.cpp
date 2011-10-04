@@ -8,12 +8,13 @@
  */
 
 #include "SoraSoundEffectManager.h"
+#include "SoraEnvValues.h"
 #include "SoraCore.h"
 
 namespace sora {
 	
 	SoraSoundEffectManager::SoraSoundEffectManager(): effectVolume(100.f) {
-		SET_ENV_FLOAT("SOUND_EFFECT_VOLUME", effectVolume);
+		SET_ENV_FLOAT("SoundEffectVolume", effectVolume);
 	}
 	
 	SoraSoundEffectManager::~SoraSoundEffectManager() {
@@ -84,7 +85,7 @@ namespace sora {
 	}
 	
 	void SoraSoundEffectManager::setVolume(float32 vol) {
-		SET_ENV_FLOAT("SOUND_EFFECT_VOLUME", vol);
+		SET_ENV_FLOAT("SoundEffectVolume", vol);
 		
 		SOUND_EFFECT_MAP::iterator itEffect = mSoundEffects.begin();
 		while(itEffect != mSoundEffects.end()) {

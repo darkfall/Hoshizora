@@ -87,7 +87,7 @@ namespace sora {
         
         void onExtensionStateChanged(int32 extension, bool state, int32 param);
         
-        void getDesktopResolution(float* w, float* h);
+        void getDesktopResolution(int* w, int* h);
         void setQueryVideoModeCallback(QueryVideoMode func);
 
 	private:

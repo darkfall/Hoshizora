@@ -47,8 +47,8 @@ namespace sora {
                                               bbox.y1,
                                               bbox.x2,
                                               bbox.y2,
-                                              1.f,
-                                              0xFFFFFFFF);
+											  0xFFFFFFFF,
+                                              1.f);
     }
     
 } // namespace sora

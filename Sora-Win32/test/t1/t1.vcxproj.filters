@@ -88,9 +88,6 @@
     <Filter Include="头文件\thread">
       <UniqueIdentifier>{6a5ee93e-1065-449d-ae92-704129f7810e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\RTTi">
-      <UniqueIdentifier>{f44d7db7-5b11-4f6c-9eab-b87727f96b9c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\cmd">
       <UniqueIdentifier>{26ff19b6-eb2d-4a49-ba27-affcdd117330}</UniqueIdentifier>
     </Filter>
@@ -133,8 +130,11 @@
     <Filter Include="头文件\config">
       <UniqueIdentifier>{1058bf33-749d-484d-b939-3d20f6fa266d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugins\ogl">
-      <UniqueIdentifier>{453227ed-ae66-4074-bd91-deb2b605e5e5}</UniqueIdentifier>
+    <Filter Include="Plugins\box2dphysics">
+      <UniqueIdentifier>{d76572f8-c0bc-4726-9d91-937d44684cb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\hge">
+      <UniqueIdentifier>{89510b77-a729-4bda-8546-615f99351a6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -768,9 +768,6 @@
     <ClInclude Include="..\..\..\Sora\modifiers\SoraCameraModifiers.h">
       <Filter>头文件\modifiers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\event\SoraEventChannel.h">
-      <Filter>头文件\event</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\event\SoraEventFactory.h">
       <Filter>头文件\event</Filter>
     </ClInclude>
@@ -1145,48 +1142,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraTimerEvent.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTI.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIClass.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIClassManager.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIConstructor.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIException.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIField.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIFunctor.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIMethod.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIType.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTITypeDecl.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIVar.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIVarAccess.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIVarConverter.h">
-      <Filter>头文件\RTTi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\RTTI\SoraRTTIVarDefaultValue.h">
-      <Filter>头文件\RTTi</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\cmd\CoreCmds.h">
       <Filter>头文件\cmd</Filter>
@@ -1638,44 +1593,173 @@
     <ClInclude Include="..\..\..\Sora\config\SoraConfigParser.h">
       <Filter>头文件\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\glfw\GL\glfw.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicBody.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\OSXIconWrapper.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicDef.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicJoint.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_helper.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicListener.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\SOIL.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicShape.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stbi_DDS_aug.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Sora\physics\SoraPhysicWorld.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stbi_DDS_aug_c.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Box2D.h">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\soil\stb_image_aug.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2BroadPhase.h">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLInput.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Collision.h">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLKeyPoll.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Distance.h">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2DynamicTree.h">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2TimeOfImpact.h">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.h">
-      <Filter>Plugins\ogl</Filter>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2CircleShape.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2PolygonShape.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2Shape.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2BlockAllocator.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2Math.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2Settings.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2StackAllocator.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Body.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2ContactManager.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Fixture.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Island.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2TimeStep.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2World.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2WorldCallbacks.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2CircleContact.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2Contact.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2ContactSolver.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2PolygonContact.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2TOISolver.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2DistanceJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2FrictionJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2GearJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2Joint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2LineJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2MouseJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2PrismaticJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2PulleyJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2RevoluteJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2WeldJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicBody.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicJoint.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicWorld.h">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge.h">
+      <Filter>Plugins\hge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hgecolor.h">
+      <Filter>Plugins\hge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge_impl.h">
+      <Filter>Plugins\hge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.h">
+      <Filter>Plugins\hge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h">
+      <Filter>Plugins\hge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraShape.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraSignal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\task\SoraTask.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\task\SoraTaskManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\task\SoraTaskNotification.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.h">
+      <Filter>Plugins\hge</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1964,9 +2048,6 @@
     <ClCompile Include="..\..\..\Sora\modifiers\SoraCameraModifiers.cpp">
       <Filter>头文件\modifiers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\event\SoraEventChannel.cpp">
-      <Filter>头文件\event</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\event\SoraEventFactory.cpp">
       <Filter>头文件\event</Filter>
     </ClCompile>
@@ -2069,9 +2150,6 @@
     <ClCompile Include="..\..\..\Sora\SoraImageEffect.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraInputListeners.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraInputQueue.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -2146,21 +2224,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraTimerEvent.cpp">
       <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIClass.cpp">
-      <Filter>头文件\RTTi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIClassManager.cpp">
-      <Filter>头文件\RTTi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIField.cpp">
-      <Filter>头文件\RTTi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIMethod.cpp">
-      <Filter>头文件\RTTi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\RTTI\SoraRTTIType.cpp">
-      <Filter>头文件\RTTi</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\cmd\CoreCmds.cpp">
       <Filter>头文件\cmd</Filter>
@@ -2426,9 +2489,6 @@
     <ClCompile Include="..\..\..\Sora\property\SoraDynRTTIClass.cpp">
       <Filter>头文件\properties</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\property\SoraProperty.cpp">
-      <Filter>头文件\properties</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\property\SoraTypeSerializer.cpp">
       <Filter>头文件\properties</Filter>
     </ClCompile>
@@ -2495,32 +2555,161 @@
     <ClCompile Include="..\..\..\Sora\SoraSoundSystem.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_DXT.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Sora\physics\SoraPhysicBody.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\image_helper.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Sora\physics\SoraPhysicJoint.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\SOIL.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Sora\physics\SoraPhysicShape.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\soil\stb_image_aug.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Sora\physics\SoraPhysicWorld.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLInput.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2BroadPhase.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLKeyPoll.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2CollideCircle.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderer.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2CollidePolygon.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraOGLRenderer\SoraOGLRenderTarget.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Collision.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGGLShader.cpp">
-      <Filter>Plugins\ogl</Filter>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Distance.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2DynamicTree.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2TimeOfImpact.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2CircleShape.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\Shapes\b2PolygonShape.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2BlockAllocator.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2Math.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2Settings.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Common\b2StackAllocator.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Body.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2ContactManager.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Fixture.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2Island.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2World.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\b2WorldCallbacks.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2CircleContact.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2Contact.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2ContactSolver.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2PolygonContact.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Contacts\b2TOISolver.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2DistanceJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2FrictionJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2GearJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2Joint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2LineJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2MouseJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2PulleyJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Dynamics\Joints\b2WeldJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicBody.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicJoint.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\SoraBox2dPhysicWorld.cpp">
+      <Filter>Plugins\box2dphysics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgegraphics.cpp">
+      <Filter>Plugins\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp">
+      <Filter>Plugins\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeresource.cpp">
+      <Filter>Plugins\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp">
+      <Filter>Plugins\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp">
+      <Filter>Plugins\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp">
+      <Filter>Plugins\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraShape.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\task\SoraTask.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\task\SoraTaskManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp">
+      <Filter>Plugins\hge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

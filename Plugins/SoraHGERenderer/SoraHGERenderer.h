@@ -84,7 +84,7 @@ namespace sora {
         void renderBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float width, float32 z);
 		void fillBox(float32 x1, float32 y1, float32 x2, float32 y2, uint32 color, float32 z);
 
-		void getDesktopResolution(float* w, float *y);
+		void getDesktopResolution(int* w, int *y);
 		void setQueryVideoModeCallback(QueryVideoMode func);
 		
 	private:
