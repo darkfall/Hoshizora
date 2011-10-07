@@ -13,10 +13,10 @@
 
 namespace sora {
     
-    const uint32 MAX_OBJECT_SIZE = 65525;
-
     class SORA_API SoraObjectHandle {
     public:
+        enum { MaxObjectSize = 65525 };
+        
         explicit SoraObjectHandle(SoraObject* obj);
         ~SoraObjectHandle();
         

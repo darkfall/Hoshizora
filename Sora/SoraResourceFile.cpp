@@ -12,83 +12,77 @@
 #include "SoraLogger.h"
 
 namespace sora {
-    SoraResourceFileAuto::SoraResourceFileAuto():
+    
+    SoraResourceFile::SoraResourceFile():
+    SoraResource(SoraResource::RawData),
     mData(NULL),
     mSize(0),
     mRetain(false) {
         
     }
 
-	SoraResourceFileAuto::SoraResourceFileAuto(void* data, ulong32 size, bool retain):
+	SoraResourceFile::SoraResourceFile(void* data, ulong32 size, bool retain):
+    SoraResource(SoraResource::RawData),
 	mData(data),
 	mSize(size),
 	mRetain(retain) {
 	}
 	
-	SoraResourceFileAuto::SoraResourceFileAuto(const StringType& file, bool retain):
-	mRetain(retain),
-    mName(file) {
-		mData = SORA->getResourceFile(file, mSize);
+	SoraResourceFile::SoraResourceFile(const StringType& file, bool retain):
+    SoraResource(SoraResource::RawData),
+	mRetain(retain) {
+		mData = SoraCore::Ptr->getResourceFile(file, mSize);
 		if(!mData)
-			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", ws2s(file).c_str()));
+			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", file.c_str()));
 	}
     
-    SoraResourceFileAuto::SoraResourceFileAuto(const StringType& file, ulong32 pos, ulong32 size, bool retain):
-    mRetain(retain),
-    mName(file)  {
-        mData = SORA->readResourceFile(file, pos, size);
+    SoraResourceFile::SoraResourceFile(const StringType& file, ulong32 pos, ulong32 size, bool retain):
+    SoraResource(SoraResource::RawData),
+    mRetain(retain) {
+        mData = SoraCore::Ptr->readResourceFile(file, pos, size);
         if(!mData)
-			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", ws2s(file).c_str()));
+			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", file.c_str()));
     }
 	
-	SoraResourceFileAuto::~SoraResourceFileAuto() {
+	SoraResourceFile::~SoraResourceFile() {
 		if(mData && !mRetain) {
-			SORA->freeResourceFile(mData);
+			SoraCore::Ptr->freeResourceFile(mData);
 		}
 	}
     
-    SoraResourceFileAuto& SoraResourceFileAuto::operator=(const StringType& file) {
-        mData = SORA->getResourceFile(file, mSize);
+    SoraResourceFile& SoraResourceFile::operator=(const StringType& file) {
+        mData = SoraCore::Ptr->getResourceFile(file, mSize);
 		if(!mData)
-			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", ws2s(file).c_str()));
+			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", file.c_str()));
         mRetain = false;
-        mName = file;
 		return *this;
     }
     
-    void* SoraResourceFileAuto::data() const {
+    void* SoraResourceFile::data() const {
         return mData;
     }
     
-    ulong32 SoraResourceFileAuto::size() const {
+    ulong32 SoraResourceFile::size() const {
         return mSize;
     }
 	
-	void* SoraResourceFileAuto::getData() const {
+	bool SoraResourceFile::isValid() const {
+		return mData!=0;
+	}
+	
+	SoraResourceFile::operator void*() {
 		return mData;
 	}
 	
-	ulong32 SoraResourceFileAuto::getSize() const {
-		return mSize;
-	}
-	
-	bool SoraResourceFileAuto::isValid() const {
-		return mData!=NULL;
-	}
-	
-	SoraResourceFileAuto::operator void*() {
-		return mData;
-	}
-	
-	SoraResourceFileAuto::operator char*() {
+	SoraResourceFile::operator char*() {
 		return static_cast<char*>(mData);
 	}
 	
-	SoraResourceFileAuto::operator int*() {
+	SoraResourceFile::operator int*() {
 		return static_cast<int*>(mData);
 	}
 	
-	SoraResourceFileAuto::operator long*() {
+	SoraResourceFile::operator long*() {
 		return static_cast<long*>(mData);
 	}
 	

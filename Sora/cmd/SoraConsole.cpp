@@ -92,7 +92,7 @@ namespace sora {
 	
 	void SoraConsole::render() {
 		if(mActive) {
-			float delta = SORA->getDelta();
+			float delta = SoraCore::Ptr->getDelta();
 			if(mTab == TAB_CMDLINE) {
 				drawCmds();
 				
@@ -146,37 +146,37 @@ namespace sora {
 	
 	void SoraConsole::drawTab() {
 		uint32 hCol = 0xFF909090;
-		SORA->fillBox(mPositionX+mWidth-120.f, 
-						 mPositionY+mHeight-mFontHeight, 
-						 mPositionX+mWidth-60.f,
-						 mPositionY+mHeight,
-						 mTab==TAB_CMDLINE?hCol:mBackgroundColor);
-		SORA->fillBox(mPositionX+mWidth-60.f, 
-						 mPositionY+mHeight-mFontHeight, 
-						 mPositionX+mWidth,
-						 mPositionY+mHeight,
-						 mTab==TAB_MSSG?hCol:mBackgroundColor);
-		SORA->renderBox(mPositionX+mWidth-120.f, 
-						mPositionY+mHeight-mFontHeight, 
-						mPositionX+mWidth-60.f,
-						mPositionY+mHeight,
-						mCaretColor);
-		SORA->renderBox(mPositionX+mWidth-60.f, 
-						mPositionY+mHeight-mFontHeight, 
-						mPositionX+mWidth,
-						mPositionY+mHeight,
-						mCaretColor);
+		SoraCore::Ptr->fillBox(mPositionX+mWidth-120.f, 
+                               mPositionY+mHeight-mFontHeight, 
+                               mPositionX+mWidth-60.f,
+                               mPositionY+mHeight,
+                               mTab==TAB_CMDLINE?hCol:mBackgroundColor);
+		SoraCore::Ptr->fillBox(mPositionX+mWidth-60.f, 
+                               mPositionY+mHeight-mFontHeight, 
+                               mPositionX+mWidth,
+                               mPositionY+mHeight,
+                               mTab==TAB_MSSG?hCol:mBackgroundColor);
+		SoraCore::Ptr->renderBox(mPositionX+mWidth-120.f, 
+                                 mPositionY+mHeight-mFontHeight, 
+                                 mPositionX+mWidth-60.f,
+                                 mPositionY+mHeight,
+                                 mCaretColor);
+		SoraCore::Ptr->renderBox(mPositionX+mWidth-60.f, 
+                                 mPositionY+mHeight-mFontHeight, 
+                                 mPositionX+mWidth,
+                                 mPositionY+mHeight,
+                                 mCaretColor);
 		if(mFont) {
 			mFont->setColor(mCaretColor);
-			mFont->render(mPositionX+mWidth-90.f, mPositionY+mHeight-mFontHeight*1.2f, FONT_ALIGNMENT_CENTER, L"Cmd");
-			mFont->render(mPositionX+mWidth-30.f, mPositionY+mHeight-mFontHeight*1.2f, FONT_ALIGNMENT_CENTER, L"Log");
+			mFont->render(mPositionX+mWidth-90.f, mPositionY+mHeight-mFontHeight*1.2f, SoraFont::AlignmentCenter, L"Cmd");
+			mFont->render(mPositionX+mWidth-30.f, mPositionY+mHeight-mFontHeight*1.2f, SoraFont::AlignmentCenter, L"Log");
 		}
 	}
 					  
 	
 	void SoraConsole::drawCmds() {
-		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
-		SORA->fillBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mBackgroundColor);
+		SoraCore::Ptr->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
+		SoraCore::Ptr->fillBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mBackgroundColor);
 		if(mFont) {			
 			mFont->setLineWidth(mWidth);
 			float x = mPositionX + 1.f;
@@ -185,14 +185,14 @@ namespace sora {
 			if(mHistory.size() != 0) {
 				for(size_t i=mStartLine; i<mCurrLine; ++i) {
 					mFont->setColor(mCaretColor);
-					mFont->render(x, y, FONT_ALIGNMENT_LEFT, (L"> "+mHistory[i].mCmd).c_str());
+					mFont->render(x, y, SoraFont::AlignmentLeft, (L"> "+mHistory[i].mCmd).c_str());
 					y += mFontHeight;
 					
                     CmdHistory* his = &mHistory[i];
 					std::vector<std::wstring>::iterator it = his->mResults.begin();
                     for(it; it != his->mResults.end(); ++it) {
                         mFont->setColor(mResultColor);
-                        mFont->render(x, y, FONT_ALIGNMENT_LEFT, it->c_str());
+                        mFont->render(x, y, SoraFont::AlignmentLeft, it->c_str());
                         y += mFont->getStringHeight(it->c_str());
 					}
 				}
@@ -200,10 +200,10 @@ namespace sora {
 			
 			mFont->setColor(mCaretColor);
 			std::wstring currLine = s2wsfast("> "+mCurrentLine);
-			mFont->render(x, y, FONT_ALIGNMENT_LEFT, currLine.c_str());
+			mFont->render(x, y, SoraFont::AlignmentLeft, currLine.c_str());
 			
 			if(mCaretShow <= 0.5f) {
-				mFont->render(mFont->getStringWidth(currLine.c_str()), y, FONT_ALIGNMENT_LEFT, L"|");
+				mFont->render(mFont->getStringWidth(currLine.c_str()), y, SoraFont::AlignmentLeft, L"|");
 			} else if(mCaretShow >= 1.0f)
 				mCaretShow = 0.0f;
 			mFont->setLineWidth(0.f);
@@ -211,8 +211,8 @@ namespace sora {
 	}
 	
 	void SoraConsole::drawMssg() {
-		SORA->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
-		SORA->fillBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mBackgroundColor);
+		SoraCore::Ptr->renderBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mCaretColor);
+		SoraCore::Ptr->fillBox(mPositionX, mPositionY, mPositionX+mWidth, mPositionY+mHeight, mBackgroundColor);
 		if(mFont) {
 			mFont->setLineWidth(mWidth);
 			float x = mPositionX + 1.f;
@@ -242,7 +242,7 @@ namespace sora {
 					case LOG_LEVEL_ERROR:	mFont->setColor(0xFFFF0000); break;
 					case LOG_LEVEL_WARNING: mFont->setColor(0xFFFFCC00); break;
 				}
-				mFont->render(x, y, FONT_ALIGNMENT_LEFT, s2wsfast("> "+debugMssg[i].mLog).c_str());
+				mFont->render(x, y, SoraFont::AlignmentLeft, s2wsfast("> "+debugMssg[i].mLog).c_str());
 				if(i > 0)
 					y -= mFont->getStringHeight(s2wsfast(debugMssg[i-1].mLog).c_str());
 			
@@ -264,7 +264,7 @@ namespace sora {
 	}
     
     void SoraConsole::setActiveKey(const SoraHotkey& key) {
-        sora::SORA->setGlobalHotkey(mActiveKeyId, key);
+        sora::SoraCore::Ptr->setGlobalHotkey(mActiveKeyId, key);
     }
 	
 	void SoraConsole::registerCmdHandler(SoraEventHandler* handler, const std::string& cmd) {
@@ -352,7 +352,7 @@ namespace sora {
             }
 		} else {
             if(mUseSysTerm)
-                SORA->execute(cmd, params!=NULL?params:"");
+                SoraCore::Ptr->execute(cmd, params!=NULL?params:"");
 		}
 		
 		mHistory.push_back(history);

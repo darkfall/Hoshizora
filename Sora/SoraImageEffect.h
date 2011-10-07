@@ -4,9 +4,9 @@
 #include "SoraException.h"
 #include "SoraPlatform.h"
 #include "SoraColor.h"
-#include "SoraMath.h"
-#include "math/SoraCoreTransformer.h"
 #include "SoraModifier.h"
+#include "math/SoraCoreTransform.h"
+#include "math/SoraCoreTransformer.h"
 #include <list>
 
 namespace sora {

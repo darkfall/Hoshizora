@@ -7,6 +7,7 @@
 //
 
 #include "SoraLuaExport.h"
+#include "SoraShader.h"
 
 namespace sora {
     
@@ -301,12 +302,12 @@ namespace sora {
         global.SetInteger("ImageEffectPingpong", ImageEffectPingpong);
         global.SetInteger("ImageEffectRepeat", ImageEffectRepeat);
         
-        global.SetInteger("FRAGMENT_SHADER", FRAGMENT_SHADER);
-        global.SetInteger("VERTEX_SHADER", VERTEX_SHADER);
+        global.SetInteger("SoraShader::FragmentShader", SoraShader::FragmentShader);
+        global.SetInteger("SoraShader::VertexShader", SoraShader::VertexShader);
         
-        global.SetInteger("FONT_ALIGNMENT_LEFT", FONT_ALIGNMENT_LEFT);
-        global.SetInteger("FONT_ALIGNMENT_RIGHT", FONT_ALIGNMENT_RIGHT);
-        global.SetInteger("FONT_ALIGNMENT_CENTER", FONT_ALIGNMENT_CENTER);
+        global.SetInteger("SoraFont::AlignmentLeft", SoraFont::AlignmentLeft);
+        global.SetInteger("SoraFont::AlignmentCenter", SoraFont::AlignmentCenter);
+        global.SetInteger("SoraFont::AlignmentCenter", SoraFont::AlignmentCenter);
         
         global.SetInteger("BLEND_COLORADD", BLEND_COLORADD);
         global.SetInteger("BLEND_COLORMUL", BLEND_COLORMUL);

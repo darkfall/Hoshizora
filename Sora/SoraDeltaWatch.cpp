@@ -13,7 +13,7 @@ namespace sora {
     
     template<int FRAME_COUNT>
     void SoraDeltaWatch<FRAME_COUNT>::update() {
-        float delta = SORA->getDelta();
+        float delta = SoraCore::Ptr->getDelta();
         
         mFrames.push_back(delta);
         if(mFrames.size() >= FRAME_COUNT)

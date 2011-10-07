@@ -67,6 +67,8 @@ namespace sora {
         
         // external window
         SoraWindowInfoBase* Window;
+        
+        std::vector<StringType> ResourceScripts;
     };
     
 } // namespace sora

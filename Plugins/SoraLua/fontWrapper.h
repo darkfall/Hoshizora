@@ -17,7 +17,7 @@
 namespace fontWrapper {
 	
 	static ulong32 createFont(const std::wstring& fontName, int32 size) {
-		return (ulong32)sora::SORA->createFont(fontName, size);
+		return (ulong32)sora::SoraCore::Ptr->createFont(fontName, size);
 	}
 	
 	static void renderString(ulong32 font, float x, float y, int32 alignment, const std::wstring& str) {

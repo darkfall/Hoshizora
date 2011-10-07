@@ -15,15 +15,16 @@ namespace sora {
         return SoraCore::Instance()->createMusicFile(path, isStream);
     }
     
-    SoraSoundEffectFile* LoadSoundEffectFromFile(const StringType& path) {
+    SoraSoundEffectFile* SoraSoundSystem::LoadSoundEffectFromFile(const StringType& path) {
         return SoraCore::Instance()->createSoundEffectFile(path);
     }
     
-    SoraMusicFile* LoadMusicFromMemory(void* pdata, ulong32 size) {
+    SoraMusicFile* SoraSoundSystem::LoadMusicFromMemory(void* pdata, ulong32 size) {
         return SoraCore::Instance()->createMusicFileFromMemory(pdata, size);
     }
     
-    SoraSoundEffectFile* LoaSoundEffectFromMemory(void* pdata, ulong32 size) {
+    SoraSoundEffectFile* SoraSoundSystem::LoadSoundEffectFromMemory(void* pdata, ulong32 size) {
         return SoraCore::Instance()->createSoundEffectFileFromMemory(pdata, size);
     }
+    
 } // namespace sora

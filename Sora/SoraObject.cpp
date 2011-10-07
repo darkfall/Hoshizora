@@ -38,6 +38,7 @@ namespace sora {
         mNext = NULL;
         mSubObjects = NULL;
         mParent = NULL;
+        
         FreeHandleSlot(mHandleId);
         
         if(mAutoReleasePhysicBody && mPhysicBody) {

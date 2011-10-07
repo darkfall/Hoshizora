@@ -11,6 +11,11 @@
 #include "SoraGlobalMessageRouter.h"
 #include "function/SoraBind.h"
 
+#include "SoraStringConv.h"
+#include "SoraCore.h"
+#include "lexer/SoraLexer.h"
+#include "message/SoraMessageEvent.h"
+
 namespace sora {
 
 	SoraLocalizer* SoraLocalizer::mInstance = NULL;
@@ -46,68 +51,70 @@ namespace sora {
         }
     }
     
-	bool SoraLocalizer::readToken(llexer* lexer, Token tokenExpected) {
+	bool SoraLocalizer::readToken(SoraLexer* lexer, int tokenExpected) {
 		return (lexer->getNextToken() == tokenExpected);
 	}
 	
-	SoraString SoraLocalizer::readLocaleIdent(llexer* confLexer) {
-		readToken(confLexer, TOKEN_TYPE_IDENT);
+	SoraString SoraLocalizer::readLocaleIdent(SoraLexer* confLexer) {
+		readToken(confLexer, TokenIdent);
 		if(strcmp(confLexer->getCurrLexeme(), "locale") == 0) {
-			readToken(confLexer, TOKEN_TYPE_OP);
-			readToken(confLexer, TOKEN_TYPE_IDENT);
+			readToken(confLexer, TokenOperator);
+			readToken(confLexer, TokenIdent);
 
 			return confLexer->getCurrLexeme();
 		}
 		return "\0";
 	}
 	
-	bool SoraLocalizer::readLocaleString(llexer* confLexer, LocaleStringMap& strMap) {
+	bool SoraLocalizer::readLocaleString(SoraLexer* confLexer, LocaleStringMap& strMap) {
 		SoraString strIdent = confLexer->getCurrLexeme();
-		if(!readToken(confLexer, TOKEN_TYPE_OP)) return false;
-		if(!readToken(confLexer, TOKEN_TYPE_STRING)) return false;
+		if(!readToken(confLexer, TokenOperator)) return false;
+		if(!readToken(confLexer, TokenString)) return false;
 		strMap[strIdent] = s2ws(confLexer->getCurrLexeme());
 		return true;
 	}
 	
-	bool SoraLocalizer::readLocaleResource(llexer* confLexer, LocaleStringMap& strMap) {
+	bool SoraLocalizer::readLocaleResource(SoraLexer* confLexer, LocaleStringMap& strMap) {
 		SoraString strIdent = confLexer->getCurrLexeme();
-		if(!readToken(confLexer, TOKEN_TYPE_OP)) return false;
-		if(!readToken(confLexer, TOKEN_TYPE_STRING)) return false;
+		if(!readToken(confLexer, TokenOperator)) return false;
+		if(!readToken(confLexer, TokenString)) return false;
 		strMap[strIdent] = s2ws(confLexer->getCurrLexeme());
 		return true;
 	}
 	
-	void SoraLocalizer::reportError(llexer* lexer) {
+	void SoraLocalizer::reportError(SoraLexer* lexer) {
 		SoraString strErrorMssg = ("Error loading locale file\nCurrent Line=");
-		SORA->messageBox(strErrorMssg+lexer->getCurrLine()+"\nCurrent Char="+lexer->getCurrInvalidChar(),
+        SoraCore::Ptr->messageBox(strErrorMssg+lexer->getCurrLine()+"\nCurrent Char="+lexer->getCurrInvalidChar(),
 						 "Error",
 						 MB_OK | MB_ICONERROR);
 	}
+    
+    SoraString SoraLocalizer::getCurrentLocale() const { 
+        return currentLocale; 
+    }
 	
-	bool SoraLocalizer::addLocaleConf(const SoraWString& confPath) {
-		llexer* confLexer = new llexer;
+	bool SoraLocalizer::addLocaleConf(const StringType& confPath) {
+		SoraLexer* confLexer = new SoraLexer;
 		confLexer->addOperator("@", 1);
 		confLexer->addOperator("=", 2);
 		
-		ulong32 confSize;
-		void* confData = SoraCore::Instance()->getResourceFile(confPath, confSize);
-		if(confData && confLexer->loadFileMem(confData, confSize) == LEX_NO_ERROR) {
+		if(confLexer->loadFile(confPath.c_str())) {
 			SoraString localeIdent;
 			LocaleStringMap localeStrMap;
 			
 			Token token = confLexer->getNextToken();
-			while(token != TOKEN_TYPE_END_OF_STREAM && token != TOKEN_TYPE_INVALID_INPUT) {
-				if(token == TOKEN_TYPE_OP) {
+			while(token != TokenEndOfStream && token != TokenInvalidInput) {
+				if(token == TokenOperator) {
 					if(confLexer->getCurrOp() == 1) {
 						localeIdent = readLocaleIdent(confLexer);
 					}
-				} else if(token == TOKEN_TYPE_IDENT) {
+				} else if(token == TokenIdent) {
 					if(!readLocaleString(confLexer, localeStrMap)) {
 						reportError(confLexer);
 						return false;
 					}
 					
-				} else if(token == TOKEN_TYPE_STRING) {
+				} else if(token == TokenString) {
 					if(readLocaleResource(confLexer, localeStrMap)) {
 						reportError(confLexer);
 						return false;
@@ -117,13 +124,11 @@ namespace sora {
 			}
 			
 			delete confLexer;
-			SORA->freeResourceFile(confData);
 			
 			if(localeIdent.size() != 0) {
 				localeConfs[localeIdent].insert(localeStrMap.begin(), localeStrMap.end());
 				if(currentLocale.size() == 0) {
 					currentLocale = localeIdent;
-					currentLocaleW = s2ws(currentLocale);
 					currentLocaleMap = localeConfs.find(localeIdent);
 					
 					return true;
@@ -135,34 +140,34 @@ namespace sora {
 			} else
 				THROW_SORA_EXCEPTION(NotFoundException, "no locale ident read");
 		} else {
-			sora::SORA->messageBox(L"Cannot find locale file: "+confPath, L"Error", MB_OK | MB_ICONERROR);
+			sora::SoraCore::Instance()->messageBox("Cannot find locale file: "+confPath, "Error", MB_OK | MB_ICONERROR);
 			return false;
 		}
 		return false;
 	}
 	
-	SoraWString SoraLocalizer::getStr(const SoraString& ident) {
+	StringType SoraLocalizer::getStr(const StringType& ident) {
 		LocaleStringMap::iterator itStr = currentLocaleMap->second.find(ident);
 		if(itStr != currentLocaleMap->second.end())
 			return itStr->second;
-		return std::wstring();
+		return StringType();
 	}
 
 	void SoraLocalizer::setCurrentLocale(const SoraString& localeIdent) {
 		LocaleConfMap::iterator itConf = localeConfs.find(localeIdent);
 		if(itConf != localeConfs.end()) {
 			currentLocale = localeIdent;
-			currentLocaleW = s2ws(localeIdent);
 			currentLocaleMap = itConf;
 		}
 	}
 		
-	SoraWString SoraLocalizer::localizeResourceName(SoraWString& resourceName) {
-		size_t dotPos = resourceName.rfind(L'.');
+	StringType SoraLocalizer::localizeResourceName(const StringType& resourceName) {
+        std::string rfile = resourceName;
+		size_t dotPos = rfile.rfind('.');
 		if(dotPos != std::string::npos) {
-			resourceName.insert(dotPos, L"_"+currentLocaleW);
+			rfile.insert(dotPos, "@"+currentLocale);
 		}
-		return resourceName;
+		return rfile;
 	}
 
 

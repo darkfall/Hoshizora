@@ -72,10 +72,10 @@ namespace sora {
 
         if(!SoraFileUtility::fileExists(path)) {            
             ulong32 size;
-            void* data = SORA->getResourceFile(path, size);
+            void* data = SoraCore::Ptr->getResourceFile(path, size);
             if(data) {
                 readFileMem(data, size);
-                SORA->freeResourceFile(data);
+                SoraCore::Ptr->freeResourceFile(data);
              } else 
                 log_mssg(vamssg("Creating %s: File not exists", path.c_str()),
 							  LOG_LEVEL_ERROR);
@@ -298,10 +298,10 @@ namespace sora {
         
         if(!SoraFileUtility::fileExists(path)) {            
             ulong32 size;
-            void* data = SORA->getResourceFile(path, size);
+            void* data = SoraCore::Ptr->getResourceFile(path, size);
             if(data) {
                 readFileMem(data, size);
-                SORA->freeResourceFile(data);
+                SoraCore::Ptr->freeResourceFile(data);
             } else 
                 log_mssg(vamssg("Creating %s: File not exists", path.c_str()),
 							  LOG_LEVEL_ERROR);

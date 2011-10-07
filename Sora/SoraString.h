@@ -40,6 +40,9 @@ namespace sora {
             bool compare(const std::wstring& str) const;
             bool compare(const String& rhs) const;
             
+            String toUpper() const;
+            String toLower() const;
+            
             String& operator=(const String& str);
             String operator+(const String& str) const;
             String& operator+=(const String& str);

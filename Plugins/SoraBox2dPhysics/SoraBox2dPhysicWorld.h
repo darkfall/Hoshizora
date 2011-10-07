@@ -36,6 +36,8 @@ namespace sora {
         
         void update(float dt);
         
+        SoraPhysicRaycastResult rayCast(const SoraVector& start, const SoraVector& dir);
+        
         void addContactListener(SoraPhysicContactListener* listener);
         void delContactListener(SoraPhysicContactListener* listener);
 

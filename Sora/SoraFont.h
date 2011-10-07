@@ -8,19 +8,19 @@
 
 namespace sora {
 
-	// Font Render Alignments
-	enum {
-		FONT_ALIGNMENT_LEFT     =   1,
-		FONT_ALIGNMENT_RIGHT    =   2,
-		FONT_ALIGNMENT_CENTER   =   3,
-	};
-
 	/*
 		Abstract Font Class provides Font related APIs
 	*/
 
 	class SORA_API SoraFont {
 	public:
+        // Font Render Alignments
+        enum {
+            AlignmentLeft     =   1,
+            AlignmentRight    =   2,
+            AlignmentCenter   =   3,
+        };
+        
 		virtual void	render(float x, float y, const wchar_t* text, bool hcenter = false, bool vcenter = false) = 0;
 		// render with alignments
 		virtual void	print(float x, float y, int32 align, const wchar_t *format, ...) = 0;

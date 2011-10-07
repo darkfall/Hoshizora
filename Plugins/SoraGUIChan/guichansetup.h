@@ -90,8 +90,8 @@ namespace sora {
             
 			gcn::Container* contTop = new gcn::Container;
 			contTop->setDimension(gcn::Rectangle(0, 0, 
-												 sora::SORA->getScreenWidth(), 
-												 sora::SORA->getScreenHeight()));
+												 sora::SoraCore::Ptr->getScreenWidth(), 
+												 sora::SoraCore::Ptr->getScreenHeight()));
 			mGUIChan->setTop(contTop);
 			contTop->setOpaque(false);
 		}

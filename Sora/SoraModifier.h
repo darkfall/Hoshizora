@@ -40,24 +40,24 @@ namespace sora {
         }
         
         void setFinishDelegate(const Delegate& del) {
-            mDelegate = del;
+            this->mDelegate = del;
         }
         
         const Delegate& getFinishDelegate() const {
-            return mDelegate;
+            return this->mDelegate;
         }
         
         virtual void release() {
-            if(isAutoRelease())
+            if(this->isAutoRelease())
                 delete this;
         }
         
         void setAutoRelease(bool flag) {
-            mAutoRelease = flag;
+            this->mAutoRelease = flag;
         }
         
         bool isAutoRelease() const {
-            return mAutoRelease;
+            return this->mAutoRelease;
         }
         
     protected:
@@ -96,22 +96,22 @@ namespace sora {
     
     template<typename MT>
     SoraModifierList<MT>::~SoraModifierList() {
-        clear();
+        this->clear();
     }
     
     template<typename MT>
     void SoraModifierList<MT>::add(SoraModifier<MT>* modi) {
-        mModifiers.push_back(modi);
+        this->mModifiers.push_back(modi);
     }
     
     template<typename MT>
     bool SoraModifierList<MT>::update(float dt) {
-        if(mModifiers.size() != 0) {
-            if(mModifiers[mCurrModifier]->update(dt)) {
-                ++mCurrModifier;
+        if(this->mModifiers.size() != 0) {
+            if(this->mModifiers[this->mCurrModifier]->update(dt)) {
+                ++this->mCurrModifier;
             
-                if(!mRepeat) {
-                    if(mCurrModifier >= mModifiers.size()) {
+                if(!this->mRepeat) {
+                    if(this->mCurrModifier >= this->mModifiers.size()) {
                         clear();
 
                         if(SoraModifier<MT>::mDelegate) {
@@ -119,12 +119,12 @@ namespace sora {
                         }
                         return true;
                     } else 
-                        mModifiers[mCurrModifier]->reset();
+                        this->mModifiers[this->mCurrModifier]->reset();
                 } else {
-                    if(mCurrModifier >= mModifiers.size())
-                        mCurrModifier = 0;
+                    if(this->mCurrModifier >= this->mModifiers.size())
+                        this->mCurrModifier = 0;
                   
-                    mModifiers[mCurrModifier]->reset();
+                    this->mModifiers[this->mCurrModifier]->reset();
                 }
             }
         }
@@ -133,28 +133,29 @@ namespace sora {
     
     template<typename MT>
     void SoraModifierList<MT>::modify(MT* obj) {
-        if(mModifiers.size() != 0 && mCurrModifier < mModifiers.size()) {
-            mModifiers[mCurrModifier]->modify(obj);
+        if(this->mModifiers.size() != 0 && 
+           this->mCurrModifier < this->mModifiers.size()) {
+            this->mModifiers[this->mCurrModifier]->modify(obj);
         }
     }
     
     template<typename MT>
     void SoraModifierList<MT>::clear() {
-        typename ModifierList::iterator itModifier = mModifiers.begin();
-        while(itModifier != mModifiers.end()) {
+        typename ModifierList::iterator itModifier = this->mModifiers.begin();
+        while(itModifier != this->mModifiers.end()) {
             if((*itModifier)->isAutoRelease()) {
                 (*itModifier)->release();
             }
             ++itModifier;
         }
-        mModifiers.clear();
+        this->mModifiers.clear();
     }
     
     template<typename MT>
     SoraModifier<MT>* SoraModifierList<MT>::clone() {
         SoraModifierList<MT>* c = new SoraModifierList<MT>(mRepeat);
-        typename ModifierList::iterator itModifier = mModifiers.begin();
-        while(itModifier != mModifiers.end()) {
+        typename ModifierList::iterator itModifier = this->mModifiers.begin();
+        while(itModifier != this->mModifiers.end()) {
             SoraModifier<MT>* mod = (*itModifier)->clone();
             if(mod != NULL) {
                 c->add(mod);
@@ -162,7 +163,7 @@ namespace sora {
             ++itModifier;
         }
         c->mDelegate = SoraModifier<MT>::mDelegate;
-        c->mCurrModifier = mCurrModifier;
+        c->mCurrModifier = this->mCurrModifier;
         return c;
     }
     

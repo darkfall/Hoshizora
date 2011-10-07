@@ -16,6 +16,7 @@
 #include "SoraStringId.h"
 #include "SoraRefCounted.h"
 #include "SoraFunction.h"
+#include "SoraResource.h"
 #include <vector>
 #include <map>
 
@@ -27,42 +28,101 @@
 namespace sora {
 	
 	class SoraResourceManager;
-	
+    class SoraResourceFile;
+    class SoraSpriteSheet;
+    	
 	class SoraResourceFileFinder {
-	public:
-		SoraResourceFileFinder();
+    private:
+        SoraResourceFileFinder();
 		~SoraResourceFileFinder();
 		
-		void attachResourceManager(SoraResourceManager* rm);
+        friend class SoraCore;
+        
+	public:
+		
+        static ulong32 ResourceMemory;
+        
+        void attachResourceManager(SoraResourceManager* rm);
 		void detachResourceManager(const StringType& name);
 		
-		ulong32	loadResourcePack    (const StringType& file);
-		void	detachResourcePack  (ulong32 handle);
+		SoraResourceHandle  loadResourcePack    (const StringType& file);
+		void                detachResourcePack  (SoraResourceHandle handle);
 		
-		void*   readResourceFile			(const StringType& file, ulong32 pos, ulong32 size);
-		void*   getResourceFile				(const StringType& file, ulong32& size);
-		ulong32 getResourceFileSize			(const StringType& file);
-		void    freeResourceFile(void* p);
+		void*   readResourceFile    (const StringType& file, ulong32 pos, ulong32 size);
+		void*   getResourceFile     (const StringType& file, ulong32& size);
+		ulong32 getResourceFileSize (const StringType& file);
+		void    freeResourceFile    (void* p);
 		
-		bool enumFiles(std::vector<StringType>& cont, const StringType& folder);
+		bool    enumFiles(std::vector<StringType>& cont, const StringType& folder);
         
-        static ulong32 ResourceMemory;
+    public:
+        /** New **/
+        /**
+         * Add a resource 
+         * Tag is optical but better for performance
+         * If tag is empty then tag = file
+         **/
+        SoraResource::Ptr addResource(const StringType& file, SoraResource::Type type, const StringType& tag=StringType());
+        SoraResource::Ptr getResource(const StringType& tag);
+        void              freeResource(const StringType& tag);
+        
+        /**
+         * Load a resource config script
+         * Root node should be resources
+         * Can have three fields, type, path and tag
+         *  <resources>
+         *      <node type="texture" path="my_texture.png" tag="st1_background">
+         *      ...
+         *  </resources>
+         * etc
+         **/
+        bool loadResourceScript(const StringType& script);
+        
+        SoraTextureHandle       getTextureResource      (const StringType& tag);
+        SoraFont*               getFontResource         (const StringType& tag);
+        SoraMusicFile*          getMusicResource        (const StringType& tag);
+        SoraSoundEffectFile*    getSoundEffectResource  (const StringType& tag);
+        SoraConfigParser*       getConfigResource       (const StringType& tag);
+        SoraResourceFile*       getRawDataResource      (const StringType& tag);
+        SoraShaderContext*      getShaderResource       (const StringType& tag);
+        SoraSpriteSheet*        getSpriteSheetResource  (const StringType& tag);
+        
+#ifdef SORA_ENABLE_MULTI_THREAD
+        
+        bool loadResourceScriptAsync(const StringType& script);
+        void addResourceAsync(const StringType& file, SoraResource::Type type, const StringType& tag=StringType());
+        
+    private:
+        struct ResourceIoParam {
+            std::string         mName;
+            std::string         mTag;
+            SoraResource::Type  mType;
+        };
+        void resource_async_not(void*, ulong32, void*);
+#endif
+        
+    private:
+        typedef sora_hash_map<std::string, SoraResource::Ptr> ResourceMap;
+        ResourceMap mResources;
+                
+    public:
         
 #ifdef SORA_ENABLE_MULTI_THREAD
         typedef SoraFunction<void(void*, ulong32, void*)> AsyncNotification;
         void loadResourceFileAsync(const StringType& file, const AsyncNotification& notification, void* userdata);
+        
     private:
         struct IoThreadParam {
-            AsyncNotification mNotification;
-            StringType mName;
-            void* mUserData;
+            void*               mUserData;
+            StringType          mName;
+            AsyncNotification   mNotification;
         };
         void ioThreadFunc(void* arg);
 #endif
         
 	private:		
-		typedef std::vector<SoraAutoPtr<SoraResourceManager> > RESOURCE_MANAGER_CONT;
-		RESOURCE_MANAGER_CONT mResourceManagers;
+		typedef std::vector<SoraAutoPtr<SoraResourceManager> > ResourceManagerCont;
+		ResourceManagerCont mResourceManagers;
         
         template<class C>
         struct ReleasePolicy {
@@ -76,8 +136,8 @@ namespace sora {
             AutoPtrType mResource;
             ulong32 mSize;
         };
-        typedef std::map<SoraStringId, ResourceInfo> AvailableResourceMap;
-        AvailableResourceMap mResources;
+        typedef std::map<SoraStringId, ResourceInfo> ResourceCacheMap;
+        ResourceCacheMap mResourceCaches;
         
 #ifdef SORA_ENABLE_MULTI_THREAD
         SoraThreadPool mIOThreadPool;

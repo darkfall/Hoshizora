@@ -20,16 +20,6 @@
 #endif
 
 namespace sora {
-    
-    SoraSprite* GifCreatorFn(const std::wstring& path, Json::Value* val) {
-        SoraGifSprite* spr = new SoraGifSprite(path);
-        if(spr && val) {
-            if(val->isMember("frame_rate")) {
-                spr->setFrameRate((*val)["frame_rate"].asInt());
-            }
-        }
-        return spr;
-    }
         
     static int InterlacedOffset[] = { 0, 4, 2, 1 }; /* The way Interlaced image should. */
     static int InterlacedJumps[] = { 8, 8, 4, 2 };    /* be read - offsets and jumps... */
@@ -68,7 +58,7 @@ namespace sora {
     void SoraGifSprite::clear() {
         GIF_FRAME_CONT::iterator itFrame = mFrames.begin();
         while(itFrame != mFrames.end()) {
-            SORA->releaseTexture(itFrame->mFrameTex);
+            SoraCore::Ptr->releaseTexture(itFrame->mFrameTex);
             ++itFrame;
         }
         mFrames.clear();
@@ -87,11 +77,11 @@ namespace sora {
 #endif
         int ExtCode;
        
-        SoraResourceFileAuto resourceFile(path);
+        SoraResourceFile resourceFile(path);
         if(!resourceFile.isValid())
             return false;
         
-        SoraMemoryBuffer memBuffer(static_cast<void*>(resourceFile), resourceFile.getSize());
+        SoraMemoryBuffer memBuffer(static_cast<void*>(resourceFile), resourceFile.size());
         if ((GifFileIn = DGifOpen(&memBuffer, image_gif_read)) == NULL)
             return false;
         
@@ -166,7 +156,7 @@ namespace sora {
                     
                     free(ScreenBuffer);
                     
-                    SoraTextureHandle frameTex = SORA->createTextureFromRawData(bits, node.mFrameWidth, node.mFrameHeight);
+                    SoraTextureHandle frameTex = SoraCore::Ptr->createTextureFromRawData(bits, node.mFrameWidth, node.mFrameHeight);
                     if(frameTex)
                         node.mFrameTex = frameTex;
                     else {
@@ -271,7 +261,5 @@ namespace sora {
     int32 SoraGifSprite::getCurrFrame() const {
         return mCurrFrame;
     }
-
-    SORA_STATIC_RUN_CODE(REGISTER_SPRITE_PRODUCT("gif", GifCreatorFn));
 
 } // namespace sora

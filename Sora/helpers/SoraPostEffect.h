@@ -21,7 +21,7 @@ namespace sora {
      * SoraCore::Instance()->enableCoreFeature(SoraCore::FeatureRenderToBuffer); etc
      **/
 
-    class SORA_API SoraPostEffect: public SoraObject {
+    class SORA_API SoraPostEffect: public SoraShaderEnabledObject {
     public:
         SoraPostEffect();
         ~SoraPostEffect();
@@ -31,15 +31,6 @@ namespace sora {
         void onBufferRender(SoraTextureHandle texture);
         
         SoraSprite* getSprite() const;
-        
-        SoraShader* attachFragmentShader(const StringType& file, const SoraString& entry);
-        SoraShader* attachVertexShader(const StringType& file, const SoraString& entry);
-        
-        void detachFragmentShader();
-        void detachVertexShader();
-        
-        void attachFragmentShader(SoraShader* shader);
-        void attachVertexShader(SoraShader* shader);
         
     private:
         sora::SoraSprite* mSprite;

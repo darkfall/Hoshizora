@@ -6,14 +6,9 @@
 #include "math/SoraVector.h"
 
 namespace sora {
-
-	struct SORA_API SoraTextureDataRef {
-		uint32* texData;
-		
-		SoraTextureDataRef(): texData(0) {}
-	};
-	
-	struct SORA_API SoraTexture {
+    
+	class SORA_API SoraTexture {
+    public:
 		SoraTexture();
 		SoraTexture(ulong32 id, int32 width, int32 height, int32 oriwidth, int32 oriheight);
 
@@ -25,7 +20,10 @@ namespace sora {
          * For wrapper convinience
          **/
         void* mUserData;
-		SoraTextureDataRef dataRef;
+        /*
+         * Use to store texture color data temporary by Renderers
+         */
+		uint32* mTexData;
         
 #ifdef OS_IOS
         // if not retina texture and the device supports retina display, we need to scale the texture
@@ -37,15 +35,15 @@ namespace sora {
         static SoraTextureHandle LoadFromMemory(uint32* data, ulong32 size);
         static SoraTextureHandle CreateEmpty(int32 w, int32 h);
         
-        static uint32* GetData(SoraTextureHandle handle);
-        static void PutData(SoraTextureHandle data);
+        static uint32*  GetData(SoraTextureHandle handle);
+        static void     PutData(SoraTextureHandle data);
         
-        static int32 GetWidth(SoraTextureHandle handle);
-        static int32 GetHeight(SoraTextureHandle handle);
-        static int32 GetOriginalWidth(SoraTextureHandle handle);
-        static int32 GetOriginalHeight(SoraTextureHandle handle);
-        static SoraVector GetSize(SoraTextureHandle handle);
-        static SoraVector GetOriginalSize(SoraTextureHandle handle);
+        static int32        GetWidth(SoraTextureHandle handle);
+        static int32        GetHeight(SoraTextureHandle handle);
+        static int32        GetOriginalWidth(SoraTextureHandle handle);
+        static int32        GetOriginalHeight(SoraTextureHandle handle);
+        static SoraVector   GetSize(SoraTextureHandle handle);
+        static SoraVector   GetOriginalSize(SoraTextureHandle handle);
         
         static void Release(SoraTextureHandle h);
 	};

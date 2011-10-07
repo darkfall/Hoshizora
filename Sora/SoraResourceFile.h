@@ -13,6 +13,7 @@
 #include "SoraPlatform.h"
 #include "SoraUncopyable.h"
 #include "SoraString.h"
+#include "SoraResource.h"
 
 namespace sora {
 	
@@ -22,20 +23,18 @@ namespace sora {
 	 *	this class can also request for a resource file directly
 	 **/
 	
-	class SORA_API SoraResourceFileAuto: SoraUncopyable {
+	class SORA_API SoraResourceFile: public SoraResource {
 	public:
-        SoraResourceFileAuto();
-		explicit SoraResourceFileAuto(const StringType& file, bool retain=false);
-		SoraResourceFileAuto(void* data, ulong32 size, bool retain=false);
-        SoraResourceFileAuto(const StringType& file, ulong32 pos, ulong32 size, bool retain=false);
-		~SoraResourceFileAuto();
+        SoraResourceFile();
+		explicit SoraResourceFile(const StringType& file, bool retain=false);
         
-        SoraResourceFileAuto& operator=(const StringType& file);
+		SoraResourceFile(void* data, ulong32 size, bool retain=false);
+        SoraResourceFile(const StringType& file, ulong32 pos, ulong32 size, bool retain=false);
+		~SoraResourceFile();
+        
+        SoraResourceFile& operator=(const StringType& file);
 		
-		void* getData() const;
-		ulong32 getSize() const;
-        
-        void* data() const;
+        void*   data() const;
         ulong32 size() const;
 		
 		operator void*();
@@ -46,12 +45,10 @@ namespace sora {
 		bool isValid() const;
 		
 	private:
-		void* mData;
+		void*   mData;
 		ulong32 mSize;
-		bool mRetain;
-        
-        SoraWString mName;
-	};
+		bool    mRetain;
+    };
 	
 } // namespace sora
 

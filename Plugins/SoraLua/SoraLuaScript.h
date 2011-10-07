@@ -83,7 +83,7 @@ namespace sora  {
         }
         
         virtual ScriptPtr createScriptFromFile(const SoraString& file) {
-            SoraResourceFileAuto data(file);
+            SoraResourceFile data(file);
             
             SoraString strData((const char*)data, data.size());
             return ScriptPtr(new SoraLuaScript(strData));

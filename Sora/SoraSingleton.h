@@ -21,7 +21,7 @@ namespace sora {
 			if(!pInstance) pInstance = new T();
 			return pInstance;
 		}
-        static T& RefInstance() {
+        static T& GetInstance() {
 			if(!pInstance) pInstance = new T();
 			return *pInstance;
 		}

@@ -41,7 +41,7 @@ namespace sora {
         static SoraMusicFile* LoadMusicFromFile(const StringType& path, bool isStream=true);
         static SoraSoundEffectFile* LoadSoundEffectFromFile(const StringType& path);
         static SoraMusicFile* LoadMusicFromMemory(void* pdata, ulong32 size);
-        static SoraSoundEffectFile* LoaSoundEffectFromMemory(void* pdata, ulong32 size);
+        static SoraSoundEffectFile* LoadSoundEffectFromMemory(void* pdata, ulong32 size);
 	};
 	
 } // namespace sora

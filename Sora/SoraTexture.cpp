@@ -3,22 +3,28 @@
 
 namespace sora {
     
-	SoraTexture::SoraTexture(ulong32 texid, int32 width, int32 height, int32 oriwidth, int32 oriheight) {
-		mTextureID = texid;
-		mTextureWidth = width;
-		mTextureHeight = height;
-		mOriginalWidth = oriwidth;
-		mOriginalHeight = oriheight;
+	SoraTexture::SoraTexture(ulong32 texid, int32 width, int32 height, int32 oriwidth, int32 oriheight):
+    mTextureID(texid),
+    mTextureWidth(width),
+    mTextureHeight(height),
+    mOriginalWidth(oriwidth),
+    mOriginalHeight(oriheight),
+    mUserData(0),
+    mTexData(0) {
         
 #ifdef OS_IOS
         mIsRetinaTexture = false;
 #endif
 	}
     
-	SoraTexture::SoraTexture() {
-		mTextureID = 0;
-		mTextureWidth = mTextureHeight = 0;
-		mOriginalWidth = mOriginalHeight = 0;
+	SoraTexture::SoraTexture():
+    mTextureID(0),
+    mTextureWidth(0),
+    mTextureHeight(0),
+    mOriginalWidth(0),
+    mOriginalHeight(0),
+    mUserData(0),
+    mTexData(0) {
         
 #ifdef OS_IOS
         mIsRetinaTexture = false;

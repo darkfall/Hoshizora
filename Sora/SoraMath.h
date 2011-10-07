@@ -6,10 +6,10 @@
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
-#ifndef Sora_SoraMath_h
-#define Sora_SoraMath_h
-
-#include "math/SoraMath.h"
-
-
-#endif
+#include "math/SoraMathCommon.h"
+#include "math/SoraVector.h"
+#include "math/SoraVector3.h"
+#include "math/SoraVector4.h"
+#include "math/SoraMatrix3.h"
+#include "math/SoraMatrix4.h"
+#include "math/SoraRect.h"

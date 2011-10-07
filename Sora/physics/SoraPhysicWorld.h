@@ -19,6 +19,7 @@ namespace sora {
     class SoraPhysicContactListener;
     struct SoraPhysicBodyDef;
     struct SoraPhysicJointDef;
+    struct SoraPhysicRaycastResult;
     
     class SoraPhysicWorld {
     public:
@@ -36,6 +37,8 @@ namespace sora {
         
         virtual void addContactListener(SoraPhysicContactListener* listener) = 0;
         virtual void delContactListener(SoraPhysicContactListener* listener) = 0;
+        
+        virtual SoraPhysicRaycastResult rayCast(const SoraVector& start, const SoraVector& dir) = 0;
         
         static SoraPhysicBody*  CreateBody(const SoraPhysicBodyDef& def);
         static void             DestroyBody(SoraPhysicBody* body);

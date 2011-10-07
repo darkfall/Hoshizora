@@ -74,6 +74,12 @@ namespace sora {
                     }
                 }
             }
+            if(parser.toNode("/app/resource")) {
+                parser.toFirstChild();
+                do {
+                    ResourceScripts.push_back(parser.getString(std::string()));
+                } while(parser.toNextChild());
+            }
         }
     }
     

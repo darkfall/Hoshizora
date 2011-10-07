@@ -26,10 +26,10 @@ namespace sora {
     
     bool JsonGui::parse(const SoraWString& filePath) {
         ulong32 size;
-        void* pdata = SORA->getResourceFile(filePath, size);
+        void* pdata = SoraCore::Ptr->getResourceFile(filePath, size);
         if(pdata) {
             bool result = parse(pdata, size);
-            SORA->freeResourceFile(pdata);
+            SoraCore::Ptr->freeResourceFile(pdata);
             return result;
         }
         return false;

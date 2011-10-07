@@ -37,6 +37,17 @@ namespace sora {
             
         }
         
+        String String::toUpper() const {
+            std::string result = mString;
+            std::transform(mString.begin(), mString.end(), result.begin(), toupper);
+            return result;
+        }
+        
+        String String::toLower() const {
+            std::string result = mString;
+            std::transform(mString.begin(), mString.end(), result.begin(), tolower);
+            return result;
+        }
         
         uint64 String::uniqueId() const {
             return GetUniqueStringId(mString);

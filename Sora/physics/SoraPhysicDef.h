@@ -73,6 +73,14 @@ namespace sora {
         mBodyB(b2) { }
     };
     
+    struct SoraPhysicRaycastResult {
+        SoraVector mPoint;
+        SoraVector mNormal;
+        float mFraction;
+        
+        SoraPhysicBody* mBody;
+    };
+    
 } // namespace sora
 
 

@@ -10,13 +10,13 @@
 
 namespace sora {
     
-    static SoraObject* g_ObjectMap[MAX_OBJECT_SIZE];
-    static std::list<SoraObject*> g_ObjectList;
+    static SoraObject* g_ObjectMap[SoraObjectHandle::MaxObjectSize];
     static uint32 g_ObjectSize = 0;
     
     SoraObjectHandle::SoraObjectHandle(SoraObject* obj):
     m_HandleId(obj->getHandleId()),
     m_UniqueId(obj->getUniqueId()) {
+        sora_assert(m_HandleId < SoraObjectHandle::MaxObjectSize);
         g_ObjectMap[m_HandleId] = obj;
         ++g_ObjectSize;
     }
@@ -32,7 +32,7 @@ namespace sora {
     }
         
     SoraObject* SoraObjectHandle::toObject() {
-        assert(m_HandleId < MAX_OBJECT_SIZE);
+        assert(m_HandleId < SoraObjectHandle::MaxObjectSize);
         SoraObject* object = g_ObjectMap[m_HandleId];
         if(object != NULL &&
            object->getUniqueId() == m_UniqueId)
@@ -65,7 +65,7 @@ namespace sora {
     }
 
     void SoraObjectHandle::freeObjectHandle(SoraHandle handle) {
-        assert(handle < MAX_OBJECT_SIZE);
+        assert(handle < SoraObjectHandle::MaxObjectSize);
         g_ObjectMap[handle] = NULL;
     }
     

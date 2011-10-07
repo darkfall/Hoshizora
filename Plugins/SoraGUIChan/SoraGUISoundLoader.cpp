@@ -37,7 +37,7 @@ namespace gcn {
 			psound->pfile = itSound->second;
 			return psound;
 		} else {
-			sora::SoraSoundEffectFile* psefile = sora::SORA->createSoundEffectFile(sora::s2ws(soundName));
+			sora::SoraSoundEffectFile* psefile = sora::SoraCore::Ptr->createSoundEffectFile(sora::s2ws(soundName));
 			if(psefile != NULL) {
 				mSoundMap[soundid] = psefile;
 				psound->pfile = psefile;

@@ -7,13 +7,13 @@
 //
 
 #include "spriteWrapper.h"
-
+#include "SoraShader.h"
 #include "SoraImageEffect.h"
 
 namespace spritewrapper {
     
     SoraSpriteHandle createSprite(const SoraWString& path) {
-        return (SoraSpriteHandle)SORA->createSprite(path);
+        return (SoraSpriteHandle)SoraCore::Ptr->createSprite(path);
     }
     
     SoraSpriteHandle createSpriteWithTex(SoraTextureHandle tex) {
@@ -25,19 +25,19 @@ namespace spritewrapper {
     }
     
 	SoraSpriteHandle createSpriteWH(int32 w, int32 h){
-		return (SoraSpriteHandle)(new SoraSprite(SORA->createTextureWH(w, h)));
+		return (SoraSpriteHandle)(new SoraSprite(SoraCore::Ptr->createTextureWH(w, h)));
 	}
 	
 	SoraTextureHandle createTexture(const SoraWString& path) {
-		return SORA->createTexture(path);
+		return SoraCore::Ptr->createTexture(path);
 	}
 	
 	SoraTextureHandle createTextureWH(int32 w, int32 h) {
-		return SORA->createTextureWH(w, h);
+		return SoraCore::Ptr->createTextureWH(w, h);
 	}
 	
 	void releaseTexture(SoraTextureHandle tex) {
-		SORA->releaseTexture(tex);
+		SoraCore::Ptr->releaseTexture(tex);
 	}
 	
     void setTextureRect(SoraSpriteHandle h, float x, float y, float w, float fh) {
@@ -50,7 +50,7 @@ namespace spritewrapper {
     void setColor(SoraSpriteHandle h, float r, float g, float b, float a) {
         SoraSprite* p = (SoraSprite*)(h);
 		SoraColorRGBA color(r, g, b, a);
-        if(p) p->setColor(color.GetHWColor(), -1);
+        if(p) p->setColor(color.getHWColor(), -1);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
@@ -58,7 +58,7 @@ namespace spritewrapper {
 	void setVertexColor(SoraSpriteHandle h, float r, float g, float b, float a, int32 i) {
 		SoraSprite* p = (SoraSprite*)(h);
 		SoraColorRGBA color(r, g, b, a);
-        if(p) p->setColor(color.GetHWColor(), i);
+        if(p) p->setColor(color.getHWColor(), i);
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
 	}
@@ -248,7 +248,7 @@ namespace spritewrapper {
     
     void update(SoraSpriteHandle h) {
         SoraSprite* p = (SoraSprite*)(h);
-        if(p) p->update(sora::SORA->getDelta());
+        if(p) p->update(sora::SoraCore::Ptr->getDelta());
         else
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Invalid sprite arg");
     }
@@ -309,7 +309,7 @@ namespace spritewrapper {
 		if(p) {
 			SoraColorRGBA col = p->getColor();
 			col.a = a;
-			p->setColor(col.GetHWColor());
+			p->setColor(col.getHWColor());
 		}
 	}
 	

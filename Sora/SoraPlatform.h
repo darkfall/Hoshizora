@@ -229,10 +229,6 @@ static void msleep(uint32 msec) {
 #include <time.h>
 #include <errno.h>
 // sleep for milliseconds
-// because sleep under windows is guaranteed in millisecond precision
-// but under *nix is second precision
-// so we need high precision sleep udner *nix
-// this is guaranteed in milliseconds
 // see my http://cc.byexamples.com/2007/05/25/nanosleep-is-better-than-sleep-and-usleep/ for more information
 static void msleep(uint32_t msec) {
 	struct timespec timeout0;

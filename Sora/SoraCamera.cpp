@@ -27,7 +27,7 @@ namespace sora {
     mVZoom(1.f),
     mRotation(0.f),
     mPropChanged(true) {
-        mViewRect.set(0.f, 0.f, (float)SORA->getScreenWidth(), (float)SORA->getScreenHeight());
+        mViewRect.set(0.f, 0.f, (float)SoraCore::Ptr->getScreenWidth(), (float)SoraCore::Ptr->getScreenHeight());
     }
     
     SoraCamera::~SoraCamera() {
@@ -90,8 +90,8 @@ namespace sora {
 
     int32 SoraCamera::update(float dt) {
         if(mPropChanged) {
-            sora::SORA->setTransform(getPositionX(), getPositionY(), 0.f, 0.f, mRotation, mHZoom, mVZoom);
-            sora::SORA->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);
+            sora::SoraCore::Ptr->setTransform(getPositionX(), getPositionY(), 0.f, 0.f, mRotation, mHZoom, mVZoom);
+            sora::SoraCore::Ptr->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);
             mPropChanged = false;
         }
 		return 0;
@@ -99,18 +99,18 @@ namespace sora {
     
     void SoraCamera::render() {
         if(getObjSize() != 0) {
-            sora::SORA->pushTransformMatrix();
-            sora::SORA->pushClippingMatrix();
+            sora::SoraCore::Ptr->pushTransformMatrix();
+            sora::SoraCore::Ptr->pushClippingMatrix();
             apply();
             SoraObject::render();
-            sora::SORA->popTransformMatrix();
-            sora::SORA->popClippingMatrix();
+            sora::SoraCore::Ptr->popTransformMatrix();
+            sora::SoraCore::Ptr->popClippingMatrix();
         }
     }
     
     void SoraCamera::apply() {
-        sora::SORA->setTransform(getPositionX(), getPositionY(), 0.f, 0.f, mRotation, mHZoom, mVZoom);
-        sora::SORA->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);
+        sora::SoraCore::Ptr->setTransform(getPositionX(), getPositionY(), 0.f, 0.f, mRotation, mHZoom, mVZoom);
+        sora::SoraCore::Ptr->setClipping((int32)getPositionX(), (int32)getPositionY(), (int32)mViewRect.x2, (int32)mViewRect.y2);
     }
     
     void SoraCamera::moveTo(float x, float y, float inTime) {

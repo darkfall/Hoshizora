@@ -152,10 +152,10 @@ namespace sora {
     
     void SoraiOSFont::render(float32 x, float32 y, int32 align, const wchar_t* pwstr) {
         float32 ox = x;
-        if(align != FONT_ALIGNMENT_LEFT) {
-            if(align == FONT_ALIGNMENT_RIGHT)
+        if(align != SoraFont::AlignmentLeft) {
+            if(align == SoraFont::AlignmentRight)
                 x = x - getStringWidth(pwstr);
-            else if(align == FONT_ALIGNMENT_CENTER)
+            else if(align == SoraFont::AlignmentCenter)
                 x = x - ((int32)getStringWidth(pwstr) >> 1);
         }
         
@@ -165,10 +165,10 @@ namespace sora {
                 y += getHeight() + kerningHeight;
                 ++pwstr;
                 x = ox;
-                if(align != FONT_ALIGNMENT_LEFT) {
-                    if(align == FONT_ALIGNMENT_RIGHT)
+                if(align != SoraFont::AlignmentLeft) {
+                    if(align == SoraFont::AlignmentRight)
                         x = x - getStringWidth(pwstr);
-                    else if(align == FONT_ALIGNMENT_CENTER)
+                    else if(align == SoraFont::AlignmentCenter)
                         x = x - ((int32)getStringWidth(pwstr) >> 1);
                 }
                 continue;

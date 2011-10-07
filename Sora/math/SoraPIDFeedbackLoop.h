@@ -70,76 +70,76 @@ namespace sora {
     }
     
     inline void SoraPIDFeedbackLoop::setValue(double value) {
-        mValue = value;
-        mLastError = 0.0;
-        mLastDelta = 0.0;
+        this->mValue = value;
+        this->mLastError = 0.0;
+        this->mLastDelta = 0.0;
     }
     
     inline void SoraPIDFeedbackLoop::setConstants(double p, double i, double d, double acceleration) {
-        mPConst = p;
-        mIConst = i;
-        mDConst = d;
-        mMaxAcceleration = acceleration;
+        this->mPConst = p;
+        this->mIConst = i;
+        this->mDConst = d;
+        this->mMaxAcceleration = acceleration;
     }
     
     inline const double& SoraPIDFeedbackLoop::getValue() const {
-        return mValue;
+        return this->mValue;
     }
     
     inline double SoraPIDFeedbackLoop::getLastError() const {
-        return mLastError;
+        return this->mLastError;
     }
     
     inline double SoraPIDFeedbackLoop::getLastDelta() const {
-        return mLastDelta;
+        return this->mLastDelta;
     }
     
     inline const double& SoraPIDFeedbackLoop::getGoal() const {
-        return mGoal;
+        return this->mGoal;
     }
     
     inline void SoraPIDFeedbackLoop::update(float dt) {
         if(dt != 0.0f) {
-            if(dt > mMaxAllowableDeletaTime)
-                dt = mMaxAllowableDeletaTime;
+            if(dt > this->mMaxAllowableDeletaTime)
+                dt = this->mMaxAllowableDeletaTime;
             
-            double error = (mGoal - mValue) * dt;
-            mRunningError += error;
+            double error = (this->mGoal - this->mValue) * dt;
+            this->mRunningError += error;
             
-            double dP = mPConst * error;
-            double dI = mIConst * mRunningError * dt;
+            double dP = this->mPConst * error;
+            double dI = this->mIConst * this->mRunningError * dt;
             double dD(0.0);
-            if(mValidError) 
-                dD = mDConst * (mLastError - error) * dt;
+            if(this->mValidError) 
+                dD = this->mDConst * (this->mLastError - error) * dt;
             else
-                mValidError = true;
+                this->mValidError = true;
             
-            mLastError = error;
+            this->mLastError = error;
             double thisDelta = dP + dI + dD;
-            if(mMaxAcceleration != 0.0 || false) {
+            if(this->mMaxAcceleration != 0.0 || false) {
                 double timeRatio(1.0);
-                if(mLastDeltaTime != 0.0) {
-                    timeRatio = dt / mLastDeltaTime;
+                if(this->mLastDeltaTime != 0.0) {
+                    timeRatio = dt / this->mLastDeltaTime;
                 }
-                mLastDeltaTime = dt;
+                this->mLastDeltaTime = dt;
                 
-                mLastDelta *= timeRatio;
-                double difference = (thisDelta - mLastDelta);
-                double accl = mMaxAcceleration * dt * dt;
+                this->mLastDelta *= timeRatio;
+                double difference = (thisDelta - this->mLastDelta);
+                double accl = this->mMaxAcceleration * dt * dt;
                 if(difference < -accl)
-                    thisDelta = mLastDelta - accl;
+                    thisDelta = this->mLastDelta - accl;
                 else if(difference > accl)
-                    thisDelta = mLastDelta + accl;
+                    thisDelta = this->mLastDelta + accl;
             }
             
-            mValue += thisDelta;
-            mLastDelta = thisDelta;
+            this->mValue += thisDelta;
+            this->mLastDelta = thisDelta;
         }
     }
     
     inline void SoraPIDFeedbackLoop::resetError() {
-        mRunningError = 0.0;
-        mValidError = false;
+        this->mRunningError = 0.0;
+        this->mValidError = false;
     }
 }
 

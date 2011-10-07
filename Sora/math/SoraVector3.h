@@ -16,58 +16,58 @@ namespace sora {
 		SoraVector3(const SoraVector3& rhs): x(rhs.x), y(rhs.y), z(rhs.z) {}
 		
 		void set(float _x, float _y, float _z) {
-			x = _x; y = _y; z = _z;
+			this->x = _x; this->y = _y; this->z = _z;
 		}
 
 		SoraVector3& operator=(const SoraVector3& rhs)  {
-			x = rhs.x; y = rhs.y; z = rhs.z;
+			this->x = rhs.x; this->y = rhs.y; this->z = rhs.z;
 			return *this;
 		}
 
 		SoraVector3 operator-(const SoraVector3& rhs) const {
-			return SoraVector3(x-rhs.x, y-rhs.y, z-rhs.z);
+			return SoraVector3(this->x-rhs.x, this->y-rhs.y, this->z-rhs.z);
 		}
 		SoraVector3 operator+(const SoraVector3& rhs) const {
-			return SoraVector3(x+rhs.x, y+rhs.y, z+rhs.z);
+			return SoraVector3(this->x+rhs.x, this->y+rhs.y, this->z+rhs.z);
 		}
 		SoraVector3 operator*(float f) const {
-			return SoraVector3(x*f, y*f, z*f);
+			return SoraVector3(this->x*f, this->y*f, this->z*f);
 		}
 		SoraVector3 operator/(float f) const {
 			assert(f != 0);
-			return SoraVector3(x/f, y/f, z/f);
+			return SoraVector3(this->x/f, this->y/f, this->z/f);
 		}
 		SoraVector3& operator+=(const SoraVector3& rhs) {
-			x += rhs.x; y += rhs.y; z += rhs.z;
+			this->x += rhs.x; this->y += rhs.y; this->z += rhs.z;
 			return *this;
 		}
 		SoraVector3& operator-=(const SoraVector3& rhs) {
-			x -= rhs.x; y -= rhs.y; z -= rhs.z;
+			this->x -= rhs.x; this->y -= rhs.y; this->z -= rhs.z;
 			return *this;
 		}
 	
 		float dot(const SoraVector3& rhs) const {
-			return x*rhs.x+y*rhs.y+z*rhs.z;
+			return this->x*rhs.x+this->y*rhs.y+this->z*rhs.z;
 		}
 		SoraVector3 cross(const SoraVector3& rhs) const {
-			return SoraVector3(-z*rhs.y+y*rhs.z, z*rhs.x-x*rhs.z, -y*rhs.x+x*rhs.y);
+			return SoraVector3(-this->z*rhs.y+this->y*rhs.z, this->z*rhs.x-this->x*rhs.z, -this->y*rhs.x+this->x*rhs.y);
 		}
 	
 		float length() const {
-			return (float)sqrtf(x*x+y*y+z*z);
+			return (float)sqrtf(this->x*this->x + this->y*this->y + this->z*this->z);
 		}
 	
 		float sqrLength() const {
-			return x*x+y*y+z*z;
+			return this->x*this->x + this->y*this->y + this->z*this->z;
 		}
 	
 		SoraVector3 normalize() const {
 			float inv = 1/length();
-			return SoraVector3(x*inv, y*inv, z*inv);
+			return SoraVector3(this->x*inv, this->y*inv, this->z*inv);
 		}
 	
 		SoraVector3 negate() const {
-			return SoraVector3(-x, -y, -z);
+			return SoraVector3(-this->x, -this->y, -this->z);
 		}
 
 		float x, y, z;

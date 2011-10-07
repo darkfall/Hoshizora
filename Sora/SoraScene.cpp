@@ -175,9 +175,9 @@ namespace sora {
         if(mRenderToCanvas && mCanvas) 
             mCanvas->beginRender();
         
-        sora::SORA->pushTransformMatrix();
+        sora::SoraCore::Ptr->pushTransformMatrix();
         if(!mCamera) {
-            sora::SORA->setTransform(0.f, 
+            sora::SoraCore::Ptr->setTransform(0.f, 
                                      0.f, 
                                      getPositionX(), 
                                      getPositionY(),
@@ -185,7 +185,7 @@ namespace sora {
                                      mHScale,
                                      mVScale);
         } else {
-            sora::SORA->setTransform(mCamera->getPositionX(), 
+            sora::SoraCore::Ptr->setTransform(mCamera->getPositionX(), 
                                      mCamera->getPositionY(), 
                                      getPositionX(), 
                                      getPositionY(),
@@ -194,9 +194,9 @@ namespace sora {
                                      mVScale+mCamera->getVZoom()-1.f);
         }
         
-        sora::SORA->pushClippingMatrix();
+        sora::SoraCore::Ptr->pushClippingMatrix();
         if(!mCamera) {
-            sora::SORA->setClipping((int32)(getPositionX()), 
+            sora::SoraCore::Ptr->setClipping((int32)(getPositionX()), 
                                     (int32)(getPositionY()), 
                                     mWidth,
                                     mHeight);
@@ -206,7 +206,7 @@ namespace sora {
             int32 rWidth = (int32)mCamera->getPositionX()+mCamera->getViewWidth()-rx;
             int32 rHeight = (int32)mCamera->getPositionY()+mCamera->getViewHeight()-ry;
             
-            sora::SORA->setClipping(rx,
+            sora::SoraCore::Ptr->setClipping(rx,
                                     ry,
                                     rWidth>mWidth?mWidth:rWidth,
                                     rHeight>mHeight?mHeight:rHeight);
@@ -223,8 +223,8 @@ namespace sora {
          **/
         SoraObject::render();
         
-        sora::SORA->popTransformMatrix();
-        sora::SORA->popClippingMatrix();
+        sora::SoraCore::Ptr->popTransformMatrix();
+        sora::SoraCore::Ptr->popClippingMatrix();
         
         if(mRenderToCanvas && mCanvas)
             mCanvas->finishRender();

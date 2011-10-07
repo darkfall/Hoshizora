@@ -5,9 +5,13 @@
 #include "SoraString.h"
 #include "SoraMath.h"
 #include "SoraKeyInfo.h"
-#include "SoraResourceFileFinder.h"
 #include "SoraVertex.h"
+
 #include "function/SoraFunction.h"
+
+#ifdef SORA_ENABLE_MULTI_THREAD        
+#include "thread/SoraMutex.h"
+#endif 
 
 #include <map>
 #include <list>
@@ -33,9 +37,9 @@ namespace sora {
     class SoraHotkey;
     class SoraFont;
     class SoraWindowInfoBase;
-    class SoraMutexLock;
     class SoraInputListener;
     class SoraPhysicWorld;
+    class SoraResourceFileFinder;
     
 	class SORA_API SoraCore {
 	protected:
@@ -85,14 +89,15 @@ namespace sora {
 		void registerTimer			(SoraTimer* timer);
         void registerPhysicWorld    (SoraPhysicWorld* physicWorld);
             
-        SoraRenderSystem*   getRenderSystem() const;
-        SoraInput*          getInput() const;
-        SoraMiscTool*       getMiscTool() const;
-        SoraPluginManager*  getPluginManager() const;
-        SoraTimer*          getTimer() const;
-        SoraFontManager*    getFontManager() const;
-        SoraSoundSystem*    getSoundSystem() const;
-        SoraPhysicWorld*    getPhysicWorld() const;
+        SoraRenderSystem*       getRenderSystem() const;
+        SoraInput*              getInput() const;
+        SoraMiscTool*           getMiscTool() const;
+        SoraPluginManager*      getPluginManager() const;
+        SoraTimer*              getTimer() const;
+        SoraFontManager*        getFontManager() const;
+        SoraSoundSystem*        getSoundSystem() const;
+        SoraPhysicWorld*        getPhysicWorld() const;
+        SoraResourceFileFinder* getResourceFileFinder() const;
         
 		void        registerPlugin  (SoraPlugin* pPlugin);
 		SoraPlugin* unistallPlugin  (SoraPlugin* pPlugin);
@@ -120,9 +125,9 @@ namespace sora {
 		void beginScene(uint32 c=0xFF000000, SoraTargetHandle h=0, bool clear=true);
 		void endScene();
 
-		SoraTargetHandle     createTarget(int width, int height, bool zbuffer=true);
-		void                 freeTarget(ulong32 t);
-		SoraTextureHandle    getTargetTexture(ulong32 t);
+		SoraTargetHandle    createTarget(int width, int height, bool zbuffer=true);
+		void                freeTarget(ulong32 t);
+		SoraTextureHandle   getTargetTexture(ulong32 t);
 
 		SoraTextureHandle   createTexture(const StringType& sTexturePath, bool bCache=true, bool bMipmap=false);
 		SoraTextureHandle   createTextureWH(int32 w, int32 h);
@@ -216,9 +221,7 @@ namespace sora {
 		void                freeResourceFile		(void* p);
 		void                enumFilesInFolder		(std::vector<StringType>& cont, const StringType& folder);
 
-#ifdef SORA_ENABLE_MULTI_THREAD
-        void  loadResourceFileAsync   (const StringType& file, const SoraResourceFileFinder::AsyncNotification& handler, void* puserdata);
-        
+#ifdef SORA_ENABLE_MULTI_THREAD        
         /*
          These calls must exist in the main thread
          After multithreadedRendering begins
@@ -327,6 +330,8 @@ namespace sora {
         float       transform3DPoint(SoraVector3* point);
 		float       transform3DPoint(float* x, float* y, float* z);
         
+        static SoraCore* Ptr;
+        
 	private:
         static SoraCore* mInstance;
         
@@ -394,8 +399,6 @@ namespace sora {
     
     typedef SoraCore::Feature SoraCoreFeature;
         
-#define SORA SoraCore::Instance()
-
 } // namespace sora
 
 #endif

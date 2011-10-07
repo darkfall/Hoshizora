@@ -23,7 +23,7 @@ namespace sora {
     }
     
     bool SoraConfigParserXmlImpl::open(const StringType& path) {
-        SoraResourceFileAuto file(path);
+        SoraResourceFile file(path);
         if(file.isValid()) {
             return open(file, file.size());
         }

@@ -13,7 +13,7 @@
 namespace gcn {
 
 	SoraGUISound::SoraGUISound(const std::string& name) {
-		pfile = sora::SORA->createSoundEffectFile(sora::s2ws(name));
+		pfile = sora::SoraCore::Ptr->createSoundEffectFile(sora::s2ws(name));
 	}
 	
 	SoraGUISound::SoraGUISound() {

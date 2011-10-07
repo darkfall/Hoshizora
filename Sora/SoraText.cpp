@@ -133,7 +133,7 @@ namespace sora {
         else if(mFont) {
             mFont->setCharRotation(mCharRotation);
             mFont->setLineRotation(mRotation);
-            mFont->setColor(mColor.GetHWColor());
+            mFont->setColor(mColor.getHWColor());
             mFont->print(getPositionX(), getPositionY(), (int32)mStyle, mText.c_str());
         }
     }
@@ -145,7 +145,7 @@ namespace sora {
         else if(mFont) {
             mFont->setCharRotation(mCharRotation);
             mFont->setLineRotation(mRotation);
-            mFont->setColor(mColor.GetHWColor());
+            mFont->setColor(mColor.getHWColor());
             mFont->print(x, y, mStyle, mText.c_str());
         }
     }
@@ -168,7 +168,7 @@ namespace sora {
         if(mFont) {
             mFont->setCharRotation(mCharRotation);
             mFont->setLineRotation(mRotation);
-            mFont->setColor(mColor.GetHWColor());
+            mFont->setColor(mColor.getHWColor());
             if(mStyle != AlignmentLeft) {
                 if(mStyle == AlignmentRight) {
                     mFont->print(dimensions.x, 0.f, (int32)mStyle, mText.c_str());

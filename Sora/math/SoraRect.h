@@ -38,30 +38,31 @@ namespace sora {
         }
         
         void set(const SoraVector& upper, const SoraVector& lower) {
-            x1 = upper.x;
-            y1 = upper.y;
-            x2 = upper.x;
-            y2 = upper.y;
+            this->x1 = upper.x;
+            this->y1 = upper.y;
+            this->x2 = upper.x;
+            this->y2 = upper.y;
         }
         
         void set(float _x1, float _y1, float _x2, float _y2, bool asWH=false) {
-            x1 = _x1; y1 = _y1;
-            x2 = asWH ? _x1 + _x2 : _x2;
-            y2 = asWH ? _y1 + _y2 : _y2;
+            this->x1 = _x1; 
+            this->y1 = _y1;
+            this->x2 = asWH ? _x1 + _x2 : _x2;
+            this->y2 = asWH ? _y1 + _y2 : _y2;
         }
         
         void setAsBox(float x, float y, float r) {
-            x1 = x - r;
-            y1 = y - r;
-            x2 = x + r;
-            y2 = y + r;
+            this->x1 = x - r;
+            this->y1 = y - r;
+            this->x2 = x + r;
+            this->y2 = y + r;
         }
         
         void encapsulate(float x, float y) {
-            if(x<x1) x1 = x;
-            if(x>x2) x2 = x;
-            if(y<y1) y1 = y;
-            if(y>y2) y2 = y;
+            if(x<this->x1) this->x1 = x;
+            if(x>this->x2) this->x2 = x;
+            if(y<this->y1) this->y1 = y;
+            if(y>this->y2) this->y2 = y;
         }
         
         bool testPoint(float x, float y) const {
@@ -73,8 +74,8 @@ namespace sora {
         }
         
         bool intersect(const SoraRect& rhs) const {
-            if(fabs(x1 + x2 - rhs.x1 - rhs.x2) < (x2 - x1 + rhs.x2 - rhs.x1)) {
-                if(fabs(y1 + y2 - rhs.y1 - rhs.y2) < (y2 - y1 + rhs.y2 - rhs.y1)) {
+            if(fabs(this->x1 + this->x2 - rhs.x1 - rhs.x2) < (this->x2 - this->x1 + rhs.x2 - rhs.x1)) {
+                if(fabs(this->y1 + this->y2 - rhs.y1 - rhs.y2) < (this->y2 - this->y1 + rhs.y2 - rhs.y1)) {
                     return true;
                 }
             }
@@ -82,7 +83,8 @@ namespace sora {
         }
         
         SoraVector getPosition() const {
-            return SoraVector((x1 + x2)/2, (y1+y2)/2);
+            return SoraVector((this->x1 + this->x2)/2,
+                              (this->y1+this->y2)/2);
         }
     };
 }

@@ -11,6 +11,11 @@
 
 namespace sora {
     
+    SoraHandleManager& SoraHandleManager::GetInstance() {
+        static SoraHandleManager instance;
+        return instance;
+    }
+    
     SoraHandleManager::SoraHandleManager():
     m_NextUniqueId(0),
     m_NextUniqueHandle(0) {
@@ -19,8 +24,7 @@ namespace sora {
     SoraHandle SoraHandleManager::getUniqueHandle() {
         if(m_FreeHandles.empty()) {
             ++m_NextUniqueHandle;
-            if(m_NextUniqueHandle > MAX_OBJECT_SIZE)
-                throw SORA_EXCEPTION(PoolOverflowException, "MAX OBJECT SIZE REACHED");
+            
             return m_NextUniqueHandle;
         } else {
             int32 slot = m_FreeHandles.back();

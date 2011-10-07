@@ -46,56 +46,56 @@ namespace sora {
                 if(fnrs != NULL) {
                     SoraRenderSystem* rs = fnrs();
                     if(rs != NULL)
-                        SORA->registerRenderSystem(rs);
+                        SoraCore::Ptr->registerRenderSystem(rs);
                 }
                 
                 create_input fni = (create_input)dll.getProc("create_input");
                 if(fni) {
                     SoraInput* input = fni();
                     if(input != NULL)
-                        SORA->registerInput(input);
+                        SoraCore::Ptr->registerInput(input);
                 }
                 
                 create_misctool fnmt = (create_misctool)dll.getProc("create_misctool");
                 if(fnmt != NULL) {
                     SoraMiscTool* ms = fnmt();
                     if(ms != NULL)
-                        SORA->registerMiscTool(ms);
+                        SoraCore::Ptr->registerMiscTool(ms);
                 }
                 
                 create_timer fnt = (create_timer)dll.getProc("create_timer");
                 if(fnt != NULL) {
                     SoraTimer* timer = fnt();
                     if(timer != NULL)
-                        SORA->registerTimer(timer);
+                        SoraCore::Ptr->registerTimer(timer);
                 }
                 
                 create_sound_system fnss = (create_sound_system)dll.getProc("create_sound_system");
                 if(fnss != NULL) {
                     SoraSoundSystem* ss = fnss();
                     if(ss != NULL)
-                        SORA->registerSoundSystem(ss);
+                        SoraCore::Ptr->registerSoundSystem(ss);
                 }
                 
                 create_resource_manager fnrm = (create_resource_manager)dll.getProc("create_resource_manager");
                 if(fnrm != NULL) {
                     SoraResourceManager* rm = fnrm();
                     if(rm != NULL)
-                        SORA->registerResourceManager(rm);
+                        SoraCore::Ptr->registerResourceManager(rm);
                 }
                 
                 create_plugin_manager fnpm = (create_plugin_manager)dll.getProc("create_plugin_manager");
                 if(fnpm != NULL) {
                     SoraPluginManager* pm = fnpm();
                     if(pm != NULL)
-                        SORA->registerPluginManager(pm);
+                        SoraCore::Ptr->registerPluginManager(pm);
                 }
                 
                 create_font_manager fnfm = (create_font_manager)dll.getProc("create_font_manager");
                 if(fnfm != NULL) {
                     SoraFontManager* fm = fnfm();
                     if(fm != NULL)
-                        SORA->registerFontManager(fm);
+                        SoraCore::Ptr->registerFontManager(fm);
                 }
                 
             }

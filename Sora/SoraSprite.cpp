@@ -2,7 +2,6 @@
 #include "SoraModifierAdapter.h"
 #include "SoraTextureMap.h"
 #include "SoraCore.h"
-#include "SoraFastRenderer.h"
 
 #include "physics/SoraPhysicBody.h"
 
@@ -218,6 +217,55 @@ namespace sora {
         detachShaderFromRender();
 	}
     
+    void SoraSprite::renderEx(float x, float y, float rot, float scalex, float scaley) {
+        float tx1, ty1, tx2, ty2;
+		float sint, cost;
+        
+#ifdef OS_IOS
+        if(_IS_RETINA_DISPLAY() && isUseRetina()) {
+            x *= sora::getScaleFactor();
+            y *= sora::getScaleFactor();
+        }
+#endif
+        
+		tx1 = -mCenterX*scalex;
+		ty1 = -mCenterY*scaley;
+		tx2 = (mTextureRect.x2-mCenterX)*scalex;
+		ty2 = (mTextureRect.y2-mCenterY)*scaley;
+		
+		if(mRotation != 0.0f) {
+			cost = cosf(rot);
+			sint = sinf(rot);
+			
+			mQuad.v[0].x  = tx1*cost - ty1*sint + x;
+			mQuad.v[1].x  = tx2*cost - ty1*sint + x;
+			mQuad.v[2].x  = tx2*cost - ty2*sint + x;
+			mQuad.v[3].x  = tx1*cost - ty2*sint + x;
+            
+			mQuad.v[0].y  = tx1*sint + ty1*cost + y;	
+            mQuad.v[1].y  = tx2*sint + ty1*cost + y;	
+            mQuad.v[2].y  = tx2*sint + ty2*cost + y;	
+            mQuad.v[3].y  = tx1*sint + ty2*cost + y;
+		}
+		else {
+			mQuad.v[0].x = tx1 + x; 
+			mQuad.v[1].x = tx2 + x; 
+			mQuad.v[2].x = mQuad.v[1].x; 
+			mQuad.v[3].x = mQuad.v[0].x; 
+            
+			mQuad.v[0].y = ty1 + y;
+            mQuad.v[1].y = mQuad.v[0].y;
+            mQuad.v[2].y = ty2 + y;
+            mQuad.v[3].y = mQuad.v[2].y;
+		}
+        
+        bPropChanged = true;
+        
+        attachShaderToRender();
+		mSora->renderQuad(mQuad);
+        detachShaderFromRender();
+    }
+    
     void SoraSprite::renderInBox(float x1, float y1, float x2, float y2) {
         mQuad.v[0].x = x1; mQuad.v[0].y = y1;
         mQuad.v[1].x = x2; mQuad.v[1].y = y1;
@@ -245,7 +293,6 @@ namespace sora {
 		mQuad.v[2].x = x3; mQuad.v[2].y = y3;
 		mQuad.v[3].x = x4; mQuad.v[3].y = y4;
 #endif
-
         
         bPropChanged = true;
 		
@@ -525,7 +572,7 @@ namespace sora {
     }
     
     void SoraSprite::Render(const StringType& file, float x, float y, float r, float sh, float sv) {
-        SoraFastRenderer::Instance()->renderSprite(file, x, y, r, sh, sv);
+  //      SoraFastRenderer::Instance()->renderSprite(file, x, y, r, sh, sv);
     }
     
     void SoraSprite::fadeTo(float to, float t) {

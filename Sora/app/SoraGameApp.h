@@ -74,7 +74,7 @@ namespace sora {
             bool hideMouse();
             
         private:
-            SoraGameAppDef mDef;
+            const SoraGameAppDef& mDef;
             SoraFSMManager& mFSMManager;
         };
 #else
@@ -93,13 +93,14 @@ namespace sora {
             void didChangeStatusBarOrientation(iOSOrientation newOrientation, iOSOrientation oldOrientation);
             
         private:
-            SoraGameAppDef mDef;
+            const SoraGameAppDef& mDef;
             SoraFSMManager& mFSMManager;
         };
         
 #endif
         
         SoraWindow* mWindow;
+        SoraGameAppDef mAppDef;
         SoraFSMManager mFSMManager;
     };
     

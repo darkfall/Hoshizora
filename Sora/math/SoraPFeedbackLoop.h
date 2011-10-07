@@ -54,48 +54,48 @@ namespace sora {
     
     template<typename T>
     void SoraPFeedbackLoop<T>::reset(float time, float stepSize, float gain, const T& curState) {
-        mTime = time;
-        mStepSize = stepSize;
-        mGain = gain;
-        mState = curState;
+        this->mTime = time;
+        this->mStepSize = stepSize;
+        this->mGain = gain;
+        this->mState = curState;
     }
     
     template<typename T>
     void SoraPFeedbackLoop<T>::setGain(float g) {
-        mGain = g;
+        this->mGain = g;
     }
     
     template<typename T>
     float SoraPFeedbackLoop<T>::getGain() const {
-        return mGain;
+        return this->mGain;
     }
     
     template<typename T>
     void SoraPFeedbackLoop<T>::setGoal(const T& g) {
-        mGoal = g;
+        this->mGoal = g;
     }
     
     template<typename T>
     const T& SoraPFeedbackLoop<T>::getGoal() const {
-        return mGoal;
+        return this->mGoal;
     }
     
     template<typename T>
     void SoraPFeedbackLoop<T>::setState(const T& s) {
-        mState = s;
+        this->mState = s;
     }
     
     template<typename T>
     const T& SoraPFeedbackLoop<T>::getState() const {
-        return mState;
+        return this->mState;
     }
     
     template<typename T>
     void SoraPFeedbackLoop<T>::update(float dt) {
-        float curTime = mTime + dt;
+        float curTime = this->mTime + dt;
         while(mTime < curTime) {
-            mState = mState + (mState - mGoal) * mGain * mStepSize;
-            mTime += mStepSize;
+            this->mState = this->mState + (this->mState - this->mGoal) * this->mGain * this->mStepSize;
+            this->mTime += this->mStepSize;
         }
     }
     

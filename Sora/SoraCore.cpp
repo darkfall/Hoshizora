@@ -12,7 +12,6 @@
 #include "SoraTimerEvent.h"
 #include "SoraKeyInfo.h"
 #include "SoraFileChangeEvent.h"
-#include "SoraFastRenderer.h"
 #include "SoraAutoUpdate.h"
 #include "SoraFrameListener.h"
 
@@ -36,10 +35,6 @@
 
 #include "physics/SoraPhysicWorld.h"
 
-#ifdef SORA_ENABLE_MULTI_THREAD
-#include "thread/SoraMutex.h"
-#endif
-
 #include "Defaults/SoraDefaultMiscTool.h"
 #include "Defaults/SoraDefaultTimer.h"
 
@@ -57,7 +52,6 @@
 #include "SoraString.h"
 
 #include "Debug/SoraAutoProfile.h"
-#include "Debug/SoraDebugRenderer.h"
 
 #include "helpers/SoraInputSimulator.h"
 #include "helpers/SoraZSorter.h"
@@ -97,6 +91,7 @@ extern "C" {
 namespace sora {
     
     SoraCore* SoraCore::mInstance = NULL;
+    SoraCore* SoraCore::Ptr = 0;
     
     int SoraCore::iRandomSeed = rand();
     
@@ -145,8 +140,11 @@ namespace sora {
     }
     
     SoraCore* SoraCore::Instance() {
-        static SoraCore instance;
-        return &instance;
+        if(!mInstance) {
+            mInstance = new SoraCore;
+            Ptr = mInstance;
+        }
+        return mInstance;
     }
 	
 	SoraCore::SoraCore() {
@@ -323,9 +321,7 @@ namespace sora {
         } catch(const SoraException& exp) {
             _postError(exp.what());
         }
-        
-        SoraFastRenderer::Instance();
-        
+                
         if(bSeperateSoundSystemThread && pSoundSystem != 0) {
             SoraSoundSystemThread::Instance()->setSoundSystem(pSoundSystem);
             SoraSoundSystemThread::Instance()->start();
@@ -558,6 +554,8 @@ namespace sora {
 
 	void SoraCore::shutDown() {        
 		//SoraTextureMap::Instance()->Destroy();
+        delete pResourceFileFinder;
+
         if(mMainWindow)
             delete mMainWindow;
         
@@ -571,7 +569,6 @@ namespace sora {
 			pRenderSystem->shutdown();
 			delete pRenderSystem;
 		}
-		delete pResourceFileFinder;
 		
 		if(pSoundSystem) {
             if(bSeperateSoundSystemThread)
@@ -773,6 +770,10 @@ namespace sora {
     
     SoraPhysicWorld* SoraCore::getPhysicWorld() const {
         return pPhysicWorld;
+    }
+    
+    SoraResourceFileFinder* SoraCore::getResourceFileFinder() const {
+        return pResourceFileFinder;
     }
 
 	float SoraCore::getFPS() {
@@ -1688,10 +1689,6 @@ namespace sora {
     }
     
 #ifdef SORA_ENABLE_MULTI_THREAD
-
-    void SoraCore::loadResourceFileAsync(const StringType& file, const SoraResourceFileFinder::AsyncNotification& handler, void* puserdata) {
-        pResourceFileFinder->loadResourceFileAsync(file, handler, puserdata);
-    }
     
     void SoraCore::beginMultithreadedRendering() {
         bMultithreadedRendering = true;

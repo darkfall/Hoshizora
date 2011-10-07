@@ -17,6 +17,7 @@ namespace sora {
     mSprite(0) {
         mSprite = new SoraSprite(0);
         sora_assert(mSprite);
+        mSprite->attachShaderContext(this->getShaderContext());
         
         attach();
         
@@ -38,30 +39,6 @@ namespace sora {
             mSprite->setTexture(texture);
         
         mSprite->render(getPositionX(), getPositionY());
-    }
-    
-    SoraShader* SoraPostEffect::attachFragmentShader(const StringType& file, const SoraString& entry) {
-        return mSprite->attachFragmentShader(file, entry);
-    }
-    
-    SoraShader* SoraPostEffect::attachVertexShader(const StringType& file, const SoraString& entry) {
-        return mSprite->attachVertexShader(file, entry);
-    }
-    
-    void SoraPostEffect::detachFragmentShader() {
-        mSprite->detachFragmentShader();
-    }
-    
-    void SoraPostEffect::detachVertexShader() {
-        mSprite->detachVertexShader();
-    }
-    
-    void SoraPostEffect::attachFragmentShader(SoraShader* shader) {
-        mSprite->attachFragmentShader(shader);
-    }
-    
-    void SoraPostEffect::attachVertexShader(SoraShader* shader) {
-        mSprite->attachVertexShader(shader);
     }
     
     SoraSprite* SoraPostEffect::getSprite() const {

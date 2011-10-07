@@ -46,25 +46,25 @@ namespace sora {
         }
         
         void set(float _x, float _y) {
-            x = _x;
-            y = _y;
+            this->x = _x;
+            this->y = _y;
         }
         
-        SoraVector operator -() const { return SoraVector(-x, -y); }
-        SoraVector operator -(const SoraVector& rhs) const { return SoraVector(x-rhs.x, y-rhs.y); }
-        SoraVector operator +(const SoraVector& rhs) const { return SoraVector(x+rhs.x, y+rhs.y); }
+        SoraVector operator -() const { return SoraVector(-this->x, -this->y); }
+        SoraVector operator -(const SoraVector& rhs) const { return SoraVector(this->x-rhs.x, this->y-rhs.y); }
+        SoraVector operator +(const SoraVector& rhs) const { return SoraVector(this->x+rhs.x, this->y+rhs.y); }
         
-        SoraVector& operator+=(const SoraVector& rhs) { x += rhs.x; y += rhs.y; return *this; }
-        SoraVector& operator-=(const SoraVector& rhs) { x -= rhs.x; y -= rhs.y; return *this; }
+        SoraVector& operator+=(const SoraVector& rhs) { this->x += rhs.x; this->y += rhs.y; return *this; }
+        SoraVector& operator-=(const SoraVector& rhs) { this->x -= rhs.x; this->y -= rhs.y; return *this; }
         
-        bool operator ==(const SoraVector& rhs) const { return FloatEqual(x, rhs.x) && FloatEqual(y, rhs.y); }
-        bool operator !=(const SoraVector& rhs) const { return x!=rhs.x && y!=rhs.y; }
+        bool operator ==(const SoraVector& rhs) const { return FloatEqual(this->x, rhs.x) && FloatEqual(this->y, rhs.y); }
+        bool operator !=(const SoraVector& rhs) const { return this->x!=rhs.x && this->y!=rhs.y; }
         
-        SoraVector operator/(float s) const { return SoraVector(x/s, y/s); }
-        SoraVector operator*(float s) const { return SoraVector(x*s, y*s); }
-        SoraVector& operator*=(float s) { x *= s; y *= s; return *this; }
+        SoraVector operator/(float s) const { return SoraVector(this->x/s, this->y/s); }
+        SoraVector operator*(float s) const { return SoraVector(this->x*s, this->y*s); }
+        SoraVector& operator*=(float s) { this->x *= s; this->y *= s; return *this; }
         
-        float dot(const SoraVector& rhs) const { return x*rhs.x + y*rhs.y; }
+        float dot(const SoraVector& rhs) const { return this->x*rhs.x + this->y*rhs.y; }
         float length() const { return sqrtf(dot(*this)); }
         float lengthsq() const { return dot(*this); }
         float angle(const SoraVector* rhs = 0) const {
@@ -74,28 +74,28 @@ namespace sora {
                 t.normalize();
                 return acosf(s.dot(t));
             } else
-                return atan2f(y, x);
+                return atan2f(this->y, this->x);
         }
         
         void clamp(const float max) {
             if(length() > max) {
                 normalize();
-                x *= max;
-                y *= max;
+                this->x *= max;
+                this->y *= max;
             }
         }
         
         SoraVector& normalize() {
             float rc = InvSqrt(dot(*this));
-            x *= rc;
-            y *= rc;
+            this->x *= rc;
+            this->y *= rc;
             return *this;
         }
         SoraVector& rotate(float a) {
             SoraVector v;
-            v.x = x * cosf(a) - y * sinf(a);
-            v.y = x * sinf(a) + y * cosf(a);
-            x = v.x; y = v.y;
+            v.x = this->x * cosf(a) - this->y * sinf(a);
+            v.y = this->x * sinf(a) + this->y * cosf(a);
+            this->x = v.x; this->y = v.y;
             return *this;
         }
         

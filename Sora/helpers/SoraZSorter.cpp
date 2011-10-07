@@ -124,9 +124,9 @@ namespace sora {
 					quad.tex = node->tex;
 					
 					if(node->shader)
-						SORA->attachShaderContext(node->shader);
-					SORA->renderQuad(quad);
-					SORA->detachShaderContext();
+						SoraCore::Ptr->attachShaderContext(node->shader);
+					SoraCore::Ptr->renderQuad(quad);
+					SoraCore::Ptr->detachShaderContext();
 				} else if(node->size == 3) {
 					SoraTriple trip;
 					memcpy(&trip.v[0], node->vertex, sizeof(SoraVertex)*3);
@@ -134,14 +134,14 @@ namespace sora {
 					trip.tex = node->tex;
 					
 					if(node->shader)
-						SORA->attachShaderContext(node->shader);
-					SORA->renderTriple(trip);
-					SORA->detachShaderContext();
+						SoraCore::Ptr->attachShaderContext(node->shader);
+					SoraCore::Ptr->renderTriple(trip);
+					SoraCore::Ptr->detachShaderContext();
 				} else if(node->size != 0) {
 					if(node->shader)
-						SORA->attachShaderContext(node->shader);
-					SORA->renderWithVertices((SoraTextureHandle)node->tex, node->blend, node->vertex, node->size, node->drawMode);
-					SORA->detachShaderContext();
+						SoraCore::Ptr->attachShaderContext(node->shader);
+					SoraCore::Ptr->renderWithVertices((SoraTextureHandle)node->tex, node->blend, node->vertex, node->size, node->drawMode);
+					SoraCore::Ptr->detachShaderContext();
 				}
 				node = node->next;
 			}

@@ -9,17 +9,40 @@
 #include "SoraShaderEnabled.h"
 #include "SoraCore.h"
 #include "SoraLogger.h"
+#include "SoraShader.h"
+#include "SoraResourceFileFinder.h"
 
 namespace sora {
     
-    SoraShaderEnabledObject::SoraShaderEnabledObject() {
-        mShaderContext = NULL;
+    SoraShaderEnabledObject::SoraShaderEnabledObject():
+    mInternalContext(false),
+    mShaderContext(0) {
+        
     }
     
     SoraShaderEnabledObject::~SoraShaderEnabledObject() {
-        if(mShaderContext) {
+        if(mInternalContext && mShaderContext) {
             delete mShaderContext;
         }
+    }
+
+    void SoraShaderEnabledObject::attachShaderContext(const StringType& tag) {
+        SoraShaderContext* context = SoraCore::Ptr->getResourceFileFinder()->getShaderResource(tag);
+        if(context)
+            attachShaderContext(context);
+    }
+    
+    void SoraShaderEnabledObject::attachShaderContext(SoraShaderContext* context) {
+        sora_assert(context);
+        
+        if(mInternalContext && mShaderContext)
+            delete mShaderContext;
+        mShaderContext = context;
+        mInternalContext = false;
+    }
+    
+    SoraShaderContext* SoraShaderEnabledObject::getShaderContext() const {
+        return mShaderContext;
     }
     
     SoraShader* SoraShaderEnabledObject::attachShader(const StringType& file, const SoraString& entry, int32 type) {
@@ -32,11 +55,11 @@ namespace sora {
     }
     
     SoraShader* SoraShaderEnabledObject::attachFragmentShader(const StringType& file, const SoraString& entry) {
-        return attachShader(file, entry, FRAGMENT_SHADER);
+        return attachShader(file, entry, SoraShader::FragmentShader);
     }
     
     SoraShader* SoraShaderEnabledObject::attachVertexShader(const StringType& file, const SoraString& entry) {
-        return attachShader(file, entry, VERTEX_SHADER);
+        return attachShader(file, entry, SoraShader::VertexShader);
     }
     
     void SoraShaderEnabledObject::detachShader(SoraShader* shader) {
@@ -98,6 +121,7 @@ namespace sora {
             mShaderContext = SoraCore::Instance()->createShaderContext();
             if(!mShaderContext)
                 log_error("SoraShaderEnabledObject: error creating shader context");
+            mInternalContext = true;
         }
     }
     
@@ -109,4 +133,15 @@ namespace sora {
         if(mShaderContext)
             mShaderContext->clear();
     }
+    
+    SoraShader* SoraShaderEnabledObject::getFragmentShader() const {
+        if(mShaderContext)
+            return mShaderContext->getFragmentShader();
+    }
+    
+    SoraShader* SoraShaderEnabledObject::getVertexShader() const {
+        if(mShaderContext)
+            return mShaderContext->getVertexShader();
+    }
+    
 } // namespace sora

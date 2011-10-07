@@ -8,14 +8,12 @@
  */
 
 #include "SoraShader.h"
-#include "SoraShaderManager.h"
 #include "SoraCore.h"
 #include "SoraLogger.h"
 
 namespace sora {
 
 	SoraShader::SoraShader() {
-		mType = UNKNOWN_SHADER;
         mErrorCode = ShaderNoError;
         mShaderContext = NULL;
 	}
@@ -96,9 +94,9 @@ namespace sora {
 	}
 	
     SoraShader* SoraShaderContext::attachShader(const StringType& file, const SoraString& entry, int32 type) {
-        if(type == FRAGMENT_SHADER)
+        if(type == SoraShader::FragmentShader)
             return attachFragmentShader(file, entry);
-        else if(type == VERTEX_SHADER)
+        else if(type == SoraShader::VertexShader)
             return attachVertexShader(file, entry);
         else 
             THROW_SORA_EXCEPTION(RuntimeException, "Unknown shader type");
@@ -145,12 +143,12 @@ namespace sora {
 	}
     
     SoraShader* SoraShaderContext::attachFragmentShader(const StringType& file, const SoraString& entry) {
-        SoraShader* shader = createShader(file, entry, FRAGMENT_SHADER);
+        SoraShader* shader = createShader(file, entry, SoraShader::FragmentShader);
         if(!shader) {
             log_error("Error creating shader");
             return 0;
         }
-        if(shader->getError() != ShaderNoError) {
+        if(shader->getError() != SoraShader::ShaderNoError) {
             shader->release();
             log_error(vamssg("Shader returned with error code %d", shader->getError()));
             return NULL;
@@ -160,10 +158,10 @@ namespace sora {
     }
     
     SoraShader* SoraShaderContext::attachVertexShader(const StringType& file, const SoraString& entry) {
-        SoraShader* shader = createShader(file, entry, VERTEX_SHADER);
+        SoraShader* shader = createShader(file, entry, SoraShader::VertexShader);
         if(!shader)
             log_error("Error creating shader");
-        if(shader->getError() != ShaderNoError) {
+        if(shader->getError() != SoraShader::ShaderNoError) {
             shader->release();
             log_error(vamssg("Shader returned with error code %d", shader->getError()));
             return NULL;
@@ -182,9 +180,9 @@ namespace sora {
 	
     void SoraShaderContext::attachShader(SoraShader* shader) {
         sora_assert(shader);
-        if(shader->getType() == FRAGMENT_SHADER)
+        if(shader->getType() == SoraShader::FragmentShader)
             attachFragmentShader(shader);
-        else if(shader->getType() == VERTEX_SHADER)
+        else if(shader->getType() == SoraShader::VertexShader)
             attachVertexShader(shader);
         else 
             THROW_SORA_EXCEPTION(RuntimeException, "Unknown shader type");
@@ -207,29 +205,14 @@ namespace sora {
     void SoraShaderContext::detachShader(SoraShader* shader) {
         sora_assert(shader);
         
-        if(shader->getType() == FRAGMENT_SHADER && shader == mFragmentShader.get())
+        if(shader->getType() == SoraShader::FragmentShader && shader == mFragmentShader.get())
             detachFragmentShader();
-        else if(shader->getType() == VERTEX_SHADER && shader == mVertexShader.get())
+        else if(shader->getType() == SoraShader::VertexShader && shader == mVertexShader.get())
             detachVertexShader();
     }
     
     bool SoraShaderContext::isAvailable() {
         return (mFragmentShader.get() != NULL || mVertexShader.get() != NULL);
-    }
-    
-    void SoraShader::Free(SoraShader* shader) {
-        SoraShaderContext* context = shader->getShaderContext();
-        if(!context)
-            THROW_SORA_EXCEPTION(IllegalStateException, "Caught wild shader without ShaderContext, possible bug");
-        else context->detachShader(shader);
-    }
-    
-    SoraShader* SoraShader::LoadFromFile(const StringType& file, const SoraString& entry, int32 type) {
-        return SoraShaderManager::Instance()->createShader(file, entry, type);
-    }
-    
-    SoraShader* SoraShader::LoadFromMemory(const char* data, const SoraString& entry, int32 type) {
-        return SoraShaderManager::Instance()->createShaderFromMem(data, entry, type);
     }
     
     SoraShaderContext* SoraShaderContext::Create() {

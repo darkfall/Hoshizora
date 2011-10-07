@@ -56,10 +56,8 @@ namespace sora {
 				if(!FT_Render_Glyph(glyph, FT_RENDER_MODE_NORMAL)) {
 					bits = glyph->bitmap;
 					uint8_t *pt = bits.buffer;
-				//	image = new unsigned char[bits.width * bits.rows];
-				//	memcpy(image, pt, bits.width * bits.rows);
-
-					top = glyph->bitmap_top;
+                    
+                    top = glyph->bitmap_top;
 					left = glyph->bitmap_left;
 					imgw = 1;
 					imgh = 1;
@@ -112,7 +110,7 @@ namespace sora {
 					}
                     
 					if(tex != 0)
-						SORA->releaseTexture(tex);
+						SoraCore::Ptr->releaseTexture(tex);
 					tex = createTexture(texd, imgw, imgh);
                     free(texd);
 					cached = true;
@@ -154,9 +152,6 @@ namespace sora {
 		ft_face = face;
 		this->size = size;
 
-//		FTGlyph tmp;  
-//		int* tmp2;
-
 		try {
 			ft_glyphs.resize(ft_face->face->num_glyphs);
 		} catch(std::exception& e) {
@@ -168,8 +163,6 @@ namespace sora {
 			ft_glyphs[i].face = &(ft_face->face);
 			ft_glyphs[i].cached = false;
 
-		//	tmp2 = (int*)&(ft_glyphs[i]);
-		//	*tmp2 = *(int*)(&tmp);
 			ft_glyphs[i].init(); 
 		}
 		attached = true;
@@ -225,13 +218,23 @@ namespace sora {
 	float SoraFTFont::getKerningWidth() const {
 		return kerningWidth;
 	}
+    
+    inline int32 charToInt(wchar_t c) {
+        if(c >= 48 && c <= 57)
+            return (int32)c-48;
+        else if(c >= 65 && c <= 70)
+            return (int32)c-65 + 10;
+        else if(c >= 97 && c <= 102)
+            return (int32)c-97 + 10;
+        return 0;
+    }
 
 	void SoraFTFont::render(float x, float y, int32 align, const wchar_t* pwstr) {
 		float ox = x;
-		if(align != FONT_ALIGNMENT_LEFT) {
-			if(align == FONT_ALIGNMENT_RIGHT)
+		if(align != SoraFont::AlignmentLeft) {
+			if(align == SoraFont::AlignmentRight)
 				x = x - getStringWidth(pwstr);
-			else if(align == FONT_ALIGNMENT_CENTER )
+			else if(align == SoraFont::AlignmentCenter )
 				x = x - ((int32)getStringWidth(pwstr) >>1 );
 		}
         
@@ -241,10 +244,10 @@ namespace sora {
 				++pwstr;
                 y += getHeight() + kerningHeight;
 				x = ox;
-				if(align != FONT_ALIGNMENT_LEFT) {
-					if(align == FONT_ALIGNMENT_RIGHT)
+				if(align != SoraFont::AlignmentLeft) {
+					if(align == SoraFont::AlignmentRight)
 						x = x - getStringWidth(pwstr);
-					else if(align == FONT_ALIGNMENT_CENTER )
+					else if(align == SoraFont::AlignmentCenter )
 						x = x - ((int32)getStringWidth(pwstr) >>1 );
 				}
 				continue;
@@ -252,20 +255,30 @@ namespace sora {
 				x += getWidthFromCharacter(L' ')*8;
                 ++pwstr;
 				continue;
-			}
+			} else if(*pwstr == L'|') {
+                if(*(pwstr+1) == L'#') {
+                    ++pwstr;
+                    
+                    int32 r = charToInt(*(++pwstr)) * charToInt(*(++pwstr));
+                    int32 g = charToInt(*(++pwstr)) * charToInt(*(++pwstr));
+                    int32 b = charToInt(*(++pwstr)) * charToInt(*(++pwstr));
+                    
+                    setColor(SoraColorRGBA(r, g, b).getHWColor());
+                }
+                ++pwstr;
+                ++pwstr;
+                continue;
+            }
             
 			n = getGlyphByChar(*pwstr);
 			if(n > 0 && n < ft_glyphs.size()) {
 				int imgw = ft_glyphs[n-1].imgw - 1;
 				int imgh = ft_glyphs[n-1].imgh - 1;
-				//int texw = ft_glyphs[n-1].texw;
-				//int texh = ft_glyphs[n-1].texh;
 				int offx = ft_glyphs[n-1].left;
 				int offy = ft_glyphs[n-1].size - ft_glyphs[n-1].top;
 
 				sprite->setTexture(ft_glyphs[n-1].tex);
 				sprite->setTextureRect(0.f, 0.f, imgw, imgh);
-            //    sprite->setCenter(imgw/2.f, imgh/2.f);
                 sprite->setRotation(charRotation);
 				sprite->setScale(scale, scale);
 				sprite->render(x+offx, y+offy);
@@ -275,10 +288,10 @@ namespace sora {
                     if(lineWidth != 0.f && x >= lineWidth+ox-size) {
                         y += getHeight() + kerningHeight;
                         x = ox;
-                        if(align != FONT_ALIGNMENT_LEFT) {
-                            if(align == FONT_ALIGNMENT_RIGHT)
+                        if(align != SoraFont::AlignmentLeft) {
+                            if(align == SoraFont::AlignmentRight)
                                 x = x - getStringWidth(pwstr);
-                            else if(align == FONT_ALIGNMENT_CENTER )
+                            else if(align == SoraFont::AlignmentCenter )
                                 x = x - ((int32)getStringWidth(pwstr) >>1 );
                         }
                     }
@@ -294,10 +307,10 @@ namespace sora {
                     if(lineWidth != 0.f && x >= lineWidth+ox) {
                         y += getHeight() + kerningHeight;
                         x = ox;
-                        if(align != FONT_ALIGNMENT_LEFT) {
-                            if(align == FONT_ALIGNMENT_RIGHT)
+                        if(align != SoraFont::AlignmentLeft) {
+                            if(align == SoraFont::AlignmentRight)
                                 x = x - getStringWidth(pwstr);
-                            else if(align == FONT_ALIGNMENT_CENTER )
+                            else if(align == SoraFont::AlignmentCenter )
                                 x = x - ((int32)getStringWidth(pwstr) >>1 );
                         }
                     }
@@ -349,14 +362,25 @@ namespace sora {
 				x += getWidthFromCharacter(L' ')*8;
                 ++pwstr;
 				continue;
-			}
+			} else if(*pwstr == L'|') {
+                if(*(pwstr+1) == L'#') {
+                    ++pwstr;
+                    
+                    int32 r = charToInt(*(++pwstr)) * charToInt(*(++pwstr));
+                    int32 g = charToInt(*(++pwstr)) * charToInt(*(++pwstr));
+                    int32 b = charToInt(*(++pwstr)) * charToInt(*(++pwstr));
+                                        
+                    setColor(SoraColorRGBA(r, g, b).getHWColor());
+                }
+                ++pwstr;
+                ++pwstr;
+                continue;
+            }
             
 			n = getGlyphByChar(*pwstr);
 			if(n > 0 && n < ft_glyphs.size()) {
 				int imgw = ft_glyphs[n-1].imgw - 1;
 				int imgh = ft_glyphs[n-1].imgh - 1;
-				//int texw = ft_glyphs[n-1].texw;
-				//int texh = ft_glyphs[n-1].texh;
 				int offx = ft_glyphs[n-1].left;
 				int offy = ft_glyphs[n-1].size - ft_glyphs[n-1].top;
 

@@ -13,7 +13,7 @@
 
 #include "factory/SoraSpriteFactory.h"
 #include "json/json.h"
-#include "llexer/llexer.h"
+#include "lexer/SoraLexer.h"
 
 #include "util/SoraHash.h"
 #include "SoraCommon.h"
@@ -22,36 +22,10 @@
 #include <cassert>
 
 namespace sora {
-
-    inline sora::ANIMATION_SPRITE_ANCHOR identToAnchor(const std::string& anchor) {
-		if(strcmpnocase("center", anchor.c_str()) == 0)
-			return sora::ANCHOR_MIDDLE;
-		else if(strcmpnocase("upperleft", anchor.c_str()) == 0)
-			return sora::ANCHOR_UPPER_LEFT;
-		else if(strcmpnocase("upperright", anchor.c_str()) == 0)
-			return sora::ANCHOR_UPPER_RIGHT;
-		else if(strcmpnocase("lowerleft", anchor.c_str()) == 0)
-			return sora::ANCHOR_LOWER_LEFT;
-		else if(strcmpnocase("lowerright", anchor.c_str()) == 0)
-			return sora::ANCHOR_LOWER_RIGHT;
-		return sora::ANCHOR_UPPER_LEFT;
-	}
-    
-    SoraSprite* SpriteAnimationCreatorFn(const std::wstring& path, Json::Value* val) {
-        SoraSpriteAnimation* spr = UNPACK_ANIMATION(path);
-        if(spr && val != NULL) {
-            ParseJsonSpriteDef(spr, val);
-            
-            if(val->isMember("anchor")) {
-                spr->setAnchor(identToAnchor((*val)["anchor"].asString()));
-            }
-        }
-        return spr;
-    }
         
-    inline uint32 cFileReadToken(llexer* lexer, bool& err) {
+    inline uint32 cFileReadToken(SoraLexer* lexer, bool& err) {
         Token token = lexer->getNextToken();
-        if(token != TOKEN_TYPE_INT) {
+        if(token != TokenInt) {
             err = true;
             return 0;
         }
@@ -59,9 +33,9 @@ namespace sora {
         return i;
     }
     
-    inline const char* nextAnmNameToken(llexer* lexer, bool& err) {
+    inline const char* nextAnmNameToken(SoraLexer* lexer, bool& err) {
         Token token = lexer->getNextToken();
-        if(token != TOKEN_TYPE_IDENT) {
+        if(token != TokenIdent) {
             err = true;
             return "\0";
         }
@@ -69,8 +43,8 @@ namespace sora {
     }
     
     int SoraSpriteAnimationPacker::pack(const char* pstrScript, const char* pstrDest) {
-        llexer* lexer = new llexer;
-        if(lexer->loadFile(pstrScript) != LEX_NO_ERROR) 
+        SoraLexer* lexer = new SoraLexer;
+        if(!lexer->loadFile(pstrScript)) 
             return 0;
         
         bool err = false;
@@ -83,7 +57,7 @@ namespace sora {
             err = true;
         
         Token token = lexer->getNextToken();
-        if(token != TOKEN_TYPE_STRING)
+        if(token != TokenString)
             err = true;
         
         std::string texturePath = lexer->getCurrLexeme();
@@ -97,7 +71,7 @@ namespace sora {
         }
         
         token = lexer->getNextToken();
-        if(token != TOKEN_TYPE_INT)
+        if(token != TokenInt)
             err = true;
         
         if(!err) {
@@ -315,10 +289,10 @@ namespace sora {
     
     SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const SoraString& name) {
         ulong32 size;
-        void* data = SORA->getResourceFile(s2ws(name), size);
+        void* data = SoraCore::Ptr->getResourceFile(s2ws(name), size);
         if(data) {
             SoraSpriteAnimation* anm = unpack(data, size);
-            SORA->freeResourceFile(data);
+            SoraCore::Ptr->freeResourceFile(data);
             
             return anm;
         }
@@ -327,10 +301,10 @@ namespace sora {
 	
 	SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const SoraWString& name) {
 		ulong32 size;
-		void* data = SORA->getResourceFile(name, size);
+		void* data = SoraCore::Ptr->getResourceFile(name, size);
 		if(data) {
 			SoraSpriteAnimation* anm = unpack(data, size);
-			SORA->freeResourceFile(data);
+			SoraCore::Ptr->freeResourceFile(data);
 			
 			return anm;
 		}
@@ -418,7 +392,7 @@ namespace sora {
 	bPaused(false), bIsPlaying(false), bLoop(true), 
 	defaultId(0), currTime(0), totalTime(0), currNodeId(0)  {
 		ulong32 size;
-		void* pData = sora::SORA->getResourceFile(anmPath, size);
+		void* pData = sora::SoraCore::Ptr->getResourceFile(anmPath, size);
 		
 		bool err = false;
 		if(pData) {
@@ -497,7 +471,7 @@ namespace sora {
 			pmfile->seek(0);
 			delete pmfile;
 			
-			SORA->freeResourceFile(pData);
+			SoraCore::Ptr->freeResourceFile(pData);
 			if(!err)
 				init();
 		}
@@ -657,7 +631,7 @@ namespace sora {
     
     void SoraSpriteAnimation::init() {
         if(texturePath.size() != 0) {
-            setTexture(sora::SORA->createTexture(s2ws(texturePath)));
+            setTexture(sora::SoraCore::Ptr->createTexture(s2ws(texturePath)));
             if(mQuad.tex != NULL) {
                 if(anmCount != 0 && anmNodes[0].texList.size() != 0)
                     setTextureRect((float)anmNodes[0].texList[0].tx, 
@@ -699,8 +673,6 @@ namespace sora {
 	int32 SoraSpriteAnimation::getAnchor() const {
 		return sprAnchor;
 	}
-    
-    SORA_STATIC_RUN_CODE(REGISTER_SPRITE_PRODUCT("animation", SpriteAnimationCreatorFn));
 
     
 } // namespace sora

@@ -15,7 +15,7 @@
 namespace sora {
         
     SoraBaseCanvas::SoraBaseCanvas(int32 w, int32 h, bool bDepthBuffer) {
-        canvasTarget = SORA->createTarget(w, h, bDepthBuffer);
+        canvasTarget = SoraCore::Ptr->createTarget(w, h, bDepthBuffer);
 		if(!canvasTarget) {
 			log_mssg("SoraBaseCanvas: Error creating render target");
             return;
@@ -30,7 +30,7 @@ namespace sora {
     
     SoraBaseCanvas::~SoraBaseCanvas() {
         if(canvasTarget)
-            SORA->freeTarget(canvasTarget);
+            SoraCore::Ptr->freeTarget(canvasTarget);
         if(pCanvasSprite)
             delete pCanvasSprite;
     }
@@ -47,7 +47,7 @@ namespace sora {
     
     void SoraBaseCanvas::render() {
         if(pCanvasSprite) {
-            pCanvasSprite->setTexture(SORA->getTargetTexture(canvasTarget));
+            pCanvasSprite->setTexture(SoraCore::Ptr->getTargetTexture(canvasTarget));
             pCanvasSprite->render(getPositionX(), getPositionY());
         }
     }
@@ -61,14 +61,14 @@ namespace sora {
     
     SoraSprite* SoraBaseCanvas::getCanvasSprite() const { 
         if(pCanvasSprite)
-            pCanvasSprite->setTexture(SORA->getTargetTexture(canvasTarget));
+            pCanvasSprite->setTexture(SoraCore::Ptr->getTargetTexture(canvasTarget));
         return pCanvasSprite;
     }
     
     void SoraBaseCanvas::beginRender(ulong32 col) {
         if(canvasTarget) {
             bSceneBegan = true;
-            SORA->beginScene(col, canvasTarget);
+            SoraCore::Ptr->beginScene(col, canvasTarget);
         }
     }
     
@@ -76,7 +76,7 @@ namespace sora {
         if(canvasTarget) {
             if(!bSceneBegan)
                 THROW_SORA_EXCEPTION(IllegalStateException, "Render not began");
-            SORA->endScene();
+            SoraCore::Ptr->endScene();
         }
     }
     	

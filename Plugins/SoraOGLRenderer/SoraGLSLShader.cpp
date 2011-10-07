@@ -66,7 +66,7 @@ namespace sora {
 		assert(mProgram != 0);
         mType = type;
 
-		if(mType == FRAGMENT_SHADER) 
+		if(mType == SoraShader::FragmentShader) 
 			mShader = glCreateShader(GL_FRAGMENT_SHADER);
 		else
 			mShader = glCreateShader(GL_VERTEX_SHADER);
@@ -77,7 +77,7 @@ namespace sora {
 			return false;
 		}
 		
-		SoraResourceFileAuto data(file);
+		SoraResourceFile data(file);
 		if(data.isValid()) {
 			const char* cdata = static_cast<const char*>(data);
 			glShaderSource(mShader, 1, &cdata, NULL);
@@ -98,7 +98,7 @@ namespace sora {
     bool SoraGLSLShader::loadShaderFromMem(const char* data, const SoraString& entry, int32 type) {
         mType = type;
         
-		if(mType == FRAGMENT_SHADER) 
+		if(mType == SoraShader::FragmentShader) 
 			mShader = glCreateShader(GL_FRAGMENT_SHADER);
 		else
 			mShader = glCreateShader(GL_VERTEX_SHADER);

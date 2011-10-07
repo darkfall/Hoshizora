@@ -27,12 +27,12 @@ namespace sora {
 	SoraShader* SoraCGD3D9ShaderContext::createShader(const StringType& file, const SoraString& entry, int32 type) {
 		SoraCGD3D9Shader* shader;
         switch(type) {
-            case FRAGMENT_SHADER: {
+            case SoraShader::FragmentShader: {
                 shader = new SoraCGD3D9Shader();
                 shader->load(file, entry, type, context, fragmentProfile);
                 break;
             }
-            case VERTEX_SHADER: {
+            case SoraShader::VertexShader: {
                 shader = new SoraCGD3D9Shader();
                 shader->load(file, entry, type, context, vertexProfile);
                 break;
@@ -50,12 +50,12 @@ namespace sora {
 	SoraShader* SoraCGD3D9ShaderContext::createShaderFromMem(const char* data, const SoraString& entry, int32 type) {
 		SoraCGD3D9Shader* shader;
         switch(type) {
-            case FRAGMENT_SHADER: {
+            case SoraShader::FragmentShader: {
                 shader = new SoraCGD3D9Shader();
                 shader->loadFromMem(data, entry, type, context, fragmentProfile);
                 break;
             }
-            case VERTEX_SHADER: {
+            case SoraShader::VertexShader: {
                 shader = new SoraCGD3D9Shader();
                 shader->loadFromMem(data, entry, type, context, vertexProfile);
                 break;

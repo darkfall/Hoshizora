@@ -32,37 +32,37 @@ namespace sora {
     class SORA_API SoraModifierAdapter: public SoraAbstractModifierAdapter {
     public:
         SoraModifierAdapter(T* obj, SoraModifier<T>* modi, bool insert=false) {
-            mObj = obj;
-            mModifier = modi;
+            this->mObj = obj;
+            this->mModifier = modi;
             
-            mInsert = insert;
-            if(mInsert)
+            this->mInsert = insert;
+            if(this->mInsert)
                 obj->addModifierAdapter(this);
         }
         
         virtual ~SoraModifierAdapter() {
-            if(mInsert)
-                mObj->removeModifierAdapter(this);
+            if(this->mInsert)
+                this->mObj->removeModifierAdapter(this);
         }
         
         typedef SoraFunction<void(T*)> FinishNotification;
         void setFinishNotification(const FinishNotification& func) {
-            mOnFinish = func;
+            this->mOnFinish = func;
         }
         
         bool update(float dt) {
-            if(mModifier) {
-                bool result = mModifier->update(dt);
-                mModifier->modify(mObj);
+            if(this->mModifier) {
+                bool result = this->mModifier->update(dt);
+                this->mModifier->modify(this->mObj);
                 
                 if(result) { 
-                    if(mOnFinish) {
-                        mOnFinish(mObj);
+                    if(this->mOnFinish) {
+                        this->mOnFinish(this->mObj);
                     }
                     
-                    if(mModifier->isAutoRelease()) {
-                        mModifier->release();
-                        mModifier = 0;
+                    if(this->mModifier->isAutoRelease()) {
+                        this->mModifier->release();
+                        this->mModifier = 0;
                         return true;
                     }
                 }

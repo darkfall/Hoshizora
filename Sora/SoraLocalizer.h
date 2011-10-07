@@ -11,17 +11,16 @@
 #define SORA_LOCALIZER_H_
 
 #include "SoraPlatform.h"
-#include "SoraStringConv.h"
 #include "SoraSingleton.h"
-#include "SoraCore.h"
-
-#include "message/SoraMessageEvent.h"
-#include "llexer/llexer.h"
+#include "SoraString.h"
 
 #include <map>
 
 namespace sora {
 	
+    class SoraLexer;
+    class SoraMessageEvent;
+    
 	/*
 		@locale file format for sora
 	 
@@ -49,20 +48,20 @@ namespace sora {
 		 if the ident of the conf already exist, then the old one would be replaced
 		 @param confPath, path of the configuration file
 		 */
-		bool addLocaleConf(const SoraWString& confPath);
+		bool addLocaleConf(const StringType& confPath);
 		
 		/*
 		 get a str depend on current locale
 		 @param ident, string ident id in the configuration file
 		 */
-		SoraWString getStr(const SoraString& ident);
+		StringType getStr(const StringType& ident);
 		
 		/*
 		 set current locale, this would affect the result of getStr
 		 @param localeIdent, locale ident id in the configuration file
 		 */
 		void setCurrentLocale(const SoraString& localeIdent);
-		SoraString getCurrentLocale() const { return currentLocale; }
+		SoraString getCurrentLocale() const;
 		
 		
 		/*
@@ -70,34 +69,33 @@ namespace sora {
 		 @param resourceName, the resource name to localize
 		 for example, myResource.png would be localized as myResource_CHN.png if current locale is CHN
 		 */
-		SoraWString localizeResourceName(SoraWString& resourceName);
+		StringType localizeResourceName(const StringType& resourceName);
         
         void onMessage(SoraMessageEvent* message);
 		
 	private:
 		static SoraLocalizer* mInstance;
 
-		typedef sora_hash_map<SoraString, SoraWString> LocaleStringMap;		
+		typedef sora_hash_map<SoraString, StringType> LocaleStringMap;		
 		typedef std::map<SoraString, LocaleStringMap > LocaleConfMap;
 		LocaleConfMap localeConfs;
 		LocaleConfMap::iterator currentLocaleMap;
 		
 		SoraString currentLocale;
-		SoraWString currentLocaleW;
 		
 	protected:
-		inline bool readToken(llexer* lexer, Token tokenExpected);
-		inline SoraString readLocaleIdent(llexer* lexer);
-		inline bool readLocaleString(llexer* lexer, LocaleStringMap& strMap);
-		inline bool readLocaleResource(llexer* lexer, LocaleStringMap& strMap);
+		inline bool readToken(SoraLexer* lexer, int tokenExpected);
+		inline SoraString readLocaleIdent(SoraLexer* lexer);
+		inline bool readLocaleString(SoraLexer* lexer, LocaleStringMap& strMap);
+		inline bool readLocaleResource(SoraLexer* lexer, LocaleStringMap& strMap);
 		
-		void reportError(llexer* lexer);
+		void reportError(SoraLexer* lexer);
 				
 		SoraLocalizer();
 		~SoraLocalizer();
 	};
 	
-	static SoraLocalizer* SORA_LOCALIZER = SoraLocalizer::Instance();
+	static SoraLocalizer* SoraLocalizerPtr = SoraLocalizer::Instance();
 	
 #define GET_LOCAL_STR(ident) SORA_LOCALIZER->getStr(ident)
 #define GET_LOCAL_RESOURCE(ident) SORA_LOCALIZER->getStr(ident)

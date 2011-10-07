@@ -25,19 +25,19 @@ namespace sora {
     SoraShader* SoraCGGLShaderContext::createShader(const StringType& file, const SoraString& entry, int32 type) {
         SoraCGGLShader* shader = NULL;
         switch (type) {
-			case VERTEX_SHADER: {
+			case SoraShader::VertexShader: {
                 shader = new SoraCGGLShader();
                 shader->load(file, entry, type, context, vertexProfile);
                 break;
             }
-			case FRAGMENT_SHADER: {
+			case SoraShader::FragmentShader: {
                 shader = new SoraCGGLShader();
                 shader->load(file, entry, type, context, fragmentProfile);
                 break;
             }
 		}
 		
-		if(!shader || shader->getError() != ShaderNoError) {
+		if(!shader || shader->getError() != SoraShader::ShaderNoError) {
 			if(shader) delete shader;
 			return NULL;
 		}
@@ -48,19 +48,19 @@ namespace sora {
     SoraShader* SoraCGGLShaderContext::createShaderFromMem(const char* data, const SoraString& entry, int32 type) {
         SoraCGGLShader* shader = NULL;
         switch (type) {
-			case VERTEX_SHADER: {
+			case SoraShader::VertexShader: {
                 shader = new SoraCGGLShader();
                 shader->loadFromMem(data, entry, type, context, vertexProfile);
                 break;
             }
-			case FRAGMENT_SHADER: {
+			case SoraShader::FragmentShader: {
                 shader = new SoraCGGLShader();
                 shader->loadFromMem(data, entry, type, context, fragmentProfile);
                 break;
             }
 		}
 		
-		if(!shader || shader->getError() != ShaderNoError) {
+		if(!shader || shader->getError() != SoraShader::ShaderNoError) {
 			if(shader) delete shader;
 			return NULL;
 		}
@@ -104,7 +104,7 @@ namespace sora {
 									  profile,
 									  entry.c_str(),
 									  NULL);
-			SORA->freeResourceFile((void*)data);
+			SoraCore::Ptr->freeResourceFile((void*)data);
             
 			checkError(context);
 			cgGLLoadProgram(program);

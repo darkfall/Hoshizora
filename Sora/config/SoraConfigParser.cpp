@@ -76,7 +76,7 @@ namespace sora {
                 if(type != CONFIG_UNKNOWN)
                     return open(path, type);
                 else {
-                    SoraResourceFileAuto resource(path);
+                    SoraResourceFile resource(path);
                     if(resource.isValid()) {
                         return open(resource, resource.size(), CONFIG_AUTO_DETECT);
                     }

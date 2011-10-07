@@ -19,15 +19,6 @@
 
 namespace sora {
 	
-	typedef enum {
-        UNKNOWN_SHADER = 0,
-		/* vertex shader */
-		VERTEX_SHADER = 1,
-		/* fragment shader */
-		FRAGMENT_SHADER = 2,
-	};
-    
-    const int ShaderNoError = 0;
     
     class SoraShaderContext;
 	
@@ -39,13 +30,18 @@ namespace sora {
 		friend class SoraShaderContext;
         
 	public:
+        enum { ShaderNoError = 0 };
+        
+        enum {
+                /* vertex shader */
+            VertexShader = 1,
+                /* fragment shader */
+            FragmentShader = 2,
+        };
+    
         SoraShader();
         virtual ~SoraShader();
         
-        static SoraShader* LoadFromFile(const StringType& file, const SoraString& entry, int32 type);
-        static SoraShader* LoadFromMemory(const char* data, const SoraString& entry, int32 type);
-        static void Free(SoraShader* shader);
-		
 		/*
 			Set a parameterf
 			@param name, the name of the parameter to set

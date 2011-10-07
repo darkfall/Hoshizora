@@ -10,9 +10,8 @@
 #define Sora_SoraSpriteFactory_h
 
 #include "SoraFactory.h"
-
-#include "json/json.h"
 #include "SoraSprite.h"
+#include "SoraString.h"
 
 namespace sora {
     
@@ -25,10 +24,12 @@ namespace sora {
     
     /**
      * Global Sprite type factory
-     * All sprite creation based on json in core goes there
+     * All sprite creation in core goes there
      **/
     
-    typedef SoraAbstractFactory<SoraSprite, SoraSprite*(const SoraWString&, Json::Value*)> SoraSpriteFactory;
+    class SoraConfigParser;
+    
+    typedef SoraAbstractFactory<SoraSprite, SoraSprite*(const StringType&, SoraConfigParser*)> SoraSpriteFactory;
         
 #define GlobalSpriteFactory \
     SoraSpriteFactory::Instance()
@@ -41,12 +42,10 @@ namespace sora {
         SoraSpriteFactory::Instance()->reg(type, fn);
     }
     
-    static SoraSprite* CreateSpriteType(const std::string& type, const SoraWString& path, Json::Value* val=NULL) {
+    static SoraSprite* CreateSpriteType(const std::string& type, const StringType& path, SoraConfigParser* val=0) {
         return SoraSpriteFactory::Instance()->createInstance(type, path, val);
     }
-   
-    SORA_API void ParseJsonSpriteDef(SoraSprite* sprite, const Json::Value& val);
-    
+       
 }
 
 #endif

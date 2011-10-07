@@ -10,12 +10,14 @@
 #define Sora_SoraShaderEnabled_h
 
 #include "SoraPlatform.h"
-#include "SoraShader.h"
 #include "SoraObject.h"
 #include "SoraUncopyable.h"
 #include "SoraString.h"
 
 namespace sora {
+    
+    class SoraShader;
+    class SoraShaderContext;
     
     /**
      * Base class from objects that can render with shader
@@ -26,27 +28,39 @@ namespace sora {
         SoraShaderEnabledObject();
         virtual ~SoraShaderEnabledObject();
         
+        void attachShaderContext(const StringType& tag);
+        void attachShaderContext(SoraShaderContext* context);
+        SoraShaderContext* getShaderContext() const;
+        
         SoraShader* attachShader(const StringType& file, const SoraString& entry, int32 type);
         SoraShader* attachFragmentShader(const StringType& file, const SoraString& entry);
         SoraShader* attachVertexShader(const StringType& file, const SoraString& entry);
         
-        void detachShader(SoraShader* shader);
         void detachFragmentShader();
         void detachVertexShader();
         
-        void attachShader(SoraShader* shader);
-        void attachFragmentShader(SoraShader* shader);
-        void attachVertexShader(SoraShader* shader);
-        
         void attachShaderToRender();
         void detachShaderFromRender();
+        
+        SoraShader* getFragmentShader() const;
+        SoraShader* getVertexShader() const;
         
         bool hasShader() const;
         void clearShader();
         
     private:
+        void detachShader(SoraShader* shader);
+        void attachShader(SoraShader* shader);
+        void attachFragmentShader(SoraShader* shader);
+        void attachVertexShader(SoraShader* shader);
+        
+    private:
+        SoraShaderEnabledObject(const SoraShaderEnabledObject&);
+        SoraShaderEnabledObject& operator=(const SoraShaderEnabledObject&);
+        
         inline void checkShaderContext();
         
+        bool mInternalContext;
         SoraShaderContext* mShaderContext;
     };
     

@@ -17,12 +17,14 @@
 
 namespace sora {
     
-    class SORA_API SoraHandleManager: public SoraSingleton<SoraHandleManager> {
+    class SORA_API SoraHandleManager {
     protected:
         friend class SoraSingleton<SoraHandleManager>;
         SoraHandleManager();
         
     public:
+        static SoraHandleManager& GetInstance();
+        
         SoraHandle getUniqueHandle();
         SoraUniqueId getNextUniqieId();
         
@@ -37,15 +39,15 @@ namespace sora {
     };
     
     static SoraUniqueId GetNextUniqueId() {
-        return SoraHandleManager::Instance()->getNextUniqieId();
+        return SoraHandleManager::GetInstance().getNextUniqieId();
     }
     
     static SoraHandle FindFreeHandleSlot() {
-        return SoraHandleManager::Instance()->getUniqueHandle();
+        return SoraHandleManager::GetInstance().getUniqueHandle();
     }
     
     static void FreeHandleSlot(SoraHandle handle) {
-        SoraHandleManager::Instance()->freeHandle(handle);
+        SoraHandleManager::GetInstance().freeHandle(handle);
     }
     
 } // namespace sora

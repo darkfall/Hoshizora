@@ -524,43 +524,43 @@ namespace sora{
 	}
 
 	uint32* SoraOGLRenderer::textureLock(SoraTexture* ht) {
-		ht->dataRef.texData = new uint32[ht->mOriginalWidth * ht->mOriginalHeight];
-		memset(ht->dataRef.texData, 0, ht->mOriginalWidth * ht->mOriginalHeight);
-		if(ht->dataRef.texData) {
-            glEnable(GL_TEXTURE_2D);
-
-            GLint PreviousTexture;
-            glGetIntegerv(GL_TEXTURE_BINDING_2D, &PreviousTexture);
-
-            glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
-			glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, ht->dataRef.texData);
-            if(glGetError() != GL_NO_ERROR) {
-                delete ht->dataRef.texData;
-                ht->dataRef.texData = 0;
-                return NULL;
-            }
-
-            glBindTexture(GL_TEXTURE_2D, PreviousTexture);
-			return (uint32*)ht->dataRef.texData;
-		}
-		return 0;
+		ht->mTexData = (uint32*)sora_malloc(ht->mOriginalWidth * ht->mOriginalHeight * sizeof(uint32));
+		sora_assert(ht->mTexData);
+        
+        memset(ht->mTexData, 0, ht->mOriginalWidth * ht->mOriginalHeight);
+		
+        glEnable(GL_TEXTURE_2D);
+        
+        GLint PreviousTexture;
+        glGetIntegerv(GL_TEXTURE_BINDING_2D, &PreviousTexture);
+        
+        glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
+        glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, ht->mTexData);
+        if(glGetError() != GL_NO_ERROR) {
+            sora_free(ht->mTexData);
+            ht->mTexData = 0;
+            return 0;
+        }
+        
+        glBindTexture(GL_TEXTURE_2D, PreviousTexture);
+        return ht->mTexData;
 	}
 
 	void SoraOGLRenderer::textureUnlock(SoraTexture* ht) {
-		if(ht->dataRef.texData != NULL) {
+		if(ht->mTexData != 0) {
 			glEnable(GL_TEXTURE_2D);
 
             GLint PreviousTexture;
             glGetIntegerv(GL_TEXTURE_BINDING_2D, &PreviousTexture);
 
             glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
-			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight, GL_RGBA, GL_UNSIGNED_BYTE, ht->dataRef.texData);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, ht->mOriginalWidth, ht->mOriginalHeight, GL_RGBA, GL_UNSIGNED_BYTE, ht->mTexData);
             glBindTexture(GL_TEXTURE_2D, 0);
 
             glBindTexture(GL_TEXTURE_2D, PreviousTexture);
 
-			delete[] ht->dataRef.texData;
-			ht->dataRef.texData = 0;
+			sora_free(ht->mTexData);
+			ht->mTexData = 0;
 		}
 
 	}
@@ -867,7 +867,7 @@ namespace sora{
 	}
 
     void SoraOGLRenderer::snapshot(const SoraString& path) {
-        SOIL_save_screenshot(path.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, SORA->getScreenWidth(), SORA->getScreenHeight());
+        SOIL_save_screenshot(path.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, SoraCore::Ptr->getScreenWidth(), SoraCore::Ptr->getScreenHeight());
     }
 
     void SoraOGLRenderer::setIcon(const SoraString& icon) {

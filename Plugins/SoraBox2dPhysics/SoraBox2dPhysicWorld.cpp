@@ -56,6 +56,21 @@ namespace sora {
     private:
         SoraBox2dPhysicWorld* mWorld;
     };
+    
+    class SoraB2RaycastReport: public b2RayCastCallback {
+    public:
+        float32 ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) {
+            if(fixture) {
+                mDef.mBody = static_cast<SoraBox2dPhysicBody*>(fixture->GetBody()->GetUserData());
+                mDef.mPoint = SoraVector(SoraBox2dPhysicBody::ScaleFrom(point.x), SoraBox2dPhysicBody::ScaleFrom(point.y));
+                mDef.mNormal = SoraVector(normal.x, normal.y);
+                mDef.mFraction = fraction;
+                return fraction;
+            }
+        }
+        
+        SoraPhysicRaycastResult mDef;
+    };
             
     SoraBox2dPhysicWorld::SoraBox2dPhysicWorld(float gx, float gy, bool doSleep):
     mWorld(0),
@@ -117,6 +132,16 @@ namespace sora {
     void SoraBox2dPhysicWorld::update(float dt) {
         mWorld->Step(dt, mVelocityIteration, mPositionIteration);
         mWorld->ClearForces();
+    }
+    
+    SoraPhysicRaycastResult SoraBox2dPhysicWorld::rayCast(const SoraVector& start, const SoraVector& dir) {
+        SoraB2RaycastReport report;
+        
+        b2Vec2 p1(SoraBox2dPhysicBody::ScaleTo(start.x), SoraBox2dPhysicBody::ScaleTo(start.y));
+        b2Vec2 p2(SoraBox2dPhysicBody::ScaleTo(dir.x), SoraBox2dPhysicBody::ScaleTo(dir.y));
+        mWorld->RayCast(&report, p1, p2);
+        
+        return report.mDef;
     }
     
     void SoraBox2dPhysicWorld::addContactListener(SoraPhysicContactListener* listener) {

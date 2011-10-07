@@ -29,13 +29,13 @@ namespace sora {
 		 */
 		virtual bool isFormatSupported(const StringType& format) const = 0;
 		
-		virtual bool enumFiles(std::vector<StringType>& cont, const StringType& folder) { return false; }
+		virtual bool enumFiles(std::vector<StringType>& cont, const StringType& folder) = 0;
         
-        static SoraResourceHandle LoadAndAttachResourcePack(const StringType& file);
-        static void DetachResourcePack(SoraResourceHandle handle);
-        static void* LoadResourceFile(const StringType& file, ulong32* size);
-        static ulong32 GetResourceFileSize(const StringType& file);
-        static void FreeResourceFile(void* p);
+        static SoraResourceHandle   LoadAndAttachResourcePack(const StringType& file);
+        static void                 DetachResourcePack(SoraResourceHandle handle);
+        static void*                LoadResourceFile(const StringType& file, ulong32* size);
+        static ulong32              GetResourceFileSize(const StringType& file);
+        static void                 FreeResourceFile(void* p);
         
 #ifdef SORA_ENABLE_MULTI_THREAD
         

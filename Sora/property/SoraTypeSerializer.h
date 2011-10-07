@@ -12,9 +12,10 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+
+#include "SoraMath.h"
 #include "SoraPlatform.h"
 #include "SoraStringConv.h"
-#include "SoraMath.h"
 #include "SoraStringTokenlizer.h"
 
 namespace sora {
@@ -338,15 +339,15 @@ namespace sora {
         };
         
         template<>
-        struct Serializer<SoraMatrix3x3> {
+        struct Serializer<SoraMatrix3> {
         public:
-            static std::string toString(const SoraMatrix3x3& val) {
+            static std::string toString(const SoraMatrix3& val) {
                 std::string str = Serializer<float>::toString(val._11()) + "," + Serializer<float>::toString(val._12()) + "," + Serializer<float>::toString(val._13()) + ","
                                     + Serializer<float>::toString(val._21()) + "," + Serializer<float>::toString(val._22()) + "," + Serializer<float>::toString(val._23()) + ","
                                     + Serializer<float>::toString(val._31()) + "," + Serializer<float>::toString(val._32()) + "," + Serializer<float>::toString(val._33());
                 return str;
             }
-            static void fromString(const std::string& val, SoraMatrix3x3* outValue) {
+            static void fromString(const std::string& val, SoraMatrix3* outValue) {
                 SoraStringTokenlizer tokens(val, ",");
                 if(tokens.size() == 9) {
                     SoraStringTokenlizer::iterator it = tokens.begin();
@@ -363,11 +364,11 @@ namespace sora {
                     Serializer<float>::fromString(*it, &tmp); outValue->_33(tmp); ++it;
                 }
             }
-            static int getTypeId(const SoraMatrix3x3& val) {
+            static int getTypeId(const SoraMatrix3& val) {
                 return SoraTypeSerializer::TYPE_MATRIX33;
             }
-            static SoraMatrix3x3 defaultValue() {
-                return SoraMatrix3x3();
+            static SoraMatrix3 defaultValue() {
+                return SoraMatrix3();
             }
         };
         

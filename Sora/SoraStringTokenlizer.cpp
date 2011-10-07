@@ -71,6 +71,12 @@ namespace sora {
         parse(str, std::string());
     }
     
+    std::string SoraStringTokenlizer::operator[](size_t index) {
+        sora_assert(index < mTokens.size());
+        
+        return mTokens[index];
+    }
+    
     void SoraStringTokenlizer::parse(const std::string& str, const std::string& deli) {
         size_t start = 0, end = 0;
         if(deli.size() != 0) {

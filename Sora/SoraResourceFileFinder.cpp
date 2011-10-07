@@ -9,6 +9,18 @@
 
 #include "SoraResourceFileFinder.h"
 #include "SoraResourceManager.h"
+#include "SoraStringTokenlizer.h"
+
+#include "SoraCore.h"
+#include "SoraTexture.h"
+#include "SoraFont.h"
+#include "SoraConfigUtil.h"
+#include "SoraResourceFile.h"
+#include "SoraSoundSystem.h"
+#include "SoraShader.h"
+#include "SoraSpriteSheet.h"
+
+#include "SoraLogger.h"
 
 namespace sora {
     
@@ -30,9 +42,12 @@ namespace sora {
 	}
 	
 	void SoraResourceFileFinder::detachResourceManager(const StringType& name) {
-		for(size_t i=0; i<mResourceManagers.size(); ++i) {
-			if(name.compare(mResourceManagers[i]->getName()) == 0) {
-				mResourceManagers.erase(mResourceManagers.begin()+i);
+        ResourceManagerCont::iterator it = mResourceManagers.begin();
+        ResourceManagerCont::iterator end = mResourceManagers.end();
+        
+		for(; it != end; ++it) {
+			if(name.compare((*it)->getName()) == 0) {
+				mResourceManagers.erase(it);
 				break;
 			}
 		}
@@ -40,8 +55,12 @@ namespace sora {
 
 	void* SoraResourceFileFinder::readResourceFile(const StringType& file, ulong32 pos, ulong32 size) {
 		void* data;
-		for(size_t i=0; i<mResourceManagers.size(); ++i) {
-			if((data = mResourceManagers[i]->readResourceFile(file, pos, size)) != NULL) {
+        
+        ResourceManagerCont::iterator it = mResourceManagers.begin();
+        ResourceManagerCont::iterator end = mResourceManagers.end();
+
+		for(; it != end; ++it) {
+			if((data = (*it)->readResourceFile(file, pos, size)) != NULL) {
 #ifdef SORA_ENABLE_MULTI_THREAD
                 SoraMutexGuard guard(mIOMutex);
 #endif
@@ -52,7 +71,7 @@ namespace sora {
                 ResourceInfo info;
                 info.mResource = resource;
                 info.mSize = size;
-                mResources.insert(std::make_pair((ulong32)data, info));
+                mResourceCaches.insert(std::make_pair((ulong32)data, info));
                 
 				return data;
             }
@@ -62,8 +81,12 @@ namespace sora {
 	
 	void* SoraResourceFileFinder::getResourceFile(const StringType& file, ulong32& size) {
 		void* data;
-		for(size_t i=0; i<mResourceManagers.size(); ++i) {
-			if((data = mResourceManagers[i]->getResourceFile(file, size)) != NULL) {
+        
+        ResourceManagerCont::iterator it = mResourceManagers.begin();
+        ResourceManagerCont::iterator end = mResourceManagers.end();
+        
+		for(; it != end; ++it) {
+			if((data = (*it)->getResourceFile(file, size)) != NULL) {
 #ifdef SORA_ENABLE_MULTI_THREAD
                 SoraMutexGuard guard(mIOMutex);
 #endif
@@ -74,7 +97,7 @@ namespace sora {
                 ResourceInfo info;
                 info.mResource = resource;
                 info.mSize = size;
-                mResources.insert(std::make_pair((ulong32)data, info));
+                mResourceCaches.insert(std::make_pair((ulong32)data, info));
 
 				return data;
             }
@@ -84,8 +107,12 @@ namespace sora {
 	
 	ulong32 SoraResourceFileFinder::getResourceFileSize(const StringType& file) { 
 		ulong32 size;
-		for(size_t i=0; i<mResourceManagers.size(); ++i) {
-			if((size = mResourceManagers[i]->getResourceFileSize(file)) != 0) {
+
+        ResourceManagerCont::iterator it = mResourceManagers.begin();
+        ResourceManagerCont::iterator end = mResourceManagers.end();
+
+		for(; it != end; ++it) {
+			if((size = (*it)->getResourceFileSize(file)) != 0) {
 
 				return size;
             }
@@ -101,10 +128,10 @@ namespace sora {
         SoraMutexGuard guard(mIOMutex);
 #endif
         
-        AvailableResourceMap::iterator itResource = mResources.find((ulong32)p);
-        if(itResource != mResources.end()) {
+        ResourceCacheMap::iterator itResource = mResourceCaches.find((ulong32)p);
+        if(itResource != mResourceCaches.end()) {
             ResourceMemory -= itResource->second.mSize;
-            mResources.erase(itResource);
+            mResourceCaches.erase(itResource);
         }
 	}
 	
@@ -143,7 +170,426 @@ namespace sora {
 		return mResourceManagers[0]->enumFiles(cont, folder);
 	}
     
+    SoraResource::Ptr SoraResourceFileFinder::addResource(const StringType& file, SoraResource::Type type, const StringType& tag) {
+        std::string rtag = tag.empty() ? file : tag;
+        
+        SoraResource::Ptr resource;
+        switch(type) {
+            case SoraResource::Texture: {
+                SoraTextureHandle tex = SoraTexture::LoadFromFile(file);
+                if(tex) {
+                    resource = new SoraTextureResource(tex);
+                } else
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                break;
+            }
+                
+            case SoraResource::Font: {
+                SoraFont* font = SoraFont::LoadFromFile(file, 20);
+                if(font) {
+                    resource = new SoraFontResource(font);
+                } else
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                break;
+            }
+            
+            case SoraResource::Config: {
+                SoraConfigParser* parser = new SoraConfigParser;
+                if(parser->open(file)) {
+                    resource = new SoraConfigResource(parser);
+                } else {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                    delete parser;
+                }
+                break;
+            }
+            
+            case SoraResource::Music: {
+                SoraMusicFile* music = SoraSoundSystem::LoadMusicFromFile(file);
+                if(music) {
+                    resource = new SoraMusicResource(music);
+                } else {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                }
+                break;
+            }
+            
+            case SoraResource::SoundEffect: {
+                SoraSoundEffectFile* se = SoraSoundSystem::LoadSoundEffectFromFile(file);
+                if(se) {
+                    resource = new SoraSoundEffectResource(se);
+                } else {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                }
+                break;
+            }
+            
+            case SoraResource::RawData: {
+                SoraResourceFile* res = new SoraResourceFile(file);
+                if(!res->isValid()) {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                    delete res;
+                    res = 0;
+                } else
+                    resource = res;
+                break;
+            }
+                
+            case SoraResource::SpriteSheet: {
+                SoraSpriteSheet* sheet = new SoraSpriteSheet;
+                if(sheet->load(file)) {
+                    resource = sheet;
+                } else {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                    delete sheet;
+                    sheet = 0;
+                }
+                break;
+            }
+                
+            case SoraResource::Shader: {
+                SoraShaderContext* res = SoraCore::Ptr->createShaderContext();
+                if(res) {
+                    SoraStringTokenlizer token(file);
+                    SoraShader* result = 0;
+                    
+                    if(token.size() == 4) {
+                        result = res->attachFragmentShader(token[0], token[1]);
+                        result = res->attachVertexShader(token[2], token[3]);
+                    } 
+                    else if(token.size() == 2) {
+                        result = res->attachFragmentShader(token[0], token[1]);
+                    } 
+                    else if(token.size() == 1) {
+                        std::string ident = token[0];
+                        size_t dotPos = ident.rfind('.');
+                        if(dotPos != std::string::npos) {
+                            result = res->attachFragmentShader(ident.substr(0, dotPos), ident.substr(dotPos+1, ident.size()));
+                        }
+                    }
+                    if(!result) {
+                        log_error(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                        
+                        delete res;
+                        break;
+                    }
+                    resource = new SoraShaderResource(res);
+                } else
+                    log_error(vamssg("SoraResourceFileFinder::error loading resource %s\n", file.c_str()));
+                break;
+            }
+        }
+        
+        if(resource.isValid()) {
+            mResources.insert(std::make_pair(rtag, resource));
+        }
+        return resource;
+    }
+    
+    SoraResource::Ptr SoraResourceFileFinder::getResource(const StringType& tag) {
+        ResourceMap::iterator it = mResources.find(tag);
+        if(it != mResources.end()) {
+            return it->second;
+        }
+        return SoraResource::Ptr();
+    }
+    
+    void SoraResourceFileFinder::freeResource(const StringType& tag) {
+        ResourceMap::iterator it = mResources.find(tag);
+        if(it != mResources.end()) {
+            mResources.erase(it);
+        }
+    }
+    
+    bool SoraResourceFileFinder::loadResourceScript(const StringType& script) {
+        SoraConfigParser parser;
+        if(parser.open(script)) {
+            if(parser.toNode("/resources")) {
+                parser.toFirstChild();
+                do {
+                    std::string strtype = parser.getString("type");
+                    if(strtype.empty())
+                        strtype = "raw";
+                    
+                    SoraResource::Type type = SoraResource::IdentToType(strtype);
+                    if(type == SoraResource::Invalid) {
+                        log_error(vamssg("SoraResourceFileFinder::loadResourceScript: invalid type identifier %s", strtype.c_str()));
+                        continue;
+                    }
+                    
+                    std::string path = parser.getString("path");
+                    if(path.empty() && type != SoraResource::Shader) {
+                        log_error("SoraResourceFileFinder::loadResourceScript: no path specified for node");
+                        continue;
+                    }
+                                        
+                    std::string tag = parser.getString("tag");
+                    if(tag.empty())
+                        tag = path;
+                    
+                    if(type == SoraResource::Shader) {
+                        SoraShaderContext* context = SoraCore::Ptr->createShaderContext();
+                        if(context) {
+                            std::string frag = parser.getString("fragment");
+                            std::string fragEntry = parser.getString("fragment-entry");
+                            std::string vertex = parser.getString("vertex");
+                            std::string vertexEntry = parser.getString("vertex-entry");
+                            
+                            if(!frag.empty() && !fragEntry.empty()) 
+                                context->attachFragmentShader(frag, fragEntry);
+                            if(!vertex.empty() && !vertexEntry.empty())
+                                context->attachVertexShader(vertex, vertexEntry);
+                            
+                        } else 
+                            log_error("SoraResourceFileFinder: error creating shader context");
+                        
+                        SoraResource::Ptr resource;
+                        resource = new SoraShaderResource(context);
+                        mResources.insert(std::make_pair(tag, resource));
+                        
+                    } else {
+                        addResource(path, type, tag);
+                    }
+                } while(parser.toNextChild());
+                
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    SoraTextureHandle SoraResourceFileFinder::getTextureResource(const StringType& tag) {
+        SoraResource::Ptr rptr = getResource(tag);
+        if(rptr.isValid()) {
+            sora_assert(rptr->getType() == SoraResource::Texture);
+            return static_cast<SoraTextureResource*>(rptr.get())->getTexture();
+        } else {
+            rptr = addResource(tag, SoraResource::Texture, tag);
+            if(rptr.isValid()) 
+                return static_cast<SoraTextureResource*>(rptr.get())->getTexture(); 
+        }
+        log_error(vamssg("SoraResourceFileFinder: error finding resource with tag %s", tag.c_str()));
+        return 0;
+    }
+    
+    SoraFont* SoraResourceFileFinder::getFontResource(const StringType& tag) {
+        SoraResource::Ptr rptr = getResource(tag);
+        if(rptr.isValid()) {
+            sora_assert(rptr->getType() == SoraResource::Font);
+            return static_cast<SoraFontResource*>(rptr.get())->getFont();
+        } else {
+            rptr = addResource(tag, SoraResource::Font, tag);
+            if(rptr.isValid()) 
+                return static_cast<SoraFontResource*>(rptr.get())->getFont();
+        }
+        log_error(vamssg("SoraResourceFileFinder: error finding resource with tag %s", tag.c_str()));
+        return 0;
+    }
+    
+    SoraMusicFile* SoraResourceFileFinder::getMusicResource(const StringType& tag) {
+        SoraResource::Ptr rptr = getResource(tag);
+        if(rptr.isValid()) {
+            sora_assert(rptr->getType() == SoraResource::Music);
+            return static_cast<SoraMusicResource*>(rptr.get())->getMusic();
+        } else {
+            rptr = addResource(tag, SoraResource::Music, tag);
+            if(rptr.isValid()) 
+                return static_cast<SoraMusicResource*>(rptr.get())->getMusic();
+        }
+        log_error(vamssg("SoraResourceFileFinder: error finding resource with tag %s", tag.c_str()));
+        return 0;
+    }
+    
+    SoraSoundEffectFile* SoraResourceFileFinder::getSoundEffectResource(const StringType& tag) {
+        SoraResource::Ptr rptr = getResource(tag);
+        if(rptr.isValid()) {
+            sora_assert(rptr->getType() == SoraResource::SoundEffect);
+            return static_cast<SoraSoundEffectResource*>(rptr.get())->getSoundEffect();
+        } else {
+            rptr = addResource(tag, SoraResource::SoundEffect, tag);
+            if(rptr.isValid()) 
+                return static_cast<SoraSoundEffectResource*>(rptr.get())->getSoundEffect();
+        }
+        log_error(vamssg("SoraResourceFileFinder: error finding resource with tag %s", tag.c_str()));
+        return 0;
+    }
+    
+    SoraConfigParser* SoraResourceFileFinder::getConfigResource(const StringType& tag) {
+        SoraResource::Ptr rptr = getResource(tag);
+        if(rptr.isValid()) {
+            sora_assert(rptr->getType() == SoraResource::Config);
+            return static_cast<SoraConfigResource*>(rptr.get())->getConfig();
+        } else {
+            rptr = addResource(tag, SoraResource::Texture, tag);
+            if(rptr.isValid()) 
+                return static_cast<SoraConfigResource*>(rptr.get())->getConfig();
+        }
+        log_error(vamssg("SoraResourceFileFinder: error finding resource with tag %s", tag.c_str()));
+        return 0;
+    }
+    
+    SoraResourceFile* SoraResourceFileFinder::getRawDataResource(const StringType& tag) {
+        SoraResource::Ptr rptr = getResource(tag);
+        if(rptr.isValid()) {
+            sora_assert(rptr->getType() == SoraResource::RawData);
+            return static_cast<SoraResourceFile*>(rptr.get());
+        } else {
+            rptr = addResource(tag, SoraResource::RawData, tag);
+            if(rptr.isValid()) 
+                return static_cast<SoraResourceFile*>(rptr.get());
+        }
+        log_error(vamssg("SoraResourceFileFinder: error finding resource with tag %s", tag.c_str()));
+        return 0;
+    }
+    
+    SoraShaderContext* SoraResourceFileFinder::getShaderResource(const StringType& tag) {
+        SoraResource::Ptr rptr = getResource(tag);
+        if(rptr.isValid()) {
+            sora_assert(rptr->getType() == SoraResource::Shader);
+            return static_cast<SoraShaderResource*>(rptr.get())->getShaderContext();
+        }
+        log_error(vamssg("SoraResourceFileFinder: error finding resource with tag %s", tag.c_str()));
+        return 0;
+    }
+    
+    SoraSpriteSheet* SoraResourceFileFinder::getSpriteSheetResource(const StringType& tag) {
+        SoraResource::Ptr rptr = getResource(tag);
+        if(rptr.isValid()) {
+            sora_assert(rptr->getType() == SoraResource::SpriteSheet);
+            return static_cast<SoraSpriteSheet*>(rptr.get());
+        }
+        log_error(vamssg("SoraResourceFileFinder: error finding resource with tag %s", tag.c_str()));
+        return 0;
+    }
+    
 #ifdef SORA_ENABLE_MULTI_THREAD
+    
+    bool SoraResourceFileFinder::loadResourceScriptAsync(const StringType& script) {
+        SoraConfigParser parser;
+        if(parser.open(script)) {
+            if(parser.toNode("/resources")) {
+                parser.toFirstChild();
+                do {
+                    std::string path = parser.getString("path");
+                    if(path.empty()) {
+                        log_error("SoraResourceFileFinder::loadResourceScript: no path specified for node");
+                        continue;
+                    }
+                    
+                    std::string strtype = parser.getString("type");
+                    if(strtype.empty())
+                        strtype = "raw";
+                    
+                    SoraResource::Type type = SoraResource::IdentToType(strtype);
+                    if(type == SoraResource::Invalid) {
+                        log_error(vamssg("SoraResourceFileFinder::loadResourceScript: invalid type identifier %s", strtype.c_str()));
+                        continue;
+                    }
+                    
+                    std::string tag = parser.getString("tag");
+                    if(tag.empty())
+                        tag = path;
+                    
+                    addResourceAsync(path, type, tag);
+                    
+                } while(parser.toNextChild());
+                
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    void SoraResourceFileFinder::resource_async_not(void* data, ulong32 size, void* userData) {
+        ResourceIoParam* param = static_cast<ResourceIoParam*>(userData);
+        
+        SoraResource::Ptr resource;
+        switch(param->mType) {
+            case SoraResource::Texture: {
+                SoraTextureHandle tex = SoraTexture::LoadFromMemory((uint32*)data, size);
+                if(tex) {
+                    resource = new SoraTextureResource(tex);
+                } else
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", param->mName.c_str()));
+                break;
+            }
+                
+            case SoraResource::Font: {
+                SoraFont* font = SoraFont::LoadFromMemory(data, size, 20, param->mName);
+                if(font) {
+                    resource = new SoraFontResource(font);
+                } else
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", param->mName.c_str()));
+                break;
+            }
+                
+            case SoraResource::Config: {
+                SoraConfigParser* parser = new SoraConfigParser;
+                if(parser->open(data, size)) {
+                    resource = new SoraConfigResource(parser);
+                } else {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", param->mName.c_str()));
+                    delete parser;
+                }
+                break;
+            }
+                
+            case SoraResource::SpriteSheet: {
+                SoraSpriteSheet* sheet = new SoraSpriteSheet;
+                if(sheet->loadFromMemory(data, size)) {
+                    resource = sheet;
+                } else {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", param->mName.c_str()));
+                    delete sheet;
+                    sheet = 0;
+                }
+                break;
+            }
+                
+            case SoraResource::Music: {
+                SoraMusicFile* music = SoraSoundSystem::LoadMusicFromMemory(data, size);
+                if(music) {
+                    resource = new SoraMusicResource(music);
+                } else {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", param->mName.c_str()));
+                }
+                break;
+            }
+                
+            case SoraResource::SoundEffect: {
+                SoraSoundEffectFile* se = SoraSoundSystem::LoadSoundEffectFromMemory(data, size);
+                if(se) {
+                    resource = new SoraSoundEffectResource(se);
+                } else {
+                    log_mssg(vamssg("SoraResourceFileFinder::error loading resource %s\n", param->mName.c_str()));
+                }
+                break;
+            }
+                
+            case SoraResource::Shader: {
+                break;
+            }
+        }
+        
+        if(resource.isValid()) {
+            mResources.insert(std::make_pair(param->mTag, resource));
+        }
+        
+        delete param;
+    }
+    
+    void SoraResourceFileFinder::addResourceAsync(const StringType& file, SoraResource::Type type, const StringType& tag) {
+        std::string rtag = tag.empty() ? file : tag;
+        
+        ResourceIoParam* param = new ResourceIoParam;
+        param->mName = file;
+        param->mTag = tag.empty() ? file : tag;
+        param->mType = type;
+        
+        sora_assert(type != SoraResource::Shader);
+        
+        loadResourceFileAsync(file, Bind(this, &SoraResourceFileFinder::resource_async_not), param);
+    }
     
     void SoraResourceFileFinder::ioThreadFunc(void* arg) {
         

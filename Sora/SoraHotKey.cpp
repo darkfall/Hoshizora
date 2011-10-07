@@ -32,17 +32,17 @@ namespace sora {
     bool SoraHotkey::test() {
         bool keyFlag;
         if(mRequirePress) {
-            keyFlag = SORA->keyDown(mKey);
+            keyFlag = SoraCore::Ptr->keyDown(mKey);
         } else 
-            keyFlag = SORA->keyDown(mKey) || SORA->keyUp(mKey);
+            keyFlag = SoraCore::Ptr->keyDown(mKey) || SoraCore::Ptr->keyUp(mKey);
         
         if(keyFlag) {
             bool flags = true;
-            if(mCtrlFlag && !SORA->keyDown(SORA_KEY_CTRL))
+            if(mCtrlFlag && !SoraCore::Ptr->keyDown(SORA_KEY_CTRL))
                 flags = false;
-            if(mAltFlag && !SORA->keyDown(SORA_KEY_ALT))
+            if(mAltFlag && !SoraCore::Ptr->keyDown(SORA_KEY_ALT))
                 flags = false;
-            if(mShiftFlag && !SORA->keyDown(SORA_KEY_SHIFT))
+            if(mShiftFlag && !SoraCore::Ptr->keyDown(SORA_KEY_SHIFT))
                 flags = false;
             return flags;
         }

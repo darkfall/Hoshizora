@@ -17,7 +17,7 @@ namespace sora {
 	SoraMutableSprite::SoraMutableSprite(SoraTextureHandle tex): SoraSprite(tex) {
 		mChanged = false;
 		
-		mPixelData = sora::SORA->textureLock(tex);
+		mPixelData = SoraCore::Ptr->textureLock(tex);
 	};
 	
 	uint32 SoraMutableSprite::getPixel(int32 x, int32 y) {
@@ -54,8 +54,8 @@ namespace sora {
 	
 	void SoraMutableSprite::applyChange() {
 		mChanged = false;
-		SORA->textureUnlock((SoraTextureHandle)mQuad.tex);
-		mPixelData = SORA->textureLock((SoraTextureHandle)mQuad.tex);
+		SoraCore::Ptr->textureUnlock((SoraTextureHandle)mQuad.tex);
+		mPixelData = SoraCore::Ptr->textureLock((SoraTextureHandle)mQuad.tex);
 	}
 	
 	void SoraMutableSprite::render() {

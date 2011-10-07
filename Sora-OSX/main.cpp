@@ -26,6 +26,7 @@
 
 #include "SoraTask.h"
 #include "SoraShape.h"
+#include "SoraShader.h"
 
 #include "SoraLogger.h"
 #include "SoraResourceFile.h"
@@ -35,11 +36,14 @@
 #include "physics/SoraPhysicShape.h"
 #include "physics/SoraPhysicBody.h"
 
+#include "SoraSpriteManager.h"
+
 float lx, ly, rx, ry;
 float maxsize, maxiteration, iterinc;
 float cr, cg, cb;
 
 void msetCommands(sora::SoraConsoleEvent* evt) {
+    
     std::string cmd = evt->getCmd();
     sora::StringType param = evt->getParams();
     if(cmd == "set_lx") {
@@ -107,11 +111,15 @@ public:
         r = mBg2.getPhysicBody()->getBoundingBox();
         sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
                                               r.x2, r.y2, 0xFFFF0000);
+        
+        mFont->render(0.f, 0.f, L"|#00FFFF|Hello |#FF0000|World! |#CDCDCD|Sora ~ |#FFDEAD|Chan~");
        
        // mText.render();
        // mText2.render();
+        body->render();
                 
         mShape.render();
+        
         
         sora::SoraGameApp::EndScene();
     }
@@ -184,20 +192,22 @@ public:
         mBg.setPosition(200.f, 200.f);
         mBg.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::DynamicBody),
                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 
-                                                                                          100.f, 0.f, 0.f, 10.f)),
+                                                                                          100.f, 0.f, 0.f, 100.f)),
                                                         1.f,
                                                         0.f,
                                                         0.f);
         
         mBg2.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
         mBg2.setColor(0xFFFF0000);
-        mBg2.setPosition(0.f, 600.f);
-        mBg2.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::StaticBody),
-                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(800.f, 10.f, 400.f, 5.f, 0.f)),
+        mBg2.setPosition(400.f, 200.f);
+        mBg2.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::DynamicBody),
+                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 100.f, 50.f, 5.f, 0.f)),
                               1.f,
                               0.f,
                               0.f);
         
+        body = sora::SoraPhysicWorld::CreateBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::StaticBody, sora::SoraVector(0.f, 600.f)));
+        body->createFixture(sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(800.f, 10.f, 400.f, 5.f, 0.f)));
         
         mShader = /* mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet")*/ 0;
         lx = -2.5f;
@@ -229,7 +239,7 @@ public:
         mShape.enableOutline(3.f, 0xFFFF0000);
         mShape.setClosed(true);
         
-        sora::SoraResourceFileAuto fontData("Bank Gothic Medium BT.ttf");
+        sora::SoraResourceFile fontData("Bank Gothic Medium BT.ttf");
         mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
         if(!mFont) {
             sora::SoraCore::Instance()->messageBox("Error loading font", "error", MB_OK | MB_ICONERROR);

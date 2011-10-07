@@ -19,7 +19,7 @@ namespace sora {
 	mKerningWidth(0.f), mKerningHeight(0.f),
 	mRotation(0.f), mScale(0.f),
 	mWidth(0), mHeight(0) {
-		mFontSprite = SORA->createSprite(font);
+		mFontSprite = SoraCore::Ptr->createSprite(font);
 		if(mFontSprite) {
 			mWidth = width;
 			mHeight = height;
@@ -95,9 +95,9 @@ namespace sora {
 	}
 	
 	void SoraSpriteFont::render(float x, float y, int32 align, const wchar_t* text) {
-		if(align == FONT_ALIGNMENT_RIGHT)
+		if(align == SoraFont::AlignmentCenter)
 			x -= getStringWidth(text);
-		else if(align == FONT_ALIGNMENT_CENTER)
+		else if(align == SoraFont::AlignmentCenter)
 			x -= static_cast<int32>(getStringWidth(text)) >> 1;
 		
 		render(x, y, text, false, false);

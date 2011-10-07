@@ -54,7 +54,7 @@ namespace sora {
 	bool SoraMenuBarMenu::update() {
 		if(mActive) {
 			float x, y;
-			SORA->getMousePos(&x, &y);
+			SoraCore::Ptr->getMousePos(&x, &y);
 			mCurrentItem = -1;
 			
 			if(x >= mPosX && x <= mPosX+mWidth) {
@@ -63,7 +63,7 @@ namespace sora {
 					mCurrentItem = static_cast<int32>(y /  mParent->getMenuBarHeight()) - 1;
 				}
 				
-				if(SORA->keyDown(SORA_KEY_LBUTTON)) {
+				if(SoraCore::Ptr->keyDown(SORA_KEY_LBUTTON)) {
 					if(mCurrentItem != -1) {
 						mItems[mCurrentItem].onClick();
 						mParent->diactiveMenus();
@@ -85,16 +85,16 @@ namespace sora {
 			float distHeight = (mParent->getMenuBarHeight()-mItemHeight)/2;
 			float posy = mParent->getMenuBarHeight();
 
-			SORA->renderBox(mPosX, 0.f, mPosX+mWidth, posy, 0xFF000000);
+			SoraCore::Ptr->renderBox(mPosX, 0.f, mPosX+mWidth, posy, 0xFF000000);
 			
 			mFont->setColor(0xFF000000);
 			if(mActive) {
-				SORA->fillBox(mPosX, 0.f, mPosX+mWidth, posy, 0xCCFFFFFF);
+				SoraCore::Ptr->fillBox(mPosX, 0.f, mPosX+mWidth, posy, 0xCCFFFFFF);
 			}
 			mFont->render(mPosX+10.f, distHeight, mBarName.c_str(), false, true);
 			
 			if(mActive) {
-				SORA->fillBox(mPosX, posy, mPosX+mWidth, posy*(mItems.size()+1), 0xCCFFFFFF);
+				SoraCore::Ptr->fillBox(mPosX, posy, mPosX+mWidth, posy*(mItems.size()+1), 0xCCFFFFFF);
 				
 				for(size_t i=0; i<mItems.size(); ++i) {
 					if(mItems[i].isAvailable())
@@ -103,9 +103,9 @@ namespace sora {
 						mFont->setColor(0xFFDDDDDD);
 					
 					if(mCurrentItem == i && mItems[i].isAvailable()) {
-						SORA->fillBox(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), 0xCCFFFFFF);
+						SoraCore::Ptr->fillBox(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), 0xCCFFFFFF);
 					}
-					SORA->renderBox(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), 0xFF000000);
+					SoraCore::Ptr->renderBox(mPosX, posy, mPosX+mWidth, posy+mParent->getMenuBarHeight(), 0xFF000000);
 					
 					mFont->render(mPosX+10.f, posy+distHeight, mItems[i].getName().c_str(), false, true);
 
@@ -226,7 +226,7 @@ namespace sora {
 	mShowAlways(false),
 	mMenuClicked(false),
 	mEnabled(false) {
-        mActiveKeyId = SORA->registerGlobalHotkey(SoraHotkey(SORA_KEY_F1), this);
+        mActiveKeyId = SoraCore::Ptr->registerGlobalHotkey(SoraHotkey(SORA_KEY_F1), this);
         registerEventFunc(this, &SoraMenuBar::onHotkeyEvent);
         
         SoraCore::Instance()->addFrameListener(this);
@@ -269,9 +269,9 @@ namespace sora {
 			return;
 		
 		if(mActive || mShowAlways) {
-			float screenWidth = (float)SORA->getScreenWidth();
-			SORA->fillBox(0.f, 0.f, screenWidth, mMenuBarHeight, 0x99FFFFFF);
-			SORA->renderBox(0.f, 0.f, screenWidth-1.f, mMenuBarHeight-1.f, 0xFFAAAAAA);
+			float screenWidth = (float)SoraCore::Ptr->getScreenWidth();
+			SoraCore::Ptr->fillBox(0.f, 0.f, screenWidth, mMenuBarHeight, 0x99FFFFFF);
+			SoraCore::Ptr->renderBox(0.f, 0.f, screenWidth-1.f, mMenuBarHeight-1.f, 0xFFAAAAAA);
 			
 			MENUBAR_LIST::iterator itMenu = mMenus.begin();
 			while(itMenu != mMenus.end()) {
@@ -305,7 +305,7 @@ namespace sora {
 			return;
 		
 		float posx, posy;
-		SORA->getMousePos(&posx, &posy);
+		SoraCore::Ptr->getMousePos(&posx, &posy);
 		
 		if(mActive || mShowAlways) {
 			bool menuClicked = false;
@@ -322,7 +322,7 @@ namespace sora {
 					menuClicked = true;
 				
 			} else {
-				if(SORA->keyDown(SORA_KEY_LBUTTON)) {
+				if(SoraCore::Ptr->keyDown(SORA_KEY_LBUTTON)) {
 					if(activeMenu(posx, posy)) {
 						menuClicked = true;
 						mMenuClicked = true;
@@ -330,7 +330,7 @@ namespace sora {
 				}
 			}
 			
-			if(SORA->keyDown(SORA_KEY_RBUTTON)) {
+			if(SoraCore::Ptr->keyDown(SORA_KEY_RBUTTON)) {
 				diactiveMenus();
 			}
 		}
@@ -360,7 +360,7 @@ namespace sora {
 	}
     
     void SoraMenuBar::setActiveKey(const SoraHotkey& activeKey) {
-        SORA->setGlobalHotkey(mActiveKeyId, activeKey);
+        SoraCore::Ptr->setGlobalHotkey(mActiveKeyId, activeKey);
     }
 	
 	void SoraMenuBar::setFont(SoraFont* font) {
