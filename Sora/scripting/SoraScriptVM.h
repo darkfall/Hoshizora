@@ -44,8 +44,8 @@ namespace sora {
     class SORA_API SoraScriptingSystem {
     public:
         enum Language {
-            L_LUA = 0,
-            L_LSCRIPT,
+            Lua = 0,
+            LScript,
         };
         
         virtual int32 getLanguage() const = 0;

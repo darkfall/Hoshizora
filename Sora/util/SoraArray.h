@@ -25,6 +25,8 @@ namespace sora {
         typedef T* iterator;
         typedef SoraArray<T> self_type;
         
+        enum { InvalidIndex = -1 };
+        
         SoraArray();
         SoraArray(uint32 capcity, uint32 grow);
         SoraArray(uint32 size, uint32 grow, const T& value);
@@ -71,6 +73,12 @@ namespace sora {
         
         void fill(uint32 start, uint32 num, const T& elm);
         void realloc(uint32 size, uint32 grow);
+        
+         /* Sort and Search */
+        void insertSorted(const T& elm);
+        bool isSorted() const;
+        void sort() const;
+        uint32 binarySearchIndex(const T& elm);
         
     private:
         void destroyAll();
@@ -458,6 +466,122 @@ namespace sora {
             this->mElements[0] = elemt;
             this->mSize++;
         }
+    }
+    
+    template<typename T>
+    void SoraArray<T>::insertSorted(const T& elm) {
+        if(this->mSize == 0) 
+            this->append(elm);
+        else {
+            uint32 num = this->mSize;
+            uint32 half;
+            uint32 lo = 0;
+            uint32 hi = this->mSize - 1;
+            uint32 mid;
+            while(lo < hi) {
+                if(0 != (half = num/2)) {
+                    mid = lo + ((num & 1) ? half : (half - 1));
+                    if(elm < this->mElements[mid]) {
+                        hi = mid - 1;
+                        num = num & 1 ? half : half - 1;
+                    } else if(elm > this->mElements[mid]) {
+                        lo = mid + 1;
+                        num = half;
+                    } else {
+                        uint32 i = mid +1;
+                        for(; i<this->mSize; ++i) {
+                            if(this->mElements[i] != elm) {
+                                this->insert(i, elm);
+                                return;
+                            }
+                        }
+                        this->append(elm);
+                        return;
+                    }
+                } else if(0 != num) {
+                    if(elm < this->mElements[lo]) {
+                        this->insert(lo, elm);
+                        return;
+                    } else if(elm > this->mElements[lo]) {
+                        this->insert(lo+1, elm);
+                        return;
+                    } else {
+                        uint32 i = lo +1;
+                        for(; i<this->mSize; ++i) {
+                            if(this->mElements[i] != elm) {
+                                this->insert(i, elm);
+                                return;
+                            }
+                        }
+                        this->append(elm);
+                        return;
+                    }
+                    
+                } else {
+                    sora_assert(0 == lo);
+                    this->insert(lo, elm);
+                    return;
+                }
+            }
+            if(elm < this->mElements[lo]) {
+                this->insert(lo, elm);
+                return;
+            } else if(elm > this->mElements[lo]) {
+                this->insert(lo+1, elm);
+                return;
+            } else {
+                // can't happen
+                sora_assert(false);
+            }
+        }
+    }
+    
+    template<typename T>
+    bool SoraArray<T>::isSorted() const {
+        if(this->mSize > 1) {
+            for(uint32 i=0; i<this->mSize; ++i) {
+                if(this->mElements[i] > this->mElements[i+1]) 
+                    return false;
+            }
+        }
+        return true;
+    }
+   
+    template<typename T>
+    void SoraArray<T>::sort() const {
+        std::sort(this->begin(), this->end());
+    }
+    
+    template<typename T>
+    uint32 SoraArray<T>::binarySearchIndex(const T& elm) {
+        if(this->mSize > 0) {
+            uint32 num = this->mSize;
+            uint32 half;
+            uint32 lo;
+            uint32 hi = this->mSize - 1;
+            uint32 mid;
+            while(lo < hi) {
+                if(0 != (half = num/2)) {
+                    mid = lo + ((num & 1) ? half : (half-1));
+                    if(elm < this->mElements[mid]) {
+                        hi = mid-1;
+                        num = num & 1 ? half : half - 1;
+                    } else if(elm > this->mElements[mid]) {
+                        lo = mid+1;
+                        num = half;
+                    } else {
+                        return mid;
+                    }
+                } else if(0 != num) {
+                    if(elm != this->mElements[lo]) 
+                        return InvalidIndex;
+                    else 
+                        return lo;
+                } else 
+                    break;
+            }
+        }
+        return InvalidIndex;
     }
     
 } // namespace sora

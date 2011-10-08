@@ -89,24 +89,24 @@ namespace sora  {
             return mData.mValue;
         }
         
-        virtual bool isNull() const {
+        bool isNull() const {
             return mIsDefault;
         }
         
-        virtual const std::string& getName() const {
+        const std::string& getName() const {
             return mData.mName;
         }
         
-        virtual std::string toString() const {
+        std::string toString() const {
             return Serializer::toString(mData.mValue);
         }
         
-        virtual void setFromString(const std::string& str) {
+        void setFromString(const std::string& str) {
             mIsDefault = false;
             Serializer::fromString(str, &mData.mValue);
         }
         
-        virtual int getTypeId() const {
+        int getTypeId() const {
             return Serializer::getTypeId(mData.mValue);
         }
         

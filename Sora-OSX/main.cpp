@@ -114,6 +114,8 @@ public:
         
         mFont->render(0.f, 0.f, L"|#00FFFF|Hello |#FF0000|World! |#CDCDCD|Sora ~ |#FFDEAD|Chan~");
        
+        sora::SoraSpriteManager::GetInstance().render("SoraChan.png", 0.f, 0.f);
+        
        // mText.render();
        // mText2.render();
         body->render();

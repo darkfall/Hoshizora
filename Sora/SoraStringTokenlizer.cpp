@@ -106,8 +106,17 @@ namespace sora {
                 mTokens.push_back( str.substr(start, end-start) );
                 
                 ++end; 
-                while(!isAlpha(str[end]) && end < str.size()) ++end;
+                while(!isAlpha(str[end]) && end < str.size()) {
+                    if(str[end] == '"') {
+                        ++end;
+                        start = end;
+                        while(str[end] != '"' && end < str.size())
+                            ++end;
+                        mTokens.push_back( str.substr(start, end-start) );
+                    }
+                    ++end;
                 
+                }
                 start = end;
             }
         }

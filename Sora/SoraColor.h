@@ -200,7 +200,7 @@ namespace sora {
         static SoraColorRGBA Plum           = SoraColorRGBA(0xFFDDA0DD);
         static SoraColorRGBA Violet         = SoraColorRGBA(0xFFEE82EE);
         static SoraColorRGBA Slateblue      = SoraColorRGBA(0xFF6A5ACD);
-        static SoraColorRGBA MediumSlateblue= SoraColorRGBA(0xFF7B68EE);
+        static SoraColorRGBA Mediumslateblue= SoraColorRGBA(0xFF7B68EE);
         static SoraColorRGBA Darkblue       = SoraColorRGBA(0xFF00008B);
         static SoraColorRGBA Mediumblue     = SoraColorRGBA(0xFF0000CD);
         static SoraColorRGBA Navy           = SoraColorRGBA(0xFF000080);

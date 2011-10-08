@@ -33,7 +33,6 @@ namespace sora {
             }
         }
         
-        
         void attachListener(ListenerType*, const std::string& tag = std::string(), bool autoRelease=false);
         
         ListenerType* getListener(const std::string& tag) const;
