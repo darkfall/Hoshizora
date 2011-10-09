@@ -807,8 +807,8 @@ namespace sora{
 		return glGetError() != GL_NO_ERROR;
 	}
 	
-	SoraWString SoraiOSGLRenderer::videoInfo() {
-		SoraWString info(L"Driver=OpenGL Version=");
+	StringType SoraiOSGLRenderer::videoInfo() {
+		StringType info(L"Driver: OpenGL Version ");
 		//int mav, miv, rev;
 		info += s2ws((char*)glGetString(GL_VERSION));
 		return info;

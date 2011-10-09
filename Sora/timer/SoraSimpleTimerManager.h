@@ -35,7 +35,7 @@ namespace sora {
     
     template<typename T>
     static SimpleTimerPtr CreateSimpleTimer(const T& func) {
-        return SoraSimpleTimerManager::RefInstance().createTimer(ITimerManager::TimerFunc(func));
+        return SoraSimpleTimerManager::RefInstance().createTimer(func);
     }
     
 } // namespace sora

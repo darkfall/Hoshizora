@@ -41,8 +41,7 @@ namespace sora {
             parseWidget(rootValue, NULL);
             return true;
         }
-		DebugPtr->log(reader.getFormatedErrorMessages(),
-					  LOG_LEVEL_ERROR);
+		log_error(reader.getFormatedErrorMessages());
         return false;
     }
     

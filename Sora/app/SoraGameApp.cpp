@@ -10,7 +10,7 @@
 #include "SoraCore.h"
 #include "SoraGameState.h"
 #include "SoraInputQueue.h"
-#include "SoraResourceFileFinder.h"
+#include "SoraFileSystem.h"
 
 #ifdef OS_IOS
 #include "SoraiOSGLRenderer/SoraiOSInitializer.h"
@@ -141,7 +141,7 @@ namespace sora {
             mFSMManager.switchToState(initState);
             SoraKeyPoll::AddInputListener(static_cast<SoraGameState*>(state));
             
-            SoraResourceFileFinder* resourceFinder = SoraCore::Ptr->getResourceFileFinder();
+            SoraFileSystem* resourceFinder = SoraCore::Ptr->getResourceFileFinder();
             for(int i=0; i<mAppDef.ResourceScripts.size(); ++i) {
                 resourceFinder->loadResourceScript(mAppDef.ResourceScripts[i]);
             }

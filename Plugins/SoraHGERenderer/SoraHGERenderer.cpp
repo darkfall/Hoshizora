@@ -355,8 +355,8 @@ namespace sora{
 		return (ulong32)ptex;
 	}
 
-	SoraWString SoraHGERenderer::videoInfo() {
-		SoraWString str(L"DirectX 9");
+	StringType SoraHGERenderer::videoInfo() {
+		StringType = pHGE->getDeviceInfo();
 		return str;
 	}
 

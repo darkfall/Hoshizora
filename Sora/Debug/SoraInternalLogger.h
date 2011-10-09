@@ -4,6 +4,7 @@
 #include "SoraPlatform.h"
 #include "SoraSingleton.h"
 #include "SoraStringConv.h"
+#include "SoraString.h"
 
 #include <vector>
 #include <fstream>
@@ -31,34 +32,26 @@ namespace sora {
         static SoraInternalLogger* Instance();
         static void Destroy();
         
-		typedef struct _LogMssg {
+        struct LogMssg {
 			SoraString mLog;
 			int32 mLogLevel;
 			
-			_LogMssg(): mLogLevel(LOG_LEVEL_NORMAL) {}
-			_LogMssg(const std::string& log, int32 level=LOG_LEVEL_NORMAL): mLog(log), mLogLevel(level) {}
-			
-		} LogMssg;
+			LogMssg(): mLogLevel(LOG_LEVEL_NORMAL) {}
+			LogMssg(const std::string& log, int32 level=LOG_LEVEL_NORMAL);
+        };
 		
-		SoraInternalLogger& operator<<(SoraString& mssg);
-		SoraInternalLogger& operator<<(SoraWString& mssg);
+		SoraInternalLogger& operator<<(const StringType& mssg);
 		
 		static void printf(const char* format, ...);
 		static void printf(const wchar_t* format, ...);
 		
-		void log(const std::string& log, int32 logLevel=LOG_LEVEL_NORMAL);
-		void log(const std::wstring& log, int32 logLevel=LOG_LEVEL_NORMAL);
+		void log(const StringType& log, int32 logLevel=LOG_LEVEL_NORMAL);
         
-        void normal(const std::string& log);
-        void error(const std::string& log);
-        void warning(const std::string& log);
-        void notice(const std::string& lob);
+        void normal(const StringType& log);
+        void error(const StringType& log);
+        void warning(const StringType& log);
+        void notice(const StringType& lob);
         
-        void normal(const std::wstring& log);
-        void error(const std::wstring& log);
-        void warning(const std::wstring& log);
-        void notice(const std::wstring& lob);
-		
 		void writeToFile(const char* fileName);
 		
 		const std::vector<LogMssg>& get() const;
@@ -94,42 +87,35 @@ namespace sora {
 	
 	static std::string vamssg(const char* format, ...) {
 		va_list	ArgPtr;
-		char Message[1024] = {0};
+		char Message[512] = {0};
 		va_start(ArgPtr, format);
 		vsprintf(Message, format, ArgPtr);
 		va_end(ArgPtr);
 		return Message;
 	}
 	
-	typedef SoraInternalLogger Debug;
-	static SoraInternalLogger* DebugPtr = SoraInternalLogger::Instance();
+	static SoraInternalLogger& Logger = *SoraInternalLogger::Instance();
     
-    inline void log_mssg(const std::string& log, int32 level=LOG_LEVEL_NORMAL) {
-        DebugPtr->log(log, level);
+    inline void log_mssg(const StringType& log, int32 level=LOG_LEVEL_NORMAL) {
+        Logger.log(log, level);
     }
     
-    inline void log_mssg(const std::wstring& log, int32 level=LOG_LEVEL_NORMAL) {
-        DebugPtr->log(log, level);
+    inline void log_error(const StringType& log) {
+        Logger.error(log);
     }
     
-    inline void log_error(const std::string& log) {
-        DebugPtr->error(log);
+    inline void log_warning(const StringType& log) {
+        Logger.warning(log);
     }
     
-    inline void log_warning(const std::string& log) {
-        DebugPtr->warning(log);
+    inline void log_notice(const StringType& log) {
+        Logger.notice(log);
     }
     
-    inline void log_notice(const std::string& log) {
-        DebugPtr->notice(log);
-    }
-    
-    inline void log_normal(const std::string& log) {
-        DebugPtr->normal(log);
+    inline void log_normal(const StringType& log) {
+        Logger.normal(log);
     }
 	
-#define DEBUG_LOG_HANDLE SoraInternalLogger::Instance()
-	//} // namespace internal
 } // namespace sora
 
 #endif

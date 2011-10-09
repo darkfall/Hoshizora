@@ -21,18 +21,16 @@ namespace sora {
 	
 	class SoraMiscTooliOS: public SoraDefaultMiscTool {
 	public:		
-		int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode);
-		int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
-			return messageBox(ws2s(sMessage), ws2s(sTitle), msgCode);
-		}
+		int32 messageBox(const StringType& sMessage, const StringType& sTitle, int32 msgCode);
 		
-		StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
-            return StringType();
-		}
+		StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
 		
-		StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) {
-            return StringType();
-		}
+		StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL);
+        
+        uint32 getProcessorSpeed() const;
+        StringType getOSVersion() const;
+        uint64 getSystemMemorySize() const;
+
 	};
 	
 } // namespace sora

@@ -84,8 +84,7 @@ namespace sora {
 			lua_Debug debug;
 			lua_getstack(luaState->GetCState(), 0, &debug);
 	
-			DebugPtr->log(vamssg("Lua Error: %d, what:\n %s", result, debug.what!=NULL?debug.what:"???"),
-						  LOG_LEVEL_ERROR);
+			log_error(vamssg("Lua Error: %d, what:\n %s", result, debug.what!=NULL?debug.what:"???"));
 		}
 		return result;
 	}
@@ -97,8 +96,7 @@ namespace sora {
 			lua_Debug debug;
 			lua_getstack(luaState->GetCState(), 0, &debug);
 			
-			DebugPtr->log(vamssg("Lua Error: %d, what:\n %s", result, debug.what!=NULL?debug.what:"???"),
-						  LOG_LEVEL_ERROR);
+			log_error(vamssg("Lua Error: %d, what:\n %s", result, debug.what!=NULL?debug.what:"???"));
 		}
 		return result;
 	}
@@ -120,8 +118,7 @@ namespace sora {
 			lua_Debug debug;
 			lua_getstack(luaState->GetCState(), 0, &debug);
 			
-			DebugPtr->log(vamssg("Lua Error: %d, what:\n %s", result, debug.what!=NULL?debug.what:"???"),
-						  LOG_LEVEL_ERROR);
+			log_error(vamssg("Lua Error: %d, what:\n %s", result, debug.what!=NULL?debug.what:"???"));
 		}
 		return result;
 	}
@@ -133,8 +130,7 @@ namespace sora {
 			lua_Debug debug;
 			lua_getstack(luaState->GetCState(), 0, &debug);
 			
-			DebugPtr->log(vamssg("Lua Error: %d, what:\n %s", result, debug.what!=NULL?debug.what:"???"),
-						  LOG_LEVEL_ERROR);
+			log_error(vamssg("Lua Error: %d, what:\n %s", result, debug.what!=NULL?debug.what:"???"));
 		}
 		return result;
 	}

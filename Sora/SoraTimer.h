@@ -22,9 +22,12 @@ namespace sora {
 		virtual float getDelta() = 0;
 		virtual float getFPS() = 0;
 		virtual bool update() = 0;
-		virtual float getTime() = 0;
-		virtual int32 getFrameCount() = 0;
-		virtual uint64 getCurrentSystemTime() = 0;
+        
+    private:
+        friend class SoraCore;
+        
+        static float TimeScale;
+        static uint64 FrameCount;
 	};
 }
 

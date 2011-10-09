@@ -71,8 +71,8 @@ namespace sora {
 			pFile = new SoraHttpDownloadFile;
 		if(!easy_handle) {
 			easy_handle = curl_easy_init();
-			if(!easy_handle)
-				THROW_SORA_EXCEPTION(SystemException, "unable to alloc CURL handle");
+			
+            sora_assert(easy_handle);
 		}
 	}
 
@@ -87,7 +87,7 @@ namespace sora {
 		curl_easy_setopt(easy_handle, CURLOPT_WRITEDATA, pFile);
 		CURLcode result = curl_easy_perform(easy_handle);
 		if(result != CURLE_OK) {
-			DebugPtr->log(vamssg("Unable to perform CURL at url %s, error code %d", pHead->sURL.c_str(), result), 
+			log_mssg(vamssg("Unable to perform CURL at url %s, error code %d", pHead->sURL.c_str(), result), 
 						  LOG_LEVEL_ERROR);
 		}
 		
@@ -180,7 +180,7 @@ namespace sora {
 		phead.httpFile = this;
 		pdownloadthread.startDownload(&phead);
 		
-		DebugPtr->log(vamssg("Start download file from %s", phead.sURL.c_str()), 
+		log_mssg(vamssg("Start download file from %s", phead.sURL.c_str()), 
 					  LOG_LEVEL_NORMAL);
 
 		isopen = true;
@@ -195,7 +195,7 @@ namespace sora {
 		phead.httpFile = this;
 		pdownloadthread.startDownload(&phead);
 		
-		DebugPtr->log(vamssg("Start download file from %s, to %s", phead.sURL.c_str(), ws2s(file).c_str()), 
+		log_mssg(vamssg("Start download file from %s, to %s", phead.sURL.c_str(), ws2s(file).c_str()), 
 					  LOG_LEVEL_NORMAL);
 		
 		isopen = true;
@@ -258,7 +258,7 @@ namespace sora {
 			}
 		}
 		if(result != CURLE_OK) {
-			DebugPtr->log(vamssg("Unable to perform curl at url %s, error code: %d", url.c_str(), result));
+			log_mssg(vamssg("Unable to perform curl at url %s, error code: %d", url.c_str(), result));
 		}
 		return 0.0;
 	}

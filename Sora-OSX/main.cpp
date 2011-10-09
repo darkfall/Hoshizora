@@ -113,8 +113,6 @@ public:
                                               r.x2, r.y2, 0xFFFF0000);
         
         mFont->render(0.f, 0.f, L"|#00FFFF|Hello |#FF0000|World! |#CDCDCD|Sora ~ |#FFDEAD|Chan~");
-       
-        sora::SoraSpriteManager::GetInstance().render("SoraChan.png", 0.f, 0.f);
         
        // mText.render();
        // mText2.render();
@@ -241,7 +239,7 @@ public:
         mShape.enableOutline(3.f, 0xFFFF0000);
         mShape.setClosed(true);
         
-        sora::SoraResourceFile fontData("Bank Gothic Medium BT.ttf");
+        sora::SoraResourceFile fontData("cour.ttf");
         mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
         if(!mFont) {
             sora::SoraCore::Instance()->messageBox("Error loading font", "error", MB_OK | MB_ICONERROR);

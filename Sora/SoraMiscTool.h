@@ -19,12 +19,14 @@ namespace sora {
 	public:
 		virtual ~SoraMiscTool() {}
 		
-		virtual int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) = 0;
-		virtual int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) = 0;
-		virtual void setMainWindowHandle(ulong32 handle) = 0;
+		virtual int32 messageBox(const StringType& sMessage, const StringType& sTitle, int32 msgCode) = 0;
 		
 		virtual StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) = 0;
 		virtual StringType fileSaveDialog(const char* filter = NULL, const char* defaultPath = NULL, const char* defaultExt = NULL) = 0;		
+        
+        virtual uint32 getProcessorSpeed() const = 0;
+        virtual StringType getOSVersion() const = 0;
+        virtual uint64 getSystemMemorySize() const = 0;
 	};
 } // namespace sora
 

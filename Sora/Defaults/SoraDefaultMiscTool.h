@@ -20,24 +20,11 @@ namespace sora {
 		SoraDefaultMiscTool(){}
 		virtual ~SoraDefaultMiscTool() { }
 
-		virtual void setLogFile(const SoraString& sfile) { }
-
-		virtual int32 messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
-			log_mssg("MessageBox: "+sTitle + ": " + sMessage);
+		virtual int32 messageBox(const StringType& sMessage, const StringType& sTitle, int32 msgCode) {
+			log_mssg(std::string("MessageBox: "+sTitle + ": " + sMessage));
 			return 0;
 		}
-		virtual int32 messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
-			log_mssg(L"MessageBox: "+ sTitle + L": " + sMessage);
-			return 0;
-		}
-	
-		virtual void log(const SoraString& sMessage) {
-			log_mssg(sMessage);
-		}
-		virtual void log(const SoraWString& sMessage) {
-			log_mssg(sMessage);
-		}
-		
+        
 		StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL) {
 			return "\0";
 		}
@@ -46,8 +33,18 @@ namespace sora {
 			return "\0";
 		}
 		
-		virtual void setMainWindowHandle(ulong32 handle) { }
-		
+		uint32 getProcessorSpeed() const {
+            return 0;
+        }
+        
+        StringType getOSVersion() const {
+            return "null";
+        }
+        
+        uint64 getSystemMemorySize() const {
+            return 0;
+        }
+        
 	private:
 	};
 } // namespace sora

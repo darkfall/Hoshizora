@@ -56,7 +56,7 @@ namespace sora {
         bool open(const char* path) {
             dyn = dlopen(path, RTLD_LOCAL);
             if(!dyn) {
-                DebugPtr->error(dlerror());
+                log_error(std::string("SoraDynLibrary: ")+dlerror());
                 return false;
             }
             return true;

@@ -134,7 +134,7 @@ namespace sora {
 							++mStartLine;
 						}
 					} else if(mTab == TAB_MSSG) {
-						if(mCurrLine < DebugPtr->logSize()-1) {
+						if(mCurrLine < Logger.logSize()-1) {
 							++mCurrLine;
 						}
 					}
@@ -218,7 +218,7 @@ namespace sora {
 			float x = mPositionX + 1.f;
 			float y = mPositionY + mHeight - mFontHeight*2 - 1.f;
 			
-			std::vector<SoraInternalLogger::LogMssg> debugMssg = DebugPtr->get();
+			std::vector<SoraInternalLogger::LogMssg> debugMssg = Logger.get();
 			
 			float starty = y;
 			for(int32 i=mCurrLine; i>=0; --i) {
@@ -259,7 +259,7 @@ namespace sora {
 		if(mTab == TAB_CMDLINE) {
 			mCurrLine = mHistory.size();
 		} else if(mTab == TAB_MSSG) {
-			mCurrLine = DebugPtr->logSize()-1;
+			mCurrLine = Logger.logSize()-1;
 		}
 	}
     
@@ -441,7 +441,7 @@ namespace sora {
 						++mStartLine;
 					}
 				} else if(mTab == TAB_MSSG) {
-					if(mCurrLine < DebugPtr->logSize()-1) {
+					if(mCurrLine < Logger.logSize()-1) {
 						++mCurrLine;
 					}
 				}
@@ -475,7 +475,7 @@ namespace sora {
 			}
 		} else if(mTab == TAB_MSSG) {
 			if(kev->isKeyPressed(SORA_KEY_S) && kev->isCtrlFlag())
-				DebugPtr->writeToFile("./SoraLog.log");
+				Logger.writeToFile("./SoraLog.log");
 		}
 	}
 	

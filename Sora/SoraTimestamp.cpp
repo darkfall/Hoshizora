@@ -54,20 +54,20 @@ void SoraTimestamp::swap(SoraTimestamp& timestamp)
 }
 
 
-SoraTimestamp SoraTimestamp::fromEpochTime(std::time_t t)
+SoraTimestamp SoraTimestamp::FromEpochTime(std::time_t t)
 {
-	return SoraTimestamp(TimeVal(t)*resolution());
+	return SoraTimestamp(TimeVal(t)*Resolution());
 }
 
 
-SoraTimestamp SoraTimestamp::fromUtcTime(UtcTimeVal val)
+SoraTimestamp SoraTimestamp::FromUtcTime(UtcTimeVal val)
 {
 	val -= (TimeDiff(0x01b21dd2) << 32) + 0x13814000;
 	val /= 10;
 	return SoraTimestamp(val);
 }
     
-    SoraTimestamp::TimeVal SoraTimestamp::currentTime() {
+    SoraTimestamp::TimeVal SoraTimestamp::CurrentTime() {
         TimeVal ts;
 #if defined(_WIN32)
         
@@ -88,7 +88,7 @@ SoraTimestamp SoraTimestamp::fromUtcTime(UtcTimeVal val)
         struct timeval tv;
         if (gettimeofday(&tv, NULL))
             throw ("cannot get time of day");
-        ts = TimeVal(tv.tv_sec)*resolution() + tv.tv_usec;
+        ts = TimeVal(tv.tv_sec)*Resolution() + tv.tv_usec;
         
 #endif
         return ts;
@@ -116,7 +116,7 @@ void SoraTimestamp::update()
 	struct timeval tv;
 	if (gettimeofday(&tv, NULL))
 		throw ("cannot get time of day");
-	_ts = TimeVal(tv.tv_sec)*resolution() + tv.tv_usec;
+	_ts = TimeVal(tv.tv_sec)*Resolution() + tv.tv_usec;
 	
 #endif
 }

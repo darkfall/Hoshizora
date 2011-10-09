@@ -42,7 +42,7 @@ namespace sora {
 	
 	class SoraOSXTimer: public SoraTimer {
 	public:
-		SoraOSXTimer(): fpsInterval(SORA_FPS_INFINITE), frameCounter(0), fps(0.f), fTime(0.f) {
+		SoraOSXTimer(): fpsInterval(SORA_FPS_INFINITE), fps(0.f) {
 			time = mach_absolute_time();
 			oldtime = time;
 		}
@@ -54,9 +54,6 @@ namespace sora {
 		
 		float getFPS()	{ return fps; }
 		float getDelta()	{ return fdt; }
-		float getTime() { return fTime; }
-		int32 getFrameCount() { return frameCounter; }
-		uint64 getCurrentSystemTime() { return mach_absolute_time(); }
 		
 		bool update() {
 			if(fpsInterval == SORA_FPS_INFINITE) {
@@ -98,8 +95,6 @@ namespace sora {
 			
 			fps = 1.f / fdt;
 			
-			frameCounter++;
-			fTime += fdt;
 			return true;
 		}
 		
@@ -121,8 +116,6 @@ namespace sora {
 		uint64_t fpsInterval;
 		float fps;
 		float fdt;
-		int32 frameCounter;
-		float fTime;
 	};
 	
 } // namespace sora

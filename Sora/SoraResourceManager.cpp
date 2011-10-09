@@ -8,7 +8,6 @@
 
 #include "SoraResourceManager.h"
 #include "SoraCore.h"
-#include "SoraResourceFileFinder.h"
 
 namespace sora {
     

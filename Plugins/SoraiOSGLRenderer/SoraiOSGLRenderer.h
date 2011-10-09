@@ -76,7 +76,7 @@ namespace sora {
 		void attachShaderContext(SoraShaderContext* context);
 		void detachShaderContext();
 		
-		SoraWString videoInfo();
+		StringType videoInfo();
 		ulong32 getVideoDeviceHandle();
         void setVerticalSync(bool flag);
 		

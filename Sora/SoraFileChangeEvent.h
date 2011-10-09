@@ -12,8 +12,8 @@
 
 #include "SoraEvent.h"
 #include "SoraTimerEvent.h"
-
-#include "support/md5lib.h"
+#include "SoraString.h"
+#include "timer/SoraSimpleTimerManager.h"
 
 #include <list>
 
@@ -22,22 +22,20 @@ namespace sora {
 	class SORA_API SoraFileChangeEvent: public SoraEvent {
 	public:
 		SoraFileChangeEvent() {}
-		SoraFileChangeEvent(const SoraWString& file): mChangedFile(file) {}
+		SoraFileChangeEvent(const StringType& file): mChangedFile(file) {}
 		
-		void setChangedFile(const SoraWString& file) {
+		void setChangedFile(const StringType& file) {
 			mChangedFile = file;
 		}
 		
-		SoraWString getChangedFile() const {
+		StringType getChangedFile() const {
 			return mChangedFile;
 		}
 		
-#ifndef SORA_USE_RTTI
 		SORA_EVENT_IDENTIFIER(18446744073686077189ULL);
-#endif
 	
 	private:
-		SoraWString mChangedFile;
+		StringType mChangedFile;
 	};
 	
 	class SORA_API SoraFileChangeEventPublisher: public SoraEventHandler {
@@ -45,22 +43,23 @@ namespace sora {
 		SoraFileChangeEventPublisher();
 		
 		void setInterval(float interval);
-		void addEventHandler(const SoraWString& file, SoraEventHandler* handler);
+		void addEventHandler(const StringType& file, SoraEventHandler* handler);
 		void delEventHandler(SoraEventHandler* handler);
-		void onCheckTimerEvent(SoraTimerEvent* event);
+		bool onTimer(SoraSimpleTimer*, float);
 		
 	private:
-		struct FileChangeInfo {			
-			std::string mMD5;
-			
-			typedef std::list<SoraEventHandler*> CHANGE_HANDLERS;
-			CHANGE_HANDLERS mHandlers;
+
+		struct FileChangeInfo {		
+            std::string mMD5;
+			typedef std::list<SoraEventHandler*> ChangeHandlers;
+			ChangeHandlers mHandlers;
 		};
 		
-		typedef std::map<SoraWString, FileChangeInfo> FILE_CHANGE_MAP;
-		FILE_CHANGE_MAP mChangeListeners;
+		typedef std::map<StringType, FileChangeInfo> FileChangeMap;
+		FileChangeMap mChangeListeners;
 		
 		float mCheckInternval;
+        SimpleTimerPtr mTimer;
 	};
 	
 	

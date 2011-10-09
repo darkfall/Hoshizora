@@ -11,6 +11,10 @@
 #ifndef _SORA_PLATFORM_H_
 #define _SORA_PLATFORM_H_
 
+#define SORA_VERSION_MAJOR 3
+#define SORA_VERSION_MINOR 4
+#define SORA_VERSION_REV   466
+
 /*
  gcc std extension
  if gcc version >= 4

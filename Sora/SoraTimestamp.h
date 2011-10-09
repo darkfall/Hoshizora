@@ -5,7 +5,7 @@
 #include <ctime>
 
 /** 
- * Original TimeStamp class by Sora-Chin form war3bot
+ * Original TimeStamp class from Poco C++ Library
  * Modifired for Sora by darkfall
  **/
 
@@ -73,7 +73,7 @@ public:
 		/// Returns the timestamp expressed in microseconds
 		/// since the Unix epoch, midnight, January 1, 1970.
     
-    static TimeVal currentTime();
+    static TimeVal CurrentTime();
 	
 	TimeDiff elapsed() const;
 		/// Returns the time elapsed since the time denoted by
@@ -83,17 +83,17 @@ public:
 		/// Returns true iff the given interval has passed
 		/// since the time denoted by the timestamp.
 	
-	static SoraTimestamp fromEpochTime(std::time_t t);
+	static SoraTimestamp FromEpochTime(std::time_t t);
 		/// Creates a timestamp from a std::time_t.
 		
-	static SoraTimestamp fromUtcTime(UtcTimeVal val);
+	static SoraTimestamp FromUtcTime(UtcTimeVal val);
 		/// Creates a timestamp from a UTC time value.
 		
-	static TimeVal resolution();
+	static TimeVal Resolution();
 		/// Returns the resolution in units per second.
 		/// Since the timestamp has microsecond resolution,
 		/// the returned value is always 1000000.
-
+    
 #if defined(_WIN32)
 	static SoraTimestamp fromFileTimeNP(uint32 fileTimeLow, uint32 fileTimeHigh);
 	void toFileTimeNP(uint32& fileTimeLow, uint32& fileTimeHigh) const;
@@ -109,87 +109,87 @@ private:
 //
 inline bool SoraTimestamp::operator == (const SoraTimestamp& ts) const
 {
-	return _ts == ts._ts;
+	return this->_ts == ts._ts;
 }
 
 
 inline bool SoraTimestamp::operator != (const SoraTimestamp& ts) const
 {
-	return _ts != ts._ts;
+	return this->_ts != ts._ts;
 }
 
 
 inline bool SoraTimestamp::operator >  (const SoraTimestamp& ts) const
 {
-	return _ts > ts._ts;
+	return this->_ts > ts._ts;
 }
 
 
 inline bool SoraTimestamp::operator >= (const SoraTimestamp& ts) const
 {
-	return _ts >= ts._ts;
+	return this->_ts >= ts._ts;
 }
 
 
 inline bool SoraTimestamp::operator <  (const SoraTimestamp& ts) const
 {
-	return _ts < ts._ts;
+	return this->_ts < ts._ts;
 }
 
 
 inline bool SoraTimestamp::operator <= (const SoraTimestamp& ts) const
 {
-	return _ts <= ts._ts;
+	return this->_ts <= ts._ts;
 }
 
 
 inline SoraTimestamp SoraTimestamp::operator + (SoraTimestamp::TimeDiff d) const
 {
-	return SoraTimestamp(_ts + d);
+	return SoraTimestamp(this->_ts + d);
 }
 
 
 inline SoraTimestamp SoraTimestamp::operator - (SoraTimestamp::TimeDiff d) const
 {
-	return SoraTimestamp(_ts - d);
+	return SoraTimestamp(this->_ts - d);
 }
 
 
 inline SoraTimestamp::TimeDiff SoraTimestamp::operator - (const SoraTimestamp& ts) const
 {
-	return _ts - ts._ts;
+	return this->_ts - ts._ts;
 }
 
 
 inline SoraTimestamp& SoraTimestamp::operator += (SoraTimestamp::TimeDiff d)
 {
-	_ts += d;
+	this->_ts += d;
 	return *this;
 }
 
 
 inline SoraTimestamp& SoraTimestamp::operator -= (SoraTimestamp::TimeDiff d)
 {
-	_ts -= d;
+	this->_ts -= d;
 	return *this;
 }
 
 
 inline std::time_t SoraTimestamp::epochTime() const
 {
-	return std::time_t(_ts/resolution());
+	return std::time_t(this->_ts/Resolution());
 }
 
 
 inline SoraTimestamp::UtcTimeVal SoraTimestamp::utcTime() const
 {
-	return _ts*10 + (TimeDiff(0x01b21dd2) << 32) + 0x13814000;
+	return this->_ts*10 + (TimeDiff(0x01b21dd2) << 32) + 0x13814000;
 }
 
 
 inline SoraTimestamp::TimeVal SoraTimestamp::epochMicroseconds() const
 {
-	return _ts;
+	return this->_ts;
 }
 
 
@@ -208,7 +208,7 @@ inline bool SoraTimestamp::isElapsed(SoraTimestamp::TimeDiff interval) const
 }
 
 
-inline SoraTimestamp::TimeVal SoraTimestamp::resolution()
+inline SoraTimestamp::TimeVal SoraTimestamp::Resolution()
 {
 	return 1000000;
 }

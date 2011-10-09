@@ -15,7 +15,10 @@
 #import <Cocoa/Cocoa.h>	
 #import <Foundation/Foundation.h>
 
+#include <sys/sysctl.h>
+
 #include "SoraStringTokenlizer.h"
+#include "SoraLogger.h"
 
 namespace sora {
 	
@@ -33,7 +36,7 @@ namespace sora {
 		return kCFUserNotificationPlainAlertLevel;
 	}
 	
-	int32 SoraMiscToolOSX::messageBox(const SoraString& sMessage, const SoraString& sTitle, int32 msgCode) {
+	int32 SoraMiscToolOSX::messageBox(const StringType& sMessage, const StringType& sTitle, int32 msgCode) {
 		CFStringRef header_ref   = CFStringCreateWithCString(NULL, sTitle.c_str(), sTitle.size());
 		CFStringRef message_ref  = CFStringCreateWithCString(NULL, sMessage.c_str(), sMessage.size());
 		
@@ -62,10 +65,6 @@ namespace sora {
 			case kCFUserNotificationOtherResponse: return IDABORT;
 		}
 		return 0;
-	}
-	
-	int32 SoraMiscToolOSX::messageBox(const SoraWString& sMessage, const SoraWString& sTitle, int32 msgCode) { 
-		return messageBox(ws2s(sMessage), ws2s(sTitle), msgCode);
 	}
 
 	StringType SoraMiscToolOSX::fileOpenDialog(const char* filter, const char* defaultPath) {
@@ -137,9 +136,36 @@ namespace sora {
         [fileExt release];
         
 		return "\0";
-		
 	}
+    
+    uint32 SoraMiscToolOSX::getProcessorSpeed() const {
+        int mib[2] = { CTL_HW, HW_CPU_FREQ };
+        u_int namelen = sizeof(mib) / sizeof(mib[0]);
+        uint64_t freq = 0;
+        size_t len = sizeof(freq);
+        
+        sysctl(mib, namelen, &freq, &len, NULL, 0);
+        return freq / 1000000;
+        
+    }
 
+    StringType SoraMiscToolOSX::getOSVersion() const {
+        SInt32 versionMajor = 0;
+        SInt32 versionMinor = 0;
+        Gestalt( gestaltSystemVersionMajor, &versionMajor );
+        Gestalt( gestaltSystemVersionMinor, &versionMinor );
+        return vamssg("Mac OS X Version %d.%d", versionMajor, versionMinor);
+    }
+    
+    uint64 SoraMiscToolOSX::getSystemMemorySize() const {
+        int mib[2] = { CTL_HW, HW_MEMSIZE };
+        u_int namelen = sizeof(mib) / sizeof(mib[0]);
+        uint64_t size = 0;
+        size_t len = sizeof(size);
+        
+        sysctl(mib, namelen, &size, &len, NULL, 0);
+        return size;
+    }
 }
 
 #endif // OS_OSX

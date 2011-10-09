@@ -39,7 +39,7 @@ namespace sora {
     class SoraWindowInfoBase;
     class SoraInputListener;
     class SoraPhysicWorld;
-    class SoraResourceFileFinder;
+    class SoraFileSystem;
     
 	class SORA_API SoraCore {
 	protected:
@@ -97,7 +97,7 @@ namespace sora {
         SoraFontManager*        getFontManager() const;
         SoraSoundSystem*        getSoundSystem() const;
         SoraPhysicWorld*        getPhysicWorld() const;
-        SoraResourceFileFinder* getResourceFileFinder() const;
+        SoraFileSystem* getResourceFileFinder() const;
         
 		void        registerPlugin  (SoraPlugin* pPlugin);
 		SoraPlugin* unistallPlugin  (SoraPlugin* pPlugin);
@@ -114,11 +114,6 @@ namespace sora {
 		float   getFPS();
 		float   getDelta();
         float   getAbsoluteDelta();
-		float   getTime();
-		int32	getFrameCount();
-		void	setTimeScale(float scale);
-		float   getTimeScale();
-		uint64  getCurrentSystemTime();
         void    setVerticalSync(bool flag);
 
 		// render system APIs
@@ -209,6 +204,14 @@ namespace sora {
         static void    clearGlobalHotkeys();
 		
 		static void    simulateKey(int32 key, int32 state);
+        
+        static void execute(const SoraString& appPath, const SoraString& args);
+        
+		static uint64   getRunningTime();
+		static uint64	getFrameCount();
+		static void     setTimeScale(float scale);
+		static float    getTimeScale();
+		static uint64   getCurrentSystemTime();
 
 		int32 getScreenWidth();
 		int32 getScreenHeight();
@@ -277,15 +280,17 @@ namespace sora {
         void addInputListener(SoraInputListener* listener, int priority=0);
         void delInputListener(SoraInputListener* listener);
         
-        static void execute(const SoraString& appPath, const SoraString& args);
         void snapshot(const SoraString& path);
 		/*
 		 for directX, return (ulong32)(pD3DDevice)
-		 for ogl, just return (ulong32)(this)
+		 for ogl, just return (ulong32)(pRenderSystem)
 		 */
 		ulong32		 getVideoDeviceHandle();
-		StringType   videoInfo();
-		void		 flush();
+		StringType   getVideoInfo();
+        uint64       getSystemMemorySize();
+        uint32       getCPUSpeed();
+        StringType   getOSVersion();
+        StringType   getSoraVersion();
 
 		void postError(const SoraString& sMssg);
 
@@ -305,7 +310,7 @@ namespace sora {
          **/
 		uint64 getEngineMemoryUsage() const;
         /**
-         *  Memory usage calculated by SoraResourceFileFinder
+         *  Memory usage calculated by SoraFileSystem
          *  Only calculates resource allocation and free
          *  (Library managed memory not included, such as gl texture)
          **/
@@ -349,7 +354,7 @@ namespace sora {
 
 		SoraMiscTool*			pMiscTool;
 		SoraRenderSystem*		pRenderSystem;
-		SoraResourceFileFinder*	pResourceFileFinder;
+		SoraFileSystem*	pResourceFileFinder;
 		SoraInput*				pInput;
 		SoraPluginManager*		pPluginManager;
 		SoraTimer*				pTimer;
@@ -374,8 +379,6 @@ namespace sora {
 
         bool bMainScene;
 		bool bFrameSync;
-		float mTime;
-        float mTimeScale;
 
 		SoraWindowInfoBase* mMainWindow;
         SoraShaderContext* mPrevShaderContext;

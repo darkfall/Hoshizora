@@ -66,6 +66,10 @@ namespace sora {
     inline void* sora_realloc(void* ptr, size_t size) {
         return g_memory_allocator.sora_realloc(ptr, size);
     }
+    
+#define sora_malloc_t(t, size) \
+    (t*)sora_malloc(sizeof(t) * size);
+    
 
 }
 

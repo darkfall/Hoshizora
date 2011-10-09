@@ -23,7 +23,7 @@
 #include "SoraTimer.h"
 #include "SoraFontManager.h"
 #include "SoraSoundSystem.h"
-#include "SoraResourceFileFinder.h"
+#include "SoraFileSystem.h"
 #include "SoraShader.h"
 #include "SoraFrameListener.h"
 #include "SoraEnvValues.h"
@@ -89,6 +89,8 @@ extern "C" {
 }
 
 namespace sora {
+    
+    static SoraTimestamp g_starttime = SoraTimestamp();
     
     SoraCore* SoraCore::mInstance = NULL;
     SoraCore* SoraCore::Ptr = 0;
@@ -164,12 +166,6 @@ namespace sora {
         bSeperateSoundSystemThread = false;
         bMultithreadedRendering = false;
 
-		_initializeTimer();
-		_initializeMiscTool();
-		
-		SoraEventManager::Instance();
-		SoraInternalLogger::Instance();
-
 		pInput = NULL;
 		pFontManager = NULL;
 		pRenderSystem = NULL;
@@ -181,11 +177,17 @@ namespace sora {
 		mPrevShaderContext = NULL;
         mScreenBuffer = NULL;
         
-        mTime = 0.f;
-        mTimeScale = 1.0f;
-
-		pPluginManager = new SoraPluginManager;
-		pResourceFileFinder = new SoraResourceFileFinder;
+        
+        log_notice("Initializing base systems...");
+        
+		_initializeTimer();
+		_initializeMiscTool();
+		
+		SoraEventManager::Instance();
+		SoraInternalLogger::Instance();
+        
+        pPluginManager = new SoraPluginManager;
+		pResourceFileFinder = new SoraFileSystem;
 		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
 #ifdef SORA_ZIP_PACK_SUPPORT
         pResourceFileFinder->attachResourceManager(new SoraZipResourceManager);
@@ -197,6 +199,11 @@ namespace sora {
         _regGlobalProducts();
         
         new SoraSimpleTimerManager;
+        
+        log_mssg(getSoraVersion().get());
+        log_mssg(getOSVersion().get());
+        log_mssg(vamssg("CPU Speed: %d mhz", getCPUSpeed()));
+        log_mssg(vamssg("Memory Size: %d kb", getSystemMemorySize() / 1024));
 	}
     
     void SoraCore::_regGlobalProducts() {
@@ -224,6 +231,7 @@ namespace sora {
         switch(feature) {
             case FeatureLoadPlugin:
                 SoraBooter::loadExPlugins(L"plugins");
+                log_notice("Loading plugins...");
                 break;
             case FeatureRenderToBuffer:
                 bEnableScreenBuffer = true;
@@ -279,7 +287,7 @@ namespace sora {
 		pMiscTool = new SoraDefaultMiscTool;
 	}
 
-	void SoraCore::start() {        
+	void SoraCore::start() { 
         try {
             // no main window created
             if(!bMainWindowSet) {
@@ -357,7 +365,7 @@ namespace sora {
 
 	void SoraCore::update() {
 		sora_assert(bInitialized == true);
-        float dt = bFrameSync?1.f:pTimer->getDelta();
+        float dt = bFrameSync?1.f:pTimer->getDelta() * SoraTimer::TimeScale;
 #ifdef PROFILE_CORE_UPDATE
 		PROFILE("CoreUpdate");
 #endif
@@ -451,8 +459,7 @@ namespace sora {
                     _updateEnd();
                 }
                 
-                
-                mTime += pTimer->getDelta();
+                SoraTimer::FrameCount++;
                 
                 pRenderSystem->endFrame();
             }
@@ -475,11 +482,6 @@ namespace sora {
             }
         }
     }
-
-	void SoraCore::flush() {
-		if(pRenderSystem)
-			pRenderSystem->flush();
-	}
 
 	void SoraCore::_checkCoreComponents() {
 		if(!pInput) {
@@ -593,8 +595,6 @@ namespace sora {
             mMainWindow = info;
             mMainWindow->setActive(true);
             mMainWindow->init();
-            
-            log_notice("Created console app");
             return true;
         }
 		if(mMainWindow == NULL) {
@@ -606,9 +606,13 @@ namespace sora {
 			
 			ulong32 result = pRenderSystem->createWindow(info);
 			if(result) {
+                log_mssg(getVideoInfo().get());
+
                 if(pInput != NULL)
 					pInput->setWindowHandle(result);
-				pMiscTool->setMainWindowHandle(result);
+#ifdef OS_WIN32
+				static_cast<SoraMiscToolWin32*>(pMiscTool)->setMainWindowHandle(result);
+#endif
 				bMainWindowSet = true;
 				mMainWindow = info;
                 mMainWindow->setActive(true);
@@ -692,6 +696,8 @@ namespace sora {
 		}
 		pRenderSystem = renderSystem;
 		bInitialized = true;
+        
+        log_mssg("RenderSystem registered");
 	}
 
 	void SoraCore::registerInput(SoraInput* input) {
@@ -700,6 +706,8 @@ namespace sora {
 		bHasInput = true;
         
         SoraKeyPoll::setQueueInput(input);
+        
+        log_mssg("Input registered");
 	}
 
 	void SoraCore::registerResourceManager(SoraResourceManager* pResourceManager) {
@@ -709,7 +717,7 @@ namespace sora {
 	void SoraCore::registerMiscTool(SoraMiscTool* miscTool) {
 		if(pMiscTool) delete pMiscTool;
 		pMiscTool = miscTool;
-	}
+    }
 
 	void SoraCore::registerPluginManager(SoraPluginManager* pluginManager) {
 		if(pPluginManager) delete pPluginManager;
@@ -728,16 +736,22 @@ namespace sora {
 		}
 		pSoundSystem = ss;
 		pSoundSystem->init();
+        
+        log_mssg("SoundSystem registered");
 	}
 
 	void SoraCore::registerFontManager(SoraFontManager* fontManager) {
 		if(pFontManager) delete pFontManager;
 		pFontManager = fontManager;
+        
+        log_mssg("FontManager registered");
 	}
     
     void SoraCore::registerPhysicWorld(SoraPhysicWorld* physicWorld) {
         if(pPhysicWorld) delete pPhysicWorld;
         pPhysicWorld = physicWorld;
+        
+        log_mssg("PhysicalWorld registered");
     }
     
     SoraRenderSystem* SoraCore::getRenderSystem() const {
@@ -772,7 +786,7 @@ namespace sora {
         return pPhysicWorld;
     }
     
-    SoraResourceFileFinder* SoraCore::getResourceFileFinder() const {
+    SoraFileSystem* SoraCore::getResourceFileFinder() const {
         return pResourceFileFinder;
     }
 
@@ -782,7 +796,7 @@ namespace sora {
 
 	float SoraCore::getDelta() {
 		if(!bFrameSync)
-			return pTimer->getDelta() * mTimeScale;
+			return pTimer->getDelta() * SoraTimer::TimeScale;
 		return 1.f;
 	}
     
@@ -790,12 +804,12 @@ namespace sora {
         return pTimer->getDelta();
     }
 
-	float SoraCore::getTime() {
-		return pTimer->getTime();
+	uint64 SoraCore::getRunningTime() {
+        return g_starttime.elapsed();
 	}
 
 	uint64 SoraCore::getCurrentSystemTime() {
-		return SoraTimestamp::currentTime();
+		return SoraTimestamp::CurrentTime();
 	}
 
 	void SoraCore::setFPS(int32 fps) {
@@ -804,17 +818,17 @@ namespace sora {
 		pTimer->setFPS(fps);
 	}
 
-	int32 SoraCore::getFrameCount() {
-		return pTimer->getFrameCount();
+	uint64 SoraCore::getFrameCount() {
+        return SoraTimer::FrameCount;
 	}
 
 	void SoraCore::setTimeScale(float scale) {
 		SET_ENV_FLOAT("TimeScale", scale);
-		mTimeScale = scale;
+        SoraTimer::TimeScale = scale;
 	}
 
 	float SoraCore::getTimeScale() {
-		return mTimeScale;
+		return SoraTimer::TimeScale;
 	}
     
     void SoraCore::setVerticalSync(bool flag) {
@@ -1341,30 +1355,55 @@ namespace sora {
 		if(!pMiscTool)
 			return 0;
 		
-		pMiscTool->setMainWindowHandle(getMainWindowHandle());
 		return pMiscTool->messageBox((SoraWString)sMssg, (SoraWString)sTitle, iCode);
 	}
 
 	void SoraCore::registerPlugin(SoraPlugin* pPlugin) {
 		pPluginManager->registerPlugin(pPlugin);
+        
+        log_mssg(vamssg("Plugin %s registered", pPlugin->getName().c_str()));
 	}
 
 	SoraPlugin* SoraCore::unistallPlugin(SoraPlugin* pPlugin) {
-		return pPluginManager->unistallPlugin(pPlugin);
+		SoraPlugin* plugin = pPluginManager->unistallPlugin(pPlugin);
+        
+        if(plugin)
+            log_mssg(vamssg("Plugin %s unistalled", pPlugin->getName().c_str()));
+        return plugin;
 	}
 
 	SoraPlugin* SoraCore::unistallPlugin(const SoraString& sPluginName) {
-		return pPluginManager->unistallPlugin(sPluginName);
+		SoraPlugin* plugin = pPluginManager->unistallPlugin(sPluginName);
+        
+        if(plugin)
+            log_mssg(vamssg("Plugin %s unistalled", sPluginName.c_str()));
+        return plugin;
 	}
 
 	SoraPlugin* SoraCore::getPlugin(const SoraString& sPluginName) {
 		return pPluginManager->getPlugin(sPluginName);
 	}
 
-	StringType SoraCore::videoInfo() {
+	StringType SoraCore::getVideoInfo() {
 		sora_assert(bInitialized==true);
 		return pRenderSystem->videoInfo();
 	}
+    
+    uint64 SoraCore::getSystemMemorySize() {
+        return pMiscTool->getSystemMemorySize();
+    }
+    
+    uint32 SoraCore::getCPUSpeed() {
+        return pMiscTool->getProcessorSpeed();
+    }
+    
+    StringType SoraCore::getOSVersion() {
+        return pMiscTool->getOSVersion();
+    }
+    
+    StringType SoraCore::getSoraVersion() {
+        return vamssg("Hoshizora Version %d.%d Rev %d", SORA_VERSION_MAJOR, SORA_VERSION_MINOR, SORA_VERSION_REV);
+    }
 
 	void SoraCore::setRandomSeed(int32 seed) {
 		init_gen_rand(seed);
@@ -1637,7 +1676,7 @@ namespace sora {
     }
     
     uint64 SoraCore::getResourceMemoryUsage() const {
-        return SoraResourceFileFinder::ResourceMemory / 1024;
+        return SoraFileSystem::ResourceMemory / 1024;
     }
     
     void SoraCore::addInputListener(SoraInputListener* listener, int priority) {

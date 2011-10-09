@@ -8,11 +8,12 @@
  */
 
 #include "SoraPluginManager.h"
+#include "SoraPlugin.h"
 
 namespace sora {
 
     SoraPluginManager::~SoraPluginManager() {
-        PluginIterator itPlugin = mPluginMap.begin();
+        PluginMap::iterator itPlugin = mPluginMap.begin();
         while(itPlugin != mPluginMap.end()) {
             SoraPlugin* plugin = itPlugin->second;
             
@@ -35,7 +36,7 @@ namespace sora {
     }
     
     SoraPlugin* SoraPluginManager::unistallPlugin(const SoraString& name) {
-        PluginIterator itPlugin = mPluginMap.find(name);
+        PluginMap::iterator itPlugin = mPluginMap.find(name);
         if(itPlugin != mPluginMap.end()) {
             SoraPlugin* plugin = itPlugin->second;
             
@@ -52,10 +53,23 @@ namespace sora {
         return unistallPlugin(plugin->getName());
     }
     
-    SoraPlugin* SoraPluginManager::getPlugin(const SoraString& name) {
-        PluginIterator itPlugin = mPluginMap.find(name);
+    SoraPlugin* SoraPluginManager::getPlugin(const SoraString& name) const {
+        PluginMap::const_iterator itPlugin = mPluginMap.find(name);
         if(itPlugin != mPluginMap.end())
             return itPlugin->second;
+        return 0;
+    }
+    
+    SoraPluginManager::FuncMap SoraPluginManager::mFuncs;
+    
+    void SoraPluginManager::RegisterFunc(const std::string& funcName, void* func) {
+        mFuncs.insert(std::make_pair(funcName, func));
+    }
+    
+    void* SoraPluginManager::GetFunc(const std::string& name) {
+        FuncMap::const_iterator it = mFuncs.find(name);
+        if(it != mFuncs.end())
+            return it->second;
         return 0;
     }
 

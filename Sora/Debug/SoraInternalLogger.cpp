@@ -12,6 +12,7 @@
 
 #include "SoraEventManager.h"
 #include "SoraEvent.h"
+#include "SoraCore.h"
 
 #ifdef OS_PSP
 #include <pspkernel.h>
@@ -34,6 +35,12 @@ namespace sora {
             mInstance = NULL;
         }
     }
+    
+    SoraInternalLogger::LogMssg::LogMssg(const std::string& log, int32 level) {
+        
+        mLog = vamssg("%.4f: ", ((float)(SoraCore::getRunningTime()) / 1000000)) + log;
+        mLogLevel = level;
+    }
 	
 	SoraInternalLogger::SoraInternalLogger() {
 #ifdef OS_PSP
@@ -44,16 +51,11 @@ namespace sora {
 	SoraInternalLogger::~SoraInternalLogger() {
 	}
 	
-	SoraInternalLogger& SoraInternalLogger::operator<<(SoraString& mssg) {
-		vMssg.push_back(mssg);
+	SoraInternalLogger& SoraInternalLogger::operator<<(const StringType& mssg) {
+		vMssg.push_back(LogMssg(mssg));
 		return *this;
 	}
-	
-	SoraInternalLogger& SoraInternalLogger::operator<<(SoraWString& mssg) {
-		vMssg.push_back(ws2s(mssg));
-		return *this;
-	}
-	
+
 	void SoraInternalLogger::printf(const char* format, ...) {
 		va_list	ArgPtr;
 		char Message[1024] = {0};
@@ -91,17 +93,10 @@ namespace sora {
 #endif
 	}
 	
-	void SoraInternalLogger::log(const std::string& log, int32 logLevel) {
+	void SoraInternalLogger::log(const StringType& log, int32 logLevel) {
 		vMssg.push_back(LogMssg(log, logLevel));
 #ifdef OS_IOS
         ::printf("%s\n", log.c_str());
-#endif
-	}
-	
-	void SoraInternalLogger::log(const std::wstring& log, int32 logLevel) {
-		vMssg.push_back(LogMssg(ws2s(log), logLevel));
-#ifdef OS_IOS
-        ::printf("%s\n", ws2s(log).c_str());
 #endif
 	}
 	
@@ -125,39 +120,22 @@ namespace sora {
 		file.close();
 	}
     
-    void SoraInternalLogger::normal(const std::string& mssg) {
+    void SoraInternalLogger::normal(const StringType& mssg) {
         log(mssg, LOG_LEVEL_NORMAL);
     }
     
-    void SoraInternalLogger::error(const std::string& mssg) {
+    void SoraInternalLogger::error(const StringType& mssg) {
         log(mssg, LOG_LEVEL_ERROR);
     }
     
-    void SoraInternalLogger::warning(const std::string& mssg) {
+    void SoraInternalLogger::warning(const StringType& mssg) {
         log(mssg, LOG_LEVEL_WARNING);
     }
     
-    void SoraInternalLogger::notice(const std::string& mssg) {
+    void SoraInternalLogger::notice(const StringType& mssg) {
         log(mssg, LOG_LEVEL_NOTICE);
     }
     
-    void SoraInternalLogger::normal(const std::wstring& mssg) {
-        log(mssg, LOG_LEVEL_NORMAL);
-    }
-    
-    void SoraInternalLogger::error(const std::wstring& mssg) {
-        log(mssg, LOG_LEVEL_ERROR);
-    }
-    
-    void SoraInternalLogger::warning(const std::wstring& mssg) {
-        log(mssg, LOG_LEVEL_WARNING);
-    }
-    
-    void SoraInternalLogger::notice(const std::wstring& mssg) {
-        log(mssg, LOG_LEVEL_NOTICE);
-    }
-	
-	
 	size_t SoraInternalLogger::logSize() const {
 		return vMssg.size();
 	}

@@ -9,7 +9,7 @@
 #include "SoraSpriteManager.h"
 #include "SoraCore.h"
 #include "SoraSprite.h"
-#include "SoraResourceFileFinder.h"
+#include "SoraFileSystem.h"
 
 namespace sora {
     

@@ -16,7 +16,7 @@
 namespace sora {
     
     class SoraSprite;
-    class SoraResourceFileFinder;
+    class SoraFileSystem;
     
     class SoraSpriteManager: public SoraSingleton<SoraSpriteManager> {
     private:
@@ -30,7 +30,7 @@ namespace sora {
         
     private:
         SoraSprite* mSprite;
-        SoraResourceFileFinder* mResourceFileFinder;
+        SoraFileSystem* mResourceFileFinder;
     };
     
 } // namespace sora

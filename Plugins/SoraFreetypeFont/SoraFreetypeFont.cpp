@@ -49,7 +49,7 @@ namespace sora {
 
 	void FTGlyph::cache(unsigned int idx) {
 		FT_Set_Pixel_Sizes(*face, 0, size);
-		if (!FT_Load_Glyph(*face, idx, FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP)) {
+		if (!FT_Load_Glyph(*face, idx, FT_LOAD_FORCE_AUTOHINT | FT_LOAD_NO_BITMAP)) {
 			FT_GlyphSlot glyph = (*face)->glyph;
 			FT_Bitmap bits;
 			if(glyph->format == ft_glyph_format_outline) {

@@ -20,20 +20,10 @@ namespace sora {
 		friend class SoraCore;
 
 	public:
-		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; nFrameCounter = 0; }
+		SoraWin32Timer() { desiredFPS = SORA_FPS_INFINITE; }
 		void setFPS(int32 fps) { desiredFPS = (float)fps; }
 		float getDelta() { return fDeltaTime; }
 		float getFPS() { return fFPS; }
-		float getTime() { return fTime; }
-		int32 getFrameCount() { return nFrameCounter; }
-		uint64 getCurrentSystemTime() { 
-			LONGLONG  TimePrecision;
-			LARGE_INTEGER Frequency;
-		    QueryPerformanceFrequency(&Frequency);
-			TimePrecision =  Frequency.QuadPart;
-			return GetCurrentSystemTime(); 
-		}
-
 		
 		bool update() { 
 			int bPriorityRaised = 0;
@@ -102,8 +92,6 @@ namespace sora {
 			if(fDeltaTime >= 1.f) 
 				fDeltaTime = 1.f / desiredFPS;
 
-			nFrameCounter++;
-			fTime += fDeltaTime;
 			fFPS = 1.0f / fDeltaTime;
 			return true;
 		}
@@ -111,8 +99,7 @@ namespace sora {
 	private:
 		float desiredFPS;
 		int32 oldTimeStamp;
-		float fDeltaTime, fTime, fFPS;
-		int32 nFrameCounter;
+		float fDeltaTime, fFPS;
 	};
 
 } // namespace sora

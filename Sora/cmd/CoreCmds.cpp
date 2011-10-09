@@ -160,7 +160,7 @@ namespace sora {
 			if(params.size() > 0) {
 				std::string result = "Log have been wrote to ";
 				for(size_t i=0; i<params.size(); ++i) {
-					DebugPtr->writeToFile(params[i].c_str());
+					Logger.writeToFile(params[i].c_str());
 					result += params[i] + ", ";
 				}
 				cev->pushResult(result);

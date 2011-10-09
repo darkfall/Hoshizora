@@ -18,6 +18,7 @@
 #include "SoraTexture.h"
 #include "SoraTimer.h"
 #include "SoraShader.h"
+#include "SoraString.h"
 
 #include <map>
 
@@ -72,7 +73,7 @@ namespace sora {
 		virtual void flush() = 0;
 
 		virtual bool isActive() = 0;
-		virtual SoraWString videoInfo() = 0;
+		virtual StringType videoInfo() = 0;
 
         virtual SoraShaderContext* createShaderContext() = 0;
 		virtual	void attachShaderContext(SoraShaderContext* context) = 0;
