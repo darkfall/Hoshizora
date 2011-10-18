@@ -211,7 +211,7 @@
 
 - (void) update {
     if(initialized)
-        sora::SORA_IOS->update();
+        sora::SoraiOSInitializer::Instance()->update();
 }
 
 - (void)setFramebuffer
@@ -234,10 +234,7 @@
             else
                 glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
             
-            glColor4f(0.f, 0.f, 0.f, 0.f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glViewport(0, 0, framebufferWidth, framebufferHeight);
-        }
+          }
 }
 
 
@@ -266,6 +263,7 @@
             glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
         } 
         success = [context presentRenderbuffer:GL_RENDERBUFFER];
+        
     }
     return success;
 }

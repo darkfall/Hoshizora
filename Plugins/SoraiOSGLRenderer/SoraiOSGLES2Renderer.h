@@ -1,5 +1,5 @@
 /*
- *  SoraiOSGLRenderer.h
+ *  SoraiOSGLES2Renderer.h
  *  Plugin Concept
  *
  *  Created by griffin clare on 1/26/11.
@@ -7,25 +7,28 @@
  *
  */
 
-#ifndef _SORA_IOSGL_RENDERER_H_
-#define _SORA_IOSGL_RENDERER_H_
+#ifndef _SORA_IOSGLES2_RENDERER_H_
+#define _SORA_IOSGLES2_RENDERER_H_
 
 #include "SoraRenderSystem.h"
 #include "SoraiOSDeviceHelper.h"
 
+#include "math/SoraMatrix4.h"
+#include "math/SoraMatrix3.h"
+
 #ifdef OS_IOS
-#include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
 #endif
 
 namespace sora {
     
     class SoraRenderTargetiOSGL;
 
-	class SoraiOSGLRenderer: public SoraRenderSystem {
+	class SoraiOSGLES2Renderer: public SoraRenderSystem {
 	public:
-		SoraiOSGLRenderer();
-		~SoraiOSGLRenderer();
+		SoraiOSGLES2Renderer();
+		~SoraiOSGLES2Renderer();
 		
 		bool update();
 		
@@ -127,6 +130,11 @@ namespace sora {
 		int32 windowWidth;
 		int32 windowHeight;
 		
+        /**
+         * OGL ES2 Shader Param
+         **/
+        SoraShader* mVertexProgram;
+        
 		struct _SoraOGLWindowInfo {
 			float32 x, y, z;
 			float32 dx, dy;
@@ -145,17 +153,22 @@ namespace sora {
 		SoraRenderTargetiOSGL* pCurTarget;
 		
 		GLuint mCurrTexture;
-
 		SoraShaderContext* currShader;
 
 		int iFrameStart;
         
         iOSOrientation mOrientation;
         
+        SoraShaderContext* g_shader;
+        GLuint g_vertexbuffer;
+        GLuint g_elementbuffer;
+                
         int mVertexCount;
-        GLfloat mVertices[384];
-        GLfloat mUVs[256];
-        GLubyte mColors[256];
+        GLfloat mVertices[84];
+        GLfloat mUVs[26];
+        GLubyte mColors[26];
+
+        SoraMatrix4 mUVPMatrix;
 	};
 } // namespace sora
 

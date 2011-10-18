@@ -63,18 +63,23 @@ namespace sora {
             [mMusicTrack playFile:path];
             [path release];
         }
+        
+        publishEvent(SoraPlaybackEvent::Started);
     }
     
     void SoraiOSMusicFile::stop() {
         [mMusicTrack stop];
+        publishEvent(SoraPlaybackEvent::Stopped);
     }
     
     void SoraiOSMusicFile::pause() {
         [mMusicTrack setPaused: true];
+        publishEvent(SoraPlaybackEvent::Paused);
     }
     
     void SoraiOSMusicFile::resume() {
         [mMusicTrack setPaused: false];
+        publishEvent(SoraPlaybackEvent::Resumed);
     }
     
     void SoraiOSMusicFile::setVolume(float32 vol) {

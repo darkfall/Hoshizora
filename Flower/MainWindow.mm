@@ -23,24 +23,21 @@ namespace flower {
     
     void MainWindow::init() {
         mFSManager.defState(new StateMenu, "menu");
-        
-        sora::SoraiOSInitializer::Instance()->setOrientation(sora::ORIENTATION_LANDSCAPE_LEFT);
-        sora::SoraiOSInitializer::Instance()->enableOrientationChange(false);
-        
+            
         sora::SoraiOSInitializer::Instance()->enableAccelerometer(true);
         
-        if(!ThemeController::Instance()->loadConfig(L"ThemeConfig.xml")) {
+        if(!ThemeController::Instance()->loadConfig("ThemeConfig.xml")) {
             sora::SoraCore::Instance()->messageBox("error loading theme confog", "error", MB_OK);
         }
-        if(!ObjectController::Instance()->loadConfig(L"ItemConfig.xml")) {
+        if(!ObjectController::Instance()->loadConfig("ItemConfig.xml")) {
             sora::SoraCore::Instance()->messageBox("error loading item config", "error", MB_OK);
         }
         ThemeController::Instance()->setCurrentTheme("basic");
         
-        ConfigController::LoadConfig(L"config.xml");
-        PlayerController::Instance()->loadConfig(L"player.xml");
+        ConfigController::LoadConfig("config.xml");
+        PlayerController::Instance()->loadConfig("player.xml");
         
-        HudController::Instance()->setFont(L"STHeitiSC-Medium", 20);
+        HudController::Instance()->setFont("STHeitiSC-Medium", 20);
         
         mFSManager.switchToState("menu");
 

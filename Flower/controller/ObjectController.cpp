@@ -88,7 +88,7 @@ namespace flower {
         }
     }
     
-    bool ObjectController::loadConfig(const std::wstring& path) {
+    bool ObjectController::loadConfig(const std::string& path) {
         sora::SoraConfigParser parser;
         if(parser.open(path)) {
             if(parser.toNode("/speedthreshold")) {

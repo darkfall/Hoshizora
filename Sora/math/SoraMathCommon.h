@@ -133,11 +133,16 @@ namespace sora {
     
     template <typename T>
     inline T lerp(const T& t1, const T& t2, float t) {
+        if(t < 0.f) t = 0.f;
+        else if(t > 1.f) t = 1.f;
         return t1 + (t2-t1) * t;
     }
     
     template<typename T>
     inline T slerp(const T& t1, const T& t2, float t) {
+        if(t < 0.f) t = 0.f;
+        else if(t > 1.f) t = 1.f;
+        
         float a = acos(t1 * t2);
         float sina = sin(a);
         return (sin(1-t) * a) / sina * t1 + sin(t * a) / sina * t2;

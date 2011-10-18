@@ -52,8 +52,9 @@ namespace sora {
     bool SoraSpriteSheet::load(const StringType& path) {
         SoraResourceFile data(path);
         if(data.isValid()) {
-            loadFromMemory(data, data.size());
+            return loadFromMemory(data, data.size());
         }
+        return false;
     }
     
     bool SoraSpriteSheet::loadFromMemory(void* data, ulong32 size) {
@@ -84,9 +85,12 @@ namespace sora {
                         }
                         
                     } while(parser.toNextChild());
+                    
+                    return true;
                 }
             }
         }
+        return false;
     }
     
     void SoraSpriteSheet::render(const StringType& tag, float x, float y) {

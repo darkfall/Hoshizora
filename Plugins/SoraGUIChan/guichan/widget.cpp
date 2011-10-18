@@ -782,7 +782,7 @@ namespace gcn
         ModifierIterator iter = mModifiers.begin();
         ModifierIterator end = mModifiers.end();
         
-        for(iter; iter != end; ++iter) {
+        for(; iter != end; ++iter) {
             (*iter)->update(this);
             if((*iter)->isFinished()) {
                 if((*iter)->isAutoRelease()) {

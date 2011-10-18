@@ -79,7 +79,7 @@ namespace sora {
     }
     
     size_t SoraLightWeightEntity::getPropertySize() const {
-        return mHolder.size();
+        return mHolder.getPropertySize();
     }
     
     SoraPropertyBase* SoraLightWeightEntity::removeProperty(const PropertyId& pid, bool release) {

@@ -342,9 +342,9 @@ namespace sora {
         struct Serializer<SoraMatrix3> {
         public:
             static std::string toString(const SoraMatrix3& val) {
-                std::string str = Serializer<float>::toString(val._11()) + "," + Serializer<float>::toString(val._12()) + "," + Serializer<float>::toString(val._13()) + ","
-                                    + Serializer<float>::toString(val._21()) + "," + Serializer<float>::toString(val._22()) + "," + Serializer<float>::toString(val._23()) + ","
-                                    + Serializer<float>::toString(val._31()) + "," + Serializer<float>::toString(val._32()) + "," + Serializer<float>::toString(val._33());
+                std::string str = Serializer<float>::toString(val.c[0][0]) + "," + Serializer<float>::toString(val.c[0][1]) + "," + Serializer<float>::toString(val.c[0][2]) + ","
+                                    + Serializer<float>::toString(val.c[1][0]) + "," + Serializer<float>::toString(val.c[1][1]) + "," + Serializer<float>::toString(val.c[1][2]) + ","
+                                    + Serializer<float>::toString(val.c[2][0]) + "," + Serializer<float>::toString(val.c[2][1]) + "," + Serializer<float>::toString(val.c[2][2]);
                 return str;
             }
             static void fromString(const std::string& val, SoraMatrix3* outValue) {
@@ -353,15 +353,15 @@ namespace sora {
                     SoraStringTokenlizer::iterator it = tokens.begin();
                     
                     float tmp;
-                    Serializer<float>::fromString(*it, &tmp); outValue->_11(tmp); 
-                    Serializer<float>::fromString(*it, &tmp); outValue->_12(tmp); ++it;
-                    Serializer<float>::fromString(*it, &tmp); outValue->_13(tmp); ++it; 
-                    Serializer<float>::fromString(*it, &tmp); outValue->_21(tmp); ++it;
-                    Serializer<float>::fromString(*it, &tmp); outValue->_22(tmp); ++it;
-                    Serializer<float>::fromString(*it, &tmp); outValue->_23(tmp); ++it;
-                    Serializer<float>::fromString(*it, &tmp); outValue->_31(tmp); ++it;
-                    Serializer<float>::fromString(*it, &tmp); outValue->_32(tmp); ++it;
-                    Serializer<float>::fromString(*it, &tmp); outValue->_33(tmp); ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[0][0] = tmp; 
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[0][1] = tmp; ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[0][2] = tmp; ++it; 
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[1][0] = tmp; ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[1][1] = tmp; ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[1][2] = tmp; ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[2][0] = tmp; ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[2][1] = tmp; ++it;
+                    Serializer<float>::fromString(*it, &tmp); outValue->c[2][2] = tmp; ++it;
                 }
             }
             static int getTypeId(const SoraMatrix3& val) {

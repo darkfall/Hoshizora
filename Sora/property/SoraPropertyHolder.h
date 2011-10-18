@@ -48,7 +48,7 @@ namespace sora {
         typedef sora_hash_map<std::string, SoraPropertyBase*> PropertyMap;
         const PropertyMap& getProperties() const;
         
-        size_t size() const;
+        size_t getPropertySize() const;
         
     protected:
         PropertyMap mProperties;
@@ -65,13 +65,6 @@ namespace sora {
         if(ptr->getTypeId() == SoraTypeSerializer::getTypeId<T>())
             return static_cast<SoraProperty<T>*>(ptr);
         return NULL;
-    }
-    
-    // cast using Rtti dynamic_cast
-    template<typename T>
-    inline SoraProperty<T>* PropertyRttiCast(SoraPropertyBase* ptr) {
-        SoraProperty<T>* prop = dynamic_cast<SoraProperty<T>*>(ptr);
-        return prop;
     }
     
     template<typename T>
@@ -185,7 +178,7 @@ namespace sora {
         return mProperties;
     }
     
-    inline size_t SoraPropertyHolder::size() const {
+    inline size_t SoraPropertyHolder::getPropertySize() const {
         return mProperties.size();
     }
 } // namespace sora

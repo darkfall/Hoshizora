@@ -22,7 +22,7 @@ namespace flower {
             delete mCurrentTheme;
     }
     
-    bool ThemeController::loadConfig(const std::wstring& path) {
+    bool ThemeController::loadConfig(const std::string& path) {
         sora::SoraConfigParser parser;
         if(parser.open(path)) {
             if(parser.toNode("/themes")) {
@@ -32,8 +32,8 @@ namespace flower {
                     ThemeConfig config;
                     
                     std::string tag = parser.getString("name");
-                    config.ThemeConfigPath = sora::s2ws(parser.getString("path"));
-                    config.PreviewPath = sora::s2ws(parser.getString("preview"));
+                    config.ThemeConfigPath = (parser.getString("path"));
+                    config.PreviewPath = (parser.getString("preview"));
                     
                     if(!tag.empty() &&
                        !config.ThemeConfigPath.empty() &&

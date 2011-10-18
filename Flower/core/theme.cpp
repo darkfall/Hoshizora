@@ -22,7 +22,7 @@ namespace flower {
         mSprites.clear();
     }
     
-    bool Theme::loadConfig(const std::wstring& path) {
+    bool Theme::loadConfig(const std::string& path) {
         sora::SoraConfigParser parser;
         if(parser.open(path)) {
             if(parser.toNode("/theme")) {
@@ -33,7 +33,7 @@ namespace flower {
                     
                     if(!tag.empty() &&
                        !path.empty()) {
-                        sora::SoraSprite* spr = sora::SoraCore::Instance()->createSprite(sora::s2ws(path));
+                        sora::SoraSprite* spr = sora::SoraCore::Instance()->createSprite(path);
                         if(spr)
                             mSprites.insert(std::make_pair(tag, spr)); 
                     }

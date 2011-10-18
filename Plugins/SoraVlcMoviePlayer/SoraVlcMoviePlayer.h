@@ -50,7 +50,7 @@ namespace sora {
         SoraVlcMoviePlayer();
         ~SoraVlcMoviePlayer();
         
-        bool openMedia(const SoraWString& filePath, const SoraString& dis="RGBA");
+        bool openMedia(const StringType& filePath, const SoraString& dis="RGBA");
         void play();
         void stop();
         void pause();

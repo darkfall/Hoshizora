@@ -34,7 +34,7 @@ namespace flower {
             delete mAIPlayer.mPlayer;
     }
     
-    bool PlayerController::loadConfig(const std::wstring& path) {
+    bool PlayerController::loadConfig(const std::string& path) {
         sora::SoraConfigParser parser;
         if(parser.open(path)) {
             if(parser.toNode("/players")) {

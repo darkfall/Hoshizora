@@ -34,7 +34,7 @@ namespace sora {
         
         if(type == FMOD_CHANNEL_CALLBACKTYPE_END) {
 			if(pMusicFile->isEventPublishEnabled())
-				pMusicFile->publishEvent(SORAPB_EV_PLAY_ENDED);
+				pMusicFile->publishEvent(SoraPlaybackEvent::Ended);
         }
         return FMOD_OK;
     }
@@ -135,7 +135,7 @@ namespace sora {
 			}
 			
             if(FMOD_ERROR_CHECK(result) && mEventPublish) {
-                publishEvent(SORAPB_EV_PLAY_STARTED);
+                publishEvent(SoraPlaybackEvent::Started);
                 
                 // register FMOD Channel Callback to get SOUND_ENDED event
                 pChannel->setUserData((void*)this);
@@ -149,7 +149,7 @@ namespace sora {
         if(pChannel) {
             FMOD_RESULT result = pChannel->stop();
             if(FMOD_ERROR_CHECK(result) && mEventPublish)
-				publishEvent(SORAPB_EV_PLAY_STOPPED);
+				publishEvent(SoraPlaybackEvent::Stopped);
         }
     }
     
@@ -157,7 +157,7 @@ namespace sora {
         if(pChannel) {
             FMOD_RESULT result = pChannel->setPaused(true);
             if(FMOD_ERROR_CHECK(result) && mEventPublish) {
-                publishEvent(SORAPB_EV_PLAY_PAUSED);
+                publishEvent(SoraPlaybackEvent::Resumed);
             }
         }
     }
@@ -166,7 +166,7 @@ namespace sora {
         if(pChannel) {
             FMOD_RESULT result = pChannel->setPaused(false);
             if(FMOD_ERROR_CHECK(result) && mEventPublish) {
-                publishEvent(SORAPB_EV_PLAY_RESUMED);
+                publishEvent(SoraPlaybackEvent::Resumed);
             }
         }
     }
@@ -356,7 +356,7 @@ namespace sora {
 			if(FMOD_ERROR_CHECK(result) && mEventPublish) {
 				
 				
-                publishEvent(SORAPB_EV_PLAY_STARTED);
+                publishEvent(SoraPlaybackEvent::Started);
                 pChannel->setUserData((void*)this);
                 pChannel->setCallback(myChannelCallback);
             }
@@ -367,7 +367,7 @@ namespace sora {
         if(pChannel) {
             FMOD_RESULT result = pChannel->stop();
             if(FMOD_ERROR_CHECK(result)&& mEventPublish) {
-                publishEvent(SORAPB_EV_PLAY_STOPPED);
+                publishEvent(SoraPlaybackEvent::Stopped);
             }
         }
     }

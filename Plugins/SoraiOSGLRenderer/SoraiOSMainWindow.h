@@ -9,13 +9,10 @@
 #ifndef SORA_IOS_MAIN_WINDOW_H_
 #define SORA_IOS_MAIN_WINDOW_H_
 
-#include "SoraCore.h"
 #include "SoraiOSDeviceHelper.h"
-
-#include "SoraiOSFontManager/SoraiOSFontManager.h"
+#include "SoraWindowInfo.h"
 #include "SoraiOSWrapper.h"
-#include "SoraFont.h"
-#include "SoraFileUtility.h"
+
 
 namespace sora {
     

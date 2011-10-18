@@ -31,7 +31,7 @@ namespace flower {
         PlayerController();
         ~PlayerController();
         
-        bool loadConfig(const std::wstring& path);
+        bool loadConfig(const std::string& path);
         
         Player* createPlayer(float x, float y, const std::string& playerId, PlayerType type);
         

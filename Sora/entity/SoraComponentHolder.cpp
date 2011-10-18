@@ -66,7 +66,7 @@ namespace sora {
     SoraComponent* SoraComponentHolder::removeComponent(const SoraComponent* co) {
         ComponentMap::iterator it = mComponents.begin();
         ComponentMap::iterator end = mComponents.end();
-        for(it; it != end; ++it) {
+        for(; it != end; ++it) {
             if(it->second == co) {
                 SoraComponent* co2 = it->second;
                 mComponents.erase(it);

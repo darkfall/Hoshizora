@@ -19,13 +19,19 @@
 #include "SoraiOSFontManager/SoraiOSFontManager.h"
 #include "SoraiOSSoundSystem/SoraiOSSoundSystem.h"
 
+
 namespace sora {
     
     static SoraiOSAppDelegate* g_app_delegate = 0;
 
     void SoraiOSInitializer::SoraiOSInit(bool isOGLES2API, bool multisampling) {
+#ifndef SORA_USE_GLES2
         mRenderSystem = new SoraiOSGLRenderer;
-        SORA->registerRenderSystem(mRenderSystem);
+        SoraCore::Instance()->registerRenderSystem(mRenderSystem);
+#else
+        mRenderSystem = new SoraiOSGLES2Renderer;
+        SoraCore::Instance()->registerRenderSystem(mRenderSystem);
+#endif
         
         sora::setupMultisampling(multisampling);
         g_app_delegate = [[SoraiOSAppDelegate alloc] init];
@@ -37,19 +43,19 @@ namespace sora {
         SoraiOSInit(false, multisampling);
         
         try {
-            SORA->registerFontManager(new sora::SoraiOSFontManager);
-            SORA->registerSoundSystem(new sora::SoraiOSSoundSystem(soundParams));
-            SORA->registerInput(new sora::SoraiOSInput);
-            SORA->registerTimer(new sora::SoraiOSTimer);
+            SoraCore::Ptr->registerFontManager(new sora::SoraiOSFontManager);
+            SoraCore::Ptr->registerSoundSystem(new sora::SoraiOSSoundSystem(soundParams));
+            SoraCore::Ptr->registerInput(new sora::SoraiOSInput);
+            SoraCore::Ptr->registerTimer(new sora::SoraiOSTimer);
             
         } catch(SoraException& e) {
-            SORA->messageBox(e.what(), "Fatal error", MB_OK);
-            SORA->shutDown();
+            SoraCore::Ptr->messageBox(e.what(), "Fatal error", MB_OK);
+            SoraCore::Ptr->shutDown();
         }
                 
         mMainWindow = window;
-        SORA->createWindow(window);
-        SORA->start();
+        SoraCore::Ptr->createWindow(window);
+        SoraCore::Ptr->start();
     }
     
     SoraiOSMainWindow* SoraiOSInitializer::getMainWindow() const {
@@ -80,15 +86,11 @@ namespace sora {
     }
     
     void SoraiOSInitializer::SoraiOSUpdateSystems() {
-        SORA->update();
+        SoraCore::Ptr->update();
     }
     
     void SoraiOSInitializer::SoraiOSShutDown() {
-        SORA->shutDown();
-    }
-    
-    void SoraiOSInitializer::setRenderSystem(SoraiOSGLRenderer* r) {
-        mRenderSystem = r;
+        SoraCore::Ptr->shutDown();
     }
     
     void SoraiOSInitializer::setDeviceUpdateInterval(float interval) {

@@ -31,24 +31,24 @@ namespace sora {
 		return buffer;
 	}	
 	
-	SoraWString appResourcePath() {
-		SoraWString path(appApplicationPath());
-		path += L"/";
+	StringType appResourcePath() {
+		StringType path(appApplicationPath());
+		path += "/";
 		return path;
 	}
 	
-	SoraWString appApplicationPath() {
-		return s2ws([[[NSBundle mainBundle] bundlePath] UTF8String]);
+	StringType appApplicationPath() {
+		return [[[NSBundle mainBundle] bundlePath] UTF8String];
 	}
 	
-	SoraWString appDocumentPath() {
+	StringType appDocumentPath() {
 		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
 		return s2ws(NSString2String(basePath)+"/");
 	}
 	
-	bool appFileExists(const SoraWString& path) {
-		NSString* nsPath = [[NSString alloc] initWithUTF8String:ws2s(path).c_str()];
+	bool appFileExists(const StringType& path) {
+		NSString* nsPath = [[NSString alloc] initWithUTF8String:path.c_str()];
 		return [[NSFileManager defaultManager] fileExistsAtPath:nsPath];
 	}
 	

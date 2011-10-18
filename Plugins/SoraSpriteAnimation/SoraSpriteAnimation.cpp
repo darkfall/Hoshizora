@@ -491,7 +491,7 @@ namespace sora {
     }
     
     void SoraSpriteAnimationPacker::addNodeTex(uint32 nodeId, uint32 tx, uint32 ty, uint32 tw, uint32 th) {
-        if(nodeId >= 0 && nodeId < anmNodes.size()) {
+        if(nodeId < anmNodes.size()) {
             LANM_TEX tex(tx, ty, tw, th);
             anmNodes[nodeId].texList.push_back(tex);
         }

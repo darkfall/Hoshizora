@@ -14,7 +14,7 @@
 namespace sora {
     
     SoraSpriteManager::SoraSpriteManager() {
-        mResourceFileFinder = SoraCore::Instance()->getResourceFileFinder();
+        mResourceFileFinder = SoraCore::Instance()->getFileSystem();
         sora_assert(mResourceFileFinder);
         
         mSprite = new SoraSprite;

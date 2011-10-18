@@ -10,6 +10,7 @@
 #define Sora_iPhone_OALController_h
 
 #include "SoraPlatform.h"
+#include "SoraString.h"
 #include "SoraOALParam.h"
 
 #ifdef OS_IOS

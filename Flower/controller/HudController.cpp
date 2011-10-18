@@ -25,7 +25,7 @@ namespace flower {
         
     }
     
-    void HudController::setFont(const std::wstring& fontName, int32 fontSize) {
+    void HudController::setFont(const std::string& fontName, int32 fontSize) {
         if(mFont)
             sora::SoraCore::Instance()->releaseFont(mFont);
         
@@ -42,7 +42,7 @@ namespace flower {
             Player* localPlayer;
             
             if((localPlayer = PlayerController::Instance()->getLocalPlayer()) != 0)
-                mFont->print(0.f, 20.f, sora::FONT_ALIGNMENT_LEFT, L"Score: %d", localPlayer->getScore());
+                mFont->print(0.f, 20.f, sora::SoraFont::AlignmentLeft, L"Score: %d", localPlayer->getScore());
         }
     }
     

@@ -119,7 +119,7 @@ namespace sora {
         EventList::iterator itEvent = mCurrEvtList->begin();
         EventList::iterator itEnd = mCurrEvtList->end();
         
-        for(itEvent; itEvent != itEnd; ++itEvent) {
+        for(; itEvent != itEnd; ++itEvent) {
             doBroadCasting(*itEnd);
         }
                            

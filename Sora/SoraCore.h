@@ -97,7 +97,7 @@ namespace sora {
         SoraFontManager*        getFontManager() const;
         SoraSoundSystem*        getSoundSystem() const;
         SoraPhysicWorld*        getPhysicWorld() const;
-        SoraFileSystem* getResourceFileFinder() const;
+        SoraFileSystem*         getFileSystem() const;
         
 		void        registerPlugin  (SoraPlugin* pPlugin);
 		SoraPlugin* unistallPlugin  (SoraPlugin* pPlugin);
@@ -354,7 +354,7 @@ namespace sora {
 
 		SoraMiscTool*			pMiscTool;
 		SoraRenderSystem*		pRenderSystem;
-		SoraFileSystem*	pResourceFileFinder;
+		SoraFileSystem*         pFileSystem;
 		SoraInput*				pInput;
 		SoraPluginManager*		pPluginManager;
 		SoraTimer*				pTimer;
@@ -402,6 +402,9 @@ namespace sora {
     
     typedef SoraCore::Feature SoraCoreFeature;
         
+    
+    SORA_STATIC_RUN_CODE_I(sora_start_core, SoraCore::Instance());
+    
 } // namespace sora
 
 #endif

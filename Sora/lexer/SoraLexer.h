@@ -238,7 +238,7 @@ namespace sora {
         
         SoraLexerOperators operators;
         
-        unsigned short usErrorCode;
+        short usErrorCode;
     };
 
 }

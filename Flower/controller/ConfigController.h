@@ -16,8 +16,8 @@ namespace flower {
     
     class ConfigController {
     public:
-        static bool LoadConfig(const std::wstring& path);
-        static bool WriteConfig(const std::wstring& path);
+        static bool LoadConfig(const std::string& path);
+        static bool WriteConfig(const std::string& path);
         
         static float SEVolume;
         static float BGMVolume;

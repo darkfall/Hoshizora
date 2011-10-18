@@ -190,7 +190,7 @@ namespace sora {
 					
                     CmdHistory* his = &mHistory[i];
 					std::vector<std::wstring>::iterator it = his->mResults.begin();
-                    for(it; it != his->mResults.end(); ++it) {
+                    for(; it != his->mResults.end(); ++it) {
                         mFont->setColor(mResultColor);
                         mFont->render(x, y, SoraFont::AlignmentLeft, it->c_str());
                         y += mFont->getStringHeight(it->c_str());
@@ -361,7 +361,7 @@ namespace sora {
 		if(mFont) {
 			if(history.mResults.size() != 0) {
                 std::vector<std::wstring>::iterator it = history.mResults.begin();
-                for(it; it != history.mResults.end(); ++it) 
+                for(; it != history.mResults.end(); ++it) 
                     mCurrHeight += (int32)mFont->getStringHeight(it->c_str());
             }
 		}

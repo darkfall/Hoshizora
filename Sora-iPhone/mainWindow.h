@@ -33,7 +33,7 @@ public:
 	}
 	
 	virtual bool renderFunc() {
-		sora::SORA->beginScene();
+		sora::SoraCore::Ptr->beginScene();
         pBG->render(0.f, 0.f);
 
 		sora::GCN_GLOBAL->gcnLogic();
@@ -41,21 +41,21 @@ public:
 		sora::GCN_GLOBAL->gcnDraw();
         
 		if(pFont)
-            pFont->print(0.f, getWindowHeight()-20, sora::FONT_ALIGNMENT_LEFT, L"FPS: %.2f", sora::SORA->getFPS());
-		sora::SORA->endScene();
+            pFont->print(0.f, getWindowHeight()-20, sora::SoraFont::AlignmentLeft, L"FPS: %.2f", sora::SoraCore::Ptr->getFPS());
+		sora::SoraCore::Ptr->endScene();
 		
 		return false;
 	}
 	
 	void init() {
-		sora::SORA->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource");
+		sora::SoraCore::Ptr->loadResourcePack(sora::SoraFileUtility::getApplicationPath()+L"data.rfResource");
 		
-        pBG = sora::SORA->createSprite(L"background1.png");
+        pBG = sora::SoraCore::Ptr->createSprite(L"background1.png");
 
 		sora::GCN_GLOBAL->initGUIChan(L"STHeitiJ-Medium", 20);
 		sora::GCN_GLOBAL->createTop();
 		
-		pFont = sora::SORA->createFont(L"STHeitiJ-Medium", 20);
+		pFont = sora::SoraCore::Ptr->createFont(L"STHeitiJ-Medium", 20);
 		
 		gcn::SelectableContainer* sc = new gcn::SelectableContainer;
 		

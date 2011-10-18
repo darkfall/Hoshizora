@@ -26,12 +26,10 @@ namespace sora {
 		if (infologLength > 0) {
 			infoLog = (char *)malloc(infologLength);
 			glGetProgramInfoLog(mProgram, infologLength, &charsWritten, infoLog);
-			DebugPtr->log(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
+			log_error(vamssg("SoraGLSLShader: %s\n", infoLog));
 			free(infoLog);
 		}
-		
-		mContext = NULL;
-	}
+    }
 	
 	void SoraGLSLShader::printShaderError() {
 		int infologLength = 0;
@@ -43,7 +41,7 @@ namespace sora {
 		if (infologLength > 0) {
 			infoLog = (char *)malloc(infologLength);
 			glGetShaderInfoLog(mShader, infologLength, &charsWritten, infoLog);
-			DebugPtr->log(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
+			log_error(vamssg("SoraGLSLShader: %s\n", infoLog));
 			free(infoLog);
 		}
 	}
@@ -56,11 +54,11 @@ namespace sora {
 		mTexture1 = 0;
 	}
 	
-	bool SoraGLSLShader::loadShader(const SoraWString& file, const SoraString& entry, int32 _type) {
+	bool SoraGLSLShader::loadShader(const StringType& file, const SoraString& entry, int32 _type) {
 		assert(mProgram != 0);
         mType = _type;
 
-		if(mType == FRAGMENT_SHADER) 
+		if(mType == SoraShader::FragmentShader) 
 			mShader = glCreateShader(GL_FRAGMENT_SHADER);
 		else
 			mShader = glCreateShader(GL_VERTEX_SHADER);
@@ -72,7 +70,7 @@ namespace sora {
 			return false;
 		}
 		
-		SoraResourceFileAuto data(file);
+		SoraResourceFile data(file);
 		if(data.isValid()) {
 			const char* cdata = static_cast<const char*>(data);
 			glShaderSource(mShader, 1, &cdata, NULL);
@@ -89,6 +87,37 @@ namespace sora {
 		}
 		return true;
 	}
+    
+    bool SoraGLSLShader::loadShaderFromMem(const char* data, const SoraString& entry, int32 _type) {
+		assert(mProgram != 0);
+        mType = _type;
+        
+		if(mType == SoraShader::FragmentShader) 
+			mShader = glCreateShader(GL_FRAGMENT_SHADER);
+		else
+			mShader = glCreateShader(GL_VERTEX_SHADER);
+		
+		
+		if(mShader == 0) {			
+			THROW_SORA_EXCEPTION(RuntimeException, "Error creating glsl shader");
+			mType = 0;
+			return false;
+		}
+		
+		glShaderSource(mShader, 1, (const GLchar**)data, NULL);
+        glCompileShader(mShader);
+			
+        int success;
+        glGetShaderiv(mShader, GL_COMPILE_STATUS, &success);
+        if (success == 0) {
+            printShaderError();
+            mType = 0;
+            
+            return false;
+        }
+        
+		return true;
+	}
 	
 	SoraGLSLShader::~SoraGLSLShader() {
 		if(mShader != 0)
@@ -99,6 +128,10 @@ namespace sora {
 		mTexture1Name = decalName;
 		mTexture1 = ((SoraTexture*)tex)->mTextureID;
 	}
+    
+    GLuint SoraGLSLShader::getUniformLocaltion(const char* name) {
+        return glGetUniformLocation(mProgram, name);
+    }
 	
 	bool SoraGLSLShader::setParameterfv(const char* name, float32* val, uint32 size) {
 		if(mType == 0)
@@ -112,7 +145,7 @@ namespace sora {
 		
 		GLuint var = glGetUniformLocation(mProgram, name);
 		if(var == 0) {
-			printProgramError();
+			printShaderError();
 			return false;
 		}
 		
@@ -127,9 +160,6 @@ namespace sora {
 				glUniform1fv(var, static_cast<GLint>(size), val);
 				break;
 		}
-		
-		if(requestedShaderUse)
-			mContext->detachShaderList();
 		
 		return true;
 	}
@@ -146,7 +176,7 @@ namespace sora {
 		
 		GLuint var = glGetUniformLocation(mProgram, name);
 		if(var == 0) {
-			printProgramError();
+			printShaderError();
 			return false;
 		}
 		
@@ -159,9 +189,6 @@ namespace sora {
 				glUniform1iv(var, static_cast<GLint>(size), val);
 				break;
 		}
-		
-		if(requestedShaderUse)
-			mContext->detachShaderList();
 		
 		return true;
 	}
@@ -178,14 +205,12 @@ namespace sora {
 		
 		GLuint var = glGetUniformLocation(mProgram, name);
 		if(var == 0) {
-			printProgramError();
+			printShaderError();
 			return false;
 		}
 		
-		glGetUniformfv(mProgram, var, val);
+		glGetUniformfv(mShader, var, val);
 		
-		if(requestedShaderUse)
-			mContext->detachShaderList();
         return glGetError() == GL_NO_ERROR;
 	}
 	
@@ -201,14 +226,12 @@ namespace sora {
 		
 		GLuint var = glGetUniformLocation(mProgram, name);
 		if(var == 0) {
-			printProgramError();
+			printShaderError();
 			return false;
 		}
 		
-		glGetUniformiv(mProgram, var, val);
+		glGetUniformiv(mShader, var, val);
 		
-		if(requestedShaderUse)
-			mContext->detachShaderList();
         return glGetError() == GL_NO_ERROR;
 	}
 	
@@ -232,6 +255,8 @@ namespace sora {
 	
 	SoraGLSLShaderContext::SoraGLSLShaderContext() {
 		mProgram = glCreateProgram();
+        mLinked = false;
+        mAttached = false;
 	}
 	
 	SoraGLSLShaderContext::~SoraGLSLShaderContext() {
@@ -239,7 +264,7 @@ namespace sora {
 			glDeleteProgram(mProgram);
 	}
 
-	SoraShader* SoraGLSLShaderContext::createShader(const SoraWString& file, const SoraString& entry, int32 type) {
+	SoraShader* SoraGLSLShaderContext::createShader(const StringType& file, const SoraString& entry, int32 type) {
 		if(!mProgram)
 			return NULL;
 		
@@ -249,34 +274,31 @@ namespace sora {
         shader->loadShader(file, entry, type);
         return shader;
 	}
+    
+    SoraShader* SoraGLSLShaderContext::createShaderFromMem(const char* data, const SoraString& entry, int32 type) {
+        if(!mProgram)
+			return NULL;
+		
+		SoraGLSLShader* shader = new SoraGLSLShader();
+		shader->mProgram = mProgram;
+		shader->mContext = this;
+        shader->loadShaderFromMem(data, entry, type);
+        return shader;
+    }
 	
 	bool SoraGLSLShaderContext::attachShaderList() {
         if(!mProgram)
             return false;
         
-		SoraShaderContext::attachShaderList();
-		
-		glLinkProgram(mProgram);
-		glUseProgram(mProgram);
-        
-        int success;
-        glGetShaderiv(mProgram, GL_COMPILE_STATUS, &success);
-        if (success == 0) {
-            int infologLength = 0;
-            int charsWritten  = 0;
-            char *infoLog;
+		if(!mLinked) {
+            SoraShaderContext::attachShaderList();
             
-            glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &infologLength);
-            
-            if (infologLength > 0) {
-                infoLog = (char *)malloc(infologLength);
-                glGetProgramInfoLog(mProgram, infologLength, &charsWritten, infoLog);
-                DebugPtr->log(vamssg("%s\n", infoLog), LOG_LEVEL_ERROR);
-                free(infoLog);
-            }
+            glLinkProgram(mProgram);
         }
         
-		mAttached = true;
+		glUseProgram(mProgram);
+        
+        mAttached = true;
         return glGetError() == GL_NO_ERROR;
 	}
 	

@@ -27,7 +27,7 @@
 
 - (void)awakeFromNib
 {
-    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
     if (!aContext) {
         aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
@@ -49,7 +49,7 @@
     self.displayLink = nil;
 
 	// initialize SORA base systems
-	sora::SORA_IOS->SoraiOSStart(new flower::MainWindow);
+	sora::SoraiOSInitializer::Instance()->SoraiOSStart(new flower::MainWindow);
 }
 
 - (void)dealloc
@@ -147,9 +147,9 @@
 
 - (void)drawFrame
 {
-	if(sora::SORA_IOS->update()) {
+	if(sora::SoraiOSInitializer::Instance()->update()) {
 		[(EAGLView *)self.view setFramebuffer];
-		sora::SORA_IOS->SoraiOSUpdateSystems();
+		sora::SoraiOSInitializer::Instance()->SoraiOSUpdateSystems();
         
     
 		[(EAGLView *)self.view presentFramebuffer];

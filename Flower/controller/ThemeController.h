@@ -25,15 +25,15 @@ namespace flower {
         ThemeController();
         ~ThemeController();
         
-        bool loadConfig(const std::wstring& path);
+        bool loadConfig(const std::string& path);
         
         bool setCurrentTheme(const std::string& tag);
         
         sora::SoraSprite* getSprite(const std::string& tag);
         
         struct ThemeConfig {
-            std::wstring ThemeConfigPath;
-            std::wstring PreviewPath;
+            std::string ThemeConfigPath;
+            std::string PreviewPath;
         };
         typedef std::map<std::string, ThemeConfig> ThemeMap;
 

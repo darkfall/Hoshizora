@@ -19,7 +19,7 @@ namespace flower {
     public:
         ~Theme();
         
-        bool loadConfig(const std::wstring& path);
+        bool loadConfig(const std::string& path);
         
         sora::SoraSprite* get(const std::string& tag);
         

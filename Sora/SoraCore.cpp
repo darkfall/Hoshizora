@@ -187,10 +187,10 @@ namespace sora {
 		SoraInternalLogger::Instance();
         
         pPluginManager = new SoraPluginManager;
-		pResourceFileFinder = new SoraFileSystem;
-		pResourceFileFinder->attachResourceManager(new SoraFolderResourceManager);
+		pFileSystem = new SoraFileSystem;
+		pFileSystem->attachResourceManager(new SoraFolderResourceManager);
 #ifdef SORA_ZIP_PACK_SUPPORT
-        pResourceFileFinder->attachResourceManager(new SoraZipResourceManager);
+        pFileSystem->attachResourceManager(new SoraZipResourceManager);
 #endif
         
 		setRandomSeed(rand());
@@ -556,7 +556,7 @@ namespace sora {
 
 	void SoraCore::shutDown() {        
 		//SoraTextureMap::Instance()->Destroy();
-        delete pResourceFileFinder;
+        delete pFileSystem;
 
         if(mMainWindow)
             delete mMainWindow;
@@ -711,7 +711,7 @@ namespace sora {
 	}
 
 	void SoraCore::registerResourceManager(SoraResourceManager* pResourceManager) {
-		pResourceFileFinder->attachResourceManager(pResourceManager);
+		pFileSystem->attachResourceManager(pResourceManager);
 	}
 
 	void SoraCore::registerMiscTool(SoraMiscTool* miscTool) {
@@ -786,8 +786,8 @@ namespace sora {
         return pPhysicWorld;
     }
     
-    SoraFileSystem* SoraCore::getResourceFileFinder() const {
-        return pResourceFileFinder;
+    SoraFileSystem* SoraCore::getFileSystem() const {
+        return pFileSystem;
     }
 
 	float SoraCore::getFPS() {
@@ -837,27 +837,27 @@ namespace sora {
     }
 
 	SoraResourceHandle SoraCore::loadResourcePack(const StringType& file) {
-		return pResourceFileFinder->loadResourcePack(file);
+		return pFileSystem->loadResourcePack(file);
 	}
 
 	void SoraCore::detachResourcePack(SoraResourceHandle handle) {
-		pResourceFileFinder->detachResourcePack(handle);
+		pFileSystem->detachResourcePack(handle);
 	}
 
 	void* SoraCore::getResourceFile(const StringType& sfile, ulong32& size) {
-		return pResourceFileFinder->getResourceFile(sfile, size);
+		return pFileSystem->getResourceFile(sfile, size);
 	}
 
 	void SoraCore::freeResourceFile(void* p) {
-		return pResourceFileFinder->freeResourceFile(p);
+		return pFileSystem->freeResourceFile(p);
 	}
 
 	void* SoraCore::readResourceFile(const StringType& sfile, ulong32 pos, ulong32 size) {
-		return pResourceFileFinder->readResourceFile(sfile, pos, size);
+		return pFileSystem->readResourceFile(sfile, pos, size);
 	}
 
 	ulong32 SoraCore::getResourceFileSize(const StringType& file) {
-		return pResourceFileFinder->getResourceFileSize(file);
+		return pFileSystem->getResourceFileSize(file);
 	}
     
     SoraShaderContext* SoraCore::createShaderContext() {
@@ -1501,7 +1501,7 @@ namespace sora {
 	}
 	
 	void SoraCore::enumFilesInFolder(std::vector<StringType>& cont, const StringType& folder) {
-		pResourceFileFinder->enumFiles(cont, folder);
+		pFileSystem->enumFiles(cont, folder);
 	}
 
 	void SoraCore::setFrameSync(bool flag) {

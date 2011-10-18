@@ -53,11 +53,9 @@ namespace sora  {
         std::string mName;
     };
     
-    template<typename T, class S=SoraTypeSerializer>
+    template<typename T>
     class SoraProperty: public SoraPropertyBase {
-    public:
-        typedef S Serializer;
-        
+    public:        
         SoraProperty():
         mIsDefault(true) {
             
@@ -98,31 +96,31 @@ namespace sora  {
         }
         
         std::string toString() const {
-            return Serializer::toString(mData.mValue);
+            return SoraTypeSerializer::toString(mData.mValue);
         }
         
         void setFromString(const std::string& str) {
             mIsDefault = false;
-            Serializer::fromString(str, &mData.mValue);
+            SoraTypeSerializer::fromString(str, &mData.mValue);
         }
         
         int getTypeId() const {
-            return Serializer::getTypeId(mData.mValue);
+            return SoraTypeSerializer::getTypeId(mData.mValue);
         }
         
-        SoraProperty<T, S> operator=(const SoraProperty<T, S>& rhs);
-        SoraProperty<T, S> operator=(const T& rhs);
+        SoraProperty<T> operator=(const SoraProperty<T>& rhs);
+        SoraProperty<T> operator=(const T& rhs);
         
-        bool operator==(const SoraProperty<T, S>& rhs);
+        bool operator==(const SoraProperty<T>& rhs);
         bool operator==(const T& rhs);
         
-        bool operator!=(const SoraProperty<T, S>& rhs);
+        bool operator!=(const SoraProperty<T>& rhs);
         bool operator!=(const T& rhs);
         
-        bool operator>(const SoraProperty<T, S>& rhs);
+        bool operator>(const SoraProperty<T>& rhs);
         bool operator>(const T& rhs);
         
-        bool operator<(const SoraProperty<T, S>& rhs);
+        bool operator<(const SoraProperty<T>& rhs);
         bool operator<(const T& rhs);
         
         operator T() const {
@@ -134,55 +132,55 @@ namespace sora  {
         property::ValueHolder<T> mData;
     };
     
-    template<typename T, class S>
-    inline SoraProperty<T, S> SoraProperty<T, S>::operator=(const SoraProperty<T, S>& rhs) {
+    template<typename T>
+    inline SoraProperty<T> SoraProperty<T>::operator=(const SoraProperty<T>& rhs) {
         mData = rhs.mData.clone();
         return *this;
     }
     
-    template<typename T, class S>
-    inline SoraProperty<T, S> SoraProperty<T, S>::operator=(const T& rhs) {
+    template<typename T>
+    inline SoraProperty<T> SoraProperty<T>::operator=(const T& rhs) {
         set(rhs);
         return *this;
     }
     
-    template<typename T, class S>
-    inline bool SoraProperty<T, S>::operator==(const SoraProperty<T, S>& rhs) {
+    template<typename T>
+    inline bool SoraProperty<T>::operator==(const SoraProperty<T>& rhs) {
         return mData.mValue == rhs.mData.mValue;
     }
     
-    template<typename T, class S>
-    inline bool SoraProperty<T, S>::operator==(const T& rhs) {
+    template<typename T>
+    inline bool SoraProperty<T>::operator==(const T& rhs) {
         return mData.mValue == rhs;
     }
     
-    template<typename T, class S>
-    inline bool SoraProperty<T, S>::operator!=(const SoraProperty<T, S>& rhs) {
+    template<typename T>
+    inline bool SoraProperty<T>::operator!=(const SoraProperty<T>& rhs) {
         return mData.mValue != rhs.mData.mValue;
     }
     
-    template<typename T, class S>
-    inline bool SoraProperty<T, S>::operator!=(const T& rhs) {
+    template<typename T>
+    inline bool SoraProperty<T>::operator!=(const T& rhs) {
         return mData.mValue != rhs;
     }
     
-    template<typename T, class S>
-    inline bool SoraProperty<T, S>::operator>(const SoraProperty<T, S>& rhs) {
+    template<typename T>
+    inline bool SoraProperty<T>::operator>(const SoraProperty<T>& rhs) {
         return mData.mValue > rhs.mData.mValue;
     }
    
-    template<typename T, class S>
-    inline bool SoraProperty<T, S>::operator>(const T& rhs) {
+    template<typename T>
+    inline bool SoraProperty<T>::operator>(const T& rhs) {
         return mData.mValue > rhs.mValue;
     }
     
-    template<typename T, class S>
-    inline bool SoraProperty<T, S>::operator<(const SoraProperty<T, S>& rhs) {
+    template<typename T>
+    inline bool SoraProperty<T>::operator<(const SoraProperty<T>& rhs) {
         return mData.mValue < rhs.mData.mValue;
     }
  
-    template<typename T, class S>
-    inline bool SoraProperty<T, S>::operator<(const T& rhs) {
+    template<typename T>
+    inline bool SoraProperty<T>::operator<(const T& rhs) {
         return mData.mValue < rhs;
     }
     

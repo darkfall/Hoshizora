@@ -8,6 +8,7 @@
 
 #include "SoraResourceManager.h"
 #include "SoraCore.h"
+#include "SoraFileSystem.h"
 
 namespace sora {
     
@@ -34,7 +35,7 @@ namespace sora {
 #ifdef SORA_ENABLE_MULTI_THREAD
     
     void SoraResourceManager::LoadResourceFileAsync(const StringType& file, const AsyncNotification& notification, void* puserdata) {
-        SoraCore::Instance()->getResourceFileFinder()->loadResourceFileAsync(file, notification, puserdata);
+        SoraCore::Instance()->getFileSystem()->loadResourceFileAsync(file, notification, puserdata);
     }
     
 #endif

@@ -18,24 +18,26 @@ namespace sora {
         Base event class for playback events, such as a music, a soundeffect or a movie
      */
     
-    enum SoraPlayBackEvent {
-        SORAPB_EV_NULL,
-        SORAPB_EV_PLAY_STARTED,
-        SORAPB_EV_PLAY_ENDED,
-        SORAPB_EV_PLAY_PAUSED,
-        SORAPB_EV_PLAY_RESUMED,
-        SORAPB_EV_PLAY_STOPPED,
-    };
-    
     class SORA_API SoraPlaybackEvent: public SoraEvent {
     public:
-        SoraPlaybackEvent(): eventType(SORAPB_EV_NULL) {}
-        SoraPlaybackEvent(SoraPlayBackEvent event): eventType(event) {
+        enum SoraPlayBackEventType {
+            Null,
+            Started,
+            Ended,
+            Paused,
+            Resumed,
+            Stopped,
+        };
+        
+        SoraPlaybackEvent(): eventType(SoraPlaybackEvent::Null) {}
+        SoraPlaybackEvent(SoraPlayBackEventType event): eventType(event) {
             _setEventName(event);
         }
         
-        SoraPlayBackEvent getEventType() const { return eventType; }
-        void setEventType(SoraPlayBackEvent event) { 
+        SoraPlayBackEventType getEventType() const { 
+            return eventType;
+        }
+        void setEventType(SoraPlayBackEventType event) { 
             eventType = event;
             _setEventName(event);
         }
@@ -45,16 +47,16 @@ namespace sora {
 #endif
 		
     private:
-        void _setEventName(SoraPlayBackEvent event) {
+        void _setEventName(SoraPlayBackEventType event) {
             switch(event) {
-                case SORAPB_EV_PLAY_STARTED: setName(STR_ID_PLAY_STARTED); break;
-                case SORAPB_EV_PLAY_ENDED: setName(STR_ID_PLAY_ENDED); break;
-                case SORAPB_EV_PLAY_PAUSED: setName(STR_ID_PLAY_PAUSED); break;
-                case SORAPB_EV_PLAY_RESUMED: setName(STR_ID_PLAY_RESUMED); break;
-                case SORAPB_EV_PLAY_STOPPED: setName(STR_ID_PLAY_STOPPED); break;
+                case SoraPlaybackEvent::Started: setName(STR_ID_PLAY_STARTED); break;
+                case SoraPlaybackEvent::Ended: setName(STR_ID_PLAY_ENDED); break;
+                case SoraPlaybackEvent::Paused: setName(STR_ID_PLAY_PAUSED); break;
+                case SoraPlaybackEvent::Resumed: setName(STR_ID_PLAY_RESUMED); break;
+                case SoraPlaybackEvent::Stopped: setName(STR_ID_PLAY_STOPPED); break;
             }
         }
-        SoraPlayBackEvent eventType;
+        SoraPlayBackEventType eventType;
     };
     
     class SORA_API SoraPlaybackEventHandler: public SoraEventHandler {
@@ -77,7 +79,7 @@ namespace sora {
 		void enableEventPublish(bool flag) { mEventPublish = flag; }
 		bool isEventPublishEnabled() const { return mEventPublish; }
         
-        void publishEvent(SoraPlayBackEvent eventType) {
+        void publishEvent(SoraPlaybackEvent::SoraPlayBackEventType eventType) {
             event->setEventType(eventType);
 			event->setSource(this);
             if(pEventHandler)

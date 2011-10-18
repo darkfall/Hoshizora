@@ -14,9 +14,14 @@
 #include "Debug/SoraInternalLogger.h"
 
 #include "SoraiOSGLRenderer.h"
+#include "SoraiOSGLES2Renderer.h"
+
 #include "SoraiOSInput.h"
 
 #include "SoraiOSSoundSystem/SoraOALParam.h"
+
+#define SORA_USE_GLES2
+
 
 namespace sora {
     
@@ -34,7 +39,6 @@ namespace sora {
 		
         void SoraiOSStart(SoraiOSMainWindow* window, const SoraOALParameters& soundParams=SoraOALParameters(), bool multisampling=false);
 		void setTimer(SoraTimer* timer);
-		void setRenderSystem(SoraiOSGLRenderer* sys);
         
         bool update();
         void SoraiOSUpdateSystems();
@@ -65,12 +69,14 @@ namespace sora {
 		SoraiOSInput* input;
     
         SoraiOSMainWindow* mMainWindow;
+#ifndef SORA_USE_GLES2
         SoraiOSGLRenderer* mRenderSystem;
+#else
+        SoraiOSGLES2Renderer* mRenderSystem;
+#endif
         
         float mDeviceUpdateInterval;
 	};
-
-	static SoraiOSInitializer* SORA_IOS = SoraiOSInitializer::Instance();
 	
 } // namespace sora
 

@@ -18,7 +18,7 @@ namespace sora {
 	StringType appApplicationPath();
 	StringType appDocumentPath();
 	
-	bool appFileExists(const SoraWString& path);
+	bool appFileExists(const StringType& path);
 } // namespace sora
 
 #endif

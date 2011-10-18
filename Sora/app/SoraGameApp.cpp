@@ -116,7 +116,7 @@ namespace sora {
             static_cast<SoraiOSMainWindow*>(mDef.Window)->didChangeStatusBarOrientation(newOrientation, oldOrientation);
     }
      
-#endif // SORA_IOS 
+#endif // SoraiOSInitializer::Instance() 
     
     SoraGameApp::SoraGameApp(const SoraGameAppDef& def):
     mWindow(0),
@@ -141,7 +141,7 @@ namespace sora {
             mFSMManager.switchToState(initState);
             SoraKeyPoll::AddInputListener(static_cast<SoraGameState*>(state));
             
-            SoraFileSystem* resourceFinder = SoraCore::Ptr->getResourceFileFinder();
+            SoraFileSystem* resourceFinder = SoraCore::Ptr->getFileSystem();
             for(int i=0; i<mAppDef.ResourceScripts.size(); ++i) {
                 resourceFinder->loadResourceScript(mAppDef.ResourceScripts[i]);
             }

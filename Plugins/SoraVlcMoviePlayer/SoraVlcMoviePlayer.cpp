@@ -8,10 +8,8 @@
 
 #include "SoraVlcMoviePlayer.h"
 #include "SoraException.h"
-
-#ifndef OS_OSX
-#include <memory.h>
-#endif
+#include "SoraPlaybackEvent.h"
+#include "SoraLogger.h"
 
 namespace sora {
     
@@ -55,29 +53,29 @@ namespace sora {
             case libvlc_MediaPlayerStopped: 
                 ctx->bStopped = true; 
                 ctx->bPlaying = false; 
-                ctx->pPlayer->publishEvent(SORAPB_EV_PLAY_STOPPED);
+                ctx->pPlayer->publishEvent(SoraPlaybackEvent::Stopped);
                 break;
             case libvlc_MediaPlayerPaused: 
                 ctx->bPaused = true; 
                 ctx->bPlaying = false;
-                ctx->pPlayer->publishEvent(SORAPB_EV_PLAY_PAUSED);
+                ctx->pPlayer->publishEvent(SoraPlaybackEvent::Paused);
                 break;
             case libvlc_MediaPlayerPlaying:  {
-                ctx->pPlayer->publishEvent(ctx->bPaused?SORAPB_EV_PLAY_RESUMED:SORAPB_EV_PLAY_STARTED);
+                ctx->pPlayer->publishEvent(ctx->bPaused?SoraPlaybackEvent::Resumed:SoraPlaybackEvent::Started);
                 ctx->bPlaying = true;
                 break;
 			}
             case libvlc_MediaPlayerEndReached: 
                 ctx->bPlaying = false; 
                 ctx->bStopped = true; 
-                ctx->pPlayer->publishEvent(SORAPB_EV_PLAY_ENDED);
+                ctx->pPlayer->publishEvent(SoraPlaybackEvent::Ended);
                 break;
 			case libvlc_MediaPlayerPositionChanged: {
 				uint32 w = 0, h;
 				if(libvlc_video_get_size(ctx->mp, 0, &w, &h) == -1) {
 					libvlc_media_player_stop(ctx->mp);
 					ctx->internal = 3;
-					SORA->log("error getting video dimensions, exit");
+					log_error("SoraVlcMoviePlayer: error getting video dimensions, exit");
 				}
 				ctx->pPlayer->setMediaInfo(w, h);
 				ctx->bChanged = true;
@@ -111,23 +109,23 @@ namespace sora {
             libvlc_release(vlcInstance);
     }
     
-    bool SoraVlcMoviePlayer::openMedia(const SoraWString& filePath, const SoraString& dis) {
+    bool SoraVlcMoviePlayer::openMedia(const StringType& filePath, const SoraString& dis) {
         if(!vlcInstance)
             return false;
         
         if(media) { libvlc_media_release(media); }
-        media = libvlc_media_new_path(vlcInstance, ws2s(filePath).c_str());
+        media = libvlc_media_new_path(vlcInstance, filePath.c_str());
 		if(mp) {
 			libvlc_media_player_release(mp);
 		}
 		mp = libvlc_media_player_new_from_media(media);
 		if(!mp) {
-			SORA->log("Error creating vlc media player");
+			log_error("SoraVlcMoviePlayer: Error creating vlc media player");
 			return false;
 		}
 		evtManager = libvlc_media_player_event_manager(mp);
         if(!evtManager) {
-			SORA->log("Error creating event manager for the media player, event cannot not work");
+			log_error("SoraVlcMoviePlayer: Error creating event manager for the media player, event cannot not work");
 			return false;
 		}
 		else {

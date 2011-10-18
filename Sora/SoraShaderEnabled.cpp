@@ -27,7 +27,7 @@ namespace sora {
     }
 
     void SoraShaderEnabledObject::attachShaderContext(const StringType& tag) {
-        SoraShaderContext* context = SoraCore::Ptr->getResourceFileFinder()->getShaderResource(tag);
+        SoraShaderContext* context = SoraCore::Ptr->getFileSystem()->getShaderResource(tag);
         if(context)
             attachShaderContext(context);
     }
@@ -137,11 +137,13 @@ namespace sora {
     SoraShader* SoraShaderEnabledObject::getFragmentShader() const {
         if(mShaderContext)
             return mShaderContext->getFragmentShader();
+        return 0;
     }
     
     SoraShader* SoraShaderEnabledObject::getVertexShader() const {
         if(mShaderContext)
             return mShaderContext->getVertexShader();
+        return 0;
     }
     
 } // namespace sora

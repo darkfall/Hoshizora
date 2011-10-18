@@ -52,8 +52,9 @@ namespace sora {
 		SoraGLSLShaderContext();
 		~SoraGLSLShaderContext();
 		
-        SoraShader* createShader(const SoraWString& file, const SoraString& entry, int32 type);
-		
+        SoraShader* createShader(const StringType& file, const SoraString& entry, int32 type);
+		SoraShader* createShaderFromMem(const char* data, const SoraString& entry, int32 type);
+        
 		virtual bool attachShaderList();
 		virtual bool detachShaderList();
 		
@@ -64,6 +65,7 @@ namespace sora {
 		GLuint mProgram;
 		
 		bool mAttached;
+        bool mLinked;
 	};
 	
 	class SoraGLSLShader: public SoraShader {
@@ -73,8 +75,11 @@ namespace sora {
 		SoraGLSLShader();
 		~SoraGLSLShader();
 		
-		bool loadShader(const SoraWString& file, const SoraString& entry, int32 type);
-		
+		bool loadShader(const StringType& file, const SoraString& entry, int32 type);
+        bool loadShaderFromMem(const char* data, const SoraString& entry, int32 type);
+
+        friend class SoraiOSGLES2Renderer;
+        
 	public:
 		
 		void setTexture(const SoraString& decalName, ulong32 tex);
@@ -83,6 +88,7 @@ namespace sora {
         bool getParameterfv(const char* name, float32* val, uint32 size);
         bool getParameteriv(const char* name, int32* val, uint32 size);
         
+        GLuint getUniformLocaltion(const char* name);
         
 	private:
 		bool attach();

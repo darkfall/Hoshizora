@@ -18,7 +18,7 @@ namespace flower {
     float ConfigController::AccelerometerSensetivity = 0.3f;
     ControlMode ConfigController::CurrentControlMode = CM_ACCELEROMETER;
     
-    bool ConfigController::LoadConfig(const std::wstring& path) {
+    bool ConfigController::LoadConfig(const std::string& path) {
         sora::SoraConfigParser parser;
         if(parser.open(path)) {
             if(parser.toNode("/config"));
@@ -40,7 +40,7 @@ namespace flower {
         return false;
     }
     
-    bool ConfigController::WriteConfig(const std::wstring& path) {
+    bool ConfigController::WriteConfig(const std::string& path) {
         sora::SoraConfigParser parser;
         
         if(parser.open(path)) {

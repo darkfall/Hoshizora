@@ -13,7 +13,7 @@
 #include "SoraSprite.h"
 #include "SoraCore.h"
 
-#include "timer/SoraSimpleTimer.h"
+#include "timer/SoraSimpleTimerManager.h"
 
 namespace flower {
     
@@ -29,6 +29,8 @@ namespace flower {
         sora::SimpleTimerPtr mTimer;
         sora::SimpleTimerPtr mTimer2;
         sora::SoraSprite* mBg;
+        sora::SoraSprite* mFBO;
+        sora::SoraTargetHandle target;
     };
     
 } // namespace flower

@@ -358,7 +358,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
         ofstream file(ws2s(sFile).c_str());
         if(file.is_open()) {
             vector<INISectorValue>::iterator ppb = publicSec.value.begin();
-            for(ppb; ppb != publicSec.value.end(); ++ppb)
+            for(; ppb != publicSec.value.end(); ++ppb)
                 file<<ppb->key<<"="<<ppb->value<<endl;
             
             vector<INISector>::iterator p = sec.begin();

@@ -33,7 +33,7 @@ namespace flower {
         void update(float dt);
         void render();
         
-        bool loadConfig(const std::wstring& path);
+        bool loadConfig(const std::string& path);
         
         void clear();
         

@@ -24,9 +24,7 @@ namespace sora {
     public:
         SoraiOSTimer():
         mDt(0.f),
-        mTime(0.f),
         mFPS(0.f),
-        mFrameCount(0),
         mRTime(0.f),
         mRFPS(60),
         mTFPS(0) {
@@ -45,27 +43,13 @@ namespace sora {
             return mDt;
         }
 		
-        float32 getTime() {
-            return mTime;
-        }
-        
-		int32 getFrameCount() {
-            return mFrameCount;
-        }
-		
-        uint64 getCurrentSystemTime() {
-            return SoraTimestamp::currentTime();
-        }
-		
 		bool update() {
             SoraTimestamp::TimeDiff diff = mTimestamp.elapsed();
             
-            mDt = (float)diff / SoraTimestamp::resolution();
+            mDt = (float)diff / SoraTimestamp::Resolution();
             if(mDt != 0.f) {
                 mFPS = 1.f / mDt;
             }
-            mTime += mDt;
-            ++mFrameCount;
             
             mRTime += mDt;
             mTFPS++;
@@ -83,12 +67,10 @@ namespace sora {
         SoraTimestamp mTimestamp;
 
         float mDt;
-        float mTime;
         float mRTime;
         float mFPS;
         int32 mTFPS;
         int32 mRFPS;
-        int32 mFrameCount;
     };
     
     

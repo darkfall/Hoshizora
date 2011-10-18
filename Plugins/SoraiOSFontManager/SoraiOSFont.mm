@@ -21,7 +21,7 @@ namespace sora {
 			[tex2D release];
 		}
 		if(tex) {
-			SORA->releaseTexture(tex);
+            SoraCore::Ptr->releaseTexture(tex);
 		}
 	}
     

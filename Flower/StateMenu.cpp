@@ -33,9 +33,11 @@ namespace flower {
         mTimer2 = sora::CreateSimpleTimer(timerFunc2);
         mTimer2->start(3.f, 0, 0.f);
         
-        mBg = sora::SoraCore::Instance()->createSprite(L"bg.png");
-        
+        mBg = sora::SoraCore::Instance()->createSprite("bg.png");
         PlayerController::Instance()->createPlayer(240.f, 300.f, "TestPlayer", PT_LOCAL_PLAYER);
+        
+        target = sora::SoraCore::Instance()->createTarget(320, 480);
+        mFBO = new sora::SoraSprite(sora::SoraCore::Ptr->getTargetTexture(target));
     }
     
     void StateMenu::onLeave() {
@@ -49,15 +51,16 @@ namespace flower {
     
     void StateMenu::onRender() {
         
-        sora::SoraCore::Instance()->beginScene(0);
+        sora::SoraCore::Instance()->beginScene(0xFFFF0000);
         mBg->render();
         
-        ObjectController::Instance()->render();
-        PlayerController::Instance()->render();
+     //   ObjectController::Instance()->render();
+      //  PlayerController::Instance()->render();
         
-        HudController::Instance()->render();
+     //   HudController::Instance()->render();
         
         sora::SoraCore::Instance()->endScene();
+        
     }
     
 } // namespace flower

@@ -94,26 +94,27 @@ namespace sora {
 		return Message;
 	}
 	
+    SORA_STATIC_RUN_CODE_I(sora_start_logger, SoraInternalLogger::Instance());
 	static SoraInternalLogger& Logger = *SoraInternalLogger::Instance();
     
     inline void log_mssg(const StringType& log, int32 level=LOG_LEVEL_NORMAL) {
-        Logger.log(log, level);
+        SoraInternalLogger::Instance()->log(log, level);
     }
     
     inline void log_error(const StringType& log) {
-        Logger.error(log);
+        SoraInternalLogger::Instance()->error(log);
     }
     
     inline void log_warning(const StringType& log) {
-        Logger.warning(log);
+        SoraInternalLogger::Instance()->warning(log);
     }
     
     inline void log_notice(const StringType& log) {
-        Logger.notice(log);
+        SoraInternalLogger::Instance()->notice(log);
     }
     
     inline void log_normal(const StringType& log) {
-        Logger.normal(log);
+        SoraInternalLogger::Instance()->normal(log);
     }
 	
 } // namespace sora

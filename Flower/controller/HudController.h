@@ -22,7 +22,7 @@ namespace flower {
         HudController();
         ~HudController();
         
-        void setFont(const std::wstring& fontName, int32 fontSize);
+        void setFont(const std::string& fontName, int32 fontSize);
         sora::SoraFont* getFont() const;
         
         void render();
