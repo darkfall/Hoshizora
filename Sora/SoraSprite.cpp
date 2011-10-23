@@ -402,7 +402,7 @@ namespace sora {
 
 	int32 SoraSprite::getTextureHeight(bool bOriginal) const {
 		if(mQuad.tex) 
-            return bOriginal? mQuad.tex->mOriginalWidth: mQuad.tex->mTextureHeight;
+            return bOriginal? mQuad.tex->mOriginalHeight: mQuad.tex->mTextureHeight;
 		return 0;
 	}
 

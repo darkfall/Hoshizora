@@ -88,6 +88,8 @@ void msetCommands(sora::SoraConsoleEvent* evt) {
     }
 }
 
+#include "SoraGraphicAlgorithm.h"
+
 SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_iteration,set_max_size,set_iteration_increment,set_cr,set_cg,set_cb");
 
 sora::SoraPhysicBody* body;
@@ -103,6 +105,7 @@ public:
         
         mBg.render();
         mBg2.render();
+        
         
         sora::SoraRect r = mBg.getPhysicBody()->getBoundingBox();
         sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
@@ -120,6 +123,12 @@ public:
                 
         mShape.render();
         
+        
+        
+        sc1.setScale(2.5, 2.5);
+        sc1.render(0.f, 0.f);
+        
+        sc2.render(0.f, 300.f);
         
         sora::SoraGameApp::EndScene();
     }
@@ -185,7 +194,16 @@ public:
     
     void onEnter() {
         sora::SoraCore::Instance()->registerPhysicWorld(new sora::SoraBox2dPhysicWorld(0.f, 1.f, true));
-
+        
+        
+        
+        sc1.setTexture(sora::SoraTexture::LoadFromFile("giftest-1 (dragged).png"));
+        sc2.setTexture(sora::SoraTexture::CreateEmpty(sc1.getTextureWidth(true)*2.5, sc1.getTextureHeight(true)*2.5));
+        
+        sora::SoraGraphicAlgorithm::scale(sc2.getTexture(), &sc1);
+      //  sc2.setTexture(sora::SoraTexture::LoadFromFile("l.jpg"));
+       // sc2.setScale(0.25, 0.25);
+        
         mBg.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
         mBg.setColor(0xFF00FF00);
         
@@ -291,6 +309,8 @@ private:
     sora::SoraShape mShape;
     
     sora::SoraShader* mShader;
+    sora::SoraSprite sc1;
+    sora::SoraSprite sc2;
 };
 
 

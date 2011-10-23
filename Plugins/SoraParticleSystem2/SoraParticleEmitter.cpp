@@ -12,7 +12,7 @@
 namespace sora {
     
     namespace particle {
-        ParticleEmitter::ParticleEmitter(SoraLightWeightEntity* ent):
+        ParticleEmitter::ParticleEmitter(SoraEntity* ent):
         SoraComponent(ent), 
         mSprite(0),
         mInternalSprite(false),

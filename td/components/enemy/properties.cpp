@@ -11,7 +11,7 @@
 
 namespace atd {
     
-    Property::Property(sora::SoraLightWeightEntity* owner):
+    Property::Property(sora::SoraEntity* owner):
     SoraComponent(owner, false),
     mHealth(0),
     mDefense(0) { }

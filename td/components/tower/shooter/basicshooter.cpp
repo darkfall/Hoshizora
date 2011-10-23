@@ -37,7 +37,7 @@
 
 namespace atd {
     
-    BasicShooter::BasicShooter(SoraLightWeightEntity* owner, const std::string& bulletType):
+    BasicShooter::BasicShooter(SoraEntity* owner, const std::string& bulletType):
     SoraComponent(owner, false),
     mObject(0),
     mBulletType(bulletType),

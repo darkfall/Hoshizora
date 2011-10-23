@@ -19,7 +19,7 @@ namespace sora {
         
         class CircleEmitter: public ParticleEmitter {
         public:
-            CircleEmitter(SoraLightWeightEntity* ent, int mode = MODE_ALL);
+            CircleEmitter(SoraEntity* ent, int mode = MODE_ALL);
             
             enum {
                 // emit a circle at a time

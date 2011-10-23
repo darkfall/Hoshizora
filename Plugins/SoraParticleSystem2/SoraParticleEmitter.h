@@ -24,7 +24,7 @@ namespace sora {
         using namespace sora;
         
         struct ParticleEmitter: SoraComponent {
-            ParticleEmitter(SoraLightWeightEntity* ent);
+            ParticleEmitter(SoraEntity* ent);
             
             void setSprite(const SoraWString& path);
             void setSprite(SoraSprite* spr);

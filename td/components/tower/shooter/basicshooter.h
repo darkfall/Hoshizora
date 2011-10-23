@@ -49,7 +49,7 @@ namespace atd {
         SORA_DEF_COMPONENT(BasicShooter);
         typedef std::list<Bullet*> BulletCont;
                 
-        BasicShooter(SoraLightWeightEntity* owner, const std::string& bulletType=SID_BASIC_BULLET);
+        BasicShooter(SoraEntity* owner, const std::string& bulletType=SID_BASIC_BULLET);
 
         virtual void shootBullet();
         
