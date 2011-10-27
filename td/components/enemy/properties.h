@@ -30,7 +30,7 @@
 #define HTL_health_h
 
 #include "entity/SoraComponent.h"
-#include "entity/SoraLightWeightEntity.h"
+#include "entity/SoraEntity.h"
 #include "base/constants.h"
 
 namespace atd{
@@ -39,7 +39,7 @@ namespace atd{
     public:
         SORA_DEF_COMPONENT(Property);
         
-        Property(sora::SoraLightWeightEntity* owner);
+        Property(sora::SoraEntity* owner);
         
         int getHealth() const;
         void setHealth(int health);

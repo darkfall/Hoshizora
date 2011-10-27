@@ -10,8 +10,10 @@
 #define Sora_SoraComponent_h
 
 #include "prerequisites.h"
+#include "SoraEntity.h"
+
 #include "factory/SoraFactory.h"
-#include "SoraLightWeightEntity.h"
+#include "property/SoraPropertyHolder.h"
 
 namespace sora {
     
@@ -33,7 +35,7 @@ namespace sora {
         return name; \
     }
         
-    class SORA_API SoraComponent {
+    class SORA_API SoraComponent: public SoraPropertyHolder {
     public:
         /**
          * When adding a Heavy weight component in Component Holder
@@ -41,7 +43,7 @@ namespace sora {
          * Otherwise only the component itself would be informed of the existence
          * of other components
          **/
-        SoraComponent(SoraLightWeightEntity* owner, bool heavyWeight=true):
+        SoraComponent(SoraEntity* owner, bool heavyWeight=true):
         mHeavyWeight(heavyWeight),
         mPropertyNoClassName(false),
         mOwner(0) {
@@ -50,11 +52,11 @@ namespace sora {
                 
         virtual ~SoraComponent() {}
         
-        SoraLightWeightEntity* getOwner() const {
+        SoraEntity* getOwner() const {
             return mOwner;
         }
         
-        void setOwner(SoraLightWeightEntity* entity) {
+        void setOwner(SoraEntity* entity) {
             mOwner = entity;
             onSetOwner(entity);
         }
@@ -123,33 +125,16 @@ namespace sora {
          **/
         virtual void onRender() { }
         
-        virtual void onSetOwner(SoraLightWeightEntity* entity) { }
-        
-        template<typename T>
-        void addProperty(const std::string& name, const T& val);
-        
-        SoraPropertyBase* getProperty(const std::string& prop) const;
-        
+        virtual void onSetOwner(SoraEntity* entity) { }
+   
     private:
         bool mHeavyWeight;
         bool mPropertyNoClassName;
-        SoraLightWeightEntity* mOwner;
+        SoraEntity* mOwner;
     };
     
-    template<typename T>
-    void SoraComponent::addProperty(const std::string& name, const T& val) {
-        if(mOwner != 0) {
-            if(mPropertyNoClassName) {
-                mOwner->addProperty(MakeProperty(name, val));
-            } else {
-                mOwner->addProperty(MakeProperty(getName()+"."+name, val));
-            }
-        }
-        else 
-            THROW_SORA_EXCEPTION(RuntimeException, "caught component without owner");
-    }
     
-    typedef SoraAbstractFactory<SoraComponent, SoraComponent*(SoraLightWeightEntity*)> SoraComponentFactory;
+    typedef SoraAbstractFactory<SoraComponent, SoraComponent*(SoraEntity*)> SoraComponentFactory;
     
     template<typename T>
     static void RegisterComponent(const SoraString& name, const T& fn) {
@@ -161,7 +146,7 @@ namespace sora {
         SoraComponentFactory::Instance()->reg_ctor<T>(T::GetName());
     }
     
-    static SoraComponent* CreateComponent(const SoraString& name, SoraLightWeightEntity* owner) {
+    static SoraComponent* CreateComponent(const SoraString& name, SoraEntity* owner) {
         return SoraComponentFactory::Instance()->createInstance(name, owner);
     }
     

@@ -6,9 +6,6 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#ifndef SoraPreprocessor_h
-#define SoraPreprocessor_h
-
 #include "SoraPreDeclare.h"
 
 #define SORA_REPEAT_1_0(m, d)
@@ -75,6 +72,14 @@
 #define SORA_BOOL_10 1
 #define SORA_BOOL_11 1
 #define SORA_BOOL_12 1
+#define SORA_BOOL_13 1
+#define SORA_BOOL_14 1
+#define SORA_BOOL_15 1
+#define SORA_BOOL_16 1
+#define SORA_BOOL_17 1
+#define SORA_BOOL_18 1
+#define SORA_BOOL_19 1
+#define SORA_BOOL_20 1
 
 #define SORA_COMMA() ,
 #define SORA_EMPTY() 
@@ -101,5 +106,38 @@
 #define SORA_CAT(a, b) SORA_CAT_I(a, b)
 #define SORA_CAT_I(a, b) a##b
 
+#define SORA_PP_DEC_0 0
+#define SORA_PP_DEC_1 0
+#define SORA_PP_DEC_2 1
+#define SORA_PP_DEC_3 2
+#define SORA_PP_DEC_4 3
+#define SORA_PP_DEC_5 4
+#define SORA_PP_DEC_6 5
+#define SORA_PP_DEC_7 6
+#define SORA_PP_DEC_8 7
+#define SORA_PP_DEC_9 8
+#define SORA_PP_DEC_10 9
+#define SORA_PP_DEC_11 10
+#define SORA_PP_DEC_12 11
+#define SORA_PP_DEC_13 12
+#define SORA_PP_DEC_14 13
+#define SORA_PP_DEC_15 14
+#define SORA_PP_DEC_16 15
+#define SORA_PP_DEC_17 16
+#define SORA_PP_DEC_18 17
+#define SORA_PP_DEC_19 18
+#define SORA_PP_DEC_20 19
+#define SORA_PP_DEC_21 20
+#define SORA_PP_DEC_22 21
+#define SORA_PP_DEC_23 22
+#define SORA_PP_DEC_24 23
+#define SORA_PP_DEC_25 24
+#define SORA_PP_DEC_26 25
+#define SORA_PP_DEC_27 26
+#define SORA_PP_DEC_28 27
+#define SORA_PP_DEC_29 28
+#define SORA_PP_DEC_30 29
 
-#endif
+
+
+

@@ -22,6 +22,7 @@
 #include "property/SoraDynRTTIClass.h"
 
 #include "scripting/SoraScriptVMHolder.h"
+
 #include "message/SoraMessageEvent.h"
 
 namespace sora {

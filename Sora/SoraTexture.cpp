@@ -61,6 +61,7 @@ namespace sora {
     }
     
     int32 SoraTexture::GetOriginalHeight(SoraTextureHandle handle) {
+        SoraTexture* tex = (SoraTexture*)handle;
         return ((SoraTexture*)handle)->mOriginalHeight;
     }
     

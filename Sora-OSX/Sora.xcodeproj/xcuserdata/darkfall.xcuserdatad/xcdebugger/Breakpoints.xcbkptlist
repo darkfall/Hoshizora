@@ -42,7 +42,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "201"
          endingLineNumber = "201"
+<<<<<<< HEAD
          landmarkName = "onMouseDragged(sora::SoraMouseEvent&amp; from, sora::SoraMouseEvent&amp; to)"
+=======
+         landmarkName = "onEnter()"
+>>>>>>> Sora4
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
