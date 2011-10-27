@@ -14,7 +14,7 @@
 
 namespace sora {
     
-    class SoraVector4 {
+    class SORA_API SoraVector4 {
     public:
         float x, y, z, w;
         
@@ -36,18 +36,25 @@ namespace sora {
         z( v.z ),
         w( 1.0f ) { }
         
+        void set(float _x, float _y, float _z, float _w) {
+            this->x = _x;
+            this->y = _y;
+            this->z = _z;
+            this->w = _w;
+        }
+        
         SoraVector4 operator+(const SoraVector4 &v) const {
-            return SoraVector4(x + v.x, 
-                               y + v.y, 
-                               z + v.z, 
-                               w + v.w);
+            return SoraVector4(this->x + v.x, 
+                               this->y + v.y, 
+                               this->z + v.z, 
+                               this->w + v.w);
         }
         
         SoraVector4 operator*(const float f) const {
-            return SoraVector4(x * f, 
-                               y * f, 
-                               z * f, 
-                               w * f);
+            return SoraVector4(this->x * f, 
+                               this->y * f, 
+                               this->z * f, 
+                               this->w * f);
         }
     };
     

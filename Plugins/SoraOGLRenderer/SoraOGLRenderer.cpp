@@ -41,7 +41,7 @@
 #pragma comment(lib, "glfw.lib")
 #endif
 
-const uint32 MAX_VERTEX_BUFFER = 9192;
+const uint32 MAX_VERTEX_BUFFER = 512;
 
 static int mVertexCount = 0;
 static GLfloat mVertices[MAX_VERTEX_BUFFER*3];
@@ -104,18 +104,21 @@ namespace sora{
         glEnable(GL_SCISSOR_TEST);
         //glDepthMask(GL_FALSE);
 
- //       glEnable(GL_CULL_FACE);
-//		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-//		glEnable(GL_COLOR_MATERIAL);
+        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+		glEnable(GL_COLOR_MATERIAL);
 
-     //   InitPerspective(60, (float)_oglWindowInfo.width / _oglWindowInfo.height, 0.f, 1.f);
+        InitPerspective(60, (float)_oglWindowInfo.width / _oglWindowInfo.height, 0.f, 1.f);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
 
 		glDisable(GL_DITHER);
-		glDisable(GL_FOG);
+        glDisable(GL_FOG);
+        
 		glDisable(GL_LIGHTING);
 		glDisable(GL_CULL_FACE);
-		glDisable(GL_TEXTURE_2D); 
+//		glDisable(GL_TEXTURE_2D); 
+        
+        glEnable(GL_SMOOTH);
+        glEnable(GL_LINE_SMOOTH);
         
 		SoraString info("OpenGL Version=");
 		info += (char*)glGetString(GL_VERSION);
@@ -146,7 +149,7 @@ namespace sora{
 		glLoadIdentity();
 		//Creating an orthoscopic view matrix going from -1 -> 1 in each
 		//dimension on the screen (x, y, z).
-		glOrtho(0.f, w, h, 0.f, 1.f, -1.f);
+		glOrtho(0.f, w, h, 0.f, 500.f, -500.f);
 	}
 
 	void SoraOGLRenderer::applyTransform() {
@@ -331,6 +334,9 @@ namespace sora{
         if(glfwGetWindowParam(GLFW_FSAA_SAMPLES) != FSAASamples) {
             THROW_SORA_EXCEPTION(SystemException, vamssg("Error creating window with FSAA sample = %d", FSAASamples));
         }
+        
+        if(FSAASamples != 0)
+            glEnable(GL_MULTISAMPLE_ARB);
         
 		glfwSetWindowTitle(windowInfo->getWindowName().c_str());
 		if(windowInfo->getWindowPosX() != 0.f && windowInfo->getWindowPosY() != 0.f)
@@ -686,7 +692,7 @@ namespace sora{
         }
 		_glSetBlendMode(quad.blend);
 		CurDrawMode = GL_TRIANGLES;
-
+        
 		//TODO: insert code here
 		GLfloat verteces[18] = {
 			quad.v[0].x, quad.v[0].y, quad.v[0].z,
@@ -696,7 +702,6 @@ namespace sora{
 			quad.v[3].x, quad.v[3].y, quad.v[3].z,
 			quad.v[0].x, quad.v[0].y, quad.v[0].z,
             quad.v[2].x, quad.v[2].y, quad.v[2].z,
-
 		};
 
 		GLfloat texCoords[12] = {
@@ -769,12 +774,6 @@ namespace sora{
             glfwSwapInterval(0);
     }
 
-    void SoraOGLRenderer::setViewPoint(float x, float y, float z) {
-        _oglWindowInfo.x = x;
-        _oglWindowInfo.y = y;
-        _oglWindowInfo.z = z;
-    }
-
 	void SoraOGLRenderer::setTransform(float x, float y, float dx, float dy, float rot, float hscale, float vscale) {
 		_oglWindowInfo.x		=	x;
 		_oglWindowInfo.y		=	y;
@@ -787,6 +786,20 @@ namespace sora{
         flush();
         applyTransform();
 	}
+    
+    void SoraOGLRenderer::setTransformMatrix(const SoraMatrix4& matrix) {
+        glMatrixMode(GL_MODELVIEW);
+    
+   //     glLoadIdentity();
+        glMultMatrixf(&matrix.x[0]);
+    }
+    
+    SoraMatrix4 SoraOGLRenderer::getTransformMatrix() const {
+        glMatrixMode(GL_MODELVIEW);
+        float matrix[16];
+        glGetFloatv(GL_MODELVIEW_MATRIX, &matrix[0]);
+        return SoraMatrix4(matrix);
+    }
 
 	ulong32 SoraOGLRenderer::createTarget(int width, int height, bool zbuffer) {
 		SoraRenderTargetOG* t = new SoraRenderTargetOG(width, height, zbuffer);
@@ -886,11 +899,7 @@ namespace sora{
         // multisampling
 #ifndef OS_WIN32
         if(extension == SORA_EXTENSION_FSAA) {
-            if(state) {
-                glEnable(GL_MULTISAMPLE);
-            } else {
-                glDisable(GL_MULTISAMPLE);
-            }
+        
         }
 #endif // OS_WIN32
     }

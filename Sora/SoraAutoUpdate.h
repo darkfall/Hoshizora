@@ -12,11 +12,12 @@
 /**
  * Classes that will be updated each frame
  **/
+#include "SoraPlatform.h"
 #include <list>
 
 namespace sora {
 
-    class SoraAutoUpdate {
+    class SORA_API SoraAutoUpdate {
     public:
         SoraAutoUpdate() {
             mObjects.push_back(this);

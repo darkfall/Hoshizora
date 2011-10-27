@@ -31,7 +31,7 @@ namespace sora {
     class SoraResourceFile;
     class SoraSpriteSheet;
     	
-	class SoraFileSystem {
+	class SORA_API SoraFileSystem {
     private:
         SoraFileSystem();
 		~SoraFileSystem();
@@ -126,7 +126,7 @@ namespace sora {
         
         template<class C>
         struct ReleasePolicy {
-            static void release(C* ptr) {
+            static void Release(C* ptr) {
                 sora_free(static_cast<void*>(ptr));
             }
         };

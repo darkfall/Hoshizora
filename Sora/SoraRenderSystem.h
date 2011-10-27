@@ -20,6 +20,8 @@
 #include "SoraShader.h"
 #include "SoraString.h"
 
+#include "math/SoraMatrix4.h"
+
 #include <map>
 
 namespace sora {
@@ -64,6 +66,8 @@ namespace sora {
         
 		virtual void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0) = 0;
 		virtual void setTransform(float x=0.f, float y=0.f, float dx=0.f, float dy=0.f, float rot=0.f, float hscale=0.f, float vscale=0.f) = 0;
+        virtual void setTransformMatrix(const SoraMatrix4& matrix) = 0;
+        virtual SoraMatrix4 getTransformMatrix() const = 0;
         
 		virtual void shutdown() = 0;
 		virtual ulong32 getMainWindowHandle() = 0;

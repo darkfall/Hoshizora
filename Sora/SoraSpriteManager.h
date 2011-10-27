@@ -18,7 +18,7 @@ namespace sora {
     class SoraSprite;
     class SoraFileSystem;
     
-    class SoraSpriteManager: public SoraSingleton<SoraSpriteManager> {
+    class SORA_API SoraSpriteManager: public SoraSingleton<SoraSpriteManager> {
     private:
         SoraSpriteManager();
         

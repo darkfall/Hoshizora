@@ -114,7 +114,7 @@ namespace sora {
     
     template<>
     struct ShaderReleasePolicy<SoraShader> {
-        static void release(SoraShader* shader) {
+        static void Release(SoraShader* shader) {
             if(shader)
                 shader->release();
         }

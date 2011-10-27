@@ -13,7 +13,7 @@
 
 namespace sora {
     
-    class SoraGlobalMessageRouter {
+    class SORA_API SoraGlobalMessageRouter {
     public:
         static SoraGlobalMessageRouter* Instance();
         

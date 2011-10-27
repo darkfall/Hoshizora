@@ -65,6 +65,7 @@ namespace sora {
             bool MessageBoxErrorPost;
             bool SeperateSoundSystemThread;
             bool DebugRender;
+            bool ExternalLoop;
         };
         
         void init(const Feature& param = Feature());
@@ -369,6 +370,7 @@ namespace sora {
 		bool bPluginDetection;
         bool bSeperateSoundSystemThread;
 		bool bDebugRender;
+        bool bExternalLoop;
         
 		bool bPaused;
 		bool bPauseRender;
