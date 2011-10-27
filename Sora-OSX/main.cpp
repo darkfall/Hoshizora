@@ -36,6 +36,8 @@
 #include "physics/SoraPhysicShape.h"
 #include "physics/SoraPhysicBody.h"
 
+#include "SoraRenderSystem.h"
+
 #include "SoraSpriteManager.h"
 
 float lx, ly, rx, ry;
@@ -101,8 +103,18 @@ public:
     void onRender() {
         sora::SoraGameApp::BeginScene();
         
+        
+        
+        sora::SoraMatrix4 myView = sora::SoraMatrix4::RotMat(0.f, 0.f, 0.5f);
+     //   myView.translate(100.f, 0.f, 0.f);
+     //   myView.rotate(0.f, 0.5f, 0.f);
+        
+        sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
+        
+        
         mBg.render();
         mBg2.render();
+        
         
         sora::SoraRect r = mBg.getPhysicBody()->getBoundingBox();
         sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
@@ -111,6 +123,16 @@ public:
         r = mBg2.getPhysicBody()->getBoundingBox();
         sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
                                               r.x2, r.y2, 0xFFFF0000);
+        
+
+        
+        sora::SoraMatrix4 matrix = sora::SoraCore::Ptr->getRenderSystem()->getTransformMatrix();
+        for(int i=0; i<16; ++i) {
+            printf("%.2f ", matrix.x[i]);
+            if((i+1) % 4 == 0)
+                printf("\n");
+        }
+        printf("\n");
         
         mFont->render(0.f, 0.f, L"|#00FFFF|Hello |#FF0000|World! |#CDCDCD|Sora ~ |#FFDEAD|Chan~");
         
@@ -292,10 +314,14 @@ private:
     
     sora::SoraShader* mShader;
 };
-
+#include "SoraRenderSystemExtension.h"
 
 int main(int argc, char* argv[]) {    
         
+    sora::SoraCore::Ptr->enableRenderSystemExtension(sora::SORA_EXTENSION_FSAA);
+    
+    sora::SoraCore::Ptr->setRenderSystemExtensionParam(sora::SORA_EXTENSION_FSAA, 4);
+
     sora::SoraGameAppDef def("config.xml");
     sora::SoraGameApp app(def);
     

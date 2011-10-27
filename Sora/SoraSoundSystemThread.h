@@ -15,7 +15,7 @@ namespace sora {
     
     class SoraSoundSystem;
     
-    class SoraSoundSystemThread {
+    class SORA_API SoraSoundSystemThread {
         SoraSoundSystemThread():mCond(mMutex), mExit(false) { }
         ~SoraSoundSystemThread();
         

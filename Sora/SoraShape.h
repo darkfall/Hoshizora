@@ -27,7 +27,7 @@ namespace sora {
      *   and adapt a texture to render
      **/
     
-    class SoraShape: public SoraMovable {
+    class SORA_API SoraShape: public SoraMovable {
     public:
         SoraShape(SoraTextureHandle texture=0, int32 mode=SORA_TRIANGLES_FAN);
         ~SoraShape();

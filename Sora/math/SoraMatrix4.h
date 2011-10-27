@@ -15,7 +15,7 @@
 
 namespace sora {
     
-    class SoraMatrix4 {
+    class SORA_API SoraMatrix4 {
     public:
         union {
             float c[4][4];	// Column major order for OpenGL: c[column][row]

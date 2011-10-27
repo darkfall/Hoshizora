@@ -64,8 +64,9 @@ namespace sora {
 
 		void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
 		void setTransform(float x=0.f, float y=0.f, float dx=0.f, float dy=0.f, float rot=0.f, float hscale=1.f, float vscale=1.f);
-		void setTransformWindowSize(float w, float h);
-        void setViewPoint(float x=0.f, float y=0.f, float z=0.f);
+        void setTransformMatrix(const SoraMatrix4& matrix);
+        SoraMatrix4 getTransformMatrix() const;
+        
         void setVerticalSync(bool flag);
 
 		ulong32 getMainWindowHandle() { return (ulong32)mainWindow; }
@@ -133,7 +134,7 @@ namespace sora {
 		int32 CurDrawMode;
 
 		SoraTimer* pTimer;
-
+        
 		std::list<SoraRenderTargetOG*> liTargets;
 		SoraRenderTargetOG* pCurTarget;
 

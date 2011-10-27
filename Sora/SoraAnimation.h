@@ -19,7 +19,7 @@
 
 namespace sora {
         
-    class SoraAnimation: public SoraObject {
+    class SORA_API SoraAnimation: public SoraObject {
     public:
         SoraAnimation();
         SoraAnimation(const StringType& configPath);

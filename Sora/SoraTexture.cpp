@@ -1,6 +1,8 @@
 #include "SoraTexture.h"
 #include "SoraCore.h"
 
+#include "SoraTextureMap.h"
+
 namespace sora {
     
 	SoraTexture::SoraTexture(ulong32 texid, int32 width, int32 height, int32 oriwidth, int32 oriheight):
@@ -70,6 +72,10 @@ namespace sora {
     SoraVector SoraTexture::GetOriginalSize(SoraTextureHandle handle) {
         return SoraVector(((SoraTexture*)handle)->mOriginalWidth,
                           ((SoraTexture*)handle)->mOriginalHeight);
+    }
+    
+    StringType SoraTexture::GetTextureName(SoraTextureHandle handle) {
+        return GetStringByUniqueId(SoraTextureMap::Instance()->getTextureName(handle));
     }
     
     SoraTextureHandle SoraTexture::CreateEmpty(int32 w, int32 h) {

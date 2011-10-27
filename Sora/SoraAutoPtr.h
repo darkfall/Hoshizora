@@ -45,7 +45,7 @@ namespace sora {
         
         template<class C>
         struct ReleasePolicy {
-            static void release(C* obj) {
+            static void Release(C* obj) {
                 if(obj)
                     delete obj;
             }
@@ -53,7 +53,7 @@ namespace sora {
         
         template<class C>
         struct ReleaseArrayPolicy {
-            static void release(C* obj) {
+            static void Release(C* obj) {
                 if(obj)
                     delete []obj;
             }
@@ -61,13 +61,12 @@ namespace sora {
         
         
         struct FreeReleasePolicy {
-            static void release(void* obj) {
+            static void Release(void* obj) {
                 sora_free(obj);
             }
         };
     }
-	
-    
+
 	template<typename T, class RC=autoptr::RefCounter, class RP=autoptr::ReleasePolicy<T> >
 	class SORA_API SoraAutoPtr {
 	public:
@@ -272,7 +271,7 @@ namespace sora {
             sora_assert(counter);
             int i = counter->decRef();
             if(i == 0) {
-                RP::release(ptr);
+                RP::Release(ptr);
                 ptr = 0;
                 
                 delete counter;
@@ -297,6 +296,22 @@ namespace sora {
     template <class C, class RC, class RP>
     inline void swap(SoraAutoPtr<C, RC, RP>& p1, SoraAutoPtr<C, RC, RP>& p2) {
         p1.swap(p2);
+    }
+    
+    namespace autoptr {
+       
+        template<typename T>
+        struct COMReleasePolicy {
+            static void Release(T* pointer) {
+                T::Release();
+            }
+        };
+        
+    }  
+        
+    template<typename T>
+    static SoraAutoPtr<T> MakeCOMPtr(T* pointer) {
+        return SoraAutoPtr<T, autoptr::RefCounter, autoptr::COMReleasePolicy<T> >(pointer);
     }
 	
 	template<typename T>
