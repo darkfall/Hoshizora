@@ -12,6 +12,8 @@
 #include "SoraPlatform.h"
 #include "SoraTexture.h"
 
+#include "SoraMatrix4.h"
+
 namespace sora {
     
 	struct SORA_API SoraVertex {
@@ -22,6 +24,24 @@ namespace sora {
 		
 		SoraVertex(): z(0.0f), col(0xFFFFFFFF) {}
         SoraVertex(float _x, float _y, float _tx, float _ty): x(_x), y(_y), tx(_tx), ty(_ty) {}
+        
+        SoraVertex operator*(const SoraMatrix4& rhs) const {
+            SoraVector4 vec = rhs * SoraVector4(x, y, z, 1.0);
+            
+            SoraVertex tmp = *this;
+            tmp.x = vec.x;
+            tmp.y = vec.y;
+            tmp.z = vec.z;
+            return tmp;
+        }
+        SoraVertex& operator*=(const SoraMatrix4& rhs) {
+            SoraVector4 vec = rhs * SoraVector4(x, y, z, 1.0);
+            x = vec.x;
+            y = vec.y;
+            z = vec.z;
+            
+            return *this;
+        }
 	};
 	
 	struct SORA_API SoraQuad {
@@ -30,6 +50,18 @@ namespace sora {
 		int				blend;
         
         SoraQuad(): tex(NULL) {}
+        
+        SoraQuad operator*(const SoraMatrix4& rhs) const {
+            SoraQuad tmp = *this;
+            for(int i=0; i<4; ++i)
+                tmp.v[i] *= rhs;
+            return tmp;
+        }
+        SoraQuad& operator*=(const SoraMatrix4& rhs) {
+            for(int i=0; i<4; ++i)
+                v[i] *= rhs;
+            return *this;
+        }
 	};
 	
 	struct SORA_API SoraTriple {

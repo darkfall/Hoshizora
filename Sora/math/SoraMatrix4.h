@@ -13,6 +13,8 @@
 #include "SoraVector4.h"
 #include "SoraQuaternion.h"
 
+#include "SoraMath.h"
+
 namespace sora {
     
     class SORA_API SoraMatrix4 {
@@ -52,7 +54,7 @@ namespace sora {
             return SoraMatrix4( SoraQuaternion( axis.x, axis.y, axis.z, cosf( angle * 0.5f ) ) );
         }
         
-        static SoraMatrix4 PerspectiveMat( float l, float r, float b, float t, float n, float f ) {
+        static SoraMatrix4 FrustumMat( float l, float r, float b, float t, float n, float f ) {
             SoraMatrix4 m;
             
             m.x[0] = 2 * n / (r - l);
@@ -62,8 +64,18 @@ namespace sora {
             m.x[10] = -(f + n) / (f - n);
             m.x[11] = -1;
             m.x[14] = -2 * f * n / (f - n);
-            m.x[15] = 0;
             
+            return m;
+        }
+        
+        static SoraMatrix4 PerspectiveMat(float field_of_view, float aspect, float n, float f) {
+            SoraMatrix4 m;
+            float ff = 1.0f / tan(DGR_RAD(field_of_view) / 2.0f);
+            m.x[0] = ff / aspect;
+            m.x[5] = ff;
+            m.x[10] = (n + f) / (n - f);
+            m.x[14] = (2.0f * f * n) / (n - f);
+            m.x[11] = -1.f;
             return m;
         }
         

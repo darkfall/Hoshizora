@@ -98,24 +98,20 @@ sora::SoraPhysicBody* body;
 
 float x = 0.f;
 float y = 0.f;
+float z = 0.f;
+
+float xpos = 0.f;
+float ypos = 0.f;
+float zpos = 0.f;
 
 #include "SoraOGLRenderer/SoraOGLRenderer.h"
 #include "SoraSprite.h"
 
-sora::SoraVertex vt[24];
-
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-        vt[0].x = 300.f; vt[0].y = 300.f; vt[0].z = -100.f;
-        vt[1].x = 600.f; vt[1].y = 300.f; vt[1].z = -100.f;
-        vt[2].x = 600.f; vt[2].y = 600.f; vt[2].z = -100.f;
-        vt[3].x = 300.f; vt[3].y = 600.f; vt[3].z = -100.f;
-        vt[4].x = 300.f; vt[4].y = 300.f; vt[4].z = 100.f;
-        vt[5].x = 600.f; vt[5].y = 300.f; vt[5].z = 100.f;
-        vt[6].x = 600.f; vt[6].y = 600.f; vt[6].z = 100.f;
-        vt[7].x = 300.f; vt[7].y = 600.f; vt[7].z = 100.f;
     }
+
     
     void onRender() {
         sora::SoraGameApp::BeginScene();
@@ -130,23 +126,38 @@ public:
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_RIGHT))
             y += 0.001f;
         
-        sora::SoraMatrix4 myView = sora::SoraMatrix4::RotMat(x, y, 0.f);
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_Q))
+            z -= 0.001f;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_E))
+            z += 0.001f;
         
-        for(int i=0; i<16;++i) {
-            printf("%f, ", myView.x[i]);
-            if((i+1)%4==0)
-                printf("\n");
-        }
-        printf("\n");
-
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_W))
+            zpos -= 1;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_S))
+            zpos += 1;
+        
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_A))
+            xpos -= 1;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_D))
+            xpos += 1;
+        
+     //   z -= 1.f;
+        
+        sora::SoraMatrix4 rot = sora::SoraMatrix4::RotMat(x, y, z);
+        sora::SoraMatrix4 translate = sora::SoraMatrix4::TransMat(xpos, ypos, zpos);
+        
+        sora::SoraMatrix4 myView = rot * translate ;
         sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
         
       //  sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT_Z, &vt[0], 8, sora::SORA_TRIANGLES_STRIP);
+        
         mBg.setZ(-100.f);
         mBg.render(100.f, 100.f);
+      
         
         mBg.setZ(100.f);
-        mBg.render(100.f, 100.f);
+        mBg.render(300.f, 100.f);
+        
         
         
         mText2.setPosition(100.f, 100.f);
@@ -159,6 +170,7 @@ public:
         
         sora::SoraCore::Ptr->setTransform();
         mFont->render(0.f, 80.f, L"|#00FFFF|O");
+        mFont->print(0.f, 0.f, sora::SoraFont::AlignmentLeft, L"z : %f", z);
         
         
         sora::SoraGameApp::EndScene();

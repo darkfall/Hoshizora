@@ -104,10 +104,10 @@ namespace sora{
         glEnable(GL_SCISSOR_TEST);
         //glDepthMask(GL_FALSE);
 
-        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-		glEnable(GL_COLOR_MATERIAL);
+  //     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+  //     glEnable(GL_COLOR_MATERIAL);
 
-        InitPerspective(60, (float)_oglWindowInfo.width / _oglWindowInfo.height, 0.f, 1.f);
+    //    InitPerspective(60, (float)_oglWindowInfo.width / _oglWindowInfo.height, 0.f, 1.f);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
 
 		glDisable(GL_DITHER);
@@ -799,6 +799,18 @@ namespace sora{
         glMatrixMode(GL_MODELVIEW);
         float matrix[16];
         glGetFloatv(GL_MODELVIEW_MATRIX, &matrix[0]);
+        return SoraMatrix4(matrix);
+    }
+    
+    void SoraOGLRenderer::setProjectionMatrix(const SoraMatrix4& matrix) {
+        glMatrixMode(GL_PROJECTION);
+        glLoadMatrixf(&matrix.x[0]);
+    }
+    
+    SoraMatrix4 SoraOGLRenderer::getProjectionMatrix() const {
+        glMatrixMode(GL_PROJECTION);
+        float matrix[16];
+        glGetFloatv(GL_PROJECTION_MATRIX, &matrix[0]);
         return SoraMatrix4(matrix);
     }
 

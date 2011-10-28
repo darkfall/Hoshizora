@@ -79,6 +79,8 @@ namespace sora {
 
 		void    setRotation(float r);
 		float   getRotation() const;
+        
+        void transform(const SoraMatrix4& mat);
 		
 		uint32*              getPixelData() const;
         void                 unlockPixelData();
@@ -113,6 +115,8 @@ namespace sora {
 		
 		SoraRect mTextureRect;
         int32   mSprWidth, mSprHeight;
+        
+        SoraMatrix4 mTransformMat;
 
 		float mRotation;
 		float mCenterX, mCenterY;

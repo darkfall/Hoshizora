@@ -134,6 +134,11 @@ namespace sora {
 		SORA_TRIANGLES_STRIP,
 		SORA_QUAD,
 	};
+    
+    enum MatrixMode {
+        SORA_PROJECTION_MATRIX,
+        SORA_TRANSFORM_MATRIX,
+    };
 
 } // namespace sora
 

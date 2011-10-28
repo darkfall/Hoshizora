@@ -163,6 +163,10 @@ namespace sora {
         render(getPositionX(), getPositionY());
     }
     
+    void SoraSprite::transform(const SoraMatrix4& mat) {
+        mTransformMat = mat;
+    }
+    
     void SoraSprite::buildQuad(float x, float y) {
         float tx1, ty1, tx2, ty2;
 		float sint, cost;
@@ -204,6 +208,8 @@ namespace sora {
             mQuad.v[2].y = ty2 + y;
             mQuad.v[3].y = mQuad.v[2].y;
 		}
+        
+        mQuad *= mTransformMat;
     }
 
 	void SoraSprite::render(float x, float y) {
