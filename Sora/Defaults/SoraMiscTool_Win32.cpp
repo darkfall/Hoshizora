@@ -172,14 +172,13 @@ namespace sora {
     
     StringType SoraMiscToolWin32::getOSVersion() const {
         OSVERSIONINFO osvi;
-        BOOL bIsWindowsXPorLater;
         
         ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
         osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
         
         GetVersionEx(&osvi);
         
-        return vamssg("Windows %d.%d Build %d %s", osvi,dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber, osvi.szCSDVersion);
+        return vamssg("Windows %d.%d Build %d %s", osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber, osvi.szCSDVersion);
     }
     
     uint64 SoraMiscToolWin32::getSystemMemorySize() const {

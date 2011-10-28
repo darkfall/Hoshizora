@@ -20,12 +20,12 @@
 #include "SoraMath.h"
 
 #include "SoraFunction.h"
-#include "helpers/SoraPostEffect.h"
 
 #include "cmd/SoraConsole.h"
 
 #include "SoraTask.h"
 #include "SoraShape.h"
+#include "SoraShader.h"
 
 #include "SoraLogger.h"
 #include "SoraResourceFile.h"
@@ -35,16 +35,19 @@
 #include "physics/SoraPhysicShape.h"
 #include "physics/SoraPhysicBody.h"
 
+#include "SoraRenderSystem.h"
+
+#include "SoraSpriteManager.h"
+
+#pragma comment(linker, "/NODEFAULTLIB:libcmt.lib")
+#pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
+
 float lx, ly, rx, ry;
 float maxsize, maxiteration, iterinc;
 float cr, cg, cb;
 
-#ifdef OS_WIN32
-#pragma comment(linker, "/NODEFAULTLIB:libcmt.lib")
-#pragma comment(linker, "/NODEFAULTLIB:libcmtd.lib")
-#endif
-
 void msetCommands(sora::SoraConsoleEvent* evt) {
+    
     std::string cmd = evt->getCmd();
     sora::StringType param = evt->getParams();
     if(cmd == "set_lx") {
@@ -89,34 +92,78 @@ void msetCommands(sora::SoraConsoleEvent* evt) {
     }
 }
 
+#include "SoraGraphicAlgorithm.h"
+
 SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_iteration,set_max_size,set_iteration_increment,set_cr,set_cg,set_cb");
 
 sora::SoraPhysicBody* body;
 
+float x = 0.f;
+float y = 0.f;
+
+#include "SoraOGLRenderer/SoraOGLRenderer.h"
+#include "SoraSprite.h"
+
+sora::SoraVertex vt[24];
+
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-        
+        vt[0].x = 300.f; vt[0].y = 300.f; vt[0].z = -100.f;
+        vt[1].x = 600.f; vt[1].y = 300.f; vt[1].z = -100.f;
+        vt[2].x = 600.f; vt[2].y = 600.f; vt[2].z = -100.f;
+        vt[3].x = 300.f; vt[3].y = 600.f; vt[3].z = -100.f;
+        vt[4].x = 300.f; vt[4].y = 300.f; vt[4].z = 100.f;
+        vt[5].x = 600.f; vt[5].y = 300.f; vt[5].z = 100.f;
+        vt[6].x = 600.f; vt[6].y = 600.f; vt[6].z = 100.f;
+        vt[7].x = 300.f; vt[7].y = 600.f; vt[7].z = 100.f;
     }
     
     void onRender() {
         sora::SoraGameApp::BeginScene();
         
-        mBg.render();
-        mBg2.render();
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_DOWN))
+            x -= 0.001f;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_UP))
+            x += 0.001f;
         
-        sora::SoraRect r = mBg.getPhysicBody()->getBoundingBox();
-        sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
-                                              r.x2, r.y2, 0xFFFF0000);
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_LEFT))
+            y -= 0.001f;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_RIGHT))
+            y += 0.001f;
         
-        r = mBg2.getPhysicBody()->getBoundingBox();
-        sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
-                                              r.x2, r.y2, 0xFFFF0000);
-       
-       // mText.render();
-       // mText2.render();
-                
-        mShape.render();
+        sora::SoraMatrix4 myView = sora::SoraMatrix4::RotMat(x, y, 0.f);
+        
+        for(int i=0; i<16;++i) {
+            printf("%f, ", myView.x[i]);
+            if((i+1)%4==0)
+                printf("\n");
+        }
+        printf("\n");
+
+        sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
+        
+      //  sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT_Z, &vt[0], 8, sora::SORA_TRIANGLES_STRIP);
+        mBg.setZ(-100.f);
+		mBg.setBlendMode(BLEND_DEFAULT_Z);
+        mBg.render(100.f, 100.f);
+        
+        mBg.setZ(100.f);
+		mBg.setScale(1.5f, 1.5f);
+        mBg.render(100.f, 100.f);
+        
+        mText2.getSprite()->setBlendMode(BLEND_DEFAULT_Z);
+        mText2.setPosition(100.f, 100.f);
+        mText2.render();
+        
+        
+        sora::SoraCore::Ptr->renderLine(10.f, 100.f, 10.f, 0.f, sora::Color::Red);
+        sora::SoraCore::Ptr->getRenderSystem()->renderLine(10.f, 100.f, 110.f, 100.f, sora::Color::Blue);
+        sora::SoraCore::Ptr->getRenderSystem()->renderLine(10.f, 100.f, 110.f, 0.f, sora::Color::Green);
+        
+        sora::SoraCore::Ptr->setTransform();
+        mFont->render(0.f, 80.f, L"|#00FFFF|O");
+        
         
         sora::SoraGameApp::EndScene();
     }
@@ -172,37 +219,38 @@ public:
     }
     
     void onMouseDragged(sora::SoraMouseEvent& from, sora::SoraMouseEvent& to) {
-        float d =  atan2f(to.y - from.y,
-                          to.x - from.x);
-        mBg.getPhysicBody()->applyLinearImpulse(cosf(d),
-                                                sinf(d),
-                                                50.f,
-                                                0.f);
+       
     }
     
     void onEnter() {
         sora::SoraCore::Instance()->registerPhysicWorld(new sora::SoraBox2dPhysicWorld(0.f, 1.f, true));
-
-        mBg.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
-        mBg.setColor(0xFF00FFFF);
         
-        mBg.setPosition(200.f, 200.f);
+        
+        
+        sc1.setTexture(sora::SoraTexture::LoadFromFile("bg-optd.png"));
+       
+        mBg.setTexture(sora::SoraTexture::LoadFromFile("test.png"));
+      //  mBg.setColor(0xFF00FF00);
+        
+     /*   mBg.setPosition(200.f, 200.f);
         mBg.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::DynamicBody),
                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 
-                                                                                          100.f, 0.f, 0.f, 10.f)),
+                                                                                          100.f, 0.f, 0.f, 100.f)),
                                                         1.f,
                                                         0.f,
                                                         0.f);
-        
+        */
         mBg2.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
-        mBg2.setColor(0xFFFF00FF);
-        mBg2.setPosition(0.f, 600.f);
-        mBg2.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::StaticBody),
-                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(800.f, 10.f, 400.f, 5.f, 0.f)),
+        mBg2.setColor(0xFFFF0000);
+        mBg2.setPosition(400.f, 200.f);
+        mBg2.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::DynamicBody),
+                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 100.f, 50.f, 5.f, 0.f)),
                               1.f,
                               0.f,
                               0.f);
         
+        body = sora::SoraPhysicWorld::CreateBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::StaticBody, sora::SoraVector(0.f, 600.f)));
+        body->createFixture(sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(800.f, 10.f, 400.f, 5.f, 0.f)));
         
         mShader = /* mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet")*/ 0;
         lx = -2.5f;
@@ -218,7 +266,7 @@ public:
         
         WaitForTaskFinish(task);
         
-        mText2.setStyle(sora::SoraText::AlignmentCenter);
+      //  mText2.setStyle(sora::SoraText::AlignmentCenter);
 
         mText2.enableRenderToSprite(true);
         mText.setStyle(sora::SoraText::AlignmentRight);
@@ -234,17 +282,15 @@ public:
         mShape.enableOutline(3.f, 0xFFFF0000);
         mShape.setClosed(true);
         
-        sora::SoraResourceFileAuto fontData("Bank Gothic Medium BT.ttf");
-        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
+        sora::SoraResourceFile fontData("cour.ttf");
+        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 60, "BankGothic");
         if(!mFont) {
             sora::SoraCore::Instance()->messageBox("Error loading font", "error", MB_OK | MB_ICONERROR);
         } else {
             mText.setFont(mFont);
             
             mText2.setFont(mFont);
-            mText2.setText(L"left/right arrow to move lx, up/down arrow to move ly\na/d to move rx, w/s to move ry\n\
-`(grave) key to open console, available commands:\nset_lx, set_ly, set_rx, set_ry, set_max_size, set_max_iteration, set_iteration_increment\n\
-set_cg, set_cr, set_cb");
+            mText2.setText(L"|#00FFFF|Hello |#FF0000|World! |#CDCDCD|Sora ~ |#FFDEAD|Chan~");
             mText2.setPosition(0.f, sora::SoraCore::Instance()->getScreenHeight()-mFont->getHeight()*5.5);
         }
         
@@ -286,14 +332,20 @@ private:
     sora::SoraShape mShape;
     
     sora::SoraShader* mShader;
+    sora::SoraSprite sc1;
+    sora::SoraSprite sc2;
 };
+#include "SoraRenderSystemExtension.h"
 
+int WinMain(
+ HINSTANCE hInstance,
+ HINSTANCE hPrevInstance,
+LPSTR lpCmdLine,
+int nCmdShow) {
+    sora::SoraCore::Ptr->enableRenderSystemExtension(sora::SORA_EXTENSION_FSAA);
+    
+    sora::SoraCore::Ptr->setRenderSystemExtensionParam(sora::SORA_EXTENSION_FSAA, 4);
 
-int APIENTRY WinMain(HINSTANCE hInstance,
-					   HINSTANCE hPrevInstance,
-					   LPSTR    lpCmdLine,
-					   int       nCmdShow) {    
-        
     sora::SoraGameAppDef def("config.xml");
     sora::SoraGameApp app(def);
     

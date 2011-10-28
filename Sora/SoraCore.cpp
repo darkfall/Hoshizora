@@ -176,7 +176,7 @@ namespace sora {
 		
 		mPrevShaderContext = NULL;
         mScreenBuffer = NULL;
-        
+        mSystemFont = 0;
         
         log_notice("Initializing base systems...");
         

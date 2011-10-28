@@ -116,6 +116,8 @@ namespace sora {
         for(; it != end; ++it)
             if((*it)->getName() == name)
                 return (*it).get();
+
+		return 0;
     }
     
     int SoraTaskManager::count() const {

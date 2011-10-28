@@ -317,7 +317,7 @@ namespace sora {
 				float scale = (1.f - p->position.z / fMaxDistance) + 0.01f;
 				if(scale > 1.f) scale = 1.f;
 				else if(scale < 0.f) scale = 0.f;
-				pSprite->setColor( CSETA(p->dwCurrColor.GetHWColor(), p->dwCurrColor.a * 255 * scale ) );
+				pSprite->setColor( CSETA(p->dwCurrColor, p->dwCurrColor.a * 255 * scale ) );
 				pSprite->setRotation( p->fAngle );
 				pSprite->setScale( p->fCurrScale * scale, p->fCurrScale * scale );
 				pSprite->render( p->position.x, p->position.y );
@@ -406,7 +406,7 @@ namespace sora {
 		void* buffer = SoraCore::Instance()->getResourceFile(script, size);
 		if(buffer) {
 			memcpy(&pheader, buffer, size);
-            SORA->freeResourceFile(buffer);
+            SoraCore::Ptr->freeResourceFile(buffer);
 		}
 	}
 	

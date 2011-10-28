@@ -7,12 +7,13 @@
 //
 
 #include "SoraSpriteSheet.h"
-#include "SoraConfigParser.h"
 #include "SoraResourceFile.h"
 #include "SoraTexture.h"
 #include "SoraSprite.h"
 #include "SoraLogger.h"
 #include "SoraCore.h"
+
+#include "config/SoraConfigParser.h"
 
 namespace sora {
     

@@ -21,14 +21,8 @@
     <Filter Include="Plugins\ParticleSystem">
       <UniqueIdentifier>{44a99006-6005-4dff-8541-dfd6f14faced}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\llexer">
-      <UniqueIdentifier>{2b321a02-f143-4c8d-880f-12bcef076c47}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\experimental">
       <UniqueIdentifier>{bf15e2d1-c675-4257-8adf-6699edce332d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\defaults">
-      <UniqueIdentifier>{2cef4640-6e28-4ab5-a729-25f85e45fde2}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\debug">
       <UniqueIdentifier>{a0075821-69fc-43b2-b904-e4dcbb8923bb}</UniqueIdentifier>
@@ -135,6 +129,9 @@
     </Filter>
     <Filter Include="Plugins\hge">
       <UniqueIdentifier>{89510b77-a729-4bda-8546-615f99351a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\defaults">
+      <UniqueIdentifier>{2cef4640-6e28-4ab5-a729-25f85e45fde2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -446,9 +443,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.h">
       <Filter>Plugins\ParticleSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\llexer\llexer.h">
-      <Filter>头文件\llexer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\Experimental\Sora2DMatrix.h">
       <Filter>头文件\experimental</Filter>
@@ -1080,9 +1074,6 @@
     <ClInclude Include="..\..\..\Sora\SoraResourceFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraResourceFileFinder.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraResourceManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -1096,9 +1087,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraShaderEnabled.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraShaderManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraSimpleFSM.h">
@@ -1196,9 +1184,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\factory\SoraGlobalFactory.h">
       <Filter>头文件\factory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraFastRenderer.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraGUIChan\guichansetup.h">
       <Filter>Plugins\gui</Filter>
@@ -1527,12 +1512,6 @@
     <ClInclude Include="..\..\..\Sora\entity\SoraEntityListener.h">
       <Filter>头文件\entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\entity\SoraLightWeightEntity.h">
-      <Filter>头文件\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\io\SoraFileStream.h">
-      <Filter>头文件\io</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\io\SoraFolderResourceManager.h">
       <Filter>头文件\io</Filter>
     </ClInclude>
@@ -1761,6 +1740,21 @@
     <ClInclude Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.h">
       <Filter>Plugins\hge</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraFileSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraResource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\io\SoraFileStream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\lexer\SoraLexer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraSpriteSheet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp">
@@ -1819,9 +1813,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraParticleSystem\SoraParticleSystem.cpp">
       <Filter>Plugins\ParticleSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\llexer\llexer.cpp">
-      <Filter>头文件\llexer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\Defaults\orz.c">
       <Filter>头文件\defaults</Filter>
@@ -2189,9 +2180,6 @@
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraResourceFileFinder.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraScene.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -2199,9 +2187,6 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraShaderEnabled.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraShaderManager.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraSimpleFSM.cpp">
@@ -2220,9 +2205,6 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraTexture.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraTimerEvent.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\cmd\CoreCmds.cpp">
@@ -2269,9 +2251,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\factory\SoraSpriteFactory.cpp">
       <Filter>头文件\factory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraFastRenderer.cpp">
-      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraGUIChan\jsongui.cpp">
       <Filter>Plugins\gui</Filter>
@@ -2492,22 +2471,13 @@
     <ClCompile Include="..\..\..\Sora\property\SoraTypeSerializer.cpp">
       <Filter>头文件\properties</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\entity\SoraComponent.cpp">
-      <Filter>头文件\entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\entity\SoraComponentHolder.cpp">
       <Filter>头文件\entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\entity\SoraEntity.cpp">
       <Filter>头文件\entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\entity\SoraLightWeightEntity.cpp">
-      <Filter>头文件\entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\io\SoraFolderResourceManager.cpp">
-      <Filter>头文件\io</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\io\SoraFileStream.cpp">
       <Filter>头文件\io</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\io\zip\SoraZipResourceManager.cpp">
@@ -2710,6 +2680,33 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Plugins\SoraShader\SoraCGD3D9Shader.cpp">
       <Filter>Plugins\hge</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraFileSystem.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraResource.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\io\SoraFileStream.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\lexer\SoraLexer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraTextureMap.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraTimer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraSpriteSheet.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\Defaults\SoraMiscTool_Win32.cpp">
+      <Filter>头文件\defaults</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraSpriteManager.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

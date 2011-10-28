@@ -83,7 +83,7 @@ namespace sora{
 			}
 			if(g_timer->update()) {
 				pHGE->_UpdateMouse();
-				SORA->update();
+				sora::SoraCore::Ptr->update();
 				pHGE->_ClearQueue();
 			}
 		}
@@ -174,7 +174,7 @@ namespace sora{
 		
 		currShader = context;
 		if(currShader && !currShader->attachShaderList()) {
-			DebugPtr->log("SoraHGERenderer: Unable to attach shader list");
+			log_error("SoraHGERenderer: Unable to attach shader list");
 		}
 	}
 
@@ -328,6 +328,14 @@ namespace sora{
 	void SoraHGERenderer::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
 		pHGE->Gfx_SetTransform(x, y, dx, dy, rot, hscale, vscale);
 	}
+
+	void SoraHGERenderer::setTransformMatrix(const SoraMatrix4& mat) {
+		pHGE->Gfx_SetTransformMatrix(&mat.x[0]);
+	}
+	
+	SoraMatrix4 SoraHGERenderer::getTransformMatrix() const {
+		return SoraMatrix4(pHGE->Gfx_GetTransformMatrix());
+	}
 	
 	void SoraHGERenderer::setTransformWindowSize(float32 w, float32 h) {
 		return;
@@ -356,7 +364,7 @@ namespace sora{
 	}
 
 	StringType SoraHGERenderer::videoInfo() {
-		StringType = pHGE->getDeviceInfo();
+		StringType str = pHGE->getDeviceInfo();
 		return str;
 	}
 

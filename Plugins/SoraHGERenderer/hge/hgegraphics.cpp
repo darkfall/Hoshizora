@@ -65,7 +65,7 @@ void CALL HGE_Impl::Gfx_SetClipping(int x, int y, int w, int h)
 	}
 
 	vp.MinZ=0.0f;
-	vp.MaxZ=1.0f;
+	vp.MaxZ=1000.0f;
 
 	_render_batch();
 	pD3DDevice->SetViewport(&vp);
@@ -97,6 +97,29 @@ void CALL HGE_Impl::Gfx_SetTransform(float x, float y, float dx, float dy, float
 
 	_render_batch();
 	pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
+}
+
+void CALL HGE_Impl::Gfx_SetTransformMatrix(const float* mat) {
+	D3DXMATRIX tmp;
+	for(int i=0; i<4; ++i) {
+		for(int j=0; j<4; ++j) {
+			tmp.m[i][j] = mat[i*4 + j];
+		}
+	}
+	pD3DDevice->SetTransform(D3DTS_VIEW, &tmp);
+}
+
+float* CALL HGE_Impl::Gfx_GetTransformMatrix() const {
+	D3DXMATRIX tmp;
+	pD3DDevice->GetTransform(D3DTS_VIEW, &tmp);
+
+	static float mat[16];
+	for(int i=0; i<4; ++i) {
+		for(int j=0; j<4; ++j) {
+			mat[i*4 + j] = tmp.m[i][j];
+		}
+	}
+	return &mat[0];
 }
 
 bool CALL HGE_Impl::Gfx_BeginScene(HTARGET targ)
@@ -176,6 +199,9 @@ bool CALL HGE_Impl::Gfx_BeginScene(HTARGET targ)
 
 		pCurTarget=target;
 	}
+
+	pD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+	pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
 
 	pD3DDevice->BeginScene();
 	CurBlendMode = 0;
@@ -595,8 +621,7 @@ void CALL HGE_Impl::Texture_Unlock(HTEXTURE tex)
 
 //////// Implementation ////////
 
-void HGE_Impl::_render_batch(bool bEndScene)
-{
+void HGE_Impl::_render_batch(bool bEndScene) {
 	if(VertArray)
 	{
 		pVB->Unlock();
@@ -680,7 +705,7 @@ void HGE_Impl::_SetProjectionMatrix(int width, int height)
 	D3DXMatrixScaling(&matProj, 1.0f, -1.0f, 1.0f);
 	D3DXMatrixTranslation(&tmp, -0.5f, height+0.5f, 0.0f);
 	D3DXMatrixMultiply(&matProj, &matProj, &tmp);
-	D3DXMatrixOrthoOffCenterLH(&tmp, 0, (float)width, 0, (float)height, 0.0f, 1.0f);
+	D3DXMatrixOrthoOffCenterLH(&tmp, 0, (float)width, 0, (float)height, -1000.f, 1000.0f);
 	D3DXMatrixMultiply(&matProj, &matProj, &tmp);
 }
 

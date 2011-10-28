@@ -10,6 +10,8 @@
 #include "SoraException.h"
 #include "SoraStringId.h"
 
+#include <algorithm>
+
 namespace sora {
     
     namespace util {

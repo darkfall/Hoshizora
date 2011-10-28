@@ -15,7 +15,7 @@
 
 namespace sora {
     
-    class SoraPropertyHolder {
+    class SORA_API SoraPropertyHolder {
     public:
         SoraPropertyHolder() { }
         ~SoraPropertyHolder() { 

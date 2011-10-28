@@ -87,6 +87,9 @@ namespace sora {
 		void getDesktopResolution(int* w, int *y);
 		void setQueryVideoModeCallback(QueryVideoMode func);
 		
+		void setTransformMatrix(const SoraMatrix4& mat);
+		SoraMatrix4 getTransformMatrix() const;
+		
 	private:
 		inline int32 _modeToDXMode(int32 mode);
 		

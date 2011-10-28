@@ -105,7 +105,7 @@ namespace sora {
 									  profile,
 									  entry.c_str(),
 									  0);
-			sora::SORA->freeResourceFile((void*)data);
+			sora::SoraCore::Ptr->freeResourceFile((void*)data);
 			
 			checkError(context);
 			cgD3D9LoadProgram(program, true, 0);

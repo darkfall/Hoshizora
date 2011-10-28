@@ -15,7 +15,7 @@ namespace sora {
     
     // base class for all movable things
     
-    struct SoraMovable {
+    struct SORA_API SoraMovable {
         SoraMovable():
         x(0.f),
         y(0.f),

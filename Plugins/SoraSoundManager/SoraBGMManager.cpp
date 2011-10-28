@@ -49,7 +49,7 @@ namespace sora {
 		if(!addToQueue)
 			_clearBGMQueue();
 	
-		SoraMusicFile* pmfile = sora::SORA->createMusicFile(bgmPath);
+		SoraMusicFile* pmfile = sora::SoraCore::Ptr->createMusicFile(bgmPath);
 		if(pmfile != NULL) {
 			mBGMQueue.push_back(pmfile);
 			if(!addToQueue || mBGMQueue.size() == 1) {
@@ -120,7 +120,7 @@ namespace sora {
 	
 	void SoraBGMManager::toNextBGM() {
 		if(mRandomBGMQueuePlay) {
-			uint32 newId = SORA->randomInt(0, mBGMQueue.size());
+			uint32 newId = SoraCore::Ptr->randomInt(0, mBGMQueue.size());
 			_playBGM(mBGMQueue[newId], newId);
 		}
 		else if(mCurrBGMId != -1 && mCurrBGMId < mBGMQueue.size()-1) {
@@ -226,7 +226,7 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::onPlaybackEvent(SoraPlaybackEvent* event) {
-		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
+		if(event->getEventType() == SoraPlaybackEvent::Ended) {
 			toNextBGM();
 		}
         
@@ -259,7 +259,7 @@ namespace sora {
 			itBgs = mBGSounds.find(bgsid);
 		}
 		
-		SoraMusicFile* mfile = SORA->createMusicFile(bgmsPath);
+		SoraMusicFile* mfile = SoraCore::Ptr->createMusicFile(bgmsPath);
 		if(mfile) {
 			BGSInfo* bgsinfo = new BGSInfo(bgsid, looptimes, volumeScale, bgmVolumeScale, mfile);
 			bgsinfo->path = bgmsPath;
@@ -278,7 +278,7 @@ namespace sora {
 	}
 	
 	void SoraBGMManager::BGSInfo::onPlaybackEvent(SoraPlaybackEvent* event) {
-		if(event->getEventType() == SORAPB_EV_PLAY_ENDED) {
+		if(event->getEventType() == SoraPlaybackEvent::Ended) {
 			++currLoopTimes;
 			if(currLoopTimes >= loopTimes) {
 				

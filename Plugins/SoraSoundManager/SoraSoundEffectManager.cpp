@@ -41,7 +41,7 @@ namespace sora {
 			itEffect = mSoundEffects.find(sid);
 		} 
 		
-		SoraSoundEffectFile* pefile = SORA->createSoundEffectFile(effectName);
+		SoraSoundEffectFile* pefile = SoraCore::Ptr->createSoundEffectFile(effectName);
 		if(pefile == NULL)
 			return 0;
 		
@@ -103,7 +103,7 @@ namespace sora {
 	bool SoraSoundEffectManager::playDirect(const std::wstring& effectName) {
 		//SoundEffectId eid = str2id(effectName);
 		//if(!play(eid)) {
-			SoraSoundEffectFile* pefile = SORA->createSoundEffectFile(effectName);
+			SoraSoundEffectFile* pefile = SoraCore::Ptr->createSoundEffectFile(effectName);
 			if(pefile == NULL)
 				return false;
 			

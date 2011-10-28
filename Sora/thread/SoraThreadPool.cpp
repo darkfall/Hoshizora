@@ -27,6 +27,7 @@ namespace sora {
     
     SoraThreadPool::~SoraThreadPool() {
         running = false;
+		stop();
         std::for_each(threads.begin(), threads.end(), DeleteSTLPtr());
     }
     

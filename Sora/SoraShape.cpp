@@ -49,8 +49,8 @@ namespace sora {
     void SoraShape::addPoint(const SoraVector& pos, uint32 color, float tx, float ty) {
         if(mTexture && tx == 0.0 && ty == 0.0) {
             SoraTexture* tex = (SoraTexture*)mTexture;
-            tx = 1.0 / tex->mTextureWidth;
-            ty = 1.0 / tex->mTextureHeight;
+            tx = 1.0f / tex->mTextureWidth;
+            ty = 1.0f / tex->mTextureHeight;
         }
         SoraVertex vertex(pos.x, pos.y, tx, ty);
         vertex.col = color;
@@ -256,8 +256,8 @@ namespace sora {
                             farH = it->y;
                     }
                 } else {
-                    farW = SoraTexture::GetOriginalWidth(mTexture);
-                    farH = SoraTexture::GetOriginalHeight(mTexture);
+                    farW = (float)SoraTexture::GetOriginalWidth(mTexture);
+                    farH = (float)SoraTexture::GetOriginalHeight(mTexture);
                 }
                 mRenderTarget = SoraCore::Instance()->createTarget((int32)farW+1, (int32)farH+1);
                 
