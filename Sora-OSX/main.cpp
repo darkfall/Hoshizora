@@ -96,60 +96,70 @@ SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_ite
 
 sora::SoraPhysicBody* body;
 
+float x = 0.f;
+float y = 0.f;
+
+#include "SoraOGLRenderer/SoraOGLRenderer.h"
+#include "SoraSprite.h"
+
+sora::SoraVertex vt[24];
+
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-        
+        vt[0].x = 300.f; vt[0].y = 300.f; vt[0].z = -100.f;
+        vt[1].x = 600.f; vt[1].y = 300.f; vt[1].z = -100.f;
+        vt[2].x = 600.f; vt[2].y = 600.f; vt[2].z = -100.f;
+        vt[3].x = 300.f; vt[3].y = 600.f; vt[3].z = -100.f;
+        vt[4].x = 300.f; vt[4].y = 300.f; vt[4].z = 100.f;
+        vt[5].x = 600.f; vt[5].y = 300.f; vt[5].z = 100.f;
+        vt[6].x = 600.f; vt[6].y = 600.f; vt[6].z = 100.f;
+        vt[7].x = 300.f; vt[7].y = 600.f; vt[7].z = 100.f;
     }
     
     void onRender() {
         sora::SoraGameApp::BeginScene();
         
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_DOWN))
+            x -= 0.001f;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_UP))
+            x += 0.001f;
         
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_LEFT))
+            y -= 0.001f;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_RIGHT))
+            y += 0.001f;
         
-        sora::SoraMatrix4 myView = sora::SoraMatrix4::RotMat(0.f, 0.f, 0.5f);
-     //   myView.translate(100.f, 0.f, 0.f);
-     //   myView.rotate(0.f, 0.5f, 0.f);
+        sora::SoraMatrix4 myView = sora::SoraMatrix4::RotMat(x, y, 0.f);
         
-        sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
-        
-        
-        mBg.render();
-        mBg2.render();
-        
-        
-        sora::SoraRect r = mBg.getPhysicBody()->getBoundingBox();
-        sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
-                                              r.x2, r.y2, 0xFFFF0000);
-        
-        r = mBg2.getPhysicBody()->getBoundingBox();
-        sora::SoraCore::Instance()->renderBox(r.x1, r.y1,
-                                              r.x2, r.y2, 0xFFFF0000);
-        
-
-        
-        sora::SoraMatrix4 matrix = sora::SoraCore::Ptr->getRenderSystem()->getTransformMatrix();
-        for(int i=0; i<16; ++i) {
-            printf("%.2f ", matrix.x[i]);
-            if((i+1) % 4 == 0)
+        for(int i=0; i<16;++i) {
+            printf("%f, ", myView.x[i]);
+            if((i+1)%4==0)
                 printf("\n");
         }
         printf("\n");
+
+        sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
         
-        mFont->render(0.f, 0.f, L"|#00FFFF|Hello |#FF0000|World! |#CDCDCD|Sora ~ |#FFDEAD|Chan~");
+      //  sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT_Z, &vt[0], 8, sora::SORA_TRIANGLES_STRIP);
+        mBg.setZ(-100.f);
+        mBg.render(100.f, 100.f);
         
-       // mText.render();
-       // mText2.render();
-        body->render();
-                
-        mShape.render();
-        
+        mBg.setZ(100.f);
+        mBg.render(100.f, 100.f);
         
         
-        sc1.setScale(2.5, 2.5);
-        sc1.render(0.f, 0.f);
+        mText2.setPosition(100.f, 100.f);
+        mText2.render();
         
-        sc2.render(0.f, 300.f);
+        
+        sora::SoraCore::Ptr->renderLine(10.f, 100.f, 10.f, 0.f, sora::Color::Red);
+        sora::SoraCore::Ptr->getRenderSystem()->renderLine(10.f, 100.f, 110.f, 100.f, sora::Color::Blue);
+        sora::SoraCore::Ptr->getRenderSystem()->renderLine(10.f, 100.f, 110.f, 0.f, sora::Color::Green);
+        
+        sora::SoraCore::Ptr->setTransform();
+        mFont->render(0.f, 80.f, L"|#00FFFF|O");
+        
         
         sora::SoraGameApp::EndScene();
     }
@@ -218,24 +228,19 @@ public:
         
         
         
-        sc1.setTexture(sora::SoraTexture::LoadFromFile("giftest-1 (dragged).png"));
-        sc2.setTexture(sora::SoraTexture::CreateEmpty(sc1.getTextureWidth(true)*2.5, sc1.getTextureHeight(true)*2.5));
+        sc1.setTexture(sora::SoraTexture::LoadFromFile("bg-optd.png"));
+       
+        mBg.setTexture(sora::SoraTexture::LoadFromFile("test.png"));
+      //  mBg.setColor(0xFF00FF00);
         
-        sora::SoraGraphicAlgorithm::scale(sc2.getTexture(), &sc1);
-      //  sc2.setTexture(sora::SoraTexture::LoadFromFile("l.jpg"));
-       // sc2.setScale(0.25, 0.25);
-        
-        mBg.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
-        mBg.setColor(0xFF00FF00);
-        
-        mBg.setPosition(200.f, 200.f);
+     /*   mBg.setPosition(200.f, 200.f);
         mBg.createPhysicBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::DynamicBody),
                              sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(100.f, 
                                                                                           100.f, 0.f, 0.f, 100.f)),
                                                         1.f,
                                                         0.f,
                                                         0.f);
-        
+        */
         mBg2.setTexture(sora::SoraTexture::CreateEmpty(100.f, 100.f));
         mBg2.setColor(0xFFFF0000);
         mBg2.setPosition(400.f, 200.f);
@@ -262,7 +267,7 @@ public:
         
         WaitForTaskFinish(task);
         
-        mText2.setStyle(sora::SoraText::AlignmentCenter);
+      //  mText2.setStyle(sora::SoraText::AlignmentCenter);
 
         mText2.enableRenderToSprite(true);
         mText.setStyle(sora::SoraText::AlignmentRight);
@@ -279,16 +284,14 @@ public:
         mShape.setClosed(true);
         
         sora::SoraResourceFile fontData("cour.ttf");
-        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
+        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 60, "BankGothic");
         if(!mFont) {
             sora::SoraCore::Instance()->messageBox("Error loading font", "error", MB_OK | MB_ICONERROR);
         } else {
             mText.setFont(mFont);
             
             mText2.setFont(mFont);
-            mText2.setText(L"left/right arrow to move lx, up/down arrow to move ly\na/d to move rx, w/s to move ry\n\
-`(grave) key to open console, available commands:\nset_lx, set_ly, set_rx, set_ry, set_max_size, set_max_iteration, set_iteration_increment\n\
-set_cg, set_cr, set_cb");
+            mText2.setText(L"|#00FFFF|Hello |#FF0000|World! |#CDCDCD|Sora ~ |#FFDEAD|Chan~");
             mText2.setPosition(0.f, sora::SoraCore::Instance()->getScreenHeight()-mFont->getHeight()*5.5);
         }
         

@@ -170,6 +170,10 @@ namespace sora {
                     (unsigned int)(ob*255.0f);
         }
         
+        operator uint32() {
+            return getHWColor();
+        }
+        
         
         SoraColorRGBA normalize() {
             this->r = clamp(0.f, 1.f, r);

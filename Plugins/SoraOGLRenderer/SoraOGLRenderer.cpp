@@ -119,6 +119,9 @@ namespace sora{
         
         glEnable(GL_SMOOTH);
         glEnable(GL_LINE_SMOOTH);
+        glEnable(GL_POINT_SMOOTH);
+        
+        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
         
 		SoraString info("OpenGL Version=");
 		info += (char*)glGetString(GL_VERSION);
@@ -149,7 +152,7 @@ namespace sora{
 		glLoadIdentity();
 		//Creating an orthoscopic view matrix going from -1 -> 1 in each
 		//dimension on the screen (x, y, z).
-		glOrtho(0.f, w, h, 0.f, 500.f, -500.f);
+		glOrtho(0.f, w, h, 0.f, 1000.f, -1000.f);
 	}
 
 	void SoraOGLRenderer::applyTransform() {
@@ -162,7 +165,7 @@ namespace sora{
             glOrtho(0.f,
                     _oglWindowInfo.width,
                     _oglWindowInfo.height
-                    , 0.f, 1.f, -1.f);
+                    , 0.f, 1000.f, -1000.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             
@@ -181,7 +184,7 @@ namespace sora{
             glOrtho(0,
                     pCurTarget->getWidth(),
                     0
-                    , pCurTarget->getHeight(), 1.f, -1.f);
+                    , pCurTarget->getHeight(), 1000.f, -1000.f);
             
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
@@ -789,9 +792,7 @@ namespace sora{
     
     void SoraOGLRenderer::setTransformMatrix(const SoraMatrix4& matrix) {
         glMatrixMode(GL_MODELVIEW);
-    
-   //     glLoadIdentity();
-        glMultMatrixf(&matrix.x[0]);
+        glLoadMatrixf(&matrix.x[0]);
     }
     
     SoraMatrix4 SoraOGLRenderer::getTransformMatrix() const {
