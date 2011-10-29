@@ -19,7 +19,7 @@ namespace sora {
 		SoraShaderContext*	shader;
 		int32				blend;
 		int32				size;
-		int32				drawMode;
+		RenderMode			drawMode;
 		
 		void release() {
 			if(vertex) {
@@ -95,7 +95,7 @@ namespace sora {
 		__z_buffer_insert_node(node, z);
 	}
 	
-	void SoraZSorter::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode, SoraShaderContext* shader) {
+	void SoraZSorter::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode, SoraShaderContext* shader) {
 		// use z 0
 		int32 z = static_cast<int32>(vertices[0].z * 1000);
 		__Z_BUFFER_NODE node;

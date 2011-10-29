@@ -307,7 +307,7 @@ namespace sora {
         detachShaderFromRender();
 	}
 
-	void SoraSprite::renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode) {
+	void SoraSprite::renderWithVertices(SoraVertex* vertices, uint32 size, RenderMode mode) {
 		attachShaderToRender();
 		mSora->renderWithVertices((SoraTextureHandle)mQuad.tex, mQuad.blend, vertices, size, mode);
 		detachShaderFromRender();

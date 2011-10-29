@@ -144,7 +144,7 @@ namespace sora {
 
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
-		void renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode=SORA_TRIANGLES);
+		void renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode=Triangle);
 
         void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f);
 		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float lineWidth=1.f, float z=0.f);

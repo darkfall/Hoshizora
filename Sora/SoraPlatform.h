@@ -127,17 +127,29 @@ namespace sora {
     typedef ulong32 SoraTargetHandle;
     typedef ulong32 SoraResourceHandle;
 	
-	enum {
-		SORA_LINE = 1,
-		SORA_TRIANGLES,
-		SORA_TRIANGLES_FAN,
-		SORA_TRIANGLES_STRIP,
-		SORA_QUAD,
+	enum RenderMode {
+		Line = 1,
+		Triangle,
+		TriangleFan,
+		TriangleStrip,
+		Quad,
 	};
     
+    enum RenderStateType {
+        TextureWrap0 = 0, // u
+        TextureWrap1, // v
+    };
+    
+    enum RenderStateParam {
+        TextureWrapClamp = 0,           // D3DTADDRESS_CLAMP, GL_CLAMP
+        TextureWrapRepeat,          // D3DTADDRESS_REPEAT, GL_REPEAT
+        TextureWrapClampToBoarder,  // D3DTADDRESS_BOARDER, GL_CLAMP_TO_BOARDER
+        TextureWrapMirror,          // D3DTADDRESS_MIRROR, GL_MIRRORED_REPEAT
+    };
+    
     enum MatrixMode {
-        SORA_PROJECTION_MATRIX,
-        SORA_TRANSFORM_MATRIX,
+        ProjectionMatrix,
+        TransformMatrix,
     };
 
 } // namespace sora

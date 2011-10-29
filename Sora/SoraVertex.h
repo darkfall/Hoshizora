@@ -18,12 +18,12 @@ namespace sora {
     
 	struct SORA_API SoraVertex {
 		float			x, y;		// screen position    
-		float			z;			// Z-buffer depth 0..1
+		float			z;			// Z-buffer depth
 		uint32			col;		// color
 		float			tx, ty;		// texture coordinates
 		
 		SoraVertex(): z(0.0f), col(0xFFFFFFFF) {}
-        SoraVertex(float _x, float _y, float _tx, float _ty): x(_x), y(_y), tx(_tx), ty(_ty) {}
+        SoraVertex(float _x, float _y, float _tx, float _ty): x(_x), y(_y), tx(_tx), ty(_ty), col(0xFFFFFFFF), z(0.f) {}
         
         SoraVertex operator*(const SoraMatrix4& rhs) const {
             SoraVector4 vec = rhs * SoraVector4(x, y, z, 1.0);

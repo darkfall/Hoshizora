@@ -82,7 +82,7 @@ namespace sora {
 							 x4, y4);
 	}
 	
-	void SoraMutableSprite::renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode) {
+	void SoraMutableSprite::renderWithVertices(SoraVertex* vertices, uint32 size, RenderMode mode) {
 		if(mChanged)
 			applyChange();
 		

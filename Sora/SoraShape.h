@@ -27,10 +27,14 @@ namespace sora {
      *   and adapt a texture to render
      **/
     
+    class SoraVertexList;
+    
     class SORA_API SoraShape: public SoraMovable {
     public:
-        SoraShape(SoraTextureHandle texture=0, int32 mode=SORA_TRIANGLES_FAN);
+        SoraShape(SoraTextureHandle texture=0, RenderMode mode=TriangleFan);
         ~SoraShape();
+        
+        void initWithVertexList(const SoraVertexList& list);
         
         /**
          * Add a point
@@ -41,8 +45,8 @@ namespace sora {
         void setPoint(uint32 index, float x, float y, uint32 color, float tx=0.f, float ty=0.f);
         SoraVertex getPoint(uint32 index);
         
-        void setRenderMode(int32 mode);
-        int32 getRenderMode() const;
+        void setRenderMode(RenderMode mode);
+        RenderMode getRenderMode() const;
         
         void setTexture(SoraTextureHandle texture);
         SoraTextureHandle getTexture() const;
@@ -99,7 +103,7 @@ namespace sora {
         typedef SoraArray<SoraVertex> VertexArray;
         VertexArray mVertices;
                 
-        int32 mRenderMode;
+        RenderMode mRenderMode;
         SoraTextureHandle mTexture;
         
         bool mCompiled;

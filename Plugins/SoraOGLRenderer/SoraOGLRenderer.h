@@ -23,7 +23,7 @@ namespace sora {
 
 		bool update();
 
-		void beginScene(uint32 color=0, ulong32 target=0, bool clear=true);
+		void beginScene(uint32 color=0, SoraTargetHandle target=0, bool clear=true);
 		void endScene();
 		
 		void beginFrame();
@@ -34,9 +34,9 @@ namespace sora {
 
 		void start(SoraTimer* timer);
 
-		ulong32 createTarget(int width, int height, bool zbuffer=true);
-		void	freeTarget(ulong32 t);
-		ulong32 getTargetTexture(ulong32 t);
+		SoraTargetHandle createTarget(int width, int height, bool zbuffer=true);
+		void             freeTarget(SoraTargetHandle t);
+		SoraTargetHandle getTargetTexture(SoraTargetHandle t);
 
 		SoraWindowHandle createWindow(SoraWindowInfoBase* windowInfo);
 		void setWindowSize(int32 w, int32 h);
@@ -56,7 +56,7 @@ namespace sora {
 
 		void renderQuad(SoraQuad& quad);
 		void renderTriple(SoraTriple& trip);
-		void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode);
+		void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode);
         
         void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f);
 		void renderBox		(float x1, float y1, float x2, float y2, uint32 color, float lineWidth=1.f, float z=0.f);
@@ -70,7 +70,6 @@ namespace sora {
         
         void setProjectionMatrix(const SoraMatrix4& matrix);
         SoraMatrix4 getProjectionMatrix() const;
-        
         
         void setVerticalSync(bool flag);
 
@@ -95,13 +94,16 @@ namespace sora {
         
         void getDesktopResolution(int* w, int* h);
         void setQueryVideoModeCallback(QueryVideoMode func);
+        
+        void setRenderState(RenderStateType, RenderStateParam);
+        RenderStateParam getRenderState(RenderStateType);
 
 	private:
 		void applyTransform();
 		void bindTexture(SoraTexture* tex);
 		
-		
-		inline int32 _modeToGLMode(int32 mode);
+        inline int32 _paramToGLParam(RenderStateParam param);
+		inline int32 _modeToGLMode(RenderMode mode);
 		inline void _glInitialize();
 		inline void _glEndFrame();
 		inline void _glBeginFrame();

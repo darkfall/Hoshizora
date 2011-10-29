@@ -20,7 +20,7 @@ namespace sora {
 	public:
 		static void renderQuad(SoraQuad& quad, SoraShaderContext* shader);
 		static void renderTriple(SoraTriple& trip, SoraShaderContext* shader);
-		static void renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode, SoraShaderContext* shader);
+		static void renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode, SoraShaderContext* shader);
 		
 		static void endSortAndRender();
 	};

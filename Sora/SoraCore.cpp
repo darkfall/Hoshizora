@@ -1076,7 +1076,7 @@ namespace sora {
 			pRenderSystem->renderTriple(trip);
 	}
 	
-	void SoraCore::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) {
+	void SoraCore::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode) {
 		sora_assert(bInitialized == true);
         
 		if(bZBufferArea) {

@@ -33,7 +33,7 @@ namespace sora {
 	public:
 		virtual bool update() = 0;
 
-		virtual void beginScene(uint32 c, ulong32 t, bool clear=true) = 0;
+		virtual void beginScene(uint32 c, SoraTargetHandle t, bool clear=true) = 0;
 		virtual void endScene() = 0;
 		
 		virtual void beginFrame() = 0;
@@ -41,9 +41,9 @@ namespace sora {
 
 		virtual void start(SoraTimer* timer) = 0;
 
-		virtual ulong32 createTarget(int width, int height, bool zbuffer=true) = 0;
-		virtual void	freeTarget(ulong32 t) = 0;
-		virtual ulong32 getTargetTexture(ulong32 t) = 0;
+		virtual SoraTargetHandle createTarget(int width, int height, bool zbuffer=true) = 0;
+		virtual void             freeTarget(SoraTargetHandle t) = 0;
+		virtual SoraTargetHandle getTargetTexture(SoraTargetHandle t) = 0;
 
 		virtual SoraWindowHandle createWindow(SoraWindowInfoBase* windowInfo) = 0;
 
@@ -58,7 +58,7 @@ namespace sora {
 
 		virtual void renderQuad(SoraQuad& quad) = 0;
 		virtual void renderTriple(SoraTriple& trip) = 0;
-		virtual void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, int32 mode) = 0;
+		virtual void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode) = 0;
 
 		virtual void renderLine(float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f) = 0;
 		virtual void renderBox(float x1, float y1, float x2, float y2, uint32 color, float lineWidth=1.f, float z=0.f) = 0;
@@ -72,6 +72,9 @@ namespace sora {
         
         virtual void setProjectionMatrix(const SoraMatrix4& matrix) = 0;
         virtual SoraMatrix4 getProjectionMatrix() const = 0;
+        
+        virtual void setRenderState(RenderStateType type, RenderStateParam param) = 0;
+        virtual RenderStateParam getRenderState(RenderStateType type) = 0;
         
 		virtual void shutdown() = 0;
 		virtual ulong32 getMainWindowHandle() = 0;

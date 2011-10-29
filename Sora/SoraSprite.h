@@ -38,12 +38,12 @@ namespace sora {
         virtual void renderInBox(float x1, float y1, float x2, float y2);
         virtual void render4V(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
         virtual void renderEx(float x, float y, float rot, float scalex, float scaley);
-		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
+		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, RenderMode mode);
 
 		virtual int32 update(float dt);
 
-		void    setTexture(SoraTextureHandle tex);
-		void    setTextureRect(float x, float y, float width, float height);
+		void     setTexture(SoraTextureHandle tex);
+		void     setTextureRect(float x, float y, float width, float height);
 		SoraRect getTextureRect() const;
 		
 		void    setColor(uint32 c, int32 i=-1);

@@ -26,7 +26,7 @@ namespace sora {
 		virtual void render();
 		virtual void render(float x, float y);
 		virtual void render4V(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
-		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, int32 mode);
+		virtual void renderWithVertices(SoraVertex* vertices, uint32 size, RenderMode mode);
 		
 	private:
 		inline void applyChange();

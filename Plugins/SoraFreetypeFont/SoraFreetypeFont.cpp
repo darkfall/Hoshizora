@@ -328,7 +328,7 @@ namespace sora {
 		va_list l;
 		va_start(l, format);
         
-		wchar_t text[1024];
+		wchar_t text[1024] = {0};
 		vswprintf(text, 1024, format, l);
         
 		render(x, y, align, text);

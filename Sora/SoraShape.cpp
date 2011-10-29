@@ -9,10 +9,11 @@
 #include "SoraShape.h"
 #include "SoraCore.h"
 #include "SoraSprite.h"
+#include "SoraVertexList.h"
 
 namespace sora {
     
-    SoraShape::SoraShape(SoraTextureHandle handle, int32 mode):
+    SoraShape::SoraShape(SoraTextureHandle handle, RenderMode mode):
     mCompiled(false),
     mRenderMode(mode),
     mTexture(handle),
@@ -32,6 +33,13 @@ namespace sora {
             SoraCore::Instance()->freeTarget(mRenderTarget);
         if(mSprite)
             delete mSprite;
+    }
+    
+    void SoraShape::initWithVertexList(const SoraVertexList& list) {
+        mCompiled = true;
+        mTexture = list.mTexture;
+        mRenderMode = list.mVertexMode;
+        mVertices = list.mVertexList;
     }
     
     void SoraShape::addPoint(float x, float y, uint32 color, float tx, float ty) {
@@ -104,11 +112,11 @@ namespace sora {
             spriteRender();
     }
     
-    void SoraShape::setRenderMode(int32 mode) {
+    void SoraShape::setRenderMode(RenderMode mode) {
         mRenderMode = mode;
     }
     
-    int32 SoraShape::getRenderMode() const {
+    RenderMode SoraShape::getRenderMode() const {
         return mRenderMode;
     }
     
