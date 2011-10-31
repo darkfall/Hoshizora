@@ -29,7 +29,8 @@ namespace sora {
         
         virtual void onUpdate(float dt) = 0;
         
-        static void updateList(float dt);
+    public:
+        static void UpdateList(float dt);
         
     private:
         typedef std::list<SoraAutoUpdate*> UpdateObjectList;

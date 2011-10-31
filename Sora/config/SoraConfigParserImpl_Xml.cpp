@@ -30,7 +30,7 @@ namespace sora {
         return false;
     }
     
-    bool SoraConfigParserXmlImpl::open(void* data, ulong32 size) {
+    bool SoraConfigParserXmlImpl::open(void* data, uint32 size) {
         if(mDocument) {
             delete mDocument;
         }

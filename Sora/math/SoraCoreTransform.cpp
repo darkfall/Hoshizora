@@ -2,20 +2,20 @@
 
 namespace sora {
     
-    SoraCoreTransform::SoraCoreTransform(float _f): 
+    SoraCoreTransform::SoraCoreTransform(real _f): 
     f1(_f), 
     bClean(false), 
     iKind(TRANSFORM_1F) {
     }
     
-    SoraCoreTransform::SoraCoreTransform(float _f1, float _f2): 
+    SoraCoreTransform::SoraCoreTransform(real _f1, real _f2): 
     f1(_f1), 
     f2(_f2), 
     bClean(false), 
     iKind(TRANSFORM_2F) {
     }
     
-    SoraCoreTransform::SoraCoreTransform(float _f1, float _f2, float _f3): 
+    SoraCoreTransform::SoraCoreTransform(real _f1, real _f2, real _f3): 
     f1(_f1), 
     f2(_f2), 
     f3(_f3), 
@@ -23,7 +23,7 @@ namespace sora {
     iKind(TRANSFORM_3F) {
     }
     
-    SoraCoreTransform::SoraCoreTransform(float _f1, float _f2, float _f3, float _f4):
+    SoraCoreTransform::SoraCoreTransform(real _f1, real _f2, real _f3, real _f4):
     f1(_f1), 
     f2(_f2), 
     f3(_f3), 
@@ -37,20 +37,20 @@ namespace sora {
     iKind(0) {
     }
     
-    void SoraCoreTransform::Set(float _f) { 
+    void SoraCoreTransform::Set(real _f) { 
         f1 = _f; 
         bClean = false;
         iKind = TRANSFORM_1F;
     }
     
-    void SoraCoreTransform::Set(float _f1, float _f2) {
+    void SoraCoreTransform::Set(real _f1, real _f2) {
         f1 = _f1; 
         f2 = _f2;
         bClean = false;
         iKind = TRANSFORM_2F;
     }
     
-    void SoraCoreTransform::Set(float _f1, float _f2, float _f3) { 
+    void SoraCoreTransform::Set(real _f1, real _f2, real _f3) { 
         f1 = _f1;
         f2 = _f2; 
         f3 = _f3;
@@ -58,7 +58,7 @@ namespace sora {
         iKind = TRANSFORM_3F;
     }
     
-    void SoraCoreTransform::Set(float _f1, float _f2, float _f3, float _f4) {
+    void SoraCoreTransform::Set(real _f1, real _f2, real _f3, real _f4) {
         f1 = _f1;
         f2 = _f2;
         f3 = _f3;
@@ -87,7 +87,7 @@ namespace sora {
 		return *this;
 	}
 
-	SoraCoreTransform SoraCoreTransform::operator / (float divider) const {
+	SoraCoreTransform SoraCoreTransform::operator / (real divider) const {
 		if(bClean) return *this;
 	
 		switch (iKind) {
@@ -134,7 +134,7 @@ namespace sora {
 		return *this;
 	}	
 
-	SoraCoreTransform SoraCoreTransform::operator * (float m) const {
+	SoraCoreTransform SoraCoreTransform::operator * (real m) const {
 		if(bClean) return *this;
 	
 		switch (iKind) {
@@ -152,16 +152,16 @@ namespace sora {
 		switch (iKind) {
 			case TRANSFORM_1F: return SoraCoreTransform(f1*rhs.f1); break;
 			case TRANSFORM_2F: {
-                float x = f1 * rhs.f1;
-                float y = f2 * rhs.f2;
+                real x = f1 * rhs.f1;
+                real y = f2 * rhs.f2;
                 return SoraCoreTransform(x, y);
                 break;
             }
                 
 			case TRANSFORM_3F: {
-                float x = f1 * rhs.f1;
-                float y = f2 * rhs.f2;
-                float z = f3 * rhs.f3;
+                real x = f1 * rhs.f1;
+                real y = f2 * rhs.f2;
+                real z = f3 * rhs.f3;
                 return SoraCoreTransform(x, y, z);
                 break;
             }
@@ -216,27 +216,27 @@ namespace sora {
 		return *this;
 	}
 
-	float SoraCoreTransform::Get1st() const {
+	real SoraCoreTransform::Get1st() const {
 		if(bClean) return 0.f;
 		
 		return f1;
 	}
 
-	float SoraCoreTransform::Get2nd() const {
+	real SoraCoreTransform::Get2nd() const {
 		if(bClean) return 0.f;
 	
 		if(iKind >= TRANSFORM_2F) return f2;
 		return 0.f;
 	}
 
-	float SoraCoreTransform::Get3rd() const {
+	real SoraCoreTransform::Get3rd() const {
 		if(bClean) return 0.f;
 	
 		if(iKind >= TRANSFORM_3F) return f3;
 		return 0.f;
 	}
 
-	float SoraCoreTransform::Get4th() const {
+	real SoraCoreTransform::Get4th() const {
 		if(bClean) return 0.f;
 	
 		if(iKind >= TRANSFORM_4F) return f4;

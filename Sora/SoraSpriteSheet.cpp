@@ -58,7 +58,7 @@ namespace sora {
         return false;
     }
     
-    bool SoraSpriteSheet::loadFromMemory(void* data, ulong32 size) {
+    bool SoraSpriteSheet::loadFromMemory(void* data, uint32 size) {
         release();
         
         SoraConfigParser parser;
@@ -109,9 +109,7 @@ namespace sora {
                                                  info.mTextureRect.y2);
                 }
                 
-                attachShaderToRender();
                 info.mSprite->render(x, y);
-                detachShaderFromRender();
             }
         } else
             log_error("SoraSpriteSheet: no texture available, maybe forgot to load sheet?");

@@ -29,7 +29,7 @@ namespace sora {
         
 	public:
 		
-		void setTexture(const SoraString& decalName, ulong32 tex);
+		void setTexture(const SoraString& decalName, SoraHandle tex);
 		bool setParameterfv(const char* name, float* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
         bool getParameterfv(const char* name, float* val, uint32 size);

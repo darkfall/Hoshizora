@@ -38,11 +38,11 @@ namespace sora {
 			mFileBuffer = buffer;
 		}
 		
-		ulong32 getReceivedSize() const {
+		uint32 getReceivedSize() const {
 			return mReceivedSize;
 		}
 		
-		void setReceivedSize(ulong32 size) {
+		void setReceivedSize(uint32 size) {
 			mReceivedSize = size;
 		}
 		
@@ -77,7 +77,7 @@ namespace sora {
 	private:
 		SoraMemoryBuffer* mFileBuffer;
 		
-		ulong32 mReceivedSize;
+		uint32 mReceivedSize;
 		double mReceiveTime;
 		double mDownloadSpeed;
 		
@@ -85,7 +85,7 @@ namespace sora {
 	};
 
 	typedef struct tagSoraHttpDownloadFile {
-		ulong32 receivedSize;
+		uint32 receivedSize;
 		double receiveTime;
 		double downloadSpeed;
 		int32 state;
@@ -117,7 +117,7 @@ namespace sora {
 		void cleanup();
 
 		int32 getState() const ;
-		ulong32 getDownloadedSize() const ;
+		uint32 getDownloadedSize() const ;
 		double getDownloadTime() const;
 		double getDownloadSpeed() const;
 		
@@ -167,7 +167,7 @@ namespace sora {
 		
 		SoraMemoryBuffer* getMemoryBuffer() const;
 		
-		ulong32		getDownloadedSize() const;
+		uint32		getDownloadedSize() const;
 		double		getDownloadTime() const;
 		double		getDownloadSpeed() const;
 		int32		getState() const;

@@ -40,19 +40,19 @@ namespace sora {
 			return 0;
         }
         
-        SoraStringId getHandleSrcFromWidgetHandle(ulong32 handle) {
+        SoraStringId getHandleSrcFromWidgetHandle(SoraHandle handle) {
             HandleSrcMap::iterator itHandleSrc = widgetSrc.find(handle);
             if(itHandleSrc != widgetSrc.end())
                 return itHandleSrc->second;
             return 0;
         }
         
-        void registerHandleSrc(ulong32 widget, const SoraString& src) {
+        void registerHandleSrc(SoraHandle widget, const SoraString& src) {
             widgetSrc[widget] = GetUniqueStringId(src);
         }
         
 	private:
-        typedef sora_hash_map<ulong32, SoraStringId> HandleSrcMap;
+        typedef sora_hash_map<SoraHandle, SoraStringId> HandleSrcMap;
         HandleSrcMap widgetSrc;
         
 		typedef std::map<SoraStringId, SoraGUIResponser*> ResponserMap;

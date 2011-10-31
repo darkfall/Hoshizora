@@ -22,10 +22,10 @@ namespace sora {
 	
         void setPackCode(const char* lpszPackCode);
 
-        void* getFile(const StringType& filename, uLong readsize);
+        void* getFile(const StringType& filename, uint32 readsize);
 
-        ulong32 getFileSize(const StringType& filename);
-        ulong32 getFileCRC(const StringType& filename);
+        uint32 getFileSize(const StringType& filename);
+        uint32 getFileCRC(const StringType& filename);
 		
         bool enumFiles(std::vector<StringType>& cont, const StringType& folder);
 

@@ -23,6 +23,7 @@ namespace sora {
         CONFIG_XML = 1,
         CONFIG_JSON,
         CONFIG_INI,
+        
         CONFIG_AUTO_DETECT = 10,
     };
     

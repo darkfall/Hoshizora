@@ -95,7 +95,7 @@ namespace sora {
 		this->context = context;
         this->profile = profile;
 		
-		ulong32 size;
+		uint32 size;
 		const char* data = (const char*)SoraCore::Instance()->getResourceFile(file, size);
 		if(data) {
             program = cgCreateProgram(context,
@@ -143,7 +143,7 @@ namespace sora {
         return true;
 	}
 
-	void SoraCGGLShader::setTexture(const SoraString& decalName, ulong32 tex) {
+	void SoraCGGLShader::setTexture(const SoraString& decalName, SoraHandle tex) {
 		textureParam = cgGetNamedParameter(program, decalName.c_str());
         cgGLSetTextureParameter(textureParam, (GLuint)((SoraTexture*)tex)->mTextureID);
 	}

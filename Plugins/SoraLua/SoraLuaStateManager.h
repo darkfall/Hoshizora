@@ -18,16 +18,16 @@ namespace sora {
 		friend class SoraSingleton<SoraLuaObjectManager>;
 
 	public:
-		ulong32 registerLuaObject(SoraLuaObject* obj);
+		SoraHandle registerLuaObject(SoraLuaObject* obj);
 		void unregisterLuaObject(SoraLuaObject* obj);
-		SoraLuaObject* getLuaObject(ulong32 h);
+		SoraLuaObject* getLuaObject(SoraHandle h);
 
-		void sendMessage(const SoraString& message, const SoraString& params, ulong32 receiver=0);
+		void sendMessage(const SoraString& message, const SoraString& params, SoraHandle receiver=0);
 
 	private:
 		void doSendMessage(const SoraString& message, const SoraString& params, SoraLuaObject* obj);
 
-		typedef map<ulong32, SoraLuaObject*> LUA_OBJECT_MAP;
+		typedef map<SoraHandle, SoraLuaObject*> LUA_OBJECT_MAP;
 
 		LUA_OBJECT_MAP luaObjectMap;
 	};

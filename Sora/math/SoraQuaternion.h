@@ -16,13 +16,13 @@ namespace sora {
 	
 	class SORA_API SoraQuaternion {
 	public:
-		SoraQuaternion(float _x, float _y, float _z, float _w):
+		SoraQuaternion(real _x, real _y, real _z, real _w):
 			w(_w), x(_x), y(_y), z(_z) {}
 		SoraQuaternion(const SoraQuaternion& quad):
 			w(quad.w), x(quad.x), y(quad.y), z(quad.z) {}
 		SoraQuaternion():
 			w(0.f), x(0.f), y(0.f), z(0.f) {}
-        SoraQuaternion(float eulerX, float eulerY, float eulerZ) {
+        SoraQuaternion(real eulerX, real eulerY, real eulerZ) {
             SoraQuaternion roll( sinf( eulerX * 0.5f ), 0, 0, cosf( eulerX * 0.5f ) );
             SoraQuaternion pitch( 0, sinf( eulerY * 0.5f ), 0, cosf( eulerY * 0.5f ) );
             SoraQuaternion yaw( 0, 0, sinf( eulerZ * 0.5f ), cosf( eulerZ * 0.5f ) );
@@ -31,7 +31,7 @@ namespace sora {
             *this = pitch * roll * yaw;
         }
 		
-		void set(float _x, float _y, float _z, float _w) {
+		void set(real _x, real _y, real _z, real _w) {
 			this->x = _x; 
             this->y = _y; 
             this->z = _z; 
@@ -45,7 +45,7 @@ namespace sora {
             this->w = quad.w;
 		}
 		
-		SoraVector3 get() {
+		SoraVector3 get() const {
 			return SoraVector3(x, y, z);
 		}
 		
@@ -59,7 +59,7 @@ namespace sora {
 		
 		inline SoraQuaternion operator*(const SoraQuaternion& rhs) {
 			SoraQuaternion ans;
-			float d1, d2, d3, d4;
+			real d1, d2, d3, d4;
 			d1 = this->w*rhs.w;
 			d2 = -this->x*rhs.x;
 			d3 = -this->y*rhs.y;
@@ -88,10 +88,10 @@ namespace sora {
 			return *this;
 		}
 		
-		void makeRotate(float angle, float _x, float _y, float _z) {
-			float inversenorm = (float)1.0f/sqrtf(x*x + y*y + z*z);
-			float coshalfangle = cosf(0.5f*angle);
-			float sinhalfangle = sinf(0.5f*angle);
+		void makeRotate(real angle, real _x, real _y, real _z) {
+			real inversenorm = (real)1.0f/sqrtf(x*x + y*y + z*z);
+			real coshalfangle = cosf(0.5f*angle);
+			real sinhalfangle = sinf(0.5f*angle);
 			
 			this->x = _x * sinhalfangle * inversenorm;
 			this->y = _y * sinhalfangle * inversenorm;
@@ -99,17 +99,17 @@ namespace sora {
 			this->w = coshalfangle;
 		}
 		
-		void makeRotate(float angle, const SoraVector3& vec) {
+		void makeRotate(real angle, const SoraVector3& vec) {
 			makeRotate(angle, vec.x, vec.y, vec.z);
 		}
 		
-		void makeRotate(float roll, float pitch, float yaw) {
-			float sh0 = sinf(0.5f*roll);
-			float ch0 = cosf(0.5f*roll);
-			float sh1 = sinf(0.5f*pitch);
-			float ch1 = cosf(0.5f*pitch);
-			float sh2 = sinf(0.5f*yaw);
-			float ch2 = cosf(0.5f*yaw);
+		void makeRotate(real roll, real pitch, real yaw) {
+			real sh0 = sinf(0.5f*roll);
+			real ch0 = cosf(0.5f*roll);
+			real sh1 = sinf(0.5f*pitch);
+			real ch1 = cosf(0.5f*pitch);
+			real sh2 = sinf(0.5f*yaw);
+			real ch2 = cosf(0.5f*yaw);
 			
 			this->x = sh0*ch1*ch2 + ch0*sh1*sh2;
 			this->y = ch0*sh2*ch1 + sh0*ch2*sh1;
@@ -118,18 +118,18 @@ namespace sora {
 		}
 		
 		SoraVector3 rotate(const SoraVector3& v) const {
-			float ux = this->w*v.x + this->y*v.z - this->z*v.y;
-			float uy = this->w*v.y + this->z*v.x - this->x*v.z;
-			float uz = this->w*v.z + this->x*v.y - this->y*v.x;
-			float uw = -this->x*v.x - this->y*v.y - this->z*v.z;
-			float vx = -uw*this->x + ux*this->w - uy*this->z + uz*this->y;
-			float vy = -uw*this->y + uy*this->w - uz*this->x + ux*this->z;
-			float vz = -uw*this->z + uz*this->w - ux*this->y + uz*this->x;
+			real ux = this->w*v.x + this->y*v.z - this->z*v.y;
+			real uy = this->w*v.y + this->z*v.x - this->x*v.z;
+			real uz = this->w*v.z + this->x*v.y - this->y*v.x;
+			real uw = -this->x*v.x - this->y*v.y - this->z*v.z;
+			real vx = -uw*this->x + ux*this->w - uy*this->z + uz*this->y;
+			real vy = -uw*this->y + uy*this->w - uz*this->x + ux*this->z;
+			real vz = -uw*this->z + uz*this->w - ux*this->y + uz*this->x;
 			return SoraVector3(vx, vy, vz);
 		}
 		
-		void getRotate(float& angle, float& _x, float& _y, float& _z) const {
-			float sinhalfangle = sqrtf(this->x*this->x + this->y*this->y + this->z*this->z);
+		void getRotate(real& angle, real& _x, real& _y, real& _z) const {
+			real sinhalfangle = sqrtf(this->x*this->x + this->y*this->y + this->z*this->z);
 			angle = 2.f * atan2f(sinhalfangle, this->w);
 			if(sinhalfangle) {
 				_x = x / sinhalfangle;
@@ -142,13 +142,13 @@ namespace sora {
 			}
 		}
 		
-		void getRotate(float& angle, SoraVector3& vec) const {
+		void getRotate(real& angle, SoraVector3& vec) const {
 			getRotate(angle, vec.x, vec.y, vec.z);
 		}
 		
-		void slerp(float t, const SoraQuaternion& from, const SoraQuaternion& to) {
-			const float epsilon = 0.00001f;
-			float cosomega, scale_from, scale_to;
+		void slerp(real t, const SoraQuaternion& from, const SoraQuaternion& to) {
+			const real epsilon = 0.00001f;
+			real cosomega, scale_from, scale_to;
 			
 			SoraQuaternion quatTo(to);
 			
@@ -159,8 +159,8 @@ namespace sora {
 			}
 			
 			if((1.0 - cosomega) > epsilon) {
-				float omega = acosf(cosomega);
-				float invsinomega = 1.0f/sinf(omega);
+				real omega = acosf(cosomega);
+				real invsinomega = 1.0f/sinf(omega);
 				scale_from = sinf((1.0f-t)*omega)*invsinomega;
 				scale_to = sinf(t*omega)*invsinomega;
 			} else {
@@ -175,7 +175,7 @@ namespace sora {
 		}
 		
 	//private:
-		float w, x, y, z;
+		real w, x, y, z;
 	};
 		
 }	// namespace sora

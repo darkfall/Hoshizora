@@ -15,10 +15,10 @@ namespace sora {
     
     struct SORA_API SoraRect {
         
-        float x1, y1;
-        float x2, y2;
+        real x1, y1;
+        real x2, y2;
         
-        SoraRect(float _x1, float _y1, float _x2, float _y2, bool asWH=false):
+        SoraRect(real _x1, real _y1, real _x2, real _y2, bool asWH=false):
         x1(_x1), y1(_y1),
         x2(_x2), y2(_y2) {
             
@@ -33,7 +33,7 @@ namespace sora {
             
         }
         
-        SoraRect(const SoraVector& pos, float r) {
+        SoraRect(const SoraVector& pos, real r) {
             setAsBox(pos.x, pos.y, r);
         }
         
@@ -44,28 +44,28 @@ namespace sora {
             this->y2 = upper.y;
         }
         
-        void set(float _x1, float _y1, float _x2, float _y2, bool asWH=false) {
+        void set(real _x1, real _y1, real _x2, real _y2, bool asWH=false) {
             this->x1 = _x1; 
             this->y1 = _y1;
             this->x2 = asWH ? _x1 + _x2 : _x2;
             this->y2 = asWH ? _y1 + _y2 : _y2;
         }
         
-        void setAsBox(float x, float y, float r) {
+        void setAsBox(real x, real y, real r) {
             this->x1 = x - r;
             this->y1 = y - r;
             this->x2 = x + r;
             this->y2 = y + r;
         }
         
-        void encapsulate(float x, float y) {
+        void encapsulate(real x, real y) {
             if(x<this->x1) this->x1 = x;
             if(x>this->x2) this->x2 = x;
             if(y<this->y1) this->y1 = y;
             if(y>this->y2) this->y2 = y;
         }
         
-        bool testPoint(float x, float y) const {
+        bool testPoint(real x, real y) const {
             return x>=x1 && x<=x2 && y>=y1 && y<=y2;
         }
         

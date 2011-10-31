@@ -71,7 +71,7 @@ namespace sora {
 		pitch = 0.f;
 
         if(!SoraFileUtility::fileExists(path)) {            
-            ulong32 size;
+            uint32 size;
             void* data = SoraCore::Ptr->getResourceFile(path, size);
             if(data) {
                 readFileMem(data, size);
@@ -100,7 +100,7 @@ namespace sora {
         return FMOD_ERROR_CHECK(result)==FMOD_OK?1:0;
     }
     
-    int32 SoraFMODMusicFile::readFileMem(void* data, ulong32 length) {
+    int32 SoraFMODMusicFile::readFileMem(void* data, uint32 length) {
         if(!pSystem) return 0;
         if(pSound) closeFile();
 
@@ -297,7 +297,7 @@ namespace sora {
 		pitch = 0.f;
         
         if(!SoraFileUtility::fileExists(path)) {            
-            ulong32 size;
+            uint32 size;
             void* data = SoraCore::Ptr->getResourceFile(path, size);
             if(data) {
                 readFileMem(data, size);
@@ -333,7 +333,7 @@ namespace sora {
         return FMOD_ERROR_CHECK(result)==FMOD_OK?1:0;
     }
     
-    int32 SoraFMODSoundEffectFile::readFileMem(void* data, ulong32 length) {
+    int32 SoraFMODSoundEffectFile::readFileMem(void* data, uint32 length) {
         if(!pSystem) return 0;
         if(pSound) closeFile();
         

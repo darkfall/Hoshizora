@@ -163,7 +163,7 @@ namespace sora {
     void SoraText::spriteRender() {
         SoraVector dimensions = mFont->getStringDimensions(mText.c_str());
 
-        SoraCore::Instance()->beginScene(0, mTarget);
+        SoraCore::Instance()->beginScene(0x00000000, mTarget);
         
         if(mFont) {
             mFont->setCharRotation(mCharRotation);

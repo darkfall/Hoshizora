@@ -1,5 +1,5 @@
 //
-//  SoraScene.cpp
+//  Sora2DScene.cpp
 //  Sora
 //
 //  Created by Robert Bu on 7/17/11.
@@ -13,9 +13,9 @@
 
 namespace sora {
 
-    typedef SoraTransitionModifier<SoraScene> ScenePositionModifier;
+    typedef SoraTransitionModifier<Sora2DScene> ScenePositionModifier;
 
-    SoraScene::SoraScene(int32 width, int32 height):
+    Sora2DScene::Sora2DScene(int32 width, int32 height):
     mRealWidth(0),
     mRealHeight(0),
     mRotation(0.f),
@@ -27,7 +27,7 @@ namespace sora {
         adjustSize(width, height);
     }
     
-    SoraScene::~SoraScene() {
+    Sora2DScene::~Sora2DScene() {
         LayerMap::iterator itLayer = mLayers.begin();
         while(itLayer != mLayers.end()) {
             delete itLayer->second;
@@ -36,15 +36,15 @@ namespace sora {
         mLayers.clear();
     }
     
-    int32 SoraScene::getWidth() const {
+    int32 Sora2DScene::getWidth() const {
         return mWidth;
     }
     
-    int32 SoraScene::getHeight() const {
+    int32 Sora2DScene::getHeight() const {
         return mHeight;
     }
 
-    void SoraScene::adjustSize(int32 width, int32 height) {
+    void Sora2DScene::adjustSize(int32 width, int32 height) {
         if(width == 0 || height == 0)
             THROW_SORA_EXCEPTION(InvalidArgumentException, "Attempt to create a empty scene with width or height = 0");
         
@@ -53,8 +53,8 @@ namespace sora {
         _adjustSize();
     }
      
-    void SoraScene::add(SoraObject* obj) {
-        SoraScene* subScene = dynamic_cast<SoraScene*>(obj);
+    void Sora2DScene::add(SoraObject* obj) {
+        Sora2DScene* subScene = dynamic_cast<Sora2DScene*>(obj);
         if(subScene == NULL)
             add(obj, 0);
         else {
@@ -64,7 +64,7 @@ namespace sora {
         }
     }
     
-    void SoraScene::del(SoraObject* obj, int32 layer) {
+    void Sora2DScene::del(SoraObject* obj, int32 layer) {
         LayerMap::iterator itLayer = mLayers.find(layer);
         if(itLayer != mLayers.end()) {
             SoraLayer* layer = itLayer->second;
@@ -73,20 +73,20 @@ namespace sora {
     }
 
     
-    void SoraScene::onParentChange(SoraObject* obj) {
+    void Sora2DScene::onParentChange(SoraObject* obj) {
         if(obj == NULL) {
             mParentScene = NULL;
             adjustSize(mRealWidth, mRealHeight);
         }
         
-        SoraScene* parentScene = dynamic_cast<SoraScene*>(obj);
+        Sora2DScene* parentScene = dynamic_cast<Sora2DScene*>(obj);
         if(parentScene != NULL) {
             mParentScene = parentScene;
             _adjustSize();
         }
     }
     
-    void SoraScene::_adjustSize() {
+    void Sora2DScene::_adjustSize() {
         if(mParentScene) {
             int32 maxRight = (int32)mParent->getPositionX() + mParentScene->getWidth();
             int32 maxBottom = (int32)mParent->getPositionY() + mParentScene->getHeight();
@@ -97,7 +97,7 @@ namespace sora {
         }
     }
     
-    void SoraScene::add(SoraObject* obj, int32 layerDepth) {
+    void Sora2DScene::add(SoraObject* obj, int32 layerDepth) {
         LayerMap::iterator itLayer = mLayers.find(layerDepth);
         if(itLayer != mLayers.end()) {
             SoraLayer* layer = itLayer->second;
@@ -109,7 +109,7 @@ namespace sora {
         }
     }
     
-    SoraLayer* SoraScene::addLayer(int32 layerDepth) {
+    SoraLayer* Sora2DScene::addLayer(int32 layerDepth) {
         SoraLayer* layer = new SoraLayer(layerDepth);
         if(!layer)
             THROW_SORA_EXCEPTION(RuntimeException, "Error creating new layer");
@@ -119,7 +119,7 @@ namespace sora {
         return layer;
     }
     
-    void SoraScene::removeLayer(int32 layerDepth) {
+    void Sora2DScene::removeLayer(int32 layerDepth) {
         LayerMap::iterator itLayer = mLayers.find(layerDepth);
         if(itLayer != mLayers.end()) {
             SoraLayer* layer = itLayer->second;
@@ -128,7 +128,7 @@ namespace sora {
         }
     }
     
-    void SoraScene::setLayerDepth(int32 layerDepth, int32 newDepth) {
+    void Sora2DScene::setLayerDepth(int32 layerDepth, int32 newDepth) {
         LayerMap::iterator itLayer = mLayers.find(layerDepth);
         if(itLayer != mLayers.end()) {
             mLayers.insert(std::make_pair(newDepth, itLayer->second));
@@ -137,7 +137,7 @@ namespace sora {
         }
     }
     
-    void SoraScene::combineLayer(int32 layer1, int32 layer2) {
+    void Sora2DScene::combineLayer(int32 layer1, int32 layer2) {
         LayerMap::iterator itLayerA = mLayers.find(layer1);
         LayerMap::iterator itLayerB = mLayers.find(layer2);
         if(itLayerA != mLayers.end() &&
@@ -151,11 +151,11 @@ namespace sora {
             mLayers.insert(std::make_pair(layerA->getLayerDepth(), layerA));
             mLayers.insert(std::make_pair(layerB->getLayerDepth(), layerB));
         } else {
-            log_warning(vamssg("SoraScene: Error combining layer %d and %d", layer1, layer2));
+            log_warning(vamssg("Sora2DScene: Error combining layer %d and %d", layer1, layer2));
         }
     }
     
-    SoraLayer* SoraScene::getLayer(int32 layerDepth) const {
+    SoraLayer* Sora2DScene::getLayer(int32 layerDepth) const {
         LayerMap::const_iterator itLayer = mLayers.find(layerDepth);
         if(itLayer != mLayers.end()) {
             return itLayer->second;
@@ -163,7 +163,7 @@ namespace sora {
         return NULL;
     }
     
-    SoraLayer* SoraScene::operator[](int32 layerDepth) const {
+    SoraLayer* Sora2DScene::operator[](int32 layerDepth) const {
         LayerMap::const_iterator itLayer = mLayers.find(layerDepth);
         if(itLayer != mLayers.end()) {
             return itLayer->second;
@@ -171,27 +171,27 @@ namespace sora {
         return NULL;
     }
     
-    void SoraScene::render() {
+    void Sora2DScene::render() {
         if(mRenderToCanvas && mCanvas) 
             mCanvas->beginRender();
         
         sora::SoraCore::Ptr->pushTransformMatrix();
         if(!mCamera) {
             sora::SoraCore::Ptr->setTransform(0.f, 
-                                     0.f, 
-                                     getPositionX(), 
-                                     getPositionY(),
-                                     mRotation,
-                                     mHScale,
-                                     mVScale);
+                                              0.f, 
+                                              getPositionX(), 
+                                              getPositionY(),
+                                              mRotation,
+                                              mHScale,
+                                              mVScale);
         } else {
             sora::SoraCore::Ptr->setTransform(mCamera->getPositionX(), 
-                                     mCamera->getPositionY(), 
-                                     getPositionX(), 
-                                     getPositionY(),
-                                     mRotation+mCamera->getRotation(),
-                                     mHScale+mCamera->getHZoom()-1.f,
-                                     mVScale+mCamera->getVZoom()-1.f);
+                                              mCamera->getPositionY(), 
+                                              getPositionX(), 
+                                              getPositionY(),
+                                              mRotation+mCamera->getRotation(),
+                                              mHScale+mCamera->getHZoom()-1.f,
+                                              mVScale+mCamera->getVZoom()-1.f);
         }
         
         sora::SoraCore::Ptr->pushClippingMatrix();
@@ -207,9 +207,9 @@ namespace sora {
             int32 rHeight = (int32)mCamera->getPositionY()+mCamera->getViewHeight()-ry;
             
             sora::SoraCore::Ptr->setClipping(rx,
-                                    ry,
-                                    rWidth>mWidth?mWidth:rWidth,
-                                    rHeight>mHeight?mHeight:rHeight);
+                                             ry,
+                                             rWidth>mWidth?mWidth:rWidth,
+                                             rHeight>mHeight?mHeight:rHeight);
         }
         
         LayerMap::iterator itLayer = mLayers.begin();
@@ -230,7 +230,7 @@ namespace sora {
             mCanvas->finishRender();
     }
 
-    void SoraScene::moveTo(float x, float y, float inTime) {
+    void Sora2DScene::moveTo(float x, float y, float inTime) {
         CreateModifierAdapter(this, 
                               new ScenePositionModifier(getPositionX(),
                                                         getPositionY(),
@@ -239,7 +239,7 @@ namespace sora {
                                                         inTime));
     }
     
-    int32 SoraScene::update(float dt) {        
+    int32 Sora2DScene::update(float dt) {        
         LayerMap::iterator itLayer = mLayers.begin();
         while(itLayer != mLayers.end()) {
             itLayer->second->update(dt);
@@ -254,29 +254,29 @@ namespace sora {
     }
 
     
-    void SoraScene::setRotation(float rot) {
+    void Sora2DScene::setRotation(float rot) {
         mRotation = rot;
     }
     
-    float SoraScene::getRotation() const {
+    float Sora2DScene::getRotation() const {
         return mRotation;
     }
     
-    void SoraScene::setScale(float scaleh, float scalev) {
+    void Sora2DScene::setScale(float scaleh, float scalev) {
         mHScale = scaleh;
         mVScale = scalev;
     }
     
-    void SoraScene::getScale(float* scaleh, float* scalev) {
+    void Sora2DScene::getScale(float* scaleh, float* scalev) {
         *scaleh = mHScale;
         *scalev = mVScale;
     }
     
-    void SoraScene::onPositionChange(float x, float y) {
+    void Sora2DScene::onPositionChange(float x, float y) {
         _adjustSize();
     }
     
-    void SoraScene::enableRenderToCanvas(bool flag) {
+    void Sora2DScene::enableRenderToCanvas(bool flag) {
         mRenderToCanvas = flag;
         if(flag) {
             if(!mCanvas) {
@@ -287,26 +287,26 @@ namespace sora {
         }
     }
     
-    bool SoraScene::isRenderToCanvasEnabled() const {
+    bool Sora2DScene::isRenderToCanvasEnabled() const {
         return mRenderToCanvas;
     }
     
-    SoraBaseCanvas* SoraScene::getCanvas() const {
+    SoraBaseCanvas* Sora2DScene::getCanvas() const {
         return mCanvas;
     }
     
-    void SoraScene::setCamera(SoraCamera* camera) {
+    void Sora2DScene::setCamera(Sora2DCamera* camera) {
         mCamera = camera;
         SoraObject* objects = getObjList();
         while(objects != NULL) {
-            SoraScene* scene = dynamic_cast<SoraScene*>(objects);
+            Sora2DScene* scene = dynamic_cast<Sora2DScene*>(objects);
             if(scene != NULL)
                 scene->setCamera(mCamera);
             objects = objects->getNext();
         }
     }
     
-    SoraCamera* SoraScene::getCamera() const {
+    Sora2DCamera* Sora2DScene::getCamera() const {
         return mCamera;
     }
 } // namespace sora

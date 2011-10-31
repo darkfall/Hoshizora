@@ -10,6 +10,7 @@
 #include "SoraZSorter.h"
 #include "SoraCore.h"
 #include "SoraSprite.h"
+#include "SoraRenderSystem.h"
 
 namespace sora {
 	
@@ -20,6 +21,7 @@ namespace sora {
 		int32				blend;
 		int32				size;
 		RenderMode			drawMode;
+        SoraMatrix4         viewMatrix;
 		
 		void release() {
 			if(vertex) {
@@ -45,7 +47,7 @@ namespace sora {
 	} __Z_BUFFER_NODE;
 	
 	__Z_BUFFER_NODE __z_buffer_array[1000];
-	
+    	
 	void __z_buffer_insert_node(const __Z_BUFFER_NODE& node, int32 z) {
 		if(z >= 1000)
 			z = 999;
@@ -78,6 +80,7 @@ namespace sora {
 		node.blend = quad.blend;
 		node.tex = quad.tex;
 		node.shader = shader;
+        node.viewMatrix = sora::SoraCore::Ptr->getRenderSystem()->getTransformMatrix();
 		
 		__z_buffer_insert_node(node, z);
 	}
@@ -91,6 +94,7 @@ namespace sora {
 		node.blend = trip.blend;
 		node.tex = trip.tex;
 		node.shader = shader;
+        node.viewMatrix = sora::SoraCore::Ptr->getRenderSystem()->getTransformMatrix();
 		
 		__z_buffer_insert_node(node, z);
 	}
@@ -106,11 +110,14 @@ namespace sora {
 		node.tex = (SoraTexture*)tex;
 		node.shader = shader;
 		node.drawMode = mode;
+        node.viewMatrix = sora::SoraCore::Ptr->getRenderSystem()->getTransformMatrix();
 		
 		__z_buffer_insert_node(node, z);
 	}
 	
 	void SoraZSorter::endSortAndRender() {
+        SoraCore::Ptr->pushTransformMatrix();
+        
 		for(int i=999; i>=0; --i) {
 			__Z_BUFFER_NODE* node = &__z_buffer_array[i];
 			while(node != NULL) {
@@ -125,6 +132,7 @@ namespace sora {
 					
 					if(node->shader)
 						SoraCore::Ptr->attachShaderContext(node->shader);
+                    SoraCore::Ptr->getRenderSystem()->setTransformMatrix(node->viewMatrix);
 					SoraCore::Ptr->renderQuad(quad);
 					SoraCore::Ptr->detachShaderContext();
 				} else if(node->size == 3) {
@@ -135,11 +143,13 @@ namespace sora {
 					
 					if(node->shader)
 						SoraCore::Ptr->attachShaderContext(node->shader);
+                    SoraCore::Ptr->getRenderSystem()->setTransformMatrix(node->viewMatrix);
 					SoraCore::Ptr->renderTriple(trip);
 					SoraCore::Ptr->detachShaderContext();
 				} else if(node->size != 0) {
 					if(node->shader)
 						SoraCore::Ptr->attachShaderContext(node->shader);
+                    SoraCore::Ptr->getRenderSystem()->setTransformMatrix(node->viewMatrix);
 					SoraCore::Ptr->renderWithVertices((SoraTextureHandle)node->tex, node->blend, node->vertex, node->size, node->drawMode);
 					SoraCore::Ptr->detachShaderContext();
 				}
@@ -147,5 +157,7 @@ namespace sora {
 			}
 			__z_buffer_array[i].release();
 		}
+        
+        SoraCore::Ptr->popTransformMatrix();
 	}
 }

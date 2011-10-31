@@ -13,7 +13,7 @@ namespace sora {
     
     SoraAutoUpdate::UpdateObjectList SoraAutoUpdate::mObjects;
     
-    void SoraAutoUpdate::updateList(float dt) {
+    void SoraAutoUpdate::UpdateList(float dt) {
         ConstVectorIterator<UpdateObjectList> iterator(mObjects);
         while(iterator.hasMoreElements()) {
             iterator.getNext()->onUpdate(dt);

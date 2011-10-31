@@ -16,7 +16,7 @@ namespace sora {
     
     class SORA_API SoraVector4 {
     public:
-        float x, y, z, w;
+        real x, y, z, w;
         
         SoraVector4():
         x( 0 ), 
@@ -24,19 +24,19 @@ namespace sora {
         z( 0 ), 
         w( 0 ) { }
         
-        explicit SoraVector4(const float x, const float y, const float z, const float w):
+        SoraVector4(const real x, const real y, const real z, const real w):
 		x( x ), 
         y( y ), 
         z( z ), 
         w( w ) { }
         
-        explicit SoraVector4(const SoraVector3& v):
+        SoraVector4(const SoraVector3& v):
         x( v.x ), 
         y( v.y ), 
         z( v.z ),
         w( 1.0f ) { }
         
-        void set(float _x, float _y, float _z, float _w) {
+        void set(real _x, real _y, real _z, real _w) {
             this->x = _x;
             this->y = _y;
             this->z = _z;
@@ -50,7 +50,7 @@ namespace sora {
                                this->w + v.w);
         }
         
-        SoraVector4 operator*(const float f) const {
+        SoraVector4 operator*(const real f) const {
             return SoraVector4(this->x * f, 
                                this->y * f, 
                                this->z * f, 

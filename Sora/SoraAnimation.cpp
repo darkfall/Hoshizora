@@ -20,7 +20,7 @@ namespace sora {
         
     }
     
-    SoraAnimation::SoraAnimation(void* pdata, ulong32 size) {
+    SoraAnimation::SoraAnimation(void* pdata, uint32 size) {
         
     }
     
@@ -28,7 +28,7 @@ namespace sora {
    
     }
     
-    void SoraAnimation::setFromMemory(void* pdata, ulong32 size) {
+    void SoraAnimation::setFromMemory(void* pdata, uint32 size) {
         
     }
     

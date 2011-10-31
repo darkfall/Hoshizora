@@ -28,7 +28,7 @@ namespace sora {
         return false;
     }
     
-    void SoraCameraZoomModifier::modify(SoraCamera* camera) {
+    void SoraCameraZoomModifier::modify(Sora2DCamera* camera) {
         camera->setZoom(mCurrZoom.x, mCurrZoom.y);
     }
     
@@ -37,7 +37,7 @@ namespace sora {
         mCurrTime = 0.f;
     }
   
-    SoraModifier<SoraCamera>* SoraCameraZoomModifier::clone() {
+    SoraModifier<Sora2DCamera>* SoraCameraZoomModifier::clone() {
         return new SoraCameraZoomModifier(mStartZoom.x, 
                                           mStartZoom.y,
                                           mEndZoom.x, 
@@ -63,7 +63,7 @@ namespace sora {
         return false;
     }
     
-    void SoraCameraRotationModifier::modify(SoraCamera* camera) {
+    void SoraCameraRotationModifier::modify(Sora2DCamera* camera) {
         camera->setRotation(mCurrRot);
     }
     
@@ -72,7 +72,7 @@ namespace sora {
         mCurrTime = 0.f;
     }
     
-    SoraModifier<SoraCamera>* SoraCameraRotationModifier::clone() {
+    SoraModifier<Sora2DCamera>* SoraCameraRotationModifier::clone() {
         return new SoraCameraRotationModifier(mStart,
                                               mEnd,
                                               mTime);

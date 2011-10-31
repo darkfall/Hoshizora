@@ -65,7 +65,7 @@ namespace sora {
         return pCanvasSprite;
     }
     
-    void SoraBaseCanvas::beginRender(ulong32 col) {
+    void SoraBaseCanvas::beginRender(uint32 col) {
         if(canvasTarget) {
             bSceneBegan = true;
             SoraCore::Ptr->beginScene(col, canvasTarget);

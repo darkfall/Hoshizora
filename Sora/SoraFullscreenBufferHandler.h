@@ -33,7 +33,7 @@ namespace sora {
         
     private:
         SoraSprite* mBufferSprite;
-        ulong32 mBufferTarget;
+        SoraHandle mBufferTarget;
         
         DelegateFuncType mDelegate;
     };

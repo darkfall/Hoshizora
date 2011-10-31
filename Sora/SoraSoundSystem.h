@@ -31,8 +31,8 @@ namespace sora {
         virtual SoraSoundEffectFile* createSoundEffectFile(const SoraWString& path) = 0;
         virtual SoraMusicFile* createMusicFile(bool bStream=true) = 0;
         virtual SoraSoundEffectFile* createSoundEffectFile() = 0;
-        virtual SoraMusicFile* createMusicFileFromMemory(void* pdata, ulong32 size) = 0;
-        virtual SoraSoundEffectFile* createSoundEffectFileFromMemory(void* pdata, ulong32 size) = 0;
+        virtual SoraMusicFile* createMusicFileFromMemory(void* pdata, uint32 size) = 0;
+        virtual SoraSoundEffectFile* createSoundEffectFileFromMemory(void* pdata, uint32 size) = 0;
 		/*
 			update sound device
 		*/
@@ -40,8 +40,8 @@ namespace sora {
         
         static SoraMusicFile* LoadMusicFromFile(const StringType& path, bool isStream=true);
         static SoraSoundEffectFile* LoadSoundEffectFromFile(const StringType& path);
-        static SoraMusicFile* LoadMusicFromMemory(void* pdata, ulong32 size);
-        static SoraSoundEffectFile* LoadSoundEffectFromMemory(void* pdata, ulong32 size);
+        static SoraMusicFile* LoadMusicFromMemory(void* pdata, uint32 size);
+        static SoraSoundEffectFile* LoadSoundEffectFromMemory(void* pdata, uint32 size);
 	};
 	
 } // namespace sora

@@ -9,7 +9,7 @@
 #include "SoraVertexList.h"
 #include "SoraSprite.h"
 #include "SoraLogger.h"
-
+#include "SoraRenderSystem.h"
 #include "SoraCore.h"
 
 namespace sora {
@@ -81,6 +81,10 @@ namespace sora {
     }
     
     const SoraArray<SoraVertex>& SoraVertexList::getVertexList() const {
+        return mVertexList;
+    }
+    
+    SoraArray<SoraVertex>& SoraVertexList::getVertexList() {
         return mVertexList;
     }
     
@@ -171,6 +175,10 @@ namespace sora {
         }
     }
     
+    void SoraVertexList::setRenderMode(RenderMode mode) {
+        mVertexMode = mode;
+    }
+    
     void SoraVertexList::colorPointer(size_t count, float* v, size_t stride) {
         float* p = v;
         for(size_t i=0; i<count; ++i) {
@@ -188,7 +196,13 @@ namespace sora {
     }
     
     void SoraVertexList::render() {
-        SoraCore::Ptr->renderWithVertices(mTexture, mBlendMode, mVertexList.begin(), mVertexList.size(), mVertexMode); 
+        SoraCore::Ptr->pushTransformMatrix();
+        
+        SoraCore::Ptr->getRenderSystem()->multTransformMatrix(getTransform().getTransformMatrix());
+        
+        SoraCore::Ptr->renderWithVertices(mTexture, mBlendMode, mVertexList.begin(), mVertexList.size(), mVertexMode);
+        
+        SoraCore::Ptr->popTransformMatrix();
     }
     
 } // namespace sora

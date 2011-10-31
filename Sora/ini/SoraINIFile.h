@@ -46,7 +46,7 @@ public:
 	~SoraINIFile();
 	
 	int32 readFile(const SoraWString& path);
-	int32 readFileMem(void* ptr, ulong32 size);
+	int32 readFileMem(void* ptr, uint32 size);
 	void closeFile();
 	
 	int32		getInt(const SoraString& section, const SoraString& name, int32 iDefault=0);

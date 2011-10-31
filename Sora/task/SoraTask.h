@@ -59,6 +59,10 @@ namespace sora {
         TaskState mState;
         
         SoraTaskManager* mOwner;
+        
+    private:
+        /* periodical task? say execute every update cycle */
+        bool mPeriodical;
     };
     
     class SoraTask: public SoraAbstractTask {

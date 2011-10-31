@@ -19,11 +19,11 @@ namespace sora {
         return SoraCore::Instance()->createSoundEffectFile(path);
     }
     
-    SoraMusicFile* SoraSoundSystem::LoadMusicFromMemory(void* pdata, ulong32 size) {
+    SoraMusicFile* SoraSoundSystem::LoadMusicFromMemory(void* pdata, uint32 size) {
         return SoraCore::Instance()->createMusicFileFromMemory(pdata, size);
     }
     
-    SoraSoundEffectFile* SoraSoundSystem::LoadSoundEffectFromMemory(void* pdata, ulong32 size) {
+    SoraSoundEffectFile* SoraSoundSystem::LoadSoundEffectFromMemory(void* pdata, uint32 size) {
         return SoraCore::Instance()->createSoundEffectFileFromMemory(pdata, size);
     }
     

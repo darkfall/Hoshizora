@@ -79,7 +79,7 @@ namespace sora {
 		
 	public:
 		
-		void setTexture(const SoraString& decalName, ulong32 tex);
+		void setTexture(const SoraString& decalName, SoraHandle tex);
 		bool setParameterfv(const char* name, float* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
         bool getParameterfv(const char* name, float* val, uint32 size);
@@ -94,7 +94,7 @@ namespace sora {
 		GLuint mProgram;
 		
 		std::string mTexture1Name;
-		ulong32 mTexture1;
+		SoraHandle mTexture1;
 		
 		void printProgramError();
 		void printShaderError();

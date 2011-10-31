@@ -226,7 +226,7 @@ namespace sora {
 	mShowAlways(false),
 	mMenuClicked(false),
 	mEnabled(false) {
-        mActiveKeyId = SoraCore::Ptr->registerGlobalHotkey(SoraHotkey(SORA_KEY_F1), this);
+        mActiveKeyId = SoraCore::RegisterGlobalHotkey(SoraHotkey(SORA_KEY_F1), this);
         registerEventFunc(this, &SoraMenuBar::onHotkeyEvent);
         
         SoraCore::Instance()->addFrameListener(this);
@@ -360,7 +360,7 @@ namespace sora {
 	}
     
     void SoraMenuBar::setActiveKey(const SoraHotkey& activeKey) {
-        SoraCore::Ptr->setGlobalHotkey(mActiveKeyId, activeKey);
+        SoraCore::SetGlobalHotkey(mActiveKeyId, activeKey);
     }
 	
 	void SoraMenuBar::setFont(SoraFont* font) {

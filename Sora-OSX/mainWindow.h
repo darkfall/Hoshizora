@@ -46,9 +46,9 @@ public:
 private:
 	sora::SoraCore* sora;
     
-    sora::SoraScene* mScene1;
-    sora::SoraScene* mScene2;
-    sora::SoraCamera* mCamera;
+    sora::Sora2DScene* mScene1;
+    sora::Sora2DScene* mScene2;
+    sora::Sora2DCamera* mCamera;
     
     sora::SoraFont* mFont;
 };

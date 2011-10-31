@@ -41,7 +41,7 @@ namespace sora {
         return new SoraFMODSoundEffectFile;
     }
     
-    SoraMusicFile* SoraFMODSoundSystem::createMusicFileFromMemory(void* pdata, ulong32 size) {
+    SoraMusicFile* SoraFMODSoundSystem::createMusicFileFromMemory(void* pdata, uint32 size) {
         SoraFMODMusicFile* file = new SoraFMODMusicFile(true);
         if(file->readFileMem(pdata, size))
             return file;
@@ -52,7 +52,7 @@ namespace sora {
         return 0;
     }
     
-    SoraSoundEffectFile* SoraFMODSoundSystem::createSoundEffectFileFromMemory(void* pdata, ulong32 size) {
+    SoraSoundEffectFile* SoraFMODSoundSystem::createSoundEffectFileFromMemory(void* pdata, uint32 size) {
         SoraFMODSoundEffectFile* file = new SoraFMODSoundEffectFile();
         if(file->readFileMem(pdata, size))
             return file;

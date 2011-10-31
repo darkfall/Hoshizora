@@ -14,6 +14,8 @@
 #include "SoraAutoPtr.h"
 #include "SoraSignal.h"
 
+#include "SoraAutoUpdate.h"
+
 #ifdef SORA_ENABLE_MULTI_THREAD
 #include "thread/SoraThreadPool.h"
 #endif
@@ -30,10 +32,17 @@ namespace sora {
         friend class SoraAbstractTask;
         
     public:
+        typedef SoraAutoPtr<SoraAbstractTask>           TaskPtr;
+        typedef std::list<TaskPtr>                      TaskList;
+        typedef std::list<SoraAbstractTask*>            PendingTaskList;
+        typedef SoraSignal<void(SoraTaskNotification*)> NotificationSignal;
+       
+    public:
         SoraTaskManager(bool multithreaded=false);
         ~SoraTaskManager();
         
-        void start(SoraAbstractTask* task);
+        // start a task, if the task finished, it would be removed from the task list
+        void start(SoraAbstractTask* task, bool periodical=false);
         
         // request to cancel all tasks
         void cancelAll();
@@ -42,6 +51,17 @@ namespace sora {
         void joinAll();
 #endif
         
+    public:
+        // add a task to the task list
+        // all task would run during the next update cycle unless manually started
+        void addTask(SoraAbstractTask* task, bool periodical=false);
+        void removeTask(SoraAbstractTask* task);
+        
+        // run a added task manually
+        void runTask(const std::string& name);
+        
+        void onUpdate(float dt);
+        
     private:
         void taskFinished(SoraAbstractTask* task);
         void taskStarted(SoraAbstractTask* task);
@@ -49,11 +69,7 @@ namespace sora {
         void taskProgress(SoraAbstractTask* task);
         
     public:
-        typedef SoraAutoPtr<SoraAbstractTask>           TaskPtr;
-        typedef std::list<TaskPtr>                      TaskList;
-        typedef SoraSignal<void(SoraTaskNotification*)> NotificationSignal;
-        
-        SoraAbstractTask* taskByName(const std::string& name) const;
+        TaskPtr taskByName(const std::string& name) const;
         
         int count() const;
         
@@ -62,11 +78,15 @@ namespace sora {
         const TaskList& allTasks() const;
         
         // notifications would be posted under SoraTaskNotification subclass
-        
         template<typename T>
         SoraConnection subscribeToNotification(const T& func);
         
         static SoraTaskManager& defaultManager(bool multiThreaded=false);
+        
+    public:
+        /**
+         * Static Functions
+         **/
         
         // start managed in defaultManager
         static void StartTask(SoraAbstractTask* task);
@@ -78,6 +98,7 @@ namespace sora {
         bool mMultiThread;
         
         TaskList mTasks;
+        PendingTaskList mPendingTask;
         
         NotificationSignal mNoficationSig;
         

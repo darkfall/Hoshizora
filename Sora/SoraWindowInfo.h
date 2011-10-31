@@ -6,7 +6,7 @@
 
 namespace sora {
 
-	typedef ulong32 SoraWindowHandle;
+	typedef SoraHandle SoraWindowHandle;
 
 	class SORA_API SoraWindowInfoBase: public SoraEventHandler {
 	public:

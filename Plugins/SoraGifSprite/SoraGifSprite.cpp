@@ -47,7 +47,7 @@ namespace sora {
     static int image_gif_read(GifFileType* ft, GifByteType* buf, int size) {
         SoraMemoryBuffer* memBuffer = (SoraMemoryBuffer*)ft->UserData;
         if(memBuffer) {
-            ulong32 rsize = size;
+            uint32 rsize = size;
             if(memBuffer->read(buf, rsize) && rsize == size)
                 return size;
             return 0;

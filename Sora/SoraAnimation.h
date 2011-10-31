@@ -23,10 +23,10 @@ namespace sora {
     public:
         SoraAnimation();
         SoraAnimation(const StringType& configPath);
-        SoraAnimation(void* data, ulong32 size);
+        SoraAnimation(void* data, uint32 size);
         
         void setFromFile(const StringType& configPath);
-        void setFromMemory(void* data, ulong32 size);
+        void setFromMemory(void* data, uint32 size);
         
         void render();
         int32 update(float dt);

@@ -21,7 +21,7 @@ namespace sora {
         
     }
 
-	SoraResourceFile::SoraResourceFile(void* data, ulong32 size, bool retain):
+	SoraResourceFile::SoraResourceFile(void* data, uint32 size, bool retain):
     SoraResource(SoraResource::RawData),
 	mData(data),
 	mSize(size),
@@ -36,7 +36,7 @@ namespace sora {
 			log_error(vamssg("SoraResourceFile: Error loading resource file: %s", file.c_str()));
 	}
     
-    SoraResourceFile::SoraResourceFile(const StringType& file, ulong32 pos, ulong32 size, bool retain):
+    SoraResourceFile::SoraResourceFile(const StringType& file, uint32 pos, uint32 size, bool retain):
     SoraResource(SoraResource::RawData),
     mRetain(retain) {
         mData = SoraCore::Ptr->readResourceFile(file, pos, size);
@@ -62,7 +62,7 @@ namespace sora {
         return mData;
     }
     
-    ulong32 SoraResourceFile::size() const {
+    uint32 SoraResourceFile::size() const {
         return mSize;
     }
 	

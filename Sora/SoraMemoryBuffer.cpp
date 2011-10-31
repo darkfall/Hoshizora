@@ -21,7 +21,7 @@ namespace sora {
         
     }
     
-	SoraMemoryBuffer::SoraMemoryBuffer(void* pData, ulong32 _length):
+	SoraMemoryBuffer::SoraMemoryBuffer(void* pData, uint32 _length):
 	currPos(0), 
     length(_length),
     mInternal(false) {
@@ -38,7 +38,7 @@ namespace sora {
             delete apCData;
     }
 	
-	void SoraMemoryBuffer::set(void* pData, ulong32 _length) {
+	void SoraMemoryBuffer::set(void* pData, uint32 _length) {
         if(mInternal && apCData)
             delete apCData;
         
@@ -47,7 +47,7 @@ namespace sora {
 		apCData = (uint8*)pData;
 	}
 	
-	bool SoraMemoryBuffer::alloc(ulong32 size) {
+	bool SoraMemoryBuffer::alloc(uint32 size) {
 		/* round size to be divisible by 16 */
 		//	size = (size + 15) & uint32(-16);
 		uint8* data = new uint8[size];
@@ -70,7 +70,7 @@ namespace sora {
 		}
 	}
 	
-	bool SoraMemoryBuffer::push(void* pdata, ulong32 size) {
+	bool SoraMemoryBuffer::push(void* pdata, uint32 size) {
 		if(realSize + size <= length) {
 			memcpy((void*)(get()+realSize), pdata, size);
 			realSize += size;
@@ -84,7 +84,7 @@ namespace sora {
 				memcpy(tempData, (void*)(get()), realSize);
 				
 				// rellocate data
-				ulong32 prevLength = realSize;
+				uint32 prevLength = realSize;
 				length = length*2 + 1024;
 				alloc(length);
 				memcpy((void*)(get()), tempData, prevLength);
@@ -112,7 +112,7 @@ namespace sora {
         return true;
 	}
 	
-	ulong32 SoraMemoryBuffer::read(void* pv, ulong32 size) {
+	uint32 SoraMemoryBuffer::read(void* pv, uint32 size) {
 		if(!valid()) return 0;
 		if(currPos == length) return 0;
 		
@@ -126,13 +126,13 @@ namespace sora {
 		return size;
 	}
 	
-	ulong32 SoraMemoryBuffer::read(ulong32 offset, void* pv, ulong32 size) {
+	uint32 SoraMemoryBuffer::read(uint32 offset, void* pv, uint32 size) {
 		if(!valid()) return false;
 		
-		ulong32 tempPos = currPos;
+		uint32 tempPos = currPos;
 		if(!seek(offset))
 			seek(0);
-		ulong32 result = read(pv, size);
+		uint32 result = read(pv, size);
 		seek(tempPos);
 		return result;
 	}
@@ -141,12 +141,12 @@ namespace sora {
         return apCData;
     }
     
-	uint8* SoraMemoryBuffer::get(ulong32 offset) { 
+	uint8* SoraMemoryBuffer::get(uint32 offset) { 
 		if(offset > length) offset = 0;
 		return (apCData+offset);
 	}
 	
-	bool SoraMemoryBuffer::seek(ulong32 pos) {
+	bool SoraMemoryBuffer::seek(uint32 pos) {
 		if(pos <= length) {
 			currPos = pos;
 			return true;
@@ -154,15 +154,15 @@ namespace sora {
 		return false;
 	}
 	
-	ulong32 SoraMemoryBuffer::size() const { 
+	uint32 SoraMemoryBuffer::size() const { 
         return length;
     }
     
-	ulong32 SoraMemoryBuffer::realsize() const { 
+	uint32 SoraMemoryBuffer::realsize() const { 
         return realSize;
     }
     
-	ulong32 SoraMemoryBuffer::offset() const { 
+	uint32 SoraMemoryBuffer::offset() const { 
         return currPos; 
     }
     

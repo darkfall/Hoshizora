@@ -23,7 +23,7 @@ namespace sora {
 	
 	class SORA_API SoraPrefab: public SoraObject {
 	public:
-        virtual bool        loadFromData(void* data, ulong32 size) = 0;
+        virtual bool        loadFromData(void* data, uint32 size) = 0;
         virtual SoraStream  saveToStream() = 0;
 	};
 	

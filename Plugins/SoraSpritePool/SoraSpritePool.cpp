@@ -20,7 +20,7 @@ namespace sora {
         }
     }
     
-    void SoraSpritePool::addSpriteFromMemory(const StringType& tag, uint32* data, ulong32 size) {
+    void SoraSpritePool::addSpriteFromMemory(const StringType& tag, uint32* data, uint32 size) {
         SoraSprite* sprite = SoraSprite::LoadFromMemory(data, size);
         if(sprite) {
             mSprites.insert(std::make_pair(tag, sprite));

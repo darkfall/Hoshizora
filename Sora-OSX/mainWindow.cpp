@@ -86,17 +86,17 @@ sora::SoraMusicFile* file = 0;
 
 void mainWindow::init() {
     
-    ulong32 pack = sora::SoraCore::Instance()->loadResourcePack("Textures.zip");
+    SoraHandle pack = sora::SoraCore::Instance()->loadResourcePack("Textures.zip");
     
     sora::SoraCore::Ptr->setFPS(60);
 	sora::SoraCore::Ptr->loadResourcePack(L"resource.SoraResource");
 	sora::SoraCore::Ptr->setSystemFont(L"cour.ttf", 16);
    
-    mScene1 = new sora::SoraScene(getWindowWidth(), getWindowHeight());
+    mScene1 = new sora::Sora2DScene(getWindowWidth(), getWindowHeight());
  //   mScene1->enableRenderToCanvas(true);
-    mScene2 = new sora::SoraScene(1000, 1000);
+    mScene2 = new sora::Sora2DScene(1000, 1000);
     
-    mCamera = new sora::SoraCamera(100, 100.f, 500.f, 500.f);
+    mCamera = new sora::Sora2DCamera(100, 100.f, 500.f, 500.f);
 
   //  mCamera->zoomTo(2.f, 2.f, 20.f);
 //    mScene1->setCamera(mCamera);
@@ -120,7 +120,7 @@ void mainWindow::init() {
   //  mScene2->setRotation(sora::F_PI_4/2);
  //   mScene2->setScale(2.f, 2.f);
     
-    sora::SoraScene* mScene3 = new sora::SoraScene(150, 150);
+    sora::Sora2DScene* mScene3 = new sora::Sora2DScene(150, 150);
     mScene3->add(sora::SoraCore::Ptr->createSprite(L"test.png"), 1);
     mScene3->add(sora::SoraCore::Ptr->createSprite(L"bullet2.png"), 0);
     mScene2->add(mScene3);

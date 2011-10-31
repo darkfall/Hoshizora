@@ -27,7 +27,7 @@ namespace sora {
     class SoraSpritePool: SoraUncopyable {
     public:
         void addSprite(const StringType& tag, const StringType& spritePath);
-        void addSpriteFromMemory(const StringType& tag, uint32* data, ulong32 size);
+        void addSpriteFromMemory(const StringType& tag, uint32* data, uint32 size);
         
         void removeSprite(const StringType& tag);
         

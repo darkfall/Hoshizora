@@ -13,18 +13,18 @@
 #include "SoraVector4.h"
 #include "SoraQuaternion.h"
 
-#include "SoraMath.h"
+#include "SoraMathCommon.h"
 
 namespace sora {
     
     class SORA_API SoraMatrix4 {
     public:
         union {
-            float c[4][4];	// Column major order for OpenGL: c[column][row]
-            float x[16];
+            real c[4][4];	// Column major order for OpenGL: c[column][row]
+            real x[16];
         };
         
-        static SoraMatrix4 TransMat( float x, float y, float z ) {
+        static SoraMatrix4 TransMat( real x, real y, real z ) {
             SoraMatrix4 m;
             
             m.c[3][0] = x;
@@ -34,7 +34,7 @@ namespace sora {
             return m;
         }
         
-        static SoraMatrix4 ScaleMat( float x, float y, float z ) {
+        static SoraMatrix4 ScaleMat( real x, real y, real z ) {
             SoraMatrix4 m;
             
             m.c[0][0] = x;
@@ -44,17 +44,17 @@ namespace sora {
             return m;
         }
         
-        static SoraMatrix4 RotMat( float x, float y, float z ) {
+        static SoraMatrix4 RotMat( real x, real y, real z ) {
             // Rotation order: YXZ [* Vector]
             return SoraMatrix4( SoraQuaternion( x, y, z ) );
         }
         
-        static SoraMatrix4 RotMat( SoraVector3 axis, float angle ) {
+        static SoraMatrix4 RotMat( SoraVector3 axis, real angle ) {
             axis = axis * sinf( angle * 0.5f );
             return SoraMatrix4( SoraQuaternion( axis.x, axis.y, axis.z, cosf( angle * 0.5f ) ) );
         }
         
-        static SoraMatrix4 FrustumMat( float l, float r, float b, float t, float n, float f ) {
+        static SoraMatrix4 FrustumMat( real l, real r, real b, real t, real n, real f ) {
             SoraMatrix4 m;
             
             m.x[0] = 2 * n / (r - l);
@@ -68,9 +68,9 @@ namespace sora {
             return m;
         }
         
-        static SoraMatrix4 PerspectiveMat(float field_of_view, float aspect, float n, float f) {
+        static SoraMatrix4 PerspectiveMat(real field_of_view, real aspect, real n, real f) {
             SoraMatrix4 m;
-            float ff = 1.0f / tan(DGR_RAD(field_of_view) / 2.0f);
+            real ff = 1.0f / tan(DGR_RAD(field_of_view) / 2.0f);
             m.x[0] = ff / aspect;
             m.x[5] = ff;
             m.x[10] = (n + f) / (n - f);
@@ -79,7 +79,7 @@ namespace sora {
             return m;
         }
         
-        static SoraMatrix4 OrthoMat( float l, float r, float b, float t, float n, float f ) {
+        static SoraMatrix4 OrthoMat( real l, real r, real b, real t, real n, real f ) {
             SoraMatrix4 m;
             
             m.x[0] = 2 / (r - l);
@@ -96,9 +96,9 @@ namespace sora {
             // Note: dst may not be the same as m1 or m2
             SoraMatrix4 dst;
             
-            float *dstx = dst.x;
-            const float *m1x = m1.x;
-            const float *m2x = m2.x;
+            real *dstx = dst.x;
+            const real *m1x = m1.x;
+            const real *m2x = m2.x;
             
             dstx[0] = m1x[0] * m2x[0] + m1x[4] * m2x[1] + m1x[8] * m2x[2];
             dstx[1] = m1x[1] * m2x[0] + m1x[5] * m2x[1] + m1x[9] * m2x[2];
@@ -133,20 +133,20 @@ namespace sora {
             c[0][3] = 0.f; c[1][3] = 0.f; c[2][3] = 0.f; c[3][3] = 1.f;
         }
         
-        SoraMatrix4( const float *floatArray16 ) {
+        SoraMatrix4( const real *realArray16 ) {
             for( unsigned int i = 0; i < 4; ++i ) {
                 for( unsigned int j = 0; j < 4; ++j ) {
-                    c[i][j] = floatArray16[i * 4 + j];
+                    c[i][j] = realArray16[i * 4 + j];
                 }
             }
         }
         
         SoraMatrix4( const SoraQuaternion &q ) {
             // Calculate coefficients
-            float x2 = q.x + q.x, y2 = q.y + q.y, z2 = q.z + q.z;
-            float xx = q.x * x2,  xy = q.x * y2,  xz = q.x * z2;
-            float yy = q.y * y2,  yz = q.y * z2,  zz = q.z * z2;
-            float wx = q.w * x2,  wy = q.w * y2,  wz = q.w * z2;
+            real x2 = q.x + q.x, y2 = q.y + q.y, z2 = q.z + q.z;
+            real xx = q.x * x2,  xy = q.x * y2,  xz = q.x * z2;
+            real yy = q.y * y2,  yz = q.y * z2,  zz = q.z * z2;
+            real wx = q.w * x2,  wy = q.w * y2,  wz = q.w * z2;
             
             c[0][0] = 1 - (yy + zz);  c[1][0] = xy - wz;	
             c[2][0] = xz + wy;        c[3][0] = 0;
@@ -217,7 +217,7 @@ namespace sora {
             return mf;
         }
         
-        SoraMatrix4 operator*( const float f ) const {
+        SoraMatrix4 operator*( const real f ) const {
             SoraMatrix4 m( *this );
             
             m.x[0]  *= f; m.x[1]  *= f; m.x[2]  *= f; m.x[3]  *= f;
@@ -253,16 +253,19 @@ namespace sora {
         // ---------------
         // Transformations
         // ---------------
-        void translate( const float x, const float y, const float z ) {
+        SoraMatrix4& translate( const real x, const real y, const real z ) {
             *this = TransMat( x, y, z ) * *this;
+            return *this;
         }
         
-        void scale( const float x, const float y, const float z ) {
+        SoraMatrix4& scale( const real x, const real y, const real z ) {
             *this = ScaleMat( x, y, z ) * *this;
+            return *this;
         }
         
-        void rotate( const float x, const float y, const float z ) {
+        SoraMatrix4& rotate( const real x, const real y, const real z ) {
             *this = RotMat( x, y, z ) * *this;
+            return *this;
         }
         
         // ---------------
@@ -274,7 +277,7 @@ namespace sora {
             
             for( unsigned int y = 0; y < 4; ++y ) {
                 for( unsigned int x = y + 1; x < 4; ++x ) {
-                    float tmp = m.c[x][y];
+                    real tmp = m.c[x][y];
                     m.c[x][y] = m.c[y][x];
                     m.c[y][x] = tmp;
                 }
@@ -283,7 +286,7 @@ namespace sora {
             return m;
         }
         
-        float determinant() const {
+        real determinant() const {
             return 
 			c[0][3]*c[1][2]*c[2][1]*c[3][0] - c[0][2]*c[1][3]*c[2][1]*c[3][0] - c[0][3]*c[1][1]*c[2][2]*c[3][0] + c[0][1]*c[1][3]*c[2][2]*c[3][0] +
 			c[0][2]*c[1][1]*c[2][3]*c[3][0] - c[0][1]*c[1][2]*c[2][3]*c[3][0] - c[0][3]*c[1][2]*c[2][0]*c[3][1] + c[0][2]*c[1][3]*c[2][0]*c[3][1] +
@@ -296,7 +299,7 @@ namespace sora {
         SoraMatrix4 inverted() const {
             SoraMatrix4 m;
             
-            float d = determinant();
+            real d = determinant();
             if( d == 0 ) return m;
             d = 1.0f / d;
             
@@ -343,7 +346,7 @@ namespace sora {
             rot.x = asinf( -c[2][1] / scale.z );
             
             // Special case: Cos[x] == 0 (when Sin[x] is +/-1)
-            float f = fabsf( c[2][1] / scale.z );
+            real f = fabsf( c[2][1] / scale.z );
             if( f > 0.999f && f < 1.001f ) {
                 // Pin arbitrarily one of y or z to zero
                 // Mathematical equivalent of gimbal lock

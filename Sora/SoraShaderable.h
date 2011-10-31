@@ -23,10 +23,10 @@ namespace sora {
      * Base class from objects that can render with shader
      **/
     
-    class SORA_API SoraShaderEnabledObject: public SoraObject {
+    class SORA_API SoraShaderable {
     public:
-        SoraShaderEnabledObject();
-        virtual ~SoraShaderEnabledObject();
+        SoraShaderable();
+        virtual ~SoraShaderable();
         
         void attachShaderContext(const StringType& tag);
         void attachShaderContext(SoraShaderContext* context);
@@ -55,8 +55,8 @@ namespace sora {
         void attachVertexShader(SoraShader* shader);
         
     private:
-        SoraShaderEnabledObject(const SoraShaderEnabledObject&);
-        SoraShaderEnabledObject& operator=(const SoraShaderEnabledObject&);
+        SoraShaderable(const SoraShaderable&);
+        SoraShaderable& operator=(const SoraShaderable&);
         
         inline void checkShaderContext();
         

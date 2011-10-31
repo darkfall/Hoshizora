@@ -288,7 +288,7 @@ namespace sora {
     }
     
     SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const SoraString& name) {
-        ulong32 size;
+        uint32 size;
         void* data = SoraCore::Ptr->getResourceFile(s2ws(name), size);
         if(data) {
             SoraSpriteAnimation* anm = unpack(data, size);
@@ -300,7 +300,7 @@ namespace sora {
     }
 	
 	SoraSpriteAnimation* SoraSpriteAnimationPacker::unpack(const SoraWString& name) {
-		ulong32 size;
+		uint32 size;
 		void* data = SoraCore::Ptr->getResourceFile(name, size);
 		if(data) {
 			SoraSpriteAnimation* anm = unpack(data, size);
@@ -391,7 +391,7 @@ namespace sora {
 	anmCount(0), currId(0), currAnmIndex(0), 
 	bPaused(false), bIsPlaying(false), bLoop(true), 
 	defaultId(0), currTime(0), totalTime(0), currNodeId(0)  {
-		ulong32 size;
+		uint32 size;
 		void* pData = sora::SoraCore::Ptr->getResourceFile(anmPath, size);
 		
 		bool err = false;

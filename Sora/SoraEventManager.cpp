@@ -24,7 +24,7 @@ namespace sora {
 		evMap[eid].push_back(SoraEventInfo(eventName, handler, ev));
 	}
 
-	void SoraEventManager::sendMessage(const SoraString& eventName, const SoraString& params, ulong32 hreceiver) {
+	void SoraEventManager::sendMessage(const SoraString& eventName, const SoraString& params, SoraHandle hreceiver) {
 		SoraEventHandler* receiver = (SoraEventHandler*)hreceiver;
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);
@@ -61,7 +61,7 @@ namespace sora {
 	//	SoraLuaObjectManager::Instance()->sendMessage(eventName, params, hreceiver);
 	}
 	
-	void SoraEventManager::sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 hreceiver) {
+	void SoraEventManager::sendMessage(const SoraString& eventName, SoraEvent* ev, SoraHandle hreceiver) {
 		SoraEventHandler* receiver = (SoraEventHandler*)hreceiver;
 		EVENT_ID eid = BKDRHash(eventName.c_str());
 		EVENT_MAP::iterator itEvent = evMap.find(eid);

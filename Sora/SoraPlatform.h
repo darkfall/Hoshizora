@@ -20,11 +20,7 @@
  if gcc version >= 4
  then there is tr1 support
  visual studio 2008 sp1 or above also has tr1 support
- to do with vs version check
- khash also available as an external hash option
  */
-
-
 #if defined(__GNUC__)
 	#if __GNUC__ >= 4
 		#include <tr1/unordered_map>
@@ -77,6 +73,94 @@ static inline int lrint (double const x) { // Round to nearest integer
 
 #endif
 
+
+/*
+ flag for shaders in render system
+ disable this to get rid of shader
+ */
+#define SORA_USE_SHADER
+
+/*
+ use RTTI for SoraEvents and so on,
+ if disabled, then SoraEvent must give it's unique name for type identification
+ */
+#if !defined(SORA_DLL_EXPORT) && !defined(SORA_DLL_IMPORT)
+//#define SORA_USE_RTTI
+#endif
+
+/*
+ if disabled, all exception would be disabled
+ */
+#define SORA_USE_EXCEPTION
+
+/*
+ if disabled, SoraSimpleFSM would not use a NULL state as initial state
+ */
+#define SORA_FSM_USE_NULL
+
+/*
+ enable this if you are using sora in multithread environment
+ currently unimplemented, reverved for future use
+ */
+#define SORA_ENABLE_MULTI_THREAD
+
+#define SORA_MAX_IO_THREAD 1
+
+/*
+ SoraThread Plugin Option
+ If SORA_WIN32_PTHREAD have been defined, then SoraThread would try to use external pthread library under Windows
+ Otherwise it would use Win32API to archive the goal
+ Default: NO
+ */
+#ifdef OS_WIN32
+//#define SORA_WIN32_PTHREAD
+#endif
+
+
+/*
+ automatically register plugins
+ depends on plugin implemention
+ plugins can choose to use this macro to define whether to 
+ register itself to sora when the app starts
+ for example: 
+ render systems can register itself when the app starts
+ default: on
+ */
+#define SORA_AUTOMATIC_REGISTER
+
+
+/**
+ uncomment this to enable auto debug render event receiving
+ and also you must enable DebugRender in SoraCore
+ **/
+//#define SORA_DEBUG_RENDER
+
+/**
+ * Enable core zip file pack support(in resource file manager)
+ * Comment this to disable
+ **/
+#define SORA_ZIP_PACK_SUPPORT
+
+
+/**
+ * Defines the event receiving type
+ * If defined, eventfunc registering is not required
+ * All Event handling goes through SoraEventHandler::onEvent
+ * this maybe faster but difficult to know the event type
+ * Default: OFF
+ **/
+//#define SORA_EVENT_GENERIC
+
+
+#define SORA_SINGLE_PRECISION
+
+/**
+ * data type definition compabilty 
+ * some data types not available in sora4
+ * for old plugins
+ **/
+// #define SORA_COMPABILITY_SORA3
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -90,71 +174,25 @@ static inline int lrint (double const x) { // Round to nearest integer
 #endif
 
 #include "SoraConfig.h"
-#include "SoraMemory.h"
 
-typedef		long			long32;
-typedef		unsigned long	ulong32;
+typedef     unsigned long   SoraHandle;
 
-typedef		float			float32;
-
-typedef unsigned long       ULONG, ulong;
-typedef unsigned short      WORD;
-typedef unsigned char       BYTE;
-typedef unsigned int		UINT;
-/*
-#if defined(WIN32)
-typedef unsigned long long int uint64;
-typedef long long int          int64;
-#elif (__WORDSIZE == 32)
-__extension__
-typedef long long int          int64;
-__extension__
-typedef unsigned long long int uint64;
-#elif (__WORDSIZE == 64)
-typedef uint64_t uint64;
-typedef int64_t  int64;
+#ifdef SORA_SINGLE_PRECISION
+    typedef		float			real;
+#else
+    typedef     double          real;
 #endif
-*/
+
+#ifdef SORA_COMPABILITY_SORA3
+    typedef unsigned long ulong32
+    typedef long long32;
+#endif
+
+
+#include "SoraMemory.h"
+#include "SoraRenderParameters.h"
 
 #include <stdint.h>
-
-namespace sora {
-    typedef int32 SoraHandle;
-    typedef int32 SoraUniqueId;
-    
-	typedef ulong32 SoraSpriteHandle;
-	typedef ulong32 SoraTextureHandle;
-    typedef ulong32 SoraTargetHandle;
-    typedef ulong32 SoraResourceHandle;
-	
-	enum RenderMode {
-		Line = 1,
-		Triangle,
-		TriangleFan,
-		TriangleStrip,
-		Quad,
-	};
-    
-    enum RenderStateType {
-        TextureWrap0 = 0, // u
-        TextureWrap1, // v
-    };
-    
-    enum RenderStateParam {
-        TextureWrapClamp = 0,           // D3DTADDRESS_CLAMP, GL_CLAMP
-        TextureWrapRepeat,          // D3DTADDRESS_REPEAT, GL_REPEAT
-        TextureWrapClampToBoarder,  // D3DTADDRESS_BOARDER, GL_CLAMP_TO_BOARDER
-        TextureWrapMirror,          // D3DTADDRESS_MIRROR, GL_MIRRORED_REPEAT
-    };
-    
-    enum MatrixMode {
-        ProjectionMatrix,
-        TransformMatrix,
-    };
-
-} // namespace sora
-
-
 #include <cassert>
 
 #if defined(SORA_STD_CALL)
@@ -216,8 +254,6 @@ namespace sora {
     #define SORA_API
 	#define SORA_EXTERN
 #endif
-
-#include "ZLIB/zlib.h"
 
 #ifndef OS_PSP
 #include <string>
@@ -376,84 +412,6 @@ namespace { \
 #ifndef __GNUC__
 #define snprintf _snprintf
 #endif
-
-/*
- flag for shaders in render system
- disable this to get rid of shader
-*/
-#define SORA_USE_SHADER
-
-/*
- use RTTI for SoraEvents and so on,
- if disabled, then SoraEvent must give it's unique name for type identification
-*/
-#if !defined(SORA_DLL_EXPORT) && !defined(SORA_DLL_IMPORT)
-//#define SORA_USE_RTTI
-#endif
-
-/*
- if disabled, all exception would be disabled
-*/
-#define SORA_USE_EXCEPTION
-
-/*
- if disabled, SoraSimpleFSM would not use a NULL state as initial state
-*/
-#define SORA_FSM_USE_NULL
-
-/*
- enable this if you are using sora in multithread environment
- currently unimplemented, reverved for future use
-*/
-#define SORA_ENABLE_MULTI_THREAD
-
-#define SORA_MAX_IO_THREAD 1
-
-
-/*
-	SoraThread Plugin Option
-	If SORA_WIN32_PTHREAD have been defined, then SoraThread would try to use external pthread library under Windows
-	Otherwise it would use Win32API to archive the goal
-	Default: NO
-*/
-#ifdef OS_WIN32
-//#define SORA_WIN32_PTHREAD
-#endif
-
-
-/*
- automatically register plugins
- depends on plugin implemention
- plugins can choose to use this macro to define whether to 
- register itself to sora when the app starts
- for example: 
- render systems can register itself when the app starts
- default: on
- */
-#define SORA_AUTOMATIC_REGISTER
-
-
-/**
- uncomment this to enable auto debug render event receiving
- and also you must enable DebugRender in SoraCore
- **/
-//#define SORA_DEBUG_RENDER
-
-/**
- * Enable core zip file pack support(in resource file manager)
- * Comment this to disable
- **/
-#define SORA_ZIP_PACK_SUPPORT
-
-
-/**
- * Defines the event receiving type
- * If defined, eventfunc registering is not required
- * All Event handling goes through SoraEventHandler::onEvent
- * this maybe faster but difficult to know the event type
- * Default: OFF
- **/
-//#define SORA_EVENT_GENERIC
 
 
 #endif // _SORA_PLATFORM_H_

@@ -18,7 +18,7 @@ namespace sora {
 		return pFile->state;
 	}
 	
-	ulong32 SoraHttpFileDownloadThread::getDownloadedSize() const { 
+	uint32 SoraHttpFileDownloadThread::getDownloadedSize() const { 
 		return pFile->receivedSize;
 	}
 	
@@ -232,7 +232,7 @@ namespace sora {
 		mDelegate = del.clone();
 	}
 
-	ulong32 SoraHttpFile::getDownloadedSize() const { 
+	uint32 SoraHttpFile::getDownloadedSize() const { 
 		if(isopen) return pdownloadthread.getDownloadedSize();
 		return 0;
 	} 

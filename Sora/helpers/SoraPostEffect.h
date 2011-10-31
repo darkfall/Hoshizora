@@ -10,7 +10,7 @@
 #define Sora_SoraPostEffect_h
 
 #include "SoraPlatform.h"
-#include "SoraShaderEnabled.h"
+#include "SoraShaderable.h"
 
 namespace sora {
     
@@ -21,7 +21,7 @@ namespace sora {
      * SoraCore::Instance()->enableCoreFeature(SoraCore::FeatureRenderToBuffer); etc
      **/
 
-    class SORA_API SoraPostEffect: public SoraShaderEnabledObject {
+    class SORA_API SoraPostEffect: public SoraShaderable {
     public:
         SoraPostEffect();
         ~SoraPostEffect();

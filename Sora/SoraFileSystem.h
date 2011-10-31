@@ -40,7 +40,7 @@ namespace sora {
         
 	public:
 		
-        static ulong32 ResourceMemory;
+        static uint64 ResourceMemory;
         
         void attachResourceManager(SoraResourceManager* rm);
 		void detachResourceManager(const StringType& name);
@@ -48,9 +48,9 @@ namespace sora {
 		SoraResourceHandle  loadResourcePack    (const StringType& file);
 		void                detachResourcePack  (SoraResourceHandle handle);
 		
-		void*   readResourceFile    (const StringType& file, ulong32 pos, ulong32 size);
-		void*   getResourceFile     (const StringType& file, ulong32& size);
-		ulong32 getResourceFileSize (const StringType& file);
+		void*   readResourceFile    (const StringType& file, uint32 pos, uint32 size);
+		void*   getResourceFile     (const StringType& file, uint32& size);
+		uint32  getResourceFileSize (const StringType& file);
 		void    freeResourceFile    (void* p);
 		
 		bool    enumFiles(std::vector<StringType>& cont, const StringType& folder);
@@ -98,7 +98,7 @@ namespace sora {
             std::string         mTag;
             SoraResource::Type  mType;
         };
-        void resource_async_not(void*, ulong32, void*);
+        void resource_async_not(void*, uint32, void*);
 #endif
         
     private:
@@ -108,7 +108,7 @@ namespace sora {
     public:
         
 #ifdef SORA_ENABLE_MULTI_THREAD
-        typedef SoraFunction<void(void*, ulong32, void*)> AsyncNotification;
+        typedef SoraFunction<void(void*, SoraHandle, void*)> AsyncNotification;
         void loadResourceFileAsync(const StringType& file, const AsyncNotification& notification, void* userdata);
         
     private:
@@ -134,7 +134,7 @@ namespace sora {
         typedef SoraAutoPtr<uint8, autoptr::RefCounter, ReleasePolicy<uint8> > AutoPtrType;
         struct ResourceInfo {
             AutoPtrType mResource;
-            ulong32 mSize;
+            uint32 mSize;
         };
         typedef std::map<SoraStringId, ResourceInfo> ResourceCacheMap;
         ResourceCacheMap mResourceCaches;

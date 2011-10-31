@@ -15,7 +15,7 @@ namespace sora {
         return SoraCore::Instance()->createFont(path, size);
     }
     
-    SoraFont* SoraFont::LoadFromMemory(void* data, ulong32 size, uint32 fontSize, const StringType& name) {
+    SoraFont* SoraFont::LoadFromMemory(void* data, uint32 size, uint32 fontSize, const StringType& name) {
         return SoraCore::Instance()->createFont(data, size, fontSize, name);
     }
     

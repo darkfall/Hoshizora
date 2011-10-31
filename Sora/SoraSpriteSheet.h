@@ -12,7 +12,7 @@
 #include "SoraPlatform.h"
 #include "SoraUncopyable.h"
 #include "SoraString.h"
-#include "SoraShaderEnabled.h"
+#include "SoraShaderable.h"
 #include "SoraResource.h"
 #include "math/SoraRect.h"
 
@@ -20,7 +20,7 @@ namespace sora {
     
     class SoraSprite;
     
-    class SoraSpriteSheet: public SoraShaderEnabledObject, public SoraResource {
+    class SoraSpriteSheet: public SoraResource {
     public:
         SoraSpriteSheet();
         SoraSpriteSheet(const StringType& path);
@@ -29,7 +29,7 @@ namespace sora {
         void release();
         
         bool load(const StringType& path);
-        bool loadFromMemory(void* data, ulong32 size);
+        bool loadFromMemory(void* data, uint32 size);
         
         void render(const StringType& tag, float x, float y);
         

@@ -33,7 +33,7 @@ namespace sora {
         static int parseRespondType(const char* respondStr);
 
         bool parse(const SoraWString& filePath);
-        bool parse(void* strData, ulong32 size);
+        bool parse(void* strData, uint32 size);
         
         void parseDefaults(const Json::Value& val, gcn::Widget* widget);
 

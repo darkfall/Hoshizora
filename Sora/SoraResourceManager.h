@@ -15,9 +15,9 @@ namespace sora {
 		virtual void                attachResourcePack	(SoraResourceHandle handle) = 0;
 		virtual void                detachResourcePack  (SoraResourceHandle handle) = 0;
 		
-		virtual void*   readResourceFile        (const StringType& file, ulong32 pos, ulong32 size) = 0;
-		virtual void*   getResourceFile         (const StringType& file, ulong32& size) = 0;
-		virtual ulong32 getResourceFileSize     (const StringType& file) = 0;
+		virtual void*   readResourceFile        (const StringType& file, uint32 pos, uint32 size) = 0;
+		virtual void*   getResourceFile         (const StringType& file, uint32& size) = 0;
+		virtual uint32  getResourceFileSize     (const StringType& file) = 0;
 		virtual void    freeResourceFile        (void* p) = 0;
 
 		/* name of this resource manager */
@@ -33,13 +33,13 @@ namespace sora {
         
         static SoraResourceHandle   LoadAndAttachResourcePack(const StringType& file);
         static void                 DetachResourcePack(SoraResourceHandle handle);
-        static void*                LoadResourceFile(const StringType& file, ulong32* size);
-        static ulong32              GetResourceFileSize(const StringType& file);
+        static void*                LoadResourceFile(const StringType& file, uint32* size);
+        static uint32               GetResourceFileSize(const StringType& file);
         static void                 FreeResourceFile(void* p);
         
 #ifdef SORA_ENABLE_MULTI_THREAD
         
-        typedef SoraFunction<void(void*, ulong32, void*)> AsyncNotification;
+        typedef SoraFunction<void(void*, SoraHandle, void*)> AsyncNotification;
         static void LoadResourceFileAsync(const StringType& file, const AsyncNotification& handler, void* puserdata=0);
         
 #endif

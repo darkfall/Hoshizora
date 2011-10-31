@@ -44,61 +44,11 @@ float lx, ly, rx, ry;
 float maxsize, maxiteration, iterinc;
 float cr, cg, cb;
 
-void msetCommands(sora::SoraConsoleEvent* evt) {
-    
-    std::string cmd = evt->getCmd();
-    sora::StringType param = evt->getParams();
-    if(cmd == "set_lx") {
-        lx = param.asFloat();
-        evt->pushResult("lx had been set to "+param);
-    } else if(cmd == "set_ly") {
-        ly = param.asFloat();
-        evt->pushResult("ly had been set to "+param);
-        
-    } else if(cmd == "set_rx") {
-        rx = param.asFloat();
-        evt->pushResult("rx had been set to "+param);
-
-    } else if(cmd == "set_ry") {
-        ry = param.asFloat();
-        evt->pushResult("ry had been set to "+param);
-
-    } else if(cmd == "set_max_iteration") {
-        maxiteration = param.asFloat();
-        evt->pushResult("max iteration had been set to "+param);
-
-    } else if(cmd == "set_max_size") {
-        maxsize = param.asFloat();
-        evt->pushResult("max_size had been set to "+param);
-
-    } else if(cmd == "set_iteration_increment") {
-        iterinc = param.asFloat();
-        evt->pushResult("iteration increment had been set to "+param);
-
-    } else if(cmd == "set_cr") {
-        cr = param.asFloat();
-        evt->pushResult("cr had been set to "+param);
-
-    } else if(cmd == "set_cg") {
-        cg = param.asFloat();
-        evt->pushResult("cg had been set to "+param);
-
-    } else if(cmd == "set_cb") {
-        cb = param.asFloat();
-        evt->pushResult("cb had been set to "+param);
-
-    }
-}
-
-#include "SoraGraphicAlgorithm.h"
-
-SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_iteration,set_max_size,set_iteration_increment,set_cr,set_cg,set_cb");
-
 sora::SoraPhysicBody* body;
 
-float x = 0.f;
-float y = 0.f;
-float z = 0.f;
+float x = 510.f;
+float y = 384.f;
+float z = -500.f;
 
 float xpos = 0.f;
 float ypos = 0.f;
@@ -109,7 +59,7 @@ float zpos = 0.f;
 
 #include "SoraVertexList.h"
 
-sora::SoraVertexList vertexL(sora::Quad);
+sora::SoraVertexList vertexL(sora::LineLoop);
 sora::SoraShape shape;
 
 void sphereMap(float x, float y, float z, float r, sora::SoraVertex& vertex) {
@@ -239,60 +189,102 @@ float color[] = {
     0xFFFF0000, 0xFFFF0000, 0xFFFF0000, 0xFFFF0000
 };
 
+float s = 1.f;
+
+
+void build(int detail) {
+    vertexL.clear();
+    buildSphere(200.f, 10 * detail, 512, 384);
+}
+
+void texx(const SoraString& tex) {
+    vertexL.bindTexture(sora::SoraTexture::LoadFromFile(tex));
+
+}
+
+sora::Sora3DCamera* camera;
+
+
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-        buildSphere(200.f, 400, 300.f, 300.f);
+        buildSphere(100.f, 50, 0.f, 0.f);
         
-        shape.initWithVertexList(vertexL)
+        shape.initWithVertexList(vertexL);
+        
+        camera = new sora::Sora3DCamera(sora::Sora3DCamera::Perspective);
+        camera->setProjectionMatrix(sora::SoraMatrix4::PerspectiveMat(60.f, 1.33, 10.f, 3000.f));
+        camera->setPosition(-512.f, -384.f, -1000.f);
+    //    camera->lookAt(512.f, 384.f, -500.f, 512.f, 384.f, 500.f, 0, 0, 1);
+        
+        sora::SoraVector4 pos(0.5f, 0.5f, 0.f, 1.f);
+        pos =  (camera->getProjectionMatrix() * camera->getTransform().getTransformMatrix() * pos);
+        
+        printf("%f, %f, %f, %f\n", pos.x, pos.y, pos.z);
+    //    sora::SoraCore::Ptr->set3DCamera(camera);
     }
     
     void onRender() {
         sora::SoraGameApp::BeginScene();
         
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_DOWN))
-            x -= 0.01f;
+            x -= 0.1;
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_UP))
-            x += 0.01f;
+            x += 0.1;
         
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_LEFT))
-            y -= 0.01f;
+            y -= 0.1;
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_RIGHT))
-            y += 0.01f;
+            y += 0.1;
         
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_Q))
-            z -= 0.001f;
+            z -= 0.1;
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_E))
-            z += 0.001f;
+            z += 0.1;
         
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_W))
-            zpos -= 1;
+            s -= 0.01f;
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_S))
-            zpos += 1;
-        
-        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_A))
-            xpos -= 1;
-        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_D))
-            xpos += 1;
-        
+            s += 0.01f;
+   //     camera->setPosition(x, y, z);
+
+
+      //  camera->setPosition(x, y, z);
      //   z -= 1.f;
         
         sora::SoraMatrix4 rot = sora::SoraMatrix4::RotMat(x, y, z);
-        sora::SoraMatrix4 translate = sora::SoraMatrix4::TransMat(xpos, ypos, zpos);
+        sora::SoraMatrix4 translate = sora::SoraMatrix4::TransMat(512, 384, zpos);
         
-        sora::SoraMatrix4 myView = rot * translate ;
-        sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
+        sora::SoraMatrix4 myView = sora::SoraMatrix4::TransMat(512, 384, zpos) * rot * sora::SoraMatrix4::ScaleMat(s, s, s) * sora::SoraMatrix4::TransMat(-512, -384, zpos) ;
+      ///  sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
         
       //  sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT_Z, &vt[0], 8, sora::TriangleStrip);
         
-        vertexL.bindTexture(mBg.getTexture());
         
      //   vertexL.setPosition(200.f, 200.f);
+     //   sora::SoraCore::Ptr->getRenderSystem()->setRenderState(sora::TextureWrap0, sora::TextureWrapClampToBoarder);
+     //   sora::SoraCore::Ptr->getRenderSystem()->setRenderState(sora::TextureWrap1, sora::TextureWrapClampToBoarder);
+        
+        sora::SoraCore::Ptr->switchTo2D();
+        // 2d
+        mBg.enable3D(false);
+        mBg.render(400.f, 400.f);
+        
+
+        sora::SoraCore::Ptr->switchTo3D();
+        sora::SoraCore::Ptr->getRenderSystem()->setProjectionMatrix(sora::SoraMatrix4());
+        
+  //      vertexL.getTransform().setTransformMatrix(myView);
         vertexL.render();
         
-        mText2.setPosition(100.f, 100.f);
+        mBg.enable3D(true);
+        mBg.getTransform().setRotation(x, y, z);
+        mBg.render();
+
+        sora::SoraCore::Ptr->switchTo2D();
+
+        mText2.setPosition(500.f, 600.f);
         mText2.render();
-        
         
         sora::SoraCore::Ptr->renderLine(10.f, 100.f, 10.f, 0.f, sora::Color::Red);
         sora::SoraCore::Ptr->getRenderSystem()->renderLine(10.f, 100.f, 110.f, 100.f, sora::Color::Blue);
@@ -317,12 +309,6 @@ public:
     }
     
     void onMouseDragged(sora::SoraMouseEvent& from, sora::SoraMouseEvent& to) {
-        float d =  atan2f(to.y - from.y,
-                          to.x - from.x);
-        mBg.getPhysicBody()->applyLinearImpulse(cosf(d),
-                                                sinf(d),
-                                                50.f,
-                                                0.f);
     }
     
     void onEnter() {
@@ -386,7 +372,7 @@ public:
         mShape.setClosed(true);
         
         sora::SoraResourceFile fontData("cour.ttf");
-        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 60, "BankGothic");
+        mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
         if(!mFont) {
             sora::SoraCore::Instance()->messageBox("Error loading font", "error", MB_OK | MB_ICONERROR);
         } else {
@@ -439,6 +425,73 @@ private:
     sora::SoraSprite sc2;
 };
 #include "SoraRenderSystemExtension.h"
+
+void msetCommands(sora::SoraConsoleEvent* evt) {
+    
+    std::string cmd = evt->getCmd();
+    sora::StringType param = evt->getParams();
+    if(cmd == "set_lx") {
+        lx = param.asFloat();
+        evt->pushResult("lx had been set to "+param);
+    } else if(cmd == "set_ly") {
+        ly = param.asFloat();
+        evt->pushResult("ly had been set to "+param);
+        
+    } else if(cmd == "set_rx") {
+        rx = param.asFloat();
+        evt->pushResult("rx had been set to "+param);
+        
+    } else if(cmd == "set_ry") {
+        ry = param.asFloat();
+        evt->pushResult("ry had been set to "+param);
+        
+    } else if(cmd == "set_max_iteration") {
+        maxiteration = param.asFloat();
+        evt->pushResult("max iteration had been set to "+param);
+        
+    } else if(cmd == "set_max_size") {
+        maxsize = param.asFloat();
+        evt->pushResult("max_size had been set to "+param);
+        
+    } else if(cmd == "set_iteration_increment") {
+        iterinc = param.asFloat();
+        evt->pushResult("iteration increment had been set to "+param);
+        
+    } else if(cmd == "set_cr") {
+        cr = param.asFloat();
+        evt->pushResult("cr had been set to "+param);
+        
+    } else if(cmd == "set_cg") {
+        cg = param.asFloat();
+        evt->pushResult("cg had been set to "+param);
+        
+    } else if(cmd == "set_cb") {
+        cb = param.asFloat();
+        evt->pushResult("cb had been set to "+param);
+    } else if(cmd == "detail") {
+        build(param.asInt());
+    } else if(cmd == "tex") {
+        texx(param.get());
+    } else if(cmd == "vertexmode") {
+        switch(param.asInt()) {
+            case 1:
+                vertexL.setRenderMode(sora::LineLoop);
+                break;
+            case 2:
+                vertexL.setRenderMode(sora::Quad);
+                break;
+            case 3:
+                vertexL.setRenderMode(sora::Triangle);
+                break;
+        }
+    }
+}
+
+#include "SoraGraphicAlgorithm.h"
+
+SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_iteration,set_max_size,set_iteration_increment,set_cr,set_cg,set_cb, detail, tex, vertexmode");
+
+
 
 int main(int argc, char* argv[]) {    
         

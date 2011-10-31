@@ -19,7 +19,7 @@ XmlGui::XmlGui()
 
 bool XmlGui::parse(const std::wstring &filename)
 {
-    ulong32 size;
+    uint32 size;
     char* pdata = (char*)sora::SoraCore::Ptr->getResourceFile(filename, size);
     if(pdata) {
 		bool result = parse(pdata, size);
@@ -29,7 +29,7 @@ bool XmlGui::parse(const std::wstring &filename)
 	return false;
 }
 
-bool XmlGui::parse(const char* str, ulong32 size) {
+bool XmlGui::parse(const char* str, unsigned long size) {
 	TiXmlElement *element = NULL;
 	TiXmlNode *node = NULL;
 

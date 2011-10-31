@@ -25,7 +25,7 @@ namespace sora {
             return;
         
 		SoraAutoPtr<SoraZipFile> t((SoraZipFile*)file);
-		resourcePacks[(ulong32)file] = t;
+		resourcePacks[(SoraHandle)file] = t;
 	}
 
 	void SoraZipResourceManager::detachResourcePack(SoraResourceHandle handle) {
@@ -41,10 +41,10 @@ namespace sora {
 		return 0;
 	}
 
-	void* SoraZipResourceManager::getResourceFile(const StringType& file, ulong32& size) {
+	void* SoraZipResourceManager::getResourceFile(const StringType& file, uint32& size) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
-			ulong32 s;
+			uint32 s;
 			if( (s = p->second->getFileSize( file ) ) != 0 ) {
 				size = s;
 				return p->second->getFile( file, s );
@@ -59,10 +59,10 @@ namespace sora {
 		if(p) delete (uint8*)(p);
 	}
 
-	ulong32 SoraZipResourceManager::getResourceFileSize(const StringType& file) {
+	uint32 SoraZipResourceManager::getResourceFileSize(const StringType& file) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
-			ulong32 s;
+			uint32 s;
 			if( (s = p->second->getFileSize( file ) ) != 0 )
 				return s;
 			++p;
@@ -70,10 +70,10 @@ namespace sora {
 		return 0;
 	}
 
-	ulong32 SoraZipResourceManager::getResourceFileCRC(const StringType& file) {
+	uint32 SoraZipResourceManager::getResourceFileCRC(const StringType& file) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
-			ulong32 s;
+			uint32 s;
 			if( (s = p->second->getFileSize( file ) ) != 0 )
 				return p->second->getFileCRC( file );
 			++p;
@@ -81,10 +81,10 @@ namespace sora {
 		return 0;
 	}
 
-	void* SoraZipResourceManager::readResourceFile(const StringType& file, ulong32 pos, ulong32 size) {
+	void* SoraZipResourceManager::readResourceFile(const StringType& file, uint32 pos, uint32 size) {
 		RESOURCE_PACK::iterator p = resourcePacks.begin();
 		while( p != resourcePacks.end() ) {
-			ulong32 s;
+			uint32 s;
 			if( (s = p->second->getFileSize( file ) ) != 0 ) {
                 
                 sora_assert( pos + size <= s );

@@ -27,7 +27,7 @@ namespace sora {
         GLuint depthBuffer;
         GLuint glTex;
         int32 w, h;
-        ulong32 tex;
+        SoraHandle tex;
         bool zbuffer;
         int32 err;
         
@@ -41,7 +41,7 @@ namespace sora {
         int32 getWidth() const { return w; }
         int32 getHeight() const { return h; }
         
-        ulong32 getTexture() const { return tex; }
+        SoraHandle getTexture() const { return tex; }
     };
 
 } // namespace sora

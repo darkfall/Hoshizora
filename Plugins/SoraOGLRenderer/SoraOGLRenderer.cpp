@@ -41,6 +41,8 @@
 #pragma comment(lib, "glfw.lib")
 #endif
 
+#include "Convert.h"
+
 const uint32 DEFAULT_VERTEX_BUFFER_SIZE = 512;
 
 #include "util/SoraArray.h"
@@ -149,7 +151,7 @@ namespace sora{
 		glMatrixMode(GL_PROJECTION);
 
 		glLoadIdentity();
-		glOrtho(0.f, w, h, 0.f, 1000.f, -1000.f);
+		glOrtho(0.f, w, h, 0.f, -1.f, 1.f);
 	}
 
 	void SoraOGLRenderer::applyTransform() {
@@ -162,7 +164,7 @@ namespace sora{
             glOrtho(0.f,
                     _oglWindowInfo.width,
                     _oglWindowInfo.height
-                    , 0.f, 1000.f, -1000.f);
+                    , 0.f, -1.f, 1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             
@@ -181,7 +183,7 @@ namespace sora{
             glOrtho(0,
                     pCurTarget->getWidth(),
                     0
-                    , pCurTarget->getHeight(), 1000.f, -1000.f);
+                    , pCurTarget->getHeight(), -1.f, 1.f);
             
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
@@ -193,7 +195,7 @@ namespace sora{
         }
 	}
 
-	void SoraOGLRenderer::_glBeginScene(uint32 color, ulong32 t, bool clear) {
+	void SoraOGLRenderer::_glBeginScene(uint32 color, SoraHandle t, bool clear) {
 		int32 width = _oglWindowInfo.width;
 		int32 height = _oglWindowInfo.height;
 
@@ -235,16 +237,12 @@ namespace sora{
             setClipping();
         } else
             iFrameStart = 0;
-		//else
-		//	glfwSwapBuffers();
-
 	}
 
 	void SoraOGLRenderer::_glSetBlendMode(int32 blend) {
 		if(blend != CurBlendMode)
 			flush();
 		
-//		glDisable(GL_ALPHA_TEST);
 		glEnable(GL_BLEND); // Enable Blending
 		
 		if((blend & BLEND_SRCALPHA) != (CurBlendMode & BLEND_SRCALPHA))
@@ -301,7 +299,7 @@ namespace sora{
 		}
 	}
 
-	void SoraOGLRenderer::beginScene(uint32 color, ulong32 target, bool clear) {
+	void SoraOGLRenderer::beginScene(uint32 color, SoraHandle target, bool clear) {
 		_glBeginScene(color, target, clear);
 	}
 
@@ -363,7 +361,7 @@ namespace sora{
         if(windowInfo->getCursor() != NULL)
             setCursor(mainWindow->getCursor());
 
-		return (ulong32)windowInfo;
+		return (SoraHandle)windowInfo;
 
 		return 0;
 	}
@@ -411,8 +409,8 @@ namespace sora{
 		return bFullscreen;
 	}
 
-	ulong32 SoraOGLRenderer::getVideoDeviceHandle() {
-		return (ulong32)this;
+	SoraHandle SoraOGLRenderer::getVideoDeviceHandle() {
+		return (SoraHandle)this;
 	}
 
 	int32 SoraOGLRenderer::_glTextureGetWidth(int32 tex, bool bOriginal) {
@@ -471,9 +469,8 @@ namespace sora{
 		return 0;
 	}
 
-	// to do
-	SoraTexture* SoraOGLRenderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap) {
-		ulong32  texid;
+	SoraTexture* SoraOGLRenderer::createTextureFromMem(void* ptr, uint32 size, bool bMipmap) {
+		SoraHandle  texid;
 		int w, h, channels;
 
 		texid = SOIL_load_OGL_texture_and_info_from_memory((const unsigned char* const)ptr,
@@ -501,7 +498,7 @@ namespace sora{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		
 		uint8* texData = new uint8[w*h*sizeof(uint32)];
-		memset(texData, 255, w*h*sizeof(uint32));
+		memset(texData, 0, w*h*sizeof(uint32));
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
 		delete texData;
 
@@ -577,35 +574,14 @@ namespace sora{
 		delete tex;
 		tex = 0;
 	}
-	
-	int32 SoraOGLRenderer::_modeToGLMode(RenderMode mode) {
-		switch (mode) {
-			case Line:				return GL_LINE;
-			case Triangle:          return GL_TRIANGLES;
-			case TriangleFan:       return GL_TRIANGLE_FAN;
-			case TriangleStrip:     return GL_TRIANGLE_STRIP;
-			case Quad:				return GL_QUADS;
-		}
-		return GL_INVALID_VALUE;
-	}
-    
-    int32 SoraOGLRenderer::_paramToGLParam(RenderStateParam param) {
-        switch (param) {
-            case TextureWrapClamp:          return GL_CLAMP; break;
-            case TextureWrapRepeat:         return GL_REPEAT; break;
-            case TextureWrapClampToBoarder: return GL_CLAMP_TO_BORDER; break;
-            case TextureWrapMirror:         return GL_MIRRORED_REPEAT; break;
-        }
-        return GL_INVALID_VALUE;
-    }
     
     void SoraOGLRenderer::setRenderState(RenderStateType type, RenderStateParam param) {
         switch(type) {
             case TextureWrap0:
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, _paramToGLParam(param));
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, RenderParamToGLParam(param));
                 break;
             case TextureWrap1:
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, _paramToGLParam(param));
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, RenderParamToGLParam(param));
                 break;
         }
     }
@@ -651,7 +627,7 @@ namespace sora{
             bindTexture(0);
         }
 		_glSetBlendMode(blendMode);
-		CurDrawMode = _modeToGLMode(mode);
+		CurDrawMode = RenderModeToGLMode(mode);
         
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -738,11 +714,13 @@ namespace sora{
 	}
     
     void SoraOGLRenderer::setTransformMatrix(const SoraMatrix4& matrix) {
+        flush();
+        
         glMatrixMode(GL_MODELVIEW);
         glLoadMatrixf(&matrix.x[0]);
     }
     
-    SoraMatrix4 SoraOGLRenderer::getTransformMatrix() const {
+    SoraMatrix4 SoraOGLRenderer::getTransformMatrix() const {        
         glMatrixMode(GL_MODELVIEW);
         float matrix[16];
         glGetFloatv(GL_MODELVIEW_MATRIX, &matrix[0]);
@@ -750,8 +728,17 @@ namespace sora{
     }
     
     void SoraOGLRenderer::setProjectionMatrix(const SoraMatrix4& matrix) {
+        flush();
+        
         glMatrixMode(GL_PROJECTION);
         glLoadMatrixf(&matrix.x[0]);
+    }
+    
+    void SoraOGLRenderer::multTransformMatrix(const SoraMatrix4& matrix) {
+        flush();
+        
+        glMatrixMode(GL_MODELVIEW);
+        glMultMatrixf(&matrix.x[0]);
     }
     
     SoraMatrix4 SoraOGLRenderer::getProjectionMatrix() const {
@@ -761,13 +748,33 @@ namespace sora{
         return SoraMatrix4(matrix);
     }
 
-	ulong32 SoraOGLRenderer::createTarget(int width, int height, bool zbuffer) {
+    void SoraOGLRenderer::switchTo2D() {
+        if(!pCurTarget)
+            setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, _oglWindowInfo.width, _oglWindowInfo.height, 0.f, 0.f, 1.f));
+        else 
+            setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, pCurTarget->getWidth(), 0.f, pCurTarget->getHeight(), 0.f, 1.f));
+        
+        glDisable(GL_DITHER);
+        glDisable(GL_FOG);
+        
+		glDisable(GL_LIGHTING);
+		glDisable(GL_CULL_FACE);
+    }
+    
+    void SoraOGLRenderer::switchTo3D() {
+        if(!pCurTarget)
+            setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, _oglWindowInfo.width, _oglWindowInfo.height, 0.f, -1000.f, 1000.f));
+        else 
+            setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, pCurTarget->getWidth(), 0.f, pCurTarget->getHeight(), -1000.f, 1000.f));
+    }
+    
+	SoraHandle SoraOGLRenderer::createTarget(int width, int height, bool zbuffer) {
 		SoraRenderTargetOG* t = new SoraRenderTargetOG(width, height, zbuffer);
 		liTargets.push_back((SoraRenderTargetOG*)t);
-		return (ulong32)t;
+		return (SoraHandle)t;
 	}
 
-	void SoraOGLRenderer::freeTarget(ulong32 t) {
+	void SoraOGLRenderer::freeTarget(SoraHandle t) {
 		SoraRenderTargetOG* pt = (SoraRenderTargetOG*)t;
 		if(!pt) return;
 		std::list<SoraRenderTargetOG*>::iterator itt = liTargets.begin();
@@ -781,7 +788,7 @@ namespace sora{
 		}
 	}
 
-	ulong32 SoraOGLRenderer::getTargetTexture(ulong32 t) {
+	SoraHandle SoraOGLRenderer::getTargetTexture(SoraHandle t) {
 		SoraRenderTargetOG* pt = (SoraRenderTargetOG*)t;
         assert(pt != NULL);
 
@@ -807,7 +814,7 @@ namespace sora{
 	}
 
 	StringType SoraOGLRenderer::videoInfo() {
-		StringType info(L"Driver: OpenGL Version ");
+		StringType info(L"GraphicDriver: OpenGL Version ");
 		info += (char*)glGetString(GL_VERSION);
 
 		return info;

@@ -6,7 +6,7 @@
 #include "SoraMath.h"
 #include "SoraImageEffect.h"
 #include "SoraObject.h"
-#include "SoraShaderEnabled.h"
+#include "SoraShaderable.h"
 #include "SoraVertex.h"
 
 #include <list>
@@ -26,7 +26,7 @@ namespace sora {
 	#define BLEND_DEFAULT		(BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_NOZWRITE)
 	#define BLEND_DEFAULT_Z		(BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_ZWRITE)
 
-	class SORA_API SoraSprite: public SoraShaderEnabledObject {
+	class SORA_API SoraSprite: public SoraShaderable, public SoraObject {
 	public:
         SoraSprite();
         SoraSprite(SoraTextureHandle tex);
@@ -52,8 +52,6 @@ namespace sora {
 		void    setZ(float z, int32 i=-1);
 		float   getZ(int32 i=0) const;
         
-        void    setPosition(float x, float y);
-
 		void    setCenter(float x, float y);
 		void    getCenter(float& x, float& y);
 		float   getCenterX() const;
@@ -79,12 +77,29 @@ namespace sora {
 
 		void    setRotation(float r);
 		float   getRotation() const;
-        
-        void transform(const SoraMatrix4& mat);
-		
+        		
 		uint32*              getPixelData() const;
         void                 unlockPixelData();
 		SoraTextureHandle    getTexture() const;
+        
+    public:
+        void onPositionChange(float x, float y, float z);
+        
+    public:
+        /**
+         * 3d sprite
+         * a 3d sprite would use the transform matrix in SoraObject
+         **/
+        void enable3D(bool flag);
+        bool is3DEnabled() const;
+        
+    private:
+        bool m3DEnabled;
+        
+    public:
+        /**
+         * effects and mofiers
+         **/
 		
 		void addEffect(SoraImageEffect* effect);
 		void stopEffect(SoraImageEffect* effect);
@@ -102,9 +117,14 @@ namespace sora {
         
         SoraRect getBoundingBox() const;
         
+    public:
+        /** 
+         * static functions
+         **/
+        
         static SoraSprite* LoadFromFile(const StringType& file);
         static SoraSprite* LoadFromRawData(uint32* data, int32 w, int32 h);
-        static SoraSprite* LoadFromMemory(uint32* data, ulong32 size);
+        static SoraSprite* LoadFromMemory(uint32* data, uint32 size);
         static void Render(const StringType& file, float x, float y, float r=0.f, float sh=1.f, float sv=1.f);
 		
 	protected:        
@@ -116,8 +136,6 @@ namespace sora {
 		SoraRect mTextureRect;
         int32   mSprWidth, mSprHeight;
         
-        SoraMatrix4 mTransformMat;
-
 		float mRotation;
 		float mCenterX, mCenterY;
 		float mVScale, mHScale;

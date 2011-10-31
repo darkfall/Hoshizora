@@ -85,8 +85,8 @@ namespace sora {
         
         void toNextFrame();
      
-        float32 getPlayRate() const;
-        void setPlayRate(float32 rate);
+        float getPlayRate() const;
+        void setPlayRate(float rate);
         
 		void setMediaInfo(uint32 w, uint32 h);
     private:

@@ -68,7 +68,7 @@ namespace sora {
 	}
 
 	int32 SoraLuaObject::doScript(const SoraWString& scriptPath) {
-		ulong32 size;
+		uint32 size;
 		void* pdata = SoraCore::Ptr->getResourceFile(scriptPath, size);
 		if(pdata) {
 			return doString((const char*)pdata);
@@ -102,7 +102,7 @@ namespace sora {
 	}
 
 	int32 SoraLuaObject::loadScript(const SoraWString& scriptPath) {
-		ulong32 size;
+		uint32 size;
 		void* pdata = SoraCore::Ptr->getResourceFile(scriptPath, size);
 		if(pdata) {
 			return loadString((const char*)pdata);

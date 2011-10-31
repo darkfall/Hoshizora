@@ -112,6 +112,8 @@ namespace sora {
 
         bVFlip = bHFlip = false;
         
+        m3DEnabled = false;
+        
         // force rebuild quad
         bPropChanged = true;
         
@@ -152,19 +154,36 @@ namespace sora {
 		mQuad.v[1].tx=tx2; mQuad.v[1].ty=ty1; 
 		mQuad.v[2].tx=tx2; mQuad.v[2].ty=ty2; 
 		mQuad.v[3].tx=tx1; mQuad.v[3].ty=ty2; 
+        
+        bPropChanged = true;
 	}
     
-    void SoraSprite::setPosition(float x, float y) {
+    void SoraSprite::onPositionChange(float x, float y, float z) {
         bPropChanged = true;
-        SoraShaderEnabledObject::setPosition(x, y);
+    }
+    
+    void SoraSprite::enable3D(bool flag) {
+        m3DEnabled = flag;
+        bPropChanged = true;
+        
+        if(!flag) {
+            setZ(0.f);
+        }
+    }
+    
+    bool SoraSprite::is3DEnabled() const {
+        return m3DEnabled;
     }
 	
 	void SoraSprite::render() {
-        render(getPositionX(), getPositionY());
-    }
-    
-    void SoraSprite::transform(const SoraMatrix4& mat) {
-        mTransformMat = mat;
+        if(bPropChanged) {
+            buildQuad(getPositionX(), getPositionY());
+            bPropChanged = false;
+        }
+		
+        attachShaderToRender();
+		mSora->renderQuad(mQuad);
+        detachShaderFromRender();
     }
     
     void SoraSprite::buildQuad(float x, float y) {
@@ -209,14 +228,13 @@ namespace sora {
             mQuad.v[3].y = mQuad.v[2].y;
 		}
         
-        mQuad *= mTransformMat;
+        if(m3DEnabled)
+            mQuad *= getTransform().getTransformMatrix();
     }
 
 	void SoraSprite::render(float x, float y) {
-		if(bPropChanged || x != getPositionX() || y != getPositionY()) {
-            buildQuad(x, y);
-            bPropChanged = false;
-        }
+        buildQuad(x, y);
+        bPropChanged = true;
 		
         attachShaderToRender();
 		mSora->renderQuad(mQuad);
@@ -396,7 +414,7 @@ namespace sora {
             
             bVFlip = !bVFlip;
         }
-        
+    
         bPropChanged = true;
 	}
 
@@ -570,7 +588,7 @@ namespace sora {
         return 0;
     }
     
-    SoraSprite* SoraSprite::LoadFromMemory(uint32* data, ulong32 size) {
+    SoraSprite* SoraSprite::LoadFromMemory(uint32* data, uint32 size) {
         SoraTextureHandle tex = SoraTexture::LoadFromMemory(data, size);
         if(tex)
             return new SoraSprite(tex);

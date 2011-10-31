@@ -24,7 +24,7 @@ namespace sora {
         ~SoraConfigParser();
         
         bool open(const StringType& path, ConfigType type=CONFIG_AUTO_DETECT);
-        bool open(void* data, ulong32 size, ConfigType type=CONFIG_AUTO_DETECT);
+        bool open(void* data, uint32 size, ConfigType type=CONFIG_AUTO_DETECT);
         bool openString(const std::string& string, ConfigType type=CONFIG_AUTO_DETECT);
         bool create();
         bool writeToFile(const StringType& path);
@@ -130,7 +130,7 @@ namespace sora {
         /**
          * set a long attribute under current node
          **/
-        void setLong(const std::string& attr, long32 val);
+        void setLong(const std::string& attr, uint32 val);
         /**
          * set a float attribute under current node
          **/
@@ -138,7 +138,7 @@ namespace sora {
         
     private:
         ConfigType fileNameToConfigType(const StringType& path);
-        ConfigType fileDataToConfigType(void* data, ulong32 size);
+        ConfigType fileDataToConfigType(void* data, uint32 size);
         
         SoraConfigParserImpl* mImpl;
     };

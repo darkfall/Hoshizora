@@ -25,21 +25,21 @@ namespace sora {
 	class SORA_API SoraMemoryBuffer: SoraUncopyable {
 	public:
 		SoraMemoryBuffer();
-		SoraMemoryBuffer(void* pData, ulong32 _length);
+		SoraMemoryBuffer(void* pData, uint32 _length);
 		
 		virtual ~SoraMemoryBuffer();
         
         void release();
 		
-		void set(void* pData, ulong32 _length);
+		void set(void* pData, uint32 _length);
 		
 		/* alloc a block of memory */
-		bool alloc(ulong32 size);
+		bool alloc(uint32 size);
 		
 		// reduce size to real size, becare that length have different meaning if you have used seek
 		void resize();
 		
-		bool push(void* pdata, ulong32 size);
+		bool push(void* pdata, uint32 size);
 		
 		template<typename T>
 		bool push(T t) {
@@ -63,26 +63,26 @@ namespace sora {
 		 so remember to free
 		 if buffersize < size, then the size would be set to the bytes accuraly read
 		 */
-		ulong32 read(void* pv, ulong32 size);		
+		uint32 read(void* pv, uint32 size);		
 		/*
 		 read a block of memory from offset 
 		 */
-		ulong32 read(ulong32 offset, void* pv, ulong32 size);
+		uint32 read(uint32 offset, void* pv, uint32 size);
 		
 		uint8* get();
-		uint8* get(ulong32 offset);
+		uint8* get(uint32 offset);
 		
 		template<typename datatype> 
-        datatype& get(ulong32 offset) const { 
+        datatype& get(uint32 offset) const { 
             if(offset > length+sizeof(datatype)) offset = 0;
             return *(datatype*)(apCData+offset);
         }
         
-		bool seek(ulong32 pos);
+		bool seek(uint32 pos);
 		
-		ulong32 size() const;
-		ulong32 realsize() const;
-		ulong32 offset() const;
+		uint32 size() const;
+		uint32 realsize() const;
+		uint32 offset() const;
 		bool valid() const;
 		        
         template<typename T>
@@ -104,7 +104,7 @@ namespace sora {
         }
         
         inline SoraMemoryBuffer& operator >> (std:: string& val) {
-            ulong32 n = currPos;
+            uint32 n = currPos;
             const char* data = (const char*)apCData;
             while(n < realSize && data[n] != '\0') {
                 ++n;
@@ -122,9 +122,9 @@ namespace sora {
         
 	private:
 		uint8* apCData;
-		ulong32 length;
-		ulong32 realSize;
-		ulong32 currPos;
+		uint32 length;
+		uint32 realSize;
+		uint32 currPos;
         bool mInternal;
 	};
 	
@@ -134,7 +134,7 @@ namespace sora {
         if(!valid()) return 0;
         if(currPos == length) return 0;
         
-        ulong32 size = sizeof(T);
+        uint32 size = sizeof(T);
         if(currPos+size <= length) {
             T t;
             memcpy(&t, (void*)(get()+currPos), size);
@@ -149,7 +149,7 @@ namespace sora {
         if(!valid()) return 0;
         if(currPos == length) return 0;
         
-        ulong32 size = sizeof(T);
+        uint32 size = sizeof(T);
         if(currPos+size <= length) {
             memcpy(t, (void*)(get()+currPos), size);
             currPos += size;

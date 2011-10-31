@@ -30,8 +30,8 @@ namespace spritewrapper {
 	void setVertexColor (SoraSpriteHandle h, float r, float g, float b, float a, int32 i);
 	void setAlpha		(SoraSpriteHandle h, float a);
     void setZ			(SoraSpriteHandle h, float z, int32 i=-1);
-    ulong32 getColor	(SoraSpriteHandle h, int32 i=-1);
-    float getZ		(SoraSpriteHandle h, int32 i=-1);
+    uint32 getColor     (SoraSpriteHandle h, int32 i=-1);
+    float getZ          (SoraSpriteHandle h, int32 i=-1);
     void setCenter		(SoraSpriteHandle h, float x, float y);
     float getCenterX	(SoraSpriteHandle h);
     float getCenterY	(SoraSpriteHandle h);
@@ -44,14 +44,14 @@ namespace spritewrapper {
     int32 getSpriteWidth		(SoraSpriteHandle h);
     int32 getSpriteHeight		(SoraSpriteHandle h);
     void setScale				(SoraSpriteHandle h, float vs, float hs);
-    float getVScale			(SoraSpriteHandle h);
-    float getHScale			(SoraSpriteHandle h);
+    float getVScale             (SoraSpriteHandle h);
+    float getHScale             (SoraSpriteHandle h);
     void setRotation			(SoraSpriteHandle h, float r);
     float getRotation			(SoraSpriteHandle h);
-	SoraTextureHandle getTexture		(SoraSpriteHandle h);
+	SoraTextureHandle getTexture(SoraSpriteHandle h);
 
-    void addEffect  (SoraSpriteHandle h, ulong32 eff);
-    void stopEffect (SoraSpriteHandle h, ulong32 eff);
+    void addEffect  (SoraSpriteHandle h, SoraHandle eff);
+    void stopEffect (SoraSpriteHandle h, SoraHandle eff);
     void clearEffects (SoraSpriteHandle h);
     bool hasEffect  (SoraSpriteHandle h);
     
@@ -66,20 +66,19 @@ namespace spritewrapper {
     void setBlendMode		(SoraSpriteHandle h, int32 mode);
     int32 getBlendMode		(SoraSpriteHandle h);
 	
+	SoraHandle attachShader(SoraSpriteHandle h, const SoraWString& shader, const SoraString& entry, int32 type);
 	
-	ulong32 attachShader(SoraSpriteHandle h, const SoraWString& shader, const SoraString& entry, int32 type);
+	void setShaderParam1f(SoraHandle shader, const char* name, float param);
+	void setShaderParam2f(SoraHandle shader, const char* name, float p1, float p2);
+	void setShaderParam3f(SoraHandle shader, const char* name, float p1, float p2, float p3);
+	void setShaderParam4f(SoraHandle shader, const char* name, float p1, float p2, float p3, float p4);
 	
-	void setShaderParam1f(ulong32 shader, const char* name, float param);
-	void setShaderParam2f(ulong32 shader, const char* name, float p1, float p2);
-	void setShaderParam3f(ulong32 shader, const char* name, float p1, float p2, float p3);
-	void setShaderParam4f(ulong32 shader, const char* name, float p1, float p2, float p3, float p4);
+	void setShaderParam1i(SoraHandle shader, const char* name, int32 param);
+	void setShaderParam2i(SoraHandle shader, const char* name, int32 p1, int32 p2);
+	void setShaderParam3i(SoraHandle shader, const char* name, int32 p1, int32 p2, int32 p3);
+	void setShaderParam4i(SoraHandle shader, const char* name, int32 p1, int32 p2, int32 p3, int32 p4);
 	
-	void setShaderParam1i(ulong32 shader, const char* name, int32 param);
-	void setShaderParam2i(ulong32 shader, const char* name, int32 p1, int32 p2);
-	void setShaderParam3i(ulong32 shader, const char* name, int32 p1, int32 p2, int32 p3);
-	void setShaderParam4i(ulong32 shader, const char* name, int32 p1, int32 p2, int32 p3, int32 p4);
-	
-	void setShaderTextureParam(ulong32 shader, const char* name, ulong32 tex);
+	void setShaderTextureParam(SoraHandle shader, const char* name, SoraHandle tex);
     
     void release (SoraSpriteHandle h);
 } // namespace spritewrapper
@@ -89,13 +88,13 @@ namespace imageeffectwrapper {
     
     using namespace sora;
 
-    ulong32 makeEffect_fade(float src, float dst, float time, int32 mode);
-    ulong32 makeEffect_transitions(float sx, float sy, float dx, float dy, float time, int32 mode);
-    ulong32 makeEffect_scale_tensile(float sv, float dv, float sh, float dh, float time, int32 mode);
-    ulong32 makeEffect_scale(float s, float d, float time, int32 mode);
-    ulong32 makeEffect_colorTransitions(ulong32 start, ulong32 end, float time, int32 mode);
-    ulong32 makeEffect_rotation(float start, float end, float time, int32 mode);
-	ulong32 makeEffect_rotationZ(float start, float zstart, float end, float zend, float time, int32 mode);
+    SoraHandle makeEffect_fade(float src, float dst, float time, int32 mode);
+    SoraHandle makeEffect_transitions(float sx, float sy, float dx, float dy, float time, int32 mode);
+    SoraHandle makeEffect_scale_tensile(float sv, float dv, float sh, float dh, float time, int32 mode);
+    SoraHandle makeEffect_scale(float s, float d, float time, int32 mode);
+    SoraHandle makeEffect_colorTransitions(uint32 start, uint32 end, float time, int32 mode);
+    SoraHandle makeEffect_rotation(float start, float end, float time, int32 mode);
+	SoraHandle makeEffect_rotationZ(float start, float zstart, float end, float zend, float time, int32 mode);
     
 } // namespace iamgeeffectwrapper
 

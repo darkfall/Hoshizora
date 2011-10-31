@@ -14,10 +14,10 @@ namespace sora {
 	class SORA_API SoraInput {
 	public:
 		// inputs
-		virtual void	getMousePos(float32 *x, float32 *y) = 0;
-		virtual void	setMousePos(float32 x, float32 y) = 0;
-		virtual float32 getMousePosX() = 0;
-		virtual float32 getMousePosY() = 0;
+		virtual void	getMousePos(float *x, float *y) = 0;
+		virtual void	setMousePos(float x, float y) = 0;
+		virtual float   getMousePosX() = 0;
+		virtual float   getMousePosY() = 0;
 		virtual int32	getMouseWheel()	= 0;
 		virtual bool	isMouseOver() = 0;
 		virtual bool	keyDown(int32 key) = 0;
@@ -35,7 +35,7 @@ namespace sora {
 		 set the window handle corresponds to which window to handle input
 		 @param window: the result of renderer->createWindow
 		 */
-		virtual void	setWindowHandle(ulong32 window) = 0;
+		virtual void	setWindowHandle(SoraHandle window) = 0;
 		
 #ifdef OS_IOS
 		/* ***** corresponding to mobile touch screens only */

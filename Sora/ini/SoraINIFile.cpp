@@ -36,7 +36,7 @@ void SoraINIFile::closeFile() {
 int32 SoraINIFile::readFile(const SoraWString& path) {
 	FILE* fp = fopen(ws2s(path).c_str(), "r");
 	if(fp) {
-		ulong32 size = 0;
+		uint32 size = 0;
 		fseek(fp, 0, SEEK_END);
 		size = ftell(fp);
 		fseek(fp, 0, SEEK_SET);
@@ -57,7 +57,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 	return false;
 }
 	
-	inline SoraString readLn(const char* pstr, uint32& currPos, ulong32 size) {
+	inline SoraString readLn(const char* pstr, uint32& currPos, uint32 size) {
 		SoraString buffer;
 		while(pstr[currPos] != '\n' && pstr[currPos] != '\r' && currPos < size) {
 			buffer += pstr[currPos];
@@ -67,7 +67,7 @@ int32 SoraINIFile::readFile(const SoraWString& path) {
 		return buffer;
 	}
 	
-	int32 SoraINIFile::readFileMem(void* pData, ulong32 size) {
+	int32 SoraINIFile::readFileMem(void* pData, uint32 size) {
 		if(isOpen()) closeFile();
 		
 		sec.clear();

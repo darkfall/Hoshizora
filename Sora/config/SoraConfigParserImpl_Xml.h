@@ -21,7 +21,7 @@ namespace sora {
         ~SoraConfigParserXmlImpl();
         
         bool open(const StringType& path);
-        bool open(void* data, ulong32 size);
+        bool open(void* data, uint32 size);
         bool create();
         bool writeToFile(const StringType& path);
         std::string writeToString() const;

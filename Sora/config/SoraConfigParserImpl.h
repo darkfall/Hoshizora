@@ -22,7 +22,7 @@ namespace sora {
         virtual ~SoraConfigParserImpl() {}
         
         virtual bool open(const StringType& path) = 0;
-        virtual bool open(void* data, ulong32 size) = 0;
+        virtual bool open(void* data, uint32 size) = 0;
         virtual bool create() = 0;
         virtual bool writeToFile(const StringType& path) = 0;
         virtual std::string writeToString() const = 0;

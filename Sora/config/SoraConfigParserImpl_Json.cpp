@@ -27,7 +27,7 @@ namespace sora {
         return false;
     }
     
-    bool SoraConfigParserJsonImpl::open(void* data, ulong32 size) {
+    bool SoraConfigParserJsonImpl::open(void* data, uint32 size) {
         if(mOpened)
             close();
         

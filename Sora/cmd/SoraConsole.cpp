@@ -59,7 +59,7 @@ namespace sora {
 		mResultColor = 0xFF22DD00;
 		
 		mActive = false;
-		mActiveKeyId = SoraCore::Instance()->registerGlobalHotkey(SoraHotkey(SORA_KEY_GRAVE), this);
+		mActiveKeyId = SoraCore::Instance()->RegisterGlobalHotkey(SoraHotkey(SORA_KEY_GRAVE), this);
 		
 		mBackspaceDown = false;
 		mBackspaceTime = 0.f;
@@ -264,7 +264,7 @@ namespace sora {
 	}
     
     void SoraConsole::setActiveKey(const SoraHotkey& key) {
-        sora::SoraCore::Ptr->setGlobalHotkey(mActiveKeyId, key);
+        sora::SoraCore::SetGlobalHotkey(mActiveKeyId, key);
     }
 	
 	void SoraConsole::registerCmdHandler(SoraEventHandler* handler, const std::string& cmd) {
@@ -352,7 +352,7 @@ namespace sora {
             }
 		} else {
             if(mUseSysTerm)
-                SoraCore::Ptr->execute(cmd, params!=NULL?params:"");
+                SoraCore::Ptr->Execute(cmd, params!=NULL?params:"");
 		}
 		
 		mHistory.push_back(history);
@@ -484,6 +484,7 @@ namespace sora {
     }
     
     void SoraConsole::onFrameEnd() {
+        SoraCore::Instance()->switchTo2D();
         render();
     }
 

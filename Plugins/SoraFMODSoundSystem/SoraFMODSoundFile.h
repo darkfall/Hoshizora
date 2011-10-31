@@ -21,7 +21,7 @@ namespace sora {
         ~SoraFMODMusicFile();
 		
 		int32 readFile(const StringType& sFilePath);
-		int32 readFileMem(void* ptr, ulong32 size);
+		int32 readFileMem(void* ptr, uint32 size);
 		void closeFile();
         
 		void play();
@@ -72,7 +72,7 @@ namespace sora {
         ~SoraFMODSoundEffectFile();
 		
 		int32 readFile(const StringType& sFilePath);
-		int32 readFileMem(void* ptr, ulong32 size);
+		int32 readFileMem(void* ptr, uint32 size);
 		void closeFile();
         
 		void play();

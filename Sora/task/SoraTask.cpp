@@ -17,7 +17,8 @@ namespace sora {
     mName(name),
     mProgress(0.0f),
     mState(TaskIdle),
-    mOwner(0) {
+    mOwner(0),
+    mPeriodical(false) {
     }
     
     SoraAbstractTask::~SoraAbstractTask() {
@@ -41,11 +42,11 @@ namespace sora {
             log_error(vamssg("SoraAbstractTask::run: %s", exp.what()));
         }
         
-        if(mOwner)
-            mOwner->taskFinished(this);
-        
         mState = TaskFinished;
         mProgress = 1.0f;
+        
+        if(mOwner)
+            mOwner->taskFinished(this);
     }
     
     SoraAbstractTask::TaskState SoraAbstractTask::state() const {

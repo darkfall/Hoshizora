@@ -90,32 +90,12 @@ extern "C" {
 
 namespace sora {
     
-    static SoraTimestamp g_starttime = SoraTimestamp();
-    
     SoraCore* SoraCore::mInstance = NULL;
     SoraCore* SoraCore::Ptr = 0;
     
     int SoraCore::iRandomSeed = rand();
-    
-    struct TransformData {
-        float x;
-        float y;
-        float dx;
-        float dy;
-        float rot;
-        float hscale;
-        float vscale;
-        
-        void set(float _x, float _y, float _dx, float _dy, float _rot, float _hscale, float _vscale) {
-            x = _x;
-            y = _y;
-            dx = _dx;
-            dy = _dy;
-            rot = _rot;
-            hscale = _hscale;
-            vscale = _vscale;
-        }
-    };
+    bool SoraCore::mIs3DRendering = true;
+    SoraVector3 SoraCore::mFarPoint = SoraVector3();
     
     struct ClippingData {
         int32 x;
@@ -123,7 +103,7 @@ namespace sora {
         int32 w;
         int32 h;
         
-        void set(int32 _x, int32 _y, int32 _w, int32 _h) {
+        inline void set(int32 _x, int32 _y, int32 _w, int32 _h) {
             x = _x;
             y = _y;
             w = _w;
@@ -132,10 +112,10 @@ namespace sora {
     };
     
     namespace {
-        static std::stack<TransformData> g_TransformStack;
+        static std::stack<SoraMatrix4> g_TransformStack;
         static std::stack<ClippingData> g_ClippingStack;
         
-        static TransformData g_CurrentTransform;
+        static SoraMatrix4 g_CurrentTransform;
         static ClippingData g_CurrentClipping;
         
         SoraKeyPoll* g_keypoll;
@@ -155,7 +135,7 @@ namespace sora {
 		bInitialized = false;
 		bFrameSync = false;
 		bHasInput = false;
-		bZBufferArea = false;
+		bZBufferSort = false;
         bMainScene = false;
 		bPaused = false;
 		bPauseRender = false;
@@ -165,6 +145,7 @@ namespace sora {
         bScreenBufferAttached = false;
         bSeperateSoundSystemThread = false;
         bMultithreadedRendering = false;
+        mIs3DRendering = false;
 
 		pInput = NULL;
 		pFontManager = NULL;
@@ -177,6 +158,7 @@ namespace sora {
 		mPrevShaderContext = NULL;
         mScreenBuffer = NULL;
         mSystemFont = 0;
+        m3DCamera = 0;
         
         log_notice("Initializing base systems...");
         
@@ -193,7 +175,7 @@ namespace sora {
         pFileSystem->attachResourceManager(new SoraZipResourceManager);
 #endif
         
-		setRandomSeed(rand());
+		SetRandomSeed(rand());
         
         _registerEventTypes();
         _regGlobalProducts();
@@ -335,8 +317,10 @@ namespace sora {
             SoraSoundSystemThread::Instance()->start();
         }
         
-        if(pRenderSystem)
+        if(pRenderSystem) {
+            pRenderSystem->switchTo2D();
             pRenderSystem->start(pTimer);
+        }
 	}
 
 	void SoraCore::_frameListenerStart() {
@@ -419,7 +403,7 @@ namespace sora {
 #ifdef PROFILE_CORE_UPDATE
                     PROFILE("UpdateAutoUpdate");
 #endif
-                    SoraAutoUpdate::updateList(dt);
+                    SoraAutoUpdate::UpdateList(dt);
                 }
                 
                 if(pPhysicWorld) {
@@ -542,7 +526,7 @@ namespace sora {
         factory->registerEvent<SoraMessageEvent>("MessageEvent");
     }
 
-	ulong32 SoraCore::getMainWindowHandle() {
+	SoraHandle SoraCore::getMainWindowHandle() {
 		return pRenderSystem->getMainWindowHandle();
 	}
 
@@ -604,7 +588,7 @@ namespace sora {
             SET_ENV_INT("ScreenWidth", iScreenWidth);
             SET_ENV_INT("ScreenHeight", iScreenHeight);
 			
-			ulong32 result = pRenderSystem->createWindow(info);
+			SoraHandle result = pRenderSystem->createWindow(info);
 			if(result) {
                 log_mssg(getVideoInfo().get());
 
@@ -648,7 +632,6 @@ namespace sora {
         SET_ENV_INT("ScreenWidth", iScreenWidth);
 		SET_ENV_INT("ScreenHeight", iScreenHeight);
 		
-        g_CurrentTransform.set(0.f, 0.f, 0.f, 0.f, 0.f, 1.f, 1.f);
         g_CurrentClipping.set(0, 0, iScreenWidth, iScreenHeight);
         
 		return true;
@@ -804,11 +787,12 @@ namespace sora {
         return pTimer->getDelta();
     }
 
-	uint64 SoraCore::getRunningTime() {
+	uint64 SoraCore::GetRunningTime() {
+        static SoraTimestamp g_starttime = SoraTimestamp();
         return g_starttime.elapsed();
 	}
 
-	uint64 SoraCore::getCurrentSystemTime() {
+	uint64 SoraCore::GetCurrentSystemTime() {
 		return SoraTimestamp::CurrentTime();
 	}
 
@@ -818,16 +802,16 @@ namespace sora {
 		pTimer->setFPS(fps);
 	}
 
-	uint64 SoraCore::getFrameCount() {
+	uint64 SoraCore::GetFrameCount() {
         return SoraTimer::FrameCount;
 	}
 
-	void SoraCore::setTimeScale(float scale) {
+	void SoraCore::SetTimeScale(float scale) {
 		SET_ENV_FLOAT("TimeScale", scale);
         SoraTimer::TimeScale = scale;
 	}
 
-	float SoraCore::getTimeScale() {
+	float SoraCore::GetTimeScale() {
 		return SoraTimer::TimeScale;
 	}
     
@@ -844,7 +828,7 @@ namespace sora {
 		pFileSystem->detachResourcePack(handle);
 	}
 
-	void* SoraCore::getResourceFile(const StringType& sfile, ulong32& size) {
+	void* SoraCore::getResourceFile(const StringType& sfile, uint32& size) {
 		return pFileSystem->getResourceFile(sfile, size);
 	}
 
@@ -852,11 +836,11 @@ namespace sora {
 		return pFileSystem->freeResourceFile(p);
 	}
 
-	void* SoraCore::readResourceFile(const StringType& sfile, ulong32 pos, ulong32 size) {
+	void* SoraCore::readResourceFile(const StringType& sfile, uint32 pos, uint32 size) {
 		return pFileSystem->readResourceFile(sfile, pos, size);
 	}
 
-	ulong32 SoraCore::getResourceFileSize(const StringType& file) {
+	uint32 SoraCore::getResourceFileSize(const StringType& file) {
 		return pFileSystem->getResourceFileSize(file);
 	}
     
@@ -867,7 +851,7 @@ namespace sora {
     
 	void SoraCore::attachShaderContext(SoraShaderContext* context) {
         sora_assert(bInitialized == true);
-        if(!bZBufferArea)
+        if(!bZBufferSort)
             pRenderSystem->attachShaderContext(context);
 		
 		mPrevShaderContext = context;
@@ -875,7 +859,7 @@ namespace sora {
 
 	void SoraCore::detachShaderContext() {
         sora_assert(bInitialized == true);
-        if(!bZBufferArea)
+        if(!bZBufferSort)
             pRenderSystem->detachShaderContext();
         
 		mPrevShaderContext = NULL;
@@ -911,7 +895,7 @@ namespace sora {
         sora_assert(bInitialized==true);
 		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(SoraPath::resource() + realPath)) != 0) return tex;
-		ulong32 size;
+		uint32 size;
 		void* data = getResourceFile(realPath, size);
 		if(data) {
 			tex = (SoraTextureHandle)pRenderSystem->createTextureFromMem(data, size, bMipmap);
@@ -930,7 +914,7 @@ namespace sora {
 #else
 		SoraTextureHandle tex;
 		if((tex = SoraTextureMap::Instance()->get(sTexturePath)) != 0) return tex;
-		ulong32 size;
+		uint32 size;
 		void* data = getResourceFile(sTexturePath, size);
 		if(data) {
 			tex = (SoraTextureHandle)pRenderSystem->createTextureFromMem(data, size, bMipmap);
@@ -965,7 +949,7 @@ namespace sora {
 		return (SoraTextureHandle)pRenderSystem->createTextureFromRawData(data, w, h);
 	}
 
-	SoraTextureHandle SoraCore::createTextureFromMem(void* data, ulong32 size) {
+	SoraTextureHandle SoraCore::createTextureFromMem(void* data, uint32 size) {
 		sora_assert(bInitialized==true);
         
 #ifdef SORA_ENABLE_MULTI_THREAD
@@ -1007,7 +991,7 @@ namespace sora {
         pRenderSystem->releaseTexture((SoraTexture*)pTexture);
 	}
 
-	ulong32	SoraCore::getTextureId(SoraTextureHandle tex) {
+	SoraHandle	SoraCore::getTextureId(SoraTextureHandle tex) {
 		SoraTexture* ptex = (SoraTexture*)tex;
 		if(ptex)
 			return ptex->mTextureID;
@@ -1022,7 +1006,7 @@ namespace sora {
 		SoraTextureMap::Instance()->clear();
 	}
 
-	ulong32 SoraCore::getVideoDeviceHandle() {
+	SoraHandle SoraCore::getVideoDeviceHandle() {
 		sora_assert(bInitialized==true);
 		return pRenderSystem->getVideoDeviceHandle();
 	}
@@ -1053,7 +1037,7 @@ namespace sora {
 	void SoraCore::renderQuad(SoraQuad& quad) {
 		sora_assert(bInitialized==true);
         
-		if(bZBufferArea) {
+		if(bZBufferSort) {
 #ifdef SORA_ENABLE_MULTI_THREAD
             if(bMultithreadedRendering)
                 MUTEX_LOCK(mRenderingLock);
@@ -1066,7 +1050,7 @@ namespace sora {
 	void SoraCore::renderTriple(SoraTriple& trip) {
 		sora_assert(bInitialized==true);
 		
-		if(bZBufferArea) {
+		if(bZBufferSort) {
 #ifdef SORA_ENABLE_MULTI_THREAD
             if(bMultithreadedRendering)
                 MUTEX_LOCK(mRenderingLock);
@@ -1079,7 +1063,7 @@ namespace sora {
 	void SoraCore::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode) {
 		sora_assert(bInitialized == true);
         
-		if(bZBufferArea) {
+		if(bZBufferSort) {
 #ifdef SORA_ENABLE_MULTI_THREAD
             if(bMultithreadedRendering)
                 MUTEX_LOCK(mRenderingLock);
@@ -1130,10 +1114,10 @@ namespace sora {
 #endif
 		pRenderSystem->setTransform(x, y, dx, dy, rot, hscale, vscale);
         
-        g_CurrentTransform.set(x, y, dx, dy, rot, hscale, vscale);
+        g_CurrentTransform = pRenderSystem->getTransformMatrix();
 	}
     
-	void SoraCore::beginScene(uint32 c, ulong32 t, bool clear) {
+	void SoraCore::beginScene(uint32 c, SoraHandle t, bool clear) {
 		sora_assert(bInitialized==true);
 #ifdef SORA_ENABLE_MULTI_THREAD
         sora_assert(!bMultithreadedRendering);
@@ -1157,6 +1141,7 @@ namespace sora {
             pRenderSystem->beginScene(c, t, clear);
         }
 	}
+    
 	void SoraCore::endScene() {
 		sora_assert(bInitialized==true);
 #ifdef SORA_ENABLE_MULTI_THREAD
@@ -1169,6 +1154,22 @@ namespace sora {
                 pRenderSystem->beginScene(0, mScreenBuffer, false);
         }
 	}
+    
+    void SoraCore::switchTo2D() {
+        sora_assert(bInitialized = true);
+        pRenderSystem->switchTo2D();
+        
+        mIs3DRendering = false;
+    }
+    
+    void SoraCore::switchTo3D() {
+        sora_assert(bInitialized = true);
+        pRenderSystem->switchTo3D();
+        
+        if(m3DCamera)
+            m3DCamera->apply();
+        mIs3DRendering = true;
+    }
 
 	SoraTargetHandle SoraCore::createTarget(int width, int height, bool zbuffer) {
 		sora_assert(bInitialized==true);
@@ -1179,7 +1180,7 @@ namespace sora {
 		return pRenderSystem->createTarget(width==0?iScreenWidth:width, height==0?iScreenHeight:height, zbuffer);
 	}
 
-	void SoraCore::freeTarget(ulong32 t) {
+	void SoraCore::freeTarget(SoraHandle t) {
 		sora_assert(bInitialized==true);
 #ifdef SORA_ENABLE_MULTI_THREAD
         sora_assert(!bMultithreadedRendering);
@@ -1188,7 +1189,7 @@ namespace sora {
 		pRenderSystem->freeTarget(t);
 	}
 
-	ulong32 SoraCore::getTargetTexture(ulong32 t) {
+	SoraHandle SoraCore::getTargetTexture(SoraHandle t) {
 		sora_assert(bInitialized==true);
 #ifdef SORA_ENABLE_MULTI_THREAD
         sora_assert(!bMultithreadedRendering);
@@ -1265,7 +1266,7 @@ namespace sora {
 		return false;
 	}
 	
-	void SoraCore::simulateKey(int32 key, int32 state) {
+	void SoraCore::SimulateKey(int32 key, int32 state) {
 		SoraInputSimulator::simulateKey(key, state);
 	}
 
@@ -1321,19 +1322,19 @@ namespace sora {
 		return false;
 	}
     
-    int32 SoraCore::registerGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler) {
+    int32 SoraCore::RegisterGlobalHotkey(const SoraHotkey& key, SoraEventHandler* handler) {
         return SoraKeyPoll::addGlobalHotKey(key, handler);
     }
     
-    void SoraCore::setGlobalHotkey(int32 hid, const SoraHotkey& key) {
+    void SoraCore::SetGlobalHotkey(int32 hid, const SoraHotkey& key) {
         SoraKeyPoll::setGlobalHotkey(hid, key);
     }
     
-    void SoraCore::unregisterGlobalHotkey(int32 hid) {
+    void SoraCore::UnregisterGlobalHotkey(int32 hid) {
         SoraKeyPoll::delGlobalHotkey(hid);
     }
     
-    void SoraCore::clearGlobalHotkeys() {
+    void SoraCore::ClearGlobalHotkeys() {
         SoraKeyPoll::clearGlobalHotkeys();
     }
 	
@@ -1405,28 +1406,28 @@ namespace sora {
         return vamssg("Hoshizora Version %d.%d Rev %d", SORA_VERSION_MAJOR, SORA_VERSION_MINOR, SORA_VERSION_REV);
     }
 
-	void SoraCore::setRandomSeed(int32 seed) {
+	void SoraCore::SetRandomSeed(int32 seed) {
 		init_gen_rand(seed);
 		iRandomSeed = seed;
 	}
 
-	int32 SoraCore::getRandomSeed() {
+	int32 SoraCore::GetRandomSeed() {
 		return iRandomSeed;
 	}
 
-	int32 SoraCore::randomInt(int32 min, int32 max) {
+	int32 SoraCore::RandomInt(int32 min, int32 max) {
 		return (int32)(min+genrand_real1()*(max-min));
 	}
 
-	float SoraCore::randomFloat(float min, float max) {
+	float SoraCore::RandomFloat(float min, float max) {
 		return (float)(min+genrand_real1()*(max-min));
 	}
 
-	int32 SoraCore::randomIntNoRange() {
+	int32 SoraCore::RandomIntNoRange() {
 		return gen_rand32();
 	}
 
-	float SoraCore::randomFloatNoRange() {
+	float SoraCore::RandomFloatNoRange() {
 		return (float)genrand_real1();
 	}
 
@@ -1441,7 +1442,7 @@ namespace sora {
             return pFontManager->getFont(font.c_str(), size, 0, 0);
 		}
 
-		ulong32 s;
+		uint32 s;
 		void* p = getResourceFile(font, s);
 		if(p) {
 			SoraFont* f = pFontManager->getFont((const char*)p, size, s-1, font.c_str());
@@ -1462,7 +1463,7 @@ namespace sora {
 		return 0;
 	}
     
-    SoraFont* SoraCore::createFont(void* data, ulong32 size, uint32 fontSize, const StringType& fileName) {
+    SoraFont* SoraCore::createFont(void* data, uint32 size, uint32 fontSize, const StringType& fileName) {
         if(!pFontManager) {
 			_postError("FontManager not available");
 			return 0;
@@ -1548,7 +1549,7 @@ namespace sora {
 		return pSoundSystem->createSoundEffectFile();
     }
     
-    void SoraCore::execute(const SoraString& appPath, const SoraString& args) {
+    void SoraCore::Execute(const SoraString& appPath, const SoraString& args) {
         system((appPath+" "+args).c_str());
     }
     
@@ -1579,11 +1580,11 @@ namespace sora {
 	}
 	
 	void SoraCore::beginZBufferSort() {
-		bZBufferArea = true;
+		bZBufferSort = true;
 	}
 
 	void SoraCore::endZBufferSort() {
-		bZBufferArea = false;
+		bZBufferSort = false;
 		SoraZSorter::endSortAndRender();
 	}
 
@@ -1649,13 +1650,7 @@ namespace sora {
             g_CurrentTransform = g_TransformStack.top();
             g_TransformStack.pop();
             
-            setTransform(g_CurrentTransform.x,
-                         g_CurrentTransform.y,
-                         g_CurrentTransform.dx,
-                         g_CurrentTransform.dy,
-                         g_CurrentTransform.rot,
-                         g_CurrentTransform.hscale,
-                         g_CurrentTransform.vscale);
+            pRenderSystem->setTransformMatrix(g_CurrentTransform);
         }
     }
    
@@ -1687,15 +1682,15 @@ namespace sora {
         SoraKeyPoll::DelInputListener(listener);
     }
     
-    void SoraCore::setFarPoint(const SoraVector3& ptFar) {
+    void SoraCore::SetFarPoint(const SoraVector3& ptFar) {
         mFarPoint = ptFar;
     }
     
-    SoraVector3 SoraCore::getFarPoint() const {
+    SoraVector3 SoraCore::GetFarPoint() {
         return mFarPoint;
     }
     
-    float SoraCore::transform3DPoint(SoraVector3* point) {
+    float SoraCore::Transform3DPoint(SoraVector3* point) {
         if(mFarPoint.z == 0.f)
             return 1.f;
         
@@ -1705,7 +1700,7 @@ namespace sora {
         return scale;
     }
     
-    float SoraCore::transform3DPoint(float* x, float* y, float* z) {
+    float SoraCore::Transform3DPoint(float* x, float* y, float* z) {
         if(mFarPoint.z == 0.f)
             return 1.f;
         
@@ -1715,13 +1710,17 @@ namespace sora {
         return scale;
     }
     
-    SoraMusicFile* SoraCore::createMusicFileFromMemory(void* pdata, ulong32 size) {
+    bool SoraCore::Is3DRendering() {
+        return mIs3DRendering;
+    }
+    
+    SoraMusicFile* SoraCore::createMusicFileFromMemory(void* pdata, uint32 size) {
         if(pSoundSystem)
             return pSoundSystem->createMusicFileFromMemory(pdata, size);
         return 0;
     }
     
-    SoraSoundEffectFile* SoraCore::createSoundEffectFileFromMemory(void* pdata, ulong32 size) {
+    SoraSoundEffectFile* SoraCore::createSoundEffectFileFromMemory(void* pdata, uint32 size) {
         if(pSoundSystem)
             return pSoundSystem->createSoundEffectFileFromMemory(pdata, size);
         return 0;
@@ -1740,4 +1739,13 @@ namespace sora {
     }
     
 #endif    
+    
+    void SoraCore::set3DCamera(Sora3DCamera* camera) {
+        m3DCamera = camera;
+    }
+    
+    Sora3DCamera* SoraCore::get3DCamera() const {
+        return m3DCamera;
+    }
+    
 } // namespace sora

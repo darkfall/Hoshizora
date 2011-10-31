@@ -16,32 +16,32 @@
 
 namespace fontWrapper {
 	
-	static ulong32 createFont(const std::wstring& fontName, int32 size) {
-		return (ulong32)sora::SoraCore::Ptr->createFont(fontName, size);
+	static SoraHandle createFont(const std::wstring& fontName, int32 size) {
+		return (SoraHandle)sora::SoraCore::Ptr->createFont(fontName, size);
 	}
 	
-	static void renderString(ulong32 font, float x, float y, int32 alignment, const std::wstring& str) {
+	static void renderString(SoraHandle font, float x, float y, int32 alignment, const std::wstring& str) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			pfont->render(x, y, alignment, str.c_str());
 		}
 	}
 	
-	static void setKerningWidth(ulong32 font, float kw) {
+	static void setKerningWidth(SoraHandle font, float kw) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			pfont->setKerningWidth(kw);
 		}
 	}
 	
-	static void setKerningHeight(ulong32 font, float kh) {
+	static void setKerningHeight(SoraHandle font, float kh) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			pfont->setKerningHeight(kh);
 		}
 	}
 	
-	static float getKerningWidth(ulong32 font) {
+	static float getKerningWidth(SoraHandle font) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			return pfont->getKerningWidth();
@@ -49,7 +49,7 @@ namespace fontWrapper {
 		return 0.f;
 	}
 	
-	static float getKerningHeight(ulong32 font) {
+	static float getKerningHeight(SoraHandle font) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			return pfont->getKerningHeight();
@@ -57,7 +57,7 @@ namespace fontWrapper {
 		return 0.f;
 	}
 	
-	static int32 getFontSize(ulong32 font) {
+	static int32 getFontSize(SoraHandle font) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			return pfont->getFontSize();
@@ -65,14 +65,14 @@ namespace fontWrapper {
 		return 0;
 	}
 	
-	static void setColor(ulong32 font, ulong32 color, int32 i) {
+	static void setColor(SoraHandle font, SoraHandle color, uint32 i) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			pfont->setColor(color, i);
 		}
 	}
 
-	static ulong32 getColor(ulong32 font, int32 i) {
+	static SoraHandle getColor(SoraHandle font, uint32 i) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
 			return pfont->getColor(i);

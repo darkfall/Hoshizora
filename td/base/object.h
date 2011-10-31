@@ -41,14 +41,6 @@ namespace atd {
             return &mPosition;
         }
         
-        void setPosition(const Vector2& pos) {
-            mPosition.setPosition(pos);
-        }
-        
-        Vector2 getPosition() const {
-            return mPosition.getPosition();
-        }
-        
     private:
         Movable mPosition;
     };

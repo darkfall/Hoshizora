@@ -26,8 +26,8 @@ namespace sora {
 		virtual void	print(float x, float y, int32 align, const wchar_t *format, ...) = 0;
 		virtual void	render(float x, float y, int32 align, const wchar_t* text) = 0;
 
-		virtual void	setColor(ulong32 dwColor, int32 i = -1) = 0;
-		virtual ulong32	getColor(int32 i = 0) = 0;
+		virtual void	setColor(uint32 dwColor, int32 i = -1) = 0;
+		virtual uint32	getColor(int32 i = 0) = 0;
 
 		// set kernings
 		virtual void	setKerningWidth(float kerning) = 0;
@@ -66,7 +66,7 @@ namespace sora {
         virtual float getLineRotation() const = 0;
         
         static SoraFont* LoadFromFile(const StringType& font, uint32 size);
-        static SoraFont* LoadFromMemory(void* data, ulong32 size, uint32 fontSize, const StringType& name);
+        static SoraFont* LoadFromMemory(void* data, uint32 size, uint32 fontSize, const StringType& name);
         static void Release(SoraFont* font);
 	};
 

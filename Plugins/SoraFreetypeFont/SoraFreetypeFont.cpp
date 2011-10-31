@@ -195,11 +195,11 @@ namespace sora {
 		}
 	}
 
-	ulong32 SoraFTFont::getColor(int32 i) {
+	uint32 SoraFTFont::getColor(int32 i) {
 		return sprite->getColor(i);
 	}
 
-	void SoraFTFont::setColor(ulong32 c, int32 i) {
+	void SoraFTFont::setColor(uint32 c, int32 i) {
 		sprite->setColor(c, i);
 	}
 	

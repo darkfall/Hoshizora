@@ -84,7 +84,7 @@ namespace sora {
 				}
 			}
             
-            SoraGUIResponserMap::Instance()->registerHandleSrc((ulong32)pWidget, handleSrc);
+            SoraGUIResponserMap::Instance()->registerHandleSrc((SoraHandle)pWidget, handleSrc);
 			SoraGUIResponserMap::Instance()->registerExternalResponser(responserID, pResponser);
         }
        

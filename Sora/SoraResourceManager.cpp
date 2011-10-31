@@ -20,11 +20,11 @@ namespace sora {
         SoraCore::Instance()->detachResourcePack(handle);
     }
     
-    void* SoraResourceManager::LoadResourceFile(const StringType& file, ulong32* size) {
+    void* SoraResourceManager::LoadResourceFile(const StringType& file, uint32* size) {
         return SoraCore::Instance()->getResourceFile(file, *size);
     }
     
-    ulong32 SoraResourceManager::GetResourceFileSize(const StringType& file) {
+    uint32 SoraResourceManager::GetResourceFileSize(const StringType& file) {
         return SoraCore::Instance()->getResourceFileSize(file);
     }
    

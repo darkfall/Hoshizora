@@ -38,7 +38,7 @@ namespace sora {
     
     SoraInternalLogger::LogMssg::LogMssg(const std::string& log, int32 level) {
         
-        mLog = vamssg("%.4f: ", ((float)(SoraCore::getRunningTime()) / 1000000)) + log;
+        mLog = vamssg("%.4f: ", ((float)(SoraCore::GetRunningTime()) / 1000000)) + log;
         mLogLevel = level;
     }
 	

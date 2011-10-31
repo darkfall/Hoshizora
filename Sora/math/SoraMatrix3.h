@@ -26,16 +26,16 @@ namespace sora {
 		SoraMatrix3() {
 			createIdentity();
 		}
-        SoraMatrix3(float* v);
+        SoraMatrix3(real* v);
 		union {
-			float c[3][3];
-            float m[9];
+			real c[3][3];
+            real m[9];
 		};
 		        
         void createIdentity();
-        void translate(float x, float y);
-        void scale(float x, float y);
-        void rotate(float rotation);
+        void translate(real x, real y);
+        void scale(real x, real y);
+        void rotate(real rotation);
         void rotate(const SoraVector& fwd, const SoraVector& side);
         void transformVector2Ds(std::vector<SoraVector>& vPoints);
         void transformVector2D(SoraVector& vPoint);
@@ -44,7 +44,7 @@ namespace sora {
         SoraMatrix3& operator*=(const SoraMatrix3& rhs);
 	};
 	
-	inline SoraMatrix3::SoraMatrix3(float* v) {
+	inline SoraMatrix3::SoraMatrix3(real* v) {
 		sora_assert(v);
 		for(int i=0; i<9; ++i)
 			m[i] = v[i];
@@ -89,20 +89,20 @@ namespace sora {
 	
 	inline void SoraMatrix3::transformVector2Ds(std::vector<SoraVector>& vPoints) {
 		for(uint32 i=0; i<vPoints.size(); ++i) {
-			float tempX = (c[0][0]*vPoints[i].x) + (c[1][0]*vPoints[i].y) + c[2][0];
-			float tempY = (c[0][1]*vPoints[i].x) + (c[1][1]*vPoints[i].y) + c[2][1];
+			real tempX = (c[0][0]*vPoints[i].x) + (c[1][0]*vPoints[i].y) + c[2][0];
+			real tempY = (c[0][1]*vPoints[i].x) + (c[1][1]*vPoints[i].y) + c[2][1];
 			
-			vPoints[i].x = (float)tempX;
-			vPoints[i].y = (float)tempY;
+			vPoints[i].x = (real)tempX;
+			vPoints[i].y = (real)tempY;
 		}
 	}
 	
 	inline void SoraMatrix3::transformVector2D(SoraVector& vPoint) {
-		float tempX = (c[0][0]*vPoint.x) + (c[1][0]*vPoint.y) + c[2][0];
-		float tempY = (c[0][1]*vPoint.x) + (c[1][1]*vPoint.y) + c[2][1];
+		real tempX = (c[0][0]*vPoint.x) + (c[1][0]*vPoint.y) + c[2][0];
+		real tempY = (c[0][1]*vPoint.x) + (c[1][1]*vPoint.y) + c[2][1];
 		
-		vPoint.x = (float)tempX;
-		vPoint.y = (float)tempY;
+		vPoint.x = (real)tempX;
+		vPoint.y = (real)tempY;
 	}
 	
 	inline void SoraMatrix3::createIdentity() {
@@ -111,7 +111,7 @@ namespace sora {
 		c[2][0] = 0; c[2][2] = 0; c[2][2] = 1;
 	}
 	
-	inline void SoraMatrix3::translate(float x, float y) {
+	inline void SoraMatrix3::translate(real x, real y) {
 		SoraMatrix3 mat;
 		
 		mat.c[0][0] = 1; mat.c[0][1] = 0; mat.c[0][2] = 0;
@@ -121,7 +121,7 @@ namespace sora {
 		*this *= mat;
 	}
 	
-	inline void SoraMatrix3::scale(float xscale, float yscale) {
+	inline void SoraMatrix3::scale(real xscale, real yscale) {
 		SoraMatrix3 mat;
 		
 		mat.c[0][0] = xscale; mat.c[0][1] = 0; mat.c[0][2] = 0;
@@ -131,11 +131,11 @@ namespace sora {
 		*this *= mat;
 	}
 	
-	inline void SoraMatrix3::rotate(float rot) {
+	inline void SoraMatrix3::rotate(real rot) {
 		SoraMatrix3 mat;
 		
-		float sinv = sin(rot);
-		float cosv = cos(rot);
+		real sinv = sin(rot);
+		real cosv = cos(rot);
 		
 		mat.c[0][0] = cosv; mat.c[0][1] = sinv; mat.c[0][2] = 0;
 		mat.c[1][0] = -sinv; mat.c[1][1] = cosv; mat.c[1][2] = 0;

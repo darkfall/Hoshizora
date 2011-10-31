@@ -24,29 +24,29 @@ namespace sora {
 	/* from loliEngine rewrite */
 	class SORA_API SoraCoreTransform {
 	public:
-		SoraCoreTransform(float _f);
-		SoraCoreTransform(float _f1, float _f2);
-		SoraCoreTransform(float _f1, float _f2, float _f3);
-		SoraCoreTransform(float _f1, float _f2, float _f3, float _f4);
+		SoraCoreTransform(real _f);
+		SoraCoreTransform(real _f1, real _f2);
+		SoraCoreTransform(real _f1, real _f2, real _f3);
+		SoraCoreTransform(real _f1, real _f2, real _f3, real _f4);
 	
 		SoraCoreTransform();
 			
-		void Set(float _f);
-		void Set(float _f1, float _f2);
-		void Set(float _f1, float _f2, float _f3);
-		void Set(float _f1, float _f2, float _f3, float _f4);
+		void Set(real _f);
+		void Set(real _f1, real _f2);
+		void Set(real _f1, real _f2, real _f3);
+		void Set(real _f1, real _f2, real _f3, real _f4);
 	
 		int GetKind() const { return iKind; }
 	
-		float Get1st() const;
-		float Get2nd() const;
-		float Get3rd() const;
-		float Get4th() const;
+		real Get1st() const;
+		real Get2nd() const;
+		real Get3rd() const;
+		real Get4th() const;
 	
 		SoraCoreTransform GetDist(const SoraCoreTransform& t2, int divider);
 	
-		SoraCoreTransform operator / (float divider) const;
-		SoraCoreTransform operator * (float m) const;
+		SoraCoreTransform operator / (real divider) const;
+		SoraCoreTransform operator * (real m) const;
         SoraCoreTransform operator * (const SoraCoreTransform& rhs) const;
 		SoraCoreTransform operator - (const SoraCoreTransform& rhs) const;
 		SoraCoreTransform operator + (const SoraCoreTransform& rhs) const;
@@ -58,7 +58,7 @@ namespace sora {
 		bool operator == (const SoraCoreTransform& rhs) const;
 			
 	private:
-		float f1, f2, f3, f4;
+		real f1, f2, f3, f4;
 		bool bClean;	
 		int iKind;
 	};

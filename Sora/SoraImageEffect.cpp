@@ -433,7 +433,7 @@ namespace sora {
 		start(_mode, _time);
 	}
 	
-	SoraImageEffectColorTransitions::SoraImageEffectColorTransitions(ulong32 s, ulong32 end, float _time, ImageEffectMode _mode,
+	SoraImageEffectColorTransitions::SoraImageEffectColorTransitions(uint32 s, uint32 end, float _time, ImageEffectMode _mode,
 																	 SoraCoreTransformer<SoraCoreTransform>* transformer):
 	SoraImageEffect(transformer) {
 		etype = ImageEffectColorTransitions;

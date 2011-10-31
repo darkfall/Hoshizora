@@ -31,6 +31,9 @@ namespace sora {
 
 		void shutdown();
 		bool isActive();
+        
+        void switchTo2D();
+        void switchTo3D();
 
 		void start(SoraTimer* timer);
 
@@ -47,7 +50,7 @@ namespace sora {
 
 		SoraTexture* createTexture(const SoraWString& sTexturePath, bool bMipmap=false);
 		SoraTexture* createTextureWH(int w, int h);
-		SoraTexture* createTextureFromMem(void* ptr, ulong32 size, bool bMipmap=false);
+		SoraTexture* createTextureFromMem(void* ptr, uint32 size, bool bMipmap=false);
 		SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h);
 
 		uint32*		 textureLock(SoraTexture*);
@@ -66,6 +69,7 @@ namespace sora {
 		void setTransform(float x=0.f, float y=0.f, float dx=0.f, float dy=0.f, float rot=0.f, float hscale=1.f, float vscale=1.f);
         
         void setTransformMatrix(const SoraMatrix4& matrix);
+        void multTransformMatrix(const SoraMatrix4& matrix);
         SoraMatrix4 getTransformMatrix() const;
         
         void setProjectionMatrix(const SoraMatrix4& matrix);
@@ -73,7 +77,7 @@ namespace sora {
         
         void setVerticalSync(bool flag);
 
-		ulong32 getMainWindowHandle() { return (ulong32)mainWindow; }
+		SoraHandle getMainWindowHandle() { return (SoraHandle)mainWindow; }
 		SoraWindowInfoBase* getMainWindow() { return mainWindow; }
 
         SoraShaderContext* createShaderContext();
@@ -81,7 +85,7 @@ namespace sora {
 		void detachShaderContext();
 
 		StringType videoInfo();
-		ulong32 getVideoDeviceHandle();
+		SoraHandle getVideoDeviceHandle();
 
 		void flush();
         
@@ -101,13 +105,11 @@ namespace sora {
 	private:
 		void applyTransform();
 		void bindTexture(SoraTexture* tex);
-		
-        inline int32 _paramToGLParam(RenderStateParam param);
-		inline int32 _modeToGLMode(RenderMode mode);
+
 		inline void _glInitialize();
 		inline void _glEndFrame();
 		inline void _glBeginFrame();
-		inline void _glBeginScene(uint32 color, ulong32 target, bool clear);
+		inline void _glBeginScene(uint32 color, SoraHandle target, bool clear);
 		inline void _glEndScene();
 		inline int32 _glTextureGetWidth(int32 tex, bool bOriginal=false);
 		inline int32 _glTextureGetHeight(int32 tex, bool bOriginal=false);

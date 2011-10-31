@@ -54,7 +54,7 @@ namespace gcn
 	
 	gcn::Color SoraGUIImage::getColor() const {
 		if(mSoraSprite) {
-			ulong32 hardwareColor = mSoraSprite->getColor();
+			uint32 hardwareColor = mSoraSprite->getColor();
 			return gcn::Color(CGETR(hardwareColor),
 							  CGETG(hardwareColor),
 							  CGETB(hardwareColor),
@@ -77,7 +77,7 @@ namespace gcn
             throw GCN_EXCEPTION("Locking of the texture failed. HGE only support locking of 32bit textures.");
         }
 
-        ulong32 color = pLockPtr[x + y * getWidth()];
+        uint32 color = pLockPtr[x + y * getWidth()];
 
         mSoraSprite->unlockPixelData();
         return Color(CGETR(color),
@@ -89,7 +89,7 @@ namespace gcn
 
     void  SoraGUIImage::putPixel(int x, int y, const Color& color)
     {
-        ulong32 hardwareColor = CARGB(color.a, color.r, color.g, color.b);
+        uint32 hardwareColor = CARGB(color.a, color.r, color.g, color.b);
 
         uint32 *pLockPtr = mSoraSprite->getPixelData();
 

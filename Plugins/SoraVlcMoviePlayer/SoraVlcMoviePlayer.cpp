@@ -286,14 +286,14 @@ namespace sora {
         libvlc_media_player_next_frame(mp);
     }
 
-    float32 SoraVlcMoviePlayer::getPlayRate() const {
+    float SoraVlcMoviePlayer::getPlayRate() const {
         if(!mp)
             return 0.f;
         
         return libvlc_media_player_get_rate(mp);
     }
     
-    void SoraVlcMoviePlayer::setPlayRate(float32 rate) {
+    void SoraVlcMoviePlayer::setPlayRate(float rate) {
         if(!mp)
             return;
         

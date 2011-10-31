@@ -21,7 +21,7 @@ namespace sora {
     struct SoraPhysicFixtureDef;
     struct SoraPhysicBodyDef;
 
-	class SORA_API SoraObject: public SoraEventHandler {
+	class SORA_API SoraObject: public SoraEventHandler, public SoraMovable {
 	public:
         friend class SoraObjectHandle;
         
@@ -34,33 +34,65 @@ namespace sora {
         // inherited from SoraEventHandler
         virtual void    onUpdate(float dt);
         
-        virtual void    onPositionChange(float x, float y);
+        virtual void    onPositionChange(float x, float y, float z);
         virtual void    onParentChange(SoraObject* parent);
         virtual void    onMessage(SoraMessageEvent* message);
         
 		virtual void	add(SoraObject* pobj);
 		virtual void	del(SoraObject* pobj);
         virtual void    delAll();
-    	
-        void    setPosition(float x, float y);
-        float   getPositionX() const;
-        float   getPositionY() const;
-        void    getPosition(float* x, float* y) const;
         
-        float   getAbsolutePositionX() const;
-        float   getAbsolutePositionY() const;
+    public:
+        
+        /**
+         * position
+         **/
+    	
+        void setPosition(float x, float y, float z=0.f);
+        void setPosition(const SoraVector3& pos);
+        const SoraVector3& getPosition() const;
+        
+        float getPositionX() const;
+        float getPositionY() const;
+        float getPositionZ() const;
+        
+        float getAbsolutePositionX() const;
+        float getAbsolutePositionY() const;
+        
+    public:
+        
+        /**
+         * 3d transform
+         **/
+        
+        void setTransform(const SoraTransform& transform);
+        
+        SoraTransform&       getTransform();
+        const SoraTransform& getTransform() const;
+
+    public:
+        
+        /** 
+         * child objects
+         **/
         
         void    setParent(SoraObject* obj);
         
-		SoraObject*     getObjList() const;
-		SoraObject*     getParent() const;
+		SoraObject*  getObjList() const;
+		SoraObject*  getParent() const;
         
-        int32           getObjSize() const;
-        SoraObject*     getNext() const;
+        int32        getObjSize() const;
+        SoraObject*  getNext() const;
 				
 		SoraObject* getObjByName(const SoraString& n);
         SoraObject* getObjByName(SoraStringId sid);
 		
+    public:
+        
+        /**
+         * type and name
+         **/
+        
 		uint32  getType() const;
 		void    setType(uint32 t);
         
@@ -68,14 +100,26 @@ namespace sora {
         SoraUniqueId        getUniqueId() const;
         SoraObjectHandle    getHandle();
         
-        void setName(const StringType& name);
+        void setName(const SoraString& name);
         void setName(SoraStringId n);
-		SoraStringId getName() const;
+		SoraString getName() const;
+        
+    public:
+        
+        /**
+         * modifiers
+         **/
         
         void moveTo(float x, float y, float t);
         
         typedef SoraFunction<void(SoraObject*)> NotificationFunc;
         void moveToAndNotify(float x, float y, float t, const NotificationFunc& onFinish);
+        
+    public:
+        
+        /**
+         * physics
+         **/
         
         /**
          * If a physic body is binded, the object would update itself and move itself to
@@ -102,19 +146,17 @@ namespace sora {
 	protected:
 		
         SoraObject* operator[](const SoraString& name);
-        
+            
 	protected:
        
 		SoraObject* mParent;
         SoraObject* mSubObjects;
         SoraObject* mNext;
-		
-		SoraMovable mPosition;
         
 		uint32 mType;
         
         int32 mSubObjectSize;
-        SoraStringId mName;
+        SoraString mName;
         
         bool mAutoReleasePhysicBody;
         SoraPhysicBody* mPhysicBody;

@@ -5,7 +5,7 @@
 
 namespace sora {
     
-	SoraTexture::SoraTexture(ulong32 texid, int32 width, int32 height, int32 oriwidth, int32 oriheight):
+	SoraTexture::SoraTexture(uint32 texid, int32 width, int32 height, int32 oriwidth, int32 oriheight):
     mTextureID(texid),
     mTextureWidth(width),
     mTextureHeight(height),
@@ -41,7 +41,7 @@ namespace sora {
         return SoraCore::Instance()->createTextureFromRawData(data, w, h);
     }
     
-    SoraTextureHandle SoraTexture::LoadFromMemory(uint32* data, ulong32 size) {
+    SoraTextureHandle SoraTexture::LoadFromMemory(uint32* data, uint32 size) {
         return SoraCore::Instance()->createTextureFromMem(data, size);
     }
     
@@ -61,7 +61,6 @@ namespace sora {
     }
     
     int32 SoraTexture::GetOriginalHeight(SoraTextureHandle handle) {
-        SoraTexture* tex = (SoraTexture*)handle;
         return ((SoraTexture*)handle)->mOriginalHeight;
     }
     

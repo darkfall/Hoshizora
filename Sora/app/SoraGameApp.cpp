@@ -25,7 +25,7 @@ namespace sora {
     }
     
     bool SoraGameApp::GameAppWindow::updateFunc() {
-        float32 dt = SoraCore::Instance()->getDelta();
+        float dt = SoraCore::Instance()->getDelta();
         if(mDef.Window)
             mDef.Window->updateFunc();
         mFSMManager.onUpdate(dt);

@@ -38,7 +38,7 @@ namespace sora {
         if(mSprite->getTexture() == 0)
             mSprite->setTexture(texture);
         
-        mSprite->render(getPositionX(), getPositionY());
+        mSprite->render();
     }
     
     SoraSprite* SoraPostEffect::getSprite() const {

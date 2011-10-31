@@ -18,7 +18,7 @@ namespace sora {
 	/*
 		Base class for canvas which render things onto a texture, using RenderTarget
 	 */
-	class SORA_API SoraBaseCanvas: public SoraShaderEnabledObject {
+	class SORA_API SoraBaseCanvas: public SoraShaderable, public SoraObject {
 	public:
         SoraBaseCanvas(int32 width, int32 height, bool bDepthBuffer=true);
         virtual ~SoraBaseCanvas();
@@ -26,7 +26,7 @@ namespace sora {
         void render();
         int32 update(float dt);
         
-        void beginRender(ulong32 col=0xFF000000);
+        void beginRender(uint32 col=0xFF000000);
         void finishRender();
 
 		void setZ(float z);
@@ -52,7 +52,7 @@ namespace sora {
         inline void _attachTarget();
         inline void _detachTarget();
         
-		ulong32 canvasTarget;
+		SoraHandle canvasTarget;
         SoraSprite* pCanvasSprite;
         
         bool bSceneBegan;

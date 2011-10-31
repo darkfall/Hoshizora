@@ -13,10 +13,10 @@
 
 namespace sora {
 
-	typedef ulong32 SoraResourceHandle;
+	typedef SoraHandle SoraResourceHandle;
 	
 	class SoraZipResourceManager: public SoraResourceManager {
-		typedef std::map<ulong32, SoraAutoPtr<SoraZipFile> > RESOURCE_PACK;
+		typedef std::map<SoraHandle, SoraAutoPtr<SoraZipFile> > RESOURCE_PACK;
 		
 	public:
 		~SoraZipResourceManager();
@@ -26,10 +26,10 @@ namespace sora {
 		void			detachResourcePack      (SoraResourceHandle handle);
 		SoraZipFile*	getResourcePack         (SoraResourceHandle handle);
 
-		void* readResourceFile				(const StringType& file, ulong32 pos, ulong32 size);
-		void* getResourceFile				(const StringType& file, ulong32& size);
-		ulong32 getResourceFileSize	(const StringType& file);
-		ulong32 getResourceFileCRC	(const StringType& file);
+		void* readResourceFile				(const StringType& file, uint32 pos, uint32 size);
+		void* getResourceFile				(const StringType& file, uint32& size);
+		uint32 getResourceFileSize	(const StringType& file);
+		uint32 getResourceFileCRC	(const StringType& file);
 		void  freeResourceFile(void* p);
 		
 		StringType getName() const { return "ZipRM"; }

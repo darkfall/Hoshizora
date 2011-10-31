@@ -19,7 +19,7 @@ namespace sora {
 		virtual ~SoraMusicFile() {}
 		
 		virtual int32 readFile(const StringType& sFilePath) = 0;
-		virtual int32 readFileMem(void* ptr, ulong32 size) = 0;
+		virtual int32 readFileMem(void* ptr, uint32 size) = 0;
 		virtual void closeFile() = 0;
 
 		virtual void play() = 0;
@@ -56,7 +56,7 @@ namespace sora {
 		virtual ~SoraSoundEffectFile() {}
 		
 		virtual int32 readFile(const StringType& sFilePath) = 0;
-		virtual int32 readFileMem(void* ptr, ulong32 size) = 0;
+		virtual int32 readFileMem(void* ptr, uint32 size) = 0;
 		virtual void closeFile() = 0;
 
 		virtual void play() = 0;

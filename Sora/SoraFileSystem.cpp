@@ -24,7 +24,7 @@
 
 namespace sora {
     
-    ulong32 SoraFileSystem::ResourceMemory = 0;
+    uint64 SoraFileSystem::ResourceMemory = 0;
 	
 	SoraFileSystem::SoraFileSystem() {
 	}
@@ -53,7 +53,7 @@ namespace sora {
 		}
 	}
 
-	void* SoraFileSystem::readResourceFile(const StringType& file, ulong32 pos, ulong32 size) {
+	void* SoraFileSystem::readResourceFile(const StringType& file, uint32 pos, uint32 size) {
 		void* data;
         
         ResourceManagerCont::iterator it = mResourceManagers.begin();
@@ -71,7 +71,7 @@ namespace sora {
                 ResourceInfo info;
                 info.mResource = resource;
                 info.mSize = size;
-                mResourceCaches.insert(std::make_pair((ulong32)data, info));
+                mResourceCaches.insert(std::make_pair((SoraHandle)data, info));
                 
 				return data;
             }
@@ -79,7 +79,7 @@ namespace sora {
 		return 0;
 	}
 	
-	void* SoraFileSystem::getResourceFile(const StringType& file, ulong32& size) {
+	void* SoraFileSystem::getResourceFile(const StringType& file, uint32& size) {
 		void* data;
         
         ResourceManagerCont::iterator it = mResourceManagers.begin();
@@ -97,7 +97,7 @@ namespace sora {
                 ResourceInfo info;
                 info.mResource = resource;
                 info.mSize = size;
-                mResourceCaches.insert(std::make_pair((ulong32)data, info));
+                mResourceCaches.insert(std::make_pair((SoraHandle)data, info));
 
 				return data;
             }
@@ -105,8 +105,8 @@ namespace sora {
 		return 0;
 	}
 	
-	ulong32 SoraFileSystem::getResourceFileSize(const StringType& file) { 
-		ulong32 size;
+	uint32 SoraFileSystem::getResourceFileSize(const StringType& file) { 
+		uint32 size;
 
         ResourceManagerCont::iterator it = mResourceManagers.begin();
         ResourceManagerCont::iterator end = mResourceManagers.end();
@@ -128,18 +128,18 @@ namespace sora {
         SoraMutexGuard guard(mIOMutex);
 #endif
         
-        ResourceCacheMap::iterator itResource = mResourceCaches.find((ulong32)p);
+        ResourceCacheMap::iterator itResource = mResourceCaches.find((SoraHandle)p);
         if(itResource != mResourceCaches.end()) {
             ResourceMemory -= itResource->second.mSize;
             mResourceCaches.erase(itResource);
         }
 	}
 	
-	ulong32	SoraFileSystem::loadResourcePack(const StringType& file) {
+	SoraHandle	SoraFileSystem::loadResourcePack(const StringType& file) {
 		for(size_t i=1; i<mResourceManagers.size(); ++i) {
 			SoraResourceManager* prm = mResourceManagers[i].get();
 				
-			ulong32 r = prm->loadResourcePack(file);
+			SoraHandle r = prm->loadResourcePack(file);
 			if(r) {
 				prm->attachResourcePack(r);
 				return r;
@@ -153,7 +153,7 @@ namespace sora {
 		return 0;
 	}
 	
-	void SoraFileSystem::detachResourcePack(ulong32 handle) {
+	void SoraFileSystem::detachResourcePack(SoraHandle handle) {
 		for(size_t i=0; i<mResourceManagers.size(); ++i) {
 			mResourceManagers[i]->detachResourcePack(handle);
 		}
@@ -500,7 +500,7 @@ namespace sora {
         return false;
     }
     
-    void SoraFileSystem::resource_async_not(void* data, ulong32 size, void* userData) {
+    void SoraFileSystem::resource_async_not(void* data, uint32 size, void* userData) {
         ResourceIoParam* param = static_cast<ResourceIoParam*>(userData);
         
         SoraResource::Ptr resource;
@@ -594,7 +594,7 @@ namespace sora {
     void SoraFileSystem::ioThreadFunc(void* arg) {
         
         IoThreadParam* param = static_cast<IoThreadParam*>(arg);
-        ulong32 size;
+        uint32 size;
         void* pdata = getResourceFile(param->mName, size);
         param->mNotification(pdata, size, param->mUserData);
         

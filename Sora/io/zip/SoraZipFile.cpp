@@ -97,7 +97,7 @@ namespace sora {
         }
     }
     
-    void* SoraZipFile::getFile(const StringType& filename, uLong readSize) {
+    void* SoraZipFile::getFile(const StringType& filename, uint32 readSize) {
         if(isOpen()) {
             if(readSize != 0) {
                 return _getfile(filename, readSize);
@@ -180,7 +180,7 @@ namespace sora {
         return 0;
     }
     
-    ulong32 SoraZipFile::getFileSize(const StringType& filename) {
+    uint32 SoraZipFile::getFileSize(const StringType& filename) {
         if(isOpen()) {
             std::string sFileName = filename.get().c_str();
             for (size_t nChar = 0; nChar < sFileName.size(); ++nChar) {
@@ -198,7 +198,7 @@ namespace sora {
         return 0;
     }
     
-    ulong32 SoraZipFile::getFileCRC(const StringType& filename) {
+    uint32 SoraZipFile::getFileCRC(const StringType& filename) {
         if(isOpen()) {
             unz_file_info* lpUnzFileInfo = _getUnzFileInfo(filename.c_str());
             return lpUnzFileInfo ? lpUnzFileInfo->crc : 0;

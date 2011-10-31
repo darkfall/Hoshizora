@@ -81,8 +81,8 @@ namespace sora {
 		void	print(float x, float y, int32 align, const wchar_t *format, ...);
 		void	render(float x, float y, int32 align, const wchar_t* text);
 
-		void	setColor(ulong32 dwColor, int32 i = -1);
-		ulong32	getColor(int32 i = 0);
+		void	setColor(uint32 dwColor, int32 i = -1);
+		uint32	getColor(int32 i = 0);
 
 		
 		void	setKerningWidth(float kerning);

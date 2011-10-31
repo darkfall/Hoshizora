@@ -152,16 +152,13 @@ namespace sora {
         SoraCore* core = SoraCore::Instance();
 
         if(mRenderToSprite && mSprite && mRenderTarget) {            
-            mSprite->render(getPositionX(), getPositionY());
+            mSprite->render();
             return;
         }
         
         if(!mCompiled && mTexture != 0)
             compile();
                 
-        core->pushTransformMatrix();
-        core->setTransform(0.f, 0.f, getPositionX(), getPositionY());
-        
         if(!mOutlineOnly) {
             core->renderWithVertices(mTexture, BLEND_DEFAULT, mVertices.begin(), mVertices.size(), mRenderMode);
         }
@@ -180,8 +177,6 @@ namespace sora {
                                  mVertices.front().y, mOutlineColor, mOutlineWidth);
             }
         }
-
-        core->popTransformMatrix();
     }
     
     size_t SoraShape::size() const {
@@ -232,7 +227,7 @@ namespace sora {
 		return *this;
     }
 
-    SoraVector SoraShape::computeNormal(const SoraVector& p1, const SoraVector& p2) {
+    SoraVector SoraShape::ComputeNormal(const SoraVector& p1, const SoraVector& p2) {
         SoraVector normal;
         
         normal.x = p1.y - p2.y;
@@ -306,7 +301,7 @@ namespace sora {
         SoraVector p2(x2, y2);
         
         // Compute the extrusion direction
-        SoraVector normal = computeNormal(p1, p2);
+        SoraVector normal = ComputeNormal(p1, p2);
         normal *= width / 2;
         
         // Create the shape's points

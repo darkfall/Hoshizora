@@ -16,7 +16,6 @@ namespace sora {
     mParent(NULL),
     mSubObjects(NULL), 
     mNext(NULL),
-    mPosition(SoraMovable()),
     mType(0), 
     mSubObjectSize(0),
     mAutoReleasePhysicBody(true),
@@ -114,38 +113,65 @@ namespace sora {
         update(dt);
     }
 	
-	void SoraObject::setPosition(float x, float y) {
-        mPosition.x = x;
-        mPosition.y = y;
-        onPositionChange(x, y);
-	}
-	
-	void SoraObject::getPosition(float* x, float* y) const {
-		*x = getPositionX();
-		*y = getPositionY();
+	void SoraObject::setPosition(float x, float y, float z) {
+        SoraMovable::setPosition(SoraVector3(x, y, z));
+        
+        onPositionChange(x, y, z);
 	}
 	
 	float SoraObject::getPositionX() const {
-        float x = mPosition.x;
+        float x = SoraMovable::mTransform.getPositionX();
         if(!mParent)
             return x;
         return x+mParent->getPositionX();
 	}
 	
 	float SoraObject::getPositionY() const {
-        float y = mPosition.y;
+        float y = SoraMovable::mTransform.getPositionY();
 
         if(!mParent)
             return y;
         return y+mParent->getPositionY();
 	}
     
+    float SoraObject::getPositionZ() const {
+        float y = SoraMovable::mTransform.getPositionZ();
+        
+        if(!mParent)
+            return y;
+        return y+mParent->getPositionZ();
+	}
+    
+    void SoraObject::setPosition(const SoraVector3& pos) {
+        SoraMovable::setPosition(pos);
+        
+        onPositionChange(pos.x, pos.y, pos.z);
+    }
+    
+    const SoraVector3& SoraObject::getPosition() const {
+        if(!mParent)
+            return SoraMovable::getPosition();
+        return mParent->getPosition() + SoraMovable::getPosition();
+    }
+    
+    void SoraObject::setTransform(const SoraTransform& transform) {
+        SoraMovable::mTransform = transform;
+    }
+    
+    SoraTransform& SoraObject::getTransform() {
+        return SoraMovable::mTransform;
+    }
+    
+    const SoraTransform& SoraObject::getTransform() const {
+        return SoraMovable::mTransform;
+    }
+    
     float SoraObject::getAbsolutePositionX() const {
-        return mPosition.x;
+        return SoraMovable::mTransform.getPositionX();
     }
     
     float SoraObject::getAbsolutePositionY() const {
-        return mPosition.y;
+        return SoraMovable::mTransform.getPositionY();
     }
 
 	void SoraObject::add(SoraObject* o){
@@ -205,21 +231,21 @@ namespace sora {
 	}
 
 	SoraObject* SoraObject::getObjByName(const SoraString& n) {
-        return getObjByName(GetUniqueStringId(n));
-	}
-    
-    SoraObject* SoraObject::getObjByName(SoraStringId sid) {        
-		if(mName == sid) {
+        if(mName == n) {
 			return this;
 		}
 		
 		SoraObject* obj = mSubObjects;
         while(obj != NULL) {
-            if(obj->getName() == sid) {
+            if(obj->getName() == n) {
                 return obj;
             }
         }
 		return NULL;
+	}
+    
+    SoraObject* SoraObject::getObjByName(SoraStringId sid) {        
+		return getObjByName(GetStringByUniqueId(sid));
     }
 	
 	uint32 SoraObject::getType() const { 
@@ -255,15 +281,15 @@ namespace sora {
         return getObjByName(name);
     }
     
-    void SoraObject::setName(const StringType& name) {
-        setName(name.uniqueId());
+    void SoraObject::setName(const SoraString& name) {
+        mName = name;
     }
     
     void SoraObject::setName(SoraStringId n) { 
-        mName = n; 
+        mName = GetStringByUniqueId(n);
     }
    
-    SoraStringId SoraObject::getName() const { 
+    SoraString SoraObject::getName() const { 
         return mName;
     }
     
@@ -310,7 +336,7 @@ namespace sora {
         mModifierAdapters.clear();
     }
     
-    void SoraObject::onPositionChange(float x, float y) {
+    void SoraObject::onPositionChange(float x, float y, float z) {
         
     }
     

@@ -190,19 +190,19 @@ namespace sora {
 		}
 		
 		
-		void setGlobalBackgroundColor(ulong32 col) {
+		void setGlobalBackgroundColor(uint32 col) {
 			gcn::Style::DefaultStyle()->setBackgroundColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
 		}
 		
-		void setGlobalForegroundColor(ulong32 col) {
+		void setGlobalForegroundColor(uint32 col) {
 			gcn::Style::DefaultStyle()->setForegroundColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
 		}
 		
-		void setGlobalBaseColor(ulong32 col) {
+		void setGlobalBaseColor(uint32 col) {
 			gcn::Style::DefaultStyle()->setBaseColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
 		}
 		
-		void setGlobalSelectionColor(ulong32 col) {
+		void setGlobalSelectionColor(uint32 col) {
 			gcn::Style::DefaultStyle()->setSelectionColor(gcn::Color(CGETR(col), CGETG(col), CGETB(col), CGETA(col)));
 		}
 		

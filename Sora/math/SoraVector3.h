@@ -9,13 +9,13 @@ namespace sora {
 
 	class SORA_API SoraVector3 {
 	public:
-		static const SoraVector3 ZERO;
+		static const SoraVector3 Zero;
 		
 		SoraVector3(): x(0.f), y(0.f), z(0.f) {}
-		SoraVector3(float _x, float _y, float _z): x(_x), y(_y), z(_z) {}
+		SoraVector3(real _x, real _y, real _z): x(_x), y(_y), z(_z) {}
 		SoraVector3(const SoraVector3& rhs): x(rhs.x), y(rhs.y), z(rhs.z) {}
 		
-		void set(float _x, float _y, float _z) {
+		void set(real _x, real _y, real _z) {
 			this->x = _x; this->y = _y; this->z = _z;
 		}
 
@@ -30,10 +30,10 @@ namespace sora {
 		SoraVector3 operator+(const SoraVector3& rhs) const {
 			return SoraVector3(this->x+rhs.x, this->y+rhs.y, this->z+rhs.z);
 		}
-		SoraVector3 operator*(float f) const {
+		SoraVector3 operator*(real f) const {
 			return SoraVector3(this->x*f, this->y*f, this->z*f);
 		}
-		SoraVector3 operator/(float f) const {
+		SoraVector3 operator/(real f) const {
 			assert(f != 0);
 			return SoraVector3(this->x/f, this->y/f, this->z/f);
 		}
@@ -46,23 +46,23 @@ namespace sora {
 			return *this;
 		}
 	
-		float dot(const SoraVector3& rhs) const {
+		real dot(const SoraVector3& rhs) const {
 			return this->x*rhs.x+this->y*rhs.y+this->z*rhs.z;
 		}
 		SoraVector3 cross(const SoraVector3& rhs) const {
 			return SoraVector3(-this->z*rhs.y+this->y*rhs.z, this->z*rhs.x-this->x*rhs.z, -this->y*rhs.x+this->x*rhs.y);
 		}
 	
-		float length() const {
-			return (float)sqrtf(this->x*this->x + this->y*this->y + this->z*this->z);
+		real length() const {
+			return (real)sqrtf(this->x*this->x + this->y*this->y + this->z*this->z);
 		}
 	
-		float sqrLength() const {
+		real sqrLength() const {
 			return this->x*this->x + this->y*this->y + this->z*this->z;
 		}
 	
 		SoraVector3 normalize() const {
-			float inv = 1/length();
+			real inv = 1/length();
 			return SoraVector3(this->x*inv, this->y*inv, this->z*inv);
 		}
 	
@@ -70,7 +70,7 @@ namespace sora {
 			return SoraVector3(-this->x, -this->y, -this->z);
 		}
 
-		float x, y, z;
+		real x, y, z;
 	};
     
 } // namespace rfMath

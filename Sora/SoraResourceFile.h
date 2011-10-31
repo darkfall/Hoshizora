@@ -28,14 +28,14 @@ namespace sora {
         SoraResourceFile();
 		explicit SoraResourceFile(const StringType& file, bool retain=false);
         
-		SoraResourceFile(void* data, ulong32 size, bool retain=false);
-        SoraResourceFile(const StringType& file, ulong32 pos, ulong32 size, bool retain=false);
+		SoraResourceFile(void* data, uint32 size, bool retain=false);
+        SoraResourceFile(const StringType& file, uint32 pos, uint32 size, bool retain=false);
 		~SoraResourceFile();
         
         SoraResourceFile& operator=(const StringType& file);
 		
         void*   data() const;
-        ulong32 size() const;
+        uint32 size() const;
 		
 		operator void*();
 		operator char*();
@@ -46,7 +46,7 @@ namespace sora {
 		
 	private:
 		void*   mData;
-		ulong32 mSize;
+		uint32  mSize;
 		bool    mRetain;
     };
 	

@@ -164,7 +164,7 @@ namespace sora {
     }
     
     inline bool IsAnyLong(const SoraAny& any) {
-        return any.type() == typeid(long32);
+        return any.type() == typeid(long);
     }
     
     inline bool IsAnyChar(const SoraAny& any) {
@@ -176,7 +176,7 @@ namespace sora {
     }
     
     inline bool IsAnyULong(const SoraAny& any) {
-        return any.type() == typeid(ulong32);
+        return any.type() == typeid(SoraHandle);
     }
     
     inline bool IsAnyInt64(const SoraAny& any) {

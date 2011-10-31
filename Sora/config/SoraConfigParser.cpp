@@ -40,7 +40,7 @@ namespace sora {
         return c == '\n' || c == ' ' || c == '\r' || c == '\t';
     }
     
-    ConfigType SoraConfigParser::fileDataToConfigType(void* data, ulong32 size) {
+    ConfigType SoraConfigParser::fileDataToConfigType(void* data, uint32 size) {
         const char* cdata = static_cast<const char*>(data);
         size_t pos = 0;
         while(pos < size && isSpace(cdata[pos])) {
@@ -91,7 +91,7 @@ namespace sora {
         return false;
     }
     
-    bool SoraConfigParser::open(void* data, ulong32 size, ConfigType type) {
+    bool SoraConfigParser::open(void* data, uint32 size, ConfigType type) {
         if(mImpl) {
             close();
         }
@@ -118,7 +118,7 @@ namespace sora {
     }
     
     bool SoraConfigParser::openString(const std::string& string, ConfigType type) {
-        return open((void*)string.c_str(), (ulong32)string.size(), type);
+        return open((void*)string.c_str(), (uint32)string.size(), type);
     }
     
     bool SoraConfigParser::writeToFile(const StringType& path) {

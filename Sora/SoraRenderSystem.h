@@ -40,6 +40,9 @@ namespace sora {
 		virtual void endFrame() = 0;
 
 		virtual void start(SoraTimer* timer) = 0;
+        
+        virtual void switchTo2D() = 0;
+        virtual void switchTo3D() = 0;
 
 		virtual SoraTargetHandle createTarget(int width, int height, bool zbuffer=true) = 0;
 		virtual void             freeTarget(SoraTargetHandle t) = 0;
@@ -49,7 +52,7 @@ namespace sora {
 
 		virtual SoraTexture* createTexture(const SoraWString& sTexturePath, bool bMipmap=false) = 0;
 		virtual SoraTexture* createTextureWH(int32 w, int32 h) = 0;
-		virtual SoraTexture* createTextureFromMem(void* ptr, ulong32 size, bool bMipmap=false) = 0;
+		virtual SoraTexture* createTextureFromMem(void* ptr, uint32 size, bool bMipmap=false) = 0;
 		virtual SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h) = 0;
 
 		virtual uint32*  	 textureLock(SoraTexture* ht) = 0;
@@ -68,6 +71,7 @@ namespace sora {
 		virtual void setTransform(float x=0.f, float y=0.f, float dx=0.f, float dy=0.f, float rot=0.f, float hscale=0.f, float vscale=0.f) = 0;
        
         virtual void setTransformMatrix(const SoraMatrix4& matrix) = 0;
+        virtual void multTransformMatrix(const SoraMatrix4& matrix) = 0;
         virtual SoraMatrix4 getTransformMatrix() const = 0;
         
         virtual void setProjectionMatrix(const SoraMatrix4& matrix) = 0;
@@ -77,7 +81,7 @@ namespace sora {
         virtual RenderStateParam getRenderState(RenderStateType type) = 0;
         
 		virtual void shutdown() = 0;
-		virtual ulong32 getMainWindowHandle() = 0;
+		virtual SoraHandle getMainWindowHandle() = 0;
 		virtual SoraWindowInfoBase* getMainWindow() = 0;
         
 		virtual bool isActive() = 0;
@@ -87,7 +91,7 @@ namespace sora {
 		virtual	void attachShaderContext(SoraShaderContext* context) = 0;
 		virtual void detachShaderContext() = 0;
 
-		virtual ulong32 getVideoDeviceHandle() = 0;
+		virtual SoraHandle getVideoDeviceHandle() = 0;
 
 		virtual void setWindowSize(int32 w, int32 h) = 0;
 		virtual void setWindowTitle(const SoraWString& title) = 0;

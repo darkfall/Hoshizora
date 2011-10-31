@@ -29,7 +29,7 @@ namespace sora {
     
     class SoraVertexList;
     
-    class SORA_API SoraShape: public SoraMovable {
+    class SORA_API SoraShape {
     public:
         SoraShape(SoraTextureHandle texture=0, RenderMode mode=TriangleFan);
         ~SoraShape();
@@ -86,7 +86,7 @@ namespace sora {
          **/
         void setClosed(bool flag);
         
-        static SoraVector computeNormal(const SoraVector& p1, const SoraVector& p2);
+        static SoraVector ComputeNormal(const SoraVector& p1, const SoraVector& p2);
         
         static SoraShape Line(float x1, float y1, float x2, float y2, float width, uint32 col);
         static SoraShape Box(float x1, float y1, float x2, float y2, uint32 col);

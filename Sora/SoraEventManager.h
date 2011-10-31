@@ -48,11 +48,11 @@ namespace sora {
 		 if ev == 0 in registerEvent
 		 then call this sendMessage will do nothing
 		 */
-		void sendMessage(const SoraString& eventName, const SoraString& params, ulong32 receiver=0);
+		void sendMessage(const SoraString& eventName, const SoraString& params, SoraHandle receiver=0);
 		/*
 		 publish events to a all handlers under eventName
 		 */
-		void sendMessage(const SoraString& eventName, SoraEvent* ev, ulong32 receiver=0);
+		void sendMessage(const SoraString& eventName, SoraEvent* ev, SoraHandle receiver=0);
 		
         /***
          * Timer Events are deprecated

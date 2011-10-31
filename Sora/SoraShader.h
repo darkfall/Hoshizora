@@ -76,7 +76,7 @@ namespace sora {
          add a sample texture
          may use as TEX1 in shader
          */
-		virtual void setTexture(const SoraString& decalName, ulong32 tex) = 0;
+		virtual void setTexture(const SoraString& decalName, SoraHandle tex) = 0;
 
 		/*
 			Get the type of the shader

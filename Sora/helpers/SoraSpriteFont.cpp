@@ -108,7 +108,7 @@ namespace sora {
 			mFontSprite->setColor(dwColor, i);
 	}
 	
-	ulong32	SoraSpriteFont::getColor(int32 i) {
+	uint32	SoraSpriteFont::getColor(int32 i) {
 		if(mFontSprite)
 			return mFontSprite->getColor(i);
 		return 0;

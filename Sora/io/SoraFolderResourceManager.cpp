@@ -65,10 +65,10 @@ namespace sora {
         return StringType();
 	}
 
-	void* SoraFolderResourceManager::readResourceFile(const StringType& file, ulong32 pos, ulong32 size) {
+	void* SoraFolderResourceManager::readResourceFile(const StringType& file, uint32 pos, uint32 size) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file).get())) {
-            uint8* pdata = (uint8*)sora_malloc((ulong32)stream.size()+1);
+            uint8* pdata = (uint8*)sora_malloc((uint32)stream.size()+1);
 			if(pdata != NULL) {
                 sora_assert(pos + size <= stream.size());
                 
@@ -84,10 +84,10 @@ namespace sora {
 		return 0;
 	}
 
-	void* SoraFolderResourceManager::getResourceFile(const StringType& file, ulong32& size) {
+	void* SoraFolderResourceManager::getResourceFile(const StringType& file, uint32& size) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file).get())) {
-            uint8* pdata = (uint8*)sora_malloc((ulong32)stream.size()+1);
+            uint8* pdata = (uint8*)sora_malloc((uint32)stream.size()+1);
 			if(pdata != NULL) {
                 size = stream.read(pdata, stream.size());
                 pdata[size] = 0;
@@ -97,10 +97,10 @@ namespace sora {
 		return 0;
 	}
 
-	ulong32 SoraFolderResourceManager::getResourceFileSize(const StringType& file) {
+	uint32 SoraFolderResourceManager::getResourceFileSize(const StringType& file) {
 		SoraFileStream stream;
         if(stream.open(getFullPath(file).get())) {
-            return (ulong32)stream.size();
+            return (uint32)stream.size();
         }
         return 0;
 	}

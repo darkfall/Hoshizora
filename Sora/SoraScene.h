@@ -27,10 +27,10 @@
 
 namespace sora {
     
-    class SORA_API SoraScene: public SoraObject {
+    class SORA_API Sora2DScene: public SoraObject {
     public:
-        SoraScene(int32 width, int32 height);
-        ~SoraScene();
+        Sora2DScene(int32 width, int32 height);
+        ~Sora2DScene();
     
         /**
          *  add function inherited from SoraObject
@@ -108,8 +108,8 @@ namespace sora {
         bool    isRenderToCanvasEnabled() const;
         SoraBaseCanvas* getCanvas() const;
         
-        void        setCamera(SoraCamera* camera);
-        SoraCamera* getCamera() const;
+        void          setCamera(Sora2DCamera* camera);
+        Sora2DCamera* getCamera() const;
         
     private:
         void _adjustSize();
@@ -123,8 +123,8 @@ namespace sora {
         typedef std::map<int32, SoraLayer*> LayerMap;
         LayerMap mLayers;
         
-        SoraScene* mParentScene;
-        SoraCamera* mCamera;
+        Sora2DScene* mParentScene;
+        Sora2DCamera* mCamera;
 
         bool mRenderToCanvas;
         SoraBaseCanvas* mCanvas;

@@ -22,7 +22,7 @@ namespace sora {
 		return MessageBoxW(_hWnd, sMessage.wc_str(), sTitle.wc_str(), msgCode);
 	}
     
-	void SoraMiscToolWin32::setMainWindowHandle(ulong32 mainWindowHandle) { 
+	void SoraMiscToolWin32::setMainWindowHandle(SoraHandle mainWindowHandle) { 
         _hWnd = (HWND)mainWindowHandle;
     }
 	

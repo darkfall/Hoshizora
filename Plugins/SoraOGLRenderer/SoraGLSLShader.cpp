@@ -128,7 +128,7 @@ namespace sora {
 			glDeleteShader(mShader);
 	}
 		
-	void SoraGLSLShader::setTexture(const SoraString& decalName, ulong32 tex) {
+	void SoraGLSLShader::setTexture(const SoraString& decalName, SoraHandle tex) {
 		mTexture1Name = decalName;
 		mTexture1 = ((SoraTexture*)tex)->mTextureID;
 	}

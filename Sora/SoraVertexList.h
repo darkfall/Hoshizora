@@ -10,7 +10,7 @@
 #define Sora_SoraVertexList_h
 
 #include "SoraPlatform.h"
-#include "SoraShaderEnabled.h"
+#include "SoraShaderable.h"
 #include "util/SoraArray.h"
 
 namespace sora {
@@ -20,7 +20,7 @@ namespace sora {
     // simple vertex list works like glVertex*, glTexCoord*, glColor*
     // vertex positions are related positiont
     
-    class SoraVertexList: public SoraShaderEnabledObject {
+    class SoraVertexList: public SoraShaderable, public SoraObject {
     public:
         friend class SoraShape;
         
@@ -32,6 +32,8 @@ namespace sora {
         void bindTexture(SoraTextureHandle texture);
         
         void clear();
+        
+        void setRenderMode(RenderMode mode);
         
         void vertex(const SoraVertex& vertex);
         
@@ -60,6 +62,7 @@ namespace sora {
         
         uint32 size() const;
         const SoraArray<SoraVertex>& getVertexList() const;
+        SoraArray<SoraVertex>& getVertexList();
         
     private:
         RenderMode mVertexMode;

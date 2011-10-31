@@ -16,7 +16,7 @@ public:
 
 	int32 messageBox(const StringType& sMessage, const StringType& sTitle, int32 msgCode);
 
-	void setMainWindowHandle(ulong32 mainWindowHandle);
+	void setMainWindowHandle(SoraHandle mainWindowHandle);
 	
 	StringType fileOpenDialog(const char* filter = NULL, const char* defaultPath = NULL);
 	

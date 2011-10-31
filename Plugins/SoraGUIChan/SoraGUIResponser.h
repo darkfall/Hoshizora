@@ -50,7 +50,7 @@ namespace sora {
     
     class SoraGUIResponserExtern: public SoraGUIResponser {
     public:
-      //  SoraString getHandleSrc() const { return id2str(SoraGUIResponserMap::Instance()->getHandleSrcFromWidgetHandle((ulong32)getSource())); }
+      //  SoraString getHandleSrc() const { return id2str(SoraGUIResponserMap::Instance()->getHandleSrcFromWidgetHandle((SoraHandle)getSource())); }
 
     };
 

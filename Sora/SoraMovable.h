@@ -10,71 +10,41 @@
 #define Sora_SoraMovable_h
 
 #include "SoraMath.h"
+#include "SoraTransform.h"
 
 namespace sora {
     
     // base class for all movable things
     
-    struct SORA_API SoraMovable {
-        SoraMovable():
-        x(0.f),
-        y(0.f),
-        z(0.f) {
-            
+    class SORA_API SoraMovable {
+    protected:
+        SoraMovable() {};
+        
+    public:
+        virtual ~SoraMovable() {} 
+        
+        virtual void setPosition(const SoraVector3& pos) {
+            mTransform.setPosition(pos);
         }
         
-        explicit SoraMovable(const SoraVector3& pos):
-        x(pos.x),
-        y(pos.y),
-        z(pos.z) {
-        
+        virtual const SoraVector3& getPosition() const {
+            return mTransform.getPosition();
         }
         
-        SoraMovable(float _x, float _y, float _z):
-        x(_x),
-        y(_y),
-        z(_z) {
-            
+        void setTransform(const SoraTransform& transform) {
+            mTransform = transform;
         }
         
-        float x;
-        float y;
-        float z;
-        
-        void setPosition(const SoraVector3& pos) {
-            x = pos.x;
-            y = pos.y;
-            z = pos.z;
+        const SoraTransform& getTransform() const {
+            return mTransform;
         }
         
-        void setPosition(float x, float y) {
-            this->x = x;
-            this->y = y;
+        inline void translate(const SoraVector3& d) {
+            setPosition(getPosition() + d);
         }
         
-        float getPositionX() const {
-            return x;
-        }
-        
-        float getPositionY() const {
-            return y;
-        }
-        
-        float getPositionZ() const {
-            return z;
-        }
-        
-        void translate(const SoraVector3& v, float t) {
-            x += v.x * t;
-            y += v.y * t;
-            z += v.z * t;
-        }
-        
-        void translate(float vx, float vy, float t) {
-            x += vx * t;
-            y += vy * t;
-        }
-        
+    protected:
+        SoraTransform mTransform;
     };
     
     

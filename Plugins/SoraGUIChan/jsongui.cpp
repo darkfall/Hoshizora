@@ -25,7 +25,7 @@ namespace sora {
     }
     
     bool JsonGui::parse(const SoraWString& filePath) {
-        ulong32 size;
+        uint32 size;
         void* pdata = SoraCore::Ptr->getResourceFile(filePath, size);
         if(pdata) {
             bool result = parse(pdata, size);
@@ -35,7 +35,7 @@ namespace sora {
         return false;
     }
     
-    bool JsonGui::parse(void* data, ulong32 size) {
+    bool JsonGui::parse(void* data, uint32 size) {
         const char* pstrdata = (const char*)data;
         if(reader.parse(pstrdata, pstrdata+size, rootValue)) {
             parseWidget(rootValue, NULL);

@@ -208,7 +208,7 @@ namespace sora {
 		SoraImageEffectColorTransitions(const SoraColorRGBA& start, const SoraColorRGBA& end, float time, 
 										ImageEffectMode mode=ImageEffectOnce,
 										SoraCoreTransformer<SoraCoreTransform>* transformer=0);
-		SoraImageEffectColorTransitions(ulong32 start, ulong32 end, float time, 
+		SoraImageEffectColorTransitions(uint32 start, uint32 end, float time, 
 										ImageEffectMode mode=ImageEffectOnce,
 										SoraCoreTransformer<SoraCoreTransform>* transformer=0);
 		
@@ -274,7 +274,7 @@ namespace sora {
         return new IEColorTransitions(start, end, time, mode, transformer);
     }
     
-    static IEColorTransitions* CreateColorTransitions(long32 start, ulong32 end, float time, 
+    static IEColorTransitions* CreateColorTransitions(uint32 start, uint32 end, float time, 
                                                       ImageEffectMode mode=ImageEffectOnce,
                                                       SoraCoreTransformer<SoraCoreTransform>* transformer=0) {
         return new IEColorTransitions(start, end, time, mode, transformer);
@@ -340,7 +340,7 @@ namespace sora {
         return eff;
     }
     
-    static IEColorTransitions* CreateColorTransitionsWithDelegate(long32 start, ulong32 end, float time, 
+    static IEColorTransitions* CreateColorTransitionsWithDelegate(uint32 start, uint32 end, float time, 
                                                                   const SoraModifier<SoraSprite>::Delegate& del,
                                                                   ImageEffectMode mode=ImageEffectOnce,
                                                                   SoraCoreTransformer<SoraCoreTransform>* transformer=0) {
