@@ -14,6 +14,7 @@
 #include "SoraObject.h"
 #include "SoraTexture.h"
 #include "SoraAutoPtr.h"
+#include "SoraShaderable.h"
 #include "util/SoraArray.h"
 
 namespace sora {
@@ -29,7 +30,7 @@ namespace sora {
     
     class SoraVertexList;
     
-    class SORA_API SoraShape {
+    class SORA_API SoraShape: public SoraObject, public SoraShaderable {
     public:
         SoraShape(SoraTextureHandle texture=0, RenderMode mode=TriangleFan);
         ~SoraShape();

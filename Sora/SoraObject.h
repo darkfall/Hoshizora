@@ -36,6 +36,7 @@ namespace sora {
         
         virtual void    onPositionChange(float x, float y, float z);
         virtual void    onParentChange(SoraObject* parent);
+        virtual void    on3DEnabled(bool flag);
         virtual void    onMessage(SoraMessageEvent* message);
         
 		virtual void	add(SoraObject* pobj);
@@ -69,6 +70,12 @@ namespace sora {
         
         SoraTransform&       getTransform();
         const SoraTransform& getTransform() const;
+
+        void enable3D(bool flag);
+        bool is3DEnabled() const;
+        
+    private:
+        bool m3DEnabled;
 
     public:
         
@@ -161,13 +168,13 @@ namespace sora {
         bool mAutoReleasePhysicBody;
         SoraPhysicBody* mPhysicBody;
         
-    private:
-        /**
-         *  handleId and UniqueId for the object cannot be copied
-         **/
         SoraObject(const SoraObject& rhs);
         SoraObject& operator =(const SoraObject& rhs);
         
+    private:
+        /**
+         *  handleId and UniqueId for the object cannot be copied
+         **/        
         SoraHandle mHandleId;
         SoraUniqueId mUniqueId;
     };

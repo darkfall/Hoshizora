@@ -23,7 +23,7 @@ namespace fontWrapper {
 	static void renderString(SoraHandle font, float x, float y, int32 alignment, const std::wstring& str) {
 		sora::SoraFont* pfont= (sora::SoraFont*)font;
 		if(font) {
-			pfont->render(x, y, alignment, str.c_str());
+			pfont->render(x, y, (sora::SoraFont::Alignment)alignment, str.c_str());
 		}
 	}
 	

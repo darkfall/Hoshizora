@@ -55,9 +55,6 @@ namespace sora {
         void attachVertexShader(SoraShader* shader);
         
     private:
-        SoraShaderable(const SoraShaderable&);
-        SoraShaderable& operator=(const SoraShaderable&);
-        
         inline void checkShaderContext();
         
         bool mInternalContext;

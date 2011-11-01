@@ -8,6 +8,7 @@
 
 #include "SoraShape.h"
 #include "SoraCore.h"
+#include "SoraRenderSystem.h"
 #include "SoraSprite.h"
 #include "SoraVertexList.h"
 
@@ -158,6 +159,11 @@ namespace sora {
         
         if(!mCompiled && mTexture != 0)
             compile();
+        
+        if(is3DEnabled()) {
+            SoraCore::Ptr->pushTransformMatrix();
+            SoraCore::Ptr->getRenderSystem()->multTransformMatrix(getTransform().getTransformMatrix());
+        }
                 
         if(!mOutlineOnly) {
             core->renderWithVertices(mTexture, BLEND_DEFAULT, mVertices.begin(), mVertices.size(), mRenderMode);
@@ -176,6 +182,10 @@ namespace sora {
                                  mVertices.front().x,
                                  mVertices.front().y, mOutlineColor, mOutlineWidth);
             }
+        }
+        
+        if(is3DEnabled()) {
+            SoraCore::Ptr->popTransformMatrix();
         }
     }
     

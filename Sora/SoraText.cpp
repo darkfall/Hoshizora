@@ -9,6 +9,7 @@
 #include "SoraText.h"
 #include "SoraSprite.h"
 #include "SoraCore.h"
+#include "SoraRenderSystem.h"
 #include "SoraFont.h"
 
 namespace sora {
@@ -16,7 +17,7 @@ namespace sora {
     SoraText::SoraText():
     mFont(0),
     mFontSize(20),
-    mStyle(AlignmentLeft),
+    mStyle(SoraFont::AlignmentLeft),
     mColor(SoraColorRGBA()),
     mRotation(0.f),
     mCharRotation(0.f),
@@ -31,7 +32,7 @@ namespace sora {
     SoraText::SoraText(const SoraWString& str, SoraFont* font):
     mFont(font),
     mFontSize(font->getFontSize()),
-    mStyle(AlignmentLeft),
+    mStyle(SoraFont::AlignmentLeft),
     mColor(SoraColorRGBA()),
     mRotation(0.f),
     mCharRotation(0.f),
@@ -70,7 +71,7 @@ namespace sora {
         }
     }
     
-    void SoraText::setStyle(TextStyle style) {
+    void SoraText::setStyle(SoraFont::Alignment style) {
         mStyle = style;
         
         if(mRenderToSprite && mTarget && mTextSprite) {
@@ -114,7 +115,7 @@ namespace sora {
         return mColor;
     }
     
-    SoraText::TextStyle SoraText::getStyle() const {
+    SoraFont::Alignment SoraText::getStyle() const {
         return mStyle;
     }
     
@@ -126,15 +127,30 @@ namespace sora {
         return mFont;
     }
     
-    void SoraText::render() {
-        if(mTarget && mTextSprite) {
-            mTextSprite->render(getPositionX(), getPositionY());
-        }
-        else if(mFont) {
-            mFont->setCharRotation(mCharRotation);
-            mFont->setLineRotation(mRotation);
-            mFont->setColor(mColor.getHWColor());
-            mFont->print(getPositionX(), getPositionY(), (int32)mStyle, mText.c_str());
+    void SoraText::render() {        
+        if(!is3DEnabled()) {
+            if(mTarget && mTextSprite) {
+                mTextSprite->render(getPositionX(), getPositionY());
+            }
+            else if(mFont) {
+                mFont->setCharRotation(mCharRotation);
+                mFont->setLineRotation(mRotation);
+                mFont->setColor(mColor.getHWColor());
+                mFont->print(getPositionX(), getPositionY(), mStyle, mText.c_str());
+            }
+        } else {
+            if(mTarget && mTextSprite) {
+                mTextSprite->enable3D(true);
+                mTextSprite->setTransform(getTransform());
+                mTextSprite->render();
+                mTextSprite->enable3D(false);
+            }
+            else if(mFont) {
+                mFont->setCharRotation(mCharRotation);
+                mFont->setLineRotation(mRotation);
+                mFont->setColor(mColor.getHWColor());
+                mFont->renderIn3D(getPositionX(), getPositionY(), mStyle, mText.c_str(), getTransform().getTransformMatrix());
+            }
         }
     }
     
@@ -169,14 +185,14 @@ namespace sora {
             mFont->setCharRotation(mCharRotation);
             mFont->setLineRotation(mRotation);
             mFont->setColor(mColor.getHWColor());
-            if(mStyle != AlignmentLeft) {
-                if(mStyle == AlignmentRight) {
-                    mFont->print(dimensions.x, 0.f, (int32)mStyle, mText.c_str());
+            if(mStyle != SoraFont::AlignmentLeft) {
+                if(mStyle == SoraFont::AlignmentRight) {
+                    mFont->print(dimensions.x, 0.f, mStyle, mText.c_str());
                 } else {
-                    mFont->print((float)((int32)dimensions.x >> 1), 0.f, (int32)mStyle, mText.c_str());
+                    mFont->print((float)((int32)dimensions.x >> 1), 0.f, mStyle, mText.c_str());
                 }
             } else {
-                mFont->print(0.f, 0.f, (int32)mStyle, mText.c_str());
+                mFont->print(0.f, 0.f, mStyle, mText.c_str());
             }
         }
         

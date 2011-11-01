@@ -83,18 +83,11 @@ namespace sora {
 		SoraTextureHandle    getTexture() const;
         
     public:
-        void onPositionChange(float x, float y, float z);
-        
-    public:
         /**
-         * 3d sprite
-         * a 3d sprite would use the transform matrix in SoraObject
+         * inheritated from SoraObject
          **/
-        void enable3D(bool flag);
-        bool is3DEnabled() const;
-        
-    private:
-        bool m3DEnabled;
+        void onPositionChange(float x, float y, float z);
+        void on3DEnabled(bool flag);
         
     public:
         /**
@@ -111,6 +104,7 @@ namespace sora {
         void scaleTo(float h, float v, float t);
         
         typedef SoraFunction<void(SoraSprite*)> NotificationFunc;
+        
         void fadeToAndNotify(float to, float t, const NotificationFunc& func);
         void rotateToAndNotify(float to, float t, const NotificationFunc& func);
         void scaleToAndNotify(float h, float v, float t, const NotificationFunc& func);

@@ -28,7 +28,7 @@ namespace sora {
     class SoraEventHandler;
     class SoraTaskNotification;
     
-    class SoraTaskManager: public SoraUncopyable {
+    class SoraTaskManager: public SoraUncopyable, public SoraAutoUpdate {
         friend class SoraAbstractTask;
         
     public:

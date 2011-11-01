@@ -208,7 +208,7 @@ sora::Sora3DCamera* camera;
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-        buildSphere(100.f, 50, 0.f, 0.f);
+        buildSphere(200.f, 10, 0.f, 0.f);
         
         shape.initWithVertexList(vertexL);
         
@@ -216,12 +216,7 @@ public:
         camera->setProjectionMatrix(sora::SoraMatrix4::PerspectiveMat(60.f, 1.33, 10.f, 3000.f));
         camera->setPosition(-512.f, -384.f, -1000.f);
     //    camera->lookAt(512.f, 384.f, -500.f, 512.f, 384.f, 500.f, 0, 0, 1);
-        
-        sora::SoraVector4 pos(0.5f, 0.5f, 0.f, 1.f);
-        pos =  (camera->getProjectionMatrix() * camera->getTransform().getTransformMatrix() * pos);
-        
-        printf("%f, %f, %f, %f\n", pos.x, pos.y, pos.z);
-    //    sora::SoraCore::Ptr->set3DCamera(camera);
+
     }
     
     void onRender() {
@@ -268,21 +263,31 @@ public:
         sora::SoraCore::Ptr->switchTo2D();
         // 2d
         mBg.enable3D(false);
-        mBg.render(400.f, 400.f);
+    //    mBg.render(400.f, 400.f);
         
 
         sora::SoraCore::Ptr->switchTo3D();
-        sora::SoraCore::Ptr->getRenderSystem()->setProjectionMatrix(sora::SoraMatrix4());
+   //     sora::SoraCore::Ptr->getRenderSystem()->setProjectionMatrix(sora::SoraMatrix4());
         
-  //      vertexL.getTransform().setTransformMatrix(myView);
+        vertexL.getTransform().setPosition(512, 384, 0.f);
+        vertexL.getTransform().setRotation(x, y, z);
         vertexL.render();
         
         mBg.enable3D(true);
         mBg.getTransform().setRotation(x, y, z);
+      //  mBg.getTransform().setScale(1.5f, 1.f, 1.f);
+        mBg.setPosition(512, 384);
+        mBg.setCenter(mBg.getSpriteWidth()/2, mBg.getSpriteHeight()/2);
         mBg.render();
+        
+        mText2.enable3D(true);
+        mText2.getTransform().setRotation(0.f, 0.f, 1.f);
+        mText2.setPosition(512.f, 384.f);
+        mText2.render();
 
         sora::SoraCore::Ptr->switchTo2D();
 
+        mText2.enable3D(false);
         mText2.setPosition(500.f, 600.f);
         mText2.render();
         
@@ -357,8 +362,8 @@ public:
         
       //  mText2.setStyle(sora::SoraText::AlignmentCenter);
 
-        mText2.enableRenderToSprite(true);
-        mText.setStyle(sora::SoraText::AlignmentRight);
+      //  mText2.enableRenderToSprite(true);
+        mText.setStyle(sora::SoraFont::AlignmentRight);
         
         mShape.setTexture(sora::SoraTexture::LoadFromFile("background.png"));
         mShape.enableRenderToSprite(true);

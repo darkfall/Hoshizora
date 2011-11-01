@@ -9,6 +9,15 @@
 #ifndef Sora_SoraTrigger_h
 #define Sora_SoraTrigger_h
 
+#include "SoraPlatform.h"
+
+namespace sora {
+    
+    class SoraTrigger {
+        
+    };
+    
+} // namespace sora
 
 
 #endif

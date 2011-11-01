@@ -197,7 +197,6 @@ namespace sora {
     
     void SoraVertexList::render() {
         SoraCore::Ptr->pushTransformMatrix();
-        
         SoraCore::Ptr->getRenderSystem()->multTransformMatrix(getTransform().getTransformMatrix());
         
         SoraCore::Ptr->renderWithVertices(mTexture, mBlendMode, mVertexList.begin(), mVertexList.size(), mVertexMode);

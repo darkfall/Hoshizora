@@ -13,6 +13,7 @@
 namespace sora {
 
 	SoraObject::SoraObject(): 
+    m3DEnabled(false),
     mParent(NULL),
     mSubObjects(NULL), 
     mNext(NULL),
@@ -293,6 +294,20 @@ namespace sora {
         return mName;
     }
     
+    void SoraObject::enable3D(bool flag) {
+        on3DEnabled(flag);
+
+        m3DEnabled = flag;        
+    }
+    
+    bool SoraObject::is3DEnabled() const {
+        return m3DEnabled;
+    }
+    
+    void SoraObject::on3DEnabled(bool flag) {
+        
+    }
+    
     void SoraObject::attachPhysicBody(SoraPhysicBody* body, bool autoRelease) {
         mPhysicBody = body;
         mAutoReleasePhysicBody = autoRelease;
@@ -357,7 +372,13 @@ namespace sora {
                 obj = obj->getNext();
             } while(!message->isConsumed() && obj != 0);
         }
-
+    }
+    
+    SoraObject& SoraObject::operator =(const SoraObject& rhs) {
+        if(this != &rhs) {
+            this->mTransform = rhs.mTransform;
+        }
+        return *this;
     }
             
 } // namespace sora

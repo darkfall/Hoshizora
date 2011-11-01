@@ -229,7 +229,7 @@ namespace sora {
         return 0;
     }
 
-	void SoraFTFont::render(float x, float y, int32 align, const wchar_t* pwstr) {
+	void SoraFTFont::render(float x, float y, Alignment align, const wchar_t* pwstr) {
 		float ox = x;
 		if(align != SoraFont::AlignmentLeft) {
 			if(align == SoraFont::AlignmentRight)
@@ -324,7 +324,7 @@ namespace sora {
 		}
 	}
 
-	void SoraFTFont::print(float x, float y, int32 align, const wchar_t* format, ...) {
+	void SoraFTFont::print(float x, float y, Alignment align, const wchar_t* format, ...) {
 		va_list l;
 		va_start(l, format);
         
@@ -333,6 +333,13 @@ namespace sora {
         
 		render(x, y, align, text);
 	}
+    
+    void SoraFTFont::renderIn3D(float x, float y, Alignment align, const wchar_t* text, const SoraMatrix4& transformMat) {
+        sprite->enable3D(true);
+        sprite->getTransform().setTransformMatrix(transformMat);
+        render(x, y, align, text);
+        sprite->enable3D(false);
+    }
 
 	void SoraFTFont::render(float x, float y, const wchar_t* pwstr, bool bhcenter, bool bvcenter) {
 		float ox = x;

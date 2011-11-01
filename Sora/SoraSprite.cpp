@@ -111,9 +111,7 @@ namespace sora {
 		mCenterX = mCenterY = 0.f;
 
         bVFlip = bHFlip = false;
-        
-        m3DEnabled = false;
-        
+            
         // force rebuild quad
         bPropChanged = true;
         
@@ -162,17 +160,8 @@ namespace sora {
         bPropChanged = true;
     }
     
-    void SoraSprite::enable3D(bool flag) {
-        m3DEnabled = flag;
-        bPropChanged = true;
-        
-        if(!flag) {
-            setZ(0.f);
-        }
-    }
-    
-    bool SoraSprite::is3DEnabled() const {
-        return m3DEnabled;
+    void SoraSprite::on3DEnabled(bool flag) {
+        setZ(0.f);
     }
 	
 	void SoraSprite::render() {
@@ -196,40 +185,67 @@ namespace sora {
             y *= sora::getScaleFactor();
         }
 #endif
-        
-		tx1 = -mCenterX*mHScale;
-		ty1 = -mCenterY*mVScale;
-		tx2 = (mTextureRect.x2-mCenterX)*mHScale;
-		ty2 = (mTextureRect.y2-mCenterY)*mVScale;
 		
-		if(mRotation != 0.0f) {
-			cost = cosf(mRotation);
-			sint = sinf(mRotation);
-			
-			mQuad.v[0].x  = tx1*cost - ty1*sint + x;
-			mQuad.v[1].x  = tx2*cost - ty1*sint + x;
-			mQuad.v[2].x  = tx2*cost - ty2*sint + x;
-			mQuad.v[3].x  = tx1*cost - ty2*sint + x;
+        if(!is3DEnabled()) {
+            tx1 = -mCenterX*mHScale;
+            ty1 = -mCenterY*mVScale;
+            tx2 = (mTextureRect.x2-mCenterX)*mHScale;
+            ty2 = (mTextureRect.y2-mCenterY)*mVScale;
             
-			mQuad.v[0].y  = tx1*sint + ty1*cost + y;	
-            mQuad.v[1].y  = tx2*sint + ty1*cost + y;	
-            mQuad.v[2].y  = tx2*sint + ty2*cost + y;	
-            mQuad.v[3].y  = tx1*sint + ty2*cost + y;
-		}
-		else {
-			mQuad.v[0].x = tx1 + x; 
-			mQuad.v[1].x = tx2 + x; 
-			mQuad.v[2].x = mQuad.v[1].x; 
-			mQuad.v[3].x = mQuad.v[0].x; 
+            if(mRotation != 0.0f) {
+                cost = cosf(mRotation);
+                sint = sinf(mRotation);
+                
+                mQuad.v[0].x  = tx1*cost - ty1*sint + x;
+                mQuad.v[1].x  = tx2*cost - ty1*sint + x;
+                mQuad.v[2].x  = tx2*cost - ty2*sint + x;
+                mQuad.v[3].x  = tx1*cost - ty2*sint + x;
+                
+                mQuad.v[0].y  = tx1*sint + ty1*cost + y;	
+                mQuad.v[1].y  = tx2*sint + ty1*cost + y;	
+                mQuad.v[2].y  = tx2*sint + ty2*cost + y;	
+                mQuad.v[3].y  = tx1*sint + ty2*cost + y;
+            }
+            else {
+                mQuad.v[0].x = tx1 + x; 
+                mQuad.v[1].x = tx2 + x; 
+                mQuad.v[2].x = mQuad.v[1].x; 
+                mQuad.v[3].x = mQuad.v[0].x; 
+                
+                mQuad.v[0].y = ty1 + y;
+                mQuad.v[1].y = mQuad.v[0].y;
+                mQuad.v[2].y = ty2 + y;
+                mQuad.v[3].y = mQuad.v[2].y;
+            }
+        } else {
+            tx1 = -mCenterX*mHScale;
+            ty1 = -mCenterY*mVScale;
+            tx2 = (mTextureRect.x2-mCenterX)*mHScale;
+            ty2 = (mTextureRect.y2-mCenterY)*mVScale;
             
-			mQuad.v[0].y = ty1 + y;
-            mQuad.v[1].y = mQuad.v[0].y;
-            mQuad.v[2].y = ty2 + y;
-            mQuad.v[3].y = mQuad.v[2].y;
-		}
-        
-        if(m3DEnabled)
-            mQuad *= getTransform().getTransformMatrix();
+            mQuad.v[0].x = tx1; 
+            mQuad.v[1].x = tx2; 
+            mQuad.v[2].x = tx2; 
+            mQuad.v[3].x = tx1; 
+            
+            mQuad.v[0].y = ty1;
+            mQuad.v[1].y = ty1;
+            mQuad.v[2].y = ty2;
+            mQuad.v[3].y = ty2;
+            
+      //      printf("1. %f, %f, %f, %f\n", mQuad.v[0].x, mQuad.v[1].x, mQuad.v[0].y, mQuad.v[2].y);
+            
+            const SoraTransform& transform = getTransform();
+            SoraMatrix4 mat = SoraMatrix4::RotMat(transform.mRotation.x, 
+                                                  transform.mRotation.y, 
+                                                  transform.mRotation.z).scale(transform.mScale.x,
+                                                                               transform.mScale.y,
+                                                                               transform.mScale.z);
+            mat.translate(x, y, 0.f);
+            mQuad *= mat;
+            
+      //      printf("2. %f, %f, %f, %f\n", mQuad.v[0].x, mQuad.v[1].x, mQuad.v[0].y, mQuad.v[2].y);
+        }
     }
 
 	void SoraSprite::render(float x, float y) {

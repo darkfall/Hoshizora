@@ -14,6 +14,7 @@
 #include "SoraObject.h"
 #include "SoraColor.h"
 #include "SoraMath.h"
+#include "SoraShaderable.h"
 
 namespace sora {
     
@@ -24,14 +25,8 @@ namespace sora {
     
     class SoraSprite;
     
-    class SORA_API SoraText: public SoraObject {
+    class SORA_API SoraText: public SoraObject, public SoraShaderable {
     public:
-        enum TextStyle {
-            AlignmentLeft = 1,
-            AlignmentRight = 2,
-            AlignmentCenter = 3,
-        };
-        
         SoraText();
         SoraText(const SoraWString& str, SoraFont* font);
         virtual ~SoraText();
@@ -40,12 +35,12 @@ namespace sora {
         
         void setText(const SoraWString& str);
         void setFont(SoraFont* font);
-        void setStyle(TextStyle style);
+        void setStyle(SoraFont::Alignment style);
         void setColor(const SoraColorRGBA& col);
         void setRotation(float rotation);
         void setCharRotation(float crotation);
 
-        TextStyle getStyle() const;
+        SoraFont::Alignment getStyle() const;
         SoraFont* getFont() const;
         const SoraWString& getText() const;
         const SoraColorRGBA& getColor() const;
@@ -57,13 +52,15 @@ namespace sora {
         
         SoraRect getBoundingBox() const;
         
+    public:
+        
         /**
          * Render to a sprite(if RenderTarget is allowed in the RenderSystem)
          * Not calling this during the normal frame rendering is suggested
          * Suggested for preinitiazing static text(initializing static font texts into sprites etc)
          * Notice the sprite would be released when the text is released(because the release of RenderTarget texture)
-         * And after this call, the rendering of the text will change to static sprite rendering and set* function will not work
-         * Though some functions would continue to work suchas fadeto etc
+         * And after this call, the rendering of the text will change to a sprite rendering and set* function will not work
+         * Though some functions would continue to work such as fadeto
          **/
         void enableRenderToSprite(bool flag);
         SoraSprite* getSprite() const;
@@ -79,7 +76,7 @@ namespace sora {
         
         SoraFont* mFont;
         uint32 mFontSize;
-        TextStyle mStyle;
+        SoraFont::Alignment mStyle;
         SoraColorRGBA mColor;
         float mRotation;
         float mCharRotation;
