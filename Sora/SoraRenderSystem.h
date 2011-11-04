@@ -50,7 +50,7 @@ namespace sora {
 
 		virtual SoraWindowHandle createWindow(SoraWindowInfoBase* windowInfo) = 0;
 
-		virtual SoraTexture* createTexture(const SoraWString& sTexturePath, bool bMipmap=false) = 0;
+		virtual SoraTexture* createTexture(const StringType& sTexturePath, bool bMipmap=false) = 0;
 		virtual SoraTexture* createTextureWH(int32 w, int32 h) = 0;
 		virtual SoraTexture* createTextureFromMem(void* ptr, uint32 size, bool bMipmap=false) = 0;
 		virtual SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h) = 0;
@@ -100,10 +100,10 @@ namespace sora {
 		virtual bool isFullscreen() = 0;
         virtual void setVerticalSync(bool flag) = 0;
         
-        virtual void snapshot(const SoraString& path) = 0;
+        virtual void snapshot(const StringType& path) = 0;
 
-		virtual void setIcon(const SoraString& icon) = 0;
-		virtual void setCursor(const SoraString& cursor) = 0;
+		virtual void setIcon(const StringType& icon) = 0;
+		virtual void setCursor(const StringType& cursor) = 0;
         
         virtual void onExtensionStateChanged(int32 extension, bool state, int32 param) = 0;
         

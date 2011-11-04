@@ -19,7 +19,6 @@ namespace sora {
     class SoraWindowInfoBase;
     
     struct SORA_API SoraGameAppDef {
-        SoraGameAppDef();
         SoraGameAppDef(SoraWindowInfoBase* window);
         /**
          * Config must contain the following node
@@ -38,15 +37,21 @@ namespace sora {
          **/
         explicit SoraGameAppDef(const StringType& loadFromConfig /* json or xml or ini */);
         
-        SoraGameAppDef(int32 wwidth, int32 wheight, int32 wposx, int32 wposy, bool windowedMode, bool hideMouse, const std::string& title):
-        WindowWidth(wwidth),
-        WindowHeight(wheight),
-        WindowPosX(wposx),
-        WindowPosY(wposy),
-        WindowMode(windowedMode),
-        HideMouse(hideMouse),
-        WindowTitle(title) {}
+        SoraGameAppDef();
         
+        SoraGameAppDef(int32 wwidth, int32 wheight, int32 wposx, int32 wposy, bool windowedMode, bool hideMouse, const StringType& title);
+        
+        SoraGameAppDef& width(int32 width);
+        SoraGameAppDef& height(int32 height);
+        SoraGameAppDef& posx(int32 posx);
+        SoraGameAppDef& posy(int32 posy);
+        SoraGameAppDef& windowMode(bool mode);
+        SoraGameAppDef& hideMouse(bool flag);
+        SoraGameAppDef& title(const StringType& title);
+        SoraGameAppDef& icon(const StringType& icon);
+        SoraGameAppDef& cursor(const StringType& cursor);
+        SoraGameAppDef& resource(const StringType& resource);
+                                
         // window size
         int32 WindowWidth, WindowHeight;
         // window pos
@@ -58,10 +63,10 @@ namespace sora {
         // default: NO
         bool HideMouse;
         // default: NONE
-        std::string Icon, Cursor;
+        StringType Icon, Cursor;
         
         // default: "Sora App"
-        std::string WindowTitle;
+        StringType WindowTitle;
         // default: "MainWindow"
         std::string WindowId;
         

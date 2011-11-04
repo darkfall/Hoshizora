@@ -155,9 +155,11 @@ namespace sora {
             THROW_SORA_EXCEPTION(SystemException, "Cannot find initial state");
     }
     
-    void SoraGameApp::addState(GameStatePtr state, const std::string& tag) {
+    SoraGameApp& SoraGameApp::addState(GameStatePtr state, const std::string& tag) {
         state->setGameApp(this);
         mFSMManager.defState(state, tag);
+        
+        return *this;
     }
     
     GameStatePtr SoraGameApp::getState(const std::string& tag) const {
@@ -181,8 +183,9 @@ namespace sora {
             SoraKeyPoll::AddInputListener(static_cast<SoraGameState*>(state));
     }
     
-    void SoraGameApp::defStateTrans(const std::string& state1, const SoraFSMManager::EventType& type, const std::string& state2) {
+    SoraGameApp& SoraGameApp::defStateTrans(const std::string& state1, const SoraFSMManager::EventType& type, const std::string& state2) {
         mFSMManager.defTrans(state1, type, state2);
+        return *this;
     }
     
     void SoraGameApp::postEvent(const SoraFSMManager::EventType& evt) {

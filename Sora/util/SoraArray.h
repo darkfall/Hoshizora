@@ -23,6 +23,10 @@ namespace sora {
     class SoraArray {
     public:
         typedef T* iterator;
+        typedef const T* const_iterator;
+        typedef T reference;
+        typedef const T const_reference;
+        
         typedef SoraArray<T> self_type;
         
         enum { InvalidIndex = -1 };
@@ -61,9 +65,12 @@ namespace sora {
         void push_front(const T& elm);
         void pop_back();
         void pop_front();
-                
-        iterator begin() const;
-        iterator end() const;
+        
+        iterator begin();
+        iterator end();
+        
+        const_iterator begin() const;
+        const_iterator end() const;
         
         void clear();
         void reset();
@@ -418,12 +425,22 @@ namespace sora {
     }
     
     template<typename T>
-    typename SoraArray<T>::iterator SoraArray<T>::begin() const {
+    typename SoraArray<T>::const_iterator SoraArray<T>::begin() const {
         return this->mElements;
     }
     
     template<typename T>
-    typename SoraArray<T>::iterator SoraArray<T>::end() const {
+    typename SoraArray<T>::const_iterator SoraArray<T>::end() const {
+        return this->mElements + this->mSize;
+    }
+    
+    template<typename T>
+    typename SoraArray<T>::iterator SoraArray<T>::begin() {
+        return this->mElements;
+    }
+    
+    template<typename T>
+    typename SoraArray<T>::iterator SoraArray<T>::end() {
         return this->mElements + this->mSize;
     }
     

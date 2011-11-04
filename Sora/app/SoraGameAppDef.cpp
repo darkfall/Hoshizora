@@ -20,8 +20,8 @@ namespace sora {
     WindowHeight(600),
     WindowMode(true),
     HideMouse(false),
-    Icon(std::string()),
-    Cursor(std::string()),
+    Icon(StringType()),
+    Cursor(StringType()),
     WindowTitle("Sora App"),
     WindowId("MainWindow"),
     Window(0) {
@@ -31,6 +31,66 @@ namespace sora {
     SoraGameAppDef::SoraGameAppDef(SoraWindowInfoBase* window):
     Window(window) {
         
+    }
+    
+    SoraGameAppDef::SoraGameAppDef(int32 wwidth, int32 wheight, int32 wposx, int32 wposy, bool windowedMode, bool hideMouse, const StringType& title):
+    WindowWidth(wwidth),
+    WindowHeight(wheight),
+    WindowPosX(wposx),
+    WindowPosY(wposy),
+    WindowMode(windowedMode),
+    HideMouse(hideMouse),
+    WindowTitle(title) {
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::width(int32 width) {
+        this->WindowWidth = width;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::height(int32 height) {
+        this->WindowHeight = height;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::posx(int32 posx) {
+        this->WindowPosX = posx;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::posy(int32 posy) {
+        this->WindowPosY = posy;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::windowMode(bool mode) {
+        this->WindowMode = mode;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::hideMouse(bool flag) {
+        this->HideMouse = flag;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::title(const StringType& title) {
+        this->WindowTitle = title;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::icon(const StringType& icon) {
+        this->Icon = icon;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::cursor(const StringType& cursor) {
+        this->Cursor = cursor;
+        return *this;
+    }
+    
+    SoraGameAppDef& SoraGameAppDef::resource(const StringType& resource) {
+        this->ResourceScripts.push_back(resource);
+        return *this;
     }
     
     SoraGameAppDef::SoraGameAppDef(const StringType& loadFromConfig):

@@ -1290,6 +1290,7 @@
 		8884F65F13A1F8C200BEC5AB /* SoraMutableSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraMutableSprite.cpp; sourceTree = "<group>"; };
 		8884F79B13A2926D00BEC5AB /* SoraSpriteFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSpriteFont.h; sourceTree = "<group>"; };
 		8884F79C13A2926D00BEC5AB /* SoraSpriteFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSpriteFont.cpp; sourceTree = "<group>"; };
+		8889F61514639F760098D7ED /* SoraDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraDictionary.h; sourceTree = "<group>"; };
 		888A4EB31439281500185FCA /* SoraPhysicWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraPhysicWorld.h; sourceTree = "<group>"; };
 		888A4EB61439282A00185FCA /* SoraPhysicBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraPhysicBody.h; sourceTree = "<group>"; };
 		888A4EB71439283100185FCA /* SoraPhysicBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraPhysicBody.cpp; sourceTree = "<group>"; };
@@ -3033,6 +3034,7 @@
 				888A4EBF14392A2400185FCA /* SoraArray.h */,
 				888A4EC0143937C400185FCA /* SoraFourCC.h */,
 				88677550144E152E009A4043 /* SoraTuple.h */,
+				8889F61514639F760098D7ED /* SoraDictionary.h */,
 			);
 			path = util;
 			sourceTree = "<group>";

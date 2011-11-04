@@ -48,7 +48,7 @@ namespace sora {
 		void setFullscreen(bool flag);
 		bool isFullscreen();
 
-		SoraTexture* createTexture(const SoraWString& sTexturePath, bool bMipmap=false);
+		SoraTexture* createTexture(const StringType& sTexturePath, bool bMipmap=false);
 		SoraTexture* createTextureWH(int w, int h);
 		SoraTexture* createTextureFromMem(void* ptr, uint32 size, bool bMipmap=false);
 		SoraTexture* createTextureFromRawData(unsigned int* data, int32 w, int32 h);
@@ -89,10 +89,10 @@ namespace sora {
 
 		void flush();
         
-        void snapshot(const SoraString& path);
+        void snapshot(const StringType& path);
         
-        void setIcon(const SoraString& icon);
-        void setCursor(const SoraString& cursor);
+        void setIcon(const StringType& icon);
+        void setCursor(const StringType& cursor);
         
         void onExtensionStateChanged(int32 extension, bool state, int32 param);
         

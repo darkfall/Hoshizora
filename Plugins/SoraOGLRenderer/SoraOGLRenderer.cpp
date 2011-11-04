@@ -275,8 +275,10 @@ namespace sora{
 		}
 
 		if((blend & BLEND_COLORADD) != (CurBlendMode & BLEND_COLORADD)) {
-			if(blend & BLEND_COLORADD) glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ADD);
-			else glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+			if(blend & BLEND_COLORADD) 
+                glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ADD);
+			else 
+                glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		}
 
 		CurBlendMode = blend;
@@ -464,7 +466,7 @@ namespace sora{
         VertexBuffer.reset();
 	}
 
-	SoraTexture* SoraOGLRenderer::createTexture(const SoraWString& sTexturePath, bool bMipmap) {
+	SoraTexture* SoraOGLRenderer::createTexture(const StringType& sTexturePath, bool bMipmap) {
 		// to do
 		return 0;
 	}
@@ -846,17 +848,17 @@ namespace sora{
 		currShader = 0;
 	}
 
-    void SoraOGLRenderer::snapshot(const SoraString& path) {
+    void SoraOGLRenderer::snapshot(const StringType& path) {
         SOIL_save_screenshot(path.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, SoraCore::Ptr->getScreenWidth(), SoraCore::Ptr->getScreenHeight());
     }
 
-    void SoraOGLRenderer::setIcon(const SoraString& icon) {
+    void SoraOGLRenderer::setIcon(const StringType& icon) {
 #ifdef OS_OSX
         osx_setDockIcon(icon);
 #endif // OS_OSX
     }
     
-    void SoraOGLRenderer::setCursor(const SoraString& cursor) {
+    void SoraOGLRenderer::setCursor(const StringType& cursor) {
 #ifdef OS_OSX
         osx_setAppCursor(cursor);
 #endif

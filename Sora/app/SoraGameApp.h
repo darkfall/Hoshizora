@@ -36,11 +36,11 @@ namespace sora {
         
         void run(const std::string& initState);
         
-        void addState(GameStatePtr state, const std::string& tag);
+        SoraGameApp& addState(GameStatePtr state, const std::string& tag);
         GameStatePtr getState(const std::string& tag) const;
         void setState(const std::string& tag);
         
-        void defStateTrans(const std::string& state1, const SoraFSMManager::EventType& evt, const std::string& state2);
+        SoraGameApp& defStateTrans(const std::string& state1, const SoraFSMManager::EventType& evt, const std::string& state2);
         void postEvent(const SoraFSMManager::EventType& evt);
         
         SoraWindow* getWindow() const;

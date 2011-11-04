@@ -26,6 +26,7 @@ namespace sora {
      **/
     enum ExtensionFeature {
         SORA_EXTENSION_FSAA = 0x0001,
+        SORA_EXTENSION_STENCIL_BUFFER,
     };
         
     class SORA_API SoraRenderSystemExtension {

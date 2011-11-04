@@ -66,6 +66,7 @@ namespace sora {
         typedef SoraSimpleFSM   MachineType;
         typedef simple_fsm_do_nothing_one<state_type> DoNothingOp1;
         typedef simple_fsm_do_nothing_two<MachineType, state_type> DoNothingOp2;
+        typedef SoraSimpleFSM<state_type, event_type> SelfType;
         
 #ifdef SORA_FSM_USE_NULL
         SoraSimpleFSM():
@@ -76,14 +77,16 @@ namespace sora {
         }
 #endif
         
-        void add(state_type state) {
+        SelfType& add(state_type state) {
             mStateMap.insert(std::make_pair(state, state_trans()));
+            return *this;
         }
-        void del(state_type state) {
+        SelfType& del(state_type state) {
             typename StateMap::iterator itState = mStateMap.find(mCurrState);
             if(itState != mStateMap.end()) {
                 mStateMap.erase(itState);
             }
+            return *this;
         }
         
         void setState(state_type state) {
@@ -104,7 +107,7 @@ namespace sora {
             mStateMap.clear();
         }
         
-        void defTrans(state_type state, event_type event, state_type stateto) {
+        SelfType& defTrans(state_type state, event_type event, state_type stateto) {
             typename StateMap::iterator itState = mStateMap.find(mCurrState);
             if(itState == mStateMap.end()) {
                 // should we allow this?
@@ -114,9 +117,10 @@ namespace sora {
             } else {
                 itState->second.mTransitions.insert(std::make_pair(event, stateto));
             }
+            return *this;
         }
         
-        void delTrans(state_type state, event_type event) {
+        SelfType& delTrans(state_type state, event_type event) {
             typename StateMap::iterator itState = mStateMap.find(mCurrState);
             if(itState != mStateMap.end()) {
                 typename StateEventMap::iterator itEvent = itState->second.mTransitions.find(event);
@@ -124,11 +128,13 @@ namespace sora {
                     itState->second.mTransitions.erase(itEvent);
                 }
             }
+            return *this;
         }
         
-        void procEvent(event_type event) {
+        SelfType& procEvent(event_type event) {
             DoNothingOp2 donothing;
             procEvent(event, donothing, donothing);
+            return *this;
         }
         
         template<typename event_enter_op, typename event_exit_op>

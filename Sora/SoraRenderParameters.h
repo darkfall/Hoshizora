@@ -24,7 +24,7 @@ namespace sora {
         
         // line mode
         Line = 1,           // GL_LINE, D3DPT_LINELIST
-        LineLoop = 2,       // GL_LINE_LOOP, D3DPT_LINESTRIP ( no lineloop in d3d)
+        LineLoop = 2,       // GL_LINE_LOOP, D3DPT_LINESTRIP (no lineloop in d3d)
         
         // triangle mode
         Triangle,           // GL_TRIANGLE, D3DPT_TRIANGLELIST
@@ -43,8 +43,24 @@ namespace sora {
     };
     
     enum RenderStateType {
-        TextureWrap0 = 0, // u
-        TextureWrap1, // v
+        TextureWrap0 = 0,   // u
+        TextureWrap1,       // v
+        
+        MinFilter,      // GL_TEXTURE_MIN_FILTER, D3DSAMP_MINFILTER
+        MagFilter,      
+        
+        StencilOp,      // glStencilOp
+        StencilFunc,
+        
+        DepthOp,        // glDepthOp, 
+        DepthMask,      // glDepthMask, D3DRS_ZWRITTABLE
+        
+        ColorOp,        // GL_TEXTURE_ENV_MODE, D3DTTS_COLOROP
+        
+        SrcBlend,       // GL_SRC_BLEND, D3DRS_SRC_BLEND
+        DstBlend,
+        SrcAlpha,
+        DstAlpha,
     };
     
     enum RenderStateParam {
@@ -67,7 +83,6 @@ namespace sora {
         StencilOpInvert,
         StencilOpIncrWrap,
         StencilOpDecrWrap,
-        
         
         BlendOpAdd,             // GL_FUNC_ADD, D3DBLENDOP_ADD
         BlendOpSubstract,
@@ -92,6 +107,9 @@ namespace sora {
         CompGreater,
         CompGEqual,
         CompNotEqual,
+        
+        Enable,
+        Disable, 
     };
     
     enum MatrixMode {

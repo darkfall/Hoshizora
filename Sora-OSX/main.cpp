@@ -194,7 +194,7 @@ float s = 1.f;
 
 void build(int detail) {
     vertexL.clear();
-    buildSphere(200.f, 10 * detail, 512, 384);
+    buildSphere(200.f, 10 * detail, 0.f, 0.f);
 }
 
 void texx(const SoraString& tex) {
@@ -271,19 +271,21 @@ public:
         
         vertexL.getTransform().setPosition(512, 384, 0.f);
         vertexL.getTransform().setRotation(x, y, z);
+        vertexL.getTransform().setScale(s, s, s);
         vertexL.render();
         
         mBg.enable3D(true);
         mBg.getTransform().setRotation(x, y, z);
+        
       //  mBg.getTransform().setScale(1.5f, 1.f, 1.f);
         mBg.setPosition(512, 384);
         mBg.setCenter(mBg.getSpriteWidth()/2, mBg.getSpriteHeight()/2);
-        mBg.render();
+     //   mBg.render();
         
         mText2.enable3D(true);
         mText2.getTransform().setRotation(0.f, 0.f, 1.f);
         mText2.setPosition(512.f, 384.f);
-        mText2.render();
+      //  mText2.render();
 
         sora::SoraCore::Ptr->switchTo2D();
 
@@ -492,6 +494,8 @@ void msetCommands(sora::SoraConsoleEvent* evt) {
     }
 }
 
+#include "util/SoraDictionary.h"
+
 #include "SoraGraphicAlgorithm.h"
 
 SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_iteration,set_max_size,set_iteration_increment,set_cr,set_cg,set_cb, detail, tex, vertexmode");
@@ -500,10 +504,6 @@ SORA_DEF_CONSOLE_EVT_FUNC(msetCommands, "set_lx,set_ly,set_rx,set_ry,set_max_ite
 
 int main(int argc, char* argv[]) {    
         
-    sora::SoraCore::Ptr->enableRenderSystemExtension(sora::SORA_EXTENSION_FSAA);
-    
-    sora::SoraCore::Ptr->setRenderSystemExtensionParam(sora::SORA_EXTENSION_FSAA, 4);
-
     sora::SoraGameAppDef def("config.xml");
     sora::SoraGameApp app(def);
     
