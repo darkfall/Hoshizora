@@ -28,7 +28,7 @@ namespace sora {
         void setSprite(SoraSprite* mSprite);
         SoraSprite* getSprite() const;
         
-        uint32 update(float32 dt);
+        uint32 update(float dt);
         void render();
         void render(int32 renderMode);
         
@@ -42,8 +42,8 @@ namespace sora {
         void setRenderMode(int32 renderMode);
         int32 getRenderMode() const;
         
-        int32 addVertex(float32 screenposx, float32 screenposy, float32 texposx, float32 texposy, float32 screenz=0.f); 
-        int32 addScreenMappingVertex(float32 x, float32 y, float32 screenz=0.f);
+        int32 addVertex(float screenposx, float screenposy, float texposx, float texposy, float screenz=0.f); 
+        int32 addScreenMappingVertex(float x, float y, float screenz=0.f);
         int32 addVertex(const SoraVertex& vertex);
         
         void delVertx(int32 vid);
@@ -52,14 +52,14 @@ namespace sora {
         void setVertexColor(int32 vid, uint32 color);
         uint32 getVertexColor(int32 vid) const;
         
-        void setVertexZ(int32 vid, float32 z);
-        float32 getVertexZ(int32 vid) const;
+        void setVertexZ(int32 vid, float z);
+        float getVertexZ(int32 vid) const;
         
-        void setVertexPos(int32 vid, float32 sposx, float32 sposy);
-        void getVertexPos(int32 vid, float32* sposx, float32* sposy);
+        void setVertexPos(int32 vid, float sposx, float sposy);
+        void getVertexPos(int32 vid, float* sposx, float* sposy);
         
-        void setVertexTexturePos(int32 vid, float32 tposx, float32 tposy);
-        void getVertexTexturePos(int32 vid, float32* tposx, float32 *tposy);
+        void setVertexTexturePos(int32 vid, float tposx, float tposy);
+        void getVertexTexturePos(int32 vid, float* tposx, float *tposy);
         
         void exchangeVertex(int32 vid1, int32 vid2);
         
@@ -69,7 +69,7 @@ namespace sora {
         bool loadVerticesFromFile(const SoraWString& file);
         
         SoraStream writeToStream();
-        bool loadFromData(void* data, ulong32 size);
+        bool loadFromData(void* data, uint32 size);
         
         SoraVertex* buildAndGetVertexList();
         

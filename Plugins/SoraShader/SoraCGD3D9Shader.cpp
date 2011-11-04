@@ -96,7 +96,7 @@ namespace sora {
 		this->context = context;
         this->profile = profile;
 
-		ulong32 size;
+		uint32 size;
 		const char* data = (const char*)SoraCore::Instance()->getResourceFile(file, size);
 		if(data) {
 			program = cgCreateProgram(context,
@@ -139,7 +139,7 @@ namespace sora {
 		return true;
 	}
 	
-	void SoraCGD3D9Shader::setTexture(const SoraString& decalName, ulong32 tex) {
+	void SoraCGD3D9Shader::setTexture(const SoraString& decalName, SoraTextureHandle tex) {
 		textureParam = cgGetNamedParameter(program, decalName.c_str());
 		cgD3D9SetTexture(textureParam, (LPDIRECT3DTEXTURE9)(((SoraTexture*)tex)->mTextureID));
 	}
@@ -165,7 +165,7 @@ namespace sora {
 		return getType() != 0;
 	}
 
-	bool SoraCGD3D9Shader::setParameterfv(const char* name, float32* fv, uint32 size) {
+	bool SoraCGD3D9Shader::setParameterfv(const char* name, float* fv, uint32 size) {
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);
 		if(getType() == 0) return false;
@@ -201,7 +201,7 @@ namespace sora {
 		return (getType() != 0);
 	}
     
-    bool SoraCGD3D9Shader::getParameterfv(const char* name, float32* val, uint32 size) {
+    bool SoraCGD3D9Shader::getParameterfv(const char* name, float* val, uint32 size) {
         if(getType() == 0) return false;
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);

@@ -15,12 +15,12 @@
 
 namespace sora {
     
-    class SoraVertex;
+    struct SoraVertex;
     
     // simple vertex list works like glVertex*, glTexCoord*, glColor*
     // vertex positions are related positiont
     
-    class SoraVertexList: public SoraShaderable, public SoraObject {
+    class SORA_API SoraVertexList: public SoraShaderable, public SoraObject {
     public:
         friend class SoraShape;
         

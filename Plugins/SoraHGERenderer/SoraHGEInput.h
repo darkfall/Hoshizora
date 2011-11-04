@@ -14,10 +14,10 @@ namespace sora {
 		 /*///////////////////////////////////////
 		 // Mouse Events                         /
 		 *////////////////////////////////////////
-		void	 getMousePos(float32 *x, float32 *y);
-		void	 setMousePos(float32 x, float32 y);
-		float32 getMousePosX();
-		float32 getMousePosY();
+		void	 getMousePos(float *x, float *y);
+		void	 setMousePos(float x, float y);
+		float getMousePosX();
+		float getMousePosY();
 		int	 getMouseWheel();
 		bool	 isMouseOver();
 
@@ -40,7 +40,7 @@ namespace sora {
 		bool	setJoyKey(int32 key);
 		bool	hasJoy();
 
-		void	setWindowHandle(ulong32 handle) {}
+		void	setWindowHandle(SoraHandle handle) {}
 
 	private:
 		SoraHGEInput(const SoraHGEInput&) {}

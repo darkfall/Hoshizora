@@ -11,6 +11,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include "SoraLogger.h"
+#include "SoraRenderParameters.h"
 
 void CALL HGE_Impl::Gfx_Clear(DWORD color)
 {
@@ -65,7 +66,7 @@ void CALL HGE_Impl::Gfx_SetClipping(int x, int y, int w, int h)
 	}
 
 	vp.MinZ=0.0f;
-	vp.MaxZ=1000.0f;
+	vp.MaxZ=1.f;
 
 	_render_batch();
 	pD3DDevice->SetViewport(&vp);
@@ -100,6 +101,8 @@ void CALL HGE_Impl::Gfx_SetTransform(float x, float y, float dx, float dy, float
 }
 
 void CALL HGE_Impl::Gfx_SetTransformMatrix(const float* mat) {
+	_render_batch();
+
 	D3DXMATRIX tmp;
 	for(int i=0; i<4; ++i) {
 		for(int j=0; j<4; ++j) {
@@ -120,6 +123,54 @@ float* CALL HGE_Impl::Gfx_GetTransformMatrix() const {
 		}
 	}
 	return &mat[0];
+}
+
+void CALL HGE_Impl::Gfx_MultTransformMatrix(const float* mat) {
+	D3DXMATRIX tmp;
+	pD3DDevice->GetTransform(D3DTS_VIEW, &tmp);
+
+	D3DXMATRIX tmp2;
+	for(int i=0; i<4; ++i) {
+		for(int j=0; j<4; ++j) {
+			tmp2.m[i][j] = mat[i*4 + j];
+		}
+	}
+
+	D3DXMatrixMultiply(&tmp, &tmp, &tmp2);
+	pD3DDevice->SetTransform(D3DTS_VIEW, &tmp);
+}
+
+void CALL HGE_Impl::Gfx_SetProjectionMatrix(const float* mat) {
+	_render_batch();
+
+	D3DXMATRIX tmp;
+	for(int i=0; i<4; ++i) {
+		for(int j=0; j<4; ++j) {
+			tmp.m[i][j] = mat[i*4 + j];
+		}
+	}
+	pD3DDevice->SetTransform(D3DTS_PROJECTION, &tmp);
+}
+
+float* CALL HGE_Impl::Gfx_GetProjectionMatrix() const {
+	D3DXMATRIX tmp;
+	pD3DDevice->GetTransform(D3DTS_PROJECTION, &tmp);
+
+	static float mat[16];
+	for(int i=0; i<4; ++i) {
+		for(int j=0; j<4; ++j) {
+			mat[i*4 + j] = tmp.m[i][j];
+		}
+	}
+	return &mat[0];
+}
+
+void CALL HGE_Impl::Gfx_SetRenderStateParam(int state, int param) {
+
+}
+
+int	CALL HGE_Impl::Gfx_GetRenderStateParam(int state) {
+	return 0;
 }
 
 bool CALL HGE_Impl::Gfx_BeginScene(HTARGET targ)
@@ -340,10 +391,13 @@ hgeVertex* CALL HGE_Impl::Gfx_StartBatch(int prim_type, HTEXTURE tex, int blend,
 			CurTexture = tex;
 		}
 
-		if(prim_type != HGEPRIM_TRIPLES_FAN && prim_type != HGEPRIM_TRIPLES_STRIP)
+		if(prim_type != HGEPRIM_TRIPLES_FAN && prim_type != HGEPRIM_TRIPLES_STRIP &&prim_type != HGEPRIM_LINE_LOOP)
 			*max_prim=VERTEX_BUFFER_SIZE / prim_type;
+		else if(prim_type == HGEPRIM_LINE_LOOP) 
+			*max_prim=VERTEX_BUFFER_SIZE / 2;
 		else
 			*max_prim=VERTEX_BUFFER_SIZE / 3;
+		*max_prim=VERTEX_BUFFER_SIZE;
 		return VertArray;
 	}
 	else return 0;
@@ -642,6 +696,10 @@ void HGE_Impl::_render_batch(bool bEndScene) {
 					pD3DDevice->DrawPrimitive(D3DPT_LINELIST, 0, nPrim);
 					break;
 
+				case HGEPRIM_LINE_LOOP:
+					pD3DDevice->DrawPrimitive(D3DPT_LINESTRIP, 0, nPrim);
+					break;
+
 				case HGEPRIM_TRIPLES_FAN:
 					pD3DDevice->DrawPrimitive(D3DPT_TRIANGLEFAN, 0, nPrim-2);
 					break;
@@ -705,8 +763,31 @@ void HGE_Impl::_SetProjectionMatrix(int width, int height)
 	D3DXMatrixScaling(&matProj, 1.0f, -1.0f, 1.0f);
 	D3DXMatrixTranslation(&tmp, -0.5f, height+0.5f, 0.0f);
 	D3DXMatrixMultiply(&matProj, &matProj, &tmp);
-	D3DXMatrixOrthoOffCenterLH(&tmp, 0, (float)width, 0, (float)height, -1000.f, 1000.0f);
+	D3DXMatrixOrthoOffCenterLH(&tmp, 0, (float)width, 0, (float)height, 0.f, 1.f);
 	D3DXMatrixMultiply(&matProj, &matProj, &tmp);
+
+}
+
+void HGE_Impl::ResetProjectionMatrix(float minz, float maxz) {
+	_render_batch();
+
+	float height, width;
+
+	if(pCurTarget) {
+ 		height = pCurTarget->height;
+		width = pCurTarget->width;
+	} else {
+		height = (float)nScreenHeight;
+		width = (float)nScreenWidth;
+	}
+	D3DXMATRIX tmp;
+	D3DXMatrixScaling(&matProj, 1.0f, -1.0f, 1.0f);
+	D3DXMatrixTranslation(&tmp, -0.5f, height+0.5f, 0.0f);
+	D3DXMatrixMultiply(&matProj, &matProj, &tmp);
+	D3DXMatrixOrthoOffCenterLH(&tmp, 0,width, 0, height, minz, maxz);
+	D3DXMatrixMultiply(&matProj, &matProj, &tmp);
+	
+	pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
 void HGE_Impl::enableFSAA() {

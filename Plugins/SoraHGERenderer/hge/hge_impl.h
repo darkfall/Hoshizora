@@ -125,6 +125,13 @@ public:
 	virtual void		CALL	Gfx_SetTransform(float x=0, float y=0, float dx=0, float dy=0, float rot=0, float hscale=0, float vscale=0); 
 	virtual void		CALL	Gfx_SetTransformMatrix(const float* mat);
 	virtual float*		CALL	Gfx_GetTransformMatrix() const;
+	virtual void		CALL	Gfx_MultTransformMatrix(const float* mat);
+
+	virtual void		CALL	Gfx_SetProjectionMatrix(const float* mat);
+	virtual float*		CALL	Gfx_GetProjectionMatrix() const;
+
+	virtual void		CALL	Gfx_SetRenderStateParam(int state, int param);
+	virtual int			CALL	Gfx_GetRenderStateParam(int state);
 	
 	virtual void*		CALL	Resource_Load(const char *filename, DWORD *size=0);
 	virtual void		CALL	Resource_Free(void *res);
@@ -262,7 +269,7 @@ public:
 	int					_format_id(D3DFORMAT fmt);
 	void				_SetBlendMode(int blend);
 	void				_SetProjectionMatrix(int width, int height);
-	
+	void		CALL		ResetProjectionMatrix(float minz, float maxz);
 
 	// Audio
 	HINSTANCE			hBass;

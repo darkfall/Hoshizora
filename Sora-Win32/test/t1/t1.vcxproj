@@ -426,6 +426,7 @@
     <ClInclude Include="..\..\..\Sora\math\SoraQuaternion.h" />
     <ClInclude Include="..\..\..\Sora\math\SoraRect.h" />
     <ClInclude Include="..\..\..\Sora\math\SoraRect4V.h" />
+    <ClInclude Include="..\..\..\Sora\math\SoraTransform.h" />
     <ClInclude Include="..\..\..\Sora\math\SoraVector.h" />
     <ClInclude Include="..\..\..\Sora\math\SoraVector3.h" />
     <ClInclude Include="..\..\..\Sora\message\SoraListener.h" />
@@ -542,7 +543,7 @@
     <ClInclude Include="..\..\..\Sora\SoraScene.h" />
     <ClInclude Include="..\..\..\Sora\SoraScopedPtr.h" />
     <ClInclude Include="..\..\..\Sora\SoraShader.h" />
-    <ClInclude Include="..\..\..\Sora\SoraShaderEnabled.h" />
+    <ClInclude Include="..\..\..\Sora\SoraShaderable.h" />
     <ClInclude Include="..\..\..\Sora\SoraShape.h" />
     <ClInclude Include="..\..\..\Sora\SoraSignal.h" />
     <ClInclude Include="..\..\..\Sora\SoraSimpleFSM.h" />
@@ -564,6 +565,7 @@
     <ClInclude Include="..\..\..\Sora\SoraTimerEvent.h" />
     <ClInclude Include="..\..\..\Sora\SoraTimestamp.h" />
     <ClInclude Include="..\..\..\Sora\SoraTypeInfo.h" />
+    <ClInclude Include="..\..\..\Sora\SoraVertexList.h" />
     <ClInclude Include="..\..\..\Sora\SoraWindowInfo.h" />
     <ClInclude Include="..\..\..\Sora\support\kalloc.h" />
     <ClInclude Include="..\..\..\Sora\support\md5lib.h" />
@@ -887,7 +889,7 @@
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraScene.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraShader.cpp" />
-    <ClCompile Include="..\..\..\Sora\SoraShaderEnabled.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraShaderable.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraShape.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraSimpleFSM.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraSoundSystem.cpp" />
@@ -903,6 +905,7 @@
     <ClCompile Include="..\..\..\Sora\SoraTextureMap.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraTimer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraTimestamp.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraVertexList.cpp" />
     <ClCompile Include="..\..\..\Sora\support\kalloc.c" />
     <ClCompile Include="..\..\..\Sora\support\md5lib.cpp" />
     <ClCompile Include="..\..\..\Sora\task\SoraTask.cpp" />

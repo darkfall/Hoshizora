@@ -329,40 +329,40 @@ namespace sora {
 	void SoraParticleSystem::emitParticle() {
 		SoraParticleNode node;
 		node.bDead = false;
-		node.fLifetime = core->randomFloat(pheader.fMinLifetime, pheader.fMaxLifetime);
+		node.fLifetime = SoraCore::RandomFloat(pheader.fMinLifetime, pheader.fMaxLifetime);
 		
-		node.dwCurrColor.a = core->randomFloat(pheader.dwMinStartColor.a, pheader.dwMaxStartColor.a);
-		node.dwCurrColor.r = core->randomFloat(pheader.dwMinStartColor.r, pheader.dwMaxStartColor.r);
-		node.dwCurrColor.g = core->randomFloat(pheader.dwMinStartColor.g, pheader.dwMaxStartColor.g);
-		node.dwCurrColor.b = core->randomFloat(pheader.dwMinStartColor.b, pheader.dwMaxStartColor.b);
+		node.dwCurrColor.a = SoraCore::RandomFloat(pheader.dwMinStartColor.a, pheader.dwMaxStartColor.a);
+		node.dwCurrColor.r = SoraCore::RandomFloat(pheader.dwMinStartColor.r, pheader.dwMaxStartColor.r);
+		node.dwCurrColor.g = SoraCore::RandomFloat(pheader.dwMinStartColor.g, pheader.dwMaxStartColor.g);
+		node.dwCurrColor.b = SoraCore::RandomFloat(pheader.dwMinStartColor.b, pheader.dwMaxStartColor.b);
 		SoraColorRGBA dwStart = node.dwCurrColor;
 		SoraColorRGBA dwEnd;
-		dwEnd.a = core->randomFloat(pheader.dwMinEndColor.a, pheader.dwMaxEndColor.a);
-		dwEnd.r = core->randomFloat(pheader.dwMinEndColor.r, pheader.dwMaxEndColor.r);
-		dwEnd.g = core->randomFloat(pheader.dwMinEndColor.g, pheader.dwMaxEndColor.g);
-		dwEnd.b = core->randomFloat(pheader.dwMinEndColor.b, pheader.dwMaxEndColor.b);
+		dwEnd.a = SoraCore::RandomFloat(pheader.dwMinEndColor.a, pheader.dwMaxEndColor.a);
+		dwEnd.r = SoraCore::RandomFloat(pheader.dwMinEndColor.r, pheader.dwMaxEndColor.r);
+		dwEnd.g = SoraCore::RandomFloat(pheader.dwMinEndColor.g, pheader.dwMaxEndColor.g);
+		dwEnd.b = SoraCore::RandomFloat(pheader.dwMinEndColor.b, pheader.dwMaxEndColor.b);
 		node.dwColorVar = (dwEnd - dwStart) / node.fLifetime;
 		
-		node.fCurrScale = core->randomFloat(pheader.fMinStartScale, pheader.fMaxStartScale);
+		node.fCurrScale = SoraCore::RandomFloat(pheader.fMinStartScale, pheader.fMaxStartScale);
 		float fStart = node.fCurrScale;
-		float fEnd = core->randomFloat(pheader.fMinEndScale, pheader.fMaxEndScale);
+		float fEnd = SoraCore::RandomFloat(pheader.fMinEndScale, pheader.fMaxEndScale);
 		node.fScaleVar = (fEnd - fStart) / node.fLifetime;
 		
 		node.fCurrSpin = 0.f;
-		node.fSpin = core->randomFloat(pheader.fMinSpin, pheader.fMaxSpin);
+		node.fSpin = SoraCore::RandomFloat(pheader.fMinSpin, pheader.fMaxSpin);
 		
-		node.fSpeed = core->randomFloat(pheader.fMinSpeed, pheader.fMaxSpeed);
-		node.fAngle = DGR_RAD(core->randomFloat(pheader.fMinAngle, pheader.fMaxAngle));
-		node.fGravity = core->randomFloat(pheader.fMinGravity, pheader.fMaxGravity);
-		node.fTrigAcc = DGR_RAD(core->randomFloat(pheader.fMinTrigAcc, pheader.fMaxTrigAcc));
-		node.fLinearAcc = core->randomFloat(pheader.fMinLinearAcc, pheader.fMaxLinearAcc);
+		node.fSpeed = SoraCore::RandomFloat(pheader.fMinSpeed, pheader.fMaxSpeed);
+		node.fAngle = DGR_RAD(SoraCore::RandomFloat(pheader.fMinAngle, pheader.fMaxAngle));
+		node.fGravity = SoraCore::RandomFloat(pheader.fMinGravity, pheader.fMaxGravity);
+		node.fTrigAcc = DGR_RAD(SoraCore::RandomFloat(pheader.fMinTrigAcc, pheader.fMaxTrigAcc));
+		node.fLinearAcc = SoraCore::RandomFloat(pheader.fMinLinearAcc, pheader.fMaxLinearAcc);
 		
-		node.position.set(pheader.emitPos.x+core->randomFloat(-pheader.emitRange.x, pheader.emitRange.x),
-						  pheader.emitPos.y+core->randomFloat(-pheader.emitRange.y, pheader.emitRange.y),
-						  pheader.emitPos.z+core->randomFloat(-pheader.emitRange.z, pheader.emitRange.z));
-		node.direction = SoraVector3(core->randomFloat(pheader.minDirection.x, pheader.maxDirection.x),
-								 core->randomFloat(pheader.minDirection.y, pheader.maxDirection.y),
-								 core->randomFloat(pheader.minDirection.z, pheader.maxDirection.z)).normalize();
+		node.position.set(pheader.emitPos.x+SoraCore::RandomFloat(-pheader.emitRange.x, pheader.emitRange.x),
+						  pheader.emitPos.y+SoraCore::RandomFloat(-pheader.emitRange.y, pheader.emitRange.y),
+						  pheader.emitPos.z+SoraCore::RandomFloat(-pheader.emitRange.z, pheader.emitRange.z));
+		node.direction = SoraVector3(SoraCore::RandomFloat(pheader.minDirection.x, pheader.maxDirection.x),
+								 SoraCore::RandomFloat(pheader.minDirection.y, pheader.maxDirection.y),
+								 SoraCore::RandomFloat(pheader.minDirection.z, pheader.maxDirection.z)).normalize();
 		
 		if(bRotate3v)
 			node.direction = quatRotation.rotate(node.direction);
@@ -402,7 +402,7 @@ namespace sora {
 	}
 
 	void SoraParticleSystem::_parseScript(const SoraWString& script) {
-		ulong32 size;
+		uint32 size;
 		void* buffer = SoraCore::Instance()->getResourceFile(script, size);
 		if(buffer) {
 			memcpy(&pheader, buffer, size);
@@ -446,7 +446,7 @@ namespace sora {
 		particles.clear();
 	}
 
-	void SoraParticleManager::kill(HSORAPARTICLE h) {
+	void SoraParticleManager::kill(SoraHandle h) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			delete p->second;
@@ -454,7 +454,7 @@ namespace sora {
 		}
 	}
 
-	bool SoraParticleManager::isActive(HSORAPARTICLE h) {
+	bool SoraParticleManager::isActive(SoraHandle h) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			return p->second->isActive();
@@ -462,35 +462,35 @@ namespace sora {
 		return false;
 	}
 
-	void SoraParticleManager::stop(HSORAPARTICLE h) {
+	void SoraParticleManager::stop(SoraHandle h) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			p->second->stop();
 		}
 	}
 
-	void SoraParticleManager::restart(HSORAPARTICLE h) {
+	void SoraParticleManager::restart(SoraHandle h) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			p->second->restart();
 		}
 	}
 
-	void SoraParticleManager::fire(HSORAPARTICLE h) {
+	void SoraParticleManager::fire(SoraHandle h) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			p->second->fire();
 		}
 	}
 
-	void SoraParticleManager::fireAt(HSORAPARTICLE h, float x, float y, float z) {
+	void SoraParticleManager::fireAt(SoraHandle h, float x, float y, float z) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			p->second->fireAt(x, y, z);
 		}
 	}
 
-	int32 SoraParticleManager::getParticleAlive(HSORAPARTICLE h) {
+	int32 SoraParticleManager::getParticleAlive(SoraHandle h) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			return p->second->getLiveParticle();
@@ -512,7 +512,7 @@ namespace sora {
 		return particles.size();
 	}
 
-	void SoraParticleManager::save(HSORAPARTICLE h, const SoraWString& path) {
+	void SoraParticleManager::save(SoraHandle h, const SoraWString& path) {
 		PARTICLE_MAP::iterator p = particles.find(h);
 		if( p != particles.end() ) {
 			p->second->saveScript(path);
@@ -539,7 +539,7 @@ namespace sora {
 		}
 	}
 
-	HSORAPARTICLE SoraParticleManager::emit(const SoraParticleHeader& header, float x, float y, float z) {
+	SoraHandle SoraParticleManager::emit(const SoraParticleHeader& header, float x, float y, float z) {
 		if(pGlobalSprite == 0)
 			THROW_SORA_EXCEPTION(IllegalStateException, "Error emit Particle, no global particle sprites set");
 		
@@ -547,11 +547,11 @@ namespace sora {
 		if(!par)
 			THROW_SORA_EXCEPTION(RuntimeException, "Failed Alloc ParticleSystem");
 		par->fire();
-		particles[(HSORAPARTICLE)par] = par;
-		return (HSORAPARTICLE)par;
+		particles[(SoraHandle)par] = par;
+		return (SoraHandle)par;
 	}
 
-	HSORAPARTICLE SoraParticleManager::emitS(const SoraWString& s, float x, float y, float z) {
+	SoraHandle SoraParticleManager::emitS(const SoraWString& s, float x, float y, float z) {
 		if(pGlobalSprite == 0)
 			THROW_SORA_EXCEPTION(IllegalStateException,"Error emit Particle, no global particle sprites set");
 		
@@ -559,7 +559,7 @@ namespace sora {
 		if(!par)
 			THROW_SORA_EXCEPTION(RuntimeException, "Failed Alloc ParticleSystem");
 		par->fire();
-		particles[(HSORAPARTICLE)par] = par;
-		return (HSORAPARTICLE)par;
+		particles[(SoraHandle)par] = par;
+		return (SoraHandle)par;
 	}
 } // namespace sora

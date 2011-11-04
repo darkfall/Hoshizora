@@ -162,9 +162,9 @@ namespace sora {
             mViewMatrix = SoraMatrix4::FrustumMat(l, r, b, t, n, f);
     }
     
-    Sora3DCamera::Sora3DCamera(float fov, float aspect, float near, float far):
+    Sora3DCamera::Sora3DCamera(float fov, float aspect, float nearx, float farx):
     mCameraMode(Perspective) {
-        mViewMatrix = SoraMatrix4::PerspectiveMat(fov, aspect, near, far);
+        mViewMatrix = SoraMatrix4::PerspectiveMat(fov, aspect, nearx, farx);
     }
     
     Sora3DCamera::CameraMode Sora3DCamera::getCameraMode() const {

@@ -12,9 +12,6 @@
     <Filter Include="Plugins">
       <UniqueIdentifier>{b346c15c-9ddb-4163-a967-561b3c48e6fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plugins\FreetypeFont">
-      <UniqueIdentifier>{087ef6e9-6fb0-46b6-9e4e-ae951e9c5ee7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\zlib">
       <UniqueIdentifier>{2d456fcb-de45-45d0-b289-03240ed0976e}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,9 @@
     </Filter>
     <Filter Include="头文件\defaults">
       <UniqueIdentifier>{2cef4640-6e28-4ab5-a729-25f85e45fde2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\FreetypeFont">
+      <UniqueIdentifier>{087ef6e9-6fb0-46b6-9e4e-ae951e9c5ee7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1086,9 +1086,6 @@
     <ClInclude Include="..\..\..\Sora\SoraShader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraShaderEnabled.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraSimpleFSM.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -1755,6 +1752,15 @@
     <ClInclude Include="..\..\..\Sora\SoraSpriteSheet.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\math\SoraTransform.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraShaderable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraVertexList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp">
@@ -2184,9 +2190,6 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraShader.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraShaderEnabled.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraSimpleFSM.cpp">
@@ -2706,6 +2709,12 @@
       <Filter>头文件\defaults</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraSpriteManager.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraShaderable.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraVertexList.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>

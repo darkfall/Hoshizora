@@ -12,7 +12,7 @@
 #include "SoraPlatform.h"
 #include "SoraTexture.h"
 
-#include "SoraMatrix4.h"
+#include "math/SoraMatrix4.h"
 
 namespace sora {
     

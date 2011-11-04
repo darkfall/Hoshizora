@@ -67,12 +67,12 @@ namespace sora {
 				first available id after it
 				return -1 means failed open the bg sound file
 		*/
-		int32	playBGS(const std::wstring& bgmsPath, uint32 bgsid, int32 looptimes, float32 volumeScale, float32 bgmVolumeScale);
+		int32	playBGS(const std::wstring& bgmsPath, uint32 bgsid, int32 looptimes, float volumeScale, float bgmVolumeScale);
 		/*
 		 adjust the volume of a certain bgs
 		 @param volume, the new volume for the bgs
 		 */
-		void	adjustBGSVolume(uint32 bgsid, float32 volume);
+		void	adjustBGSVolume(uint32 bgsid, float volume);
 		/*
 		 stops a certain bgs
 		 @param bgsid, the id of the bgs, see @playBGS
@@ -104,16 +104,16 @@ namespace sora {
 		 */
 		
 		// 0 - 100.0
-		void setVolume(float32 volume);
-		float32 getVolume() const;
+		void setVolume(float volume);
+		float getVolume() const;
 		
 		// 0.5 - 2.0
-		void setPitch(float32 pitch);
-		float32 getPitch() const;
+		void setPitch(float pitch);
+		float getPitch() const;
 		
 		// -1.0 - 1.0
-		void setPan(float32 pan);
-		float32 getPan() const;
+		void setPan(float pan);
+		float getPan() const;
 		
 		/*
 		 if these times are not 0, 
@@ -121,9 +121,9 @@ namespace sora {
 		 the old bgm would fade out in fadeOutTime seconds
 		 default are zero
 		 */
-		void setFadeTime(float32 fadeInTime, float32 fadeOutTime);
-		float32 getFadeInTime() const;
-		float32 getFadeOutTime() const;
+		void setFadeTime(float fadeInTime, float fadeOutTime);
+		float getFadeInTime() const;
+		float getFadeOutTime() const;
 		
 		/*
 		 if this is enabled, them when a bgm ends, new bgm would be a random item in the bgm queue
@@ -145,14 +145,14 @@ namespace sora {
 		int32 mPrevBGMId;
 		int32 mCurrBGMId;
 		
-		float32 bgmVolume;
-		float32 bgmPitch;
-		float32 bgmPan;
+		float bgmVolume;
+		float bgmPitch;
+		float bgmPan;
 		
-		float32 mCurrFadeInTime;
-		float32 mCurrFadeOutTime;
-		float32 mFadeInTime;
-		float32 mFadeOutTime;
+		float mCurrFadeInTime;
+		float mCurrFadeOutTime;
+		float mFadeInTime;
+		float mFadeOutTime;
 		
 		bool mStopAtEnd;
 		bool mRandomBGMQueuePlay;
@@ -174,12 +174,12 @@ namespace sora {
 			uint32 currLoopTimes;
 			uint32 loopTimes;
 			
-			float32 volumeScale;
-			float32 bgmVolumeScale;
+			float volumeScale;
+			float bgmVolumeScale;
 			
 			bool bPlayFinished;
 			
-			BGSInfo(uint32 id, uint32 lt, float32 vol, float32 bgmvol, SoraMusicFile* file): 
+			BGSInfo(uint32 id, uint32 lt, float vol, float bgmvol, SoraMusicFile* file): 
 				bgsid(id), loopTimes(lt), volumeScale(vol), bgmVolumeScale(bgmvol), currLoopTimes(0), bgsFile(file) {
 					if(loopTimes != -1) {
 						registerEventFunc(this, &BGSInfo::onPlaybackEvent);

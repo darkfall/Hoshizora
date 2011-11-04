@@ -13,22 +13,22 @@ namespace sora {
 		hge->Release();
 	}
 
-	void SoraHGEInput::getMousePos(float32* x, float32* y) {
+	void SoraHGEInput::getMousePos(float* x, float* y) {
 		hge->Input_GetMousePos(x, y);
 	}
 
-	void SoraHGEInput::setMousePos(float32 x, float32 y) {
+	void SoraHGEInput::setMousePos(float x, float y) {
 		hge->Input_SetMousePos(x, y);
 	}
 
-	float32 SoraHGEInput::getMousePosX() {
-		float32 x, y;
+	float SoraHGEInput::getMousePosX() {
+		float x, y;
 		hge->Input_GetMousePos(&x, &y);
 		return x;
 	}
 
-	float32 SoraHGEInput::getMousePosY() {
-		float32 x, y;
+	float SoraHGEInput::getMousePosY() {
+		float x, y;
 		hge->Input_GetMousePos(&x, &y);
 		return y;
 	}

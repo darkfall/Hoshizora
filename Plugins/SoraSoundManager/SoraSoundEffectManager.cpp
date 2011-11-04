@@ -84,7 +84,7 @@ namespace sora {
 		}
 	}
 	
-	void SoraSoundEffectManager::setVolume(float32 vol) {
+	void SoraSoundEffectManager::setVolume(float vol) {
 		SET_ENV_FLOAT("SoundEffectVolume", vol);
 		
 		SOUND_EFFECT_MAP::iterator itEffect = mSoundEffects.begin();
@@ -96,7 +96,7 @@ namespace sora {
 		effectVolume = vol;
 	}
 	
-	float32 SoraSoundEffectManager::getVolume() const {
+	float SoraSoundEffectManager::getVolume() const {
 		return effectVolume;
 	}
 	

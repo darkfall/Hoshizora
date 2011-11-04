@@ -77,8 +77,8 @@ namespace sora {
         
         void setVerticalSync(bool flag);
 
-		SoraHandle getMainWindowHandle() { return (SoraHandle)mainWindow; }
-		SoraWindowInfoBase* getMainWindow() { return mainWindow; }
+		SoraHandle getMainWindowHandle();
+		SoraWindowInfoBase* getMainWindow();
 
         SoraShaderContext* createShaderContext();
 		void attachShaderContext(SoraShaderContext* context);
@@ -100,7 +100,7 @@ namespace sora {
         void setQueryVideoModeCallback(QueryVideoMode func);
         
         void setRenderState(RenderStateType, RenderStateParam);
-        RenderStateParam getRenderState(RenderStateType);
+        RenderStateParam getRenderState(RenderStateType) const;
 
 	private:
 		void applyTransform();

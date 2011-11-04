@@ -221,6 +221,7 @@ typedef bool (*hgeCallback)();
 */
 #define HGEPRIM_TRIPLES_FAN 5
 #define HGEPRIM_TRIPLES_STRIP 6
+#define HGEPRIM_LINE_LOOP 7
 
 
 /*
@@ -377,7 +378,14 @@ public:
 	virtual void		CALL	Gfx_SetClipping(int x=0, int y=0, int w=0, int h=0) = 0;
 	virtual void		CALL	Gfx_SetTransform(float x=0, float y=0, float dx=0, float dy=0, float rot=0, float hscale=0, float vscale=0) = 0; 
 	virtual void		CALL	Gfx_SetTransformMatrix(const float* mat) = 0;
+	virtual void		CALL	Gfx_MultTransformMatrix(const float* mat) = 0;
 	virtual float*		CALL	Gfx_GetTransformMatrix() const = 0;
+
+	virtual void		CALL	Gfx_SetProjectionMatrix(const float* mat) = 0;
+	virtual float*		CALL	Gfx_GetProjectionMatrix() const = 0;
+
+	virtual void		CALL	Gfx_SetRenderStateParam(int state, int param) = 0;
+	virtual int			CALL	Gfx_GetRenderStateParam(int state) = 0;
 
 	virtual HTARGET		CALL	Target_Create(int width, int height, bool zbuffer) = 0;
 	virtual void		CALL	Target_Free(HTARGET target) = 0;
@@ -412,6 +420,7 @@ public:
 	virtual void		CALL		_UpdateMouse() = 0;
 	virtual void		CALL		_InputInit() = 0;
 	virtual void		CALL		_ClearQueue() = 0;
+	virtual void		CALL		ResetProjectionMatrix(float minz, float maxz) = 0;
 
 	virtual void		CALL	enableFSAA() = 0;
 	virtual void		CALL	disableFSAA() = 0;

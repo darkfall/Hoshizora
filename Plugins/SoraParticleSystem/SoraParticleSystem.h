@@ -105,8 +105,6 @@ namespace sora {
 		virtual bool effect(SoraParticleNode& node, float dt) = 0;
 	};
 
-	typedef ulong32 HSORAPARTICLE;
-
 	class SoraParticleSystem {
 	public:
 		SoraParticleSystem();
@@ -200,7 +198,7 @@ namespace sora {
 
 	class SoraParticleManager {
 		friend class SoraParticleSystem;
-		typedef std::map<HSORAPARTICLE, SoraParticleSystem*> PARTICLE_MAP;
+		typedef std::map<SoraHandle, SoraParticleSystem*> PARTICLE_MAP;
 
 	public:
 		SoraParticleManager();
@@ -209,21 +207,21 @@ namespace sora {
 
 		void setGlobalSprite(SoraSprite* globalSprite);
 
-		HSORAPARTICLE emit(const SoraParticleHeader& header, float x=0.f, float y=0.f, float z=0.f);
-		HSORAPARTICLE emitS(const SoraWString& par, float x=0.f, float y=0.f, float z=0.f);
+		SoraHandle emit(const SoraParticleHeader& header, float x=0.f, float y=0.f, float z=0.f);
+		SoraHandle emitS(const SoraWString& par, float x=0.f, float y=0.f, float z=0.f);
 
-		bool isActive(HSORAPARTICLE h);
+		bool isActive(SoraHandle h);
 		
-		void kill(HSORAPARTICLE h);
-		void stop(HSORAPARTICLE h);
-		void restart(HSORAPARTICLE h);
+		void kill(SoraHandle h);
+		void stop(SoraHandle h);
+		void restart(SoraHandle h);
 
-		void fire(HSORAPARTICLE h);
-		void fireAt(HSORAPARTICLE h, float x, float y, float z);
+		void fire(SoraHandle h);
+		void fireAt(SoraHandle h, float x, float y, float z);
 		
 		void killAll();
 
-		int32 getParticleAlive(HSORAPARTICLE h);
+		int32 getParticleAlive(SoraHandle h);
 		int32 getTotalParticleAlive();
 		
 		int32 size();
@@ -231,7 +229,7 @@ namespace sora {
 		void render();
 		void update(float dt);
 
-		void save(HSORAPARTICLE h, const SoraWString& path);
+		void save(SoraHandle h, const SoraWString& path);
 		
 	private:
 		SoraParticleManager(const SoraParticleManager&) {}

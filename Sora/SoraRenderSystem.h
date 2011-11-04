@@ -78,7 +78,7 @@ namespace sora {
         virtual SoraMatrix4 getProjectionMatrix() const = 0;
         
         virtual void setRenderState(RenderStateType type, RenderStateParam param) = 0;
-        virtual RenderStateParam getRenderState(RenderStateType type) = 0;
+        virtual RenderStateParam getRenderState(RenderStateType type) const = 0;
         
 		virtual void shutdown() = 0;
 		virtual SoraHandle getMainWindowHandle() = 0;

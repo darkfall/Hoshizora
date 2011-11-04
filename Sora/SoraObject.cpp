@@ -28,6 +28,22 @@ namespace sora {
         SoraObjectHandle handle(this);
 	}
 
+	SoraObject::SoraObject(const SoraObject& rhs): 
+    m3DEnabled(false),
+    mParent(NULL),
+    mSubObjects(NULL), 
+    mNext(NULL),
+    mType(0), 
+    mSubObjectSize(0),
+    mAutoReleasePhysicBody(true),
+    mPhysicBody(0) {
+        mUniqueId = GetNextUniqueId();
+        mHandleId = FindFreeHandleSlot();
+        
+        // register this object to ObjectHandles
+        SoraObjectHandle handle(this);
+	}
+
 	SoraObject::~SoraObject(){
 		if(mParent) mParent->del(this);
         SoraObject* obj = mSubObjects;
@@ -152,7 +168,7 @@ namespace sora {
     const SoraVector3& SoraObject::getPosition() const {
         if(!mParent)
             return SoraMovable::getPosition();
-        return mParent->getPosition() + SoraMovable::getPosition();
+        return  SoraMovable::getPosition() + mParent->getPosition();
     }
     
     void SoraObject::setTransform(const SoraTransform& transform) {

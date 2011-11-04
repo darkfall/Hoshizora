@@ -431,6 +431,14 @@ namespace sora{
 		return h;
 	}
 
+	SoraHandle SoraOGLRenderer::getMainWindowHandle() { 
+		return (SoraHandle)mainWindow;
+	}
+
+	SoraWindowInfoBase* SoraOGLRenderer::getMainWindow() { 
+		return mainWindow;
+	}
+
 	void SoraOGLRenderer::bindTexture(SoraTexture* tex) {
         if(!tex) {
             mCurrTexture = 0;
@@ -588,7 +596,7 @@ namespace sora{
         }
     }
     
-    RenderStateParam SoraOGLRenderer::getRenderState(RenderStateType) {
+    RenderStateParam SoraOGLRenderer::getRenderState(RenderStateType) const {
         
     }
 

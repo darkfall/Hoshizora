@@ -120,7 +120,7 @@ namespace sora {
 	
 	void SoraBGMManager::toNextBGM() {
 		if(mRandomBGMQueuePlay) {
-			uint32 newId = SoraCore::Ptr->randomInt(0, mBGMQueue.size());
+			uint32 newId = SoraCore::Ptr->RandomInt(0, mBGMQueue.size());
 			_playBGM(mBGMQueue[newId], newId);
 		}
 		else if(mCurrBGMId != -1 && mCurrBGMId < mBGMQueue.size()-1) {
@@ -146,7 +146,7 @@ namespace sora {
 		return mBGMQueue.size();
 	}
 	
-	void SoraBGMManager::setVolume(float32 volume) { 
+	void SoraBGMManager::setVolume(float volume) { 
 		SET_ENV_FLOAT("BgmVolume", bgmVolume);
 		
 		if(mCurrBGMId >= 0 && mCurrBGMId < mBGMQueue.size())
@@ -154,36 +154,36 @@ namespace sora {
 		bgmVolume = volume;
 	}
 	
-	float32 SoraBGMManager::getVolume() const {
+	float SoraBGMManager::getVolume() const {
 		return bgmVolume;
 	}
 	
-	void SoraBGMManager::setPitch(float32 pitch) {
+	void SoraBGMManager::setPitch(float pitch) {
 		bgmPitch = pitch;
 	}
 	
-	float32 SoraBGMManager::getPitch() const {
+	float SoraBGMManager::getPitch() const {
 		return bgmPitch;
 	}
 	
-	void SoraBGMManager::setPan(float32 pan) {
+	void SoraBGMManager::setPan(float pan) {
 		bgmPan = pan;
 	}
 	
-	float32 SoraBGMManager::getPan() const {
+	float SoraBGMManager::getPan() const {
 		return bgmPan;
 	}
 	
-	void SoraBGMManager::setFadeTime(float32 fadeInTime, float32 fadeOutTime) {
+	void SoraBGMManager::setFadeTime(float fadeInTime, float fadeOutTime) {
 		mFadeInTime	 = fadeInTime;
 		mFadeOutTime = fadeOutTime;
 	}
 	
-	float32 SoraBGMManager::getFadeInTime() const {
+	float SoraBGMManager::getFadeInTime() const {
 		return mFadeInTime;
 	}
 	
-	float32 SoraBGMManager::getFadeOutTime() const {
+	float SoraBGMManager::getFadeOutTime() const {
 		return mFadeOutTime;
 	}
 	
@@ -195,7 +195,7 @@ namespace sora {
 		return mRandomBGMQueuePlay;
 	}
 	
-	void SoraBGMManager::onUpdate(float32 delta) {
+	void SoraBGMManager::onUpdate(float delta) {
 		if(mPaused)
 			return; 
 				
@@ -234,7 +234,7 @@ namespace sora {
 	}
 	
 	
-	int32 SoraBGMManager::playBGS(const std::wstring& bgmsPath, uint32 bgsid, int32 looptimes, float32 volumeScale, float32 bgmVolumeScale) {
+	int32 SoraBGMManager::playBGS(const std::wstring& bgmsPath, uint32 bgsid, int32 looptimes, float volumeScale, float bgmVolumeScale) {
 		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
 		while(itBgs != mBGSounds.end()) {
 			if(bgmsPath.compare(itBgs->second->path) != 0) {
@@ -291,7 +291,7 @@ namespace sora {
 		}
 	}
 	
-	void SoraBGMManager::adjustBGSVolume(uint32 bgsid, float32 volumeScale) {
+	void SoraBGMManager::adjustBGSVolume(uint32 bgsid, float volumeScale) {
 		BGS_MAP::iterator itBgs = mBGSounds.find(bgsid);
 		if(itBgs != mBGSounds.end()) {
 			if(itBgs->second->bgsFile != NULL) {

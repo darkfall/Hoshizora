@@ -56,7 +56,7 @@ namespace sora{
 		return false;
 	}
 
-	void SoraHGERenderer::beginScene(uint32 color, ulong32 target, bool clear) {
+	void SoraHGERenderer::beginScene(uint32 color, SoraHandle target, bool clear) {
 		pHGE->Gfx_BeginScene(target);
 		if(clear)
 			pHGE->Gfx_Clear(color);
@@ -154,8 +154,8 @@ namespace sora{
 		return pHGE->System_GetState(HGE_WINDOWED);
 	}
 
-	ulong32 SoraHGERenderer::getMainWindowHandle() {
-		return (ulong32)pHGE->System_GetState(HGE_HWND);
+	SoraHandle SoraHGERenderer::getMainWindowHandle() {
+		return (SoraHandle)pHGE->System_GetState(HGE_HWND);
 	}
 	
 	SoraWindowInfoBase* SoraHGERenderer::getMainWindow() {
@@ -185,34 +185,32 @@ namespace sora{
 		}
 	}
 
-	SoraTexture* SoraHGERenderer::createTexture(const SoraWString& sTexturePath, bool bMipmap) {
+	SoraTexture* SoraHGERenderer::createTexture(const StringType& sTexturePath, bool bMipmap) {
 		HTEXTURE htex = pHGE->Texture_Load(ws2s(sTexturePath).c_str(), 0UL, bMipmap);
 		if(htex) {
 			SoraTexture* tex = new SoraTexture;
-			tex->mTextureID = static_cast<ulong32>(htex);
+			tex->mTextureID = static_cast<SoraHandle>(htex);
 			tex->mTextureWidth		= pHGE->Texture_GetWidth(htex);
 			tex->mTextureHeight		= pHGE->Texture_GetHeight(htex);
 			tex->mOriginalWidth		= pHGE->Texture_GetWidth(htex, true);
 			tex->mOriginalHeight		= pHGE->Texture_GetHeight(htex, true);
 			return tex;
-		} else
-			throw SORA_EXCEPTION(RuntimeException, "Error creating Texture");
+		}
 		return 0;
 	}
 	
 	// to do
-	SoraTexture* SoraHGERenderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap) {
+	SoraTexture* SoraHGERenderer::createTextureFromMem(void* ptr, uint32 size, bool bMipmap) {
 		HTEXTURE htex = pHGE->Texture_Load(static_cast<const char*>(ptr), size, bMipmap);
 		if(htex) {
 			SoraTexture* tex = new SoraTexture;
-			tex->mTextureID = static_cast<ulong32>(htex);
+			tex->mTextureID = static_cast<SoraHandle>(htex);
 			tex->mTextureWidth		= pHGE->Texture_GetWidth(htex);
 			tex->mTextureHeight		= pHGE->Texture_GetHeight(htex);	
 			tex->mOriginalWidth		= pHGE->Texture_GetWidth(htex, true);
 			tex->mOriginalHeight	= pHGE->Texture_GetHeight(htex, true);
 			return tex;
-		} else
-			throw SORA_EXCEPTION(RuntimeException, "Error creating texture");
+		}
 		return 0;
 	}
 
@@ -220,14 +218,13 @@ namespace sora{
 		HTEXTURE htex = pHGE->Texture_Create(w, h);
 		if(htex) {
 			SoraTexture* tex = new SoraTexture;
-			tex->mTextureID = static_cast<ulong32>(htex);
+			tex->mTextureID = static_cast<SoraHandle>(htex);
 			tex->mTextureWidth		= w;
 			tex->mTextureHeight		= h;
 			tex->mOriginalHeight	= h;
 			tex->mOriginalWidth		= w;
 			return tex;
-		} else
-			throw SORA_EXCEPTION(RuntimeException, "Error creating Texture");
+		}
 		return 0;
 	}
 
@@ -239,14 +236,13 @@ namespace sora{
 		pHGE->Texture_Unlock(htex);
 		if(htex) {
 			SoraTexture* tex = new SoraTexture;
-			tex->mTextureID = static_cast<ulong32>(htex);
+			tex->mTextureID = static_cast<SoraHandle>(htex);
 			tex->mTextureWidth		= w;
 			tex->mTextureHeight		= h;
 			tex->mOriginalHeight	= h;
 			tex->mOriginalWidth		= w;
 			return tex;
-		} else
-			throw SORA_EXCEPTION(RuntimeException, "Error creating Texture");
+		}
 		return 0;
 	}
 
@@ -300,20 +296,29 @@ namespace sora{
 
 	int32 SoraHGERenderer::_modeToDXMode(int32 mode) {
 		switch(mode) {
-			case SORA_LINE: return HGEPRIM_LINES;
-			case SORA_TRIANGLES: return HGEPRIM_TRIPLES;
-			case SORA_TRIANGLES_FAN: return HGEPRIM_TRIPLES_FAN;
-			case SORA_TRIANGLES_STRIP: return HGEPRIM_TRIPLES_STRIP;
-			case SORA_QUAD: return HGEPRIM_QUADS;
+			case Line: return HGEPRIM_LINES;
+			case LineLoop: return HGEPRIM_LINE_LOOP;
+			case Triangle: return HGEPRIM_TRIPLES;
+			case TriangleFan: return HGEPRIM_TRIPLES_FAN;
+			case TriangleStrip: return HGEPRIM_TRIPLES_STRIP;
+			case Quad: return HGEPRIM_QUADS;
 		}
 		return HGEPRIM_TRIPLES;
 	}
 
-	void SoraHGERenderer::renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 size, int32 mode) {
+	void SoraHGERenderer::renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 size, RenderMode mode) {
 		int32 maxSize;
-		hgeVertex* vtxBuffer = pHGE->Gfx_StartBatch(_modeToDXMode(mode), tex->mTextureID, blendMode, &maxSize);
-		memcpy(&vtxBuffer[0], vertices, sizeof(hgeVertex)*size);
-		pHGE->Gfx_FinishBatch(size);
+		hgeVertex* vtxBuffer = pHGE->Gfx_StartBatch(_modeToDXMode(mode), tex!=0?tex->mTextureID:0, blendMode, &maxSize);
+		int32 leftSize = size;
+		while(leftSize > maxSize) {
+			memcpy(vtxBuffer, &vertices[size-leftSize], sizeof(hgeVertex)*maxSize);
+			pHGE->Gfx_FinishBatch(maxSize);
+//			pHGE->_render_batch();
+			hgeVertex* vtxBuffer = pHGE->Gfx_StartBatch(_modeToDXMode(mode), tex!=0?tex->mTextureID:0, blendMode, &maxSize);
+			leftSize -= maxSize;
+		}
+		memcpy(vtxBuffer, &vertices[size-leftSize], sizeof(hgeVertex)*leftSize);
+		pHGE->Gfx_FinishBatch(leftSize);
 		pHGE->_render_batch();
 	}
 
@@ -325,7 +330,7 @@ namespace sora{
 		pHGE->Gfx_SetClipping(x, y, w, h);
 	}
 
-	void SoraHGERenderer::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
+	void SoraHGERenderer::setTransform(float x, float y, float dx, float dy, float rot, float hscale, float vscale) {
 		pHGE->Gfx_SetTransform(x, y, dx, dy, rot, hscale, vscale);
 	}
 
@@ -337,19 +342,19 @@ namespace sora{
 		return SoraMatrix4(pHGE->Gfx_GetTransformMatrix());
 	}
 	
-	void SoraHGERenderer::setTransformWindowSize(float32 w, float32 h) {
+	void SoraHGERenderer::setTransformWindowSize(float w, float h) {
 		return;
 	}
 
-	ulong32 SoraHGERenderer::createTarget(int width, int height, bool zbuffer) {
+	SoraHandle SoraHGERenderer::createTarget(int width, int height, bool zbuffer) {
 		return pHGE->Target_Create(width, height, zbuffer);
 	}
 
-	void SoraHGERenderer::freeTarget(ulong32 t) {
+	void SoraHGERenderer::freeTarget(SoraHandle t) {
 		pHGE->Target_Free(t);
 	}
 
-	ulong32 SoraHGERenderer::getTargetTexture(ulong32 t) {
+	SoraHandle SoraHGERenderer::getTargetTexture(SoraHandle t) {
 		HTEXTURE tex = pHGE->Target_GetTexture(t);
 		TARGET_TEX_MAP::iterator itTex = mTargetTextures.find(tex);
 		if(itTex != mTargetTextures.end())
@@ -359,8 +364,8 @@ namespace sora{
 												pHGE->Texture_GetHeight(tex),
 												pHGE->Texture_GetWidth(tex, true),
 												pHGE->Texture_GetHeight(tex, true));
-		mTargetTextures[tex] = (ulong32)ptex;
-		return (ulong32)ptex;
+		mTargetTextures[tex] = (SoraHandle)ptex;
+		return (SoraHandle)ptex;
 	}
 
 	StringType SoraHGERenderer::videoInfo() {
@@ -368,23 +373,23 @@ namespace sora{
 		return str;
 	}
 
-	ulong32 SoraHGERenderer::getVideoDeviceHandle() {
+	SoraHandle SoraHGERenderer::getVideoDeviceHandle() {
 		return pHGE->getVideoDeviceHandle();
 	}
     
-    void SoraHGERenderer::snapshot(const SoraString& path) {
+    void SoraHGERenderer::snapshot(const StringType& path) {
         pHGE->System_Snapshot(path.c_str());
     }
     
-    void SoraHGERenderer::setViewPoint(float32 x, float32 y, float32 z) {
+    void SoraHGERenderer::setViewPoint(float x, float y, float z) {
         
     }
 
-	void SoraHGERenderer::setIcon(const SoraString& icon) {
+	void SoraHGERenderer::setIcon(const StringType& icon) {
 		pHGE->System_SetState(HGE_ICON, icon.c_str());
 	}
 
-	void SoraHGERenderer::setCursor(const SoraString& cursor) {
+	void SoraHGERenderer::setCursor(const StringType& cursor) {
 		pHGE->System_SetState(HGE_CURSOR, cursor.c_str());
 	}
 	
@@ -486,6 +491,34 @@ namespace sora{
 			++n;
 		}
 	}
+
+	void SoraHGERenderer::multTransformMatrix(const SoraMatrix4& matrix) {
+		pHGE->Gfx_MultTransformMatrix(&matrix.x[0]);
+	}
+
+	void SoraHGERenderer::setProjectionMatrix(const SoraMatrix4& matrix) {
+		pHGE->Gfx_SetProjectionMatrix(&matrix.x[0]);
+	}
+
+    SoraMatrix4 SoraHGERenderer::getProjectionMatrix() const {
+		return pHGE->Gfx_GetProjectionMatrix();
+	}
+		
+	void SoraHGERenderer::setRenderState(RenderStateType type, RenderStateParam param) {
+		pHGE->Gfx_SetRenderStateParam((int)type, (int)param);
+	}
+
+    RenderStateParam SoraHGERenderer::getRenderState(RenderStateType type) const {
+		return (RenderStateParam)pHGE->Gfx_GetRenderStateParam((int)type);
+	}
+
+	void SoraHGERenderer::switchTo2D() {
+        pHGE->ResetProjectionMatrix(0.f, 1.f);
+    }
+    
+    void SoraHGERenderer::switchTo3D() {
+        pHGE->ResetProjectionMatrix(-1000.f, 1000.f);
+    }
 
 #ifdef SORA_AUTOMATIC_REGISTER
 	SORA_STATIC_RUN_CODE(SoraCore::Instance()->registerRenderSystem(new SoraHGERenderer));

@@ -46,8 +46,8 @@ namespace sora {
     void SoraShape::addPoint(float x, float y, uint32 color, float tx, float ty) {
         if(mTexture && tx == 0.0 && ty == 0.0) {
             SoraTexture* tex = (SoraTexture*)mTexture;
-            tx = 1.0 / tex->mTextureWidth;
-            ty = 1.0 / tex->mTextureHeight;
+            tx = 1.0f / tex->mTextureWidth;
+            ty = 1.0f / tex->mTextureHeight;
         }
         SoraVertex vertex(x, y, tx, ty);
         vertex.col = color;

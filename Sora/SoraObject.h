@@ -168,7 +168,7 @@ namespace sora {
         bool mAutoReleasePhysicBody;
         SoraPhysicBody* mPhysicBody;
         
-        SoraObject(const SoraObject& rhs);
+		SoraObject(const SoraObject& rhs);
         SoraObject& operator =(const SoraObject& rhs);
         
     private:
