@@ -27,7 +27,7 @@ namespace sora {
 		pTouch = SoraiOSTouch::Instance();
 	}
 	
-	void SoraiOSInput::getMousePos(float32 *x, float32 *y) {
+	void SoraiOSInput::getMousePos(float *x, float *y) {
 		// no input, impossible place
 		if(pTouch->getTouchCount() == 0) {
 			*x = -1.f;
@@ -39,11 +39,11 @@ namespace sora {
 		}
 	}
 	
-	void SoraiOSInput::setMousePos(float32 x, float32 y) {
+	void SoraiOSInput::setMousePos(float x, float y) {
 		// do nothing, cannot set
 	}
 	
-	float32 SoraiOSInput::getMousePosX() {
+	float SoraiOSInput::getMousePosX() {
 		if(pTouch->getTouchCount() == 0) {
 			return -1.f;
 		} else {
@@ -52,7 +52,7 @@ namespace sora {
 		}
 	}
 	
-	float32 SoraiOSInput::getMousePosY() {
+	float SoraiOSInput::getMousePosY() {
 		if(pTouch->getTouchCount() == 0) {
 			return -1.f;
 		} else {

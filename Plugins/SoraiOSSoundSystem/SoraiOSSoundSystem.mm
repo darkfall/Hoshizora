@@ -45,11 +45,11 @@ namespace sora {
         // do nothing
     }
     
-    SoraMusicFile* SoraiOSSoundSystem::createMusicFileFromMemory(void* data, ulong32 size) {
+    SoraMusicFile* SoraiOSSoundSystem::createMusicFileFromMemory(void* data, uint32 size) {
         return 0;
     }
     
-    SoraSoundEffectFile* SoraiOSSoundSystem::createSoundEffectFileFromMemory(void* data, ulong32 size) {
+    SoraSoundEffectFile* SoraiOSSoundSystem::createSoundEffectFileFromMemory(void* data, uint32 size) {
         return 0;
     }
     

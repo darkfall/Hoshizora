@@ -124,7 +124,7 @@ namespace sora {
 			glDeleteShader(mShader);
 	}
 		
-	void SoraGLSLShader::setTexture(const SoraString& decalName, ulong32 tex) {
+	void SoraGLSLShader::setTexture(const SoraString& decalName, SoraHandle tex) {
 		mTexture1Name = decalName;
 		mTexture1 = ((SoraTexture*)tex)->mTextureID;
 	}
@@ -133,7 +133,7 @@ namespace sora {
         return glGetUniformLocation(mProgram, name);
     }
 	
-	bool SoraGLSLShader::setParameterfv(const char* name, float32* val, uint32 size) {
+	bool SoraGLSLShader::setParameterfv(const char* name, float* val, uint32 size) {
 		if(mType == 0)
 			return false;
 		
@@ -193,7 +193,7 @@ namespace sora {
 		return true;
 	}
 	
-	bool SoraGLSLShader::getParameterfv(const char* name, float32* val, uint32 size) {
+	bool SoraGLSLShader::getParameterfv(const char* name, float* val, uint32 size) {
 		if(mType == 0)
 			return false;
 		

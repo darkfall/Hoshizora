@@ -54,6 +54,8 @@ namespace sora {
                 case SoraPlaybackEvent::Paused: setName(STR_ID_PLAY_PAUSED); break;
                 case SoraPlaybackEvent::Resumed: setName(STR_ID_PLAY_RESUMED); break;
                 case SoraPlaybackEvent::Stopped: setName(STR_ID_PLAY_STOPPED); break;
+                default:
+                    break;
             }
         }
         SoraPlayBackEventType eventType;

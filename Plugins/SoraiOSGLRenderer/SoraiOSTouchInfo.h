@@ -31,12 +31,12 @@ namespace sora {
 		// touch phase
 		SoraiOSTouchPhase phase;
 		// touch position
-		float32 x, y;
+		float x, y;
 		// delta time since last change;
-		float32 delta;
-		float32 timestamp;
+		float delta;
+		float timestamp;
 		// delta position since last change
-		float32 dx, dy;
+		float dx, dy;
 		// tapcount
 		uint32 tapCount;
 		// fingerid

@@ -51,7 +51,7 @@ namespace sora {
     	
         void setPosition(float x, float y, float z=0.f);
         void setPosition(const SoraVector3& pos);
-        const SoraVector3& getPosition() const;
+        SoraVector3 getPosition() const;
         
         float getPositionX() const;
         float getPositionY() const;

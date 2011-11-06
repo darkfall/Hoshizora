@@ -379,7 +379,7 @@ namespace sora{
 		_glSetProjectionMatrix(w, h);
 	}
 
-	void SoraOGLRenderer::setWindowTitle(const SoraWString& title) {
+	void SoraOGLRenderer::setWindowTitle(const StringType& title) {
 		glfwSetWindowTitle(ws2s(title).c_str());
 	}
 

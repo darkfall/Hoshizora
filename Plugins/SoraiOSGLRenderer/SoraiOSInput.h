@@ -26,10 +26,10 @@ namespace sora {
 	public:
 		SoraiOSInput();
 		// simple delegate methods for guichan
-		void	getMousePos(float32 *x, float32 *y);
-		void	setMousePos(float32 x, float32 y);
-		float32 getMousePosX();
-		float32 getMousePosY();
+		void	getMousePos(float *x, float *y);
+		void	setMousePos(float x, float y);
+		float getMousePosX();
+		float getMousePosY();
 		
 		bool	keyDown(int32 key);
 		bool	keyUp(int32 key);
@@ -53,7 +53,7 @@ namespace sora {
 		
 		int32	getGesture() { return 0; }
 		
-		void setWindowHandle(ulong32 handle) {}
+		void setWindowHandle(SoraHandle handle) {}
 		
 	private:
 		SoraiOSTouch* pTouch;

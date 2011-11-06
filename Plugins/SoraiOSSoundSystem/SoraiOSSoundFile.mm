@@ -42,7 +42,7 @@ namespace sora {
         return 0;
     }
     
-    int32 SoraiOSMusicFile::readFileMem(void* ptr, ulong32 size) {
+    int32 SoraiOSMusicFile::readFileMem(void* ptr, uint32 size) {
         // we don't support memory here
         return 0;
     }
@@ -82,36 +82,36 @@ namespace sora {
         publishEvent(SoraPlaybackEvent::Resumed);
     }
     
-    void SoraiOSMusicFile::setVolume(float32 vol) {
+    void SoraiOSMusicFile::setVolume(float vol) {
         [mMusicTrack setVolume: vol];
     }
     
-    void SoraiOSMusicFile::setPan(float32 pan) {
+    void SoraiOSMusicFile::setPan(float pan) {
         [mMusicTrack setPan: pan];
     }
     
-    void SoraiOSMusicFile::setPitch(float32 pitch) {
+    void SoraiOSMusicFile::setPitch(float pitch) {
       //  [mMusicTrack setPitch: pitch];
     }
     
-    float32 SoraiOSMusicFile::getPan() const {
+    float SoraiOSMusicFile::getPan() const {
         return [mMusicTrack pan];
     }
     
-    float32 SoraiOSMusicFile::getPitch() const {
+    float SoraiOSMusicFile::getPitch() const {
         return 0.f;
     }
     
-    float32 SoraiOSMusicFile::getVolume() const {
+    float SoraiOSMusicFile::getVolume() const {
         return [mMusicTrack volume];
     }
     
     
-    void SoraiOSMusicFile::setPosition(float32 x, float32 y, float32 z) {
+    void SoraiOSMusicFile::setPosition(float x, float y, float z) {
         
     }
     
-    void SoraiOSMusicFile::getPosition(float32& x, float32& y, float32& z) {
+    void SoraiOSMusicFile::getPosition(float& x, float& y, float& z) {
         
     }
     
@@ -169,7 +169,7 @@ namespace sora {
         return mBuffer != nil;
     }
     
-    int32 SoraiOSSoundEffectFile::readFileMem(void* ptr, ulong32 size) {
+    int32 SoraiOSSoundEffectFile::readFileMem(void* ptr, uint32 size) {
         // no memory buffer support here
         return 0;
     }
@@ -193,35 +193,35 @@ namespace sora {
         }
     }
     
-    void SoraiOSSoundEffectFile::setPosition(float32 x, float32 y, float32 z) {
+    void SoraiOSSoundEffectFile::setPosition(float x, float y, float z) {
         
     }
     
-    void SoraiOSSoundEffectFile::getPosition(float32& x, float32& y, float32& z) {
+    void SoraiOSSoundEffectFile::getPosition(float& x, float& y, float& z) {
         
     }
     
-    void SoraiOSSoundEffectFile::setVolume(float32 vol) {
+    void SoraiOSSoundEffectFile::setVolume(float vol) {
         mVolume = vol;
     }
     
-    void SoraiOSSoundEffectFile::setPan(float32 pan) {
+    void SoraiOSSoundEffectFile::setPan(float pan) {
         mPan = pan;
     }
     
-    void SoraiOSSoundEffectFile::setPitch(float32 pitch) {
+    void SoraiOSSoundEffectFile::setPitch(float pitch) {
         mPitch = pitch;
     }
     
-    float32 SoraiOSSoundEffectFile::getPan() const {
+    float SoraiOSSoundEffectFile::getPan() const {
         return mPan;
     }
     
-    float32 SoraiOSSoundEffectFile::getPitch() const {
+    float SoraiOSSoundEffectFile::getPitch() const {
         return mPitch;
     }
     
-    float32 SoraiOSSoundEffectFile::getVolume() const {
+    float SoraiOSSoundEffectFile::getVolume() const {
         return mVolume;
     }
     

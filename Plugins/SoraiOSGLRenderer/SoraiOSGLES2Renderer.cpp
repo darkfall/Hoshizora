@@ -9,7 +9,6 @@
 
 #include "SoraiOSGLES2Renderer.h"
 
-#include "SoraStringConv.h"
 #include "SoraInternalLogger.h"
 #include "SoraFileUtility.h"
 #include "SoraMath.h"
@@ -25,6 +24,8 @@
 #include "SoraiOSDeviceHelper.h"
 #include "SoraSprite.h"
 #include "SoraResourceFile.h"
+
+#include "Convert.h"
 
 #include "SOIL/SOIL.h"
 
@@ -233,7 +234,7 @@ namespace sora {
         }*/
 	}
 	
-	void SoraiOSGLES2Renderer::_glBeginScene(ulong32 color, ulong32 t, bool clear) {
+	void SoraiOSGLES2Renderer::_glBeginScene(uint32 color, SoraHandle t, bool clear) {
 		int32 width = _oglWindowInfo.width;
 		int32 height = _oglWindowInfo.height;
         
@@ -328,7 +329,7 @@ namespace sora {
         
 	}
 
-	void SoraiOSGLES2Renderer::beginScene(uint32 color, ulong32 target, bool clear) {
+	void SoraiOSGLES2Renderer::beginScene(uint32 color, SoraHandle target, bool clear) {
 		_glBeginScene(color, target, clear);
 	}
 
@@ -346,7 +347,7 @@ namespace sora {
 		_glSetProjectionMatrix(_oglWindowInfo.width, _oglWindowInfo.height);
 		applyTransform();
 		
-		return (ulong32)windowInfo;
+		return (SoraHandle)windowInfo;
 		
 		return 0;
 	}
@@ -354,7 +355,7 @@ namespace sora {
 	void SoraiOSGLES2Renderer::setWindowSize(int32 w, int32 h) {
 	}
 	
-	void SoraiOSGLES2Renderer::setWindowTitle(const SoraWString& title) {
+	void SoraiOSGLES2Renderer::setWindowTitle(const StringType& title) {
 	}
 	
 	void SoraiOSGLES2Renderer::setWindowPos(int32 px, int32 py) {
@@ -368,11 +369,11 @@ namespace sora {
         return true;
 	}
 	
-	ulong32 SoraiOSGLES2Renderer::getVideoDeviceHandle() {
-		return (ulong32)this;
+	SoraHandle SoraiOSGLES2Renderer::getVideoDeviceHandle() {
+		return (SoraHandle)this;
 	}
 	
-	int32 SoraiOSGLES2Renderer::_glTextureGetWidth(ulong32 tex, bool bOriginal) {
+	int32 SoraiOSGLES2Renderer::_glTextureGetWidth(SoraHandle tex, bool bOriginal) {
 		/*GLint w; 
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
@@ -381,7 +382,7 @@ namespace sora {
 		return 0;
 	}
 	
-	int32 SoraiOSGLES2Renderer::_glTextureGetHeight(ulong32 tex, bool bOriginal) {
+	int32 SoraiOSGLES2Renderer::_glTextureGetHeight(SoraHandle tex, bool bOriginal) {
 		/*GLint h; 
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
@@ -470,13 +471,13 @@ namespace sora {
 		}
 	}
 
-	SoraTexture* SoraiOSGLES2Renderer::createTexture(const SoraWString& sTexturePath, bool bMipmap) {
+	SoraTexture* SoraiOSGLES2Renderer::createTexture(const StringType& sTexturePath, bool bMipmap) {
 		return 0;
 	}
 	
-	SoraTexture* SoraiOSGLES2Renderer::createTextureFromMem(void* ptr, ulong32 size, bool bMipmap) {
+	SoraTexture* SoraiOSGLES2Renderer::createTextureFromMem(void* ptr, uint32 size, bool bMipmap) {
 		/*return mTextureCreateWithData(ptr, size);*/
-		ulong32  texid;
+		SoraHandle  texid;
 		int w, h, channels;
 		
 		texid = SOIL_load_OGL_texture_and_info_from_memory((const unsigned char* const)ptr,
@@ -539,7 +540,7 @@ namespace sora {
 		/*size_t size = w*h*4;
 		GLubyte* bitData = new GLubyte[size];
 		
-		ulong32 texid = SOIL_create_OGL_texture(bitData,
+		SoraHandle texid = SOIL_create_OGL_texture(bitData,
 												w,
 												h,
 												4,
@@ -567,7 +568,7 @@ namespace sora {
 		if(w > 1024 || h > 1024)
 			return NULL;
 		
-		ulong32 texid = SOIL_create_OGL_texture((unsigned char*)data,
+		SoraHandle texid = SOIL_create_OGL_texture((unsigned char*)data,
 												w,
 												h,
 												4,
@@ -652,10 +653,11 @@ namespace sora {
 	
 	int32 SoraiOSGLES2Renderer::_modeToGLMode(int32 mode) {
 		switch (mode) {
-	//		case SORA_LINE:				return GL_LINE;
-			case SORA_TRIANGLES:		return GL_TRIANGLES;
-			case SORA_TRIANGLES_FAN:	return GL_TRIANGLE_FAN;
-			case SORA_TRIANGLES_STRIP:	return GL_TRIANGLE_STRIP;
+			case Line:			return GL_LINES;
+            case LineLoop:      return GL_LINE_LOOP;
+			case Triangle:		return GL_TRIANGLES;
+			case TriangleFan:	return GL_TRIANGLE_FAN;
+			case TriangleStrip:	return GL_TRIANGLE_STRIP;
 	//		case SORA_QUAD:				return GL_QUADS;
 		}
 		return GL_TRIANGLES;
@@ -716,7 +718,7 @@ namespace sora {
 		flush();	
 	}
 	
-	void SoraiOSGLES2Renderer::renderWithVertices(SoraTexture* tex, int32 blendMode,  SoraVertex* vertices, uint32 vsize, int32 mode) {				
+	void SoraiOSGLES2Renderer::renderWithVertices(SoraTexture* tex, int32 blendMode,  SoraVertex* vertices, uint32 vsize, RenderMode mode) {				
 		glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
 		if(tex) {
 			
@@ -814,7 +816,7 @@ namespace sora {
         }
 	}
 
-	void SoraiOSGLES2Renderer::setTransform(float32 x, float32 y, float32 dx, float32 dy, float32 rot, float32 hscale, float32 vscale) {
+	void SoraiOSGLES2Renderer::setTransform(float x, float y, float dx, float dy, float rot, float hscale, float vscale) {
 		_oglWindowInfo.x		=	x;
 		_oglWindowInfo.y		=	y;
 		_oglWindowInfo.dx		=	dx;
@@ -826,13 +828,13 @@ namespace sora {
 		applyTransform();
 	}
 
-	ulong32 SoraiOSGLES2Renderer::createTarget(int width, int height, bool zbuffer) {        
+	SoraHandle SoraiOSGLES2Renderer::createTarget(int width, int height, bool zbuffer) {        
 		SoraRenderTargetiOSGL* t = new SoraRenderTargetiOSGL(width, height, zbuffer);
 		liTargets.push_back((SoraRenderTargetiOSGL*)t);
-		return (ulong32)t;
+		return (SoraHandle)t;
 	}
 
-	void SoraiOSGLES2Renderer::freeTarget(ulong32 t) {
+	void SoraiOSGLES2Renderer::freeTarget(SoraHandle t) {
 		SoraRenderTargetiOSGL* pt = (SoraRenderTargetiOSGL*)t;
 		if(!pt) return;
 		std::list<SoraRenderTargetiOSGL*>::iterator itt = liTargets.begin();
@@ -846,7 +848,7 @@ namespace sora {
 		}
 	}
 
-	ulong32 SoraiOSGLES2Renderer::getTargetTexture(ulong32 t) {
+	SoraHandle SoraiOSGLES2Renderer::getTargetTexture(SoraHandle t) {
 		SoraRenderTargetiOSGL* pt = (SoraRenderTargetiOSGL*)t;
         assert(pt != NULL);
 		
@@ -880,7 +882,7 @@ namespace sora {
         return 0;
 	}
 	
-	void SoraiOSGLES2Renderer::snapshot(const SoraString& file) {
+	void SoraiOSGLES2Renderer::snapshot(const StringType& file) {
 	}
 	
 	void SoraiOSGLES2Renderer::setViewPoint(float, float, float) {
@@ -975,11 +977,11 @@ namespace sora {
 		renderLine(x1, y2, x1+1.f, y1, color, lineWidth, z);
 	}
     
-    void SoraiOSGLES2Renderer::setIcon(const SoraString& icon) {
+    void SoraiOSGLES2Renderer::setIcon(const StringType& icon) {
         
     }
     
-    void SoraiOSGLES2Renderer::setCursor(const SoraString& cursor) {
+    void SoraiOSGLES2Renderer::setCursor(const StringType& cursor) {
         
     }
     
@@ -1002,12 +1004,82 @@ namespace sora {
         }
     }
     
-    ulong32 SoraiOSGLES2Renderer::getMainWindowHandle() { 
-        return (ulong32)mainWindow;
+    SoraHandle SoraiOSGLES2Renderer::getMainWindowHandle() { 
+        return (SoraHandle)mainWindow;
     }
     
     SoraWindowInfoBase* SoraiOSGLES2Renderer::getMainWindow() {
         return mainWindow;
+    }
+    
+    void SoraiOSGLES2Renderer::setTransformMatrix(const SoraMatrix4& matrix) {
+        flush();
+        
+        glMatrixMode(GL_MODELVIEW);
+        glLoadMatrixf(&matrix.x[0]);
+    }
+    
+    SoraMatrix4 SoraiOSGLES2Renderer::getTransformMatrix() const {        
+        glMatrixMode(GL_MODELVIEW);
+        float matrix[16];
+        glGetFloatv(GL_MODELVIEW_MATRIX, &matrix[0]);
+        return SoraMatrix4(matrix);
+    }
+    
+    void SoraiOSGLES2Renderer::setProjectionMatrix(const SoraMatrix4& matrix) {
+        flush();
+        
+        glMatrixMode(GL_PROJECTION);
+        glLoadMatrixf(&matrix.x[0]);
+    }
+    
+    void SoraiOSGLES2Renderer::multTransformMatrix(const SoraMatrix4& matrix) {
+        flush();
+        
+        glMatrixMode(GL_MODELVIEW);
+        glMultMatrixf(&matrix.x[0]);
+    }
+    
+    SoraMatrix4 SoraiOSGLES2Renderer::getProjectionMatrix() const {
+        glMatrixMode(GL_PROJECTION);
+        float matrix[16];
+        glGetFloatv(GL_PROJECTION_MATRIX, &matrix[0]);
+        return SoraMatrix4(matrix);
+    }
+    
+    void SoraiOSGLES2Renderer::switchTo2D() {
+        if(!pCurTarget)
+            setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, _oglWindowInfo.width, _oglWindowInfo.height, 0.f, 0.f, 1.f));
+        else 
+            setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, pCurTarget->getWidth(), 0.f, pCurTarget->getHeight(), 0.f, 1.f));
+        
+        glDisable(GL_DITHER);
+        glDisable(GL_FOG);
+        
+		glDisable(GL_LIGHTING);
+		glDisable(GL_CULL_FACE);
+    }
+    
+    void SoraiOSGLES2Renderer::switchTo3D() {
+        if(!pCurTarget)
+            setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, _oglWindowInfo.width, _oglWindowInfo.height, 0.f, -1000.f, 1000.f));
+        else 
+            setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, pCurTarget->getWidth(), 0.f, pCurTarget->getHeight(), -1000.f, 1000.f));
+    }
+    
+    void SoraiOSGLES2Renderer::setRenderState(RenderStateType type, RenderStateParam param) {
+        switch(type) {
+            case TextureWrap0:
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, RenderParamToGLParam(param));
+                break;
+            case TextureWrap1:
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, RenderParamToGLParam(param));
+                break;
+        }
+    }
+    
+    RenderStateParam SoraiOSGLES2Renderer::getRenderState(RenderStateType) const {
+        
     }
     
 } // namespace sora

@@ -27,11 +27,12 @@
 #elif defined(OS_LINUX)
 
 #define GL_GLEXT_PROTOTYPES
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glext.h>
 
-#else defined(OS_IOS)
+#elif defined(OS_IOS)
 
 #include <OpenGLES/ES1/gl.h>
 #include <OpenGLES/ES1/glext.h>
@@ -82,10 +83,10 @@ namespace sora {
         
 	public:
 		
-		void setTexture(const SoraString& decalName, ulong32 tex);
-		bool setParameterfv(const char* name, float32* val, uint32 size);
+		void setTexture(const SoraString& decalName, SoraHandle tex);
+		bool setParameterfv(const char* name, float* val, uint32 size);
 		bool setParameteriv(const char* name, int32* val, uint32 size);
-        bool getParameterfv(const char* name, float32* val, uint32 size);
+        bool getParameterfv(const char* name, float* val, uint32 size);
         bool getParameteriv(const char* name, int32* val, uint32 size);
         
         GLuint getUniformLocaltion(const char* name);

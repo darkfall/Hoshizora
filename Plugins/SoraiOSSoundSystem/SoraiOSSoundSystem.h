@@ -32,8 +32,8 @@ namespace sora {
         SoraMusicFile* createMusicFile(bool bStream=false);
         SoraSoundEffectFile* createSoundEffectFile();
         
-        SoraMusicFile* createMusicFileFromMemory(void* data, ulong32 size);
-        SoraSoundEffectFile* createSoundEffectFileFromMemory(void* data, ulong32 size);
+        SoraMusicFile* createMusicFileFromMemory(void* data, uint32 size);
+        SoraSoundEffectFile* createSoundEffectFileFromMemory(void* data, uint32 size);
 		/*
          update sound device
          */

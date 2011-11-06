@@ -22,8 +22,7 @@
 namespace flower {
     
     void MainWindow::init() {
-        mFSManager.defState(new StateMenu, "menu");
-            
+        
         sora::SoraiOSInitializer::Instance()->enableAccelerometer(true);
         
         if(!ThemeController::Instance()->loadConfig("ThemeConfig.xml")) {
@@ -39,11 +38,19 @@ namespace flower {
         
         HudController::Instance()->setFont("STHeitiSC-Medium", 20);
         
+
+        mFSManager.defState(new StateMenu, "menu");
+             mBg = sora::SoraCore::Ptr->createSprite("bg.png");
         mFSManager.switchToState("menu");
 
     }
     
     bool MainWindow::renderFunc() {
+    //    sora::SoraCore::Ptr->beginScene();
+        mBg->render(0.f, 0.f);
+    
+   //     sora::SoraCore::Ptr->endScene();
+
         mFSManager.onRender();
         return false;
     }

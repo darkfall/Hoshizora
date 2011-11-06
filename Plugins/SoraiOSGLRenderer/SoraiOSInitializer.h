@@ -20,7 +20,7 @@
 
 #include "SoraiOSSoundSystem/SoraOALParam.h"
 
-#define SORA_USE_GLES2
+//#define SORA_USE_GLES2
 
 
 namespace sora {

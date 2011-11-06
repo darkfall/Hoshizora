@@ -59,7 +59,7 @@
     printf("%f, %f, %f\n", self.contentScaleFactor, ((CAEAGLLayer *)self.layer).contentsScale, [UIScreen mainScreen].scale);
     
     sora::setEAGLView(self);
-    multisampling = true;
+ //   multisampling = true;
     initialized = true;
     
     msaaFramebuffer = nil;

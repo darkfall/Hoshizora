@@ -82,12 +82,12 @@ namespace sora {
 	SoraiOSFont::~SoraiOSFont() {
 		if(pfSpr)
 			delete pfSpr;
-		for(sora_hash_map<ulong32, iOSFontGlyph>::iterator itGlyph = ft_glyphs.begin(); itGlyph != ft_glyphs.end(); ++itGlyph)
+		for(sora_hash_map<stringId, iOSFontGlyph>::iterator itGlyph = ft_glyphs.begin(); itGlyph != ft_glyphs.end(); ++itGlyph)
 			itGlyph->second.release();
 	}
 	
-	void SoraiOSFont::render(float32 x, float32 y, const wchar_t* str, bool bxCenter, bool byCenter) {
-		float32 ox = x;
+	void SoraiOSFont::render(float x, float y, const wchar_t* str, bool bxCenter, bool byCenter) {
+		float ox = x;
 		if(bxCenter || byCenter) {
 			if(bxCenter)
 				x = x - ((int)getStringWidth(str) >> 1);
@@ -140,7 +140,7 @@ namespace sora {
 		}
 	}
     
-    void SoraiOSFont::print(float32 x, float32 y, int32 align, const wchar_t* pwstr, ...) {
+    void SoraiOSFont::print(float x, float y, SoraFont::Alignment align, const wchar_t* pwstr, ...) {
         va_list l;
         va_start(l, pwstr);
         
@@ -150,8 +150,12 @@ namespace sora {
         render(x, y, align, text);
     }
     
-    void SoraiOSFont::render(float32 x, float32 y, int32 align, const wchar_t* pwstr) {
-        float32 ox = x;
+    void SoraiOSFont::renderIn3D(float x, float y, Alignment align, const wchar_t* text, const SoraMatrix4& transformMat) {
+        
+    }
+    
+    void SoraiOSFont::render(float x, float y, SoraFont::Alignment align, const wchar_t* pwstr) {
+        float ox = x;
         if(align != SoraFont::AlignmentLeft) {
             if(align == SoraFont::AlignmentRight)
                 x = x - getStringWidth(pwstr);
@@ -206,8 +210,8 @@ namespace sora {
         } 
     }
     
-    float32 SoraiOSFont::getStringWidth(const wchar_t* pwstr) {
-        float32 width = 0.f;
+    float SoraiOSFont::getStringWidth(const wchar_t* pwstr) {
+        float width = 0.f;
         for(const wchar_t* p = pwstr; *p; ++p) {
             if(*p == L'\n')
                 break;
@@ -225,8 +229,8 @@ namespace sora {
 		return width;
     }
 	
-	float32 SoraiOSFont::getStringHeight(const wchar_t* pwstr) {
-		float32 height = getHeight();
+	float SoraiOSFont::getStringHeight(const wchar_t* pwstr) {
+		float height = getHeight();
 		for(const wchar_t* p = pwstr; *p; ++p) {
             if(*p == L'\n')
 				height += getHeight() + kerningHeight;
@@ -261,7 +265,7 @@ namespace sora {
 		return SoraVector(width+10.f, height+10.f);
     }
     
-    float32 SoraiOSFont::getWidthFromCharacter(wchar_t character, bool original) {
+    float SoraiOSFont::getWidthFromCharacter(wchar_t character, bool original) {
         stringId sid = crc32(&character, 1);
         iOSFontGlyph cglyph = ft_glyphs[sid];
         if(!cglyph.cached) {
@@ -278,7 +282,7 @@ namespace sora {
 
     }
     
-    float32 SoraiOSFont::getHeight() const {
+    float SoraiOSFont::getHeight() const {
         return size+kerningHeight;
     }
     
@@ -286,35 +290,35 @@ namespace sora {
         return size;
     }
     
-    void SoraiOSFont::setScale(float32 s) {
+    void SoraiOSFont::setScale(float s) {
         scale = s;
     }
     
-    void SoraiOSFont::setCharRotation(float32 rot) {
+    void SoraiOSFont::setCharRotation(float rot) {
         charRotation = rot;
     }
     
-    ulong32 SoraiOSFont::getColor(int32 i) {
+    uint32 SoraiOSFont::getColor(int32 i) {
         return pfSpr->getColor(i);
     }
     
-    void SoraiOSFont::setColor(ulong32 c, int32 i) {
+    void SoraiOSFont::setColor(uint32 c, int32 i) {
         pfSpr->setColor(c, i);
     }
 
-    void SoraiOSFont::setKerningWidth(float32 kw) {
+    void SoraiOSFont::setKerningWidth(float kw) {
         kerningWidth = kw;
     }
     
-    void SoraiOSFont::setKerningHeight(float32 kh) {
+    void SoraiOSFont::setKerningHeight(float kh) {
         kerningHeight = kh;
     }
     
-    float32 SoraiOSFont::getKerningWidth() const {
+    float SoraiOSFont::getKerningWidth() const {
         return kerningWidth;
     }
     
-    float32 SoraiOSFont::getKerningHeight() const {
+    float SoraiOSFont::getKerningHeight() const {
         return kerningHeight;
     }
     
@@ -322,23 +326,23 @@ namespace sora {
     
     }
     
-    void SoraiOSFont::setLineWidth(float32 width) {
+    void SoraiOSFont::setLineWidth(float width) {
         lineWidth = width;
     }
     
-    float32 SoraiOSFont::getLineWidth() const {
+    float SoraiOSFont::getLineWidth() const {
         return lineWidth;
     }
     
-    float32 SoraiOSFont::getCharRotation() const {
+    float SoraiOSFont::getCharRotation() const {
         return charRotation;
     }
     
-    float32 SoraiOSFont::getScale() const {
+    float SoraiOSFont::getScale() const {
         return scale;
     }
     
-    void SoraiOSFont::setLineRotation(float32 rot, bool rotateChar) {
+    void SoraiOSFont::setLineRotation(float rot, bool rotateChar) {
         lineRotation = rot;
         if(rotateChar)
             setCharRotation(rot);
@@ -346,7 +350,7 @@ namespace sora {
             setCharRotation(0.f);
     }
     
-    float32 SoraiOSFont::getLineRotation() const {
+    float SoraiOSFont::getLineRotation() const {
         return lineRotation;
     }
 

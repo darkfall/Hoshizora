@@ -368,7 +368,6 @@ namespace sora {
         SoraShape shape;
         
         SoraVector center(x, y);
-        float d = b - a;
         
         for(int i=0; i <= maxSegment; ++i) {
             float angle = a + i * (b - a) / maxSegment;
@@ -387,7 +386,6 @@ namespace sora {
         SoraShape shape;
         
         SoraVector center(x, y);
-        float d = b - a;
         
         for(int i=0; i <= maxSegment; ++i) {
             float angle = a + i * (b - a) / maxSegment;

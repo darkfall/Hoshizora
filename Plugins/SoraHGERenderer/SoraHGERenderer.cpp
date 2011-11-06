@@ -131,7 +131,7 @@ namespace sora{
 		pHGE->_AdjustWindow();
 	}
 
-	void SoraHGERenderer::setWindowTitle(const SoraWString& title) {
+	void SoraHGERenderer::setWindowTitle(const StringType& title) {
 		pHGE->System_SetState(HGE_TITLE, ws2s(title).c_str());
 	}
 

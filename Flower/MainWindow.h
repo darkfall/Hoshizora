@@ -14,6 +14,8 @@
 #include "SoraFSM.h"
 #include "SoraGameApp.h"
 
+#include "SoraSprite.h"
+
 namespace flower {
     
     class MainWindow: public sora::SoraiOSMainWindow {
@@ -27,6 +29,7 @@ namespace flower {
         void applicationDidBecomeActive();
         
     private:
+        sora::SoraSprite* mBg;
         sora::SoraFSMManager mFSManager;
     };
     

@@ -94,7 +94,7 @@ namespace sora {
 		virtual SoraHandle getVideoDeviceHandle() = 0;
 
 		virtual void setWindowSize(int32 w, int32 h) = 0;
-		virtual void setWindowTitle(const SoraWString& title) = 0;
+		virtual void setWindowTitle(const StringType& title) = 0;
 		virtual void setWindowPos(int32 px, int32 py) = 0;
 		virtual void setFullscreen(bool flag) = 0;
 		virtual bool isFullscreen() = 0;

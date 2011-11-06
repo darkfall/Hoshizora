@@ -30,7 +30,7 @@ namespace sora {
         ~SoraiOSMusicFile();
 		
 		int32 readFile(const StringType& sFilePath);
-		int32 readFileMem(void* ptr, ulong32 size);
+		int32 readFileMem(void* ptr, uint32 size);
 		void closeFile();
         
 		void play();
@@ -39,18 +39,18 @@ namespace sora {
 		void resume();
         
 		// 0 - 1
-		void setVolume(float32 vol);
+		void setVolume(float vol);
 		// -1.0 - 1.0
-		void setPan(float32 pan);
+		void setPan(float pan);
 		// 0.5 - 2.0
-		void setPitch(float32 pitch);
+		void setPitch(float pitch);
         
-		float32 getPan() const;
-		float32 getPitch() const;
-		float32 getVolume() const;
+		float getPan() const;
+		float getPitch() const;
+		float getVolume() const;
         
-		void setPosition(float32 x, float32 y, float32 z);
-		void getPosition(float32& x, float32& y, float32& z);
+		void setPosition(float x, float y, float z);
+		void getPosition(float& x, float& y, float& z);
         
         void setMusicPosition(int32 pos);
         int32 getMusicPosition() const;
@@ -74,25 +74,25 @@ namespace sora {
         ~SoraiOSSoundEffectFile();
 		
 		int32 readFile(const StringType& sFilePath);
-		int32 readFileMem(void* ptr, ulong32 size);
+		int32 readFileMem(void* ptr, uint32 size);
 		void closeFile();
         
 		void play();
 		void stop();
         
-        void setPosition(float32 x, float32 y, float32 z);
-        void getPosition(float32& x, float32& y, float32& z);
+        void setPosition(float x, float y, float z);
+        void getPosition(float& x, float& y, float& z);
         
 		// 0 - 1
-		void setVolume(float32 vol);
+		void setVolume(float vol);
 		// -1.0 - 1.0
-		void setPan(float32 pan);
+		void setPan(float pan);
 		// 0.5 - 2.0
-		void setPitch(float32 pitch);
+		void setPitch(float pitch);
         
-		float32 getPan() const;
-		float32 getPitch() const;
-		float32 getVolume() const;
+		float getPan() const;
+		float getPitch() const;
+		float getVolume() const;
         
         void setRepeat(bool flag);
 		bool isRepeat() const;
@@ -101,9 +101,9 @@ namespace sora {
     private:
         bool mRepeat;
         
-        float32 mVolume;
-		float32 mPitch;
-		float32 mPan;
+        float mVolume;
+		float mPitch;
+		float mPan;
         
         ALBuffer* mBuffer;
         id<ALSoundSource> mSoundSource;

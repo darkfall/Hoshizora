@@ -35,11 +35,11 @@ namespace sora {
             //
         }
         
-		float32 getFPS() {
+		float getFPS() {
             return mRFPS;
         }
 	
-        float32 getDelta() {
+        float getDelta() {
             return mDt;
         }
 		

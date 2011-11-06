@@ -45,8 +45,8 @@ namespace sora {
         bool isPlaying() const;
         bool isPaused() const ;
         
-        float32 getPlayRate() const ;
-        void setPlayRate(float32 rate);        
+        float getPlayRate() const ;
+        void setPlayRate(float rate);        
         uint64 getLength() const ;
         float getFPS() const ;
         

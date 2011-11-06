@@ -82,7 +82,7 @@ private:
 	sora::SoraSprite* pBG;
 	sora::SoraFont* pFont;
 	sora::SoraFont* pFont2;
-	ulong32 fbo;
+	SoraHandle fbo;
 };
 
 #endif

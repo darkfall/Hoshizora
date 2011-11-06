@@ -43,7 +43,7 @@ namespace sora {
 
 		SoraWindowHandle createWindow(SoraWindowInfoBase* windowInfo);
 		void setWindowSize(int32 w, int32 h);
-		void setWindowTitle(const SoraWString& title);
+		void setWindowTitle(const StringType& title);
 		void setWindowPos(int32 px, int32 py);
 		void setFullscreen(bool flag);
 		bool isFullscreen();

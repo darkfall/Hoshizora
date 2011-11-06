@@ -27,7 +27,7 @@ namespace sora {
             mTransform.setPosition(pos);
         }
         
-        virtual const SoraVector3& getPosition() const {
+        virtual SoraVector3 getPosition() const {
             return mTransform.getPosition();
         }
         

@@ -395,10 +395,10 @@ void XmlGui::parseLabel(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("align"))
 	{
-		if(element->Attribute("align") == "center" || element->Attribute("align") == "CENTER")
+		if(strncmp(element->Attribute("align"), "center", 6) == 0)
 		{
 			label->setAlignment(gcn::Graphics::CENTER);
-		}else if(element->Attribute("align") == "left" || element->Attribute("align") == "LEFT")
+		}else if(strncmp(element->Attribute("align"), "left", 6) == 0)
 		{
 			label->setAlignment(gcn::Graphics::LEFT);
 		}else
@@ -458,10 +458,10 @@ void XmlGui::parseButton(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("align"))
 	{
-		if(element->Attribute("align") == "center" || element->Attribute("align") == "CENTER")
+		if(strncmp(element->Attribute("align"), "center", 6) == 0)
 		{
 			button->setAlignment(gcn::Graphics::CENTER);
-		}else if(element->Attribute("align") == "left" || element->Attribute("align") == "LEFT")
+		}else if(strncmp(element->Attribute("align"), "left", 6) == 0)
 		{
 			button->setAlignment(gcn::Graphics::LEFT);
 		}else
@@ -711,7 +711,7 @@ void XmlGui::parseSlider(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("orientation"))
 	{
-		if(element->Attribute("orientation") == "HORIZONTAL" || element->Attribute("orientation") == "horizontal")
+		if(strncmp(element->Attribute("orientation"), "HORIZONTAL", 9))
 			slider->setOrientation(gcn::Slider::HORIZONTAL);
 		else slider->setOrientation(gcn::Slider::VERTICAL);
 	}
@@ -813,17 +813,17 @@ void XmlGui::parseScrollArea(TiXmlElement *element,gcn::Widget *parent)
 
 	if(element->Attribute("hPolicy"))
 	{
-		if(element->Attribute("hPolicy") == "ALWAYS" || element->Attribute("hPolicy") == "always")
+		if(strncmp(element->Attribute("hPolicy"), "ALWAYS", 6) == 0)
 			scroll->setHorizontalScrollPolicy(gcn::ScrollArea::SHOW_ALWAYS);
-		else if(element->Attribute("hPolicy") == "NEVER" || element->Attribute("hPolicy") == "never")
+		else if(strncmp(element->Attribute("hPolicy"), "NEVER", 5) == 0)
 			scroll->setHorizontalScrollPolicy(gcn::ScrollArea::SHOW_NEVER);
 	}
 
 	if(element->Attribute("vPolicy"))
 	{
-		if(element->Attribute("vPolicy") == "ALWAYS" || element->Attribute("vPolicy") == "always")
+		if(strncmp(element->Attribute("vPolicy"), "ALWAYS", 6) == 0)
 			scroll->setVerticalScrollPolicy(gcn::ScrollArea::SHOW_ALWAYS);
-		else if(element->Attribute("vPolicy") == "NEVER" || element->Attribute("vPolicy") == "never")
+		else if(strncmp(element->Attribute("vPolicy"), "NEVER", 5) == 0)
 			scroll->setVerticalScrollPolicy(gcn::ScrollArea::SHOW_NEVER);
 	}
 

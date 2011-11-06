@@ -165,7 +165,7 @@ namespace sora {
         onPositionChange(pos.x, pos.y, pos.z);
     }
     
-    const SoraVector3& SoraObject::getPosition() const {
+    SoraVector3 SoraObject::getPosition() const {
         if(!mParent)
             return SoraMovable::getPosition();
         return  SoraMovable::getPosition() + mParent->getPosition();

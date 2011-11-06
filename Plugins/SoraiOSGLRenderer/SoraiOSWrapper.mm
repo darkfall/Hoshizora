@@ -91,6 +91,8 @@ namespace sora {
                 *y = *x;
                 *x = newY;
                 break;
+            default:
+                break;
         }
     }
     
@@ -108,6 +110,8 @@ namespace sora {
                 break;
             case ORIENTATION_LANDSCAPE_RIGHT:
                 *y = newY;
+                break;
+            default:
                 break;
         }
     }

@@ -38,7 +38,7 @@ namespace flower {
     
     void HudController::render() {
         if(mFont) {
-            mFont->render(0.f, 0.f, L"本地玩家");
+       //     mFont->render(0.f, 0.f, L"本地玩家");
             Player* localPlayer;
             
             if((localPlayer = PlayerController::Instance()->getLocalPlayer()) != 0)

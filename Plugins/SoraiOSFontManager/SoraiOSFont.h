@@ -48,27 +48,29 @@ namespace sora {
 	public:
 		~SoraiOSFont();
 		
-		void	render(float32 x, float32 y, const wchar_t* text, bool hcenter = false, bool vcenter = false);
+		void	render(float x, float y, const wchar_t* text, bool hcenter = false, bool vcenter = false);
 		// render with alignments
-		void	print(float32 x, float32 y, int32 align, const wchar_t *format, ...);
-		void	render(float32 x, float32 y, int32 align, const wchar_t* text);
+		void	print(float x, float y, SoraFont::Alignment align, const wchar_t *format, ...);
+		void	render(float x, float y, SoraFont::Alignment align, const wchar_t* text);
 		
-		void	setColor(ulong32 dwColor, int32 i = -1);
-		ulong32	getColor(int32 i);
+        void    renderIn3D(float x, float y, Alignment align, const wchar_t* text, const SoraMatrix4& transformMat);
+        
+		void	setColor(uint32 dwColor, int32 i = -1);
+		uint32	getColor(int32 i);
 		
 		// set kernings
-		void	setKerningWidth(float32 kerning);
-		void	setKerningHeight(float32 kerning);
+		void	setKerningWidth(float kerning);
+		void	setKerningHeight(float kerning);
 		
 		// get kernings
-		float32	getKerningWidth() const;
-		float32	getKerningHeight() const;
+		float	getKerningWidth() const;
+		float	getKerningHeight() const;
 		
 		// get font dimensions
-		float32	getStringWidth(const wchar_t* text);
-		float32	getHeight() const;
+		float	getStringWidth(const wchar_t* text);
+		float	getHeight() const;
 		
-		float32 getStringHeight(const wchar_t* text);
+		float getStringHeight(const wchar_t* text);
         SoraVector getStringDimensions(const wchar_t* text);
 		
 		// get font size
@@ -76,38 +78,38 @@ namespace sora {
         void    setFontSize(uint32 newsize);
 		
 		// get width of a char
-		float32	getWidthFromCharacter(wchar_t c, bool original = false);
+		float	getWidthFromCharacter(wchar_t c, bool original = false);
 		
 		// font effects
-		void setCharRotation(float32 rot);
-		void setScale(float32 scale);
+		void setCharRotation(float rot);
+		void setScale(float scale);
 		
         // get/set line width
-        void setLineWidth(float32 width);
-        float32 getLineWidth() const;
+        void setLineWidth(float width);
+        float getLineWidth() const;
         
-        float32 getCharRotation() const;
-        float32 getScale() const;
+        float getCharRotation() const;
+        float getScale() const;
         
         // set/get line rotation
-        void setLineRotation(float32 rot, bool rotateChar=false);
-        float32 getLineRotation() const;
+        void setLineRotation(float rot, bool rotateChar=false);
+        float getLineRotation() const;
                 
 	private:
 		SoraSprite* pfSpr;
 		SoraCore* CORE;
 		
-		float32 kerningWidth;
-		float32 kerningHeight;
+		float kerningWidth;
+		float kerningHeight;
 		
 		uint32 size;
 		SoraString fontName;
-		sora_hash_map<ulong32, iOSFontGlyph> ft_glyphs;
+		sora_hash_map<stringId, iOSFontGlyph> ft_glyphs;
 		
-		float32 charRotation;
-		float32 scale;
-        float32 lineWidth;
-        float32 lineRotation;
+		float charRotation;
+		float scale;
+        float lineWidth;
+        float lineRotation;
 	};
 	
 } // namespace sora

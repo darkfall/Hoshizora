@@ -80,11 +80,11 @@ namespace sora {
         return false;
     }
     
-    float32 SoraiOSMoviePlayer::getPlayRate() const {
+    float SoraiOSMoviePlayer::getPlayRate() const {
         return 0.f;
     }
     
-    void SoraiOSMoviePlayer::setPlayRate(float32 rate) {
+    void SoraiOSMoviePlayer::setPlayRate(float rate) {
         
     }
     

@@ -20,7 +20,7 @@ namespace sora {
 //fileName->贴图名称
 //isFullPath->贴图名称是否为绝对路径
 SoraTexture *mTextureCreate(const char* fileName, bool isFullPath=false);
-SoraTexture *mTextureCreateWithData(void* pData, ulong32 size);
+SoraTexture *mTextureCreateWithData(void* pData, uint32 size);
 SoraTexture *mTextureCreateWithRawData(unsigned int* pData, uint32 width, uint32 height);
 
 //创建PVR压缩贴图

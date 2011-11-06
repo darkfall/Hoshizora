@@ -113,7 +113,7 @@ namespace sora {
         }
     }
 
-	SoraTexture *mTextureCreateWithData(void* pData, ulong32 size) {
+	SoraTexture *mTextureCreateWithData(void* pData, uint32 size) {
 		NSData* data = [[NSData alloc] initWithBytes:pData length:size];
 		UIImage* image = [[UIImage alloc] initWithData: data];
 		SoraTexture *texture = NULL;
