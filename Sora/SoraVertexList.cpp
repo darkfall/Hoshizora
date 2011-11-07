@@ -50,6 +50,14 @@ namespace sora {
         mVertexIndex++;
     }
     
+    void SoraVertexList::vertexList(const SoraVertex* vertex, size_t count) {
+        for(size_t i=0; i<count; ++i) {
+            mVertexList.push_back(vertex[i]);
+            
+            mVertexIndex++;
+        }
+    }
+    
     void SoraVertexList::vertex2(float x, float y) {
         mVertexList.push_back(SoraVertex(x, y, 0.f, 0.f));
         
@@ -202,6 +210,19 @@ namespace sora {
         SoraCore::Ptr->renderWithVertices(mTexture, mBlendMode, mVertexList.begin(), mVertexList.size(), mVertexMode);
         
         SoraCore::Ptr->popTransformMatrix();
+    }
+    
+    SoraVertexList& SoraVertexList::operator=(const SoraVertexList& rhs) {
+        mVertexMode = rhs.mVertexMode;
+        mBlendMode = rhs.mBlendMode;
+        mTexture = rhs.mTexture;
+        mVertexList = rhs.mVertexList;
+        
+        mVertexIndex = rhs.mVertexIndex;
+        mTexCoordIndex = rhs.mTexCoordIndex;
+        mColorIndex = rhs.mColorIndex;
+        
+        return *this;
     }
     
 } // namespace sora

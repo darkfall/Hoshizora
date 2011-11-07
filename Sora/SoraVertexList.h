@@ -35,7 +35,9 @@ namespace sora {
         
         void setRenderMode(RenderMode mode);
         
+        
         void vertex(const SoraVertex& vertex);
+        void vertexList(const SoraVertex* vertex, size_t count);
         
         // glVertex2
         void vertex2(float x, float y);
@@ -63,6 +65,8 @@ namespace sora {
         uint32 size() const;
         const SoraArray<SoraVertex>& getVertexList() const;
         SoraArray<SoraVertex>& getVertexList();
+        
+        SoraVertexList& operator=(const SoraVertexList& rhs);
         
     private:
         RenderMode mVertexMode;

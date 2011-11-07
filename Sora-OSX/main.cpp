@@ -20,7 +20,6 @@
 #include "SoraMath.h"
 
 #include "SoraFunction.h"
-#include "SoraPostEffect.h"
 
 #include "cmd/SoraConsole.h"
 
@@ -46,9 +45,9 @@ float cr, cg, cb;
 
 sora::SoraPhysicBody* body;
 
-float x = 510.f;
-float y = 384.f;
-float z = -500.f;
+float x = 0;
+float y = 0;
+float z = -0;
 
 float xpos = 0.f;
 float ypos = 0.f;
@@ -59,7 +58,7 @@ float zpos = 0.f;
 
 #include "SoraVertexList.h"
 
-sora::SoraVertexList vertexL(sora::LineLoop);
+sora::SoraVertexList vertexL(sora::Triangle);
 sora::SoraShape shape;
 
 void sphereMap(float x, float y, float z, float r, sora::SoraVertex& vertex) {
@@ -202,16 +201,17 @@ void texx(const SoraString& tex) {
 
 }
 
+float xp = 512, yp = 384;
+
 sora::Sora3DCamera* camera;
 
+#include "SoraModelLoader.h"
 
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-        buildSphere(200.f, 10, 0.f, 0.f);
-        
-        shape.initWithVertexList(vertexL);
-        
+      //  buildSphere(200.f, 10, 0.f, 0.f);
+    
         camera = new sora::Sora3DCamera(sora::Sora3DCamera::Perspective);
         camera->setProjectionMatrix(sora::SoraMatrix4::PerspectiveMat(60.f, 1.33, 10.f, 3000.f));
         camera->setPosition(-512.f, -384.f, -1000.f);
@@ -241,6 +241,16 @@ public:
             s -= 0.01f;
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_S))
             s += 0.01f;
+        
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_I))
+            yp -= 1;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_K))
+            yp += 1;
+        
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_J))
+            xp -= 1;
+        if(sora::SoraCore::Ptr->keyDown(SORA_KEY_L))
+            xp += 1;
    //     camera->setPosition(x, y, z);
 
 
@@ -269,7 +279,7 @@ public:
         sora::SoraCore::Ptr->switchTo3D();
    //     sora::SoraCore::Ptr->getRenderSystem()->setProjectionMatrix(sora::SoraMatrix4());
         
-        vertexL.getTransform().setPosition(512, 384, 0.f);
+        vertexL.getTransform().setPosition(xp, yp, 0.f);
         vertexL.getTransform().setRotation(x, y, z);
         vertexL.getTransform().setScale(s, s, s);
         vertexL.render();
@@ -369,11 +379,15 @@ public:
         
         mShape.setTexture(sora::SoraTexture::LoadFromFile("background.png"));
         mShape.enableRenderToSprite(true);
-
+        
+        model.load("old_key.obj");
+        printf("%d\n", model.getFaceSize());
+        vertexL.vertexList(model.getVertexList().begin(), model.getVertexSize());
+        
     }
     
     void load(sora::SoraTask* task) {
-        
+      
         mShape = sora::SoraShape::Arc(300.f, 300.f, 150.f, 0.f, sora::DegreeToRadius(90.f), 3.f, 0xFFFFFFFF);
         mShape.enableOutline(3.f, 0xFFFF0000);
         mShape.setClosed(true);
@@ -430,6 +444,8 @@ private:
     sora::SoraShader* mShader;
     sora::SoraSprite sc1;
     sora::SoraSprite sc2;
+    
+    sora::SoraModelLoader model;
 };
 #include "SoraRenderSystemExtension.h"
 
@@ -489,6 +505,12 @@ void msetCommands(sora::SoraConsoleEvent* evt) {
                 break;
             case 3:
                 vertexL.setRenderMode(sora::Triangle);
+                break;
+            case 4:
+                vertexL.setRenderMode(sora::TriangleStrip);
+                break;
+            case 5:
+                vertexL.setRenderMode(sora::TriangleFan);
                 break;
         }
     }

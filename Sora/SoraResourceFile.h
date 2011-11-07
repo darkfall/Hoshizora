@@ -35,7 +35,7 @@ namespace sora {
         SoraResourceFile& operator=(const StringType& file);
 		
         void*   data() const;
-        uint32 size() const;
+        uint32  size() const;
 		
 		operator void*();
 		operator char*();
