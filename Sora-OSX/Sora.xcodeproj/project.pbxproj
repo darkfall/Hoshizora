@@ -186,7 +186,6 @@
 		8807EC011439E69C00505EFD /* SoraBox2dPhysicWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8807EBDA1439E69C00505EFD /* SoraBox2dPhysicWorld.cpp */; };
 		880D067D142F1BF8005CB649 /* SoraConfigManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880D067C142F1BF7005CB649 /* SoraConfigManager.cpp */; };
 		880D0684142F2A96005CB649 /* SoraSpritePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880D0683142F2A96005CB649 /* SoraSpritePool.cpp */; };
-		880E5CB11467673F0096EB46 /* SoraModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880E5CB01467673F0096EB46 /* SoraModelLoader.cpp */; };
 		8813D90C145EB39100898730 /* SoraTransformModifiers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8813D90B145EB39100898730 /* SoraTransformModifiers.cpp */; };
 		8815F915145B920F00D4B58F /* SoraVertexList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8815F914145B920F00D4B58F /* SoraVertexList.cpp */; };
 		881DDC5A13BEF44000A0A4CE /* SoraInputQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 881DDC5813BEF43F00A0A4CE /* SoraInputQueue.cpp */; };
@@ -213,6 +212,7 @@
 		88240CD312C5803D009498F7 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 88240CBF12C5803D009498F7 /* zip.c */; };
 		88240CD412C5803D009498F7 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 88240CC212C5803D009498F7 /* zutil.c */; };
 		88240CFB12C5811B009498F7 /* SoraShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88240CF912C5811B009498F7 /* SoraShader.cpp */; };
+		88254AC9146990F6009ADE08 /* SoraMeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88254AC7146990F6009ADE08 /* SoraMeshLoader.cpp */; };
 		882AF2A8142985C600D55647 /* SoraResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882AF2A7142985C600D55647 /* SoraResourceManager.cpp */; };
 		882AF2AA142990F300D55647 /* libfmodex.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 882AF2A9142990F300D55647 /* libfmodex.dylib */; };
 		882AF2E2142A8A9C00D55647 /* SoraAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882AF2E1142A8A9C00D55647 /* SoraAnimation.cpp */; };
@@ -850,8 +850,8 @@
 		880D067C142F1BF7005CB649 /* SoraConfigManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraConfigManager.cpp; sourceTree = "<group>"; };
 		880D0682142F2A91005CB649 /* SoraSpritePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraSpritePool.h; sourceTree = "<group>"; };
 		880D0683142F2A96005CB649 /* SoraSpritePool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraSpritePool.cpp; sourceTree = "<group>"; };
-		880E5CAF14675CF80096EB46 /* SoraModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraModelLoader.h; sourceTree = "<group>"; };
-		880E5CB01467673F0096EB46 /* SoraModelLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraModelLoader.cpp; sourceTree = "<group>"; };
+		880E5D2B146925D80096EB46 /* SoraMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMaterial.h; sourceTree = "<group>"; };
+		880E5D2C146925EE0096EB46 /* SoraLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraLight.h; sourceTree = "<group>"; };
 		8811389E12CC424000C648C7 /* mainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainWindow.h; sourceTree = "<group>"; };
 		8813D908145E1D7D00898730 /* SoraTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTrigger.h; sourceTree = "<group>"; };
 		8813D909145E276200898730 /* SoraTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraTransform.h; sourceTree = "<group>"; };
@@ -907,6 +907,10 @@
 		88240CC312C5803D009498F7 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
 		88240CF912C5811B009498F7 /* SoraShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraShader.cpp; sourceTree = "<group>"; };
 		88240CFA12C5811B009498F7 /* SoraShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraShader.h; sourceTree = "<group>"; };
+		88254AC7146990F6009ADE08 /* SoraMeshLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraMeshLoader.cpp; sourceTree = "<group>"; };
+		88254AC8146990F6009ADE08 /* SoraMeshLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMeshLoader.h; sourceTree = "<group>"; };
+		88254ACA1469916D009ADE08 /* SoraMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraMesh.h; sourceTree = "<group>"; };
+		88254ACB146993D6009ADE08 /* SoraPointTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraPointTemplate.h; sourceTree = "<group>"; };
 		88282769143A9702004C5F16 /* SoraPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraPhysics.h; sourceTree = "<group>"; };
 		8828C1D21314CB07002C6FA7 /* SoraCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCommon.h; sourceTree = "<group>"; };
 		882AF2A7142985C600D55647 /* SoraResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraResourceManager.cpp; sourceTree = "<group>"; };
@@ -2348,6 +2352,19 @@
 			path = ../Plugins/SoraSpritePool;
 			sourceTree = "<group>";
 		};
+		880E5D2A1469140C0096EB46 /* Sora3D */ = {
+			isa = PBXGroup;
+			children = (
+				88254AC8146990F6009ADE08 /* SoraMeshLoader.h */,
+				88254AC7146990F6009ADE08 /* SoraMeshLoader.cpp */,
+				880E5D2B146925D80096EB46 /* SoraMaterial.h */,
+				880E5D2C146925EE0096EB46 /* SoraLight.h */,
+				88254ACA1469916D009ADE08 /* SoraMesh.h */,
+			);
+			name = Sora3D;
+			path = ../Plugins/Sora3D;
+			sourceTree = "<group>";
+		};
 		881F219B1435564F009DA610 /* task */ = {
 			isa = PBXGroup;
 			children = (
@@ -3037,6 +3054,7 @@
 				888A4EC0143937C400185FCA /* SoraFourCC.h */,
 				88677550144E152E009A4043 /* SoraTuple.h */,
 				8889F61514639F760098D7ED /* SoraDictionary.h */,
+				88254ACB146993D6009ADE08 /* SoraPointTemplate.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -3456,8 +3474,6 @@
 				8813D908145E1D7D00898730 /* SoraTrigger.h */,
 				881F219B1435564F009DA610 /* task */,
 				88282769143A9702004C5F16 /* SoraPhysics.h */,
-				880E5CAF14675CF80096EB46 /* SoraModelLoader.h */,
-				880E5CB01467673F0096EB46 /* SoraModelLoader.cpp */,
 			);
 			name = Sora;
 			path = ../Sora;
@@ -3580,6 +3596,7 @@
 				885AB34C13FF42E1006AC2B3 /* SoraSpriteAnimation */,
 				8801A8CF13EF79C200B9A779 /* SoraGUIChan */,
 				886E0FD713681F5800A77847 /* SoraOGLRenderer */,
+				880E5D2A1469140C0096EB46 /* Sora3D */,
 				8802D4B9135FA8C2001FD2D8 /* SoraFMODSoundSystem */,
 			);
 			name = Plugins;
@@ -4025,7 +4042,7 @@
 				88DEE234144FD8AA004D552E /* SoraGraphicAlgorithm.cpp in Sources */,
 				8815F915145B920F00D4B58F /* SoraVertexList.cpp in Sources */,
 				8813D90C145EB39100898730 /* SoraTransformModifiers.cpp in Sources */,
-				880E5CB11467673F0096EB46 /* SoraModelLoader.cpp in Sources */,
+				88254AC9146990F6009ADE08 /* SoraMeshLoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

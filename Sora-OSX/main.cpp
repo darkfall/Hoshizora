@@ -201,16 +201,18 @@ void texx(const SoraString& tex) {
 
 }
 
+#include "util/SoraPointTemplate.h"
+
+
 float xp = 512, yp = 384;
 
 sora::Sora3DCamera* camera;
 
-#include "SoraModelLoader.h"
 
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-      //  buildSphere(200.f, 10, 0.f, 0.f);
+        buildSphere(200.f, 10, 0.f, 0.f);
     
         camera = new sora::Sora3DCamera(sora::Sora3DCamera::Perspective);
         camera->setProjectionMatrix(sora::SoraMatrix4::PerspectiveMat(60.f, 1.33, 10.f, 3000.f));
@@ -380,9 +382,6 @@ public:
         mShape.setTexture(sora::SoraTexture::LoadFromFile("background.png"));
         mShape.enableRenderToSprite(true);
         
-        model.load("old_key.obj");
-        printf("%d\n", model.getFaceSize());
-        vertexL.vertexList(model.getVertexList().begin(), model.getVertexSize());
         
     }
     
@@ -445,7 +444,6 @@ private:
     sora::SoraSprite sc1;
     sora::SoraSprite sc2;
     
-    sora::SoraModelLoader model;
 };
 #include "SoraRenderSystemExtension.h"
 

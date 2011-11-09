@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
-#include "SoraModelLoader.h"
+#include "SoraMeshLoader.h"
 #include "SoraResourceFile.h"
 #include "SoraPath.h"
 

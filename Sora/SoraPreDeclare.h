@@ -74,6 +74,16 @@ namespace sora {
     SoraIfDefined(#name)
     
     
+#define SORA_DEF_SET_GET(type, name, var) \
+    public: \
+        type get##name() const { \
+            return var; \
+        } \
+        void set##name(const type& val) { \
+            var = val; \
+        } \
+    
+    
     /**
      *  helper macro to define a field which have a get##name and set##name
      *  @param field type, such as int, float
@@ -87,9 +97,9 @@ namespace sora {
         type get##name() const { \
             return name; \
         } \
-    void set##name(type val) { \
-        name = val; \
-    }
+        void set##name(type val) { \
+            name = val; \
+        }
     
     /**
      *  helper macro to define a field which have a get##name and set##name

@@ -11,6 +11,7 @@
 
 #include "SoraPlatform.h"
 #include "SoraVertex.h"
+#include "SoraDynamicFactory.h"
 
 #include "util/SoraArray.h"
 
@@ -20,6 +21,12 @@ namespace sora {
      * Simple model loader class
      * Currently only support .obj from wavefront without meterials
      **/
+    
+    class SoraMesh;
+    
+    class SoraMeshFactory: public SoraDynamicFactory<SoraMesh> {
+        
+    };
     
     class SoraModelLoader {
     public:

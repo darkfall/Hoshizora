@@ -30,6 +30,16 @@ namespace sora {
         mFriction(friction),
         mDensity(density),
         mShape(shape) { }
+        
+        SoraPhysicFixtureDef& friction(float friction) {
+            this->mFriction = friction;
+            return *this;
+        }
+        
+        SoraPhysicFixtureDef& density(float density) {
+            this->mDensity = density;
+            return *this;
+        }
     };
     
     struct SoraPhysicBodyDef {
@@ -47,6 +57,16 @@ namespace sora {
         SoraPhysicBodyDef(BodyType type, const SoraVector& pos):
         mType(type),
         mPosition(pos) { }
+        
+        SoraPhysicBodyDef& friction(BodyType type) {
+            this->mType = type;
+            return *this;
+        }
+        
+        SoraPhysicBodyDef& density(const SoraVector& pos) {
+            this->mPosition = pos;
+            return *this;
+        }
     };
     
     struct SoraPhysicJointDef {
@@ -71,6 +91,21 @@ namespace sora {
         mType(type),
         mBodyA(b1),
         mBodyB(b2) { }
+        
+        SoraPhysicJointDef& type(JointType type) {
+            this->mType = type;
+            return *this;
+        }
+        
+        SoraPhysicJointDef& bodyA(SoraPhysicBody* b1) {
+            this->mBodyA = b1;
+            return *this;
+        }
+        
+        SoraPhysicJointDef& bodyB(SoraPhysicBody* b2) {
+            this->mBodyB = b2;
+            return *this;
+        }
     };
     
     struct SoraPhysicRaycastResult {
