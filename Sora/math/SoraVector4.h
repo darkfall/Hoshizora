@@ -43,6 +43,10 @@ namespace sora {
             this->w = _w;
         }
         
+        SoraVector4 operator-() const {
+            return SoraVector4(-x, -y, -z, -w);
+        }
+        
         SoraVector4 operator+(const SoraVector4 &v) const {
             return SoraVector4(this->x + v.x, 
                                this->y + v.y, 
@@ -55,6 +59,14 @@ namespace sora {
                                this->y * f, 
                                this->z * f, 
                                this->w * f);
+        }
+        
+        real operator*(const SoraVector4& rhs) const {
+            return this->x * rhs.x + this->y * rhs.y + this->z * rhs.z + this->w * rhs.w;
+        }
+        
+        bool operator==(const SoraVector4& rhs) const {
+            return this->x == rhs.x && this->y == rhs.y && this->z == rhs.z && this->w == rhs.w;
         }
     };
     

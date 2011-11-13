@@ -63,6 +63,7 @@ namespace sora {
          * If tag is empty then tag = file
          **/
         SoraResource::Ptr addResource(const StringType& file, SoraResource::Type type, const StringType& tag=StringType());
+        void              addResource(SoraResource::Ptr r, StringType& tag);
         SoraResource::Ptr getResource(const StringType& tag);
         void              freeResource(const StringType& tag);
         

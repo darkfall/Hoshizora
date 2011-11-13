@@ -19,6 +19,8 @@
 #include "SoraScene.h"
 #include "SoraWindowInfo.h"
 
+#include "SoraString.h"
+
 class mainWindow: public sora::SoraWindowInfoBase {
 public:
 	mainWindow();
@@ -34,7 +36,7 @@ public:
 	int32 getWindowPosX() { return 0; }
 	int32 getWindowPosY() { return 0; }
 	
-	SoraString getWindowName() { return "Reflection"; }
+    sora::StringType getWindowName() { return "Reflection"; }
 	SoraString getWindowId() { return "MainWindow"; }
 	
 	bool isWindowSubWindow() { return false; }	

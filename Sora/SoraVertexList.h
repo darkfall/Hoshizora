@@ -35,7 +35,6 @@ namespace sora {
         
         void setRenderMode(RenderMode mode);
         
-        
         void vertex(const SoraVertex& vertex);
         void vertexList(const SoraVertex* vertex, size_t count);
         

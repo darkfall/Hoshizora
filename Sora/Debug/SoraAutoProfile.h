@@ -39,7 +39,7 @@ namespace sora {
         SoraTimestamp time;
 	};
 	
-	#define PROFILE(name) SoraAutoProfile(name)
+	#define SORA_PROFILE(name) ::sora::SoraAutoProfile(name)
 } // namespace sora
 
 #endif

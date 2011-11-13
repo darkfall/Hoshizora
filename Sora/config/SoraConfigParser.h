@@ -18,7 +18,7 @@ namespace sora {
     
     class SoraConfigParserImpl;
     
-    class SoraConfigParser: SoraUncopyable {
+    class SORA_API SoraConfigParser: SoraUncopyable {
     public:
         SoraConfigParser();
         ~SoraConfigParser();

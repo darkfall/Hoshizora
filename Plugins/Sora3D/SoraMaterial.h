@@ -13,19 +13,29 @@
 #include "SoraPreDeclare.h"
 #include "SoraColor.h"
 #include "SoraShaderable.h"
+#include "SoraAutoPtr.h"
 
 namespace sora {
     
     class SoraMaterial: public SoraShaderable {
     public:
-        enum { MaxTextureSize = 8; }
+        typedef SoraAutoPtr<SoraMaterial> Ptr;
         
+        /**
+         * Material Type
+         **/
         enum MaterialType {
             WireFrame,
             PointCloud,
             Solid,
             NormalMap,
         };
+        
+        SoraMaterial();
+        explicit SoraMaterial(MaterialType type);
+        virtual ~SoraMaterial() {}
+        
+        enum { MaxTextureSize = 8 };
         
         /**
          * Set/Get

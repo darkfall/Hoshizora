@@ -17,12 +17,15 @@
 #include "SoraColor.h"
 
 #include "SoraCore.h"
-#include "SoraInfiniteRendererCallback.h"
-#include "SoraRenderSystemExtension.h"
 #include "SoraOGLKeyPoll.h"
 #include "SoraEnvValues.h"
+#include "SoraWindowInfo.h"
+#include "SoraTexture.h"
+#include "SoraVertex.h"
 
-#include "SoraSprite.h"
+#include "SoraOGLRenderBuffer.h"
+
+#include "SoraInfiniteRendererCallback.h"
 
 #ifdef SORA_USE_SHADER
 #include "SoraShader/SoraCGGLShader.h"
@@ -62,9 +65,6 @@ namespace sora{
 		currShader = 0;
 		iFrameStart = 1;
 		CurBlendMode = 0;
-        
-        // FSAA params must be set by users before creating the main window
-        SoraRenderSystemExtension::Instance()->registerExtension(SORA_EXTENSION_FSAA);
         
         VertexBuffer.reserve(DEFAULT_VERTEX_BUFFER_SIZE);
 	}
@@ -110,7 +110,6 @@ namespace sora{
   //     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
   //     glEnable(GL_COLOR_MATERIAL);
 
-    //    InitPerspective(60, (float)_oglWindowInfo.width / _oglWindowInfo.height, 0.f, 1.f);
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Really Nice Perspective Calculations
 
 		glDisable(GL_DITHER);
@@ -122,6 +121,8 @@ namespace sora{
         glEnable(GL_SMOOTH);
         glEnable(GL_LINE_SMOOTH);
         glEnable(GL_POINT_SMOOTH);
+        
+        glLineWidth(1.0f);
         
         glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
         
@@ -151,7 +152,7 @@ namespace sora{
 		glMatrixMode(GL_PROJECTION);
 
 		glLoadIdentity();
-		glOrtho(0.f, w, h, 0.f, -1.f, 1.f);
+		glOrtho(0.f, w, h, 0.f, 0.f, 1.f);
 	}
 
 	void SoraOGLRenderer::applyTransform() {
@@ -164,7 +165,7 @@ namespace sora{
             glOrtho(0.f,
                     _oglWindowInfo.width,
                     _oglWindowInfo.height
-                    , 0.f, -1.f, 1.f);
+                    , 0.f, 0.f, 1.f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             
@@ -183,7 +184,7 @@ namespace sora{
             glOrtho(0,
                     pCurTarget->getWidth(),
                     0
-                    , pCurTarget->getHeight(), -1.f, 1.f);
+                    , pCurTarget->getHeight(), 0.f, 1.f);
             
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
@@ -313,8 +314,7 @@ namespace sora{
 	SoraWindowHandle SoraOGLRenderer::createWindow(SoraWindowInfoBase* windowInfo) {
 		glfwInit();
         
-        int32 FSAASamples = SoraRenderSystemExtension::Instance()->getExtensionParam(SORA_EXTENSION_FSAA);
-        
+        int FSAASamples = 0;
         glfwOpenWindowHint(GLFW_FSAA_SAMPLES, FSAASamples);
         
 		if(!glfwOpenWindow(windowInfo->getWindowWidth(), windowInfo->getWindowHeight()
@@ -472,6 +472,10 @@ namespace sora{
         glDrawArrays(CurDrawMode, 0, VertexBuffer.size());
         
         VertexBuffer.reset();
+        
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_COLOR_ARRAY);
 	}
 
 	SoraTexture* SoraOGLRenderer::createTexture(const StringType& sTexturePath, bool bMipmap) {
@@ -576,7 +580,6 @@ namespace sora{
 			sora_free(ht->mTexData);
 			ht->mTexData = 0;
 		}
-
 	}
 
 	void SoraOGLRenderer::releaseTexture(SoraTexture* tex) {
@@ -585,7 +588,7 @@ namespace sora{
 		tex = 0;
 	}
     
-    void SoraOGLRenderer::setRenderState(RenderStateType type, RenderStateParam param) {
+    void SoraOGLRenderer::setRenderState(RenderStateType type, int32 param) {
         switch(type) {
             case TextureWrap0:
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, RenderParamToGLParam(param));
@@ -593,39 +596,15 @@ namespace sora{
             case TextureWrap1:
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, RenderParamToGLParam(param));
                 break;
+            case BlendMode:
+                _glSetBlendMode(param);
+                break;
         }
     }
     
-    RenderStateParam SoraOGLRenderer::getRenderState(RenderStateType) const {
+    int32 SoraOGLRenderer::getRenderState(RenderStateType) const {
         
     }
-
-	void SoraOGLRenderer::renderTriple(SoraTriple& trip) {
-		glEnable(GL_TEXTURE_2D); 
-		if(trip.tex) {
-			bindTexture(trip.tex);
-		} else {
-            flush();
-            bindTexture(0);
-        }
-		_glSetBlendMode(trip.blend);
-		CurDrawMode = GL_TRIANGLES;
-        
-        SoraVertex tmp = trip.v[0];
-        tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
-        VertexBuffer.append(tmp);
-        tmp = trip.v[1];
-        tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
-        VertexBuffer.append(tmp);
-        tmp = trip.v[2];
-        tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
-        VertexBuffer.append(tmp);
-
-        if(currShader)
-			flush();
-		if(!trip.tex)
-			flush();
-	}
 	
 	void SoraOGLRenderer::renderWithVertices(SoraTexture* tex, int32 blendMode,  SoraVertex* vertices, uint32 vsize, RenderMode mode) {		
 		flush();
@@ -648,6 +627,10 @@ namespace sora{
         glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(SoraVertex), &(vertices[0].col));
         
         glDrawArrays(CurDrawMode, 0, vsize);
+        
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_COLOR_ARRAY);
 	}
 
 	void SoraOGLRenderer::renderQuad(SoraQuad& quad) {
@@ -659,24 +642,21 @@ namespace sora{
             bindTexture(0);
         }
 		_glSetBlendMode(quad.blend);
-		CurDrawMode = GL_TRIANGLES;
+		CurDrawMode = GL_QUADS;
    
         SoraVertex tmp = quad.v[0];
         tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
         VertexBuffer.append(tmp);
+        
         tmp = quad.v[1];
         tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
         VertexBuffer.append(tmp);
+        
         tmp = quad.v[2];
         tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
         VertexBuffer.append(tmp);
+       
         tmp = quad.v[3];
-        tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
-        VertexBuffer.append(tmp);
-        tmp = quad.v[0];
-        tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
-        VertexBuffer.append(tmp);
-        tmp = quad.v[2];
         tmp.col = CARGB(CGETA(tmp.col), CGETB(tmp.col), CGETG(tmp.col), CGETR(tmp.col));
         VertexBuffer.append(tmp);
 		
@@ -699,7 +679,7 @@ namespace sora{
             glScissor(x, _oglWindowInfo.height-(y+h), w, h);
         }
         else {
-             glScissor(x, y, w, h);
+            glScissor(x, y, w, h);
         }
 	}
     
@@ -764,6 +744,8 @@ namespace sora{
         else 
             setProjectionMatrix(sora::SoraMatrix4::OrthoMat(0.f, pCurTarget->getWidth(), 0.f, pCurTarget->getHeight(), 0.f, 1.f));
         
+        setTransform();
+        
         glDisable(GL_DITHER);
         glDisable(GL_FOG);
         
@@ -823,12 +805,16 @@ namespace sora{
 		return glGetError() != GL_NO_ERROR;
 	}
 
-	StringType SoraOGLRenderer::videoInfo() {
+	StringType SoraOGLRenderer::videoInfo() const {
 		StringType info(L"GraphicDriver: OpenGL Version ");
 		info += (char*)glGetString(GL_VERSION);
 
 		return info;
 	}
+    
+    SoraRenderSystem::RenderSystemType SoraOGLRenderer::renderSystemType() const {
+        return OpenGL;
+    }
 
     SoraShaderContext* SoraOGLRenderer::createShaderContext() {
 #ifdef SORA_USE_SHADER
@@ -870,15 +856,6 @@ namespace sora{
 #ifdef OS_OSX
         osx_setAppCursor(cursor);
 #endif
-    }
-    
-    void SoraOGLRenderer::onExtensionStateChanged(int32 extension, bool state, int32 param) {
-        // multisampling
-#ifndef OS_WIN32
-        if(extension == SORA_EXTENSION_FSAA) {
-        
-        }
-#endif // OS_WIN32
     }
     
     void SoraOGLRenderer::renderLine(float x1, float y1, float x2, float y2, uint32 color, float width, float z) {
@@ -970,6 +947,120 @@ namespace sora{
         }
     }
 
+    SoraRenderBuffer::Ptr SoraOGLRenderer::createVertexBuffer(SoraRenderBuffer::Access accessHint,
+                                                              SoraRenderBuffer::Usage usage,
+                                                              uint32 desired_count,
+                                                              void* initData,
+                                                              const SoraVertexFormat& vertexFormat) {
+        return MakeSharedPtr<SoraOGLVertexBuffer>(accessHint, 
+                                                  usage, 
+                                                  desired_count,
+                                                  initData,
+                                                  vertexFormat);
+    }
+    
+    SoraRenderBuffer::Ptr SoraOGLRenderer::createIndexBuffer(SoraRenderBuffer::Access accessHint,
+                                                             SoraRenderBuffer::Usage usage,
+                                                             uint32 desired_count,
+                                                             void* initData) {
+        return MakeSharedPtr<SoraOGLIndexBuffer>(accessHint, 
+                                                 usage, 
+                                                 desired_count,
+                                                 initData);
+    }
+        
+    void SoraOGLRenderer::renderBuffer(SoraTexture* tex, RenderMode mode, SoraRenderBuffer::Ptr vertexBuffer, SoraRenderBuffer::Ptr indexBuffer) {
+        #define BUFFER_OFFSET(i) ((char *)NULL + (i))
+
+        sora_assert(vertexBuffer.isValid());
+        
+        SoraAutoPtr<SoraOGLVertexBuffer> ogl_vertex_buffer = vertexBuffer.cast<SoraOGLVertexBuffer>();
+        if(!ogl_vertex_buffer.isValid()) {
+            log_error("SoraOGLRenderer: invalid vertex buffer format");
+            return;
+        }
+        
+        glEnable(GL_TEXTURE_2D);
+		if(tex) {
+            bindTexture(tex);
+		} else {
+            bindTexture(0);
+        }
+
+        SoraVertexFormat& format = ogl_vertex_buffer->format();
+
+        vertexBuffer->active();
+
+        if(format.checkFormat(VertexXYZ)) {
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(3, 
+                            GL_FLOAT, 
+                            format.totalSize(), 
+                            BUFFER_OFFSET(format.offsetXYZ()));
+        }
+        
+        if(format.checkFormat(VertexNormal)) {
+            glEnableClientState(GL_NORMAL_ARRAY);
+            glNormalPointer(GL_FLOAT, 
+                            format.totalSize(), 
+                            BUFFER_OFFSET(format.offsetNormal()));
+        }
+        
+        if(format.checkFormat(VertexColor)) {
+            glEnableClientState(GL_COLOR_ARRAY);
+            glColorPointer(4, 
+                           GL_UNSIGNED_BYTE, 
+                           format.totalSize(),
+                           BUFFER_OFFSET(format.offsetColor()));
+        }
+        
+        if(format.checkFormat(VertexColor2)) {
+            glEnableClientState(GL_SECONDARY_COLOR_ARRAY);
+            glSecondaryColorPointer(4, 
+                                    GL_UNSIGNED_BYTE, 
+                                    format.totalSize(),
+                                    BUFFER_OFFSET(format.offsetColor2()));
+        }
+        
+        if(format.checkFormat(VertexUV)) {
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            glTexCoordPointer(2, 
+                              GL_FLOAT, 
+                              format.totalSize(),
+                              BUFFER_OFFSET(format.offsetUV()));
+        } else {
+            glDisable(GL_TEXTURE_2D);
+        }
+       
+        if(indexBuffer.isValid()) {
+            SoraAutoPtr<SoraOGLIndexBuffer> ogl_index_buffer = indexBuffer.cast<SoraOGLIndexBuffer>();
+            if(!ogl_index_buffer.isValid()) {
+                log_error("SoraOGLRenderer: invalid vertex buffer format");
+                return;
+            }
+
+            indexBuffer->active();
+          
+            glDrawRangeElements(RenderModeToGLMode(mode), 
+                                0,
+                                0xffffffff,
+                                ogl_index_buffer->count(),
+                                GL_UNSIGNED_INT,
+                                BUFFER_OFFSET(0));
+        } else {
+            
+            glDrawArrays(RenderModeToGLMode(mode), 0, ogl_vertex_buffer->count());
+        }
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_APPLE, 0);
+        
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_NORMAL_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glDisableClientState(GL_COLOR_ARRAY);
+        glDisableClientState(GL_SECONDARY_COLOR_ARRAY);
+    }
     
     
 #ifdef SORA_AUTOMATIC_REGISTER

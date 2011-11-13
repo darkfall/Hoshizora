@@ -1296,7 +1296,7 @@ bool HGE_Impl::_init_lost()
 	if(bTextureFilter)
 	{
 		pD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-		pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+		pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR); 
 	}
 	else
 	{

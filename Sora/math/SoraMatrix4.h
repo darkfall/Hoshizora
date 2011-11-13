@@ -46,7 +46,7 @@ namespace sora {
         
         static SoraMatrix4 RotMat( real x, real y, real z ) {
             // Rotation order: YXZ [* Vector]
-            return SoraMatrix4( SoraQuaternion( x, y, z ) );
+            return SoraMatrix4( SoraQuaternion( x, y, z, 0 ) );
         }
         
         static SoraMatrix4 RotMat( SoraVector3 axis, real angle ) {

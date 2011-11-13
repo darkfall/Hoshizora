@@ -14,17 +14,6 @@
 namespace sora {
 
 	class SoraCore;
-	
-	#define	BLEND_COLORADD		1
-	#define	BLEND_COLORMUL		0
-	#define	BLEND_ALPHABLEND	2
-	#define	BLEND_ALPHAADD		0
-	#define	BLEND_ZWRITE		4
-	#define	BLEND_NOZWRITE		0
-	#define BLEND_SRCALPHA		8
-
-	#define BLEND_DEFAULT		(BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_NOZWRITE)
-	#define BLEND_DEFAULT_Z		(BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_ZWRITE)
 
 	class SORA_API SoraSprite: public SoraShaderable, public SoraObject {
 	public:

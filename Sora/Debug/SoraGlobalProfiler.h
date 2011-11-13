@@ -24,14 +24,14 @@ namespace sora {
 	class SORA_API SoraGlobalProfiler: public SoraSingleton<SoraGlobalProfiler> {
 		friend class SoraSingleton<SoraGlobalProfiler>;
 	public:
-		struct s_profile {
+		struct Profile {
 			SoraString sName;
 			uint64 elapsedTime;
 			
-			s_profile(): elapsedTime(0) {}
-			s_profile(const char* name, uint64 t): sName(name), elapsedTime(t) {}
+			Profile(): elapsedTime(0) {}
+			Profile(const char* name, uint64 t): sName(name), elapsedTime(t) {}
 		};
-		typedef sora_hash_map<SoraString, s_profile> PROFILE_CONT;
+		typedef sora_hash_map<SoraString, Profile> PROFILE_CONT;
 
 	public:
 		void storeProfile(const char* name, uint64 elapsedTime) {
@@ -39,7 +39,7 @@ namespace sora {
 			if(itprofile == profiles.end()) {
 				log_mssg(vamssg("ProfileName=%s, time=%llu\n", name, elapsedTime), LOG_LEVEL_NOTICE);
 			}
-			profiles[name] = s_profile(name, elapsedTime);
+			profiles[name] = Profile(name, elapsedTime);
 		}
 		
 		void printProfiles() {
@@ -77,12 +77,12 @@ namespace sora {
 			}
 		}
 		
-		s_profile getProfile(const char* name) const {
+		Profile getProfile(const char* name) const {
 			PROFILE_CONT::const_iterator itprofile = profiles.find(name);
 			if(itprofile != profiles.end()) {
 				return itprofile->second;
 			}
-			return s_profile();
+			return Profile();
 		}
 		
 		void flush() {

@@ -25,13 +25,13 @@ namespace sora {
         ptr(_ptr) {
         }
         SoraScopedPtr():
-        ptr(NULL) {
+        ptr(0) {
             
         }
         ~SoraScopedPtr() {
             if(ptr) {
                 delete ptr;
-                ptr = NULL;
+                ptr = 0;
             }
         }
         

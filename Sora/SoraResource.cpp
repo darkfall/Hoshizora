@@ -33,7 +33,26 @@ namespace sora {
             return SoraResource::Config;
         if(ident == "shader")
             return SoraResource::Shader;
+        if(ident == "material")
+            return SoraResource::Material;
+        if(ident == "mesh")
+            return SoraResource::Mesh;
         return SoraResource::Invalid;
+    }
+    
+    std::string SoraResource::TypeToIdent(Type type) {
+        switch(type) {
+            case SoraResource::Texture: return "texture";
+            case SoraResource::Music: return "music";
+            case SoraResource::SoundEffect: return "soundeffect";
+            case SoraResource::RawData: return "raw";
+            case SoraResource::Font: return "font";
+            case SoraResource::Shader: return "shader";
+            case SoraResource::Material: return "material";
+            case SoraResource::Mesh: return "mesh";
+            default:
+                return "unknown";
+        }
     }
     
     SoraResource::SoraResource(Type type):

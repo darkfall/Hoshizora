@@ -236,7 +236,7 @@ namespace sora {
 	typedef SoraImageEffectColorTransitions IEColorTransitions;
 	typedef SoraImageEffectRotation IERotation;
 	
-	typedef SoraCoreTransformer<SoraCoreTransform> IMAGE_EFFECT_TRANSFORMER;
+	typedef SoraCoreTransformer<SoraCoreTransform> ImageEffectTransformer;
     
     static IEFade* CreateEffectFade(float src, float dst, float time, 
                                     ImageEffectMode mode=ImageEffectOnce,

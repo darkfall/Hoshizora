@@ -32,6 +32,7 @@
 #include "SoraInputListeners.h"
 #include "SoraHotkey.h"
 #include "SoraLogger.h"
+#include "SoraWindowInfo.h"
 
 #include "physics/SoraPhysicWorld.h"
 
@@ -72,7 +73,6 @@
 #include "SoraMemoryUsage.h"
 #include "SoraMath.h"
 #include "SoraCamera.h"
-#include "SoraRenderSystemExtension.h"
 #include "SoraSoundSystemThread.h"
 
 #ifdef OS_IOS
@@ -351,14 +351,14 @@ namespace sora {
 		sora_assert(bInitialized == true);
         float dt = bFrameSync?1.f:pTimer->getDelta() * SoraTimer::TimeScale;
 #ifdef PROFILE_CORE_UPDATE
-		PROFILE("CoreUpdate");
+		SORA_PROFILE("CoreUpdate");
 #endif
 
      //   try {
             if(!bPaused && !bPauseSound) {
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UpdateSoundSystem");
+                    SORA_PROFILE("UpdateSoundSystem");
 #endif
                     if(!bSeperateSoundSystemThread) {
                         if(pSoundSystem) 
@@ -377,7 +377,7 @@ namespace sora {
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UpdateMainWindow");
+                    SORA_PROFILE("UpdateMainWindow");
 #endif
                     SoraSimpleTimerManager::Instance()->update(dt);
                     
@@ -386,7 +386,7 @@ namespace sora {
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UpdateEventManager");
+                    SORA_PROFILE("UpdateEventManager");
 #endif
                     SoraEventManager::Instance()->update(dt);
                     SoraEventWorld::defaultWorld().update(dt);
@@ -394,28 +394,28 @@ namespace sora {
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("FrameListenerStart");
+                    SORA_PROFILE("FrameListenerStart");
 #endif
                     _frameListenerStart();
                 }
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UpdateAutoUpdate");
+                    SORA_PROFILE("UpdateAutoUpdate");
 #endif
                     SoraAutoUpdate::UpdateList(dt);
                 }
                 
                 if(pPhysicWorld) {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UpdatePhysicalWorld");
+                    SORA_PROFILE("UpdatePhysicalWorld");
 #endif
                         pPhysicWorld->update(dt);
                 }
                 
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("UPDATE_RENDERSYSTEM");
+                    SORA_PROFILE("UPDATE_RENDERSYSTEM");
 #endif
                     pRenderSystem->update();
                 }
@@ -425,7 +425,7 @@ namespace sora {
             if(!bPaused && !bPauseRender) {
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("RenderMainWindow");
+                    SORA_PROFILE("RenderMainWindow");
 #endif
                     mMainWindow->renderFunc();
                 }
@@ -434,7 +434,7 @@ namespace sora {
             if(!bPaused) {
                 {
 #ifdef PROFILE_CORE_UPDATE
-                    PROFILE("FRAMELISTENER_END");
+                    SORA_PROFILE("FRAMELISTENER_END");
 #endif
                     _frameListenerEnd();
                 }
@@ -526,12 +526,12 @@ namespace sora {
         factory->registerEvent<SoraMessageEvent>("MessageEvent");
     }
 
-	SoraHandle SoraCore::getMainWindowHandle() {
-		return pRenderSystem->getMainWindowHandle();
+	SoraHandle SoraCore::getMainWindowHandle() const {
+		return mWindowHandle;
 	}
 
-	SoraWindowInfoBase* SoraCore::getMainWindow() {
-		return pRenderSystem->getMainWindow();
+	SoraWindowInfoBase* SoraCore::getMainWindow() const {
+		return mMainWindow;
 	}
 
 	bool SoraCore::isActive() {
@@ -1045,19 +1045,6 @@ namespace sora {
 			SoraZSorter::renderQuad(quad, mPrevShaderContext);
 		} else 
 			pRenderSystem->renderQuad(quad);
-	}
-
-	void SoraCore::renderTriple(SoraTriple& trip) {
-		sora_assert(bInitialized==true);
-		
-		if(bZBufferSort) {
-#ifdef SORA_ENABLE_MULTI_THREAD
-            if(bMultithreadedRendering)
-                MUTEX_LOCK(mRenderingLock);
-#endif
-			SoraZSorter::renderTriple(trip, mPrevShaderContext);
-		} else 
-			pRenderSystem->renderTriple(trip);
 	}
 	
 	void SoraCore::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode) {
@@ -1612,26 +1599,6 @@ namespace sora {
 		sora_assert(bInitialized);
 		pRenderSystem->setCursor(cursor);
 	}
-	
-    void  SoraCore::enableRenderSystemExtension(int32 extesion) {
-        EnableRenderSystemExtension((ExtensionFeature)extesion);
-    }
-    
-    void  SoraCore::disableRenderSystemExtension(int32 extension) {
-        DisableRenderSystemExtension((ExtensionFeature)extension);
-    }
-    
-    void  SoraCore::setRenderSystemExtensionParam(int32 extension, int32 param) {
-        SetRenderSystemExtensionParam((ExtensionFeature)extension, param);
-    }
-    
-    int32 SoraCore::getRenderSystemExtensionParam(int32 extension) {
-        return GetRenderSystemExtensionParam((ExtensionFeature)extension);
-    }
-    
-    bool SoraCore::isRenderSystemExtensionEnabled(int32 ext) {
-        return IsRenderSystemExtensionEnabled((ExtensionFeature)ext);
-    }
     
     void SoraCore::registerFullscreenBufferDelegate(const SoraFunction<void(SoraTextureHandle)>& delegate) {
         SoraFullscreenBufferHandler::Instance()->registerDelegate(delegate);
@@ -1642,10 +1609,14 @@ namespace sora {
     }
     
     void SoraCore::pushTransformMatrix() {
-        g_TransformStack.push(g_CurrentTransform);
+        sora_assert(bInitialized);
+        
+        g_TransformStack.push(pRenderSystem->getTransformMatrix());
     }
     
     void SoraCore::popTransformMatrix() {
+        sora_assert(bInitialized);
+        
         if(!g_TransformStack.empty()) {
             g_CurrentTransform = g_TransformStack.top();
             g_TransformStack.pop();

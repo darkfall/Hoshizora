@@ -58,6 +58,22 @@ namespace sora {
             this->y2 = y + r;
         }
         
+        real getWidth() const {
+            return this->x2 - this->x1;
+        }
+        
+        real getHeight() const {
+            return this->y2 - this->y1;
+        }
+        
+        SoraVector getUpper() const {
+            return SoraVector(this->x1, this->y1);
+        }
+        
+        SoraVector getLower() const {
+            return SoraVector(this->x2, this->y2);
+        }
+        
         void encapsulate(real x, real y) {
             if(x<this->x1) this->x1 = x;
             if(x>this->x2) this->x2 = x;
@@ -84,9 +100,11 @@ namespace sora {
         
         SoraVector getPosition() const {
             return SoraVector((this->x1 + this->x2)/2,
-                              (this->y1+this->y2)/2);
+                              (this->y1 + this->y2)/2);
         }
     };
+    
+    typedef SoraRect SoraAABB;
 }
 
 

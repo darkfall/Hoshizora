@@ -70,7 +70,7 @@ namespace sora {
         return mDef.WindowPosY;
     }
     
-    SoraString SoraGameApp::GameAppWindow::getWindowName() { 
+    StringType SoraGameApp::GameAppWindow::getWindowName() { 
         if(mDef.Window)
             return mDef.Window->getWindowName();
         return mDef.WindowTitle;

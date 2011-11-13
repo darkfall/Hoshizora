@@ -23,9 +23,6 @@ namespace sora {
 		virtual float getFPS() = 0;
 		virtual bool update() = 0;
         
-    private:
-        friend class SoraCore;
-        
         static float TimeScale;
         static uint64 FrameCount;
 	};

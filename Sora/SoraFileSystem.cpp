@@ -170,6 +170,10 @@ namespace sora {
 		return mResourceManagers[0]->enumFiles(cont, folder);
 	}
     
+    void SoraFileSystem::addResource(SoraResource::Ptr r, StringType& tag) {
+        mResources.insert(std::make_pair(tag, r));
+    }
+    
     SoraResource::Ptr SoraFileSystem::addResource(const StringType& file, SoraResource::Type type, const StringType& tag) {
         std::string rtag = tag.empty() ? file : tag;
         

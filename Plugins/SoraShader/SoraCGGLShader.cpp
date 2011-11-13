@@ -1,6 +1,7 @@
 #include "SoraCGGLShader.h"
 #include "SoraCore.h"
 #include "SoraLogger.h"
+#include "SoraTexture.h"
 
 #ifdef SORA_USE_SHADER
 

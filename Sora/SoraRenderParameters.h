@@ -17,13 +17,14 @@ namespace sora {
     typedef SoraHandle SoraTextureHandle;
     typedef SoraHandle SoraTargetHandle;
     typedef SoraHandle SoraResourceHandle;
+    typedef SoraHandle SoraWindowHandle;
     
     enum RenderMode {
         // single points
-        Points,             // GL_POINTS, D3DPT_POINTLIST
+        Point,              // GL_POINTS, D3DPT_POINTLIST
         
         // line mode
-        Line = 1,           // GL_LINE, D3DPT_LINELIST
+        Line = 1,           // GL_LINES, D3DPT_LINELIST
         LineLoop = 2,       // GL_LINE_LOOP, D3DPT_LINESTRIP (no lineloop in d3d)
         
         // triangle mode
@@ -61,6 +62,8 @@ namespace sora {
         DstBlend,
         SrcAlpha,
         DstAlpha,
+        
+        BlendMode,
     };
     
     enum RenderStateParam {

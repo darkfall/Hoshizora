@@ -10,7 +10,9 @@
 #define Sora_SoraVertex_h
 
 #include "SoraPlatform.h"
-#include "SoraTexture.h"
+
+#include "SoraAutoPtr.h"
+#include "util/SoraArray.h"
 
 #include "math/SoraMatrix4.h"
 
@@ -42,14 +44,29 @@ namespace sora {
             
             return *this;
         }
-	};
+    };
+    
+#define	BLEND_COLORADD		1
+#define	BLEND_COLORMUL		0
+#define	BLEND_ALPHABLEND	2
+#define	BLEND_ALPHAADD		0
+#define	BLEND_ZWRITE		4
+#define	BLEND_NOZWRITE		0
+#define BLEND_SRCALPHA		8
+    
+#define BLEND_DEFAULT		(BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_NOZWRITE)
+#define BLEND_DEFAULT_Z		(BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_ZWRITE)
+    
+    typedef SoraArray<SoraVertex> SoraVertexArray;
+
+    class SoraTexture;
 	
 	struct SORA_API SoraQuad {
 		SoraVertex		v[4];
 		SoraTexture*	tex;
 		int				blend;
         
-        SoraQuad(): tex(NULL) {}
+        SoraQuad(): tex(0) {}
         
         SoraQuad operator*(const SoraMatrix4& rhs) const {
             SoraQuad tmp = *this;
@@ -63,15 +80,6 @@ namespace sora {
             return *this;
         }
 	};
-	
-	struct SORA_API SoraTriple {
-		SoraVertex		v[3];
-		SoraTexture*	tex;
-		int				blend;
-        
-        SoraTriple(): tex(NULL) {}
-	};
-    
 }
 
 

@@ -21,7 +21,7 @@
 
 namespace sora {
     
-    GLint RenderParamToGLParam(RenderStateParam param) {
+    GLint RenderParamToGLParam(int32 param) {
         switch (param) {
             case TextureWrapClamp:          return GL_CLAMP;
             case TextureWrapRepeat:         return GL_REPEAT;
@@ -73,7 +73,8 @@ namespace sora {
     
     GLenum RenderModeToGLMode(RenderMode mode) {
         switch (mode) {
-			case Line:				return GL_LINE;
+            case Point:             return GL_POINTS;
+			case Line:				return GL_LINES;
             case LineLoop:          return GL_LINE_LOOP;
 			case Triangle:          return GL_TRIANGLES;
 			case TriangleFan:       return GL_TRIANGLE_FAN;

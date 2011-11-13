@@ -6,8 +6,6 @@
 
 namespace sora {
 
-	typedef SoraHandle SoraWindowHandle;
-
 	class SORA_API SoraWindowInfoBase: public SoraEventHandler {
 	public:
         SoraWindowInfoBase(): mActive(true) {}
@@ -18,7 +16,7 @@ namespace sora {
 		virtual int32 getWindowPosX() = 0;
 		virtual int32 getWindowPosY() = 0;
 		
-		virtual SoraString getWindowName() = 0;
+		virtual StringType getWindowName() = 0;
 		virtual SoraString getWindowId() = 0;
 		
 		virtual void init() = 0;

@@ -90,7 +90,7 @@ namespace sora {
         }
         
         inline void setRotation(real x, real y, real z) {
-            mRotation = SoraQuaternion(x, y, z);
+            mRotation = SoraQuaternion(x, y, z, 0);
             
             buildTransformMatrix();
         }

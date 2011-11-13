@@ -41,9 +41,12 @@ namespace sora {
             SoundEffect,
             Shader,
             SpriteSheet,
+            Material,
+            Mesh,
             RawData,
         };
         static Type IdentToType(const std::string& ident);
+        static std::string TypeToIdent(Type type);
         
         SoraResource(Type type);
         virtual ~SoraResource();

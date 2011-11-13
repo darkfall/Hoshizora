@@ -51,11 +51,7 @@ namespace sora {
     }
     
     void SoraVertexList::vertexList(const SoraVertex* vertex, size_t count) {
-        for(size_t i=0; i<count; ++i) {
-            mVertexList.push_back(vertex[i]);
-            
-            mVertexIndex++;
-        }
+        mVertexList.append(vertex, count);
     }
     
     void SoraVertexList::vertex2(float x, float y) {
@@ -207,20 +203,24 @@ namespace sora {
         SoraCore::Ptr->pushTransformMatrix();
         SoraCore::Ptr->getRenderSystem()->multTransformMatrix(getTransform().getTransformMatrix());
         
+        this->attachShaderToRender();
         SoraCore::Ptr->renderWithVertices(mTexture, mBlendMode, mVertexList.begin(), mVertexList.size(), mVertexMode);
+        this->detachShaderFromRender();
         
         SoraCore::Ptr->popTransformMatrix();
     }
     
     SoraVertexList& SoraVertexList::operator=(const SoraVertexList& rhs) {
-        mVertexMode = rhs.mVertexMode;
-        mBlendMode = rhs.mBlendMode;
-        mTexture = rhs.mTexture;
-        mVertexList = rhs.mVertexList;
-        
-        mVertexIndex = rhs.mVertexIndex;
-        mTexCoordIndex = rhs.mTexCoordIndex;
-        mColorIndex = rhs.mColorIndex;
+        if(this != &rhs) {
+            mVertexMode = rhs.mVertexMode;
+            mBlendMode = rhs.mBlendMode;
+            mTexture = rhs.mTexture;
+            mVertexList = rhs.mVertexList;
+            
+            mVertexIndex = rhs.mVertexIndex;
+            mTexCoordIndex = rhs.mTexCoordIndex;
+            mColorIndex = rhs.mColorIndex;
+        }
         
         return *this;
     }

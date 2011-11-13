@@ -58,21 +58,14 @@ namespace sora {
                     delete []obj;
             }
         };
-        
-        
-        struct FreeReleasePolicy {
-            static void Release(void* obj) {
-                sora_free(obj);
-            }
-        };
     }
 
 	template<typename T, class RC=autoptr::RefCounter, class RP=autoptr::ReleasePolicy<T> >
 	class SORA_API SoraAutoPtr {
 	public:
-		SoraAutoPtr(): ptr(NULL), counter(new RC) {}
+		SoraAutoPtr(): ptr(0), counter(new RC) {}
 		
-        explicit SoraAutoPtr(T* t): ptr(t), counter(new RC) { 
+        SoraAutoPtr(T* t): ptr(t), counter(new RC) { 
         }
         
         template<class Other, class OtherRP>
@@ -119,7 +112,7 @@ namespace sora {
             return *this;
         }
       
-        void reset(T* ptr=NULL) {
+        void reset(T* ptr=0) {
             assign(ptr);
         }
 
@@ -154,9 +147,6 @@ namespace sora {
             return SoraAutoPtr<Other, RC, RP>(counter, other);
         }
         
-        T* get() {
-            return ptr;
-        }
         T* get() const {
             return ptr;
         }
@@ -250,9 +240,8 @@ namespace sora {
         bool isNull() const {
             return ptr==0;
         }
-
 		
-		int32 ref_count() const { 
+		int32 getRefCount() const { 
 			return counter->getRef();
 		}
         
@@ -260,14 +249,14 @@ namespace sora {
 			return ptr == rhs.ptr;
 		}
 		
-	private:
-		T* deref() const {
+        T* deref() const {
             if(!ptr)
                 THROW_SORA_EXCEPTION(NullPointerException, "");
             return ptr;
         }
         
-        void release() {
+	private:
+		void release() {
             sora_assert(counter);
             int i = counter->decRef();
             if(i == 0) {
@@ -306,7 +295,12 @@ namespace sora {
                 T::Release();
             }
         };
-        
+                
+        struct FreeReleasePolicy {
+            static void Release(void* obj) {
+                sora_free(obj);
+            }
+        };
     }  
         
     template<typename T>
@@ -317,8 +311,53 @@ namespace sora {
 	template<typename T>
 	class SoraSharedClass: public SoraAutoPtr<T> {
 	public:
-		typedef SoraAutoPtr<T> Pointer;
+		typedef SoraAutoPtr<T> Ptr;
 	};
+    
+    template<typename T>
+    SoraAutoPtr<T> MakeSharedPtr() {
+        return SoraAutoPtr<T>(new T());
+    }
+    
+    template<typename T, typename A1>
+    SoraAutoPtr<T> MakeSharedPtr(A1 a1) {
+        return SoraAutoPtr<T>(new T(a1));
+    }
+    
+    template<typename T, typename A1, typename A2>
+    SoraAutoPtr<T> MakeSharedPtr(A1 a1, A2 a2) {
+        return SoraAutoPtr<T>(new T(a1, a2));
+    }
+    
+    template<typename T, typename A1, typename A2, typename A3>
+    SoraAutoPtr<T> MakeSharedPtr(A1 a1, A2 a2, A3 a3) {
+        return SoraAutoPtr<T>(new T(a1, a2, a3));
+    }
+    
+    template<typename T, typename A1, typename A2, typename A3, typename A4>
+    SoraAutoPtr<T> MakeSharedPtr(A1 a1, A2 a2, A3 a3, A4 a4) {
+        return SoraAutoPtr<T>(new T(a1, a2, a3, a4));
+    }
+    
+    template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5>
+    SoraAutoPtr<T> MakeSharedPtr(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) {
+        return SoraAutoPtr<T>(new T(a1, a2, a3, a4, a5));
+    }
+    
+    template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6>
+    SoraAutoPtr<T> MakeSharedPtr(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) {
+        return SoraAutoPtr<T>(new T(a1, a2, a3, a4, a5, a6));
+    }
+    
+    template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7>
+    SoraAutoPtr<T> MakeSharedPtr(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) {
+        return SoraAutoPtr<T>(new T(a1, a2, a3, a4, a5, a6, a7));
+    }
+    
+    template<typename T, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8>
+    SoraAutoPtr<T> MakeSharedPtr(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) {
+        return SoraAutoPtr<T>(new T(a1, a2, a3, a4, a5, a6, a7, a8));
+    }
 		
 } // namespace sora
 #endif

@@ -58,65 +58,6 @@ float zpos = 0.f;
 
 #include "SoraVertexList.h"
 
-sora::SoraVertexList vertexL(sora::Triangle);
-sora::SoraShape shape;
-
-void sphereMap(float x, float y, float z, float r, sora::SoraVertex& vertex) {
-    vertex.ty = acosf(z/r) / sora::F_PI;
-    if(vertex.ty > 0.0f) {
-        vertex.tx = acosf(x/(r*sinf(sora::F_PI * vertex.ty))) / sora::F_PI*2;
-    } else {
-        vertex.tx = (sora::F_PI + acosf(x/(r*sinf(sora::F_PI*vertex.ty)))) / sora::F_PI*2;
-    }
-}
-
-void getVertex(float r, float a, float b, sora::SoraVertex& vertex, float x, float y) {
-    
-    float sina = sinf(sora::DegreeToRadius(a));
-    vertex.x = x+r * sina * cosf(sora::DegreeToRadius(b));
-    vertex.y = y+r * sina * sinf(sora::DegreeToRadius(b));
-    vertex.z = r * cosf(sora::DegreeToRadius(a));
-    vertex.col = 0xFFFFFFFF;
-    sphereMap(vertex.x-x, vertex.y-y, vertex.z, r, vertex);
-}
-
-sora::SoraVertex* getPointMatrix(GLfloat radius,GLint slices, float x, float y)
-{
-    int i,j,w=2*slices,h=slices;
-    float a=0.0,b=0.0;
-    float hStep=180.0/(h-1);
-    float wStep=360.0/w;
-    int length=w*h;
-    sora::SoraVertex *matrix;
-    matrix=(sora::SoraVertex *)malloc(length*sizeof(sora::SoraVertex));
-    if(!matrix)return NULL;
-    for(a=0.0,i=0;i<h;i++,a+=hStep)
-        for(b=0.0,j=0;j<w;j++,b+=wStep)  
-            getVertex(radius,a,b,matrix[i*w+j],x,y); 
-    return matrix;
-}
-
-void buildSphere(GLfloat radius,GLint slices, float x, float y)
-{
-    int i=0,j=0,w=2*slices,h=slices;
-    sora::SoraVertex *mx;
-    mx=getPointMatrix(radius,slices,x,y);
-    for(;i<h-1;i++)
-    {
-        for(j=0;j<w-1;j++) {
-            vertexL.vertex(mx[i*w+j]);
-            vertexL.vertex(mx[i*w+j+1]);
-            vertexL.vertex(mx[(i+1)*w+j+1]);
-            vertexL.vertex(mx[(i+1)*w+j]);
-        }
-        vertexL.vertex(mx[i*w+j]);
-        vertexL.vertex(mx[i*w]);
-        vertexL.vertex(mx[(i+1)*w]);
-        vertexL.vertex(mx[(i+1)*w+j]);
-    }
-    free(mx);
-}
-
 float cube[] = {
     100.f, 100.f, -100.f,
     300.f, 100.f, -100.f,
@@ -190,17 +131,6 @@ float color[] = {
 
 float s = 1.f;
 
-
-void build(int detail) {
-    vertexL.clear();
-    buildSphere(200.f, 10 * detail, 0.f, 0.f);
-}
-
-void texx(const SoraString& tex) {
-    vertexL.bindTexture(sora::SoraTexture::LoadFromFile(tex));
-
-}
-
 #include "util/SoraPointTemplate.h"
 
 
@@ -208,36 +138,64 @@ float xp = 512, yp = 384;
 
 sora::Sora3DCamera* camera;
 
+#include "Sora3D/SoraModel.h"
+#include "Sora3D/SoraModelLoader.h"
+
+sora::SoraModel::Ptr sphereModel;
+sora::SoraModel::Ptr boxModel;
+
+#include "math/SoraPerlinNoise.h"
+
+#include "debug/SoraGlobalProfiler.h"
+#include "debug/SoraAutoProfile.h"
+
+
+sora::SoraRenderBuffer::Ptr vertexBuffer;
+sora::SoraRenderBuffer::Ptr indexBuffer;
+
+struct myVertex {
+    float x, y, z;
+    float nx, ny, nz;
+    uint32 col;
+  //  float tx, ty;
+};
 
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-        buildSphere(200.f, 10, 0.f, 0.f);
-    
+        sphereModel = sora::SoraModelLoader::BuildModelFromSphere(sora::SoraSphere(sora::SoraVector3(0.0, 0.0, 0.0), 200.f), 
+                                                                  50, 
+                                                                  new sora::SoraMaterial(sora::SoraMaterial::Solid));
+        
+        sora::SoraAABB3 abox = sphereModel->getBoudingBox();
+        boxModel = sora::SoraModelLoader::BuildModelFromAABB(abox, new sora::SoraMaterial(sora::SoraMaterial::WireFrame));
+        
         camera = new sora::Sora3DCamera(sora::Sora3DCamera::Perspective);
         camera->setProjectionMatrix(sora::SoraMatrix4::PerspectiveMat(60.f, 1.33, 10.f, 3000.f));
         camera->setPosition(-512.f, -384.f, -1000.f);
+        
     //    camera->lookAt(512.f, 384.f, -500.f, 512.f, 384.f, 500.f, 0, 0, 1);
-
+        
     }
     
     void onRender() {
+
         sora::SoraGameApp::BeginScene();
         
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_DOWN))
-            x -= 0.1;
+            x -= 1;
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_UP))
-            x += 0.1;
+            x += 1;
         
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_LEFT))
-            y -= 0.1;
+            y -= 1;
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_RIGHT))
-            y += 0.1;
+            y += 1;
         
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_Q))
-            z -= 0.1;
+            z -= 1;
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_E))
-            z += 0.1;
+            z += 1;
         
         if(sora::SoraCore::Ptr->keyDown(SORA_KEY_W))
             s -= 0.01f;
@@ -259,11 +217,10 @@ public:
       //  camera->setPosition(x, y, z);
      //   z -= 1.f;
         
-        sora::SoraMatrix4 rot = sora::SoraMatrix4::RotMat(x, y, z);
-        sora::SoraMatrix4 translate = sora::SoraMatrix4::TransMat(512, 384, zpos);
+        sora::SoraMatrix4 rot = sora::SoraMatrix4::RotMat(sora::DegreeToRadius(x), sora::DegreeToRadius(y), sora::DegreeToRadius(z));
+        sora::SoraMatrix4 translate = sora::SoraMatrix4::TransMat(xp, yp, 0);
         
-        sora::SoraMatrix4 myView = sora::SoraMatrix4::TransMat(512, 384, zpos) * rot * sora::SoraMatrix4::ScaleMat(s, s, s) * sora::SoraMatrix4::TransMat(-512, -384, zpos) ;
-      ///  sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
+        sora::SoraMatrix4 myView = translate * rot * sora::SoraMatrix4::ScaleMat(s, s, s);
         
       //  sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT_Z, &vt[0], 8, sora::TriangleStrip);
         
@@ -279,20 +236,46 @@ public:
         
 
         sora::SoraCore::Ptr->switchTo3D();
-   //     sora::SoraCore::Ptr->getRenderSystem()->setProjectionMatrix(sora::SoraMatrix4());
+        sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
         
-        vertexL.getTransform().setPosition(xp, yp, 0.f);
-        vertexL.getTransform().setRotation(x, y, z);
-        vertexL.getTransform().setScale(s, s, s);
-        vertexL.render();
+        {
+            sora::SoraTimestamp ts;
+
+            sora::SoraCore::Ptr->getRenderSystem()->renderBuffer(0, 
+                                                                 sora::Triangle, 
+                                                                 vertexBuffer, 
+                                                                 sora::SoraRenderBuffer::NullObject());
+            
+            //  sphereModel->render();
+
+            printf("%llu\n", ts.elapsed());
+        }
         
+     /*   sphereModel->getTransform().setPosition(xp, yp, 0.f);
+        sphereModel->getTransform().setRotation(sora::SoraQuaternion(sora::DegreeToRadius(x), sora::DegreeToRadius(y), sora::DegreeToRadius(z), 0));
+        sphereModel->getTransform().setScale(s, s, s);*/
+      /*  
+        sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(vertexL.getTransform().getTransformMatrix());
+        sora::SoraAABB3 abox = sora::SoraAABB3::AABB3FromVertices(vertexL.getVertexList().begin(), vertexL.getVertexList().size());
+        
+        sora::SoraVertexArray arr = abox.buildVertexArray();
+        
+        sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT, arr.begin(), 24, sora::Line);
+        */
+        
+        
+        boxModel->getTransform().setPosition(xp, yp, 0.f);
+        boxModel->getTransform().setRotation(sora::SoraQuaternion(sora::DegreeToRadius(x), sora::DegreeToRadius(y), sora::DegreeToRadius(z), 0));
+        boxModel->getTransform().setScale(s, s, s);
+    //    boxModel->render();
+     
         mBg.enable3D(true);
         mBg.getTransform().setRotation(x, y, z);
         
       //  mBg.getTransform().setScale(1.5f, 1.f, 1.f);
         mBg.setPosition(512, 384);
         mBg.setCenter(mBg.getSpriteWidth()/2, mBg.getSpriteHeight()/2);
-     //   mBg.render();
+    //    mBg.render();
         
         mText2.enable3D(true);
         mText2.getTransform().setRotation(0.f, 0.f, 1.f);
@@ -311,12 +294,18 @@ public:
         
         sora::SoraCore::Ptr->setTransform();
         mFont->render(0.f, 80.f, L"|#00FFFF|O");
-        mFont->print(0.f, 600.f, sora::SoraFont::AlignmentLeft, L"fps : %f\nvertex: %d", sora::SoraCore::Ptr->getFPS(), vertexL.size());
+        mFont->print(0.f, 600.f, sora::SoraFont::AlignmentLeft, L"fps : %f\nmodel: vertex: %d, UV: %d, normal: %d, face: %d", sora::SoraCore::Ptr->getFPS(), 
+                     boxModel->getMesh()->vertexCount(),
+                     boxModel->getMesh()->UVCount(),
+                     boxModel->getMesh()->normalCount(),
+                     boxModel->getMesh()->faceCount()
+                     
+                     );
         
         
         sora::SoraGameApp::EndScene();
         
-
+        
     }
     
     void onUpdate(float dt) {
@@ -333,7 +322,44 @@ public:
     void onEnter() {
         sora::SoraCore::Instance()->registerPhysicWorld(new sora::SoraBox2dPhysicWorld(0.f, 1.f, true));
         sora::SoraCore::Ptr->setFPS(60);
-
+        
+        vertexBuffer = sora::SoraCore::Instance()->getRenderSystem()->createVertexBuffer(sora::SoraRenderBuffer::ReadWrite, 
+                                                                                         sora::SoraRenderBuffer::Static, 
+                                                                                         sphereModel->getMesh()->mFaces.size(),
+                                                                                         0, 
+                                                                                         sora::SoraVertexFormat(sora::VertexXYZ | sora::VertexNormal | sora::VertexColor )
+                                                                                         .offsetXYZ(0)
+                                                                                         .offsetNormal(sizeof(float)*3)
+                                                                                         .offsetColor(sizeof(float)*6));
+        myVertex* vertexData = static_cast<myVertex*>(vertexBuffer->map());
+        sora_assert(vertexData);
+        
+        for(int i=0; i<sphereModel->getMesh()->mFaces.size(); ++i) {
+            const sora::SoraVertex& vertex = sphereModel->getMesh()->mFaces[i];
+            
+            vertexData[i].x = vertex.x;
+            vertexData[i].y = vertex.y;
+            vertexData[i].z = vertex.z;
+            
+            vertexData[i].nx = vertex.x / 200.f;
+            vertexData[i].ny = vertex.y / 200.f;
+            vertexData[i].nz = vertex.x / 200.f;
+            
+            vertexData[i].col = vertex.col;
+        }
+        
+        vertexBuffer->unmap();
+        
+        indexBuffer = sora::SoraCore::Ptr->getRenderSystem()->createIndexBuffer(sora::SoraRenderBuffer::ReadWrite, 
+                                                                                sora::SoraRenderBuffer::Static, 
+                                                                                24,
+                                                                                0);
+        uint32* indexes = static_cast<uint32*>(indexBuffer->map());
+        sora_assert(indexes);
+        
+        for(int i=0; i<24; ++i)
+            indexes[i] = i;
+        indexBuffer->unmap();
         
         sc1.setTexture(sora::SoraTexture::LoadFromFile("bg-optd.png"));
        
@@ -360,7 +386,8 @@ public:
         body = sora::SoraPhysicWorld::CreateBody(sora::SoraPhysicBodyDef(sora::SoraPhysicBodyDef::StaticBody, sora::SoraVector(0.f, 600.f)));
         body->createFixture(sora::SoraPhysicFixtureDef(sora::SoraPhysicShape::BoxAsShape(800.f, 10.f, 400.f, 5.f, 0.f)));
         
-        mShader = /* mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet")*/ 0;
+        mShader =  mBg.attachFragmentShader("MandelbrotSet.cg", "MandelbrotSet");
+        
         lx = -2.5f;
         ly = 1.0f;
         rx = -2.f;
@@ -382,6 +409,7 @@ public:
         mShape.setTexture(sora::SoraTexture::LoadFromFile("background.png"));
         mShape.enableRenderToSprite(true);
         
+      //  boxModel = sora::SoraModelLoader::LoadModel("old_key.obj");
         
     }
     
@@ -445,7 +473,6 @@ private:
     sora::SoraSprite sc2;
     
 };
-#include "SoraRenderSystemExtension.h"
 
 void msetCommands(sora::SoraConsoleEvent* evt) {
     
@@ -489,31 +516,10 @@ void msetCommands(sora::SoraConsoleEvent* evt) {
     } else if(cmd == "set_cb") {
         cb = param.asFloat();
         evt->pushResult("cb had been set to "+param);
-    } else if(cmd == "detail") {
-        build(param.asInt());
     } else if(cmd == "tex") {
-        texx(param.get());
-    } else if(cmd == "vertexmode") {
-        switch(param.asInt()) {
-            case 1:
-                vertexL.setRenderMode(sora::LineLoop);
-                break;
-            case 2:
-                vertexL.setRenderMode(sora::Quad);
-                break;
-            case 3:
-                vertexL.setRenderMode(sora::Triangle);
-                break;
-            case 4:
-                vertexL.setRenderMode(sora::TriangleStrip);
-                break;
-            case 5:
-                vertexL.setRenderMode(sora::TriangleFan);
-                break;
-        }
+        sphereModel->getMaterial()->setTexture(0, sora::SoraTexture::LoadFromFile(param));
     }
 }
-
 #include "util/SoraDictionary.h"
 
 #include "SoraGraphicAlgorithm.h"

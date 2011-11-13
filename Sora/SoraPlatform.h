@@ -118,7 +118,7 @@ static inline int lrint (double const x) { // Round to nearest integer
 
 
 /*
- automatically register plugins
+ automatically register plugins(if you choose to compile the plugin into the app)
  depends on plugin implemention
  plugins can choose to use this macro to define whether to 
  register itself to sora when the app starts

@@ -42,10 +42,10 @@ namespace sora {
         PluginMap mPluginMap;
     };
     
-#define SoraRegisterFunc(name, func) \
+#define SORA_REGISTER_PLUGIN_FUNC(name, func) \
     ::sora::SoraPluginManager::RegisterFunc(name, func);
     
-#define SoraGetFunc(name) \
+#define SORA_GET_PLUGIN_FUNC(name) \
     ::sora::SoraPluginManager::GetFunc(name);
 
 } // namespace sora

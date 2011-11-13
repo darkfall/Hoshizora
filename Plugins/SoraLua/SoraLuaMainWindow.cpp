@@ -40,7 +40,7 @@ namespace sora {
 		return callLuaFunc<int32>(mScriptObj.getState(), "getWindowPosY");
 	}
 	
-	SoraString SoraLuaMainWindow::getWindowName() {
+	StringType SoraLuaMainWindow::getWindowName() {
 		return callLuaFunc<SoraString>(mScriptObj.getState(), "getWindowName");
 	}
 	

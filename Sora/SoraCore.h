@@ -128,12 +128,6 @@ namespace sora {
 		SoraPlugin* unistallPlugin  (const SoraString& sPluginName);
 		SoraPlugin* getPlugin		(const SoraString& sPluginName);
         
-        bool  isRenderSystemExtensionEnabled(int32 extension);
-        void  enableRenderSystemExtension(int32 extesion);
-        void  disableRenderSystemExtension(int32 extension);
-        void  setRenderSystemExtensionParam(int32 extension, int32 param);
-        int32 getRenderSystemExtensionParam(int32 extension);
-        
     public:
         /**
          * fps
@@ -183,7 +177,6 @@ namespace sora {
 		SoraSprite* createSprite (const StringType& sPath);
 
 		void renderQuad(SoraQuad& quad);
-		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode=Triangle);
 
         void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f);
@@ -298,8 +291,8 @@ namespace sora {
 		 under windows, this would return HWND, 
 		 under other plaforms, just return (SoraHandle)mainWindow
 		 */
-		SoraHandle getMainWindowHandle();
-		SoraWindowInfoBase* getMainWindow();
+		SoraHandle getMainWindowHandle() const;
+		SoraWindowInfoBase* getMainWindow() const;
         
     public:
         /**
@@ -447,6 +440,7 @@ namespace sora {
 		bool bFrameSync;
 
 		SoraWindowInfoBase* mMainWindow;
+        SoraHandle mWindowHandle;
         SoraShaderContext* mPrevShaderContext;
         
         bool bEnableScreenBuffer;

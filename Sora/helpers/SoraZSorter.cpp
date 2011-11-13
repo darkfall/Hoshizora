@@ -85,20 +85,6 @@ namespace sora {
 		__z_buffer_insert_node(node, z);
 	}
 	
-	void SoraZSorter::renderTriple(SoraTriple& trip, SoraShaderContext* shader) {
-		int32 z = static_cast<int32>(trip.v[0].z * 1000);
-		__Z_BUFFER_NODE node;
-		node.vertex = new SoraVertex[3];
-		memcpy(node.vertex, &trip.v[0], sizeof(SoraVertex)*3);
-		node.size = 3;
-		node.blend = trip.blend;
-		node.tex = trip.tex;
-		node.shader = shader;
-        node.viewMatrix = sora::SoraCore::Ptr->getRenderSystem()->getTransformMatrix();
-		
-		__z_buffer_insert_node(node, z);
-	}
-	
 	void SoraZSorter::renderWithVertices(SoraTextureHandle tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode, SoraShaderContext* shader) {
 		// use z 0
 		int32 z = static_cast<int32>(vertices[0].z * 1000);
@@ -134,17 +120,6 @@ namespace sora {
 						SoraCore::Ptr->attachShaderContext(node->shader);
                     SoraCore::Ptr->getRenderSystem()->setTransformMatrix(node->viewMatrix);
 					SoraCore::Ptr->renderQuad(quad);
-					SoraCore::Ptr->detachShaderContext();
-				} else if(node->size == 3) {
-					SoraTriple trip;
-					memcpy(&trip.v[0], node->vertex, sizeof(SoraVertex)*3);
-					trip.blend = node->blend;
-					trip.tex = node->tex;
-					
-					if(node->shader)
-						SoraCore::Ptr->attachShaderContext(node->shader);
-                    SoraCore::Ptr->getRenderSystem()->setTransformMatrix(node->viewMatrix);
-					SoraCore::Ptr->renderTriple(trip);
 					SoraCore::Ptr->detachShaderContext();
 				} else if(node->size != 0) {
 					if(node->shader)

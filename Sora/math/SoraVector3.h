@@ -45,7 +45,15 @@ namespace sora {
 			this->x -= rhs.x; this->y -= rhs.y; this->z -= rhs.z;
 			return *this;
 		}
+        
+        SoraVector3 operator-() const {
+            return SoraVector3(-this->x, -this->y, -this->z);
+        }
 	
+        real operator*(const SoraVector3& rhs) {
+            return this->dot(rhs);
+        }
+        
 		real dot(const SoraVector3& rhs) const {
 			return this->x*rhs.x+this->y*rhs.y+this->z*rhs.z;
 		}
@@ -69,6 +77,10 @@ namespace sora {
 		SoraVector3 negate() const {
 			return SoraVector3(-this->x, -this->y, -this->z);
 		}
+        
+        bool operator==(const SoraVector3& rhs) const {
+            return this->x == rhs.x && this->y == rhs.y && this->z == rhs.z;
+        }
 
 		real x, y, z;
 	};

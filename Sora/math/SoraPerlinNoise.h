@@ -22,17 +22,15 @@ namespace sora {
     
     class SORA_API SoraPerlinNoise {
     public:
-        static float gen(float x, float y, float z);
+        static float Gen(float x, float y, float z);
         
     private:
         static float fade(float t);
         static float lerp(float t, float a, float b);
         static float grad(int hash, float x, float y, float z);
-        
-        static int perm[512];
     };
     
-    int SoraPerlinNoise::perm[512] = {60,137,91,90,15,
+    static int _sora_perlin_noise_perm[512] = {60,137,91,90,15,
         131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
         190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
         88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,134,139,48,27,166,
@@ -62,7 +60,7 @@ namespace sora {
         return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
     }
     
-    inline float SoraPerlinNoise::gen(float x, float y, float z) {
+    inline float SoraPerlinNoise::Gen(float x, float y, float z) {
         float floorX = floorf(x);
         float floorY = floorf(y);
         float floorZ = floorf(z);
@@ -79,21 +77,21 @@ namespace sora {
         float v = fade(y);
         float w = fade(z);
         
-        int A = perm[X] + Y;
-        int AA = perm[A] + Z;
-        int AB = perm[A+1] + Z;
-        int B = perm[X+1] + Y;
-        int BA = perm[B] + Z;
-        int BB = perm[B+1] + Z;
+        int A = _sora_perlin_noise_perm[X] + Y;
+        int AA = _sora_perlin_noise_perm[A] + Z;
+        int AB = _sora_perlin_noise_perm[A+1] + Z;
+        int B = _sora_perlin_noise_perm[X+1] + Y;
+        int BA = _sora_perlin_noise_perm[B] + Z;
+        int BB = _sora_perlin_noise_perm[B+1] + Z;
         
-        return lerp(w,  lerp(v, lerp(u, grad(perm[AA], x, y, z),
-                                        grad(perm[BA], x-1, y, z)),
-                                lerp(u, grad(perm[AB], x, y-1, z),
-                                        grad(perm[BB], x-1, y-1, z))),
-                        lerp(v, lerp(u, grad(perm[AA+1] x, y, z-1),
-                                        grad(perm[BA+1], x-1, y, z-1)),
-                                lerp(u, grad(perm[AB+1], x, y-1, z-1),
-                                        grad(perm[BB+1], x-1, y-1, z-1))));    
+        return lerp(w,  lerp(v, lerp(u, grad(_sora_perlin_noise_perm[AA], x, y, z),
+                                        grad(_sora_perlin_noise_perm[BA], x-1, y, z)),
+                                lerp(u, grad(_sora_perlin_noise_perm[AB], x, y-1, z),
+                                        grad(_sora_perlin_noise_perm[BB], x-1, y-1, z))),
+                        lerp(v, lerp(u, grad(_sora_perlin_noise_perm[AA+1], x, y, z-1),
+                                        grad(_sora_perlin_noise_perm[BA+1], x-1, y, z-1)),
+                                lerp(u, grad(_sora_perlin_noise_perm[AB+1], x, y-1, z-1),
+                                        grad(_sora_perlin_noise_perm[BB+1], x-1, y-1, z-1))));    
     }
     
 } // namespace sora

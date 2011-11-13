@@ -75,7 +75,6 @@ namespace sora {
         return SoraStringManager::Instance()->getStringId(name);
     }
     
-    
     inline SoraString GetStringByUniqueId(SoraStringId sid) {
         return SoraStringManager::Instance()->getStringById(sid);
     }

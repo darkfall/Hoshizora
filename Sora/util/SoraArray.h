@@ -10,6 +10,7 @@
 #define Sora_SoraArray_h
 
 #include "SoraPlatform.h"
+#include "SoraAutoPtr.h"
 
 namespace sora {
   
@@ -35,6 +36,7 @@ namespace sora {
         SoraArray(uint32 capcity, uint32 grow);
         SoraArray(uint32 size, uint32 grow, const T& value);
         SoraArray(const SoraArray<T>& rhs);
+        SoraArray(const T* arr, uint32 size);
         ~SoraArray();
         
         void operator=(const SoraArray<T>& rhs);
@@ -45,6 +47,7 @@ namespace sora {
         
         void append(const T& elm);
         void appendArray(const SoraArray<T>& rhs);
+        void append(const T* arr, uint32 size);
         
         void reserve(uint32 num);
         uint32 size() const;
@@ -87,6 +90,8 @@ namespace sora {
         void sort() const;
         uint32 binarySearchIndex(const T& elm);
         
+        void map(T* mappedPtr, uint32 size);
+        
     private:
         void destroyAll();
         void destroy(T* elm);
@@ -99,6 +104,11 @@ namespace sora {
         uint32 mCapacity;
         uint32 mSize;
         T* mElements;
+        
+        typedef SoraAutoPtr<T, autoptr::RefCounter, autoptr::FreeReleasePolicy> AutoPtrType;
+        AutoPtrType mHolder;
+        
+        bool mMapped;
     };
     
     template<typename T>
@@ -106,7 +116,8 @@ namespace sora {
     mGrow(0),
     mCapacity(0),
     mSize(0),
-    mElements(0) {
+    mElements(0),
+    mMapped(false) {
         
     }
     
@@ -114,9 +125,12 @@ namespace sora {
     SoraArray<T>::SoraArray(uint32 capacity, uint32 grow):
     mGrow(grow),
     mCapacity(capacity),
-    mSize(0) {
+    mSize(0),
+    mMapped(false) {
         if(capacity != 0) {
-            this->mElements = sora_malloc(sizeof(T) * capacity);
+            this->mElements = sora_malloc_t(T, capacity);
+            this->mHolder = this->mElements;
+            this->mSize = this->mCapacity;
         } else 
             this->mElements = 0;
     }
@@ -125,20 +139,35 @@ namespace sora {
     SoraArray<T>::SoraArray(uint32 size, uint32 grow, const T& value):
     mGrow(grow),
     mCapacity(size),
-    mSize(size) {
+    mSize(size),
+    mMapped(false) {
         if(size > 0) {
             this->mElements = (T*)sora_malloc(sizeof(T) * this->mCapacity);
             for(int32 i = 0; i < this->mCapacity; ++i) {
                 this->mElements[i] = value;
             }
+            this->mHolder = this->mElements;
         } else {
             this->mElements = 0;
         }
     }
     
     template<typename T>
+    SoraArray<T>::SoraArray(const T* arr, uint32 size):
+    mGrow(0),
+    mCapacity(0),
+    mSize(0),
+    mMapped(false) {
+        sora_assert(size > 0);
+        
+        reserve(size);
+        memcpy(this->mElements, arr, sizeof(T) * size);
+        this->mSize = size;
+    }
+    
+    template<typename T>
     void SoraArray<T>::copy(const SoraArray<T>& src) {
-        sora_assert(mElements == 0);
+        sora_assert(this->mElements == 0);
         
         this->mGrow = src.mGrow;
         this->mCapacity = src.mCapacity;
@@ -148,6 +177,7 @@ namespace sora {
             for(int32 i=0; i<this->mSize; ++i) {
                 this->mElements[i] = src.mElements[i];
             }
+            this->mHolder = this->mElements;
         }
     }
     
@@ -157,9 +187,20 @@ namespace sora {
         this->mCapacity = 0;
         this->mSize = 0;
         if(this->mElements) {
-            sora_free(this->mElements);
+            // reset auto ptr
+            this->mHolder.reset();
+            
             this->mElements = 0;
         }
+    }
+    
+    template<typename T>
+    void SoraArray<T>::map(T* mappedPtr, uint32 size) {
+        clear();
+        
+        this->mCapacity = this->mSize = size;
+        this->mElements = mappedPtr;
+        this->mMapped = true;
     }
     
     template<typename T>
@@ -172,13 +213,14 @@ namespace sora {
     mGrow(0),
     mCapacity(0),
     mSize(0),
-    mElements(0) {
-        this->copy(rhs);
+    mElements(0),
+    mMapped(rhs.mMapped) {
+        *this = rhs;
     }
     
     template<typename T>
     SoraArray<T>::~SoraArray() {
-        this->clear();
+        
     }
     
     template<typename T>
@@ -186,9 +228,11 @@ namespace sora {
         this->destroyAll();
         this->mGrow = grow;
         this->mCapacity = capacity;
+        this->mMapped= false;
         this->mSize = 0;
         if(this->mCapacity > 0) {
             this->mElements = (T*)sora_malloc(sizeof(T) * this->mCapacity);
+            this->mHolder = this->mElements;
         } else {
             this->mElements = 0;
         }
@@ -197,22 +241,28 @@ namespace sora {
     template<typename T>
     void SoraArray<T>::operator=(const SoraArray<T>& rhs) {
         if(this != &rhs) {
-            this->clear();
-            this->copy(rhs);
+            this->mGrow = rhs.mGrow;
+            this->mCapacity = rhs.mCapacity;
+            this->mSize = rhs.mSize;
+            this->mMapped = rhs.mMapped;
+            if(this->mCapacity > 0) {
+                this->mElements = rhs.mElements;
+                this->mHolder = rhs.mHolder;
+            }
         }
     }
     
     template<typename T>
     void SoraArray<T>::growTo(uint32 newCapacity) {
+        sora_assert(!this->mMapped);
+        
         T* newArray = (T*)sora_malloc(sizeof(T) * newCapacity);
         if(this->mElements) {
-            for(int32 i=0; i<mSize; ++i) {
-                newArray[i] = this->mElements[i];
-            }
-            
-            sora_free(this->mElements);
+            memcpy(newArray, this->mElements, sizeof(T) * this->mCapacity);
         }
         this->mElements = newArray;
+        this->mHolder.reset(newArray);
+
         this->mCapacity = newCapacity;
     }
     
@@ -232,9 +282,22 @@ namespace sora {
     }
     
     template<typename T>
+    void SoraArray<T>::append(const T* arr, uint32 size) {
+        sora_assert(size > 0);
+        
+        uint32 newSize = this->mSize + size;
+        if(newSize >= this->mCapacity) {
+            this->growTo(newSize);
+        }
+        memcpy(this->mElements + this->mSize, arr, size);
+        this->mSize = newSize;
+    }
+    
+    template<typename T>
     void SoraArray<T>::move(uint32 from, uint32 to) {
         sora_assert(this->mElements);
         sora_assert(from < this->mSize);
+        sora_assert(!this->mMapped);
         
         if(from == to)
             return;
@@ -370,6 +433,7 @@ namespace sora {
         sora_assert(this->mElements);
         sora_assert(iter < (this->mElements + this->mSize));
         sora_assert(iter >= this->mElements);
+        sora_assert(!this->mMapped);
         
         this->erase(uint32(iter - this->mElements));
         return iter;
@@ -379,6 +443,7 @@ namespace sora {
     void SoraArray<T>::erase(uint32 index) {
         sora_assert(this->mElements);
         sora_assert(index < this->mSize);
+        sora_assert(!this->mMapped);
         
         if(index == this->mSize-1) {
             this->destroy(&(this->mElements[index]));
@@ -391,6 +456,7 @@ namespace sora {
     template<typename T>
     void SoraArray<T>::insert(uint32 index, const T& elemt) {
         sora_assert(index <= this->mSize);
+        sora_assert(!this->mMapped);
         
         if(index == this->mSize) 
             this->append(elemt);
@@ -404,6 +470,7 @@ namespace sora {
     void SoraArray<T>::pop_front() {
         sora_assert(this->mElements);
         sora_assert(this->mSize >= 1);
+        sora_assert(!this->mMapped);
         
         if(this->mSize == 1)
             this->clear();

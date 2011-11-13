@@ -218,7 +218,7 @@ namespace sora {
 			float x = mPositionX + 1.f;
 			float y = mPositionY + mHeight - mFontHeight*2 - 1.f;
 			
-			std::vector<SoraInternalLogger::LogMssg> debugMssg = Logger.get();
+			const std::vector<SoraInternalLogger::LogMssg>& debugMssg = Logger.get();
 			
 			float starty = y;
 			for(int32 i=mCurrLine; i>=0; --i) {

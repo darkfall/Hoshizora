@@ -73,6 +73,10 @@ namespace sora {
 #define SORA_IF_DEFINED(name) \
     SoraIfDefined(#name)
     
+#define SORA_MIN(a, b) (a < b ? a : b)
+#define SORA_MAX(a, b) (a > b ? a : b)
+#define SORA_ABS(x)    (x < 0 ? -x : x)
+    
     
 #define SORA_DEF_SET_GET(type, name, var) \
     public: \

@@ -10,7 +10,7 @@
 
 namespace sora {
  
-    struct SoraKey {
+    namespace key {
         // keyboard
         enum {
             Num0 = 0x30,

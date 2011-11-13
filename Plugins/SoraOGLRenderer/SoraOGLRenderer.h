@@ -11,8 +11,9 @@
 #define _SORA_OGL_RENDERER_H_
 
 #include "SoraRenderSystem.h"
-
 #include "SoraOGLRenderTarget.h"
+
+#include <list>
 
 namespace sora {
 
@@ -58,7 +59,6 @@ namespace sora {
 		void		 releaseTexture(SoraTexture* tex);
 
 		void renderQuad(SoraQuad& quad);
-		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode);
         
         void renderLine     (float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f);
@@ -84,7 +84,8 @@ namespace sora {
 		void attachShaderContext(SoraShaderContext* context);
 		void detachShaderContext();
 
-		StringType videoInfo();
+		StringType videoInfo() const;
+        RenderSystemType renderSystemType() const;
 		SoraHandle getVideoDeviceHandle();
 
 		void flush();
@@ -94,13 +95,22 @@ namespace sora {
         void setIcon(const StringType& icon);
         void setCursor(const StringType& cursor);
         
-        void onExtensionStateChanged(int32 extension, bool state, int32 param);
-        
         void getDesktopResolution(int* w, int* h);
         void setQueryVideoModeCallback(QueryVideoMode func);
         
-        void setRenderState(RenderStateType, RenderStateParam);
-        RenderStateParam getRenderState(RenderStateType) const;
+        void setRenderState(RenderStateType, int32);
+        int32 getRenderState(RenderStateType) const;
+        
+        SoraRenderBuffer::Ptr createVertexBuffer(SoraRenderBuffer::Access accessHint,
+                                                 SoraRenderBuffer::Usage usage,
+                                                 uint32 desired_count,
+                                                 void* initData,
+                                                 const SoraVertexFormat& vertexFormat);
+        SoraRenderBuffer::Ptr createIndexBuffer(SoraRenderBuffer::Access accessHint,
+                                                SoraRenderBuffer::Usage usage,
+                                                uint32 desired_count,
+                                                void* initData);
+        void renderBuffer(SoraTexture* tex, RenderMode mode, SoraRenderBuffer::Ptr vertexBuffer, SoraRenderBuffer::Ptr indexBuffer);
 
 	private:
 		void applyTransform();

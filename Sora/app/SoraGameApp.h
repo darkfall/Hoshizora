@@ -67,7 +67,7 @@ namespace sora {
             int32 getWindowPosX();
             int32 getWindowPosY();
             
-            SoraString getWindowName();
+            StringType getWindowName();
             SoraString getWindowId();
             
             bool isWindowed();
