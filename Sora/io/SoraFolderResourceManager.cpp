@@ -16,7 +16,7 @@
 
 namespace sora {
     
-    SoraFolderResourceManager::SoraFolderResourceManager(): applicationPath(SoraFileUtility::getApplicationPath()) {
+    SoraFolderResourceManager::SoraFolderResourceManager(): applicationPath(SoraFileUtility::GetApplicationPath()) {
 #ifdef OS_IOS
         loadResourcePack(SoraPath::writtable());
         loadResourcePack(SoraPath::resource());
@@ -53,13 +53,13 @@ namespace sora {
 			return itFile->second;
 		}
 
-        if(SoraFileUtility::fileExists(fileName))
+        if(SoraFileUtility::FileExists(fileName))
             return fileName;
 		
 
 		for(size_t i=0; i<folders.size(); ++i) {
 			StringType fullPath = folders[i].folderName.toString() + fileName;
-			if(SoraFileUtility::fileExists(fullPath))
+			if(SoraFileUtility::FileExists(fullPath))
                 return fullPath;
 		}
         return StringType();

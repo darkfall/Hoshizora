@@ -38,7 +38,7 @@ namespace sora {
     
     SoraInternalLogger::LogMssg::LogMssg(const std::string& log, int32 level) {
         
-        mLog = vamssg("%.4f: ", ((float)(SoraCore::GetRunningTime()) / 1000000)) + log;
+        mLog = vamssg("[%.4f]", ((float)(SoraCore::GetRunningTime()) / 1000000)) + log;
         mLogLevel = level;
     }
 	
@@ -104,13 +104,11 @@ namespace sora {
 		std::ofstream file(fileName);
 		
 		if(file.is_open()) {
+            file << vamssg("Hoshizora Ver %d.%d Rev %d]n\n", SORA_VERSION_MAJOR, SORA_VERSION_MINOR, SORA_VERSION_REV);
 			std::vector<LogMssg>::iterator itLog = vMssg.begin();
 			while(itLog != vMssg.end()) {
 				switch(itLog->mLogLevel) {
-					case LOG_LEVEL_NORMAL: file<<"[normal]";  break;
-					case LOG_LEVEL_ERROR: file<<"[error]";  break;
-					case LOG_LEVEL_NOTICE: file<<"[notice]";  break;
-					case LOG_LEVEL_WARNING: file<<"[warning]";  break;
+					case LOG_LEVEL_ERROR: file<<"** error ";  break;
 				}
 				file<<itLog->mLog<<std::endl;
 				++itLog;

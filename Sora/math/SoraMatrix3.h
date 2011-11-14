@@ -29,7 +29,7 @@ namespace sora {
         SoraMatrix3(real* v);
 		union {
 			real c[3][3];
-            real m[9];
+            real x[9];
 		};
 		        
         void createIdentity();
@@ -47,7 +47,7 @@ namespace sora {
 	inline SoraMatrix3::SoraMatrix3(real* v) {
 		sora_assert(v);
 		for(int i=0; i<9; ++i)
-			m[i] = v[i];
+			x[i] = v[i];
 	}
 	
 	inline SoraMatrix3 SoraMatrix3::operator*(const SoraMatrix3& rhs) {

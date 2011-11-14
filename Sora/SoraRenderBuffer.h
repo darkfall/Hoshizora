@@ -23,11 +23,11 @@ namespace sora {
             & TotalSize = 24
      **/
     enum VertexFormat {
-        VertexXYZ    = 1,
-        VertexNormal = 2,
-        VertexUV     = 4,
-        VertexColor  = 8,
-        VertexColor2 = 16,
+        VertexXYZ    = 1UL << 0,
+        VertexNormal = 1UL << 1,
+        VertexUV     = 1UL << 2,
+        VertexColor  = 1UL << 3,
+        VertexColor2 = 1UL << 4,
     };
 
     struct SORA_API SoraVertexFormat {
@@ -98,6 +98,8 @@ namespace sora {
         virtual void unmap() { }
         
         virtual void active() { }
+        
+        virtual void resize(uint32 desired_count) { }
         
         Access access() const { return mAccessHint; }
         Usage usage() const { return mUsage; }

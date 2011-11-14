@@ -29,7 +29,6 @@ namespace sora {
         virtual ~SoraShaderable();
         
         void attachShaderContext(const StringType& tag);
-        void attachShaderContext(SoraShaderContext* context);
         SoraShaderContext* getShaderContext() const;
         
         SoraShader* attachShader(const StringType& file, const SoraString& entry, int32 type);
@@ -46,14 +45,7 @@ namespace sora {
         SoraShader* getVertexShader() const;
         
         bool hasShader() const;
-        void clearShader();
-        
-    private:
-        void detachShader(SoraShader* shader);
-        void attachShader(SoraShader* shader);
-        void attachFragmentShader(SoraShader* shader);
-        void attachVertexShader(SoraShader* shader);
-        
+    
     private:
         inline void checkShaderContext();
         

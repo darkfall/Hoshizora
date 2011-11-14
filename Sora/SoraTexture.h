@@ -39,6 +39,8 @@ namespace sora {
         static SoraTextureHandle LoadFromMemory(uint32* data, uint32 size);
         static SoraTextureHandle CreateEmpty(int32 w, int32 h);
         
+        static SoraTextureHandle NullObject();
+        
         static uint32*  GetData(SoraTextureHandle handle);
         static void     PutData(SoraTextureHandle data);
         

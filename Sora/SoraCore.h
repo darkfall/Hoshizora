@@ -6,6 +6,7 @@
 #include "SoraMath.h"
 #include "SoraKeyInfo.h"
 #include "SoraVertex.h"
+#include "SoraGraphicDeviceCaps.h"
 
 #include "function/SoraFunction.h"
 
@@ -291,8 +292,9 @@ namespace sora {
 		 under windows, this would return HWND, 
 		 under other plaforms, just return (SoraHandle)mainWindow
 		 */
-		SoraHandle getMainWindowHandle() const;
-		SoraWindowInfoBase* getMainWindow() const;
+		SoraHandle              getMainWindowHandle() const;
+		SoraWindowInfoBase*     getMainWindow() const;
+        SoraGraphicDeviceCaps   getGraphicDeviceCaps() const;
         
     public:
         /**
@@ -439,8 +441,8 @@ namespace sora {
         bool bMainScene;
 		bool bFrameSync;
 
-		SoraWindowInfoBase* mMainWindow;
         SoraHandle mWindowHandle;
+		SoraWindowInfoBase* mMainWindow;
         SoraShaderContext* mPrevShaderContext;
         
         bool bEnableScreenBuffer;
@@ -462,6 +464,7 @@ namespace sora {
 #endif
         
         Sora3DCamera* m3DCamera;
+        SoraGraphicDeviceCaps mGraphicDeviceCaps;
     };
     
     typedef SoraCore::Feature SoraCoreFeature;

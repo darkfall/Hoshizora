@@ -97,4 +97,9 @@ namespace sora {
         SoraCore::Instance()->textureUnlock(handle);
     }
     
+    SoraTextureHandle SoraTexture::NullObject() {
+        static SoraTexture null_tex;
+        return (SoraTextureHandle)&null_tex;
+    }
+    
 } // namespace sora

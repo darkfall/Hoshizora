@@ -10,7 +10,6 @@
 #define Sora_SoraMemory_h
 
 #include "stddef.h"
-#include "SoraPlatform.h"
 
 namespace sora {
     

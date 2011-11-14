@@ -6,8 +6,6 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#include "SoraPreDeclare.h"
-
 #define SORA_REPEAT_1_0(m, d)
 #define SORA_REPEAT_1_1(m, d) m(0, d)
 #define SORA_REPEAT_1_2(m, d) SORA_REPEAT_1_1(m, d) m(1, d)

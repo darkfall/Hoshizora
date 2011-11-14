@@ -36,7 +36,6 @@ namespace sora {
         }
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-
         mCount = desired_count;
     }
     
@@ -74,6 +73,17 @@ namespace sora {
     
     void SoraOGLVertexBuffer::active() {
         glBindBuffer(GL_ARRAY_BUFFER, mId);
+    }
+    
+    void SoraOGLVertexBuffer::resize(uint32 desired_count) {
+        glBindBuffer(GL_ARRAY_BUFFER, mId);
+
+        glBufferData(GL_ARRAY_BUFFER, 
+                     static_cast<GLsizeiptr>(desired_count * mFormat.totalSize()), 
+                     0,
+                     usage() == Dynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+        mCount = desired_count;
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
     
     SoraVertexFormat& SoraOGLVertexBuffer::format() {
@@ -141,6 +151,18 @@ namespace sora {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mId);
         return glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, gl_acess);
     }
+    
+    void SoraOGLIndexBuffer::resize(uint32 desired_count) {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mId);
+        
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 
+                     static_cast<GLsizeiptr>(desired_count * sizeof(uint32)), 
+                     0,   
+                     usage() == Dynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
+        mCount = desired_count;
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    }
+
     
     void SoraOGLIndexBuffer::unmap() {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mId);

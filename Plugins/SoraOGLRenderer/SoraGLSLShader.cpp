@@ -133,16 +133,12 @@ namespace sora {
 		mTexture1 = ((SoraTexture*)tex)->mTextureID;
 	}
 	
-	bool SoraGLSLShader::setParameterfv(const char* name, float* val, uint32 size) {
+	bool SoraGLSLShader::setParameterfv(const char* name, const float* val, uint32 size) {
 		if(mType == 0)
 			return false;
 		
-		bool requestedShaderUse = false;
-		if(!mContext->isAttached()) {
-			mContext->attachShaderList();
-			requestedShaderUse = true;
-		}
-		
+		mContext->link(); 
+        
 		GLuint var = glGetUniformLocation(mProgram, name);
 		if(var == 0) {
 			printProgramError();
@@ -161,21 +157,14 @@ namespace sora {
 				break;
 		}
 		
-		if(requestedShaderUse)
-			mContext->detachShaderList();
-		
 		return true;
 	}
 	
-	bool SoraGLSLShader::setParameteriv(const char* name, int32* val, uint32 size) {
+	bool SoraGLSLShader::setParameteriv(const char* name, const int32* val, uint32 size) {
 		if(mType == 0)
 			return false;
 	
-		bool requestedShaderUse = false;
-		if(!mContext->isAttached()) {
-			mContext->attachShaderList();
-			requestedShaderUse = true;
-		}
+        mContext->link(); 
 		
 		GLuint var = glGetUniformLocation(mProgram, name);
 		if(var == 0) {
@@ -192,10 +181,7 @@ namespace sora {
 				glUniform1iv(var, static_cast<GLint>(size), val);
 				break;
 		}
-		
-		if(requestedShaderUse)
-			mContext->detachShaderList();
-		
+    
 		return true;
 	}
 	
@@ -203,11 +189,7 @@ namespace sora {
 		if(mType == 0)
 			return false;
 		
-		bool requestedShaderUse = false;
-		if(!mContext->isAttached()) {
-			mContext->attachShaderList();
-			requestedShaderUse = true;
-		}
+		mContext->link(); 
 		
 		GLuint var = glGetUniformLocation(mProgram, name);
 		if(var == 0) {
@@ -217,8 +199,6 @@ namespace sora {
 		
 		glGetUniformfv(mProgram, var, val);
 		
-		if(requestedShaderUse)
-			mContext->detachShaderList();
         return glGetError() == GL_NO_ERROR;
 	}
 	
@@ -226,12 +206,8 @@ namespace sora {
 		if(mType == 0)
 			return false;
 		
-		bool requestedShaderUse = false;
-		if(!mContext->isAttached()) {
-			mContext->attachShaderList();
-			requestedShaderUse = true;
-		}
-		
+        mContext->link();    
+        
 		GLuint var = glGetUniformLocation(mProgram, name);
 		if(var == 0) {
 			printProgramError();
@@ -240,8 +216,6 @@ namespace sora {
 		
 		glGetUniformiv(mProgram, var, val);
 		
-		if(requestedShaderUse)
-			mContext->detachShaderList();
         return glGetError() == GL_NO_ERROR;
 	}
 	
@@ -254,7 +228,6 @@ namespace sora {
 				glUniform1i(tex, 1);
 			}
 		}
-		glAttachShader(mProgram, mShader);
         return glGetError() == GL_NO_ERROR;
 	}
 	
@@ -280,6 +253,9 @@ namespace sora {
 		shader->mProgram = mProgram;
 		shader->mContext = this;
         shader->loadShader(file, entry, type);
+        
+        glAttachShader(mProgram, shader->mShader);
+        mLinked = false;
         return shader;
 	}
     
@@ -291,7 +267,17 @@ namespace sora {
 		shader->mProgram = mProgram;
 		shader->mContext = this;
         shader->loadShaderFromMem(data, entry, type);
+        
+        glAttachShader(mProgram, shader->mShader);
+        mLinked = false;
         return shader;
+    }
+    
+    void SoraGLSLShaderContext::link() {
+        if(!mLinked) {
+            glLinkProgram(mProgram);
+            mLinked = true;
+        }
     }
 	
 	bool SoraGLSLShaderContext::attachShaderList() {
@@ -300,7 +286,7 @@ namespace sora {
         
 		SoraShaderContext::attachShaderList();
 		
-		glLinkProgram(mProgram);
+		link();
 		glUseProgram(mProgram);
         
         int success;
@@ -327,9 +313,7 @@ namespace sora {
 	bool SoraGLSLShaderContext::detachShaderList() {
         if(!mProgram)
             return false;
-        
-		SoraShaderContext::detachShaderList();
-		
+        		
 		glUseProgram(0);
 		
 		mAttached = false;

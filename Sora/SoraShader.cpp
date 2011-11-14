@@ -10,6 +10,7 @@
 #include "SoraShader.h"
 #include "SoraCore.h"
 #include "SoraLogger.h"
+#include "SoraShaderParamObject.h"
 
 namespace sora {
 
@@ -69,6 +70,10 @@ namespace sora {
 		arr[0] = v1; arr[1] = v2; arr[2] = v3; arr[3] = v4;
 		return setParameteriv(name, arr, 4);
 	}
+    
+    SoraShaderParameter SoraShader::getParameter(const char* name) {
+        return SoraShaderParameter(this, name);
+    }
 	
     int32 SoraShader::getType() const {
         return mType;
@@ -176,39 +181,6 @@ namespace sora {
     
     SoraShader* SoraShaderContext::getVertexShader() const {
         return mVertexShader.get();
-    }
-	
-    void SoraShaderContext::attachShader(SoraShader* shader) {
-        sora_assert(shader);
-        if(shader->getType() == SoraShader::FragmentShader)
-            attachFragmentShader(shader);
-        else if(shader->getType() == SoraShader::VertexShader)
-            attachVertexShader(shader);
-        else 
-            THROW_SORA_EXCEPTION(RuntimeException, "Unknown shader type");
-    }
-    
-    void SoraShaderContext::attachFragmentShader(SoraShader* shader) {
-        sora_assert(shader);
-        
-        shader->duplicate();
-        mFragmentShader.assign(shader);
-    }
-    
-    void SoraShaderContext::attachVertexShader(SoraShader* shader) {
-        sora_assert(shader);
-        
-        shader->duplicate();
-        mVertexShader.assign(shader);
-    }
-    
-    void SoraShaderContext::detachShader(SoraShader* shader) {
-        sora_assert(shader);
-        
-        if(shader->getType() == SoraShader::FragmentShader && shader == mFragmentShader.get())
-            detachFragmentShader();
-        else if(shader->getType() == SoraShader::VertexShader && shader == mVertexShader.get())
-            detachVertexShader();
     }
     
     bool SoraShaderContext::isAvailable() {

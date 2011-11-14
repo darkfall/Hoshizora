@@ -13,6 +13,8 @@
 #include "SoraAny.h"
 #include "SoraStringId.h"
 
+#include "util/SoraPointTemplate.h"
+
 #include <string>
 #include <map>
 
@@ -38,7 +40,26 @@ namespace sora {
         }
     }
     
+    
+    typedef SoraPointTemplate<1, float> float1;
+    typedef SoraPointTemplate<2, float> float2;
+    typedef SoraPointTemplate<3, float> float3;
+    typedef SoraPointTemplate<4, float> float4;
+    
+    typedef SoraPointTemplate<1, int32> int1;
+    typedef SoraPointTemplate<2, int32> int2;
+    typedef SoraPointTemplate<3, int32> int3;
+    typedef SoraPointTemplate<4, int32> int4;
+    
+    typedef SoraPointTemplate<1, uint32> uint1;
+    typedef SoraPointTemplate<2, uint32> uint2;
+    typedef SoraPointTemplate<3, uint32> uint3;
+    typedef SoraPointTemplate<4, uint32> uint4;
+    
+    
 #ifdef SORA_USE_RTTI
+    
+    
     /**
      * RTTI Check 
      **/

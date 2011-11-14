@@ -15,13 +15,15 @@
 #include "SoraRefCounted.h"
 #include "SoraString.h"
 #include "SoraAutoPtr.h"
+
 #include <list>
 
 namespace sora {
 	
     
     class SoraShaderContext;
-	
+	class SoraShaderParameter;
+    
 	/* 
 		Class to hold a shader
 		Automatically created and managed by SoraShaderContext
@@ -46,18 +48,18 @@ namespace sora {
 			Set a parameterf
 			@param name, the name of the parameter to set
 			@param val, the value to set
-			@param size, the size of the value array
+			@param size, the size of the value array, 1 = float, 2 float2, 16 = float4x4 etc
 			@retval, succeed or not
 		 */
-		virtual bool setParameterfv(const char* name, float* val, uint32 size) = 0;
+		virtual bool setParameterfv(const char* name, const float* val, uint32 size) = 0;
 		/*
 			Set a parameteri
 			@param name, the name of the parameter to set
 			@param val, the value to set
-			@param size, the size of the value array
+			@param size, the size of the value array, 1 = float, 2 float2, 16 = float4x4 etc
 			@retval, succeed or not
 		 */
-		virtual bool setParameteriv(const char* name, int32* val, uint32 size) = 0;
+		virtual bool setParameteriv(const char* name, const int32* val, uint32 size) = 0;
         
         virtual bool getParameterfv(const char* name, float* val, uint32 size) = 0;
         virtual bool getParameteriv(const char* name, int32* val, uint32 size) = 0;
@@ -71,7 +73,9 @@ namespace sora {
 		bool setParameter2i(const char* name, int32 v1, int32 v2);
 		bool setParameter3i(const char* name, int32 v1, int32 v2, int32 v3);
 		bool setParameter4i(const char* name, int32 v1, int32 v2, int32 v3, int32 v4);
-		
+        
+        SoraShaderParameter getParameter(const char* name);
+        		
         /*
          add a sample texture
          may use as TEX1 in shader
@@ -130,17 +134,7 @@ namespace sora {
 		void clear();
         
         static SoraShaderContext* Create();
-        
-        /**
-         * create a shader from context, not attach
-         * @param file, the path of the shader file to attach
-         * @param entry, entry function of the shader
-         * @param type, the type of the shader
-         * @retval, the handle to the attached shader, is 0 if attach failed
-		 */
-        virtual SoraShader* createShader(const StringType& file, const SoraString& entry, int32 type) = 0;
-        virtual SoraShader* createShaderFromMem(const char* data, const SoraString& entry, int32 type) = 0;
-       
+
 		/**
          * attach a shader to context
          * @param file, the path of the shader file to attach
@@ -152,26 +146,18 @@ namespace sora {
         
         /**
          * Create and attach a fragment shader
-         * Would through a RuntimeException in case there is a error
          **/
         SoraShader* attachFragmentShader(const StringType& file, const SoraString& entry);
         /**
          * Create and attach a vertex shader
-         * Would through a RuntimeException in case there is a error
          **/
         SoraShader* attachVertexShader(const StringType& file, const SoraString& entry);
-        
-        void attachShader(SoraShader* shader);
-        void attachFragmentShader(SoraShader* shader);
-        void attachVertexShader(SoraShader* shader);
-        
+    
         SoraShader* getFragmentShader() const;
         SoraShader* getVertexShader() const;
                 
 		void detachFragmentShader();
         void detachVertexShader();
-        
-        void detachShader(SoraShader* shader);
         
         bool isAvailable();
 
@@ -192,7 +178,16 @@ namespace sora {
 		virtual bool detachShaderList();
 		
 	protected:		        
-                
+        /**
+         * create a shader from context, not attach
+         * @param file, the path of the shader file to attach
+         * @param entry, entry function of the shader
+         * @param type, the type of the shader
+         * @retval, the handle to the attached shader, is 0 if attach failed
+		 */
+        virtual SoraShader* createShader(const StringType& file, const SoraString& entry, int32 type) = 0;
+        virtual SoraShader* createShaderFromMem(const char* data, const SoraString& entry, int32 type) = 0;
+        
         typedef SoraAutoPtr<SoraShader, autoptr::RefCounter, ShaderReleasePolicy<SoraShader> > ShaderPtr;
         
         ShaderPtr mVertexShader;

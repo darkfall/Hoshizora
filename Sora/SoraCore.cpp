@@ -317,10 +317,17 @@ namespace sora {
             SoraSoundSystemThread::Instance()->start();
         }
         
-        if(pRenderSystem) {
-            pRenderSystem->switchTo2D();
-            pRenderSystem->start(pTimer);
-        }
+        pRenderSystem->fillDeviceCaps(mGraphicDeviceCaps);
+        log_notice(vamssg("Graphic Device Caps:\n\t\tMaxTextureSize=(%d,%d)\n\t\tMaxIndices=%d, MaxVertices=%d\n\t\tMaxCubeMapSize=%d\n\t\tMaxPixelTextureUnits=%d, MaxVertexTextureUnit=%d", 
+                          mGraphicDeviceCaps.max_texture_width,
+                          mGraphicDeviceCaps.max_texture_height,
+                          mGraphicDeviceCaps.max_indices, 
+                          mGraphicDeviceCaps.max_vertices,
+                          mGraphicDeviceCaps.max_texture_cube_map_size,
+                          mGraphicDeviceCaps.max_pixel_texture_units,
+                          mGraphicDeviceCaps.max_vertex_texture_units));
+        pRenderSystem->switchTo2D();
+        pRenderSystem->start(pTimer);
 	}
 
 	void SoraCore::_frameListenerStart() {
@@ -539,6 +546,8 @@ namespace sora {
 	}
 
 	void SoraCore::shutDown() {        
+        SoraInternalLogger::Instance()->writeToFile(SoraFileUtility::GetWrittablePath("log.txt").c_str());
+        
 		//SoraTextureMap::Instance()->Destroy();
         delete pFileSystem;
 
@@ -633,6 +642,8 @@ namespace sora {
 		SET_ENV_INT("ScreenHeight", iScreenHeight);
 		
         g_CurrentClipping.set(0, 0, iScreenWidth, iScreenHeight);
+        
+        pRenderSystem->fillDeviceCaps(mGraphicDeviceCaps);
         
 		return true;
 	}
@@ -1717,6 +1728,10 @@ namespace sora {
     
     Sora3DCamera* SoraCore::get3DCamera() const {
         return m3DCamera;
+    }
+    
+    SoraGraphicDeviceCaps SoraCore::getGraphicDeviceCaps() const {
+        return mGraphicDeviceCaps;
     }
     
 } // namespace sora

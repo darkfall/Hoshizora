@@ -12,11 +12,18 @@
 #include "SoraPlatform.h"
 #include "SoraAutoPtr.h"
 #include "SoraVertex.h"
-
+#include "SoraPreDeclare.h"
 #include "util/SoraArray.h"
 #include "util/SoraPointTemplate.h"
 
 namespace sora {
+    
+    struct SORA_API SoraModelVertex {
+        float x, y, z;
+        float nx, ny, nz;
+        uint32 color;
+        float tx, ty;
+    };
     
     class SORA_API SoraMesh {
     public:

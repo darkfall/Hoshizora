@@ -20,11 +20,11 @@ namespace sora {
     class SORA_API SoraAutoUpdate {
     public:
         SoraAutoUpdate() {
-            mObjects.push_back(this);
+            GetObjectList().push_back(this);
         }
         
         virtual ~SoraAutoUpdate() {
-            mObjects.remove(this);
+            GetObjectList().remove(this);
         }
         
         virtual void onUpdate(float dt) = 0;
@@ -32,9 +32,14 @@ namespace sora {
     public:
         static void UpdateList(float dt);
         
-    private:
         typedef std::list<SoraAutoUpdate*> UpdateObjectList;
-        static UpdateObjectList mObjects;
+
+        static UpdateObjectList& GetObjectList() {
+            static UpdateObjectList static_objects;
+            return static_objects;
+        }
+        
+    private:
     };
 
 } // namespace sora

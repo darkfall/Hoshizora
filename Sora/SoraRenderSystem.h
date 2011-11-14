@@ -14,6 +14,7 @@
 
 #include "SoraString.h"
 #include "SoraRenderBuffer.h"
+#include "SoraGraphicDeviceCaps.h"
 
 #include "math/SoraMatrix4.h"
 
@@ -49,6 +50,7 @@ namespace sora {
          */
         virtual StringType       videoInfo() const = 0;
         virtual RenderSystemType renderSystemType() const = 0;
+        virtual void             fillDeviceCaps(SoraGraphicDeviceCaps& caps) = 0;
         
     public:
         /*
@@ -87,10 +89,12 @@ namespace sora {
                                                          uint32 desired_count,
                                                          void* initData,
                                                          const SoraVertexFormat& vertexFormat) = 0;
+        
         virtual SoraRenderBuffer::Ptr createIndexBuffer(SoraRenderBuffer::Access accessHint,
                                                         SoraRenderBuffer::Usage usage,
                                                         uint32 desired_count,
                                                         void* initData) = 0;
+        
         virtual void renderBuffer(SoraTexture* tex, RenderMode mode, SoraRenderBuffer::Ptr vertexBuffer, SoraRenderBuffer::Ptr indexBuffer) = 0;
          
          
@@ -114,9 +118,9 @@ namespace sora {
 		virtual void renderQuad(SoraQuad& quad) = 0;
 		virtual void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 vsize, RenderMode mode) = 0;
 
-		virtual void renderLine(float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f) = 0;
-		virtual void renderBox(float x1, float y1, float x2, float y2, uint32 color, float lineWidth=1.f, float z=0.f) = 0;
-        virtual void fillBox(float x1, float y1, float x2, float y2, uint32 color, float z=0.f) = 0;
+		virtual void renderLine (float x1, float y1, float x2, float y2, uint32 color, float width=1.f, float z=0.f) = 0;
+		virtual void renderBox  (float x1, float y1, float x2, float y2, uint32 color, float lineWidth=1.f, float z=0.f) = 0;
+        virtual void fillBox    (float x1, float y1, float x2, float y2, uint32 color, float z=0.f) = 0;
         
     public:
         /* 

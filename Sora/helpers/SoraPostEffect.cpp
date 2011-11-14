@@ -17,7 +17,6 @@ namespace sora {
     mSprite(0) {
         mSprite = new SoraSprite(0);
         sora_assert(mSprite);
-        mSprite->attachShaderContext(this->getShaderContext());
         
         attach();
         
@@ -38,7 +37,9 @@ namespace sora {
         if(mSprite->getTexture() == 0)
             mSprite->setTexture(texture);
         
+        this->attachShaderToRender();
         mSprite->render();
+        this->detachShaderFromRender();
     }
     
     SoraSprite* SoraPostEffect::getSprite() const {

@@ -13,6 +13,8 @@
 #include "SoraPlatform.h"
 #include "SoraSprite.h"
 
+#include "signal/SoraSignal.h"
+
 namespace sora {
 	
 	/*
@@ -26,32 +28,14 @@ namespace sora {
         void render();
         int32 update(float dt);
         
-        void beginRender(uint32 col=0xFF000000);
+        void beginRender(uint32 col=0);
         void finishRender();
-
-		void setZ(float z);
-		void setBlendMode(int32 mode);
-        
-		void addEffect(SoraImageEffect* effect);
-		void stopEffect(SoraImageEffect* effect);
-		void clearEffects();
-		bool hasEffect() const;
         
         SoraSprite* getCanvasSprite() const;
         
-        void fadeTo(float to, float t);
-        void rotateTo(float to, float t);
-        void scaleTo(float h, float v, float t);
-        
-        typedef SoraFunction<void(SoraSprite*)> NotificationFunc;
-        void fadeToAndNotify(float to, float t, const NotificationFunc& func);
-        void rotateTo(float to, float t, const NotificationFunc& func);
-        void scaleTo(float h, float v, float t, const NotificationFunc& func);
+        virtual void on3DEnabled(bool flag);
         
 	private:
-        inline void _attachTarget();
-        inline void _detachTarget();
-        
 		SoraHandle canvasTarget;
         SoraSprite* pCanvasSprite;
         

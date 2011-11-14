@@ -10,6 +10,7 @@
 #include "SoraException.h"
 #include "SoraPlaybackEvent.h"
 #include "SoraLogger.h"
+#include "SoraTexture.h"
 
 namespace sora {
     
@@ -87,7 +88,14 @@ namespace sora {
         }
     }
     
-    SoraVlcMoviePlayer::SoraVlcMoviePlayer(): vlcInstance(0), mp(0), media(0), evtManager(0), videoWidth(0), videoHeight(0) {
+    SoraVlcMoviePlayer::SoraVlcMoviePlayer(): 
+    vlcInstance(0), 
+    mp(0), 
+    media(0), 
+    evtManager(0), 
+    videoWidth(0), 
+    videoHeight(0),
+    mTexture(0) {
         const char* vlc_argv[] = {
             "--plugin-path=./Plugins"
             "--ignore-config",
@@ -109,7 +117,7 @@ namespace sora {
             libvlc_release(vlcInstance);
     }
     
-    bool SoraVlcMoviePlayer::openMedia(const StringType& filePath, const SoraString& dis) {
+    bool SoraVlcMoviePlayer::openMedia(const StringType& filePath) {
         if(!vlcInstance)
             return false;
         
@@ -137,7 +145,7 @@ namespace sora {
 		}
         libvlc_media_release(media);
 		
-		displayFormat = dis;
+		displayFormat = "RGBA";
 #ifdef OS_WIN32
         displayFormat = "RV32"
 #endif
@@ -334,5 +342,23 @@ namespace sora {
     
     bool SoraVlcMoviePlayer::isPaused() const { 
         return frameData.bStopped; 
+    }
+    
+    void SoraVlcMoviePlayer::bindTexture(SoraTextureHandle tex) {
+        mTexture = tex;
+    }
+    
+    void SoraVlcMoviePlayer::onUpdate(float dt) {
+        if(mTexture != 0) {
+            void* data = sora::SoraTexture::GetData(mTexture);
+            
+            sora_assert(SoraTexture::GetWidth(mTexture) >= getWidth() &&
+                        SoraTexture::GetHeight(mTexture) >= getHeight());
+            
+            if(data) {
+                memcpy(data, getPixelData(), getWidth() * getHeight() * sizeof(uint32));
+            }
+            sora::SoraTexture::PutData(mTexture);
+        }
     }
 } // namespace sora

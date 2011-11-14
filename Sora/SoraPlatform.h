@@ -11,17 +11,50 @@
 #ifndef _SORA_PLATFORM_H_
 #define _SORA_PLATFORM_H_
 
-#define SORA_VERSION_MAJOR 3
-#define SORA_VERSION_MINOR 5
-#define SORA_VERSION_REV   483
+#define SORA_VERSION_MAJOR 4
+#define SORA_VERSION_MINOR 0
+#define SORA_VERSION_REV   1
+
+
+#if !defined(__cplusplus)
+    #error C++ compiler required.
+#endif
+
+#if defined(DEBUG) | defined(_DEBUG)
+#define SORA_DEBUG
+#endif
 
 /*
- gcc std extension
  if gcc version >= 4
  then there is tr1 support
  visual studio 2008 sp1 or above also has tr1 support
  */
 #if defined(__GNUC__)
+
+    #define SORA_COMPILER_GCC
+
+    #if __GNUC_MINOR__ >= 5
+        #define SORA_COMPILER_VERSION 45
+    #elif __GNUC_MINOR__ >= 4
+        #define SORA_COMPILER_VERSION 44
+    #elif __GNUC_MINOR__ >= 3
+        #define SORA_COMPILER_VERSION 43
+    #elif __GNUC_MINOR__ >= 2
+        #define SORA_COMPILER_VERSION 42
+    #elif __GNUC_MINOR__ >= 1
+        #define SORA_COMPILER_VERSION 41
+    #elif __GNUC_MINOR__ >= 0
+        #define SORA_COMPILER_VERSION 40
+    #else
+        #error Unknown Compiler
+    #endif
+
+    #if __GNUC_MINOR__ >= 3
+        #ifdef __GXX_EXPERIMENTAL_CXX0X__
+            #define SORA_CXX0X_SUPPORT
+        #endif
+    #endif
+
 	#if __GNUC__ >= 4
 		#include <tr1/unordered_map>
         namespace sora {
@@ -35,6 +68,20 @@
 	#endif
 
 #elif defined(_MSC_VER)
+
+    #define SORA_COMPILER_MSVC
+    #define SORA_HAS_DECLSPEC
+
+    #if _MSC_VER >= 1600
+        #define SORA_COMPILER_VERSION 100
+        #define SORA_CXX0X_SUPPORT
+    #elif _MSC_VER >= 1500
+        #define SORA_COMPILER_VERSION 90
+    #elif _MSC_VER >= 1400
+        #define SORA_COMPILER_VERSION 80
+    #else
+        #error Unknown Compiler
+    #endif
 
 #if _MSC_VER >= 1600
     #include <unordered_map>
@@ -56,23 +103,104 @@
     }
 #endif
 
-#ifndef __GNUC__
 
-static inline int lrint (double const x) { // Round to nearest integer
-    int n;
-#if defined(__unix__) || defined(__GNUC__)
-    // 32-bit Linux, Gnu/AT&T syntax:
-    __asm ("fldl %1 \n fistpl %0 " : "=m"(n) : "m"(x) : "memory" );
+// apple os ( osx / ios )
+#if defined(__APPLE__) || defined(__APPLE_CC__)
+    #if !defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
+        #define OS_OSX
+    #else
+        #define OS_IOS
+    #endif
+// android
+#elif defined(__ANDROID__)
+    #define OS_ANDROID
+// windows
+#elif defined(_WIN32) || defined(_MSC_VER)
+    #define OS_WIN32
+
+    #if defined(_WIN64)
+        #define SORA_PLATFORM_64
+    #else
+        #define SORA_PLATFORM_32
+    #endif
+
+    #ifndef NOMINMAX
+        #define NOMINMAX
+    #endif
+
+    #if defined(__MINGW32__)
+        #include <_mingw.h>
+    #endif
+
+    #if defined(__CYGWIN__)
+        #define SORA_PLATFORM_CYGWIN
+        #define SORA_HAS_DECLSPEC
+    #endif
+
+// linux
+#elif defined(linux) || defined(__linux)
+    #define OS_LINUX
+// psp
+#elif defined(_PSP)
+    #define OS_PSP
 #else
-    // 32-bit Windows, Intel/MASM syntax:
-    __asm fld qword ptr x;
-    __asm fistp dword ptr n;
-#endif
-    return n;
-}
-
+    #error Unknown Platform
 #endif
 
+#if defined(SORA_COMPILER_MSVC)
+    #if defined(_M_X64) 
+        #define SORA_CPU_X64
+        #define SORA_COMPILER_TARGET x64
+    #elif defined(_M_IX86)
+        #define SORA_CPU_X86
+        #define SORA_COMPILER_TARGET x86
+    #endif
+#elif defined(SORA_COMPILER_GCC)
+    #if defined(__x86_64__)
+        #define SORA_CPU_X64
+        #define SORA_COMPILER_TARGET x64
+    #elif defined(__i386__)
+        #define SORA_CPU_X86
+        #define SORA_COMPILER_TARGET x86
+    #endif
+#endif
+
+#if defined(SORA_CPU_PPC)
+    #define SORA_BIG_ENDIAN
+#elif defined(SORA_CPU_X86) || defined(SORA_CPU_X64) || defined(OS_WIN32)
+    #define SORA_LITTLE_ENDIAN
+#else
+    #define SORA_BIG_ENDIAN
+#endif
+
+#ifdef KLAYGE_CPU_X64
+    #define _SSE_SUPPORT
+    #define _SSE2_SUPPORT
+    #define _X64_SUPPORT
+#elif defined KLAYGE_CPU_X86
+    #if defined(KLAYGE_COMPILER_MSVC)
+        #if _M_IX86 == 600
+            #define _MMX_SUPPORT
+        #endif
+
+        #if _M_IX86_FP == 1
+            #define _SSE_SUPPORT
+        #elif _M_IX86_FP == 2
+            #define _SSE_SUPPORT
+            #define _SSE2_SUPPORT
+        #endif
+    #elif defined(KLAYGE_COMPILER_GCC)
+        #ifdef __MMX__
+            #define _MMX_SUPPORT
+        #endif
+        #ifdef __SSE__
+            #define _SSE_SUPPORT
+        #endif
+        #ifdef __SSE2__
+            #define _SSE2_SUPPORT
+        #endif
+    #endif
+#endif
 
 /*
  flag for shaders in render system
@@ -207,48 +335,14 @@ typedef     unsigned long   SoraHandle;
 #define strcmpnocase strcasecmp
 #endif
 
-// apple os ( osx / ios )
-#if defined(__APPLE__) || defined(__APPLE_CC__)
-    #if !defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
-        #define OS_OSX
-    #else
-        #define OS_IOS
-    #endif
-// android
-#elif defined(__ANDROID__)
-	#define OS_ANDROID
-// windows
-#elif defined(_WIN32) || defined(_MSC_VER)
-	#define OS_WIN32
-// linux
-#elif defined(linux) || defined(__linux)
-    #define OS_LINUX
-// psp
-#elif defined(_PSP)
-	#define OS_PSP
-#endif
-
-/**
- * Ensure that dll_export is default when building under windows with /MD or /MDd
- *  Unless SORA_STATIC is specified for static library
- **/
-#if defined(OS_WIN32) && defined(_DLL)
-    #if !defined(SORA_DLL_EXPORT) && !defined(SORA_STATIC) && !defined(SORA_DLL_IMPORT)
-        #define SORA_DLL_EXPORT
-    #endif
-#endif
-
-// we are building a dll
-#if defined(OS_WIN32) 
+// are we building a dll or not
+#if defined(OS_WIN32) && defined(SORA_HAS_DECLSPEC)
     #if defined(SORA_DLL_EXPORT)
         #define SORA_API __declspec(dllexport)
 		#define SORA_EXTERN extern
-    #elif defined(SORA_DLL_IMPORT)
+    #elif
         #define SORA_API __declspec(dllimport)
 		#define SORA_EXTERN extern
-    #else
-		#define SORA_API
-		#define SORA_EXTERN
 	#endif
 #else
     #define SORA_API

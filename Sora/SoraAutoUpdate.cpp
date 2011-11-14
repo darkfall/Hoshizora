@@ -10,11 +10,9 @@
 #include "SoraIteratorHelper.h"
 
 namespace sora {
-    
-    SoraAutoUpdate::UpdateObjectList SoraAutoUpdate::mObjects;
-    
+        
     void SoraAutoUpdate::UpdateList(float dt) {
-        ConstVectorIterator<UpdateObjectList> iterator(mObjects);
+        ConstVectorIterator<UpdateObjectList> iterator(GetObjectList());
         while(iterator.hasMoreElements()) {
             iterator.getNext()->onUpdate(dt);
         }

@@ -70,7 +70,7 @@ namespace sora {
 		pan = 0.f;
 		pitch = 0.f;
 
-        if(!SoraFileUtility::fileExists(path)) {            
+        if(!SoraFileUtility::FileExists(path)) {            
             uint32 size;
             void* data = SoraCore::Ptr->getResourceFile(path, size);
             if(data) {
@@ -296,7 +296,7 @@ namespace sora {
 		pan = 0.f;
 		pitch = 0.f;
         
-        if(!SoraFileUtility::fileExists(path)) {            
+        if(!SoraFileUtility::FileExists(path)) {            
             uint32 size;
             void* data = SoraCore::Ptr->getResourceFile(path, size);
             if(data) {

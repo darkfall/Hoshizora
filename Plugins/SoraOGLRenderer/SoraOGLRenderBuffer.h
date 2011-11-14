@@ -35,6 +35,7 @@ namespace sora {
         const SoraVertexFormat& format() const;
         
         uint32 count() const;
+        void resize(uint32 desired_count);
         
     private:
         GLuint mId;
@@ -58,6 +59,7 @@ namespace sora {
         virtual void active();
         
         uint32 count() const;
+        void resize(uint32 desired_count);
         
     private:
         GLuint mId;

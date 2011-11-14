@@ -153,7 +153,7 @@ namespace sora {
         }
         
         vertex.col = 0xffffffff;
-        vertex.col = sora::SoraColorRGBA(vertex.x / r, vertex.y / r, vertex.z / r, 1.0f);
+      //  vertex.col = sora::SoraColorRGBA(vertex.x / r, vertex.y / r, vertex.z / r, 1.0f);
     }
   
     SoraModel::Ptr SoraModelLoader::BuildModelFromSphere(const SoraSphere& sphere, uint32 slices, SoraMaterial::Ptr mat) {

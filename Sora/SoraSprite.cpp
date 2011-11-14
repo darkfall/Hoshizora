@@ -82,7 +82,6 @@ namespace sora {
 
 	SoraSprite::~SoraSprite() {
 		clearEffects();
-        clearShader();
 	}
 
 	void SoraSprite::setTexture(SoraTextureHandle tex) {

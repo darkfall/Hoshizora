@@ -34,21 +34,20 @@ namespace sora {
         if(pCanvasSprite)
             delete pCanvasSprite;
     }
-
-	void SoraBaseCanvas::setZ(float z) {
-        if(pCanvasSprite)
-            pCanvasSprite->setZ(z);
-	}
-
-	void SoraBaseCanvas::setBlendMode(int32 mode) {
-        if(pCanvasSprite)
-            pCanvasSprite->setBlendMode(mode);
-	}
+    
+    void SoraBaseCanvas::on3DEnabled(bool flag) {
+        pCanvasSprite->enable3D(flag);
+    }
     
     void SoraBaseCanvas::render() {
         if(pCanvasSprite) {
-            pCanvasSprite->setTexture(SoraCore::Ptr->getTargetTexture(canvasTarget));
-            pCanvasSprite->render(getPositionX(), getPositionY());
+            if(!is3DEnabled()) {
+                pCanvasSprite->setTexture(SoraCore::Ptr->getTargetTexture(canvasTarget));
+                pCanvasSprite->render(getPositionX(), getPositionY());
+            } else {
+                pCanvasSprite->setTransform(getTransform());
+                pCanvasSprite->render();
+            }
         }
     }
     
@@ -57,7 +56,6 @@ namespace sora {
             pCanvasSprite->update(dt);
 		return 0;
     }
-    
     
     SoraSprite* SoraBaseCanvas::getCanvasSprite() const { 
         if(pCanvasSprite)
@@ -79,81 +77,5 @@ namespace sora {
             SoraCore::Ptr->endScene();
         }
     }
-    	
-	void SoraBaseCanvas::addEffect(SoraImageEffect* effect) {
-        if(pCanvasSprite)
-            return pCanvasSprite->addEffect(effect);
-	}
-	
-	void SoraBaseCanvas::stopEffect(SoraImageEffect* effect) {
-        if(pCanvasSprite)
-            return pCanvasSprite->stopEffect(effect);
-	}
-	
-	void SoraBaseCanvas::clearEffects() {
-        if(pCanvasSprite)
-            return pCanvasSprite->clearEffects();
-	}
-	
-	bool SoraBaseCanvas::hasEffect() const {
-        if(pCanvasSprite)
-            return pCanvasSprite->hasEffect();
-        return false;
-	}
-    
-    void SoraBaseCanvas::fadeTo(float to, float t) {
-        if(pCanvasSprite)
-            pCanvasSprite->addModifierAdapter(CreateModifierAdapter(pCanvasSprite, 
-                                                                    CreateEffectFade(CGETA(pCanvasSprite->getColor())/255.f,
-                                                                                        to,
-                                                                                        t)));
-    }
-    
-    void SoraBaseCanvas::rotateTo(float to, float t) {
-        if(pCanvasSprite)
-            pCanvasSprite->addModifierAdapter(CreateModifierAdapter(pCanvasSprite, 
-                                                                    CreateEffectRotation(pCanvasSprite->getRotation(),
-                                                                                            to,
-                                                                                            t)));
-    }
-    
-    void SoraBaseCanvas::scaleTo(float h, float v, float t) {
-        if(pCanvasSprite)
-            pCanvasSprite->addModifierAdapter(CreateModifierAdapter(pCanvasSprite, 
-                                                                    CreateEffectScale(pCanvasSprite->getHScale(),
-                                                                                        pCanvasSprite->getVScale(),
-                                                                                        h,
-                                                                                        v,
-                                                                                        t)));
-    }
-    
-    void SoraBaseCanvas::fadeToAndNotify(float to, float t, const NotificationFunc& func) {
-        if(pCanvasSprite)
-            pCanvasSprite->addModifierAdapter(CreateModifierAdapterWithNotification(pCanvasSprite, 
-                                                                                    CreateEffectFade(CGETA(pCanvasSprite->getColor()),
-                                                                                                        to,
-                                                                                                        t),
-                                                                                    func));
-    }
-    
-    void SoraBaseCanvas::rotateTo(float to, float t, const NotificationFunc& func) {
-        if(pCanvasSprite)
-            pCanvasSprite->addModifierAdapter(CreateModifierAdapterWithNotification(pCanvasSprite, 
-                                                                                    CreateEffectRotation(pCanvasSprite->getRotation(),
-                                                                                                            to,
-                                                                                                            t),
-                                                                                    func));
-    }
-    
-    void SoraBaseCanvas::scaleTo(float h, float v, float t, const NotificationFunc& func) {
-        if(pCanvasSprite)
-            pCanvasSprite->addModifierAdapter(CreateModifierAdapterWithNotification(pCanvasSprite, 
-                                                                                    CreateEffectScale(pCanvasSprite->getHScale(),
-                                                                                                        pCanvasSprite->getVScale(),
-                                                                                                        h,
-                                                                                                        v,
-                                                                                                        t),
-                                                                                    func));
-    }
-    
+      
 } // namespace sora

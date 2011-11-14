@@ -9,9 +9,9 @@ namespace sora {
 
 	class SORA_API SoraFileUtility {
 	public:
-		static bool fileExists(const StringType& filepath);
+		static bool FileExists(const StringType& filepath);
 		
-		static StringType getAbsolutePath(const StringType& filePath);
+		static StringType GetAbsolutePath(const StringType& filePath);
 		
 		/* 
 		 get path in which can use to write file
@@ -19,15 +19,15 @@ namespace sora {
 		 because ios limit writting files in app
 		 also some part of osx
 		 */
-		static StringType getWrittablePath(const StringType& filePath);
+		static StringType GetWrittablePath(const StringType& filePath);
 		
-		static StringType getApplicationPath();
+		static StringType GetApplicationPath();
 
-		static StringType getFontPath(const StringType& file);
+		static StringType GetFontPath(const StringType& file);
 
-		static StringType getFullPath(const StringType& file);
+		static StringType GetFullPath(const StringType& file);
 		
-		static StringType getFileName(const StringType& file);
+		static StringType GetFileName(const StringType& file);
     };
 
 } // namespace sora

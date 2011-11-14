@@ -28,17 +28,12 @@ namespace sora {
 
     void SoraShaderable::attachShaderContext(const StringType& tag) {
         SoraShaderContext* context = SoraCore::Ptr->getFileSystem()->getShaderResource(tag);
-        if(context)
-            attachShaderContext(context);
-    }
-    
-    void SoraShaderable::attachShaderContext(SoraShaderContext* context) {
-        sora_assert(context);
-        
-        if(mInternalContext && mShaderContext)
-            delete mShaderContext;
-        mShaderContext = context;
-        mInternalContext = false;
+        if(context) {
+            if(mInternalContext && mShaderContext)
+                delete mShaderContext;
+            mShaderContext = context;
+            mInternalContext = false;
+        }
     }
     
     SoraShaderContext* SoraShaderable::getShaderContext() const {
@@ -61,13 +56,7 @@ namespace sora {
     SoraShader* SoraShaderable::attachVertexShader(const StringType& file, const SoraString& entry) {
         return attachShader(file, entry, SoraShader::VertexShader);
     }
-    
-    void SoraShaderable::detachShader(SoraShader* shader) {
-        if(mShaderContext) {
-            mShaderContext->detachShader(shader);
-        }
-    }
-    
+
     void SoraShaderable::detachFragmentShader() {
         if(mShaderContext) {
             mShaderContext->detachFragmentShader();
@@ -77,30 +66,6 @@ namespace sora {
     void SoraShaderable::detachVertexShader() {
         if(mShaderContext) {
             mShaderContext->detachVertexShader();
-        }
-    }
-    
-    void SoraShaderable::attachShader(SoraShader* shader) {
-        checkShaderContext();
-        
-        if(mShaderContext) {
-            mShaderContext->attachShader(shader);
-        }
-    }
-    
-    void SoraShaderable::attachFragmentShader(SoraShader* shader) {
-        checkShaderContext();
-        
-        if(mShaderContext) {
-            mShaderContext->attachFragmentShader(shader);
-        }
-    }
-    
-    void SoraShaderable::attachVertexShader(SoraShader* shader) {
-        checkShaderContext();
-        
-        if(mShaderContext) {
-            mShaderContext->attachVertexShader(shader);
         }
     }
     
@@ -127,11 +92,6 @@ namespace sora {
     
     bool SoraShaderable::hasShader() const {
         return mShaderContext && mShaderContext->isAvailable();
-    }
-    
-    void SoraShaderable::clearShader() {
-        if(mShaderContext)
-            mShaderContext->clear();
     }
     
     SoraShader* SoraShaderable::getFragmentShader() const {

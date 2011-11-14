@@ -237,12 +237,12 @@ namespace sora {
 
 			for(int32 i=mCurrLine; i>=0; --i) {
 				switch(debugMssg[i].mLogLevel) {
-					case LOG_LEVEL_NORMAL:	mFont->setColor(0xFFFFFFFF); break;
-					case LOG_LEVEL_NOTICE:	mFont->setColor(0xFF30AAFF); break;
-					case LOG_LEVEL_ERROR:	mFont->setColor(0xFFFF0000); break;
-					case LOG_LEVEL_WARNING: mFont->setColor(0xFFFFCC00); break;
+					case LOG_LEVEL_NORMAL:	mFont->setColor(Color::White); break;
+					case LOG_LEVEL_NOTICE:	mFont->setColor(Color::Lightblue); break;
+					case LOG_LEVEL_ERROR:	mFont->setColor(Color::Red); break;
+					case LOG_LEVEL_WARNING: mFont->setColor(Color::Orange); break;
 				}
-				mFont->render(x, y, SoraFont::AlignmentLeft, s2wsfast("> "+debugMssg[i].mLog).c_str());
+				mFont->render(x, y, SoraFont::AlignmentLeft, s2wsfast(debugMssg[i].mLog).c_str());
 				if(i > 0)
 					y -= mFont->getStringHeight(s2wsfast(debugMssg[i-1].mLog).c_str());
 			

@@ -542,11 +542,12 @@ namespace sora{
 	}
 
 	uint32* SoraOGLRenderer::textureLock(SoraTexture* ht) {
-		ht->mTexData = (uint32*)sora_malloc(ht->mOriginalWidth * ht->mOriginalHeight * sizeof(uint32));
-		sora_assert(ht->mTexData);
+        if(ht->mTexData == 0) {
+            ht->mTexData = (uint32*)sora_malloc(ht->mOriginalWidth * ht->mOriginalHeight * sizeof(uint32));
+            sora_assert(ht->mTexData);
         
-        memset(ht->mTexData, 0, ht->mOriginalWidth * ht->mOriginalHeight);
-		
+            memset(ht->mTexData, 0xff, ht->mOriginalWidth * ht->mOriginalHeight * sizeof(uint32));
+		}
         glEnable(GL_TEXTURE_2D);
         
         GLint PreviousTexture;
@@ -555,9 +556,7 @@ namespace sora{
         glBindTexture(GL_TEXTURE_2D, ht->mTextureID);
         glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, ht->mTexData);
         if(glGetError() != GL_NO_ERROR) {
-            sora_free(ht->mTexData);
-            ht->mTexData = 0;
-            return 0;
+            log_error("SoraOGLRenderer: error when locking texture");
         }
         
         glBindTexture(GL_TEXTURE_2D, PreviousTexture);
@@ -806,8 +805,10 @@ namespace sora{
 	}
 
 	StringType SoraOGLRenderer::videoInfo() const {
-		StringType info(L"GraphicDriver: OpenGL Version ");
-		info += (char*)glGetString(GL_VERSION);
+		StringType info = vamssg("OpenGL Version: %s Vender: %s GLSL Version: %s", 
+                                 (char*)glGetString(GL_VERSION),
+                                 (char*)glGetString(GL_VENDOR),
+                                 (char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 		return info;
 	}
@@ -1060,6 +1061,19 @@ namespace sora{
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
         glDisableClientState(GL_SECONDARY_COLOR_ARRAY);
+    }
+    
+    void SoraOGLRenderer::fillDeviceCaps(SoraGraphicDeviceCaps& caps) {
+        glGetIntegerv(GL_MAX_ELEMENTS_INDICES, (GLint*)&caps.max_indices);
+        glGetIntegerv(GL_MAX_ELEMENTS_VERTICES, (GLint*)&caps.max_vertices);
+        
+        glGetIntegerv(GL_MAX_TEXTURE_SIZE, (GLint*)&caps.max_texture_height);
+        glGetIntegerv(GL_MAX_TEXTURE_SIZE, (GLint*)&caps.max_texture_width);
+        
+        glGetIntegerv(GL_MAX_CUBE_MAP_TEXTURE_SIZE, (GLint*)&caps.max_texture_cube_map_size);
+        
+        glGetIntegerv(GL_MAX_TEXTURE_UNITS, (GLint*)&caps.max_pixel_texture_units);
+        glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, (GLint*)&caps.max_vertex_texture_units);
     }
     
     

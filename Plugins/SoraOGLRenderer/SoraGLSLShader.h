@@ -59,12 +59,16 @@ namespace sora {
 		virtual bool detachShaderList();
 		
 		bool isAttached() const;
+        bool isLinked() const;
         GLuint getProgram() const { return mProgram; }
+        
+        void link();
 				
 	private:
 		GLuint mProgram;
 		
 		bool mAttached;
+        bool mLinked;
 	};
 	
 	class SoraGLSLShader: public SoraShader {
@@ -80,8 +84,8 @@ namespace sora {
 	public:
 		
 		void setTexture(const SoraString& decalName, SoraHandle tex);
-		bool setParameterfv(const char* name, float* val, uint32 size);
-		bool setParameteriv(const char* name, int32* val, uint32 size);
+		bool setParameterfv(const char* name, const float* val, uint32 size);
+		bool setParameteriv(const char* name, const int32* val, uint32 size);
         bool getParameterfv(const char* name, float* val, uint32 size);
         bool getParameteriv(const char* name, int32* val, uint32 size);             
         

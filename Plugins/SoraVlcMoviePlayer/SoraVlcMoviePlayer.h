@@ -9,9 +9,17 @@
 #ifndef SORA_VLC_MOVIE_PLAYER_H_
 #define SORA_VLC_MOVIE_PLAYER_H_    
 
-#include "SoraCore.h"
+#include "SoraPlatform.h"
+#include "SoraAutoUpdate.h"
 #include "SoraMoviePlayer.h"
+
+#ifdef OS_OSX
+#include "osx/include/vlc/vlc.h"
+#elif defined(OS_WIN32)
+#include "win32/include/vlc/vlc.h"
+#else
 #include "vlc/vlc.h"
+#endif
 
 #ifdef OS_WIN32
 #pragma comment(lib, "libvlc.lib")
@@ -20,7 +28,7 @@
 
 namespace sora {
     
-    class SoraVlcMoviePlayer: public SoraMoviePlayer {
+    class SoraVlcMoviePlayer: public SoraMoviePlayer, public SoraAutoUpdate {
 		friend class MP_CTX;
 		
     public:
@@ -50,7 +58,7 @@ namespace sora {
         SoraVlcMoviePlayer();
         ~SoraVlcMoviePlayer();
         
-        bool openMedia(const StringType& filePath, const SoraString& dis="RGBA");
+        bool openMedia(const StringType& filePath);
         void play();
         void stop();
         void pause();
@@ -88,8 +96,12 @@ namespace sora {
         float getPlayRate() const;
         void setPlayRate(float rate);
         
-		void setMediaInfo(uint32 w, uint32 h);
+        void onUpdate(float dt);
+        void bindTexture(SoraTextureHandle tex);
+        
+        void setMediaInfo(uint32 w, uint32 h);
     private:
+
         libvlc_instance_t* vlcInstance;
         libvlc_media_player_t* mp;
         libvlc_media_t* media;
@@ -99,6 +111,8 @@ namespace sora {
        
         MP_CTX frameData;
 		std::string displayFormat;
+        
+        SoraTextureHandle mTexture;
     };
     
 } // namesapce sora

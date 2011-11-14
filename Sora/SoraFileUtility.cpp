@@ -20,7 +20,7 @@
 
 namespace sora {
 
-    bool SoraFileUtility::fileExists(const StringType& filepath) {
+    bool SoraFileUtility::FileExists(const StringType& filepath) {
 #ifdef WIN32
 			return PathFileExistsA(filepath.c_str())?true:false;
 #elif defined(OS_OSX)
@@ -35,7 +35,7 @@ namespace sora {
 			return true;
 		}
 		
-	 StringType SoraFileUtility::getAbsolutePath(const StringType& filePath) {
+	 StringType SoraFileUtility::GetAbsolutePath(const StringType& filePath) {
 #ifdef WIN32
 			wchar_t buffer[MAX_PATH];
 			GetCurrentDirectoryW(MAX_PATH, buffer);
@@ -55,16 +55,16 @@ namespace sora {
 		 because ios limit writting files in app
 		 also some part of osx
 		 */
-	 StringType SoraFileUtility::getWrittablePath(const StringType& filePath) {
+	 StringType SoraFileUtility::GetWrittablePath(const StringType& filePath) {
 #ifndef OS_IOS
-			return getAbsolutePath(filePath);
+			return GetAbsolutePath(filePath);
 #else
 			return appDocumentPath()+"/"+filePath;
 #endif
 			return "\0";
 		}
 		
-	 StringType SoraFileUtility::getApplicationPath() {
+	 StringType SoraFileUtility::GetApplicationPath() {
 #ifdef WIN32
 			wchar_t buffer[MAX_PATH];
 			GetCurrentDirectoryW(MAX_PATH, buffer);
@@ -78,18 +78,18 @@ namespace sora {
 			return "./";
 		}
 
-	 StringType SoraFileUtility::getFontPath(const StringType& file) {
+	 StringType SoraFileUtility::GetFontPath(const StringType& file) {
          StringType fontPath = SoraPath::font() + "/";
          return fontPath + file;
      }
 
-	 StringType SoraFileUtility::getFullPath(const StringType& file) {
-         StringType str = getApplicationPath();
+	 StringType SoraFileUtility::GetFullPath(const StringType& file) {
+         StringType str = GetApplicationPath();
          str += std::string("/" + file);
          return str;
      }
 		
-	 StringType SoraFileUtility::getFileName(const StringType& file) {
+	 StringType SoraFileUtility::GetFileName(const StringType& file) {
 			SoraString op = file;
 			for(size_t i=0; i<op.size(); ++i)
 				if(op[i] == '\\')

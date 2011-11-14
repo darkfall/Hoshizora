@@ -84,9 +84,10 @@ namespace sora {
 		void attachShaderContext(SoraShaderContext* context);
 		void detachShaderContext();
 
-		StringType videoInfo() const;
-        RenderSystemType renderSystemType() const;
-		SoraHandle getVideoDeviceHandle();
+		StringType          videoInfo() const;
+        RenderSystemType    renderSystemType() const;
+        void                fillDeviceCaps(SoraGraphicDeviceCaps& caps);
+		SoraHandle          getVideoDeviceHandle();
 
 		void flush();
         

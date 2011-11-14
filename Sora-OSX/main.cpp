@@ -149,6 +149,7 @@ sora::SoraModel::Ptr boxModel;
 #include "debug/SoraGlobalProfiler.h"
 #include "debug/SoraAutoProfile.h"
 
+#include "SoraShaderParamObject.h"
 
 sora::SoraRenderBuffer::Ptr vertexBuffer;
 sora::SoraRenderBuffer::Ptr indexBuffer;
@@ -159,6 +160,13 @@ struct myVertex {
     uint32 col;
   //  float tx, ty;
 };
+
+#include "SoraVlcMoviePlayer/SoraVlcMoviePlayer.h"
+
+sora::SoraShaderParameter ppppp;
+
+sora::SoraVlcMoviePlayer moviePlayer;
+sora::SoraTextureHandle movieTexture;
 
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
@@ -234,6 +242,7 @@ public:
         mBg.enable3D(false);
     //    mBg.render(400.f, 400.f);
         
+        ppppp = z;
 
         sora::SoraCore::Ptr->switchTo3D();
         sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(myView);
@@ -241,14 +250,13 @@ public:
         {
             sora::SoraTimestamp ts;
 
-            sora::SoraCore::Ptr->getRenderSystem()->renderBuffer(0, 
+       /*     sora::SoraCore::Ptr->getRenderSystem()->renderBuffer(0, 
                                                                  sora::Triangle, 
                                                                  vertexBuffer, 
                                                                  sora::SoraRenderBuffer::NullObject());
-            
-            //  sphereModel->render();
+            */
+            sphereModel->render();
 
-            printf("%llu\n", ts.elapsed());
         }
         
      /*   sphereModel->getTransform().setPosition(xp, yp, 0.f);
@@ -263,11 +271,8 @@ public:
         sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT, arr.begin(), 24, sora::Line);
         */
         
-        
-        boxModel->getTransform().setPosition(xp, yp, 0.f);
-        boxModel->getTransform().setRotation(sora::SoraQuaternion(sora::DegreeToRadius(x), sora::DegreeToRadius(y), sora::DegreeToRadius(z), 0));
-        boxModel->getTransform().setScale(s, s, s);
-    //    boxModel->render();
+      
+        boxModel->render();
      
         mBg.enable3D(true);
         mBg.getTransform().setRotation(x, y, z);
@@ -302,15 +307,13 @@ public:
                      
                      );
         
-        
         sora::SoraGameApp::EndScene();
         
         
     }
     
-    void onUpdate(float dt) {
+    void onUpdate(float dt) {   
 
-                
     }
     
     void onKeyEvent(sora::SoraKeyEvent* keyEvent) {
@@ -323,44 +326,19 @@ public:
         sora::SoraCore::Instance()->registerPhysicWorld(new sora::SoraBox2dPhysicWorld(0.f, 1.f, true));
         sora::SoraCore::Ptr->setFPS(60);
         
-        vertexBuffer = sora::SoraCore::Instance()->getRenderSystem()->createVertexBuffer(sora::SoraRenderBuffer::ReadWrite, 
-                                                                                         sora::SoraRenderBuffer::Static, 
-                                                                                         sphereModel->getMesh()->mFaces.size(),
-                                                                                         0, 
-                                                                                         sora::SoraVertexFormat(sora::VertexXYZ | sora::VertexNormal | sora::VertexColor )
-                                                                                         .offsetXYZ(0)
-                                                                                         .offsetNormal(sizeof(float)*3)
-                                                                                         .offsetColor(sizeof(float)*6));
-        myVertex* vertexData = static_cast<myVertex*>(vertexBuffer->map());
-        sora_assert(vertexData);
+       // ppppp = sphereModel->getMaterial()->attachFragmentShader("Bloom.cg", "Bloom")->getParameter("rate");
         
-        for(int i=0; i<sphereModel->getMesh()->mFaces.size(); ++i) {
-            const sora::SoraVertex& vertex = sphereModel->getMesh()->mFaces[i];
-            
-            vertexData[i].x = vertex.x;
-            vertexData[i].y = vertex.y;
-            vertexData[i].z = vertex.z;
-            
-            vertexData[i].nx = vertex.x / 200.f;
-            vertexData[i].ny = vertex.y / 200.f;
-            vertexData[i].nz = vertex.x / 200.f;
-            
-            vertexData[i].col = vertex.col;
+        
+        if(!moviePlayer.openMedia("[完全感覚Dreamer]打开姿势错误的罪恶王冠.mp4"))
+            sora::SoraCore::Ptr->messageBox("Error opening movie", "Error", MB_OK);
+        else {
+            movieTexture = sora::SoraTexture::CreateEmpty(moviePlayer.getWidth(), moviePlayer.getHeight());
+            moviePlayer.play();
+            moviePlayer.bindTexture(movieTexture);
+            sphereModel->getMaterial()->setTexture(0, movieTexture);
         }
-        
-        vertexBuffer->unmap();
-        
-        indexBuffer = sora::SoraCore::Ptr->getRenderSystem()->createIndexBuffer(sora::SoraRenderBuffer::ReadWrite, 
-                                                                                sora::SoraRenderBuffer::Static, 
-                                                                                24,
-                                                                                0);
-        uint32* indexes = static_cast<uint32*>(indexBuffer->map());
-        sora_assert(indexes);
-        
-        for(int i=0; i<24; ++i)
-            indexes[i] = i;
-        indexBuffer->unmap();
-        
+                
+    
         sc1.setTexture(sora::SoraTexture::LoadFromFile("bg-optd.png"));
        
         mBg.setTexture(sora::SoraTexture::LoadFromFile("test.png"));
