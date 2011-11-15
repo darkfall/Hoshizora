@@ -18,6 +18,12 @@
     #ifdef SORA_COMPILER_MSVC
         #include <intrin.h>
     #endif
+#elif defined(OS_LINUX) || defined(OS_OSX)
+    #include <sched.h>
+
+    #if defined OS_OSX
+        #include <sys/sysctl.h>
+    #endif
 #endif
 
 namespace
@@ -366,7 +372,7 @@ namespace sora {
 			::GetSystemInfo(&si);
 			mNumHWThreads = si.dwNumberOfProcessors;
 		}
-#elif defined OS_LINUX
+#elif defined(OS_LINUX) || defined(OS_OSX)
 		// Linux doesn't easily allow us to look at the Affinity Bitmask directly,
 		// but it does provide an API to test affinity maskbits of the current process
 		// against each logical processor visible under OS.
@@ -461,10 +467,9 @@ namespace sora {
 					}
 				}
 			}
-#elif defined OS_LINUX
+#elif defined(OS_LINUX) || defined(OS_OSX)
             {
                 bool supported = (GenuineIntel == mCPUString) || (AuthenticAMD == mCPUString);
-#endif
                 
                 if (supported)
                 {
@@ -472,7 +477,7 @@ namespace sora {
                     uint8_t cores_per_pkg = 1;
                     
                     // Determine if hyper-threading is enabled.
-                    if (this->TestFeature(HTT))
+                    if (this->testFeature(HTT))
                     {
                         cpuid.Call(1);
                         
@@ -585,12 +590,12 @@ namespace sora {
                         ::SetThreadAffinityMask(thread_handle, prev_thread_affinity);
                         ::Sleep(0);
                     }
-#elif defined OS_LINUX
-                    if (1 == num_hw_threads_)
+#elif defined(OS_LINUX)
+                    if (1 == mNumHWThreads)
                     {
                         // Since we only have 1 logical processor present on the system, we
                         // can explicitly set a single APIC ID to zero.
-                        BOOST_ASSERT(1 == log_procs_per_pkg);
+                        sora_assert(1 == log_procs_per_pkg);
                         apic_ids.push_back(0);
                     }
                     else
@@ -600,7 +605,7 @@ namespace sora {
                         
                         cpu_set_t current_cpu;
                         // Call cpuid on each active logical processor in the system affinity.
-                        for (int j = 0; j < num_hw_threads_; ++ j)
+                        for (int j = 0; j < mNumHWThreads; ++ j)
                         {
                             CPU_ZERO(&current_cpu);
                             CPU_SET(j, &current_cpu);
@@ -632,6 +637,24 @@ namespace sora {
                 }
             }
 #endif
+            
+#if defined OS_OSX
+            int nm[2];
+            size_t len = 4;
+            uint32_t count;
+            
+            nm[0] = CTL_HW; nm[1] = HW_AVAILCPU;
+            sysctl(nm, 2, &count, &len, NULL, 0);
+            
+            if(count < 1) {
+                nm[1] = HW_NCPU;
+                sysctl(nm, 2, &count, &len, NULL, 0);
+                if(count < 1) { count = 1; }
+            }
+            mNumCores = static_cast<int>(count);
+
+#endif
+            
 #endif
     }
         

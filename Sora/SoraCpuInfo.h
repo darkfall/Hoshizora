@@ -38,23 +38,23 @@ namespace sora {
     public:
         SoraCpuInfo();
         
-        const std::string& CPUString() const {
+        const std::string& getCPUString() const {
             return mCPUString;
         }
         
-        const std::string& CPUBrandString() const {
+        const std::string& getCPUBrandString() const {
             return mCPUBrandString;
         }
         
-        bool TestFeature(Feature feature) const {
+        bool testFeature(Feature feature) const {
             return mFeatureMask & feature ? true : false;
         }
         
-        int NumHWThreads() const {
+        int getNumHWThreads() const {
             return mNumHWThreads;
         }
         
-        int NumCores() const {
+        int getNumCores() const {
             return mNumCores;
         }
         

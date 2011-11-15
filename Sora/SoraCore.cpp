@@ -81,6 +81,8 @@
 #endif
 
 #include "SoraPath.h"
+#include "SoraCpuInfo.h"
+#include "SoraCamera.h"
 
 #include <stack>
 
@@ -158,7 +160,7 @@ namespace sora {
 		mPrevShaderContext = NULL;
         mScreenBuffer = NULL;
         mSystemFont = 0;
-        m3DCamera = 0;
+        mCamera = 0;
         
         log_notice("Initializing base systems...");
         
@@ -186,6 +188,13 @@ namespace sora {
         log_mssg(getOSVersion().get());
         log_mssg(vamssg("CPU Speed: %d mhz", getCPUSpeed()));
         log_mssg(vamssg("Memory Size: %d kb", getSystemMemorySize() / 1024));
+        
+        SoraCpuInfo cpuinfo;
+        log_mssg(vamssg("CPU: %s, %s, Cores: %d Threads: %d", 
+                        cpuinfo.getCPUString().c_str(),
+                        cpuinfo.getCPUBrandString().c_str(),
+                        cpuinfo.getNumCores(),
+                        cpuinfo.getNumHWThreads()));
 	}
     
     void SoraCore::_regGlobalProducts() {
@@ -1164,8 +1173,8 @@ namespace sora {
         sora_assert(bInitialized = true);
         pRenderSystem->switchTo3D();
         
-        if(m3DCamera)
-            m3DCamera->apply();
+        if(mCamera)
+            mCamera->apply();
         mIs3DRendering = true;
     }
 
@@ -1722,12 +1731,12 @@ namespace sora {
     
 #endif    
     
-    void SoraCore::set3DCamera(Sora3DCamera* camera) {
-        m3DCamera = camera;
+    void SoraCore::set3DCamera(SoraCamera* camera) {
+        mCamera = camera;
     }
     
-    Sora3DCamera* SoraCore::get3DCamera() const {
-        return m3DCamera;
+    SoraCamera* SoraCore::get3DCamera() const {
+        return mCamera;
     }
     
     SoraGraphicDeviceCaps SoraCore::getGraphicDeviceCaps() const {

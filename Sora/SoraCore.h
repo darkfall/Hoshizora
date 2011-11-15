@@ -41,7 +41,7 @@ namespace sora {
     class SoraInputListener;
     class SoraPhysicWorld;
     class SoraFileSystem;
-    class Sora3DCamera;
+    class SoraCamera;
     
 	class SORA_API SoraCore {
 	protected:
@@ -203,8 +203,8 @@ namespace sora {
         void switchTo2D();
         void switchTo3D();
         
-        void          set3DCamera(Sora3DCamera* camera);
-        Sora3DCamera* get3DCamera() const;
+        void          set3DCamera(SoraCamera* camera);
+        SoraCamera*   get3DCamera() const;
 
 #ifdef SORA_ENABLE_MULTI_THREAD        
         /*
@@ -463,7 +463,7 @@ namespace sora {
         SoraMutexLock mRenderingLock;
 #endif
         
-        Sora3DCamera* m3DCamera;
+        SoraCamera* mCamera;
         SoraGraphicDeviceCaps mGraphicDeviceCaps;
     };
     

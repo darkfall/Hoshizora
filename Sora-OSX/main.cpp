@@ -136,8 +136,6 @@ float s = 1.f;
 
 float xp = 512, yp = 384;
 
-sora::Sora3DCamera* camera;
-
 #include "Sora3D/SoraModel.h"
 #include "Sora3D/SoraModelLoader.h"
 
@@ -177,11 +175,7 @@ public:
         
         sora::SoraAABB3 abox = sphereModel->getBoudingBox();
         boxModel = sora::SoraModelLoader::BuildModelFromAABB(abox, new sora::SoraMaterial(sora::SoraMaterial::WireFrame));
-        
-        camera = new sora::Sora3DCamera(sora::Sora3DCamera::Perspective);
-        camera->setProjectionMatrix(sora::SoraMatrix4::PerspectiveMat(60.f, 1.33, 10.f, 3000.f));
-        camera->setPosition(-512.f, -384.f, -1000.f);
-        
+
     //    camera->lookAt(512.f, 384.f, -500.f, 512.f, 384.f, 500.f, 0, 0, 1);
         
     }
