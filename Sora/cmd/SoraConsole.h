@@ -115,6 +115,8 @@ namespace sora {
         
 		SORA_CLASS_DEF_FIELD_SET_GET_P(float, PositionX, m)
         SORA_CLASS_DEF_FIELD_SET_GET_P(float, PositionY, m)
+		
+		typedef std::map<std::string, SoraEventHandler*> CommandHandlerMap;
 
 	private:        
 		void drawCmds();
@@ -135,11 +137,7 @@ namespace sora {
 		
 		int32 mTab;
 		
-		typedef std::map<std::string, SoraEventHandler*> CommandHandlerMap;
-		static CommandHandlerMap& getCommandHandlerMap() {
-			static CommandHandlerMap instance;
-			return instance;
-		}
+		static CommandHandlerMap& getCommandHandlerMap();
 
 		std::string mCurrentLine;
 		typedef struct {

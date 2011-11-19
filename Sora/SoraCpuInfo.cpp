@@ -26,6 +26,8 @@
     #endif
 #endif
 
+#include <algorithm>
+
 namespace
 {
 	using namespace sora;
@@ -470,7 +472,9 @@ namespace sora {
 #elif defined(OS_LINUX) || defined(OS_OSX)
             {
                 bool supported = (GenuineIntel == mCPUString) || (AuthenticAMD == mCPUString);
-                
+                    
+#endif              
+       
                 if (supported)
                 {
                     uint8_t log_procs_per_pkg = 1;
@@ -527,13 +531,13 @@ namespace sora {
                             }
                         }
                     }
-                    
-                    std::vector<uint8_t> apic_ids;
+		             std::vector<uint8_t> apic_ids;
                     
                     // Configure the APIC extractor object with the information it needs to
                     // be able to decode the APIC.
                     ApicExtractor apic_extractor;
                     apic_extractor.SetPackageTopology(log_procs_per_pkg, cores_per_pkg);
+
                     
 #if defined OS_WIN32
                     DWORD_PTR process_affinity, system_affinity;
@@ -544,7 +548,7 @@ namespace sora {
                     {
                         // Since we only have 1 logical processor present on the system, we
                         // can explicitly set a single APIC ID to zero.
-                        BOOST_ASSERT(1 == log_procs_per_pkg);
+                        sora_assert(1 == log_procs_per_pkg);
                         apic_ids.push_back(0);
                     }
                     else
@@ -567,12 +571,12 @@ namespace sora {
                                 {
                                     // Save the previous thread affinity so we can return
                                     // the executing thread affinity back to this state.
-                                    BOOST_ASSERT(apic_ids.empty());
+                                    sora_assert(apic_ids.empty());
                                     prev_thread_affinity = ::SetThreadAffinityMask(thread_handle, thread_affinity);
                                 }
                                 else
                                 {
-                                    BOOST_ASSERT(!apic_ids.empty());
+                                    sora_assert(!apic_ids.empty());
                                     ::SetThreadAffinityMask(thread_handle, thread_affinity);
                                 }
                                 
@@ -653,8 +657,6 @@ namespace sora {
             }
             mNumCores = static_cast<int>(count);
 
-#endif
-            
 #endif
     }
         

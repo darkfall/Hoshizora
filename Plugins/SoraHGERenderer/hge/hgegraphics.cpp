@@ -804,6 +804,45 @@ std::string HGE_Impl::getDeviceInfo() {
 	return deviceInfo;
 }
 
+void HGE_Impl::Gfx_RenderBuffer(DWORD vertex, DWORD index, HTEXTURE tex, int mode, int vsize, int isize) {
+	IDirect3DVertexBuffer9* vertexBuffer = (IDirect3DVertexBuffer9*)vertex;
+	IDirect3DIndexBuffer9* indexBuffer = (IDirect3DIndexBuffer9*)index;
+
+	CurPrimType = mode;
+	pD3DDevice->SetTexture( 0, (LPDIRECT3DTEXTURE9)tex );
+	CurTexture = tex;
+
+	switch(CurPrimType)
+			{
+				case HGEPRIM_QUADS:
+					pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vsize, 0, isize/4);
+					break;
+
+				case HGEPRIM_TRIPLES:
+					pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vsize, 0, isize/3);
+					break;
+
+				case HGEPRIM_LINES:
+					pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vsize, 0, isize/2);
+					break;
+
+				case HGEPRIM_LINE_LOOP:
+					pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vsize, 0, isize-1);
+					break;
+
+				case HGEPRIM_TRIPLES_FAN:
+					pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vsize, 0, isize-2);
+					break;
+
+				case HGEPRIM_TRIPLES_STRIP:
+					pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 9, vsize, 0, isize-1);
+					break;
+			}
+
+	pD3DDevice->SetStreamSource(0, pVB, 0, sizeof(hgeVertex));
+	pD3DDevice->SetIndices(pIB);
+}
+
 bool HGE_Impl::_GfxInit()
 {
 	static const char *szFormats[]={"UNKNOWN", "R5G6B5", "X1R5G5B5", "A1R5G5B5", "X8R8G8B8", "A8R8G8B8"};

@@ -158,6 +158,8 @@ public:
 	virtual DWORD*		CALL	Texture_Lock(HTEXTURE tex, bool bReadOnly=true, int left=0, int top=0, int width=0, int height=0);
 	virtual void		CALL	Texture_Unlock(HTEXTURE tex);
 
+	virtual void       CALL   Gfx_RenderBuffer(DWORD vertex, DWORD indieces, HTEXTURE tex, int mode, int vsize, int isize);
+
 	virtual unsigned long CALL getVideoDeviceHandle();
 	virtual std::string CALL getDeviceInfo();
 	virtual void	CALL SetShaderChanged(bool flag) { shaderChanged = flag; }

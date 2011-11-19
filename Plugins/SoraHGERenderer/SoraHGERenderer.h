@@ -34,6 +34,22 @@ namespace sora {
 
 		void start(SoraTimer* timer);
 
+		SoraRenderBuffer::Ptr createVertexBuffer(SoraRenderBuffer::Access accessHint,
+                                                         SoraRenderBuffer::Usage usage,
+                                                         uint32 desired_count,
+                                                         void* initData,
+                                                         const SoraVertexFormat& vertexFormat);
+        
+        SoraRenderBuffer::Ptr createIndexBuffer(SoraRenderBuffer::Access accessHint,
+                                                        SoraRenderBuffer::Usage usage,
+                                                        uint32 desired_count,
+                                                        void* initData);
+        
+        void renderBuffer(SoraTexture* tex, RenderMode mode, SoraRenderBuffer::Ptr vertexBuffer, SoraRenderBuffer::Ptr indexBuffer);
+
+		RenderSystemType renderSystemType() const;
+        void fillDeviceCaps(SoraGraphicDeviceCaps& caps);
+
 		SoraHandle	createTarget(int width, int height, bool zbuffer=true);
 		void		freeTarget(SoraHandle t);
 		SoraHandle	getTargetTexture(SoraHandle t);
@@ -54,7 +70,6 @@ namespace sora {
 		void		 releaseTexture(SoraTexture* tex);
 
 		void renderQuad(SoraQuad& quad);
-		void renderTriple(SoraTriple& trip);
 		void renderWithVertices(SoraTexture* tex, int32 blendMode, SoraVertex* vertices, uint32 size, RenderMode mode);
 
 		void setClipping(int32 x=0, int32 y=0, int32 w=0, int32 h=0);
@@ -70,7 +85,7 @@ namespace sora {
 		void attachShaderContext(SoraShaderContext* context);
 		void detachShaderContext();
 
-		StringType videoInfo();
+		StringType videoInfo() const;
 		SoraHandle getVideoDeviceHandle();
         void snapshot(const StringType& path);
 
@@ -79,8 +94,7 @@ namespace sora {
 		void setIcon(const StringType& icon);
 		void setCursor(const StringType& cursor);
 		
-		void onExtensionStateChanged(int32 extension, bool state, int32 param);
-        void renderLine(float x1, float y1, float x2, float y2, uint32 color, float width, float z);
+		void renderLine(float x1, float y1, float x2, float y2, uint32 color, float width, float z);
         void renderBox(float x1, float y1, float x2, float y2, uint32 color, float width, float z);
 		void fillBox(float x1, float y1, float x2, float y2, uint32 color, float z);
 
@@ -94,8 +108,8 @@ namespace sora {
 		void setProjectionMatrix(const SoraMatrix4& matrix);
         SoraMatrix4 getProjectionMatrix() const;
 		
-		void setRenderState(RenderStateType, RenderStateParam);
-        RenderStateParam getRenderState(RenderStateType) const;
+		void setRenderState(RenderStateType, int32);
+        int32 getRenderState(RenderStateType) const;
 
 		void switchTo2D();
         void switchTo3D();

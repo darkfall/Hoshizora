@@ -67,6 +67,7 @@ namespace sora {
                 mDef.mFraction = fraction;
                 return fraction;
             }
+			return 0.f;
         }
         
         SoraPhysicRaycastResult mDef;

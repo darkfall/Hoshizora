@@ -147,7 +147,7 @@ namespace sora {
 		
 		displayFormat = "RGBA";
 #ifdef OS_WIN32
-        displayFormat = "RV32"
+        displayFormat = "RV32";
 #endif
 
         frameData.videoWidth = 0;

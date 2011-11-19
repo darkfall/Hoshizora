@@ -55,7 +55,7 @@ namespace sora {
         }
     }
     
-    bool SoraVertexFormat::checkFormat(VertexFormat format) {
+    bool SoraVertexFormat::checkFormat(VertexFormat format) const {
         return mFormat & format;
     }
     

@@ -35,6 +35,11 @@ namespace sora {
         }
     }
 
+	SoraConsole::CommandHandlerMap& SoraConsole::getCommandHandlerMap() {
+		static SoraConsole::CommandHandlerMap* g_instance = new SoraConsole::CommandHandlerMap;
+		return *g_instance;
+	}
+
 	SoraConsole::SoraConsole(): mStartLine(0) {
 		registerEventFunc(this, &SoraConsole::onKeyEvent);
         registerEventFunc(this, &SoraConsole::onHotkeyEvent);

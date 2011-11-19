@@ -39,13 +39,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraBox2dPhysics;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraGifSprite;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraHttpFile;$(ProjectDir)../../../Plugins/SoraThread;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraBox2dPhysics;$(ProjectDir)../../../Plugins\SoraVlcMoviePlayer\win32\include;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)../../../Plugins\SoraVlcMoviePlayer/win32/lib;$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/SoraGifSprite;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraHttpFile;$(ProjectDir)../../../Plugins/SoraThread;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(ProjectDir)/../../../Plugins/cg;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraBox2dPhysics;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)../../../Plugins/SoraFMODSoundSystem/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/fmod;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)../../../Plugins/fmod/;$(ProjectDir)../../../Plugins/SoraBox2dPhysics;$(ProjectDir)../../../Plugins\SoraVlcMoviePlayer\win32\include;$(ProjectDir)../../../Plugins/SoraLua/LuaPlus/src;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/include;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)/../../../Plugins/SoraShader;$(ProjectDir)/../../../Plugins/SoraGUIChan;$(ProjectDir)/../../../Plugins/SoraFreetypeFont/;$(DXSDK_DIR)/include;$(ProjectDir)/../../../Plugins;$(ProjectDir)/../../../Sora;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)../../../Plugins\SoraVlcMoviePlayer/win32/lib;$(ProjectDir)../../../Plugins/SoraFMODSoundSystem/;$(ProjectDir)../../../Plugins/SoraOGLRenderer;$(ProjectDir)../../../Plugins/fmod;$(ProjectDir)../../../Plugins/cg;$(ProjectDir)../../../Plugins/SoraFreetypeFont;$(ProjectDir)../../../Plugins/SoraAudiereSoundSystem;$(ProjectDir)../../../Plugins/SoraLua;$(ProjectDir)../../../Plugins/libvlc/win32/lib;$(DXSDK_DIR)/Lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -87,6 +87,16 @@
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnProgressBar.h" />
     <ClInclude Include="..\..\..\Plugins\gcnExtend\gcnSelectableContainer.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraAABB3.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraCamera3D.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraLight.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraMaterial.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraMesh.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraModel.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraModelLoader.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraObjModelLoader.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraPlane.h" />
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraSphere.h" />
     <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Box2D.h" />
     <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2BroadPhase.h" />
     <ClInclude Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2Collision.h" />
@@ -296,6 +306,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hgecolor.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\hge\hge_impl.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraDXRenderBuffer.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.h" />
     <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.h" />
     <ClInclude Include="..\..\..\Plugins\SoraLua\EnvVarExport.h" />
@@ -355,6 +366,7 @@
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.h" />
     <ClInclude Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.h" />
+    <ClInclude Include="..\..\..\Plugins\SoraVlcMoviePlayer\SoraVlcMoviePlayer.h" />
     <ClInclude Include="..\..\..\Sora\app\SoraGameApp.h" />
     <ClInclude Include="..\..\..\Sora\app\SoraGameAppDef.h" />
     <ClInclude Include="..\..\..\Sora\app\SoraGameState.h" />
@@ -478,6 +490,7 @@
     <ClInclude Include="..\..\..\Sora\SoraConfig.h" />
     <ClInclude Include="..\..\..\Sora\SoraConstantStrings.h" />
     <ClInclude Include="..\..\..\Sora\SoraCore.h" />
+    <ClInclude Include="..\..\..\Sora\SoraCpuInfo.h" />
     <ClInclude Include="..\..\..\Sora\SoraDelegate.h" />
     <ClInclude Include="..\..\..\Sora\SoraDelegateConvert.h" />
     <ClInclude Include="..\..\..\Sora\SoraDeltaWatch.h" />
@@ -534,8 +547,8 @@
     <ClInclude Include="..\..\..\Sora\SoraPluginManager.h" />
     <ClInclude Include="..\..\..\Sora\SoraPreDeclare.h" />
     <ClInclude Include="..\..\..\Sora\SoraPrefab.h" />
+    <ClInclude Include="..\..\..\Sora\SoraRenderBuffer.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderSystem.h" />
-    <ClInclude Include="..\..\..\Sora\SoraRenderSystemExtension.h" />
     <ClInclude Include="..\..\..\Sora\SoraRenderTarget.h" />
     <ClInclude Include="..\..\..\Sora\SoraResource.h" />
     <ClInclude Include="..\..\..\Sora\SoraResourceFile.h" />
@@ -619,7 +632,6 @@
     <ClInclude Include="..\..\..\Sora\ZLIB\zip.h" />
     <ClInclude Include="..\..\..\Sora\ZLIB\zlib.h" />
     <ClInclude Include="..\..\..\Sora\ZLIB\zutil.h" />
-    <ClInclude Include="mainWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnBackgroundContainer.cpp" />
@@ -631,6 +643,12 @@
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnMenuContainer.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnProgressBar.cpp" />
     <ClCompile Include="..\..\..\Plugins\gcnExtend\gcnSelectableContainer.cpp" />
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraCamera3D.cpp" />
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraLight.cpp" />
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraMaterial.cpp" />
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraModel.cpp" />
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraModelLoader.cpp" />
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraObjModelLoader.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2BroadPhase.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2CollideCircle.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraBox2dPhysics\Box2D\Collision\b2CollidePolygon.cpp" />
@@ -738,6 +756,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeinput.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgeresource.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\hge\hgesystem.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraDXRenderBuffer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGEInput.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraHGERenderer.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraLua\EnvVarExport.cpp" />
@@ -798,6 +817,7 @@
     <ClCompile Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\AnimationLuaExport.cpp" />
     <ClCompile Include="..\..\..\Plugins\SoraSpriteAnimation\SoraSpriteAnimation.cpp" />
+    <ClCompile Include="..\..\..\Plugins\SoraVlcMoviePlayer\SoraVlcMoviePlayer.cpp" />
     <ClCompile Include="..\..\..\Sora\app\SoraGameApp.cpp" />
     <ClCompile Include="..\..\..\Sora\app\SoraGameAppDef.cpp" />
     <ClCompile Include="..\..\..\Sora\cmd\CoreCmds.cpp" />
@@ -856,8 +876,8 @@
     <ClCompile Include="..\..\..\Sora\SoraCamera.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraCanvas.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraCore.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraCpuInfo.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraDelegate.cpp" />
-    <ClCompile Include="..\..\..\Sora\SoraDeltaWatch.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraDirectoryIterator.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEnvValues.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraEvent.cpp" />
@@ -883,8 +903,7 @@
     <ClCompile Include="..\..\..\Sora\SoraObjectHandle.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPath.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraPluginManager.cpp" />
-    <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp" />
-    <ClCompile Include="..\..\..\Sora\SoraRenderSystemExtension.cpp" />
+    <ClCompile Include="..\..\..\Sora\SoraRenderBuffer.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraResource.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp" />
     <ClCompile Include="..\..\..\Sora\SoraScene.cpp" />
@@ -939,7 +958,6 @@
     <ClCompile Include="..\..\..\Sora\ZLIB\zip.c" />
     <ClCompile Include="..\..\..\Sora\ZLIB\zutil.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Plugins\SoraLua\LuaPlus\LuaCall.inl" />

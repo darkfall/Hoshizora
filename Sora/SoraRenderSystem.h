@@ -30,8 +30,8 @@ namespace sora {
     class SoraShader;
     class SoraWindowInfoBase;
     class SoraTexture;
-    class SoraVertex;
-    class SoraQuad;
+    struct SoraVertex;
+    struct SoraQuad;
 
 	class SORA_API SoraRenderSystem {
 	public:

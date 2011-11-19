@@ -10,13 +10,14 @@
 #define Sora_SoraModelLoader_h
 
 #include "SoraPlatform.h"
-#include "SoraDynamicFactory.h"
 #include "SoraAutoPtr.h"
 #include "SoraModel.h"
 
 #include "SoraAABB3.h"
 #include "SoraSphere.h"
 #include "SoraPlane.h"
+
+#include "factory/SoraDynamicFactory.h"
 
 namespace sora {
     

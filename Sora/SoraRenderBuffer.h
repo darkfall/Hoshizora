@@ -34,7 +34,7 @@ namespace sora {
         SoraVertexFormat(int32 format);
         SoraVertexFormat(int32 format, uint32 offsetXYZ, uint32 offsetNormal, uint32 offsetUV, uint32 offsetColor, uint32 offsetColor2);
         
-        bool checkFormat(VertexFormat format);
+        bool checkFormat(VertexFormat format) const;
         
         int32 format() const;
         
@@ -98,6 +98,8 @@ namespace sora {
         virtual void unmap() { }
         
         virtual void active() { }
+
+		virtual uint32 count() const { return 0; }
         
         virtual void resize(uint32 desired_count) { }
         

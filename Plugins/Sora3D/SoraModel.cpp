@@ -76,7 +76,7 @@ namespace sora {
     }
     
     int32 SoraModel::update() {
-        
+        return 0;
     }
     
 } // namespace sora

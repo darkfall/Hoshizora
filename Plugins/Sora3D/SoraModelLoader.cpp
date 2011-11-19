@@ -198,7 +198,7 @@ namespace sora {
     }
     
     SoraModel::Ptr SoraModelLoader::BuildModelFromPlane(const SoraPlane& plane, SoraMaterial::Ptr mat) {
-        
+        return SoraModel::Ptr();
     }
 
     

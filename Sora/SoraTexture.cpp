@@ -65,13 +65,13 @@ namespace sora {
     }
     
     SoraVector SoraTexture::GetSize(SoraTextureHandle handle) {
-        return SoraVector(((SoraTexture*)handle)->mTextureWidth,
-                          ((SoraTexture*)handle)->mTextureHeight);
+        return SoraVector((float)((SoraTexture*)handle)->mTextureWidth,
+                          (float)((SoraTexture*)handle)->mTextureHeight);
     }
     
     SoraVector SoraTexture::GetOriginalSize(SoraTextureHandle handle) {
-        return SoraVector(((SoraTexture*)handle)->mOriginalWidth,
-                          ((SoraTexture*)handle)->mOriginalHeight);
+        return SoraVector((float)((SoraTexture*)handle)->mOriginalWidth,
+                          (float)((SoraTexture*)handle)->mOriginalHeight);
     }
     
     StringType SoraTexture::GetTextureName(SoraTextureHandle handle) {

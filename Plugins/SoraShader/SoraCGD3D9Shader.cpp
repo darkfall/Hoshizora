@@ -1,6 +1,7 @@
 #include "SoraCGD3D9Shader.h"
 #include "SoraCore.h"
 #include "SoraLogger.h"
+#include "SoraTexture.h"
 
 #ifdef SORA_USE_SHADER
 
@@ -165,7 +166,7 @@ namespace sora {
 		return getType() != 0;
 	}
 
-	bool SoraCGD3D9Shader::setParameterfv(const char* name, float* fv, uint32 size) {
+	bool SoraCGD3D9Shader::setParameterfv(const char* name, const float* fv, uint32 size) {
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);
 		if(getType() == 0) return false;
@@ -183,7 +184,7 @@ namespace sora {
 		return (getType() != 0);
 	}
 	
-	bool SoraCGD3D9Shader::setParameteriv(const char* name, int32* fv, uint32 size) {
+	bool SoraCGD3D9Shader::setParameteriv(const char* name, const int32* fv, uint32 size) {
 		CGparameter param = cgGetNamedParameter(program, name);
 		checkError(context);
 		if(getType() == 0) return false;

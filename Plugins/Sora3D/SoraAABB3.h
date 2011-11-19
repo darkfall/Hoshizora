@@ -10,9 +10,10 @@
 #define Sora_SoraAABB3_h
 
 #include "SoraPlatform.h"
-#include "SoraVector3.h"
-#include "SoraMatrix4.h"
 #include "SoraVertex.h"
+
+#include "math/SoraVector3.h"
+#include "math/SoraMatrix4.h"
 
 namespace sora {
     

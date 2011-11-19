@@ -216,17 +216,17 @@ namespace sora {
     const SoraTaskManager::TaskList& SoraTaskManager::allTasks() const {
         return mTasks;
     }
-    
-    namespace  {
-        SoraSingletonHolder<SoraTaskManager, bool> mTaskManager;
-        SoraSingletonHolder<SoraTaskManager, bool> mMultiThreadedTaskManager;
-    }
-    
+
     SoraTaskManager& SoraTaskManager::defaultManager(bool multiThreaded) {
-        if(!multiThreaded)
-            return *mTaskManager.get(false);
-        else
-            return *mMultiThreadedTaskManager.get(true);
+        if(!multiThreaded) {
+			static SoraTaskManager mTaskManager(false);
+            return mTaskManager;
+		}
+        else {
+
+			static SoraTaskManager mMultiThreadedTaskManager(true);
+            return mMultiThreadedTaskManager;
+		}
     }
     
     void SoraTaskManager::StartTask(sora::SoraAbstractTask* task) {

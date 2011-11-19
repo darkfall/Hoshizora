@@ -133,6 +133,12 @@
     <Filter Include="Plugins\FreetypeFont">
       <UniqueIdentifier>{087ef6e9-6fb0-46b6-9e4e-ae951e9c5ee7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plugins\vlcmovieplayer">
+      <UniqueIdentifier>{3f998c5c-8573-48af-917f-2abe5225199f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\3dstuff">
+      <UniqueIdentifier>{a2353c96-95ae-48e5-997f-ff5dc0139ac0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.h">
@@ -729,9 +735,6 @@
     <ClInclude Include="..\..\..\Plugins\SoraSoundManager\SoraSoundEffectManager.h">
       <Filter>Plugins\SoundManager</Filter>
     </ClInclude>
-    <ClInclude Include="mainWindow.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Plugins\SoraLua\EnvVarExport.h">
       <Filter>Plugins\SoraLua</Filter>
     </ClInclude>
@@ -1063,9 +1066,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraRenderSystem.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Sora\SoraRenderSystemExtension.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Sora\SoraRenderTarget.h">
@@ -1761,6 +1761,48 @@
     <ClInclude Include="..\..\..\Sora\SoraVertexList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraRenderBuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sora\SoraCpuInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraVlcMoviePlayer\SoraVlcMoviePlayer.h">
+      <Filter>Plugins\vlcmovieplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraMaterial.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraMesh.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraModel.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraModelLoader.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraObjModelLoader.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraPlane.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraSphere.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraAABB3.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraCamera3D.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\Sora3D\SoraLight.h">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Plugins\SoraHGERenderer\SoraDXRenderBuffer.h">
+      <Filter>Plugins\hge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Plugins\SoraFreetypeFont\SoraFreetypeFont.cpp">
@@ -2015,9 +2057,6 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="mainWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\Debug\SoraInternalLogger.cpp">
       <Filter>头文件\debug</Filter>
     </ClCompile>
@@ -2108,9 +2147,6 @@
     <ClCompile Include="..\..\..\Sora\SoraDelegate.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraDeltaWatch.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraDirectoryIterator.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
@@ -2175,12 +2211,6 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraPluginManager.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraRenderSystem.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Sora\SoraRenderSystemExtension.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraResourceFile.cpp">
@@ -2716,6 +2746,36 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sora\SoraVertexList.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraRenderBuffer.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sora\SoraCpuInfo.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraVlcMoviePlayer\SoraVlcMoviePlayer.cpp">
+      <Filter>Plugins\vlcmovieplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraMaterial.cpp">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraModel.cpp">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraModelLoader.cpp">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraObjModelLoader.cpp">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraCamera3D.cpp">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\Sora3D\SoraLight.cpp">
+      <Filter>Plugins\3dstuff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Plugins\SoraHGERenderer\SoraDXRenderBuffer.cpp">
+      <Filter>Plugins\hge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

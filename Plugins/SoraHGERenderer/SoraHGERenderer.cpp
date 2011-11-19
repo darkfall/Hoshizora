@@ -19,17 +19,22 @@
 #include "SoraShader/SoraCGD3D9Shader.h"
 #endif
 
-#include "SoraRenderSystemExtension.h"
 #include "SoraEnvValues.h"
 #include "SoraLogger.h"
+
+#include "SoraWindowInfo.h"
+#include "SoraTexture.h"
+
+#include "SoraDXRenderBuffer.h"
+
+#include <d3d9.h>
+#include <d3dx9.h>
 
 namespace sora{
 	
 	SoraHGERenderer::SoraHGERenderer() {
 		pHGE = hgeCreate(HGE_VERSION);
 		
-		SoraRenderSystemExtension::Instance()->registerExtension(SORA_EXTENSION_FSAA);
-
 		if(!pHGE) {
 			throw SORA_EXCEPTION(SystemException, "Error initiazing HGE");
 		}
@@ -89,11 +94,57 @@ namespace sora{
 		}
 	}
 
+	SoraRenderBuffer::Ptr SoraHGERenderer::createVertexBuffer(SoraRenderBuffer::Access accessHint,
+                                                         SoraRenderBuffer::Usage usage,
+                                                         uint32 desired_count,
+                                                         void* initData,
+														 const SoraVertexFormat& vertexFormat) {
+		return MakeSharedPtr<SoraDXVertexBuffer>(accessHint, usage, desired_count, initData, vertexFormat);
+	}
+        
+	SoraRenderBuffer::Ptr SoraHGERenderer::createIndexBuffer(SoraRenderBuffer::Access accessHint,
+                                                        SoraRenderBuffer::Usage usage,
+                                                        uint32 desired_count,
+                                                        void* initData) {
+		return MakeSharedPtr<SoraDXIndexBuffer>(accessHint, usage, desired_count, initData);
+	}
+        
+    void SoraHGERenderer::renderBuffer(SoraTexture* tex, RenderMode mode, SoraRenderBuffer::Ptr vertexBuffer, SoraRenderBuffer::Ptr indexBuffer) {
+		vertexBuffer->active();
+		if(indexBuffer.isValid())
+			indexBuffer->active();
+
+		pHGE->Gfx_RenderBuffer((DWORD)vertexBuffer.get(),
+								(DWORD)indexBuffer.get(),
+								(HTEXTURE)tex->mTextureID,
+								_modeToDXMode(mode),
+								vertexBuffer->count(),
+								indexBuffer->count());
+	}
+
+	SoraRenderSystem::RenderSystemType SoraHGERenderer::renderSystemType() const {
+		return SoraRenderSystem::DirectX;
+	}
+
+	void SoraHGERenderer::fillDeviceCaps(SoraGraphicDeviceCaps& caps) {
+		IDirect3DDevice9* device = (IDirect3DDevice9*)getVideoDeviceHandle();
+		D3DCAPS9 d9caps;
+		device->GetDeviceCaps(&d9caps);
+
+		caps.max_indices = d9caps.MaxVertexIndex;
+		caps.max_texture_height = d9caps.MaxTextureHeight;
+		caps.max_texture_width = d9caps.MaxTextureWidth;
+		caps.max_vertices = d9caps.MaxPrimitiveCount;
+		// unknown now?
+		caps.max_vertex_texture_units = -1;
+		caps.max_pixel_texture_units = -1;
+		caps.max_texture_cube_map_size = -1;
+	}
+
 	SoraWindowHandle SoraHGERenderer::createWindow(SoraWindowInfoBase* windowInfo) {
 //		if(!windowInfo->isWindowSubWindow()) {
-			// just for hge compablity, otherwise hge would fail to start
-			int32 nFSAA = GetRenderSystemExtensionParam(SORA_EXTENSION_FSAA);
-			pHGE->System_SetState(HGE_FSAA, nFSAA);
+//			int32 nFSAA = GetRenderSystemExtensionParam(SORA_EXTENSION_FSAA);
+			pHGE->System_SetState(HGE_FSAA, 0);
 
 			pHGE->System_SetState(HGE_FRAMEFUNC, bool_updateFrame);
 		
@@ -283,17 +334,6 @@ namespace sora{
 			pHGE->_render_batch();
 	}
 
-	void SoraHGERenderer::renderTriple(SoraTriple& trip) {
-		hgeTriple htrip;
-		memcpy(&htrip.v[0], &trip.v[0], sizeof(hgeVertex)*3);
-		htrip.tex = ((SoraTexture*)trip.tex)->mTextureID;
-		htrip.blend = trip.blend;
-		pHGE->Gfx_RenderTriple(&htrip);
-		
-		if(currShader)
-			pHGE->_render_batch();
-	}
-
 	int32 SoraHGERenderer::_modeToDXMode(int32 mode) {
 		switch(mode) {
 			case Line: return HGEPRIM_LINES;
@@ -310,7 +350,7 @@ namespace sora{
 		int32 maxSize;
 		hgeVertex* vtxBuffer = pHGE->Gfx_StartBatch(_modeToDXMode(mode), tex!=0?tex->mTextureID:0, blendMode, &maxSize);
 		int32 leftSize = size;
-		while(leftSize > maxSize) {
+		while(leftSize > maxSize && vtxBuffer) {
 			memcpy(vtxBuffer, &vertices[size-leftSize], sizeof(hgeVertex)*maxSize);
 			pHGE->Gfx_FinishBatch(maxSize);
 //			pHGE->_render_batch();
@@ -368,7 +408,7 @@ namespace sora{
 		return (SoraHandle)ptex;
 	}
 
-	StringType SoraHGERenderer::videoInfo() {
+	StringType SoraHGERenderer::videoInfo() const {
 		StringType str = pHGE->getDeviceInfo();
 		return str;
 	}
@@ -392,16 +432,6 @@ namespace sora{
 	void SoraHGERenderer::setCursor(const StringType& cursor) {
 		pHGE->System_SetState(HGE_CURSOR, cursor.c_str());
 	}
-	
-	void SoraHGERenderer::onExtensionStateChanged(int32 extension, bool state, int32 param) {
-        if(extension == SORA_EXTENSION_FSAA) {
-            if(state) {
-				pHGE->System_SetState(HGE_FSAA, param);
-				pHGE->enableFSAA();
-			} else
-				pHGE->disableFSAA();
-        }
-    }
     
     void SoraHGERenderer::renderLine(float x1, float y1, float x2, float y2, uint32 color, float width, float z) {
 		sora::SoraQuad quad;
@@ -504,20 +534,22 @@ namespace sora{
 		return pHGE->Gfx_GetProjectionMatrix();
 	}
 		
-	void SoraHGERenderer::setRenderState(RenderStateType type, RenderStateParam param) {
+	void SoraHGERenderer::setRenderState(RenderStateType type, int32 param) {
 		pHGE->Gfx_SetRenderStateParam((int)type, (int)param);
 	}
 
-    RenderStateParam SoraHGERenderer::getRenderState(RenderStateType type) const {
-		return (RenderStateParam)pHGE->Gfx_GetRenderStateParam((int)type);
+    int32 SoraHGERenderer::getRenderState(RenderStateType type) const {
+		return (int32)pHGE->Gfx_GetRenderStateParam((int)type);
 	}
 
 	void SoraHGERenderer::switchTo2D() {
         pHGE->ResetProjectionMatrix(0.f, 1.f);
+		setTransform();
     }
     
     void SoraHGERenderer::switchTo3D() {
         pHGE->ResetProjectionMatrix(-1000.f, 1000.f);
+		setTransform();
     }
 
 #ifdef SORA_AUTOMATIC_REGISTER
