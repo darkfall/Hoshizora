@@ -173,12 +173,12 @@
     #define SORA_BIG_ENDIAN
 #endif
 
-#ifdef KLAYGE_CPU_X64
+#ifdef SORA_CPU_X64
     #define _SSE_SUPPORT
     #define _SSE2_SUPPORT
     #define _X64_SUPPORT
-#elif defined KLAYGE_CPU_X86
-    #if defined(KLAYGE_COMPILER_MSVC)
+#elif defined SORA_CPU_X86
+    #if defined(SORA_COMPILER_MSVC)
         #if _M_IX86 == 600
             #define _MMX_SUPPORT
         #endif
@@ -189,7 +189,7 @@
             #define _SSE_SUPPORT
             #define _SSE2_SUPPORT
         #endif
-    #elif defined(KLAYGE_COMPILER_GCC)
+    #elif defined(SORA_COMPILER_GCC)
         #ifdef __MMX__
             #define _MMX_SUPPORT
         #endif

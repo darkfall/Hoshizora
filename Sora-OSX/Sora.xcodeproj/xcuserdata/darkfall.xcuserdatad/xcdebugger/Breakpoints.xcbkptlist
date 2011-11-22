@@ -224,7 +224,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "390"
          endingLineNumber = "390"
-         landmarkName = "onEnter()"
+         landmarkName = "load(sora::SoraTask* task)"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
@@ -252,7 +252,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "185"
          endingLineNumber = "185"
-         landmarkName = "GameInitState()"
+         landmarkName = "onRender()"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
