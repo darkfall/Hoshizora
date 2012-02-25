@@ -282,6 +282,9 @@ namespace sora {
                     log_error(vamssg("SoraFileSystem::error loading resource %s\n", file.c_str()));
                 break;
             }
+                
+            default:
+                break;
         }
         
         if(resource.isValid()) {
@@ -573,6 +576,9 @@ namespace sora {
             case SoraResource::Shader: {
                 break;
             }
+                
+            default:
+                break;
         }
         
         if(resource.isValid()) {

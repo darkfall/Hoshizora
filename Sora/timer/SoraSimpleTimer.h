@@ -42,7 +42,6 @@ namespace sora {
         bool isPaused() const;
         bool isEnabled() const;
         
-        
         void setEnable(bool flag);
         
         // time since the timer has started

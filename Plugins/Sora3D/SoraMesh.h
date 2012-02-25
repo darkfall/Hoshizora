@@ -18,7 +18,7 @@
 
 namespace sora {
     
-    struct SORA_API SoraModelVertex {
+    struct SoraModelVertex {
         float x, y, z;
         float nx, ny, nz;
         uint32 color;

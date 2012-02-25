@@ -38,7 +38,7 @@ namespace sora {
         SoraAABB3 getBoudingBox() const;
         
         void render();
-        int32 update();
+        int32 update(float dt);
         
     private:
         SoraMesh::Ptr mMesh;

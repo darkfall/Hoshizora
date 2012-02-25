@@ -220,7 +220,6 @@
 		88254AC9146990F6009ADE08 /* SoraModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88254AC7146990F6009ADE08 /* SoraModelLoader.cpp */; };
 		882AF2A8142985C600D55647 /* SoraResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882AF2A7142985C600D55647 /* SoraResourceManager.cpp */; };
 		882AF2AA142990F300D55647 /* libfmodex.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 882AF2A9142990F300D55647 /* libfmodex.dylib */; };
-		882AF2E2142A8A9C00D55647 /* SoraAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882AF2E1142A8A9C00D55647 /* SoraAnimation.cpp */; };
 		882E19F913E7B1C1005F0109 /* SoraException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882E19F813E7B1C1005F0109 /* SoraException.cpp */; };
 		882E621B13CD91D300B6A74C /* SoraString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882E621A13CD91D300B6A74C /* SoraString.cpp */; };
 		882E621D13CD9D3800B6A74C /* SoraHandleManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 882E621C13CD9D3500B6A74C /* SoraHandleManager.cpp */; };
@@ -930,8 +929,6 @@
 		8828C1D21314CB07002C6FA7 /* SoraCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraCommon.h; sourceTree = "<group>"; };
 		882AF2A7142985C600D55647 /* SoraResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraResourceManager.cpp; sourceTree = "<group>"; };
 		882AF2A9142990F300D55647 /* libfmodex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodex.dylib; path = ../fmod/libfmodex.dylib; sourceTree = "<group>"; };
-		882AF2E0142A81EB00D55647 /* SoraAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraAnimation.h; sourceTree = "<group>"; };
-		882AF2E1142A8A9C00D55647 /* SoraAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraAnimation.cpp; sourceTree = "<group>"; };
 		882B41A61415CA81002D4647 /* SoraPerlinNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraPerlinNoise.h; sourceTree = "<group>"; };
 		882B41A71415DC95002D4647 /* SoraPFeedbackLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraPFeedbackLoop.h; sourceTree = "<group>"; };
 		882B41A81415E00D002D4647 /* SoraPIDFeedbackLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoraPIDFeedbackLoop.h; sourceTree = "<group>"; };
@@ -3265,8 +3262,6 @@
 				8800092B1414B8B4009044C8 /* SoraIO.h */,
 				887186E11425728F00B6DB67 /* SoraText.h */,
 				887186E21425729900B6DB67 /* SoraText.cpp */,
-				882AF2E0142A81EB00D55647 /* SoraAnimation.h */,
-				882AF2E1142A8A9C00D55647 /* SoraAnimation.cpp */,
 				8821653714321A1000A2ED5A /* SoraiOSDeviceHelper.h */,
 				8821653814321A2000A2ED5A /* SoraiOSDeviceHelper.mm */,
 				881F219F14355658009DA610 /* SoraTask.h */,
@@ -3779,7 +3774,6 @@
 				8871879F1426A1A500B6DB67 /* SoraFTFontManager.cpp in Sources */,
 				887187A11426E1C800B6DB67 /* SoraPostEffect.cpp in Sources */,
 				882AF2A8142985C600D55647 /* SoraResourceManager.cpp in Sources */,
-				882AF2E2142A8A9C00D55647 /* SoraAnimation.cpp in Sources */,
 				880D067D142F1BF8005CB649 /* SoraConfigManager.cpp in Sources */,
 				880D0684142F2A96005CB649 /* SoraSpritePool.cpp in Sources */,
 				8821653914321A2100A2ED5A /* SoraiOSDeviceHelper.mm in Sources */,
@@ -3892,8 +3886,6 @@
 					"$(SRCROOT)/../Plugins/SoraLuaBind/",
 					"\"$(SRCROOT)/../Plugins/libvlc/osx/lib\"",
 					"\"$(SRCROOT)/../Plugins/fmod\"",
-					"\"$(SRCROOT)/../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraFreetypeFont\"",
-					"\"$(SRCROOT)/../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraOGLRenderer\"",
 					"\"$(SRCROOT)/../Plugins/SoraFreetypeFont\"",
 					"\"$(SRCROOT)/../Plugins/GLFW3\"",
 					"\"$(SRCROOT)/../Plugins/SoraHttpFile\"",
@@ -3902,7 +3894,6 @@
 					"\"$(SRCROOT)/../Plugins/SoraGifSprite/libgif\"",
 					"\"$(SRCROOT)/../Plugins/SoraGifSprite\"",
 					"\"$(SRCROOT)/../Plugins/SoraThread\"",
-					"\"$(SRCROOT)/../Sora/thread\"",
 					"\"$(SRCROOT)/../Plugins/SoraNetwork/zeromq\"",
 					"\"$(SRCROOT)/../Plugins/SoraVlcMoviePlayer/osx/lib\"",
 					"\"$(SRCROOT)/../Plugins/SoraVlcMoviePlayer/win32/lib\"",
@@ -3946,8 +3937,6 @@
 					"$(SRCROOT)/../Plugins/SoraLuaBind/",
 					"\"$(SRCROOT)/../Plugins/libvlc/osx/lib\"",
 					"\"$(SRCROOT)/../Plugins/fmod\"",
-					"\"$(SRCROOT)/../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraFreetypeFont\"",
-					"\"$(SRCROOT)/../../Downloads/darkfall-Hoshizor-b99cd7aa58390d34538a3f01acbda9b9434263af/Plugins/SoraOGLRenderer\"",
 					"\"$(SRCROOT)/../Plugins/SoraFreetypeFont\"",
 					"\"$(SRCROOT)/../Plugins/GLFW3\"",
 					"\"$(SRCROOT)/../Plugins/SoraHttpFile\"",
@@ -3956,7 +3945,6 @@
 					"\"$(SRCROOT)/../Plugins/SoraGifSprite/libgif\"",
 					"\"$(SRCROOT)/../Plugins/SoraGifSprite\"",
 					"\"$(SRCROOT)/../Plugins/SoraThread\"",
-					"\"$(SRCROOT)/../Sora/thread\"",
 					"\"$(SRCROOT)/../Plugins/SoraNetwork/zeromq\"",
 					"\"$(SRCROOT)/../Plugins/SoraVlcMoviePlayer/osx/lib\"",
 					"\"$(SRCROOT)/../Plugins/SoraVlcMoviePlayer/win32/lib\"",

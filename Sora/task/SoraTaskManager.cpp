@@ -42,7 +42,7 @@ namespace sora {
         rtask->run();
     }
     
-    void SoraTaskManager::start(SoraAbstractTask* task, bool periodical) {
+    void SoraTaskManager::start(const TaskPtr& task, bool periodical) {
         sora_assert(task);
         if(task->state() == SoraTask::TaskRunning) 
             THROW_SORA_EXCEPTION(RuntimeException, "SoraTaskManager: attempt to start a running task");
@@ -54,7 +54,7 @@ namespace sora {
         TaskList::const_iterator it = mTasks.begin();
         TaskList::const_iterator end = mTasks.end();
         for(; it != end; ++it) {
-            if(it->get() == task) {
+            if(*it == task) {
                 isInTaskList = true;
             }
         }
@@ -70,7 +70,7 @@ namespace sora {
         MUTEX_LOCK(mMutex);
         
         task->mState = sora::SoraAbstractTask::TaskPreparing;
-        mThreadPool.run(ThreadTask(&SoraTaskManager::taskRun, this, task));
+        mThreadPool.run(ThreadTask(&SoraTaskManager::taskRun, this, task.get()));
 #endif
     }
     
@@ -100,7 +100,7 @@ namespace sora {
     }
 #endif
     
-    void SoraTaskManager::addTask(SoraAbstractTask* task, bool periodical) {
+    void SoraTaskManager::addTask(const TaskPtr& task, bool periodical) {
         task->mPeriodical = periodical;
         mPendingTask.push_back(task);
     }

@@ -18,7 +18,7 @@ namespace sora {
         
         std::string str = s;
         // to resolve assign
-      
+        return false;
     }
     
     StringType SoraURI::build() const {

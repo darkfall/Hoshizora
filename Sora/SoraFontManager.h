@@ -13,7 +13,9 @@ namespace sora {
 
 	class SORA_API SoraFontManager {
 	public:
-
+        virtual ~SoraFontManager() {
+        
+        }
 		// this API both loads fonts in memory and hard drive
 		// when bzsize != 0, then filename = first byte of font data in memory
 		// under this occasion, pr is used as real file name because we need to cache the font for efficiency

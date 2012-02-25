@@ -23,16 +23,19 @@ namespace sora {
     class SoraMutexLockImpl: public SoraUncopyable {
     protected:
         SoraMutexLockImpl() {
-            InitializeCriticalSectionAndSpinCount(&cs, 4000);
+            //InitializeCriticalSectionAndSpinCount(&cs, 4000);
+			mutex = CreateMutexW(NULL,FALSE,NULL);
         }
         
         ~SoraMutexLockImpl() {
-            DeleteCriticalSection(&cs);
+            //DeleteCriticalSection(&cs);
+			CloseHandle(mutex);
         }
         
         inline void lockImpl() {
             try {
-                EnterCriticalSection(&cs);
+				WaitForSingleObject(mutex,INFINITE);
+                //EnterCriticalSection(&cs);
             } catch(...) {
                 THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock mutex");
             }
@@ -40,18 +43,20 @@ namespace sora {
         
         inline void unlockImpl() {
             try {
-                LeaveCriticalSection(&cs);
+				ReleaseMutex(mutex);
+                //LeaveCriticalSection(&cs);
             } catch(...) {
                 THROW_SORA_EXCEPTION(RuntimeException, "Cannot lock mutex");
             }
         }
         
         inline void* getSysMutexImpl() {
-            return &cs;
+            return &mutex;
         }
         
     private:
-        CRITICAL_SECTION cs;
+        //CRITICAL_SECTION cs;
+		HANDLE mutex;
     };
     
     

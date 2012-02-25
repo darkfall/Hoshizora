@@ -75,7 +75,8 @@ namespace sora {
         SoraCore::Ptr->popTransformMatrix();
     }
     
-    int32 SoraModel::update() {
+    int32 SoraModel::update(float dt) {
+        SoraObject::update(dt);
         return 0;
     }
     

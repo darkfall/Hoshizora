@@ -188,7 +188,7 @@ namespace sora {
         virtual SoraShader* createShader(const StringType& file, const SoraString& entry, int32 type) = 0;
         virtual SoraShader* createShaderFromMem(const char* data, const SoraString& entry, int32 type) = 0;
         
-        typedef SoraAutoPtr<SoraShader, autoptr::RefCounter, ShaderReleasePolicy<SoraShader> > ShaderPtr;
+        typedef SoraAutoPtr<SoraShader, ShaderReleasePolicy<SoraShader> > ShaderPtr;
         
         ShaderPtr mVertexShader;
         ShaderPtr mFragmentShader;

@@ -92,6 +92,8 @@ namespace sora {
         
         void map(T* mappedPtr, uint32 size);
         
+        void resize(uint32 size);
+        
     private:
         void destroyAll();
         void destroy(T* elm);
@@ -105,7 +107,7 @@ namespace sora {
         uint32 mSize;
         T* mElements;
         
-        typedef SoraAutoPtr<T, autoptr::RefCounter, autoptr::FreeReleasePolicy> AutoPtrType;
+        typedef SoraAutoPtr<T, SoraAutoPtrFreeReleasePolicy<T> > AutoPtrType;
         AutoPtrType mHolder;
         
         bool mMapped;
@@ -162,6 +164,13 @@ namespace sora {
         
         reserve(size);
         memcpy(this->mElements, arr, sizeof(T) * size);
+        this->mSize = size;
+    }
+    
+    template<typename T>
+    void SoraArray<T>::resize(uint32 size) {
+        this->growTo(size);
+        
         this->mSize = size;
     }
     

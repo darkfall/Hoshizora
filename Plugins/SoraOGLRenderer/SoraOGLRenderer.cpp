@@ -975,8 +975,8 @@ namespace sora{
 
         sora_assert(vertexBuffer.isValid());
         
-        SoraAutoPtr<SoraOGLVertexBuffer> ogl_vertex_buffer = vertexBuffer.cast<SoraOGLVertexBuffer>();
-        if(!ogl_vertex_buffer.isValid()) {
+        SoraOGLVertexBuffer* ogl_vertex_buffer = checked_cast<SoraOGLVertexBuffer*>(vertexBuffer.get());
+        if(!ogl_vertex_buffer) {
             log_error("SoraOGLRenderer: invalid vertex buffer format");
             return;
         }
@@ -1034,8 +1034,8 @@ namespace sora{
         }
        
         if(indexBuffer.isValid()) {
-            SoraAutoPtr<SoraOGLIndexBuffer> ogl_index_buffer = indexBuffer.cast<SoraOGLIndexBuffer>();
-            if(!ogl_index_buffer.isValid()) {
+            SoraOGLIndexBuffer* ogl_index_buffer = checked_cast<SoraOGLIndexBuffer*>(indexBuffer.get());
+            if(!ogl_index_buffer) {
                 log_error("SoraOGLRenderer: invalid vertex buffer format");
                 return;
             }

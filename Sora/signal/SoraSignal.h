@@ -61,6 +61,8 @@ namespace sora {
         
         class SORA_API ConnectionBase {
         public:
+            virtual ~ConnectionBase() { }
+            
             virtual bool isValid() = 0;
             virtual void disconnect() = 0;
             

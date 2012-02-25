@@ -45,6 +45,8 @@ namespace sora {
             OpenGLES2,
         };
         
+        virtual ~SoraRenderSystem() { }
+        
         /*
          Render System Info
          */

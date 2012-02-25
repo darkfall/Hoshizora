@@ -18,6 +18,7 @@ namespace sora {
     
     class SoraThreadTaskImpl: SoraUncopyable {
     public:
+        virtual ~SoraThreadTaskImpl() { }
         virtual void operator()(void* arg) = 0;
     };
     

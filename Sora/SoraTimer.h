@@ -18,6 +18,8 @@ namespace sora {
 	
 	class SORA_API SoraTimer {
 	public:
+        virtual ~SoraTimer() { }
+        
 		virtual void setFPS(int32 fps) = 0;
 		virtual float getDelta() = 0;
 		virtual float getFPS() = 0;

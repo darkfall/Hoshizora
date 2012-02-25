@@ -382,18 +382,12 @@ namespace sora {
             return -1;
         
         if (ZLIB_FILEFUNC_SEEK_CUR == origin) {
-            if ((zmf->pos + offset) < 0)
-                return -1;
             zmf->pos = zmf->pos + offset;
         }
         else if (ZLIB_FILEFUNC_SEEK_END == origin) {
-            if (offset < 0 && (zmf->size + offset) < 0)
-                return -1;
             zmf->pos = zmf->size + offset;
         }
         else if (ZLIB_FILEFUNC_SEEK_SET == origin) {
-            if (offset < 0)
-                return -1;
             zmf->pos = offset;
         }
         else {

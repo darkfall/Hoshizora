@@ -57,6 +57,7 @@ namespace sora {
     inline void* sora_malloc(size_t size) {
         return g_memory_allocator.sora_malloc(size);
     }
+
     
     inline void sora_free(void* ptr) {
         return g_memory_allocator.sora_free(ptr);

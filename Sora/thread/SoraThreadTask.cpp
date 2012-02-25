@@ -38,11 +38,11 @@ namespace sora {
     }
     
     bool SoraThreadTask::isValid() const {
-        return func.valid();
+        return func.isValid();
     }
     
     void SoraThreadTask::run() const {
-        if(func.valid()) {
+        if(func.isValid()) {
             SoraThreadTaskImpl* realFunc = func.get();
             realFunc->operator ()(iarg);
         }

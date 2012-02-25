@@ -16,7 +16,7 @@
 
 #ifdef OS_WIN32
 #include <windows.h>
-#else defined(OS_OSX)
+#elif defined(OS_OSX)
 #include <libkern/OSAtomic.h>
 #endif
 

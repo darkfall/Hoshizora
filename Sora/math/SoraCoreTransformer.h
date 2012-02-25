@@ -17,7 +17,9 @@ namespace sora {
 	
 	template<typename T>
 	class SoraCoreTransformer {
-	public:        
+	public:    
+        virtual ~SoraCoreTransformer() { }
+        
         virtual SoraCoreTransformer<T>* clone() = 0;
         
 		virtual T transform(T& t1, T& t2, real pos) = 0;

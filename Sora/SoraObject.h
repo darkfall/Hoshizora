@@ -7,6 +7,7 @@
 #include "SoraAutoPtr.h"
 #include "SoraMovable.h"
 #include "SoraFunction.h"
+#include "SoraAction.h"
 
 #include <algorithm>
 #include <list>
@@ -139,16 +140,13 @@ namespace sora {
         
     public:
         
-        void addModifierAdapter(SoraAbstractModifierAdapter* adapter);
-        void removeModifierAdapter(SoraAbstractModifierAdapter* adapter);
-        bool hasModifierAdapter() const;
-        void clearModifierAdapters();
+        void            runAction(const SoraAction::Ptr& action);
+        SoraAction::Ptr stopAction(const SoraAction::Ptr& action);
         
     private:
         void  setNext(SoraObject* obj);
 
-        typedef std::list<SoraAbstractModifierAdapter*> ModifierAdapterList;
-        ModifierAdapterList mModifierAdapters;
+        SoraActionContainer mActionContainer;
 		
 	protected:
 		

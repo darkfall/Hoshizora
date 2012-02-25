@@ -35,6 +35,7 @@ namespace sora {
             this->min = rhs.min;
             this->max = rhs.max;
             this->boundingRadius = rhs.boundingRadius;
+            return *this;
         }
         
         static SoraAABB3 AABB3FromVertices(const SoraVertex* vertices, uint32 size) {

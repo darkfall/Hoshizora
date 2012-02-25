@@ -71,7 +71,7 @@ namespace sora {
             case CONFIG_XML:
                 mImpl = new SoraConfigParserXmlImpl;
                 break;
-            case CONFIG_AUTO_DETECT:
+            case CONFIG_AUTO_DETECT: {
                 ConfigType type = fileNameToConfigType(path);
                 if(type != CONFIG_UNKNOWN)
                     return open(path, type);
@@ -82,6 +82,9 @@ namespace sora {
                     }
                     return false;
                 }
+                break;
+            }
+            default:
                 break;
                 
         }
@@ -102,12 +105,15 @@ namespace sora {
             case CONFIG_XML:
                 mImpl = new SoraConfigParserXmlImpl;
                 break;
-            case CONFIG_AUTO_DETECT:
+            case CONFIG_AUTO_DETECT: {
                 ConfigType type = fileDataToConfigType(data, size);
                 if(type != CONFIG_UNKNOWN) {
                     return open(data, size, type);
                 }
                 return false;
+                break;
+            }
+            default:
                 break;
                 
         }

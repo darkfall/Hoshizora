@@ -46,7 +46,7 @@ namespace sora {
             mesh->mVertices.push_back(vtx);
             
         } else if(str[0] == 'v' && str[1] == 't') {
-            float tx, ty, tw;
+            float tx, ty;
             sscanf(&str[4], "%f %f", &tx, &ty);
             
             float2 tc;

@@ -132,7 +132,7 @@ namespace sora {
             }
         };
         
-        typedef SoraAutoPtr<uint8, autoptr::RefCounter, ReleasePolicy<uint8> > AutoPtrType;
+        typedef SoraAutoPtr<uint8, ReleasePolicy<uint8> > AutoPtrType;
         struct ResourceInfo {
             AutoPtrType mResource;
             uint32 mSize;

@@ -34,7 +34,7 @@ namespace sora {
     public:
         typedef SoraAutoPtr<SoraAbstractTask>           TaskPtr;
         typedef std::list<TaskPtr>                      TaskList;
-        typedef std::list<SoraAbstractTask*>            PendingTaskList;
+        typedef std::list<TaskPtr>                      PendingTaskList;
         typedef SoraSignal<void(SoraTaskNotification*)> NotificationSignal;
        
     public:
@@ -42,7 +42,7 @@ namespace sora {
         ~SoraTaskManager();
         
         // start a task, if the task finished, it would be removed from the task list
-        void start(SoraAbstractTask* task, bool periodical=false);
+        void start(const TaskPtr& task, bool periodical=false);
         
         // request to cancel all tasks
         void cancelAll();
@@ -54,7 +54,7 @@ namespace sora {
     public:
         // add a task to the task list
         // all task would run during the next update cycle unless manually started
-        void addTask(SoraAbstractTask* task, bool periodical=false);
+        void addTask(const TaskPtr& task, bool periodical=false);
         void removeTask(SoraAbstractTask* task);
         
         // run a added task manually
