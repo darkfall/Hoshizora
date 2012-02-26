@@ -122,6 +122,12 @@ namespace sora{
         glEnable(GL_LINE_SMOOTH);
         glEnable(GL_POINT_SMOOTH);
         
+        
+        
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+
+        
         glLineWidth(1.0f);
         
         glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
@@ -989,7 +995,6 @@ namespace sora{
         }
 
         SoraVertexFormat& format = ogl_vertex_buffer->format();
-
         vertexBuffer->active();
 
         if(format.checkFormat(VertexXYZ)) {

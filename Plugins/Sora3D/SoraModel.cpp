@@ -48,24 +48,30 @@ namespace sora {
         mMaterial = mat;
     }
     
-    SoraAABB3 SoraModel::getBoudingBox() const {
-        return SoraAABB3::AABB3FromVertices(mMesh->mFaces.begin(), mMesh->mFaces.size());
-    }
-    
     void SoraModel::render() {
+        SoraRenderSystem* rs = SoraCore::Ptr->getRenderSystem();
         SoraCore::Ptr->pushTransformMatrix();
-        SoraCore::Ptr->getRenderSystem()->multTransformMatrix(getTransform().getTransformMatrix());
+        rs->multTransformMatrix(getTransform().getTransformMatrix());
         
         mMaterial->attachShaderToRender();
         switch(mMaterial->getMaterialType()) {
             case SoraMaterial::WireFrame:
-                SoraCore::Ptr->renderWithVertices(mMaterial->getTexture(0), BLEND_DEFAULT, mMesh->mFaces.begin(), mMesh->mFaces.size(), Line);
+                rs->renderBuffer(SoraTexture::TextureFromHandle(mMaterial->getTexture(0)),
+                                 Line, 
+                                 mMesh->getVertexBuffer(), 
+                                 mMesh->getIndexBuffer());
                 break;
             case SoraMaterial::Solid:
-                SoraCore::Ptr->renderWithVertices(mMaterial->getTexture(0), BLEND_DEFAULT, mMesh->mFaces.begin(), mMesh->mFaces.size(), Triangle);
+                rs->renderBuffer(SoraTexture::TextureFromHandle(mMaterial->getTexture(0)),
+                                 Triangle, 
+                                 mMesh->getVertexBuffer(), 
+                                 mMesh->getIndexBuffer());
                 break;
             case SoraMaterial::PointCloud:
-                SoraCore::Ptr->renderWithVertices(mMaterial->getTexture(0), BLEND_DEFAULT, mMesh->mFaces.begin(), mMesh->mFaces.size(), Point);
+                rs->renderBuffer(SoraTexture::TextureFromHandle(mMaterial->getTexture(0)),
+                                 Point, 
+                                 mMesh->getVertexBuffer(), 
+                                 mMesh->getIndexBuffer());
                 break;
             default:
                 break;

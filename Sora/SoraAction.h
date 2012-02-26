@@ -10,10 +10,11 @@
 #define SoraF_SoraAction_h
 
 #include "SoraPlatform.h"
-#include "SoraPreDeclare.h"
-#include "SoraPreprocessor.h"
 #include "SoraAutoPtr.h"
+#include "SoraPreDeclare.h"
 #include "SoraModifier.h"
+#include "SoraRefCounted.h"
+#include "SoraFunction.h"
 
 #include <vector>
 #include <list>
@@ -53,7 +54,7 @@ namespace sora {
         
         SORA_CLASS_DEF_FIELD_SET_GET_P(float, Duration, m);
         
-        virtual SoraAction::Ptr reverse() { return new SoraFiniteAction(); }
+        virtual SoraAction::Ptr reverse() const { return new SoraFiniteAction(); }
         
         virtual void startWithTarget(SoraObject* target) {
             mCurrentTime = 0;
@@ -70,6 +71,10 @@ namespace sora {
             return mCurrentTime >= getDuration();
         }
         
+        float getCurrentTime() const {
+            return mCurrentTime;
+        }
+        
     private:
         float mCurrentTime;
     };
@@ -78,9 +83,11 @@ namespace sora {
     class SoraSpeedAdjustAction: public SoraAction {
     public:
         SoraSpeedAdjustAction(): mSpeedRatio(1.f), mAction(0) { }
-        SoraSpeedAdjustAction(SoraAction* action, float ratio):
+        SoraSpeedAdjustAction(const SoraAction::Ptr& action, float ratio):
         mSpeedRatio(ratio),
         mAction(action) { }
+        
+        virtual ~SoraSpeedAdjustAction() { }
         
         virtual void step(float dt) {
             if(mAction) {
@@ -101,10 +108,10 @@ namespace sora {
         }
         
         SORA_CLASS_DEF_FIELD_SET_GET_P(float, SpeedRatio, m);
-        SORA_CLASS_DEF_FIELD_SET_GET_P(SoraAction*, Action, m);
+        SORA_CLASS_DEF_FIELD_SET_GET_P(SoraAction::Ptr, Action, m);
         
     public:
-        static SoraAction::Ptr ActionWithAction(SoraAction* action, float ratio) {
+        static SoraAction* ActionWithAction(const SoraAction::Ptr& action, float ratio) {
             return new SoraSpeedAdjustAction(action, ratio);
         }
     };
@@ -122,7 +129,7 @@ namespace sora {
         virtual void step(float dt);
         virtual bool isDone() const;
         
-        static SoraAction::Ptr ActionWithModifierAdapter(SoraAbstractModifierAdapter* adapter) {
+        static SoraAction* ActionWithModifierAdapter(SoraAbstractModifierAdapter* adapter) {
             return new SoraModifierAdapterAction(adapter);
         }
         
@@ -161,7 +168,7 @@ namespace sora {
         
         SORA_CLASS_DEF_FIELD_SET_GET_P(SoraModifier<T>*, Modifier, m);
         
-        static SoraAction::Ptr ActionWithModifier(SoraModifier<T>* modifier) {
+        static SoraAction* ActionWithModifier(SoraModifier<T>* modifier) {
             return new SoraModifierAction<T>(modifier);
         }
         
@@ -172,7 +179,12 @@ namespace sora {
     class SoraActionRepeat: public SoraAction {
     public:
         SoraActionRepeat(): mCurrentRepeatTime(0), mAction(0) { }
-        virtual ~SoraActionRepeat();
+        SoraActionRepeat(const SoraAction::Ptr& action, int repeat):
+        mAction(action),
+        mRepeatTimes(repeat) {
+            
+        }
+        virtual ~SoraActionRepeat() { }
         
         virtual void step(float dt) {
             if(mAction) {
@@ -197,7 +209,11 @@ namespace sora {
         }
         
         SORA_CLASS_DEF_FIELD_SET_GET_P(int, RepeatTimes, m);
-        SORA_CLASS_DEF_FIELD_SET_GET_P(SoraAction*, Action, m);
+        SORA_CLASS_DEF_FIELD_SET_GET_P(SoraAction::Ptr, Action, m);
+        
+        static SoraAction* ActionWithRepeatTimes(const SoraAction::Ptr& action, int repeat) {
+            return new SoraActionRepeat(action, repeat);
+        }
 
     private:
         int mCurrentRepeatTime;
@@ -215,6 +231,10 @@ namespace sora {
         virtual bool isDone() const;
         virtual void step(float dt);
         
+        void addAction(const SoraAction::Ptr& action);
+        
+        static SoraAction* ActionWithActions(SoraAction* action, ...);
+        
     public:
         typedef std::vector<SoraAction::Ptr> ActionList;
 
@@ -223,6 +243,119 @@ namespace sora {
         int mCurrentAction;
     };
     
+    class SoraDelayAction: public SoraFiniteAction {
+    public:
+        SoraDelayAction(): mAction(0) { }
+        SoraDelayAction(const SoraAction::Ptr& action, float delay):
+        mAction(action) { 
+            this->setDuration(delay);
+        }
+        
+        virtual ~SoraDelayAction() { }
+        
+        SORA_CLASS_DEF_FIELD_SET_GET_P(SoraAction::Ptr, Action, m);
+        
+        virtual bool isDone() const {
+            if(mCurrentTime < this->getDuration())
+                return false;
+            if(mAction)
+                return mAction->isDone();
+            return true;
+        }
+        
+        virtual void step(float dt) {
+            if(mCurrentTime > this->getDuration()) {
+                mAction->step(dt);
+            } else {
+                mCurrentTime += dt;
+            }
+        }
+        
+        virtual void startWithTarget(SoraObject* target) {
+            mCurrentTime = 0.f;
+            SoraFiniteAction::startWithTarget(target);
+        }
+        
+        static SoraAction* ActionWithDelay(const SoraAction::Ptr& action, float delay) {
+            return new SoraDelayAction(action, delay);
+        }
+        
+    private:
+        float mCurrentTime;
+    };
+    
+    // call a function
+    class SoraCallFuncNAction: public SoraAction {
+    public:
+        typedef SoraFunction<void()> FuncType;
+        
+        SoraCallFuncNAction() { }
+        SoraCallFuncNAction(const FuncType& func):
+        mFunc(func) {  }
+        
+        virtual ~SoraCallFuncNAction() { }
+        
+        SORA_CLASS_DEF_FIELD_SET_GET_P(FuncType, Func, m);
+        
+        virtual bool isDone() const {
+            return mDone;
+        }
+        
+        virtual void step(float dt) {
+            if(!mDone)
+                mFunc();
+            mDone = true;
+        }
+        
+        virtual void startWithTarget(SoraObject* target) {
+            mDone = false;
+            SoraAction::startWithTarget(target);
+        }
+        
+        static SoraAction* ActionWithFunction(const FuncType& func) {
+            return new SoraCallFuncNAction(func);
+        }
+        
+    private:
+        bool mDone;
+    };
+    
+    // call a function with dt param
+    class SoraCallFuncAction: public SoraAction {
+    public:
+        typedef SoraFunction<void(float)> FuncType;
+        
+        SoraCallFuncAction() { }
+        SoraCallFuncAction(const FuncType& func):
+        mFunc(func) {  }
+        
+        virtual ~SoraCallFuncAction() { }
+        
+        SORA_CLASS_DEF_FIELD_SET_GET_P(FuncType, Func, m);
+        
+        virtual bool isDone() const {
+            return mDone;
+        }
+        
+        virtual void step(float dt) {
+            if(!mDone)
+                mFunc(dt);
+            mDone = true;
+        }
+        
+        virtual void startWithTarget(SoraObject* target) {
+            mDone = false;
+            SoraAction::startWithTarget(target);
+        }
+        
+        static SoraAction* ActionWithFunction(const FuncType& func) {
+            return new SoraCallFuncAction(func);
+        }
+        
+    private:
+        bool mDone;
+    };
+
     class SoraActionContainer {
     public:
         SoraActionContainer(SoraObject* owner): mOwner(owner) { }

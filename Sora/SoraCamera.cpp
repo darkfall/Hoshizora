@@ -10,7 +10,8 @@
 #include "SoraCamera.h"
 #include "SoraCore.h"
 #include "SoraRenderSystem.h"
-#include "Modifiers/SoraCameraModifiers.h"
+#include "actions/SoraCameraActions.h"
+#include "actions/SoraObjectActions.h"
 
 namespace sora {
 
@@ -115,29 +116,22 @@ namespace sora {
     }
     
     void Sora2DCamera::moveTo(float x, float y, float inTime) {
-        CreateModifierAdapter(this, 
-                              new SoraCameraPositionModifier(getPositionX(),
-                                                             getPositionY(),
-                                                             x, 
-                                                             y,
-                                                             inTime));
+        this->runAction(SoraMoveToAction::ActionWithDest(SoraVector(x, y), inTime));
 
     }
     
     void Sora2DCamera::rotateTo(float newRot, float inTime) {
-        CreateModifierAdapter(this,
-                              new SoraCameraRotationModifier(mRotation,
-                                                             newRot,
-                                                             inTime));
+        this->runAction(SoraCameraRotationAction::ActionWithRotation(this->getRotation(), 
+                                                                     newRot,
+                                                                     inTime));
     }
 
     void Sora2DCamera::zoomTo(float hz, float vz, float inTime) {
-        CreateModifierAdapter(this,
-                              new SoraCameraZoomModifier(mHZoom,
-                                                         mVZoom,
-                                                         hz,
-                                                         vz,
-                                                         inTime));
+        this->runAction(SoraCameraZoomAction::ActionWithZoom(mHZoom,
+                                                             mVZoom,
+                                                             hz,
+                                                             vz,
+                                                             inTime));
                                               
     }
     

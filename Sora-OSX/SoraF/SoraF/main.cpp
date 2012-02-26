@@ -150,6 +150,14 @@ struct myVertex {
 
 sora::SoraTextureHandle movieTexture;
 
+void test_func(float dt) {
+    
+}
+
+void test_func_2() {
+    
+}
+
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
@@ -237,23 +245,6 @@ public:
          
          sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT, arr.begin(), 24, sora::Line);
          */
-        
-        
-        boxModel->render();
-        
-        mBg.enable3D(true);
-        mBg.getTransform().setRotation(x, y, z);
-        
-        //  mBg.getTransform().setScale(1.5f, 1.f, 1.f);
-        mBg.setPosition(512, 384);
-        mBg.setCenter(mBg.getSpriteWidth()/2, mBg.getSpriteHeight()/2);
-        //    mBg.render();
-        
-        mText2.enable3D(true);
-        mText2.getTransform().setRotation(0.f, 0.f, 1.f);
-        mText2.setPosition(512.f, 384.f);
-        //  mText2.render();
-        
         sora::SoraCore::Ptr->switchTo2D();
         
         mText2.enable3D(false);
@@ -267,11 +258,7 @@ public:
         sora::SoraCore::Ptr->setTransform();
         mFont->render(0.f, 80.f, L"|#00FFFF|O");
         mFont->print(0.f, 600.f, sora::SoraFont::AlignmentLeft, L"fps : %f\nmodel: vertex: %d, UV: %d, normal: %d, face: %d", sora::SoraCore::Ptr->getFPS(), 
-                     boxModel->getMesh()->vertexCount(),
-                     boxModel->getMesh()->UVCount(),
-                     boxModel->getMesh()->normalCount(),
-                     boxModel->getMesh()->faceCount()
-                     
+                     sphereModel->getMesh()->getVertexCount()
                      );
         
         sora::SoraGameApp::EndScene();
@@ -297,7 +284,7 @@ public:
             new sora::SoraTask("ResourceLoad", 
                                sora::Bind(this, 
                                           &GameInitState::load));
-        sora::SoraTaskManager::StartAsyncTask(task);
+        sora::SoraTaskManager::StartTask(task);
         
         WaitForTaskFinish(task);
         
@@ -310,15 +297,9 @@ public:
                                                                   50, 
                                                                   new sora::SoraMaterial(sora::SoraMaterial::Solid));
         
-        sora::SoraAABB3 abox = sphereModel->getBoudingBox();
-        boxModel = sora::SoraModelLoader::BuildModelFromAABB(abox, new sora::SoraMaterial(sora::SoraMaterial::WireFrame));
+     //   sora::SoraAABB3 abox = sphereModel->getBoudingBox();
+      //  boxModel = sora::SoraModelLoader::BuildModelFromAABB(abox, new sora::SoraMaterial(sora::SoraMaterial::WireFrame));
 
-        
-        mShape = sora::SoraShape::Arc(300.f, 300.f, 150.f, 0.f, sora::DegreeToRadius(90.f), 3.f, 0xFFFFFFFF);
-        mShape.enableOutline(3.f, 0xFFFF0000);
-        mShape.setClosed(true);
-        
-        
         sora::SoraResourceFile fontData("cour.ttf");
         mFont = sora::SoraFont::LoadFromMemory(fontData, fontData.size(), 20, "BankGothic");
         if(!mFont) {
@@ -332,13 +313,12 @@ public:
         }
         
         registerEventFunc(this, &GameInitState::onKeyEvent);  
-        sphereModel->moveTo(1000, 10000, 100);
+        
+        sphereModel->runAction(sora::SoraActionSequence::ActionWithActions(sora::SoraDelayAction::ActionWithDelay(sora::SoraCallFuncAction::ActionWithFunction(test_func), 
+                                                                                                                  0.5f),
+                                                                           0));
+     //   sphereModel->moveTo(1000, 10000, 100);
 
-    }
-    
-    void onFadeFinish(sora::SoraSprite* obj) {
-        obj->fadeTo(1.f, 2.f);
-        obj->addEffect(sora::CreateEffectFade(0.f, 1.f, 1.f, sora::ImageEffectPingpong));
     }
     
 private:

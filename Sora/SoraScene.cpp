@@ -9,11 +9,8 @@
 #include "SoraScene.h"
 #include "SoraCore.h"
 #include "SoraLogger.h"
-#include "Modifiers/SoraObjectModifiers.h"
 
 namespace sora {
-
-    typedef SoraTransitionModifier<Sora2DScene> ScenePositionModifier;
 
     Sora2DScene::Sora2DScene(int32 width, int32 height):
     mRealWidth(0),
@@ -230,15 +227,6 @@ namespace sora {
             mCanvas->finishRender();
     }
 
-    void Sora2DScene::moveTo(float x, float y, float inTime) {
-        CreateModifierAdapter(this, 
-                              new ScenePositionModifier(getPositionX(),
-                                                        getPositionY(),
-                                                        x,
-                                                        y,
-                                                        inTime));
-    }
-    
     int32 Sora2DScene::update(float dt) {        
         LayerMap::iterator itLayer = mLayers.begin();
         while(itLayer != mLayers.end()) {

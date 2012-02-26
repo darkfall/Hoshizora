@@ -15,6 +15,9 @@ namespace sora {
         
         char buffer[512];
         
+        SoraMesh::Ptr mesh = model->getMesh();
+        mesh->beginVertex();
+        
         int start = 0, end = start;
         while(end < size) {
             while(data[end] != '\n' && end < size) ++end;
@@ -24,11 +27,13 @@ namespace sora {
             buffer[end-start] = '\0';
             
             if(buffer[0] != '#')
-                parseLine(buffer, model->getMesh());
+                parseLine(buffer, mesh);
             
             end = end+1;
             start = end;
         }
+        
+        mesh->endVertex();
         
         return model;
     }
@@ -38,12 +43,12 @@ namespace sora {
             float x, y, z;
             sscanf(&str[3], "%f %f %f", &x, &y, &z);
             
-            float3 vtx;
-            vtx[0] = x;
-            vtx[1] = y;
-            vtx[2] = z;
+            SoraVector3 vtx;
+            vtx.x = x;
+            vtx.y = y;
+            vtx.z = z;
             
-            mesh->mVertices.push_back(vtx);
+            mVertices.push_back(vtx);
             
         } else if(str[0] == 'v' && str[1] == 't') {
             float tx, ty;
@@ -53,24 +58,24 @@ namespace sora {
             tc[0] = tx;
             tc[1] = ty;
             
-            mesh->mUVs.push_back(tc);
+            mUVs.push_back(tc);
             
         } else if(str[0] == 'v' && str[1] == 'n') {
             float x, y, z;
             sscanf(&str[3], "%f %f %f", &x, &y, &z);
             
-            float3 n;
-            n[0] = x;
-            n[1] = y;
-            n[2] = z;
+            SoraVector3 n;
+            n.x = x;
+            n.y = y;
+            n.z = z;
             
-            mesh->mNormals.push_back(n);
+            mNormals.push_back(n);
             
         } else if(str[0] == 'f') {            
             int cur = 2;
             int start = cur;
             
-            SoraArray<SoraVertex> tmp;
+            SoraArray<SoraVertexN> tmp;
             
             while(str[cur] != 0) {
                 int slashNum = 0;
@@ -90,10 +95,8 @@ namespace sora {
                         sscanf(&str[start], "%i", &id);
                         id = id-1;
                         
-                        SoraVertex vertex;
-                        vertex.x = mesh->mVertices[id][0];
-                        vertex.y = mesh->mVertices[id][1];
-                        vertex.z = mesh->mVertices[id][2];
+                        SoraVertexN vertex;
+                        vertex.pos = mVertices[id];
                         
                         tmp.push_back(vertex);
                         break;
@@ -104,12 +107,10 @@ namespace sora {
                         id -= 1;
                         id1 -= 1;
                         
-                        SoraVertex vertex;
-                        vertex.x = mesh->mVertices[id][0];
-                        vertex.y = mesh->mVertices[id][1];
-                        vertex.z = mesh->mVertices[id][2];
-                        vertex.tx = mesh->mUVs[id1][0];
-                        vertex.ty = mesh->mUVs[id1][1];
+                        SoraVertexN vertex;
+                        vertex.pos = mVertices[id];
+                        vertex.u = mUVs[id1][0];
+                        vertex.v = mUVs[id1][1];
                         
                         tmp.push_back(vertex);
                         break;
@@ -122,11 +123,8 @@ namespace sora {
                             id -= 1;
                             id2 -= 1;
                             
-                            
-                            SoraVertex vertex;
-                            vertex.x = mesh->mVertices[id][0];
-                            vertex.y = mesh->mVertices[id][1];
-                            vertex.z = mesh->mVertices[id][2];
+                            SoraVertexN vertex;
+                            vertex.pos = mVertices[id];
                             
                             tmp.push_back(vertex);
                         } else {
@@ -136,12 +134,10 @@ namespace sora {
                             id1 -= 1;
                             id2 -= 1;
                             
-                            SoraVertex vertex;
-                            vertex.x = mesh->mVertices[id][0];
-                            vertex.y = mesh->mVertices[id][1];
-                            vertex.z = mesh->mVertices[id][2];
-                            vertex.tx = mesh->mUVs[id1][0];
-                            vertex.ty = mesh->mUVs[id1][1];
+                            SoraVertexN vertex;
+                            vertex.pos = mVertices[id];
+                            vertex.u = mUVs[id1][0];
+                            vertex.v = mUVs[id1][1];
                             
                             tmp.push_back(vertex);
                         }
@@ -155,8 +151,7 @@ namespace sora {
             }
             
             if(tmp.size() == 3) {
-                for(int i=0; i<3; ++i)
-                    mesh->mFaces.push_back(tmp[i]);
+                mesh->pushVertex(tmp.begin(), 3);
             }
         }
     }

@@ -111,18 +111,7 @@ namespace sora {
         void setName(const SoraString& name);
         void setName(SoraStringId n);
 		SoraString getName() const;
-        
-    public:
-        
-        /**
-         * modifiers
-         **/
-        
-        void moveTo(float x, float y, float t);
-        
-        typedef SoraFunction<void(SoraObject*)> NotificationFunc;
-        void moveToAndNotify(float x, float y, float t, const NotificationFunc& onFinish);
-        
+ 
     public:
         
         /**
@@ -133,14 +122,14 @@ namespace sora {
          * If a physic body is binded, the object would update itself and move itself to
          * the body's position everyframe
          **/
-        void            attachPhysicBody(SoraPhysicBody* body, bool autoRelease=false);
+    /*    void            attachPhysicBody(SoraPhysicBody* body, bool autoRelease=false);
         void            createPhysicBody(const SoraPhysicBodyDef& def, const SoraPhysicFixtureDef& fixtureDef, float mass, float centerX, float centerY);
         void            detachPhysicBody();
-        SoraPhysicBody* getPhysicBody() const;
+        SoraPhysicBody* getPhysicBody() const;*/
         
     public:
         
-        void            runAction(const SoraAction::Ptr& action);
+        SoraAction::Ptr runAction(const SoraAction::Ptr& action);
         SoraAction::Ptr stopAction(const SoraAction::Ptr& action);
         
     private:
@@ -163,8 +152,8 @@ namespace sora {
         int32 mSubObjectSize;
         SoraString mName;
         
-        bool mAutoReleasePhysicBody;
-        SoraPhysicBody* mPhysicBody;
+      /*  bool mAutoReleasePhysicBody;*/
+      /*  SoraPhysicBody* mPhysicBody;*/
         
 		SoraObject(const SoraObject& rhs);
         SoraObject& operator =(const SoraObject& rhs);

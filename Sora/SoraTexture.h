@@ -52,6 +52,8 @@ namespace sora {
         static SoraVector   GetOriginalSize(SoraTextureHandle handle);
         static StringType   GetTextureName(SoraTextureHandle handle);
         
+        static SoraTexture* TextureFromHandle(SoraTextureHandle handle);
+        
         static void Release(SoraTextureHandle h);
 	};
 

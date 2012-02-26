@@ -34,9 +34,7 @@ namespace sora {
         
         void setMesh(SoraMesh::Ptr mesh);
         void setMaterial(SoraMaterial::Ptr mat);
-        
-        SoraAABB3 getBoudingBox() const;
-        
+
         void render();
         int32 update(float dt);
         

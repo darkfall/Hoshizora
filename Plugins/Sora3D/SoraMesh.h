@@ -13,49 +13,56 @@
 #include "SoraAutoPtr.h"
 #include "SoraVertex.h"
 #include "SoraPreDeclare.h"
+#include "SoraRenderBuffer.h"
 #include "util/SoraArray.h"
 #include "util/SoraPointTemplate.h"
 
 namespace sora {
     
-    struct SoraModelVertex {
-        float x, y, z;
-        float nx, ny, nz;
-        uint32 color;
-        float tx, ty;
+    struct SoraVertexN {
+        SoraVector3 pos;
+        SoraVector3 normal;
+        uint32 col;
+        float u, v;
     };
+    
+    static SoraVertexFormat VertexNFormat = SoraVertexFormat(VertexXYZ | VertexNormal | VertexColor | VertexUV).offsetUV(sizeof(SoraVector3)*2+sizeof(uint32))
+                 .offsetXYZ(0)
+                 .offsetColor(sizeof(SoraVector3)*2)
+                 .offsetNormal(sizeof(SoraVector3));
     
     class SORA_API SoraMesh {
     public:
+        SoraMesh();
+        ~SoraMesh();
+        
         typedef SoraAutoPtr<SoraMesh> Ptr;
         
-        typedef SoraArray<float3> VertexList;
-        typedef SoraArray<float3> NormalList;
-        typedef SoraArray<float2> UVList;
-        typedef SoraArray<SoraVertex> FaceList;
-        
-        VertexList mVertices;
-        NormalList mNormals;
-        UVList     mUVs;
-        FaceList   mFaces;
-        
-        SoraHandle mMaterialHandle;
+        uint32 getVertexCount() const;
+        uint32 getIndexCount() const;
                 
-        uint32 vertexCount() const {
-            return mVertices.size();
-        }
+        SoraRenderBuffer::Ptr getVertexBuffer() const;
+        SoraRenderBuffer::Ptr getIndexBuffer() const;
         
-        uint32 normalCount() const {
-            return mNormals.size();
-        }
+        void beginVertex();
+        void pushVertex(const SoraVertexN& vertex);
+        void pushVertex(SoraVertexN* pointer, uint32 count);
+        void endVertex();
         
-        uint32 UVCount() const {
-            return mUVs.size();
-        }
+        void beginIndex();
+        void pushIndex(uint32 index);
+        void pushIndex(uint32* index, uint32 count);
+        void endIndex();
         
-        uint32 faceCount() const {
-            return mFaces.size() / 3;
-        }
+    private:
+        friend class SoraModel;
+        
+        SoraRenderBuffer::Ptr mVertexBuffer;
+        SoraRenderBuffer::Ptr mIndexBuffer;
+        SoraHandle mMaterialHandle;
+        
+        SoraArray<SoraVertexN> mVertexBufferArray;
+        SoraArray<uint32> mIndexBufferArray;
     };
     
 } // namespace sora

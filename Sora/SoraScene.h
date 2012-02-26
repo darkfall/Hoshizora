@@ -99,9 +99,7 @@ namespace sora {
         
         void    setScale(float scaleh, float scalev);
         void    getScale(float* scaleh, float* scalev);
-        
-        void    moveTo(float x, float y, float inTime);
-        
+                
         void    onPositionChange(float x, float y);
         
         void    enableRenderToCanvas(bool flag);

@@ -20,6 +20,11 @@ namespace sora {
         virtual SoraModel::Ptr loadModelFromData(const char* data, uint32 size);
         
         void parseLine(const char* str, SoraMesh* mesh);
+        
+    private:
+        SoraArray<SoraVector3> mVertices;
+        SoraArray<SoraVector3> mNormals;
+        SoraArray<float2> mUVs;
     };
     
 } // namespace sora

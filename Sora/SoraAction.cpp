@@ -9,6 +9,7 @@
 #include "SoraAction.h"
 #include "SoraModifierAdapter.h"
 #include "SoraForEach.h"
+#include "SoraCamera.h"
 
 namespace sora {
     
@@ -55,6 +56,25 @@ namespace sora {
     
     bool SoraActionSequence::isDone() const {
         return mCurrentAction == mActions.size();
+    }
+    
+    void SoraActionSequence::addAction(const SoraAction::Ptr& action) {
+        mActions.push_back(action);
+    }
+    
+    SoraAction* SoraActionSequence::ActionWithActions(SoraAction* action, ...) {
+        SoraActionSequence* actionseq = new SoraActionSequence();
+        va_list list;
+        va_start(list, action);
+        
+        while(action) {
+            actionseq->addAction(action);
+            
+            action = va_arg(list, SoraAction*);
+        }
+        
+        va_end(list);
+        return actionseq;
     }
     
     void SoraActionSequence::step(float dt) {

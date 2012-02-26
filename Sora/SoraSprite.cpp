@@ -549,13 +549,7 @@ namespace sora {
 				++eff;
 			}
 		}
-        
-        if(mPhysicBody) {
-            SoraVector ccenter = mPhysicBody->getLocalCenter();
-            setCenter(ccenter.x, ccenter.y);
-            
-            setRotation(mPhysicBody->getRotation());
-        }
+    
 		return 0;
 	}
     
@@ -613,51 +607,5 @@ namespace sora {
     void SoraSprite::Render(const StringType& file, float x, float y, float r, float sh, float sv) {
   //      SoraFastRenderer::Instance()->renderSprite(file, x, y, r, sh, sv);
     }
-    
-    void SoraSprite::fadeTo(float to, float t) {
-        this->runAction(SoraModifierAction<SoraSprite>::ActionWithModifier(CreateEffectFade(CGETA(getColor())/255.f,
-                                                                                            to,
-                                                                                            t)));
-    }
-    
-    void SoraSprite::rotateTo(float to, float t) {
-        this->runAction(SoraModifierAction<SoraSprite>::ActionWithModifier(CreateEffectRotation(getRotation(),
-                                                                                                to,
-                                                                                                t)));
-    }
-    
-    void SoraSprite::scaleTo(float h, float v, float t) {
-        this->runAction(SoraModifierAction<SoraSprite>::ActionWithModifier(CreateEffectScale(getHScale(),
-                                                                                             getVScale(),
-                                                                                             h,
-                                                                                             v,
-                                                                                             t)));
-    }
-    
-    void SoraSprite::fadeToAndNotify(float to, float t, const NotificationFunc& func) {
-        this->runAction(SoraModifierAdapterAction::ActionWithModifierAdapter(CreateModifierAdapterWithNotification(this, 
-                                                                                                                   CreateEffectFade(CGETA(getColor())/255.f,
-                                                                                                                                    to,
-                                                                                                                                    t),
-                                                                                                                   func)));
-    }
-    
-    void SoraSprite::rotateToAndNotify(float to, float t, const NotificationFunc& func) {
-        this->runAction(SoraModifierAdapterAction::ActionWithModifierAdapter(CreateModifierAdapterWithNotification(this, 
-                                                                                                                   CreateEffectRotation(getRotation(),
-                                                                                                                                        to,
-                                                                                                                                        t),
-                                                                                                                   func)));
-    }
-    
-    void SoraSprite::scaleToAndNotify(float h, float v, float t, const NotificationFunc& func) {
-        this->runAction(SoraModifierAdapterAction::ActionWithModifierAdapter(CreateModifierAdapterWithNotification(this, 
-                                                                                                                   CreateEffectScale(getHScale(),
-                                                                                                                                    getVScale(),
-                                                                                                                                    h,
-                                                                                                                                    v,
-                                                                                                                                    t),
-                                                                                                                   func)));
-    }
-	
+
 } // namespace sora

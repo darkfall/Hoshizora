@@ -3,10 +3,10 @@
 #include "SoraObjectHandle.h"
 #include "SoraModifierAdapter.h"
 
-#include "modifiers/SoraObjectModifiers.h"
-
 #include "physics/SoraPhysicBody.h"
 #include "physics/SoraPhysicWorld.h"
+
+#include "actions/SoraObjectActions.h"
 
 #include "message/SoraMessageEvent.h"
 
@@ -19,8 +19,6 @@ namespace sora {
     mNext(NULL),
     mType(0), 
     mSubObjectSize(0),
-    mAutoReleasePhysicBody(true),
-    mPhysicBody(0),
     mActionContainer(this) {
         mUniqueId = GetNextUniqueId();
         mHandleId = FindFreeHandleSlot();
@@ -36,8 +34,6 @@ namespace sora {
     mNext(NULL),
     mType(0), 
     mSubObjectSize(0),
-    mAutoReleasePhysicBody(true),
-    mPhysicBody(0),
     mActionContainer(this) {
         mUniqueId = GetNextUniqueId();
         mHandleId = FindFreeHandleSlot();
@@ -58,10 +54,6 @@ namespace sora {
         mParent = NULL;
         
         FreeHandleSlot(mHandleId);
-        
-        if(mAutoReleasePhysicBody && mPhysicBody) {
-            SoraPhysicWorld::DestroyBody(mPhysicBody);
-        }
 	}
 	
 	int32 SoraObject::update(float dt) {
@@ -74,11 +66,6 @@ namespace sora {
         }
         
         mActionContainer.update(dt);
-        
-        if(mPhysicBody) {
-            SoraVector pos = mPhysicBody->getPosition();
-            setPosition(pos.x, pos.y);
-        }
 
 		return 0;
 	}
@@ -92,28 +79,7 @@ namespace sora {
             }
         }
 	}
-    
-    void SoraObject::moveTo(float x, float y, float t) {
-        this->runAction(SoraModifierAction<SoraObject>::ActionWithModifier(new SoraObjectPositionModifier(getPositionX(),
-                                                                                                          getPositionY(),
-                                                                                                          x,
-                                                                                                          y,
-                                                                                                          t)));
-        
-    }
-    
-    void SoraObject::moveToAndNotify(float x, float y, float t, const SoraFunction<void(SoraObject*)>& onFinish) {
-        this->runAction(SoraModifierAdapterAction::ActionWithModifierAdapter(
-                           CreateModifierAdapterWithNotification(this,
-                                                                 new SoraObjectPositionModifier(getPositionX(),
-                                                                                                getPositionY(),
-                                                                                                x,
-                                                                                                y,
-                                                                                                t),
-                                                                 onFinish)));
-                                                 
-    }
-    
+
     void SoraObject::onUpdate(float dt) {
         update(dt);
     }
@@ -312,7 +278,7 @@ namespace sora {
         
     }
     
-    void SoraObject::attachPhysicBody(SoraPhysicBody* body, bool autoRelease) {
+ /*   void SoraObject::attachPhysicBody(SoraPhysicBody* body, bool autoRelease) {
         mPhysicBody = body;
         mAutoReleasePhysicBody = autoRelease;
     }
@@ -332,10 +298,11 @@ namespace sora {
     
     SoraPhysicBody* SoraObject::getPhysicBody() const {
         return mPhysicBody;
-    }
+    }*/
     
-    void SoraObject::runAction(const SoraAction::Ptr& action) {
+    SoraAction::Ptr SoraObject::runAction(const SoraAction::Ptr& action) {
         mActionContainer.add(action);
+        return action;
     }
     
     SoraAction::Ptr SoraObject::stopAction(const SoraAction::Ptr& action) {

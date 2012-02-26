@@ -45,6 +45,10 @@ namespace sora {
         return SoraCore::Instance()->createTextureFromMem(data, size);
     }
     
+    SoraTexture* SoraTexture::TextureFromHandle(SoraTextureHandle handle) {
+        return (SoraTexture*)handle;
+    }
+    
     int32 SoraTexture::GetWidth(SoraTextureHandle handle) {
         sora_assert(handle);
         return ((SoraTexture*)handle)->mTextureWidth;
