@@ -66,7 +66,8 @@ namespace sora {
     void SoraScheduler::update(float dt) {
         SORA_FOR_EACH(Schedule& s, mScheduled) {
             if(s.update(dt)) {
-                s.mFunc(dt);
+                float ct = s.mCurrentTime;
+                s.mFunc(ct + dt);
             }
         }
     }
