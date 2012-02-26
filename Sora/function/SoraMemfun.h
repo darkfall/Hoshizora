@@ -37,6 +37,10 @@ namespace sora {
             return mFunc != NULL;
         }
         
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
+        }
+        
     private:
         Memfun mFunc;
     };
@@ -64,6 +68,10 @@ namespace sora {
         
         operator bool() {
             return mFunc != NULL;
+        }
+        
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
         }
         
     private:
@@ -96,6 +104,10 @@ namespace sora {
             return mFunc != NULL;
         }
         
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
+        }
+        
     private:
         Memfun mFunc;
     };
@@ -125,6 +137,10 @@ namespace sora {
         
         operator bool() {
             return mFunc != NULL;
+        }
+        
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
         }
         
     private:
@@ -159,6 +175,10 @@ namespace sora {
             return mFunc != NULL;
         }
         
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
+        }
+        
     private:
         Memfun mFunc;
     };
@@ -190,6 +210,10 @@ namespace sora {
         
         operator bool() {
             return mFunc != NULL;
+        }
+        
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
         }
         
     private:
@@ -256,6 +280,10 @@ namespace sora {
         
         operator bool() {
             return mFunc != NULL;
+        }
+        
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
         }
         
     private:
@@ -329,6 +357,10 @@ namespace sora {
         
         operator bool() {
             return mFunc != NULL;
+        }
+        
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
         }
         
     private:
@@ -406,6 +438,10 @@ namespace sora {
         
         operator bool() {
             return mFunc != NULL;
+        }
+        
+        bool operator==(Memfun rhs) const {
+            return mFunc == rhs;
         }
         
     private:

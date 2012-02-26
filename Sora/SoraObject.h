@@ -8,7 +8,7 @@
 #include "SoraMovable.h"
 #include "SoraFunction.h"
 #include "SoraAction.h"
-
+#include "SoraScheduler.h"
 #include <algorithm>
 #include <list>
 
@@ -132,9 +132,13 @@ namespace sora {
         SoraAction::Ptr runAction(const SoraAction::Ptr& action);
         SoraAction::Ptr stopAction(const SoraAction::Ptr& action);
         
+        void schedule(SoraScheduler::MemfunType::Memfun func, float dt);
+        void unschedule(SoraScheduler::MemfunType::Memfun func);
+        
     private:
         void  setNext(SoraObject* obj);
 
+        SoraScheduler       mScheduler;
         SoraActionContainer mActionContainer;
 		
 	protected:

@@ -32,6 +32,13 @@ namespace sora {
                 return mObj && mMemfun;
             }
             
+            bool operator==(const MemfunType& rhs) const {
+                return mObj == rhs.mObj && mMemfun == rhs.mMemfun;
+            }
+            
+            ObjType* getObj() const { return mObj; }
+            MemfunType getMemfun() const { return mMemfun; }
+            
         protected:
             ObjType* mObj;
             MemfunType mMemfun;

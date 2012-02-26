@@ -148,16 +148,6 @@ struct myVertex {
   //  float tx, ty;
 };
 
-sora::SoraTextureHandle movieTexture;
-
-void test_func(float dt) {
-    
-}
-
-void test_func_2() {
-    
-}
-
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
@@ -223,6 +213,7 @@ public:
         mBg.enable3D(false);
         mBg.render(0, 0);
         
+        
         rs->switchTo3D();
         rs->setTransformMatrix(viewMat);
         
@@ -233,6 +224,7 @@ public:
             // render a buffer
         }
         rs->endScene();
+        
         
         /*   sphereModel->getTransform().setPosition(xp, yp, 0.f);
          sphereModel->getTransform().setRotation(sora::SoraQuaternion(sora::DegreeToRadius(x), sora::DegreeToRadius(y), sora::DegreeToRadius(z), 0));
@@ -314,9 +306,6 @@ public:
         
         registerEventFunc(this, &GameInitState::onKeyEvent);  
         
-        sphereModel->runAction(sora::SoraActionSequence::ActionWithActions(sora::SoraDelayAction::ActionWithDelay(sora::SoraCallFuncAction::ActionWithFunction(test_func), 
-                                                                                                                  0.5f),
-                                                                           0));
      //   sphereModel->moveTo(1000, 10000, 100);
 
     }

@@ -19,6 +19,7 @@ namespace sora {
     mNext(NULL),
     mType(0), 
     mSubObjectSize(0),
+    mScheduler(this),
     mActionContainer(this) {
         mUniqueId = GetNextUniqueId();
         mHandleId = FindFreeHandleSlot();
@@ -34,6 +35,7 @@ namespace sora {
     mNext(NULL),
     mType(0), 
     mSubObjectSize(0),
+    mScheduler(this),
     mActionContainer(this) {
         mUniqueId = GetNextUniqueId();
         mHandleId = FindFreeHandleSlot();
@@ -57,6 +59,7 @@ namespace sora {
 	}
 	
 	int32 SoraObject::update(float dt) {
+        
         if(mSubObjectSize != 0) {
             SoraObject* obj = mSubObjects;
             while(obj != NULL) {
@@ -65,6 +68,7 @@ namespace sora {
             }
         }
         
+        mScheduler.update(dt);
         mActionContainer.update(dt);
 
 		return 0;
@@ -276,6 +280,14 @@ namespace sora {
     
     void SoraObject::on3DEnabled(bool flag) {
         
+    }
+    
+    void SoraObject::schedule(SoraScheduler::MemfunType::Memfun func, float dt) {
+        mScheduler.schedule(func, dt);
+    }
+    
+    void SoraObject::unschedule(SoraScheduler::MemfunType::Memfun func) {
+        mScheduler.unschedule(func);
     }
     
  /*   void SoraObject::attachPhysicBody(SoraPhysicBody* body, bool autoRelease) {
