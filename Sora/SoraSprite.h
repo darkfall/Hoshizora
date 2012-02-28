@@ -71,6 +71,8 @@ namespace sora {
         void                 unlockPixelData();
 		SoraTextureHandle    getTexture() const;
         
+        void setTransform(const SoraTransform& transform);
+        
     public:
         /**
          * inheritated from SoraObject
@@ -109,10 +111,8 @@ namespace sora {
 		SoraRect mTextureRect;
         int32   mSprWidth, mSprHeight;
         
-		float mRotation;
 		float mCenterX, mCenterY;
-		float mVScale, mHScale;
-
+        
 		bool bVFlip, bHFlip, bCFlip;
         bool bPropChanged;
 		
@@ -120,8 +120,6 @@ namespace sora {
 		ImageEffectList vEffects;
 
 		SoraQuad mQuad;
-
-        static SoraCore* mSora;
         
 	private:
 		SoraSprite(SoraSprite&);

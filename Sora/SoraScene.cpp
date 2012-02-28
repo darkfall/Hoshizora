@@ -116,6 +116,11 @@ namespace sora {
         return layer;
     }
     
+    SoraLayer* Sora2DScene::addLayer(int32 layerDepth, SoraLayer* my_layer) {
+        mLayers.insert(std::make_pair(layerDepth, my_layer));
+        return my_layer;
+    }
+    
     void Sora2DScene::removeLayer(int32 layerDepth) {
         LayerMap::iterator itLayer = mLayers.find(layerDepth);
         if(itLayer != mLayers.end()) {
@@ -237,8 +242,7 @@ namespace sora {
         /**
          *  Update SubScenes(If Available)
          **/
-        SoraObject::update(dt);
-        return 0;
+        return SoraObject::update(dt);
     }
 
     

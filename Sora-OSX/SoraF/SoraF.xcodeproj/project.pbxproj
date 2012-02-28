@@ -202,6 +202,12 @@
 		88CCB9A114FA00C400ECDE0E /* SoraSpriteActions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB99B14FA00C400ECDE0E /* SoraSpriteActions.cpp */; };
 		88CCB9A414FA06A400ECDE0E /* SoraDirector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB9A314FA06A000ECDE0E /* SoraDirector.cpp */; };
 		88CCB9A714FA074300ECDE0E /* SoraScheduler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB9A614FA073A00ECDE0E /* SoraScheduler.cpp */; };
+		88CCB9B614FB229400ECDE0E /* SoraParticleFSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB9B514FB229400ECDE0E /* SoraParticleFSystem.cpp */; };
+		88CCB9B814FB24D300ECDE0E /* SoraParticleFEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB9B714FB24D300ECDE0E /* SoraParticleFEmitter.cpp */; };
+		88CCB9BB14FB307400ECDE0E /* SoraParticleFRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB9BA14FB307300ECDE0E /* SoraParticleFRenderer.cpp */; };
+		88CCB9BF14FB862A00ECDE0E /* SoraParticleFCircleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB9BE14FB862900ECDE0E /* SoraParticleFCircleEmitter.cpp */; };
+		88CCB9C214FB88EB00ECDE0E /* SoraParticleFBasicEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB9C114FB88E900ECDE0E /* SoraParticleFBasicEmitter.cpp */; };
+		88CCB9C514FB8C5400ECDE0E /* SoraRandomizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB9C414FB8C5000ECDE0E /* SoraRandomizer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -851,6 +857,20 @@
 		88CCB9A314FA06A000ECDE0E /* SoraDirector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraDirector.cpp; sourceTree = "<group>"; };
 		88CCB9A514FA073100ECDE0E /* SoraScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraScheduler.h; sourceTree = "<group>"; };
 		88CCB9A614FA073A00ECDE0E /* SoraScheduler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraScheduler.cpp; sourceTree = "<group>"; };
+		88CCB9B214FB223900ECDE0E /* SoraParticleFNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraParticleFNode.h; sourceTree = "<group>"; };
+		88CCB9B314FB224100ECDE0E /* SoraParticleFSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraParticleFSystem.h; sourceTree = "<group>"; };
+		88CCB9B414FB224D00ECDE0E /* SoraParticleFEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraParticleFEmitter.h; sourceTree = "<group>"; };
+		88CCB9B514FB229400ECDE0E /* SoraParticleFSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraParticleFSystem.cpp; sourceTree = "<group>"; };
+		88CCB9B714FB24D300ECDE0E /* SoraParticleFEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraParticleFEmitter.cpp; sourceTree = "<group>"; };
+		88CCB9B914FB306900ECDE0E /* SoraParticleFRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraParticleFRenderer.h; sourceTree = "<group>"; };
+		88CCB9BA14FB307300ECDE0E /* SoraParticleFRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraParticleFRenderer.cpp; sourceTree = "<group>"; };
+		88CCB9BC14FB3B9B00ECDE0E /* SoraParticleFFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraParticleFFactory.h; sourceTree = "<group>"; };
+		88CCB9BD14FB861900ECDE0E /* SoraParticleFCircleEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraParticleFCircleEmitter.h; sourceTree = "<group>"; };
+		88CCB9BE14FB862900ECDE0E /* SoraParticleFCircleEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraParticleFCircleEmitter.cpp; sourceTree = "<group>"; };
+		88CCB9C014FB88DE00ECDE0E /* SoraParticleFBasicEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraParticleFBasicEmitter.h; sourceTree = "<group>"; };
+		88CCB9C114FB88E900ECDE0E /* SoraParticleFBasicEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraParticleFBasicEmitter.cpp; sourceTree = "<group>"; };
+		88CCB9C314FB8BEA00ECDE0E /* SoraRandomizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraRandomizer.h; sourceTree = "<group>"; };
+		88CCB9C414FB8C5000ECDE0E /* SoraRandomizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraRandomizer.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -909,6 +929,7 @@
 		880E78B114F88AA70060F821 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				88CCB9B014FB1DF600ECDE0E /* SoraParticleF */,
 				88CCB88014F8903E00ECDE0E /* SoraFreetypeFont */,
 				88CCB82714F88D1500ECDE0E /* Sora3D */,
 				88CCB83814F88D1500ECDE0E /* SoraOGLRenderer */,
@@ -1161,6 +1182,8 @@
 				88CCB9A314FA06A000ECDE0E /* SoraDirector.cpp */,
 				88CCB9A514FA073100ECDE0E /* SoraScheduler.h */,
 				88CCB9A614FA073A00ECDE0E /* SoraScheduler.cpp */,
+				88CCB9C314FB8BEA00ECDE0E /* SoraRandomizer.h */,
+				88CCB9C414FB8C5000ECDE0E /* SoraRandomizer.cpp */,
 			);
 			name = Sora;
 			path = ../../Sora;
@@ -1931,6 +1954,26 @@
 			path = actions;
 			sourceTree = "<group>";
 		};
+		88CCB9B014FB1DF600ECDE0E /* SoraParticleF */ = {
+			isa = PBXGroup;
+			children = (
+				88CCB9B214FB223900ECDE0E /* SoraParticleFNode.h */,
+				88CCB9B314FB224100ECDE0E /* SoraParticleFSystem.h */,
+				88CCB9B514FB229400ECDE0E /* SoraParticleFSystem.cpp */,
+				88CCB9B414FB224D00ECDE0E /* SoraParticleFEmitter.h */,
+				88CCB9B714FB24D300ECDE0E /* SoraParticleFEmitter.cpp */,
+				88CCB9B914FB306900ECDE0E /* SoraParticleFRenderer.h */,
+				88CCB9BA14FB307300ECDE0E /* SoraParticleFRenderer.cpp */,
+				88CCB9BC14FB3B9B00ECDE0E /* SoraParticleFFactory.h */,
+				88CCB9C014FB88DE00ECDE0E /* SoraParticleFBasicEmitter.h */,
+				88CCB9C114FB88E900ECDE0E /* SoraParticleFBasicEmitter.cpp */,
+				88CCB9BD14FB861900ECDE0E /* SoraParticleFCircleEmitter.h */,
+				88CCB9BE14FB862900ECDE0E /* SoraParticleFCircleEmitter.cpp */,
+			);
+			name = SoraParticleF;
+			path = ../Plugins/SoraParticleF;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2162,6 +2205,12 @@
 				88CCB9A114FA00C400ECDE0E /* SoraSpriteActions.cpp in Sources */,
 				88CCB9A414FA06A400ECDE0E /* SoraDirector.cpp in Sources */,
 				88CCB9A714FA074300ECDE0E /* SoraScheduler.cpp in Sources */,
+				88CCB9B614FB229400ECDE0E /* SoraParticleFSystem.cpp in Sources */,
+				88CCB9B814FB24D300ECDE0E /* SoraParticleFEmitter.cpp in Sources */,
+				88CCB9BB14FB307400ECDE0E /* SoraParticleFRenderer.cpp in Sources */,
+				88CCB9BF14FB862A00ECDE0E /* SoraParticleFCircleEmitter.cpp in Sources */,
+				88CCB9C214FB88EB00ECDE0E /* SoraParticleFBasicEmitter.cpp in Sources */,
+				88CCB9C514FB8C5400ECDE0E /* SoraRandomizer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

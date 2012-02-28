@@ -24,7 +24,8 @@ namespace sora {
     struct SoraTransform {
         
         inline SoraTransform():
-        mScale(SoraVector3(1.f, 1.f, 1.f)) {
+        mScale(SoraVector3(1.f, 1.f, 1.f)),
+        mBuild(false) {
             
         }
         
@@ -46,7 +47,9 @@ namespace sora {
             mTransformMatrix = mat;
         }
         
-        inline const SoraMatrix4& getTransformMatrix() const {
+        inline SoraMatrix4& getTransformMatrix() {
+            if(!mBuild)
+                buildTransformMatrix();
             return mTransformMatrix;
         }
 
@@ -56,43 +59,43 @@ namespace sora {
         inline void setPosition(const SoraVector3& pos) {
             mPosition = pos;
             
-            buildTransformMatrix();
+            mBuild = false;
         }
         
         inline void setScale(const SoraVector3& scale) {
             mScale = scale;
             
-            buildTransformMatrix();
+            mBuild = false;
         }
         
         inline void setRotation(const SoraQuaternion& rot) {
             mRotation = rot;
             
-            buildTransformMatrix();
+            mBuild = false;
         }
         
         inline void setRotation(const SoraVector3& axis, real angle) {
             mRotation = SoraQuaternion(axis.x, axis.y, axis.z, angle);
             
-            buildTransformMatrix();
+            mBuild = false;
         }
         
         inline void setPosition(real x, real y, real z) {
             mPosition.set(x, y, z);
             
-            buildTransformMatrix();
+            mBuild = false;
         }
         
         inline void setScale(real x, real y, real z) {
             mScale.set(x, y, z);
             
-            buildTransformMatrix();
+            mBuild = false;
         }
         
         inline void setRotation(real x, real y, real z) {
             mRotation = SoraQuaternion(x, y, z, 0);
             
-            buildTransformMatrix();
+            mBuild = false;
         }
         
         /*
@@ -146,11 +149,14 @@ namespace sora {
             return mRotation.z;
         }
         
+    protected:
         SoraVector3 mPosition;
         SoraVector3 mScale;
         SoraQuaternion mRotation;
         
+    private:
         SoraMatrix4 mTransformMatrix;
+        bool        mBuild;
     };
     
 } // namespace sora

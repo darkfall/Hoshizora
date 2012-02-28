@@ -10,20 +10,12 @@
 #endif
 
 namespace sora {
-    
-    SoraCore* SoraSprite::mSora = NULL;
-    
+        
     SoraSprite::SoraSprite() {
-        if(!mSora)
-            mSora = SoraCore::Instance();
-
         _initDefaults();
     }
 
     SoraSprite::SoraSprite(SoraTextureHandle tex) {
-        if(!mSora)
-            mSora = SoraCore::Instance();
-        
         SoraTexture* ptex = tex==0?NULL:(SoraTexture*)tex;
         
         _init(ptex, 0.f, 0.f, ptex!=NULL?ptex->mTextureWidth:1.f, ptex!=NULL?ptex->mTextureHeight:1.f);
@@ -31,9 +23,6 @@ namespace sora {
     }
     
     SoraSprite::SoraSprite(SoraTextureHandle tex, float x, float y, float w, float h) {
-        if(!mSora)
-            mSora = SoraCore::Instance();
-        
         if(w == 0.f)
             w = (float)SoraTexture::GetWidth(tex);
         if(h == 0.f)
@@ -97,7 +86,10 @@ namespace sora {
 	}
 
 	void SoraSprite::_initDefaults() {
-		mVScale = mHScale = 1.f;
+		setScale(1.f, 1.f);
+        setRotation(1.f);
+        setCenter(0.f, 0.f);
+        
 #ifdef OS_IOS
         if(_IS_RETINA_DISPLAY() && isUseRetina()) {
             if(mQuad.tex && !mQuad.tex->mIsRetinaTexture) {
@@ -105,10 +97,6 @@ namespace sora {
             }
         }
 #endif
-        
-		mRotation = 0.f;
-		mCenterX = mCenterY = 0.f;
-
         bVFlip = bHFlip = false;
             
         // force rebuild quad
@@ -170,8 +158,13 @@ namespace sora {
         }
 		
         attachShaderToRender();
-		mSora->renderQuad(mQuad);
+        SoraCore::Ptr->renderQuad(mQuad);
         detachShaderFromRender();
+    }
+    
+    void SoraSprite::setTransform(const SoraTransform& transform) {
+        bPropChanged = true;
+        SoraObject::setTransform(transform);
     }
     
     void SoraSprite::buildQuad(float x, float y) {
@@ -184,16 +177,16 @@ namespace sora {
             y *= sora::getScaleFactor();
         }
 #endif
+        tx1 = -mCenterX * mTransform.getRotationZ();
+        ty1 = -mCenterY * mTransform.getRotationZ();
+        tx2 = (mTextureRect.x2-mCenterX) * mTransform.getScaleX();
+        ty2 = (mTextureRect.y2-mCenterY) * mTransform.getScaleY();
 		
         if(!is3DEnabled()) {
-            tx1 = -mCenterX*mHScale;
-            ty1 = -mCenterY*mVScale;
-            tx2 = (mTextureRect.x2-mCenterX)*mHScale;
-            ty2 = (mTextureRect.y2-mCenterY)*mVScale;
             
-            if(mRotation != 0.0f) {
-                cost = cosf(mRotation);
-                sint = sinf(mRotation);
+            if(mTransform.getRotationZ() != 0.0f) {
+                cost = cosf(mTransform.getRotationZ());
+                sint = sinf(mTransform.getRotationZ());
                 
                 mQuad.v[0].x  = tx1*cost - ty1*sint + x;
                 mQuad.v[1].x  = tx2*cost - ty1*sint + x;
@@ -217,11 +210,6 @@ namespace sora {
                 mQuad.v[3].y = mQuad.v[2].y;
             }
         } else {
-            tx1 = -mCenterX*mHScale;
-            ty1 = -mCenterY*mVScale;
-            tx2 = (mTextureRect.x2-mCenterX)*mHScale;
-            ty2 = (mTextureRect.y2-mCenterY)*mVScale;
-            
             mQuad.v[0].x = tx1; 
             mQuad.v[1].x = tx2; 
             mQuad.v[2].x = tx2; 
@@ -232,18 +220,8 @@ namespace sora {
             mQuad.v[2].y = ty2;
             mQuad.v[3].y = ty2;
             
-      //      printf("1. %f, %f, %f, %f\n", mQuad.v[0].x, mQuad.v[1].x, mQuad.v[0].y, mQuad.v[2].y);
             
-            const SoraTransform& transform = getTransform();
-            SoraMatrix4 mat = SoraMatrix4::RotMat(transform.mRotation.x, 
-                                                  transform.mRotation.y, 
-                                                  transform.mRotation.z).scale(transform.mScale.x,
-                                                                               transform.mScale.y,
-                                                                               transform.mScale.z);
-            mat.translate(x, y, 0.f);
-            mQuad *= mat;
-            
-      //      printf("2. %f, %f, %f, %f\n", mQuad.v[0].x, mQuad.v[1].x, mQuad.v[0].y, mQuad.v[2].y);
+            mQuad *= getTransform().getTransformMatrix();
         }
     }
 
@@ -252,7 +230,7 @@ namespace sora {
         bPropChanged = true;
 		
         attachShaderToRender();
-		mSora->renderQuad(mQuad);
+        SoraCore::Ptr->renderQuad(mQuad);
         detachShaderFromRender();
 	}
     
@@ -272,7 +250,7 @@ namespace sora {
 		tx2 = (mTextureRect.x2-mCenterX)*scalex;
 		ty2 = (mTextureRect.y2-mCenterY)*scaley;
 		
-		if(mRotation != 0.0f) {
+		if(rot != 0.0f) {
 			cost = cosf(rot);
 			sint = sinf(rot);
 			
@@ -301,7 +279,7 @@ namespace sora {
         bPropChanged = true;
         
         attachShaderToRender();
-		mSora->renderQuad(mQuad);
+        SoraCore::Ptr->renderQuad(mQuad);
         detachShaderFromRender();
     }
     
@@ -314,7 +292,7 @@ namespace sora {
         bPropChanged = true;
         
         attachShaderToRender();
-		mSora->renderQuad(mQuad);
+        SoraCore::Ptr->renderQuad(mQuad);
         detachShaderFromRender();
     }
 
@@ -336,13 +314,13 @@ namespace sora {
         bPropChanged = true;
 		
         attachShaderToRender();
-		mSora->renderQuad(mQuad);
+		SoraCore::Ptr->renderQuad(mQuad);
         detachShaderFromRender();
 	}
 
 	void SoraSprite::renderWithVertices(SoraVertex* vertices, uint32 size, RenderMode mode) {
 		attachShaderToRender();
-		mSora->renderWithVertices((SoraTextureHandle)mQuad.tex, mQuad.blend, vertices, size, mode);
+		SoraCore::Ptr->renderWithVertices((SoraTextureHandle)mQuad.tex, mQuad.blend, vertices, size, mode);
 		detachShaderFromRender();
 	}
 	
@@ -377,12 +355,12 @@ namespace sora {
 	}
 
 	uint32* SoraSprite::getPixelData() const {
-		return mSora->textureLock((SoraTextureHandle)mQuad.tex);
+		return SoraCore::Ptr->textureLock((SoraTextureHandle)mQuad.tex);
 		return 0;
 	}
     
     void SoraSprite::unlockPixelData() {
-        mSora->textureUnlock((SoraSpriteHandle)mQuad.tex);
+        SoraCore::Ptr->textureUnlock((SoraSpriteHandle)mQuad.tex);
     }
 
 	SoraRect SoraSprite::getTextureRect() const {
@@ -454,14 +432,14 @@ namespace sora {
 	}
 
 	void SoraSprite::setScale(float h, float v) {
-		mVScale = v;
-		mHScale = h;
+		mTransform.setScale(h, v, 1.f);
         
 #ifdef OS_IOS
         if(_IS_RETINA_DISPLAY() && isUseRetina()) {
             if(mQuad.tex && !mQuad.tex->mIsRetinaTexture) {
-                mVScale *= getScaleFactor();
-                mHScale *= getScaleFactor();
+                mTransform.setScale(h *= getScaleFactor(),
+                                    v *= getScaleFactor(),
+                                    1.f);
             }
         }
 #endif
@@ -470,21 +448,21 @@ namespace sora {
 	}
 
 	float SoraSprite::getVScale()  const{
-		return mVScale;
+		return mTransform.getScaleX();
 	}
 
 	float SoraSprite::getHScale()  const{
-		return mHScale;
+		return mTransform.getScaleY();
 	}
 
 	void SoraSprite::setRotation(float r) { 
-		mRotation = r;
+		mTransform.setRotation(0.f, 0.f, r);
         
         bPropChanged = true;
 	}
 
 	float SoraSprite::getRotation()  const{
-		return mRotation;
+		return mTransform.getRotationZ();
 	}
 
 	bool SoraSprite::getHFlip()  const{ 
@@ -532,9 +510,7 @@ namespace sora {
 		vEffects.clear();
 	}
 	
-	int32 SoraSprite::update(float dt) {
-        SoraObject::update(dt);
-        
+	int32 SoraSprite::update(float dt) {        
 		if(!vEffects.empty()) {
 			ImageEffectList::iterator eff = vEffects.begin();
 			while(eff != vEffects.end()) {
@@ -550,7 +526,7 @@ namespace sora {
 			}
 		}
     
-		return 0;
+		return SoraObject::update(dt);
 	}
     
     SoraTextureHandle SoraSprite::getTexture() const {
@@ -567,13 +543,13 @@ namespace sora {
         float tx1, ty1, tx2, ty2;
 		float sint, cost;
         
-		tx1 = -mCenterX*mHScale;
-		ty1 = -mCenterY*mVScale;
-		tx2 = (mTextureRect.x2-mCenterX)*mHScale;
-		ty2 = (mTextureRect.y2-mCenterY)*mVScale;
+		tx1 = -mCenterX * getRotation();
+        ty1 = -mCenterY * getRotation();
+        tx2 = (mTextureRect.x2-mCenterX) * mTransform.getScaleX();
+        ty2 = (mTextureRect.y2-mCenterY) * mTransform.getScaleY();
 		
-		cost = cosf(mRotation);
-        sint = sinf(mRotation);
+		cost = cosf(getRotation());
+        sint = sinf(getRotation());
 			
         rect.x1  = tx1*cost - ty1*sint + getPositionX();
         rect.x2  = tx2*cost - ty2*sint + getPositionX();

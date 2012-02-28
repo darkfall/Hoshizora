@@ -67,7 +67,7 @@ namespace sora {
          * 3d transform
          **/
         
-        void setTransform(const SoraTransform& transform);
+        virtual void setTransform(const SoraTransform& transform);
         
         SoraTransform&       getTransform();
         const SoraTransform& getTransform() const;

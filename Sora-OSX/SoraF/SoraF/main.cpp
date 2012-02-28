@@ -47,77 +47,6 @@ float zpos = 0.f;
 
 #include "SoraVertexList.h"
 
-float cube[] = {
-    100.f, 100.f, -100.f,
-    300.f, 100.f, -100.f,
-    300.f, 100.f, 100.f,
-    100.f, 100.f, 100.f,
-    
-    100.f, 300.f, 100.f,
-    300.f, 300.f, 100.f,
-    300.f, 300.f, -100.f,
-    100.f, 300.f, -100.f,
-    
-    100.f, 100.f, -100.f,
-    300.f, 100.f, -100.f,
-    300.f, 300.f, -100.f,
-    100.f, 300.f, -100.f,
-    
-    
-    300.f, 100.f, -100.f,
-    300.f, 100.f, 100.f,
-    300.f, 300.f, 100.f,
-    300.f, 300.f, -100.f,
-    
-    
-    300.f, 100.f, 100.f,
-    100.f, 100.f, 100.f,
-    100.f, 300.f, 100.f,
-    300.f, 300.f, 100.f,
-    
-    
-    100.f, 100.f, -100.f,
-    100.f, 100.f, 100.f,
-    100.f, 300.f, 100.f,
-    100.f, 300.f, -100.f,
-};
-
-float tex[] = {
-    0.f, 0.f,
-    1.f, 0.f,
-    1.f, 1.f, 
-    0.f, 1.f,
-    0.f, 0.f,
-    1.f, 0.f,
-    1.f, 1.f, 
-    0.f, 1.f,
-    0.f, 0.f,
-    1.f, 0.f,
-    1.f, 1.f, 
-    0.f, 1.f,
-    0.f, 0.f,
-    1.f, 0.f,
-    1.f, 1.f, 
-    0.f, 1.f,
-    0.f, 0.f,
-    1.f, 0.f,
-    1.f, 1.f, 
-    0.f, 1.f,
-    0.f, 0.f,
-    1.f, 0.f,
-    1.f, 1.f, 
-    0.f, 1.f,
-};
-
-float color[] = {
-    0xFFFF0000, 0xFFFF0000, 0xFFFF0000, 0xFFFF0000,
-    0xFFFF0000, 0xFFFF0000, 0xFFFF0000, 0xFFFF0000,
-    0xFFFF0000, 0xFFFF0000, 0xFFFF0000, 0xFFFF0000,
-    0xFFFF0000, 0xFFFF0000, 0xFFFF0000, 0xFFFF0000,
-    0xFFFF0000, 0xFFFF0000, 0xFFFF0000, 0xFFFF0000,
-    0xFFFF0000, 0xFFFF0000, 0xFFFF0000, 0xFFFF0000
-};
-
 float s = 1.f;
 
 #include "util/SoraPointTemplate.h"
@@ -138,15 +67,11 @@ sora::SoraModel::Ptr boxModel;
 
 #include "SoraShaderParamObject.h"
 
-sora::SoraRenderBuffer::Ptr vertexBuffer;
-sora::SoraRenderBuffer::Ptr indexBuffer;
+#include "SoraParticleF/SoraParticleFSystem.h"
+#include "SoraParticleF/SoraParticleFBasicEmitter.h"
+#include "SoraParticleF/SoraParticleFRenderer.h"
 
-struct myVertex {
-    float x, y, z;
-    float nx, ny, nz;
-    uint32 col;
-  //  float tx, ty;
-};
+sora::SoraParticleFSystem pfSys;
 
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
@@ -219,26 +144,16 @@ public:
         
         {
             // render a model
-            sphereModel->render();
+   //         sphereModel->render();
             
             // render a buffer
         }
         rs->endScene();
         
-        
-        /*   sphereModel->getTransform().setPosition(xp, yp, 0.f);
-         sphereModel->getTransform().setRotation(sora::SoraQuaternion(sora::DegreeToRadius(x), sora::DegreeToRadius(y), sora::DegreeToRadius(z), 0));
-         sphereModel->getTransform().setScale(s, s, s);*/
-        /*  
-         sora::SoraCore::Ptr->getRenderSystem()->setTransformMatrix(vertexL.getTransform().getTransformMatrix());
-         sora::SoraAABB3 abox = sora::SoraAABB3::AABB3FromVertices(vertexL.getVertexList().begin(), vertexL.getVertexList().size());
-         
-         sora::SoraVertexArray arr = abox.buildVertexArray();
-         
-         sora::SoraCore::Ptr->renderWithVertices(0, BLEND_DEFAULT, arr.begin(), 24, sora::Line);
-         */
         sora::SoraCore::Ptr->switchTo2D();
         
+        pfSys.render();
+
         mText2.enable3D(false);
         mText2.setPosition(500.f, 600.f);
         mText2.render();
@@ -249,13 +164,12 @@ public:
         
         sora::SoraCore::Ptr->setTransform();
         mFont->render(0.f, 80.f, L"|#00FFFF|O");
-        mFont->print(0.f, 600.f, sora::SoraFont::AlignmentLeft, L"fps : %f\nmodel: vertex: %d, UV: %d, normal: %d, face: %d", sora::SoraCore::Ptr->getFPS(), 
+        mFont->print(0.f, 600.f, sora::SoraFont::AlignmentLeft, L"fps : %f\nvertex: %d", sora::SoraCore::Ptr->getFPS(), 
                      sphereModel->getMesh()->getVertexCount()
                      );
         
         sora::SoraGameApp::EndScene();
         
-
     }
     
     void onUpdate(float dt) {   
@@ -263,6 +177,7 @@ public:
         sora::SoraRenderBuffer::Ptr myIndexBuffer;
         
         sphereModel->update(dt);
+        pfSys.update(dt);
     }
     
     void onKeyEvent(sora::SoraKeyEvent* keyEvent) {
@@ -282,6 +197,40 @@ public:
         
         sphereModel->getMaterial()->setTexture(0, sora::SoraTexture::LoadFromFile("kagami2.jpg"));
         
+        
+        sora::SoraParticleFRenderer* renderer = new sora::SoraParticleFRenderer();
+        renderer->setTeture(sora::SoraCore::Instance()->createTexture("particles.png"));
+        renderer->setTextureRect(sora::SoraRect(0, 0, 32,32));
+        
+        pfSys.addRenderer(renderer);
+        
+        sora::SoraParticleFBasicEmitter* emitter = new sora::SoraParticleFBasicEmitter();
+        emitter->setMaxSpeed(50);
+        emitter->setMinSpeed(10);
+        
+        emitter->setMaxAngle(sora::SoraVector(sora::F_PI, sora::F_PI));
+        emitter->setMinAngle(sora::SoraVector(-sora::F_PI, 0));
+        
+        emitter->setStartColor(sora::Color::Red);
+        emitter->setEndColor(sora::Color::Blue.a(0));
+        
+        emitter->setMinLifeTime(10.f);
+        emitter->setMaxLifeTime(20.f);
+        
+        emitter->setMinSpin(sora::SoraVector3());
+        emitter->setMaxSpin(sora::SoraVector3());
+        
+        emitter->setStartScale(sora::SoraVector3(1, 1, 1));
+        emitter->setEndScale(sora::SoraVector3(1, 1, 1));
+        
+        emitter->setEmissionNum(10);
+        emitter->setEmissionDuration(2);
+        emitter->setEmissionRepeatTime(-1);
+        emitter->setEmissionInterval(1);
+        
+        pfSys.addEmitter(emitter);
+        pfSys.setPosition(sora::SoraCore::Ptr->getScreenWidth() / 2, 
+                          sora::SoraCore::Ptr->getScreenHeight() / 2);
     }
     
     void load(sora::SoraTask* task) {
@@ -327,7 +276,13 @@ private:
 
 #include "util/SoraDictionary.h"
 
-int main(int argc, char* argv[]) {    
+int inc(int a) {
+    return (a & 1) ? (inc(a >> 1) << 1) : (a | 1); 
+    
+}
+
+int main(int argc, char* argv[]) { 
+    printf("%d, %d, %d, %d\n", inc(inc(inc(inc(inc(inc(1)))))), inc(2), inc(3), inc(1000));
         
     sora::SoraGameAppDef def("config.xml");
     sora::SoraGameApp app(def);

@@ -58,6 +58,8 @@ namespace sora {
          **/
         SoraLayer* addLayer(int32 layerDepth);
         
+        SoraLayer* addLayer(int32 layerDepth, SoraLayer* my_layer);
+        
         /**
          *  Remove a layer from the scene
          *  Would remove all objects attached to the layer

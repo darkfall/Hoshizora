@@ -194,7 +194,10 @@ namespace sora {
         sora_assert(mDocument);
         
         if(attr.empty()) {
-            return mCurrNode.child_value();
+            std::string str = mCurrNode.name();
+            if(str.empty())
+                str = mCurrNode.child_value();
+            return str;
         }
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
@@ -266,8 +269,12 @@ namespace sora {
     std::string SoraConfigParserXmlImpl::getString(const std::string& attr, const std::string& opt) const {
         sora_assert(mDocument);
         
-        if(attr.empty())
-            return mCurrNode.child_value();
+        if(attr.empty()) {
+            std::string str = mCurrNode.name();
+            if(str.empty())
+                str = mCurrNode.child_value();
+            return str;
+        }
         pugi::xml_attribute attribute = mCurrNode.attribute(attr.c_str());
         if(attribute) {
             return attribute.value();

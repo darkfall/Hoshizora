@@ -449,7 +449,8 @@ namespace sora {
         struct Serializer<SoraTransform> {
             static std::string toString(const SoraTransform& val) {
                 // 
-                std::string str = Serializer<SoraMatrix4>::toString(val.getTransformMatrix());
+                SoraTransform tmp = val;
+                std::string str = Serializer<SoraMatrix4>::toString(tmp.getTransformMatrix());
                 return str;
             }
             static void fromString(const std::string& val, SoraTransform* outValue) {
@@ -458,8 +459,13 @@ namespace sora {
                 
                 // decompose the matrix
                 SoraVector3 rotation;
-                transformMat.decompose(outValue->mPosition, rotation, outValue->mScale);
-                outValue->mRotation.makeRotate(rotation.x, rotation.y, rotation.z);
+                SoraVector3 position;
+                SoraVector3 scale;
+                transformMat.decompose(position, rotation, scale);
+                
+                outValue->setPosition(position);
+                outValue->setScale(scale);
+                outValue->setRotation(SoraQuaternion(rotation.x, rotation.y, rotation.z));
             }
             static int getTypeId(const SoraTransform& val) {
                 return SoraTypeSerializer::TYPE_TRANSFORM;
