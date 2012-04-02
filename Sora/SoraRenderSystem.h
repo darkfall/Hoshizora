@@ -147,6 +147,7 @@ namespace sora {
         virtual void             setRenderState(RenderStateType type, int32 param) = 0;
         virtual int32            getRenderState(RenderStateType type) const = 0;
                 
+        virtual SoraHandle getMainWindowHandle() = 0;
         virtual SoraHandle getVideoDeviceHandle() = 0;
 
     public:

@@ -57,27 +57,27 @@ namespace sora {
             *this = col;
         }
         
-        SoraColorRGBA& a(float a) {
+        SoraColorRGBA& setA(float a) {
             this->a = a;
             return *this;
         }
         
-        SoraColorRGBA& r(float r) {
+        SoraColorRGBA& setR(float r) {
             this->r = r;
             return *this;
         }
         
-        SoraColorRGBA& g(float g) {
+        SoraColorRGBA& setG(float g) {
             this->g = g;
             return *this;
         }
         
-        SoraColorRGBA& b(float b) {
+        SoraColorRGBA& setB(float b) {
             this->b = b;
             return *this;
         }
         
-        void Set(float _r, float _g, float _b, float _a) { 
+        void set(float _r, float _g, float _b, float _a) { 
             this->r = _r; 
             this->g = _g; 
             this->b = _b; 

@@ -212,7 +212,7 @@ public:
         emitter->setMinAngle(sora::SoraVector(-sora::F_PI, 0));
         
         emitter->setStartColor(sora::Color::Red);
-        emitter->setEndColor(sora::Color::Blue.a(0));
+        emitter->setEndColor(sora::Color::Blue.setA(0));
         
         emitter->setMinLifeTime(10.f);
         emitter->setMaxLifeTime(20.f);

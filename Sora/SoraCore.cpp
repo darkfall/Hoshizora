@@ -156,6 +156,7 @@ namespace sora {
         pPhysicWorld = NULL;
         
 		mMainWindow = NULL;
+        mWindowHandle = 0;
 		
 		mPrevShaderContext = NULL;
         mScreenBuffer = NULL;
@@ -610,6 +611,8 @@ namespace sora {
 			if(result) {
                 log_mssg(getVideoInfo().get());
 
+                mWindowHandle = result;
+                
                 if(pInput != NULL)
 					pInput->setWindowHandle(result);
 #ifdef OS_WIN32
@@ -619,7 +622,7 @@ namespace sora {
 				mMainWindow = info;
                 mMainWindow->setActive(true);
                 mMainWindow->init();
-
+                
 				log_notice(vamssg("Created MainWindow, Width=%d, Height=%d, Title=%s", iScreenWidth, iScreenHeight, mMainWindow->getWindowName().c_str()));
                 
 			} else {

@@ -38,6 +38,9 @@ namespace sora {
         
         const std::string& get() const;
         const std::string& next() {
+            if(!mDir)
+                return mCurrent;
+            
             do {
                 struct dirent* entry = readdir(mDir);
                 if(entry)
