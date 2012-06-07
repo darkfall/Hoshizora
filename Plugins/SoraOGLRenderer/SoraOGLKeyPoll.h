@@ -2,7 +2,7 @@
  *  SoraOGLKeyPoll.h
  *  Sora
  *
- *  Created by GriffinBu on 12/12/10.
+ *  Created by Robert Bu on 12/12/10.
  *  Copyright 2010 GameMaster. All rights reserved.
  *
  */

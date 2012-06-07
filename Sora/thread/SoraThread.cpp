@@ -3,7 +3,7 @@
  *  Hoshizora
  *
  *  Created by Robert Bu on 8/27/10.
- *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *  Copyright 2010 GameMaster Studio(Project Hoshizora). All rights reserved.
  *
  */
 

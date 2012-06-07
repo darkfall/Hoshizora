@@ -2,8 +2,8 @@
  *  SoraMemoryBuffer.h
  *  lAnm
  *
- *  Created by GriffinBu on 3/7/11.
- *  Copyright 2010 Griffin Bu(Project Hoshizora). All rights reserved.
+ *  Created by Robert Bu on 3/7/11.
+ *  Copyright 2010 Robert Bu(Project Hoshizora). All rights reserved.
  *
  */
 

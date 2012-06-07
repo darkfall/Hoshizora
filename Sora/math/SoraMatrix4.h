@@ -2,7 +2,7 @@
 //  SoraMatrix4x4.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 10/7/11.
+//  Created by Robert Bu on 10/7/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 

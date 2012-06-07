@@ -2,8 +2,8 @@
  *  SoraUncopyable.h
  *  Sora
  *
- *  Created by GriffinBu on 12/18/10.
- *  Copyright 2010 Griffin Bu(Project L). All rights reserved.
+ *  Created by Robert Bu on 12/18/10.
+ *  Copyright 2010 GameMaster Studio(Project Hoshizora). All rights reserved.
  *
  */
 

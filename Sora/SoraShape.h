@@ -2,7 +2,7 @@
 //  SoraShape.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 9/23/11.
+//  Created by Robert Bu on 9/23/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 

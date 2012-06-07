@@ -2,8 +2,8 @@
  *  CoreCmds.cpp
  *  Sora
  *
- *  Created by Griffin Bu on 6/6/11.
- *  Copyright 2011 Griffin Bu(Project Hoshizor). All rights reserved.
+ *  Created by Robert Bu on 6/6/11.
+ *  Copyright 2011 GameMaster Studio(Project Hoshizora). All rights reserved.
  *
  */
 

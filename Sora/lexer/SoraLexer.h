@@ -2,7 +2,7 @@
  *  lexer.h
  *  lScript_lexer
  *
- *  Created by GriffinBu on 10年1月7日.
+ *  Created by Robert Bu on 10年1月7日.
  *  Copyright 2010 RobertBu(Project L). All rights reserved.
  *
  */

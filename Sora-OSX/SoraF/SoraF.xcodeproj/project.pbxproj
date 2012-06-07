@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		880E76B314F88A7C0060F821 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 880E76B214F88A7C0060F821 /* main.cpp */; };
 		880E76B514F88A7C0060F821 /* SoraF.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 880E76B414F88A7C0060F821 /* SoraF.1 */; };
+		8834BCFE157F9A0600E61757 /* Awesomium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8834BCFD157F9A0600E61757 /* Awesomium.framework */; };
+		8834BD01157F9A7400E61757 /* SoraAwesomium.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8834BD00157F9A7400E61757 /* SoraAwesomium.cpp */; };
+		8834BD03157FA70300E61757 /* osx_libfreetype_i386.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8834BD02157FA70300E61757 /* osx_libfreetype_i386.lib */; };
+		8834BD06157FA89D00E61757 /* Awesomium.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8834BD05157FA89D00E61757 /* Awesomium.framework */; };
 		8870000214F88B4000A4471B /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8870FFFB14F88B4000A4471B /* Cg.framework */; };
 		8870000314F88B4000A4471B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8870FFFC14F88B4000A4471B /* AudioToolbox.framework */; };
 		8870000414F88B4000A4471B /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8870FFFD14F88B4000A4471B /* QTKit.framework */; };
@@ -135,7 +139,6 @@
 		88CCB80714F88D0400ECDE0E /* md5lib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB72F14F88D0400ECDE0E /* md5lib.cpp */; };
 		88CCB80814F88D0400ECDE0E /* SoraTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB73214F88D0400ECDE0E /* SoraTask.cpp */; };
 		88CCB80914F88D0400ECDE0E /* SoraTaskManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB73414F88D0400ECDE0E /* SoraTaskManager.cpp */; };
-		88CCB80A14F88D0400ECDE0E /* pthreadVC2.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CCB73A14F88D0400ECDE0E /* pthreadVC2.lib */; };
 		88CCB80B14F88D0400ECDE0E /* SoraAtomicCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB73D14F88D0400ECDE0E /* SoraAtomicCounter.cpp */; };
 		88CCB80C14F88D0400ECDE0E /* SoraCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB74014F88D0400ECDE0E /* SoraCondition.cpp */; };
 		88CCB80D14F88D0400ECDE0E /* SoraCountDownLatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB74314F88D0400ECDE0E /* SoraCountDownLatch.cpp */; };
@@ -170,8 +173,6 @@
 		88CCB86B14F88D1500ECDE0E /* SoraModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB83014F88D1500ECDE0E /* SoraModel.cpp */; };
 		88CCB86C14F88D1500ECDE0E /* SoraModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB83214F88D1500ECDE0E /* SoraModelLoader.cpp */; };
 		88CCB86D14F88D1500ECDE0E /* SoraObjModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB83414F88D1500ECDE0E /* SoraObjModelLoader.cpp */; };
-		88CCB86E14F88D1500ECDE0E /* GLFW.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CCB83D14F88D1500ECDE0E /* GLFW.lib */; };
-		88CCB86F14F88D1600ECDE0E /* linux_libglfw.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CCB83E14F88D1500ECDE0E /* linux_libglfw.lib */; };
 		88CCB87014F88D1600ECDE0E /* osx_libglfw_i386.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CCB83F14F88D1500ECDE0E /* osx_libglfw_i386.lib */; };
 		88CCB87114F88D1600ECDE0E /* osx_libglfw_x86_64.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CCB84014F88D1500ECDE0E /* osx_libglfw_x86_64.lib */; };
 		88CCB87214F88D1600ECDE0E /* OSXIconWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 88CCB84214F88D1500ECDE0E /* OSXIconWrapper.mm */; };
@@ -221,12 +222,59 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		8834BD04157FA87D00E61757 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8834BD06157FA89D00E61757 /* Awesomium.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		880E76AE14F88A7C0060F821 /* SoraF */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SoraF; sourceTree = BUILT_PRODUCTS_DIR; };
 		880E76B214F88A7C0060F821 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		880E76B414F88A7C0060F821 /* SoraF.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SoraF.1; sourceTree = "<group>"; };
+		8834BCFD157F9A0600E61757 /* Awesomium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Awesomium.framework; sourceTree = "<group>"; };
+		8834BCFF157F9A6800E61757 /* SoraAwesomium.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraAwesomium.h; sourceTree = "<group>"; };
+		8834BD00157F9A7400E61757 /* SoraAwesomium.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoraAwesomium.cpp; sourceTree = "<group>"; };
+		8834BD02157FA70300E61757 /* osx_libfreetype_i386.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libfreetype_i386.lib; sourceTree = "<group>"; };
+		8834BD05157FA89D00E61757 /* Awesomium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Awesomium.framework; path = ../../Plugins/SoraAwesomium/Awesomium.framework; sourceTree = "<group>"; };
+		885C63601538E2DC00B13111 /* Convert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Convert.h; sourceTree = "<group>"; };
+		885C63631538E2DC00B13111 /* glfw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glfw.h; sourceTree = "<group>"; };
+		885C63641538E2DC00B13111 /* GLFW.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = GLFW.lib; sourceTree = "<group>"; };
+		885C63651538E2DC00B13111 /* linux_libglfw.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = linux_libglfw.lib; sourceTree = "<group>"; };
+		885C63661538E2DC00B13111 /* osx_libglfw_i386.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libglfw_i386.lib; sourceTree = "<group>"; };
+		885C63671538E2DC00B13111 /* osx_libglfw_x86_64.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = osx_libglfw_x86_64.lib; sourceTree = "<group>"; };
+		885C63681538E2DC00B13111 /* OSXIconWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSXIconWrapper.h; sourceTree = "<group>"; };
+		885C63691538E2DC00B13111 /* OSXIconWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OSXIconWrapper.mm; sourceTree = "<group>"; };
+		885C636B1538E2DC00B13111 /* image_DXT.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image_DXT.cpp; sourceTree = "<group>"; };
+		885C636C1538E2DC00B13111 /* image_DXT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = image_DXT.h; sourceTree = "<group>"; };
+		885C636D1538E2DC00B13111 /* image_helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image_helper.cpp; sourceTree = "<group>"; };
+		885C636E1538E2DC00B13111 /* image_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = image_helper.h; sourceTree = "<group>"; };
+		885C636F1538E2DC00B13111 /* SOIL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SOIL.cpp; sourceTree = "<group>"; };
+		885C63701538E2DC00B13111 /* SOIL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOIL.h; sourceTree = "<group>"; };
+		885C63711538E2DC00B13111 /* stb_image_aug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image_aug.cpp; sourceTree = "<group>"; };
+		885C63721538E2DC00B13111 /* stb_image_aug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_aug.h; sourceTree = "<group>"; };
+		885C63731538E2DC00B13111 /* stbi_DDS_aug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug.h; sourceTree = "<group>"; };
+		885C63741538E2DC00B13111 /* stbi_DDS_aug_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stbi_DDS_aug_c.h; sourceTree = "<group>"; };
+		885C63751538E2DC00B13111 /* SoraGLSLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoraGLSLShader.cpp; sourceTree = "<group>"; };
+		885C63761538E2DC00B13111 /* SoraGLSLShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraGLSLShader.h; sourceTree = "<group>"; };
+		885C63771538E2DC00B13111 /* SoraOGLInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLInput.cpp; sourceTree = "<group>"; };
+		885C63781538E2DC00B13111 /* SoraOGLInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraOGLInput.h; sourceTree = "<group>"; };
+		885C63791538E2DC00B13111 /* SoraOGLKeyPoll.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLKeyPoll.cpp; sourceTree = "<group>"; };
+		885C637A1538E2DC00B13111 /* SoraOGLKeyPoll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraOGLKeyPoll.h; sourceTree = "<group>"; };
+		885C637B1538E2DC00B13111 /* SoraOGLLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLLayer.cpp; sourceTree = "<group>"; };
+		885C637C1538E2DC00B13111 /* SoraOGLLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraOGLLayer.h; sourceTree = "<group>"; };
+		885C637D1538E2DC00B13111 /* SoraOGLRenderBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLRenderBuffer.cpp; sourceTree = "<group>"; };
+		885C637E1538E2DC00B13111 /* SoraOGLRenderBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderBuffer.h; sourceTree = "<group>"; };
+		885C637F1538E2DC00B13111 /* SoraOGLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLRenderer.cpp; sourceTree = "<group>"; };
+		885C63801538E2DC00B13111 /* SoraOGLRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderer.h; sourceTree = "<group>"; };
+		885C63811538E2DC00B13111 /* SoraOGLRenderTarget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoraOGLRenderTarget.cpp; sourceTree = "<group>"; };
+		885C63821538E2DC00B13111 /* SoraOGLRenderTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoraOGLRenderTarget.h; sourceTree = "<group>"; };
 		8870000014F88B4000A4471B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8870000114F88B4000A4471B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8870FFFB14F88B4000A4471B /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = Library/Frameworks/Cg.framework; sourceTree = SDKROOT; };
@@ -885,13 +933,12 @@
 				8870000614F88B4000A4471B /* Cocoa.framework in Frameworks */,
 				8870000714F88B4000A4471B /* Foundation.framework in Frameworks */,
 				8870000814F88B4000A4471B /* OpenGL.framework in Frameworks */,
-				88CCB80A14F88D0400ECDE0E /* pthreadVC2.lib in Frameworks */,
-				88CCB86E14F88D1500ECDE0E /* GLFW.lib in Frameworks */,
-				88CCB86F14F88D1600ECDE0E /* linux_libglfw.lib in Frameworks */,
 				88CCB87014F88D1600ECDE0E /* osx_libglfw_i386.lib in Frameworks */,
 				88CCB87114F88D1600ECDE0E /* osx_libglfw_x86_64.lib in Frameworks */,
 				88CCB93214F8903E00ECDE0E /* freetype244ST.lib in Frameworks */,
 				88CCB93314F8903E00ECDE0E /* libfreetype.6.dylib in Frameworks */,
+				8834BCFE157F9A0600E61757 /* Awesomium.framework in Frameworks */,
+				8834BD03157FA70300E61757 /* osx_libfreetype_i386.lib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,6 +948,7 @@
 		880E76A314F88A7C0060F821 = {
 			isa = PBXGroup;
 			children = (
+				8834BD05157FA89D00E61757 /* Awesomium.framework */,
 				8870000A14F88B4500A4471B /* Frameworks */,
 				880E78B114F88AA70060F821 /* Plugins */,
 				88CCB59814F88D0400ECDE0E /* Sora */,
@@ -929,6 +977,8 @@
 		880E78B114F88AA70060F821 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				8834BCFC157F976900E61757 /* SoraAwesomium */,
+				885C635F1538E2DC00B13111 /* SoraOGLRenderer */,
 				88CCB9B014FB1DF600ECDE0E /* SoraParticleF */,
 				88CCB88014F8903E00ECDE0E /* SoraFreetypeFont */,
 				88CCB82714F88D1500ECDE0E /* Sora3D */,
@@ -937,6 +987,81 @@
 			);
 			name = Plugins;
 			path = ../../Sora;
+			sourceTree = "<group>";
+		};
+		8834BCFC157F976900E61757 /* SoraAwesomium */ = {
+			isa = PBXGroup;
+			children = (
+				8834BCFD157F9A0600E61757 /* Awesomium.framework */,
+				8834BCFF157F9A6800E61757 /* SoraAwesomium.h */,
+				8834BD00157F9A7400E61757 /* SoraAwesomium.cpp */,
+			);
+			name = SoraAwesomium;
+			path = ../Plugins/SoraAwesomium;
+			sourceTree = "<group>";
+		};
+		885C635F1538E2DC00B13111 /* SoraOGLRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				885C63601538E2DC00B13111 /* Convert.h */,
+				885C63611538E2DC00B13111 /* glfw */,
+				885C63641538E2DC00B13111 /* GLFW.lib */,
+				885C63651538E2DC00B13111 /* linux_libglfw.lib */,
+				885C63661538E2DC00B13111 /* osx_libglfw_i386.lib */,
+				885C63671538E2DC00B13111 /* osx_libglfw_x86_64.lib */,
+				885C63681538E2DC00B13111 /* OSXIconWrapper.h */,
+				885C63691538E2DC00B13111 /* OSXIconWrapper.mm */,
+				885C636A1538E2DC00B13111 /* soil */,
+				885C63751538E2DC00B13111 /* SoraGLSLShader.cpp */,
+				885C63761538E2DC00B13111 /* SoraGLSLShader.h */,
+				885C63771538E2DC00B13111 /* SoraOGLInput.cpp */,
+				885C63781538E2DC00B13111 /* SoraOGLInput.h */,
+				885C63791538E2DC00B13111 /* SoraOGLKeyPoll.cpp */,
+				885C637A1538E2DC00B13111 /* SoraOGLKeyPoll.h */,
+				885C637B1538E2DC00B13111 /* SoraOGLLayer.cpp */,
+				885C637C1538E2DC00B13111 /* SoraOGLLayer.h */,
+				885C637D1538E2DC00B13111 /* SoraOGLRenderBuffer.cpp */,
+				885C637E1538E2DC00B13111 /* SoraOGLRenderBuffer.h */,
+				885C637F1538E2DC00B13111 /* SoraOGLRenderer.cpp */,
+				885C63801538E2DC00B13111 /* SoraOGLRenderer.h */,
+				885C63811538E2DC00B13111 /* SoraOGLRenderTarget.cpp */,
+				885C63821538E2DC00B13111 /* SoraOGLRenderTarget.h */,
+			);
+			name = SoraOGLRenderer;
+			path = ../../codes/SoraGithub/Plugins/SoraOGLRenderer;
+			sourceTree = "<group>";
+		};
+		885C63611538E2DC00B13111 /* glfw */ = {
+			isa = PBXGroup;
+			children = (
+				885C63621538E2DC00B13111 /* GL */,
+			);
+			path = glfw;
+			sourceTree = "<group>";
+		};
+		885C63621538E2DC00B13111 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				885C63631538E2DC00B13111 /* glfw.h */,
+			);
+			path = GL;
+			sourceTree = "<group>";
+		};
+		885C636A1538E2DC00B13111 /* soil */ = {
+			isa = PBXGroup;
+			children = (
+				885C636B1538E2DC00B13111 /* image_DXT.cpp */,
+				885C636C1538E2DC00B13111 /* image_DXT.h */,
+				885C636D1538E2DC00B13111 /* image_helper.cpp */,
+				885C636E1538E2DC00B13111 /* image_helper.h */,
+				885C636F1538E2DC00B13111 /* SOIL.cpp */,
+				885C63701538E2DC00B13111 /* SOIL.h */,
+				885C63711538E2DC00B13111 /* stb_image_aug.cpp */,
+				885C63721538E2DC00B13111 /* stb_image_aug.h */,
+				885C63731538E2DC00B13111 /* stbi_DDS_aug.h */,
+				885C63741538E2DC00B13111 /* stbi_DDS_aug_c.h */,
+			);
+			path = soil;
 			sourceTree = "<group>";
 		};
 		8870000A14F88B4500A4471B /* Frameworks */ = {
@@ -1813,6 +1938,7 @@
 				88CCB88114F8903E00ECDE0E /* freetype */,
 				88CCB8D814F8903E00ECDE0E /* freetype244ST.lib */,
 				88CCB8D914F8903E00ECDE0E /* ft2build.h */,
+				8834BD02157FA70300E61757 /* osx_libfreetype_i386.lib */,
 				88CCB8DA14F8903E00ECDE0E /* libfreetype.6.dylib */,
 				88CCB92E14F8903E00ECDE0E /* SoraFreetypeFont.cpp */,
 				88CCB92F14F8903E00ECDE0E /* SoraFreetypeFont.h */,
@@ -1984,6 +2110,7 @@
 				880E76AA14F88A7C0060F821 /* Sources */,
 				880E76AB14F88A7C0060F821 /* Frameworks */,
 				880E76AC14F88A7C0060F821 /* CopyFiles */,
+				8834BD04157FA87D00E61757 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2211,6 +2338,7 @@
 				88CCB9BF14FB862A00ECDE0E /* SoraParticleFCircleEmitter.cpp in Sources */,
 				88CCB9C214FB88EB00ECDE0E /* SoraParticleFBasicEmitter.cpp in Sources */,
 				88CCB9C514FB8C5400ECDE0E /* SoraRandomizer.cpp in Sources */,
+				8834BD01157F9A7400E61757 /* SoraAwesomium.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2265,6 +2393,11 @@
 		880E76B914F88A7C0060F821 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Plugins/SoraAwesomium\"",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../Plugins",
 					"$(PROJECT_DIR)/../../Sora",
@@ -2283,6 +2416,11 @@
 		880E76BA14F88A7C0060F821 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Plugins/SoraAwesomium\"",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../../Plugins",
 					"$(PROJECT_DIR)/../../Sora",

@@ -71,12 +71,14 @@ sora::SoraModel::Ptr boxModel;
 #include "SoraParticleF/SoraParticleFBasicEmitter.h"
 #include "SoraParticleF/SoraParticleFRenderer.h"
 
+#include "SoraAwesomium/SoraAwesomium.h"
+
 sora::SoraParticleFSystem pfSys;
 
 class GameInitState: public sora::SoraGameState, public sora::SoraEventHandler {
 public:
     GameInitState() {
-        
+      
     //    camera->lookAt(512.f, 384.f, -500.f, 512.f, 384.f, 500.f, 0, 0, 1);
         
     }
@@ -145,7 +147,8 @@ public:
         {
             // render a model
    //         sphereModel->render();
-            
+            mAwesomiumView->render();
+
             // render a buffer
         }
         rs->endScene();
@@ -155,16 +158,17 @@ public:
         pfSys.render();
 
         mText2.enable3D(false);
-        mText2.setPosition(500.f, 600.f);
+        mText2.setPosition(500.f, 720.f);
         mText2.render();
         
         sora::SoraCore::Ptr->renderLine(10.f, 100.f, 10.f, 0.f, sora::Color::Red);
         sora::SoraCore::Ptr->getRenderSystem()->renderLine(10.f, 100.f, 110.f, 100.f, sora::Color::Blue);
         sora::SoraCore::Ptr->getRenderSystem()->renderLine(10.f, 100.f, 110.f, 0.f, sora::Color::Green);
         
+        
         sora::SoraCore::Ptr->setTransform();
         mFont->render(0.f, 80.f, L"|#00FFFF|O");
-        mFont->print(0.f, 600.f, sora::SoraFont::AlignmentLeft, L"fps : %f\nvertex: %d", sora::SoraCore::Ptr->getFPS(), 
+        mFont->print(0.f, 720.f, sora::SoraFont::AlignmentLeft, L"fps : %f\nvertex: %d", sora::SoraCore::Ptr->getFPS(), 
                      sphereModel->getMesh()->getVertexCount()
                      );
         
@@ -178,6 +182,8 @@ public:
         
         sphereModel->update(dt);
         pfSys.update(dt);
+        
+        mAwesomiumView->update(dt);
     }
     
     void onKeyEvent(sora::SoraKeyEvent* keyEvent) {
@@ -231,12 +237,22 @@ public:
         pfSys.addEmitter(emitter);
         pfSys.setPosition(sora::SoraCore::Ptr->getScreenWidth() / 2, 
                           sora::SoraCore::Ptr->getScreenHeight() / 2);
+        
+        
+        mAwesomiumView = new sora::SoraAwesomium(this->getGameApp()->getWindowWidth(),
+                                                 this->getGameApp()->getWindowHeight() - 100);
+        mAwesomiumView->focus();
+        mAwesomiumView->loadUrl("http://www.google.com");
+        mAwesomiumView->enable3D(true);
+
     }
     
     void load(sora::SoraTask* task) {
         sphereModel = sora::SoraModelLoader::BuildModelFromSphere(sora::SoraSphere(sora::SoraVector3(0.0, 0.0, 0.0), 200.f), 
                                                                   50, 
                                                                   new sora::SoraMaterial(sora::SoraMaterial::Solid));
+        
+        
         
      //   sora::SoraAABB3 abox = sphereModel->getBoudingBox();
       //  boxModel = sora::SoraModelLoader::BuildModelFromAABB(abox, new sora::SoraMaterial(sora::SoraMaterial::WireFrame));
@@ -250,10 +266,12 @@ public:
             
             mText2.setFont(mFont);
             mText2.setText(L"|#00FFFF|Hello |#FF0000|World! |#CDCDCD|Sora ~ |#FFDEAD|Chan~");
-            mText2.setPosition(0.f, sora::SoraCore::Instance()->getScreenHeight()-mFont->getHeight()*5.5);
+            mText2.setPosition(0.f, sora::SoraCore::Instance()->getScreenHeight()-mFont->getHeight()*1.5);
         }
         
         registerEventFunc(this, &GameInitState::onKeyEvent);  
+        
+        
         
      //   sphereModel->moveTo(1000, 10000, 100);
 
@@ -272,6 +290,8 @@ private:
     sora::SoraSprite sc1;
     sora::SoraSprite sc2;
     
+    sora::SoraAwesomium* mAwesomiumView;
+    
 };
 
 #include "util/SoraDictionary.h"
@@ -284,7 +304,7 @@ int inc(int a) {
 int main(int argc, char* argv[]) { 
     printf("%d, %d, %d, %d\n", inc(inc(inc(inc(inc(inc(1)))))), inc(2), inc(3), inc(1000));
         
-    sora::SoraGameAppDef def("config.xml");
+    sora::SoraGameAppDef def = sora::SoraGameAppDef("config.xml").title("Sora Test App");
     sora::SoraGameApp app(def);
     
     app.addState(new GameInitState, "init");

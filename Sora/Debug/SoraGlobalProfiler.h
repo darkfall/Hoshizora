@@ -2,8 +2,8 @@
  *  SoraGlobalProfiler.h
  *  Sora
  *
- *  Created by GriffinBu on 1/23/11.
- *  Copyright 2011 Griffin Bu(Project L). All rights reserved.
+ *  Created by Robert Bu on 1/23/11.
+ *  Copyright 2011 GameMaster Studio(Project Hoshizora). All rights reserved.
  *
  */
 

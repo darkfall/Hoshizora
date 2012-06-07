@@ -2,7 +2,7 @@
 //  SoraTaskNotification.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 9/30/11.
+//  Created by Robert Bu on 9/30/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 

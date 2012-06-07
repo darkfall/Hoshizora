@@ -2,7 +2,7 @@
 //  ZipUtil.cpp
 //  Project Unknown
 //
-//  Created by Ruiwei Bu on 1/10/12.
+//  Created by Robert Bu on 1/10/12.
 //  Copyright (c) 2012 heizi. All rights reserved.
 //
 

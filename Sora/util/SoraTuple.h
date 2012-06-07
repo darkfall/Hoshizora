@@ -2,7 +2,7 @@
 //  SoraTuple.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 10/18/11.
+//  Created by Robert Bu on 10/18/11.
 //  Copyright (c) 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 

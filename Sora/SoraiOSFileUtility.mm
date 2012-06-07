@@ -2,7 +2,7 @@
  *  SoraiOSFileUtility.mm
  *  Sora-iPhone
  *
- *  Created by GriffinBu on 1/28/11.
+ *  Created by Robert Bu on 1/28/11.
  *  Copyright 2011 Robert Bu. All rights reserved.
  *
  */

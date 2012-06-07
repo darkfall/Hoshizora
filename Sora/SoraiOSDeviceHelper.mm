@@ -2,7 +2,7 @@
 //  SoraiOSDeviceHelper.mm
 //  Sora-iPhone
 //
-//  Created by Ruiwei Bu on 7/30/11.
+//  Created by Robert Bu on 7/30/11.
 //  Copyright 2011 Studio GameMaster. All rights reserved.
 //
 

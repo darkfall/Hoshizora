@@ -4,7 +4,7 @@
  *
  *  Created by Robert Bu on 7/19/10.
  *  Copyright 2010 GM&Symphonie&ring0dev. All rights reserved.
- *  Modified by Griffin Bu for Sora 14/10/10
+ *  Modified by Robert Bu for Sora 14/10/10
  *
  */
 

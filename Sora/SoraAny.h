@@ -19,7 +19,7 @@ namespace sora {
     /**
      * A class that holds a general type
      * Code from Boost Library and Poco Library, Original Copyright by Kevlin Henney and Applied Infomatics
-     * Modified for Hoshizora by Griffin Bu
+     * Modified for Hoshizora by Robert Bu
      **/
     
     class SORA_API SoraAny {

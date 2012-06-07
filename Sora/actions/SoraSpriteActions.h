@@ -2,8 +2,8 @@
 //  SoraSpriteActions.h
 //  SoraF
 //
-//  Created by Ruiwei Bu on 2/25/12.
-//  Copyright (c) 2012 Studio Symphonie. All rights reserved.
+//  Created by Robert Bu on 2/25/12.
+//  Copyright (c) 2012 Game Master Studio. All rights reserved.
 //
 
 #ifndef SoraF_SoraSpriteActions_h

@@ -2,7 +2,7 @@
 //  SoraAbstractTask.cpp
 //  Sora-iPhone
 //
-//  Created by Ruiwei Bu on 9/29/11.
+//  Created by Robert Bu on 9/29/11.
 //  Copyright 2011 Studio GameMaster. All rights reserved.
 //
 

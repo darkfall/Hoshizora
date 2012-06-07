@@ -2,7 +2,7 @@
  *  SoraQuaternion.h
  *  lParticle
  *
- *  Created by GriffinBu on 12/21/10.
+ *  Created by Robert Bu on 12/21/10.
  *  Copyright 2010 Robert Bu. All rights reserved.
  *
  */

@@ -2,8 +2,8 @@
 //  SoraFunctionImpl.h
 //  zeromq_client
 //
-//  Created by Ruiwei Bu on 8/15/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Robert Bu on 8/15/11.
+//  Copyright 2011 GameMaster Studio(Project Hoshizora). All rights reserved.
 //
 
 #ifndef SoraFunctionImpl_h

@@ -2,8 +2,8 @@
 //  SoraFactory.h
 //  HTL
 //
-//  Created by Ruiwei Bu on 9/2/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Robert Bu on 9/2/11.
+//  Copyright 2011 GameMaster Studio(Project Hoshizora). All rights reserved.
 //
 
 #ifndef HTL_SoraFactory_h

@@ -2,7 +2,7 @@
 //  SoraMoviePlayer.h
 //  Sora
 //
-//  Created by Griffin Bu on 3/21/11.
+//  Created by Robert Bu on 3/21/11.
 //  Copyright 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 

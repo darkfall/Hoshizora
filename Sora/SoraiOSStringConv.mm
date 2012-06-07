@@ -2,7 +2,7 @@
  *  SoraiOSStringConv.cpp
  *  Sora-iPhone
  *
- *  Created by Griffin Bu on 4/20/11.
+ *  Created by Robert Bu on 4/20/11.
  *  Copyright 2011 Studio GameMaster. All rights reserved.
  *
  */

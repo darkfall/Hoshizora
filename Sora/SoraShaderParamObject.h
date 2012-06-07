@@ -2,7 +2,7 @@
 //  SoraShaderParamObject.h
 //  Sora
 //
-//  Created by Ruiwei Bu on 11/13/11.
+//  Created by Robert Bu on 11/13/11.
 //  Copyright (c) 2011 Robert Bu(Project Hoshizora). All rights reserved.
 //
 
